@@ -3,9 +3,14 @@ import SearchBar from '../components/searchBar';
 
 interface IProps {
   small?: boolean;
+  currentSearchterm?: string;
 }
 
-const Page: React.FC<IProps> = ({ small, children }) => (
+const Page: React.FC<IProps> = ({
+  small,
+  children,
+  currentSearchTerm = '',
+}) => (
   <div id="page-layout">
     {small ? (
       <div className="header-small">
@@ -13,7 +18,7 @@ const Page: React.FC<IProps> = ({ small, children }) => (
           <a href="/search">
             <img src="/images/logo_RF_small.svg" alt="" />
           </a>
-          <SearchBar small={true} />
+          <SearchBar small={true} defaultValue={currentSearchTerm} />
         </div>
       </div>
     ) : (

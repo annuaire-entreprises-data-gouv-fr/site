@@ -67,6 +67,16 @@ class MyDocument extends Document {
 
             /* open-sans-regular - latin */
             @font-face {
+              font-family: 'Marianne';
+              font-style: normal;
+              font-weight: 700;
+              font-display: swap;
+              src: url('/fonts/Marianne-Bold.woff2');
+            }
+
+
+            /* open-sans-regular - latin */
+            @font-face {
               font-family: 'Open Sans';
               font-style: normal;
               font-weight: 400;
@@ -166,10 +176,16 @@ class MyDocument extends Document {
             h2,
             h3,
             h4 {
-              font-family: 'Open Sans', sans-serif;
+              font-family: 'Marianne', 'Open Sans', sans-serif;
             }
 `,
             }}
+          />
+
+          <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+          <link
+            href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
+            rel="stylesheet"
           />
         </Head>
 

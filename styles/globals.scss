@@ -165,29 +165,6 @@ html {
   line-height: 1.6rem;
   color: $darkestGrey;
 
-  table {
-    border-collapse: collapse;
-    text-align: left;
-    color: #081d35;
-
-    width: 100%;
-
-    tr td,
-    th {
-      padding: 5px;
-      border-right: 1px solid #c9d3df;
-      border-left: 1px solid #c9d3df;
-      border-bottom: 1px solid #c9d3df;
-      padding: 5px 8px;
-    }
-
-    thead {
-      background-color: #f4f7fb;
-      border-bottom: 3px double #c9d3df;
-      border-top: 1px solid #c9d3df;
-    }
-  }
-
   h1 {
     font-size: 2.5rem;
     line-height: 3.4rem;
@@ -246,15 +223,15 @@ html {
 }
 
 h1 {
-  font-size: 2.8rem;
-  line-height: 3.7rem;
+  font-size: 2rem;
+  line-height: 3rem;
   margin: 15px 0;
   color: $darkestGrey;
 }
 
 h2 {
-  font-size: 1.5rem;
-  line-height: 2.1rem;
+  font-size: 1.3rem;
+  line-height: 2rem;
   margin: 10px 0 16px;
   color: $darkestGrey;
 }

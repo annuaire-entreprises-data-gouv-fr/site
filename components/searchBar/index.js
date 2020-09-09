@@ -39,12 +39,13 @@ const SearchBar = ({
           width: 100%;
           display: flex;
           flex-direction: row;
+          align-items: center;
         }
         input[type='text'] {
           font-size: ${small ? '0.9rem' : '1.1rem'};
           background-color: #fff;
           width: 100%;
-          border: 1px solid #ccc;
+          border: 2px solid #dfdff1;
           border-right: none;
           border-radius: 0;
           display: flex;

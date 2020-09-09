@@ -3,46 +3,75 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 
-const About: React.FC = ({ response, slug, currentPage = 1, maxPage }) => (
-  <Page small={true}>
+interface IProps {
+  response: any;
+  slug: string;
+  currentPage: number;
+}
+
+const About: React.FC<IProps> = ({ response, slug, currentPage = 1 }) => (
+  <Page small={true} currentSearchTerm={slug}>
+    {console.log(response)}
     <div className="content-container">
-      <div className="results-counter">
-        {response.total_results} entreprises trouvées pour “<b>{slug}</b>”
-      </div>
+      {response.total_results ? (
+        <div className="results-counter">
+          {currentPage > 1 && `Page ${currentPage} de `}
+          {response.total_results} sociétés trouvées pour “<b>{slug}</b>”
+        </div>
+      ) : (
+        <div className="results-counter">
+          Aucune société n’a été trouvée pour “<b>{slug}</b>”
+          <p>
+            Nous vous suggérons de vérifier l’orthographe du nom, du SIRET, ou
+            de l'adresse que vous avez utilisé.
+          </p>
+        </div>
+      )}
       <div className="results-list">
-        {response.etablissement.map((etablissement) => (
-          <a
-            href={`/personne-morale/${etablissement.siret}`}
-            className="dont-apply-link-style"
-          >
-            <div className="title">
-              {etablissement.l1_normalisee.toLowerCase()}
-            </div>
-            <div>{etablissement.libelle_activite_principale}</div>
-            <div className="adress">{etablissement.geo_adresse}</div>
-          </a>
-        ))}
+        {response.etablissement &&
+          response.etablissement.map((etablissement) => (
+            <a
+              href={`/personne-morale/${etablissement.siret}`}
+              key={etablissement.siret}
+              className="dont-apply-link-style"
+            >
+              <div className="title">
+                {etablissement.l1_normalisee.toLowerCase()}
+                <div className="tags">
+                  {etablissement.is_siege !== '1' && 'Etablissement secondaire'}
+                </div>
+              </div>
+              <div>{etablissement.libelle_activite_principale}</div>
+              <div className="adress">{etablissement.geo_adresse}</div>
+            </a>
+          ))}
         {response.total_pages > 1 && (
           <div className="pages-selector">
-            {currentPage !== 1 && <a>⇠ précédente</a>}
+            {currentPage !== 1 && (
+              <a href={`?page=${currentPage - 1}`}>⇠ précédente</a>
+            )}
             <div>
               {[...Array(response.total_pages).keys()].map((pageNum) => {
                 if (response.total_pages > 10) {
-                  if (pageNum === 3) return <div>...</div>;
+                  if (pageNum === 3) return <div key="none">...</div>;
                   if (pageNum > 3 && pageNum < response.total_pages - 3) {
                     return;
                   }
                 }
                 return (
                   <a
+                    href={`?page=${pageNum + 1}`}
                     className={`${currentPage === pageNum + 1 ? 'active' : ''}`}
+                    key={pageNum}
                   >
                     {pageNum + 1}
                   </a>
                 );
               })}
             </div>
-            {currentPage !== response.total_pages && <a>suivante ⇢</a>}
+            {currentPage !== response.total_pages && (
+              <a href={`?page=${currentPage + 1}`}>suivante ⇢</a>
+            )}
           </div>
         )}
       </div>
@@ -66,7 +95,18 @@ const About: React.FC = ({ response, slug, currentPage = 1, maxPage }) => (
         font-size: 1.4rem;
         margin-bottom: 5px;
       }
-      .title:hover {
+      .title > .tags {
+        font-size: 0.9rem;
+        font-weight: bold;
+        display: inline-block;
+        background-color: #eee;
+        color: #888;
+        border-radius: 3px;
+        padding: 0 5px;
+        margin: 0 10px;
+      }
+
+      .results-list > a:hover .title {
         text-decoration: underline;
       }
 
@@ -98,6 +138,14 @@ const About: React.FC = ({ response, slug, currentPage = 1, maxPage }) => (
   </Page>
 );
 
+const parsePage = (pageAsString: string) => {
+  try {
+    return parseInt(pageAsString, 10);
+  } catch {
+    return 1;
+  }
+};
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug;
@@ -105,7 +153,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const request = await fetch(
     `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
       slug
-    )}?per_page=10&page=1`
+    )}?per_page=10&page=${parsePage(context.query.page) || 1}`
   );
 
   const response = await request.json();
@@ -113,6 +161,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       response,
       slug,
+      currentPage: parsePage(response.page),
     },
   };
 };

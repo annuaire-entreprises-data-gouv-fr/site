@@ -8,7 +8,7 @@ const About: React.FC = () => {
     <Page>
       <div className="layout-center">
         <div className="centered-search">
-          <h1>Répertoire des personnes morales</h1>
+          <h1>Répertoire des Sociétés</h1>
           <h2>
             Retrouvez toutes les informations publiques concernant les
             entreprises et associations de France
