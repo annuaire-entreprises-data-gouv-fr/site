@@ -178,12 +178,12 @@ class DevDocument extends Document {
               __html: INIT_STYLE,
             }}
           />
-
+          {/*
           <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
           <link
             href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
             rel="stylesheet"
-          />
+          /> */}
         </Head>
         <body>
           <Main />
@@ -236,19 +236,13 @@ class StaticDocument extends Document {
               __html: INIT_STYLE,
             }}
           />
-
+          {/*
           <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
           <link
             href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
             rel="stylesheet"
-          />
+          /> */}
         </CustomHead>
-        <script
-          src="//instant.page/3.0.0"
-          type="module"
-          defer
-          integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"
-        ></script>
 
         <body>
           <Main />
