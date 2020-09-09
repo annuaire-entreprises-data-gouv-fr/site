@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-import Button from '../button';
+import ButtonLink from '../button';
 
 const SearchBar = ({
   placeholder = 'Rechercher un nom, un SIRET, une adresse',
@@ -29,9 +29,14 @@ const SearchBar = ({
             defaultValue={defaultValue}
           />
         </div>
-        <Button className="button" value="Submit" type="submit" small={small}>
+        <ButtonLink
+          className="button"
+          value="Submit"
+          type="submit"
+          small={small}
+        >
           Lancer la recherche
-        </Button>
+        </ButtonLink>
       </form>
       <style jsx>{`
         form#search-wrapper {

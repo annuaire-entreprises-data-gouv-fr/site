@@ -1,7 +1,17 @@
-import "../styles/globals.scss";
+import React from 'react';
+import App from 'next/app';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+import '../styles/globals.scss';
+
+class MyApp extends App {
+  render() {
+    const { Component, pageProps } = this.props;
+
+    return (
+      <>
+        <Component {...pageProps} />
+      </>
+    );
+  }
 }
-
 export default MyApp;

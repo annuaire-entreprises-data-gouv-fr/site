@@ -3,7 +3,7 @@ import SearchBar from '../components/searchBar';
 
 interface IProps {
   small?: boolean;
-  currentSearchterm?: string;
+  currentSearchTerm?: string;
 }
 
 const Page: React.FC<IProps> = ({

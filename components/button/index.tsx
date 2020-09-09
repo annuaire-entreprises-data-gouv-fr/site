@@ -1,10 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 
-interface IProps extends HTMLLinkElement {
-  small: boolean;
+interface IProps {
+  small?: boolean;
+  href: string;
 }
 
-const Button: React.FC<PropsWithChildren<IProps>> = ({
+const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   href,
   children,
   small = false,
@@ -36,4 +37,4 @@ const Button: React.FC<PropsWithChildren<IProps>> = ({
   </div>
 );
 
-export default Button;
+export default ButtonLink;

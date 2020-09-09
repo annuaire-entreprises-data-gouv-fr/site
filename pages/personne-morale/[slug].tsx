@@ -2,9 +2,14 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import Button from '../../components/button';
+import ButtonLink from '../../components/button';
 
-const Section = ({ children, title, width = 100 }) => (
+interface ISectionProps {
+  title: string;
+  width?: number;
+}
+
+const Section: React.FC<ISectionProps> = ({ children, title, width = 100 }) => (
   <>
     <div className="section-container">
       <h2>{title}</h2>
@@ -35,14 +40,26 @@ const Section = ({ children, title, width = 100 }) => (
   </>
 );
 
-const About: React.FC = ({ response, slug, currentPage = 1, maxPage }) => (
+interface IProps {
+  response: any;
+  slug: string;
+  currentPage?: number;
+  maxPage: number;
+}
+
+const About: React.FC<IProps> = ({
+  response,
+  slug,
+  currentPage = 1,
+  maxPage,
+}) => (
   <Page small={true}>
     {console.log(response)}
     <div className="content-container">
       <div className="header-section">
         <h1>Société {response.etablissement.unite_legale.denomination}</h1>
         <div className="cta">
-          <Button>
+          <ButtonLink href="">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -59,7 +76,7 @@ const About: React.FC = ({ response, slug, currentPage = 1, maxPage }) => (
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
             Justificatif d'immatriculation
-          </Button>
+          </ButtonLink>
         </div>
       </div>
       <p>
@@ -231,6 +248,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const request = await fetch(
     `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/${encodeURI(
+      //@ts-ignore
       slug
     )}`
   );

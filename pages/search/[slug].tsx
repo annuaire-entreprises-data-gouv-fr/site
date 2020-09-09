@@ -29,7 +29,7 @@ const About: React.FC<IProps> = ({ response, slug, currentPage = 1 }) => (
       )}
       <div className="results-list">
         {response.etablissement &&
-          response.etablissement.map((etablissement) => (
+          response.etablissement.map((etablissement: any) => (
             <a
               href={`/personne-morale/${etablissement.siret}`}
               key={etablissement.siret}
@@ -51,6 +51,7 @@ const About: React.FC<IProps> = ({ response, slug, currentPage = 1 }) => (
               <a href={`?page=${currentPage - 1}`}>⇠ précédente</a>
             )}
             <div>
+              {/* @ts-ignore */}
               {[...Array(response.total_pages).keys()].map((pageNum) => {
                 if (response.total_pages > 10) {
                   if (pageNum === 3) return <div key="none">...</div>;
@@ -152,7 +153,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const request = await fetch(
     `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
+      //@ts-ignore
       slug
+      //@ts-ignore
     )}?per_page=10&page=${parsePage(context.query.page) || 1}`
   );
 
