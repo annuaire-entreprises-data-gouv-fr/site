@@ -246,17 +246,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug;
 
-  // const request = await fetch(
-  //   `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/${encodeURI(
-  //     //@ts-ignore
-  //     slug
-  //   )}`
-  // );
-  //const response = await request.json();
+  const request = await fetch(
+    `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/${encodeURI(
+      //@ts-ignore
+      slug
+    )}`
+  );
 
+  const response = await request.json();
   return {
     props: {
-      response: {},
+      response,
       slug,
     },
   };
