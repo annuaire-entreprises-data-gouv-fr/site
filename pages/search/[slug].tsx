@@ -151,20 +151,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug;
 
-  const request = await fetch(
-    `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
-      //@ts-ignore
-      slug
-      //@ts-ignore
-    )}?per_page=10&page=${parsePage(context.query.page) || 1}`
-  );
+  // const request = await fetch(
+  //   `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
+  //     //@ts-ignore
+  //     slug
+  //     //@ts-ignore
+  //   )}?per_page=10&page=${parsePage(context.query.page) || 1}`
+  // );
 
-  const response = await request.json();
+  // const response = await request.json();
+
+  const response = {};
+
   return {
     props: {
       response,
       slug,
-      currentPage: parsePage(response.page),
+      //      currentPage: parsePage(response.page || 1),
+      currentPage: 1,
     },
   };
 };

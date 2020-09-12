@@ -55,6 +55,12 @@ const About: React.FC<IProps> = ({
 }) => (
   <Page small={true}>
     {console.log(response)}
+
+    {/* <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
+      rel="stylesheet"
+    /> */}
     <div className="content-container">
       <div className="header-section">
         <h1>Société {response.etablissement.unite_legale.denomination}</h1>
@@ -252,8 +258,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       slug
     )}`
   );
-
   const response = await request.json();
+
   return {
     props: {
       response,

@@ -15,7 +15,7 @@ const Page: React.FC<IProps> = ({
     {small ? (
       <div className="header-small">
         <div className="content-container">
-          <a href="/search">
+          <a href="/">
             <img src="/images/logo_RF_small.svg" alt="" />
           </a>
           <SearchBar small={true} defaultValue={currentSearchTerm} />

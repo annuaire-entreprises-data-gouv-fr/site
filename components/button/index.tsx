@@ -2,21 +2,30 @@ import React, { PropsWithChildren } from 'react';
 
 interface IProps {
   small?: boolean;
-  href: string;
+  href?: string;
+  type?: 'submit' | null;
 }
 
 const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   href,
   children,
   small = false,
+  type,
 }) => (
   <div id="button">
-    <a href={href}>{children}</a>
+    {!href ? (
+      <button type="submit">{children}</button>
+    ) : (
+      <a href={href}>{children}</a>
+    )}
     <style jsx>{`
       div {
         display: block;
       }
-      a {
+      a,
+      button {
+        outline: none;
+        transition: none;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -24,10 +33,15 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         background-color: #000091;
         color: #fff;
         text-decoration: none;
-        padding: ${small ? '4px 10px' : '9px 20px'};
+        font-size: ${small ? '0.9rem' : '1rem'};
+        height: ${small ? '36px' : '46px'};
+        padding: 0 10px;
         border: 2px solid transparent;
       }
-      div:hover > a {
+      button {
+      }
+      div:hover > a,
+      div:hover > button {
         color: #000091;
         border-color: #000091;
         text-decoration: none;

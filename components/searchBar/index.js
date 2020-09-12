@@ -31,7 +31,7 @@ const SearchBar = ({
         </div>
         <ButtonLink
           className="button"
-          value="Submit"
+          value="submit"
           type="submit"
           small={small}
         >
