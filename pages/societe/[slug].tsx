@@ -308,8 +308,8 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
       }
 
       .tags.closed {
-        color:#c50000;
-        background-color:#ffd0d0;
+        color:#914141;
+        background-color:#ffe5e5;
       }
     `}</style>
   </Page>
