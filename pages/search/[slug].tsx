@@ -166,7 +166,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // const response = await request.json();
 
-  await sleep(5000); //wait 5 seconds
+  await sleep(50); //wait 5 seconds
 
   console.timeEnd('Appel page recherche');
 
