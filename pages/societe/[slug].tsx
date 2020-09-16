@@ -7,11 +7,17 @@ import ButtonLink from '../../components/button';
 interface ISectionProps {
   title: string;
   width?: number;
+  id?: string;
 }
 
-const Section: React.FC<ISectionProps> = ({ children, title, width = 100 }) => (
+const Section: React.FC<ISectionProps> = ({
+  id,
+  children,
+  title,
+  width = 100,
+}) => (
   <>
-    <div className="section-container">
+    <div className="section-container" id={id}>
       <h2>{title}</h2>
       <div>{children}</div>
     </div>
@@ -41,29 +47,16 @@ const Section: React.FC<ISectionProps> = ({ children, title, width = 100 }) => (
 );
 
 interface IProps {
-  response: any;
-  slug: string;
-  currentPage?: number;
-  maxPage: number;
+  etablissement: any;
+  uniteLegale: any;
 }
 
-const About: React.FC<IProps> = ({
-  response,
-  slug,
-  currentPage = 1,
-  maxPage,
-}) => (
-  <Page small={true}>
-    {console.log(response)}
-
-    {/* <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
-      rel="stylesheet"
-    /> */}
+const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
+  <Page small={true} useMapbox={true}>
+    {console.log(etablissement, uniteLegale)}
     <div className="content-container">
       <div className="header-section">
-        <h1>Société {response.etablissement.unite_legale.denomination}</h1>
+        <h1>Société {etablissement.unite_legale.denomination}</h1>
         <div className="cta">
           <ButtonLink href="">
             <svg
@@ -86,15 +79,32 @@ const About: React.FC<IProps> = ({
         </div>
       </div>
       <p>
-        Blabla bla on présente la société, son statut, ou ca depuis combien de
-        temps, ancre vers l'adresse et le contact, si plusieurs etablissement,
-        ancre vers la liste. Si etablissement secondaire, sinon lien vers le
-        siège social de l'entreprise.
+        La société DENOMINATION est une TYPE_DE_STRUCTURE créee le ADRESSE .
+        Elle est domiciliée à <a href="#contact">BLA</a> et elle est{' '}
+        <b>
+          {etablissement.etat_administratif === 'A' ? ' en activité' : 'fermée'}
+          .
+        </b>
       </p>
-      {response.etablissement.is_siege && (
-        <p>Cette société est le siège social de l'entreprise</p>
-      )}
-      <Section title="Les informations sur cet établissement [en commentaire, siege sociale, etab secondaire]">
+      <p>
+        {etablissement.etablissement_siege === 'true'
+          ? 'Cette société est le siège social de l’entreprise.'
+          : 'Cette société est un établissement secondaire de l’entreprise.'}
+        {uniteLegale.etablissements && (
+          <>
+            {' '}
+            Celle-ci possède{' '}
+            <a href="#etablissements">
+              {uniteLegale.etablissements.length} autres établissements.
+            </a>
+          </>
+        )}
+      </p>
+      <Section
+        title={`Les informations sur cet établissement${
+          etablissement.etablissement_siege === 'true' ? ' (siège social)' : ''
+        }`}
+      >
         <table>
           <thead>
             <tr>
@@ -105,19 +115,19 @@ const About: React.FC<IProps> = ({
           <tbody>
             <tr>
               <th scope="row">SIRET</th>
-              <td>{response.etablissement.siret}</td>
+              <td>{etablissement.siret}</td>
             </tr>
             <tr>
               <th scope="row">SIREN</th>
-              <td>{response.etablissement.siren}</td>
+              <td>{etablissement.siren}</td>
             </tr>
             <tr>
               <th scope="row">Clef NIC</th>
-              <td>{response.etablissement.nic}</td>
+              <td>{etablissement.nic}</td>
             </tr>
             <tr>
               <th scope="row">Activité principale Etablissement</th>
-              <td>{response.etablissement.activite_principale}</td>
+              <td>{etablissement.activite_principale}</td>
             </tr>
             <tr>
               <th scope="row">Activité principale Entreprise</th>
@@ -130,7 +140,7 @@ const About: React.FC<IProps> = ({
           </tbody>
         </table>
       </Section>
-      <div className="section-wrapper">
+      <div className="section-wrapper" id="contact">
         <Section title="Les informations de contact">
           <table>
             <thead>
@@ -146,21 +156,21 @@ const About: React.FC<IProps> = ({
               </tr>
               <tr>
                 <th scope="row">Adresse</th>
-                <td>{response.etablissement.geo_l4}</td>
+                <td>{etablissement.geo_l4}</td>
               </tr>
               <tr>
                 <th scope="row">Ville</th>
-                <td>{response.etablissement.libelle_commune}</td>
+                <td>{etablissement.libelle_commune}</td>
               </tr>
               <tr>
                 <th scope="row">Cedex</th>
-                <td>{response.etablissement.code_postal}</td>
+                <td>{etablissement.code_postal}</td>
               </tr>
               <tr>
                 <th scope="row">Date de création</th>
                 <td>
                   {new Intl.DateTimeFormat('fr-FR').format(
-                    new Date(response.etablissement.date_creation)
+                    new Date(etablissement.date_creation)
                   )}
                 </td>
               </tr>
@@ -177,15 +187,16 @@ const About: React.FC<IProps> = ({
             dangerouslySetInnerHTML={{
               __html: `
                 function initMap(style) {
-                  console.log(style)
+                  if (typeof maboxgl ==='undefined') {return;}
+
                   var map = new mapboxgl.Map({
                     container: 'map',
                     style: style, // stylesheet location
-                    center: [${response.etablissement.longitude}, ${response.etablissement.latitude}], // starting position [lng, lat]
+                    center: [${etablissement.longitude}, ${etablissement.latitude}], // starting position [lng, lat]
                     zoom: 14 // starting zoom
                   });
                   new mapboxgl.Marker({ color: '#000091' })
-                  .setLngLat([${response.etablissement.longitude}, ${response.etablissement.latitude}])
+                  .setLngLat([${etablissement.longitude}, ${etablissement.latitude}])
                   .addTo(map);
                 }
 
@@ -195,7 +206,39 @@ const About: React.FC<IProps> = ({
           />
         </div>
       </div>
-      <Section title="La liste des établissements de l'entreprise"></Section>
+      <Section
+        title="La liste des établissements de l'entreprise"
+        id="etablissements"
+      >
+        <table className="etablissement">
+          <thead>
+            <tr>
+              <th>SIRET</th>
+              <th>Clef NIC</th>
+              <th scope="col">Adresse</th>
+              <th scope="col">Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            {uniteLegale.etablissements.map((etablissementSecondaire: any) => (
+              <tr>
+                <td>{etablissementSecondaire.siret}</td>
+                <td>{etablissementSecondaire.nic}</td>
+                <td>{etablissementSecondaire.geo_adresse}</td>
+                <td>
+                  {' '}
+                  {etablissementSecondaire.etablissement_siege === 'true' ? (
+                    <span className="tags">siège social</span>
+                  ) : null}
+                  {etablissementSecondaire.etat_administratif === 'A' ? null : (
+                    <span className="tags closed">fermé</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Section>
     </div>
     <style jsx>{`
       .header-section {
@@ -232,17 +275,41 @@ const About: React.FC<IProps> = ({
         padding: 5px;
         background-color: #fff;
       }
-      tr > td {
+      tr > td,
+      table.etablissement th {
         padding-left: 30px;
       }
-      th {
+      table.etablissement {
+        width:100%;:
+      }
+      table.etablissement tr:hover > td {
+        background-color: #dfdff166;
+        cursor: pointer;
+      }
+      table:not(.etablissement) th {
         padding-right: 30px;
         border-right: 1px solid #dfdff1;
       }
-
-      thead {
+      table:not(.etablissement) > thead {
         display: none;
         background-color: #dfdff1;
+      }
+
+      .tags {
+        font-size: 0.9rem;
+        font-weight: bold;
+        display: inline-block;
+        background-color: #eee;
+        color: #888;
+        border-radius: 3px;
+        padding: 0 5px;
+        margin: 0;
+        margin-right:10px;
+      }
+
+      .tags.closed {
+        color:#c50000;
+        background-color:#ffd0d0;
       }
     `}</style>
   </Page>
@@ -250,20 +317,28 @@ const About: React.FC<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
-  const slug = context.params.slug;
+  const siret = context.params.slug;
 
-  const request = await fetch(
+  const etablissementRequest = await fetch(
     `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/${encodeURI(
       //@ts-ignore
-      slug
+      siret
     )}`
   );
-  const response = await request.json();
+  const { etablissement } = await etablissementRequest.json();
+
+  const uniteLegaleRequest = await fetch(
+    `https://entreprise.data.gouv.fr/api/sirene/v3/unites_legales/${encodeURI(
+      //@ts-ignore
+      etablissement.siren
+    )}`
+  );
+  const uniteLegale = await uniteLegaleRequest.json();
 
   return {
     props: {
-      response,
-      slug,
+      etablissement: etablissement,
+      uniteLegale: uniteLegale.unite_legale,
     },
   };
 };

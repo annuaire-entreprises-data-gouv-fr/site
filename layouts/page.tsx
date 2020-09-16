@@ -1,17 +1,32 @@
 import React from 'react';
 import SearchBar from '../components/searchBar';
+import { Head } from 'next/document';
+import { NextSeo } from 'next-seo';
 
 interface IProps {
   small?: boolean;
   currentSearchTerm?: string;
+  useMapbox?: boolean;
 }
 
 const Page: React.FC<IProps> = ({
   small,
   children,
   currentSearchTerm = '',
+  useMapbox = false,
 }) => (
   <div id="page-layout">
+    {useMapbox && (
+      <NextSeo>
+        <Head>
+          <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+          <link
+            href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
+            rel="stylesheet"
+          />
+        </Head>
+      </NextSeo>
+    )}
     {small ? (
       <div className="header-small">
         <div className="content-container">
@@ -29,7 +44,11 @@ const Page: React.FC<IProps> = ({
 
     <main>{children}</main>
     <div className="footer layout-center">
-      🇫🇷 un service officiel du gouvernement français ◦ <a>Etalab</a> ◦ 2020
+      🇫🇷 un service officiel du gouvernement français ・{' '}
+      <a href="https:://etalab.fr" rel="noopener noreferrer" target="_blank">
+        réalisé par Etalab
+      </a>{' '}
+      ・ 2020
     </div>
     <style global jsx>{`
       #page-layout {

@@ -31,7 +31,7 @@ const About: React.FC<IProps> = ({ response, slug, currentPage = 1 }) => (
         {response.etablissement &&
           response.etablissement.map((etablissement: any) => (
             <a
-              href={`/personne-morale/${etablissement.siret}`}
+              href={`/societe/${etablissement.siret}`}
               key={etablissement.siret}
               className="dont-apply-link-style"
             >
@@ -151,17 +151,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug;
 
-  // const request = await fetch(
-  //   `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
-  //     //@ts-ignore
-  //     slug
-  //     //@ts-ignore
-  //   )}?per_page=10&page=${parsePage(context.query.page) || 1}`
-  // );
+  const request = await fetch(
+    `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
+      //@ts-ignore
+      slug
+      //@ts-ignore
+    )}?per_page=10&page=${parsePage(context.query.page) || 1}`
+  );
 
-  // const response = await request.json();
+  const response = await request.json();
 
-  const response = {};
+  // const response = {};
 
   return {
     props: {

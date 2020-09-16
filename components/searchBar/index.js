@@ -27,6 +27,7 @@ const SearchBar = ({
             type="text"
             ref={searchInput}
             defaultValue={defaultValue}
+            required
           />
         </div>
         <ButtonLink

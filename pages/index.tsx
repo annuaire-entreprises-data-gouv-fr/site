@@ -11,7 +11,7 @@ const About: React.FC = () => {
           <h1>Répertoire des Sociétés</h1>
           <h2>
             Retrouvez toutes les informations publiques concernant les
-            entreprises et associations de France
+            entreprises françaises
           </h2>
           <div className="layout-center">
             <SearchBar />
