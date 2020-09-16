@@ -166,7 +166,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // const response = await request.json();
 
-  await sleep(50); //wait 5 seconds
+  // await sleep(50); //wait 5 seconds
+
+  const request = await fetch('http://requestbin.net/r/1d01f0y1');
+
+  const response = await request.json();
 
   console.timeEnd('Appel page recherche');
 
