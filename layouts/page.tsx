@@ -61,6 +61,10 @@ const Page: React.FC<IProps> = ({
         border-bottom: 1px solid #00009166;
         display: flex;
         align-items: center;
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        z-index: 10;
       }
       .header-small > div {
         display: flex;

@@ -1,25 +1,26 @@
 import React from 'react';
 
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
+import Page from '../layouts';
+import { Tag } from '../components/tag';
 
 interface IProps {
   response: any;
-  slug: string;
+  searchTerm: string;
   currentPage: number;
 }
 
-const About: React.FC<IProps> = ({ response, slug, currentPage = 1 }) => (
-  <Page small={true} currentSearchTerm={slug}>
+const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
+  <Page small={true} currentSearchTerm={searchTerm}>
     <div className="content-container">
       {response.total_results ? (
         <div className="results-counter">
           {currentPage > 1 && `Page ${currentPage} de `}
-          {response.total_results} sociétés trouvées pour “<b>{slug}</b>”
+          {response.total_results} résultats trouvés pour “<b>{searchTerm}</b>”
         </div>
       ) : (
         <div className="results-counter">
-          Aucune société n’a été trouvée pour “<b>{slug}</b>”
+          Aucune société n’a été trouvée pour “<b>{searchTerm}</b>”
           <p>
             Nous vous suggérons de vérifier l’orthographe du nom, du SIRET, ou
             de l'adresse que vous avez utilisé.
@@ -36,9 +37,9 @@ const About: React.FC<IProps> = ({ response, slug, currentPage = 1 }) => (
             >
               <div className="title">
                 {etablissement.l1_normalisee.toLowerCase()}
-                <div className="tags">
+                <Tag>
                   {etablissement.is_siege !== '1' && 'Etablissement secondaire'}
-                </div>
+                </Tag>
               </div>
               <div>{etablissement.libelle_activite_principale}</div>
               <div className="adress">{etablissement.geo_adresse}</div>
@@ -95,16 +96,6 @@ const About: React.FC<IProps> = ({ response, slug, currentPage = 1 }) => (
         font-size: 1.4rem;
         margin-bottom: 5px;
       }
-      .title > .tags {
-        font-size: 0.9rem;
-        font-weight: bold;
-        display: inline-block;
-        background-color: #eee;
-        color: #888;
-        border-radius: 3px;
-        padding: 0 5px;
-        margin: 0 10px;
-      }
 
       .results-list > a:hover .title {
         text-decoration: underline;
@@ -148,38 +139,23 @@ const parsePage = (pageAsString: string) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
-  const slug = context.params.slug;
+  const searchTerm = context.query.terme;
 
-  const sleep = (milliseconds = 300) => {
-    return new Promise((resolve) => setTimeout(resolve, milliseconds));
-  };
-
-  console.time('Appel page recherche');
-
-  // const request = await fetch(
-  //   `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
-  //     //@ts-ignore
-  //     slug
-  //     //@ts-ignore
-  //   )}?per_page=10&page=${parsePage(context.query.page) || 1}`
-  // );
-
-  // const response = await request.json();
-
-  // await sleep(50); //wait 5 seconds
-
-  const request = await fetch('http://requestbin.net/r/1d01f0y1');
+  const request = await fetch(
+    `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
+      //@ts-ignore
+      searchTerm
+      //@ts-ignore
+    )}?per_page=10&page=${parsePage(context.query.page) || 1}`
+  );
 
   const response = await request.json();
 
-  console.timeEnd('Appel page recherche');
-
   return {
     props: {
-      response: {},
-      slug,
-      //      currentPage: parsePage(response.page || 1),
-      currentPage: 1,
+      response: response,
+      searchTerm,
+      currentPage: parsePage(response.page || 1),
     },
   };
 };

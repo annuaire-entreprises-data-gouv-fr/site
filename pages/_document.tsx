@@ -265,8 +265,8 @@ class StaticDocument extends Document {
   }
 }
 
-export default DevDocument;
+// export default DevDocument;
 
-// export default process.env.NODE_ENV === 'production'
-//   ? StaticDocument
-//   : DevDocument;
+export default process.env.NODE_ENV === 'production'
+  ? StaticDocument
+  : DevDocument;

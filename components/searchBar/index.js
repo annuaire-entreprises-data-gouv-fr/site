@@ -7,27 +7,17 @@ const SearchBar = ({
   defaultValue = '',
   small = false,
 }) => {
-  const searchInput = useRef(null);
-
-  const submit = (e) => {
-    e.preventDefault();
-    if (!searchInput || !searchInput.current || !searchInput.current.value) {
-      return;
-    }
-
-    window.location = `/search/${searchInput.current.value}`;
-  };
-
   return (
     <>
-      <form onSubmit={submit} id="search-wrapper">
+      <form action="/rechercher" id="search-wrapper" method="get">
         <div className="search-bar">
           <input
             placeholder={placeholder}
             type="text"
-            ref={searchInput}
+            name="terme"
             defaultValue={defaultValue}
             required
+            autoComplete="off"
           />
         </div>
         <ButtonLink
