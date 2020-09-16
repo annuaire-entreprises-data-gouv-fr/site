@@ -53,7 +53,6 @@ interface IProps {
 
 const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   <Page small={true} useMapbox={true}>
-    {console.log(etablissement, uniteLegale)}
     <div className="content-container">
       <div className="header-section">
         <h1>Société {etablissement.unite_legale.denomination}</h1>
@@ -95,7 +94,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
             {' '}
             Celle-ci possède{' '}
             <a href="#etablissements">
-              {uniteLegale.etablissements.length} autres établissements.
+              {uniteLegale.etablissements.length} établissements.
             </a>
           </>
         )}
@@ -319,6 +318,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const siret = context.params.slug;
 
+  console.time('Appel page entreprise');
   const etablissementRequest = await fetch(
     `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/${encodeURI(
       //@ts-ignore
@@ -334,6 +334,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     )}`
   );
   const uniteLegale = await uniteLegaleRequest.json();
+  console.timeEnd('Appel page entreprise');
 
   return {
     props: {

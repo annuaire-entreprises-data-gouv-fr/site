@@ -11,7 +11,6 @@ interface IProps {
 
 const About: React.FC<IProps> = ({ response, slug, currentPage = 1 }) => (
   <Page small={true} currentSearchTerm={slug}>
-    {console.log(response)}
     <div className="content-container">
       {response.total_results ? (
         <div className="results-counter">
@@ -150,6 +149,7 @@ const parsePage = (pageAsString: string) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug;
+  console.time('Appel page recherche');
 
   const request = await fetch(
     `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
@@ -160,8 +160,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   );
 
   const response = await request.json();
-
-  // const response = {};
+  console.timeEnd('Appel page recherche');
 
   return {
     props: {
