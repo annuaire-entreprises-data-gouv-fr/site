@@ -44,7 +44,7 @@ const About: React.FC<IProps> = ({ response, slug, currentPage = 1 }) => (
               <div className="adress">{etablissement.geo_adresse}</div>
             </a>
           ))}
-        {response.total_pages > 1 && (
+        {response.total_pages && response.total_pages > 1 && (
           <div className="pages-selector">
             {currentPage !== 1 && (
               <a href={`?page=${currentPage - 1}`}>⇠ précédente</a>
@@ -149,22 +149,30 @@ const parsePage = (pageAsString: string) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug;
+
+  const sleep = (milliseconds = 300) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
+
   console.time('Appel page recherche');
 
-  const request = await fetch(
-    `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
-      //@ts-ignore
-      slug
-      //@ts-ignore
-    )}?per_page=10&page=${parsePage(context.query.page) || 1}`
-  );
+  // const request = await fetch(
+  //   `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
+  //     //@ts-ignore
+  //     slug
+  //     //@ts-ignore
+  //   )}?per_page=10&page=${parsePage(context.query.page) || 1}`
+  // );
 
-  const response = await request.json();
+  // const response = await request.json();
+
+  await sleep(5000); //wait 5 seconds
+
   console.timeEnd('Appel page recherche');
 
   return {
     props: {
-      response,
+      response: {},
       slug,
       //      currentPage: parsePage(response.page || 1),
       currentPage: 1,
