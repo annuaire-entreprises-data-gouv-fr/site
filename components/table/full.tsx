@@ -51,7 +51,6 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
       }
       table tr:hover > td {
         background-color: #dfdff166;
-        cursor: pointer;
       }
     `}</style>
   </>

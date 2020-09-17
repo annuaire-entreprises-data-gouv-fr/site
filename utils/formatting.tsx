@@ -24,3 +24,11 @@ export const concatNames = (firstName: string, lastName: string) => {
   if (first !== '' && last !== '') return `${first} ${last}`;
   else return last;
 };
+
+export const formatNumbersFr = (numberAsString = '') => {
+  return numberAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
+};
+
+export const formatSiret = (siret = '') => {
+  return siret.replace(/(\d{3})/g, '$1 ').replace(/(\s)(?=(\d{2})$)/g, '');
+};

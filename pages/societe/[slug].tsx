@@ -3,7 +3,12 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import ButtonLink from '../../components/button';
-import { formatDate, formatDateLong } from '../../utils/formatting';
+import {
+  formatDate,
+  formatDateLong,
+  formatNumbersFr,
+  formatSiret,
+} from '../../utils/formatting';
 import { Tag } from '../../components/tag';
 import { Section } from '../../components/section';
 import { FullTable } from '../../components/table/full';
@@ -23,6 +28,7 @@ interface IProps {
 
 const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   <Page small={true} useMapbox={true}>
+    {console.log(etablissement, uniteLegale)}
     <div className="content-container">
       <div className="header-section">
         <div className="title">
@@ -97,9 +103,13 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
       >
         <SimpleTable
           body={[
-            ['SIRET', etablissement.siret],
-            ['SIREN', etablissement.siren],
+            ['SIREN', formatNumbersFr(etablissement.siren)],
+            ['SIRET', formatSiret(etablissement.siret)],
             ['Clef NIC', etablissement.nic],
+            [
+              'N° TVA Intracommunautaire',
+              formatNumbersFr(tvaIntracommunautaire(etablissement.siren)),
+            ],
             [
               'Activité principale (établissement)',
               <>
@@ -108,19 +118,17 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
               </>,
             ],
             [
-              'Activité principale (entreprise)',
-              <>
-                {uniteLegale.activite_principale} -{' '}
-                {libelleFromCodeNaf(uniteLegale.activite_principale)}
-              </>,
-            ],
-            [
               'Nature juridique',
               libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique),
             ],
+            ['Date de création', formatDate(etablissement.date_creation)],
             [
-              'N° TVA Intracommunautaire',
-              tvaIntracommunautaire(etablissement.siren),
+              'Date de dernière mise à jour',
+              formatDate(etablissement.date_dernier_traitement),
+            ],
+            [
+              'Tranche d’effectif salarié',
+              etablissement.tranche_effectifs || 'N/A',
             ],
           ]}
         />
@@ -137,11 +145,6 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
                   <br />
                   {etablissement.code_postal} {etablissement.libelle_commune}
                 </>,
-              ],
-              ['Date de création', formatDate(etablissement.date_creation)],
-              [
-                'Tranche d’effectif salarié',
-                etablissement.tranche_effectifs || 'N/A',
               ],
             ]}
           />
@@ -176,10 +179,13 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         id="etablissements"
       >
         <FullTable
-          head={['SIRET', 'Clef NIC', 'Adresse', 'Statut']}
+          head={['SIRET', 'Activité (code NAF)', 'Adresse', 'Statut']}
           body={uniteLegale.etablissements.map((elem: any) => [
-            elem.siret,
-            elem.nic,
+            <a href={`/societe/${elem.siret}`}>{formatSiret(elem.siret)}</a>,
+            <>
+              {elem.activite_principale} -{' '}
+              {libelleFromCodeNaf(elem.activite_principale)}
+            </>,
             elem.geo_adresse,
             <>
               {elem.etablissement_siege === 'true' ? (
