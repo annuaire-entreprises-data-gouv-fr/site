@@ -12,6 +12,7 @@ interface IProps {
 
 const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
   <Page small={true} currentSearchTerm={searchTerm}>
+    {console.log(response)}
     <div className="content-container">
       {response.total_results ? (
         <div className="results-counter">
@@ -37,12 +38,16 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
             >
               <div className="title">
                 {etablissement.l1_normalisee.toLowerCase()}
-                <Tag>
-                  {etablissement.is_siege !== '1' && 'Etablissement secondaire'}
-                </Tag>
               </div>
               <div>{etablissement.libelle_activite_principale}</div>
-              <div className="adress">{etablissement.geo_adresse}</div>
+              <div className="adress">
+                {etablissement.geo_adresse}{' '}
+                <Tag>
+                  {etablissement.is_siege !== '1'
+                    ? 'établissement secondaire'
+                    : 'siège social'}
+                </Tag>
+              </div>
             </a>
           ))}
         {response.total_pages && response.total_pages > 1 && (
@@ -139,7 +144,11 @@ const parsePage = (pageAsString: string) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
-  const searchTerm = context.query.terme;
+  const searchTerm = context.query.terme
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+
+  console.log(searchTerm);
 
   const request = await fetch(
     `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(

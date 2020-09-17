@@ -12,15 +12,15 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
       <thead>
         <tr>
           {head.map((cell) => (
-            <th>{cell}</th>
+            <th key={cell}>{cell}</th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {body.map((row) => (
-          <tr>
+        {body.map((row, idx) => (
+          <tr key={idx}>
             {row.map((cell) => (
-              <td>{cell}</td>
+              <td key={cell}>{cell}</td>
             ))}
           </tr>
         ))}

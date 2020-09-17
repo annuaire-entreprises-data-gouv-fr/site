@@ -8,6 +8,13 @@ import { Tag } from '../../components/tag';
 import { Section } from '../../components/section';
 import { FullTable } from '../../components/table/full';
 import { SimpleTable } from '../../components/table/simple';
+import {
+  getCompanyTitle,
+  libelleFromCategoriesJuridiques,
+  libelleFromCodeNaf,
+  managingDirector,
+  tvaIntracommunautaire,
+} from '../../utils/helper';
 
 interface IProps {
   etablissement: any;
@@ -19,7 +26,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
     <div className="content-container">
       <div className="header-section">
         <div className="title">
-          <h1>{etablissement.unite_legale.denomination}</h1>
+          <h1>{getCompanyTitle(etablissement.unite_legale)}</h1>
           {etablissement.unite_legale.etat_administratif === 'A' ? (
             <Tag className="open">en activité</Tag>
           ) : (
@@ -48,9 +55,12 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         </div>
       </div>
       <p>
-        L’établissement {etablissement.unite_legale.denomination} est une
-        TYPE_DE_STRUCTURE crée le {formatDateLong(etablissement.date_creation)}{' '}
-        et domicilié au <a href="#contact">{etablissement.geo_adresse}</a>.
+        L’établissement {etablissement.unite_legale.denomination} est une{' '}
+        <b>
+          {libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique)}
+        </b>{' '}
+        crée le {formatDateLong(etablissement.date_creation)} et domicilié au{' '}
+        <a href="#contact">{etablissement.geo_adresse}</a>.
       </p>
       <p>
         Cet établissement est
@@ -65,13 +75,18 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
           <> un établissement secondaire</>
         )}{' '}
         de l’entreprise {uniteLegale.denomination},
-        {uniteLegale.etablissements && (
+        {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
           <>
             {' '}
             qui possède au total
             <a href="#etablissements">
               {uniteLegale.etablissements.length} établissements.
             </a>
+          </>
+        ) : (
+          <>
+            {' '}
+            et <a href="#etablissements">son unique établissement</a>
           </>
         )}
       </p>
@@ -87,10 +102,26 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
             ['Clef NIC', etablissement.nic],
             [
               'Activité principale (établissement)',
-              etablissement.activite_principale,
+              <>
+                {etablissement.activite_principale} -{' '}
+                {libelleFromCodeNaf(etablissement.activite_principale)}
+              </>,
             ],
-            ['Activité principale (entreprise)', 'N/A'],
-            ['N° TVA Intracommunautaire', 'N/A'],
+            [
+              'Activité principale (entreprise)',
+              <>
+                {uniteLegale.activite_principale} -{' '}
+                {libelleFromCodeNaf(uniteLegale.activite_principale)}
+              </>,
+            ],
+            [
+              'Nature juridique',
+              libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique),
+            ],
+            [
+              'N° TVA Intracommunautaire',
+              tvaIntracommunautaire(etablissement.siren),
+            ],
           ]}
         />
       </Section>
@@ -98,12 +129,20 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         <Section title="Les informations de contact">
           <SimpleTable
             body={[
-              ['Gérant', 'N/A'],
-              ['Adresse', etablissement.geo_l4],
-              ['Ville', etablissement.libelle_commune],
-              ['Cedex', etablissement.code_postal],
+              ['Gérant', managingDirector(uniteLegale) || 'N/A'],
+              [
+                'Adresse',
+                <>
+                  {etablissement.geo_l4}
+                  <br />
+                  {etablissement.code_postal} {etablissement.libelle_commune}
+                </>,
+              ],
               ['Date de création', formatDate(etablissement.date_creation)],
-              ['Tranche d’effectif salarié', 'N/A'],
+              [
+                'Tranche d’effectif salarié',
+                etablissement.tranche_effectifs || 'N/A',
+              ],
             ]}
           />
         </Section>
@@ -113,13 +152,13 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
             dangerouslySetInnerHTML={{
               __html: `
                 function initMap(style) {
-                  if (typeof maboxgl ==='undefined') {return;}
+                  if (!mapboxgl) {return;}
 
                   var map = new mapboxgl.Map({
                     container: 'map',
                     style: style, // stylesheet location
                     center: [${etablissement.longitude}, ${etablissement.latitude}], // starting position [lng, lat]
-                    zoom: 14 // starting zoom
+                    zoom:12 // starting zoom
                   });
                   new mapboxgl.Marker({ color: '#000091' })
                   .setLngLat([${etablissement.longitude}, ${etablissement.latitude}])
@@ -175,8 +214,8 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
       }
       .section-wrapper .map {
         background-color: #dfdff1;
-        width: 50%;
-        max-width: 450px;
+        width: 40%;
+        max-width: 350px;
         flex-shrink: 0;
         margin: 40px 0 10px 20px;
       }
