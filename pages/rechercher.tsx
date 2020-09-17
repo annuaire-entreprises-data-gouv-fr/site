@@ -145,6 +145,7 @@ const parsePage = (pageAsString: string) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const searchTerm = context.query.terme
+    //@ts-ignore
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
 

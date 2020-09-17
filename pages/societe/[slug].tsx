@@ -228,12 +228,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siret = context.params.slug;
 
   console.time('Appel page entreprise');
+
   const etablissementRequest = await fetch(
     `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/${encodeURI(
       //@ts-ignore
       siret
     )}`
   );
+
   const { etablissement } = await etablissementRequest.json();
 
   const uniteLegaleRequest = await fetch(
@@ -242,7 +244,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       etablissement.siren
     )}`
   );
+
   const uniteLegale = await uniteLegaleRequest.json();
+
   console.timeEnd('Appel page entreprise');
 
   return {
