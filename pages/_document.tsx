@@ -134,6 +134,33 @@ h4 {
   font-family: 'Marianne', 'Open Sans', sans-serif;
 }
 `;
+
+const COPY_TO_CLIPBOARD = (
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `
+    (function addCopyFunction() {
+      const copyList = document.getElementsByClassName('copy-to-clipboard-anchor');
+      for (var i=0; i<copyList.length; i++) {
+        const element = copyList[i];
+        element.onclick = () => {
+          element.classList.toggle('copy-done');
+          var el = document.createElement('textarea');
+          el.value = element.children[0].innerHTML;
+          document.body.appendChild(el);
+          el.select();
+          document.execCommand('copy');
+          document.body.removeChild(el);
+          window.setTimeout(function() {
+            element.classList.toggle('copy-done');
+          },800)
+        }
+      }
+    })();
+  `,
+    }}
+  />
+);
 class CustomHead extends Head {
   render() {
     const res = super.render();
@@ -188,6 +215,7 @@ class DevDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          {COPY_TO_CLIPBOARD}
         </body>
       </html>
     );
@@ -265,6 +293,8 @@ class StaticDocument extends Document {
               }}
             />
           )} */}
+
+          {COPY_TO_CLIPBOARD}
         </body>
       </html>
     );

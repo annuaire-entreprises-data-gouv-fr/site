@@ -34,6 +34,7 @@ const Page: React.FC<IProps> = ({
             <img src="/images/logo_RF_small.svg" alt="" />
           </a>
           <SearchBar small={true} defaultValue={currentSearchTerm} />
+          <div>Comment ça marche ?</div>
         </div>
       </div>
     ) : (
@@ -45,10 +46,18 @@ const Page: React.FC<IProps> = ({
     <main>{children}</main>
     <div className="footer layout-center">
       🇫🇷 un service officiel du gouvernement français ・{' '}
-      <a href="https:://etalab.fr" rel="noopener noreferrer" target="_blank">
+      <a href="https://etalab.fr" rel="noopener noreferrer" target="_blank">
         réalisé par Etalab
+      </a>
+      {' et la '}
+      <a
+        href="https://entreprise.gouv.fr"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        DGE
       </a>{' '}
-      ・ 2020
+      en 2020
     </div>
     <style global jsx>{`
       #page-layout {
@@ -68,6 +77,12 @@ const Page: React.FC<IProps> = ({
       }
       .header-small > div {
         display: flex;
+      }
+      .header-small > div > div {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
       }
       .header-small img {
         border-radius: 60px;

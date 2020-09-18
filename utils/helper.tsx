@@ -14,13 +14,32 @@ export const managingDirector = (uniteLegale: any) => {
 };
 
 export const libelleFromCodeNaf = (codeNaf: string) => {
-  const formattedNaf = codeNaf.replace(/[.-]/g, '');
+  const formattedNaf = (codeNaf || '').replace(/[.-]/g, '');
   //@ts-ignore
   return codesNaf[formattedNaf];
 };
-export const libelleFromCategoriesJuridiques = (categorie: string) => {
+
+export const fullLibelleFromCodeNaf = (activite_principale: string) =>
+  activite_principale
+    ? `${activite_principale} - ${libelleFromCodeNaf(activite_principale)}`
+    : '';
+
+export const libelleFromCategoriesJuridiques = (categorie: string) =>
   //@ts-ignore
-  return categoriesJuridiques[categorie];
+  categorie ? categoriesJuridiques[categorie] : '';
+
+export const fullAdress = (etablissement: any) => {
+  if (
+    !etablissement.libelle_commune &&
+    !etablissement.geo_l4 &&
+    !etablissement.code_postal
+  ) {
+    return '';
+  }
+
+  return `${etablissement.geo_l4 || ''} ${etablissement.code_postal || ''} ${
+    etablissement.libelle_commune || ''
+  }`;
 };
 
 export const getCompanyTitle = (uniteLegale: any) => {

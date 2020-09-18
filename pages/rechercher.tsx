@@ -53,7 +53,9 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
         {response.total_pages && response.total_pages > 1 && (
           <div className="pages-selector">
             {currentPage !== 1 && (
-              <a href={`?page=${currentPage - 1}`}>⇠ précédente</a>
+              <a href={`?terme=${searchTerm}&page=${currentPage - 1}`}>
+                ⇠ précédente
+              </a>
             )}
             <div>
               {/* @ts-ignore */}
@@ -66,7 +68,7 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
                 }
                 return (
                   <a
-                    href={`?page=${pageNum + 1}`}
+                    href={`?terme=${searchTerm}&page=${pageNum + 1}`}
                     className={`${currentPage === pageNum + 1 ? 'active' : ''}`}
                     key={pageNum}
                   >
@@ -76,7 +78,9 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
               })}
             </div>
             {currentPage !== response.total_pages && (
-              <a href={`?page=${currentPage + 1}`}>suivante ⇢</a>
+              <a href={`?terme=${searchTerm}&page=${currentPage + 1}`}>
+                suivante ⇢
+              </a>
             )}
           </div>
         )}

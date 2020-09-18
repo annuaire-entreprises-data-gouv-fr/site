@@ -14,6 +14,8 @@ import { Section } from '../../components/section';
 import { FullTable } from '../../components/table/full';
 import { SimpleTable } from '../../components/table/simple';
 import {
+  fullAdress,
+  fullLibelleFromCodeNaf,
   getCompanyTitle,
   libelleFromCategoriesJuridiques,
   libelleFromCodeNaf,
@@ -33,7 +35,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
       <div className="header-section">
         <div className="title">
           <h1>{getCompanyTitle(etablissement.unite_legale)}</h1>
-          {etablissement.unite_legale.etat_administratif === 'A' ? (
+          {etablissement.etat_administratif === 'A' ? (
             <Tag className="open">en activité</Tag>
           ) : (
             <Tag className="closed">fermé</Tag>
@@ -61,17 +63,29 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         </div>
       </div>
       <p>
-        L’établissement {etablissement.unite_legale.denomination} est une{' '}
-        <b>
-          {libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique)}
-        </b>{' '}
-        crée le {formatDateLong(etablissement.date_creation)} et domicilié au{' '}
-        <a href="#contact">{etablissement.geo_adresse}</a>.
+        L’établissement {etablissement.unite_legale.denomination}
+        {uniteLegale.categorie_juridique && (
+          <>
+            est une{' '}
+            <b>
+              {libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique)}
+            </b>{' '}
+          </>
+        )}
+        {etablissement.date_creation && (
+          <>crée le {formatDateLong(etablissement.date_creation)}</>
+        )}{' '}
+        {etablissement.geo_adresse && (
+          <>
+            et domicilié au <a href="#contact">{etablissement.geo_adresse}</a>
+          </>
+        )}
+        .
       </p>
       <p>
         Cet établissement est
         <b>
-          {etablissement.etat_administratif === 'A' ? ' en activité' : 'fermée'}
+          {etablissement.etat_administratif === 'A' ? ' en activité' : ' fermé'}
           .
         </b>{' '}
         C’est
@@ -80,7 +94,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         ) : (
           <> un établissement secondaire</>
         )}{' '}
-        de l’entreprise {uniteLegale.denomination},
+        de l’entreprise {getCompanyTitle(etablissement.unite_legale)},
         {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
           <>
             {' '}
@@ -112,10 +126,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
             ],
             [
               'Activité principale (établissement)',
-              <>
-                {etablissement.activite_principale} -{' '}
-                {libelleFromCodeNaf(etablissement.activite_principale)}
-              </>,
+              fullLibelleFromCodeNaf(etablissement.activite_principale),
             ],
             [
               'Nature juridique',
@@ -128,7 +139,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
             ],
             [
               'Tranche d’effectif salarié',
-              etablissement.tranche_effectifs || 'N/A',
+              etablissement.tranche_effectifs || '',
             ],
           ]}
         />
@@ -137,15 +148,8 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         <Section title="Les informations de contact">
           <SimpleTable
             body={[
-              ['Gérant', managingDirector(uniteLegale) || 'N/A'],
-              [
-                'Adresse',
-                <>
-                  {etablissement.geo_l4}
-                  <br />
-                  {etablissement.code_postal} {etablissement.libelle_commune}
-                </>,
-              ],
+              ['Gérant', managingDirector(uniteLegale) || ''],
+              ['Adresse', fullAdress(etablissement)],
             ]}
           />
         </Section>
