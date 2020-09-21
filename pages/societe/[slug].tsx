@@ -30,7 +30,6 @@ interface IProps {
 
 const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   <Page small={true} useMapbox={true}>
-    {console.log(etablissement, uniteLegale)}
     <div className="content-container">
       <div className="header-section">
         <div className="title">

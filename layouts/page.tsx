@@ -34,7 +34,9 @@ const Page: React.FC<IProps> = ({
             <img src="/images/logo_RF_small.svg" alt="" />
           </a>
           <SearchBar small={true} defaultValue={currentSearchTerm} />
-          <div>Comment ça marche ?</div>
+          <div>
+            <a href="/comment-ca-marche">Comment ça marche&nbsp;?</a>
+          </div>
         </div>
       </div>
     ) : (
@@ -83,6 +85,8 @@ const Page: React.FC<IProps> = ({
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        text-align: center;
+        margin-left: 20px;
       }
       .header-small img {
         border-radius: 60px;
@@ -107,6 +111,17 @@ const Page: React.FC<IProps> = ({
       .footer {
         border-top: 1px dashed #00009166;
         height: 50px;
+      }
+      @media only screen and (min-width: 1px) and (max-width: 900px) {
+        .footer {
+          flex-direction: column;
+          height: auto;
+        }
+
+        main {
+          min-height: 400px;
+          flex-grow: 0;
+        }
       }
     `}</style>
   </div>

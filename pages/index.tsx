@@ -8,7 +8,7 @@ const About: React.FC = () => {
     <Page>
       <div className="layout-center">
         <div className="centered-search">
-          <h1>Référentiel des Entreprises</h1>
+          <h1>L’annuaire des Entreprises</h1>
           <h2>
             Retrouvez toutes les informations publiques concernant les
             entreprises françaises
@@ -36,6 +36,12 @@ const About: React.FC = () => {
           padding-bottom: 10vh;
           padding-top: 10vh;
           flex-grow: 1;
+        }
+        @media only screen and (min-width: 1px) and (max-width: 900px) {
+          .centered-search {
+            width: calc(100% - 30px);
+            flex-grow: 0;
+          }
         }
       `}</style>
     </Page>
