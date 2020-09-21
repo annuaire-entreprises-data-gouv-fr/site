@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p $PORT",
+    "deploy": "git push dokku master"
   },
   "dependencies": {
     "next": "9.5.1",
