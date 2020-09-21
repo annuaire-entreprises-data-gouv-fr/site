@@ -58,7 +58,7 @@ export const CopyCell: React.FC<PropsWithChildren<{}>> = ({ children }) => (
         display: flex;
         align-items: center;
         justify-content: space-between;
-        cursor: pointer;
+        cursor: ${!!children ? 'pointer' : 'inherit'};
       }
       div.copy-done span.copy {
         display: none;

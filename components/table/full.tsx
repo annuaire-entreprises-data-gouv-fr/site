@@ -44,7 +44,7 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
 
       tr > td,
       table th {
-        padding-left: 30px;
+        padding-left: 10px;
       }
       table {
         width:100%;:
