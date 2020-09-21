@@ -59,6 +59,7 @@ export const CopyCell: React.FC<PropsWithChildren<{}>> = ({ children }) => (
         align-items: center;
         justify-content: space-between;
         cursor: ${!!children ? 'pointer' : 'inherit'};
+        position: relative;
       }
       div.copy-done span.copy {
         display: none;
@@ -67,6 +68,8 @@ export const CopyCell: React.FC<PropsWithChildren<{}>> = ({ children }) => (
         display: flex;
       }
       div > span.label {
+        position: absolute;
+        right: 0;
         border-radius: 4px;
         padding: 0 4px;
         height: 28px;
@@ -89,11 +92,19 @@ export const CopyCell: React.FC<PropsWithChildren<{}>> = ({ children }) => (
         height: 100%;
         color: green;
       }
+      @media only screen and (min-width: 1px) and (max-width: 900px) {
+        div {
+          cursor: inherit;
+        }
+        div > span.label {
+          display: none;
+        }
+      }
     `}</style>
   </td>
 );
 
-export const SimpleTable: React.FC<ISectionProps> = ({ id, body }) => (
+export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => (
   <>
     <table id={id}>
       <tbody>

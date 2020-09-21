@@ -12,7 +12,7 @@ import {
 import { Tag } from '../../components/tag';
 import { Section } from '../../components/section';
 import { FullTable } from '../../components/table/full';
-import { SimpleTable } from '../../components/table/simple';
+import { TwoColumnTable } from '../../components/table/simple';
 import {
   fullAdress,
   fullLibelleFromCodeNaf,
@@ -114,7 +114,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
           etablissement.etablissement_siege === 'true' ? ' (siège social)' : ''
         }`}
       >
-        <SimpleTable
+        <TwoColumnTable
           body={[
             ['SIREN', formatNumbersFr(etablissement.siren)],
             ['SIRET', formatSiret(etablissement.siret)],
@@ -145,7 +145,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
       </Section>
       <div className="section-wrapper" id="contact">
         <Section title="Les informations de contact">
-          <SimpleTable
+          <TwoColumnTable
             body={[
               ['Gérant', managingDirector(uniteLegale) || ''],
               ['Adresse', fullAdress(etablissement)],
