@@ -79,7 +79,11 @@ const Page: React.FC<IProps> = ({
     <main>{children}</main>
     <div className="footer layout-center">
       🇫🇷 un service officiel du gouvernement français ・{' '}
-      <a href="https://etalab.fr" rel="noopener noreferrer" target="_blank">
+      <a
+        href="https://etalab.gouv.fr"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
         réalisé par Etalab
       </a>
       {' et la '}
