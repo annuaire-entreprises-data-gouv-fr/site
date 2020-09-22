@@ -3,6 +3,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../layouts';
 import { Tag } from '../components/tag';
+import { isSirenOrSiret } from '../utils/helper';
 
 interface IProps {
   response: any;
@@ -16,7 +17,10 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
       {response.total_results ? (
         <div className="results-counter">
           {currentPage > 1 && `Page ${currentPage} de `}
-          {response.total_results} résultats trouvés pour “<b>{searchTerm}</b>”
+          {response.total_results} résultats trouvés pour “<b>{searchTerm}</b>”.
+          <a href={`/carte?terme=${searchTerm}`}>
+            Afficher les résultats sur la carte
+          </a>
         </div>
       ) : (
         <div className="results-counter">
@@ -31,7 +35,7 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
         {response.etablissement &&
           response.etablissement.map((etablissement: any) => (
             <a
-              href={`/societe/${etablissement.siret}`}
+              href={`/entreprise/${etablissement.siret}`}
               key={etablissement.siret}
               className="dont-apply-link-style"
             >
@@ -151,6 +155,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     //@ts-ignore
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
+
+  if (
+    isSirenOrSiret(searchTerm) &&
+    (searchTerm.length === 9 || searchTerm.length === 14)
+  ) {
+    context.res.writeHead(302, {
+      Location: `/entreprise/${searchTerm}`,
+    });
+    context.res.end();
+  }
 
   const request = await fetch(
     `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(

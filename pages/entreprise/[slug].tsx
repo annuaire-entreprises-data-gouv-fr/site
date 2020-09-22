@@ -17,6 +17,7 @@ import {
   fullAdress,
   fullLibelleFromCodeNaf,
   getCompanyTitle,
+  isSirenOrSiret,
   libelleFromCategoriesJuridiques,
   libelleFromCodeNaf,
   managingDirector,
@@ -33,7 +34,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
     <div className="content-container">
       <div className="header-section">
         <div className="title">
-          <h1>{getCompanyTitle(etablissement.unite_legale)}</h1>
+          <h1>{getCompanyTitle(uniteLegale)}</h1>
           {etablissement.etat_administratif === 'A' ? (
             <Tag className="open">en activité</Tag>
           ) : (
@@ -62,7 +63,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         </div>
       </div>
       <p>
-        L’établissement {etablissement.unite_legale.denomination}
+        L’entreprise {getCompanyTitle(uniteLegale)}
         {uniteLegale.categorie_juridique && (
           <>
             est une{' '}
@@ -93,7 +94,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         ) : (
           <> un établissement secondaire</>
         )}{' '}
-        de l’entreprise {getCompanyTitle(etablissement.unite_legale)},
+        de l’entreprise {getCompanyTitle(uniteLegale)},
         {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
           <>
             {' '}
@@ -184,7 +185,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         <FullTable
           head={['SIRET', 'Activité (code NAF)', 'Adresse', 'Statut']}
           body={uniteLegale.etablissements.map((elem: any) => [
-            <a href={`/societe/${elem.siret}`}>{formatSiret(elem.siret)}</a>,
+            <a href={`/entreprise/${elem.siret}`}>{formatSiret(elem.siret)}</a>,
             <>
               {elem.activite_principale} -{' '}
               {libelleFromCodeNaf(elem.activite_principale)}
@@ -234,36 +235,65 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
-  const siret = context.params.slug;
+  const siretOrSiren = context.params.slug;
 
-  console.time('Appel page entreprise');
+  if (
+    isSirenOrSiret(siretOrSiren as string) &&
+    (siretOrSiren.length === 9 || siretOrSiren.length === 14)
+  ) {
+    if (siretOrSiren.length === 9) {
+      // siege social
+      const uniteLegaleRequest = await fetch(
+        `https://entreprise.data.gouv.fr/api/sirene/v3/unites_legales/${encodeURI(
+          //@ts-ignore
+          siretOrSiren
+        )}`
+      );
 
-  const etablissementRequest = await fetch(
-    `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/${encodeURI(
-      //@ts-ignore
-      siret
-    )}`
-  );
+      const uniteLegale = await uniteLegaleRequest.json();
+      console.log(uniteLegale);
 
-  const { etablissement } = await etablissementRequest.json();
+      return {
+        props: {
+          etablissement: uniteLegale.unite_legale.etablissement_siege,
+          uniteLegale: uniteLegale.unite_legale,
+        },
+      };
+    } else if (siretOrSiren.length === 14) {
+      const etablissementRequest = await fetch(
+        `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/${encodeURI(
+          //@ts-ignore
+          siretOrSiren
+        )}`
+      );
 
-  const uniteLegaleRequest = await fetch(
-    `https://entreprise.data.gouv.fr/api/sirene/v3/unites_legales/${encodeURI(
-      //@ts-ignore
-      etablissement.siren
-    )}`
-  );
+      if (etablissementRequest.status === 404) {
+        context.res.statusCode = 404;
+        context.res.end();
+      }
 
-  const uniteLegale = await uniteLegaleRequest.json();
+      const { etablissement } = await etablissementRequest.json();
 
-  console.timeEnd('Appel page entreprise');
+      const uniteLegaleRequest = await fetch(
+        `https://entreprise.data.gouv.fr/api/sirene/v3/unites_legales/${encodeURI(
+          //@ts-ignore
+          etablissement.siren
+        )}`
+      );
 
-  return {
-    props: {
-      etablissement: etablissement,
-      uniteLegale: uniteLegale.unite_legale,
-    },
-  };
+      const uniteLegale = await uniteLegaleRequest.json();
+
+      return {
+        props: {
+          etablissement: etablissement,
+          uniteLegale: uniteLegale.unite_legale,
+        },
+      };
+    }
+  } else {
+    context.res.statusCode = 404;
+    context.res.end();
+  }
 };
 
 export default About;

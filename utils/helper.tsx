@@ -50,3 +50,7 @@ export const getCompanyTitle = (uniteLegale: any) => {
     return uniteLegale.denomination;
   }
 };
+
+export const isSirenOrSiret = (str: string) => {
+  return str.match(/^\d{9}|\d{14}$/g);
+};
