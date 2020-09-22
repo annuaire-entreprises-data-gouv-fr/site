@@ -237,62 +237,60 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const siretOrSiren = context.params.slug;
 
-  if (
-    isSirenOrSiret(siretOrSiren as string) &&
-    (siretOrSiren.length === 9 || siretOrSiren.length === 14)
-  ) {
-    if (siretOrSiren.length === 9) {
-      // siege social
-      const uniteLegaleRequest = await fetch(
-        `https://entreprise.data.gouv.fr/api/sirene/v3/unites_legales/${encodeURI(
-          //@ts-ignore
-          siretOrSiren
-        )}`
-      );
-
-      const uniteLegale = await uniteLegaleRequest.json();
-      console.log(uniteLegale);
-
-      return {
-        props: {
-          etablissement: uniteLegale.unite_legale.etablissement_siege,
-          uniteLegale: uniteLegale.unite_legale,
-        },
-      };
-    } else if (siretOrSiren.length === 14) {
-      const etablissementRequest = await fetch(
-        `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/${encodeURI(
-          //@ts-ignore
-          siretOrSiren
-        )}`
-      );
-
-      if (etablissementRequest.status === 404) {
-        context.res.statusCode = 404;
-        context.res.end();
-      }
-
-      const { etablissement } = await etablissementRequest.json();
-
-      const uniteLegaleRequest = await fetch(
-        `https://entreprise.data.gouv.fr/api/sirene/v3/unites_legales/${encodeURI(
-          //@ts-ignore
-          etablissement.siren
-        )}`
-      );
-
-      const uniteLegale = await uniteLegaleRequest.json();
-
-      return {
-        props: {
-          etablissement: etablissement,
-          uniteLegale: uniteLegale.unite_legale,
-        },
-      };
-    }
-  } else {
-    context.res.statusCode = 404;
+  if (!siretOrSiren || !isSirenOrSiret(siretOrSiren as string)) {
+    context.res.writeHead(404, {
+      Location: `/404`,
+    });
     context.res.end();
+  }
+
+  if (siretOrSiren && siretOrSiren.length === 9) {
+    // siege social
+    const uniteLegaleRequest = await fetch(
+      `https://entreprise.data.gouv.fr/api/sirene/v3/unites_legales/${encodeURI(
+        //@ts-ignore
+        siretOrSiren
+      )}`
+    );
+
+    const uniteLegale = await uniteLegaleRequest.json();
+
+    return {
+      props: {
+        etablissement: uniteLegale.unite_legale.etablissement_siege,
+        uniteLegale: uniteLegale.unite_legale,
+      },
+    };
+  } else {
+    const etablissementRequest = await fetch(
+      `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/${encodeURI(
+        //@ts-ignore
+        siretOrSiren
+      )}`
+    );
+
+    if (etablissementRequest.status === 404) {
+      context.res.statusCode = 404;
+      context.res.end();
+    }
+
+    const { etablissement } = await etablissementRequest.json();
+
+    const uniteLegaleRequest = await fetch(
+      `https://entreprise.data.gouv.fr/api/sirene/v3/unites_legales/${encodeURI(
+        //@ts-ignore
+        etablissement.siren
+      )}`
+    );
+
+    const uniteLegale = await uniteLegaleRequest.json();
+
+    return {
+      props: {
+        etablissement: etablissement,
+        uniteLegale: uniteLegale.unite_legale,
+      },
+    };
   }
 };
 

@@ -156,10 +156,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
 
-  if (
-    isSirenOrSiret(searchTerm) &&
-    (searchTerm.length === 9 || searchTerm.length === 14)
-  ) {
+  if (isSirenOrSiret(searchTerm)) {
     context.res.writeHead(302, {
       Location: `/entreprise/${searchTerm}`,
     });

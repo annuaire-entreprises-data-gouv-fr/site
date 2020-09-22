@@ -52,5 +52,7 @@ export const getCompanyTitle = (uniteLegale: any) => {
 };
 
 export const isSirenOrSiret = (str: string) => {
-  return str.match(/^\d{9}|\d{14}$/g);
+  return (
+    str.match(/^\d{9}|\d{14}$/g) && (str.length === 9 || str.length === 14)
+  );
 };
