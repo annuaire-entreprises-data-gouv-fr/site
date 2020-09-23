@@ -5,7 +5,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const {
-    query: { siren },
+    query: { siren, format },
   } = req;
 
   const RNM_LINK = `https://api-rnm.artisanat.fr/v2/entreprises/${siren}`;
@@ -14,7 +14,7 @@ export default async function handler(
   const rnm = await fetch(RNM_LINK + '?format=html');
   if (rnm.status === 200) {
     res.writeHead(302, {
-      Location: RNM_LINK + '?format=pdf',
+      Location: RNM_LINK + `?format=${format || 'html'}`,
     });
     res.end();
   }
@@ -22,7 +22,7 @@ export default async function handler(
   const rncs = await fetch(RNCS_LINK);
   if (rncs.status === 200) {
     res.writeHead(302, {
-      Location: RNCS_LINK + '?format=pdf',
+      Location: RNCS_LINK + (format ? `?format=${format}` : ''),
     });
     res.end();
   }

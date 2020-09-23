@@ -44,7 +44,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         <div className="cta">
           <ButtonLink
             target="_blank"
-            href={`/api/immatriculation?siren=${etablissement.siren}`}
+            href={`/api/immatriculation?siren=${etablissement.siren}?format=pdf`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -171,8 +171,6 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         </Section>
         <div className="map">
           <svg
-            // width="180"
-            // height="180"
             viewBox="0 0 180 180"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -210,7 +208,10 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
             />
           </svg>
           <div className="layout-center">
-            <ButtonLink href="/carte?terme='hey'" alt>
+            <ButtonLink
+              href={`/carte?lat=${etablissement.latitude}&lng=${etablissement.longitude}`}
+              alt
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
