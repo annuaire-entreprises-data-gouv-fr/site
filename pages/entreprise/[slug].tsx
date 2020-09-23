@@ -42,7 +42,10 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
           )}
         </div>
         <div className="cta">
-          <ButtonLink href="">
+          <ButtonLink
+            target="_blank"
+            href={`/api/immatriculation?siren=${etablissement.siren}`}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -58,12 +61,21 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
+            <span style={{ width: '5px' }} />
             Justificatif d'immatriculation
+          </ButtonLink>
+          <span style={{ width: '5px' }} />
+          <ButtonLink
+            target="_blank"
+            href={`/api/immatriculation?siren=${etablissement.siren}`}
+            alt
+          >
+            Fiche d'immatriculation
           </ButtonLink>
         </div>
       </div>
       <p>
-        L’entreprise {getCompanyTitle(uniteLegale)}
+        L’entreprise {getCompanyTitle(uniteLegale)}{' '}
         {uniteLegale.categorie_juridique && (
           <>
             est une{' '}
@@ -94,7 +106,11 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         ) : (
           <> un établissement secondaire</>
         )}{' '}
-        de l’entreprise {getCompanyTitle(uniteLegale)},
+        de l’entreprise{' '}
+        <a href={`/entreprise/${uniteLegale.siren}`}>
+          {getCompanyTitle(uniteLegale)}
+        </a>
+        ,
         {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
           <>
             {' '}
@@ -154,28 +170,64 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
           />
         </Section>
         <div className="map">
-          <div id="map" style={{ width: '100%', height: '100%' }}></div>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                function initMap(style) {
-                  if (!mapboxgl) {return;}
-
-                  var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: style, // stylesheet location
-                    center: [${etablissement.longitude}, ${etablissement.latitude}], // starting position [lng, lat]
-                    zoom:12 // starting zoom
-                  });
-                  new mapboxgl.Marker({ color: '#000091' })
-                  .setLngLat([${etablissement.longitude}, ${etablissement.latitude}])
-                  .addTo(map);
-                }
-
-                fetch("https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json").then(res=> res.json()).then(el => initMap(el))
-              `,
-            }}
-          />
+          <svg
+            // width="180"
+            // height="180"
+            viewBox="0 0 180 180"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M68.5 29.5V48H87L87 29.5L68.5 29.5Z" fill="#C3E095" />
+            <path
+              d="M84 52.5L1.90735e-06 154.5L1.14441e-05 52.5L84 52.5Z"
+              fill="#DFDFF1"
+            />
+            <path
+              d="M87.5 57.5L1.90735e-06 165L0 180L87.5 180L87.5 57.5Z"
+              fill="#DFDFF1"
+            />
+            <path d="M95.5 136L95.5 180L180 180V136L95.5 136Z" fill="#DFDFF1" />
+            <path
+              d="M95.5 128.5L180 128.5V108L95.5 85.5L95.5 128.5Z"
+              fill="#DFDFF1"
+            />
+            <path
+              d="M95.5 74.5L180 95.5L180 29.5L95.5 29.5V74.5Z"
+              fill="#DFDFF1"
+            />
+            <path d="M155 23H180V1.52588e-05H155V23Z" fill="#DFDFF1" />
+            <path
+              d="M147 1.52588e-05V23L95.5 23L95.5 1.52588e-05L147 1.52588e-05Z"
+              fill="#DFDFF1"
+            />
+            <path
+              d="M87.5 23H61.0001L37 1.52588e-05H87.5L87.5 23Z"
+              fill="#DFDFF1"
+            />
+            <path
+              d="M31 1.52588e-05L61.0001 29.5L61.0001 47.5H1.14441e-05L1.63321e-05 0L31 1.52588e-05Z"
+              fill="#DFDFF1"
+            />
+          </svg>
+          <div className="layout-center">
+            <ButtonLink href="/carte?terme='hey'" alt>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Afficher sur la carte
+            </ButtonLink>
+          </div>
         </div>
       </div>
       <Section
@@ -223,11 +275,26 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         display: flex;
       }
       .section-wrapper .map {
-        background-color: #dfdff1;
-        width: 40%;
-        max-width: 350px;
+        background-color: #fff;
+        max-height: 120px;
+        overflow: hidden;
+        width: 220px;
         flex-shrink: 0;
         margin: 40px 0 10px 20px;
+        position: relative;
+      }
+      .section-wrapper .map > svg {
+        width: 100%;
+      }
+      .section-wrapper .map > div {
+        position: absolute;
+        bottom: 15px;
+        width: 100%;
+      }
+
+      .cta {
+        flex-direction: row;
+        display: flex;
       }
     `}</style>
   </Page>

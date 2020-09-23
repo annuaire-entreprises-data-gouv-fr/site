@@ -4,6 +4,8 @@ interface IProps {
   small?: boolean;
   href?: string;
   type?: 'submit' | null;
+  alt?: boolean;
+  target?: '_blank';
 }
 
 const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
@@ -11,12 +13,20 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   children,
   small = false,
   type,
+  alt = false,
+  target = '',
 }) => (
   <div id="button">
     {!href ? (
       <button type="submit">{children}</button>
     ) : (
-      <a href={href}>{children}</a>
+      <a
+        target={target}
+        rel={target === '_blank' ? 'noopener noreferrer' : ''}
+        href={href}
+      >
+        {children}
+      </a>
     )}
     <style jsx>{`
       div {
@@ -30,22 +40,22 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         align-items: center;
         justify-content: center;
         border-radius: 0;
-        background-color: #000091;
-        color: #fff;
+        background-color: ${alt ? '#fff' : '#000091'};
+        color: ${alt ? '#000091' : '#fff'};
         text-decoration: none;
         font-size: ${small ? '0.9rem' : '1rem'};
         height: ${small ? '36px' : '46px'};
         padding: 0 10px;
-        border: 2px solid transparent;
+        border: 2px solid ${alt ? '#000091' : 'transparent'};
       }
       button {
       }
       div:hover > a,
       div:hover > button {
-        color: #000091;
+        color: ${alt ? '#fff' : '#000091'};
         border-color: #000091;
         text-decoration: none;
-        background-color: #dfdff1;
+        background-color: ${alt ? '#000091' : '#dfdff1'};
       }
     `}</style>
   </div>
