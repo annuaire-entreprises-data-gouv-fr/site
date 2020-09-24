@@ -4,9 +4,11 @@ import { GetServerSideProps } from 'next';
 import Page from '../layouts';
 import { Tag } from '../components/tag';
 import { isSirenOrSiret } from '../utils/helper';
+import { getResults, SearchResults } from '../model';
+import { parsePage } from '../model/routes';
 
 interface IProps {
-  response: any;
+  response: SearchResults;
   searchTerm: string;
   currentPage: number;
 }
@@ -141,20 +143,9 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
   </Page>
 );
 
-const parsePage = (pageAsString: string) => {
-  try {
-    return parseInt(pageAsString, 10);
-  } catch {
-    return 1;
-  }
-};
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
-  const searchTerm = context.query.terme
-    //@ts-ignore
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
+  const searchTerm = context.query.terme as string;
 
   if (isSirenOrSiret(searchTerm)) {
     context.res.writeHead(302, {
@@ -163,21 +154,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     context.res.end();
   }
 
-  const request = await fetch(
-    `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
-      //@ts-ignore
-      searchTerm
-      //@ts-ignore
-    )}?per_page=10&page=${parsePage(context.query.page) || 1}`
+  const results = await getResults(
+    searchTerm,
+    (context.query.page || '') as string
   );
-
-  const response = await request.json();
 
   return {
     props: {
-      response: response,
+      response: results,
       searchTerm,
-      currentPage: parsePage(response.page || 1),
+      currentPage: parsePage(results.page),
     },
   };
 };

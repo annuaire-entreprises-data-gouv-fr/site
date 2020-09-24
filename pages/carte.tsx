@@ -2,36 +2,44 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../layouts';
+import {
+  Etablissement,
+  SearchResults,
+  getEtablissement,
+  getResults,
+} from '../model';
 
 interface IProps {
-  response?: any;
+  response?: SearchResults;
   searchTerm?: string;
-  lat?: string;
-  lng?: string;
+  etablissement?: Etablissement;
 }
 
-const About: React.FC<IProps> = ({ response, searchTerm, lat, lng }) => (
+const About: React.FC<IProps> = ({ response, searchTerm, etablissement }) => (
   <Page small={true} currentSearchTerm={searchTerm}>
-    {response && (
-      <div className="content-container">
-        {response.total_results ? (
-          <div className="results-counter">
+    <div className="content-container results-counter">
+      {response ? (
+        response.total_results ? (
+          <>
             {response.total_results} résultats trouvés pour “<b>{searchTerm}</b>
             ”. {Math.min(response.total_results, 100)} résultats affichés.
-          </div>
+          </>
         ) : (
-          <div className="results-counter">
+          <>
             Aucune société n’a été trouvée pour “<b>{searchTerm}</b>”
             <p>
               Nous vous suggérons de vérifier l’orthographe du nom, du SIRET, ou
               de l'adresse que vous avez utilisé.
             </p>
-          </div>
-        )}
-      </div>
-    )}
+          </>
+        )
+      ) : (
+        <>🏄🏻‍♂️</>
+      )}
+    </div>
     <div id="map"></div>
-    {lat && lng && (
+
+    {etablissement && (
       <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -41,11 +49,11 @@ const About: React.FC<IProps> = ({ response, searchTerm, lat, lng }) => (
                   var map = new mapboxgl.Map({
                     container: 'map',
                     style: style, // stylesheet location
-                    center: [${lng},${lat}], // starting position [lng, lat]
+                    center: [${etablissement.longitude},${etablissement.latitude}], // starting position [lng, lat]
                     zoom: 12 // starting zoom
                   });
                   new mapboxgl.Marker({ color: '#000091' })
-                  .setLngLat([${lng},${lat}])
+                  .setLngLat([${etablissement.longitude},${etablissement.latitude}])
                   .addTo(map);
                 }
 
@@ -89,6 +97,7 @@ const About: React.FC<IProps> = ({ response, searchTerm, lat, lng }) => (
         margin-top: 10px;
         margin-bottom: 10px;
         color: rgb(112, 117, 122);
+        height: 24px;
       }
       .title {
         color: #000091;
@@ -98,6 +107,8 @@ const About: React.FC<IProps> = ({ response, searchTerm, lat, lng }) => (
       }
       #map {
         width: 100%;
+        height: calc(100vh - 164px);
+        background-color: red;
         min-height: 500px;
         flex-grow: 1;
       }
@@ -114,37 +125,23 @@ const parsePage = (pageAsString: string) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { terme, lat, lng } = context.query;
-  if (lat && lng) {
+  const { terme, siret } = context.query;
+  if (siret) {
+    const etablissement = await getEtablissement(siret as string);
     return {
       props: {
-        lat,
-        lng,
+        etablissement,
       },
     };
   }
 
   if (terme) {
-    //@ts-ignore
-    const searchTerm = context.query.terme
-      //@ts-ignore
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
-
-    const request = await fetch(
-      `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/${encodeURI(
-        //@ts-ignore
-        searchTerm
-        //@ts-ignore
-      )}?per_page=100`
-    );
-
-    const response = await request.json();
+    const results = await getResults(terme as string, '1');
 
     return {
       props: {
-        response: response,
-        searchTerm,
+        response: results,
+        searchTerm: terme as string,
       },
     };
   }
