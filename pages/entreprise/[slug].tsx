@@ -3,32 +3,20 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import ButtonLink from '../../components/button';
-import {
-  formatDate,
-  formatDateLong,
-  formatNumbersFr,
-  formatSiret,
-} from '../../utils/formatting';
+import { formatSiret } from '../../utils/formatting';
 import { Tag } from '../../components/tag';
 import { Section } from '../../components/section';
 import { FullTable } from '../../components/table/full';
-import { TwoColumnTable } from '../../components/table/simple';
-import {
-  fullAdress,
-  fullLibelleFromCodeNaf,
-  getCompanyTitle,
-  libelleFromCategoriesJuridiques,
-  libelleFromCodeNaf,
-  managingDirector,
-  tvaIntracommunautaire,
-} from '../../utils/helper';
+import { getCompanyTitle, libelleFromCodeNaf } from '../../utils/helper';
 import {
   Etablissement,
   getEtablissement,
   getUniteLegale,
   UniteLegale,
 } from '../../model';
-import { download, map, pin } from '../../static/icon';
+import { download } from '../../static/icon';
+import EtablissementSection from '../../components/etablissementSection';
+import EntrepriseSection from '../../components/entrepriseSection';
 
 interface IProps {
   etablissement: Etablissement;
@@ -37,15 +25,22 @@ interface IProps {
 
 const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   <Page small={true} useMapbox={true}>
+    {console.log(etablissement, uniteLegale)}
     <div className="content-container">
       <div className="header-section">
         <div className="title">
           <h1>{getCompanyTitle(uniteLegale)}</h1>
-          {etablissement.etat_administratif === 'A' ? (
-            <Tag className="open">en activité</Tag>
-          ) : (
-            <Tag className="closed">fermé</Tag>
-          )}
+          <span>
+            <span>etablissement</span>
+            <span>
+              {formatSiret(etablissement.siret)}
+              {etablissement.etat_administratif === 'A' ? (
+                <Tag className="open">en activité</Tag>
+              ) : (
+                <Tag className="closed">fermé</Tag>
+              )}
+            </span>
+          </span>
         </div>
         <div className="cta">
           <ButtonLink
@@ -66,111 +61,11 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
           </ButtonLink>
         </div>
       </div>
-      <p>
-        L’entreprise {getCompanyTitle(uniteLegale)}{' '}
-        {uniteLegale.categorie_juridique && (
-          <>
-            est une{' '}
-            <b>
-              {libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique)}
-            </b>{' '}
-          </>
-        )}
-        {etablissement.date_creation && (
-          <>crée le {formatDateLong(etablissement.date_creation)}</>
-        )}{' '}
-        {etablissement.geo_adresse && (
-          <>
-            et domicilié au <a href="#contact">{etablissement.geo_adresse}</a>
-          </>
-        )}
-        .
-      </p>
-      <p>
-        Cet établissement est
-        <b>
-          {etablissement.etat_administratif === 'A' ? ' en activité' : ' fermé'}
-          .
-        </b>{' '}
-        C’est
-        {etablissement.etablissement_siege === 'true' ? (
-          <b> le siège social</b>
-        ) : (
-          <> un établissement secondaire</>
-        )}{' '}
-        de l’entreprise{' '}
-        <a href={`/entreprise/${uniteLegale.siren}`}>
-          {getCompanyTitle(uniteLegale)}
-        </a>
-        ,
-        {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
-          <>
-            {' '}
-            qui possède au total
-            <a href="#etablissements">
-              {uniteLegale.etablissements.length} établissements.
-            </a>
-          </>
-        ) : (
-          <>
-            {' '}
-            et <a href="#etablissements">son unique établissement</a>
-          </>
-        )}
-      </p>
-      <Section
-        title={`Les informations sur cet établissement${
-          etablissement.etablissement_siege === 'true' ? ' (siège social)' : ''
-        }`}
-      >
-        <TwoColumnTable
-          body={[
-            ['SIREN', formatNumbersFr(etablissement.siren)],
-            ['SIRET', formatSiret(etablissement.siret)],
-            ['Clef NIC', etablissement.nic],
-            [
-              'N° TVA Intracommunautaire',
-              formatNumbersFr(tvaIntracommunautaire(etablissement.siren)),
-            ],
-            [
-              'Activité principale (établissement)',
-              fullLibelleFromCodeNaf(etablissement.activite_principale),
-            ],
-            [
-              'Nature juridique',
-              libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique),
-            ],
-            ['Date de création', formatDate(etablissement.date_creation)],
-            [
-              'Date de dernière mise à jour',
-              formatDate(etablissement.date_dernier_traitement),
-            ],
-            [
-              'Tranche d’effectif salarié',
-              etablissement.tranche_effectifs || '',
-            ],
-          ]}
-        />
-      </Section>
-      <div className="section-wrapper" id="contact">
-        <Section title="Les informations de contact">
-          <TwoColumnTable
-            body={[
-              ['Gérant', managingDirector(uniteLegale) || ''],
-              ['Adresse', fullAdress(etablissement)],
-            ]}
-          />
-        </Section>
-        <div className="map">
-          {map}
-          <div className="layout-center">
-            <ButtonLink href={`/carte?siret=${etablissement.siret}`} alt>
-              {pin}
-              Afficher sur la carte
-            </ButtonLink>
-          </div>
-        </div>
-      </div>
+      <EtablissementSection
+        etablissement={etablissement}
+        uniteLegale={uniteLegale}
+      />
+      <EntrepriseSection uniteLegale={uniteLegale} />
       <Section
         title="La liste des établissements de l'entreprise"
         id="etablissements"
@@ -206,34 +101,35 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         display: flex;
         align-items: center;
       }
-      .title h1 {
-        margin-right: 10px;
+      .title > span {
+        display: flex;
+        flex-direction: column;
+        margin: 0 10px;
+      }
+      .title > span > span:last-of-type {
+        color: #888;
+        font-size: 1.4rem;
+        line-height: 1.4rem;
+        margin-left: 15px;
+        position: relative;
+        display: flex;
+      }
+      .title > span > span:last-of-type:before {
+        content: '‣';
+        position: absolute;
+        left: -15px;
+      }
+      .title > span > span:first-of-type {
+        font-variant: small-caps;
+        margin-left: 15px;
+        color: #777;
+        font-weight: bold;
+        line-height: 0.7rem;
+        font-size: 0.8rem;
       }
       .content-container {
         margin: 20px auto 40px;
       }
-      .section-wrapper {
-        display: flex;
-      }
-      .section-wrapper .map {
-        background-color: #fff;
-        max-height: 120px;
-        overflow: hidden;
-        width: 220px;
-        flex-shrink: 0;
-        margin: 40px 0 10px 20px;
-        position: relative;
-      }
-      .section-wrapper .map > svg {
-        width: 100%;
-      }
-      .section-wrapper .map > div {
-        position: absolute;
-        bottom: 0;
-        height: 100%;
-        width: 100%;
-      }
-
       .cta {
         flex-direction: row;
         display: flex;

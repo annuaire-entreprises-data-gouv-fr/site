@@ -7,7 +7,7 @@ a:not(.dont-apply-link-style) {
   background-color: none;
   border-radius: 4px;
   transition: background-color 120ms ease-in-out;
-  padding: 2px;
+  padding: 2px 0;
 
   &:hover {
     text-decoration: underline;
