@@ -26,15 +26,13 @@ export default async function handler(
     });
     res.end();
   }
-  console.log(rnm.status);
-
-  //   https://data.inpi.fr/entreprises/:siren
-  // https://data.inpi.fr/entreprises/:siren?format=pdf
-  // https://api-rnm.artisanat.fr/v2/entreprises/:siren?format=html
-  // https://api-rnm.artisanat.fr/v2/entreprises/:siren?format=pdf
 
   try {
-    res.json({ test: 'test' });
+    res.statusCode = 404;
+    res.json({
+      test:
+        'Ce siren n’a pas été trouvé dans la base de données des greffes de tribunaux de commerce (INPI), ni dans celle des Chambres des Métiers et de l’Artisanat (CMA)',
+    });
   } catch (err) {
     res.statusCode = 500;
     res.send({ Error: err });
