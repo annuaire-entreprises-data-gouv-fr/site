@@ -2,7 +2,6 @@ import React from 'react';
 import { UniteLegale } from '../../model';
 import { formatDateLong, formatSiret } from '../../utils/formatting';
 import { libelleFromCodeNaf } from '../../utils/helper';
-import HorizontalSeparator from '../horizontalSeparator';
 import { Section } from '../section';
 import { FullTable } from '../table/full';
 import { Tag } from '../tag';
@@ -11,22 +10,9 @@ const EtablissementListeSection: React.FC<{
   uniteLegale: UniteLegale;
 }> = ({ uniteLegale }) => (
   <div id="etablissements">
-    <HorizontalSeparator />
     <p>
-      Cette entreprise possède XX établissement
-      {uniteLegale.etablissement_siege.date_creation && (
-        <>
-          crée le{' '}
-          {formatDateLong(uniteLegale.etablissement_siege.date_creation)}
-        </>
-      )}{' '}
-      {uniteLegale.etablissement_siege.geo_adresse && (
-        <>
-          et domicilié au{' '}
-          <a href="#contact">{uniteLegale.etablissement_siege.geo_adresse}</a>
-        </>
-      )}
-      .
+      Cette entreprise possède {uniteLegale.etablissements.length}{' '}
+      établissement(s) dont xx fermés.
     </p>
     <Section title="La liste des établissements de l'entreprise">
       <FullTable

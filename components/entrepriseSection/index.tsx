@@ -19,7 +19,6 @@ const EntrepriseSection: React.FC<{
   uniteLegale: UniteLegale;
 }> = ({ uniteLegale }) => (
   <div id="entreprise">
-    <HorizontalSeparator />
     <p>
       L’entreprise {getCompanyTitle(uniteLegale)}{' '}
       {uniteLegale.categorie_juridique && (
@@ -32,7 +31,7 @@ const EntrepriseSection: React.FC<{
       )}
       {uniteLegale.etablissement_siege.date_creation && (
         <>
-          crée le{' '}
+          créee le{' '}
           {formatDateLong(uniteLegale.etablissement_siege.date_creation)}
         </>
       )}{' '}
@@ -71,6 +70,7 @@ const EntrepriseSection: React.FC<{
         ]}
       />
     </Section>
+    <HorizontalSeparator />
   </div>
 );
 

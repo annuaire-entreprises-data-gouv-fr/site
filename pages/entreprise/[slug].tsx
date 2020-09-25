@@ -5,8 +5,6 @@ import Page from '../../layouts';
 import ButtonLink from '../../components/button';
 import { formatSiret } from '../../utils/formatting';
 import { Tag } from '../../components/tag';
-import { Section } from '../../components/section';
-import { FullTable } from '../../components/table/full';
 import { getCompanyTitle, libelleFromCodeNaf } from '../../utils/helper';
 import {
   Etablissement,
@@ -22,9 +20,14 @@ import EtablissementListeSection from '../../components/etablissementListeSectio
 interface IProps {
   etablissement: Etablissement;
   uniteLegale: UniteLegale;
+  isEntreprise: boolean; // true if entreprise, false if etablissement
 }
 
-const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
+const About: React.FC<IProps> = ({
+  etablissement,
+  uniteLegale,
+  isEntreprise = false,
+}) => (
   <Page small={true} useMapbox={true}>
     {console.log(etablissement, uniteLegale)}
     <div className="content-container">
@@ -32,15 +35,27 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         <div className="title">
           <h1>{getCompanyTitle(uniteLegale)}</h1>
           <span>
-            <span>etablissement</span>
-            <span>
-              {formatSiret(etablissement.siret)}
-              {etablissement.etat_administratif === 'A' ? (
-                <Tag className="open">en activité</Tag>
-              ) : (
-                <Tag className="closed">fermé</Tag>
-              )}
-            </span>
+            {!isEntreprise ? (
+              <>
+                <span>etablissement</span>
+                <span>
+                  {formatSiret(etablissement.siret)}
+                  {etablissement.etat_administratif === 'A' ? (
+                    <Tag className="open">en activité</Tag>
+                  ) : (
+                    <Tag className="closed">fermé</Tag>
+                  )}
+                </span>
+              </>
+            ) : (
+              <>
+                {etablissement.etat_administratif === 'A' ? (
+                  <Tag className="open">en activité</Tag>
+                ) : (
+                  <Tag className="closed">fermé</Tag>
+                )}
+              </>
+            )}
           </span>
         </div>
         <div className="cta">
@@ -62,10 +77,12 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
           </ButtonLink>
         </div>
       </div>
-      <EtablissementSection
-        etablissement={etablissement}
-        uniteLegale={uniteLegale}
-      />
+      {!isEntreprise && (
+        <EtablissementSection
+          etablissement={etablissement}
+          uniteLegale={uniteLegale}
+        />
+      )}
       <EntrepriseSection uniteLegale={uniteLegale} />
       <EtablissementListeSection uniteLegale={uniteLegale} />
     </div>
@@ -127,6 +144,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: {
         etablissement: uniteLegale.etablissement_siege,
         uniteLegale,
+        isEntreprise: true,
       },
     };
   }
@@ -138,6 +156,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       etablissement,
       uniteLegale,
+      isEntreprise: false,
     },
   };
 };

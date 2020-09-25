@@ -16,6 +16,7 @@ import {
   tvaIntracommunautaire,
 } from '../../utils/helper';
 import ButtonLink from '../button';
+import HorizontalSeparator from '../horizontalSeparator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 
@@ -53,7 +54,10 @@ const EtablissementSection: React.FC<{
     </p>
     <p>
       {etablissement.date_creation && (
-        <>Il a été crée le {formatDateLong(etablissement.date_creation)}</>
+        <>
+          Cet établissment a été crée le{' '}
+          {formatDateLong(etablissement.date_creation)}
+        </>
       )}{' '}
       {etablissement.geo_adresse && (
         <>
@@ -112,6 +116,7 @@ const EtablissementSection: React.FC<{
         </div>
       </div>
     </div>
+    <HorizontalSeparator />
     <style jsx>{`
       .section-wrapper {
         display: flex;
