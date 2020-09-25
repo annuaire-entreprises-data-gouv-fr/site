@@ -88,7 +88,7 @@ const Page: React.FC<IProps> = ({
       </a>
       {' et la '}
       <a
-        href="https://entreprise.gouv.fr"
+        href="https://entreprises.gouv.fr"
         rel="noopener noreferrer"
         target="_blank"
       >
