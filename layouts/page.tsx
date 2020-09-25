@@ -84,9 +84,9 @@ const Page: React.FC<IProps> = ({
         rel="noopener noreferrer"
         target="_blank"
       >
-        réalisé par Etalab
+        réalisé par Etalab{' '}
       </a>
-      {' et la '}
+      &nbsp;et la&nbsp;
       <a
         href="https://entreprises.gouv.fr"
         rel="noopener noreferrer"

@@ -59,7 +59,6 @@ const getResults = async (
   searchTerms: string,
   page: string
 ): Promise<SearchResults | undefined> => {
-  console.log(searchTerms);
   const response = await fetch(getResultPage(searchTerms, page));
 
   if (response.status === 404) {

@@ -29,7 +29,6 @@ const About: React.FC<IProps> = ({
   isEntreprise = false,
 }) => (
   <Page small={true} useMapbox={true}>
-    {console.log(etablissement, uniteLegale)}
     <div className="content-container">
       <div className="header-section">
         <div className="title">
@@ -123,7 +122,7 @@ const About: React.FC<IProps> = ({
         margin-left: 15px;
         color: #777;
         font-weight: bold;
-        line-height: 0.7rem;
+        line-height: 0.6rem;
         font-size: 0.8rem;
       }
       .content-container {
