@@ -3,6 +3,7 @@ import { Etablissement, UniteLegale } from '../../model';
 import { map, pin } from '../../static/icon';
 import {
   formatDate,
+  formatDateLong,
   formatNumbersFr,
   formatSiret,
 } from '../../utils/formatting';
@@ -34,11 +35,7 @@ const EtablissementSection: React.FC<{
       ) : (
         <> un établissement secondaire</>
       )}{' '}
-      de l’entreprise{' '}
-      <a href={`/entreprise/${uniteLegale.siren}`}>
-        {getCompanyTitle(uniteLegale)}
-      </a>
-      ,
+      de l’entreprise <a href="#entreprise">{getCompanyTitle(uniteLegale)}</a>,
       {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
         <>
           {' '}
@@ -51,6 +48,17 @@ const EtablissementSection: React.FC<{
         <>
           {' '}
           et <a href="#etablissements">son unique établissement</a>
+        </>
+      )}
+    </p>
+    <p>
+      {etablissement.date_creation && (
+        <>Il a été crée le {formatDateLong(etablissement.date_creation)}</>
+      )}{' '}
+      {etablissement.geo_adresse && (
+        <>
+          et il est domicilié au{' '}
+          <a href="#contact">{etablissement.geo_adresse}</a>
         </>
       )}
     </p>
@@ -125,10 +133,6 @@ const EtablissementSection: React.FC<{
         bottom: 0;
         height: 100%;
         width: 100%;
-      }
-      .cta {
-        flex-direction: row;
-        display: flex;
       }
     `}</style>
   </>

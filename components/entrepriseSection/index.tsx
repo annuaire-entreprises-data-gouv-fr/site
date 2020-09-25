@@ -11,13 +11,15 @@ import {
   getCompanyTitle,
   libelleFromCategoriesJuridiques,
 } from '../../utils/helper';
+import HorizontalSeparator from '../horizontalSeparator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 
 const EntrepriseSection: React.FC<{
   uniteLegale: UniteLegale;
 }> = ({ uniteLegale }) => (
-  <>
+  <div id="entreprise">
+    <HorizontalSeparator />
     <p>
       L’entreprise {getCompanyTitle(uniteLegale)}{' '}
       {uniteLegale.categorie_juridique && (
@@ -42,7 +44,7 @@ const EntrepriseSection: React.FC<{
       )}
       .
     </p>
-    <Section title={`Les informations sur cet entreprise`}>
+    <Section title={`Les informations sur cette entreprise`}>
       <TwoColumnTable
         body={[
           ['SIREN', formatNumbersFr(uniteLegale.etablissement_siege.siren)],
@@ -69,7 +71,7 @@ const EntrepriseSection: React.FC<{
         ]}
       />
     </Section>
-  </>
+  </div>
 );
 
 export default EntrepriseSection;

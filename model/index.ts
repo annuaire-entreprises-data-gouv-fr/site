@@ -21,6 +21,7 @@ export interface UniteLegale {
   etablissement_siege: Etablissement;
   categorie_juridique: string;
   etablissements: Etablissement[];
+  date_creation: string;
 }
 
 export interface SearchResults {
@@ -57,12 +58,12 @@ const getEtablissement = async (siret: string): Promise<Etablissement> => {
 const getResults = async (
   searchTerms: string,
   page: string
-): Promise<SearchResults | {}> => {
+): Promise<SearchResults | undefined> => {
   console.log(searchTerms);
   const response = await fetch(getResultPage(searchTerms, page));
 
   if (response.status === 404) {
-    return {};
+    return undefined;
   }
 
   return (await response.json()) as SearchResults;

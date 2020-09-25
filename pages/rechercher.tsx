@@ -161,9 +161,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      response: results,
+      response: results || {},
       searchTerm,
-      currentPage: parsePage(results.page),
+      currentPage: parsePage(results ? results.page : '1'),
     },
   };
 };

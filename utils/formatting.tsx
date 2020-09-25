@@ -8,10 +8,12 @@ const longDateOptions = {
 };
 
 export const formatDateLong = (date: string | Date) =>
-  new Intl.DateTimeFormat('fr-FR', longDateOptions).format(castDate(date));
+  date
+    ? new Intl.DateTimeFormat('fr-FR', longDateOptions).format(castDate(date))
+    : undefined;
 
 export const formatDate = (date: string | Date) =>
-  new Intl.DateTimeFormat('fr-FR').format(castDate(date));
+  date ? new Intl.DateTimeFormat('fr-FR').format(castDate(date)) : undefined;
 
 export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);

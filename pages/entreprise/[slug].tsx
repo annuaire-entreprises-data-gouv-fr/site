@@ -17,6 +17,7 @@ import {
 import { download } from '../../static/icon';
 import EtablissementSection from '../../components/etablissementSection';
 import EntrepriseSection from '../../components/entrepriseSection';
+import EtablissementListeSection from '../../components/etablissementListeSection';
 
 interface IProps {
   etablissement: Etablissement;
@@ -66,30 +67,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         uniteLegale={uniteLegale}
       />
       <EntrepriseSection uniteLegale={uniteLegale} />
-      <Section
-        title="La liste des établissements de l'entreprise"
-        id="etablissements"
-      >
-        <FullTable
-          head={['SIRET', 'Activité (code NAF)', 'Adresse', 'Statut']}
-          body={uniteLegale.etablissements.map((elem: any) => [
-            <a href={`/entreprise/${elem.siret}`}>{formatSiret(elem.siret)}</a>,
-            <>
-              {elem.activite_principale} -{' '}
-              {libelleFromCodeNaf(elem.activite_principale)}
-            </>,
-            elem.geo_adresse,
-            <>
-              {elem.etablissement_siege === 'true' ? (
-                <Tag>siège social</Tag>
-              ) : null}
-              {elem.etat_administratif === 'A' ? null : (
-                <Tag className="closed">fermé</Tag>
-              )}
-            </>,
-          ])}
-        />
-      </Section>
+      <EtablissementListeSection uniteLegale={uniteLegale} />
     </div>
     <style jsx>{`
       .header-section {

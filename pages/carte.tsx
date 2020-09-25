@@ -108,7 +108,6 @@ const About: React.FC<IProps> = ({ response, searchTerm, etablissement }) => (
       #map {
         width: 100%;
         height: calc(100vh - 164px);
-        background-color: red;
         min-height: 500px;
         flex-grow: 1;
       }
