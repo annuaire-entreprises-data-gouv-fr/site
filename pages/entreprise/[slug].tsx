@@ -33,7 +33,11 @@ const About: React.FC<IProps> = ({
     <div className="content-container">
       <div className="header-section">
         <div className="title">
-          <h1>{getCompanyTitle(uniteLegale)}</h1>
+          <h1>
+            <a href={`/entreprise/${uniteLegale.siren}`}>
+              {getCompanyTitle(uniteLegale)}
+            </a>
+          </h1>
           <span>
             {!isEntreprise ? (
               <>
