@@ -4,7 +4,7 @@ import { Tag } from '../tag';
 
 interface IProps {
   resultList: Etablissement[];
-  compact: boolean;
+  compact?: boolean;
 }
 
 const ResultList: React.FC<IProps> = ({ resultList, compact = false }) => (
