@@ -3,7 +3,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import ButtonLink from '../../components/button';
-import { formatSiret } from '../../utils/formatting';
+import { formatNumbersFr, formatSiret } from '../../utils/formatting';
 import { Tag } from '../../components/tag';
 import { getCompanyTitle, libelleFromCodeNaf } from '../../utils/helper';
 import {
@@ -37,29 +37,21 @@ const About: React.FC<IProps> = ({
               {getCompanyTitle(uniteLegale)}
             </a>
           </h1>
-          <span>
+          <div>
+            <span>fiche {isEntreprise ? 'entreprise' : 'etablissement'}</span>
             {!isEntreprise ? (
-              <>
-                <span>etablissement</span>
-                <span>
-                  {formatSiret(etablissement.siret)}
-                  {etablissement.etat_administratif === 'A' ? (
-                    <Tag className="open">en activité</Tag>
-                  ) : (
-                    <Tag className="closed">fermé</Tag>
-                  )}
-                </span>
-              </>
+              <span> ‣ {formatSiret(etablissement.siret)}</span>
             ) : (
-              <>
-                {etablissement.etat_administratif === 'A' ? (
-                  <Tag className="open">en activité</Tag>
-                ) : (
-                  <Tag className="closed">fermé</Tag>
-                )}
-              </>
+              <span> ‣ {formatNumbersFr(uniteLegale.siren)}</span>
             )}
-          </span>
+            <span>
+              {etablissement.etat_administratif === 'A' ? (
+                <Tag className="open">en activité</Tag>
+              ) : (
+                <Tag className="closed">fermé</Tag>
+              )}
+            </span>
+          </div>
         </div>
         <div className="cta">
           <ButtonLink
@@ -96,35 +88,28 @@ const About: React.FC<IProps> = ({
         align-items: center;
       }
       .title {
+        margin: 20px 0 10px;
         display: flex;
-        align-items: center;
-      }
-      .title > span {
-        display: flex;
+        align-items: start;
         flex-direction: column;
-        margin: 0 10px;
+        justify-content: center;
       }
-      .title > span > span:last-of-type {
-        color: #888;
-        font-size: 1.4rem;
-        line-height: 1.4rem;
-        margin-left: 15px;
-        position: relative;
-        display: flex;
+      .title h1 {
+        margin: 0;
+        line-height: 2rem;
       }
-      .title > span > span:last-of-type:before {
-        content: '‣';
-        position: absolute;
-        left: -15px;
+      .title h1 > a {
+        margin: 0;
+        padding: 0;
       }
-      .title > span > span:first-of-type {
+      .title > div > span {
+        color: #666;
+      }
+      .title > div > span:first-of-type {
         font-variant: small-caps;
-        margin-left: 15px;
-        color: #777;
-        font-weight: bold;
-        line-height: 0.6rem;
-        font-size: 0.8rem;
+        font-size: 1.1rem;
       }
+
       .content-container {
         margin: 20px auto 40px;
       }

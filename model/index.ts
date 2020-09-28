@@ -11,6 +11,9 @@ export interface Etablissement {
   etablissement_siege: string;
   activite_principale: string;
   date_dernier_traitement: string;
+  l1_normalisee: string;
+  libelle_activite_principale: string;
+  is_siege: '1' | null;
   tranche_effectifs: string;
   latitude: string;
   longitude: string;

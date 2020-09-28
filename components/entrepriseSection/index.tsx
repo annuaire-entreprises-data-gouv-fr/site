@@ -38,7 +38,9 @@ const EntrepriseSection: React.FC<{
       {uniteLegale.etablissement_siege.geo_adresse && (
         <>
           et dont le siège est domicilié au{' '}
-          <a href={`/carte?siret=${uniteLegale.etablissement_siege.siret}`}>
+          <a
+            href={`/rechercher/carte?siret=${uniteLegale.etablissement_siege.siret}`}
+          >
             {uniteLegale.etablissement_siege.geo_adresse}
           </a>
         </>

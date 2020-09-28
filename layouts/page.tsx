@@ -6,17 +6,17 @@ import { NextSeo } from 'next-seo';
 interface IProps {
   small?: boolean;
   currentSearchTerm?: string;
-  useMapbox?: boolean;
+  map?: boolean;
 }
 
 const Page: React.FC<IProps> = ({
   small,
   children,
   currentSearchTerm = '',
-  useMapbox = false,
+  map = false,
 }) => (
   <div id="page-layout">
-    {useMapbox && (
+    {map && (
       <NextSeo>
         <Head>
           <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
@@ -64,7 +64,11 @@ const Page: React.FC<IProps> = ({
               </g>
             </svg>
           </a>
-          <SearchBar small={true} defaultValue={currentSearchTerm} />
+          <SearchBar
+            small={true}
+            defaultValue={currentSearchTerm}
+            url={map ? '/rechercher/carte' : '/rechercher'}
+          />
           <div>
             <a href="/comment-ca-marche">Comment ça marche&nbsp;?</a>
           </div>

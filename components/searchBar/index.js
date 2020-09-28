@@ -6,10 +6,11 @@ const SearchBar = ({
   placeholder = 'Rechercher un nom, un SIRET, une adresse',
   defaultValue = '',
   small = false,
+  url = '/rechercher',
 }) => {
   return (
     <>
-      <form action="/rechercher" id="search-wrapper" method="get">
+      <form action={url} id="search-wrapper" method="get">
         <div className="search-bar">
           <input
             placeholder={placeholder}

@@ -109,7 +109,10 @@ const EtablissementSection: React.FC<{
       <div className="map">
         {map}
         <div className="layout-center">
-          <ButtonLink href={`/carte?siret=${etablissement.siret}`} alt>
+          <ButtonLink
+            href={`/rechercher/carte?siret=${etablissement.siret}`}
+            alt
+          >
             {pin}
             Afficher sur la carte
           </ButtonLink>

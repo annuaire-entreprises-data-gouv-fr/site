@@ -1,43 +1,71 @@
 import React from 'react';
 
 import { GetServerSideProps } from 'next';
-import Page from '../layouts';
+import Page from '../../layouts';
 import {
   Etablissement,
   SearchResults,
   getEtablissement,
   getResults,
-} from '../model';
+} from '../../model';
+import ResultList from '../../components/resultList';
+import { isSirenOrSiret } from '../../utils/helper';
+import PageCounter from '../../components/pageCounter';
 
 interface IProps {
   response?: SearchResults;
   searchTerm?: string;
   etablissement?: Etablissement;
+  currentPage: number;
 }
 
-const About: React.FC<IProps> = ({ response, searchTerm, etablissement }) => (
-  <Page small={true} currentSearchTerm={searchTerm}>
-    <div className="content-container results-counter">
-      {response ? (
-        response.total_results ? (
-          <>
-            {response.total_results} résultats trouvés pour “<b>{searchTerm}</b>
-            ”. {Math.min(response.total_results, 100)} résultats affichés.
-          </>
-        ) : (
-          <>
-            Aucune société n’a été trouvée pour “<b>{searchTerm}</b>”
-            <p>
-              Nous vous suggérons de vérifier l’orthographe du nom, du SIRET, ou
-              de l'adresse que vous avez utilisé.
-            </p>
-          </>
-        )
-      ) : (
-        <>🏄🏻‍♂️</>
+const About: React.FC<IProps> = ({
+  response,
+  searchTerm = '',
+  etablissement,
+  currentPage = 1,
+}) => (
+  <Page small={true} currentSearchTerm={searchTerm} map={true}>
+    <div className="map-container">
+      {response && response.etablissement && (
+        <div className="map-results">
+          <div className="results">
+            <div className="results-counter">
+              {response ? (
+                response.total_results ? (
+                  <>
+                    {response.total_results} résultats trouvés pour “
+                    <b>{searchTerm}</b>
+                    ”.
+                  </>
+                ) : (
+                  <>
+                    Aucune société n’a été trouvée pour “<b>{searchTerm}</b>”
+                    <p>
+                      Nous vous suggérons de vérifier l’orthographe du nom, du
+                      SIRET, ou de l'adresse que vous avez utilisé.
+                    </p>
+                  </>
+                )
+              ) : (
+                <>🏄🏻‍♂️</>
+              )}
+            </div>
+            <ResultList resultList={response.etablissement} compact={true} />
+          </div>
+          <div className="results-footer">
+            {response.total_pages && response.total_pages > 1 && (
+              <PageCounter
+                totalPages={response.total_pages}
+                currentPage={currentPage}
+                searchTerm={searchTerm}
+              />
+            )}
+          </div>
+        </div>
       )}
+      <div id="map"></div>
     </div>
-    <div id="map"></div>
 
     {etablissement && (
       <script
@@ -97,7 +125,7 @@ const About: React.FC<IProps> = ({ response, searchTerm, etablissement }) => (
         margin-top: 10px;
         margin-bottom: 10px;
         color: rgb(112, 117, 122);
-        height: 24px;
+        margin-bottom: 15px;
       }
       .title {
         color: #000091;
@@ -105,11 +133,30 @@ const About: React.FC<IProps> = ({ response, searchTerm, etablissement }) => (
         font-size: 1.4rem;
         margin-bottom: 5px;
       }
-      #map {
+      .map-container {
+        display: flex;
+        height: calc(100vh - 120px);
+      }
+      .map-results {
+        width: 600px;
+        font-size: 1rem;
+        height: 100%;
+        overflow: auto;
+      }
+      .map-results > .results {
+        padding: 0 10px;
+        height: calc(100% - 50px);
+        overflow: auto;
+      }
+      .map-results > .results-footer {
+        height: 50px;
         width: 100%;
-        height: calc(100vh - 164px);
-        min-height: 500px;
-        flex-grow: 1;
+        display: flex;
+        border-top: 1px solid #dfdff1;
+      }
+      #map {
+        background: #dfdff1;
+        width: 100%;
       }
     `}</style>
   </Page>
@@ -135,12 +182,25 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   if (terme) {
-    const results = await getResults(terme as string, '1');
+    const searchTerm = terme as string;
+
+    if (isSirenOrSiret(searchTerm)) {
+      context.res.writeHead(302, {
+        Location: `/entreprise/${searchTerm}`,
+      });
+      context.res.end();
+    }
+
+    const results = await getResults(
+      searchTerm,
+      (context.query.page || '') as string
+    );
 
     return {
       props: {
-        response: results,
-        searchTerm: terme as string,
+        response: results || {},
+        searchTerm: searchTerm,
+        currentPage: parsePage(results ? results.page : '1'),
       },
     };
   }
