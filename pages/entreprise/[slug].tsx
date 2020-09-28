@@ -28,7 +28,7 @@ const About: React.FC<IProps> = ({
   uniteLegale,
   isEntreprise = false,
 }) => (
-  <Page small={true} useMapbox={true}>
+  <Page small={true}>
     <div className="content-container">
       <div className="header-section">
         <div className="title">
