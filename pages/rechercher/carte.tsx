@@ -67,30 +67,7 @@ const About: React.FC<IProps> = ({
       <div id="map"></div>
     </div>
 
-    {etablissement && (
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-                function initMap(style) {
-                  if (!mapboxgl) {return;}
-
-                  var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: style, // stylesheet location
-                    center: [${etablissement.longitude},${etablissement.latitude}], // starting position [lng, lat]
-                    zoom: 12 // starting zoom
-                  });
-                  new mapboxgl.Marker({ color: '#000091' })
-                  .setLngLat([${etablissement.longitude},${etablissement.latitude}])
-                  .addTo(map);
-                }
-
-                fetch("https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json").then(res=> res.json()).then(el => initMap(el))
-              `,
-        }}
-      />
-    )}
-    {response && (
+    {response ? (
       <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -111,6 +88,40 @@ const About: React.FC<IProps> = ({
                       new mapboxgl.Marker({ color: '#000091' })
                       .setLngLat([etablissement.longitude,etablissement.latitude])
                       .addTo(map);
+                  }
+                }
+
+                fetch("https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json").then(res=> res.json()).then(el => initMap(el))
+              `,
+        }}
+      />
+    ) : (
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+                function initMap(style) {
+                  if (!mapboxgl) {return;}
+
+                  var coords = ${
+                    etablissement
+                      ? `[${etablissement.longitude},${etablissement.latitude}]`
+                      : '[0.68484,47.394144]'
+                  };
+
+                  var zoom = ${etablissement ? '12' : '4.5'};
+
+                  var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: style, // stylesheet location
+                    center: coords,
+                    zoom: zoom // starting zoom
+                  });
+                  ${
+                    etablissement
+                      ? `new mapboxgl.Marker({ color: '#000091' })
+                    .setLngLat(coords)
+                    .addTo(map);`
+                      : ''
                   }
                 }
 
@@ -208,6 +219,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       response: null,
+      etablissement: null,
       searchTerm: null,
     },
   };

@@ -36,7 +36,11 @@ const EtablissementSection: React.FC<{
       ) : (
         <> un établissement secondaire</>
       )}{' '}
-      de l’entreprise <a href="#entreprise">{getCompanyTitle(uniteLegale)}</a>,
+      de l’entreprise{' '}
+      <a href={`/entreprise/${uniteLegale.siren}`}>
+        {getCompanyTitle(uniteLegale)}
+      </a>
+      ,
       {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
         <>
           {' '}
