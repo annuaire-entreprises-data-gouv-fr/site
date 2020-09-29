@@ -7,6 +7,7 @@ import { getResults, SearchResults } from '../../model';
 import { parsePage } from '../../model/routes';
 import ResultList from '../../components/resultList';
 import PageCounter from '../../components/pageCounter';
+import { pin } from '../../static/icon';
 
 interface IProps {
   response: SearchResults;
@@ -22,7 +23,7 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
           {currentPage > 1 && `Page ${currentPage} de `}
           {response.total_results} résultats trouvés pour “<b>{searchTerm}</b>”.
           <a href={`/rechercher/carte?terme=${searchTerm}`}>
-            Afficher les résultats sur la carte
+            {pin} Afficher les résultats sur la carte
           </a>
         </div>
       ) : (
