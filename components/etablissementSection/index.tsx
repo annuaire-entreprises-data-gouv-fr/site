@@ -130,6 +130,7 @@ const EtablissementSection: React.FC<{
     <style jsx>{`
       .section-wrapper {
         display: flex;
+        flex-direction: row;
       }
       .section-wrapper .map {
         background-color: #fff;
@@ -148,6 +149,18 @@ const EtablissementSection: React.FC<{
         bottom: 0;
         height: 100%;
         width: 100%;
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 600px) {
+        .section-wrapper {
+          flex-direction: column;
+        }
+
+        .section-wrapper .map {
+          flex-direction: column;
+          width: 100%;
+          margin: auto;
+        }
       }
     `}</style>
   </>

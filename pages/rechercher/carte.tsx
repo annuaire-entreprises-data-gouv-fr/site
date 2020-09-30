@@ -27,6 +27,8 @@ const About: React.FC<IProps> = ({
 }) => (
   <Page small={true} currentSearchTerm={searchTerm} map={true}>
     <div className="map-container">
+      <div id="map"></div>
+
       {response && response.etablissement && (
         <div className="map-results">
           <div className="results">
@@ -37,7 +39,7 @@ const About: React.FC<IProps> = ({
                     {response.total_results} résultats trouvés pour “
                     <b>{searchTerm}</b>
                     ”.{' '}
-                    <a href={`/rechercher/${searchTerm}`}>
+                    <a href={`/rechercher/?terme=${searchTerm}`}>
                       Afficher les résultats sous forme de liste
                     </a>
                   </>
@@ -67,7 +69,6 @@ const About: React.FC<IProps> = ({
           </div>
         </div>
       )}
-      <div id="map"></div>
     </div>
 
     {response ? (
@@ -149,6 +150,7 @@ const About: React.FC<IProps> = ({
       }
       .map-container {
         display: flex;
+        flex-direction: row-reverse;
         height: calc(100vh - 120px);
       }
       .map-results {
@@ -171,6 +173,24 @@ const About: React.FC<IProps> = ({
       #map {
         background: #dfdff1;
         width: 100%;
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 900px) {
+        .map-container {
+          display: block;
+          height: auto;
+        }
+        .map-results {
+          width: 100%;
+        }
+        #map {
+          background: #dfdff1;
+          min-height: 250px;
+        }
+        .map-results > .results {
+          height: auto;
+          overflow: none;
+        }
       }
     `}</style>
   </Page>

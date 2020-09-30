@@ -28,11 +28,11 @@ const Title: React.FC<IProps> = ({
         <a href={`/entreprise/${siren}`}>{name}</a>
       </h1>
       <div>
-        <span>fiche {isEntreprise ? 'entreprise' : 'etablissement'}</span>
+        <span>fiche {isEntreprise ? 'entreprise ' : 'etablissement '}</span>
         {!isEntreprise ? (
-          <span> ‣ {formatSiret(siret)}</span>
+          <span>‣ {formatSiret(siret)}</span>
         ) : (
-          <span> ‣ {formatNumbersFr(siren)}</span>
+          <span>‣ {formatNumbersFr(siren)}</span>
         )}
         <span>
           {isNonDiffusible ? (
@@ -56,10 +56,10 @@ const Title: React.FC<IProps> = ({
         href={`/api/immatriculation?siren=${siren}?format=pdf`}
       >
         {download}
-        <span style={{ width: '5px' }} />
+        <span className="separator" />
         Justificatif d'immatriculation
       </ButtonLink>
-      <span style={{ width: '5px' }} />
+      <span className="separator" />
       <ButtonLink
         target="_blank"
         href={`/api/immatriculation?siren=${siren}`}
@@ -104,8 +104,15 @@ const Title: React.FC<IProps> = ({
         flex-direction: row;
         display: flex;
       }
+      .cta .separator {
+        width: 5px;
+        flex-shrink: 0;
+      }
 
       @media only screen and (min-width: 1px) and (max-width: 900px) {
+        .title {
+          margin-top: 10px;
+        }
         .header-section {
           justify-content: start;
           align-items: flex-start;
@@ -114,6 +121,10 @@ const Title: React.FC<IProps> = ({
         .cta {
           width: 100%;
           margin: 5px auto 20px;
+        }
+        .title > div > span:first-of-type {
+          display: block;
+          margin-top: 10px;
         }
       }
     `}</style>

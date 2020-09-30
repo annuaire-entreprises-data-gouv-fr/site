@@ -99,6 +99,10 @@ export const CopyCell: React.FC<PropsWithChildren<{}>> = ({ children }) => (
         div > span.label {
           display: none;
         }
+        td {
+          padding: 0;
+          margin: 0;
+        }
       }
     `}</style>
   </td>
@@ -142,6 +146,23 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => (
       table > thead {
         display: none;
         background-color: #dfdff1;
+      }
+      @media only screen and (min-width: 1px) and (max-width: 600px) {
+        tr {
+          display: flex;
+          flex-direction: column;
+          margin: 15px 0;
+        }
+        tr > td {
+          border: none;
+          padding: 0;
+          margin: 0;
+        }
+        tr > td:first-of-type {
+          border: none;
+          padding: 0;
+          margin: 0;
+        }
       }
     `}</style>
   </>

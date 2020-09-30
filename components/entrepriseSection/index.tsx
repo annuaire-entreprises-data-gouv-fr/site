@@ -17,38 +17,38 @@ import { TwoColumnTable } from '../table/simple';
 
 const entrepriseDescription = (uniteLegale: UniteLegale) => {
   if (uniteLegale.statut_diffusion === 'N') {
-    return '';
-  }
-  let description = `L’entreprise ${getCompanyTitle(uniteLegale)} `;
-
-  if (uniteLegale.categorie_juridique) {
-    description += (
+    return <></>;
+  } else
+    return (
       <>
-        est une{' '}
-        {libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique)}
+        <>L’entreprise {getCompanyTitle(uniteLegale)}</>
+        {uniteLegale.categorie_juridique && (
+          <>
+            est une{' '}
+            <b>
+              {libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique)}
+            </b>{' '}
+          </>
+        )}
+        {uniteLegale.date_creation && (
+          <>
+            créee le <b>{formatDateLong(uniteLegale.date_creation)}</b>{' '}
+          </>
+        )}
+        {uniteLegale.etablissement_siege &&
+          uniteLegale.etablissement_siege.geo_adresse && (
+            <>
+              et dont le siège est domicilié au{' '}
+              <a
+                href={`/rechercher/carte?siret=${uniteLegale.etablissement_siege.siret}`}
+              >
+                {uniteLegale.etablissement_siege.geo_adresse}
+              </a>
+            </>
+          )}
+        .{' '}
       </>
     );
-  }
-  if (uniteLegale.date_creation) {
-    description += <>créee le {formatDateLong(uniteLegale.date_creation)}</>;
-  }
-  if (
-    uniteLegale.etablissement_siege &&
-    uniteLegale.etablissement_siege.geo_adresse
-  ) {
-    description += (
-      <>
-        et dont le siège est domicilié au{' '}
-        <a
-          href={`/rechercher/carte?siret=${uniteLegale.etablissement_siege.siret}`}
-        >
-          {uniteLegale.etablissement_siege.geo_adresse}
-        </a>
-      </>
-    );
-  }
-  description += '.';
-  return description;
 };
 
 const EntrepriseSection: React.FC<{

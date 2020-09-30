@@ -69,8 +69,25 @@ const Page: React.FC<IProps> = ({
             defaultValue={currentSearchTerm}
             url={map ? '/rechercher/carte' : '/rechercher'}
           />
-          <div>
-            <a href="/comment-ca-marche">Comment ça marche&nbsp;?</a>
+          <div className="about">
+            <a href="/comment-ca-marche">
+              <span>Comment ça marche&nbsp;?</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </a>
           </div>
         </div>
       </div>
@@ -119,14 +136,6 @@ const Page: React.FC<IProps> = ({
       .header-small > div {
         display: flex;
       }
-      .header-small > div > div {
-        flex-grow: 1;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        text-align: center;
-        margin-left: 20px;
-      }
       .header-small svg {
         width: auto;
         height: 36px;
@@ -137,6 +146,19 @@ const Page: React.FC<IProps> = ({
       }
       .header img {
         margin: 20px;
+      }
+
+      .about {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        text-align: center;
+        margin-left: 20px;
+      }
+      .about > a > svg {
+        color: #000091;
+        display: none;
       }
 
       main {
@@ -158,6 +180,22 @@ const Page: React.FC<IProps> = ({
         main {
           min-height: 400px;
           flex-grow: 0;
+        }
+
+        .header-small svg {
+          height: 24px;
+          margin: 12px 10px;
+          margin-left: 0;
+        }
+        .about {
+          margin-left: 10px;
+        }
+        .about > a > svg {
+          display: block;
+          margin: 0;
+        }
+        .about > a > span {
+          display: none;
         }
       }
     `}</style>

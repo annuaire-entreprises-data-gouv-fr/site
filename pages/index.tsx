@@ -24,9 +24,6 @@ const About: React.FC = () => {
         h2 {
           text-align: center;
         }
-        h1 {
-          font-size: 3rem;
-        }
 
         .layout-center {
           height: 100%;
@@ -41,6 +38,7 @@ const About: React.FC = () => {
           .centered-search {
             width: calc(100% - 30px);
             flex-grow: 0;
+            padding-top: 30px;
           }
         }
       `}</style>
