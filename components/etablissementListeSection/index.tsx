@@ -25,11 +25,17 @@ const EtablissementListeSection: React.FC<{
           </>,
           elem.geo_adresse,
           <>
-            {elem.etablissement_siege === 'true' ? (
-              <Tag>siège social</Tag>
-            ) : null}
-            {elem.etat_administratif === 'A' ? null : (
-              <Tag className="closed">fermé</Tag>
+            {uniteLegale.statut_diffusion === 'N' ? (
+              <Tag>non-diffusable</Tag>
+            ) : (
+              <>
+                {elem.etablissement_siege === 'true' ? (
+                  <Tag>siège social</Tag>
+                ) : null}
+                {elem.etat_administratif === 'A' ? null : (
+                  <Tag className="closed">fermé</Tag>
+                )}
+              </>
             )}
           </>,
         ])}

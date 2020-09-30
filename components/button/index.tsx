@@ -34,6 +34,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
       }
       a,
       button {
+        text-align: center;
         outline: none;
         transition: none;
         display: flex;
@@ -44,6 +45,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         color: ${alt ? '#000091' : '#fff'};
         text-decoration: none;
         font-size: ${small ? '0.9rem' : '1rem'};
+        line-height: 1.2rem;
         height: ${small ? '36px' : '46px'};
         padding: 0 10px;
         border: 2px solid ${alt ? '#000091' : 'transparent'};

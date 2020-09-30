@@ -25,6 +25,7 @@ export interface UniteLegale {
   categorie_juridique: string;
   etablissements: Etablissement[];
   date_creation: string;
+  statut_diffusion: string;
 }
 
 export interface SearchResults {

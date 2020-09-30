@@ -2,20 +2,19 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import ButtonLink from '../../components/button';
-import { formatNumbersFr, formatSiret } from '../../utils/formatting';
-import { Tag } from '../../components/tag';
-import { getCompanyTitle, libelleFromCodeNaf } from '../../utils/helper';
+import { getCompanyTitle } from '../../utils/helper';
 import {
   Etablissement,
   getEtablissement,
   getUniteLegale,
   UniteLegale,
 } from '../../model';
-import { download } from '../../static/icon';
 import EtablissementSection from '../../components/etablissementSection';
 import EntrepriseSection from '../../components/entrepriseSection';
 import EtablissementListeSection from '../../components/etablissementListeSection';
+import Title from '../../components/titleSection';
+import ButtonLink from '../../components/button';
+import HorizontalSeparator from '../../components/horizontalSeparator';
 
 interface IProps {
   etablissement: Etablissement;
@@ -30,48 +29,47 @@ const About: React.FC<IProps> = ({
 }) => (
   <Page small={true}>
     <div className="content-container">
-      <div className="header-section">
-        <div className="title">
-          <h1>
-            <a href={`/entreprise/${uniteLegale.siren}`}>
-              {getCompanyTitle(uniteLegale)}
+      <Title
+        name={
+          uniteLegale.statut_diffusion === 'N'
+            ? 'Nom inconnu'
+            : getCompanyTitle(uniteLegale)
+        }
+        siren={uniteLegale.siren}
+        siret={etablissement.siret}
+        isEntreprise={isEntreprise}
+        isSiege={etablissement.etat_administratif === 'A'}
+        isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
+      />
+      {uniteLegale.statut_diffusion === 'N' && (
+        <>
+          <p>
+            Vous ne pouvez pas obtenir les informations de cette entreprise
+            individuelle car celle-ci a demandé à ne pas figurer sur les listes
+            de diffusion publique en vertu de{' '}
+            <a href="https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=C505A51DBC1A4EB1FFF3764C69ACDB1C.tpdjo11v_1?idArticle=LEGIARTI000020165030&cidTexte=LEGITEXT000005634379&dateTexte=20100702">
+              l'article A123-96 du code du commerce
             </a>
-          </h1>
-          <div>
-            <span>fiche {isEntreprise ? 'entreprise' : 'etablissement'}</span>
-            {!isEntreprise ? (
-              <span> ‣ {formatSiret(etablissement.siret)}</span>
-            ) : (
-              <span> ‣ {formatNumbersFr(uniteLegale.siren)}</span>
-            )}
-            <span>
-              {etablissement.etat_administratif === 'A' ? (
-                <Tag className="open">en activité</Tag>
-              ) : (
-                <Tag className="closed">fermé</Tag>
-              )}
-            </span>
+            .
+          </p>
+          <p>
+            Pour des raisons de sécurité, certaines associations et les
+            organismes relevant du Ministère de la Défense ne sont pas
+            diffusables non plus.
+          </p>
+          <p>
+            Si cette entreprise est la votre et que vous souhaitez vous rendre
+            diffusable de nouveau la démarche est à effectuée auprès de l’INSEE
+            :
+          </p>
+          <div className="layout-center">
+            <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
+              ⇢ Rendre mon entreprise diffusible
+            </ButtonLink>
           </div>
-        </div>
-        <div className="cta">
-          <ButtonLink
-            target="_blank"
-            href={`/api/immatriculation?siren=${etablissement.siren}?format=pdf`}
-          >
-            {download}
-            <span style={{ width: '5px' }} />
-            Justificatif d'immatriculation
-          </ButtonLink>
-          <span style={{ width: '5px' }} />
-          <ButtonLink
-            target="_blank"
-            href={`/api/immatriculation?siren=${etablissement.siren}`}
-            alt
-          >
-            Fiche d'immatriculation
-          </ButtonLink>
-        </div>
-      </div>
+          <HorizontalSeparator />
+        </>
+      )}
       {!isEntreprise && (
         <EtablissementSection
           etablissement={etablissement}
@@ -82,40 +80,8 @@ const About: React.FC<IProps> = ({
       <EtablissementListeSection uniteLegale={uniteLegale} />
     </div>
     <style jsx>{`
-      .header-section {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .title {
-        margin: 20px 0 10px;
-        display: flex;
-        align-items: start;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .title h1 {
-        margin: 0;
-        line-height: 2rem;
-      }
-      .title h1 > a {
-        margin: 0;
-        padding: 0;
-      }
-      .title > div > span {
-        color: #666;
-      }
-      .title > div > span:first-of-type {
-        font-variant: small-caps;
-        font-size: 1.1rem;
-      }
-
       .content-container {
         margin: 20px auto 40px;
-      }
-      .cta {
-        flex-direction: row;
-        display: flex;
       }
     `}</style>
   </Page>
@@ -130,7 +96,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const uniteLegale = await getUniteLegale(siretOrSiren as string);
     return {
       props: {
-        etablissement: uniteLegale.etablissement_siege,
+        etablissement: uniteLegale.etablissement_siege || {},
         uniteLegale,
         isEntreprise: true,
       },

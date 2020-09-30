@@ -36,7 +36,10 @@ const About: React.FC<IProps> = ({
                   <>
                     {response.total_results} résultats trouvés pour “
                     <b>{searchTerm}</b>
-                    ”.
+                    ”.{' '}
+                    <a href={`/rechercher/${searchTerm}`}>
+                      Afficher les résultats sous forme de liste
+                    </a>
                   </>
                 ) : (
                   <>

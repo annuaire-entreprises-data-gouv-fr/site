@@ -25,37 +25,40 @@ const EtablissementSection: React.FC<{
   uniteLegale: UniteLegale;
 }> = ({ etablissement, uniteLegale }) => (
   <>
-    <p>
-      Cet établissement est
-      <b>
-        {etablissement.etat_administratif === 'A' ? ' en activité' : ' fermé'}.
-      </b>{' '}
-      C’est
-      {etablissement.etablissement_siege === 'true' ? (
-        <b> le siège social</b>
-      ) : (
-        <> un établissement secondaire</>
-      )}{' '}
-      de l’entreprise{' '}
-      <a href={`/entreprise/${uniteLegale.siren}`}>
-        {getCompanyTitle(uniteLegale)}
-      </a>
-      ,
-      {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
-        <>
-          {' '}
-          qui possède au total
-          <a href="#etablissements">
-            {uniteLegale.etablissements.length} établissements.
-          </a>
-        </>
-      ) : (
-        <>
-          {' '}
-          et <a href="#etablissements">son unique établissement</a>
-        </>
-      )}
-    </p>
+    {uniteLegale.statut_diffusion !== 'N' && (
+      <p>
+        Cet établissement est
+        <b>
+          {etablissement.etat_administratif === 'A' ? ' en activité' : ' fermé'}
+          .
+        </b>{' '}
+        C’est
+        {etablissement.etablissement_siege === 'true' ? (
+          <b> le siège social</b>
+        ) : (
+          <> un établissement secondaire</>
+        )}{' '}
+        de l’entreprise{' '}
+        <a href={`/entreprise/${uniteLegale.siren}`}>
+          {getCompanyTitle(uniteLegale)}
+        </a>
+        ,
+        {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
+          <>
+            {' '}
+            qui possède au total
+            <a href="#etablissements">
+              {uniteLegale.etablissements.length} établissements.
+            </a>
+          </>
+        ) : (
+          <>
+            {' '}
+            et <a href="#etablissements">son unique établissement</a>
+          </>
+        )}
+      </p>
+    )}
     <p>
       {etablissement.date_creation && (
         <>

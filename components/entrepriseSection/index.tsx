@@ -15,55 +15,71 @@ import HorizontalSeparator from '../horizontalSeparator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 
+const entrepriseDescription = (uniteLegale: UniteLegale) => {
+  if (uniteLegale.statut_diffusion === 'N') {
+    return '';
+  }
+  let description = `L’entreprise ${getCompanyTitle(uniteLegale)} `;
+
+  if (uniteLegale.categorie_juridique) {
+    description += (
+      <>
+        est une{' '}
+        {libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique)}
+      </>
+    );
+  }
+  if (uniteLegale.date_creation) {
+    description += <>créee le {formatDateLong(uniteLegale.date_creation)}</>;
+  }
+  if (
+    uniteLegale.etablissement_siege &&
+    uniteLegale.etablissement_siege.geo_adresse
+  ) {
+    description += (
+      <>
+        et dont le siège est domicilié au{' '}
+        <a
+          href={`/rechercher/carte?siret=${uniteLegale.etablissement_siege.siret}`}
+        >
+          {uniteLegale.etablissement_siege.geo_adresse}
+        </a>
+      </>
+    );
+  }
+  description += '.';
+  return description;
+};
+
 const EntrepriseSection: React.FC<{
   uniteLegale: UniteLegale;
 }> = ({ uniteLegale }) => (
   <div id="entreprise">
-    <p>
-      L’entreprise {getCompanyTitle(uniteLegale)}{' '}
-      {uniteLegale.categorie_juridique && (
-        <>
-          est une{' '}
-          <b>
-            {libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique)}
-          </b>{' '}
-        </>
-      )}
-      {uniteLegale.etablissement_siege.date_creation && (
-        <>
-          créee le{' '}
-          {formatDateLong(uniteLegale.etablissement_siege.date_creation)}
-        </>
-      )}{' '}
-      {uniteLegale.etablissement_siege.geo_adresse && (
-        <>
-          et dont le siège est domicilié au{' '}
-          <a
-            href={`/rechercher/carte?siret=${uniteLegale.etablissement_siege.siret}`}
-          >
-            {uniteLegale.etablissement_siege.geo_adresse}
-          </a>
-        </>
-      )}
-      .
-    </p>
+    <p>{entrepriseDescription(uniteLegale)}</p>
     <Section title={`Les informations sur cette entreprise`}>
       <TwoColumnTable
         body={[
-          ['SIREN', formatNumbersFr(uniteLegale.etablissement_siege.siren)],
+          ['SIREN', formatNumbersFr(uniteLegale.siren)],
           [
             'Siège social',
-            <>
-              {formatSiret(uniteLegale.etablissement_siege.siret)}{' '}
-              <a href={`/entreprise/${uniteLegale.etablissement_siege.siret}`}>
-                (voir le siège social)
-              </a>
-            </>,
+            uniteLegale.etablissement_siege &&
+              uniteLegale.etablissement_siege.siret && (
+                <>
+                  {formatSiret((uniteLegale.etablissement_siege || {}).siret)}{' '}
+                  <a
+                    href={`/entreprise/${
+                      (uniteLegale.etablissement_siege || {}).siret
+                    }`}
+                  >
+                    (voir le siège social)
+                  </a>
+                </>
+              ),
           ],
           [
             'Activité principale (siège)',
             fullLibelleFromCodeNaf(
-              uniteLegale.etablissement_siege.activite_principale
+              (uniteLegale.etablissement_siege || {}).activite_principale
             ),
           ],
           [

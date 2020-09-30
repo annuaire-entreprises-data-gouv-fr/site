@@ -37,6 +37,12 @@ export const Section: React.FC<ISectionProps> = ({
         color: #000091;
         padding: 0 7px;
         border-radius: 2px;
+        max-width: calc(100% - 40px);
+      }
+      @media only screen and (min-width: 1px) and (max-width: 900px) {
+        .section-container {
+          padding-top: 3rem;
+        }
       }
     `}</style>
   </>
