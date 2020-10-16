@@ -8,27 +8,14 @@ import { Header, HeaderSmall } from '../components/header';
 interface IProps {
   small?: boolean;
   currentSearchTerm?: string;
-  map?: boolean;
 }
 
 const Page: React.FC<IProps> = ({
   small,
   children,
   currentSearchTerm = '',
-  map = false,
 }) => (
   <div id="page-layout">
-    {map && (
-      <NextSeo>
-        <Head>
-          <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
-          <link
-            href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
-            rel="stylesheet"
-          />
-        </Head>
-      </NextSeo>
-    )}
     {small ? (
       <HeaderSmall currentSearchTerm={currentSearchTerm} map={map} />
     ) : (
