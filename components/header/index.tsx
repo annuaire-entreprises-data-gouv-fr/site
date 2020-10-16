@@ -182,6 +182,14 @@ const Header = () => (
       .about > a > span {
         text-align: left;
       }
+      @media only screen and (min-width: 1px) and (max-width: 600px) {
+        .header .about > a > svg {
+          display: none;
+        }
+        .about > a > span {
+          text-align: right;
+        }
+      }
     `}</style>
   </>
 );

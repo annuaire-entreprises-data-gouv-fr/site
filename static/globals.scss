@@ -225,19 +225,19 @@ html {
 h1 {
   font-size: 2rem;
   line-height: 3rem;
-  margin: 15px 0;
+  margin: 40px 0 15px;
   color: $darkestGrey;
 }
 
 h2 {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   line-height: 2rem;
-  margin: 10px 0 16px;
+  margin: 30px 0 16px;
   color: $darkestGrey;
 }
 
 h3 {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   line-height: 1.9rem;
   margin: 12px 0 16px;
 }
@@ -250,16 +250,16 @@ h4 {
 
 @media only screen and (min-width: 1px) and (max-width: 600px) {
   h1 {
-    font-size: 2.2rem;
-    line-height: 2.5rem;
-    margin: 12px 0 15px;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    margin: 40px 0 15px;
     color: $darkestGrey;
   }
 
   h2 {
     font-size: 1.2rem;
     line-height: 1.7rem;
-    margin: 12px 0 16px;
+    margin: 30px 0 16px;
 
     color: $darkestGrey;
   }
