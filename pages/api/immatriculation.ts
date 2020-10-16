@@ -20,6 +20,7 @@ export default async function handler(
   }
 
   const rncs = await fetch(RNCS_LINK);
+
   if (rncs.status === 200) {
     res.writeHead(302, {
       Location: RNCS_LINK + (format ? `?format=${format}` : ''),

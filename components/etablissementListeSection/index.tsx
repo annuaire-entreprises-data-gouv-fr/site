@@ -12,7 +12,13 @@ const EtablissementListeSection: React.FC<{
   <div id="etablissements">
     <p>
       Cette entreprise possède {uniteLegale.etablissements.length}{' '}
-      établissement(s) dont xx fermés.
+      établissement(s) dont{' '}
+      {
+        uniteLegale.etablissements.filter(
+          (etab) => etab.etat_administratif !== 'A'
+        ).length
+      }{' '}
+      fermés.
     </p>
     <Section title="La liste des établissements de l'entreprise">
       <FullTable

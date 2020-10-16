@@ -22,15 +22,13 @@ export const Section: React.FC<ISectionProps> = ({
         border: 2px solid #dfdff1;
         border-radius: 2px;
         position: relative;
-        margin: 40px 0 10px;
+        margin: 10px 0 10px;
         padding: 1rem;
-        padding-top: 2rem;
         width: ${width}%;
       }
       .section-container > h2 {
-        position: absolute;
-        top: -1.6rem;
-        left: 20px;
+        margin-top: 0;
+        display: inline-block;
         font-size: 1.1rem;
         line-height: 1.8rem;
         background-color: #dfdff1;
@@ -38,11 +36,6 @@ export const Section: React.FC<ISectionProps> = ({
         padding: 0 7px;
         border-radius: 2px;
         max-width: calc(100% - 40px);
-      }
-      @media only screen and (min-width: 1px) and (max-width: 900px) {
-        .section-container {
-          padding-top: 3rem;
-        }
       }
     `}</style>
   </>

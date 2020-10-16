@@ -8,12 +8,14 @@ import { Header, HeaderSmall } from '../components/header';
 interface IProps {
   small?: boolean;
   currentSearchTerm?: string;
+  map?: boolean;
 }
 
 const Page: React.FC<IProps> = ({
   small,
   children,
   currentSearchTerm = '',
+  map = false,
 }) => (
   <div id="page-layout">
     {small ? (

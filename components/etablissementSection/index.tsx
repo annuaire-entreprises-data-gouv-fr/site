@@ -134,11 +134,11 @@ const EtablissementSection: React.FC<{
       }
       .section-wrapper .map {
         background-color: #fff;
-        max-height: 120px;
+        max-height: 160px;
         overflow: hidden;
         width: 220px;
         flex-shrink: 0;
-        margin: 40px 0 10px 20px;
+        margin: 10px 0 10px 20px;
         position: relative;
       }
       .section-wrapper .map > svg {

@@ -25,7 +25,7 @@ const About: React.FC<IProps> = ({
   etablissement,
   currentPage = 1,
 }) => (
-  <Page small={true} currentSearchTerm={searchTerm}>
+  <Page small={true} currentSearchTerm={searchTerm} map={true}>
     <div className="map-container">
       <div id="map"></div>
 
