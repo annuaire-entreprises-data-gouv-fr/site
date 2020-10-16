@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_ENV=development next dev",
     "build": "next build",
     "start": "next start -p $PORT",
-    "deploy": "git push dokku master"
+    "deploy": "NODE_ENV=production git push dokku master"
   },
   "dependencies": {
     "next": "9.5.1",
