@@ -51,6 +51,20 @@ export const getCompanyTitle = (uniteLegale: any) => {
   }
 };
 
+export const getCompanyName = (
+  denomination: string,
+  prenom: string,
+  nom: string,
+  categorie_juridique: string
+) => {
+  const isEntrepreneur = categorie_juridique === '1000';
+  if (isEntrepreneur) {
+    return concatNames(prenom, nom);
+  } else {
+    return denomination;
+  }
+};
+
 export const isSirenOrSiret = (str: string) => {
   return (
     str.match(/^\d{9}|\d{14}$/g) && (str.length === 9 || str.length === 14)

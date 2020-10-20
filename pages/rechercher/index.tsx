@@ -3,7 +3,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { isSirenOrSiret } from '../../utils/helper';
-import { getResults, SearchResults } from '../../model';
+import { getResults, getResultsUniteLegale, SearchResults } from '../../model';
 import { parsePage } from '../../model/routes';
 import ResultList from '../../components/resultList';
 import PageCounter from '../../components/pageCounter';
@@ -62,6 +62,7 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const searchTerm = context.query.terme as string;
+  const proto = context.query.proto as string;
 
   if (isSirenOrSiret(searchTerm)) {
     context.res.writeHead(302, {
@@ -70,10 +71,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     context.res.end();
   }
 
-  const results = await getResults(
-    searchTerm,
-    (context.query.page || '') as string
-  );
+  const results = proto
+    ? await getResultsUniteLegale(
+        searchTerm,
+        (context.query.page || '') as string
+      )
+    : await getResults(searchTerm, (context.query.page || '') as string);
 
   return {
     props: {

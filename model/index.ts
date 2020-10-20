@@ -1,5 +1,10 @@
-import { isSirenOrSiret } from '../utils/helper';
-import routes, { getResultPage } from './routes';
+import {
+  getCompanyName,
+  getCompanyTitle,
+  isSirenOrSiret,
+  libelleFromCodeNaf,
+} from '../utils/helper';
+import routes, { getResultPage, getResultUniteLegalePage } from './routes';
 
 export interface Etablissement {
   siren: string;
@@ -72,4 +77,60 @@ const getResults = async (
   return (await response.json()) as SearchResults;
 };
 
-export { getEtablissement, getUniteLegale, getResults };
+const getResultsUniteLegale = async (
+  searchTerms: string,
+  page: string
+): Promise<SearchResults | undefined> => {
+  const response = await fetch(getResultUniteLegalePage(searchTerms, page));
+
+  if (response.status === 404) {
+    return undefined;
+  }
+
+  const results = (await response.json()) || [];
+
+  return ({
+    page: 0,
+    total_results: results.length,
+    total_pages: 1,
+    etablissement: results.map((result: any) => {
+      const {
+        siren,
+        siret,
+        nic,
+        etat_administratif = null,
+        date_creation,
+        activite_principale,
+        latitude,
+        longitude,
+        geo_adresse,
+        nom_raison_sociale,
+        prenom,
+        nom,
+        nature_juridique_entreprise,
+      } = result;
+
+      //@ts-ignore
+      return {
+        siren,
+        siret,
+        nic,
+        etat_administratif,
+        date_creation,
+        activite_principale,
+        latitude,
+        longitude,
+        geo_adresse,
+        libelle_activite_principale: libelleFromCodeNaf(activite_principale),
+        l1_normalisee: getCompanyName(
+          nom_raison_sociale,
+          prenom,
+          nom,
+          nature_juridique_entreprise
+        ),
+      };
+    }),
+  } as unknown) as SearchResults;
+};
+
+export { getEtablissement, getUniteLegale, getResults, getResultsUniteLegale };
