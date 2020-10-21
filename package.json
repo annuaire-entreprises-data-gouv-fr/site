@@ -6,7 +6,7 @@
     "dev": "NODE_ENV=development next dev",
     "build": "next build",
     "start": "next start -p $PORT",
-    "deploy": "NODE_ENV=production git push dokku master"
+    "deploy": "NODE_ENV=production git push dokku main:master"
   },
   "dependencies": {
     "next": "9.5.1",

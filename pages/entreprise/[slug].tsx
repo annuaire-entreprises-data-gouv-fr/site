@@ -44,8 +44,7 @@ const About: React.FC<IProps> = ({
       {uniteLegale.statut_diffusion === 'N' && (
         <>
           <p>
-            Vous ne pouvez pas obtenir les informations de cette entreprise
-            individuelle car celle-ci a demandé à ne pas figurer sur les listes
+            Vous ne pouvez pas obtenir les informations de cette entreprise car celle-ci a demandé à ne pas figurer sur les listes
             de diffusion publique en vertu de{' '}
             <a href="https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=C505A51DBC1A4EB1FFF3764C69ACDB1C.tpdjo11v_1?idArticle=LEGIARTI000020165030&cidTexte=LEGITEXT000005634379&dateTexte=20100702">
               l'article A123-96 du code du commerce
@@ -59,7 +58,7 @@ const About: React.FC<IProps> = ({
           </p>
           <p>
             Si cette entreprise est la votre et que vous souhaitez vous rendre
-            diffusable de nouveau la démarche est à effectuée auprès de l’INSEE
+            diffusable de nouveau la démarche est à effectuer auprès de l’INSEE
             :
           </p>
           <div className="layout-center">

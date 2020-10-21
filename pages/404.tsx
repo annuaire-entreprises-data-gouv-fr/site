@@ -1,20 +1,24 @@
 import React from 'react';
 
-import { GetServerSideProps } from 'next';
 import Page from '../layouts';
+import ButtonLink from '../components/button';
+import constants from '../constants';
 
-interface IProps {
-  response?: any;
-  searchTerm?: string;
-  lat?: string;
-  lng?: string;
-}
-
-const About: React.FC<IProps> = ({ response, searchTerm, lat, lng }) => (
-  <Page small={true} currentSearchTerm={searchTerm}>
-    <div className="content-container">404</div>
-    <style jsx>{``}</style>
+const NotFound: React.FC<{}> = () => (
+  <Page small={true}>
+    <div className="content-container layout-center">
+      <h1>La page que vous avez demandé n’existe pas</h1>
+    </div>
+    <div className="layout-center">
+      <h2>
+        Cela ne devrait pas arriver, mais si le problème persiste, vous pouvez
+        <a href={constants.links.mailto}>nous contacter</a>.
+      </h2>
+    </div>
+    <div className="layout-center">
+      <ButtonLink href="/">Retourner à la page d’accueil</ButtonLink>
+    </div>
   </Page>
 );
 
-export default About;
+export default NotFound;

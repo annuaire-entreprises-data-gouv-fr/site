@@ -4,6 +4,7 @@ import { Head } from 'next/document';
 import { NextSeo } from 'next-seo';
 import Footer from '../components/footer';
 import { Header, HeaderSmall } from '../components/header';
+import { Question } from '../components/question';
 
 interface IProps {
   small?: boolean;
@@ -24,12 +25,14 @@ const Page: React.FC<IProps> = ({
       <Header />
     )}
     <main>{children}</main>
+    <Question />
     <Footer />
     <style global jsx>{`
       #page-layout {
         width: 100%;
       }
       main {
+        position: relative;
         display: inline-block;
         min-height: calc(100vh - ${small ? 130 : 210}px);
         width: 100%;
