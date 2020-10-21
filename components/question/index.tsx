@@ -9,7 +9,7 @@ export const Question: React.FC<{}> = () => (
     </div>
     <style jsx>{`
       .question-bottom-right {
-        position: absolute;
+        position: fixed;
         right: 50px;
         bottom: 50px;
       }
