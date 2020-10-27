@@ -4,7 +4,7 @@ import Page from '../layouts';
 import ButtonLink from '../components/button';
 import constants from '../constants';
 
-const NotFound: React.FC<{}> = () => (
+const NotFound = () => (
   <Page small={true} title="Page introuvable">
     <div className="content-container layout-center">
       <h1>La page que vous avez demandé n’existe pas</h1>
