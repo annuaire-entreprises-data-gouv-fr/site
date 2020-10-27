@@ -52,10 +52,7 @@ const Meta: React.FC<IProps> = ({
         }}
       />
       <Head>
-        <title>
-          {title ? title + ' - ' : ''}
-          {SITE_NAME}
-        </title>
+        <title>{title ? title : SITE_NAME}</title>
 
         {/* custom no index as NextSEO noindex was broken */}
         {noIndex && (

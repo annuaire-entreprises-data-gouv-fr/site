@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import redirect from '../../utils/redirect';
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,27 +14,18 @@ export default async function handler(
 
   const rnm = await fetch(RNM_LINK + '?format=html');
   if (rnm.status === 200) {
-    res.writeHead(302, {
-      Location: RNM_LINK + `?format=${format || 'html'}`,
-    });
-    res.end();
+    redirect(res, RNM_LINK + `?format=${format || 'html'}`);
   }
 
   const rncs = await fetch(RNCS_LINK);
 
   if (rncs.status === 200) {
-    res.writeHead(302, {
-      Location: RNCS_LINK + (format ? `?format=${format}` : ''),
-    });
-    res.end();
+    redirect(res, RNCS_LINK + (format ? `?format=${format}` : ''));
   }
 
   try {
-    res.statusCode = 404;
-    res.json({
-      test:
-        'Ce siren n’a pas été trouvé dans la base de données des greffes de tribunaux de commerce (INPI), ni dans celle des Chambres des Métiers et de l’Artisanat (CMA)',
-    });
+    redirect(res, `/introuvable/immatriculation?q=${siren}`);
+
   } catch (err) {
     res.statusCode = 500;
     res.send({ Error: err });

@@ -12,7 +12,6 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   href,
   children,
   small = false,
-  type,
   alt = false,
   target = '',
 }) => (
@@ -54,10 +53,10 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
       }
       div:hover > a,
       div:hover > button {
-        color: ${alt ? '#fff' : '#000091'};
+        color: #000091;
         border-color: #000091;
         text-decoration: none;
-        background-color: ${alt ? '#000091' : '#dfdff1'};
+        background-color: #dfdff1;
       }
     `}</style>
   </div>

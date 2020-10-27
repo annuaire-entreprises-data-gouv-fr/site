@@ -53,7 +53,7 @@ const Title: React.FC<IProps> = ({
     <div className="cta">
       <ButtonLink
         target="_blank"
-        href={`/api/immatriculation?siren=${siren}?format=pdf`}
+        href={`/api/immatriculation?siren=${siren}&format=pdf`}
       >
         {download}
         <span className="separator" />

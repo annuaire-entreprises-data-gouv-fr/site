@@ -8,6 +8,7 @@ import { parsePage, removeInvisibleChar } from '../../model/routes';
 import ResultList from '../../components/resultList';
 import PageCounter from '../../components/pageCounter';
 import { pin } from '../../static/icon';
+import redirect from '../../utils/redirect';
 
 interface IProps {
   response: SearchResults;
@@ -69,11 +70,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const escapedTerm = removeInvisibleChar(searchTerm);
 
   if (isSirenOrSiret(escapedTerm)) {
-    context.res.writeHead(302, {
-      Location: `/entreprise/${escapedTerm}`,
-    });
-    context.res.end();
+    redirect(context.res, `/entreprise/${escapedTerm}`);
   }
+  console.log(searchTerm + 'EOF');
+  console.log(escapedTerm + 'EOF');
 
   const results = await getResults(
     escapedTerm,

@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 
 export const Question: React.FC<{}> = () => (
   <>
-    <div className="question-bottom-right">
+    <div className="question-bottom-right layout-center">
       <a className="dont-apply-link-style" href="/faq">
         Une question ?
       </a>
@@ -10,15 +10,15 @@ export const Question: React.FC<{}> = () => (
     <style jsx>{`
       .question-bottom-right {
         position: fixed;
-        right: 50px;
-        bottom: 50px;
+        right: 30px;
+        bottom: 30px;
       }
 
       .question-bottom-right > a {
         background-color: #000091;
         color: #fff;
         border-radius: 30px;
-        padding: 10px 15px;
+        padding: 15px 25px;
         font-size: 1.1rem;
 
         display: inline-block;
@@ -40,6 +40,18 @@ export const Question: React.FC<{}> = () => (
       .tag.open {
         color: #326f00;
         background-color: #cdf2c0;
+      }
+      @media only screen and (min-width: 1px) and (max-width: 600px) {
+        .question-bottom-right {
+          right: 0;
+          bottom: 20px;
+          width: 100%;
+        }
+        .question-bottom-right > a {
+          font-size: 1.3rem;
+          padding: 15px 25px;
+          margin: auto;
+        }
       }
     `}</style>
   </>

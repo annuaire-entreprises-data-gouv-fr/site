@@ -48,7 +48,12 @@ export const getCompanyTitle = (uniteLegale: any) => {
   if (isEntrepreneur) {
     return concatNames(uniteLegale.prenom_1, uniteLegale.nom);
   } else {
-    return uniteLegale.denomination;
+    if (!uniteLegale.denomination && !uniteLegale.sigle) {
+      return 'Nom inconnu';
+    }
+    return `${uniteLegale.denomination} ${
+      uniteLegale.sigle ? `(${uniteLegale.sigle})` : ''
+    }`;
   }
 };
 
@@ -63,6 +68,9 @@ export const getCompanyName = (
   if (isEntrepreneur) {
     return concatNames(prenom, nom);
   } else {
+    if (!denomination && !prenom && !nom && !sigle) {
+      return 'Nom inconnu';
+    }
     return `${denomination} ${sigle ? `(${sigle})` :  ''}`;
   }
 };
