@@ -5,7 +5,7 @@ import ButtonLink from '../components/button';
 import constants from '../constants';
 
 const ServerError: React.FC<{}> = () => (
-  <Page small={true}>
+  <Page small={true} title="Une erreur est survenue">
     <div className="content-container layout-center">
       <h1>Une erreur est survenue</h1>
     </div>

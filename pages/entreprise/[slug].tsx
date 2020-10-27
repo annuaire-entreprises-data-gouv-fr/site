@@ -27,7 +27,7 @@ const About: React.FC<IProps> = ({
   uniteLegale,
   isEntreprise = false,
 }) => (
-  <Page small={true}>
+  <Page small={true} title={`Page entreprise - ${uniteLegale.siren}`}>
     <div className="content-container">
       <Title
         name={
@@ -54,11 +54,11 @@ const About: React.FC<IProps> = ({
           <p>
             Pour des raisons de sécurité, certaines associations et les
             organismes relevant du Ministère de la Défense ne sont pas
-            diffusables non plus.
+            diffusibles non plus.
           </p>
           <p>
             Si cette entreprise est la votre et que vous souhaitez vous rendre
-            diffusable de nouveau la démarche est à effectuer auprès de l’INSEE
+            diffusible de nouveau la démarche est à effectuer auprès de l’INSEE
             :
           </p>
           <div className="layout-center">

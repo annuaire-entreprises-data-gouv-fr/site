@@ -5,10 +5,10 @@ import Page from '../layouts';
 
 const About: React.FC = () => {
   return (
-    <Page>
+    <Page title="L’Annuaire des Entreprises">
       <div className="layout-center">
         <div className="centered-search">
-          <h1>L’annuaire des Entreprises</h1>
+          <h1>L’Annuaire des Entreprises</h1>
           <h2>
             Retrouvez toutes les informations publiques concernant les
             entreprises françaises

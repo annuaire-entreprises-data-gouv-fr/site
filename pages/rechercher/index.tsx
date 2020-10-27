@@ -17,7 +17,7 @@ interface IProps {
 
 const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
   <Page small={true} currentSearchTerm={searchTerm}>
-    <div className="content-container">
+    <div className="content-container" title="Rechercher une entreprise">
       {response.total_results ? (
         <div className="results-counter">
           {currentPage > 1 && `Page ${currentPage} de `}

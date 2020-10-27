@@ -25,7 +25,12 @@ const About: React.FC<IProps> = ({
   etablissement,
   currentPage = 1,
 }) => (
-  <Page small={true} currentSearchTerm={searchTerm} map={true}>
+  <Page
+    small={true}
+    currentSearchTerm={searchTerm}
+    map={true}
+    title="Rechercher une entreprise"
+  >
     <div className="map-container">
       <div id="map"></div>
 
@@ -84,9 +89,7 @@ const About: React.FC<IProps> = ({
                     center: [2, 46], // starting position [lng, lat]
                     zoom: 4.5 // starting zoom
                   });
-                  var uniteLegales = ${JSON.stringify(
-                    response.unite_legale
-                  )};
+                  var uniteLegales = ${JSON.stringify(response.unite_legale)};
                   for (var i = 0; i < uniteLegales.length; i++) {
                       var uniteLegale = uniteLegales[i];
                       new mapboxgl.Marker({ color: '#000091' })

@@ -32,7 +32,7 @@ const EtablissementListeSection: React.FC<{
           elem.geo_adresse,
           <>
             {uniteLegale.statut_diffusion === 'N' ? (
-              <Tag>non-diffusable</Tag>
+              <Tag>non-diffusible</Tag>
             ) : (
               <>
                 {elem.etablissement_siege === 'true' ? (

@@ -4,7 +4,7 @@ import Page from '../layouts';
 
 const About: React.FC = () => {
   return (
-    <Page small={true}>
+    <Page small={true} title="Comment ça marche ?">
       <div className="content-container">
         <h1>Comment ça marche ?</h1>
         <p>

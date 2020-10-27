@@ -36,7 +36,7 @@ const Title: React.FC<IProps> = ({
         )}
         <span>
           {isNonDiffusible ? (
-            <Tag>non diffusable</Tag>
+            <Tag>non diffusible</Tag>
           ) : (
             <>
               {isSiege ? (

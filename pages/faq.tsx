@@ -66,49 +66,71 @@ const QuestionBlock: React.FC<PropsWithChildren<{title:string}>> = ({children, t
 
 
 const ServerError: React.FC<{}> = () => (
-  <Page small={true}>
+  <Page small={true} title="FAQ de l’Annuaire des Entreprises">
     <div className="content-container layout-center">
       <h1>FAQ de l'Annuaire des Entreprises</h1>
     </div>
     <div className="questions">
       <QuestionBlock title="Je cherche une entreprise qui n'apparait pas dans les résultats de recherche">
-        <p>Cette entreprise est probablement <b>non diffusible</b>. Certaines entreprises demandent à ne pas figurer sur les listes
-            de diffusion publique en vertu de{' '}
-            <a href="https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=C505A51DBC1A4EB1FFF3764C69ACDB1C.tpdjo11v_1?idArticle=LEGIARTI000020165030&cidTexte=LEGITEXT000005634379&dateTexte=20100702">
-              l'article A123-96 du code du commerce
-            </a>
-            . On parle d‘entreprise non diffusable. Dans ce cas nous <b>ne diffusons pas les informations</b> de cette entreprise sur l'Annuaire des Entreprises.
-          </p>
-          <p>
-            Pour des raisons de sécurité, certaines associations et les
-            organismes relevant du Ministère de la Défense ne sont pas
-            diffusables non plus.
-          </p>
-          <p>
-            Si cette entreprise est la votre et que vous souhaitez vous rendre
-            diffusable de nouveau la démarche est à effectuer auprès de l’INSEE
-            :
-          </p>
-          <div className="layout-center">
-            <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
-              ⇢ Rendre mon entreprise diffusible
-            </ButtonLink>
-          </div>
+        <p>
+          Cette entreprise est probablement <b>non diffusible</b>. Certaines
+          entreprises demandent à ne pas figurer sur les listes de diffusion
+          publique en vertu de{' '}
+          <a href="https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=C505A51DBC1A4EB1FFF3764C69ACDB1C.tpdjo11v_1?idArticle=LEGIARTI000020165030&cidTexte=LEGITEXT000005634379&dateTexte=20100702">
+            l'article A123-96 du code du commerce
+          </a>
+          . On parle d‘entreprise non diffusible. Dans ce cas nous{' '}
+          <b>ne diffusons pas les informations</b> de cette entreprise sur
+          l'Annuaire des Entreprises.
+        </p>
+        <p>
+          Pour des raisons de sécurité, certaines associations et les organismes
+          relevant du Ministère de la Défense ne sont pas diffusibles non plus.
+        </p>
+        <p>
+          Si cette entreprise est la votre et que vous souhaitez vous rendre
+          diffusible de nouveau la démarche est à effectuer auprès de l’INSEE :
+        </p>
+        <div className="layout-center">
+          <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
+            ⇢ Rendre mon entreprise diffusible
+          </ButtonLink>
+        </div>
       </QuestionBlock>
       <QuestionBlock title="La fiche d'immatriculation de mon entreprise est introuvable">
-          <p>Les entreprises individuelles et les auto-entreprises, ne sont <b>pas obligées d'être immatriculées</b>. Il est donc possible que vous ne trouviez pas de fiche d'immatriculation pour une entreprise de ce type.</p>
-          <p>
-            En revanche, les entreprises de toutes les autres formes juridiques <b>doivent être immatriculées</b>. Si vous ne trouvez pas de fiche d'immatriculation pour une entreprise, deux choix s'offrent à vous :
-          </p>
-          <ul>
-            <li>Si l'entreprise est une entreprise artisanale, <a href="https://rnm.artisanat.fr/">contactez les Chambres des Métiers de l‘Artisanat</a>
-            </li>
-            <li>Si l'entreprise n‘est pas une entreprise, <a href="http://data.inpi.fr/">contactez l‘INPI qui centralise les données des Greffes des tribuanux de commerce.</a>
-            </li>
-          </ul>
+        <p>
+          Les entreprises individuelles et les auto-entreprises, ne sont{' '}
+          <b>pas obligées d'être immatriculées</b>. Il est donc possible que
+          vous ne trouviez pas de fiche d'immatriculation pour une entreprise de
+          ce type.
+        </p>
+        <p>
+          En revanche, les entreprises de toutes les autres formes juridiques{' '}
+          <b>doivent être immatriculées</b>. Si vous ne trouvez pas de fiche
+          d'immatriculation pour une entreprise, deux choix s'offrent à vous :
+        </p>
+        <ul>
+          <li>
+            Si l'entreprise est une entreprise artisanale,{' '}
+            <a href="https://rnm.artisanat.fr/">
+              contactez les Chambres des Métiers de l‘Artisanat
+            </a>
+          </li>
+          <li>
+            Si l'entreprise n‘est pas une entreprise,{' '}
+            <a href="http://data.inpi.fr/">
+              contactez l‘INPI qui centralise les données des Greffes des
+              tribuanux de commerce.
+            </a>
+          </li>
+        </ul>
       </QuestionBlock>
     </div>
-    <style jsx>{`.questions {margin:20px 0 60px;}`}</style>
+    <style jsx>{`
+      .questions {
+        margin: 20px 0 60px;
+      }
+    `}</style>
   </Page>
 );
 
