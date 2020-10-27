@@ -53,18 +53,14 @@ const Meta: React.FC<IProps> = ({
         }}
       />
       <Head>
+        {/* weird stuff going on with jsx and my kitchen recipe in _document
+          the second {''} seems to be required
+        */}
+
         <title>
-
-
-
           {title}
 
-
-
           {''}
-
-
-
         </title>
 
         {/* custom no index as NextSEO noindex was broken */}
