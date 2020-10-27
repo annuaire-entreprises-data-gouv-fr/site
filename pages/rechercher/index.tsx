@@ -72,8 +72,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (isSirenOrSiret(escapedTerm)) {
     redirect(context.res, `/entreprise/${escapedTerm}`);
   }
-  console.log(searchTerm + 'EOF');
-  console.log(escapedTerm + 'EOF');
 
   const results = await getResults(
     escapedTerm,
