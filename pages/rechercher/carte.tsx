@@ -29,7 +29,7 @@ const About: React.FC<IProps> = ({
     <div className="map-container">
       <div id="map"></div>
 
-      {response && response.etablissement && (
+      {response && response.unite_legale && (
         <div className="map-results">
           <div className="results">
             <div className="results-counter">
@@ -56,7 +56,7 @@ const About: React.FC<IProps> = ({
                 <>🏄🏻‍♂️</>
               )}
             </div>
-            <ResultList resultList={response.etablissement} compact={true} />
+            <ResultList resultList={response.unite_legale} compact={true} />
           </div>
           <div className="results-footer">
             {response.total_pages && response.total_pages > 1 && (
@@ -84,13 +84,13 @@ const About: React.FC<IProps> = ({
                     center: [2, 46], // starting position [lng, lat]
                     zoom: 4.5 // starting zoom
                   });
-                  var etablissements = ${JSON.stringify(
-                    response.etablissement
+                  var uniteLegales = ${JSON.stringify(
+                    response.unite_legale
                   )};
-                  for (var i = 0; i < etablissements.length; i++) {
-                      var etablissement = etablissements[i];
+                  for (var i = 0; i < uniteLegales.length; i++) {
+                      var uniteLegale = uniteLegales[i];
                       new mapboxgl.Marker({ color: '#000091' })
-                      .setLngLat([etablissement.longitude,etablissement.latitude])
+                      .setLngLat([uniteLegale.longitude,uniteLegale.latitude])
                       .addTo(map);
                   }
                 }

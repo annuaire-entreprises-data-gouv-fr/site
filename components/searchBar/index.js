@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 
 import ButtonLink from '../button';
 
+
 const SearchBar = ({
   placeholder = 'Rechercher un nom, un SIRET, une adresse',
   defaultValue = '',

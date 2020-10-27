@@ -1,28 +1,36 @@
 import React from 'react';
-import { Etablissement } from '../../model';
+import { Etablissement, ResultUniteLegale } from '../../model';
 import { Tag } from '../tag';
 
 interface IProps {
-  resultList: Etablissement[];
+  resultList: ResultUniteLegale[];
   compact?: boolean;
 }
 
 const ResultList: React.FC<IProps> = ({ resultList, compact = false }) => (
   <div className="results-list">
-    {resultList.map((etablissement) => (
+    {resultList.map((unite_legale) => (
       <a
-        href={`/entreprise/${etablissement.siret}`}
-        key={etablissement.siret}
+        href={`/entreprise/${unite_legale.siren}`}
+        key={unite_legale.siret}
         className="dont-apply-link-style"
       >
-        <div className="title">{etablissement.l1_normalisee.toLowerCase()}</div>
-        <div>{etablissement.libelle_activite_principale}</div>
+        <div className="title">{unite_legale.l1_normalisee.toLowerCase()}</div>
+        <div>{unite_legale.libelle_activite_principale}</div>
         <div className="adress">
-          {etablissement.geo_adresse}{' '}
+          {unite_legale.geo_adresse}{' '}
           <Tag>
-            {etablissement.is_siege !== '1'
-              ? 'établissement secondaire'
-              : 'siège social'}
+            {`${unite_legale.nombre_etablissements} établissement${
+
+
+
+
+              unite_legale.nombre_etablissements > 1 ? 's' : ''
+
+
+
+
+            }`}
           </Tag>
         </div>
       </a>

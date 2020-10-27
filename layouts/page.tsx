@@ -1,7 +1,4 @@
 import React from 'react';
-import SearchBar from '../components/searchBar';
-import { Head } from 'next/document';
-import { NextSeo } from 'next-seo';
 import Footer from '../components/footer';
 import { Header, HeaderSmall } from '../components/header';
 import { Question } from '../components/question';

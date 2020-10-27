@@ -21,7 +21,7 @@ const entrepriseDescription = (uniteLegale: UniteLegale) => {
   } else
     return (
       <>
-        <>L’entreprise {getCompanyTitle(uniteLegale)}</>
+        <>L’entreprise {getCompanyTitle(uniteLegale)}</>{' '}
         {uniteLegale.categorie_juridique && (
           <>
             est une{' '}

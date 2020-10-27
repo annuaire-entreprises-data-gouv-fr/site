@@ -2,7 +2,7 @@ const routes = {
   etablissement: `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/`,
   uniteLegale: `https://entreprise.data.gouv.fr/api/sirene/v3/unites_legales/`,
   recherche: `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/`,
-  rechercheUniteLeegale: `http://recherche.entreprise.dataeng.etalab.studio/?search=`,
+  rechercheUniteLegale: `http://recherche.entreprise.dataeng.etalab.studio/search?q=`,
 };
 
 export const escapeSearchTerm = (searchTerm: string) => {
@@ -24,10 +24,9 @@ export const getResultPage = (searchterm: string, page: string) => {
 };
 
 export const getResultUniteLegalePage = (searchterm: string, page: string) => {
-  console.log(page);
-  return `${routes.rechercheUniteLeegale}${encodeURI(
+  return `${routes.rechercheUniteLegale}${encodeURI(
     escapeSearchTerm(searchterm)
-  )}`;
+  )}&per_page=10&page=${parsePage(page) || 1}`;
 };
 
 export default routes;

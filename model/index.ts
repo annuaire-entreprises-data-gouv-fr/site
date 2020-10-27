@@ -4,7 +4,7 @@ import {
   isSirenOrSiret,
   libelleFromCodeNaf,
 } from '../utils/helper';
-import routes, { getResultPage, getResultUniteLegalePage } from './routes';
+import routes, {getResultUniteLegalePage } from './routes';
 
 export interface Etablissement {
   siren: string;
@@ -33,11 +33,25 @@ export interface UniteLegale {
   statut_diffusion: string;
 }
 
+export interface ResultUniteLegale {
+  siren: string;
+  siret: string;
+  etablissement_siege: Etablissement;
+  categorie_juridique: string;
+  nombre_etablissements: number;
+  date_creation: string;
+  libelle_activite_principale:string;
+  l1_normalisee:string;
+  geo_adresse:string;
+  latitude:string;
+  longitude:string;
+}
+
 export interface SearchResults {
   page: string;
   total_results: number;
   total_pages: number;
-  etablissement: Etablissement[];
+  unite_legale: ResultUniteLegale[];
 }
 
 const getUniteLegale = async (siren: string): Promise<UniteLegale> => {
@@ -68,19 +82,6 @@ const getResults = async (
   searchTerms: string,
   page: string
 ): Promise<SearchResults | undefined> => {
-  const response = await fetch(getResultPage(searchTerms, page));
-
-  if (response.status === 404) {
-    return undefined;
-  }
-
-  return (await response.json()) as SearchResults;
-};
-
-const getResultsUniteLegale = async (
-  searchTerms: string,
-  page: string
-): Promise<SearchResults | undefined> => {
   const response = await fetch(getResultUniteLegalePage(searchTerms, page));
 
   if (response.status === 404) {
@@ -88,12 +89,13 @@ const getResultsUniteLegale = async (
   }
 
   const results = (await response.json()) || [];
+  const {total_results, total_pages, unite_legale} = results[0];
 
   return ({
     page: 0,
-    total_results: results.length,
-    total_pages: 1,
-    etablissement: results.map((result: any) => {
+    total_results,
+    total_pages,
+    unite_legale: unite_legale.map((result: any) => {
       const {
         siren,
         siret,
@@ -108,6 +110,8 @@ const getResultsUniteLegale = async (
         prenom,
         nom,
         nature_juridique_entreprise,
+        sigle,
+        nombre_etablissements =1
       } = result;
 
       //@ts-ignore
@@ -116,6 +120,7 @@ const getResultsUniteLegale = async (
         siret,
         nic,
         etat_administratif,
+        nombre_etablissements,
         date_creation,
         activite_principale,
         latitude,
@@ -126,11 +131,12 @@ const getResultsUniteLegale = async (
           nom_raison_sociale,
           prenom,
           nom,
-          nature_juridique_entreprise
+          nature_juridique_entreprise,
+          sigle
         ),
-      };
+      } as ResultUniteLegale;
     }),
   } as unknown) as SearchResults;
 };
 
-export { getEtablissement, getUniteLegale, getResults, getResultsUniteLegale };
+export { getEtablissement, getUniteLegale, getResults };

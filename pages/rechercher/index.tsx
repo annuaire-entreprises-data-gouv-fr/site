@@ -3,7 +3,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { isSirenOrSiret } from '../../utils/helper';
-import { getResults, getResultsUniteLegale, SearchResults } from '../../model';
+import { getResults, SearchResults } from '../../model';
 import { parsePage } from '../../model/routes';
 import ResultList from '../../components/resultList';
 import PageCounter from '../../components/pageCounter';
@@ -36,16 +36,16 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
         </div>
       )}
 
-      {response && response.etablissement && (
+      {response && response.unite_legale && (
         <div>
-          <ResultList resultList={response.etablissement} />
-          {response.total_pages && response.total_pages > 1 && (
+          <ResultList resultList={response.unite_legale} />
+          {response.total_pages && response.total_pages > 1 ? (
             <PageCounter
               totalPages={response.total_pages}
               currentPage={currentPage}
               searchTerm={searchTerm}
             />
-          )}
+          ) : null}
         </div>
       )}
     </div>
@@ -62,7 +62,6 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const searchTerm = context.query.terme as string;
-  const proto = context.query.proto as string;
 
   if (isSirenOrSiret(searchTerm)) {
     context.res.writeHead(302, {
@@ -71,12 +70,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     context.res.end();
   }
 
-  const results = proto
-    ? await getResultsUniteLegale(
+  const results = await getResults(
         searchTerm,
-        (context.query.page || '') as string
+        (context.query.page || '1') as string
       )
-    : await getResults(searchTerm, (context.query.page || '') as string);
 
   return {
     props: {

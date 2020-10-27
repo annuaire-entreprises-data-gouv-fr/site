@@ -9,6 +9,7 @@
     "deploy": "NODE_ENV=production git push dokku main:master"
   },
   "dependencies": {
+    "@gouvfr/design-system": "^0.2.0",
     "next": "9.5.1",
     "next-seo": "^4.7.3",
     "react": "16.13.1",

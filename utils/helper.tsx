@@ -55,13 +55,14 @@ export const getCompanyName = (
   denomination: string,
   prenom: string,
   nom: string,
-  categorie_juridique: string
+  categorie_juridique: string,
+  sigle?: string
 ) => {
   const isEntrepreneur = categorie_juridique === '1000';
   if (isEntrepreneur) {
     return concatNames(prenom, nom);
   } else {
-    return denomination;
+    return `${denomination} ${sigle ? `(${sigle})` :  ''}`;
   }
 };
 
