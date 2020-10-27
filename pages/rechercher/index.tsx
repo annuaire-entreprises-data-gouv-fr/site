@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { isSirenOrSiret } from '../../utils/helper';
 import { getResults, SearchResults } from '../../model';
-import { parsePage } from '../../model/routes';
+import { parsePage, removeInvisibleChar } from '../../model/routes';
 import ResultList from '../../components/resultList';
 import PageCounter from '../../components/pageCounter';
 import { pin } from '../../static/icon';
@@ -66,18 +66,19 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const searchTerm = context.query.terme as string;
+  const escapedTerm = removeInvisibleChar(searchTerm);
 
-  if (isSirenOrSiret(searchTerm)) {
+  if (isSirenOrSiret(escapedTerm)) {
     context.res.writeHead(302, {
-      Location: `/entreprise/${searchTerm}`,
+      Location: `/entreprise/${escapedTerm}`,
     });
     context.res.end();
   }
 
   const results = await getResults(
-        searchTerm,
-        (context.query.page || '1') as string
-      )
+    escapedTerm,
+    (context.query.page || '1') as string
+  );
 
   return {
     props: {

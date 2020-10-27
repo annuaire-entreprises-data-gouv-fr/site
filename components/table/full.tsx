@@ -19,8 +19,8 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
       <tbody>
         {body.map((row, idx) => (
           <tr key={idx}>
-            {row.map((cell) => (
-              <td key={cell}>{cell}</td>
+            {row.map((cell, idx) => (
+              <td key={idx}>{cell}</td>
             ))}
           </tr>
         ))}

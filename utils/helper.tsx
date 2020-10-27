@@ -1,6 +1,7 @@
 import { concatNames } from './formatting';
 import { categoriesJuridiques } from './categoriesJuridiques';
 import { codesNaf } from './codesNAF';
+import { removeInvisibleChar } from '../model/routes';
 
 export const tvaIntracommunautaire = (siren: number | string) => {
   const sirenNum = typeof siren === 'string' ? parseInt(siren, 10) : siren;

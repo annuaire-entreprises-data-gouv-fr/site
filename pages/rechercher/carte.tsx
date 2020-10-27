@@ -11,6 +11,7 @@ import {
 import ResultList from '../../components/resultList';
 import { isSirenOrSiret } from '../../utils/helper';
 import PageCounter from '../../components/pageCounter';
+import { removeInvisibleChar } from '../../model/routes';
 
 interface IProps {
   response?: SearchResults;
@@ -209,6 +210,7 @@ const parsePage = (pageAsString: string) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { terme, siret } = context.query;
+
   if (siret) {
     const etablissement = await getEtablissement(siret as string);
     return {
@@ -220,16 +222,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (terme) {
     const searchTerm = terme as string;
+    const escapedTerm = removeInvisibleChar(searchTerm);
 
-    if (isSirenOrSiret(searchTerm)) {
+    if (isSirenOrSiret(escapedTerm)) {
       context.res.writeHead(302, {
-        Location: `/entreprise/${searchTerm}`,
+        Location: `/entreprise/${escapedTerm}`,
       });
       context.res.end();
     }
 
     const results = await getResults(
-      searchTerm,
+      escapedTerm,
       (context.query.page || '') as string
     );
 
