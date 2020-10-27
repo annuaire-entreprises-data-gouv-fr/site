@@ -91,8 +91,6 @@ const getResults = async (
   const results = (await response.json()) || [];
   const {total_results=0, total_pages=0, unite_legale} = results[0];
 
-  console.log(results)
-
   return ({
     page: 0,
     total_results,
