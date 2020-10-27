@@ -24,6 +24,9 @@ export const getResultPage = (searchterm: string, page: string) => {
 };
 
 export const getResultUniteLegalePage = (searchterm: string, page: string) => {
+  console.log( `${routes.rechercheUniteLegale}${encodeURI(
+    escapeSearchTerm(searchterm)
+  )}&per_page=10&page=${parsePage(page) || 1}`)
   return `${routes.rechercheUniteLegale}${encodeURI(
     escapeSearchTerm(searchterm)
   )}&per_page=10&page=${parsePage(page) || 1}`;

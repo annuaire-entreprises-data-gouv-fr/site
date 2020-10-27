@@ -89,13 +89,15 @@ const getResults = async (
   }
 
   const results = (await response.json()) || [];
-  const {total_results, total_pages, unite_legale} = results[0];
+  const {total_results=0, total_pages=0, unite_legale} = results[0];
+
+  console.log(results)
 
   return ({
     page: 0,
     total_results,
     total_pages,
-    unite_legale: unite_legale.map((result: any) => {
+    unite_legale: (unite_legale|| []).map((result: any) => {
       const {
         siren,
         siret,
