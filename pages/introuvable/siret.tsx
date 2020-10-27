@@ -3,7 +3,7 @@ import React from 'react';
 import Page from '../../layouts';
 import ButtonLink from '../../components/button';
 
-const SiretNotFound: React.FC = () => {
+const SiretNotFound: React.FC<{}> = () => {
   return (
     <Page small={true} title="Numero Siret introuvable">
       <div className="content-container">

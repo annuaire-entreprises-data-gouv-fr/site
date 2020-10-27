@@ -72,7 +72,7 @@ const QuestionBlock: React.FC<PropsWithChildren<{title:string}>> = ({children, t
 )}
 
 
-const ServerError: React.FC<{}> = () => (
+const FAQ: React.FC<{}> = () => (
   <Page small={true} title="FAQ de l’Annuaire des Entreprises">
     <div className="content-container">
       <div className="layout-center">
@@ -92,12 +92,14 @@ const ServerError: React.FC<{}> = () => (
             l'Annuaire des Entreprises.
           </p>
           <p>
-            Pour des raisons de sécurité, certaines associations et les organismes
-            relevant du Ministère de la Défense ne sont pas diffusibles non plus.
+            Pour des raisons de sécurité, certaines associations et les
+            organismes relevant du Ministère de la Défense ne sont pas
+            diffusibles non plus.
           </p>
           <p>
             Si cette entreprise est la votre et que vous souhaitez vous rendre
-            diffusible de nouveau la démarche est à effectuer auprès de l’INSEE :
+            diffusible de nouveau la démarche est à effectuer auprès de l’INSEE
+            :
           </p>
           <div className="layout-center">
             <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
@@ -109,8 +111,8 @@ const ServerError: React.FC<{}> = () => (
           <p>
             Les entreprises individuelles et les auto-entreprises, ne sont{' '}
             <b>pas obligées d'être immatriculées</b>. Il est donc possible que
-            vous ne trouviez pas de fiche d'immatriculation pour une entreprise de
-            ce type.
+            vous ne trouviez pas de fiche d'immatriculation pour une entreprise
+            de ce type.
           </p>
           <p>
             En revanche, les entreprises de toutes les autres formes juridiques{' '}
@@ -149,4 +151,4 @@ const ServerError: React.FC<{}> = () => (
   </Page>
 );
 
-export default ServerError;
+export default FAQ;

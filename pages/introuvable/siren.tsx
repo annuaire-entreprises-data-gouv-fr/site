@@ -31,7 +31,7 @@ const SirenNotFound: React.FC = () => {
         </div>
       </div>
     </Page>
-  );;
+  );
 };
 
 export default SirenNotFound;

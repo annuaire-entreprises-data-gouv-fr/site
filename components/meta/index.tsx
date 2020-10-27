@@ -12,8 +12,15 @@ interface IProps {
   canonical?: string;
 }
 
+const SITE_NAME = 'annuaire-entreprises.data.gouv.fr';
+const SITE_URL =
+  process.env.SITE_URL || 'https://annuaire-entreprises.data.gouv.fr';
+const SITE_DESCRIPTION =
+  'Recherchez une entreprise par son nom, son sigle, son SIRET et accédez à ses informations publiques détenues par l’administration';
+
+
 const Meta: React.FC<IProps> = ({
-  title,
+  title = SITE_NAME,
   description = '',
   noIndex = false,
   canonical,
@@ -22,12 +29,6 @@ const Meta: React.FC<IProps> = ({
     description.length > 140
       ? `${description.substring(0, 140)}…`
       : description;
-
-  const SITE_NAME = 'annuaire-entreprises.data.gouv.fr';
-  const SITE_URL =
-    process.env.SITE_URL || 'https://annuaire-entreprises.data.gouv.fr';
-  const SITE_DESCRIPTION =
-    'Recherchez une entreprise par son nom, son sigle, son SIRET et accédez à ses informations publiques détenues par l’administration';
 
   return (
     <>
@@ -38,7 +39,7 @@ const Meta: React.FC<IProps> = ({
         openGraph={{
           url: SITE_URL,
           locale: 'fr_FR',
-          title: title || SITE_NAME,
+          title: title,
           description: description || SITE_DESCRIPTION,
           images: [
             {
@@ -52,7 +53,19 @@ const Meta: React.FC<IProps> = ({
         }}
       />
       <Head>
-        <title>{title ? title : SITE_NAME}</title>
+        <title>
+
+
+
+          {title}
+
+
+
+          {''}
+
+
+
+        </title>
 
         {/* custom no index as NextSEO noindex was broken */}
         {noIndex && (
