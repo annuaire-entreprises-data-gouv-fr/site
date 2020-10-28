@@ -45,12 +45,12 @@ const About: React.FC<IProps> = ({
         isSiege={etablissement.etat_administratif === 'A'}
         isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
       />
-      {!isEntreprise ? (
+      {isEntreprise ? (
         <>
           <EntrepriseSection uniteLegale={uniteLegale} />
           <EtablissementListeSection uniteLegale={uniteLegale} />
         </>
-        ): (
+      ) : (
         <EtablissementSection
           etablissement={etablissement}
           uniteLegale={uniteLegale}
