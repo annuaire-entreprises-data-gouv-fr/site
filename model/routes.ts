@@ -7,7 +7,10 @@ const routes = {
 
 export const escapeSearchTerm = (searchTerm: string) => {
   // non visible characters
-  return searchTerm.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  return searchTerm
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+$/, '');
 };
 
 export const removeInvisibleChar = (searchTerm: string) => {
