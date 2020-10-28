@@ -14,6 +14,57 @@ interface IProps {
   isNonDiffusible?: boolean;
 }
 
+const CtaForTitle: React.FC<{ siren: string }> = ({siren}) => (
+  <div className="wrapper">
+    <div className="label">
+    ⇣ <i>Justificatif d'immatriculation au RCS ou au RM</i> ⇣
+    </div>
+    <div className="cta">
+      <ButtonLink
+        target="_blank"
+        href={`/api/immatriculation?siren=${siren}&format=pdf`}
+      >
+        {download}
+        <span className="separator" />
+        Télécharger le justificatif
+      </ButtonLink>
+      <span className="separator" />
+      <ButtonLink
+        target="_blank"
+        href={`/api/immatriculation?siren=${siren}`}
+        alt
+      >
+        Voir le justificatif
+      </ButtonLink>
+    </div>
+    <style jsx>{`
+      div.label {
+        font-size: 0.9rem;
+        color: #444;
+        text-align: right;
+      }
+
+      .cta {
+        flex-direction: row;
+        display: flex;
+      }
+      .cta .separator {
+        width: 5px;
+        flex-shrink: 0;
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 900px) {
+        .wrapper {
+          margin:15px auto;
+        }
+        div.label{
+          text-align:center;
+        }
+      }
+    `}</style>
+  </div>
+);
+
 const Title: React.FC<IProps> = ({
   siren,
   siret,
@@ -50,24 +101,7 @@ const Title: React.FC<IProps> = ({
       </div>
     </div>
 
-    <div className="cta">
-      <ButtonLink
-        target="_blank"
-        href={`/api/immatriculation?siren=${siren}&format=pdf`}
-      >
-        {download}
-        <span className="separator" />
-        Justificatif d'immatriculation
-      </ButtonLink>
-      <span className="separator" />
-      <ButtonLink
-        target="_blank"
-        href={`/api/immatriculation?siren=${siren}`}
-        alt
-      >
-        Fiche d'immatriculation
-      </ButtonLink>
-    </div>
+    <CtaForTitle siren={siren} />
 
     <style jsx>{`
       .header-section {
@@ -75,6 +109,7 @@ const Title: React.FC<IProps> = ({
         justify-content: space-between;
         align-items: center;
         flex-direction: row;
+        margin-bottom:    20px;
       }
 
       .title {
@@ -100,15 +135,6 @@ const Title: React.FC<IProps> = ({
         font-size: 1.1rem;
       }
 
-      .cta {
-        flex-direction: row;
-        display: flex;
-      }
-      .cta .separator {
-        width: 5px;
-        flex-shrink: 0;
-      }
-
       @media only screen and (min-width: 1px) and (max-width: 900px) {
         .title {
           margin-top: 10px;
@@ -118,13 +144,8 @@ const Title: React.FC<IProps> = ({
           align-items: flex-start;
           flex-direction: column;
         }
-        .cta {
-          width: 100%;
-          margin: 5px auto 20px;
-        }
         .title > div > span:first-of-type {
           display: block;
-          margin-top: 10px;
         }
       }
     `}</style>

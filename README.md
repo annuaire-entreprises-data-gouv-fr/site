@@ -33,8 +33,8 @@ npm run build && npm run start
 
 ```
 
-**NB**: le code de l'API est [également disponible.](https://github.com/etalab/api-annuaire-entreprises)
+**NB**: le code de l'API est [disponible ici.](https://github.com/etalab/api-annuaire-entreprises)
 
 ## Licence
 
-Ce projet est sous [license MIT](https://fr.wikipedia.org/wiki/Licence_MIT)
+Ce projet est sous AGPL 3.0

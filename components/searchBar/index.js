@@ -4,7 +4,7 @@ import ButtonLink from '../button';
 
 
 const SearchBar = ({
-  placeholder = 'Rechercher un nom, un SIRET, une adresse',
+  placeholder = 'Rechercher un nom, un SIRET ou un SIREN',
   defaultValue = '',
   small = false,
   url = '/rechercher',

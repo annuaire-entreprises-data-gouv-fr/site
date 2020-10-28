@@ -14,8 +14,12 @@ const SirenNotFound: React.FC = () => {
             <li>
               Les entreprises individuelles et les auto-entreprises, ne sont{' '}
               <b>pas obligées d'être immatriculées</b>. Il est donc possible que
-              vous ne trouviez pas de fiche d'immatriculation pour une entreprise
-              de ce type.
+              vous ne trouviez pas de fiche d'immatriculation pour une
+              entreprise de ce type.
+            </li>
+            <li>
+              Les administrations publiques peuvent également ne pas être
+              immatriculées.
             </li>
             <li>
               Si l'entreprise est une entreprise artisanale,{' '}
@@ -38,7 +42,7 @@ const SirenNotFound: React.FC = () => {
         </div>
       </div>
     </Page>
-  )
+  );
 };
 
 export default SirenNotFound;

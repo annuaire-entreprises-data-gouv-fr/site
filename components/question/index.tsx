@@ -12,6 +12,7 @@ export const Question: React.FC<{}> = () => (
         position: fixed;
         right: 30px;
         bottom: 30px;
+        z-index: 100;
       }
 
       .question-bottom-right > a {
