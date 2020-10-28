@@ -1,30 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# annuaire-entreprises.data.gouv.fr
 
-## Getting Started
+Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr)
 
-First, run the development server:
+Ce site a pour vocation de mettre à disposition des citoyens et des agents les données ouvertes "Open-data" des entreprises, associations et administrations présentes dans la base SIRENE.
 
-```bash
+## A propos des choix d'architecture
+
+Ce site utilise Next.js de manière modifiée :
+
+- en developpement, next.js tourne de manière normale.
+- en production, la ré-hydratation de react dans le navigateur est désactivée. Next.js se comporte comme un framework de rendu serveur traditionnel.
+
+Pourquoi désactiver la ré-hydratation ? Par soucis d'inclusivité et du frugalité :
+
+1. Le site peut fonctionner en mode dégradé sans javascript
+2. Les pages du site sont beaucoup, beaucoup, beaucoup plus légères, ce qui avec un bon débit donne le meme confort qu'une SPA, et avec un mauvais débit est plus utilisable q'une SPA
+
+Dans ce cas pourquoi utiliser Next.js ? Pour bénéficier de l'ecosystème, de l'outillage dev (HotReload en local, typescript) et pour des raisons de compétences et de préférences.
+
+## Installation
+
+``` bash
+# Installation
+npm i
+
+# Lancer le site en dev
 npm run dev
-# or
-yarn dev
+
+# Lancer le site en prod
+export PORT=3000
+npm run build && npm run start
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**NB**: le code de l'API est [également disponible.](https://github.com/etalab/api-annuaire-entreprises)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Licence
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Ce projet est sous [license MIT](https://fr.wikipedia.org/wiki/Licence_MIT)
