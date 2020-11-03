@@ -8,7 +8,7 @@
   "scripts": {
     "sitemap": "node ./sitemap/generate.js",
     "dev": "NODE_ENV=development next dev",
-    "build": "next build",
+    "build": "npm run sitemap && NODE_ENV=production next build",
     "start": "next start -p $PORT",
     "deploy": "NODE_ENV=production git push dokku main:master"
   },
