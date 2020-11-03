@@ -89,13 +89,13 @@ const getResults = async (
   }
 
   const results = (await response.json()) || [];
-  const {total_results=0, total_pages=0, unite_legale} = results[0];
+  const { total_results = 0, total_pages = 0, unite_legale } = results[0];
 
   return ({
-    page: 0,
+    page,
     total_results,
     total_pages,
-    unite_legale: (unite_legale|| []).map((result: any) => {
+    unite_legale: (unite_legale || []).map((result: any) => {
       const {
         siren,
         siret,
@@ -111,7 +111,7 @@ const getResults = async (
         nom,
         nature_juridique_entreprise,
         sigle,
-        nombre_etablissements =1
+        nombre_etablissements = 1,
       } = result;
 
       //@ts-ignore

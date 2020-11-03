@@ -36,5 +36,5 @@ yarn-error.log*
 /sitemap/url-list.txt
 /sitemap/sitemap-name.csv
 
-/public/maps/*
+/public/maps/
 /public/sitemap.xml

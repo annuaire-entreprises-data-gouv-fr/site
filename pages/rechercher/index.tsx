@@ -73,16 +73,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     redirect(context.res, `/entreprise/${escapedTerm}`);
   }
 
-  const results = await getResults(
-    escapedTerm,
-    (context.query.page || '1') as string
-  );
+  //@ts-ignore
+  const page = parsePage(context.query.page || '1') - 1;
+
+  const results = await getResults(escapedTerm, page.toString());
 
   return {
     props: {
       response: results || {},
       searchTerm,
-      currentPage: parsePage(results ? results.page : '1'),
+      currentPage: parsePage(results ? results.page : '0') + 1,
     },
   };
 };
