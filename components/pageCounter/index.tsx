@@ -6,6 +6,16 @@ interface IProps {
   totalPages: number;
 }
 
+const pagesArray = (currentPage:number, totalPages:number) : number[] => {
+  if (currentPage + 5 >= totalPages){
+    //@ts-ignore
+    return [...Array(10).keys()].map(i=>i+totalPages - 9);
+  }
+
+  //@ts-ignore
+  return [...Array(10).keys()].map(i=>i+Math.max(0, currentPage-5))
+}
+
 const PageCounter: React.FC<IProps> = ({
   currentPage,
   searchTerm,
@@ -17,25 +27,21 @@ const PageCounter: React.FC<IProps> = ({
     )}
     <div>
       {/* @ts-ignore */}
-      {[...Array(totalPages).keys()].map((pageNum) => {
-        if (totalPages > 10) {
-          if (pageNum === 3) return <div key="none">...</div>;
-          if (pageNum > 3 && pageNum < totalPages - 3) {
-            return;
-          }
+      {pagesArray(currentPage, totalPages + 1).map(
+        (pageNum) => {
+          return (
+            <a
+              href={`?terme=${searchTerm}&page=${pageNum + 1}`}
+              className={`${currentPage === pageNum + 1 ? 'active' : ''}`}
+              key={pageNum}
+            >
+              {pageNum + 1}
+            </a>
+          );
         }
-        return (
-          <a
-            href={`?terme=${searchTerm}&page=${pageNum + 1}`}
-            className={`${currentPage === pageNum + 1 ? 'active' : ''}`}
-            key={pageNum}
-          >
-            {pageNum + 1}
-          </a>
-        );
-      })}
+      )}
     </div>
-    {currentPage !== totalPages && (
+    {currentPage !== totalPages + 2 && (
       <a href={`?terme=${searchTerm}&page=${currentPage + 1}`}>suivante ⇢</a>
     )}
 
