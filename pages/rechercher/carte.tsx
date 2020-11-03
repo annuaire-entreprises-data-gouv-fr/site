@@ -100,7 +100,7 @@ const About: React.FC<IProps> = ({
                   }
                 }
 
-                fetch("https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json").then(res=> res.json()).then(el => initMap(el))
+                fetch("https://etalab-tiles.fr/styles/osm-bright/style.json").then(res=> res.json()).then(el => initMap(el))
               `,
         }}
       />
@@ -134,7 +134,7 @@ const About: React.FC<IProps> = ({
                   }
                 }
 
-                fetch("https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json").then(res=> res.json()).then(el => initMap(el))
+                fetch("https://etalab-tiles.fr/styles/osm-bright/style.json").then(res=> res.json()).then(el => initMap(el))
               `,
         }}
       />
