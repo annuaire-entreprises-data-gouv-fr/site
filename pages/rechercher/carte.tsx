@@ -78,24 +78,29 @@ const About: React.FC<IProps> = ({
       )}
     </div>
 
-
     {response ? (
       <>
-        <script dangerouslySetInnerHTML={{
-          __html: `
+        <script
+          async
+          defer
+          dangerouslySetInnerHTML={{
+            __html: `
           function logSearch () {
             if(window.Piwik) {
               console.log('found Piwik')
               var tracker = window.Piwik.getTracker();
               if (tracker) {
-                tracker.trackSiteSearch(${searchTerm}, ${'carte'}, ${response.total_results});
+                tracker.trackSiteSearch(${searchTerm}, ${'carte'}, ${
+              response.total_results
+            });
               }
             }
             console.log('End')
           }
           logSearch();
-          `
-        }}/>
+          `,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `

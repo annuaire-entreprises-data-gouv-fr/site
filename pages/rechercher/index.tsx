@@ -56,6 +56,8 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
     </div>
 
     <script
+      async
+      defer
       dangerouslySetInnerHTML={{
         __html: `
         function logSearch () {
