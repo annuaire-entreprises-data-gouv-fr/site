@@ -69,11 +69,10 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
           response.total_results
         });
             }
-          } else {
-            console.log('Did not found Piwik')
           }
+          console.log('End')
         }
-        logSearch();
+        window.setTimeout(logSearch, 500);
           `,
       }}
     />

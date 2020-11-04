@@ -97,7 +97,7 @@ const About: React.FC<IProps> = ({
             }
             console.log('End')
           }
-          logSearch();
+          window.setTimeout(logSearch, 500);
           `,
           }}
         />
