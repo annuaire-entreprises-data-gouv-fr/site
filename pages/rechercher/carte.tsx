@@ -83,16 +83,15 @@ const About: React.FC<IProps> = ({
       <>
         <script dangerouslySetInnerHTML={{
           __html: `
-          logSearch () {
+          function logSearch () {
             if(window.Piwik) {
               console.log('found Piwik')
               var tracker = window.Piwik.getTracker();
               if (tracker) {
                 tracker.trackSiteSearch(${searchTerm}, ${'carte'}, ${response.total_results});
               }
-            } else {
-              console.log('Did not found Piwik')
             }
+            console.log('End')
           }
           logSearch();
           `
