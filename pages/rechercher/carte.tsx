@@ -78,32 +78,45 @@ const About: React.FC<IProps> = ({
       )}
     </div>
 
+
     {response ? (
-      <script
-        dangerouslySetInnerHTML={{
+      <>
+        <script dangerouslySetInnerHTML={{
           __html: `
-                function initMap(style) {
-                  if (!mapboxgl) {return;}
+          if(window.Piwik) {
+            var tracker = window.Piwik.getTracker("https://stats.data.gouv.fr/piwik.php",145);
+            if (tracker) {
+              tracker.trackSiteSearch(${searchTerm}, ${'carte'}, ${response.total_results});
+            }
+          }
+          `
+        }}/>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+                  function initMap(style) {
+                    if (!mapboxgl) {return;}
 
-                  var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: style, // stylesheet location
-                    center: [2, 46], // starting position [lng, lat]
-                    zoom: 4.5 // starting zoom
-                  });
-                  var uniteLegales = ${JSON.stringify(response.unite_legale)};
-                  for (var i = 0; i < uniteLegales.length; i++) {
-                      var uniteLegale = uniteLegales[i];
-                      new mapboxgl.Marker({ color: '#000091' })
-                      .setLngLat([uniteLegale.longitude,uniteLegale.latitude])
-                      .addTo(map);
+                    var map = new mapboxgl.Map({
+                      container: 'map',
+                      style: style, // stylesheet location
+                      center: [2, 46], // starting position [lng, lat]
+                      zoom: 4.5 // starting zoom
+                    });
+                    var uniteLegales = ${JSON.stringify(response.unite_legale)};
+                    for (var i = 0; i < uniteLegales.length; i++) {
+                        var uniteLegale = uniteLegales[i];
+                        new mapboxgl.Marker({ color: '#000091' })
+                        .setLngLat([uniteLegale.longitude,uniteLegale.latitude])
+                        .addTo(map);
+                    }
                   }
-                }
 
-                fetch("https://etalab-tiles.fr/styles/osm-bright/style.json").then(res=> res.json()).then(el => initMap(el))
-              `,
-        }}
-      />
+                  fetch("https://etalab-tiles.fr/styles/osm-bright/style.json").then(res=> res.json()).then(el => initMap(el))
+                `,
+          }}
+        />
+      </>
     ) : (
       <script
         dangerouslySetInnerHTML={{

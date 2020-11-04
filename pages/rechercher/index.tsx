@@ -55,6 +55,21 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
       )}
     </div>
 
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+          if(window.Piwik) {
+            var tracker = window.Piwik.getTracker("https://stats.data.gouv.fr/piwik.php",145);
+            if (tracker) {
+              tracker.trackSiteSearch(${searchTerm}, ${'carte'}, ${
+          response.total_results
+        });
+            }
+          }
+          `,
+      }}
+    />
+
     <style jsx>{`
       .results-counter {
         margin-top: 10px;
