@@ -89,7 +89,7 @@ const About: React.FC<IProps> = ({
             if(window.Piwik) {
               var tracker = window.Piwik.getTracker();
               if (tracker) {
-                tracker.trackSiteSearch("${searchTerm}", ${'carte'}, ${
+                tracker.trackSiteSearch("${searchTerm}", "${'carte'}", ${
               response.total_results
             });
               }

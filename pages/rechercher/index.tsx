@@ -64,7 +64,7 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
           if(window.Piwik) {
             var tracker = window.Piwik.getTracker();
             if (tracker) {
-              tracker.trackSiteSearch("${searchTerm}", ${'recherche en liste'}, ${
+              tracker.trackSiteSearch("${searchTerm}", "${'recherche en liste'}", ${
           response.total_results
         });
             }
