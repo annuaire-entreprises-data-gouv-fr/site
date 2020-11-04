@@ -9,10 +9,9 @@ import {
   getResults,
 } from '../../model';
 import ResultList from '../../components/resultList';
-import { isSirenOrSiret } from '../../utils/helper';
 import PageCounter from '../../components/pageCounter';
 import { removeInvisibleChar } from '../../model/routes';
-import redirect from '../../utils/redirect';
+import { redirectIfSiretOrSiren } from '../../utils/redirect';
 
 interface IProps {
   response?: SearchResults;
@@ -246,9 +245,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const searchTerm = terme as string;
     const escapedTerm = removeInvisibleChar(searchTerm);
 
-    if (isSirenOrSiret(escapedTerm)) {
-      redirect(context.res, `/entreprise/${escapedTerm}`);
-    }
+    redirectIfSiretOrSiren(context.res, escapedTerm);
 
     //@ts-ignore
     const page = parsePage(context.query.page || '1') - 1;

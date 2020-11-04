@@ -10,7 +10,8 @@ export const escapeSearchTerm = (searchTerm: string) => {
   return searchTerm
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
-    .replace(/\s+$/, '');
+    .replace(/\s+$/, '')
+    .replace(/^\s+/, '');
 };
 
 export const removeInvisibleChar = (searchTerm: string) => {

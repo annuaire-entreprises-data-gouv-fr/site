@@ -2,13 +2,12 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { isSirenOrSiret } from '../../utils/helper';
 import { getResults, SearchResults } from '../../model';
 import { parsePage, removeInvisibleChar } from '../../model/routes';
 import ResultList from '../../components/resultList';
 import PageCounter from '../../components/pageCounter';
 import { pin } from '../../static/icon';
-import redirect from '../../utils/redirect';
+import { redirectIfSiretOrSiren } from '../../utils/redirect';
 
 interface IProps {
   response: SearchResults;
@@ -89,9 +88,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const searchTerm = context.query.terme as string;
   const escapedTerm = removeInvisibleChar(searchTerm);
 
-  if (isSirenOrSiret(escapedTerm)) {
-    redirect(context.res, `/entreprise/${escapedTerm}`);
-  }
+  redirectIfSiretOrSiren(context.res, escapedTerm);
+
 
   //@ts-ignore
   const page = parsePage(context.query.page || '1') - 1;
