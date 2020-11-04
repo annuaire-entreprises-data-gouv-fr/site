@@ -87,15 +87,13 @@ const About: React.FC<IProps> = ({
             __html: `
           function logSearch () {
             if(window.Piwik) {
-              console.log('found Piwik')
               var tracker = window.Piwik.getTracker();
               if (tracker) {
-                tracker.trackSiteSearch(${searchTerm}, ${'carte'}, ${
+                tracker.trackSiteSearch("${searchTerm}", ${'carte'}, ${
               response.total_results
             });
               }
             }
-            console.log('End')
           }
           window.setTimeout(logSearch, 500);
           `,
