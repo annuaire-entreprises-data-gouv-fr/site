@@ -1,5 +1,6 @@
 const fs = require('fs');
-const readline = require('readline');
+const fetch = require('node-fetch');
+// const readline = require('readline');
 
 const mem = () => {
   const used = process.memoryUsage().heapUsed / 1024 / 1024;
@@ -70,12 +71,17 @@ async function main() {
 
   ['/', '/comment-ca-marche', '/faq'].map(write);
 
-  const fileStream = fs.createReadStream('./sitemap/sitemap-name.csv');
+  const url = 'NAMES_URL_HERE';
+  const names = await fetch(url);
+  const data = await names.text();
 
-  const rl = readline.createInterface({
-    input: fileStream,
-    crlfDelay: Infinity,
-  });
+  // const fileStream = fs.createReadStream('./sitemap/sitemap-name.csv');
+
+  // const rl = readline.createInterface({
+  //   input: fileStream,
+  //   crlfDelay: Infinity,
+  // });
+
 
   for await (const line of rl) {
     // Each line in input.txt will be successively available here as `line`.

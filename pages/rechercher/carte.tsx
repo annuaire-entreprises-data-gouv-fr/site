@@ -77,6 +77,17 @@ const About: React.FC<IProps> = ({
       )}
     </div>
 
+    <script
+
+
+           src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"
+
+    ></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+
     {response ? (
       <>
         <script
@@ -99,6 +110,8 @@ const About: React.FC<IProps> = ({
           }}
         />
         <script
+          async
+          defer
           dangerouslySetInnerHTML={{
             __html: `
                   function initMap(style) {
@@ -126,6 +139,8 @@ const About: React.FC<IProps> = ({
       </>
     ) : (
       <script
+      async
+      defer
         dangerouslySetInnerHTML={{
           __html: `
                 function initMap(style) {
