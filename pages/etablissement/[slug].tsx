@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { getCompanyTitle, isSirenOrSiret } from '../../utils/helper';
+import { getCompanyTitle } from '../../utils/helper';
 import {
   Etablissement,
   getEtablissement,
@@ -10,8 +10,6 @@ import {
   UniteLegale,
 } from '../../model';
 import EtablissementSection from '../../components/etablissementSection';
-import EntrepriseSection from '../../components/entrepriseSection';
-import EtablissementListeSection from '../../components/etablissementListeSection';
 import Title from '../../components/titleSection';
 import redirect from '../../utils/redirect';
 
@@ -20,14 +18,14 @@ interface IProps {
   uniteLegale: UniteLegale;
 }
 
-const About: React.FC<IProps> = ({
+const EtablissementPage: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
 }) => (
   <Page
     small={true}
-    title={`Page entreprise - ${getCompanyTitle(uniteLegale)} - ${
-      uniteLegale.siren
+    title={`Page etablissement - ${getCompanyTitle(uniteLegale)} - ${
+      etablissement.siret
     }`}
   >
     <div className="content-container">
@@ -39,12 +37,14 @@ const About: React.FC<IProps> = ({
         }
         siren={uniteLegale.siren}
         siret={etablissement.siret}
-        isEntreprise={true}
+        isEntreprise={false}
         isSiege={etablissement.etat_administratif === 'A'}
         isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
       />
-          <EntrepriseSection uniteLegale={uniteLegale} />
-          <EtablissementListeSection uniteLegale={uniteLegale} />
+      <EtablissementSection
+        etablissement={etablissement}
+        uniteLegale={uniteLegale}
+      />
     </div>
     <style jsx>{`
       .content-container {
@@ -56,28 +56,23 @@ const About: React.FC<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
-  const slug = context.params.slug as string;
+  const slug = context.params.slug;
 
-  const siretOrSiren = slug ? slug.substr(slug.length - 9) : slug;
+  const siretOrSiren = slug;
 
-  if (!isSirenOrSiret(siretOrSiren)) {
-    redirect(context.res, '/404');
-  }
-
-  // siege social
-  const uniteLegale = await getUniteLegale(siretOrSiren as string);
+  const etablissement = await getEtablissement(siretOrSiren as string);
+  const uniteLegale = await getUniteLegale(etablissement.siren as string);
 
   if (uniteLegale.statut_diffusion === 'N') {
-    redirect(context.res, `/introuvable/siren?q=${siretOrSiren}`);
+    redirect(context.res, `/introuvable/siret?q=${siretOrSiren}`);
   }
 
   return {
     props: {
-      etablissement: uniteLegale.etablissement_siege || {},
+      etablissement,
       uniteLegale,
-      isEntreprise: true,
     },
   };
 };
 
-export default About;
+export default EtablissementPage;

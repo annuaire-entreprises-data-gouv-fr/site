@@ -24,7 +24,9 @@ const EtablissementListeSection: React.FC<{
       <FullTable
         head={['SIRET', 'Activité (code NAF)', 'Adresse', 'Statut']}
         body={uniteLegale.etablissements.map((elem: any) => [
-          <a href={`/entreprise/${elem.siret}`}>{formatSiret(elem.siret)}</a>,
+          <a href={`/etablissement/${elem.siret}`}>
+            {formatSiret(elem.siret)}
+          </a>,
           <>
             {elem.activite_principale} -{' '}
             {libelleFromCodeNaf(elem.activite_principale)}

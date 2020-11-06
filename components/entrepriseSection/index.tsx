@@ -67,7 +67,7 @@ const EntrepriseSection: React.FC<{
                 <>
                   {formatSiret((uniteLegale.etablissement_siege || {}).siret)}{' '}
                   <a
-                    href={`/entreprise/${
+                    href={`/etablissement/${
                       (uniteLegale.etablissement_siege || {}).siret
                     }`}
                   >
