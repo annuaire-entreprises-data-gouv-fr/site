@@ -2,7 +2,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 
 const mem = () => {
-  return used = process.memoryUsage().heapUsed / 1024 / 1024;
+  return (used = process.memoryUsage().heapUsed / 1024 / 1024);
 };
 
 const logMem = () => {
@@ -50,10 +50,10 @@ const saveSitemapIndex = (indices) => {
   fs.writeFileSync('./public/sitemap.xml', index);
 };
 
-const WEBSITE = process.env.SITE_URL || 'https://annuaire-entreprises.data.gouv.fr';
+const WEBSITE =
+  process.env.SITE_URL || 'https://annuaire-entreprises.data.gouv.fr';
 
-const getIndexUrl = (str) =>
-  `${WEBSITE}${str}`;
+const getIndexUrl = (str) => `${WEBSITE}${str}`;
 
 const getEntrepriseUrl = (str) =>
   `${WEBSITE}/entreprise/${encodeURIComponent(str)}`;
@@ -66,9 +66,9 @@ async function main() {
   let urlCount = 0;
   let maxMemory = 0;
 
-  console.log('*** Sitemap generation script ***')
+  console.log('*** Sitemap generation script ***');
 
-  console.time('⏱ Total time to execute script')
+  console.time('⏱ Total time to execute script');
 
   const write = (elem) => {
     currentBatch.push(elem);
@@ -83,15 +83,15 @@ async function main() {
 
   ['/', '/comment-ca-marche', '/faq'].map(write);
 
-  console.time('⏱ Time to download base SIREN')
+  console.time('⏱ Time to download base SIREN');
   const url =
     'https://files.data.gouv.fr/annuaire-entreprises/sitemap-name.csv';
   const names = await fetch(url);
   const data = await names.text();
-  console.timeEnd('⏱ Time to download base SIREN')
+  console.timeEnd('⏱ Time to download base SIREN');
 
-  data.split('\n').forEach((line, idx)  =>  {
-    if(idx%10000===0){
+  data.split('\n').forEach((line, idx) => {
+    if (idx % 10000 === 0) {
       maxMemory = Math.max(mem(), maxMemory);
     }
     write(line);
@@ -103,7 +103,7 @@ async function main() {
   }
   saveSitemapIndex(indices);
 
-  console.timeEnd('⏱ Total time to execute script')
+  console.timeEnd('⏱ Total time to execute script');
   console.log(`📈 Max memory usage ${Math.round(maxMemory * 100) / 100} mo`);
   console.log(`💾 Saved ${sitemapCount} sitemaps with ${urlCount} urls`);
 }
