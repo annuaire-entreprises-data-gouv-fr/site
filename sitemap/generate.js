@@ -12,6 +12,18 @@ const logMem = () => {
   );
 };
 
+const path = process.env.NODE_ENV === 'production' ? '/tmp/build' : '.';
+
+const WEBSITE =
+  process.env.SITE_URL || 'https://annuaire-entreprises.data.gouv.fr';
+
+const getIndexUrl = (str) => `${WEBSITE}${str}`;
+
+const getEntrepriseUrl = (str) =>
+  `${WEBSITE}/entreprise/${encodeURIComponent(str)}`;
+
+const getSitemap = (idx) => `/maps/sitemap${idx}.xml`;
+
 const saveSitemap = (indices, idx) => {
   const index = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset
@@ -30,7 +42,7 @@ const saveSitemap = (indices, idx) => {
     .join('')}
       </urlset>`;
 
-  fs.writeFileSync(`./public${getSitemap(idx)}`, index);
+  fs.writeFileSync(`${path}/public${getSitemap(idx)}`, index);
 };
 
 const saveSitemapIndex = (indices) => {
@@ -47,19 +59,8 @@ const saveSitemapIndex = (indices) => {
     .join('')}
       </sitemapindex>`;
 
-  const path = process.env.NODE_ENV === 'production' ? '/tmp/build' : '.';
   fs.writeFileSync(`${path}/public/sitemap.xml`, index);
 };
-
-const WEBSITE =
-  process.env.SITE_URL || 'https://annuaire-entreprises.data.gouv.fr';
-
-const getIndexUrl = (str) => `${WEBSITE}${str}`;
-
-const getEntrepriseUrl = (str) =>
-  `${WEBSITE}/entreprise/${encodeURIComponent(str)}`;
-
-const getSitemap = (idx) => `/maps/sitemap${idx}.xml`;
 
 async function main() {
   let sitemapCount = 0;
