@@ -47,7 +47,8 @@ const saveSitemapIndex = (indices) => {
     .join('')}
       </sitemapindex>`;
 
-  fs.writeFileSync('./public/sitemap.xml', index);
+  const path = process.env.NODE_ENV === 'production' ? '/tmp/build' : '.';
+  fs.writeFileSync(`${path}/public/sitemap.xml`, index);
 };
 
 const WEBSITE =
@@ -81,7 +82,7 @@ async function main() {
     }
   };
 
-  ['/', '/comment-ca-marche', '/faq'].map(write);
+  ['/', '/comment-ca-marche', 'rechercher', '/faq'].map(write);
 
   console.time('⏱ Time to download base SIREN');
   const url =
