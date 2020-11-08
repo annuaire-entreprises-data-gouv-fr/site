@@ -1,1 +1,10 @@
-User-agent: * 
+Sitemap: https://annuaire-entreprises.data.gouv.fr/sitemap.xml
+
+# Groupe 2
+User-agent: *
+Allow: /
+
+# Groupe 1
+User-agent: *
+Disallow: /api/
+Disallow: /rechercher/carte
