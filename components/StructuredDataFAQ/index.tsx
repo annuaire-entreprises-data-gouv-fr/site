@@ -11,8 +11,8 @@ interface IFAQuestion {
 
 const generateFAQuestion = (question: string, answer: string): String => {
   return `{
-    "@type': "Question",
-    "name: "${question}",
+    "@type": "Question",
+    "name": "${question}",
     "acceptedAnswer": {
       "@type": "Answer",
       "text": "${answer}",
