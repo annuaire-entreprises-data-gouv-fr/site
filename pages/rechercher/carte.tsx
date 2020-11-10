@@ -32,6 +32,7 @@ const About: React.FC<IProps> = ({
     map={true}
     noIndex={true}
     title="Rechercher une entreprise"
+    canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/carte"
   >
     <div className="map-container">
       <div id="map" />
@@ -250,7 +251,7 @@ const parsePage = (pageAsString: string) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { terme, siret } = context.query;
+  const { terme = '', siret } = context.query;
 
   if (siret) {
     const etablissement = await getEtablissement(siret as string);

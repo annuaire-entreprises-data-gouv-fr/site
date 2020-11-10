@@ -7,6 +7,11 @@ interface IProps {
 }
 
 const pagesArray = (currentPage:number, totalPages:number) : number[] => {
+  if (totalPages <= 10) {
+    //@ts-ignore
+    return [...Array(totalPages).keys()];
+  }
+
   if (currentPage + 5 >= totalPages){
     //@ts-ignore
     return [...Array(10).keys()].map(i=>i+totalPages - 9);
@@ -27,21 +32,19 @@ const PageCounter: React.FC<IProps> = ({
     )}
     <div>
       {/* @ts-ignore */}
-      {pagesArray(currentPage, totalPages + 1).map(
-        (pageNum) => {
-          return (
-            <a
-              href={`?terme=${searchTerm}&page=${pageNum + 1}`}
-              className={`${currentPage === pageNum + 1 ? 'active' : ''}`}
-              key={pageNum}
-            >
-              {pageNum + 1}
-            </a>
-          );
-        }
-      )}
+      {pagesArray(currentPage, totalPages + 1).map((pageNum) => {
+        return (
+          <a
+            href={`?terme=${searchTerm}&page=${pageNum + 1}`}
+            className={`${currentPage === pageNum + 1 ? 'active' : ''}`}
+            key={pageNum}
+          >
+            {pageNum + 1}
+          </a>
+        );
+      })}
     </div>
-    {currentPage !== totalPages + 2 && (
+    {currentPage !== totalPages + 1 && (
       <a href={`?terme=${searchTerm}&page=${currentPage + 1}`}>suivante ⇢</a>
     )}
 

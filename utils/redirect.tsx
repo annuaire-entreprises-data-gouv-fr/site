@@ -3,6 +3,10 @@ import { ServerResponse } from 'http';
 import { isSirenOrSiret } from './helper';
 
 export const redirectIfSiretOrSiren = (res: ServerResponse, term: string) => {
+  if (!term) {
+    redirect(res, '/');
+  }
+
   if (isSirenOrSiret(term)) {
     redirect(res, `/entreprise/${term}`);
   } else {

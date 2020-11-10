@@ -20,6 +20,7 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
     small={true}
     currentSearchTerm={searchTerm}
     title="Rechercher une entreprise"
+    canonical="https://annuaire-entreprises.data.gouv.fr"
   >
     <div className="content-container">
       {response.total_results ? (
@@ -85,7 +86,7 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
-  const searchTerm = context.query.terme as string;
+  const searchTerm = (context.query.terme || '') as string;
   const escapedTerm = removeInvisibleChar(searchTerm);
 
   redirectIfSiretOrSiren(context.res, escapedTerm);
