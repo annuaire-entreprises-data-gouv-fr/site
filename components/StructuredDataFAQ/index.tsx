@@ -15,8 +15,8 @@ const generateFAQuestion = (question: string, answer: string): String => {
     "name": "${question}",
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "${answer}",
-    },
+      "text": "${answer}"
+    }
   }`;;;
 };
 
@@ -31,9 +31,9 @@ const StrucutredData = ({ data }: IProps) => (
       __html: `{
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": [${data.map((elem) =>
-          generateFAQuestion(elem[0], elem[1])
-        )}],
+        "mainEntity": [${data
+          .map((elem) => generateFAQuestion(elem[0], elem[1]))
+          .join(',')}]
       }`,
     }}
   ></script>
