@@ -13,22 +13,25 @@ import EtablissementListeSection from '../../components/etablissementListeSectio
 import Title from '../../components/titleSection';
 import redirect from '../../utils/redirect';
 import EtablissementSection from '../../components/etablissementSection';
+import StructuredDataFAQ from '../../components/StructuredDataFAQ';
+
+const structuredData = (uniteLegale:UniteLegale) => [
+    ["Quel est le SIREN de cette entreprise?",`SIREN : ${uniteLegale.siren}`]
+    ]
 
 interface IProps {
   etablissement: Etablissement;
   uniteLegale: UniteLegale;
 }
 
-const About: React.FC<IProps> = ({
-  etablissement,
-  uniteLegale,
-}) => (
+const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   <Page
     small={true}
     title={`Page entreprise - ${getCompanyTitle(uniteLegale)} - ${
       uniteLegale.siren
     }`}
   >
+    <StructuredDataFAQ data={structuredData(uniteLegale)}   />
     <div className="content-container">
       <Title
         name={
@@ -42,9 +45,13 @@ const About: React.FC<IProps> = ({
         isSiege={etablissement.etat_administratif === 'A'}
         isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
       />
-          <EntrepriseSection uniteLegale={uniteLegale} />
-          <EtablissementSection  uniteLegale={uniteLegale} etablissement={uniteLegale.etablissement_siege} usedInEntreprisePage={true}/>
-          <EtablissementListeSection uniteLegale={uniteLegale} />
+      <EntrepriseSection uniteLegale={uniteLegale} />
+      <EtablissementSection
+        uniteLegale={uniteLegale}
+        etablissement={uniteLegale.etablissement_siege}
+        usedInEntreprisePage={true}
+      />
+      <EtablissementListeSection uniteLegale={uniteLegale} />
     </div>
     <style jsx>{`
       .content-container {
