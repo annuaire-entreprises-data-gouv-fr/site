@@ -24,12 +24,14 @@ interface IProps {
   data: string[][];
 }
 
-export default ({ data }: IProps) => (
+const StrucutredData = ({ data }: IProps) => (
   <script type="application/ld+json">
-    {{
+    {JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: [data.map((elem) => generateFAQuestion(elem[0], elem[1]))],
-    }}
+    })}
   </script>
 );
+
+export default StrucutredData;
