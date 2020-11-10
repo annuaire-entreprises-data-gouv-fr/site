@@ -9,15 +9,15 @@ interface IFAQuestion {
   };
 }
 
-const generateFAQuestion = (question: string, answer: string): IFAQuestion => {
-  return {
-    '@type': 'Question',
-    name: question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: answer,
+const generateFAQuestion = (question: string, answer: string): String => {
+  return `{
+    "@type': "Question",
+    "name: "${question}",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "${answer}",
     },
-  };
+  }`;;;
 };
 
 interface IProps {
@@ -25,15 +25,18 @@ interface IProps {
 }
 
 const StrucutredData = ({ data }: IProps) => (
-  <script type="application/ld+json" dangerouslySetInnerHTML={{
-    __html: `{
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: [${data.map((elem) => generateFAQuestion(elem[0], elem[1]))}],
-      }`
-  }}>
-
-  </script>
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: `{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [${data.map((elem) =>
+          generateFAQuestion(elem[0], elem[1])
+        )}],
+      }`,
+    }}
+  ></script>
 );
 
 export default StrucutredData;
