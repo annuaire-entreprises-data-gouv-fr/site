@@ -1,3 +1,4 @@
+import constants from '../constants';
 import React, { PropsWithChildren } from 'react';
 import ButtonLink from '../components/button';
 
@@ -139,6 +140,14 @@ const FAQ: React.FC<{}> = () => (
           <p>
             Les données du moteur de recherche sont mises à jour tous les mois.
           </p>
+        </QuestionBlock>
+        <QuestionBlock title="Je ne trouve pas la réponse a ma question">
+          <p>Vous pouvez nous poser une question directement :</p>
+          <div className="layout-center">
+            <ButtonLink href={constants.links.mailto} alt>
+              Nous écrire
+            </ButtonLink>
+          </div>
         </QuestionBlock>
       </div>
     </div>

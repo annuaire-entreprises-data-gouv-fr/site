@@ -1,3 +1,3 @@
 export default {
-  mailto: 'mailto:entreprise@data.gouv.fr',
+  mailto: 'mailto:annuaire-entreprises@data.gouv.fr',
 };
