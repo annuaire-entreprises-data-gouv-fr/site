@@ -25,12 +25,14 @@ interface IProps {
 }
 
 const StrucutredData = ({ data }: IProps) => (
-  <script type="application/ld+json">
-    {JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [data.map((elem) => generateFAQuestion(elem[0], elem[1]))],
-    })}
+  <script type="application/ld+json" dangerouslySetInnerHTML={{
+    __html: `{
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [${data.map((elem) => generateFAQuestion(elem[0], elem[1]))}],
+      }`
+  }}>
+
   </script>
 );
 
