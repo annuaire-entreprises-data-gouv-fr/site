@@ -34,7 +34,7 @@ const About: React.FC<IProps> = ({
     title="Rechercher une entreprise"
   >
     <div className="map-container">
-      <div id="map"></div>
+      <div id="map" />
 
       {response && response.unite_legale && (
         <div className="map-results">
@@ -122,11 +122,20 @@ const About: React.FC<IProps> = ({
                     var uniteLegales = ${JSON.stringify(response.unite_legale)};
                     for (var i = 0; i < uniteLegales.length; i++) {
                         var uniteLegale = uniteLegales[i];
+
+                        var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+                        '<div><b>'+uniteLegale.l1_normalisee+'</b></div>'+
+                        '<div><i>'+uniteLegale.geo_adresse+'</i></div>'+
+                        '<div><a href="/entreprise/'+uniteLegale.siren+'">⇢ Accéder a la fiche entreprise</a></div>'
+                        );
+
                         new mapboxgl.Marker({ color: '#000091' })
                         .setLngLat([uniteLegale.longitude,uniteLegale.latitude])
+                        .setPopup(popup)
                         .addTo(map);
                     }
                   }
+
 
                   fetch("https://etalab-tiles.fr/styles/osm-bright/style.json").then(res=> res.json()).then(el => initMap(el))
                 `,

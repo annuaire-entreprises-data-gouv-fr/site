@@ -5,15 +5,14 @@ import Page from '../../layouts';
 import { getCompanyTitle, isSirenOrSiret } from '../../utils/helper';
 import {
   Etablissement,
-  getEtablissement,
   getUniteLegale,
   UniteLegale,
 } from '../../model';
-import EtablissementSection from '../../components/etablissementSection';
 import EntrepriseSection from '../../components/entrepriseSection';
 import EtablissementListeSection from '../../components/etablissementListeSection';
 import Title from '../../components/titleSection';
 import redirect from '../../utils/redirect';
+import EtablissementSection from '../../components/etablissementSection';
 
 interface IProps {
   etablissement: Etablissement;
@@ -44,6 +43,7 @@ const About: React.FC<IProps> = ({
         isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
       />
           <EntrepriseSection uniteLegale={uniteLegale} />
+          <EtablissementSection  uniteLegale={uniteLegale} etablissement={uniteLegale.etablissement_siege} usedInEntreprisePage={true}/>
           <EtablissementListeSection uniteLegale={uniteLegale} />
     </div>
     <style jsx>{`

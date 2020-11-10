@@ -63,18 +63,8 @@ const EntrepriseSection: React.FC<{
           [
             'Siège social',
             uniteLegale.etablissement_siege &&
-              uniteLegale.etablissement_siege.siret && (
-                <>
-                  {formatSiret((uniteLegale.etablissement_siege || {}).siret)}{' '}
-                  <a
-                    href={`/etablissement/${
-                      (uniteLegale.etablissement_siege || {}).siret
-                    }`}
-                  >
-                    (voir le siège social)
-                  </a>
-                </>
-              ),
+              uniteLegale.etablissement_siege.siret &&
+              formatSiret((uniteLegale.etablissement_siege || {}).siret),
           ],
           [
             'Activité principale (siège)',

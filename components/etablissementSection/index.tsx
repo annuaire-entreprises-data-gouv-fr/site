@@ -23,58 +23,63 @@ import { TwoColumnTable } from '../table/simple';
 const EtablissementSection: React.FC<{
   etablissement: Etablissement;
   uniteLegale: UniteLegale;
-}> = ({ etablissement, uniteLegale }) => (
+  usedInEntreprisePage?:  Boolean;
+}> = ({ etablissement, uniteLegale, usedInEntreprisePage }) => (
   <>
-    {uniteLegale.statut_diffusion !== 'N' && (
-      <p>
-        Cet établissement est
-        <b>
-          {etablissement.etat_administratif === 'A' ? ' en activité' : ' fermé'}
-          .
-        </b>{' '}
-        C’est
-        {etablissement.etablissement_siege === 'true' ? (
-          <b> le siège social</b>
-        ) : (
-          <> un établissement secondaire</>
-        )}{' '}
-        de l’entreprise{' '}
-        <a href={`/entreprise/${uniteLegale.siren}`}>
-          {getCompanyTitle(uniteLegale)}
-        </a>
-        ,
-        {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
-          <>
-            {' '}
-            qui possède au total
-            <a href="#etablissements">
-              {uniteLegale.etablissements.length} établissements.
+    {!usedInEntreprisePage && (
+      <>
+        {uniteLegale.statut_diffusion !== 'N' && (
+          <p>
+            Cet établissement est
+            <b>
+              {etablissement.etat_administratif === 'A' ? ' en activité' : ' fermé'}
+              .
+            </b>{' '}
+            C’est
+            {etablissement.etablissement_siege === 'true' ? (
+              <b> le siège social</b>
+            ) : (
+              <> un établissement secondaire</>
+            )}{' '}
+            de l’entreprise{' '}
+            <a href={`/entreprise/${uniteLegale.siren}`}>
+              {getCompanyTitle(uniteLegale)}
             </a>
-          </>
-        ) : (
-          <>
-            {' '}
-            et <a href="#etablissements">son unique établissement</a>
-          </>
+            ,
+            {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
+              <>
+                {' '}
+                qui possède au total
+                <a href="#etablissements">
+                  {uniteLegale.etablissements.length} établissements.
+                </a>
+              </>
+            ) : (
+              <>
+                {' '}
+                et <a href="#etablissements">son unique établissement</a>
+              </>
+            )}
+          </p>
         )}
-      </p>
+        <p>
+          {etablissement.date_creation && (
+            <>
+              Cet établissement a été crée le{' '}
+              {formatDateLong(etablissement.date_creation)}
+            </>
+          )}{' '}
+          {etablissement.geo_adresse && (
+            <>
+              et il est domicilié au{' '}
+              <a href="#contact">{etablissement.geo_adresse}</a>
+            </>
+          )}
+        </p>
+      </>
     )}
-    <p>
-      {etablissement.date_creation && (
-        <>
-          Cet établissment a été crée le{' '}
-          {formatDateLong(etablissement.date_creation)}
-        </>
-      )}{' '}
-      {etablissement.geo_adresse && (
-        <>
-          et il est domicilié au{' '}
-          <a href="#contact">{etablissement.geo_adresse}</a>
-        </>
-      )}
-    </p>
     <Section
-      title={`Les informations sur cet établissement${
+      title={usedInEntreprisePage ? `Les informations sur le siège social` : `Les informations sur cet établissement${
         etablissement.etablissement_siege === 'true' ? ' (siège social)' : ''
       }`}
     >

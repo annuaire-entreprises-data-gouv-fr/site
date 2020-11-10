@@ -8,48 +8,57 @@ import { Tag } from '../tag';
 
 const EtablissementListeSection: React.FC<{
   uniteLegale: UniteLegale;
-}> = ({ uniteLegale }) => (
-  <div id="etablissements">
-    <p>
-      Cette entreprise possède {uniteLegale.etablissements.length}{' '}
-      établissement(s) dont{' '}
-      {
-        uniteLegale.etablissements.filter(
-          (etab) => etab.etat_administratif !== 'A'
-        ).length
-      }{' '}
-      fermés.
-    </p>
-    <Section title="La liste des établissements de l'entreprise">
-      <FullTable
-        head={['SIRET', 'Activité (code NAF)', 'Adresse', 'Statut']}
-        body={uniteLegale.etablissements.map((elem: any) => [
-          <a href={`/etablissement/${elem.siret}`}>
-            {formatSiret(elem.siret)}
-          </a>,
+}> = ({ uniteLegale }) => {
+  const closedEtablissement = uniteLegale.etablissements.filter(
+    (etab) => etab.etat_administratif !== 'A'
+  ).length
+  return    (
+    <div id="etablissements">
+      <p>
+        Cette entreprise possède {uniteLegale.etablissements.length}{' '}
+        établissement(s)
+        {closedEtablissement > 0 && (
           <>
-            {elem.activite_principale} -{' '}
-            {libelleFromCodeNaf(elem.activite_principale)}
-          </>,
-          elem.geo_adresse,
-          <>
-            {uniteLegale.statut_diffusion === 'N' ? (
-              <Tag>non-diffusible</Tag>
-            ) : (
-              <>
-                {elem.etablissement_siege === 'true' ? (
-                  <Tag>siège social</Tag>
-                ) : null}
-                {elem.etat_administratif === 'A' ? null : (
-                  <Tag className="closed">fermé</Tag>
-                )}
-              </>
-            )}
-          </>,
-        ])}
-      />
-    </Section>
-  </div>
-);
-
+            dont{' '}
+            {
+              uniteLegale.etablissements.filter(
+                (etab) => etab.etat_administratif !== 'A'
+              ).length
+            }{' '}
+            fermés.
+          </>
+        )}
+      </p>
+      <Section title="La liste des établissements de l'entreprise">
+        <FullTable
+          head={['SIRET', 'Activité (code NAF)', 'Adresse', 'Statut']}
+          body={uniteLegale.etablissements.map((elem: any) => [
+            <a href={`/etablissement/${elem.siret}`}>
+              {formatSiret(elem.siret)}
+            </a>,
+            <>
+              {elem.activite_principale} -{' '}
+              {libelleFromCodeNaf(elem.activite_principale)}
+            </>,
+            elem.geo_adresse,
+            <>
+              {uniteLegale.statut_diffusion === 'N' ? (
+                <Tag>non-diffusible</Tag>
+              ) : (
+                <>
+                  {elem.etablissement_siege === 'true' ? (
+                    <Tag>siège social</Tag>
+                  ) : null}
+                  {elem.etat_administratif === 'A' ? null : (
+                    <Tag className="closed">fermé</Tag>
+                  )}
+                </>
+              )}
+            </>,
+          ])}
+        />
+      </Section>
+    </div>
+  );
+};
 export default EtablissementListeSection;
