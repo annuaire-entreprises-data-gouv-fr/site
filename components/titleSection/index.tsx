@@ -14,20 +14,20 @@ interface IProps {
   isNonDiffusible?: boolean;
 }
 
-const CtaForTitle: React.FC<{ siren: string }> = ({siren}) => (
+const CtaForTitle: React.FC<{ siren: string }> = ({  siren  }) => (
   <div className="wrapper">
     <div className="label">
-    ⇣ <i>Justificatif d'immatriculation au RCS ou au RM</i> ⇣
+        ⇣ <i>Justificatif d'immatriculation au RCS ou au RM</i> ⇣
     </div>
     <div className="cta">
-      <ButtonLink
+      {/* <ButtonLink
         target="_blank"
         href={`/api/immatriculation?siren=${siren}&format=pdf`}
       >
         {download}
         <span className="separator" />
         Télécharger le justificatif
-      </ButtonLink>
+      </ButtonLink> */}
       <span className="separator" />
       <ButtonLink
         target="_blank"
@@ -46,6 +46,7 @@ const CtaForTitle: React.FC<{ siren: string }> = ({siren}) => (
 
       .cta {
         flex-direction: row;
+        justify-content: flex-end;
         display: flex;
       }
       .cta .separator {
@@ -55,10 +56,10 @@ const CtaForTitle: React.FC<{ siren: string }> = ({siren}) => (
 
       @media only screen and (min-width: 1px) and (max-width: 900px) {
         .wrapper {
-          margin:15px auto;
+          margin:  15px auto;
         }
-        div.label{
-          text-align:center;
+        div.label  {
+          text-align:  center;
         }
       }
     `}</style>
