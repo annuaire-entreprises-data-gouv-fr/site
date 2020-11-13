@@ -21,15 +21,7 @@ const ResultList: React.FC<IProps> = ({ resultList, compact = false }) => (
           {unite_legale.geo_adresse}{' '}
           <Tag>
             {`${unite_legale.nombre_etablissements} établissement${
-
-
-
-
               unite_legale.nombre_etablissements > 1 ? 's' : ''
-
-
-
-
             }`}
           </Tag>
         </div>
@@ -45,7 +37,7 @@ const ResultList: React.FC<IProps> = ({ resultList, compact = false }) => (
       .results-list > a .title {
         color: #000091;
         text-decoration: none;
-        font-size: ${compact ? '1.1rem' : '1.4rem'};
+        font-size: ${compact ? '1.1rem' : '1.2rem'};
         margin-bottom: ${compact ? '0' : '5px'} 0;
       }
 
