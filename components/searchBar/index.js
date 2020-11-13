@@ -52,12 +52,13 @@ const SearchBar = ({
           align-items: center;
         }
         input[type='text'] {
+          z-index:10;
           font-size: 1rem;
           background-color: #f0f0f0;
           width: 100%;
           border:none;
-          border-bottom: 2px solid transparent;
           border-right: none;
+          border-bottom: 2px solid #000091;
           border-radius: 0;
           display: flex;
           transition: border-color 300ms ease-in-out;
@@ -67,8 +68,7 @@ const SearchBar = ({
         }
 
         input[type='text']:focus {
-          border-bottom: 2px solid #000091;
-          outline: none;
+          outline: solid #0064f9;
         }
 
         .search-bar {
