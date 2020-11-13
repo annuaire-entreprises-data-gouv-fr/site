@@ -28,7 +28,11 @@ const PageCounter: React.FC<IProps> = ({
 }) => (
   <div className="pages-selector">
     {currentPage !== 1 && (
-      <a href={`?terme=${searchTerm}&page=${currentPage - 1}`}>⇠ précédente</a>
+      <a href={`?terme=${searchTerm}&page=${currentPage - 1}`}>
+
+        ⇠ <span>précédente</span>
+
+      </a>
     )}
     <div>
       {/* @ts-ignore */}
@@ -45,7 +49,9 @@ const PageCounter: React.FC<IProps> = ({
       })}
     </div>
     {currentPage !== totalPages + 1 && (
-      <a href={`?terme=${searchTerm}&page=${currentPage + 1}`}>suivante ⇢</a>
+      <a href={`?terme=${searchTerm}&page=${currentPage + 1}`}>
+        <span>suivante</span> ⇢
+      </a>
     )}
 
     <style jsx>{`
@@ -67,6 +73,11 @@ const PageCounter: React.FC<IProps> = ({
       }
       .pages-selector > div > a.active {
         border: 1px solid #000091;
+      }
+      @media only screen and (min-width: 1px) and (max-width: 900px) {
+        .pages-selector > a > span {
+          display:none;
+        }
       }
     `}</style>
   </div>

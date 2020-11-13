@@ -17,7 +17,9 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
 }) => (
   <div id="button">
     {!href ? (
-      <button type="submit">{children}</button>
+      <button type="submit">
+        {children}
+      </button>
     ) : (
       <a
         target={target}
@@ -31,8 +33,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
       div {
         display: block;
       }
-      a,
-      button {
+      a, button {
         text-align: center;
         outline: none;
         transition: none;
@@ -49,8 +50,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         padding: 0 10px;
         border: 2px solid ${alt ? '#000091' : 'transparent'};
       }
-      button {
-      }
+
       div:hover > a,
       div:hover > button {
         color: #000091;

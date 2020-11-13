@@ -22,7 +22,7 @@ const Page: React.FC<IProps> = ({
   title,
   description,
   canonical,
-  noIndex  =  false,
+  noIndex = false,
 }) => (
   <div id="page-layout">
     <Meta
@@ -46,7 +46,7 @@ const Page: React.FC<IProps> = ({
       main {
         position: relative;
         display: inline-block;
-        min-height: calc(100vh - ${small ? 130 : 210}px);
+        min-height: calc(100vh - ${small ? 136 : 210}px);
         width: 100%;
         flex-grow: 1;
       }

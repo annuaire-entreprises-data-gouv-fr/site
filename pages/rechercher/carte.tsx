@@ -36,7 +36,6 @@ const About: React.FC<IProps> = ({
   >
     <div className="map-container">
       <div id="map" />
-
       {response && response.unite_legale && (
         <div className="map-results">
           <div className="results">
@@ -197,17 +196,18 @@ const About: React.FC<IProps> = ({
       .map-container {
         display: flex;
         flex-direction: row-reverse;
-        height: calc(100vh - 120px);
+        height: calc(100vh - 140px);
       }
       .map-results {
-        width: 600px;
+        width: 550px;
+        flex-shrink: 0;
         font-size: 1rem;
         height: 100%;
         overflow: auto;
       }
       .map-results > .results {
         padding: 0 10px;
-        height: calc(100% - 50px);
+        height: calc(100% - 60px);
         overflow: auto;
       }
       .map-results > .results-footer {
@@ -221,7 +221,7 @@ const About: React.FC<IProps> = ({
         width: 100%;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 900px) {
+      @media only screen and (min-width: 1px) and (max-width: 1100px) {
         .map-container {
           display: block;
           height: auto;
@@ -231,7 +231,7 @@ const About: React.FC<IProps> = ({
         }
         #map {
           background: #dfdff1;
-          min-height: 250px;
+          min-height: 30vh;
         }
         .map-results > .results {
           height: auto;

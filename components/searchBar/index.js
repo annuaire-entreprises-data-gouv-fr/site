@@ -6,7 +6,6 @@ import ButtonLink from '../button';
 const SearchBar = ({
   placeholder = 'Rechercher un nom, un SIRET ou un SIREN',
   defaultValue = '',
-  small = false,
   url = '/rechercher',
 }) => {
   return (
@@ -26,7 +25,6 @@ const SearchBar = ({
           className="button"
           value="submit"
           type="submit"
-          small={small}
         >
           <span className="magnifying-glass">
             <svg
@@ -54,21 +52,22 @@ const SearchBar = ({
           align-items: center;
         }
         input[type='text'] {
-          font-size: ${small ? '0.9rem' : '1.1rem'};
-          background-color: #fff;
+          font-size: 1rem;
+          background-color: #f0f0f0;
           width: 100%;
-          border: 2px solid #dfdff1;
+          border:none;
+          border-bottom: 2px solid transparent;
           border-right: none;
           border-radius: 0;
           display: flex;
           transition: border-color 300ms ease-in-out;
-          line-height: ${small ? '32px' : '42px'};
+          line-height: 44px;
           padding: 0 10px;
           margin: 0;
         }
 
         input[type='text']:focus {
-          border-color: #000091;
+          border-bottom: 2px solid #000091;
           outline: none;
         }
 

@@ -40,7 +40,6 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
           </svg>
         </a>
         <SearchBar
-          small={true}
           defaultValue={currentSearchTerm}
           url={map ? '/rechercher/carte' : '/rechercher'}
         />
@@ -81,7 +80,7 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
       }
       .header-small svg {
         width: auto;
-        height: 36px;
+        height: 42px;
         object-fit: cover;
         margin: 12px 10px;
         margin-left: 0;
