@@ -24,91 +24,16 @@ body {
 @font-face {
   font-family: 'Marianne';
   font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/Marianne-Bold.woff2');
-}
-
-
-/* open-sans-regular - latin */
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/open-sans-v17-latin-regular.eot'); /* IE9 Compat Modes */
-  src: local('Open Sans Regular'), local('OpenSans-Regular'),
-    url('/fonts/open-sans-v17-latin-regular.eot?#iefix')
-      format('embedded-opentype'),
-    /* IE6-IE8 */ url('/fonts/open-sans-v17-latin-regular.woff2')
-      format('woff2'),
-    /* Super Modern Browsers */
-      url('/fonts/open-sans-v17-latin-regular.woff') format('woff'),
-    /* Modern Browsers */
-      url('/fonts/open-sans-v17-latin-regular.ttf')
-      format('truetype'),
-    /* Safari, Android, iOS */
-      url('/fonts/open-sans-v17-latin-regular.svg#OpenSans')
-      format('svg'); /* Legacy iOS */
+  src: url('/fonts/Marianne-Regular.woff2'), url('/fonts/Marianne-Regular.woff') format('woff');
 }
-/* open-sans-700 - latin */
 @font-face {
-  font-family: 'Open Sans';
+  font-family: 'Marianne';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('/fonts/open-sans-v17-latin-700.eot'); /* IE9 Compat Modes */
-  src: local('Open Sans Bold'), local('OpenSans-Bold'),
-    url('/fonts/open-sans-v17-latin-700.eot?#iefix')
-      format('embedded-opentype'),
-    /* IE6-IE8 */ url('/fonts/open-sans-v17-latin-700.woff2')
-      format('woff2'),
-    /* Super Modern Browsers */
-      url('/fonts/open-sans-v17-latin-700.woff') format('woff'),
-    /* Modern Browsers */ url('/fonts/open-sans-v17-latin-700.ttf')
-      format('truetype'),
-    /* Safari, Android, iOS */
-      url('/fonts/open-sans-v17-latin-700.svg#OpenSans')
-      format('svg'); /* Legacy iOS */
-}
-
-/* source-sans-pro-regular - latin */
-@font-face {
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/source-sans-pro-v13-latin-regular.eot');
-  src: local('Source Sans Pro Regular'),
-    local('SourceSansPro-Regular'),
-    url('/fonts/source-sans-pro-v13-latin-regular.eot?#iefix')
-      format('embedded-opentype'),
-    url('/fonts/source-sans-pro-v13-latin-regular.woff2')
-      format('woff2'),
-    url('/fonts/source-sans-pro-v13-latin-regular.woff')
-      format('woff'),
-    url('/fonts/source-sans-pro-v13-latin-regular.ttf')
-      format('truetype'),
-    url('/fonts/source-sans-pro-v13-latin-regular.svg#SourceSansPro')
-      format('svg');
-}
-
-/* source-sans-pro-700 - latin */
-@font-face {
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/source-sans-pro-v13-latin-700.eot');
-  src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'),
-    url('/fonts/source-sans-pro-v13-latin-700.eot?#iefix')
-      format('embedded-opentype'),
-    url('/fonts/source-sans-pro-v13-latin-700.woff2')
-      format('woff2'),
-    url('/fonts/source-sans-pro-v13-latin-700.woff') format('woff'),
-    url('/fonts/source-sans-pro-v13-latin-700.ttf')
-      format('truetype'),
-    url('/fonts/source-sans-pro-v13-latin-700.svg#SourceSansPro');
+  src: url('/fonts/Marianne-Bold.woff2'), url('/fonts/Marianne-Bold.woff') format('woff');
 }
 
 html,
@@ -124,14 +49,14 @@ div,
 p,
 span,
 a {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Marianne', Arial, sans-serif;
 }
 
 h1,
 h2,
 h3,
-h4 {
-  font-family: 'Marianne', 'Open Sans', sans-serif;
+h4, h1 > a {
+  font-family: 'Marianne', Arial, sans-serif;
 }
 `;
 
