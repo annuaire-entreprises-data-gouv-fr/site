@@ -1,7 +1,6 @@
 import React from 'react';
 import App from 'next/app';
 
-
 import '../static/globals.scss';
 // import '@gouvfr/design-system/dist/css/dsfr.min.css';
 
