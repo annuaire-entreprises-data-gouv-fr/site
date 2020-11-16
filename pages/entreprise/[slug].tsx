@@ -61,21 +61,30 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   </Page>
 );
 
+const extractSiren = (slug: string) => {
+  if (!slug) {
+    return '';
+  }
+  const m = slug.match(/-\d{9}/);
+
+  return m ? m[0].replace('-', '') : '';
+};
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug as string;
 
-  const siretOrSiren = slug ? slug.substr(slug.length - 9) : slug;
+  const siren = extractSiren(slug);
 
-  if (!isSirenOrSiret(siretOrSiren)) {
+  if (!isSirenOrSiret(siren)) {
     redirect(context.res, '/404');
   }
 
   // siege social
-  const uniteLegale = await getUniteLegale(siretOrSiren as string);
+  const uniteLegale = await getUniteLegale(siren as string);
 
   if (uniteLegale.statut_diffusion === 'N') {
-    redirect(context.res, `/introuvable/siren?q=${siretOrSiren}`);
+    redirect(context.res, `/introuvable/siren?q=${siren}`);
   }
 
   return {
