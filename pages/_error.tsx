@@ -38,7 +38,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
     Raven.config(process.env.SENTRY_DSN).install();
 
-    Raven.captureException(new Error(`Error on page :${context.req.url}`));
+    Raven.captureException(
+      new Error(
+        `Error on page : https://annuaire-entreprises.data.gouv.fr${context.req.url}`
+      )
+    );
   }
 
   return {
