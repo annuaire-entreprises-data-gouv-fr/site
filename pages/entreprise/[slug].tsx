@@ -65,9 +65,9 @@ const extractSiren = (slug: string) => {
   if (!slug) {
     return '';
   }
-  const m = slug.match(/-\d{9}/);
+  const m = slug.match(/\d{9}/);
 
-  return m ? m[0].replace('-', '') : '';
+  return m ? m[0] : '';
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
