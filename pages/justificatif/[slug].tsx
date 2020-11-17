@@ -147,7 +147,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   if (!hrefRNCS && !hrefRNM) {
-    redirect(context.res, `/introuvable/immatriculation?q=${siretOrSiren}`);
+    redirect(context.res, `/introuvable/immatriculation?q=${siren}`);
   }
 
   return {
