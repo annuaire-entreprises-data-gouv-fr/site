@@ -66,6 +66,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     redirectSiretIntrouvable(context.res, siretOrSiren as string);
   }
 
+  //@ts-ignore
   const uniteLegale = await getUniteLegale(etablissement.siren as string);
 
   if (!uniteLegale || uniteLegale.statut_diffusion === 'N') {
