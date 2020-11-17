@@ -45,10 +45,10 @@ const EtablissementPage: React.FC<IProps> = ({
             <div className="logo-wrapper">{inpi}</div>
           </div>
           <div className="layout-center">
-            {/* <ButtonLink target="_blank" href={`${hrefRNCS}?format=pdf`}>
+            <ButtonLink target="_blank" href={`${hrefRNCS}?format=pdf`}>
               {download} Télécharger le justificatif
             </ButtonLink>
-            <div className="separator" /> */}
+            <div className="separator" />
             <ButtonLink target="_blank" href={`${hrefRNCS}`} alt>
               ⇢ Voir la fiche sur le site de l’INPI
             </ButtonLink>
