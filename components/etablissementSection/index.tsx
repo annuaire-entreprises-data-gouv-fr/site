@@ -23,7 +23,7 @@ import { TwoColumnTable } from '../table/simple';
 const EtablissementSection: React.FC<{
   etablissement: Etablissement;
   uniteLegale: UniteLegale;
-  usedInEntreprisePage?:  Boolean;
+  usedInEntreprisePage?: Boolean;
 }> = ({ etablissement, uniteLegale, usedInEntreprisePage }) => (
   <>
     {!usedInEntreprisePage && (
@@ -32,7 +32,9 @@ const EtablissementSection: React.FC<{
           <p>
             Cet établissement est
             <b>
-              {etablissement.etat_administratif === 'A' ? ' en activité' : ' fermé'}
+              {etablissement.etat_administratif === 'A'
+                ? ' en activité'
+                : ' fermé'}
               .
             </b>{' '}
             C’est
@@ -46,18 +48,22 @@ const EtablissementSection: React.FC<{
               {getCompanyTitle(uniteLegale)}
             </a>
             ,
-            {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
+            {uniteLegale.etablissements &&
+            uniteLegale.etablissements.length > 1 ? (
               <>
                 {' '}
                 qui possède au total
-                <a href="#etablissements">
+                <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
                   {uniteLegale.etablissements.length} établissements.
                 </a>
               </>
             ) : (
               <>
                 {' '}
-                et <a href="#etablissements">son unique établissement</a>
+                et
+                <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
+                  son unique établissement
+                </a>
               </>
             )}
           </p>
@@ -79,9 +85,15 @@ const EtablissementSection: React.FC<{
       </>
     )}
     <Section
-      title={usedInEntreprisePage ? `Les informations sur le siège social` : `Les informations sur cet établissement${
-        etablissement.etablissement_siege === 'true' ? ' (siège social)' : ''
-      }`}
+      title={
+        usedInEntreprisePage
+          ? `Les informations sur le siège social`
+          : `Les informations sur cet établissement${
+              etablissement.etablissement_siege === 'true'
+                ? ' (siège social)'
+                : ''
+            }`
+      }
     >
       <TwoColumnTable
         body={[
