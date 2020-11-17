@@ -54,25 +54,29 @@ export interface SearchResults {
   unite_legale: ResultUniteLegale[];
 }
 
-const getUniteLegale = async (siren: string): Promise<UniteLegale> => {
+const getUniteLegale = async (
+  siren: string
+): Promise<UniteLegale | undefined> => {
   if (!isSirenOrSiret(siren)) {
     throw new Error(`Ceci n'est pas un numéro SIREN valide : ${siren}`);
   }
   const response = await fetch(`${routes.uniteLegale}${encodeURI(siren)}`);
   if (response.status === 404) {
-    throw new Error('404');
+    return undefined;
   }
   const { unite_legale } = await response.json();
   return unite_legale as UniteLegale;
 };
 
-const getEtablissement = async (siret: string): Promise<Etablissement> => {
+const getEtablissement = async (
+  siret: string
+): Promise<Etablissement | undefined> => {
   if (!isSirenOrSiret(siret)) {
     throw new Error(`Ceci n'est pas un numéro SIRET valide : ${siret}`);
   }
   const response = await fetch(`${routes.etablissement}${encodeURI(siret)}`);
   if (response.status === 404) {
-    throw new Error('404');
+    return undefined;
   }
   const { etablissement } = await response.json();
   return etablissement as Etablissement;

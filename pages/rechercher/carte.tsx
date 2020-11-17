@@ -11,7 +11,10 @@ import {
 import ResultList from '../../components/resultList';
 import PageCounter from '../../components/pageCounter';
 import { removeInvisibleChar } from '../../model/routes';
-import { redirectIfSiretOrSiren } from '../../utils/redirect';
+import {
+  redirectIfSiretOrSiren,
+  redirectSiretIntrouvable,
+} from '../../utils/redirect';
 
 interface IProps {
   response?: SearchResults;
@@ -255,6 +258,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (siret) {
     const etablissement = await getEtablissement(siret as string);
+    if (!etablissement) {
+      redirectSiretIntrouvable(context.res, siret as string);
+    }
     return {
       props: {
         etablissement,

@@ -11,7 +11,7 @@ import {
 import EntrepriseSection from '../../components/entrepriseSection';
 import EtablissementListeSection from '../../components/etablissementListeSection';
 import Title from '../../components/titleSection';
-import redirect from '../../utils/redirect';
+import redirect, { redirectSirenIntrouvable } from '../../utils/redirect';
 import EtablissementSection from '../../components/etablissementSection';
 import StructuredDataFAQ from '../../components/StructuredDataFAQ';
 import Annonces from '../../components/annonces';
@@ -82,15 +82,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     redirect(context.res, '/404');
   }
 
-  // siege social
   const uniteLegale = await getUniteLegale(siren as string);
 
-  if (uniteLegale.statut_diffusion === 'N') {
-    redirect(context.res, `/introuvable/siren?q=${siren}`);
+  if  (!uniteLegale || uniteLegale.statut_diffusion === 'N') {
+    redirectSirenIntrouvable(context.res, siren as string);
   }
 
   return {
     props: {
+      //@ts-ignore
       etablissement: uniteLegale.etablissement_siege || {},
       uniteLegale,
       isEntreprise: true,

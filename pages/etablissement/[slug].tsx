@@ -11,7 +11,7 @@ import {
 } from '../../model';
 import EtablissementSection from '../../components/etablissementSection';
 import Title from '../../components/titleSection';
-import redirect from '../../utils/redirect';
+import { redirectSiretIntrouvable } from '../../utils/redirect';
 
 interface IProps {
   etablissement: Etablissement;
@@ -61,10 +61,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siretOrSiren = slug;
 
   const etablissement = await getEtablissement(siretOrSiren as string);
+
+  if (!etablissement) {
+    redirectSiretIntrouvable(context.res, siretOrSiren as string);
+  }
+
   const uniteLegale = await getUniteLegale(etablissement.siren as string);
 
-  if (uniteLegale.statut_diffusion === 'N') {
-    redirect(context.res, `/introuvable/siret?q=${siretOrSiren}`);
+  if (!uniteLegale || uniteLegale.statut_diffusion === 'N') {
+    redirectSiretIntrouvable(context.res, siretOrSiren as string);
   }
 
   return {

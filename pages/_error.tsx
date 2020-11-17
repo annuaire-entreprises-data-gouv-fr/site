@@ -4,7 +4,7 @@ import Page from '../layouts';
 import ButtonLink from '../components/button';
 import constants from '../constants';
 import { GetServerSideProps } from 'next';
-import Raven from 'raven';
+import { logErrorInSentry } from '../utils/sentry';
 
 
 const ServerError: React.FC<{ statusCode: number }> = () => (
@@ -35,11 +35,7 @@ const ServerError: React.FC<{ statusCode: number }> = () => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const statusCode = context.res ? context.res.statusCode : 404;
 
-  if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
-    Raven.config(process.env.SENTRY_DSN).install();
-
-    Raven.captureException(new Error(`${context.req.url}`));
-  }
+  logErrorInSentry(`${context.req.url}`);
 
   return {
     props: {

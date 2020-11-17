@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { getCompanyTitle, isSirenOrSiret } from '../../utils/helper';
 import { getUniteLegale, UniteLegale } from '../../model';
-import redirect from '../../utils/redirect';
+import redirect, { redirectSirenIntrouvable } from '../../utils/redirect';
 import { Section } from '../../components/section';
 import ButtonLink from '../../components/button';
 import HorizontalSeparator from '../../components/horizontalSeparator';
@@ -115,17 +115,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug as string;
 
-  const siretOrSiren = slug ? slug.substr(slug.length - 9) : slug;
+  const siren = slug ? slug.substr(slug.length - 9) : slug;
 
-  if (!isSirenOrSiret(siretOrSiren)) {
+  if (!isSirenOrSiret(siren)) {
     redirect(context.res, '/404');
   }
-  const RNM_LINK = `https://api-rnm.artisanat.fr/v2/entreprises/${siretOrSiren}`;
-  const RNCS_LINK = `https://data.inpi.fr/entreprises/${siretOrSiren}`;
-  const RNCS_PRINT = `https://data.inpi.fr/print/companies/${siretOrSiren}`;
+  const RNM_LINK = `https://api-rnm.artisanat.fr/v2/entreprises/${siren}`;
+  const RNCS_LINK = `https://data.inpi.fr/entreprises/${siren}`;
+  const RNCS_PRINT = `https://data.inpi.fr/print/companies/${siren}`;
 
   // siege social
-  const uniteLegale = await getUniteLegale(siretOrSiren as string);
+  const uniteLegale = await getUniteLegale(siren as string);
+
+  if (!uniteLegale || uniteLegale.statut_diffusion === 'N') {
+    redirectSirenIntrouvable(context.res, siren);
+  }
+
   const rnm = await fetch(RNM_LINK + '?format=html');
   // so instead of calling data.inpi.fr page we rather call the print page that is much faster
   const rncs_test = await fetch(RNCS_PRINT);
@@ -139,10 +144,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (rncs_test.status === 200) {
     hrefRNCS = RNCS_LINK;
-  }
-
-  if (uniteLegale.statut_diffusion === 'N') {
-    redirect(context.res, `/introuvable/siren?q=${siretOrSiren}`);
   }
 
   if (!hrefRNCS && !hrefRNM) {

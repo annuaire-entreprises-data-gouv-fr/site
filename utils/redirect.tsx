@@ -1,13 +1,30 @@
 
 import { ServerResponse } from 'http';
 import { isSirenOrSiret } from './helper';
+import { logMessageInSentry } from '../utils/sentry';
 
-const redirectToEtablissement = (res: ServerResponse, siretOrSiren: string) => {
+const redirectToCorrectPage = (res: ServerResponse, siretOrSiren: string) => {
   if (siretOrSiren.length === 9) {
     redirect(res, `/entreprise/${siretOrSiren}`);
   } else {
     redirect(res, `/etablissement/${siretOrSiren}`);
   }
+};
+
+export const redirectSirenIntrouvable = (
+  res: ServerResponse,
+  siren: string
+) => {
+  redirect(res, `/introuvable/siren?q=${siren}`);
+  logMessageInSentry(`Siren ${siren} not found`);
+};
+
+export const redirectSiretIntrouvable = (
+  res: ServerResponse,
+  siret: string
+) => {
+  redirect(res, `/introuvable/siret?q=${siret}`);
+  logMessageInSentry(`Siret ${siret} not found`);
 };
 
 export const redirectIfSiretOrSiren = (res: ServerResponse, term: string) => {
@@ -16,11 +33,11 @@ export const redirectIfSiretOrSiren = (res: ServerResponse, term: string) => {
   }
 
   if (isSirenOrSiret(term)) {
-    redirectToEtablissement(res, term);
+    redirectToCorrectPage(res, term);
   } else {
     const noSpace = term.split(' ').join('');
     if (isSirenOrSiret(noSpace)) {
-      redirectToEtablissement(res, noSpace);
+      redirectToCorrectPage(res, noSpace);
     }
   }
 };
