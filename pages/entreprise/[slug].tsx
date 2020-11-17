@@ -14,6 +14,7 @@ import Title from '../../components/titleSection';
 import redirect from '../../utils/redirect';
 import EtablissementSection from '../../components/etablissementSection';
 import StructuredDataFAQ from '../../components/StructuredDataFAQ';
+import Annonces from '../../components/annonces';
 
 const structuredData = (uniteLegale:UniteLegale) => [
     ["Quel est le SIREN de cette entreprise?",`SIREN : ${uniteLegale.siren}`]
@@ -31,7 +32,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
       uniteLegale.siren
     }`}
   >
-    <StructuredDataFAQ data={structuredData(uniteLegale)}   />
+    <StructuredDataFAQ data={structuredData(uniteLegale)} />
     <div className="content-container">
       <Title
         name={
@@ -51,6 +52,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         etablissement={uniteLegale.etablissement_siege}
         usedInEntreprisePage={true}
       />
+      <Annonces siren={uniteLegale.siren} />
       <EtablissementListeSection uniteLegale={uniteLegale} />
     </div>
     <style jsx>{`

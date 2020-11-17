@@ -47,6 +47,14 @@ const entrepriseDescription = (uniteLegale: UniteLegale) => {
             </>
           )}
         .{' '}
+        {uniteLegale.etablissements && (
+          <>
+            Cette entreprise possède{' '}
+            <a href={`#etablissements`}>
+              {uniteLegale.etablissements.length} établissement(s).
+            </a>
+          </>
+        )}
       </>
     );
 };

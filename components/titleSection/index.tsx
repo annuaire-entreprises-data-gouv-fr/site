@@ -13,16 +13,19 @@ interface IProps {
   isNonDiffusible?: boolean;
 }
 
-const CtaForTitle: React.FC<{ siren: string }> = ({  siren  }) => (
+const CtaForTitle: React.FC<{ siren: string }> = ({ siren }) => (
   <div className="wrapper">
     <div className="cta">
-      <ButtonLink
-        href={`/justificatif/${siren}`}
-      >
+      <ButtonLink href={`/justificatif/${siren}`}>
         ⇢ Voir le justificatif d'immatriculation au RCS ou au RM
       </ButtonLink>
     </div>
+    <div className="separator"     />
     <style jsx>{`
+      .separator {
+        height:5px;
+      }
+
       .cta {
         flex-direction: row;
         justify-content: flex-end;
@@ -31,10 +34,13 @@ const CtaForTitle: React.FC<{ siren: string }> = ({  siren  }) => (
 
       @media only screen and (min-width: 1px) and (max-width: 900px) {
         .wrapper {
-          margin:  15px auto;
+          margin: 15px auto;
         }
-        div.label  {
-          text-align:  center;
+        .cta {
+          justify-content: center;
+        }
+        div.label {
+          text-align: center;
         }
       }
     `}</style>
@@ -97,7 +103,7 @@ const Title: React.FC<IProps> = ({
       }
       .title h1 {
         margin: 0;
-        line-height: 2rem;
+        line-height: 2.3rem;
       }
       .title h1 > a {
         margin: 0;

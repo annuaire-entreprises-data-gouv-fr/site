@@ -12,13 +12,14 @@ const EtablissementListeSection: React.FC<{
   const closedEtablissement = uniteLegale.etablissements.filter(
     (etab) => etab.etat_administratif !== 'A'
   ).length
-  return    (
+  return (
     <div id="etablissements">
       <p>
         Cette entreprise possède {uniteLegale.etablissements.length}{' '}
         établissement(s)
         {closedEtablissement > 0 && (
           <>
+            {' '}
             dont{' '}
             {
               uniteLegale.etablissements.filter(
