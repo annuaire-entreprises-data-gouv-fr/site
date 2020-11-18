@@ -35,7 +35,11 @@ const ServerError: React.FC<{ statusCode: number }> = () => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const statusCode = context.res ? context.res.statusCode : 404;
 
-  const msg = `Url : ${context.req.url} \r\nUser Agent: ${context.req.headers['user-agent']}`;
+  const msg = `Url : ${context.req.url} \r\nUser Agent: ${
+
+    context.req.headers['user-agent']
+
+  }\r\nRequest: ${JSON.stringify(context.req)}`;
 
   logErrorInSentry(msg);
 
@@ -44,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       statusCode,
     },
   };
-};;;;;
+};
 
 
 export default ServerError;
