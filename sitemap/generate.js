@@ -35,7 +35,7 @@ const saveSitemap = (indices, idx) => {
     .map(
       (url) => `
       <url>
-      <loc>${getEntrepriseUrl(url)}</loc>
+      <loc>${url}</loc>
       </url>
       `
     )
@@ -83,7 +83,9 @@ async function main() {
     }
   };
 
-  ['/', '/comment-ca-marche', 'rechercher', '/faq'].map(write);
+  ['/', '/comment-ca-marche', '/rechercher', '/faq'].map((path) =>
+    write(WEBSITE + path)
+  );
 
   console.time('⏱ Time to download base SIREN');
   const url =
@@ -96,7 +98,7 @@ async function main() {
     if (idx % 10000 === 0) {
       maxMemory = Math.max(mem(), maxMemory);
     }
-    write(line);
+    write(getEntrepriseUrl(line));
   });
 
   const indices = [];
