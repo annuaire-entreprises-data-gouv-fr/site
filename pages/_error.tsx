@@ -35,11 +35,22 @@ const ServerError: React.FC<{ statusCode: number }> = () => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const statusCode = context.res ? context.res.statusCode : 404;
 
-  const msg = `Url : ${context.req.url} \r\nUser Agent: ${
+  let cache: any[] = [];
 
-    context.req.headers['user-agent']
+  // oooh this is dirty
+  const request = JSON.stringify(context.req, (key, value) => {
+    if (typeof value === 'object' && value !== null) {
+      // Duplicate reference found, discard key
+      if (cache.includes(value)) return;
 
-  }\r\nRequest: ${JSON.stringify(context.req)}`;
+      // Store value in our collection
+      cache.push(value);
+    }
+    return value;
+  });
+  cache = [];
+
+  const msg = `Url : ${context.req.url} \r\nUser Agent: ${context.req.headers['user-agent']}\r\nRequest: ${request}`;
 
   logErrorInSentry(msg);
 
