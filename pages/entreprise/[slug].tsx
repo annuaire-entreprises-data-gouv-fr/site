@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { getCompanyTitle, isSirenOrSiret } from '../../utils/helper';
+import { isSirenOrSiret } from '../../utils/helper';
 import {
   Etablissement,
   getUniteLegale,
@@ -13,7 +13,7 @@ import EtablissementListeSection from '../../components/etablissementListeSectio
 import Title from '../../components/titleSection';
 import redirect, { redirectSirenIntrouvable } from '../../utils/redirect';
 import EtablissementSection from '../../components/etablissementSection';
-import StructuredDataFAQ from '../../components/StructuredDataFAQ';
+import StructuredDataFAQ from '../../components/structuredDataFAQ';
 import Annonces from '../../components/annonces';
 
 const structuredData = (uniteLegale:UniteLegale) => [
@@ -28,9 +28,10 @@ interface IProps {
 const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   <Page
     small={true}
-    title={`Page entreprise - ${getCompanyTitle(uniteLegale)} - ${
+    title={`Page entreprise - ${uniteLegale.nom_complet} - ${
       uniteLegale.siren
     }`}
+    canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.page_path}`}
   >
     <StructuredDataFAQ data={structuredData(uniteLegale)} />
     <div className="content-container">
@@ -38,12 +39,12 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         name={
           uniteLegale.statut_diffusion === 'N'
             ? 'Nom inconnu'
-            : getCompanyTitle(uniteLegale)
+            : uniteLegale.nom_complet
         }
         siren={uniteLegale.siren}
         siret={etablissement.siret}
         isEntreprise={true}
-        isSiege={etablissement.etat_administratif === 'A'}
+        isOpen={etablissement.etat_administratif === 'A'}
         isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
       />
       <EntrepriseSection uniteLegale={uniteLegale} />

@@ -1,10 +1,10 @@
-import {
-  getCompanyName,
-  getCompanyTitle,
-  isSirenOrSiret,
-  libelleFromCodeNaf,
-} from '../utils/helper';
-import routes, {getResultUniteLegalePage } from './routes';
+import { generatePagePath } from '../utils/formatting';
+import { isSirenOrSiret, libelleFromCodeNaf } from '../utils/helper';
+import logErrorInSentry from '../utils/sentry';
+import routes, {
+  getSearchUniteLegaleRoute,
+  getUniteLegaleRoute,
+} from './routes';
 
 export interface Etablissement {
   siren: string;
@@ -16,7 +16,6 @@ export interface Etablissement {
   etablissement_siege: string;
   activite_principale: string;
   date_dernier_traitement: string;
-  l1_normalisee: string;
   libelle_activite_principale: string;
   is_siege: '1' | null;
   tranche_effectifs: string;
@@ -31,6 +30,8 @@ export interface UniteLegale {
   etablissements: Etablissement[];
   date_creation: string;
   statut_diffusion: string;
+  nom_complet: string;
+  page_path: string;
 }
 
 export interface ResultUniteLegale {
@@ -40,11 +41,13 @@ export interface ResultUniteLegale {
   categorie_juridique: string;
   nombre_etablissements: number;
   date_creation: string;
-  libelle_activite_principale:string;
-  l1_normalisee:string;
-  geo_adresse:string;
-  latitude:string;
-  longitude:string;
+  libelle_activite_principale: string;
+  etat_administratif_etablissement: string;
+  geo_adresse: string;
+  latitude: string;
+  longitude: string;
+  nom_complet: string;
+  page_path: string;
 }
 
 export interface SearchResults {
@@ -60,12 +63,45 @@ const getUniteLegale = async (
   if (!isSirenOrSiret(siren)) {
     throw new Error(`Ceci n'est pas un numéro SIREN valide : ${siren}`);
   }
-  const response = await fetch(`${routes.uniteLegale}${encodeURI(siren)}`);
+  const response = await fetch(getUniteLegaleRoute(siren));
   if (response.status === 404) {
     return undefined;
   }
-  const { unite_legale } = await response.json();
-  return unite_legale as UniteLegale;
+  const listOfEtablissement = await response.json();
+
+  if (!listOfEtablissement || listOfEtablissement.length === 0) {
+    return undefined;
+  }
+
+  const siege = listOfEtablissement[0];
+
+  if (!siege.is_siege) {
+    throw new Error(`First Etablissement is not siege : ${siren}`);
+  }
+
+  const {
+    statut_diffusion = null,
+    date_creation,
+    nature_juridique_entreprise = null,
+    tranche_effectif_salarie_entreprise = null,
+    nombre_etablissements,
+    nom_complet = 'hello',
+  } = siege;
+
+  const unite_legale = {
+    siren,
+    etablissement_siege: siege,
+    categorie_juridique: nature_juridique_entreprise,
+    tranche_effectifs: tranche_effectif_salarie_entreprise,
+    date_creation,
+    etablissements: listOfEtablissement,
+    statut_diffusion,
+    nombre_etablissements,
+    nom_complet,
+    page_path: generatePagePath(nom_complet, siren),
+  } as UniteLegale;
+
+  return unite_legale;
 };
 
 const getEtablissement = async (
@@ -86,7 +122,7 @@ const getResults = async (
   searchTerms: string,
   page: string
 ): Promise<SearchResults | undefined> => {
-  const response = await fetch(getResultUniteLegalePage(searchTerms, page));
+  const response = await fetch(getSearchUniteLegaleRoute(searchTerms, page));
 
   if (response.status === 404) {
     return undefined;
@@ -100,43 +136,12 @@ const getResults = async (
     total_results,
     total_pages,
     unite_legale: (unite_legale || []).map((result: any) => {
-      const {
-        siren,
-        siret,
-        nic,
-        etat_administratif = null,
-        date_creation,
-        activite_principale,
-        latitude,
-        longitude,
-        geo_adresse,
-        nom_raison_sociale,
-        prenom,
-        nom,
-        nature_juridique_entreprise,
-        sigle,
-        nombre_etablissements = 1,
-      } = result;
-
-      //@ts-ignore
       return {
-        siren,
-        siret,
-        nic,
-        etat_administratif,
-        nombre_etablissements,
-        date_creation,
-        activite_principale,
-        latitude,
-        longitude,
-        geo_adresse,
-        libelle_activite_principale: libelleFromCodeNaf(activite_principale),
-        l1_normalisee: getCompanyName(
-          nom_raison_sociale,
-          prenom,
-          nom,
-          nature_juridique_entreprise,
-          sigle
+        ...result,
+        nombre_etablissements: result.nombre_etablissements || 1,
+        page_path: generatePagePath(result.nom_complet, result.siren),
+        libelle_activite_principale: libelleFromCodeNaf(
+          result.activite_principale
         ),
       } as ResultUniteLegale;
     }),

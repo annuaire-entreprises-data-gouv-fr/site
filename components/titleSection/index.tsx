@@ -8,7 +8,7 @@ interface IProps {
   siren: string;
   siret: string;
   name: string;
-  isSiege?: boolean;
+  isOpen?: boolean;
   isEntreprise?: boolean; // true if entreprise, false if etablissement
   isNonDiffusible?: boolean;
 }
@@ -51,7 +51,7 @@ const Title: React.FC<IProps> = ({
   siren,
   siret,
   name,
-  isSiege,
+  isOpen,
   isEntreprise,
   isNonDiffusible = false,
 }) => (
@@ -72,7 +72,7 @@ const Title: React.FC<IProps> = ({
             <Tag>non diffusible</Tag>
           ) : (
             <>
-              {isSiege ? (
+              {isOpen ? (
                 <Tag className="open">en activité</Tag>
               ) : (
                 <Tag className="closed">fermé</Tag>

@@ -6,7 +6,6 @@ import constants from '../constants';
 import { GetServerSideProps } from 'next';
 import { logErrorInSentry } from '../utils/sentry';
 
-
 const ServerError: React.FC<{ statusCode: number }> = () => (
   <Page small={true} title="Une erreur est survenue">
     <div className="content-container">
@@ -60,6 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
+
 
 
 export default ServerError;

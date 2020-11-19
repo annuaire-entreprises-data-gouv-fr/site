@@ -2,7 +2,6 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { getCompanyTitle } from '../../utils/helper';
 import {
   Etablissement,
   getEtablissement,
@@ -24,7 +23,7 @@ const EtablissementPage: React.FC<IProps> = ({
 }) => (
   <Page
     small={true}
-    title={`Page etablissement - ${getCompanyTitle(uniteLegale)} - ${
+    title={`Page etablissement - ${uniteLegale.nom_complet} - ${
       etablissement.siret
     }`}
   >
@@ -33,12 +32,12 @@ const EtablissementPage: React.FC<IProps> = ({
         name={
           uniteLegale.statut_diffusion === 'N'
             ? 'Nom inconnu'
-            : getCompanyTitle(uniteLegale)
+            : uniteLegale.nom_complet
         }
         siren={uniteLegale.siren}
         siret={etablissement.siret}
         isEntreprise={false}
-        isSiege={etablissement.etat_administratif === 'A'}
+        isOpen={etablissement.etat_administratif === 'A'}
         isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
       />
       <EtablissementSection

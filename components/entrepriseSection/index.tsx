@@ -8,7 +8,6 @@ import {
 } from '../../utils/formatting';
 import {
   fullLibelleFromCodeNaf,
-  getCompanyTitle,
   libelleFromCategoriesJuridiques,
 } from '../../utils/helper';
 import HorizontalSeparator from '../horizontalSeparator';
@@ -21,7 +20,7 @@ const entrepriseDescription = (uniteLegale: UniteLegale) => {
   } else
     return (
       <>
-        <>L’entreprise {getCompanyTitle(uniteLegale)}</>{' '}
+        <>L’entreprise {uniteLegale.nom_complet}</>{' '}
         {uniteLegale.categorie_juridique && (
           <>
             est une{' '}

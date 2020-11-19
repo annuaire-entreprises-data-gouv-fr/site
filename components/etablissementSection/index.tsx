@@ -10,7 +10,6 @@ import {
 import {
   fullAdress,
   fullLibelleFromCodeNaf,
-  getCompanyTitle,
   libelleFromCategoriesJuridiques,
   managingDirector,
   tvaIntracommunautaire,
@@ -45,7 +44,7 @@ const EtablissementSection: React.FC<{
             )}{' '}
             de l’entreprise{' '}
             <a href={`/entreprise/${uniteLegale.siren}`}>
-              {getCompanyTitle(uniteLegale)}
+              {uniteLegale.nom_complet}
             </a>
             ,
             {uniteLegale.etablissements &&

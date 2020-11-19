@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { getCompanyTitle, isSirenOrSiret } from '../../utils/helper';
+import { isSirenOrSiret } from '../../utils/helper';
 import { getUniteLegale, UniteLegale } from '../../model';
 import redirect, { redirectSirenIntrouvable } from '../../utils/redirect';
 import { Section } from '../../components/section';
@@ -25,13 +25,13 @@ const EtablissementPage: React.FC<IProps> = ({
 }) => (
   <Page
     small={true}
-    title={`Justificatif d’immatricuation - ${getCompanyTitle(uniteLegale)}`}
+    title={`Justificatif d’immatricuation - ${uniteLegale.nom_complet}`}
     noIndex={true}
   >
     <div className="content-container">
       <TitleImmatriculation
         siren={uniteLegale.siren}
-        name={getCompanyTitle(uniteLegale)}
+        name={uniteLegale.nom_complet}
       />
       {hrefRNCS && (
         <Section title="Cette entreprise est immatriculée au RCS">
