@@ -13,7 +13,7 @@ import EtablissementListeSection from '../../components/etablissementListeSectio
 import Title from '../../components/titleSection';
 import redirect, { redirectSirenIntrouvable } from '../../utils/redirect';
 import EtablissementSection from '../../components/etablissementSection';
-import StructuredDataFAQ from '../../components/structuredDataFAQ';
+import StructuredData from '../../components/structuredData';
 import Annonces from '../../components/annonces';
 import logErrorInSentry from '../../utils/sentry';
 
@@ -33,7 +33,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
       uniteLegale.siren
     }`}
   >
-    <StructuredDataFAQ data={structuredData(uniteLegale)} />
+    <StructuredData data={structuredData(uniteLegale)} />
     <div className="content-container">
       <Title
         name={
@@ -50,10 +50,10 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
       <EntrepriseSection uniteLegale={uniteLegale} />
       {uniteLegale.etablissement_siege && (
         <EtablissementSection
-            uniteLegale={uniteLegale}
-            etablissement={uniteLegale.etablissement_siege}
-            usedInEntreprisePage={true}
-          />
+          uniteLegale={uniteLegale}
+          etablissement={uniteLegale.etablissement_siege}
+          usedInEntreprisePage={true}
+        />
       )}
       <Annonces siren={uniteLegale.siren} />
       <EtablissementListeSection uniteLegale={uniteLegale} />

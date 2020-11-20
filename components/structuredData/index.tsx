@@ -17,7 +17,7 @@ const generateFAQuestion = (question: string, answer: string): String => {
       "@type": "Answer",
       "text": "${answer}"
     }
-  }`;;;
+  }`;
 };
 
 interface IProps {
