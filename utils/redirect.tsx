@@ -1,7 +1,7 @@
 
 import { ServerResponse } from 'http';
 import { isSirenOrSiret } from './helper';
-import { logMessageInSentry } from '../utils/sentry';
+import logErrorInSentry from '../utils/sentry';
 
 const redirectToCorrectPage = (res: ServerResponse, siretOrSiren: string) => {
   if (siretOrSiren.length === 9) {
@@ -16,7 +16,7 @@ export const redirectSirenIntrouvable = (
   siren: string
 ) => {
   redirect(res, `/introuvable/siren?q=${siren}`);
-  logMessageInSentry(`Siren ${siren} not found`);
+  logErrorInSentry(new Error(`Siren ${siren} not found`));
 };
 
 export const redirectSiretIntrouvable = (
@@ -24,7 +24,7 @@ export const redirectSiretIntrouvable = (
   siret: string
 ) => {
   redirect(res, `/introuvable/siret?q=${siret}`);
-  logMessageInSentry(`Siret ${siret} not found`);
+  logErrorInSentry(new Error(`Siret ${siret} not found`));
 };
 
 export const redirectIfSiretOrSiren = (res: ServerResponse, term: string) => {

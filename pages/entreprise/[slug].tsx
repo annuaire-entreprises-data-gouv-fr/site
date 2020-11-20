@@ -13,8 +13,9 @@ import EtablissementListeSection from '../../components/etablissementListeSectio
 import Title from '../../components/titleSection';
 import redirect, { redirectSirenIntrouvable } from '../../utils/redirect';
 import EtablissementSection from '../../components/etablissementSection';
-import StructuredDataFAQ from '../../components/StructuredDataFAQ';
+import StructuredDataFAQ from '../../components/structuredDataFAQ';
 import Annonces from '../../components/annonces';
+import logErrorInSentry from '../../utils/sentry';
 
 const structuredData = (uniteLegale:UniteLegale) => [
     ["Quel est le SIREN de cette entreprise?",`SIREN : ${uniteLegale.siren}`]
@@ -47,11 +48,13 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
       />
       <EntrepriseSection uniteLegale={uniteLegale} />
-      <EtablissementSection
-        uniteLegale={uniteLegale}
-        etablissement={uniteLegale.etablissement_siege}
-        usedInEntreprisePage={true}
-      />
+      {uniteLegale.etablissement_siege && (
+        <EtablissementSection
+            uniteLegale={uniteLegale}
+            etablissement={uniteLegale.etablissement_siege}
+            usedInEntreprisePage={true}
+          />
+      )}
       <Annonces siren={uniteLegale.siren} />
       <EtablissementListeSection uniteLegale={uniteLegale} />
     </div>
@@ -79,13 +82,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siren = extractSiren(slug);
 
   if (!isSirenOrSiret(siren)) {
+    logErrorInSentry(new Error(`Not Found ${slug}`))
     redirect(context.res, '/404');
+    return { props: {} };
   }
 
   const uniteLegale = await getUniteLegale(siren as string);
 
   if  (!uniteLegale || uniteLegale.statut_diffusion === 'N') {
+    logErrorInSentry(new Error(`Non diffusible ${siren}`))
     redirectSirenIntrouvable(context.res, siren as string);
+    return { props: {} };
   }
 
   return {
