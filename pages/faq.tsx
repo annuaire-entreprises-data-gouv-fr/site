@@ -4,16 +4,25 @@ import ButtonLink from '../components/button';
 
 import Page from '../layouts';
 
-const QuestionBlock: React.FC<PropsWithChildren<{title:string}>> = ({children, title}) => {
-  const id = (Math.random()).toString(16).substring(7);
-  return (<>
-    <div className="content-container container">
-      <input type="checkbox" value="selected" id={id} className="toggle__input"/>
-      <label htmlFor={id}>{title}</label>
-      <div>{children}</div>
-    </div>
+const QuestionBlock: React.FC<PropsWithChildren<{ title: string }>> = ({
+  children,
+  title,
+}) => {
+  const id = Math.random().toString(16).substring(7);
+  return (
+    <>
+      <div className="content-container container">
+        <input
+          type="checkbox"
+          value="selected"
+          id={id}
+          className="toggle__input"
+        />
+        <label htmlFor={id}>{title}</label>
+        <div>{children}</div>
+      </div>
 
-    <style jsx>{`
+      <style jsx>{`
       div.container > div {
         max-height:0;
         overflow:hidden;
@@ -65,13 +74,15 @@ const QuestionBlock: React.FC<PropsWithChildren<{title:string}>> = ({children, t
 
       @media only screen and (min-width: 1px) and (max-width: 600px) {
         label {
-          padding: 10px 0;
+          padding: 20px 0;
+          font-size:1.2rem;
+          line-height:1.4rem;
         }
       }
     `}</style>
-  </>
-)}
-
+    </>
+  );
+};
 
 const FAQ: React.FC<{}> = () => (
   <Page small={true} title="FAQ de l’Annuaire des Entreprises">
@@ -140,6 +151,14 @@ const FAQ: React.FC<{}> = () => (
           <p>
             Les données du moteur de recherche sont mises à jour tous les mois.
           </p>
+        </QuestionBlock>
+        <QuestionBlock title="Comment puis-je utiliser ces données dans mon site internet ?">
+          <p>Consultez la page “Comment ça marche&nbsp;?”</p>
+          <div className="layout-center">
+            <ButtonLink href="/comment-ca-marche" alt>
+              Comment ça marche ?
+            </ButtonLink>
+          </div>
         </QuestionBlock>
         <QuestionBlock title="Je ne trouve pas la réponse a ma question">
           <p>Vous pouvez nous poser une question directement :</p>

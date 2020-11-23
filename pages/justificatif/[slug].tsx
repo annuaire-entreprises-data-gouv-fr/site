@@ -91,7 +91,8 @@ const EtablissementPage: React.FC<IProps> = ({
         flex-direction: row;
       }
       .logo-wrapper {
-        width: 30%;
+        padding-left: 20px;
+        width: calc(30% - 20px);
       }
       .logo-wrapper svg {
         width: 100%;
@@ -105,6 +106,7 @@ const EtablissementPage: React.FC<IProps> = ({
         }
         .logo-wrapper {
           margin: 20px auto 0;
+          padding: 0;
         }
       }
     `}</style>
