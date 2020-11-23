@@ -45,7 +45,7 @@ export const Question: React.FC<{}> = () => (
       }
       @media only screen and (min-width: 1px) and (max-width: 600px) {
         .question-bottom-right {
-          bottom: 70px;
+          bottom: 20px;
           right: 10px;
         }
         .question-bottom-right > a {
