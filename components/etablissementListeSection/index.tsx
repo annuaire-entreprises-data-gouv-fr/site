@@ -11,11 +11,11 @@ const EtablissementListeSection: React.FC<{
 }> = ({ uniteLegale }) => {
   const closedEtablissement = uniteLegale.etablissements.filter(
     (etab) => etab.etat_administratif !== 'A'
-  ).length
+  ).length;
   return (
     <div id="etablissements">
       <p>
-        Cette entreprise possède {uniteLegale.etablissements.length}{' '}
+        Cette société possède {uniteLegale.etablissements.length}{' '}
         établissement(s)
         {closedEtablissement > 0 && (
           <>
@@ -30,7 +30,7 @@ const EtablissementListeSection: React.FC<{
           </>
         )}
       </p>
-      <Section title="La liste des établissements de l'entreprise">
+      <Section title="La liste des établissements de la société">
         <FullTable
           head={['SIRET', 'Activité (code NAF)', 'Adresse', 'Statut']}
           body={uniteLegale.etablissements.map((elem: any) => [

@@ -13,7 +13,11 @@ const Annonces: React.FC<{
           Vous pouvez consulter les annonces publiées par cette entreprise au
           bulletin officiel
         </div>
-        <ButtonLink alt href={`https://www.bodacc.fr/annonce/liste/${siren}`}>
+        <ButtonLink
+          alt
+          target="_blank"
+          href={`https://www.bodacc.fr/annonce/liste/${siren}`}
+        >
           ⇢ Voir les annonces (BODACC)
         </ButtonLink>
       </div>

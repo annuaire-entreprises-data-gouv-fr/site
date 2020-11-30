@@ -18,7 +18,7 @@ const ResultList: React.FC<IProps> = ({ resultList, compact = false }) => (
         <div className="title">{unite_legale.l1_normalisee.toLowerCase()}</div>
         <div>{unite_legale.libelle_activite_principale}</div>
         <div className="adress">
-          {unite_legale.geo_adresse}{' '}
+          {unite_legale.geo_adresse || 'Adresse inconnue'}{' '}
           <Tag>
             {`${unite_legale.nombre_etablissements} établissement${
               unite_legale.nombre_etablissements > 1 ? 's' : ''

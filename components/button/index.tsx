@@ -6,6 +6,7 @@ interface IProps {
   type?: 'submit' | null;
   alt?: boolean;
   target?: '_blank';
+  nofollow?: Boolean;
 }
 
 const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
@@ -14,16 +15,18 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   small = false,
   alt = false,
   target = '',
+  nofollow = false,
 }) => (
   <div id="button">
     {!href ? (
-      <button type="submit">
-        {children}
-      </button>
+      <button type="submit">{children}</button>
     ) : (
       <a
         target={target}
-        rel={target === '_blank' ? 'noopener noreferrer' : ''}
+        rel={
+          (target === '_blank' ? 'noopener noreferrer' : '') +
+          (nofollow ? 'nofollow' : '')
+        }
         href={href}
       >
         {children}
@@ -33,7 +36,8 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
       div {
         display: block;
       }
-      a, button {
+      a,
+      button {
         text-align: center;
         outline: none;
         transition: none;

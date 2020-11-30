@@ -43,7 +43,7 @@ const EtablissementSection: React.FC<{
             ) : (
               <> un établissement secondaire</>
             )}{' '}
-            de l’entreprise{' '}
+            de la société{' '}
             <a href={`/entreprise/${uniteLegale.siren}`}>
               {getCompanyTitle(uniteLegale)}
             </a>
@@ -125,7 +125,7 @@ const EtablissementSection: React.FC<{
       <Section title="Les informations de contact">
         <TwoColumnTable
           body={[
-            ['Gérant', managingDirector(uniteLegale) || ''],
+            // ['Gérant', managingDirector(uniteLegale) || ''],
             ['Adresse', fullAdress(etablissement)],
           ]}
         />
@@ -136,6 +136,7 @@ const EtablissementSection: React.FC<{
           <ButtonLink
             href={`/rechercher/carte?siret=${etablissement.siret}`}
             alt
+            nofollow
           >
             {pin}
             Afficher sur la carte
@@ -151,7 +152,7 @@ const EtablissementSection: React.FC<{
       }
       .section-wrapper .map {
         background-color: #fff;
-        max-height: 160px;
+        max-height: 130px;
         overflow: hidden;
         width: 220px;
         flex-shrink: 0;

@@ -4,7 +4,7 @@ const Footer = () => (
   <>
     <div className="footer layout-center">
       <div>
-        🇫🇷 ・ un service du gouvernement français ・{' '}
+        🇫🇷 ・ un service de l’Etat français ・{' '}
         <a
           href="https://etalab.gouv.fr"
           rel="noopener noreferrer"
@@ -35,7 +35,6 @@ const Footer = () => (
         display: table-cell;
         vertical-align: middle;
       }
-
     `}</style>
   </>
 );

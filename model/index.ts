@@ -4,7 +4,7 @@ import {
   isSirenOrSiret,
   libelleFromCodeNaf,
 } from '../utils/helper';
-import routes, {getResultUniteLegalePage } from './routes';
+import routes, { getResultUniteLegalePage } from './routes';
 
 export interface Etablissement {
   siren: string;
@@ -40,11 +40,11 @@ export interface ResultUniteLegale {
   categorie_juridique: string;
   nombre_etablissements: number;
   date_creation: string;
-  libelle_activite_principale:string;
-  l1_normalisee:string;
-  geo_adresse:string;
-  latitude:string;
-  longitude:string;
+  libelle_activite_principale: string;
+  l1_normalisee: string;
+  geo_adresse: string;
+  latitude: string;
+  longitude: string;
 }
 
 export interface SearchResults {

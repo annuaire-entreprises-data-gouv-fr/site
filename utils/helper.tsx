@@ -1,7 +1,6 @@
 import { concatNames } from './formatting';
 import { categoriesJuridiques } from './categoriesJuridiques';
 import { codesNaf } from './codesNAF';
-import { removeInvisibleChar } from '../model/routes';
 
 export const tvaIntracommunautaire = (siren: number | string) => {
   const sirenNum = typeof siren === 'string' ? parseInt(siren, 10) : siren;
@@ -17,7 +16,7 @@ export const managingDirector = (uniteLegale: any) => {
 export const libelleFromCodeNaf = (codeNaf: string) => {
   const formattedNaf = (codeNaf || '').replace(/[.-]/g, '');
   //@ts-ignore
-  return codesNaf[formattedNaf];
+  return codesNaf[formattedNaf] || 'Activité inconnue';
 };
 
 export const fullLibelleFromCodeNaf = (activite_principale: string) =>
@@ -35,12 +34,14 @@ export const fullAdress = (etablissement: any) => {
     !etablissement.geo_l4 &&
     !etablissement.code_postal
   ) {
-    return '';
+    return 'Adresse inconnue';
   }
 
-  return `${etablissement.geo_l4 || ''} ${etablissement.code_postal || ''} ${
-    etablissement.libelle_commune || ''
-  }`;
+  const adresse = `${etablissement.geo_l4 || ''} ${
+    etablissement.code_postal || ''
+  } ${etablissement.libelle_commune || ''}`;
+
+  return adresse || 'Adresse inconnue';
 };
 
 export const getCompanyTitle = (uniteLegale: any) => {
@@ -71,7 +72,7 @@ export const getCompanyName = (
     if (!denomination && !prenom && !nom && !sigle) {
       return 'Nom inconnu';
     }
-    return `${denomination} ${sigle ? `(${sigle})` :  ''}`;
+    return `${denomination} ${sigle ? `(${sigle})` : ''}`;
   }
 };
 
