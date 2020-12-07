@@ -1,43 +1,39 @@
-import SiretNotFound from '../pages/introuvable/siret';
-
 const castDate = (date: string | Date) =>
   typeof date === 'string' ? new Date(date) : date;
 
+const longDateOptions = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
 
-
-  const longDateOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  };
-
-  export const formatDateLong = (date: string | Date) =>
+export const formatDateLong = (date: string | Date) =>
   date
-  ? new Intl.DateTimeFormat('fr-FR', longDateOptions).format(castDate(date))
-  : undefined;
+    ? new Intl.DateTimeFormat('fr-FR', longDateOptions).format(castDate(date))
+    : undefined;
 
-  export const formatDate = (date: string | Date) =>
+export const formatDate = (date: string | Date) =>
   date ? new Intl.DateTimeFormat('fr-FR').format(castDate(date)) : undefined;
 
-  export const capitalize = (str: string) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
+export const capitalize = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
 
-  export const concatNames = (firstName: string, lastName: string) => {
-    const last = (lastName || '').toUpperCase();
-    const first = capitalize(firstName || '');
+export const concatNames = (firstName: string, lastName: string) => {
+  const last = (lastName || '').toUpperCase();
+  const first = capitalize(firstName || '');
 
-    if (first !== '' && last !== '') return `${first} ${last}`;
-    else return last;
-  };
+  if (first !== '' && last !== '') return `${first} ${last}`;
+  else return last;
+};
 
-  export const formatNumbersFr = (numberAsString = '') => {
-    return numberAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
-  };
+export const formatNumbersFr = (numberAsString = '') => {
+  return numberAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
+};
 
-  export const formatSiret = (siret = '') => {
-    return siret.replace(/(\d{3})/g, '$1 ').replace(/(\s)(?=(\d{2})$)/g, '');
-  };
+export const formatSiret = (siret = '') => {
+  return siret.replace(/(\d{3})/g, '$1 ').replace(/(\s)(?=(\d{2})$)/g, '');
+};
 
 export const generatePagePath = (name: string, siretOrSiren: string) => {
   return `${(name || '').replace(' ', '-')}-${siretOrSiren}`;

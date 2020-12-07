@@ -28,7 +28,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
     title={`Page entreprise - ${uniteLegale.nom_complet} - ${uniteLegale.siren}`}
     canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.page_path}`}
   >
-    <StructuredData data={structuredData(uniteLegale)} />
+    {/* <StructuredData data={structuredData(uniteLegale)} /> */}
     <div className="content-container">
       <Title
         name={
@@ -39,7 +39,7 @@ const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         siren={uniteLegale.siren}
         siret={etablissement.siret}
         isEntreprise={true}
-        isOpen={etablissement.etat_administratif === 'A'}
+        isOpen={etablissement.etat_administratif_etablissement === 'A'}
         isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
       />
       <EntrepriseSection uniteLegale={uniteLegale} />

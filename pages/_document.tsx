@@ -1,5 +1,5 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 const INIT_STYLE = `
 html {
@@ -123,7 +123,7 @@ class CustomHead extends Head {
 class DevDocument extends Document {
   render() {
     return (
-      <html lang="fr">
+      <Html>
         <Head>
           <style
             dangerouslySetInnerHTML={{
@@ -136,7 +136,7 @@ class DevDocument extends Document {
           <NextScript />
           {COPY_TO_CLIPBOARD}
         </body>
-      </html>
+      </Html>
     );
   }
 }
@@ -144,7 +144,7 @@ class DevDocument extends Document {
 class StaticDocument extends Document {
   render() {
     return (
-      <html lang="fr">
+      <Html lang="fr">
         <CustomHead>
           {/* Standard Meta */}
 
@@ -209,7 +209,7 @@ class StaticDocument extends Document {
 
           {COPY_TO_CLIPBOARD}
         </body>
-      </html>
+      </Html>
     );
   }
 }

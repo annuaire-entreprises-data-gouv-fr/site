@@ -1,6 +1,6 @@
 import React from 'react';
 import { UniteLegale } from '../../model';
-import { formatDateLong, formatSiret } from '../../utils/formatting';
+import { formatSiret } from '../../utils/formatting';
 import { libelleFromCodeNaf } from '../../utils/helper';
 import { Section } from '../section';
 import { FullTable } from '../table/full';
@@ -10,7 +10,7 @@ const EtablissementListeSection: React.FC<{
   uniteLegale: UniteLegale;
 }> = ({ uniteLegale }) => {
   const closedEtablissement = uniteLegale.etablissements.filter(
-    (etab) => etab.etat_administratif !== 'A'
+    (etab) => etab.etat_administratif_etablissement !== 'A'
   ).length;
   return (
     <div id="etablissements">
@@ -23,7 +23,7 @@ const EtablissementListeSection: React.FC<{
             dont{' '}
             {
               uniteLegale.etablissements.filter(
-                (etab) => etab.etat_administratif !== 'A'
+                (etab) => etab.etat_administratif_etablissement !== 'A'
               ).length
             }{' '}
             fermés.
@@ -50,7 +50,7 @@ const EtablissementListeSection: React.FC<{
                   {elem.etablissement_siege === 'true' ? (
                     <Tag>siège social</Tag>
                   ) : null}
-                  {elem.etat_administratif === 'A' ? null : (
+                  {elem.etat_administratif_etablissement === 'A' ? null : (
                     <Tag className="closed">fermé</Tag>
                   )}
                 </>

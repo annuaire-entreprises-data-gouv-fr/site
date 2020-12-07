@@ -1,5 +1,6 @@
 import React from 'react';
 import { Etablissement, ResultUniteLegale } from '../../model';
+import { capitalize } from '../../utils/formatting';
 import { Tag } from '../tag';
 
 interface IProps {
@@ -16,7 +17,7 @@ const ResultList: React.FC<IProps> = ({ resultList, compact = false }) => (
         className="dont-apply-link-style"
       >
         <div className="title">
-          {unite_legale.nom_complet}
+          {capitalize(unite_legale.nom_complet)}
           {unite_legale.etat_administratif_etablissement !== 'A' && (
             <Tag className="closed">fermée</Tag>
           )}

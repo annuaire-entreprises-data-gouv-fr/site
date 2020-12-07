@@ -9,6 +9,8 @@ import {
 import {
   fullLibelleFromCodeNaf,
   libelleFromCategoriesJuridiques,
+  libelleFromCodeEffectif,
+  tvaIntracommunautaire,
 } from '../../utils/helper';
 import HorizontalSeparator from '../horizontalSeparator';
 import { Section } from '../section';
@@ -68,13 +70,17 @@ const EntrepriseSection: React.FC<{
         body={[
           ['SIREN', formatNumbersFr(uniteLegale.siren)],
           [
-            'Siège social',
+            'SIRET du siège social',
             uniteLegale.etablissement_siege &&
               uniteLegale.etablissement_siege.siret &&
               formatSiret((uniteLegale.etablissement_siege || {}).siret),
           ],
           [
-            'Activité principale (siège)',
+            'N° TVA Intracommunautaire',
+            formatNumbersFr(tvaIntracommunautaire(uniteLegale.siren)),
+          ],
+          [
+            'Activité principale (siège social)',
             fullLibelleFromCodeNaf(
               (uniteLegale.etablissement_siege || {}).activite_principale
             ),
@@ -84,6 +90,16 @@ const EntrepriseSection: React.FC<{
             libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique),
           ],
           ['Date de création', formatDate(uniteLegale.date_creation)],
+          [
+            'Date de dernière mise à jour',
+            formatDate(uniteLegale.date_mise_a_jour),
+          ],
+          [
+            'Tranche effectif salarié de l’entreprise',
+            libelleFromCodeEffectif(
+              uniteLegale.tranche_effectif_salarie_entreprise
+            ),
+          ],
         ]}
       />
     </Section>

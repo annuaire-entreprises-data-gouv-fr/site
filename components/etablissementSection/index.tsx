@@ -11,7 +11,7 @@ import {
   fullAdress,
   fullLibelleFromCodeNaf,
   libelleFromCategoriesJuridiques,
-  managingDirector,
+  libelleFromCodeEffectif,
   tvaIntracommunautaire,
 } from '../../utils/helper';
 import ButtonLink from '../button';
@@ -31,7 +31,7 @@ const EtablissementSection: React.FC<{
           <p>
             Cet établissement est
             <b>
-              {etablissement.etat_administratif === 'A'
+              {etablissement.etat_administratif_etablissement === 'A'
                 ? ' en activité'
                 : ' fermé'}
               .
@@ -114,9 +114,18 @@ const EtablissementSection: React.FC<{
           ['Date de création', formatDate(etablissement.date_creation)],
           [
             'Date de dernière mise à jour',
-            formatDate(etablissement.date_dernier_traitement),
+            formatDate(
+              etablissement.date_mise_a_jour ||
+                etablissement.date_dernier_traitement
+            ),
           ],
-          ['Tranche d’effectif salarié', etablissement.tranche_effectifs || ''],
+          [
+            'Tranche d’effectif salarié',
+            libelleFromCodeEffectif(
+              etablissement.tranche_effectifs ||
+                etablissement.tranche_effectif_salarie
+            ),
+          ],
         ]}
       />
     </Section>

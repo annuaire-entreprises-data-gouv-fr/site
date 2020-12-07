@@ -1,6 +1,7 @@
 import { concatNames } from './formatting';
 import { categoriesJuridiques } from './categoriesJuridiques';
 import { codesNaf } from './codesNAF';
+import { codesEffectifs } from './codeEffectifs';
 
 export const tvaIntracommunautaire = (siren: number | string) => {
   const sirenNum = typeof siren === 'string' ? parseInt(siren, 10) : siren;
@@ -17,6 +18,10 @@ export const libelleFromCodeNaf = (codeNaf: string) => {
   const formattedNaf = (codeNaf || '').replace(/[.-]/g, '');
   //@ts-ignore
   return codesNaf[formattedNaf] || 'Activité inconnue';
+};
+export const libelleFromCodeEffectif = (codeEffectif: string) => {
+  //@ts-ignore
+  return codesEffectifs[codeEffectif] || null;
 };
 
 export const fullLibelleFromCodeNaf = (activite_principale: string) =>

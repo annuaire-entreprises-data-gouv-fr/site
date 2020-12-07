@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { formatNumbersFr, formatSiret } from '../../utils/formatting';
+import {
+  capitalize,
+  formatNumbersFr,
+  formatSiret,
+} from '../../utils/formatting';
 import { Tag } from '../../components/tag';
 import ButtonLink from '../button';
 
@@ -58,7 +62,7 @@ const Title: React.FC<IProps> = ({
   <div className="header-section">
     <div className="title">
       <h1>
-        <a href={`/entreprise/${siren}`}>{name}</a>
+        <a href={`/entreprise/${siren}`}>{capitalize(name)}</a>
       </h1>
       <div>
         <span>fiche {isEntreprise ? 'société ' : 'etablissement '}</span>

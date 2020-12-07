@@ -23,9 +23,7 @@ const EtablissementPage: React.FC<IProps> = ({
 }) => (
   <Page
     small={true}
-    title={`Page etablissement - ${uniteLegale.nom_complet} - ${
-      etablissement.siret
-    }`}
+    title={`Page etablissement - ${uniteLegale.nom_complet} - ${etablissement.siret}`}
   >
     <div className="content-container">
       <Title
@@ -37,7 +35,10 @@ const EtablissementPage: React.FC<IProps> = ({
         siren={uniteLegale.siren}
         siret={etablissement.siret}
         isEntreprise={false}
-        isOpen={etablissement.etat_administratif === 'A'}
+        isOpen={
+          (etablissement.etat_administratif_etablissement ||
+            etablissement.etat_administratif) === 'A'
+        }
         isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
       />
       <EtablissementSection

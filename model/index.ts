@@ -1,36 +1,29 @@
-<<<<<<< HEAD
 import { generatePagePath } from '../utils/formatting';
-import { isSirenOrSiret, libelleFromCodeNaf } from '../utils/helper';
-import logErrorInSentry from '../utils/sentry';
 import routes, {
   getSearchUniteLegaleRoute,
   getUniteLegaleRoute,
 } from './routes';
-=======
-import {
-  getCompanyName,
-  getCompanyTitle,
-  isSirenOrSiret,
-  libelleFromCodeNaf,
-} from '../utils/helper';
-import routes, { getResultUniteLegalePage } from './routes';
->>>>>>> main
+import { isSirenOrSiret, libelleFromCodeNaf } from '../utils/helper';
 
 export interface Etablissement {
   siren: string;
   siret: string;
   nic: string;
-  etat_administratif: 'A' | null;
+  etat_administratif_etablissement: 'A' | null;
   date_creation: string;
   geo_adresse: string;
   etablissement_siege: string;
   activite_principale: string;
-  date_dernier_traitement: string;
+  date_mise_a_jour: string;
   libelle_activite_principale: string;
   is_siege: '1' | null;
-  tranche_effectifs: string;
+  tranche_effectif_salarie: string;
   latitude: string;
   longitude: string;
+  // old API
+  tranche_effectifs: string;
+  etat_administratif: 'A' | null;
+  date_dernier_traitement: string;
 }
 
 export interface UniteLegale {
@@ -39,9 +32,11 @@ export interface UniteLegale {
   categorie_juridique: string;
   etablissements: Etablissement[];
   date_creation: string;
+  date_mise_a_jour: string;
   statut_diffusion: string;
   nom_complet: string;
   page_path: string;
+  tranche_effectif_salarie_entreprise: string;
 }
 
 export interface ResultUniteLegale {
@@ -78,7 +73,6 @@ const getUniteLegale = async (
     return undefined;
   }
   const uniteLegale = (await response.json())[0].unite_legale[0];
-  console.log(uniteLegale);
 
   if (!uniteLegale) {
     return undefined;
@@ -97,25 +91,30 @@ const getUniteLegale = async (
   }
 
   const {
-    statut_diffusion = null,
     date_creation,
+    date_mise_a_jour,
+    tranche_effectif_salarie_entreprise,
+  } = uniteLegale;
+
+  const {
+    statut_diffusion = null,
     nature_juridique_entreprise = null,
-    tranche_effectif_salarie_entreprise = null,
     nombre_etablissements,
-    nom_complet = 'hello',
+    nom_complet = null,
   } = siege;
 
   const unite_legale = {
     siren,
     etablissement_siege: siege,
     categorie_juridique: nature_juridique_entreprise,
-    tranche_effectifs: tranche_effectif_salarie_entreprise,
-    date_creation,
+    tranche_effectif_salarie_entreprise,
     etablissements: listOfEtablissement,
     statut_diffusion,
     nombre_etablissements,
     nom_complet,
     page_path: generatePagePath(nom_complet, siren),
+    date_creation,
+    date_mise_a_jour,
   } as UniteLegale;
 
   return unite_legale;
