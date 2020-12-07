@@ -74,6 +74,7 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
         top: 0;
         background-color: #fff;
         z-index: 10;
+        height: 70px;
       }
       .header-small > div {
         display: flex;
@@ -117,7 +118,8 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
         }
       }
       @media only screen and (min-width: 1px) and (max-width: 600px) {
-        .header-small > div.content-container > a {
+        .header-small > div.content-container > a,
+        .about {
           display: none;
         }
       }

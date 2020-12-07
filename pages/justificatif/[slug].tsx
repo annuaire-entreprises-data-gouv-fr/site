@@ -34,10 +34,10 @@ const EtablissementPage: React.FC<IProps> = ({
         name={uniteLegale.nom_complet}
       />
       {hrefRNCS && (
-        <Section title="Cette entreprise est immatriculée au RCS">
+        <Section title="Cette société est immatriculée au RCS">
           <div className="description">
             <div>
-              Cette entreprise possède une fiche d'immatriculation sur le{' '}
+              Cette société possède une fiche d'immatriculation sur le{' '}
               <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
               liste les entreprises enregistrées auprès des Greffes des
               tribunaux de commerce et centralisées par l'INPI.
@@ -57,10 +57,10 @@ const EtablissementPage: React.FC<IProps> = ({
       )}
       {hrefRNCS && hrefRNM && <HorizontalSeparator />}
       {hrefRNM && (
-        <Section title="Cette entreprise est immatriculée au RM">
+        <Section title="Cette société est immatriculée au RM">
           <div className="description">
             <div>
-              Cette entreprise possède une fiche d'immatriculation sur le{' '}
+              Cette société possède une fiche d'immatriculation sur le{' '}
               <b>Répertoire National des Métiers (RNM)</b> qui liste les
               entreprises artisanales enreigstrées auprès des Chambres des
               Métiers et de l'Artisanat (CMA France).
@@ -91,7 +91,8 @@ const EtablissementPage: React.FC<IProps> = ({
         flex-direction: row;
       }
       .logo-wrapper {
-        width: 30%;
+        padding-left: 20px;
+        width: calc(30% - 20px);
       }
       .logo-wrapper svg {
         width: 100%;
@@ -105,6 +106,7 @@ const EtablissementPage: React.FC<IProps> = ({
         }
         .logo-wrapper {
           margin: 20px auto 0;
+          padding: 0;
         }
       }
     `}</style>

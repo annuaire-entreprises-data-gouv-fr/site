@@ -1,7 +1,6 @@
 import { concatNames } from './formatting';
 import { categoriesJuridiques } from './categoriesJuridiques';
 import { codesNaf } from './codesNAF';
-import { removeInvisibleChar } from '../model/routes';
 
 export const tvaIntracommunautaire = (siren: number | string) => {
   const sirenNum = typeof siren === 'string' ? parseInt(siren, 10) : siren;
@@ -35,12 +34,14 @@ export const fullAdress = (etablissement: any) => {
     !etablissement.geo_l4 &&
     !etablissement.code_postal
   ) {
-    return '';
+    return 'Adresse inconnue';
   }
 
-  return `${etablissement.geo_l4 || ''} ${etablissement.code_postal || ''} ${
-    etablissement.libelle_commune || ''
-  }`;
+  const adresse = `${etablissement.geo_l4 || ''} ${
+    etablissement.code_postal || ''
+  } ${etablissement.libelle_commune || ''}`;
+
+  return adresse || 'Adresse inconnue';
 };
 
 export const isSirenOrSiret = (str: string) => {

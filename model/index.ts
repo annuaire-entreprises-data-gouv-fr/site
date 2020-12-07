@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { generatePagePath } from '../utils/formatting';
 import { isSirenOrSiret, libelleFromCodeNaf } from '../utils/helper';
 import logErrorInSentry from '../utils/sentry';
@@ -5,6 +6,15 @@ import routes, {
   getSearchUniteLegaleRoute,
   getUniteLegaleRoute,
 } from './routes';
+=======
+import {
+  getCompanyName,
+  getCompanyTitle,
+  isSirenOrSiret,
+  libelleFromCodeNaf,
+} from '../utils/helper';
+import routes, { getResultUniteLegalePage } from './routes';
+>>>>>>> main
 
 export interface Etablissement {
   siren: string;

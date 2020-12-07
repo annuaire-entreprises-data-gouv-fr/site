@@ -20,7 +20,7 @@ const entrepriseDescription = (uniteLegale: UniteLegale) => {
   } else
     return (
       <>
-        <>L’entreprise {uniteLegale.nom_complet}</>{' '}
+        <>La société {uniteLegale.nom_complet}</>{' '}
         {uniteLegale.categorie_juridique && (
           <>
             est une{' '}
@@ -48,7 +48,7 @@ const entrepriseDescription = (uniteLegale: UniteLegale) => {
         .{' '}
         {uniteLegale.etablissements && (
           <>
-            Cette entreprise possède{' '}
+            Cette société possède{' '}
             <a href={`#etablissements`}>
               {uniteLegale.etablissements.length} établissement(s).
             </a>
@@ -63,7 +63,7 @@ const EntrepriseSection: React.FC<{
 }> = ({ uniteLegale }) => (
   <div id="entreprise">
     <p>{entrepriseDescription(uniteLegale)}</p>
-    <Section title={`Les informations sur cette entreprise`}>
+    <Section title={`Les informations sur cette société`}>
       <TwoColumnTable
         body={[
           ['SIREN', formatNumbersFr(uniteLegale.siren)],

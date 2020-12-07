@@ -16,14 +16,14 @@ interface IProps {
 const CtaForTitle: React.FC<{ siren: string }> = ({ siren }) => (
   <div className="wrapper">
     <div className="cta">
-      <ButtonLink href={`/justificatif/${siren}`}>
+      <ButtonLink href={`/justificatif/${siren}`} nofollow>
         ⇢ Voir le justificatif d'immatriculation au RCS ou au RM
       </ButtonLink>
     </div>
-    <div className="separator"     />
+    <div className="separator" />
     <style jsx>{`
       .separator {
-        height:5px;
+        height: 5px;
       }
 
       .cta {
@@ -61,7 +61,7 @@ const Title: React.FC<IProps> = ({
         <a href={`/entreprise/${siren}`}>{name}</a>
       </h1>
       <div>
-        <span>fiche {isEntreprise ? 'entreprise ' : 'etablissement '}</span>
+        <span>fiche {isEntreprise ? 'société ' : 'etablissement '}</span>
         {!isEntreprise ? (
           <span>‣ {formatSiret(siret)}</span>
         ) : (
@@ -91,7 +91,7 @@ const Title: React.FC<IProps> = ({
         justify-content: space-between;
         align-items: center;
         flex-direction: row;
-        margin-bottom:    20px;
+        margin-bottom: 20px;
       }
 
       .title {
@@ -134,21 +134,20 @@ const Title: React.FC<IProps> = ({
   </div>
 );
 
-
-export const TitleImmatriculation: React.FC<{siren:string, name:string}> = ({
-  siren,
-  name,
-}) => (
+export const TitleImmatriculation: React.FC<{
+  siren: string;
+  name: string;
+}> = ({ siren, name }) => (
   <div className="header-section">
     <div className="title">
       <h1>
         <a href={`/entreprise/${siren}`}>{name}</a>
       </h1>
       <div>
-          <span>justificatif d’immatriculation{' '}</span>
-          <span>‣ {formatNumbersFr(siren)}</span>
-          </div>
+        <span>justificatif d’immatriculation </span>
+        <span>‣ {formatNumbersFr(siren)}</span>
       </div>
+    </div>
 
     <style jsx>{`
       .header-section {
@@ -156,7 +155,7 @@ export const TitleImmatriculation: React.FC<{siren:string, name:string}> = ({
         justify-content: space-between;
         align-items: center;
         flex-direction: row;
-        margin-bottom:    20px;
+        margin-bottom: 20px;
       }
 
       .title {
