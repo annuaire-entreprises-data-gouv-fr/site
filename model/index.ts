@@ -67,16 +67,23 @@ const getUniteLegale = async (
   if (response.status === 404) {
     return undefined;
   }
-  const listOfEtablissement = await response.json();
+  const uniteLegale = (await response.json())[0].unite_legale[0];
+  console.log(uniteLegale);
 
-  if (!listOfEtablissement || listOfEtablissement.length === 0) {
+  if (!uniteLegale) {
     return undefined;
   }
 
-  const siege = listOfEtablissement[0];
+  const siege = uniteLegale.etablissement_siege[0];
 
   if (!siege.is_siege) {
-    throw new Error(`First Etablissement is not siege : ${siren}`);
+    throw new Error(`Etablissement siege is not siege : ${siren}`);
+  }
+
+  const listOfEtablissement = uniteLegale.etablissements;
+
+  if (!listOfEtablissement || listOfEtablissement.length === 0) {
+    throw new Error(`No etablissements found`);
   }
 
   const {
