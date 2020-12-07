@@ -1,7 +1,6 @@
 const routes = {
   etablissement: `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/`,
-  uniteLegale: `https://entreprise.data.gouv.fr/api/sirene/v3/unites_legales/`,
-  recherche: `https://entreprise.data.gouv.fr/api/sirene/v1/full_text/`,
+  uniteLegale: `http://recherche.entreprise.dataeng.etalab.studio/siren`,
   rechercheUniteLegale: `http://recherche.entreprise.dataeng.etalab.studio/search`,
 };
 
@@ -20,8 +19,6 @@ export const removeInvisibleChar = (searchTerm: string) => {
   return searchTerm.normalize('NFD').replace(re, '');
 };
 
-
-
 export const parsePage = (pageAsString: string) => {
   try {
     return parseInt(pageAsString, 10);
@@ -30,17 +27,14 @@ export const parsePage = (pageAsString: string) => {
   }
 };
 
-export const getResultPage = (searchterm: string, page: string) => {
-  return `${routes.recherche}${encodeURI(
-    escapeSearchTerm(searchterm)
-  )}?per_page=10&page=${parsePage(page) || 1}`;
+export const getUniteLegaleRoute = (siren: string) => {
+  return `${routes.uniteLegale}?q=${siren}`;
 };
 
-export const getResultUniteLegalePage = (searchterm: string, page: string) => {
-  const route = `${routes.rechercheUniteLegale}?per_page=10&page=${parsePage(page) || 1}&q=${encodeURI(
-    escapeSearchTerm(searchterm)
-  )}`
-  return route;
+export const getSearchUniteLegaleRoute = (searchterm: string, page: string) => {
+  return `${routes.rechercheUniteLegale}?per_page=10&page=${
+    parsePage(page) || 1
+  }&q=${encodeURI(escapeSearchTerm(searchterm))}`;
 };
 
 export default routes;

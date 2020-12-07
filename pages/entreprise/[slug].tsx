@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { getCompanyTitle, isSirenOrSiret } from '../../utils/helper';
+import { isSirenOrSiret } from '../../utils/helper';
 import { Etablissement, getUniteLegale, UniteLegale } from '../../model';
 import EntrepriseSection from '../../components/entrepriseSection';
 import EtablissementListeSection from '../../components/etablissementListeSection';
@@ -25,22 +25,21 @@ interface IProps {
 const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   <Page
     small={true}
-    title={`Page entreprise - ${getCompanyTitle(uniteLegale)} - ${
-      uniteLegale.siren
-    }`}
+    title={`Page entreprise - ${uniteLegale.nom_complet} - ${uniteLegale.siren}`}
+    canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.page_path}`}
   >
-    <StructuredData data={structuredData(uniteLegale)} />
+    {/* <StructuredData data={structuredData(uniteLegale)} /> */}
     <div className="content-container">
       <Title
         name={
           uniteLegale.statut_diffusion === 'N'
             ? 'Nom inconnu'
-            : getCompanyTitle(uniteLegale)
+            : uniteLegale.nom_complet
         }
         siren={uniteLegale.siren}
         siret={etablissement.siret}
         isEntreprise={true}
-        isSiege={etablissement.etat_administratif === 'A'}
+        isOpen={etablissement.etat_administratif_etablissement === 'A'}
         isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
       />
       <EntrepriseSection uniteLegale={uniteLegale} />

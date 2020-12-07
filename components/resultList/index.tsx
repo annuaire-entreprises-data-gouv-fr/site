@@ -1,5 +1,6 @@
 import React from 'react';
 import { Etablissement, ResultUniteLegale } from '../../model';
+import { capitalize } from '../../utils/formatting';
 import { Tag } from '../tag';
 
 interface IProps {
@@ -11,11 +12,16 @@ const ResultList: React.FC<IProps> = ({ resultList, compact = false }) => (
   <div className="results-list">
     {resultList.map((unite_legale) => (
       <a
-        href={`/entreprise/${unite_legale.siren}`}
+        href={`/entreprise/${unite_legale.page_path}`}
         key={unite_legale.siret}
         className="dont-apply-link-style"
       >
-        <div className="title">{unite_legale.l1_normalisee.toLowerCase()}</div>
+        <div className="title">
+          {capitalize(unite_legale.nom_complet)}
+          {unite_legale.etat_administratif_etablissement !== 'A' && (
+            <Tag className="closed">fermée</Tag>
+          )}
+        </div>
         <div>{unite_legale.libelle_activite_principale}</div>
         <div className="adress">
           {unite_legale.geo_adresse || 'Adresse inconnue'}{' '}

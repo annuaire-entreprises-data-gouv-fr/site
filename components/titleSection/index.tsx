@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { formatNumbersFr, formatSiret } from '../../utils/formatting';
+import {
+  capitalize,
+  formatNumbersFr,
+  formatSiret,
+} from '../../utils/formatting';
 import { Tag } from '../../components/tag';
 import ButtonLink from '../button';
 
@@ -8,7 +12,7 @@ interface IProps {
   siren: string;
   siret: string;
   name: string;
-  isSiege?: boolean;
+  isOpen?: boolean;
   isEntreprise?: boolean; // true if entreprise, false if etablissement
   isNonDiffusible?: boolean;
 }
@@ -51,14 +55,14 @@ const Title: React.FC<IProps> = ({
   siren,
   siret,
   name,
-  isSiege,
+  isOpen,
   isEntreprise,
   isNonDiffusible = false,
 }) => (
   <div className="header-section">
     <div className="title">
       <h1>
-        <a href={`/entreprise/${siren}`}>{name}</a>
+        <a href={`/entreprise/${siren}`}>{capitalize(name)}</a>
       </h1>
       <div>
         <span>fiche {isEntreprise ? 'société ' : 'etablissement '}</span>
@@ -72,7 +76,7 @@ const Title: React.FC<IProps> = ({
             <Tag>non diffusible</Tag>
           ) : (
             <>
-              {isSiege ? (
+              {isOpen ? (
                 <Tag className="open">en activité</Tag>
               ) : (
                 <Tag className="closed">fermé</Tag>

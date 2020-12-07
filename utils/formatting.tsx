@@ -34,3 +34,7 @@ export const formatNumbersFr = (numberAsString = '') => {
 export const formatSiret = (siret = '') => {
   return siret.replace(/(\d{3})/g, '$1 ').replace(/(\s)(?=(\d{2})$)/g, '');
 };
+
+export const generatePagePath = (name: string, siretOrSiren: string) => {
+  return `${(name || '').replace(' ', '-')}-${siretOrSiren}`;
+};

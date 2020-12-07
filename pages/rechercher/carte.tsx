@@ -127,7 +127,7 @@ const About: React.FC<IProps> = ({
                         var uniteLegale = uniteLegales[i];
 
                         var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-                        '<div><b>'+uniteLegale.l1_normalisee+'</b></div>'+
+                        '<div><b>'+uniteLegale.nom_complet+'</b></div>'+
                         '<div><i>'+uniteLegale.geo_adresse+'</i></div>'+
                         '<div><a href="/entreprise/'+uniteLegale.siren+'">⇢ Accéder a la fiche entreprise</a></div>'
                         );

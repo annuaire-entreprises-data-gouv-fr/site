@@ -1,6 +1,7 @@
 import { concatNames } from './formatting';
 import { categoriesJuridiques } from './categoriesJuridiques';
 import { codesNaf } from './codesNAF';
+import { codesEffectifs } from './codeEffectifs';
 
 export const tvaIntracommunautaire = (siren: number | string) => {
   const sirenNum = typeof siren === 'string' ? parseInt(siren, 10) : siren;
@@ -17,6 +18,10 @@ export const libelleFromCodeNaf = (codeNaf: string) => {
   const formattedNaf = (codeNaf || '').replace(/[.-]/g, '');
   //@ts-ignore
   return codesNaf[formattedNaf] || 'Activité inconnue';
+};
+export const libelleFromCodeEffectif = (codeEffectif: string) => {
+  //@ts-ignore
+  return codesEffectifs[codeEffectif] || null;
 };
 
 export const fullLibelleFromCodeNaf = (activite_principale: string) =>
@@ -42,38 +47,6 @@ export const fullAdress = (etablissement: any) => {
   } ${etablissement.libelle_commune || ''}`;
 
   return adresse || 'Adresse inconnue';
-};
-
-export const getCompanyTitle = (uniteLegale: any) => {
-  const isEntrepreneur = uniteLegale.categorie_juridique === '1000';
-  if (isEntrepreneur) {
-    return concatNames(uniteLegale.prenom_1, uniteLegale.nom);
-  } else {
-    if (!uniteLegale.denomination && !uniteLegale.sigle) {
-      return 'Nom inconnu';
-    }
-    return `${uniteLegale.denomination} ${
-      uniteLegale.sigle ? `(${uniteLegale.sigle})` : ''
-    }`;
-  }
-};
-
-export const getCompanyName = (
-  denomination: string,
-  prenom: string,
-  nom: string,
-  categorie_juridique: string,
-  sigle?: string
-) => {
-  const isEntrepreneur = categorie_juridique === '1000';
-  if (isEntrepreneur) {
-    return concatNames(prenom, nom);
-  } else {
-    if (!denomination && !prenom && !nom && !sigle) {
-      return 'Nom inconnu';
-    }
-    return `${denomination} ${sigle ? `(${sigle})` : ''}`;
-  }
 };
 
 export const isSirenOrSiret = (str: string) => {
