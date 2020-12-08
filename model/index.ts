@@ -69,16 +69,8 @@ const getUniteLegale = async (siren: string) => {
   if (!uniteLegale) {
     const uniteLegaleInsee = await getUniteLegaleInsee(siren);
 
-    if (!uniteLegaleInsee || !uniteLegaleInsee.statut_diffusion) {
+    if (!uniteLegaleInsee) {
       return undefined;
-    }
-
-    if (uniteLegaleInsee.statut_diffusion === 'N') {
-      return {
-        ...uniteLegaleInsee,
-        nom_complet: 'Nom inconnu',
-        page_path: siren,
-      };
     }
     return uniteLegaleInsee;
   }

@@ -33,7 +33,7 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
         </div>
       ) : (
         <div className="results-counter">
-          Aucune société n’a été trouvée pour “<b>{searchTerm}</b>”
+          Aucune entité n’a été trouvée pour “<b>{searchTerm}</b>”
           <p>
             Nous vous suggérons de vérifier l’orthographe du nom, du SIRET, ou
             de l'adresse que vous avez utilisé.
@@ -90,7 +90,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const escapedTerm = removeInvisibleChar(searchTerm);
 
   redirectIfSiretOrSiren(context.res, escapedTerm);
-
 
   //@ts-ignore
   const page = parsePage(context.query.page || '1') - 1;

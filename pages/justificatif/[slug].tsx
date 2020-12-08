@@ -31,16 +31,16 @@ const EtablissementPage: React.FC<IProps> = ({
   >
     <div className="content-container">
       <br />
-      <a href={`/entreprise/${uniteLegale.siren}`}>← Fiche société</a>
+      <a href={`/entreprise/${uniteLegale.siren}`}>← Fiche entité</a>
       <TitleImmatriculation
         siren={uniteLegale.siren}
         name={uniteLegale.nom_complet}
       />
       {hrefRNCS && (
-        <Section title="Cette société est immatriculée au RCS">
+        <Section title="Cette entité est immatriculée au RCS">
           <div className="description">
             <div>
-              Cette société possède une fiche d'immatriculation sur le{' '}
+              Cette entité possède une fiche d'immatriculation sur le{' '}
               <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
               liste les entreprises enregistrées auprès des Greffes des
               tribunaux de commerce et centralisées par l'INPI.
@@ -60,10 +60,10 @@ const EtablissementPage: React.FC<IProps> = ({
       )}
       {hrefRNCS && hrefRNM && <HorizontalSeparator />}
       {hrefRNM && (
-        <Section title="Cette société est immatriculée au RM">
+        <Section title="Cette entité est immatriculée au RM">
           <div className="description">
             <div>
-              Cette société possède une fiche d'immatriculation sur le{' '}
+              Cette entité possède une fiche d'immatriculation sur le{' '}
               <b>Répertoire National des Métiers (RNM)</b> qui liste les
               entreprises artisanales enreigstrées auprès des Chambres des
               Métiers et de l'Artisanat (CMA France).

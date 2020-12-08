@@ -15,7 +15,7 @@ const EtablissementListeSection: React.FC<{
   return (
     <div id="etablissements">
       <p>
-        Cette société possède {uniteLegale.etablissements.length}{' '}
+        Cette entité possède {uniteLegale.etablissements.length}{' '}
         établissement(s)
         {closedEtablissement > 0 && (
           <>
@@ -30,7 +30,7 @@ const EtablissementListeSection: React.FC<{
           </>
         )}
       </p>
-      <Section title="La liste des établissements de la société">
+      <Section title="La liste des établissements de l’entité">
         <FullTable
           head={['SIRET', 'Activité (code NAF)', 'Adresse', 'Statut']}
           body={uniteLegale.etablissements.map((elem: any) => [

@@ -65,7 +65,7 @@ const Title: React.FC<IProps> = ({
         <a href={`/entreprise/${siren}`}>{capitalize(name)}</a>
       </h1>
       <div>
-        <span>fiche {isEntreprise ? 'société ' : 'etablissement '}</span>
+        <span>fiche {isEntreprise ? 'entité ' : 'etablissement '}</span>
         {!isEntreprise ? (
           <span>‣ {formatSiret(siret)}</span>
         ) : (

@@ -18,7 +18,7 @@ import { TwoColumnTable } from '../table/simple';
 
 const entrepriseDescription = (uniteLegale: UniteLegale) => (
   <>
-    <>La société {uniteLegale.nom_complet}</>{' '}
+    <>L’entité {uniteLegale.nom_complet}</>{' '}
     {uniteLegale.categorie_juridique && (
       <>
         est une{' '}
@@ -46,7 +46,7 @@ const entrepriseDescription = (uniteLegale: UniteLegale) => (
     .{' '}
     {uniteLegale.etablissements && (
       <>
-        Cette société possède{' '}
+        Cette entité possède{' '}
         <a href={`#etablissements`}>
           {uniteLegale.etablissements.length} établissement(s).
         </a>
@@ -60,7 +60,7 @@ const EntrepriseSection: React.FC<{
 }> = ({ uniteLegale }) => (
   <div id="entreprise">
     <p>{entrepriseDescription(uniteLegale)}</p>
-    <Section title={`Les informations sur cette société`}>
+    <Section title={`Les informations sur cette entité`}>
       <TwoColumnTable
         body={[
           ['SIREN', formatNumbersFr(uniteLegale.siren)],

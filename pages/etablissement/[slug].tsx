@@ -30,7 +30,7 @@ const EtablissementPage: React.FC<IProps> = ({
   >
     <div className="content-container">
       <br />
-      <a href={`/entreprise/${uniteLegale.siren}`}>← Fiche société</a>
+      <a href={`/entreprise/${uniteLegale.siren}`}>← Fiche entité</a>
       <Title
         name={uniteLegale.nom_complet}
         siren={uniteLegale.siren}
@@ -71,6 +71,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siretOrSiren = slug;
 
   const etablissement = await getEtablissement(siretOrSiren as string);
+
+  console.log(etablissement);
 
   if (!etablissement) {
     redirectSiretIntrouvable(context.res, siretOrSiren as string);

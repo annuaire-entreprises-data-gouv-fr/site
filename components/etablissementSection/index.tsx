@@ -42,7 +42,7 @@ const EtablissementSection: React.FC<{
             ) : (
               <> un établissement secondaire</>
             )}{' '}
-            de la société{' '}
+            de l’entité{' '}
             <a href={`/entreprise/${uniteLegale.siren}`}>
               {uniteLegale.nom_complet}
             </a>
