@@ -18,7 +18,6 @@ const SITE_URL =
 const SITE_DESCRIPTION =
   'Recherchez une entreprise par son nom, son sigle, son SIRET et accédez à ses informations publiques détenues par l’administration';
 
-
 const Meta: React.FC<IProps> = ({
   title = SITE_NAME,
   description = '',

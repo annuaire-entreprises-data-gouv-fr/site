@@ -90,7 +90,7 @@ const EntrepriseSection: React.FC<{
             formatDate(uniteLegale.date_mise_a_jour),
           ],
           [
-            'Tranche effectif salarié de l’entreprise',
+            'Tranche effectif salarié de l’entité',
             libelleFromCodeEffectif(
               uniteLegale.tranche_effectif_salarie_entreprise
             ),
