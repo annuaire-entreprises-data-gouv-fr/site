@@ -83,6 +83,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (!uniteLegale) {
     redirectSiretIntrouvable(context.res, siretOrSiren as string);
+    return { props: {} };
   }
 
   return {

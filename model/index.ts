@@ -67,12 +67,7 @@ const getUniteLegale = async (siren: string) => {
   const uniteLegale = await getUniteLegaleSirenOuverte(siren);
 
   if (!uniteLegale) {
-    const uniteLegaleInsee = await getUniteLegaleInsee(siren);
-
-    if (!uniteLegaleInsee) {
-      return undefined;
-    }
-    return uniteLegaleInsee;
+    return await getUniteLegaleInsee(siren);
   }
   return uniteLegale;
 };
