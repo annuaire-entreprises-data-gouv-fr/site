@@ -11,27 +11,28 @@ import {
 import EtablissementSection from '../../components/etablissementSection';
 import Title from '../../components/titleSection';
 import { redirectSiretIntrouvable } from '../../utils/redirect';
+import NonDiffusible from '../../components/nonDiffusible';
 
 interface IProps {
   etablissement: Etablissement;
   uniteLegale: UniteLegale;
+  isNonDiffusible?: boolean;
 }
 
 const EtablissementPage: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
+  isNonDiffusible = false,
 }) => (
   <Page
     small={true}
     title={`Page etablissement - ${uniteLegale.nom_complet} - ${etablissement.siret}`}
   >
     <div className="content-container">
+      <br />
+      <a href={`/entreprise/${uniteLegale.siren}`}>← Fiche société</a>
       <Title
-        name={
-          uniteLegale.statut_diffusion === 'N'
-            ? 'Nom inconnu'
-            : uniteLegale.nom_complet
-        }
+        name={uniteLegale.nom_complet}
         siren={uniteLegale.siren}
         siret={etablissement.siret}
         isEntreprise={false}
@@ -39,12 +40,21 @@ const EtablissementPage: React.FC<IProps> = ({
           (etablissement.etat_administratif_etablissement ||
             etablissement.etat_administratif) === 'A'
         }
-        isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
+        isNonDiffusible={isNonDiffusible}
       />
-      <EtablissementSection
-        etablissement={etablissement}
-        uniteLegale={uniteLegale}
-      />
+      {isNonDiffusible ? (
+        <>
+          <p>
+            Cette entreprise est <b>non-diffusible.</b>
+          </p>
+          <NonDiffusible />
+        </>
+      ) : (
+        <EtablissementSection
+          etablissement={etablissement}
+          uniteLegale={uniteLegale}
+        />
+      )}
     </div>
     <style jsx>{`
       .content-container {
@@ -69,7 +79,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const uniteLegale = await getUniteLegale(etablissement.siren as string);
 
-  if (!uniteLegale || uniteLegale.statut_diffusion === 'N') {
+  if (!uniteLegale) {
     redirectSiretIntrouvable(context.res, siretOrSiren as string);
   }
 
@@ -77,6 +87,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       etablissement,
       uniteLegale,
+      isNonDiffusible: uniteLegale.statut_diffusion === 'N',
     },
   };
 };

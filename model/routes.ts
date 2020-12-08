@@ -2,6 +2,10 @@ const routes = {
   etablissement: `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/`,
   uniteLegale: `http://recherche.entreprise.dataeng.etalab.studio/siren`,
   rechercheUniteLegale: `http://recherche.entreprise.dataeng.etalab.studio/search`,
+  rnmLink: `https://api-rnm.artisanat.fr/v2/entreprises/`,
+  rncsLink: `https://data.inpi.fr/entreprises/`,
+  rncsPrint: `https://data.inpi.fr/print/companies/`,
+  inseeSiren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
 };
 
 export const escapeSearchTerm = (searchTerm: string) => {

@@ -16,49 +16,44 @@ import HorizontalSeparator from '../horizontalSeparator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 
-const entrepriseDescription = (uniteLegale: UniteLegale) => {
-  if (uniteLegale.statut_diffusion === 'N') {
-    return <></>;
-  } else
-    return (
+const entrepriseDescription = (uniteLegale: UniteLegale) => (
+  <>
+    <>La société {uniteLegale.nom_complet}</>{' '}
+    {uniteLegale.categorie_juridique && (
       <>
-        <>La société {uniteLegale.nom_complet}</>{' '}
-        {uniteLegale.categorie_juridique && (
-          <>
-            est une{' '}
-            <b>
-              {libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique)}
-            </b>{' '}
-          </>
-        )}
-        {uniteLegale.date_creation && (
-          <>
-            créee le <b>{formatDateLong(uniteLegale.date_creation)}</b>{' '}
-          </>
-        )}
-        {uniteLegale.etablissement_siege &&
-          uniteLegale.etablissement_siege.geo_adresse && (
-            <>
-              et dont le siège est domicilié au{' '}
-              <a
-                href={`/rechercher/carte?siret=${uniteLegale.etablissement_siege.siret}`}
-              >
-                {uniteLegale.etablissement_siege.geo_adresse}
-              </a>
-            </>
-          )}
-        .{' '}
-        {uniteLegale.etablissements && (
-          <>
-            Cette société possède{' '}
-            <a href={`#etablissements`}>
-              {uniteLegale.etablissements.length} établissement(s).
-            </a>
-          </>
-        )}
+        est une{' '}
+        <b>
+          {libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique)}
+        </b>{' '}
       </>
-    );
-};
+    )}
+    {uniteLegale.date_creation && (
+      <>
+        créee le <b>{formatDateLong(uniteLegale.date_creation)}</b>{' '}
+      </>
+    )}
+    {uniteLegale.etablissement_siege &&
+      uniteLegale.etablissement_siege.geo_adresse && (
+        <>
+          et dont le siège est domicilié au{' '}
+          <a
+            href={`/rechercher/carte?siret=${uniteLegale.etablissement_siege.siret}`}
+          >
+            {uniteLegale.etablissement_siege.geo_adresse}
+          </a>
+        </>
+      )}
+    .{' '}
+    {uniteLegale.etablissements && (
+      <>
+        Cette société possède{' '}
+        <a href={`#etablissements`}>
+          {uniteLegale.etablissements.length} établissement(s).
+        </a>
+      </>
+    )}
+  </>
+);
 
 const EntrepriseSection: React.FC<{
   uniteLegale: UniteLegale;

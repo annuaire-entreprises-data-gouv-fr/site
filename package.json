@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@gouvfr/design-system": "^0.2.0",
+    "client-oauth2": "^4.3.3",
     "next": "^10.0.1",
     "next-seo": "^4.7.3",
     "raven": "^2.6.4",

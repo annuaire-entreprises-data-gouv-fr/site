@@ -107,7 +107,7 @@ const Title: React.FC<IProps> = ({
       }
       .title h1 {
         margin: 0;
-        line-height: 2.3rem;
+        line-height: 2.5rem;
       }
       .title h1 > a {
         margin: 0;
@@ -145,7 +145,7 @@ export const TitleImmatriculation: React.FC<{
   <div className="header-section">
     <div className="title">
       <h1>
-        <a href={`/entreprise/${siren}`}>{name}</a>
+        <a href={`/entreprise/${siren}`}>{capitalize(name)}</a>
       </h1>
       <div>
         <span>justificatif d’immatriculation </span>
@@ -171,7 +171,7 @@ export const TitleImmatriculation: React.FC<{
       }
       .title h1 {
         margin: 0;
-        line-height: 2rem;
+        line-height: 2.5rem;
       }
       .title h1 > a {
         margin: 0;
