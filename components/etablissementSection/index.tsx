@@ -31,7 +31,8 @@ const EtablissementSection: React.FC<{
           <p>
             Cet établissement est
             <b>
-              {etablissement.etat_administratif_etablissement === 'A'
+              {(etablissement.etat_administratif_etablissement ||
+                etablissement.etat_administratif) === 'A'
                 ? ' en activité'
                 : ' fermé'}
               .

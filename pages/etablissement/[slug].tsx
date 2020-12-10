@@ -41,6 +41,10 @@ const EtablissementPage: React.FC<IProps> = ({
             etablissement.etat_administratif) === 'A'
         }
         isNonDiffusible={isNonDiffusible}
+        isSiege={
+          !!etablissement.is_siege ||
+          etablissement.etablissement_siege === 'true'
+        }
       />
       {isNonDiffusible ? (
         <>
@@ -71,8 +75,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siretOrSiren = slug;
 
   const etablissement = await getEtablissement(siretOrSiren as string);
-
-  console.log(etablissement);
 
   if (!etablissement) {
     redirectSiretIntrouvable(context.res, siretOrSiren as string);

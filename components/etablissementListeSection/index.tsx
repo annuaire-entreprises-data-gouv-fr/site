@@ -47,9 +47,7 @@ const EtablissementListeSection: React.FC<{
                 <Tag>non-diffusible</Tag>
               ) : (
                 <>
-                  {elem.etablissement_siege === 'true' ? (
-                    <Tag>siège social</Tag>
-                  ) : null}
+                  {elem.is_siege ? <Tag>siège social</Tag> : null}
                   {elem.etat_administratif_etablissement === 'A' ? null : (
                     <Tag className="closed">fermé</Tag>
                   )}

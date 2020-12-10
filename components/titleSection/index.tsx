@@ -15,6 +15,7 @@ interface IProps {
   isOpen?: boolean;
   isEntreprise?: boolean; // true if entreprise, false if etablissement
   isNonDiffusible?: boolean;
+  isSiege?: boolean;
 }
 
 const CtaForTitle: React.FC<{ siren: string }> = ({ siren }) => (
@@ -58,6 +59,7 @@ const Title: React.FC<IProps> = ({
   isOpen,
   isEntreprise,
   isNonDiffusible = false,
+  isSiege = false,
 }) => (
   <div className="header-section">
     <div className="title">
@@ -83,6 +85,7 @@ const Title: React.FC<IProps> = ({
               )}
             </>
           )}
+          {isSiege && <Tag>siège social</Tag>}
         </span>
       </div>
     </div>
