@@ -36,5 +36,5 @@ export const formatSiret = (siret = '') => {
 };
 
 export const generatePagePath = (name: string, siretOrSiren: string) => {
-  return `${(name || '').replace(' ', '-')}-${siretOrSiren}`;
+  return `${(name || '').replace(/ /g, '-')}-${siretOrSiren}`;
 };
