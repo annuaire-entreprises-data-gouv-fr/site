@@ -10,7 +10,7 @@ const redirectToCorrectPage = (res: ServerResponse, siretOrSiren: string) => {
   }
 };
 
-export const redirectPageNotFound = (res: ServerResponse, msg) => {
+export const redirectPageNotFound = (res: ServerResponse, msg: string) => {
   redirect(res, '/404');
   logErrorInSentry(new Error(`Not Found - ${msg}`));
 };
