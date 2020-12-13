@@ -7,7 +7,11 @@ import { Etablissement, getUniteLegale, UniteLegale } from '../../model';
 import EntrepriseSection from '../../components/entrepriseSection';
 import EtablissementListeSection from '../../components/etablissementListeSection';
 import Title from '../../components/titleSection';
-import redirect, { redirectSirenIntrouvable } from '../../utils/redirect';
+import redirect, {
+  redirectIfSiretOrSiren,
+  redirectPageNotFound,
+  redirectSirenIntrouvable,
+} from '../../utils/redirect';
 import EtablissementSection from '../../components/etablissementSection';
 import StructuredData from '../../components/structuredData';
 import Annonces from '../../components/annonces';
@@ -89,9 +93,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const siren = extractSiren(slug);
 
+  // does not match a siren
   if (!isSirenOrSiret(siren)) {
-    logErrorInSentry(new Error(`Not Found ${slug}`));
-    redirect(context.res, '/404');
+    redirectPageNotFound(context.res, slug);
     return { props: {} };
   }
 

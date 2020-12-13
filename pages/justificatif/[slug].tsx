@@ -4,7 +4,10 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { isSirenOrSiret } from '../../utils/helper';
 import { getUniteLegale, UniteLegale } from '../../model';
-import redirect, { redirectSirenIntrouvable } from '../../utils/redirect';
+import redirect, {
+  redirectPageNotFound,
+  redirectSirenIntrouvable,
+} from '../../utils/redirect';
 import { Section } from '../../components/section';
 import ButtonLink from '../../components/button';
 import HorizontalSeparator from '../../components/horizontalSeparator';
@@ -123,7 +126,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siren = slug ? slug.substr(slug.length - 9) : slug;
 
   if (!isSirenOrSiret(siren)) {
-    redirect(context.res, '/404');
+    redirectPageNotFound(context.res, siren);
+    return { props: {} };
   }
 
   // siege social
@@ -131,6 +135,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (!uniteLegale) {
     redirectSirenIntrouvable(context.res, siren);
+    return { props: {} };
   }
 
   const { rnmLink, rncsLink, rncsPrint } = routes;
@@ -152,6 +157,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (!hrefRNCS && !hrefRNM) {
     redirect(context.res, `/introuvable/immatriculation?q=${siren}`);
+    return { props: {} };
   }
 
   return {

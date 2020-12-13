@@ -1,5 +1,6 @@
 import { generatePagePath } from '../utils/formatting';
 import { isSirenOrSiret, libelleFromCodeNaf } from '../utils/helper';
+import logErrorInSentry from '../utils/sentry';
 import {
   ResultUniteLegale,
   UniteLegale,
@@ -22,7 +23,12 @@ const getUniteLegaleSirenOuverte = async (
     return undefined;
   }
   try {
-    const uniteLegale = (await response.json())[0].unite_legale[0];
+    const result = (await response.json())[0].unite_legale;
+    if (!result) {
+      return undefined;
+    }
+
+    const uniteLegale = result[0];
 
     if (!uniteLegale) {
       return undefined;
@@ -70,6 +76,7 @@ const getUniteLegaleSirenOuverte = async (
     return unite_legale;
   } catch (e) {
     console.log(e);
+    logErrorInSentry(e);
     return undefined;
   }
 };

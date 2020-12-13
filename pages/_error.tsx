@@ -14,9 +14,6 @@ const ServerError: React.FC<{ statusCode: number }> = () => (
       </div>
       <p>
         Notre équipe a été notifiée et est en train de chercher la cause de
-
-
-
         cette erreur afin qu'elle ne se reproduise plus.
       </p>
       <p>
@@ -34,22 +31,7 @@ const ServerError: React.FC<{ statusCode: number }> = () => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const statusCode = context.res ? context.res.statusCode : 404;
 
-  let cache: any[] = [];
-
-  // oooh this is dirty
-  const request = JSON.stringify(context.req, (key, value) => {
-    if (typeof value === 'object' && value !== null) {
-      // Duplicate reference found, discard key
-      if (cache.includes(value)) return;
-
-      // Store value in our collection
-      cache.push(value);
-    }
-    return value;
-  });
-  cache = [];
-
-  const msg = `Url : ${context.req.url} \r\nUser Agent: ${context.req.headers['user-agent']}\r\nRequest: ${request}`;
+  const msg = `Error ${statusCode} - ${context.req.url}`;
 
   logErrorInSentry(msg);
 
@@ -59,7 +41,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
-
-
 
 export default ServerError;

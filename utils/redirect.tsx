@@ -1,5 +1,4 @@
-
-import { ServerResponse } from 'http';
+import { Server, ServerResponse } from 'http';
 import { isSirenOrSiret } from './helper';
 import logErrorInSentry from '../utils/sentry';
 
@@ -9,6 +8,11 @@ const redirectToCorrectPage = (res: ServerResponse, siretOrSiren: string) => {
   } else {
     redirect(res, `/etablissement/${siretOrSiren}`);
   }
+};
+
+export const redirectPageNotFound = (res: ServerResponse, msg) => {
+  redirect(res, '/404');
+  logErrorInSentry(new Error(`Not Found - ${msg}`));
 };
 
 export const redirectSirenIntrouvable = (
