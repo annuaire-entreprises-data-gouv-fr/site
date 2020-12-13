@@ -16,13 +16,20 @@ const inseeAuth = async () => {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
-
-  return response.json();
+  try {
+    return response.json();
+  } catch (e) {
+    logErrorInSentry(response.text());
+    return undefined;
+  }
 };
 
 export const getUniteLegaleInsee = async (siren: string) => {
   try {
     const token = await inseeAuth();
+    if (!token) {
+      return undefined;
+    }
 
     // Return a second API call
     // This one uses the token we received for authentication
