@@ -1,65 +1,6 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-const INIT_STYLE = `
-html {
-  height: 100%;
-}
-
-body {
-  height: 100%;
-  margin: 0;
-}
-
-#__next {
-  height: 100%;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-}
-
-/* open-sans-regular - latin */
-@font-face {
-  font-family: 'Marianne';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/Marianne-Regular.woff2'), url('/fonts/Marianne-Regular.woff') format('woff');
-}
-@font-face {
-  font-family: 'Marianne';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/Marianne-Bold.woff2'), url('/fonts/Marianne-Bold.woff') format('woff');
-}
-
-html,
-body {
-  font-size: 16px;
-  line-height: 24px;
-  color: rgba(0, 0, 0, 0.78);
-}
-
-html,
-body,
-div,
-p,
-span,
-a {
-  font-family: 'Marianne', Arial, sans-serif;
-}
-
-h1,
-h2,
-h3,
-h4, h1 > a {
-  font-family: 'Marianne', Arial, sans-serif;
-}
-`;
-
 const COPY_TO_CLIPBOARD = (
   <script
     dangerouslySetInnerHTML={{
@@ -131,11 +72,6 @@ class DevDocument extends Document {
             rel="stylesheet"
             type="text/css"
           ></link>
-          <style
-            dangerouslySetInnerHTML={{
-              __html: INIT_STYLE,
-            }}
-          />
         </Head>
         <body>
           <Main />
@@ -160,7 +96,7 @@ class StaticDocument extends Document {
             type="text/css"
           ></link>
           <link rel="icon" href="/favicon.ico" />
-          <link
+          {/* <link
             rel="preload"
             href="/fonts/open-sans-v17-latin-700.woff2"
             as="font"
@@ -187,12 +123,7 @@ class StaticDocument extends Document {
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
-          />
-          <style
-            dangerouslySetInnerHTML={{
-              __html: INIT_STYLE,
-            }}
-          />
+          /> */}
         </CustomHead>
 
         <body>

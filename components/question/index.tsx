@@ -15,6 +15,7 @@ export const Question: React.FC<{}> = () => (
         right: 60px;
         bottom: 60px;
         z-index: 100;
+        font-family: sans-serif;
       }
 
       .question-bottom-right > a {
