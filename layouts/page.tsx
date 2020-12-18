@@ -8,10 +8,10 @@ interface IProps {
   small?: boolean;
   currentSearchTerm?: string;
   map?: boolean;
-  title:string;
-  description?:string;
-  canonical?:string;
-  noIndex?:boolean;
+  title: string;
+  description?: string;
+  canonical?: string;
+  noIndex?: boolean;
 }
 
 const Page: React.FC<IProps> = ({
@@ -36,26 +36,16 @@ const Page: React.FC<IProps> = ({
     ) : (
       <Header />
     )}
-    <main>{children}</main>
+    <main className="rf-container">{children}</main>
     <Question />
     <Footer />
     <style global jsx>{`
       #page-layout {
         width: 100%;
       }
-      main {
-        position: relative;
-        display: inline-block;
-        min-height: calc(100vh - ${small ? 136 : 210}px);
-        width: 100%;
-        flex-grow: 1;
-      }
 
-      @media only screen and (min-width: 1px) and (max-width: 900px) {
-        main {
-          min-height: 400px;
-          flex-grow: 0;
-        }
+      main.rf-container {
+        max-width: ${map ? '100%' : ''};
       }
     `}</style>
   </div>

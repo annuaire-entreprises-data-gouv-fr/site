@@ -125,6 +125,12 @@ class DevDocument extends Document {
     return (
       <Html>
         <Head>
+          {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/222331452/Designers */}
+          <link
+            href="/resources/css/all.min.css"
+            rel="stylesheet"
+            type="text/css"
+          ></link>
           <style
             dangerouslySetInnerHTML={{
               __html: INIT_STYLE,
@@ -147,7 +153,12 @@ class StaticDocument extends Document {
       <Html lang="fr">
         <CustomHead>
           {/* Standard Meta */}
-
+          {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/222331452/Designers */}
+          <link
+            href="/resources/css/all.min.css"
+            rel="stylesheet"
+            type="text/css"
+          ></link>
           <link rel="icon" href="/favicon.ico" />
           <link
             rel="preload"
@@ -177,7 +188,6 @@ class StaticDocument extends Document {
             type="font/woff2"
             crossOrigin="anonymous"
           />
-
           <style
             dangerouslySetInnerHTML={{
               __html: INIT_STYLE,

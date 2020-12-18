@@ -27,8 +27,8 @@ const About: React.FC = () => {
             les données ouvertes ou l'open data.
           </p>
           <p>
-            <b>NB :</b>Toutes les données ouvertes (open data) de
-            l'administration sont accessibles sur
+            <b>NB :</b> toutes les données ouvertes (open data) de
+            l'administration sont accessibles sur{' '}
             <a href="https://data.gouv.fr">data.gouv.fr</a>
           </p>
           <h3>Les fiches entreprises et etablissements</h3>
@@ -42,14 +42,14 @@ const About: React.FC = () => {
           </p>
           <h3>Les fiches d'immatriculation</h3>
           <p>
-            Les informations de la fiche d’immatriculation sont issues du
+            Les informations de la fiche d’immatriculation sont issues du{' '}
             <a href="http://data.inpi.fr/">
               Registre National du Commerce et des Sociétés (RNCS)
             </a>{' '}
             ou du{' '}
             <a href="https://rnm.artisanat.fr/">
               Répertoire National des Métiers (RNM)
-            </a>
+            </a>{' '}
             (dans le cas des entreprises artisanales).
           </p>
           <h2>Comment utiliser ces données dans mon site internet ?</h2>
@@ -66,6 +66,7 @@ const About: React.FC = () => {
               <a href="https://www.insee.fr/fr/accueil">INSEE</a>
             </li>
             <li>
+              {' '}
               <a href="https://api-rnm.artisanat.fr/">
                 API Répertoire National des Métiers
               </a>{' '}
@@ -74,6 +75,7 @@ const About: React.FC = () => {
             </li>
             <li>
               <a href="https://api.gouv.fr/les-api/api_inpi">
+                {' '}
                 API Registre National du Commerce et des Sociétés
               </a>{' '}
               : les immatriculations d'entreprises auprès des Greffes de
@@ -106,6 +108,7 @@ const About: React.FC = () => {
               ⇢ En savoir plus sur API Entreprise
             </a>
           </p>
+          <br />
         </div>
       </div>
     </Page>

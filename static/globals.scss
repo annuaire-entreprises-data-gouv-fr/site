@@ -1,20 +1,6 @@
 @import '../constants/colors.scss';
 @import '../constants/layout.scss';
 
-a:not(.dont-apply-link-style) {
-  color: $republicBlue;
-  text-decoration: none;
-  background-color: none;
-  border-radius: 4px;
-  transition: background-color 120ms ease-in-out;
-  padding: 2px;
-
-  &:hover {
-    text-decoration: underline;
-    color: $vividBlue;
-  }
-}
-
 button,
 a {
   cursor: pointer;
@@ -222,7 +208,7 @@ h4 {
 }
 
 p {
-  margin : 5px 0;
+  margin: 5px 0;
 }
 
 @media only screen and (min-width: 1px) and (max-width: 600px) {

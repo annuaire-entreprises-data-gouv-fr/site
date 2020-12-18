@@ -22,7 +22,7 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"
   >
-    <div className="content-container">
+    <div className="result-content-container">
       {response.total_results ? (
         <div className="results-counter">
           {currentPage > 1 && `Page ${currentPage} de `}
@@ -76,8 +76,11 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
     />
 
     <style jsx>{`
+      .result-content-container {
+        min-height: 400px;
+      }
       .results-counter {
-        margin-top: 10px;
+        margin-top: 30px;
         color: rgb(112, 117, 122);
       }
     `}</style>

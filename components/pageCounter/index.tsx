@@ -6,20 +6,20 @@ interface IProps {
   totalPages: number;
 }
 
-const pagesArray = (currentPage:number, totalPages:number) : number[] => {
+const pagesArray = (currentPage: number, totalPages: number): number[] => {
   if (totalPages <= 10) {
     //@ts-ignore
     return [...Array(totalPages).keys()];
   }
 
-  if (currentPage + 5 >= totalPages){
+  if (currentPage + 5 >= totalPages) {
     //@ts-ignore
-    return [...Array(10).keys()].map(i=>i+totalPages - 9);
+    return [...Array(10).keys()].map((i) => i + totalPages - 9);
   }
 
   //@ts-ignore
-  return [...Array(10).keys()].map(i=>i+Math.max(0, currentPage-5))
-}
+  return [...Array(10).keys()].map((i) => i + Math.max(0, currentPage - 5));
+};
 
 const PageCounter: React.FC<IProps> = ({
   currentPage,
@@ -29,9 +29,7 @@ const PageCounter: React.FC<IProps> = ({
   <div className="pages-selector">
     {currentPage !== 1 && (
       <a href={`?terme=${searchTerm}&page=${currentPage - 1}`}>
-
         ⇠ <span>précédente</span>
-
       </a>
     )}
     <div>
@@ -70,13 +68,14 @@ const PageCounter: React.FC<IProps> = ({
         border-radius: 3px;
         padding: 0 5px;
         margin: 0 3px;
+        box-shadow: none;
       }
       .pages-selector > div > a.active {
         border: 1px solid #000091;
       }
       @media only screen and (min-width: 1px) and (max-width: 900px) {
         .pages-selector > a > span {
-          display:none;
+          display: none;
         }
       }
     `}</style>

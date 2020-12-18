@@ -13,7 +13,7 @@ const About: React.FC = () => {
             Retrouvez toutes les informations publiques concernant les
             entreprises françaises
           </h2>
-          <div className="layout-center">
+          <div className="layout-center search">
             <SearchBar />
           </div>
         </div>
@@ -25,21 +25,13 @@ const About: React.FC = () => {
           text-align: center;
         }
 
-        .layout-center {
-          height: 100%;
+        .search {
+          margin-top: 30px;
         }
 
         .centered-search {
-          padding-bottom: 10vh;
-          padding-top: 10vh;
-          flex-grow: 1;
-        }
-        @media only screen and (min-width: 1px) and (max-width: 900px) {
-          .centered-search {
-            width: calc(100% - 30px);
-            flex-grow: 0;
-            padding-top: 30px;
-          }
+          margin-bottom: 32vh;
+          margin-top: 10vh;
         }
       `}</style>
     </Page>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Etablissement, ResultUniteLegale } from '../../model';
+import { ResultUniteLegale } from '../../model';
 import { capitalize } from '../../utils/formatting';
 import { Tag } from '../tag';
 
@@ -36,6 +36,8 @@ const ResultList: React.FC<IProps> = ({ resultList, compact = false }) => (
     <style jsx>{`
       .results-list > a {
         text-decoration: none;
+        border: none;
+        box-shadow: none;
         color: #333;
         margin: ${compact ? '15px' : '25px'} 0;
         display: block;
