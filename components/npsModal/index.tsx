@@ -5,15 +5,15 @@ export const NPSModal: React.FC<{}> = () => (
   <>
     <div id="nps-modal">
       <div className="rf-container">
-        <ButtonLink alt href="/test" target="_blank">
-          👍👎 Quel-est votre avis sur ce site ?
-        </ButtonLink>
+        <a href="https://startupdetat.typeform.com/to/ehxbMpeX" target="_blank">
+          👍👎 Donnez-nous votre avis sur ce site
+        </a>
         {/* @ts-ignore */}
         <div
           dangerouslySetInnerHTML={{
             __html: `
               <button style="font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;" onclick="window.closeNPSModal()">
-                Ne plus afficher ce message ✕
+                <b>Ne plus afficher ce message ✕</b>
               </button>
         `,
           }}
@@ -25,22 +25,16 @@ export const NPSModal: React.FC<{}> = () => (
         display: none;
         padding-top: 15px;
         padding-bottom: 15px;
+        font-size: 0.9rem;
         width: 100%;
         background-color: #fffde6;
         font-family: 'Marianne', sans-serif;
-      }
-      #nps-modal {
-        position: fixed;
-        bottom: 0;
-        border-top: 2px solid #000091;
-        z-index: 100;
+        border-bottom: 2px solid #000091;
       }
       #nps-modal .rf-container {
         display: flex;
+        align-items: center;
         justify-content: space-between;
-      }
-      #nps-modal .rf-container button {
-        f
       }
     `}</style>
   </>

@@ -14,7 +14,7 @@ const About: React.FC = () => {
             entreprises françaises
           </h2>
           <div className="layout-center search">
-            <SearchBar />
+            <SearchBar autoFocus={true} />
           </div>
         </div>
       </div>

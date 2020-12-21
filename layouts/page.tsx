@@ -32,12 +32,12 @@ const Page: React.FC<IProps> = ({
       noIndex={noIndex}
       canonical={canonical}
     />
+    <NPSModal />
     {small ? (
       <HeaderSmall currentSearchTerm={currentSearchTerm} map={map} />
     ) : (
       <Header />
     )}
-    <NPSModal />
     <main className="rf-container">{children}</main>
     <Question />
     <Footer />

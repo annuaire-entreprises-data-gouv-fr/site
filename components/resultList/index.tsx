@@ -38,14 +38,14 @@ const ResultList: React.FC<IProps> = ({ resultList }) => (
         border: none;
         box-shadow: none;
         color: #333;
-        margin: 15px 0;
+        margin: 20px 0;
         display: block;
         font-size: 0.9rem;
       }
       .results-list > a .title {
         color: #000091;
         text-decoration: none;
-        font-size: 1rem;
+        font-size: 1.1rem;
         margin-bottom: 5px 0;
       }
 

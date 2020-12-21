@@ -7,6 +7,7 @@ const About: React.FC = () => {
     <Page small={true} title="Comment ça marche ?">
       <div className="content-container">
         <h1>À propos de L’Annuaire des Entreprises</h1>
+        <h2>Qui a développé ce site ?</h2>
         <p>
           Ce site a été développé et est maintenu par{' '}
           <a href="https://etalab.gouv.fr">Etalab</a> et la{' '}
@@ -108,7 +109,6 @@ const About: React.FC = () => {
               ⇢ En savoir plus sur API Entreprise
             </a>
           </p>
-          <br />
         </div>
       </div>
     </Page>

@@ -24,7 +24,6 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
             <SearchBar
               defaultValue={currentSearchTerm}
               url={map ? '/rechercher/carte' : '/rechercher'}
-              autoFocus={true}
             />
           </div>
           <div className="rf-header__tools">
