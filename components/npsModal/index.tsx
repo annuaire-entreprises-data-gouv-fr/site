@@ -2,14 +2,14 @@ import React from 'react';
 
 export const NPSModal: React.FC<{}> = () => (
   <>
-    <div id="nps-modal">
+    <div id="nps-modal" role="dialog" aria-label="Donnez-nous votre avis">
       <div className="rf-container">
         <div
           dangerouslySetInnerHTML={{
             __html: `
               <a onclick="window.closeNPSModal()"  href="https://startupdetat.typeform.com/to/ehxbMpeX" target="_blank">
-                👍👎 Quel-est votre avis sur ce site ?
-              <a>`,
+                👍👎 Quel est votre avis sur ce site ?
+              </a>`,
           }}
         />
         <div

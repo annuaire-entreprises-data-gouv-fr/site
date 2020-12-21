@@ -108,7 +108,7 @@ class CustomHead extends Head {
 class DevDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang="fr">
         <Head>
           {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/222331452/Designers */}
           <link

@@ -2,7 +2,11 @@ import React from 'react';
 
 export const Question: React.FC<{}> = () => (
   <>
-    <div className="question-bottom-right layout-center">
+    <div
+      role="dialog"
+      aria-label="Une question"
+      className="question-bottom-right layout-center"
+    >
       <a className="dont-apply-link-style" href="/faq">
         <div>
           <span>Une question</span> ?
