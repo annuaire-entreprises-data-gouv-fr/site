@@ -140,6 +140,27 @@ class StaticDocument extends Document {
             rel="stylesheet"
             type="text/css"
           ></link>
+          <link
+            rel="preload"
+            href="/resources/fonts/Marianne-Bold.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/resources/fonts/Marianne-Regular_Italic.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/resources/fonts/Marianne-Regular.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
           <link rel="icon" href="/favicon.ico" />
         </CustomHead>
 
