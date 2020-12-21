@@ -1,18 +1,21 @@
 import React from 'react';
-import ButtonLink from '../button';
 
 export const NPSModal: React.FC<{}> = () => (
   <>
     <div id="nps-modal">
       <div className="rf-container">
-        <a href="https://startupdetat.typeform.com/to/ehxbMpeX" target="_blank">
-          👍👎 Donnez-nous votre avis sur ce site
-        </a>
-        {/* @ts-ignore */}
         <div
           dangerouslySetInnerHTML={{
             __html: `
-              <button style="font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;" onclick="window.closeNPSModal()">
+              <a onclick="window.closeNPSModal()"  href="https://startupdetat.typeform.com/to/ehxbMpeX" target="_blank">
+                👍👎 Quel-est votre avis sur ce site ?
+              <a>`,
+          }}
+        />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `
+              <button onclick="window.closeNPSModal()" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
                 <b>Ne plus afficher ce message ✕</b>
               </button>
         `,
