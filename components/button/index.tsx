@@ -53,14 +53,16 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         height: ${small ? '36px' : '46px'};
         padding: 0 10px;
         border: 2px solid ${alt ? '#000091' : 'transparent'};
+        border-radius: 3px;
+        box-shadow: none;
       }
 
       div:hover > a,
       div:hover > button {
-        color: #000091;
-        border-color: #000091;
+        color: ${alt ? '#0b01c3' : '#fff'};
+        border-color: #0b01c3;
         text-decoration: none;
-        background-color: #dfdff1;
+        background-color: ${alt ? '#dfdff1' : '#0b01c3'};
       }
     `}</style>
   </div>

@@ -5,10 +5,9 @@ import { Tag } from '../tag';
 
 interface IProps {
   resultList: ResultUniteLegale[];
-  compact?: boolean;
 }
 
-const ResultList: React.FC<IProps> = ({ resultList, compact = false }) => (
+const ResultList: React.FC<IProps> = ({ resultList }) => (
   <div className="results-list">
     {resultList.map((unite_legale) => (
       <a
@@ -39,14 +38,15 @@ const ResultList: React.FC<IProps> = ({ resultList, compact = false }) => (
         border: none;
         box-shadow: none;
         color: #333;
-        margin: ${compact ? '15px' : '25px'} 0;
+        margin: 15px 0;
         display: block;
+        font-size: 0.9rem;
       }
       .results-list > a .title {
         color: #000091;
         text-decoration: none;
-        font-size: ${compact ? '1.1rem' : '1.2rem'};
-        margin-bottom: ${compact ? '0' : '5px'} 0;
+        font-size: 1rem;
+        margin-bottom: 5px 0;
       }
 
       .results-list > a:hover .title {
@@ -54,7 +54,7 @@ const ResultList: React.FC<IProps> = ({ resultList, compact = false }) => (
       }
 
       .results-list > a .adress {
-        font-size: ${compact ? '0.8rem' : '0.9rem'};
+        font-size: 0.9rem;
         color: rgb(112, 117, 122);
       }
     `}</style>

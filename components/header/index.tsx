@@ -19,10 +19,12 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
               </span>
             </a>
           </div>
+          <div className="rf-header__sub">L’Annuaire des Entreprises</div>
           <div className="not-rf-search">
             <SearchBar
               defaultValue={currentSearchTerm}
               url={map ? '/rechercher/carte' : '/rechercher'}
+              autoFocus={true}
             />
           </div>
           <div className="rf-header__tools">
@@ -34,7 +36,7 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
                     className="rf-link"
                     target="_self"
                   >
-                    Comment ça marche&nbsp;?
+                    À propos
                   </a>
                 </li>
               </ul>
@@ -51,12 +53,32 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
       .not-rf-search {
         flex-grow: 1;
         height: 100%;
+        margin: 5px;
       }
       .rf-header .rf-search-bar {
         margin: 0;
       }
       .rf-header__tools {
         flex-grow: 0;
+      }
+      div.rf-header__sub {
+        max-width: 80px;
+        margin: 0;
+        margin-right: 15px;
+        flex-grow: 0;
+        font-size: 1rem;
+        font-family: serif;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 500px) {
+        .not-rf-search {
+          flex-grow: 0;
+          margin: auto;
+          margin-top: 10px;
+          width: calc(100% - 20px);
+        }
       }
     `}</style>
   </>
@@ -85,7 +107,7 @@ const Header = () => (
                     className="rf-link"
                     target="_self"
                   >
-                    Comment ça marche&nbsp;?
+                    À propos
                   </a>
                 </li>
               </ul>

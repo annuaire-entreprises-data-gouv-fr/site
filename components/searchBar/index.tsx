@@ -4,12 +4,13 @@ const SearchBar = ({
   placeholder = 'Rechercher un nom, un SIRET ou un SIREN',
   defaultValue = '',
   url = '/rechercher',
+  autoFocus = false,
 }) => {
   return (
     <>
       <form action={url} id="search-wrapper" method="get">
-        <div class="rf-search-bar" id="search-input--lg">
-          <label class="rf-label" for="search-input-input">
+        <div className="rf-search-bar" id="search-input--lg">
+          <label className="rf-label" htmlFor="search-input-input">
             Rechercher une entreprise
           </label>
           <input
@@ -21,9 +22,10 @@ const SearchBar = ({
             name="terme"
             required
             autoComplete="off"
+            autoFocus={autoFocus}
           />
           <button
-            class="rf-btn"
+            className="rf-btn"
             title="Rechercher"
             value="submit"
             type="submit"

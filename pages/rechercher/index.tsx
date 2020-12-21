@@ -76,11 +76,8 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
     />
 
     <style jsx>{`
-      .result-content-container {
-        min-height: 400px;
-      }
       .results-counter {
-        margin-top: 30px;
+        margin-top: 20px;
         color: rgb(112, 117, 122);
       }
     `}</style>

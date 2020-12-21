@@ -66,16 +66,16 @@ const About: React.FC<IProps> = ({
                 <>🏄🏻‍♂️</>
               )}
             </div>
-            <ResultList resultList={response.unite_legale} compact={true} />
+            <ResultList resultList={response.unite_legale} />
           </div>
           <div className="results-footer">
-            {response.total_pages && response.total_pages > 1 && (
+            {response.total_pages && response.total_pages > 1 ? (
               <PageCounter
                 totalPages={response.total_pages}
                 currentPage={currentPage}
                 searchTerm={searchTerm}
               />
-            )}
+            ) : null}
           </div>
         </div>
       )}

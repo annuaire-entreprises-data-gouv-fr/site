@@ -89,7 +89,7 @@ const FAQ: React.FC<{}> = () => (
   <Page small={true} title="FAQ de l’Annuaire des Entreprises">
     <div className="content-container">
       <div className="layout-center">
-        <h1>FAQ de l'Annuaire des Entreprises</h1>
+        <h1>FAQ de l’Annuaire des Entreprises</h1>
       </div>
       <div className="questions">
         <QuestionBlock title="Je cherche une entreprise qui n'apparait pas dans les résultats de recherche">
@@ -150,10 +150,10 @@ const FAQ: React.FC<{}> = () => (
           </p>
         </QuestionBlock>
         <QuestionBlock title="Comment puis-je utiliser ces données dans mon site internet ?">
-          <p>Consultez la page “Comment ça marche&nbsp;?”</p>
+          <p>Consultez la page “À propos”</p>
           <div className="layout-center">
             <ButtonLink href="/comment-ca-marche" alt>
-              Comment ça marche ?
+              À propos
             </ButtonLink>
           </div>
         </QuestionBlock>

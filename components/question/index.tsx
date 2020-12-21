@@ -15,7 +15,7 @@ export const Question: React.FC<{}> = () => (
         right: 60px;
         bottom: 60px;
         z-index: 100;
-        font-family: sans-serif;
+        font-family: 'Marianne', sans-serif;
       }
 
       .question-bottom-right > a {
@@ -46,7 +46,7 @@ export const Question: React.FC<{}> = () => (
       }
       @media only screen and (min-width: 1px) and (max-width: 600px) {
         .question-bottom-right {
-          bottom: 20px;
+          bottom: 50px;
           right: 10px;
         }
         .question-bottom-right > a {

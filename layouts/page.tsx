@@ -3,6 +3,7 @@ import Footer from '../components/footer';
 import { Header, HeaderSmall } from '../components/header';
 import Meta from '../components/meta';
 import { Question } from '../components/question';
+import { NPSModal } from '../components/npsModal';
 
 interface IProps {
   small?: boolean;
@@ -36,6 +37,7 @@ const Page: React.FC<IProps> = ({
     ) : (
       <Header />
     )}
+    <NPSModal />
     <main className="rf-container">{children}</main>
     <Question />
     <Footer />

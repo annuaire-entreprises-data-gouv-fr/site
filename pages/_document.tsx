@@ -27,6 +27,50 @@ const COPY_TO_CLIPBOARD = (
     }}
   />
 );
+
+const NPS = (
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `
+    (function init() {
+      window.showNPSModal = function () {
+        var modal = document.getElementById('nps-modal');
+        if (modal) {
+          modal.style.display='block';
+        }
+      }
+      window.closeNPSModal = function () {
+        var modal = document.getElementById('nps-modal');
+        if (modal) {
+          modal.style.display='none';
+        }
+        window.localStorage.setItem('u', true);
+      }
+    })();
+
+    (function triggerNPSModal() {
+      try {
+        var u = window.localStorage.getItem('u') || false;
+        if(u) {
+          return;
+        }
+        var data = window.sessionStorage.getItem('p') || 0;
+        window.sessionStorage.setItem('p', parseInt(data,10)+1);
+
+        var p = window.location.pathname;
+        if((p.indexOf('/entreprise')===0 && data >= 2)
+        || (p.indexOf('/rechercher')===0 && data >= 3)
+        || (p.indexOf('/justificatif')===0 && data >= 2)
+        || (p.indexOf('/etablissement')===0 && data >= 2)){
+          window.showNPSModal();
+        }
+      } catch (e) {}
+    })();
+  `,
+    }}
+  />
+);
+
 class CustomHead extends Head {
   render() {
     const res = super.render();
@@ -77,6 +121,7 @@ class DevDocument extends Document {
           <Main />
           <NextScript />
           {COPY_TO_CLIPBOARD}
+          {NPS}
         </body>
       </Html>
     );
@@ -96,34 +141,6 @@ class StaticDocument extends Document {
             type="text/css"
           ></link>
           <link rel="icon" href="/favicon.ico" />
-          {/* <link
-            rel="preload"
-            href="/fonts/open-sans-v17-latin-700.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="/fonts/open-sans-v17-latin-regular.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="/fonts/source-sans-pro-v13-latin-regular.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="/fonts/source-sans-pro-v13-latin-700.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          /> */}
         </CustomHead>
 
         <body>
@@ -149,6 +166,7 @@ class StaticDocument extends Document {
           )}
 
           {COPY_TO_CLIPBOARD}
+          {NPS}
         </body>
       </Html>
     );

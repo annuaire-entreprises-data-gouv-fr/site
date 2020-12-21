@@ -101,22 +101,9 @@ html {
 .content-container {
   margin-left: auto;
   margin-right: auto;
-
-  @media only screen and (min-width: 1124px) {
-    width: 1100px;
-  }
-
-  @media only screen and (min-width: 768px) and (max-width: 1124px) {
-    width: calc(100% - 60px);
-  }
-
-  @media only screen and (min-width: 550px) and (max-width: 768px) {
-    width: calc(100% - 40px);
-  }
-
-  @media only screen and (min-width: 1px) and (max-width: 600px) {
-    width: calc(100% - 20px);
-  }
+}
+main {
+  min-height: 400px;
 }
 
 .text-style {
