@@ -113,10 +113,10 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => (
     <table id={id}>
       <tbody>
         {body.map((row, idx) => (
-          <tr key={idx}>
-            {row.map((cell, idx) => (
-              <React.Fragment key={cell}>
-                {idx === 0 ? <td>{cell}</td> : <CopyCell>{cell}</CopyCell>}
+          <tr key={'a' + idx}>
+            {row.map((cell, idc) => (
+              <React.Fragment key={'e' + idc}>
+                {idc === 0 ? <td>{cell}</td> : <CopyCell>{cell}</CopyCell>}
               </React.Fragment>
             ))}
           </tr>

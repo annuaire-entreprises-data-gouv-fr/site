@@ -16,12 +16,14 @@ export interface Etablissement {
   etablissement_siege: string;
   activite_principale: string;
   date_mise_a_jour: string;
+  date_debut_activite: string;
   libelle_activite_principale: string;
   is_siege: '1' | null;
   tranche_effectif_salarie: string;
   latitude: string;
   longitude: string;
   // old API
+  date_debut: string;
   tranche_effectifs: string;
   etat_administratif: 'A' | null;
   date_dernier_traitement: string;
@@ -33,7 +35,9 @@ export interface UniteLegale {
   categorie_juridique: string;
   etablissements: Etablissement[];
   date_creation: string;
+  date_creation_entreprise: string;
   date_mise_a_jour: string;
+  date_debut_activite: string;
   statut_diffusion: string;
   nom_complet: string;
   page_path: string;

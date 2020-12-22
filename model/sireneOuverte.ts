@@ -48,7 +48,9 @@ const getUniteLegaleSirenOuverte = async (
 
     const {
       date_creation,
+      date_creation_entreprise,
       date_mise_a_jour,
+      date_debut_activite,
       tranche_effectif_salarie_entreprise,
     } = uniteLegale;
 
@@ -71,6 +73,8 @@ const getUniteLegaleSirenOuverte = async (
       nom_complet,
       page_path: nom_url || siren,
       date_creation,
+      date_creation_entreprise,
+      date_debut_activite,
       date_mise_a_jour,
     } as UniteLegale;
 

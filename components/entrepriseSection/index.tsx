@@ -29,13 +29,22 @@ const entrepriseDescription = (uniteLegale: UniteLegale) => (
     )}
     {uniteLegale.date_creation && (
       <>
-        créee le <b>{formatDateLong(uniteLegale.date_creation)}</b>{' '}
+        créee le <b>{formatDateLong(uniteLegale.date_creation)}</b>
       </>
     )}
+    {uniteLegale.date_debut_activite &&
+      uniteLegale.etablissement_siege &&
+      uniteLegale.etablissement_siege.etat_administratif_etablissement !==
+        'A' && (
+        <>
+          {' '}
+          et fermée le <b>{formatDateLong(uniteLegale.date_debut_activite)}</b>
+        </>
+      )}
     {uniteLegale.etablissement_siege &&
       uniteLegale.etablissement_siege.geo_adresse && (
         <>
-          et dont le siège est domicilié au{' '}
+          , dont le siège est domicilié au{' '}
           <a
             href={`/rechercher/carte?siret=${uniteLegale.etablissement_siege.siret}`}
           >
@@ -57,49 +66,54 @@ const entrepriseDescription = (uniteLegale: UniteLegale) => (
 
 const EntrepriseSection: React.FC<{
   uniteLegale: UniteLegale;
-}> = ({ uniteLegale }) => (
-  <div id="entreprise">
-    <p>{entrepriseDescription(uniteLegale)}</p>
-    <Section title={`Les informations sur cette entité`}>
-      <TwoColumnTable
-        body={[
-          ['SIREN', formatNumbersFr(uniteLegale.siren)],
-          [
-            'SIRET du siège social',
-            uniteLegale.etablissement_siege &&
-              uniteLegale.etablissement_siege.siret &&
-              formatSiret((uniteLegale.etablissement_siege || {}).siret),
-          ],
-          [
-            'N° TVA Intracommunautaire',
-            formatNumbersFr(tvaIntracommunautaire(uniteLegale.siren)),
-          ],
-          [
-            'Activité principale (siège social)',
-            fullLibelleFromCodeNaf(
-              (uniteLegale.etablissement_siege || {}).activite_principale
-            ),
-          ],
-          [
-            'Nature juridique',
-            libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique),
-          ],
-          ['Date de création', formatDate(uniteLegale.date_creation)],
-          [
-            'Date de dernière mise à jour',
-            formatDate(uniteLegale.date_mise_a_jour),
-          ],
-          [
-            'Tranche effectif salarié de l’entité',
-            libelleFromCodeEffectif(
-              uniteLegale.tranche_effectif_salarie_entreprise
-            ),
-          ],
-        ]}
-      />
-    </Section>
-    <HorizontalSeparator />
-  </div>
-);
+}> = ({ uniteLegale }) => {
+  const data = [
+    ['SIREN', formatNumbersFr(uniteLegale.siren)],
+    [
+      'SIRET du siège social',
+      uniteLegale.etablissement_siege &&
+        uniteLegale.etablissement_siege.siret &&
+        formatSiret((uniteLegale.etablissement_siege || {}).siret),
+    ],
+    [
+      'N° TVA Intracommunautaire',
+      formatNumbersFr(tvaIntracommunautaire(uniteLegale.siren)),
+    ],
+    [
+      'Activité principale (siège social)',
+      fullLibelleFromCodeNaf(
+        (uniteLegale.etablissement_siege || {}).activite_principale
+      ),
+    ],
+    [
+      'Nature juridique',
+      libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique),
+    ],
+    [
+      'Tranche effectif salarié de l’entité',
+      libelleFromCodeEffectif(uniteLegale.tranche_effectif_salarie_entreprise),
+    ],
+    ['Date de création', formatDate(uniteLegale.date_creation_entreprise)],
+    ['Date de dernière mise à jour', formatDate(uniteLegale.date_mise_a_jour)],
+  ];
+  if (
+    uniteLegale.etablissement_siege.etat_administratif_etablissement !== 'A'
+  ) {
+    data.push([
+      'Date de fermeture',
+      formatDate(uniteLegale.date_debut_activite),
+    ]);
+  }
+
+  return (
+    <div id="entreprise">
+      <p>{entrepriseDescription(uniteLegale)}</p>
+      <Section title={`Les informations sur cette entité`}>
+        <TwoColumnTable body={data} />
+      </Section>
+      <HorizontalSeparator />
+    </div>
+  );
+};
 
 export default EntrepriseSection;
