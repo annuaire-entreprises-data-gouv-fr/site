@@ -132,7 +132,10 @@ const EtablissementSection: React.FC<IProps> = ({
     ],
   ];
 
-  if (etablissement.etat_administratif !== 'A') {
+  if (
+    (etablissement.etat_administratif ||
+      etablissement.etat_administratif_etablissement) !== 'A'
+  ) {
     data.push([
       'Date de fermeture',
       formatDate(etablissement.date_debut || etablissement.date_debut_activite),
