@@ -146,21 +146,21 @@ class StaticDocument extends Document {
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
-          />
+          ></link>
           <link
             rel="preload"
             href="/resources/fonts/Marianne-Regular_Italic.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
-          />
+          ></link>
           <link
             rel="preload"
             href="/resources/fonts/Marianne-Regular.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
-          />
+          ></link>
           <link rel="icon" href="/favicon.ico" />
         </CustomHead>
 

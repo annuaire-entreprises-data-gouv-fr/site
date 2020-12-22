@@ -57,6 +57,7 @@ const getUniteLegaleSirenOuverte = async (
       nature_juridique_entreprise = null,
       nombre_etablissements,
       nom_complet = null,
+      nom_url = null,
     } = siege;
 
     const unite_legale = {
@@ -68,7 +69,7 @@ const getUniteLegaleSirenOuverte = async (
       statut_diffusion,
       nombre_etablissements,
       nom_complet,
-      page_path: generatePagePath(nom_complet, siren),
+      page_path: nom_url || siren,
       date_creation,
       date_mise_a_jour,
     } as UniteLegale;
@@ -116,7 +117,7 @@ const getResults = async (
       return {
         ...result,
         nombre_etablissements: result.nombre_etablissements || 1,
-        page_path: generatePagePath(result.nom_complet, result.siren),
+        page_path: result.nom_url || result.siren,
         libelle_activite_principale: libelleFromCodeNaf(
           result.activite_principale
         ),
