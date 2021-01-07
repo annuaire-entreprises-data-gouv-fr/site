@@ -7,20 +7,17 @@ import { Etablissement, getUniteLegale, UniteLegale } from '../../model';
 import EntrepriseSection from '../../components/entrepriseSection';
 import EtablissementListeSection from '../../components/etablissementListeSection';
 import Title from '../../components/titleSection';
-import redirect, {
-  redirectIfSiretOrSiren,
+import {
   redirectPageNotFound,
   redirectSirenIntrouvable,
 } from '../../utils/redirect';
 import EtablissementSection from '../../components/etablissementSection';
-import StructuredData from '../../components/structuredData';
-import Annonces from '../../components/annonces';
-import logErrorInSentry from '../../utils/sentry';
+
 import NonDiffusible from '../../components/nonDiffusible';
 
-const structuredData = (uniteLegale: UniteLegale) => [
-  ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],
-];
+// const structuredData = (uniteLegale: UniteLegale) => [
+//   ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],
+// ];
 
 interface IProps {
   etablissement: Etablissement;
@@ -65,7 +62,6 @@ const About: React.FC<IProps> = ({
               usedInEntreprisePage={true}
             />
           )}
-          <Annonces siren={uniteLegale.siren} />
           <EtablissementListeSection uniteLegale={uniteLegale} />
         </>
       )}

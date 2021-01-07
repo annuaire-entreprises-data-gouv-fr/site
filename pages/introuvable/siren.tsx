@@ -20,6 +20,11 @@ const SirenNotFound: React.FC = () => {
               <a href="/faq">non-diffusible</a>.
             </li>
             <li>
+              Ce SIREN fait peut-être référence a une entité publique dont les
+              informations sont protégées (Ministère de Défense, Gendarmerie,
+              parlementaire etc.)
+            </li>
+            <li>
               Ce SIREN fait référence a une entreprise crée récemment et{' '}
               <a href="/faq">nos informations ne sont pas encore à jour</a>.
             </li>

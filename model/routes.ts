@@ -6,6 +6,7 @@ const routes = {
   rncsLink: `https://data.inpi.fr/entreprises/`,
   rncsPrint: `https://data.inpi.fr/print/companies/`,
   inseeSiren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
+  conventionCollectives: ' https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
 };
 
 export const escapeSearchTerm = (searchTerm: string) => {
@@ -39,6 +40,10 @@ export const getSearchUniteLegaleRoute = (searchterm: string, page: string) => {
   return `${routes.rechercheUniteLegale}?per_page=10&page=${
     parsePage(page) || 1
   }&q=${encodeURI(escapeSearchTerm(searchterm))}`;
+};
+
+export const getConventionCollectivesRoute = (sirets: string[]) => {
+  return `${routes.conventionCollectives}${sirets.join(',')}`;
 };
 
 export default routes;

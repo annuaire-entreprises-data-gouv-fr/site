@@ -1,6 +1,5 @@
 import React from 'react';
 import ButtonLink from '../button';
-import HorizontalSeparator from '../horizontalSeparator';
 import { Section } from '../section';
 
 const Annonces: React.FC<{
@@ -22,7 +21,6 @@ const Annonces: React.FC<{
         </ButtonLink>
       </div>
     </Section>
-    <HorizontalSeparator />
     <style jsx>{`
       .annonces {
         display: flex;

@@ -15,15 +15,24 @@ import { download } from '../../static/icon';
 import { cma, inpi } from '../../static/logo';
 import { TitleImmatriculation } from '../../components/titleSection';
 import routes from '../../model/routes';
+import getConventionCollective, {
+  IConventions,
+} from '../../model/conventionCollective';
+import ImmatriculationNotFound from '../../components/introuvable/immatriculation';
+import { Tag } from '../../components/tag';
+import Annonces from '../../components/annonces';
+import { FullTable } from '../../components/table/full';
 
 interface IProps {
   uniteLegale: UniteLegale;
   hrefRNCS: string;
   hrefRNM: string;
+  conventionCollectives: IConventions[];
 }
 
 const EtablissementPage: React.FC<IProps> = ({
   uniteLegale,
+  conventionCollectives,
   hrefRNCS,
   hrefRNM,
 }) => (
@@ -84,7 +93,29 @@ const EtablissementPage: React.FC<IProps> = ({
           </div>
         </Section>
       )}
-      {!hrefRNM && !hrefRNCS && <div></div>}
+      {!hrefRNM && !hrefRNCS && <ImmatriculationNotFound />}
+      <HorizontalSeparator />
+      <Section title="Conventions collectives">
+        {conventionCollectives.length === 0 ? (
+          <div>Cette entité n’a aucune convention collective enregistrée</div>
+        ) : (
+          <FullTable
+            head={['SIRET', 'Titre', 'N°IDCC', 'Convention']}
+            body={conventionCollectives.map((convention) => [
+              <a href={`/etablissement/${convention.siret}`}>
+                {convention.siret}
+              </a>,
+              convention.title,
+              <Tag>{convention.num}</Tag>,
+              <ButtonLink target="_blank" href={convention.url} alt small>
+                ⇢&nbsp;Consulter
+              </ButtonLink>,
+            ])}
+          />
+        )}
+      </Section>
+      <HorizontalSeparator />
+      <Annonces siren={uniteLegale.siren} />
     </div>
     <style jsx>{`
       .separator {
@@ -133,16 +164,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // siege social
   const uniteLegale = await getUniteLegale(siren as string);
 
+  const conventionCollectives = await getConventionCollective(
+    uniteLegale as UniteLegale
+  );
+
   if (!uniteLegale) {
     redirectSirenIntrouvable(context.res, siren);
     return { props: {} };
   }
 
-  const { rnmLink, rncsLink, rncsPrint } = routes;
+  const { rnmLink, rncsLink } = routes;
 
   const rnm = await fetch(rnmLink + siren + '?format=html');
-  // so instead of calling data.inpi.fr page we rather call the print page that is much faster
-  const rncs_test = await fetch(rncsPrint + siren);
+  const rncs_test = await fetch(rncsLink + siren);
 
   let hrefRNM = '';
   let hrefRNCS = '';
@@ -155,14 +189,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     hrefRNCS = rncsLink + siren;
   }
 
-  if (!hrefRNCS && !hrefRNM) {
-    redirect(context.res, `/introuvable/immatriculation?q=${siren}`);
-    return { props: {} };
-  }
-
   return {
     props: {
       uniteLegale,
+      conventionCollectives,
       hrefRNCS,
       hrefRNM,
     },
