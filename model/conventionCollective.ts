@@ -27,7 +27,7 @@ const getConventionCollectives = async (
 
     const response = (await result.json()) as IEtablissementConvention[];
 
-    const flatConventions = response.reduce((acc, el) => {
+    const flatConventions = response.reduce((acc: IConventions[], el) => {
       return [
         ...acc,
         ...el.conventions.map((convention) => {
