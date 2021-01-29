@@ -4,7 +4,7 @@ import { getConventionCollectivesRoute } from './routes';
 
 export interface IEtablissementConvention {
   siret: string;
-  conventions: IConventions[];
+  conventions?: IConventions[];
 }
 
 export interface IConventions {
@@ -28,6 +28,9 @@ const getConventionCollectives = async (
     const response = (await result.json()) as IEtablissementConvention[];
 
     const flatConventions = response.reduce((acc: IConventions[], el) => {
+      if (!el.conventions) {
+        return acc;
+      }
       return [
         ...acc,
         ...el.conventions.map((convention) => {
@@ -39,8 +42,9 @@ const getConventionCollectives = async (
 
     return flatConventions;
   } catch (e) {
-    console.log(e);
-    logErrorInSentry(e);
+    const errorMessage = `${unite_legale.siren} error in convention collectives : ${e}`;
+    console.log(errorMessage);
+    logErrorInSentry(errorMessage);
     return [];
   }
 };

@@ -7,6 +7,7 @@ import {
 import { getUniteLegaleInsee } from './sireneInsee';
 
 export interface Etablissement {
+  enseigne?: string;
   siren: string;
   siret: string;
   nic: string;
