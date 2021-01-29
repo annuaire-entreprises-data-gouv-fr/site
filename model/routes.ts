@@ -2,10 +2,19 @@ const routes = {
   etablissement: `https://entreprise.data.gouv.fr/api/sirene/v3/etablissements/`,
   uniteLegale: `http://recherche.entreprise.dataeng.etalab.studio/siren`,
   rechercheUniteLegale: `http://recherche.entreprise.dataeng.etalab.studio/search`,
-  rnmLink: `https://api-rnm.artisanat.fr/v2/entreprises/`,
-  rncsLink: `https://data.inpi.fr/entreprises/`,
-  rncsPrint: `https://data.inpi.fr/print/companies/`,
-  inseeSiren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
+  rnm: `https://api-rnm.artisanat.fr/v2/entreprises/`,
+  rncs: {
+    portail: `https://data.inpi.fr/entreprises/`,
+    api: {
+      login: 'https://opendata-rncs.inpi.fr/services/diffusion/login',
+      imr:
+        'https://opendata-rncs.inpi.fr/services/diffusion/imrs-saisis/find?siren=',
+    },
+  },
+  insee: {
+    siren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
+    auth: 'https://api.insee.fr/token',
+  },
   conventionCollectives: ' https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
 };
 

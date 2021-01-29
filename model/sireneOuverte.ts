@@ -1,4 +1,3 @@
-import { generatePagePath } from '../utils/formatting';
 import { isSirenOrSiret, libelleFromCodeNaf } from '../utils/helper';
 import logErrorInSentry from '../utils/sentry';
 import {

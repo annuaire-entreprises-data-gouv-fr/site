@@ -5,7 +5,7 @@ import routes from './routes';
 const inseeAuth = async () => {
   const clientId = process.env.INSEE_CLIENT_ID;
   const clientSecret = process.env.INSEE_CLIENT_SECRET;
-  const response = await fetch('https://api.insee.fr/token', {
+  const response = await fetch(routes.insee.auth, {
     method: 'POST',
     body:
       'grant_type=client_credentials&client_id=' +
@@ -33,7 +33,7 @@ export const getUniteLegaleInsee = async (siren: string) => {
 
     // Return a second API call
     // This one uses the token we received for authentication
-    const response = await fetch(routes.inseeSiren + siren, {
+    const response = await fetch(routes.insee.siren + siren, {
       headers: {
         Authorization: token.token_type + ' ' + token.access_token,
         'Content-Type': 'application/x-www-form-urlencoded',

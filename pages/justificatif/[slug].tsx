@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { isSirenOrSiret } from '../../utils/helper';
 import { getUniteLegale, UniteLegale } from '../../model';
-import redirect, {
+import {
   redirectPageNotFound,
   redirectSirenIntrouvable,
 } from '../../utils/redirect';
@@ -14,14 +14,15 @@ import HorizontalSeparator from '../../components/horizontalSeparator';
 import { download } from '../../components/icon';
 import { cma, inpi } from '../../public/static/logo';
 import { TitleImmatriculation } from '../../components/titleSection';
-import routes from '../../model/routes';
 import getConventionCollective, {
   IConventions,
 } from '../../model/conventionCollective';
+import { getRNCSLink } from '../../model/rncs';
 import ImmatriculationNotFound from '../../components/introuvable/immatriculation';
 import { Tag } from '../../components/tag';
 import Annonces from '../../components/annonces';
 import { FullTable } from '../../components/table/full';
+import { getRNMLink } from '../../model/rnm';
 
 interface IProps {
   uniteLegale: UniteLegale;
@@ -173,28 +174,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { props: {} };
   }
 
-  const { rnmLink, rncsLink } = routes;
-
-  const rnm = await fetch(rnmLink + siren + '?format=html');
-  const rncs_test = await fetch(rncsLink + siren);
-
-  let hrefRNM = '';
-  let hrefRNCS = '';
-
-  if (rnm.status === 200) {
-    hrefRNM = rnmLink + siren;
-  }
-
-  if (rncs_test.status === 200) {
-    hrefRNCS = rncsLink + siren;
-  }
-
   return {
     props: {
       uniteLegale,
       conventionCollectives,
-      hrefRNCS,
-      hrefRNM,
+      hrefRNM: await getRNMLink(siren),
+      hrefRNCS: await getRNCSLink(siren),
     },
   };
 };
