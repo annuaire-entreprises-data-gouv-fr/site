@@ -6,7 +6,7 @@ import { getResults, SearchResults } from '../../model';
 import { parsePage, removeInvisibleChar } from '../../model/routes';
 import ResultList from '../../components/resultList';
 import PageCounter from '../../components/pageCounter';
-import { pin } from '../../static/icon';
+import { pin } from '../../public/static/icon';
 import { redirectIfSiretOrSiren } from '../../utils/redirect';
 
 interface IProps {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Etablissement, UniteLegale } from '../../model';
-import { map, pin } from '../../static/icon';
+import { map, pin } from '../../public/static/icon';
 import {
   formatDate,
   formatDateLong,
