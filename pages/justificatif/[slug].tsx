@@ -11,7 +11,7 @@ import redirect, {
 import { Section } from '../../components/section';
 import ButtonLink from '../../components/button';
 import HorizontalSeparator from '../../components/horizontalSeparator';
-import { download } from '../../public/static/icon';
+import { download } from '../../components/icon';
 import { cma, inpi } from '../../public/static/logo';
 import { TitleImmatriculation } from '../../components/titleSection';
 import routes from '../../model/routes';

@@ -1,7 +1,7 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-const COPY_TO_CLIPBOARD = (
+const COPY_TO_CLIPBOARD_SCRIPT = (
   <script
     dangerouslySetInnerHTML={{
       __html: `
@@ -12,7 +12,13 @@ const COPY_TO_CLIPBOARD = (
         element.onclick = () => {
           element.classList.toggle('copy-done');
           var el = document.createElement('textarea');
-          el.value = element.children[0].innerHTML;
+
+          var toCopy = element.children[0].innerHTML;
+          if(element.className.indexOf('trim') > -1){
+            toCopy = toCopy.split(' ').join('');
+          }
+
+          el.value = toCopy;
           document.body.appendChild(el);
           el.select();
           document.execCommand('copy');
@@ -28,7 +34,7 @@ const COPY_TO_CLIPBOARD = (
   />
 );
 
-const NPS = (
+const NPS_SCRIPT = (
   <script
     dangerouslySetInnerHTML={{
       __html: `
@@ -67,6 +73,26 @@ const NPS = (
       } catch (e) {}
     })();
   `,
+    }}
+  />
+);
+
+const MATOMO_SCRIPT = (
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `
+            <!-- Piwik -->
+            var _paq = window._paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+              var u="https://stats.data.gouv.fr/";
+              _paq.push(['setTrackerUrl', u+'piwik.php']);
+              _paq.push(['setSiteId', ${process.env.MATOMO_SITE_ID}]);
+              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+              g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
+            `,
     }}
   />
 );
@@ -120,8 +146,8 @@ class DevDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          {COPY_TO_CLIPBOARD}
-          {NPS}
+          {COPY_TO_CLIPBOARD_SCRIPT}
+          {NPS_SCRIPT}
         </body>
       </Html>
     );
@@ -166,28 +192,11 @@ class StaticDocument extends Document {
 
         <body>
           <Main />
-          {process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID && (
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-            <!-- Piwik -->
-            var _paq = window._paq || [];
-            _paq.push(['trackPageView']);
-            _paq.push(['enableLinkTracking']);
-            (function() {
-              var u="https://stats.data.gouv.fr/";
-              _paq.push(['setTrackerUrl', u+'piwik.php']);
-              _paq.push(['setSiteId', ${process.env.MATOMO_SITE_ID}]);
-              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-              g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-            })();
-            `,
-              }}
-            />
-          )}
-
-          {COPY_TO_CLIPBOARD}
-          {NPS}
+          {process.env.NODE_ENV === 'production' &&
+            process.env.MATOMO_SITE_ID &&
+            MATOMO_SCRIPT}
+          {COPY_TO_CLIPBOARD_SCRIPT}
+          {NPS_SCRIPT}
         </body>
       </Html>
     );

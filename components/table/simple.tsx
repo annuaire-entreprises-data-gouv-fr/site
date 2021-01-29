@@ -1,47 +1,28 @@
 import React, { PropsWithChildren } from 'react';
+import { copy, copied } from '../icon';
 
 interface ISectionProps {
   body: any[][];
   id?: string;
 }
 
-export const CopyCell: React.FC<PropsWithChildren<{}>> = ({ children }) => (
+export const CopyCell: React.FC<PropsWithChildren<{ className?: string }>> = ({
+  children,
+  className,
+}) => (
   <td>
-    <div className={!!children ? 'copy-to-clipboard-anchor' : ''}>
+    <div
+      className={`${className} ${!!children ? 'copy-to-clipboard-anchor' : ''}`}
+    >
       <span>{children || <i>Non renseigné</i>}</span>
       {!!children && (
         <span className="label">
           <span className="copy">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-            </svg>
+            {copy}
             copier
           </span>
           <span className="copied">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
+            {copied}
             copié!
           </span>
         </span>
@@ -96,9 +77,6 @@ export const CopyCell: React.FC<PropsWithChildren<{}>> = ({ children }) => (
         div {
           cursor: inherit;
         }
-        div > span.label {
-          display: none;
-        }
         td {
           padding: 0;
           margin: 0;
@@ -108,17 +86,28 @@ export const CopyCell: React.FC<PropsWithChildren<{}>> = ({ children }) => (
   </td>
 );
 
+/**
+ * Add a css class to customize copy to clipboard behaviour
+ * @param label
+ */
+const getClass = (label: string) => {
+  if (
+    label.indexOf('TVA') > -1 ||
+    label.indexOf('SIREN') > -1 ||
+    label.indexOf('SIRET') > -1
+  ) {
+    return 'trim';
+  }
+};
+
 export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => (
   <>
     <table id={id}>
       <tbody>
         {body.map((row, idx) => (
           <tr key={'a' + idx}>
-            {row.map((cell, idc) => (
-              <React.Fragment key={'e' + idc}>
-                {idc === 0 ? <td>{cell}</td> : <CopyCell>{cell}</CopyCell>}
-              </React.Fragment>
-            ))}
+            <td>{row[0]}</td>
+            <CopyCell className={getClass(row[0])}>{row[1]}</CopyCell>
           </tr>
         ))}
       </tbody>
