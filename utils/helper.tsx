@@ -3,13 +3,6 @@ import { categoriesJuridiques } from './categoriesJuridiques';
 import { codesNaf } from './codesNAF';
 import { codesEffectifs } from './codeEffectifs';
 
-export const tvaIntracommunautaire = (siren: number | string) => {
-  const sirenNum = typeof siren === 'string' ? parseInt(siren, 10) : siren;
-  const tvaKey = (12 + 3 * (sirenNum % 97)) % 97;
-  const tvaNumber = `${tvaKey}${sirenNum}`;
-  return `FR${tvaNumber}`;
-};
-
 export const managingDirector = (uniteLegale: any) => {
   return concatNames(uniteLegale.prenom_1, uniteLegale.nom);
 };

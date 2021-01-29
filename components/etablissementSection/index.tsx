@@ -12,7 +12,6 @@ import {
   fullLibelleFromCodeNaf,
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
-  tvaIntracommunautaire,
 } from '../../utils/helper';
 import ButtonLink from '../button';
 import HorizontalSeparator from '../horizontalSeparator';
@@ -106,7 +105,7 @@ const EtablissementSection: React.FC<IProps> = ({
     ['Clef NIC', etablissement.nic],
     [
       'N° TVA Intracommunautaire',
-      formatNumbersFr(tvaIntracommunautaire(etablissement.siren)),
+      formatNumbersFr(uniteLegale.numero_tva_intra),
     ],
     [
       'Activité principale (établissement)',

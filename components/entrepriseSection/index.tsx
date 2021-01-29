@@ -10,7 +10,6 @@ import {
   fullLibelleFromCodeNaf,
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
-  tvaIntracommunautaire,
 } from '../../utils/helper';
 import HorizontalSeparator from '../horizontalSeparator';
 import { Section } from '../section';
@@ -77,7 +76,7 @@ const EntrepriseSection: React.FC<{
     ],
     [
       'N° TVA Intracommunautaire',
-      formatNumbersFr(tvaIntracommunautaire(uniteLegale.siren)),
+      formatNumbersFr(uniteLegale.numero_tva_intra),
     ],
     [
       'Activité principale (siège social)',

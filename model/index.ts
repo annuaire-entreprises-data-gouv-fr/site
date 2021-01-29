@@ -31,6 +31,7 @@ export interface Etablissement {
 
 export interface UniteLegale {
   siren: string;
+  numero_tva_intra: string;
   etablissement_siege: Etablissement;
   categorie_juridique: string;
   etablissements: Etablissement[];
