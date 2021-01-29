@@ -67,7 +67,7 @@ const Footer = () => (
                 className="rf-footer__content-link"
                 target="blank"
                 rel="noreferrer noopener"
-                href="http://service-public.fr"
+                href="https://service-public.fr"
               >
                 service-public.fr
               </a>
@@ -77,7 +77,17 @@ const Footer = () => (
                 className="rf-footer__content-link"
                 target="blank"
                 rel="noreferrer noopener"
-                href="http://data.gouv.fr"
+                href="https://mon-entreprise.fr"
+              >
+                mon-entreprise.fr
+              </a>
+            </li>
+            <li className="rf-footer__content-item">
+              <a
+                className="rf-footer__content-link"
+                target="blank"
+                rel="noreferrer noopener"
+                href="https://data.gouv.fr"
               >
                 data.gouv.fr
               </a>

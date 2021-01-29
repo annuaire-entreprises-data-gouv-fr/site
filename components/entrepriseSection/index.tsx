@@ -26,9 +26,9 @@ const entrepriseDescription = (uniteLegale: UniteLegale) => (
         </b>{' '}
       </>
     )}
-    {uniteLegale.date_creation && (
+    {uniteLegale.date_creation_entreprise && (
       <>
-        créee le <b>{formatDateLong(uniteLegale.date_creation)}</b>
+        créee le <b>{formatDateLong(uniteLegale.date_creation_entreprise)}</b>
       </>
     )}
     {uniteLegale.date_debut_activite &&
@@ -67,6 +67,7 @@ const EntrepriseSection: React.FC<{
   uniteLegale: UniteLegale;
 }> = ({ uniteLegale }) => {
   const data = [
+    ['Dénomination', uniteLegale.nom_complet],
     ['SIREN', formatNumbersFr(uniteLegale.siren)],
     [
       'SIRET du siège social',

@@ -140,6 +140,10 @@ const EtablissementSection: React.FC<IProps> = ({
       formatDate(etablissement.date_debut || etablissement.date_debut_activite),
     ]);
   }
+  if (etablissement.enseigne) {
+    data.splice(0, 0, ['Enseigne de l’établissement', etablissement.enseigne]);
+  }
+
   return (
     <>
       {!usedInEntreprisePage && (
