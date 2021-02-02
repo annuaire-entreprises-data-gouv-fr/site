@@ -1,3 +1,4 @@
+import { escapeTerm } from '../utils/formatting';
 import { isSirenOrSiret, libelleFromCodeNaf } from '../utils/helper';
 import logErrorInSentry from '../utils/sentry';
 import {
@@ -6,10 +7,67 @@ import {
   Etablissement,
   SearchResults,
 } from './index';
-import routes, {
-  getSearchUniteLegaleRoute,
-  getUniteLegaleRoute,
-} from './routes';
+import routes from './routes';
+
+/**
+ * API SIRENE by Etalab
+ *
+ * This API provide :
+ * - a Results route for search pages
+ * - an UniteLegale for entreprise pages
+ * - an Etablissement for etablissement pages
+ *
+ */
+
+/**
+ * SEARCH UNITE LEGALE
+ */
+
+export const parsePage = (pageAsString: string) => {
+  try {
+    return parseInt(pageAsString, 10);
+  } catch {
+    return 1;
+  }
+};
+
+const getResults = async (
+  searchTerms: string,
+  page: string
+): Promise<SearchResults | undefined> => {
+  const resultPage = parsePage(page) || 1;
+  const encodedTerms = encodeURI(escapeTerm(searchTerms));
+  const route = `${routes.sireneOuverte.rechercheUniteLegale}?per_page=10&page=${resultPage}&q=${encodedTerms}`;
+
+  const response = await fetch(route);
+
+  if (response.status === 404) {
+    return undefined;
+  }
+
+  const results = (await response.json()) || [];
+  const { total_results = 0, total_pages = 0, unite_legale } = results[0];
+
+  return ({
+    page,
+    total_results,
+    total_pages,
+    unite_legale: (unite_legale || []).map((result: any) => {
+      return {
+        ...result,
+        nombre_etablissements: result.nombre_etablissements || 1,
+        page_path: result.nom_url || result.siren,
+        libelle_activite_principale: libelleFromCodeNaf(
+          result.activite_principale
+        ),
+      } as ResultUniteLegale;
+    }),
+  } as unknown) as SearchResults;
+};
+
+/**
+ * GET UNITE LEGALE
+ */
 
 const getUniteLegaleSirenOuverte = async (
   siren: string
@@ -17,11 +75,11 @@ const getUniteLegaleSirenOuverte = async (
   if (!isSirenOrSiret(siren)) {
     throw new Error(`Ceci n'est pas un numéro SIREN valide : ${siren}`);
   }
-  const response = await fetch(getUniteLegaleRoute(siren));
-  if (response.status === 404) {
-    return undefined;
-  }
   try {
+    const response = await fetch(routes.sireneOuverte.uniteLegale + siren);
+    if (response.status === 404) {
+      return undefined;
+    }
     const result = (await response.json())[0].unite_legale;
     if (!result) {
       return undefined;
@@ -87,48 +145,42 @@ const getUniteLegaleSirenOuverte = async (
   }
 };
 
+/**
+ * GET ETABLISSEMENT
+ */
+
 const getEtablissement = async (
   siret: string
 ): Promise<Etablissement | undefined> => {
   if (!isSirenOrSiret(siret)) {
     throw new Error(`Ceci n'est pas un numéro SIRET valide : ${siret}`);
   }
-  const response = await fetch(`${routes.etablissement}${encodeURI(siret)}`);
-  if (response.status === 404) {
+
+  try {
+    const response = await fetch(
+      `${routes.sireneOuverte.etablissement}${encodeURI(siret)}`
+    );
+    if (response.status === 404) {
+      return undefined;
+    }
+    const result = (await response.json())[0].etablissement;
+
+    if (!result) {
+      return undefined;
+    }
+
+    const etablissement = result[0];
+
+    if (!etablissement) {
+      return undefined;
+    }
+
+    return etablissement as Etablissement;
+  } catch (e) {
+    console.log(e);
+    logErrorInSentry(e);
     return undefined;
   }
-  const { etablissement } = await response.json();
-  return etablissement as Etablissement;
-};
-
-const getResults = async (
-  searchTerms: string,
-  page: string
-): Promise<SearchResults | undefined> => {
-  const response = await fetch(getSearchUniteLegaleRoute(searchTerms, page));
-
-  if (response.status === 404) {
-    return undefined;
-  }
-
-  const results = (await response.json()) || [];
-  const { total_results = 0, total_pages = 0, unite_legale } = results[0];
-
-  return ({
-    page,
-    total_results,
-    total_pages,
-    unite_legale: (unite_legale || []).map((result: any) => {
-      return {
-        ...result,
-        nombre_etablissements: result.nombre_etablissements || 1,
-        page_path: result.nom_url || result.siren,
-        libelle_activite_principale: libelleFromCodeNaf(
-          result.activite_principale
-        ),
-      } as ResultUniteLegale;
-    }),
-  } as unknown) as SearchResults;
 };
 
 export { getEtablissement, getUniteLegaleSirenOuverte, getResults };

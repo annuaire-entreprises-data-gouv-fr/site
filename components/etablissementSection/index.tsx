@@ -30,8 +30,7 @@ const Details: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
       <p>
         Cet établissement est
         <b>
-          {(etablissement.etat_administratif_etablissement ||
-            etablissement.etat_administratif) === 'A'
+          {etablissement.etat_administratif_etablissement === 'A'
             ? ' en activité'
             : ' fermé'}
           .
@@ -73,15 +72,11 @@ const Details: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
           <b>{formatDateLong(etablissement.date_creation)}</b>
         </>
       )}{' '}
-      {etablissement.date_debut &&
-        etablissement.etat_administratif !== 'A' && (
+      {etablissement.date_debut_activite &&
+        etablissement.etat_administratif_etablissement !== 'A' && (
           <>
             et il a été fermé le{' '}
-            <b>
-              {formatDateLong(
-                etablissement.date_debut || etablissement.date_debut_activite
-              )}
-            </b>
+            <b>{formatDateLong(etablissement.date_debut_activite)}</b>
           </>
         )}{' '}
       {etablissement.geo_adresse && (
@@ -117,27 +112,19 @@ const EtablissementSection: React.FC<IProps> = ({
     ],
     [
       'Tranche d’effectif salarié',
-      libelleFromCodeEffectif(
-        etablissement.tranche_effectifs ||
-          etablissement.tranche_effectif_salarie
-      ),
+      libelleFromCodeEffectif(etablissement.tranche_effectif_salarie),
     ],
     ['Date de création', formatDate(etablissement.date_creation)],
     [
       'Date de dernière mise à jour',
-      formatDate(
-        etablissement.date_mise_a_jour || etablissement.date_dernier_traitement
-      ),
+      formatDate(etablissement.date_mise_a_jour),
     ],
   ];
 
-  if (
-    (etablissement.etat_administratif ||
-      etablissement.etat_administratif_etablissement) !== 'A'
-  ) {
+  if (etablissement.etat_administratif_etablissement !== 'A') {
     data.push([
       'Date de fermeture',
-      formatDate(etablissement.date_debut || etablissement.date_debut_activite),
+      formatDate(etablissement.date_debut_activite),
     ]);
   }
   if (etablissement.enseigne) {

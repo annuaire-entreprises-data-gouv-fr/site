@@ -36,10 +36,7 @@ const EtablissementPage: React.FC<IProps> = ({
         siren={uniteLegale.siren}
         siret={etablissement.siret}
         isEntreprise={false}
-        isOpen={
-          (etablissement.etat_administratif_etablissement ||
-            etablissement.etat_administratif) === 'A'
-        }
+        isOpen={etablissement.etat_administratif_etablissement === 'A'}
         isNonDiffusible={isNonDiffusible}
         isSiege={
           !!etablissement.is_siege ||
@@ -78,6 +75,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (!etablissement) {
     redirectSiretIntrouvable(context.res, siretOrSiren as string);
+    return { props: {} };
   }
 
   //@ts-ignore

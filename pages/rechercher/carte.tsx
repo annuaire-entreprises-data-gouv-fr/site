@@ -10,11 +10,11 @@ import {
 } from '../../model';
 import ResultList from '../../components/resultList';
 import PageCounter from '../../components/pageCounter';
-import { removeInvisibleChar } from '../../model/routes';
 import {
   redirectIfSiretOrSiren,
   redirectSiretIntrouvable,
 } from '../../utils/redirect';
+import { removeInvisibleChar } from '../../utils/formatting';
 
 interface IProps {
   response?: SearchResults;

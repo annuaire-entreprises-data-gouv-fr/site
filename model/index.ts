@@ -23,11 +23,6 @@ export interface Etablissement {
   tranche_effectif_salarie: string;
   latitude: string;
   longitude: string;
-  // old API
-  date_debut: string;
-  tranche_effectifs: string;
-  etat_administratif: 'A' | null;
-  date_dernier_traitement: string;
 }
 
 export interface UniteLegale {
