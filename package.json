@@ -6,7 +6,7 @@
     "node": "13.x"
   },
   "scripts": {
-    "sitemap": "node ./sitemap/generate.js",
+    "sitemap": "node ./node_scripts/generate.js",
     "dev": "NODE_ENV=development next dev",
     "build-dev": "NODE_ENV=production next build",
     "build": "npm run sitemap && NODE_ENV=production next build",

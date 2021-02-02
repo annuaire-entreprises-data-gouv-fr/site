@@ -1,7 +1,9 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
 
-const urls = open('../sitemap/sitemap-name.csv');
+/** This script test the website load capacity */
+
+const urls = open('../node_scripts/sitemap-name.csv');
 const URL_TO_TEST = 20;
 
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array

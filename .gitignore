@@ -34,8 +34,8 @@ yarn-error.log*
 # vercel
 .vercel
 
-/sitemap/url-list.txt
-/sitemap/sitemap-name.csv
+/node_scripts/url-list.txt
+/node_scripts/sitemap-name.csv
 
 /public/maps/*
 /public/sitemap.xml

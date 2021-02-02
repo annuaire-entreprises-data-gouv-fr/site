@@ -1,6 +1,16 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
 
+/** This script generate the full sitemap
+ *
+ * 1. download most recent list of 20m siren from datagouv server
+ * 2. produce as many sitemap as necessary (sitemap can contains 50k url max)
+ * 3. create a sitemap index
+ *
+ * NB : this script is supposed to run on server, on deploy. Therefore it is triggered in the default build command that will be used by dokku
+ * NB 2 : main risk here is to overflow memory, always monitor max mem usage when running the script
+ */
+
 const mem = () => {
   return (used = process.memoryUsage().heapUsed / 1024 / 1024);
 };
