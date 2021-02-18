@@ -2,18 +2,18 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { isSirenOrSiret } from '../../utils/helper';
+import { isSiren } from '../../utils/helper';
 import { Etablissement, getUniteLegale, UniteLegale } from '../../model';
-import EntrepriseSection from '../../components/entrepriseSection';
-import EtablissementListeSection from '../../components/etablissementListeSection';
-import Title from '../../components/titleSection';
+import EntrepriseSection from '../../components/entreprise-section';
+import EtablissementListeSection from '../../components/etablissement-liste-section';
+import Title from '../../components/title-section';
 import {
   redirectPageNotFound,
   redirectSirenIntrouvable,
 } from '../../utils/redirect';
-import EtablissementSection from '../../components/etablissementSection';
+import EtablissementSection from '../../components/etablissement-section';
 
-import NonDiffusible from '../../components/nonDiffusible';
+import NonDiffusible from '../../components/non-diffusible';
 
 // const structuredData = (uniteLegale: UniteLegale) => [
 //   ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],
@@ -32,7 +32,7 @@ const About: React.FC<IProps> = ({
 }) => (
   <Page
     small={true}
-    title={`Page entreprise - ${uniteLegale.nom_complet} - ${uniteLegale.siren}`}
+    title={`Entité - ${uniteLegale.nom_complet} - ${uniteLegale.siren}`}
     canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.page_path}`}
   >
     {/* <StructuredData data={structuredData(uniteLegale)} /> */}
@@ -48,7 +48,7 @@ const About: React.FC<IProps> = ({
       {uniteLegale.statut_diffusion === 'N' ? (
         <>
           <p>
-            Cette entreprise est <b>non-diffusible.</b>
+            Cette entité est <b>non-diffusible.</b>
           </p>
           <NonDiffusible />
         </>
@@ -90,7 +90,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siren = extractSiren(slug);
 
   // does not match a siren
-  if (!isSirenOrSiret(siren)) {
+  if (!isSiren(siren)) {
     redirectPageNotFound(context.res, slug);
     return { props: {} };
   }

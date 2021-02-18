@@ -8,10 +8,14 @@ import {
   getUniteLegale,
   UniteLegale,
 } from '../../model';
-import EtablissementSection from '../../components/etablissementSection';
-import Title from '../../components/titleSection';
-import { redirectSiretIntrouvable } from '../../utils/redirect';
-import NonDiffusible from '../../components/nonDiffusible';
+import EtablissementSection from '../../components/etablissement-section';
+import Title from '../../components/title-section';
+import {
+  redirectPageNotFound,
+  redirectSiretIntrouvable,
+} from '../../utils/redirect';
+import NonDiffusible from '../../components/non-diffusible';
+import { isSiret } from '../../utils/helper';
 
 interface IProps {
   etablissement: Etablissement;
@@ -26,7 +30,7 @@ const EtablissementPage: React.FC<IProps> = ({
 }) => (
   <Page
     small={true}
-    title={`Page etablissement - ${uniteLegale.nom_complet} - ${etablissement.siret}`}
+    title={`Etablissement - ${uniteLegale.nom_complet} - ${etablissement.siret}`}
   >
     <div className="content-container">
       <br />
@@ -46,7 +50,7 @@ const EtablissementPage: React.FC<IProps> = ({
       {isNonDiffusible ? (
         <>
           <p>
-            Cette entreprise est <b>non-diffusible.</b>
+            Cette établissement est <b>non-diffusible.</b>
           </p>
           <NonDiffusible />
         </>
@@ -67,22 +71,30 @@ const EtablissementPage: React.FC<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
-  const slug = context.params.slug;
+  const slug = context.params.slug as string;
 
-  const siretOrSiren = slug;
+  const siret = slug;
 
-  const etablissement = await getEtablissement(siretOrSiren as string);
-
-  if (!etablissement) {
-    redirectSiretIntrouvable(context.res, siretOrSiren as string);
+  // does not match a siren
+  if (!isSiret(siret)) {
+    redirectPageNotFound(context.res, slug);
     return { props: {} };
   }
+
+  const etablissement = await getEtablissement(siret as string);
+
+  if (!etablissement) {
+    redirectSiretIntrouvable(context.res, siret as string);
+    return { props: {} };
+  }
+
+  console.log(JSON.stringify(etablissement));
 
   //@ts-ignore
   const uniteLegale = await getUniteLegale(etablissement.siren as string);
 
   if (!uniteLegale) {
-    redirectSiretIntrouvable(context.res, siretOrSiren as string);
+    redirectSiretIntrouvable(context.res, siret as string);
     return { props: {} };
   }
 

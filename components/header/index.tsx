@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from '../searchBar';
+import SearchBar from '../search-bar';
 
 const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
   <>

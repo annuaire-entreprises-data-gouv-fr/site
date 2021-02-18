@@ -1,8 +1,9 @@
 import React from 'react';
 import ButtonLink from '../button';
+import { Section } from '../section';
 
 const NonDiffusible = () => (
-  <>
+  <Section title="Qu’est ce qu’une entreprise non-diffusible ?">
     <p>
       Certaines entités demandent à ne pas figurer sur les listes de diffusion
       publique en vertu de{' '}
@@ -27,7 +28,7 @@ const NonDiffusible = () => (
         ⇢ Rendre mon entité diffusible
       </ButtonLink>
     </div>
-  </>
+  </Section>
 );
 
 export default NonDiffusible;

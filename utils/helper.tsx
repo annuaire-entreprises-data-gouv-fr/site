@@ -1,7 +1,7 @@
 import { concatNames } from './formatting';
-import { categoriesJuridiques } from './categoriesJuridiques';
-import { codesNaf } from './codesNAF';
-import { codesEffectifs } from './codeEffectifs';
+import { categoriesJuridiques } from './categories-juridiques';
+import { codesNaf } from './codes-NAF';
+import { codesEffectifs } from './code-effectifs';
 
 export const managingDirector = (uniteLegale: any) => {
   return concatNames(uniteLegale.prenom_1, uniteLegale.nom);
@@ -46,4 +46,12 @@ export const isSirenOrSiret = (str: string) => {
   return (
     str.match(/^\d{9}|\d{14}$/g) && (str.length === 9 || str.length === 14)
   );
+};
+
+export const isSiret = (str: string) => {
+  return str.match(/^\d{14}$/g) && str.length === 14;
+};
+
+export const isSiren = (str: string) => {
+  return str.match(/^\d{9}$/g) && str.length === 9;
 };

@@ -5,7 +5,7 @@ import {
   formatNumbersFr,
   formatSiret,
 } from '../../utils/formatting';
-import { Tag } from '../../components/tag';
+import { Tag } from '../tag';
 import ButtonLink from '../button';
 
 interface IProps {
@@ -160,7 +160,8 @@ const Title: React.FC<IProps> = ({
 export const TitleImmatriculation: React.FC<{
   siren: string;
   name: string;
-}> = ({ siren, name }) => (
+  isNonDiffusible?: boolean;
+}> = ({ siren, name, isNonDiffusible = false }) => (
   <div className="header-section">
     <div className="title">
       <h1>
@@ -169,6 +170,7 @@ export const TitleImmatriculation: React.FC<{
       <div>
         <span>fiche documents & justificatifs </span>
         <span>‣ {formatNumbersFr(siren)}</span>
+        {isNonDiffusible && <Tag>non diffusible</Tag>}
       </div>
     </div>
 

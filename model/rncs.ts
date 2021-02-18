@@ -12,16 +12,11 @@ const rncsAuth = async () => {
       password: password,
     },
   });
-  try {
-    const cookie = response.headers.get('set-cookie');
-    if (cookie && typeof cookie === 'string') {
-      return cookie.split(';')[0];
-    }
-    return undefined;
-  } catch (e) {
-    logErrorInSentry(response.text());
-    return undefined;
+  const cookie = response.headers.get('set-cookie');
+  if (cookie && typeof cookie === 'string') {
+    return cookie.split(';')[0];
   }
+  return undefined;
 };
 
 export const getRNCSLink = async (siren: string) => {
@@ -38,8 +33,7 @@ export const getRNCSLink = async (siren: string) => {
     const result = await response.json();
     return result.length > 0 ? routes.rncs.portail + siren : null;
   } catch (e) {
-    console.log(e);
-    logErrorInSentry(e);
+    logErrorInSentry(`API RNCS for ${siren} : ${e}`);
     return null;
   }
 };

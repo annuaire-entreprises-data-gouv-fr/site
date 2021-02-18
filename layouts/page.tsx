@@ -3,7 +3,7 @@ import Footer from '../components/footer';
 import { Header, HeaderSmall } from '../components/header';
 import Meta from '../components/meta';
 import { Question } from '../components/question';
-import { NPSModal } from '../components/npsModal';
+import { NPSModal } from '../components/nps-modal';
 
 interface IProps {
   small?: boolean;

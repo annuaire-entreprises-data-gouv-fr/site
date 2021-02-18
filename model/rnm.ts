@@ -7,7 +7,7 @@ export const getRNMLink = async (siren: string) => {
     return response.status === 200 ? routes.rnm + siren : null;
   } catch (e) {
     console.log(e);
-    logErrorInSentry(e);
+    logErrorInSentry(`API RNM for ${siren} : ${e}`);
     return null;
   }
 };

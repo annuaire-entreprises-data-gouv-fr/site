@@ -10,13 +10,13 @@ import {
 } from '../../utils/redirect';
 import { Section } from '../../components/section';
 import ButtonLink from '../../components/button';
-import HorizontalSeparator from '../../components/horizontalSeparator';
+import HorizontalSeparator from '../../components/horizontal-separator';
 import { download } from '../../components/icon';
 import { cma, inpi } from '../../public/static/logo';
-import { TitleImmatriculation } from '../../components/titleSection';
+import { TitleImmatriculation } from '../../components/title-section';
 import getConventionCollective, {
   IConventions,
-} from '../../model/conventionCollective';
+} from '../../model/convention-collective';
 import { getRNCSLink } from '../../model/rncs';
 import ImmatriculationNotFound from '../../components/introuvable/immatriculation';
 import { Tag } from '../../components/tag';
@@ -31,7 +31,7 @@ interface IProps {
   conventionCollectives: IConventions[];
 }
 
-const EtablissementPage: React.FC<IProps> = ({
+const JustificatifPage: React.FC<IProps> = ({
   uniteLegale,
   conventionCollectives,
   hrefRNCS,
@@ -48,6 +48,7 @@ const EtablissementPage: React.FC<IProps> = ({
       <TitleImmatriculation
         siren={uniteLegale.siren}
         name={uniteLegale.nom_complet}
+        isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
       />
       {hrefRNCS && (
         <Section title="Cette entité est immatriculée au RCS">
@@ -96,27 +97,33 @@ const EtablissementPage: React.FC<IProps> = ({
       )}
       {!hrefRNM && !hrefRNCS && <ImmatriculationNotFound />}
       <HorizontalSeparator />
-      <Section title="Conventions collectives">
-        {conventionCollectives.length === 0 ? (
-          <div>Cette entité n’a aucune convention collective enregistrée</div>
-        ) : (
-          <FullTable
-            head={['SIRET', 'Titre', 'N°IDCC', 'Convention']}
-            body={conventionCollectives.map((convention) => [
-              <a href={`/etablissement/${convention.siret}`}>
-                {convention.siret}
-              </a>,
-              convention.title,
-              <Tag>{convention.num}</Tag>,
-              <ButtonLink target="_blank" href={convention.url} alt small>
-                ⇢&nbsp;Consulter
-              </ButtonLink>,
-            ])}
-          />
-        )}
-      </Section>
-      <HorizontalSeparator />
-      <Annonces siren={uniteLegale.siren} />
+      {uniteLegale.statut_diffusion !== 'N' && (
+        <>
+          <Section title="Conventions collectives">
+            {conventionCollectives.length === 0 ? (
+              <div>
+                Cette entité n’a aucune convention collective enregistrée
+              </div>
+            ) : (
+              <FullTable
+                head={['SIRET', 'Titre', 'N°IDCC', 'Convention']}
+                body={conventionCollectives.map((convention) => [
+                  <a href={`/etablissement/${convention.siret}`}>
+                    {convention.siret}
+                  </a>,
+                  convention.title,
+                  <Tag>{convention.num}</Tag>,
+                  <ButtonLink target="_blank" href={convention.url} alt small>
+                    ⇢&nbsp;Consulter
+                  </ButtonLink>,
+                ])}
+              />
+            )}
+          </Section>
+          <HorizontalSeparator />
+          <Annonces siren={uniteLegale.siren} />
+        </>
+      )}
     </div>
     <style jsx>{`
       .separator {
@@ -184,4 +191,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default EtablissementPage;
+export default JustificatifPage;

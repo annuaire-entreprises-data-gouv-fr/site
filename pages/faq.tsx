@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from 'react';
 import ButtonLink from '../components/button';
 
 import Page from '../layouts';
-import NonDiffusible from '../components/nonDiffusible';
+import NonDiffusible from '../components/non-diffusible';
 
 const QuestionBlock: React.FC<PropsWithChildren<{ title: string }>> = ({
   children,
@@ -136,7 +136,7 @@ const FAQ: React.FC<{}> = () => (
               </a>
             </li>
             <li>
-              Si l'entreprise n‘est pas une entreprise,{' '}
+              Si l'entreprise n‘est pas une entreprise artisanale,{' '}
               <a href="http://data.inpi.fr/">
                 contactez l‘INPI qui centralise les données des Greffes des
                 tribuanux de commerce.

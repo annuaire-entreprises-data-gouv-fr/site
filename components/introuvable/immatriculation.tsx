@@ -29,7 +29,7 @@ const ImmatriculationNotFound: React.FC = () => {
             </a>
           </li>
           <li>
-            Si l'entreprise n‘est pas une entreprise,{' '}
+            Si l'entreprise n‘est pas une entreprise artisanale,{' '}
             <a href="http://data.inpi.fr/">
               contactez l‘INPI qui centralise les données des Greffes des
               tribuanux de commerce.

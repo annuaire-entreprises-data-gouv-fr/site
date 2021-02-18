@@ -1,9 +1,11 @@
 import Raven from 'raven';
 
-export const logMessageInSentry = (message) => {
+export const logWarningInSentry = (message) => {
   if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
     Raven.config(process.env.SENTRY_DSN).install();
-    Raven.captureMessage(message);
+    Raven.captureMessage(message, {
+      level: 'info',
+    });
   }
 };
 

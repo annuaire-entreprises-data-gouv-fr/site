@@ -1,6 +1,6 @@
 import { escapeTerm } from '../utils/formatting';
 import { isSirenOrSiret, libelleFromCodeNaf } from '../utils/helper';
-import logErrorInSentry from '../utils/sentry';
+import logErrorInSentry, { logWarningInSentry } from '../utils/sentry';
 import {
   ResultUniteLegale,
   UniteLegale,
@@ -69,7 +69,7 @@ const getResults = async (
  * GET UNITE LEGALE
  */
 
-const getUniteLegaleSirenOuverte = async (
+const getUniteLegaleSireneOuverte = async (
   siren: string
 ): Promise<UniteLegale | undefined> => {
   if (!isSirenOrSiret(siren)) {
@@ -77,20 +77,12 @@ const getUniteLegaleSirenOuverte = async (
   }
   try {
     const response = await fetch(routes.sireneOuverte.uniteLegale + siren);
-    if (response.status === 404) {
-      return undefined;
+    if (response.status !== 200) {
+      throw new Error(await response.text());
     }
+
     const result = (await response.json())[0].unite_legale;
-    if (!result) {
-      return undefined;
-    }
-
     const uniteLegale = result[0];
-
-    if (!uniteLegale) {
-      return undefined;
-    }
-
     const siege = uniteLegale.etablissement_siege[0];
 
     if (!siege.is_siege) {
@@ -140,7 +132,7 @@ const getUniteLegaleSirenOuverte = async (
     return unite_legale;
   } catch (e) {
     console.log(e);
-    logErrorInSentry(e);
+    logErrorInSentry(`API Sirene Etalab for ${siren} : ${e}`);
     return undefined;
   }
 };
@@ -149,7 +141,7 @@ const getUniteLegaleSirenOuverte = async (
  * GET ETABLISSEMENT
  */
 
-const getEtablissement = async (
+const getEtablissementSireneOuverte = async (
   siret: string
 ): Promise<Etablissement | undefined> => {
   if (!isSirenOrSiret(siret)) {
@@ -160,27 +152,22 @@ const getEtablissement = async (
     const response = await fetch(
       `${routes.sireneOuverte.etablissement}${encodeURI(siret)}`
     );
-    if (response.status === 404) {
-      return undefined;
+    if (response.status !== 200) {
+      throw new Error(await response.text());
     }
     const result = (await response.json())[0].etablissement;
-
-    if (!result) {
-      return undefined;
-    }
-
     const etablissement = result[0];
-
-    if (!etablissement) {
-      return undefined;
-    }
 
     return etablissement as Etablissement;
   } catch (e) {
     console.log(e);
-    logErrorInSentry(e);
+    logErrorInSentry(`API Sirene Etalab for ${siret} : ${e}`);
     return undefined;
   }
 };
 
-export { getEtablissement, getUniteLegaleSirenOuverte, getResults };
+export {
+  getEtablissementSireneOuverte,
+  getUniteLegaleSireneOuverte,
+  getResults,
+};

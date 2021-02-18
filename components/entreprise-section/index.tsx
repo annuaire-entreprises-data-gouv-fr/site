@@ -1,6 +1,7 @@
 import React from 'react';
 import { Etablissement, UniteLegale } from '../../model';
 import {
+  capitalize,
   formatDate,
   formatDateLong,
   formatNumbersFr,
@@ -11,7 +12,7 @@ import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
 } from '../../utils/helper';
-import HorizontalSeparator from '../horizontalSeparator';
+import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 
@@ -67,7 +68,7 @@ const EntrepriseSection: React.FC<{
   uniteLegale: UniteLegale;
 }> = ({ uniteLegale }) => {
   const data = [
-    ['Dénomination', uniteLegale.nom_complet],
+    ['Dénomination', capitalize(uniteLegale.nom_complet)],
     ['SIREN', formatNumbersFr(uniteLegale.siren)],
     [
       'SIRET du siège social',

@@ -1,10 +1,10 @@
 import {
-  getEtablissement,
-  getUniteLegaleSirenOuverte,
+  getEtablissementSireneOuverte,
+  getUniteLegaleSireneOuverte,
   getResults,
-} from './sireneOuverte';
+} from './sirene-ouverte';
 
-import { getUniteLegaleInsee } from './sireneInsee';
+import { getUniteLegaleInsee, getEtablissementInsee } from './sirene-insee';
 
 export interface Etablissement {
   enseigne?: string;
@@ -64,13 +64,30 @@ export interface SearchResults {
   unite_legale: ResultUniteLegale[];
 }
 
+/**
+ * Download Unite Legale from Etalab SIRENE API (fallback on INSEE's API)
+ * @param siren
+ */
 const getUniteLegale = async (siren: string) => {
-  const uniteLegale = await getUniteLegaleSirenOuverte(siren);
+  const uniteLegale = await getUniteLegaleSireneOuverte(siren);
 
   if (!uniteLegale) {
     return await getUniteLegaleInsee(siren);
   }
   return uniteLegale;
+};
+
+/**
+ * Download Etablissement from Etalab SIRENE API (fallback on INSEE's API)
+ */
+const getEtablissement = async (siret: string) => {
+  // const etablissement = await getEtablissementSireneOuverte(siret);
+  const etablissement = null;
+
+  if (!etablissement) {
+    return await getEtablissementInsee(siret);
+  }
+  return etablissement;
 };
 
 export { getEtablissement, getUniteLegale, getResults };

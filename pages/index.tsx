@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SearchBar from '../components/searchBar';
+import SearchBar from '../components/search-bar';
 import Page from '../layouts';
 
 const About: React.FC = () => {

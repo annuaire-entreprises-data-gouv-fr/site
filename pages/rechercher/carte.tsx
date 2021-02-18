@@ -8,8 +8,8 @@ import {
   getEtablissement,
   getResults,
 } from '../../model';
-import ResultList from '../../components/resultList';
-import PageCounter from '../../components/pageCounter';
+import ResultList from '../../components/result-list';
+import PageCounter from '../../components/page-counter';
 import {
   redirectIfSiretOrSiren,
   redirectSiretIntrouvable,

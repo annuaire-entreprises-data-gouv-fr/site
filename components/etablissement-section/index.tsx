@@ -14,7 +14,7 @@ import {
   libelleFromCodeEffectif,
 } from '../../utils/helper';
 import ButtonLink from '../button';
-import HorizontalSeparator from '../horizontalSeparator';
+import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 

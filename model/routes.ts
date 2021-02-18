@@ -10,6 +10,7 @@ const routes = {
   },
   sireneInsee: {
     siren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
+    siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',
     auth: 'https://api.insee.fr/token',
   },
   sireneOuverte: {
@@ -17,7 +18,7 @@ const routes = {
     uniteLegale: `http://recherche.entreprise.dataeng.etalab.studio/siren?q=`,
     rechercheUniteLegale: `http://recherche.entreprise.dataeng.etalab.studio/search`,
   },
-  conventionCollectives: ' https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
+  conventionCollectives: 'https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
 };
 
 export default routes;

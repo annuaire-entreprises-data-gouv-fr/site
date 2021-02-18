@@ -3,12 +3,12 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { getResults, SearchResults } from '../../model';
-import ResultList from '../../components/resultList';
-import PageCounter from '../../components/pageCounter';
+import ResultList from '../../components/result-list';
+import PageCounter from '../../components/page-counter';
 import { pin } from '../../components/icon';
 import { redirectIfSiretOrSiren } from '../../utils/redirect';
 import { removeInvisibleChar } from '../../utils/formatting';
-import { parsePage } from '../../model/sireneOuverte';
+import { parsePage } from '../../model/sirene-ouverte';
 
 interface IProps {
   response: SearchResults;
