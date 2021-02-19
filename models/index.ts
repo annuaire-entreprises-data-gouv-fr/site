@@ -6,13 +6,13 @@ import getConventionCollectives from './convention-collective';
 
 /** COMMON TYPES */
 
-export interface Etablissement {
+export interface IEtablissement {
   enseigne?: string;
   siren: string;
   siret: string;
   nic: string;
-  isActive: boolean;
-  isSiege: boolean;
+  isActive: boolean; // === 'A'
+  isSiege: boolean; // === 'true'
   creationDate: string;
   lastUpdateDate: string;
   firstUpdateDate: string;
@@ -24,16 +24,16 @@ export interface Etablissement {
   longitude: string;
 }
 
-export interface UniteLegale {
+export interface IUniteLegale {
   siren: string;
   tvaNumber: string;
-  siege: Etablissement;
-  companyType: string;
-  etablissementList: Etablissement[];
+  siege: IEtablissement;
+  companyLegalStatus: string;
+  etablissementList: IEtablissement[];
   creationDate: string;
   lastUpdateDate: string;
   firstUpdateDate: string;
-  isDiffusible: string;
+  isDiffusible: boolean; // !== 'N'
   fullName: string;
   path: string;
   headcount: string;

@@ -1,57 +1,49 @@
 import React from 'react';
-import { Etablissement, UniteLegale } from '../../models';
+import { IEtablissement, IUniteLegale } from '../../models';
 import { map, pin } from '../icon';
 import {
   formatDate,
   formatDateLong,
   formatNumbersFr,
-  formatSiret,
 } from '../../utils/helpers/formatting';
 import {
   fullAdress,
   fullLibelleFromCodeNaf,
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
-} from '../../utils/helper';
+} from '../../utils/labels';
 import ButtonLink from '../button';
 import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
+import { formatSiret } from '../../utils/helpers/siren-and-siret';
 
 interface IProps {
-  etablissement: Etablissement;
-  uniteLegale: UniteLegale;
+  etablissement: IEtablissement;
+  uniteLegale: IUniteLegale;
   usedInEntreprisePage?: Boolean;
 }
 
 const Details: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   <>
-    {uniteLegale.statut_diffusion !== 'N' && (
+    {uniteLegale.isDiffusible && (
       <p>
         Cet établissement est
-        <b>
-          {etablissement.etat_administratif_etablissement === 'A'
-            ? ' en activité'
-            : ' fermé'}
-          .
-        </b>{' '}
-        C’est
-        {etablissement.etablissement_siege === 'true' ? (
+        <b>{etablissement.isActive ? ' en activité' : ' fermé'}.</b> C’est
+        {etablissement.isSiege ? (
           <b> le siège social</b>
         ) : (
           <> un établissement secondaire</>
         )}{' '}
         de l’entité{' '}
-        <a href={`/entreprise/${uniteLegale.siren}`}>
-          {uniteLegale.nom_complet}
-        </a>
-        ,
-        {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
+        <a href={`/entreprise/${uniteLegale.siren}`}>{uniteLegale.fullName}</a>,
+        {uniteLegale.etablissementList &&
+        uniteLegale.etablissementList.length > 1 ? (
           <>
             {' '}
             qui possède au total{' '}
             <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
-              {uniteLegale.etablissements.length} établissements.
+              {uniteLegale.etablissementList.length} établissements.
             </a>
           </>
         ) : (
@@ -66,23 +58,21 @@ const Details: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
       </p>
     )}
     <p>
-      {etablissement.date_creation && (
+      {etablissement.creationDate && (
         <>
           Cet établissement a été crée le{' '}
-          <b>{formatDateLong(etablissement.date_creation)}</b>
+          <b>{formatDateLong(etablissement.creationDate)}</b>
         </>
       )}{' '}
-      {etablissement.date_debut_activite &&
-        etablissement.etat_administratif_etablissement !== 'A' && (
-          <>
-            et il a été fermé le{' '}
-            <b>{formatDateLong(etablissement.date_debut_activite)}</b>
-          </>
-        )}{' '}
-      {etablissement.geo_adresse && (
+      {etablissement.firstUpdateDate && !etablissement.isActive && (
         <>
-          et il est domicilié au{' '}
-          <a href="#contact">{etablissement.geo_adresse}</a>
+          et il a été fermé le{' '}
+          <b>{formatDateLong(etablissement.firstUpdateDate)}</b>
+        </>
+      )}{' '}
+      {etablissement.adress && (
+        <>
+          et il est domicilié au <a href="#contact">{etablissement.adress}</a>
         </>
       )}
     </p>
@@ -98,34 +88,25 @@ const EtablissementSection: React.FC<IProps> = ({
     ['SIREN', formatNumbersFr(etablissement.siren)],
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
-    [
-      'N° TVA Intracommunautaire',
-      formatNumbersFr(uniteLegale.numero_tva_intra),
-    ],
+    ['N° TVA Intracommunautaire', formatNumbersFr(uniteLegale.tvaNumber)],
     [
       'Activité principale (établissement)',
-      fullLibelleFromCodeNaf(etablissement.activite_principale),
+      fullLibelleFromCodeNaf(etablissement.mainActivity),
     ],
     [
       'Nature juridique',
-      libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique),
+      libelleFromCategoriesJuridiques(uniteLegale.companyLegalStatus),
     ],
     [
       'Tranche d’effectif salarié',
-      libelleFromCodeEffectif(etablissement.tranche_effectif_salarie),
+      libelleFromCodeEffectif(etablissement.headcount),
     ],
-    ['Date de création', formatDate(etablissement.date_creation)],
-    [
-      'Date de dernière mise à jour',
-      formatDate(etablissement.date_mise_a_jour),
-    ],
+    ['Date de création', formatDate(etablissement.creationDate)],
+    ['Date de dernière mise à jour', formatDate(etablissement.lastUpdateDate)],
   ];
 
-  if (etablissement.etat_administratif_etablissement !== 'A') {
-    data.push([
-      'Date de fermeture',
-      formatDate(etablissement.date_debut_activite),
-    ]);
+  if (!etablissement.isActive) {
+    data.push(['Date de fermeture', formatDate(etablissement.firstUpdateDate)]);
   }
   if (etablissement.enseigne) {
     data.splice(0, 0, ['Enseigne de l’établissement', etablissement.enseigne]);
@@ -141,9 +122,7 @@ const EtablissementSection: React.FC<IProps> = ({
           usedInEntreprisePage
             ? `Les informations sur le siège social`
             : `Les informations sur cet établissement${
-                etablissement.etablissement_siege === 'true'
-                  ? ' (siège social)'
-                  : ''
+                etablissement.isSiege ? ' (siège social)' : ''
               }`
         }
       >

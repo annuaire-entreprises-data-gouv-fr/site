@@ -1,8 +1,8 @@
 import React from 'react';
 import MapboxInstance from '.';
-import { Etablissement } from '../../models';
+import { IEtablissement } from '../../models';
 
-const MapEtablissement: React.FC<{ etablissement: Etablissement }> = ({
+const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
   etablissement,
 }) => (
   <>

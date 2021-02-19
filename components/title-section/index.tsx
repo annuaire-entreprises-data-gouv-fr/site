@@ -1,20 +1,17 @@
 import React from 'react';
 
-import {
-  capitalize,
-  formatNumbersFr,
-  formatSiret,
-} from '../../utils/helpers/formatting';
+import { capitalize, formatNumbersFr } from '../../utils/helpers/formatting';
 import { Tag } from '../tag';
 import ButtonLink from '../button';
+import { formatSiret } from '../../utils/helpers/siren-and-siret';
 
 interface IProps {
   siren: string;
   siret: string;
   name: string;
-  isOpen?: boolean;
+  isActive?: boolean;
   isEntreprise?: boolean; // true if entreprise, false if etablissement
-  isNonDiffusible?: boolean;
+  isDiffusible?: boolean;
   isSiege?: boolean;
 }
 
@@ -72,9 +69,9 @@ const Title: React.FC<IProps> = ({
   siren,
   siret,
   name,
-  isOpen,
+  isActive,
   isEntreprise,
-  isNonDiffusible = false,
+  isDiffusible = true,
   isSiege = false,
 }) => (
   <div className="header-section">
@@ -90,11 +87,11 @@ const Title: React.FC<IProps> = ({
           <span>‣ {formatNumbersFr(siren)}</span>
         )}
         <span>
-          {isNonDiffusible ? (
+          {!isDiffusible ? (
             <Tag>non diffusible</Tag>
           ) : (
             <>
-              {isOpen ? (
+              {isActive ? (
                 <Tag className="open">en activité</Tag>
               ) : (
                 <Tag className="closed">fermé</Tag>

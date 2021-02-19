@@ -2,12 +2,12 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { Etablissement, getEtablissement, search } from '../../models';
+import { getEtablissement, IEtablissement } from '../../models';
 import { redirectSiretIntrouvable } from '../../utils/redirect';
 import MapEtablissement from '../../components/mapbox/map-etablissement';
 
 interface IProps {
-  etablissement: Etablissement;
+  etablissement: IEtablissement;
 }
 
 const About: React.FC<IProps> = ({ etablissement }) => (

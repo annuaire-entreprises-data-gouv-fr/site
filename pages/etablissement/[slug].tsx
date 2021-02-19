@@ -3,10 +3,10 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import {
-  Etablissement,
   getEtablissement,
   getUniteLegale,
-  UniteLegale,
+  IEtablissement,
+  IUniteLegale,
 } from '../../models';
 import EtablissementSection from '../../components/etablissement-section';
 import Title from '../../components/title-section';
@@ -18,8 +18,8 @@ import NonDiffusible from '../../components/non-diffusible';
 import { isSiret } from '../../utils/helper';
 
 interface IProps {
-  etablissement: Etablissement;
-  uniteLegale: UniteLegale;
+  etablissement: IEtablissement;
+  uniteLegale: IUniteLegale;
   isNonDiffusible?: boolean;
 }
 
@@ -40,7 +40,7 @@ const EtablissementPage: React.FC<IProps> = ({
         siren={uniteLegale.siren}
         siret={etablissement.siret}
         isEntreprise={false}
-        isOpen={etablissement.etat_administratif_etablissement === 'A'}
+        isActive={etablissement.etat_administratif_etablissement === 'A'}
         isNonDiffusible={isNonDiffusible}
         isSiege={
           !!etablissement.is_siege ||

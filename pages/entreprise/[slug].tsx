@@ -2,8 +2,8 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { isSiren } from '../../utils/helper';
-import { Etablissement, getUniteLegale, UniteLegale } from '../../models';
+import { isSiren } from '../../utils/helpers/siren-and-siret';
+import { getUniteLegale, IEtablissement, IUniteLegale } from '../../models';
 import EntrepriseSection from '../../components/entreprise-section';
 import EtablissementListeSection from '../../components/etablissement-liste-section';
 import Title from '../../components/title-section';
@@ -20,32 +20,27 @@ import NonDiffusible from '../../components/non-diffusible';
 // ];
 
 interface IProps {
-  etablissement: Etablissement;
-  uniteLegale: UniteLegale;
-  isNonDiffusible?: boolean;
+  etablissement: IEtablissement;
+  uniteLegale: IUniteLegale;
 }
 
-const About: React.FC<IProps> = ({
-  etablissement,
-  uniteLegale,
-  isNonDiffusible,
-}) => (
+const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   <Page
     small={true}
-    title={`Entité - ${uniteLegale.nom_complet} - ${uniteLegale.siren}`}
+    title={`Entité - ${uniteLegale.fullName} - ${uniteLegale.siren}`}
     canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.page_path}`}
   >
     {/* <StructuredData data={structuredData(uniteLegale)} /> */}
     <div className="content-container">
       <Title
-        name={uniteLegale.nom_complet}
+        name={uniteLegale.fullName}
         siren={uniteLegale.siren}
         siret={etablissement.siret}
         isEntreprise={true}
-        isOpen={etablissement.etat_administratif_etablissement === 'A'}
-        isNonDiffusible={isNonDiffusible}
+        isActive={etablissement.isActive}
+        isDiffusible={uniteLegale.isDiffusible}
       />
-      {uniteLegale.statut_diffusion === 'N' ? (
+      {uniteLegale.isDiffusible ? (
         <>
           <p>
             Cette entité est <b>non-diffusible.</b>
@@ -55,10 +50,10 @@ const About: React.FC<IProps> = ({
       ) : (
         <>
           <EntrepriseSection uniteLegale={uniteLegale} />
-          {uniteLegale.etablissement_siege && (
+          {uniteLegale.siege && (
             <EtablissementSection
               uniteLegale={uniteLegale}
-              etablissement={uniteLegale.etablissement_siege}
+              etablissement={uniteLegale.siege}
               usedInEntreprisePage={true}
             />
           )}
@@ -95,10 +90,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { props: {} };
   }
 
-  const uniteLegale = await getUniteLegale(siren as string);
+  const uniteLegale = await getUniteLegale(siren);
 
   if (!uniteLegale) {
-    redirectSirenIntrouvable(context.res, siren as string);
+    redirectSirenIntrouvable(context.res, siren);
     return { props: {} };
   }
 
@@ -107,7 +102,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       //@ts-ignore
       etablissement: uniteLegale.etablissement_siege || {},
       uniteLegale,
-      isNonDiffusible: uniteLegale.statut_diffusion === 'N',
     },
   };
 };

@@ -1,6 +1,6 @@
+import { IUniteLegale } from '.';
 import fetchConventionCollectives from '../clients/siret-2-idcc';
 import logErrorInSentry from '../utils/sentry';
-import { UniteLegale } from './unite-legale';
 
 export interface IConventionCollective {
   title: string;
@@ -10,10 +10,10 @@ export interface IConventionCollective {
 }
 
 const getConventionCollectives = async (
-  uniteLegale: UniteLegale
+  uniteLegale: IUniteLegale
 ): Promise<IConventionCollective[] | undefined> => {
   try {
-    const sirets = uniteLegale.etablissements.map((e) => e.siret);
+    const sirets = uniteLegale.etablissementList.map((e) => e.siret);
     return await fetchConventionCollectives(sirets);
   } catch (e) {
     const errorMessage = `${uniteLegale.siren} error in API Siret2Idcc convention collectives : ${e}`;

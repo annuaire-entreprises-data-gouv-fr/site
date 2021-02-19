@@ -1,7 +1,9 @@
+import { IEtablissement } from '../../models';
+
 interface UniteLegaleResultat {
   siren: string;
   siret: string;
-  etablissement_siege: Etablissement;
+  etablissement_siege: IEtablissement;
   categorie_juridique: string;
   nombre_etablissements: number;
   date_creation: string;
