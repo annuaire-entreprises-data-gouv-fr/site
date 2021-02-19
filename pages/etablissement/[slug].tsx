@@ -7,7 +7,7 @@ import {
   getEtablissement,
   getUniteLegale,
   UniteLegale,
-} from '../../model';
+} from '../../models';
 import EtablissementSection from '../../components/etablissement-section';
 import Title from '../../components/title-section';
 import {

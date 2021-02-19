@@ -1,12 +1,12 @@
 import React from 'react';
-import { Etablissement, UniteLegale } from '../../model';
+import { Etablissement, UniteLegale } from '../../models';
 import {
   capitalize,
   formatDate,
   formatDateLong,
   formatNumbersFr,
   formatSiret,
-} from '../../utils/formatting';
+} from '../../utils/helpers/formatting';
 import {
   fullLibelleFromCodeNaf,
   libelleFromCategoriesJuridiques,

@@ -3,7 +3,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { isSirenOrSiret } from '../../utils/helper';
-import { getUniteLegale, UniteLegale } from '../../model';
+import { getUniteLegale } from '../../models';
 import {
   redirectPageNotFound,
   redirectSirenIntrouvable,
@@ -16,26 +16,27 @@ import { cma, inpi } from '../../public/static/logo';
 import { TitleImmatriculation } from '../../components/title-section';
 import getConventionCollective, {
   IConventions,
-} from '../../model/convention-collective';
-import { getRNCSLink } from '../../model/rncs';
+} from '../../clients/siret-2-idcc';
 import ImmatriculationNotFound from '../../components/introuvable/immatriculation';
 import { Tag } from '../../components/tag';
 import Annonces from '../../components/annonces';
 import { FullTable } from '../../components/table/full';
-import { getRNMLink } from '../../model/rnm';
+import {
+  getImmatriculationLinks,
+  ImmatriculationLinks,
+} from '../../models/immatriculation';
+import { UniteLegale } from '../../models/unite-legale';
 
 interface IProps {
   uniteLegale: UniteLegale;
-  hrefRNCS: string;
-  hrefRNM: string;
+  immatriculationLinks: ImmatriculationLinks;
   conventionCollectives: IConventions[];
 }
 
 const JustificatifPage: React.FC<IProps> = ({
   uniteLegale,
   conventionCollectives,
-  hrefRNCS,
-  hrefRNM,
+  immatriculationLinks,
 }) => (
   <Page
     small={true}
@@ -48,9 +49,8 @@ const JustificatifPage: React.FC<IProps> = ({
       <TitleImmatriculation
         siren={uniteLegale.siren}
         name={uniteLegale.nom_complet}
-        isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
       />
-      {hrefRNCS && (
+      {immatriculationLinks.rncsLink && (
         <Section title="Cette entité est immatriculée au RCS">
           <div className="description">
             <div>
@@ -66,14 +66,20 @@ const JustificatifPage: React.FC<IProps> = ({
               {download} Télécharger le justificatif
             </ButtonLink> */}
             <div className="separator" />
-            <ButtonLink target="_blank" href={`${hrefRNCS}`} alt>
+            <ButtonLink
+              target="_blank"
+              href={`${immatriculationLinks.rncsLink}`}
+              alt
+            >
               ⇢ Voir la fiche sur le site de l’INPI
             </ButtonLink>
           </div>
         </Section>
       )}
-      {hrefRNCS && hrefRNM && <HorizontalSeparator />}
-      {hrefRNM && (
+      {immatriculationLinks.rncsLink && immatriculationLinks.rnmLink && (
+        <HorizontalSeparator />
+      )}
+      {immatriculationLinks.rncsLink && (
         <Section title="Cette entité est immatriculée au RM">
           <div className="description">
             <div>
@@ -85,17 +91,26 @@ const JustificatifPage: React.FC<IProps> = ({
             <div className="logo-wrapper">{cma}</div>
           </div>
           <div className="layout-center">
-            <ButtonLink target="_blank" href={`${hrefRNM}?format=pdf`}>
+            <ButtonLink
+              target="_blank"
+              href={`${immatriculationLinks.rncsLink}?format=pdf`}
+            >
               {download} Télécharger le justificatif
             </ButtonLink>
             <div className="separator" />
-            <ButtonLink target="_blank" href={`${hrefRNM}?format=html`} alt>
+            <ButtonLink
+              target="_blank"
+              href={`${immatriculationLinks.rncsLink}?format=html`}
+              alt
+            >
               ⇢ Voir la fiche sur le site de CMA France
             </ButtonLink>
           </div>
         </Section>
       )}
-      {!hrefRNM && !hrefRNCS && <ImmatriculationNotFound />}
+      {!immatriculationLinks.rncsLink && !immatriculationLinks.rnmLink && (
+        <ImmatriculationNotFound />
+      )}
       <HorizontalSeparator />
       {uniteLegale.statut_diffusion !== 'N' && (
         <>
@@ -185,8 +200,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       uniteLegale,
       conventionCollectives,
-      hrefRNM: await getRNMLink(siren),
-      hrefRNCS: await getRNCSLink(siren),
+      immatriculationLinks: await getImmatriculationLinks(siren),
     },
   };
 };

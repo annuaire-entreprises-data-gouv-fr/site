@@ -4,7 +4,7 @@ import {
   capitalize,
   formatNumbersFr,
   formatSiret,
-} from '../../utils/formatting';
+} from '../../utils/helpers/formatting';
 import { Tag } from '../tag';
 import ButtonLink from '../button';
 

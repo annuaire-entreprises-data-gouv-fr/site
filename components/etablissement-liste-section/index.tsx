@@ -1,6 +1,6 @@
 import React from 'react';
-import { UniteLegale } from '../../model';
-import { formatSiret } from '../../utils/formatting';
+import { UniteLegale } from '../../models';
+import { formatSiret } from '../../utils/helpers/formatting';
 import { libelleFromCodeNaf } from '../../utils/helper';
 import { Section } from '../section';
 import { FullTable } from '../table/full';

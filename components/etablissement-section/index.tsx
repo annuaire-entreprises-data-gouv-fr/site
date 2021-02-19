@@ -1,12 +1,12 @@
 import React from 'react';
-import { Etablissement, UniteLegale } from '../../model';
+import { Etablissement, UniteLegale } from '../../models';
 import { map, pin } from '../icon';
 import {
   formatDate,
   formatDateLong,
   formatNumbersFr,
   formatSiret,
-} from '../../utils/formatting';
+} from '../../utils/helpers/formatting';
 import {
   fullAdress,
   fullLibelleFromCodeNaf,
@@ -151,12 +151,7 @@ const EtablissementSection: React.FC<IProps> = ({
       </Section>
       <div className="section-wrapper" id="contact">
         <Section title="Les informations de contact">
-          <TwoColumnTable
-            body={[
-              // ['Gérant', managingDirector(uniteLegale) || ''],
-              ['Adresse', fullAdress(etablissement)],
-            ]}
-          />
+          <TwoColumnTable body={[['Adresse', fullAdress(etablissement)]]} />
         </Section>
         <div className="map">
           {map}

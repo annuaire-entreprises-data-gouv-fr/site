@@ -1,32 +1,30 @@
 import React from 'react';
-import { ResultUniteLegale } from '../../model';
-import { capitalize } from '../../utils/formatting';
+import { ISearchResult } from '../../models/search';
+import { capitalize } from '../../utils/helpers/formatting';
 import { Tag } from '../tag';
 
 interface IProps {
-  resultList: ResultUniteLegale[];
+  results: ISearchResult[];
 }
 
-const ResultList: React.FC<IProps> = ({ resultList }) => (
+const ResultsList: React.FC<IProps> = ({ results }) => (
   <div className="results-list">
-    {resultList.map((unite_legale) => (
+    {results.map((result) => (
       <a
-        href={`/entreprise/${unite_legale.page_path}`}
-        key={unite_legale.siret}
+        href={`/entreprise/${result.path}`}
+        key={result.siret}
         className="dont-apply-link-style"
       >
         <div className="title">
-          {capitalize(unite_legale.nom_complet)}
-          {unite_legale.etat_administratif_etablissement !== 'A' && (
-            <Tag className="closed">fermée</Tag>
-          )}
+          {capitalize(result.fullName)}
+          {result.isActive && <Tag className="closed">fermée</Tag>}
         </div>
-        <div>{unite_legale.libelle_activite_principale}</div>
+        <div>{result.mainActivityLabel}</div>
         <div className="adress">
-          {unite_legale.geo_adresse || 'Adresse inconnue'}{' '}
+          {result.adress || 'Adresse inconnue'}{' '}
           <Tag>
-            {`${unite_legale.nombre_etablissements} établissement${
-              unite_legale.nombre_etablissements > 1 ? 's' : ''
+            {`${result.etablissementCount} établissement${
+              result.etablissementCount > 1 ? 's' : ''
             }`}
           </Tag>
         </div>
@@ -61,4 +59,4 @@ const ResultList: React.FC<IProps> = ({ resultList }) => (
   </div>
 );
 
-export default ResultList;
+export default ResultsList;

@@ -3,7 +3,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { isSiren } from '../../utils/helper';
-import { Etablissement, getUniteLegale, UniteLegale } from '../../model';
+import { Etablissement, getUniteLegale, UniteLegale } from '../../models';
 import EntrepriseSection from '../../components/entreprise-section';
 import EtablissementListeSection from '../../components/etablissement-liste-section';
 import Title from '../../components/title-section';
