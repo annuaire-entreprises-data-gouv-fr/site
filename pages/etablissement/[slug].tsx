@@ -15,39 +15,35 @@ import {
   redirectSiretIntrouvable,
 } from '../../utils/redirect';
 import NonDiffusible from '../../components/non-diffusible';
-import { isSiret } from '../../utils/helper';
+import { isSiret } from '../../utils/helpers/siren-and-siret';
+import { getEtablissementWithUniteLegale } from '../../models/etablissement';
 
 interface IProps {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
-  isNonDiffusible?: boolean;
 }
 
 const EtablissementPage: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
-  isNonDiffusible = false,
 }) => (
   <Page
     small={true}
-    title={`Etablissement - ${uniteLegale.nom_complet} - ${etablissement.siret}`}
+    title={`Etablissement - ${uniteLegale.fullName} - ${etablissement.siret}`}
   >
     <div className="content-container">
       <br />
       <a href={`/entreprise/${uniteLegale.siren}`}>← Fiche entité</a>
       <Title
-        name={uniteLegale.nom_complet}
+        name={uniteLegale.fullName}
         siren={uniteLegale.siren}
         siret={etablissement.siret}
         isEntreprise={false}
-        isActive={etablissement.etat_administratif_etablissement === 'A'}
-        isNonDiffusible={isNonDiffusible}
-        isSiege={
-          !!etablissement.is_siege ||
-          etablissement.etablissement_siege === 'true'
-        }
+        isActive={etablissement.isActive}
+        isDiffusible={uniteLegale.isDiffusible}
+        isSiege={!!etablissement.isSiege}
       />
-      {isNonDiffusible ? (
+      {uniteLegale.isDiffusible ? (
         <>
           <p>
             Cette établissement est <b>non-diffusible.</b>
@@ -71,38 +67,21 @@ const EtablissementPage: React.FC<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
-  const slug = context.params.slug as string;
-
-  const siret = slug;
+  const siret = context.params.slug as string;
 
   // does not match a siren
   if (!isSiret(siret)) {
-    redirectPageNotFound(context.res, slug);
+    redirectPageNotFound(context.res, siret);
     return { props: {} };
   }
 
-  const etablissement = await getEtablissement(siret as string);
-
-  if (!etablissement) {
-    redirectSiretIntrouvable(context.res, siret as string);
-    return { props: {} };
-  }
-
-  console.log(JSON.stringify(etablissement));
-
-  //@ts-ignore
-  const uniteLegale = await getUniteLegale(etablissement.siren as string);
-
-  if (!uniteLegale) {
-    redirectSiretIntrouvable(context.res, siret as string);
-    return { props: {} };
-  }
+  const etablissementWithUniteLegale = await getEtablissementWithUniteLegale(
+    siret
+  );
 
   return {
     props: {
-      etablissement,
-      uniteLegale,
-      isNonDiffusible: uniteLegale.statut_diffusion === 'N',
+      ...etablissementWithUniteLegale,
     },
   };
 };

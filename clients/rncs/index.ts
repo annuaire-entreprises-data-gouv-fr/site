@@ -7,23 +7,32 @@ export class RncsHttpServerError extends Error {
     super();
   }
 }
+export class RncsAuthError extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
 
 const rncsAuth = async () => {
-  const login = process.env.INPI_LOGIN as string;
-  const password = process.env.INPI_PASSWORD as string;
+  try {
+    const login = process.env.INPI_LOGIN as string;
+    const password = process.env.INPI_PASSWORD as string;
 
-  const response = await fetch(routes.rncs.api.login, {
-    method: 'POST',
-    headers: {
-      login: login,
-      password: password,
-    },
-  });
-  const cookie = response.headers.get('set-cookie');
-  if (!cookie || typeof cookie !== 'string') {
-    return undefined;
+    const response = await fetch(routes.rncs.api.login, {
+      method: 'POST',
+      headers: {
+        login: login,
+        password: password,
+      },
+    });
+    const cookie = response.headers.get('set-cookie');
+    if (!cookie || typeof cookie !== 'string') {
+      throw new Error('Authentication failed');
+    }
+    return cookie.split(';')[0];
+  } catch (e) {
+    throw new RncsAuthError(e);
   }
-  return cookie.split(';')[0];
 };
 
 export { fetchRncsImmatriculation, rncsAuth };

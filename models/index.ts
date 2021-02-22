@@ -11,7 +11,7 @@ export interface IEtablissement {
   siren: string;
   siret: string;
   nic: string;
-  isActive: boolean; // === 'A'
+  isActive: boolean | null; // === 'A'
   isSiege: boolean; // === 'true'
   creationDate: string;
   lastUpdateDate: string;

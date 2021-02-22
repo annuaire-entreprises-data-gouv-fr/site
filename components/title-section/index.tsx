@@ -4,12 +4,13 @@ import { capitalize, formatNumbersFr } from '../../utils/helpers/formatting';
 import { Tag } from '../tag';
 import ButtonLink from '../button';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
+import IsActiveTag from '../is-active-tag';
 
 interface IProps {
   siren: string;
   siret: string;
   name: string;
-  isActive?: boolean;
+  isActive: boolean | null;
   isEntreprise?: boolean; // true if entreprise, false if etablissement
   isDiffusible?: boolean;
   isSiege?: boolean;
@@ -87,17 +88,8 @@ const Title: React.FC<IProps> = ({
           <span>‣ {formatNumbersFr(siren)}</span>
         )}
         <span>
-          {!isDiffusible ? (
-            <Tag>non diffusible</Tag>
-          ) : (
-            <>
-              {isActive ? (
-                <Tag className="open">en activité</Tag>
-              ) : (
-                <Tag className="closed">fermé</Tag>
-              )}
-            </>
-          )}
+          {!isDiffusible && <Tag>non diffusible</Tag>}
+          <IsActiveTag isActive={isActive} />
           {isSiege && <Tag>siège social</Tag>}
         </span>
       </div>
