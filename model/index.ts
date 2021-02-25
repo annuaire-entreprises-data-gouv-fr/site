@@ -81,8 +81,7 @@ const getUniteLegale = async (siren: string) => {
  * Download Etablissement from Etalab SIRENE API (fallback on INSEE's API)
  */
 const getEtablissement = async (siret: string) => {
-  // const etablissement = await getEtablissementSireneOuverte(siret);
-  const etablissement = null;
+  const etablissement = await getEtablissementSireneOuverte(siret);
 
   if (!etablissement) {
     return await getEtablissementInsee(siret);

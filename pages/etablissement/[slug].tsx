@@ -88,8 +88,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { props: {} };
   }
 
-  console.log(JSON.stringify(etablissement));
-
   //@ts-ignore
   const uniteLegale = await getUniteLegale(etablissement.siren as string);
 
