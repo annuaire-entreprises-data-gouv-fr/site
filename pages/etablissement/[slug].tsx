@@ -69,13 +69,29 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const siret = context.params.slug as string;
 
+  try {
+    const etablissementWithUniteLegale = await getEtablissementWithUniteLegale(siret);
+
+    return {
+      props: {
+        ...etablissementWithUniteLegale,
+      },
+    };
+  } catch (e) {
+    if (e instanceof NotASiretError) {
+      redirectPageNotFound(context.res, slug);
+    }
+    if (e instanceof SirenNotFoundError) {
+      redirectSirenIntrouvable(context.res, siren);
+    }
+    return { props: {} };
+  }
   // does not match a siren
   if (!isSiret(siret)) {
     redirectPageNotFound(context.res, siret);
     return { props: {} };
   }
 
-  const etablissementWithUniteLegale = await getEtablissementWithUniteLegale(
     siret
   );
 

@@ -1,4 +1,4 @@
-import { inseeGet } from '.';
+import { inseeClient } from '.';
 import { IEtablissement, IUniteLegale } from '../../models';
 import { libelleFromCodeNaf } from '../../utils/labels';
 import routes from '../routes';
@@ -23,12 +23,12 @@ interface IPeriodeUniteLegale {
 }
 
 export const getUniteLegaleInsee = async (siren: string) => {
-  const request = await inseeGet(routes.sireneInsee.siren + siren);
+  const request = await inseeClient(routes.sireneInsee.siren + siren);
   const response = (await request.json()) as IInseeUniteLegaleResponse;
-  return convertResponse(siren, response);
+  return mapToDomainObject(siren, response);
 };
 
-const convertResponse = (
+const mapToDomainObject = (
   siren: string,
   response: IInseeUniteLegaleResponse
 ): IUniteLegale => {

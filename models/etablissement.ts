@@ -1,16 +1,16 @@
 import { IEtablissement, IUniteLegale } from '.';
 import { getEtablissementInsee } from '../clients/sirene-insee/siret';
 import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
+import { isSiret } from '../utils/helpers/siren-and-siret';
 import getUniteLegale from './unite-legale';
 
-export class SiretNotFoundException extends Error {
+export class SiretNotFoundError extends Error {
   constructor(public message: string) {
     super();
   }
 }
-
-export class SirenNotFoundException extends Error {
-  constructor(public message: string) {
+export class NotASiretError extends Error {
+  constructor() {
     super();
   }
 }
@@ -38,10 +38,14 @@ const getEtablissement = async (siret: string): Promise<IEtablissement> => {
 const getEtablissementWithUniteLegale = async (
   siret: string
 ): Promise<IEtablissementWithUniteLegale> => {
+  if (!isSiret(siret)) {
+    throw new NotASiretError();
+  }
+
   const etablissement = await getEtablissement(siret);
 
   if (!etablissement) {
-    throw new SiretNotFoundException(
+    throw new SiretNotFoundError(
       `Cannot find etablissement for siret : ${siret}`
     );
   }
@@ -50,8 +54,8 @@ const getEtablissementWithUniteLegale = async (
   const uniteLegale = await getUniteLegale(etablissement.siren);
 
   if (!uniteLegale) {
-    throw new SirenNotFoundException(
-      `Cannot find etablissement for siret : ${etablissement.siren}`
+    throw new SiretNotFoundError(
+      `Cannot find unite legale for siren : ${etablissement.siren}`
     );
   }
 

@@ -83,18 +83,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const pageParam = (context.query.page || '') as string;
 
   // Removes invisible characters one might copy paste without knowing
-  const cleantTerm = removeInvisibleChar(searchTermParam);
+  const cleanedTerm = removeInvisibleChar(searchTermParam);
 
   // Redirects when user copy/pasted a siret or a siren
-  const cleantTermWithNoSpace = trimWhitespace(cleantTerm);
-  const shouldRedirect = isSirenOrSiret(cleantTermWithNoSpace);
+  const cleanedTermWithNoSpace = trimWhitespace(cleanedTerm);
+  const shouldRedirect = isSirenOrSiret(cleanedTermWithNoSpace);
   if (shouldRedirect) {
-    redirectIfSiretOrSiren(context.res, cleantTermWithNoSpace);
+    redirectIfSiretOrSiren(context.res, cleanedTermWithNoSpace);
   }
 
   // careful, page is not zero indexed should substract 1
   const page = parseIntWithDefaultValue(pageParam, 1) - 1;
-  const results = (await search(cleantTerm, page)) || {};
+  const results = (await search(cleanedTerm, page)) || {};
 
   return {
     props: {

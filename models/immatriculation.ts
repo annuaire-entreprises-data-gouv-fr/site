@@ -9,6 +9,10 @@ export interface ImmatriculationLinks {
   rnmLink: string | null;
 }
 
+const catchAndLogError = (e) => {
+  logErrorInSentry(e);
+};
+
 /**
  * Download Unite Legale from Etalab SIRENE API (fallback on INSEE's API)
  * @param siren
@@ -18,8 +22,10 @@ const getImmatriculations = async (
 ): Promise<ImmatriculationLinks> => {
   let existInRncs, existInRnm;
   try {
-    const rncsImmatriculation = await fetchRncsImmatriculation(siren);
-    const rnmImmatriculation = await fetchRnmImmatriculation(siren);
+    const t = Promise.all([
+      fetchRncsImmatriculation(siren).catch(catchAndLogError),
+      fetchRnmImmatriculation(siren).catch(catchAndLogError),
+    ]);
 
     // shall we test response or catch HttpResponseNotFound ?
     existInRncs = rncsImmatriculation && rncsImmatriculation !== {};

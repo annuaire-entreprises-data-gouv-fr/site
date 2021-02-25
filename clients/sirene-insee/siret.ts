@@ -1,4 +1,4 @@
-import { inseeGet } from '.';
+import { inseeClient } from '.';
 import { IEtablissement } from '../../models';
 import routes from '../routes';
 
@@ -24,13 +24,12 @@ interface IPeriodeUniteLegale {
 }
 
 export const getEtablissementInsee = async (siret: string) => {
-  const response = await inseeGet(routes.sireneInsee.siret + siret);
-
+  const response = await inseeClient(routes.sireneInsee.siret + siret);
   const etablissement = (await response.json()) as IInseeEtablissementResponse;
-  return convertResponse(etablissement);
+  return mapToDomainObject(etablissement);
 };
 
-const convertResponse = (
+const mapToDomainObject = (
   response: IInseeEtablissementResponse
 ): IEtablissement => {
   const {

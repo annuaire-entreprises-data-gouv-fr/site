@@ -2,8 +2,7 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { isSiren } from '../../utils/helpers/siren-and-siret';
-import { getUniteLegale, IEtablissement, IUniteLegale } from '../../models';
+import { getUniteLegale, IUniteLegale } from '../../models';
 import EntrepriseSection from '../../components/entreprise-section';
 import EtablissementListeSection from '../../components/etablissement-liste-section';
 import Title from '../../components/title-section';
@@ -14,30 +13,30 @@ import {
 import EtablissementSection from '../../components/etablissement-section';
 
 import NonDiffusible from '../../components/non-diffusible';
+import { NotASirenError, SirenNotFoundError } from '../../models/unite-legale';
 
 // const structuredData = (uniteLegale: UniteLegale) => [
 //   ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],
 // ];
 
 interface IProps {
-  etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
 }
 
-const About: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
+const About: React.FC<IProps> = ({ uniteLegale }) => (
   <Page
     small={true}
     title={`Entité - ${uniteLegale.fullName} - ${uniteLegale.siren}`}
-    canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.page_path}`}
+    canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.path}`}
   >
     {/* <StructuredData data={structuredData(uniteLegale)} /> */}
     <div className="content-container">
       <Title
         name={uniteLegale.fullName}
         siren={uniteLegale.siren}
-        siret={etablissement.siret}
+        siret={uniteLegale.siege.siret}
         isEntreprise={true}
-        isActive={etablissement.isActive}
+        isActive={uniteLegale.siege.isActive}
         isDiffusible={uniteLegale.isDiffusible}
       />
       {uniteLegale.isDiffusible ? (
@@ -81,29 +80,24 @@ const extractSiren = (slug: string) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug as string;
-
   const siren = extractSiren(slug);
 
-  // does not match a siren
-  if (!isSiren(siren)) {
-    redirectPageNotFound(context.res, slug);
+  try {
+    const uniteLegale = await getUniteLegale(siren);
+    return {
+      props: {
+        uniteLegale,
+      },
+    };
+  } catch (e) {
+    if (e instanceof NotASirenError) {
+      redirectPageNotFound(context.res, slug);
+    }
+    if (e instanceof SirenNotFoundError) {
+      redirectSirenIntrouvable(context.res, siren);
+    }
     return { props: {} };
   }
-
-  const uniteLegale = await getUniteLegale(siren);
-
-  if (!uniteLegale) {
-    redirectSirenIntrouvable(context.res, siren);
-    return { props: {} };
-  }
-
-  return {
-    props: {
-      //@ts-ignore
-      etablissement: uniteLegale.etablissement_siege || {},
-      uniteLegale,
-    },
-  };
 };
 
 export default About;

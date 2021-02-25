@@ -57,7 +57,7 @@ export const inseeAuth = async () => {
   }
 };
 
-export const inseeGet = async (route: string) => {
+export const inseeClient = async (route: string) => {
   const token = await inseeAuth();
 
   const response = await fetch(route, {

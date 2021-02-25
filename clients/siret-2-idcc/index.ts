@@ -41,31 +41,34 @@ const fetchConventionCollectives = async (
     batches.map((urls) => fetch(urls).then((response) => response.json()))
   )) as ISiret2idccResponse[][];
 
-  return convertResponse(response);
+  const flattenedResponse = response.reduce(
+    (acc, item) => [...acc, ...item],
+    []
+  );
+
+  return mapToDomainObject(flattenedResponse);
 };
 
-const convertResponse = (
-  siret2idccResponse: ISiret2idccResponse[][]
+const mapToDomainObject = (
+  siret2idccResponses: ISiret2idccResponse[]
 ): IConventionCollective[] => {
-  return siret2idccResponse
-    .reduce((acc, item) => [...acc, ...item], [])
-    .reduce((acc: IConventionCollective[], el) => {
-      if (!el.conventions) {
-        return acc;
-      }
-      return [
-        ...acc,
-        ...el.conventions.map((convention) => {
-          return {
-            siret: el.siret,
-            active: convention.active,
-            title: convention.title,
-            idccNumber: convention.num,
-            url: convention.url,
-          };
-        }),
-      ];
-    }, []);
+  return siret2idccResponses.reduce((acc: IConventionCollective[], el) => {
+    if (!el.conventions) {
+      return acc;
+    }
+    return [
+      ...acc,
+      ...el.conventions.map((convention) => {
+        return {
+          siret: el.siret,
+          active: convention.active,
+          title: convention.title,
+          idccNumber: convention.num,
+          url: convention.url,
+        };
+      }),
+    ];
+  }, []);
 };
 
 export default fetchConventionCollectives;
