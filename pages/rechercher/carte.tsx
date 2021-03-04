@@ -2,26 +2,25 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { search } from '../../models';
 import PageCounter from '../../components/results-page-counter';
-import { redirectIfSiretOrSiren } from '../../utils/redirect';
 import {
-  parseIntWithDefaultValue,
-  removeInvisibleChar,
-  trimWhitespace,
-} from '../../utils/helpers/formatting';
-import { isSirenOrSiret } from '../../utils/helpers/siren-and-siret';
+  redirectIfSiretOrSiren,
+  redirectServerError,
+} from '../../utils/redirect';
+import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import ResultsHeader from '../../components/results-header';
-import { ISearchResults } from '../../models/search';
+import search, { ISearchResults } from '../../models/search';
 import ResultsList from '../../components/results-list';
 import MapResults from '../../components/mapbox/map-results';
+import { IsASirenException } from '../../models';
+import LogSearchTermInPiwik from '../../components/clients-script/log-search-term-in-piwik';
 
 interface IProps extends ISearchResults {
   searchTerm: string;
   currentPage: number;
 }
 
-const About: React.FC<IProps> = ({
+const MapSearchResultPage: React.FC<IProps> = ({
   results,
   pageCount,
   resultCount,
@@ -39,18 +38,19 @@ const About: React.FC<IProps> = ({
     <div className="map-container">
       <MapResults results={results} />
       {results && (
-        <div className="map-results">
-          <div className="results">
+        <div className="results-for-map-wrapper">
+          <div className="results-list-wrapper">
             <div className="results-counter">
               <ResultsHeader
                 resultCount={resultCount}
                 searchTerm={searchTerm}
                 currentPage={currentPage}
+                isMap={true}
               />
             </div>
             <ResultsList results={results} />
           </div>
-          <div className="results-footer">
+          <div className="results-footer-wrapper">
             <PageCounter
               totalPages={pageCount}
               currentPage={currentPage}
@@ -61,23 +61,55 @@ const About: React.FC<IProps> = ({
       )}
     </div>
 
-    <script
-      async
-      defer
-      dangerouslySetInnerHTML={{
-        __html: `
-          function logSearch () {
-            if(window.Piwik) {
-              var tracker = window.Piwik.getTracker();
-              if (tracker) {
-                tracker.trackSiteSearch("${searchTerm}", "${'carte'}", ${resultCount});
-              }
-            }
-          }
-          window.setTimeout(logSearch, 500);
-          `,
-      }}
-    />
+    <LogSearchTermInPiwik searchTerm={searchTerm} resultCount={resultCount} />
+
+    <style jsx>{`
+      .map-container {
+        display: flex;
+        flex-direction: row-reverse;
+        height: calc(100vh - 140px);
+      }
+      .results-for-map-wrapper {
+        width: 550px;
+        flex-shrink: 0;
+        font-size: 1rem;
+        height: 100%;
+        overflow: auto;
+      }
+      .results-for-map-wrapper > .results-list-wrapper {
+        padding: 0 10px;
+        height: calc(100% - 60px);
+        overflow: auto;
+      }
+      .results-for-map-wrapper > .results-footer-wrapper {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        border-top: 1px solid #dfdff1;
+      }
+      .results-counter {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        color: rgb(112, 117, 122);
+        margin-bottom: 15px;
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 1100px) {
+        .map-container {
+          display: block;
+          height: auto;
+        }
+
+        .results-for-map-wrapper {
+          width: 100%;
+        }
+
+        .results-for-map-wrapper > .results-list-wrapper {
+          height: auto;
+          overflow: none;
+        }
+      }
+    `}</style>
   </Page>
 );
 
@@ -86,27 +118,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const searchTermParam = (context.query.terme || '') as string;
   const pageParam = (context.query.page || '') as string;
 
-  // Removes invisible characters one might copy paste without knowing
-  const cleantTerm = removeInvisibleChar(searchTermParam);
+  const page = parseIntWithDefaultValue(pageParam, 1);
 
-  // Redirects when user copy/pasted a siret or a siren
-  const cleantTermWithNoSpace = trimWhitespace(cleantTerm);
-  const shouldRedirect = isSirenOrSiret(cleantTermWithNoSpace);
-  if (shouldRedirect) {
-    redirectIfSiretOrSiren(context.res, cleantTermWithNoSpace);
+  try {
+    const results = (await search(searchTermParam, page)) || {};
+    return {
+      props: {
+        ...results,
+        searchTerm: searchTermParam,
+      },
+    };
+  } catch (e) {
+    if (e instanceof IsASirenException) {
+      redirectIfSiretOrSiren(context.res, e.message);
+    } else {
+      redirectServerError(context.res, e.message);
+    }
+    return { props: {} };
   }
-
-  // careful, page is not zero indexed should substract 1
-  const page = parseIntWithDefaultValue(pageParam, 1) - 1;
-  const results = (await search(cleantTerm, page)) || {};
-
-  return {
-    props: {
-      ...results,
-      searchTerm: searchTermParam,
-      //currentPage: parsePage(results ? results.page : '0') + 1,
-    },
-  };
 };
 
-export default About;
+export default MapSearchResultPage;

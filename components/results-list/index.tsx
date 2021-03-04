@@ -11,20 +11,20 @@ const ResultsList: React.FC<IProps> = ({ results }) => (
   <div className="results-list">
     {results.map((result) => (
       <a
-        href={`/entreprise/${result.path}`}
+        href={`/entreprise/${result.chemin}`}
         key={result.siret}
         className="dont-apply-link-style"
       >
         <div className="title">
-          {capitalize(result.fullName)}
-          {result.isActive && <Tag className="closed">fermée</Tag>}
+          {capitalize(result.nomComplet)}
+          {!result.estActive && <Tag className="closed">fermée</Tag>}
         </div>
-        <div>{result.mainActivityLabel}</div>
+        <div>{result.libelleActivitePrincipale}</div>
         <div className="adress">
-          {result.adress || 'Adresse inconnue'}{' '}
+          {result.adresse || 'Adresse inconnue'}{' '}
           <Tag>
-            {`${result.etablissementCount} établissement${
-              result.etablissementCount > 1 ? 's' : ''
+            {`${result.nombreEtablissements} établissement${
+              result.nombreEtablissements > 1 ? 's' : ''
             }`}
           </Tag>
         </div>

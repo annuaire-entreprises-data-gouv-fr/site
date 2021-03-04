@@ -3,19 +3,21 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import {
-  getEtablissement,
-  getUniteLegale,
   IEtablissement,
   IUniteLegale,
+  NotASiretError,
+  SirenNotFoundError,
+  SiretNotFoundError,
 } from '../../models';
 import EtablissementSection from '../../components/etablissement-section';
-import Title from '../../components/title-section';
+import Title, { FICHE } from '../../components/title-section';
 import {
   redirectPageNotFound,
+  redirectServerError,
+  redirectSirenIntrouvable,
   redirectSiretIntrouvable,
 } from '../../utils/redirect';
 import NonDiffusible from '../../components/non-diffusible';
-import { isSiret } from '../../utils/helpers/siren-and-siret';
 import { getEtablissementWithUniteLegale } from '../../models/etablissement';
 
 interface IProps {
@@ -29,32 +31,32 @@ const EtablissementPage: React.FC<IProps> = ({
 }) => (
   <Page
     small={true}
-    title={`Etablissement - ${uniteLegale.fullName} - ${etablissement.siret}`}
+    title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
   >
     <div className="content-container">
       <br />
       <a href={`/entreprise/${uniteLegale.siren}`}>← Fiche entité</a>
       <Title
-        name={uniteLegale.fullName}
+        name={uniteLegale.nomComplet}
         siren={uniteLegale.siren}
         siret={etablissement.siret}
-        isEntreprise={false}
-        isActive={etablissement.isActive}
-        isDiffusible={uniteLegale.isDiffusible}
-        isSiege={!!etablissement.isSiege}
+        isActive={etablissement.estActif}
+        isDiffusible={uniteLegale.estDiffusible}
+        isSiege={etablissement.estSiege}
+        ficheType={FICHE.ETABLISSEMENT}
       />
-      {uniteLegale.isDiffusible ? (
+      {uniteLegale.estDiffusible ? (
+        <EtablissementSection
+          etablissement={etablissement}
+          uniteLegale={uniteLegale}
+        />
+      ) : (
         <>
           <p>
             Cette établissement est <b>non-diffusible.</b>
           </p>
           <NonDiffusible />
         </>
-      ) : (
-        <EtablissementSection
-          etablissement={etablissement}
-          uniteLegale={uniteLegale}
-        />
       )}
     </div>
     <style jsx>{`
@@ -70,7 +72,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siret = context.params.slug as string;
 
   try {
-    const etablissementWithUniteLegale = await getEtablissementWithUniteLegale(siret);
+    const etablissementWithUniteLegale = await getEtablissementWithUniteLegale(
+      siret
+    );
 
     return {
       props: {
@@ -79,27 +83,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   } catch (e) {
     if (e instanceof NotASiretError) {
-      redirectPageNotFound(context.res, slug);
-    }
-    if (e instanceof SirenNotFoundError) {
-      redirectSirenIntrouvable(context.res, siren);
+      redirectPageNotFound(context.res, siret);
+    } else if (e instanceof SiretNotFoundError) {
+      redirectSiretIntrouvable(context.res, siret);
+    } else if (e instanceof SirenNotFoundError) {
+      redirectSirenIntrouvable(context.res, e.message);
+    } else {
+      redirectServerError(context.res, e.message);
     }
     return { props: {} };
   }
-  // does not match a siren
-  if (!isSiret(siret)) {
-    redirectPageNotFound(context.res, siret);
-    return { props: {} };
-  }
-
-    siret
-  );
-
-  return {
-    props: {
-      ...etablissementWithUniteLegale,
-    },
-  };
 };
 
 export default EtablissementPage;

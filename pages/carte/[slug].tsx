@@ -10,7 +10,7 @@ interface IProps {
   etablissement: IEtablissement;
 }
 
-const About: React.FC<IProps> = ({ etablissement }) => (
+const EtablissementMapPage: React.FC<IProps> = ({ etablissement }) => (
   <Page
     small={true}
     map={true}
@@ -38,4 +38,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default About;
+export default EtablissementMapPage;

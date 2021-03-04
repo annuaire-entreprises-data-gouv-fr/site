@@ -1,101 +1,8 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-
-const COPY_TO_CLIPBOARD_SCRIPT = (
-  <script
-    dangerouslySetInnerHTML={{
-      __html: `
-    (function addCopyFunction() {
-      const copyList = document.getElementsByClassName('copy-to-clipboard-anchor');
-      for (var i=0; i<copyList.length; i++) {
-        const element = copyList[i];
-        element.onclick = () => {
-          element.classList.toggle('copy-done');
-          var el = document.createElement('textarea');
-
-          var toCopy = element.children[0].innerHTML;
-          if(element.className.indexOf('trim') > -1){
-            toCopy = toCopy.split(' ').join('');
-          }
-
-          el.value = toCopy;
-          document.body.appendChild(el);
-          el.select();
-          document.execCommand('copy');
-          document.body.removeChild(el);
-          window.setTimeout(function() {
-            element.classList.toggle('copy-done');
-          },800)
-        }
-      }
-    })();
-  `,
-    }}
-  />
-);
-
-const NPS_SCRIPT = (
-  <script
-    dangerouslySetInnerHTML={{
-      __html: `
-    (function init() {
-      window.showNPSModal = function () {
-        var modal = document.getElementById('nps-modal');
-        if (modal) {
-          modal.style.display='block';
-        }
-      }
-      window.closeNPSModal = function () {
-        var modal = document.getElementById('nps-modal');
-        if (modal) {
-          modal.style.display='none';
-        }
-        window.localStorage.setItem('u', true);
-      }
-    })();
-
-    (function triggerNPSModal() {
-      try {
-        var u = window.localStorage.getItem('u') || false;
-        if(u) {
-          return;
-        }
-        var data = window.sessionStorage.getItem('p') || 0;
-        window.sessionStorage.setItem('p', parseInt(data,10)+1);
-
-        var p = window.location.pathname;
-        if((p.indexOf('/entreprise')===0 && data >= 2)
-        || (p.indexOf('/rechercher')===0 && data >= 3)
-        || (p.indexOf('/justificatif')===0 && data >= 2)
-        || (p.indexOf('/etablissement')===0 && data >= 2)){
-          window.showNPSModal();
-        }
-      } catch (e) {}
-    })();
-  `,
-    }}
-  />
-);
-
-const MATOMO_SCRIPT = (
-  <script
-    dangerouslySetInnerHTML={{
-      __html: `
-            <!-- Piwik -->
-            var _paq = window._paq || [];
-            _paq.push(['trackPageView']);
-            _paq.push(['enableLinkTracking']);
-            (function() {
-              var u="https://stats.data.gouv.fr/";
-              _paq.push(['setTrackerUrl', u+'piwik.php']);
-              _paq.push(['setSiteId', ${process.env.MATOMO_SITE_ID}]);
-              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-              g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-            })();
-            `,
-    }}
-  />
-);
+import CopyToClipboard from '../components/clients-script/copy-to-clipboard';
+import DisplayNps from '../components/clients-script/display-nps';
+import InitPiwik from '../components/clients-script/init-piwik';
 
 class CustomHead extends Head {
   render() {
@@ -146,8 +53,8 @@ class DevDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          {COPY_TO_CLIPBOARD_SCRIPT}
-          {NPS_SCRIPT}
+          {CopyToClipboard}
+          {DisplayNps}
         </body>
       </Html>
     );
@@ -194,9 +101,9 @@ class StaticDocument extends Document {
           <Main />
           {process.env.NODE_ENV === 'production' &&
             process.env.MATOMO_SITE_ID &&
-            MATOMO_SCRIPT}
-          {COPY_TO_CLIPBOARD_SCRIPT}
-          {NPS_SCRIPT}
+            InitPiwik}
+          {CopyToClipboard}
+          {DisplayNps}
         </body>
       </Html>
     );

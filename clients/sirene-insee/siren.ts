@@ -1,6 +1,9 @@
 import { inseeClient } from '.';
 import { IEtablissement, IUniteLegale } from '../../models';
-import { libelleFromCodeNaf } from '../../utils/labels';
+import {
+  libelleFromCategoriesJuridiques,
+  libelleFromCodeNaf,
+} from '../../utils/labels';
 import routes from '../routes';
 
 interface IInseeUniteLegaleResponse {
@@ -21,6 +24,20 @@ interface IPeriodeUniteLegale {
   categorieJuridiqueUniteLegale: string;
   denominationUniteLegale: string;
 }
+
+export const CreateNonDiffusibleUniteLegale = (
+  siren: string
+): IUniteLegale => ({
+  siren,
+  siege: {
+    siren,
+    estActif: null,
+    estSiege: true,
+  },
+  isDiffusible: false,
+  fullName: 'Cette entreprise n’est pas diffusible',
+  path: siren,
+});
 
 export const getUniteLegaleInsee = async (siren: string) => {
   const request = await inseeClient(routes.sireneInsee.siren + siren);
@@ -57,27 +74,36 @@ const mapToDomainObject = (
       siren: siren,
       siret: siren + nicSiegeUniteLegale,
       nic: nicSiegeUniteLegale,
-      isActive: etatAdministratifUniteLegale === 'A',
-      creationDate: dateDebut,
-      mainActivity: activitePrincipaleUniteLegale,
-      mainActivityLabel: libelleFromCodeNaf(activitePrincipaleUniteLegale),
-      isSiege: true,
-      headcount: null,
+      estActif: etatAdministratifUniteLegale === 'A',
+      dateCreation: dateDebut,
+      activitePrincipale: activitePrincipaleUniteLegale,
+      libelleActivitePrincipale: libelleFromCodeNaf(
+        activitePrincipaleUniteLegale
+      ),
+      estSiege: true,
+      trancheEffectif: null,
     };
   }
 
   return {
     siren: siren,
     siege: siege,
-    companyLegalStatus: categorieJuridiqueUniteLegale,
-    etablissementList: siege ? [siege] : [],
-    creationDate: dateCreationUniteLegale,
-    lastUpdateDate: (dateDernierTraitementUniteLegale || '').split('T')[0],
-    isDiffusible: statutDiffusionUniteLegale !== 'N',
-    fullName: `${(
+    numeroTva: null,
+    dateDebutActivite: null,
+    natureJuridique: categorieJuridiqueUniteLegale,
+    libelleNatureJuridique: libelleFromCategoriesJuridiques(
+      categorieJuridiqueUniteLegale
+    ),
+    etablissements: siege ? [siege] : [],
+    dateCreation: dateCreationUniteLegale,
+    dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
+      'T'
+    )[0],
+    estDiffusible: statutDiffusionUniteLegale !== 'N',
+    nomComplet: `${(
       denominationUniteLegale || ''
     ).toLowerCase()} (${sigleUniteLegale})`,
-    path: siren,
-    headcount: trancheEffectifsUniteLegale,
+    chemin: siren,
+    trancheEffectif: trancheEffectifsUniteLegale,
   };
 };

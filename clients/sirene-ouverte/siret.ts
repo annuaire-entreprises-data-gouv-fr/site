@@ -1,34 +1,93 @@
+import { SireneEtalabServerError } from '.';
+import { IEtablissement } from '../../models';
+import {
+  formatAdresse,
+  libelleFromCodeEffectif,
+  libelleFromCodeNaf,
+} from '../../utils/labels';
+import routes from '../routes';
+
+interface ISireneOuverteEtablissementResponse {
+  etablissement: ISireneOuverteEtablissement[];
+}
+export interface ISireneOuverteEtablissement {
+  enseigne?: string;
+  siren: string;
+  siret: string;
+  nic: string;
+  etat_administratif_etablissement: 'A' | null;
+  date_creation: string;
+  geo_adresse: string;
+  etablissement_siege: string;
+  activite_principale: string;
+  date_mise_a_jour: string;
+  date_debut_activite: string;
+  libelle_activite_principale: string;
+  is_siege: boolean;
+  tranche_effectif_salarie: string;
+  latitude: string;
+  longitude: string;
+  numero_voie: string;
+  type_voie: string;
+  libelle_commune: string;
+  code_postal: string;
+  libelle_voie: string;
+}
+
 /**
  * GET ETABLISSEMENT
  */
 
 const getEtablissementSireneOuverte = async (
   siret: string
-): Promise<Etablissement | undefined> => {
-  if (!isSirenOrSiret(siret)) {
-    throw new Error(`Ceci n'est pas un numéro SIRET valide : ${siret}`);
+): Promise<IEtablissement> => {
+  const route = `${routes.sireneOuverte.etablissement}${encodeURI(siret)}`;
+  const response = await fetch(route);
+
+  if (response.status !== 200) {
+    throw new SireneEtalabServerError(500, await response.text());
   }
 
-  try {
-    const response = await fetch(
-      `${routes.sireneOuverte.etablissement}${encodeURI(siret)}`
-    );
-    if (response.status !== 200) {
-      throw new Error(await response.text());
-    }
-    const result = (await response.json())[0].etablissement;
-    const etablissement = result[0];
+  const result = (
+    await response.json()
+  )[0] as ISireneOuverteEtablissementResponse;
 
-    return etablissement as Etablissement;
-  } catch (e) {
-    console.log(e);
-    logErrorInSentry(`API Sirene Etalab for ${siret} : ${e}`);
-    return undefined;
-  }
+  const etablissement = result.etablissement[0];
+
+  return mapSireneOuverteEtablissementToDomainObject(etablissement);
 };
 
-export {
-  getEtablissementSireneOuverte,
-  getUniteLegaleSireneOuverte,
-  getResults,
+export const mapSireneOuverteEtablissementToDomainObject = (
+  etablissement: ISireneOuverteEtablissement
+): IEtablissement => {
+  return {
+    enseigne: etablissement.enseigne,
+    siren: etablissement.siren,
+    siret: etablissement.siret,
+    nic: etablissement.nic,
+    estActif: etablissement.etat_administratif_etablissement === 'A',
+    estSiege: etablissement.is_siege,
+    dateCreation: etablissement.date_creation,
+    dateDerniereMiseAJour: etablissement.date_mise_a_jour,
+    dateDebutActivite: etablissement.date_debut_activite,
+    adresse: formatAdresse(
+      etablissement.numero_voie,
+      etablissement.type_voie,
+      etablissement.libelle_commune,
+      etablissement.code_postal,
+      etablissement.libelle_voie
+    ),
+    activitePrincipale: etablissement.activite_principale,
+    libelleActivitePrincipale: libelleFromCodeNaf(
+      etablissement.activite_principale
+    ),
+    trancheEffectif: etablissement.tranche_effectif_salarie,
+    libelleTrancheEffectif: libelleFromCodeEffectif(
+      etablissement.tranche_effectif_salarie
+    ),
+    latitude: etablissement.latitude,
+    longitude: etablissement.longitude,
+  };
 };
+
+export { getEtablissementSireneOuverte };

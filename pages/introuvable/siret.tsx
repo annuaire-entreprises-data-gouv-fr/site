@@ -3,7 +3,7 @@ import React from 'react';
 import Page from '../../layouts';
 import ButtonLink from '../../components/button';
 
-const SiretNotFound: React.FC<{}> = () => {
+const SiretNotFoundPage: React.FC<{}> = () => {
   return (
     <Page small={true} title="Numero Siret introuvable">
       <div className="content-container">
@@ -39,4 +39,4 @@ const SiretNotFound: React.FC<{}> = () => {
   );
 };
 
-export default SiretNotFound;
+export default SiretNotFoundPage;

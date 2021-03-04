@@ -26,24 +26,26 @@ interface IProps {
 
 const Details: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   <>
-    {uniteLegale.isDiffusible && (
+    {uniteLegale.estDiffusible && (
       <p>
         Cet établissement est
-        <b>{etablissement.isActive ? ' en activité' : ' fermé'}.</b> C’est
-        {etablissement.isSiege ? (
+        <b>{etablissement.estActif ? ' en activité' : ' fermé'}.</b> C’est
+        {etablissement.estSiege ? (
           <b> le siège social</b>
         ) : (
           <> un établissement secondaire</>
         )}{' '}
         de l’entité{' '}
-        <a href={`/entreprise/${uniteLegale.siren}`}>{uniteLegale.fullName}</a>,
-        {uniteLegale.etablissementList &&
-        uniteLegale.etablissementList.length > 1 ? (
+        <a href={`/entreprise/${uniteLegale.siren}`}>
+          {uniteLegale.nomComplet}
+        </a>
+        ,
+        {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
           <>
             {' '}
             qui possède au total{' '}
             <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
-              {uniteLegale.etablissementList.length} établissements.
+              {uniteLegale.etablissements.length} établissements.
             </a>
           </>
         ) : (
@@ -58,21 +60,21 @@ const Details: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
       </p>
     )}
     <p>
-      {etablissement.creationDate && (
+      {etablissement.dateCreation && (
         <>
           Cet établissement a été crée le{' '}
-          <b>{formatDateLong(etablissement.creationDate)}</b>
+          <b>{formatDateLong(etablissement.dateCreation)}</b>
         </>
       )}{' '}
-      {etablissement.firstUpdateDate && !etablissement.isActive && (
+      {etablissement.dateDebutActivite && !etablissement.estActif && (
         <>
           et il a été fermé le{' '}
-          <b>{formatDateLong(etablissement.firstUpdateDate)}</b>
+          <b>{formatDateLong(etablissement.dateDebutActivite)}</b>
         </>
       )}{' '}
-      {etablissement.adress && (
+      {etablissement.adresse && (
         <>
-          et il est domicilié au <a href="#contact">{etablissement.adress}</a>
+          et il est domicilié au <a href="#contact">{etablissement.adresse}</a>
         </>
       )}
     </p>
@@ -88,25 +90,25 @@ const EtablissementSection: React.FC<IProps> = ({
     ['SIREN', formatNumbersFr(etablissement.siren)],
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
-    ['N° TVA Intracommunautaire', formatNumbersFr(uniteLegale.tvaNumber)],
+    ['N° TVA Intracommunautaire', formatNumbersFr(uniteLegale.numeroTva)],
     [
       'Activité principale (établissement)',
-      fullLibelleFromCodeNaf(etablissement.mainActivity),
+      etablissement.libelleActivitePrincipale,
     ],
+    ['Nature juridique', uniteLegale.libelleNatureJuridique],
+    ['Tranche d’effectif salarié', etablissement.libelleTrancheEffectif],
+    ['Date de création', formatDate(etablissement.dateCreation)],
     [
-      'Nature juridique',
-      libelleFromCategoriesJuridiques(uniteLegale.companyLegalStatus),
+      'Date de dernière mise à jour',
+      formatDate(etablissement.dateDerniereMiseAJour),
     ],
-    [
-      'Tranche d’effectif salarié',
-      libelleFromCodeEffectif(etablissement.headcount),
-    ],
-    ['Date de création', formatDate(etablissement.creationDate)],
-    ['Date de dernière mise à jour', formatDate(etablissement.lastUpdateDate)],
   ];
 
-  if (!etablissement.isActive) {
-    data.push(['Date de fermeture', formatDate(etablissement.firstUpdateDate)]);
+  if (!etablissement.estActif) {
+    data.push([
+      'Date de fermeture',
+      formatDate(etablissement.dateDebutActivite),
+    ]);
   }
   if (etablissement.enseigne) {
     data.splice(0, 0, ['Enseigne de l’établissement', etablissement.enseigne]);
@@ -122,7 +124,7 @@ const EtablissementSection: React.FC<IProps> = ({
           usedInEntreprisePage
             ? `Les informations sur le siège social`
             : `Les informations sur cet établissement${
-                etablissement.isSiege ? ' (siège social)' : ''
+                etablissement.estSiege ? ' (siège social)' : ''
               }`
         }
       >
@@ -130,21 +132,23 @@ const EtablissementSection: React.FC<IProps> = ({
       </Section>
       <div className="section-wrapper" id="contact">
         <Section title="Les informations de contact">
-          <TwoColumnTable body={[['Adresse', fullAdress(etablissement)]]} />
+          <TwoColumnTable body={[['Adresse', etablissement.adresse]]} />
         </Section>
-        <div className="map">
-          {map}
-          <div className="layout-center">
-            <ButtonLink
-              href={`/rechercher/carte?siret=${etablissement.siret}`}
-              alt
-              nofollow
-            >
-              {pin}
-              Afficher sur la carte
-            </ButtonLink>
+        {etablissement.longitude && etablissement.latitude && (
+          <div className="map">
+            {map}
+            <div className="layout-center">
+              <ButtonLink
+                href={`/rechercher/carte?siret=${etablissement.siret}`}
+                alt
+                nofollow
+              >
+                {pin}
+                Afficher sur la carte
+              </ButtonLink>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <HorizontalSeparator />
       <style jsx>{`

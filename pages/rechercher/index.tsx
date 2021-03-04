@@ -4,21 +4,21 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import ResultsList from '../../components/results-list';
 import PageCounter from '../../components/results-page-counter';
-import { redirectIfSiretOrSiren } from '../../utils/redirect';
 import {
-  parseIntWithDefaultValue,
-  removeInvisibleChar,
-  trimWhitespace,
-} from '../../utils/helpers/formatting';
+  redirectIfSiretOrSiren,
+  redirectServerError,
+} from '../../utils/redirect';
+import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import search, { ISearchResults } from '../../models/search';
-import { isSirenOrSiret } from '../../utils/helpers/siren-and-siret';
 import ResultsHeader from '../../components/results-header';
+import { IsASirenException } from '../../models';
+import LogSearchTermInPiwik from '../../components/clients-script/log-search-term-in-piwik';
 
 interface IProps extends ISearchResults {
   searchTerm: string;
 }
 
-const About: React.FC<IProps> = ({
+const SearchResultPage: React.FC<IProps> = ({
   results,
   pageCount,
   currentPage = 1,
@@ -50,23 +50,7 @@ const About: React.FC<IProps> = ({
       )}
     </div>
 
-    <script
-      async
-      defer
-      dangerouslySetInnerHTML={{
-        __html: `
-        function logSearch () {
-          if(window.Piwik) {
-            var tracker = window.Piwik.getTracker();
-            if (tracker) {
-              tracker.trackSiteSearch("${searchTerm}", "${'recherche en liste'}", ${resultCount});
-            }
-          }
-        }
-        window.setTimeout(logSearch, 500);
-          `,
-      }}
-    />
+    <LogSearchTermInPiwik searchTerm={searchTerm} resultCount={resultCount} />
 
     <style jsx>{`
       .results-counter {
@@ -82,27 +66,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const searchTermParam = (context.query.terme || '') as string;
   const pageParam = (context.query.page || '') as string;
 
-  // Removes invisible characters one might copy paste without knowing
-  const cleanedTerm = removeInvisibleChar(searchTermParam);
+  const page = parseIntWithDefaultValue(pageParam, 1);
 
-  // Redirects when user copy/pasted a siret or a siren
-  const cleanedTermWithNoSpace = trimWhitespace(cleanedTerm);
-  const shouldRedirect = isSirenOrSiret(cleanedTermWithNoSpace);
-  if (shouldRedirect) {
-    redirectIfSiretOrSiren(context.res, cleanedTermWithNoSpace);
+  try {
+    const results = (await search(searchTermParam, page)) || {};
+    return {
+      props: {
+        ...results,
+        searchTerm: searchTermParam,
+      },
+    };
+  } catch (e) {
+    if (e instanceof IsASirenException) {
+      redirectIfSiretOrSiren(context.res, e.message);
+    } else {
+      redirectServerError(context.res, e.message);
+    }
+    return { props: {} };
   }
-
-  // careful, page is not zero indexed should substract 1
-  const page = parseIntWithDefaultValue(pageParam, 1) - 1;
-  const results = (await search(cleanedTerm, page)) || {};
-
-  return {
-    props: {
-      ...results,
-      searchTerm: searchTermParam,
-      //currentPage: parsePage(results ? results.page : '0') + 1,
-    },
-  };
 };
 
-export default About;
+export default SearchResultPage;

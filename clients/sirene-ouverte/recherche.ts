@@ -1,13 +1,18 @@
+import { SireneEtalabNotFound } from '.';
 import { IEtablissement } from '../../models';
+import { ISearchResults } from '../../models/search';
+import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
+import { libelleFromCodeNaf } from '../../utils/labels';
+import routes from '../routes';
 
-interface UniteLegaleResultat {
+interface ISireneOuverteUniteLegaleResultat {
   siren: string;
   siret: string;
   etablissement_siege: IEtablissement;
   categorie_juridique: string;
   nombre_etablissements: number;
   date_creation: string;
-  libelle_activite_principale: string;
+  activite_principale: string;
   etat_administratif_etablissement: string;
   geo_adresse: string;
   latitude: string;
@@ -16,54 +21,76 @@ interface UniteLegaleResultat {
   page_path: string;
 }
 
-export interface SearchResults {
+export interface ISireneOuverteSearchResults {
   page: string;
   total_results: number;
   total_pages: number;
-  unite_legale: UniteLegaleResultat[];
+  currentPage?: string;
+  unite_legale: ISireneOuverteUniteLegaleResultat[];
 }
 
 /**
- * SEARCH UNITE LEGALE
+ * Get results for searchTerms from Sirene ouverte API
  */
-
 const getResults = async (
   searchTerms: string,
   page: number
-): Promise<SearchResults | undefined> => {
-  const encodedTerms = encodeURI(escapeTerm(searchTerms));
+): Promise<ISearchResults> => {
+  const encodedTerms = encodeURI(searchTerms);
   const route = `${routes.sireneOuverte.rechercheUniteLegale}?per_page=10&page=${page}&q=${encodedTerms}`;
-
   const response = await fetch(route);
 
   if (response.status === 404) {
-    return undefined;
+    throw new SireneEtalabNotFound(404, 'No results');
   }
 
-  const results = (await response.json()) || [];
-  const { total_results = 0, total_pages = 0, unite_legale } = results[0];
+  const results = ((await response.json()) ||
+    []) as ISireneOuverteSearchResults[];
 
-  if (searchResults.currentPage) {
-    searchResults.currentPage = parseIntWithDefaultValue(
-      searchResults.currentPage
-    );
+  // Sirene Ouverte is based on a Postrgres to Rest converter and might return [] instead of 404
+  if (
+    results.length === 0 ||
+    !results[0].unite_legale ||
+    results[0].unite_legale.length === 0
+  ) {
+    throw new SireneEtalabNotFound(404, 'No results');
   }
 
-  return ({
+  return mapToDomainObject(results[0]);
+};
+
+const mapToDomainObject = (
+  results: ISireneOuverteSearchResults
+): ISearchResults => {
+  const {
+    total_results = 0,
+    total_pages = 0,
+    unite_legale = [],
     page,
-    total_results,
-    total_pages,
-    unite_legale: (unite_legale || []).map((result: any) => {
+  } = results;
+
+  return {
+    currentPage: page ? parseIntWithDefaultValue(page) : 1,
+    resultCount: total_results,
+    pageCount: total_pages,
+    results: unite_legale.map((result: ISireneOuverteUniteLegaleResultat) => {
       return {
-        ...result,
-        nombre_etablissements: result.nombre_etablissements || 1,
-        page_path: result.nom_url || result.siren,
-        libelle_activite_principale: libelleFromCodeNaf(
-          result.activite_principale
+        siren: result.siren,
+        siret: result.siret,
+        estActive: result.etat_administratif_etablissement === 'A',
+        adresse: result.geo_adresse,
+        latitude: result.latitude,
+        longitude: result.longitude,
+        nomComplet: result.nom_complet,
+        nombreEtablissements: result.nombre_etablissements || 1,
+        chemin: result.page_path || result.siren,
+        libelleActivitePrincipale: libelleFromCodeNaf(
+          result.activite_principale,
+          false
         ),
-      } as ResultUniteLegale;
+      };
     }),
-  } as unknown) as SearchResults;
+  };
 };
 
 export default getResults;

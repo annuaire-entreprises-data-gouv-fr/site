@@ -5,12 +5,12 @@ import { pin } from '../icon';
 const MapOrListSwitch = ({ isMap = false, searchTerm = '' }) => (
   <>
     {isMap ? (
-      <a href={`/rechercher/carte?terme=${searchTerm}`}>
-        {pin} Afficher les résultats sur la carte
-      </a>
-    ) : (
       <a href={`/rechercher/?terme=${searchTerm}`}>
         Afficher les résultats sous forme de liste
+      </a>
+    ) : (
+      <a href={`/rechercher/carte?terme=${searchTerm}`}>
+        {pin} Afficher les résultats sur la carte
       </a>
     )}
   </>
@@ -38,6 +38,12 @@ const ResultsHeader = ({
         </p>
       </div>
     )}
+    <style jsx>{`
+      .results-counter {
+        margin-top: 20px;
+        color: rgb(112, 117, 122);
+      }
+    `}</style>
   </>
 );
 

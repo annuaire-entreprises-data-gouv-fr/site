@@ -23,7 +23,7 @@ export const formatNumbersFr = (numberAsString = '') => {
   return numberAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
 };
 
-/*
+/**
  * Normalize string and remove special chars & diacritics before using a term in search
  */
 export const escapeTerm = (term: string) => {
@@ -57,7 +57,11 @@ export const parseIntWithDefaultValue = (
   defaultValue = 0
 ) => {
   try {
-    return parseInt(intAsString, 10);
+    const result = parseInt(intAsString, 10);
+    if (isNaN(result)) {
+      throw new Error();
+    }
+    return result;
   } catch {
     return defaultValue;
   }

@@ -9,21 +9,21 @@ import { Tag } from '../tag';
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const closedEtablissement = uniteLegale.etablissementList.filter(
-    (etablissement) => etablissement.isActive
+  const closedEtablissement = uniteLegale.etablissements.filter(
+    (etablissement) => etablissement.estActif
   ).length;
   return (
     <div id="etablissements">
       <p>
-        Cette entité possède {uniteLegale.etablissementList.length}{' '}
+        Cette entité possède {uniteLegale.etablissements.length}{' '}
         établissement(s)
         {closedEtablissement > 0 && (
           <>
             {' '}
             dont{' '}
             {
-              uniteLegale.etablissementList.filter(
-                (etablissement) => etablissement.isActive
+              uniteLegale.etablissements.filter(
+                (etablissement) => etablissement.estActif
               ).length
             }{' '}
             fermés.
@@ -33,23 +33,23 @@ const EtablissementListeSection: React.FC<{
       <Section title="La liste des établissements de l’entité">
         <FullTable
           head={['SIRET', 'Activité (code NAF)', 'Adresse', 'Statut']}
-          body={uniteLegale.etablissementList.map(
+          body={uniteLegale.etablissements.map(
             (etablissement: IEtablissement) => [
               <a href={`/etablissement/${etablissement.siret}`}>
                 {formatSiret(etablissement.siret)}
               </a>,
               <>
-                {etablissement.mainActivity} -{' '}
-                {libelleFromCodeNaf(etablissement.mainActivityLabel)}
+                {etablissement.activitePrincipale} -{' '}
+                {libelleFromCodeNaf(etablissement.activitePrincipale)}
               </>,
-              etablissement.adress,
+              etablissement.adresse,
               <>
-                {!uniteLegale.isDiffusible ? (
+                {!uniteLegale.estDiffusible ? (
                   <Tag>non-diffusible</Tag>
                 ) : (
                   <>
-                    {etablissement.isSiege ? <Tag>siège social</Tag> : null}
-                    {etablissement.isActive ? null : (
+                    {etablissement.estSiege ? <Tag>siège social</Tag> : null}
+                    {etablissement.estActif ? null : (
                       <Tag className="closed">fermé</Tag>
                     )}
                   </>

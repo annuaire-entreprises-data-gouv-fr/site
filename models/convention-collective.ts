@@ -11,9 +11,9 @@ export interface IConventionCollective {
 
 const getConventionCollectives = async (
   uniteLegale: IUniteLegale
-): Promise<IConventionCollective[] | undefined> => {
+): Promise<IConventionCollective[]> => {
   try {
-    const sirets = uniteLegale.etablissementList.map((e) => e.siret);
+    const sirets = uniteLegale.etablissements.map((e) => e.siret);
     return await fetchConventionCollectives(sirets);
   } catch (e) {
     const errorMessage = `${uniteLegale.siren} error in API Siret2Idcc convention collectives : ${e}`;

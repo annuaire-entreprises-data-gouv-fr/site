@@ -4,7 +4,7 @@ import { RnmHttpServerError, fetchRnmImmatriculation } from '../clients/rnm';
 import routes from '../clients/routes';
 import logErrorInSentry from '../utils/sentry';
 
-export interface ImmatriculationLinks {
+export interface IImmatriculationLinks {
   rncsLink: string | null;
   rnmLink: string | null;
 }
@@ -19,7 +19,7 @@ const catchAndLogError = (e) => {
  */
 const getImmatriculations = async (
   siren: string
-): Promise<ImmatriculationLinks> => {
+): Promise<IImmatriculationLinks> => {
   let existInRncs, existInRnm;
   try {
     const t = Promise.all([

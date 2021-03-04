@@ -1,9 +1,3 @@
-import search from './search';
-import getUniteLegale from './unite-legale';
-import getEtablissement from './etablissement';
-import getImmatriculations from './immatriculation';
-import getConventionCollectives from './convention-collective';
-
 /** COMMON TYPES */
 
 export interface IEtablissement {
@@ -11,38 +5,66 @@ export interface IEtablissement {
   siren: string;
   siret: string;
   nic: string;
-  isActive: boolean | null; // === 'A'
-  isSiege: boolean; // === 'true'
-  creationDate: string;
-  lastUpdateDate: string;
-  firstUpdateDate: string;
-  adress: string;
-  mainActivity: string;
-  mainActivityLabel: string;
-  headcount: string;
+  estActif: boolean | null;
+  estSiege: boolean;
+  dateCreation: string;
+  dateDerniereMiseAJour: string;
+  dateDebutActivite: string;
+  adresse: string;
+  activitePrincipale: string;
+  libelleActivitePrincipale: string;
+  trancheEffectif: string;
+  libelleTrancheEffectif: string;
   latitude: string;
   longitude: string;
 }
 
 export interface IUniteLegale {
   siren: string;
-  tvaNumber: string;
+  numeroTva: string;
   siege: IEtablissement;
-  companyLegalStatus: string;
-  etablissementList: IEtablissement[];
-  creationDate: string;
-  lastUpdateDate: string;
-  firstUpdateDate: string;
-  isDiffusible: boolean; // !== 'N'
-  fullName: string;
-  path: string;
-  headcount: string;
+  natureJuridique: string;
+  libelleNatureJuridique: string;
+  etablissements: IEtablissement[];
+  activitePrincipale: string;
+  libelleActivitePrincipale: string;
+  dateCreation: string;
+  dateDerniereMiseAJour: string;
+  dateDebutActivite: string;
+  estDiffusible: boolean;
+  nomComplet: string;
+  chemin: string;
+  trancheEffectif: string;
+  libelleTrancheEffectif: string;
+  adresse: string;
 }
 
-export {
-  getEtablissement,
-  getUniteLegale,
-  search,
-  getImmatriculations,
-  getConventionCollectives,
-};
+/** COMMON ERRORS */
+export class SirenNotFoundError extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+export class NotASirenError extends Error {
+  constructor() {
+    super();
+  }
+}
+
+export class SiretNotFoundError extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+export class NotASiretError extends Error {
+  constructor() {
+    super();
+  }
+}
+
+/** COMMON EXCEPTIONS */
+export class IsASirenException extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}

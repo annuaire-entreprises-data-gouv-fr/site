@@ -1,23 +1,16 @@
-import { IUniteLegale } from '.';
+import { IUniteLegale, NotASirenError, SirenNotFoundError } from '.';
 import {
   InseeAuthError,
   InseeForbiddenError,
   InseeTooManyRequestsError,
 } from '../clients/sirene-insee';
-import { getUniteLegaleInsee } from '../clients/sirene-insee/siren';
+import {
+  CreateNonDiffusibleUniteLegale,
+  getUniteLegaleInsee,
+} from '../clients/sirene-insee/siren';
+import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
 import { isSiren } from '../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../utils/sentry';
-
-export class SirenNotFoundError extends Error {
-  constructor(public message: string) {
-    super();
-  }
-}
-export class NotASirenError extends Error {
-  constructor() {
-    super();
-  }
-}
 
 /**
  * Fetch Unite Legale from Etalab SIRENE API with a fallback on INSEE's API
@@ -43,16 +36,7 @@ const getUniteLegale = async (siren: string): Promise<IUniteLegale> => {
 
       if (e instanceof InseeForbiddenError) {
         // this means company is not diffusible
-        return {
-          siren,
-          siege: {
-            siren,
-            isActive: null,
-          },
-          isDiffusible: false,
-          fullName: 'Cette entreprise n’est pas diffusible',
-          path: siren,
-        };
+        return CreateNonDiffusibleUniteLegale(siren);
       }
 
       // Siren was not found in both API

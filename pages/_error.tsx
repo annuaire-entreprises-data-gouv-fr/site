@@ -7,21 +7,31 @@ import { GetServerSideProps } from 'next';
 import { logErrorInSentry } from '../utils/sentry';
 
 const ServerError: React.FC<{ statusCode: number }> = () => (
-  <Page small={true} title="Une erreur est survenue">
+  <Page small={true} title="Cette page est introuvable">
     <div className="content-container">
       <div className="layout-left">
-        <h1>Une erreur est survenue 🤭</h1>
+        <h1>Oh non 😱 ! C'est la panne ⚠️</h1>
       </div>
       <p>
-        Notre équipe a été notifiée et est en train de chercher la cause de
-        cette erreur afin qu'elle ne se reproduise plus.
-      </p>
-      <p>
-        Si le problème persiste, vous pouvez{' '}
-        <a href={constants.links.mailto}>nous contacter</a>.
+        Si vous voyez cette page, c'est que l'ordinateur qui fait marcher ce
+        site internet a rencontré une petite panne. Pas d'inquiétude, le reste
+        du site fonctionne toujours !
       </p>
       <br />
+      <p>
+        Cependant, si vous pouvez nous{' '}
+        <a href={constants.links.mailto}>écrire un mail</a> pour nous expliquer
+        comment c'est arrivé, nous vous en serions reconnaissant et nous ferons
+        le nécessaire pour résoudre le problème 🕵️‍♀️.
+      </p>
+      <br />
+      <p>En attendant, vous pouvez toujours :</p>
+      <br />
       <div className="layout-left">
+        <ButtonLink href="/faq" alt>
+          Consulter notre page d'aide
+        </ButtonLink>
+        <span>&nbsp;</span>
         <ButtonLink href="/">Retourner à la page d’accueil</ButtonLink>
       </div>
     </div>
@@ -31,9 +41,7 @@ const ServerError: React.FC<{ statusCode: number }> = () => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const statusCode = context.res ? context.res.statusCode : 404;
 
-  const msg = `Error ${statusCode} - ${context.req.url}`;
-
-  logErrorInSentry(msg);
+  logErrorInSentry(new Error(`Server Error (500)`));
 
   return {
     props: {

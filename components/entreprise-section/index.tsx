@@ -1,57 +1,45 @@
 import React from 'react';
-import { Etablissement, UniteLegale } from '../../models';
+import { IUniteLegale } from '../../models';
 import {
   capitalize,
   formatDate,
   formatDateLong,
   formatNumbersFr,
-  formatSiret,
 } from '../../utils/helpers/formatting';
-import {
-  fullLibelleFromCodeNaf,
-  libelleFromCategoriesJuridiques,
-  libelleFromCodeEffectif,
-} from '../../utils/helper';
+import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 
-const entrepriseDescription = (uniteLegale: UniteLegale) => (
+const entrepriseDescription = (uniteLegale: IUniteLegale) => (
   <>
-    <>L’entité {uniteLegale.nom_complet}</>{' '}
-    {uniteLegale.categorie_juridique && (
+    <>L’entité {uniteLegale.nomComplet}</>{' '}
+    {uniteLegale.natureJuridique && (
       <>
-        est une{' '}
-        <b>
-          {libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique)}
-        </b>{' '}
+        est une <b>{uniteLegale.libelleNatureJuridique}</b>{' '}
       </>
     )}
-    {uniteLegale.date_creation_entreprise && (
+    {uniteLegale.dateCreation && (
       <>
-        créee le <b>{formatDateLong(uniteLegale.date_creation_entreprise)}</b>
+        créee le <b>{formatDateLong(uniteLegale.dateCreation)}</b>
       </>
     )}
-    {uniteLegale.date_debut_activite &&
-      uniteLegale.etablissement_siege &&
-      uniteLegale.etablissement_siege.etat_administratif_etablissement !==
-        'A' && (
+    {uniteLegale.dateDebutActivite &&
+      uniteLegale.siege &&
+      !uniteLegale.siege.estActif && (
         <>
           {' '}
-          et fermée le <b>{formatDateLong(uniteLegale.date_debut_activite)}</b>
+          et fermée le <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>
         </>
       )}
-    {uniteLegale.etablissement_siege &&
-      uniteLegale.etablissement_siege.geo_adresse && (
-        <>
-          , dont le siège est domicilié au{' '}
-          <a
-            href={`/rechercher/carte?siret=${uniteLegale.etablissement_siege.siret}`}
-          >
-            {uniteLegale.etablissement_siege.geo_adresse}
-          </a>
-        </>
-      )}
+    {uniteLegale.siege && uniteLegale.siege.adresse && (
+      <>
+        , dont le siège est domicilié au{' '}
+        <a href={`/rechercher/carte?siret=${uniteLegale.siege.siret}`}>
+          {uniteLegale.siege.adresse}
+        </a>
+      </>
+    )}
     .{' '}
     {uniteLegale.etablissements && (
       <>
@@ -65,45 +53,35 @@ const entrepriseDescription = (uniteLegale: UniteLegale) => (
 );
 
 const EntrepriseSection: React.FC<{
-  uniteLegale: UniteLegale;
+  uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const data = [
-    ['Dénomination', capitalize(uniteLegale.nom_complet)],
+    ['Dénomination', capitalize(uniteLegale.nomComplet)],
     ['SIREN', formatNumbersFr(uniteLegale.siren)],
     [
       'SIRET du siège social',
-      uniteLegale.etablissement_siege &&
-        uniteLegale.etablissement_siege.siret &&
-        formatSiret((uniteLegale.etablissement_siege || {}).siret),
+      uniteLegale.siege &&
+        uniteLegale.siege.siret &&
+        formatSiret((uniteLegale.siege || {}).siret),
     ],
+    ['N° TVA Intracommunautaire', formatNumbersFr(uniteLegale.numeroTva)],
     [
-      'N° TVA Intracommunautaire',
-      formatNumbersFr(uniteLegale.numero_tva_intra),
+      'Activité principale (du siège social)',
+      uniteLegale.libelleActivitePrincipale,
     ],
-    [
-      'Activité principale (siège social)',
-      fullLibelleFromCodeNaf(
-        (uniteLegale.etablissement_siege || {}).activite_principale
-      ),
-    ],
-    [
-      'Nature juridique',
-      libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique),
-    ],
+    ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
       'Tranche effectif salarié de l’entité',
-      libelleFromCodeEffectif(uniteLegale.tranche_effectif_salarie_entreprise),
+      uniteLegale.libelleTrancheEffectif,
     ],
-    ['Date de création', formatDate(uniteLegale.date_creation_entreprise)],
-    ['Date de dernière mise à jour', formatDate(uniteLegale.date_mise_a_jour)],
+    ['Date de création', formatDate(uniteLegale.dateCreation)],
+    [
+      'Date de dernière mise à jour',
+      formatDate(uniteLegale.dateDerniereMiseAJour),
+    ],
   ];
-  if (
-    uniteLegale.etablissement_siege.etat_administratif_etablissement !== 'A'
-  ) {
-    data.push([
-      'Date de fermeture',
-      formatDate(uniteLegale.date_debut_activite),
-    ]);
+  if (!uniteLegale.siege.estActif) {
+    data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
   }
 
   return (

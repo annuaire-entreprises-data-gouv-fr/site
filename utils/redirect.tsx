@@ -1,6 +1,6 @@
 import { ServerResponse } from 'http';
 import { isSiren, isSiret } from './helpers/siren-and-siret';
-import { logWarningInSentry } from '../utils/sentry';
+import logErrorInSentry, { logWarningInSentry } from '../utils/sentry';
 
 export const redirectIfSiretOrSiren = (
   res: ServerResponse,
@@ -18,6 +18,11 @@ export const redirectIfSiretOrSiren = (
 export const redirectPageNotFound = (res: ServerResponse, msg: string) => {
   redirect(res, '/404');
   logWarningInSentry(new Error(`Unknown url (404) - ${msg}`));
+};
+
+export const redirectServerError = (res: ServerResponse, msg: string) => {
+  redirect(res, '/500');
+  logErrorInSentry(new Error(`Server Error (500) - ${msg}`));
 };
 
 export const redirectSirenIntrouvable = (
