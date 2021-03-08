@@ -1,17 +1,15 @@
 import { IUniteLegale, NotASirenError, SirenNotFoundError } from '.';
 import {
-  InseeAuthError,
-  InseeForbiddenError,
-  InseeTooManyRequestsError,
-} from '../clients/sirene-insee';
+  HttpAuthentificationFailure,
+  HttpNotFound,
+  HttpServerError,
+  HttpTooManyRequests,
+} from '../clients/exceptions';
+import { InseeForbiddenError } from '../clients/sirene-insee';
 import {
   CreateNonDiffusibleUniteLegale,
   getUniteLegaleInsee,
 } from '../clients/sirene-insee/siren';
-import {
-  SireneEtalabNotFound,
-  SireneEtalabServerError,
-} from '../clients/sirene-ouverte';
 import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
 import { isSiren } from '../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../utils/sentry';
@@ -28,10 +26,10 @@ const getUniteLegale = async (siren: string): Promise<IUniteLegale> => {
   try {
     return await getUniteLegaleSireneOuverte(siren);
   } catch (e) {
-    if (e instanceof SireneEtalabNotFound) {
+    if (e instanceof HttpNotFound) {
       // do nothing
     }
-    if (e instanceof SireneEtalabServerError) {
+    if (e instanceof HttpServerError) {
       logWarningInSentry(
         `Server error in SireneEtalab, fallback on INSEE ${e}`
       );
@@ -40,8 +38,8 @@ const getUniteLegale = async (siren: string): Promise<IUniteLegale> => {
       return await getUniteLegaleInsee(siren);
     } catch (e) {
       if (
-        e instanceof InseeTooManyRequestsError ||
-        e instanceof InseeAuthError
+        e instanceof HttpTooManyRequests ||
+        e instanceof HttpAuthentificationFailure
       ) {
         logWarningInSentry(e);
       }

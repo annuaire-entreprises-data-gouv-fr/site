@@ -1,10 +1,10 @@
-import { SireneEtalabNotFound, SireneEtalabServerError } from '.';
 import { IEtablissement } from '../../models';
 import {
   formatAdresse,
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
+import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
 
 interface ISireneOuverteEtablissementResponse {
@@ -45,7 +45,7 @@ const getEtablissementSireneOuverte = async (
   const response = await fetch(route);
 
   if (response.status !== 200) {
-    throw new SireneEtalabServerError(500, await response.text());
+    throw new HttpServerError(500, await response.text());
   }
 
   const result = (
@@ -55,7 +55,7 @@ const getEtablissementSireneOuverte = async (
   const etablissement = result.etablissement[0];
 
   if (!etablissement) {
-    throw new SireneEtalabNotFound(404, siret);
+    throw new HttpNotFound(404, siret);
   }
 
   return mapSireneOuverteEtablissementToDomainObject(etablissement);

@@ -1,5 +1,9 @@
-import { rncsAuth, RncsHttpServerError } from '.';
-import { HttpNotFound } from '../exceptions';
+import { rncsAuth } from '.';
+import {
+  HttpNotFound,
+  HttpServerError,
+  HttpTooManyRequests,
+} from '../exceptions';
 import routes from '../routes';
 
 export const fetchRncsImmatriculation = async (siren: string) => {
@@ -17,10 +21,14 @@ export const fetchRncsImmatriculation = async (siren: string) => {
   }
 
   if (response.status === 500) {
-    throw new RncsHttpServerError(
+    throw new HttpServerError(
       500,
       `Siren ${siren} triggered a server error in RNCS`
     );
+  }
+
+  if (response.status === 429) {
+    throw new HttpTooManyRequests(429, `Too many requests in RNCS`);
   }
 
   return await response.json();

@@ -6,19 +6,16 @@ import {
   SiretNotFoundError,
 } from '.';
 import {
-  InseeAuthError,
-  InseeForbiddenError,
-  InseeTooManyRequestsError,
-} from '../clients/sirene-insee';
-import { CreateNonDiffusibleUniteLegale } from '../clients/sirene-insee/siren';
+  HttpNotFound,
+  HttpServerError,
+  HttpTooManyRequests,
+  HttpAuthentificationFailure,
+} from '../clients/exceptions';
+import { InseeForbiddenError } from '../clients/sirene-insee';
 import {
   CreateNonDiffusibleEtablissement,
   getEtablissementInsee,
 } from '../clients/sirene-insee/siret';
-import {
-  SireneEtalabNotFound,
-  SireneEtalabServerError,
-} from '../clients/sirene-ouverte';
 import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
 import { isSiret } from '../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../utils/sentry';
@@ -40,10 +37,10 @@ const getEtablissement = async (siret: string): Promise<IEtablissement> => {
   try {
     return await getEtablissementSireneOuverte(siret);
   } catch (e) {
-    if (e instanceof SireneEtalabNotFound) {
+    if (e instanceof HttpNotFound) {
       // do nothing
     }
-    if (e instanceof SireneEtalabServerError) {
+    if (e instanceof HttpServerError) {
       logWarningInSentry(
         `Server error in SireneEtalab, fallback on INSEE ${e}`
       );
@@ -52,8 +49,8 @@ const getEtablissement = async (siret: string): Promise<IEtablissement> => {
       return await getEtablissementInsee(siret);
     } catch (e) {
       if (
-        e instanceof InseeTooManyRequestsError ||
-        e instanceof InseeAuthError
+        e instanceof HttpTooManyRequests ||
+        e instanceof HttpAuthentificationFailure
       ) {
         logWarningInSentry(e);
       }

@@ -14,18 +14,12 @@
  *
  */
 
+import {
+  HttpAuthentificationFailure,
+  HttpTooManyRequests,
+} from '../exceptions';
 import routes from '../routes';
 
-export class InseeAuthError extends Error {
-  constructor(public message: string) {
-    super();
-  }
-}
-export class InseeTooManyRequestsError extends Error {
-  constructor(public status: number, public message: string) {
-    super();
-  }
-}
 export class InseeForbiddenError extends Error {
   constructor(public status: number, public message: string) {
     super();
@@ -53,7 +47,7 @@ export const inseeAuth = async () => {
     }
     return token;
   } catch (e) {
-    throw new InseeAuthError(e);
+    throw new HttpAuthentificationFailure(e);
   }
 };
 
@@ -68,7 +62,7 @@ export const inseeClient = async (route: string) => {
   });
 
   if (response.status === 429) {
-    throw new InseeTooManyRequestsError(429, `Too many requests`);
+    throw new HttpTooManyRequests(429, `Too many requests`);
   }
 
   if (response.status === 403) {

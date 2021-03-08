@@ -1,5 +1,5 @@
 import { IsASirenException } from '.';
-import { SireneEtalabNotFound } from '../clients/sirene-ouverte';
+import { HttpNotFound } from '../clients/exceptions';
 import getResults from '../clients/sirene-ouverte/recherche';
 import {
   escapeTerm,
@@ -7,7 +7,6 @@ import {
   trimWhitespace,
 } from '../utils/helpers/formatting';
 import { isSirenOrSiret } from '../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../utils/sentry';
 
 export interface ISearchResult {
   siren: string;
@@ -46,7 +45,7 @@ const search = async (searchTerms: string, page: number) => {
     const escapedSearchTerm = escapeTerm(searchTerms);
     return await getResults(escapedSearchTerm, page);
   } catch (e) {
-    if (e instanceof SireneEtalabNotFound) {
+    if (e instanceof HttpNotFound) {
       return [];
     } else {
       throw e;

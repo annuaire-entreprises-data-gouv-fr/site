@@ -1,8 +1,8 @@
-import { SireneEtalabNotFound } from '.';
 import { IEtablissement } from '../../models';
 import { ISearchResults } from '../../models/search';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import { libelleFromCodeNaf } from '../../utils/labels';
+import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 
 interface ISireneOuverteUniteLegaleResultat {
@@ -41,7 +41,7 @@ const getResults = async (
   const response = await fetch(route);
 
   if (response.status === 404) {
-    throw new SireneEtalabNotFound(404, 'No results');
+    throw new HttpNotFound(404, 'No results');
   }
 
   const results = ((await response.json()) ||
@@ -53,7 +53,7 @@ const getResults = async (
     !results[0].unite_legale ||
     results[0].unite_legale.length === 0
   ) {
-    throw new SireneEtalabNotFound(404, 'No results');
+    throw new HttpNotFound(404, 'No results');
   }
 
   return mapToDomainObject(results[0]);

@@ -1,3 +1,4 @@
+import { HttpNotFound } from '../clients/exceptions';
 import { RncsHttpServerError, fetchRncsImmatriculation } from '../clients/rncs';
 import { RnmHttpServerError, fetchRnmImmatriculation } from '../clients/rnm';
 import routes from '../clients/routes';
@@ -29,9 +30,14 @@ const getImmatriculationRNM = async (
       downloadlink: routes.rnm + siren,
     };
   } catch (e) {
-    if (e instanceof RnmHttpServerError) {
-      logErrorInSentry(`Error in API RNM for ${siren} : ${e}`);
+    if (e instanceof HttpNotFound) {
+      return {
+        administration: EAdministration.CMAFRANCE,
+        type: 404,
+      };
     }
+
+    logErrorInSentry(`Error in API RNM for ${siren} : ${e}`);
     return {
       administration: EAdministration.CMAFRANCE,
       type: 500,
@@ -52,9 +58,14 @@ const getImmatriculationRNCS = async (
       downloadlink: routes.rncs.portail + siren,
     };
   } catch (e) {
-    if (e instanceof RncsHttpServerError) {
-      logErrorInSentry(`Error in API RNCS for ${siren} : ${e}`);
+    if (e instanceof HttpNotFound) {
+      return {
+        administration: EAdministration.INPI,
+        type: 404,
+      };
     }
+
+    logErrorInSentry(`Error in API RNCS for ${siren} : ${e}`);
     return {
       administration: EAdministration.INPI,
       type: 500,

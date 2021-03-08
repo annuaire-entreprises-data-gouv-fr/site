@@ -1,17 +1,7 @@
 import { fetchRncsImmatriculation } from './immatriculation';
 
 import routes from '../routes';
-
-export class RncsHttpServerError extends Error {
-  constructor(public status: number, public message: string) {
-    super();
-  }
-}
-export class RncsAuthError extends Error {
-  constructor(public message: string) {
-    super();
-  }
-}
+import { HttpAuthentificationFailure } from '../exceptions';
 
 const rncsAuth = async () => {
   try {
@@ -31,7 +21,7 @@ const rncsAuth = async () => {
     }
     return cookie.split(';')[0];
   } catch (e) {
-    throw new RncsAuthError(e);
+    throw new HttpAuthentificationFailure(e);
   }
 };
 

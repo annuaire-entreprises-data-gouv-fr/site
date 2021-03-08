@@ -1,5 +1,4 @@
-import { RnmHttpServerError } from '.';
-import { HttpNotFound } from '../exceptions';
+import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
 
 export const fetchRnmImmatriculation = async (siren: string) => {
@@ -10,7 +9,7 @@ export const fetchRnmImmatriculation = async (siren: string) => {
   }
 
   if (response.status === 500) {
-    throw new RnmHttpServerError(
+    throw new HttpServerError(
       500,
       `Siren ${siren} triggered a server error in RNM`
     );

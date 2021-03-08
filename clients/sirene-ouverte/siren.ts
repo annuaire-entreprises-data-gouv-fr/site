@@ -1,4 +1,3 @@
-import { SireneEtalabNotFound, SireneEtalabServerError } from '.';
 import { IUniteLegale } from '../../models';
 import {
   formatAdresse,
@@ -6,6 +5,7 @@ import {
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
+import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
 import {
   ISireneOuverteEtablissement,
@@ -44,7 +44,7 @@ const getUniteLegaleSireneOuverte = async (
   const response = await fetch(routes.sireneOuverte.uniteLegale + siren);
 
   if (response.status !== 200) {
-    throw new SireneEtalabServerError(500, await response.text());
+    throw new HttpServerError(500, await response.text());
   }
 
   const result = (
@@ -52,7 +52,7 @@ const getUniteLegaleSireneOuverte = async (
   )[0] as ISireneOuverteUniteLegaleResponse;
 
   if (!result) {
-    throw new SireneEtalabNotFound(404, siren);
+    throw new HttpNotFound(404, siren);
   }
 
   return mapToDomainObject(siren, result);
@@ -72,7 +72,7 @@ const mapToDomainObject = (
   );
 
   if (!listOfEtablissement || listOfEtablissement.length === 0) {
-    throw new SireneEtalabServerError(500, `No etablissements found`);
+    throw new HttpServerError(500, `No etablissements found`);
   }
 
   const {
