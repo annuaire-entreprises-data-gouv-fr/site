@@ -1,4 +1,4 @@
-import { SireneEtalabServerError } from '.';
+import { SireneEtalabNotFound, SireneEtalabServerError } from '.';
 import { IEtablissement } from '../../models';
 import {
   formatAdresse,
@@ -53,6 +53,10 @@ const getEtablissementSireneOuverte = async (
   )[0] as ISireneOuverteEtablissementResponse;
 
   const etablissement = result.etablissement[0];
+
+  if (!etablissement) {
+    throw new SireneEtalabNotFound(404, siret);
+  }
 
   return mapSireneOuverteEtablissementToDomainObject(etablissement);
 };

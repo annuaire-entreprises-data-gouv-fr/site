@@ -91,6 +91,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     } else {
       redirectServerError(context.res, e.message);
     }
+
     return { props: {} };
   }
 };

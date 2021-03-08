@@ -1,49 +1,65 @@
 import { RncsHttpServerError, fetchRncsImmatriculation } from '../clients/rncs';
 import { RnmHttpServerError, fetchRnmImmatriculation } from '../clients/rnm';
-
 import routes from '../clients/routes';
-import logErrorInSentry from '../utils/sentry';
 
-export interface IImmatriculationLinks {
-  rncsLink: string | null;
-  rnmLink: string | null;
+import logErrorInSentry from '../utils/sentry';
+import { EAdministration, IAPINotRespondingError } from './api-not-responding';
+
+export interface IImmatriculation {
+  downloadlink: string;
+}
+export interface IImmatriculationRNCS extends IImmatriculation {
+  immatriculation: any;
+}
+export interface IImmatriculationRNM extends IImmatriculation {
+  immatriculation: any;
 }
 
-const catchAndLogError = (e) => {
-  logErrorInSentry(e);
-};
-
 /**
- * Download Unite Legale from Etalab SIRENE API (fallback on INSEE's API)
+ * Request Immatriculation from CMA-France's RNM
  * @param siren
  */
-const getImmatriculations = async (
+const getImmatriculationRNM = async (
   siren: string
-): Promise<IImmatriculationLinks> => {
-  let existInRncs, existInRnm;
+): Promise<IImmatriculationRNM | IAPINotRespondingError> => {
   try {
-    const t = Promise.all([
-      fetchRncsImmatriculation(siren).catch(catchAndLogError),
-      fetchRnmImmatriculation(siren).catch(catchAndLogError),
-    ]);
-
-    // shall we test response or catch HttpResponseNotFound ?
-    existInRncs = rncsImmatriculation && rncsImmatriculation !== {};
-    existInRnm = rnmImmatriculation && rnmImmatriculation !== {};
+    const immatriculation = await fetchRnmImmatriculation(siren);
+    return {
+      immatriculation,
+      downloadlink: routes.rnm + siren,
+    };
   } catch (e) {
-    // not very happy with this architecture in case of async as it might shadow an error if several are thrown
     if (e instanceof RnmHttpServerError) {
       logErrorInSentry(`Error in API RNM for ${siren} : ${e}`);
     }
+    return {
+      administration: EAdministration.CMAFRANCE,
+      type: 500,
+    };
+  }
+};
+/**
+ * Request Immatriculation from INPI's RNCS
+ * @param siren
+ */
+const getImmatriculationRNCS = async (
+  siren: string
+): Promise<IImmatriculationRNCS | IAPINotRespondingError> => {
+  try {
+    const immatriculation = await fetchRncsImmatriculation(siren);
+    return {
+      immatriculation,
+      downloadlink: routes.rncs.portail + siren,
+    };
+  } catch (e) {
     if (e instanceof RncsHttpServerError) {
       logErrorInSentry(`Error in API RNCS for ${siren} : ${e}`);
     }
-  } finally {
     return {
-      rncsLink: existInRncs ? routes.rncs.portail + siren : null,
-      rnmLink: existInRnm ? routes.rnm + siren : null,
+      administration: EAdministration.INPI,
+      type: 500,
     };
   }
 };
 
-export default getImmatriculations;
+export { getImmatriculationRNCS, getImmatriculationRNM };

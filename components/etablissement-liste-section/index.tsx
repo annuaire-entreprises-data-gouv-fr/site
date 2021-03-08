@@ -23,7 +23,7 @@ const EtablissementListeSection: React.FC<{
             dont{' '}
             {
               uniteLegale.etablissements.filter(
-                (etablissement) => etablissement.estActif
+                (etablissement) => !etablissement.estActif
               ).length
             }{' '}
             fermés.

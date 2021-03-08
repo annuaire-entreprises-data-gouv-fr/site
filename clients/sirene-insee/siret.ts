@@ -14,20 +14,20 @@ interface IInseeEtablissementResponse {
     activitePrincipaleRegistreMetiersEtablissement: string;
   };
 }
-interface IPeriodeUniteLegale {
-  nicSiegeUniteLegale: string;
-  etatAdministratifUniteLegale: string;
-  dateDebut: string;
-  activitePrincipaleUniteLegale: string;
-  categorieJuridiqueUniteLegale: string;
-  denominationUniteLegale: string;
-}
 
 export const getEtablissementInsee = async (siret: string) => {
   const response = await inseeClient(routes.sireneInsee.siret + siret);
   const etablissement = (await response.json()) as IInseeEtablissementResponse;
   return mapToDomainObject(etablissement);
 };
+
+export const CreateNonDiffusibleEtablissement = (
+  siret: string,
+  isSiege = false
+): IEtablissement => ({
+  siret,
+  estSiege: isSiege,
+});
 
 const mapToDomainObject = (
   response: IInseeEtablissementResponse

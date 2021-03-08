@@ -1,4 +1,4 @@
-import { SireneEtalabServerError } from '.';
+import { SireneEtalabNotFound, SireneEtalabServerError } from '.';
 import { IUniteLegale } from '../../models';
 import {
   formatAdresse,
@@ -50,6 +50,10 @@ const getUniteLegaleSireneOuverte = async (
   const result = (
     await response.json()
   )[0] as ISireneOuverteUniteLegaleResponse;
+
+  if (!result) {
+    throw new SireneEtalabNotFound(404, siren);
+  }
 
   return mapToDomainObject(siren, result);
 };

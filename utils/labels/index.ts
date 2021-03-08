@@ -38,6 +38,8 @@ export const fullAdress = (etablissement: any) => {
   return adresse || 'Adresse inconnue';
 };
 
+const wrapWord = (word: string) => (word ? `${word} ` : '');
+
 export const formatAdresse = (
   numero_voie: string,
   type_voie: string,
@@ -45,5 +47,7 @@ export const formatAdresse = (
   code_postal: string,
   libelle_voie: string
 ) => {
-  return `${numero_voie} ${type_voie} ${libelle_voie} ${code_postal} ${libelle_commune}`;
+  return `${wrapWord(numero_voie)}${wrapWord(type_voie)}${wrapWord(
+    libelle_voie
+  )}${wrapWord(code_postal)}${libelle_commune || ''}`;
 };

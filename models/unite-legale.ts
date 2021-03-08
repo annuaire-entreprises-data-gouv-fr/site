@@ -8,6 +8,10 @@ import {
   CreateNonDiffusibleUniteLegale,
   getUniteLegaleInsee,
 } from '../clients/sirene-insee/siren';
+import {
+  SireneEtalabNotFound,
+  SireneEtalabServerError,
+} from '../clients/sirene-ouverte';
 import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
 import { isSiren } from '../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../utils/sentry';
@@ -24,6 +28,14 @@ const getUniteLegale = async (siren: string): Promise<IUniteLegale> => {
   try {
     return await getUniteLegaleSireneOuverte(siren);
   } catch (e) {
+    if (e instanceof SireneEtalabNotFound) {
+      // do nothing
+    }
+    if (e instanceof SireneEtalabServerError) {
+      logWarningInSentry(
+        `Server error in SireneEtalab, fallback on INSEE ${e}`
+      );
+    }
     try {
       return await getUniteLegaleInsee(siren);
     } catch (e) {

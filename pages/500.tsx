@@ -18,8 +18,7 @@ const ServerError: React.FC = () => {
         </p>
         <br />
         <p>
-          Cependant, si vous pouvez nous{' '}
-          <a href={constants.links.mailto}>écrire un mail</a> pour nous
+          Écrivez-nous <a href={constants.links.mailto}>un email</a> pour nous
           expliquer comment c'est arrivé, nous vous en serions reconnaissant et
           nous ferons le nécessaire pour résoudre le problème 🕵️‍♀️.
         </p>

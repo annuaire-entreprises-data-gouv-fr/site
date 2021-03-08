@@ -1,37 +1,41 @@
-import { IUniteLegale, NotASirenError, SirenNotFoundError } from '.';
+import { IUniteLegale, NotASirenError } from '.';
 import { isSiren } from '../utils/helpers/siren-and-siret';
+import { IAPINotRespondingError } from './api-not-responding';
 import getConventionCollectives, {
   IConventionCollective,
 } from './convention-collective';
-import getImmatriculations, { IImmatriculationLinks } from './immatriculation';
+import {
+  IImmatriculationRNM,
+  IImmatriculationRNCS,
+  getImmatriculationRNM,
+  getImmatriculationRNCS,
+} from './immatriculation';
 import getUniteLegale from './unite-legale';
 
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;
   conventionCollectives: IConventionCollective[];
-  immatriculations: IImmatriculationLinks;
+  immatriculationRNM: IImmatriculationRNM | IAPINotRespondingError;
+  immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
 }
 
 const getJustificatifs = async (siren: string): Promise<IJustificatifs> => {
   if (!isSiren(siren)) {
     throw new NotASirenError();
   }
-
   const uniteLegale = await getUniteLegale(siren as string);
-
-  if (!uniteLegale) {
-    throw new SirenNotFoundError(siren);
-  }
 
   const justificatifs = await Promise.all([
     getConventionCollectives(uniteLegale as IUniteLegale),
-    getImmatriculations(siren),
+    getImmatriculationRNM(siren),
+    getImmatriculationRNCS(siren),
   ]);
 
   return {
     uniteLegale,
     conventionCollectives: justificatifs[0],
-    immatriculations: justificatifs[1],
+    immatriculationRNM: justificatifs[1],
+    immatriculationRNCS: justificatifs[2],
   };
 };
 

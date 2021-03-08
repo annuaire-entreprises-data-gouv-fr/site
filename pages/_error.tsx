@@ -19,10 +19,9 @@ const ServerError: React.FC<{ statusCode: number }> = () => (
       </p>
       <br />
       <p>
-        Cependant, si vous pouvez nous{' '}
-        <a href={constants.links.mailto}>écrire un mail</a> pour nous expliquer
-        comment c'est arrivé, nous vous en serions reconnaissant et nous ferons
-        le nécessaire pour résoudre le problème 🕵️‍♀️.
+        Écrivez-nous <a href={constants.links.mailto}>un email</a> pour nous
+        expliquer comment c'est arrivé, nous vous en serions reconnaissant et
+        nous ferons le nécessaire pour résoudre le problème 🕵️‍♀️.
       </p>
       <br />
       <p>En attendant, vous pouvez toujours :</p>

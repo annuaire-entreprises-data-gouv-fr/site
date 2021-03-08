@@ -5,9 +5,23 @@ import {
   NotASiretError,
   SiretNotFoundError,
 } from '.';
-import { getEtablissementInsee } from '../clients/sirene-insee/siret';
+import {
+  InseeAuthError,
+  InseeForbiddenError,
+  InseeTooManyRequestsError,
+} from '../clients/sirene-insee';
+import { CreateNonDiffusibleUniteLegale } from '../clients/sirene-insee/siren';
+import {
+  CreateNonDiffusibleEtablissement,
+  getEtablissementInsee,
+} from '../clients/sirene-insee/siret';
+import {
+  SireneEtalabNotFound,
+  SireneEtalabServerError,
+} from '../clients/sirene-ouverte';
 import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
 import { isSiret } from '../utils/helpers/siren-and-siret';
+import { logWarningInSentry } from '../utils/sentry';
 import getUniteLegale from './unite-legale';
 
 export interface IEtablissementWithUniteLegale {
@@ -23,19 +37,38 @@ const getEtablissement = async (siret: string): Promise<IEtablissement> => {
     throw new NotASiretError();
   }
 
-  const etablissement = await getEtablissementSireneOuverte(siret);
-  if (etablissement) {
-    return etablissement;
-  }
+  try {
+    return await getEtablissementSireneOuverte(siret);
+  } catch (e) {
+    if (e instanceof SireneEtalabNotFound) {
+      // do nothing
+    }
+    if (e instanceof SireneEtalabServerError) {
+      logWarningInSentry(
+        `Server error in SireneEtalab, fallback on INSEE ${e}`
+      );
+    }
+    try {
+      return await getEtablissementInsee(siret);
+    } catch (e) {
+      if (
+        e instanceof InseeTooManyRequestsError ||
+        e instanceof InseeAuthError
+      ) {
+        logWarningInSentry(e);
+      }
 
-  const inseeEteablissement = await getEtablissementInsee(siret);
-  if (inseeEteablissement) {
-    return inseeEteablissement;
-  }
+      if (e instanceof InseeForbiddenError) {
+        // this means company is not diffusible
+        return CreateNonDiffusibleEtablissement(siret);
+      }
 
-  throw new SiretNotFoundError(
-    `Cannot find etablissement for siret : ${siret}`
-  );
+      // Siren was not found in both API
+      const message = `Siret ${siret} was not found in both siren API`;
+      logWarningInSentry(message);
+      throw new SiretNotFoundError(message);
+    }
+  }
 };
 
 /**
@@ -45,13 +78,6 @@ const getEtablissementWithUniteLegale = async (
   siret: string
 ): Promise<IEtablissementWithUniteLegale> => {
   const etablissement = await getEtablissement(siret);
-
-  if (!etablissement) {
-    throw new SiretNotFoundError(
-      `Cannot find etablissement for siret : ${siret}`
-    );
-  }
-
   //@ts-ignore
   const uniteLegale = await getUniteLegale(etablissement.siren);
 
@@ -60,7 +86,6 @@ const getEtablissementWithUniteLegale = async (
       `Cannot find unite legale for siren : ${etablissement.siren}`
     );
   }
-
   return { etablissement, uniteLegale };
 };
 

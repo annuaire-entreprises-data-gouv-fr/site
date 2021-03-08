@@ -11,21 +11,18 @@ import {
 import { Section } from '../../components/section';
 import ButtonLink from '../../components/button';
 import HorizontalSeparator from '../../components/horizontal-separator';
-import { download } from '../../components/icon';
-import { cma, inpi } from '../../public/static/logo';
 import Title, { FICHE } from '../../components/title-section';
-import ImmatriculationNotFound from '../../components/introuvable/immatriculation';
 import { Tag } from '../../components/tag';
 import Annonces from '../../components/annonces';
 import { FullTable } from '../../components/table/full';
 import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
+import Immatriculations from '../../components/immatriculations';
 
-interface IProps extends IJustificatifs {}
-
-const JustificatifPage: React.FC<IProps> = ({
+const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
   conventionCollectives,
-  immatriculations,
+  immatriculationRNM,
+  immatriculationRNCS,
 }) => (
   <Page
     small={true}
@@ -43,67 +40,10 @@ const JustificatifPage: React.FC<IProps> = ({
         isDiffusible={uniteLegale.estDiffusible}
         ficheType={FICHE.JUSTIFICATIFS}
       />
-      {immatriculations.rncsLink && (
-        <Section title="Cette entité est immatriculée au RCS">
-          <div className="description">
-            <div>
-              Cette entité possède une fiche d'immatriculation sur le{' '}
-              <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
-              liste les entreprises enregistrées auprès des Greffes des
-              tribunaux de commerce et centralisées par l'INPI.
-            </div>
-            <div className="logo-wrapper">{inpi}</div>
-          </div>
-          <div className="layout-center">
-            {/* <ButtonLink target="_blank" href={`${hrefRNCS}?format=pdf`}>
-              {download} Télécharger le justificatif
-            </ButtonLink> */}
-            <div className="separator" />
-            <ButtonLink
-              target="_blank"
-              href={`${immatriculations.rncsLink}`}
-              alt
-            >
-              ⇢ Voir la fiche sur le site de l’INPI
-            </ButtonLink>
-          </div>
-        </Section>
-      )}
-      {immatriculations.rncsLink && immatriculations.rnmLink && (
-        <HorizontalSeparator />
-      )}
-      {immatriculations.rncsLink && (
-        <Section title="Cette entité est immatriculée au RM">
-          <div className="description">
-            <div>
-              Cette entité possède une fiche d'immatriculation sur le{' '}
-              <b>Répertoire National des Métiers (RNM)</b> qui liste les
-              entreprises artisanales enreigstrées auprès des Chambres des
-              Métiers et de l'Artisanat (CMA France).
-            </div>
-            <div className="logo-wrapper">{cma}</div>
-          </div>
-          <div className="layout-center">
-            <ButtonLink
-              target="_blank"
-              href={`${immatriculations.rncsLink}?format=pdf`}
-            >
-              {download} Télécharger le justificatif
-            </ButtonLink>
-            <div className="separator" />
-            <ButtonLink
-              target="_blank"
-              href={`${immatriculations.rncsLink}?format=html`}
-              alt
-            >
-              ⇢ Voir la fiche sur le site de CMA France
-            </ButtonLink>
-          </div>
-        </Section>
-      )}
-      {!immatriculations.rncsLink && !immatriculations.rnmLink && (
-        <ImmatriculationNotFound />
-      )}
+      <Immatriculations
+        immatriculationRNM={immatriculationRNM}
+        immatriculationRNCS={immatriculationRNCS}
+      />
       <HorizontalSeparator />
       {uniteLegale.estDiffusible && (
         <>
