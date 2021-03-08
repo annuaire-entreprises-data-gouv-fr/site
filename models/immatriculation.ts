@@ -1,6 +1,6 @@
 import { HttpNotFound } from '../clients/exceptions';
-import { RncsHttpServerError, fetchRncsImmatriculation } from '../clients/rncs';
-import { RnmHttpServerError, fetchRnmImmatriculation } from '../clients/rnm';
+import { fetchRncsImmatriculation } from '../clients/rncs';
+import { fetchRnmImmatriculation } from '../clients/rnm';
 import routes from '../clients/routes';
 
 import logErrorInSentry from '../utils/sentry';

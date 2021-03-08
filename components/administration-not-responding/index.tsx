@@ -5,10 +5,13 @@ import { Section } from '../section';
 const AdministrationNotResponding: React.FC<IAPINotRespondingError> = ({
   administration,
 }) => (
-  <Section title={`${administration} : transmission des données hors-service`}>
+  <Section
+    title={`${administration} : transmission des données hors-service 🛑`}
+  >
     <p>
-      L'administration qui nous transmet cette donnée est actuellement hors
-      service.
+      Le service de l’administration qui nous transmet cette donnée ne
+      fonctionne pas correctement.
+      <br />
       <br />
       Cela vient surement d'une surcharge ponctuelle de leurs service. Merci de
       ré-essayer plus tard. Nous sommes désolé pour le dérangement.

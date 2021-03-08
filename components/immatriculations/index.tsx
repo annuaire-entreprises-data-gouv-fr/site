@@ -29,12 +29,12 @@ const Immatriculations: React.FC<IProps> = ({
   return (
     <>
       {noImmatriculation ? (
+        <ImmatriculationNotFound />
+      ) : (
         <>
           <ImmatriculationRNCS immatriculation={immatriculationRNCS} />
           <ImmatriculationRNM immatriculation={immatriculationRNM} />
         </>
-      ) : (
-        <ImmatriculationNotFound />
       )}
     </>
   );

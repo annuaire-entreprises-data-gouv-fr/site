@@ -16,6 +16,9 @@ interface IProps {
 
 const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
   if (isAPINotRespondingError(immatriculation)) {
+    if (immatriculation.type === 404) {
+      return null;
+    }
     return <AdministrationNotResponding {...immatriculation} />;
   }
   return (
@@ -47,6 +50,36 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
               ⇢ Voir la fiche sur le site de CMA France
             </ButtonLink>
           </div>
+          <style jsx>{`
+            .separator {
+              width: 10px;
+              height: 10px;
+            }
+            .description {
+              display: flex;
+              margin-bottom: 20px;
+              flex-direction: row;
+            }
+            .logo-wrapper {
+              padding-left: 20px;
+              width: calc(30% - 20px);
+            }
+            .logo-wrapper svg {
+              width: 100%;
+            }
+            .content-container {
+              margin: 20px auto 40px;
+            }
+            @media only screen and (min-width: 1px) and (max-width: 900px) {
+              .description {
+                flex-direction: column;
+              }
+              .logo-wrapper {
+                margin: 20px auto 0;
+                padding: 0;
+              }
+            }
+          `}</style>
         </Section>
       )}
     </>

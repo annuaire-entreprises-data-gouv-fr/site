@@ -15,7 +15,7 @@ export const isAPINotRespondingError = (
 };
 
 export enum EAdministration {
-  INPI,
-  INSEE,
-  CMAFRANCE,
+  INPI = 'Institut National de la Propriété Intellectuelle (INPI)',
+  INSEE = 'Institut national de la Statistique et des Études Économiques (INSEE)',
+  CMAFRANCE = 'Chambre des Métiers et de l’Artisnat (CMA-France)',
 }
