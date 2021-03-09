@@ -1,5 +1,9 @@
 import { inseeClient } from '.';
-import { IEtablissement, IUniteLegale } from '../../models';
+import {
+  createDefaultEtablissement,
+  createDefaultUniteLegale,
+  IUniteLegale,
+} from '../../models';
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeNaf,
@@ -14,6 +18,7 @@ interface IInseeUniteLegaleResponse {
     dateDernierTraitementUniteLegale: string;
     trancheEffectifsUniteLegale: string;
     statutDiffusionUniteLegale: string;
+    prenom1UniteLegale: string;
   };
 }
 interface IPeriodeUniteLegale {
@@ -23,21 +28,8 @@ interface IPeriodeUniteLegale {
   activitePrincipaleUniteLegale: string;
   categorieJuridiqueUniteLegale: string;
   denominationUniteLegale: string;
+  nomUniteLegale: string;
 }
-
-export const CreateNonDiffusibleUniteLegale = (
-  siren: string
-): IUniteLegale => ({
-  siren,
-  siege: {
-    siren,
-    estActif: null,
-    estSiege: true,
-  },
-  isDiffusible: false,
-  fullName: 'Cette entreprise n’est pas diffusible',
-  path: siren,
-});
 
 export const getUniteLegaleInsee = async (siren: string) => {
   const request = await inseeClient(routes.sireneInsee.siren + siren);
@@ -49,6 +41,7 @@ const mapToDomainObject = (
   siren: string,
   response: IInseeUniteLegaleResponse
 ): IUniteLegale => {
+  console.log(response.uniteLegale.periodesUniteLegale);
   const {
     sigleUniteLegale,
     dateCreationUniteLegale,
@@ -56,6 +49,7 @@ const mapToDomainObject = (
     dateDernierTraitementUniteLegale,
     trancheEffectifsUniteLegale,
     statutDiffusionUniteLegale,
+    prenom1UniteLegale,
   } = response.uniteLegale;
 
   const {
@@ -65,44 +59,50 @@ const mapToDomainObject = (
     activitePrincipaleUniteLegale,
     categorieJuridiqueUniteLegale,
     denominationUniteLegale,
+    nomUniteLegale,
   } = periodesUniteLegale[0];
 
-  let siege: IEtablissement;
+  const siege = createDefaultEtablissement();
 
   if (periodesUniteLegale && periodesUniteLegale.length > 0) {
-    siege = {
-      siren: siren,
-      siret: siren + nicSiegeUniteLegale,
-      nic: nicSiegeUniteLegale,
-      estActif: etatAdministratifUniteLegale === 'A',
-      dateCreation: dateDebut,
-      activitePrincipale: activitePrincipaleUniteLegale,
-      libelleActivitePrincipale: libelleFromCodeNaf(
-        activitePrincipaleUniteLegale
-      ),
-      estSiege: true,
-      trancheEffectif: null,
-    };
+    siege.siren = siren;
+    siege.siret = siren + nicSiegeUniteLegale;
+    siege.nic = nicSiegeUniteLegale;
+    siege.estActif = etatAdministratifUniteLegale === 'A';
+    siege.dateCreation = dateDebut;
+    siege.activitePrincipale = activitePrincipaleUniteLegale.replace('.', '');
+    siege.libelleActivitePrincipale = libelleFromCodeNaf(
+      activitePrincipaleUniteLegale.replace('.', '')
+    );
+    siege.estSiege = true;
+    siege.trancheEffectif = '';
   }
 
+  const nomComplet = `${(
+    denominationUniteLegale ||
+    `${prenom1UniteLegale} ${nomUniteLegale}` ||
+    'Nom Inconnu'
+  ).toLowerCase()}${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
+
+  const defaultUniteLegale = createDefaultUniteLegale(siren);
+
   return {
+    ...defaultUniteLegale,
     siren: siren,
-    siege: siege,
-    numeroTva: null,
-    dateDebutActivite: null,
+    siege,
     natureJuridique: categorieJuridiqueUniteLegale,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(
       categorieJuridiqueUniteLegale
     ),
-    etablissements: siege ? [siege] : [],
+    activitePrincipale: siege.activitePrincipale,
+    libelleActivitePrincipale: siege.libelleActivitePrincipale,
+    etablissements: [siege],
     dateCreation: dateCreationUniteLegale,
     dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
       'T'
     )[0],
     estDiffusible: statutDiffusionUniteLegale !== 'N',
-    nomComplet: `${(
-      denominationUniteLegale || ''
-    ).toLowerCase()} (${sigleUniteLegale})`,
+    nomComplet,
     chemin: siren,
     trancheEffectif: trancheEffectifsUniteLegale,
   };

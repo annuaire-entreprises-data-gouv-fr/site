@@ -16,6 +16,7 @@
 
 import {
   HttpAuthentificationFailure,
+  HttpNotFound,
   HttpTooManyRequests,
 } from '../exceptions';
 import routes from '../routes';
@@ -63,6 +64,9 @@ export const inseeClient = async (route: string) => {
 
   if (response.status === 429) {
     throw new HttpTooManyRequests(429, `Too many requests`);
+  }
+  if (response.status === 404) {
+    throw new HttpNotFound(404, `Too many requests`);
   }
 
   if (response.status === 403) {

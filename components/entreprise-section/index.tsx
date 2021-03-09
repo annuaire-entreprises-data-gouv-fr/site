@@ -21,7 +21,7 @@ const entrepriseDescription = (uniteLegale: IUniteLegale) => (
     )}
     {uniteLegale.dateCreation && (
       <>
-        créee le <b>{formatDateLong(uniteLegale.dateCreation)}</b>
+        créée le <b>{formatDateLong(uniteLegale.dateCreation)}</b>
       </>
     )}
     {uniteLegale.dateDebutActivite &&
@@ -80,7 +80,7 @@ const EntrepriseSection: React.FC<{
       formatDate(uniteLegale.dateDerniereMiseAJour),
     ],
   ];
-  if (!uniteLegale.siege.estActif) {
+  if (uniteLegale.siege && !uniteLegale.siege.estActif) {
     data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
   }
 

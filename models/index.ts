@@ -1,7 +1,7 @@
 /** COMMON TYPES */
 
 export interface IEtablissement {
-  enseigne?: string;
+  enseigne: string | null;
   siren: string;
   siret: string;
   nic: string;
@@ -38,6 +38,52 @@ export interface IUniteLegale {
   libelleTrancheEffectif: string;
   adresse: string;
 }
+
+/** BASIC CONSTRUCTORS */
+export const createDefaultEtablissement = (): IEtablissement => {
+  return {
+    siren: '',
+    estActif: null,
+    estSiege: false,
+    enseigne: null,
+    siret: '',
+    nic: '',
+    dateCreation: '',
+    dateDerniereMiseAJour: '',
+    dateDebutActivite: '',
+    adresse: '',
+    activitePrincipale: '',
+    libelleActivitePrincipale: '',
+    trancheEffectif: '',
+    libelleTrancheEffectif: '',
+    latitude: '',
+    longitude: '',
+  };
+};
+
+export const createDefaultUniteLegale = (siren: string): IUniteLegale => {
+  const siege = createDefaultEtablissement();
+  siege.estSiege = true;
+  return {
+    siren,
+    siege,
+    estDiffusible: true,
+    nomComplet: '',
+    chemin: siren,
+    numeroTva: '',
+    natureJuridique: '',
+    libelleNatureJuridique: '',
+    etablissements: [siege],
+    activitePrincipale: '',
+    libelleActivitePrincipale: '',
+    dateCreation: '',
+    dateDerniereMiseAJour: '',
+    dateDebutActivite: '',
+    trancheEffectif: '',
+    libelleTrancheEffectif: '',
+    adresse: '',
+  };
+};
 
 /** COMMON ERRORS */
 export class SirenNotFoundError extends Error {

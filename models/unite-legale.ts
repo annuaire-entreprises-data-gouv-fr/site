@@ -1,4 +1,9 @@
-import { IUniteLegale, NotASirenError, SirenNotFoundError } from '.';
+import {
+  createDefaultUniteLegale,
+  IUniteLegale,
+  NotASirenError,
+  SirenNotFoundError,
+} from '.';
 import {
   HttpAuthentificationFailure,
   HttpNotFound,
@@ -6,10 +11,7 @@ import {
   HttpTooManyRequests,
 } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
-import {
-  CreateNonDiffusibleUniteLegale,
-  getUniteLegaleInsee,
-} from '../clients/sirene-insee/siren';
+import { getUniteLegaleInsee } from '../clients/sirene-insee/siren';
 import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
 import { isSiren } from '../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../utils/sentry';
@@ -28,8 +30,7 @@ const getUniteLegale = async (siren: string): Promise<IUniteLegale> => {
   } catch (e) {
     if (e instanceof HttpNotFound) {
       // do nothing
-    }
-    if (e instanceof HttpServerError) {
+    } else {
       logWarningInSentry(
         `Server error in SireneEtalab, fallback on INSEE ${e}`
       );
@@ -42,16 +43,24 @@ const getUniteLegale = async (siren: string): Promise<IUniteLegale> => {
         e instanceof HttpAuthentificationFailure
       ) {
         logWarningInSentry(e);
-      }
-
-      if (e instanceof InseeForbiddenError) {
+      } else if (e instanceof InseeForbiddenError) {
         // this means company is not diffusible
-        return CreateNonDiffusibleUniteLegale(siren);
+        const uniteLegale = createDefaultUniteLegale(siren);
+        uniteLegale.estDiffusible = false;
+        uniteLegale.nomComplet =
+          'Les informations de cette entreprises ne sont pas publiques';
+
+        return uniteLegale;
+      } else if (e instanceof HttpNotFound) {
+        // do nothin
+      } else {
+        logWarningInSentry(
+          `Server error in SireneInsee, fallback on Siren not found ${e}`
+        );
       }
 
       // Siren was not found in both API
       const message = `Siren ${siren} was not found in both siren API`;
-      logWarningInSentry(message);
       throw new SirenNotFoundError(message);
     }
   }

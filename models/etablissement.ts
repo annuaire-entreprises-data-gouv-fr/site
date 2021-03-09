@@ -4,6 +4,7 @@ import {
   SirenNotFoundError,
   NotASiretError,
   SiretNotFoundError,
+  createDefaultEtablissement,
 } from '.';
 import {
   HttpNotFound,
@@ -12,10 +13,7 @@ import {
   HttpAuthentificationFailure,
 } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
-import {
-  CreateNonDiffusibleEtablissement,
-  getEtablissementInsee,
-} from '../clients/sirene-insee/siret';
+import { getEtablissementInsee } from '../clients/sirene-insee/siret';
 import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
 import { isSiret } from '../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../utils/sentry';
@@ -39,8 +37,7 @@ const getEtablissement = async (siret: string): Promise<IEtablissement> => {
   } catch (e) {
     if (e instanceof HttpNotFound) {
       // do nothing
-    }
-    if (e instanceof HttpServerError) {
+    } else {
       logWarningInSentry(
         `Server error in SireneEtalab, fallback on INSEE ${e}`
       );
@@ -53,16 +50,20 @@ const getEtablissement = async (siret: string): Promise<IEtablissement> => {
         e instanceof HttpAuthentificationFailure
       ) {
         logWarningInSentry(e);
-      }
-
-      if (e instanceof InseeForbiddenError) {
+      } else if (e instanceof InseeForbiddenError) {
         // this means company is not diffusible
-        return CreateNonDiffusibleEtablissement(siret);
+        const etablissement = createDefaultEtablissement();
+        etablissement.siret = siret;
+
+        return etablissement;
+      } else {
+        logWarningInSentry(
+          `Server error in SireneInsee, fallback on Siret not found ${e}`
+        );
       }
 
       // Siren was not found in both API
       const message = `Siret ${siret} was not found in both siren API`;
-      logWarningInSentry(message);
       throw new SiretNotFoundError(message);
     }
   }
@@ -78,14 +79,7 @@ const getEtablissementWithUniteLegale = async (
   //@ts-ignore
   const uniteLegale = await getUniteLegale(etablissement.siren);
 
-  if (!uniteLegale) {
-    throw new SirenNotFoundError(
-      `Cannot find unite legale for siren : ${etablissement.siren}`
-    );
-  }
   return { etablissement, uniteLegale };
 };
 
 export { getEtablissementWithUniteLegale, getEtablissement };
-
-export default getEtablissement;

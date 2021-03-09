@@ -6,13 +6,13 @@ const IsActiveTag: React.FC<{ isActive: boolean | null }> = ({ isActive }) => (
   <>
     {isActive === null ? (
       <>
-        <Tag>
-          Statut : données insufisantes
-          <InformationTooltip>
-            L'INSEE ne fournit pas les informations nécessaire pour savoir si
-            cette entité est en activité ou si elle est fermée.
-          </InformationTooltip>
-        </Tag>
+        <InformationTooltip
+          label="L'INSEE ne fournit pas les
+            informations nécessaires pour savoir si cette entité est en activité
+            ou si elle est fermée."
+        >
+          <Tag className="unknown">Etat inconnu</Tag>
+        </InformationTooltip>
       </>
     ) : isActive ? (
       <Tag className="open">en activité</Tag>

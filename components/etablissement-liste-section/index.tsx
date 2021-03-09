@@ -10,25 +10,14 @@ const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const closedEtablissement = uniteLegale.etablissements.filter(
-    (etablissement) => etablissement.estActif
+    (etablissement) => !etablissement.estActif
   ).length;
   return (
     <div id="etablissements">
       <p>
         Cette entité possède {uniteLegale.etablissements.length}{' '}
         établissement(s)
-        {closedEtablissement > 0 && (
-          <>
-            {' '}
-            dont{' '}
-            {
-              uniteLegale.etablissements.filter(
-                (etablissement) => !etablissement.estActif
-              ).length
-            }{' '}
-            fermés.
-          </>
-        )}
+        {closedEtablissement > 0 && <> dont {closedEtablissement} fermés</>} :
       </p>
       <Section title="La liste des établissements de l’entité">
         <FullTable
@@ -38,10 +27,7 @@ const EtablissementListeSection: React.FC<{
               <a href={`/etablissement/${etablissement.siret}`}>
                 {formatSiret(etablissement.siret)}
               </a>,
-              <>
-                {etablissement.activitePrincipale} -{' '}
-                {libelleFromCodeNaf(etablissement.activitePrincipale)}
-              </>,
+              <>{libelleFromCodeNaf(etablissement.activitePrincipale)}</>,
               etablissement.adresse,
               <>
                 {!uniteLegale.estDiffusible ? (

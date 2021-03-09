@@ -67,7 +67,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
       .map-container {
         display: flex;
         flex-direction: row-reverse;
-        height: calc(100vh - 140px);
+        height: calc(100vh - 180px);
       }
       .results-for-map-wrapper {
         width: 550px;
@@ -78,7 +78,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
       }
       .results-for-map-wrapper > .results-list-wrapper {
         padding: 0 10px;
-        height: calc(100% - 60px);
+        height: calc(100% - 50px);
         overflow: auto;
       }
       .results-for-map-wrapper > .results-footer-wrapper {

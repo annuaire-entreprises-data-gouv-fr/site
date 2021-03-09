@@ -65,7 +65,7 @@ export const mapSireneOuverteEtablissementToDomainObject = (
   etablissement: ISireneOuverteEtablissement
 ): IEtablissement => {
   return {
-    enseigne: etablissement.enseigne,
+    enseigne: etablissement.enseigne || null,
     siren: etablissement.siren,
     siret: etablissement.siret,
     nic: etablissement.nic,

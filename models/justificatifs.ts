@@ -23,6 +23,7 @@ const getJustificatifs = async (siren: string): Promise<IJustificatifs> => {
   if (!isSiren(siren)) {
     throw new NotASirenError();
   }
+
   const uniteLegale = await getUniteLegale(siren as string);
 
   const justificatifs = await Promise.all([

@@ -15,3 +15,11 @@ export const isSiren = (str: string) => {
 export const formatSiret = (siret = '') => {
   return siret.replace(/(\d{3})/g, '$1 ').replace(/(\s)(?=(\d{2})$)/g, '');
 };
+
+export const extractSirenFromSiret = (siret: string) => {
+  return siret.slice(0, 9);
+};
+
+export const extractNicFromSiret = (siret: string) => {
+  return siret.slice(9);
+};

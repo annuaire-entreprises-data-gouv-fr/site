@@ -30,6 +30,10 @@ export const Tag: React.FC<PropsWithChildren<IProps>> = ({
         color: #326f00;
         background-color: #cdf2c0;
       }
+      .tag.unknown {
+        color: #6f0000;
+        background-color: #ffe585;
+      }
     `}</style>
   </>
 );

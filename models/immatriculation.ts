@@ -1,7 +1,6 @@
 import { HttpNotFound } from '../clients/exceptions';
 import { fetchRncsImmatriculation } from '../clients/rncs';
 import { fetchRnmImmatriculation } from '../clients/rnm';
-import routes from '../clients/routes';
 
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration, IAPINotRespondingError } from './api-not-responding';
@@ -10,10 +9,15 @@ export interface IImmatriculation {
   downloadlink: string;
 }
 export interface IImmatriculationRNCS extends IImmatriculation {
-  immatriculation: any;
+  immatriculation: {};
 }
+
 export interface IImmatriculationRNM extends IImmatriculation {
-  immatriculation: any;
+  immatriculation: {
+    codeAPRM: string | null;
+    activitésArtisanalesDéclarées: string | null;
+    dirigeantQualification: string | null;
+  };
 }
 
 /**
@@ -24,11 +28,7 @@ const getImmatriculationRNM = async (
   siren: string
 ): Promise<IImmatriculationRNM | IAPINotRespondingError> => {
   try {
-    const immatriculation = await fetchRnmImmatriculation(siren);
-    return {
-      immatriculation,
-      downloadlink: routes.rnm + siren,
-    };
+    return await fetchRnmImmatriculation(siren);
   } catch (e) {
     if (e instanceof HttpNotFound) {
       return {
@@ -52,11 +52,7 @@ const getImmatriculationRNCS = async (
   siren: string
 ): Promise<IImmatriculationRNCS | IAPINotRespondingError> => {
   try {
-    const immatriculation = await fetchRncsImmatriculation(siren);
-    return {
-      immatriculation,
-      downloadlink: routes.rncs.portail + siren,
-    };
+    return await fetchRncsImmatriculation(siren);
   } catch (e) {
     if (e instanceof HttpNotFound) {
       return {

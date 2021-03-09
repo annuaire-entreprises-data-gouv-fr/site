@@ -1,5 +1,10 @@
 import { inseeClient } from '.';
-import { IEtablissement } from '../../models';
+import { createDefaultEtablissement, IEtablissement } from '../../models';
+import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
+import {
+  libelleFromCodeEffectif,
+  libelleFromCodeNaf,
+} from '../../utils/labels';
 import routes from '../routes';
 
 interface IInseeEtablissementResponse {
@@ -21,14 +26,6 @@ export const getEtablissementInsee = async (siret: string) => {
   return mapToDomainObject(etablissement);
 };
 
-export const CreateNonDiffusibleEtablissement = (
-  siret: string,
-  isSiege = false
-): IEtablissement => ({
-  siret,
-  estSiege: isSiege,
-});
-
 const mapToDomainObject = (
   response: IInseeEtablissementResponse
 ): IEtablissement => {
@@ -36,29 +33,29 @@ const mapToDomainObject = (
     siret,
     nic,
     etablissementSiege,
-    statutDiffusionEtablissement,
     trancheEffectifsEtablissement,
     dateCreationEtablissement,
     dateDernierTraitementEtablissement,
     activitePrincipaleRegistreMetiersEtablissement,
   } = response.etablissement;
 
+  const defaultEtablissement = createDefaultEtablissement();
+
   return {
-    enseigne: null,
-    siren,
+    ...defaultEtablissement,
+    siren: extractSirenFromSiret(siret),
     siret,
     nic,
-    date_creation: dateCreationEtablissement,
-    geo_adresse: null,
-    etablissement_siege: activitePrincipaleRegistreMetiersEtablissement,
-    activite_principale: activitePrincipaleRegistreMetiersEtablissement,
-    date_mise_a_jour: dateDernierTraitementEtablissement,
-    date_debut_activite: null,
-    libelle_activite_principale: activitePrincipaleRegistreMetiersEtablissement,
-    is_siege: etablissementSiege ? '1' : null,
-    tranche_effectif_salarie: trancheEffectifsEtablissement,
-    latitude: null,
-    longitude: null,
-    statut_diffusion: statutDiffusionEtablissement,
+    dateCreation: dateCreationEtablissement,
+    activitePrincipale: activitePrincipaleRegistreMetiersEtablissement,
+    libelleActivitePrincipale: libelleFromCodeNaf(
+      activitePrincipaleRegistreMetiersEtablissement
+    ),
+    dateDerniereMiseAJour: dateDernierTraitementEtablissement,
+    estSiege: !!etablissementSiege,
+    trancheEffectif: trancheEffectifsEtablissement,
+    libelleTrancheEffectif: libelleFromCodeEffectif(
+      trancheEffectifsEtablissement
+    ),
   };
 };

@@ -10,7 +10,7 @@ const AdministrationNotResponding: React.FC<IAPINotRespondingError> = ({
   >
     <p>
       Le service de l’administration qui nous transmet cette donnée ne
-      fonctionne pas correctement.
+      fonctionne pas en ce moment.
       <br />
       <br />
       Cela vient surement d'une surcharge ponctuelle de leurs service. Merci de

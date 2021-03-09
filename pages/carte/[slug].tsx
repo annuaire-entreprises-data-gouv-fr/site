@@ -2,9 +2,10 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { getEtablissement, IEtablissement } from '../../models';
+import { IEtablissement } from '../../models';
 import { redirectSiretIntrouvable } from '../../utils/redirect';
 import MapEtablissement from '../../components/mapbox/map-etablissement';
+import { getEtablissement } from '../../models/etablissement';
 
 interface IProps {
   etablissement: IEtablissement;

@@ -84,10 +84,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   } catch (e) {
     if (e instanceof NotASiretError) {
       redirectPageNotFound(context.res, siret);
-    } else if (e instanceof SiretNotFoundError) {
+    } else if (
+      e instanceof SiretNotFoundError ||
+      e instanceof SirenNotFoundError
+    ) {
       redirectSiretIntrouvable(context.res, siret);
-    } else if (e instanceof SirenNotFoundError) {
-      redirectSirenIntrouvable(context.res, e.message);
     } else {
       redirectServerError(context.res, e.message);
     }
