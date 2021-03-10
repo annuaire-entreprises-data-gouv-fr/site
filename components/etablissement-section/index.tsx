@@ -1,49 +1,43 @@
 import React from 'react';
-import { Etablissement, UniteLegale } from '../../model';
+import { IEtablissement, IUniteLegale } from '../../models';
 import { map, pin } from '../icon';
 import {
   formatDate,
   formatDateLong,
   formatNumbersFr,
-  formatSiret,
-} from '../../utils/formatting';
+} from '../../utils/helpers/formatting';
 import {
   fullAdress,
   fullLibelleFromCodeNaf,
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
-} from '../../utils/helper';
+} from '../../utils/labels';
 import ButtonLink from '../button';
 import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
+import { formatSiret } from '../../utils/helpers/siren-and-siret';
 
 interface IProps {
-  etablissement: Etablissement;
-  uniteLegale: UniteLegale;
+  etablissement: IEtablissement;
+  uniteLegale: IUniteLegale;
   usedInEntreprisePage?: Boolean;
 }
 
 const Details: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   <>
-    {uniteLegale.statut_diffusion !== 'N' && (
+    {uniteLegale.estDiffusible && (
       <p>
         Cet établissement est
-        <b>
-          {etablissement.etat_administratif_etablissement === 'A'
-            ? ' en activité'
-            : ' fermé'}
-          .
-        </b>{' '}
-        C’est
-        {etablissement.etablissement_siege === 'true' ? (
+        <b>{etablissement.estActif ? ' en activité' : ' fermé'}.</b> C’est
+        {etablissement.estSiege ? (
           <b> le siège social</b>
         ) : (
           <> un établissement secondaire</>
         )}{' '}
         de l’entité{' '}
         <a href={`/entreprise/${uniteLegale.siren}`}>
-          {uniteLegale.nom_complet}
+          {uniteLegale.nomComplet}
         </a>
         ,
         {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
@@ -66,23 +60,21 @@ const Details: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
       </p>
     )}
     <p>
-      {etablissement.date_creation && (
+      {etablissement.dateCreation && (
         <>
           Cet établissement a été crée le{' '}
-          <b>{formatDateLong(etablissement.date_creation)}</b>
+          <b>{formatDateLong(etablissement.dateCreation)}</b>
         </>
       )}{' '}
-      {etablissement.date_debut_activite &&
-        etablissement.etat_administratif_etablissement !== 'A' && (
-          <>
-            et il a été fermé le{' '}
-            <b>{formatDateLong(etablissement.date_debut_activite)}</b>
-          </>
-        )}{' '}
-      {etablissement.geo_adresse && (
+      {etablissement.dateDebutActivite && !etablissement.estActif && (
         <>
-          et il est domicilié au{' '}
-          <a href="#contact">{etablissement.geo_adresse}</a>
+          et il a été fermé le{' '}
+          <b>{formatDateLong(etablissement.dateDebutActivite)}</b>
+        </>
+      )}{' '}
+      {etablissement.adresse && (
+        <>
+          et il est domicilié au <a href="#contact">{etablissement.adresse}</a>
         </>
       )}
     </p>
@@ -98,33 +90,24 @@ const EtablissementSection: React.FC<IProps> = ({
     ['SIREN', formatNumbersFr(etablissement.siren)],
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
-    [
-      'N° TVA Intracommunautaire',
-      formatNumbersFr(uniteLegale.numero_tva_intra),
-    ],
+    ['N° TVA Intracommunautaire', formatNumbersFr(uniteLegale.numeroTva)],
     [
       'Activité principale (établissement)',
-      fullLibelleFromCodeNaf(etablissement.activite_principale),
+      etablissement.libelleActivitePrincipale,
     ],
-    [
-      'Nature juridique',
-      libelleFromCategoriesJuridiques(uniteLegale.categorie_juridique),
-    ],
-    [
-      'Tranche d’effectif salarié',
-      libelleFromCodeEffectif(etablissement.tranche_effectif_salarie),
-    ],
-    ['Date de création', formatDate(etablissement.date_creation)],
+    ['Nature juridique', uniteLegale.libelleNatureJuridique],
+    ['Tranche d’effectif salarié', etablissement.libelleTrancheEffectif],
+    ['Date de création', formatDate(etablissement.dateCreation)],
     [
       'Date de dernière mise à jour',
-      formatDate(etablissement.date_mise_a_jour),
+      formatDate(etablissement.dateDerniereMiseAJour),
     ],
   ];
 
-  if (etablissement.etat_administratif_etablissement !== 'A') {
+  if (!etablissement.estActif) {
     data.push([
       'Date de fermeture',
-      formatDate(etablissement.date_debut_activite),
+      formatDate(etablissement.dateDebutActivite),
     ]);
   }
   if (etablissement.enseigne) {
@@ -141,9 +124,7 @@ const EtablissementSection: React.FC<IProps> = ({
           usedInEntreprisePage
             ? `Les informations sur le siège social`
             : `Les informations sur cet établissement${
-                etablissement.etablissement_siege === 'true'
-                  ? ' (siège social)'
-                  : ''
+                etablissement.estSiege ? ' (siège social)' : ''
               }`
         }
       >
@@ -151,26 +132,23 @@ const EtablissementSection: React.FC<IProps> = ({
       </Section>
       <div className="section-wrapper" id="contact">
         <Section title="Les informations de contact">
-          <TwoColumnTable
-            body={[
-              // ['Gérant', managingDirector(uniteLegale) || ''],
-              ['Adresse', fullAdress(etablissement)],
-            ]}
-          />
+          <TwoColumnTable body={[['Adresse', etablissement.adresse]]} />
         </Section>
-        <div className="map">
-          {map}
-          <div className="layout-center">
-            <ButtonLink
-              href={`/rechercher/carte?siret=${etablissement.siret}`}
-              alt
-              nofollow
-            >
-              {pin}
-              Afficher sur la carte
-            </ButtonLink>
+        {etablissement.longitude && etablissement.latitude && (
+          <div className="map">
+            {map}
+            <div className="layout-center">
+              <ButtonLink
+                href={`/rechercher/carte?siret=${etablissement.siret}`}
+                alt
+                nofollow
+              >
+                {pin}
+                Afficher sur la carte
+              </ButtonLink>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <HorizontalSeparator />
       <style jsx>{`

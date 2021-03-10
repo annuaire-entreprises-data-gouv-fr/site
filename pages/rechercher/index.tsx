@@ -2,21 +2,29 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { getResults, SearchResults } from '../../model';
-import ResultList from '../../components/result-list';
-import PageCounter from '../../components/page-counter';
-import { pin } from '../../components/icon';
-import { redirectIfSiretOrSiren } from '../../utils/redirect';
-import { removeInvisibleChar } from '../../utils/formatting';
-import { parsePage } from '../../model/sirene-ouverte';
+import ResultsList from '../../components/results-list';
+import PageCounter from '../../components/results-page-counter';
+import {
+  redirectIfSiretOrSiren,
+  redirectServerError,
+} from '../../utils/redirect';
+import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
+import search, { ISearchResults } from '../../models/search';
+import ResultsHeader from '../../components/results-header';
+import { IsASirenException } from '../../models';
+import LogSearchTermInPiwik from '../../components/clients-script/log-search-term-in-piwik';
 
-interface IProps {
-  response: SearchResults;
+interface IProps extends ISearchResults {
   searchTerm: string;
-  currentPage: number;
 }
 
-const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
+const SearchResultPage: React.FC<IProps> = ({
+  results,
+  pageCount,
+  currentPage = 1,
+  resultCount,
+  searchTerm,
+}) => (
   <Page
     small={true}
     currentSearchTerm={searchTerm}
@@ -24,57 +32,25 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
     canonical="https://annuaire-entreprises.data.gouv.fr"
   >
     <div className="result-content-container">
-      {response.total_results ? (
-        <div className="results-counter">
-          {currentPage > 1 && `Page ${currentPage} de `}
-          {response.total_results} résultats trouvés pour “<b>{searchTerm}</b>”.
-          <a href={`/rechercher/carte?terme=${searchTerm}`}>
-            {pin} Afficher les résultats sur la carte
-          </a>
-        </div>
-      ) : (
-        <div className="results-counter">
-          Aucune entité n’a été trouvée pour “<b>{searchTerm}</b>”
-          <p>
-            Nous vous suggérons de vérifier l’orthographe du nom, du SIRET, ou
-            de l'adresse que vous avez utilisé.
-          </p>
-        </div>
-      )}
+      <ResultsHeader
+        resultCount={resultCount}
+        searchTerm={searchTerm}
+        currentPage={currentPage}
+      />
 
-      {response && response.unite_legale && (
+      {results && (
         <div>
-          <ResultList resultList={response.unite_legale} />
-          {response.total_pages && response.total_pages > 1 ? (
-            <PageCounter
-              totalPages={response.total_pages}
-              currentPage={currentPage}
-              searchTerm={searchTerm}
-            />
-          ) : null}
+          <ResultsList results={results} />
+          <PageCounter
+            totalPages={pageCount}
+            currentPage={currentPage}
+            searchTerm={searchTerm}
+          />
         </div>
       )}
     </div>
 
-    <script
-      async
-      defer
-      dangerouslySetInnerHTML={{
-        __html: `
-        function logSearch () {
-          if(window.Piwik) {
-            var tracker = window.Piwik.getTracker();
-            if (tracker) {
-              tracker.trackSiteSearch("${searchTerm}", "${'recherche en liste'}", ${
-          response.total_results
-        });
-            }
-          }
-        }
-        window.setTimeout(logSearch, 500);
-          `,
-      }}
-    />
+    <LogSearchTermInPiwik searchTerm={searchTerm} resultCount={resultCount} />
 
     <style jsx>{`
       .results-counter {
@@ -86,24 +62,28 @@ const About: React.FC<IProps> = ({ response, searchTerm, currentPage = 1 }) => (
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const searchTerm = (context.query.terme || '') as string;
-  const escapedTerm = removeInvisibleChar(searchTerm);
+  // get params from query string
+  const searchTermParam = (context.query.terme || '') as string;
+  const pageParam = (context.query.page || '') as string;
 
-  redirectIfSiretOrSiren(context.res, escapedTerm);
+  const page = parseIntWithDefaultValue(pageParam, 1);
 
-  //@ts-ignore
-  const page = parsePage(context.query.page || '1') - 1;
-
-  const results = await getResults(escapedTerm, page.toString());
-
-  return {
-    props: {
-      response: results || {},
-      searchTerm,
-      currentPage: parsePage(results ? results.page : '0') + 1,
-    },
-  };
+  try {
+    const results = (await search(searchTermParam, page)) || {};
+    return {
+      props: {
+        ...results,
+        searchTerm: searchTermParam,
+      },
+    };
+  } catch (e) {
+    if (e instanceof IsASirenException) {
+      redirectIfSiretOrSiren(context.res, e.message);
+    } else {
+      redirectServerError(context.res, e.message);
+    }
+    return { props: {} };
+  }
 };
 
-export default About;
+export default SearchResultPage;

@@ -2,67 +2,62 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { isSiren } from '../../utils/helper';
-import { Etablissement, getUniteLegale, UniteLegale } from '../../model';
+import { IUniteLegale, NotASirenError, SirenNotFoundError } from '../../models';
 import EntrepriseSection from '../../components/entreprise-section';
 import EtablissementListeSection from '../../components/etablissement-liste-section';
-import Title from '../../components/title-section';
+import Title, { FICHE } from '../../components/title-section';
 import {
   redirectPageNotFound,
+  redirectServerError,
   redirectSirenIntrouvable,
 } from '../../utils/redirect';
 import EtablissementSection from '../../components/etablissement-section';
 
 import NonDiffusible from '../../components/non-diffusible';
+import getUniteLegale from '../../models/unite-legale';
 
 // const structuredData = (uniteLegale: UniteLegale) => [
 //   ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],
 // ];
 
 interface IProps {
-  etablissement: Etablissement;
-  uniteLegale: UniteLegale;
-  isNonDiffusible?: boolean;
+  uniteLegale: IUniteLegale;
 }
 
-const About: React.FC<IProps> = ({
-  etablissement,
-  uniteLegale,
-  isNonDiffusible,
-}) => (
+const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
   <Page
     small={true}
-    title={`Entité - ${uniteLegale.nom_complet} - ${uniteLegale.siren}`}
-    canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.page_path}`}
+    title={`Entité - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
+    canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
   >
     {/* <StructuredData data={structuredData(uniteLegale)} /> */}
     <div className="content-container">
       <Title
-        name={uniteLegale.nom_complet}
+        name={uniteLegale.nomComplet}
         siren={uniteLegale.siren}
-        siret={etablissement.siret}
-        isEntreprise={true}
-        isOpen={etablissement.etat_administratif_etablissement === 'A'}
-        isNonDiffusible={isNonDiffusible}
+        siret={uniteLegale.siege.siret}
+        isActive={uniteLegale.siege.estActif}
+        isDiffusible={uniteLegale.estDiffusible}
+        ficheType={FICHE.UNITELEGALE}
       />
-      {uniteLegale.statut_diffusion === 'N' ? (
+      {uniteLegale.estDiffusible ? (
+        <>
+          <EntrepriseSection uniteLegale={uniteLegale} />
+          {uniteLegale.siege && (
+            <EtablissementSection
+              uniteLegale={uniteLegale}
+              etablissement={uniteLegale.siege}
+              usedInEntreprisePage={true}
+            />
+          )}
+          <EtablissementListeSection uniteLegale={uniteLegale} />
+        </>
+      ) : (
         <>
           <p>
             Cette entité est <b>non-diffusible.</b>
           </p>
           <NonDiffusible />
-        </>
-      ) : (
-        <>
-          <EntrepriseSection uniteLegale={uniteLegale} />
-          {uniteLegale.etablissement_siege && (
-            <EtablissementSection
-              uniteLegale={uniteLegale}
-              etablissement={uniteLegale.etablissement_siege}
-              usedInEntreprisePage={true}
-            />
-          )}
-          <EtablissementListeSection uniteLegale={uniteLegale} />
         </>
       )}
     </div>
@@ -86,30 +81,25 @@ const extractSiren = (slug: string) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug as string;
-
   const siren = extractSiren(slug);
 
-  // does not match a siren
-  if (!isSiren(siren)) {
-    redirectPageNotFound(context.res, slug);
+  try {
+    const uniteLegale = await getUniteLegale(siren);
+    return {
+      props: {
+        uniteLegale,
+      },
+    };
+  } catch (e) {
+    if (e instanceof NotASirenError) {
+      redirectPageNotFound(context.res, slug);
+    } else if (e instanceof SirenNotFoundError) {
+      redirectSirenIntrouvable(context.res, siren);
+    } else {
+      redirectServerError(context.res, e.message);
+    }
     return { props: {} };
   }
-
-  const uniteLegale = await getUniteLegale(siren as string);
-
-  if (!uniteLegale) {
-    redirectSirenIntrouvable(context.res, siren as string);
-    return { props: {} };
-  }
-
-  return {
-    props: {
-      //@ts-ignore
-      etablissement: uniteLegale.etablissement_siege || {},
-      uniteLegale,
-      isNonDiffusible: uniteLegale.statut_diffusion === 'N',
-    },
-  };
 };
 
-export default About;
+export default UniteLegalePage;

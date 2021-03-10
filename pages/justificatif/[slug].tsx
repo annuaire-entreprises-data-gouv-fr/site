@@ -2,102 +2,50 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { isSirenOrSiret } from '../../utils/helper';
-import { getUniteLegale, UniteLegale } from '../../model';
+import { NotASirenError, SirenNotFoundError } from '../../models';
 import {
   redirectPageNotFound,
+  redirectServerError,
   redirectSirenIntrouvable,
 } from '../../utils/redirect';
 import { Section } from '../../components/section';
 import ButtonLink from '../../components/button';
 import HorizontalSeparator from '../../components/horizontal-separator';
-import { download } from '../../components/icon';
-import { cma, inpi } from '../../public/static/logo';
-import { TitleImmatriculation } from '../../components/title-section';
-import getConventionCollective, {
-  IConventions,
-} from '../../model/convention-collective';
-import { getRNCSLink } from '../../model/rncs';
-import ImmatriculationNotFound from '../../components/introuvable/immatriculation';
+import Title, { FICHE } from '../../components/title-section';
 import { Tag } from '../../components/tag';
 import Annonces from '../../components/annonces';
 import { FullTable } from '../../components/table/full';
-import { getRNMLink } from '../../model/rnm';
+import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
+import Immatriculations from '../../components/immatriculations';
 
-interface IProps {
-  uniteLegale: UniteLegale;
-  hrefRNCS: string;
-  hrefRNM: string;
-  conventionCollectives: IConventions[];
-}
-
-const JustificatifPage: React.FC<IProps> = ({
+const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
   conventionCollectives,
-  hrefRNCS,
-  hrefRNM,
+  immatriculationRNM,
+  immatriculationRNCS,
 }) => (
   <Page
     small={true}
-    title={`Justificatif d’immatricuation - ${uniteLegale.nom_complet}`}
+    title={`Justificatif d’immatricuation - ${uniteLegale.nomComplet}`}
     noIndex={true}
   >
     <div className="content-container">
       <br />
       <a href={`/entreprise/${uniteLegale.siren}`}>← Fiche entité</a>
-      <TitleImmatriculation
+      <Title
+        name={uniteLegale.nomComplet}
         siren={uniteLegale.siren}
-        name={uniteLegale.nom_complet}
-        isNonDiffusible={uniteLegale.statut_diffusion === 'N'}
+        siret={uniteLegale.siege.siret}
+        isActive={uniteLegale.siege.estActif}
+        isDiffusible={uniteLegale.estDiffusible}
+        ficheType={FICHE.JUSTIFICATIFS}
       />
-      {hrefRNCS && (
-        <Section title="Cette entité est immatriculée au RCS">
-          <div className="description">
-            <div>
-              Cette entité possède une fiche d'immatriculation sur le{' '}
-              <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
-              liste les entreprises enregistrées auprès des Greffes des
-              tribunaux de commerce et centralisées par l'INPI.
-            </div>
-            <div className="logo-wrapper">{inpi}</div>
-          </div>
-          <div className="layout-center">
-            {/* <ButtonLink target="_blank" href={`${hrefRNCS}?format=pdf`}>
-              {download} Télécharger le justificatif
-            </ButtonLink> */}
-            <div className="separator" />
-            <ButtonLink target="_blank" href={`${hrefRNCS}`} alt>
-              ⇢ Voir la fiche sur le site de l’INPI
-            </ButtonLink>
-          </div>
-        </Section>
-      )}
-      {hrefRNCS && hrefRNM && <HorizontalSeparator />}
-      {hrefRNM && (
-        <Section title="Cette entité est immatriculée au RM">
-          <div className="description">
-            <div>
-              Cette entité possède une fiche d'immatriculation sur le{' '}
-              <b>Répertoire National des Métiers (RNM)</b> qui liste les
-              entreprises artisanales enreigstrées auprès des Chambres des
-              Métiers et de l'Artisanat (CMA France).
-            </div>
-            <div className="logo-wrapper">{cma}</div>
-          </div>
-          <div className="layout-center">
-            <ButtonLink target="_blank" href={`${hrefRNM}?format=pdf`}>
-              {download} Télécharger le justificatif
-            </ButtonLink>
-            <div className="separator" />
-            <ButtonLink target="_blank" href={`${hrefRNM}?format=html`} alt>
-              ⇢ Voir la fiche sur le site de CMA France
-            </ButtonLink>
-          </div>
-        </Section>
-      )}
-      {!hrefRNM && !hrefRNCS && <ImmatriculationNotFound />}
+      <Immatriculations
+        immatriculationRNM={immatriculationRNM}
+        immatriculationRNCS={immatriculationRNCS}
+      />
       <HorizontalSeparator />
-      {uniteLegale.statut_diffusion !== 'N' && (
+      {uniteLegale.estDiffusible && (
         <>
           <Section title="Conventions collectives">
             {conventionCollectives.length === 0 ? (
@@ -112,7 +60,7 @@ const JustificatifPage: React.FC<IProps> = ({
                     {convention.siret}
                   </a>,
                   convention.title,
-                  <Tag>{convention.num}</Tag>,
+                  <Tag>{convention.idccNumber}</Tag>,
                   <ButtonLink target="_blank" href={convention.url} alt small>
                     ⇢&nbsp;Consulter
                   </ButtonLink>,
@@ -160,35 +108,24 @@ const JustificatifPage: React.FC<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
-  const slug = context.params.slug as string;
+  const siren = context.params.slug as string;
 
-  const siren = slug ? slug.substr(slug.length - 9) : slug;
+  try {
+    const justificatifs = await getJustificatifs(siren);
 
-  if (!isSirenOrSiret(siren)) {
-    redirectPageNotFound(context.res, siren);
+    return {
+      props: justificatifs,
+    };
+  } catch (e) {
+    if (e instanceof NotASirenError) {
+      redirectPageNotFound(context.res, siren);
+    } else if (e instanceof SirenNotFoundError) {
+      redirectSirenIntrouvable(context.res, siren);
+    } else {
+      redirectServerError(context.res, e.message);
+    }
     return { props: {} };
   }
-
-  // siege social
-  const uniteLegale = await getUniteLegale(siren as string);
-
-  const conventionCollectives = await getConventionCollective(
-    uniteLegale as UniteLegale
-  );
-
-  if (!uniteLegale) {
-    redirectSirenIntrouvable(context.res, siren);
-    return { props: {} };
-  }
-
-  return {
-    props: {
-      uniteLegale,
-      conventionCollectives,
-      hrefRNM: await getRNMLink(siren),
-      hrefRNCS: await getRNCSLink(siren),
-    },
-  };
 };
 
 export default JustificatifPage;

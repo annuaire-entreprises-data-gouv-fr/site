@@ -9,17 +9,18 @@ const ServerError: React.FC = () => {
     <Page small={true} title="Cette page est introuvable">
       <div className="content-container">
         <div className="layout-left">
-          <h1>Cette page est introuvable 🔍</h1>
+          <h1>Oh non 😱 ! C'est la panne ⚠️</h1>
         </div>
         <p>
-          Si vous êtes arrivé sur cette page en tapant une url dans votre
-          navigateur, c'est probable que vous vous soyez trompé d'url.
+          Si vous voyez cette page, c'est que l'ordinateur qui fait marcher ce
+          site internet a rencontré une petite panne. Pas d'inquiétude, le reste
+          du site fonctionne toujours !
         </p>
         <br />
         <p>
-          Si vous êtes arrivé sur cette page en cliquant sur un lien du site,
-          merci de <a href={constants.links.mailto}>nous contacter</a> pour que
-          nous puissions trouver la panne 🕵️‍♀️.
+          Écrivez-nous <a href={constants.links.mailto}>un email</a> pour nous
+          expliquer comment c'est arrivé, nous vous en serions reconnaissant et
+          nous ferons le nécessaire pour résoudre le problème 🕵️‍♀️.
         </p>
         <br />
         <p>En attendant, vous pouvez toujours :</p>

@@ -3,62 +3,60 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import {
-  Etablissement,
-  getEtablissement,
-  getUniteLegale,
-  UniteLegale,
-} from '../../model';
+  IEtablissement,
+  IUniteLegale,
+  NotASiretError,
+  SirenNotFoundError,
+  SiretNotFoundError,
+} from '../../models';
 import EtablissementSection from '../../components/etablissement-section';
-import Title from '../../components/title-section';
+import Title, { FICHE } from '../../components/title-section';
 import {
   redirectPageNotFound,
+  redirectServerError,
+  redirectSirenIntrouvable,
   redirectSiretIntrouvable,
 } from '../../utils/redirect';
 import NonDiffusible from '../../components/non-diffusible';
-import { isSiret } from '../../utils/helper';
+import { getEtablissementWithUniteLegale } from '../../models/etablissement';
 
 interface IProps {
-  etablissement: Etablissement;
-  uniteLegale: UniteLegale;
-  isNonDiffusible?: boolean;
+  etablissement: IEtablissement;
+  uniteLegale: IUniteLegale;
 }
 
 const EtablissementPage: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
-  isNonDiffusible = false,
 }) => (
   <Page
     small={true}
-    title={`Etablissement - ${uniteLegale.nom_complet} - ${etablissement.siret}`}
+    title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
   >
     <div className="content-container">
       <br />
       <a href={`/entreprise/${uniteLegale.siren}`}>← Fiche entité</a>
       <Title
-        name={uniteLegale.nom_complet}
+        name={uniteLegale.nomComplet}
         siren={uniteLegale.siren}
         siret={etablissement.siret}
-        isEntreprise={false}
-        isOpen={etablissement.etat_administratif_etablissement === 'A'}
-        isNonDiffusible={isNonDiffusible}
-        isSiege={
-          !!etablissement.is_siege ||
-          etablissement.etablissement_siege === 'true'
-        }
+        isActive={etablissement.estActif}
+        isDiffusible={uniteLegale.estDiffusible}
+        isSiege={etablissement.estSiege}
+        ficheType={FICHE.ETABLISSEMENT}
       />
-      {isNonDiffusible ? (
+      {uniteLegale.estDiffusible ? (
+        <EtablissementSection
+          etablissement={etablissement}
+          uniteLegale={uniteLegale}
+        />
+      ) : (
         <>
           <p>
             Cette établissement est <b>non-diffusible.</b>
           </p>
           <NonDiffusible />
         </>
-      ) : (
-        <EtablissementSection
-          etablissement={etablissement}
-          uniteLegale={uniteLegale}
-        />
       )}
     </div>
     <style jsx>{`
@@ -71,38 +69,32 @@ const EtablissementPage: React.FC<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
-  const slug = context.params.slug as string;
+  const siret = context.params.slug as string;
 
-  const siret = slug;
+  try {
+    const etablissementWithUniteLegale = await getEtablissementWithUniteLegale(
+      siret
+    );
 
-  // does not match a siren
-  if (!isSiret(siret)) {
-    redirectPageNotFound(context.res, slug);
+    return {
+      props: {
+        ...etablissementWithUniteLegale,
+      },
+    };
+  } catch (e) {
+    if (e instanceof NotASiretError) {
+      redirectPageNotFound(context.res, siret);
+    } else if (
+      e instanceof SiretNotFoundError ||
+      e instanceof SirenNotFoundError
+    ) {
+      redirectSiretIntrouvable(context.res, siret);
+    } else {
+      redirectServerError(context.res, e.message);
+    }
+
     return { props: {} };
   }
-
-  const etablissement = await getEtablissement(siret as string);
-
-  if (!etablissement) {
-    redirectSiretIntrouvable(context.res, siret as string);
-    return { props: {} };
-  }
-
-  //@ts-ignore
-  const uniteLegale = await getUniteLegale(etablissement.siren as string);
-
-  if (!uniteLegale) {
-    redirectSiretIntrouvable(context.res, siret as string);
-    return { props: {} };
-  }
-
-  return {
-    props: {
-      etablissement,
-      uniteLegale,
-      isNonDiffusible: uniteLegale.statut_diffusion === 'N',
-    },
-  };
 };
 
 export default EtablissementPage;

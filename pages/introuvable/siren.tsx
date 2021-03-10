@@ -3,7 +3,7 @@ import React from 'react';
 import Page from '../../layouts';
 import ButtonLink from '../../components/button';
 
-const SirenNotFound: React.FC = () => {
+const SirenNotFoundPage: React.FC = () => {
   return (
     <Page small={true} title="Numero Siren introuvable">
       <div className="content-container">
@@ -39,4 +39,4 @@ const SirenNotFound: React.FC = () => {
   );
 };
 
-export default SirenNotFound;
+export default SirenNotFoundPage;
