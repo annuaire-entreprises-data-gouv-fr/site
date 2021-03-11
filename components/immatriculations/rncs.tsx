@@ -1,4 +1,5 @@
 import React from 'react';
+import { EAdministration } from '../../models/administration';
 import {
   IAPINotRespondingError,
   isAPINotRespondingError,
@@ -23,7 +24,10 @@ const ImmatriculationRNCS: React.FC<IProps> = ({ immatriculation }) => {
   return (
     <>
       {immatriculation.downloadlink && (
-        <Section title="Cette entité est immatriculée au RCS">
+        <Section
+          title="Cette entité est immatriculée au RCS"
+          source={EAdministration.INPI}
+        >
           <div className="description">
             <div>
               Cette entité possède une fiche d'immatriculation sur le{' '}

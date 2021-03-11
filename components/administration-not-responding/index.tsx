@@ -7,6 +7,7 @@ const AdministrationNotResponding: React.FC<IAPINotRespondingError> = ({
 }) => (
   <Section
     title={`${administration} : transmission des données hors-service 🛑`}
+    source={administration}
   >
     <p>
       Le service de l’administration qui nous transmet cette donnée ne

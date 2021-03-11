@@ -2,8 +2,17 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { IEtablissement } from '../../models';
-import { redirectSiretIntrouvable } from '../../utils/redirect';
+import {
+  IEtablissement,
+  NotASiretError,
+  SirenNotFoundError,
+  SiretNotFoundError,
+} from '../../models';
+import {
+  redirectPageNotFound,
+  redirectServerError,
+  redirectSiretIntrouvable,
+} from '../../utils/redirect';
 import MapEtablissement from '../../components/mapbox/map-etablissement';
 import { getEtablissement } from '../../models/etablissement';
 
@@ -22,21 +31,43 @@ const EtablissementMapPage: React.FC<IProps> = ({ etablissement }) => (
     <div className="map-container">
       <MapEtablissement etablissement={etablissement} />
     </div>
+    <style jsx>
+      {`
+        .map-container {
+          display: flex;
+          flex-direction: row-reverse;
+          height: calc(100vh - 180px);
+        }
+      `}
+    </style>
   </Page>
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { siret } = context.query;
+  //@ts-ignore
+  const siret = context.params.slug as string;
 
-  const etablissement = await getEtablissement(siret as string);
-  if (!etablissement) {
-    redirectSiretIntrouvable(context.res, siret as string);
+  try {
+    const etablissement = await getEtablissement(siret);
+    return {
+      props: {
+        etablissement,
+      },
+    };
+  } catch (e) {
+    if (e instanceof NotASiretError) {
+      redirectPageNotFound(context.res, siret);
+    } else if (
+      e instanceof SiretNotFoundError ||
+      e instanceof SirenNotFoundError
+    ) {
+      redirectSiretIntrouvable(context.res, siret);
+    } else {
+      redirectServerError(context.res, e.message);
+    }
+
+    return { props: {} };
   }
-  return {
-    props: {
-      etablissement,
-    },
-  };
 };
 
 export default EtablissementMapPage;

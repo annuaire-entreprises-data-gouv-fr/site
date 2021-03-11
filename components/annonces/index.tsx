@@ -1,4 +1,5 @@
 import React from 'react';
+import { EAdministration } from '../../models/administration';
 import ButtonLink from '../button';
 import { Section } from '../section';
 
@@ -6,7 +7,7 @@ const Annonces: React.FC<{
   siren: string;
 }> = ({ siren }) => (
   <>
-    <Section title="Annonces BODACC">
+    <Section title="Annonces BODACC" source={EAdministration.DILA}>
       <div className="annonces">
         <div>
           Vous pouvez consulter les annonces publiées par cette entreprise au

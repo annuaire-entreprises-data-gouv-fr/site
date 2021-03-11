@@ -1,5 +1,6 @@
 import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
+import { EAdministration } from '../../models/administration';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { libelleFromCodeNaf } from '../../utils/labels';
 import { Section } from '../section';
@@ -19,7 +20,10 @@ const EtablissementListeSection: React.FC<{
         établissement(s)
         {closedEtablissement > 0 && <> dont {closedEtablissement} fermés</>} :
       </p>
-      <Section title="La liste des établissements de l’entité">
+      <Section
+        title="La liste des établissements de l’entité"
+        source={EAdministration.METI}
+      >
         <FullTable
           head={['SIRET', 'Activité (code NAF)', 'Adresse', 'Statut']}
           body={uniteLegale.etablissements.map(

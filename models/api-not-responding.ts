@@ -1,3 +1,4 @@
+import { EAdministration } from './administration';
 import { IImmatriculation } from './immatriculation';
 
 export interface IAPINotRespondingError {
@@ -13,9 +14,3 @@ export const isAPINotRespondingError = (
   }
   return false;
 };
-
-export enum EAdministration {
-  INPI = 'Institut National de la Propriété Intellectuelle (INPI)',
-  INSEE = 'Institut national de la Statistique et des Études Économiques (INSEE)',
-  CMAFRANCE = 'Chambre des Métiers et de l’Artisnat (CMA-France)',
-}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { EAdministration } from '../../models/administration';
 import {
   IAPINotRespondingError,
   isAPINotRespondingError,
@@ -24,7 +25,10 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
   return (
     <>
       {immatriculation.downloadlink && (
-        <Section title="Cette entité est immatriculée au RM">
+        <Section
+          title="Cette entité est immatriculée au RM"
+          source={EAdministration.CMAFRANCE}
+        >
           <div className="description">
             <div>
               Cette entité possède une fiche d'immatriculation sur le{' '}

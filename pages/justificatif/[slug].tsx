@@ -17,6 +17,7 @@ import Annonces from '../../components/annonces';
 import { FullTable } from '../../components/table/full';
 import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
+import { EAdministration } from '../../models/administration';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -47,7 +48,10 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
       <HorizontalSeparator />
       {uniteLegale.estDiffusible && (
         <>
-          <Section title="Conventions collectives">
+          <Section
+            title="Conventions collectives"
+            source={EAdministration.INSEE}
+          >
             {conventionCollectives.length === 0 ? (
               <div>
                 Cette entité n’a aucune convention collective enregistrée

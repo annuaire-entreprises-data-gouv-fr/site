@@ -3,7 +3,8 @@ import { fetchRncsImmatriculation } from '../clients/rncs';
 import { fetchRnmImmatriculation } from '../clients/rnm';
 
 import logErrorInSentry from '../utils/sentry';
-import { EAdministration, IAPINotRespondingError } from './api-not-responding';
+import { EAdministration } from './administration';
+import { IAPINotRespondingError } from './api-not-responding';
 
 export interface IImmatriculation {
   downloadlink: string;

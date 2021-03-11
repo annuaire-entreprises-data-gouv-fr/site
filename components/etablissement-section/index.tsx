@@ -17,6 +17,8 @@ import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
+import AdministrationNotResponding from '../administration-not-responding';
+import { EAdministration } from '../../models/administration';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -127,22 +129,22 @@ const EtablissementSection: React.FC<IProps> = ({
                 etablissement.estSiege ? ' (siège social)' : ''
               }`
         }
+        source={EAdministration.INSEE}
       >
         <TwoColumnTable body={data} />
       </Section>
       <div className="section-wrapper" id="contact">
-        <Section title="Les informations de contact">
+        <Section
+          title="Les informations de contact"
+          source={EAdministration.INSEE}
+        >
           <TwoColumnTable body={[['Adresse', etablissement.adresse]]} />
         </Section>
         {etablissement.longitude && etablissement.latitude && (
           <div className="map">
             {map}
             <div className="layout-center">
-              <ButtonLink
-                href={`/rechercher/carte?siret=${etablissement.siret}`}
-                alt
-                nofollow
-              >
+              <ButtonLink href={`/carte/${etablissement.siret}`} alt nofollow>
                 {pin}
                 Afficher sur la carte
               </ButtonLink>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { IUniteLegale } from '../../models';
+import { EAdministration } from '../../models/administration';
 import {
   capitalize,
   formatDate,
@@ -87,7 +88,10 @@ const EntrepriseSection: React.FC<{
   return (
     <div id="entreprise">
       <p>{entrepriseDescription(uniteLegale)}</p>
-      <Section title={`Les informations sur cette entité`}>
+      <Section
+        title={`Les informations sur cette entité`}
+        source={EAdministration.INSEE}
+      >
         <TwoColumnTable body={data} />
       </Section>
       <HorizontalSeparator />

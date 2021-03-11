@@ -14,7 +14,6 @@ import Title, { FICHE } from '../../components/title-section';
 import {
   redirectPageNotFound,
   redirectServerError,
-  redirectSirenIntrouvable,
   redirectSiretIntrouvable,
 } from '../../utils/redirect';
 import NonDiffusible from '../../components/non-diffusible';
