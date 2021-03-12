@@ -1,4 +1,4 @@
-import { inseeClient } from '.';
+import { inseeClientGet } from '.';
 import { createDefaultEtablissement, IEtablissement } from '../../models';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
@@ -21,7 +21,7 @@ interface IInseeEtablissementResponse {
 }
 
 export const getEtablissementInsee = async (siret: string) => {
-  const response = await inseeClient(routes.sireneInsee.siret + siret);
+  const response = await inseeClientGet(routes.sireneInsee.siret + siret);
   const etablissement = (await response.json()) as IInseeEtablissementResponse;
   return mapToDomainObject(etablissement);
 };

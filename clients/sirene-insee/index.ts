@@ -42,17 +42,23 @@ export const inseeAuth = async () => {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     });
-    const token = response.json();
-    if (!token) {
-      throw new Error('Authentication failed');
+    const rawResponse = await response.text();
+    try {
+      const token = JSON.parse(rawResponse);
+      if (!token) {
+        throw new Error(`No token`);
+      }
+      return token;
+    } catch (e) {
+      // when on maintenance mode, INSEE will return a html error page with a 200 :/
+      throw new Error(rawResponse);
     }
-    return token;
   } catch (e) {
     throw new HttpAuthentificationFailure(e);
   }
 };
 
-export const inseeClient = async (route: string) => {
+export const inseeClientGet = async (route: string) => {
   const token = await inseeAuth();
 
   const response = await fetch(route, {
@@ -60,6 +66,32 @@ export const inseeClient = async (route: string) => {
       Authorization: token.token_type + ' ' + token.access_token,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
+  });
+
+  if (response.status === 429) {
+    throw new HttpTooManyRequests(429, `Too many requests`);
+  }
+  if (response.status === 404) {
+    throw new HttpNotFound(404, `Too many requests`);
+  }
+
+  if (response.status === 403) {
+    throw new InseeForbiddenError(403, `Forbidden`);
+  }
+
+  return response;
+};
+
+export const inseeClientPost = async (route: string, body: string) => {
+  const token = await inseeAuth();
+
+  const response = await fetch(route, {
+    headers: {
+      Authorization: token.token_type + ' ' + token.access_token,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    method: 'POST',
+    body,
   });
 
   if (response.status === 429) {

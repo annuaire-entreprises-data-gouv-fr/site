@@ -12,6 +12,7 @@ const routes = {
     siren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
     siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',
     auth: 'https://api.insee.fr/token',
+    avis: 'https://avis-situation-sirene.insee.fr/AvisPdf.action',
   },
   sireneOuverte: {
     etablissement: `http://recherche.entreprise.dataeng.etalab.studio/siret?q=`,

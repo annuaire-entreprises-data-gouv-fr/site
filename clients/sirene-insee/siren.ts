@@ -1,4 +1,4 @@
-import { inseeClient } from '.';
+import { inseeClientGet } from '.';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
@@ -32,7 +32,7 @@ interface IPeriodeUniteLegale {
 }
 
 export const getUniteLegaleInsee = async (siren: string) => {
-  const request = await inseeClient(routes.sireneInsee.siren + siren);
+  const request = await inseeClientGet(routes.sireneInsee.siren + siren);
   const response = (await request.json()) as IInseeUniteLegaleResponse;
   return mapToDomainObject(siren, response);
 };
@@ -41,7 +41,6 @@ const mapToDomainObject = (
   siren: string,
   response: IInseeUniteLegaleResponse
 ): IUniteLegale => {
-  console.log(response.uniteLegale.periodesUniteLegale);
   const {
     sigleUniteLegale,
     dateCreationUniteLegale,
