@@ -11,6 +11,7 @@ export default async function handler(
   const keys = r.headers.keys();
   let header = keys.next();
   while (header.value) {
+    //@ts-ignore
     res.setHeader(header.value, r.headers.get(header.value));
     header = keys.next();
   }
