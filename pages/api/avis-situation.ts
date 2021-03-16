@@ -6,14 +6,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const r = await getAvisSituationSiren('', '');
-
-  const keys = r.headers.keys();
+  const keys = req.headers.keys();
   let header = keys.next();
   while (header.value) {
+    //@ts-ignore
     res.setHeader(header.value, r.headers.get(header.value));
     header = keys.next();
   }
+  
+  const r = await getAvisSituationSiren('', '');
+
 
   res.status(200).send(await r.text());
 }
