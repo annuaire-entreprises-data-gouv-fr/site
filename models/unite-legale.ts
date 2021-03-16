@@ -32,7 +32,7 @@ const getUniteLegale = async (siren: string): Promise<IUniteLegale> => {
       // do nothing
     } else {
       logWarningInSentry(
-        `Server error in SireneEtalab, fallback on INSEE ${e}`
+        `Server error in SireneEtalab, fallback on INSEE ${siren}. ${e}`
       );
     }
     try {
@@ -53,10 +53,6 @@ const getUniteLegale = async (siren: string): Promise<IUniteLegale> => {
         return uniteLegale;
       } else if (e instanceof HttpNotFound) {
         // do nothin
-      } else {
-        logWarningInSentry(
-          `Server error in SireneInsee, fallback on Siren not found ${e}`
-        );
       }
 
       // Siren was not found in both API

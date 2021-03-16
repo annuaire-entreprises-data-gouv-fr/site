@@ -42,7 +42,7 @@ const getEtablissement = async (siret: string): Promise<IEtablissement> => {
       // do nothing
     } else {
       logWarningInSentry(
-        `Server error in SireneEtalab, fallback on INSEE ${e}`
+        `Server error in SireneEtalab, fallback on INSEE ${siret}. ${e}`
       );
     }
     try {
@@ -60,10 +60,6 @@ const getEtablissement = async (siret: string): Promise<IEtablissement> => {
         etablissement.siren = extractSirenFromSiret(siret);
 
         return etablissement;
-      } else {
-        logWarningInSentry(
-          `Server error in SireneInsee, fallback on Siret not found ${e}`
-        );
       }
 
       // Siren was not found in both API

@@ -16,16 +16,16 @@ const SirenNotFoundPage: React.FC = () => {
               et celui-ci n'existe pas
             </li>
             <li>
-              Ce SIREN fait peut-être référence a une entreprise{' '}
+              Ce SIREN fait peut-être référence à une entreprise{' '}
               <a href="/faq">non-diffusible</a>.
             </li>
             <li>
-              Ce SIREN fait peut-être référence a une entité publique dont les
+              Ce SIREN fait peut-être référence à une entité publique dont les
               informations sont protégées (Ministère de Défense, Gendarmerie,
               parlementaire etc.)
             </li>
             <li>
-              Ce SIREN fait référence a une entreprise crée récemment et{' '}
+              Ce SIREN fait référence à une entreprise crée récemment et{' '}
               <a href="/faq">nos informations ne sont pas encore à jour</a>.
             </li>
           </ul>
