@@ -1,6 +1,7 @@
 import { categoriesJuridiques } from './categories-juridiques';
 import { codesNaf } from './codes-NAF';
 import { codesEffectifs } from './code-effectifs';
+import { capitalize, formatNumbersFr } from '../helpers/formatting';
 
 export const libelleFromCodeNaf = (codeNaf: string, addCode = true) => {
   const formattedNaf = (codeNaf || '').replace(/[.-]/g, '');
@@ -38,7 +39,15 @@ export const fullAdress = (etablissement: any) => {
   return adresse || 'Adresse inconnue';
 };
 
-const wrapWord = (word: string) => (word ? `${word} ` : '');
+const wrapWord = (word: string, caps = false, stop = ' ') => {
+  if (!word) {
+    return '';
+  }
+  if (caps) {
+    return capitalize(word.toLowerCase()) + stop;
+  }
+  return word.toLowerCase() + stop;
+};
 
 export const formatAdresse = (
   numero_voie: string,
@@ -48,6 +57,8 @@ export const formatAdresse = (
   libelle_voie: string
 ) => {
   return `${wrapWord(numero_voie)}${wrapWord(type_voie)}${wrapWord(
-    libelle_voie
-  )}${wrapWord(code_postal)}${libelle_commune || ''}`;
+    libelle_voie,
+    false,
+    ', '
+  )}${formatNumbersFr(code_postal)} ${wrapWord(libelle_commune, true, '')}`;
 };

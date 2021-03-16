@@ -1,7 +1,7 @@
 import { IEtablissement } from '../../models';
 import { ISearchResults } from '../../models/search';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
-import { libelleFromCodeNaf } from '../../utils/labels';
+import { formatAdresse, libelleFromCodeNaf } from '../../utils/labels';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 
@@ -19,6 +19,11 @@ interface ISireneOuverteUniteLegaleResultat {
   longitude: string;
   nom_complet: string;
   page_path: string;
+  numero_voie: string;
+  type_voie: string;
+  libelle_commune: string;
+  code_postal: string;
+  libelle_voie: string;
 }
 
 export interface ISireneOuverteSearchResults {
@@ -78,7 +83,13 @@ const mapToDomainObject = (
         siren: result.siren,
         siret: result.siret,
         estActive: result.etat_administratif_etablissement === 'A',
-        adresse: result.geo_adresse,
+        adresse: formatAdresse(
+          result.numero_voie,
+          result.type_voie,
+          result.libelle_commune,
+          result.code_postal,
+          result.libelle_voie
+        ),
         latitude: result.latitude,
         longitude: result.longitude,
         nomComplet: result.nom_complet,

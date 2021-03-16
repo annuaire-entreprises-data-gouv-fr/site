@@ -50,7 +50,7 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
         <>
           <Section
             title="Conventions collectives"
-            source={EAdministration.INSEE}
+            source={EAdministration.METI}
           >
             {conventionCollectives.length === 0 ? (
               <div>

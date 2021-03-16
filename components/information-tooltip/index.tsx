@@ -27,6 +27,7 @@ const InformationTooltip: React.FC<PropsWithChildren<{ label: string }>> = ({
         width: 300px;
         pointer-events: none;
         position: absolute;
+        z-index: 100;
       }
 
       /* This bridges the gap so you can mouse into the tooltip without it disappearing */
