@@ -47,15 +47,19 @@ const getUniteLegaleSireneOuverte = async (
     throw new HttpServerError(500, await response.text());
   }
 
-  const result = (
-    await response.json()
-  )[0] as ISireneOuverteUniteLegaleResponse;
+  const result = (await response.json()) as any;
 
-  if (!result) {
+  if (result.length === 0) {
     throw new HttpNotFound(404, siren);
   }
 
-  return mapToDomainObject(siren, result);
+  const uniteLegale = result[0] as ISireneOuverteUniteLegaleResponse;
+
+  if (!uniteLegale) {
+    throw new HttpNotFound(404, siren);
+  }
+
+  return mapToDomainObject(siren, uniteLegale);
 };
 
 const mapToDomainObject = (

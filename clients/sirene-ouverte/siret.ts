@@ -52,6 +52,10 @@ const getEtablissementSireneOuverte = async (
     await response.json()
   )[0] as ISireneOuverteEtablissementResponse;
 
+  if (!result.etablissement) {
+    throw new HttpNotFound(404, siret);
+  }
+
   const etablissement = result.etablissement[0];
 
   if (!etablissement) {

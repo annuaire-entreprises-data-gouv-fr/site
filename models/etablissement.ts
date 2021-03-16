@@ -15,7 +15,10 @@ import {
 import { InseeForbiddenError } from '../clients/sirene-insee';
 import { getEtablissementInsee } from '../clients/sirene-insee/siret';
 import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
-import { isSiret } from '../utils/helpers/siren-and-siret';
+import {
+  extractSirenFromSiret,
+  isSiret,
+} from '../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../utils/sentry';
 import getUniteLegale from './unite-legale';
 
@@ -54,6 +57,7 @@ const getEtablissement = async (siret: string): Promise<IEtablissement> => {
         // this means company is not diffusible
         const etablissement = createDefaultEtablissement();
         etablissement.siret = siret;
+        etablissement.siren = extractSirenFromSiret(siret);
 
         return etablissement;
       } else {
