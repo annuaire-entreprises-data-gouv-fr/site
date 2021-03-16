@@ -52,7 +52,7 @@ const EtablissementPage: React.FC<IProps> = ({
       ) : (
         <>
           <p>
-            Cette établissement est <b>non-diffusible.</b>
+            Cet établissement est <b>non-diffusible.</b>
           </p>
           <NonDiffusible />
         </>

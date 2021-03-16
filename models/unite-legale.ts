@@ -48,7 +48,7 @@ const getUniteLegale = async (siren: string): Promise<IUniteLegale> => {
         const uniteLegale = createDefaultUniteLegale(siren);
         uniteLegale.estDiffusible = false;
         uniteLegale.nomComplet =
-          'Les informations de cette entreprises ne sont pas publiques';
+          'Les informations de cette entité ne sont pas publiques';
 
         return uniteLegale;
       } else if (e instanceof HttpNotFound) {
