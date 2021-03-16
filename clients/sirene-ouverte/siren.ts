@@ -118,7 +118,7 @@ const mapToDomainObject = (
     ),
     etablissements: listOfEtablissement,
     estDiffusible: true,
-    nomComplet: nom_complet,
+    nomComplet: nom_complet || 'Nom inconnu',
     chemin: nom_url,
     dateCreation: date_creation_entreprise,
     dateDebutActivite: date_debut_activite,

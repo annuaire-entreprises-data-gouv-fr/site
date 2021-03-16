@@ -63,7 +63,7 @@ export const formatAdresse = (
     !code_postal &&
     !libelle_voie
   ) {
-    return null;
+    return '';
   }
   return `${wrapWord(numero_voie)}${wrapWord(type_voie)}${wrapWord(
     libelle_voie,

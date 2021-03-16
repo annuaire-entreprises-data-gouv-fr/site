@@ -80,7 +80,7 @@ const mapToDomainObject = (
   const nomComplet = `${(
     denominationUniteLegale ||
     `${prenom1UniteLegale} ${nomUniteLegale}` ||
-    'Nom Inconnu'
+    'Nom inconnu'
   ).toLowerCase()}${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
