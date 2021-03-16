@@ -55,7 +55,7 @@ const mapToDomainObject = (
     nicSiegeUniteLegale,
     etatAdministratifUniteLegale,
     dateDebut,
-    activitePrincipaleUniteLegale,
+    activitePrincipaleUniteLegale = '',
     categorieJuridiqueUniteLegale,
     denominationUniteLegale,
     nomUniteLegale,
