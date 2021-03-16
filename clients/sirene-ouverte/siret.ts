@@ -48,17 +48,19 @@ const getEtablissementSireneOuverte = async (
     throw new HttpServerError(500, await response.text());
   }
 
-  const result = (
-    await response.json()
-  )[0] as ISireneOuverteEtablissementResponse;
+  let etablissement;
 
-  if (!result.etablissement) {
-    throw new HttpNotFound(404, siret);
-  }
+  try {
+    // Sirene ouverte does not return actual 404, just empty objects/arrays
+    const result = (
+      await response.json()
+    )[0] as ISireneOuverteEtablissementResponse;
 
-  const etablissement = result.etablissement[0];
-
-  if (!etablissement) {
+    etablissement = result.etablissement[0];
+    if (!etablissement) {
+      throw new Error();
+    }
+  } catch (e) {
     throw new HttpNotFound(404, siret);
   }
 
