@@ -7,7 +7,7 @@ export const libelleFromCodeNaf = (codeNaf: string, addCode = true) => {
   const formattedNaf = (codeNaf || '').replace(/[.-]/g, '');
   //@ts-ignore
   const label = codesNaf[formattedNaf] || 'Activité inconnue';
-  return addCode ? `${codeNaf} - ${label}` : label;
+  return addCode && codeNaf ? `${codeNaf} - ${label}` : label;
 };
 export const libelleFromCodeEffectif = (codeEffectif: string) => {
   //@ts-ignore
@@ -56,9 +56,22 @@ export const formatAdresse = (
   code_postal: string,
   libelle_voie: string
 ) => {
+  if (
+    !numero_voie &&
+    !type_voie &&
+    !libelle_commune &&
+    !code_postal &&
+    !libelle_voie
+  ) {
+    return null;
+  }
   return `${wrapWord(numero_voie)}${wrapWord(type_voie)}${wrapWord(
     libelle_voie,
     false,
     ', '
-  )}${formatNumbersFr(code_postal)} ${wrapWord(libelle_commune, true, '')}`;
+  )}${formatNumbersFr(code_postal || '')} ${wrapWord(
+    libelle_commune,
+    true,
+    ''
+  )}`;
 };

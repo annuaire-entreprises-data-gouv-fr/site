@@ -32,7 +32,7 @@ export interface IUniteLegale {
   dateDerniereMiseAJour: string;
   dateDebutActivite: string;
   estDiffusible: boolean;
-  nomComplet: string;
+  nomComplet: string | null;
   chemin: string;
   trancheEffectif: string;
   libelleTrancheEffectif: string;

@@ -6,6 +6,8 @@ import ButtonLink from '../button';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import IsActiveTag from '../is-active-tag';
 
+const NAME_UNKNOWN = 'Nom inconnu';
+
 export enum FICHE {
   UNITELEGALE = 'entité',
   ETABLISSEMENT = 'établissement',
@@ -14,7 +16,7 @@ export enum FICHE {
 interface IProps {
   siren: string;
   siret: string;
-  name: string;
+  name: string | null;
   isActive: boolean | null;
   isDiffusible?: boolean;
   isSiege?: boolean;
@@ -83,7 +85,9 @@ const Title: React.FC<IProps> = ({
   <div className="header-section">
     <div className="title">
       <h1>
-        <a href={`/entreprise/${siren}`}>{capitalize(name)}</a>
+        <a href={`/entreprise/${siren}`}>
+          {name ? capitalize(name) : NAME_UNKNOWN}
+        </a>
       </h1>
       <div>
         <span>fiche {ficheType}&nbsp;</span>
