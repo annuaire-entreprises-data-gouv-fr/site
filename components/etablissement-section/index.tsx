@@ -6,19 +6,13 @@ import {
   formatDateLong,
   formatNumbersFr,
 } from '../../utils/helpers/formatting';
-import {
-  fullAdress,
-  fullLibelleFromCodeNaf,
-  libelleFromCategoriesJuridiques,
-  libelleFromCodeEffectif,
-} from '../../utils/labels';
 import ButtonLink from '../button';
 import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import AdministrationNotResponding from '../administration-not-responding';
 import { EAdministration } from '../../models/administration';
+import AvisSituation from '../avis-situation';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -104,6 +98,7 @@ const EtablissementSection: React.FC<IProps> = ({
       'Date de dernière mise à jour',
       formatDate(etablissement.dateDerniereMiseAJour),
     ],
+    ['Avis de situation INSEE', <AvisSituation siret={etablissement.siret} />],
   ];
 
   if (!etablissement.estActif) {
