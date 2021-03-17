@@ -19,12 +19,13 @@ const InformationTooltip: React.FC<PropsWithChildren<{ label: string }>> = ({
         font-size: 0.9rem;
         background: #444;
         border-radius: 5px;
-        bottom: calc(100% + 10px);
+        bottom: 100%;
         color: #fff;
-        left: calc(50% - 140px);
-        display: none;
+        left: calc(50% - 110px);
+        display: block;
+        visibility: hidden;
         padding: 10px;
-        width: 300px;
+        width: 250px;
         pointer-events: none;
         position: absolute;
         z-index: 100;
@@ -56,17 +57,8 @@ const InformationTooltip: React.FC<PropsWithChildren<{ label: string }>> = ({
       }
 
       .wrapper:hover .tooltip {
-        display: block;
+        visibility: visible;
         pointer-events: auto;
-      }
-
-      /* IE can just show/hide with no transition */
-      .lte8 .wrapper .tooltip {
-        display: none;
-      }
-
-      .lte8 .wrapper:hover .tooltip {
-        display: block;
       }
     `}</style>
   </>
