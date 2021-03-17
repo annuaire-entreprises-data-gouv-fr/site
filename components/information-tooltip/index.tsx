@@ -19,9 +19,9 @@ const InformationTooltip: React.FC<PropsWithChildren<{ label: string }>> = ({
         font-size: 0.9rem;
         background: #444;
         border-radius: 5px;
-        bottom: 100%;
+        bottom: calc(100% + 10px);
         color: #fff;
-        left: calc(50% - 110px);
+        left: calc(50% - 115px);
         display: block;
         visibility: hidden;
         padding: 10px;
