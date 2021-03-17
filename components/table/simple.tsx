@@ -9,82 +9,81 @@ interface ISectionProps {
 export const CopyCell: React.FC<PropsWithChildren<{ className?: string }>> = ({
   children,
   className,
-}) => (
-  <td>
-    <div
-      className={`${className} ${!!children ? 'copy-to-clipboard-anchor' : ''}`}
-    >
-      <span>{children || <i>Non renseigné</i>}</span>
-      {!!children && (
-        <span className="label">
-          <span className="copy">
-            {copy}
-            copier
+}) => {
+  const isCopyEnabled = typeof children === 'string';
+  return (
+    <td>
+      <div
+        className={`${className} ${
+          isCopyEnabled ? 'copy-to-clipboard-anchor' : ''
+        }`}
+      >
+        <span>{children || <i>Non renseigné</i>}</span>
+        {isCopyEnabled && (
+          <span className="label">
+            <span className="copy">{copy}&nbsp;copier</span>
+            <span className="copied">{copied}&nbsp;copié!</span>
           </span>
-          <span className="copied">
-            {copied}
-            copié!
-          </span>
-        </span>
-      )}
-    </div>
-    <style jsx>{`
-      td {
-        width: auto;
-        padding: 5px;
-        background-color: #fff;
-        padding-left: 30px;
-      }
-      div {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        cursor: ${!!children ? 'pointer' : 'inherit'};
-        position: relative;
-      }
-      div.copy-done span.copy {
-        display: none;
-      }
-      div.copy-done span.copied {
-        display: flex;
-      }
-      div > span.label {
-        position: absolute;
-        right: 0;
-        border-radius: 4px;
-        padding: 0 4px;
-        height: 28px;
-        border: 2px solid transparent;
-        color: #000091;
-        margin-left: 20px;
-        opacity: 0;
-        background-color: #dfdff1;
-      }
-      div:hover > span.label {
-        opacity: 1;
-      }
-      span.copy {
-        display: flex;
-        align-items: center;
-      }
-      span.copied {
-        display: none;
-        align-items: center;
-        height: 100%;
-        color: green;
-      }
-      @media only screen and (min-width: 1px) and (max-width: 900px) {
-        div {
-          cursor: inherit;
-        }
+        )}
+      </div>
+      <style jsx>{`
         td {
-          padding: 0;
-          margin: 0;
+          width: auto;
+          padding: 5px;
+          background-color: #fff;
+          padding-left: 30px;
         }
-      }
-    `}</style>
-  </td>
-);
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          cursor: ${!!children ? 'pointer' : 'inherit'};
+          position: relative;
+        }
+        div.copy-done span.copy {
+          display: none;
+        }
+        div.copy-done span.copied {
+          display: flex;
+        }
+        div > span.label {
+          position: absolute;
+          right: 0;
+          border-radius: 4px;
+          padding: 0 4px;
+          height: 28px;
+          border: 2px solid transparent;
+          color: #000091;
+          margin-left: 20px;
+          opacity: 0;
+          background-color: #dfdff1;
+        }
+        div:hover > span.label {
+          opacity: 1;
+        }
+        span.copy {
+          display: flex;
+          align-items: center;
+        }
+        span.copied {
+          display: none;
+          align-items: center;
+          height: 100%;
+          color: green;
+        }
+        @media only screen and (min-width: 1px) and (max-width: 900px) {
+          div {
+            cursor: inherit;
+          }
+          td {
+            padding: 0;
+            margin: 0;
+          }
+        }
+      `}</style>
+    </td>
+  );
+};
 
 /**
  * Add a css class to customize copy to clipboard behaviour
