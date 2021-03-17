@@ -55,7 +55,7 @@ const mapToDomainObject = (
     nicSiegeUniteLegale,
     etatAdministratifUniteLegale,
     dateDebut,
-    activitePrincipaleUniteLegale,
+    activitePrincipaleUniteLegale = '',
     categorieJuridiqueUniteLegale,
     denominationUniteLegale,
     nomUniteLegale,
@@ -80,7 +80,7 @@ const mapToDomainObject = (
   const nomComplet = `${(
     denominationUniteLegale ||
     `${prenom1UniteLegale} ${nomUniteLegale}` ||
-    'Nom Inconnu'
+    'Nom inconnu'
   ).toLowerCase()}${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);

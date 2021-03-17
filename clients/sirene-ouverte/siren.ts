@@ -15,27 +15,27 @@ import {
 /**
  * GET UNITE LEGALE
  */
-
+interface ISireneOuverteUniteLegale {
+  etablissement_siege: ISireneOuverteEtablissement[];
+  etablissements: ISireneOuverteEtablissement[];
+  date_creation: string;
+  date_creation_entreprise: string;
+  date_mise_a_jour: string;
+  numero_tva_intra: string;
+  date_debut_activite: string;
+  tranche_effectif_salarie_entreprise: string;
+  nature_juridique_entreprise: string;
+  nom_complet: string;
+  nom_url: string;
+  numero_voie: string;
+  type_voie: string;
+  libelle_commune: string;
+  code_postal: string;
+  libelle_voie: string;
+  activite_principale_entreprise: string;
+}
 interface ISireneOuverteUniteLegaleResponse {
-  unite_legale: {
-    etablissement_siege: ISireneOuverteEtablissement[];
-    etablissements: ISireneOuverteEtablissement[];
-    date_creation: string;
-    date_creation_entreprise: string;
-    date_mise_a_jour: string;
-    numero_tva_intra: string;
-    date_debut_activite: string;
-    tranche_effectif_salarie_entreprise: string;
-    nature_juridique_entreprise: string;
-    nom_complet: string;
-    nom_url: string;
-    numero_voie: string;
-    type_voie: string;
-    libelle_commune: string;
-    code_postal: string;
-    libelle_voie: string;
-    activite_principale_entreprise: string;
-  }[];
+  unite_legale: ISireneOuverteUniteLegale[];
 }
 
 const getUniteLegaleSireneOuverte = async (
@@ -47,22 +47,30 @@ const getUniteLegaleSireneOuverte = async (
     throw new HttpServerError(500, await response.text());
   }
 
-  const result = (
-    await response.json()
-  )[0] as ISireneOuverteUniteLegaleResponse;
+  let uniteLegale;
 
-  if (!result) {
+  try {
+    // Sirene ouverte does not return actual 404, just empty objects/arrays
+    const result = (
+      await response.json()
+    )[0] as ISireneOuverteUniteLegaleResponse;
+
+    uniteLegale = result.unite_legale[0];
+
+    if (!uniteLegale) {
+      throw new Error();
+    }
+  } catch (e) {
     throw new HttpNotFound(404, siren);
   }
 
-  return mapToDomainObject(siren, result);
+  return mapToDomainObject(siren, uniteLegale);
 };
 
 const mapToDomainObject = (
   siren: string,
-  result: ISireneOuverteUniteLegaleResponse
+  uniteLegale: ISireneOuverteUniteLegale
 ): IUniteLegale => {
-  const uniteLegale = result.unite_legale[0];
   const siege = mapSireneOuverteEtablissementToDomainObject(
     uniteLegale.etablissement_siege[0]
   );
@@ -110,7 +118,7 @@ const mapToDomainObject = (
     ),
     etablissements: listOfEtablissement,
     estDiffusible: true,
-    nomComplet: nom_complet,
+    nomComplet: nom_complet || 'Nom inconnu',
     chemin: nom_url,
     dateCreation: date_creation_entreprise,
     dateDebutActivite: date_debut_activite,

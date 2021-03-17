@@ -20,12 +20,19 @@ interface IProps {
   usedInEntreprisePage?: Boolean;
 }
 
+const statusLabel = (estActif: Boolean | null) => {
+  if (estActif === null) {
+    return ' dans un état administratif inconnu';
+  }
+  return estActif ? ' en activité' : ' fermé';
+};
+
 const Details: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
   <>
     {uniteLegale.estDiffusible && (
       <p>
         Cet établissement est
-        <b>{etablissement.estActif ? ' en activité' : ' fermé'}.</b> C’est
+        <b>{statusLabel(etablissement.estActif)}.</b> C’est
         {etablissement.estSiege ? (
           <b> le siège social</b>
         ) : (

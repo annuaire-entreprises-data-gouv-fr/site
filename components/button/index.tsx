@@ -50,7 +50,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         text-decoration: none;
         font-size: ${small ? '0.9rem' : '1rem'};
         line-height: 1.2rem;
-        height: ${small ? '36px' : '46px'};
+        min-height: ${small ? '36px' : '46px'};
         padding: 0 10px;
         border: 2px solid ${alt ? '#000091' : 'transparent'};
         border-radius: 3px;

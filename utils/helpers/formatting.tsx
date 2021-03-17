@@ -20,7 +20,11 @@ export const capitalize = (str: string) => {
 };
 
 export const formatNumbersFr = (numberAsString = '') => {
-  return numberAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
+  try {
+    return numberAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
+  } catch {
+    return numberAsString;
+  }
 };
 
 /**

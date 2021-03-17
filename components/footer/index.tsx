@@ -137,7 +137,7 @@ const Footer = () => (
             </li> */}
         </ul>
         <div className="rf-footer__bottom-copy">
-          © République Française 2020
+          © République Française 2021
         </div>
       </div>
     </div>

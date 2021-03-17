@@ -16,16 +16,16 @@ const SiretNotFoundPage: React.FC<{}> = () => {
               et celui-ci n'existe pas
             </li>
             <li>
-              Ce SIRET fait peut-être référence a une entreprise{' '}
+              Ce SIRET fait peut-être référence à une entreprise{' '}
               <a href="/faq">non-diffusible</a>.
             </li>
             <li>
-              Ce SIRET fait peut-être référence a une entité publique dont les
+              Ce SIRET fait peut-être référence à une entité publique dont les
               informations sont protégées (Ministère de Défense, Gendarmerie,
               parlementaire etc.)
             </li>
             <li>
-              Ce SIRET fait référence a une entreprise crée récemment et{' '}
+              Ce SIRET fait référence à une entreprise crée récemment et{' '}
               <a href="/faq">nos informations ne sont pas encore à jour</a>.
             </li>
           </ul>

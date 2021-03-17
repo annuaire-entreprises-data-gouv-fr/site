@@ -22,7 +22,7 @@ const EtablissementListeSection: React.FC<{
       </p>
       <Section
         title="La liste des établissements de l’entité"
-        source={EAdministration.METI}
+        source={EAdministration.INSEE}
       >
         <FullTable
           head={['SIRET', 'Activité (code NAF)', 'Adresse', 'Statut']}
