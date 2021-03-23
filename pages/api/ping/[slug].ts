@@ -16,7 +16,7 @@ const ping = async (
           await fetchRncsImmatriculation('880878145');
         case 'rnm':
           await fetchRnmImmatriculation('824024350');
-        case 'convention-collectives':
+        case 'conventions-collectives':
           await fetchConventionCollectives(['54205118000066']);
         case 'sirene-insee':
           await getUniteLegaleInsee('880878145');
