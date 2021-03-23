@@ -46,36 +46,27 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
         immatriculationRNCS={immatriculationRNCS}
       />
       <HorizontalSeparator />
-      {uniteLegale.estDiffusible && (
-        <>
-          <Section
-            title="Conventions collectives"
-            source={EAdministration.METI}
-          >
-            {conventionCollectives.length === 0 ? (
-              <div>
-                Cette entité n’a aucune convention collective enregistrée
-              </div>
-            ) : (
-              <FullTable
-                head={['SIRET', 'Titre', 'N°IDCC', 'Convention']}
-                body={conventionCollectives.map((convention) => [
-                  <a href={`/etablissement/${convention.siret}`}>
-                    {convention.siret}
-                  </a>,
-                  convention.title,
-                  <Tag>{convention.idccNumber}</Tag>,
-                  <ButtonLink target="_blank" href={convention.url} alt small>
-                    ⇢&nbsp;Consulter
-                  </ButtonLink>,
-                ])}
-              />
-            )}
-          </Section>
-          <HorizontalSeparator />
-          <Annonces siren={uniteLegale.siren} />
-        </>
-      )}
+      <Section title="Conventions collectives" source={EAdministration.METI}>
+        {conventionCollectives.length === 0 ? (
+          <div>Cette entité n’a aucune convention collective enregistrée</div>
+        ) : (
+          <FullTable
+            head={['SIRET', 'Titre', 'N°IDCC', 'Convention']}
+            body={conventionCollectives.map((convention) => [
+              <a href={`/etablissement/${convention.siret}`}>
+                {convention.siret}
+              </a>,
+              convention.title,
+              <Tag>{convention.idccNumber}</Tag>,
+              <ButtonLink target="_blank" href={convention.url} alt small>
+                ⇢&nbsp;Consulter
+              </ButtonLink>,
+            ])}
+          />
+        )}
+      </Section>
+      <HorizontalSeparator />
+      <Annonces siren={uniteLegale.siren} />
     </div>
     <style jsx>{`
       .separator {

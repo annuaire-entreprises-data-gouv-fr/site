@@ -9,6 +9,7 @@ import {
   libelleFromCodeNaf,
 } from '../../utils/labels';
 import routes from '../routes';
+import { getAllEtablissementInsee } from './siret';
 
 interface IInseeUniteLegaleResponse {
   uniteLegale: {

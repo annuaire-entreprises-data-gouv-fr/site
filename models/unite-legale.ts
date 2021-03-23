@@ -12,6 +12,7 @@ import {
 } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
 import { getUniteLegaleInsee } from '../clients/sirene-insee/siren';
+import { getAllEtablissementInsee } from '../clients/sirene-insee/siret';
 import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
 import { isSiren } from '../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../utils/sentry';
@@ -36,7 +37,15 @@ const getUniteLegale = async (siren: string): Promise<IUniteLegale> => {
       );
     }
     try {
-      return await getUniteLegaleInsee(siren);
+      const uniteLegale = await getUniteLegaleInsee(siren);
+      const etablissements = await getAllEtablissementInsee(siren);
+      uniteLegale.etablissements = etablissements;
+
+      const siege = etablissements.find((e) => e.estSiege);
+      if (siege) {
+        uniteLegale.siege = siege;
+      }
+      return uniteLegale;
     } catch (e) {
       if (
         e instanceof HttpTooManyRequests ||

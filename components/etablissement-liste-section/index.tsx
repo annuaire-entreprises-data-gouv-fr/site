@@ -3,6 +3,7 @@ import { IEtablissement, IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { libelleFromCodeNaf } from '../../utils/labels';
+import IsActiveTag from '../is-active-tag';
 import { Section } from '../section';
 import { FullTable } from '../table/full';
 import { Tag } from '../tag';
@@ -11,7 +12,7 @@ const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const closedEtablissement = uniteLegale.etablissements.filter(
-    (etablissement) => !etablissement.estActif
+    (etablissement) => etablissement.estActif === false
   ).length;
   return (
     <div id="etablissements">
@@ -38,9 +39,9 @@ const EtablissementListeSection: React.FC<{
                   <Tag>non-diffusible</Tag>
                 ) : (
                   <>
-                    {etablissement.estSiege ? <Tag>siège social</Tag> : null}
-                    {etablissement.estActif ? null : (
-                      <Tag className="closed">fermé</Tag>
+                    {etablissement.estSiege && <Tag>siège social</Tag>}
+                    {!etablissement.estActif && (
+                      <IsActiveTag isActive={etablissement.estActif} />
                     )}
                   </>
                 )}

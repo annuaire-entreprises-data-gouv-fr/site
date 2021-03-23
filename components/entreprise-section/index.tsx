@@ -81,7 +81,7 @@ const EntrepriseSection: React.FC<{
       formatDate(uniteLegale.dateDerniereMiseAJour),
     ],
   ];
-  if (uniteLegale.siege && !uniteLegale.siege.estActif) {
+  if (uniteLegale.siege && uniteLegale.siege.estActif === false) {
     data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
   }
 

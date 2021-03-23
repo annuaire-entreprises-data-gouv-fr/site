@@ -36,6 +36,7 @@ const AvisSituation: React.FC<{ siret: string }> = ({ siret }) => (
         color: inherit;
         border-radius: 0;
         padding: 2px 0;
+        font: inherit;
       }
 
       #avis-situation input:active {

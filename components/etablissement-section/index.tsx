@@ -108,7 +108,7 @@ const EtablissementSection: React.FC<IProps> = ({
     ['Avis de situation INSEE', <AvisSituation siret={etablissement.siret} />],
   ];
 
-  if (!etablissement.estActif) {
+  if (etablissement.estActif === false) {
     data.push([
       'Date de fermeture',
       formatDate(etablissement.dateDebutActivite),

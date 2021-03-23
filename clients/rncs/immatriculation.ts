@@ -12,7 +12,6 @@ interface IApiRNCSResponse {}
 
 export const fetchRncsImmatriculation = async (siren: string) => {
   const cookie = await rncsAuth();
-
   const response = await fetch(routes.rncs.api.imr + siren, {
     headers: { Cookie: cookie },
   });

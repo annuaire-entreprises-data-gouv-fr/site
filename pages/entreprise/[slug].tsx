@@ -92,7 +92,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   } catch (e) {
     if (e instanceof NotASirenError) {
-      redirectPageNotFound(context.res, slug);
+      //@ts-ignore
+      redirectPageNotFound(context.res, JSON.stringify(context.params.slug));
     } else if (e instanceof SirenNotFoundError) {
       redirectSirenIntrouvable(context.res, siren);
     } else {
