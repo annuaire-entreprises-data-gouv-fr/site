@@ -5,7 +5,7 @@ import constants from '../constants';
 
 const Accessibility: React.FC = () => {
   return (
-    <Page small={true} title="Déclaration d’accessibilité">
+    <Page small={true} title="Déclaration d’accessibilité" noIndex={true}>
       <div className="content-container">
         <div className="layout-left">
           <h1>Déclaration d’accessibilité</h1>

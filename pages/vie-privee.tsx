@@ -4,7 +4,7 @@ import { NextPage } from 'next';
 import Page from '../layouts/page';
 
 const Privacy: NextPage = () => (
-  <Page title="Politique de confidentialité" small>
+  <Page title="Politique de confidentialité" small noIndex={true}>
     <div className="content-container">
       <h1>Politique de confidentialité</h1>
       <h2>Cookies déposés</h2>
