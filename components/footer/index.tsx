@@ -120,6 +120,11 @@ const Footer = () => (
               Historique des modifications
             </a>
           </li>
+          <li className="rf-footer__bottom-item">
+            <a className="rf-footer__bottom-link" href="/accessibilite">
+              Accessibilité : non-conforme
+            </a>
+          </li>
           {/* <li className="rf-footer__bottom-item">
               <a className="rf-footer__bottom-link" href="#">
                 Accessibilité: partiellement conforme
