@@ -35,10 +35,9 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
       <Title
         name={uniteLegale.nomComplet}
         siren={uniteLegale.siren}
-        siret={uniteLegale.siege.siret}
         isActive={uniteLegale.siege.estActif}
         isDiffusible={uniteLegale.estDiffusible}
-        ficheType={FICHE.UNITELEGALE}
+        ficheType={FICHE.INFORMATION}
       />
       {uniteLegale.estDiffusible ? (
         <>

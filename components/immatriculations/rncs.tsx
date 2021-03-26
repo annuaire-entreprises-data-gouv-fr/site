@@ -25,7 +25,7 @@ const ImmatriculationRNCS: React.FC<IProps> = ({ immatriculation }) => {
     <>
       {immatriculation.downloadlink && (
         <Section
-          title="Cette entité est immatriculée au RCS"
+          title="Justificatif d’immatriculation au RCS"
           source={EAdministration.INPI}
         >
           <div className="description">

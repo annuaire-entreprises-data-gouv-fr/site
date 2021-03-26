@@ -81,6 +81,7 @@ const Details: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
         </>
       )}
     </p>
+    <br />
   </>
 );
 

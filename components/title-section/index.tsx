@@ -2,83 +2,81 @@ import React from 'react';
 
 import { capitalize, formatNumbersFr } from '../../utils/helpers/formatting';
 import { Tag } from '../tag';
-import ButtonLink from '../button';
-import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import IsActiveTag from '../is-active-tag';
 
 export enum FICHE {
-  UNITELEGALE = 'entité',
-  ETABLISSEMENT = 'établissement',
-  JUSTIFICATIFS = 'documents & justificatifs',
+  INFORMATION = 'informations générales',
+  JUSTIFICATIFS = 'justificatifs',
+  ANNONCES = 'annonces & conventions collectives',
 }
 interface IProps {
   siren: string;
-  siret: string;
   name: string;
   isActive: boolean | null;
   isDiffusible?: boolean;
-  isSiege?: boolean;
   ficheType?: FICHE;
 }
 
-const CtaForTitle: React.FC<{ siren: string }> = ({ siren }) => (
-  <div className="wrapper">
-    <div className="cta">
-      <ButtonLink href={`/justificatif/${siren}`} nofollow>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-        >
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-          <polyline points="14 2 14 8 20 8"></polyline>
-          <line x1="16" y1="13" x2="8" y2="13"></line>
-          <line x1="16" y1="17" x2="8" y2="17"></line>
-          <polyline points="10 9 9 9 8 9"></polyline>
-        </svg>
-        &nbsp;Justificatif d'immatriculation,
-        <br /> conventions collectives et annonces légales
-      </ButtonLink>
+const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
+  ficheType,
+  siren,
+}) => (
+  <>
+    <div className="title-tabs">
+      <a
+        className={`${ficheType === FICHE.INFORMATION && 'active'}`}
+        href={`/entreprise/${siren}`}
+      >
+        Informations générales
+      </a>
+      <a
+        className={`${ficheType === FICHE.JUSTIFICATIFS && 'active'}`}
+        href={`/justificatif/${siren}`}
+      >
+        Justificatifs
+      </a>
+      <a
+        className={`${ficheType === FICHE.ANNONCES && 'active'}`}
+        href={`/annonces/${siren}`}
+      >
+        Annonces & conventions collectives
+      </a>
     </div>
-    <div className="separator" />
+
     <style jsx>{`
-      .separator {
-        height: 5px;
-      }
-
-      .cta {
-        flex-direction: row;
-        justify-content: flex-end;
+      .title-tabs {
         display: flex;
+        flex-grow: 1;
+        max-width: 50%;
+        font-size: 0.9rem;
+      }
+      .title-tabs > a {
+        margin-right: 8px;
+        padding: 10px 5px;
+        border: 2px solid #dfdff1;
+        background-color: #f7f7fd;
+        margin-bottom: -2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        box-shadow: none;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 900px) {
-        .wrapper {
-          margin: 15px auto;
-        }
-        .cta {
-          justify-content: center;
-        }
-        div.label {
-          text-align: center;
-        }
+      .title-tabs > a.active {
+        background-color: #fff;
+        border-bottom: 0;
       }
     `}</style>
-  </div>
+  </>
 );
 
 const Title: React.FC<IProps> = ({
   siren,
-  siret,
   name,
   isActive,
   isDiffusible = true,
-  isSiege = false,
-  ficheType = FICHE.UNITELEGALE,
+  ficheType = FICHE.INFORMATION,
 }) => (
   <div className="header-section">
     <div className="title">
@@ -86,33 +84,27 @@ const Title: React.FC<IProps> = ({
         <a href={`/entreprise/${siren}`}>{capitalize(name)}</a>
       </h1>
       <div>
-        <span>fiche {ficheType}&nbsp;</span>
-        {ficheType === FICHE.ETABLISSEMENT ? (
-          <span>‣ {formatSiret(siret)}</span>
-        ) : (
-          <span>‣ {formatNumbersFr(siren)}</span>
-        )}
+        <span>unité légale ‣ {formatNumbersFr(siren)}</span>
         <span>
           {!isDiffusible && <Tag>non diffusible</Tag>}
           <IsActiveTag isActive={isActive} />
-          {isSiege && <Tag>siège social</Tag>}
         </span>
       </div>
     </div>
-
-    {ficheType !== FICHE.JUSTIFICATIFS && <CtaForTitle siren={siren} />}
+    <Tabs siren={siren} ficheType={ficheType} />
 
     <style jsx>{`
       .header-section {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-end;
         flex-direction: row;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dfdff1;
       }
 
       .title {
-        margin: 20px 0 10px;
+        margin: 20px 0 30px;
         display: flex;
         align-items: start;
         flex-direction: column;

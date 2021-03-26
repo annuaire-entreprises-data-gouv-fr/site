@@ -18,6 +18,9 @@ import {
 } from '../../utils/redirect';
 import NonDiffusible from '../../components/non-diffusible';
 import { getEtablissementWithUniteLegale } from '../../models/etablissement';
+import { Tag } from '../../components/tag';
+import { formatSiret } from '../../utils/helpers/siren-and-siret';
+import IsActiveTag from '../../components/is-active-tag';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -33,17 +36,23 @@ const EtablissementPage: React.FC<IProps> = ({
     title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
   >
     <div className="content-container">
-      <br />
-      <a href={`/entreprise/${uniteLegale.siren}`}>← Fiche entité</a>
       <Title
         name={uniteLegale.nomComplet}
         siren={uniteLegale.siren}
-        siret={etablissement.siret}
-        isActive={etablissement.estActif}
+        isActive={uniteLegale.siege.estActif}
         isDiffusible={uniteLegale.estDiffusible}
-        isSiege={etablissement.estSiege}
-        ficheType={FICHE.ETABLISSEMENT}
+        ficheType={FICHE.INFORMATION}
       />
+      <div className="sub-title">
+        <span>
+          information établissement ‣ {formatSiret(etablissement.siret)}
+        </span>
+        {etablissement.estSiege && <Tag>siège social</Tag>}
+        {etablissement.estActif && (
+          <IsActiveTag isActive={etablissement.estActif} />
+        )}
+      </div>
+      <br />
       {uniteLegale.estDiffusible ? (
         <EtablissementSection
           etablissement={etablissement}
@@ -61,6 +70,11 @@ const EtablissementPage: React.FC<IProps> = ({
     <style jsx>{`
       .content-container {
         margin: 20px auto 40px;
+      }
+      .sub-title > span {
+        color: #666;
+        font-variant: small-caps;
+        font-size: 1.1rem;
       }
     `}</style>
   </Page>

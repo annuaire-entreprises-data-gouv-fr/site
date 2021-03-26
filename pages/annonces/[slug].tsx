@@ -9,15 +9,20 @@ import {
   redirectSirenIntrouvable,
 } from '../../utils/redirect';
 import { Section } from '../../components/section';
+import ButtonLink from '../../components/button';
+import HorizontalSeparator from '../../components/horizontal-separator';
 import Title, { FICHE } from '../../components/title-section';
-import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
-import Immatriculations from '../../components/immatriculations';
-import AvisSituation from '../../components/avis-situation';
+import { Tag } from '../../components/tag';
+import Annonces from '../../components/annonces';
+import { FullTable } from '../../components/table/full';
+import { EAdministration } from '../../models/administration';
+import getConventions, {
+  IConventions,
+} from '../../models/annonces-conventions';
 
-const JustificatifPage: React.FC<IJustificatifs> = ({
+const AnnoncesAndConventionsPage: React.FC<IConventions> = ({
   uniteLegale,
-  immatriculationRNM,
-  immatriculationRNCS,
+  conventionCollectives,
 }) => (
   <Page
     small={true}
@@ -30,22 +35,29 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
         siren={uniteLegale.siren}
         isActive={uniteLegale.siege.estActif}
         isDiffusible={uniteLegale.estDiffusible}
-        ficheType={FICHE.JUSTIFICATIFS}
+        ficheType={FICHE.ANNONCES}
       />
-      <Section title="Avis de situation INSEE">
-        <div className="description">
-          Le siège social de cette entité possède un avis de situation au
-          répertoire Sirene des entreprises.
-        </div>
-        <div className="layout-center">
-          👉&nbsp;
-          <AvisSituation siret={uniteLegale.siege.siret} />
-        </div>
+      <Annonces siren={uniteLegale.siren} />
+      <HorizontalSeparator />
+      <Section title="Conventions collectives" source={EAdministration.METI}>
+        {conventionCollectives.length === 0 ? (
+          <div>Cette entité n’a aucune convention collective enregistrée</div>
+        ) : (
+          <FullTable
+            head={['SIRET', 'Titre', 'N°IDCC', 'Convention']}
+            body={conventionCollectives.map((convention) => [
+              <a href={`/etablissement/${convention.siret}`}>
+                {convention.siret}
+              </a>,
+              convention.title,
+              <Tag>{convention.idccNumber}</Tag>,
+              <ButtonLink target="_blank" href={convention.url} alt small>
+                ⇢&nbsp;Consulter
+              </ButtonLink>,
+            ])}
+          />
+        )}
       </Section>
-      <Immatriculations
-        immatriculationRNM={immatriculationRNM}
-        immatriculationRNCS={immatriculationRNCS}
-      />
     </div>
     <style jsx>{`
       .separator {
@@ -85,10 +97,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siren = context.params.slug as string;
 
   try {
-    const justificatifs = await getJustificatifs(siren);
+    const conventions = await getConventions(siren);
 
     return {
-      props: justificatifs,
+      props: conventions,
     };
   } catch (e) {
     if (e instanceof NotASirenError) {
@@ -102,4 +114,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 };
 
-export default JustificatifPage;
+export default AnnoncesAndConventionsPage;

@@ -50,6 +50,8 @@ const entrepriseDescription = (uniteLegale: IUniteLegale) => (
         </a>
       </>
     )}
+    <br />
+    <br />
   </>
 );
 
