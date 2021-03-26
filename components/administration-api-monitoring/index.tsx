@@ -211,7 +211,7 @@ const AdministrationApiMonitoring: React.FC<IMonitoring> = ({
       .tabs {
         display: flex;
         align-items: stretch;
-        justify-content: end;
+        justify-content: flex-end;
         list-style: none;
         padding: 0;
         margin-top: 0;
