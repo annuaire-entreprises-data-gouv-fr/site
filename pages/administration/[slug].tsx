@@ -9,9 +9,13 @@ import {
   EAdministration,
   IAdministrationMetaData,
 } from '../../models/administration';
-import { redirectPageNotFound } from '../../utils/redirect';
+import {
+  redirectPageNotFound,
+  redirectServerError,
+} from '../../utils/redirect';
 import getMonitoring, { IMonitoring } from '../../models/monitoring';
 import AdministrationApiMonitoring from '../../components/administration-api-monitoring';
+import { HttpNotFound } from '../../clients/exceptions';
 
 interface IProps extends IAdministrationMetaData {
   monitoring: IMonitoring;
@@ -71,23 +75,30 @@ const AdministrationPage: React.FC<IProps> = ({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug as EAdministration;
-  const administration = Object.values(administrationsMetaData).find(
-    //@ts-ignore
-    (admin) => admin.slug === slug
-  );
-  if (administration === undefined) {
-    redirectPageNotFound(
-      context.res,
-      `Administration ${slug} page does not exist`
+  try {
+    const administration = Object.values(administrationsMetaData).find(
+      //@ts-ignore
+      (admin) => admin.slug === slug
     );
+    if (administration === undefined) {
+      throw new HttpNotFound(404, `${slug}`);
+    }
+
+    const monitoring = administration.monitoringSlug
+      ? await getMonitoring(administration.monitoringSlug)
+      : null;
+    return { props: { ...administration, monitoring } };
+  } catch (e) {
+    if (e instanceof HttpNotFound) {
+      redirectPageNotFound(
+        context.res,
+        `Administration ${slug} page does not exist`
+      );
+    } else {
+      redirectServerError(context.res, e);
+    }
     return { props: {} };
   }
-
-  const monitoring = administration.monitoringSlug
-    ? await getMonitoring(administration.monitoringSlug)
-    : null;
-
-  return { props: { ...administration, monitoring } };
 };
 
 export default AdministrationPage;

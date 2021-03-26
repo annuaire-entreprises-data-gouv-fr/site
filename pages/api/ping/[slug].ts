@@ -6,7 +6,7 @@ import { getUniteLegaleInsee } from '../../../clients/sirene-insee/siren';
 import getUniteLegaleSireneOuverte from '../../../clients/sirene-ouverte/siren';
 import fetchConventionCollectives from '../../../clients/siret-2-idcc';
 
-const test = async (slug: string | string[]) => {
+const testApi = async (slug: string | string[]) => {
   switch (slug) {
     case 'rncs':
       return await fetchRncsImmatriculation('880878145');
@@ -29,7 +29,7 @@ const ping = async (
 ) => {
   if (slug) {
     try {
-      if ((await test(slug)) === null) {
+      if ((await testApi(slug)) === null) {
         res.status(404).json({ message: `Slug: ${slug} not found.` });
       }
       res.status(200).json({ message: 'ok' });
