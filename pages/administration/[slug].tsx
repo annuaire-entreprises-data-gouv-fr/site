@@ -23,6 +23,7 @@ interface IProps extends IAdministrationMetaData {
 
 const AdministrationPage: React.FC<IProps> = ({
   long,
+  short,
   slug,
   description,
   apiGouvLink,
@@ -39,7 +40,7 @@ const AdministrationPage: React.FC<IProps> = ({
       <ReactMarkdown children={description} />
       {(apiGouvLink || dataGouvLink) && (
         <>
-          <h2>Accéder aux données</h2>
+          <h2 id="acces">Accéder aux données {short}</h2>
           {dataGouvLink && (
             <>
               <h3>En téléchargeant un jeu de données</h3>

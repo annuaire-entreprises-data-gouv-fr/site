@@ -149,13 +149,37 @@ const FAQ: React.FC<{}> = () => (
             Les données du moteur de recherche sont mises à jour tous les mois.
           </p>
         </QuestionBlock>
+        <QuestionBlock title="Qu'est-ce qu'une entreprise non-diffusible ?">
+          <NonDiffusible />
+        </QuestionBlock>
         <QuestionBlock title="Comment puis-je utiliser ces données dans mon site internet ?">
-          <p>Consultez la page “À propos”</p>
-          <div className="layout-center">
-            <ButtonLink href="/comment-ca-marche" alt>
-              À propos
-            </ButtonLink>
-          </div>
+          <p>
+            Toutes les données présentées sur le site sont publiées en
+            open-data. Pour en savoir plus sur la démarche, vous pouvez
+            consulter la <a href="/comment-ca-marche">page "à propos"</a>.
+          </p>
+          <br />
+          <p>
+            Vous pouvez également consulter les fiches explicatives de chaque
+            administration :
+            <ul>
+              <li>
+                <a href="/administration/inpi#acces">L’INPI</a>
+              </li>
+              <li>
+                <a href="/administration/insee#acces">L’INSEE</a>
+              </li>
+              <li>
+                <a href="/administration/cma-france#acces">CMA-France</a>
+              </li>
+              <li>
+                <a href="/administration/meti#acces">Le Ministère du Travail</a>
+              </li>
+              <li>
+                <a href="/administration/dila#acces">La DILA</a>
+              </li>
+            </ul>
+          </p>
         </QuestionBlock>
         <QuestionBlock title="Je ne trouve pas la réponse a ma question">
           <p>Vous pouvez nous poser une question directement :</p>

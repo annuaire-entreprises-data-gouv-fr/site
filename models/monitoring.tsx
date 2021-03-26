@@ -1,5 +1,6 @@
 import { HttpNotFound } from '../clients/exceptions';
 import { fetchApiMonitoringSummary } from '../clients/monitoring';
+import { isApiOnline } from '../clients/test';
 
 export interface IMonitoring {
   isOnline: boolean;
@@ -35,6 +36,7 @@ const getMonitoring = async (apiSlug: string): Promise<IMonitoring> => {
   if (monitoring === undefined) {
     throw new HttpNotFound(404, `${apiSlug} monitoring not found`);
   }
+  monitoring.isOnline = await isApiOnline(apiSlug);
   return monitoring;
 };
 

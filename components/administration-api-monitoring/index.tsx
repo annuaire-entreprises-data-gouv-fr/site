@@ -5,9 +5,9 @@ import { Section } from '../section';
 
 export const getUptimeColor = (uptime: number) => {
   if (uptime >= 98) {
-    return '#19ae4d';
+    return '#088635';
   } else if (uptime >= 90) {
-    return '#ffcb00'; // Orange
+    return '#a85a20'; // Orange
   }
   return '#d00';
 };
@@ -22,9 +22,9 @@ export const getUptimeLabel = (uptime: number) => {
 
 export const getResponseTimeColor = (responseTime: number) => {
   if (responseTime < 300) {
-    return '#2fcc66';
+    return '#088635';
   } else if (responseTime < 600) {
-    return '#ffcb00'; // Orange
+    return '#a85a20'; // Orange
   }
   return '#d00';
 };
@@ -126,7 +126,7 @@ const AdministrationApiMonitoring: React.FC<IMonitoring> = ({
   series,
 }) => (
   <Section
-    title={`Disponiblité : l’API est actuellement ${
+    title={`Disponibilité : l’API est actuellement ${
       isOnline ? 'en ligne ✅' : 'hors-ligne 🛑'
     }`}
   >
