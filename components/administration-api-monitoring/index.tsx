@@ -43,7 +43,7 @@ const Metric: React.FC<{
   responseTime: number;
   series?: number[];
 }> = ({ uptime, responseTime, series }) => (
-  <>
+  <div className="wrapper">
     <div className="metrics">
       <div>
         Disponiblité moyenne :{' '}
@@ -80,6 +80,10 @@ const Metric: React.FC<{
       )}
     </div>
     <style jsx>{`
+      .wrapper {
+        display: flex;
+        flex-direction: row;
+      }
       .metrics {
         flex-shrink: 0;
         padding-right: 30px;
@@ -92,6 +96,7 @@ const Metric: React.FC<{
         flex-grow: 1;
         display: flex;
         background-color: #f3f3f3;
+        margin: 0;
       }
       .uptime-chart > div {
         flex-grow: 1;
@@ -101,8 +106,17 @@ const Metric: React.FC<{
         height: 40px;
         border-left: 0.5px solid #fff;
       }
+
+      @media only screen and (min-width: 1px) and (max-width: 600px) {
+        .wrapper {
+          flex-direction: column;
+        }
+        .uptime-chart {
+          margin-top: 10px;
+        }
+      }
     `}</style>
-  </>
+  </div>
 );
 
 const AdministrationApiMonitoring: React.FC<IMonitoring> = ({
@@ -259,7 +273,7 @@ const AdministrationApiMonitoring: React.FC<IMonitoring> = ({
       .tabbed
         [type='radio']:nth-of-type(4):checked
         ~ .tab-content:nth-of-type(4) {
-        display: flex;
+        display: block;
       }
     `}</style>
   </Section>

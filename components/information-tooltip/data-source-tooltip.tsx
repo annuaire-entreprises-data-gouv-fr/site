@@ -35,9 +35,7 @@ const DataSourceTooltip: React.FC<{ dataSource: IAdministrationMetaData }> = ({
         <>
           <p>{dataSource.long}</p>
           <br />
-          <a href={`/administration/${dataSource.slug}`}>
-            👉 En savoir plus ou mettre à jour ces données
-          </a>
+          <a href={`/administration/${dataSource.slug}`}>👉 En savoir plus</a>
         </>
       }
     >

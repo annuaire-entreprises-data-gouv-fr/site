@@ -26,7 +26,7 @@ export const Section: React.FC<ISectionProps> = ({
         <h2>{title}</h2>
         <div>{children}</div>
         {dataSource && (
-          <div className="layout-right">
+          <div className="data-source-tooltip-wrapper">
             <DataSourceTooltip dataSource={dataSource} />
           </div>
         )}
@@ -50,6 +50,15 @@ export const Section: React.FC<ISectionProps> = ({
           padding: 0 7px;
           border-radius: 2px;
           max-width: calc(100% - 40px);
+        }
+        .data-source-tooltip-wrapper {
+          display: flex;
+          justify-content: end;
+        }
+        @media only screen and (min-width: 1px) and (max-width: 900px) {
+          .data-source-tooltip-wrapper {
+            justify-content: center;
+          }
         }
       `}</style>
     </>
