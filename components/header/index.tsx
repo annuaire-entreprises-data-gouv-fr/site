@@ -7,11 +7,7 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
       <div className="rf-container">
         <div className="rf-header__body">
           <div className="rf-header__brand">
-            <a
-              className="rf-logo"
-              href="/"
-              title="Ministère<br>de l’europe<br>et des affaires<br>étrangères"
-            >
+            <a className="rf-logo" href="/" title="République Française">
               <span className="rf-logo__title">
                 République
                 <br />
@@ -65,7 +61,8 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
         margin: 0;
         margin-right: 15px;
         flex-grow: 0;
-        font-size: 1rem;
+        font-size: 1.05rem;
+        line-height: 1.3rem;
         font-family: serif;
         font-weight: bold;
         font-style: italic;

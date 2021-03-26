@@ -15,9 +15,7 @@
     "deploy": "NODE_ENV=production git push dokku main:master"
   },
   "dependencies": {
-    "@gouvfr/design-system": "^0.2.0",
-    "client-oauth2": "^4.3.3",
-    "next": "^10.0.1",
+    "next": "^10.0.9",
     "next-seo": "^4.7.3",
     "raven": "^2.6.4",
     "react": "16.13.1",
@@ -30,6 +28,7 @@
     "@types/react": "^16.9.44",
     "axe-core": "^4.1.1",
     "node-fetch": "^2.6.1",
+    "react-markdown": "^5.0.3",
     "sass": "^1.26.10",
     "typescript": "^3.9.7"
   }

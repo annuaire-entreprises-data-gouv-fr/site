@@ -3,8 +3,7 @@ import {
   administrationsMetaData,
   EAdministration,
 } from '../../models/administration';
-import { information } from '../icon';
-import InformationTooltip from '../information-tooltip';
+import DataSourceTooltip from '../information-tooltip/data-source-tooltip';
 
 interface ISectionProps {
   title: string;
@@ -12,29 +11,6 @@ interface ISectionProps {
   source?: EAdministration;
   id?: string;
 }
-
-export const DataSource: React.FC<{ shortSourceName: string }> = ({
-  shortSourceName,
-}) => (
-  <div className="data-source">
-    <span className="layout-center">{information}</span>
-    <span>
-      &nbsp;Source des données&nbsp;:&nbsp;
-      {shortSourceName}
-    </span>
-    <style jsx>{`
-      .data-source {
-        margin-top: 15px;
-        display: inline-flex;
-        font-size: 0.7rem;
-        background-color: #dfdff1;
-        color: #000091;
-        padding: 2px 7px;
-        border-radius: 40px;
-      }
-    `}</style>
-  </div>
-);
 
 export const Section: React.FC<ISectionProps> = ({
   id,
@@ -51,9 +27,7 @@ export const Section: React.FC<ISectionProps> = ({
         <div>{children}</div>
         {dataSource && (
           <div className="layout-right">
-            <InformationTooltip label={dataSource.long}>
-              <DataSource shortSourceName={dataSource.short} />
-            </InformationTooltip>
+            <DataSourceTooltip dataSource={dataSource} />
           </div>
         )}
       </div>

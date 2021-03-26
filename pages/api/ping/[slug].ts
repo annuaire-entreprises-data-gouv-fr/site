@@ -1,9 +1,27 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { HttpNotFound } from '../../../clients/exceptions';
 import { fetchRncsImmatriculation } from '../../../clients/rncs';
 import { fetchRnmImmatriculation } from '../../../clients/rnm';
 import { getUniteLegaleInsee } from '../../../clients/sirene-insee/siren';
 import getUniteLegaleSireneOuverte from '../../../clients/sirene-ouverte/siren';
 import fetchConventionCollectives from '../../../clients/siret-2-idcc';
+
+const test = async (slug: string | string[]) => {
+  switch (slug) {
+    case 'rncs':
+      return await fetchRncsImmatriculation('880878145');
+    case 'rnm':
+      return await fetchRnmImmatriculation('824024350');
+    case 'conventions-collectives':
+      return await fetchConventionCollectives(['54205118000066']);
+    case 'sirene-insee':
+      return await getUniteLegaleInsee('880878145');
+    case 'sirene-donnees-ouvertes':
+      return await getUniteLegaleSireneOuverte('880878145');
+    default:
+      return null;
+  }
+};
 
 const ping = async (
   { query: { slug } }: NextApiRequest,
@@ -11,19 +29,9 @@ const ping = async (
 ) => {
   if (slug) {
     try {
-      switch (slug) {
-        case 'rncs':
-          await fetchRncsImmatriculation('880878145');
-        case 'rnm':
-          await fetchRnmImmatriculation('824024350');
-        case 'conventions-collectives':
-          await fetchConventionCollectives(['54205118000066']);
-        case 'sirene-insee':
-          await getUniteLegaleInsee('880878145');
-        case 'sirene-donnees-ouvertes':
-          await getUniteLegaleSireneOuverte('880878145');
+      if ((await test(slug)) === null) {
+        res.status(404).json({ message: `Slug: ${slug} not found.` });
       }
-
       res.status(200).json({ message: 'ok' });
     } catch (e) {
       res.status(500).json({ message: 'ko' });

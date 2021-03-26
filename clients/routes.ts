@@ -1,4 +1,10 @@
 const routes = {
+  monitoring: {
+    history:
+      'https://etalab.github.io/statut.annuaire-entreprises.data.gouv.fr/history/',
+    summary:
+      'https://raw.githubusercontent.com/etalab/statut.annuaire-entreprises.data.gouv.fr/master/history/summary.json',
+  },
   rnm: `https://api-rnm.artisanat.fr/v2/entreprises/`,
   rncs: {
     portail: `https://data.inpi.fr/entreprises/`,

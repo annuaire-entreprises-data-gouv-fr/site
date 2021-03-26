@@ -1,9 +1,8 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
-const InformationTooltip: React.FC<PropsWithChildren<{ label: string }>> = ({
-  children,
-  label,
-}) => (
+const InformationTooltip: React.FC<
+  PropsWithChildren<{ label: ReactNode | string }>
+> = ({ children, label }) => (
   <>
     <span className="wrapper">
       {children}
