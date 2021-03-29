@@ -4,7 +4,6 @@ import { EAdministration } from '../../models/administration';
 import {
   capitalize,
   formatDate,
-  formatDateLong,
   formatNumbersFr,
 } from '../../utils/helpers/formatting';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
@@ -12,50 +11,7 @@ import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 
-const entrepriseDescription = (uniteLegale: IUniteLegale) => (
-  <>
-    <>L’entité {uniteLegale.nomComplet}</>{' '}
-    {uniteLegale.natureJuridique && (
-      <>
-        est une <b>{uniteLegale.libelleNatureJuridique}</b>{' '}
-      </>
-    )}
-    {uniteLegale.dateCreation && (
-      <>
-        créée le <b>{formatDateLong(uniteLegale.dateCreation)}</b>
-      </>
-    )}
-    {uniteLegale.dateDebutActivite &&
-      uniteLegale.siege &&
-      !uniteLegale.siege.estActif && (
-        <>
-          {' '}
-          et fermée le <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>
-        </>
-      )}
-    {uniteLegale.siege && uniteLegale.siege.adresse && (
-      <>
-        , dont le siège est domicilié au{' '}
-        <a href={`/rechercher/carte?siret=${uniteLegale.siege.siret}`}>
-          {uniteLegale.siege.adresse}
-        </a>
-      </>
-    )}
-    .{' '}
-    {uniteLegale.etablissements && (
-      <>
-        Cette entité possède{' '}
-        <a href={`#etablissements`}>
-          {uniteLegale.etablissements.length} établissement(s).
-        </a>
-      </>
-    )}
-    <br />
-    <br />
-  </>
-);
-
-const EntrepriseSection: React.FC<{
+const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const data = [
@@ -89,7 +45,6 @@ const EntrepriseSection: React.FC<{
 
   return (
     <div id="entreprise">
-      <p>{entrepriseDescription(uniteLegale)}</p>
       <Section
         title={`Les informations sur cette entité`}
         source={EAdministration.INSEE}
@@ -101,4 +56,4 @@ const EntrepriseSection: React.FC<{
   );
 };
 
-export default EntrepriseSection;
+export default UniteLegaleSection;

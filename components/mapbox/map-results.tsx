@@ -24,9 +24,9 @@ const MapResults: React.FC<{ results: ISearchResult[] }> = ({ results }) => (
                         var uniteLegale = uniteLegales[i];
 
                         var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-                        '<div><b>'+uniteLegale.nom_complet+'</b></div>'+
-                        '<div><i>'+uniteLegale.geo_adresse+'</i></div>'+
-                        '<div><a href="/entreprise/'+uniteLegale.siren+'">⇢ Accéder a la fiche entreprise</a></div>'
+                        '<div><b>'+uniteLegale.nomComplet+'</b></div>'+
+                        '<div><i>'+uniteLegale.adresse+'</i></div>'+
+                        '<div><a href="/entreprise/'+uniteLegale.siren+'">⇢ Accéder à la fiche entreprise</a></div>'
                         );
 
                         new mapboxgl.Marker({ color: '#000091' })

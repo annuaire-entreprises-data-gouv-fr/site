@@ -26,7 +26,7 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
     <>
       {immatriculation.downloadlink && (
         <Section
-          title="Justificatif d’immatriculation au RM"
+          title="Justificatif d’immatriculation au RNM"
           source={EAdministration.CMAFRANCE}
         >
           <div className="description">

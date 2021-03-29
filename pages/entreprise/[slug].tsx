@@ -3,7 +3,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { IUniteLegale, NotASirenError, SirenNotFoundError } from '../../models';
-import EntrepriseSection from '../../components/entreprise-section';
+import UniteLegaleSection from '../../components/unite-legale-section';
 import EtablissementListeSection from '../../components/etablissement-liste-section';
 import Title, { FICHE } from '../../components/title-section';
 import {
@@ -32,16 +32,10 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
   >
     {/* <StructuredData data={structuredData(uniteLegale)} /> */}
     <div className="content-container">
-      <Title
-        name={uniteLegale.nomComplet}
-        siren={uniteLegale.siren}
-        isActive={uniteLegale.siege.estActif}
-        isDiffusible={uniteLegale.estDiffusible}
-        ficheType={FICHE.INFORMATION}
-      />
+      <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
       {uniteLegale.estDiffusible ? (
         <>
-          <EntrepriseSection uniteLegale={uniteLegale} />
+          <UniteLegaleSection uniteLegale={uniteLegale} />
           {uniteLegale.siege && (
             <EtablissementSection
               uniteLegale={uniteLegale}

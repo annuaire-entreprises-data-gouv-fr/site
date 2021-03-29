@@ -13,6 +13,7 @@ import Title, { FICHE } from '../../components/title-section';
 import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
 import AvisSituation from '../../components/avis-situation';
+import { EAdministration } from '../../models/administration';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -25,14 +26,8 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
     noIndex={true}
   >
     <div className="content-container">
-      <Title
-        name={uniteLegale.nomComplet}
-        siren={uniteLegale.siren}
-        isActive={uniteLegale.siege.estActif}
-        isDiffusible={uniteLegale.estDiffusible}
-        ficheType={FICHE.JUSTIFICATIFS}
-      />
-      <Section title="Avis de situation INSEE">
+      <Title uniteLegale={uniteLegale} ficheType={FICHE.JUSTIFICATIFS} />
+      <Section title="Avis de situation INSEE" source={EAdministration.INSEE}>
         <div className="description">
           Le siège social de cette entité possède un avis de situation au
           répertoire Sirene des entreprises.

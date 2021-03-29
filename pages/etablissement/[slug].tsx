@@ -36,16 +36,10 @@ const EtablissementPage: React.FC<IProps> = ({
     title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
   >
     <div className="content-container">
-      <Title
-        name={uniteLegale.nomComplet}
-        siren={uniteLegale.siren}
-        isActive={uniteLegale.siege.estActif}
-        isDiffusible={uniteLegale.estDiffusible}
-        ficheType={FICHE.INFORMATION}
-      />
+      <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
       <div className="sub-title">
         <span>
-          information établissement ‣ {formatSiret(etablissement.siret)}
+          information sur l’établissement ‣ {formatSiret(etablissement.siret)}
         </span>
         {etablissement.estSiege && <Tag>siège social</Tag>}
         {etablissement.estActif && (

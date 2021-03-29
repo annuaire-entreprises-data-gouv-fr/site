@@ -1,11 +1,7 @@
 import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
 import { map, pin } from '../icon';
-import {
-  formatDate,
-  formatDateLong,
-  formatNumbersFr,
-} from '../../utils/helpers/formatting';
+import { formatDate, formatNumbersFr } from '../../utils/helpers/formatting';
 import ButtonLink from '../button';
 import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
@@ -13,77 +9,13 @@ import { TwoColumnTable } from '../table/simple';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { EAdministration } from '../../models/administration';
 import AvisSituation from '../avis-situation';
+import { EtablissementDescription } from '../etablissement-description';
 
 interface IProps {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
   usedInEntreprisePage?: Boolean;
 }
-
-const statusLabel = (estActif: Boolean | null) => {
-  if (estActif === null) {
-    return ' dans un état administratif inconnu';
-  }
-  return estActif ? ' en activité' : ' fermé';
-};
-
-const Details: React.FC<IProps> = ({ etablissement, uniteLegale }) => (
-  <>
-    {uniteLegale.estDiffusible && (
-      <p>
-        Cet établissement est
-        <b>{statusLabel(etablissement.estActif)}.</b> C’est
-        {etablissement.estSiege ? (
-          <b> le siège social</b>
-        ) : (
-          <> un établissement secondaire</>
-        )}{' '}
-        de l’entité{' '}
-        <a href={`/entreprise/${uniteLegale.siren}`}>
-          {uniteLegale.nomComplet}
-        </a>
-        ,
-        {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
-          <>
-            {' '}
-            qui possède au total{' '}
-            <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
-              {uniteLegale.etablissements.length} établissements.
-            </a>
-          </>
-        ) : (
-          <>
-            {' '}
-            et{' '}
-            <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
-              son unique établissement
-            </a>
-          </>
-        )}
-      </p>
-    )}
-    <p>
-      {etablissement.dateCreation && (
-        <>
-          Cet établissement a été crée le{' '}
-          <b>{formatDateLong(etablissement.dateCreation)}</b>
-        </>
-      )}{' '}
-      {etablissement.dateDebutActivite && !etablissement.estActif && (
-        <>
-          et il a été fermé le{' '}
-          <b>{formatDateLong(etablissement.dateDebutActivite)}</b>
-        </>
-      )}{' '}
-      {etablissement.adresse && (
-        <>
-          et il est domicilié au <a href="#contact">{etablissement.adresse}</a>
-        </>
-      )}
-    </p>
-    <br />
-  </>
-);
 
 const EtablissementSection: React.FC<IProps> = ({
   etablissement,
@@ -122,7 +54,10 @@ const EtablissementSection: React.FC<IProps> = ({
   return (
     <>
       {!usedInEntreprisePage && (
-        <Details etablissement={etablissement} uniteLegale={uniteLegale} />
+        <EtablissementDescription
+          etablissement={etablissement}
+          uniteLegale={uniteLegale}
+        />
       )}
       <Section
         title={

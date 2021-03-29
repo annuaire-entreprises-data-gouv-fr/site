@@ -3,6 +3,8 @@ import React from 'react';
 import { capitalize, formatNumbersFr } from '../../utils/helpers/formatting';
 import { Tag } from '../tag';
 import IsActiveTag from '../is-active-tag';
+import { UnitLegaleDescription } from '../unite-legale-description';
+import { IUniteLegale } from '../../models';
 
 export enum FICHE {
   INFORMATION = 'informations générales',
@@ -10,11 +12,8 @@ export enum FICHE {
   ANNONCES = 'annonces & conventions collectives',
 }
 interface IProps {
-  siren: string;
-  name: string;
-  isActive: boolean | null;
-  isDiffusible?: boolean;
   ficheType?: FICHE;
+  uniteLegale: IUniteLegale;
 }
 
 const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
@@ -47,59 +46,64 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
       .title-tabs {
         display: flex;
         flex-grow: 1;
-        max-width: 50%;
         font-size: 0.9rem;
       }
       .title-tabs > a {
-        margin-right: 8px;
+        color: #000091;
+        font-weight: bold;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        margin: 0 4px;
         padding: 10px 5px;
         border: 2px solid #dfdff1;
-        background-color: #f7f7fd;
+        background-color: #efeffb;
         margin-bottom: -2px;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        box-shadow: none;
+        box-shadow: 0 -8px 5px -5px #dfdff1 inset;
+      }
+
+      .title-tabs > a:hover {
+        background-color: #dfdff1;
       }
 
       .title-tabs > a.active {
         background-color: #fff;
         border-bottom: 0;
+        box-shadow: none;
       }
     `}</style>
   </>
 );
 
 const Title: React.FC<IProps> = ({
-  siren,
-  name,
-  isActive,
-  isDiffusible = true,
   ficheType = FICHE.INFORMATION,
+  uniteLegale,
 }) => (
   <div className="header-section">
     <div className="title">
       <h1>
-        <a href={`/entreprise/${siren}`}>{capitalize(name)}</a>
+        <a href={`/entreprise/${uniteLegale.siren}`}>
+          {capitalize(uniteLegale.nomComplet)}
+        </a>
       </h1>
       <div>
-        <span>unité légale ‣ {formatNumbersFr(siren)}</span>
+        <span>unité légale ‣ {formatNumbersFr(uniteLegale.siren)}</span>
         <span>
-          {!isDiffusible && <Tag>non diffusible</Tag>}
-          <IsActiveTag isActive={isActive} />
+          {!uniteLegale.estDiffusible && <Tag>non diffusible</Tag>}
+          <IsActiveTag isActive={uniteLegale.siege.estActif} />
         </span>
       </div>
     </div>
-    <Tabs siren={siren} ficheType={ficheType} />
+    <UnitLegaleDescription uniteLegale={uniteLegale} />
+    <Tabs siren={uniteLegale.siren} ficheType={ficheType} />
 
     <style jsx>{`
       .header-section {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        flex-direction: row;
-        margin-bottom: 30px;
+        display: block;
+        margin-bottom: 40px;
         border-bottom: 2px solid #dfdff1;
       }
 

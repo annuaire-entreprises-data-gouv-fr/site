@@ -26,17 +26,11 @@ const AnnoncesAndConventionsPage: React.FC<IConventions> = ({
 }) => (
   <Page
     small={true}
-    title={`Justificatif d’immatricuation - ${uniteLegale.nomComplet}`}
+    title={`Annonces BODACC et conventions collectives - ${uniteLegale.nomComplet}`}
     noIndex={true}
   >
     <div className="content-container">
-      <Title
-        name={uniteLegale.nomComplet}
-        siren={uniteLegale.siren}
-        isActive={uniteLegale.siege.estActif}
-        isDiffusible={uniteLegale.estDiffusible}
-        ficheType={FICHE.ANNONCES}
-      />
+      <Title ficheType={FICHE.ANNONCES} uniteLegale={uniteLegale} />
       <Annonces siren={uniteLegale.siren} />
       <HorizontalSeparator />
       <Section title="Conventions collectives" source={EAdministration.METI}>
