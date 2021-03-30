@@ -30,7 +30,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
     title={`Entité - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
     canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
     noIndex={
-      uniteLegale.activitePrincipale === '1' &&
+      ['1', '10', '1000'].indexOf(uniteLegale.natureJuridique) > -1 &&
       uniteLegale.siege.estActif === false
     }
   >
