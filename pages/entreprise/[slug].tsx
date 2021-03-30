@@ -29,7 +29,10 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
     small={true}
     title={`Entité - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
     canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
-    noIndex={uniteLegale.activitePrincipale === '1'}
+    noIndex={
+      uniteLegale.activitePrincipale === '1' &&
+      uniteLegale.siege.estActif === false
+    }
   >
     {/* <StructuredData data={structuredData(uniteLegale)} /> */}
     <div className="content-container">
