@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const NPSModal: React.FC<{}> = () => (
+export const NPSBanner: React.FC<{}> = () => (
   <>
     <div id="nps-modal" role="dialog" aria-label="Donnez-nous votre avis">
       <div className="rf-container">

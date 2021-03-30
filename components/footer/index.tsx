@@ -46,7 +46,7 @@ const Footer = () => (
               <a
                 className="rf-footer__content-link"
                 href="https://etalab.gouv.fr"
-                target="blank"
+                target="_blank"
                 rel="noreferrer noopener"
               >
                 etalab.gouv.fr
@@ -56,7 +56,7 @@ const Footer = () => (
               <a
                 className="rf-footer__content-link"
                 href="https://entreprises.gouv.fr"
-                target="blank"
+                target="_blank"
                 rel="noreferrer noopener"
               >
                 entreprises.gouv.fr
@@ -65,7 +65,7 @@ const Footer = () => (
             <li className="rf-footer__content-item">
               <a
                 className="rf-footer__content-link"
-                target="blank"
+                target="_blank"
                 rel="noreferrer noopener"
                 href="https://service-public.fr"
               >
@@ -75,7 +75,7 @@ const Footer = () => (
             <li className="rf-footer__content-item">
               <a
                 className="rf-footer__content-link"
-                target="blank"
+                target="_blank"
                 rel="noreferrer noopener"
                 href="https://mon-entreprise.fr"
               >
@@ -85,7 +85,7 @@ const Footer = () => (
             <li className="rf-footer__content-item">
               <a
                 className="rf-footer__content-link"
-                target="blank"
+                target="_blank"
                 rel="noreferrer noopener"
                 href="https://data.gouv.fr"
               >
@@ -100,7 +100,7 @@ const Footer = () => (
           <li className="rf-footer__bottom-item">
             <a
               className="rf-footer__bottom-link"
-              target="blank"
+              target="_blank"
               rel="noreferrer noopener"
               href="https://github.com/etalab/annuaire-entreprises.data.gouv.fr"
             >

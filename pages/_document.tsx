@@ -1,7 +1,7 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import CopyToClipboard from '../components/clients-script/copy-to-clipboard';
-import DisplayNps from '../components/clients-script/display-nps';
+import DisplayFeedback from '../components/clients-script/display-feedback';
 import InitPiwik from '../components/clients-script/init-piwik';
 
 class CustomHead extends Head {
@@ -54,7 +54,7 @@ class DevDocument extends Document {
           <Main />
           <NextScript />
           {CopyToClipboard}
-          {DisplayNps}
+          {DisplayFeedback}
         </body>
       </Html>
     );
@@ -103,7 +103,7 @@ class StaticDocument extends Document {
             process.env.MATOMO_SITE_ID &&
             InitPiwik}
           {CopyToClipboard}
-          {DisplayNps}
+          {DisplayFeedback}
         </body>
       </Html>
     );

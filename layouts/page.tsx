@@ -3,7 +3,8 @@ import Footer from '../components/footer';
 import { Header, HeaderSmall } from '../components/header';
 import Meta from '../components/meta';
 import { Question } from '../components/question';
-import { NPSModal } from '../components/nps-modal';
+import { NPSBanner } from '../components/banner/nps';
+import { WeNeedYouModal } from '../components/modal/we-need-you';
 
 interface IProps {
   small?: boolean;
@@ -32,7 +33,8 @@ const Page: React.FC<IProps> = ({
       noIndex={noIndex}
       canonical={canonical}
     />
-    <NPSModal />
+    <NPSBanner />
+    <WeNeedYouModal />
     {small ? (
       <HeaderSmall currentSearchTerm={currentSearchTerm} map={map} />
     ) : (
