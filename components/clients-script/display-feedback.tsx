@@ -37,7 +37,6 @@ const DisplayNps = (
     })();
 
     (function triggerNPSModal() {
-      console.log('hey')
       try {
         var u = window.localStorage.getItem('u') || false;
         if(u) {
@@ -45,7 +44,6 @@ const DisplayNps = (
         }
         var data = window.sessionStorage.getItem('p') || 0;
         window.sessionStorage.setItem('p', parseInt(data,10)+1);
-        console.log(data)
         var p = window.location.pathname;
         if((p.indexOf('/entreprise')===0 && data >= 2)
         || (p.indexOf('/rechercher')===0 && data >= 3)
