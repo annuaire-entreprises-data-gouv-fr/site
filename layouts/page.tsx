@@ -34,7 +34,7 @@ const Page: React.FC<IProps> = ({
       canonical={canonical}
     />
     <NPSBanner />
-    {/* <WeNeedYouModal /> */}
+    <WeNeedYouModal />
     {small ? (
       <HeaderSmall currentSearchTerm={currentSearchTerm} map={map} />
     ) : (

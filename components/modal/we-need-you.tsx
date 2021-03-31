@@ -12,7 +12,7 @@ export const WeNeedYouModal: React.FC<{}> = () => (
         className="background-close-modal"
         dangerouslySetInnerHTML={{
           __html: `
-                <div onclick="window.closeWeNeedYouModal()" style="width:100%; height:100%; z-index:99"/>
+                <div onclick="window.closeWeNeedYouModal()" style="width:100%; height:100%; z-index:99"></div>
           `,
         }}
       />
