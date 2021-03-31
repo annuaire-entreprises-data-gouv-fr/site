@@ -11,7 +11,7 @@ export class HttpServerError extends Error {
 }
 export class HttpTimeoutError extends HttpServerError {
   constructor(public message: string) {
-    super(500, message);
+    super(504, message);
   }
 }
 
