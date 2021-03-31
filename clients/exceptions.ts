@@ -9,6 +9,11 @@ export class HttpServerError extends Error {
     super();
   }
 }
+export class HttpTimeoutError extends HttpServerError {
+  constructor(public message: string) {
+    super(500, message);
+  }
+}
 
 export class HttpAuthentificationFailure extends Error {
   constructor(public message: string) {

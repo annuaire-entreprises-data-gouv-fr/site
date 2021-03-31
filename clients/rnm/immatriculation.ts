@@ -1,4 +1,5 @@
 import { IImmatriculationRNM } from '../../models/immatriculation';
+import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 
@@ -60,7 +61,7 @@ export interface IApiRNMResponse {
 export const fetchRnmImmatriculation = async (
   siren: string
 ): Promise<IImmatriculationRNM> => {
-  const response = await fetch(routes.rnm + siren + '?format=json');
+  const response = await fetchWithTimeout(routes.rnm + siren + '?format=json');
   if (response.status === 404) {
     throw new HttpNotFound(404, `Siren ${siren} not found in RNM`);
   }

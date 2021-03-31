@@ -2,6 +2,7 @@ import { IEtablissement } from '../../models';
 import { ISearchResults } from '../../models/search';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import { formatAdresse, libelleFromCodeNaf } from '../../utils/labels';
+import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 
@@ -42,7 +43,7 @@ const getResults = async (
 ): Promise<ISearchResults> => {
   const encodedTerms = encodeURI(searchTerms);
   const route = `${routes.sireneOuverte.rechercheUniteLegale}?per_page=10&page=${page}&q=${encodedTerms}`;
-  const response = await fetch(route);
+  const response = await fetchWithTimeout(route);
 
   if (response.status === 404) {
     throw new HttpNotFound(404, 'No results');

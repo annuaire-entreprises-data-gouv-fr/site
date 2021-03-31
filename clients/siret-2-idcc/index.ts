@@ -1,4 +1,5 @@
 import { IConventionCollective } from '../../models/convention-collective';
+import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
 import routes from '../routes';
 
 /**
@@ -39,7 +40,7 @@ const fetchConventionCollectives = async (
 
   const response = (await Promise.all(
     batches.map((urls) =>
-      fetch(urls).then((response) => {
+      fetchWithTimeout(urls).then((response) => {
         return response.json();
       })
     )
