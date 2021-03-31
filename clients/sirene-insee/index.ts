@@ -14,6 +14,7 @@
  *
  */
 
+import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
 import {
   HttpAuthentificationFailure,
   HttpNotFound,
@@ -31,7 +32,7 @@ export const inseeAuth = async () => {
   try {
     const clientId = process.env.INSEE_CLIENT_ID;
     const clientSecret = process.env.INSEE_CLIENT_SECRET;
-    const response = await fetch(routes.sireneInsee.auth, {
+    const response = await fetchWithTimeout(routes.sireneInsee.auth, {
       method: 'POST',
       body:
         'grant_type=client_credentials&client_id=' +
@@ -61,7 +62,7 @@ export const inseeAuth = async () => {
 export const inseeClientGet = async (route: string) => {
   const token = await inseeAuth();
 
-  const response = await fetch(route, {
+  const response = await fetchWithTimeout(route, {
     headers: {
       Authorization: token.token_type + ' ' + token.access_token,
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -85,7 +86,7 @@ export const inseeClientGet = async (route: string) => {
 export const inseeClientPost = async (route: string, body: string) => {
   const token = await inseeAuth();
 
-  const response = await fetch(route, {
+  const response = await fetchWithTimeout(route, {
     headers: {
       Authorization: token.token_type + ' ' + token.access_token,
       'Content-Type': 'application/x-www-form-urlencoded',

@@ -1,4 +1,5 @@
 import { IMonitoring } from '../../models/monitoring';
+import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
 import routes from '../routes';
 
 export interface IUpptimeSummaryResponse {
@@ -18,7 +19,7 @@ export interface IUpptimeSummaryResponse {
 }
 
 export const fetchApiMonitoringSummary = async () => {
-  const response = await fetch(routes.monitoring.summary);
+  const response = await fetchWithTimeout(routes.monitoring.summary);
 
   //@ts-ignore
   const results = (await response.json()) as IUpptimeSummaryResponse[];

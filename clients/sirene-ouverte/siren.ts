@@ -5,6 +5,7 @@ import {
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
+import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
 import {
@@ -41,7 +42,9 @@ interface ISireneOuverteUniteLegaleResponse {
 const getUniteLegaleSireneOuverte = async (
   siren: string
 ): Promise<IUniteLegale> => {
-  const response = await fetch(routes.sireneOuverte.uniteLegale + siren);
+  const response = await fetchWithTimeout(
+    routes.sireneOuverte.uniteLegale + siren
+  );
 
   if (response.status !== 200) {
     throw new HttpServerError(500, await response.text());

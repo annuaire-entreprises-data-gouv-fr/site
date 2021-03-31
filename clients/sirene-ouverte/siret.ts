@@ -4,6 +4,7 @@ import {
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
+import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
 
@@ -42,7 +43,7 @@ const getEtablissementSireneOuverte = async (
   siret: string
 ): Promise<IEtablissement> => {
   const route = `${routes.sireneOuverte.etablissement}${encodeURI(siret)}`;
-  const response = await fetch(route);
+  const response = await fetchWithTimeout(route);
 
   if (response.status !== 200) {
     throw new HttpServerError(500, await response.text());

@@ -1,18 +1,14 @@
 import { rncsAuth } from '.';
-import ResultsHeader from '../../components/results-header';
 import { IImmatriculationRNCS } from '../../models/immatriculation';
-import {
-  HttpNotFound,
-  HttpServerError,
-  HttpTooManyRequests,
-} from '../exceptions';
+import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
+import { HttpNotFound, HttpTooManyRequests } from '../exceptions';
 import routes from '../routes';
 
 interface IApiRNCSResponse {}
 
 export const fetchRncsImmatriculation = async (siren: string) => {
   const cookie = await rncsAuth();
-  const response = await fetch(routes.rncs.api.imr + siren, {
+  const response = await fetchWithTimeout(routes.rncs.api.imr + siren, {
     headers: { Cookie: cookie },
   });
 
