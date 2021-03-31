@@ -77,7 +77,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e) {
-    console.log(e);
     if (e instanceof IsASirenException) {
       redirectIfSiretOrSiren(context.res, e.message);
     } else {
