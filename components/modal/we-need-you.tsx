@@ -8,6 +8,14 @@ export const WeNeedYouModal: React.FC<{}> = () => (
       role="dialog"
       aria-label="Donnez-nous votre avis"
     >
+      <div
+        className="background-close-modal"
+        dangerouslySetInnerHTML={{
+          __html: `
+                <div onclick="window.closeWeNeedYouModal()" style="width:100%; height:100%; z-index:99"/>
+          `,
+        }}
+      />
       <div className="modal">
         <h2>Nous sommes curieux ! 👀</h2>
         <p>
@@ -28,10 +36,10 @@ export const WeNeedYouModal: React.FC<{}> = () => (
           className="close-modal"
           dangerouslySetInnerHTML={{
             __html: `
-              <button onclick="window.closeWeNeedYouModal()" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
-                <b>Ne plus afficher ce message ✕</b>
-              </button>
-        `,
+            <button onclick="window.closeWeNeedYouModal()" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
+            <b>Ne plus afficher ce message ✕</b>
+            </button>
+            `,
           }}
         />
       </div>
@@ -84,6 +92,14 @@ export const WeNeedYouModal: React.FC<{}> = () => (
         position: absolute;
         top: 20px;
         right: 20px;
+      }
+
+      .background-close-modal {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
       }
     `}</style>
   </>
