@@ -32,7 +32,7 @@ const InformationTooltip: React.FC<
 
       /* This bridges the gap so you can mouse into the tooltip without it disappearing */
       .wrapper .tooltip:before {
-        bottom: -20px;
+        bottom: -10px;
         content: ' ';
         display: block;
         height: 20px;

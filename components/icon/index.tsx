@@ -94,4 +94,80 @@ const information = (
   </svg>
 );
 
-export { download, map, pin, copy, copied, information };
+const facebook = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    stroke="none"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+  </svg>
+);
+
+const linkedin = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    stroke="none"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+  </svg>
+);
+
+const twitter = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    stroke="none"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+  </svg>
+);
+
+const qrCode = (
+  <svg
+    width="15"
+    height="15"
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    stroke="none"
+    xmlns="http://www.w3.org/2000/svg"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M4.36364 11.6364V13.0909H2.90909V11.6364H4.36364ZM4.36364 2.90909V4.36364H2.90909V2.90909H4.36364ZM13.0909 2.90909V4.36364H11.6364V2.90909H13.0909ZM1.45455 14.5341H5.81818V10.1818H1.45455V14.5341ZM1.45455 5.81818H5.81818V1.45455H1.45455V5.81818ZM10.1818 5.81818H14.5455V1.45455H10.1818V5.81818ZM7.27273 8.72727V16H0V8.72727H7.27273ZM13.0909 14.5455V16H11.6364V14.5455H13.0909ZM16 14.5455V16H14.5455V14.5455H16ZM16 8.72727V13.0909H11.6364V11.6364H10.1818V16H8.72727V8.72727H13.0909V10.1818H14.5455V8.72727H16ZM7.27273 0V7.27273H0V0H7.27273ZM16 0V7.27273H8.72727V0H16Z" />
+  </svg>
+);
+
+export {
+  download,
+  map,
+  pin,
+  copy,
+  copied,
+  information,
+  facebook,
+  linkedin,
+  twitter,
+  qrCode,
+};

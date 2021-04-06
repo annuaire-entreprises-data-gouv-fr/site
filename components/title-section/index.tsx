@@ -5,6 +5,7 @@ import { Tag } from '../tag';
 import IsActiveTag from '../is-active-tag';
 import { UnitLegaleDescription } from '../unite-legale-description';
 import { IUniteLegale } from '../../models';
+import SocialMedia from '../social-media';
 
 export enum FICHE {
   INFORMATION = 'informations générales',
@@ -97,7 +98,10 @@ const Title: React.FC<IProps> = ({
         </span>
       </div>
     </div>
+    <SocialMedia siren={uniteLegale.siren} />
+    <br />
     <UnitLegaleDescription uniteLegale={uniteLegale} />
+    <br />
     <Tabs siren={uniteLegale.siren} ficheType={ficheType} />
 
     <style jsx>{`
@@ -108,7 +112,7 @@ const Title: React.FC<IProps> = ({
       }
 
       .title {
-        margin: 20px 0 30px;
+        margin: 40px 0 0;
         display: flex;
         align-items: start;
         flex-direction: column;

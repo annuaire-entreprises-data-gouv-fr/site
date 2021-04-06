@@ -16,7 +16,6 @@ const ping = async (
       }
       res.status(500).json({ message: 'ko' });
     }
-  } else {
     res.status(404).json({ message: `Slug: ${slug} not found.` });
   }
 };

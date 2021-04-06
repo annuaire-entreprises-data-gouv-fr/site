@@ -43,6 +43,5 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
       </>
     )}
     <br />
-    <br />
   </>
 );

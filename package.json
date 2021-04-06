@@ -18,6 +18,7 @@
     "abort-controller": "^3.0.0",
     "next": "^10.0.9",
     "next-seo": "^4.7.3",
+    "qrcode": "^1.4.4",
     "raven": "^2.6.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@axe-core/cli": "^4.1.0",
     "@types/node": "^14.0.27",
+    "@types/qrcode": "^1.4.0",
     "@types/raven": "^2.5.3",
     "@types/react": "^16.9.44",
     "axe-core": "^4.1.1",
