@@ -15,7 +15,13 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
               </span>
             </a>
           </div>
-          <div className="rf-header__sub">L’Annuaire des Entreprises</div>
+          <a
+            href="/"
+            className="annuaire-logo"
+            title="L’Annuaire des Entreprises"
+          >
+            <div className="rf-header__sub">L’Annuaire des Entreprises</div>
+          </a>
           <div className="not-rf-search">
             <SearchBar
               defaultValue={currentSearchTerm}
@@ -66,6 +72,10 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
         font-family: serif;
         font-weight: bold;
         font-style: italic;
+      }
+
+      a.annuaire-logo {
+        box-shadow: none;
       }
 
       @media only screen and (min-width: 1px) and (max-width: 500px) {

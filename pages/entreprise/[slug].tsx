@@ -15,6 +15,7 @@ import EtablissementSection from '../../components/etablissement-section';
 
 import NonDiffusible from '../../components/non-diffusible';
 import getUniteLegale from '../../models/unite-legale';
+import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 
 // const structuredData = (uniteLegale: UniteLegale) => [
 //   ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],
@@ -78,10 +79,13 @@ const extractSiren = (slug: string) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug as string;
+  const pageParam = (context.query.page || '') as string;
+
   const siren = extractSiren(slug);
+  const page = parseIntWithDefaultValue(pageParam, 1);
 
   try {
-    const uniteLegale = await getUniteLegale(siren);
+    const uniteLegale = await getUniteLegale(siren, page);
     return {
       props: {
         uniteLegale,

@@ -54,11 +54,7 @@ export const Section: React.FC<ISectionProps> = ({
         .data-source-tooltip-wrapper {
           display: flex;
           justify-content: flex-end;
-        }
-        @media only screen and (min-width: 1px) and (max-width: 900px) {
-          .data-source-tooltip-wrapper {
-            justify-content: center;
-          }
+          margin-top: 15px;
         }
       `}</style>
     </>

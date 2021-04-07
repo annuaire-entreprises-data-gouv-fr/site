@@ -39,7 +39,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
             {' '}
             qui possède au total{' '}
             <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
-              {uniteLegale.etablissements.length} établissements.
+              {uniteLegale.nombreEtablissements} établissements.
             </a>
           </>
         ) : (

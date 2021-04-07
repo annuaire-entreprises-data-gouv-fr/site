@@ -26,6 +26,7 @@ interface ISireneOuverteUniteLegale {
   date_debut_activite: string;
   tranche_effectif_salarie_entreprise: string;
   nature_juridique_entreprise: string;
+  nombre_etablissements: number;
   nom_complet: string;
   nom_url: string;
   numero_voie: string;
@@ -40,10 +41,11 @@ interface ISireneOuverteUniteLegaleResponse {
 }
 
 const getUniteLegaleSireneOuverte = async (
-  siren: string
+  siren: string,
+  page: number
 ): Promise<IUniteLegale> => {
   const response = await fetchWithTimeout(
-    routes.sireneOuverte.uniteLegale + siren
+    routes.sireneOuverte.uniteLegale + siren + '&page=' + page
   );
 
   if (response.status !== 200) {
@@ -67,12 +69,13 @@ const getUniteLegaleSireneOuverte = async (
     throw new HttpNotFound(404, siren);
   }
 
-  return mapToDomainObject(siren, uniteLegale);
+  return mapToDomainObject(siren, uniteLegale, page);
 };
 
 const mapToDomainObject = (
   siren: string,
-  uniteLegale: ISireneOuverteUniteLegale
+  uniteLegale: ISireneOuverteUniteLegale,
+  page: number
 ): IUniteLegale => {
   const siege = mapSireneOuverteEtablissementToDomainObject(
     uniteLegale.etablissement_siege[0]
@@ -98,6 +101,7 @@ const mapToDomainObject = (
     libelle_commune,
     code_postal,
     libelle_voie,
+    nombre_etablissements,
     nature_juridique_entreprise,
     tranche_effectif_salarie_entreprise,
     activite_principale_entreprise,
@@ -126,6 +130,7 @@ const mapToDomainObject = (
     dateCreation: date_creation_entreprise,
     dateDebutActivite: date_debut_activite,
     dateDerniereMiseAJour: date_mise_a_jour,
+    nombreEtablissements: nombre_etablissements,
     adresse: formatAdresse(
       numero_voie,
       type_voie,
@@ -133,6 +138,7 @@ const mapToDomainObject = (
       code_postal,
       libelle_voie
     ),
+    currentEtablissementPage: page,
   };
 };
 

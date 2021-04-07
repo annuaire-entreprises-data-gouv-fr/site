@@ -14,7 +14,6 @@ export const DataSource: React.FC<{ shortSourceName: string }> = ({
     </span>
     <style jsx>{`
       .data-source {
-        margin-top: 15px;
         display: inline-flex;
         font-size: 0.7rem;
         background-color: #dfdff1;
@@ -31,6 +30,7 @@ const DataSourceTooltip: React.FC<{ dataSource: IAdministrationMetaData }> = ({
 }) => (
   <>
     <InformationTooltip
+      orientation="right"
       label={
         <>
           <p>{dataSource.long}</p>

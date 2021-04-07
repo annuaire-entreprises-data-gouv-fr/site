@@ -99,9 +99,7 @@ const Title: React.FC<IProps> = ({
       </div>
     </div>
     <SocialMedia siren={uniteLegale.siren} />
-    <br />
     <UnitLegaleDescription uniteLegale={uniteLegale} />
-    <br />
     <Tabs siren={uniteLegale.siren} ficheType={ficheType} />
 
     <style jsx>{`

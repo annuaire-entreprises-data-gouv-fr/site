@@ -38,10 +38,11 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
       <>
         Cette entité possède{' '}
         <a href={`#etablissements`}>
-          {uniteLegale.etablissements.length} établissement(s).
+          {uniteLegale.nombreEtablissements} établissement(s).
         </a>
       </>
     )}
+    <br />
     <br />
   </>
 );

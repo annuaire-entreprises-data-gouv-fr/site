@@ -43,8 +43,8 @@ const SearchResultPage: React.FC<IProps> = ({
           <ResultsList results={results} />
           <PageCounter
             totalPages={pageCount}
+            querySuffix={`terme=${searchTerm}`}
             currentPage={currentPage}
-            searchTerm={searchTerm}
           />
         </div>
       )}

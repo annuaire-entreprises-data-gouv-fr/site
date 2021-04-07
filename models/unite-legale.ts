@@ -21,13 +21,16 @@ import { logWarningInSentry } from '../utils/sentry';
  * Fetch Unite Legale from Etalab SIRENE API with a fallback on INSEE's API
  * @param siren
  */
-const getUniteLegale = async (siren: string): Promise<IUniteLegale> => {
+const getUniteLegale = async (
+  siren: string,
+  page: number
+): Promise<IUniteLegale> => {
   if (!isSiren(siren)) {
     throw new NotASirenError();
   }
 
   try {
-    return await getUniteLegaleSireneOuverte(siren);
+    return await getUniteLegaleSireneOuverte(siren, page);
   } catch (e) {
     if (e instanceof HttpNotFound) {
       // do nothing

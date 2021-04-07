@@ -2,7 +2,7 @@ import React from 'react';
 
 interface IProps {
   currentPage: number;
-  searchTerm: string;
+  querySuffix?: string;
   totalPages: number;
 }
 
@@ -23,14 +23,18 @@ const pagesArray = (currentPage: number, totalPages: number): number[] => {
 
 const PageCounter: React.FC<IProps> = ({
   currentPage,
-  searchTerm,
+  querySuffix,
   totalPages,
 }) => (
   <>
     {totalPages && totalPages > 1 ? (
       <div className="pages-selector">
         {currentPage !== 1 && (
-          <a href={`?terme=${searchTerm}&page=${currentPage - 1}`}>
+          <a
+            href={`?page=${currentPage - 1}${
+              querySuffix ? `&${querySuffix}` : ''
+            }`}
+          >
             ⇠ <span>précédente</span>
           </a>
         )}
@@ -39,7 +43,9 @@ const PageCounter: React.FC<IProps> = ({
           {pagesArray(currentPage, totalPages + 1).map((pageNum) => {
             return (
               <a
-                href={`?terme=${searchTerm}&page=${pageNum + 1}`}
+                href={`?page=${pageNum + 1}${
+                  querySuffix ? `&${querySuffix}` : ''
+                }`}
                 className={`${currentPage === pageNum + 1 ? 'active' : ''}`}
                 key={pageNum}
               >
@@ -49,7 +55,11 @@ const PageCounter: React.FC<IProps> = ({
           })}
         </div>
         {currentPage !== totalPages + 1 && (
-          <a href={`?terme=${searchTerm}&page=${currentPage + 1}`}>
+          <a
+            href={`?page=${currentPage + 1}${
+              querySuffix ? `&${querySuffix}` : ''
+            }`}
+          >
             <span>suivante</span> ⇢
           </a>
         )}

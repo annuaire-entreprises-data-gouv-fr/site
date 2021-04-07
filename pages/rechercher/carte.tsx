@@ -54,7 +54,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
             <PageCounter
               totalPages={pageCount}
               currentPage={currentPage}
-              searchTerm={searchTerm}
+              querySuffix={`terme=${searchTerm}`}
             />
           </div>
         </div>

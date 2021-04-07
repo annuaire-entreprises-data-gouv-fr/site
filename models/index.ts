@@ -26,6 +26,7 @@ export interface IUniteLegale {
   natureJuridique: string;
   libelleNatureJuridique: string;
   etablissements: IEtablissement[];
+  nombreEtablissements: number;
   activitePrincipale: string;
   libelleActivitePrincipale: string;
   dateCreation: string;
@@ -37,6 +38,8 @@ export interface IUniteLegale {
   trancheEffectif: string;
   libelleTrancheEffectif: string;
   adresse: string;
+  // etablissement list pagination
+  currentEtablissementPage?: number;
 }
 
 /** BASIC CONSTRUCTORS */
@@ -74,6 +77,7 @@ export const createDefaultUniteLegale = (siren: string): IUniteLegale => {
     natureJuridique: '',
     libelleNatureJuridique: '',
     etablissements: [siege],
+    nombreEtablissements: 1,
     activitePrincipale: '',
     libelleActivitePrincipale: '',
     dateCreation: '',

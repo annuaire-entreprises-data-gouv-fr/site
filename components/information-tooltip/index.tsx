@@ -1,8 +1,35 @@
 import React, { PropsWithChildren, ReactNode } from 'react';
 
+const left = (orientation: 'left' | 'right' | 'center') => {
+  switch (orientation) {
+    case 'right':
+      return 'calc(100% - 240px);';
+    case 'left':
+      return 'calc(100% - 10px)';
+    case 'center':
+    default:
+      return 'calc(50% - 115px)';
+  }
+};
+
+const leftTriangle = (orientation: 'left' | 'right' | 'center') => {
+  switch (orientation) {
+    case 'right':
+      return '95%';
+    case 'left':
+      return '5%';
+    case 'center':
+    default:
+      return '50%';
+  }
+};
+
 const InformationTooltip: React.FC<
-  PropsWithChildren<{ label: ReactNode | string }>
-> = ({ children, label }) => (
+  PropsWithChildren<{
+    label: ReactNode | string;
+    orientation?: 'left' | 'right' | 'center';
+  }>
+> = ({ children, label, orientation = 'center' }) => (
   <>
     <span className="wrapper">
       {children}
@@ -20,7 +47,7 @@ const InformationTooltip: React.FC<
         border-radius: 5px;
         bottom: calc(100% + 10px);
         color: #fff;
-        left: calc(50% - 115px);
+        left: ${left(orientation)};
         display: block;
         visibility: hidden;
         padding: 10px;
@@ -49,7 +76,7 @@ const InformationTooltip: React.FC<
         bottom: -5px;
         content: ' ';
         height: 0;
-        left: 50%;
+        left: ${leftTriangle(orientation)};
         margin-left: -13px;
         position: absolute;
         width: 0;

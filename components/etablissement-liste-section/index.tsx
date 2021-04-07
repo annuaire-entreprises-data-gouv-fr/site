@@ -1,9 +1,11 @@
 import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
+import { formatNumbersFr } from '../../utils/helpers/formatting';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { libelleFromCodeNaf } from '../../utils/labels';
 import IsActiveTag from '../is-active-tag';
+import PageCounter from '../results-page-counter';
 import { Section } from '../section';
 import { FullTable } from '../table/full';
 import { Tag } from '../tag';
@@ -17,9 +19,9 @@ const EtablissementListeSection: React.FC<{
   return (
     <div id="etablissements">
       <p>
-        Cette entité possède {uniteLegale.etablissements.length}{' '}
-        établissement(s)
-        {closedEtablissement > 0 && <> dont {closedEtablissement} fermés</>} :
+        Cette entité possède{' '}
+        {uniteLegale.nombreEtablissements || uniteLegale.etablissements.length}{' '}
+        établissement(s) :
       </p>
       <Section
         title="La liste des établissements de l’entité"
@@ -49,6 +51,12 @@ const EtablissementListeSection: React.FC<{
             ]
           )}
         />
+        {uniteLegale.nombreEtablissements > 200 && (
+          <PageCounter
+            currentPage={uniteLegale.currentEtablissementPage || 1}
+            totalPages={Math.round(uniteLegale.nombreEtablissements / 200) - 1}
+          />
+        )}
       </Section>
     </div>
   );
