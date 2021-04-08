@@ -1,24 +1,23 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { HttpNotFound } from '../../../clients/exceptions';
-import { testApi } from '../../../clients/test';
+import { APISlugNotFound, isApiOnline } from '../../../clients/test';
 
 const ping = async (
   { query: { slug } }: NextApiRequest,
   res: NextApiResponse
 ) => {
-  if (slug) {
-    try {
-      await testApi(slug);
+  try {
+    const test = await isApiOnline(slug);
+    if (test) {
       res.status(200).json({ message: 'ok' });
-    } catch (e) {
-      if (e instanceof HttpNotFound) {
-        res.status(404).json({ message: e });
-      } else {
-        res.status(500).json({ message: 'ko' });
-      }
+    } else {
+      res.status(500).json({ message: 'ko' });
     }
-  } else {
-    res.status(404).json({ message: `Slug: ${slug} not found.` });
+  } catch (e) {
+    if (e instanceof APISlugNotFound) {
+      res.status(404).json(e);
+    } else {
+      res.status(500).json(e);
+    }
   }
 };
 

@@ -23,7 +23,7 @@ import { logWarningInSentry } from '../utils/sentry';
  */
 const getUniteLegale = async (
   siren: string,
-  page: number
+  page = 1
 ): Promise<IUniteLegale> => {
   if (!isSiren(siren)) {
     throw new NotASirenError();

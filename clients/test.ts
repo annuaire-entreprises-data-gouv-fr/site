@@ -1,11 +1,16 @@
-import { HttpNotFound } from './exceptions';
 import { fetchRncsImmatriculation } from './rncs';
 import { fetchRnmImmatriculation } from './rnm';
 import { getUniteLegaleInsee } from './sirene-insee/siren';
 import getUniteLegaleSireneOuverte from './sirene-ouverte/siren';
 import fetchConventionCollectives from './siret-2-idcc';
 
-export const testApi = async (slug: string | string[]) => {
+export class APISlugNotFound extends Error {
+  constructor(public status: number, public message: string) {
+    super();
+  }
+}
+
+const testApi = async (slug: string | string[]) => {
   switch (slug) {
     case 'api-rncs':
       return await fetchRncsImmatriculation('880878145');
@@ -18,6 +23,19 @@ export const testApi = async (slug: string | string[]) => {
     case 'api-sirene-donnees-ouvertes':
       return await getUniteLegaleSireneOuverte('880878145');
     default:
-      throw new HttpNotFound(404, `${slug}`);
+      throw new APISlugNotFound(404, `API ping ${slug} not found`);
+  }
+};
+
+export const isApiOnline = async (slug: string | string[]) => {
+  try {
+    await testApi(slug);
+    return true;
+  } catch (e) {
+    if (e instanceof APISlugNotFound) {
+      throw e;
+    } else {
+      return false;
+    }
   }
 };
