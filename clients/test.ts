@@ -5,7 +5,7 @@ import { getUniteLegaleInsee } from './sirene-insee/siren';
 import getUniteLegaleSireneOuverte from './sirene-ouverte/siren';
 import fetchConventionCollectives from './siret-2-idcc';
 
-const testApi = async (slug: string | string[]) => {
+export const testApi = async (slug: string | string[]) => {
   switch (slug) {
     case 'api-rncs':
       return await fetchRncsImmatriculation('880878145');
@@ -19,17 +19,5 @@ const testApi = async (slug: string | string[]) => {
       return await getUniteLegaleSireneOuverte('880878145');
     default:
       throw new HttpNotFound(404, `${slug}`);
-  }
-};
-
-export const isApiOnline = async (slug: string | string[]) => {
-  try {
-    await testApi(slug);
-    return true;
-  } catch (e) {
-    if (e instanceof HttpNotFound) {
-      throw e;
-    }
-    return false;
   }
 };

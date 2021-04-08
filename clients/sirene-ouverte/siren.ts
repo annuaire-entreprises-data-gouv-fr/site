@@ -42,7 +42,7 @@ interface ISireneOuverteUniteLegaleResponse {
 
 const getUniteLegaleSireneOuverte = async (
   siren: string,
-  page: number
+  page = 1
 ): Promise<IUniteLegale> => {
   const response = await fetchWithTimeout(
     routes.sireneOuverte.uniteLegale + siren + '&page=' + page
