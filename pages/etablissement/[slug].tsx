@@ -38,13 +38,10 @@ const EtablissementPage: React.FC<IProps> = ({
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
       <div className="sub-title">
-        <span>
-          information sur l’établissement ‣ {formatSiret(etablissement.siret)}
-        </span>
+        <h2>Information sur un établissement</h2>
+        <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
         {etablissement.estSiege && <Tag>siège social</Tag>}
-        {etablissement.estActif && (
-          <IsActiveTag isActive={etablissement.estActif} />
-        )}
+        <IsActiveTag isActive={etablissement.estActif} />
       </div>
       <br />
       {uniteLegale.estDiffusible ? (
