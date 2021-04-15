@@ -9,7 +9,6 @@ import {
   SiretNotFoundError,
 } from '../../models';
 import {
-  redirectPageNotFound,
   redirectServerError,
   redirectSiretIntrouvable,
 } from '../../utils/redirect';
@@ -55,9 +54,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e) {
-    if (e instanceof NotASiretError) {
-      redirectPageNotFound(context.res, siret);
-    } else if (
+    if (
+      e instanceof NotASiretError ||
       e instanceof SiretNotFoundError ||
       e instanceof SirenNotFoundError
     ) {

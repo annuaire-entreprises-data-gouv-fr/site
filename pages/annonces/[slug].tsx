@@ -4,7 +4,6 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { NotASirenError, SirenNotFoundError } from '../../models';
 import {
-  redirectPageNotFound,
   redirectServerError,
   redirectSirenIntrouvable,
 } from '../../utils/redirect';
@@ -97,9 +96,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: conventions,
     };
   } catch (e) {
-    if (e instanceof NotASirenError) {
-      redirectPageNotFound(context.res, siren);
-    } else if (e instanceof SirenNotFoundError) {
+    if (e instanceof NotASirenError || e instanceof SirenNotFoundError) {
       redirectSirenIntrouvable(context.res, siren);
     } else {
       redirectServerError(context.res, e.message);

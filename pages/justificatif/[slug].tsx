@@ -86,9 +86,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: justificatifs,
     };
   } catch (e) {
-    if (e instanceof NotASirenError) {
-      redirectPageNotFound(context.res, siren);
-    } else if (e instanceof SirenNotFoundError) {
+    if (e instanceof NotASirenError || e instanceof SirenNotFoundError) {
       redirectSirenIntrouvable(context.res, siren);
     } else {
       redirectServerError(context.res, e.message);

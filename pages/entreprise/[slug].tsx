@@ -7,7 +7,6 @@ import UniteLegaleSection from '../../components/unite-legale-section';
 import EtablissementListeSection from '../../components/etablissement-liste-section';
 import Title, { FICHE } from '../../components/title-section';
 import {
-  redirectPageNotFound,
   redirectServerError,
   redirectSirenIntrouvable,
 } from '../../utils/redirect';
@@ -92,10 +91,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e) {
-    if (e instanceof NotASirenError) {
-      //@ts-ignore
-      redirectPageNotFound(context.res, JSON.stringify(context.params.slug));
-    } else if (e instanceof SirenNotFoundError) {
+    if (e instanceof NotASirenError || e instanceof SirenNotFoundError) {
       redirectSirenIntrouvable(context.res, siren);
     } else {
       redirectServerError(context.res, e.message);
