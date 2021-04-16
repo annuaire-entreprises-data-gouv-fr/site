@@ -1,18 +1,36 @@
-import Raven from 'raven';
+import * as Sentry from '@sentry/browser';
+
+let _isInitialized = false;
+
+const init = () => {
+  if (_isInitialized) {
+    return;
+  }
+
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 1.0,
+  });
+  _isInitialized = true;
+};
 
 export const logWarningInSentry = (message) => {
   if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
-    Raven.config(process.env.SENTRY_DSN).install();
-    Raven.captureMessage(message, {
+    init();
+    Sentry.captureMessage(message, {
       level: 'info',
     });
   }
 };
 
 export const logErrorInSentry = (error) => {
+  init();
   if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
-    Raven.config(process.env.SENTRY_DSN).install();
-    Raven.captureException(new Error(error));
+    Sentry.captureException(new Error(error));
   }
 };
 
