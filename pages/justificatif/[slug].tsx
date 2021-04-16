@@ -4,7 +4,6 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { NotASirenError, SirenNotFoundError } from '../../models';
 import {
-  redirectPageNotFound,
   redirectServerError,
   redirectSirenIntrouvable,
 } from '../../utils/redirect';
