@@ -35,6 +35,7 @@ interface IPeriodeUniteLegale {
 export const getUniteLegaleInsee = async (siren: string) => {
   const request = await inseeClientGet(routes.sireneInsee.siren + siren);
   const response = (await request.json()) as IInseeUniteLegaleResponse;
+
   return mapToDomainObject(siren, response);
 };
 

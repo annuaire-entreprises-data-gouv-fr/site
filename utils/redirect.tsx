@@ -17,7 +17,7 @@ export const redirectIfSiretOrSiren = (
 
 export const redirectPageNotFound = (res: ServerResponse, msg: string) => {
   redirect(res, '/404');
-  logWarningInSentry(new Error(`Unknown url (404) - ${msg}`));
+  logWarningInSentry(`Unknown url (404) - ${msg}`);
 };
 
 export const redirectServerError = (res: ServerResponse, msg: string) => {
@@ -30,7 +30,7 @@ export const redirectSirenIntrouvable = (
   siren: string
 ) => {
   redirect(res, `/introuvable/siren?q=${siren}`);
-  logWarningInSentry(new Error(`Siren ${siren} not found`));
+  logWarningInSentry(`Siren ${siren} not found`);
 };
 
 export const redirectSiretIntrouvable = (
@@ -38,7 +38,7 @@ export const redirectSiretIntrouvable = (
   siret: string
 ) => {
   redirect(res, `/introuvable/siret?q=${siret}`);
-  logWarningInSentry(new Error(`Siret ${siret} not found`));
+  logWarningInSentry(`Siret ${siret} not found`);
 };
 
 export const redirect = (res: ServerResponse, path: string) => {

@@ -52,7 +52,7 @@ const getEtablissement = async (siret: string): Promise<IEtablissement> => {
         e instanceof HttpTooManyRequests ||
         e instanceof HttpAuthentificationFailure
       ) {
-        logWarningInSentry(e);
+        logWarningInSentry(e.message);
       } else if (e instanceof InseeForbiddenError) {
         // this means company is not diffusible
         const etablissement = createDefaultEtablissement();
