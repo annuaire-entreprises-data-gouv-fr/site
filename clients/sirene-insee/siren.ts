@@ -75,7 +75,7 @@ const mapToDomainObject = (
     siege.siren = siren;
     siege.siret = siren + nicSiegeUniteLegale;
     siege.nic = nicSiegeUniteLegale;
-    siege.estActif = etatAdministratifUniteLegale === 'A';
+    siege.estActif = statutDiffusionUniteLegale === 'A';
     siege.dateCreation = dateDebut;
     siege.activitePrincipale = activitePrincipaleUniteLegale.replace('.', '');
     siege.libelleActivitePrincipale = libelleFromCodeNaf(
