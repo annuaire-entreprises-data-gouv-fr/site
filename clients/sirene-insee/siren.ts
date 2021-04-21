@@ -65,7 +65,7 @@ const mapToDomainObject = (
     nomUniteLegale,
   } = periodesUniteLegale[0];
 
-  if (etatAdministratifUniteLegale === 'N') {
+  if (statutDiffusionUniteLegale === 'N') {
     throw new InseeForbiddenError(403, 'Forbidden (non diffusible)');
   }
 
