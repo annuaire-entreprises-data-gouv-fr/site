@@ -57,7 +57,6 @@ const mapToDomainObject = (
 
   const {
     nicSiegeUniteLegale,
-    etatAdministratifUniteLegale,
     dateDebut,
     activitePrincipaleUniteLegale = '',
     categorieJuridiqueUniteLegale,
@@ -69,6 +68,10 @@ const mapToDomainObject = (
     throw new InseeForbiddenError(403, 'Forbidden (non diffusible)');
   }
 
+  const safeActivitePrincipaleUniteLegale = (
+    activitePrincipaleUniteLegale || ''
+  ).replace('.', '');
+
   const siege = createDefaultEtablissement();
 
   if (periodesUniteLegale && periodesUniteLegale.length > 0) {
@@ -77,9 +80,9 @@ const mapToDomainObject = (
     siege.nic = nicSiegeUniteLegale;
     siege.estActif = statutDiffusionUniteLegale === 'A';
     siege.dateCreation = dateDebut;
-    siege.activitePrincipale = activitePrincipaleUniteLegale.replace('.', '');
+    siege.activitePrincipale = safeActivitePrincipaleUniteLegale;
     siege.libelleActivitePrincipale = libelleFromCodeNaf(
-      activitePrincipaleUniteLegale.replace('.', '')
+      safeActivitePrincipaleUniteLegale
     );
     siege.estSiege = true;
     siege.trancheEffectif = '';
