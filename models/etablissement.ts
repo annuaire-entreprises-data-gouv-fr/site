@@ -1,16 +1,15 @@
 import {
   IEtablissement,
   IUniteLegale,
-  SirenNotFoundError,
   NotASiretError,
   SiretNotFoundError,
   createDefaultEtablissement,
 } from '.';
 import {
   HttpNotFound,
-  HttpServerError,
   HttpTooManyRequests,
   HttpAuthentificationFailure,
+  HttpServerError,
 } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
 import { getEtablissementInsee } from '../clients/sirene-insee/siret';
@@ -36,30 +35,37 @@ const getEtablissement = async (siret: string): Promise<IEtablissement> => {
   }
 
   try {
-    return await getEtablissementSireneOuverte(siret);
+    return await getEtablissementInsee(siret);
   } catch (e) {
-    if (e instanceof HttpNotFound) {
+    if (
+      e instanceof HttpTooManyRequests ||
+      e instanceof HttpAuthentificationFailure
+    ) {
+      logWarningInSentry(e.message);
+    } else if (e instanceof InseeForbiddenError) {
+      // this means company is not diffusible
+      const etablissement = createDefaultEtablissement();
+      etablissement.siret = siret;
+      etablissement.siren = extractSirenFromSiret(siret);
+
+      return etablissement;
+    } else if (e instanceof HttpNotFound) {
       // do nothing
     } else {
       logWarningInSentry(
-        `Server error in SireneEtalab, fallback on INSEE ${siret}. ${e}`
+        `Server error in SireneInsee, fallback on Sirene Ouverte (Etalab) ${siret}. ${e}`
       );
     }
-    try {
-      return await getEtablissementInsee(siret);
-    } catch (e) {
-      if (
-        e instanceof HttpTooManyRequests ||
-        e instanceof HttpAuthentificationFailure
-      ) {
-        logWarningInSentry(e.message);
-      } else if (e instanceof InseeForbiddenError) {
-        // this means company is not diffusible
-        const etablissement = createDefaultEtablissement();
-        etablissement.siret = siret;
-        etablissement.siren = extractSirenFromSiret(siret);
 
-        return etablissement;
+    try {
+      return await getEtablissementSireneOuverte(siret);
+    } catch (e) {
+      if (e instanceof HttpNotFound) {
+        // do nothing
+      } else {
+        logWarningInSentry(
+          `Server error in SireneEtalab, fallback on not found. ${e}`
+        );
       }
 
       // Siren was not found in both API

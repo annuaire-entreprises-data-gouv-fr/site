@@ -12,7 +12,7 @@ import {
 } from '../../utils/redirect';
 import EtablissementSection from '../../components/etablissement-section';
 
-import NonDiffusible from '../../components/non-diffusible';
+import { NonDiffusibleSection } from '../../components/non-diffusible';
 import getUniteLegale from '../../models/unite-legale';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 
@@ -30,8 +30,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
     title={`Entité - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
     canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
     noIndex={
-      ['1', '10', '1000'].indexOf(uniteLegale.natureJuridique) > -1 &&
-      uniteLegale.siege.estActif === false
+      uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
     }
   >
     {/* <StructuredData data={structuredData(uniteLegale)} /> */}
@@ -54,7 +53,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
           <p>
             Cette entité est <b>non-diffusible.</b>
           </p>
-          <NonDiffusible />
+          <NonDiffusibleSection />
         </>
       )}
     </div>

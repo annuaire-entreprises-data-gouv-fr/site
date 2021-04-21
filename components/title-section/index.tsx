@@ -94,7 +94,7 @@ const Title: React.FC<IProps> = ({
         <span>unité légale ‣ {formatNumbersFr(uniteLegale.siren)}</span>
         <span>
           {!uniteLegale.estDiffusible && <Tag>non diffusible</Tag>}
-          <IsActiveTag isActive={uniteLegale.siege.estActif} />
+          <IsActiveTag isActive={uniteLegale.estActive} />
         </span>
       </div>
     </div>

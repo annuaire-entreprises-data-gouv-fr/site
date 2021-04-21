@@ -1,15 +1,16 @@
-import { inseeClientGet } from '.';
+import { inseeClientGet, InseeForbiddenError } from '.';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
   IUniteLegale,
 } from '../../models';
+import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/est-entrepreneur-individuel';
+import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeNaf,
 } from '../../utils/labels';
 import routes from '../routes';
-import { getAllEtablissementInsee } from './siret';
 
 interface IInseeUniteLegaleResponse {
   uniteLegale: {
@@ -51,6 +52,7 @@ const mapToDomainObject = (
     trancheEffectifsUniteLegale,
     statutDiffusionUniteLegale,
     prenom1UniteLegale,
+    // identifiantAssociationUniteLegale,
   } = response.uniteLegale;
 
   const {
@@ -62,6 +64,10 @@ const mapToDomainObject = (
     denominationUniteLegale,
     nomUniteLegale,
   } = periodesUniteLegale[0];
+
+  if (etatAdministratifUniteLegale === 'N') {
+    throw new InseeForbiddenError(403, 'Forbidden (non diffusible)');
+  }
 
   const siege = createDefaultEtablissement();
 
@@ -90,6 +96,7 @@ const mapToDomainObject = (
   return {
     ...defaultUniteLegale,
     siren: siren,
+    numeroTva: tvaIntracommunautaireFromSiren(siren),
     siege,
     natureJuridique: categorieJuridiqueUniteLegale,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(
@@ -102,7 +109,11 @@ const mapToDomainObject = (
     dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
       'T'
     )[0],
+    estActive: statutDiffusionUniteLegale === 'O',
     estDiffusible: statutDiffusionUniteLegale !== 'N',
+    estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
+      categorieJuridiqueUniteLegale
+    ),
     nomComplet,
     chemin: siren,
     trancheEffectif: trancheEffectifsUniteLegale,

@@ -1,4 +1,5 @@
 import { IUniteLegale } from '../../models';
+import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/est-entrepreneur-individuel';
 import {
   formatAdresse,
   libelleFromCategoriesJuridiques,
@@ -125,6 +126,10 @@ const mapToDomainObject = (
     ),
     etablissements: listOfEtablissement,
     estDiffusible: true,
+    estActive: !!(siege && siege.estActif),
+    estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
+      nature_juridique_entreprise
+    ),
     nomComplet: nom_complet || 'Nom inconnu',
     chemin: nom_url,
     dateCreation: date_creation_entreprise,

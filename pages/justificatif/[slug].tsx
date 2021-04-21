@@ -13,6 +13,7 @@ import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
 import AvisSituation from '../../components/avis-situation';
 import { EAdministration } from '../../models/administration';
+import { formatDate } from '../../utils/helpers/formatting';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -26,16 +27,22 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
   >
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.JUSTIFICATIFS} />
-      <Section title="Avis de situation INSEE" source={EAdministration.INSEE}>
-        <div className="description">
-          Le siège social de cette entité possède un avis de situation au
-          répertoire Sirene des entreprises.
-        </div>
-        <div className="layout-center">
-          👉&nbsp;
-          <AvisSituation siret={uniteLegale.siege.siret} />
-        </div>
-      </Section>
+      {uniteLegale.estDiffusible && (
+        <Section
+          title="Avis de situation INSEE"
+          source={EAdministration.INSEE}
+          sourceLastUpdatedAt={formatDate(uniteLegale.dateDerniereMiseAJour)}
+        >
+          <div className="description">
+            Le siège social de cette entité possède un avis de situation au
+            répertoire Sirene des entreprises.
+          </div>
+          <div className="layout-center">
+            👉&nbsp;
+            <AvisSituation siret={uniteLegale.siege.siret} />
+          </div>
+        </Section>
+      )}
       <Immatriculations
         immatriculationRNM={immatriculationRNM}
         immatriculationRNCS={immatriculationRNCS}

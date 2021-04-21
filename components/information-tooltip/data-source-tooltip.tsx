@@ -3,14 +3,16 @@ import InformationTooltip from '.';
 import { IAdministrationMetaData } from '../../models/administration';
 import { information } from '../icon';
 
-export const DataSource: React.FC<{ shortSourceName: string }> = ({
-  shortSourceName,
-}) => (
+export const DataSource: React.FC<{
+  shortSourceName: string;
+  lastUpdatedAt?: string | Date;
+}> = ({ shortSourceName, lastUpdatedAt }) => (
   <div className="data-source">
     <span className="layout-center">{information}</span>
     <span>
       &nbsp;Source des données&nbsp;:&nbsp;
       {shortSourceName}
+      {lastUpdatedAt ? <>&nbsp;・&nbsp;{lastUpdatedAt}</> : ''}
     </span>
     <style jsx>{`
       .data-source {
@@ -25,9 +27,10 @@ export const DataSource: React.FC<{ shortSourceName: string }> = ({
   </div>
 );
 
-const DataSourceTooltip: React.FC<{ dataSource: IAdministrationMetaData }> = ({
-  dataSource,
-}) => (
+const DataSourceTooltip: React.FC<{
+  dataSource: IAdministrationMetaData;
+  lastUpdatedAt?: string | Date;
+}> = ({ dataSource, lastUpdatedAt }) => (
   <>
     <InformationTooltip
       orientation="right"
@@ -39,7 +42,10 @@ const DataSourceTooltip: React.FC<{ dataSource: IAdministrationMetaData }> = ({
         </>
       }
     >
-      <DataSource shortSourceName={dataSource.short} />
+      <DataSource
+        shortSourceName={dataSource.short}
+        lastUpdatedAt={lastUpdatedAt}
+      />
     </InformationTooltip>
   </>
 );

@@ -17,14 +17,12 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
         créée le <b>{formatDateLong(uniteLegale.dateCreation)}</b>
       </>
     )}
-    {uniteLegale.dateDebutActivite &&
-      uniteLegale.siege &&
-      !uniteLegale.siege.estActif && (
-        <>
-          {' '}
-          et fermée le <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>
-        </>
-      )}
+    {uniteLegale.dateDebutActivite && !uniteLegale.estActive && (
+      <>
+        {' '}
+        et fermée le <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>
+      </>
+    )}
     {uniteLegale.siege && uniteLegale.siege.adresse && (
       <>
         , dont le siège est domicilié au{' '}

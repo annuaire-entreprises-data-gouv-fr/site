@@ -77,7 +77,7 @@ export const inseeClientGet = async (route: string) => {
   }
 
   if (response.status === 403) {
-    throw new InseeForbiddenError(403, `Forbidden`);
+    throw new InseeForbiddenError(403, `Forbidden (non diffusible)`);
   }
 
   return response;
@@ -103,7 +103,7 @@ export const inseeClientPost = async (route: string, body: string) => {
   }
 
   if (response.status === 403) {
-    throw new InseeForbiddenError(403, `Forbidden`);
+    throw new InseeForbiddenError(403, `Forbidden (non diffusible)`);
   }
 
   return response;

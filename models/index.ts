@@ -33,6 +33,8 @@ export interface IUniteLegale {
   dateDerniereMiseAJour: string;
   dateDebutActivite: string;
   estDiffusible: boolean;
+  estActive: boolean | null;
+  estEntrepreneurIndividuel: boolean;
   nomComplet: string;
   chemin: string;
   trancheEffectif: string;
@@ -71,6 +73,8 @@ export const createDefaultUniteLegale = (siren: string): IUniteLegale => {
     siren,
     siege,
     estDiffusible: true,
+    estActive: null,
+    estEntrepreneurIndividuel: false,
     nomComplet: '',
     chemin: siren,
     numeroTva: '',

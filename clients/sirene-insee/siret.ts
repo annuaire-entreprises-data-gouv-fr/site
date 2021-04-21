@@ -33,11 +33,12 @@ interface IInseeEtablissement {
     libelleCommuneEtablissement: string;
   };
 }
-export const getAllEtablissementInsee = async (siren: string) => {
+export const getAllEtablissementInsee = async (siren: string, page = 1) => {
   const request = await inseeClientGet(routes.sireneInsee.siretBySiren + siren);
   const {
     etablissements,
   } = (await request.json()) as IInseeEtablissementsResponse;
+
   return etablissements.map(mapToDomainObject);
 };
 
@@ -61,6 +62,7 @@ const mapToDomainObject = (
     dateDernierTraitementEtablissement,
     activitePrincipaleRegistreMetiersEtablissement,
     adresseEtablissement,
+    statutDiffusionEtablissement,
   } = inseeEtablissement;
 
   const defaultEtablissement = createDefaultEtablissement();
@@ -77,6 +79,7 @@ const mapToDomainObject = (
     ),
     dateDerniereMiseAJour: dateDernierTraitementEtablissement,
     estSiege: !!etablissementSiege,
+    estActif: statutDiffusionEtablissement === 'O',
     trancheEffectif: trancheEffectifsEtablissement,
     libelleTrancheEffectif: libelleFromCodeEffectif(
       trancheEffectifsEtablissement

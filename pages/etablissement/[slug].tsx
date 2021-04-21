@@ -15,7 +15,7 @@ import {
   redirectServerError,
   redirectSiretIntrouvable,
 } from '../../utils/redirect';
-import NonDiffusible from '../../components/non-diffusible';
+import { NonDiffusibleSection } from '../../components/non-diffusible';
 import { getEtablissementWithUniteLegale } from '../../models/etablissement';
 import { Tag } from '../../components/tag';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
@@ -53,7 +53,7 @@ const EtablissementPage: React.FC<IProps> = ({
           <p>
             Cet établissement est <b>non-diffusible.</b>
           </p>
-          <NonDiffusible />
+          <NonDiffusibleSection />
         </>
       )}
     </div>
