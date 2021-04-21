@@ -1,4 +1,4 @@
-import { inseeClientGet } from '.';
+import { inseeClientGet, InseeForbiddenError } from '.';
 import { createDefaultEtablissement, IEtablissement } from '../../models';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
@@ -64,6 +64,10 @@ const mapToDomainObject = (
     adresseEtablissement,
     statutDiffusionEtablissement,
   } = inseeEtablissement;
+
+  if (statutDiffusionEtablissement === 'N') {
+    throw new InseeForbiddenError(403, 'Forbidden (non diffusible)');
+  }
 
   const defaultEtablissement = createDefaultEtablissement();
 
