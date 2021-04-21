@@ -113,6 +113,30 @@ const FAQ: React.FC<{}> = () => (
             </li>
           </ul>
         </QuestionBlock>
+        <QuestionBlock title="Pourquoi mon adresse personnelle apparait-elle sur l'Annuaire des Entreprises ?">
+          <p>
+            Les pages des entreprises individuelles et des auto-entreprises,
+            sont susceptibles de contenir des informations à caractère
+            personnel. Dans le cadre de l’article{' '}
+            <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000031043097/">
+              A123-96 du code de Commerce
+            </a>
+            , chaque personne physique inscrite au répertoire Sirene comme
+            entrepreneur individuel peut choisir de rendre publiques ou non les
+            données qui la concernent.
+          </p>
+          <br />
+          <p>
+            La procédure s'appelle "changement de statut de diffusion" et elle
+            est à effectuer auprès de L'INSEE :
+          </p>
+          <br />
+          <div className="layout-center">
+            <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
+              ⇢ Changer le statut de diffusion de mon entreprise
+            </ButtonLink>
+          </div>
+        </QuestionBlock>
         <QuestionBlock title="Qu'est-ce qu'une entreprise non-diffusible ?">
           <NonDiffusible />
         </QuestionBlock>
@@ -148,9 +172,6 @@ const FAQ: React.FC<{}> = () => (
           <p>
             Les données du moteur de recherche sont mises à jour tous les mois.
           </p>
-        </QuestionBlock>
-        <QuestionBlock title="Qu'est-ce qu'une entreprise non-diffusible ?">
-          <NonDiffusible />
         </QuestionBlock>
         <QuestionBlock title="Comment puis-je utiliser ces données dans mon site internet ?">
           <p>

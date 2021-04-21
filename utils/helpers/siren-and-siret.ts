@@ -23,7 +23,6 @@ const isLuhnValid = (str: string) => {
   if (str.indexOf('356000000') === 0) {
     return true;
   }
-
   return luhnChecksum(str) % 10 == 0;
 };
 

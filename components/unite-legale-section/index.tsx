@@ -39,7 +39,7 @@ const UniteLegaleSection: React.FC<{
       formatDate(uniteLegale.dateDerniereMiseAJour),
     ],
   ];
-  if (uniteLegale.siege && uniteLegale.siege.estActif === false) {
+  if (uniteLegale.estActive === false) {
     data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
   }
 
@@ -48,6 +48,7 @@ const UniteLegaleSection: React.FC<{
       <Section
         title={`Les informations sur cette entité`}
         source={EAdministration.INSEE}
+        sourceLastUpdatedAt={formatDate(uniteLegale.dateDerniereMiseAJour)}
       >
         <TwoColumnTable body={data} />
       </Section>
