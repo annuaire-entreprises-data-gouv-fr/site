@@ -8,6 +8,7 @@ import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers
 import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
 import {
   libelleFromCategoriesJuridiques,
+  libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
 import routes from '../routes';
@@ -120,5 +121,8 @@ const mapToDomainObject = (
     nomComplet,
     chemin: siren,
     trancheEffectif: trancheEffectifsUniteLegale,
+    libelleTrancheEffectif: libelleFromCodeEffectif(
+      trancheEffectifsUniteLegale
+    ),
   };
 };

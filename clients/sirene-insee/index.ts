@@ -73,7 +73,7 @@ export const inseeClientGet = async (route: string) => {
     throw new HttpTooManyRequests(429, `Too many requests`);
   }
   if (response.status === 404) {
-    throw new HttpNotFound(404, `Too many requests`);
+    throw new HttpNotFound(404, `Not found`);
   }
 
   if (response.status === 403) {
@@ -99,7 +99,7 @@ export const inseeClientPost = async (route: string, body: string) => {
     throw new HttpTooManyRequests(429, `Too many requests`);
   }
   if (response.status === 404) {
-    throw new HttpNotFound(404, `Too many requests`);
+    throw new HttpNotFound(404, `Not found`);
   }
 
   if (response.status === 403) {
