@@ -18,9 +18,9 @@ const getConventions = async (siren: string): Promise<IConventions> => {
 
   const uniteLegale = await getUniteLegale(siren as string);
 
-  const conventions = await getConventionCollectives(
-    uniteLegale as IUniteLegale
-  );
+  const conventions = uniteLegale.estDiffusible
+    ? await getConventionCollectives(uniteLegale as IUniteLegale)
+    : [];
 
   return {
     uniteLegale,
