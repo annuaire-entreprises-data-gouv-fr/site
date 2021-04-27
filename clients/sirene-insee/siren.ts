@@ -28,6 +28,7 @@ interface IInseeUniteLegaleResponse {
 interface IPeriodeUniteLegale {
   nicSiegeUniteLegale: string;
   etatAdministratifUniteLegale: string;
+  economieSocialeSolidaireUniteLegale: string | null;
   dateDebut: string;
   activitePrincipaleUniteLegale: string;
   categorieJuridiqueUniteLegale: string;
@@ -63,6 +64,8 @@ const mapToDomainObject = (
     activitePrincipaleUniteLegale = '',
     categorieJuridiqueUniteLegale,
     denominationUniteLegale,
+    economieSocialeSolidaireUniteLegale,
+    etatAdministratifUniteLegale,
     nomUniteLegale,
   } = periodesUniteLegale[0];
 
@@ -80,7 +83,7 @@ const mapToDomainObject = (
     siege.siren = siren;
     siege.siret = siren + nicSiegeUniteLegale;
     siege.nic = nicSiegeUniteLegale;
-    siege.estActif = statutDiffusionUniteLegale === 'A';
+    siege.estActif = null;
     siege.dateCreation = dateDebut;
     siege.activitePrincipale = safeActivitePrincipaleUniteLegale;
     siege.libelleActivitePrincipale = libelleFromCodeNaf(
@@ -117,11 +120,12 @@ const mapToDomainObject = (
     dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
       'T'
     )[0],
-    estActive: statutDiffusionUniteLegale === 'O',
+    estActive: etatAdministratifUniteLegale === 'A',
     estDiffusible: statutDiffusionUniteLegale !== 'N',
     estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
       categorieJuridiqueUniteLegale
     ),
+    estEss: economieSocialeSolidaireUniteLegale === 'O',
     nomComplet,
     chemin: siren,
     trancheEffectif: trancheEffectifsUniteLegale,

@@ -133,6 +133,7 @@ const mapToDomainObject = (
     estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
       nature_juridique_entreprise
     ),
+    estEss: false,
     nomComplet: nom_complet || 'Nom inconnu',
     chemin: nom_url,
     dateCreation: date_creation_entreprise,

@@ -20,6 +20,7 @@ import { getEtablissementWithUniteLegale } from '../../models/etablissement';
 import { Tag } from '../../components/tag';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import IsActiveTag from '../../components/is-active-tag';
+import { capitalize } from '../../utils/helpers/formatting';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -37,7 +38,12 @@ const EtablissementPage: React.FC<IProps> = ({
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
       <div className="sub-title">
-        <h2>Information sur un établissement</h2>
+        <h2>
+          Information sur un établissement de{' '}
+          <a href={`/entreprise/${uniteLegale.siren}`}>
+            {capitalize(uniteLegale.nomComplet)}
+          </a>
+        </h2>
         <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
         {etablissement.estSiege && <Tag>siège social</Tag>}
         <IsActiveTag isActive={etablissement.estActif} />

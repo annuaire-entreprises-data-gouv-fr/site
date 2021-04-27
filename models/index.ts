@@ -16,6 +16,7 @@ export interface IEtablissement {
   estSiege: boolean;
   dateCreation: string;
   dateDerniereMiseAJour: string;
+  dateFermeture: string | null;
   dateDebutActivite: string;
   adresse: string;
   activitePrincipale: string;
@@ -42,6 +43,7 @@ export interface IUniteLegale {
   estDiffusible: boolean;
   estActive: boolean | null;
   estEntrepreneurIndividuel: boolean;
+  estEss: boolean;
   nomComplet: string;
   chemin: string;
   trancheEffectif: string;
@@ -64,6 +66,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     dateCreation: '',
     dateDerniereMiseAJour: '',
     dateDebutActivite: '',
+    dateFermeture: '',
     adresse: '',
     activitePrincipale: '',
     libelleActivitePrincipale: '',
@@ -83,6 +86,7 @@ export const createDefaultUniteLegale = (siren: string): IUniteLegale => {
     estDiffusible: true,
     estActive: null,
     estEntrepreneurIndividuel: false,
+    estEss: null,
     nomComplet: '',
     chemin: siren,
     numeroTva: '',

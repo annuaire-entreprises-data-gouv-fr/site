@@ -24,6 +24,12 @@ interface IInseeEtablissement {
   dateCreationEtablissement: string;
   dateDernierTraitementEtablissement: string;
   activitePrincipaleRegistreMetiersEtablissement: string;
+  periodesEtablissement: {
+    dateFin: string;
+    dateDebut: string;
+    etatAdministratifEtablissement: string;
+    changementEtatAdministratifEtablissement: boolean;
+  }[];
   adresseEtablissement: {
     numeroVoieEtablissement: string;
     indiceRepetitionEtablissement: string;
@@ -63,7 +69,18 @@ const mapToDomainObject = (
     activitePrincipaleRegistreMetiersEtablissement,
     adresseEtablissement,
     statutDiffusionEtablissement,
+    periodesEtablissement,
   } = inseeEtablissement;
+
+  let lastEtatAdministratif = periodesEtablissement.find(
+    (periode) => periode.changementEtatAdministratifEtablissement === true
+  );
+
+  if (!lastEtatAdministratif) {
+    lastEtatAdministratif = periodesEtablissement[0];
+  }
+  const estActif = lastEtatAdministratif.etatAdministratifEtablissement === 'A';
+  const dateFermeture = !estActif ? lastEtatAdministratif.dateDebut : null;
 
   if (statutDiffusionEtablissement === 'N') {
     throw new InseeForbiddenError(403, 'Forbidden (non diffusible)');
@@ -83,7 +100,8 @@ const mapToDomainObject = (
     ),
     dateDerniereMiseAJour: dateDernierTraitementEtablissement,
     estSiege: !!etablissementSiege,
-    estActif: statutDiffusionEtablissement === 'O',
+    estActif,
+    dateFermeture,
     trancheEffectif: trancheEffectifsEtablissement,
     libelleTrancheEffectif: libelleFromCodeEffectif(
       trancheEffectifsEtablissement

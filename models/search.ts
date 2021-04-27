@@ -1,12 +1,7 @@
-import { IsASirenException, FalseSirenOrSiretException } from '.';
+import { IsASirenException } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import getResults from '../clients/sirene-ouverte/recherche';
-import {
-  cleanSearchTerm,
-  escapeTerm,
-  removeInvisibleChar,
-  trimWhitespace,
-} from '../utils/helpers/formatting';
+import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
 import { isSirenOrSiret } from '../utils/helpers/siren-and-siret';
 
 export interface ISearchResult {

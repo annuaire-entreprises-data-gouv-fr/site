@@ -43,6 +43,9 @@ const UniteLegaleSection: React.FC<{
   if (uniteLegale.estActive === false) {
     data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
   }
+  if (uniteLegale.estEss) {
+    data.push(['Economie Sociale et Solidaire', 'Oui']);
+  }
 
   return (
     <div id="entreprise">

@@ -45,7 +45,7 @@ const EtablissementSection: React.FC<IProps> = ({
   if (etablissement.estActif === false) {
     data.push([
       'Date de fermeture',
-      formatDate(etablissement.dateDebutActivite),
+      formatDate(etablissement.dateFermeture || ''),
     ]);
   }
   if (etablissement.enseigne) {

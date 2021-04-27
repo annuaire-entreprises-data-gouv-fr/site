@@ -72,16 +72,18 @@ const getEtablissementSireneOuverte = async (
 export const mapSireneOuverteEtablissementToDomainObject = (
   etablissement: ISireneOuverteEtablissement
 ): IEtablissement => {
+  const estActif = etablissement.etat_administratif_etablissement === 'A';
   return {
     enseigne: etablissement.enseigne || null,
     siren: etablissement.siren,
     siret: etablissement.siret,
     nic: etablissement.nic,
-    estActif: etablissement.etat_administratif_etablissement === 'A',
+    estActif,
     estSiege: etablissement.is_siege,
     dateCreation: etablissement.date_creation,
     dateDerniereMiseAJour: etablissement.date_mise_a_jour,
     dateDebutActivite: etablissement.date_debut_activite,
+    dateFermeture: !estActif ? etablissement.date_debut_activite : null,
     adresse: formatAdresse(
       etablissement.numero_voie,
       etablissement.indice_repetition,

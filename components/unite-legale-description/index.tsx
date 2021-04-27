@@ -1,12 +1,12 @@
 import React from 'react';
 import { IUniteLegale } from '../../models';
-import { formatDateLong } from '../../utils/helpers/formatting';
+import { capitalize, formatDateLong } from '../../utils/helpers/formatting';
 
 export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
 }) => (
   <>
-    <>L’unité légale {uniteLegale.nomComplet}</>{' '}
+    <>L’unité légale {capitalize(uniteLegale.nomComplet)}</>{' '}
     {uniteLegale.natureJuridique && (
       <>
         est une <b>{uniteLegale.libelleNatureJuridique}</b>{' '}
