@@ -86,7 +86,7 @@ export const createDefaultUniteLegale = (siren: string): IUniteLegale => {
     estDiffusible: true,
     estActive: null,
     estEntrepreneurIndividuel: false,
-    estEss: null,
+    estEss: false,
     nomComplet: '',
     chemin: siren,
     numeroTva: '',
