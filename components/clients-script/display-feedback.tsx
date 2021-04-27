@@ -54,9 +54,9 @@ const DisplayNps = (
         || (p.indexOf('/justificatif')===0 && data >= 2)
         || (p.indexOf('/annonces')===0 && data >= 2)
         || (p.indexOf('/etablissement')===0 && data >= 2)){
-          // window.showNPSModal();
+          window.showNPSModal();
 
-          window.showWeNeedYouModal();
+          // window.showWeNeedYouModal();
         }
       } catch (e) {}
     })();
