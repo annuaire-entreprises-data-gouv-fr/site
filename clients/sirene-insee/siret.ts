@@ -89,13 +89,12 @@ const mapToDomainObject = (
       trancheEffectifsEtablissement
     ),
     adresse: formatAdresse(
-      `${adresseEtablissement.numeroVoieEtablissement || ''}${
-        adresseEtablissement.indiceRepetitionEtablissement || ''
-      }`,
+      adresseEtablissement.numeroVoieEtablissement,
+      adresseEtablissement.indiceRepetitionEtablissement,
       adresseEtablissement.typeVoieEtablissement,
-      adresseEtablissement.libelleCommuneEtablissement,
+      adresseEtablissement.libelleVoieEtablissement,
       adresseEtablissement.codePostalEtablissement,
-      adresseEtablissement.libelleVoieEtablissement
+      adresseEtablissement.libelleCommuneEtablissement
     ),
   };
 };

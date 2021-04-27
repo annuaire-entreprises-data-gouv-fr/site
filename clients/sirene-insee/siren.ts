@@ -22,6 +22,7 @@ interface IInseeUniteLegaleResponse {
     trancheEffectifsUniteLegale: string;
     statutDiffusionUniteLegale: string;
     prenom1UniteLegale: string;
+    identifiantAssociationUniteLegale: string | null;
   };
 }
 interface IPeriodeUniteLegale {
@@ -53,7 +54,7 @@ const mapToDomainObject = (
     trancheEffectifsUniteLegale,
     statutDiffusionUniteLegale,
     prenom1UniteLegale,
-    // identifiantAssociationUniteLegale,
+    identifiantAssociationUniteLegale,
   } = response.uniteLegale;
 
   const {
@@ -101,6 +102,9 @@ const mapToDomainObject = (
     ...defaultUniteLegale,
     siren: siren,
     numeroTva: tvaIntracommunautaireFromSiren(siren),
+    association: identifiantAssociationUniteLegale
+      ? { id: identifiantAssociationUniteLegale }
+      : null,
     siege,
     natureJuridique: categorieJuridiqueUniteLegale,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(

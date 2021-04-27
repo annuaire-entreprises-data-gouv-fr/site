@@ -1,4 +1,11 @@
 /** COMMON TYPES */
+export interface IAssociation {
+  id: string;
+  exId?: string;
+  nomComplet?: string;
+  objet?: string;
+  adresse?: string;
+}
 
 export interface IEtablissement {
   enseigne: string | null;
@@ -42,6 +49,7 @@ export interface IUniteLegale {
   adresse: string;
   // etablissement list pagination
   currentEtablissementPage?: number;
+  association: IAssociation | null;
 }
 
 /** BASIC CONSTRUCTORS */
@@ -90,6 +98,7 @@ export const createDefaultUniteLegale = (siren: string): IUniteLegale => {
     trancheEffectif: '',
     libelleTrancheEffectif: '',
     adresse: '',
+    association: null,
   };
 };
 

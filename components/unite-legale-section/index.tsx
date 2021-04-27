@@ -39,6 +39,7 @@ const UniteLegaleSection: React.FC<{
       formatDate(uniteLegale.dateDerniereMiseAJour),
     ],
   ];
+
   if (uniteLegale.estActive === false) {
     data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
   }

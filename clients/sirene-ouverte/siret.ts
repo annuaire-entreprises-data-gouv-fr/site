@@ -29,6 +29,7 @@ export interface ISireneOuverteEtablissement {
   latitude: string;
   longitude: string;
   numero_voie: string;
+  indice_repetition: string;
   type_voie: string;
   libelle_commune: string;
   code_postal: string;
@@ -83,10 +84,11 @@ export const mapSireneOuverteEtablissementToDomainObject = (
     dateDebutActivite: etablissement.date_debut_activite,
     adresse: formatAdresse(
       etablissement.numero_voie,
+      etablissement.indice_repetition,
       etablissement.type_voie,
-      etablissement.libelle_commune,
+      etablissement.libelle_voie,
       etablissement.code_postal,
-      etablissement.libelle_voie
+      etablissement.libelle_commune
     ),
     activitePrincipale: etablissement.activite_principale,
     libelleActivitePrincipale: libelleFromCodeNaf(

@@ -6,6 +6,10 @@ const routes = {
       'https://raw.githubusercontent.com/etalab/statut.annuaire-entreprises.data.gouv.fr/master/history/summary.json',
   },
   rnm: `https://api-rnm.artisanat.fr/v2/entreprises/`,
+  rna: {
+    id: `https://entreprise.data.gouv.fr/api/rna/v1/id/`,
+    siren: `https://entreprise.data.gouv.fr/api/rna/v1/siret/`,
+  },
   rncs: {
     portail: `https://data.inpi.fr/entreprises/`,
     api: {

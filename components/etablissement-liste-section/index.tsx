@@ -1,7 +1,6 @@
 import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
-import { formatNumbersFr } from '../../utils/helpers/formatting';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { libelleFromCodeNaf } from '../../utils/labels';
 import IsActiveTag from '../is-active-tag';
@@ -13,9 +12,6 @@ import { Tag } from '../tag';
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const closedEtablissement = uniteLegale.etablissements.filter(
-    (etablissement) => etablissement.estActif === false
-  ).length;
   return (
     <div id="etablissements">
       <p>

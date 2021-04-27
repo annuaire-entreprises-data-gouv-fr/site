@@ -4,6 +4,7 @@ export enum EAdministration {
   CMAFRANCE,
   DILA,
   METI,
+  MI,
 }
 
 export interface IAdministrationsMetaData {
@@ -166,6 +167,19 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/',
     monitoringSlug: 'api-conventions-collectives',
+  },
+  [EAdministration.MI]: {
+    slug: 'mi',
+    short: 'MI',
+    long: 'Ministère de l’Intérieur (MI)',
+    adress: '',
+    loc: [],
+    description: `
+
+        `,
+    contact: '',
+    dataGouvLink: '',
+    monitoringSlug: '',
   },
   [EAdministration.CMAFRANCE]: {
     slug: 'cma-france',

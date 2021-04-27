@@ -15,6 +15,7 @@ import EtablissementSection from '../../components/etablissement-section';
 import { NonDiffusibleSection } from '../../components/non-diffusible';
 import getUniteLegale from '../../models/unite-legale';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
+import AssociationSection from '../../components/association-section';
 
 // const structuredData = (uniteLegale: UniteLegale) => [
 //   ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],
@@ -39,6 +40,9 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
       {uniteLegale.estDiffusible ? (
         <>
           <UniteLegaleSection uniteLegale={uniteLegale} />
+          {uniteLegale.association && uniteLegale.association.id && (
+            <AssociationSection uniteLegale={uniteLegale} />
+          )}
           {uniteLegale.siege && (
             <EtablissementSection
               uniteLegale={uniteLegale}

@@ -20,6 +20,7 @@ interface ISireneOuverteUniteLegaleResultat {
   nom_complet: string;
   page_path: string;
   numero_voie: string;
+  indice_repetition: string;
   type_voie: string;
   libelle_commune: string;
   code_postal: string;
@@ -85,10 +86,11 @@ const mapToDomainObject = (
         estActive: result.etat_administratif_etablissement === 'A',
         adresse: formatAdresse(
           result.numero_voie,
+          result.indice_repetition,
           result.type_voie,
-          result.libelle_commune,
+          result.libelle_voie,
           result.code_postal,
-          result.libelle_voie
+          result.libelle_commune
         ),
         latitude: result.latitude,
         longitude: result.longitude,

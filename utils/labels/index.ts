@@ -51,10 +51,11 @@ const wrapWord = (word: string, caps = false, stop = ' ') => {
 
 export const formatAdresse = (
   numero_voie: string,
+  indice_repetition: string,
   type_voie: string,
-  libelle_commune: string,
+  libelle_voie: string,
   code_postal: string,
-  libelle_voie: string
+  libelle_commune: string
 ) => {
   if (
     !numero_voie &&
@@ -65,13 +66,9 @@ export const formatAdresse = (
   ) {
     return '';
   }
-  return `${wrapWord(numero_voie)}${wrapWord(type_voie)}${wrapWord(
-    libelle_voie,
-    false,
-    ', '
-  )}${formatNumbersFr(code_postal || '')} ${wrapWord(
-    libelle_commune,
-    true,
-    ''
-  )}`;
+  return `${wrapWord(numero_voie)}${wrapWord(indice_repetition)}${wrapWord(
+    type_voie
+  )}${wrapWord(libelle_voie, false, ', ')}${formatNumbersFr(
+    code_postal || ''
+  )} ${wrapWord(libelle_commune, true, '')}`;
 };
