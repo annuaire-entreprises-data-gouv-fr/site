@@ -31,12 +31,18 @@ export const isSirenOrSiret = (str: string) => {
 };
 
 export const isSiret = (str: string) => {
-  return str.match(/^\d{14}$/g) && isLuhnValid(str);
+  return lookLikeSiret(str) && isLuhnValid(str);
 };
 
 export const isSiren = (str: string) => {
-  return str.match(/^\d{9}$/g) && isLuhnValid(str);
+  return lookLikeSiren(str) && isLuhnValid(str);
 };
+
+export const lookLikeSiren = (str: string) => !!str.match(/^\d{9}$/g);
+export const lookLikeSiret = (str: string) => !!str.match(/^\d{14}$/g);
+
+export const lookLikeSirenOrSiret = (str: string) =>
+  lookLikeSiren(str) || lookLikeSiret(str);
 
 export const formatSiret = (siret = '') => {
   return siret.replace(/(\d{3})/g, '$1 ').replace(/(\s)(?=(\d{2})$)/g, '');

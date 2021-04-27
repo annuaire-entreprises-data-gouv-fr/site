@@ -1,7 +1,8 @@
-import { IsASirenException } from '.';
+import { IsASirenException, FalseSirenOrSiretException } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import getResults from '../clients/sirene-ouverte/recherche';
 import {
+  cleanSearchTerm,
   escapeTerm,
   removeInvisibleChar,
   trimWhitespace,
@@ -28,21 +29,17 @@ export interface ISearchResults {
   results: ISearchResult[];
 }
 
-const search = async (searchTerms: string, page: number) => {
+const search = async (searchTerm: string, page: number) => {
   try {
-    // Removes invisible characters one might copy paste without knowing
-    const cleanedTerm = removeInvisibleChar(searchTerms);
+    const cleanedTerm = cleanSearchTerm(searchTerm);
 
-    // Redirects when user copy/pasted a siret or a siren
-    const trimmedTerm = trimWhitespace(cleanedTerm);
-
-    const isAValidSirenOrSiret = isSirenOrSiret(trimmedTerm);
+    const isAValidSirenOrSiret = isSirenOrSiret(cleanedTerm);
 
     if (isAValidSirenOrSiret) {
-      throw new IsASirenException(trimmedTerm);
+      throw new IsASirenException(cleanedTerm);
     }
 
-    const escapedSearchTerm = escapeTerm(searchTerms);
+    const escapedSearchTerm = escapeTerm(searchTerm);
     return await getResults(escapedSearchTerm, page);
   } catch (e) {
     if (e instanceof HttpNotFound) {

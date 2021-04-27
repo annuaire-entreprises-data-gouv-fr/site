@@ -13,6 +13,7 @@ import search, { ISearchResults } from '../../models/search';
 import ResultsHeader from '../../components/results-header';
 import { IsASirenException } from '../../models';
 import LogSearchTermInPiwik from '../../components/clients-script/log-search-term-in-piwik';
+import { lookLikeSirenOrSiret } from '../../utils/helpers/siren-and-siret';
 
 interface IProps extends ISearchResults {
   searchTerm: string;

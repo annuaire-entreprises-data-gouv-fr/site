@@ -54,6 +54,14 @@ export const trimWhitespace = (term: string) => {
 };
 
 /**
+ * Clean Search term by removing inivisible char and whitespaces
+ */
+export const cleanSearchTerm = (term: string) => {
+  const cleanedTerm = removeInvisibleChar(term);
+  return trimWhitespace(cleanedTerm);
+};
+
+/**
  * Parse an int and return default value in case of failure
  */
 export const parseIntWithDefaultValue = (
