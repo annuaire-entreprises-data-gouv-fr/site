@@ -27,10 +27,10 @@ export const logWarningInSentry = (message) => {
   }
 };
 
-export const logErrorInSentry = (error) => {
+export const logErrorInSentry = (errorMsg) => {
   init();
   if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
-    Sentry.captureException(error);
+    Sentry.captureException(errorMsg);
   }
 };
 

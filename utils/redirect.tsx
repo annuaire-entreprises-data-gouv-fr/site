@@ -22,7 +22,7 @@ export const redirectPageNotFound = (res: ServerResponse, msg: string) => {
 
 export const redirectServerError = (res: ServerResponse, msg: string) => {
   redirect(res, '/500');
-  logErrorInSentry(new Error(`Server Error (500) - ${msg}`));
+  logErrorInSentry(`Server Error (500) - ${msg}`);
 };
 
 export const redirectSirenIntrouvable = (
