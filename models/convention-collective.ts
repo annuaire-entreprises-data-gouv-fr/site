@@ -17,7 +17,7 @@ const getConventionCollectives = async (
     return await fetchConventionCollectives(sirets);
   } catch (e) {
     const errorMessage = `${uniteLegale.siren} error in API Siret2Idcc convention collectives : ${e}`;
-    logErrorInSentry(errorMessage);
+    logErrorInSentry(new Error(errorMessage));
     return [];
   }
 };

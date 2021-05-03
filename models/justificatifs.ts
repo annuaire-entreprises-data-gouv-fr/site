@@ -17,7 +17,7 @@ export interface IJustificatifs {
 
 const getJustificatifs = async (siren: string): Promise<IJustificatifs> => {
   if (!isSiren(siren)) {
-    throw new NotASirenError();
+    throw new NotASirenError(`${siren} is not a valid siren`);
   }
 
   const uniteLegale = await getUniteLegale(siren as string);

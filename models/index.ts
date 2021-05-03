@@ -113,7 +113,7 @@ export class SirenNotFoundError extends Error {
   }
 }
 export class NotASirenError extends Error {
-  constructor() {
+  constructor(public message: string) {
     super();
   }
 }

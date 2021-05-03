@@ -24,7 +24,7 @@ const getUniteLegale = async (
   page = 1
 ): Promise<IUniteLegale> => {
   if (!isSiren(siren)) {
-    throw new NotASirenError();
+    throw new NotASirenError(`${siren} is not a valid siren`);
   }
 
   try {

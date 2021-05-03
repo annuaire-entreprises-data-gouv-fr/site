@@ -13,7 +13,7 @@ export interface IConventions {
 
 const getConventions = async (siren: string): Promise<IConventions> => {
   if (!isSiren(siren)) {
-    throw new NotASirenError();
+    throw new NotASirenError(`${siren} is not a valid siren`);
   }
 
   const uniteLegale = await getUniteLegale(siren as string);
