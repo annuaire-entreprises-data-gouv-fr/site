@@ -2,25 +2,19 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import {
-  IEtablissement,
-  IUniteLegale,
-  NotASiretError,
-  SirenNotFoundError,
-  SiretNotFoundError,
-} from '../../models';
+import { IEtablissement, IUniteLegale } from '../../models';
 import EtablissementSection from '../../components/etablissement-section';
 import Title, { FICHE } from '../../components/title-section';
-import {
-  redirectServerError,
-  redirectSiretIntrouvable,
-} from '../../utils/redirect';
 import { NonDiffusibleSection } from '../../components/non-diffusible';
 import { getEtablissementWithUniteLegale } from '../../models/etablissement';
 import { Tag } from '../../components/tag';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import IsActiveTag from '../../components/is-active-tag';
 import { capitalize } from '../../utils/helpers/formatting';
+import {
+  redirectIfIssueWithSiren,
+  redirectIfIssueWithSiret,
+} from '../../utils/redirects/routers';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -91,16 +85,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e) {
-    if (
-      e instanceof NotASiretError ||
-      e instanceof SiretNotFoundError ||
-      e instanceof SirenNotFoundError
-    ) {
-      redirectSiretIntrouvable(context.res, siret);
-    } else {
-      redirectServerError(context.res, e.message);
-    }
-
+    redirectIfIssueWithSiret(context.res, e, siret);
+    redirectIfIssueWithSiren(context.res, e, siret);
     return { props: {} };
   }
 };

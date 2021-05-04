@@ -1,7 +1,6 @@
 import {
   IEtablissement,
   IUniteLegale,
-  NotASiretError,
   SiretNotFoundError,
   createDefaultEtablissement,
 } from '.';
@@ -9,7 +8,6 @@ import {
   HttpNotFound,
   HttpTooManyRequests,
   HttpAuthentificationFailure,
-  HttpServerError,
 } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
 import { getEtablissementInsee } from '../clients/sirene-insee/siret';
@@ -30,9 +28,7 @@ export interface IEtablissementWithUniteLegale {
  * Download Etablissement
  */
 const getEtablissement = async (siret: string): Promise<IEtablissement> => {
-  if (!isSiret(siret)) {
-    throw new NotASiretError();
-  }
+  isSiret(siret);
 
   try {
     return await getEtablissementInsee(siret);
@@ -82,7 +78,6 @@ const getEtablissementWithUniteLegale = async (
   siret: string
 ): Promise<IEtablissementWithUniteLegale> => {
   const etablissement = await getEtablissement(siret);
-  //@ts-ignore
   const uniteLegale = await getUniteLegale(etablissement.siren);
 
   return { etablissement, uniteLegale };

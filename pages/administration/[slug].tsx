@@ -12,7 +12,7 @@ import {
 import {
   redirectPageNotFound,
   redirectServerError,
-} from '../../utils/redirect';
+} from '../../utils/redirects';
 import getMonitoring, { IMonitoring } from '../../models/monitoring';
 import AdministrationApiMonitoring from '../../components/administration-api-monitoring';
 import { HttpNotFound } from '../../clients/exceptions';

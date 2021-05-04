@@ -1,8 +1,8 @@
-import { IsASirenException } from '.';
+import { IsLikelyASirenOrSiretException } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import getResults from '../clients/sirene-ouverte/recherche';
 import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
-import { isSirenOrSiret } from '../utils/helpers/siren-and-siret';
+import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
 
 export interface ISearchResult {
   siren: string;
@@ -28,10 +28,10 @@ const search = async (searchTerm: string, page: number) => {
   try {
     const cleanedTerm = cleanSearchTerm(searchTerm);
 
-    const isAValidSirenOrSiret = isSirenOrSiret(cleanedTerm);
+    const likelyASiretOrSiren = isLikelyASiretOrSiren(cleanedTerm);
 
-    if (isAValidSirenOrSiret) {
-      throw new IsASirenException(cleanedTerm);
+    if (likelyASiretOrSiren) {
+      throw new IsLikelyASirenOrSiretException(cleanedTerm);
     }
 
     const escapedSearchTerm = escapeTerm(searchTerm);

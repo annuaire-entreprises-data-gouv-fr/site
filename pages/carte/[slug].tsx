@@ -2,18 +2,13 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import {
-  IEtablissement,
-  NotASiretError,
-  SirenNotFoundError,
-  SiretNotFoundError,
-} from '../../models';
-import {
-  redirectServerError,
-  redirectSiretIntrouvable,
-} from '../../utils/redirect';
+import { IEtablissement } from '../../models';
 import MapEtablissement from '../../components/mapbox/map-etablissement';
 import { getEtablissement } from '../../models/etablissement';
+import {
+  redirectIfIssueWithSiren,
+  redirectIfIssueWithSiret,
+} from '../../utils/redirects/routers';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -54,15 +49,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e) {
-    if (
-      e instanceof NotASiretError ||
-      e instanceof SiretNotFoundError ||
-      e instanceof SirenNotFoundError
-    ) {
-      redirectSiretIntrouvable(context.res, siret);
-    } else {
-      redirectServerError(context.res, e.message);
-    }
+    redirectIfIssueWithSiret(context.res, e, siret);
+    redirectIfIssueWithSiren(context.res, e, siret);
 
     return { props: {} };
   }

@@ -1,13 +1,13 @@
 import QRCode from 'qrcode';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { isSiren } from '../../../utils/helpers/siren-and-siret';
+import { hasSirenFormat } from '../../../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../../../utils/sentry';
 
-const getUrl = (sirenOrSiret: string) => {
-  if (isSiren(sirenOrSiret)) {
-    return `https://annuaire-entreprises.data.gouv.fr/entreprise/${sirenOrSiret}`;
+const getUrl = (slug: string) => {
+  if (hasSirenFormat(slug)) {
+    return `https://annuaire-entreprises.data.gouv.fr/entreprise/${slug}`;
   }
-  return `https://annuaire-entreprises.data.gouv.fr/etablissement/${sirenOrSiret}`;
+  return `https://annuaire-entreprises.data.gouv.fr/etablissement/${slug}`;
 };
 
 const qrCode = ({ query: { slug } }: NextApiRequest, res: NextApiResponse) => {

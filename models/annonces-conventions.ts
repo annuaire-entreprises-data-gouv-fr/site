@@ -1,5 +1,4 @@
-import { IUniteLegale, NotASirenError } from '.';
-import { isSiren } from '../utils/helpers/siren-and-siret';
+import { IUniteLegale } from '.';
 import getConventionCollectives, {
   IConventionCollective,
 } from './convention-collective';
@@ -11,12 +10,8 @@ export interface IConventions {
   conventionCollectives: IConventionCollective[];
 }
 
-const getConventions = async (siren: string): Promise<IConventions> => {
-  if (!isSiren(siren)) {
-    throw new NotASirenError(`${siren} is not a valid siren`);
-  }
-
-  const uniteLegale = await getUniteLegale(siren as string);
+const getConventions = async (slug: string): Promise<IConventions> => {
+  const uniteLegale = await getUniteLegale(slug);
 
   const conventions = uniteLegale.estDiffusible
     ? await getConventionCollectives(uniteLegale as IUniteLegale)

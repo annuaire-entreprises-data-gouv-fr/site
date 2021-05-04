@@ -2,11 +2,6 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { NotASirenError, SirenNotFoundError } from '../../models';
-import {
-  redirectServerError,
-  redirectSirenIntrouvable,
-} from '../../utils/redirect';
 import { Section } from '../../components/section';
 import ButtonLink from '../../components/button';
 import HorizontalSeparator from '../../components/horizontal-separator';
@@ -18,6 +13,7 @@ import { EAdministration } from '../../models/administration';
 import getConventions, {
   IConventions,
 } from '../../models/annonces-conventions';
+import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 
 const AnnoncesAndConventionsPage: React.FC<IConventions> = ({
   uniteLegale,
@@ -96,11 +92,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: conventions,
     };
   } catch (e) {
-    if (e instanceof NotASirenError || e instanceof SirenNotFoundError) {
-      redirectSirenIntrouvable(context.res, siren);
-    } else {
-      redirectServerError(context.res, e.message);
-    }
+    redirectIfIssueWithSiren(context.res, e, siren);
     return { props: {} };
   }
 };

@@ -1,5 +1,4 @@
-import { IUniteLegale, NotASirenError } from '.';
-import { isSiren } from '../utils/helpers/siren-and-siret';
+import { IUniteLegale } from '.';
 import { IAPINotRespondingError } from './api-not-responding';
 import {
   IImmatriculationRNM,
@@ -15,16 +14,12 @@ export interface IJustificatifs {
   immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
 }
 
-const getJustificatifs = async (siren: string): Promise<IJustificatifs> => {
-  if (!isSiren(siren)) {
-    throw new NotASirenError(`${siren} is not a valid siren`);
-  }
-
-  const uniteLegale = await getUniteLegale(siren as string);
+const getJustificatifs = async (slug: string): Promise<IJustificatifs> => {
+  const uniteLegale = await getUniteLegale(slug);
 
   const justificatifs = await Promise.all([
-    getImmatriculationRNM(siren),
-    getImmatriculationRNCS(siren),
+    getImmatriculationRNM(uniteLegale.siren),
+    getImmatriculationRNCS(uniteLegale.siren),
   ]);
 
   return {

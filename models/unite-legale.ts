@@ -1,9 +1,4 @@
-import {
-  createDefaultUniteLegale,
-  IUniteLegale,
-  NotASirenError,
-  SirenNotFoundError,
-} from '.';
+import { createDefaultUniteLegale, IUniteLegale, SirenNotFoundError } from '.';
 import {
   HttpAuthentificationFailure,
   HttpNotFound,
@@ -23,9 +18,7 @@ const getUniteLegale = async (
   siren: string,
   page = 1
 ): Promise<IUniteLegale> => {
-  if (!isSiren(siren)) {
-    throw new NotASirenError(`${siren} is not a valid siren`);
-  }
+  isSiren(siren);
 
   try {
     // INSEE does not provide enough information to paginate etablissement list
