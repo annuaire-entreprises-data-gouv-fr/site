@@ -3,6 +3,8 @@ import {
   IUniteLegale,
   SiretNotFoundError,
   createDefaultEtablissement,
+  NotASiretError,
+  NotLuhnValidSiretError,
 } from '.';
 import {
   HttpNotFound,
@@ -14,6 +16,8 @@ import { getEtablissementInsee } from '../clients/sirene-insee/siret';
 import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
 import {
   extractSirenFromSiret,
+  hasSiretFormat,
+  isLuhnValid,
   isSiret,
 } from '../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../utils/sentry';
@@ -28,6 +32,14 @@ export interface IEtablissementWithUniteLegale {
  * Download Etablissement
  */
 const getEtablissement = async (siret: string): Promise<IEtablissement> => {
+  if (!hasSiretFormat(siret)) {
+    throw new NotASiretError(siret);
+  }
+
+  if (!isLuhnValid(siret)) {
+    throw new NotLuhnValidSiretError(siret);
+  }
+
   isSiret(siret);
 
   try {

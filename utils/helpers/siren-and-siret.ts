@@ -1,10 +1,3 @@
-import {
-  NotASirenError,
-  NotASiretError,
-  NotLuhnValidSirenError,
-  NotLuhnValidSiretError,
-} from '../../models';
-
 /**
  * Siren and siret types
  */
@@ -14,26 +7,16 @@ export type Siren = Brand<string, 'Siren'>;
 export type Siret = Brand<string, 'Siren'>;
 
 export const isSiren = (slug: string): slug is Siren => {
-  if (!hasSirenFormat(slug)) {
-    throw new NotASirenError(slug);
+  if (!hasSirenFormat(slug) || !isLuhnValid(slug)) {
+    return false;
   }
-
-  if (!isLuhnValid(slug)) {
-    throw new NotLuhnValidSirenError(slug);
-  }
-
   return true;
 };
 
 export const isSiret = (slug: string): slug is Siren => {
-  if (!hasSiretFormat(slug)) {
-    throw new NotASiretError(slug);
+  if (!hasSiretFormat(slug) || !isLuhnValid(slug)) {
+    return false;
   }
-
-  if (!isLuhnValid(slug)) {
-    throw new NotLuhnValidSiretError(slug);
-  }
-
   return true;
 };
 
