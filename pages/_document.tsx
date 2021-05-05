@@ -43,12 +43,26 @@ class DevDocument extends Document {
     return (
       <Html lang="fr">
         <Head>
-          {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/222331452/Designers */}
+          <link rel="stylesheet" href="/resources/css/dsfr.min.css" />
           <link
-            href="/resources/css/all.min.css"
-            rel="stylesheet"
-            type="text/css"
-          ></link>
+            rel="apple-touch-icon"
+            href="/resources/favicons/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            href="/resources/favicons/favicon.svg"
+            type="image/svg+xml"
+          />
+          <link
+            rel="shortcut icon"
+            href="/resources/favicons/favicon.ico"
+            type="image/x-icon"
+          />
+          <link
+            rel="manifest"
+            href="/resources/favicons/manifest.webmanifest"
+            cross-origin="use-credentials"
+          />
         </Head>
         <body>
           <Main />
@@ -67,34 +81,27 @@ class StaticDocument extends Document {
       <Html lang="fr">
         <CustomHead>
           {/* Standard Meta */}
-          {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/222331452/Designers */}
+          {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/223019574/D+veloppeurs */}
+          <link rel="stylesheet" href="/resources/css/dsfr.min.css" />
           <link
-            href="/resources/css/all.min.css"
-            rel="stylesheet"
-            type="text/css"
-          ></link>
+            rel="apple-touch-icon"
+            href="/resources/favicons/apple-touch-icon.png"
+          />
           <link
-            rel="preload"
-            href="/resources/fonts/Marianne-Bold.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          ></link>
+            rel="icon"
+            href="/resources/favicons/favicon.svg"
+            type="image/svg+xml"
+          />
           <link
-            rel="preload"
-            href="/resources/fonts/Marianne-Regular_Italic.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          ></link>
+            rel="shortcut icon"
+            href="/resources/favicons/favicon.ico"
+            type="image/x-icon"
+          />
           <link
-            rel="preload"
-            href="/resources/fonts/Marianne-Regular.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          ></link>
-          <link rel="icon" href="/favicon.ico" />
+            rel="manifest"
+            href="/resources/favicons/manifest.webmanifest"
+            cross-origin="use-credentials"
+          />
         </CustomHead>
 
         <body>

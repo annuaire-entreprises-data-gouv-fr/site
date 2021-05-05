@@ -75,6 +75,9 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
         cursor: pointer !important;
         box-shadow: none;
       }
+      .social-media span a:after {
+        display: none;
+      }
       .social-media {
         color: #000091;
         margin: 0 0 12px 0;
