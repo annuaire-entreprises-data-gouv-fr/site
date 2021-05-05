@@ -1,20 +1,20 @@
 import React from 'react';
 
 const Footer = () => (
-  <footer className="rf-footer" role="contentinfo" id="footer">
-    <div className="rf-container">
-      <div className="rf-footer__body">
-        <div className="rf-footer__brand">
-          <a className="rf-logo" href="#" title="république française">
-            <span className="rf-logo__title">
+  <footer className="fr-footer" role="contentinfo" id="footer">
+    <div className="fr-container">
+      <div className="fr-footer__body">
+        <div className="fr-footer__brand">
+          <a className="fr-logo" href="#" title="république française">
+            <span className="fr-logo__title">
               république
               <br />
               française
             </span>
           </a>
         </div>
-        <div className="rf-footer__content">
-          <p className="rf-footer__content-desc">
+        <div className="fr-footer__content">
+          <p className="fr-footer__content-desc">
             Ceci est un service de l’Etat français 🇫🇷, crée par{' '}
             <a
               href="https://etalab.gouv.fr"
@@ -41,10 +41,10 @@ const Footer = () => (
             </a>{' '}
             en 2020.
           </p>
-          <ul className="rf-footer__content-list">
-            <li className="rf-footer__content-item">
+          <ul className="fr-footer__content-list">
+            <li className="fr-footer__content-item">
               <a
-                className="rf-footer__content-link"
+                className="fr-footer__content-link"
                 href="https://etalab.gouv.fr"
                 target="_blank"
                 rel="noreferrer noopener"
@@ -52,9 +52,9 @@ const Footer = () => (
                 etalab.gouv.fr
               </a>
             </li>
-            <li className="rf-footer__content-item">
+            <li className="fr-footer__content-item">
               <a
-                className="rf-footer__content-link"
+                className="fr-footer__content-link"
                 href="https://entreprises.gouv.fr"
                 target="_blank"
                 rel="noreferrer noopener"
@@ -62,9 +62,9 @@ const Footer = () => (
                 entreprises.gouv.fr
               </a>
             </li>
-            <li className="rf-footer__content-item">
+            <li className="fr-footer__content-item">
               <a
-                className="rf-footer__content-link"
+                className="fr-footer__content-link"
                 target="_blank"
                 rel="noreferrer noopener"
                 href="https://service-public.fr"
@@ -72,9 +72,9 @@ const Footer = () => (
                 service-public.fr
               </a>
             </li>
-            <li className="rf-footer__content-item">
+            <li className="fr-footer__content-item">
               <a
-                className="rf-footer__content-link"
+                className="fr-footer__content-link"
                 target="_blank"
                 rel="noreferrer noopener"
                 href="https://mon-entreprise.fr"
@@ -82,9 +82,9 @@ const Footer = () => (
                 mon-entreprise.fr
               </a>
             </li>
-            <li className="rf-footer__content-item">
+            <li className="fr-footer__content-item">
               <a
-                className="rf-footer__content-link"
+                className="fr-footer__content-link"
                 target="_blank"
                 rel="noreferrer noopener"
                 href="https://data.gouv.fr"
@@ -95,11 +95,11 @@ const Footer = () => (
           </ul>
         </div>
       </div>
-      <div className="rf-footer__bottom">
-        <ul className="rf-footer__bottom-list">
-          <li className="rf-footer__bottom-item">
+      <div className="fr-footer__bottom">
+        <ul className="fr-footer__bottom-list">
+          <li className="fr-footer__bottom-item">
             <a
-              className="rf-footer__bottom-link"
+              className="fr-footer__bottom-link"
               target="_blank"
               rel="noreferrer noopener"
               href="https://github.com/etalab/annuaire-entreprises.data.gouv.fr"
@@ -107,42 +107,50 @@ const Footer = () => (
               Code source
             </a>
           </li>
-          <li className="rf-footer__bottom-item">
-            <a className="rf-footer__bottom-link" href="/vie-privee">
+          <li className="fr-footer__bottom-item">
+            <a className="fr-footer__bottom-link" href="/vie-privee">
               Vie privée & cookies
             </a>
           </li>
-          <li className="rf-footer__bottom-item">
+          <li className="fr-footer__bottom-item">
             <a
-              className="rf-footer__bottom-link"
+              className="fr-footer__bottom-link"
               href="https://www.notion.so/7c6f3a06b4444a328201c2f6aea9f27f?v=331f2aaec05f44df9b3d7fd286c956a5"
             >
               Historique des modifications
             </a>
           </li>
-          <li className="rf-footer__bottom-item">
-            <a className="rf-footer__bottom-link" href="/accessibilite">
+          <li className="fr-footer__bottom-item">
+            <a className="fr-footer__bottom-link" href="/accessibilite">
               Accessibilité : non-conforme
             </a>
           </li>
-          {/* <li className="rf-footer__bottom-item">
-              <a className="rf-footer__bottom-link" href="#">
+          {/* <li className="fr-footer__bottom-item">
+              <a className="fr-footer__bottom-link" href="#">
                 Accessibilité: partiellement conforme
               </a>
             </li> */}
-          {/* <li className="rf-footer__bottom-item">
-              <a className="rf-footer__bottom-link" href="#">
+          {/* <li className="fr-footer__bottom-item">
+              <a className="fr-footer__bottom-link" href="#">
                 Mentions légales
               </a>
             </li>
-            <li className="rf-footer__bottom-item">
-              <a className="rf-footer__bottom-link" href="#">
+            <li className="fr-footer__bottom-item">
+              <a className="fr-footer__bottom-link" href="#">
                 Gestion des cookies
               </a>
             </li> */}
         </ul>
-        <div className="rf-footer__bottom-copy">
-          © République Française 2021
+        <div className="fr-footer__bottom-copy">
+          <p>
+            Sauf mention contraire, tous les textes de ce site sont sous{' '}
+            <a
+              href="https://github.com/etalab/licence-ouverte/blob/master/LO.md"
+              target="_blank"
+            >
+              licence etalab-2.0
+            </a>
+          </p>
         </div>
       </div>
     </div>

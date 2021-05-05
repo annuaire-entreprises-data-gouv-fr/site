@@ -9,7 +9,8 @@ export const Question: React.FC<{}> = () => (
     >
       <a className="dont-apply-link-style" href="/faq">
         <div>
-          <span>Une question</span> ?
+          <span>Une question</span>{' '}
+          <span className="fr-fi-question-fill"></span>
         </div>
       </a>
     </div>

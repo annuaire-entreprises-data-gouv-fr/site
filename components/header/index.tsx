@@ -3,12 +3,12 @@ import SearchBar from '../search-bar';
 
 const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
   <>
-    <header className="rf-header">
-      <div className="rf-container">
-        <div className="rf-header__body">
-          <div className="rf-header__brand">
-            <a className="rf-logo" href="/" title="République Française">
-              <span className="rf-logo__title">
+    {/* <header className="fr-header">
+      <div className="fr-header__body">
+        <div className="fr-container">
+          <div className="fr-header__brand">
+            <a className="fr-logo" href="/" title="République Française">
+              <span className="fr-logo__title">
                 République
                 <br />
                 française
@@ -20,21 +20,21 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
             className="annuaire-logo"
             title="L’Annuaire des Entreprises"
           >
-            <div className="rf-header__sub">L’Annuaire des Entreprises</div>
+            <div className="fr-header__sub">L’Annuaire des Entreprises</div>
           </a>
-          <div className="not-rf-search">
+          <div className="not-fr-search">
             <SearchBar
               defaultValue={currentSearchTerm}
               url={map ? '/rechercher/carte' : '/rechercher'}
             />
           </div>
-          <div className="rf-header__tools">
-            <div className="rf-shortcuts">
-              <ul className="rf-shortcuts__list">
-                <li className="rf-shortcuts__item">
+          <div className="fr-header__tools">
+            <div className="fr-shortcuts">
+              <ul className="fr-shortcuts__list">
+                <li className="fr-shortcuts__item">
                   <a
                     href="/comment-ca-marche"
-                    className="rf-link"
+                    className="fr-link"
                     target="_self"
                   >
                     À propos
@@ -45,45 +45,83 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
           </div>
         </div>
       </div>
+    </header> */}
+
+    <header role="banner" className="fr-header">
+      <div className="fr-header__body">
+        <div className="fr-container">
+          <div className="fr-header__body-row">
+            <div className="fr-header__brand">
+              <div className="fr-header__brand-top">
+                <div className="fr-header__logo">
+                  <a href="/" title="République française">
+                    <p className="fr-logo">
+                      République
+                      <br />
+                      française
+                    </p>
+                  </a>
+                </div>
+                <div className="annuaire-logo">
+                  <a href="/" title="L’Annuaire des Entreprises">
+                    <div>L’Annuaire des Entreprises</div>
+                  </a>
+                </div>
+                <div className="fr-header__navbar"></div>
+              </div>
+              <div className="not-fr-search">
+                <SearchBar
+                  defaultValue={currentSearchTerm}
+                  url={map ? '/rechercher/carte' : '/rechercher'}
+                />
+              </div>
+            </div>
+            <div className="fr-header__tools">
+              <div className="fr-header__tools-links">
+                <ul className="fr-links-group">
+                  <li>
+                    <a
+                      className="fr-link fr-fi-information-line"
+                      href="/comment-ca-marche"
+                    >
+                      À propos
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
 
     <style global jsx>{`
-      .rf-header__brand {
-        flex-grow: 0;
+      div.annuaire-logo {
+        order: 2;
       }
-      .not-rf-search {
-        flex-grow: 1;
-        height: 100%;
-        margin: 5px;
-      }
-      .rf-header .rf-search-bar {
-        margin: 0;
-      }
-      .rf-header__tools {
-        flex-grow: 0;
-      }
-      div.rf-header__sub {
+      div.annuaire-logo > a > div {
         max-width: 80px;
         margin: 0;
-        margin-right: 15px;
+        margin-right: 30px;
         flex-grow: 0;
-        font-size: 1.05rem;
-        line-height: 1.3rem;
+        font-size: 1.1rem;
+        line-height: 1.4rem;
         font-family: serif;
         font-weight: bold;
         font-style: italic;
       }
 
-      a.annuaire-logo {
-        box-shadow: none;
+      .not-fr-search {
+        width: 420px;
+        max-width: 100%;
+        flex-grow: 1;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 500px) {
-        .not-rf-search {
-          flex-grow: 0;
-          margin: auto;
-          margin-top: 10px;
-          width: calc(100% - 20px);
+      @media only screen and (min-width: 1px) and (max-width: 991px) {
+        .not-fr-search {
+          width: 100%;
+          margin: 0.75rem;
+          margin-top: 0;
         }
       }
     `}</style>
@@ -92,38 +130,44 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
 
 const Header = () => (
   <>
-    <header className="rf-header">
-      <div className="rf-container">
-        <div className="rf-header__body">
-          <div className="rf-header__brand">
-            <a className="rf-logo" href="#" title="République française">
-              <span className="rf-logo__title">
-                République
-                <br />
-                française
-              </span>
-            </a>
-          </div>
-          <div className="rf-header__tools">
-            <div className="rf-shortcuts">
-              <ul className="rf-shortcuts__list">
-                <li className="rf-shortcuts__item">
-                  <a
-                    href="/comment-ca-marche"
-                    className="rf-link"
-                    target="_self"
-                  >
-                    À propos
+    <header role="banner" className="fr-header">
+      <div className="fr-header__body">
+        <div className="fr-container">
+          <div className="fr-header__body-row">
+            <div className="fr-header__brand fr-enlarge-link">
+              <div className="fr-header__brand-top">
+                <div className="fr-header__logo">
+                  <a href="/" title="République française">
+                    <p className="fr-logo">
+                      République
+                      <br />
+                      française
+                    </p>
                   </a>
-                </li>
-              </ul>
+                </div>
+                <div className="fr-header__navbar"></div>
+              </div>
+            </div>
+            <div className="fr-header__tools">
+              <div className="fr-header__tools-links">
+                <ul className="fr-links-group">
+                  <li>
+                    <a
+                      className="fr-link fr-fi-information-line"
+                      href="/comment-ca-marche"
+                    >
+                      À propos
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </header>
     <style jsx>{`
-      header.rf-header {
+      header.fr-header {
         box-shadow: none !important;
       }
     `}</style>

@@ -43,12 +43,27 @@ class DevDocument extends Document {
     return (
       <Html lang="fr">
         <Head>
-          {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/222331452/Designers */}
+          <link rel="stylesheet" href="/resources/css/dsfr.min.css" />
+
           <link
-            href="/resources/css/all.min.css"
-            rel="stylesheet"
-            type="text/css"
-          ></link>
+            rel="apple-touch-icon"
+            href="/resources/favicons/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            href="/resources/favicons/favicon.svg"
+            type="image/svg+xml"
+          />
+          <link
+            rel="shortcut icon"
+            href="/resources/favicons/favicon.ico"
+            type="image/x-icon"
+          />
+          <link
+            rel="manifest"
+            href="/resources/favicons/manifest.webmanifest"
+            cross-origin="use-credentials"
+          />
         </Head>
         <body>
           <Main />
@@ -67,7 +82,34 @@ class StaticDocument extends Document {
       <Html lang="fr">
         <CustomHead>
           {/* Standard Meta */}
-          {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/222331452/Designers */}
+          {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/223019574/D+veloppeurs */}
+          <meta char-set="utf-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+          <link rel="stylesheet" href="/resources/css/dsfr.min.css" />
+
+          <link
+            rel="apple-touch-icon"
+            href="/resources/favicons/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            href="/resources/favicons/favicon.svg"
+            type="image/svg+xml"
+          />
+          <link
+            rel="shortcut icon"
+            href="/resources/favicons/favicon.ico"
+            type="image/x-icon"
+          />
+          <link
+            rel="manifest"
+            href="/resources/favicons/manifest.webmanifest"
+            cross-origin="use-credentials"
+          />
+          {/*
           <link
             href="/resources/css/all.min.css"
             rel="stylesheet"
@@ -94,7 +136,7 @@ class StaticDocument extends Document {
             type="font/woff2"
             crossOrigin="anonymous"
           ></link>
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/favicon.ico" /> */}
         </CustomHead>
 
         <body>

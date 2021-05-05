@@ -9,12 +9,12 @@ const SearchBar = ({
   return (
     <>
       <form action={url} id="search-wrapper" method="get">
-        <div className="rf-search-bar" id="search-input--lg">
-          <label className="rf-label" htmlFor="search-input-input">
+        <div className="fr-search-bar" id="search-input--lg">
+          <label className="fr-label" htmlFor="search-input-input">
             Rechercher une entreprise
           </label>
           <input
-            className="rf-input"
+            className="fr-input"
             placeholder={placeholder}
             defaultValue={defaultValue}
             type="search"
@@ -25,7 +25,7 @@ const SearchBar = ({
             autoFocus={autoFocus}
           />
           <button
-            className="rf-btn"
+            className="fr-btn"
             title="Rechercher"
             value="submit"
             type="submit"
@@ -41,6 +41,7 @@ const SearchBar = ({
         }
         input[type='search'] {
           width: 100%;
+          font-family: 'Marianne', sans-serif;
         }
       `}</style>
     </>
