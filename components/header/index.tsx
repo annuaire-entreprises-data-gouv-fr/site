@@ -3,50 +3,6 @@ import SearchBar from '../search-bar';
 
 const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
   <>
-    {/* <header className="fr-header">
-      <div className="fr-header__body">
-        <div className="fr-container">
-          <div className="fr-header__brand">
-            <a className="fr-logo" href="/" title="République Française">
-              <span className="fr-logo__title">
-                République
-                <br />
-                française
-              </span>
-            </a>
-          </div>
-          <a
-            href="/"
-            className="annuaire-logo"
-            title="L’Annuaire des Entreprises"
-          >
-            <div className="fr-header__sub">L’Annuaire des Entreprises</div>
-          </a>
-          <div className="not-fr-search">
-            <SearchBar
-              defaultValue={currentSearchTerm}
-              url={map ? '/rechercher/carte' : '/rechercher'}
-            />
-          </div>
-          <div className="fr-header__tools">
-            <div className="fr-shortcuts">
-              <ul className="fr-shortcuts__list">
-                <li className="fr-shortcuts__item">
-                  <a
-                    href="/comment-ca-marche"
-                    className="fr-link"
-                    target="_self"
-                  >
-                    À propos
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header> */}
-
     <header role="banner" className="fr-header">
       <div className="fr-header__body">
         <div className="fr-container">
