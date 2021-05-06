@@ -21,7 +21,7 @@ interface IProps {
 const StatusPage: React.FC<IProps> = ({ monitors }) => (
   <Page
     small={true}
-    title="Page de statut des API partenaires de l'Annuaire des Entreprises"
+    title="Statut des API partenaires de l'Annuaire des Entreprises"
     canonical={`https://annuaire-entreprises.data.gouv.fr/administration}`}
   >
     <div className="content-container">

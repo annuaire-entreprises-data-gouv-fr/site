@@ -23,12 +23,14 @@ export const getUptimeLabel = (ratio: IRatio) => {
     return 'Aucune donnée sur cette période.';
   }
   const uptimeNum = parseFloat(ratio.ratio);
-  if (uptimeNum >= 98) {
-    return `${ratio.ratio}% : haute disponibilité`;
-  } else if (uptimeNum >= 90) {
-    return `${ratio.ratio}% : mauvaise disponibilité`; // Orange
+  if (uptimeNum >= 99.99) {
+    return 'service en état de fonctionnement';
+  } else if (uptimeNum >= 99) {
+    return `${ratio.ratio}% : service faiblement perturbé`;
+  } else if (uptimeNum >= 95) {
+    return `${ratio.ratio}% : service très perturbé`; // Orange
   }
-  return `${ratio.ratio}% : très mauvaise disponibilité`;
+  return `${ratio.ratio}% : service extrêmement perturbé`;
 };
 
 const Metric: React.FC<{
