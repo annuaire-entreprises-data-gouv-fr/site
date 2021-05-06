@@ -125,6 +125,11 @@ const Footer = () => (
               Accessibilité : non-conforme
             </a>
           </li>
+          <li className="fr-footer__bottom-item">
+            <a className="fr-footer__bottom-link" href="/administration">
+              Statut des API utilisées
+            </a>
+          </li>
           {/* <li className="fr-footer__bottom-item">
               <a className="fr-footer__bottom-link" href="#">
                 Accessibilité: partiellement conforme

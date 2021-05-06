@@ -1,101 +1,70 @@
 import React from 'react';
-import { IMonitoring } from '../../models/monitoring';
+import { IMonitoring, IRatio } from '../../models/monitoring';
 import InformationTooltip from '../information-tooltip';
 import { Section } from '../section';
 
-export const getUptimeColor = (uptime: number) => {
-  if (uptime >= 98) {
-    return '#088635';
-  } else if (uptime >= 90) {
-    return '#a85a20'; // Orange
+export const getUptimeColor = (ratio: IRatio) => {
+  if (ratio.label === 'black') {
+    return '#ddd';
   }
-  return '#d00';
-};
-export const getUptimeLabel = (uptime: number) => {
-  if (uptime >= 98) {
-    return 'haute disponibilité';
-  } else if (uptime >= 90) {
-    return 'disponibilité médiocre'; // Orange
-  }
-  return 'très mauvaise disponibilité';
-};
+  const uptimeNum = parseFloat(ratio.ratio);
 
-export const getResponseTimeColor = (responseTime: number) => {
-  if (responseTime < 300) {
-    return '#088635';
-  } else if (responseTime < 600) {
-    return '#a85a20'; // Orange
+  if (uptimeNum >= 99.99) {
+    return '#3bd671';
+  } else if (uptimeNum >= 99) {
+    return '#c2e34b;';
+  } else if (uptimeNum >= 95) {
+    return '#f29030'; // Orange
   }
-  return '#d00';
+  return '#df484a';
 };
-
-export const getResponseTimeLabel = (responseTime: number) => {
-  if (responseTime < 300) {
-    return 'rapidement 🐎';
-  } else if (responseTime < 600) {
-    return 'lentement 🐢'; // Orange
+export const getUptimeLabel = (ratio: IRatio) => {
+  if (ratio.label === 'black') {
+    return 'Aucune donnée sur cette période.';
   }
-  return 'très lentement 🐌';
+  const uptimeNum = parseFloat(ratio.ratio);
+  if (uptimeNum >= 98) {
+    return `${ratio.ratio}% : haute disponibilité`;
+  } else if (uptimeNum >= 90) {
+    return `${ratio.ratio}% : mauvaise disponibilité`; // Orange
+  }
+  return `${ratio.ratio}% : très mauvaise disponibilité`;
 };
 
 const Metric: React.FC<{
-  uptime: number;
-  responseTime: number;
-  series?: number[];
-}> = ({ uptime, responseTime, series }) => (
+  series: IRatio[];
+}> = ({ series }) => (
   <div className="wrapper">
-    <div className="metrics">
-      <div>
-        Disponiblité moyenne :{' '}
-        <InformationTooltip
-          label={`Ce service fait preuve d’une ${getUptimeLabel(uptime)}`}
-        >
-          <b style={{ color: getUptimeColor(uptime) }}>{uptime} %</b>
-        </InformationTooltip>
-      </div>
-      <div>
-        Temps moyen de réponse :{' '}
-        <InformationTooltip
-          label={`Ce service répond ${getResponseTimeLabel(responseTime)}`}
-        >
-          <b style={{ color: getResponseTimeColor(responseTime) }}>
-            {responseTime} ms
-          </b>
-        </InformationTooltip>
-      </div>
-    </div>
     <div className="uptime-chart">
-      {series ? (
-        series.map((serie, index) => (
-          <div
-            className="serie"
-            key={index}
-            style={{ backgroundColor: getUptimeColor(serie) }}
-          ></div>
-        ))
-      ) : (
-        <div className="serie layout-center">
-          <i>Pas de graphe sur cette période</i>
+      {series.map((serie, index) => (
+        <div className={`serie ${index < 59 ? 'hide-mobile' : ''}`} key={index}>
+          <InformationTooltip
+            label={
+              <>
+                <b>{serie.date}</b>
+                <br />
+                {getUptimeLabel(serie)}
+              </>
+            }
+          >
+            <div
+              className="serie"
+              style={{
+                backgroundColor: getUptimeColor(serie),
+              }}
+            ></div>
+          </InformationTooltip>
         </div>
-      )}
+      ))}
     </div>
     <style jsx>{`
       .wrapper {
         display: flex;
         flex-direction: row;
       }
-      .metrics {
-        flex-shrink: 0;
-        padding-right: 30px;
-        font-size: 0.9rem;
-      }
-      i {
-        font-size: 0.9rem;
-      }
       .uptime-chart {
         flex-grow: 1;
         display: flex;
-        background-color: #f3f3f3;
         margin: 0;
       }
       .uptime-chart > div {
@@ -104,10 +73,15 @@ const Metric: React.FC<{
 
       .serie {
         height: 40px;
-        border-left: 0.5px solid #fff;
+        width: 100%;
+        margin: 0 1.5px;
+        border-radius: 4px;
       }
 
       @media only screen and (min-width: 1px) and (max-width: 600px) {
+        .hide-mobile {
+          display: none;
+        }
         .wrapper {
           flex-direction: column;
         }
@@ -121,9 +95,8 @@ const Metric: React.FC<{
 
 const AdministrationApiMonitoring: React.FC<IMonitoring> = ({
   isOnline,
-  responseTime,
-  uptime,
   series,
+  uptime,
 }) => (
   <Section
     title={`Disponibilité : l’API est actuellement ${
@@ -142,49 +115,27 @@ const AdministrationApiMonitoring: React.FC<IMonitoring> = ({
       </p>
     )}
     <div className="metrics-title">
-      <h3>Historique</h3>
-      <div className="tabbed">
-        <input type="radio" id="tab1" name="css-tabs2" defaultChecked />
-        <input type="radio" id="tab2" name="css-tabs2" />
-        <input type="radio" id="tab3" name="css-tabs2" />
-        <input type="radio" id="tab4" name="css-tabs2" />
-        <ul className="tabs">
-          <li className="tab">
-            <label htmlFor="tab1">aujourd'hui</label>
-          </li>
-          <li className="tab">
-            <label htmlFor="tab2">7 jours</label>
-          </li>
-          <li className="tab">
-            <label htmlFor="tab3">30 jours</label>
-          </li>
-          <li className="tab">
-            <label htmlFor="tab4">1 an</label>
-          </li>
-        </ul>
-        <div className="tab-content layout-center">
-          <Metric uptime={uptime.day} responseTime={responseTime.day} />
+      <h3>Historique des trois derniers mois</h3>
+      <br />
+      <Metric series={series} />
+      <h3>Statistiques moyennes</h3>
+      <br />
+      <div className="mean-stats">
+        <div>
+          <b>24h</b>
+          <span>{uptime.day}%</span>
         </div>
-        <div className="tab-content layout-center">
-          <Metric
-            uptime={uptime.week}
-            responseTime={responseTime.week}
-            series={series.week}
-          />
+        <div>
+          <b>7 jours</b>
+          <span>{uptime.week}%</span>
         </div>
-        <div className="tab-content layout-center">
-          <Metric
-            uptime={uptime.month}
-            responseTime={responseTime.month}
-            series={series.month}
-          />
+        <div>
+          <b>30 jours</b>
+          <span>{uptime.month}%</span>
         </div>
-        <div className="tab-content layout-center">
-          <Metric
-            uptime={uptime.year}
-            responseTime={responseTime.year}
-            series={series.year}
-          />
+        <div>
+          <b>3 mois</b>
+          <span>{uptime.trimester}%</span>
         </div>
       </div>
     </div>
@@ -197,83 +148,22 @@ const AdministrationApiMonitoring: React.FC<IMonitoring> = ({
       .metrics-title h3 {
         margin-bottom: 0;
       }
-      .tabbed {
-        margin: 0;
-        margin-top: -25px;
-        padding-bottom: 16px;
-      }
-
-      .tabbed [type='radio'] {
-        /* hiding the inputs */
-        display: none;
-      }
-
-      .tabs {
+      .mean-stats {
         display: flex;
-        align-items: stretch;
-        justify-content: flex-end;
-        list-style: none;
-        padding: 0;
-        margin-top: 0;
+        justify-content: space-between;
       }
-      .tab > label {
-        display: block;
-        font-size: 0.9rem;
-        font-weight: bold;
-        margin: 0 5px;
-        color: #000091;
-        cursor: pointer;
+      .mean-stats > div {
+        width: 24%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
-
-      .tab:hover label {
-        border-top-color: #333;
-        text-decoration: underline;
-        color: #333;
+      .mean-stats > div b {
+        font-size: 1.1rem;
+        line-height: 2.2rem;
       }
-
-      .tab-content {
-        display: none;
-        color: #777;
-      }
-
-      /* As we cannot replace the numbers with variables or calls to element properties, the number of this selector parts is our tab count limit */
-      .tabbed
-        [type='radio']:nth-of-type(1):checked
-        ~ .tabs
-        .tab:nth-of-type(1)
-        label,
-      .tabbed
-        [type='radio']:nth-of-type(2):checked
-        ~ .tabs
-        .tab:nth-of-type(2)
-        label,
-      .tabbed
-        [type='radio']:nth-of-type(3):checked
-        ~ .tabs
-        .tab:nth-of-type(3)
-        label,
-      .tabbed
-        [type='radio']:nth-of-type(4):checked
-        ~ .tabs
-        .tab:nth-of-type(4)
-        label {
-        color: #222;
-        text-decoration: underline;
-      }
-
-      .tabbed
-        [type='radio']:nth-of-type(1):checked
-        ~ .tab-content:nth-of-type(1),
-      .tabbed
-        [type='radio']:nth-of-type(2):checked
-        ~ .tab-content:nth-of-type(2),
-      .tabbed
-        [type='radio']:nth-of-type(3):checked
-        ~ .tab-content:nth-of-type(3),
-      .tabbed
-        [type='radio']:nth-of-type(4):checked
-        ~ .tab-content:nth-of-type(4) {
-        display: block;
+      .mean-stats > div:not(:last-of-type) {
+        border-right: 2px solid #dfdff1;
       }
     `}</style>
   </Section>

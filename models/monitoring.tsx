@@ -1,42 +1,23 @@
-import { HttpNotFound } from '../clients/exceptions';
-import { fetchApiMonitoringSummary } from '../clients/monitoring';
-import { isApiOnline } from '../clients/test';
+import { fetchApiMonitoring } from '../clients/monitoring';
 
+export interface IRatio {
+  ratio: string;
+  label: 'success' | 'warning' | 'black';
+  date?: string;
+}
 export interface IMonitoring {
   isOnline: boolean;
-  slug: string;
-  responseTime: {
-    all: number;
-    day: number;
-    week: number;
-    month: number;
-    year: number;
-  };
   uptime: {
-    all: number;
-    day: number;
-    week: number;
-    month: number;
-    year: number;
+    day: string;
+    week: string;
+    month: string;
+    trimester: string;
   };
-  series: {
-    week: number[];
-    month: number[];
-    year: number[];
-  };
+  series: IRatio[];
 }
 
 const getMonitoring = async (apiSlug: string): Promise<IMonitoring> => {
-  const summary = await fetchApiMonitoringSummary();
-
-  const monitoring = summary.find(
-    (apiMonitoring) => apiMonitoring.slug === apiSlug
-  );
-
-  if (monitoring === undefined) {
-    throw new HttpNotFound(404, `${apiSlug} monitoring not found`);
-  }
-  monitoring.isOnline = await isApiOnline(apiSlug);
+  const monitoring = await fetchApiMonitoring(apiSlug);
   return monitoring;
 };
 

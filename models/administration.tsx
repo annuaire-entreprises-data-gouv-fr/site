@@ -57,13 +57,13 @@ sont pas à jour ? 👉 [Contactez l’INPI pour demander une correction](https:
     dataGouvLink:
       'https://www.data.gouv.fr/fr/organizations/institut-national-de-la-propriete-industrielle-inpi/',
     apiGouvLink: 'https://api.gouv.fr/les-api/api-rncs',
-    monitoringSlug: 'api-rncs',
+    monitoringSlug: '?m=787859523&_=1620298045458',
   },
   [EAdministration.INSEE]: {
     slug: 'insee',
     short: 'INSEE',
     long:
-      'Institut national de la Statistique et des Études Économiques (INSEE)',
+      'Institut National de la Statistique et des Études Économiques (INSEE)',
     adress: '',
     loc: [],
     description: `## Qu'est-ce que l’INSEE ?
@@ -113,7 +113,7 @@ Si ce n'est pas suffisant, [contactez directement l'INSEE](https://www.insee.fr/
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/',
     apiGouvLink: 'https://api.gouv.fr/les-api/sirene_v3',
-    monitoringSlug: 'api-sirene-insee',
+    monitoringSlug: '?m=787859514&_=1620298094400',
   },
   [EAdministration.DILA]: {
     slug: 'dila',
@@ -166,7 +166,7 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
     contact: 'https://travail-emploi.gouv.fr/ministere/article/nous-contacter',
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/',
-    monitoringSlug: 'api-conventions-collectives',
+    monitoringSlug: '?m=787859521&_=1620297978592',
   },
   [EAdministration.MI]: {
     slug: 'mi',
@@ -196,7 +196,7 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
     apiGouvLink: 'https://api.gouv.fr/les-api/api_rna',
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/',
-    monitoringSlug: '',
+    monitoringSlug: '?m=788061105&_=1620298012257',
   },
   [EAdministration.CMAFRANCE]: {
     slug: 'cma-france',
@@ -219,6 +219,6 @@ sont pas à jour ? 👉 [Contactez la Chambre des Métiers et de l'Artisanat de 
         `,
     contact: 'http://annuairecma.artisanat.fr/',
     apiGouvLink: 'https://api.gouv.fr/les-api/api_rnm',
-    monitoringSlug: 'api-rnm',
+    monitoringSlug: '?m=787859525&_=1620298073800',
   },
 };
