@@ -15,30 +15,33 @@ import { getUniteLegaleInsee } from '../clients/sirene-insee/siren';
 import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
 import {
   hasSirenFormat,
-  isLuhnValid,
   isSiren,
-  throwSirenExceptions,
+  Siren,
 } from '../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../utils/sentry';
+
+const getUniteLegaleFromSlug = async (
+  slug: string,
+  page = 1
+): Promise<IUniteLegale> => {
+  if (!isSiren(slug)) {
+    if (!hasSirenFormat(slug)) {
+      throw new NotASirenError(slug);
+    } else {
+      throw new NotLuhnValidSirenError(slug);
+    }
+  }
+  return getUniteLegale(slug, page);
+};
 
 /**
  * Fetch Unite Legale from Etalab SIRENE API with a fallback on INSEE's API
  * @param siren
  */
 const getUniteLegale = async (
-  siren: string,
+  siren: Siren,
   page = 1
 ): Promise<IUniteLegale> => {
-  if (!hasSirenFormat(siren)) {
-    throw new NotASirenError(siren);
-  }
-
-  if (!isLuhnValid(siren)) {
-    throw new NotLuhnValidSirenError(siren);
-  }
-
-  isSiren(siren);
-
   try {
     // INSEE does not provide enough information to paginate etablissement list
     // so we doubled our API call with sirene ouverte to get Etablissements.
@@ -102,4 +105,4 @@ const getUniteLegale = async (
   }
 };
 
-export default getUniteLegale;
+export { getUniteLegaleFromSlug };

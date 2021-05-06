@@ -6,7 +6,7 @@ import {
   getImmatriculationRNM,
   getImmatriculationRNCS,
 } from './immatriculation';
-import getUniteLegale from './unite-legale';
+import { getUniteLegaleFromSlug } from './unite-legale';
 
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;
@@ -15,7 +15,7 @@ export interface IJustificatifs {
 }
 
 const getJustificatifs = async (slug: string): Promise<IJustificatifs> => {
-  const uniteLegale = await getUniteLegale(slug);
+  const uniteLegale = await getUniteLegaleFromSlug(slug);
 
   const justificatifs = await Promise.all([
     getImmatriculationRNM(uniteLegale.siren),

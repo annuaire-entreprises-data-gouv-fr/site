@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { IEtablissement } from '../../models';
 import MapEtablissement from '../../components/mapbox/map-etablissement';
-import { getEtablissement } from '../../models/etablissement';
+import { getEtablissementFromSlug } from '../../models/etablissement';
 import {
   redirectIfIssueWithSiren,
   redirectIfIssueWithSiret,
@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siret = context.params.slug as string;
 
   try {
-    const etablissement = await getEtablissement(siret);
+    const etablissement = await getEtablissementFromSlug(siret);
     return {
       props: {
         etablissement,

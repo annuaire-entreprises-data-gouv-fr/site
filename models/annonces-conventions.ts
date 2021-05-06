@@ -3,7 +3,7 @@ import getConventionCollectives, {
   IConventionCollective,
 } from './convention-collective';
 
-import getUniteLegale from './unite-legale';
+import { getUniteLegaleFromSlug } from './unite-legale';
 
 export interface IConventions {
   uniteLegale: IUniteLegale;
@@ -11,7 +11,7 @@ export interface IConventions {
 }
 
 const getConventions = async (slug: string): Promise<IConventions> => {
-  const uniteLegale = await getUniteLegale(slug);
+  const uniteLegale = await getUniteLegaleFromSlug(slug);
 
   const conventions = uniteLegale.estDiffusible
     ? await getConventionCollectives(uniteLegale as IUniteLegale)
