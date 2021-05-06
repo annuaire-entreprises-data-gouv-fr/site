@@ -1,3 +1,4 @@
+import { getAssociation } from './rna';
 import { fetchRncsImmatriculation } from './rncs';
 import { fetchRnmImmatriculation } from './rnm';
 import { getUniteLegaleInsee } from './sirene-insee/siren';
@@ -22,6 +23,8 @@ const testApi = async (slug: string | string[]) => {
       return await getUniteLegaleInsee('880878145');
     case 'api-sirene-donnees-ouvertes':
       return await getUniteLegaleSireneOuverte('880878145');
+    case 'api-rna':
+      return await getAssociation('W551000280');
     default:
       throw new APISlugNotFound(404, `API ping ${slug} not found`);
   }
