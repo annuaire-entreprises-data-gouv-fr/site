@@ -20,6 +20,7 @@ export interface IAdministrationMetaData {
   description: string;
   contact: string;
   apiGouvLink?: string;
+  apiName?: string;
   dataGouvLink?: string;
 }
 
@@ -57,6 +58,7 @@ sont pas à jour ? 👉 [Contactez l’INPI pour demander une correction](https:
     dataGouvLink:
       'https://www.data.gouv.fr/fr/organizations/institut-national-de-la-propriete-industrielle-inpi/',
     apiGouvLink: 'https://api.gouv.fr/les-api/api-rncs',
+    apiName: 'API Registre National du Commerce et des Sociétés',
     monitoringSlug: '?m=787859523&_=1620298045458',
   },
   [EAdministration.INSEE]: {
@@ -113,6 +115,7 @@ Si ce n'est pas suffisant, [contactez directement l'INSEE](https://www.insee.fr/
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/',
     apiGouvLink: 'https://api.gouv.fr/les-api/sirene_v3',
+    apiName: 'API Répertoire Sirene',
     monitoringSlug: '?m=787859514&_=1620298094400',
   },
   [EAdministration.DILA]: {
@@ -144,7 +147,6 @@ sont pas à jour ? 👉 [Contactez la DILA pour demander une correction](https:/
     contact:
       'https://www.dila.premier-ministre.gouv.fr/services/api/boamp/contact',
     dataGouvLink: 'https://www.data.gouv.fr/fr/organizations/premier-ministre/',
-    apiGouvLink: 'https://api.gouv.fr/producteurs/dila',
     monitoringSlug: '',
   },
   [EAdministration.METI]: {
@@ -166,6 +168,7 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
     contact: 'https://travail-emploi.gouv.fr/ministere/article/nous-contacter',
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/',
+    apiName: 'API Conventions Collectives',
     monitoringSlug: '?m=787859521&_=1620297978592',
   },
   [EAdministration.MI]: {
@@ -196,29 +199,31 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
     apiGouvLink: 'https://api.gouv.fr/les-api/api_rna',
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/',
+    apiName: 'API Répertoire National des Associations',
     monitoringSlug: '?m=788061105&_=1620298012257',
   },
   [EAdministration.CMAFRANCE]: {
     slug: 'cma-france',
     short: 'CMA-France',
-    long: 'Chambre des Métiers et de l’Artisnat (CMA-France)',
+    long: 'Chambre des Métiers et de l’Artisanat (CMA-France)',
     adress: '',
     loc: [],
     description: `## Qu'est-ce que CMA-France ?
 
-CMA-France est l’organisme fédérateur des Chambres des Métiers et de l'Artisanat en France.
+    CMA-France est l’organisme fédérateur des Chambres des Métiers et de l'Artisanat en France.
 
-## Quelles sont les données des entreprises publiées par CMA-France ?
+    ## Quelles sont les données des entreprises publiées par CMA-France ?
 
-Dans le cadre de sa mission, CMA-France a la charge du Répertoire National des Métiers, qui recense tous les artisans.
+    Dans le cadre de sa mission, CMA-France a la charge du Répertoire National des Métiers, qui recense tous les artisans.
 
-## Corriger une erreur dans les données
+    ## Corriger une erreur dans les données
 
-Vous avez repéré une erreur ? Les données de cette administration ne
-sont pas à jour ? 👉 [Contactez la Chambre des Métiers et de l'Artisanat de votre département pour demander une correction](http://annuairecma.artisanat.fr/).
-        `,
+    Vous avez repéré une erreur ? Les données de cette administration ne
+    sont pas à jour ? 👉 [Contactez la Chambre des Métiers et de l'Artisanat de votre département pour demander une correction](http://annuairecma.artisanat.fr/).
+    `,
     contact: 'http://annuairecma.artisanat.fr/',
     apiGouvLink: 'https://api.gouv.fr/les-api/api_rnm',
+    apiName: 'API Répertoire National des Métiers',
     monitoringSlug: '?m=787859525&_=1620298073800',
   },
 };

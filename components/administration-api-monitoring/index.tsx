@@ -95,6 +95,19 @@ const Metric: React.FC<{
   </div>
 );
 
+const RobotTooltip = () => (
+  <>
+    <InformationTooltip label="Ces données sont obtenues via un robot qui interroge la source de données toutes les 5 minutes">
+      <span className="fr-fi-information-line"></span>
+    </InformationTooltip>
+    <style jsx>{`
+      span.fr-fi-information-line:before {
+        font-size: 1rem !important;
+      }
+    `}</style>
+  </>
+);
+
 const AdministrationApiMonitoring: React.FC<IMonitoring> = ({
   isOnline,
   series,
@@ -117,7 +130,9 @@ const AdministrationApiMonitoring: React.FC<IMonitoring> = ({
       </p>
     )}
     <div className="metrics-title">
-      <h3>Historique des trois derniers mois</h3>
+      <h3>
+        Historique de disponibilité <RobotTooltip />
+      </h3>
       <br />
       <Metric series={series} />
       <h3>Statistiques moyennes</h3>

@@ -9,9 +9,10 @@ import getMonitoring, { IMonitoring } from '../../models/monitoring';
 import AdministrationApiMonitoring from '../../components/administration-api-monitoring';
 
 interface IMonitoringWithName extends IMonitoring {
-  long: string;
+  short: string;
   apiGouvLink?: string;
   slug: string;
+  apiName: string;
 }
 
 interface IProps {
@@ -27,9 +28,10 @@ const StatusPage: React.FC<IProps> = ({ monitors }) => (
     <div className="content-container">
       <h1>Statut des API partenaires</h1>
       {monitors.map((monitor) => (
-        <div key={monitor.long}>
+        <div key={monitor.short}>
           <h2>
-            API <a href={`/administration/${monitor.slug}`}>{monitor.long}</a>
+            {monitor.apiName} (
+            <a href={`/administration/${monitor.slug}`}>{monitor.short}</a>)
           </h2>
           <AdministrationApiMonitoring {...monitor} />
           {monitor.apiGouvLink && (
@@ -72,9 +74,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             new Promise(async (resolve) =>
               resolve({
                 ...(await getMonitoring(admin.monitoringSlug)),
-                long: admin.long,
+                short: admin.short,
                 apiGouvLink: admin.apiGouvLink || null,
                 slug: admin.slug,
+                apiName: admin.apiName,
               })
             )
         )
