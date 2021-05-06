@@ -2,11 +2,6 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { NotASirenError, SirenNotFoundError } from '../../models';
-import {
-  redirectServerError,
-  redirectSirenIntrouvable,
-} from '../../utils/redirect';
 import { Section } from '../../components/section';
 import Title, { FICHE } from '../../components/title-section';
 import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
@@ -14,6 +9,7 @@ import Immatriculations from '../../components/immatriculations';
 import AvisSituation from '../../components/avis-situation';
 import { EAdministration } from '../../models/administration';
 import { formatDate } from '../../utils/helpers/formatting';
+import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -92,11 +88,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: justificatifs,
     };
   } catch (e) {
-    if (e instanceof NotASirenError || e instanceof SirenNotFoundError) {
-      redirectSirenIntrouvable(context.res, siren);
-    } else {
-      redirectServerError(context.res, e.message);
-    }
+    redirectIfIssueWithSiren(context.res, e, siren);
     return { props: {} };
   }
 };

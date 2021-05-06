@@ -1,6 +1,30 @@
 /**
+ * Siren and siret types
+ */
+type Brand<K, T> = K & { __brand: T };
+
+export type Siren = Brand<string, 'Siren'>;
+export type Siret = Brand<string, 'Siren'>;
+
+export const isSiren = (slug: string): slug is Siren => {
+  if (!hasSirenFormat(slug) || !isLuhnValid(slug)) {
+    return false;
+  }
+  return true;
+};
+
+export const isSiret = (slug: string): slug is Siren => {
+  if (!hasSiretFormat(slug) || !isLuhnValid(slug)) {
+    return false;
+  }
+  return true;
+};
+
+/**
  * Siren and siret follow the luhn checksum algorithm except La Poste
  * https://fr.wikipedia.org/wiki/Formule_de_Luhn
+ * ex : 889742876 00009 dos not follow Luhn's rule
+ *
  * @param siret
  * @returns
  */
@@ -18,7 +42,7 @@ const luhnChecksum = (str: string) => {
     }, 0);
 };
 
-const isLuhnValid = (str: string) => {
+export const isLuhnValid = (str: string) => {
   // La poste siren and siret are the only exceptions to Luhn's formula
   if (str.indexOf('356000000') === 0) {
     return true;
@@ -26,23 +50,13 @@ const isLuhnValid = (str: string) => {
   return luhnChecksum(str) % 10 == 0;
 };
 
-export const isSirenOrSiret = (str: string) => {
-  return isSiren(str) || isSiret(str);
+export const isLikelyASiretOrSiren = (slug: string) => {
+  return hasSirenFormat(slug) || hasSiretFormat(slug);
 };
 
-export const isSiret = (str: string) => {
-  return lookLikeSiret(str) && isLuhnValid(str);
-};
+export const hasSirenFormat = (str: string) => !!str.match(/^\d{9}$/g);
 
-export const isSiren = (str: string) => {
-  return lookLikeSiren(str) && isLuhnValid(str);
-};
-
-export const lookLikeSiren = (str: string) => !!str.match(/^\d{9}$/g);
-export const lookLikeSiret = (str: string) => !!str.match(/^\d{14}$/g);
-
-export const lookLikeSirenOrSiret = (str: string) =>
-  lookLikeSiren(str) || lookLikeSiret(str);
+export const hasSiretFormat = (str: string) => !!str.match(/^\d{14}$/g);
 
 export const formatSiret = (siret = '') => {
   return siret.replace(/(\d{3})/g, '$1 ').replace(/(\s)(?=(\d{2})$)/g, '');

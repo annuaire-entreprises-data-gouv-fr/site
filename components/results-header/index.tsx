@@ -1,6 +1,5 @@
 import React from 'react';
 import { pin } from '../icon';
-import { SiretOrSirenInvalid } from '../siret-or-siren-invalid';
 
 const MapOrListSwitch = ({ isMap = false, searchTerm = '' }) => (
   <>
@@ -37,7 +36,6 @@ const ResultsHeader = ({
             Nous vous suggérons de vérifier l’orthographe du nom, du SIRET, ou
             de l'adresse que vous avez utilisé.
           </p>
-          <SiretOrSirenInvalid searchTerm={searchTerm} />
         </div>
       )}
       <style jsx>{`

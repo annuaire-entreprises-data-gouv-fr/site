@@ -3,17 +3,16 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import PageCounter from '../../components/results-page-counter';
-import {
-  redirectIfSiretOrSiren,
-  redirectServerError,
-} from '../../utils/redirect';
+import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
+
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import ResultsHeader from '../../components/results-header';
 import search, { ISearchResults } from '../../models/search';
 import ResultsList from '../../components/results-list';
 import MapResults from '../../components/mapbox/map-results';
-import { IsASirenException } from '../../models';
+import { IsLikelyASirenOrSiretException } from '../../models';
 import LogSearchTermInPiwik from '../../components/clients-script/log-search-term-in-piwik';
+import { redirectServerError } from '../../utils/redirects';
 
 interface IProps extends ISearchResults {
   searchTerm: string;
@@ -129,7 +128,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e) {
-    if (e instanceof IsASirenException) {
+    if (e instanceof IsLikelyASirenOrSiretException) {
       redirectIfSiretOrSiren(context.res, e.message);
     } else {
       redirectServerError(context.res, e.message);

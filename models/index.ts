@@ -107,30 +107,63 @@ export const createDefaultUniteLegale = (siren: string): IUniteLegale => {
 };
 
 /** COMMON ERRORS */
+
+/**
+ * This is a valid siren but it was not found
+ */
 export class SirenNotFoundError extends Error {
   constructor(public message: string) {
     super();
   }
 }
+
+/**
+ * This look like a siren but does not respect Luhn formula
+ */
+export class NotLuhnValidSirenError extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+/**
+ * This does not even look like a siren
+ */
 export class NotASirenError extends Error {
   constructor(public message: string) {
     super();
   }
 }
 
+/**
+ * This is a valid siret but it was not found
+ */
 export class SiretNotFoundError extends Error {
   constructor(public message: string) {
     super();
   }
 }
+
+/**
+ * This look like a siret but does not respect Luhn formula
+ */
+export class NotLuhnValidSiretError extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+/**
+ * This does not even look like a siret
+ */
 export class NotASiretError extends Error {
-  constructor() {
+  constructor(public message: string) {
     super();
   }
 }
 
 /** COMMON EXCEPTIONS */
-export class IsASirenException extends Error {
+export class IsLikelyASirenOrSiretException extends Error {
   constructor(public message: string) {
     super();
   }

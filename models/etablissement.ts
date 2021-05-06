@@ -1,39 +1,45 @@
 import {
   IEtablissement,
   IUniteLegale,
-  NotASiretError,
   SiretNotFoundError,
   createDefaultEtablissement,
+  NotASiretError,
+  NotLuhnValidSiretError,
 } from '.';
 import {
   HttpNotFound,
   HttpTooManyRequests,
   HttpAuthentificationFailure,
-  HttpServerError,
 } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
 import { getEtablissementInsee } from '../clients/sirene-insee/siret';
 import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
 import {
   extractSirenFromSiret,
+  hasSiretFormat,
   isSiret,
+  Siret,
 } from '../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../utils/sentry';
-import getUniteLegale from './unite-legale';
+import { getUniteLegaleFromSlug } from './unite-legale';
 
-export interface IEtablissementWithUniteLegale {
-  etablissement: IEtablissement;
-  uniteLegale: IUniteLegale;
-}
+const getEtablissementFromSlug = async (
+  slug: string
+): Promise<IEtablissement> => {
+  if (!isSiret(slug)) {
+    if (!hasSiretFormat(slug)) {
+      throw new NotASiretError(slug);
+    } else {
+      throw new NotLuhnValidSiretError(slug);
+    }
+  }
+  return getEtablissement(slug);
+};
 
 /**
  * Download Etablissement
  */
-const getEtablissement = async (siret: string): Promise<IEtablissement> => {
-  if (!isSiret(siret)) {
-    throw new NotASiretError();
-  }
-
+const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
   try {
     return await getEtablissementInsee(siret);
   } catch (e) {
@@ -75,17 +81,21 @@ const getEtablissement = async (siret: string): Promise<IEtablissement> => {
   }
 };
 
+export interface IEtablissementWithUniteLegale {
+  etablissement: IEtablissement;
+  uniteLegale: IUniteLegale;
+}
+
 /**
  * Download Etablissement and the corresponding UniteLegale
  */
 const getEtablissementWithUniteLegale = async (
   siret: string
 ): Promise<IEtablissementWithUniteLegale> => {
-  const etablissement = await getEtablissement(siret);
-  //@ts-ignore
-  const uniteLegale = await getUniteLegale(etablissement.siren);
+  const etablissement = await getEtablissementFromSlug(siret);
+  const uniteLegale = await getUniteLegaleFromSlug(etablissement.siren);
 
   return { etablissement, uniteLegale };
 };
 
-export { getEtablissementWithUniteLegale, getEtablissement };
+export { getEtablissementWithUniteLegale, getEtablissementFromSlug };
