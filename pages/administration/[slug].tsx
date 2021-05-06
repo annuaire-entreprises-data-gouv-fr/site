@@ -36,6 +36,8 @@ const AdministrationPage: React.FC<IProps> = ({
     canonical={`https://annuaire-entreprises.data.gouv.fr/administration/${slug}`}
   >
     <div className="content-container">
+      <br />
+      <a href="/administration">← Toutes les administrations partenaires</a>
       <h1>{long}</h1>
       <ReactMarkdown children={description} />
       {(apiGouvLink || dataGouvLink) && (

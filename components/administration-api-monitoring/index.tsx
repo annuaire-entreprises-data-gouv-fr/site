@@ -12,7 +12,7 @@ export const getUptimeColor = (ratio: IRatio) => {
   if (uptimeNum >= 99.99) {
     return '#3bd671';
   } else if (uptimeNum >= 99) {
-    return '#c2e34b;';
+    return '#c2e34b';
   } else if (uptimeNum >= 95) {
     return '#f29030'; // Orange
   }
