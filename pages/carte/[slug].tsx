@@ -4,11 +4,9 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { IEtablissement } from '../../models';
 import MapEtablissement from '../../components/mapbox/map-etablissement';
-import { getEtablissementFromSlug } from '../../models/etablissement';
-import {
-  redirectIfIssueWithSiren,
-  redirectIfIssueWithSiret,
-} from '../../utils/redirects/routers';
+import { getEtablissementWithLatLongFromSlug } from '../../models/etablissement';
+import { TitleEtablissement } from '../../components/title-etablissement-section';
+import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -22,15 +20,36 @@ const EtablissementMapPage: React.FC<IProps> = ({ etablissement }) => (
     title="Carte"
     canonical={`https://annuaire-entreprises.data.gouv.fr/carte/${etablissement.siret}`}
   >
-    <div className="map-container">
-      <MapEtablissement etablissement={etablissement} />
+    <div className="fr-container">
+      <br />
+      <a href={`/entreprise/${extractSirenFromSiret(etablissement.siret)}`}>
+        ← Retour
+      </a>
+      {etablissement.latitude && etablissement.longitude ? (
+        <>
+          <TitleEtablissement
+            etablissement={etablissement}
+            title="Géolocalisation de l’établissement"
+          />
+          <br />
+          <div className="map-container">
+            <MapEtablissement etablissement={etablissement} />
+          </div>
+          <br />
+        </>
+      ) : (
+        <p>
+          <br />
+          <i>La géolocalisation de cet établissement est introuvable.</i>
+        </p>
+      )}
     </div>
     <style jsx>
       {`
         .map-container {
           display: flex;
           flex-direction: row-reverse;
-          height: calc(100vh - 180px);
+          height: 600px;
         }
       `}
     </style>
@@ -42,17 +61,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siret = context.params.slug as string;
 
   try {
-    const etablissement = await getEtablissementFromSlug(siret);
+    const etablissement = await getEtablissementWithLatLongFromSlug(siret);
     return {
       props: {
         etablissement,
       },
     };
   } catch (e) {
-    redirectIfIssueWithSiret(context.res, e, siret);
-    redirectIfIssueWithSiren(context.res, e, siret);
-
-    return { props: {} };
+    return { props: { etablissement: { siret } } };
   }
 };
 

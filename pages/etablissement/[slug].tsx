@@ -6,15 +6,12 @@ import { IEtablissement, IUniteLegale } from '../../models';
 import EtablissementSection from '../../components/etablissement-section';
 import Title, { FICHE } from '../../components/title-section';
 import { NonDiffusibleSection } from '../../components/non-diffusible';
-import { getEtablissementWithUniteLegale } from '../../models/etablissement';
-import { Tag } from '../../components/tag';
-import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import IsActiveTag from '../../components/is-active-tag';
-import { capitalize } from '../../utils/helpers/formatting';
+import { getEtablissementWithUniteLegaleFromSlug } from '../../models/etablissement';
 import {
   redirectIfIssueWithSiren,
   redirectIfIssueWithSiret,
 } from '../../utils/redirects/routers';
+import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -31,17 +28,10 @@ const EtablissementPage: React.FC<IProps> = ({
   >
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
-      <div className="sub-title">
-        <h2>
-          Information sur un établissement de{' '}
-          <a href={`/entreprise/${uniteLegale.siren}`}>
-            {capitalize(uniteLegale.nomComplet)}
-          </a>
-        </h2>
-        <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
-        {etablissement.estSiege && <Tag>siège social</Tag>}
-        <IsActiveTag isActive={etablissement.estActif} />
-      </div>
+      <TitleEtablissementWithDenomination
+        uniteLegale={uniteLegale}
+        etablissement={etablissement}
+      />
       <br />
       {uniteLegale.estDiffusible ? (
         <EtablissementSection
@@ -61,11 +51,6 @@ const EtablissementPage: React.FC<IProps> = ({
       .content-container {
         margin: 20px auto 40px;
       }
-      .sub-title > span {
-        color: #666;
-        font-variant: small-caps;
-        font-size: 1.1rem;
-      }
     `}</style>
   </Page>
 );
@@ -75,7 +60,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siret = context.params.slug as string;
 
   try {
-    const etablissementWithUniteLegale = await getEtablissementWithUniteLegale(
+    const etablissementWithUniteLegale = await getEtablissementWithUniteLegaleFromSlug(
       siret
     );
 

@@ -89,13 +89,30 @@ export interface IEtablissementWithUniteLegale {
 /**
  * Download Etablissement and the corresponding UniteLegale
  */
-const getEtablissementWithUniteLegale = async (
-  siret: string
+const getEtablissementWithUniteLegaleFromSlug = async (
+  slug: string
 ): Promise<IEtablissementWithUniteLegale> => {
-  const etablissement = await getEtablissementFromSlug(siret);
+  const etablissement = await getEtablissementFromSlug(slug);
   const uniteLegale = await getUniteLegaleFromSlug(etablissement.siren);
 
   return { etablissement, uniteLegale };
 };
 
-export { getEtablissementWithUniteLegale, getEtablissementFromSlug };
+/**
+ * Download Etablissement and the Latitude/longitude
+ */
+const getEtablissementWithLatLongFromSlug = async (
+  slug: string
+): Promise<IEtablissement> => {
+  try {
+    return await getEtablissementSireneOuverte(slug);
+  } catch (e) {
+    throw new SiretNotFoundError(slug);
+  }
+};
+
+export {
+  getEtablissementWithUniteLegaleFromSlug,
+  getEtablissementWithLatLongFromSlug,
+  getEtablissementFromSlug,
+};
