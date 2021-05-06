@@ -12,7 +12,7 @@ const QuestionBlock: React.FC<PropsWithChildren<{ title: string }>> = ({
   const id = Math.random().toString(16).substring(7);
   return (
     <>
-      <div className="content-container container">
+      <div className="container">
         <input
           type="checkbox"
           value="selected"
@@ -32,6 +32,7 @@ const QuestionBlock: React.FC<PropsWithChildren<{ title: string }>> = ({
         border-radius:2px;
         padding:15px;
         display:block;
+        margin-bottom: 15px;
       }
 
       label {
@@ -202,7 +203,7 @@ const FAQ: React.FC<{}> = () => (
             </ul>
           </p>
         </QuestionBlock>
-        <QuestionBlock title="Je ne trouve pas la réponse a ma question">
+        <QuestionBlock title="Je ne trouve pas la réponse à ma question">
           <p>Vous pouvez nous poser une question directement :</p>
           <div className="layout-center">
             <ButtonLink href={constants.links.mailto} alt>

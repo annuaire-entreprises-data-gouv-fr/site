@@ -10,8 +10,19 @@ const About: React.FC = () => {
         <h2>Qui a développé ce site ?</h2>
         <p>
           Ce site a été développé et est maintenu par{' '}
-          <a href="https://etalab.gouv.fr">Etalab</a> et la{' '}
-          <a href="https://entreprises.gouv.fr">
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://etalab.gouv.fr"
+          >
+            Etalab
+          </a>{' '}
+          et la{' '}
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://entreprises.gouv.fr"
+          >
             Direction Générale des Entreprises (DGE)
           </a>
           .
@@ -30,13 +41,23 @@ const About: React.FC = () => {
           <p>
             <b>NB :</b> toutes les données ouvertes (open data) de
             l'administration sont accessibles sur{' '}
-            <a href="https://data.gouv.fr">data.gouv.fr</a>
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://data.gouv.fr"
+            >
+              data.gouv.fr
+            </a>
           </p>
           <h3>Les fiches entreprises et etablissements</h3>
           <p>
             Les informations comme le SIRET, l'adresse du siège social, la
             dénomination sont issues de la{' '}
-            <a href="https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/">
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/"
+            >
               base Sirene des entreprises
             </a>{' '}
             publiée par l'INSEE, et accessible à tous.
@@ -44,11 +65,19 @@ const About: React.FC = () => {
           <h3>Les fiches d'immatriculation</h3>
           <p>
             Les informations de la fiche d’immatriculation sont issues du{' '}
-            <a href="http://data.inpi.fr/">
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="http://data.inpi.fr/"
+            >
               Registre National du Commerce et des Sociétés (RNCS)
             </a>{' '}
             ou du{' '}
-            <a href="https://rnm.artisanat.fr/">
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://rnm.artisanat.fr/"
+            >
               Répertoire National des Métiers (RNM)
             </a>{' '}
             (dans le cas des entreprises artisanales).
@@ -60,33 +89,85 @@ const About: React.FC = () => {
           </p>
           <ul>
             <li>
-              <a href="https://api.gouv.fr/guides/quelle-api-sirene">
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://api.gouv.fr/guides/quelle-api-sirene"
+              >
                 API Sirene données ouvertes
               </a>{' '}
               : qui donne accès à la base Sirene des entreprises de l'
-              <a href="https://www.insee.fr/fr/accueil">INSEE</a>
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://www.insee.fr/fr/accueil"
+              >
+                INSEE
+              </a>
             </li>
             <li>
-              {' '}
-              <a href="https://api-rnm.artisanat.fr/">
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://api.gouv.fr/les-api/api_rnm"
+              >
                 API Répertoire National des Métiers
               </a>{' '}
               : les immatriculations d'entreprises artisanales, auprès de{' '}
-              <a href="https://cma-france.fr/">CMA France</a>
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://cma-france.fr/"
+              >
+                CMA France
+              </a>
             </li>
             <li>
-              <a href="https://api.gouv.fr/les-api/api_inpi">
-                {' '}
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://api.gouv.fr/les-api/api_inpi"
+              >
                 API Registre National du Commerce et des Sociétés
               </a>{' '}
               : les immatriculations d'entreprises auprès des Greffes de
               tribunal de Commerce, centralisées par l’
-              <a href="https://www.inpi.fr/fr">INPI</a>.
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://www.inpi.fr/fr"
+              >
+                INPI
+              </a>
+              .
+            </li>
+            <li>
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://api.gouv.fr/les-api/api_rna"
+              >
+                API Répertoire National des Associations
+              </a>{' '}
+              : les informations des associations, centralisées par le{' '}
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://www.interieur.gouv.fr"
+              >
+                Ministère de l’Intérieur
+              </a>
             </li>
           </ul>
           <p>
             <b>NB :</b>Toutes les APIs du service public sont référencées sur{' '}
-            <a href="https://api.gouv.fr">api.gouv.fr</a>
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://api.gouv.fr"
+            >
+              api.gouv.fr
+            </a>
           </p>
           <h2>
             Je suis une administration, comment utiliser ces données directement
@@ -105,7 +186,11 @@ const About: React.FC = () => {
             <li>... et bien d’autres</li>
           </ul>
           <p>
-            <a href="https://api.gouv.fr/les-api/api-entreprise">
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://api.gouv.fr/les-api/api-entreprise"
+            >
               ⇢ En savoir plus sur API Entreprise
             </a>
           </p>
