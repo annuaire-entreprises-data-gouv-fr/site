@@ -118,6 +118,7 @@ const Title: React.FC<IProps> = ({
       }
       .title h1 {
         margin: 0;
+        margin-bottom: 7px;
         line-height: 2.5rem;
       }
       .title h1 > a {

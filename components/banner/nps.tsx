@@ -3,7 +3,7 @@ import React from 'react';
 export const NPSBanner: React.FC<{}> = () => (
   <>
     <div id="nps-modal" role="dialog" aria-label="Donnez-nous votre avis">
-      <div className="rf-container">
+      <div className="fr-container">
         <div
           dangerouslySetInnerHTML={{
             __html: `
@@ -34,7 +34,7 @@ export const NPSBanner: React.FC<{}> = () => (
         font-family: 'Marianne', sans-serif;
         border-bottom: 2px solid #000091;
       }
-      #nps-modal .rf-container {
+      #nps-modal .fr-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
