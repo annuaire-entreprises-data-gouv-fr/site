@@ -41,6 +41,7 @@ const Metric: React.FC<{
       {series.map((serie, index) => (
         <div className={`serie ${index < 59 ? 'hide-mobile' : ''}`} key={index}>
           <InformationTooltip
+            orientation={index < 70 ? 'left' : 'right'}
             label={
               <>
                 <b>{serie.date}</b>

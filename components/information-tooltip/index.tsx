@@ -15,9 +15,9 @@ const left = (orientation: 'left' | 'right' | 'center') => {
 const leftTriangle = (orientation: 'left' | 'right' | 'center') => {
   switch (orientation) {
     case 'right':
-      return '95%';
+      return '97%';
     case 'left':
-      return '5%';
+      return '10%';
     case 'center':
     default:
       return '50%';
