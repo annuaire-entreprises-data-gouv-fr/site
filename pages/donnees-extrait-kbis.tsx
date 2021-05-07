@@ -34,7 +34,7 @@ const ExtraitKbis: React.FC = () => {
                 rel="noreferrer noopener"
                 href="https://api.gouv.fr/guides/quelle-api-sirene"
               >
-                API Sirene données ouvertes
+                API Sirene
               </a>{' '}
               : qui donne accès à la base Sirene des entreprises de l'
               <a
