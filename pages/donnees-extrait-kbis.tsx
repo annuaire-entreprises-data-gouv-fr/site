@@ -92,10 +92,7 @@ const ExtraitKbis: React.FC = () => {
               api.gouv.fr
             </a>
           </p>
-          <h2>
-            Je suis une administration, comment utiliser ces données directement
-            dans une démarche ou un back office ?
-          </h2>
+          <h2>Accéder à des données complémentaires sur les entreprises</h2>
           <p>
             Il existe une API spéciale (nommée API Entreprise) réservée aux
             administrations et à certaines entreprises éligibles, qui permet
