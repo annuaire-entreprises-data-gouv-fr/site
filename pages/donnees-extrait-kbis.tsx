@@ -6,62 +6,26 @@ const ExtraitKbis: React.FC = () => {
   return (
     <Page small={true} title="Comment ça marche ?">
       <div className="content-container">
-        <h1>À propos des données contenues dans une extrait KBIS</h1>
+        <h1>À propos des données contenues dans un extrait KBIS</h1>
         <div>
-          <h2>Comment accéder aux données d'un extrait KBIS via API ?</h2>
+          <h2>
+            Comment accéder aux données d'un extrait KBIS via le site
+            annuaire-entreprises.data.gouv.fr
+          </h2>
           <p>
-            Toutes les informations affichées sur le site sont des informations
-            publiques, accessibles librement et gratuitement. On appelle cela
-            les données ouvertes ou l'open data.
+            Pour retrouver les informations d'immatriculation d'une entreprise,{' '}
+            <a href="/rechercher">utilisez le moteur de recherche</a> pour
+            trouver la page de l'entreprise concernée.
+            <br />
+            Une fois sur la page de l'entreprise, consultez l'onglet
+            justificatif, pour y retrouver les données d'immatriculations, soit
+            au Registre National du Commerce et des Sociétés (RNCS), soit au
+            Répertoire National des Métiers (RNM).
           </p>
+          <h2>Comment accéder aux données d'un extrait KBIS via une API</h2>
           <p>
-            <b>NB :</b> toutes les données ouvertes (open data) de
-            l'administration sont accessibles sur{' '}
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://data.gouv.fr"
-            >
-              data.gouv.fr
-            </a>
-          </p>
-          <h3>Les fiches entreprises et etablissements</h3>
-          <p>
-            Les informations comme le SIRET, l'adresse du siège social, la
-            dénomination sont issues de la{' '}
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/"
-            >
-              base Sirene des entreprises
-            </a>{' '}
-            publiée par l'INSEE, et accessible à tous.
-          </p>
-          <h3>Les fiches d'immatriculation</h3>
-          <p>
-            Les informations de la fiche d’immatriculation sont issues du{' '}
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href="http://data.inpi.fr/"
-            >
-              Registre National du Commerce et des Sociétés (RNCS)
-            </a>{' '}
-            ou du{' '}
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://rnm.artisanat.fr/"
-            >
-              Répertoire National des Métiers (RNM)
-            </a>{' '}
-            (dans le cas des entreprises artisanales).
-          </p>
-          <h2>Comment utiliser ces données dans mon site internet ?</h2>
-          <p>
-            Toutes les sources de données citées précédement sont accessibles
-            grâce à des APIs :
+            Toutes les sources de données affichées sur le site sont accessibles
+            grâce à des API. Pour en savoir plus :
           </p>
           <ul>
             <li>
@@ -116,23 +80,6 @@ const ExtraitKbis: React.FC = () => {
                 INPI
               </a>
               .
-            </li>
-            <li>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://api.gouv.fr/les-api/api_rna"
-              >
-                API Répertoire National des Associations
-              </a>{' '}
-              : les informations des associations, centralisées par le{' '}
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://www.interieur.gouv.fr"
-              >
-                Ministère de l’Intérieur
-              </a>
             </li>
           </ul>
           <p>
