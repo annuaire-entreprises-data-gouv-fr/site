@@ -34,31 +34,33 @@ export const redirectIfSiretOrSiren = (
 export const redirectIfIssueWithSiren = (
   res: ServerResponse,
   exception: any,
-  siren: string
+  siren: string,
+  path?: string
 ) => {
   if (exception instanceof SirenNotFoundError) {
-    redirectSirenIntrouvable(res, siren);
+    redirectSirenIntrouvable(res, siren, path);
   } else if (exception instanceof NotLuhnValidSirenError) {
-    redirectSirenInvalid(res, siren);
+    redirectSirenInvalid(res, siren, path);
   } else if (exception instanceof NotASirenError) {
-    redirectPageNotFound(res, siren);
+    redirectPageNotFound(res, siren, path);
   } else {
-    redirectServerError(res, exception.message);
+    redirectServerError(res, exception.message, path);
   }
 };
 
 export const redirectIfIssueWithSiret = (
   res: ServerResponse,
   exception: any,
-  siret: string
+  siret: string,
+  path?: string
 ) => {
   if (exception instanceof SiretNotFoundError) {
-    redirectSiretIntrouvable(res, siret);
+    redirectSiretIntrouvable(res, siret, path);
   } else if (exception instanceof NotLuhnValidSiretError) {
-    redirectSiretInvalid(res, siret);
+    redirectSiretInvalid(res, siret, path);
   } else if (exception instanceof NotASiretError) {
-    redirectPageNotFound(res, siret);
+    redirectPageNotFound(res, siret, path);
   } else {
-    redirectServerError(res, exception.message);
+    redirectServerError(res, exception.message, path);
   }
 };

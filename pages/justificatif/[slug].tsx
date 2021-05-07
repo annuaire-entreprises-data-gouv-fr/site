@@ -88,7 +88,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: justificatifs,
     };
   } catch (e) {
-    redirectIfIssueWithSiren(context.res, e, siren);
+    redirectIfIssueWithSiren(context.res, e, siren, context.req.url);
     return { props: {} };
   }
 };

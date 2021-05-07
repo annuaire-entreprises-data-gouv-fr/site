@@ -78,6 +78,7 @@ const AdministrationPage: React.FC<IProps> = ({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug as EAdministration;
+
   try {
     const administration = Object.values(administrationsMetaData).find(
       //@ts-ignore
@@ -95,7 +96,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (e instanceof HttpNotFound) {
       redirectPageNotFound(
         context.res,
-        `Administration ${slug} page does not exist`
+        `Administration ${slug} page does not exist`,
+        context.req.url
       );
     } else {
       redirectServerError(context.res, e);
