@@ -84,7 +84,8 @@ const getUniteLegale = async (
       // do nothing
     } else {
       logWarningInSentry(
-        `Server error in Sirene Insee, fallback on Sirene Ouverte (Etalab) ${siren}. ${e}`
+        'Server error in Sirene Insee, fallback on Sirene Ouverte (Etalab)',
+        { siren, details: e }
       );
     }
     try {
@@ -93,9 +94,10 @@ const getUniteLegale = async (
       if (e instanceof HttpNotFound) {
         // do nothing
       } else {
-        logWarningInSentry(
-          `Server error in SireneEtalab, fallback on not found. ${e}`
-        );
+        logWarningInSentry('Server error in SireneEtalab, Redirect to 404', {
+          siren,
+          details: e,
+        });
       }
 
       // Siren was not found in both API

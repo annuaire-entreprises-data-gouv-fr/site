@@ -20,7 +20,7 @@ export const DataSource: React.FC<{
         font-size: 0.7rem;
         background-color: #dfdff1;
         color: #000091;
-        padding: 2px 7px;
+        padding: 2px 10px;
         border-radius: 40px;
       }
     `}</style>
@@ -34,6 +34,7 @@ const DataSourceTooltip: React.FC<{
   <>
     <InformationTooltip
       orientation="right"
+      offsetLeftpx={20}
       label={
         <>
           <p>{dataSource.long}</p>

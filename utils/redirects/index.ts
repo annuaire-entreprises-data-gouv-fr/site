@@ -1,5 +1,5 @@
 import { ServerResponse } from 'http';
-import logErrorInSentry, { logWarningInSentry } from '../../utils/sentry';
+import logErrorInSentry, { logWarningInSentry } from '../sentry';
 
 export const redirect = (res: ServerResponse, path: string) => {
   res.writeHead(302, {
@@ -10,12 +10,12 @@ export const redirect = (res: ServerResponse, path: string) => {
 
 export const redirectPageNotFound = (res: ServerResponse, msg: string) => {
   redirect(res, '/404');
-  logWarningInSentry(`Unknown url (404) - ${msg}`);
+  logWarningInSentry('Unknown url (404)', { details: msg });
 };
 
 export const redirectServerError = (res: ServerResponse, msg: string) => {
   redirect(res, '/500');
-  logErrorInSentry(new Error(`Server Error (500) - ${msg}`));
+  logErrorInSentry(new Error('Server Error (500)'), { details: msg });
 };
 
 /**
@@ -23,12 +23,12 @@ export const redirectServerError = (res: ServerResponse, msg: string) => {
  */
 export const redirectSirenInvalid = (res: ServerResponse, siren: string) => {
   redirect(res, `/invalide/siren?q=${siren}`);
-  logWarningInSentry(`Siren ${siren} is invalid`);
+  logWarningInSentry('Siren is invalid', { siren });
 };
 
 export const redirectSiretInvalid = (res: ServerResponse, siret: string) => {
   redirect(res, `/invalide/siret?q=${siret}`);
-  logWarningInSentry(`Siret ${siret} is invalid`);
+  logWarningInSentry('Siret is invalid', { siret });
 };
 
 /**
@@ -39,7 +39,7 @@ export const redirectSirenIntrouvable = (
   siren: string
 ) => {
   redirect(res, `/introuvable/siren?q=${siren}`);
-  logWarningInSentry(`Siren ${siren} not found`);
+  logWarningInSentry('Siren not found', { siren });
 };
 
 export const redirectSiretIntrouvable = (
@@ -47,7 +47,7 @@ export const redirectSiretIntrouvable = (
   siret: string
 ) => {
   redirect(res, `/introuvable/siret?q=${siret}`);
-  logWarningInSentry(`Siret ${siret} not found`);
+  logWarningInSentry('Siret not found', { siret });
 };
 
 export default redirect;

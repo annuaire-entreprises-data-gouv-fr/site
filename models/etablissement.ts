@@ -59,7 +59,8 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
       // do nothing
     } else {
       logWarningInSentry(
-        `Server error in SireneInsee, fallback on Sirene Ouverte (Etalab) ${siret}. ${e}`
+        'Server error in SireneInsee, fallback on Sirene Ouverte (Etalab)',
+        { siret, details: e }
       );
     }
 
@@ -69,14 +70,12 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
       if (e instanceof HttpNotFound) {
         // do nothing
       } else {
-        logWarningInSentry(
-          `Server error in SireneEtalab, fallback on not found. ${e}`
-        );
+        logWarningInSentry('Server error in SireneEtalab, Redirect to 404', {
+          siret,
+          details: e,
+        });
       }
-
-      // Siren was not found in both API
-      const message = `Siret ${siret} was not found in both siren API`;
-      throw new SiretNotFoundError(message);
+      throw new SiretNotFoundError(siret);
     }
   }
 };
