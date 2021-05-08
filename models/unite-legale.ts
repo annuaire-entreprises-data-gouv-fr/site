@@ -71,7 +71,7 @@ const getUniteLegale = async (
       e instanceof HttpTooManyRequests ||
       e instanceof HttpAuthentificationFailure
     ) {
-      logWarningInSentry(e.message);
+      logWarningInSentry(e.message, { siren });
     } else if (e instanceof InseeForbiddenError) {
       // this means company is not diffusible
       const uniteLegale = createDefaultUniteLegale(siren);

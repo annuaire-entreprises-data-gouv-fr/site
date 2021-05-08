@@ -70,7 +70,7 @@ export const inseeClientGet = async (route: string) => {
   });
 
   if (response.status === 429) {
-    throw new HttpTooManyRequests(429, `Too many requests`);
+    throw new HttpTooManyRequests(429, `Too many requests in Insee`);
   }
   if (response.status === 404) {
     throw new HttpNotFound(404, `Not found`);
@@ -96,7 +96,7 @@ export const inseeClientPost = async (route: string, body: string) => {
   });
 
   if (response.status === 429) {
-    throw new HttpTooManyRequests(429, `Too many requests`);
+    throw new HttpTooManyRequests(429, `Too many requests in Insee`);
   }
   if (response.status === 404) {
     throw new HttpNotFound(404, `Not found`);
