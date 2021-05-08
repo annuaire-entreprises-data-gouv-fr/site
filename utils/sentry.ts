@@ -7,6 +7,7 @@ export interface IScope {
   details?: string;
 }
 
+// scope allows to log stuff in tags in sentry
 const getScope = (extra: IScope) => {
   const scope = new Sentry.Scope();
   Object.keys(extra).forEach((key) => {
