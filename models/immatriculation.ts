@@ -38,7 +38,10 @@ const getImmatriculationRNM = async (
       };
     }
 
-    logErrorInSentry(new Error('Error in API RNM'), { siren, details: e });
+    logErrorInSentry(new Error('Error in API RNM'), {
+      siren,
+      details: e.message,
+    });
     return {
       administration: EAdministration.CMAFRANCE,
       type: 500,
@@ -62,7 +65,10 @@ const getImmatriculationRNCS = async (
       };
     }
 
-    logErrorInSentry(new Error('Error in API RNCS'), { siren, details: e });
+    logErrorInSentry(new Error('Error in API RNCS'), {
+      siren,
+      details: e.message,
+    });
     return {
       administration: EAdministration.INPI,
       type: 500,

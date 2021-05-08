@@ -80,14 +80,13 @@ const getUniteLegale = async (
         'Les informations de cette entité ne sont pas publiques';
 
       return uniteLegale;
-    } else if (e instanceof HttpNotFound) {
-      // do nothing
-    } else {
-      logWarningInSentry(
-        'Server error in Sirene Insee, fallback on Sirene Ouverte (Etalab)',
-        { siren, details: e }
-      );
     }
+    // 404 and 500, do nothing and fallback on etalab API
+    logWarningInSentry(
+      'Server error in Sirene Insee, fallback on Sirene Ouverte (Etalab)',
+      { siren, details: e.message }
+    );
+
     try {
       return await getUniteLegaleSireneOuverte(siren, page);
     } catch (e) {
@@ -96,7 +95,7 @@ const getUniteLegale = async (
       } else {
         logWarningInSentry('Server error in SireneEtalab, Redirect to 404', {
           siren,
-          details: e,
+          details: e.message,
         });
       }
 

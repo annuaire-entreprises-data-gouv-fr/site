@@ -12,8 +12,7 @@ const getScope = (extra: IScope) => {
   const scope = new Sentry.Scope();
   Object.keys(extra).forEach((key) => {
     //@ts-ignore
-    const value = key === 'details' ? extra[key] : JSON.stringify(extra[key]);
-    scope.setTag(key, value);
+    scope.setTag(key, extra[key]);
   });
   return scope;
 };
