@@ -1,4 +1,5 @@
 import { fetchApiMonitoring } from '../clients/monitoring';
+import logErrorInSentry from '../utils/sentry';
 
 export interface IRatio {
   ratio: string;
@@ -16,9 +17,15 @@ export interface IMonitoring {
   series: IRatio[];
 }
 
-const getMonitoring = async (apiSlug: string): Promise<IMonitoring> => {
-  const monitoring = await fetchApiMonitoring(apiSlug);
-  return monitoring;
+const getMonitoring = async (apiSlug: string): Promise<IMonitoring | null> => {
+  try {
+    return await fetchApiMonitoring(apiSlug);
+  } catch (e) {
+    logErrorInSentry('Error while fecthing monitoring from uptime robot', {
+      details: e.message,
+    });
+    return null;
+  }
 };
 
 export default getMonitoring;

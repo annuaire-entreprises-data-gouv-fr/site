@@ -7,6 +7,7 @@ import { administrationsMetaData } from '../../models/administration';
 import { redirectServerError } from '../../utils/redirects';
 import getMonitoring, { IMonitoring } from '../../models/monitoring';
 import AdministrationApiMonitoring from '../../components/administration-api-monitoring';
+import { Section } from '../../components/section';
 
 interface IMonitoringWithName extends IMonitoring {
   short: string;
@@ -33,7 +34,14 @@ const StatusPage: React.FC<IProps> = ({ monitors }) => (
             {monitor.apiName} (
             <a href={`/administration/${monitor.slug}`}>{monitor.short}</a>)
           </h2>
-          <AdministrationApiMonitoring {...monitor} />
+          {monitor.series ? (
+            <AdministrationApiMonitoring {...monitor} />
+          ) : (
+            <Section title="Suivi des performances de l'API indisponible">
+              Notre service de suivi des performances est actuellement
+              hors-ligne. Nous sommes désolé pour ce dérangement.
+            </Section>
+          )}
           {monitor.apiGouvLink && (
             <i>
               <a
