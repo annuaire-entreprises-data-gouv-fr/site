@@ -210,16 +210,16 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
     loc: [],
     description: `## Qu'est-ce que CMA-France ?
 
-    CMA-France est l’organisme fédérateur des Chambres des Métiers et de l'Artisanat en France.
+CMA-France est l’organisme fédérateur des Chambres des Métiers et de l'Artisanat en France.
 
-    ## Quelles sont les données des entreprises publiées par CMA-France ?
+## Quelles sont les données des entreprises publiées par CMA-France ?
 
-    Dans le cadre de sa mission, CMA-France a la charge du Répertoire National des Métiers, qui recense tous les artisans.
+Dans le cadre de sa mission, CMA-France a la charge du Répertoire National des Métiers, qui recense tous les artisans.
 
-    ## Corriger une erreur dans les données
+## Corriger une erreur dans les données
 
-    Vous avez repéré une erreur ? Les données de cette administration ne
-    sont pas à jour ? 👉 [Contactez la Chambre des Métiers et de l'Artisanat de votre département pour demander une correction](http://annuairecma.artisanat.fr/).
+Vous avez repéré une erreur ? Les données de cette administration ne
+sont pas à jour ? 👉 [Contactez la Chambre des Métiers et de l'Artisanat de votre département pour demander une correction](http://annuairecma.artisanat.fr/).
     `,
     contact: 'http://annuairecma.artisanat.fr/',
     apiGouvLink: 'https://api.gouv.fr/les-api/api_rnm',
