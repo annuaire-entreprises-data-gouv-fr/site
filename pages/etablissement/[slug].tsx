@@ -7,10 +7,7 @@ import EtablissementSection from '../../components/etablissement-section';
 import Title, { FICHE } from '../../components/title-section';
 import { NonDiffusibleSection } from '../../components/non-diffusible';
 import { getEtablissementWithUniteLegaleFromSlug } from '../../models/etablissement';
-import {
-  redirectIfIssueWithSiren,
-  redirectIfIssueWithSiret,
-} from '../../utils/redirects/routers';
+import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
 
 interface IProps {
@@ -70,8 +67,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e) {
-    redirectIfIssueWithSiret(context.res, e, siret, context.req.url);
-    redirectIfIssueWithSiren(context.res, e, siret, context.req.url);
+    redirectIfIssueWithSiretOrSiren(context.res, e, siret, context.req.url);
     return { props: {} };
   }
 };

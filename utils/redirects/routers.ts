@@ -1,5 +1,9 @@
 import { ServerResponse } from 'http';
-import { hasSiretFormat, hasSirenFormat } from '../helpers/siren-and-siret';
+import {
+  hasSiretFormat,
+  hasSirenFormat,
+  extractSirenFromSiret,
+} from '../helpers/siren-and-siret';
 
 import {
   NotASirenError,
@@ -48,18 +52,26 @@ export const redirectIfIssueWithSiren = (
   }
 };
 
-export const redirectIfIssueWithSiret = (
+export const redirectIfIssueWithSiretOrSiren = (
   res: ServerResponse,
   exception: any,
   siret: string,
   path?: string
 ) => {
+  const siren = extractSirenFromSiret(siret || '');
+
   if (exception instanceof SiretNotFoundError) {
     redirectSiretIntrouvable(res, siret, path);
   } else if (exception instanceof NotLuhnValidSiretError) {
     redirectSiretInvalid(res, siret, path);
   } else if (exception instanceof NotASiretError) {
     redirectPageNotFound(res, siret, path);
+  } else if (exception instanceof SirenNotFoundError) {
+    redirectSirenIntrouvable(res, siren, path);
+  } else if (exception instanceof NotLuhnValidSirenError) {
+    redirectSirenInvalid(res, siren, path);
+  } else if (exception instanceof NotASirenError) {
+    redirectPageNotFound(res, siren, path);
   } else {
     redirectServerError(res, exception.message, path);
   }

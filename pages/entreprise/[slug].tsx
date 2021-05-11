@@ -14,6 +14,7 @@ import { getUniteLegaleFromSlug } from '../../models/unite-legale';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
+import { redirectServerError } from '../../utils/redirects';
 
 // const structuredData = (uniteLegale: UniteLegale) => [
 //   ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],

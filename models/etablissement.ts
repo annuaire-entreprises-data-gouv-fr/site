@@ -58,7 +58,7 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
     }
     // 404 and 500, do nothing and fallback
     logWarningInSentry(
-      'Server error in SireneInsee, fallback on Sirene Ouverte (Etalab)',
+      'Server error in Sirene Insee, fallback on Sirene Ouverte (Etalab)',
       { siret, details: e.message }
     );
 
