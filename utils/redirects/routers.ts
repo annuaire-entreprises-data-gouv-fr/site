@@ -21,6 +21,8 @@ import redirect, {
   redirectSiretIntrouvable,
   redirectSiretInvalid,
 } from '.';
+import { NextApiRequest } from 'next';
+import { IncomingMessage } from 'node:http';
 
 export const redirectIfSiretOrSiren = (
   res: ServerResponse,
@@ -35,20 +37,32 @@ export const redirectIfSiretOrSiren = (
   }
 };
 
+const getScopeFromRequest = (req: IncomingMessage | undefined) => {
+  return req
+    ? {
+        page: req.url,
+        referer: req.headers.referer,
+        browser: req.headers['user-agent'] as string,
+      }
+    : {};
+};
+
 export const redirectIfIssueWithSiren = (
   res: ServerResponse,
   exception: any,
   siren: string,
-  path?: string
+  req?: IncomingMessage
 ) => {
+  const scope = getScopeFromRequest(req);
+
   if (exception instanceof SirenNotFoundError) {
-    redirectSirenIntrouvable(res, siren, path);
+    redirectSirenIntrouvable(res, siren, scope);
   } else if (exception instanceof NotLuhnValidSirenError) {
-    redirectSirenInvalid(res, siren, path);
+    redirectSirenInvalid(res, siren, scope);
   } else if (exception instanceof NotASirenError) {
-    redirectPageNotFound(res, siren, path);
+    redirectPageNotFound(res, siren, scope);
   } else {
-    redirectServerError(res, exception.message, path);
+    redirectServerError(res, exception.message, scope);
   }
 };
 
@@ -56,23 +70,25 @@ export const redirectIfIssueWithSiretOrSiren = (
   res: ServerResponse,
   exception: any,
   siret: string,
-  path?: string
+  req?: IncomingMessage
 ) => {
   const siren = extractSirenFromSiret(siret || '');
 
+  const scope = getScopeFromRequest(req);
+
   if (exception instanceof SiretNotFoundError) {
-    redirectSiretIntrouvable(res, siret, path);
+    redirectSiretIntrouvable(res, siret, scope);
   } else if (exception instanceof NotLuhnValidSiretError) {
-    redirectSiretInvalid(res, siret, path);
+    redirectSiretInvalid(res, siret, scope);
   } else if (exception instanceof NotASiretError) {
-    redirectPageNotFound(res, siret, path);
+    redirectPageNotFound(res, siret, scope);
   } else if (exception instanceof SirenNotFoundError) {
-    redirectSirenIntrouvable(res, siren, path);
+    redirectSirenIntrouvable(res, siren, scope);
   } else if (exception instanceof NotLuhnValidSirenError) {
-    redirectSirenInvalid(res, siren, path);
+    redirectSirenInvalid(res, siren, scope);
   } else if (exception instanceof NotASirenError) {
-    redirectPageNotFound(res, siren, path);
+    redirectPageNotFound(res, siren, scope);
   } else {
-    redirectServerError(res, exception.message, path);
+    redirectServerError(res, exception.message, scope);
   }
 };

@@ -52,12 +52,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
           label="Télécharger un QR Code à inclure dans un courier ou dans un devis, pour partager cet url."
           orientation="right"
         >
-          <a
-            href={`/api/qr/${siren}`}
-            rel="noreferrer noopener"
-            target="_blank"
-            download={`QR_code_page_${siren}.jpeg`}
-          >
+          <a href={`/api/qr/${siren}`} download={`QR_code_page_${siren}.jpeg`}>
             {qrCode}
           </a>
         </InformationTooltip>

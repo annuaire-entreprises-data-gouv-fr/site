@@ -1,5 +1,5 @@
 import { ServerResponse } from 'http';
-import logErrorInSentry, { logWarningInSentry } from '../sentry';
+import logErrorInSentry, { IScope, logWarningInSentry } from '../sentry';
 
 export const redirect = (res: ServerResponse, path: string) => {
   res.writeHead(302, {
@@ -11,19 +11,22 @@ export const redirect = (res: ServerResponse, path: string) => {
 export const redirectPageNotFound = (
   res: ServerResponse,
   msg: string,
-  page?: string
+  scope?: IScope
 ) => {
   redirect(res, '/404');
-  logWarningInSentry('Unknown url (404)', { details: msg, page });
+  logWarningInSentry('Unknown url (404)', {
+    details: msg,
+    ...scope,
+  });
 };
 
 export const redirectServerError = (
   res: ServerResponse,
   msg: string,
-  page?: string
+  scope?: IScope
 ) => {
   redirect(res, '/500');
-  logErrorInSentry(new Error('Server Error (500)'), { details: msg, page });
+  logErrorInSentry(new Error('Server Error (500)'), { details: msg, ...scope });
 };
 
 /**
@@ -32,19 +35,19 @@ export const redirectServerError = (
 export const redirectSirenInvalid = (
   res: ServerResponse,
   siren: string,
-  page?: string
+  scope?: IScope
 ) => {
   redirect(res, `/invalide/siren?q=${siren}`);
-  logWarningInSentry('Siren is invalid', { siren, page });
+  logWarningInSentry('Siren is invalid', { siren, ...scope });
 };
 
 export const redirectSiretInvalid = (
   res: ServerResponse,
   siret: string,
-  page?: string
+  scope?: IScope
 ) => {
   redirect(res, `/invalide/siret?q=${siret}`);
-  logWarningInSentry('Siret is invalid', { siret, page });
+  logWarningInSentry('Siret is invalid', { siret, ...scope });
 };
 
 /**
@@ -53,19 +56,19 @@ export const redirectSiretInvalid = (
 export const redirectSirenIntrouvable = (
   res: ServerResponse,
   siren: string,
-  page?: string
+  scope?: IScope
 ) => {
   redirect(res, `/introuvable/siren?q=${siren}`);
-  logWarningInSentry('Siren not found', { siren, page });
+  logWarningInSentry('Siren not found', { siren, ...scope });
 };
 
 export const redirectSiretIntrouvable = (
   res: ServerResponse,
   siret: string,
-  page?: string
+  scope?: IScope
 ) => {
   redirect(res, `/introuvable/siret?q=${siret}`);
-  logWarningInSentry('Siret not found', { siret, page });
+  logWarningInSentry('Siret not found', { siret, ...scope });
 };
 
 export default redirect;

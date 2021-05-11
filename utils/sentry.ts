@@ -5,6 +5,8 @@ export interface IScope {
   siret?: string;
   siren?: string;
   details?: string;
+  referrer?: string;
+  browser?: string;
 }
 
 // scope allows to log stuff in tags in sentry
