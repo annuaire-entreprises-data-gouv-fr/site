@@ -40,7 +40,7 @@ const getImmatriculationRNM = async (
 
     logErrorInSentry(new Error('Error in API RNM'), {
       siren,
-      details: e.message,
+      details: JSON.stringify(e.message),
     });
     return {
       administration: EAdministration.CMAFRANCE,
@@ -67,7 +67,7 @@ const getImmatriculationRNCS = async (
 
     logErrorInSentry(new Error('Error in API RNCS'), {
       siren,
-      details: e.message,
+      details: JSON.stringify(e.message),
     });
     return {
       administration: EAdministration.INPI,
