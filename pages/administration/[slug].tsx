@@ -97,7 +97,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       redirectPageNotFound(
         context.res,
         `Administration ${slug} page does not exist`,
-        context.req.url
+        { page: context.req.url }
       );
     } else {
       redirectServerError(context.res, e);
