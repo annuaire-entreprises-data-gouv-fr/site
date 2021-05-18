@@ -32,4 +32,6 @@ jobs:
         with:
           browser: firefox
           build: npm run build
-          start: PORT=3000 npm start
+          start: npm start
+        env:
+          PORT: 3000
