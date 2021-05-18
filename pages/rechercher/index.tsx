@@ -63,7 +63,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // get params from query string
   const searchTermParam = (context.query.terme || '') as string;
   const pageParam = (context.query.page || '') as string;
-
   const page = parseIntWithDefaultValue(pageParam, 1);
 
   try {
