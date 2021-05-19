@@ -1,5 +1,7 @@
 # annuaire-entreprises.data.gouv.fr
 
+[![Tests End to End](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/test-end-to-end.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/test-end-to-end.yml)
+
 Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr)
 
 Ce site a pour vocation de mettre à disposition des citoyens et des agents les données ouvertes "Open-data" des entreprises, associations et administrations présentes dans la base SIRENE.
