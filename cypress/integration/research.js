@@ -66,14 +66,14 @@ describe('Map search results', () => {
     cy.get('.results-list').should('have.length', 1);
   });
 
-  it('shows the map marker for "Ganymede"', () => {
-    cy.visit('/rechercher/carte?terme=Ganymede');
+  // it('shows the map marker for "Ganymede"', () => {
+  //   cy.visit('/rechercher/carte?terme=Ganymede');
 
-    cy.get('.mapboxgl-marker mapboxgl-marker-anchor-center').not(
-      'have.length',
-      0
-    );
-  });
+  //   cy.get('.mapboxgl-marker mapboxgl-marker-anchor-center').not(
+  //     'have.length',
+  //     0
+  //   );
+  // });
 
   it('shows no results for "Rififi the mighty rifter"', () => {
     cy.visit('/rechercher/carte?terme=Rififi+the+mighty+rifter');
