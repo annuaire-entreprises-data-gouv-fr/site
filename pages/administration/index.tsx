@@ -39,7 +39,7 @@ const StatusPage: React.FC<IProps> = ({ monitors }) => (
           ) : (
             <Section title="Suivi des performances de l'API indisponible">
               Notre service de suivi des performances est actuellement
-              hors-ligne. Nous sommes désolé pour ce dérangement.
+              hors-ligne. Nous sommes désolés pour ce dérangement.
             </Section>
           )}
           {monitor.apiGouvLink && (

@@ -17,8 +17,8 @@ const AdministrationNotResponding: React.FC<IAPINotRespondingError> = ({
         fonctionne pas en ce moment.
         <br />
         <br />
-        Cela vient probablement d'une surcharge ponctuelle de leurs service.
-        Merci de ré-essayer plus tard. Nous sommes désolé pour le dérangement.
+        Cela vient probablement d'une surcharge ponctuelle de leurs services.
+        Merci de ré-essayer plus tard. Nous sommes désolés pour le dérangement.
         <br />
         Pour en savoir plus sur l'état du service,{' '}
         <a
