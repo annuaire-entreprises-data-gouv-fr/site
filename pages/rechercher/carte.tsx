@@ -35,28 +35,36 @@ const MapSearchResultPage: React.FC<IProps> = ({
     canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/carte"
   >
     <div className="map-container">
-      <MapResults results={results} />
-      {results && (
-        <div className="results-for-map-wrapper">
-          <div className="results-list-wrapper">
-            <div className="results-counter">
-              <ResultsHeader
-                resultCount={resultCount}
-                searchTerm={searchTerm}
+      {results ? (
+        <>
+          <MapResults results={results} />
+          <div className="results-for-map-wrapper">
+            <div className="results-list-wrapper">
+              <div className="results-counter">
+                <ResultsHeader
+                  resultCount={resultCount}
+                  searchTerm={searchTerm}
+                  currentPage={currentPage}
+                  isMap={true}
+                />
+              </div>
+              <ResultsList results={results} />
+            </div>
+            <div className="results-footer-wrapper">
+              <PageCounter
+                totalPages={pageCount}
                 currentPage={currentPage}
-                isMap={true}
+                querySuffix={`terme=${searchTerm}`}
               />
             </div>
-            <ResultsList results={results} />
           </div>
-          <div className="results-footer-wrapper">
-            <PageCounter
-              totalPages={pageCount}
-              currentPage={currentPage}
-              querySuffix={`terme=${searchTerm}`}
-            />
-          </div>
-        </div>
+        </>
+      ) : (
+        <ResultsHeader
+          resultCount={resultCount}
+          searchTerm={searchTerm}
+          currentPage={currentPage}
+        />
       )}
     </div>
 
