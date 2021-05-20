@@ -34,39 +34,37 @@ const MapSearchResultPage: React.FC<IProps> = ({
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/carte"
   >
-    <div className="map-container">
-      {results ? (
-        <>
-          <MapResults results={results} />
-          <div className="results-for-map-wrapper">
-            <div className="results-list-wrapper">
-              <div className="results-counter">
-                <ResultsHeader
-                  resultCount={resultCount}
-                  searchTerm={searchTerm}
-                  currentPage={currentPage}
-                  isMap={true}
-                />
-              </div>
-              <ResultsList results={results} />
-            </div>
-            <div className="results-footer-wrapper">
-              <PageCounter
-                totalPages={pageCount}
+    {results ? (
+      <div className="map-container">
+        <MapResults results={results} />
+        <div className="results-for-map-wrapper">
+          <div className="results-list-wrapper">
+            <div className="results-counter">
+              <ResultsHeader
+                resultCount={resultCount}
+                searchTerm={searchTerm}
                 currentPage={currentPage}
-                querySuffix={`terme=${searchTerm}`}
+                isMap={true}
               />
             </div>
+            <ResultsList results={results} />
           </div>
-        </>
-      ) : (
-        <ResultsHeader
-          resultCount={resultCount}
-          searchTerm={searchTerm}
-          currentPage={currentPage}
-        />
-      )}
-    </div>
+          <div className="results-footer-wrapper">
+            <PageCounter
+              totalPages={pageCount}
+              currentPage={currentPage}
+              querySuffix={`terme=${searchTerm}`}
+            />
+          </div>
+        </div>
+      </div>
+    ) : (
+      <ResultsHeader
+        resultCount={resultCount}
+        searchTerm={searchTerm}
+        currentPage={currentPage}
+      />
+    )}
 
     <LogSearchTermInPiwik searchTerm={searchTerm} resultCount={resultCount} />
 
