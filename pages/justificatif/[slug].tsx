@@ -62,10 +62,10 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
                     </>
                   )}
                 </>,
-                <div className="layout-left">
-                  👉&nbsp;
-                  <AvisSituation siret={uniteLegale.siege.siret} />
-                </div>,
+                <AvisSituation
+                  siret={uniteLegale.siege.siret}
+                  label="Télécharger"
+                />,
               ]
             )}
           />
