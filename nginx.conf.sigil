@@ -4,6 +4,14 @@
 {{ $listen_port := index $port_map_list 1 }}
 {{ $upstream_port := index $port_map_list 2 }}
 
+limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s;
+
+server {
+  location / {
+    limit_req zone=mylimit;
+  }
+}
+
 {{ if eq $scheme "http" }}
 server {
   listen      [{{ $.NGINX_BIND_ADDRESS_IP6 }}]:{{ $listen_port }};
