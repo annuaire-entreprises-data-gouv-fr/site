@@ -10,6 +10,11 @@ import AvisSituation from '../../components/avis-situation';
 import { EAdministration } from '../../models/administration';
 import { formatDate } from '../../utils/helpers/formatting';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
+import { FullTable } from '../../components/table/full';
+import { IEtablissement } from '../../models';
+import { formatSiret } from '../../utils/helpers/siren-and-siret';
+import { Tag } from '../../components/tag';
+import IsActiveTag from '../../components/is-active-tag';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -23,6 +28,10 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
   >
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.JUSTIFICATIFS} />
+      <Immatriculations
+        immatriculationRNM={immatriculationRNM}
+        immatriculationRNCS={immatriculationRNCS}
+      />
       {uniteLegale.estDiffusible && (
         <Section
           title="Avis de situation INSEE"
@@ -30,19 +39,39 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
           sourceLastUpdatedAt={formatDate(uniteLegale.dateDerniereMiseAJour)}
         >
           <div className="description">
-            Le siège social de cette entité possède un avis de situation au
-            répertoire Sirene des entreprises.
+            Chaque établissement immatriculé par l'INSEE au répertoire Sirene
+            des entreprises possède un avis de situation. C'est notamment le cas
+            du siège social de l'unité légale.
           </div>
-          <div className="layout-center">
-            👉&nbsp;
-            <AvisSituation siret={uniteLegale.siege.siret} />
-          </div>
+          <FullTable
+            head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
+            body={uniteLegale.etablissements.map(
+              (etablissement: IEtablissement) => [
+                <a href={`/etablissement/${etablissement.siret}`}>
+                  {formatSiret(etablissement.siret)}
+                </a>,
+                etablissement.adresse,
+                <>
+                  {!uniteLegale.estDiffusible ? (
+                    <Tag>non-diffusible</Tag>
+                  ) : (
+                    <>
+                      {etablissement.estSiege && <Tag>siège social</Tag>}
+                      {!etablissement.estActif && (
+                        <IsActiveTag isActive={etablissement.estActif} />
+                      )}
+                    </>
+                  )}
+                </>,
+                <div className="layout-left">
+                  👉&nbsp;
+                  <AvisSituation siret={uniteLegale.siege.siret} />
+                </div>,
+              ]
+            )}
+          />
         </Section>
       )}
-      <Immatriculations
-        immatriculationRNM={immatriculationRNM}
-        immatriculationRNCS={immatriculationRNCS}
-      />
     </div>
     <style jsx>{`
       .separator {
