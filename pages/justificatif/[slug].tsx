@@ -40,8 +40,7 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
         >
           <div className="description">
             Chaque établissement immatriculé par l'INSEE au répertoire Sirene
-            des entreprises possède un avis de situation. C'est notamment le cas
-            du siège social de l'unité légale.
+            des entreprises possède un avis de situation.
           </div>
           <FullTable
             head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
