@@ -6,6 +6,8 @@ Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuair
 
 Ce site a pour vocation de mettre à disposition des citoyens et des agents les données ouvertes "Open-data" des entreprises, associations et administrations présentes dans la base SIRENE.
 
+Le moteur de recherche utilise une API dédiée dont le code est [disponible ici.](https://github.com/etalab/api-annuaire-entreprises).
+
 ## Statut
 
 **Statut du site :**
@@ -45,8 +47,6 @@ export PORT=3000
 npm run build && npm run start
 
 ```
-
-**NB**: le code de l'API est [disponible ici.](https://github.com/etalab/api-annuaire-entreprises)
 
 ## Licence
 
