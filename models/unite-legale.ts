@@ -71,7 +71,7 @@ const getUniteLegale = async (
       e instanceof HttpTooManyRequests ||
       e instanceof HttpAuthentificationFailure
     ) {
-      logWarningInSentry(e.message, { siren });
+      // no additionnal log
     } else if (e instanceof InseeForbiddenError) {
       // this means company is not diffusible
       const uniteLegale = createDefaultUniteLegale(siren);
@@ -81,6 +81,7 @@ const getUniteLegale = async (
 
       return uniteLegale;
     }
+
     // 404 and 500, do nothing and fallback on etalab API
     logWarningInSentry(
       'Server error in Sirene Insee, fallback on Sirene Ouverte (Etalab)',
