@@ -2,6 +2,9 @@
   "name": "personnes-morales",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "13.x"
+  },
   "scripts": {
     "sitemap": "node ./node-scripts/generate.js",
     "dev": "NODE_ENV=development next dev",
