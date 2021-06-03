@@ -28,10 +28,30 @@ export class InseeForbiddenError extends Error {
   }
 }
 
-export const inseeAuth = async () => {
+/**
+ * Can choose between two different set of credentials in case first is rate limited
+ * */
+const getCredentials = (useFallbackToken: boolean) => {
+  if (useFallbackToken) {
+    return {
+      clientId: process.env.INSEE_CLIENT_ID_FALLBACK,
+      clientSecret: process.env.INSEE_CLIENT_SECRET_FALLBACK,
+    };
+  }
+  return {
+    clientId: process.env.INSEE_CLIENT_ID,
+    clientSecret: process.env.INSEE_CLIENT_SECRET,
+  };
+};
+
+/**
+ * Calls insee authent route
+ * @param useFallbackToken
+ * @returns
+ */
+const inseeAuth = async (useFallbackToken = false) => {
   try {
-    const clientId = process.env.INSEE_CLIENT_ID;
-    const clientSecret = process.env.INSEE_CLIENT_SECRET;
+    const { clientId, clientSecret } = getCredentials(useFallbackToken);
     const response = await fetchWithTimeout(routes.sireneInsee.auth, {
       method: 'POST',
       body:
@@ -59,10 +79,15 @@ export const inseeAuth = async () => {
   }
 };
 
-export const inseeClientGet = async (route: string) => {
-  const token = await inseeAuth();
+export const inseeClientWrapper = async (
+  route: string,
+  options?: RequestInit,
+  useFallbackToken?: boolean
+) => {
+  const token = await inseeAuth(useFallbackToken);
 
   const response = await fetchWithTimeout(route, {
+    ...options,
     headers: {
       Authorization: token.token_type + ' ' + token.access_token,
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -83,28 +108,21 @@ export const inseeClientGet = async (route: string) => {
   return response;
 };
 
-export const inseeClientPost = async (route: string, body: string) => {
-  const token = await inseeAuth();
+export const inseeClientGet = async (
+  route: string,
+  useFallbackToken?: boolean
+) => inseeClientWrapper(route, {}, useFallbackToken);
 
-  const response = await fetchWithTimeout(route, {
-    headers: {
-      Authorization: token.token_type + ' ' + token.access_token,
-      'Content-Type': 'application/x-www-form-urlencoded',
+export const inseeClientPost = async (
+  route: string,
+  body: string,
+  useFallbackToken?: boolean
+) =>
+  inseeClientWrapper(
+    route,
+    {
+      method: 'POST',
+      body,
     },
-    method: 'POST',
-    body,
-  });
-
-  if (response.status === 429) {
-    throw new HttpTooManyRequests(429, `Too many requests in Insee`);
-  }
-  if (response.status === 404) {
-    throw new HttpNotFound(404, `Not found`);
-  }
-
-  if (response.status === 403) {
-    throw new InseeForbiddenError(403, `Forbidden (non diffusible)`);
-  }
-
-  return response;
-};
+    useFallbackToken
+  );

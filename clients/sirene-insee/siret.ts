@@ -48,8 +48,14 @@ export const getAllEtablissementInsee = async (siren: string, page = 1) => {
   return etablissements.map(mapToDomainObject);
 };
 
-export const getEtablissementInsee = async (siret: string) => {
-  const response = await inseeClientGet(routes.sireneInsee.siret + siret);
+export const getEtablissementInsee = async (
+  siret: string,
+  useFallbackToken?: boolean
+) => {
+  const response = await inseeClientGet(
+    routes.sireneInsee.siret + siret,
+    useFallbackToken
+  );
   const {
     etablissement,
   } = (await response.json()) as IInseeEtablissementResponse;

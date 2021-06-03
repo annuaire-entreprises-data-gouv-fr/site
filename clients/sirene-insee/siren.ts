@@ -36,8 +36,20 @@ interface IPeriodeUniteLegale {
   nomUniteLegale: string;
 }
 
-export const getUniteLegaleInsee = async (siren: string) => {
-  const request = await inseeClientGet(routes.sireneInsee.siren + siren);
+/**
+ * Call to Sirene INSEE API - can be used with the fallback token
+ * @param siren
+ * @param useInseeFallback
+ * @returns
+ */
+export const getUniteLegaleInsee = async (
+  siren: string,
+  useFallbackToken?: boolean
+) => {
+  const request = await inseeClientGet(
+    routes.sireneInsee.siren + siren,
+    useFallbackToken
+  );
   const response = (await request.json()) as IInseeUniteLegaleResponse;
 
   return mapToDomainObject(siren, response);
