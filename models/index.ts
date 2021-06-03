@@ -27,6 +27,11 @@ export interface IEtablissement {
   longitude: string;
 }
 
+export interface IEtablissementWithUniteLegale {
+  etablissement: IEtablissement;
+  uniteLegale: IUniteLegale;
+}
+
 export interface IUniteLegale {
   siren: string;
   numeroTva: string;
