@@ -8,7 +8,10 @@ import {
 } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
-import { getEtablissementInsee } from '../clients/sirene-insee/siret';
+import {
+  getEtablissementInsee,
+  getEtablissementInseeWithFallbackCredentials,
+} from '../clients/sirene-insee/siret';
 import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
 import {
   extractSirenFromSiret,
@@ -52,8 +55,11 @@ const verifySiret = (slug: string): Siret => {
  */
 const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
   try {
-    return await fetchEtablissementFromInseeOnly(siret);
+    return await getEtablissementInsee(siret);
   } catch (e) {
+    if (e instanceof InseeForbiddenError) {
+      return createNonDiffusibleEtablissement(siret);
+    }
     if (e instanceof HttpNotFound) {
       throw new SiretNotFoundError(`Siret ${siret} was not found`);
     }
@@ -66,8 +72,11 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
       logSireneOuvertefailed({ siret, details: e.message });
 
       try {
-        return await fetchEtablissementFromInseeOnly(siret, true);
+        return await getEtablissementInseeWithFallbackCredentials(siret);
       } catch (e) {
+        if (e instanceof InseeForbiddenError) {
+          return createNonDiffusibleEtablissement(siret);
+        }
         logSecondSireneInseefailed({ siret, details: e.message });
 
         // Siret was not found in both API, return a 404
@@ -106,20 +115,6 @@ const getEtablissementWithLatLongFromSlug = async (
 //=========================
 //        API calls
 //=========================
-
-const fetchEtablissementFromInseeOnly = async (
-  siret: Siret,
-  useFallbackToken?: boolean
-) => {
-  try {
-    return await getEtablissementInsee(siret, useFallbackToken);
-  } catch (e) {
-    if (e instanceof InseeForbiddenError) {
-      return createNonDiffusibleEtablissement(siret);
-    }
-    throw e;
-  }
-};
 
 /**
  * Create a default etablissement that will be displayed as non diffusible

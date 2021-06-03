@@ -1,4 +1,4 @@
-import { inseeClientGet, InseeForbiddenError } from '.';
+import { inseeClientGet, InseeForbiddenError, INSEE_CREDENTIALS } from '.';
 import { createDefaultEtablissement, IEtablissement } from '../../models';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
@@ -48,13 +48,20 @@ export const getAllEtablissementInsee = async (siren: string, page = 1) => {
   return etablissements.map(mapToDomainObject);
 };
 
-export const getEtablissementInsee = async (
-  siret: string,
-  useFallbackToken?: boolean
+export const getEtablissementInsee = async (siret: string) => {
+  const response = await inseeClientGet(routes.sireneInsee.siret + siret);
+  const {
+    etablissement,
+  } = (await response.json()) as IInseeEtablissementResponse;
+  return mapToDomainObject(etablissement);
+};
+
+export const getEtablissementInseeWithFallbackCredentials = async (
+  siret: string
 ) => {
   const response = await inseeClientGet(
     routes.sireneInsee.siret + siret,
-    useFallbackToken
+    INSEE_CREDENTIALS.FALLBACK
   );
   const {
     etablissement,

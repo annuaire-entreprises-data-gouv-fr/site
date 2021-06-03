@@ -1,4 +1,4 @@
-import { inseeClientGet, InseeForbiddenError } from '.';
+import { inseeClientGet, InseeForbiddenError, INSEE_CREDENTIALS } from '.';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
@@ -42,13 +42,19 @@ interface IPeriodeUniteLegale {
  * @param useInseeFallback
  * @returns
  */
-export const getUniteLegaleInsee = async (
-  siren: string,
-  useFallbackToken?: boolean
+export const getUniteLegaleInsee = async (siren: string) => {
+  const request = await inseeClientGet(routes.sireneInsee.siren + siren);
+  const response = (await request.json()) as IInseeUniteLegaleResponse;
+
+  return mapToDomainObject(siren, response);
+};
+
+export const getUniteLegaleInseeWithFallbackCredentials = async (
+  siren: string
 ) => {
   const request = await inseeClientGet(
     routes.sireneInsee.siren + siren,
-    useFallbackToken
+    INSEE_CREDENTIALS.FALLBACK
   );
   const response = (await request.json()) as IInseeUniteLegaleResponse;
 

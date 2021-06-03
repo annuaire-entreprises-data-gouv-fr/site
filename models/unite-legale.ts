@@ -7,7 +7,10 @@ import {
 } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
-import { getUniteLegaleInsee } from '../clients/sirene-insee/siren';
+import {
+  getUniteLegaleInsee,
+  getUniteLegaleInseeWithFallbackCredentials,
+} from '../clients/sirene-insee/siren';
 import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
 import {
   hasSirenFormat,
@@ -69,9 +72,9 @@ const getUniteLegale = async (
       logSireneOuvertefailed({ siren, details: e.message });
 
       try {
-        // in case sirene etalab 404 or 500, fallback on Sirene insee using fallback token to avoid 403
+        // in case sirene etalab 404 or 500, fallback on Sirene insee using fallback credentials to avoid 403
         // no pagination as this function is called when sirene etalab already failed
-        return await getUniteLegaleInsee(siren, true);
+        return await getUniteLegaleInseeWithFallbackCredentials(siren);
       } catch (e) {
         if (e instanceof InseeForbiddenError) {
           return createNonDiffusibleUniteLegale(siren);

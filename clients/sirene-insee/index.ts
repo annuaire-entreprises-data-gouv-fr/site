@@ -28,11 +28,16 @@ export class InseeForbiddenError extends Error {
   }
 }
 
+export const enum INSEE_CREDENTIALS {
+  DEFAULT,
+  FALLBACK,
+}
+
 /**
  * Can choose between two different set of credentials in case first is rate limited
  * */
-const getCredentials = (useFallbackToken: boolean) => {
-  if (useFallbackToken) {
+const getCredentials = (credentials: INSEE_CREDENTIALS) => {
+  if (credentials === INSEE_CREDENTIALS.FALLBACK) {
     return {
       clientId: process.env.INSEE_CLIENT_ID_FALLBACK,
       clientSecret: process.env.INSEE_CLIENT_SECRET_FALLBACK,
@@ -49,9 +54,9 @@ const getCredentials = (useFallbackToken: boolean) => {
  * @param useFallbackToken
  * @returns
  */
-const inseeAuth = async (useFallbackToken = false) => {
+const inseeAuth = async (credentials = INSEE_CREDENTIALS.DEFAULT) => {
   try {
-    const { clientId, clientSecret } = getCredentials(useFallbackToken);
+    const { clientId, clientSecret } = getCredentials(credentials);
     const response = await fetchWithTimeout(routes.sireneInsee.auth, {
       method: 'POST',
       body:
@@ -82,9 +87,9 @@ const inseeAuth = async (useFallbackToken = false) => {
 export const inseeClientWrapper = async (
   route: string,
   options?: RequestInit,
-  useFallbackToken?: boolean
+  credentials?: INSEE_CREDENTIALS
 ) => {
-  const token = await inseeAuth(useFallbackToken);
+  const token = await inseeAuth(credentials);
 
   const response = await fetchWithTimeout(route, {
     ...options,
@@ -110,13 +115,13 @@ export const inseeClientWrapper = async (
 
 export const inseeClientGet = async (
   route: string,
-  useFallbackToken?: boolean
-) => inseeClientWrapper(route, {}, useFallbackToken);
+  credentials?: INSEE_CREDENTIALS
+) => inseeClientWrapper(route, {}, credentials);
 
 export const inseeClientPost = async (
   route: string,
   body: string,
-  useFallbackToken?: boolean
+  credentials?: INSEE_CREDENTIALS
 ) =>
   inseeClientWrapper(
     route,
@@ -124,5 +129,5 @@ export const inseeClientPost = async (
       method: 'POST',
       body,
     },
-    useFallbackToken
+    credentials
   );
