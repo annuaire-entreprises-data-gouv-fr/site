@@ -28,7 +28,7 @@ export class InseeForbiddenError extends Error {
   }
 }
 
-export const enum INSEE_CREDENTIALS {
+export enum INSEE_CREDENTIALS {
   DEFAULT,
   FALLBACK,
 }
