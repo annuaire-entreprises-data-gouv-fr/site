@@ -6,6 +6,7 @@ import {
   NotASiretError,
   NotLuhnValidSiretError,
 } from '.';
+import { HttpNotFound } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
 import { getEtablissementInsee } from '../clients/sirene-insee/siret';
 import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
@@ -15,8 +16,12 @@ import {
   isSiret,
   Siret,
 } from '../utils/helpers/siren-and-siret';
-import { logWarningInSentry } from '../utils/sentry';
 import { getUniteLegaleFromSlug } from './unite-legale';
+import {
+  logFirstSireneInseefailed,
+  logSecondSireneInseefailed,
+  logSireneOuvertefailed,
+} from '../utils/sentry/helpers';
 
 /*
  * Return an etablissement given an existing siret
@@ -49,21 +54,26 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
   try {
     return await fetchEtablissementFromInseeOnly(siret);
   } catch (e) {
+    if (e instanceof HttpNotFound) {
+      throw new SiretNotFoundError(`Siret ${siret} was not found`);
+    }
+
+    logFirstSireneInseefailed({ siret, details: e.message });
+
     try {
       return await getEtablissementSireneOuverte(siret);
     } catch (e) {
-      logWarningInSentry(
-        'Server error in SireneEtalab, fallback to Sirene Insee with fallback token',
-        {
-          siret,
-          details: e.message,
-        }
-      );
+      logSireneOuvertefailed({ siret, details: e.message });
+
       try {
         return await fetchEtablissementFromInseeOnly(siret, true);
-      } catch (e) {}
+      } catch (e) {
+        logSecondSireneInseefailed({ siret, details: e.message });
 
-      throw new SiretNotFoundError(siret);
+        // Siret was not found in both API, return a 404
+        const message = `Siret ${siret} was not found in both siren API`;
+        throw new SiretNotFoundError(message);
+      }
     }
   }
 };
@@ -102,20 +112,11 @@ const fetchEtablissementFromInseeOnly = async (
   useFallbackToken?: boolean
 ) => {
   try {
-    return await getEtablissementInsee(siret);
+    return await getEtablissementInsee(siret, useFallbackToken);
   } catch (e) {
     if (e instanceof InseeForbiddenError) {
       return createNonDiffusibleEtablissement(siret);
     }
-    // TooManyRequests, HttpAuthentificationFailure, HttpNotFound, HttpServerError
-    logWarningInSentry(
-      `Server error in Sirene Insee ${
-        useFallbackToken
-          ? 'with Fallback token, return 404'
-          : ', fallback on Sirene Ouverte (Etalab)'
-      }`,
-      { siret, details: e.message }
-    );
     throw e;
   }
 };
