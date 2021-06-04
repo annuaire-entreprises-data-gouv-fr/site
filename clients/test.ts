@@ -33,12 +33,12 @@ const testApi = async (slug: string | string[]) => {
 export const isApiOnline = async (slug: string | string[]) => {
   try {
     await testApi(slug);
-    return true;
+    return { test: true, status: 200 };
   } catch (e) {
     if (e instanceof APISlugNotFound) {
       throw e;
     } else {
-      return false;
+      return { test: false, status: e.status | 500 };
     }
   }
 };

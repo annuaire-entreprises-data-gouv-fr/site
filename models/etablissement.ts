@@ -1,18 +1,17 @@
 import {
   IEtablissement,
-  IUniteLegale,
+  IEtablissementWithUniteLegale,
   SiretNotFoundError,
   createDefaultEtablissement,
   NotASiretError,
   NotLuhnValidSiretError,
 } from '.';
-import {
-  HttpNotFound,
-  HttpTooManyRequests,
-  HttpAuthentificationFailure,
-} from '../clients/exceptions';
+import { HttpNotFound } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
-import { getEtablissementInsee } from '../clients/sirene-insee/siret';
+import {
+  getEtablissementInsee,
+  getEtablissementInseeWithFallbackCredentials,
+} from '../clients/sirene-insee/siret';
 import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
 import {
   extractSirenFromSiret,
@@ -20,12 +19,27 @@ import {
   isSiret,
   Siret,
 } from '../utils/helpers/siren-and-siret';
-import { logWarningInSentry } from '../utils/sentry';
 import { getUniteLegaleFromSlug } from './unite-legale';
+import {
+  logFirstSireneInseefailed,
+  logSecondSireneInseefailed,
+  logSireneOuvertefailed,
+} from '../utils/sentry/helpers';
 
+/*
+ * Return an etablissement given an existing siret
+ */
 const getEtablissementFromSlug = async (
   slug: string
 ): Promise<IEtablissement> => {
+  const siret = verifySiret(slug);
+  return getEtablissement(siret);
+};
+
+/**
+ * Throw an exception if a string is not a siret
+ * */
+const verifySiret = (slug: string): Siret => {
   if (!isSiret(slug)) {
     if (!hasSiretFormat(slug)) {
       throw new NotASiretError(slug);
@@ -33,58 +47,48 @@ const getEtablissementFromSlug = async (
       throw new NotLuhnValidSiretError(slug);
     }
   }
-  return getEtablissement(slug);
+  return slug;
 };
 
 /**
- * Download Etablissement
+ * Return an Etablissement for a given siret
  */
 const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
   try {
     return await getEtablissementInsee(siret);
   } catch (e) {
-    if (
-      e instanceof HttpTooManyRequests ||
-      e instanceof HttpAuthentificationFailure
-    ) {
-      // no additionnal log
-    } else if (e instanceof InseeForbiddenError) {
-      // this means company is not diffusible
-      const etablissement = createDefaultEtablissement();
-      etablissement.siret = siret;
-      etablissement.siren = extractSirenFromSiret(siret);
-
-      return etablissement;
+    if (e instanceof InseeForbiddenError) {
+      return createNonDiffusibleEtablissement(siret);
     }
-    // 404 and 500, do nothing and fallback
-    logWarningInSentry(
-      'Server error in Sirene Insee, fallback on Sirene Ouverte (Etalab)',
-      { siret, details: e.message }
-    );
+    if (e instanceof HttpNotFound) {
+      throw new SiretNotFoundError(`Siret ${siret} was not found`);
+    }
+
+    logFirstSireneInseefailed({ siret, details: e.message });
 
     try {
       return await getEtablissementSireneOuverte(siret);
     } catch (e) {
-      if (e instanceof HttpNotFound) {
-        // do nothing
-      } else {
-        logWarningInSentry('Server error in SireneEtalab, Redirect to 404', {
-          siret,
-          details: e.message,
-        });
+      logSireneOuvertefailed({ siret, details: e.message });
+
+      try {
+        return await getEtablissementInseeWithFallbackCredentials(siret);
+      } catch (e) {
+        if (e instanceof InseeForbiddenError) {
+          return createNonDiffusibleEtablissement(siret);
+        }
+        logSecondSireneInseefailed({ siret, details: e.message });
+
+        // Siret was not found in both API, return a 404
+        const message = `Siret ${siret} was not found in both siren API`;
+        throw new SiretNotFoundError(message);
       }
-      throw new SiretNotFoundError(siret);
     }
   }
 };
 
-export interface IEtablissementWithUniteLegale {
-  etablissement: IEtablissement;
-  uniteLegale: IUniteLegale;
-}
-
 /**
- * Download Etablissement and the corresponding UniteLegale
+ * Return an Etablissement and the corresponding UniteLegale
  */
 const getEtablissementWithUniteLegaleFromSlug = async (
   slug: string
@@ -106,6 +110,21 @@ const getEtablissementWithLatLongFromSlug = async (
   } catch (e) {
     throw new SiretNotFoundError(slug);
   }
+};
+
+//=========================
+//        API calls
+//=========================
+
+/**
+ * Create a default etablissement that will be displayed as non diffusible
+ */
+const createNonDiffusibleEtablissement = (siret: Siret) => {
+  const etablissement = createDefaultEtablissement();
+  etablissement.siret = siret;
+  etablissement.siren = extractSirenFromSiret(siret);
+
+  return etablissement;
 };
 
 export {
