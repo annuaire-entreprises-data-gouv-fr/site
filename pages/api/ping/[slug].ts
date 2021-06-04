@@ -6,11 +6,11 @@ const ping = async (
   res: NextApiResponse
 ) => {
   try {
-    const test = await isApiOnline(slug);
+    const { test, status } = await isApiOnline(slug);
     if (test) {
       res.status(200).json({ message: 'ok' });
     } else {
-      res.status(500).json({ message: 'ko' });
+      res.status(status | 500).json({ message: 'ko' });
     }
   } catch (e) {
     if (e instanceof APISlugNotFound) {
