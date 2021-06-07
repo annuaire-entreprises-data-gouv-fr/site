@@ -57,7 +57,7 @@ const getUniteLegale = async (
 ): Promise<IUniteLegale> => {
   try {
     // first attempt to call siren insee
-    return fetchUniteLegaleFromBothAPI(siren, page);
+    return await fetchUniteLegaleFromBothAPI(siren, page);
   } catch (e) {
     if (e instanceof HttpNotFound) {
       throw new SirenNotFoundError(`Siren ${siren} was not found`);
@@ -67,7 +67,7 @@ const getUniteLegale = async (
 
     try {
       // in case sirene INSEE 403, fallback on Siren Etalab
-      return getUniteLegaleSireneOuverte(siren, page);
+      return await getUniteLegaleSireneOuverte(siren, page);
     } catch (e) {
       logSireneOuvertefailed({ siren, details: e.message });
 
