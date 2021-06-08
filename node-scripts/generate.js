@@ -93,9 +93,13 @@ async function main() {
     }
   };
 
-  ['/', '/comment-ca-marche', '/rechercher', '/faq'].map((path) =>
-    write(WEBSITE + path)
-  );
+  [
+    '/',
+    'donnees-extrait-kbis',
+    '/comment-ca-marche',
+    '/rechercher',
+    '/faq',
+  ].map((path) => write(WEBSITE + path));
 
   console.time('⏱ Time to download base SIREN');
   const url =
