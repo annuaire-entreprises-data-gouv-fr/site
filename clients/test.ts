@@ -1,7 +1,7 @@
 import { getAssociation } from './rna';
 import { fetchRncsImmatriculation } from './rncs';
 import { fetchRnmImmatriculation } from './rnm';
-import { getUniteLegaleInsee } from './sirene-insee/siren';
+import { getUniteLegaleInseeWithFallbackCredentials } from './sirene-insee/siren';
 import getUniteLegaleSireneOuverte from './sirene-ouverte/siren';
 import fetchConventionCollectives from './siret-2-idcc';
 
@@ -20,7 +20,7 @@ const testApi = async (slug: string | string[]) => {
     case 'api-conventions-collectives':
       return await fetchConventionCollectives(['54205118000066']);
     case 'api-sirene-insee':
-      return await getUniteLegaleInsee('880878145');
+      return await getUniteLegaleInseeWithFallbackCredentials('880878145');
     case 'api-sirene-donnees-ouvertes':
       return await getUniteLegaleSireneOuverte('880878145');
     case 'api-rna':
