@@ -1,4 +1,5 @@
 import React from 'react';
+import ButtonLink from '../components/button';
 
 import Page from '../layouts';
 
@@ -82,6 +83,32 @@ const About: React.FC = () => {
             </a>{' '}
             (dans le cas des entreprises artisanales).
           </p>
+          <h2>
+            Utilisation du site dans le cadre de démarches administratives
+          </h2>
+          <p>
+            L’Annuaire des Entreprises est un élément clefs des services mise en
+            oeuvre par l'Etat pour faciliter les démarches des entreprises.
+          </p>
+          <h3>Retrouver le numéro siret, siren de son entreprise</h3>
+          <p>
+            L'Annuaire des Entreprises propose une recherche puissante et simple
+            qui permet aux entrepreneurs de retrouver facilement le numéro siret
+            de leurs entreprises pour l'utiliser dans leurs démarches
+            admniistratives.
+          </p>
+          <h3>Suppression du KBIS dans les démarches des entreprises</h3>
+          <p>
+            À partir de Novembre 2021, les entreprises immatriculées au RCS ou
+            au RNM n’ont plus à fournir leur extrait KBIS dans leurs démarches
+            administratives, le seul numéro siret suffit à l'administration pour
+            retrouver les données nécessaire.
+            <br /> L'Annuaire permet aux agents d’administrations de retrouver
+            facilement les informations contenues dans un KBIS (
+            <a href="/donnees-extrait-kbis">En savoir plus</a>
+            ).
+          </p>
+          <div className="layout-center"></div>
           <h2>Comment utiliser ces données dans mon site internet ?</h2>
           <p>
             Toutes les sources de données citées précédement sont accessibles

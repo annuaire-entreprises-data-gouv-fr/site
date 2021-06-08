@@ -17,7 +17,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   target = '',
   nofollow = false,
 }) => (
-  <div id="button">
+  <div>
     {!href ? (
       <button type="submit">{children}</button>
     ) : (

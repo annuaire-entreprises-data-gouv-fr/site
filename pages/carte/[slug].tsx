@@ -7,6 +7,7 @@ import MapEtablissement from '../../components/mapbox/map-etablissement';
 import { getEtablissementWithLatLongFromSlug } from '../../models/etablissement';
 import { TitleEtablissement } from '../../components/title-etablissement-section';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
+import HiddenH1 from '../../components/a11y-components/hidden-h1';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -25,6 +26,7 @@ const EtablissementMapPage: React.FC<IProps> = ({ etablissement }) => (
       <a href={`/entreprise/${extractSirenFromSiret(etablissement.siret)}`}>
         ← Retour
       </a>
+      <HiddenH1 title="Localisation de l’etablissement" />
       {etablissement.latitude && etablissement.longitude ? (
         <>
           <TitleEtablissement

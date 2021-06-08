@@ -6,7 +6,16 @@ const ExtraitKbis: React.FC = () => {
   return (
     <Page small={true} title="Comment ça marche ?">
       <div className="content-container">
-        <h1>À propos des données contenues dans un extrait KBIS</h1>
+        <h1>Suppression du KBIS dans les démarches des entreprises</h1>
+        <p>
+          Publié en Mai 2021,{' '}
+          <a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043523262">
+            le décret de suppression du KBIS
+          </a>{' '}
+          supprime le recours aux extraits KBIS (Registre du Commerce) et D1
+          (Répertoire des Métiers) dans les démarches administratives des
+          personnes morales.
+        </p>
         <div>
           <h2>
             Comment accéder aux données d'un extrait KBIS via le site

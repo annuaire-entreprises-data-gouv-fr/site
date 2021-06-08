@@ -11,6 +11,7 @@ import ResultsHeader from '../../components/results-header';
 import { IsLikelyASirenOrSiretException } from '../../models';
 import LogSearchTermInPiwik from '../../components/clients-script/log-search-term-in-piwik';
 import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
+import HiddenH1 from '../../components/a11y-components/hidden-h1';
 
 interface IProps extends ISearchResults {
   searchTerm: string;
@@ -29,6 +30,7 @@ const SearchResultPage: React.FC<IProps> = ({
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"
   >
+    <HiddenH1 title="Résultats de recherche" />
     <div className="result-content-container">
       <ResultsHeader
         resultCount={resultCount}

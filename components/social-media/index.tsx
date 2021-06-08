@@ -14,6 +14,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
             href={`https://www.linkedin.com/shareArticle?mini=true&url=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
             rel="noreferrer noopener"
             target="_blank"
+            title="Partager cette page sur linkedin"
           >
             {linkedin}
           </a>
@@ -28,6 +29,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
             href={`https://twitter.com/intent/tweet?url=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
             rel="noreferrer noopener"
             target="_blank"
+            title="Partager cette page sur twitter"
           >
             {twitter}
           </a>
@@ -42,6 +44,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
             href={`https://www.facebook.com/sharer/sharer.php?u=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
             rel="noreferrer noopener"
             target="_blank"
+            title="Partager cette page sur Facebook"
           >
             {facebook}
           </a>
@@ -52,7 +55,11 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
           label="Télécharger un QR Code à inclure dans un courier ou dans un devis, pour partager cet url."
           orientation="right"
         >
-          <a href={`/api/qr/${siren}`} download={`QR_code_page_${siren}.jpeg`}>
+          <a
+            title="Partager cette page grâce à un QR Code"
+            href={`/api/qr/${siren}`}
+            download={`QR_code_page_${siren}.jpeg`}
+          >
             {qrCode}
           </a>
         </InformationTooltip>

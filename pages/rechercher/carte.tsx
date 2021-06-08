@@ -13,6 +13,7 @@ import MapResults from '../../components/mapbox/map-results';
 import { IsLikelyASirenOrSiretException } from '../../models';
 import LogSearchTermInPiwik from '../../components/clients-script/log-search-term-in-piwik';
 import { redirectServerError } from '../../utils/redirects';
+import HiddenH1 from '../../components/a11y-components/hidden-h1';
 
 interface IProps extends ISearchResults {
   searchTerm: string;
@@ -34,6 +35,8 @@ const MapSearchResultPage: React.FC<IProps> = ({
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/carte"
   >
+    <HiddenH1 title="Résultats de recherche" />
+
     {results ? (
       <div className="map-container">
         <MapResults results={results} />

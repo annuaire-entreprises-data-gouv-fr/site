@@ -16,7 +16,7 @@ export const Tag: React.FC<PropsWithChildren<IProps>> = ({
         font-weight: bold;
         display: inline-block;
         background-color: #eee;
-        color: #888;
+        color: #666;
         border-radius: 3px;
         padding: 0 5px;
         margin: 0 7px;

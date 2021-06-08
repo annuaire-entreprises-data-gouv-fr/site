@@ -1,12 +1,9 @@
 const { exec } = require('child_process');
-const fs = require('fs');
-
-const start = new Date();
 
 // subset of pages to test
 const PAGES = [
   '/',
-  'donnees-extrait-kbis',
+  '/donnees-extrait-kbis',
   '/comment-ca-marche',
   '/rechercher',
   '/faq',
@@ -32,8 +29,17 @@ PAGES.forEach((page) => {
       page,
     ' --stdout --exit --disable scrollable-region-focusable --disable region',
     (err, stdout, stderr) => {
-      console.info('===> 🔍 ' + page);
-      console.log(stdout);
+      if (err || stderr) {
+        console.log(err, stderr);
+        process.exit(1);
+      }
+      if (stdout.indexOf('0 violations found!') > -1) {
+        console.info('=> ✅ ' + page);
+      } else {
+        console.info('=> 😭 ' + page);
+        console.log(stdout);
+        process.exit(1);
+      }
     }
   );
 });

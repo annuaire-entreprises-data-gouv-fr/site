@@ -13,7 +13,8 @@
     "start": "next start -p $PORT",
     "deploy-staging": "NODE_ENV=production git push dokku-staging main:master",
     "deploy": "NODE_ENV=production git push dokku main:master",
-    "cypress:open": "npx cypress open"
+    "cypress:open": "npx cypress open",
+    "check:a11y": "node ./node-scripts/a11y.js"
   },
   "dependencies": {
     "@sentry/node": "^6.3.5",
@@ -23,15 +24,15 @@
     "qrcode": "^1.4.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-markdown": "^5.0.3"
+    "react-markdown": "^5.0.3",
+    "uninstall": "*"
   },
   "devDependencies": {
-    "@axe-core/cli": "^4.1.0",
+    "@axe-core/cli": "^4.2.1",
     "@types/node": "^14.0.27",
     "@types/qrcode": "^1.4.0",
     "@types/raven": "^2.5.3",
     "@types/react": "^16.9.44",
-    "axe-core": "^4.1.1",
     "cypress": "^7.3.0",
     "node-fetch": "^2.6.1",
     "sass": "^1.26.10",

@@ -57,9 +57,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siret = context.params.slug as string;
 
   try {
-    const etablissementWithUniteLegale = await getEtablissementWithUniteLegaleFromSlug(
-      siret
-    );
+    const etablissementWithUniteLegale =
+      await getEtablissementWithUniteLegaleFromSlug(siret);
 
     return {
       props: {
