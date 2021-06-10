@@ -11,7 +11,7 @@ export class APISlugNotFound extends Error {
   }
 }
 
-const testApi = async (slug: string | string[]) => {
+const ping = async (slug: string | string[]) => {
   switch (slug) {
     case 'api-rncs':
       return await fetchRncsImmatriculation('880878145');
@@ -30,9 +30,9 @@ const testApi = async (slug: string | string[]) => {
   }
 };
 
-export const isApiOnline = async (slug: string | string[]) => {
+export const pingAPIClient = async (slug: string | string[]) => {
   try {
-    await testApi(slug);
+    await ping(slug);
     return { test: true, status: 200 };
   } catch (e) {
     if (e instanceof APISlugNotFound) {

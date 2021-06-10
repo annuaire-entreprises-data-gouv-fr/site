@@ -2,6 +2,7 @@
 
 [![Tests End to End](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/test-end-to-end.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/test-end-to-end.yml)
 [![Accessibilité](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-a11y.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-a11y.yml)
+[![Tests unitaires](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/unit-test.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/unit-test.yml)
 
 Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr)
 

@@ -1,5 +1,5 @@
 import { IUniteLegale } from '../../models';
-import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/est-entrepreneur-individuel';
+import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import {
   formatAdresse,
   libelleFromCategoriesJuridiques,
