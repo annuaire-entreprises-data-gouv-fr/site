@@ -13,8 +13,9 @@
     "start": "next start -p $PORT",
     "deploy-staging": "NODE_ENV=production git push dokku-staging main:master",
     "deploy": "NODE_ENV=production git push dokku main:master",
-    "cypress:open": "npx cypress open",
-    "check:a11y": "node ./node-scripts/a11y.js"
+    "test:end2end": "npx cypress open",
+    "test:unit": "npx jest",
+    "test:a11y": "node ./node-scripts/a11y.js"
   },
   "dependencies": {
     "@sentry/node": "^6.3.5",
@@ -34,8 +35,7 @@
     "@types/qrcode": "^1.4.0",
     "@types/raven": "^2.5.3",
     "@types/react": "^16.9.44",
-    "cypress": "^7.3.0",
-    "jest": "^27.0.4",
+    "cypress": "^7.5.0",
     "node-fetch": "^2.6.1",
     "sass": "^1.26.10",
     "typescript": "^3.9.7"
