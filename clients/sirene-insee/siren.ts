@@ -4,7 +4,7 @@ import {
   createDefaultUniteLegale,
   IUniteLegale,
 } from '../../models';
-import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/est-entrepreneur-individuel';
+import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
 import {
   libelleFromCategoriesJuridiques,
