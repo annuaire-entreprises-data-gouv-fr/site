@@ -7,7 +7,7 @@ import constants from '../../constants';
 const SirenInvalidPage: React.FC = () => {
   return (
     <Page small={true} title="Numero Siren introuvable">
-      <div className="content-container">
+      <div className="content-container text-wrapper">
         <h1>⚠️ Attention : ce numéro siren est invalide</h1>
         <div>
           <p>
@@ -36,13 +36,11 @@ const SirenInvalidPage: React.FC = () => {
               l'a transmis.
             </li>
           </ul>
-          <br />
           <p>
             Si vous avez effectué ces deux vérifications et que cette page
             s'affiche toujours, n'hésitez pas à{' '}
             <a href={constants.links.mailto}>nous contacter.</a>
           </p>
-          <br />
         </div>
         <div className="layout-center">
           <ButtonLink href="/">Retourner à l’écran d'accueil</ButtonLink>

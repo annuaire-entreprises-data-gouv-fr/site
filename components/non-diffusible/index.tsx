@@ -18,12 +18,10 @@ const NonDiffusible = () => (
       Pour des raisons de sécurité, certaines associations et les organismes
       relevant du Ministère de la Défense ne sont pas diffusibles non plus.
     </p>
-    <br />
     <p>
       Si cette entité est la votre et que vous souhaitez vous rendre diffusible
       de nouveau la démarche est à effectuer auprès de l’INSEE&nbsp;:
     </p>
-    <br />
     <div className="layout-center">
       <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
         ⇢ Rendre mon entité diffusible

@@ -51,6 +51,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
             </a>
           </>
         )}
+        .
       </p>
     )}
     <p>
@@ -71,7 +72,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
           et il est domicilié au <a href="#contact">{etablissement.adresse}</a>
         </>
       )}
+      .
     </p>
-    <br />
   </>
 );

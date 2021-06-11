@@ -6,7 +6,7 @@ import Page from '../layouts';
 const About: React.FC = () => {
   return (
     <Page small={true} title="Comment ça marche ?">
-      <div className="content-container">
+      <div className="content-container text-wrapper">
         <h1>À propos de L’Annuaire des Entreprises</h1>
         <h2>Qui a développé ce site ?</h2>
         <p>
@@ -87,15 +87,16 @@ const About: React.FC = () => {
             Utilisation du site dans le cadre de démarches administratives
           </h2>
           <p>
-            L’Annuaire des Entreprises est un élément clefs des services mise en
-            oeuvre par l'Etat pour faciliter les démarches des entreprises.
+            L’Annuaire des Entreprises est un des services clefs mis en oeuvre
+            par l'Etat pour faciliter les démarches des entreprises. Parmi ses
+            fonctionnalités, on peut citer :
           </p>
-          <h3>Retrouver le numéro siret, siren de son entreprise</h3>
+          <h3>Recherche de numéro siret, de numéro siren</h3>
           <p>
             L'Annuaire des Entreprises propose une recherche puissante et simple
             qui permet aux entrepreneurs de retrouver facilement le numéro siret
-            de leurs entreprises pour l'utiliser dans leurs démarches
-            admniistratives.
+            de leur(s) entreprise(s) pour l'utiliser dans leurs démarches
+            administratives.
           </p>
           <h3>Suppression du KBIS dans les démarches des entreprises</h3>
           <p>
@@ -103,10 +104,15 @@ const About: React.FC = () => {
             au RNM n’ont plus à fournir leur extrait KBIS dans leurs démarches
             administratives, le seul numéro siret suffit à l'administration pour
             retrouver les données nécessaire.
-            <br /> L'Annuaire permet aux agents d’administrations de retrouver
-            facilement les informations contenues dans un KBIS (
-            <a href="/donnees-extrait-kbis">En savoir plus</a>
-            ).
+          </p>
+          <p>
+            Ce site permet aux agents d’administrations de retrouver{' '}
+            <b>toutes les informations contenues dans un KBIS</b>.
+          </p>
+          <p>
+            <a href="/donnees-extrait-kbis">
+              ⇢ Vous êtes un agent ? Consultez notre guide.
+            </a>
           </p>
           <div className="layout-center"></div>
           <h2>Comment utiliser ces données dans mon site internet ?</h2>
