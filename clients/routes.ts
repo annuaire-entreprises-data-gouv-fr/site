@@ -8,11 +8,13 @@ const routes = {
     siren: `https://entreprise.data.gouv.fr/api/rna/v1/siret/`,
   },
   rncs: {
-    portail: `https://data.inpi.fr/entreprises/`,
+    portail: {
+      entreprise: 'https://data.inpi.fr/entreprises/',
+      login: 'https://data.inpi.fr/login',
+    },
     api: {
       login: 'https://opendata-rncs.inpi.fr/services/diffusion/login',
-      imr:
-        'https://opendata-rncs.inpi.fr/services/diffusion/imrs-saisis/find?siren=',
+      imr: 'https://opendata-rncs.inpi.fr/services/diffusion/imrs-saisis/find?siren=',
     },
   },
   sireneInsee: {

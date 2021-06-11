@@ -15,11 +15,13 @@
     "deploy": "NODE_ENV=production git push dokku main:master",
     "test:end2end": "cypress open",
     "test:unit": "jest",
-    "test:a11y": "node ./node-scripts/a11y.js"
+    "test:a11y": "node ./node-scripts/a11y.js",
+    "test:inpi-pdf-proxy": "node ./node-scripts/inpi-pdf-proxy.js"
   },
   "dependencies": {
     "@sentry/node": "^6.6.0",
     "abort-controller": "^3.0.0",
+    "axios": "^0.21.1",
     "next": "^10.0.9",
     "next-seo": "^4.24.0",
     "qrcode": "^1.4.4",

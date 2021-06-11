@@ -1,6 +1,7 @@
 import { HttpNotFound } from '../clients/exceptions';
 import { fetchRncsImmatriculation } from '../clients/rncs';
 import { fetchRnmImmatriculation } from '../clients/rnm';
+import { Siren } from '../utils/helpers/siren-and-siret';
 
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
@@ -10,10 +11,12 @@ export interface IImmatriculation {
   downloadlink: string;
 }
 export interface IImmatriculationRNCS extends IImmatriculation {
+  siren: Siren;
   immatriculation: {};
 }
 
 export interface IImmatriculationRNM extends IImmatriculation {
+  siren: Siren;
   immatriculation: {
     codeAPRM: string | null;
     activitésArtisanalesDéclarées: string | null;
@@ -26,7 +29,7 @@ export interface IImmatriculationRNM extends IImmatriculation {
  * @param siren
  */
 const getImmatriculationRNM = async (
-  siren: string
+  siren: Siren
 ): Promise<IImmatriculationRNM | IAPINotRespondingError> => {
   try {
     return await fetchRnmImmatriculation(siren);
@@ -53,7 +56,7 @@ const getImmatriculationRNM = async (
  * @param siren
  */
 const getImmatriculationRNCS = async (
-  siren: string
+  siren: Siren
 ): Promise<IImmatriculationRNCS | IAPINotRespondingError> => {
   try {
     return await fetchRncsImmatriculation(siren);

@@ -209,7 +209,7 @@ const About: React.FC = () => {
           <p>
             Il existe une API spéciale (nommée API Entreprise) réservée aux
             administrations et à certaines entreprises éligibles, qui permet
-            d'accèder aux informations des entreprises détenue par
+            d'accéder aux informations des entreprises détenue par
             l'administration :
           </p>
           <ul>
