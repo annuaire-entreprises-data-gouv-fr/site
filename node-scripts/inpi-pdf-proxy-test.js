@@ -27,7 +27,9 @@ const checkINPIpdfProxy = async () => {
   // pdf should be bigger than one mo
   if (ratio <= 0.65 || ratio >= 0.75) {
     console.info(
-      '=> ❌ size ratio is suspect. The authentication might have failed'
+      `=> ❌ size ratio is suspect. unauthenticated PDF is ${
+        ratio * 100
+      }% of authenticated (${authentifiedPdfSize})`
     );
     process.exit(1);
   }
