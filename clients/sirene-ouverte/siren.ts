@@ -1,4 +1,5 @@
 import { IUniteLegale } from '../../models';
+import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import {
   formatAdresse,
   libelleFromCategoriesJuridiques,
@@ -30,6 +31,7 @@ interface ISireneOuverteUniteLegale {
   nom_complet: string;
   nom_url: string;
   numero_voie: string;
+  indice_repetition: string;
   type_voie: string;
   libelle_commune: string;
   code_postal: string;
@@ -97,6 +99,7 @@ const mapToDomainObject = (
     nom_complet,
     nom_url,
     numero_voie,
+    indice_repetition,
     type_voie,
     libelle_commune,
     code_postal,
@@ -110,6 +113,7 @@ const mapToDomainObject = (
   return {
     siren,
     numeroTva: numero_tva_intra,
+    association: null,
     siege,
     activitePrincipale: activite_principale_entreprise,
     libelleActivitePrincipale: libelleFromCodeNaf(
@@ -125,6 +129,11 @@ const mapToDomainObject = (
     ),
     etablissements: listOfEtablissement,
     estDiffusible: true,
+    estActive: !!(siege && siege.estActif),
+    estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
+      nature_juridique_entreprise
+    ),
+    estEss: false,
     nomComplet: nom_complet || 'Nom inconnu',
     chemin: nom_url,
     dateCreation: date_creation_entreprise,
@@ -133,10 +142,11 @@ const mapToDomainObject = (
     nombreEtablissements: nombre_etablissements,
     adresse: formatAdresse(
       numero_voie,
+      indice_repetition,
       type_voie,
-      libelle_commune,
+      libelle_voie,
       code_postal,
-      libelle_voie
+      libelle_commune
     ),
     currentEtablissementPage: page,
   };

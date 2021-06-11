@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "13.x"
+    "node": ">=14"
   },
   "scripts": {
     "sitemap": "node ./node-scripts/generate.js",
@@ -12,25 +12,31 @@
     "build": "npm run sitemap && NODE_ENV=production next build",
     "start": "next start -p $PORT",
     "deploy-staging": "NODE_ENV=production git push dokku-staging main:master",
-    "deploy": "NODE_ENV=production git push dokku main:master"
+    "deploy": "NODE_ENV=production git push dokku main:master",
+    "test:end2end": "cypress open",
+    "test:unit": "jest",
+    "test:a11y": "node ./node-scripts/a11y.js"
   },
   "dependencies": {
+    "@sentry/node": "^6.3.5",
     "abort-controller": "^3.0.0",
     "next": "^10.0.9",
     "next-seo": "^4.7.3",
     "qrcode": "^1.4.4",
-    "raven": "^2.6.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-markdown": "^5.0.3"
+    "react-markdown": "^5.0.3",
+    "uninstall": "*"
   },
   "devDependencies": {
-    "@axe-core/cli": "^4.1.0",
+    "@axe-core/cli": "^4.2.1",
+    "@types/jest": "^26.0.23",
     "@types/node": "^14.0.27",
     "@types/qrcode": "^1.4.0",
     "@types/raven": "^2.5.3",
     "@types/react": "^16.9.44",
-    "axe-core": "^4.1.1",
+    "cypress": "^7.5.0",
+    "jest": "^27.0.4",
     "node-fetch": "^2.6.1",
     "sass": "^1.26.10",
     "typescript": "^3.9.7"

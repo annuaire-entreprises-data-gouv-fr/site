@@ -1,4 +1,11 @@
 /** COMMON TYPES */
+export interface IAssociation {
+  id: string;
+  exId?: string;
+  nomComplet?: string;
+  objet?: string;
+  adresse?: string;
+}
 
 export interface IEtablissement {
   enseigne: string | null;
@@ -9,6 +16,7 @@ export interface IEtablissement {
   estSiege: boolean;
   dateCreation: string;
   dateDerniereMiseAJour: string;
+  dateFermeture: string | null;
   dateDebutActivite: string;
   adresse: string;
   activitePrincipale: string;
@@ -17,6 +25,11 @@ export interface IEtablissement {
   libelleTrancheEffectif: string;
   latitude: string;
   longitude: string;
+}
+
+export interface IEtablissementWithUniteLegale {
+  etablissement: IEtablissement;
+  uniteLegale: IUniteLegale;
 }
 
 export interface IUniteLegale {
@@ -33,6 +46,9 @@ export interface IUniteLegale {
   dateDerniereMiseAJour: string;
   dateDebutActivite: string;
   estDiffusible: boolean;
+  estActive: boolean | null;
+  estEntrepreneurIndividuel: boolean;
+  estEss: boolean;
   nomComplet: string;
   chemin: string;
   trancheEffectif: string;
@@ -40,6 +56,7 @@ export interface IUniteLegale {
   adresse: string;
   // etablissement list pagination
   currentEtablissementPage?: number;
+  association: IAssociation | null;
 }
 
 /** BASIC CONSTRUCTORS */
@@ -54,6 +71,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     dateCreation: '',
     dateDerniereMiseAJour: '',
     dateDebutActivite: '',
+    dateFermeture: '',
     adresse: '',
     activitePrincipale: '',
     libelleActivitePrincipale: '',
@@ -71,6 +89,9 @@ export const createDefaultUniteLegale = (siren: string): IUniteLegale => {
     siren,
     siege,
     estDiffusible: true,
+    estActive: null,
+    estEntrepreneurIndividuel: false,
+    estEss: false,
     nomComplet: '',
     chemin: siren,
     numeroTva: '',
@@ -86,34 +107,68 @@ export const createDefaultUniteLegale = (siren: string): IUniteLegale => {
     trancheEffectif: '',
     libelleTrancheEffectif: '',
     adresse: '',
+    association: null,
   };
 };
 
 /** COMMON ERRORS */
+
+/**
+ * This is a valid siren but it was not found
+ */
 export class SirenNotFoundError extends Error {
   constructor(public message: string) {
     super();
   }
 }
-export class NotASirenError extends Error {
-  constructor() {
+
+/**
+ * This look like a siren but does not respect Luhn formula
+ */
+export class NotLuhnValidSirenError extends Error {
+  constructor(public message: string) {
     super();
   }
 }
 
+/**
+ * This does not even look like a siren
+ */
+export class NotASirenError extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+/**
+ * This is a valid siret but it was not found
+ */
 export class SiretNotFoundError extends Error {
   constructor(public message: string) {
     super();
   }
 }
+
+/**
+ * This look like a siret but does not respect Luhn formula
+ */
+export class NotLuhnValidSiretError extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+/**
+ * This does not even look like a siret
+ */
 export class NotASiretError extends Error {
-  constructor() {
+  constructor(public message: string) {
     super();
   }
 }
 
 /** COMMON EXCEPTIONS */
-export class IsASirenException extends Error {
+export class IsLikelyASirenOrSiretException extends Error {
   constructor(public message: string) {
     super();
   }

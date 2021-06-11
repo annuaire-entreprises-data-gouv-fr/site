@@ -10,6 +10,7 @@ import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { EAdministration } from '../../models/administration';
 import AvisSituation from '../avis-situation';
 import { EtablissementDescription } from '../etablissement-description';
+import InformationTooltip from '../information-tooltip';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -44,7 +45,7 @@ const EtablissementSection: React.FC<IProps> = ({
   if (etablissement.estActif === false) {
     data.push([
       'Date de fermeture',
-      formatDate(etablissement.dateDebutActivite),
+      formatDate(etablissement.dateFermeture || ''),
     ]);
   }
   if (etablissement.enseigne) {
@@ -68,6 +69,7 @@ const EtablissementSection: React.FC<IProps> = ({
               }`
         }
         source={EAdministration.INSEE}
+        sourceLastUpdatedAt={formatDate(etablissement.dateDerniereMiseAJour)}
       >
         <TwoColumnTable body={data} />
       </Section>
@@ -75,8 +77,17 @@ const EtablissementSection: React.FC<IProps> = ({
         <Section
           title="Les informations de contact"
           source={EAdministration.INSEE}
+          sourceLastUpdatedAt={formatDate(uniteLegale.dateDerniereMiseAJour)}
         >
           <TwoColumnTable body={[['Adresse', etablissement.adresse]]} />
+          {uniteLegale.estEntrepreneurIndividuel && (
+            <p className="faq-entrepreneur-individuels">
+              <i>
+                Pour en savoir plus sur l'affichage des adresses{' '}
+                <a href="/faq">consultez notre FAQ</a>
+              </i>
+            </p>
+          )}
         </Section>
         {etablissement.longitude && etablissement.latitude && (
           <div className="map">
@@ -113,6 +124,11 @@ const EtablissementSection: React.FC<IProps> = ({
           bottom: 0;
           height: 100%;
           width: 100%;
+        }
+
+        .faq-entrepreneur-individuels {
+          margin: 10px;
+          font-size: 0.9rem;
         }
 
         @media only screen and (min-width: 1px) and (max-width: 600px) {

@@ -1,11 +1,12 @@
 const routes = {
   monitoring: {
-    history:
-      'https://etalab.github.io/statut.annuaire-entreprises.data.gouv.fr/history/',
-    summary:
-      'https://raw.githubusercontent.com/etalab/statut.annuaire-entreprises.data.gouv.fr/master/history/summary.json',
+    uptimeRobot: 'https://stats.uptimerobot.com/api/getMonitor/4GgkgUJWlv',
   },
   rnm: `https://api-rnm.artisanat.fr/v2/entreprises/`,
+  rna: {
+    id: `https://entreprise.data.gouv.fr/api/rna/v1/id/`,
+    siren: `https://entreprise.data.gouv.fr/api/rna/v1/siret/`,
+  },
   rncs: {
     portail: `https://data.inpi.fr/entreprises/`,
     api: {

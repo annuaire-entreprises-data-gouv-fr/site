@@ -5,7 +5,7 @@ import Page from '../layouts/page';
 
 const Privacy: NextPage = () => (
   <Page title="Politique de confidentialité" small noIndex={true}>
-    <div className="content-container">
+    <div className="content-container text-wrapper">
       <h1>Politique de confidentialité</h1>
       <h2>Cookies déposés</h2>
       <p>
@@ -21,11 +21,15 @@ const Privacy: NextPage = () => (
       <p>
         C'est vrai, vous n'avez pas eu à cliquer sur un bloc qui recouvre la
         moitié de la page pour dire que vous êtes d'accord avec le dépôt de
-        cookies — même si vous ne savez pas ce que ça veut dire !<br />
+        cookies — même si vous ne savez pas ce que ça veut dire !
+      </p>
+      <p>
         Rien d'exceptionnel, pas de passe-droit lié à un .gouv.fr. Nous
         respectons simplement la loi, qui dit que certains outils de suivi
         d'audience, correctement configurés pour respecter la vie privée, sont
-        exemptés d'autorisation préalable. <br />
+        exemptés d'autorisation préalable.
+      </p>
+      <p>
         Nous utilisons pour cela{' '}
         <a href="https://matomo.org/" rel="noopener noreferrer" target="_blank">
           Matomo

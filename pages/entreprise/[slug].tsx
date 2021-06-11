@@ -2,20 +2,19 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { IUniteLegale, NotASirenError, SirenNotFoundError } from '../../models';
+import { IUniteLegale } from '../../models';
 import UniteLegaleSection from '../../components/unite-legale-section';
 import EtablissementListeSection from '../../components/etablissement-liste-section';
 import Title, { FICHE } from '../../components/title-section';
-import {
-  redirectPageNotFound,
-  redirectServerError,
-  redirectSirenIntrouvable,
-} from '../../utils/redirect';
+
 import EtablissementSection from '../../components/etablissement-section';
 
-import NonDiffusible from '../../components/non-diffusible';
-import getUniteLegale from '../../models/unite-legale';
+import { NonDiffusibleSection } from '../../components/non-diffusible';
+import { getUniteLegaleFromSlug } from '../../models/unite-legale';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
+import AssociationSection from '../../components/association-section';
+import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
+import { redirectServerError } from '../../utils/redirects';
 
 // const structuredData = (uniteLegale: UniteLegale) => [
 //   ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],
@@ -31,8 +30,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
     title={`Entité - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
     canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
     noIndex={
-      ['1', '10', '1000'].indexOf(uniteLegale.natureJuridique) > -1 &&
-      uniteLegale.siege.estActif === false
+      uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
     }
   >
     {/* <StructuredData data={structuredData(uniteLegale)} /> */}
@@ -41,6 +39,9 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
       {uniteLegale.estDiffusible ? (
         <>
           <UniteLegaleSection uniteLegale={uniteLegale} />
+          {uniteLegale.association && uniteLegale.association.id && (
+            <AssociationSection uniteLegale={uniteLegale} />
+          )}
           {uniteLegale.siege && (
             <EtablissementSection
               uniteLegale={uniteLegale}
@@ -55,7 +56,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
           <p>
             Cette entité est <b>non-diffusible.</b>
           </p>
-          <NonDiffusible />
+          <NonDiffusibleSection />
         </>
       )}
     </div>
@@ -85,21 +86,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const page = parseIntWithDefaultValue(pageParam, 1);
 
   try {
-    const uniteLegale = await getUniteLegale(siren, page);
+    const uniteLegale = await getUniteLegaleFromSlug(siren, page);
     return {
       props: {
         uniteLegale,
       },
     };
   } catch (e) {
-    if (e instanceof NotASirenError) {
-      //@ts-ignore
-      redirectPageNotFound(context.res, JSON.stringify(context.params.slug));
-    } else if (e instanceof SirenNotFoundError) {
-      redirectSirenIntrouvable(context.res, siren);
-    } else {
-      redirectServerError(context.res, e.message);
-    }
+    // redirectIfIssueWithSiren(context.res, e, siren, context.req);
     return { props: {} };
   }
 };

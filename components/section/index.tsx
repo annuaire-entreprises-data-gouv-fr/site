@@ -9,6 +9,7 @@ interface ISectionProps {
   title: string;
   width?: number;
   source?: EAdministration;
+  sourceLastUpdatedAt?: string | Date;
   id?: string;
 }
 
@@ -17,6 +18,7 @@ export const Section: React.FC<ISectionProps> = ({
   children,
   title,
   source,
+  sourceLastUpdatedAt,
   width = 100,
 }) => {
   const dataSource = source ? administrationsMetaData[source] : undefined;
@@ -27,7 +29,10 @@ export const Section: React.FC<ISectionProps> = ({
         <div>{children}</div>
         {dataSource && (
           <div className="data-source-tooltip-wrapper">
-            <DataSourceTooltip dataSource={dataSource} />
+            <DataSourceTooltip
+              dataSource={dataSource}
+              lastUpdatedAt={sourceLastUpdatedAt}
+            />
           </div>
         )}
       </div>

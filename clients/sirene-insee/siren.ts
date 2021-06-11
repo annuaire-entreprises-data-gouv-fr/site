@@ -1,15 +1,17 @@
-import { inseeClientGet } from '.';
+import { inseeClientGet, InseeForbiddenError, INSEE_CREDENTIALS } from '.';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
   IUniteLegale,
 } from '../../models';
+import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
+import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
 import {
   libelleFromCategoriesJuridiques,
+  libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
 import routes from '../routes';
-import { getAllEtablissementInsee } from './siret';
 
 interface IInseeUniteLegaleResponse {
   uniteLegale: {
@@ -20,11 +22,13 @@ interface IInseeUniteLegaleResponse {
     trancheEffectifsUniteLegale: string;
     statutDiffusionUniteLegale: string;
     prenom1UniteLegale: string;
+    identifiantAssociationUniteLegale: string | null;
   };
 }
 interface IPeriodeUniteLegale {
   nicSiegeUniteLegale: string;
   etatAdministratifUniteLegale: string;
+  economieSocialeSolidaireUniteLegale: string | null;
   dateDebut: string;
   activitePrincipaleUniteLegale: string;
   categorieJuridiqueUniteLegale: string;
@@ -32,9 +36,28 @@ interface IPeriodeUniteLegale {
   nomUniteLegale: string;
 }
 
+/**
+ * Call to Sirene INSEE API - can be used with the fallback token
+ * @param siren
+ * @param useInseeFallback
+ * @returns
+ */
 export const getUniteLegaleInsee = async (siren: string) => {
   const request = await inseeClientGet(routes.sireneInsee.siren + siren);
   const response = (await request.json()) as IInseeUniteLegaleResponse;
+
+  return mapToDomainObject(siren, response);
+};
+
+export const getUniteLegaleInseeWithFallbackCredentials = async (
+  siren: string
+) => {
+  const request = await inseeClientGet(
+    routes.sireneInsee.siren + siren,
+    INSEE_CREDENTIALS.FALLBACK
+  );
+  const response = (await request.json()) as IInseeUniteLegaleResponse;
+
   return mapToDomainObject(siren, response);
 };
 
@@ -50,17 +73,27 @@ const mapToDomainObject = (
     trancheEffectifsUniteLegale,
     statutDiffusionUniteLegale,
     prenom1UniteLegale,
+    identifiantAssociationUniteLegale,
   } = response.uniteLegale;
 
   const {
     nicSiegeUniteLegale,
-    etatAdministratifUniteLegale,
     dateDebut,
     activitePrincipaleUniteLegale = '',
     categorieJuridiqueUniteLegale,
     denominationUniteLegale,
+    economieSocialeSolidaireUniteLegale,
+    etatAdministratifUniteLegale,
     nomUniteLegale,
   } = periodesUniteLegale[0];
+
+  if (statutDiffusionUniteLegale === 'N') {
+    throw new InseeForbiddenError(403, 'Forbidden (non diffusible)');
+  }
+
+  const safeActivitePrincipaleUniteLegale = (
+    activitePrincipaleUniteLegale || ''
+  ).replace('.', '');
 
   const siege = createDefaultEtablissement();
 
@@ -68,11 +101,11 @@ const mapToDomainObject = (
     siege.siren = siren;
     siege.siret = siren + nicSiegeUniteLegale;
     siege.nic = nicSiegeUniteLegale;
-    siege.estActif = etatAdministratifUniteLegale === 'A';
+    siege.estActif = null;
     siege.dateCreation = dateDebut;
-    siege.activitePrincipale = activitePrincipaleUniteLegale.replace('.', '');
+    siege.activitePrincipale = safeActivitePrincipaleUniteLegale;
     siege.libelleActivitePrincipale = libelleFromCodeNaf(
-      activitePrincipaleUniteLegale.replace('.', '')
+      safeActivitePrincipaleUniteLegale
     );
     siege.estSiege = true;
     siege.trancheEffectif = '';
@@ -89,6 +122,10 @@ const mapToDomainObject = (
   return {
     ...defaultUniteLegale,
     siren: siren,
+    numeroTva: tvaIntracommunautaireFromSiren(siren),
+    association: identifiantAssociationUniteLegale
+      ? { id: identifiantAssociationUniteLegale }
+      : null,
     siege,
     natureJuridique: categorieJuridiqueUniteLegale,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(
@@ -101,9 +138,17 @@ const mapToDomainObject = (
     dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
       'T'
     )[0],
+    estActive: etatAdministratifUniteLegale === 'A',
     estDiffusible: statutDiffusionUniteLegale !== 'N',
+    estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
+      categorieJuridiqueUniteLegale
+    ),
+    estEss: economieSocialeSolidaireUniteLegale === 'O',
     nomComplet,
     chemin: siren,
     trancheEffectif: trancheEffectifsUniteLegale,
+    libelleTrancheEffectif: libelleFromCodeEffectif(
+      trancheEffectifsUniteLegale
+    ),
   };
 };

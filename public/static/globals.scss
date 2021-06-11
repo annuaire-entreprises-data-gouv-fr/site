@@ -16,56 +16,6 @@ html {
   padding: 0;
 }
 
-#page-layout {
-  section.page-baseline {
-    margin: 30px auto;
-    text-align: left;
-  }
-
-  section.page-body-container {
-    padding: 35px 0 60px;
-    background: $lightGrey;
-  }
-
-  .default-grid {
-    display: grid;
-    grid-template-columns: 31% 31% 31%;
-    grid-gap: 30px 3%;
-
-    @media only screen and (min-width: 550px) and (max-width: 920px) {
-      grid-template-columns: 48% 48%;
-      grid-gap: 30px 4%;
-    }
-
-    @media only screen and (min-width: 1px) and (max-width: 600px) {
-      grid-template-columns: 100%;
-      grid-gap: 30px 0%;
-    }
-  }
-
-  .left-column-grid {
-    display: grid;
-    grid-template-columns: 25% 72%;
-    grid-gap: 20px 3%;
-
-    @media only screen and (min-width: 1px) and (max-width: 920px) {
-      grid-template-columns: 100%;
-      grid-gap: 0 0;
-
-      &.desktop-only {
-        > .left-column {
-          display: none;
-        }
-      }
-    }
-    .sticky-column {
-      position: sticky;
-      overflow: hidden;
-      padding-bottom: 15px;
-    }
-  }
-}
-
 .layout-center {
   display: flex;
   align-items: center;
@@ -107,65 +57,15 @@ main {
   min-height: 400px;
 }
 
-.text-style {
-  font-size: 1.1rem;
-  line-height: 1.6rem;
-  color: $darkestGrey;
+.text-wrapper {
+  margin: 80px auto;
 
-  h1 {
-    font-size: 2.5rem;
-    line-height: 3.4rem;
-    margin: 50px 0;
-    color: $darkGrey;
+  @media only screen and (min-width: 864px) {
+    width: 874px;
   }
 
-  h2 {
-    font-size: 1.8rem;
-    line-height: 2.2rem;
-    margin: 40px 0 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-    color: $darkestGrey;
-  }
-
-  h3 {
-    font-size: 1.3rem;
-    line-height: 1.9rem;
-    margin: 25px 0 16px;
-  }
-
-  h4 {
-    font-size: 1.2rem;
-    line-height: 1.8rem;
-    margin: 20px 0 16px;
-  }
-
-  p {
-    font-size: 1.1rem;
-    line-height: 1.8rem;
-    margin: 20px 0 25px;
-
-    br {
-      margin-bottom: 15px;
-    }
-
-    ul {
-      list-style: none;
-    }
-  }
-
-  ul {
-    list-style-type: circle;
-    margin-left: 20px;
-
-    li > p {
-      margin: 0;
-    }
-  }
-
-  pre {
-    overflow: auto;
-    color: #001a39;
+  @media only screen and (min-width: 1px) and (max-width: 864px) {
+    width: 100%;
   }
 }
 
@@ -196,7 +96,7 @@ h4 {
 }
 
 p {
-  margin: 5px 0;
+  margin: 20px 0;
 }
 
 @media only screen and (min-width: 1px) and (max-width: 600px) {

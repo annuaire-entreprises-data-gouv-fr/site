@@ -14,6 +14,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
             href={`https://www.linkedin.com/shareArticle?mini=true&url=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
             rel="noreferrer noopener"
             target="_blank"
+            title="Partager cette page sur linkedin"
           >
             {linkedin}
           </a>
@@ -28,6 +29,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
             href={`https://twitter.com/intent/tweet?url=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
             rel="noreferrer noopener"
             target="_blank"
+            title="Partager cette page sur twitter"
           >
             {twitter}
           </a>
@@ -42,6 +44,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
             href={`https://www.facebook.com/sharer/sharer.php?u=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
             rel="noreferrer noopener"
             target="_blank"
+            title="Partager cette page sur Facebook"
           >
             {facebook}
           </a>
@@ -53,9 +56,8 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
           orientation="right"
         >
           <a
+            title="Partager cette page grâce à un QR Code"
             href={`/api/qr/${siren}`}
-            rel="noreferrer noopener"
-            target="_blank"
             download={`QR_code_page_${siren}.jpeg`}
           >
             {qrCode}
@@ -74,6 +76,9 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       .social-media span a {
         cursor: pointer !important;
         box-shadow: none;
+      }
+      .social-media span a:after {
+        display: none;
       }
       .social-media {
         color: #000091;

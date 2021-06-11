@@ -4,15 +4,14 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import ResultsList from '../../components/results-list';
 import PageCounter from '../../components/results-page-counter';
-import {
-  redirectIfSiretOrSiren,
-  redirectServerError,
-} from '../../utils/redirect';
+import { redirectServerError } from '../../utils/redirects';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import search, { ISearchResults } from '../../models/search';
 import ResultsHeader from '../../components/results-header';
-import { IsASirenException } from '../../models';
+import { IsLikelyASirenOrSiretException } from '../../models';
 import LogSearchTermInPiwik from '../../components/clients-script/log-search-term-in-piwik';
+import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
+import HiddenH1 from '../../components/a11y-components/hidden-h1';
 
 interface IProps extends ISearchResults {
   searchTerm: string;
@@ -31,6 +30,7 @@ const SearchResultPage: React.FC<IProps> = ({
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"
   >
+    <HiddenH1 title="Résultats de recherche" />
     <div className="result-content-container">
       <ResultsHeader
         resultCount={resultCount}
@@ -65,7 +65,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // get params from query string
   const searchTermParam = (context.query.terme || '') as string;
   const pageParam = (context.query.page || '') as string;
-
   const page = parseIntWithDefaultValue(pageParam, 1);
 
   try {
@@ -77,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e) {
-    if (e instanceof IsASirenException) {
+    if (e instanceof IsLikelyASirenOrSiretException) {
       redirectIfSiretOrSiren(context.res, e.message);
     } else {
       redirectServerError(context.res, e.message);

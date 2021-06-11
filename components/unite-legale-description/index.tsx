@@ -1,12 +1,12 @@
 import React from 'react';
 import { IUniteLegale } from '../../models';
-import { formatDateLong } from '../../utils/helpers/formatting';
+import { capitalize, formatDateLong } from '../../utils/helpers/formatting';
 
 export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
 }) => (
-  <>
-    <>L’unité légale {uniteLegale.nomComplet}</>{' '}
+  <p>
+    <>L’unité légale {capitalize(uniteLegale.nomComplet)}</>{' '}
     {uniteLegale.natureJuridique && (
       <>
         est une <b>{uniteLegale.libelleNatureJuridique}</b>{' '}
@@ -17,14 +17,12 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
         créée le <b>{formatDateLong(uniteLegale.dateCreation)}</b>
       </>
     )}
-    {uniteLegale.dateDebutActivite &&
-      uniteLegale.siege &&
-      !uniteLegale.siege.estActif && (
-        <>
-          {' '}
-          et fermée le <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>
-        </>
-      )}
+    {uniteLegale.dateDebutActivite && !uniteLegale.estActive && (
+      <>
+        {' '}
+        et fermée le <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>
+      </>
+    )}
     {uniteLegale.siege && uniteLegale.siege.adresse && (
       <>
         , dont le siège est domicilié au{' '}
@@ -42,7 +40,5 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
         </a>
       </>
     )}
-    <br />
-    <br />
-  </>
+  </p>
 );

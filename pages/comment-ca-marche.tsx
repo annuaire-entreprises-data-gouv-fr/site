@@ -1,17 +1,29 @@
 import React from 'react';
+import ButtonLink from '../components/button';
 
 import Page from '../layouts';
 
 const About: React.FC = () => {
   return (
     <Page small={true} title="Comment ça marche ?">
-      <div className="content-container">
+      <div className="content-container text-wrapper">
         <h1>À propos de L’Annuaire des Entreprises</h1>
         <h2>Qui a développé ce site ?</h2>
         <p>
           Ce site a été développé et est maintenu par{' '}
-          <a href="https://etalab.gouv.fr">Etalab</a> et la{' '}
-          <a href="https://entreprises.gouv.fr">
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://etalab.gouv.fr"
+          >
+            Etalab
+          </a>{' '}
+          et la{' '}
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://entreprises.gouv.fr"
+          >
             Direction Générale des Entreprises (DGE)
           </a>
           .
@@ -30,13 +42,23 @@ const About: React.FC = () => {
           <p>
             <b>NB :</b> toutes les données ouvertes (open data) de
             l'administration sont accessibles sur{' '}
-            <a href="https://data.gouv.fr">data.gouv.fr</a>
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://data.gouv.fr"
+            >
+              data.gouv.fr
+            </a>
           </p>
           <h3>Les fiches entreprises et etablissements</h3>
           <p>
             Les informations comme le SIRET, l'adresse du siège social, la
             dénomination sont issues de la{' '}
-            <a href="https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/">
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/"
+            >
               base Sirene des entreprises
             </a>{' '}
             publiée par l'INSEE, et accessible à tous.
@@ -44,15 +66,55 @@ const About: React.FC = () => {
           <h3>Les fiches d'immatriculation</h3>
           <p>
             Les informations de la fiche d’immatriculation sont issues du{' '}
-            <a href="http://data.inpi.fr/">
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="http://data.inpi.fr/"
+            >
               Registre National du Commerce et des Sociétés (RNCS)
             </a>{' '}
             ou du{' '}
-            <a href="https://rnm.artisanat.fr/">
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://rnm.artisanat.fr/"
+            >
               Répertoire National des Métiers (RNM)
             </a>{' '}
             (dans le cas des entreprises artisanales).
           </p>
+          <h2>
+            Utilisation du site dans le cadre de démarches administratives
+          </h2>
+          <p>
+            L’Annuaire des Entreprises est un des services clefs mis en oeuvre
+            par l'Etat pour faciliter les démarches des entreprises. Parmi ses
+            fonctionnalités, on peut citer :
+          </p>
+          <h3>Recherche de numéro siret, de numéro siren</h3>
+          <p>
+            L'Annuaire des Entreprises propose une recherche puissante et simple
+            qui permet aux entrepreneurs de retrouver facilement le numéro siret
+            de leur(s) entreprise(s) pour l'utiliser dans leurs démarches
+            administratives.
+          </p>
+          <h3>Suppression du KBIS dans les démarches des entreprises</h3>
+          <p>
+            À partir de Novembre 2021, les entreprises immatriculées au RCS ou
+            au RNM n’ont plus à fournir leur extrait KBIS dans leurs démarches
+            administratives, le seul numéro siret suffit à l'administration pour
+            retrouver les données nécessaire.
+          </p>
+          <p>
+            Ce site permet aux agents d’administrations de retrouver{' '}
+            <b>toutes les informations contenues dans un KBIS</b>.
+          </p>
+          <p>
+            <a href="/donnees-extrait-kbis">
+              ⇢ Vous êtes un agent ? Consultez notre guide.
+            </a>
+          </p>
+          <div className="layout-center"></div>
           <h2>Comment utiliser ces données dans mon site internet ?</h2>
           <p>
             Toutes les sources de données citées précédement sont accessibles
@@ -60,33 +122,85 @@ const About: React.FC = () => {
           </p>
           <ul>
             <li>
-              <a href="https://api.gouv.fr/guides/quelle-api-sirene">
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://api.gouv.fr/guides/quelle-api-sirene"
+              >
                 API Sirene données ouvertes
               </a>{' '}
               : qui donne accès à la base Sirene des entreprises de l'
-              <a href="https://www.insee.fr/fr/accueil">INSEE</a>
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://www.insee.fr/fr/accueil"
+              >
+                INSEE
+              </a>
             </li>
             <li>
-              {' '}
-              <a href="https://api-rnm.artisanat.fr/">
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://api.gouv.fr/les-api/api_rnm"
+              >
                 API Répertoire National des Métiers
               </a>{' '}
               : les immatriculations d'entreprises artisanales, auprès de{' '}
-              <a href="https://cma-france.fr/">CMA France</a>
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://cma-france.fr/"
+              >
+                CMA France
+              </a>
             </li>
             <li>
-              <a href="https://api.gouv.fr/les-api/api_inpi">
-                {' '}
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://api.gouv.fr/les-api/api_inpi"
+              >
                 API Registre National du Commerce et des Sociétés
               </a>{' '}
               : les immatriculations d'entreprises auprès des Greffes de
               tribunal de Commerce, centralisées par l’
-              <a href="https://www.inpi.fr/fr">INPI</a>.
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://www.inpi.fr/fr"
+              >
+                INPI
+              </a>
+              .
+            </li>
+            <li>
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://api.gouv.fr/les-api/api_rna"
+              >
+                API Répertoire National des Associations
+              </a>{' '}
+              : les informations des associations, centralisées par le{' '}
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://www.interieur.gouv.fr"
+              >
+                Ministère de l’Intérieur
+              </a>
             </li>
           </ul>
           <p>
             <b>NB :</b>Toutes les APIs du service public sont référencées sur{' '}
-            <a href="https://api.gouv.fr">api.gouv.fr</a>
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://api.gouv.fr"
+            >
+              api.gouv.fr
+            </a>
           </p>
           <h2>
             Je suis une administration, comment utiliser ces données directement
@@ -105,7 +219,11 @@ const About: React.FC = () => {
             <li>... et bien d’autres</li>
           </ul>
           <p>
-            <a href="https://api.gouv.fr/les-api/api-entreprise">
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://api.gouv.fr/les-api/api-entreprise"
+            >
               ⇢ En savoir plus sur API Entreprise
             </a>
           </p>

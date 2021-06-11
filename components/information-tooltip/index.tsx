@@ -1,23 +1,23 @@
 import React, { PropsWithChildren, ReactNode } from 'react';
 
-const left = (orientation: 'left' | 'right' | 'center') => {
+const left = (orientation: 'left' | 'right' | 'center', offsetLeftpx = 0) => {
   switch (orientation) {
     case 'right':
-      return 'calc(100% - 240px);';
+      return `calc(100% - ${230 + offsetLeftpx}px);`;
     case 'left':
-      return 'calc(100% - 10px)';
+      return `calc(100% - ${10 + offsetLeftpx}px)`;
     case 'center':
     default:
-      return 'calc(50% - 115px)';
+      return `calc(50% - ${115 + offsetLeftpx}px)`;
   }
 };
 
 const leftTriangle = (orientation: 'left' | 'right' | 'center') => {
   switch (orientation) {
     case 'right':
-      return '95%';
+      return '97%';
     case 'left':
-      return '5%';
+      return '10%';
     case 'center':
     default:
       return '50%';
@@ -28,8 +28,9 @@ const InformationTooltip: React.FC<
   PropsWithChildren<{
     label: ReactNode | string;
     orientation?: 'left' | 'right' | 'center';
+    offsetLeftpx?: number;
   }>
-> = ({ children, label, orientation = 'center' }) => (
+> = ({ children, label, orientation = 'center', offsetLeftpx = 0 }) => (
   <>
     <span className="wrapper">
       {children}
@@ -47,7 +48,7 @@ const InformationTooltip: React.FC<
         border-radius: 5px;
         bottom: calc(100% + 10px);
         color: #fff;
-        left: ${left(orientation)};
+        left: ${left(orientation, offsetLeftpx)};
         display: block;
         visibility: hidden;
         padding: 10px;

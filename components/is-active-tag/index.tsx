@@ -2,7 +2,10 @@ import React from 'react';
 import InformationTooltip from '../information-tooltip';
 import { Tag } from '../tag';
 
-const IsActiveTag: React.FC<{ isActive: boolean | null }> = ({ isActive }) => (
+const IsActiveTag: React.FC<{
+  isActive: boolean | null;
+  isUniteLegale?: boolean;
+}> = ({ isActive, isUniteLegale = false }) => (
   <>
     {isActive === null ? (
       <>
@@ -17,7 +20,7 @@ const IsActiveTag: React.FC<{ isActive: boolean | null }> = ({ isActive }) => (
     ) : isActive ? (
       <Tag className="open">en activité</Tag>
     ) : (
-      <Tag className="closed">fermé</Tag>
+      <Tag className="closed">{isUniteLegale ? 'cessée' : 'fermé'}</Tag>
     )}
   </>
 );

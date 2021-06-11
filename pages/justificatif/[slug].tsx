@@ -2,18 +2,19 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { NotASirenError, SirenNotFoundError } from '../../models';
-import {
-  redirectPageNotFound,
-  redirectServerError,
-  redirectSirenIntrouvable,
-} from '../../utils/redirect';
 import { Section } from '../../components/section';
 import Title, { FICHE } from '../../components/title-section';
 import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
 import AvisSituation from '../../components/avis-situation';
 import { EAdministration } from '../../models/administration';
+import { formatDate } from '../../utils/helpers/formatting';
+import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
+import { FullTable } from '../../components/table/full';
+import { IEtablissement } from '../../models';
+import { formatSiret } from '../../utils/helpers/siren-and-siret';
+import { Tag } from '../../components/tag';
+import IsActiveTag from '../../components/is-active-tag';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -27,20 +28,49 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
   >
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.JUSTIFICATIFS} />
-      <Section title="Avis de situation INSEE" source={EAdministration.INSEE}>
-        <div className="description">
-          Le siège social de cette entité possède un avis de situation au
-          répertoire Sirene des entreprises.
-        </div>
-        <div className="layout-center">
-          👉&nbsp;
-          <AvisSituation siret={uniteLegale.siege.siret} />
-        </div>
-      </Section>
       <Immatriculations
         immatriculationRNM={immatriculationRNM}
         immatriculationRNCS={immatriculationRNCS}
       />
+      {uniteLegale.estDiffusible && (
+        <Section
+          title="Avis de situation INSEE"
+          source={EAdministration.INSEE}
+          sourceLastUpdatedAt={formatDate(uniteLegale.dateDerniereMiseAJour)}
+        >
+          <div className="description">
+            Chaque établissement immatriculé par l'INSEE au répertoire Sirene
+            des entreprises possède un avis de situation.
+          </div>
+          <FullTable
+            head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
+            body={uniteLegale.etablissements.map(
+              (etablissement: IEtablissement) => [
+                <a href={`/etablissement/${etablissement.siret}`}>
+                  {formatSiret(etablissement.siret)}
+                </a>,
+                etablissement.adresse,
+                <>
+                  {!uniteLegale.estDiffusible ? (
+                    <Tag>non-diffusible</Tag>
+                  ) : (
+                    <>
+                      {etablissement.estSiege && <Tag>siège social</Tag>}
+                      {!etablissement.estActif && (
+                        <IsActiveTag isActive={etablissement.estActif} />
+                      )}
+                    </>
+                  )}
+                </>,
+                <AvisSituation
+                  siret={uniteLegale.siege.siret}
+                  label="Télécharger"
+                />,
+              ]
+            )}
+          />
+        </Section>
+      )}
     </div>
     <style jsx>{`
       .separator {
@@ -86,13 +116,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: justificatifs,
     };
   } catch (e) {
-    if (e instanceof NotASirenError) {
-      redirectPageNotFound(context.res, siren);
-    } else if (e instanceof SirenNotFoundError) {
-      redirectSirenIntrouvable(context.res, siren);
-    } else {
-      redirectServerError(context.res, e.message);
-    }
+    redirectIfIssueWithSiren(context.res, e, siren, context.req);
     return { props: {} };
   }
 };

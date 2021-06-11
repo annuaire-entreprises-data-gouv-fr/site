@@ -12,7 +12,7 @@ import {
 import {
   redirectPageNotFound,
   redirectServerError,
-} from '../../utils/redirect';
+} from '../../utils/redirects';
 import getMonitoring, { IMonitoring } from '../../models/monitoring';
 import AdministrationApiMonitoring from '../../components/administration-api-monitoring';
 import { HttpNotFound } from '../../clients/exceptions';
@@ -36,6 +36,8 @@ const AdministrationPage: React.FC<IProps> = ({
     canonical={`https://annuaire-entreprises.data.gouv.fr/administration/${slug}`}
   >
     <div className="content-container">
+      <br />
+      <a href="/administration">← Toutes les administrations partenaires</a>
       <h1>{long}</h1>
       <ReactMarkdown children={description} />
       {(apiGouvLink || dataGouvLink) && (
@@ -76,6 +78,7 @@ const AdministrationPage: React.FC<IProps> = ({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug as EAdministration;
+
   try {
     const administration = Object.values(administrationsMetaData).find(
       //@ts-ignore
@@ -93,7 +96,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (e instanceof HttpNotFound) {
       redirectPageNotFound(
         context.res,
-        `Administration ${slug} page does not exist`
+        `Administration ${slug} page does not exist`,
+        { page: context.req.url }
       );
     } else {
       redirectServerError(context.res, e);

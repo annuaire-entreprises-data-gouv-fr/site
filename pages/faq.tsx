@@ -12,7 +12,7 @@ const QuestionBlock: React.FC<PropsWithChildren<{ title: string }>> = ({
   const id = Math.random().toString(16).substring(7);
   return (
     <>
-      <div className="content-container container">
+      <div className="container">
         <input
           type="checkbox"
           value="selected"
@@ -24,73 +24,70 @@ const QuestionBlock: React.FC<PropsWithChildren<{ title: string }>> = ({
       </div>
 
       <style jsx>{`
-      div.container > div {
-        max-height:0;
-        overflow:hidden;
-        transition: max-height 150ms ease-in-out,padding 150ms ease-in-out;
-        background-color: #f3f3f3;
-        border-radius:2px;
-        padding:15px;
-        display:block;
-      }
-
-      label {
-        display:block;
-        font-weight:bold;
-        font-size:1.4rem;
-        line-height:1.8rem;
-        padding: 20px 0;
-        cursor:pointer;
-        position:relative;
-        margin-right:25px;
-      }
-      label:after {
-        content:"▾";
-        position:absolute;
-        color:#000091;
-        right:-25px;
-        top:20px;
-        transition:transform 200ms ease-in-out;
-      }
-
-
-      .toggle__input {
-          display: none;
-      }
-      .toggle__input:checked ~ div {
-        max-height:500px;
-        display block;
-        padding:15px;
-      }
-      .toggle__input:checked ~ label:after {
-        transform:rotate(-180deg);
-      }
-      .toggle__input:not(:checked) ~ div {
-        max-height:0;
-        padding:0 15px;
-      }
-      .toggle__input:not(:checked) ~ label:after {
-        transform:rotate(0deg);
-      }
-
-      @media only screen and (min-width: 1px) and (max-width: 600px) {
-        label {
-          padding: 20px 0;
-          font-size:1.2rem;
-          line-height:1.4rem;
+        div.container > div {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 150ms ease-in-out, padding 150ms ease-in-out;
+          background-color: #f3f3f3;
+          border-radius: 2px;
+          padding: 0 15px 15px;
+          display: block;
+          margin-bottom: 15px;
         }
-      }
-    `}</style>
+
+        label {
+          display: block;
+          font-weight: bold;
+          font-size: 1.2rem;
+          line-height: 1.6rem;
+          padding: 10px 0;
+          cursor: pointer;
+          position: relative;
+          margin-right: 25px;
+        }
+        label:after {
+          content: '▾';
+          position: absolute;
+          color: #000091;
+          right: -25px;
+          top: 20px;
+          transition: transform 200ms ease-in-out;
+        }
+
+        .toggle__input {
+          display: none;
+        }
+        .toggle__input:checked ~ div {
+          max-height: 500px;
+        }
+        .toggle__input:checked ~ label:after {
+          transform: rotate(-180deg);
+        }
+        .toggle__input:not(:checked) ~ div {
+          max-height: 0;
+          padding: 0 15px;
+        }
+        .toggle__input:not(:checked) ~ label:after {
+          transform: rotate(0deg);
+        }
+
+        @media only screen and (min-width: 1px) and (max-width: 600px) {
+          label {
+            padding: 10px 0;
+            font-size: 1.2rem;
+            line-height: 1.6rem;
+          }
+        }
+      `}</style>
     </>
   );
 };
 
 const FAQ: React.FC<{}> = () => (
   <Page small={true} title="FAQ de l’Annuaire des Entreprises">
-    <div className="content-container">
-      <div className="layout-center">
-        <h1>FAQ de l’Annuaire des Entreprises</h1>
-      </div>
+    <div className="content-container text-wrapper">
+      <h1>FAQ</h1>
+      <p>Conseils et réponses de l'équipe Annuaire des Entreprises</p>
       <div className="questions">
         <QuestionBlock title="Je cherche une entreprise qui n'apparait pas dans les résultats de recherche">
           <p>
@@ -113,8 +110,47 @@ const FAQ: React.FC<{}> = () => (
             </li>
           </ul>
         </QuestionBlock>
+        <QuestionBlock title="Pourquoi mon adresse personnelle apparait-elle sur l'Annuaire des Entreprises ?">
+          <p>
+            Les pages des entreprises individuelles et des auto-entreprises,
+            sont susceptibles de contenir des informations à caractère
+            personnel. Dans le cadre de l’article{' '}
+            <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000031043097/">
+              A123-96 du code de Commerce
+            </a>
+            , chaque personne physique inscrite au répertoire Sirene comme
+            entrepreneur individuel peut choisir de rendre publiques ou non les
+            données qui la concernent.
+          </p>
+          <p>
+            La procédure s'appelle "changement de statut de diffusion" et elle
+            est à effectuer auprès de L'INSEE :
+          </p>
+          <div className="layout-center">
+            <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
+              ⇢ Changer le statut de diffusion de mon entreprise
+            </ButtonLink>
+          </div>
+        </QuestionBlock>
         <QuestionBlock title="Qu'est-ce qu'une entreprise non-diffusible ?">
           <NonDiffusible />
+        </QuestionBlock>
+        <QuestionBlock title="Je suis un agent public et je cherche les données présentes dans un extrait KBIS/D1">
+          <p>
+            À partir de Novembre 2021, les entreprises immatriculées au RCS ou
+            au RNM n’ont plus à fournir leur extrait KBIS dans leurs démarches
+            administratives, le seul numéro siret suffit à l'administration pour
+            retrouver les données nécessaire.
+          </p>
+          <p>
+            Ce site permet aux agents d’administrations de retrouver{' '}
+            <b>toutes les informations contenues dans un KBIS</b>.
+          </p>
+          <p>
+            <a href="/donnees-extrait-kbis">
+              ⇢ Pour en savoir plus, consultez notre guide.
+            </a>
+          </p>
         </QuestionBlock>
         <QuestionBlock title="La fiche d'immatriculation de mon entreprise est introuvable">
           <p>
@@ -149,16 +185,12 @@ const FAQ: React.FC<{}> = () => (
             Les données du moteur de recherche sont mises à jour tous les mois.
           </p>
         </QuestionBlock>
-        <QuestionBlock title="Qu'est-ce qu'une entreprise non-diffusible ?">
-          <NonDiffusible />
-        </QuestionBlock>
         <QuestionBlock title="Comment puis-je utiliser ces données dans mon site internet ?">
           <p>
             Toutes les données présentées sur le site sont publiées en
             open-data. Pour en savoir plus sur la démarche, vous pouvez
             consulter la <a href="/comment-ca-marche">page "à propos"</a>.
           </p>
-          <br />
           <p>
             Vous pouvez également consulter les fiches explicatives de chaque
             administration :
@@ -181,7 +213,7 @@ const FAQ: React.FC<{}> = () => (
             </ul>
           </p>
         </QuestionBlock>
-        <QuestionBlock title="Je ne trouve pas la réponse a ma question">
+        <QuestionBlock title="Je ne trouve pas la réponse à ma question">
           <p>Vous pouvez nous poser une question directement :</p>
           <div className="layout-center">
             <ButtonLink href={constants.links.mailto} alt>

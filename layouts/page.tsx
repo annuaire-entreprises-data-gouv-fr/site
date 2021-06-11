@@ -40,7 +40,7 @@ const Page: React.FC<IProps> = ({
     ) : (
       <Header />
     )}
-    <main className="rf-container">{children}</main>
+    <main className="fr-container">{children}</main>
     <Question />
     <Footer />
     <style global jsx>{`
@@ -48,7 +48,7 @@ const Page: React.FC<IProps> = ({
         width: 100%;
       }
 
-      main.rf-container {
+      main.fr-container {
         max-width: ${map ? '100%' : ''};
       }
     `}</style>

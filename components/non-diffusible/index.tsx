@@ -3,7 +3,7 @@ import ButtonLink from '../button';
 import { Section } from '../section';
 
 const NonDiffusible = () => (
-  <Section title="Qu’est ce qu’une entreprise non-diffusible ?">
+  <>
     <p>
       Certaines entités demandent à ne pas figurer sur les listes de diffusion
       publique en vertu de{' '}
@@ -18,17 +18,21 @@ const NonDiffusible = () => (
       Pour des raisons de sécurité, certaines associations et les organismes
       relevant du Ministère de la Défense ne sont pas diffusibles non plus.
     </p>
-    <br />
     <p>
       Si cette entité est la votre et que vous souhaitez vous rendre diffusible
       de nouveau la démarche est à effectuer auprès de l’INSEE&nbsp;:
     </p>
-    <br />
     <div className="layout-center">
       <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
         ⇢ Rendre mon entité diffusible
       </ButtonLink>
     </div>
+  </>
+);
+
+export const NonDiffusibleSection = () => (
+  <Section title="Qu’est ce qu’une entreprise non-diffusible ?">
+    <NonDiffusible />
   </Section>
 );
 

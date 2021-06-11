@@ -16,6 +16,8 @@ export const formatDate = (date: string | Date) =>
   date ? new Intl.DateTimeFormat('fr-FR').format(castDate(date)) : undefined;
 
 export const capitalize = (str: string) => {
+  if (!str) return str;
+
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
@@ -51,6 +53,14 @@ export const removeInvisibleChar = (term: string) => {
  */
 export const trimWhitespace = (term: string) => {
   return term.split(' ').join('');
+};
+
+/**
+ * Clean Search term by removing inivisible char and whitespaces
+ */
+export const cleanSearchTerm = (term: string) => {
+  const cleanedTerm = removeInvisibleChar(term);
+  return trimWhitespace(cleanedTerm);
 };
 
 /**

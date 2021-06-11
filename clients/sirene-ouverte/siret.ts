@@ -29,6 +29,7 @@ export interface ISireneOuverteEtablissement {
   latitude: string;
   longitude: string;
   numero_voie: string;
+  indice_repetition: string;
   type_voie: string;
   libelle_commune: string;
   code_postal: string;
@@ -71,22 +72,25 @@ const getEtablissementSireneOuverte = async (
 export const mapSireneOuverteEtablissementToDomainObject = (
   etablissement: ISireneOuverteEtablissement
 ): IEtablissement => {
+  const estActif = etablissement.etat_administratif_etablissement === 'A';
   return {
     enseigne: etablissement.enseigne || null,
     siren: etablissement.siren,
     siret: etablissement.siret,
     nic: etablissement.nic,
-    estActif: etablissement.etat_administratif_etablissement === 'A',
+    estActif,
     estSiege: etablissement.is_siege,
     dateCreation: etablissement.date_creation,
     dateDerniereMiseAJour: etablissement.date_mise_a_jour,
     dateDebutActivite: etablissement.date_debut_activite,
+    dateFermeture: !estActif ? etablissement.date_debut_activite : null,
     adresse: formatAdresse(
       etablissement.numero_voie,
+      etablissement.indice_repetition,
       etablissement.type_voie,
-      etablissement.libelle_commune,
+      etablissement.libelle_voie,
       etablissement.code_postal,
-      etablissement.libelle_voie
+      etablissement.libelle_commune
     ),
     activitePrincipale: etablissement.activite_principale,
     libelleActivitePrincipale: libelleFromCodeNaf(

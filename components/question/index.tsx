@@ -9,7 +9,8 @@ export const Question: React.FC<{}> = () => (
     >
       <a className="dont-apply-link-style" href="/faq">
         <div>
-          <span>Une question</span> ?
+          <span>Une question</span>{' '}
+          <span className="fr-fi-question-fill"></span>
         </div>
       </a>
     </div>
@@ -57,14 +58,12 @@ export const Question: React.FC<{}> = () => (
           height: 60px;
           width: 60px;
           border-radius: 50px;
-          font-size: 2.5rem;
-          padding: 15px 25px;
           font-weight: bold;
           display: flex;
           align-items: center;
           justify-content: center;
         }
-        .question-bottom-right span {
+        .question-bottom-right span:not(.fr-fi-question-fill) {
           display: none;
         }
       }

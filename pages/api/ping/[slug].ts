@@ -1,16 +1,19 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { APISlugNotFound, isApiOnline } from '../../../clients/test';
+import {
+  APISlugNotFound,
+  pingAPIClient,
+} from '../../../clients/ping-api-clients';
 
 const ping = async (
   { query: { slug } }: NextApiRequest,
   res: NextApiResponse
 ) => {
   try {
-    const test = await isApiOnline(slug);
+    const { test, status } = await pingAPIClient(slug);
     if (test) {
       res.status(200).json({ message: 'ok' });
     } else {
-      res.status(500).json({ message: 'ko' });
+      res.status(status | 500).json({ message: 'ko' });
     }
   } catch (e) {
     if (e instanceof APISlugNotFound) {

@@ -94,7 +94,7 @@ const Title: React.FC<IProps> = ({
         <span>unité légale ‣ {formatNumbersFr(uniteLegale.siren)}</span>
         <span>
           {!uniteLegale.estDiffusible && <Tag>non diffusible</Tag>}
-          <IsActiveTag isActive={uniteLegale.siege.estActif} />
+          <IsActiveTag isActive={uniteLegale.estActive} isUniteLegale={true} />
         </span>
       </div>
     </div>
@@ -118,6 +118,7 @@ const Title: React.FC<IProps> = ({
       }
       .title h1 {
         margin: 0;
+        margin-bottom: 7px;
         line-height: 2.5rem;
       }
       .title h1 > a {

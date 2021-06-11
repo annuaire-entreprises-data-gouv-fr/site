@@ -2,76 +2,154 @@ import {
   createDefaultUniteLegale,
   IUniteLegale,
   NotASirenError,
+  NotLuhnValidSirenError,
   SirenNotFoundError,
 } from '.';
-import {
-  HttpAuthentificationFailure,
-  HttpNotFound,
-  HttpServerError,
-  HttpTooManyRequests,
-} from '../clients/exceptions';
+import { HttpNotFound } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
-import { getUniteLegaleInsee } from '../clients/sirene-insee/siren';
-import { getAllEtablissementInsee } from '../clients/sirene-insee/siret';
+import {
+  getUniteLegaleInsee,
+  getUniteLegaleInseeWithFallbackCredentials,
+} from '../clients/sirene-insee/siren';
 import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
-import { isSiren } from '../utils/helpers/siren-and-siret';
-import { logWarningInSentry } from '../utils/sentry';
+import {
+  hasSirenFormat,
+  isSiren,
+  Siren,
+} from '../utils/helpers/siren-and-siret';
+import {
+  logFirstSireneInseefailed,
+  logSecondSireneInseefailed,
+  logSireneOuvertefailed,
+} from '../utils/sentry/helpers';
+
+/**
+ * Return an uniteLegale given an existing siren
+ */
+const getUniteLegaleFromSlug = async (
+  slug: string,
+  page = 1
+): Promise<IUniteLegale> => {
+  const siren = verifySiren(slug);
+  return getUniteLegale(siren, page);
+};
+
+/**
+ * throw an exception if a string is not a siren
+ * */
+const verifySiren = (slug: string): Siren => {
+  if (!isSiren(slug)) {
+    if (!hasSirenFormat(slug)) {
+      throw new NotASirenError(slug);
+    } else {
+      throw new NotLuhnValidSirenError(slug);
+    }
+  }
+  return slug;
+};
 
 /**
  * Fetch Unite Legale from Etalab SIRENE API with a fallback on INSEE's API
- * @param siren
  */
 const getUniteLegale = async (
-  siren: string,
+  siren: Siren,
   page = 1
 ): Promise<IUniteLegale> => {
-  if (!isSiren(siren)) {
-    throw new NotASirenError();
-  }
-
   try {
-    return await getUniteLegaleSireneOuverte(siren, page);
+    // first attempt to call siren insee
+    return await fetchUniteLegaleFromBothAPI(siren, page);
   } catch (e) {
     if (e instanceof HttpNotFound) {
-      // do nothing
-    } else {
-      logWarningInSentry(
-        `Server error in SireneEtalab, fallback on INSEE ${siren}. ${e}`
-      );
+      throw new SirenNotFoundError(`Siren ${siren} was not found`);
     }
+
+    logFirstSireneInseefailed({ siren, details: e.message });
+
     try {
-      const uniteLegale = await getUniteLegaleInsee(siren);
-      const etablissements = await getAllEtablissementInsee(siren);
-      uniteLegale.etablissements = etablissements;
-
-      const siege = etablissements.find((e) => e.estSiege);
-      if (siege) {
-        uniteLegale.siege = siege;
-      }
-      return uniteLegale;
+      // in case sirene INSEE 403, fallback on Siren Etalab
+      return await getUniteLegaleSireneOuverte(siren, page);
     } catch (e) {
-      if (
-        e instanceof HttpTooManyRequests ||
-        e instanceof HttpAuthentificationFailure
-      ) {
-        logWarningInSentry(e);
-      } else if (e instanceof InseeForbiddenError) {
-        // this means company is not diffusible
-        const uniteLegale = createDefaultUniteLegale(siren);
-        uniteLegale.estDiffusible = false;
-        uniteLegale.nomComplet =
-          'Les informations de cette entité ne sont pas publiques';
+      logSireneOuvertefailed({ siren, details: e.message });
 
-        return uniteLegale;
-      } else if (e instanceof HttpNotFound) {
-        // do nothin
+      try {
+        // in case sirene etalab 404 or 500, fallback on Sirene insee using fallback credentials to avoid 403
+        // no pagination as this function is called when sirene etalab already failed
+        return await getUniteLegaleInseeWithFallbackCredentials(siren);
+      } catch (e) {
+        if (e instanceof InseeForbiddenError) {
+          return createNonDiffusibleUniteLegale(siren);
+        }
+        logSecondSireneInseefailed({ siren, details: e.message });
+
+        // Siren was not found in both API, return a 404
+        const message = `Siren ${siren} was not found in both siren API`;
+        throw new SirenNotFoundError(message);
       }
-
-      // Siren was not found in both API
-      const message = `Siren ${siren} was not found in both siren API`;
-      throw new SirenNotFoundError(message);
     }
   }
 };
 
-export default getUniteLegale;
+//=========================
+//        API calls
+//=========================
+
+/**
+ * Fetch Unite Legale from Sirene INSEE and Etalab
+ */
+const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
+  try {
+    // INSEE does not provide enough information to paginate etablissement list
+    // so we doubled our API call with sirene ouverte to get Etablissements.
+    const [uniteLegaleInsee, uniteLegaleSireneOuverte] = await Promise.all([
+      getUniteLegaleInsee(siren),
+      getUniteLegaleSireneOuverte(siren, page).catch((e) => null),
+    ]);
+
+    if (!uniteLegaleSireneOuverte) {
+      return uniteLegaleInsee;
+    }
+
+    return mergeUniteLegaleFromBothApi(
+      uniteLegaleInsee,
+      uniteLegaleSireneOuverte
+    );
+  } catch (e) {
+    if (e instanceof InseeForbiddenError) {
+      return createNonDiffusibleUniteLegale(siren);
+    }
+    throw e;
+  }
+};
+
+/**
+ * Merge response form INSEE and Etalab, using best of both
+ */
+const mergeUniteLegaleFromBothApi = (
+  uniteLegaleInsee: IUniteLegale,
+  uniteLegaleSireneOuverte: IUniteLegale
+) => {
+  return {
+    ...uniteLegaleInsee,
+    // siege from INSEE lacks many information (adress etc.)
+    siege: uniteLegaleSireneOuverte.siege,
+    // these last fields are only available in Sirene ouverte
+    etablissements: uniteLegaleSireneOuverte.etablissements,
+    chemin: uniteLegaleSireneOuverte.chemin,
+    currentEtablissementPage: uniteLegaleSireneOuverte.currentEtablissementPage,
+    nombreEtablissements: uniteLegaleSireneOuverte.nombreEtablissements,
+  };
+};
+
+/**
+ * Create a default UniteLegale that will display as non diffusible
+ */
+const createNonDiffusibleUniteLegale = (siren: Siren) => {
+  const uniteLegale = createDefaultUniteLegale(siren);
+  uniteLegale.estDiffusible = false;
+  uniteLegale.nomComplet =
+    'Les informations de cette entité ne sont pas publiques';
+
+  return uniteLegale;
+};
+
+export { getUniteLegaleFromSlug };

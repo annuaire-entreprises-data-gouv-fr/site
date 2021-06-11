@@ -93,7 +93,8 @@ const getClass = (label: string) => {
   if (
     label.indexOf('TVA') > -1 ||
     label.indexOf('SIREN') > -1 ||
-    label.indexOf('SIRET') > -1
+    label.indexOf('SIRET') > -1 ||
+    label.indexOf('RNA') > -1
   ) {
     return 'trim';
   }

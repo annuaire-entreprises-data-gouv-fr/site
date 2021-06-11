@@ -1,8 +1,25 @@
 # annuaire-entreprises.data.gouv.fr
 
+[![Tests End to End](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/test-end-to-end.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/test-end-to-end.yml)
+[![Accessibilité](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-a11y.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-a11y.yml)
+[![Tests unitaires](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/unit-test.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/unit-test.yml)
+
 Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr)
 
 Ce site a pour vocation de mettre à disposition des citoyens et des agents les données ouvertes "Open-data" des entreprises, associations et administrations présentes dans la base SIRENE.
+
+Le moteur de recherche utilise une API dédiée dont le code est [disponible ici.](https://github.com/etalab/api-annuaire-entreprises).
+
+## Statut
+
+**Statut du site :**
+
+![Page entreprise](https://img.shields.io/uptimerobot/status/m787859483-e754b64b78a0c30eea102880?label=Page%20entreprise&logo=Page%20entreprise)
+![Recherche](https://img.shields.io/uptimerobot/status/m787859512-adcc5cd05674366504f96c86?label=Recherche&logo=Page%20entreprise)
+
+**Statut des APIs utilisées sur le site :**
+
+Pour voir le détail des disponibilités des API utilisées sur le site, [consultez la page de statut](https://annuaire-entreprises.data.gouv.fr/administration).
 
 ## A propos des choix d'architecture
 
@@ -20,7 +37,7 @@ Dans ce cas pourquoi utiliser Next.js ? Pour bénéficier de l'ecosystème, de l
 
 ## Installation
 
-``` bash
+```bash
 # Installation
 npm i
 
@@ -32,8 +49,6 @@ export PORT=3000
 npm run build && npm run start
 
 ```
-
-**NB**: le code de l'API est [disponible ici.](https://github.com/etalab/api-annuaire-entreprises)
 
 ## Licence
 
