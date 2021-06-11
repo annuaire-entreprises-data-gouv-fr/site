@@ -16,7 +16,7 @@
     "test:end2end": "cypress open",
     "test:unit": "jest",
     "test:a11y": "node ./node-scripts/a11y.js",
-    "test:inpi-pdf-proxy": "node ./node-scripts/inpi-pdf-proxy.js"
+    "test:inpi-pdf-proxy": "node ./node-scripts/inpi-pdf-proxy-test.js"
   },
   "dependencies": {
     "@sentry/node": "^6.6.0",
