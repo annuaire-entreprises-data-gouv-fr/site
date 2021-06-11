@@ -3,8 +3,6 @@ import {
   IEtablissementWithUniteLegale,
   SiretNotFoundError,
   createDefaultEtablissement,
-  NotASiretError,
-  NotLuhnValidSiretError,
 } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
@@ -15,9 +13,8 @@ import {
 import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
 import {
   extractSirenFromSiret,
-  hasSiretFormat,
-  isSiret,
   Siret,
+  verifySiret,
 } from '../utils/helpers/siren-and-siret';
 import { getUniteLegaleFromSlug } from './unite-legale';
 import {
@@ -34,20 +31,6 @@ const getEtablissementFromSlug = async (
 ): Promise<IEtablissement> => {
   const siret = verifySiret(slug);
   return getEtablissement(siret);
-};
-
-/**
- * Throw an exception if a string is not a siret
- * */
-const verifySiret = (slug: string): Siret => {
-  if (!isSiret(slug)) {
-    if (!hasSiretFormat(slug)) {
-      throw new NotASiretError(slug);
-    } else {
-      throw new NotLuhnValidSiretError(slug);
-    }
-  }
-  return slug;
 };
 
 /**

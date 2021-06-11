@@ -1,3 +1,4 @@
+import { isSiren, verifySiren } from '../utils/helpers/siren-and-siret';
 import { getAssociation } from './rna';
 import { fetchRncsImmatriculation } from './rncs';
 import { fetchRnmImmatriculation } from './rnm';
@@ -14,9 +15,9 @@ export class APISlugNotFound extends Error {
 const ping = async (slug: string | string[]) => {
   switch (slug) {
     case 'api-rncs':
-      return await fetchRncsImmatriculation('880878145');
+      return await fetchRncsImmatriculation(verifySiren('880878145'));
     case 'api-rnm':
-      return await fetchRnmImmatriculation('824024350');
+      return await fetchRnmImmatriculation(verifySiren('824024350'));
     case 'api-conventions-collectives':
       return await fetchConventionCollectives(['54205118000066']);
     case 'api-sirene-insee':
