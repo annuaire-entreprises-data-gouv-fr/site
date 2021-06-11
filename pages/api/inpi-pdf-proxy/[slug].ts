@@ -113,6 +113,21 @@ const extractInitialAuthData = (cookies: string) => {
   return initialAuthData;
 };
 
+const extractTokenFromHtmlForm = (html: string) => {
+  const formSearch = RegExp(/(name="login_form\[_token\]" value="[^"]*)/, 'g');
+  const formSearchResults = formSearch.exec(html);
+
+  if (!formSearchResults) {
+    throw new Error('Authentication failed');
+  }
+
+  return formSearchResults[0].replace('name="login_form[_token]" value="', '');
+};
+
+const extractAuthSuccessFromHtmlForm = (html: string) => {
+  return html.indexOf('alert-success alert-dismissible') > -1;
+};
+
 /** First call. Caller get two session cookies and a token to identify the login form */
 const getInitialAuthData = async (): Promise<IInitialAuth> => {
   try {
@@ -130,20 +145,7 @@ const getInitialAuthData = async (): Promise<IInitialAuth> => {
     const initialAuthData = extractInitialAuthData(cookies);
 
     const html = await response.text();
-    const formSearch = RegExp(
-      /(name="login_form\[_token\]" value="[^"]*)/,
-      'g'
-    );
-    const formSearchResults = formSearch.exec(html);
-
-    if (!formSearchResults) {
-      throw new Error('Authentication failed');
-    }
-
-    initialAuthData.token = formSearchResults[0].replace(
-      'name="login_form[_token]" value="',
-      ''
-    );
+    initialAuthData.token = extractTokenFromHtmlForm(html);
 
     if (
       !initialAuthData.token ||
@@ -175,7 +177,8 @@ const authenticateCookie = async (initialAuthData: IInitialAuth) => {
     });
 
     const html = await response.text();
-    const loginSuccess = html.indexOf('alert-success alert-dismissible') > -1;
+    const loginSuccess = extractAuthSuccessFromHtmlForm(html);
+
     return loginSuccess ? 200 : 403;
   } catch (e) {
     throw new HttpAuthentificationFailure(e);
