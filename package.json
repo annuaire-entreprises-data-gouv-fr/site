@@ -13,8 +13,8 @@
     "start": "next start -p $PORT",
     "deploy-staging": "NODE_ENV=production git push dokku-staging main:master",
     "deploy": "NODE_ENV=production git push dokku main:master",
-    "test:end2end": "npm cypress open",
-    "test:unit": "npm jest",
+    "test:end2end": "cypress open",
+    "test:unit": "jest",
     "test:a11y": "node ./node-scripts/a11y.js"
   },
   "dependencies": {
