@@ -37,7 +37,7 @@ const DataSourceTooltip: React.FC<{
       offsetLeftpx={20}
       label={
         <>
-          <p>{dataSource.long}</p>
+          <div>{dataSource.long}</div>
           <br />
           <a href={`/administration/${dataSource.slug}`}>👉 En savoir plus</a>
         </>

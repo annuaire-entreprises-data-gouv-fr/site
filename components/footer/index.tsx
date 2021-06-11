@@ -41,6 +41,15 @@ const Footer = () => (
             </a>{' '}
             en 2020.
           </p>
+          <br />
+          <p className="fr-footer__content-desc">
+            Ce site permet de retrouver toutes les données publiques détenues
+            par l'administration sur une entreprise ou une association et{' '}
+            <a href="/donnees-extrait-kbis">
+              en particulier les données contenue dans un extrait KBIS/D1
+            </a>
+            .
+          </p>
           <ul className="fr-footer__content-list">
             <li className="fr-footer__content-item">
               <a

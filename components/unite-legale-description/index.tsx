@@ -5,7 +5,7 @@ import { capitalize, formatDateLong } from '../../utils/helpers/formatting';
 export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
 }) => (
-  <>
+  <p>
     <>L’unité légale {capitalize(uniteLegale.nomComplet)}</>{' '}
     {uniteLegale.natureJuridique && (
       <>
@@ -40,7 +40,5 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
         </a>
       </>
     )}
-    <br />
-    <br />
-  </>
+  </p>
 );

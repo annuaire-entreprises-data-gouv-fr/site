@@ -5,8 +5,10 @@ import Page from '../layouts';
 const ExtraitKbis: React.FC = () => {
   return (
     <Page small={true} title="Comment ça marche ?">
-      <div className="content-container">
-        <h1>Suppression du KBIS dans les démarches des entreprises</h1>
+      <div className="content-container text-wrapper">
+        <h1>
+          Retrouver les données contenues dans un extrait KBIS ou un extrait D1
+        </h1>
         <p>
           Publié en Mai 2021,{' '}
           <a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043523262">
@@ -16,44 +18,70 @@ const ExtraitKbis: React.FC = () => {
           (Répertoire des Métiers) dans les démarches administratives des
           personnes morales.
         </p>
+        <h2>Qu’est ce qu’un extrait KBIS / D1 ?</h2>
+        <p>
+          L'extrait d'immatriculation est une preuve de l'immatriculation d'une
+          entreprise auprès de son Centre de Formalité des Entreprises (CFE).
+        </p>
+        <p>
+          Il est important de faire la différence entre <b>l’extrait KBIS</b>{' '}
+          qui est l'extrait d'immatriculation au Registre du Commerce et des
+          Sociétés, qui concerne les <b>entreprises commerciales</b> et{' '}
+          <b>l'extrait D1</b> qui est l'extrait d’immatriculation au Répertoire
+          des Métiers de la Chambre de Métiers et de l'Artisanat et qui concerne{' '}
+          <b>les entreprises artisanales</b>.
+        </p>
         <div>
           <h2>
-            Comment accéder aux données d'un extrait KBIS via le site
-            annuaire-entreprises.data.gouv.fr
+            Comment accéder aux données d'un extrait d’immatriculation via le
+            site annuaire-entreprises.data.gouv.fr ?
           </h2>
           <p>
             Pour retrouver les informations d'immatriculation d'une entreprise,{' '}
-            <a href="/rechercher">utilisez le moteur de recherche</a> pour
-            trouver la page de l'entreprise concernée.
-            <br />
-            Une fois sur la page de l'entreprise, consultez l'onglet
-            justificatif, pour y retrouver les données d'immatriculations, soit
-            au Registre National du Commerce et des Sociétés (RNCS), soit au
-            Répertoire National des Métiers (RNM).
+            <a href="/">utilisez le moteur de recherche</a> pour trouver la page
+            de l'entreprise concernée.
           </p>
-          <h2>Comment accéder aux données d'un extrait KBIS via une API</h2>
+          <p>
+            Une fois sur la page de l'entreprise, consultez l'onglet{' '}
+            <b>justificatifs</b> et retrouvez-y les données d'immatriculations,
+            soit au Registre National du Commerce et des Sociétés (RNCS), soit
+            au Répertoire National des Métiers (RNM).
+          </p>
+          <h2>
+            Comment intégrer les données d'un extrait d’immatriculation à son
+            système d’information ?
+          </h2>
+          <p>
+            Vous travailler sur un système d’information et vous avez besoin de
+            rendre disponible ces données dans votre site ou votre back-office ?
+            Deux choix s'offrent à vous :
+          </p>
+          <ol>
+            <li>
+              Utiliser les API : intégrez directement les API de l'INPI et de
+              CMA France à votre système d’information.
+            </li>
+            <li>
+              Intégrer le lien vers la page Annuaire des Entreprises dans votre
+              application.
+            </li>
+          </ol>
+          <p>
+            <b>NB :</b> le lien se construit ainsi :
+          </p>
+          <code>
+            https://annuaire-entreprises.data.gouv.fr/justificatifs/
+            <i>{'{insérer_le_numéro_siren}'}</i>
+          </code>
+          <h2>
+            Quelles sont les API qui donnent accès aux données d’immatriculation
+            des entreprises ?
+          </h2>
           <p>
             Toutes les sources de données affichées sur le site sont accessibles
-            grâce à des API. Pour en savoir plus :
+            grâce à deux API :
           </p>
           <ul>
-            <li>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://api.gouv.fr/guides/quelle-api-sirene"
-              >
-                API Sirene
-              </a>{' '}
-              : qui donne accès à la base Sirene des entreprises de l'
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://www.insee.fr/fr/accueil"
-              >
-                INSEE
-              </a>
-            </li>
             <li>
               <a
                 target="_blank"
@@ -70,6 +98,7 @@ const ExtraitKbis: React.FC = () => {
               >
                 CMA France
               </a>
+              .
             </li>
             <li>
               <a
@@ -92,7 +121,7 @@ const ExtraitKbis: React.FC = () => {
             </li>
           </ul>
           <p>
-            <b>NB :</b>Toutes les APIs du service public sont référencées sur{' '}
+            <b>NB :</b> toutes les APIs du service public sont référencées sur{' '}
             <a
               target="_blank"
               rel="noreferrer noopener"
@@ -100,16 +129,20 @@ const ExtraitKbis: React.FC = () => {
             >
               api.gouv.fr
             </a>
+            .
           </p>
-          <h2>Accéder à des données complémentaires sur les entreprises</h2>
+          <h2>
+            Accéder à plus de données sur les entreprises et les associations
+            via API
+          </h2>
           <p>
-            Il existe une API spéciale (nommée API Entreprise) réservée aux
+            Il existe une API spéciale, <b>API Entreprise</b> réservée aux
             administrations et à certaines entreprises éligibles, qui permet
             d'accèder aux informations des entreprises détenue par
             l'administration :
           </p>
           <ul>
-            <li>les informations d'immatriculation</li>
+            <li>les informations de la base sirene de l'INSEE</li>
             <li>le chiffre d'affaire</li>
             <li>les certifications professionnelles</li>
             <li>... et bien d’autres</li>
