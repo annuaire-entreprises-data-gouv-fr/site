@@ -1,4 +1,4 @@
-import { ServerResponse } from 'http';
+import { IncomingMessage, ServerResponse } from 'http';
 import {
   hasSiretFormat,
   hasSirenFormat,
@@ -21,8 +21,6 @@ import redirect, {
   redirectSiretIntrouvable,
   redirectSiretInvalid,
 } from '.';
-import { NextApiRequest } from 'next';
-import { IncomingMessage } from 'node:http';
 
 export const redirectIfSiretOrSiren = (
   res: ServerResponse,

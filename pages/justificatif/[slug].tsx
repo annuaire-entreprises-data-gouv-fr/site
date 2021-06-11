@@ -33,11 +33,7 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
         immatriculationRNCS={immatriculationRNCS}
       />
       {uniteLegale.estDiffusible && (
-        <Section
-          title="Avis de situation INSEE"
-          source={EAdministration.INSEE}
-          sourceLastUpdatedAt={formatDate(uniteLegale.dateDerniereMiseAJour)}
-        >
+        <Section title="Avis de situation INSEE" source={EAdministration.INSEE}>
           <div className="description">
             Chaque établissement immatriculé par l'INSEE au répertoire Sirene
             des entreprises possède un avis de situation.

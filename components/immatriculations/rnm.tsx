@@ -35,6 +35,12 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
               <b>Répertoire National des Métiers (RNM)</b> qui liste les
               entreprises artisanales enreigstrées auprès des Chambres des
               Métiers et de l'Artisanat (CMA France).
+              <p>
+                Pour accéder à l’ensemble des données contenues dans un extrait
+                D1, vous pouvez télécharger le justificatif d’immatriculation.
+                Si le téléchargement échoue, vous pouvez accéder à la donnée en
+                allant sur le site de CMA France.
+              </p>
             </div>
             <div className="logo-wrapper">{cma}</div>
           </div>

@@ -1,12 +1,13 @@
 import { rncsAuth } from '.';
 import { IImmatriculationRNCS } from '../../models/immatriculation';
+import { Siren } from '../../utils/helpers/siren-and-siret';
 import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
 import { HttpNotFound, HttpTooManyRequests } from '../exceptions';
 import routes from '../routes';
 
 interface IApiRNCSResponse {}
 
-export const fetchRncsImmatriculation = async (siren: string) => {
+export const fetchRncsImmatriculation = async (siren: Siren) => {
   const cookie = await rncsAuth();
   const response = await fetchWithTimeout(routes.rncs.api.imr + siren, {
     headers: { Cookie: cookie },
@@ -29,11 +30,12 @@ export const fetchRncsImmatriculation = async (siren: string) => {
 };
 
 const mapToDomainObject = (
-  siren: string,
+  siren: Siren,
   apiRncsResponse: IApiRNCSResponse
 ): IImmatriculationRNCS => {
   return {
+    siren,
     immatriculation: apiRncsResponse,
-    downloadlink: routes.rncs.portail + siren,
+    downloadlink: routes.rncs.portail.entreprise + siren,
   };
 };

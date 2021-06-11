@@ -1,10 +1,4 @@
-import {
-  createDefaultUniteLegale,
-  IUniteLegale,
-  NotASirenError,
-  NotLuhnValidSirenError,
-  SirenNotFoundError,
-} from '.';
+import { createDefaultUniteLegale, IUniteLegale, SirenNotFoundError } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
 import {
@@ -12,11 +6,7 @@ import {
   getUniteLegaleInseeWithFallbackCredentials,
 } from '../clients/sirene-insee/siren';
 import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
-import {
-  hasSirenFormat,
-  isSiren,
-  Siren,
-} from '../utils/helpers/siren-and-siret';
+import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
 import {
   logFirstSireneInseefailed,
   logSecondSireneInseefailed,
@@ -32,20 +22,6 @@ const getUniteLegaleFromSlug = async (
 ): Promise<IUniteLegale> => {
   const siren = verifySiren(slug);
   return getUniteLegale(siren, page);
-};
-
-/**
- * throw an exception if a string is not a siren
- * */
-const verifySiren = (slug: string): Siren => {
-  if (!isSiren(slug)) {
-    if (!hasSirenFormat(slug)) {
-      throw new NotASirenError(slug);
-    } else {
-      throw new NotLuhnValidSirenError(slug);
-    }
-  }
-  return slug;
 };
 
 /**

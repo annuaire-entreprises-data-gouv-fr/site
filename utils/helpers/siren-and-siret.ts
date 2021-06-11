@@ -1,3 +1,10 @@
+import {
+  NotASirenError,
+  NotASiretError,
+  NotLuhnValidSirenError,
+  NotLuhnValidSiretError,
+} from '../../models';
+
 /**
  * Siren and siret types
  */
@@ -18,6 +25,34 @@ export const isSiret = (slug: string): slug is Siren => {
     return false;
   }
   return true;
+};
+
+/**
+ * throw an exception if a string is not a siren
+ * */
+export const verifySiren = (slug: string): Siren => {
+  if (!isSiren(slug)) {
+    if (!hasSirenFormat(slug)) {
+      throw new NotASirenError(slug);
+    } else {
+      throw new NotLuhnValidSirenError(slug);
+    }
+  }
+  return slug;
+};
+
+/**
+ * Throw an exception if a string is not a siret
+ * */
+export const verifySiret = (slug: string): Siret => {
+  if (!isSiret(slug)) {
+    if (!hasSiretFormat(slug)) {
+      throw new NotASiretError(slug);
+    } else {
+      throw new NotLuhnValidSiretError(slug);
+    }
+  }
+  return slug;
 };
 
 /**

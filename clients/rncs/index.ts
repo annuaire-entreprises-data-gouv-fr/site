@@ -4,6 +4,7 @@ import routes from '../routes';
 import { HttpAuthentificationFailure } from '../exceptions';
 import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
 
+/** Authenticate a user on opendata-rncs */
 const rncsAuth = async () => {
   try {
     const login = process.env.INPI_LOGIN as string;

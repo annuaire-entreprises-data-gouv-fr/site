@@ -69,7 +69,6 @@ const EtablissementSection: React.FC<IProps> = ({
               }`
         }
         source={EAdministration.INSEE}
-        sourceLastUpdatedAt={formatDate(etablissement.dateDerniereMiseAJour)}
       >
         <TwoColumnTable body={data} />
       </Section>
@@ -77,7 +76,6 @@ const EtablissementSection: React.FC<IProps> = ({
         <Section
           title="Les informations de contact"
           source={EAdministration.INSEE}
-          sourceLastUpdatedAt={formatDate(uniteLegale.dateDerniereMiseAJour)}
         >
           <TwoColumnTable body={[['Adresse', etablissement.adresse]]} />
           {uniteLegale.estEntrepreneurIndividuel && (

@@ -1,4 +1,5 @@
 import { IImmatriculationRNM } from '../../models/immatriculation';
+import { Siren } from '../../utils/helpers/siren-and-siret';
 import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
@@ -59,7 +60,7 @@ export interface IApiRNMResponse {
 }
 
 export const fetchRnmImmatriculation = async (
-  siren: string
+  siren: Siren
 ): Promise<IImmatriculationRNM> => {
   const response = await fetchWithTimeout(routes.rnm + siren + '?format=json');
   if (response.status === 404) {
@@ -69,10 +70,11 @@ export const fetchRnmImmatriculation = async (
 };
 
 const mapToDomainObject = (
-  siren: string,
+  siren: Siren,
   apiRnmResponse: IApiRNMResponse
 ): IImmatriculationRNM => {
   return {
+    siren,
     immatriculation: {
       codeAPRM: apiRnmResponse.ent_act_code_nafa_principal,
       activitésArtisanalesDéclarées:

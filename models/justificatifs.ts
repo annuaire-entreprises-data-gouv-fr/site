@@ -1,4 +1,5 @@
 import { IUniteLegale } from '.';
+import { verifySiren } from '../utils/helpers/siren-and-siret';
 import { IAPINotRespondingError } from './api-not-responding';
 import {
   IImmatriculationRNM,
@@ -15,11 +16,13 @@ export interface IJustificatifs {
 }
 
 const getJustificatifs = async (slug: string): Promise<IJustificatifs> => {
-  const uniteLegale = await getUniteLegaleFromSlug(slug);
+  const siren = verifySiren(slug);
+
+  const uniteLegale = await getUniteLegaleFromSlug(siren);
 
   const justificatifs = await Promise.all([
-    getImmatriculationRNM(uniteLegale.siren),
-    getImmatriculationRNCS(uniteLegale.siren),
+    getImmatriculationRNM(siren),
+    getImmatriculationRNCS(siren),
   ]);
 
   return {
