@@ -95,6 +95,24 @@ const getFormData = (initialAuthData: IInitialAuth) => {
   }`;
 };
 
+const extractInitialAuthData = (cookies: string) => {
+  const initialAuthData = {} as IInitialAuth;
+  const cookieSearch = RegExp(/(PHPSESSID=[^;]*|Q71x4Drzmg@@=[^;]*)/, 'g');
+  let cookieSearchResult = cookieSearch.exec(cookies);
+
+  while (cookieSearchResult !== null) {
+    const match = cookieSearchResult[0];
+    if (match.indexOf('PHPSESSID=') > -1) {
+      initialAuthData.phpSessionId = match.replace('PHPSESSID=', '');
+    } else if (match.indexOf('Q71x4Drzmg@@=') > -1) {
+      initialAuthData.Q71 = match.replace('Q71x4Drzmg@@=', '');
+    }
+    cookieSearchResult = cookieSearch.exec(cookies);
+  }
+
+  return initialAuthData;
+};
+
 /** First call. Caller get two session cookies and a token to identify the login form */
 const getInitialAuthData = async (): Promise<IInitialAuth> => {
   try {
@@ -109,19 +127,7 @@ const getInitialAuthData = async (): Promise<IInitialAuth> => {
       throw new Error('Authentication failed');
     }
 
-    const initialAuthData = {} as IInitialAuth;
-    const cookieSearch = RegExp(/(PHPSESSID=[^;]*|Q71x4Drzmg@@=[^;]*)/, 'g');
-    let cookieSearchResult = cookieSearch.exec(cookies);
-
-    while (cookieSearchResult !== null) {
-      const match = cookieSearchResult[0];
-      if (match.indexOf('PHPSESSID=') > -1) {
-        initialAuthData.phpSessionId = match.replace('PHPSESSID=', '');
-      } else if (match.indexOf('Q71x4Drzmg@@=') > -1) {
-        initialAuthData.Q71 = match.replace('Q71x4Drzmg@@=', '');
-      }
-      cookieSearchResult = cookieSearch.exec(cookies);
-    }
+    const initialAuthData = extractInitialAuthData(cookies);
 
     const html = await response.text();
     const formSearch = RegExp(
@@ -168,8 +174,8 @@ const authenticateCookie = async (initialAuthData: IInitialAuth) => {
       body: getFormData(initialAuthData),
     });
 
-    const page = await response.text();
-    const loginSuccess = page.indexOf('alert-success alert-dismissible') > -1;
+    const html = await response.text();
+    const loginSuccess = html.indexOf('alert-success alert-dismissible') > -1;
     return loginSuccess ? 200 : 403;
   } catch (e) {
     throw new HttpAuthentificationFailure(e);
