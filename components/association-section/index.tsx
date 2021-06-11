@@ -25,7 +25,6 @@ const AssociationSection: React.FC<{
       <Section
         title={`Les informations au Répertoire National des Associations`}
         source={EAdministration.MI}
-        // sourceLastUpdatedAt={formatDate(uniteLegale.dateDerniereMiseAJour)}
       >
         <TwoColumnTable body={data} />
       </Section>
