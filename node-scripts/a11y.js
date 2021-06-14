@@ -15,7 +15,7 @@ const PAGES = [
   '/administration/insee',
   '/administration/',
   '/carte',
-  // '/carte/88087814500015', issue with .mapbox-gl-marker
+  '/carte/88087814500015',
   '/etablissement/88087814500015',
   '/rechercher?terme=ganymede',
 ];
