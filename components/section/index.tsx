@@ -3,6 +3,7 @@ import {
   administrationsMetaData,
   EAdministration,
 } from '../../models/administration';
+import { formatDate } from '../../utils/helpers/formatting';
 import DataSourceTooltip from '../information-tooltip/data-source-tooltip';
 
 interface ISectionProps {
@@ -20,6 +21,7 @@ export const Section: React.FC<ISectionProps> = ({
   width = 100,
 }) => {
   const dataSource = source ? administrationsMetaData[source] : undefined;
+  const now = new Date();
   return (
     <>
       <div className="section-container" id={id}>
@@ -27,7 +29,10 @@ export const Section: React.FC<ISectionProps> = ({
         <div>{children}</div>
         {dataSource && (
           <div className="data-source-tooltip-wrapper">
-            <DataSourceTooltip dataSource={dataSource} />
+            <DataSourceTooltip
+              dataSource={dataSource}
+              lastUpdatedAt={formatDate(now)}
+            />
           </div>
         )}
       </div>
