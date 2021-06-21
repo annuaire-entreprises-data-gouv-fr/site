@@ -184,6 +184,12 @@ const FAQ: React.FC<{}> = () => (
           <p>
             Les données du moteur de recherche sont mises à jour tous les mois.
           </p>
+          <p>
+            Mais les données affichées sur chaque page entreprise sont mis à
+            jour en temps-réel. Les données proviennent des{' '}
+            <a href="/administration">services informatiques</a> des différentes
+            administrations concernées.
+          </p>
         </QuestionBlock>
         <QuestionBlock title="Comment puis-je utiliser ces données dans mon site internet ?">
           <p>
