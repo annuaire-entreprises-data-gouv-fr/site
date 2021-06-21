@@ -219,6 +219,30 @@ const FAQ: React.FC<{}> = () => (
             </ul>
           </p>
         </QuestionBlock>
+        <QuestionBlock title="Existe-t-il une API Annuaire des Entreprises ?">
+          <p>
+            Toutes les données présentées sur le site sont collectées par API
+            auprès de chaque administration qui détient de la donnée pertinente.
+          </p>
+          <p>
+            Toutes ces API sont en open data et vous pouvez librement les
+            réutiliser :
+            <ul>
+              <li>
+                <a href="/administration/inpi#acces">L’INPI</a>
+              </li>
+              <li>
+                <a href="/administration/insee#acces">L’INSEE</a>
+              </li>
+              <li>
+                <a href="/administration/cma-france#acces">CMA-France</a>
+              </li>
+              <li>
+                <a href="/administration/meti#acces">Le Ministère du Travail</a>
+              </li>
+            </ul>
+          </p>
+        </QuestionBlock>
         <QuestionBlock title="Je ne trouve pas la réponse à ma question">
           <p>Vous pouvez nous poser une question directement :</p>
           <div className="layout-center">

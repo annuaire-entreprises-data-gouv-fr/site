@@ -1,5 +1,5 @@
 import { HttpNotFound } from '../clients/exceptions';
-import { fetchRncsImmatriculation } from '../clients/rncs';
+import { fetchRNCSImmatriculation } from '../clients/rncs';
 import { fetchRnmImmatriculation } from '../clients/rnm';
 import { Siren } from '../utils/helpers/siren-and-siret';
 
@@ -59,7 +59,7 @@ const getImmatriculationRNCS = async (
   siren: Siren
 ): Promise<IImmatriculationRNCS | IAPINotRespondingError> => {
   try {
-    return await fetchRncsImmatriculation(siren);
+    return await fetchRNCSImmatriculation(siren);
   } catch (e) {
     if (e instanceof HttpNotFound) {
       return {

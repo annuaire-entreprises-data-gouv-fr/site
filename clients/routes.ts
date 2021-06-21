@@ -14,7 +14,10 @@ const routes = {
     },
     api: {
       login: 'https://opendata-rncs.inpi.fr/services/diffusion/login',
-      imr: 'https://opendata-rncs.inpi.fr/services/diffusion/imrs-saisis/find?siren=',
+      imr: {
+        find: 'https://opendata-rncs.inpi.fr/services/diffusion/imrs-saisis/find?siren=',
+        get: 'https://opendata-rncs.inpi.fr/services/diffusion/imrs-saisis/get?listeSirens=',
+      },
     },
   },
   sireneInsee: {

@@ -1,11 +1,15 @@
-import { fetchRncsImmatriculation } from './immatriculation';
+import { fetchRNCSImmatriculation } from './immatriculation';
 
 import routes from '../routes';
-import { HttpAuthentificationFailure } from '../exceptions';
+import {
+  HttpAuthentificationFailure,
+  HttpNotFound,
+  HttpTooManyRequests,
+} from '../exceptions';
 import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
 
 /** Authenticate a user on opendata-rncs */
-const rncsAuth = async () => {
+const RNCSAuth = async () => {
   try {
     const login = process.env.INPI_LOGIN as string;
     const password = process.env.INPI_PASSWORD as string;
@@ -28,4 +32,21 @@ const rncsAuth = async () => {
   }
 };
 
-export { fetchRncsImmatriculation, rncsAuth };
+const RNCSClientWrapper = async (route: string, options?: RequestInit) => {
+  const cookie = await RNCSAuth();
+  const response = await fetchWithTimeout(route, {
+    ...options,
+    headers: { Cookie: cookie },
+  });
+
+  if (response.status === 404) {
+    throw new HttpNotFound(404, `Not found in RNCS`);
+  }
+
+  if (response.status === 429) {
+    throw new HttpTooManyRequests(429, `Too many requests in RNCS`);
+  }
+  return response;
+};
+
+export { fetchRNCSImmatriculation, RNCSAuth, RNCSClientWrapper };

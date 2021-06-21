@@ -1,3 +1,6 @@
+import { Siren, Siret } from '../utils/helpers/siren-and-siret';
+import { IEtatCivil } from './dirigeants';
+
 /** COMMON TYPES */
 export interface IAssociation {
   id: string;
@@ -9,8 +12,8 @@ export interface IAssociation {
 
 export interface IEtablissement {
   enseigne: string | null;
-  siren: string;
-  siret: string;
+  siren: Siren;
+  siret: Siret;
   nic: string;
   estActif: boolean | null;
   estSiege: boolean;
@@ -33,7 +36,7 @@ export interface IEtablissementWithUniteLegale {
 }
 
 export interface IUniteLegale {
-  siren: string;
+  siren: Siren;
   numeroTva: string;
   siege: IEtablissement;
   natureJuridique: string;
@@ -57,16 +60,19 @@ export interface IUniteLegale {
   // etablissement list pagination
   currentEtablissementPage?: number;
   association: IAssociation | null;
+  dirigeant: IEtatCivil | null;
 }
 
 /** BASIC CONSTRUCTORS */
 export const createDefaultEtablissement = (): IEtablissement => {
   return {
+    //@ts-ignore
     siren: '',
+    //@ts-ignore
+    siret: '',
     estActif: null,
     estSiege: false,
     enseigne: null,
-    siret: '',
     nic: '',
     dateCreation: '',
     dateDerniereMiseAJour: '',
@@ -82,7 +88,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
   };
 };
 
-export const createDefaultUniteLegale = (siren: string): IUniteLegale => {
+export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
   const siege = createDefaultEtablissement();
   siege.estSiege = true;
   return {
@@ -108,6 +114,7 @@ export const createDefaultUniteLegale = (siren: string): IUniteLegale => {
     libelleTrancheEffectif: '',
     adresse: '',
     association: null,
+    dirigeant: null,
   };
 };
 
