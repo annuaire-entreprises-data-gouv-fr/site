@@ -1,6 +1,7 @@
 import React from 'react';
 import { administrationsMetaData } from '../../models/administration';
 import { IAPINotRespondingError } from '../../models/api-not-responding';
+import ButtonLink from '../button';
 import { Section } from '../section';
 
 const AdministrationNotResponding: React.FC<IAPINotRespondingError> = ({
@@ -30,6 +31,13 @@ const AdministrationNotResponding: React.FC<IAPINotRespondingError> = ({
         </a>
         .
       </p>
+      {administrationMetaData.site && (
+        <div className="layout-center">
+          <ButtonLink href={administrationMetaData.site}>
+            Consulter le site de l’administration
+          </ButtonLink>
+        </div>
+      )}
     </Section>
   );
 };
