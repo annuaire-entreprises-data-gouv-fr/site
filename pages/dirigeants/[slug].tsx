@@ -14,12 +14,7 @@ import {
 } from '../../models/dirigeants';
 import DirigeantsSection from '../../components/dirigeants-section';
 
-interface IProps {
-  uniteLegale: IUniteLegale;
-  dirigeants: IDirigeants;
-}
-
-const DirigeantsPage: React.FC<IProps> = ({ uniteLegale, dirigeants }) => (
+const DirigeantsPage: React.FC<IDirigeants> = ({ uniteLegale, dirigeants }) => (
   <Page
     small={true}
     title={`Dirigeants de l’entité - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
@@ -30,13 +25,22 @@ const DirigeantsPage: React.FC<IProps> = ({ uniteLegale, dirigeants }) => (
       <Title uniteLegale={uniteLegale} ficheType={FICHE.DIRIGEANTS} />
       {uniteLegale.estDiffusible ? (
         <>
-          {uniteLegale.estEntrepreneurIndividuel && dirigeants.INSEE && (
+          {!uniteLegale.dirigeant && !dirigeants && (
+            <p>
+              Cette entreprise n’a pas de dirigeant enregistré, que ce soit
+              auprès de l’INSEE, ou auprès de l’INPI.
+            </p>
+          )}
+          {uniteLegale.estEntrepreneurIndividuel && uniteLegale.dirigeant && (
             <DirigeantsEntrepriseIndividuelleSection
-              dirigeant={dirigeants.INSEE}
+              dirigeant={uniteLegale.dirigeant}
             />
           )}
-          {dirigeants.RNCS && (
-            <DirigeantsSection dirigeants={dirigeants.RNCS} />
+          {dirigeants && (
+            <DirigeantsSection
+              dirigeants={dirigeants}
+              siren={uniteLegale.siren}
+            />
           )}
         </>
       ) : (

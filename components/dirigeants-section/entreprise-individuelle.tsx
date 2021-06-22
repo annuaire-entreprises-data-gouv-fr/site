@@ -27,14 +27,15 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
 
   return (
     <>
-      <p>
-        {`Cette entité est une entreprise individuelle. Elle n’a qu’un${femininMasculin}
-        seul${femininMasculin} dirigeant${femininMasculin}.`}
-      </p>
       <Section
         title={'Les informations sur le dirigeant'}
         source={EAdministration.INSEE}
       >
+        <p>
+          Cette entité est une entreprise individuelle. Elle a un
+          {femininMasculin} dirigeant{femininMasculin} enregistré
+          {femininMasculin} auprès de l’INSEE&nbsp;:
+        </p>
         <TwoColumnTable body={data} />
       </Section>
       <HorizontalSeparator />

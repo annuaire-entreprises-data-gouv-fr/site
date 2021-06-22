@@ -28,12 +28,17 @@ export const Section: React.FC<ISectionProps> = ({
         <h2>{title}</h2>
         <div>{children}</div>
         {dataSource && (
-          <div className="data-source-tooltip-wrapper">
-            <DataSourceTooltip
-              dataSource={dataSource}
-              lastUpdatedAt={formatDate(now)}
-            />
-          </div>
+          <>
+            <div className="data-source-tooltip-wrapper">
+              <DataSourceTooltip
+                dataSource={dataSource}
+                lastUpdatedAt={formatDate(now)}
+              />
+            </div>
+            {dataSource.logo && (
+              <div className="logo-wrapper">{dataSource.logo}</div>
+            )}
+          </>
         )}
       </div>
       <style jsx>{`
@@ -60,6 +65,24 @@ export const Section: React.FC<ISectionProps> = ({
           display: flex;
           justify-content: flex-end;
           margin-top: 15px;
+        }
+
+        .logo-wrapper {
+          position: absolute;
+          min-width: 70px;
+          height: 30px;
+          max-height: 30px;
+          top: 16px;
+          right: 16px;
+        }
+        .logo-wrapper svg {
+          width: 100%;
+          height: 100%;
+        }
+        @media only screen and (min-width: 1px) and (max-width: 600px) {
+          .logo-wrapper {
+            display: none;
+          }
         }
       `}</style>
     </>

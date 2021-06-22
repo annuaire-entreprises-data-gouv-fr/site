@@ -1,3 +1,4 @@
+import { IUniteLegale } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import { fetchRNCSDirigeants } from '../clients/rncs/dirigeants';
 import { Siren } from '../utils/helpers/siren-and-siret';
@@ -21,20 +22,23 @@ export interface IPersonneMorale {
   role?: string;
 }
 
+export type IDirigeant = IEtatCivil & IPersonneMorale;
+
 export interface IDirigeants {
-  INSEE: IEtatCivil | null;
-  RNCS: (IEtatCivil & IPersonneMorale)[] & IAPINotRespondingError;
+  uniteLegale: IUniteLegale;
+  dirigeants: IDirigeant[] & IAPINotRespondingError;
 }
 
 export const getDirigeantsWithUniteLegaleFromSlug = async (slug: string) => {
   const uniteLegale = await getUniteLegaleFromSlug(slug);
 
+  const { dirigeants } = await getDirigeantsFromImmatricualtions(
+    uniteLegale.siren
+  );
+
   return {
     uniteLegale,
-    dirigeants: {
-      INSEE: uniteLegale.dirigeant,
-      RNCS: await getDirigeantsFromImmatricualtions(uniteLegale.siren),
-    },
+    dirigeants,
   };
 };
 
@@ -42,8 +46,11 @@ export const getDirigeantsFromImmatricualtions = async (siren: Siren) => {
   try {
     return await fetchRNCSDirigeants(siren);
   } catch (e) {
+    console.log(e);
     if (e instanceof HttpNotFound) {
-      return null;
+      return {
+        dirigeants: null,
+      };
     } else {
       return {
         administration: EAdministration.INPI,
