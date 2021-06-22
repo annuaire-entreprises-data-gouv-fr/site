@@ -21,7 +21,9 @@ const ping = async (slug: string | string[]) => {
     case 'api-conventions-collectives':
       return await fetchConventionCollectives(['54205118000066']);
     case 'api-sirene-insee':
-      return await getUniteLegaleInseeWithFallbackCredentials('880878145');
+      return await getUniteLegaleInseeWithFallbackCredentials(
+        verifySiren('880878145')
+      );
     case 'api-sirene-donnees-ouvertes':
       return await getUniteLegaleSireneOuverte('880878145');
     case 'api-rna':
