@@ -93,7 +93,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e) {
-    // redirectIfIssueWithSiren(context.res, e, siren, context.req);
+    redirectIfIssueWithSiren(context.res, e, siren, context.req);
     return { props: {} };
   }
 };
