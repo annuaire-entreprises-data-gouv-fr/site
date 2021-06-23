@@ -56,7 +56,7 @@ const getAllEtablissementsCurry =
     const etablissementsPerPage = constants.resultsPerPage.etablissements;
     const cursor = Math.max(page - 1, 0) * etablissementsPerPage;
 
-    const request = await inseeClientGet(
+    const response = await inseeClientGet(
       routes.sireneInsee.siretBySiren +
         siren +
         `&nombre=${etablissementsPerPage}` +
@@ -64,8 +64,7 @@ const getAllEtablissementsCurry =
       credential
     );
 
-    const { header, etablissements } =
-      (await request.json()) as IInseeEtablissementsResponse;
+    const { header, etablissements } = response as IInseeEtablissementsResponse;
 
     return {
       currentEtablissementPage: page,
@@ -80,8 +79,7 @@ const getEtablissementCurry =
       routes.sireneInsee.siret + siret,
       credential
     );
-    const { etablissement } =
-      (await response.json()) as IInseeEtablissementResponse;
+    const { etablissement } = response as IInseeEtablissementResponse;
 
     return mapToDomainObject(etablissement);
   };

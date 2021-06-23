@@ -14,7 +14,9 @@
  *
  */
 
-import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
+import axios, { Method } from 'axios';
+import constants from '../../constants';
+import httpClient, { httpGet } from '../../utils/network/http';
 import {
   HttpAuthentificationFailure,
   HttpNotFound,
@@ -57,9 +59,9 @@ const getCredentials = (credentials: INSEE_CREDENTIALS) => {
 const inseeAuth = async (credentials = INSEE_CREDENTIALS.DEFAULT) => {
   try {
     const { clientId, clientSecret } = getCredentials(credentials);
-    const response = await fetchWithTimeout(routes.sireneInsee.auth, {
+    const response = await httpGet(routes.sireneInsee.auth, {
       method: 'POST',
-      body:
+      data:
         'grant_type=client_credentials&client_id=' +
         clientId +
         '&client_secret=' +
@@ -68,16 +70,15 @@ const inseeAuth = async (credentials = INSEE_CREDENTIALS.DEFAULT) => {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     });
-    const rawResponse = await response.text();
     try {
-      const token = JSON.parse(rawResponse);
+      const token = JSON.parse(response);
       if (!token) {
         throw new Error(`No token`);
       }
       return token;
     } catch (e) {
       // when on maintenance mode, INSEE will return a html error page with a 200 :/
-      throw new Error(rawResponse);
+      throw new Error(response);
     }
   } catch (e) {
     throw new HttpAuthentificationFailure(e);
@@ -85,30 +86,22 @@ const inseeAuth = async (credentials = INSEE_CREDENTIALS.DEFAULT) => {
 };
 
 export const inseeClientWrapper = async (
-  route: string,
+  url: string,
+  method: Method,
   options?: RequestInit,
   credentials?: INSEE_CREDENTIALS
 ) => {
   const token = await inseeAuth(credentials);
 
-  const response = await fetchWithTimeout(route, {
+  const response = await httpClient({
     ...options,
+    url,
+    method,
     headers: {
       Authorization: token.token_type + ' ' + token.access_token,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
-
-  if (response.status === 429) {
-    throw new HttpTooManyRequests(429, `Too many requests in Insee`);
-  }
-  if (response.status === 404) {
-    throw new HttpNotFound(404, `Not found`);
-  }
-
-  if (response.status === 403) {
-    throw new InseeForbiddenError(403, `Forbidden (non diffusible)`);
-  }
 
   return response;
 };
@@ -116,7 +109,7 @@ export const inseeClientWrapper = async (
 export const inseeClientGet = async (
   route: string,
   credentials?: INSEE_CREDENTIALS
-) => inseeClientWrapper(route, {}, credentials);
+) => inseeClientWrapper(route, 'GET', {}, credentials);
 
 export const inseeClientPost = async (
   route: string,
@@ -125,8 +118,8 @@ export const inseeClientPost = async (
 ) =>
   inseeClientWrapper(
     route,
+    'POST',
     {
-      method: 'POST',
       body,
     },
     credentials

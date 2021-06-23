@@ -2,7 +2,7 @@ import { IEtablissement } from '../../models';
 import { ISearchResults } from '../../models/search';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import { formatAdresse, libelleFromCodeNaf } from '../../utils/labels';
-import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
+import { httpGet } from '../../utils/network/http';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 
@@ -44,14 +44,9 @@ const getResults = async (
 ): Promise<ISearchResults> => {
   const encodedTerms = encodeURI(searchTerms);
   const route = `${routes.sireneOuverte.rechercheUniteLegale}?per_page=10&page=${page}&q=${encodedTerms}`;
-  const response = await fetchWithTimeout(route);
+  const response = await httpGet(route);
 
-  if (response.status === 404) {
-    throw new HttpNotFound(404, 'No results');
-  }
-
-  const results = ((await response.json()) ||
-    []) as ISireneOuverteSearchResults[];
+  const results = (response.data || []) as ISireneOuverteSearchResults[];
 
   // Sirene Ouverte is based on a Postrgres to Rest converter and might return [] instead of 404
   if (

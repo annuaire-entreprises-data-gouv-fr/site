@@ -1,5 +1,5 @@
 import { IMonitoring } from '../../models/monitoring';
-import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
+import { httpGet } from '../../utils/network/http';
 import routes from '../routes';
 interface IRatioUptime {
   ratio: string;
@@ -21,11 +21,9 @@ interface IUptimeRobotResponse {
 }
 
 export const fetchApiMonitoring = async (apiSlug: string) => {
-  const response = await fetchWithTimeout(
-    routes.monitoring.uptimeRobot + apiSlug
-  );
+  const response = await httpGet(routes.monitoring.uptimeRobot + apiSlug);
 
-  const result = (await response.json()) as IUptimeRobotResponse;
+  const result = response as IUptimeRobotResponse;
 
   return mapToDomainObject(result);
 };
