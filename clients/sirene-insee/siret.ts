@@ -1,10 +1,9 @@
 import { inseeClientGet, InseeForbiddenError, INSEE_CREDENTIALS } from '.';
+import constants from '../../constants';
 import {
   createDefaultEtablissement,
-  createDefaultUniteLegale,
   IEtablissement,
   IEtablissementsList,
-  IUniteLegale,
 } from '../../models';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
@@ -50,14 +49,18 @@ export const getAllEtablissementInsee = async (
   siren: string,
   page = 1
 ): Promise<IEtablissementsList> => {
-  const debut = Math.max(page - 1, 0);
+  const etablissementsPerPage = constants.resultsPerPage.etablissements;
+  const cursor = Math.max(page - 1, 0) * etablissementsPerPage;
+
   const request = await inseeClientGet(
-    routes.sireneInsee.siretBySiren + siren + '&nombre=100&debut=' + debut
+    routes.sireneInsee.siretBySiren +
+      siren +
+      `&nombre=${etablissementsPerPage}` +
+      `&debut=${cursor}`
   );
 
   const { header, etablissements } =
     (await request.json()) as IInseeEtablissementsResponse;
-
   return {
     currentEtablissementPage: page,
     etablissements: etablissements.map(mapToDomainObject),
@@ -71,6 +74,10 @@ export const getEtablissementInsee = async (siret: string) => {
     (await response.json()) as IInseeEtablissementResponse;
   return mapToDomainObject(etablissement);
 };
+
+//======
+// fallback methods
+//======
 
 export const getEtablissementInseeWithFallbackCredentials = async (
   siret: string

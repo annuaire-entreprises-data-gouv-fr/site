@@ -85,8 +85,8 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
     const [uniteLegaleInsee, etablissementsInsee, uniteLegaleSireneOuverte] =
       await Promise.all([
         getUniteLegaleInsee(siren),
-        getAllEtablissementInsee(siren, page),
-        getUniteLegaleSireneOuverte(siren, page).catch((e) => null),
+        getAllEtablissementInsee(siren, page).catch(() => null),
+        getUniteLegaleSireneOuverte(siren, page).catch(() => null),
       ]);
 
     return mergeUniteLegaleFromBothApi(
@@ -107,22 +107,24 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
  */
 const mergeUniteLegaleFromBothApi = (
   uniteLegaleInsee: IUniteLegale,
-  etablissementsInsee: IEtablissementsList,
+  etablissementsInsee: IEtablissementsList | null,
   uniteLegaleSireneOuverte: IUniteLegale | null
 ) => {
   if (!uniteLegaleSireneOuverte) {
     return uniteLegaleInsee;
   }
 
+  const etablissementsList = etablissementsInsee || uniteLegaleSireneOuverte;
+
   return {
     ...uniteLegaleInsee,
     // siege from INSEE lacks many information (adress etc.)
     siege: uniteLegaleSireneOuverte.siege,
     // these last fields are only available in Sirene ouverte
-    etablissements: etablissementsInsee.etablissements,
+    etablissements: etablissementsList.etablissements,
     chemin: uniteLegaleSireneOuverte.chemin,
-    currentEtablissementPage: etablissementsInsee.currentEtablissementPage,
-    nombreEtablissements: etablissementsInsee.nombreEtablissements,
+    currentEtablissementPage: etablissementsList.currentEtablissementPage,
+    nombreEtablissements: etablissementsList.nombreEtablissements,
   };
 };
 

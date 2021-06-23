@@ -2,6 +2,7 @@ import links from './links';
 
 export default {
   links: links,
+  resultsPerPage: { etablissements: 200, search: 30 },
   layout: { HEADER_HEIGHT: 75 },
   colors: {
     confidential: '#10c6b0',
