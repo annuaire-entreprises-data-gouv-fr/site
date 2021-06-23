@@ -1,10 +1,16 @@
-import { createDefaultUniteLegale, IUniteLegale, SirenNotFoundError } from '.';
+import {
+  createDefaultUniteLegale,
+  IEtablissementsList,
+  IUniteLegale,
+  SirenNotFoundError,
+} from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import { InseeForbiddenError } from '../clients/sirene-insee';
 import {
   getUniteLegaleInsee,
   getUniteLegaleInseeWithFallbackCredentials,
 } from '../clients/sirene-insee/siren';
+import { getAllEtablissementInsee } from '../clients/sirene-insee/siret';
 import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
 import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
 import {
@@ -76,17 +82,16 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
   try {
     // INSEE does not provide enough information to paginate etablissement list
     // so we doubled our API call with sirene ouverte to get Etablissements.
-    const [uniteLegaleInsee, uniteLegaleSireneOuverte] = await Promise.all([
-      getUniteLegaleInsee(siren),
-      getUniteLegaleSireneOuverte(siren, page).catch((e) => null),
-    ]);
-
-    if (!uniteLegaleSireneOuverte) {
-      return uniteLegaleInsee;
-    }
+    const [uniteLegaleInsee, etablissementsInsee, uniteLegaleSireneOuverte] =
+      await Promise.all([
+        getUniteLegaleInsee(siren),
+        getAllEtablissementInsee(siren, page),
+        getUniteLegaleSireneOuverte(siren, page).catch((e) => null),
+      ]);
 
     return mergeUniteLegaleFromBothApi(
       uniteLegaleInsee,
+      etablissementsInsee,
       uniteLegaleSireneOuverte
     );
   } catch (e) {
@@ -102,17 +107,22 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
  */
 const mergeUniteLegaleFromBothApi = (
   uniteLegaleInsee: IUniteLegale,
-  uniteLegaleSireneOuverte: IUniteLegale
+  etablissementsInsee: IEtablissementsList,
+  uniteLegaleSireneOuverte: IUniteLegale | null
 ) => {
+  if (!uniteLegaleSireneOuverte) {
+    return uniteLegaleInsee;
+  }
+
   return {
     ...uniteLegaleInsee,
     // siege from INSEE lacks many information (adress etc.)
     siege: uniteLegaleSireneOuverte.siege,
     // these last fields are only available in Sirene ouverte
-    etablissements: uniteLegaleSireneOuverte.etablissements,
+    etablissements: etablissementsInsee.etablissements,
     chemin: uniteLegaleSireneOuverte.chemin,
-    currentEtablissementPage: uniteLegaleSireneOuverte.currentEtablissementPage,
-    nombreEtablissements: uniteLegaleSireneOuverte.nombreEtablissements,
+    currentEtablissementPage: etablissementsInsee.currentEtablissementPage,
+    nombreEtablissements: etablissementsInsee.nombreEtablissements,
   };
 };
 

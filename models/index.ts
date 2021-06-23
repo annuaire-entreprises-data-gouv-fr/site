@@ -32,14 +32,12 @@ export interface IEtablissementWithUniteLegale {
   uniteLegale: IUniteLegale;
 }
 
-export interface IUniteLegale {
+export interface IUniteLegale extends IEtablissementsList {
   siren: string;
   numeroTva: string;
   siege: IEtablissement;
   natureJuridique: string;
   libelleNatureJuridique: string;
-  etablissements: IEtablissement[];
-  nombreEtablissements: number;
   activitePrincipale: string;
   libelleActivitePrincipale: string;
   dateCreation: string;
@@ -54,9 +52,13 @@ export interface IUniteLegale {
   trancheEffectif: string;
   libelleTrancheEffectif: string;
   adresse: string;
-  // etablissement list pagination
-  currentEtablissementPage?: number;
   association: IAssociation | null;
+}
+
+export interface IEtablissementsList {
+  etablissements: IEtablissement[];
+  nombreEtablissements: number;
+  currentEtablissementPage?: number;
 }
 
 /** BASIC CONSTRUCTORS */

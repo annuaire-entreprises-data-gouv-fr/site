@@ -1,5 +1,11 @@
 import { inseeClientGet, InseeForbiddenError, INSEE_CREDENTIALS } from '.';
-import { createDefaultEtablissement, IEtablissement } from '../../models';
+import {
+  createDefaultEtablissement,
+  createDefaultUniteLegale,
+  IEtablissement,
+  IEtablissementsList,
+  IUniteLegale,
+} from '../../models';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
@@ -12,6 +18,7 @@ interface IInseeEtablissementResponse {
   etablissement: IInseeEtablissement;
 }
 interface IInseeEtablissementsResponse {
+  header: { total: number; debut: number; nombre: number };
   etablissements: IInseeEtablissement[];
 }
 
@@ -39,20 +46,29 @@ interface IInseeEtablissement {
     libelleCommuneEtablissement: string;
   };
 }
-export const getAllEtablissementInsee = async (siren: string, page = 1) => {
-  const request = await inseeClientGet(routes.sireneInsee.siretBySiren + siren);
-  const {
-    etablissements,
-  } = (await request.json()) as IInseeEtablissementsResponse;
+export const getAllEtablissementInsee = async (
+  siren: string,
+  page = 1
+): Promise<IEtablissementsList> => {
+  const debut = Math.max(page - 1, 0);
+  const request = await inseeClientGet(
+    routes.sireneInsee.siretBySiren + siren + '&nombre=100&debut=' + debut
+  );
 
-  return etablissements.map(mapToDomainObject);
+  const { header, etablissements } =
+    (await request.json()) as IInseeEtablissementsResponse;
+
+  return {
+    currentEtablissementPage: page,
+    etablissements: etablissements.map(mapToDomainObject),
+    nombreEtablissements: header.total,
+  };
 };
 
 export const getEtablissementInsee = async (siret: string) => {
   const response = await inseeClientGet(routes.sireneInsee.siret + siret);
-  const {
-    etablissement,
-  } = (await response.json()) as IInseeEtablissementResponse;
+  const { etablissement } =
+    (await response.json()) as IInseeEtablissementResponse;
   return mapToDomainObject(etablissement);
 };
 
@@ -63,9 +79,8 @@ export const getEtablissementInseeWithFallbackCredentials = async (
     routes.sireneInsee.siret + siret,
     INSEE_CREDENTIALS.FALLBACK
   );
-  const {
-    etablissement,
-  } = (await response.json()) as IInseeEtablissementResponse;
+  const { etablissement } =
+    (await response.json()) as IInseeEtablissementResponse;
   return mapToDomainObject(etablissement);
 };
 
