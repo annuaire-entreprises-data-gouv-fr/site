@@ -1,6 +1,12 @@
 import { inseeClientGet, InseeForbiddenError, INSEE_CREDENTIALS } from '.';
 import { createDefaultEtablissement, IEtablissement } from '../../models';
-import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
+import {
+  extractSirenFromSiret,
+  Siren,
+  Siret,
+  verifySiren,
+  verifySiret,
+} from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
   libelleFromCodeEffectif,
@@ -39,33 +45,30 @@ interface IInseeEtablissement {
     libelleCommuneEtablissement: string;
   };
 }
-export const getAllEtablissementInsee = async (siren: string, page = 1) => {
+export const getAllEtablissementInsee = async (siren: Siren, page = 1) => {
   const request = await inseeClientGet(routes.sireneInsee.siretBySiren + siren);
-  const {
-    etablissements,
-  } = (await request.json()) as IInseeEtablissementsResponse;
+  const response = await request.json();
+  const { etablissements } = response as IInseeEtablissementsResponse;
 
   return etablissements.map(mapToDomainObject);
 };
 
-export const getEtablissementInsee = async (siret: string) => {
+export const getEtablissementInsee = async (siret: Siret) => {
   const response = await inseeClientGet(routes.sireneInsee.siret + siret);
-  const {
-    etablissement,
-  } = (await response.json()) as IInseeEtablissementResponse;
+  const { etablissement } =
+    (await response.json()) as IInseeEtablissementResponse;
   return mapToDomainObject(etablissement);
 };
 
 export const getEtablissementInseeWithFallbackCredentials = async (
-  siret: string
+  siret: Siret
 ) => {
   const response = await inseeClientGet(
     routes.sireneInsee.siret + siret,
     INSEE_CREDENTIALS.FALLBACK
   );
-  const {
-    etablissement,
-  } = (await response.json()) as IInseeEtablissementResponse;
+  const { etablissement } =
+    (await response.json()) as IInseeEtablissementResponse;
   return mapToDomainObject(etablissement);
 };
 
@@ -73,8 +76,8 @@ const mapToDomainObject = (
   inseeEtablissement: IInseeEtablissement
 ): IEtablissement => {
   const {
-    siret,
     nic,
+    siret,
     etablissementSiege,
     trancheEffectifsEtablissement,
     dateCreationEtablissement,
@@ -103,8 +106,8 @@ const mapToDomainObject = (
 
   return {
     ...defaultEtablissement,
-    siren: extractSirenFromSiret(siret),
-    siret,
+    siren: verifySiren(extractSirenFromSiret(siret)),
+    siret: verifySiret(siret),
     nic,
     dateCreation: dateCreationEtablissement,
     activitePrincipale: activitePrincipaleRegistreMetiersEtablissement,

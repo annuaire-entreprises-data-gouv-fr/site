@@ -1,6 +1,6 @@
 import { IUniteLegale } from '.';
 import { HttpNotFound } from '../clients/exceptions';
-import { fetchRNCSDirigeants } from '../clients/rncs/dirigeants';
+import { fetchRNCSIMR } from '../clients/rncs/IMR';
 import { Siren } from '../utils/helpers/siren-and-siret';
 import { EAdministration } from './administration';
 import { IAPINotRespondingError } from './api-not-responding';
@@ -44,9 +44,8 @@ export const getDirigeantsWithUniteLegaleFromSlug = async (slug: string) => {
 
 export const getDirigeantsFromImmatricualtions = async (siren: Siren) => {
   try {
-    return await fetchRNCSDirigeants(siren);
+    return await fetchRNCSIMR(siren);
   } catch (e) {
-    console.log(e);
     if (e instanceof HttpNotFound) {
       return {
         dirigeants: null,

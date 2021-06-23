@@ -1,4 +1,5 @@
-import { fetchRNCSImmatriculation } from './immatriculation';
+import { fetchRNCSImmatriculation } from './IMRJustificatif';
+import { fetchRNCSIMR } from './IMR';
 
 import routes from '../routes';
 import {
@@ -49,4 +50,4 @@ const RNCSClientWrapper = async (route: string, options?: RequestInit) => {
   return response;
 };
 
-export { fetchRNCSImmatriculation, RNCSAuth, RNCSClientWrapper };
+export { fetchRNCSImmatriculation, RNCSAuth, fetchRNCSIMR, RNCSClientWrapper };

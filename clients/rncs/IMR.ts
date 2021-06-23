@@ -1,26 +1,58 @@
 import { RNCSClientWrapper } from '.';
-import {
-  IDirigeant,
-  IEtatCivil,
-  IPersonneMorale,
-} from '../../models/dirigeants';
+import { IDirigeant } from '../../models/dirigeants';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import routes from '../routes';
 import yauzl from 'yauzl';
 import { HttpNotFound } from '../exceptions';
-import parser from 'fast-xml-parser';
+import { extractIMRFromXml } from './IMRParser';
+import { logWarningInSentry } from '../../utils/sentry';
 
-interface IApiRNCSResponse {
-  dirigeants: any;
-  beneficiaires: any;
+export interface IRNCSResponse {
+  fichier: {
+    // un dossier par greffe, tous les représentants ont été déplacés par l'inpi dans un seul dossier
+    dossier: IRNCSResponseDossier | IRNCSResponseDossier[];
+  };
 }
 
-export const fetchRNCSDirigeants = async (siren: Siren) => {
-  const imrBuffer = await fetchIMRAsBuffer(siren);
-  const res = await unZipFromBuffer(imrBuffer);
+export interface IRNCSResponseDossier {
+  representants: {
+    representant: IRNCSRepresentantResponse | IRNCSRepresentantResponse[];
+  };
+}
+
+export interface IRNCSRepresentantResponse {
+  representants: {
+    prenoms: string;
+    nom_patronymique: string;
+    lieu_naiss: string;
+    code_pays_naiss: string;
+    dat_naiss: string;
+    qualites: { qualite: string | string[] };
+    form_jur: string;
+    siren: string;
+    denomination: string;
+    type: string;
+  };
+}
+
+interface IZipFileAsBuffer {
+  file: string;
+  buffer: Buffer;
+}
+
+export const fetchRNCSIMR = async (siren: Siren) => {
+  const IMRBuffer = await fetchIMRAsBuffer(siren);
+  const unzippedIMR = await unZipFromBuffer(IMRBuffer);
+
+  if (unzippedIMR.length > 2) {
+    logWarningInSentry('More than 2 files returned in IMR zip', {
+      siren,
+      details: unzippedIMR.join(', '),
+    });
+  }
 
   // we assume first archive only contains one zip file
-  const zippedIMRFile = res.find(
+  const zippedIMRFile = unzippedIMR.find(
     (extractedFile) => extractedFile.file.indexOf('.zip') > -1
   );
 
@@ -29,69 +61,17 @@ export const fetchRNCSDirigeants = async (siren: Siren) => {
   }
 
   const extractedXMLBuffer = await unZipFromBuffer(zippedIMRFile.buffer);
-  const xmlString = await extractedXMLBuffer[0].buffer.toString();
-  const response = await openRNCSXml(xmlString);
+  const xmlResponse = extractedXMLBuffer[0].buffer.toString();
 
-  return mapToDomainObject(response);
+  return mapToDomainObject(xmlResponse);
 };
 
 const mapToDomainObject = (
-  apiRNCSResponse: IApiRNCSResponse
+  xmlResponse: string
 ): { dirigeants: IDirigeant[] } => {
-  let dossier;
-  if (Array.isArray(apiRNCSResponse.fichier.dossier)) {
-    dossier = apiRNCSResponse.fichier.dossier.find(
-      (response) => response.representants !== undefined
-    );
-  } else {
-    dossier = apiRNCSResponse.fichier.dossier;
-  }
-  const representant = dossier.representants.representant;
-  const isRepresentantAnArray = Array.isArray(representant);
-
-  const dirigeants = (
-    isRepresentantAnArray ? representant : [representant]
-  ).map(extractDirigeants);
+  const dirigeants = extractIMRFromXml(xmlResponse);
 
   return { dirigeants };
-};
-
-const extractDirigeants = (dirigeant: any) => {
-  const {
-    prenoms,
-    nom_patronymique,
-    lieu_naiss,
-    code_pays_naiss,
-    dat_naiss,
-    qualites,
-    form_jur,
-    siren,
-    denomination,
-    type,
-  } = dirigeant;
-  try {
-    const qualite = qualites.qualite;
-    const roles = Array.isArray(qualite) ? qualite.join(', ') : qualite;
-    if (type === 'P.Physique') {
-      return {
-        prenom: prenoms.split(' ')[0],
-        nom: nom_patronymique,
-        role: roles,
-        lieuNaissance: lieu_naiss + ', ' + code_pays_naiss,
-        dateNaissance: dat_naiss.toString().slice(0, 4),
-      };
-    } else {
-      return {
-        siren: siren,
-        denomination: denomination,
-        role: roles,
-        natureJuridique: form_jur,
-      };
-    }
-  } catch (e) {
-    console.log(dirigeant);
-    console.log(e);
-  }
 };
 
 const fetchIMRAsBuffer = async (siren: Siren) => {
@@ -100,21 +80,15 @@ const fetchIMRAsBuffer = async (siren: Siren) => {
   return Buffer.from(new Uint8Array(arrayBuffer));
 };
 
-interface IZipFileAsBuffer {
-  file: string;
-  buffer: Buffer;
-}
-
 const unZipFromBuffer = (buffer: Buffer): Promise<IZipFileAsBuffer[]> => {
-  const extractedFiles: IZipFileAsBuffer[] = [];
-
   return new Promise((resolve, reject) => {
     yauzl.fromBuffer(
       buffer,
       { autoClose: true, lazyEntries: true },
       function (err, zipfile) {
+        const extractedFiles: IZipFileAsBuffer[] = [];
+
         if (err) {
-          console.log('C’est la cacata' + err.message);
           reject(err.message);
         } else if (zipfile === undefined) {
           reject('Could not find zipfile');
@@ -130,8 +104,11 @@ const unZipFromBuffer = (buffer: Buffer): Promise<IZipFileAsBuffer[]> => {
               try {
                 // file entry
                 zipfile.openReadStream(entry, function (err, readStream) {
-                  const chunks = [];
+                  const chunks: any[] = [];
+
                   if (err) throw err;
+                  if (!readStream) throw new Error('ReadStream is undefined');
+
                   readStream.on('data', (chunk) => {
                     chunks.push(chunk);
                   });
@@ -144,8 +121,6 @@ const unZipFromBuffer = (buffer: Buffer): Promise<IZipFileAsBuffer[]> => {
                   });
                 });
               } catch (e) {
-                console.log('zip extraction failed' + e);
-
                 reject(e);
               }
             }
@@ -157,9 +132,4 @@ const unZipFromBuffer = (buffer: Buffer): Promise<IZipFileAsBuffer[]> => {
       }
     );
   });
-};
-
-const openRNCSXml = (xmlString: string) => {
-  const tObj = parser.getTraversalObj(xmlString, { arrayMode: false });
-  return parser.convertToJson(tObj, { arrayMode: false });
 };

@@ -6,6 +6,11 @@ import routes from '../routes';
 
 interface IApiRNCSResponse {}
 
+/**
+ * Checks if justificatifs exists in RNCS
+ * @param siren
+ * @returns
+ */
 export const fetchRNCSImmatriculation = async (siren: Siren) => {
   const response = await RNCSClientWrapper(
     routes.rncs.api.imr.find + siren,
