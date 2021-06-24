@@ -45,6 +45,10 @@ export const httpClientOAuthFactory = (
   client_id: string,
   client_secret: string
 ) => {
+  if (!client_id || !client_secret) {
+    throw new HttpServerError(500, 'Client id or client secret is undefined');
+  }
+
   const getClientCredentials = oauth.client(axios.create(), {
     url: token_url,
     grant_type: 'client_credentials',

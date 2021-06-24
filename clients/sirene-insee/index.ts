@@ -1,5 +1,4 @@
 import { httpClientOAuthFactory } from '../../utils/network/http';
-import { HttpServerError } from '../exceptions';
 import routes from '../routes';
 
 /**
@@ -42,9 +41,6 @@ const getCredentials = (credentials: INSEE_CREDENTIALS) => {
 const inseeClientFactory = (credentials = INSEE_CREDENTIALS.DEFAULT) => {
   const { client_id, client_secret } = getCredentials(credentials);
 
-  if (!client_id || !client_secret) {
-    throw new HttpServerError(500, 'Client id or client secret is undefined');
-  }
   return httpClientOAuthFactory(
     routes.sireneInsee.auth,
     client_id,
