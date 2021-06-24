@@ -10,7 +10,7 @@ export class HttpServerError extends Error {
   }
 }
 export class HttpTimeoutError extends HttpServerError {
-  constructor(public message: string) {
+  constructor(public status: number, public message: string) {
     super(504, message);
   }
 }
@@ -21,6 +21,12 @@ export class HttpAuthentificationFailure extends Error {
   }
 }
 export class HttpTooManyRequests extends Error {
+  constructor(public status: number, public message: string) {
+    super();
+  }
+}
+
+export class HttpForbiddenError extends Error {
   constructor(public status: number, public message: string) {
     super();
   }

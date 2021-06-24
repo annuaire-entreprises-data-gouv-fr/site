@@ -1,19 +1,17 @@
-import { inseeClientGet, InseeForbiddenError, INSEE_CREDENTIALS } from '.';
+import { inseeClientGet, INSEE_CREDENTIALS } from '.';
 import constants from '../../constants';
 import {
   createDefaultEtablissement,
   IEtablissement,
   IEtablissementsList,
 } from '../../models';
-import {
-  extractSirenFromSiret,
-  Siren,
-} from '../../utils/helpers/siren-and-siret';
+import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
+import { HttpForbiddenError } from '../exceptions';
 import routes from '../routes';
 
 interface IInseeEtablissementResponse {
@@ -112,7 +110,7 @@ const mapToDomainObject = (
     lastEtatAdministratif.activitePrincipaleEtablissement;
 
   if (statutDiffusionEtablissement === 'N') {
-    throw new InseeForbiddenError(403, 'Forbidden (non diffusible)');
+    throw new HttpForbiddenError(403, 'Forbidden (non diffusible)');
   }
 
   const defaultEtablissement = createDefaultEtablissement();

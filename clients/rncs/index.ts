@@ -18,7 +18,7 @@ const rncsAuth = async () => {
       },
     });
 
-    const cookie = response.headers.get('set-cookie');
+    const cookie = response.headers['set-cookie'][0];
     if (!cookie || typeof cookie !== 'string') {
       throw new Error('Authentication failed');
     }

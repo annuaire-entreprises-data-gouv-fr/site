@@ -49,7 +49,7 @@ const getAssociation = async (numeroRna: string): Promise<IAssociation> => {
   const route = `${routes.rna.id}${numeroRna}`;
   const response = await httpGet(route);
 
-  return mapToDomainObject(response as IAssociationResponse);
+  return mapToDomainObject(response.data as IAssociationResponse);
 };
 
 export const mapToDomainObject = (

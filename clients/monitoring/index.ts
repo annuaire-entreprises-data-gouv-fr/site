@@ -23,7 +23,7 @@ interface IUptimeRobotResponse {
 export const fetchApiMonitoring = async (apiSlug: string) => {
   const response = await httpGet(routes.monitoring.uptimeRobot + apiSlug);
 
-  const result = response as IUptimeRobotResponse;
+  const result = response.data as IUptimeRobotResponse;
 
   return mapToDomainObject(result);
 };

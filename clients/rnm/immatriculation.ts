@@ -63,7 +63,7 @@ export const fetchRnmImmatriculation = async (
   siren: Siren
 ): Promise<IImmatriculationRNM> => {
   const response = await httpGet(routes.rnm + siren + '?format=json');
-  return mapToDomainObject(siren, response);
+  return mapToDomainObject(siren, response.data);
 };
 
 const mapToDomainObject = (

@@ -13,11 +13,11 @@ export const fetchRncsImmatriculation = async (siren: Siren) => {
     headers: { Cookie: cookie },
   });
 
-  if (response.length === 0) {
+  if (response.data.length === 0) {
     throw new HttpNotFound(404, `Siren ${siren} not found in RNCS`);
   }
 
-  return mapToDomainObject(siren, response);
+  return mapToDomainObject(siren, response.data);
 };
 
 const mapToDomainObject = (

@@ -4,8 +4,7 @@ import {
   IUniteLegale,
   SirenNotFoundError,
 } from '.';
-import { HttpNotFound } from '../clients/exceptions';
-import { InseeForbiddenError } from '../clients/sirene-insee';
+import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {
   getUniteLegaleInsee,
   getUniteLegaleInseeWithFallbackCredentials,
@@ -61,7 +60,7 @@ const getUniteLegale = async (
         // no pagination as this function is called when sirene etalab already failed
         return await fetchUniteLegaleFromInseeFallback(siren, page);
       } catch (e) {
-        if (e instanceof InseeForbiddenError) {
+        if (e instanceof HttpForbiddenError) {
           return createNonDiffusibleUniteLegale(siren);
         }
         logSecondSireneInseefailed({ siren, details: e.message });
@@ -98,7 +97,7 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
       allEtablissementsInsee
     );
   } catch (e) {
-    if (e instanceof InseeForbiddenError) {
+    if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleUniteLegale(siren);
     }
     throw e;
@@ -122,7 +121,7 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
       allEtablissementsInsee
     );
   } catch (e) {
-    if (e instanceof InseeForbiddenError) {
+    if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleUniteLegale(siren);
     }
     throw e;

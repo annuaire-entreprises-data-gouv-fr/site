@@ -39,7 +39,7 @@ const fetchConventionCollectives = async (
   const batches = generateBatches(sirets);
 
   const response = (await Promise.all(
-    batches.map((urls) => httpGet(urls))
+    batches.map((urls) => httpGet(urls).then((response) => response.data))
   )) as ISiret2idccResponse[][];
 
   const flattenedResponse = response.reduce(

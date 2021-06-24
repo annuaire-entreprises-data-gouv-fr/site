@@ -14,7 +14,7 @@ import logErrorInSentry, { logWarningInSentry } from '../../../utils/sentry';
  */
 const proxyPdf = async (
   { query: { slug } }: NextApiRequest,
-  res: NextApiResponse
+  nextAPIResponse: NextApiResponse
 ) => {
   const siren = slug as string;
 
@@ -38,21 +38,19 @@ const proxyPdf = async (
         headers: {
           Cookie: getCookie(initialAuthData),
         },
+        responseType: 'arraybuffer',
       }
     );
-
-    const pdfRaw = response;
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader(
+    nextAPIResponse.setHeader('Content-Type', 'application/pdf');
+    nextAPIResponse.setHeader(
       'Content-Disposition',
       `attachment; filename=justificatif_immatriculation_rcs_${siren}.pdf`
     );
-
-    res.status(200).send(pdfRaw);
+    nextAPIResponse.status(200).send(response.data);
   } catch (e) {
     console.log(e);
     logErrorInSentry(e);
-    res.status(500).json({ message: e });
+    nextAPIResponse.status(500).json({ message: e });
   }
 };
 
@@ -138,15 +136,15 @@ const getInitialAuthData = async (): Promise<IInitialAuth> => {
       headers: DEFAULT_HEADERS,
     });
 
-    const cookies = response.headers.get('set-cookie');
+    const cookies = response.headers['set-cookie'].join('');
 
     if (!cookies || typeof cookies !== 'string') {
       throw new Error('Authentication failed');
     }
+    const html = response.data;
 
     const initialAuthData = extractInitialAuthData(cookies);
 
-    const html = response.data;
     initialAuthData.token = extractTokenFromHtmlForm(html);
 
     if (
@@ -180,6 +178,7 @@ const authenticateCookie = async (initialAuthData: IInitialAuth) => {
     });
 
     const html = response.data;
+
     const loginSuccess = extractAuthSuccessFromHtmlForm(html);
 
     return loginSuccess ? 200 : 403;

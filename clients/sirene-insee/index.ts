@@ -14,21 +14,9 @@
  *
  */
 
-import axios, { Method } from 'axios';
-import constants from '../../constants';
-import httpClient, { httpGet } from '../../utils/network/http';
-import {
-  HttpAuthentificationFailure,
-  HttpNotFound,
-  HttpTooManyRequests,
-} from '../exceptions';
+import httpClient from '../../utils/network/http';
+import { HttpAuthentificationFailure } from '../exceptions';
 import routes from '../routes';
-
-export class InseeForbiddenError extends Error {
-  constructor(public status: number, public message: string) {
-    super();
-  }
-}
 
 export enum INSEE_CREDENTIALS {
   DEFAULT,
@@ -59,7 +47,8 @@ const getCredentials = (credentials: INSEE_CREDENTIALS) => {
 const inseeAuth = async (credentials = INSEE_CREDENTIALS.DEFAULT) => {
   try {
     const { clientId, clientSecret } = getCredentials(credentials);
-    const response = await httpGet(routes.sireneInsee.auth, {
+    const response = await httpClient({
+      url: routes.sireneInsee.auth,
       method: 'POST',
       data:
         'grant_type=client_credentials&client_id=' +
@@ -71,14 +60,14 @@ const inseeAuth = async (credentials = INSEE_CREDENTIALS.DEFAULT) => {
       },
     });
     try {
-      const token = JSON.parse(response);
-      if (!token) {
+      const token = response.data;
+      if (!token || !token.access_token) {
         throw new Error(`No token`);
       }
       return token;
     } catch (e) {
       // when on maintenance mode, INSEE will return a html error page with a 200 :/
-      throw new Error(response);
+      throw new Error(e + ' | received :' + response.data);
     }
   } catch (e) {
     throw new HttpAuthentificationFailure(e);
@@ -87,7 +76,7 @@ const inseeAuth = async (credentials = INSEE_CREDENTIALS.DEFAULT) => {
 
 export const inseeClientWrapper = async (
   url: string,
-  method: Method,
+  method: 'GET' | 'POST',
   options?: RequestInit,
   credentials?: INSEE_CREDENTIALS
 ) => {
@@ -103,7 +92,7 @@ export const inseeClientWrapper = async (
     },
   });
 
-  return response;
+  return response.data;
 };
 
 export const inseeClientGet = async (

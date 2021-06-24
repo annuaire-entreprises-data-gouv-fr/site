@@ -1,4 +1,11 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import {
+  HttpForbiddenError,
+  HttpNotFound,
+  HttpServerError,
+  HttpTimeoutError,
+  HttpTooManyRequests,
+} from '../../clients/exceptions';
 import constants from '../../constants';
 
 enum StatusCode {
@@ -8,44 +15,39 @@ enum StatusCode {
   InternalServerError = 500,
 }
 
-const handleError = (error: AxiosResponse) => {
-  console.log(error);
-  const { status } = error;
+const handleError = (error: AxiosError) => {
+  const { config, response } = error;
 
-  switch (status) {
-    case StatusCode.InternalServerError: {
-      // Handle InternalServerError
-      break;
+  if (!response) {
+    throw new HttpServerError(
+      500,
+      `Unknown server error while querying ${config.url}`
+    );
+  }
+
+  switch (response.status) {
+    case 429: {
+      throw new HttpTooManyRequests(429, response.statusText);
     }
-    case StatusCode.Forbidden: {
-      // Handle Forbidden
-      break;
+    case 404: {
+      throw new HttpNotFound(404, response.statusText);
     }
-    case StatusCode.Unauthorized: {
-      // Handle Unauthorized
-      break;
+    case 403: {
+      throw new HttpForbiddenError(403, response.statusText);
     }
-    case StatusCode.TooManyRequests: {
-      // Handle TooManyRequests
-      break;
+    case 504: {
+      throw new HttpTimeoutError(504, response.statusText);
     }
+    default:
+      throw new HttpServerError(response.status, response.statusText);
   }
 };
 
-// if (response.status === 429) {
-//   throw new HttpTooManyRequests(429, `Too many requests in Insee`);
-// }
-// if (response.status === 404) {
-//   throw new HttpNotFound(404, `Not found`);
-// }
-
-// if (response.status === 403) {
-//   throw new InseeForbiddenError(403, `Forbidden (non diffusible)`);
-// }
-
-export const httpClient = (config: AxiosRequestConfig) => {
+export const httpClient = (
+  config: AxiosRequestConfig
+): Promise<AxiosResponse> => {
   return axios({ timeout: constants.defaultTimeout, ...config })
-    .then((response) => response.data)
+    .then((response) => response)
     .catch((error) => handleError(error));
 };
 
