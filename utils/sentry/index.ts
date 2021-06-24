@@ -37,7 +37,7 @@ const init = () => {
   _isInitialized = true;
 };
 
-const logInSentryCurry =
+const logInSentryFactory =
   (info: Sentry.Severity) => (errorMsg: any, extra?: IScope) => {
     if (process.env.NODE_ENV === 'development') {
       console.log(errorMsg, JSON.stringify(extra));
@@ -49,8 +49,8 @@ const logInSentryCurry =
     }
   };
 
-export const logWarningInSentry = logInSentryCurry(Sentry.Severity.Warning);
+export const logWarningInSentry = logInSentryFactory(Sentry.Severity.Warning);
 
-export const logErrorInSentry = logInSentryCurry(Sentry.Severity.Error);
+export const logErrorInSentry = logInSentryFactory(Sentry.Severity.Error);
 
 export default logErrorInSentry;
