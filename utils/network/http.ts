@@ -1,4 +1,8 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+//@ts-ignore
+import * as oauth from 'axios-oauth-client';
+import * as tokenProvider from 'axios-token-interceptor';
+
 import {
   HttpForbiddenError,
   HttpNotFound,
@@ -7,13 +11,6 @@ import {
   HttpTooManyRequests,
 } from '../../clients/exceptions';
 import constants from '../../constants';
-
-enum StatusCode {
-  Unauthorized = 401,
-  Forbidden = 403,
-  TooManyRequests = 429,
-  InternalServerError = 500,
-}
 
 const handleError = (error: AxiosError) => {
   const { config, response } = error;
@@ -41,6 +38,31 @@ const handleError = (error: AxiosError) => {
     default:
       throw new HttpServerError(response.status, response.statusText);
   }
+};
+
+export const httpClientOAuthFactory = (
+  token_url: string,
+  client_id: string,
+  client_secret: string
+) => {
+  const getClientCredentials = oauth.client(axios.create(), {
+    url: token_url,
+    grant_type: 'client_credentials',
+    client_id,
+    client_secret,
+    // scope: 'am_application_scope default',
+  });
+
+  const axiosInstance = axios.create({ timeout: constants.defaultTimeout });
+  axiosInstance.interceptors.request.use(
+    oauth.interceptor(tokenProvider, getClientCredentials)
+  );
+
+  axiosInstance.interceptors.response.use(
+    (response) => response,
+    (error) => handleError(error)
+  );
+  return axiosInstance;
 };
 
 export const httpClient = (

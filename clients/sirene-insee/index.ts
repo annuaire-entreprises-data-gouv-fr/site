@@ -1,3 +1,7 @@
+import { httpClientOAuthFactory } from '../../utils/network/http';
+import { HttpServerError } from '../exceptions';
+import routes from '../routes';
+
 /**
  * API SIRENE by INSEE
  *
@@ -14,10 +18,6 @@
  *
  */
 
-import httpClient from '../../utils/network/http';
-import { HttpAuthentificationFailure } from '../exceptions';
-import routes from '../routes';
-
 export enum INSEE_CREDENTIALS {
   DEFAULT,
   FALLBACK,
@@ -29,50 +29,36 @@ export enum INSEE_CREDENTIALS {
 const getCredentials = (credentials: INSEE_CREDENTIALS) => {
   if (credentials === INSEE_CREDENTIALS.FALLBACK) {
     return {
-      clientId: process.env.INSEE_CLIENT_ID_FALLBACK,
-      clientSecret: process.env.INSEE_CLIENT_SECRET_FALLBACK,
+      client_id: process.env.INSEE_CLIENT_ID_FALLBACK,
+      client_secret: process.env.INSEE_CLIENT_SECRET_FALLBACK,
     };
   }
   return {
-    clientId: process.env.INSEE_CLIENT_ID,
-    clientSecret: process.env.INSEE_CLIENT_SECRET,
+    client_id: process.env.INSEE_CLIENT_ID,
+    client_secret: process.env.INSEE_CLIENT_SECRET,
   };
 };
 
-/**
- * Calls insee authent route
- * @param useFallbackToken
- * @returns
- */
-const inseeAuth = async (credentials = INSEE_CREDENTIALS.DEFAULT) => {
-  try {
-    const { clientId, clientSecret } = getCredentials(credentials);
-    const response = await httpClient({
-      url: routes.sireneInsee.auth,
-      method: 'POST',
-      data:
-        'grant_type=client_credentials&client_id=' +
-        clientId +
-        '&client_secret=' +
-        clientSecret,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    });
-    try {
-      const token = response.data;
-      if (!token || !token.access_token) {
-        throw new Error(`No token`);
-      }
-      return token;
-    } catch (e) {
-      // when on maintenance mode, INSEE will return a html error page with a 200 :/
-      throw new Error(e + ' | received :' + response.data);
-    }
-  } catch (e) {
-    throw new HttpAuthentificationFailure(e);
+const inseeClientFactory = (credentials = INSEE_CREDENTIALS.DEFAULT) => {
+  const { client_id, client_secret } = getCredentials(credentials);
+
+  if (!client_id || !client_secret) {
+    throw new HttpServerError(500, 'Client id or client secret is undefined');
   }
+  return httpClientOAuthFactory(
+    routes.sireneInsee.auth,
+    client_id,
+    client_secret
+  );
 };
+
+const defaultInseeClient = inseeClientFactory(INSEE_CREDENTIALS.DEFAULT);
+const fallBackInseeClient = inseeClientFactory(INSEE_CREDENTIALS.FALLBACK);
+
+const inseeClient = (credentials = INSEE_CREDENTIALS.DEFAULT) =>
+  credentials === INSEE_CREDENTIALS.DEFAULT
+    ? defaultInseeClient
+    : fallBackInseeClient;
 
 export const inseeClientWrapper = async (
   url: string,
@@ -80,18 +66,11 @@ export const inseeClientWrapper = async (
   options?: RequestInit,
   credentials?: INSEE_CREDENTIALS
 ) => {
-  const token = await inseeAuth(credentials);
-
-  const response = await httpClient({
+  const response = await inseeClient(credentials)({
     ...options,
     url,
     method,
-    headers: {
-      Authorization: token.token_type + ' ' + token.access_token,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
   });
-
   return response.data;
 };
 
