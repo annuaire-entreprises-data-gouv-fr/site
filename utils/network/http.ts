@@ -42,8 +42,8 @@ const handleError = (error: AxiosError) => {
 
 export const httpClientOAuthFactory = (
   token_url: string,
-  client_id: string,
-  client_secret: string
+  client_id: string | undefined,
+  client_secret: string | undefined
 ) => {
   if (!client_id || !client_secret) {
     throw new HttpServerError(500, 'Client id or client secret is undefined');
