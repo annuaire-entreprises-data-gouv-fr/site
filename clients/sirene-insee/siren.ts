@@ -1,4 +1,4 @@
-import { inseeClientGet, InseeForbiddenError, INSEE_CREDENTIALS } from '.';
+import { inseeClientGet, INSEE_CREDENTIALS } from '.';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
@@ -12,6 +12,7 @@ import {
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
+import { HttpForbiddenError } from '../exceptions';
 import routes from '../routes';
 
 interface IInseeUniteLegaleResponse {
@@ -46,7 +47,7 @@ interface IPeriodeUniteLegale {
  */
 export const getUniteLegaleInsee = async (siren: Siren) => {
   const request = await inseeClientGet(routes.sireneInsee.siren + siren);
-  const response = (await request.json()) as IInseeUniteLegaleResponse;
+  const response = request as IInseeUniteLegaleResponse;
 
   return mapToDomainObject(siren, response);
 };
@@ -58,7 +59,7 @@ export const getUniteLegaleInseeWithFallbackCredentials = async (
     routes.sireneInsee.siren + siren,
     INSEE_CREDENTIALS.FALLBACK
   );
-  const response = (await request.json()) as IInseeUniteLegaleResponse;
+  const response = request as IInseeUniteLegaleResponse;
 
   return mapToDomainObject(siren, response);
 };
@@ -91,7 +92,7 @@ const mapToDomainObject = (
   } = periodesUniteLegale[0];
 
   if (statutDiffusionUniteLegale === 'N') {
-    throw new InseeForbiddenError(403, 'Forbidden (non diffusible)');
+    throw new HttpForbiddenError(403, 'Forbidden (non diffusible)');
   }
 
   const safeActivitePrincipaleUniteLegale = (

@@ -1,4 +1,5 @@
 import React from 'react';
+import constants from '../../constants';
 import { IEtablissement, IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
@@ -12,6 +13,7 @@ import { Tag } from '../tag';
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
+  const etablissementsPerPage = constants.resultsPerPage.etablissements;
   return (
     <div id="etablissements">
       <p>
@@ -47,10 +49,12 @@ const EtablissementListeSection: React.FC<{
             ]
           )}
         />
-        {uniteLegale.nombreEtablissements > 200 && (
+        {uniteLegale.nombreEtablissements > etablissementsPerPage && (
           <PageCounter
             currentPage={uniteLegale.currentEtablissementPage || 1}
-            totalPages={Math.round(uniteLegale.nombreEtablissements / 200) - 1}
+            totalPages={Math.ceil(
+              uniteLegale.nombreEtablissements / etablissementsPerPage
+            )}
           />
         )}
       </Section>

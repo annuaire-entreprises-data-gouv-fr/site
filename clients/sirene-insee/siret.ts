@@ -1,23 +1,25 @@
-import { inseeClientGet, InseeForbiddenError, INSEE_CREDENTIALS } from '.';
-import { createDefaultEtablissement, IEtablissement } from '../../models';
+import { verifySiren, verifySiret } from '../../utils/helpers/siren-and-siret';
+import { inseeClientGet, INSEE_CREDENTIALS } from '.';
+import constants from '../../constants';
 import {
-  extractSirenFromSiret,
-  Siren,
-  Siret,
-  verifySiren,
-  verifySiret,
-} from '../../utils/helpers/siren-and-siret';
+  createDefaultEtablissement,
+  IEtablissement,
+  IEtablissementsList,
+} from '../../models';
+import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
+import { HttpForbiddenError } from '../exceptions';
 import routes from '../routes';
 
 interface IInseeEtablissementResponse {
   etablissement: IInseeEtablissement;
 }
 interface IInseeEtablissementsResponse {
+  header: { total: number; debut: number; nombre: number };
   etablissements: IInseeEtablissement[];
 }
 
@@ -35,6 +37,7 @@ interface IInseeEtablissement {
     dateDebut: string;
     etatAdministratifEtablissement: string;
     changementEtatAdministratifEtablissement: boolean;
+    activitePrincipaleEtablissement: string;
   }[];
   adresseEtablissement: {
     numeroVoieEtablissement: string;
@@ -45,32 +48,40 @@ interface IInseeEtablissement {
     libelleCommuneEtablissement: string;
   };
 }
-export const getAllEtablissementInsee = async (siren: Siren, page = 1) => {
-  const request = await inseeClientGet(routes.sireneInsee.siretBySiren + siren);
-  const response = await request.json();
-  const { etablissements } = response as IInseeEtablissementsResponse;
 
-  return etablissements.map(mapToDomainObject);
-};
+const getAllEtablissementsCurry =
+  (credential: INSEE_CREDENTIALS) =>
+  async (siren: string, page = 1): Promise<IEtablissementsList> => {
+    const etablissementsPerPage = constants.resultsPerPage.etablissements;
+    const cursor = Math.max(page - 1, 0) * etablissementsPerPage;
 
-export const getEtablissementInsee = async (siret: Siret) => {
-  const response = await inseeClientGet(routes.sireneInsee.siret + siret);
-  const { etablissement } =
-    (await response.json()) as IInseeEtablissementResponse;
-  return mapToDomainObject(etablissement);
-};
+    const response = await inseeClientGet(
+      routes.sireneInsee.siretBySiren +
+        siren +
+        `&nombre=${etablissementsPerPage}` +
+        `&debut=${cursor}`,
+      credential
+    );
 
-export const getEtablissementInseeWithFallbackCredentials = async (
-  siret: Siret
-) => {
-  const response = await inseeClientGet(
-    routes.sireneInsee.siret + siret,
-    INSEE_CREDENTIALS.FALLBACK
-  );
-  const { etablissement } =
-    (await response.json()) as IInseeEtablissementResponse;
-  return mapToDomainObject(etablissement);
-};
+    const { header, etablissements } = response as IInseeEtablissementsResponse;
+
+    return {
+      currentEtablissementPage: page,
+      etablissements: etablissements.map(mapToDomainObject),
+      nombreEtablissements: header.total,
+    };
+  };
+
+const getEtablissementCurry =
+  (credential: INSEE_CREDENTIALS) => async (siret: string) => {
+    const response = await inseeClientGet(
+      routes.sireneInsee.siret + siret,
+      credential
+    );
+    const { etablissement } = response as IInseeEtablissementResponse;
+
+    return mapToDomainObject(etablissement);
+  };
 
 const mapToDomainObject = (
   inseeEtablissement: IInseeEtablissement
@@ -82,7 +93,6 @@ const mapToDomainObject = (
     trancheEffectifsEtablissement,
     dateCreationEtablissement,
     dateDernierTraitementEtablissement,
-    activitePrincipaleRegistreMetiersEtablissement,
     adresseEtablissement,
     statutDiffusionEtablissement,
     periodesEtablissement,
@@ -97,9 +107,11 @@ const mapToDomainObject = (
   }
   const estActif = lastEtatAdministratif.etatAdministratifEtablissement === 'A';
   const dateFermeture = !estActif ? lastEtatAdministratif.dateDebut : null;
+  const activitePrincipaleEtablissement =
+    lastEtatAdministratif.activitePrincipaleEtablissement;
 
   if (statutDiffusionEtablissement === 'N') {
-    throw new InseeForbiddenError(403, 'Forbidden (non diffusible)');
+    throw new HttpForbiddenError(403, 'Forbidden (non diffusible)');
   }
 
   const defaultEtablissement = createDefaultEtablissement();
@@ -110,9 +122,9 @@ const mapToDomainObject = (
     siret: verifySiret(siret),
     nic,
     dateCreation: dateCreationEtablissement,
-    activitePrincipale: activitePrincipaleRegistreMetiersEtablissement,
+    activitePrincipale: activitePrincipaleEtablissement,
     libelleActivitePrincipale: libelleFromCodeNaf(
-      activitePrincipaleRegistreMetiersEtablissement
+      activitePrincipaleEtablissement
     ),
     dateDerniereMiseAJour: dateDernierTraitementEtablissement,
     estSiege: !!etablissementSiege,
@@ -132,3 +144,21 @@ const mapToDomainObject = (
     ),
   };
 };
+
+//=================
+// public methods
+//=================
+
+export const getAllEtablissementsInsee = getAllEtablissementsCurry(
+  INSEE_CREDENTIALS.DEFAULT
+);
+
+export const getAllEtablissementsInseeWithFallbackCredentials =
+  getAllEtablissementsCurry(INSEE_CREDENTIALS.FALLBACK);
+
+export const getEtablissementInsee = getEtablissementCurry(
+  INSEE_CREDENTIALS.DEFAULT
+);
+
+export const getEtablissementInseeWithFallbackCredentials =
+  getEtablissementCurry(INSEE_CREDENTIALS.FALLBACK);

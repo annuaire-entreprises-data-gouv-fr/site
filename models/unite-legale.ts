@@ -1,10 +1,18 @@
-import { createDefaultUniteLegale, IUniteLegale, SirenNotFoundError } from '.';
-import { HttpNotFound } from '../clients/exceptions';
-import { InseeForbiddenError } from '../clients/sirene-insee';
+import {
+  createDefaultUniteLegale,
+  IEtablissementsList,
+  IUniteLegale,
+  SirenNotFoundError,
+} from '.';
+import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {
   getUniteLegaleInsee,
   getUniteLegaleInseeWithFallbackCredentials,
 } from '../clients/sirene-insee/siren';
+import {
+  getAllEtablissementsInsee,
+  getAllEtablissementsInseeWithFallbackCredentials,
+} from '../clients/sirene-insee/siret';
 import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
 import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
 import {
@@ -50,9 +58,9 @@ const getUniteLegale = async (
       try {
         // in case sirene etalab 404 or 500, fallback on Sirene insee using fallback credentials to avoid 403
         // no pagination as this function is called when sirene etalab already failed
-        return await getUniteLegaleInseeWithFallbackCredentials(siren);
+        return await fetchUniteLegaleFromInseeFallback(siren, page);
       } catch (e) {
-        if (e instanceof InseeForbiddenError) {
+        if (e instanceof HttpForbiddenError) {
           return createNonDiffusibleUniteLegale(siren);
         }
         logSecondSireneInseefailed({ siren, details: e.message });
@@ -76,21 +84,44 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
   try {
     // INSEE does not provide enough information to paginate etablissement list
     // so we doubled our API call with sirene ouverte to get Etablissements.
-    const [uniteLegaleInsee, uniteLegaleSireneOuverte] = await Promise.all([
-      getUniteLegaleInsee(siren),
-      getUniteLegaleSireneOuverte(siren, page).catch((e) => null),
-    ]);
-
-    if (!uniteLegaleSireneOuverte) {
-      return uniteLegaleInsee;
-    }
+    const [uniteLegaleInsee, uniteLegaleSireneOuverte, allEtablissementsInsee] =
+      await Promise.all([
+        getUniteLegaleInsee(siren),
+        getUniteLegaleSireneOuverte(siren, page).catch(() => null),
+        getAllEtablissementsInsee(siren),
+      ]);
 
     return mergeUniteLegaleFromBothApi(
       uniteLegaleInsee,
-      uniteLegaleSireneOuverte
+      uniteLegaleSireneOuverte,
+      allEtablissementsInsee
     );
   } catch (e) {
-    if (e instanceof InseeForbiddenError) {
+    if (e instanceof HttpForbiddenError) {
+      return createNonDiffusibleUniteLegale(siren);
+    }
+    throw e;
+  }
+};
+
+/**
+ * Fetch Unite Legale from Sirene INSEE only, using fallback credentials
+ */
+const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
+  try {
+    // INSEE requires two calls to get uniteLegale with etablissements
+    const [uniteLegaleInsee, allEtablissementsInsee] = await Promise.all([
+      getUniteLegaleInseeWithFallbackCredentials(siren),
+      getAllEtablissementsInseeWithFallbackCredentials(siren),
+    ]);
+
+    return mergeUniteLegaleFromBothApi(
+      uniteLegaleInsee,
+      null,
+      allEtablissementsInsee
+    );
+  } catch (e) {
+    if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleUniteLegale(siren);
     }
     throw e;
@@ -102,17 +133,28 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
  */
 const mergeUniteLegaleFromBothApi = (
   uniteLegaleInsee: IUniteLegale,
-  uniteLegaleSireneOuverte: IUniteLegale
+  uniteLegaleSireneOuverte: IUniteLegale | null,
+  allEtablissementsInsee: IEtablissementsList
 ) => {
+  const { nombreEtablissements, currentEtablissementPage, etablissements } =
+    allEtablissementsInsee;
+
+  if (!uniteLegaleSireneOuverte) {
+    return {
+      ...uniteLegaleInsee,
+      etablissements,
+      currentEtablissementPage,
+      nombreEtablissements,
+    };
+  }
+
   return {
     ...uniteLegaleInsee,
-    // siege from INSEE lacks many information (adress etc.)
     siege: uniteLegaleSireneOuverte.siege,
-    // these last fields are only available in Sirene ouverte
-    etablissements: uniteLegaleSireneOuverte.etablissements,
     chemin: uniteLegaleSireneOuverte.chemin,
-    currentEtablissementPage: uniteLegaleSireneOuverte.currentEtablissementPage,
-    nombreEtablissements: uniteLegaleSireneOuverte.nombreEtablissements,
+    etablissements,
+    currentEtablissementPage,
+    nombreEtablissements,
   };
 };
 

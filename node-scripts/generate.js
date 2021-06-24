@@ -1,5 +1,5 @@
+const { default: axios } = require('axios');
 const fs = require('fs');
-const fetch = require('node-fetch');
 
 /** This script generate the full sitemap
  *
@@ -104,8 +104,8 @@ async function main() {
   console.time('⏱ Time to download base SIREN');
   const url =
     'https://files.data.gouv.fr/annuaire-entreprises/sitemap-name.csv';
-  const names = await fetch(url);
-  const data = await names.text();
+  const names = await axios.get(url);
+  const data = names.data;
   console.timeEnd('⏱ Time to download base SIREN');
 
   data.split('\n').forEach((line, idx) => {

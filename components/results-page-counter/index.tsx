@@ -6,94 +6,159 @@ interface IProps {
   totalPages: number;
 }
 
-const pagesArray = (currentPage: number, totalPages: number): number[] => {
-  if (totalPages <= 10) {
-    //@ts-ignore
-    return [...Array(totalPages).keys()];
+export const pagesArray = (
+  currentPage: number,
+  totalPages: number
+): number[] => {
+  let from = Math.max(1, currentPage - 5);
+  let to = Math.min(totalPages, currentPage + 5);
+
+  const pages = [];
+  for (let page = from; page <= to; page++) {
+    pages.push(page);
   }
 
-  if (currentPage + 5 >= totalPages) {
-    //@ts-ignore
-    return [...Array(10).keys()].map((i) => i + totalPages - 9);
-  }
-
-  //@ts-ignore
-  return [...Array(10).keys()].map((i) => i + Math.max(0, currentPage - 5));
+  return pages;
 };
 
-const PageCounter: React.FC<IProps> = ({
+const First: React.FC<IProps> = ({ querySuffix, currentPage }) => (
+  <li>
+    <a
+      className="fr-pagination__link fr-pagination__link--first fr-pagination__link--lg-label"
+      href={
+        currentPage > 1
+          ? `?page=${1}${querySuffix ? `&${querySuffix}` : ''}`
+          : undefined
+      }
+    >
+      Première page
+    </a>
+  </li>
+);
+
+const Last: React.FC<IProps> = ({ currentPage, querySuffix, totalPages }) => (
+  <li>
+    <a
+      className="fr-pagination__link fr-pagination__link--last"
+      href={
+        currentPage < totalPages
+          ? `?page=${totalPages}${querySuffix ? `&${querySuffix}` : ''}`
+          : undefined
+      }
+    >
+      Dernière Page
+    </a>
+  </li>
+);
+const Previous: React.FC<IProps> = ({
   currentPage,
   querySuffix,
   totalPages,
 }) => (
-  <>
-    {totalPages && totalPages > 1 ? (
-      <div className="pages-selector">
-        {currentPage !== 1 && (
-          <a
-            href={`?page=${currentPage - 1}${
-              querySuffix ? `&${querySuffix}` : ''
-            }`}
-          >
-            ⇠ <span>précédente</span>
-          </a>
-        )}
-        <div>
-          {/* @ts-ignore */}
-          {pagesArray(currentPage, totalPages + 1).map((pageNum) => {
+  <li>
+    <a
+      className="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
+      href={
+        currentPage > 1
+          ? `?page=${currentPage - 1}${querySuffix ? `&${querySuffix}` : ''}`
+          : undefined
+      }
+    >
+      Page précédente
+    </a>
+  </li>
+);
+
+const Next: React.FC<IProps> = ({ currentPage, querySuffix, totalPages }) => (
+  <li>
+    <a
+      className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
+      href={
+        currentPage < totalPages
+          ? `?page=${currentPage + 1}${querySuffix ? `&${querySuffix}` : ''}`
+          : undefined
+      }
+    >
+      Page suivante
+    </a>
+  </li>
+);
+
+const Page: React.FC<{
+  pageNum: number;
+  querySuffix?: string;
+  currentPage: number;
+}> = ({ pageNum, querySuffix, currentPage }) => (
+  <li>
+    <a
+      href={`?page=${pageNum}${querySuffix ? `&${querySuffix}` : ''}`}
+      className="fr-pagination__link "
+      aria-current={currentPage === pageNum ? 'page' : undefined}
+      title={`Page ${pageNum}`}
+    >
+      {pageNum}
+    </a>
+  </li>
+);
+
+/**
+ * Page counter component. Be careful as it is not zero-indexed. Pages starts at 1
+ * @param param0
+ * @returns
+ */
+const PageCounter: React.FC<IProps> = ({
+  currentPage,
+  querySuffix,
+  totalPages,
+}) => {
+  const pages = pagesArray(currentPage, totalPages);
+  if (pages.length === 1) {
+    return null;
+  }
+
+  return (
+    <div className="layout-center">
+      <nav role="navigation" className="fr-pagination" aria-label="Pagination">
+        <ul className="fr-pagination__list">
+          <First
+            currentPage={currentPage}
+            querySuffix={querySuffix}
+            totalPages={totalPages}
+          />
+          <Previous
+            currentPage={currentPage}
+            querySuffix={querySuffix}
+            totalPages={totalPages}
+          />
+          {pages.map((pageNum) => {
             return (
-              <a
-                href={`?page=${pageNum + 1}${
-                  querySuffix ? `&${querySuffix}` : ''
-                }`}
-                className={`${currentPage === pageNum + 1 ? 'active' : ''}`}
+              <Page
                 key={pageNum}
-              >
-                {pageNum + 1}
-              </a>
+                currentPage={currentPage}
+                querySuffix={querySuffix}
+                pageNum={pageNum}
+              />
             );
           })}
-        </div>
-        {currentPage !== totalPages + 1 && (
-          <a
-            href={`?page=${currentPage + 1}${
-              querySuffix ? `&${querySuffix}` : ''
-            }`}
-          >
-            <span>suivante</span> ⇢
-          </a>
-        )}
-
-        <style jsx>{`
-          .pages-selector {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0;
-          }
-          .pages-selector > div {
-            display: flex;
-            margin: 0 30px;
-          }
-          .pages-selector > div > a {
-            border-radius: 3px;
-            padding: 0 5px;
-            margin: 0 3px;
-            box-shadow: none;
-          }
-          .pages-selector > div > a.active {
-            border: 1px solid #000091;
-          }
-          @media only screen and (min-width: 1px) and (max-width: 900px) {
-            .pages-selector > a > span {
-              display: none;
-            }
-          }
-        `}</style>
-      </div>
-    ) : null}
-  </>
-);
+          <Next
+            currentPage={currentPage}
+            querySuffix={querySuffix}
+            totalPages={totalPages}
+          />
+          <Last
+            currentPage={currentPage}
+            querySuffix={querySuffix}
+            totalPages={totalPages}
+          />
+        </ul>
+      </nav>
+      <style jsx>{`
+        div.layout-center {
+          margin: 15px auto;
+        }
+      `}</style>
+    </div>
+  );
+};
 
 export default PageCounter;

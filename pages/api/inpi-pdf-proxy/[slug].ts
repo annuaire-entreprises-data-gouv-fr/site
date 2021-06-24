@@ -4,8 +4,9 @@ import {
   HttpNotFound,
 } from '../../../clients/exceptions';
 import routes from '../../../clients/routes';
+import constants from '../../../constants';
 import { isSiren } from '../../../utils/helpers/siren-and-siret';
-import { fetchWithTimeout } from '../../../utils/network/fetch-with-timeout';
+import httpClient, { httpGet } from '../../../utils/network/http';
 import logErrorInSentry, { logWarningInSentry } from '../../../utils/sentry';
 
 /**
@@ -13,7 +14,7 @@ import logErrorInSentry, { logWarningInSentry } from '../../../utils/sentry';
  */
 const proxyPdf = async (
   { query: { slug } }: NextApiRequest,
-  res: NextApiResponse
+  nextAPIResponse: NextApiResponse
 ) => {
   const siren = slug as string;
 
@@ -31,27 +32,25 @@ const proxyPdf = async (
       );
     }
 
-    const response = await fetchWithTimeout(
+    const response = await httpGet(
       `${routes.rncs.portail.entreprise}${siren}?format=pdf`,
       {
         headers: {
           Cookie: getCookie(initialAuthData),
         },
+        responseType: 'arraybuffer',
       }
     );
-
-    const pdfRaw = response.body;
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader(
+    nextAPIResponse.setHeader('Content-Type', 'application/pdf');
+    nextAPIResponse.setHeader(
       'Content-Disposition',
       `attachment; filename=justificatif_immatriculation_rcs_${siren}.pdf`
     );
-
-    res.status(200).send(pdfRaw);
+    nextAPIResponse.status(200).send(response.data);
   } catch (e) {
     console.log(e);
     logErrorInSentry(e);
-    res.status(500).json({ message: e });
+    nextAPIResponse.status(500).json({ message: e });
   }
 };
 
@@ -131,20 +130,21 @@ const extractAuthSuccessFromHtmlForm = (html: string) => {
 /** First call. Caller get two session cookies and a token to identify the login form */
 const getInitialAuthData = async (): Promise<IInitialAuth> => {
   try {
-    const response = await fetchWithTimeout(routes.rncs.portail.login, {
+    const response = await httpClient({
+      url: routes.rncs.portail.login,
       method: 'POST',
       headers: DEFAULT_HEADERS,
     });
 
-    const cookies = response.headers.get('set-cookie');
+    const cookies = response.headers['set-cookie'].join('');
 
     if (!cookies || typeof cookies !== 'string') {
       throw new Error('Authentication failed');
     }
+    const html = response.data;
 
     const initialAuthData = extractInitialAuthData(cookies);
 
-    const html = await response.text();
     initialAuthData.token = extractTokenFromHtmlForm(html);
 
     if (
@@ -165,7 +165,8 @@ const getInitialAuthData = async (): Promise<IInitialAuth> => {
  */
 const authenticateCookie = async (initialAuthData: IInitialAuth) => {
   try {
-    const response = await fetchWithTimeout(routes.rncs.portail.login, {
+    const response = await httpClient({
+      url: routes.rncs.portail.login,
       method: 'POST',
       headers: {
         ...DEFAULT_HEADERS,
@@ -173,10 +174,11 @@ const authenticateCookie = async (initialAuthData: IInitialAuth) => {
         Origin: 'https://data.inpi.fr',
         Cookie: getCookie(initialAuthData),
       },
-      body: getFormData(initialAuthData),
+      data: getFormData(initialAuthData),
     });
 
-    const html = await response.text();
+    const html = response.data;
+
     const loginSuccess = extractAuthSuccessFromHtmlForm(html);
 
     return loginSuccess ? 200 : 403;

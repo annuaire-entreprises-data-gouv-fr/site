@@ -1,6 +1,6 @@
 import { IAssociation } from '../../models';
 import { formatAdresse } from '../../utils/labels';
-import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
+import { httpGet } from '../../utils/network/http';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 
@@ -42,17 +42,14 @@ interface IAssociationResponse {
   };
 }
 /**
- * GET ETABLISSEMENT
+ * GET Association
  */
 
 const getAssociation = async (numeroRna: string): Promise<IAssociation> => {
   const route = `${routes.rna.id}${numeroRna}`;
-  const response = await fetchWithTimeout(route);
+  const response = await httpGet(route);
 
-  if (response.status === 404) {
-    throw new HttpNotFound(404, `N° RNA ${numeroRna} not found in RNA`);
-  }
-  return mapToDomainObject((await response.json()) as IAssociationResponse);
+  return mapToDomainObject(response.data as IAssociationResponse);
 };
 
 export const mapToDomainObject = (
