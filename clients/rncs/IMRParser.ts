@@ -1,4 +1,5 @@
 import parser from 'fast-xml-parser';
+
 import { IRNCSResponse } from './IMR';
 
 export const extractIMRFromXml = (responseAsXml: string) => {
