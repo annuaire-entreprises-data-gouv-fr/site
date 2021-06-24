@@ -54,7 +54,6 @@ export const httpClientOAuthFactory = (
     grant_type: 'client_credentials',
     client_id,
     client_secret,
-    // scope: 'am_application_scope default',
   });
 
   const axiosInstance = axios.create({ timeout: constants.defaultTimeout });
