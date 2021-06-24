@@ -39,7 +39,7 @@ const init = () => {
 
 const logInSentryFactory =
   (severity = Sentry.Severity.Error) =>
-  (errorMsg: any, extra?: IScope) => {
+  (errorMsg: Error & string, extra?: IScope) => {
     if (process.env.NODE_ENV === 'development') {
       console.log(errorMsg, JSON.stringify(extra));
     }
@@ -47,7 +47,12 @@ const logInSentryFactory =
       init();
       const scope = getScope(extra || {});
       scope.setLevel(severity);
-      Sentry.captureException(errorMsg, scope);
+
+      if (typeof errorMsg === 'string') {
+        Sentry.captureMessage(errorMsg, scope);
+      } else {
+        Sentry.captureException(errorMsg, scope);
+      }
     }
   };
 
