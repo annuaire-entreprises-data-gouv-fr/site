@@ -51,7 +51,7 @@ const logInSentryFactory =
     }
   };
 
-export const logWarningInSentry = logInSentryFactory(Sentry.Severity.Warning);
+export const logWarningInSentry = logInSentryFactory(Sentry.Severity.Info);
 
 export const logErrorInSentry = logInSentryFactory(Sentry.Severity.Error);
 
