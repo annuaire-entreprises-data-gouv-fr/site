@@ -38,13 +38,15 @@ const init = () => {
 };
 
 const logInSentryFactory =
-  (info: Sentry.Severity) => (errorMsg: any, extra?: IScope) => {
+  (severity = Sentry.Severity.Error) =>
+  (errorMsg: any, extra?: IScope) => {
     if (process.env.NODE_ENV === 'development') {
       console.log(errorMsg, JSON.stringify(extra));
     }
     if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
       init();
       const scope = getScope(extra || {});
+      scope.setLevel(severity);
       Sentry.captureException(errorMsg, scope);
     }
   };

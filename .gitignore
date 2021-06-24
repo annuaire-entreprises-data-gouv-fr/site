@@ -40,3 +40,6 @@ yarn-error.log*
 /public/maps/*
 /public/sitemap.xml
 /public/*.xml
+
+# pm2 deploy
+ecosystem.config.js
