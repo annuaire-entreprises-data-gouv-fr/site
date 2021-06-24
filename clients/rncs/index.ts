@@ -1,8 +1,7 @@
 import { fetchRncsImmatriculation } from './immatriculation';
-
 import routes from '../routes';
 import { HttpAuthentificationFailure } from '../exceptions';
-import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
+import httpClient from '../../utils/network/http';
 
 /** Authenticate a user on opendata-rncs */
 const rncsAuth = async () => {
@@ -10,7 +9,8 @@ const rncsAuth = async () => {
     const login = process.env.INPI_LOGIN as string;
     const password = process.env.INPI_PASSWORD as string;
 
-    const response = await fetchWithTimeout(routes.rncs.api.login, {
+    const response = await httpClient({
+      url: routes.rncs.api.login,
       method: 'POST',
       headers: {
         login: login,
@@ -18,7 +18,7 @@ const rncsAuth = async () => {
       },
     });
 
-    const cookie = response.headers.get('set-cookie');
+    const cookie = response.headers['set-cookie'][0];
     if (!cookie || typeof cookie !== 'string') {
       throw new Error('Authentication failed');
     }

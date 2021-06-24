@@ -4,7 +4,7 @@ import {
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
-import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
+import { httpGet } from '../../utils/network/http';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
 
@@ -44,19 +44,13 @@ const getEtablissementSireneOuverte = async (
   siret: string
 ): Promise<IEtablissement> => {
   const route = `${routes.sireneOuverte.etablissement}${encodeURI(siret)}`;
-  const response = await fetchWithTimeout(route);
-
-  if (response.status !== 200) {
-    throw new HttpServerError(500, await response.text());
-  }
+  const response = await httpGet(route);
 
   let etablissement;
 
   try {
     // Sirene ouverte does not return actual 404, just empty objects/arrays
-    const result = (
-      await response.json()
-    )[0] as ISireneOuverteEtablissementResponse;
+    const result = response.data[0] as ISireneOuverteEtablissementResponse;
 
     etablissement = result.etablissement[0];
     if (!etablissement) {

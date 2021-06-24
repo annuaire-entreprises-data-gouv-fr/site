@@ -1,5 +1,5 @@
 import { IConventionCollective } from '../../models/convention-collective';
-import { fetchWithTimeout } from '../../utils/network/fetch-with-timeout';
+import { httpGet } from '../../utils/network/http';
 import routes from '../routes';
 
 /**
@@ -39,11 +39,7 @@ const fetchConventionCollectives = async (
   const batches = generateBatches(sirets);
 
   const response = (await Promise.all(
-    batches.map((urls) =>
-      fetchWithTimeout(urls).then((response) => {
-        return response.json();
-      })
-    )
+    batches.map((urls) => httpGet(urls).then((response) => response.data))
   )) as ISiret2idccResponse[][];
 
   const flattenedResponse = response.reduce(

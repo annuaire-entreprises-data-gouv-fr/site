@@ -1,19 +1,17 @@
-import { inseeClientGet, InseeForbiddenError, INSEE_CREDENTIALS } from '.';
+import { inseeClientGet, INSEE_CREDENTIALS } from '.';
 import constants from '../../constants';
 import {
   createDefaultEtablissement,
   IEtablissement,
   IEtablissementsList,
 } from '../../models';
-import {
-  extractSirenFromSiret,
-  Siren,
-} from '../../utils/helpers/siren-and-siret';
+import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
+import { HttpForbiddenError } from '../exceptions';
 import routes from '../routes';
 
 interface IInseeEtablissementResponse {
@@ -56,7 +54,7 @@ const getAllEtablissementsCurry =
     const etablissementsPerPage = constants.resultsPerPage.etablissements;
     const cursor = Math.max(page - 1, 0) * etablissementsPerPage;
 
-    const request = await inseeClientGet(
+    const response = await inseeClientGet(
       routes.sireneInsee.siretBySiren +
         siren +
         `&nombre=${etablissementsPerPage}` +
@@ -64,8 +62,7 @@ const getAllEtablissementsCurry =
       credential
     );
 
-    const { header, etablissements } =
-      (await request.json()) as IInseeEtablissementsResponse;
+    const { header, etablissements } = response as IInseeEtablissementsResponse;
 
     return {
       currentEtablissementPage: page,
@@ -80,8 +77,7 @@ const getEtablissementCurry =
       routes.sireneInsee.siret + siret,
       credential
     );
-    const { etablissement } =
-      (await response.json()) as IInseeEtablissementResponse;
+    const { etablissement } = response as IInseeEtablissementResponse;
 
     return mapToDomainObject(etablissement);
   };
@@ -114,7 +110,7 @@ const mapToDomainObject = (
     lastEtatAdministratif.activitePrincipaleEtablissement;
 
   if (statutDiffusionEtablissement === 'N') {
-    throw new InseeForbiddenError(403, 'Forbidden (non diffusible)');
+    throw new HttpForbiddenError(403, 'Forbidden (non diffusible)');
   }
 
   const defaultEtablissement = createDefaultEtablissement();
