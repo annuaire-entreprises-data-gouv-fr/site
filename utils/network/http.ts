@@ -24,19 +24,25 @@ const handleError = (error: AxiosError) => {
 
   switch (response.status) {
     case 429: {
-      throw new HttpTooManyRequests(429, response.statusText);
+      throw new HttpTooManyRequests(
+        429,
+        response.statusText || 'Too many requests'
+      );
     }
     case 404: {
-      throw new HttpNotFound(404, response.statusText);
+      throw new HttpNotFound(404, response.statusText || 'Not Found');
     }
     case 403: {
-      throw new HttpForbiddenError(403, response.statusText);
+      throw new HttpForbiddenError(403, 'Forbidden');
     }
     case 504: {
-      throw new HttpTimeoutError(504, response.statusText);
+      throw new HttpTimeoutError(504, 'Timeout');
     }
     default:
-      throw new HttpServerError(response.status, response.statusText);
+      throw new HttpServerError(
+        response.status,
+        response.statusText || 'Unknown server error'
+      );
   }
 };
 
