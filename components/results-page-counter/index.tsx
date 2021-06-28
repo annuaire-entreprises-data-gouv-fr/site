@@ -4,6 +4,7 @@ interface IProps {
   currentPage: number;
   querySuffix?: string;
   totalPages: number;
+  compact?: boolean;
 }
 
 export const pagesArray = (
@@ -21,7 +22,7 @@ export const pagesArray = (
   return pages;
 };
 
-const First: React.FC<IProps> = ({ querySuffix, currentPage }) => (
+const First: React.FC<IProps> = ({ querySuffix, currentPage, compact }) => (
   <li>
     <a
       className="fr-pagination__link fr-pagination__link--first fr-pagination__link--lg-label"
@@ -31,12 +32,17 @@ const First: React.FC<IProps> = ({ querySuffix, currentPage }) => (
           : undefined
       }
     >
-      Première page
+      {compact ? '' : 'Première page'}
     </a>
   </li>
 );
 
-const Last: React.FC<IProps> = ({ currentPage, querySuffix, totalPages }) => (
+const Last: React.FC<IProps> = ({
+  currentPage,
+  querySuffix,
+  totalPages,
+  compact,
+}) => (
   <li>
     <a
       className="fr-pagination__link fr-pagination__link--last"
@@ -46,7 +52,7 @@ const Last: React.FC<IProps> = ({ currentPage, querySuffix, totalPages }) => (
           : undefined
       }
     >
-      Dernière Page
+      {compact ? '' : 'Dernière page'}
     </a>
   </li>
 );
@@ -54,6 +60,7 @@ const Previous: React.FC<IProps> = ({
   currentPage,
   querySuffix,
   totalPages,
+  compact,
 }) => (
   <li>
     <a
@@ -64,12 +71,17 @@ const Previous: React.FC<IProps> = ({
           : undefined
       }
     >
-      Page précédente
+      {compact ? '' : 'Page précédente'}
     </a>
   </li>
 );
 
-const Next: React.FC<IProps> = ({ currentPage, querySuffix, totalPages }) => (
+const Next: React.FC<IProps> = ({
+  currentPage,
+  querySuffix,
+  totalPages,
+  compact,
+}) => (
   <li>
     <a
       className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
@@ -79,7 +91,7 @@ const Next: React.FC<IProps> = ({ currentPage, querySuffix, totalPages }) => (
           : undefined
       }
     >
-      Page suivante
+      {compact ? '' : 'Page suivante'}
     </a>
   </li>
 );
@@ -110,6 +122,7 @@ const PageCounter: React.FC<IProps> = ({
   currentPage,
   querySuffix,
   totalPages,
+  compact = false,
 }) => {
   const pages = pagesArray(currentPage, totalPages);
   if (pages.length === 1) {
@@ -124,11 +137,13 @@ const PageCounter: React.FC<IProps> = ({
             currentPage={currentPage}
             querySuffix={querySuffix}
             totalPages={totalPages}
+            compact={compact}
           />
           <Previous
             currentPage={currentPage}
             querySuffix={querySuffix}
             totalPages={totalPages}
+            compact={compact}
           />
           {pages.map((pageNum) => {
             return (
@@ -143,10 +158,12 @@ const PageCounter: React.FC<IProps> = ({
           <Next
             currentPage={currentPage}
             querySuffix={querySuffix}
+            compact={compact}
             totalPages={totalPages}
           />
           <Last
             currentPage={currentPage}
+            compact={compact}
             querySuffix={querySuffix}
             totalPages={totalPages}
           />

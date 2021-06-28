@@ -37,20 +37,27 @@ const init = () => {
   _isInitialized = true;
 };
 
-const logInSentryCurry =
-  (info: Sentry.Severity) => (errorMsg: any, extra?: IScope) => {
+const logInSentryFactory =
+  (severity = Sentry.Severity.Error) =>
+  (errorMsg: any, extra?: IScope) => {
     if (process.env.NODE_ENV === 'development') {
       console.log(errorMsg, JSON.stringify(extra));
     }
     if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
       init();
       const scope = getScope(extra || {});
-      Sentry.captureException(errorMsg, scope);
+      scope.setLevel(severity);
+
+      if (typeof errorMsg === 'string') {
+        Sentry.captureMessage(errorMsg, scope);
+      } else {
+        Sentry.captureException(errorMsg, scope);
+      }
     }
   };
 
-export const logWarningInSentry = logInSentryCurry(Sentry.Severity.Warning);
+export const logWarningInSentry = logInSentryFactory(Sentry.Severity.Info);
 
-export const logErrorInSentry = logInSentryCurry(Sentry.Severity.Error);
+export const logErrorInSentry = logInSentryFactory(Sentry.Severity.Error);
 
 export default logErrorInSentry;

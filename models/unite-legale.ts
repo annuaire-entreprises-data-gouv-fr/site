@@ -47,13 +47,13 @@ const getUniteLegale = async (
       throw new SirenNotFoundError(`Siren ${siren} was not found`);
     }
 
-    logFirstSireneInseefailed({ siren, details: e.message });
+    logFirstSireneInseefailed({ siren, details: e.message || e });
 
     try {
       // in case sirene INSEE 403, fallback on Siren Etalab
       return await getUniteLegaleSireneOuverte(siren, page);
     } catch (e) {
-      logSireneOuvertefailed({ siren, details: e.message });
+      logSireneOuvertefailed({ siren, details: e.message || e });
 
       try {
         // in case sirene etalab 404 or 500, fallback on Sirene insee using fallback credentials to avoid 403
@@ -63,7 +63,7 @@ const getUniteLegale = async (
         if (e instanceof HttpForbiddenError) {
           return createNonDiffusibleUniteLegale(siren);
         }
-        logSecondSireneInseefailed({ siren, details: e.message });
+        logSecondSireneInseefailed({ siren, details: e.message || e });
 
         // Siren was not found in both API, return a 404
         const message = `Siren ${siren} was not found in both siren API`;

@@ -49,7 +49,7 @@ interface IInseeEtablissement {
   };
 }
 
-const getAllEtablissementsCurry =
+const getAllEtablissementsFactory =
   (credential: INSEE_CREDENTIALS) =>
   async (siren: string, page = 1): Promise<IEtablissementsList> => {
     const etablissementsPerPage = constants.resultsPerPage.etablissements;
@@ -72,7 +72,7 @@ const getAllEtablissementsCurry =
     };
   };
 
-const getEtablissementCurry =
+const getEtablissementFactory =
   (credential: INSEE_CREDENTIALS) => async (siret: string) => {
     const response = await inseeClientGet(
       routes.sireneInsee.siret + siret,
@@ -149,16 +149,16 @@ const mapToDomainObject = (
 // public methods
 //=================
 
-export const getAllEtablissementsInsee = getAllEtablissementsCurry(
+export const getAllEtablissementsInsee = getAllEtablissementsFactory(
   INSEE_CREDENTIALS.DEFAULT
 );
 
 export const getAllEtablissementsInseeWithFallbackCredentials =
-  getAllEtablissementsCurry(INSEE_CREDENTIALS.FALLBACK);
+  getAllEtablissementsFactory(INSEE_CREDENTIALS.FALLBACK);
 
-export const getEtablissementInsee = getEtablissementCurry(
+export const getEtablissementInsee = getEtablissementFactory(
   INSEE_CREDENTIALS.DEFAULT
 );
 
 export const getEtablissementInseeWithFallbackCredentials =
-  getEtablissementCurry(INSEE_CREDENTIALS.FALLBACK);
+  getEtablissementFactory(INSEE_CREDENTIALS.FALLBACK);
