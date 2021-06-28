@@ -36,11 +36,12 @@ export const redirectIfSiretOrSiren = (
 };
 
 const getScopeFromRequest = (req: IncomingMessage | undefined) => {
+  const headers = req ? req.headers : {};
   return req
     ? {
         page: req.url,
-        referer: req.headers.referer,
-        browser: req.headers['user-agent'] as string,
+        referer: headers.referer,
+        browser: headers['user-agent'] as string,
       }
     : {};
 };
