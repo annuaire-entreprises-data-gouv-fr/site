@@ -9,7 +9,7 @@
     "sitemap": "node ./node-scripts/generate.js",
     "dev": "NODE_ENV=development next dev",
     "build-dev": "NODE_ENV=production next build",
-    "build": "npm run sitemap && NODE_ENV=production next build",
+    "build": "NODE_ENV=production next build",
     "start": "next start -p $PORT",
     "deploy-staging": "NODE_ENV=production git push dokku-staging main:master",
     "deploy": "NODE_ENV=production git push dokku main:master",
