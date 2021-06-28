@@ -3,15 +3,22 @@ import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { EAdministration } from '../../models/administration';
-import { IEtatCivil, IPersonneMorale } from '../../models/dirigeants';
-import { IAPINotRespondingError } from '../../models/api-not-responding';
+import {
+  IEtatCivil,
+  IPersonneMorale,
+  isPersonneMorale,
+} from '../../models/dirigeants';
+import {
+  IAPINotRespondingError,
+  isAPINotResponding,
+} from '../../models/api-not-responding';
 import AdministrationNotResponding from '../administration-not-responding';
 import { formatNumbersFr } from '../../utils/helpers/formatting';
 import routes from '../../clients/routes';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 
 interface IProps {
-  dirigeants: (IEtatCivil & IPersonneMorale)[] & IAPINotRespondingError;
+  dirigeants: (IEtatCivil | IPersonneMorale)[] | IAPINotRespondingError;
   siren: Siren;
 }
 
@@ -21,7 +28,7 @@ interface IProps {
  * @returns
  */
 const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
-  if (dirigeants.errorType) {
+  if (isAPINotResponding(dirigeants)) {
     if (dirigeants.errorType === 404) {
       return null;
     }
@@ -33,20 +40,22 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
     );
   }
 
-  const formatDirigeant = (dirigeant: IEtatCivil & IPersonneMorale) => {
-    const isPersonneMorale = dirigeant.siren;
-    if (isPersonneMorale) {
-      return [
+  const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
+    if (isPersonneMorale(dirigeant)) {
+      const infos = [
         ['Rôle(s)', <b>{dirigeant.role}</b>],
         ['Dénomination', dirigeant.denomination],
         ['Nature Juridique', dirigeant.natureJuridique],
-        [
+      ];
+      if (dirigeant.siren) {
+        infos.push([
           'Siren',
           <a href={`/entreprise/${dirigeant.siren}`}>
             {formatNumbersFr(dirigeant.siren)}
           </a>,
-        ],
-      ];
+        ]);
+      }
+      return infos;
     } else {
       return [
         ['Rôle', <b>{dirigeant.role}</b>],

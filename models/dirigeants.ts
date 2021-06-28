@@ -11,26 +11,38 @@ import {
 import { getUniteLegaleFromSlug } from './unite-legale';
 
 export interface IEtatCivil {
-  sexe?: 'M' | 'F' | null;
-  nom?: string;
-  prenom?: string;
-  role?: string;
-  dateNaissance?: string;
-  lieuNaissance?: string;
+  sexe: 'M' | 'F' | null;
+  nom: string;
+  prenom: string;
+  role: string;
+  dateNaissance: string;
+  lieuNaissance: string;
 }
 
 export interface IPersonneMorale {
-  siren?: string;
-  denomination?: string;
-  natureJuridique?: string;
-  role?: string;
+  siren: string;
+  denomination: string;
+  natureJuridique: string;
+  role: string;
 }
 
-export type IDirigeant = IEtatCivil & IPersonneMorale;
+export type IDirigeant = IEtatCivil | IPersonneMorale;
+
+export const isPersonneMorale = (
+  toBeDetermined: IEtatCivil | IPersonneMorale
+): toBeDetermined is IPersonneMorale => {
+  if (
+    (toBeDetermined as IPersonneMorale).siren ||
+    (toBeDetermined as IPersonneMorale).denomination
+  ) {
+    return true;
+  }
+  return false;
+};
 
 export interface IDirigeants {
   uniteLegale: IUniteLegale;
-  dirigeants: IDirigeant[] & IAPINotRespondingError;
+  dirigeants: IDirigeant[] | IAPINotRespondingError;
 }
 
 export const getDirigeantsWithUniteLegaleFromSlug = async (slug: string) => {

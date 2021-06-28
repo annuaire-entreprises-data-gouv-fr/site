@@ -1,6 +1,9 @@
 import React from 'react';
 import { EAdministration } from '../../models/administration';
-import { IAPINotRespondingError } from '../../models/api-not-responding';
+import {
+  IAPINotRespondingError,
+  isAPINotResponding,
+} from '../../models/api-not-responding';
 import { IImmatriculationRNCS } from '../../models/immatriculation';
 import AdministrationNotResponding from '../administration-not-responding';
 import { INPI } from '../administrations';
@@ -9,11 +12,11 @@ import { download } from '../icon';
 import { Section } from '../section';
 
 interface IProps {
-  immatriculation: IImmatriculationRNCS & IAPINotRespondingError;
+  immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
 }
 
 const ImmatriculationRNCS: React.FC<IProps> = ({ immatriculation }) => {
-  if (immatriculation.errorType) {
+  if (isAPINotResponding(immatriculation)) {
     if (immatriculation.errorType === 404) {
       return null;
     }
@@ -58,8 +61,7 @@ const ImmatriculationRNCS: React.FC<IProps> = ({ immatriculation }) => {
               href={`${immatriculation.downloadlink}`}
               alt
             >
-              ⇢ Voir la fiche sur le site de l’
-              <INPI />
+              ⇢ Voir la fiche sur le site de l’INPI
             </ButtonLink>
           </div>
           <style jsx>{`

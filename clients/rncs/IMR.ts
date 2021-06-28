@@ -61,11 +61,11 @@ export const fetchRNCSIMR = async (siren: Siren) => {
   const extractedXMLBuffer = await unZipFromBuffer(zippedIMRFile.buffer);
   const xmlResponse = extractedXMLBuffer[0].buffer.toString();
 
-  return mapToDomainObject(xmlResponse);
+  return mapToDomainObject(xmlResponse, siren);
 };
 
-const mapToDomainObject = (xmlResponse: string): IDirigeant[] => {
-  const dirigeants = extractIMRFromXml(xmlResponse);
+const mapToDomainObject = (xmlResponse: string, siren: Siren): IDirigeant[] => {
+  const dirigeants = extractIMRFromXml(xmlResponse, siren);
 
   return dirigeants;
 };
