@@ -26,11 +26,19 @@ export interface IAdministrationMetaData {
   site?: string;
 }
 
+interface IAdministrationsLogos {
+  [key: string]: JSX.Element;
+}
+
+export const administrationsLogo: IAdministrationsLogos = {
+  [EAdministration.INPI]: inpi,
+  [EAdministration.CMAFRANCE]: cma,
+};
+
 export const administrationsMetaData: IAdministrationsMetaData = {
   [EAdministration.INPI]: {
     slug: 'inpi',
     short: 'INPI',
-    logo: inpi,
     long: 'Institut National de la Propriété Intellectuelle (INPI)',
     site: 'https://data.inpi.fr',
     description: `## Qu'est-ce que l’INPI ?
@@ -200,7 +208,6 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
   [EAdministration.CMAFRANCE]: {
     slug: 'cma-france',
     short: 'CMA-France',
-    logo: cma,
     site: 'https://rnm.artisanat.fr/',
     long: 'Chambre des Métiers et de l’Artisanat (CMA-France)',
     description: `## Qu'est-ce que CMA-France ?

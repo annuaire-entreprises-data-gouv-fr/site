@@ -5,7 +5,10 @@ import { Siren } from '../utils/helpers/siren-and-siret';
 
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
-import { IAPINotRespondingError } from './api-not-responding';
+import {
+  APINotRespondingFactory,
+  IAPINotRespondingError,
+} from './api-not-responding';
 
 export interface IImmatriculation {
   downloadlink: string;
@@ -28,55 +31,38 @@ export interface IImmatriculationRNM extends IImmatriculation {
  * Request Immatriculation from CMA-France's RNM
  * @param siren
  */
-const getImmatriculationRNM = async (
-  siren: Siren
-): Promise<IImmatriculationRNM | IAPINotRespondingError> => {
+export const getImmatriculationRNM = async (siren: Siren) => {
   try {
     return await fetchRnmImmatriculation(siren);
   } catch (e) {
     if (e instanceof HttpNotFound) {
-      return {
-        administration: EAdministration.CMAFRANCE,
-        type: 404,
-      };
+      return APINotRespondingFactory(EAdministration.CMAFRANCE, 404);
     }
 
     logErrorInSentry(new Error('Error in API RNM'), {
       siren,
       details: JSON.stringify(e.message),
     });
-    return {
-      administration: EAdministration.CMAFRANCE,
-      type: 500,
-    };
+
+    return APINotRespondingFactory(EAdministration.CMAFRANCE, 500);
   }
 };
 /**
  * Request Immatriculation from INPI's RNCS
  * @param siren
  */
-const getImmatriculationRNCS = async (
-  siren: Siren
-): Promise<IImmatriculationRNCS | IAPINotRespondingError> => {
+export const getImmatriculationRNCS = async (siren: Siren) => {
   try {
     return await fetchRNCSImmatriculation(siren);
   } catch (e) {
     if (e instanceof HttpNotFound) {
-      return {
-        administration: EAdministration.INPI,
-        type: 404,
-      };
+      return APINotRespondingFactory(EAdministration.INPI, 404);
     }
 
     logErrorInSentry(new Error('Error in API RNCS'), {
       siren,
       details: JSON.stringify(e.message),
     });
-    return {
-      administration: EAdministration.INPI,
-      type: 500,
-    };
+    return APINotRespondingFactory(EAdministration.INPI, 500);
   }
 };
-
-export { getImmatriculationRNCS, getImmatriculationRNM };

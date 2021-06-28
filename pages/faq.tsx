@@ -1,6 +1,7 @@
 import constants from '../constants';
 import React, { PropsWithChildren } from 'react';
 import ButtonLink from '../components/button';
+import { DILA, INPI, INSEE, METI, CMA } from '../components/administrations';
 
 import Page from '../layouts';
 import NonDiffusible from '../components/non-diffusible';
@@ -124,7 +125,8 @@ const FAQ: React.FC<{}> = () => (
           </p>
           <p>
             La procédure s'appelle "changement de statut de diffusion" et elle
-            est à effectuer auprès de L'INSEE :
+            est à effectuer auprès de L'
+            <INSEE /> :
           </p>
           <div className="layout-center">
             <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
@@ -202,19 +204,21 @@ const FAQ: React.FC<{}> = () => (
             administration :
             <ul>
               <li>
-                <a href="/administration/inpi#acces">L’INPI</a>
+                L’
+                <INPI queryString="#acces" />
               </li>
               <li>
-                <a href="/administration/insee#acces">L’INSEE</a>
+                L’
+                <INSEE queryString="#acces" />
               </li>
               <li>
-                <a href="/administration/cma-france#acces">CMA-France</a>
+                <CMA queryString="#acces" />
               </li>
               <li>
-                <a href="/administration/meti#acces">Le Ministère du Travail</a>
+                Le <METI queryString="#acces" />
               </li>
               <li>
-                <a href="/administration/dila#acces">La DILA</a>
+                La <DILA queryString="#acces" />
               </li>
             </ul>
           </p>
@@ -229,16 +233,21 @@ const FAQ: React.FC<{}> = () => (
             réutiliser :
             <ul>
               <li>
-                <a href="/administration/inpi#acces">L’INPI</a>
+                L’
+                <INPI queryString="#acces" />
               </li>
               <li>
-                <a href="/administration/insee#acces">L’INSEE</a>
+                L’
+                <INSEE queryString="#acces" />
               </li>
               <li>
-                <a href="/administration/cma-france#acces">CMA-France</a>
+                <CMA queryString="#acces" />
               </li>
               <li>
-                <a href="/administration/meti#acces">Le Ministère du Travail</a>
+                Le <METI queryString="#acces" />
+              </li>
+              <li>
+                La <DILA queryString="#acces" />
               </li>
             </ul>
           </p>

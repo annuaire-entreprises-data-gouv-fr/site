@@ -21,12 +21,14 @@ interface IProps {
  * @returns
  */
 const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
-  const isAPINotResponding = dirigeants.administration;
-  if (isAPINotResponding) {
+  if (dirigeants.errorType) {
+    if (dirigeants.errorType === 404) {
+      return null;
+    }
     return (
       <AdministrationNotResponding
         administration={dirigeants.administration}
-        type={dirigeants.type}
+        errorType={dirigeants.errorType}
       />
     );
   }
@@ -79,13 +81,13 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
           <p>
             Pour en savoir plus, vous pouvez consulter{' '}
             <a
-              rel="referrer noopener"
+              rel="referrer noopener nofollow"
               target="_blank"
               href={`${routes.rncs.portail.entreprise}${siren}`}
             >
               la page de cette entreprise
             </a>{' '}
-            sur le compte de l’INPI.
+            sur le site de l’INPI.
           </p>
           <div className="layout-center"></div>
         </>

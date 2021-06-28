@@ -11,11 +11,11 @@ import { getUniteLegaleFromSlug } from './unite-legale';
 
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;
-  immatriculationRNM: IImmatriculationRNM | IAPINotRespondingError;
-  immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
+  immatriculationRNM: IImmatriculationRNM & IAPINotRespondingError;
+  immatriculationRNCS: IImmatriculationRNCS & IAPINotRespondingError;
 }
 
-const getJustificatifs = async (slug: string): Promise<IJustificatifs> => {
+const getJustificatifs = async (slug: string) => {
   const siren = verifySiren(slug);
 
   const uniteLegale = await getUniteLegaleFromSlug(siren);

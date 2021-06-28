@@ -17,7 +17,7 @@ export const fetchRNCSImmatriculation = async (siren: Siren) => {
     {}
   );
 
-  const result = await response.json();
+  const result = response.data;
   if (result.length === 0) {
     throw new HttpNotFound(404, `Siren ${siren} not found in RNCS`);
   }

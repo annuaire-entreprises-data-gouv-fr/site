@@ -1,61 +1,62 @@
-// import { readFileSync } from 'fs';
-// import { extractIMRFromXml } from './IMRParser';
+import { readFileSync } from 'fs';
+import { NotASirenError } from '../../models';
+import { extractIMRFromXml, InvalidFormatError } from './IMRParser';
 
-// describe('The CNAF XML parser', () => {
-//   it('parses the XML', () => {
-//     const okXML = readFileSync(
-//       __dirname + '/__tests__/resources/ok.txt',
-//       'utf-8'
-//     );
+describe('IMR XML parser', () => {
+  it('parses the XML for company with single leader', () => {
+    const okXML = readFileSync(
+      __dirname + '/__tests__/ok_simple_company.txt',
+      'utf-8'
+    );
 
-//     const result = extractIMRFromXml(okXML);
+    const result = extractIMRFromXml(okXML);
 
-//     expect(result).toEqual({
-//       adresse: {
-//         codePostalVille: '75002 PARIS',
-//         identite: 'Madame JEANNE CROUTE',
-//         numeroRue: '23 RUE DES ROSIERS',
-//         pays: 'FRANCE',
-//       },
-//       allocataires: [
-//         {
-//           dateDeNaissance: new Date('03-05-1988'),
-//           nomPrenom: 'JEANNE CROUTE',
-//           sexe: 'F',
-//         },
-//         {
-//           dateDeNaissance: new Date('05-03-1989'),
-//           nomPrenom: 'JEAN CROUTE',
-//           sexe: 'M',
-//         },
-//       ],
-//       annee: 2021,
-//       enfants: [
-//         {
-//           dateDeNaissance: new Date('03-04-2015'),
-//           nomPrenom: 'MICHEL CROUTE',
-//           sexe: 'M',
-//         },
-//         {
-//           dateDeNaissance: new Date('02-11-2017'),
-//           nomPrenom: 'MICHELINE CROUTE',
-//           sexe: 'F',
-//         },
-//       ],
-//       mois: 5,
-//       quotientFamilial: 2057,
-//     });
-//   });
+    expect(result).toEqual([
+      {
+        prenom: 'Bilbon',
+        nom: 'Sacquet',
+        role: 'Président',
+        lieuNaissance: 'La Comté, Terre du Milieu',
+        dateNaissance: '2000',
+      },
+    ]);
+  });
 
-//   it('returns domain error when xml is invalid', () => {
-//     expect(() => parser.parse('yolo<')).toThrowError(InvalidFormatError);
-//   });
+  it('parses the XML for company with several leaders including a company', () => {
+    const okXML = readFileSync(
+      __dirname + '/__tests__/ok_complex_company.txt',
+      'utf-8'
+    );
 
-//   it('returns CNAF error if webservice provides a non-null error code', () => {
-//     const koXML = readFileSync(
-//       __dirname + '/__tests__/resources/ko.txt',
-//       'utf-8'
-//     );
-//     expect(() => parser.parse(koXML)).toThrowError(CNAFError);
-//   });
-// });
+    const result = extractIMRFromXml(okXML);
+
+    expect(result).toEqual([
+      {
+        prenom: 'Bilbon',
+        nom: 'Sacquet',
+        role: 'Président',
+        lieuNaissance: 'La Comté, Terre du Milieu',
+        dateNaissance: '2000',
+      },
+      {
+        denomination: 'Nazgul SAS',
+        natureJuridique: 'SAS',
+        siren: '356000000',
+        role: 'Président',
+      },
+    ]);
+  });
+
+  it('returns a siren error if siren doesnot exist', () => {
+    const koSiren = readFileSync(
+      __dirname + '/__tests__/ko_siren.txt',
+      'utf-8'
+    );
+
+    expect(() => extractIMRFromXml(koSiren)).toThrowError(NotASirenError);
+  });
+
+  it('returns domain error when xml is invalid', () => {
+    expect(() => extractIMRFromXml('yolo<')).toThrowError(InvalidFormatError);
+  });
+});

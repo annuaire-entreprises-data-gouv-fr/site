@@ -1,4 +1,5 @@
 import React from 'react';
+import { CMA, INPI, INSEE } from '../components/administrations';
 
 import Page from '../layouts';
 
@@ -58,8 +59,8 @@ const ExtraitKbis: React.FC = () => {
           </p>
           <ol>
             <li>
-              Utiliser les API : intégrez directement les API de l'INPI et de
-              CMA France à votre système d’information.
+              Utiliser les API : intégrez directement les API de l'
+              <INPI /> et de <CMA /> à votre système d’information.
             </li>
             <li>
               Intégrer le lien vers la page Annuaire des Entreprises dans votre
@@ -142,7 +143,10 @@ const ExtraitKbis: React.FC = () => {
             l'administration :
           </p>
           <ul>
-            <li>les informations de la base sirene de l'INSEE</li>
+            <li>
+              les informations de la base sirene de l’
+              <INSEE />
+            </li>
             <li>le chiffre d'affaire</li>
             <li>les certifications professionnelles</li>
             <li>... et bien d’autres</li>

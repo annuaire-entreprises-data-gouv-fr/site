@@ -2,7 +2,6 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { IUniteLegale } from '../../models';
 import Title, { FICHE } from '../../components/title-section';
 
 import { NonDiffusibleSection } from '../../components/non-diffusible';
@@ -13,6 +12,7 @@ import {
   IDirigeants,
 } from '../../models/dirigeants';
 import DirigeantsSection from '../../components/dirigeants-section';
+import { INPI, INSEE } from '../../components/administrations';
 
 const DirigeantsPage: React.FC<IDirigeants> = ({ uniteLegale, dirigeants }) => (
   <Page
@@ -28,7 +28,9 @@ const DirigeantsPage: React.FC<IDirigeants> = ({ uniteLegale, dirigeants }) => (
           {!uniteLegale.dirigeant && !dirigeants && (
             <p>
               Cette entreprise n’a pas de dirigeant enregistré, que ce soit
-              auprès de l’INSEE, ou auprès de l’INPI.
+              auprès de l’
+              <INSEE /> ou auprès de l’
+              <INPI />.
             </p>
           )}
           {uniteLegale.estEntrepreneurIndividuel && uniteLegale.dirigeant && (
@@ -36,12 +38,10 @@ const DirigeantsPage: React.FC<IDirigeants> = ({ uniteLegale, dirigeants }) => (
               dirigeant={uniteLegale.dirigeant}
             />
           )}
-          {dirigeants && (
-            <DirigeantsSection
-              dirigeants={dirigeants}
-              siren={uniteLegale.siren}
-            />
-          )}
+          <DirigeantsSection
+            dirigeants={dirigeants}
+            siren={uniteLegale.siren}
+          />
         </>
       ) : (
         <>

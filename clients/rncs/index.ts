@@ -4,6 +4,7 @@ import { fetchRNCSIMR } from './IMR';
 import httpClient from '../../utils/network/http';
 import { HttpAuthentificationFailure } from '../exceptions';
 import routes from '../routes';
+import { AxiosRequestConfig } from 'axios';
 
 /** Authenticate a user on opendata-rncs */
 const RNCSAuth = async () => {
@@ -30,7 +31,10 @@ const RNCSAuth = async () => {
   }
 };
 
-const RNCSClientWrapper = async (route: string, options?: RequestInit) => {
+const RNCSClientWrapper = async (
+  route: string,
+  options?: AxiosRequestConfig
+) => {
   const cookie = await RNCSAuth();
   const response = await httpClient({
     ...options,
@@ -39,7 +43,7 @@ const RNCSClientWrapper = async (route: string, options?: RequestInit) => {
     headers: { Cookie: cookie },
   });
 
-  return response.data;
+  return response;
 };
 
 export { fetchRNCSImmatriculation, RNCSAuth, fetchRNCSIMR, RNCSClientWrapper };

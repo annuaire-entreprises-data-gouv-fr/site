@@ -118,7 +118,7 @@ const mapToDomainObject = (
 
   return {
     ...defaultEtablissement,
-    siren: verifySiren(extractSirenFromSiret(siret)),
+    siren: extractSirenFromSiret(siret),
     siret: verifySiret(siret),
     nic,
     dateCreation: dateCreationEtablissement,

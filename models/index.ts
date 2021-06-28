@@ -35,7 +35,7 @@ export interface IEtablissementWithUniteLegale {
   uniteLegale: IUniteLegale;
 }
 
-export interface IUniteLegale {
+export interface IUniteLegale extends IEtablissementsList {
   siren: Siren;
   numeroTva: string;
   siege: IEtablissement;

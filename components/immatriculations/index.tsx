@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  IAPINotRespondingError,
-  isAPINotRespondingError,
-} from '../../models/api-not-responding';
+import { IAPINotRespondingError } from '../../models/api-not-responding';
 import {
   IImmatriculationRNCS,
   IImmatriculationRNM,
@@ -12,8 +9,8 @@ import ImmatriculationRNCS from './rncs';
 import ImmatriculationRNM from './rnm';
 
 interface IProps {
-  immatriculationRNM: IImmatriculationRNM | IAPINotRespondingError;
-  immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
+  immatriculationRNM: IImmatriculationRNM & IAPINotRespondingError;
+  immatriculationRNCS: IImmatriculationRNCS & IAPINotRespondingError;
 }
 
 const Immatriculations: React.FC<IProps> = ({
@@ -21,10 +18,8 @@ const Immatriculations: React.FC<IProps> = ({
   immatriculationRNCS,
 }) => {
   const noImmatriculation =
-    isAPINotRespondingError(immatriculationRNM) &&
-    isAPINotRespondingError(immatriculationRNCS) &&
-    immatriculationRNCS.type === 404 &&
-    immatriculationRNM.type === 404;
+    immatriculationRNCS.errorType === 404 &&
+    immatriculationRNM.errorType === 404;
 
   return (
     <>

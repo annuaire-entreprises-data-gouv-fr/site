@@ -1,5 +1,6 @@
 import { IUniteLegale } from '../../models';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
+import { Siren } from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
   libelleFromCategoriesJuridiques,
@@ -43,7 +44,7 @@ interface ISireneOuverteUniteLegaleResponse {
 }
 
 const getUniteLegaleSireneOuverte = async (
-  siren: string,
+  siren: Siren,
   page = 1
 ): Promise<IUniteLegale> => {
   const response = await httpGet(
@@ -69,7 +70,7 @@ const getUniteLegaleSireneOuverte = async (
 };
 
 const mapToDomainObject = (
-  siren: string,
+  siren: Siren,
   uniteLegale: ISireneOuverteUniteLegale,
   page: number
 ): IUniteLegale => {
@@ -143,6 +144,7 @@ const mapToDomainObject = (
       libelle_commune
     ),
     currentEtablissementPage: page,
+    dirigeant: null,
   };
 };
 

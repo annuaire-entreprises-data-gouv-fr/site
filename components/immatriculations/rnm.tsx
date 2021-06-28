@@ -1,9 +1,6 @@
 import React from 'react';
 import { EAdministration } from '../../models/administration';
-import {
-  IAPINotRespondingError,
-  isAPINotRespondingError,
-} from '../../models/api-not-responding';
+import { IAPINotRespondingError } from '../../models/api-not-responding';
 import { IImmatriculationRNM } from '../../models/immatriculation';
 import { cma } from '../../public/static/logo';
 import AdministrationNotResponding from '../administration-not-responding';
@@ -12,12 +9,12 @@ import { download } from '../icon';
 import { Section } from '../section';
 
 interface IProps {
-  immatriculation: IImmatriculationRNM | IAPINotRespondingError;
+  immatriculation: IImmatriculationRNM & IAPINotRespondingError;
 }
 
 const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
-  if (isAPINotRespondingError(immatriculation)) {
-    if (immatriculation.type === 404) {
+  if (immatriculation.errorType) {
+    if (immatriculation.errorType === 404) {
       return null;
     }
     return <AdministrationNotResponding {...immatriculation} />;

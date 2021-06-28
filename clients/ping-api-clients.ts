@@ -1,4 +1,4 @@
-import { isSiren, verifySiren } from '../utils/helpers/siren-and-siret';
+import { verifySiren } from '../utils/helpers/siren-and-siret';
 import { getAssociation } from './rna';
 import { fetchRNCSImmatriculation } from './rncs';
 import { fetchRnmImmatriculation } from './rnm';
@@ -25,7 +25,7 @@ const ping = async (slug: string | string[]) => {
         verifySiren('880878145')
       );
     case 'api-sirene-donnees-ouvertes':
-      return await getUniteLegaleSireneOuverte('880878145');
+      return await getUniteLegaleSireneOuverte(verifySiren('880878145'));
     case 'api-rna':
       return await getAssociation('W551000280');
     default:

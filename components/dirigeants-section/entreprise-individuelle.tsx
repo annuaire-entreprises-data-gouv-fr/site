@@ -4,6 +4,7 @@ import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { EAdministration } from '../../models/administration';
 import { IEtatCivil } from '../../models/dirigeants';
+import { INSEE } from '../administrations';
 
 interface IProps {
   dirigeant: IEtatCivil;
@@ -34,7 +35,9 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
         <p>
           Cette entité est une entreprise individuelle. Elle a un
           {femininMasculin} dirigeant{femininMasculin} enregistré
-          {femininMasculin} auprès de l’INSEE&nbsp;:
+          {femininMasculin} auprès de l’
+          <INSEE />
+          &nbsp;:
         </p>
         <TwoColumnTable body={data} />
       </Section>

@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  administrationsLogo,
   administrationsMetaData,
   EAdministration,
 } from '../../models/administration';
@@ -21,6 +22,7 @@ export const Section: React.FC<ISectionProps> = ({
   width = 100,
 }) => {
   const dataSource = source ? administrationsMetaData[source] : undefined;
+  const dataLogo = source ? administrationsLogo[source] : undefined;
   const now = new Date();
   return (
     <>
@@ -35,9 +37,7 @@ export const Section: React.FC<ISectionProps> = ({
                 lastUpdatedAt={formatDate(now)}
               />
             </div>
-            {dataSource.logo && (
-              <div className="logo-wrapper">{dataSource.logo}</div>
-            )}
+            {dataLogo && <div className="logo-wrapper">{dataLogo}</div>}
           </>
         )}
       </div>
@@ -70,6 +70,7 @@ export const Section: React.FC<ISectionProps> = ({
         .logo-wrapper {
           position: absolute;
           min-width: 70px;
+          max-width: 100px;
           height: 30px;
           max-height: 30px;
           top: 16px;

@@ -5,7 +5,7 @@ import {
   IUniteLegale,
 } from '../../models';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
-import { Siren } from '../../utils/helpers/siren-and-siret';
+import { Siren, verifySiret } from '../../utils/helpers/siren-and-siret';
 import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
 import {
   libelleFromCategoriesJuridiques,
@@ -103,7 +103,7 @@ const mapToDomainObject = (
 
   if (periodesUniteLegale && periodesUniteLegale.length > 0) {
     siege.siren = siren;
-    siege.siret = siren + nicSiegeUniteLegale;
+    siege.siret = verifySiret(siren + nicSiegeUniteLegale);
     siege.nic = nicSiegeUniteLegale;
     siege.estActif = null;
     siege.dateCreation = dateDebut;

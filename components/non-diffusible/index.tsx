@@ -1,4 +1,5 @@
 import React from 'react';
+import { INSEE } from '../administrations';
 import ButtonLink from '../button';
 import { Section } from '../section';
 
@@ -20,7 +21,9 @@ const NonDiffusible = () => (
     </p>
     <p>
       Si cette entité est la votre et que vous souhaitez vous rendre diffusible
-      de nouveau la démarche est à effectuer auprès de l’INSEE&nbsp;:
+      de nouveau la démarche est à effectuer auprès de l’
+      <INSEE />
+      &nbsp;:
     </p>
     <div className="layout-center">
       <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>

@@ -21,18 +21,16 @@ export interface IRNCSResponseDossier {
 }
 
 export interface IRNCSRepresentantResponse {
-  representants: {
-    prenoms: string;
-    nom_patronymique: string;
-    lieu_naiss: string;
-    code_pays_naiss: string;
-    dat_naiss: string;
-    qualites: { qualite: string | string[] };
-    form_jur: string;
-    siren: string;
-    denomination: string;
-    type: string;
-  };
+  prenoms: string;
+  nom_patronymique: string;
+  lieu_naiss: string;
+  code_pays_naiss: string;
+  dat_naiss: string;
+  qualites: { qualite: string | string[] };
+  form_jur: string;
+  siren: string;
+  denomination: string;
+  type: string;
 }
 
 interface IZipFileAsBuffer {
@@ -66,17 +64,17 @@ export const fetchRNCSIMR = async (siren: Siren) => {
   return mapToDomainObject(xmlResponse);
 };
 
-const mapToDomainObject = (
-  xmlResponse: string
-): { dirigeants: IDirigeant[] } => {
+const mapToDomainObject = (xmlResponse: string): IDirigeant[] => {
   const dirigeants = extractIMRFromXml(xmlResponse);
 
-  return { dirigeants };
+  return dirigeants;
 };
 
 const fetchIMRAsBuffer = async (siren: Siren) => {
-  const response = await RNCSClientWrapper(routes.rncs.api.imr.get + siren, {});
-  const arrayBuffer = await response.arrayBuffer();
+  const response = await RNCSClientWrapper(routes.rncs.api.imr.get + siren, {
+    responseType: 'arraybuffer',
+  });
+  const arrayBuffer = await response.data;
   return Buffer.from(new Uint8Array(arrayBuffer));
 };
 

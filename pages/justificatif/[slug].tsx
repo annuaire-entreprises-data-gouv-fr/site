@@ -8,7 +8,6 @@ import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
 import AvisSituation from '../../components/avis-situation';
 import { EAdministration } from '../../models/administration';
-import { formatDate } from '../../utils/helpers/formatting';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import { FullTable } from '../../components/table/full';
 import { IEtablissement } from '../../models';
