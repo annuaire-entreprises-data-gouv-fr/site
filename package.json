@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@sentry/node": "^6.6.0",
+    "@types/adm-zip": "^0.4.34",
     "abort-controller": "^3.0.0",
     "axios": "^0.21.1",
     "axios-oauth-client": "^1.4.2",
@@ -40,8 +41,10 @@
     "@types/raven": "^2.5.3",
     "@types/react": "^17.0.11",
     "cypress": "^7.5.0",
+    "fast-xml-parser": "^3.19.0",
     "jest": "^27.0.4",
     "sass": "^1.34.1",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.2",
+    "yauzl": "^2.10.0"
   }
 }

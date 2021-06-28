@@ -68,7 +68,9 @@ export const formatAdresse = (
   }
   return `${wrapWord(numero_voie)}${wrapWord(indice_repetition)}${wrapWord(
     type_voie
-  )}${wrapWord(libelle_voie, false, ', ')}${formatNumbersFr(
-    code_postal || ''
-  )} ${wrapWord(libelle_commune, true, '')}`;
+  )}${wrapWord(libelle_voie, false, ', ')}${code_postal || ''} ${wrapWord(
+    libelle_commune,
+    true,
+    ''
+  )}`;
 };

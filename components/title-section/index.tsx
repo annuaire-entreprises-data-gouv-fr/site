@@ -11,6 +11,8 @@ export enum FICHE {
   INFORMATION = 'informations générales',
   JUSTIFICATIFS = 'justificatifs',
   ANNONCES = 'annonces & conventions collectives',
+  DIRIGEANTS = 'dirigeants',
+  ACTES = 'actes & statuts',
 }
 interface IProps {
   ficheType?: FICHE;
@@ -32,12 +34,21 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
       <a
         className={`${ficheType === FICHE.JUSTIFICATIFS && 'active'}`}
         href={`/justificatif/${siren}`}
+        rel="nofollow"
       >
         Justificatifs
       </a>
       <a
+        className={`${ficheType === FICHE.DIRIGEANTS && 'active'}`}
+        href={`/dirigeants/${siren}`}
+        rel="nofollow"
+      >
+        Dirigeants
+      </a>
+      <a
         className={`${ficheType === FICHE.ANNONCES && 'active'}`}
         href={`/annonces/${siren}`}
+        rel="nofollow"
       >
         Annonces & conventions collectives
       </a>
@@ -48,6 +59,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         display: flex;
         flex-grow: 1;
         font-size: 0.9rem;
+        border-bottom: 2px solid #dfdff1;
       }
       .title-tabs > a {
         color: #000091;
@@ -74,6 +86,21 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         background-color: #fff;
         border-bottom: 0;
         box-shadow: none;
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 450px) {
+        .title-tabs {
+          flex-direction: column;
+          border-bottom: 0;
+        }
+        .title-tabs > a {
+          margin: 3px;
+        }
+        .title-tabs > a.active {
+          background-color: #fff;
+          border-bottom: 2px solid #dfdff1;
+          box-shadow: none;
+        }
       }
     `}</style>
   </>
@@ -106,7 +133,6 @@ const Title: React.FC<IProps> = ({
       .header-section {
         display: block;
         margin-bottom: 40px;
-        border-bottom: 2px solid #dfdff1;
       }
 
       .title {

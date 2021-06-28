@@ -1,9 +1,6 @@
 import React from 'react';
 import { EAdministration } from '../../models/administration';
-import {
-  IAPINotRespondingError,
-  isAPINotRespondingError,
-} from '../../models/api-not-responding';
+import { IAPINotRespondingError } from '../../models/api-not-responding';
 import { IImmatriculationRNM } from '../../models/immatriculation';
 import { cma } from '../../public/static/logo';
 import AdministrationNotResponding from '../administration-not-responding';
@@ -12,12 +9,12 @@ import { download } from '../icon';
 import { Section } from '../section';
 
 interface IProps {
-  immatriculation: IImmatriculationRNM | IAPINotRespondingError;
+  immatriculation: IImmatriculationRNM & IAPINotRespondingError;
 }
 
 const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
-  if (isAPINotRespondingError(immatriculation)) {
-    if (immatriculation.type === 404) {
+  if (immatriculation.errorType) {
+    if (immatriculation.errorType === 404) {
       return null;
     }
     return <AdministrationNotResponding {...immatriculation} />;
@@ -29,21 +26,18 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
           title="Justificatif d’immatriculation au RNM"
           source={EAdministration.CMAFRANCE}
         >
-          <div className="description">
-            <div>
-              Cette entité possède une fiche d'immatriculation sur le{' '}
-              <b>Répertoire National des Métiers (RNM)</b> qui liste les
-              entreprises artisanales enreigstrées auprès des Chambres des
-              Métiers et de l'Artisanat (CMA France).
-              <p>
-                Pour accéder à l’ensemble des données contenues dans un extrait
-                D1, vous pouvez télécharger le justificatif d’immatriculation.
-                Si le téléchargement échoue, vous pouvez accéder à la donnée en
-                allant sur le site de CMA France.
-              </p>
-            </div>
-            <div className="logo-wrapper">{cma}</div>
-          </div>
+          <p>
+            Cette entité possède une fiche d'immatriculation sur le{' '}
+            <b>Répertoire National des Métiers (RNM)</b> qui liste les
+            entreprises artisanales enreigstrées auprès des Chambres des Métiers
+            et de l'Artisanat (CMA France).
+          </p>
+          <p>
+            Pour accéder à l’ensemble des données contenues dans un extrait D1,
+            vous pouvez télécharger le justificatif d’immatriculation. Si le
+            téléchargement échoue, vous pouvez accéder à la donnée en allant sur
+            le site de CMA France.
+          </p>
           <div className="layout-center">
             <ButtonLink
               target="_blank"
@@ -64,30 +58,6 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
             .separator {
               width: 10px;
               height: 10px;
-            }
-            .description {
-              display: flex;
-              margin-bottom: 20px;
-              flex-direction: row;
-            }
-            .logo-wrapper {
-              padding-left: 20px;
-              width: calc(30% - 20px);
-            }
-            .logo-wrapper svg {
-              width: 100%;
-            }
-            .content-container {
-              margin: 20px auto 40px;
-            }
-            @media only screen and (min-width: 1px) and (max-width: 900px) {
-              .description {
-                flex-direction: column;
-              }
-              .logo-wrapper {
-                margin: 20px auto 0;
-                padding: 0;
-              }
             }
           `}</style>
         </Section>

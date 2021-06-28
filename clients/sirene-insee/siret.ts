@@ -1,3 +1,4 @@
+import { verifySiren, verifySiret } from '../../utils/helpers/siren-and-siret';
 import { inseeClientGet, INSEE_CREDENTIALS } from '.';
 import constants from '../../constants';
 import {
@@ -86,8 +87,8 @@ const mapToDomainObject = (
   inseeEtablissement: IInseeEtablissement
 ): IEtablissement => {
   const {
-    siret,
     nic,
+    siret,
     etablissementSiege,
     trancheEffectifsEtablissement,
     dateCreationEtablissement,
@@ -118,7 +119,7 @@ const mapToDomainObject = (
   return {
     ...defaultEtablissement,
     siren: extractSirenFromSiret(siret),
-    siret,
+    siret: verifySiret(siret),
     nic,
     dateCreation: dateCreationEtablissement,
     activitePrincipale: activitePrincipaleEtablissement,

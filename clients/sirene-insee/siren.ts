@@ -5,6 +5,7 @@ import {
   IUniteLegale,
 } from '../../models';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
+import { Siren, verifySiret } from '../../utils/helpers/siren-and-siret';
 import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
 import {
   libelleFromCategoriesJuridiques,
@@ -23,6 +24,7 @@ interface IInseeUniteLegaleResponse {
     trancheEffectifsUniteLegale: string;
     statutDiffusionUniteLegale: string;
     prenom1UniteLegale: string;
+    sexeUniteLegale: 'M' | 'F';
     identifiantAssociationUniteLegale: string | null;
   };
 }
@@ -43,7 +45,7 @@ interface IPeriodeUniteLegale {
  * @param useInseeFallback
  * @returns
  */
-export const getUniteLegaleInsee = async (siren: string) => {
+export const getUniteLegaleInsee = async (siren: Siren) => {
   const request = await inseeClientGet(routes.sireneInsee.siren + siren);
   const response = request as IInseeUniteLegaleResponse;
 
@@ -51,7 +53,7 @@ export const getUniteLegaleInsee = async (siren: string) => {
 };
 
 export const getUniteLegaleInseeWithFallbackCredentials = async (
-  siren: string
+  siren: Siren
 ) => {
   const request = await inseeClientGet(
     routes.sireneInsee.siren + siren,
@@ -63,7 +65,7 @@ export const getUniteLegaleInseeWithFallbackCredentials = async (
 };
 
 const mapToDomainObject = (
-  siren: string,
+  siren: Siren,
   response: IInseeUniteLegaleResponse
 ): IUniteLegale => {
   const {
@@ -74,6 +76,7 @@ const mapToDomainObject = (
     trancheEffectifsUniteLegale,
     statutDiffusionUniteLegale,
     prenom1UniteLegale,
+    sexeUniteLegale,
     identifiantAssociationUniteLegale,
   } = response.uniteLegale;
 
@@ -100,7 +103,7 @@ const mapToDomainObject = (
 
   if (periodesUniteLegale && periodesUniteLegale.length > 0) {
     siege.siren = siren;
-    siege.siret = siren + nicSiegeUniteLegale;
+    siege.siret = verifySiret(siren + nicSiegeUniteLegale);
     siege.nic = nicSiegeUniteLegale;
     siege.estActif = null;
     siege.dateCreation = dateDebut;
@@ -119,6 +122,16 @@ const mapToDomainObject = (
   ).toLowerCase()}${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
+
+  const estEntrepreneurIndividuel = isEntrepreneurIndividuelFromNatureJuridique(
+    categorieJuridiqueUniteLegale
+  );
+
+  const dirigeant = {
+    sexe: sexeUniteLegale,
+    prenom: prenom1UniteLegale,
+    nom: nomUniteLegale,
+  };
 
   return {
     ...defaultUniteLegale,
@@ -141,9 +154,7 @@ const mapToDomainObject = (
     )[0],
     estActive: etatAdministratifUniteLegale === 'A',
     estDiffusible: statutDiffusionUniteLegale !== 'N',
-    estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
-      categorieJuridiqueUniteLegale
-    ),
+    estEntrepreneurIndividuel,
     estEss: economieSocialeSolidaireUniteLegale === 'O',
     nomComplet,
     chemin: siren,
@@ -151,5 +162,6 @@ const mapToDomainObject = (
     libelleTrancheEffectif: libelleFromCodeEffectif(
       trancheEffectifsUniteLegale
     ),
+    dirigeant: estEntrepreneurIndividuel ? dirigeant : null,
   };
 };

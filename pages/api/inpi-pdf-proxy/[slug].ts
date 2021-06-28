@@ -48,8 +48,7 @@ const proxyPdf = async (
     );
     nextAPIResponse.status(200).send(response.data);
   } catch (e) {
-    console.log(e);
-    logErrorInSentry(e);
+    logErrorInSentry(e.message || e);
     nextAPIResponse.status(500).json({ message: e });
   }
 };
