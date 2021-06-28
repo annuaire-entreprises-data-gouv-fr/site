@@ -52,6 +52,7 @@ export const httpClientOAuthFactory = (
   client_secret: string | undefined
 ) => {
   if (!client_id || !client_secret) {
+    console.log(process.env);
     throw new HttpServerError(500, 'Client id or client secret is undefined');
   }
 
