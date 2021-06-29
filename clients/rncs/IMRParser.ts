@@ -1,10 +1,15 @@
 import parser from 'fast-xml-parser';
 import { NotASirenError, NotLuhnValidSirenError } from '../../models';
 import { IDirigeant } from '../../models/dirigeants';
-import { verifySiren } from '../../utils/helpers/siren-and-siret';
+import { Siren, verifySiren } from '../../utils/helpers/siren-and-siret';
+import { logWarningInSentry } from '../../utils/sentry';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 
-import { IRNCSRepresentantResponse, IRNCSResponse } from './IMR';
+import {
+  IRNCSRepresentantResponse,
+  IRNCSResponse,
+  IRNCSResponseDossier,
+} from './IMR';
 
 export class InvalidFormatError extends HttpServerError {
   constructor(message: string) {
@@ -12,38 +17,23 @@ export class InvalidFormatError extends HttpServerError {
   }
 }
 
-export const extractIMRFromXml = (responseAsXml: string) => {
+export const extractIMRFromXml = (responseAsXml: string, siren: Siren) => {
   try {
     const response = parseXmlToJson(responseAsXml);
+    const dossiers = extractDossiers(response, siren);
+    const representants = dossiers.map(extractRepresentants);
 
-    let dossier;
-    if (Array.isArray(response.fichier.dossier)) {
-      dossier = response.fichier.dossier.find(
-        (element) => element.representants !== undefined
-      );
-    } else {
-      dossier = response.fichier.dossier;
-    }
-    const representant = ((dossier || {}).representants || {}).representant;
-
-    if (!representant) {
+    // filter correct representants
+    if (representants.length === 0) {
       throw new HttpNotFound(404, 'No representant in IMR file');
     }
 
-    const isRepresentantAnArray = Array.isArray(representant);
+    const selectedRepresentant = representants.sort(
+      (a, b) => b.length - a.length
+    )[0];
 
-    let dirigeants = [];
-    if (isRepresentantAnArray) {
-      dirigeants = representant as IRNCSRepresentantResponse[];
-    } else {
-      dirigeants = [representant] as IRNCSRepresentantResponse[];
-    }
-
-    return dirigeants.map(extractDirigeant);
+    return selectedRepresentant.map(mapRepresentantToDirigeants);
   } catch (e) {
-    if (e instanceof NotASirenError || e instanceof NotLuhnValidSirenError) {
-      throw e;
-    }
     throw new InvalidFormatError(e);
   }
 };
@@ -53,7 +43,39 @@ const parseXmlToJson = (xmlString: string): IRNCSResponse => {
   return parser.convertToJson(tObj, { arrayMode: false });
 };
 
-const extractDirigeant = (dirigeant: IRNCSRepresentantResponse): IDirigeant => {
+const extractDossiers = (
+  response: IRNCSResponse,
+  siren: Siren
+): IRNCSResponseDossier[] => {
+  const isDossierArray = Array.isArray(response.fichier.dossier);
+  const dossier = (
+    isDossierArray ? response.fichier.dossier : [response.fichier.dossier]
+  ) as IRNCSResponseDossier[];
+
+  let dossiersWithRepresentants = dossier.filter(
+    (element) => element.representants !== undefined
+  );
+
+  if (dossiersWithRepresentants.length > 1) {
+    logWarningInSentry(
+      `${dossiersWithRepresentants.length} dossiers found in IMR`,
+      { siren }
+    );
+  }
+
+  return dossiersWithRepresentants;
+};
+
+const extractRepresentants = (dossier: IRNCSResponseDossier) => {
+  const representant = ((dossier || {}).representants || {}).representant;
+  const isRepresentantAnArray = Array.isArray(representant);
+  const dirigeants = isRepresentantAnArray ? representant : [representant];
+  return dirigeants as IRNCSRepresentantResponse[];
+};
+
+const mapRepresentantToDirigeants = (
+  dirigeant: IRNCSRepresentantResponse
+): IDirigeant => {
   const {
     prenoms,
     nom_patronymique,
@@ -66,23 +88,26 @@ const extractDirigeant = (dirigeant: IRNCSRepresentantResponse): IDirigeant => {
     denomination,
     type,
   } = dirigeant;
+
   const qualite = (qualites || {}).qualite;
   const roles = Array.isArray(qualite) ? qualite.join(', ') : qualite;
+
   if (type === 'P.Physique') {
     return {
+      sexe: null,
       prenom: (prenoms || '').split(' ')[0],
-      nom: nom_patronymique,
+      nom: nom_patronymique || '',
       role: roles || '',
-      lieuNaissance: lieu_naiss + ', ' + code_pays_naiss,
+      lieuNaissance: (lieu_naiss || '') + ', ' + (code_pays_naiss || ''),
       dateNaissance: (dat_naiss || '').toString().slice(0, 4),
     };
   } else {
     const sirenAsString = (siren || '').toString();
     return {
-      siren: verifySiren(sirenAsString),
-      denomination: denomination,
+      siren: sirenAsString,
+      denomination: denomination || '',
       role: roles || '',
-      natureJuridique: form_jur,
+      natureJuridique: form_jur || '',
     };
   }
 };
