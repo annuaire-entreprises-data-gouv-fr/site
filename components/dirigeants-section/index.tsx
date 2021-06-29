@@ -14,7 +14,7 @@ import routes from '../../clients/routes';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 
 interface IProps {
-  dirigeants: (IEtatCivil & IPersonneMorale)[] | IAPINotRespondingError;
+  dirigeants: (IEtatCivil | IPersonneMorale)[] | IAPINotRespondingError;
   siren: Siren;
 }
 
@@ -36,20 +36,39 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
     );
   }
 
-  const formatDirigeant = (dirigeant: IEtatCivil & IPersonneMorale) => {
-    const isPersonneMorale = dirigeant.siren;
-    if (isPersonneMorale) {
-      return [
+  /**
+   * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts
+   * @param toBeDetermined
+   * @returns
+   */
+  const isPersonneMorale = (
+    toBeDetermined: IEtatCivil | IPersonneMorale
+  ): toBeDetermined is IPersonneMorale => {
+    if (
+      (toBeDetermined as IPersonneMorale).siren ||
+      (toBeDetermined as IPersonneMorale).denomination
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
+    if (isPersonneMorale(dirigeant)) {
+      const infos = [
         ['Rôle(s)', <b>{dirigeant.role}</b>],
         ['Dénomination', dirigeant.denomination],
         ['Nature Juridique', dirigeant.natureJuridique],
-        [
+      ];
+      if (dirigeant.siren) {
+        infos.push([
           'Siren',
           <a href={`/entreprise/${dirigeant.siren}`}>
             {formatNumbersFr(dirigeant.siren)}
           </a>,
-        ],
-      ];
+        ]);
+      }
+      return infos;
     } else {
       return [
         ['Rôle', <b>{dirigeant.role}</b>],
