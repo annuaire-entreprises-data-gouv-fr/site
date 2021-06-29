@@ -1,6 +1,8 @@
 import { readFileSync } from 'fs';
-import { NotASirenError } from '../../models';
+import { verifySiren } from '../../utils/helpers/siren-and-siret';
 import { extractIMRFromXml, InvalidFormatError } from './IMRParser';
+
+const dummySiren = verifySiren('880878145');
 
 describe('IMR XML parser', () => {
   it('parses the XML for company with single leader', () => {
@@ -9,7 +11,7 @@ describe('IMR XML parser', () => {
       'utf-8'
     );
 
-    const result = extractIMRFromXml(okXML);
+    const result = extractIMRFromXml(okXML, dummySiren);
 
     expect(result).toEqual([
       {
@@ -18,6 +20,7 @@ describe('IMR XML parser', () => {
         role: 'Président',
         lieuNaissance: 'La Comté, Terre du Milieu',
         dateNaissance: '2000',
+        sexe: null,
       },
     ]);
   });
@@ -28,7 +31,7 @@ describe('IMR XML parser', () => {
       'utf-8'
     );
 
-    const result = extractIMRFromXml(okXML);
+    const result = extractIMRFromXml(okXML, dummySiren);
 
     expect(result).toEqual([
       {
@@ -37,6 +40,7 @@ describe('IMR XML parser', () => {
         role: 'Président',
         lieuNaissance: 'La Comté, Terre du Milieu',
         dateNaissance: '2000',
+        sexe: null,
       },
       {
         denomination: 'Nazgul SAS',
@@ -47,16 +51,9 @@ describe('IMR XML parser', () => {
     ]);
   });
 
-  it('returns a siren error if siren doesnot exist', () => {
-    const koSiren = readFileSync(
-      __dirname + '/__tests__/ko_siren.txt',
-      'utf-8'
-    );
-
-    expect(() => extractIMRFromXml(koSiren)).toThrowError(NotASirenError);
-  });
-
   it('returns domain error when xml is invalid', () => {
-    expect(() => extractIMRFromXml('yolo<')).toThrowError(InvalidFormatError);
+    expect(() => extractIMRFromXml('yolo<', dummySiren)).toThrowError(
+      InvalidFormatError
+    );
   });
 });
