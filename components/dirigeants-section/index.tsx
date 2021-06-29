@@ -4,14 +4,17 @@ import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { EAdministration } from '../../models/administration';
 import { IEtatCivil, IPersonneMorale } from '../../models/dirigeants';
-import { IAPINotRespondingError } from '../../models/api-not-responding';
+import {
+  IAPINotRespondingError,
+  isAPINotResponding,
+} from '../../models/api-not-responding';
 import AdministrationNotResponding from '../administration-not-responding';
 import { formatNumbersFr } from '../../utils/helpers/formatting';
 import routes from '../../clients/routes';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 
 interface IProps {
-  dirigeants: (IEtatCivil & IPersonneMorale)[] & IAPINotRespondingError;
+  dirigeants: (IEtatCivil & IPersonneMorale)[] | IAPINotRespondingError;
   siren: Siren;
 }
 
@@ -21,7 +24,7 @@ interface IProps {
  * @returns
  */
 const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
-  if (dirigeants.errorType) {
+  if (isAPINotResponding(dirigeants)) {
     if (dirigeants.errorType === 404) {
       return null;
     }

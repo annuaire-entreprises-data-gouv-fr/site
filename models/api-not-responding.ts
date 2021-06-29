@@ -14,3 +14,12 @@ export const APINotRespondingFactory = (
     errorType,
   };
 };
+
+export const isAPINotResponding = (
+  toBeDetermined: any | IAPINotRespondingError
+): toBeDetermined is IAPINotRespondingError => {
+  if ((toBeDetermined as IAPINotRespondingError).errorType) {
+    return true;
+  }
+  return false;
+};

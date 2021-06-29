@@ -28,9 +28,21 @@ export interface IPersonneMorale {
 
 export type IDirigeant = IEtatCivil & IPersonneMorale;
 
+// export const isPersonneMorale = (
+//   toBeDetermined: IEtatCivil | IPersonneMorale
+// ): toBeDetermined is IPersonneMorale => {
+//   if (
+//     (toBeDetermined as IPersonneMorale).siren ||
+//     (toBeDetermined as IPersonneMorale).denomination
+//   ) {
+//     return true;
+//   }
+//   return false;
+// };
+
 export interface IDirigeants {
   uniteLegale: IUniteLegale;
-  dirigeants: IDirigeant[] & IAPINotRespondingError;
+  dirigeants: IDirigeant[] | IAPINotRespondingError;
 }
 
 export const getDirigeantsWithUniteLegaleFromSlug = async (slug: string) => {

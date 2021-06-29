@@ -4,6 +4,7 @@ import {
   createDefaultUniteLegale,
   IUniteLegale,
 } from '../../models';
+import { IEtatCivil } from '../../models/dirigeants';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import { Siren, verifySiret } from '../../utils/helpers/siren-and-siret';
 import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
@@ -131,7 +132,7 @@ const mapToDomainObject = (
     sexe: sexeUniteLegale,
     prenom: prenom1UniteLegale,
     nom: nomUniteLegale,
-  };
+  } as IEtatCivil;
 
   return {
     ...defaultUniteLegale,
