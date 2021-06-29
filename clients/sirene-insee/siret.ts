@@ -1,4 +1,4 @@
-import { verifySiren, verifySiret } from '../../utils/helpers/siren-and-siret';
+import { verifySiret } from '../../utils/helpers/siren-and-siret';
 import { inseeClientGet, INSEE_CREDENTIALS } from '.';
 import constants from '../../constants';
 import {
@@ -12,7 +12,7 @@ import {
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
-import { HttpForbiddenError } from '../exceptions';
+import { HttpForbiddenError, HttpNotFound } from '../exceptions';
 import routes from '../routes';
 
 interface IInseeEtablissementResponse {
@@ -78,14 +78,22 @@ const getEtablissementFactory =
       routes.sireneInsee.siret + siret,
       credential
     );
-    const { etablissement } = response as IInseeEtablissementResponse;
 
+    const { etablissement } = response as IInseeEtablissementResponse;
     return mapToDomainObject(etablissement);
   };
 
 const mapToDomainObject = (
   inseeEtablissement: IInseeEtablissement
 ): IEtablissement => {
+  // There cases of inseeEtablissement undefined.
+  // For instance 89898637700015 that returns an etablissementS instead of etablissement and that also returns a different siren/siret
+  // as sirene.fr doesnot disply it, we dont either
+
+  if (!inseeEtablissement) {
+    throw new HttpNotFound(404, 'Not Found');
+  }
+
   const {
     nic,
     siret,
