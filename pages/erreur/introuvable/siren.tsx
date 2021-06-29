@@ -1,31 +1,31 @@
 import React from 'react';
 
-import Page from '../../layouts';
-import ButtonLink from '../../components/button';
+import Page from '../../../layouts';
+import ButtonLink from '../../../components/button';
 
-const SiretNotFoundPage: React.FC<{}> = () => {
+const SirenNotFoundPage: React.FC = () => {
   return (
-    <Page small={true} title="Numero Siret introuvable">
+    <Page small={true} title="Numero Siren introuvable" noIndex={true}>
       <div className="content-container">
-        <h1>Ce numéro SIRET est introuvable</h1>
+        <h1>Ce numéro SIREN est introuvable</h1>
         <div>
           <p>Il existe plusieurs explications possibles :</p>
           <ul>
             <li>
-              Vous avez peut-être commis une erreur en tapant votre numéro SIRET
+              Vous avez peut-être commis une erreur en tapant votre numéro SIREN
               et celui-ci n'existe pas
             </li>
             <li>
-              Ce SIRET fait peut-être référence à une entreprise{' '}
+              Ce SIREN fait peut-être référence à une entreprise{' '}
               <a href="/faq">non-diffusible</a>.
             </li>
             <li>
-              Ce SIRET fait peut-être référence à une entité publique dont les
+              Ce SIREN fait peut-être référence à une entité publique dont les
               informations sont protégées (Ministère de Défense, Gendarmerie,
               parlementaire etc.)
             </li>
             <li>
-              Ce SIRET fait référence à une entreprise crée récemment et{' '}
+              Ce SIREN fait référence à une entreprise crée récemment et{' '}
               <a href="/faq">nos informations ne sont pas encore à jour</a>.
             </li>
           </ul>
@@ -39,4 +39,4 @@ const SiretNotFoundPage: React.FC<{}> = () => {
   );
 };
 
-export default SiretNotFoundPage;
+export default SirenNotFoundPage;

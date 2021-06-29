@@ -13,13 +13,17 @@ import {
 import constants from '../../constants';
 
 const handleError = (error: AxiosError) => {
-  const { config, response } = error;
+  const { config, response, message } = error;
 
   if (!response) {
-    throw new HttpServerError(
-      500,
-      `Unknown server error while querying ${config.url}`
-    );
+    if (message && message.indexOf('timeout of') > -1) {
+      throw new HttpTimeoutError(504, message);
+    } else {
+      throw new HttpServerError(
+        500,
+        `Unknown server error while querying ${config.url}`
+      );
+    }
   }
 
   switch (response.status) {

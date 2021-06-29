@@ -50,6 +50,7 @@ const ImmatriculationRNCS: React.FC<IProps> = ({ immatriculation }) => {
           <div className="layout-center">
             <ButtonLink
               nofollow={true}
+              target="_blank"
               href={`/api/inpi-pdf-proxy/${immatriculation.siren}`}
             >
               {download} Télécharger le justificatif d'immatriculation
