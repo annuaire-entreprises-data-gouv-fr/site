@@ -23,6 +23,7 @@ interface IInseeUniteLegaleResponse {
     periodesUniteLegale: IPeriodeUniteLegale[];
     dateDernierTraitementUniteLegale: string;
     trancheEffectifsUniteLegale: string;
+    anneeEffectifsUniteLegale: string;
     statutDiffusionUniteLegale: string;
     prenom1UniteLegale: string;
     sexeUniteLegale: 'M' | 'F';
@@ -75,6 +76,7 @@ const mapToDomainObject = (
     periodesUniteLegale,
     dateDernierTraitementUniteLegale,
     trancheEffectifsUniteLegale,
+    anneeEffectifsUniteLegale,
     statutDiffusionUniteLegale,
     prenom1UniteLegale,
     sexeUniteLegale,
@@ -153,6 +155,7 @@ const mapToDomainObject = (
     dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
       'T'
     )[0],
+    dateDebutActivite: dateDebut,
     estActive: etatAdministratifUniteLegale === 'A',
     estDiffusible: statutDiffusionUniteLegale !== 'N',
     estEntrepreneurIndividuel,
@@ -161,7 +164,8 @@ const mapToDomainObject = (
     chemin: siren,
     trancheEffectif: trancheEffectifsUniteLegale,
     libelleTrancheEffectif: libelleFromCodeEffectif(
-      trancheEffectifsUniteLegale
+      trancheEffectifsUniteLegale,
+      anneeEffectifsUniteLegale
     ),
     dirigeant: estEntrepreneurIndividuel ? dirigeant : null,
   };

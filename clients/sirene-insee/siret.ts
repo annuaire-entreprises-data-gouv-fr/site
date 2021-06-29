@@ -29,6 +29,7 @@ interface IInseeEtablissement {
   etablissementSiege: string;
   statutDiffusionEtablissement: string;
   trancheEffectifsEtablissement: string;
+  anneeEffectifsEtablissement: string;
   dateCreationEtablissement: string;
   dateDernierTraitementEtablissement: string;
   activitePrincipaleRegistreMetiersEtablissement: string;
@@ -99,6 +100,7 @@ const mapToDomainObject = (
     siret,
     etablissementSiege,
     trancheEffectifsEtablissement,
+    anneeEffectifsEtablissement,
     dateCreationEtablissement,
     dateDernierTraitementEtablissement,
     adresseEtablissement,
@@ -140,7 +142,8 @@ const mapToDomainObject = (
     dateFermeture,
     trancheEffectif: trancheEffectifsEtablissement,
     libelleTrancheEffectif: libelleFromCodeEffectif(
-      trancheEffectifsEtablissement
+      trancheEffectifsEtablissement,
+      anneeEffectifsEtablissement
     ),
     adresse: formatAdresse(
       adresseEtablissement.numeroVoieEtablissement,
