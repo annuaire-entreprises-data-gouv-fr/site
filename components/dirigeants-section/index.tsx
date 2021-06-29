@@ -3,15 +3,7 @@ import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { EAdministration } from '../../models/administration';
-<<<<<<< HEAD
-import {
-  IEtatCivil,
-  IPersonneMorale,
-  isPersonneMorale,
-} from '../../models/dirigeants';
-=======
 import { IEtatCivil, IPersonneMorale } from '../../models/dirigeants';
->>>>>>> fix_build
 import {
   IAPINotRespondingError,
   isAPINotResponding,
