@@ -3,11 +3,15 @@ import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { EAdministration } from '../../models/administration';
+<<<<<<< HEAD
 import {
   IEtatCivil,
   IPersonneMorale,
   isPersonneMorale,
 } from '../../models/dirigeants';
+=======
+import { IEtatCivil, IPersonneMorale } from '../../models/dirigeants';
+>>>>>>> fix_build
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -39,6 +43,23 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
       />
     );
   }
+
+  /**
+   * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts
+   * @param toBeDetermined
+   * @returns
+   */
+  const isPersonneMorale = (
+    toBeDetermined: IEtatCivil | IPersonneMorale
+  ): toBeDetermined is IPersonneMorale => {
+    if (
+      (toBeDetermined as IPersonneMorale).siren ||
+      (toBeDetermined as IPersonneMorale).denomination
+    ) {
+      return true;
+    }
+    return false;
+  };
 
   const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
     if (isPersonneMorale(dirigeant)) {
