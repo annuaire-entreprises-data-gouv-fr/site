@@ -1,3 +1,4 @@
+import { Http } from '@sentry/node/dist/integrations';
 import parser from 'fast-xml-parser';
 import { NotASirenError, NotLuhnValidSirenError } from '../../models';
 import { IDirigeant } from '../../models/dirigeants';
@@ -34,6 +35,9 @@ export const extractIMRFromXml = (responseAsXml: string, siren: Siren) => {
 
     return selectedRepresentant.map(mapRepresentantToDirigeants);
   } catch (e) {
+    if (e instanceof HttpNotFound) {
+      throw e;
+    }
     throw new InvalidFormatError(e);
   }
 };
