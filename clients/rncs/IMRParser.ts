@@ -1,8 +1,6 @@
-import { Http } from '@sentry/node/dist/integrations';
 import parser from 'fast-xml-parser';
-import { NotASirenError, NotLuhnValidSirenError } from '../../models';
 import { IDirigeant } from '../../models/dirigeants';
-import { Siren, verifySiren } from '../../utils/helpers/siren-and-siret';
+import { Siren } from '../../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../../utils/sentry';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 
