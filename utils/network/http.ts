@@ -17,7 +17,10 @@ const handleError = (error: AxiosError) => {
 
   if (!response) {
     if (message && message.indexOf('timeout of') > -1) {
-      throw new HttpTimeoutError(504, message);
+      throw new HttpTimeoutError(
+        504,
+        `${message} while querying ${config.url}`
+      );
     } else {
       throw new HttpServerError(
         500,
