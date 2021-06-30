@@ -21,7 +21,7 @@ const handleError = (error: AxiosError) => {
     } else {
       throw new HttpServerError(
         500,
-        `Unknown server error while querying ${config.url}`
+        `Unknown server error while querying ${config.url}. ${message}`
       );
     }
   }
@@ -45,7 +45,7 @@ const handleError = (error: AxiosError) => {
     default:
       throw new HttpServerError(
         response.status,
-        response.statusText || 'Unknown server error'
+        `Unknown server error while querying ${config.url}. ${response.statusText} ${message}`
       );
   }
 };
