@@ -41,9 +41,6 @@ yarn-error.log*
 /public/sitemap.xml
 /public/*.xml
 
-# pm2 deploy
-ecosystem.config.js
-
 # direnv
 .nvmrc
 .envrc

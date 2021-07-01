@@ -24,10 +24,11 @@ module.exports = {
       repo: 'https://github.com/etalab/annuaire-entreprises.data.gouv.fr.git',
       path: '/opt/apps/annuaire-entreprises',
       'post-deploy':
-        'ln -s ../.env .env ; npm install && npm run build && /usr/local/lib/npm/bin/pm2 startOrRestart ecosystem.json --env production',
+        'ln -s ../.env .env ; npm install && npm run build && /usr/local/lib/npm/bin/pm2 startOrRestart ecosystem.config.js --env production',
       'pre-deploy-local': "echo 'This is a local executed command'",
       env: {
         NODE_ENV: 'production',
+        app_port: 3000,
       },
     },
   },
