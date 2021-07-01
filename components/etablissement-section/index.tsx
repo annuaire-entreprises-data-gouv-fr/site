@@ -8,9 +8,8 @@ import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { EAdministration } from '../../models/administration';
-import AvisSituation from '../avis-situation';
+import AvisSituationLink from '../avis-situation-link';
 import { EtablissementDescription } from '../etablissement-description';
-import InformationTooltip from '../information-tooltip';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -39,7 +38,10 @@ const EtablissementSection: React.FC<IProps> = ({
       'Date de dernière mise à jour',
       formatDate(etablissement.dateDerniereMiseAJour),
     ],
-    ['Avis de situation INSEE', <AvisSituation siret={etablissement.siret} />],
+    [
+      'Avis de situation INSEE',
+      <AvisSituationLink siret={etablissement.siret} />,
+    ],
   ];
 
   if (etablissement.estActif === false) {

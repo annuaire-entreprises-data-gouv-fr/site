@@ -2,18 +2,11 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { Section } from '../../components/section';
 import Title, { FICHE } from '../../components/title-section';
 import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
-import AvisSituation from '../../components/avis-situation';
-import { EAdministration } from '../../models/administration';
+import AvisSituationSection from '../../components/avis-de-situation-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
-import { FullTable } from '../../components/table/full';
-import { IEtablissement } from '../../models';
-import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import { Tag } from '../../components/tag';
-import IsActiveTag from '../../components/is-active-tag';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -31,41 +24,7 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
         immatriculationRNM={immatriculationRNM}
         immatriculationRNCS={immatriculationRNCS}
       />
-      {uniteLegale.estDiffusible && (
-        <Section title="Avis de situation INSEE" source={EAdministration.INSEE}>
-          <div className="description">
-            Chaque établissement immatriculé par l'INSEE au répertoire Sirene
-            des entreprises possède un avis de situation.
-          </div>
-          <FullTable
-            head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
-            body={uniteLegale.etablissements.map(
-              (etablissement: IEtablissement) => [
-                <a href={`/etablissement/${etablissement.siret}`}>
-                  {formatSiret(etablissement.siret)}
-                </a>,
-                etablissement.adresse,
-                <>
-                  {!uniteLegale.estDiffusible ? (
-                    <Tag>non-diffusible</Tag>
-                  ) : (
-                    <>
-                      {etablissement.estSiege && <Tag>siège social</Tag>}
-                      {!etablissement.estActif && (
-                        <IsActiveTag isActive={etablissement.estActif} />
-                      )}
-                    </>
-                  )}
-                </>,
-                <AvisSituation
-                  siret={uniteLegale.siege.siret}
-                  label="Télécharger"
-                />,
-              ]
-            )}
-          />
-        </Section>
-      )}
+      <AvisSituationSection uniteLegale={uniteLegale} />
     </div>
     <style jsx>{`
       .separator {

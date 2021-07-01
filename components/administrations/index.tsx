@@ -1,12 +1,12 @@
 export const INSEE = ({ queryString = '' }) => (
-  <a rel="nofollow" href={`/administration/inpi${queryString}`}>
-    INPI
+  <a rel="nofollow" href={`/administration/insee${queryString}`}>
+    INSEE
   </a>
 );
 
 export const INPI = ({ queryString = '' }) => (
-  <a rel="nofollow" href={`/administration/insee${queryString}`}>
-    INSEE
+  <a rel="nofollow" href={`/administration/inpi${queryString}`}>
+    INPI
   </a>
 );
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AvisSituation: React.FC<{ siret: string; label?: string }> = ({
+const AvisSituationLink: React.FC<{ siret: string; label?: string }> = ({
   siret,
   label,
 }) => (
@@ -13,4 +13,4 @@ const AvisSituation: React.FC<{ siret: string; label?: string }> = ({
   </a>
 );
 
-export default AvisSituation;
+export default AvisSituationLink;
