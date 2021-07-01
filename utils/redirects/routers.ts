@@ -16,10 +16,8 @@ import {
 import redirect, {
   redirectPageNotFound,
   redirectServerError,
-  redirectSirenIntrouvable,
-  redirectSirenInvalid,
-  redirectSiretIntrouvable,
-  redirectSiretInvalid,
+  redirectSirenOrSiretIntrouvable,
+  redirectSirenOrSiretInvalid,
 } from '.';
 
 export const redirectIfSiretOrSiren = (
@@ -55,9 +53,9 @@ export const redirectIfIssueWithSiren = (
   const scope = getScopeFromRequest(req);
 
   if (exception instanceof SirenNotFoundError) {
-    redirectSirenIntrouvable(res, siren, scope);
+    redirectSirenOrSiretIntrouvable(res, siren, { siren, ...scope });
   } else if (exception instanceof NotLuhnValidSirenError) {
-    redirectSirenInvalid(res, siren, scope);
+    redirectSirenOrSiretInvalid(res, siren, { siren, ...scope });
   } else if (exception instanceof NotASirenError) {
     redirectPageNotFound(res, siren, scope);
   } else {
@@ -76,15 +74,15 @@ export const redirectIfIssueWithSiretOrSiren = (
   const scope = getScopeFromRequest(req);
 
   if (exception instanceof SiretNotFoundError) {
-    redirectSiretIntrouvable(res, siret, scope);
+    redirectSirenOrSiretIntrouvable(res, siret, { siret, ...scope });
   } else if (exception instanceof NotLuhnValidSiretError) {
-    redirectSiretInvalid(res, siret, scope);
+    redirectSirenOrSiretInvalid(res, siret, { siret, ...scope });
   } else if (exception instanceof NotASiretError) {
     redirectPageNotFound(res, siret, scope);
   } else if (exception instanceof SirenNotFoundError) {
-    redirectSirenIntrouvable(res, siren, scope);
+    redirectSirenOrSiretIntrouvable(res, siren, { siren, ...scope });
   } else if (exception instanceof NotLuhnValidSirenError) {
-    redirectSirenInvalid(res, siren, scope);
+    redirectSirenOrSiretInvalid(res, siren, { siren, ...scope });
   } else if (exception instanceof NotASirenError) {
     redirectPageNotFound(res, siren, scope);
   } else {

@@ -1,19 +1,19 @@
 import React from 'react';
 
-import Page from '../../../layouts';
-import ButtonLink from '../../../components/button';
-import constants from '../../../constants';
+import Page from '../../layouts';
+import ButtonLink from '../../components/button';
+import constants from '../../constants';
 
-const SirenInvalidPage: React.FC = () => {
+const SirenOrSiretInvalidPage = () => {
   return (
-    <Page small={true} title="Numero Siren introuvable" noIndex={true}>
+    <Page small={true} title="Numero d’identification invalide" noIndex={true}>
       <div className="content-container text-wrapper">
-        <h1>⚠️ Attention : ce numéro siren est invalide</h1>
+        <h1>⚠️ Attention : ce numéro d’identification est invalide</h1>
         <div>
           <p>
-            Si vous voyez cette page, c'est que le numéro siren que vous
-            recherchez ressemble à un numéro siren par sa forme (9 chiffres)
-            mais qu'il ne respecte pas{' '}
+            Si vous voyez cette page, c'est que le numéro que vous recherchez
+            ressemble à un numéro siren/siret par sa forme (9 chiffres pour le
+            siren ou 14 chiffres pour le siret) mais qu'il ne respecte pas{' '}
             <a
               href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
               target="_blank"
@@ -29,10 +29,10 @@ const SirenInvalidPage: React.FC = () => {
           <ul>
             <li>
               Vérifiez que vous n'avez pas commis de faute de frappe en
-              recopiant le siren.
+              recopiant le numero.
             </li>
             <li>
-              Vérifiez ce siren auprès de l'organisme ou l'entreprise qui vous
+              Vérifiez ce numero auprès de l'organisme ou l'entreprise qui vous
               l'a transmis.
             </li>
           </ul>
@@ -50,4 +50,4 @@ const SirenInvalidPage: React.FC = () => {
   );
 };
 
-export default SirenInvalidPage;
+export default SirenOrSiretInvalidPage;

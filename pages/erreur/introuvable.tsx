@@ -1,31 +1,35 @@
 import React from 'react';
 
-import Page from '../../../layouts';
-import ButtonLink from '../../../components/button';
+import Page from '../../layouts';
+import ButtonLink from '../../components/button';
 
-const SiretNotFoundPage: React.FC<{}> = () => {
+const SirenOrSiretNotFoundPage = () => {
   return (
-    <Page small={true} title="Numero Siret introuvable" noIndex={true}>
+    <Page
+      small={true}
+      title="Numero d’identification introuvable"
+      noIndex={true}
+    >
       <div className="content-container">
-        <h1>Ce numéro SIRET est introuvable</h1>
+        <h1>Ce numéro d’identification (siren/siret) est introuvable</h1>
         <div>
           <p>Il existe plusieurs explications possibles :</p>
           <ul>
             <li>
-              Vous avez peut-être commis une erreur en tapant votre numéro SIRET
-              et celui-ci n'existe pas
+              Vous avez peut-être commis une erreur en tapant votre numéro
+              siren/siret et celui-ci n'existe pas
             </li>
             <li>
-              Ce SIRET fait peut-être référence à une entreprise{' '}
+              Ce numéro fait peut-être référence à une entreprise{' '}
               <a href="/faq">non-diffusible</a>.
             </li>
             <li>
-              Ce SIRET fait peut-être référence à une entité publique dont les
+              Ce numéro fait peut-être référence à une entité publique dont les
               informations sont protégées (Ministère de Défense, Gendarmerie,
               parlementaire etc.)
             </li>
             <li>
-              Ce SIRET fait référence à une entreprise crée récemment et{' '}
+              Ce numéro fait référence à une entreprise crée récemment et{' '}
               <a href="/faq">nos informations ne sont pas encore à jour</a>.
             </li>
           </ul>
@@ -39,4 +43,4 @@ const SiretNotFoundPage: React.FC<{}> = () => {
   );
 };
 
-export default SiretNotFoundPage;
+export default SirenOrSiretNotFoundPage;

@@ -32,43 +32,24 @@ export const redirectServerError = (
 /**
  * Siren/Siret is NOT valid
  */
-export const redirectSirenInvalid = (
+export const redirectSirenOrSiretInvalid = (
   res: ServerResponse,
-  siren: string,
+  sirenOrSiret: string,
   scope?: IScope
 ) => {
-  redirect(res, `/erreur/invalide/siren?q=${siren}`);
-  logWarningInSentry('Siren is invalid', { siren, ...scope });
+  redirect(res, `/erreur/invalide?q=${sirenOrSiret}`);
+  logWarningInSentry('Siren or siret is invalid', scope);
 };
-
-export const redirectSiretInvalid = (
-  res: ServerResponse,
-  siret: string,
-  scope?: IScope
-) => {
-  redirect(res, `/erreur/invalide/siret?q=${siret}`);
-  logWarningInSentry('Siret is invalid', { siret, ...scope });
-};
-
 /**
  * Siren/Siret is valid but not found
  */
-export const redirectSirenIntrouvable = (
+export const redirectSirenOrSiretIntrouvable = (
   res: ServerResponse,
-  siren: string,
+  sirenOrSiret: string,
   scope?: IScope
 ) => {
-  redirect(res, `/erreur/introuvable/siren?q=${siren}`);
-  logWarningInSentry('Siren not found', { siren, ...scope });
-};
-
-export const redirectSiretIntrouvable = (
-  res: ServerResponse,
-  siret: string,
-  scope?: IScope
-) => {
-  redirect(res, `/erreur/introuvable/siret?q=${siret}`);
-  logWarningInSentry('Siret not found', { siret, ...scope });
+  redirect(res, `/erreur/introuvable?q=${sirenOrSiret}`);
+  logWarningInSentry('Siren not found', scope);
 };
 
 export default redirect;
