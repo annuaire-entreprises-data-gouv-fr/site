@@ -12,11 +12,16 @@ import {
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
-import { HttpForbiddenError, HttpNotFound } from '../exceptions';
+import {
+  HttpForbiddenError,
+  HttpNotFound,
+  HttpServerError,
+} from '../exceptions';
 import routes from '../routes';
 
 interface IInseeEtablissementResponse {
   etablissement: IInseeEtablissement;
+  etablissements: IInseeEtablissement[];
 }
 interface IInseeEtablissementsResponse {
   header: { total: number; debut: number; nombre: number };
@@ -80,7 +85,15 @@ const getEtablissementFactory =
       credential
     );
 
-    const { etablissement } = response as IInseeEtablissementResponse;
+    const { etablissement, etablissements } =
+      response as IInseeEtablissementResponse;
+
+    if (!etablissement && etablissements) {
+      throw new HttpServerError(
+        500,
+        'INSEE returns multiple siret for one etablissement'
+      );
+    }
     return mapToDomainObject(etablissement);
   };
 

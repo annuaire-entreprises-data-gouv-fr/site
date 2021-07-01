@@ -55,10 +55,10 @@ const getEtablissementSireneOuverte = async (
 
     etablissement = result.etablissement[0];
     if (!etablissement) {
-      throw new Error();
+      throw new HttpNotFound(404, 'Not Found');
     }
   } catch (e) {
-    throw new HttpNotFound(404, siret);
+    throw new HttpNotFound(404, 'Not Found');
   }
 
   return mapSireneOuverteEtablissementToDomainObject(etablissement);

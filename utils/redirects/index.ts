@@ -49,7 +49,7 @@ export const redirectSirenOrSiretIntrouvable = (
   scope?: IScope
 ) => {
   redirect(res, `/erreur/introuvable?q=${sirenOrSiret}`);
-  logWarningInSentry('Siren not found', scope);
+  logWarningInSentry('Siren or siret not found', scope);
 };
 
 export default redirect;
