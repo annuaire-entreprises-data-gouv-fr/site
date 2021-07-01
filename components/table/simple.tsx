@@ -8,13 +8,13 @@ interface ISectionProps {
 
 export const CopyCell: React.FC<PropsWithChildren<{ className?: string }>> = ({
   children,
-  className,
+  className = '',
 }) => {
   const isCopyEnabled = typeof children === 'string';
   return (
     <td>
       <div
-        className={`${className} ${
+        className={`copy-wrapper ${className} ${
           isCopyEnabled ? 'copy-to-clipboard-anchor' : ''
         }`}
       >
@@ -33,10 +33,10 @@ export const CopyCell: React.FC<PropsWithChildren<{ className?: string }>> = ({
           background-color: #fff;
           padding-left: 30px;
         }
-        div {
+        div.copy-wrapper {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: start;
           cursor: ${isCopyEnabled ? 'pointer' : 'inherit'};
           position: relative;
         }
@@ -47,16 +47,18 @@ export const CopyCell: React.FC<PropsWithChildren<{ className?: string }>> = ({
           display: flex;
         }
         div > span.label {
-          position: absolute;
-          right: 0;
-          border-radius: 4px;
-          padding: 0 4px;
+          position: relative;
+          border-radius: 3px;
+          padding: 0 3px;
           height: 28px;
+          width: 75px;
+          flex-shrink: 0;
           border: 2px solid transparent;
           color: #000091;
-          margin-left: 20px;
+          margin-left: 12px;
           opacity: 0;
           background-color: #dfdff1;
+          font-size: 0.9rem;
         }
         div:hover > span.label {
           opacity: 1;
@@ -75,6 +77,8 @@ export const CopyCell: React.FC<PropsWithChildren<{ className?: string }>> = ({
           div {
             cursor: inherit;
           }
+        }
+        @media only screen and (min-width: 1px) and (max-width: 600px) {
           td {
             padding: 0;
             margin: 0;
