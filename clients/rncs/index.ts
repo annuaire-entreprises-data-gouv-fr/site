@@ -1,10 +1,13 @@
-import { fetchRncsImmatriculation } from './immatriculation';
-import routes from '../routes';
-import { HttpAuthentificationFailure } from '../exceptions';
+import { fetchRNCSImmatriculation } from './IMRJustificatif';
+import { fetchRNCSIMR } from './IMR';
+
 import httpClient from '../../utils/network/http';
+import { HttpAuthentificationFailure } from '../exceptions';
+import routes from '../routes';
+import { AxiosRequestConfig } from 'axios';
 
 /** Authenticate a user on opendata-rncs */
-const rncsAuth = async () => {
+const RNCSAuth = async () => {
   try {
     const login = process.env.INPI_LOGIN as string;
     const password = process.env.INPI_PASSWORD as string;
@@ -28,4 +31,19 @@ const rncsAuth = async () => {
   }
 };
 
-export { fetchRncsImmatriculation, rncsAuth };
+const RNCSClientWrapper = async (
+  route: string,
+  options?: AxiosRequestConfig
+) => {
+  const cookie = await RNCSAuth();
+  const response = await httpClient({
+    ...options,
+    url: route,
+    method: 'GET',
+    headers: { Cookie: cookie },
+  });
+
+  return response;
+};
+
+export { fetchRNCSImmatriculation, RNCSAuth, fetchRNCSIMR, RNCSClientWrapper };

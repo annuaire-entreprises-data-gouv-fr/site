@@ -1,7 +1,8 @@
 import { categoriesJuridiques } from './categories-juridiques';
 import { codesNaf } from './codes-NAF';
-import { codesEffectifs } from './code-effectifs';
-import { capitalize, formatNumbersFr } from '../helpers/formatting';
+import { codesEffectifs } from './codes-effectifs';
+import { codesVoies } from './codes-voie';
+import { capitalize } from '../helpers/formatting';
 
 export const libelleFromCodeNaf = (codeNaf: string, addCode = true) => {
   const formattedNaf = (codeNaf || '').replace(/[.-]/g, '');
@@ -9,9 +10,18 @@ export const libelleFromCodeNaf = (codeNaf: string, addCode = true) => {
   const label = codesNaf[formattedNaf] || 'Activité inconnue';
   return addCode && codeNaf ? `${codeNaf} - ${label}` : label;
 };
-export const libelleFromCodeEffectif = (codeEffectif: string) => {
+
+export const libelleFromCodeEffectif = (
+  codeEffectif: string,
+  anneeEffectif?: string
+) => {
   //@ts-ignore
-  return codesEffectifs[codeEffectif] || null;
+  const libelle = codesEffectifs[codeEffectif];
+
+  if (libelle && anneeEffectif) {
+    return `${libelle}, en ${anneeEffectif}`;
+  }
+  return libelle || null;
 };
 
 export const fullLibelleFromCodeNaf = (activite_principale: string) =>
@@ -49,6 +59,11 @@ const wrapWord = (word: string, caps = false, stop = ' ') => {
   return word.toLowerCase() + stop;
 };
 
+const libelleFromTypeVoie = (codeVoie: string) => {
+  //@ts-ignore
+  return codesVoies[codeVoie] || codeVoie;
+};
+
 export const formatAdresse = (
   numero_voie: string,
   indice_repetition: string,
@@ -66,9 +81,13 @@ export const formatAdresse = (
   ) {
     return '';
   }
+
+  const fullLibelleFromTypeVoie = libelleFromTypeVoie(type_voie);
   return `${wrapWord(numero_voie)}${wrapWord(indice_repetition)}${wrapWord(
-    type_voie
-  )}${wrapWord(libelle_voie, false, ', ')}${formatNumbersFr(
-    code_postal || ''
-  )} ${wrapWord(libelle_commune, true, '')}`;
+    fullLibelleFromTypeVoie
+  )}${wrapWord(libelle_voie, false, ', ')}${code_postal || ''} ${wrapWord(
+    libelle_commune,
+    true,
+    ''
+  )}`;
 };

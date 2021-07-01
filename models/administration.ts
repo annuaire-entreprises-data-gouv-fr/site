@@ -1,3 +1,5 @@
+import { cma, inpi } from '../public/static/logo';
+
 export enum EAdministration {
   INPI = 1,
   INSEE,
@@ -13,24 +15,32 @@ export interface IAdministrationsMetaData {
 export interface IAdministrationMetaData {
   long: string;
   short: string;
+  logo?: JSX.Element;
   monitoringSlug: string;
   slug: string;
-  adress: string;
-  loc: number[];
   description: string;
   contact: string;
   apiGouvLink?: string;
   apiName?: string;
   dataGouvLink?: string;
+  site?: string;
 }
+
+interface IAdministrationsLogos {
+  [key: string]: JSX.Element;
+}
+
+export const administrationsLogo: IAdministrationsLogos = {
+  [EAdministration.INPI]: inpi,
+  [EAdministration.CMAFRANCE]: cma,
+};
 
 export const administrationsMetaData: IAdministrationsMetaData = {
   [EAdministration.INPI]: {
     slug: 'inpi',
     short: 'INPI',
     long: 'Institut National de la Propriété Intellectuelle (INPI)',
-    adress: '15 rue des Minimes - CS50001 92677 Courbevoie Cedex',
-    loc: [48.9047703, 2.2606488],
+    site: 'https://data.inpi.fr',
     description: `## Qu'est-ce que l’INPI ?
 
 L’INPI est l’Institut National de la Protection Intellectuelle. C’est un établissement public à caractère administratif,  qui relève du ministère de l’Économie.
@@ -64,10 +74,8 @@ sont pas à jour ? 👉 [Contactez l’INPI pour demander une correction](https:
   [EAdministration.INSEE]: {
     slug: 'insee',
     short: 'INSEE',
-    long:
-      'Institut National de la Statistique et des Études Économiques (INSEE)',
-    adress: '',
-    loc: [],
+    site: 'https://www.sirene.fr/sirene/public/accueil',
+    long: 'Institut National de la Statistique et des Études Économiques (INSEE)',
     description: `## Qu'est-ce que l’INSEE ?
 
 L’INSEE est l’Institut National de la Statistique et des Études Économiques. C’est une direction générale du ministère des finances.
@@ -122,8 +130,6 @@ Si ce n'est pas suffisant, [contactez directement l'INSEE](https://www.insee.fr/
     slug: 'dila',
     short: 'DILA',
     long: 'Direction de l’Information Légale et Administrative (DILA)',
-    adress: '',
-    loc: [],
     description: `## Qu'est-ce que la DILA ?
 
 La DILA est la Direction de l'Information Légale et Administrative. C'est une administration publique française.
@@ -152,9 +158,8 @@ sont pas à jour ? 👉 [Contactez la DILA pour demander une correction](https:/
   [EAdministration.METI]: {
     slug: 'meti',
     short: 'METI',
+    site: 'https://code.travail.gouv.fr/outils/convention-collective',
     long: 'Ministère du Travail de l’Emploi et de l’Insertion (METI)',
-    adress: '',
-    loc: [],
     description: `
 ## Quelles sont les données des entreprises publiées par le ministère du travail ?
 
@@ -175,8 +180,6 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
     slug: 'mi',
     short: 'MI',
     long: 'Ministère de l’Intérieur (MI)',
-    adress: '',
-    loc: [],
     description: `
 ## Quelles sont les données des associations publiées par le ministère de l'Intérieur ?
 
@@ -205,9 +208,8 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
   [EAdministration.CMAFRANCE]: {
     slug: 'cma-france',
     short: 'CMA-France',
+    site: 'https://rnm.artisanat.fr/',
     long: 'Chambre des Métiers et de l’Artisanat (CMA-France)',
-    adress: '',
-    loc: [],
     description: `## Qu'est-ce que CMA-France ?
 
 CMA-France est l’organisme fédérateur des Chambres des Métiers et de l'Artisanat en France.

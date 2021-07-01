@@ -95,7 +95,7 @@ async function main() {
 
   [
     '/',
-    'donnees-extrait-kbis',
+    '/donnees-extrait-kbis',
     '/comment-ca-marche',
     '/rechercher',
     '/faq',

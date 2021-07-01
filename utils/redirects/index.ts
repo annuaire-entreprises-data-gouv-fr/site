@@ -37,7 +37,7 @@ export const redirectSirenInvalid = (
   siren: string,
   scope?: IScope
 ) => {
-  redirect(res, `/invalide/siren?q=${siren}`);
+  redirect(res, `/erreur/invalide/siren?q=${siren}`);
   logWarningInSentry('Siren is invalid', { siren, ...scope });
 };
 
@@ -46,7 +46,7 @@ export const redirectSiretInvalid = (
   siret: string,
   scope?: IScope
 ) => {
-  redirect(res, `/invalide/siret?q=${siret}`);
+  redirect(res, `/erreur/invalide/siret?q=${siret}`);
   logWarningInSentry('Siret is invalid', { siret, ...scope });
 };
 
@@ -58,7 +58,7 @@ export const redirectSirenIntrouvable = (
   siren: string,
   scope?: IScope
 ) => {
-  redirect(res, `/introuvable/siren?q=${siren}`);
+  redirect(res, `/erreur/introuvable/siren?q=${siren}`);
   logWarningInSentry('Siren not found', { siren, ...scope });
 };
 
@@ -67,7 +67,7 @@ export const redirectSiretIntrouvable = (
   siret: string,
   scope?: IScope
 ) => {
-  redirect(res, `/introuvable/siret?q=${siret}`);
+  redirect(res, `/erreur/introuvable/siret?q=${siret}`);
   logWarningInSentry('Siret not found', { siret, ...scope });
 };
 

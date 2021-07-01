@@ -6,7 +6,7 @@ const AvisSituation: React.FC<{ siret: string; label?: string }> = ({
 }) => (
   <a
     target="_blank"
-    rel="noopener noreferrer"
+    rel="noopener noreferrer nofollow"
     href={`https://api.avis-situation-sirene.insee.fr/identification/pdf/${siret}`}
   >
     {label || 'Avis de situation'}

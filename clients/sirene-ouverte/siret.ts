@@ -1,11 +1,12 @@
 import { IEtablissement } from '../../models';
+import { verifySiren, verifySiret } from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
 import { httpGet } from '../../utils/network/http';
-import { HttpNotFound, HttpServerError } from '../exceptions';
+import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 
 interface ISireneOuverteEtablissementResponse {
@@ -69,8 +70,8 @@ export const mapSireneOuverteEtablissementToDomainObject = (
   const estActif = etablissement.etat_administratif_etablissement === 'A';
   return {
     enseigne: etablissement.enseigne || null,
-    siren: etablissement.siren,
-    siret: etablissement.siret,
+    siren: verifySiren(etablissement.siren),
+    siret: verifySiret(etablissement.siret),
     nic: etablissement.nic,
     estActif,
     estSiege: etablissement.is_siege,

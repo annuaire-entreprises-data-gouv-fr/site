@@ -1,7 +1,6 @@
 import { IImmatriculationRNM } from '../../models/immatriculation';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { httpGet } from '../../utils/network/http';
-import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 
 export interface IApiRNMResponse {

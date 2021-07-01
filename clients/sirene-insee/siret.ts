@@ -1,3 +1,4 @@
+import { verifySiret } from '../../utils/helpers/siren-and-siret';
 import { inseeClientGet, INSEE_CREDENTIALS } from '.';
 import constants from '../../constants';
 import {
@@ -11,7 +12,7 @@ import {
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
-import { HttpForbiddenError } from '../exceptions';
+import { HttpForbiddenError, HttpNotFound } from '../exceptions';
 import routes from '../routes';
 
 interface IInseeEtablissementResponse {
@@ -28,6 +29,7 @@ interface IInseeEtablissement {
   etablissementSiege: string;
   statutDiffusionEtablissement: string;
   trancheEffectifsEtablissement: string;
+  anneeEffectifsEtablissement: string;
   dateCreationEtablissement: string;
   dateDernierTraitementEtablissement: string;
   activitePrincipaleRegistreMetiersEtablissement: string;
@@ -77,19 +79,28 @@ const getEtablissementFactory =
       routes.sireneInsee.siret + siret,
       credential
     );
-    const { etablissement } = response as IInseeEtablissementResponse;
 
+    const { etablissement } = response as IInseeEtablissementResponse;
     return mapToDomainObject(etablissement);
   };
 
 const mapToDomainObject = (
   inseeEtablissement: IInseeEtablissement
 ): IEtablissement => {
+  // There cases of inseeEtablissement undefined.
+  // For instance 89898637700015 that returns an etablissementS instead of etablissement and that also returns a different siren/siret
+  // as sirene.fr doesnot disply it, we dont either
+
+  if (!inseeEtablissement) {
+    throw new HttpNotFound(404, 'Not Found');
+  }
+
   const {
-    siret,
     nic,
+    siret,
     etablissementSiege,
     trancheEffectifsEtablissement,
+    anneeEffectifsEtablissement,
     dateCreationEtablissement,
     dateDernierTraitementEtablissement,
     adresseEtablissement,
@@ -118,7 +129,7 @@ const mapToDomainObject = (
   return {
     ...defaultEtablissement,
     siren: extractSirenFromSiret(siret),
-    siret,
+    siret: verifySiret(siret),
     nic,
     dateCreation: dateCreationEtablissement,
     activitePrincipale: activitePrincipaleEtablissement,
@@ -131,7 +142,8 @@ const mapToDomainObject = (
     dateFermeture,
     trancheEffectif: trancheEffectifsEtablissement,
     libelleTrancheEffectif: libelleFromCodeEffectif(
-      trancheEffectifsEtablissement
+      trancheEffectifsEtablissement,
+      anneeEffectifsEtablissement
     ),
     adresse: formatAdresse(
       adresseEtablissement.numeroVoieEtablissement,

@@ -43,3 +43,7 @@ yarn-error.log*
 
 # pm2 deploy
 ecosystem.config.js
+
+# direnv
+.nvmrc
+.envrc

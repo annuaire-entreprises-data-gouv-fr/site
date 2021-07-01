@@ -39,7 +39,9 @@ const DataSourceTooltip: React.FC<{
         <>
           <div>{dataSource.long}</div>
           <br />
-          <a href={`/administration/${dataSource.slug}`}>👉 En savoir plus</a>
+          <a rel="nofollow" href={`/administration/${dataSource.slug}`}>
+            👉 En savoir plus
+          </a>
         </>
       }
     >

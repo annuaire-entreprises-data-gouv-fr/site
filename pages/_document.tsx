@@ -9,13 +9,20 @@ class CustomHead extends Head {
     const res = super.render();
 
     function transform(node: any): any {
-      // remove all link preloads
-      if (
+      // remove link preloads and next.js script
+      const isLinkPreload =
         node &&
         node.type === 'link' &&
         node.props &&
-        node.props.rel === 'preload'
-      ) {
+        node.props.rel === 'preload';
+
+      const isNextScript =
+        node &&
+        node.type === 'script' &&
+        node.props &&
+        node.props.src.indexOf('/_next/static') > -1;
+
+      if (isLinkPreload || isNextScript) {
         return null;
       }
       if (node && node.props && node.props.children) {

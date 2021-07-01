@@ -1,15 +1,24 @@
 import { EAdministration } from './administration';
-import { IImmatriculation } from './immatriculation';
 
 export interface IAPINotRespondingError {
   administration: EAdministration;
-  type: 404 | 500;
+  errorType: 404 | 500 | number;
 }
 
-export const isAPINotRespondingError = (
-  toBeDetermined: IImmatriculation | IAPINotRespondingError
+export const APINotRespondingFactory = (
+  administration: EAdministration,
+  errorType = 500
+): IAPINotRespondingError => {
+  return {
+    administration,
+    errorType,
+  };
+};
+
+export const isAPINotResponding = (
+  toBeDetermined: any | IAPINotRespondingError
 ): toBeDetermined is IAPINotRespondingError => {
-  if ((toBeDetermined as IAPINotRespondingError).administration) {
+  if ((toBeDetermined as IAPINotRespondingError).errorType) {
     return true;
   }
   return false;

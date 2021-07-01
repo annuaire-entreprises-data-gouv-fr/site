@@ -1,6 +1,7 @@
 import constants from '../constants';
 import React, { PropsWithChildren } from 'react';
 import ButtonLink from '../components/button';
+import { DILA, INPI, INSEE, METI, CMA } from '../components/administrations';
 
 import Page from '../layouts';
 import NonDiffusible from '../components/non-diffusible';
@@ -124,7 +125,8 @@ const FAQ: React.FC<{}> = () => (
           </p>
           <p>
             La procédure s'appelle "changement de statut de diffusion" et elle
-            est à effectuer auprès de L'INSEE :
+            est à effectuer auprès de L'
+            <INSEE /> :
           </p>
           <div className="layout-center">
             <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
@@ -184,6 +186,12 @@ const FAQ: React.FC<{}> = () => (
           <p>
             Les données du moteur de recherche sont mises à jour tous les mois.
           </p>
+          <p>
+            Mais les données affichées sur chaque page entreprise sont mis à
+            jour en temps-réel. Les données proviennent des{' '}
+            <a href="/administration">services informatiques</a> des différentes
+            administrations concernées.
+          </p>
         </QuestionBlock>
         <QuestionBlock title="Comment puis-je utiliser ces données dans mon site internet ?">
           <p>
@@ -196,19 +204,50 @@ const FAQ: React.FC<{}> = () => (
             administration :
             <ul>
               <li>
-                <a href="/administration/inpi#acces">L’INPI</a>
+                L’
+                <INPI queryString="#acces" />
               </li>
               <li>
-                <a href="/administration/insee#acces">L’INSEE</a>
+                L’
+                <INSEE queryString="#acces" />
               </li>
               <li>
-                <a href="/administration/cma-france#acces">CMA-France</a>
+                <CMA queryString="#acces" />
               </li>
               <li>
-                <a href="/administration/meti#acces">Le Ministère du Travail</a>
+                Le <METI queryString="#acces" />
               </li>
               <li>
-                <a href="/administration/dila#acces">La DILA</a>
+                La <DILA queryString="#acces" />
+              </li>
+            </ul>
+          </p>
+        </QuestionBlock>
+        <QuestionBlock title="Existe-t-il une API Annuaire des Entreprises ?">
+          <p>
+            Toutes les données présentées sur le site sont collectées par API
+            auprès de chaque administration qui détient de la donnée pertinente.
+          </p>
+          <p>
+            Toutes ces API sont en open data et vous pouvez librement les
+            réutiliser :
+            <ul>
+              <li>
+                L’
+                <INPI queryString="#acces" />
+              </li>
+              <li>
+                L’
+                <INSEE queryString="#acces" />
+              </li>
+              <li>
+                <CMA queryString="#acces" />
+              </li>
+              <li>
+                Le <METI queryString="#acces" />
+              </li>
+              <li>
+                La <DILA queryString="#acces" />
               </li>
             </ul>
           </p>

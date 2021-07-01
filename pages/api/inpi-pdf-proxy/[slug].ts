@@ -4,10 +4,14 @@ import {
   HttpNotFound,
 } from '../../../clients/exceptions';
 import routes from '../../../clients/routes';
-import constants from '../../../constants';
 import { isSiren } from '../../../utils/helpers/siren-and-siret';
 import httpClient, { httpGet } from '../../../utils/network/http';
 import logErrorInSentry, { logWarningInSentry } from '../../../utils/sentry';
+
+/**
+ * INPI API can be very slow
+ */
+const INPI_TIMEOUT = 20000;
 
 /**
  * Call with authenticated cookies to get full pdf.
@@ -39,6 +43,7 @@ const proxyPdf = async (
           Cookie: getCookie(initialAuthData),
         },
         responseType: 'arraybuffer',
+        timeout: INPI_TIMEOUT,
       }
     );
     nextAPIResponse.setHeader('Content-Type', 'application/pdf');
@@ -48,9 +53,11 @@ const proxyPdf = async (
     );
     nextAPIResponse.status(200).send(response.data);
   } catch (e) {
-    console.log(e);
-    logErrorInSentry(e);
-    nextAPIResponse.status(500).json({ message: e });
+    logErrorInSentry(e.message || e);
+    nextAPIResponse.writeHead(302, {
+      Location: '/erreur/administration/inpi',
+    });
+    nextAPIResponse.end();
   }
 };
 
@@ -134,6 +141,7 @@ const getInitialAuthData = async (): Promise<IInitialAuth> => {
       url: routes.rncs.portail.login,
       method: 'POST',
       headers: DEFAULT_HEADERS,
+      timeout: INPI_TIMEOUT,
     });
 
     const cookies = response.headers['set-cookie'].join('');
@@ -175,6 +183,7 @@ const authenticateCookie = async (initialAuthData: IInitialAuth) => {
         Cookie: getCookie(initialAuthData),
       },
       data: getFormData(initialAuthData),
+      timeout: INPI_TIMEOUT,
     });
 
     const html = response.data;

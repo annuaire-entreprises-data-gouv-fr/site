@@ -1,8 +1,10 @@
 import React from 'react';
 import {
+  administrationsLogo,
   administrationsMetaData,
   EAdministration,
 } from '../../models/administration';
+import { formatDate } from '../../utils/helpers/formatting';
 import DataSourceTooltip from '../information-tooltip/data-source-tooltip';
 
 interface ISectionProps {
@@ -20,15 +22,23 @@ export const Section: React.FC<ISectionProps> = ({
   width = 100,
 }) => {
   const dataSource = source ? administrationsMetaData[source] : undefined;
+  const dataLogo = source ? administrationsLogo[source] : undefined;
+  const now = new Date();
   return (
     <>
       <div className="section-container" id={id}>
         <h2>{title}</h2>
         <div>{children}</div>
         {dataSource && (
-          <div className="data-source-tooltip-wrapper">
-            <DataSourceTooltip dataSource={dataSource} />
-          </div>
+          <>
+            <div className="data-source-tooltip-wrapper">
+              <DataSourceTooltip
+                dataSource={dataSource}
+                lastUpdatedAt={formatDate(now)}
+              />
+            </div>
+            {dataLogo && <div className="logo-wrapper">{dataLogo}</div>}
+          </>
         )}
       </div>
       <style jsx>{`
@@ -55,6 +65,25 @@ export const Section: React.FC<ISectionProps> = ({
           display: flex;
           justify-content: flex-end;
           margin-top: 15px;
+        }
+
+        .logo-wrapper {
+          position: absolute;
+          min-width: 70px;
+          max-width: 100px;
+          height: 30px;
+          max-height: 30px;
+          top: 16px;
+          right: 16px;
+        }
+        .logo-wrapper svg {
+          width: 100%;
+          height: 100%;
+        }
+        @media only screen and (min-width: 1px) and (max-width: 600px) {
+          .logo-wrapper {
+            display: none;
+          }
         }
       `}</style>
     </>

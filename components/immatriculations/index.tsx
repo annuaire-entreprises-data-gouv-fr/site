@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   IAPINotRespondingError,
-  isAPINotRespondingError,
+  isAPINotResponding,
 } from '../../models/api-not-responding';
 import {
   IImmatriculationRNCS,
@@ -21,10 +21,10 @@ const Immatriculations: React.FC<IProps> = ({
   immatriculationRNCS,
 }) => {
   const noImmatriculation =
-    isAPINotRespondingError(immatriculationRNM) &&
-    isAPINotRespondingError(immatriculationRNCS) &&
-    immatriculationRNCS.type === 404 &&
-    immatriculationRNM.type === 404;
+    isAPINotResponding(immatriculationRNM) &&
+    isAPINotResponding(immatriculationRNCS) &&
+    immatriculationRNCS.errorType === 404 &&
+    immatriculationRNM.errorType === 404;
 
   return (
     <>

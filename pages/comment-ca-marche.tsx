@@ -1,4 +1,5 @@
 import React from 'react';
+import { INSEE } from '../components/administrations';
 import ButtonLink from '../components/button';
 
 import Page from '../layouts';
@@ -61,7 +62,8 @@ const About: React.FC = () => {
             >
               base Sirene des entreprises
             </a>{' '}
-            publiée par l'INSEE, et accessible à tous.
+            publiée par l'
+            <INSEE />, et accessible à tous.
           </p>
           <h3>Les fiches d'immatriculation</h3>
           <p>
