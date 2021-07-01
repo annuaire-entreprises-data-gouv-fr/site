@@ -58,7 +58,11 @@ export const httpClientOAuthFactory = (
   client_id: string | undefined,
   client_secret: string | undefined
 ) => {
+<<<<<<< Updated upstream
   if (!client_id || !client_secret) {
+=======
+  if ((!client_id || !client_secret) && process.env.NODE_ENV === 'production') {
+>>>>>>> Stashed changes
     throw new HttpServerError(500, 'Client id or client secret is undefined');
   }
 
