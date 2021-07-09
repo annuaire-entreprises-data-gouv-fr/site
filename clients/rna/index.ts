@@ -1,7 +1,6 @@
 import { IAssociation } from '../../models';
 import { formatAdresse } from '../../utils/labels';
 import { httpGet } from '../../utils/network/http';
-import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 
 interface IAssociationResponse {

@@ -186,9 +186,9 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
     description: `
 ## Quelles sont les données des associations publiées par le ministère de l'Intérieur ?
 
-Le ministère du travail publie toutes les données des associations enregistrées dans le Répertoire National des Associations (RNA). Le RNA remplace depuis 2010 le répertoire Waldec (Web des associations librement déclarées).
+Le ministère de l’interieur publie toutes les données des associations enregistrées dans le [Répertoire National des Associations (RNA)](https://www.associations.gouv.fr/le-rna-repertoire-national-des-associations.html). Le RNA remplace depuis 2010 le répertoire Waldec (Web des associations librement déclarées).
 
-Toutes les associations sont référencées au RNA, mais seule une fraction d'entre elles ont un siret et sont enregistrées au répertoire Sirene de l'INSEE.
+Toutes les associations sont référencées au RNA, mais seule une partie d'entre elles ont un siret et sont enregistrées au répertoire Sirene de l'INSEE.
 
 Les associations doivent demander un siret dans les cas suivants :
 

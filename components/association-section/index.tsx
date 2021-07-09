@@ -1,7 +1,7 @@
 import React from 'react';
 import { IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
-import { formatDate, formatNumbersFr } from '../../utils/helpers/formatting';
+import { formatNumbersFr } from '../../utils/helpers/formatting';
 import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
@@ -18,6 +18,9 @@ const AssociationSection: React.FC<{
       'N° RNA (identifiant d’association)',
       formatNumbersFr(uniteLegale.association.id),
     ],
+    ['Nom', uniteLegale.association.nomComplet],
+    ['Objet', uniteLegale.association.objet],
+    ['Adresse', uniteLegale.association.adresse],
   ];
 
   return (
@@ -26,6 +29,11 @@ const AssociationSection: React.FC<{
         title={`Les informations au Répertoire National des Associations`}
         source={EAdministration.MI}
       >
+        <p>
+          Cette entité est inscrite au{' '}
+          <b>Répertoire National des Associations (RNA)</b>, qui contient les
+          informations suivantes&nbsp;
+        </p>
         <TwoColumnTable body={data} />
       </Section>
       <HorizontalSeparator />
