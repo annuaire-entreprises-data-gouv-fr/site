@@ -11,6 +11,10 @@ module.exports = {
       error_file: '/var/log/annuaire-entreprises/err.log',
       out_file: '/var/log/annuaire-entreprises/out.log',
       time: true,
+      env: {
+        NODE_ENV: 'production',
+        app_port: 3000,
+      },
     },
   ],
 };
