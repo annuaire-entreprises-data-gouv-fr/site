@@ -25,8 +25,8 @@ import {
 /**
  * Return an uniteLegale with RNA if
  */
-const getUniteLegaleWithRNAFromSlug = async (slug: string) => {
-  const uniteLegale = await getUniteLegaleFromSlug(slug);
+const getUniteLegaleWithRNAFromSlug = async (slug: string, page = 1) => {
+  const uniteLegale = await getUniteLegaleFromSlug(slug, page);
   if (uniteLegale.association && uniteLegale.association.id) {
     uniteLegale.association = {
       ...(await getAssociation(uniteLegale.association.id)),
