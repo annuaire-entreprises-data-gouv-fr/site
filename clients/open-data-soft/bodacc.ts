@@ -60,7 +60,7 @@ const mapToDomainObject = (annonce: IBodaccRecords): IAnnoncesBodacc => {
     tribunal: annonce.tribunal || '',
     numeroAnnonce: annonce.numeroannonce || 0,
     datePublication: formatDate(annonce.dateparution) || '',
-    details: extractDetails(annonce),
+    details: extractDetails(annonce) || '',
     path: `${routes.bodacc.site.annonce}${annonce.publicationavis}/${annonce.parution}/${annonce.numeroannonce}`,
   };
 };
@@ -73,18 +73,17 @@ const extractDetails = (annonce: IBodaccRecords): string => {
     }
     if ((annonce as IBodaccA).acte) {
       const acte = JSON.parse((annonce as IBodaccA).acte || '{}');
+
+      const detail = acte.creation?.categorieCreation; // || acte.descriptif; descriptif is usually very long
       const dateDebutActivite = formatDate(acte.dateCommencementActivite);
       const dateImmatriculation = formatDate(acte.dateImmatriculation);
-      if (acte.creation) {
-        return `${acte.creation.categorieCreation || ''} ${
-          dateImmatriculation ? `, immatriculée le ${dateImmatriculation}` : ''
-        } ${
-          dateDebutActivite
-            ? `, dont l'activité a commencé le ${dateDebutActivite}`
-            : ''
-        }`;
-      }
-      return acte.complementJugement;
+      return `${detail || ''} ${
+        dateImmatriculation ? `, immatriculée le ${dateImmatriculation}` : ''
+      } ${
+        dateDebutActivite
+          ? `, dont l'activité a commencé le ${dateDebutActivite}`
+          : ''
+      }`;
     }
 
     if ((annonce as IBodaccC).depot) {

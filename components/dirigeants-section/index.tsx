@@ -14,6 +14,22 @@ import routes from '../../clients/routes';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { INPI } from '../administrations';
 
+/**
+ * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts
+ * @param toBeDetermined
+ * @returns
+ */
+const isPersonneMorale = (
+  toBeDetermined: IEtatCivil | IPersonneMorale
+): toBeDetermined is IPersonneMorale => {
+  if (
+    (toBeDetermined as IPersonneMorale).siren ||
+    (toBeDetermined as IPersonneMorale).denomination
+  ) {
+    return true;
+  }
+  return false;
+};
 interface IProps {
   dirigeants: (IEtatCivil | IPersonneMorale)[] | IAPINotRespondingError;
   siren: Siren;
@@ -33,26 +49,10 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
       <AdministrationNotResponding
         administration={dirigeants.administration}
         errorType={dirigeants.errorType}
+        title="Les informations sur les dirigeants"
       />
     );
   }
-
-  /**
-   * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts
-   * @param toBeDetermined
-   * @returns
-   */
-  const isPersonneMorale = (
-    toBeDetermined: IEtatCivil | IPersonneMorale
-  ): toBeDetermined is IPersonneMorale => {
-    if (
-      (toBeDetermined as IPersonneMorale).siren ||
-      (toBeDetermined as IPersonneMorale).denomination
-    ) {
-      return true;
-    }
-    return false;
-  };
 
   const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
     if (isPersonneMorale(dirigeant)) {
@@ -113,7 +113,6 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
           ))}
         </>
       </Section>
-      <HorizontalSeparator />
       <style global jsx>{`
         table > tbody > tr > td:first-of-type {
           width: 30%;

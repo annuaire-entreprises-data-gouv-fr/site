@@ -20,7 +20,12 @@ const ImmatriculationRNCS: React.FC<IProps> = ({ immatriculation }) => {
     if (immatriculation.errorType === 404) {
       return null;
     }
-    return <AdministrationNotResponding {...immatriculation} />;
+    return (
+      <AdministrationNotResponding
+        {...immatriculation}
+        title="Justificatif d’immatriculation"
+      />
+    );
   }
   return (
     <>

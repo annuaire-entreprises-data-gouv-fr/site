@@ -79,15 +79,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         .filter((admin) => !!admin.monitoringSlug)
         .map(
           (admin) =>
-            new Promise(async (resolve) =>
+            new Promise(async (resolve) => {
+              const monitoring = await getMonitoring(admin.monitoringSlug);
               resolve({
-                ...(await getMonitoring(admin.monitoringSlug)),
+                ...monitoring,
                 short: admin.short,
                 apiGouvLink: admin.apiGouvLink || null,
                 slug: admin.slug,
                 apiName: admin.apiName,
-              })
-            )
+              });
+            })
         )
     );
 

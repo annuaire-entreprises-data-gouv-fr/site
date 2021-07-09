@@ -1,10 +1,11 @@
 import parser from 'fast-xml-parser';
-import { IDirigeant } from '../../models/dirigeants';
+import { IBeneficiaire, IDirigeant } from '../../models/dirigeants';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../../utils/sentry';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 
 import {
+  IRNCSBeneficiaireResponse,
   IRNCSRepresentantResponse,
   IRNCSResponse,
   IRNCSResponseDossier,
@@ -20,18 +21,13 @@ export const extractIMRFromXml = (responseAsXml: string, siren: Siren) => {
   try {
     const response = parseXmlToJson(responseAsXml);
     const dossiers = extractDossiers(response, siren);
-    const representants = dossiers.map(extractRepresentants);
+    const dirigeants = extractRepresentants(dossiers);
+    const beneficiaires = extractBeneficiaires(dossiers);
 
-    // filter correct representants
-    if (representants.length === 0) {
-      throw new HttpNotFound(404, 'No representant in IMR file');
-    }
-
-    const selectedRepresentant = representants.sort(
-      (a, b) => b.length - a.length
-    )[0];
-
-    return selectedRepresentant.map(mapRepresentantToDirigeants);
+    return {
+      dirigeants,
+      beneficiaires,
+    };
   } catch (e) {
     if (e instanceof HttpNotFound) {
       throw e;
@@ -68,14 +64,39 @@ const extractDossiers = (
   return dossiersWithRepresentants;
 };
 
-const extractRepresentants = (dossier: IRNCSResponseDossier) => {
-  const representant = ((dossier || {}).representants || {}).representant;
-  const isRepresentantAnArray = Array.isArray(representant);
-  const dirigeants = isRepresentantAnArray ? representant : [representant];
-  return dirigeants as IRNCSRepresentantResponse[];
+const selectRelevantRecord = (array: any[][]): any[] => {
+  if (array.length === 0) {
+    return [];
+  }
+
+  // if several possibilities, use the record with the most elements
+  return array.sort((a, b) => b.length - a.length)[0];
 };
 
-const mapRepresentantToDirigeants = (
+//==============
+// Representants
+//==============
+
+const extractRepresentants = (dossiers: IRNCSResponseDossier[]) => {
+  const representants = dossiers.reduce(
+    (aggregate: IRNCSRepresentantResponse[][], dossier) => {
+      const representant = dossier?.representants?.representant;
+      if (representant) {
+        const representantArray = Array.isArray(representant)
+          ? representant
+          : [representant];
+
+        aggregate.push(representantArray);
+      }
+
+      return aggregate;
+    },
+    []
+  );
+  return selectRelevantRecord(representants).map(mapToDomainDirigeant);
+};
+
+const mapToDomainDirigeant = (
   dirigeant: IRNCSRepresentantResponse
 ): IDirigeant => {
   const {
@@ -112,4 +133,40 @@ const mapRepresentantToDirigeants = (
       natureJuridique: form_jur || '',
     };
   }
+};
+
+//==============
+// Dirigeants
+//==============
+
+const extractBeneficiaires = (dossiers: IRNCSResponseDossier[]) => {
+  const beneficiaires = dossiers.reduce(
+    (aggregate: IRNCSBeneficiaireResponse[][], dossier) => {
+      const beneficiaire = dossier?.beneficiaires?.beneficiaire;
+      if (beneficiaire) {
+        const benef = Array.isArray(beneficiaire)
+          ? beneficiaire
+          : [beneficiaire];
+
+        aggregate.push(benef);
+      }
+
+      return aggregate;
+    },
+    []
+  );
+  return selectRelevantRecord(beneficiaires).map(mapToDomainBeneficiaires);
+};
+
+const mapToDomainBeneficiaires = (
+  beneficiaire: IRNCSBeneficiaireResponse
+): IBeneficiaire => {
+  const { nom_naissance, prenoms, date_naissance, nationalite } = beneficiaire;
+
+  return {
+    nom: nom_naissance || '',
+    prenoms: prenoms || '',
+    dateNaissance: (date_naissance || '').toString(),
+    nationalite: nationalite || '',
+  };
 };

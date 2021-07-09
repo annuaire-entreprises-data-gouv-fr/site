@@ -18,6 +18,9 @@ export interface IRNCSResponseDossier {
   representants: {
     representant: IRNCSRepresentantResponse | IRNCSRepresentantResponse[];
   };
+  beneficiaires: {
+    beneficiaire: IRNCSBeneficiaireResponse | IRNCSBeneficiaireResponse[];
+  };
 }
 
 export interface IRNCSRepresentantResponse {
@@ -33,6 +36,21 @@ export interface IRNCSRepresentantResponse {
   type: string;
 }
 
+export interface IRNCSBeneficiaireResponse {
+  type_entite: string; //'BE_SOC';
+  nom_naissance: string; //'Penchienati';
+  prenoms: string; //'Veronique Bianca';
+  date_naissance: string; //'01/1967';
+  nationalite: string; //'Française';
+  detention_pouvoir_decision_ag: boolean; //false;
+  deten_pvr_nom_membr_cons_admin: boolean; //false;
+  detent_autres_moyens_controle: boolean; //false;
+  benef_reprst_legal: boolean; //true;
+  rep_legal_placmt_ss_gest_deleg: boolean; //false;
+  date_greffe: string; //20210416;
+  date_integration: string; //20210416;
+}
+
 interface IZipFileAsBuffer {
   file: string;
   buffer: Buffer;
@@ -40,6 +58,37 @@ interface IZipFileAsBuffer {
 
 export const fetchRNCSIMR = async (siren: Siren) => {
   const IMRBuffer = await fetchIMRAsBuffer(siren);
+  const xmlResponse = await unzipTwiceIMR(IMRBuffer, siren);
+  return mapToDomainObject(xmlResponse, siren);
+};
+
+const mapToDomainObject = (
+  xmlResponse: string,
+  siren: Siren
+): { dirigeants: IDirigeant[]; beneficiaires: IDirigeant[] } => {
+  const { dirigeants, beneficiaires } = extractIMRFromXml(xmlResponse, siren);
+
+  return { dirigeants, beneficiaires };
+};
+
+const fetchIMRAsBuffer = async (siren: Siren) => {
+  const response = await RNCSClientWrapper(routes.rncs.api.imr.get + siren, {
+    responseType: 'arraybuffer',
+  });
+  const arrayBuffer = await response.data;
+  return Buffer.from(new Uint8Array(arrayBuffer));
+};
+
+/**
+ * Unzip twice and returns XML
+ * @param IMRBuffer
+ * @param siren
+ * @returns
+ */
+const unzipTwiceIMR = async (
+  IMRBuffer: Buffer,
+  siren: Siren
+): Promise<string> => {
   const unzippedIMR = await unZipFromBuffer(IMRBuffer);
 
   if (unzippedIMR.length > 2) {
@@ -59,23 +108,7 @@ export const fetchRNCSIMR = async (siren: Siren) => {
   }
 
   const extractedXMLBuffer = await unZipFromBuffer(zippedIMRFile.buffer);
-  const xmlResponse = extractedXMLBuffer[0].buffer.toString();
-
-  return mapToDomainObject(xmlResponse, siren);
-};
-
-const mapToDomainObject = (xmlResponse: string, siren: Siren): IDirigeant[] => {
-  const dirigeants = extractIMRFromXml(xmlResponse, siren);
-
-  return dirigeants;
-};
-
-const fetchIMRAsBuffer = async (siren: Siren) => {
-  const response = await RNCSClientWrapper(routes.rncs.api.imr.get + siren, {
-    responseType: 'arraybuffer',
-  });
-  const arrayBuffer = await response.data;
-  return Buffer.from(new Uint8Array(arrayBuffer));
+  return extractedXMLBuffer[0].buffer.toString();
 };
 
 const unZipFromBuffer = (buffer: Buffer): Promise<IZipFileAsBuffer[]> => {

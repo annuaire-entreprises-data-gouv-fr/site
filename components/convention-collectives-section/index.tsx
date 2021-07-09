@@ -20,6 +20,7 @@ const ConventionCollectivesSection: React.FC<{
       <AdministrationNotResponding
         administration={conventionCollectives.administration}
         errorType={conventionCollectives.errorType}
+        title="Conventions collectives"
       />
     );
   }

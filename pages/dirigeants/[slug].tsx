@@ -12,10 +12,15 @@ import {
   IDirigeants,
 } from '../../models/dirigeants';
 import DirigeantsSection from '../../components/dirigeants-section';
+import BeneficiairesSection from '../../components/beneficiaires-section';
 import { INPI, INSEE } from '../../components/administrations';
 import { isAPINotResponding } from '../../models/api-not-responding';
 
-const DirigeantsPage: React.FC<IDirigeants> = ({ uniteLegale, dirigeants }) => {
+const DirigeantsPage: React.FC<IDirigeants> = ({
+  uniteLegale,
+  dirigeants,
+  beneficiaires,
+}) => {
   const hasNoDirigeant =
     !uniteLegale.dirigeant &&
     isAPINotResponding(dirigeants) &&
@@ -47,6 +52,10 @@ const DirigeantsPage: React.FC<IDirigeants> = ({ uniteLegale, dirigeants }) => {
             )}
             <DirigeantsSection
               dirigeants={dirigeants}
+              siren={uniteLegale.siren}
+            />
+            <BeneficiairesSection
+              beneficiaires={beneficiaires}
               siren={uniteLegale.siren}
             />
           </>

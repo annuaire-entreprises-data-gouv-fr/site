@@ -24,6 +24,7 @@ const AnnoncesBodaccSection: React.FC<{
       <AdministrationNotResponding
         administration={annonces.administration}
         errorType={annonces.errorType}
+        title="Annonces BODACC"
       />
     );
   }

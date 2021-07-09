@@ -18,17 +18,17 @@ export interface IJustificatifs {
 const getJustificatifs = async (slug: string) => {
   const siren = verifySiren(slug);
 
-  const uniteLegale = await getUniteLegaleFromSlug(siren);
-
-  const justificatifs = await Promise.all([
-    getImmatriculationRNM(siren),
-    getImmatriculationRNCS(siren),
-  ]);
+  const [uniteLegale, immatriculationRNM, immatriculationRNCS] =
+    await Promise.all([
+      getUniteLegaleFromSlug(siren),
+      getImmatriculationRNM(siren),
+      getImmatriculationRNCS(siren),
+    ]);
 
   return {
     uniteLegale,
-    immatriculationRNM: justificatifs[0],
-    immatriculationRNCS: justificatifs[1],
+    immatriculationRNM,
+    immatriculationRNCS,
   };
 };
 

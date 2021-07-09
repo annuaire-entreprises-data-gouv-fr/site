@@ -4,13 +4,20 @@ import { IAPINotRespondingError } from '../../models/api-not-responding';
 import ButtonLink from '../button';
 import { Section } from '../section';
 
-const AdministrationNotResponding: React.FC<IAPINotRespondingError> = ({
+interface IProps extends IAPINotRespondingError {
+  title?: string;
+}
+
+const AdministrationNotResponding: React.FC<IProps> = ({
+  title,
   administration,
 }) => {
   const administrationMetaData = administrationsMetaData[administration] || {};
   return (
     <Section
-      title={`${administrationMetaData.long} : transmission des données hors-service 🛑`}
+      title={`${
+        title || administrationMetaData.long
+      } : transmission des données hors-service 🛑`}
       source={administration}
     >
       <p>
