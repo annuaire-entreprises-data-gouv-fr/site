@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'www',
-      cwd: '/opt/apps/annuaire-entreprises',
+      cwd: '/opt/apps/annuaire-entreprises/current',
       script: './node_modules/.bin/next',
       args: 'start -p 3000',
       exec_mode: 'cluster',
