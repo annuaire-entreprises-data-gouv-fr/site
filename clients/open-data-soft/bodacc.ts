@@ -1,5 +1,4 @@
-import { ModifierFlags } from 'typescript';
-import odsClient, { IODSResponse } from '.';
+import odsClient from '.';
 import { IAnnoncesBodacc } from '../../models/annonces-bodacc';
 import { formatDate } from '../../utils/helpers/formatting';
 import { Siren } from '../../utils/helpers/siren-and-siret';

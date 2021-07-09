@@ -29,7 +29,7 @@ export const CopyCell: React.FC<PropsWithChildren<{ className?: string }>> = ({
       <style jsx>{`
         td {
           width: auto;
-          padding: 5px;
+          padding: 3px;
           background-color: #fff;
           padding-left: 30px;
         }
@@ -132,7 +132,7 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => (
       td,
       th {
         border: none;
-        padding: 5px;
+        padding: 3px;
         background-color: #fff;
         padding-left: 30px;
       }
