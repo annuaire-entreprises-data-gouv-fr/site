@@ -1,5 +1,5 @@
 import { RNCSClientWrapper } from '.';
-import { IDirigeant } from '../../models/dirigeants';
+import { IBeneficiaire, IDirigeant } from '../../models/dirigeants';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import routes from '../routes';
 import yauzl from 'yauzl';
@@ -65,7 +65,7 @@ export const fetchRNCSIMR = async (siren: Siren) => {
 const mapToDomainObject = (
   xmlResponse: string,
   siren: Siren
-): { dirigeants: IDirigeant[]; beneficiaires: IDirigeant[] } => {
+): { dirigeants: IDirigeant[]; beneficiaires: IBeneficiaire[] } => {
   const { dirigeants, beneficiaires } = extractIMRFromXml(xmlResponse, siren);
 
   return { dirigeants, beneficiaires };

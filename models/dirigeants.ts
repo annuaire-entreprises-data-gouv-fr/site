@@ -38,7 +38,7 @@ export type IDirigeant = IEtatCivil | IPersonneMorale;
 export interface IDirigeants {
   uniteLegale: IUniteLegale;
   dirigeants: IDirigeant[] | IAPINotRespondingError;
-  beneficiaires: IDirigeant[] | IAPINotRespondingError;
+  beneficiaires: IBeneficiaire[] | IAPINotRespondingError;
 }
 
 export const getDirigeantsWithUniteLegaleFromSlug = async (slug: string) => {
