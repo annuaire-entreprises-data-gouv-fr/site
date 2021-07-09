@@ -12,17 +12,19 @@ describe('IMR XML parser', () => {
     );
 
     const result = extractIMRFromXml(okXML, dummySiren);
-
-    expect(result).toEqual([
-      {
-        prenom: 'Bilbon',
-        nom: 'Sacquet',
-        role: 'Président',
-        lieuNaissance: 'La Comté, Terre du Milieu',
-        dateNaissance: '2000',
-        sexe: null,
-      },
-    ]);
+    expect(result).toEqual({
+      beneficiaires: [],
+      dirigeants: [
+        {
+          prenom: 'Bilbon',
+          nom: 'Sacquet',
+          role: 'Président',
+          lieuNaissance: 'La Comté, Terre du Milieu',
+          dateNaissance: '2000',
+          sexe: null,
+        },
+      ],
+    });
   });
 
   it('parses the XML for company with several leaders including a company', () => {
@@ -33,22 +35,25 @@ describe('IMR XML parser', () => {
 
     const result = extractIMRFromXml(okXML, dummySiren);
 
-    expect(result).toEqual([
-      {
-        prenom: 'Bilbon',
-        nom: 'Sacquet',
-        role: 'Président',
-        lieuNaissance: 'La Comté, Terre du Milieu',
-        dateNaissance: '2000',
-        sexe: null,
-      },
-      {
-        denomination: 'Nazgul SAS',
-        natureJuridique: 'SAS',
-        siren: '356000000',
-        role: 'Président',
-      },
-    ]);
+    expect(result).toEqual({
+      beneficiaires: [],
+      dirigeants: [
+        {
+          prenom: 'Bilbon',
+          nom: 'Sacquet',
+          role: 'Président',
+          lieuNaissance: 'La Comté, Terre du Milieu',
+          dateNaissance: '2000',
+          sexe: null,
+        },
+        {
+          denomination: 'Nazgul SAS',
+          natureJuridique: 'SAS',
+          siren: '356000000',
+          role: 'Président',
+        },
+      ],
+    });
   });
 
   it('returns domain error when xml is invalid', () => {
