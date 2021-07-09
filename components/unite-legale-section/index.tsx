@@ -25,7 +25,7 @@ const UniteLegaleSection: React.FC<{
     ],
     ['N° TVA Intracommunautaire', formatNumbersFr(uniteLegale.numeroTva)],
     [
-      'Activité principale (du siège social)',
+      'Activité principale du siège social (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],

@@ -20,6 +20,13 @@ const routes = {
       },
     },
   },
+  bodacc: {
+    ods: 'https://bodacc-datadila.opendatasoft.com/api/records/1.0/search/?dataset=annonces-commerciales',
+    site: {
+      recherche: 'https://www.bodacc.fr/annonce/liste/',
+      annonce: 'https://www.bodacc.fr/annonce/detail-annonce/',
+    },
+  },
   sireneInsee: {
     siren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
     siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',

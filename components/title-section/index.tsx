@@ -10,9 +10,10 @@ import SocialMedia from '../social-media';
 export enum FICHE {
   INFORMATION = 'informations générales',
   JUSTIFICATIFS = 'justificatifs',
-  ANNONCES = 'annonces & conventions collectives',
+  ANNONCES = 'annonces',
   DIRIGEANTS = 'dirigeants',
   ACTES = 'actes & statuts',
+  DIVERS = 'conventions collectives',
 }
 interface IProps {
   ficheType?: FICHE;
@@ -50,7 +51,14 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         href={`/annonces/${siren}`}
         rel="nofollow"
       >
-        Annonces & conventions collectives
+        Annonces
+      </a>
+      <a
+        className={`${ficheType === FICHE.DIVERS && 'active'}`}
+        href={`/divers/${siren}`}
+        rel="nofollow"
+      >
+        Conventions collectives
       </a>
     </div>
 

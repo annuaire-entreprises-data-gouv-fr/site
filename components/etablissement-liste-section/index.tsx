@@ -26,7 +26,7 @@ const EtablissementListeSection: React.FC<{
         source={EAdministration.INSEE}
       >
         <FullTable
-          head={['SIRET', 'Activité (code NAF)', 'Adresse', 'Statut']}
+          head={['SIRET', 'Activité (NAF/APE)', 'Adresse', 'Statut']}
           body={uniteLegale.etablissements.map(
             (etablissement: IEtablissement) => [
               <a href={`/etablissement/${etablissement.siret}`}>

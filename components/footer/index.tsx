@@ -135,6 +135,11 @@ const Footer = () => (
             </a>
           </li>
           <li className="fr-footer__bottom-item">
+            <a className="fr-footer__bottom-link" href="/faq">
+              FAQ
+            </a>
+          </li>
+          <li className="fr-footer__bottom-item">
             <a className="fr-footer__bottom-link" href="/administration">
               Statut des API utilisées
             </a>

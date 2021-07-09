@@ -12,6 +12,7 @@ import AdministrationNotResponding from '../administration-not-responding';
 import { formatNumbersFr } from '../../utils/helpers/formatting';
 import routes from '../../clients/routes';
 import { Siren } from '../../utils/helpers/siren-and-siret';
+import { INPI } from '../administrations';
 
 interface IProps {
   dirigeants: (IEtatCivil | IPersonneMorale)[] | IAPINotRespondingError;
@@ -91,17 +92,10 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
         <>
           <p>
             Cette entité possède {dirigeants.length} dirigeant{plural}{' '}
-            enregistré{plural} au Registre National du Commerce et des Sociétés
-            (RNCS)&nbsp;:
-          </p>
-          {dirigeants.map((dirigeant, idx) => (
-            <React.Fragment key={'b' + idx}>
-              <TwoColumnTable body={formatDirigeant(dirigeant)} />
-              {dirigeants.length !== idx + 1 && <br />}
-            </React.Fragment>
-          ))}
-          <p>
-            Pour en savoir plus, vous pouvez consulter{' '}
+            enregistré{plural} au{' '}
+            <b>Registre National du Commerce et des Sociétés (RNCS)</b>{' '}
+            centralisé par l’
+            <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
             <a
               rel="referrer noopener nofollow"
               target="_blank"
@@ -109,9 +103,14 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
             >
               la page de cette entreprise
             </a>{' '}
-            sur le site de l’INPI.
+            sur le site de l’INPI&nbsp;:
           </p>
-          <div className="layout-center"></div>
+          {dirigeants.map((dirigeant, idx) => (
+            <React.Fragment key={'b' + idx}>
+              <TwoColumnTable body={formatDirigeant(dirigeant)} />
+              {dirigeants.length !== idx + 1 && <br />}
+            </React.Fragment>
+          ))}
         </>
       </Section>
       <HorizontalSeparator />

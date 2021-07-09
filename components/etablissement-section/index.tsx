@@ -23,12 +23,11 @@ const EtablissementSection: React.FC<IProps> = ({
   usedInEntreprisePage,
 }) => {
   const data = [
-    ['SIREN', formatNumbersFr(etablissement.siren)],
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
     ['N° TVA Intracommunautaire', formatNumbersFr(uniteLegale.numeroTva)],
     [
-      'Activité principale (établissement)',
+      'Activité principale de l’établissement (NAF/APE)',
       etablissement.libelleActivitePrincipale,
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],

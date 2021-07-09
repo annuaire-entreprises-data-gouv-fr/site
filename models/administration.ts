@@ -152,8 +152,11 @@ sont pas à jour ? 👉 [Contactez la DILA pour demander une correction](https:/
     `,
     contact:
       'https://www.dila.premier-ministre.gouv.fr/services/api/boamp/contact',
+    apiName: 'API BODACC',
+    apiGouvLink:
+      'https://api.gouv.fr/les-api/api-bulletin-annonces-civiles-commerciales-bodacc',
     dataGouvLink: 'https://www.data.gouv.fr/fr/organizations/premier-ministre/',
-    monitoringSlug: '',
+    monitoringSlug: '?m=788647353&_=1625749635935',
   },
   [EAdministration.METI]: {
     slug: 'meti',
