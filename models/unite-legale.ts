@@ -5,7 +5,6 @@ import {
   SirenNotFoundError,
 } from '.';
 import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
-import { getAssociation } from '../clients/rna';
 import {
   getUniteLegaleInsee,
   getUniteLegaleInseeWithFallbackCredentials,
@@ -21,6 +20,7 @@ import {
   logSecondSireneInseefailed,
   logSireneOuvertefailed,
 } from '../utils/sentry/helpers';
+import { getAssociation } from './association';
 
 /**
  * Return an uniteLegale with RNA if
@@ -29,7 +29,7 @@ const getUniteLegaleWithRNAFromSlug = async (slug: string, page = 1) => {
   const uniteLegale = await getUniteLegaleFromSlug(slug, page);
   if (uniteLegale.association && uniteLegale.association.id) {
     uniteLegale.association = {
-      ...(await getAssociation(uniteLegale.association.id)),
+      ...(await getAssociation(uniteLegale.association.id, uniteLegale.siren)),
       id: uniteLegale.association.id,
     };
   }

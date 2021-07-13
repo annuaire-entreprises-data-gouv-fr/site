@@ -9,18 +9,17 @@ import { TwoColumnTable } from '../table/simple';
 const AssociationSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  if (!uniteLegale.association || !uniteLegale.association.id) {
+  const { association } = uniteLegale;
+
+  if (!association || !association.id) {
     throw new Error('This component should never be rendered without a RNA ID');
   }
 
   const data = [
-    [
-      'N° RNA (identifiant d’association)',
-      formatNumbersFr(uniteLegale.association.id),
-    ],
-    ['Nom', uniteLegale.association.nomComplet],
-    ['Objet', uniteLegale.association.objet],
-    ['Adresse', uniteLegale.association.adresse],
+    ['N° RNA (identifiant d’association)', formatNumbersFr(association.id)],
+    ['Nom', association.nomComplet],
+    ['Objet', association.objet],
+    ['Adresse', association.adresse],
   ];
 
   return (
@@ -32,7 +31,7 @@ const AssociationSection: React.FC<{
         <p>
           Cette entité est inscrite au{' '}
           <b>Répertoire National des Associations (RNA)</b>, qui contient les
-          informations suivantes&nbsp;
+          informations suivantes&nbsp;:
         </p>
         <TwoColumnTable body={data} />
       </Section>
