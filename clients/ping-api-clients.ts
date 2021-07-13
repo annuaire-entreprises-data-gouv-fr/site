@@ -1,5 +1,5 @@
 import { verifySiren } from '../utils/helpers/siren-and-siret';
-import { getAssociation } from './rna';
+import { fetchAssociation } from './rna';
 import { fetchRNCSImmatriculation } from './rncs';
 import { fetchRnmImmatriculation } from './rnm';
 import { getUniteLegaleInseeWithFallbackCredentials } from './sirene-insee/siren';
@@ -27,7 +27,7 @@ const ping = async (slug: string | string[]) => {
     case 'api-sirene-donnees-ouvertes':
       return await getUniteLegaleSireneOuverte(verifySiren('880878145'));
     case 'api-rna':
-      return await getAssociation('W551000280');
+      return await fetchAssociation('W551000280');
     default:
       throw new APISlugNotFound(404, `API ping ${slug} not found`);
   }
