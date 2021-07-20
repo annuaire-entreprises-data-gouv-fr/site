@@ -16,15 +16,19 @@ const handleError = (error: AxiosError) => {
   const { config, response, message } = error;
 
   if (!response) {
-    if (message && message.indexOf('timeout of') > -1) {
-      throw new HttpTimeoutError(
-        504,
-        `${message} while querying ${config.url}`
-      );
+    if (message) {
+      if (message.indexOf('timeout of') > -1) {
+        throw new HttpTimeoutError(
+          504,
+          `${message} while querying ${config.url}`
+        );
+      } else {
+        throw new HttpServerError(500, message);
+      }
     } else {
       throw new HttpServerError(
         500,
-        `Unknown server error while querying ${config.url}. ${message}`
+        `Unknown server error while querying ${config.url}.`
       );
     }
   }
