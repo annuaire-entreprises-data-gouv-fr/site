@@ -22,11 +22,12 @@ module.exports = {
     staging: {
       user: 'machine_user',
       host: 'staging.annuaire-entreprises-infra.data.gouv.fr',
+      key: 'deploy.key',
       ref: 'origin/staging-deploy',
       repo: 'https://github.com/etalab/annuaire-entreprises.data.gouv.fr.git',
       path: '/opt/apps/annuaire-entreprises',
       'post-deploy':
-        'ln -sfn ../.env .env && npm install && npm run build-dev && /usr/local/lib/npm/bin/pm2 startOrRestart ecosystem.config.js --env production',
+        'ln -sfn ../.env .env && npm install && npm run build-dev && /usr/local/lib/npm/bin/pm2 startOrRestart ecosystem.config.js',
       env: {
         NODE_ENV: 'production',
       },
