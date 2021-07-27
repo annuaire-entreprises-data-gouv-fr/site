@@ -26,4 +26,4 @@ jobs:
         run: npm i pm2
 
       - name: Deploy
-        run: pm2 deploy ecosystem.config.js staging deploy
+        run: /usr/local/lib/npm/bin/pm2 deploy ecosystem.config.js staging deploy
