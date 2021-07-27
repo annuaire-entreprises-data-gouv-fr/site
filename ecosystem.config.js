@@ -20,7 +20,7 @@ module.exports = {
 
   deploy: {
     staging: {
-      user: 'machine_user',
+      user: 'www-data',
       host: 'staging.annuaire-entreprises-infra.data.gouv.fr',
       // key: 'deploy.key',
       key: '../annuaire-entreprises-infrastructure/gh_rsa',
