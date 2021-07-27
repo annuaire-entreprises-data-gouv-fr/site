@@ -17,4 +17,19 @@ module.exports = {
       },
     },
   ],
+
+  deploy: {
+    staging: {
+      user: 'www-data',
+      host: 'staging.annuaire-entreprises-infra.data.gouv.fr',
+      ref: 'origin/ansible-deployment',
+      repo: 'https://github.com/etalab/annuaire-entreprises.data.gouv.fr.git',
+      path: '/opt/apps/annuaire-entreprises',
+      'post-deploy':
+        'ln -sfn ../.env .env && npm install && npm run build-dev && /usr/local/lib/npm/bin/pm2 startOrRestart ecosystem.config.js --env production',
+      env: {
+        NODE_ENV: 'production',
+      },
+    },
+  },
 };
