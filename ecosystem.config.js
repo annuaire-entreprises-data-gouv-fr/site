@@ -22,8 +22,7 @@ module.exports = {
     staging: {
       user: 'www-data',
       host: 'staging.annuaire-entreprises-infra.data.gouv.fr',
-      // key: 'deploy.key',
-      key: '../annuaire-entreprises-infrastructure/gh_rsa',
+      key: 'deploy.key',
       ref: 'origin/staging-deploy',
       repo: 'https://github.com/etalab/annuaire-entreprises.data.gouv.fr.git',
       path: '/opt/apps/annuaire-entreprises',
