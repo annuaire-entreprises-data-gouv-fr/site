@@ -20,9 +20,9 @@ module.exports = {
 
   deploy: {
     staging: {
-      user: 'www-data',
+      user: 'machine_user',
       host: 'staging.annuaire-entreprises-infra.data.gouv.fr',
-      ref: 'origin/ansible-deployment',
+      ref: 'origin/staging-deploy',
       repo: 'https://github.com/etalab/annuaire-entreprises.data.gouv.fr.git',
       path: '/opt/apps/annuaire-entreprises',
       'post-deploy':
