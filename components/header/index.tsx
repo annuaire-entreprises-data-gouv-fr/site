@@ -20,7 +20,7 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
                 </div>
                 <div className="annuaire-logo">
                   <a href="/" title="L’Annuaire des Entreprises">
-                    <div>L’Annuaire des Entreprises - Tadaaaa</div>
+                    <div>L’Annuaire des Entreprises</div>
                   </a>
                 </div>
                 <div className="fr-header__navbar"></div>
