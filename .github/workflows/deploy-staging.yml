@@ -23,7 +23,7 @@ jobs:
           SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
 
       - name: Install PM2
-        run: npm i pm2
+        run: npm i -g pm2
 
       - name: Deploy
-        run: /usr/local/lib/npm/bin/pm2 deploy ecosystem.config.js staging deploy
+        run: pm2 deploy ecosystem.config.js staging deploy
