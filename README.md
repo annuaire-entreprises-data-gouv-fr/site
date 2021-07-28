@@ -13,6 +13,10 @@ Le moteur de recherche utilise une API dédiée dont le code est [disponible ici
 
 ## Statut
 
+**Déploiement**
+
+[![Deploy - Staging](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-staging.yml/badge.svg?branch=main)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-staging.yml)
+
 **Statut du site :**
 
 ![Page entreprise](https://img.shields.io/uptimerobot/status/m787859483-e754b64b78a0c30eea102880?label=Page%20entreprise&logo=Page%20entreprise)
