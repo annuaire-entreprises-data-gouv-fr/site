@@ -22,7 +22,7 @@ const logMem = () => {
   );
 };
 
-const path = process.env.NODE_ENV === 'production' ? '/tmp/build' : '.';
+const path = process.env.NODE_ENV === 'production' ? '.' : '.';
 
 const WEBSITE =
   process.env.SITE_URL || 'https://annuaire-entreprises.data.gouv.fr';

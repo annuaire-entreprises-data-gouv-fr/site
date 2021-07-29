@@ -27,7 +27,7 @@ module.exports = {
       repo: 'https://github.com/etalab/annuaire-entreprises.data.gouv.fr.git',
       path: '/opt/apps/annuaire-entreprises',
       'post-deploy':
-        'ln -sfn ../.env .env && npm install && npm run build-dev && /usr/local/lib/npm/bin/pm2 startOrRestart ecosystem.config.js',
+        'ln -sfn ../.env .env && npm install && npm run build && /usr/local/lib/npm/bin/pm2 startOrRestart ecosystem.config.js',
       env: {
         NODE_ENV: 'production',
       },
