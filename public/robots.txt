@@ -3,8 +3,15 @@ Sitemap: https://annuaire-entreprises.data.gouv.fr/sitemap.xml
 # Groupe 2
 User-agent: *
 Allow: /
+Allow: /entreprise/
+Allow: /administration/
+Allow: /etablissement/
 
 # Groupe 1
 User-agent: *
 Disallow: /api/
 Disallow: /rechercher/carte
+Disallow: /justificatif/
+Disallow: /annonces/
+Disallow: /carte/
+Disallow: /dirigeants/
