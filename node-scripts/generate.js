@@ -22,7 +22,7 @@ const logMem = () => {
   );
 };
 
-const path = process.env.NODE_ENV === 'production' ? '.' : '.';
+const workingPath = process.env.NODE_ENV === 'production' ? '.' : '.';
 
 const WEBSITE =
   process.env.SITE_URL || 'https://annuaire-entreprises.data.gouv.fr';
@@ -52,7 +52,7 @@ const saveSitemap = (indices, idx) => {
     .join('')}
       </urlset>`;
 
-  fs.writeFileSync(`${path}/public${getSitemap(idx)}`, index);
+  fs.writeFileSync(`${workingPath}/public${getSitemap(idx)}`, index);
 };
 
 const saveSitemapIndex = (indices) => {
@@ -69,7 +69,7 @@ const saveSitemapIndex = (indices) => {
     .join('')}
       </sitemapindex>`;
 
-  fs.writeFileSync(`${path}/public/sitemap.xml`, index);
+  fs.writeFileSync(`${workingPath}/public/sitemap.xml`, index);
 };
 
 async function main() {
