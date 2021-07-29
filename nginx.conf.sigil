@@ -48,7 +48,7 @@ server {
   location = /mirror {
     internal;
     resolver 8.8.8.8;
-    proxy_pass https://staging.annuaire-entreprises.data.gouv.fr$request_uri;
+    proxy_pass http://staging.annuaire-entreprises.data.gouv.fr$request_uri;
   }
 
   {{ if $.CLIENT_MAX_BODY_SIZE }}client_max_body_size {{ $.CLIENT_MAX_BODY_SIZE }};{{ end }}
@@ -123,7 +123,7 @@ server {
   location = /mirror {
     internal;
     resolver 8.8.8.8;
-    proxy_pass https://staging.annuaire-entreprises.data.gouv.fr$request_uri;
+    proxy_pass http://staging.annuaire-entreprises.data.gouv.fr$request_uri;
   }
 
 
