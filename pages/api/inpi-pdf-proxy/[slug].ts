@@ -53,10 +53,15 @@ const proxyPdf = async (
     );
     nextAPIResponse.status(200).send(response.data);
   } catch (e) {
-    logErrorInSentry(e.message || e);
+    logErrorInSentry('Error in INPI’s proxy PDF', {
+      siren,
+      details: e.message || e,
+    });
+
     nextAPIResponse.writeHead(302, {
       Location: '/erreur/administration/inpi',
     });
+
     nextAPIResponse.end();
   }
 };

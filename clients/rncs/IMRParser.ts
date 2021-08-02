@@ -54,13 +54,6 @@ const extractDossiers = (
     (element) => element.representants !== undefined
   );
 
-  if (dossiersWithRepresentants.length > 1) {
-    logWarningInSentry(
-      `${dossiersWithRepresentants.length} dossiers found in IMR`,
-      { siren }
-    );
-  }
-
   return dossiersWithRepresentants;
 };
 
