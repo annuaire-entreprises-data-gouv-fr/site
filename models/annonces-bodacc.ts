@@ -1,6 +1,5 @@
-import { IUniteLegale } from '.';
 import fetchAnnoncesBodacc from '../clients/open-data-soft/bodacc';
-import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
+import { verifySiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
 import {
@@ -26,8 +25,10 @@ const getAnnoncesBodaccFromSlug = async (
   try {
     return await fetchAnnoncesBodacc(siren);
   } catch (e) {
-    const errorMessage = `${siren} error in API BODACC : ${e}`;
-    logErrorInSentry(new Error(errorMessage), { siren });
+    logErrorInSentry(new Error('Error in API BODACC'), {
+      siren,
+      details: `${e}`,
+    });
     return APINotRespondingFactory(EAdministration.DILA, 500);
   }
 };

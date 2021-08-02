@@ -69,7 +69,10 @@ export const getDirigeantsFromImmatriculations = async (siren: Siren) => {
     if (e instanceof HttpNotFound) {
       return { dirigeants: notFound, beneficiaires: notFound };
     } else {
-      logWarningInSentry('IMR Fetching failed', { siren, details: e.message });
+      logWarningInSentry('Error in API INPI', {
+        siren,
+        details: `Dirigeants fetching failed : ${e.message || e}`,
+      });
       const error = APINotRespondingFactory(EAdministration.INPI, 500);
       return { dirigeants: error, beneficiaires: error };
     }
