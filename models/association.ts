@@ -6,7 +6,10 @@ const getAssociation = async (idRna: string, siren: Siren) => {
   try {
     return await fetchAssociation(idRna);
   } catch (e) {
-    logWarningInSentry(e.message, { siren, details: `n°RNA ${idRna}` });
+    logWarningInSentry('Id RNA not found', {
+      siren,
+      details: `n°RNA ${idRna} - ${e.message}`,
+    });
     return {};
   }
 };
