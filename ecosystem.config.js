@@ -32,5 +32,18 @@ module.exports = {
         NODE_ENV: 'production',
       },
     },
+    production: {
+      user: 'www-data',
+      host: 'production.annuaire-entreprises-infra.data.gouv.fr',
+      key: 'deploy.key',
+      ref: 'origin/main',
+      repo: 'https://github.com/etalab/annuaire-entreprises.data.gouv.fr.git',
+      path: '/opt/apps/annuaire-entreprises',
+      'post-deploy':
+        'ln -sfn ../.env .env && npm install && npm run build && /usr/local/lib/npm/bin/pm2 startOrRestart ecosystem.config.js',
+      env: {
+        NODE_ENV: 'production',
+      },
+    },
   },
 };
