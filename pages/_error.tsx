@@ -14,7 +14,9 @@ const ServerError: React.FC<{ statusCode: number }> = () => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const statusCode = context.res ? context.res.statusCode : 404;
 
-  logErrorInSentry(new Error(`Server Error (500) - unknown reason`));
+  logErrorInSentry(new Error(`Server Error (500) - unknown reason`), {
+    details: JSON.stringify(context.req),
+  });
 
   return {
     props: {
