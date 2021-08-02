@@ -103,7 +103,7 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
       await Promise.all([
         getUniteLegaleInsee(siren),
         getUniteLegaleSireneOuverte(siren, page).catch(() => null),
-        getAllEtablissementsInsee(siren),
+        getAllEtablissementsInsee(siren, page),
       ]);
 
     return mergeUniteLegaleFromBothApi(
