@@ -59,7 +59,7 @@ export const getImmatriculationRNCS = async (siren: Siren) => {
       return APINotRespondingFactory(EAdministration.INPI, 404);
     }
 
-    logErrorInSentry(new Error('Error in API RNCS'), {
+    logErrorInSentry(new Error('Error in API INPI'), {
       siren,
       details: JSON.stringify(e.message),
     });

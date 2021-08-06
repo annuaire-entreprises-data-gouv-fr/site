@@ -4,7 +4,7 @@ import InformationTooltip from '../information-tooltip';
 import { Section } from '../section';
 
 export const getUptimeColor = (ratio: IRatio) => {
-  if (ratio.label === 'black') {
+  if (!ratio.isActive) {
     return '#ddd';
   }
   const uptimeNum = parseFloat(ratio.ratio);
@@ -19,7 +19,7 @@ export const getUptimeColor = (ratio: IRatio) => {
   return '#df484a';
 };
 export const getUptimeLabel = (ratio: IRatio) => {
-  if (ratio.label === 'black') {
+  if (!ratio.isActive) {
     return 'Aucune donnée sur cette période.';
   }
   const uptimeNum = parseFloat(ratio.ratio);
@@ -51,7 +51,7 @@ const Metric: React.FC<{
             }
           >
             <div
-              className="serie"
+              className="serie-rectangle"
               style={{
                 backgroundColor: getUptimeColor(serie),
               }}
@@ -75,10 +75,21 @@ const Metric: React.FC<{
       }
 
       .serie {
-        height: 40px;
         width: 100%;
-        margin: 0 1.5px;
-        border-radius: 4px;
+        margin: 0;
+        padding: 0;
+      }
+      .serie-rectangle {
+        border-radius: 6px;
+        height: 40px;
+        margin: 3px 0;
+        transition: 100ms opacity ease-in-out;
+        border: 2px solid #fff;
+      }
+      .serie-rectangle:hover {
+        margin: 0;
+        opacity: 0.6;
+        height: 46px;
       }
 
       @media only screen and (min-width: 1px) and (max-width: 600px) {
@@ -87,9 +98,6 @@ const Metric: React.FC<{
         }
         .wrapper {
           flex-direction: column;
-        }
-        .uptime-chart {
-          margin-top: 10px;
         }
       }
     `}</style>

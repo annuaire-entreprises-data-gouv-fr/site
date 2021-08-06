@@ -13,9 +13,10 @@ import {
   redirectPageNotFound,
   redirectServerError,
 } from '../../utils/redirects';
-import getMonitoring, { IMonitoring } from '../../models/monitoring';
+import { getMonitoring, IMonitoring } from '../../models/monitoring';
 import AdministrationApiMonitoring from '../../components/administration-api-monitoring';
 import { HttpNotFound } from '../../clients/exceptions';
+import { Section } from '../../components/section';
 
 interface IProps extends IAdministrationMetaData {
   monitoring: IMonitoring;
@@ -29,6 +30,7 @@ const AdministrationPage: React.FC<IProps> = ({
   apiGouvLink,
   dataGouvLink,
   monitoring,
+  monitoringId,
 }) => (
   <Page
     small={true}
@@ -63,7 +65,15 @@ const AdministrationPage: React.FC<IProps> = ({
             </>
           )}
           <br />
-          {monitoring && <AdministrationApiMonitoring {...monitoring} />}
+          {monitoringId &&
+            (monitoring && monitoring.series ? (
+              <AdministrationApiMonitoring {...monitoring} />
+            ) : (
+              <Section title="Suivi des performances de l'API indisponible">
+                Notre service de suivi des performances est actuellement
+                hors-ligne. Nous sommes désolés pour ce dérangement.
+              </Section>
+            ))}
         </>
       )}
     </div>
@@ -88,9 +98,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       throw new HttpNotFound(404, `${slug}`);
     }
 
-    const monitoring = administration.monitoringSlug
-      ? await getMonitoring(administration.monitoringSlug)
+    const monitoring = administration.monitoringId
+      ? await getMonitoring(administration.monitoringId)
       : null;
+
     return { props: { ...administration, monitoring } };
   } catch (e) {
     if (e instanceof HttpNotFound) {

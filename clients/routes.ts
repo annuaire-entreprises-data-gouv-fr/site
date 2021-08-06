@@ -1,7 +1,5 @@
 const routes = {
-  monitoring: {
-    uptimeRobot: 'https://stats.uptimerobot.com/api/getMonitor/4GgkgUJWlv',
-  },
+  monitoring: 'https://api.uptimerobot.com/v2/getMonitors',
   rnm: `https://api-rnm.artisanat.fr/v2/entreprises/`,
   rna: {
     id: `https://entreprise.data.gouv.fr/api/rna/v1/id/`,

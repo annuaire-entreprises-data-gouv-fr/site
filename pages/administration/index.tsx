@@ -5,7 +5,7 @@ import Page from '../../layouts';
 
 import { administrationsMetaData } from '../../models/administration';
 import { redirectServerError } from '../../utils/redirects';
-import getMonitoring, { IMonitoring } from '../../models/monitoring';
+import { getMonitorings, IMonitoring } from '../../models/monitoring';
 import AdministrationApiMonitoring from '../../components/administration-api-monitoring';
 import { Section } from '../../components/section';
 
@@ -74,25 +74,29 @@ const StatusPage: React.FC<IProps> = ({ monitors }) => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   try {
-    const monitors = await Promise.all(
-      Object.values(administrationsMetaData)
-        .filter((admin) => !!admin.monitoringSlug)
-        .map(
-          (admin) =>
-            new Promise(async (resolve) => {
-              const monitoring = await getMonitoring(admin.monitoringSlug);
-              resolve({
-                ...monitoring,
-                short: admin.short,
-                apiGouvLink: admin.apiGouvLink || null,
-                slug: admin.slug,
-                apiName: admin.apiName,
-              });
-            })
-        )
+    const administrationsWithMonitor = Object.values(
+      administrationsMetaData
+    ).filter((admin) => !!admin.monitoringId);
+
+    const monitors = await getMonitorings(
+      administrationsWithMonitor.map((a) => a.monitoringId)
     );
 
-    return { props: { monitors } };
+    const monitorsAndMetaData = administrationsWithMonitor.map((admin) => {
+      const monitoring = monitors.find(
+        (monitor) => monitor.monitoringId === admin.monitoringId
+      );
+
+      return {
+        ...monitoring,
+        short: admin.short,
+        apiGouvLink: admin.apiGouvLink || null,
+        slug: admin.slug,
+        apiName: admin.apiName,
+      };
+    });
+
+    return { props: { monitors: monitorsAndMetaData } };
   } catch (e) {
     redirectServerError(context.res, e);
 

@@ -16,7 +16,7 @@ export interface IAdministrationMetaData {
   long: string;
   short: string;
   logo?: JSX.Element;
-  monitoringSlug: string;
+  monitoringId: number;
   slug: string;
   description: string;
   contact: string;
@@ -69,7 +69,7 @@ sont pas à jour ? 👉 [Contactez l’INPI pour demander une correction](https:
       'https://www.data.gouv.fr/fr/organizations/institut-national-de-la-propriete-industrielle-inpi/',
     apiGouvLink: 'https://api.gouv.fr/les-api/api-rncs',
     apiName: 'API Registre National du Commerce et des Sociétés',
-    monitoringSlug: '?m=787859523&_=1620298045458',
+    monitoringId: 787859523,
   },
   [EAdministration.INSEE]: {
     slug: 'insee',
@@ -124,7 +124,7 @@ Si ce n'est pas suffisant, [contactez directement l'INSEE](https://www.insee.fr/
       'https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/',
     apiGouvLink: 'https://api.gouv.fr/les-api/sirene_v3',
     apiName: 'API Répertoire Sirene',
-    monitoringSlug: '?m=787859514&_=1620298094400',
+    monitoringId: 787859514,
   },
   [EAdministration.DILA]: {
     slug: 'dila',
@@ -156,7 +156,7 @@ sont pas à jour ? 👉 [Contactez la DILA pour demander une correction](https:/
     apiGouvLink:
       'https://api.gouv.fr/les-api/api-bulletin-annonces-civiles-commerciales-bodacc',
     dataGouvLink: 'https://www.data.gouv.fr/fr/organizations/premier-ministre/',
-    monitoringSlug: '?m=788647353&_=1625749635935',
+    monitoringId: 788647353,
   },
   [EAdministration.METI]: {
     slug: 'meti',
@@ -177,7 +177,7 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/',
     apiName: 'API Conventions Collectives',
-    monitoringSlug: '?m=787859521&_=1620297978592',
+    monitoringId: 787859521,
   },
   [EAdministration.MI]: {
     slug: 'mi',
@@ -206,7 +206,7 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/',
     apiName: 'API Répertoire National des Associations',
-    monitoringSlug: '?m=788061105&_=1620298012257',
+    monitoringId: 788061105,
   },
   [EAdministration.CMAFRANCE]: {
     slug: 'cma-france',
@@ -229,6 +229,6 @@ sont pas à jour ? 👉 [Contactez la Chambre des Métiers et de l'Artisanat de 
     contact: 'http://annuairecma.artisanat.fr/',
     apiGouvLink: 'https://api.gouv.fr/les-api/api_rnm',
     apiName: 'API Répertoire National des Métiers',
-    monitoringSlug: '?m=787859525&_=1620298073800',
+    monitoringId: 787859525,
   },
 };

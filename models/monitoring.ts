@@ -1,13 +1,14 @@
-import { fetchApiMonitoring } from '../clients/monitoring';
+import { fetchMonitoring, fetchMonitorings } from '../clients/monitoring';
 import logErrorInSentry from '../utils/sentry';
 
 export interface IRatio {
   ratio: string;
-  label: 'success' | 'warning' | 'black';
+  isActive: boolean;
   date?: string;
 }
 export interface IMonitoring {
   isOnline: boolean;
+  monitoringId: number;
   uptime: {
     day: string;
     week: string;
@@ -17,15 +18,31 @@ export interface IMonitoring {
   series: IRatio[];
 }
 
-const getMonitoring = async (apiSlug: string): Promise<IMonitoring | null> => {
+const logError = (e: Error) =>
+  logErrorInSentry('Error while fecthing monitoring', {
+    details: e.message,
+  });
+
+const getMonitoring = async (
+  monitoringId: number
+): Promise<IMonitoring | null> => {
   try {
-    return await fetchApiMonitoring(apiSlug);
+    return await fetchMonitoring(monitoringId);
   } catch (e) {
-    logErrorInSentry('Error while fecthing monitoring from uptime robot', {
-      details: e.message,
-    });
+    logError(e);
     return null;
   }
 };
 
-export default getMonitoring;
+const getMonitorings = async (
+  monitoringIds: number[]
+): Promise<IMonitoring[]> => {
+  try {
+    return await fetchMonitorings(monitoringIds);
+  } catch (e) {
+    logError(e);
+    return [];
+  }
+};
+
+export { getMonitoring, getMonitorings };
