@@ -8,15 +8,13 @@ const IsActiveTag: React.FC<{
 }> = ({ isActive, isUniteLegale = false }) => (
   <>
     {isActive === null ? (
-      <>
-        <InformationTooltip
-          label="Nous n’avons pas les
+      <InformationTooltip
+        label="Nous n’avons pas les
             informations nécessaires pour savoir si cette entité est en activité
             ou si elle est fermée."
-        >
-          <Tag className="unknown">Etat inconnu</Tag>
-        </InformationTooltip>
-      </>
+      >
+        <Tag className="unknown">Etat inconnu</Tag>
+      </InformationTooltip>
     ) : isActive ? (
       <Tag className="open">en activité</Tag>
     ) : (

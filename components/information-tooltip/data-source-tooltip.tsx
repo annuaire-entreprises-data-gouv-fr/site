@@ -33,8 +33,7 @@ const DataSourceTooltip: React.FC<{
 }> = ({ dataSource, lastUpdatedAt }) => (
   <>
     <InformationTooltip
-      orientation="right"
-      offsetLeftpx={20}
+      orientation="center"
       label={
         <>
           <div>{dataSource.long}</div>

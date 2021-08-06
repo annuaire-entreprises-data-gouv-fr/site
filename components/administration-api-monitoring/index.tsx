@@ -3,7 +3,7 @@ import { IMonitoring, IRatio } from '../../models/monitoring';
 import InformationTooltip from '../information-tooltip';
 import { Section } from '../section';
 
-export const getUptimeColor = (ratio: IRatio) => {
+const getUptimeColor = (ratio: IRatio) => {
   if (!ratio.isActive) {
     return '#ddd';
   }
@@ -18,7 +18,8 @@ export const getUptimeColor = (ratio: IRatio) => {
   }
   return '#df484a';
 };
-export const getUptimeLabel = (ratio: IRatio) => {
+
+const getUptimeLabel = (ratio: IRatio) => {
   if (!ratio.isActive) {
     return 'Aucune donnée sur cette période.';
   }
@@ -33,15 +34,27 @@ export const getUptimeLabel = (ratio: IRatio) => {
   return `${ratio.ratio}% : service extrêmement perturbé`;
 };
 
+const getHideClasses = (index: number) => {
+  if (index > 70) {
+    return '';
+  } else if (index > 50) {
+    return 'hide-mobile';
+  } else {
+    return 'hide-mobile hide-tablet';
+  }
+};
+
 const Metric: React.FC<{
   series: IRatio[];
 }> = ({ series }) => (
-  <div className="wrapper">
+  <div className="series-wrapper">
     <div className="uptime-chart">
       {series.map((serie, index) => (
-        <div className={`serie ${index < 59 ? 'hide-mobile' : ''}`} key={index}>
+        <div className={`serie ${getHideClasses(index)}`} key={index}>
           <InformationTooltip
-            orientation={index < 70 ? 'left' : 'right'}
+            orientation={index < 76 ? 'left' : 'right'}
+            width={170}
+            inlineBlock={false}
             label={
               <>
                 <b>{serie.date}</b>
@@ -61,7 +74,7 @@ const Metric: React.FC<{
       ))}
     </div>
     <style jsx>{`
-      .wrapper {
+      .series-wrapper {
         display: flex;
         flex-direction: row;
       }
@@ -92,12 +105,14 @@ const Metric: React.FC<{
         height: 46px;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 600px) {
-        .hide-mobile {
+      @media only screen and (min-width: 550px) and (max-width: 700px) {
+        .hide-tablet {
           display: none;
         }
-        .wrapper {
-          flex-direction: column;
+      }
+      @media only screen and (min-width: 1px) and (max-width: 550px) {
+        .hide-mobile {
+          display: none;
         }
       }
     `}</style>
@@ -106,7 +121,10 @@ const Metric: React.FC<{
 
 const RobotTooltip = () => (
   <>
-    <InformationTooltip label="Ces données sont obtenues via un robot qui interroge la source de données toutes les 5 minutes">
+    <InformationTooltip
+      orientation="right"
+      label="Ces données sont obtenues via un robot qui interroge la source de données toutes les 5 minutes"
+    >
       <span className="fr-fi-information-line"></span>
     </InformationTooltip>
     <style jsx>{`

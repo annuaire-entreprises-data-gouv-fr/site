@@ -8,7 +8,6 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       <span>
         <InformationTooltip
           orientation="right"
-          offsetLeftpx={11}
           label="Partager la page de cette entreprise sur Linkedin"
         >
           <a
@@ -24,7 +23,6 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       <span>
         <InformationTooltip
           orientation="right"
-          offsetLeftpx={11}
           label="Partager la page de cette entreprise sur Twitter"
         >
           <a
@@ -40,7 +38,6 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       <span>
         <InformationTooltip
           orientation="right"
-          offsetLeftpx={11}
           label="Partager la page de cette entreprise sur Facebook"
         >
           <a
@@ -57,7 +54,6 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
         <InformationTooltip
           label="Télécharger un QR Code à inclure dans un courier ou dans un devis, pour partager cet url."
           orientation="right"
-          offsetLeftpx={11}
         >
           <a
             title="Partager cette page grâce à un QR Code"
