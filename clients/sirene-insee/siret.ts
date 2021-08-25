@@ -18,42 +18,7 @@ import {
   HttpServerError,
 } from '../exceptions';
 import routes from '../routes';
-
-interface IInseeEtablissementResponse {
-  etablissement: IInseeEtablissement;
-  etablissements: IInseeEtablissement[];
-}
-interface IInseeEtablissementsResponse {
-  header: { total: number; debut: number; nombre: number };
-  etablissements: IInseeEtablissement[];
-}
-
-interface IInseeEtablissement {
-  siret: string;
-  nic: string;
-  etablissementSiege: string;
-  statutDiffusionEtablissement: string;
-  trancheEffectifsEtablissement: string;
-  anneeEffectifsEtablissement: string;
-  dateCreationEtablissement: string;
-  dateDernierTraitementEtablissement: string;
-  activitePrincipaleRegistreMetiersEtablissement: string;
-  periodesEtablissement: {
-    dateFin: string;
-    dateDebut: string;
-    etatAdministratifEtablissement: string;
-    changementEtatAdministratifEtablissement: boolean;
-    activitePrincipaleEtablissement: string;
-  }[];
-  adresseEtablissement: {
-    numeroVoieEtablissement: string;
-    indiceRepetitionEtablissement: string;
-    typeVoieEtablissement: string;
-    libelleVoieEtablissement: string;
-    codePostalEtablissement: string;
-    libelleCommuneEtablissement: string;
-  };
-}
+import { IInseeEtablissement, IInseeEtablissementResponse } from './types';
 
 const getAllEtablissementsFactory =
   (credential: INSEE_CREDENTIALS) =>
@@ -69,11 +34,11 @@ const getAllEtablissementsFactory =
       credential
     );
 
-    const { header, etablissements } = response as IInseeEtablissementsResponse;
+    const { header, etablissements } = response as IInseeEtablissementResponse;
 
     return {
       currentEtablissementPage: page,
-      etablissements: etablissements.map(mapToDomainObject),
+      etablissements: etablissements.map(mapEtablissementToDomainObject),
       nombreEtablissements: header.total,
     };
   };
@@ -94,10 +59,10 @@ const getEtablissementFactory =
         'INSEE returns multiple siret for one etablissement'
       );
     }
-    return mapToDomainObject(etablissement);
+    return mapEtablissementToDomainObject(etablissement);
   };
 
-const mapToDomainObject = (
+export const mapEtablissementToDomainObject = (
   inseeEtablissement: IInseeEtablissement
 ): IEtablissement => {
   // There cases of inseeEtablissement undefined.

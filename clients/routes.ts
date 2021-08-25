@@ -28,6 +28,8 @@ const routes = {
   sireneInsee: {
     siren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
     siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',
+    siege:
+      'https://api.insee.fr/entreprises/sirene/V3/siret?q=etablissementSiege:true%20AND%20siren:',
     siretBySiren: 'https://api.insee.fr/entreprises/sirene/V3/siret?q=siren:',
     auth: 'https://api.insee.fr/token',
     avis: 'https://avis-situation-sirene.insee.fr/AvisPdf.action',

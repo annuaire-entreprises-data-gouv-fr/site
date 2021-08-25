@@ -6,8 +6,8 @@ import {
 } from '.';
 import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {
-  getUniteLegaleInsee,
-  getUniteLegaleInseeWithFallbackCredentials,
+  getUniteLegaleWithSiegeInsee,
+  getUniteLegaleWithSiegeInseeWithFallbackCredentials,
 } from '../clients/sirene-insee/siren';
 import {
   getAllEtablissementsInsee,
@@ -99,17 +99,20 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
   try {
     // INSEE does not provide enough information to paginate etablissement list
     // so we doubled our API call with sirene ouverte to get Etablissements.
-    const [uniteLegaleInsee, uniteLegaleSireneOuverte, allEtablissementsInsee] =
-      await Promise.all([
-        getUniteLegaleInsee(siren),
-        getUniteLegaleSireneOuverte(siren, page).catch(() => null),
-        getAllEtablissementsInsee(siren, page),
-      ]);
+    const [
+      uniteLegaleSireneOuverte,
+      allEtablissementsInsee,
+      uniteLegaleWithSiegeInsee,
+    ] = await Promise.all([
+      getUniteLegaleSireneOuverte(siren, page).catch(() => null),
+      getAllEtablissementsInsee(siren, page),
+      getUniteLegaleWithSiegeInsee(siren),
+    ]);
 
     return mergeUniteLegaleFromBothApi(
-      uniteLegaleInsee,
       uniteLegaleSireneOuverte,
-      allEtablissementsInsee
+      allEtablissementsInsee,
+      uniteLegaleWithSiegeInsee
     );
   } catch (e) {
     if (e instanceof HttpForbiddenError) {
@@ -125,15 +128,16 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
 const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
   try {
     // INSEE requires two calls to get uniteLegale with etablissements
-    const [uniteLegaleInsee, allEtablissementsInsee] = await Promise.all([
-      getUniteLegaleInseeWithFallbackCredentials(siren),
-      getAllEtablissementsInseeWithFallbackCredentials(siren),
-    ]);
+    const [allEtablissementsInsee, uniteLegaleWithSiegeInsee] =
+      await Promise.all([
+        getAllEtablissementsInseeWithFallbackCredentials(siren, page),
+        getUniteLegaleWithSiegeInseeWithFallbackCredentials(siren),
+      ]);
 
     return mergeUniteLegaleFromBothApi(
-      uniteLegaleInsee,
       null,
-      allEtablissementsInsee
+      allEtablissementsInsee,
+      uniteLegaleWithSiegeInsee
     );
   } catch (e) {
     if (e instanceof HttpForbiddenError) {
@@ -147,26 +151,19 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
  * Merge response form INSEE and Etalab, using best of both
  */
 const mergeUniteLegaleFromBothApi = (
-  uniteLegaleInsee: IUniteLegale,
   uniteLegaleSireneOuverte: IUniteLegale | null,
-  allEtablissementsInsee: IEtablissementsList
+  allEtablissementsInsee: IEtablissementsList,
+  uniteLegaleWithSiegeInsee: IUniteLegale
 ) => {
   const { nombreEtablissements, currentEtablissementPage, etablissements } =
     allEtablissementsInsee;
 
-  if (!uniteLegaleSireneOuverte) {
-    return {
-      ...uniteLegaleInsee,
-      etablissements,
-      currentEtablissementPage,
-      nombreEtablissements,
-    };
-  }
+  const chemin =
+    (uniteLegaleSireneOuverte || {}).chemin || uniteLegaleWithSiegeInsee.siren;
 
   return {
-    ...uniteLegaleInsee,
-    siege: uniteLegaleInsee.siege,
-    chemin: uniteLegaleSireneOuverte.chemin,
+    ...uniteLegaleWithSiegeInsee,
+    chemin,
     etablissements,
     currentEtablissementPage,
     nombreEtablissements,

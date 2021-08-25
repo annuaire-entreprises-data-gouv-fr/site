@@ -27,7 +27,10 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
   <Page
     small={true}
     title={`Entité - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
-    canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
+    canonical={
+      uniteLegale.chemin &&
+      `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`
+    }
     noIndex={
       uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
     }

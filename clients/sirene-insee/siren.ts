@@ -1,79 +1,52 @@
 import { inseeClientGet, INSEE_CREDENTIALS } from '.';
 import {
-  createDefaultEtablissement,
+  IEtablissement,
   createDefaultUniteLegale,
   IUniteLegale,
 } from '../../models';
-import { IEtatCivil } from '../../models/dirigeants';
-import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
-import { Siren, verifySiret } from '../../utils/helpers/siren-and-siret';
-import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
 import {
-  libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
-  libelleFromCodeNaf,
+  libelleFromCategoriesJuridiques,
 } from '../../utils/labels';
 import { HttpForbiddenError } from '../exceptions';
 import routes from '../routes';
+import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
+import { Siren } from '../../utils/helpers/siren-and-siret';
+import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
+import { IEtatCivil } from '../../models/dirigeants';
+import { mapEtablissementToDomainObject } from './siret';
+import {
+  IInseeEtablissementResponse,
+  IInseeetablissementUniteLegale,
+} from './types';
 
-interface IInseeUniteLegaleResponse {
-  uniteLegale: {
-    sigleUniteLegale: string;
-    dateCreationUniteLegale: string;
-    periodesUniteLegale: IPeriodeUniteLegale[];
-    dateDernierTraitementUniteLegale: string;
-    trancheEffectifsUniteLegale: string;
-    anneeEffectifsUniteLegale: string;
-    statutDiffusionUniteLegale: string;
-    prenom1UniteLegale: string;
-    sexeUniteLegale: 'M' | 'F';
-    identifiantAssociationUniteLegale: string | null;
+const getUniteLegaleWithSiegeFactory =
+  (credential: INSEE_CREDENTIALS) => async (siren: Siren) => {
+    const response = (await inseeClientGet(
+      routes.sireneInsee.siege + siren,
+      credential
+    )) as IInseeEtablissementResponse;
+
+    const siege = mapEtablissementToDomainObject(response.etablissements[0]);
+    const uniteLegale = mapUniteLegaleToDomainObject(
+      siren,
+      response.etablissements[0].uniteLegale,
+      siege
+    );
+    return {
+      ...uniteLegale,
+      siege,
+    };
   };
-}
-interface IPeriodeUniteLegale {
-  nicSiegeUniteLegale: string;
-  etatAdministratifUniteLegale: string;
-  economieSocialeSolidaireUniteLegale: string | null;
-  dateDebut: string;
-  activitePrincipaleUniteLegale: string;
-  categorieJuridiqueUniteLegale: string;
-  denominationUniteLegale: string;
-  nomUniteLegale: string;
-}
 
-/**
- * Call to Sirene INSEE API - can be used with the fallback token
- * @param siren
- * @param useInseeFallback
- * @returns
- */
-export const getUniteLegaleInsee = async (siren: Siren) => {
-  const request = await inseeClientGet(routes.sireneInsee.siren + siren);
-  const response = request as IInseeUniteLegaleResponse;
-
-  return mapToDomainObject(siren, response);
-};
-
-export const getUniteLegaleInseeWithFallbackCredentials = async (
-  siren: Siren
-) => {
-  const request = await inseeClientGet(
-    routes.sireneInsee.siren + siren,
-    INSEE_CREDENTIALS.FALLBACK
-  );
-  const response = request as IInseeUniteLegaleResponse;
-
-  return mapToDomainObject(siren, response);
-};
-
-const mapToDomainObject = (
+const mapUniteLegaleToDomainObject = (
   siren: Siren,
-  response: IInseeUniteLegaleResponse
+  response: IInseeetablissementUniteLegale,
+  siege: IEtablissement
 ): IUniteLegale => {
   const {
     sigleUniteLegale,
     dateCreationUniteLegale,
-    periodesUniteLegale,
     dateDernierTraitementUniteLegale,
     trancheEffectifsUniteLegale,
     anneeEffectifsUniteLegale,
@@ -81,41 +54,15 @@ const mapToDomainObject = (
     prenom1UniteLegale,
     sexeUniteLegale,
     identifiantAssociationUniteLegale,
-  } = response.uniteLegale;
-
-  const {
-    nicSiegeUniteLegale,
-    dateDebut,
-    activitePrincipaleUniteLegale = '',
     categorieJuridiqueUniteLegale,
     denominationUniteLegale,
     economieSocialeSolidaireUniteLegale,
     etatAdministratifUniteLegale,
     nomUniteLegale,
-  } = periodesUniteLegale[0];
+  } = response;
 
   if (statutDiffusionUniteLegale === 'N') {
     throw new HttpForbiddenError(403, 'Forbidden (non diffusible)');
-  }
-
-  const safeActivitePrincipaleUniteLegale = (
-    activitePrincipaleUniteLegale || ''
-  ).replace('.', '');
-
-  const siege = createDefaultEtablissement();
-
-  if (periodesUniteLegale && periodesUniteLegale.length > 0) {
-    siege.siren = siren;
-    siege.siret = verifySiret(siren + nicSiegeUniteLegale);
-    siege.nic = nicSiegeUniteLegale;
-    siege.estActif = null;
-    siege.dateCreation = dateDebut;
-    siege.activitePrincipale = safeActivitePrincipaleUniteLegale;
-    siege.libelleActivitePrincipale = libelleFromCodeNaf(
-      safeActivitePrincipaleUniteLegale
-    );
-    siege.estSiege = true;
-    siege.trancheEffectif = '';
   }
 
   const nomComplet = `${(
@@ -155,7 +102,7 @@ const mapToDomainObject = (
     dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
       'T'
     )[0],
-    dateDebutActivite: dateDebut,
+    dateDebutActivite: siege.dateDebutActivite || siege.dateFermeture || '',
     estActive: etatAdministratifUniteLegale === 'A',
     estDiffusible: statutDiffusionUniteLegale !== 'N',
     estEntrepreneurIndividuel,
@@ -170,3 +117,10 @@ const mapToDomainObject = (
     dirigeant: estEntrepreneurIndividuel ? dirigeant : null,
   };
 };
+
+export const getUniteLegaleWithSiegeInsee = getUniteLegaleWithSiegeFactory(
+  INSEE_CREDENTIALS.DEFAULT
+);
+
+export const getUniteLegaleWithSiegeInseeWithFallbackCredentials =
+  getUniteLegaleWithSiegeFactory(INSEE_CREDENTIALS.FALLBACK);
