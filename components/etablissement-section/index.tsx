@@ -88,17 +88,15 @@ const EtablissementSection: React.FC<IProps> = ({
             </p>
           )}
         </Section>
-        {etablissement.longitude && etablissement.latitude && (
-          <div className="map">
-            {map}
-            <div className="layout-center">
-              <ButtonLink href={`/carte/${etablissement.siret}`} alt nofollow>
-                {pin}
-                Afficher sur la carte
-              </ButtonLink>
-            </div>
+        <div className="map">
+          {map}
+          <div className="layout-center">
+            <ButtonLink href={`/carte/${etablissement.siret}`} alt nofollow>
+              {pin}
+              Afficher sur la carte
+            </ButtonLink>
           </div>
-        )}
+        </div>
       </div>
       <HorizontalSeparator />
       <style jsx>{`

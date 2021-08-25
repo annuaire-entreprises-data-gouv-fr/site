@@ -165,7 +165,7 @@ const mergeUniteLegaleFromBothApi = (
 
   return {
     ...uniteLegaleInsee,
-    siege: uniteLegaleSireneOuverte.siege,
+    siege: uniteLegaleInsee.siege,
     chemin: uniteLegaleSireneOuverte.chemin,
     etablissements,
     currentEtablissementPage,
