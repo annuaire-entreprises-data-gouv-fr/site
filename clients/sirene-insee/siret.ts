@@ -18,7 +18,11 @@ import {
   HttpServerError,
 } from '../exceptions';
 import routes from '../routes';
-import { IInseeEtablissement, IInseeEtablissementResponse } from './types';
+import {
+  IInseeEtablissement,
+  IInseeEtablissementResponse,
+  IInseeEtablissementsResponse,
+} from './types';
 
 const getAllEtablissementsFactory =
   (credential: INSEE_CREDENTIALS) =>
@@ -34,7 +38,7 @@ const getAllEtablissementsFactory =
       credential
     );
 
-    const { header, etablissements } = response as IInseeEtablissementResponse;
+    const { header, etablissements } = response as IInseeEtablissementsResponse;
 
     return {
       currentEtablissementPage: page,

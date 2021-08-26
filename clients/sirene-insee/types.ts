@@ -2,7 +2,7 @@ export interface IInseeEtablissementResponse {
   etablissement: IInseeEtablissement;
   etablissements: IInseeEtablissement[];
 }
-interface IInseeEtablissementsResponse {
+export interface IInseeEtablissementsResponse {
   header: { total: number; debut: number; nombre: number };
   etablissements: IInseeEtablissement[];
 }
