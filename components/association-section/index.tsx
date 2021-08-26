@@ -2,6 +2,7 @@ import React from 'react';
 import { IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
 import { formatNumbersFr } from '../../utils/helpers/formatting';
+import Warning from '../alerts/warning';
 import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
@@ -22,17 +23,28 @@ const AssociationSection: React.FC<{
     ['Adresse', association.adresse],
   ];
 
+  const notInRna =
+    !association.nomComplet && !association.objet && !association.adresse;
+
   return (
     <div id="entreprise">
       <Section
         title={`Les informations au Répertoire National des Associations`}
         source={EAdministration.MI}
       >
-        <p>
-          Cette entité est inscrite au{' '}
-          <b>Répertoire National des Associations (RNA)</b>, qui contient les
-          informations suivantes&nbsp;:
-        </p>
+        {notInRna ? (
+          <Warning>
+            Cette entité possède un identifiant d'assocation, mais aucune
+            information n'a été trouvée dans le{' '}
+            <b>Répertoire National des Associations (RNA)</b>.
+          </Warning>
+        ) : (
+          <p>
+            Cette entité est inscrite au{' '}
+            <b>Répertoire National des Associations (RNA)</b>, qui contient les
+            informations suivantes&nbsp;:
+          </p>
+        )}
         <TwoColumnTable body={data} />
       </Section>
       <HorizontalSeparator />

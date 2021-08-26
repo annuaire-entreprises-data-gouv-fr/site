@@ -8,7 +8,11 @@ import {
   libelleFromCodeEffectif,
   libelleFromCategoriesJuridiques,
 } from '../../utils/labels';
-import { HttpForbiddenError } from '../exceptions';
+import {
+  HttpForbiddenError,
+  HttpNotFound,
+  HttpServerError,
+} from '../exceptions';
 import routes from '../routes';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import { Siren } from '../../utils/helpers/siren-and-siret';
@@ -21,7 +25,8 @@ import {
 } from './types';
 
 const getUniteLegaleWithSiegeFactory =
-  (credential: INSEE_CREDENTIALS) => async (siren: Siren) => {
+  (credential: INSEE_CREDENTIALS) =>
+  async (siren: Siren): Promise<IUniteLegale> => {
     const response = (await inseeClientGet(
       routes.sireneInsee.siege + siren,
       credential
@@ -124,3 +129,28 @@ export const getUniteLegaleWithSiegeInsee = getUniteLegaleWithSiegeFactory(
 
 export const getUniteLegaleWithSiegeInseeWithFallbackCredentials =
   getUniteLegaleWithSiegeFactory(INSEE_CREDENTIALS.FALLBACK);
+
+/**
+ * Returns true if Siren is non-diffusible
+ * @param siren
+ * @returns
+ */
+export const checkInseeNonDiffusible = async (siren: Siren) => {
+  try {
+    const response = await inseeClientGet(
+      routes.sireneInsee.siren + siren,
+      INSEE_CREDENTIALS.FALLBACK
+    );
+    if (response.statutDiffusionUniteLegale === 'N') {
+      return true;
+    }
+    return false;
+  } catch (e) {
+    if (e instanceof HttpForbiddenError) {
+      return true;
+    }
+    // in this case either we got a 429 which is unlikely as we use fallback, or we got a 500 or a 404
+    // either cases we can consider it is not non-diffusible
+    return false;
+  }
+};

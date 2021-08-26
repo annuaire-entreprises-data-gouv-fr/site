@@ -6,6 +6,7 @@ import {
 } from '.';
 import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {
+  checkInseeNonDiffusible,
   getUniteLegaleWithSiegeInsee,
   getUniteLegaleWithSiegeInseeWithFallbackCredentials,
 } from '../clients/sirene-insee/siren';
@@ -59,13 +60,12 @@ const getUniteLegale = async (
     return await fetchUniteLegaleFromBothAPI(siren, page);
   } catch (e) {
     if (e instanceof HttpNotFound) {
-      throw new SirenNotFoundError(`Siren ${siren} was not found`);
+      return await handleInseeHttpNotFound(siren, e);
     }
-
     logFirstSireneInseefailed({ siren, details: e.message || e });
 
     try {
-      // in case sirene INSEE 403, fallback on Siren Etalab
+      // in case sirene INSEE 429 or 500, fallback on Siren Etalab
       return await getUniteLegaleSireneOuverte(siren, page);
     } catch (e) {
       logSireneOuvertefailed({ siren, details: e.message || e });
@@ -75,8 +75,8 @@ const getUniteLegale = async (
         // no pagination as this function is called when sirene etalab already failed
         return await fetchUniteLegaleFromInseeFallback(siren, page);
       } catch (e) {
-        if (e instanceof HttpForbiddenError) {
-          return createNonDiffusibleUniteLegale(siren);
+        if (e instanceof HttpNotFound) {
+          return await handleInseeHttpNotFound(siren, e);
         }
         logSecondSireneInseefailed({ siren, details: e.message || e });
 
@@ -168,6 +168,21 @@ const mergeUniteLegaleFromBothApi = (
     currentEtablissementPage,
     nombreEtablissements,
   };
+};
+
+/**
+ * In cas INSEE returns an HttpNotFound, check if Siren is non-diffusible
+ * @param siren
+ * @param e
+ * @returns
+ */
+const handleInseeHttpNotFound = async (siren: Siren, e: Error) => {
+  const isNonDiffusible = await checkInseeNonDiffusible(siren);
+  if (isNonDiffusible) {
+    return createNonDiffusibleUniteLegale(siren);
+  } else {
+    throw new SirenNotFoundError(`Siren ${siren} was not found`);
+  }
 };
 
 /**

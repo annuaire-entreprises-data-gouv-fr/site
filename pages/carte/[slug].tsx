@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { createDefaultEtablissement, IEtablissement } from '../../models';
+import { IEtablissement } from '../../models';
 import MapEtablissement from '../../components/mapbox/map-etablissement';
 import { getEtablissementWithLatLongFromSlug } from '../../models/etablissement';
 import { TitleEtablissement } from '../../components/title-etablissement-section';

@@ -24,10 +24,10 @@ export const redirectIfSiretOrSiren = (
   res: ServerResponse,
   siretOrSiren: string
 ) => {
-  if (hasSirenFormat(siretOrSiren)) {
-    redirect(res, `/entreprise/${siretOrSiren}`);
-  } else if (hasSiretFormat(siretOrSiren)) {
+  if (hasSiretFormat(siretOrSiren)) {
     redirect(res, `/etablissement/${siretOrSiren}`);
+  } else if (hasSirenFormat(siretOrSiren)) {
+    redirect(res, `/entreprise/${siretOrSiren}`);
   } else {
     throw new Error(`${siretOrSiren} is neither a siret or a siren`);
   }

@@ -1,9 +1,10 @@
+import { IdRna } from '../utils/helpers/id-rna';
 import { Siren, Siret } from '../utils/helpers/siren-and-siret';
 import { IEtatCivil } from './dirigeants';
 
 /** COMMON TYPES */
 export interface IAssociation {
-  id: string;
+  id: IdRna | string;
   exId?: string;
   nomComplet?: string;
   objet?: string;
@@ -171,6 +172,15 @@ export class NotLuhnValidSiretError extends Error {
  * This does not even look like a siret
  */
 export class NotASiretError extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+/**
+ * This is not a valid IdRna
+ */
+export class NotAValidIdRnaError extends Error {
   constructor(public message: string) {
     super();
   }
