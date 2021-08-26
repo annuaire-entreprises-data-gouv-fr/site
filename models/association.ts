@@ -18,6 +18,7 @@ const getAssociation = async (slug: string, siren: Siren) => {
     if (e instanceof HttpNotFound) {
       logWarningInSentry('Id RNA not found', more);
     } else if (e instanceof NotAValidIdRnaError) {
+      // no need to log warning or to make an api call, we know Id is not valid
       return {};
     } else {
       logErrorInSentry(new Error('Error in API RNA'), more);
