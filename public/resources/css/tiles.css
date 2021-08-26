@@ -1,5 +1,5 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 @charset "UTF-8";
 
@@ -39,7 +39,9 @@
 
 .fr-tile__link {
   display: inline-flex;
-  --is-link: false;
+  --link-underline: none;
+  --link-blank-font: none;
+  --link-blank-content: none;
   width: 100%;
 }
 
@@ -155,24 +157,24 @@
   background-color: var(--beige);
 }
 
-:root:not([data-fr-theme="dark" i]) .fr-tile.fr-enlarge-link {
+:root:not([data-fr-theme="dark"]) .fr-tile.fr-enlarge-link {
   --color-hover: rgba(224, 219, 208, 0.5);
   --color-active: rgba(199, 189, 170, 0.5);
 }
 
-:root:not([data-fr-theme="dark" i]) [class*="fr-scheme-light"] .fr-tile.fr-enlarge-link,
-:root:not([data-fr-theme="dark" i]) [class*="--scheme-light-"] .fr-tile.fr-enlarge-link {
+:root:not([data-fr-theme="dark"]) [class*="fr-scheme-light"] .fr-tile.fr-enlarge-link,
+:root:not([data-fr-theme="dark"]) [class*="--scheme-light-"] .fr-tile.fr-enlarge-link {
   --color-hover: rgba(224, 219, 208, 0.5);
   --color-active: rgba(199, 189, 170, 0.5);
 }
 
-:root:not([data-fr-theme="dark" i]) [class*="fr-scheme-dark"] .fr-tile.fr-enlarge-link,
-:root:not([data-fr-theme="dark" i]) [class*="--scheme-dark-"] .fr-tile.fr-enlarge-link {
+:root:not([data-fr-theme="dark"]) [class*="fr-scheme-dark"] .fr-tile.fr-enlarge-link,
+:root:not([data-fr-theme="dark"]) [class*="--scheme-dark-"] .fr-tile.fr-enlarge-link {
   --color-hover: rgba(79, 79, 79, 0.5);
   --color-active: rgba(115, 115, 115, 0.5);
 }
 
-:root[data-fr-theme="dark" i] .fr-tile.fr-enlarge-link {
+:root[data-fr-theme="dark"] .fr-tile.fr-enlarge-link {
   --color-hover: rgba(79, 79, 79, 0.5);
   --color-active: rgba(115, 115, 115, 0.5);
 }

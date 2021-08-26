@@ -1,5 +1,5 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 @charset "UTF-8";
 
@@ -22,7 +22,7 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
 }
 
 .fr-breadcrumb__button {
-  box-shadow: 0 1px 0 0 currentColor;
+  box-shadow: var(--link-underline);
   font-size: 0.75rem;
   line-height: 1.25rem;
   margin: 0;
@@ -30,7 +30,7 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
   color: inherit;
 }
 
-.fr-breadcrumb__button[aria-expanded="true" i] {
+.fr-breadcrumb__button[aria-expanded="true"] {
   display: none;
 }
 
@@ -43,7 +43,13 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
 }
 
 .fr-breadcrumb__list {
-  --is-list: false;
+  --ul-type: none;
+  --ol-type: none;
+  --ul-start: 0;
+  --ol-start: 0;
+  --xl-block: 0;
+  --li-bottom: 0;
+  --ol-content: none;
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -66,17 +72,8 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
 }
 
 .fr-breadcrumb__link:not([aria-current])::after {
-  font-family: icons !important;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-}
-
-.fr-breadcrumb__link:not([aria-current])::after {
-  font-size: 1rem;
-  content: "";
+  font: normal normal normal 1rem/1 dsfr-icons;
+  content: "";
 }
 
 .fr-breadcrumb__link:not([aria-current])::after {
@@ -87,7 +84,9 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
 }
 
 .fr-breadcrumb__link[aria-current] {
-  --is-link: false;
+  --link-underline: none;
+  --link-blank-font: none;
+  --link-blank-content: none;
   pointer-events: none;
   cursor: default;
 }
@@ -119,13 +118,13 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
     padding-left: 0;
     padding-right: 0;
     transform: none;
-    visibility: visible;
+    visibility: inherit;
     overflow: visible;
     max-height: initial;
   }
 
   .fr-breadcrumb .fr-collapse::before {
-    display: none;
+    content: none;
   }
 
   .fr-breadcrumb__list {

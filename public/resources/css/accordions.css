@@ -1,22 +1,11 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 @charset "UTF-8";
 
 /* ------------------------------------ *\
   ACCORDIONS
 \* ------------------------------------ */
-
-.fr-accordion .fr-accordion__btn {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.fr-accordion .fr-accordion__btn {
-  overflow: hidden;
-  z-index: 1;
-}
 
 .fr-accordion {
   position: relative;
@@ -29,54 +18,62 @@
   line-height: unset;
 }
 
-.fr-accordion .fr-accordion__btn {
+.fr-accordion__btn {
+  --link-underline: none;
+  --link-blank-font: none;
+  --link-blank-content: none;
+  margin: 0;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  z-index: 1;
   font-size: 1rem;
   line-height: 1.5rem;
   min-height: 3rem;
   padding: 0.75rem 1rem;
+  flex-direction: row-reverse;
+  overflow: initial;
   max-width: none;
   max-height: none;
-  flex-direction: row-reverse;
   width: 100%;
   text-align: left;
   margin: 0;
   padding: 0.75rem 0;
 }
 
-.fr-accordion .fr-accordion__btn::before {
-  font-family: icons !important;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
+.fr-accordion__btn::before {
+  font: normal normal normal 1.5rem/1 dsfr-icons;
+  content: "";
 }
 
-.fr-accordion .fr-accordion__btn::before {
-  content: "";
-}
-
-.fr-accordion .fr-accordion__btn::before {
+.fr-accordion__btn::before {
   margin-right: -0.25rem;
   margin-left: 0.25rem;
   font-size: 1rem;
 }
 
-.fr-accordion .fr-accordion__btn::before {
+.fr-accordion__btn::before {
   margin-right: 0;
   margin-left: auto;
 }
 
-.fr-accordion .fr-accordion__btn[aria-expanded="true" i] {
+.fr-accordion__btn[aria-expanded="true"] {
   font-weight: 700;
 }
 
-.fr-accordion .fr-accordion__btn[aria-expanded="true" i]::before {
-  content: "";
+.fr-accordion__btn[aria-expanded="true"]::before {
+  content: "";
 }
 
 .fr-accordion .fr-collapse {
-  --is-list:  ;
+  --ul-type: "●\00a0\00a0";
+  --ol-type: decimal;
+  --ul-start: 1rem;
+  --ol-start: 1.5rem;
+  --xl-block: 0.5rem;
+  --li-bottom: 0.25rem;
+  --xl-base: 1em;
+  --ol-content: counters(li-counter, ".") ".\00a0\00a0";
   transition: visibility 0.3s, padding 0.3s;
 }
 
@@ -86,7 +83,13 @@
 }
 
 .fr-accordions-group {
-  --is-list: false;
+  --ul-type: none;
+  --ol-type: none;
+  --ul-start: 0;
+  --ol-start: 0;
+  --xl-block: 0;
+  --li-bottom: 0;
+  --ol-content: none;
 }
 
 .fr-accordions-group > * > .fr-accordion, .fr-accordions-group > .fr-accordion {
@@ -102,30 +105,30 @@
   background-color: var(--t-plain);
 }
 
-:root:not([data-fr-theme="dark" i]) .fr-accordion .fr-accordion__btn {
+:root:not([data-fr-theme="dark"]) .fr-accordion .fr-accordion__btn {
   --color-hover: var(--block-color-hover);
   --color-active: var(--block-color-active);
 }
 
-:root:not([data-fr-theme="dark" i]) [class*="fr-scheme-light"] .fr-accordion .fr-accordion__btn,
-:root:not([data-fr-theme="dark" i]) [class*="--scheme-light-"] .fr-accordion .fr-accordion__btn {
+:root:not([data-fr-theme="dark"]) [class*="fr-scheme-light"] .fr-accordion .fr-accordion__btn,
+:root:not([data-fr-theme="dark"]) [class*="--scheme-light-"] .fr-accordion .fr-accordion__btn {
   --color-hover: var(--block-color-hover);
   --color-active: var(--block-color-active);
 }
 
-:root:not([data-fr-theme="dark" i]) [class*="fr-scheme-dark"] .fr-accordion .fr-accordion__btn,
-:root:not([data-fr-theme="dark" i]) [class*="--scheme-dark-"] .fr-accordion .fr-accordion__btn {
+:root:not([data-fr-theme="dark"]) [class*="fr-scheme-dark"] .fr-accordion .fr-accordion__btn,
+:root:not([data-fr-theme="dark"]) [class*="--scheme-dark-"] .fr-accordion .fr-accordion__btn {
   --color-hover: var(--block-color-hover);
   --color-active: var(--block-color-active);
 }
 
-:root[data-fr-theme="dark" i] .fr-accordion .fr-accordion__btn {
+:root[data-fr-theme="dark"] .fr-accordion .fr-accordion__btn {
   --color-hover: var(--block-color-hover);
   --color-active: var(--block-color-active);
 }
 
 @media (min-width: 48em) {
-  .fr-accordion .fr-accordion__btn {
+  .fr-accordion__btn {
     padding: 0.75rem 1rem;
   }
 

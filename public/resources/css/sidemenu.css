@@ -1,5 +1,5 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 @charset "UTF-8";
 
@@ -8,8 +8,16 @@
 \* ------------------------------------ */
 
 .fr-sidemenu {
-  --is-list: false;
-  --is-link: false;
+  --ul-type: none;
+  --ol-type: none;
+  --ul-start: 0;
+  --ol-start: 0;
+  --xl-block: 0;
+  --li-bottom: 0;
+  --ol-content: none;
+  --link-underline: none;
+  --link-blank-font: none;
+  --link-blank-content: none;
   position: relative;
   box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.1), 0 8px 16px -16px rgba(0, 0, 0, 0.32);
   margin-left: -1rem;
@@ -118,28 +126,19 @@
     */
 }
 
-.fr-sidemenu__btn::before, .fr-sidemenu__inner > .fr-sidemenu__btn::after {
-  font-family: icons !important;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-}
-
 .fr-sidemenu__btn::before {
-  font-size: 1rem;
-  content: "";
+  font: normal normal normal 1rem/1 dsfr-icons;
+  content: "";
   margin-left: auto;
   margin-right: 0;
   transition: transform 0.3s;
 }
 
-.fr-sidemenu__btn[aria-expanded="true" i] {
+.fr-sidemenu__btn[aria-expanded="true"] {
   border: 0;
 }
 
-.fr-sidemenu__btn[aria-expanded="true" i]::before {
+.fr-sidemenu__btn[aria-expanded="true"]::before {
   transform: rotate(-180deg);
 }
 
@@ -156,8 +155,8 @@
 }
 
 .fr-sidemenu__inner > .fr-sidemenu__btn::after {
-  font-size: 1rem;
-  content: "";
+  font: normal normal normal 1rem/1 dsfr-icons;
+  content: "";
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
@@ -218,24 +217,24 @@
   background-color: var(--t-plain);
 }
 
-:root:not([data-fr-theme="dark" i]) .fr-sidemenu__link {
+:root:not([data-fr-theme="dark"]) .fr-sidemenu__link {
   --color-hover: var(--block-color-hover);
   --color-active: var(--block-color-active);
 }
 
-:root:not([data-fr-theme="dark" i]) [class*="fr-scheme-light"] .fr-sidemenu__link,
-:root:not([data-fr-theme="dark" i]) [class*="--scheme-light-"] .fr-sidemenu__link {
+:root:not([data-fr-theme="dark"]) [class*="fr-scheme-light"] .fr-sidemenu__link,
+:root:not([data-fr-theme="dark"]) [class*="--scheme-light-"] .fr-sidemenu__link {
   --color-hover: var(--block-color-hover);
   --color-active: var(--block-color-active);
 }
 
-:root:not([data-fr-theme="dark" i]) [class*="fr-scheme-dark"] .fr-sidemenu__link,
-:root:not([data-fr-theme="dark" i]) [class*="--scheme-dark-"] .fr-sidemenu__link {
+:root:not([data-fr-theme="dark"]) [class*="fr-scheme-dark"] .fr-sidemenu__link,
+:root:not([data-fr-theme="dark"]) [class*="--scheme-dark-"] .fr-sidemenu__link {
   --color-hover: var(--block-color-hover);
   --color-active: var(--block-color-active);
 }
 
-:root[data-fr-theme="dark" i] .fr-sidemenu__link {
+:root[data-fr-theme="dark"] .fr-sidemenu__link {
   --color-hover: var(--block-color-hover);
   --color-active: var(--block-color-active);
 }
@@ -305,7 +304,7 @@
   }
 
   .fr-sidemenu__inner > .fr-collapse:not(.fr-collapse--expanded) {
-    visibility: visible;
+    visibility: inherit;
   }
 
   .fr-sidemenu {
@@ -390,24 +389,24 @@
     background-color: var(--t-plain);
   }
 
-  :root:not([data-fr-theme="dark" i]) .fr-sidemenu__btn {
+  :root:not([data-fr-theme="dark"]) .fr-sidemenu__btn {
     --color-hover: var(--block-color-hover);
     --color-active: var(--block-color-active);
   }
 
-  :root:not([data-fr-theme="dark" i]) [class*="fr-scheme-light"] .fr-sidemenu__btn,
-  :root:not([data-fr-theme="dark" i]) [class*="--scheme-light-"] .fr-sidemenu__btn {
+  :root:not([data-fr-theme="dark"]) [class*="fr-scheme-light"] .fr-sidemenu__btn,
+  :root:not([data-fr-theme="dark"]) [class*="--scheme-light-"] .fr-sidemenu__btn {
     --color-hover: var(--block-color-hover);
     --color-active: var(--block-color-active);
   }
 
-  :root:not([data-fr-theme="dark" i]) [class*="fr-scheme-dark"] .fr-sidemenu__btn,
-  :root:not([data-fr-theme="dark" i]) [class*="--scheme-dark-"] .fr-sidemenu__btn {
+  :root:not([data-fr-theme="dark"]) [class*="fr-scheme-dark"] .fr-sidemenu__btn,
+  :root:not([data-fr-theme="dark"]) [class*="--scheme-dark-"] .fr-sidemenu__btn {
     --color-hover: var(--block-color-hover);
     --color-active: var(--block-color-active);
   }
 
-  :root[data-fr-theme="dark" i] .fr-sidemenu__btn {
+  :root[data-fr-theme="dark"] .fr-sidemenu__btn {
     --color-hover: var(--block-color-hover);
     --color-active: var(--block-color-active);
   }

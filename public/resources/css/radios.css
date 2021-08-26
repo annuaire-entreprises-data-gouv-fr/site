@@ -1,5 +1,5 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 @charset "UTF-8";
 
@@ -28,7 +28,7 @@
   margin-top: -0.75rem;
 }
 
-.fr-radio-group:first-child input[type="radio" i] + label {
+.fr-radio-group:first-child input[type="radio"] + label {
   margin-top: 0;
 }
 
@@ -36,13 +36,13 @@
   margin-bottom: -0.75rem;
 }
 
-.fr-radio-group:last-child input[type="radio" i] + label[style*='background-image:'],
-.fr-radio-group:last-child input[type="radio" i] + label[class^="fr-ifi-"],
-.fr-radio-group:last-child input[type="radio" i] + label[class*=" fr-ifi-"] {
+.fr-radio-group:last-child input[type="radio"] + label[style*='background-image:'],
+.fr-radio-group:last-child input[type="radio"] + label[class^="fr-ifi-"],
+.fr-radio-group:last-child input[type="radio"] + label[class*=" fr-ifi-"] {
   margin-bottom: 1.5rem;
 }
 
-.fr-radio-group input[type="radio" i] {
+.fr-radio-group input[type="radio"] {
   position: absolute;
   opacity: 0;
   /**
@@ -53,24 +53,18 @@
      */
 }
 
-.fr-radio-group input[type="radio" i] + label {
+.fr-radio-group input[type="radio"] + label {
   position: relative;
   padding: 0.75rem 0;
   font-size: 1rem;
   line-height: 1.5rem;
   -webkit-tap-highlight-color: transparent;
-  display: grid;
-  display: -ms-grid;
-  grid-row: 1;
-  -ms-grid-row: 2;
-  grid-column: 2;
-  -ms-grid-column: 2;
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  -ms-align-items: center;
-  grid-template-columns: 1fr 2rem;
-  -ms-grid-columns: 1fr 2rem;
-  text-align: left;
-  direction: rtl;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-left: 2rem;
   /**
        * Style du texte d'aide dans le label
        *//**
@@ -78,60 +72,49 @@
        */
 }
 
-.fr-radio-group input[type="radio" i] + label,
-.fr-radio-group input[type="radio" i] + label > * {
-  unicode-bidi: plaintext;
-}
-
-.fr-radio-group input[type="radio" i] + label .fr-hint-text {
+.fr-radio-group input[type="radio"] + label .fr-hint-text {
   margin: 0;
-  grid-row: 2;
-  grid-column: 1;
-  -ms-grid-row: 2;
-  -ms-grid-column: 1;
+  width: 100%;
 }
 
-.fr-radio-group input[type="radio" i] + label::before {
-  display: inline-block;
+.fr-radio-group input[type="radio"] + label::before {
   content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: -2rem;
   width: 1.5rem;
   height: 1.5rem;
+  margin-top: 0.75rem;
   margin-right: 0.5rem;
-  flex-shrink: 0;
   border: 1px solid;
   border-radius: 50%;
   transform-origin: center;
-  grid-row: 1;
-  -ms-grid-row: 1;
-  grid-column: 2;
-  -ms-grid-column: 2;
-  align-items: center;
-  -ms-align-items: center;
-  transition: transform 0.3s;
 }
 
-.fr-radio-group input[type="radio" i]:checked + label {
+.fr-radio-group input[type="radio"]:checked + label {
   /**
          * Cas du radio riche
          */
 }
 
-.fr-radio-group input[type="radio" i]:checked + label[style*='background-image:'],
-.fr-radio-group input[type="radio" i]:checked + label[class^="fr-ifi-"],
-.fr-radio-group input[type="radio" i]:checked + label[class*=" fr-ifi-"] {
+.fr-radio-group input[type="radio"]:checked + label[style*='background-image:'],
+.fr-radio-group input[type="radio"]:checked + label[class^="fr-ifi-"],
+.fr-radio-group input[type="radio"]:checked + label[class*=" fr-ifi-"] {
   width: 100%;
 }
 
-.fr-radio-group--sm input[type="radio" i] + label::before {
+.fr-radio-group--sm input[type="radio"] + label::before {
   width: 1rem;
   height: 1rem;
+  margin-top: 1rem;
 }
 
 .fr-radio-rich input[type="radio"] + .fr-label {
   padding-left: 3.5rem;
+  margin-left: 0;
   min-height: 5.5rem;
   width: 100%;
-  height: 1px;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-right: 6.5rem;
@@ -140,7 +123,7 @@
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: center;
   /**
       * On applique la taille sm pour le bouton radio riche
@@ -153,15 +136,18 @@
   width: 1rem;
   height: 1rem;
   position: absolute;
+  top: 50%;
   left: 1.75rem;
+  margin-top: -0.5rem;
 }
 
 .fr-radio-rich input[type="radio"] + .fr-label::after {
   content: "";
   position: absolute;
-  top: 0;
+  top: 50%;
   right: 0;
   margin: 0.25rem;
+  margin-top: -2.5rem;
   padding-left: 0.25rem;
   display: flex;
   align-items: center;
@@ -169,6 +155,10 @@
   width: 5.25rem;
   height: 5rem;
   vertical-align: middle;
+}
+
+.fr-radio-rich input[type="radio"] + .fr-label .fr-hint-text {
+  margin-left: 0;
 }
 
 .fr-radio-rich__icon {
@@ -234,7 +224,7 @@
    */
 }
 
-.fr-radio-group input[type="radio" i] {
+.fr-radio-group input[type="radio"] {
   /**
      * On applique les styles au pseudo élément before du label quand l'input présente
      * un état check
@@ -252,7 +242,6 @@
 .fr-radio-group input[type="radio"][disabled] + label,
 .fr-radio-group input[type="radio"]:disabled + label {
   color: var(--g600-g400);
-  filter: grayscale(1);
 }
 
 .fr-radio-group input[type="radio"][disabled] + label::before,
@@ -261,12 +250,7 @@
   border: 1px solid var(--g400);
 }
 
-.fr-radio-group input[type="radio"][disabled] + label::after,
-.fr-radio-group input[type="radio"]:disabled + label::after {
-  background-color: transparent;
-}
-
-.fr-radio-group--sm input[type="radio" i]:checked + label::before {
+.fr-radio-group--sm input[type="radio"]:checked + label::before {
   box-shadow: inset 0 0 0 3px var(--w);
 }
 
@@ -286,4 +270,21 @@
 
 .fr-radio-rich input[type="radio"]:checked + label::before {
   box-shadow: inset 0 0 0 3px var(--w);
+}
+
+.fr-radio-rich input[type="radio"][disabled] + label,
+.fr-radio-rich input[type="radio"]:disabled + label {
+  color: var(--g600-g400);
+  filter: grayscale(1);
+}
+
+.fr-radio-rich input[type="radio"][disabled] + label::before,
+.fr-radio-rich input[type="radio"]:disabled + label::before {
+  background-color: var(--g200);
+  border: 1px solid var(--g400);
+}
+
+.fr-radio-rich input[type="radio"][disabled] + label::after,
+.fr-radio-rich input[type="radio"]:disabled + label::after {
+  background-color: transparent;
 }

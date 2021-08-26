@@ -1,18 +1,18 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 /* ------------------------------------ *\
   TAGS
 \* ------------------------------------ */
 
 .fr-tag {
+  --link-underline: none;
+  --link-blank-font: none;
+  --link-blank-content: none;
+  margin: 0;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-}
-
-.fr-tag {
-  overflow: hidden;
   z-index: 1;
 }
 
@@ -24,16 +24,11 @@
   border-radius: 1rem;
 }
 
-.fr-tag--sm {
-  font-size: 0.75rem;
-  line-height: 1.25rem;
-  min-height: 1.5rem;
-  padding: 0.125rem 0.5rem;
-  border-radius: 0.75rem;
-}
-
 .fr-tag--icon-left[class^="fr-fi-"], .fr-tag--icon-left[class*=" fr-fi-"] {
   flex-direction: row;
+  overflow: initial;
+  max-width: none;
+  max-height: none;
 }
 
 .fr-tag--icon-left[class^="fr-fi-"]::before,
@@ -43,20 +38,11 @@
   font-size: 1rem;
 }
 
-.fr-tag--sm.fr-tag--icon-left[class^="fr-fi-"],
-.fr-tag--sm.fr-tag--icon-left[class*=" fr-fi-"] {
-  flex-direction: row;
-}
-
-.fr-tag--sm.fr-tag--icon-left[class^="fr-fi-"]::before,
-.fr-tag--sm.fr-tag--icon-left[class*=" fr-fi-"]::before {
-  margin-left: -0.25rem;
-  margin-right: 0.25rem;
-  font-size: 1rem;
-}
-
 .fr-tag--icon-right[class^="fr-fi-"], .fr-tag--icon-right[class*=" fr-fi-"] {
   flex-direction: row-reverse;
+  overflow: initial;
+  max-width: none;
+  max-height: none;
 }
 
 .fr-tag--icon-right[class^="fr-fi-"]::before,
@@ -66,9 +52,35 @@
   font-size: 1rem;
 }
 
+.fr-tag--sm {
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  min-height: 1.5rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.75rem;
+}
+
+.fr-tag--sm.fr-tag--icon-left[class^="fr-fi-"],
+.fr-tag--sm.fr-tag--icon-left[class*=" fr-fi-"] {
+  flex-direction: row;
+  overflow: initial;
+  max-width: none;
+  max-height: none;
+}
+
+.fr-tag--sm.fr-tag--icon-left[class^="fr-fi-"]::before,
+.fr-tag--sm.fr-tag--icon-left[class*=" fr-fi-"]::before {
+  margin-left: -0.25rem;
+  margin-right: 0.25rem;
+  font-size: 1rem;
+}
+
 .fr-tag--sm.fr-tag--icon-right[class^="fr-fi-"],
 .fr-tag--sm.fr-tag--icon-right[class*=" fr-fi-"] {
   flex-direction: row-reverse;
+  overflow: initial;
+  max-width: none;
+  max-height: none;
 }
 
 .fr-tag--sm.fr-tag--icon-right[class^="fr-fi-"]::before,
@@ -78,13 +90,14 @@
   font-size: 1rem;
 }
 
-.fr-tag {
-  --is-link: false;
-  margin: 0;
-}
-
 .fr-tags-group {
-  --is-list: false;
+  --ul-type: none;
+  --ol-type: none;
+  --ul-start: 0;
+  --ol-start: 0;
+  --xl-block: 0;
+  --li-bottom: 0;
+  --ol-content: none;
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 0;
@@ -119,29 +132,29 @@ a.fr-tag, button.fr-tag {
   background-color: var(--bf200-bf300);
 }
 
-:root:not([data-fr-theme="dark" i]) a.fr-tag,
-:root:not([data-fr-theme="dark" i]) button.fr-tag {
+:root:not([data-fr-theme="dark"]) a.fr-tag,
+:root:not([data-fr-theme="dark"]) button.fr-tag {
   --color-hover: rgba(172, 172, 255, 0.5);
   --color-active: rgba(107, 107, 255, 0.5);
 }
 
-:root:not([data-fr-theme="dark" i]) [class*="fr-scheme-light"] a.fr-tag,
-:root:not([data-fr-theme="dark" i]) [class*="fr-scheme-light"] button.fr-tag,
-:root:not([data-fr-theme="dark" i]) [class*="--scheme-light-"] a.fr-tag,
-:root:not([data-fr-theme="dark" i]) [class*="--scheme-light-"] button.fr-tag {
+:root:not([data-fr-theme="dark"]) [class*="fr-scheme-light"] a.fr-tag,
+:root:not([data-fr-theme="dark"]) [class*="fr-scheme-light"] button.fr-tag,
+:root:not([data-fr-theme="dark"]) [class*="--scheme-light-"] a.fr-tag,
+:root:not([data-fr-theme="dark"]) [class*="--scheme-light-"] button.fr-tag {
   --color-hover: rgba(172, 172, 255, 0.5);
   --color-active: rgba(107, 107, 255, 0.5);
 }
 
-:root:not([data-fr-theme="dark" i]) [class*="fr-scheme-dark"] a.fr-tag,
-:root:not([data-fr-theme="dark" i]) [class*="fr-scheme-dark"] button.fr-tag,
-:root:not([data-fr-theme="dark" i]) [class*="--scheme-dark-"] a.fr-tag,
-:root:not([data-fr-theme="dark" i]) [class*="--scheme-dark-"] button.fr-tag {
+:root:not([data-fr-theme="dark"]) [class*="fr-scheme-dark"] a.fr-tag,
+:root:not([data-fr-theme="dark"]) [class*="fr-scheme-dark"] button.fr-tag,
+:root:not([data-fr-theme="dark"]) [class*="--scheme-dark-"] a.fr-tag,
+:root:not([data-fr-theme="dark"]) [class*="--scheme-dark-"] button.fr-tag {
   --color-hover: rgba(71, 71, 255, 0.5);
   --color-active: rgba(0, 0, 243, 0.5);
 }
 
-:root[data-fr-theme="dark" i] a.fr-tag, button.fr-tag {
+:root[data-fr-theme="dark"] a.fr-tag, button.fr-tag {
   --color-hover: rgba(71, 71, 255, 0.5);
   --color-active: rgba(0, 0, 243, 0.5);
 }

@@ -1,5 +1,5 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 @charset "UTF-8";
 
@@ -46,6 +46,7 @@
   min-height: 2.5rem;
   padding: 0.5rem 1.5rem;
   flex-direction: row;
+  overflow: hidden;
   max-width: 2.5rem;
   max-height: 2.5rem;
   padding-left: 0.5rem;
@@ -55,16 +56,8 @@
 }
 
 .fr-search-bar .fr-btn::before {
-  font-family: icons !important;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-}
-
-.fr-search-bar .fr-btn::before {
-  content: "";
+  font: normal normal normal 1.5rem/1 dsfr-icons;
+  content: "";
 }
 
 .fr-search-bar .fr-btn::before {
@@ -83,9 +76,14 @@
     line-height: 2rem;
     min-height: 3.5rem;
     padding: 0.75rem 2rem;
+    flex-direction: row;
+    overflow: initial;
     max-width: none;
     max-height: none;
-    flex-direction: row;
+  }
+
+  .fr-search-bar--lg .fr-btn::before {
+    font: normal normal normal 2rem/1 dsfr-icons;
   }
 
   .fr-search-bar--lg .fr-btn::before {

@@ -1,5 +1,5 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 @charset "UTF-8";
 
@@ -18,16 +18,6 @@
 }
 
 .fr-callout[class^="fr-fi-"]::before, .fr-callout[class*=" fr-fi-"]::before {
-  font-family: icons !important;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-}
-
-.fr-callout[class^="fr-fi-"]::before, .fr-callout[class*=" fr-fi-"]::before {
-  font-size: 1.5rem;
   display: block;
   margin: -0.5rem 0 0.5rem;
 }

@@ -1,3 +1,4 @@
+import { verifyIdRna } from '../utils/helpers/id-rna';
 import { verifySiren } from '../utils/helpers/siren-and-siret';
 import { fetchAssociation } from './rna';
 import { fetchRNCSImmatriculation } from './rncs';
@@ -25,7 +26,7 @@ const ping = async (slug: string | string[]) => {
     case 'api-sirene-donnees-ouvertes':
       return await getUniteLegaleSireneOuverte(verifySiren('880878145'));
     case 'api-rna':
-      return await fetchAssociation('W551000280');
+      return await fetchAssociation(verifyIdRna('W551000280'));
     default:
       throw new APISlugNotFound(404, `API ping ${slug} not found`);
   }

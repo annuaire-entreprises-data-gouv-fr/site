@@ -1,19 +1,11 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 @charset "UTF-8";
 
 /* ------------------------------------ *\
   TOGGLES
 \* ------------------------------------ */
-
-.fr-toggle .fr-hint-text {
-  display: block;
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: 0.75rem;
-  line-height: 1.25rem;
-}
 
 .fr-toggle {
   display: flex;
@@ -50,8 +42,7 @@
      */
 }
 
-.fr-toggle__input:checked ~ .fr-toggle__label[data-fr-unchecked-label]::before,
-.fr-toggle__input:checked ~ .fr-toggle__label[data-fr-checked-label]::before {
+.fr-toggle__input:checked ~ .fr-toggle__label[data-fr-unchecked-label][data-fr-checked-label]::before {
   content: attr(data-fr-checked-label) "\a" attr(data-fr-unchecked-label);
 }
 
@@ -84,18 +75,15 @@
      */
 }
 
-.fr-toggle__label[data-fr-unchecked-label],
-.fr-toggle__label[data-fr-checked-label] {
+.fr-toggle__label[data-fr-unchecked-label][data-fr-checked-label] {
   padding-left: 0;
 }
 
-.fr-toggle__label[data-fr-unchecked-label]::before,
-.fr-toggle__label[data-fr-checked-label]::before {
+.fr-toggle__label[data-fr-unchecked-label][data-fr-checked-label]::before {
   content: attr(data-fr-unchecked-label) "\a" attr(data-fr-checked-label);
 }
 
-.fr-toggle__label[data-fr-unchecked-label] + .fr-hint-text,
-.fr-toggle__label[data-fr-checked-label] + .fr-hint-text {
+.fr-toggle__label[data-fr-unchecked-label][data-fr-checked-label] + .fr-hint-text {
   margin-top: 0.5rem;
 }
 
@@ -114,17 +102,8 @@
 }
 
 .fr-toggle__label::after {
-  font-family: icons !important;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-}
-
-.fr-toggle__label::after {
-  font-size: 1rem;
-  content: "";
+  font: normal normal normal 1rem/1 dsfr-icons;
+  content: "";
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,8 +118,12 @@
 }
 
 .fr-toggle .fr-hint-text {
-  flex-basis: 100%;
+  display: block;
   margin-top: 1rem;
+  margin-bottom: 0;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  flex-basis: 100%;
 }
 
 .fr-toggle--label-left .fr-toggle__input {
@@ -185,7 +168,13 @@
  */
 
 .fr-toggle__list {
-  --is-list: false;
+  --ul-type: none;
+  --ol-type: none;
+  --ul-start: 0;
+  --ol-start: 0;
+  --xl-block: 0;
+  --li-bottom: 0;
+  --ol-content: none;
 }
 
 .fr-toggle {

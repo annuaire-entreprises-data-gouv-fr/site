@@ -1,26 +1,11 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 @charset "UTF-8";
 
 /* ------------------------------------ *\
   CONTENT
 \* ------------------------------------ */
-
-.fr-content-media__img img {
-  object-fit: cover;
-  object-position: 50% 50%;
-}
-
-.fr-content-media__img img {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 
 .fr-content-media {
   width: 100%;
@@ -36,10 +21,22 @@
 }
 
 .fr-content-media__img::before {
-  display: block;
   content: "";
+  display: block;
   width: 100%;
   padding-bottom: 56.25%;
+}
+
+.fr-content-media__img img {
+  object-fit: cover;
+  object-position: 50% 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .fr-content-media__caption, .fr-content-media__transcription {
@@ -59,24 +56,15 @@
   min-height: 2rem;
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
+  flex-direction: row-reverse;
+  overflow: initial;
   max-width: none;
   max-height: none;
-  flex-direction: row-reverse;
-  margin-left: -0.75rem;
-  margin-right: -0.5rem;
 }
 
 .fr-content-media__transcription .fr-link::before {
-  font-family: icons !important;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-}
-
-.fr-content-media__transcription .fr-link::before {
-  content: "";
+  font: normal normal normal 1.5rem/1 dsfr-icons;
+  content: "";
 }
 
 .fr-content-media__transcription .fr-link::before {

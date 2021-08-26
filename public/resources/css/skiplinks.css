@@ -1,12 +1,18 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 /* ------------------------------------ *\
   SKIPLINKS
 \* ------------------------------------ */
 
 .fr-skiplinks {
-  --is-list: false;
+  --ul-type: none;
+  --ol-type: none;
+  --ul-start: 0;
+  --ol-start: 0;
+  --xl-block: 0;
+  --li-bottom: 0;
+  --ol-content: none;
   position: absolute;
   padding: 1rem 0;
   transform: translateY(-100%);
@@ -37,10 +43,10 @@
   min-height: 2rem;
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
-  max-width: none;
-  max-height: none;
-  margin-left: -0.75rem;
-  margin-right: -0.75rem;
+}
+
+.fr-skiplinks__list > li .fr-link::before {
+  font: normal normal normal 1.5rem/1 dsfr-icons;
 }
 
 .fr-skiplinks__list > li .fr-link::before {

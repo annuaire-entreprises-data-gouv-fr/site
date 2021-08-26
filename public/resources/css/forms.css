@@ -1,5 +1,5 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 @charset "UTF-8";
 
@@ -23,7 +23,7 @@
   line-height: 1.5rem;
 }
 
-.fr-label + .fr-input, .fr-label + .fr-select {
+.fr-label + .fr-input, .fr-label + .fr-input-wrap, .fr-label + .fr-select {
   margin-top: 0.5rem;
 }
 
@@ -58,18 +58,9 @@
   margin-bottom: 0;
 }
 
-.fr-error-text::before, .fr-valid-text::before {
-  font-family: icons !important;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-}
-
 .fr-error-text::before {
-  font-size: 1rem;
-  content: "";
+  font: normal normal normal 1rem/1 dsfr-icons;
+  content: "";
   display: inline-block;
   margin-right: 0.25rem;
 }
@@ -89,8 +80,8 @@
 }
 
 .fr-valid-text::before {
-  font-size: 1rem;
-  content: "";
+  font: normal normal normal 1rem/1 dsfr-icons;
+  content: "";
   display: inline-block;
   margin-right: 0.25rem;
 }
@@ -169,7 +160,7 @@
   display: inline-flex;
 }
 
-.fr-fieldset--inline .fr-radio-group:not(:last-child) input[type="radio" i] + label {
+.fr-fieldset--inline .fr-radio-group:not(:last-child) input[type="radio"] + label {
   margin-right: 1.75rem;
 }
 
@@ -177,7 +168,7 @@
   margin-top: 0;
 }
 
-.fr-fieldset--inline .fr-radio-group:first-child input[type="radio" i] + label {
+.fr-fieldset--inline .fr-radio-group:first-child input[type="radio"] + label {
   margin-top: 0;
 }
 
@@ -185,7 +176,7 @@
   margin-bottom: 0;
 }
 
-.fr-fieldset--inline .fr-radio-group:last-child input[type="radio" i] + label {
+.fr-fieldset--inline .fr-radio-group:last-child input[type="radio"] + label {
   margin-bottom: 0;
 }
 

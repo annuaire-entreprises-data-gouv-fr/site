@@ -1,5 +1,5 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 @charset "UTF-8";
 
@@ -9,9 +9,8 @@
 
 .fr-table {
   position: relative;
-  overflow: hidden;
-  max-width: 100%;
   margin-bottom: 2.5rem;
+  padding-top: calc(var(--table-offset) + 1rem);
   /* Style bordered, enleve le style even/odd et ajoute des bordures entre chaque ligne *//*
   * Cache la caption
   *//*
@@ -22,7 +21,18 @@
   * Fixe la taille des colonnes du tableau
   *//*
 * Ombres ajoutées en Js si le contenu est plus grand que le conteneur
+*//*
+* Positionnement ombres sur le tableau sans caption
+*//*
+* Positionnement ombres sur le tableau avec caption en bas
 */
+}
+
+.fr-table::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 0;
 }
 
 .fr-table:not(.fr-table--no-scroll) table {
@@ -30,15 +40,24 @@
 }
 
 .fr-table table {
+  width: 100%;
+  display: block;
+  overflow: auto;
   border-spacing: 0;
 }
 
+.fr-table[data-fr-js-table="true"] caption {
+  position: absolute;
+  top: 0;
+}
+
 .fr-table caption {
+  position: initial;
   font-weight: 700;
   font-size: 1.375rem;
   line-height: 1.75rem;
   margin: 0 0 1rem;
-  font-weight: bold;
+  font-weight: 700;
   text-align: left;
 }
 
@@ -64,6 +83,10 @@
   border: 0;
 }
 
+.fr-table--no-caption {
+  padding-top: 0;
+}
+
 .fr-table--no-caption caption {
   position: absolute;
   width: 1px;
@@ -75,11 +98,31 @@
   white-space: nowrap;
   /* added line */
   border: 0;
+  height: 0;
+}
+
+.fr-table--caption-bottom {
+  padding-top: 0;
+  margin-bottom: 0;
+  margin-top: 1rem;
+}
+
+.fr-table--caption-bottom table {
+  margin-bottom: calc(var(--table-offset) + 3.75rem);
+}
+
+.fr-table--caption-bottom[data-fr-js-table="true"] caption {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-top: 1rem;
 }
 
 .fr-table--caption-bottom caption {
-  margin-bottom: 0;
   margin-top: 1rem;
+  height: min-content;
   caption-side: bottom;
 }
 
@@ -87,42 +130,50 @@
   min-width: auto;
 }
 
+.fr-table--no-scroll table {
+  overflow-x: hidden;
+}
+
 .fr-table--no-scroll caption {
   max-width: calc(100vw - 2rem);
 }
 
 .fr-table--layout-fixed table {
+  display: table;
   table-layout: fixed;
 }
 
-.fr-table--shadow caption {
-  position: absolute;
-}
-
-.fr-table--shadow .fr-table__wrapper {
-  overflow: visible;
-  position: relative;
-}
-
-.fr-table--shadow .fr-table__wrapper table::before {
-  display: block;
+.fr-table--shadow table::before {
   content: "";
+  display: block;
   position: absolute;
-  top: 0;
+  top: calc(var(--table-offset) + 1rem);
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 1;
   opacity: 1;
   pointer-events: none;
-  transition: box-shadow ease-out 0.2s;
 }
 
-.fr-table--shadow table {
-  width: 100%;
+.fr-table--no-caption table::before {
+  content: "";
   display: block;
-  overflow-y: hidden;
-  overflow-x: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.fr-table--caption-bottom table::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .fr-table {
@@ -168,25 +219,25 @@
     **/
 }
 
-.fr-table--shadow .fr-table__wrapper table::before {
+.fr-table--shadow table::before {
   box-shadow: inset 0 0 0 transparent, inset 0 0 0 transparent;
 }
 
-.fr-table--shadow-left .fr-table__wrapper table::before {
-  display: block;
+.fr-table--shadow-left table::before {
   content: "";
+  display: block;
   box-shadow: inset 2rem 0 1rem -1.5rem var(--scroll-shadow), inset 0 0 0 transparent;
 }
 
-.fr-table--shadow-right .fr-table__wrapper table::before {
-  display: block;
+.fr-table--shadow-right table::before {
   content: "";
-  box-shadow: inset 0 0 0 transparent, inset -2rem 0 1rem -1.5rem var(--scroll-shadow);
+  display: block;
+  box-shadow: inset 0 0 0 transparent, inset -2rem 0 1rem -2rem var(--scroll-shadow);
 }
 
-.fr-table--shadow-left.fr-table--shadow-right .fr-table__wrapper table::before {
-  display: block;
+.fr-table--shadow-left.fr-table--shadow-right table::before {
   content: "";
+  display: block;
   box-shadow: inset 2rem 0 1rem -1.5rem var(--scroll-shadow),
                 inset -2rem 0 1rem -1.5rem var(--scroll-shadow);
 }

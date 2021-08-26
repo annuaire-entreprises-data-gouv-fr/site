@@ -1,5 +1,5 @@
 /*
- * DSFR v1.0.0-rc1.0 | restricted use
+ * DSFR v1.1.0 | SPDX-License-Identifier: MIT | License-Filename: LICENCE.md | restricted use (see terms and conditions)
  */
 @charset "UTF-8";
 
@@ -38,15 +38,15 @@
    */
 }
 
-:root[data-fr-theme="dark" i] .fr-select {
+:root[data-fr-theme="dark"] .fr-select {
   --data-uri-svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' ><path fill='%23fff' d='M12,13.1l5-4.9l1.4,1.4L12,15.9L5.6,9.5l1.4-1.4L12,13.1z'/></svg>");
 }
 
-[class*="fr-scheme-light"] .fr-select :root:not([data-fr-theme="dark" i]) {
+[class*="fr-scheme-light"] .fr-select :root:not([data-fr-theme="dark"]) {
   --data-uri-svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' ><path fill='%231e1e1e' d='M12,13.1l5-4.9l1.4,1.4L12,15.9L5.6,9.5l1.4-1.4L12,13.1z'/></svg>");
 }
 
-[class*="fr-scheme-dark"] .fr-select :root:not([data-fr-theme="dark" i]) {
+[class*="fr-scheme-dark"] .fr-select :root:not([data-fr-theme="dark"]) {
   --data-uri-svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' ><path fill='%231e1e1e' d='M12,13.1l5-4.9l1.4,1.4L12,15.9L5.6,9.5l1.4-1.4L12,13.1z'/></svg>");
 }
 
@@ -69,18 +69,18 @@ select.fr-select[disabled], select.fr-select:disabled {
   background-image: var(--data-uri-svg);
 }
 
-:root[data-fr-theme="dark" i] select.fr-select[disabled],
-:root[data-fr-theme="dark" i] select.fr-select:disabled {
+:root[data-fr-theme="dark"] select.fr-select[disabled],
+:root[data-fr-theme="dark"] select.fr-select:disabled {
   --data-uri-svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' ><path fill='%23cecece' d='M12,13.1l5-4.9l1.4,1.4L12,15.9L5.6,9.5l1.4-1.4L12,13.1z'/></svg>");
 }
 
-[class*="fr-scheme-light"] select.fr-select[disabled] :root:not([data-fr-theme="dark" i]),
-[class*="fr-scheme-light"] select.fr-select:disabled :root:not([data-fr-theme="dark" i]) {
+[class*="fr-scheme-light"] select.fr-select[disabled] :root:not([data-fr-theme="dark"]),
+[class*="fr-scheme-light"] select.fr-select:disabled :root:not([data-fr-theme="dark"]) {
   --data-uri-svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' ><path fill='%236a6a6a' d='M12,13.1l5-4.9l1.4,1.4L12,15.9L5.6,9.5l1.4-1.4L12,13.1z'/></svg>");
 }
 
-[class*="fr-scheme-dark"] select.fr-select[disabled] :root:not([data-fr-theme="dark" i]),
-[class*="fr-scheme-dark"] select.fr-select:disabled :root:not([data-fr-theme="dark" i]) {
+[class*="fr-scheme-dark"] select.fr-select[disabled] :root:not([data-fr-theme="dark"]),
+[class*="fr-scheme-dark"] select.fr-select:disabled :root:not([data-fr-theme="dark"]) {
   --data-uri-svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' ><path fill='%236a6a6a' d='M12,13.1l5-4.9l1.4,1.4L12,15.9L5.6,9.5l1.4-1.4L12,13.1z'/></svg>");
 }
 

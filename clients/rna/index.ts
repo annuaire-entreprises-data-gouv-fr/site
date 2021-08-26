@@ -1,4 +1,5 @@
 import { IAssociation } from '../../models';
+import { IdRna } from '../../utils/helpers/id-rna';
 import { formatAdresse } from '../../utils/labels';
 import { httpGet } from '../../utils/network/http';
 import routes from '../routes';
@@ -44,21 +45,21 @@ interface IAssociationResponse {
  * GET Association
  */
 
-const fetchAssociation = async (numeroRna: string): Promise<IAssociation> => {
+const fetchAssociation = async (numeroRna: IdRna): Promise<IAssociation> => {
   const route = `${routes.rna.id}${numeroRna}`;
   const response = await httpGet(route);
 
-  return mapToDomainObject(response.data as IAssociationResponse);
+  return mapToDomainObject(numeroRna, response.data as IAssociationResponse);
 };
 
 export const mapToDomainObject = (
+  idRna: IdRna,
   association: IAssociationResponse
 ): IAssociation => {
   const {
     association: {
       titre,
       objet,
-      id_association,
       id_ex_association,
       adresse_numero_voie,
       adresse_repetition,
@@ -69,7 +70,7 @@ export const mapToDomainObject = (
     },
   } = association;
   return {
-    id: id_association,
+    id: idRna,
     exId: id_ex_association,
     nomComplet: titre,
     objet,
