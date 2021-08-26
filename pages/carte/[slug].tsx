@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { IEtablissement } from '../../models';
+import { createDefaultEtablissement, IEtablissement } from '../../models';
 import MapEtablissement from '../../components/mapbox/map-etablissement';
 import { getEtablissementWithLatLongFromSlug } from '../../models/etablissement';
 import { TitleEtablissement } from '../../components/title-etablissement-section';
@@ -27,24 +27,24 @@ const EtablissementMapPage: React.FC<IProps> = ({ etablissement }) => (
         ← Retour
       </a>
       <HiddenH1 title="Localisation de l’etablissement" />
-      {etablissement.latitude && etablissement.longitude ? (
-        <>
-          <TitleEtablissement
-            etablissement={etablissement}
-            title="Géolocalisation de l’établissement"
-          />
-          <br />
+      <>
+        <TitleEtablissement
+          etablissement={etablissement}
+          title="Géolocalisation de l’établissement"
+        />
+        <br />
+        {etablissement.latitude && etablissement.longitude ? (
           <div className="map-container">
             <MapEtablissement etablissement={etablissement} />
           </div>
-          <br />
-        </>
-      ) : (
-        <p>
-          <br />
-          <i>La géolocalisation de cet établissement est introuvable.</i>
-        </p>
-      )}
+        ) : (
+          <i>
+            Nous n’avons pas réussi à déterminer la géolocalisation de cet
+            établissement.
+          </i>
+        )}
+        <br />
+      </>
     </div>
     <style jsx>
       {`
@@ -70,7 +70,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e) {
-    return { props: { etablissement: { siret } } };
+    return { props: { etablissement: { estActif: null, siret } } };
   }
 };
 
