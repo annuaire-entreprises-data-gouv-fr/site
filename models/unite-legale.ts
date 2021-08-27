@@ -105,8 +105,8 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
       uniteLegaleSireneOuverte,
     ] = await Promise.all([
       getUniteLegaleInsee(siren),
-      getAllEtablissementsInsee(siren, page),
-      getSiegeInsee(siren),
+      getAllEtablissementsInsee(siren, page).catch(() => null),
+      getSiegeInsee(siren).catch(() => null),
       getUniteLegaleSireneOuverte(siren, page).catch(() => null),
     ]);
 
@@ -133,8 +133,10 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
         getUniteLegaleInseeWithFallbackCredentials(siren),
-        getAllEtablissementsInseeWithFallbackCredentials(siren, page),
-        getSiegeInseeWithFallbackCredentials(siren),
+        getAllEtablissementsInseeWithFallbackCredentials(siren, page).catch(
+          () => null
+        ),
+        getSiegeInseeWithFallbackCredentials(siren).catch(() => null),
       ]);
 
     return mergeUniteLegaleFromBothApi(
@@ -156,23 +158,23 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
  */
 const mergeUniteLegaleFromBothApi = (
   uniteLegaleInsee: IUniteLegale,
-  allEtablissementsInsee: IEtablissementsList,
-  siegeInsee: IEtablissement,
+  allEtablissementsInsee: IEtablissementsList | null,
+  siegeInsee: IEtablissement | null,
   uniteLegaleSireneOuverte: IUniteLegale | null
 ) => {
-  const { nombreEtablissements, currentEtablissementPage, etablissements } =
-    allEtablissementsInsee;
-
   const chemin =
     (uniteLegaleSireneOuverte || {}).chemin || uniteLegaleInsee.siren;
 
+  const siege = siegeInsee || uniteLegaleInsee.siege;
+
   return {
     ...uniteLegaleInsee,
-    siege: siegeInsee,
+    siege,
     chemin,
-    etablissements,
-    currentEtablissementPage,
-    nombreEtablissements,
+    etablissements: allEtablissementsInsee?.etablissements || [siege],
+    currentEtablissementPage:
+      allEtablissementsInsee?.currentEtablissementPage || 0,
+    nombreEtablissements: allEtablissementsInsee?.nombreEtablissements || 1,
   };
 };
 

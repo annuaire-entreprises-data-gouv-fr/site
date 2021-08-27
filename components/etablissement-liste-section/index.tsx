@@ -32,19 +32,24 @@ const EtablissementListeSection: React.FC<{
               <a href={`/etablissement/${etablissement.siret}`}>
                 {formatSiret(etablissement.siret)}
               </a>,
-              <>{libelleFromCodeNaf(etablissement.activitePrincipale)}</>,
-              etablissement.adresse,
               <>
-                {!uniteLegale.estDiffusible ? (
-                  <Tag>non-diffusible</Tag>
+                {!etablissement.estDiffusible ? (
+                  <i>Non renseigné</i>
                 ) : (
-                  <>
-                    {etablissement.estSiege && <Tag>siège social</Tag>}
-                    {!etablissement.estActif && (
-                      <IsActiveTag isActive={etablissement.estActif} />
-                    )}
-                  </>
+                  libelleFromCodeNaf(etablissement.activitePrincipale)
                 )}
+              </>,
+              !etablissement.estDiffusible ? (
+                <i>Non renseigné</i>
+              ) : (
+                etablissement.adresse
+              ),
+              <>
+                {etablissement.estSiege && <Tag>siège social</Tag>}
+                {!etablissement.estActif && (
+                  <IsActiveTag isActive={etablissement.estActif} />
+                )}
+                {!etablissement.estDiffusible && <Tag>non-diffusible</Tag>}
               </>,
             ]
           )}

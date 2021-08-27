@@ -35,7 +35,6 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
       uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
     }
   >
-    {/* <StructuredData data={structuredData(uniteLegale)} /> */}
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
       {uniteLegale.estDiffusible ? (
@@ -54,12 +53,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
           <EtablissementListeSection uniteLegale={uniteLegale} />
         </>
       ) : (
-        <>
-          <p>
-            Cette entité est <b>non-diffusible.</b>
-          </p>
-          <NonDiffusibleSection />
-        </>
+        <NonDiffusibleSection />
       )}
     </div>
     <style jsx>{`
