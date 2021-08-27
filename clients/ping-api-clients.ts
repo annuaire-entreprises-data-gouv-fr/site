@@ -3,7 +3,7 @@ import { verifySiren } from '../utils/helpers/siren-and-siret';
 import { fetchAssociation } from './rna';
 import { fetchRNCSImmatriculation } from './rncs';
 import { fetchRnmImmatriculation } from './rnm';
-import { getUniteLegaleWithSiegeInsee } from './sirene-insee/siren';
+import { getUniteLegaleInsee } from './sirene-insee/siren';
 import getUniteLegaleSireneOuverte from './sirene-ouverte/siren';
 import fetchConventionCollectives from './siret-2-idcc';
 
@@ -22,7 +22,7 @@ const ping = async (slug: string | string[]) => {
     case 'api-conventions-collectives':
       return await fetchConventionCollectives(['54205118000066']);
     case 'api-sirene-insee':
-      return await getUniteLegaleWithSiegeInsee(verifySiren('880878145'));
+      return await getUniteLegaleInsee(verifySiren('880878145'));
     case 'api-sirene-donnees-ouvertes':
       return await getUniteLegaleSireneOuverte(verifySiren('880878145'));
     case 'api-rna':

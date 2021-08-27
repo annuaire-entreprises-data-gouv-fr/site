@@ -1,4 +1,4 @@
-import { verifySiret } from '../../utils/helpers/siren-and-siret';
+import { Siren, verifySiret } from '../../utils/helpers/siren-and-siret';
 import { inseeClientGet, INSEE_CREDENTIALS } from '.';
 import constants from '../../constants';
 import {
@@ -18,11 +18,64 @@ import {
   HttpServerError,
 } from '../exceptions';
 import routes from '../routes';
-import {
-  IInseeEtablissement,
-  IInseeEtablissementResponse,
-  IInseeEtablissementsResponse,
-} from './types';
+
+interface IInseeEtablissementResponse {
+  etablissement: IInseeEtablissement;
+  etablissements: IInseeEtablissement[];
+}
+interface IInseeEtablissementsResponse {
+  header: { total: number; debut: number; nombre: number };
+  etablissements: IInseeEtablissement[];
+}
+
+interface IInseeEtablissement {
+  siret: string;
+  nic: string;
+  etablissementSiege: string;
+  statutDiffusionEtablissement: string;
+  trancheEffectifsEtablissement: string;
+  anneeEffectifsEtablissement: string;
+  dateCreationEtablissement: string;
+  dateDernierTraitementEtablissement: string;
+  activitePrincipaleRegistreMetiersEtablissement: string;
+  periodesEtablissement: {
+    dateFin: string;
+    dateDebut: string;
+    etatAdministratifEtablissement: string;
+    changementEtatAdministratifEtablissement: boolean;
+    activitePrincipaleEtablissement: string;
+  }[];
+  adresseEtablissement: {
+    numeroVoieEtablissement: string;
+    indiceRepetitionEtablissement: string;
+    typeVoieEtablissement: string;
+    libelleVoieEtablissement: string;
+    codePostalEtablissement: string;
+    libelleCommuneEtablissement: string;
+  };
+  uniteLegale: IInseeetablissementUniteLegale;
+}
+
+interface IInseeetablissementUniteLegale {
+  sigleUniteLegale: string;
+  dateCreationUniteLegale: string;
+  periodesUniteLegale: string;
+  dateDernierTraitementUniteLegale: string;
+  trancheEffectifsUniteLegale: string;
+  anneeEffectifsUniteLegale: string;
+  statutDiffusionUniteLegale: string;
+  prenom1UniteLegale: string;
+  sexeUniteLegale: string;
+  identifiantAssociationUniteLegale: string;
+  nicSiegeUniteLegale: string;
+  dateDebut: string;
+  activitePrincipaleUniteLegale: string;
+  categorieJuridiqueUniteLegale: string;
+  denominationUniteLegale: string;
+  economieSocialeSolidaireUniteLegale: string;
+  etatAdministratifUniteLegale: string;
+  nomUniteLegale: string;
+}
 
 const getAllEtablissementsFactory =
   (credential: INSEE_CREDENTIALS) =>
@@ -64,6 +117,17 @@ const getEtablissementFactory =
       );
     }
     return mapEtablissementToDomainObject(etablissement);
+  };
+
+const getSiegeFactory =
+  (credential: INSEE_CREDENTIALS) =>
+  async (siren: Siren): Promise<IEtablissement> => {
+    const response = (await inseeClientGet(
+      routes.sireneInsee.siege + siren,
+      credential
+    )) as IInseeEtablissementResponse;
+
+    return mapEtablissementToDomainObject(response.etablissements[0]);
   };
 
 export const mapEtablissementToDomainObject = (
@@ -155,3 +219,9 @@ export const getEtablissementInsee = getEtablissementFactory(
 
 export const getEtablissementInseeWithFallbackCredentials =
   getEtablissementFactory(INSEE_CREDENTIALS.FALLBACK);
+
+export const getSiegeInsee = getSiegeFactory(INSEE_CREDENTIALS.DEFAULT);
+
+export const getSiegeInseeWithFallbackCredentials = getSiegeFactory(
+  INSEE_CREDENTIALS.FALLBACK
+);

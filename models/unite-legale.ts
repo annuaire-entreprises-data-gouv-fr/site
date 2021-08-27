@@ -1,18 +1,20 @@
 import {
   createDefaultUniteLegale,
+  IEtablissement,
   IEtablissementsList,
   IUniteLegale,
   SirenNotFoundError,
 } from '.';
 import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {
-  checkInseeNonDiffusible,
-  getUniteLegaleWithSiegeInsee,
-  getUniteLegaleWithSiegeInseeWithFallbackCredentials,
+  getUniteLegaleInsee,
+  getUniteLegaleInseeWithFallbackCredentials,
 } from '../clients/sirene-insee/siren';
 import {
   getAllEtablissementsInsee,
   getAllEtablissementsInseeWithFallbackCredentials,
+  getSiegeInsee,
+  getSiegeInseeWithFallbackCredentials,
 } from '../clients/sirene-insee/siret';
 import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
 import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
@@ -60,7 +62,7 @@ const getUniteLegale = async (
     return await fetchUniteLegaleFromBothAPI(siren, page);
   } catch (e) {
     if (e instanceof HttpNotFound) {
-      return await handleInseeHttpNotFound(siren, e);
+      throw new SirenNotFoundError(`Siren ${siren} was not found`);
     }
     logFirstSireneInseefailed({ siren, details: e.message || e });
 
@@ -75,9 +77,6 @@ const getUniteLegale = async (
         // no pagination as this function is called when sirene etalab already failed
         return await fetchUniteLegaleFromInseeFallback(siren, page);
       } catch (e) {
-        if (e instanceof HttpNotFound) {
-          return await handleInseeHttpNotFound(siren, e);
-        }
         logSecondSireneInseefailed({ siren, details: e.message || e });
 
         // Siren was not found in both API, return a 404
@@ -100,19 +99,22 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
     // INSEE does not provide enough information to paginate etablissement list
     // so we doubled our API call with sirene ouverte to get Etablissements.
     const [
-      uniteLegaleSireneOuverte,
+      uniteLegaleInsee,
       allEtablissementsInsee,
-      uniteLegaleWithSiegeInsee,
+      siegeInsee,
+      uniteLegaleSireneOuverte,
     ] = await Promise.all([
-      getUniteLegaleSireneOuverte(siren, page).catch(() => null),
+      getUniteLegaleInsee(siren),
       getAllEtablissementsInsee(siren, page),
-      getUniteLegaleWithSiegeInsee(siren),
+      getSiegeInsee(siren),
+      getUniteLegaleSireneOuverte(siren, page).catch(() => null),
     ]);
 
     return mergeUniteLegaleFromBothApi(
-      uniteLegaleSireneOuverte,
+      uniteLegaleInsee,
       allEtablissementsInsee,
-      uniteLegaleWithSiegeInsee
+      siegeInsee,
+      uniteLegaleSireneOuverte
     );
   } catch (e) {
     if (e instanceof HttpForbiddenError) {
@@ -128,16 +130,18 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
 const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
   try {
     // INSEE requires two calls to get uniteLegale with etablissements
-    const [allEtablissementsInsee, uniteLegaleWithSiegeInsee] =
+    const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
+        getUniteLegaleInseeWithFallbackCredentials(siren),
         getAllEtablissementsInseeWithFallbackCredentials(siren, page),
-        getUniteLegaleWithSiegeInseeWithFallbackCredentials(siren),
+        getSiegeInseeWithFallbackCredentials(siren),
       ]);
 
     return mergeUniteLegaleFromBothApi(
-      null,
+      uniteLegaleInsee,
       allEtablissementsInsee,
-      uniteLegaleWithSiegeInsee
+      siegeInsee,
+      null
     );
   } catch (e) {
     if (e instanceof HttpForbiddenError) {
@@ -151,38 +155,25 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
  * Merge response form INSEE and Etalab, using best of both
  */
 const mergeUniteLegaleFromBothApi = (
-  uniteLegaleSireneOuverte: IUniteLegale | null,
+  uniteLegaleInsee: IUniteLegale,
   allEtablissementsInsee: IEtablissementsList,
-  uniteLegaleWithSiegeInsee: IUniteLegale
+  siegeInsee: IEtablissement,
+  uniteLegaleSireneOuverte: IUniteLegale | null
 ) => {
   const { nombreEtablissements, currentEtablissementPage, etablissements } =
     allEtablissementsInsee;
 
   const chemin =
-    (uniteLegaleSireneOuverte || {}).chemin || uniteLegaleWithSiegeInsee.siren;
+    (uniteLegaleSireneOuverte || {}).chemin || uniteLegaleInsee.siren;
 
   return {
-    ...uniteLegaleWithSiegeInsee,
+    ...uniteLegaleInsee,
+    siege: siegeInsee,
     chemin,
     etablissements,
     currentEtablissementPage,
     nombreEtablissements,
   };
-};
-
-/**
- * In cas INSEE returns an HttpNotFound, check if Siren is non-diffusible
- * @param siren
- * @param e
- * @returns
- */
-const handleInseeHttpNotFound = async (siren: Siren, e: Error) => {
-  const isNonDiffusible = await checkInseeNonDiffusible(siren);
-  if (isNonDiffusible) {
-    return createNonDiffusibleUniteLegale(siren);
-  } else {
-    throw new SirenNotFoundError(`Siren ${siren} was not found`);
-  }
 };
 
 /**
