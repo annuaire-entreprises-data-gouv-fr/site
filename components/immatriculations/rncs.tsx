@@ -8,6 +8,7 @@ import { IImmatriculationRNCS } from '../../models/immatriculation';
 import AdministrationNotResponding from '../administration-not-responding';
 import { INPI } from '../administrations';
 import ButtonLink from '../button';
+import ButtonLinkAsync from '../button-async';
 import { download } from '../icon';
 import { Section } from '../section';
 
@@ -53,13 +54,9 @@ const ImmatriculationRNCS: React.FC<IProps> = ({ immatriculation }) => {
             .
           </p>
           <div className="layout-center">
-            <ButtonLink
-              nofollow={true}
-              target="_blank"
+            <ButtonLinkAsync
               href={`/api/inpi-pdf-proxy/${immatriculation.siren}`}
-            >
-              {download} Télécharger le justificatif d'immatriculation
-            </ButtonLink>
+            />
             <div className="separator" />
             <ButtonLink
               nofollow={true}

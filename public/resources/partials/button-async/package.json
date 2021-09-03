@@ -1,0 +1,25 @@
+{
+  "name": "button-async",
+  "version": "0.1.0",
+  "description": "",
+  "source": "src/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "umd:main": "dist/index.umd.js",
+  "scripts": {
+    "dev": "microbundle watch --no-pkg-main -f umd --external none",
+    "build": "microbundle build --no-pkg-main -f umd --external none"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "preact": "^10.5.7"
+  },
+  "devDependencies": {
+    "microbundle": "^0.13.3",
+    "preact-cli": "^3.2.2",
+    "preact": "^10.5.14",
+    "preact-habitat": "^3.3.0"
+  }
+}
