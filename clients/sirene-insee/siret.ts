@@ -135,7 +135,7 @@ export const mapEtablissementToDomainObject = (
 ): IEtablissement => {
   // There cases of inseeEtablissement undefined.
   // For instance 89898637700015 that returns an etablissementS instead of etablissement and that also returns a different siren/siret
-  // as sirene.fr doesnot disply it, we dont either
+  // as sirene.fr doesnot display it, we dont either
 
   if (!inseeEtablissement) {
     throw new HttpNotFound(404, 'Not Found');
@@ -166,10 +166,6 @@ export const mapEtablissementToDomainObject = (
   const activitePrincipaleEtablissement =
     lastEtatAdministratif.activitePrincipaleEtablissement;
 
-  if (statutDiffusionEtablissement === 'N') {
-    throw new HttpForbiddenError(403, 'Forbidden (non diffusible)');
-  }
-
   const defaultEtablissement = createDefaultEtablissement();
 
   return {
@@ -185,6 +181,7 @@ export const mapEtablissementToDomainObject = (
     dateDerniereMiseAJour: dateDernierTraitementEtablissement,
     estSiege: !!etablissementSiege,
     estActif,
+    estDiffusible: statutDiffusionEtablissement !== 'N',
     dateFermeture,
     trancheEffectif: trancheEffectifsEtablissement,
     libelleTrancheEffectif: libelleFromCodeEffectif(
