@@ -41,6 +41,7 @@ const RNCSClientWrapper = async (
     url: route,
     method: 'GET',
     headers: { Cookie: cookie },
+    timeout: 10000, // INPI API can take a looong time
   });
 
   return response;

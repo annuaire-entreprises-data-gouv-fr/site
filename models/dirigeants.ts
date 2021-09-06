@@ -2,7 +2,7 @@ import { IUniteLegale } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import { fetchRNCSIMR } from '../clients/rncs/IMR';
 import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
-import { logWarningInSentry } from '../utils/sentry';
+import logErrorInSentry, { logWarningInSentry } from '../utils/sentry';
 import { EAdministration } from './administration';
 import {
   IAPINotRespondingError,
@@ -69,7 +69,7 @@ export const getDirigeantsFromImmatriculations = async (siren: Siren) => {
     if (e instanceof HttpNotFound) {
       return { dirigeants: notFound, beneficiaires: notFound };
     } else {
-      logWarningInSentry('Error in API INPI', {
+      logErrorInSentry(new Error('Error in API INPI'), {
         siren,
         details: `Dirigeants fetching failed : ${e.message || e}`,
       });
