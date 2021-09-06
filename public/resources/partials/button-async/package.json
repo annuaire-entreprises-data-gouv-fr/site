@@ -18,8 +18,9 @@
   },
   "devDependencies": {
     "microbundle": "^0.13.3",
-    "preact-cli": "^3.2.2",
     "preact": "^10.5.14",
+    "preact-cli": "^3.2.2",
+    "preact-custom-element": "^4.2.1",
     "preact-habitat": "^3.3.0"
   }
 }

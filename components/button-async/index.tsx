@@ -2,12 +2,12 @@ import React from 'react';
 import ButtonLink from '../button';
 import { download } from '../icon';
 
-const ButtonLinkAsync: React.FC<{ href: string }> = ({ href }) => {
+const ButtonLinkAsync: React.FC<{ to: string }> = ({ to }) => {
   const id = 'sldkf-dslfkgn-dkjg';
   return (
     <div>
-      <div data-partial-widget="button-async" data-href={href}>
-        <ButtonLink nofollow={true} target="_blank" href={href}>
+      <div>
+        <ButtonLink nofollow={true} target="_blank" to={to}>
           {download} Télécharger le justificatif d'immatriculation
         </ButtonLink>
       </div>
@@ -15,6 +15,13 @@ const ButtonLinkAsync: React.FC<{ href: string }> = ({ href }) => {
         async
         src="/resources/partials/button-async/dist/index.js"
       ></script>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: `
+        <partial-button-async to="${to}" />
+      `,
+        }}
+      />
     </div>
   );
 };

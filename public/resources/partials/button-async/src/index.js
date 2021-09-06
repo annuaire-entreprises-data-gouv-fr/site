@@ -1,7 +1,8 @@
 import { h, render } from 'preact';
 import { useState } from 'preact/hooks';
+import register from 'preact-custom-element';
 
-const Widget = (props) => {
+const ButtonAsync = (props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const click = () => {
@@ -9,10 +10,9 @@ const Widget = (props) => {
       return;
     }
     setIsLoading(true);
-    fetch(props.href).then((response) => {
+    fetch(props.to).then((response) => {
       try {
         response.blob().then((blob) => {
-          console.log(blob);
           let url = window.URL.createObjectURL(blob);
           let a = document.createElement('a');
           a.href = url;
@@ -34,9 +34,4 @@ const Widget = (props) => {
   );
 };
 
-const mountPoint = document.querySelector(
-  '[data-partial-widget="button-async"]'
-);
-
-const href = mountPoint.dataset.href;
-render(<Widget href={href} />, mountPoint);
+register(ButtonAsync, 'partial-button-async', ['href']);
