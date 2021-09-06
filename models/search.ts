@@ -1,7 +1,7 @@
 import { IsLikelyASirenOrSiretException } from '.';
 import { HttpNotFound } from '../clients/exceptions';
-// import getResults from '../clients/sirene-ouverte/recherche';
-import getResultsFallback from '../clients/sirene-ouverte/recherche-fallback';
+import getResults from '../clients/sirene-ouverte/recherche';
+// import getResultsFallback from '../clients/sirene-ouverte/recherche-fallback';
 import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
 import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
 
@@ -36,8 +36,8 @@ const search = async (searchTerm: string, page: number) => {
     }
 
     const escapedSearchTerm = escapeTerm(searchTerm);
-    // return await getResults(escapedSearchTerm, page);
-    return await getResultsFallback(escapedSearchTerm, page);
+    return await getResults(escapedSearchTerm, page);
+    // return await getResultsFallback(escapedSearchTerm, page);
   } catch (e) {
     if (e instanceof HttpNotFound) {
       return [];
