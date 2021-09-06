@@ -12,21 +12,21 @@ const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
     </p>
     <p>En attendant, vous pouvez toujours :</p>
     <div className="layout-left">
-      <ButtonLink href="/faq" alt>
-        Consulter notre page d'aide
+      <ButtonLink to="/faq" alt>
+        Consulter notre page d’aide
       </ButtonLink>
       <span>&nbsp;</span>
-      <ButtonLink href="/">Retourner à la page d’accueil</ButtonLink>
+      <ButtonLink to="/">Retourner à la page d’accueil</ButtonLink>
     </div>
   </div>
 );
 
 const ServerErrorExplanations = () => (
   <ErrorTemplate>
-    <h1>Oh non 😱 ! C'est la panne ⚠️</h1>
+    <h1>Oh non 😱 ! C’est la panne ⚠️</h1>
     <p>
-      Si vous voyez cette page, c'est que l'ordinateur qui fait marcher ce site
-      internet a rencontré une petite panne. Pas d'inquiétude, le reste du site
+      Si vous voyez cette page, c’est que l’ordinateur qui fait marcher ce site
+      internet a rencontré une petite panne. Pas d’inquiétude, le reste du site
       fonctionne toujours !
     </p>
   </ErrorTemplate>
@@ -37,7 +37,7 @@ const ErrorNotFoundExplanations = () => (
     <h1>Cette page est introuvable 🔍</h1>
     <p>
       Si vous êtes arrivé sur cette page en tapant une url dans votre
-      navigateur, c'est probable que vous vous soyez trompé d'url.
+      navigateur, c’est probable que vous vous soyez trompé d’url.
     </p>
   </ErrorTemplate>
 );

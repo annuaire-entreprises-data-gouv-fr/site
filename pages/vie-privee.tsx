@@ -15,19 +15,19 @@ const Privacy: NextPage = () => (
         consultées.
       </p>
       <h2>
-        Ce site n'affiche pas de bannière de consentement aux cookies, pourquoi
+        Ce site n’affiche pas de bannière de consentement aux cookies, pourquoi
         ?
       </h2>
       <p>
-        C'est vrai, vous n'avez pas eu à cliquer sur un bloc qui recouvre la
-        moitié de la page pour dire que vous êtes d'accord avec le dépôt de
+        C’est vrai, vous n’avez pas eu à cliquer sur un bloc qui recouvre la
+        moitié de la page pour dire que vous êtes d’accord avec le dépôt de
         cookies — même si vous ne savez pas ce que ça veut dire !
       </p>
       <p>
-        Rien d'exceptionnel, pas de passe-droit lié à un .gouv.fr. Nous
+        Rien d’exceptionnel, pas de passe-droit lié à un .gouv.fr. Nous
         respectons simplement la loi, qui dit que certains outils de suivi
-        d'audience, correctement configurés pour respecter la vie privée, sont
-        exemptés d'autorisation préalable.
+        d’audience, correctement configurés pour respecter la vie privée, sont
+        exemptés d’autorisation préalable.
       </p>
       <p>
         Nous utilisons pour cela{' '}
@@ -55,7 +55,7 @@ const Privacy: NextPage = () => (
           CNIL
         </abbr>
         . Cela signifie que votre adresse IP, par exemple, est anonymisée avant
-        d'être enregistrée. Il est donc impossible d'associer vos visites sur ce
+        d’être enregistrée. Il est donc impossible d’associer vos visites sur ce
         site à votre personne.
       </p>
       <h2>Désinscription</h2>
@@ -67,7 +67,7 @@ const Privacy: NextPage = () => (
         Opera).
       </p>
       <p>
-        Pour l'outil Matomo, vous pouvez décider de ne jamais être suivi, y
+        Pour l’outil Matomo, vous pouvez décider de ne jamais être suivi, y
         compris anonymement :
         <iframe
           className="matomo-optout"
@@ -77,7 +77,7 @@ const Privacy: NextPage = () => (
       </p>
       <h2>Je contribue à enrichir vos données, puis-je y accéder ?</h2>
       <p>
-        Bien sûr ! Les statistiques d'usage de la majorité de nos produits, sont
+        Bien sûr ! Les statistiques d’usage de la majorité de nos produits, sont
         disponibles en accès libre sur{' '}
         <a
           href="https://stats.data.gouv.fr"

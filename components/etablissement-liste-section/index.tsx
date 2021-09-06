@@ -29,6 +29,7 @@ const EtablissementListeSection: React.FC<{
           head={['SIRET', 'Activité (NAF/APE)', 'Adresse', 'Statut']}
           body={uniteLegale.etablissements.map(
             (etablissement: IEtablissement) => [
+              //eslint-disable-next-line
               <a href={`/etablissement/${etablissement.siret}`}>
                 {formatSiret(etablissement.siret)}
               </a>,

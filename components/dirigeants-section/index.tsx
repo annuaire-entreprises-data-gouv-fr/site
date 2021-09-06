@@ -57,6 +57,7 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
   const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
     if (isPersonneMorale(dirigeant)) {
       const infos = [
+        //eslint-disable-next-line
         ['Rôle(s)', <b>{dirigeant.role}</b>],
         ['Dénomination', dirigeant.denomination],
         ['Nature Juridique', dirigeant.natureJuridique],
@@ -64,6 +65,7 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
       if (dirigeant.siren) {
         infos.push([
           'Siren',
+          //eslint-disable-next-line
           <a href={`/entreprise/${dirigeant.siren}`}>
             {formatNumbersFr(dirigeant.siren)}
           </a>,
@@ -72,6 +74,7 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
       return infos;
     } else {
       return [
+        //eslint-disable-next-line
         ['Rôle', <b>{dirigeant.role}</b>],
         ['Nom', dirigeant.nom],
         ['Prénom', dirigeant.prenom],
@@ -97,7 +100,7 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
             centralisé par l’
             <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
             <a
-              rel="referrer noopener nofollow"
+              rel="noreferrer noopener nofollow"
               target="_blank"
               href={`${routes.rncs.portail.entreprise}${siren}`}
             >

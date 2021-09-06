@@ -5,10 +5,7 @@ import { Siren } from '../utils/helpers/siren-and-siret';
 
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
-import {
-  APINotRespondingFactory,
-  IAPINotRespondingError,
-} from './api-not-responding';
+import { APINotRespondingFactory } from './api-not-responding';
 
 export interface IImmatriculation {
   downloadlink: string;

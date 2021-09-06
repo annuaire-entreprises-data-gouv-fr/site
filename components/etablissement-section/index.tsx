@@ -39,6 +39,7 @@ const EtablissementSection: React.FC<IProps> = ({
     ],
     [
       'Avis de situation INSEE',
+      // eslint-disable-next-line
       <AvisSituationLink siret={etablissement.siret} />,
     ],
   ];
@@ -82,7 +83,7 @@ const EtablissementSection: React.FC<IProps> = ({
           {uniteLegale.estEntrepreneurIndividuel && (
             <p className="faq-entrepreneur-individuels">
               <i>
-                Pour en savoir plus sur l'affichage des adresses{' '}
+                Pour en savoir plus sur l’affichage des adresses{' '}
                 <a href="/faq">consultez notre FAQ</a>
               </i>
             </p>
@@ -91,7 +92,7 @@ const EtablissementSection: React.FC<IProps> = ({
         <div className="map">
           {map}
           <div className="layout-center">
-            <ButtonLink href={`/carte/${etablissement.siret}`} alt nofollow>
+            <ButtonLink to={`/carte/${etablissement.siret}`} alt nofollow>
               {pin}
               Afficher sur la carte
             </ButtonLink>

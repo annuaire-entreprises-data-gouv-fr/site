@@ -88,7 +88,7 @@ const FAQ: React.FC<{}> = () => (
   <Page small={true} title="FAQ de l’Annuaire des Entreprises">
     <div className="content-container text-wrapper">
       <h1>FAQ</h1>
-      <p>Conseils et réponses de l'équipe Annuaire des Entreprises</p>
+      <p>Conseils et réponses de l’équipe Annuaire des Entreprises</p>
       <div className="questions">
         <QuestionBlock title="Je cherche une entreprise qui n'apparait pas dans les résultats de recherche">
           <p>
@@ -98,15 +98,15 @@ const FAQ: React.FC<{}> = () => (
           <ul>
             <li>
               Vous avez pu faire une faute de frappe en tapant le nom de
-              l'entreprise.
+              l’entreprise.
             </li>
             <li>
-              Si l'entreprise est récente, les données peuvent ne pas encore
+              Si l’entreprise est récente, les données peuvent ne pas encore
               être à jour (les données du moteur de recherche sont mises à jour
               tous les mois)
             </li>
             <li>
-              C'est une entreprise non-diffusible (voir l’explication
+              C’est une entreprise non-diffusible (voir l’explication
               ci-dessous)
             </li>
           </ul>
@@ -124,12 +124,12 @@ const FAQ: React.FC<{}> = () => (
             données qui la concernent.
           </p>
           <p>
-            La procédure s'appelle "changement de statut de diffusion" et elle
-            est à effectuer auprès de L'
+            La procédure s’appelle “changement de statut de diffusion” et elle
+            est à effectuer auprès de L’
             <INSEE /> :
           </p>
           <div className="layout-center">
-            <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
+            <ButtonLink to="https://statut-diffusion-sirene.insee.fr/" alt>
               ⇢ Changer le statut de diffusion de mon entreprise
             </ButtonLink>
           </div>
@@ -141,7 +141,7 @@ const FAQ: React.FC<{}> = () => (
           <p>
             À partir de Novembre 2021, les entreprises immatriculées au RCS ou
             au RNM n’ont plus à fournir leur extrait KBIS dans leurs démarches
-            administratives, le seul numéro siret suffit à l'administration pour
+            administratives, le seul numéro siret suffit à l’administration pour
             retrouver les données nécessaire.
           </p>
           <p>
@@ -157,24 +157,24 @@ const FAQ: React.FC<{}> = () => (
         <QuestionBlock title="La fiche d'immatriculation de mon entreprise est introuvable">
           <p>
             Les entreprises individuelles et les auto-entreprises, ne sont{' '}
-            <b>pas obligées d'être immatriculées</b>. Il est donc possible que
-            vous ne trouviez pas de fiche d'immatriculation pour une entreprise
+            <b>pas obligées d’être immatriculées</b>. Il est donc possible que
+            vous ne trouviez pas de fiche d’immatriculation pour une entreprise
             de ce type.
           </p>
           <p>
             En revanche, les entreprises de toutes les autres formes juridiques{' '}
             <b>doivent être immatriculées</b>. Si vous ne trouvez pas de fiche
-            d'immatriculation pour une entreprise, deux choix s'offrent à vous :
+            d’immatriculation pour une entreprise, deux choix s’offrent à vous :
           </p>
           <ul>
             <li>
-              Si l'entreprise est une entreprise artisanale,{' '}
+              Si l’entreprise est une entreprise artisanale,{' '}
               <a href="https://rnm.artisanat.fr/">
                 contactez les Chambres des Métiers de l‘Artisanat
               </a>
             </li>
             <li>
-              Si l'entreprise n‘est pas une entreprise artisanale,{' '}
+              Si l’entreprise n‘est pas une entreprise artisanale,{' '}
               <a href="http://data.inpi.fr/">
                 contactez l‘INPI qui centralise les données des Greffes des
                 tribuanux de commerce.
@@ -197,7 +197,7 @@ const FAQ: React.FC<{}> = () => (
           <p>
             Toutes les données présentées sur le site sont publiées en
             open-data. Pour en savoir plus sur la démarche, vous pouvez
-            consulter la <a href="/comment-ca-marche">page "à propos"</a>.
+            consulter la <a href="/comment-ca-marche">page “à propos”</a>.
           </p>
           <p>
             Vous pouvez également consulter les fiches explicatives de chaque
@@ -255,7 +255,7 @@ const FAQ: React.FC<{}> = () => (
         <QuestionBlock title="Je ne trouve pas la réponse à ma question">
           <p>Vous pouvez nous poser une question directement :</p>
           <div className="layout-center">
-            <ButtonLink href={constants.links.mailto} alt>
+            <ButtonLink to={constants.links.mailto} alt>
               Nous écrire
             </ButtonLink>
           </div>

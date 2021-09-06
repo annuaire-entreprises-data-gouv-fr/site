@@ -38,7 +38,7 @@ const ConventionCollectivesSection: React.FC<{
             {plural} collective{plural} enregistrée{plural}. Pour en savoir plus
             sur les conventions collectives, vous pouvez consulter{' '}
             <a
-              rel="referrer noopener nofollow"
+              rel="noreferrer noopener nofollow"
               target="_blank"
               href="https://code.travail.gouv.fr/outils/convention-collective"
             >
@@ -48,14 +48,16 @@ const ConventionCollectivesSection: React.FC<{
           <FullTable
             head={['SIRET', 'N°IDCC', 'Détails', 'Convention']}
             body={conventionCollectives.map((convention) => [
+              /*eslint-disable*/
               <a href={`/etablissement/${convention.siret}`}>
                 {convention.siret}
               </a>,
               <Tag>{convention.idccNumber}</Tag>,
               <i className="font-small">{convention.title}</i>,
-              <ButtonLink target="_blank" href={convention.url} alt small>
+              <ButtonLink target="_blank" to={convention.url} alt small>
                 ⇢&nbsp;Consulter
               </ButtonLink>,
+              /*eslint-enable*/
             ])}
           />
         </>
