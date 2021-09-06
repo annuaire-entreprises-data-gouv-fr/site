@@ -1,7 +1,9 @@
 import links from './links';
 
-export default {
+const constants = {
   links: links,
   resultsPerPage: { etablissements: 200, search: 30 },
-  defaultTimeout: 5000,
+  defaultTimeout: 10000,
 };
+
+export default constants;

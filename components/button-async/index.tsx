@@ -5,6 +5,7 @@ import { download } from '../icon';
 
 const ButtonLinkAsync: React.FC<{ to: string }> = ({ to }) => {
   const id = randomId();
+
   return (
     <div>
       <script
@@ -18,9 +19,7 @@ const ButtonLinkAsync: React.FC<{ to: string }> = ({ to }) => {
       </div>
       <div
         dangerouslySetInnerHTML={{
-          __html: `
-        <partial-button-async to="${to}" clean="${id}" />
-      `,
+          __html: `<partial-button-async to="${to}" clean="${id}" />`,
         }}
       />
     </div>
