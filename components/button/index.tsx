@@ -17,7 +17,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   target = '',
   nofollow = false,
 }) => (
-  <div>
+  <div className={`button-link ${alt ? 'alt' : ''} ${small ? 'small' : ''}`}>
     {!to ? (
       <button type="submit">{children}</button>
     ) : (
@@ -32,12 +32,12 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         {children}
       </a>
     )}
-    <style jsx>{`
-      div {
+    <style global jsx>{`
+      div.button-link {
         display: block;
       }
-      a,
-      button {
+      div.button-link > a,
+      div.button-link > button {
         text-align: center;
         outline: none;
         transition: none;
@@ -45,24 +45,42 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         align-items: center;
         justify-content: center;
         border-radius: 0;
-        background-color: ${alt ? '#fff' : '#000091'};
-        color: ${alt ? '#000091' : '#fff'};
+        background-color: #000091;
+        color: #fff;
         text-decoration: none;
-        font-size: ${small ? '0.9rem' : '1rem'};
+        font-size: 1rem;
         line-height: 1.2rem;
-        min-height: ${small ? '36px' : '46px'};
+        min-height: 46px;
         padding: 0 10px;
-        border: 2px solid ${alt ? '#000091' : 'transparent'};
+        border: 2px solid transparent;
         border-radius: 3px;
         box-shadow: none;
       }
+      div.button-link.small > a,
+      div.button-link.small > button {
+        min-height: 36px;
+        font-size: 0.9rem;
+      }
 
-      div:hover > a,
-      div:hover > button {
-        color: ${alt ? '#0b01c3' : '#fff'};
+      div.button-link.alt > a,
+      div.button-link.alt > button {
+        border: 2px solid #000091;
+        color: #000091;
+        background-color: #fff;
+      }
+
+      div.button-link:hover > a,
+      div.button-link:hover > button {
+        color: #fff;
         border-color: #0b01c3;
         text-decoration: none;
-        background-color: ${alt ? '#dfdff1' : '#0b01c3'};
+        background-color: #0b01c3;
+      }
+
+      div.button-link.alt:hover > a,
+      div.button-link.alt:hover > button {
+        color: #0b01c3;
+        background-color: #dfdff1;
       }
     `}</style>
   </div>

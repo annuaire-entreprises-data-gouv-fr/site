@@ -5,12 +5,13 @@ import { DILA, INPI, INSEE, METI, CMA } from '../components/administrations';
 
 import Page from '../layouts';
 import NonDiffusible from '../components/non-diffusible';
+import randomId from '../utils/helpers/randomId';
 
 const QuestionBlock: React.FC<PropsWithChildren<{ title: string }>> = ({
   children,
   title,
 }) => {
-  const id = Math.random().toString(16).substring(7);
+  const id = randomId();
   return (
     <>
       <div className="container">
