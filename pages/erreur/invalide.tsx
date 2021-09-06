@@ -43,7 +43,7 @@ const SirenOrSiretInvalidPage = () => {
           </p>
         </div>
         <div className="layout-center">
-          <ButtonLink href="/">Retourner à l’écran d'accueil</ButtonLink>
+          <ButtonLink to="/">Retourner à l’écran d'accueil</ButtonLink>
         </div>
       </div>
     </Page>

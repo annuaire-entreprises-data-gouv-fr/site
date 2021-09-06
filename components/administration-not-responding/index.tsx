@@ -40,7 +40,7 @@ const AdministrationNotResponding: React.FC<IProps> = ({
       </p>
       {administrationMetaData.site && (
         <div className="layout-center">
-          <ButtonLink href={administrationMetaData.site}>
+          <ButtonLink to={administrationMetaData.site}>
             Consulter le site de l’administration
           </ButtonLink>
         </div>

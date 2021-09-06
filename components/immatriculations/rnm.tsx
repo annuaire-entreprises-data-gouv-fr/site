@@ -49,14 +49,14 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
           <div className="layout-center">
             <ButtonLink
               target="_blank"
-              href={`${immatriculation.downloadlink}?format=pdf`}
+              to={`${immatriculation.downloadlink}?format=pdf`}
             >
               {download} Télécharger le justificatif
             </ButtonLink>
             <div className="separator" />
             <ButtonLink
               target="_blank"
-              href={`${immatriculation.downloadlink}?format=html`}
+              to={`${immatriculation.downloadlink}?format=html`}
               alt
             >
               ⇢ Voir la fiche sur le site de CMA France

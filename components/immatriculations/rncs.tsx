@@ -44,24 +44,26 @@ const ImmatriculationRNCS: React.FC<IProps> = ({ immatriculation }) => {
           </p>
           <p>
             Pour accéder à l’ensemble des données contenues dans un extrait
-            KBIS, vous pouvez télécharger le justificatif d’immatriculation. Si
-            le téléchargement échoue, vous pouvez accéder à la donnée en allant
-            sur le site de l'
-            <INPI />. Pour accéder à la donnée complète, vous{' '}
-            <b>
-              devrez vous créer un compte <INPI />
-            </b>
-            .
+            KBIS, téléchargez le justificatif d’immatriculation via le{' '}
+            <b>bouton ci-dessous</b>. Le téléchargement peut prendre quelques
+            dizaines de secondes.
+          </p>
+          <p>
+            Si le téléchargement échoue, vous pouvez accéder à la donnée en
+            allant sur le site de l'
+            <INPI />. Pour accéder à l’ensemble de la donnée en utilisant le
+            site de l'
+            <INPI /> vous devrez vous créer un compte <INPI />.
           </p>
           <div className="layout-center">
             <ButtonLinkAsync
-              href={`/api/inpi-pdf-proxy/${immatriculation.siren}`}
+              to={`/api/inpi-pdf-proxy/${immatriculation.siren}`}
             />
             <div className="separator" />
             <ButtonLink
               nofollow={true}
               target="_blank"
-              href={`${immatriculation.downloadlink}`}
+              to={`${immatriculation.downloadlink}`}
               alt
             >
               ⇢ Voir la fiche sur le site de l’INPI

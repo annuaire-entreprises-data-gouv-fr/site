@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 
 interface IProps {
   small?: boolean;
-  href?: string;
+  to?: string;
   type?: 'submit' | null;
   alt?: boolean;
   target?: '_blank';
@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
-  href,
+  to,
   children,
   small = false,
   alt = false,
@@ -18,7 +18,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   nofollow = false,
 }) => (
   <div>
-    {!href ? (
+    {!to ? (
       <button type="submit">{children}</button>
     ) : (
       <a
@@ -27,7 +27,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
           (target === '_blank' ? 'noopener noreferrer' : '') +
           (nofollow ? 'nofollow' : '')
         }
-        href={href}
+        href={to}
       >
         {children}
       </a>

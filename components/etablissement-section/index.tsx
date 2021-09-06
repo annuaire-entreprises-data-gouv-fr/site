@@ -91,7 +91,7 @@ const EtablissementSection: React.FC<IProps> = ({
         <div className="map">
           {map}
           <div className="layout-center">
-            <ButtonLink href={`/carte/${etablissement.siret}`} alt nofollow>
+            <ButtonLink to={`/carte/${etablissement.siret}`} alt nofollow>
               {pin}
               Afficher sur la carte
             </ButtonLink>

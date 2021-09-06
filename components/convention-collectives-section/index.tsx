@@ -53,7 +53,7 @@ const ConventionCollectivesSection: React.FC<{
               </a>,
               <Tag>{convention.idccNumber}</Tag>,
               <i className="font-small">{convention.title}</i>,
-              <ButtonLink target="_blank" href={convention.url} alt small>
+              <ButtonLink target="_blank" to={convention.url} alt small>
                 ⇢&nbsp;Consulter
               </ButtonLink>,
             ])}

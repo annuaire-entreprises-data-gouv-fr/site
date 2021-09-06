@@ -23,7 +23,7 @@ const AvisSituationNonDiffusible = () => (
       son avis de situation.
     </div>
     <div className="layout-center">
-      <ButtonLink href="https://avis-situation-sirene.insee.fr/">
+      <ButtonLink to="https://avis-situation-sirene.insee.fr/">
         Obtenir mon avis de situation
       </ButtonLink>
     </div>

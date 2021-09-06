@@ -26,7 +26,7 @@ const NonDiffusible = () => (
       &nbsp;:
     </p>
     <div className="layout-center">
-      <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
+      <ButtonLink to="https://statut-diffusion-sirene.insee.fr/" alt>
         ⇢ Rendre mon entité diffusible
       </ButtonLink>
     </div>

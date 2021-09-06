@@ -12,11 +12,11 @@ const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
     </p>
     <p>En attendant, vous pouvez toujours :</p>
     <div className="layout-left">
-      <ButtonLink href="/faq" alt>
+      <ButtonLink to="/faq" alt>
         Consulter notre page d'aide
       </ButtonLink>
       <span>&nbsp;</span>
-      <ButtonLink href="/">Retourner à la page d’accueil</ButtonLink>
+      <ButtonLink to="/">Retourner à la page d’accueil</ButtonLink>
     </div>
   </div>
 );

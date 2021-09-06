@@ -129,7 +129,7 @@ const FAQ: React.FC<{}> = () => (
             <INSEE /> :
           </p>
           <div className="layout-center">
-            <ButtonLink href="https://statut-diffusion-sirene.insee.fr/" alt>
+            <ButtonLink to="https://statut-diffusion-sirene.insee.fr/" alt>
               ⇢ Changer le statut de diffusion de mon entreprise
             </ButtonLink>
           </div>
@@ -255,7 +255,7 @@ const FAQ: React.FC<{}> = () => (
         <QuestionBlock title="Je ne trouve pas la réponse à ma question">
           <p>Vous pouvez nous poser une question directement :</p>
           <div className="layout-center">
-            <ButtonLink href={constants.links.mailto} alt>
+            <ButtonLink to={constants.links.mailto} alt>
               Nous écrire
             </ButtonLink>
           </div>

@@ -68,7 +68,7 @@ const AnnoncesBodaccSection: React.FC<{
                 </div>
                 <i className="font-small">{annonce.details}</i>
               </div>,
-              <ButtonLink target="_blank" href={annonce.path} alt small>
+              <ButtonLink target="_blank" to={annonce.path} alt small>
                 ⇢&nbsp;Consulter
               </ButtonLink>,
             ])}

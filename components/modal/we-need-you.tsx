@@ -25,7 +25,7 @@ export const WeNeedYouModal: React.FC<{}> = () => (
         <br />
         <div className="layout-center">
           <ButtonLink
-            href="https://startupdetat.typeform.com/to/gyOD5443"
+            to="https://startupdetat.typeform.com/to/gyOD5443"
             target="_blank"
           >
             Aidez-nous en répondant au questionnaire

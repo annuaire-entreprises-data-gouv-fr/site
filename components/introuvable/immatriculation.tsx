@@ -39,7 +39,7 @@ const ImmatriculationNotFound: React.FC = () => {
         <p>Consultez notre FAQ pour en savoir plus.</p>
       </div>
       <div className="layout-center">
-        <ButtonLink href="/faq">Consultez la FAQ</ButtonLink>
+        <ButtonLink to="/faq">Consultez la FAQ</ButtonLink>
       </div>
     </Section>
   );
