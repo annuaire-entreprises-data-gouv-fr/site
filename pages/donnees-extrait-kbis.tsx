@@ -21,45 +21,45 @@ const ExtraitKbis: React.FC = () => {
         </p>
         <h2>Qu’est ce qu’un extrait KBIS / D1 ?</h2>
         <p>
-          L'extrait d'immatriculation est une preuve de l'immatriculation d'une
+          L’extrait d’immatriculation est une preuve de l’immatriculation d’une
           entreprise auprès de son Centre de Formalité des Entreprises (CFE).
         </p>
         <p>
           Il est important de faire la différence entre <b>l’extrait KBIS</b>{' '}
-          qui est l'extrait d'immatriculation au Registre du Commerce et des
+          qui est l’extrait d’immatriculation au Registre du Commerce et des
           Sociétés, qui concerne les <b>entreprises commerciales</b> et{' '}
-          <b>l'extrait D1</b> qui est l'extrait d’immatriculation au Répertoire
-          des Métiers de la Chambre de Métiers et de l'Artisanat et qui concerne{' '}
+          <b>l’extrait D1</b> qui est l’extrait d’immatriculation au Répertoire
+          des Métiers de la Chambre de Métiers et de l’Artisanat et qui concerne{' '}
           <b>les entreprises artisanales</b>.
         </p>
         <div>
           <h2>
-            Comment accéder aux données d'un extrait d’immatriculation via le
+            Comment accéder aux données d’un extrait d’immatriculation via le
             site annuaire-entreprises.data.gouv.fr ?
           </h2>
           <p>
-            Pour retrouver les informations d'immatriculation d'une entreprise,{' '}
+            Pour retrouver les informations d’immatriculation d’une entreprise,{' '}
             <a href="/">utilisez le moteur de recherche</a> pour trouver la page
-            de l'entreprise concernée.
+            de l’entreprise concernée.
           </p>
           <p>
-            Une fois sur la page de l'entreprise, consultez l'onglet{' '}
-            <b>justificatifs</b> et retrouvez-y les données d'immatriculations,
+            Une fois sur la page de l’entreprise, consultez l’onglet{' '}
+            <b>justificatifs</b> et retrouvez-y les données d’immatriculations,
             soit au Registre National du Commerce et des Sociétés (RNCS), soit
             au Répertoire National des Métiers (RNM).
           </p>
           <h2>
-            Comment intégrer les données d'un extrait d’immatriculation à son
+            Comment intégrer les données d’un extrait d’immatriculation à son
             système d’information ?
           </h2>
           <p>
             Vous travailler sur un système d’information et vous avez besoin de
             rendre disponible ces données dans votre site ou votre back-office ?
-            Deux choix s'offrent à vous :
+            Deux choix s’offrent à vous :
           </p>
           <ol>
             <li>
-              Utiliser les API : intégrez directement les API de l'
+              Utiliser les API : intégrez directement les API de l’
               <INPI /> et de <CMA /> à votre système d’information.
             </li>
             <li>
@@ -91,7 +91,7 @@ const ExtraitKbis: React.FC = () => {
               >
                 API Répertoire National des Métiers
               </a>{' '}
-              : les immatriculations d'entreprises artisanales, auprès de{' '}
+              : les immatriculations d’entreprises artisanales, auprès de{' '}
               <a
                 target="_blank"
                 rel="noreferrer noopener"
@@ -109,7 +109,7 @@ const ExtraitKbis: React.FC = () => {
               >
                 API Registre National du Commerce et des Sociétés
               </a>{' '}
-              : les immatriculations d'entreprises auprès des Greffes de
+              : les immatriculations d’entreprises auprès des Greffes de
               tribunal de Commerce, centralisées par l’
               <a
                 target="_blank"
@@ -139,15 +139,15 @@ const ExtraitKbis: React.FC = () => {
           <p>
             Il existe une API spéciale, <b>API Entreprise</b> réservée aux
             administrations et à certaines entreprises éligibles, qui permet
-            d'accéder aux informations des entreprises détenue par
-            l'administration :
+            d’accéder aux informations des entreprises détenue par
+            l’administration :
           </p>
           <ul>
             <li>
               les informations de la base sirene de l’
               <INSEE />
             </li>
-            <li>le chiffre d'affaire</li>
+            <li>le chiffre d’affaire</li>
             <li>les certifications professionnelles</li>
             <li>... et bien d’autres</li>
           </ul>

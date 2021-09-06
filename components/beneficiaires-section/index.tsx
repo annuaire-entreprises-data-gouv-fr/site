@@ -61,7 +61,7 @@ const BeneficiairesSection: React.FC<IProps> = ({ beneficiaires, siren }) => {
             centralisé par l’
             <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
             <a
-              rel="referrer noopener nofollow"
+              rel="noreferrer noopener nofollow"
               target="_blank"
               href={`${routes.rncs.portail.entreprise}${siren}`}
             >

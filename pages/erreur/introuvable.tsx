@@ -17,7 +17,7 @@ const SirenOrSiretNotFoundPage = () => {
           <ul>
             <li>
               Vous avez peut-être commis une erreur en tapant votre numéro
-              siren/siret et celui-ci n'existe pas
+              siren/siret et celui-ci n’existe pas
             </li>
             <li>
               Ce numéro fait peut-être référence à une entreprise{' '}

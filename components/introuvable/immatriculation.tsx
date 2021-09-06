@@ -8,14 +8,14 @@ const ImmatriculationNotFound: React.FC = () => {
     <Section title="justificatif d'immatriculation introuvable">
       <div>
         <p>
-          Nous n'avons <b>pas trouvé de justificatif d'immatriculation</b> chez
+          Nous n’avons <b>pas trouvé de justificatif d’immatriculation</b> chez
           nos partenaires. Il existe plusieurs explications possibles :
         </p>
         <ul>
           <li>
             Les <b>entreprises individuelles et les auto-entreprises</b>, ne
-            sont pas obligées d'être immatriculées. Il est donc possible que
-            vous ne trouviez pas de fiche d'immatriculation pour une entreprise
+            sont pas obligées d’être immatriculées. Il est donc possible que
+            vous ne trouviez pas de fiche d’immatriculation pour une entreprise
             de ce type.
           </li>
           <li>
@@ -23,13 +23,13 @@ const ImmatriculationNotFound: React.FC = () => {
             immatriculées.
           </li>
           <li>
-            Si l'entreprise est une entreprise artisanale,{' '}
+            Si l’entreprise est une entreprise artisanale,{' '}
             <a href="https://rnm.artisanat.fr/">
               contactez les Chambres des Métiers de l‘Artisanat
             </a>
           </li>
           <li>
-            Si l'entreprise n‘est pas une entreprise artisanale,{' '}
+            Si l’entreprise n‘est pas une entreprise artisanale,{' '}
             <a href="http://data.inpi.fr/">
               contactez l‘INPI qui centralise les données des Greffes des
               tribuanux de commerce.

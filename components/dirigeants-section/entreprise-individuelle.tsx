@@ -19,6 +19,7 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
   dirigeant,
 }) => {
   const data = [
+    //eslint-disable-next-line
     ['Rôle', <b>Représentant Légal</b>],
     ['Nom', (dirigeant.sexe === 'M' ? 'Mr ' : 'Mme ') + dirigeant.nom],
     ['Prénom', dirigeant.prenom],

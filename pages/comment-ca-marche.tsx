@@ -38,11 +38,11 @@ const About: React.FC = () => {
           <p>
             Toutes les informations affichées sur le site sont des informations
             publiques, accessibles librement et gratuitement. On appelle cela
-            les données ouvertes ou l'open data.
+            les données ouvertes ou l’open data.
           </p>
           <p>
             <b>NB :</b> toutes les données ouvertes (open data) de
-            l'administration sont accessibles sur{' '}
+            l’administration sont accessibles sur{' '}
             <a
               target="_blank"
               rel="noreferrer noopener"
@@ -53,7 +53,7 @@ const About: React.FC = () => {
           </p>
           <h3>Les fiches entreprises et etablissements</h3>
           <p>
-            Les informations comme le SIRET, l'adresse du siège social, la
+            Les informations comme le SIRET, l’adresse du siège social, la
             dénomination sont issues de la{' '}
             <a
               target="_blank"
@@ -62,10 +62,10 @@ const About: React.FC = () => {
             >
               base Sirene des entreprises
             </a>{' '}
-            publiée par l'
+            publiée par l’
             <INSEE />, et accessible à tous.
           </p>
-          <h3>Les fiches d'immatriculation</h3>
+          <h3>Les fiches d’immatriculation</h3>
           <p>
             Les informations de la fiche d’immatriculation sont issues du{' '}
             <a
@@ -90,21 +90,21 @@ const About: React.FC = () => {
           </h2>
           <p>
             L’Annuaire des Entreprises est un des services clefs mis en oeuvre
-            par l'Etat pour faciliter les démarches des entreprises. Parmi ses
+            par l’Etat pour faciliter les démarches des entreprises. Parmi ses
             fonctionnalités, on peut citer :
           </p>
           <h3>Recherche de numéro siret, de numéro siren</h3>
           <p>
-            L'Annuaire des Entreprises propose une recherche puissante et simple
+            L’Annuaire des Entreprises propose une recherche puissante et simple
             qui permet aux entrepreneurs de retrouver facilement le numéro siret
-            de leur(s) entreprise(s) pour l'utiliser dans leurs démarches
+            de leur(s) entreprise(s) pour l’utiliser dans leurs démarches
             administratives.
           </p>
           <h3>Suppression du KBIS dans les démarches des entreprises</h3>
           <p>
             À partir de Novembre 2021, les entreprises immatriculées au RCS ou
             au RNM n’ont plus à fournir leur extrait KBIS dans leurs démarches
-            administratives, le seul numéro siret suffit à l'administration pour
+            administratives, le seul numéro siret suffit à l’administration pour
             retrouver les données nécessaire.
           </p>
           <p>
@@ -131,7 +131,7 @@ const About: React.FC = () => {
               >
                 API Sirene données ouvertes
               </a>{' '}
-              : qui donne accès à la base Sirene des entreprises de l'
+              : qui donne accès à la base Sirene des entreprises de l’
               <a
                 target="_blank"
                 rel="noreferrer noopener"
@@ -148,7 +148,7 @@ const About: React.FC = () => {
               >
                 API Répertoire National des Métiers
               </a>{' '}
-              : les immatriculations d'entreprises artisanales, auprès de{' '}
+              : les immatriculations d’entreprises artisanales, auprès de{' '}
               <a
                 target="_blank"
                 rel="noreferrer noopener"
@@ -165,7 +165,7 @@ const About: React.FC = () => {
               >
                 API Registre National du Commerce et des Sociétés
               </a>{' '}
-              : les immatriculations d'entreprises auprès des Greffes de
+              : les immatriculations d’entreprises auprès des Greffes de
               tribunal de Commerce, centralisées par l’
               <a
                 target="_blank"
@@ -211,12 +211,12 @@ const About: React.FC = () => {
           <p>
             Il existe une API spéciale (nommée API Entreprise) réservée aux
             administrations et à certaines entreprises éligibles, qui permet
-            d'accéder aux informations des entreprises détenue par
-            l'administration :
+            d’accéder aux informations des entreprises détenue par
+            l’administration :
           </p>
           <ul>
-            <li>les informations d'immatriculation</li>
-            <li>le chiffre d'affaire</li>
+            <li>les informations d’immatriculation</li>
+            <li>le chiffre d’affaire</li>
             <li>les certifications professionnelles</li>
             <li>... et bien d’autres</li>
           </ul>

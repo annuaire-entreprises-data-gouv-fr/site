@@ -34,8 +34,8 @@ const AssociationSection: React.FC<{
       >
         {notInRna ? (
           <Warning>
-            Cette entité possède un identifiant d'assocation, mais aucune
-            information n'a été trouvée dans le{' '}
+            Cette entité possède un identifiant d’assocation, mais aucune
+            information n’a été trouvée dans le{' '}
             <b>Répertoire National des Associations (RNA)</b>.
           </Warning>
         ) : (

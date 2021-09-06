@@ -34,7 +34,7 @@ const ResultsHeader = ({
           Aucune entité n’a été trouvée pour “<b>{searchTerm}</b>”
           <p>
             Nous vous suggérons de vérifier l’orthographe du nom, du SIRET, ou
-            de l'adresse que vous avez utilisé.
+            de l’adresse que vous avez utilisé.
           </p>
         </div>
       )}

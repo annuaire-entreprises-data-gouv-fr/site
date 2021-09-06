@@ -25,10 +25,10 @@ const AdministrationNotResponding: React.FC<IProps> = ({
         fonctionne pas en ce moment.
         <br />
         <br />
-        Cela vient probablement d'une surcharge ponctuelle de leurs services.
+        Cela vient probablement d’une surcharge ponctuelle de leurs services.
         Merci de ré-essayer plus tard. Nous sommes désolés pour le dérangement.
         <br />
-        Pour en savoir plus sur l'état du service,{' '}
+        Pour en savoir plus sur l’état du service,{' '}
         <a
           href={`/administration/${administrationMetaData.slug}#acces`}
           target="_blank"

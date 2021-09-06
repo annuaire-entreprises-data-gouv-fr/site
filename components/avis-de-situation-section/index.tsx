@@ -35,13 +35,14 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
     {uniteLegale.estDiffusible ? (
       <>
         <div className="description">
-          Chaque établissement immatriculé par l'INSEE au répertoire Sirene des
+          Chaque établissement immatriculé par l’INSEE au répertoire Sirene des
           entreprises possède un avis de situation.
         </div>
         <FullTable
           head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
           body={uniteLegale.etablissements.map(
             (etablissement: IEtablissement) => [
+              /*eslint-disable*/
               <a href={`/etablissement/${etablissement.siret}`}>
                 {formatSiret(etablissement.siret)}
               </a>,
@@ -62,6 +63,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
                 siret={uniteLegale.siege.siret}
                 label="Télécharger"
               />,
+              /*eslint-enable*/
             ]
           )}
         />

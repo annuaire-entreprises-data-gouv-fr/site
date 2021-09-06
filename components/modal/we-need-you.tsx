@@ -20,7 +20,7 @@ export const WeNeedYouModal: React.FC<{}> = () => (
         <h2>Nous sommes curieux ! 👀</h2>
         <p>
           Dites-nous comment vous utilisez le site, comment nous pourrions
-          l'améliorer et le compléter.
+          l’améliorer et le compléter.
         </p>
         <br />
         <div className="layout-center">

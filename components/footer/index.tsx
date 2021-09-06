@@ -44,7 +44,7 @@ const Footer = () => (
           <br />
           <p className="fr-footer__content-desc">
             Ce site permet de retrouver toutes les données publiques détenues
-            par l'administration sur une entreprise ou une association et{' '}
+            par l’administration sur une entreprise ou une association et{' '}
             <a href="/donnees-extrait-kbis">
               en particulier les données contenue dans un extrait KBIS/D1
             </a>
@@ -144,21 +144,6 @@ const Footer = () => (
               Statut des API utilisées
             </a>
           </li>
-          {/* <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="#">
-                Accessibilité: partiellement conforme
-              </a>
-            </li> */}
-          {/* <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="#">
-                Mentions légales
-              </a>
-            </li>
-            <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="#">
-                Gestion des cookies
-              </a>
-            </li> */}
         </ul>
         <div className="fr-footer__bottom-copy">
           <p>
@@ -166,6 +151,7 @@ const Footer = () => (
             <a
               href="https://github.com/etalab/licence-ouverte/blob/master/LO.md"
               target="_blank"
+              rel="noreferrer noopener"
             >
               licence etalab-2.0
             </a>

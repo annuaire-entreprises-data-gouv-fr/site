@@ -36,10 +36,10 @@ const ImmatriculationRNCS: React.FC<IProps> = ({ immatriculation }) => {
           source={EAdministration.INPI}
         >
           <p>
-            Cette entité possède une fiche d'immatriculation au{' '}
+            Cette entité possède une fiche d’immatriculation au{' '}
             <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
             liste les entreprises enregistrées auprès des Greffes des tribunaux
-            de commerce et centralisées par l'
+            de commerce et centralisées par l’
             <INPI />.
           </p>
           <p>
@@ -50,9 +50,9 @@ const ImmatriculationRNCS: React.FC<IProps> = ({ immatriculation }) => {
           </p>
           <p>
             Si le téléchargement échoue, vous pouvez accéder à la donnée en
-            allant sur le site de l'
+            allant sur le site de l’
             <INPI />. Pour accéder à l’ensemble de la donnée en utilisant le
-            site de l'
+            site de l’
             <INPI /> vous devrez vous créer un compte <INPI />.
           </p>
           <div className="layout-center">

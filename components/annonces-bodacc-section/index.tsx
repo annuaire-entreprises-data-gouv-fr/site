@@ -47,7 +47,7 @@ const AnnoncesBodaccSection: React.FC<{
             , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
             consulter{' '}
             <a
-              rel="referrer noopener nofollow"
+              rel="noreferrer noopener nofollow"
               target="_blank"
               href={`${routes.bodacc.site.recherche}/${uniteLegale.siren}`}
             >
@@ -58,6 +58,7 @@ const AnnoncesBodaccSection: React.FC<{
           <FullTable
             head={['Publication', 'N°', 'Details', 'Lien']}
             body={annonces.map((annonce) => [
+              /*eslint-disable*/
               <b>{annonce.datePublication}</b>,
               <Tag>n° {annonce.numeroAnnonce}</Tag>,
               <div className="annonce">
@@ -71,6 +72,7 @@ const AnnoncesBodaccSection: React.FC<{
               <ButtonLink target="_blank" to={annonce.path} alt small>
                 ⇢&nbsp;Consulter
               </ButtonLink>,
+              /*eslint-enable*/
             ])}
           />
         </>
