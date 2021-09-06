@@ -30,7 +30,7 @@ const EtablissementPage: React.FC<IProps> = ({
         etablissement={etablissement}
       />
       <br />
-      {uniteLegale.estDiffusible ? (
+      {etablissement.estDiffusible ? (
         <EtablissementSection
           etablissement={etablissement}
           uniteLegale={uniteLegale}

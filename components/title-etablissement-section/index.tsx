@@ -37,7 +37,14 @@ const TitleEtablissementWithDenomination: React.FC<{
     </h2>
     <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
     {etablissement.estSiege && <Tag>siège social</Tag>}
-    <IsActiveTag isActive={etablissement.estActif} />
+    {etablissement.estDiffusible ? (
+      <IsActiveTag isActive={etablissement.estActif} />
+    ) : (
+      <>
+        <Tag>Non-diffusible</Tag>
+        <IsActiveTag isActive={null} />
+      </>
+    )}
     <style jsx>{`
       .sub-title > span {
         color: #666;

@@ -75,6 +75,7 @@ export const mapSireneOuverteEtablissementToDomainObject = (
     nic: etablissement.nic,
     estActif,
     estSiege: etablissement.is_siege,
+    estDiffusible: true,
     dateCreation: etablissement.date_creation,
     dateDerniereMiseAJour: etablissement.date_mise_a_jour,
     dateDebutActivite: etablissement.date_debut_activite,

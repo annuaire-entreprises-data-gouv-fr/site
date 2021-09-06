@@ -18,6 +18,7 @@ export interface IEtablissement {
   nic: string;
   estActif: boolean | null;
   estSiege: boolean;
+  estDiffusible: boolean;
   dateCreation: string;
   dateDerniereMiseAJour: string;
   dateFermeture: string | null;

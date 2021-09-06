@@ -94,10 +94,6 @@ const mapToDomainObject = (
     nomUniteLegale,
   } = periodesUniteLegale[0];
 
-  if (statutDiffusionUniteLegale === 'N') {
-    throw new HttpForbiddenError(403, 'Forbidden (non diffusible)');
-  }
-
   const safeActivitePrincipaleUniteLegale = (
     activitePrincipaleUniteLegale || ''
   ).replace('.', '');
