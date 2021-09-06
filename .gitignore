@@ -40,8 +40,6 @@ yarn-error.log*
 /public/maps/*
 /public/sitemap.xml
 /public/*.xml
-/public/resources/partials/*/dist
-/public/resources/partials/*/dist/*
 /public/resources/partials/*/node_modules/*
 
 # direnv
