@@ -127,7 +127,7 @@ const ButtonAsync = (props) => {
     <div className="button-link" ref={instance}>
       <Styles isLoading={isLoading} />
       <button onClick={click}>
-        {isLoading || true ? (
+        {isLoading ? (
           <Fragment>
             <Loader />
             <div>
