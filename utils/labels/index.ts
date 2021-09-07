@@ -13,7 +13,8 @@ export const libelleFromCodeNaf = (codeNaf: string, addCode = true) => {
 
 export const libelleFromCodeEffectif = (
   codeEffectif: string,
-  anneeEffectif?: string
+  anneeEffectif?: string,
+  characterEmployeurUniteLegale?: string
 ) => {
   //@ts-ignore
   const libelle = codesEffectifs[codeEffectif];
@@ -21,7 +22,13 @@ export const libelleFromCodeEffectif = (
   if (libelle && anneeEffectif) {
     return `${libelle}, en ${anneeEffectif}`;
   }
-  return libelle || null;
+  if (libelle) {
+    return libelle;
+  }
+  if (characterEmployeurUniteLegale === 'N') {
+    return 'Unité non employeuse';
+  }
+  return null;
 };
 
 export const fullLibelleFromCodeNaf = (activite_principale: string) =>

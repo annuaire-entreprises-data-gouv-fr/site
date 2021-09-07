@@ -13,7 +13,6 @@ import {
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
-import { HttpForbiddenError } from '../exceptions';
 import routes from '../routes';
 
 interface IInseeUniteLegaleResponse {
@@ -38,6 +37,7 @@ interface IPeriodeUniteLegale {
   activitePrincipaleUniteLegale: string;
   categorieJuridiqueUniteLegale: string;
   denominationUniteLegale: string;
+  caractereEmployeurUniteLegale: string;
   nomUniteLegale: string;
 }
 
@@ -91,6 +91,7 @@ const mapToDomainObject = (
     denominationUniteLegale,
     economieSocialeSolidaireUniteLegale,
     etatAdministratifUniteLegale,
+    caractereEmployeurUniteLegale,
     nomUniteLegale,
   } = periodesUniteLegale[0];
 
@@ -161,7 +162,8 @@ const mapToDomainObject = (
     trancheEffectif: trancheEffectifsUniteLegale,
     libelleTrancheEffectif: libelleFromCodeEffectif(
       trancheEffectifsUniteLegale,
-      anneeEffectifsUniteLegale
+      anneeEffectifsUniteLegale,
+      caractereEmployeurUniteLegale
     ),
     dirigeant: estEntrepreneurIndividuel ? dirigeant : null,
   };
