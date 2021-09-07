@@ -1,5 +1,6 @@
 import React from 'react';
 import randomId from '../../utils/helpers/randomId';
+import Head from 'next/head';
 import ButtonLink from '../button';
 import { download } from '../icon';
 
@@ -19,8 +20,9 @@ const ButtonLinkAsync: React.FC<{ to: string }> = ({ to }) => {
           {download} Télécharger le justificatif d’immatriculation
         </ButtonLink>
       </span>
-      {/* Use Next built-in script component to have a single import */}
-      <script async src="/resources/partials/button-async/dist/index.js" />
+      <Head>
+        <script async src="/resources/partials/button-async/dist/index.js" />
+      </Head>
       <div
         dangerouslySetInnerHTML={{
           __html: `<partial-button-async to="${to}" clean="${id}" />`,
