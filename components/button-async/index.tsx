@@ -1,5 +1,4 @@
 import React from 'react';
-import Script from 'next/script';
 import randomId from '../../utils/helpers/randomId';
 import ButtonLink from '../button';
 import { download } from '../icon';
@@ -21,7 +20,7 @@ const ButtonLinkAsync: React.FC<{ to: string }> = ({ to }) => {
         </ButtonLink>
       </span>
       {/* Use Next built-in script component to have a single import */}
-      <Script async src="/resources/partials/button-async/dist/index.js" />
+      <script async src="/resources/partials/button-async/dist/index.js" />
       <div
         dangerouslySetInnerHTML={{
           __html: `<partial-button-async to="${to}" clean="${id}" />`,
