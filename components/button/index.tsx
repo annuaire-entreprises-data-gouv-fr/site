@@ -32,6 +32,8 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         {children}
       </a>
     )}
+
+    {/* styles are global as they are used in partials button-async */}
     <style global jsx>{`
       div.button-link {
         display: block;
