@@ -2,22 +2,26 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import Title, { FICHE } from '../../components/title-section';
-import AnnoncesBodaccSection from '../../components/annonces-bodacc-section';
 
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
-import { getUniteLegaleFromSlug } from '../../models/unite-legale';
-import getAnnoncesBodaccFromSlug, {
-  IAnnoncesBodacc,
-} from '../../models/annonces-bodacc';
+import { IAnnoncesBodacc, IAnnoncesJO } from '../../models/annonces';
 import { IUniteLegale } from '../../models';
 import { IAPINotRespondingError } from '../../models/api-not-responding';
+import getAnnoncesFromSlug from '../../models/annonces';
+import AnnoncesBodaccSection from '../../components/annonces-section/bodacc';
+import AnnoncesJOSection from '../../components/annonces-section/jo';
 
 interface IProps {
   uniteLegale: IUniteLegale;
-  annonces: IAnnoncesBodacc[] | IAPINotRespondingError;
+  annoncesBodacc: IAnnoncesBodacc[] | IAPINotRespondingError;
+  annoncesJO: IAnnoncesJO[] | IAPINotRespondingError;
 }
 
-const Annonces: React.FC<IProps> = ({ uniteLegale, annonces }) => (
+const Annonces: React.FC<IProps> = ({
+  uniteLegale,
+  annoncesJO,
+  annoncesBodacc,
+}) => (
   <Page
     small={true}
     title={`Annonces légales (BODACC) - ${uniteLegale.nomComplet}`}
@@ -25,7 +29,13 @@ const Annonces: React.FC<IProps> = ({ uniteLegale, annonces }) => (
   >
     <div className="content-container">
       <Title ficheType={FICHE.ANNONCES} uniteLegale={uniteLegale} />
-      <AnnoncesBodaccSection uniteLegale={uniteLegale} annonces={annonces} />
+      <AnnoncesBodaccSection
+        uniteLegale={uniteLegale}
+        annonces={annoncesBodacc}
+      />
+      {uniteLegale.association && (
+        <AnnoncesJOSection uniteLegale={uniteLegale} annonces={annoncesJO} />
+      )}
     </div>
   </Page>
 );
@@ -35,15 +45,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siren = context.params.slug as string;
 
   try {
-    const [uniteLegale, annonces] = await Promise.all([
-      getUniteLegaleFromSlug(siren),
-      getAnnoncesBodaccFromSlug(siren),
-    ]);
+    const { uniteLegale, annoncesBodacc, annoncesJO } =
+      await getAnnoncesFromSlug(siren);
 
     return {
       props: {
         uniteLegale,
-        annonces,
+        annoncesBodacc,
+        annoncesJO,
       },
     };
   } catch (e) {

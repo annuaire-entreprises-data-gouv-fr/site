@@ -25,6 +25,14 @@ const routes = {
       annonce: 'https://www.bodacc.fr/annonce/detail-annonce/',
     },
   },
+  journalOfficielAssociations: {
+    ods: 'https://journal-officiel-datadila.opendatasoft.com/api/records/1.0/search/?dataset=jo_associations',
+    site: {
+      recherche: 'https://www.journal-officiel.gouv.fr/associations/recherche/',
+      justificatif:
+        'https://www.journal-officiel.gouv.fr/document/associations_b/',
+    },
+  },
   sireneInsee: {
     siren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
     siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',

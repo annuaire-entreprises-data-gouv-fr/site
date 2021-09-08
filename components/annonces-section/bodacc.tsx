@@ -8,7 +8,7 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
-import { IAnnoncesBodacc } from '../../models/annonces-bodacc';
+import { IAnnoncesBodacc } from '../../models/annonces';
 import { Tag } from '../tag';
 import ButtonLink from '../button';
 import { DILA } from '../administrations';

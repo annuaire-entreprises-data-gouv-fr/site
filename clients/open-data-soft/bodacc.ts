@@ -1,5 +1,5 @@
 import odsClient from '.';
-import { IAnnoncesBodacc } from '../../models/annonces-bodacc';
+import { IAnnoncesBodacc } from '../../models/annonces';
 import { formatDate } from '../../utils/helpers/formatting';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../../utils/sentry';
