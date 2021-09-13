@@ -34,7 +34,6 @@ interface IJournalOfficielAssociationRecord {
 const fetchAnnoncesJO = async (idRna: string) => {
   const url = `${routes.journalOfficielAssociations.ods}&q=numero_rna%3A${idRna}+source%3Ajoafe&sort=dateparution`;
 
-  console.log(url);
   const response = (await odsClient(
     url
   )) as IJournalOfficielAssociationRecord[];

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
@@ -8,18 +8,19 @@ import {
   administrationsMetaData,
   EAdministration,
   IAdministrationMetaData,
+  IAPIMonitorMetaData,
 } from '../../models/administration';
 import {
   redirectPageNotFound,
   redirectServerError,
 } from '../../utils/redirects';
-import { getMonitoring, IMonitoring } from '../../models/monitoring';
+import { getMonitorsWithMetaData, IMonitoring } from '../../models/monitoring';
 import AdministrationApiMonitoring from '../../components/administration-api-monitoring';
 import { HttpNotFound } from '../../clients/exceptions';
 import { Section } from '../../components/section';
 
 interface IProps extends IAdministrationMetaData {
-  monitoring: IMonitoring;
+  monitorings: (IMonitoring & IAPIMonitorMetaData)[];
 }
 
 const AdministrationPage: React.FC<IProps> = ({
@@ -27,10 +28,8 @@ const AdministrationPage: React.FC<IProps> = ({
   short,
   slug,
   description,
-  apiGouvLink,
+  monitorings,
   dataGouvLink,
-  monitoring,
-  monitoringId,
 }) => (
   <Page
     small={true}
@@ -42,38 +41,42 @@ const AdministrationPage: React.FC<IProps> = ({
       <a href="/administration">← Toutes les administrations partenaires</a>
       <h1>{long}</h1>
       <ReactMarkdown children={description} />
-      {(apiGouvLink || dataGouvLink) && (
+      {(dataGouvLink || monitorings.length > 0) && (
+        <h2 id="acces">Accéder aux données {short}</h2>
+      )}
+      {dataGouvLink && (
         <>
-          <h2 id="acces">Accéder aux données {short}</h2>
-          {dataGouvLink && (
-            <>
-              <h3>En téléchargeant un jeu de données</h3>
-              <p>
-                Les données brutes sont téléchargeables, sous licence open-data.
-                Pour y accéder, consultez{' '}
-                <a href={dataGouvLink}>la page data.gouv.fr</a>.<br />
-              </p>
-            </>
-          )}
-          {apiGouvLink && (
-            <>
-              <h3>Par API</h3>
-              <p>
-                Les données sont accessibles par API. Pour y accéder, consultez{' '}
-                <a href={apiGouvLink}>la page api.gouv.fr</a>.
-              </p>
-            </>
-          )}
-          <br />
-          {monitoringId &&
-            (monitoring && monitoring.series ? (
-              <AdministrationApiMonitoring {...monitoring} />
-            ) : (
-              <Section title="Suivi des performances de l'API indisponible">
-                Notre service de suivi des performances est actuellement
-                hors-ligne. Nous sommes désolés pour ce dérangement.
-              </Section>
-            ))}
+          <h3>En téléchargeant un jeu de données</h3>
+          <p>
+            Les données brutes sont téléchargeables, sous licence open-data.
+            Pour y accéder, consultez{' '}
+            <a href={dataGouvLink}>la page data.gouv.fr</a>.<br />
+          </p>
+        </>
+      )}
+      {monitorings.length > 0 && (
+        <>
+          <h2>En utilisant les API</h2>
+          {monitorings.map((monitoring) => (
+            <Fragment key={monitoring.id}>
+              {monitoring.apiName && <h3>{monitoring.apiName}</h3>}
+              {monitoring.apiGouvLink && (
+                <p>
+                  Les données sont accessibles par API. Pour y accéder,
+                  consultez{' '}
+                  <a href={monitoring.apiGouvLink}>la page api.gouv.fr</a>.
+                </p>
+              )}
+              {monitoring && monitoring.series ? (
+                <AdministrationApiMonitoring {...monitoring} />
+              ) : (
+                <Section title="Suivi des performances de l'API indisponible">
+                  Notre service de suivi des performances est actuellement
+                  hors-ligne. Nous sommes désolés pour ce dérangement.
+                </Section>
+              )}
+            </Fragment>
+          ))}
         </>
       )}
     </div>
@@ -98,11 +101,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       throw new HttpNotFound(404, `${slug}`);
     }
 
-    const monitoring = administration.monitoringId
-      ? await getMonitoring(administration.monitoringId)
-      : null;
-
-    return { props: { ...administration, monitoring } };
+    const monitorings = await getMonitorsWithMetaData(
+      administration.apiMonitors
+    );
+    return {
+      props: {
+        ...administration,
+        monitorings,
+      },
+    };
   } catch (e) {
     if (e instanceof HttpNotFound) {
       redirectPageNotFound(

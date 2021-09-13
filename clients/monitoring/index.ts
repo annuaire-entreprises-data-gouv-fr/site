@@ -86,7 +86,7 @@ const mapToDomainObject = (
   const isOnline = [8, 9].indexOf(monitor.status) === -1;
 
   return {
-    monitoringId: monitor.id,
+    id: monitor.id,
     series: dailySeries.export(),
     isOnline,
     uptime: {

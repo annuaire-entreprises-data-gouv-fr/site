@@ -160,10 +160,8 @@ const AdministrationApiMonitoring: React.FC<IMonitoring> = ({
       <h3>
         Historique de disponibilité <RobotTooltip />
       </h3>
-      <br />
       <Metric series={series} />
       <h3>Statistiques moyennes</h3>
-      <br />
       <div className="mean-stats">
         <div>
           <b>24h</b>
@@ -190,7 +188,8 @@ const AdministrationApiMonitoring: React.FC<IMonitoring> = ({
         margin-bottom: 10px;
       }
       .metrics-title h3 {
-        margin-bottom: 0;
+        margin-bottom: 10px;
+        margin-top: 20px;
       }
       .mean-stats {
         display: flex;

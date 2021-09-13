@@ -1,6 +1,7 @@
 import { cma, inpi } from '../public/static/logo';
 
 export enum EAdministration {
+  DINUM = 0,
   INPI = 1,
   INSEE,
   CMAFRANCE,
@@ -16,16 +17,19 @@ export interface IAdministrationMetaData {
   long: string;
   short: string;
   logo?: JSX.Element;
-  monitoringId: number;
   slug: string;
   description: string;
   contact: string;
-  apiGouvLink?: string;
-  apiName?: string;
-  dataGouvLink?: string;
   site?: string;
+  apiMonitors: IAPIMonitorMetaData[];
+  dataGouvLink?: string;
 }
 
+export interface IAPIMonitorMetaData {
+  id: number;
+  apiGouvLink?: string;
+  apiName?: string;
+}
 interface IAdministrationsLogos {
   [key: string]: JSX.Element;
 }
@@ -36,6 +40,24 @@ export const administrationsLogo: IAdministrationsLogos = {
 };
 
 export const administrationsMetaData: IAdministrationsMetaData = {
+  [EAdministration.DINUM]: {
+    slug: 'dinum',
+    short: 'DINUM',
+    long: 'Direction Interministérielle du Numérique (DINUM)',
+    site: 'https://numerique.gouv.fr',
+    description: `## Qu'est-ce que la DINUM ?
+La direction interministérielle du numérique (DINUM) est l’administration qui accompagne les ministères et les autres administrations dans leur transformation numérique.
+
+Elle conseille également le gouvernement sur les sujet numérique et développe des services et ressources mises à disposition des autres administrations comme par exemple : le réseau interministériel de l’État, [FranceConnect](https://franceconnect.gouv.fr), [data.gouv.fr](https://data.gouv.fr) ou [api.gouv.fr](https://api.gouv.fr).
+    `,
+    contact: 'https://www.numerique.gouv.fr/contact/',
+    apiMonitors: [
+      {
+        apiName: 'API Moteur de recherche de l’Annuaire des Entreprises',
+        id: 787859512,
+      },
+    ],
+  },
   [EAdministration.INPI]: {
     slug: 'inpi',
     short: 'INPI',
@@ -67,9 +89,13 @@ sont pas à jour ? 👉 [Contactez l’INPI pour demander une correction](https:
     contact: 'https://www.inpi.fr/fr/contactez-nous?about=030',
     dataGouvLink:
       'https://www.data.gouv.fr/fr/organizations/institut-national-de-la-propriete-industrielle-inpi/',
-    apiGouvLink: 'https://api.gouv.fr/les-api/api-rncs',
-    apiName: 'API Registre National du Commerce et des Sociétés',
-    monitoringId: 787859523,
+    apiMonitors: [
+      {
+        apiGouvLink: 'https://api.gouv.fr/les-api/api-rncs',
+        apiName: 'API Registre National du Commerce et des Sociétés',
+        id: 787859523,
+      },
+    ],
   },
   [EAdministration.INSEE]: {
     slug: 'insee',
@@ -122,9 +148,13 @@ Si ce n'est pas suffisant, [contactez directement l'INSEE](https://www.insee.fr/
       'https://api.insee.fr/catalogue/site/themes/wso2/subthemes/insee/pages/help.jag#contact',
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/',
-    apiGouvLink: 'https://api.gouv.fr/les-api/sirene_v3',
-    apiName: 'API Répertoire Sirene',
-    monitoringId: 787859514,
+    apiMonitors: [
+      {
+        apiGouvLink: 'https://api.gouv.fr/les-api/sirene_v3',
+        apiName: 'API Répertoire Sirene',
+        id: 787859514,
+      },
+    ],
   },
   [EAdministration.DILA]: {
     slug: 'dila',
@@ -152,11 +182,22 @@ sont pas à jour ? 👉 [Contactez la DILA pour demander une correction](https:/
     `,
     contact:
       'https://www.dila.premier-ministre.gouv.fr/services/api/boamp/contact',
-    apiName: 'API BODACC',
-    apiGouvLink:
-      'https://api.gouv.fr/les-api/api-bulletin-annonces-civiles-commerciales-bodacc',
     dataGouvLink: 'https://www.data.gouv.fr/fr/organizations/premier-ministre/',
-    monitoringId: 788647353,
+    apiMonitors: [
+      {
+        apiName: 'API BODACC',
+        apiGouvLink:
+          'https://api.gouv.fr/les-api/api-bulletin-annonces-civiles-commerciales-bodacc',
+        id: 788647353,
+      },
+      {
+        apiName:
+          'API annonces et comptes annuels des associations (Journal Officiel)',
+        apiGouvLink:
+          'https://api.gouv.fr/les-api/api-annonces-comptes-annuels-associations-joafe',
+        id: 789134910,
+      },
+    ],
   },
   [EAdministration.METI]: {
     slug: 'meti',
@@ -176,8 +217,7 @@ sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](h
     contact: 'https://travail-emploi.gouv.fr/ministere/article/nous-contacter',
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/',
-    apiName: 'API Conventions Collectives',
-    monitoringId: 787859521,
+    apiMonitors: [{ apiName: 'API Conventions Collectives', id: 787859521 }],
   },
   [EAdministration.MI]: {
     slug: 'mi',
@@ -202,11 +242,15 @@ Vous avez repéré une erreur ? Les données d’une association ne
 sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](https://www.interieur.gouv.fr/Infos-du-site/Nous-contacter).
         `,
     contact: 'https://www.interieur.gouv.fr/Infos-du-site/Nous-contacter',
-    apiGouvLink: 'https://api.gouv.fr/les-api/api_rna',
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/',
-    apiName: 'API Répertoire National des Associations',
-    monitoringId: 788061105,
+    apiMonitors: [
+      {
+        apiGouvLink: 'https://api.gouv.fr/les-api/api_rna',
+        apiName: 'API Répertoire National des Associations',
+        id: 788061105,
+      },
+    ],
   },
   [EAdministration.CMAFRANCE]: {
     slug: 'cma-france',
@@ -227,8 +271,12 @@ Vous avez repéré une erreur ? Les données de cette administration ne
 sont pas à jour ? 👉 [Contactez la Chambre des Métiers et de l'Artisanat de votre département pour demander une correction](http://annuairecma.artisanat.fr/).
     `,
     contact: 'http://annuairecma.artisanat.fr/',
-    apiGouvLink: 'https://api.gouv.fr/les-api/api_rnm',
-    apiName: 'API Répertoire National des Métiers',
-    monitoringId: 787859525,
+    apiMonitors: [
+      {
+        apiGouvLink: 'https://api.gouv.fr/les-api/api_rnm',
+        apiName: 'API Répertoire National des Métiers',
+        id: 787859525,
+      },
+    ],
   },
 };

@@ -3,11 +3,14 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 
-import { administrationsMetaData } from '../../models/administration';
 import { redirectServerError } from '../../utils/redirects';
-import { getMonitorings, IMonitoring } from '../../models/monitoring';
+import {
+  getAllMonitorsWithMetaData,
+  IMonitoring,
+} from '../../models/monitoring';
 import AdministrationApiMonitoring from '../../components/administration-api-monitoring';
 import { Section } from '../../components/section';
+import { escapeTerm, trimWhitespace } from '../../utils/helpers/formatting';
 
 interface IMonitoringWithName extends IMonitoring {
   short: string;
@@ -20,6 +23,8 @@ interface IProps {
   monitors: IMonitoringWithName[];
 }
 
+const simplify = (str: string) => escapeTerm(trimWhitespace(str));
+
 const StatusPage: React.FC<IProps> = ({ monitors }) => (
   <Page
     small={true}
@@ -28,9 +33,17 @@ const StatusPage: React.FC<IProps> = ({ monitors }) => (
   >
     <div className="content-container">
       <h1>Statut des API partenaires</h1>
+      <b>Sommaire</b>
+      <ul>
+        {monitors.map((monitor) => (
+          <li key={`link-${simplify(monitor.apiName)}`}>
+            <a href={`#${simplify(monitor.apiName)}`}>{monitor.apiName}</a>
+          </li>
+        ))}
+      </ul>
       {monitors.map((monitor) => (
-        <div key={monitor.short}>
-          <h2>
+        <div key={monitor.apiName}>
+          <h2 id={simplify(monitor.apiName)}>
             {monitor.apiName} (
             <a href={`/administration/${monitor.slug}`}>{monitor.short}</a>)
           </h2>
@@ -74,29 +87,10 @@ const StatusPage: React.FC<IProps> = ({ monitors }) => (
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   try {
-    const administrationsWithMonitor = Object.values(
-      administrationsMetaData
-    ).filter((admin) => !!admin.monitoringId);
-
-    const monitors = await getMonitorings(
-      administrationsWithMonitor.map((a) => a.monitoringId)
-    );
-
-    const monitorsAndMetaData = administrationsWithMonitor.map((admin) => {
-      const monitoring = monitors.find(
-        (monitor) => monitor.monitoringId === admin.monitoringId
-      );
-
-      return {
-        ...monitoring,
-        short: admin.short,
-        apiGouvLink: admin.apiGouvLink || null,
-        slug: admin.slug,
-        apiName: admin.apiName,
-      };
-    });
-
-    return { props: { monitors: monitorsAndMetaData } };
+    const monitors = await getAllMonitorsWithMetaData();
+    return {
+      props: { monitors },
+    };
   } catch (e) {
     redirectServerError(context.res, e);
 
