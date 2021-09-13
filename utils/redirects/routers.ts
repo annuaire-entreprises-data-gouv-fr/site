@@ -2,7 +2,7 @@ import { IncomingMessage, ServerResponse } from 'http';
 import {
   hasSiretFormat,
   hasSirenFormat,
-  extractSirenFromSiret,
+  extractSirenFromSiretNoVerify,
 } from '../helpers/siren-and-siret';
 
 import {
@@ -69,7 +69,7 @@ export const redirectIfIssueWithSiretOrSiren = (
   siret: string,
   req?: IncomingMessage
 ) => {
-  const siren = extractSirenFromSiret(siret || '');
+  const siren = extractSirenFromSiretNoVerify(siret || '');
 
   const scope = { siren, siret, ...getScopeFromRequest(req) };
 

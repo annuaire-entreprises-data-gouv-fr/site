@@ -100,6 +100,9 @@ export const formatSiret = (siret = '') => {
 export const extractSirenFromSiret = (siret: string) => {
   return verifySiren(siret.slice(0, 9));
 };
+export const extractSirenFromSiretNoVerify = (siret: string): string => {
+  return siret.slice(0, 9);
+};
 
 export const extractNicFromSiret = (siret: string) => {
   return siret.slice(9);
