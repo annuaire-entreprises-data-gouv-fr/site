@@ -1,7 +1,8 @@
 import React from 'react';
 import { IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
-import { formatNumbersFr } from '../../utils/helpers/formatting';
+import { isTwoMonthOld } from '../../utils/helpers/checks';
+import { formatDate, formatNumbersFr } from '../../utils/helpers/formatting';
 import Warning from '../alerts/warning';
 import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
@@ -33,11 +34,20 @@ const AssociationSection: React.FC<{
         source={EAdministration.MI}
       >
         {notInRna ? (
-          <Warning>
-            Cette entité possède un identifiant d’assocation, mais aucune
-            information n’a été trouvée dans le{' '}
-            <b>Répertoire National des Associations (RNA)</b>.
-          </Warning>
+          <>
+            <Warning>
+              Cette entité possède un identifiant d’assocation, mais aucune
+              information n’a été trouvée dans le{' '}
+              <b>Répertoire National des Associations (RNA)</b>.
+            </Warning>
+            {!isTwoMonthOld(uniteLegale.dateCreation) && (
+              <Warning>
+                Cette entité est récente, elle a été créée il y a moins de deux
+                mois. Il est donc possible qu’elle n’ait pas encore été publiée
+                au RNA et qu’elle le soit prochainement.
+              </Warning>
+            )}
+          </>
         ) : (
           <p>
             Cette entité est inscrite au{' '}

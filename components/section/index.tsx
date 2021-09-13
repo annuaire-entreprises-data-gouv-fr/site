@@ -4,7 +4,9 @@ import {
   administrationsMetaData,
   EAdministration,
 } from '../../models/administration';
-import { formatDate } from '../../utils/helpers/formatting';
+import { isTwoMonthOld } from '../../utils/helpers/checks';
+import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
+import Warning from '../alerts/warning';
 import DataSourceTooltip from '../information-tooltip/data-source-tooltip';
 
 interface ISectionProps {
@@ -12,6 +14,7 @@ interface ISectionProps {
   width?: number;
   source?: EAdministration;
   id?: string;
+  lastModified?: string;
 }
 
 export const Section: React.FC<ISectionProps> = ({
@@ -19,22 +22,31 @@ export const Section: React.FC<ISectionProps> = ({
   children,
   title,
   source,
+  lastModified,
   width = 100,
 }) => {
   const dataSource = source ? administrationsMetaData[source] : undefined;
   const dataLogo = source ? administrationsLogo[source] : undefined;
-  const now = new Date();
+
+  const isOld = lastModified && isTwoMonthOld(lastModified);
+  const last = lastModified || new Date();
   return (
     <>
       <div className="section-container" id={id}>
         <h2>{title}</h2>
+        {isOld && (
+          <Warning>
+            Ces données n’ont pas été mises à jour depuis plus de deux mois.
+            Dernière mise à jour : {formatDateLong(lastModified)}.
+          </Warning>
+        )}
         <div>{children}</div>
         {dataSource && (
           <>
             <div className="data-source-tooltip-wrapper">
               <DataSourceTooltip
                 dataSource={dataSource}
-                lastUpdatedAt={formatDate(now)}
+                lastUpdatedAt={formatDate(last)}
               />
             </div>
             {dataLogo && <div className="logo-wrapper">{dataLogo}</div>}

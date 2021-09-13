@@ -8,14 +8,37 @@ export interface IODSResponse {
   }[];
 }
 
+export interface IODSMetadata {
+  datasets: { metas: { modified: string } }[];
+}
+
+const extractLastModifiedDate = (metadata: IODSMetadata) => {
+  if (!(metadata.datasets.length > 0)) {
+    return null;
+  }
+  return metadata.datasets[0].metas.modified;
+};
+
 /**
  * Get results for searchTerms from Sirene ouverte API
  */
-const odsClient = async (url: string): Promise<any> => {
-  const response = await httpGet(url);
+const odsClient = async (
+  searchUrl: string,
+  metaDataUrl: string
+): Promise<any> => {
+  const [response, metadata] = await Promise.all([
+    httpGet(searchUrl),
+    httpGet(metaDataUrl),
+  ]);
+
   const results = (response.data || []) as IODSResponse;
 
-  return results.records.map((record) => record.fields);
+  const lastModified = extractLastModifiedDate(metadata.data);
+
+  return {
+    records: results.records.map((record) => record.fields),
+    lastModified,
+  };
 };
 
 export default odsClient;

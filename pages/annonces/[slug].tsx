@@ -13,15 +13,11 @@ import AnnoncesJOSection from '../../components/annonces-section/jo';
 
 interface IProps {
   uniteLegale: IUniteLegale;
-  annoncesBodacc: IAnnoncesBodacc[] | IAPINotRespondingError;
-  annoncesJO: IAnnoncesJO[] | IAPINotRespondingError;
+  bodacc: IAnnoncesBodacc[] | IAPINotRespondingError;
+  jo: IAnnoncesJO[] | IAPINotRespondingError;
 }
 
-const Annonces: React.FC<IProps> = ({
-  uniteLegale,
-  annoncesJO,
-  annoncesBodacc,
-}) => (
+const Annonces: React.FC<IProps> = ({ uniteLegale, bodacc, jo }) => (
   <Page
     small={true}
     title={`Annonces légales (BODACC) - ${uniteLegale.nomComplet}`}
@@ -29,12 +25,9 @@ const Annonces: React.FC<IProps> = ({
   >
     <div className="content-container">
       <Title ficheType={FICHE.ANNONCES} uniteLegale={uniteLegale} />
-      <AnnoncesBodaccSection
-        uniteLegale={uniteLegale}
-        annonces={annoncesBodacc}
-      />
+      <AnnoncesBodaccSection uniteLegale={uniteLegale} bodacc={bodacc} />
       {uniteLegale.association && (
-        <AnnoncesJOSection uniteLegale={uniteLegale} annonces={annoncesJO} />
+        <AnnoncesJOSection uniteLegale={uniteLegale} jo={jo} />
       )}
     </div>
   </Page>
@@ -45,14 +38,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siren = context.params.slug as string;
 
   try {
-    const { uniteLegale, annoncesBodacc, annoncesJO } =
-      await getAnnoncesFromSlug(siren);
+    const { uniteLegale, bodacc, jo } = await getAnnoncesFromSlug(siren);
 
     return {
       props: {
         uniteLegale,
-        annoncesBodacc,
-        annoncesJO,
+        bodacc,
+        jo,
       },
     };
   } catch (e) {

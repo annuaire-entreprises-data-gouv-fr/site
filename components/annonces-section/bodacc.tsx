@@ -17,21 +17,25 @@ import { IUniteLegale } from '../../models';
 
 const AnnoncesBodaccSection: React.FC<{
   uniteLegale: IUniteLegale;
-  annonces: IAnnoncesBodacc[] | IAPINotRespondingError;
-}> = ({ uniteLegale, annonces }) => {
-  if (isAPINotResponding(annonces)) {
+  bodacc: IAnnoncesBodacc[] | IAPINotRespondingError;
+}> = ({ uniteLegale, bodacc }) => {
+  if (isAPINotResponding(bodacc)) {
     return (
       <AdministrationNotResponding
-        administration={annonces.administration}
-        errorType={annonces.errorType}
+        administration={bodacc.administration}
+        errorType={bodacc.errorType}
         title="Annonces BODACC"
       />
     );
   }
 
   return (
-    <Section title="Annonces BODACC" source={EAdministration.DILA}>
-      {annonces.length === 0 ? (
+    <Section
+      title="Annonces BODACC"
+      source={EAdministration.DILA}
+      lastModified={bodacc.lastModified}
+    >
+      {bodacc.annonces.length === 0 ? (
         <div>
           Cette entité n’a aucune annonce publiée au{' '}
           <b>Bulletin Officiel Des Annonces Civiles et Commerciales (BODACC)</b>
@@ -40,7 +44,7 @@ const AnnoncesBodaccSection: React.FC<{
       ) : (
         <>
           <p>
-            Cette entité possède {annonces.length} annonces publiées au{' '}
+            Cette entité possède {bodacc.annonces.length} annonces publiées au{' '}
             <b>
               Bulletin Officiel Des Annonces Civiles et Commerciales (BODACC)
             </b>
@@ -57,7 +61,7 @@ const AnnoncesBodaccSection: React.FC<{
           </p>
           <FullTable
             head={['Publication', 'N°', 'Details', 'Lien']}
-            body={annonces.map((annonce) => [
+            body={bodacc.annonces.map((annonce) => [
               /*eslint-disable*/
               <b>{annonce.datePublication}</b>,
               <Tag>n° {annonce.numeroAnnonce}</Tag>,

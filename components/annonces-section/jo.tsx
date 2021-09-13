@@ -17,13 +17,13 @@ import { IUniteLegale } from '../../models';
 
 const AnnoncesJOSection: React.FC<{
   uniteLegale: IUniteLegale;
-  annonces: IAnnoncesJO[] | IAPINotRespondingError;
-}> = ({ uniteLegale, annonces }) => {
-  if (isAPINotResponding(annonces)) {
+  jo: IAnnoncesJO[] | IAPINotRespondingError;
+}> = ({ uniteLegale, jo }) => {
+  if (isAPINotResponding(jo)) {
     return (
       <AdministrationNotResponding
-        administration={annonces.administration}
-        errorType={annonces.errorType}
+        administration={jo.administration}
+        errorType={jo.errorType}
         title="Annonces Journal Officiel des Associations"
       />
     );
@@ -33,8 +33,9 @@ const AnnoncesJOSection: React.FC<{
     <Section
       title="Annonces Journal Officiel des Associations"
       source={EAdministration.DILA}
+      lastModified={jo.lastModified}
     >
-      {annonces.length === 0 ? (
+      {jo.annonces.length === 0 ? (
         <div>
           Cette entité n’a aucune annonce publiée au{' '}
           <b>Journal Officiel des Associations (JOAFE)</b>.
@@ -42,7 +43,7 @@ const AnnoncesJOSection: React.FC<{
       ) : (
         <>
           <p>
-            Cette entité possède {annonces.length} annonces publiées au{' '}
+            Cette entité possède {jo.annonces.length} annonces publiées au{' '}
             <b>Journal Officiel des Associations (JOAFE)</b>
             , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
             consulter{' '}
@@ -62,7 +63,7 @@ const AnnoncesJOSection: React.FC<{
               'Type d’annonce',
               'Justificatif de parution',
             ]}
-            body={annonces.map((annonce) => [
+            body={jo.annonces.map((annonce) => [
               /*eslint-disable*/
               <b>{annonce.datePublication}</b>,
               <Tag>{annonce.numeroParution}</Tag>,
