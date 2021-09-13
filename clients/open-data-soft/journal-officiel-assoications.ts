@@ -1,8 +1,6 @@
 import odsClient from '.';
 import { IAnnoncesJO } from '../../models/annonces';
-import Annonces from '../../pages/annonces/[slug]';
 import { formatDate } from '../../utils/helpers/formatting';
-import { IdRna } from '../../utils/helpers/id-rna';
 import routes from '../routes';
 
 interface IJournalOfficielAssociationRecord {
@@ -31,19 +29,18 @@ interface IJournalOfficielAssociationRecord {
   association_type_libelle: string; // 'Associations loi du 1er juillet 1901';
 }
 
-const fetchAnnoncesJO = async (idRna: string) => {
-  const url = `${routes.journalOfficielAssociations.ods}&q=numero_rna%3A${idRna}+source%3Ajoafe&sort=dateparution`;
+const fetchAnnoncesJO = async (idRna: string): Promise<IAnnoncesJO> => {
+  const searchUrl = `${routes.journalOfficielAssociations.ods.search}&q=numero_rna%3A${idRna}+source%3Ajoafe&sort=dateparution`;
+  const metadataUrl = routes.journalOfficielAssociations.ods.metadata;
+  const response = await odsClient(searchUrl, metadataUrl);
 
-  const response = (await odsClient(
-    url
-  )) as IJournalOfficielAssociationRecord[];
-
-  return response.map(mapToDomainObject);
+  return {
+    annonces: response.records.map(mapToDomainObject),
+    lastModified: response.lastModified,
+  };
 };
 
-const mapToDomainObject = (
-  annonce: IJournalOfficielAssociationRecord
-): IAnnoncesJO => {
+const mapToDomainObject = (annonce: IJournalOfficielAssociationRecord) => {
   return {
     typeAvisLibelle: annonce.typeavis || '',
     datePublication: formatDate(annonce.dateparution) || '',
