@@ -13,8 +13,8 @@ import AnnoncesJOSection from '../../components/annonces-section/jo';
 
 interface IProps {
   uniteLegale: IUniteLegale;
-  bodacc: IAnnoncesBodacc[] | IAPINotRespondingError;
-  jo: IAnnoncesJO[] | IAPINotRespondingError;
+  bodacc: IAnnoncesBodacc | IAPINotRespondingError;
+  jo: IAnnoncesJO | IAPINotRespondingError;
 }
 
 const Annonces: React.FC<IProps> = ({ uniteLegale, bodacc, jo }) => (

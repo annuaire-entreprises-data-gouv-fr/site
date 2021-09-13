@@ -17,7 +17,7 @@ import { IUniteLegale } from '../../models';
 
 const AnnoncesJOSection: React.FC<{
   uniteLegale: IUniteLegale;
-  jo: IAnnoncesJO[] | IAPINotRespondingError;
+  jo: IAnnoncesJO | IAPINotRespondingError;
 }> = ({ uniteLegale, jo }) => {
   if (isAPINotResponding(jo)) {
     return (

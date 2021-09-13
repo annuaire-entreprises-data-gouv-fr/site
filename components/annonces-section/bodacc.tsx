@@ -17,7 +17,7 @@ import { IUniteLegale } from '../../models';
 
 const AnnoncesBodaccSection: React.FC<{
   uniteLegale: IUniteLegale;
-  bodacc: IAnnoncesBodacc[] | IAPINotRespondingError;
+  bodacc: IAnnoncesBodacc | IAPINotRespondingError;
 }> = ({ uniteLegale, bodacc }) => {
   if (isAPINotResponding(bodacc)) {
     return (

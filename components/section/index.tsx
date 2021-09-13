@@ -14,7 +14,7 @@ interface ISectionProps {
   width?: number;
   source?: EAdministration;
   id?: string;
-  lastModified?: string;
+  lastModified?: string | null;
 }
 
 export const Section: React.FC<ISectionProps> = ({
@@ -22,7 +22,7 @@ export const Section: React.FC<ISectionProps> = ({
   children,
   title,
   source,
-  lastModified,
+  lastModified = null,
   width = 100,
 }) => {
   const dataSource = source ? administrationsMetaData[source] : undefined;
@@ -34,7 +34,7 @@ export const Section: React.FC<ISectionProps> = ({
     <>
       <div className="section-container" id={id}>
         <h2>{title}</h2>
-        {isOld && (
+        {isOld && lastModified && (
           <Warning>
             Ces données n’ont pas été mises à jour depuis plus de deux mois.
             Dernière mise à jour : {formatDateLong(lastModified)}.
