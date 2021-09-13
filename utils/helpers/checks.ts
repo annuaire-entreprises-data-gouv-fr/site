@@ -9,7 +9,6 @@ export const isTwoMonthOld = (dateAsString: string) => {
 
     return Math.round(timeDifference / (3600 * 24 * 1000)) > 60;
   } catch {
-    console.log('hey');
     return false;
   }
 };
