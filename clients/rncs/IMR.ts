@@ -38,9 +38,9 @@ export interface IRNCSRepresentantResponse {
 
 export interface IRNCSBeneficiaireResponse {
   type_entite: string; //'BE_SOC';
-  nom_naissance: string; //'Penchienati';
-  prenoms: string; //'Veronique Bianca';
-  date_naissance: string; //'01/1967';
+  nom_naissance: string; //'XXX';
+  prenoms: string; //'YYY ZZZ';
+  date_naissance: string; //'MM/YYYY';
   nationalite: string; //'Française';
   detention_pouvoir_decision_ag: boolean; //false;
   deten_pvr_nom_membr_cons_admin: boolean; //false;
