@@ -36,17 +36,18 @@ const AssociationSection: React.FC<{
         {notInRna ? (
           <>
             <Warning>
-              Cette entité possède un identifiant d’assocation, mais aucune
+              Cette entité possède un identifiant d’association, mais aucune
               information n’a été trouvée dans le{' '}
               <b>Répertoire National des Associations (RNA)</b>.
+              {!isTwoMonthOld(uniteLegale.dateCreation) && (
+                <>
+                  <br />
+                  Cette entité a été créée il y a moins de deux mois. Il est
+                  donc possible qu’elle n’ait pas encore été publiée au RNA et
+                  qu’elle le soit prochainement.
+                </>
+              )}
             </Warning>
-            {!isTwoMonthOld(uniteLegale.dateCreation) && (
-              <Warning>
-                Cette entité est récente, elle a été créée il y a moins de deux
-                mois. Il est donc possible qu’elle n’ait pas encore été publiée
-                au RNA et qu’elle le soit prochainement.
-              </Warning>
-            )}
           </>
         ) : (
           <p>
