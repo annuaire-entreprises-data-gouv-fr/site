@@ -2,9 +2,13 @@ const { createServer } = require('http');
 const DataDome = require('@datadome/node-module');
 const { parse } = require('url');
 const next = require('next');
+const { loadEnvConfig } = require('@next/env');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
+
+// load env variables
+loadEnvConfig(process.cwd());
 
 const handle = app.getRequestHandler();
 
@@ -17,21 +21,14 @@ const handleRequest = function (req, res) {
 
 const datadomeClient = new DataDome(
   process.env.DATADOME_SERVER_KEY,
-  'api-eu-france-1.datadome.co',
-  {
-    ssl: true,
-    port: 443,
-    path: '/validate-request/',
-    timeout: 150,
-    uriRegex: null,
-    uriRegexExclusion:
-      /\.(js|css|jpg|jpeg|png|ico|gif|tiff|svg|woff|woff2|ttf|eot|mp4|otf)$/,
-  }
+  'api-eu-france-1.datadome.co'
 )
   .on('blocked', function (req) {
     console.log('DataDome blocked this request');
   })
-  .on('valid', handleRequest);
+  .on('valid', function (req, res) {
+    handleRequest(req, res);
+  });
 
 app.prepare().then(() => {
   createServer((req, res) => {
