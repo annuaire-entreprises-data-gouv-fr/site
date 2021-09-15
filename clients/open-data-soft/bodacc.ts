@@ -45,14 +45,18 @@ interface IBodaccB extends IBodaccCoreRecord {
   radiationaurcs?: string; // "{\"radiationPM\": \"O\"}"
 }
 
-const fetchAnnoncesBodacc = async (siren: Siren) => {
-  const url = `${routes.bodacc.ods}&q=registre%3A${siren}&sort=dateparution&facet=publicationavis&facet=publicationavis_facette&facet=typeavis&facet=typeavis_lib&facet=familleavis&facet=familleavis_lib&facet=numerodepartement&facet=departement_nom_officiel`;
-  const response = (await odsClient(url)) as IBodaccRecords[];
+const fetchAnnoncesBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
+  const searchUrl = `${routes.bodacc.ods.search}&q=registre%3A${siren}&sort=dateparution&facet=publicationavis&facet=publicationavis_facette&facet=typeavis&facet=typeavis_lib&facet=familleavis&facet=familleavis_lib&facet=numerodepartement&facet=departement_nom_officiel`;
+  const metadataUrl = routes.bodacc.ods.metadata;
+  const response = await odsClient(searchUrl, metadataUrl);
 
-  return response.map(mapToDomainObject);
+  return {
+    annonces: response.records.map(mapToDomainObject),
+    lastModified: response.lastModified,
+  };
 };
 
-const mapToDomainObject = (annonce: IBodaccRecords): IAnnoncesBodacc => {
+const mapToDomainObject = (annonce: IBodaccRecords) => {
   return {
     titre: annonce.familleavis_lib || '',
     sousTitre: `BODACC ${annonce.publicationavis} n°${annonce.parution}`,

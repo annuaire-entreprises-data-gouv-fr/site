@@ -19,14 +19,24 @@ const routes = {
     },
   },
   bodacc: {
-    ods: 'https://bodacc-datadila.opendatasoft.com/api/records/1.0/search/?dataset=annonces-commerciales',
+    ods: {
+      search:
+        'https://bodacc-datadila.opendatasoft.com/api/records/1.0/search/?dataset=annonces-commerciales',
+      metadata:
+        'https://bodacc-datadila.opendatasoft.com/api/datasets/1.0/search/?q=annonces-commerciales',
+    },
     site: {
       recherche: 'https://www.bodacc.fr/annonce/liste/',
       annonce: 'https://www.bodacc.fr/annonce/detail-annonce/',
     },
   },
   journalOfficielAssociations: {
-    ods: 'https://journal-officiel-datadila.opendatasoft.com/api/records/1.0/search/?dataset=jo_associations',
+    ods: {
+      search:
+        'https://journal-officiel-datadila.opendatasoft.com/api/records/1.0/search/?dataset=jo_associations',
+      metadata:
+        'https://journal-officiel-datadila.opendatasoft.com/api/datasets/1.0/search/?q=jo_associations',
+    },
     site: {
       recherche: 'https://www.journal-officiel.gouv.fr/associations/recherche/',
       justificatif:

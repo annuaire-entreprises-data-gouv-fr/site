@@ -10,33 +10,39 @@ import {
 import { getUniteLegaleFromSlug } from './unite-legale';
 
 export interface IAnnoncesBodacc {
-  titre: string;
-  sousTitre: string;
-  typeAvisLibelle: string;
-  tribunal: string;
-  numeroAnnonce: number;
-  datePublication: string;
-  details: string;
-  path: string;
+  annonces: {
+    titre: string;
+    sousTitre: string;
+    typeAvisLibelle: string;
+    tribunal: string;
+    numeroAnnonce: number;
+    datePublication: string;
+    details: string;
+    path: string;
+  }[];
+  lastModified: string | null;
 }
 
 export interface IAnnoncesJO {
-  typeAvisLibelle: string;
-  numeroParution: string;
-  datePublication: string;
-  details: string;
-  path: string;
+  annonces: {
+    typeAvisLibelle: string;
+    numeroParution: string;
+    datePublication: string;
+    details: string;
+    path: string;
+  }[];
+  lastModified: string | null;
 }
 
 const getAnnoncesFromSlug = async (siren: string) => {
-  const [uniteLegale, annoncesBodacc] = await Promise.all([
+  const [uniteLegale, bodacc] = await Promise.all([
     getUniteLegaleFromSlug(siren),
     getAnnoncesBodaccFromSlug(siren),
   ]);
 
-  let annoncesJO;
+  let jo;
   if (uniteLegale.association && uniteLegale.association.id) {
-    annoncesJO = await getAnnoncesJoFromIdRna(
+    jo = await getAnnoncesJoFromIdRna(
       uniteLegale.association.id,
       uniteLegale.siren
     );
@@ -44,15 +50,15 @@ const getAnnoncesFromSlug = async (siren: string) => {
 
   return {
     uniteLegale,
-    annoncesBodacc,
-    annoncesJO,
+    bodacc,
+    jo,
   };
 };
 
 const getAnnoncesJoFromIdRna = async (
   idRna: string,
   siren: Siren
-): Promise<IAnnoncesJO[] | IAPINotRespondingError> => {
+): Promise<IAnnoncesJO | IAPINotRespondingError> => {
   try {
     return await fetchAnnoncesJO(idRna);
   } catch (e) {
@@ -66,7 +72,7 @@ const getAnnoncesJoFromIdRna = async (
 
 const getAnnoncesBodaccFromSlug = async (
   slug: string
-): Promise<IAnnoncesBodacc[] | IAPINotRespondingError> => {
+): Promise<IAnnoncesBodacc | IAPINotRespondingError> => {
   const siren = verifySiren(slug);
   try {
     return await fetchAnnoncesBodacc(siren);

@@ -7,10 +7,10 @@
   },
   "scripts": {
     "sitemap": "node ./node-scripts/generate.js",
-    "dev": "NODE_ENV=development next dev",
+    "dev": "NODE_ENV=development node-dev server.js",
     "build-dev": "NODE_ENV=production next build",
     "build": "npm run sitemap && NODE_ENV=production next build",
-    "start": "next start -p $PORT",
+    "start": "NODE_ENV=production && node server.js",
     "setup-staging": "pm2 deploy ecosystem.config.js staging setup --force",
     "deploy-staging": "pm2 deploy ecosystem.config.js staging deploy --force",
     "setup": "pm2 deploy ecosystem.config.js production setup --force",
@@ -35,6 +35,8 @@
     "axios": "^0.21.1",
     "axios-oauth-client": "^1.4.2",
     "axios-token-interceptor": "^0.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^11.1.2",
     "fast-xml-parser": "^3.19.0",
     "form-data": "^4.0.0",
     "next": "^11.0.1",
@@ -44,12 +46,11 @@
     "react-dom": "^17.0.2",
     "react-markdown": "^6.0.2",
     "typescript": "^4.3.4",
-    "yauzl": "^2.10.0",
-    "eslint": "^7.32.0",
-    "eslint-config-next": "^11.1.2"
+    "yauzl": "^2.10.0"
   },
   "devDependencies": {
     "@axe-core/cli": "^4.2.1",
+    "@datadome/node-module": "^1.1.7",
     "cypress": "^8.2.0",
     "jest": "^27.0.6",
     "sass": "^1.34.1",
