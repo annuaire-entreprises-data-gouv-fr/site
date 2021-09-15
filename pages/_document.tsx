@@ -75,7 +75,6 @@ class DevDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          {InitDataDome}
           {CopyToClipboard}
           {DisplayFeedback}
         </body>
