@@ -3,6 +3,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 import CopyToClipboard from '../components/clients-script/copy-to-clipboard';
 import DisplayFeedback from '../components/clients-script/display-feedback';
 import InitPiwik from '../components/clients-script/init-piwik';
+import InitDataDome from '../components/clients-script/datadome';
 
 class CustomHead extends Head {
   render() {
@@ -74,6 +75,7 @@ class DevDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          {InitDataDome}
           {CopyToClipboard}
           {DisplayFeedback}
         </body>
@@ -116,6 +118,9 @@ class StaticDocument extends Document {
           {process.env.NODE_ENV === 'production' &&
             process.env.MATOMO_SITE_ID &&
             InitPiwik}
+          {process.env.NODE_ENV === 'production' &&
+            process.env.DATADOME_CLIENT_KEY &&
+            InitDataDome}
           {CopyToClipboard}
           {DisplayFeedback}
         </body>
