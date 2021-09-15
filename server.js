@@ -19,6 +19,8 @@ const handleRequest = function (req, res) {
   handle(req, res, parsedUrl);
 };
 
+console.log('apiKey' + process.env);
+
 const datadomeClient = new DataDome(
   process.env.DATADOME_SERVER_KEY,
   'api-eu-france-1.datadome.co'
