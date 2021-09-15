@@ -3,8 +3,8 @@ module.exports = {
     {
       name: 'www',
       cwd: '/opt/apps/annuaire-entreprises/current',
-      script: './node_modules/.bin/next',
-      args: 'start -p 3000',
+      script: 'server.js',
+      // args: 'start -p 3000',
       exec_mode: 'cluster',
       instances: 'max',
       log_file: '/var/log/annuaire-entreprises/app.log',
