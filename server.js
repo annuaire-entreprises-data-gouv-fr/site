@@ -42,6 +42,10 @@ app.prepare().then(() => {
     }
   }).listen(process.env.PORT || 3000, (err) => {
     if (err) throw err;
+    console.log(
+      process.env.DATADOME_SERVER_KEY,
+      process.env.DATADOME_CLIENT_KEY
+    );
     console.log(`> Ready on http://localhost:${process.env.PORT}`);
   });
 });
