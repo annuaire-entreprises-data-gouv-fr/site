@@ -102,23 +102,17 @@ const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
   try {
     // INSEE does not provide enough information to paginate etablissement list
     // so we doubled our API call with sirene ouverte to get Etablissements.
-    const [
-      uniteLegaleInsee,
-      allEtablissementsInsee,
-      siegeInsee,
-      uniteLegaleSireneOuverte,
-    ] = await Promise.all([
-      getUniteLegaleInsee(siren),
-      getAllEtablissementsInsee(siren, page).catch(() => null),
-      getSiegeInsee(siren).catch(() => null),
-      getUniteLegaleSireneOuverte(siren, page).catch(() => null),
-    ]);
+    const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
+      await Promise.all([
+        getUniteLegaleInsee(siren),
+        getAllEtablissementsInsee(siren, page).catch(() => null),
+        getSiegeInsee(siren).catch(() => null),
+      ]);
 
     return mergeUniteLegaleFromBothApi(
       uniteLegaleInsee,
       allEtablissementsInsee,
-      siegeInsee,
-      uniteLegaleSireneOuverte
+      siegeInsee
     );
   } catch (e) {
     if (e instanceof HttpForbiddenError) {
@@ -146,8 +140,7 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
     return mergeUniteLegaleFromBothApi(
       uniteLegaleInsee,
       allEtablissementsInsee,
-      siegeInsee,
-      null
+      siegeInsee
     );
   } catch (e) {
     if (e instanceof HttpForbiddenError) {
@@ -163,13 +156,13 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
 const mergeUniteLegaleFromBothApi = (
   uniteLegaleInsee: IUniteLegale,
   allEtablissementsInsee: IEtablissementsList | null,
-  siegeInsee: IEtablissement | null,
-  uniteLegaleSireneOuverte: IUniteLegale | null
+  siegeInsee: IEtablissement | null
 ) => {
-  const chemin =
-    (uniteLegaleSireneOuverte || {}).chemin || uniteLegaleInsee.siren;
-
   const siege = siegeInsee || uniteLegaleInsee.siege;
+
+  const chemin = `${uniteLegaleInsee.nomComplet}-${uniteLegaleInsee.siren}`
+    .toLowerCase()
+    .replaceAll(/[^a-zA-Z0-9]+/g, '-');
 
   return {
     ...uniteLegaleInsee,

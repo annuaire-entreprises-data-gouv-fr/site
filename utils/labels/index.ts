@@ -39,7 +39,7 @@ export const fullLibelleFromCodeNaf = (activite_principale: string) =>
 
 export const libelleFromCategoriesJuridiques = (categorie: string) =>
   //@ts-ignore
-  categorie ? categoriesJuridiques[categorie] : '';
+  categoriesJuridiques[categorie] || null;
 
 export const fullAdress = (etablissement: any) => {
   if (
