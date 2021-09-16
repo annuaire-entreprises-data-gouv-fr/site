@@ -3,6 +3,7 @@ import { codesNaf } from './codes-NAF';
 import { codesEffectifs } from './codes-effectifs';
 import { codesVoies } from './codes-voie';
 import { capitalize } from '../helpers/formatting';
+import { categoriesEntreprise } from './categories-entreprise';
 
 export const libelleFromCodeNaf = (codeNaf: string, addCode = true) => {
   const formattedNaf = (codeNaf || '').replace(/[.-]/g, '');
@@ -97,4 +98,19 @@ export const formatAdresse = (
     true,
     ''
   )}`;
+};
+
+export const libelleFromeCodeCategorie = (
+  codeCategorie: string,
+  anneCategorie: string
+) => {
+  const libelle = categoriesEntreprise(codeCategorie);
+
+  if (!!libelle && anneCategorie) {
+    return `${libelle}, en ${anneCategorie}`;
+  }
+  if (!!libelle) {
+    return libelle;
+  }
+  return null;
 };

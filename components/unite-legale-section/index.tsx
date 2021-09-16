@@ -33,6 +33,7 @@ const UniteLegaleSection: React.FC<{
       'Tranche effectif salarié de l’entité',
       uniteLegale.libelleTrancheEffectif,
     ],
+    ['Catégorie d’entreprise', uniteLegale.libelleCategorieEntreprise],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
       'Date de dernière mise à jour',

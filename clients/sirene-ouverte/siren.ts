@@ -1,4 +1,4 @@
-import { IUniteLegale } from '../../models';
+import { createDefaultUniteLegale, IUniteLegale } from '../../models';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import {
@@ -106,6 +106,7 @@ const mapToDomainObject = (
   } = uniteLegale;
 
   return {
+    ...createDefaultUniteLegale(siren),
     siren,
     numeroTva: numero_tva_intra,
     association: null,

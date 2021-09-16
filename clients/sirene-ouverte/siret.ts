@@ -1,4 +1,4 @@
-import { IEtablissement } from '../../models';
+import { createDefaultEtablissement, IEtablissement } from '../../models';
 import { verifySiren, verifySiret } from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
@@ -69,6 +69,7 @@ export const mapSireneOuverteEtablissementToDomainObject = (
 ): IEtablissement => {
   const estActif = etablissement.etat_administratif_etablissement === 'A';
   return {
+    ...createDefaultEtablissement(),
     enseigne: etablissement.enseigne || null,
     siren: verifySiren(etablissement.siren),
     siret: verifySiret(etablissement.siret),

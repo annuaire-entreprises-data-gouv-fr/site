@@ -12,6 +12,7 @@ import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
+  libelleFromeCodeCategorie,
 } from '../../utils/labels';
 import routes from '../routes';
 
@@ -24,6 +25,8 @@ interface IInseeUniteLegaleResponse {
     trancheEffectifsUniteLegale: string;
     anneeEffectifsUniteLegale: string;
     statutDiffusionUniteLegale: string;
+    categorieEntreprise: string;
+    anneeCategorieEntreprise: string;
     prenom1UniteLegale: string;
     sexeUniteLegale: 'M' | 'F';
     identifiantAssociationUniteLegale: string | null;
@@ -81,6 +84,8 @@ const mapToDomainObject = (
     prenom1UniteLegale,
     sexeUniteLegale,
     identifiantAssociationUniteLegale,
+    categorieEntreprise,
+    anneeCategorieEntreprise,
   } = response.uniteLegale;
 
   const {
@@ -164,6 +169,10 @@ const mapToDomainObject = (
       trancheEffectifsUniteLegale,
       anneeEffectifsUniteLegale,
       caractereEmployeurUniteLegale
+    ),
+    libelleCategorieEntreprise: libelleFromeCodeCategorie(
+      categorieEntreprise,
+      anneeCategorieEntreprise
     ),
     dirigeant: estEntrepreneurIndividuel ? dirigeant : null,
   };
