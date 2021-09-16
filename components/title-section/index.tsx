@@ -6,6 +6,7 @@ import IsActiveTag from '../is-active-tag';
 import { UnitLegaleDescription } from '../unite-legale-description';
 import { IUniteLegale } from '../../models';
 import SocialMedia from '../social-media';
+import Warning from '../alerts/warning';
 
 export enum FICHE {
   INFORMATION = 'informations générales',
@@ -120,6 +121,13 @@ const Title: React.FC<IProps> = ({
 }) => (
   <div className="header-section">
     <div className="title">
+      {uniteLegale.oldSiren !== uniteLegale.siren && (
+        <Warning full>
+          Cette unité est inscrite en double dans le répertoire Sirene. Nous
+          vous avons donc redirigé : {formatNumbersFr(uniteLegale.oldSiren)} ⇢{' '}
+          {formatNumbersFr(uniteLegale.siren)}.
+        </Warning>
+      )}
       <h1>
         <a href={`/entreprise/${uniteLegale.siren}`}>
           {capitalize(uniteLegale.nomComplet)}

@@ -1,4 +1,4 @@
-import { Siren, verifySiret } from '../../utils/helpers/siren-and-siret';
+import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
 import { inseeClientGet, INSEE_CREDENTIALS } from '.';
 import constants from '../../constants';
 import {
@@ -12,11 +12,7 @@ import {
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
-import {
-  HttpForbiddenError,
-  HttpNotFound,
-  HttpServerError,
-} from '../exceptions';
+import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
 
 interface IInseeEtablissementResponse {
@@ -29,7 +25,7 @@ interface IInseeEtablissementsResponse {
 }
 
 interface IInseeEtablissement {
-  siret: string;
+  siret: Siret;
   nic: string;
   etablissementSiege: string;
   statutDiffusionEtablissement: string;
@@ -171,7 +167,7 @@ export const mapEtablissementToDomainObject = (
   return {
     ...defaultEtablissement,
     siren: extractSirenFromSiret(siret),
-    siret: verifySiret(siret),
+    siret,
     nic,
     dateCreation: dateCreationEtablissement,
     activitePrincipale: activitePrincipaleEtablissement,

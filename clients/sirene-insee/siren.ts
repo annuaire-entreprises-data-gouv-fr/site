@@ -6,7 +6,7 @@ import {
 } from '../../models';
 import { IEtatCivil } from '../../models/dirigeants';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
-import { Siren, verifySiret } from '../../utils/helpers/siren-and-siret';
+import { Siren } from '../../utils/helpers/siren-and-siret';
 import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
 import {
   libelleFromCategoriesJuridiques,
@@ -18,6 +18,7 @@ import routes from '../routes';
 
 interface IInseeUniteLegaleResponse {
   uniteLegale: {
+    siren: Siren;
     sigleUniteLegale: string;
     dateCreationUniteLegale: string;
     periodesUniteLegale: IPeriodeUniteLegale[];
@@ -70,10 +71,11 @@ export const getUniteLegaleInseeWithFallbackCredentials = async (
 };
 
 const mapToDomainObject = (
-  siren: Siren,
+  originalSiren: Siren,
   response: IInseeUniteLegaleResponse
 ): IUniteLegale => {
   const {
+    siren,
     sigleUniteLegale,
     dateCreationUniteLegale,
     periodesUniteLegale,
@@ -108,7 +110,8 @@ const mapToDomainObject = (
 
   if (periodesUniteLegale && periodesUniteLegale.length > 0) {
     siege.siren = siren;
-    siege.siret = verifySiret(siren + nicSiegeUniteLegale);
+    //@ts-ignore
+    siege.siret = siren + nicSiegeUniteLegale;
     siege.nic = nicSiegeUniteLegale;
     siege.estActif = null;
     siege.dateCreation = dateDebut;
@@ -140,7 +143,8 @@ const mapToDomainObject = (
 
   return {
     ...defaultUniteLegale,
-    siren: siren,
+    siren,
+    oldSiren: originalSiren,
     numeroTva: tvaIntracommunautaireFromSiren(siren),
     association: identifiantAssociationUniteLegale
       ? { id: identifiantAssociationUniteLegale }

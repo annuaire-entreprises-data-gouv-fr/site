@@ -71,8 +71,10 @@ export const mapSireneOuverteEtablissementToDomainObject = (
   return {
     ...createDefaultEtablissement(),
     enseigne: etablissement.enseigne || null,
-    siren: verifySiren(etablissement.siren),
-    siret: verifySiret(etablissement.siret),
+    //@ts-ignore
+    siren: etablissement.siren,
+    //@ts-ignore
+    siret: etablissement.siret,
     nic: etablissement.nic,
     estActif,
     estSiege: etablissement.is_siege,

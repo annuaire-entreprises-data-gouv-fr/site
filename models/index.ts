@@ -39,6 +39,7 @@ export interface IEtablissementWithUniteLegale {
 
 export interface IUniteLegale extends IEtablissementsList {
   siren: Siren;
+  oldSiren: Siren;
   numeroTva: string;
   siege: IEtablissement;
   natureJuridique: string;
@@ -98,6 +99,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
   siege.estSiege = true;
   return {
     siren,
+    oldSiren: siren,
     siege,
     estDiffusible: true,
     estActive: null,

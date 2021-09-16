@@ -1,6 +1,9 @@
 import React, { PropsWithChildren } from 'react';
 
-const Warning: React.FC<PropsWithChildren<{}>> = ({ children }) => (
+const Warning: React.FC<PropsWithChildren<{ full: boolean }>> = ({
+  full = false,
+  children,
+}) => (
   <div className="alert">
     <div className="icon">
       <span className="fr-fi-alert-fill" aria-hidden="true"></span>
@@ -16,6 +19,7 @@ const Warning: React.FC<PropsWithChildren<{}>> = ({ children }) => (
         margin: 10px 0;
         display: flex;
         align-items: start;
+        width: ${full ? '100%' : 'auto'};
       }
 
       .icon {
