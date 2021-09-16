@@ -7,7 +7,7 @@
   },
   "scripts": {
     "sitemap": "node ./node-scripts/generate.js",
-    "dev": "NODE_ENV=development node-dev server.js",
+    "dev": "NODE_ENV=development node server.js",
     "build-dev": "NODE_ENV=production next build",
     "build": "npm run sitemap && NODE_ENV=production next build",
     "start": "NODE_ENV=production && node server.js",

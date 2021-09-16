@@ -119,35 +119,29 @@ const Title: React.FC<IProps> = ({
   uniteLegale,
 }) => (
   <div className="header-section">
-    {!uniteLegale.estDiffusible ? (
-      <div className="title">
-        <h1>Entité non-diffusible</h1>
-        <div>
-          <span>unité légale ‣ {formatNumbersFr(uniteLegale.siren)}</span>
-          <span>
-            <Tag>Non-diffusible</Tag>
-            <IsActiveTag isActive={null} isUniteLegale={true} />
-          </span>
-        </div>
-      </div>
-    ) : (
-      <div className="title">
-        <h1>
-          <a href={`/entreprise/${uniteLegale.siren}`}>
-            {capitalize(uniteLegale.nomComplet)}
-          </a>
-        </h1>
-        <div>
-          <span>unité légale ‣ {formatNumbersFr(uniteLegale.siren)}</span>
-          <span>
+    <div className="title">
+      <h1>
+        <a href={`/entreprise/${uniteLegale.siren}`}>
+          {capitalize(uniteLegale.nomComplet)}
+        </a>
+      </h1>
+      <div>
+        <span>unité légale ‣ {formatNumbersFr(uniteLegale.siren)}</span>
+        <span>
+          {!uniteLegale.estDiffusible ? (
+            <>
+              <Tag>Non-diffusible</Tag>
+              <IsActiveTag isActive={null} isUniteLegale={true} />
+            </>
+          ) : (
             <IsActiveTag
               isActive={uniteLegale.estActive}
               isUniteLegale={true}
             />
-          </span>
-        </div>
+          )}
+        </span>
       </div>
-    )}
+    </div>
     <SocialMedia siren={uniteLegale.siren} />
     {!uniteLegale.estDiffusible ? (
       <p>Les informations concernant cette entité ne sont pas publiques.</p>

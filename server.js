@@ -35,10 +35,8 @@ const datadomeClient = new DataDome(
 app.prepare().then(() => {
   createServer((req, res) => {
     if (process.env.DATADOME_SERVER_KEY) {
-      console.log('cool');
       datadomeClient.auth(req, res);
     } else {
-      console.log('xhelou');
       handleRequest(req, res);
     }
   }).listen(process.env.PORT || 3000, (err) => {

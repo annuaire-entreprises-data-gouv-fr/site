@@ -47,7 +47,11 @@ const getUniteLegaleFromSlug = async (
   page = 1
 ): Promise<IUniteLegale> => {
   const siren = verifySiren(slug);
-  return getUniteLegale(siren, page);
+  const uniteLegale = await getUniteLegale(siren, page);
+  if (!uniteLegale.estDiffusible) {
+    uniteLegale.nomComplet = 'Entité non-diffusible';
+  }
+  return uniteLegale;
 };
 
 /**

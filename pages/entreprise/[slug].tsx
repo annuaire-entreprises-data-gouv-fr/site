@@ -26,7 +26,7 @@ interface IProps {
 const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
   <Page
     small={true}
-    title={`Entité - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
+    title={`${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
     canonical={
       uniteLegale.chemin &&
       `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`
