@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-const Warning: React.FC<PropsWithChildren<{ full: boolean }>> = ({
+const Warning: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   full = false,
   children,
 }) => (
