@@ -3,10 +3,10 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import { IEtablissement } from '../../models';
-import MapEtablissement from '../../components/mapbox/map-etablissement';
+import MapEtablissement from '../../components/map/map-etablissement';
 import { getEtablissementWithLatLongFromSlug } from '../../models/etablissement';
 import { TitleEtablissement } from '../../components/title-etablissement-section';
-import { extractSirenFromSiretNoVerify } from '../../utils/helpers/siren-and-siret';
+import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
 
 interface IProps {
@@ -23,11 +23,7 @@ const EtablissementMapPage: React.FC<IProps> = ({ etablissement }) => (
   >
     <div className="fr-container">
       <br />
-      <a
-        href={`/entreprise/${extractSirenFromSiretNoVerify(
-          etablissement.siret
-        )}`}
-      >
+      <a href={`/entreprise/${extractSirenFromSiret(etablissement.siret)}`}>
         ← Retour
       </a>
       <HiddenH1 title="Localisation de l’etablissement" />

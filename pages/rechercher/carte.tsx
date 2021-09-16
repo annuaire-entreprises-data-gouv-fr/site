@@ -9,7 +9,7 @@ import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import ResultsHeader from '../../components/results-header';
 import search, { ISearchResults } from '../../models/search';
 import ResultsList from '../../components/results-list';
-import MapResults from '../../components/mapbox/map-results';
+import MapResults from '../../components/map/map-results';
 import { IsLikelyASirenOrSiretException } from '../../models';
 import LogSearchTermInPiwik from '../../components/clients-script/log-search-term-in-piwik';
 import { redirectServerError } from '../../utils/redirects';

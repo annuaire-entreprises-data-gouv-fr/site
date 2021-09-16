@@ -1,5 +1,6 @@
 const routes = {
   monitoring: 'https://api.uptimerobot.com/v2/getMonitors',
+  ban: 'https://api-adresse.data.gouv.fr/search/?q=',
   rnm: `https://api-rnm.artisanat.fr/v2/entreprises/`,
   rna: {
     id: `https://entreprise.data.gouv.fr/api/rna/v1/id/`,

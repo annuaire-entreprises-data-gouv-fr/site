@@ -21,6 +21,7 @@ import {
   logSecondSireneInseefailed,
   logSireneOuvertefailed,
 } from '../utils/sentry/helpers';
+import { getGeoLoc } from './geto-loc';
 
 /*
  * Return an etablissement given an existing siret
@@ -88,7 +89,11 @@ const getEtablissementWithLatLongFromSlug = async (
   slug: string
 ): Promise<IEtablissement> => {
   try {
-    return await getEtablissementSireneOuverte(slug);
+    const etablissement = await getEtablissementFromSlug(slug);
+    const { lat, long } = await getGeoLoc(etablissement);
+    etablissement.latitude = lat;
+    etablissement.longitude = long;
+    return etablissement;
   } catch (e) {
     throw new SiretNotFoundError(slug);
   }

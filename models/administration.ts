@@ -56,6 +56,11 @@ Elle conseille également le gouvernement sur les sujet numérique et développe
         apiName: 'API Moteur de recherche de l’Annuaire des Entreprises',
         id: 787859512,
       },
+      {
+        apiName: 'API Base Adresse Nationale',
+        apiGouvLink: 'https://api.gouv.fr/les-api/base-adresse-nationale',
+        id: 789207932,
+      },
     ],
   },
   [EAdministration.INPI]: {

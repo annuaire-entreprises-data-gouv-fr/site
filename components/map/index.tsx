@@ -1,14 +1,14 @@
 import React from 'react';
 
-const MapboxInstance = () => (
+const MaplibreInstance = () => (
   <>
     <div id="map" />
     <script
       async
-      src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"
+      src="https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.js"
     ></script>
     <link
-      href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
+      href="https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.css"
       rel="stylesheet"
     />
 
@@ -16,6 +16,7 @@ const MapboxInstance = () => (
       #map {
         background: #dfdff1;
         width: 100%;
+        z-index: 0;
       }
       @media only screen and (min-width: 1px) and (max-width: 1100px) {
         #map {
@@ -27,4 +28,4 @@ const MapboxInstance = () => (
   </>
 );
 
-export default MapboxInstance;
+export default MaplibreInstance;

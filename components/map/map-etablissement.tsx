@@ -1,19 +1,19 @@
 import React from 'react';
-import MapboxInstance from '.';
+import MaplibreInstance from '.';
 import { IEtablissement } from '../../models';
 
 const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
   etablissement,
 }) => (
   <>
-    <MapboxInstance />
+    <MaplibreInstance />
     <script
       async
       defer
       dangerouslySetInnerHTML={{
         __html: `
                 function initMap(style) {
-                  if (!mapboxgl) {return;}
+                  if (!maplibregl) {return;}
 
                   var coords = ${
                     etablissement
@@ -23,7 +23,7 @@ const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
 
                   var zoom = ${etablissement ? '12' : '4.5'};
 
-                  var map = new mapboxgl.Map({
+                  var map = new maplibregl.Map({
                     container: 'map',
                     style: style, // stylesheet location
                     center: coords,
@@ -31,7 +31,7 @@ const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
                   });
                   ${
                     etablissement
-                      ? `new mapboxgl.Marker({ color: '#000091' })
+                      ? `new maplibregl.Marker({ color: '#000091' })
                     .setLngLat(coords)
                     .addTo(map);`
                       : ''
