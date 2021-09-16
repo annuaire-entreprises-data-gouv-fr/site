@@ -30,7 +30,7 @@ export const mapToDomainObject = (response: IBANResponse): IGeoLoc => {
     throw new HttpNotFound(404, 'No results in API BAN');
   }
   const coordinates = features[0].geometry.coordinates;
-  return { lat: coordinates[1], long: coordinates[0] };
+  return { lat: coordinates[1].toString(), long: coordinates[0].toString() };
 };
 
 export { fetchBanGeoLoc };
