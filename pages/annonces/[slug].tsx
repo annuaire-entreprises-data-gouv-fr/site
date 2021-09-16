@@ -14,7 +14,7 @@ import AnnoncesJOSection from '../../components/annonces-section/jo';
 interface IProps {
   uniteLegale: IUniteLegale;
   bodacc: IAnnoncesBodacc | IAPINotRespondingError;
-  jo: IAnnoncesJO | IAPINotRespondingError;
+  jo: IAnnoncesJO | IAPINotRespondingError | null;
 }
 
 const Annonces: React.FC<IProps> = ({ uniteLegale, bodacc, jo }) => (
@@ -26,9 +26,7 @@ const Annonces: React.FC<IProps> = ({ uniteLegale, bodacc, jo }) => (
     <div className="content-container">
       <Title ficheType={FICHE.ANNONCES} uniteLegale={uniteLegale} />
       <AnnoncesBodaccSection uniteLegale={uniteLegale} bodacc={bodacc} />
-      {uniteLegale.association && (
-        <AnnoncesJOSection uniteLegale={uniteLegale} jo={jo} />
-      )}
+      {jo && <AnnoncesJOSection uniteLegale={uniteLegale} jo={jo} />}
     </div>
   </Page>
 );
