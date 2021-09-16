@@ -4,11 +4,11 @@ const { parse } = require('url');
 const next = require('next');
 const { loadEnvConfig } = require('@next/env');
 
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
-
 // load env variables
 loadEnvConfig(process.cwd());
+
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
 
 const handle = app.getRequestHandler();
 
@@ -18,8 +18,6 @@ const handleRequest = function (req, res) {
   const parsedUrl = parse(req.url, true);
   handle(req, res, parsedUrl);
 };
-
-console.log('apiKey' + process.env);
 
 const datadomeClient = new DataDome(
   process.env.DATADOME_SERVER_KEY,
@@ -41,6 +39,9 @@ app.prepare().then(() => {
     }
   }).listen(process.env.PORT || 3000, (err) => {
     if (err) throw err;
+
+    console.log('Caca');
+    console.log(process.env.DATADOME_SERVER_KEY);
     console.log(`> Ready on http://localhost:${process.env.PORT}`);
   });
 });
