@@ -24,4 +24,4 @@ jobs:
         run: npm i -g pm2
 
       - name: Deploy to production
-        run: ssh www-data@production.annuaire-entreprises-infra.data.gouv.fr  'sh /opt/apps/annuaire-entreprises/annuaire-entreprises-deploy.sh'
+        run: ssh -i ./deploy.key www-data@production.annuaire-entreprises-infra.data.gouv.fr  'sh /opt/apps/annuaire-entreprises/annuaire-entreprises-deploy.sh'
