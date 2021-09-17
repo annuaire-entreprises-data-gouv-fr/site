@@ -23,5 +23,5 @@ jobs:
       - name: Install PM2
         run: npm i -g pm2
 
-      - name: Deploy
-        run: pm2 deploy ecosystem.config.js production deploy
+      - name: Deploy to production
+        run: ssh www-data@production.annuaire-entreprises.data.gouv.fr  'sh /opt/apps/annuaire-entreprises/annuaire-entreprises-deploy.sh'

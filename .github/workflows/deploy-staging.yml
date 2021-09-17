@@ -25,5 +25,5 @@ jobs:
       - name: Install PM2
         run: npm i -g pm2
 
-      - name: Deploy
-        run: pm2 deploy ecosystem.config.js staging deploy
+      - name: Deploy to staging
+        run: ssh www-data@staging.annuaire-entreprises.data.gouv.fr  'sh /opt/apps/annuaire-entreprises/annuaire-entreprises-deploy.sh'
