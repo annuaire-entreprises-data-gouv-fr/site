@@ -22,8 +22,5 @@ jobs:
           SSH_PRIVATE_KEY: ${{secrets.SSH_MACHINE_USER_PRIVATE_KEY}}
           SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
 
-      - name: Install PM2
-        run: npm i -g pm2
-
       - name: Deploy to staging
         run: ssh -i ./deploy.key www-data@staging.annuaire-entreprises-infra.data.gouv.fr  'sh /opt/apps/annuaire-entreprises/annuaire-entreprises-deploy.sh'
