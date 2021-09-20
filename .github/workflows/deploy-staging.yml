@@ -20,7 +20,7 @@ jobs:
         shell: bash
         env:
           SSH_PRIVATE_KEY: ${{secrets.SSH_MACHINE_USER_PRIVATE_KEY}}
-          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
+          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS_STAGING}}
 
       - name: Deploy to staging
         run: ssh -i ./deploy.key www-data@staging.annuaire-entreprises-infra.data.gouv.fr  'sh /opt/apps/annuaire-entreprises/annuaire-entreprises-deploy.sh'
