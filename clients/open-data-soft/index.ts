@@ -9,14 +9,14 @@ export interface IODSResponse {
 }
 
 export interface IODSMetadata {
-  datasets: { metas: { modified: string } }[];
+  datasets: { metas: { modified: string; data_processed: string } }[];
 }
 
 const extractLastModifiedDate = (metadata: IODSMetadata) => {
   if (!(metadata.datasets.length > 0)) {
     return null;
   }
-  return metadata.datasets[0].metas.modified;
+  return metadata.datasets[0].metas.data_processed;
 };
 
 /**
