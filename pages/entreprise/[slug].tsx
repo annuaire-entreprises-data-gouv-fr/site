@@ -14,6 +14,7 @@ import { getUniteLegaleWithRNAFromSlug } from '../../models/unite-legale';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
+import redirect from '../../utils/redirects';
 
 // const structuredData = (uniteLegale: UniteLegale) => [
 //   ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],
@@ -68,8 +69,8 @@ const extractSiren = (slug: string) => {
   if (!slug) {
     return '';
   }
-  const m = slug.match(/\d{9}/);
-
+  // match a string that ends with either 9 digit or 14 like a siren or a siret
+  const m = slug.match(/\d{9}|\d{14}$/);
   return m ? m[0] : '';
 };
 
@@ -79,6 +80,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const pageParam = (context.query.page || '') as string;
 
   const siren = extractSiren(slug);
+  if (siren.length === 14) {
+    // 14 digits is not a siren -> but it may be a siret
+    redirect(context.res, `/etablissement/${siren}`);
+  }
+
   const page = parseIntWithDefaultValue(pageParam, 1);
 
   try {
