@@ -178,7 +178,7 @@ const FAQ: React.FC<{}> = () => (
               Si l’entreprise n‘est pas une entreprise artisanale,{' '}
               <a href="http://data.inpi.fr/">
                 contactez l‘INPI qui centralise les données des Greffes des
-                tribuanux de commerce.
+                tribunaux de commerce.
               </a>
             </li>
           </ul>
