@@ -34,6 +34,7 @@ const UniteLegaleSection: React.FC<{
       uniteLegale.libelleTrancheEffectif,
     ],
     ['Catégorie d’entreprise', uniteLegale.libelleCategorieEntreprise],
+    ['Economie Sociale et Solidaire (ESS)', uniteLegale.estEss ? 'Oui' : 'Non'],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
       'Date de dernière mise à jour',
@@ -44,10 +45,6 @@ const UniteLegaleSection: React.FC<{
   if (uniteLegale.estActive === false) {
     data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
   }
-  data.push([
-    'Economie Sociale et Solidaire',
-    uniteLegale.estEss ? 'Oui' : 'Non',
-  ]);
 
   return (
     <div id="entreprise">
