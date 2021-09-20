@@ -13,6 +13,7 @@ export enum FICHE {
   JUSTIFICATIFS = 'justificatifs',
   ANNONCES = 'annonces',
   DIRIGEANTS = 'dirigeants',
+  COMPTES = 'bilans & comptes',
   ACTES = 'actes & statuts',
   DIVERS = 'conventions collectives',
 }
@@ -46,6 +47,20 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         rel="nofollow"
       >
         Dirigeants
+      </a>
+      <a
+        className={`${ficheType === FICHE.COMPTES && 'active'}`}
+        href={`/comptes/${siren}`}
+        rel="nofollow"
+      >
+        Bilans & Comptes
+      </a>
+      <a
+        className={`${ficheType === FICHE.COMPTES && 'active'}`}
+        href={`/actes/${siren}`}
+        rel="nofollow"
+      >
+        Actes & Statuts
       </a>
       <a
         className={`${ficheType === FICHE.ANNONCES && 'active'}`}
