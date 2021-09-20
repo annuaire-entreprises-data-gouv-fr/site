@@ -31,7 +31,7 @@ const qrCode = ({ query: { slug } }: NextApiRequest, res: NextApiResponse) => {
 
           //
           res.writeHead(200, {
-            'Content-Type': 'image/jpeg',
+            'Content-Type': 'image/png',
             'Content-Length': img.length,
           });
           res.end(img);
