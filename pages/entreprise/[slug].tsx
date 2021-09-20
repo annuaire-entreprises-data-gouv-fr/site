@@ -70,7 +70,7 @@ const extractSiren = (slug: string) => {
     return '';
   }
   // match a string that ends with either 9 digit or 14 like a siren or a siret
-  const m = slug.match(/\d{9}|\d{14}$/);
+  const m = slug.match(/\d{14}|\d{9}$/);
   return m ? m[0] : '';
 };
 
@@ -83,6 +83,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (siren.length === 14) {
     // 14 digits is not a siren -> but it may be a siret
     redirect(context.res, `/etablissement/${siren}`);
+    return { props: {} };
   }
 
   const page = parseIntWithDefaultValue(pageParam, 1);
