@@ -48,7 +48,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
       >
         Dirigeants
       </a>
-      <a
+      {/* <a
         className={`${ficheType === FICHE.COMPTES && 'active'}`}
         href={`/comptes/${siren}`}
         rel="nofollow"
@@ -61,7 +61,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         rel="nofollow"
       >
         Actes & Statuts
-      </a>
+      </a> */}
       <a
         className={`${ficheType === FICHE.ANNONCES && 'active'}`}
         href={`/annonces/${siren}`}
