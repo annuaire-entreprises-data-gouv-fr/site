@@ -120,6 +120,10 @@ const ButtonAsync = (props) => {
     setIsLoading(true);
     fetch(props.to)
       .then((response) => {
+        if (response.redirected) {
+          throw new Error('Redirected to error page');
+        }
+
         try {
           response.blob().then((blob) => {
             let url = window.URL.createObjectURL(blob);

@@ -46,6 +46,7 @@ const proxyPdf = async (
         timeout: INPI_TIMEOUT,
       }
     );
+
     nextAPIResponse.setHeader('Content-Type', 'application/pdf');
     nextAPIResponse.setHeader(
       'Content-Disposition',
@@ -55,7 +56,7 @@ const proxyPdf = async (
   } catch (e) {
     logErrorInSentry('Error in INPI’s proxy PDF', {
       siren,
-      details: e.message || e,
+      details: e.message || JSON.stringify(e),
     });
 
     nextAPIResponse.writeHead(302, {
