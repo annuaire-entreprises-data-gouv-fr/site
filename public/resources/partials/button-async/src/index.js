@@ -30,6 +30,13 @@ const Loader = () => (
 const Styles = (props) => (
   <style>
     {`
+
+.button-link .error-message {
+  color:red;
+  font-size:0.9rem;
+  font-weight:bold;
+}
+
 .button-link button {
   cursor: ${props.isLoading} ? 'progress' : 'pointer';
   flex-direction: 'row';
@@ -87,8 +94,12 @@ const Styles = (props) => (
   </style>
 );
 
+const ERROR =
+  "Le téléservice ne répond pas. Merci d’utiliser le lien vers le site de l'INPI à la place";
+
 const ButtonAsync = (props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const instance = useRef(null);
 
   useEffect(() => {
@@ -105,27 +116,35 @@ const ButtonAsync = (props) => {
     if (isLoading) {
       return;
     }
+    setError(null);
     setIsLoading(true);
-    fetch(props.to).then((response) => {
-      try {
-        response.blob().then((blob) => {
-          let url = window.URL.createObjectURL(blob);
-          let a = document.createElement('a');
-          a.href = url;
-          a.download = 'immatriculation.pdf';
-          a.click();
-        });
-      } catch {
-        window.location.href = response.url;
-      } finally {
+    fetch(props.to)
+      .then((response) => {
+        try {
+          response.blob().then((blob) => {
+            let url = window.URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = 'immatriculation.pdf';
+            a.click();
+          });
+        } catch (e) {
+          setError(ERROR);
+          window.location.href = response.url;
+        } finally {
+          setIsLoading(false);
+        }
+      })
+      .catch((e) => {
+        setError(ERROR);
         setIsLoading(false);
-      }
-    });
+      });
   };
 
   return (
     <div className="button-link" ref={instance}>
       <Styles isLoading={isLoading} />
+      {error && <div className="error-message">{error}</div>}
       <button onClick={click}>
         {isLoading ? (
           <Fragment>
