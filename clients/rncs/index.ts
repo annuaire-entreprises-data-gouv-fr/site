@@ -60,6 +60,8 @@ const RNCSClientWrapper = async (
       await AuthenticateCookie();
       return await fetchData(route, options);
     }
+
+    throw e;
   }
 };
 
