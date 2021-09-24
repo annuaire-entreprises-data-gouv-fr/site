@@ -26,6 +26,12 @@ export class HttpTooManyRequests extends Error {
   }
 }
 
+export class HttpUnauthorizedError extends Error {
+  constructor(public status: number, public message: string) {
+    super();
+  }
+}
+
 export class HttpForbiddenError extends Error {
   constructor(public status: number, public message: string) {
     super();

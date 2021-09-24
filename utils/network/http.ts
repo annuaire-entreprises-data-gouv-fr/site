@@ -9,6 +9,7 @@ import {
   HttpServerError,
   HttpTimeoutError,
   HttpTooManyRequests,
+  HttpUnauthorizedError,
 } from '../../clients/exceptions';
 import constants from '../../constants';
 
@@ -45,6 +46,9 @@ const handleError = (error: AxiosError) => {
     }
     case 403: {
       throw new HttpForbiddenError(403, 'Forbidden');
+    }
+    case 401: {
+      throw new HttpUnauthorizedError(401, 'Unauthorized');
     }
     case 504: {
       throw new HttpTimeoutError(504, 'Timeout');

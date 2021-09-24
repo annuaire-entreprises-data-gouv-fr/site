@@ -2,12 +2,17 @@ import { fetchRNCSImmatriculation } from './IMRJustificatif';
 import { fetchRNCSIMR } from './IMR';
 
 import httpClient from '../../utils/network/http';
-import { HttpAuthentificationFailure } from '../exceptions';
+import {
+  HttpAuthentificationFailure,
+  HttpUnauthorizedError,
+} from '../exceptions';
 import routes from '../routes';
 import { AxiosRequestConfig } from 'axios';
 
+let COOKIE = '';
+
 /** Authenticate a user on opendata-rncs */
-const RNCSAuth = async () => {
+const AuthenticateCookie = async () => {
   try {
     const login = process.env.INPI_LOGIN as string;
     const password = process.env.INPI_PASSWORD as string;
@@ -25,26 +30,37 @@ const RNCSAuth = async () => {
     if (!cookie || typeof cookie !== 'string') {
       throw new Error('Authentication failed');
     }
-    return cookie.split(';')[0];
+    COOKIE = cookie.split(';')[0];
   } catch (e) {
     throw new HttpAuthentificationFailure(e);
   }
+};
+
+const fetchData = async (route: string, options?: AxiosRequestConfig) => {
+  return await httpClient({
+    ...options,
+    url: route,
+    method: 'GET',
+    headers: { Cookie: COOKIE },
+    timeout: 12000, // INPI API can take a looong time
+  });
 };
 
 const RNCSClientWrapper = async (
   route: string,
   options?: AxiosRequestConfig
 ) => {
-  const cookie = await RNCSAuth();
-  const response = await httpClient({
-    ...options,
-    url: route,
-    method: 'GET',
-    headers: { Cookie: cookie },
-    timeout: 12000, // INPI API can take a looong time
-  });
-
-  return response;
+  if (!COOKIE) {
+    await AuthenticateCookie();
+  }
+  try {
+    return await fetchData(route, options);
+  } catch (e) {
+    if (e instanceof HttpUnauthorizedError) {
+      await AuthenticateCookie();
+      return await fetchData(route, options);
+    }
+  }
 };
 
-export { fetchRNCSImmatriculation, RNCSAuth, fetchRNCSIMR, RNCSClientWrapper };
+export { fetchRNCSImmatriculation, fetchRNCSIMR, RNCSClientWrapper };
