@@ -56,7 +56,7 @@ const routes = {
   sireneOuverte: {
     etablissement: `https://api.annuaire-entreprises.data.gouv.fr/siret?q=`,
     uniteLegale: `https://api.annuaire-entreprises.data.gouv.fr/siren?q=`,
-    rechercheUniteLegale: `https://api.annuaire-entreprises.data.gouv.fr/search`,
+    rechercheUniteLegale: `http://annuaire-entreprises.dataeng.etalab.studio/search`,
   },
   conventionCollectives: 'https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
 };
