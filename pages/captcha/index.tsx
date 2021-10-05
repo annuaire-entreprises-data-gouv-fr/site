@@ -1,6 +1,5 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import ButtonLink from '../../components/button';
 
 import Page from '../../layouts';
 
@@ -24,29 +23,12 @@ const Captcha: React.FC<{ url: string }> = ({ url }) => {
       <div className="title">
         <h1>Êtes-vous bien un humain ? 🤔</h1>
         <p>
-          Pour accéder à cette page, merci de cliquer sur le bouton ci-dessous
+          Pour accéder à cette page, merci de cliquer sur la case ci-dessous
           pour nous permettre de vérifier que vous êtes bien un humain.
         </p>
         <p>(Car c’est bien connu, les robots n’ont pas de souris 🐭 !)</p>
       </div>
       <div className="layout-center">
-        <form id="recaptcha-form" action="/api/verify-captcha" method="GET">
-          <div className="catptcha-hidden">
-            <label htmlFor="url">Url</label>
-            <input name="url" defaultValue={url} />
-          </div>
-
-          <div className="button-link layout-center">
-            <button
-              className="g-recaptcha "
-              data-sitekey={process.env.CAPTCHA_SITE_KEY}
-              data-callback="onReCaptchaValid"
-            >
-              Accéder à la page
-            </button>
-          </div>
-        </form>
-        {/*
         <form id="recaptcha-form" action="/api/verify-captcha" method="GET">
           <div
             className="g-recaptcha"
@@ -61,9 +43,9 @@ const Captcha: React.FC<{ url: string }> = ({ url }) => {
           <input
             className="catptcha-hidden"
             type="submit"
-            value="Accéder au données"
+            value="Accéder aux données"
           />
-        </form> */}
+        </form>
       </div>
 
       <style jsx>{`

@@ -38,7 +38,7 @@ export const getImmatriculationRNM = async (siren: Siren) => {
 
     logErrorInSentry(new Error('Error in API RNM'), {
       siren,
-      details: JSON.stringify(e.message),
+      details: JSON.stringify(e),
     });
 
     return APINotRespondingFactory(EAdministration.CMAFRANCE, 500);
@@ -58,7 +58,7 @@ export const getImmatriculationRNCS = async (siren: Siren) => {
 
     logErrorInSentry(new Error('Error in API INPI'), {
       siren,
-      details: JSON.stringify(e.message),
+      details: JSON.stringify(e),
     });
     return APINotRespondingFactory(EAdministration.INPI, 500);
   }
