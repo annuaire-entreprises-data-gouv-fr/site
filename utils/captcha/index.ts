@@ -16,6 +16,14 @@ export const protectWithCaptcha = (
   req: IncomingMessage,
   res: ServerResponse
 ) => {
+  if (
+    !process.env.CAPTCHA_COOKIE_SECRET_KEY ||
+    !process.env.CAPTCHA_SERVER_KEY ||
+    !process.env.CAPTCHA_SITE_KEY
+  ) {
+    return;
+  }
+
   const captchaCookieIsValid = isCaptchaCookieValid(req, res);
   if (!captchaCookieIsValid) {
     redirect(res, `/captcha?url=${req.url}`);

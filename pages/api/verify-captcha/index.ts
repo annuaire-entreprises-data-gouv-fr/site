@@ -7,6 +7,7 @@ import { setCaptchaCookie } from '../../../utils/captcha';
 const verify = async (req: NextApiRequest, res: NextApiResponse) => {
   const path = decodeURI(req.query.url as string);
   const code = req.query['g-recaptcha-response'];
+
   try {
     const verify = await httpClient({
       url: `https://www.google.com/recaptcha/api/siteverify?response=${code}&secret=${process.env.CAPTCHA_SERVER_KEY}`,
