@@ -27,6 +27,7 @@ export const protectWithCaptcha = (
   const captchaCookieIsValid = isCaptchaCookieValid(req, res);
   if (!captchaCookieIsValid) {
     redirect(res, `/captcha?url=${req.url}`);
+    res.end();
   }
 };
 

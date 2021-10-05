@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import httpClient from '../../../utils/network/http';
 import redirect, { redirectForbidden } from '../../../utils/redirects';
-import logErrorInSentry from '../../../utils/sentry';
+import logErrorInSentry, { logWarningInSentry } from '../../../utils/sentry';
 import { setCaptchaCookie } from '../../../utils/captcha';
 
 const verify = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -22,12 +22,18 @@ const verify = async (req: NextApiRequest, res: NextApiResponse) => {
       redirect(res, path);
     } else {
       const reason = verify.data['error-codes'].join('.');
-      logErrorInSentry(reason, { page: path });
+      logWarningInSentry('G-reCaptcha failed to verfiy response', {
+        page: path,
+        details: reason,
+      });
       redirectForbidden(res, 'Blocked by reCaptcha');
     }
   } catch (e) {
     setCaptchaCookie(req, res);
-    logErrorInSentry(e, { page: path });
+    logErrorInSentry('G-reCaptcha error, passing through', {
+      page: path,
+      details: JSON.stringify(e),
+    });
     redirect(res, path);
   }
   res.end();
