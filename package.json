@@ -22,9 +22,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@datadome/node-module": "^1.1.7",
     "@sentry/node": "^6.6.0",
     "@types/adm-zip": "^0.4.34",
     "@types/axios-token-interceptor": "^0.2.1",
+    "@types/cookies": "^0.7.7",
     "@types/jest": "^26.0.23",
     "@types/node": "^16.4.13",
     "@types/qrcode": "^1.4.0",
@@ -35,6 +37,7 @@
     "axios": "^0.21.1",
     "axios-oauth-client": "^1.4.2",
     "axios-token-interceptor": "^0.2.0",
+    "cookies": "^0.8.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.2",
     "fast-xml-parser": "^3.19.0",
@@ -46,8 +49,7 @@
     "react-dom": "^17.0.2",
     "react-markdown": "^6.0.2",
     "typescript": "^4.3.4",
-    "yauzl": "^2.10.0",
-    "@datadome/node-module": "^1.1.7"
+    "yauzl": "^2.10.0"
   },
   "devDependencies": {
     "@axe-core/cli": "^4.2.1",
