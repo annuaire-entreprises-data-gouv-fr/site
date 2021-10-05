@@ -6,32 +6,6 @@ import { decrypt, encrypt } from '../crypto';
 const CAPTCHA_COOKIE_NAME = 'annuaire-captcha';
 
 /**
- * Redirect all requests that doesnot have a valid captcha cookie to /captcha
- * Transparent for the valid requests
- *
- * @param req
- * @param res
- */
-export const protectWithCaptcha = (
-  req: IncomingMessage,
-  res: ServerResponse
-) => {
-  if (
-    !process.env.CAPTCHA_COOKIE_SECRET_KEY ||
-    !process.env.CAPTCHA_SERVER_KEY ||
-    !process.env.CAPTCHA_SITE_KEY
-  ) {
-    return;
-  }
-
-  const captchaCookieIsValid = isCaptchaCookieValid(req, res);
-  if (!captchaCookieIsValid) {
-    redirect(res, `/captcha?url=${req.url}`);
-    res.end();
-  }
-};
-
-/**
  * Verify the presence and the validity of the captcha cookie.
  *
  * @param req
@@ -42,6 +16,14 @@ export const isCaptchaCookieValid = (
   req: IncomingMessage,
   res: ServerResponse
 ) => {
+  if (
+    !process.env.CAPTCHA_COOKIE_SECRET_KEY ||
+    !process.env.CAPTCHA_SERVER_KEY ||
+    !process.env.CAPTCHA_SITE_KEY
+  ) {
+    return true;
+  }
+
   try {
     const cookie = getCookie(req, res, CAPTCHA_COOKIE_NAME);
     const timestampAsString = decrypt(cookie);
