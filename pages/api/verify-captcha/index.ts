@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import httpClient from '../../../utils/network/http';
 import redirect, { redirectForbidden } from '../../../utils/redirects';
 import logErrorInSentry from '../../../utils/sentry';
-import { setCaptchaCookie } from '../../../utils/captcha-cookies';
+import { setCaptchaCookie } from '../../../utils/captcha';
 
 const verify = async (req: NextApiRequest, res: NextApiResponse) => {
   const path = decodeURI(req.query.url as string);

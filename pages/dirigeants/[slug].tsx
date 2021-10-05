@@ -15,7 +15,7 @@ import DirigeantsSection from '../../components/dirigeants-section';
 import BeneficiairesSection from '../../components/beneficiaires-section';
 import { INPI, INSEE } from '../../components/administrations';
 import { isAPINotResponding } from '../../models/api-not-responding';
-import { protectWithCaptcha } from '../../utils/redirects/protect-with-captcha';
+import { protectWithCaptcha } from '../../utils/captcha';
 
 const DirigeantsPage: React.FC<IDirigeants> = ({
   uniteLegale,
