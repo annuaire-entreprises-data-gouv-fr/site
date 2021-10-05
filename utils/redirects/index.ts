@@ -8,6 +8,18 @@ export const redirect = (res: ServerResponse, path: string) => {
   res.end();
 };
 
+export const redirectForbidden = (
+  res: ServerResponse,
+  msg: string,
+  scope?: IScope
+) => {
+  redirect(res, '/403');
+  logWarningInSentry('Access Forbidden', {
+    details: msg,
+    ...scope,
+  });
+};
+
 export const redirectPageNotFound = (
   res: ServerResponse,
   msg: string,

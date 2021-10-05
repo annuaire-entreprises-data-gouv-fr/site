@@ -9,7 +9,6 @@ import AdministrationNotResponding from '../administration-not-responding';
 import { INPI } from '../administrations';
 import ButtonLink from '../button';
 import ButtonLinkAsync from '../button-async';
-import { download } from '../icon';
 import { Section } from '../section';
 
 interface IProps {

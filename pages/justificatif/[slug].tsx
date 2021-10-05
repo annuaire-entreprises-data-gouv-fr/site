@@ -7,7 +7,7 @@ import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
 import AvisSituationSection from '../../components/avis-de-situation-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
-import ButtonLinkAsync from '../../components/button-async';
+import { protectWithCaptcha } from '../../utils/captcha';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -61,6 +61,8 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  protectWithCaptcha(context.req, context.res);
+
   //@ts-ignore
   const siren = context.params.slug as string;
 

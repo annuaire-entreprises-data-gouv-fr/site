@@ -15,6 +15,7 @@ import DirigeantsSection from '../../components/dirigeants-section';
 import BeneficiairesSection from '../../components/beneficiaires-section';
 import { INPI, INSEE } from '../../components/administrations';
 import { isAPINotResponding } from '../../models/api-not-responding';
+import { protectWithCaptcha } from '../../utils/captcha';
 
 const DirigeantsPage: React.FC<IDirigeants> = ({
   uniteLegale,
@@ -78,6 +79,8 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  protectWithCaptcha(context.req, context.res);
+
   //@ts-ignore
   const slug = context.params.slug as string;
   try {
