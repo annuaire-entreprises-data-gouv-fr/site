@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GetServerSideProps, Redirect } from 'next';
+import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import Title, { FICHE } from '../../components/title-section';
 
