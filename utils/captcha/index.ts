@@ -1,20 +1,34 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import redirect from '../redirects';
-import { getCookie, cleanCookie, setCookie } from '../cookies';
+import { getCookie, setCookie } from '../cookies';
 import { decrypt, encrypt } from '../crypto';
 
 const CAPTCHA_COOKIE_NAME = 'annuaire-captcha';
 
+/**
+ * Redirect all requests that doesnot have a valid captcha cookie to /captcha
+ * Transparent for the valid requests
+ *
+ * @param req
+ * @param res
+ */
 export const protectWithCaptcha = (
   req: IncomingMessage,
   res: ServerResponse
 ) => {
-  const isCaptcahCookieValid = isCaptchaCookieValid(req, res);
-  if (!isCaptcahCookieValid) {
+  const captchaCookieIsValid = isCaptchaCookieValid(req, res);
+  if (!captchaCookieIsValid) {
     redirect(res, `/captcha?url=${req.url}`);
   }
 };
 
+/**
+ * Verify the presence and the validity of the captcha cookie.
+ *
+ * @param req
+ * @param res
+ * @returns
+ */
 export const isCaptchaCookieValid = (
   req: IncomingMessage,
   res: ServerResponse
@@ -26,17 +40,19 @@ export const isCaptchaCookieValid = (
     const cookieIsOutdated = isTooOld(cookieCreationTimestamp);
 
     if (cookieIsOutdated) {
-      throw new Error('Cookie is outdated');
+      return false;
     }
-
     return true;
   } catch (e) {
-    console.log(e);
-    cleanCookie(req, res, CAPTCHA_COOKIE_NAME);
     return false;
   }
 };
 
+/**
+ * Set a captcha cookie that is a timestamp of the time the user went through captcha verification
+ * @param req
+ * @param res
+ */
 export const setCaptchaCookie = (req: IncomingMessage, res: ServerResponse) => {
   const crypted = encrypt(getTimestamp().toString());
   setCookie(req, res, CAPTCHA_COOKIE_NAME, crypted);

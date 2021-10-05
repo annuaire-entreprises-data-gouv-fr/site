@@ -19,12 +19,3 @@ export const setCookie = (
   const cookies = new Cookies(req, res);
   cookies.set(cookieName, value);
 };
-
-export const cleanCookie = (
-  req: IncomingMessage,
-  res: ServerResponse,
-  cookieName: string
-) => {
-  const cookies = new Cookies(req, res);
-  cookies.set(cookieName, '', { maxAge: 0 });
-};
