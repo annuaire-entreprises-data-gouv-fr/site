@@ -92,7 +92,14 @@ export const httpClientOAuthFactory = (
 export const httpClient = (
   config: AxiosRequestConfig
 ): Promise<AxiosResponse> => {
-  return axios({ timeout: constants.defaultTimeout, ...config })
+  return axios({
+    timeout: constants.defaultTimeout,
+    ...config,
+    headers: {
+      'User-Agent': 'annuaire-entreprises',
+      ...(config.headers || {}),
+    },
+  })
     .then((response) => response)
     .catch((error) => handleError(error));
 };

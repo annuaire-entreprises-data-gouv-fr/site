@@ -41,7 +41,6 @@ const proxyPdf = async (
       {
         headers: {
           Cookie: getCookie(initialAuthData),
-          'User-Agent': 'annuaire-entreprises',
         },
         responseType: 'arraybuffer',
         timeout: INPI_TIMEOUT,
