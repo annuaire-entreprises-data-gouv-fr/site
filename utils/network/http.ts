@@ -95,10 +95,6 @@ export const httpClient = (
   return axios({
     timeout: constants.defaultTimeout,
     ...config,
-    headers: {
-      'User-Agent': 'annuaire-entreprises',
-      ...(config.headers || {}),
-    },
   })
     .then((response) => response)
     .catch((error) => handleError(error));
