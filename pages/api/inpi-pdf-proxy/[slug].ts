@@ -55,11 +55,6 @@ const proxyPdf = async (
       `attachment; filename=justificatif_immatriculation_rcs_${siren}.pdf`
     );
 
-    try {
-      const fileName = randomUUID();
-      fs.writeFileSync(`/tmp/${fileName}.pdf`, response.data);
-    } catch (e) {}
-
     nextAPIResponse.status(200).send(response.data);
   } catch (e) {
     logErrorInSentry('Error in INPI’s proxy PDF', {
