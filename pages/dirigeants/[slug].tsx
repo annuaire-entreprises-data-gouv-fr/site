@@ -15,6 +15,7 @@ import DirigeantsSection from '../../components/dirigeants-section';
 import BeneficiairesSection from '../../components/beneficiaires-section';
 import { INPI, INSEE } from '../../components/administrations';
 import { isAPINotResponding } from '../../models/api-not-responding';
+import { isCaptchaCookieValid } from '../../utils/captcha';
 
 const DirigeantsPage: React.FC<IDirigeants> = ({
   uniteLegale,
@@ -78,6 +79,16 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const captchaCookieIsValid = isCaptchaCookieValid(context.req, context.res);
+  if (!captchaCookieIsValid) {
+    return {
+      redirect: {
+        destination: `/captcha?url=${context.req.url}`,
+        permanent: false,
+      },
+    };
+  }
+
   //@ts-ignore
   const slug = context.params.slug as string;
   try {

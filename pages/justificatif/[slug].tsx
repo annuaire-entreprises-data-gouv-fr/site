@@ -7,7 +7,7 @@ import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
 import AvisSituationSection from '../../components/avis-de-situation-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
-import ButtonLinkAsync from '../../components/button-async';
+import { isCaptchaCookieValid } from '../../utils/captcha';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -61,6 +61,16 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const captchaCookieIsValid = isCaptchaCookieValid(context.req, context.res);
+  if (!captchaCookieIsValid) {
+    return {
+      redirect: {
+        destination: `/captcha?url=${context.req.url}`,
+        permanent: false,
+      },
+    };
+  }
+
   //@ts-ignore
   const siren = context.params.slug as string;
 
