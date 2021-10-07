@@ -45,7 +45,7 @@ const proxyPdf = async (
           Cookie: getCookie(initialAuthData),
         },
         responseType: 'arraybuffer',
-        timeout: INPI_TIMEOUT,
+        timeout: INPI_TIMEOUT * 2,
       }
     );
 
