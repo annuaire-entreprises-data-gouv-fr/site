@@ -57,5 +57,5 @@ const getTimestamp = () => {
 const isTooOld = (timestamp: number) => {
   const timeDiff = getTimestamp() - timestamp;
   const elapsedMinutes = Math.floor(timeDiff / (1000 * 60));
-  return elapsedMinutes > 10;
+  return elapsedMinutes > 20;
 };
