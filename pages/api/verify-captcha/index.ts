@@ -6,7 +6,9 @@ import { setCaptchaCookie } from '../../../utils/captcha';
 
 const verify = async (req: NextApiRequest, res: NextApiResponse) => {
   const path = decodeURI(req.query.url as string);
-  const code = req.query['h-captcha-response'] as string;
+  const code =
+    req.query['h-captcha-response'] ||
+    (req.query['g-recaptcha-response'] as string);
 
   try {
     const verify = await httpClient({
@@ -30,7 +32,6 @@ const verify = async (req: NextApiRequest, res: NextApiResponse) => {
       redirectForbidden(res, 'Blocked by Captcha');
     }
   } catch (e) {
-    console.log(e);
     setCaptchaCookie(req, res);
     logErrorInSentry('H-Captcha error, passing through', {
       page: path,
