@@ -5,10 +5,8 @@ import logErrorInSentry, { logWarningInSentry } from '../../../utils/sentry';
 import { setCaptchaCookie } from '../../../utils/captcha';
 
 const verify = async (req: NextApiRequest, res: NextApiResponse) => {
-  const path = decodeURI(req.query.url as string);
-  const code = req.query['h-captcha-response'] as string;
-
-  console.log(code);
+  const path = decodeURI(req.body.url as string);
+  const code = req.body['h-captcha-response'] as string;
 
   try {
     const verify = await httpClient({
