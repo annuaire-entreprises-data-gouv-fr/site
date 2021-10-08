@@ -9,17 +9,16 @@ const Captcha: React.FC<{ url: string }> = ({ url }) => {
       <script
         dangerouslySetInnerHTML={{
           __html: `
-            function onReCaptchaValid(token) {
-              document.getElementById("recaptcha-form").submit();
+            function onError(err) {
+              console.error(err)
+            }
+            function onSubmit(token) {
+              document.getElementById("h-captcha-form").submit();
             }
             `,
         }}
       ></script>
-      <script
-        async
-        defer
-        src="https://www.google.com/recaptcha/api.js"
-      ></script>
+      <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
       <div className="title">
         <h1>Êtes-vous bien un humain ? 🤔</h1>
         <p>
@@ -29,16 +28,18 @@ const Captcha: React.FC<{ url: string }> = ({ url }) => {
         <p>(Car c’est bien connu, les robots n’ont pas de souris 🐭 !)</p>
       </div>
       <div className="layout-center">
-        <form id="recaptcha-form" action="/api/verify-captcha" method="GET">
-          <div
-            className="g-recaptcha"
-            data-sitekey={process.env.CAPTCHA_SITE_KEY}
-            data-callback="onReCaptchaValid"
-          ></div>
+        <form id="h-captcha-form" action="/api/verify-captcha" method="GET">
           <div className="catptcha-hidden">
             <label htmlFor="url">Url</label>
             <input name="url" defaultValue={url} />
           </div>
+
+          <div
+            className="h-captcha"
+            data-sitekey={process.env.CAPTCHA_SITE_KEY}
+            data-error-callback="onError"
+            data-callback="onSubmit"
+          ></div>
 
           <input
             className="catptcha-hidden"

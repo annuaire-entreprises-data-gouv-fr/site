@@ -6,11 +6,11 @@ import { setCaptchaCookie } from '../../../utils/captcha';
 
 const verify = async (req: NextApiRequest, res: NextApiResponse) => {
   const path = decodeURI(req.query.url as string);
-  const code = req.query['g-recaptcha-response'];
+  const code = req.query['h-captcha-response'];
 
   try {
     const verify = await httpClient({
-      url: `https://www.google.com/recaptcha/api/siteverify?response=${code}&secret=${process.env.CAPTCHA_SERVER_KEY}`,
+      url: `https://hcaptcha.com/siteverify?response=${code}&secret=${process.env.CAPTCHA_SERVER_KEY}`,
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -22,15 +22,15 @@ const verify = async (req: NextApiRequest, res: NextApiResponse) => {
       redirect(res, path);
     } else {
       const reason = verify.data['error-codes'].join('.');
-      logWarningInSentry('G-reCaptcha failed to verfiy response', {
+      logWarningInSentry('H-Captcha failed to verify response', {
         page: path,
         details: reason,
       });
-      redirectForbidden(res, 'Blocked by reCaptcha');
+      redirectForbidden(res, 'Blocked by Captcha');
     }
   } catch (e) {
     setCaptchaCookie(req, res);
-    logErrorInSentry('G-reCaptcha error, passing through', {
+    logErrorInSentry('H-Captcha error, passing through', {
       page: path,
       details: JSON.stringify(e),
     });
