@@ -6,9 +6,9 @@ import { setCaptchaCookie } from '../../../utils/captcha';
 
 const verify = async (req: NextApiRequest, res: NextApiResponse) => {
   const path = decodeURI(req.query.url as string);
-  const code =
-    req.query['h-captcha-response'] ||
-    (req.query['g-recaptcha-response'] as string);
+  const code = req.query['h-captcha-response'] as string;
+
+  console.log(code);
 
   try {
     const verify = await httpClient({

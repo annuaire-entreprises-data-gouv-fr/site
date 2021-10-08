@@ -29,7 +29,7 @@ const Captcha: React.FC<{ url: string }> = ({ url }) => {
         <p>(Car c’est bien connu, les robots n’ont pas de souris 🐭 !)</p>
       </div>
       <div className="layout-center">
-        <form id="h-captcha-form" action="/api/verify-captcha" method="GET">
+        <form id="h-captcha-form" action="/api/verify-captcha" method="POST">
           <div className="catptcha-hidden">
             <label htmlFor="url">Url</label>
             <input name="url" defaultValue={url} />
