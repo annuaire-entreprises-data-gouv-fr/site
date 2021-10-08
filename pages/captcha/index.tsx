@@ -13,6 +13,7 @@ const Captcha: React.FC<{ url: string }> = ({ url }) => {
               console.error(err)
             }
             function onSubmit(token) {
+              console.log(token)
               document.getElementById("h-captcha-form").submit();
             }
             `,
