@@ -9,16 +9,13 @@ const verify = async (req: NextApiRequest, res: NextApiResponse) => {
   const code = req.query['h-captcha-response'] as string;
 
   try {
-    const bodyFormData = new FormData();
-    bodyFormData.append('response', code);
-    bodyFormData.append('secret', process.env.CAPTCHA_SERVER_KEY || '');
     const verify = await httpClient({
       url: `https://hcaptcha.com/siteverify`,
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      data: bodyFormData,
+      data: `response=${code}&secret=${process.env.CAPTCHA_SERVER_KEY}`,
     });
 
     if (verify.data.success) {
@@ -33,10 +30,11 @@ const verify = async (req: NextApiRequest, res: NextApiResponse) => {
       redirectForbidden(res, 'Blocked by Captcha');
     }
   } catch (e) {
+    console.log(e);
     setCaptchaCookie(req, res);
     logErrorInSentry('H-Captcha error, passing through', {
       page: path,
-      details: JSON.stringify(e),
+      details: e.toString(),
     });
     redirect(res, path);
   }

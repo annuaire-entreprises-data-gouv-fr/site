@@ -59,7 +59,7 @@ const proxyPdf = async (
   } catch (e) {
     logErrorInSentry('Error in INPI’s proxy PDF', {
       siren,
-      details: e.message || JSON.stringify(e),
+      details: e.toString(),
     });
 
     nextAPIResponse.writeHead(302, {

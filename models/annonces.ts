@@ -64,7 +64,7 @@ const getAnnoncesJoFromIdRna = async (
   } catch (e) {
     logErrorInSentry(new Error('Error in API Journal Officiel'), {
       siren,
-      details: `${JSON.stringify(e)}`,
+      details: e.toString(),
     });
     return APINotRespondingFactory(EAdministration.DILA, 500);
   }
@@ -79,7 +79,7 @@ const getAnnoncesBodaccFromSlug = async (
   } catch (e) {
     logErrorInSentry(new Error('Error in API BODACC'), {
       siren,
-      details: `${JSON.stringify(e)}`,
+      details: e.toString(),
     });
     return APINotRespondingFactory(EAdministration.DILA, 500);
   }
