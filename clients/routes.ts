@@ -54,8 +54,8 @@ const routes = {
     avis: 'https://avis-situation-sirene.insee.fr/AvisPdf.action',
   },
   sireneOuverte: {
-    etablissement: `https://api.annuaire-entreprises.data.gouv.fr/siret?q=`,
-    uniteLegale: `https://api.annuaire-entreprises.data.gouv.fr/siren?q=`,
+    etablissement: `http://annuaire-entreprises.dataeng.etalab.studio/siret?q=`,
+    uniteLegale: `http://annuaire-entreprises.dataeng.etalab.studio/siren?q=`,
     rechercheUniteLegale: `http://annuaire-entreprises.dataeng.etalab.studio/search`,
   },
   conventionCollectives: 'https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
