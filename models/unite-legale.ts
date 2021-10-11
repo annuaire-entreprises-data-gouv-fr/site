@@ -91,6 +91,21 @@ const getUniteLegale = async (
   }
 };
 
+/**
+ * Return an uniteLegale from SireneOuverte
+ *
+ * @param siren
+ * @param page
+ * @returns
+ */
+const getUniteLegaleSireneOuverteFromSlug = async (
+  slug: string,
+  page = 1
+): Promise<IUniteLegale> => {
+  const siren = verifySiren(slug);
+  return await getUniteLegaleSireneOuverte(siren, page);
+};
+
 //=========================
 //        API calls
 //=========================
@@ -187,4 +202,8 @@ const createNonDiffusibleUniteLegale = (siren: Siren) => {
   return uniteLegale;
 };
 
-export { getUniteLegaleFromSlug, getUniteLegaleWithRNAFromSlug };
+export {
+  getUniteLegaleFromSlug,
+  getUniteLegaleWithRNAFromSlug,
+  getUniteLegaleSireneOuverteFromSlug,
+};

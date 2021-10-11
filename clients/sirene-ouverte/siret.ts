@@ -99,8 +99,6 @@ export const mapSireneOuverteEtablissementToDomainObject = (
     libelleTrancheEffectif: libelleFromCodeEffectif(
       etablissement.tranche_effectif_salarie
     ),
-    latitude: etablissement.latitude,
-    longitude: etablissement.longitude,
   };
 };
 

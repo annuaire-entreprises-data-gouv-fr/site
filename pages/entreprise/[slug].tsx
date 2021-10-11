@@ -10,7 +10,10 @@ import Title, { FICHE } from '../../components/title-section';
 import EtablissementSection from '../../components/etablissement-section';
 
 import { NonDiffusibleSection } from '../../components/non-diffusible';
-import { getUniteLegaleWithRNAFromSlug } from '../../models/unite-legale';
+import {
+  getUniteLegaleSireneOuverteFromSlug,
+  getUniteLegaleWithRNAFromSlug,
+} from '../../models/unite-legale';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
@@ -88,7 +91,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const page = parseIntWithDefaultValue(pageParam, 1);
 
+  const useSireneOuverte = (context.query.sireneOuverte || '') as string;
+
   try {
+    if (!!useSireneOuverte) {
+      return {
+        props: {
+          uniteLegale: await getUniteLegaleSireneOuverteFromSlug(siren, page),
+        },
+      };
+    }
+
     const uniteLegale = await getUniteLegaleWithRNAFromSlug(siren, page);
     return {
       props: {

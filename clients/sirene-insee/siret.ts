@@ -48,6 +48,7 @@ interface IInseeEtablissement {
     libelleVoieEtablissement: string;
     codePostalEtablissement: string;
     libelleCommuneEtablissement: string;
+    libellePaysEtrangerEtablissement?: string;
   };
   uniteLegale: IInseeetablissementUniteLegale;
 }
@@ -190,7 +191,8 @@ export const mapEtablissementToDomainObject = (
       adresseEtablissement.typeVoieEtablissement,
       adresseEtablissement.libelleVoieEtablissement,
       adresseEtablissement.codePostalEtablissement,
-      adresseEtablissement.libelleCommuneEtablissement
+      adresseEtablissement.libelleCommuneEtablissement,
+      adresseEtablissement.libellePaysEtrangerEtablissement
     ),
   };
 };

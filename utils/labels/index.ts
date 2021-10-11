@@ -78,7 +78,8 @@ export const formatAdresse = (
   type_voie: string,
   libelle_voie: string,
   code_postal: string,
-  libelle_commune: string
+  libelle_commune: string,
+  pays?: string
 ) => {
   if (
     !numero_voie &&
@@ -97,12 +98,12 @@ export const formatAdresse = (
     libelle_commune,
     true,
     ''
-  )}`;
+  )}${pays ? ', ' + pays : ''}`;
 };
 
 export const libelleFromeCodeCategorie = (
   codeCategorie: string,
-  anneCategorie: string
+  anneCategorie?: string
 ) => {
   const libelle = categoriesEntreprise(codeCategorie);
 

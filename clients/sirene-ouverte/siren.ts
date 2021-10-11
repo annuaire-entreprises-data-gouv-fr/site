@@ -6,6 +6,7 @@ import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
+  libelleFromeCodeCategorie,
 } from '../../utils/labels';
 import { httpGet } from '../../utils/network/http';
 import { HttpNotFound, HttpServerError } from '../exceptions';
@@ -27,6 +28,7 @@ interface ISireneOuverteUniteLegale {
   numero_tva_intra: string;
   date_debut_activite: string;
   tranche_effectif_salarie_entreprise: string;
+  categorie_entreprise: string;
   nature_juridique_entreprise: string;
   nombre_etablissements: number;
   nom_complet: string;
@@ -96,6 +98,7 @@ const mapToDomainObject = (
     numero_voie,
     indice_repetition,
     type_voie,
+    categorie_entreprise,
     libelle_commune,
     code_postal,
     libelle_voie,
@@ -115,6 +118,7 @@ const mapToDomainObject = (
     libelleActivitePrincipale: libelleFromCodeNaf(
       activite_principale_entreprise
     ),
+    libelleCategorieEntreprise: libelleFromeCodeCategorie(categorie_entreprise),
     natureJuridique: nature_juridique_entreprise,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(
       nature_juridique_entreprise
