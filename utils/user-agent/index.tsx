@@ -1,17 +1,12 @@
 import { IncomingMessage } from 'http';
 import crawlers from 'crawler-user-agents';
 
-const checkUserAgentIsABot = (req: IncomingMessage) => {
+const isUserAgentABot = (req: IncomingMessage) => {
   const userAgent = req.headers['user-agent'];
   if (!userAgent) {
     return false;
   }
-  for (let i = 0; i < crawlers.length; i++) {
-    if (RegExp(crawlers[i].pattern).test(userAgent)) {
-      return true;
-    }
-  }
-  return false;
+  return crawlers.some((crawler) => RegExp(crawler.pattern).test(userAgent));
 };
 
-export default checkUserAgentIsABot;
+export default isUserAgentABot;

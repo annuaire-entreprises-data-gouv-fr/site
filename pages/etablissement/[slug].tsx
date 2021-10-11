@@ -12,7 +12,7 @@ import {
 } from '../../models/etablissement';
 import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
-import checkUserAgentIsABot from '../../utils/user-agent';
+import isUserAgentABot from '../../utils/user-agent';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -60,11 +60,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const siret = context.params.slug as string;
 
-  const useSireneOuverte = (context.query.sireneOuverte || '') as string;
-  const isRobotAgent = checkUserAgentIsABot(context.req);
+  const forceSireneOuverteForDebug = (context.query
+    .forceSireneOuverteForDebug || '') as string;
+  const isABot = isUserAgentABot(context.req);
 
   try {
-    const forceUseOfSireneOuverte = !!useSireneOuverte || isRobotAgent;
+    const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
 
     const etablissementWithUniteLegale = forceUseOfSireneOuverte
       ? await getEtablissementWithUniteLegaleSireneOuverteFromSlug(siret)

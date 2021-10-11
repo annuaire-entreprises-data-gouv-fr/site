@@ -18,7 +18,7 @@ import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import redirect from '../../utils/redirects';
-import checkUserAgentIsABot from '../../utils/user-agent';
+import isUserAgentABot from '../../utils/user-agent';
 
 // const structuredData = (uniteLegale: UniteLegale) => [
 //   ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],
@@ -92,11 +92,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const page = parseIntWithDefaultValue(pageParam, 1);
 
-  const useSireneOuverte = (context.query.sireneOuverte || '') as string;
-  const isRobotAgent = checkUserAgentIsABot(context.req);
+  const forceSireneOuverteForDebug = (context.query
+    .forceSireneOuverteForDebug || '') as string;
+  const isABot = isUserAgentABot(context.req);
 
   try {
-    const forceUseOfSireneOuverte = !!useSireneOuverte || isRobotAgent;
+    const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
 
     const uniteLegale = forceUseOfSireneOuverte
       ? await getUniteLegaleSireneOuverteFromSlug(siren, page)
