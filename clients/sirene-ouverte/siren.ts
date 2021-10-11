@@ -40,6 +40,8 @@ interface ISireneOuverteUniteLegale {
   code_postal: string;
   libelle_voie: string;
   activite_principale_entreprise: string;
+  identifiantAssociationUniteLegale: string;
+  economieSocialeSolidaireUniteLegale: string;
 }
 interface ISireneOuverteUniteLegaleResponse {
   unite_legale: ISireneOuverteUniteLegale[];
@@ -105,6 +107,8 @@ const mapToDomainObject = (
     nombre_etablissements,
     nature_juridique_entreprise,
     tranche_effectif_salarie_entreprise,
+    identifiantAssociationUniteLegale,
+    economieSocialeSolidaireUniteLegale,
     activite_principale_entreprise,
   } = uniteLegale;
 
@@ -112,7 +116,6 @@ const mapToDomainObject = (
     ...createDefaultUniteLegale(siren),
     siren,
     numeroTva: numero_tva_intra,
-    association: null,
     siege,
     activitePrincipale: activite_principale_entreprise,
     libelleActivitePrincipale: libelleFromCodeNaf(
@@ -133,7 +136,7 @@ const mapToDomainObject = (
     estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
       nature_juridique_entreprise
     ),
-    estEss: false,
+    estEss: economieSocialeSolidaireUniteLegale === 'O',
     nomComplet: nom_complet || 'Nom inconnu',
     chemin: nom_url,
     dateCreation: date_creation_entreprise,
@@ -150,6 +153,9 @@ const mapToDomainObject = (
     ),
     currentEtablissementPage: page,
     dirigeant: null,
+    association: identifiantAssociationUniteLegale
+      ? { id: identifiantAssociationUniteLegale }
+      : null,
   };
 };
 
