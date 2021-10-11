@@ -18,6 +18,7 @@ import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import redirect from '../../utils/redirects';
+import checkUserAgentIsABot from '../../utils/user-agent';
 
 // const structuredData = (uniteLegale: UniteLegale) => [
 //   ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],
@@ -92,17 +93,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const page = parseIntWithDefaultValue(pageParam, 1);
 
   const useSireneOuverte = (context.query.sireneOuverte || '') as string;
+  const isRobotAgent = checkUserAgentIsABot(context.req);
 
   try {
-    if (!!useSireneOuverte) {
-      return {
-        props: {
-          uniteLegale: await getUniteLegaleSireneOuverteFromSlug(siren, page),
-        },
-      };
-    }
+    const forceUseOfSireneOuverte = !!useSireneOuverte || isRobotAgent;
 
-    const uniteLegale = await getUniteLegaleWithRNAFromSlug(siren, page);
+    const uniteLegale = forceUseOfSireneOuverte
+      ? await getUniteLegaleSireneOuverteFromSlug(siren, page)
+      : await getUniteLegaleWithRNAFromSlug(siren, page);
+
     return {
       props: {
         uniteLegale,

@@ -6,9 +6,13 @@ import { IEtablissement, IUniteLegale } from '../../models';
 import EtablissementSection from '../../components/etablissement-section';
 import Title, { FICHE } from '../../components/title-section';
 import { NonDiffusibleSection } from '../../components/non-diffusible';
-import { getEtablissementWithUniteLegaleFromSlug } from '../../models/etablissement';
+import {
+  getEtablissementWithUniteLegaleFromSlug,
+  getEtablissementWithUniteLegaleSireneOuverteFromSlug,
+} from '../../models/etablissement';
 import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
+import checkUserAgentIsABot from '../../utils/user-agent';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -56,9 +60,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const siret = context.params.slug as string;
 
+  const useSireneOuverte = (context.query.sireneOuverte || '') as string;
+  const isRobotAgent = checkUserAgentIsABot(context.req);
+
   try {
-    const etablissementWithUniteLegale =
-      await getEtablissementWithUniteLegaleFromSlug(siret);
+    const forceUseOfSireneOuverte = !!useSireneOuverte || isRobotAgent;
+
+    const etablissementWithUniteLegale = forceUseOfSireneOuverte
+      ? await getEtablissementWithUniteLegaleSireneOuverteFromSlug(siret)
+      : await getEtablissementWithUniteLegaleFromSlug(siret);
 
     return {
       props: {
