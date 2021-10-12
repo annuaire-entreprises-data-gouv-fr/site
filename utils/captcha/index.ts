@@ -1,5 +1,4 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import redirect from '../redirects';
 import { getCookie, setCookie } from '../cookies';
 import { decrypt, encrypt } from '../crypto';
 
@@ -57,5 +56,5 @@ const getTimestamp = () => {
 const isTooOld = (timestamp: number) => {
   const timeDiff = getTimestamp() - timestamp;
   const elapsedMinutes = Math.floor(timeDiff / (1000 * 60));
-  return elapsedMinutes > 20;
+  return elapsedMinutes > 90;
 };
