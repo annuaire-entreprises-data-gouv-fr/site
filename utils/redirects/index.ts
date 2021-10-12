@@ -13,7 +13,7 @@ export const redirectForbidden = (
   msg: string,
   scope?: IScope
 ) => {
-  redirect(res, '/403');
+  redirect(res, '/erreur/acces-refuse');
   logWarningInSentry('Access Forbidden', {
     details: msg,
     ...scope,

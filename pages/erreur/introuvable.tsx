@@ -1,4 +1,5 @@
 import React from 'react';
+import { GetServerSideProps } from 'next';
 
 import Page from '../../layouts';
 import ButtonLink from '../../components/button';
@@ -41,6 +42,11 @@ const SirenOrSiretNotFoundPage = () => {
       </div>
     </Page>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  context.res.statusCode = 404;
+  return { props: {} };
 };
 
 export default SirenOrSiretNotFoundPage;

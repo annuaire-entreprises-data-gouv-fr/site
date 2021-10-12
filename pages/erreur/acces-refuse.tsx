@@ -1,9 +1,9 @@
+import { GetServerSideProps } from 'next';
 import React from 'react';
-import ButtonLink from '../components/button';
+import ButtonLink from '../../components/button';
+import Page from '../../layouts';
 
-import Page from '../layouts';
-
-const TooManyRequest: React.FC = () => {
+const Forbidden: React.FC = () => {
   return (
     <Page small={true} title="Accès refusé">
       <h1>Accès refusé 🤖</h1>
@@ -25,4 +25,9 @@ const TooManyRequest: React.FC = () => {
   );
 };
 
-export default TooManyRequest;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  context.res.statusCode = 403;
+  return { props: {} };
+};
+
+export default Forbidden;
