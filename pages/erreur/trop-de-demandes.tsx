@@ -6,15 +6,27 @@ import Page from '../../layouts';
 const TooManyRequest: React.FC = () => {
   return (
     <Page small={true} title="Accès refusé">
-      <h1>Nous avons reçu trop de demandes de votre part</h1>
+      <h1>Nous avons reçu trop de demandes de votre part 📈</h1>
       <p>
         Notre site a reçu trop de demandes de la part de votre adresse IP en un
         temps très court, par conséquent nous ne pouvons pas répondre à votre
         requête.
       </p>
+      <ul>
+        <li>
+          Soit cela est du à une coincidence malheureuse et dans ce cas vous
+          pouvez continuer a naviguer sur le site, cela ne devrait plus se
+          produire.
+        </li>
+        <li>
+          Soit cela est du au fait que vous partagez votre connexion avec de
+          nombreuses autres personnes (le réseau internet de votre entreprise ou
+          de votre administration) et dans ce cas cela peut se produire de
+          nouveau.
+        </li>
+      </ul>
       <p>
-        Si cela se reproduit, merci de nous contacter au plus vite via notre
-        FAQ.
+        Si le problème se reproduit, vous pouvez nous contacter via notre FAQ.
       </p>
       <div className="layout-left">
         <ButtonLink to="/faq" alt>
