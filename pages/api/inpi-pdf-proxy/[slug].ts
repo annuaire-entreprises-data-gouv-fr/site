@@ -7,6 +7,7 @@ import routes from '../../../clients/routes';
 import { isCaptchaCookieValid } from '../../../utils/captcha';
 import { isSiren } from '../../../utils/helpers/siren-and-siret';
 import httpClient, { httpGet } from '../../../utils/network/http';
+import redirect from '../../../utils/redirects';
 import logErrorInSentry, { logWarningInSentry } from '../../../utils/sentry';
 
 /**
@@ -26,12 +27,8 @@ const proxyPdf = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const captchaCookieIsValid = isCaptchaCookieValid(req, res);
   if (!captchaCookieIsValid) {
-    return {
-      redirect: {
-        destination: `/captcha?url=${req.url}`,
-        permanent: false,
-      },
-    };
+    redirect(res, `/captcha?url=${req.url}`);
+    return;
   }
 
   try {
