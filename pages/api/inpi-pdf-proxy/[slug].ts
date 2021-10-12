@@ -1,11 +1,10 @@
-import { randomUUID } from 'crypto';
-import fs from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   HttpAuthentificationFailure,
   HttpNotFound,
 } from '../../../clients/exceptions';
 import routes from '../../../clients/routes';
+import { isCaptchaCookieValid } from '../../../utils/captcha';
 import { isSiren } from '../../../utils/helpers/siren-and-siret';
 import httpClient, { httpGet } from '../../../utils/network/http';
 import logErrorInSentry, { logWarningInSentry } from '../../../utils/sentry';
@@ -18,14 +17,21 @@ const INPI_TIMEOUT = 20000;
 /**
  * Call with authenticated cookies to get full pdf.
  */
-const proxyPdf = async (
-  { query: { slug } }: NextApiRequest,
-  nextAPIResponse: NextApiResponse
-) => {
-  const siren = slug as string;
+const proxyPdf = async (req: NextApiRequest, res: NextApiResponse) => {
+  const siren = req.query.slug as string;
 
   if (!isSiren(siren)) {
     throw new HttpNotFound(404, `${siren} is not a valid siren`);
+  }
+
+  const captchaCookieIsValid = isCaptchaCookieValid(req, res);
+  if (!captchaCookieIsValid) {
+    return {
+      redirect: {
+        destination: `/captcha?url=${req.url}`,
+        permanent: false,
+      },
+    };
   }
 
   try {
@@ -49,24 +55,24 @@ const proxyPdf = async (
       }
     );
 
-    nextAPIResponse.setHeader('Content-Type', 'application/pdf');
-    nextAPIResponse.setHeader(
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader(
       'Content-Disposition',
       `attachment; filename=justificatif_immatriculation_rcs_${siren}.pdf`
     );
 
-    nextAPIResponse.status(200).send(response.data);
+    res.status(200).send(response.data);
   } catch (e) {
     logErrorInSentry('Error in INPI’s proxy PDF', {
       siren,
       details: e.toString(),
     });
 
-    nextAPIResponse.writeHead(302, {
+    res.writeHead(302, {
       Location: '/erreur/administration/inpi',
     });
 
-    nextAPIResponse.end();
+    res.end();
   }
 };
 
