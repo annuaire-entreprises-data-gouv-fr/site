@@ -14,7 +14,7 @@ const PAGES = [
   '/annonces/880878145',
   '/administration/insee',
   '/administration/',
-  '/rechercher/carte',
+  '/carte',
   '/etablissement/88087814500015',
   '/rechercher?terme=ganymede',
 ];
