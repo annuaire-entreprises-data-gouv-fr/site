@@ -22,7 +22,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@datadome/node-module": "^1.1.7",
     "@sentry/node": "^6.6.0",
     "@types/adm-zip": "^0.4.34",
     "@types/axios-token-interceptor": "^0.2.1",
