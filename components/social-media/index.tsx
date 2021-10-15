@@ -55,12 +55,16 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
           label="Imprimer cette page ou la sauvegarder au format PDF"
           orientation="right"
         >
-          <div
-            title="Imprimer cette page ou la sauvergarder au format PDF"
-            onClick={() => window.print()}
-          >
-            {print}
-          </div>
+          <div id="print-icon">{print}</div>
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: `
+              var openPrintAlert = function() { window.print() };
+              document.getElementById("print-icon").onclick=openPrintAlert;
+          `,
+            }}
+          ></script>
         </InformationTooltip>
       </span>
       <span>
