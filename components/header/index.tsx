@@ -80,6 +80,11 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
           margin-top: 0;
         }
       }
+      @media print {
+        .fr-header {
+          display: none !important;
+        }
+      }
     `}</style>
   </>
 );

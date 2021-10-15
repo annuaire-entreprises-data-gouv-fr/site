@@ -67,6 +67,11 @@ export const Question: React.FC<{}> = () => (
           display: none;
         }
       }
+      @media print {
+        .question-bottom-right {
+          display: none;
+        }
+      }
     `}</style>
   </>
 );

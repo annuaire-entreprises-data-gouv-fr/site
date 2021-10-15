@@ -39,6 +39,11 @@ export const NPSBanner: React.FC<{}> = () => (
         align-items: center;
         justify-content: space-between;
       }
+      @media print {
+        #nps-modal {
+          display: none !important;
+        }
+      }
     `}</style>
   </>
 );

@@ -126,6 +126,11 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
           box-shadow: none;
         }
       }
+      @media print {
+        .title-tabs {
+          display: none !important;
+        }
+      }
     `}</style>
   </>
 );

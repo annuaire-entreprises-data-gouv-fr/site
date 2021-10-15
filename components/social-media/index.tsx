@@ -1,5 +1,5 @@
 import React from 'react';
-import { facebook, linkedin, qrCode, twitter } from '../icon';
+import { facebook, linkedin, qrCode, twitter, print } from '../icon';
 import InformationTooltip from '../information-tooltip';
 
 const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
@@ -52,6 +52,19 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       </span>
       <span>
         <InformationTooltip
+          label="Imprimer cette page ou la sauvegarder au format PDF"
+          orientation="right"
+        >
+          <div
+            title="Imprimer cette page ou la sauvergarder au format PDF"
+            onClick={() => window.print()}
+          >
+            {print}
+          </div>
+        </InformationTooltip>
+      </span>
+      <span>
+        <InformationTooltip
           label="Télécharger un QR Code à inclure dans un courier ou dans un devis, pour partager cet url."
           orientation="right"
         >
@@ -73,7 +86,8 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       .social-media span {
         margin: 0 5px;
       }
-      .social-media span a {
+      .social-media span a,
+      .social-media span div {
         cursor: pointer !important;
         box-shadow: none;
       }
@@ -83,6 +97,12 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       .social-media {
         color: #000091;
         margin: 0 0 12px 0;
+      }
+
+      @media print {
+        .social-media {
+          display: none !important;
+        }
       }
     `}</style>
   </>

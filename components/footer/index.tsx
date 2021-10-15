@@ -159,6 +159,13 @@ const Footer = () => (
         </div>
       </div>
     </div>
+    <style jsx>{`
+      @media print {
+        .fr-footer {
+          display: none !important;
+        }
+      }
+    `}</style>
   </footer>
 );
 
