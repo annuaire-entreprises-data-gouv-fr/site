@@ -1,7 +1,7 @@
 import React from 'react';
 import App from 'next/app';
 
-import '../public/static/globals.scss';
+import '../constants/globals.scss';
 
 class MyApp extends App {
   render() {

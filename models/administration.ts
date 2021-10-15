@@ -1,4 +1,4 @@
-import { cma, inpi } from '../public/static/logo';
+import { cma, inpi } from '../constants/logo';
 
 export enum EAdministration {
   DINUM = 0,

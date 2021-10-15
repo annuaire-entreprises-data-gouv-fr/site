@@ -5,7 +5,6 @@ import {
   isAPINotResponding,
 } from '../../models/api-not-responding';
 import { IImmatriculationRNM } from '../../models/immatriculation';
-import { cma } from '../../public/static/logo';
 import AdministrationNotResponding from '../administration-not-responding';
 import ButtonLink from '../button';
 import { download } from '../icon';
