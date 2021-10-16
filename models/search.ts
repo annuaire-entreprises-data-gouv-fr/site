@@ -36,8 +36,10 @@ const search = async (searchTerm: string, page: number) => {
     }
 
     const escapedSearchTerm = escapeTerm(searchTerm);
-    return await getResults(escapedSearchTerm, page);
-    // return await getResultsFallback(escapedSearchTerm, page);
+
+    const results = await getResults(escapedSearchTerm, page);
+    // const results = await getResultsFallback(escapedSearchTerm, page);
+    return results;
   } catch (e) {
     if (e instanceof HttpNotFound) {
       return [];

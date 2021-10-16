@@ -9,7 +9,6 @@ import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import search, { ISearchResults } from '../../models/search';
 import ResultsHeader from '../../components/results-header';
 import { IsLikelyASirenOrSiretException } from '../../models';
-import LogSearchTermInPiwik from '../../components/clients-script/log-search-term-in-piwik';
 import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
 
@@ -49,8 +48,6 @@ const SearchResultPage: React.FC<IProps> = ({
         </div>
       )}
     </div>
-
-    <LogSearchTermInPiwik searchTerm={searchTerm} resultCount={resultCount} />
 
     <style jsx>{`
       .results-counter {

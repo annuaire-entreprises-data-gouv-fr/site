@@ -11,7 +11,6 @@ import search, { ISearchResults } from '../../models/search';
 import ResultsList from '../../components/results-list';
 import MapResults from '../../components/map/map-results';
 import { IsLikelyASirenOrSiretException } from '../../models';
-import LogSearchTermInPiwik from '../../components/clients-script/log-search-term-in-piwik';
 import { redirectServerError } from '../../utils/redirects';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
 
@@ -69,8 +68,6 @@ const MapSearchResultPage: React.FC<IProps> = ({
         currentPage={currentPage}
       />
     )}
-
-    <LogSearchTermInPiwik searchTerm={searchTerm} resultCount={resultCount} />
 
     <style jsx>{`
       .map-container {

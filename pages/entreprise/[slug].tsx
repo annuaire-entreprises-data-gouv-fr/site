@@ -19,10 +19,6 @@ import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import redirect from '../../utils/redirects';
 
-// const structuredData = (uniteLegale: UniteLegale) => [
-//   ['Quel est le SIREN de cette entreprise?', `SIREN : ${uniteLegale.siren}`],
-// ];
-
 interface IProps {
   uniteLegale: IUniteLegale;
 }

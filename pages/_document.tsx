@@ -1,8 +1,5 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import CopyToClipboard from '../components/clients-script/copy-to-clipboard';
-import DisplayFeedback from '../components/clients-script/display-feedback';
-import InitPiwik from '../components/clients-script/init-piwik';
 
 class CustomHead extends Head {
   render() {
@@ -70,12 +67,13 @@ class DevDocument extends Document {
             href="/resources/favicons/manifest.webmanifest"
             cross-origin="use-credentials"
           />
+          <script defer src="/resources/js/alpine.min.js"></script>
+          <script defer src="/resources/js/display-feedback.js"></script>
+          <script defer src="/resources/js/copy-to-clipboard.js"></script>
         </Head>
         <body>
           <Main />
           <NextScript />
-          {CopyToClipboard}
-          {DisplayFeedback}
         </body>
       </Html>
     );
@@ -109,15 +107,17 @@ class StaticDocument extends Document {
             href="/resources/favicons/manifest.webmanifest"
             cross-origin="use-credentials"
           />
+          <script defer src="/resources/js/alpine.min.js"></script>
+          <script defer src="/resources/js/display-feedback.js"></script>
+          <script defer src="/resources/js/copy-to-clipboard.js"></script>
+          {process.env.NODE_ENV === 'production' &&
+            process.env.MATOMO_SITE_ID && (
+              <script defer src="/resources/js/init-piwik.js"></script>
+            )}
         </CustomHead>
 
         <body>
           <Main />
-          {process.env.NODE_ENV === 'production' &&
-            process.env.MATOMO_SITE_ID &&
-            InitPiwik}
-          {CopyToClipboard}
-          {DisplayFeedback}
         </body>
       </Html>
     );
