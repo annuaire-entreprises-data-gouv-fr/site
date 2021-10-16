@@ -68,8 +68,7 @@ class DevDocument extends Document {
             cross-origin="use-credentials"
           />
           <script defer src="/resources/js/alpine.min.js"></script>
-          <script defer src="/resources/js/display-feedback.js"></script>
-          <script defer src="/resources/js/copy-to-clipboard.js"></script>
+          <script defer src="/resources/js/helpers.js"></script>
         </Head>
         <body>
           <Main />
@@ -108,8 +107,7 @@ class StaticDocument extends Document {
             cross-origin="use-credentials"
           />
           <script defer src="/resources/js/alpine.min.js"></script>
-          <script defer src="/resources/js/display-feedback.js"></script>
-          <script defer src="/resources/js/copy-to-clipboard.js"></script>
+          <script defer src="/resources/js/helpers.js"></script>
           {process.env.NODE_ENV === 'production' &&
             process.env.MATOMO_SITE_ID && (
               <script defer src="/resources/js/init-piwik.js"></script>
