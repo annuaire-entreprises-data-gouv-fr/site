@@ -6,10 +6,13 @@
     "node": ">=16.4"
   },
   "scripts": {
-    "sitemap": "node ./node-scripts/generate.js",
     "dev": "NODE_ENV=development next dev",
-    "build-dev": "NODE_ENV=production next build",
-    "build": "npm run sitemap && NODE_ENV=production next build",
+    "build:front-js": "esbuild public/resources/js/index.js --bundle --minify --outfile=public/resources/js/bundle.js --target=chrome58,firefox57",
+    "build:css": "purgecss --config ./purgecss.config.js --output public/resources/css/bundle.css",
+    "build:sitemap": "node ./node-scripts/generate.js",
+    "build:back": "NODE_ENV=production next build",
+    "build:site": "npm run build:front-js && npm run build:css && npm run build:back",
+    "build": "npm run build:sitemap && npm run build:site",
     "start": "NODE_ENV=production && next start",
     "test:end2end": "cypress open",
     "test:unit": "jest",
@@ -19,7 +22,6 @@
   },
   "dependencies": {
     "@sentry/node": "^6.6.0",
-    "@types/adm-zip": "^0.4.34",
     "@types/axios-token-interceptor": "^0.2.1",
     "@types/cookies": "^0.7.7",
     "@types/crypto-js": "^4.0.2",
@@ -46,6 +48,8 @@
     "react-dom": "^17.0.2",
     "react-markdown": "^6.0.2",
     "typescript": "^4.3.4",
+    "purgecss": "^4.0.3",
+    "esbuild": "^0.13.7",
     "yauzl": "^2.10.0"
   },
   "devDependencies": {
@@ -56,7 +60,6 @@
     "simple-git-hooks": "^2.6.1"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx simple-git-hooks && npm run lint && npm run test:unit",
-    "pre-push": "cd public/resources/partials/button-async && npm run build"
+    "pre-commit": "npx simple-git-hooks && npm run lint && npm run test:unit"
   }
 }
