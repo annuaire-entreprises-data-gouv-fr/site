@@ -11,7 +11,7 @@
     "build:css": "purgecss --config ./purgecss.config.js --output public/resources/css/bundle.css",
     "build:sitemap": "node ./node-scripts/generate.js",
     "build:back": "NODE_ENV=production next build",
-    "build:site": "npm run build:front-js && npm run build:css && npm run build:back",
+    "build:site": "npm run build:front-js && npm run build:back && npm run build:css",
     "build": "npm run build:sitemap && npm run build:site",
     "start": "NODE_ENV=production && next start",
     "test:end2end": "cypress open",
