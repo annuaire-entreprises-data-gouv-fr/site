@@ -1,5 +1,4 @@
 import React from 'react';
-
 import SearchBar from '../components/search-bar';
 import Page from '../layouts';
 
@@ -16,13 +15,6 @@ const About: React.FC = () => {
           <div className="layout-center search">
             <SearchBar autoFocus={true} />
           </div>
-        </div>
-      </div>
-      heeey
-      <div x-data="{ open: false }">
-        <div x-data="{ label: 'Content:' }">
-          <span x-text="label"></span>
-          <span x-show="open"></span>
         </div>
       </div>
       <style jsx>{`
