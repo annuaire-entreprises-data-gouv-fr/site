@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBar from '../components/search-bar';
 import Page from '../layouts';
 
-const About: React.FC = () => {
+const Index: React.FC = (pageProps) => {
   return (
     <Page title="L’Annuaire des Entreprises">
       <div className="layout-center">
@@ -36,4 +36,4 @@ const About: React.FC = () => {
   );
 };
 
-export default About;
+export default Index;

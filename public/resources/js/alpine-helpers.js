@@ -4,7 +4,7 @@
       isLoading: false,
       error: null,
 
-      init(id) {
+      initialize(id) {
         let e = document.getElementById(id);
         if (e) {
           e.style.display = 'none';
