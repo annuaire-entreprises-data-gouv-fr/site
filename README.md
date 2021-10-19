@@ -51,9 +51,9 @@ npm i
 # Lancer le site en dev
 npm run dev
 
-# Lancer le site en prod
+# Lancer le site en prod sans la sitemap
 export PORT=3000
-npm run build && npm run start
+npm run build:site && npm run start
 
 ```
 
