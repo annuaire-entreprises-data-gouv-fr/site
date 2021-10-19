@@ -22,7 +22,7 @@ const ButtonLinkAsync: React.FC<{ to: string }> = ({ to }) => {
       <div
         dangerouslySetInnerHTML={{
           __html: `
-          <div class="button-link" x-data="asyncButton('${to}')" x-cloak x-init="function() {initialize('${id}')}">
+          <div class="button-link" x-data="asyncButton('${to}', '${id}')" x-cloak>
             <div class="error-message" x-show="error !== null" x-text="error"></div>
             <button @click="click">
               <template x-if="!isLoading">

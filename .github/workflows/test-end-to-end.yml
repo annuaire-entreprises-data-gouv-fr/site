@@ -43,7 +43,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           browser: firefox
-          build: npm run build
+          build: npm run build:site
           start: npm start
         env:
           PORT: 3000

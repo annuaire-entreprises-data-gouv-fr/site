@@ -36,7 +36,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm i
-      - run: npm run build-dev
+      - run: npm run build:site
       - run: npm run start &
         env:
           PORT: 3000

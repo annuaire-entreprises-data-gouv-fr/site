@@ -1,11 +1,11 @@
 (() => {
   document.addEventListener('alpine:init', () => {
-    Alpine.data('asyncButton', (to) => ({
+    Alpine.data('asyncButton', (href, idToClean) => ({
       isLoading: false,
       error: null,
 
-      initialize(id) {
-        let e = document.getElementById(id);
+      init() {
+        let e = document.getElementById(idToClean);
         if (e) {
           e.style.display = 'none';
         }
@@ -17,7 +17,7 @@
         }
         this.error = null;
         this.isLoading = true;
-        fetch(to)
+        fetch(href)
           .then((response) => {
             if (response.redirected) {
               throw new Error('Redirected to error page');
