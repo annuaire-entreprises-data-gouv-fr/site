@@ -1,4 +1,5 @@
 import React from 'react';
+import ButtonLinkAsync from '../components/button-async';
 import SearchBar from '../components/search-bar';
 import Page from '../layouts';
 
@@ -12,6 +13,7 @@ const Index: React.FC = (pageProps) => {
             Retrouvez toutes les informations publiques concernant les
             entreprises françaises
           </h2>
+          <ButtonLinkAsync to="test" />
           <div className="layout-center search">
             <SearchBar autoFocus={true} />
           </div>

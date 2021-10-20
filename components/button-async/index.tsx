@@ -24,6 +24,7 @@ const ButtonLinkAsync: React.FC<{ to: string }> = ({ to }) => {
           __html: `
           <div class="button-link" x-data="asyncButton('${to}', '${id}')" x-cloak>
             <div class="error-message" x-show="error !== null" x-text="error"></div>
+            <button @click="$store.downloadManager.add(Math.random().toString(16).substring(7))">BLA</button>
             <button @click="click">
               <template x-if="!isLoading">
                 <svg

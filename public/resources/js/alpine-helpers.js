@@ -44,5 +44,45 @@
           });
       },
     }));
+
+    Alpine.store('downloadManager', {
+      downloads: [],
+
+      add(href) {
+        this.downloads.push({
+          href,
+          name: href,
+          progress: 1,
+          timestamp: new Date().getTime(),
+        });
+        this.triggerUpdate();
+      },
+      remove(index) {
+        this.downloads.splice(index, 1);
+      },
+      get() {
+        return this.downloads;
+      },
+      triggerUpdate() {
+        for (let i = 0; i < this.downloads.length; i++) {
+          const currentProgress = this.downloads[i].progress;
+          if (currentProgress < 99) {
+            const progression =
+              (Math.random() * 40) / (currentProgress / 10 + 1);
+
+            this.downloads[i].progress = Math.min(
+              99,
+              Math.ceil(
+                currentProgress + (Math.random() < 0.05 ? progression : 0)
+              )
+            );
+          }
+        }
+
+        if (this.downloads.length > 0) {
+          window.setTimeout(() => this.triggerUpdate(), 350);
+        }
+      },
+    });
   });
 })();

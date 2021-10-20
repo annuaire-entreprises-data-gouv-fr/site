@@ -75,11 +75,6 @@ class DevDocument extends Document {
           <script
             defer
             type="text/javascript"
-            src="/resources/js/helpers.js"
-          ></script>
-          <script
-            defer
-            type="text/javascript"
             src="/resources/js/alpine.min.js"
           ></script>
         </Head>
@@ -99,7 +94,7 @@ class StaticDocument extends Document {
         <CustomHead>
           {/* Standard Meta */}
           {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/223019574/D+veloppeurs */}
-          <link rel="stylesheet" href="/resources/css/bundle.css" />
+          <link rel="stylesheet" href="/resources/css/dsfr.min.css" />
           <link
             rel="apple-touch-icon"
             href="/resources/favicons/apple-touch-icon.png"

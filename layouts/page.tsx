@@ -5,6 +5,7 @@ import Meta from '../components/meta';
 import { Question } from '../components/question';
 import { NPSBanner } from '../components/banner/nps';
 import { WeNeedYouModal } from '../components/modal/we-need-you';
+import DownloadManager from '../components/download-manger';
 
 interface IProps {
   small?: boolean;
@@ -42,6 +43,7 @@ const Page: React.FC<IProps> = ({
     )}
     <main className="fr-container">{children}</main>
     <Question />
+    <DownloadManager />
     <Footer />
     <style global jsx>{`
       #page-layout {
