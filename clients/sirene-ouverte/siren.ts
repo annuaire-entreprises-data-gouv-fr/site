@@ -61,6 +61,10 @@ const getUniteLegaleSireneOuverte = async (
     // Sirene ouverte does not return actual 404, just empty objects/arrays
     const result = response.data[0] as ISireneOuverteUniteLegaleResponse;
 
+    if (!result.unite_legale) {
+      throw new Error();
+    }
+
     uniteLegale = result.unite_legale[0];
 
     if (!uniteLegale) {

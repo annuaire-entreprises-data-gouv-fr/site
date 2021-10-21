@@ -53,6 +53,10 @@ const getEtablissementSireneOuverte = async (
     // Sirene ouverte does not return actual 404, just empty objects/arrays
     const result = response.data[0] as ISireneOuverteEtablissementResponse;
 
+    if (!result.etablissement) {
+      throw new Error();
+    }
+
     etablissement = result.etablissement[0];
     if (!etablissement) {
       throw new HttpNotFound(404, 'Not Found');
