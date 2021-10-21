@@ -10,6 +10,7 @@ const routes = {
     portail: {
       entreprise: 'https://data.inpi.fr/entreprises/',
       login: 'https://data.inpi.fr/login',
+      informations: 'https://data.inpi.fr/espace_personnel/informations',
     },
     api: {
       login: 'https://opendata-rncs.inpi.fr/services/diffusion/login',
