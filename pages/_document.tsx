@@ -129,6 +129,10 @@ class StaticDocument extends Document {
             type="text/javascript"
             src="/resources/js/alpine.min.js"
           ></script>
+        </CustomHead>
+
+        <body>
+          <Main />
           {process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID && (
             <script
               dangerouslySetInnerHTML={{
@@ -153,10 +157,6 @@ class StaticDocument extends Document {
               }}
             ></script>
           )}
-        </CustomHead>
-
-        <body>
-          <Main />
         </body>
       </Html>
     );
