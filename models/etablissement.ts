@@ -108,12 +108,19 @@ const getEtablissementWithLatLongFromSlug = async (
 const getEtablissementWithUniteLegaleSireneOuverteFromSlug = async (
   slug: string
 ): Promise<IEtablissementWithUniteLegale> => {
-  const etablissement = await getEtablissementSireneOuverte(slug);
-  const uniteLegale = await getUniteLegaleSireneOuverteFromSlug(
-    etablissement.siren
-  );
+  try {
+    const etablissement = await getEtablissementSireneOuverte(slug);
+    const uniteLegale = await getUniteLegaleSireneOuverteFromSlug(
+      etablissement.siren
+    );
 
-  return { etablissement, uniteLegale };
+    return { etablissement, uniteLegale };
+  } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      throw new SiretNotFoundError(`Siret ${slug} was not found`);
+    }
+    throw e;
+  }
 };
 
 //=========================

@@ -103,7 +103,14 @@ const getUniteLegaleSireneOuverteFromSlug = async (
   page = 1
 ): Promise<IUniteLegale> => {
   const siren = verifySiren(slug);
-  return await getUniteLegaleSireneOuverte(siren, page);
+  try {
+    return await getUniteLegaleSireneOuverte(siren, page);
+  } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      throw new SirenNotFoundError(`Siren ${siren} was not found`);
+    }
+    throw e;
+  }
 };
 
 //=========================
