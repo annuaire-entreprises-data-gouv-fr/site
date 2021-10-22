@@ -1,5 +1,10 @@
 import { createDefaultEtablissement, IEtablissement } from '../../models';
-import { verifySiren, verifySiret } from '../../utils/helpers/siren-and-siret';
+import {
+  extractNicFromSiret,
+  extractSirenFromSiret,
+  verifySiren,
+  verifySiret,
+} from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
   libelleFromCodeEffectif,
@@ -65,21 +70,22 @@ const getEtablissementSireneOuverte = async (
     throw new HttpNotFound(404, 'Not Found');
   }
 
-  return mapSireneOuverteEtablissementToDomainObject(etablissement);
+  return mapSireneOuverteEtablissementToDomainObject(etablissement, siret);
 };
 
 export const mapSireneOuverteEtablissementToDomainObject = (
-  etablissement: ISireneOuverteEtablissement
+  etablissement: ISireneOuverteEtablissement,
+  siret: string
 ): IEtablissement => {
   const estActif = etablissement.etat_administratif_etablissement === 'A';
   return {
     ...createDefaultEtablissement(),
     enseigne: etablissement.enseigne || null,
     //@ts-ignore
-    siren: etablissement.siren,
+    siren: extractSirenFromSiret(siret),
     //@ts-ignore
-    siret: etablissement.siret,
-    nic: etablissement.nic,
+    siret,
+    nic: extractNicFromSiret(siret),
     estActif,
     estSiege: etablissement.is_siege,
     estDiffusible: true,

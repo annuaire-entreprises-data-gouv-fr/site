@@ -66,7 +66,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   try {
     const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
-
     const etablissementWithUniteLegale = forceUseOfSireneOuverte
       ? await getEtablissementWithUniteLegaleSireneOuverteFromSlug(siret)
       : await getEtablissementWithUniteLegaleFromSlug(siret);
@@ -77,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e) {
-    redirectIfIssueWithSiretOrSiren(context.res, e, siret, context.req);
+    //redirectIfIssueWithSiretOrSiren(context.res, e, siret, context.req);
     return { props: {} };
   }
 };
