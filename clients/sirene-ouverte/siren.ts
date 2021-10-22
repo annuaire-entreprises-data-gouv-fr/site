@@ -83,11 +83,12 @@ const mapToDomainObject = (
   page: number
 ): IUniteLegale => {
   const siege = mapSireneOuverteEtablissementToDomainObject(
-    uniteLegale.etablissement_siege[0]
+    uniteLegale.etablissement_siege[0],
+    uniteLegale.etablissement_siege[0].siret
   );
 
-  const listOfEtablissement = uniteLegale.etablissements.map(
-    mapSireneOuverteEtablissementToDomainObject
+  const listOfEtablissement = uniteLegale.etablissements.map((etab) =>
+    mapSireneOuverteEtablissementToDomainObject(etab, etab.siret)
   );
 
   if (!listOfEtablissement || listOfEtablissement.length === 0) {
