@@ -8,7 +8,7 @@ import { IImmatriculationRNCS } from '../../models/immatriculation';
 import AdministrationNotResponding from '../administration-not-responding';
 import { INPI } from '../administrations';
 import ButtonLink from '../button';
-import ButtonLinkAsync from '../button-async';
+import ButtonInpiPdf from '../button-inpi-pdf';
 import { Section } from '../section';
 
 interface IProps {
@@ -55,9 +55,7 @@ const ImmatriculationRNCS: React.FC<IProps> = ({ immatriculation }) => {
             <INPI /> vous devrez vous créer un compte <INPI />.
           </p>
           <div className="layout-center">
-            <ButtonLinkAsync
-              to={`/api/inpi-pdf-proxy/${immatriculation.siren}`}
-            />
+            <ButtonInpiPdf siren={immatriculation.siren} />
             <div className="separator" />
             <ButtonLink
               nofollow={true}

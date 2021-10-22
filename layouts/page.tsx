@@ -5,7 +5,7 @@ import Meta from '../components/meta';
 import { Question } from '../components/question';
 import { NPSBanner } from '../components/banner/nps';
 import { WeNeedYouModal } from '../components/modal/we-need-you';
-import DownloadManager from '../components/download-manger';
+import DownloadManager from '../components/download-manager';
 
 interface IProps {
   small?: boolean;
