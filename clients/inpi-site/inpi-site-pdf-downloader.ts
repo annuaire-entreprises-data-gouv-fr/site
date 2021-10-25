@@ -12,9 +12,8 @@ import InpiSiteAuthInstance from './inpi-site-auth';
 const INPI_TIMEOUT = 30000;
 const DIRECTORY = process.env.INPI_PDF_DOWNLOAD_DIRECTORY as string;
 
+const pendingDownload: { [key: string]: { retry: number } } = {};
 class PDFDownloader {
-  pendingDownload: { [key: string]: { retry: number } } = {};
-
   constructor() {
     if (!DIRECTORY) {
       throw new Error('INPI download directory is not defined');
@@ -42,26 +41,26 @@ class PDFDownloader {
 
   async downloadAndSaveOnDisk(siren: Siren, slug: string) {
     try {
-      this.pendingDownload[slug] = { retry: 0 };
+      pendingDownload[slug] = { retry: 0 };
 
       console.log('Keys :');
-      console.log(Object.keys(this.pendingDownload));
+      console.log(Object.keys(pendingDownload));
 
       const pdf = await this.download(siren);
       fs.writeFileSync(`${DIRECTORY}${slug}.pdf`, pdf, {});
       console.log('deleting');
-      delete this.pendingDownload[slug];
+      delete pendingDownload[slug];
     } catch (e: any) {
       logErrorInSentry('INPI PDF Download failed', {
         siren,
         details: e.toString(),
       });
-      delete this.pendingDownload[slug];
+      delete pendingDownload[slug];
     }
   }
 
   getStatus(slug: string) {
-    const fileMetaData = this.pendingDownload[slug];
+    const fileMetaData = pendingDownload[slug];
     console.log('status : ' + JSON.stringify(fileMetaData));
     if (fileMetaData && fileMetaData.retry === 0) {
       return 'pending';

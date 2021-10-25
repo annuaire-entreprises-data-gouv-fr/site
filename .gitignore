@@ -38,6 +38,7 @@ yarn-error.log*
 /node-scripts/sitemap-name.csv
 
 /public/maps/*
+/public/resources/downloads/*
 /public/sitemap.xml
 /public/*.xml
 

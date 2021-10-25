@@ -27,15 +27,14 @@ const INPI_SITE_IMEOUT = 30000;
 
 const COOKIE_CONSERVATION_TIME = 500000;
 
+let initialAuthData: IInitialAuth | null = null;
+let lastSuccessfulAuth: number = 0;
 class InpiSiteAuthProvider {
-  initialAuthData: IInitialAuth | null = null;
-  lastSuccessfulAuth: number = 0;
-
   async getAuthenticatedCookies(): Promise<string | null> {
     try {
       const now = new Date().getTime();
 
-      if (now - this.lastSuccessfulAuth > COOKIE_CONSERVATION_TIME) {
+      if (now - lastSuccessfulAuth > COOKIE_CONSERVATION_TIME) {
         const { isAlreadyAuthenticated } = await this.getInitialAuthData();
 
         if (!isAlreadyAuthenticated) {
@@ -62,7 +61,7 @@ class InpiSiteAuthProvider {
   async getInitialAuthData(): Promise<{ isAlreadyAuthenticated: Boolean }> {
     try {
       const response = await httpClient({
-        url: routes.rncs.portail.informations,
+        url: routes.rncs.portail.login,
         method: 'POST',
         headers: {
           ...DEFAULT_HEADERS,
@@ -70,9 +69,9 @@ class InpiSiteAuthProvider {
         },
         timeout: INPI_SITE_IMEOUT,
       });
-      const isRedirected = response.request.path.indexOf('redirectUrl') > -1;
+      const html = response.data;
 
-      if (!isRedirected) {
+      if (html.indexOf('Bonjour Xavier') > -1) {
         return { isAlreadyAuthenticated: true };
       }
 
@@ -81,12 +80,11 @@ class InpiSiteAuthProvider {
       if (!cookies || typeof cookies !== 'string') {
         throw new Error('Authentication failed');
       }
-      const html = response.data;
 
-      this.initialAuthData = extractInitialAuthData(cookies);
-      this.initialAuthData.token = extractTokenFromHtmlForm(html);
+      initialAuthData = extractInitialAuthData(cookies);
+      initialAuthData.token = extractTokenFromHtmlForm(html);
       return {
-        isAlreadyAuthenticated: !isRedirected && this.verifyAuthentication(),
+        isAlreadyAuthenticated: false,
       };
     } catch (e: any) {
       throw new HttpAuthentificationFailure(e);
@@ -95,10 +93,10 @@ class InpiSiteAuthProvider {
 
   verifyAuthentication(): Boolean {
     return (
-      this.initialAuthData !== null &&
-      !!this.initialAuthData.token &&
-      !!this.initialAuthData.Q71 &&
-      !!this.initialAuthData.phpSessionId
+      initialAuthData !== null &&
+      !!initialAuthData.token &&
+      !!initialAuthData.Q71 &&
+      !!initialAuthData.phpSessionId
     );
   }
 
@@ -106,7 +104,7 @@ class InpiSiteAuthProvider {
     if (!this.verifyAuthentication()) {
       return null;
     }
-    return `PHPSESSID=${this.initialAuthData?.phpSessionId}; Q71x4Drzmg@@=${this.initialAuthData?.Q71}; cookieconsent_status=allow`;
+    return `PHPSESSID=${initialAuthData?.phpSessionId}; Q71x4Drzmg@@=${initialAuthData?.Q71}; cookieconsent_status=allow`;
   };
 
   /**
@@ -133,12 +131,14 @@ class InpiSiteAuthProvider {
 
       if (loginSuccess) {
         const now = new Date();
-        this.lastSuccessfulAuth = now.getTime();
+        lastSuccessfulAuth = now.getTime();
       } else {
-        this.lastSuccessfulAuth = 0;
-        this.initialAuthData = null;
+        lastSuccessfulAuth = 0;
+        initialAuthData = null;
       }
     } catch (e: any) {
+      lastSuccessfulAuth = 0;
+      initialAuthData = null;
       throw new HttpAuthentificationFailure(e);
     }
   }
@@ -152,7 +152,7 @@ class InpiSiteAuthProvider {
     )}&login_form%5Bpassword%5D=${encodeURI(
       password
     )}&login_form%5Blicence%5D=1&login_form%5Bsubmit%5D=&login_form%5B_token%5D=${
-      this.initialAuthData?.token
+      initialAuthData?.token
     }`;
   };
 }
