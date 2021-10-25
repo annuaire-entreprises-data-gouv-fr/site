@@ -15,7 +15,10 @@ import {
   Siret,
   verifySiret,
 } from '../utils/helpers/siren-and-siret';
-import { getUniteLegaleFromSlug } from './unite-legale';
+import {
+  getUniteLegaleFromSlug,
+  getUniteLegaleSireneOuverteFromSlug,
+} from './unite-legale';
 import {
   logFirstSireneInseefailed,
   logSecondSireneInseefailed,
@@ -99,6 +102,27 @@ const getEtablissementWithLatLongFromSlug = async (
   }
 };
 
+/**
+ * Return an Etablissement and the corresponding UniteLegale from sirene ouverte
+ */
+const getEtablissementWithUniteLegaleSireneOuverteFromSlug = async (
+  slug: string
+): Promise<IEtablissementWithUniteLegale> => {
+  try {
+    const etablissement = await getEtablissementSireneOuverte(slug);
+    const uniteLegale = await getUniteLegaleSireneOuverteFromSlug(
+      etablissement.siren
+    );
+
+    return { etablissement, uniteLegale };
+  } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      throw new SiretNotFoundError(`Siret ${slug} was not found`);
+    }
+    throw e;
+  }
+};
+
 //=========================
 //        API calls
 //=========================
@@ -116,6 +140,7 @@ const createNonDiffusibleEtablissement = (siret: Siret) => {
 
 export {
   getEtablissementWithUniteLegaleFromSlug,
+  getEtablissementWithUniteLegaleSireneOuverteFromSlug,
   getEtablissementWithLatLongFromSlug,
   getEtablissementFromSlug,
 };

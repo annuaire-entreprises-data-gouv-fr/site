@@ -61,6 +61,10 @@ const getUniteLegaleSireneOuverte = async (
     // Sirene ouverte does not return actual 404, just empty objects/arrays
     const result = response.data[0] as ISireneOuverteUniteLegaleResponse;
 
+    if (!result.unite_legale) {
+      throw new Error();
+    }
+
     uniteLegale = result.unite_legale[0];
 
     if (!uniteLegale) {
@@ -79,11 +83,12 @@ const mapToDomainObject = (
   page: number
 ): IUniteLegale => {
   const siege = mapSireneOuverteEtablissementToDomainObject(
-    uniteLegale.etablissement_siege[0]
+    uniteLegale.etablissement_siege[0],
+    uniteLegale.etablissement_siege[0].siret
   );
 
-  const listOfEtablissement = uniteLegale.etablissements.map(
-    mapSireneOuverteEtablissementToDomainObject
+  const listOfEtablissement = uniteLegale.etablissements.map((etab) =>
+    mapSireneOuverteEtablissementToDomainObject(etab, etab.siret)
   );
 
   if (!listOfEtablissement || listOfEtablissement.length === 0) {

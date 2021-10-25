@@ -36,6 +36,7 @@
     "axios-oauth-client": "^1.4.2",
     "axios-token-interceptor": "^0.2.0",
     "cookies": "^0.8.0",
+    "crawler-user-agents": "^1.0.85",
     "crypto-js": "^4.1.1",
     "esbuild": "^0.13.7",
     "eslint": "^7.32.0",
