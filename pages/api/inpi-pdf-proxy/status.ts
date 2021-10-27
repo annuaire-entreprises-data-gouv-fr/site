@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import PDFDownloaderInstance from '../../../clients/inpi-site/inpi-site-pdf-downloader';
+import PDFDownloaderInstance from '../../../clients/inpi-site/downloader-manager';
 import logErrorInSentry from '../../../utils/sentry';
 
 /**
@@ -9,8 +9,10 @@ import logErrorInSentry from '../../../utils/sentry';
 const getPdfStatus = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const slugs = JSON.parse(req.body) as string[];
+
     const pdfStatuses = slugs.map((slug) => {
-      return { slug, status: PDFDownloaderInstance.getStatus(slug) };
+      const status = PDFDownloaderInstance.getDownloadStatus(slug);
+      return { slug, ...status };
     });
     res.status(200).json(pdfStatuses);
   } catch (e: any) {

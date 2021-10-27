@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { HttpNotFound } from '../../../clients/exceptions';
-import PDFDownloaderInstance from '../../../clients/inpi-site/inpi-site-pdf-downloader';
+import PDFDownloaderInstance from '../../../clients/inpi-site/downloader-manager';
 import { isSiren } from '../../../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../../../utils/sentry';
 

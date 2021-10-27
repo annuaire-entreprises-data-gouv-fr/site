@@ -19,6 +19,7 @@ import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import redirect from '../../utils/redirects';
 import isUserAgentABot from '../../utils/user-agent';
+import ButtonInpiPdf from '../../components/button-inpi-pdf';
 
 interface IProps {
   uniteLegale: IUniteLegale;
@@ -36,6 +37,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
       uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
     }
   >
+    <ButtonInpiPdf siren={uniteLegale.siren} />
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
       {uniteLegale.estDiffusible ? (

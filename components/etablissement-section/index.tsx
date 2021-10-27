@@ -142,6 +142,11 @@ const EtablissementSection: React.FC<IProps> = ({
             margin: auto;
           }
         }
+        @media print {
+          .map {
+            display: none;
+          }
+        }
       `}</style>
     </>
   );
