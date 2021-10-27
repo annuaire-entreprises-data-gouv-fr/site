@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import PDFDownloaderInstance from '../../../../clients/inpi-site/downloader-manager';
+import PDFDownloaderInstance from '../../../../utils/download-manager';
 import logErrorInSentry from '../../../../utils/sentry';
 
 /**
