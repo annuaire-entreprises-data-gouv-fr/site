@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { HttpNotFound } from '../../../clients/exceptions';
-import PDFDownloaderInstance from '../../../clients/inpi-site/downloader-manager';
+import downloadInpiPdf from '../../../clients/inpi-site';
 import { isSiren } from '../../../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../../../utils/sentry';
 
@@ -16,7 +16,7 @@ const downloadPdf = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const data = await PDFDownloaderInstance.download(siren);
+    const data = await downloadInpiPdf(siren);
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader(
       'Content-Disposition',

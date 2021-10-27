@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { HttpNotFound } from '../../../../clients/exceptions';
-import PDFDownloaderInstance from '../../../../clients/inpi-site/downloader-manager';
+import { downloadInpiPdfAndSaveOnDisk } from '../../../../clients/inpi-site';
 import { isCaptchaCookieValid } from '../../../../utils/captcha';
 import randomId from '../../../../utils/helpers/randomId';
 import { isSiren } from '../../../../utils/helpers/siren-and-siret';
@@ -25,8 +25,7 @@ const createPdfDownload = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const slug = randomId();
-    PDFDownloaderInstance.downloadAndSaveOnDisk(siren, slug);
+    const slug = downloadInpiPdfAndSaveOnDisk(siren);
     res.status(201).json({ slug });
   } catch (e: any) {
     logErrorInSentry('Error in INPI’s proxy PDF', {

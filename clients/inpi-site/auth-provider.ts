@@ -1,13 +1,12 @@
 import routes from '../routes';
-import httpClient from '../../utils/network/http';
+import httpClient, { httpGet } from '../../utils/network/http';
 import { logWarningInSentry } from '../../utils/sentry';
 import {
-  extractInitialAuthData,
-  IInitialAuth,
-  extractTokenFromHtmlForm,
+  extractCookies,
+  IInpiSiteCookies,
   extractAuthSuccessFromHtmlForm,
   loginFormData,
-} from './helpers';
+} from './auth-helpers';
 
 const DEFAULT_HEADERS = {
   'User-Agent':
@@ -28,28 +27,28 @@ const INPI_SITE_IMEOUT = 30 * 1000;
 const COOKIE_CONSERVATION_TIME = 30 * 60 * 1000;
 
 interface IAuth {
-  initialAuthData: IInitialAuth | null;
-  lastSuccessfulAuthAt: number;
+  cookies: IInpiSiteCookies | null;
+  lastSuccessfullAuth: number;
 }
 const authData: IAuth = {
-  initialAuthData: null,
-  lastSuccessfulAuthAt: 0,
+  cookies: null,
+  lastSuccessfullAuth: 0,
 };
 
 class InpiSiteAuthProvider {
-  async getAuthenticatedCookies(): Promise<string | null> {
+  async getCookies(): Promise<string | null> {
     try {
-      const now = new Date().getTime();
-      const cookieIsTooOld =
-        now - authData.lastSuccessfulAuthAt > COOKIE_CONSERVATION_TIME;
+      const cookiesNeedToBeUpdated =
+        !!authData.cookies && this.verifyIfCookiesAreOutdated();
 
       // renew auth
-      if (cookieIsTooOld) {
+      if (cookiesNeedToBeUpdated) {
         this.resetAuthData();
-        await this.getInitialAuthData();
-        await this.authenticateCookie();
+        await this.getInitialCookies();
+        await this.authenticateCookies();
       }
-      return this.getCookie();
+
+      return this.formatCookies();
     } catch (e: any) {
       this.resetAuthData();
       logWarningInSentry('InpiSiteAuthProvider: returning empty credentials', {
@@ -60,49 +59,25 @@ class InpiSiteAuthProvider {
   }
 
   /**
-   * First call. Caller get two session cookies and a token to identify the login form
+   * First call. Caller get two session cookies and a token in the login form
    * */
-  async getInitialAuthData(): Promise<void> {
-    const response = await httpClient({
-      url: routes.rncs.portail.login,
-      method: 'POST',
+  async getInitialCookies(): Promise<void> {
+    const response = await httpGet(routes.rncs.portail.login, {
       headers: DEFAULT_HEADERS,
       timeout: INPI_SITE_IMEOUT,
     });
     const html = response.data;
-    const cookies = (response.headers['set-cookie'] || []).join('');
-
-    if (!cookies || typeof cookies !== 'string') {
-      throw new Error('INPI response contains no set-cookie');
-    } else {
-      authData.initialAuthData = extractInitialAuthData(cookies);
-      authData.initialAuthData.token = extractTokenFromHtmlForm(html);
-    }
+    const sessionCookies = (response.headers['set-cookie'] || []).join('');
+    authData.cookies = extractCookies(sessionCookies, html);
   }
-
-  verifyAuthentication(): Boolean {
-    return (
-      authData.initialAuthData !== null &&
-      !!authData.initialAuthData.token &&
-      !!authData.initialAuthData.Q71 &&
-      !!authData.initialAuthData.phpSessionId
-    );
-  }
-
-  getCookie = () => {
-    if (!this.verifyAuthentication()) {
-      throw new Error();
-    }
-    return `PHPSESSID=${authData.initialAuthData?.phpSessionId}; Q71x4Drzmg@@=${authData.initialAuthData?.Q71}; cookieconsent_status=allow`;
-  };
 
   /**
    * POST the form to validate the cookies
    */
-  async authenticateCookie() {
-    const cookie = this.getCookie();
-    const token = authData.initialAuthData?.token;
-    if (!cookie || !token) {
+  async authenticateCookies() {
+    const cookieString = this.formatCookies();
+    const token = authData.cookies?.token;
+    if (!cookieString || !token) {
       throw new Error('trying to authenticate empty cookies or token');
     }
 
@@ -113,7 +88,7 @@ class InpiSiteAuthProvider {
         ...DEFAULT_HEADERS,
         'Content-Type': 'application/x-www-form-urlencoded',
         Origin: 'https://data.inpi.fr',
-        Cookie: this.getCookie(),
+        Cookie: cookieString,
       },
       data: loginFormData(token),
       timeout: INPI_SITE_IMEOUT,
@@ -123,20 +98,36 @@ class InpiSiteAuthProvider {
     const loginSuccess = extractAuthSuccessFromHtmlForm(html);
 
     if (loginSuccess) {
-      this.updateLastSuccessfulAuthAt();
+      this.updateLastSuccessfullAuth();
     } else {
-      throw new Error('INPI response does not contains success alert');
+      throw new Error('INPI response does not contain success alert');
     }
   }
 
-  resetAuthData() {
-    authData.lastSuccessfulAuthAt = 0;
-    authData.initialAuthData = null;
+  verifyIfCookiesAreOutdated(): Boolean {
+    if (authData.cookies) {
+      return false;
+    }
+
+    const now = new Date().getTime();
+    return now - authData.lastSuccessfullAuth > COOKIE_CONSERVATION_TIME;
   }
 
-  updateLastSuccessfulAuthAt() {
+  formatCookies = () => {
+    if (!authData.cookies) {
+      return null;
+    }
+    return `PHPSESSID=${authData.cookies.phpSessionId}; Q71x4Drzmg@@=${authData.cookies.Q71}; cookieconsent_status=allow`;
+  };
+
+  resetAuthData() {
+    authData.lastSuccessfullAuth = 0;
+    authData.cookies = null;
+  }
+
+  updateLastSuccessfullAuth() {
     const now = new Date();
-    authData.lastSuccessfulAuthAt = now.getTime();
+    authData.lastSuccessfullAuth = now.getTime();
   }
 }
 
