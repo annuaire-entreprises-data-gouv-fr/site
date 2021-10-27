@@ -1,4 +1,6 @@
 (() => {
+  const ERROR =
+    'Nous avons rencontré une erreur lors du téléchargement, merci de réessayer plus tard.';
   document.addEventListener('alpine:init', () => {
     Alpine.data('asyncButton', (href, idToClean) => ({
       isLoading: false,
