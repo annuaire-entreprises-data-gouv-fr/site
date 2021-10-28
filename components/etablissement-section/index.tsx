@@ -50,6 +50,12 @@ const EtablissementSection: React.FC<IProps> = ({
       formatDate(etablissement.dateFermeture || ''),
     ]);
   }
+  if (etablissement.denomination) {
+    data.splice(0, 0, [
+      'Dénomination de l’établissement',
+      etablissement.denomination,
+    ]);
+  }
   if (etablissement.enseigne) {
     data.splice(0, 0, ['Enseigne de l’établissement', etablissement.enseigne]);
   }

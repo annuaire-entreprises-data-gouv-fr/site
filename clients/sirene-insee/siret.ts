@@ -9,6 +9,7 @@ import {
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
+  formatEnseigne,
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
@@ -37,6 +38,10 @@ interface IInseeEtablissement {
   periodesEtablissement: {
     dateFin: string;
     dateDebut: string;
+    enseigne1Etablissement: string;
+    enseigne2Etablissement: string;
+    enseigne3Etablissement: string;
+    denominationUsuelleEtablissement: string;
     etatAdministratifEtablissement: string;
     changementEtatAdministratifEtablissement: boolean;
     activitePrincipaleEtablissement: string;
@@ -160,8 +165,19 @@ export const mapEtablissementToDomainObject = (
   }
   const estActif = lastEtatAdministratif.etatAdministratifEtablissement === 'A';
   const dateFermeture = !estActif ? lastEtatAdministratif.dateDebut : null;
-  const activitePrincipaleEtablissement =
-    lastEtatAdministratif.activitePrincipaleEtablissement;
+  const {
+    activitePrincipaleEtablissement,
+    denominationUsuelleEtablissement,
+    enseigne1Etablissement,
+    enseigne2Etablissement,
+    enseigne3Etablissement,
+  } = lastEtatAdministratif;
+
+  const enseigne = formatEnseigne(
+    enseigne1Etablissement,
+    enseigne2Etablissement,
+    enseigne3Etablissement
+  );
 
   const defaultEtablissement = createDefaultEtablissement();
 
@@ -170,6 +186,8 @@ export const mapEtablissementToDomainObject = (
     siren: extractSirenFromSiret(siret),
     siret,
     nic,
+    enseigne,
+    denomination: denominationUsuelleEtablissement,
     dateCreation: dateCreationEtablissement,
     activitePrincipale: activitePrincipaleEtablissement,
     libelleActivitePrincipale: libelleFromCodeNaf(

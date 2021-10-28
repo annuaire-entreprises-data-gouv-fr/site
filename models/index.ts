@@ -13,6 +13,7 @@ export interface IAssociation {
 
 export interface IEtablissement {
   enseigne: string | null;
+  denomination: string | null;
   siren: Siren;
   siret: Siret;
   nic: string;
@@ -79,6 +80,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     estActif: null,
     estSiege: false,
     enseigne: null,
+    denomination: null,
     nic: '',
     dateCreation: '',
     dateDerniereMiseAJour: '',
