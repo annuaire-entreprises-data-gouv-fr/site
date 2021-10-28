@@ -51,16 +51,19 @@ class PDFDownloader {
     if (!fs.existsSync(DIRECTORY)) {
       fs.mkdirSync(DIRECTORY);
     }
-    this.triggerOldFilesCleaner();
+    this.cleanOldFiles();
   }
 
   createJob(downloadCallBack: () => Promise<string>) {
     const slug = randomId();
-    this.download(slug, downloadCallBack);
+    this.downloadAndRetry(slug, downloadCallBack);
     return slug;
   }
 
-  async download(slug: string, downloadCallBack: () => Promise<string>) {
+  async downloadAndRetry(
+    slug: string,
+    downloadCallBack: () => Promise<string>
+  ) {
     this.addOrUpdatePendingDownload(slug);
 
     try {
@@ -73,7 +76,7 @@ class PDFDownloader {
         downloadEntry && downloadEntry.retry < MAX_RETRY_COUNT;
 
       if (shouldRetry) {
-        this.download(slug, downloadCallBack);
+        this.downloadAndRetry(slug, downloadCallBack);
       } else {
         logErrorInSentry('Download manager : download failed', {
           details: e.toString(),
@@ -112,7 +115,7 @@ class PDFDownloader {
     return STATUSES.aborted;
   }
 
-  triggerOldFilesCleaner = async () => {
+  cleanOldFiles = async () => {
     try {
       const now = new Date().getTime();
       fs.readdirSync(DIRECTORY).forEach((file) => {
@@ -129,7 +132,7 @@ class PDFDownloader {
       });
     }
 
-    setTimeout(this.triggerOldFilesCleaner, FILES_CLEANING_FREQUENCY);
+    setTimeout(this.cleanOldFiles, FILES_CLEANING_FREQUENCY);
   };
 }
 
