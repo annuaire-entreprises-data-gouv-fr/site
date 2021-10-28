@@ -117,11 +117,10 @@ class PDFDownloader {
 
   cleanOldFiles = async () => {
     const now = new Date().getTime();
-    fs.readdir(DIRECTORY, (err, files: string[]) => {
-      try {
-        if (err) {
-          throw err;
-        }
+
+    fs.promises
+      .readdir(DIRECTORY)
+      .then((files: string[]) => {
         files.forEach((file) => {
           const filePath = `${DIRECTORY}${file}`;
           const stats = fs.statSync(filePath);
@@ -130,13 +129,13 @@ class PDFDownloader {
             fs.unlinkSync(filePath);
           }
         });
-      } catch (e: any) {
+        setTimeout(this.cleanOldFiles, FILES_CLEANING_FREQUENCY);
+      })
+      .catch((err) => {
         logErrorInSentry('Download manager : file cleaning failed', {
-          details: e.toString(),
+          details: err.toString(),
         });
-      }
-      setTimeout(this.cleanOldFiles, FILES_CLEANING_FREQUENCY);
-    });
+      });
   };
 }
 
