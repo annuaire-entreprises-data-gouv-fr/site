@@ -1,3 +1,4 @@
+import { init } from '@sentry/node';
 import fs from 'fs';
 
 import logErrorInSentry from '../../utils/sentry';
@@ -48,9 +49,7 @@ class PDFDownloader {
     if (!DIRECTORY) {
       throw new Error('Download manager : directory is not defined');
     }
-    if (!fs.existsSync(DIRECTORY)) {
-      fs.mkdirSync(DIRECTORY);
-    }
+
     this.cleanOldFiles();
   }
 
@@ -68,7 +67,7 @@ class PDFDownloader {
 
     try {
       const file = await downloadCallBack();
-      this.savePdfOnDisk(slug, file);
+      await this.savePdfOnDisk(slug, file);
       this.removePendingDownload(slug);
     } catch (e: any) {
       const downloadEntry = pendingDownloads[slug];
@@ -98,8 +97,8 @@ class PDFDownloader {
     delete pendingDownloads[slug];
   }
 
-  savePdfOnDisk(slug: string, pdf: any) {
-    fs.writeFileSync(`${DIRECTORY}${slug}.pdf`, pdf, {});
+  async savePdfOnDisk(slug: string, pdf: any) {
+    await fs.promises.writeFile(`${DIRECTORY}${slug}.pdf`, pdf, {});
   }
 
   getDownloadStatus(slug: string): IStatusMetaData {
@@ -117,25 +116,24 @@ class PDFDownloader {
 
   cleanOldFiles = async () => {
     const now = new Date().getTime();
-
-    fs.promises
-      .readdir(DIRECTORY)
-      .then((files: string[]) => {
-        files.forEach((file) => {
+    try {
+      const files = await fs.promises.readdir(DIRECTORY);
+      await Promise.all(
+        files.map(async (file) => {
           const filePath = `${DIRECTORY}${file}`;
-          const stats = fs.statSync(filePath);
+          const stats = await fs.promises.stat(filePath);
           const isTooOld = now - stats.birthtimeMs > FILES_LIFESPAN;
           if (isTooOld) {
-            fs.unlinkSync(filePath);
+            await fs.promises.unlink(filePath);
           }
-        });
-        setTimeout(this.cleanOldFiles, FILES_CLEANING_FREQUENCY);
-      })
-      .catch((err) => {
-        logErrorInSentry('Download manager : file cleaning failed', {
-          details: err.toString(),
-        });
+        })
+      );
+    } catch (e: any) {
+      logErrorInSentry('Download manager : file cleaning failed', {
+        details: e.toString(),
       });
+    }
+    setTimeout(this.cleanOldFiles, FILES_CLEANING_FREQUENCY);
   };
 }
 
