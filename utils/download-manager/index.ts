@@ -1,4 +1,3 @@
-import { init } from '@sentry/node';
 import fs from 'fs';
 
 import logErrorInSentry from '../../utils/sentry';
@@ -45,12 +44,22 @@ const STATUSES: { [key: string]: IStatusMetaData } = {
 const pendingDownloads: { [key: string]: { retry: number } } = {};
 
 class PDFDownloader {
+  _initialized = false;
+
   constructor() {
     if (!DIRECTORY) {
       throw new Error('Download manager : directory is not defined');
     }
 
     this.cleanOldFiles();
+  }
+
+  async init() {
+    if (!fs.existsSync(DIRECTORY)) {
+      await fs.promises.mkdir(DIRECTORY, { recursive: true });
+    }
+
+    this._initialized = true;
   }
 
   createJob(downloadCallBack: () => Promise<string>) {
@@ -63,6 +72,10 @@ class PDFDownloader {
     slug: string,
     downloadCallBack: () => Promise<string>
   ) {
+    if (!this._initialized) {
+      await this.init();
+    }
+
     this.addOrUpdatePendingDownload(slug);
 
     try {
