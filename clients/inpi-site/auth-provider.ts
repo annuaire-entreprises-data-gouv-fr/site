@@ -134,6 +134,6 @@ class InpiSiteAuthProvider {
 /**
  * Create a singleton
  */
-const InpiSiteAuthInstance = new InpiSiteAuthProvider();
+const inpiSiteAuth = new InpiSiteAuthProvider();
 
-export default InpiSiteAuthInstance;
+export default inpiSiteAuth;

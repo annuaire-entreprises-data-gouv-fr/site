@@ -67,11 +67,7 @@ const loginFormData = (token: string) => {
   const login = process.env.INPI_SITE_LOGIN as string;
   const password = process.env.INPI_SITE_PASSWORD as string;
 
-  return `referer=&login_form%5BEmail%5D=${encodeURI(
-    login
-  )}&login_form%5Bpassword%5D=${encodeURI(
-    password
-  )}&login_form%5Blicence%5D=1&login_form%5Bsubmit%5D=&login_form%5B_token%5D=${token}`;
+  return `referer=&login_form%5BEmail%5D=${login}&login_form%5Bpassword%5D=${password}&login_form%5Blicence%5D=1&login_form%5Bsubmit%5D=&login_form%5B_token%5D=${token}`;
 };
 
 export { extractAuthSuccessFromHtmlForm, extractCookies, loginFormData };

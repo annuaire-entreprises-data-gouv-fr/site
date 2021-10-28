@@ -1,14 +1,14 @@
-import PDFDownloaderInstance from '../../utils/download-manager';
-import InpiSiteAuthInstance from './auth-provider';
+import pdfDownloader from '../../utils/download-manager';
+import inpiSiteAuth from './auth-provider';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { httpGet } from '../../utils/network/http';
 import routes from '../routes';
 
-const INPI_TIMEOUT = 30000;
+const INPI_TIMEOUT = 50 * 1000;
 
 export const downloadInpiPdf = async (siren: Siren): Promise<string> => {
   try {
-    const cookies = await InpiSiteAuthInstance.getCookies();
+    const cookies = await inpiSiteAuth.getCookies();
     const response = await httpGet(
       `${routes.rncs.portail.entreprise}${siren}?format=pdf`,
       {
@@ -16,7 +16,7 @@ export const downloadInpiPdf = async (siren: Siren): Promise<string> => {
           Cookie: cookies || '',
         },
         responseType: 'arraybuffer',
-        timeout: INPI_TIMEOUT * 2,
+        timeout: INPI_TIMEOUT,
       }
     );
     const { data } = response;
@@ -30,8 +30,8 @@ export const downloadInpiPdf = async (siren: Siren): Promise<string> => {
 };
 
 export const downloadInpiPdfAndSaveOnDisk = (siren: Siren) => {
-  const slug = PDFDownloaderInstance.createJob(() => downloadInpiPdf(siren));
-  return slug;
+  const downloadJobId = pdfDownloader.createJob(() => downloadInpiPdf(siren));
+  return downloadJobId;
 };
 
 export default downloadInpiPdf;

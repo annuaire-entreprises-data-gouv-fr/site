@@ -41,7 +41,7 @@ const STATUSES: { [key: string]: IStatusMetaData } = {
   },
 };
 
-const pendingDownload: { [key: string]: { retry: number } } = {};
+const pendingDownloads: { [key: string]: { retry: number } } = {};
 
 class PDFDownloader {
   constructor() {
@@ -55,9 +55,9 @@ class PDFDownloader {
   }
 
   createJob(downloadCallBack: () => Promise<string>) {
-    const slug = randomId();
-    this.downloadAndRetry(slug, downloadCallBack);
-    return slug;
+    const downloadJobId = randomId();
+    this.downloadAndRetry(downloadJobId, downloadCallBack);
+    return downloadJobId;
   }
 
   async downloadAndRetry(
@@ -71,7 +71,7 @@ class PDFDownloader {
       this.savePdfOnDisk(slug, file);
       this.removePendingDownload(slug);
     } catch (e: any) {
-      const downloadEntry = pendingDownload[slug];
+      const downloadEntry = pendingDownloads[slug];
       const shouldRetry =
         downloadEntry && downloadEntry.retry < MAX_RETRY_COUNT;
 
@@ -87,15 +87,15 @@ class PDFDownloader {
   }
 
   addOrUpdatePendingDownload(slug: string) {
-    if (pendingDownload[slug]) {
-      pendingDownload[slug].retry += 1;
+    if (pendingDownloads[slug]) {
+      pendingDownloads[slug].retry += 1;
     } else {
-      pendingDownload[slug] = { retry: 0 };
+      pendingDownloads[slug] = { retry: 0 };
     }
   }
 
   removePendingDownload(slug: string) {
-    delete pendingDownload[slug];
+    delete pendingDownloads[slug];
   }
 
   savePdfOnDisk(slug: string, pdf: any) {
@@ -103,7 +103,7 @@ class PDFDownloader {
   }
 
   getDownloadStatus(slug: string): IStatusMetaData {
-    const fileMetaData = pendingDownload[slug];
+    const fileMetaData = pendingDownloads[slug];
     if (fileMetaData && fileMetaData.retry === 0) {
       return STATUSES.pending;
     } else if (fileMetaData && fileMetaData.retry > 0) {
@@ -116,9 +116,14 @@ class PDFDownloader {
   }
 
   cleanOldFiles = async () => {
-    try {
-      const now = new Date().getTime();
-      fs.readdirSync(DIRECTORY).forEach((file) => {
+    const now = new Date().getTime();
+    fs.readdir(DIRECTORY, (err, files: string[]) => {
+      if (err) {
+        logErrorInSentry('Download manager : file cleaning failed', {
+          details: err.toString(),
+        });
+      }
+      files.forEach((file) => {
         const filePath = `${DIRECTORY}${file}`;
         const stats = fs.statSync(filePath);
         const isTooOld = now - stats.birthtimeMs > FILES_LIFESPAN;
@@ -126,16 +131,12 @@ class PDFDownloader {
           fs.unlinkSync(filePath);
         }
       });
-    } catch (e: any) {
-      logErrorInSentry('Download manager : file cleaning failed', {
-        details: e.toString(),
-      });
-    }
+    });
 
     setTimeout(this.cleanOldFiles, FILES_CLEANING_FREQUENCY);
   };
 }
 
-const PDFDownloaderInstance = new PDFDownloader();
+const pdfDownloader = new PDFDownloader();
 
-export default PDFDownloaderInstance;
+export default pdfDownloader;
