@@ -27,7 +27,7 @@ const ButtonInpiPdf: React.FC<{ siren: string }> = ({ siren }) => {
         dangerouslySetInnerHTML={{
           __html: `
           <div class="button-link" x-data="asyncButton('${id}')" x-cloak>
-            <div class="warning" x-text="warning"></div>
+            <div class="warning" x-text="error"></div>
             <button @click="download('${siren}')">
               <svg
               xmlns="http://www.w3.org/2000/svg"

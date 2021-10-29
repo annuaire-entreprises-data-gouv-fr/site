@@ -53,6 +53,9 @@ const EtablissementSection: React.FC<IProps> = ({
   if (etablissement.enseigne) {
     data.splice(0, 0, ['Enseigne de l’établissement', etablissement.enseigne]);
   }
+  if (etablissement.denomination) {
+    data.splice(0, 0, ['Nom commercial', etablissement.denomination]);
+  }
 
   return (
     <>

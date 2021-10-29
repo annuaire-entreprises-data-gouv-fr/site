@@ -46,6 +46,11 @@ yarn-error.log*
 /public/resources/css/bundle.css
 /public/resources/partials/*/node_modules/*
 
+public/resources/downloads/*
+/public/resources/js/bundle.js
+/public/resources/css/bundle.css
+/public/resources/partials/*/node_modules/*
+
 # direnv
 .nvmrc
 .envrc

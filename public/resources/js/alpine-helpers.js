@@ -1,23 +1,24 @@
 (() => {
   const LOCAL_STORAGE_KEY = 'downloadManager';
-
   document.addEventListener('alpine:init', () => {
     Alpine.data('asyncButton', (idToClean) => ({
+      isLoading: false,
+      error: '',
+
       init() {
         let e = document.getElementById(idToClean);
         if (e) {
           e.style.display = 'none';
         }
       },
-      warning: '',
 
       download(siren) {
-        this.warning = '';
+        this.error = '';
         const duplicate =
           this.$store.downloadManager.isAlreadyDownloading(siren);
 
         if (duplicate) {
-          this.warning = 'Ce document est déja en cours de téléchargement.';
+          this.error = 'Ce document est déja en cours de téléchargement.';
         } else {
           this.$store.downloadManager.download(siren);
         }
@@ -37,24 +38,34 @@
         }
       },
 
-      warning: '',
       downloads: {},
       _updateDownloadLock: false,
 
       async download(siren) {
-        const response = await fetch(`/api/inpi-pdf-proxy/create/${siren}`);
-        const { slug } = await response.json();
-        const createdAt = new Date().getTime();
-        this.downloads[slug] = {
-          slug,
-          siren,
-          label: 'Le téléchargement commence.',
-          status: 'started',
-          createdAt: createdAt,
-          isPending: true,
-        };
+        try {
+          const response = await fetch(`/api/inpi-pdf-proxy/job/${siren}`);
+          const { slug } = await response.json();
+          const createdAt = new Date().getTime();
+          this.downloads[slug] = {
+            slug,
+            siren,
+            label: 'Le téléchargement commence.',
+            status: 'started',
+            createdAt: createdAt,
+            isPending: true,
+          };
 
-        this.updateDownloadStatuses();
+          this.updateDownloadStatuses();
+        } catch (e) {
+          const slug = Math.random().toString(16).substring(7);
+          this.downloads[slug] = {
+            slug,
+            siren,
+            label: 'Le téléchargement a échoué.',
+            status: 'aborted',
+            isPending: false,
+          };
+        }
       },
       deleteDownload(slug) {
         delete this.downloads[slug];
@@ -91,19 +102,22 @@
       },
 
       async callApiAndUpdateStatuses(downloadsToUpdate) {
-        const updatedStatus = await fetch(`/api/inpi-pdf-proxy/status`, {
-          method: 'POST',
-          body: JSON.stringify(downloadsToUpdate),
-        }).then((response) => response.json());
+        try {
+          const updatedStatus = await fetch(`/api/inpi-pdf-proxy/job/status`, {
+            method: 'POST',
+            body: JSON.stringify(downloadsToUpdate),
+          }).then((response) => response.json());
 
-        updatedStatus.forEach(({ slug, status, label, isPending }) => {
-          this.downloads[slug] = {
-            ...this.downloads[slug],
-            status,
-            label,
-            isPending,
-          };
-        });
+          updatedStatus.forEach(({ slug, status, isPending }) => {
+            this.downloads[slug] = {
+              ...this.downloads[slug],
+              status,
+              isPending,
+            };
+          });
+        } catch (e) {
+          console.error(e);
+        }
       },
 
       saveOnLocalStorage() {
@@ -115,6 +129,20 @@
           LOCAL_STORAGE_KEY,
           JSON.stringify(this.downloads)
         );
+      },
+
+      extractLabel(status) {
+        switch (status) {
+          case 'pending':
+          case 'retried':
+          case 'started':
+            return 'en cours';
+          case 'downloaded':
+            return 'réussi';
+          case 'aborted':
+          default:
+            return 'échoué';
+        }
       },
 
       filterDownloadsForUpdate() {

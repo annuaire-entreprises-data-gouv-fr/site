@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import PDFDownloaderInstance from '../../../clients/inpi-site/downloader-manager';
-import logErrorInSentry from '../../../utils/sentry';
+import PDFDownloaderInstance from '../../../../utils/download-manager';
+import logErrorInSentry from '../../../../utils/sentry';
 
 /**
  * Get status of a PDF download
@@ -20,7 +20,7 @@ const getPdfStatus = async (req: NextApiRequest, res: NextApiResponse) => {
       details: e.toString(),
     });
 
-    res.status(500).end();
+    res.status(500).json({ error: e });
   }
 };
 

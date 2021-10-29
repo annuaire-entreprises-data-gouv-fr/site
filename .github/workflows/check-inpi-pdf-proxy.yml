@@ -5,7 +5,7 @@ name: Proxy PDF de l’extrait d’immatriculation INPI
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 # be extrremly careful as env variable defined here are accessible by all the actions of the workflow.

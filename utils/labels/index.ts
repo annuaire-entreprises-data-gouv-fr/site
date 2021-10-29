@@ -101,6 +101,18 @@ export const formatAdresse = (
   )}${pays ? ', ' + pays : ''}`;
 };
 
+export const formatEnseigne = (
+  enseigne1: string | null,
+  enseigne2: string | null,
+  enseigne3: string | null
+) => {
+  if (!enseigne1 && !enseigne2 && !enseigne3) {
+    return null;
+  }
+  const enseigne = `${enseigne1 || ''} ${enseigne2 || ''} ${enseigne3 || ''}`;
+  return enseigne;
+};
+
 export const libelleFromeCodeCategorie = (
   codeCategorie: string,
   anneCategorie?: string

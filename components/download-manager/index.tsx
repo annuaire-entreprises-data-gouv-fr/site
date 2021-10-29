@@ -15,18 +15,18 @@ const DownloadManager = () => (
               <template x-for="item in Object.values(items)">
                 <li>
                   <div>
-                    <div><i x-text="'justificatif_'+item.siren+'.pdf'"></i></div>
+                    <div x-text="'justificatif_'+item.siren+'.pdf'"></div>
                     <template x-if="item.status!=='downloaded'">
-                      <span x-text="item.label"></span>
+                      <span x-bind:class="item.status+' tag'" x-text="$store.downloadManager.extractLabel(item.status)"></span>
                     </template>
                     <template x-if="item.status==='downloaded'">
-                      <a x-bind:href="'/resources/downloads/'+item.slug+'.pdf'" target="_blank" rel="noopener noreferrer">→ télécharger le document PDF</a>
+                      <a x-bind:href="'/resources/downloads/'+item.slug+'.pdf'" target="_blank" rel="noopener noreferrer">ouvrir</a>
                     </template>
                     <template x-if="item.status==='aborted'">
-                      <button @click="$store.downloadManager.retryDownload(item.siren, item.slug)">→ réessayer</button>
+                      <button class="action" @click="$store.downloadManager.retryDownload(item.siren, item.slug)">réessayer</button>
                     </template>
                     </div>
-                  <button @click="$store.downloadManager.deleteDownload(item.slug)">✖︎</button>
+                  <button class="close" @click="$store.downloadManager.deleteDownload(item.slug)">✖︎</button>
                 </li>
               </template>
             </template>
@@ -40,6 +40,7 @@ const DownloadManager = () => (
         position: fixed;
         padding: 0;
         background: #fff;
+        color: #000091;
         left: 10px;
         bottom: 10px;
         border: 1px solid #000091;
@@ -62,11 +63,34 @@ const DownloadManager = () => (
         list-style-type: none;
       }
       #download-manager > ul > li {
-        padding: 7px;
-        border-top: 0.5px solid #000091;
+        padding: 5px 7px;
         display: flex;
         align-items: start;
         justify-content: space-between;
+      }
+      #download-manager .tag {
+        font-size: 0.9rem;
+        padding: 0px 5px;
+        font-weight: bold;
+        background-color: #eee;
+        color: #666;
+        border-radius: 3px;
+      }
+      #download-manager .tag.aborted {
+        color: #914141;
+        background-color: #ffe5e5;
+      }
+      #download-manager .tag.downloaded {
+        color: #326f00;
+        background-color: #cdf2c0;
+      }
+      #download-manager button.action {
+        background: none;
+        text-decoration: underline;
+      }
+      #download-manager button.close {
+        color: #000091;
+        background: #dfdff1;
       }
       @media print {
         #download-manager {

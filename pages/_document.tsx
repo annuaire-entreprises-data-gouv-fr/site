@@ -70,6 +70,11 @@ class DevDocument extends Document {
           <script
             defer
             type="text/javascript"
+            src="/resources/js/helpers.js"
+          ></script>
+          <script
+            defer
+            type="text/javascript"
             src="/resources/js/alpine-helpers.js"
           ></script>
           <script
