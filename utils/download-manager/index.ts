@@ -47,7 +47,8 @@ export class PDFDownloader {
 
   constructor(
     private readonly fileSystem: FileSystemProvider,
-    private readonly directory: string
+    private readonly directory: string,
+    private readonly shouldCleanOldFiles = true
   ) {}
 
   async init() {
@@ -59,7 +60,9 @@ export class PDFDownloader {
       await this.fileSystem.createDir(this.directory, { recursive: true });
     }
 
-    this.cleanOldFiles();
+    if (this.shouldCleanOldFiles) {
+      this.cleanOldFiles();
+    }
     this._initialized = true;
   }
 
