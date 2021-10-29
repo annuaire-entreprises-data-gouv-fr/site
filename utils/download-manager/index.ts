@@ -5,7 +5,7 @@ import randomId from '../helpers/randomId';
 /**
  * INPI Pdf generation can be very slow
  */
-const DIRECTORY = process.env.INPI_PDF_DOWNLOAD_DIRECTORY as string;
+const DIRECTORY = process.env.PDF_DOWNLOAD_DIRECTORY as string;
 const MAX_RETRY_COUNT = 3;
 const FILES_LIFESPAN = 30 * 60 * 1000;
 const FILES_CLEANING_FREQUENCY = 60 * 60 * 1000;
