@@ -109,7 +109,7 @@ export class PDFDownloader {
   }
 
   async savePdfOnDisk(slug: string, pdf: any) {
-    await this.fileSystem.writeFile(`${this.directory}${slug}.pdf`, pdf, {});
+    await this.fileSystem.writeFile(`${this.directory}/${slug}.pdf`, pdf, {});
   }
 
   getDownloadStatus(slug: string): IStatusMetaData {
@@ -119,7 +119,7 @@ export class PDFDownloader {
     } else if (fileMetaData && fileMetaData.retry > 0) {
       return STATUSES.retried;
     }
-    if (this.fileSystem.exists(`${this.directory}${slug}.pdf`)) {
+    if (this.fileSystem.exists(`${this.directory}/${slug}.pdf`)) {
       return STATUSES.downloaded;
     }
     return STATUSES.aborted;
@@ -131,7 +131,7 @@ export class PDFDownloader {
       const files = await this.fileSystem.readdir(this.directory);
       await Promise.all(
         files.map(async (file) => {
-          const filePath = `${this.directory}${file}`;
+          const filePath = `${this.directory}/${file}`;
           const stats = await this.fileSystem.stats(filePath);
           const isTooOld = now - stats.birthtimeMs > FILES_LIFESPAN;
           if (isTooOld) {
