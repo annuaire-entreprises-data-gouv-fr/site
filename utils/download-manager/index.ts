@@ -1,6 +1,5 @@
-import fs from 'fs';
-
 import logErrorInSentry from '../../utils/sentry';
+import fileSystem, { FileSystemProvider } from '../file-system';
 import randomId from '../helpers/randomId';
 
 /**
@@ -43,22 +42,24 @@ const STATUSES: { [key: string]: IStatusMetaData } = {
 
 const pendingDownloads: { [key: string]: { retry: number } } = {};
 
-class PDFDownloader {
+export class PDFDownloader {
   _initialized = false;
 
-  constructor() {
-    if (!DIRECTORY) {
+  constructor(
+    private readonly fileSystem: FileSystemProvider,
+    private readonly directory: string
+  ) {}
+
+  async init() {
+    if (!this.directory) {
       throw new Error('Download manager : directory is not defined');
     }
 
-    this.cleanOldFiles();
-  }
-
-  async init() {
-    if (!fs.existsSync(DIRECTORY)) {
-      await fs.promises.mkdir(DIRECTORY, { recursive: true });
+    if (!this.fileSystem.exists(this.directory)) {
+      await this.fileSystem.createDir(this.directory, { recursive: true });
     }
 
+    this.cleanOldFiles();
     this._initialized = true;
   }
 
@@ -111,7 +112,7 @@ class PDFDownloader {
   }
 
   async savePdfOnDisk(slug: string, pdf: any) {
-    await fs.promises.writeFile(`${DIRECTORY}${slug}.pdf`, pdf, {});
+    await this.fileSystem.writeFile(`${this.directory}${slug}.pdf`, pdf, {});
   }
 
   getDownloadStatus(slug: string): IStatusMetaData {
@@ -121,7 +122,7 @@ class PDFDownloader {
     } else if (fileMetaData && fileMetaData.retry > 0) {
       return STATUSES.retried;
     }
-    if (fs.existsSync(`${DIRECTORY}${slug}.pdf`)) {
+    if (this.fileSystem.exists(`${this.directory}${slug}.pdf`)) {
       return STATUSES.downloaded;
     }
     return STATUSES.aborted;
@@ -130,14 +131,14 @@ class PDFDownloader {
   cleanOldFiles = async () => {
     const now = new Date().getTime();
     try {
-      const files = await fs.promises.readdir(DIRECTORY);
+      const files = await this.fileSystem.readdir(this.directory);
       await Promise.all(
         files.map(async (file) => {
-          const filePath = `${DIRECTORY}${file}`;
-          const stats = await fs.promises.stat(filePath);
+          const filePath = `${this.directory}${file}`;
+          const stats = await this.fileSystem.stats(filePath);
           const isTooOld = now - stats.birthtimeMs > FILES_LIFESPAN;
           if (isTooOld) {
-            await fs.promises.unlink(filePath);
+            await this.fileSystem.delete(filePath);
           }
         })
       );
@@ -150,6 +151,6 @@ class PDFDownloader {
   };
 }
 
-const pdfDownloader = new PDFDownloader();
+const pdfDownloader = new PDFDownloader(fileSystem, DIRECTORY);
 
 export default pdfDownloader;
