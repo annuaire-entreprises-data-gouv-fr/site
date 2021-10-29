@@ -40,7 +40,7 @@ const init = () => {
 const logInSentryFactory =
   (severity = Sentry.Severity.Error) =>
   (errorMsg: any, extra?: IScope) => {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development' || !process.env.SENTRY_DSN) {
       console.log(errorMsg, JSON.stringify(extra));
     }
     if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {

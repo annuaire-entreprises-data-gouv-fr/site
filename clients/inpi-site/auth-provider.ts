@@ -39,7 +39,7 @@ class InpiSiteAuthProvider {
   async getCookies(): Promise<string | null> {
     try {
       const cookiesNeedToBeUpdated =
-        !!authData.cookies && this.verifyIfCookiesAreOutdated();
+        !!authData.cookies || this.areCookiesUpdated();
 
       // renew auth
       if (cookiesNeedToBeUpdated) {
@@ -104,7 +104,7 @@ class InpiSiteAuthProvider {
     }
   }
 
-  verifyIfCookiesAreOutdated(): Boolean {
+  areCookiesUpdated(): Boolean {
     if (authData.cookies) {
       return false;
     }
