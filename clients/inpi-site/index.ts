@@ -25,7 +25,7 @@ export const downloadInpiPdf = async (siren: Siren): Promise<string> => {
     }
     return data;
   } catch (e: any) {
-    throw new Error('download failed');
+    throw new Error('download failed' + e);
   }
 };
 

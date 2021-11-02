@@ -47,7 +47,7 @@ class DevDocument extends Document {
     return (
       <Html lang="fr">
         <Head>
-          <link rel="stylesheet" href="/resources/css/dsfr.min.css" />
+          <link rel="stylesheet" href="/resources/css/bundle.css" />
           <link
             rel="apple-touch-icon"
             href="/resources/favicons/apple-touch-icon.png"
