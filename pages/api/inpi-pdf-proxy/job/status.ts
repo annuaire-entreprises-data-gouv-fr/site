@@ -20,7 +20,7 @@ const getPdfStatus = async (req: NextApiRequest, res: NextApiResponse) => {
       details: e.toString(),
     });
 
-    res.status(500).end();
+    res.status(500).json({ error: e });
   }
 };
 

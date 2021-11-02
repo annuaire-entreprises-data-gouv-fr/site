@@ -61,30 +61,18 @@
 })();
 
 (function triggerNPSModal() {
-  try {
-    var p = window.location.pathname;
+  var p = window.location.pathname;
 
-    var u = window.localStorage.getItem('u') || false;
-    if (u || p === '/') {
-      return;
-    }
+  var u = window.localStorage.getItem('u') || false;
+  if (u || p === '/') {
+    return;
+  }
 
-    // add a page-view counter
-    var data = window.sessionStorage.getItem('p') || 0;
-    window.sessionStorage.setItem('p', parseInt(data, 10) + 1);
+  // add a page-view counter
+  var data = window.sessionStorage.getItem('p') || 0;
+  window.sessionStorage.setItem('p', parseInt(data, 10) + 1);
 
-    if (data >= 2) {
-      window.showNPSModal();
-    }
-
-    if (
-      (p.indexOf('/entreprise') === 0 && data >= 2) ||
-      (p.indexOf('/rechercher') === 0 && data >= 3) ||
-      (p.indexOf('/justificatif') === 0 && data >= 2) ||
-      (p.indexOf('/annonces') === 0 && data >= 2) ||
-      (p.indexOf('/etablissement') === 0 && data >= 2)
-    ) {
-      // window.showWeNeedYouModal();
-    }
-  } catch (e) {}
+  if (data >= 2) {
+    window.showNPSModal();
+  }
 })();
