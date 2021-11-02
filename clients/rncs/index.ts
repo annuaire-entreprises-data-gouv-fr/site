@@ -11,11 +11,28 @@ import { AxiosRequestConfig } from 'axios';
 
 let COOKIE = '';
 
+const getCredentials = () => {
+  const logins = [
+    process.env.INPI_LOGIN,
+    process.env.INPI_LOGIN_2,
+    process.env.INPI_LOGIN_3,
+    process.env.INPI_LOGIN_4,
+  ];
+  const passwords = [
+    process.env.INPI_PASSWORD,
+    process.env.INPI_PASSWORD_2,
+    process.env.INPI_PASSWORD_3,
+    process.env.INPI_PASSWORD_4,
+  ];
+
+  const index = Math.floor(Math.random() * 3);
+  return { login: logins[index], password: passwords[index] };
+};
+
 /** Authenticate a user on opendata-rncs */
 const AuthenticateCookie = async () => {
   try {
-    const login = process.env.INPI_LOGIN as string;
-    const password = process.env.INPI_PASSWORD as string;
+    const { login, password } = getCredentials();
 
     const response = await httpClient({
       url: routes.rncs.api.login,

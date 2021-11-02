@@ -61,7 +61,7 @@ const getAnnoncesJoFromIdRna = async (
 ): Promise<IAnnoncesJO | IAPINotRespondingError> => {
   try {
     return await fetchAnnoncesJO(idRna);
-  } catch (e) {
+  } catch (e: any) {
     logErrorInSentry(new Error('Error in API Journal Officiel'), {
       siren,
       details: e.toString(),
@@ -76,7 +76,7 @@ const getAnnoncesBodaccFromSlug = async (
   const siren = verifySiren(slug);
   try {
     return await fetchAnnoncesBodacc(siren);
-  } catch (e) {
+  } catch (e: any) {
     logErrorInSentry(new Error('Error in API BODACC'), {
       siren,
       details: e.toString(),

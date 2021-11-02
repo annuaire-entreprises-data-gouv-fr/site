@@ -12,30 +12,24 @@ const FILES_CLEANING_FREQUENCY = 60 * 60 * 1000;
 
 interface IStatusMetaData {
   status: string;
-  label: string;
   isPending: boolean;
 }
 
 const STATUSES: { [key: string]: IStatusMetaData } = {
   pending: {
     status: 'pending',
-    label: 'Téléchargement en cours',
     isPending: true,
   },
   retried: {
     status: 'retried',
-    label:
-      'Le téléchargement prend plus de temps que prévu. Merci de patienter.',
     isPending: true,
   },
   aborted: {
     status: 'aborted',
-    label: 'Le téléchargement a échoué',
     isPending: false,
   },
   downloaded: {
     status: 'downloaded',
-    label: 'Téléchargement réussi',
     isPending: false,
   },
 };
