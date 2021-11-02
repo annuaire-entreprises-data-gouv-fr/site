@@ -99,7 +99,7 @@ class StaticDocument extends Document {
         <CustomHead>
           {/* Standard Meta */}
           {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/223019574/D+veloppeurs */}
-          <link rel="stylesheet" href="/resources/css/dsfr.min.css" />
+          <link rel="stylesheet" href="/resources/css/bundle.css" />
           <link
             rel="apple-touch-icon"
             href="/resources/favicons/apple-touch-icon.png"
