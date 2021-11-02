@@ -1,2 +1,2 @@
-import { triggerNPSModal, initModals, addCopyFunction } from './helpers';
-import initAlpineHelpers from './alpine-helpers';
+import './helpers';
+import './alpine-helpers';

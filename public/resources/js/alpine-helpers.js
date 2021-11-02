@@ -1,5 +1,4 @@
 (() => {
-  const LOCAL_STORAGE_KEY = 'downloadManager';
   document.addEventListener('alpine:init', () => {
     Alpine.data('asyncButton', (idToClean) => ({
       isLoading: false,
@@ -25,16 +24,22 @@
       },
     }));
 
+    const SESSION_STORAGE_KEY = 'downloadManager';
+    const MAX_LIFESPAN = 10 * 60 * 1000;
+
     Alpine.store('downloadManager', {
       init() {
         try {
-          const downloads = window.sessionStorage.getItem(LOCAL_STORAGE_KEY);
+          const downloads = window.sessionStorage.getItem(SESSION_STORAGE_KEY);
           if (downloads) {
-            this.downloads = JSON.parse(downloads);
+            const tempDownloads = JSON.parse(downloads);
+            this.downloads = this.filterOldDownloads(tempDownloads);
+
+            this.deleteOldDownloads();
             this.updateDownloadStatuses();
           }
         } catch {
-          window.sessionStorage.removeItem(LOCAL_STORAGE_KEY);
+          window.sessionStorage.removeItem(SESSION_STORAGE_KEY);
         }
       },
 
@@ -70,6 +75,12 @@
       deleteDownload(slug) {
         delete this.downloads[slug];
         this.saveOnLocalStorage();
+      },
+      filterOldDownloads(tempDownloads) {
+        const now = new Date();
+        return tempDownloads.filter((download) => {
+          return now.getTime() - download.createdAt < MAX_LIFESPAN;
+        });
       },
       retryDownload(siren, slug) {
         this.deleteDownload(slug);
@@ -123,10 +134,10 @@
       saveOnLocalStorage() {
         const downloadIsEmpty = Object.keys(this.downloads).length === 0;
         if (downloadIsEmpty) {
-          window.sessionStorage.removeItem(LOCAL_STORAGE_KEY);
+          window.sessionStorage.removeItem(SESSION_STORAGE_KEY);
         }
         window.sessionStorage.setItem(
-          LOCAL_STORAGE_KEY,
+          SESSION_STORAGE_KEY,
           JSON.stringify(this.downloads)
         );
       },

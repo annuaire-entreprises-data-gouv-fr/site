@@ -4,9 +4,8 @@ import ButtonLink from '../button';
 import { download } from '../icon';
 
 /**
- * Render both a static version of the component and a custom element to be rendered by the preact partial
+ * Render both a static version of the component and a Alpine component that clean static if it succesfully mount
  *
- * Static can get cleaned by the preact partial script
  * @param param0
  * @returns
  */

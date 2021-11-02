@@ -15,16 +15,18 @@ const DownloadManager = () => (
               <template x-for="item in Object.values(items)">
                 <li>
                   <div>
-                    <div x-text="'justificatif_'+item.siren+'.pdf'"></div>
-                    <template x-if="item.status!=='downloaded'">
+                    <div>
+                      <span x-text="'justificatif_'+item.siren+'.pdf'"></span>
+                    </div>
                       <span x-bind:class="item.status+' tag'" x-text="$store.downloadManager.extractLabel(item.status)"></span>
-                    </template>
-                    <template x-if="item.status==='downloaded'">
-                      <a x-bind:href="'/resources/downloads/'+item.slug+'.pdf'" target="_blank" rel="noopener noreferrer">ouvrir</a>
-                    </template>
-                    <template x-if="item.status==='aborted'">
-                      <button class="action" @click="$store.downloadManager.retryDownload(item.siren, item.slug)">réessayer</button>
-                    </template>
+                      <template x-if="item.status==='downloaded'">
+                        &nbps;
+                        <a x-bind:href="'/downloads/'+item.slug+'.pdf'" target="_blank" rel="noopener noreferrer">ouvrir</a>
+                      </template>
+                      <template x-if="item.status==='aborted'">
+                        &nbps;
+                        <button class="action" @click="$store.downloadManager.retryDownload(item.siren, item.slug)">réessayer</button>
+                      </template>
                     </div>
                   <button class="close" @click="$store.downloadManager.deleteDownload(item.slug)">✖︎</button>
                 </li>
@@ -63,7 +65,7 @@ const DownloadManager = () => (
         list-style-type: none;
       }
       #download-manager > ul > li {
-        padding: 5px 7px;
+        padding: 8px 7px;
         display: flex;
         align-items: start;
         justify-content: space-between;
@@ -86,6 +88,7 @@ const DownloadManager = () => (
       }
       #download-manager button.action {
         background: none;
+        color: #000091;
         text-decoration: underline;
       }
       #download-manager button.close {

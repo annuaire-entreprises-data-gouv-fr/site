@@ -157,6 +157,32 @@ class StaticDocument extends Document {
               }}
             ></script>
           )}
+          {process.env.NODE_ENV === 'production' &&
+            process.env.SENTRY_FRONT_DSN && (
+              <>
+                <script
+                  type="text/javascript"
+                  src="/resources/js/sentry.min.js"
+                ></script>
+                <script
+                  defer
+                  dangerouslySetInnerHTML={{
+                    __html: `
+                  (function () {
+                    var dsn = '${process.env.SENTRY_FRONT_DSN}';
+                    if (!window.Sentry || !dsn) {
+                      return;
+                    }
+                    window.Sentry.init({
+                      dsn: dsn,
+                      tracesSampleRate: 1.0,
+                    });
+                  })();
+                `,
+                  }}
+                ></script>
+              </>
+            )}
         </body>
       </Html>
     );
