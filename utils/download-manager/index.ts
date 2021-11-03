@@ -114,7 +114,7 @@ export class PDFDownloader {
   }
 
   getDownloadStatus(slug: string): IStatusMetaData {
-    console.log('pending downloads : ' + this.pendingDownloads);
+    console.log('pending downloads : ' + JSON.stringify(this.pendingDownloads));
     const fileMetaData = this.pendingDownloads[slug];
     if (fileMetaData && fileMetaData.retry === 0) {
       return STATUSES.pending;
