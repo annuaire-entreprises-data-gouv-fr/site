@@ -32,13 +32,12 @@
         try {
           const downloads = window.sessionStorage.getItem(SESSION_STORAGE_KEY);
           if (downloads) {
-            const tempDownloads = JSON.parse(downloads);
-            this.downloads = this.filterOldDownloads(tempDownloads);
-
-            this.deleteOldDownloads();
+            this.downloads = JSON.parse(downloads);
+            this.filterOldDownloads();
             this.updateDownloadStatuses();
           }
-        } catch {
+        } catch (e) {
+          console.log(e);
           window.sessionStorage.removeItem(SESSION_STORAGE_KEY);
         }
       },
@@ -76,10 +75,15 @@
         delete this.downloads[slug];
         this.saveOnLocalStorage();
       },
-      filterOldDownloads(tempDownloads) {
+      filterOldDownloads() {
         const now = new Date();
-        return tempDownloads.filter((download) => {
-          return now.getTime() - download.createdAt < MAX_LIFESPAN;
+        Object.keys(this.download).forEach((download) => {
+          const shoulddelete =
+            now.getTime() - download.createdAt < MAX_LIFESPAN;
+          if (shoulddelete) {
+            console.log(download);
+            deleteDownload(download.slug);
+          }
         });
       },
       retryDownload(siren, slug) {

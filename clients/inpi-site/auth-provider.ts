@@ -24,7 +24,7 @@ const DEFAULT_HEADERS = {
 
 const INPI_SITE_IMEOUT = 30 * 1000;
 
-const COOKIE_VALIDITY_TIME = 45 * 60 * 1000;
+const COOKIE_VALIDITY_TIME = 1 * 60 * 1000;
 const COOKIE_OUTDATED_RETRY_TIME = 10 * 60 * 1000;
 
 interface IAuth {
@@ -56,12 +56,12 @@ class InpiSiteAuthProvider {
       const newCookies = await this.getInitialCookies();
       await this.authenticateCookies(newCookies);
       this.setCookies(newCookies);
-      setTimeout(this.refreshCookies, COOKIE_VALIDITY_TIME);
+      setTimeout(() => this.refreshCookies(), COOKIE_VALIDITY_TIME);
     } catch (e: any) {
       logWarningInSentry('InpiSiteAuthProvider: cookie refresh failed', {
         details: e.toString(),
       });
-      setTimeout(this.refreshCookies, COOKIE_OUTDATED_RETRY_TIME);
+      setTimeout(() => this.refreshCookies(), COOKIE_OUTDATED_RETRY_TIME);
     }
   }
 

@@ -8,7 +8,7 @@ import randomId from '../helpers/randomId';
 const DIRECTORY = process.env.PDF_DOWNLOAD_DIRECTORY as string;
 const MAX_RETRY_COUNT = 3;
 const FILES_LIFESPAN = 30 * 60 * 1000;
-const FILES_CLEANING_FREQUENCY = 60 * 60 * 1000;
+const FILES_CLEANING_FREQUENCY = 1 * 60 * 1000;
 
 interface IStatusMetaData {
   status: string;
@@ -144,7 +144,7 @@ export class PDFDownloader {
         details: e.toString(),
       });
     }
-    setTimeout(this.cleanOldFiles, FILES_CLEANING_FREQUENCY);
+    setTimeout(() => this.cleanOldFiles(), FILES_CLEANING_FREQUENCY);
   };
 }
 
