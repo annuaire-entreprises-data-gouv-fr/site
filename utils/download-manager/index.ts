@@ -74,8 +74,10 @@ export class PDFDownloader {
     if (!this._initialized) {
       await this.init();
     }
-
     this.addOrUpdatePendingDownload(slug);
+    console.log(
+      'Adding slug : ' + slug + ' => ' + JSON.stringify(this.pendingDownloads)
+    );
 
     try {
       const file = await downloadCallBack();
@@ -86,8 +88,9 @@ export class PDFDownloader {
       const shouldRetry =
         downloadEntry && downloadEntry.retry < MAX_RETRY_COUNT;
 
+      console.log(e);
       if (shouldRetry) {
-        this.downloadAndRetry(slug, downloadCallBack);
+        await this.downloadAndRetry(slug, downloadCallBack);
       } else {
         logErrorInSentry('Download manager : download failed', {
           details: e.toString(),
