@@ -42,9 +42,7 @@ export class PDFDownloader {
     private readonly fileSystem: FileSystemProvider,
     private readonly directory: string,
     private readonly shouldCleanOldFiles = true
-  ) {
-    console.log('Building');
-  }
+  ) {}
 
   async init() {
     if (!this.directory) {
@@ -75,9 +73,6 @@ export class PDFDownloader {
       await this.init();
     }
     this.addOrUpdatePendingDownload(slug);
-    console.log(
-      'Adding slug : ' + slug + ' => ' + JSON.stringify(this.pendingDownloads)
-    );
 
     try {
       const file = await downloadCallBack();
@@ -88,7 +83,6 @@ export class PDFDownloader {
       const shouldRetry =
         downloadEntry && downloadEntry.retry < MAX_RETRY_COUNT;
 
-      console.log(e);
       if (shouldRetry) {
         await this.downloadAndRetry(slug, downloadCallBack);
       } else {
@@ -117,7 +111,6 @@ export class PDFDownloader {
   }
 
   getDownloadStatus(slug: string): IStatusMetaData {
-    console.log('pending downloads : ' + JSON.stringify(this.pendingDownloads));
     const fileMetaData = this.pendingDownloads[slug];
     if (fileMetaData && fileMetaData.retry === 0) {
       return STATUSES.pending;

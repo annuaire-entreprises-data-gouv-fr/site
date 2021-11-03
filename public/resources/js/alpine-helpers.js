@@ -37,7 +37,6 @@
             this.updateDownloadStatuses();
           }
         } catch (e) {
-          console.log(e);
           window.sessionStorage.removeItem(SESSION_STORAGE_KEY);
         }
       },
@@ -81,7 +80,6 @@
           const shoulddelete =
             now.getTime() - download.createdAt < MAX_LIFESPAN;
           if (shoulddelete) {
-            console.log(download);
             deleteDownload(download.slug);
           }
         });
