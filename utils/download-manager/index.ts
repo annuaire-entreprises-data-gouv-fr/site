@@ -34,16 +34,17 @@ const STATUSES: { [key: string]: IStatusMetaData } = {
   },
 };
 
-const pendingDownloads: { [key: string]: { retry: number } } = {};
-
 export class PDFDownloader {
   _initialized = false;
+  pendingDownloads: { [key: string]: { retry: number } } = {};
 
   constructor(
     private readonly fileSystem: FileSystemProvider,
     private readonly directory: string,
     private readonly shouldCleanOldFiles = true
-  ) {}
+  ) {
+    console.log('Building');
+  }
 
   async init() {
     if (!this.directory) {
@@ -81,7 +82,7 @@ export class PDFDownloader {
       await this.savePdfOnDisk(slug, file);
       this.removePendingDownload(slug);
     } catch (e: any) {
-      const downloadEntry = pendingDownloads[slug];
+      const downloadEntry = this.pendingDownloads[slug];
       const shouldRetry =
         downloadEntry && downloadEntry.retry < MAX_RETRY_COUNT;
 
@@ -97,15 +98,15 @@ export class PDFDownloader {
   }
 
   addOrUpdatePendingDownload(slug: string) {
-    if (pendingDownloads[slug]) {
-      pendingDownloads[slug].retry += 1;
+    if (this.pendingDownloads[slug]) {
+      this.pendingDownloads[slug].retry += 1;
     } else {
-      pendingDownloads[slug] = { retry: 0 };
+      this.pendingDownloads[slug] = { retry: 0 };
     }
   }
 
   removePendingDownload(slug: string) {
-    delete pendingDownloads[slug];
+    delete this.pendingDownloads[slug];
   }
 
   async savePdfOnDisk(slug: string, pdf: any) {
@@ -113,7 +114,8 @@ export class PDFDownloader {
   }
 
   getDownloadStatus(slug: string): IStatusMetaData {
-    const fileMetaData = pendingDownloads[slug];
+    console.log('pending downloads : ' + this.pendingDownloads);
+    const fileMetaData = this.pendingDownloads[slug];
     if (fileMetaData && fileMetaData.retry === 0) {
       return STATUSES.pending;
     } else if (fileMetaData && fileMetaData.retry > 0) {
