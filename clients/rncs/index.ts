@@ -9,9 +9,9 @@ import {
 import routes from '../routes';
 import { AxiosRequestConfig } from 'axios';
 
-let COOKIE = '';
+let COOKIE = ['', '', '', ''];
 
-const getCredentials = () => {
+const getCredentials = (index: number) => {
   const logins = [
     process.env.INPI_LOGIN,
     process.env.INPI_LOGIN_2,
@@ -25,14 +25,13 @@ const getCredentials = () => {
     process.env.INPI_PASSWORD_4,
   ];
 
-  const index = Math.floor(Math.random() * 3);
   return { login: logins[index], password: passwords[index] };
 };
 
 /** Authenticate a user on opendata-rncs */
-const AuthenticateCookie = async () => {
+const createAndAuthenticateCookie = async (index: number) => {
   try {
-    const { login, password } = getCredentials();
+    const { login, password } = getCredentials(index);
 
     const response = await httpClient({
       url: routes.rncs.api.login,
@@ -47,18 +46,22 @@ const AuthenticateCookie = async () => {
     if (!cookie || typeof cookie !== 'string') {
       throw new Error('Authentication failed');
     }
-    COOKIE = cookie.split(';')[0];
-  } catch (e) {
+    COOKIE[index] = cookie.split(';')[0];
+  } catch (e: any) {
     throw new HttpAuthentificationFailure(e);
   }
 };
 
-const fetchData = async (route: string, options?: AxiosRequestConfig) => {
+const fetchData = async (
+  route: string,
+  cookie: string,
+  options?: AxiosRequestConfig
+) => {
   return await httpClient({
     ...options,
     url: route,
     method: 'GET',
-    headers: { Cookie: COOKIE },
+    headers: { Cookie: cookie },
     timeout: 12000, // INPI API can take a looong time
   });
 };
@@ -67,15 +70,16 @@ const RNCSClientWrapper = async (
   route: string,
   options?: AxiosRequestConfig
 ) => {
-  if (!COOKIE) {
-    await AuthenticateCookie();
-  }
+  const index = Math.floor(Math.random() * 3.99);
   try {
-    return await fetchData(route, options);
+    if (!COOKIE[index]) {
+      await createAndAuthenticateCookie(index);
+    }
+    return await fetchData(route, COOKIE[index], options);
   } catch (e) {
     if (e instanceof HttpUnauthorizedError) {
-      await AuthenticateCookie();
-      return await fetchData(route, options);
+      await createAndAuthenticateCookie(index);
+      return await fetchData(route, COOKIE[index], options);
     }
 
     throw e;
