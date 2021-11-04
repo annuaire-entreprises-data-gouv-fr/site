@@ -88,6 +88,10 @@
         this.deleteDownload(slug);
         this.download(siren);
       },
+      openFile(slug) {
+        this.deleteDownload(slug);
+        window.open(`/downloads/${slug}.pdf`, '_blank');
+      },
       isAlreadyDownloading(siren) {
         return Object.values(this.downloads).reduce((acc, elem) => {
           return acc || (elem.siren === siren && elem.isPending);
