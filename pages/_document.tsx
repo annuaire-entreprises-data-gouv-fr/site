@@ -6,8 +6,6 @@ class CustomHead extends Head {
   render() {
     const res = super.render();
 
-    console.log(res.type);
-
     function transform(node: any): any {
       // remove link preloads and next.js script
       const isLinkPreload =
