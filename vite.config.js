@@ -35,7 +35,7 @@ module.exports = {
   },
   plugins: [
     legacy({
-      targets: ['ie >= 11'],
+      targets: ['defaults', 'ie >= 11'],
     }),
   ],
   css: {
