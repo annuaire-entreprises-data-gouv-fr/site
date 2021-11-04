@@ -7,6 +7,7 @@ const DownloadManager = () => (
           <div
             x-show="Object.keys($store.downloadManager.downloads).length > 0"
             id="download-manager"
+            style="display:none;"
             x-data="{ items: $store.downloadManager.downloads }">
             <div class="label">
               Gestionnaire de téléchargement

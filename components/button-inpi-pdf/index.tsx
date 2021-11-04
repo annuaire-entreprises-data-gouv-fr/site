@@ -13,11 +13,11 @@ const ButtonInpiPdf: React.FC<{ siren: string }> = ({ siren }) => {
   const id = randomId();
   return (
     <div>
-      <span id={id}>
+      <span id={id + '-legacy'}>
         <ButtonLink
           nofollow={true}
           target="_blank"
-          to={`/api/inpi-pdf-proxy${siren}`}
+          to={`/api/inpi-pdf-proxy/${siren}`}
         >
           {download} Télécharger le justificatif d’immatriculation
         </ButtonLink>
@@ -25,7 +25,11 @@ const ButtonInpiPdf: React.FC<{ siren: string }> = ({ siren }) => {
       <div
         dangerouslySetInnerHTML={{
           __html: `
-          <div class="button-link" x-data="asyncButton('${id}')" x-cloak>
+          <div
+            id="${id}"
+            style="display:none;"
+            class="button-link"
+            x-data="asyncButton('${id}')">
             <div class="warning" x-text="error"></div>
             <button @click="download('${siren}')">
               <svg

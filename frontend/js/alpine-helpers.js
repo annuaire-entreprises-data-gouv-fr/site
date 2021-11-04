@@ -3,12 +3,17 @@
     Alpine.data('asyncButton', (idToClean) => ({
       isLoading: false,
       error: '',
+      display: true,
 
       init() {
-        let e = document.getElementById(idToClean);
-        if (e) {
-          e.style.display = 'none';
-        }
+        try {
+          const buttonLegacy = document.getElementById(idToClean + '-legacy');
+          const button = document.getElementById(idToClean);
+          const downloadManager = document.getElementById('download-manager');
+          button.style.display = 'block';
+          buttonLegacy.style.display = 'none';
+          downloadManager.style.display = 'block';
+        } catch {}
       },
 
       download(siren) {
