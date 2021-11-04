@@ -58,32 +58,32 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
       }
 
       table {
-        width:100%;:
+        width: 100%;
       }
 
       table tr:hover > td {
         background-color: #dfdff166;
       }
 
-      .mobile{
-        display:none;
+      .mobile {
+        display: none;
       }
-      .mobile >div {
+      .mobile > div {
         margin: 20px 0;
       }
-      .mobile > div > div:nth-of-type(1){
+      .mobile > div > div:nth-of-type(1) {
         margin-bottom: 10px;
       }
-      .mobile >div>div:nth-of-type(3) {
-        font-style:italic;
-        font-size:0.9rem;
+      .mobile > div > div:nth-of-type(3) {
+        font-style: italic;
+        font-size: 0.9rem;
       }
       @media only screen and (min-width: 1px) and (max-width: 600px) {
         .mobile {
-          display:block;
+          display: block;
         }
-        table{
-          display:none;
+        table {
+          display: none;
         }
       }
     `}</style>

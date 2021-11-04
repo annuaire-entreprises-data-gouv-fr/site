@@ -17,12 +17,6 @@ const createPdfDownload = async (req: NextApiRequest, res: NextApiResponse) => {
     throw new HttpNotFound(404, `${siren} is not a valid siren`);
   }
 
-  const captchaCookieIsValid = isCaptchaCookieValid(req, res);
-  if (!captchaCookieIsValid) {
-    redirect(res, `/captcha?url=${req.url}`);
-    return;
-  }
-
   try {
     const slug = downloadInpiPdfAndSaveOnDisk(siren);
     res.status(201).json({ slug });
