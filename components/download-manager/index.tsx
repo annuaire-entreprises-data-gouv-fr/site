@@ -21,7 +21,7 @@ const DownloadManager = () => (
                       <span x-bind:class="item.status+' tag'" x-text="$store.downloadManager.extractLabel(item.status)"></span>
                       <template x-if="item.status==='downloaded'">
                         &nbps;
-                        <a x-bind:href="'/downloads/'+item.slug+'.pdf'" target="_blank" rel="noopener noreferrer">ouvrir</a>
+                        <button class="action" @click="$store.downloadManager.openFile(item.slug)">ouvrir</button>
                       </template>
                       <template x-if="item.status==='aborted'">
                         &nbps;

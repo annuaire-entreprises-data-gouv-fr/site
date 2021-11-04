@@ -57,8 +57,8 @@ describe('IMR XML parser', () => {
   });
 
   it('returns domain error when xml is invalid', () => {
-    expect(() => extractIMRFromXml('yolo<', dummySiren)).toThrowError(
-      InvalidFormatError
-    );
+    expect(() => extractIMRFromXml('yolo<', dummySiren)).toThrowError(Error);
   });
 });
+
+export {};

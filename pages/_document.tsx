@@ -1,6 +1,7 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
+import manifest from '../public/manifest.json';
 class CustomHead extends Head {
   render() {
     const res = super.render();
@@ -47,40 +48,33 @@ class DevDocument extends Document {
     return (
       <Html lang="fr">
         <Head>
-          <link rel="stylesheet" href="/resources/css/bundle.css" />
-          <link
-            rel="apple-touch-icon"
-            href="/resources/favicons/apple-touch-icon.png"
-          />
-          <link
-            rel="icon"
-            href="/resources/favicons/favicon.svg"
-            type="image/svg+xml"
-          />
+          <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" />
+          <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml" />
           <link
             rel="shortcut icon"
-            href="/resources/favicons/favicon.ico"
+            href="/favicons/favicon.ico"
             type="image/x-icon"
           />
           <link
             rel="manifest"
-            href="/resources/favicons/manifest.webmanifest"
+            href="/favicons/manifest.webmanifest"
             cross-origin="use-credentials"
+          />
+
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="http://localhost:3001/frontend/css/bundle.css"
           />
           <script
             defer
-            type="text/javascript"
-            src="/resources/js/helpers.js"
+            type="module"
+            src="http://localhost:3001/@vite/client"
           ></script>
           <script
             defer
-            type="text/javascript"
-            src="/resources/js/alpine-helpers.js"
-          ></script>
-          <script
-            defer
-            type="text/javascript"
-            src="/resources/js/alpine.min.js"
+            type="module"
+            src="http://localhost:3001/frontend/js/development.js"
           ></script>
         </Head>
         <body>
@@ -99,35 +93,43 @@ class StaticDocument extends Document {
         <CustomHead>
           {/* Standard Meta */}
           {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/223019574/D+veloppeurs */}
-          <link rel="stylesheet" href="/resources/css/bundle.css" />
-          <link
-            rel="apple-touch-icon"
-            href="/resources/favicons/apple-touch-icon.png"
-          />
-          <link
-            rel="icon"
-            href="/resources/favicons/favicon.svg"
-            type="image/svg+xml"
-          />
+          <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" />
+          <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml" />
           <link
             rel="shortcut icon"
-            href="/resources/favicons/favicon.ico"
+            href="/favicons/favicon.ico"
             type="image/x-icon"
           />
           <link
             rel="manifest"
-            href="/resources/favicons/manifest.webmanifest"
+            href="/favicons/manifest.webmanifest"
             cross-origin="use-credentials"
+          />
+
+          <script
+            type="text/javascript"
+            //@ts-ignore
+            nomodule="nomodule"
+            src={
+              //@ts-ignore
+              `/${manifest['vite/legacy-polyfills'].file}`
+            }
+          ></script>
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href={`/${manifest['frontend/js/production.js'].css}`}
           />
           <script
             defer
-            type="text/javascript"
-            src="/resources/js/bundle.js"
+            type="module"
+            src={`/${manifest['frontend/js/production.js'].file}`}
           ></script>
           <script
             defer
-            type="text/javascript"
-            src="/resources/js/alpine.min.js"
+            //@ts-ignore
+            nomodule="nomodule"
+            src={`/${manifest['frontend/js/production-legacy.js'].file}`}
           ></script>
         </CustomHead>
 
@@ -157,32 +159,6 @@ class StaticDocument extends Document {
               }}
             ></script>
           )}
-          {process.env.NODE_ENV === 'production' &&
-            process.env.SENTRY_FRONT_DSN && (
-              <>
-                <script
-                  type="text/javascript"
-                  src="/resources/js/sentry.min.js"
-                ></script>
-                <script
-                  defer
-                  dangerouslySetInnerHTML={{
-                    __html: `
-                  (function () {
-                    var dsn = '${process.env.SENTRY_FRONT_DSN}';
-                    if (!window.Sentry || !dsn) {
-                      return;
-                    }
-                    window.Sentry.init({
-                      dsn: dsn,
-                      tracesSampleRate: 1.0,
-                    });
-                  })();
-                `,
-                  }}
-                ></script>
-              </>
-            )}
         </body>
       </Html>
     );

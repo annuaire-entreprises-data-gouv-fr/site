@@ -1,4 +1,4 @@
-import { pagesArray } from '.';
+import pagesArray from './pages-array';
 
 describe('Check page counter helper', () => {
   test('Works with few pages', () => {
