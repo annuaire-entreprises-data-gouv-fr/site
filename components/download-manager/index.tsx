@@ -18,7 +18,18 @@ const DownloadManager = () => (
                     <div>
                       <span x-text="'justificatif_'+item.siren+'.pdf'"></span>
                     </div>
-                      <span x-bind:class="item.status+' tag'" x-text="$store.downloadManager.extractLabel(item.status)"></span>
+                      <span x-bind:class="item.status+' tag'">
+                        <template x-if="item.isPending">
+                          <span>
+                            <div class="spinner">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                            </div>
+                          </span>
+                        </template>
+                        <span x-text="$store.downloadManager.extractLabel(item.status)"></span>
+                      </span>
                       <template x-if="item.status==='downloaded'">
                         &nbps;
                         <button class="action" @click="$store.downloadManager.openFile(item.slug)">ouvrir</button>
@@ -95,6 +106,44 @@ const DownloadManager = () => (
         color: #000091;
         background: #dfdff1;
       }
+      #download-manager .spinner {
+        display: inline;
+      }
+
+      @keyframes spinner {
+        33% {
+          transform: translateY(2px);
+        }
+        66% {
+          transform: translateY(-5px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      #download-manager .spinner > div:nth-child(1) {
+        animation: spinner 0.6s -0.14s infinite ease-in-out;
+      }
+
+      #download-manager .spinner > div:nth-child(2) {
+        animation: spinner 0.6s -0.07s infinite ease-in-out;
+      }
+
+      #download-manager .spinner > div:nth-child(3) {
+        animation: spinner 0.6s 0s infinite ease-in-out;
+      }
+
+      #download-manager .spinner > div {
+        background-color: #999;
+        width: 6px;
+        height: 6px;
+        border-radius: 100%;
+        margin: 0;
+        animation-fill-mode: both;
+        display: inline-block;
+      }
+
       @media print {
         #download-manager {
           display: none;
