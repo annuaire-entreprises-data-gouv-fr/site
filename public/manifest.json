@@ -1,6 +1,6 @@
 {
   "frontend/js/production-legacy.js": {
-    "file": "assets/production-legacy.e9ca3df9.js",
+    "file": "assets/production-legacy.5e87ef9a.js",
     "src": "frontend/js/production-legacy.js",
     "isEntry": true,
     "imports": [
@@ -34,7 +34,7 @@
     "isEntry": true
   },
   "frontend/js/production.js": {
-    "file": "assets/production.528b88e6.js",
+    "file": "assets/production.6ec8c41a.js",
     "src": "frontend/js/production.js",
     "isEntry": true,
     "imports": [
