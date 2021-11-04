@@ -1,10 +1,10 @@
 {
   "frontend/js/production-legacy.js": {
-    "file": "assets/production-legacy.b06d672b.js",
+    "file": "assets/production-legacy.e9ca3df9.js",
     "src": "frontend/js/production-legacy.js",
     "isEntry": true,
     "imports": [
-      "_vendor-legacy.93d9e5db.js"
+      "_vendor-legacy.5ed2cdfa.js"
     ],
     "assets": [
       "assets/Marianne-Light.6440d11d.woff2",
@@ -25,20 +25,20 @@
       "assets/Spectral-ExtraBold.6fbbf1a8.woff"
     ]
   },
-  "_vendor-legacy.93d9e5db.js": {
-    "file": "assets/vendor-legacy.93d9e5db.js"
+  "_vendor-legacy.5ed2cdfa.js": {
+    "file": "assets/vendor-legacy.5ed2cdfa.js"
   },
   "vite/legacy-polyfills": {
-    "file": "assets/polyfills-legacy.9fb2ee65.js",
+    "file": "assets/polyfills-legacy.7758d8a8.js",
     "src": "vite/legacy-polyfills",
     "isEntry": true
   },
   "frontend/js/production.js": {
-    "file": "assets/production.13967287.js",
+    "file": "assets/production.528b88e6.js",
     "src": "frontend/js/production.js",
     "isEntry": true,
     "imports": [
-      "_vendor.a6e3f38b.js"
+      "_vendor.04bb5842.js"
     ],
     "css": [
       "assets/production.bbfaf9aa.css"
@@ -62,7 +62,7 @@
       "assets/Spectral-ExtraBold.6fbbf1a8.woff"
     ]
   },
-  "_vendor.a6e3f38b.js": {
-    "file": "assets/vendor.a6e3f38b.js"
+  "_vendor.04bb5842.js": {
+    "file": "assets/vendor.04bb5842.js"
   }
 }
