@@ -9,12 +9,13 @@ import {
 import routes from '../routes';
 import { AxiosRequestConfig } from 'axios';
 
-let COOKIE = ['', '', '', '', ''];
+let COOKIE = ['', '', '', '', '', ''];
 
 const getCredentials = (index: number) => {
   const logins = [
     process.env.INPI_LOGIN,
     process.env.INPI_LOGIN_2,
+    process.env.INPI_LOGIN_3,
     process.env.INPI_LOGIN_4,
     process.env.INPI_LOGIN_5,
     process.env.INPI_LOGIN_6,
@@ -22,6 +23,7 @@ const getCredentials = (index: number) => {
   const passwords = [
     process.env.INPI_PASSWORD,
     process.env.INPI_PASSWORD_2,
+    process.env.INPI_PASSWORD_3,
     process.env.INPI_PASSWORD_4,
     process.env.INPI_PASSWORD_5,
     process.env.INPI_PASSWORD_6,
@@ -72,7 +74,7 @@ const RNCSClientWrapper = async (
   route: string,
   options?: AxiosRequestConfig
 ) => {
-  const index = Math.floor(Math.random() * 4.99);
+  const index = Math.floor(Math.random() * 5.99);
   try {
     if (!COOKIE[index]) {
       await createAndAuthenticateCookie(index);
