@@ -1,5 +1,3 @@
 import './sentry';
-import './helpers';
-import './alpine-helpers';
+import './index';
 import '../css/bundle.css';
-import './alpine';
