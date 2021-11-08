@@ -2,7 +2,7 @@ import { IEtablissement } from '../../models';
 import { ISearchResults } from '../../models/search';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import { formatAdresse, libelleFromCodeNaf } from '../../utils/labels';
-import { httpGet } from '../../utils/network/http';
+import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 

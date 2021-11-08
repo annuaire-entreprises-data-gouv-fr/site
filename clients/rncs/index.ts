@@ -1,7 +1,7 @@
 import { fetchRNCSImmatriculation } from './IMRJustificatif';
 import { fetchRNCSIMR } from './IMR';
 
-import httpClient from '../../utils/network/http';
+import httpClient from '../../utils/network';
 import {
   HttpAuthentificationFailure,
   HttpUnauthorizedError,

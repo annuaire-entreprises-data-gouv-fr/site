@@ -1,7 +1,7 @@
 import pdfDownloader from '../../utils/download-manager';
 import inpiSiteAuth from './auth-provider';
 import { Siren } from '../../utils/helpers/siren-and-siret';
-import { httpGet } from '../../utils/network/http';
+import { httpGet } from '../../utils/network';
 import routes from '../routes';
 
 const INPI_TIMEOUT = 50 * 1000;

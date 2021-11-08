@@ -1,4 +1,4 @@
-import { fetchMonitoring, fetchMonitorings } from '../clients/monitoring';
+import { fetchMonitorings } from '../clients/monitoring';
 import logErrorInSentry from '../utils/sentry';
 import {
   administrationsMetaData,
@@ -28,23 +28,12 @@ const logError = (e: Error) =>
     details: e.message,
   });
 
-const getMonitoring = async (
-  monitoringId: number
-): Promise<IMonitoring | null> => {
-  try {
-    return await fetchMonitoring(monitoringId);
-  } catch (e) {
-    logError(e);
-    return null;
-  }
-};
-
 const getMonitorings = async (
   monitoringIds: number[]
 ): Promise<IMonitoring[]> => {
   try {
     return await fetchMonitorings(monitoringIds);
-  } catch (e) {
+  } catch (e: any) {
     logError(e);
     return [];
   }

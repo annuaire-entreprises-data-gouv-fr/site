@@ -1,6 +1,6 @@
 import { IEtablissement } from '../../models';
 import { IGeoLoc } from '../../models/geto-loc';
-import { httpGet } from '../../utils/network/http';
+import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 

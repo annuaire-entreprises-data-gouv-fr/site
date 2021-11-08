@@ -2,15 +2,13 @@ import { createDefaultEtablissement, IEtablissement } from '../../models';
 import {
   extractNicFromSiret,
   extractSirenFromSiret,
-  verifySiren,
-  verifySiret,
 } from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
-import { httpGet } from '../../utils/network/http';
+import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 

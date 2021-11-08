@@ -285,3 +285,11 @@ sont pas à jour ? 👉 [Contactez la Chambre des Métiers et de l'Artisanat de 
     ],
   },
 };
+
+export const allMonitoringIds = () =>
+  Object.values(administrationsMetaData).reduce((acc, administration) => {
+    administration.apiMonitors.forEach((monitor) => {
+      acc.push(monitor.id);
+    });
+    return acc;
+  }, []) as number[];

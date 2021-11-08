@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import httpClient from '../../../utils/network/http';
+import httpClient from '../../../utils/network';
 import redirect, { redirectForbidden } from '../../../utils/redirects';
 import logErrorInSentry, { logWarningInSentry } from '../../../utils/sentry';
 import { setCaptchaCookie } from '../../../utils/captcha';

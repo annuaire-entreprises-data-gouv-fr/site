@@ -1,5 +1,5 @@
 import { IConventionCollective } from '../../models/convention-collective';
-import { httpGet } from '../../utils/network/http';
+import { httpGet } from '../../utils/network';
 import routes from '../routes';
 
 /**
