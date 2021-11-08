@@ -25,6 +25,7 @@ module.exports = {
     outDir: 'public',
     assetsDir: 'assets',
     emptyOutDir: false,
+    target: ['es2020', 'chrome61', 'firefox60', 'safari11', 'edge18'],
     manifest: true,
     rollupOptions: {
       input: 'frontend/js/production.js',
