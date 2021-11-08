@@ -12,7 +12,7 @@ import { download } from '../icon';
 const ButtonInpiPdf: React.FC<{ siren: string }> = ({ siren }) => {
   const id = randomId();
   return (
-    <div>
+    <div id="button-inpi-pdf">
       <span id={id + '-legacy'}>
         <ButtonLink
           nofollow={true}
