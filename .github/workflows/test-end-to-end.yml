@@ -30,6 +30,7 @@ env:
   INPI_PASSWORD_5: ${{ secrets.INPI_PASSWORD}}
   INPI_LOGIN_6: ${{ secrets.INPI_LOGIN}}
   INPI_PASSWORD_6: ${{ secrets.INPI_PASSWORD}}
+  PDF_DOWNLOAD_DIRECTORY: /tmp/download
 
 jobs:
   build:
