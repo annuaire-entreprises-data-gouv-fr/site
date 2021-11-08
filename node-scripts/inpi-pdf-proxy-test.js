@@ -2,6 +2,42 @@ const axios = require('axios');
 
 console.info('=== INPI PDF proxy checker ===');
 
+const sleep = async (seconds) => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(), seconds * 1000);
+  });
+};
+
+const downloadAuthenticatedPdf = async (siren) => {
+  let retry = 3;
+  const create = await axios(
+    `https://staging.annuaire-entreprises.data.gouv.fr/api/inpi-pdf-proxy/job/${siren}`,
+    {
+      timeout: 90 * 1000,
+      method: 'GET',
+    }
+  );
+
+  const slug = create.data.slug;
+
+  if (!slug) {
+    throw new Error('Job was not created properly');
+  }
+
+  while (retry > 0) {
+    await sleep(15);
+    try {
+      const file = await axios(
+        `https://staging.annuaire-entreprises.data.gouv.fr/downloads/${slug}.pdf`
+      );
+      return file;
+    } catch (e) {
+      console.log(`Attempt n°${retry} failed. Retrying in 15 seconds...`);
+    }
+    retry -= 1;
+  }
+};
+
 const checkINPIpdfProxy = async () => {
   try {
     // let's test Danone Siren
@@ -14,10 +50,7 @@ const checkINPIpdfProxy = async () => {
         method: 'GET',
       }),
       // and the authenticated one
-      axios(`http://localhost:3000/api/inpi-pdf-proxy/${siren}`, {
-        timeout: 90 * 1000,
-        method: 'GET',
-      }),
+      downloadAuthenticatedPdf(siren),
     ]);
 
     // we compare size
@@ -49,5 +82,4 @@ const checkINPIpdfProxy = async () => {
     process.exit(1);
   }
 };
-
 checkINPIpdfProxy();
