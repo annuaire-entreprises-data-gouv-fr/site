@@ -3,10 +3,7 @@ import React from 'react';
 const MaplibreInstance = () => (
   <>
     <div id="map" />
-    <script
-      async
-      src="https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.js"
-    ></script>
+    <script src="https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.js"></script>
     <link
       href="https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.css"
       rel="stylesheet"
