@@ -8,7 +8,7 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
-# be extrremly careful as env variable defined here are accessible by all the actions of the workflow.
+# be extremly careful as env variable defined here are accessible by all the actions of the workflow.
 # For critical env variable declare it within the action
 env:
   INSEE_CLIENT_ID: ${{ secrets.INSEE_CLIENT_ID }}
@@ -17,8 +17,16 @@ env:
   INSEE_CLIENT_SECRET_FALLBACK: ${{ secrets.INSEE_CLIENT_SECRET_FALLBACK}}
   INPI_LOGIN: ${{ secrets.INPI_LOGIN}}
   INPI_PASSWORD: ${{ secrets.INPI_PASSWORD}}
-  INPI_SITE_LOGIN: ${{ secrets.INPI_SITE_LOGIN}}
-  INPI_SITE_PASSWORD: ${{ secrets.INPI_SITE_PASSWORD}}
+  INPI_SITE_LOGIN_2: ${{ secrets.INPI_SITE_LOGIN}}
+  INPI_SITE_PASSWORD_2: ${{ secrets.INPI_SITE_PASSWORD}}
+  INPI_SITE_LOGIN_3: ${{ secrets.INPI_SITE_LOGIN}}
+  INPI_SITE_PASSWORD_3: ${{ secrets.INPI_SITE_PASSWORD}}
+  INPI_SITE_LOGIN_4: ${{ secrets.INPI_SITE_LOGIN}}
+  INPI_SITE_PASSWORD_4: ${{ secrets.INPI_SITE_PASSWORD}}
+  INPI_SITE_LOGIN_5: ${{ secrets.INPI_SITE_LOGIN}}
+  INPI_SITE_PASSWORD_5: ${{ secrets.INPI_SITE_PASSWORD}}
+  INPI_SITE_LOGIN_6: ${{ secrets.INPI_SITE_LOGIN}}
+  INPI_SITE_PASSWORD_6: ${{ secrets.INPI_SITE_PASSWORD}}
 
 jobs:
   build:
