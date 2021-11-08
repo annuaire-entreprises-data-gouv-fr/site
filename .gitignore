@@ -46,6 +46,7 @@ yarn-error.log*
 public/dist
 public/downloads
 public/assets
+public/manifest.json
 
 # direnv
 .nvmrc
