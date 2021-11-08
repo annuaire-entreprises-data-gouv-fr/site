@@ -9,27 +9,20 @@ import {
 import routes from '../routes';
 import { AxiosRequestConfig } from 'axios';
 
-let COOKIE = ['', '', '', '', '', ''];
+let COOKIE = [] as string[];
+
+const credentials = [
+  [process.env.INPI_LOGIN, process.env.INPI_PASSWORD],
+  [process.env.INPI_LOGIN_2, process.env.INPI_PASSWORD_2],
+  [process.env.INPI_LOGIN_3, process.env.INPI_PASSWORD_3],
+  // [process.env.INPI_LOGIN_4, process.env.INPI_PASSWORD_4],
+  [process.env.INPI_LOGIN_5, process.env.INPI_PASSWORD_5],
+  [process.env.INPI_LOGIN_6, process.env.INPI_PASSWORD_6],
+];
 
 const getCredentials = (index: number) => {
-  const logins = [
-    process.env.INPI_LOGIN,
-    process.env.INPI_LOGIN_2,
-    process.env.INPI_LOGIN_3,
-    process.env.INPI_LOGIN_4,
-    process.env.INPI_LOGIN_5,
-    process.env.INPI_LOGIN_6,
-  ];
-  const passwords = [
-    process.env.INPI_PASSWORD,
-    process.env.INPI_PASSWORD_2,
-    process.env.INPI_PASSWORD_3,
-    process.env.INPI_PASSWORD_4,
-    process.env.INPI_PASSWORD_5,
-    process.env.INPI_PASSWORD_6,
-  ];
-
-  return { login: logins[index], password: passwords[index] };
+  const credential = credentials[index];
+  return { login: credential[0], password: credential[1] };
 };
 
 /** Authenticate a user on opendata-rncs */
@@ -74,7 +67,7 @@ const RNCSClientWrapper = async (
   route: string,
   options?: AxiosRequestConfig
 ) => {
-  const index = Math.floor(Math.random() * 5.99);
+  const index = Math.floor(Math.random() * credentials.length);
   try {
     if (!COOKIE[index]) {
       await createAndAuthenticateCookie(index);
