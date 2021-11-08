@@ -11,8 +11,6 @@ const MapResults: React.FC<{ results: ISearchResult[] }> = ({ results }) => (
       dangerouslySetInnerHTML={{
         __html: `
           function initMap(style) {
-            if (!maplibregl) {return;}
-
             var map = new maplibregl.Map({
               container: 'map',
               style: style, // stylesheet location

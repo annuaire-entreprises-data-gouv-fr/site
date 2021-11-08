@@ -74,7 +74,7 @@ class DevDocument extends Document {
           <script
             defer
             type="module"
-            src="http://localhost:3001/frontend/js/development.js"
+            src="http://localhost:3001/frontend/js/index.js"
           ></script>
         </Head>
         <body>

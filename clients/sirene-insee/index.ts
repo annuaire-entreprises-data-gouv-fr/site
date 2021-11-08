@@ -1,4 +1,4 @@
-import { httpClientOAuthFactory } from '../../utils/network/http';
+import { httpClientOAuthFactory } from '../../utils/network';
 import routes from '../routes';
 
 /**

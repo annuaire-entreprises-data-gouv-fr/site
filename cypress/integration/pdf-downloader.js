@@ -10,6 +10,10 @@ describe('Test download manager', () => {
     cy.get('#download-manager').should('be.visible');
     cy.contains('en cours').should('have.length', 1);
   });
+  it('Should display on a different page', () => {
+    cy.visit(`/entreprise/${siren}`);
+    cy.get('#download-manager').should('be.visible');
+  });
   it('Should allow user to remove download', () => {
     cy.get('button.close').click();
     cy.contains('justificatif_').should('have.length', 0);

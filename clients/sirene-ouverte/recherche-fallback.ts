@@ -1,5 +1,5 @@
 import { ISearchResults } from '../../models/search';
-import { httpGet } from '../../utils/network/http';
+import { httpGet } from '../../utils/network';
 
 export interface IEntrepriseDataSearchResults {
   total_results: number;

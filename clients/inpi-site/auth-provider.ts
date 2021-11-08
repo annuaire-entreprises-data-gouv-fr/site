@@ -1,5 +1,5 @@
 import routes from '../routes';
-import httpClient, { httpGet } from '../../utils/network/http';
+import httpClient, { httpGet } from '../../utils/network';
 import { logWarningInSentry } from '../../utils/sentry';
 import {
   extractCookies,

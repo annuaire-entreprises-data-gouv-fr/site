@@ -8,7 +8,7 @@ import {
   libelleFromCodeNaf,
   libelleFromeCodeCategorie,
 } from '../../utils/labels';
-import { httpGet } from '../../utils/network/http';
+import { httpGet } from '../../utils/network';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
 import {

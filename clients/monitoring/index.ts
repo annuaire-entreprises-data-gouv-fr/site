@@ -1,8 +1,9 @@
 import { IMonitoring } from '../../models/monitoring';
-import httpClient from '../../utils/network/http';
+import httpClient from '../../utils/network';
 import FormData from 'form-data';
 import routes from '../routes';
 import { DailyUptimeRatioConverter } from './series';
+import { allMonitoringIds } from '../../models/administration';
 
 export interface IMonitorLog {
   id?: number;
@@ -36,9 +37,31 @@ interface IUptimeRobotResponse {
   monitors: IUptimeRobotMonitor[];
 }
 
+interface IMonitoringCache {
+  lastUpdate: number;
+  monitorings: IMonitoring[];
+}
+
+const cachedMonitorings: IMonitoringCache = {
+  lastUpdate: 0,
+  monitorings: [],
+};
+
 export const fetchMonitorings = async (
   monitoringIds: number[]
 ): Promise<IMonitoring[]> => {
+  const shouldUpdate =
+    new Date().getTime() - cachedMonitorings.lastUpdate > 30 * 1000;
+
+  if (shouldUpdate) {
+    await fetchAllMonitorings();
+  }
+  return monitoringIds.map((id) => cachedMonitorings.monitorings[id]);
+};
+
+const fetchAllMonitorings = async () => {
+  const monitoringIds = allMonitoringIds();
+
   const data = new FormData();
   const to = new Date();
   const from = new Date();
@@ -64,14 +87,13 @@ export const fetchMonitorings = async (
 
   const result = response.data as IUptimeRobotResponse;
 
-  return result.monitors.map((monitor) => mapToDomainObject(monitor, from));
-};
-
-export const fetchMonitoring = async (
-  monitoringId: number
-): Promise<IMonitoring> => {
-  const monitoring = await fetchMonitorings([monitoringId]);
-  return monitoring[0];
+  result.monitors.forEach((monitor) => {
+    cachedMonitorings.monitorings[monitor.id] = mapToDomainObject(
+      monitor,
+      from
+    );
+  });
+  cachedMonitorings.lastUpdate = new Date().getTime();
 };
 
 const mapToDomainObject = (

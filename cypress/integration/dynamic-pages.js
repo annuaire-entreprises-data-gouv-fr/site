@@ -15,15 +15,13 @@ siret.forEach((siret) => {
       });
     });
 
-    ['annonces', 'justificatif', 'entreprise', 'dirigeants'].map(
-      (pagePrefix) => {
-        const path = `/${pagePrefix}/${siret.slice(0, 9)}`;
-        it(`/${pagePrefix} page loads`, () => {
-          cy.request(path).then((resp) => {
-            expect(resp.status).to.eq(200);
-          });
+    ['annonces', 'entreprise', 'divers'].map((pagePrefix) => {
+      const path = `/${pagePrefix}/${siret.slice(0, 9)}`;
+      it(`/${pagePrefix} page loads`, () => {
+        cy.request(path).then((resp) => {
+          expect(resp.status).to.eq(200);
         });
-      }
-    );
+      });
+    });
   });
 });

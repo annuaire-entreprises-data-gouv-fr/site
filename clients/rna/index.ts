@@ -1,7 +1,7 @@
 import { IAssociation } from '../../models';
 import { IdRna } from '../../utils/helpers/id-rna';
 import { formatAdresse } from '../../utils/labels';
-import { httpGet } from '../../utils/network/http';
+import { httpGet } from '../../utils/network';
 import routes from '../routes';
 
 interface IAssociationResponse {
