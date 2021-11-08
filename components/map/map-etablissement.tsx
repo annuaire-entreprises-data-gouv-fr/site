@@ -13,8 +13,6 @@ const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
       dangerouslySetInnerHTML={{
         __html: `
                 function initMap(style) {
-                  if (maplibregl === undefined) {return;}
-
                   var coords = ${
                     etablissement
                       ? `[${etablissement.longitude},${etablissement.latitude}]`
