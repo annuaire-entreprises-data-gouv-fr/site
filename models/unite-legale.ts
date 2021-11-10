@@ -63,7 +63,7 @@ const getUniteLegale = async (
 ): Promise<IUniteLegale> => {
   try {
     // first attempt to call siren insee
-    return await fetchUniteLegaleFromBothAPI(siren, page);
+    return await fetchUniteLegaleFromInsee(siren, page);
   } catch (e) {
     if (e instanceof HttpNotFound) {
       throw new SirenNotFoundError(`Siren ${siren} was not found`);
@@ -120,7 +120,7 @@ const getUniteLegaleSireneOuverteFromSlug = async (
 /**
  * Fetch Unite Legale from Sirene INSEE and Etalab
  */
-const fetchUniteLegaleFromBothAPI = async (siren: Siren, page = 1) => {
+const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
   try {
     // INSEE does not provide enough information to paginate etablissement list
     // so we doubled our API call with sirene ouverte to get Etablissements.

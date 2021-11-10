@@ -143,9 +143,14 @@ const Title: React.FC<IProps> = ({
     <div className="title">
       {uniteLegale.oldSiren !== uniteLegale.siren && (
         <Warning full>
-          Cette unité est inscrite en double dans le répertoire Sirene. Nous
-          vous avons donc redirigé : {formatNumbersFr(uniteLegale.oldSiren)} ⇢{' '}
-          {formatNumbersFr(uniteLegale.siren)}.
+          Cette unité est inscrite en double à l’INSEE :{' '}
+          {formatNumbersFr(uniteLegale.oldSiren)} et{' '}
+          {formatNumbersFr(uniteLegale.siren)}. Pour voir les informations
+          complètes, consultez la page{' '}
+          <a href={`/entreprise/${uniteLegale.siren}`}>
+            {formatNumbersFr(uniteLegale.siren)}
+          </a>
+          .
         </Warning>
       )}
       <h1>
