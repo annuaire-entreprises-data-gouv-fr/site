@@ -12,16 +12,20 @@ export interface IImmatriculation {
 }
 export interface IImmatriculationRNCS extends IImmatriculation {
   siren: Siren;
-  immatriculation: {};
 }
 
 export interface IImmatriculationRNM extends IImmatriculation {
   siren: Siren;
-  immatriculation: {
-    codeAPRM: string | null;
-    activitésArtisanalesDéclarées: string | null;
-    dirigeantQualification: string | null;
-  };
+  gestionId: string;
+  denomination: string;
+  codeAPRM: string;
+  activite: string;
+  dateImmatricutation: string;
+  dateMiseAJour: string;
+  dateDebutActivite: string;
+  libelleNatureJuridique: string;
+  dateRadiation: string;
+  adresse: string;
 }
 
 /**

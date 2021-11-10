@@ -5,10 +5,12 @@ import {
   isAPINotResponding,
 } from '../../models/api-not-responding';
 import { IImmatriculationRNM } from '../../models/immatriculation';
+import { capitalize, formatDate } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
 import ButtonLink from '../button';
 import { download } from '../icon';
 import { Section } from '../section';
+import { TwoColumnTable } from '../table/simple';
 
 interface IProps {
   immatriculation: IImmatriculationRNM | IAPINotRespondingError;
@@ -26,6 +28,25 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
       />
     );
   }
+
+  const data = [
+    ['Dénomination', capitalize(immatriculation.denomination)],
+    ['Code APRM', immatriculation.codeAPRM],
+    ['Numéro de gestion', immatriculation.gestionId],
+    ['Activité déclarée au RNM', immatriculation.activite],
+    ['Nature juridique', immatriculation.libelleNatureJuridique],
+    [
+      'Date d’immatriculation au RNM',
+      formatDate(immatriculation.dateImmatricutation),
+    ],
+    ['Date de début d’activité', formatDate(immatriculation.dateDebutActivite)],
+    ['Date de dernière mise à jour', formatDate(immatriculation.dateMiseAJour)],
+  ];
+
+  if (immatriculation.dateRadiation) {
+    data.push(['Date de radiation', formatDate(immatriculation.dateRadiation)]);
+  }
+
   return (
     <>
       {immatriculation.downloadlink && (
@@ -39,10 +60,11 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
             entreprises artisanales enreigstrées auprès des Chambres des Métiers
             et de l’Artisanat (CMA France).
           </p>
+          <TwoColumnTable body={data} />
           <p>
             Pour accéder à l’ensemble des données contenues dans un extrait D1,
             vous pouvez télécharger le justificatif d’immatriculation. Si le
-            téléchargement échoue, vous pouvez accéder à la donnée en allant sur
+            téléchargement échoue, vous pouvez accéder aux données en allant sur
             le site de CMA France.
           </p>
           <div className="layout-center">
