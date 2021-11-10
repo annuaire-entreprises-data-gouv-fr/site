@@ -1,7 +1,12 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-import manifest from '../public/manifest.json';
+const manifest = (
+  process.env.NODE_ENV === 'production'
+    ? require('../public/manifest.json')
+    : {}
+) as { [key: string]: any };
+
 class CustomHead extends Head {
   render() {
     const res = super.render();
@@ -64,7 +69,7 @@ class DevDocument extends Document {
           <link
             rel="stylesheet"
             type="text/css"
-            href="http://localhost:3001/frontend/css/bundle.css"
+            href="http://localhost:3001/frontend/css/dsfr.min.css"
           />
           <script
             defer
@@ -88,6 +93,7 @@ class DevDocument extends Document {
 
 class StaticDocument extends Document {
   render() {
+    console.log(manifest);
     return (
       <Html lang="fr">
         <CustomHead>

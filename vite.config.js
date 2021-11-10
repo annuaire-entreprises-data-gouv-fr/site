@@ -4,7 +4,7 @@ const autoprefixer = require('autoprefixer');
 
 const purgeConfig = {
   content: ['./**/*.tsx', './**/*.html'],
-  css: ['frontend/css/dsfr.css'],
+  css: ['frontend/css/dsfr.min.css'],
   fontFace: false, // otherwise, it will remove dsfr icon
   variables: true,
 };

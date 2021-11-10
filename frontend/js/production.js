@@ -1,3 +1,3 @@
 import './sentry';
 import './index';
-import '../css/bundle.css';
+import '../css/dsfr.min.css';
