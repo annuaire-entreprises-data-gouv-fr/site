@@ -14,6 +14,7 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
   immatriculationRNM,
   immatriculationRNCS,
+  immatriculationJOAFE,
 }) => (
   <Page
     small={true}
@@ -25,11 +26,13 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
       <ImmatriculationSummary
         immatriculationRNM={immatriculationRNM}
         immatriculationRNCS={immatriculationRNCS}
+        immatriculationJOAFE={immatriculationJOAFE}
         uniteLegale={uniteLegale}
       />
       <Immatriculations
         immatriculationRNM={immatriculationRNM}
         immatriculationRNCS={immatriculationRNCS}
+        immatriculationJOAFE={immatriculationJOAFE}
         uniteLegale={uniteLegale}
       />
       <AvisSituationSection uniteLegale={uniteLegale} />

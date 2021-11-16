@@ -63,7 +63,7 @@ const mapToDomainObject = (annonce: IBodaccRecords) => {
     typeAvisLibelle: annonce.typeavis_lib || '',
     tribunal: annonce.tribunal || '',
     numeroAnnonce: annonce.numeroannonce || 0,
-    datePublication: formatDate(annonce.dateparution) || '',
+    datePublication: annonce.dateparution || '',
     details: extractDetails(annonce) || '',
     path: `${routes.bodacc.site.annonce}${annonce.publicationavis}/${annonce.parution}/${annonce.numeroannonce}`,
   };
