@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { verifySiren } from '../../utils/helpers/siren-and-siret';
-import { extractIMRFromXml, InvalidFormatError } from './IMRParser';
+import { extractIMRFromXml } from './IMRParser';
 
 const dummySiren = verifySiren('880878145');
 
@@ -13,6 +13,21 @@ describe('IMR XML parser', () => {
 
     const result = extractIMRFromXml(okXML, dummySiren);
     expect(result).toEqual({
+      identite: {
+        capital: '1 000 EUR (fixe)',
+        codeGreffe: '7501',
+        dateCessationActivite: '',
+        dateClotureExercice: '31 décembre',
+        dateDebutActiv: '23/01/2020',
+        dateGreffe: '2020-01-23',
+        dateImmatriculation: '23/01/2020',
+        dateRadiation: '',
+        denomination: 'Ganymède',
+        dureePersonneMorale: 99,
+        greffe: 'Paris',
+        numGestion: '2020B02214',
+        numeroRCS: 'RCS Paris 880 878 145',
+      },
       beneficiaires: [],
       dirigeants: [
         {
@@ -36,6 +51,21 @@ describe('IMR XML parser', () => {
     const result = extractIMRFromXml(okXML, dummySiren);
 
     expect(result).toEqual({
+      identite: {
+        capital: '1 000 EUR (fixe)',
+        codeGreffe: '7501',
+        dateCessationActivite: '',
+        dateClotureExercice: '31 décembre',
+        dateDebutActiv: '23/01/2020',
+        dateGreffe: '2020-01-23',
+        dateImmatriculation: '23/01/2020',
+        dateRadiation: '',
+        denomination: 'Ganymède',
+        dureePersonneMorale: 99,
+        greffe: 'Paris',
+        numGestion: '2020B02214',
+        numeroRCS: 'RCS Paris 880 878 145',
+      },
       beneficiaires: [],
       dirigeants: [
         {

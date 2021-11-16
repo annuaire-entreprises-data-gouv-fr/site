@@ -1,11 +1,15 @@
 import { RNCSClientWrapper } from '.';
-import { IBeneficiaire, IDirigeant } from '../../models/dirigeants';
+import { IBeneficiaire, IDirigeant, IIdentite } from '../../models/dirigeants';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import routes from '../routes';
 import yauzl from 'yauzl';
 import { HttpNotFound } from '../exceptions';
 import { extractIMRFromXml } from './IMRParser';
 import { logWarningInSentry } from '../../utils/sentry';
+import {
+  IImmatriculation,
+  IImmatriculationRNCS,
+} from '../../models/immatriculation';
 
 export interface IRNCSResponse {
   fichier: {
@@ -15,12 +19,16 @@ export interface IRNCSResponse {
 }
 
 export interface IRNCSResponseDossier {
+  '@_code_greffe': string; //'7501',
+  '@_num_gestion': string; // '2020B02214',
+  '@_siren': string; // '880878145',
   representants: {
     representant: IRNCSRepresentantResponse | IRNCSRepresentantResponse[];
   };
   beneficiaires: {
     beneficiaire: IRNCSBeneficiaireResponse | IRNCSBeneficiaireResponse[];
   };
+  identite: IRNCSIdentiteResponse;
 }
 
 export interface IRNCSRepresentantResponse {
@@ -51,6 +59,31 @@ export interface IRNCSBeneficiaireResponse {
   date_integration: string; //20210416;
 }
 
+export interface IRNCSIdentiteResponse {
+  type_inscrip: string; // 'P';
+  libelle_evt: string; // 'Création';
+  date_greffe: number; // 20200123;
+  dat_immat: number; // 20200123;
+  dat_1ere_immat: string; // '23/01/2020';
+  dat_rad: string;
+  dat_cessat_activite: string;
+  sans_activ: string; // 'Non';
+  date_debut_activ: string; // '23/01/2020';
+  identite_PM: {
+    denomination: string; //'Ganymède',
+    sigle: string;
+    form_jur: string; //'Société par actions simplifiée',
+    assoc_unique: string; //'Oui',
+    activ_princip: string; //"La prestation de services informatiques , le conseil en informatique et services annexes , l'animation de formations informatiques , la création, la fourniture de tous supports de formation , la création et la commercialisation d'applications mobiles ou Web",
+    type_cap: string; //'F',
+    montant_cap: string; //1000,
+    devise_cap: string; //'EUR',
+    dat_cloture_exer: string; //'31 décembre',
+    ess_indic: string; //'Non',
+    duree_pm: string; //99
+  };
+}
+
 interface IZipFileAsBuffer {
   file: string;
   buffer: Buffer;
@@ -65,10 +98,17 @@ export const fetchRNCSIMR = async (siren: Siren) => {
 const mapToDomainObject = (
   xmlResponse: string,
   siren: Siren
-): { dirigeants: IDirigeant[]; beneficiaires: IBeneficiaire[] } => {
-  const { dirigeants, beneficiaires } = extractIMRFromXml(xmlResponse, siren);
+): {
+  dirigeants: IDirigeant[];
+  beneficiaires: IBeneficiaire[];
+  identite: IIdentite;
+} => {
+  const { dirigeants, beneficiaires, identite } = extractIMRFromXml(
+    xmlResponse,
+    siren
+  );
 
-  return { dirigeants, beneficiaires };
+  return { dirigeants, beneficiaires, identite };
 };
 
 const fetchIMRAsBuffer = async (siren: Siren) => {

@@ -1,11 +1,12 @@
 import { IImmatriculationRNM } from '../../models/immatriculation';
 import { Siren } from '../../utils/helpers/siren-and-siret';
+import { formatAdresse } from '../../utils/labels';
 import { httpGet } from '../../utils/network';
 import routes from '../routes';
 
 export interface IApiRNMResponse {
-  ent_id_num_gestion: string | null;
-  ent_id_siren: string | null;
+  ent_id_num_gestion: string;
+  ent_id_siren: string;
   ent_id_origine: string | null;
   ent_adr_numero_voie: string | null;
   ent_adr_indice_repetition: string | null;
@@ -27,6 +28,7 @@ export interface IApiRNMResponse {
   ent_act_non_sedentaire: string | null;
   ent_act_activite_artisanales_declarees: string | null;
   ent_act_denomination_sociale: string | null;
+  ent_act_sigle: string | null;
   ent_act_forme_juridique: string | null;
   ent_eff_salarie: string | null;
   ent_eff_apprenti: string | null;
@@ -69,14 +71,50 @@ const mapToDomainObject = (
   siren: Siren,
   apiRnmResponse: IApiRNMResponse
 ): IImmatriculationRNM => {
+  const {
+    ent_id_num_gestion,
+    ent_act_code_nafa_principal,
+    ent_act_activite_artisanales_declarees,
+    gest_label_forme_juridique,
+    gest_date_maj,
+    ent_act_date_immat_rm,
+    ent_act_date_debut_activite,
+    ent_act_date_radiation,
+    eirl_denomination,
+    ent_act_denomination_sociale,
+    ent_act_sigle,
+    ent_adr_numero_voie,
+    ent_adr_indice_repetition,
+    ent_adr_type_voie,
+    ent_adr_adresse,
+    ent_adr_adresse_complement,
+    ent_adr_code_postal,
+    ent_adr_commune,
+  } = apiRnmResponse;
+
+  const denomination =
+    (ent_act_denomination_sociale || eirl_denomination) +
+    (ent_act_sigle ? `(${ent_act_sigle})` : '');
+
   return {
     siren,
-    immatriculation: {
-      codeAPRM: apiRnmResponse.ent_act_code_nafa_principal,
-      activitésArtisanalesDéclarées:
-        apiRnmResponse.ent_act_activite_artisanales_declarees,
-      dirigeantQualification: apiRnmResponse.dir_qa_qualification,
-    },
+    gestionId: ent_id_num_gestion,
+    denomination,
+    codeAPRM: ent_act_code_nafa_principal || '',
+    activite: ent_act_activite_artisanales_declarees || '',
+    dateImmatriculation: ent_act_date_immat_rm || '',
+    dateRadiation: ent_act_date_radiation || '',
+    dateMiseAJour: gest_date_maj || '',
+    dateDebutActivite: ent_act_date_debut_activite || '',
+    libelleNatureJuridique: gest_label_forme_juridique || '',
+    adresse: formatAdresse(
+      ent_adr_numero_voie || '',
+      ent_adr_indice_repetition || '',
+      ent_adr_type_voie || '',
+      ent_adr_adresse + ' ' + ent_adr_adresse_complement,
+      ent_adr_code_postal || '',
+      ent_adr_commune || ''
+    ),
     downloadlink: routes.rnm + siren,
   };
 };

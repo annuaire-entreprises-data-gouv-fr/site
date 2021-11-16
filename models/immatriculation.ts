@@ -6,22 +6,27 @@ import { Siren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
 import { APINotRespondingFactory } from './api-not-responding';
+import { IIdentite } from './dirigeants';
 
 export interface IImmatriculation {
   downloadlink: string;
 }
-export interface IImmatriculationRNCS extends IImmatriculation {
+export interface IImmatriculationRNCS extends IImmatriculation, IIdentite {
   siren: Siren;
-  immatriculation: {};
 }
 
 export interface IImmatriculationRNM extends IImmatriculation {
   siren: Siren;
-  immatriculation: {
-    codeAPRM: string | null;
-    activitésArtisanalesDéclarées: string | null;
-    dirigeantQualification: string | null;
-  };
+  gestionId: string;
+  denomination: string;
+  codeAPRM: string;
+  activite: string;
+  dateImmatriculation: string;
+  dateMiseAJour: string;
+  dateDebutActivite: string;
+  libelleNatureJuridique: string;
+  dateRadiation: string;
+  adresse: string;
 }
 
 /**

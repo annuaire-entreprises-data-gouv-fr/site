@@ -1,20 +1,31 @@
 import React from 'react';
+import { IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
 import { IImmatriculationRNM } from '../../models/immatriculation';
+import {
+  capitalize,
+  formatDate,
+  formatIntFr,
+} from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
 import ButtonLink from '../button';
 import { download } from '../icon';
 import { Section } from '../section';
+import { TwoColumnTable } from '../table/simple';
 
 interface IProps {
   immatriculation: IImmatriculationRNM | IAPINotRespondingError;
+  uniteLegale: IUniteLegale;
 }
 
-const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
+const ImmatriculationRNM: React.FC<IProps> = ({
+  immatriculation,
+  uniteLegale,
+}) => {
   if (isAPINotResponding(immatriculation)) {
     if (immatriculation.errorType === 404) {
       return null;
@@ -22,15 +33,41 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
     return (
       <AdministrationNotResponding
         {...immatriculation}
-        title="Justificatif d’immatriculation"
+        title="Immatriculation au RNM"
       />
     );
   }
+
+  const data = [
+    ['Dénomination', capitalize(immatriculation.denomination)],
+    ['Siren', formatIntFr(immatriculation.siren)],
+    [
+      'Siège social',
+      <a key="siege" href={`/etablissement/${uniteLegale.siege.siret}`}>
+        → voir le détail du siège social
+      </a>,
+    ],
+    ['Code APRM', immatriculation.codeAPRM],
+    ['Numéro de gestion', immatriculation.gestionId],
+    ['Nature juridique', immatriculation.libelleNatureJuridique],
+    [
+      'Date d’immatriculation au RNM',
+      formatDate(immatriculation.dateImmatriculation),
+    ],
+    ['Date de début d’activité', formatDate(immatriculation.dateDebutActivite)],
+    ['Date de dernière mise à jour', formatDate(immatriculation.dateMiseAJour)],
+  ];
+
+  if (immatriculation.dateRadiation) {
+    data.push(['Date de radiation', formatDate(immatriculation.dateRadiation)]);
+  }
+
   return (
     <>
       {immatriculation.downloadlink && (
         <Section
-          title="Justificatif d’immatriculation au RNM"
+          id="rnm"
+          title="Immatriculation au RNM"
           source={EAdministration.CMAFRANCE}
         >
           <p>
@@ -39,10 +76,11 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
             entreprises artisanales enreigstrées auprès des Chambres des Métiers
             et de l’Artisanat (CMA France).
           </p>
+          <TwoColumnTable body={data} />
           <p>
             Pour accéder à l’ensemble des données contenues dans un extrait D1,
             vous pouvez télécharger le justificatif d’immatriculation. Si le
-            téléchargement échoue, vous pouvez accéder à la donnée en allant sur
+            téléchargement échoue, vous pouvez accéder aux données en allant sur
             le site de CMA France.
           </p>
           <div className="layout-center">

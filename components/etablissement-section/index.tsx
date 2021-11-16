@@ -1,7 +1,7 @@
 import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
 import { map, pin } from '../icon';
-import { formatDate, formatNumbersFr } from '../../utils/helpers/formatting';
+import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import ButtonLink from '../button';
 import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
@@ -25,7 +25,7 @@ const EtablissementSection: React.FC<IProps> = ({
   const data = [
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
-    ['N° TVA Intracommunautaire', formatNumbersFr(uniteLegale.numeroTva)],
+    ['N° TVA Intracommunautaire', formatIntFr(uniteLegale.numeroTva)],
     [
       'Activité principale de l’établissement (NAF/APE)',
       etablissement.libelleActivitePrincipale,

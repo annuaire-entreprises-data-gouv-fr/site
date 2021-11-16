@@ -1,5 +1,6 @@
 import { categoriesJuridiques } from './categories-juridiques';
 import { codesNaf } from './codes-NAF';
+import { codesGreffes } from './codes-greffes';
 import { codesEffectifs } from './codes-effectifs';
 import { codesVoies } from './codes-voie';
 import { capitalize } from '../helpers/formatting';
@@ -126,4 +127,9 @@ export const libelleFromeCodeCategorie = (
     return libelle;
   }
   return null;
+};
+
+export const libelleFromCodeGreffe = (codeGreffe: string) => {
+  //@ts-ignore
+  return codesGreffes[codeGreffe] || codeGreffe;
 };

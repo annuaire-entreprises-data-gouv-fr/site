@@ -1,11 +1,18 @@
 import parser from 'fast-xml-parser';
-import { IBeneficiaire, IDirigeant } from '../../models/dirigeants';
+import { IBeneficiaire, IDirigeant, IIdentite } from '../../models/dirigeants';
+import {
+  formatFloatFr,
+  formatIntFr,
+  formatYYYYMMDDString,
+} from '../../utils/helpers/formatting';
 import { Siren } from '../../utils/helpers/siren-and-siret';
+import { libelleFromCodeGreffe } from '../../utils/labels';
 import { logWarningInSentry } from '../../utils/sentry';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 
 import {
   IRNCSBeneficiaireResponse,
+  IRNCSIdentiteResponse,
   IRNCSRepresentantResponse,
   IRNCSResponse,
   IRNCSResponseDossier,
@@ -23,10 +30,12 @@ export const extractIMRFromXml = (responseAsXml: string, siren: Siren) => {
     const dossiers = extractDossiers(response, siren);
     const dirigeants = extractRepresentants(dossiers);
     const beneficiaires = extractBeneficiaires(dossiers);
+    const identite = extractIdentite(dossiers, siren);
 
     return {
       dirigeants,
       beneficiaires,
+      identite,
     };
   } catch (e) {
     if (e instanceof HttpNotFound) {
@@ -37,7 +46,10 @@ export const extractIMRFromXml = (responseAsXml: string, siren: Siren) => {
 };
 
 const parseXmlToJson = (xmlString: string): IRNCSResponse => {
-  const tObj = parser.getTraversalObj(xmlString, { arrayMode: false });
+  const tObj = parser.getTraversalObj(xmlString, {
+    arrayMode: false,
+    ignoreAttributes: false,
+  });
   return parser.convertToJson(tObj, { arrayMode: false });
 };
 
@@ -161,5 +173,71 @@ const mapToDomainBeneficiaires = (
     prenoms: prenoms || '',
     dateNaissance: (date_naissance || '').toString(),
     nationalite: nationalite || '',
+  };
+};
+
+//==============
+// Identite / Immatriculation
+//==============
+
+const extractIdentite = (dossiers: IRNCSResponseDossier[], siren: string) => {
+  if (dossiers.filter((d) => d.identite).length > 1) {
+    logWarningInSentry('Found several identite in IMR', { siren });
+  }
+
+  const dossier = dossiers[0];
+  return mapToDomainIdentite(dossier.identite, dossier);
+};
+
+const mapToDomainIdentite = (
+  identite: IRNCSIdentiteResponse,
+  dossier: IRNCSResponseDossier
+): IIdentite => {
+  const {
+    date_greffe,
+    dat_immat,
+    date_debut_activ,
+    dat_1ere_immat,
+    identite_PM,
+    dat_rad,
+    dat_cessat_activite,
+  } = identite;
+
+  const {
+    denomination,
+    sigle,
+    type_cap,
+    montant_cap,
+    devise_cap,
+    duree_pm,
+    dat_cloture_exer,
+  } = identite_PM;
+
+  const capital = `${formatFloatFr(montant_cap)} ${devise_cap} (${
+    type_cap === 'F' ? 'fixe' : 'variable'
+  })`;
+  const denominationComplete = denomination + (sigle ? `(${sigle})` : '');
+  const codeGreffe = dossier['@_code_greffe'];
+  const greffe = libelleFromCodeGreffe(codeGreffe);
+  const dateImmatriculation = dat_1ere_immat
+    ? dat_1ere_immat
+    : dat_immat
+    ? formatYYYYMMDDString(dat_immat.toString())
+    : '';
+
+  return {
+    denomination: denominationComplete,
+    greffe,
+    codeGreffe, //'7501',
+    numeroRCS: `RCS ${greffe} ${formatIntFr(dossier['@_siren'])}`,
+    numGestion: dossier['@_num_gestion'], // '2020B02214',
+    dateImmatriculation,
+    dateDebutActiv: date_debut_activ || '',
+    dureePersonneMorale: duree_pm || '',
+    dateClotureExercice: dat_cloture_exer || '',
+    dateGreffe: date_greffe ? formatYYYYMMDDString(date_greffe.toString()) : '', // YYYYMMDD
+    capital,
+    dateRadiation: dat_rad ? formatYYYYMMDDString(dat_rad.toString()) : '', // YYYYMMDD
+    dateCessationActivite: dat_cessat_activite || '',
   };
 };

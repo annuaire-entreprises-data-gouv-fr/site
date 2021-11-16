@@ -9,7 +9,7 @@ import {
   isAPINotResponding,
 } from '../../models/api-not-responding';
 import AdministrationNotResponding from '../administration-not-responding';
-import { formatNumbersFr } from '../../utils/helpers/formatting';
+import { formatIntFr } from '../../utils/helpers/formatting';
 import routes from '../../clients/routes';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { INPI } from '../administrations';
@@ -67,7 +67,7 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
           'Siren',
           //eslint-disable-next-line
           <a href={`/entreprise/${dirigeant.siren}`}>
-            {formatNumbersFr(dirigeant.siren)}
+            {formatIntFr(dirigeant.siren)}
           </a>,
         ]);
       }
