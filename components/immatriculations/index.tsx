@@ -1,32 +1,23 @@
 import React from 'react';
-import { IUniteLegale } from '../../models';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '../../models/api-not-responding';
-import {
-  IImmatriculationRNCS,
-  IImmatriculationRNM,
-} from '../../models/immatriculation';
+import { isAPINotResponding } from '../../models/api-not-responding';
+import { IJustificatifs } from '../../models/justificatifs';
 import ImmatriculationNotFound from '../introuvable/immatriculation';
+import ImmatriculationJOAFE from './joafe';
 import ImmatriculationRNCS from './rncs';
 import ImmatriculationRNM from './rnm';
 
-interface IProps {
-  immatriculationRNM: IImmatriculationRNM | IAPINotRespondingError;
-  immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
-  uniteLegale: IUniteLegale;
-}
-
-const Immatriculations: React.FC<IProps> = ({
+const Immatriculations: React.FC<IJustificatifs> = ({
   immatriculationRNM,
   immatriculationRNCS,
+  immatriculationJOAFE,
   uniteLegale,
 }) => {
   const noImmatriculation =
     isAPINotResponding(immatriculationRNM) &&
+    isAPINotResponding(immatriculationJOAFE) &&
     isAPINotResponding(immatriculationRNCS) &&
     immatriculationRNCS.errorType === 404 &&
+    immatriculationJOAFE.errorType === 404 &&
     immatriculationRNM.errorType === 404;
 
   return (
@@ -35,6 +26,10 @@ const Immatriculations: React.FC<IProps> = ({
         <ImmatriculationNotFound />
       ) : (
         <>
+          <ImmatriculationJOAFE
+            immatriculation={immatriculationJOAFE}
+            uniteLegale={uniteLegale}
+          />
           <ImmatriculationRNM
             immatriculation={immatriculationRNM}
             uniteLegale={uniteLegale}

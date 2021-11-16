@@ -14,6 +14,7 @@ import ButtonLink from '../button';
 import { DILA } from '../administrations';
 import routes from '../../clients/routes';
 import { IUniteLegale } from '../../models';
+import { formatDate } from '../../utils/helpers/formatting';
 
 const AnnoncesJOSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -65,7 +66,7 @@ const AnnoncesJOSection: React.FC<{
             ]}
             body={jo.annonces.map((annonce) => [
               /*eslint-disable*/
-              <b>{annonce.datePublication}</b>,
+              <b>{formatDate(annonce.datePublication)}</b>,
               <Tag>{annonce.numeroParution}</Tag>,
               <div className="annonce">
                 <b>{annonce.typeAvisLibelle}</b>

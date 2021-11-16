@@ -43,7 +43,7 @@ const fetchAnnoncesJO = async (idRna: string): Promise<IAnnoncesJO> => {
 const mapToDomainObject = (annonce: IJournalOfficielAssociationRecord) => {
   return {
     typeAvisLibelle: annonce.typeavis || '',
-    datePublication: formatDate(annonce.dateparution) || '',
+    datePublication: annonce.dateparution || '',
     numeroParution: annonce.id,
     details: annonce.association_type_libelle,
     path: `${routes.journalOfficielAssociations.site.justificatif}${annonce.id}`,

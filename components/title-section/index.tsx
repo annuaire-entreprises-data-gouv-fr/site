@@ -39,7 +39,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         href={`/justificatif/${siren}`}
         rel="nofollow"
       >
-        Justificatifs d’immatriculation
+        Justificatif d’immatriculation
       </a>
       <a
         className={`${ficheType === FICHE.DIRIGEANTS && 'active'}`}

@@ -1,9 +1,15 @@
 import { IUniteLegale } from '.';
 import { verifySiren } from '../utils/helpers/siren-and-siret';
-import { IAPINotRespondingError } from './api-not-responding';
+import { EAdministration } from './administration';
+import {
+  APINotRespondingFactory,
+  IAPINotRespondingError,
+} from './api-not-responding';
 import {
   IImmatriculationRNM,
   IImmatriculationRNCS,
+  IImmatriculationJOAFE,
+  getImmatriculationJOAFE,
   getImmatriculationRNM,
   getImmatriculationRNCS,
 } from './immatriculation';
@@ -13,6 +19,7 @@ export interface IJustificatifs {
   uniteLegale: IUniteLegale;
   immatriculationRNM: IImmatriculationRNM | IAPINotRespondingError;
   immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
+  immatriculationJOAFE: IImmatriculationJOAFE | IAPINotRespondingError;
 }
 
 const getJustificatifs = async (slug: string) => {
@@ -25,10 +32,16 @@ const getJustificatifs = async (slug: string) => {
       getImmatriculationRNCS(siren),
     ]);
 
+  const immatriculationJOAFE = await getImmatriculationJOAFE(
+    siren,
+    uniteLegale.association?.id || null
+  );
+
   return {
     uniteLegale,
     immatriculationRNM,
     immatriculationRNCS,
+    immatriculationJOAFE,
   };
 };
 

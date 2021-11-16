@@ -5,7 +5,7 @@ import { Section } from '../section';
 
 const ImmatriculationNotFound: React.FC = () => {
   return (
-    <Section title="justificatif d'immatriculation introuvable">
+    <Section title="Pas de justificatif d'immatriculation">
       <div>
         <p>
           Nous n’avons <b>pas trouvé de justificatif d’immatriculation</b> chez
@@ -13,27 +13,34 @@ const ImmatriculationNotFound: React.FC = () => {
         </p>
         <ul>
           <li>
-            Les <b>entreprises individuelles et les auto-entreprises</b>, ne
-            sont pas obligées d’être immatriculées. Il est donc possible que
-            vous ne trouviez pas de fiche d’immatriculation pour une entreprise
-            de ce type.
+            Si l’entité est une{' '}
+            <b>entreprise individuelle ou une auto-entreprise</b>, elle n’est
+            pas nécessairement immatriculée au RNM ou RNCS. Dans ce cas{' '}
+            <a href="#insee">l’avis d’inscription à l’INSEE</a> sert à prouver
+            l’existence de l’entreprise
           </li>
           <li>
-            Les <b>administrations publiques</b> peuvent également ne pas être
-            immatriculées.
+            Si l’entité est une association,{' '}
+            <a href="https://www.journal-officiel.gouv.fr/associations/">
+              contactez le Journal Officiel des Associations
+            </a>
           </li>
           <li>
-            Si l’entreprise est une entreprise artisanale,{' '}
+            Si l’entité est une entreprise artisanale,{' '}
             <a href="https://rnm.artisanat.fr/">
               contactez les Chambres des Métiers de l‘Artisanat
             </a>
           </li>
           <li>
-            Si l’entreprise n‘est pas une entreprise artisanale,{' '}
+            Si l’entité est une entreprise commerciale,{' '}
             <a href="http://data.inpi.fr/">
               contactez l‘INPI qui centralise les données des Greffes des
               tribunaux de commerce.
             </a>
+          </li>
+          <li>
+            Les <b>administrations publiques</b> n’ont pas de justificatif
+            d’immatriculation.
           </li>
         </ul>
         <p>Consultez notre FAQ pour en savoir plus.</p>

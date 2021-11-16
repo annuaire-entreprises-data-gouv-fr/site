@@ -6,7 +6,15 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
   uniteLegale,
   immatriculationRNM,
   immatriculationRNCS,
+  immatriculationJOAFE,
 }) => {
+  let joafe = '';
+  if (immatriculationJOAFE && !isAPINotResponding(immatriculationJOAFE)) {
+    joafe = `Enregistrée au Journal Officiel des Associations (JOAFE), depuis le ${formatDateLong(
+      immatriculationJOAFE.datePublication
+    )}`;
+  }
+
   let rnm = '';
   if (immatriculationRNM && !isAPINotResponding(immatriculationRNM)) {
     if (immatriculationRNM.dateRadiation) {
@@ -45,6 +53,11 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
     <>
       Cette entité est :
       <ul>
+        {joafe && (
+          <li>
+            <a href="#joafe">{joafe}</a>
+          </li>
+        )}
         {rnm && (
           <li>
             <a href="#rnm">{rnm}</a>

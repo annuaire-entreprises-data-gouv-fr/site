@@ -14,6 +14,7 @@ import ButtonLink from '../button';
 import { DILA } from '../administrations';
 import routes from '../../clients/routes';
 import { IUniteLegale } from '../../models';
+import { formatDate } from '../../utils/helpers/formatting';
 
 const AnnoncesBodaccSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -63,7 +64,7 @@ const AnnoncesBodaccSection: React.FC<{
             head={['Publication', 'N°', 'Details', 'Lien']}
             body={bodacc.annonces.map((annonce) => [
               /*eslint-disable*/
-              <b>{annonce.datePublication}</b>,
+              <b>{formatDate(annonce.datePublication)}</b>,
               <Tag>n° {annonce.numeroAnnonce}</Tag>,
               <div className="annonce">
                 <b>{annonce.titre}</b>
