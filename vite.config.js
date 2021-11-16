@@ -5,9 +5,7 @@ const autoprefixer = require('autoprefixer');
 const purgeConfig = {
   content: ['./**/*.tsx', './**/*.html'],
   css: ['frontend/css/dsfr.min.css'],
-  safelist: ['input:focus-visible'],
   fontFace: false, // otherwise, it will remove dsfr icon
-  variables: true,
 };
 
 const purgecss = require('@fullhuman/postcss-purgecss')(purgeConfig);
