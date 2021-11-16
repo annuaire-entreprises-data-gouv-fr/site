@@ -2,7 +2,7 @@ import { IUniteLegale } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import { fetchRNCSIMR } from '../clients/rncs/IMR';
 import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
-import logErrorInSentry, { logWarningInSentry } from '../utils/sentry';
+import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
 import {
   IAPINotRespondingError,
@@ -24,6 +24,21 @@ export interface IBeneficiaire {
   prenoms: string;
   dateNaissance: string;
   nationalite: string;
+}
+export interface IIdentite {
+  denomination: string;
+  codeGreffe: string;
+  greffe: string;
+  numeroRCS: string;
+  numGestion: string;
+  dateGreffe: string;
+  dateImmatriculation: string;
+  dateDebutActiv: string;
+  dureePersonneMorale: string;
+  dateClotureExercice: string;
+  dateRadiation: string;
+  dateCessationActivite: string;
+  capital: string;
 }
 
 export interface IPersonneMorale {

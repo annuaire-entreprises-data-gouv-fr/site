@@ -93,8 +93,8 @@ const mapToDomainObject = (
   } = apiRnmResponse;
 
   const denomination =
-    ent_act_denomination_sociale ||
-    eirl_denomination + (ent_act_sigle ? `(${ent_act_sigle})` : '');
+    (ent_act_denomination_sociale || eirl_denomination) +
+    (ent_act_sigle ? `(${ent_act_sigle})` : '');
 
   return {
     siren,
@@ -102,7 +102,7 @@ const mapToDomainObject = (
     denomination,
     codeAPRM: ent_act_code_nafa_principal || '',
     activite: ent_act_activite_artisanales_declarees || '',
-    dateImmatricutation: ent_act_date_immat_rm || '',
+    dateImmatriculation: ent_act_date_immat_rm || '',
     dateRadiation: ent_act_date_radiation || '',
     dateMiseAJour: gest_date_maj || '',
     dateDebutActivite: ent_act_date_debut_activite || '',

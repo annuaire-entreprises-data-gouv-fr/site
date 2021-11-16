@@ -1,37 +1,29 @@
-import { RNCSClientWrapper } from '.';
+import { fetchRNCSIMR } from '.';
+import { IIdentite } from '../../models/dirigeants';
 import { IImmatriculationRNCS } from '../../models/immatriculation';
 import { Siren } from '../../utils/helpers/siren-and-siret';
-import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
-
-interface IApiRNCSResponse {}
 
 /**
  * Checks if justificatifs exists in RNCS
  * @param siren
  * @returns
  */
-export const fetchRNCSImmatriculation = async (siren: Siren) => {
-  const response = await RNCSClientWrapper(
-    routes.rncs.api.imr.find + siren,
-    {}
-  );
+export const fetchRNCSImmatriculation = async (
+  siren: Siren
+): Promise<IImmatriculationRNCS> => {
+  const { identite } = await fetchRNCSIMR(siren);
 
-  const result = response.data;
-  if (result.length === 0) {
-    throw new HttpNotFound(404, `Siren ${siren} not found in RNCS`);
-  }
-
-  return mapToDomainObject(siren, result);
+  return mapToDomainObject(siren, identite);
 };
 
 const mapToDomainObject = (
   siren: Siren,
-  apiRNCSResponse: IApiRNCSResponse
+  apiRNCSResponse: IIdentite
 ): IImmatriculationRNCS => {
   return {
+    ...apiRNCSResponse,
     siren,
-    immatriculation: apiRNCSResponse,
     downloadlink: routes.rncs.portail.entreprise + siren,
   };
 };

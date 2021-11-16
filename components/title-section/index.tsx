@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { capitalize, formatNumbersFr } from '../../utils/helpers/formatting';
+import { capitalize, formatIntFr } from '../../utils/helpers/formatting';
 import { Tag } from '../tag';
 import IsActiveTag from '../is-active-tag';
 import { UnitLegaleDescription } from '../unite-legale-description';
@@ -39,7 +39,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         href={`/justificatif/${siren}`}
         rel="nofollow"
       >
-        Justificatifs
+        Justificatifs d’immatriculation
       </a>
       <a
         className={`${ficheType === FICHE.DIRIGEANTS && 'active'}`}
@@ -144,11 +144,11 @@ const Title: React.FC<IProps> = ({
       {uniteLegale.oldSiren !== uniteLegale.siren && (
         <Warning full>
           Cette unité est inscrite en double à l’INSEE :{' '}
-          {formatNumbersFr(uniteLegale.oldSiren)} et{' '}
-          {formatNumbersFr(uniteLegale.siren)}. Pour voir les informations
+          {formatIntFr(uniteLegale.oldSiren)} et{' '}
+          {formatIntFr(uniteLegale.siren)}. Pour voir les informations
           complètes, consultez la page{' '}
           <a href={`/entreprise/${uniteLegale.siren}`}>
-            {formatNumbersFr(uniteLegale.siren)}
+            {formatIntFr(uniteLegale.siren)}
           </a>
           .
         </Warning>
@@ -159,7 +159,7 @@ const Title: React.FC<IProps> = ({
         </a>
       </h1>
       <div>
-        <span>unité légale ‣ {formatNumbersFr(uniteLegale.siren)}</span>
+        <span>unité légale ‣ {formatIntFr(uniteLegale.siren)}</span>
         <span>
           {!uniteLegale.estDiffusible ? (
             <>

@@ -2,7 +2,7 @@ import React from 'react';
 import { IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
 import { isTwoMonthOld } from '../../utils/helpers/checks';
-import { formatDate, formatNumbersFr } from '../../utils/helpers/formatting';
+import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import Warning from '../alerts/warning';
 import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
@@ -18,7 +18,7 @@ const AssociationSection: React.FC<{
   }
 
   const data = [
-    ['N° RNA (identifiant d’association)', formatNumbersFr(association.id)],
+    ['N° RNA (identifiant d’association)', formatIntFr(association.id)],
     ['Nom', association.nomComplet],
     ['Objet', association.objet],
     ['Adresse', association.adresse],

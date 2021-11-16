@@ -1,11 +1,16 @@
 import React from 'react';
+import { IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
 import { IImmatriculationRNM } from '../../models/immatriculation';
-import { capitalize, formatDate } from '../../utils/helpers/formatting';
+import {
+  capitalize,
+  formatDate,
+  formatIntFr,
+} from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
 import ButtonLink from '../button';
 import { download } from '../icon';
@@ -14,9 +19,13 @@ import { TwoColumnTable } from '../table/simple';
 
 interface IProps {
   immatriculation: IImmatriculationRNM | IAPINotRespondingError;
+  uniteLegale: IUniteLegale;
 }
 
-const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
+const ImmatriculationRNM: React.FC<IProps> = ({
+  immatriculation,
+  uniteLegale,
+}) => {
   if (isAPINotResponding(immatriculation)) {
     if (immatriculation.errorType === 404) {
       return null;
@@ -24,20 +33,26 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
     return (
       <AdministrationNotResponding
         {...immatriculation}
-        title="Justificatif d’immatriculation"
+        title="Immatriculation au RNM"
       />
     );
   }
 
   const data = [
     ['Dénomination', capitalize(immatriculation.denomination)],
+    ['Siren', formatIntFr(immatriculation.siren)],
+    [
+      'Siège social',
+      <a key="siege" href={`/etablissement/${uniteLegale.siege.siret}`}>
+        → voir le détail du siège social
+      </a>,
+    ],
     ['Code APRM', immatriculation.codeAPRM],
     ['Numéro de gestion', immatriculation.gestionId],
-    ['Activité déclarée au RNM', immatriculation.activite],
     ['Nature juridique', immatriculation.libelleNatureJuridique],
     [
       'Date d’immatriculation au RNM',
-      formatDate(immatriculation.dateImmatricutation),
+      formatDate(immatriculation.dateImmatriculation),
     ],
     ['Date de début d’activité', formatDate(immatriculation.dateDebutActivite)],
     ['Date de dernière mise à jour', formatDate(immatriculation.dateMiseAJour)],
@@ -51,7 +66,8 @@ const ImmatriculationRNM: React.FC<IProps> = ({ immatriculation }) => {
     <>
       {immatriculation.downloadlink && (
         <Section
-          title="Justificatif d’immatriculation au RNM"
+          id="rnm"
+          title="Immatriculation au RNM"
           source={EAdministration.CMAFRANCE}
         >
           <p>

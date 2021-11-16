@@ -1,4 +1,5 @@
 import React from 'react';
+import { IUniteLegale } from '../../models';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -14,11 +15,13 @@ import ImmatriculationRNM from './rnm';
 interface IProps {
   immatriculationRNM: IImmatriculationRNM | IAPINotRespondingError;
   immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
+  uniteLegale: IUniteLegale;
 }
 
 const Immatriculations: React.FC<IProps> = ({
   immatriculationRNM,
   immatriculationRNCS,
+  uniteLegale,
 }) => {
   const noImmatriculation =
     isAPINotResponding(immatriculationRNM) &&
@@ -32,8 +35,14 @@ const Immatriculations: React.FC<IProps> = ({
         <ImmatriculationNotFound />
       ) : (
         <>
-          <ImmatriculationRNCS immatriculation={immatriculationRNCS} />
-          <ImmatriculationRNM immatriculation={immatriculationRNM} />
+          <ImmatriculationRNM
+            immatriculation={immatriculationRNM}
+            uniteLegale={uniteLegale}
+          />
+          <ImmatriculationRNCS
+            immatriculation={immatriculationRNCS}
+            uniteLegale={uniteLegale}
+          />
         </>
       )}
     </>

@@ -31,7 +31,11 @@ const AvisSituationNonDiffusible = () => (
 );
 
 const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
-  <Section title="Avis de situation INSEE" source={EAdministration.INSEE}>
+  <Section
+    id="insee"
+    title="Inscription à l’INSEE"
+    source={EAdministration.INSEE}
+  >
     {uniteLegale.estDiffusible ? (
       <>
         <div className="description">

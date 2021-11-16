@@ -4,7 +4,7 @@ import { EAdministration } from '../../models/administration';
 import {
   capitalize,
   formatDate,
-  formatNumbersFr,
+  formatIntFr,
 } from '../../utils/helpers/formatting';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import HorizontalSeparator from '../horizontal-separator';
@@ -16,14 +16,14 @@ const UniteLegaleSection: React.FC<{
 }> = ({ uniteLegale }) => {
   const data = [
     ['Dénomination', capitalize(uniteLegale.nomComplet)],
-    ['SIREN', formatNumbersFr(uniteLegale.siren)],
+    ['SIREN', formatIntFr(uniteLegale.siren)],
     [
       'SIRET du siège social',
       uniteLegale.siege &&
         uniteLegale.siege.siret &&
         formatSiret((uniteLegale.siege || {}).siret),
     ],
-    ['N° TVA Intracommunautaire', formatNumbersFr(uniteLegale.numeroTva)],
+    ['N° TVA Intracommunautaire', formatIntFr(uniteLegale.numeroTva)],
     [
       'Activité principale du siège social (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,

@@ -8,6 +8,7 @@ import Immatriculations from '../../components/immatriculations';
 import AvisSituationSection from '../../components/avis-de-situation-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import { isCaptchaCookieValid } from '../../utils/captcha';
+import ImmatriculationSummary from '../../components/immatriculations/summary';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -21,9 +22,15 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
   >
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.JUSTIFICATIFS} />
+      <ImmatriculationSummary
+        immatriculationRNM={immatriculationRNM}
+        immatriculationRNCS={immatriculationRNCS}
+        uniteLegale={uniteLegale}
+      />
       <Immatriculations
         immatriculationRNM={immatriculationRNM}
         immatriculationRNCS={immatriculationRNCS}
+        uniteLegale={uniteLegale}
       />
       <AvisSituationSection uniteLegale={uniteLegale} />
     </div>

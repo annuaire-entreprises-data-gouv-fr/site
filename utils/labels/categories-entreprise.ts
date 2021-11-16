@@ -1,4 +1,4 @@
-export const categoriesEntreprise = (code) => {
+export const categoriesEntreprise = (code: string) => {
   if (code === 'GE') {
     return 'Grande Entreprise';
   } else if (code === 'PME') {

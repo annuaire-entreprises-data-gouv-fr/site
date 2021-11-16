@@ -26,11 +26,36 @@ export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-export const formatNumbersFr = (numberAsString = '') => {
+/**
+ * Format a YYYYMMDD date string
+ * @param date
+ * @returns
+ */
+export const formatYYYYMMDDString = (unformatted = '') => {
   try {
-    return numberAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
+    return `${unformatted.substr(0, 4)}-${unformatted.substr(
+      4,
+      2
+    )}-${unformatted.substr(6)}`;
+  } catch (e) {
+    return unformatted;
+  }
+};
+
+export const formatIntFr = (intAsString = '') => {
+  try {
+    return intAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
+  } catch (e) {
+    return intAsString;
+  }
+};
+
+export const formatFloatFr = (floatAsString = '') => {
+  try {
+    const floatAsNumber = parseFloat(floatAsString);
+    return new Intl.NumberFormat('fr-FR').format(floatAsNumber);
   } catch {
-    return numberAsString;
+    return floatAsString;
   }
 };
 

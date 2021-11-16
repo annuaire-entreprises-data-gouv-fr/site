@@ -93,7 +93,6 @@ class DevDocument extends Document {
 
 class StaticDocument extends Document {
   render() {
-    console.log(manifest);
     return (
       <Html lang="fr">
         <CustomHead>

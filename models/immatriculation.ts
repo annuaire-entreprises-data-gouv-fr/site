@@ -6,11 +6,12 @@ import { Siren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
 import { APINotRespondingFactory } from './api-not-responding';
+import { IIdentite } from './dirigeants';
 
 export interface IImmatriculation {
   downloadlink: string;
 }
-export interface IImmatriculationRNCS extends IImmatriculation {
+export interface IImmatriculationRNCS extends IImmatriculation, IIdentite {
   siren: Siren;
 }
 
@@ -20,7 +21,7 @@ export interface IImmatriculationRNM extends IImmatriculation {
   denomination: string;
   codeAPRM: string;
   activite: string;
-  dateImmatricutation: string;
+  dateImmatriculation: string;
   dateMiseAJour: string;
   dateDebutActivite: string;
   libelleNatureJuridique: string;
