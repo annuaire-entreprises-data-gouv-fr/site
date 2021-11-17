@@ -26,22 +26,6 @@ export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-/**
- * Format a YYYYMMDD date string
- * @param date
- * @returns
- */
-export const formatYYYYMMDDString = (unformatted = '') => {
-  try {
-    return `${unformatted.substr(0, 4)}-${unformatted.substr(
-      4,
-      2
-    )}-${unformatted.substr(6)}`;
-  } catch (e) {
-    return unformatted;
-  }
-};
-
 export const formatIntFr = (intAsString = '') => {
   try {
     return intAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
