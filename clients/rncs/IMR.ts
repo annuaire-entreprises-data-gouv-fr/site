@@ -69,6 +69,22 @@ export interface IRNCSIdentiteResponse {
   dat_cessat_activite: string;
   sans_activ: string; // 'Non';
   date_debut_activ: string; // '23/01/2020';
+  identite_PP: {
+    nom_patronymique: string;
+    prenom: string;
+    dat_naiss: string;
+    lieu_naiss: string;
+    pays_naiss: string;
+    nationalite: string;
+    adr_siege_1: string;
+    adr_siege_cp: number;
+    adr_siege_ville: string;
+    adr_siege_code_commune: number;
+    adr_siege_pays: string;
+    activ_forain_indic: string;
+    eirl_indic: string;
+    eirl_dap_indic: string;
+  };
   identite_PM: {
     denomination: string; //'Ganymède',
     sigle: string;

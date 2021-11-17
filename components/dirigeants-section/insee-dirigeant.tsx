@@ -30,6 +30,7 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
   return (
     <>
       <Section
+        id="insee-dirigeant"
         title={'Les informations sur le dirigeant'}
         source={EAdministration.INSEE}
       >

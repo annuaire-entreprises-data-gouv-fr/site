@@ -6,27 +6,21 @@ import Title, { FICHE } from '../../components/title-section';
 
 import { NonDiffusibleSection } from '../../components/non-diffusible';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
-import DirigeantsEntrepriseIndividuelleSection from '../../components/dirigeants-section/entreprise-individuelle';
 import {
   getDirigeantsWithUniteLegaleFromSlug,
   IDirigeants,
 } from '../../models/dirigeants';
-import DirigeantsSection from '../../components/dirigeants-section';
-import BeneficiairesSection from '../../components/beneficiaires-section';
-import { INPI, INSEE } from '../../components/administrations';
-import { isAPINotResponding } from '../../models/api-not-responding';
+import DirigeantsEntrepriseIndividuelleSection from '../../components/dirigeants-section/insee-dirigeant';
+import DirigeantsSection from '../../components/dirigeants-section/rncs-dirigeants';
+import BeneficiairesSection from '../../components/dirigeants-section/beneficiaires';
 import { isCaptchaCookieValid } from '../../utils/captcha';
+import DirigeantSummary from '../../components/dirigeants-section/summary';
 
 const DirigeantsPage: React.FC<IDirigeants> = ({
   uniteLegale,
   dirigeants,
   beneficiaires,
 }) => {
-  const hasNoDirigeant =
-    !uniteLegale.dirigeant &&
-    isAPINotResponding(dirigeants) &&
-    dirigeants.errorType === 404;
-
   return (
     <Page
       small={true}
@@ -36,38 +30,38 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
     >
       <div className="content-container">
         <Title uniteLegale={uniteLegale} ficheType={FICHE.DIRIGEANTS} />
-        {uniteLegale.estDiffusible ? (
-          <>
-            {hasNoDirigeant && (
+        <>
+          <DirigeantSummary
+            uniteLegale={uniteLegale}
+            dirigeants={dirigeants}
+            beneficiaires={beneficiaires}
+          />
+          {uniteLegale.estDiffusible ? (
+            <>
+              {uniteLegale.estEntrepreneurIndividuel &&
+                uniteLegale.dirigeant && (
+                  <DirigeantsEntrepriseIndividuelleSection
+                    dirigeant={uniteLegale.dirigeant}
+                  />
+                )}
+            </>
+          ) : (
+            <>
               <p>
-                Cette entreprise n’a pas de dirigeant enregistré, que ce soit
-                auprès de l’
-                <INSEE /> ou auprès de l’
-                <INPI />.
+                Cette entité est <b>non-diffusible.</b>
               </p>
-            )}
-            {uniteLegale.estEntrepreneurIndividuel && uniteLegale.dirigeant && (
-              <DirigeantsEntrepriseIndividuelleSection
-                dirigeant={uniteLegale.dirigeant}
-              />
-            )}
-            <DirigeantsSection
-              dirigeants={dirigeants}
-              siren={uniteLegale.siren}
-            />
-            <BeneficiairesSection
-              beneficiaires={beneficiaires}
-              siren={uniteLegale.siren}
-            />
-          </>
-        ) : (
-          <>
-            <p>
-              Cette entité est <b>non-diffusible.</b>
-            </p>
-            <NonDiffusibleSection />
-          </>
-        )}
+              <NonDiffusibleSection />
+            </>
+          )}
+          <DirigeantsSection
+            dirigeants={dirigeants}
+            siren={uniteLegale.siren}
+          />
+          <BeneficiairesSection
+            beneficiaires={beneficiaires}
+            siren={uniteLegale.siren}
+          />
+        </>
       </div>
       <style jsx>{`
         .content-container {

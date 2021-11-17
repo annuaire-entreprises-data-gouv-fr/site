@@ -4,7 +4,10 @@ import { HttpNotFound, HttpServerError } from '../exceptions';
 
 import { IRNCSResponse, IRNCSResponseDossier } from './IMR';
 import { extractBeneficiaires } from './parsers/beneficiaires';
-import { extractRepresentants } from './parsers/dirigeants';
+import {
+  extractDirigeantFromIdentite,
+  extractRepresentants,
+} from './parsers/dirigeants';
 import { extractIdentite } from './parsers/identite';
 
 export class InvalidFormatError extends HttpServerError {
@@ -16,10 +19,14 @@ export class InvalidFormatError extends HttpServerError {
 export const extractIMRFromXml = (responseAsXml: string, siren: Siren) => {
   try {
     const response = parseXmlToJson(responseAsXml);
-    const dossiers = extractDossiers(response, siren);
+    const dossiers = extractDossiers(response);
     const dirigeants = extractRepresentants(dossiers);
     const beneficiaires = extractBeneficiaires(dossiers);
     const identite = extractIdentite(dossiers, siren);
+
+    if (dirigeants.length === 0 && !identite.isPersonneMorale) {
+      dirigeants.push(extractDirigeantFromIdentite(dossiers, siren));
+    }
 
     return {
       dirigeants,
@@ -42,17 +49,14 @@ const parseXmlToJson = (xmlString: string): IRNCSResponse => {
   return parser.convertToJson(tObj, { arrayMode: false });
 };
 
-const extractDossiers = (
-  response: IRNCSResponse,
-  siren: Siren
-): IRNCSResponseDossier[] => {
+const extractDossiers = (response: IRNCSResponse): IRNCSResponseDossier[] => {
   const isDossierArray = Array.isArray(response.fichier.dossier);
   const dossier = (
     isDossierArray ? response.fichier.dossier : [response.fichier.dossier]
   ) as IRNCSResponseDossier[];
 
-  let dossiersWithRepresentants = dossier.filter(
-    (element) => element.representants !== undefined
+  let dossiersWithRepresentants = dossier.sort((element) =>
+    element.representants !== undefined ? -1 : 1
   );
 
   return dossiersWithRepresentants;

@@ -90,10 +90,16 @@ const mapToDomainObject = (
     ent_adr_adresse_complement,
     ent_adr_code_postal,
     ent_adr_commune,
+    dir_id_prenom_1,
+    dir_id_nom_usage,
   } = apiRnmResponse;
 
+  const prenomEtNom =
+    dir_id_prenom_1 || dir_id_nom_usage
+      ? `${dir_id_prenom_1} ${dir_id_nom_usage}`
+      : '';
   const denomination =
-    (ent_act_denomination_sociale || eirl_denomination) +
+    (ent_act_denomination_sociale || eirl_denomination || prenomEtNom) +
     (ent_act_sigle ? `(${ent_act_sigle})` : '');
 
   return {

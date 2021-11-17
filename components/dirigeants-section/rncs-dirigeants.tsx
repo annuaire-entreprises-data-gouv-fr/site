@@ -1,5 +1,4 @@
 import React from 'react';
-import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { EAdministration } from '../../models/administration';
@@ -89,6 +88,7 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
   return (
     <>
       <Section
+        id="rncs-dirigeants"
         title={`Les informations sur le${plural} dirigeant${plural}`}
         source={EAdministration.INPI}
       >

@@ -34,10 +34,11 @@ export interface IIdentite {
   dateGreffe: string;
   dateImmatriculation: string;
   dateDebutActiv: string;
-  dureePersonneMorale: string;
-  dateClotureExercice: string;
   dateRadiation: string;
   dateCessationActivite: string;
+  isPersonneMorale: boolean;
+  dateClotureExercice: string;
+  dureePersonneMorale: string;
   capital: string;
 }
 

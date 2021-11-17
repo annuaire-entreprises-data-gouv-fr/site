@@ -51,21 +51,26 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
         → voir le détail du siège social
       </a>,
     ],
-    ['Capital', immatriculation.capital],
-    [
-      'Date de clôture de l’exercice comptable',
-      immatriculation.dateClotureExercice,
-    ],
-    [
-      'Durée de la personne morale',
-      immatriculation.dureePersonneMorale + ' ans',
-    ],
     [
       'Date d’immatriculation au RNCS',
       formatDate(immatriculation.dateImmatriculation),
     ],
     ['Date de début d’activité', formatDate(immatriculation.dateDebutActiv)],
   ];
+
+  if (immatriculation.isPersonneMorale) {
+    data.push(
+      ['Capital', immatriculation.capital],
+      [
+        'Date de clôture de l’exercice comptable',
+        immatriculation.dateClotureExercice,
+      ],
+      [
+        'Durée de la personne morale',
+        immatriculation.dureePersonneMorale + ' ans',
+      ]
+    );
+  }
 
   if (immatriculation.dateCessationActivite) {
     data.push([

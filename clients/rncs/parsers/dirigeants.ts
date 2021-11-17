@@ -3,7 +3,12 @@
 //==============
 
 import { IDirigeant } from '../../../models/dirigeants';
-import { IRNCSRepresentantResponse, IRNCSResponseDossier } from '../IMR';
+import { logWarningInSentry } from '../../../utils/sentry';
+import {
+  IRNCSIdentiteResponse,
+  IRNCSRepresentantResponse,
+  IRNCSResponseDossier,
+} from '../IMR';
 import { selectRelevantRecord } from '../IMRParser';
 
 export const extractRepresentants = (dossiers: IRNCSResponseDossier[]) => {
@@ -22,6 +27,7 @@ export const extractRepresentants = (dossiers: IRNCSResponseDossier[]) => {
     },
     []
   );
+
   return selectRelevantRecord(representants).map(mapToDomainDirigeant);
 };
 
@@ -62,4 +68,38 @@ const mapToDomainDirigeant = (
       natureJuridique: form_jur || '',
     };
   }
+};
+
+export const extractDirigeantFromIdentite = (
+  dossiers: IRNCSResponseDossier[],
+  siren: string
+) => {
+  if (dossiers.filter((d) => d.identite).length > 1) {
+    logWarningInSentry('Found several identite in IMR', { siren });
+  }
+  const dossier = dossiers[0];
+  return mapToDomainFromIdentite(dossier.identite);
+};
+
+const mapToDomainFromIdentite = (
+  identite: IRNCSIdentiteResponse
+): IDirigeant => {
+  const {
+    identite_PP: {
+      nom_patronymique,
+      prenom,
+      dat_naiss,
+      lieu_naiss,
+      pays_naiss,
+    },
+  } = identite;
+
+  return {
+    sexe: null,
+    prenom: (prenom || '').split(' ')[0],
+    nom: nom_patronymique || '',
+    role: '',
+    lieuNaissance: (lieu_naiss || '') + ', ' + (pays_naiss || ''),
+    dateNaissance: (dat_naiss || '').toString().slice(0, 4),
+  };
 };
