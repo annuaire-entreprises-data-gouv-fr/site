@@ -1,6 +1,5 @@
 import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
-import { capitalize } from '../../utils/helpers/formatting';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import IsActiveTag from '../is-active-tag';
 import { Tag } from '../tag';
@@ -31,9 +30,7 @@ const TitleEtablissementWithDenomination: React.FC<{
   <div className="sub-title">
     <h2>
       Information sur un établissement de{' '}
-      <a href={`/entreprise/${uniteLegale.siren}`}>
-        {capitalize(uniteLegale.nomComplet)}
-      </a>
+      <a href={`/entreprise/${uniteLegale.siren}`}>{uniteLegale.nomComplet}</a>
     </h2>
     <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
     {etablissement.estSiege && <Tag>siège social</Tag>}

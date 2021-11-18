@@ -1,6 +1,11 @@
 import { IImmatriculationRNM } from '../../models/immatriculation';
 import { Siren } from '../../utils/helpers/siren-and-siret';
-import { formatAdresse } from '../../utils/labels';
+import {
+  formatAdresse,
+  formatFirstNames,
+  formatName,
+  formatNameFull,
+} from '../../utils/helpers/formatting';
 import { httpGet } from '../../utils/network';
 import routes from '../routes';
 
@@ -92,12 +97,13 @@ const mapToDomainObject = (
     ent_adr_commune,
     dir_id_prenom_1,
     dir_id_nom_usage,
+    dir_id_nom_naissance,
   } = apiRnmResponse;
 
-  const prenomEtNom =
-    dir_id_prenom_1 || dir_id_nom_usage
-      ? `${dir_id_prenom_1} ${dir_id_nom_usage}`
-      : '';
+  const prenomEtNom = `${formatFirstNames([
+    dir_id_prenom_1 || '',
+  ])} ${formatName(dir_id_nom_naissance || '', dir_id_nom_usage || '')}`;
+
   const denomination =
     (ent_act_denomination_sociale || eirl_denomination || prenomEtNom) +
     (ent_act_sigle ? `(${ent_act_sigle})` : '');

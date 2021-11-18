@@ -74,7 +74,7 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
     } else {
       return [
         //eslint-disable-next-line
-        ['Rôle', <b>{dirigeant.role}</b>],
+        ['Rôle', dirigeant.role && <b>{dirigeant.role}</b>],
         ['Nom', dirigeant.nom],
         ['Prénom', dirigeant.prenom],
         ['Année de naissance', dirigeant.dateNaissance],

@@ -1,8 +1,8 @@
 import { createDefaultUniteLegale, IUniteLegale } from '../../models';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
+import { formatAdresse } from '../../utils/helpers/formatting';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import {
-  formatAdresse,
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
   libelleFromCodeNaf,

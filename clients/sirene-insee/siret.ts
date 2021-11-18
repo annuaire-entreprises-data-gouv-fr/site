@@ -8,13 +8,12 @@ import {
 } from '../../models';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
-  formatAdresse,
-  formatEnseigne,
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
+import { formatAdresse, formatEnseigne } from '../../utils/helpers/formatting';
 
 interface IInseeEtablissementResponse {
   etablissement: IInseeEtablissement;

@@ -1,3 +1,5 @@
+import { libelleFromTypeVoie } from '../labels';
+
 const castDate = (date: string | Date) =>
   typeof date === 'string' ? new Date(date) : date;
 
@@ -23,7 +25,7 @@ export const formatDate = (date: string | Date) =>
 export const capitalize = (str: string) => {
   if (!str) return str;
 
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
 };
 
 export const formatIntFr = (intAsString = '') => {
@@ -94,4 +96,90 @@ export const parseIntWithDefaultValue = (
   } catch {
     return defaultValue;
   }
+};
+
+export const fullAdress = (etablissement: any) => {
+  if (
+    !etablissement.libelle_commune &&
+    !etablissement.geo_l4 &&
+    !etablissement.code_postal
+  ) {
+    return 'Adresse inconnue';
+  }
+
+  const adresse = `${etablissement.geo_l4 || ''} ${
+    etablissement.code_postal || ''
+  } ${etablissement.libelle_commune || ''}`;
+
+  return adresse || 'Adresse inconnue';
+};
+
+const wrapWord = (word: string, caps = false, stop = ' ') => {
+  if (!word) {
+    return '';
+  }
+  if (caps) {
+    return capitalize(word) + stop;
+  }
+  return word.toLowerCase() + stop;
+};
+
+export const formatAdresse = (
+  numero_voie: string,
+  indice_repetition: string,
+  type_voie: string,
+  libelle_voie: string,
+  code_postal: string,
+  libelle_commune: string,
+  pays?: string
+) => {
+  if (
+    !numero_voie &&
+    !type_voie &&
+    !libelle_commune &&
+    !code_postal &&
+    !libelle_voie
+  ) {
+    return '';
+  }
+
+  const fullLibelleFromTypeVoie = libelleFromTypeVoie(type_voie);
+  return `${wrapWord(numero_voie)}${wrapWord(indice_repetition)}${wrapWord(
+    fullLibelleFromTypeVoie
+  )}${wrapWord(libelle_voie, false, ', ')}${code_postal || ''} ${wrapWord(
+    libelle_commune,
+    true,
+    ''
+  )}${pays ? ', ' + pays : ''}`;
+};
+
+export const formatEnseigne = (
+  enseigne1: string | null,
+  enseigne2: string | null,
+  enseigne3: string | null
+) => {
+  if (!enseigne1 && !enseigne2 && !enseigne3) {
+    return null;
+  }
+  const enseigne = `${enseigne1 || ''} ${enseigne2 || ''} ${enseigne3 || ''}`;
+  return enseigne;
+};
+
+export const formatFirstNames = (firstNames: string[], nameCount = 0) => {
+  const formatted = firstNames.map(capitalize);
+  if (nameCount > 0 && nameCount < firstNames.length) {
+    return formatted.slice(0, nameCount).join(', ');
+  }
+  return formatted.join(', ');
+};
+
+export const formatName = (nomPatronymique = '', nomUsage = '') => {
+  return capitalize(nomUsage || nomPatronymique || '');
+};
+
+export const formatNameFull = (nomPatronymique = '', nomUsage = '') => {
+  if (nomUsage && nomPatronymique) {
+    return `${capitalize(nomUsage)} (${capitalize(nomPatronymique)})`;
+  }
+  return capitalize(nomUsage || nomPatronymique || '');
 };
