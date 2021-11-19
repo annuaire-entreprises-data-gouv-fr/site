@@ -70,8 +70,12 @@ const extractSiren = (slug: string) => {
     return '';
   }
   // match a string that ends with either 9 digit or 14 like a siren or a siret
-  const m = slug.match(/\d{14}$|\d{9}$/);
-  return m ? m[0] : '';
+  // we dont use a $ end match as there might be " or %22 at the end
+  const m = slug.match(/\d{14}|\d{9}/);
+  if (m) {
+    return m[m.length]; // last occurence of match
+  }
+  return '';
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
