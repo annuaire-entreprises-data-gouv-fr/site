@@ -3,6 +3,11 @@
 //==============
 
 import { IDirigeant } from '../../../models/dirigeants';
+import {
+  capitalize,
+  formatFirstNames,
+  formatNameFull,
+} from '../../../utils/helpers/formatting';
 import { logWarningInSentry } from '../../../utils/sentry';
 import {
   IRNCSIdentiteResponse,
@@ -37,6 +42,7 @@ const mapToDomainDirigeant = (
   const {
     prenoms,
     nom_patronymique,
+    nom_usage,
     lieu_naiss,
     code_pays_naiss,
     dat_naiss,
@@ -53,8 +59,8 @@ const mapToDomainDirigeant = (
   if (type === 'P.Physique') {
     return {
       sexe: null,
-      prenom: (prenoms || '').split(' ')[0],
-      nom: nom_patronymique || '',
+      prenom: formatFirstNames((prenoms || '').split(' '), 0),
+      nom: formatNameFull(nom_usage, nom_patronymique),
       role: roles || '',
       lieuNaissance: (lieu_naiss || '') + ', ' + (code_pays_naiss || ''),
       dateNaissance: (dat_naiss || '').toString().slice(0, 4),
@@ -87,6 +93,7 @@ const mapToDomainFromIdentite = (
   const {
     identite_PP: {
       nom_patronymique,
+      nom_usage,
       prenom,
       dat_naiss,
       lieu_naiss,
@@ -96,8 +103,8 @@ const mapToDomainFromIdentite = (
 
   return {
     sexe: null,
-    prenom: (prenom || '').split(' ')[0],
-    nom: nom_patronymique || '',
+    prenom: formatFirstNames((prenom || '').split(' '), 0),
+    nom: formatNameFull(nom_usage, nom_patronymique),
     role: '',
     lieuNaissance: (lieu_naiss || '') + ', ' + (pays_naiss || ''),
     dateNaissance: (dat_naiss || '').toString().slice(0, 4),

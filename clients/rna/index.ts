@@ -1,6 +1,6 @@
 import { IAssociation } from '../../models';
+import { formatAdresse } from '../../utils/helpers/formatting';
 import { IdRna } from '../../utils/helpers/id-rna';
-import { formatAdresse } from '../../utils/labels';
 import { httpGet } from '../../utils/network';
 import routes from '../routes';
 

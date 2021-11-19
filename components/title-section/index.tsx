@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { capitalize, formatIntFr } from '../../utils/helpers/formatting';
+import { formatIntFr } from '../../utils/helpers/formatting';
 import { Tag } from '../tag';
 import IsActiveTag from '../is-active-tag';
 import { UnitLegaleDescription } from '../unite-legale-description';
@@ -155,7 +155,7 @@ const Title: React.FC<IProps> = ({
       )}
       <h1>
         <a href={`/entreprise/${uniteLegale.siren}`}>
-          {capitalize(uniteLegale.nomComplet)}
+          {uniteLegale.nomComplet}
         </a>
       </h1>
       <div>

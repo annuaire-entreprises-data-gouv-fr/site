@@ -1,11 +1,7 @@
 import React from 'react';
 import { IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
-import {
-  capitalize,
-  formatDate,
-  formatIntFr,
-} from '../../utils/helpers/formatting';
+import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
@@ -15,7 +11,7 @@ const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const data = [
-    ['Dénomination', capitalize(uniteLegale.nomComplet)],
+    ['Dénomination', uniteLegale.nomComplet],
     ['SIREN', formatIntFr(uniteLegale.siren)],
     [
       'SIRET du siège social',

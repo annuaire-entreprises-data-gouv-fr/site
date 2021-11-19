@@ -1,10 +1,10 @@
 import { createDefaultEtablissement, IEtablissement } from '../../models';
+import { formatAdresse } from '../../utils/helpers/formatting';
 import {
   extractNicFromSiret,
   extractSirenFromSiret,
 } from '../../utils/helpers/siren-and-siret';
 import {
-  formatAdresse,
   libelleFromCodeEffectif,
   libelleFromCodeNaf,
 } from '../../utils/labels';

@@ -6,10 +6,6 @@ import yauzl from 'yauzl';
 import { HttpNotFound } from '../exceptions';
 import { extractIMRFromXml } from './IMRParser';
 import { logWarningInSentry } from '../../utils/sentry';
-import {
-  IImmatriculation,
-  IImmatriculationRNCS,
-} from '../../models/immatriculation';
 
 export interface IRNCSResponse {
   fichier: {
@@ -34,6 +30,7 @@ export interface IRNCSResponseDossier {
 export interface IRNCSRepresentantResponse {
   prenoms: string;
   nom_patronymique: string;
+  nom_usage: string;
   lieu_naiss: string;
   code_pays_naiss: string;
   dat_naiss: string;
@@ -71,6 +68,7 @@ export interface IRNCSIdentiteResponse {
   date_debut_activ: string; // '23/01/2020';
   identite_PP: {
     nom_patronymique: string;
+    nom_usage: string;
     prenom: string;
     dat_naiss: string;
     lieu_naiss: string;

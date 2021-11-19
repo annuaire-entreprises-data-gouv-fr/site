@@ -6,6 +6,12 @@ import {
 } from '../../models';
 import { IEtatCivil } from '../../models/dirigeants';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
+import {
+  capitalize,
+  formatFirstNames,
+  formatName,
+  formatNameFull,
+} from '../../utils/helpers/formatting';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
 import {
@@ -29,6 +35,10 @@ interface IInseeUniteLegaleResponse {
     categorieEntreprise: string;
     anneeCategorieEntreprise: string;
     prenom1UniteLegale: string;
+    prenom2UniteLegale: string;
+    prenom3UniteLegale: string;
+    prenom4UniteLegale: string;
+    prenomUsuelUniteLegale: string;
     sexeUniteLegale: 'M' | 'F';
     identifiantAssociationUniteLegale: string | null;
   };
@@ -43,6 +53,7 @@ interface IPeriodeUniteLegale {
   denominationUniteLegale: string;
   caractereEmployeurUniteLegale: string;
   nomUniteLegale: string;
+  nomUsageUniteLegale: string;
 }
 
 /**
@@ -84,6 +95,10 @@ const mapToDomainObject = (
     anneeEffectifsUniteLegale,
     statutDiffusionUniteLegale,
     prenom1UniteLegale,
+    prenom2UniteLegale,
+    prenom3UniteLegale,
+    prenom4UniteLegale,
+    prenomUsuelUniteLegale,
     sexeUniteLegale,
     identifiantAssociationUniteLegale,
     categorieEntreprise,
@@ -100,6 +115,7 @@ const mapToDomainObject = (
     etatAdministratifUniteLegale,
     caractereEmployeurUniteLegale,
     nomUniteLegale,
+    nomUsageUniteLegale,
   } = periodesUniteLegale[0];
 
   const safeActivitePrincipaleUniteLegale = (
@@ -123,11 +139,14 @@ const mapToDomainObject = (
     siege.trancheEffectif = '';
   }
 
-  const nomComplet = `${(
-    denominationUniteLegale ||
-    `${prenom1UniteLegale} ${nomUniteLegale}` ||
+  const nomComplet = `${
+    capitalize(denominationUniteLegale) ||
+    `${formatFirstNames([prenomUsuelUniteLegale])} ${formatName(
+      nomUsageUniteLegale,
+      nomUniteLegale
+    )}` ||
     'Nom inconnu'
-  ).toLowerCase()}${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
+  }${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
 
@@ -137,8 +156,13 @@ const mapToDomainObject = (
 
   const dirigeant = {
     sexe: sexeUniteLegale,
-    prenom: prenom1UniteLegale,
-    nom: nomUniteLegale,
+    prenom: formatFirstNames([
+      prenom1UniteLegale,
+      prenom2UniteLegale,
+      prenom3UniteLegale,
+      prenom4UniteLegale,
+    ]),
+    nom: formatNameFull(nomUsageUniteLegale, nomUniteLegale),
   } as IEtatCivil;
 
   return {
