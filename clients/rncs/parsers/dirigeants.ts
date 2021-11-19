@@ -60,7 +60,7 @@ const mapToDomainDirigeant = (
     return {
       sexe: null,
       prenom: formatFirstNames((prenoms || '').split(' '), 0),
-      nom: formatNameFull(nom_usage, nom_patronymique),
+      nom: formatNameFull(nom_patronymique, nom_usage),
       role: roles || '',
       lieuNaissance: (lieu_naiss || '') + ', ' + (code_pays_naiss || ''),
       dateNaissance: (dat_naiss || '').toString().slice(0, 4),
@@ -104,7 +104,7 @@ const mapToDomainFromIdentite = (
   return {
     sexe: null,
     prenom: formatFirstNames((prenom || '').split(' '), 0),
-    nom: formatNameFull(nom_usage, nom_patronymique),
+    nom: formatNameFull(nom_patronymique, nom_usage),
     role: '',
     lieuNaissance: (lieu_naiss || '') + ', ' + (pays_naiss || ''),
     dateNaissance: (dat_naiss || '').toString().slice(0, 4),

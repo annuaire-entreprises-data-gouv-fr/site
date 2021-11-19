@@ -142,8 +142,8 @@ const mapToDomainObject = (
   const nomComplet = `${
     capitalize(denominationUniteLegale) ||
     `${formatFirstNames([prenomUsuelUniteLegale])} ${formatName(
-      nomUsageUniteLegale,
-      nomUniteLegale
+      nomUniteLegale,
+      nomUsageUniteLegale
     )}` ||
     'Nom inconnu'
   }${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
@@ -162,7 +162,7 @@ const mapToDomainObject = (
       prenom3UniteLegale,
       prenom4UniteLegale,
     ]),
-    nom: formatNameFull(nomUsageUniteLegale, nomUniteLegale),
+    nom: formatNameFull(nomUniteLegale, nomUsageUniteLegale),
   } as IEtatCivil;
 
   return {
