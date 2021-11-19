@@ -166,7 +166,7 @@ export const formatEnseigne = (
 };
 
 export const formatFirstNames = (firstNames: string[], nameCount = 0) => {
-  const formatted = firstNames.map(capitalize);
+  const formatted = firstNames.map(capitalize).filter((name) => !!name);
   if (nameCount > 0 && nameCount < firstNames.length) {
     return formatted.slice(0, nameCount).join(', ');
   }

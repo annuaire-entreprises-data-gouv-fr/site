@@ -11,6 +11,8 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
+import routes from '../../clients/routes';
+import { METI } from '../administrations';
 
 const ConventionCollectivesSection: React.FC<{
   conventionCollectives: IConventionCollective[] | IAPINotRespondingError;
@@ -30,7 +32,17 @@ const ConventionCollectivesSection: React.FC<{
   return (
     <Section title="Conventions collectives" source={EAdministration.METI}>
       {conventionCollectives.length === 0 ? (
-        <div>Cette entité n’a aucune convention collective enregistrée</div>
+        <div>
+          Cette entité n’a pas de{' '}
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href={routes.conventionCollectives.site}
+          >
+            convention collective enregistrée
+          </a>{' '}
+          auprès du <METI />.
+        </div>
       ) : (
         <>
           <p>

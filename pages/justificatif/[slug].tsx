@@ -5,10 +5,8 @@ import Page from '../../layouts';
 import Title, { FICHE } from '../../components/title-section';
 import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
-import AvisSituationSection from '../../components/avis-de-situation-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import { isCaptchaCookieValid } from '../../utils/captcha';
-import ImmatriculationSummary from '../../components/immatriculations/summary';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -23,48 +21,16 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
   >
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.JUSTIFICATIFS} />
-      <ImmatriculationSummary
-        immatriculationRNM={immatriculationRNM}
-        immatriculationRNCS={immatriculationRNCS}
-        immatriculationJOAFE={immatriculationJOAFE}
-        uniteLegale={uniteLegale}
-      />
       <Immatriculations
         immatriculationRNM={immatriculationRNM}
         immatriculationRNCS={immatriculationRNCS}
         immatriculationJOAFE={immatriculationJOAFE}
         uniteLegale={uniteLegale}
       />
-      <AvisSituationSection uniteLegale={uniteLegale} />
     </div>
     <style jsx>{`
-      .separator {
-        width: 10px;
-        height: 10px;
-      }
-      .description {
-        display: flex;
-        margin-bottom: 20px;
-        flex-direction: row;
-      }
-      .logo-wrapper {
-        padding-left: 20px;
-        width: calc(30% - 20px);
-      }
-      .logo-wrapper svg {
-        width: 100%;
-      }
       .content-container {
         margin: 20px auto 40px;
-      }
-      @media only screen and (min-width: 1px) and (max-width: 900px) {
-        .description {
-          flex-direction: column;
-        }
-        .logo-wrapper {
-          margin: 20px auto 0;
-          padding: 0;
-        }
       }
     `}</style>
   </Page>

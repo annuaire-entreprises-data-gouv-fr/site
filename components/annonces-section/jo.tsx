@@ -8,13 +8,14 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
-import { IAnnoncesBodacc, IAnnoncesJO } from '../../models/annonces';
+import { IAnnoncesJO } from '../../models/annonces';
 import { Tag } from '../tag';
 import ButtonLink from '../button';
 import { DILA } from '../administrations';
 import routes from '../../clients/routes';
 import { IUniteLegale } from '../../models';
 import { formatDate } from '../../utils/helpers/formatting';
+import AssociationCreationNotFound from '../introuvable/association-creation';
 
 const AnnoncesJOSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -36,10 +37,21 @@ const AnnoncesJOSection: React.FC<{
       source={EAdministration.DILA}
       lastModified={jo.lastModified}
     >
+      {jo.annonces.filter((annonce) => annonce.typeAvisLibelle === 'Création')
+        .length === 0 && (
+        <AssociationCreationNotFound uniteLegale={uniteLegale} />
+      )}
       {jo.annonces.length === 0 ? (
         <div>
           Cette entité n’a aucune annonce publiée au{' '}
-          <b>Journal Officiel des Associations (JOAFE)</b>.
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href={routes.journalOfficielAssociations.site.recherche}
+          >
+            Journal Officiel des Associations (JOAFE)
+          </a>
+          .
         </div>
       ) : (
         <>

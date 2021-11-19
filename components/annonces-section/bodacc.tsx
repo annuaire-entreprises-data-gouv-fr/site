@@ -39,7 +39,13 @@ const AnnoncesBodaccSection: React.FC<{
       {bodacc.annonces.length === 0 ? (
         <div>
           Cette entité n’a aucune annonce publiée au{' '}
-          <b>Bulletin Officiel Des Annonces Civiles et Commerciales (BODACC)</b>
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href={routes.bodacc.site.recherche}
+          >
+            Bulletin Officiel Des Annonces Civiles et Commerciales (BODACC)
+          </a>
           .
         </div>
       ) : (

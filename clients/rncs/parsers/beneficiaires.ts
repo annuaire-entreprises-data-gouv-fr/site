@@ -3,6 +3,10 @@
 //==============
 
 import { IBeneficiaire } from '../../../models/dirigeants';
+import {
+  formatFirstNames,
+  formatName,
+} from '../../../utils/helpers/formatting';
 import { IRNCSBeneficiaireResponse, IRNCSResponseDossier } from '../IMR';
 import { selectRelevantRecord } from '../IMRParser';
 
@@ -30,8 +34,8 @@ const mapToDomainBeneficiaires = (
 ): IBeneficiaire => {
   const { nom_naissance, prenoms, date_naissance, nationalite } = beneficiaire;
   return {
-    nom: nom_naissance || '',
-    prenoms: prenoms || '',
+    nom: formatName(nom_naissance, ''),
+    prenoms: formatFirstNames((prenoms || '').split(' ')),
     dateNaissance: (date_naissance || '').toString(),
     nationalite: nationalite || '',
   };
