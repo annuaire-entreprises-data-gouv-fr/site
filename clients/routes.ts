@@ -58,7 +58,10 @@ const routes = {
     uniteLegale: `http://annuaire-entreprises.dataeng.etalab.studio/siren?q=`,
     rechercheUniteLegale: `http://annuaire-entreprises.dataeng.etalab.studio/search`,
   },
-  conventionCollectives: 'https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
+  conventionCollectives: {
+    api: 'https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
+    site: 'https://code.travail.gouv.fr/outils/convention-collective',
+  },
 };
 
 export default routes;

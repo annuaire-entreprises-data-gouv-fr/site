@@ -1,10 +1,25 @@
 import React from 'react';
-import { isAPINotResponding } from '../../models/api-not-responding';
+import {
+  IAPINotRespondingError,
+  isAPINotResponding,
+} from '../../models/api-not-responding';
+import { IImmatriculation } from '../../models/immatriculation';
 import { IJustificatifs } from '../../models/justificatifs';
+import AssociationCreationNotFound from '../introuvable/association-creation';
 import ImmatriculationNotFound from '../introuvable/immatriculation';
+import AvisSituationSection from './insee';
 import ImmatriculationJOAFE from './joafe';
 import ImmatriculationRNCS from './rncs';
 import ImmatriculationRNM from './rnm';
+import ImmatriculationSummary from './summary';
+
+const isNotFound = (
+  immatriculation: IImmatriculation | IAPINotRespondingError
+) => {
+  return (
+    isAPINotResponding(immatriculation) && immatriculation.errorType === 404
+  );
+};
 
 const Immatriculations: React.FC<IJustificatifs> = ({
   immatriculationRNM,
@@ -12,24 +27,39 @@ const Immatriculations: React.FC<IJustificatifs> = ({
   immatriculationJOAFE,
   uniteLegale,
 }) => {
-  const noImmatriculation =
-    isAPINotResponding(immatriculationRNM) &&
-    isAPINotResponding(immatriculationJOAFE) &&
-    isAPINotResponding(immatriculationRNCS) &&
-    immatriculationRNCS.errorType === 404 &&
-    immatriculationJOAFE.errorType === 404 &&
-    immatriculationRNM.errorType === 404;
+  const noAssociationImmatriculation =
+    uniteLegale.association && isNotFound(immatriculationJOAFE);
+  const noRNMImmatriculation = isNotFound(immatriculationRNM);
+  const noRNCSImmatriculation = isNotFound(immatriculationRNCS);
+
+  const noEntrepriseImmatriculation =
+    !noAssociationImmatriculation &&
+    noRNCSImmatriculation &&
+    noRNMImmatriculation;
 
   return (
     <>
-      {noImmatriculation ? (
+      <ImmatriculationSummary
+        immatriculationRNM={immatriculationRNM}
+        immatriculationRNCS={immatriculationRNCS}
+        immatriculationJOAFE={immatriculationJOAFE}
+        uniteLegale={uniteLegale}
+      />
+      {noAssociationImmatriculation ? (
+        <>
+          <AssociationCreationNotFound uniteLegale={uniteLegale} />
+          <br />
+        </>
+      ) : (
+        <ImmatriculationJOAFE
+          immatriculation={immatriculationJOAFE}
+          uniteLegale={uniteLegale}
+        />
+      )}
+      {noEntrepriseImmatriculation ? (
         <ImmatriculationNotFound />
       ) : (
         <>
-          <ImmatriculationJOAFE
-            immatriculation={immatriculationJOAFE}
-            uniteLegale={uniteLegale}
-          />
           <ImmatriculationRNM
             immatriculation={immatriculationRNM}
             uniteLegale={uniteLegale}
@@ -40,6 +70,7 @@ const Immatriculations: React.FC<IJustificatifs> = ({
           />
         </>
       )}
+      <AvisSituationSection uniteLegale={uniteLegale} />
     </>
   );
 };

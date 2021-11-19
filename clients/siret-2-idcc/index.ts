@@ -12,7 +12,7 @@ const generateBatches = (sirets: string[]) => {
   const siretBatches = [];
   for (var i = 0; i < sirets.length; i += 130) {
     siretBatches.push(
-      `${routes.conventionCollectives}${sirets.slice(i, i + 130).join(',')}`
+      `${routes.conventionCollectives.api}${sirets.slice(i, i + 130).join(',')}`
     );
   }
   return siretBatches;
