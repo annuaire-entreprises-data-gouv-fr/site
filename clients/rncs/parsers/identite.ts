@@ -5,19 +5,11 @@
 import { IIdentite } from '../../../models/dirigeants';
 import { formatFloatFr, formatIntFr } from '../../../utils/helpers/formatting';
 import { libelleFromCodeGreffe } from '../../../utils/labels';
-import { logWarningInSentry } from '../../../utils/sentry';
 import { IRNCSIdentiteResponse, IRNCSResponseDossier } from '../IMR';
 import { formatINPIDateField } from '../helper';
 
-export const extractIdentite = (
-  dossiers: IRNCSResponseDossier[],
-  siren: string
-) => {
-  if (dossiers.filter((d) => d.identite).length > 1) {
-    logWarningInSentry('Found several identite in IMR', { siren });
-  }
-  const dossier = dossiers[0];
-  return mapToDomainIdentite(dossier.identite, dossier);
+export const extractIdentite = (dossierPrincipal: IRNCSResponseDossier) => {
+  return mapToDomainIdentite(dossierPrincipal.identite, dossierPrincipal);
 };
 
 const mapToDomainIdentite = (

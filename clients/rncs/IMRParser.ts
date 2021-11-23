@@ -1,5 +1,6 @@
 import parser from 'fast-xml-parser';
 import { Siren } from '../../utils/helpers/siren-and-siret';
+import logErrorInSentry, { logWarningInSentry } from '../../utils/sentry';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 
 import { IRNCSResponse, IRNCSResponseDossier } from './IMR';
@@ -19,13 +20,13 @@ export class InvalidFormatError extends HttpServerError {
 export const extractIMRFromXml = (responseAsXml: string, siren: Siren) => {
   try {
     const response = parseXmlToJson(responseAsXml);
-    const dossiers = extractDossiers(response);
-    const dirigeants = extractRepresentants(dossiers);
-    const beneficiaires = extractBeneficiaires(dossiers);
-    const identite = extractIdentite(dossiers, siren);
+    const dossierPrincipal = extractDossierPrincipal(response, siren);
+    const dirigeants = extractRepresentants(dossierPrincipal);
+    const beneficiaires = extractBeneficiaires(dossierPrincipal);
+    const identite = extractIdentite(dossierPrincipal);
 
     if (dirigeants.length === 0 && !identite.isPersonneMorale) {
-      dirigeants.push(extractDirigeantFromIdentite(dossiers, siren));
+      dirigeants.push(extractDirigeantFromIdentite(dossierPrincipal));
     }
 
     return {
@@ -49,24 +50,25 @@ const parseXmlToJson = (xmlString: string): IRNCSResponse => {
   return parser.convertToJson(tObj, { arrayMode: false });
 };
 
-const extractDossiers = (response: IRNCSResponse): IRNCSResponseDossier[] => {
+const extractDossierPrincipal = (
+  response: IRNCSResponse,
+  siren: string
+): IRNCSResponseDossier => {
   const isDossierArray = Array.isArray(response.fichier.dossier);
-  const dossier = (
+  const dossiers = (
     isDossierArray ? response.fichier.dossier : [response.fichier.dossier]
   ) as IRNCSResponseDossier[];
 
-  let dossiersWithRepresentants = dossier.sort((element) =>
-    element.representants !== undefined ? -1 : 1
+  const principaux = dossiers.filter(
+    (dossier) => dossier.identite.type_inscrip === 'P'
   );
 
-  return dossiersWithRepresentants;
-};
-
-export const selectRelevantRecord = (array: any[][]): any[] => {
-  if (array.length === 0) {
-    return [];
+  if (principaux.length > 1) {
+    logWarningInSentry('Several inscription principale', { siren });
+    return principaux[0];
+  } else if (principaux.length === 0) {
+    logErrorInSentry('No inscription principale', { siren });
+    throw new HttpNotFound(404, 'No inscription principale');
   }
-
-  // if several possibilities, use the record with the most elements
-  return array.sort((a, b) => b.length - a.length)[0];
+  return principaux[0];
 };

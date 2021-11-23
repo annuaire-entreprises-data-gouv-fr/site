@@ -4,6 +4,7 @@ import { codesGreffes } from './codes-greffes';
 import { codesEffectifs } from './codes-effectifs';
 import { codesVoies } from './codes-voie';
 import { categoriesEntreprise } from './categories-entreprise';
+import { codesBeneficiaires } from './codes-beneficiaires';
 
 export const libelleFromCodeNaf = (codeNaf: string, addCode = true) => {
   const formattedNaf = (codeNaf || '').replace(/[.-]/g, '');
@@ -64,4 +65,9 @@ export const libelleFromeCodeCategorie = (
 export const libelleFromCodeGreffe = (codeGreffe: string) => {
   //@ts-ignore
   return codesGreffes[codeGreffe] || codeGreffe;
+};
+
+export const libelleFromCodeBeneficiaires = (codeBeneficiaires: string) => {
+  //@ts-ignore
+  return codesBeneficiaires[codeBeneficiaires] || codeBeneficiaires;
 };

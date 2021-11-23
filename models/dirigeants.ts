@@ -20,10 +20,12 @@ export interface IEtatCivil {
 }
 
 export interface IBeneficiaire {
+  type: string;
   nom: string;
   prenoms: string;
   dateNaissance: string;
   nationalite: string;
+  dateGreffe: string;
 }
 export interface IIdentite {
   denomination: string;

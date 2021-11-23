@@ -4,36 +4,25 @@
 
 import { IDirigeant } from '../../../models/dirigeants';
 import {
-  capitalize,
   formatFirstNames,
   formatNameFull,
 } from '../../../utils/helpers/formatting';
 import { logWarningInSentry } from '../../../utils/sentry';
-import {
-  IRNCSIdentiteResponse,
-  IRNCSRepresentantResponse,
-  IRNCSResponseDossier,
-} from '../IMR';
-import { selectRelevantRecord } from '../IMRParser';
+import { IRNCSRepresentantResponse, IRNCSResponseDossier } from '../IMR';
 
-export const extractRepresentants = (dossiers: IRNCSResponseDossier[]) => {
-  const representants = dossiers.reduce(
-    (aggregate: IRNCSRepresentantResponse[][], dossier) => {
-      const representant = dossier?.representants?.representant;
-      if (representant) {
-        const representantArray = Array.isArray(representant)
-          ? representant
-          : [representant];
+export const extractRepresentants = (dossier: IRNCSResponseDossier) => {
+  const representantsObject = dossier?.representants?.representant;
 
-        aggregate.push(representantArray);
-      }
+  if (!representantsObject) {
+    logWarningInSentry('No Dirigeant found', { siren: dossier['@_siren'] });
+    return [];
+  }
 
-      return aggregate;
-    },
-    []
-  );
+  const representants = Array.isArray(representantsObject)
+    ? representantsObject
+    : [representantsObject];
 
-  return selectRelevantRecord(representants).map(mapToDomainDirigeant);
+  return representants.map(mapToDomainDirigeant);
 };
 
 const mapToDomainDirigeant = (
@@ -77,18 +66,13 @@ const mapToDomainDirigeant = (
 };
 
 export const extractDirigeantFromIdentite = (
-  dossiers: IRNCSResponseDossier[],
-  siren: string
+  dossierPrincipal: IRNCSResponseDossier
 ) => {
-  if (dossiers.filter((d) => d.identite).length > 1) {
-    logWarningInSentry('Found several identite in IMR', { siren });
-  }
-  const dossier = dossiers[0];
-  return mapToDomainFromIdentite(dossier.identite);
+  return mapToDomainFromIdentite(dossierPrincipal);
 };
 
 const mapToDomainFromIdentite = (
-  identite: IRNCSIdentiteResponse
+  dossierPrincipal: IRNCSResponseDossier
 ): IDirigeant => {
   const {
     identite_PP: {
@@ -99,7 +83,7 @@ const mapToDomainFromIdentite = (
       lieu_naiss,
       pays_naiss,
     },
-  } = identite;
+  } = dossierPrincipal.identite;
 
   return {
     sexe: null,

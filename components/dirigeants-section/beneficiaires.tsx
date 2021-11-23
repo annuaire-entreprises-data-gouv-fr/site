@@ -12,6 +12,7 @@ import routes from '../../clients/routes';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { INPI } from '../administrations';
 import { IBeneficiaire } from '../../models/dirigeants';
+import { formatDate } from '../../utils/helpers/formatting';
 
 interface IProps {
   beneficiaires: IBeneficiaire[] | IAPINotRespondingError;
@@ -42,6 +43,7 @@ const BeneficiairesSection: React.FC<IProps> = ({ beneficiaires, siren }) => {
     ['Prénoms', beneficiaire.prenoms],
     ['Date de naissance', beneficiaire.dateNaissance],
     ['Nationalité', beneficiaire.nationalite],
+    ['Date de déclaration', formatDate(beneficiaire.dateGreffe)],
   ];
 
   const plural = beneficiaires.length > 1 ? 's' : '';
