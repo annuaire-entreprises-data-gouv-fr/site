@@ -14,8 +14,12 @@ export const extractRepresentants = (dossier: IRNCSResponseDossier) => {
   const representantsObject = dossier?.representants?.representant;
 
   if (!representantsObject) {
-    logWarningInSentry('No Dirigeant found', { siren: dossier['@_siren'] });
-    return [];
+    const representantEI = extractDirigeantFromIdentite(dossier);
+    if (!representantEI) {
+      logWarningInSentry('No Dirigeant found', { siren: dossier['@_siren'] });
+      return [];
+    }
+    return [representantEI];
   }
 
   const representants = Array.isArray(representantsObject)
@@ -89,7 +93,7 @@ const mapToDomainFromIdentite = (
     sexe: null,
     prenom: formatFirstNames((prenom || '').split(' '), 0),
     nom: formatNameFull(nom_patronymique, nom_usage),
-    role: '',
+    role: 'Représentant Légal',
     lieuNaissance: (lieu_naiss || '') + ', ' + (pays_naiss || ''),
     dateNaissance: (dat_naiss || '').toString().slice(0, 4),
   };

@@ -25,10 +25,6 @@ export const extractIMRFromXml = (responseAsXml: string, siren: Siren) => {
     const beneficiaires = extractBeneficiaires(dossierPrincipal);
     const identite = extractIdentite(dossierPrincipal);
 
-    if (dirigeants.length === 0 && !identite.isPersonneMorale) {
-      dirigeants.push(extractDirigeantFromIdentite(dossierPrincipal));
-    }
-
     return {
       dirigeants,
       beneficiaires,

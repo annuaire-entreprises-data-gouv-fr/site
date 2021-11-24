@@ -16,7 +16,7 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
 }) => (
   <Page
     small={true}
-    title={`Justificatif d’immatricuation - ${uniteLegale.nomComplet}`}
+    title={`Justificatif d’immatriculation - ${uniteLegale.nomComplet}`}
     noIndex={true}
   >
     <div className="content-container">
