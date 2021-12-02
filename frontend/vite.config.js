@@ -31,9 +31,6 @@ module.exports = {
   },
   server: {
     port: 3001,
-    fs: {
-      // allow: ['./js', './css', './fonts'],
-    },
   },
   plugins: [
     legacy({
