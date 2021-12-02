@@ -2,8 +2,9 @@ import React from 'react';
 import { IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
 import { isTwoMonthOld } from '../../utils/helpers/checks';
-import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
+import { formatIntFr } from '../../utils/helpers/formatting';
 import Warning from '../alerts/warning';
+import BreakPageForPrint from '../print-break-page';
 import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
@@ -59,6 +60,7 @@ const AssociationSection: React.FC<{
         <TwoColumnTable body={data} />
       </Section>
       <HorizontalSeparator />
+      <BreakPageForPrint />
     </div>
   );
 };

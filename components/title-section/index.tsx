@@ -7,6 +7,7 @@ import { UnitLegaleDescription } from '../unite-legale-description';
 import { IUniteLegale } from '../../models';
 import SocialMedia from '../social-media';
 import Warning from '../alerts/warning';
+import { PrintNever } from '../print-visibility';
 
 export enum FICHE {
   INFORMATION = 'informations générales',
@@ -26,7 +27,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
   ficheType,
   siren,
 }) => (
-  <>
+  <PrintNever>
     <div className="title-tabs">
       <a
         className={`${ficheType === FICHE.INFORMATION && 'active'}`}
@@ -48,20 +49,6 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
       >
         Dirigeants
       </a>
-      {/* <a
-        className={`${ficheType === FICHE.COMPTES && 'active'}`}
-        href={`/comptes/${siren}`}
-        rel="nofollow"
-      >
-        Bilans & Comptes
-      </a>
-      <a
-        className={`${ficheType === FICHE.COMPTES && 'active'}`}
-        href={`/actes/${siren}`}
-        rel="nofollow"
-      >
-        Actes & Statuts
-      </a> */}
       <a
         className={`${ficheType === FICHE.ANNONCES && 'active'}`}
         href={`/annonces/${siren}`}
@@ -126,13 +113,8 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
           box-shadow: none;
         }
       }
-      @media print {
-        .title-tabs {
-          display: none !important;
-        }
-      }
     `}</style>
-  </>
+  </PrintNever>
 );
 
 const Title: React.FC<IProps> = ({
