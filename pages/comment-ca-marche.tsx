@@ -1,6 +1,5 @@
 import React from 'react';
 import { INSEE } from '../components/administrations';
-import ButtonLink from '../components/button';
 
 import Page from '../layouts';
 

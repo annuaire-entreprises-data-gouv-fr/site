@@ -21,7 +21,7 @@ module.exports = {
   publicDir: false,
   clearScreen: false,
   build: {
-    outDir: 'public',
+    outDir: '../public',
     assetsDir: 'assets',
     emptyOutDir: false,
     manifest: true,
@@ -31,10 +31,14 @@ module.exports = {
   },
   server: {
     port: 3001,
+    fs: {
+      // allow: ['./js', './css', './fonts'],
+    },
   },
   plugins: [
     legacy({
       targets: ['defaults', 'ie >= 11'],
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
     }),
   ],
   css: {

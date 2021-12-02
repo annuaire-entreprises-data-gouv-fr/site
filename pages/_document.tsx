@@ -117,24 +117,24 @@ class StaticDocument extends Document {
             nomodule="nomodule"
             src={
               //@ts-ignore
-              `/${manifest['vite/legacy-polyfills'].file}`
+              `/${manifest['../vite/legacy-polyfills'].file}`
             }
-          ></script>
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href={`/${manifest['frontend/js/production.js'].css}`}
-          />
-          <script
-            defer
-            type="module"
-            src={`/${manifest['frontend/js/production.js'].file}`}
           ></script>
           <script
             defer
             //@ts-ignore
             nomodule="nomodule"
-            src={`/${manifest['frontend/js/production-legacy.js'].file}`}
+            src={`/${manifest['js/production-legacy.js'].file}`}
+          ></script>
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href={`/${manifest['js/production.js'].css}`}
+          />
+          <script
+            defer
+            type="module"
+            src={`/${manifest['js/production.js'].file}`}
           ></script>
         </CustomHead>
 
