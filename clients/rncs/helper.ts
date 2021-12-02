@@ -21,6 +21,10 @@ export const formatINPIDateField = (unformatted: string | number): string => {
       // DD/MM/YYYY
       const times = unformatted.split('/');
       return `${times[2]}-${times[1]}-${times[0]}`;
+    } else if (unformatted.indexOf('-') === 2) {
+      // DD-MM-YYYY
+      const times = unformatted.split('-');
+      return `${times[2]}-${times[1]}-${times[0]}`;
     } else if (unformatted.indexOf('-') === 4) {
       // YYYY-MM-DD
       return unformatted;
