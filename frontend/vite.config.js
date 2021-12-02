@@ -21,7 +21,7 @@ module.exports = {
   publicDir: false,
   clearScreen: false,
   build: {
-    outDir: 'public',
+    outDir: '../public',
     assetsDir: 'assets',
     emptyOutDir: false,
     manifest: true,
@@ -35,6 +35,7 @@ module.exports = {
   plugins: [
     legacy({
       targets: ['defaults', 'ie >= 11'],
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
     }),
   ],
   css: {
