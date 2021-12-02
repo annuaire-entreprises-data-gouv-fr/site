@@ -1,9 +1,10 @@
 import React from 'react';
 import { facebook, linkedin, qrCode, twitter, print } from '../icon';
 import InformationTooltip from '../information-tooltip';
+import { PrintNever } from '../print-visibility';
 
 const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
-  <>
+  <PrintNever>
     <div className="social-media layout-right">
       <span>
         <InformationTooltip
@@ -102,14 +103,8 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
         color: #000091;
         margin: 0 0 12px 0;
       }
-
-      @media print {
-        .social-media {
-          display: none !important;
-        }
-      }
     `}</style>
-  </>
+  </PrintNever>
 );
 
 export default SocialMedia;

@@ -1,7 +1,8 @@
 import React from 'react';
+import { PrintNever } from '../print-visibility';
 
 export const NPSBanner: React.FC<{}> = () => (
-  <>
+  <PrintNever>
     <div id="nps-modal" role="dialog" aria-label="Donnez-nous votre avis">
       <div className="fr-container">
         <div
@@ -39,11 +40,6 @@ export const NPSBanner: React.FC<{}> = () => (
         align-items: center;
         justify-content: space-between;
       }
-      @media print {
-        #nps-modal {
-          display: none !important;
-        }
-      }
     `}</style>
-  </>
+  </PrintNever>
 );

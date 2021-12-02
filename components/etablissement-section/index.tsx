@@ -10,6 +10,8 @@ import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { EAdministration } from '../../models/administration';
 import AvisSituationLink from '../avis-situation-link';
 import { EtablissementDescription } from '../etablissement-description';
+import BreakPageForPrint from '../print-break-page';
+import { PrintNever } from '../print-visibility';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -93,18 +95,21 @@ const EtablissementSection: React.FC<IProps> = ({
           )}
         </Section>
         {etablissement.adresse && (
-          <div className="map">
-            {map}
-            <div className="layout-center">
-              <ButtonLink to={`/carte/${etablissement.siret}`} alt nofollow>
-                {pin}
-                Afficher sur la carte
-              </ButtonLink>
+          <PrintNever>
+            <div className="map">
+              {map}
+              <div className="layout-center">
+                <ButtonLink to={`/carte/${etablissement.siret}`} alt nofollow>
+                  {pin}
+                  Afficher sur la carte
+                </ButtonLink>
+              </div>
             </div>
-          </div>
+          </PrintNever>
         )}
       </div>
       <HorizontalSeparator />
+      <BreakPageForPrint />
       <style jsx>{`
         .section-wrapper {
           display: flex;
@@ -143,11 +148,6 @@ const EtablissementSection: React.FC<IProps> = ({
             flex-direction: column;
             width: 100%;
             margin: auto;
-          }
-        }
-        @media print {
-          .map {
-            display: none;
           }
         }
       `}</style>

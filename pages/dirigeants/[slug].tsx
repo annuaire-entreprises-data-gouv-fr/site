@@ -15,6 +15,7 @@ import DirigeantsSection from '../../components/dirigeants-section/rncs-dirigean
 import BeneficiairesSection from '../../components/dirigeants-section/beneficiaires';
 import { isCaptchaCookieValid } from '../../utils/captcha';
 import DirigeantSummary from '../../components/dirigeants-section/summary';
+import BreakPageForPrint from '../../components/print-break-page';
 
 const DirigeantsPage: React.FC<IDirigeants> = ({
   uniteLegale,
@@ -37,14 +38,15 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
             beneficiaires={beneficiaires}
           />
           {uniteLegale.estDiffusible ? (
-            <>
-              {uniteLegale.estEntrepreneurIndividuel &&
-                uniteLegale.dirigeant && (
-                  <DirigeantsEntrepriseIndividuelleSection
-                    dirigeant={uniteLegale.dirigeant}
-                  />
-                )}
-            </>
+            uniteLegale.estEntrepreneurIndividuel &&
+            uniteLegale.dirigeant && (
+              <>
+                <DirigeantsEntrepriseIndividuelleSection
+                  dirigeant={uniteLegale.dirigeant}
+                />
+                <BreakPageForPrint />
+              </>
+            )
           ) : (
             <>
               <p>
@@ -57,6 +59,7 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
             dirigeants={dirigeants}
             siren={uniteLegale.siren}
           />
+          <BreakPageForPrint />
           <BeneficiairesSection
             beneficiaires={beneficiaires}
             siren={uniteLegale.siren}

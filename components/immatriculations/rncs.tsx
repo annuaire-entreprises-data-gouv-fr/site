@@ -9,10 +9,12 @@ import { IImmatriculationRNCS } from '../../models/immatriculation';
 import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
 import { INPI } from '../administrations';
+import BreakPageForPrint from '../print-break-page';
 import ButtonLink from '../button';
 import ButtonInpiPdf from '../button-inpi-pdf';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
+import { PrintNever } from '../print-visibility';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
@@ -85,51 +87,56 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
   return (
     <>
       {immatriculation.downloadlink && (
-        <Section
-          id="rncs"
-          title="Immatriculation au RNCS"
-          source={EAdministration.INPI}
-        >
-          <p>
-            Cette entité possède une fiche d’immatriculation au{' '}
-            <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
-            liste les entreprises enregistrées auprès des Greffes des tribunaux
-            de commerce et centralisées par l’
-            <INPI />.
-          </p>
-          <TwoColumnTable body={data} />
-          <p>
-            Pour accéder à l’ensemble des données contenues dans un extrait
-            KBIS, téléchargez le justificatif d’immatriculation via le{' '}
-            <b>bouton ci-dessous</b>. Le téléchargement peut prendre quelques
-            dizaines de secondes.
-          </p>
-          <div className="layout-center">
-            <ButtonInpiPdf siren={immatriculation.siren} />
-            <div className="separator" />
-            <ButtonLink
-              nofollow={true}
-              target="_blank"
-              to={`${immatriculation.downloadlink}`}
-              alt
-            >
-              ⇢ Voir la fiche sur le site de l’INPI
-            </ButtonLink>
-          </div>
-          <p>
-            <b>NB :</b> si le téléchargement échoue, vous pouvez accéder à la
-            donnée en allant sur le site de l’
-            <INPI />. Pour accéder à l’ensemble de la donnée en utilisant le
-            site de l’
-            <INPI /> vous devrez vous créer un compte <INPI />.
-          </p>
-          <style jsx>{`
-            .separator {
-              width: 10px;
-              height: 10px;
-            }
-          `}</style>
-        </Section>
+        <>
+          <Section
+            id="rncs"
+            title="Immatriculation au RNCS"
+            source={EAdministration.INPI}
+          >
+            <p>
+              Cette entité possède une fiche d’immatriculation au{' '}
+              <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
+              liste les entreprises enregistrées auprès des Greffes des
+              tribunaux de commerce et centralisées par l’
+              <INPI />.
+            </p>
+            <TwoColumnTable body={data} />
+            <PrintNever>
+              <p>
+                Pour accéder à l’ensemble des données contenues dans un extrait
+                KBIS, téléchargez le justificatif d’immatriculation via le{' '}
+                <b>bouton ci-dessous</b>. Le téléchargement peut prendre
+                quelques dizaines de secondes.
+              </p>
+              <div className="layout-center">
+                <ButtonInpiPdf siren={immatriculation.siren} />
+                <div className="separator" />
+                <ButtonLink
+                  nofollow={true}
+                  target="_blank"
+                  to={`${immatriculation.downloadlink}`}
+                  alt
+                >
+                  ⇢ Voir la fiche sur le site de l’INPI
+                </ButtonLink>
+              </div>
+              <p>
+                <b>NB :</b> si le téléchargement échoue, vous pouvez accéder à
+                la donnée en allant sur le site de l’
+                <INPI />. Pour accéder à l’ensemble de la donnée en utilisant le
+                site de l’
+                <INPI /> vous devrez vous créer un compte <INPI />.
+              </p>
+            </PrintNever>
+            <style jsx>{`
+              .separator {
+                width: 10px;
+                height: 10px;
+              }
+            `}</style>
+          </Section>
+          <BreakPageForPrint />
+        </>
       )}
     </>
   );

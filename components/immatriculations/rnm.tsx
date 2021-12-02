@@ -12,10 +12,12 @@ import {
   formatIntFr,
 } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
+import BreakPageForPrint from '../print-break-page';
 import ButtonLink from '../button';
 import { download } from '../icon';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
+import { PrintNever } from '../print-visibility';
 
 interface IProps {
   immatriculation: IImmatriculationRNM | IAPINotRespondingError;
@@ -65,47 +67,52 @@ const ImmatriculationRNM: React.FC<IProps> = ({
   return (
     <>
       {immatriculation.downloadlink && (
-        <Section
-          id="rnm"
-          title="Immatriculation au RNM"
-          source={EAdministration.CMAFRANCE}
-        >
-          <p>
-            Cette entité possède une fiche d’immatriculation sur le{' '}
-            <b>Répertoire National des Métiers (RNM)</b> qui liste les
-            entreprises artisanales enreigstrées auprès des Chambres des Métiers
-            et de l’Artisanat (CMA France).
-          </p>
-          <TwoColumnTable body={data} />
-          <p>
-            Pour accéder à l’ensemble des données contenues dans un extrait D1,
-            vous pouvez télécharger le justificatif d’immatriculation. Si le
-            téléchargement échoue, vous pouvez accéder aux données en allant sur
-            le site de CMA France.
-          </p>
-          <div className="layout-center">
-            <ButtonLink
-              target="_blank"
-              to={`${immatriculation.downloadlink}?format=pdf`}
-            >
-              {download} Télécharger le justificatif
-            </ButtonLink>
-            <div className="separator" />
-            <ButtonLink
-              target="_blank"
-              to={`${immatriculation.downloadlink}?format=html`}
-              alt
-            >
-              ⇢ Voir la fiche sur le site de CMA France
-            </ButtonLink>
-          </div>
-          <style jsx>{`
-            .separator {
-              width: 10px;
-              height: 10px;
-            }
-          `}</style>
-        </Section>
+        <>
+          <Section
+            id="rnm"
+            title="Immatriculation au RNM"
+            source={EAdministration.CMAFRANCE}
+          >
+            <p>
+              Cette entité possède une fiche d’immatriculation sur le{' '}
+              <b>Répertoire National des Métiers (RNM)</b> qui liste les
+              entreprises artisanales enreigstrées auprès des Chambres des
+              Métiers et de l’Artisanat (CMA France).
+            </p>
+            <TwoColumnTable body={data} />
+            <PrintNever>
+              <p>
+                Pour accéder à l’ensemble des données contenues dans un extrait
+                D1, vous pouvez télécharger le justificatif d’immatriculation.
+                Si le téléchargement échoue, vous pouvez accéder aux données en
+                allant sur le site de CMA France.
+              </p>
+              <div className="layout-center">
+                <ButtonLink
+                  target="_blank"
+                  to={`${immatriculation.downloadlink}?format=pdf`}
+                >
+                  {download} Télécharger le justificatif
+                </ButtonLink>
+                <div className="separator" />
+                <ButtonLink
+                  target="_blank"
+                  to={`${immatriculation.downloadlink}?format=html`}
+                  alt
+                >
+                  ⇢ Voir la fiche sur le site de CMA France
+                </ButtonLink>
+              </div>
+            </PrintNever>
+            <style jsx>{`
+              .separator {
+                width: 10px;
+                height: 10px;
+              }
+            `}</style>
+          </Section>
+          <BreakPageForPrint />
+        </>
       )}
     </>
   );
