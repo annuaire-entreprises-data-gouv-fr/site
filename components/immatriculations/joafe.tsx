@@ -8,10 +8,12 @@ import {
 import { IImmatriculationJOAFE } from '../../models/immatriculation';
 import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
+import BreakPageForPrint from '../print-break-page';
 import ButtonLink from '../button';
 import { download } from '../icon';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
+import { PrintNever } from '../print-visibility';
 
 interface IProps {
   immatriculation: IImmatriculationJOAFE | IAPINotRespondingError;
@@ -40,29 +42,34 @@ const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
   return (
     <>
       {immatriculation.downloadlink && (
-        <Section
-          id="joafe"
-          title="Enregistrement au JOAFE"
-          source={EAdministration.DILA}
-        >
-          <p>
-            Cette entité est enregistrée au{' '}
-            <b>Journal Officiel des Association (JOAFE)</b>.
-          </p>
-          <TwoColumnTable body={data} />
-          <p>
-            Pour accéder à l’annonce de création de l’association, téléchargez
-            le document ci-dessous :
-          </p>
-          <div className="layout-center">
-            <ButtonLink
-              target="_blank"
-              to={`${immatriculation.downloadlink}?format=pdf`}
-            >
-              {download} Télécharger le justificatif
-            </ButtonLink>
-          </div>
-        </Section>
+        <>
+          <Section
+            id="joafe"
+            title="Enregistrement au JOAFE"
+            source={EAdministration.DILA}
+          >
+            <p>
+              Cette entité est enregistrée au{' '}
+              <b>Journal Officiel des Association (JOAFE)</b>.
+            </p>
+            <TwoColumnTable body={data} />
+            <PrintNever>
+              <p>
+                Pour accéder à l’annonce de création de l’association,
+                téléchargez le document ci-dessous :
+              </p>
+              <div className="layout-center">
+                <ButtonLink
+                  target="_blank"
+                  to={`${immatriculation.downloadlink}?format=pdf`}
+                >
+                  {download} Télécharger le justificatif
+                </ButtonLink>
+              </div>
+            </PrintNever>
+          </Section>
+          <BreakPageForPrint />
+        </>
       )}
     </>
   );

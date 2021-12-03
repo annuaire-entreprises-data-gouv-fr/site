@@ -1,7 +1,8 @@
 import React from 'react';
+import { PrintNever } from '../print-visibility';
 
 export const Question: React.FC<{}> = () => (
-  <>
+  <PrintNever>
     <div
       role="dialog"
       aria-label="Une question"
@@ -67,11 +68,6 @@ export const Question: React.FC<{}> = () => (
           display: none;
         }
       }
-      @media print {
-        .question-bottom-right {
-          display: none;
-        }
-      }
     `}</style>
-  </>
+  </PrintNever>
 );

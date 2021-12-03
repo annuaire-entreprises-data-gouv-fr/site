@@ -1,5 +1,7 @@
+import { PrintNever } from '../print-visibility';
+
 const DownloadManager = () => (
-  <>
+  <PrintNever>
     <div
       role="dialog"
       dangerouslySetInnerHTML={{
@@ -144,14 +146,8 @@ const DownloadManager = () => (
         animation-fill-mode: both;
         display: inline-block;
       }
-
-      @media print {
-        #download-manager {
-          display: none;
-        }
-      }
     `}</style>
-  </>
+  </PrintNever>
 );
 
 export default DownloadManager;
