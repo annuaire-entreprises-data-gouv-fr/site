@@ -131,21 +131,13 @@ jobs:
           npm run test:unit
 
   testE2E:
-    name: Tests end2end
+    name: End2end tests
     runs-on: ubuntu-latest
     needs: [build]
 
     steps:
       - uses: actions/checkout@v2
-      - name: Load node modules
-        uses: actions/cache@v2
-        id: restore-dependencies
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
-      - name: Load cached site
+      - name: Load cached build
         uses: actions/cache@v2
         id: restore-build
         with:
@@ -155,7 +147,6 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           # we have already installed all dependencies above
-          install: false
           browser: firefox
           record: false
           start: npm start
