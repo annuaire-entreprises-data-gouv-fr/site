@@ -1,13 +1,22 @@
 import React from 'react';
 import {
-  administrationsLogo,
   administrationsMetaData,
   EAdministration,
 } from '../../models/administration';
 import { isTwoMonthOld } from '../../utils/helpers/checks';
 import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
+import { cma, inpi } from '../administrations/logos';
 import Warning from '../alerts/warning';
 import DataSourceTooltip from '../information-tooltip/data-source-tooltip';
+
+interface IAdministrationsLogos {
+  [key: string]: JSX.Element;
+}
+
+const administrationsLogo: IAdministrationsLogos = {
+  [EAdministration.INPI]: inpi,
+  [EAdministration.CMAFRANCE]: cma,
+};
 
 interface ISectionProps {
   title: string;

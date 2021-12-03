@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Page from '../layouts';
-import constants from '../constants';
+import constants from '../models/constants';
 
 const Accessibility: React.FC = () => {
   return (

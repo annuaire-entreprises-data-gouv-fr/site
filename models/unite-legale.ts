@@ -64,7 +64,7 @@ const getUniteLegale = async (
   try {
     // first attempt to call siren insee
     return await fetchUniteLegaleFromInsee(siren, page);
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof HttpNotFound) {
       throw new SirenNotFoundError(`Siren ${siren} was not found`);
     }
@@ -73,14 +73,14 @@ const getUniteLegale = async (
     try {
       // in case sirene INSEE 429 or 500, fallback on Siren Etalab
       return await getUniteLegaleSireneOuverte(siren, page);
-    } catch (e) {
+    } catch (e: any) {
       logSireneOuvertefailed({ siren, details: e.message || e });
 
       try {
         // in case sirene etalab 404 or 500, fallback on Sirene insee using fallback credentials to avoid 403
         // no pagination as this function is called when sirene etalab already failed
         return await fetchUniteLegaleFromInseeFallback(siren, page);
-      } catch (e) {
+      } catch (e: any) {
         logSecondSireneInseefailed({ siren, details: e.message || e });
 
         // Siren was not found in both API, return a 404
@@ -136,7 +136,7 @@ const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
       allEtablissementsInsee,
       siegeInsee
     );
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleUniteLegale(siren);
     }
@@ -164,7 +164,7 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
       allEtablissementsInsee,
       siegeInsee
     );
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleUniteLegale(siren);
     }

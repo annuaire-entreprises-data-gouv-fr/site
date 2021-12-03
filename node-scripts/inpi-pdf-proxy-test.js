@@ -31,7 +31,7 @@ const downloadAuthenticatedPdf = async (siren) => {
         `https://staging.annuaire-entreprises.data.gouv.fr/downloads/${slug}.pdf`
       );
       return file;
-    } catch (e) {
+    } catch (e: any) {
       console.log(`Attempt n°${retry} failed. Retrying in 15 seconds...`);
     }
     retry -= 1;
@@ -76,7 +76,7 @@ const checkINPIpdfProxy = async () => {
       process.exit(1);
     }
     console.info('=> ✅ yaaay ! pdf proxy worked like a charm 🧙‍♂️');
-  } catch (e) {
+  } catch (e: any) {
     console.log(e);
     console.info('=> ❌ download failed');
     process.exit(1);

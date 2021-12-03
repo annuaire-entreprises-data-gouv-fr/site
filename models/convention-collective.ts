@@ -37,7 +37,7 @@ const getConventionCollectives = async (
     }
     const sirets = uniteLegale.etablissements.map((e) => e.siret);
     return await fetchConventionCollectives(sirets);
-  } catch (e) {
+  } catch (e: any) {
     logErrorInSentry(new Error('Error in API convention collectives'), {
       siren: uniteLegale.siren,
       details: `Error : ${e}`,

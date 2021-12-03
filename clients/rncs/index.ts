@@ -75,7 +75,7 @@ const RNCSClientWrapper = async (
       await createAndAuthenticateCookie(index);
     }
     return await fetchData(route, COOKIE[index], options);
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof HttpUnauthorizedError) {
       await createAndAuthenticateCookie(index);
       return await fetchData(route, COOKIE[index], options);

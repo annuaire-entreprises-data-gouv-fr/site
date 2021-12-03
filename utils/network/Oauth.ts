@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as oauth from 'axios-oauth-client';
 import * as tokenProvider from 'axios-token-interceptor';
 import { HttpServerError } from '../../clients/exceptions';
-import constants from '../../constants';
+import constants from '../../models/constants';
 import handleError from './handle-errors';
 
 export const httpClientOAuthFactory = (

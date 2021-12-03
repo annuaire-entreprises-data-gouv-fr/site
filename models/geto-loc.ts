@@ -15,7 +15,7 @@ export interface IGeoLoc {
 export const getGeoLoc = async (etablissement: IEtablissement) => {
   try {
     return await fetchBanGeoLoc(etablissement);
-  } catch (e) {
+  } catch (e: any) {
     logErrorInSentry(new Error('Error in API Geoloc'), {
       siren: etablissement.siren,
       details: JSON.stringify(e.message),

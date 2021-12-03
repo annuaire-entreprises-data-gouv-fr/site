@@ -72,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         searchTerm: searchTermParam,
       },
     };
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof IsLikelyASirenOrSiretException) {
       redirectIfSiretOrSiren(context.res, e.message);
     } else {

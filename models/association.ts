@@ -9,7 +9,7 @@ const getAssociation = async (slug: string, siren: Siren) => {
   try {
     const idRna = verifyIdRna(slug);
     return await fetchAssociation(idRna);
-  } catch (e) {
+  } catch (e: any) {
     const more = {
       siren,
       details: `n°RNA ${slug} - ${e.message}`,

@@ -92,7 +92,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: await getDirigeantsWithUniteLegaleFromSlug(slug),
     };
-  } catch (e) {
+  } catch (e: any) {
     redirectIfIssueWithSiren(context.res, e, slug, context.req);
     return { props: {} };
   }

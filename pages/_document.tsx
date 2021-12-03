@@ -9,42 +9,15 @@ const manifest = (
 
 class CustomHead extends Head {
   render() {
-    const res = super.render();
-
-    function transform(node: any): any {
-      // remove link preloads and next.js script
-      const isLinkPreload =
-        node &&
-        node.type === 'link' &&
-        node.props &&
-        node.props.rel === 'preload';
-
-      const isNextScript =
-        node &&
-        node.type === 'script' &&
-        node.props &&
-        node.props.src.indexOf('/_next/static') > -1;
-
-      if (isLinkPreload || isNextScript) {
-        return null;
-      }
-      if (node && node.props && node.props.children) {
-        return {
-          ...node,
-          props: {
-            ...node.props,
-            children: node.props.children.map(transform),
-          },
-        };
-      }
-      if (Array.isArray(node)) {
-        return node.map(transform);
-      }
-
-      return node;
-    }
-
-    return transform(res);
+    const { head, styles } = this.context;
+    const children = this.props.children;
+    return (
+      <head {...this.props}>
+        {children}
+        {head}
+        {styles}
+      </head>
+    );
   }
 }
 
@@ -65,11 +38,15 @@ class DevDocument extends Document {
             href="/favicons/manifest.webmanifest"
             cross-origin="use-credentials"
           />
-
           <link
             rel="stylesheet"
             type="text/css"
             href="http://localhost:3001/frontend/css/dsfr.min.css"
+          />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="http://localhost:3001/frontend/css/globals.css"
           />
           <script
             defer
@@ -117,7 +94,7 @@ class StaticDocument extends Document {
             nomodule="nomodule"
             src={
               //@ts-ignore
-              `/${manifest['../vite/legacy-polyfills'].file}`
+              `/${manifest['../\u0000vite/legacy-polyfills'].file}`
             }
           ></script>
           <script

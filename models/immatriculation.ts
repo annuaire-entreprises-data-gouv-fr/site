@@ -49,7 +49,7 @@ export interface IImmatriculationRNM extends IImmatriculation {
 export const getImmatriculationRNM = async (siren: Siren) => {
   try {
     return await fetchRnmImmatriculation(siren);
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.CMAFRANCE, 404);
     }
@@ -69,7 +69,7 @@ export const getImmatriculationRNM = async (siren: Siren) => {
 export const getImmatriculationRNCS = async (siren: Siren) => {
   try {
     return await fetchRNCSImmatriculation(siren);
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INPI, 404);
     }
@@ -105,7 +105,7 @@ export const getImmatriculationJOAFE = async (
       datePublication: annonceCreation.datePublication,
       downloadlink: annonceCreation.path,
     } as IImmatriculationJOAFE;
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof HttpNotFound || e instanceof NotAValidIdRnaError) {
       return APINotRespondingFactory(EAdministration.DILA, 404);
     }

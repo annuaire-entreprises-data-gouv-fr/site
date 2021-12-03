@@ -29,7 +29,7 @@ const verify = async (req: NextApiRequest, res: NextApiResponse) => {
       });
       redirectForbidden(res, 'Blocked by Captcha');
     }
-  } catch (e) {
+  } catch (e: any) {
     setCaptchaCookie(req, res);
     logErrorInSentry('H-Captcha error, passing through', {
       page: path,

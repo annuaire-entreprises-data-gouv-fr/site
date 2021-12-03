@@ -75,7 +75,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         ...etablissementWithUniteLegale,
       },
     };
-  } catch (e) {
+  } catch (e: any) {
     redirectIfIssueWithSiretOrSiren(context.res, e, siret, context.req);
     return { props: {} };
   }

@@ -111,7 +111,7 @@ const extractDetails = (annonce: IBodaccRecords): string => {
       return modif.descriptif;
     }
     return '';
-  } catch (e) {
+  } catch (e: any) {
     logWarningInSentry('Unexpected error while parsing BODACC :' + e, {
       details: annonce.registre,
     });

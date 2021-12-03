@@ -38,7 +38,7 @@ const qrCode = ({ query: { slug } }: NextApiRequest, res: NextApiResponse) => {
           resolve(null);
         }
       );
-    } catch (e) {
+    } catch (e: any) {
       logErrorInSentry(e, { siren: slug as string });
       res.status(500).json({ message: e });
       resolve(null);

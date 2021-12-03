@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 
 import Page from '../../layouts';
 import ButtonLink from '../../components/button';
-import constants from '../../constants';
+import constants from '../../models/constants';
 
 const SirenOrSiretNotFoundPage = () => {
   return (

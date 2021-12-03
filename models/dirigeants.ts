@@ -83,7 +83,7 @@ export const getDirigeantsFromImmatriculations = async (siren: Siren) => {
       dirigeants: dirigeants.length > 0 ? dirigeants : notFound,
       beneficiaires: beneficiaires.length > 0 ? beneficiaires : notFound,
     };
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return { dirigeants: notFound, beneficiaires: notFound };
     } else {

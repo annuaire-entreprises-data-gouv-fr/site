@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import constants from '../../constants';
+import constants from '../../models/constants';
 import ButtonLink from '../button';
 
 const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
