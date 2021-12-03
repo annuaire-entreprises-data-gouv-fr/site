@@ -1,13 +1,13 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests
 
-name: 'Pre merge checks'
+name: 'Pre-merge checks'
 
 on:
   pull_request:
     branches: [master]
 
-# be extremly careful as env variable defined here are accessible by all the actions of the workflow.
-# For critical env variable declare it within the action
+# Be extremely careful as the env variables defined here are accessible by all the actions of the workflow.
+# For critical env variable, declare it within the action.
 env:
   node-version: 16.x
   INSEE_CLIENT_ID: ${{ secrets.INSEE_CLIENT_ID }}
@@ -54,7 +54,8 @@ jobs:
             ${{ runner.os }}-npm-cache-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - run: npm i
+      - name: Install dependencies
+        run: npm i
 
   lint:
     name: Lint
