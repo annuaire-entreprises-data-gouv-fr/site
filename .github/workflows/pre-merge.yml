@@ -125,8 +125,8 @@ jobs:
       - run: |
           npm run test:unit
 
-  tests:
-    name: Unit tests
+  testE2E:
+    name: Tests end 2 end
     runs-on: ubuntu-latest
     needs: [build]
 
