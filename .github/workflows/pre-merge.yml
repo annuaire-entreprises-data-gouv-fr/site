@@ -76,7 +76,8 @@ jobs:
         with:
           path: ./node_modules
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
-      - run: npm run lint
+      - name: Run linter
+        run: npm run lint
 
   build:
     name: Build
@@ -97,7 +98,8 @@ jobs:
         with:
           path: ./node_modules
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
-      - run: npm run build:site
+      - name: Build site
+        run: npm run build:site
       - uses: actions/cache@v2
         id: restore-build
         with:
@@ -123,7 +125,8 @@ jobs:
         with:
           path: ./node_modules
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
-      - run: |
+      - name: Run unit tests
+        run: |
           npm run test:unit
 
   testE2E:
