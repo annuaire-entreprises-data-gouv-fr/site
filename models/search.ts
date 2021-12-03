@@ -40,7 +40,7 @@ const search = async (searchTerm: string, page: number) => {
     const results = await getResults(escapedSearchTerm, page);
     // const results = await getResultsFallback(escapedSearchTerm, page);
     return results;
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return [];
     } else {

@@ -31,7 +31,7 @@ export const formatINPIDateField = (unformatted: string | number): string => {
     } else {
       throw new Error('Unknown date format');
     }
-  } catch (e) {
+  } catch (e: any) {
     logErrorInSentry('Unknwon date format in INPI’s reponse', {
       details: `${unformatted}`,
     });

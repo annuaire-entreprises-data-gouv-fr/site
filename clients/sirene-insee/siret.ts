@@ -1,6 +1,6 @@
 import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
 import { inseeClientGet, INSEE_CREDENTIALS } from '.';
-import constants from '../../constants';
+import constants from '../../models/constants';
 import {
   createDefaultEtablissement,
   IEtablissement,

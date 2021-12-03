@@ -1,5 +1,5 @@
 import React from 'react';
-import constants from '../../constants';
+import constants from '../../models/constants';
 import { IEtablissement, IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';

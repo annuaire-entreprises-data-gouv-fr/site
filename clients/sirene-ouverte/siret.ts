@@ -64,7 +64,7 @@ const getEtablissementSireneOuverte = async (
     if (!etablissement) {
       throw new Error();
     }
-  } catch (e) {
+  } catch (e: any) {
     throw new HttpNotFound(404, 'Not Found');
   }
 

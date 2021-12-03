@@ -1,14 +1,11 @@
-import parser from 'fast-xml-parser';
+import parser, { XMLParser } from 'fast-xml-parser';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import logErrorInSentry, { logWarningInSentry } from '../../utils/sentry';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 
 import { IRNCSResponse, IRNCSResponseDossier } from './IMR';
 import { extractBeneficiaires } from './parsers/beneficiaires';
-import {
-  extractDirigeantFromIdentite,
-  extractRepresentants,
-} from './parsers/dirigeants';
+import { extractRepresentants } from './parsers/dirigeants';
 import { extractIdentite } from './parsers/identite';
 
 export class InvalidFormatError extends HttpServerError {
@@ -30,7 +27,7 @@ export const extractIMRFromXml = (responseAsXml: string, siren: Siren) => {
       beneficiaires,
       identite,
     };
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof HttpNotFound) {
       throw e;
     }
@@ -39,11 +36,10 @@ export const extractIMRFromXml = (responseAsXml: string, siren: Siren) => {
 };
 
 const parseXmlToJson = (xmlString: string): IRNCSResponse => {
-  const tObj = parser.getTraversalObj(xmlString, {
-    arrayMode: false,
+  const parser = new XMLParser({
     ignoreAttributes: false,
   });
-  return parser.convertToJson(tObj, { arrayMode: false });
+  return parser.parse(xmlString);
 };
 
 const extractDossierPrincipal = (

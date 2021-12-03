@@ -62,6 +62,7 @@ export const inseeClientWrapper = async (
   options?: RequestInit,
   credentials?: INSEE_CREDENTIALS
 ) => {
+  //@ts-ignore
   const response = await inseeClient(credentials)({
     ...options,
     url,

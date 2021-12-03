@@ -33,7 +33,7 @@ export const isCaptchaCookieValid = (
       return false;
     }
     return true;
-  } catch (e) {
+  } catch (e: any) {
     return false;
   }
 };

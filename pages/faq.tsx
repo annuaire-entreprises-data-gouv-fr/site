@@ -1,4 +1,4 @@
-import constants from '../constants';
+import constants from '../models/constants';
 import React, { PropsWithChildren } from 'react';
 import ButtonLink from '../components/button';
 import { DILA, INPI, INSEE, METI, CMA } from '../components/administrations';

@@ -69,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         etablissement,
       },
     };
-  } catch (e) {
+  } catch (e: any) {
     return { props: { etablissement: { estActif: null, siret } } };
   }
 };

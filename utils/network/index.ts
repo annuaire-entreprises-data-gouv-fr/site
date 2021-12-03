@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import constants from '../../constants';
+import constants from '../../models/constants';
 import handleError from './handle-errors';
 import httpClientOAuthFactory from './Oauth';
 

@@ -42,7 +42,7 @@ const getEtablissementFromSlug = async (
 const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
   try {
     return await getEtablissementInsee(siret);
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleEtablissement(siret);
     }
@@ -54,12 +54,12 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
 
     try {
       return await getEtablissementSireneOuverte(siret);
-    } catch (e) {
+    } catch (e: any) {
       logSireneOuvertefailed({ siret, details: e.message });
 
       try {
         return await getEtablissementInseeWithFallbackCredentials(siret);
-      } catch (e) {
+      } catch (e: any) {
         if (e instanceof HttpForbiddenError) {
           return createNonDiffusibleEtablissement(siret);
         }
@@ -97,7 +97,7 @@ const getEtablissementWithLatLongFromSlug = async (
     etablissement.latitude = lat;
     etablissement.longitude = long;
     return etablissement;
-  } catch (e) {
+  } catch (e: any) {
     throw new SiretNotFoundError(slug);
   }
 };

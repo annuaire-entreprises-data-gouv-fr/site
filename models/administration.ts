@@ -1,5 +1,3 @@
-import { cma, inpi } from '../constants/logo';
-
 export enum EAdministration {
   DINUM = 0,
   INPI = 1,
@@ -30,14 +28,6 @@ export interface IAPIMonitorMetaData {
   apiGouvLink?: string;
   apiName?: string;
 }
-interface IAdministrationsLogos {
-  [key: string]: JSX.Element;
-}
-
-export const administrationsLogo: IAdministrationsLogos = {
-  [EAdministration.INPI]: inpi,
-  [EAdministration.CMAFRANCE]: cma,
-};
 
 export const administrationsMetaData: IAdministrationsMetaData = {
   [EAdministration.DINUM]: {

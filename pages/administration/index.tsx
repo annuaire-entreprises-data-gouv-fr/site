@@ -91,7 +91,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: { monitors },
     };
-  } catch (e) {
+  } catch (e: any) {
     redirectServerError(context.res, e);
 
     return { props: {} };

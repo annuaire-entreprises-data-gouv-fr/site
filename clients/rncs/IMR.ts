@@ -205,7 +205,7 @@ const unZipFromBuffer = (buffer: Buffer): Promise<IZipFileAsBuffer[]> => {
                     zipfile.readEntry();
                   });
                 });
-              } catch (e) {
+              } catch (e: any) {
                 reject(e);
               }
             }

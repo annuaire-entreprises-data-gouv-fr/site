@@ -70,7 +70,7 @@ const getUniteLegaleSireneOuverte = async (
     if (!uniteLegale) {
       throw new Error();
     }
-  } catch (e) {
+  } catch (e: any) {
     throw new HttpNotFound(404, siren);
   }
 

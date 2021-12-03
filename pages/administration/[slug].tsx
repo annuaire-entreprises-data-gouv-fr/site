@@ -110,7 +110,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         monitorings,
       },
     };
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof HttpNotFound) {
       redirectPageNotFound(
         context.res,
