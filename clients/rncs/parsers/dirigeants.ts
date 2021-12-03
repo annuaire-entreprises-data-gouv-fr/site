@@ -72,6 +72,9 @@ const mapToDomainDirigeant = (
 export const extractDirigeantFromIdentite = (
   dossierPrincipal: IRNCSResponseDossier
 ) => {
+  if (!dossierPrincipal.identite || !dossierPrincipal.identite.identite_PP) {
+    return null;
+  }
   return mapToDomainFromIdentite(dossierPrincipal);
 };
 
