@@ -25,8 +25,8 @@ PAGES.forEach((page) => {
   exec(
     './node_modules/@axe-core/cli/dist/src/bin/cli.js ' +
       'http://localhost:3000' +
-      page,
-    ' --stdout --exit --disable scrollable-region-focusable --disable region',
+      page +
+      ' --stdout --exit --disable scrollable-region-focusable --disable region --show-errors',
     (err, stdout, stderr) => {
       if (err || stderr) {
         console.log(err, stderr);
