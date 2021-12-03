@@ -36,7 +36,7 @@ export const pingAPIClient = async (slug: string | string[]) => {
   try {
     await ping(slug);
     return { test: true, status: 200 };
-  } catch (e) {
+  } catch (e: any) {
     if (e instanceof APISlugNotFound) {
       throw e;
     } else {

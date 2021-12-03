@@ -22,7 +22,7 @@ const credentials = [
 
 const getCredentials = (index: number) => {
   const credential = credentials[index];
-  return { login: credential[0], password: credential[1] };
+  return { login: credential[0] || '', password: credential[1] || '' };
 };
 
 /** Authenticate a user on opendata-rncs */
@@ -39,7 +39,9 @@ const createAndAuthenticateCookie = async (index: number) => {
       },
     });
 
-    const cookie = response.headers['set-cookie'][0];
+    const setCookieValue = response.headers['set-cookie'] || [];
+    const cookie = setCookieValue[0];
+
     if (!cookie || typeof cookie !== 'string') {
       throw new Error('Authentication failed');
     }
