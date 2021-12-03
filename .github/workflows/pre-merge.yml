@@ -143,18 +143,13 @@ jobs:
         # run 4 copies of the current job in parallel
         containers: [1, 2, 3, 4]
 
-  - name: Cypress tests 🧪
-      uses: cypress-io/github-action@v2
-      with:
-        record: true
-        parallel: true
-        group: 1. Markdown
-
     steps:
       - uses: actions/checkout@v2
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
+          record: false
+          parallel: true
           browser: firefox
           start: npm start
         env:
