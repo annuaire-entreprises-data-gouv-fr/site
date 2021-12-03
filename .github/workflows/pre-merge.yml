@@ -1,0 +1,158 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests
+
+name: 'Pre merge checks'
+
+on:
+  pull_request:
+    branches: [master]
+
+# be extremly careful as env variable defined here are accessible by all the actions of the workflow.
+# For critical env variable declare it within the action
+env:
+  node-version: 16.x
+  INSEE_CLIENT_ID: ${{ secrets.INSEE_CLIENT_ID }}
+  INSEE_CLIENT_SECRET: ${{ secrets.INSEE_CLIENT_SECRET}}
+  INSEE_CLIENT_ID_FALLBACK: ${{ secrets.INSEE_CLIENT_ID_FALLBACK }}
+  INSEE_CLIENT_SECRET_FALLBACK: ${{ secrets.INSEE_CLIENT_SECRET_FALLBACK}}
+  INPI_SITE_LOGIN: ${{ secrets.INPI_SITE_LOGIN}}
+  INPI_SITE_PASSWORD: ${{ secrets.INPI_SITE_PASSWORD}}
+  INPI_LOGIN: ${{ secrets.INPI_LOGIN}}
+  INPI_PASSWORD: ${{ secrets.INPI_PASSWORD}}
+  INPI_LOGIN_2: ${{ secrets.INPI_LOGIN}}
+  INPI_PASSWORD_2: ${{ secrets.INPI_PASSWORD}}
+  INPI_LOGIN_3: ${{ secrets.INPI_LOGIN}}
+  INPI_PASSWORD_3: ${{ secrets.INPI_PASSWORD}}
+  INPI_LOGIN_4: ${{ secrets.INPI_LOGIN}}
+  INPI_PASSWORD_4: ${{ secrets.INPI_PASSWORD}}
+  INPI_LOGIN_5: ${{ secrets.INPI_LOGIN}}
+  INPI_PASSWORD_5: ${{ secrets.INPI_PASSWORD}}
+  INPI_LOGIN_6: ${{ secrets.INPI_LOGIN}}
+  INPI_PASSWORD_6: ${{ secrets.INPI_PASSWORD}}
+  PDF_DOWNLOAD_DIRECTORY: /tmp/download
+
+jobs:
+  dependencies:
+    name: 'Install dependencies'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Cache node modules
+        uses: actions/cache@v2
+        id: restore-dependencies
+        env:
+          cache-name: cache-node-modules
+        with:
+          # Cache node_modules. To cache global, you may try ~/.npm
+          path: ./node_modules
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-cache-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - run: npm i
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: [dependencies]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Load node modules
+        uses: actions/cache@v2
+        id: restore-dependencies
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+      - run: npm run lint
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [dependencies]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Load node modules
+        uses: actions/cache@v2
+        id: restore-dependencies
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+      - run: npm run build:site
+      - uses: actions/cache@v2
+        id: restore-build
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+
+  tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    needs: [dependencies]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Load node modules
+        uses: actions/cache@v2
+        id: restore-dependencies
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+      - run: |
+          npm run test:unit
+
+  tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Load node modules
+        uses: actions/cache@v2
+        id: restore-dependencies
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+      - uses: actions/cache@v2
+        id: restore-build
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          browser: firefox
+          start: npm start
+        env:
+          PORT: 3000
