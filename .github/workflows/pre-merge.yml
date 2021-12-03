@@ -151,6 +151,7 @@ jobs:
           record: false
           parallel: true
           browser: firefox
+          build: npm run build:site
           start: npm start
         env:
           PORT: 3000
