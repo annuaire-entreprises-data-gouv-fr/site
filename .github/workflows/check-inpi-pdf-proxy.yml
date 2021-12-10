@@ -4,8 +4,8 @@
 name: Proxy PDF de l’extrait d’immatriculation INPI
 
 on:
-  schedule:
-    - cron: '*/30 * * * *'
+# schedule:
+#   - cron: '*/30 * * * *'
   workflow_dispatch:
 
 jobs:
