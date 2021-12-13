@@ -8,6 +8,9 @@ on:
     - cron: '*/30 * * * *'
   workflow_dispatch:
 
+env:
+  CI_TEST_USER_AGENT: ${{ secrets.CI_TEST_USER_AGENT}}
+
 jobs:
   build:
     runs-on: ubuntu-latest

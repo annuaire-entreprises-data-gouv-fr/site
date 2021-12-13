@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+require('dotenv').config();
+
 console.info('=== INPI PDF proxy checker ===');
 
 const sleep = async (seconds) => {
@@ -9,12 +11,15 @@ const sleep = async (seconds) => {
 };
 
 const downloadAuthenticatedPdf = async (siren) => {
-  let retry = 3;
+  let retry = 0;
   const create = await axios(
     `https://staging.annuaire-entreprises.data.gouv.fr/api/inpi-pdf-proxy/job/${siren}`,
     {
       timeout: 90 * 1000,
       method: 'GET',
+      headers: {
+        'User-Agent': process.env.CI_TEST_USER_AGENT,
+      },
     }
   );
 
@@ -24,17 +29,23 @@ const downloadAuthenticatedPdf = async (siren) => {
     throw new Error('Job was not created properly');
   }
 
-  while (retry > 0) {
+  while (retry < 3) {
     await sleep(15);
     try {
       const file = await axios(
-        `https://staging.annuaire-entreprises.data.gouv.fr/downloads/${slug}.pdf`
+        `https://staging.annuaire-entreprises.data.gouv.fr/downloads/${slug}.pdf`,
+        {
+          headers: {
+            'User-Agent': process.env.CI_TEST_USER_AGENT,
+          },
+        }
       );
       return file;
     } catch (e) {
+      console.log(e);
       console.log(`Attempt n°${retry} failed. Retrying in 15 seconds...`);
     }
-    retry -= 1;
+    retry += 1;
   }
 };
 
