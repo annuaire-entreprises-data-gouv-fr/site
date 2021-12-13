@@ -29,7 +29,7 @@ const downloadAuthenticatedPdf = async (siren) => {
     throw new Error('Job was not created properly');
   }
 
-  while (retry < 3) {
+  while (retry <= 3) {
     await sleep(15);
     try {
       const file = await axios(
@@ -42,7 +42,6 @@ const downloadAuthenticatedPdf = async (siren) => {
       );
       return file;
     } catch (e) {
-      console.log(e);
       console.log(`Attempt n°${retry} failed. Retrying in 15 seconds...`);
     }
     retry += 1;
