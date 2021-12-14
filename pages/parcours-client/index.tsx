@@ -1,7 +1,9 @@
+import { GetServerSideProps } from 'next';
 import React from 'react';
 import ButtonFranceConnect from '../../components/button-france-connect';
 
 import Page from '../../layouts';
+import { getSession } from '../../utils/session';
 
 const Login: React.FC = () => {
   return (
@@ -39,6 +41,23 @@ const Login: React.FC = () => {
       `}</style>
     </Page>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context.req, context.res);
+
+  if (session.passport && session.passport.user) {
+    return {
+      redirect: {
+        destination: '/parcours-client/home',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 };
 
 export default Login;

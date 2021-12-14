@@ -1,5 +1,6 @@
 import Page from './page';
+import ApplicationPage from './appPage';
 
-export { Page };
+export { Page, ApplicationPage };
 
 export default Page;
