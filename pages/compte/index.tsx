@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (session.passport && session.passport.user) {
     return {
       redirect: {
-        destination: '/parcours-client/home',
+        destination: '/compte/mes-entreprises',
         permanent: false,
       },
     };

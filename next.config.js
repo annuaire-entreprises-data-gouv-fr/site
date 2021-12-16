@@ -3,7 +3,7 @@ module.exports = {
     return [
       {
         source: '/callback',
-        destination: '/api/login',
+        destination: '/api/compte/callback',
         permanent: true,
       },
     ];

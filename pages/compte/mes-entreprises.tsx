@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import { Section } from '../../components/section';
 
-import { ApplicationPage } from '../../layouts';
+import Page from '../../layouts';
 import { getSession } from '../../utils/session';
 
 const Login: React.FC<{ name: string; firstName: string }> = ({
@@ -10,16 +10,41 @@ const Login: React.FC<{ name: string; firstName: string }> = ({
   firstName,
 }) => {
   return (
-    <ApplicationPage title="Vos entreprises">
+    <Page title="Vos entreprises">
       <h1>
         {firstName} {name}
       </h1>
+      <a href="/api/compte/logout">Se deconnecter</a>
       <Section title="Vos entreprises">
         <p>Vous n’avez aucune entreprise actuellement référencée.</p>
+
+        <div className="layout-center">
+          <div className="new-entreprise">
+            <div className="plus">+</div>
+            <div>Référencer une entreprise</div>
+          </div>
+        </div>
       </Section>
 
-      <style jsx>{``}</style>
-    </ApplicationPage>
+      <style jsx>{`
+        .new-entreprise {
+          background-color: #dfdff155;
+          padding: 20px;
+          margin: 20px;
+          border-radius: 5px;
+          color: #000091;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-weight: bold;
+        }
+        .plus {
+          font-size: 6rem;
+          opacity: 0.1;
+          height: 4rem;
+        }
+      `}</style>
+    </Page>
   );
 };
 
@@ -29,7 +54,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!session.passport || !session.passport.user) {
     return {
       redirect: {
-        destination: '/parcours-client',
+        destination: '/compte',
         permanent: false,
       },
     };
