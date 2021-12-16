@@ -69,6 +69,11 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
             {formatIntFr(dirigeant.siren)}
           </a>,
         ]);
+        infos.push([
+          'Dirigeant(s)',
+          //eslint-disable-next-line
+          <a href={`/dirigeants/${dirigeant.siren}`}>→ voir les dirigeants</a>,
+        ]);
       }
       return infos;
     } else {
