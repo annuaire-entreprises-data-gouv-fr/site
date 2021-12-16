@@ -137,10 +137,9 @@ sont pas à jour ?
 
 Certaines mise à jour peuvent être effectuées via [un formulaire en ligne](https://www.service-public.fr/professionnels-entreprises/vosdroits/N31143).
 
-Si ce n'est pas suffisant, [contactez directement l'INSEE](https://www.insee.fr/fr/information/2410945)
+Si ce n'est pas suffisant, [contactez directement l'INSEE](https://www.insee.fr/fr/information/1302169)
     `,
-    contact:
-      'https://api.insee.fr/catalogue/site/themes/wso2/subthemes/insee/pages/help.jag#contact',
+    contact: 'https://www.insee.fr/fr/information/1302169',
     dataGouvLink:
       'https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/',
     apiMonitors: [

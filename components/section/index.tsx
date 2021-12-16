@@ -5,7 +5,7 @@ import {
 } from '../../models/administration';
 import { isTwoMonthOld } from '../../utils/helpers/checks';
 import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
-import { cma, inpi } from '../administrations/logos';
+import { cma, inpi, insee } from '../administrations/logos';
 import Warning from '../alerts/warning';
 import DataSourceTooltip from '../information-tooltip/data-source-tooltip';
 
@@ -16,6 +16,7 @@ interface IAdministrationsLogos {
 const administrationsLogo: IAdministrationsLogos = {
   [EAdministration.INPI]: inpi,
   [EAdministration.CMAFRANCE]: cma,
+  [EAdministration.INSEE]: insee,
 };
 
 interface ISectionProps {
@@ -58,7 +59,15 @@ export const Section: React.FC<ISectionProps> = ({
                 lastUpdatedAt={formatDate(last)}
               />
             </div>
-            {dataLogo && <div className="logo-wrapper">{dataLogo}</div>}
+            {dataLogo && (
+              <a
+                href={`/administration/${dataSource.slug}`}
+                className="logo-wrapper"
+                title={dataSource.long}
+              >
+                {dataLogo}
+              </a>
+            )}
           </>
         )}
       </div>
@@ -92,15 +101,13 @@ export const Section: React.FC<ISectionProps> = ({
           position: absolute;
           min-width: 70px;
           max-width: 100px;
-          height: 30px;
-          max-height: 30px;
+          height: 50px;
+          max-height: 50px;
           top: 16px;
           right: 16px;
+          box-shadow: none;
         }
-        .logo-wrapper svg {
-          width: 100%;
-          height: 100%;
-        }
+
         @media only screen and (min-width: 1px) and (max-width: 600px) {
           .logo-wrapper {
             display: none;
