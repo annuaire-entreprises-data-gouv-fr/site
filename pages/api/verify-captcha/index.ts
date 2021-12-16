@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import httpClient from '../../../utils/network';
-import redirect, { redirectForbidden } from '../../../utils/redirects';
+import redirect from '../../../utils/redirects';
 import logErrorInSentry, { logWarningInSentry } from '../../../utils/sentry';
 import { setCaptchaCookie } from '../../../utils/captcha';
 
@@ -23,11 +23,15 @@ const verify = async (req: NextApiRequest, res: NextApiResponse) => {
       redirect(res, path);
     } else {
       const reason = verify.data['error-codes'].join('.');
-      logWarningInSentry('H-Captcha failed to verify response', {
-        page: path,
-        details: reason,
-      });
-      redirectForbidden(res, 'Blocked by Captcha');
+      logWarningInSentry(
+        'H-Captcha failed to verify response - redirect to 403',
+        {
+          page: path,
+          details: reason,
+        }
+      );
+
+      redirect(res, '/erreur/acces-refuse');
     }
   } catch (e: any) {
     setCaptchaCookie(req, res);
