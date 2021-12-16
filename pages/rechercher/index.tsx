@@ -74,11 +74,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   } catch (e: any) {
     if (e instanceof IsLikelyASirenOrSiretException) {
-      redirectIfSiretOrSiren(context.res, e.message);
+      return redirectIfSiretOrSiren(e.message);
     } else {
-      redirectServerError(context.res, e.message);
+      return redirectServerError(e.message);
     }
-    return { props: {} };
   }
 };
 

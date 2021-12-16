@@ -1,9 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { HttpNotFound } from '../../../../clients/exceptions';
 import { downloadInpiPdfAndSaveOnDisk } from '../../../../clients/inpi-site';
-import { isCaptchaCookieValid } from '../../../../utils/captcha';
 import { isSiren } from '../../../../utils/helpers/siren-and-siret';
-import redirect from '../../../../utils/redirects';
 import logErrorInSentry from '../../../../utils/sentry';
 
 /**

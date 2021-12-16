@@ -1,4 +1,4 @@
-import { IncomingMessage, ServerResponse } from 'http';
+import { IncomingMessage } from 'http';
 import {
   hasSiretFormat,
   hasSirenFormat,
@@ -13,24 +13,28 @@ import {
   SirenNotFoundError,
   SiretNotFoundError,
 } from '../../models';
-import redirect, {
+import {
   redirectPageNotFound,
   redirectServerError,
   redirectSirenOrSiretIntrouvable,
   redirectSirenOrSiretInvalid,
 } from '.';
 
-export const redirectIfSiretOrSiren = (
-  res: ServerResponse,
-  siretOrSiren: string
-) => {
+export const redirectIfSiretOrSiren = (siretOrSiren: string) => {
+  let destination;
   if (hasSiretFormat(siretOrSiren)) {
-    redirect(res, `/etablissement/${siretOrSiren}`);
+    destination = `/etablissement/${siretOrSiren}`;
   } else if (hasSirenFormat(siretOrSiren)) {
-    redirect(res, `/entreprise/${siretOrSiren}`);
+    destination = `/entreprise/${siretOrSiren}`;
   } else {
     throw new Error(`${siretOrSiren} is neither a siret or a siren`);
   }
+  return {
+    redirect: {
+      destination,
+      permanent: false,
+    },
+  };
 };
 
 const getScopeFromRequest = (req: IncomingMessage | undefined) => {
@@ -45,7 +49,6 @@ const getScopeFromRequest = (req: IncomingMessage | undefined) => {
 };
 
 export const redirectIfIssueWithSiren = (
-  res: ServerResponse,
   exception: any,
   siren: string,
   req?: IncomingMessage
@@ -53,18 +56,17 @@ export const redirectIfIssueWithSiren = (
   const scope = { siren, ...getScopeFromRequest(req) };
 
   if (exception instanceof SirenNotFoundError) {
-    redirectSirenOrSiretIntrouvable(res, siren, scope);
+    return redirectSirenOrSiretIntrouvable(siren, scope);
   } else if (exception instanceof NotLuhnValidSirenError) {
-    redirectSirenOrSiretInvalid(res, siren, scope);
+    return redirectSirenOrSiretInvalid(siren, scope);
   } else if (exception instanceof NotASirenError) {
-    redirectPageNotFound(res, siren, scope);
+    return redirectPageNotFound(siren, scope);
   } else {
-    redirectServerError(res, exception.message, scope);
+    return redirectServerError(exception.message, scope);
   }
 };
 
 export const redirectIfIssueWithSiretOrSiren = (
-  res: ServerResponse,
   exception: any,
   siret: string,
   req?: IncomingMessage
@@ -74,18 +76,18 @@ export const redirectIfIssueWithSiretOrSiren = (
   const scope = { siren, siret, ...getScopeFromRequest(req) };
 
   if (exception instanceof SiretNotFoundError) {
-    redirectSirenOrSiretIntrouvable(res, siret, scope);
+    return redirectSirenOrSiretIntrouvable(siret, scope);
   } else if (exception instanceof NotLuhnValidSiretError) {
-    redirectSirenOrSiretInvalid(res, siret, scope);
+    return redirectSirenOrSiretInvalid(siret, scope);
   } else if (exception instanceof NotASiretError) {
-    redirectPageNotFound(res, siret, scope);
+    return redirectPageNotFound(siret, scope);
   } else if (exception instanceof SirenNotFoundError) {
-    redirectSirenOrSiretIntrouvable(res, siren, scope);
+    return redirectSirenOrSiretIntrouvable(siren, scope);
   } else if (exception instanceof NotLuhnValidSirenError) {
-    redirectSirenOrSiretInvalid(res, siren, scope);
+    return redirectSirenOrSiretInvalid(siren, scope);
   } else if (exception instanceof NotASirenError) {
-    redirectPageNotFound(res, siren, scope);
+    return redirectPageNotFound(siren, scope);
   } else {
-    redirectServerError(res, exception.message, scope);
+    return redirectServerError(exception.message, scope);
   }
 };

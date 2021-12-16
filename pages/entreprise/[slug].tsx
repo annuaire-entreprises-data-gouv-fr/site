@@ -87,8 +87,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const siren = extractSiren(slug);
   if (siren.length === 14) {
     // 14 digits is not a siren -> but it may be a siret
-    redirect(context.res, `/etablissement/${siren}`);
-    return { props: {} };
+    return {
+      redirect: {
+        destination: `/etablissement/${siren}`,
+        permanent: false,
+      },
+    };
   }
 
   const page = parseIntWithDefaultValue(pageParam, 1);
@@ -110,8 +114,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e: any) {
-    redirectIfIssueWithSiren(context.res, e, siren, context.req);
-    return { props: {} };
+    return redirectIfIssueWithSiren(e, siren, context.req);
   }
 };
 
