@@ -73,18 +73,19 @@ const mapToDomainIdentite = (
       dat_cloture_exer,
     } = identite_PM;
 
-    const capital = isPP
-      ? ''
-      : `${formatFloatFr(montant_cap)} ${devise_cap} (${
-          type_cap === 'F' ? 'fixe' : 'variable'
-        })`;
+    const capital =
+      isPP || !montant_cap
+        ? ''
+        : `${formatFloatFr(montant_cap)} ${devise_cap} (${
+            type_cap === 'F' ? 'fixe' : 'variable'
+          })`;
 
     const denominationPM = denomination + (sigle ? `(${sigle})` : '');
     return {
       ...infosIdentite,
       denomination: denominationPM,
-      dureePersonneMorale: duree_pm || '',
-      dateClotureExercice: dat_cloture_exer,
+      dureePersonneMorale: duree_pm ? `${duree_pm} ans` : '',
+      dateClotureExercice: dat_cloture_exer || '',
       capital,
       isPersonneMorale: true,
     };

@@ -67,10 +67,7 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
         'Date de clôture de l’exercice comptable',
         immatriculation.dateClotureExercice,
       ],
-      [
-        'Durée de la personne morale',
-        immatriculation.dureePersonneMorale + ' ans',
-      ]
+      ['Durée de la personne morale', immatriculation.dureePersonneMorale]
     );
   }
 

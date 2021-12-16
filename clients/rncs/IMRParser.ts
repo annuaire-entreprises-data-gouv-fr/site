@@ -1,6 +1,6 @@
-import parser, { XMLParser } from 'fast-xml-parser';
+import { XMLParser } from 'fast-xml-parser';
 import { Siren } from '../../utils/helpers/siren-and-siret';
-import logErrorInSentry, { logWarningInSentry } from '../../utils/sentry';
+import { logWarningInSentry } from '../../utils/sentry';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 
 import { IRNCSResponse, IRNCSResponseDossier } from './IMR';
@@ -59,7 +59,8 @@ const extractDossierPrincipal = (
     logWarningInSentry('Several inscription principale', { siren });
     return principaux[0];
   } else if (principaux.length === 0) {
-    logErrorInSentry('No inscription principale', { siren });
+    logWarningInSentry('No inscription principale', { siren });
+    return dossiers[0];
     throw new HttpNotFound(404, 'No inscription principale');
   }
   return principaux[0];
