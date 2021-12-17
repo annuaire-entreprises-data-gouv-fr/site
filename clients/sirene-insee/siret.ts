@@ -96,13 +96,15 @@ const getAllEtablissementsFactory =
 
     return {
       currentEtablissementPage: page,
-      etablissements: etablissements.map(mapEtablissementToDomainObject),
+      etablissements: etablissements.map((e) =>
+        mapEtablissementToDomainObject(e)
+      ),
       nombreEtablissements: header.total,
     };
   };
 
 const getEtablissementFactory =
-  (credential: INSEE_CREDENTIALS) => async (siret: string) => {
+  (credential: INSEE_CREDENTIALS) => async (siret: Siret) => {
     const response = await inseeClientGet(
       routes.sireneInsee.siret + siret,
       credential
@@ -112,12 +114,16 @@ const getEtablissementFactory =
       response as IInseeEtablissementResponse;
 
     if (!etablissement && etablissements) {
+      if (etablissements.length === 1) {
+        return mapEtablissementToDomainObject(etablissements[0], siret);
+      }
+
       throw new HttpServerError(
         500,
         'INSEE returns multiple siret for one etablissement'
       );
     }
-    return mapEtablissementToDomainObject(etablissement);
+    return mapEtablissementToDomainObject(etablissement, siret);
   };
 
 const getSiegeFactory =
@@ -132,7 +138,8 @@ const getSiegeFactory =
   };
 
 export const mapEtablissementToDomainObject = (
-  inseeEtablissement: IInseeEtablissement
+  inseeEtablissement: IInseeEtablissement,
+  oldSiret?: Siret
 ): IEtablissement => {
   // There cases of inseeEtablissement undefined.
   // For instance 89898637700015 that returns an etablissementS instead of etablissement and that also returns a different siren/siret
@@ -184,6 +191,7 @@ export const mapEtablissementToDomainObject = (
     ...defaultEtablissement,
     siren: extractSirenFromSiret(siret),
     siret,
+    oldSiret: oldSiret || siret,
     nic,
     enseigne,
     denomination: denominationUsuelleEtablissement,

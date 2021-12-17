@@ -16,6 +16,7 @@ export interface IEtablissement {
   denomination: string | null;
   siren: Siren;
   siret: Siret;
+  oldSiret: Siret;
   nic: string;
   estActif: boolean | null;
   estSiege: boolean;
@@ -77,6 +78,8 @@ export const createDefaultEtablissement = (): IEtablissement => {
     siren: '',
     //@ts-ignore
     siret: '',
+    //@ts-ignore
+    oldSiret: '',
     estActif: null,
     estSiege: false,
     enseigne: null,
