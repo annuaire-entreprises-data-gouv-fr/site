@@ -1,10 +1,9 @@
 import React from 'react';
 
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
 import { IEtablissement, IUniteLegale } from '../../models';
 import EtablissementSection from '../../components/etablissement-section';
-import Title, { FICHE } from '../../components/title-section';
+import { FICHE } from '../../components/title-section';
 import { NonDiffusibleSection } from '../../components/non-diffusible';
 import {
   getEtablissementWithUniteLegaleFromSlug,
@@ -13,6 +12,7 @@ import {
 import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
 import isUserAgentABot from '../../utils/user-agent';
+import PageEntreprise from '../../layouts/page-entreprise';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -23,37 +23,30 @@ const EtablissementPage: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
 }) => (
-  <Page
-    small={true}
+  <PageEntreprise
     title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
+    uniteLegale={uniteLegale}
+    currentTab={FICHE.INFORMATION}
   >
-    <div className="content-container">
-      <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
-      <TitleEtablissementWithDenomination
-        uniteLegale={uniteLegale}
+    <TitleEtablissementWithDenomination
+      uniteLegale={uniteLegale}
+      etablissement={etablissement}
+    />
+    <br />
+    {etablissement.estDiffusible ? (
+      <EtablissementSection
         etablissement={etablissement}
+        uniteLegale={uniteLegale}
       />
-      <br />
-      {etablissement.estDiffusible ? (
-        <EtablissementSection
-          etablissement={etablissement}
-          uniteLegale={uniteLegale}
-        />
-      ) : (
-        <>
-          <p>
-            Cet établissement est <b>non-diffusible.</b>
-          </p>
-          <NonDiffusibleSection />
-        </>
-      )}
-    </div>
-    <style jsx>{`
-      .content-container {
-        margin: 20px auto 40px;
-      }
-    `}</style>
-  </Page>
+    ) : (
+      <>
+        <p>
+          Cet établissement est <b>non-diffusible.</b>
+        </p>
+        <NonDiffusibleSection />
+      </>
+    )}
+  </PageEntreprise>
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

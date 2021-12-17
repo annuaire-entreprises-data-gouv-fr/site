@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import Title, { FICHE } from '../../components/title-section';
+import { FICHE } from '../../components/title-section';
 import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import { isCaptchaCookieValid } from '../../utils/captcha';
+import PageEntreprise from '../../layouts/page-entreprise';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -14,26 +14,19 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
   immatriculationRNCS,
   immatriculationJOAFE,
 }) => (
-  <Page
-    small={true}
+  <PageEntreprise
     title={`Justificatif d’immatriculation - ${uniteLegale.nomComplet}`}
     noIndex={true}
+    uniteLegale={uniteLegale}
+    currentTab={FICHE.JUSTIFICATIFS}
   >
-    <div className="content-container">
-      <Title uniteLegale={uniteLegale} ficheType={FICHE.JUSTIFICATIFS} />
-      <Immatriculations
-        immatriculationRNM={immatriculationRNM}
-        immatriculationRNCS={immatriculationRNCS}
-        immatriculationJOAFE={immatriculationJOAFE}
-        uniteLegale={uniteLegale}
-      />
-    </div>
-    <style jsx>{`
-      .content-container {
-        margin: 20px auto 40px;
-      }
-    `}</style>
-  </Page>
+    <Immatriculations
+      immatriculationRNM={immatriculationRNM}
+      immatriculationRNCS={immatriculationRNCS}
+      immatriculationJOAFE={immatriculationJOAFE}
+      uniteLegale={uniteLegale}
+    />
+  </PageEntreprise>
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

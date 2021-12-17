@@ -1,30 +1,28 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import Title, { FICHE } from '../../components/title-section';
 
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import ConventionCollectivesSection from '../../components/convention-collectives-section';
 import getConventionCollectivesFromSlug, {
   IConventions,
 } from '../../models/convention-collective';
+import PageEntreprise from '../../layouts/page-entreprise';
+import { FICHE } from '../../components/title-section';
 
 const ConventionsCollectives: React.FC<IConventions> = ({
   uniteLegale,
   conventionCollectives,
 }) => (
-  <Page
-    small={true}
+  <PageEntreprise
     title={`Conventions collectives - ${uniteLegale.nomComplet}`}
     noIndex={true}
+    uniteLegale={uniteLegale}
+    currentTab={FICHE.DIVERS}
   >
-    <div className="content-container">
-      <Title ficheType={FICHE.DIVERS} uniteLegale={uniteLegale} />
-      <ConventionCollectivesSection
-        conventionCollectives={conventionCollectives}
-      />
-    </div>
-  </Page>
+    <ConventionCollectivesSection
+      conventionCollectives={conventionCollectives}
+    />
+  </PageEntreprise>
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

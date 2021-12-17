@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import Title, { FICHE } from '../../components/title-section';
+import { FICHE } from '../../components/title-section';
 
 import { NonDiffusibleSection } from '../../components/non-diffusible';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
@@ -16,6 +15,7 @@ import BeneficiairesSection from '../../components/dirigeants-section/beneficiai
 import { isCaptchaCookieValid } from '../../utils/captcha';
 import DirigeantSummary from '../../components/dirigeants-section/summary';
 import BreakPageForPrint from '../../components/print-break-page';
+import PageEntreprise from '../../layouts/page-entreprise';
 
 const DirigeantsPage: React.FC<IDirigeants> = ({
   uniteLegale,
@@ -23,55 +23,43 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
   beneficiaires,
 }) => {
   return (
-    <Page
-      small={true}
+    <PageEntreprise
       title={`Dirigeants de l’entité - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
       canonical={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`}
       noIndex={true}
+      uniteLegale={uniteLegale}
+      currentTab={FICHE.DIRIGEANTS}
     >
-      <div className="content-container">
-        <Title uniteLegale={uniteLegale} ficheType={FICHE.DIRIGEANTS} />
+      <DirigeantSummary
+        uniteLegale={uniteLegale}
+        dirigeants={dirigeants}
+        beneficiaires={beneficiaires}
+      />
+      {uniteLegale.estDiffusible ? (
+        uniteLegale.estEntrepreneurIndividuel &&
+        uniteLegale.dirigeant && (
+          <>
+            <DirigeantsEntrepriseIndividuelleSection
+              dirigeant={uniteLegale.dirigeant}
+            />
+            <BreakPageForPrint />
+          </>
+        )
+      ) : (
         <>
-          <DirigeantSummary
-            uniteLegale={uniteLegale}
-            dirigeants={dirigeants}
-            beneficiaires={beneficiaires}
-          />
-          {uniteLegale.estDiffusible ? (
-            uniteLegale.estEntrepreneurIndividuel &&
-            uniteLegale.dirigeant && (
-              <>
-                <DirigeantsEntrepriseIndividuelleSection
-                  dirigeant={uniteLegale.dirigeant}
-                />
-                <BreakPageForPrint />
-              </>
-            )
-          ) : (
-            <>
-              <p>
-                Cette entité est <b>non-diffusible.</b>
-              </p>
-              <NonDiffusibleSection />
-            </>
-          )}
-          <DirigeantsSection
-            dirigeants={dirigeants}
-            siren={uniteLegale.siren}
-          />
-          <BreakPageForPrint />
-          <BeneficiairesSection
-            beneficiaires={beneficiaires}
-            siren={uniteLegale.siren}
-          />
+          <p>
+            Cette entité est <b>non-diffusible.</b>
+          </p>
+          <NonDiffusibleSection />
         </>
-      </div>
-      <style jsx>{`
-        .content-container {
-          margin: 20px auto 40px;
-        }
-      `}</style>
-    </Page>
+      )}
+      <DirigeantsSection dirigeants={dirigeants} siren={uniteLegale.siren} />
+      <BreakPageForPrint />
+      <BeneficiairesSection
+        beneficiaires={beneficiaires}
+        siren={uniteLegale.siren}
+      />
+    </PageEntreprise>
   );
 };
 

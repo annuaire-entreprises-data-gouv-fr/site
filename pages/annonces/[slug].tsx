@@ -1,7 +1,6 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import Title, { FICHE } from '../../components/title-section';
+import { FICHE } from '../../components/title-section';
 
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import { IAnnoncesBodacc, IAnnoncesJO } from '../../models/annonces';
@@ -10,6 +9,7 @@ import { IAPINotRespondingError } from '../../models/api-not-responding';
 import getAnnoncesFromSlug from '../../models/annonces';
 import AnnoncesBodaccSection from '../../components/annonces-section/bodacc';
 import AnnoncesJOSection from '../../components/annonces-section/jo';
+import PageEntreprise from '../../layouts/page-entreprise';
 
 interface IProps {
   uniteLegale: IUniteLegale;
@@ -18,17 +18,15 @@ interface IProps {
 }
 
 const Annonces: React.FC<IProps> = ({ uniteLegale, bodacc, jo }) => (
-  <Page
-    small={true}
+  <PageEntreprise
     title={`Annonces légales (BODACC) - ${uniteLegale.nomComplet}`}
     noIndex={true}
+    uniteLegale={uniteLegale}
+    currentTab={FICHE.ANNONCES}
   >
-    <div className="content-container">
-      <Title ficheType={FICHE.ANNONCES} uniteLegale={uniteLegale} />
-      <AnnoncesBodaccSection uniteLegale={uniteLegale} bodacc={bodacc} />
-      {jo && <AnnoncesJOSection uniteLegale={uniteLegale} jo={jo} />}
-    </div>
-  </Page>
+    <AnnoncesBodaccSection uniteLegale={uniteLegale} bodacc={bodacc} />
+    {jo && <AnnoncesJOSection uniteLegale={uniteLegale} jo={jo} />}
+  </PageEntreprise>
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

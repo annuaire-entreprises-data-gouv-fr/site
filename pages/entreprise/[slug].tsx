@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
 import { IUniteLegale } from '../../models';
 import UniteLegaleSection from '../../components/unite-legale-section';
 import EtablissementListeSection from '../../components/etablissement-liste-section';
@@ -17,16 +16,15 @@ import {
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
-import redirect from '../../utils/redirects';
 import isUserAgentABot from '../../utils/user-agent';
+import PageEntreprise from '../../layouts/page-entreprise';
 
 interface IProps {
   uniteLegale: IUniteLegale;
 }
 
 const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
-  <Page
-    small={true}
+  <PageEntreprise
     title={`${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
     canonical={
       uniteLegale.chemin &&
@@ -35,34 +33,28 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
     noIndex={
       uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
     }
+    uniteLegale={uniteLegale}
+    currentTab={FICHE.INFORMATION}
   >
-    <div className="content-container">
-      <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
-      {uniteLegale.estDiffusible ? (
-        <>
-          <UniteLegaleSection uniteLegale={uniteLegale} />
-          {uniteLegale.association && uniteLegale.association.id && (
-            <AssociationSection uniteLegale={uniteLegale} />
-          )}
-          {uniteLegale.siege && (
-            <EtablissementSection
-              uniteLegale={uniteLegale}
-              etablissement={uniteLegale.siege}
-              usedInEntreprisePage={true}
-            />
-          )}
-          <EtablissementListeSection uniteLegale={uniteLegale} />
-        </>
-      ) : (
-        <NonDiffusibleSection />
-      )}
-    </div>
-    <style jsx>{`
-      .content-container {
-        margin: 20px auto 40px;
-      }
-    `}</style>
-  </Page>
+    {uniteLegale.estDiffusible ? (
+      <>
+        <UniteLegaleSection uniteLegale={uniteLegale} />
+        {uniteLegale.association && uniteLegale.association.id && (
+          <AssociationSection uniteLegale={uniteLegale} />
+        )}
+        {uniteLegale.siege && (
+          <EtablissementSection
+            uniteLegale={uniteLegale}
+            etablissement={uniteLegale.siege}
+            usedInEntreprisePage={true}
+          />
+        )}
+        <EtablissementListeSection uniteLegale={uniteLegale} />
+      </>
+    ) : (
+      <NonDiffusibleSection />
+    )}
+  </PageEntreprise>
 );
 
 const extractSiren = (slug: string) => {
