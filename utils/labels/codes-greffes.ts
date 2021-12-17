@@ -47,7 +47,7 @@ export const codesGreffes = {
   5001: 'Cherbourg',
   6303: 'Clermont Ferrand',
   6002: 'Compiegne',
-  7801: 'Corbeil',
+  7801: 'Evry',
   5002: 'Coutances',
   9401: 'Creteil',
   '0301': 'Cusset',
