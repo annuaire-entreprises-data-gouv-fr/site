@@ -13,7 +13,6 @@ import {
 import DirigeantsEntrepriseIndividuelleSection from '../../components/dirigeants-section/insee-dirigeant';
 import DirigeantsSection from '../../components/dirigeants-section/rncs-dirigeants';
 import BeneficiairesSection from '../../components/dirigeants-section/beneficiaires';
-import { isCaptchaCookieValid } from '../../utils/captcha';
 import DirigeantSummary from '../../components/dirigeants-section/summary';
 import BreakPageForPrint from '../../components/print-break-page';
 
@@ -76,16 +75,6 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const captchaCookieIsValid = isCaptchaCookieValid(context.req, context.res);
-  if (!captchaCookieIsValid) {
-    return {
-      redirect: {
-        destination: `/captcha?url=${context.req.url}`,
-        permanent: false,
-      },
-    };
-  }
-
   //@ts-ignore
   const slug = context.params.slug as string;
   try {

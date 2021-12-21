@@ -56,14 +56,6 @@ npm run build:site && npm run start
 
 ```
 
-## Captcha
-
-Pour faire fonctionner le CAPTCHA en local vous devez ajouter la ligne suivante dans votre `/etc/hosts` :
-
-```
-127.0.0.1 dev.annuaire-entreprises.data.gouv.fr
-```
-
 ## Licence
 
 Ce projet est sous AGPL 3.0
