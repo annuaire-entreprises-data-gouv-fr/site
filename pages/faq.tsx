@@ -86,7 +86,7 @@ const QuestionBlock: React.FC<PropsWithChildren<{ title: string }>> = ({
 };
 
 const FAQ: React.FC<{}> = () => (
-  <Page small={true} title="FAQ de l’Annuaire des Entreprises">
+  <Page title="FAQ de l’Annuaire des Entreprises">
     <div className="content-container text-wrapper">
       <h1>FAQ</h1>
       <p>Conseils et réponses de l’équipe Annuaire des Entreprises</p>

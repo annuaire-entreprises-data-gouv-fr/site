@@ -5,7 +5,7 @@ import Page from '../../layouts';
 
 const Forbidden: React.FC = () => {
   return (
-    <Page small={true} title="Accès refusé">
+    <Page title="Accès refusé">
       <h1>Accès refusé 🚫</h1>
       <p>
         Notre algorithme de détection pense que vous êtes un robot. <br />

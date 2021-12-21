@@ -5,7 +5,7 @@ import Page from '../layouts';
 
 const ExtraitKbis: React.FC = () => {
   return (
-    <Page small={true} title="Comment ça marche ?">
+    <Page title="Comment ça marche ?">
       <div className="content-container text-wrapper">
         <h1>
           Retrouver les données contenues dans un extrait KBIS ou un extrait D1

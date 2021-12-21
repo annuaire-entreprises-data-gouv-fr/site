@@ -24,7 +24,6 @@ const SearchResultPage: React.FC<IProps> = ({
   searchTerm,
 }) => (
   <Page
-    small={true}
     currentSearchTerm={searchTerm}
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"

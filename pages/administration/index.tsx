@@ -27,7 +27,6 @@ const simplify = (str: string) => escapeTerm(trimWhitespace(str));
 
 const StatusPage: React.FC<IProps> = ({ monitors }) => (
   <Page
-    small={true}
     title="Statut des API partenaires de l'Annuaire des Entreprises"
     canonical={`https://annuaire-entreprises.data.gouv.fr/administration}`}
   >

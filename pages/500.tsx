@@ -5,7 +5,7 @@ import { ServerErrorExplanations } from '../components/error-explanations';
 
 const ServerError: React.FC = () => {
   return (
-    <Page small={true} title="Cette page est introuvable">
+    <Page title="Cette page est introuvable">
       <ServerErrorExplanations />
     </Page>
   );

@@ -23,12 +23,13 @@ interface IProps {
   uniteLegale: IUniteLegale;
 }
 
-const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
-  ficheType,
-  siren,
-}) => (
+export const Tabs: React.FC<{
+  ficheType: FICHE;
+  siren: string;
+  estDirigeant: boolean;
+}> = ({ ficheType, siren, estDirigeant = false }) => (
   <PrintNever>
-    <div className="title-tabs">
+    <div className={`title-tabs ${estDirigeant ? 'dirigeant' : ''}`}>
       <a
         className={`${ficheType === FICHE.INFORMATION && 'active'}`}
         href={`/entreprise/${siren}`}
@@ -71,8 +72,9 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         flex-grow: 1;
         font-size: 0.9rem;
         border-bottom: 2px solid #dfdff1;
+        margin-bottom: 40px;
       }
-      .title-tabs > a {
+      .title-tabs.dirigeant > a {
         color: #000091;
         font-weight: bold;
         border-top-left-radius: 3px;
@@ -85,7 +87,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         display: flex;
         align-items: center;
         justify-content: center;
-        text-align: center;
+        text-align: ${estDirigeant ? 'left' : 'center'};
         box-shadow: 0 -8px 5px -5px #dfdff1 inset;
       }
 
@@ -96,6 +98,34 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
       .title-tabs > a.active {
         background-color: #fff;
         border-bottom: 0;
+        box-shadow: none;
+      }
+
+      .title-tabs.dirigeant {
+        flex-direction: column;
+        border-bottom: none;
+        margin: 0;
+      }
+      .title-tabs.dirigeant > a {
+        color: #000091;
+        font-weight: bold;
+        background-color: #fff;
+        border-radius: 3px;
+        border: none;
+        margin: 0;
+        padding-left: 10px;
+        margin: 2px 20px 2px 0;
+        text-align: left;
+        justify-content: start;
+        box-shadow: none;
+        border: 1px solid transparent;
+      }
+      .title-tabs.dirigeant > a:hover {
+        background-color: #efeffb;
+      }
+
+      .title-tabs.dirigeant > a.active {
+        background-color: #dfdff1;
         box-shadow: none;
       }
 
@@ -117,10 +147,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
   </PrintNever>
 );
 
-const Title: React.FC<IProps> = ({
-  ficheType = FICHE.INFORMATION,
-  uniteLegale,
-}) => (
+const Title: React.FC<IProps> = ({ uniteLegale }) => (
   <div className="header-section">
     <div className="title">
       {uniteLegale.oldSiren !== uniteLegale.siren && (
@@ -163,12 +190,10 @@ const Title: React.FC<IProps> = ({
     ) : (
       <UnitLegaleDescription uniteLegale={uniteLegale} />
     )}
-    <Tabs siren={uniteLegale.siren} ficheType={ficheType} />
 
     <style jsx>{`
       .header-section {
         display: block;
-        margin-bottom: 40px;
       }
 
       .title {

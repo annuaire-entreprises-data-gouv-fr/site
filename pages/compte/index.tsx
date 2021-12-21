@@ -7,7 +7,7 @@ import { getSession } from '../../utils/session';
 
 const Login: React.FC = () => {
   return (
-    <Page small={true} title="Cette page est introuvable" noIndex={true}>
+    <Page title="Cette page est introuvable" noIndex={true}>
       <h1>
         Utilisez FranceConnect pour vous connecter à votre dossier numérique
         d’entrepreneur

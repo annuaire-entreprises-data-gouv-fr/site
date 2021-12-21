@@ -5,7 +5,7 @@ import Page from '../../layouts';
 
 const TooManyRequest: React.FC = () => {
   return (
-    <Page small={true} title="Accès refusé">
+    <Page title="Accès refusé">
       <h1>Nous avons reçu trop de demandes de votre part 📈</h1>
       <p>
         Notre site a reçu trop de demandes de la part de votre adresse IP en un

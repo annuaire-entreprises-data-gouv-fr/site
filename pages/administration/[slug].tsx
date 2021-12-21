@@ -32,7 +32,6 @@ const AdministrationPage: React.FC<IProps> = ({
   dataGouvLink,
 }) => (
   <Page
-    small={true}
     title={long}
     canonical={`https://annuaire-entreprises.data.gouv.fr/administration/${slug}`}
   >

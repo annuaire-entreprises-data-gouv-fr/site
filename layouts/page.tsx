@@ -9,8 +9,9 @@ import DownloadManager from '../components/download-manager';
 import { IUniteLegale } from '../models';
 
 interface IProps {
-  small?: boolean;
+  headerWithSearch?: boolean;
   currentSearchTerm?: string;
+  fullWidth?: boolean;
   map?: boolean;
   title: string;
   description?: string;
@@ -19,7 +20,8 @@ interface IProps {
 }
 
 const Page: React.FC<IProps> = ({
-  small,
+  headerWithSearch = true,
+  fullWidth = false,
   children,
   currentSearchTerm = '',
   map = false,
@@ -37,7 +39,7 @@ const Page: React.FC<IProps> = ({
     />
     <NPSBanner />
     <WeNeedYouModal />
-    {small ? (
+    {headerWithSearch ? (
       <HeaderSmall currentSearchTerm={currentSearchTerm} map={map} />
     ) : (
       <Header />
@@ -52,7 +54,7 @@ const Page: React.FC<IProps> = ({
       }
 
       main.fr-container {
-        max-width: ${map ? '100%' : ''};
+        max-width: ${map || fullWidth ? '100%' : ''};
       }
     `}</style>
   </div>

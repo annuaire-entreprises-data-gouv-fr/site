@@ -27,7 +27,6 @@ const MapSearchResultPage: React.FC<IProps> = ({
   currentPage = 1,
 }) => (
   <Page
-    small={true}
     currentSearchTerm={searchTerm}
     map={true}
     noIndex={true}

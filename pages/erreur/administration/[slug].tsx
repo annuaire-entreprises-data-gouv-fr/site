@@ -13,11 +13,7 @@ const AdministrationError: React.FC<{ administration: EAdministration }> = ({
   administration,
 }) => {
   return (
-    <Page
-      small={true}
-      title="Cette administration ne répond pas"
-      noIndex={true}
-    >
+    <Page title="Cette administration ne répond pas" noIndex={true}>
       <div className="content-container">
         <h1>Le téléservice ne répond pas</h1>
         <AdministrationNotResponding

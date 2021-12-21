@@ -7,7 +7,7 @@ import constants from '../../models/constants';
 
 const SirenOrSiretInvalidPage = () => {
   return (
-    <Page small={true} title="Numero d’identification invalide" noIndex={true}>
+    <Page title="Numero d’identification invalide" noIndex={true}>
       <h1>⚠️ Attention : ce numéro d’identification est invalide ❗️</h1>
       <div>
         <p>
