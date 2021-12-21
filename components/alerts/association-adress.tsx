@@ -39,9 +39,9 @@ const AssociationAdressAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
           Cette association possède deux adresses différentes.
           <br />
           L’une est déclarée au <MI /> (en préfecture) :{' '}
-          <b>{uniteLegale.siege.adresse || 'Non renseignée'}</b>, l’autre est
-          déclarée à l’
-          <INSEE /> : <b>{associationAdresse || 'Non renseignée'}</b>.
+          <b>{associationAdresse || 'Non renseignée'}</b>, l’autre est déclarée
+          à l’
+          <INSEE /> : <b>{uniteLegale.siege.adresse || 'Non renseignée'}</b>.
           <br />
           Si vous êtes membre de cette association. Contactez l’administration
           concernée pour corriger l’erreur.
