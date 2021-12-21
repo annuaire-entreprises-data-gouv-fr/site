@@ -9,6 +9,7 @@ export interface IAssociation {
   nomComplet?: string;
   objet?: string;
   adresse?: string;
+  adresseInconsistency?: boolean;
 }
 
 export interface IEtablissement {

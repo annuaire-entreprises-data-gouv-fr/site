@@ -15,7 +15,7 @@ import { DILA } from '../administrations';
 import routes from '../../clients/routes';
 import { IUniteLegale } from '../../models';
 import { formatDate } from '../../utils/helpers/formatting';
-import AssociationCreationNotFound from '../introuvable/association-creation';
+import AssociationCreationNotFoundAlert from '../alerts/association-creation-not-found-alert';
 
 const AnnoncesJOSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -39,7 +39,7 @@ const AnnoncesJOSection: React.FC<{
     >
       {jo.annonces.filter((annonce) => annonce.typeAvisLibelle === 'Création')
         .length === 0 && (
-        <AssociationCreationNotFound uniteLegale={uniteLegale} />
+        <AssociationCreationNotFoundAlert uniteLegale={uniteLegale} />
       )}
       {jo.annonces.length === 0 ? (
         <div>

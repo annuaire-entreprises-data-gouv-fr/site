@@ -1,40 +1,19 @@
 import { IUniteLegale } from '../../models';
-import { escapeTerm } from '../../utils/helpers/formatting';
 import { INSEE, MI } from '../administrations';
 import Warning from './warning';
-
-const checkAdressConsistency = (
-  uniteLegale: IUniteLegale,
-  associationAdresse: string
-) => {
-  try {
-    return (
-      associationAdresse &&
-      escapeTerm(uniteLegale.siege.adresse.toLowerCase()) !==
-        escapeTerm(associationAdresse.toLowerCase())
-    );
-  } catch {
-    return false;
-  }
-};
 
 const AssociationAdressAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
 }) => {
-  const associationAdresse =
-    (uniteLegale.association &&
-      uniteLegale.association.id &&
-      uniteLegale.association.adresse) ||
-    '';
+  const adresseInconsistency =
+    uniteLegale.association && uniteLegale.association.adresseInconsistency;
 
-  const areAdressesInconsistent = checkAdressConsistency(
-    uniteLegale,
-    associationAdresse
-  );
+  const associationAdresse =
+    uniteLegale.association && uniteLegale.association.adresse;
 
   return (
     <>
-      {areAdressesInconsistent && (
+      {adresseInconsistency && (
         <Warning full>
           Cette association possède deux adresses différentes.
           <br />

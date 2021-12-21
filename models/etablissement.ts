@@ -24,7 +24,7 @@ import {
   logSecondSireneInseefailed,
   logSireneOuvertefailed,
 } from '../utils/sentry/helpers';
-import { getGeoLoc } from './geto-loc';
+import { getGeoLoc } from './geo-loc';
 
 /*
  * Return an etablissement given an existing siret
