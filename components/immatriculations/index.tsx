@@ -5,8 +5,8 @@ import {
 } from '../../models/api-not-responding';
 import { IImmatriculation } from '../../models/immatriculation';
 import { IJustificatifs } from '../../models/justificatifs';
-import AssociationCreationNotFound from '../introuvable/association-creation';
-import ImmatriculationNotFound from '../introuvable/immatriculation';
+import AssociationCreationNotFoundAlert from '../alerts/association-creation-not-found-alert';
+import ImmatriculationNotFound from '../alerts/immatriculation-not-found-alert';
 import AvisSituationSection from './insee';
 import ImmatriculationJOAFE from './joafe';
 import ImmatriculationRNCS from './rncs';
@@ -27,12 +27,15 @@ const Immatriculations: React.FC<IJustificatifs> = ({
   immatriculationJOAFE,
   uniteLegale,
 }) => {
+  const isAnAssociation = !!uniteLegale.association;
+
   const noAssociationImmatriculation =
-    uniteLegale.association && isNotFound(immatriculationJOAFE);
+    !isAnAssociation || (isAnAssociation && isNotFound(immatriculationJOAFE));
+
   const noRNMImmatriculation = isNotFound(immatriculationRNM);
   const noRNCSImmatriculation = isNotFound(immatriculationRNCS);
 
-  const noEntrepriseImmatriculation =
+  const noImmatriculation =
     noAssociationImmatriculation &&
     noRNCSImmatriculation &&
     noRNMImmatriculation;
@@ -45,21 +48,21 @@ const Immatriculations: React.FC<IJustificatifs> = ({
         immatriculationJOAFE={immatriculationJOAFE}
         uniteLegale={uniteLegale}
       />
-      {noAssociationImmatriculation ? (
+      {noImmatriculation ? (
         <>
-          <AssociationCreationNotFound uniteLegale={uniteLegale} />
+          {isAnAssociation ? (
+            <AssociationCreationNotFoundAlert uniteLegale={uniteLegale} />
+          ) : (
+            <ImmatriculationNotFound />
+          )}
           <br />
         </>
       ) : (
-        <ImmatriculationJOAFE
-          immatriculation={immatriculationJOAFE}
-          uniteLegale={uniteLegale}
-        />
-      )}
-      {noEntrepriseImmatriculation ? (
-        <ImmatriculationNotFound />
-      ) : (
         <>
+          <ImmatriculationJOAFE
+            immatriculation={immatriculationJOAFE}
+            uniteLegale={uniteLegale}
+          />
           <ImmatriculationRNM
             immatriculation={immatriculationRNM}
             uniteLegale={uniteLegale}
