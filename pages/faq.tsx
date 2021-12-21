@@ -138,6 +138,22 @@ const FAQ: React.FC<{}> = () => (
         <QuestionBlock title="Qu'est-ce qu'une entreprise non-diffusible ?">
           <NonDiffusible />
         </QuestionBlock>
+        <QuestionBlock title="L’adresse de mon entreprise ou de mon association est incorrecte, comment la modifier ?">
+          <p>
+            Comme expliqué par l’
+            <INSEE /> dans sa{' '}
+            <a href="https://www.insee.fr/fr/information/2015441#titre-bloc-1">
+              documentation aux entreprises
+            </a>
+            , tout changement d’adresse est à déclarer auprès de son centre de
+            formalités des entreprises (CFE)
+          </p>
+          <div className="layout-center">
+            <ButtonLink to="https://www.insee.fr/fr/information/1972060" alt>
+              ⇢ Trouver son CFE
+            </ButtonLink>
+          </div>
+        </QuestionBlock>
         <QuestionBlock title="Je suis un agent public et je cherche les données présentes dans un extrait KBIS/D1">
           <p>
             À partir de Novembre 2021, les entreprises immatriculées au RCS ou
