@@ -94,16 +94,16 @@ sont pas à jour ? 👉 [Contactez l’INPI pour demander une correction](https:
   },
   [EAdministration.INSEE]: {
     slug: 'insee',
-    short: 'INSEE',
+    short: 'Insee',
     site: 'https://www.sirene.fr/sirene/public/accueil',
-    long: 'Institut National de la Statistique et des Études Économiques (INSEE)',
-    description: `## Qu'est-ce que l’INSEE ?
+    long: 'Institut national de la statistique et des études économiques (Insee)',
+    description: `## Qu'est-ce que l’Insee ?
 
-L’INSEE est l’Institut National de la Statistique et des Études Économiques. C’est une direction générale du ministère des finances.
+L’Insee est l’Institut National de la Statistique et des Études Économiques. C’est une direction générale du ministère des finances.
 
-## Quelles sont les données des entreprises publiées par l’INSEE ?
+## Quelles sont les données des entreprises publiées par l’Insee ?
 
-Dans le cadre de sa mission, l’INSEE a la charge du Système National d'Identification et du Répertoire des Entreprises et de leurs Établissements (SIRENE). Lors de l'enregistrement d’unz nouvelle API au répertoire, sont attribués :
+Dans le cadre de sa mission, l’Insee a la charge du Système National d'Identification et du Répertoire des Entreprises et de leurs Établissements (SIRENE). Lors de l'enregistrement d’unz nouvelle API au répertoire, sont attribués :
 
 - un numero unique d'identification SIREN (à 9 chiffre) pour l’unité légale
 - un numéro unique d'identification SIRET (à 14 chiffres) pour chaque établissement
@@ -124,7 +124,7 @@ Les données du répertoire sont remontées par les Centres de Formalités des E
 - les chambres d’agriculture
 - la chambre nationale de la batellerie artisanale
 
-L'INSEE maintient également les nomenclatures des entreprises :
+L’Insee maintient également les nomenclatures des entreprises :
 
 - les codes APE (Activité Principale Exercée) ou codes NAF
 - les codes officiels des communes
@@ -137,7 +137,7 @@ sont pas à jour ?
 
 Certaines mise à jour peuvent être effectuées via [un formulaire en ligne](https://www.service-public.fr/professionnels-entreprises/vosdroits/N31143).
 
-Si ce n'est pas suffisant, [contactez directement l'INSEE](https://www.insee.fr/fr/information/1302169)
+Si ce n'est pas suffisant, [contactez directement l’Insee](https://www.insee.fr/fr/information/1302169)
     `,
     contact: 'https://www.insee.fr/fr/information/1302169',
     dataGouvLink:

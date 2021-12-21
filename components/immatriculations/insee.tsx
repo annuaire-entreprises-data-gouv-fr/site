@@ -33,13 +33,13 @@ const AvisSituationNonDiffusible = () => (
 const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
   <Section
     id="insee"
-    title="Inscription à l’INSEE"
+    title="Inscription à l’Insee"
     source={EAdministration.INSEE}
   >
     {uniteLegale.estDiffusible ? (
       <>
         <div className="description">
-          Chaque établissement immatriculé par l’INSEE au répertoire Sirene des
+          Chaque établissement immatriculé par l’Insee au répertoire Sirene des
           entreprises possède un avis de situation.
         </div>
         <FullTable

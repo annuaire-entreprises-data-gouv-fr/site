@@ -17,7 +17,6 @@ import {
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
-import redirect from '../../utils/redirects';
 import isUserAgentABot from '../../utils/user-agent';
 
 interface IProps {

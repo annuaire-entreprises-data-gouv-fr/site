@@ -16,7 +16,7 @@ const ImmatriculationNotFound: React.FC = () => {
             Si l’entité est une{' '}
             <b>entreprise individuelle ou une auto-entreprise</b>, elle n’est
             pas nécessairement immatriculée au RNM ou RNCS. Dans ce cas{' '}
-            <a href="#insee">l’avis d’inscription à l’INSEE</a> sert à prouver
+            <a href="#insee">l’avis d’inscription à l’Insee</a> sert à prouver
             l’existence de l’entreprise
           </li>
           <li>

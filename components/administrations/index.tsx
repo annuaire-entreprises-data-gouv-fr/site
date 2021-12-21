@@ -4,7 +4,7 @@ export const INSEE = ({ queryString = '' }) => (
     href={`/administration/insee${queryString}`}
     title="Institut National de la Statistique et des Études Économiques"
   >
-    INSEE
+    Insee
   </a>
 );
 
@@ -35,6 +35,16 @@ export const METI = ({ queryString = '' }) => (
     title="Ministère du Travail de l’Emploi et de l’Insertion"
   >
     Ministère du Travail
+  </a>
+);
+
+export const MI = ({ queryString = '' }) => (
+  <a
+    rel="nofollow"
+    href={`/administration/mi${queryString}`}
+    title="Ministère de l’Intérieur"
+  >
+    Ministère de l’Intérieur
   </a>
 );
 

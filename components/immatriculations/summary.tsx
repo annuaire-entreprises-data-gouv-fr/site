@@ -42,7 +42,7 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
     }
   }
 
-  const insee = `Inscrite à l’INSEE, depuis le ${formatDateLong(
+  const insee = `Inscrite à l’Insee, depuis le ${formatDateLong(
     uniteLegale.dateCreation
   )}${
     !uniteLegale.estActive
