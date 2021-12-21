@@ -1,0 +1,52 @@
+slug: insee
+short: Insee
+site: https://www.sirene.fr/sirene/public/accueil
+long: Institut national de la statistique et des études économiques (Insee)
+contact: https://www.insee.fr/fr/information/1302169
+dataGouvLink: https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/
+apiMonitors:
+  - apiGouvLink: https://api.gouv.fr/les-api/sirene_v3
+    apiName: API Répertoire Sirene
+    id: 787859514
+description: |
+  ## Qu’est-ce que l’Insee ?
+
+  L’Insee est l’Institut National de la Statistique et des Études Économiques. C’est une direction générale du ministère des finances.
+
+  ## Quelles sont les données des entreprises publiées par l’Insee ?
+
+  Dans le cadre de sa mission, l’Insee a la charge du Système National d’Identification et du Répertoire des Entreprises et de leurs Établissements (SIRENE). Lors de l’enregistrement d’unz nouvelle API au répertoire, sont attribués :
+
+  - un numero unique d’identification SIREN (à 9 chiffre) pour l’unité légale
+  - un numéro unique d’identification SIRET (à 14 chiffres) pour chaque établissement
+
+  Sont également enregistrés dans le répertoire :
+
+  - l’adresse
+  - l’activité prinicpale de chaque établissement
+  - la forme juridique
+
+  Les données du répertoire sont remontées par les Centres de Formalités des Entreprises (CFE). Il existe 7 types de CFE, selon le type d’entreprise :
+
+  - les greffes des tribunaux de commerce
+  - les Chambes de Commerce et de l’Industrie (CCI)
+  - les chambres de métiers et de l’artisanat (CMA)
+  - les URSSAF
+  - les centres des impôts
+  - les chambres d’agriculture
+  - la chambre nationale de la batellerie artisanale
+
+  L’Insee maintient également les nomenclatures des entreprises :
+
+  - les codes APE (Activité Principale Exercée) ou codes NAF
+  - les codes officiels des communes
+  - les Professions et Catégories Socio-professionnelles (PCS)
+
+  ## Corriger une erreur dans les données
+
+  Vous avez repéré une erreur ? Les données de cette administration ne
+  sont pas à jour ?
+
+  Certaines mise à jour peuvent être effectuées via [un formulaire en ligne](https://www.service-public.fr/professionnels-entreprises/vosdroits/N31143).
+
+  Si ce n’est pas suffisant, [contactez directement l’Insee](https://www.insee.fr/fr/information/1302169)

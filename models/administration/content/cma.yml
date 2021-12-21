@@ -1,0 +1,22 @@
+slug: cma-france
+short: CMA-France
+site: https://rnm.artisanat.fr/
+long: Chambre des Métiers et de l’Artisanat (CMA-France)
+contact: http://annuairecma.artisanat.fr/
+apiMonitors:
+  - apiGouvLink: https://api.gouv.fr/les-api/api_rnm
+    apiName: API Répertoire National des Métiers
+    id: 787859525
+description: |
+  ## Qu'est-ce que CMA-France ?
+
+  CMA-France est l’organisme fédérateur des Chambres des Métiers et de l'Artisanat en France.
+
+  ## Quelles sont les données des entreprises publiées par CMA-France ?
+
+  Dans le cadre de sa mission, CMA-France a la charge du Répertoire National des Métiers, qui recense tous les artisans.
+
+  ## Corriger une erreur dans les données
+
+  Vous avez repéré une erreur ? Les données de cette administration ne
+  sont pas à jour ? 👉 [Contactez la Chambre des Métiers et de l'Artisanat de votre département pour demander une correction](http://annuairecma.artisanat.fr/).

@@ -1,0 +1,33 @@
+slug: inpi
+short: INPI
+long: Institut National de la Propriété Intellectuelle (INPI)
+contact: https://www.inpi.fr/fr/contactez-nous?about=030
+dataGouvLink: https://www.data.gouv.fr/fr/organizations/institut-national-de-la-propriete-industrielle-inpi/
+apiMonitors:
+  - apiGouvLink: https://api.gouv.fr/les-api/api-rncs
+    apiName: API Registre National du Commerce et des Sociétés
+    id: 787859523
+site: https://data.inpi.fr
+description: |
+  ## Qu'est-ce que l’INPI ?
+
+  L’INPI est l’Institut National de la Protection Intellectuelle. C’est un établissement public à caractère administratif,  qui relève du ministère de l’Économie.
+
+  ## Quelles sont les données des entreprises publiées par l’INPI ?
+
+  Dans le cadre de sa mission historique, l’INPI centralise les données de propriété intellectuelle des entreprises.
+
+  - Marques
+  - Brevets
+  - Dessins et Modèles
+
+  Depuis 2017 et dans le cadre de la loi "Macron", l'INPI publie également les données du Répertoire National du Commerce et des Sociétés
+
+  - immatriculations, modifications et radiations des sociétés
+  - actes et statuts
+  - comptes annuels non-confidentiels
+
+  ## Corriger une erreur dans les données
+
+  Vous avez repéré une erreur ? Les données de cette administration ne
+  sont pas à jour ? 👉 [Contactez l’INPI pour demander une correction](https://www.inpi.fr/fr/contactez-nous?about=030).
