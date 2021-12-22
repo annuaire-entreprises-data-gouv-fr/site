@@ -64,9 +64,10 @@ const verifyAdressConsistency = async (
     }
 
     return false;
-  } catch {
+  } catch (e: any) {
     logErrorInSentry(new Error('Error in association adress check'), {
       siren: uniteLegale.siren,
+      details: e.toString(),
     });
     return false;
   }
