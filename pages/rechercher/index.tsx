@@ -49,14 +49,29 @@ const SearchResultPage: React.FC<IProps> = ({
             dangerouslySetInnerHTML={{
               __html: `
                 <script>
-                  window.logSearch('${searchTerm}', ${resultCount});
+                  // log search stats
+                  if (typeof window !== 'undefined' && window._paq) {
+                    window._paq.push([
+                      'trackEvent',
+                      'research:search',
+                      ${searchTerm},
+                      'resultCount='+resultCount,
+                    ]);
 
-                  var links = document.getElementsByClassName("result-link");
-                  for (let i = 0; i < links.length; i++) {
-                    links[i].addEventListener("click", function() {
-                      var position = 10*${currentPage - 1}+i+1;
-                      window.logResultSelected(links[i].attributes['data-siren'].value, '${searchTerm}', ${resultCount}, position);
-                    });
+                    var links = document.getElementsByClassName("result-link");
+                    for (let i = 0; i < links.length; i++) {
+                      links[i].addEventListener("click", function() {
+                        var position = 10*${currentPage - 1}+i+1;
+                        var siren = links[i].attributes['data-siren'].value;
+
+                        window._paq.push([
+                          'trackEvent',
+                          'research:click',
+                          searchTerms,
+                          'selectedSiren='+siren+'-position='+position+'-resultCount='+${resultCount},
+                        ]);
+                      });
+                    }
                   }
                 </script>
               `,
