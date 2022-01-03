@@ -49,11 +49,13 @@ const SearchResultPage: React.FC<IProps> = ({
             dangerouslySetInnerHTML={{
               __html: `
                 <script>
+                  window.logSearch('${searchTerm}', ${resultCount});
+
                   var links = document.getElementsByClassName("result-link");
                   for (let i = 0; i < links.length; i++) {
                     links[i].addEventListener("click", function() {
                       var position = 10*${currentPage - 1}+i+1;
-                      window.logSearch(links[i].attributes['data-siren'].value, '${searchTerm}', ${resultCount}, position);
+                      window.logResultSelected(links[i].attributes['data-siren'].value, '${searchTerm}', ${resultCount}, position);
                     });
                   }
                 </script>
