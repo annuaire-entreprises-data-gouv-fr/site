@@ -45,6 +45,21 @@ const SearchResultPage: React.FC<IProps> = ({
             querySuffix={`terme=${searchTerm}`}
             currentPage={currentPage}
           />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: `
+                <script>
+                  var links = document.getElementsByClassName("result-link");
+                  for (let i = 0; i < links.length; i++) {
+                    links[i].addEventListener("click", function() {
+                      var position = 10*${currentPage - 1}+i+1;
+                      window.logSearch(links[i].attributes['data-siren'].value, '${searchTerm}', ${resultCount}, position);
+                    });
+                  }
+                </script>
+              `,
+            }}
+          ></div>
         </div>
       )}
     </div>

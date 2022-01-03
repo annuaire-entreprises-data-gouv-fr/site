@@ -4,7 +4,6 @@ import { HttpNotFound } from '../clients/exceptions';
 import { fetchAssociation } from '../clients/rna';
 import { escapeTerm } from '../utils/helpers/formatting';
 import { verifyIdRna } from '../utils/helpers/id-rna';
-import { Siren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry, { logWarningInSentry } from '../utils/sentry';
 
 const getAssociation = async (slug: string, uniteLegale: IUniteLegale) => {

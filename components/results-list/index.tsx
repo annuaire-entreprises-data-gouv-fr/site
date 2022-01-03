@@ -13,7 +13,8 @@ const ResultsList: React.FC<IProps> = ({ results }) => (
       <a
         href={`/entreprise/${result.chemin}`}
         key={result.siret}
-        className="dont-apply-link-style"
+        className="result-link dont-apply-link-style"
+        data-siren={result.siren}
       >
         <div className="title">
           {capitalize(result.nomComplet)}
