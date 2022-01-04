@@ -49,18 +49,10 @@ const SearchResultPage: React.FC<IProps> = ({
             dangerouslySetInnerHTML={{
               __html: `
                 <script>
-                  // log search stats
-                  if (typeof window !== 'undefined' && window._paq) {
-                    window._paq.push([
-                      'trackEvent',
-                      'research:search',
-                      ${searchTerm},
-                      'resultCount='+resultCount,
-                    ]);
-
-                    var links = document.getElementsByClassName("result-link");
-                    for (let i = 0; i < links.length; i++) {
-                      links[i].addEventListener("click", function() {
+                  var links = document.getElementsByClassName("result-link");
+                  for (let i = 0; i < links.length; i++) {
+                    links[i].addEventListener("click", function() {
+                      if (typeof window !== 'undefined' && window._paq) {
                         var position = 10*${currentPage - 1}+i+1;
                         var siren = links[i].attributes['data-siren'].value;
 
@@ -70,8 +62,8 @@ const SearchResultPage: React.FC<IProps> = ({
                           searchTerms,
                           'selectedSiren='+siren+'-position='+position+'-resultCount='+${resultCount},
                         ]);
-                      });
-                    }
+                      }
+                    });
                   }
                 </script>
               `,
