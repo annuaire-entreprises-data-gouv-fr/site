@@ -59,7 +59,7 @@ const SearchResultPage: React.FC<IProps> = ({
                         window._paq.push([
                           'trackEvent',
                           'research:click',
-                          searchTerms,
+                          ${searchTerm},
                           'selectedSiren='+siren+'-position='+position+'-resultCount='+${resultCount},
                         ]);
                       }
