@@ -13,6 +13,14 @@ html {
   padding: 0;
 }
 
+p,
+.section-container,
+h1,
+h2,
+h3 {
+  word-break: break-word;
+}
+
 .layout-center {
   display: flex;
   align-items: center;
