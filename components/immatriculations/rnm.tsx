@@ -14,7 +14,7 @@ import {
 import AdministrationNotResponding from '../administration-not-responding';
 import BreakPageForPrint from '../print-break-page';
 import ButtonLink from '../button';
-import { download } from '../icon';
+import { Closed, download, Open } from '../icon';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../print-visibility';
@@ -41,6 +41,26 @@ const ImmatriculationRNM: React.FC<IProps> = ({
   }
 
   const data = [
+    [
+      'Statut',
+      <>
+        {immatriculation.dateRadiation ? (
+          <b>
+            <Closed /> Radiée
+          </b>
+        ) : (
+          <b>
+            <Open /> Inscrite
+          </b>
+        )}
+      </>,
+    ],
+    [
+      'Date d’immatriculation au RNM',
+      formatDate(immatriculation.dateImmatriculation),
+    ],
+    ['Code APRM', immatriculation.codeAPRM],
+    ['Numéro de gestion', immatriculation.gestionId],
     ['Dénomination', capitalize(immatriculation.denomination)],
     ['Siren', formatIntFr(immatriculation.siren)],
     [
@@ -49,13 +69,7 @@ const ImmatriculationRNM: React.FC<IProps> = ({
         → voir le détail du siège social
       </a>,
     ],
-    ['Code APRM', immatriculation.codeAPRM],
-    ['Numéro de gestion', immatriculation.gestionId],
     ['Nature juridique', immatriculation.libelleNatureJuridique],
-    [
-      'Date d’immatriculation au RNM',
-      formatDate(immatriculation.dateImmatriculation),
-    ],
     ['Date de début d’activité', formatDate(immatriculation.dateDebutActivite)],
     ['Date de dernière mise à jour', formatDate(immatriculation.dateMiseAJour)],
   ];
