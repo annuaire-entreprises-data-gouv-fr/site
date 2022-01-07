@@ -18,6 +18,7 @@ import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import isUserAgentABot from '../../utils/user-agent';
+import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
 
 interface IProps {
   uniteLegale: IUniteLegale;
@@ -35,6 +36,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
       uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
     }
   >
+    <StructuredDataBreadcrumb siren={uniteLegale.siren} />
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
       {uniteLegale.estDiffusible ? (

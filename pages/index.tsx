@@ -1,10 +1,12 @@
 import React from 'react';
 import SearchBar from '../components/search-bar';
+import StructuredDataSearchAction from '../components/structured-data/search';
 import Page from '../layouts';
 
 const Index: React.FC = (pageProps) => {
   return (
     <Page title="L’Annuaire des Entreprises">
+      <StructuredDataSearchAction />
       <div className="layout-center">
         <div className="centered-search">
           <h1>L’Annuaire des Entreprises</h1>

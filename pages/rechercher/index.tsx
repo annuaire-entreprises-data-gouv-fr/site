@@ -11,6 +11,7 @@ import ResultsHeader from '../../components/results-header';
 import { IsLikelyASirenOrSiretException } from '../../models';
 import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
+import StructuredDataSearchAction from '../../components/structured-data/search';
 
 interface IProps extends ISearchResults {
   searchTerm: string;
@@ -29,6 +30,7 @@ const SearchResultPage: React.FC<IProps> = ({
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"
   >
+    <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
     <div className="result-content-container">
       <ResultsHeader
