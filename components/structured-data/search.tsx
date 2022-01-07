@@ -4,7 +4,7 @@ const StructuredDataSearchAction: React.FC<{}> = () => (
   <script
     type="application/ld+json"
     dangerouslySetInnerHTML={{
-      __html: `
+      __html: `{
         "@context": "https://schema.org",
         "@type": "WebSite",
         "url": "https://annuaire-entreprises.data.gouv.fr",
