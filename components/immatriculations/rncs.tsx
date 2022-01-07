@@ -15,6 +15,7 @@ import ButtonInpiPdf from '../button-inpi-pdf';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../print-visibility';
+import { Closed, Open } from '../icon';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
@@ -38,9 +39,28 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
   }
 
   const data = [
+    [
+      'Statut',
+      <>
+        {immatriculation.dateRadiation ? (
+          <b>
+            <Closed /> Radiée
+          </b>
+        ) : (
+          <b>
+            <Open /> Inscrite
+          </b>
+        )}
+      </>,
+    ],
+    [
+      'Date d’immatriculation au RNCS',
+      formatDate(immatriculation.dateImmatriculation),
+    ],
+    ['Numéro RCS', immatriculation.numeroRCS],
+    ['Numéro de Gestion', immatriculation.numGestion],
     ['Dénomination', immatriculation.denomination],
     ['Siren', formatIntFr(immatriculation.siren)],
-    ['Numéro RCS', immatriculation.numeroRCS],
     [
       'Dirigeant(s)',
       <a key="dirigeant" href={`/dirigeants/${uniteLegale.siren}`}>
@@ -52,10 +72,6 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
       <a key="siege" href={`/etablissement/${uniteLegale.siege.siret}`}>
         → voir le détail du siège social
       </a>,
-    ],
-    [
-      'Date d’immatriculation au RNCS',
-      formatDate(immatriculation.dateImmatriculation),
     ],
     ['Date de début d’activité', formatDate(immatriculation.dateDebutActiv)],
   ];
