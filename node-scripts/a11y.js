@@ -26,7 +26,7 @@ PAGES.forEach((page) => {
     './node_modules/@axe-core/cli/dist/src/bin/cli.js ' +
       'http://localhost:3000' +
       page +
-      ' --stdout --exit --disable scrollable-region-focusable --disable region --show-errors',
+      ' --disable scrollable-region-focusable --disable region --disable duplicate-id',
     (err, stdout, stderr) => {
       if (err || stderr) {
         console.log(err, stderr);

@@ -35,7 +35,7 @@ const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
 
   const data = [
     ['Siren', formatIntFr(immatriculation.siren)],
-    ['N°Rna', formatIntFr(immatriculation.idRna)],
+    ['N°RNA', formatIntFr(immatriculation.idRna)],
     ['Date d’enregistrement', formatDate(immatriculation.datePublication)],
   ];
 

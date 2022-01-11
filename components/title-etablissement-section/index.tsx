@@ -1,6 +1,7 @@
 import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
+import { INSEE } from '../administrations';
 import Warning from '../alerts/warning';
 import IsActiveTag from '../is-active-tag';
 import { Tag } from '../tag';
@@ -31,8 +32,8 @@ const TitleEtablissementWithDenomination: React.FC<{
   <div className="sub-title">
     {etablissement.oldSiret && etablissement.oldSiret !== etablissement.siret && (
       <Warning full>
-        Cet établissement est inscrit en double à l’INSEE :{' '}
-        {formatSiret(etablissement.oldSiret)} et{' '}
+        Cet établissement est inscrit en double à l’
+        <INSEE /> : {formatSiret(etablissement.oldSiret)} et{' '}
         {formatSiret(etablissement.siret)}. Pour voir les informations
         complètes, consultez la page{' '}
         <a href={`/etablissement/${etablissement.siret}`}>

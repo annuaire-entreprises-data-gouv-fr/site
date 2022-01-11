@@ -8,7 +8,7 @@ export const NPSBanner: React.FC<{}> = () => (
         <div
           dangerouslySetInnerHTML={{
             __html: `
-              <a onclick="window.closeNPSModal()"  href="https://startupdetat.typeform.com/to/ehxbMpeX" target="_blank">
+              <a onclick="window.closeNPSModal()"  href="https://form.typeform.com/to/ehxbMpeX" target="_blank">
                 👍👎 Quel est votre avis sur ce site ?
               </a>`,
           }}

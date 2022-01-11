@@ -15,7 +15,7 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
   const hasNoDirigeant =
     !uniteLegale.dirigeant && notFoundInRCS && notFoundInRBE;
 
-  const insee = uniteLegale.dirigeant && '1 dirigeant(e) inscrite à l’INSEE';
+  const insee = uniteLegale.dirigeant && '1 dirigeant(e) inscrite à l’Insee';
   const rncs =
     dirigeants &&
     !isAPINotResponding(dirigeants) &&

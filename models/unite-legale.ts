@@ -32,7 +32,7 @@ const getUniteLegaleWithRNAFromSlug = async (slug: string, page = 1) => {
   const uniteLegale = await getUniteLegaleFromSlug(slug, page);
   if (uniteLegale.association && uniteLegale.association.id) {
     uniteLegale.association = {
-      ...(await getAssociation(uniteLegale.association.id, uniteLegale.siren)),
+      ...(await getAssociation(uniteLegale.association.id, uniteLegale)),
       id: uniteLegale.association.id,
     };
   }

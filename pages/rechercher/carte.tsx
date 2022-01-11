@@ -13,6 +13,7 @@ import MapResults from '../../components/map/map-results';
 import { IsLikelyASirenOrSiretException } from '../../models';
 import { redirectServerError } from '../../utils/redirects';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
+import StructuredDataSearchAction from '../../components/structured-data/search';
 
 interface IProps extends ISearchResults {
   searchTerm: string;
@@ -33,6 +34,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/carte"
   >
+    <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
 
     {results ? (

@@ -6,6 +6,7 @@ import logErrorInSentry from '../utils/sentry';
 export interface IGeoLoc {
   lat: string;
   long: string;
+  geoCodedAdress?: string;
 }
 
 /**

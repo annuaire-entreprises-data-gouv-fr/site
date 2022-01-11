@@ -2,12 +2,12 @@ import React from 'react';
 import routes from '../../clients/routes';
 import { IUniteLegale } from '../../models';
 import { formatIntFr } from '../../utils/helpers/formatting';
-import Warning from '../alerts/warning';
+import Warning from './warning';
 
-const AssociationCreationNotFound: React.FC<{
+const AssociationCreationNotFoundAlert: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => (
-  <Warning>
+  <Warning full>
     Nous n’avons pas retrouvé l’annonce de création de cette association dans le{' '}
     <b>Journal Officiel des Association (JOAFE).</b>
     <br />
@@ -28,4 +28,4 @@ const AssociationCreationNotFound: React.FC<{
   </Warning>
 );
 
-export default AssociationCreationNotFound;
+export default AssociationCreationNotFoundAlert;

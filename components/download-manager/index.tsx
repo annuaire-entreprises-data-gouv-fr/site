@@ -4,6 +4,7 @@ const DownloadManager = () => (
   <PrintNever>
     <div
       role="dialog"
+      aria-label="Download manager modal"
       dangerouslySetInnerHTML={{
         __html: `
           <div

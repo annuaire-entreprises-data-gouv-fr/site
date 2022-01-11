@@ -11,6 +11,8 @@ class CustomHead extends Head {
   render() {
     const { head, styles } = this.context;
     const children = this.props.children;
+    this.context.docComponentsRendered.Head = true;
+    this.context.docComponentsRendered.NextScript = true;
     return (
       <head {...this.props}>
         {children}

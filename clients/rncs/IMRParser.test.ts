@@ -27,7 +27,7 @@ describe('IMR XML parser', () => {
         dureePersonneMorale: '99 ans',
         greffe: 'Paris',
         numGestion: '2020B02214',
-        numeroRCS: 'RCS Paris 880 878 145',
+        numeroRCS: '880 878 145 rcs Paris',
       },
       beneficiaires: [],
       dirigeants: [
@@ -66,7 +66,7 @@ describe('IMR XML parser', () => {
         dureePersonneMorale: '99 ans',
         greffe: 'Paris',
         numGestion: '2020B02214',
-        numeroRCS: 'RCS Paris 880 878 145',
+        numeroRCS: '880 878 145 rcs Paris',
       },
       beneficiaires: [],
       dirigeants: [

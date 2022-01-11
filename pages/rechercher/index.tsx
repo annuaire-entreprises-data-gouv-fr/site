@@ -11,6 +11,7 @@ import ResultsHeader from '../../components/results-header';
 import { IsLikelyASirenOrSiretException } from '../../models';
 import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
+import StructuredDataSearchAction from '../../components/structured-data/search';
 
 interface IProps extends ISearchResults {
   searchTerm: string;
@@ -28,6 +29,7 @@ const SearchResultPage: React.FC<IProps> = ({
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"
   >
+    <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
     <div className="result-content-container">
       <ResultsHeader
@@ -44,6 +46,30 @@ const SearchResultPage: React.FC<IProps> = ({
             querySuffix={`terme=${searchTerm}`}
             currentPage={currentPage}
           />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: `
+                <script>
+                  var links = document.getElementsByClassName("result-link");
+                  for (let i = 0; i < links.length; i++) {
+                    links[i].addEventListener("click", function() {
+                      if (typeof window !== 'undefined' && window._paq) {
+                        var position = 10*${currentPage - 1}+i+1;
+                        var siren = links[i].attributes['data-siren'].value;
+
+                        window._paq.push([
+                          'trackEvent',
+                          'research:click',
+                          '${searchTerm}',
+                          'selectedSiren='+siren+'-position='+position+'-resultCount='+${resultCount},
+                        ]);
+                      }
+                    });
+                  }
+                </script>
+              `,
+            }}
+          ></div>
         </div>
       )}
     </div>

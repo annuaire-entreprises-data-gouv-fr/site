@@ -82,6 +82,7 @@ export const mapToDomainObject = (
       adresse_code_postal,
       adresse_libelle_commune
     ),
+    adresseInconsistency: false,
   };
 };
 

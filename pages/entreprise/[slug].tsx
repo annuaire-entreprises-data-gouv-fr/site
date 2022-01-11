@@ -18,6 +18,7 @@ import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import isUserAgentABot from '../../utils/user-agent';
 import PageEntreprise from '../../layouts/page-entreprise';
+import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
 
 interface IProps {
   uniteLegale: IUniteLegale;
@@ -36,6 +37,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
     uniteLegale={uniteLegale}
     currentTab={FICHE.INFORMATION}
   >
+    <StructuredDataBreadcrumb siren={uniteLegale.siren} />
     {uniteLegale.estDiffusible ? (
       <>
         <UniteLegaleSection uniteLegale={uniteLegale} />

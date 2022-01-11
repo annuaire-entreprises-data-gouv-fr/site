@@ -1,7 +1,6 @@
 import { isAPINotResponding } from '../../models/api-not-responding';
 import { IJustificatifs } from '../../models/justificatifs';
 import { formatDateLong } from '../../utils/helpers/formatting';
-import Warning from '../alerts/warning';
 
 const ImmatriculationSummary: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -9,68 +8,62 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
   immatriculationRNCS,
   immatriculationJOAFE,
 }) => {
-  let joafe = '';
-  if (immatriculationJOAFE && !isAPINotResponding(immatriculationJOAFE)) {
-    joafe = `Enregistrée au Journal Officiel des Associations (JOAFE), depuis le ${formatDateLong(
-      immatriculationJOAFE.datePublication
-    )}`;
-  }
-
-  let rnm = '';
-  if (immatriculationRNM && !isAPINotResponding(immatriculationRNM)) {
-    if (immatriculationRNM.dateRadiation) {
-      rnm = `Radiée du Répertoire des métiers (RNM), depuis le ${formatDateLong(
-        immatriculationRNM.dateRadiation
-      )}`;
-    } else {
-      rnm = `Inscrite au Répertoire des métiers (RNM), depuis le ${formatDateLong(
-        immatriculationRNM.dateImmatriculation
-      )}`;
-    }
-  }
-
-  let rncs = '';
-  if (immatriculationRNCS && !isAPINotResponding(immatriculationRNCS)) {
-    if (immatriculationRNCS.dateRadiation) {
-      rncs = `Radiée du Registre du Commerce et des Sociétés (RCS), depuis le ${formatDateLong(
-        immatriculationRNCS.dateRadiation
-      )}`;
-    } else {
-      rncs = `Inscrite au Registre du Commerce et des Sociétés (RCS), depuis le ${formatDateLong(
-        immatriculationRNCS.dateImmatriculation
-      )}`;
-    }
-  }
-
-  const insee = `Inscrite à l’INSEE, depuis le ${formatDateLong(
-    uniteLegale.dateCreation
-  )}${
-    !uniteLegale.estActive
-      ? `, cessée depuis le ${formatDateLong(uniteLegale.dateDebutActivite)}`
-      : ''
-  }`;
-
   return (
     <>
       Cette entité est :
       <ul>
-        {joafe && (
+        {immatriculationJOAFE && !isAPINotResponding(immatriculationJOAFE) && (
           <li>
-            <a href="#joafe">{joafe}</a>
+            <a href="#joafe">
+              <b>Enregistrée</b> au Journal Officiel des Associations (JOAFE),
+              depuis le {formatDateLong(immatriculationJOAFE.datePublication)}
+            </a>
           </li>
         )}
-        {rnm && (
+        {immatriculationRNM && !isAPINotResponding(immatriculationRNM) && (
           <li>
-            <a href="#rnm">{rnm}</a>
+            {immatriculationRNM.dateRadiation ? (
+              <a href="#rnm">
+                <b>Radiée</b> du Répertoire des métiers (RNM), depuis le
+                {formatDateLong(immatriculationRNM.dateRadiation)}
+              </a>
+            ) : (
+              <a href="#rnm">
+                <b>Inscrite</b> au Répertoire des métiers (RNM), depuis le
+                {formatDateLong(immatriculationRNM.dateImmatriculation)}
+              </a>
+            )}
           </li>
         )}
-        {rncs && (
+        {immatriculationRNCS && !isAPINotResponding(immatriculationRNCS) && (
           <li>
-            <a href="#rncs">{rncs}</a>
+            {immatriculationRNCS.dateRadiation ? (
+              <a href="#rncs">
+                <b>Radiée</b> du Registre du Commerce et des Sociétés (RCS),
+                depuis le
+                {formatDateLong(immatriculationRNCS.dateRadiation)}
+              </a>
+            ) : (
+              <a href="#rncs">
+                <b>Inscrite</b> au Registre du Commerce et des Sociétés (RCS),
+                depuis le{' '}
+                {formatDateLong(immatriculationRNCS.dateImmatriculation)}
+              </a>
+            )}
           </li>
         )}
         <li>
-          <a href="#insee">{insee}</a>
+          {uniteLegale.estActive ? (
+            <a href="#insee">
+              <b>Inscrite</b> à l’Insee, depuis le
+              {formatDateLong(uniteLegale.dateCreation)}
+            </a>
+          ) : (
+            <a href="#insee">
+              <b>Cessée</b> auprès de l’Insee, depuis le
+              {formatDateLong(uniteLegale.dateDebutActivite)}
+            </a>
+          )}
         </li>
       </ul>
       <br />

@@ -40,7 +40,7 @@ const mapToDomainIdentite = (
   const infosIdentite = {
     greffe,
     codeGreffe, //'7501',
-    numeroRCS: `RCS ${greffe} ${formatIntFr(dossier['@_siren'])}`,
+    numeroRCS: `${formatIntFr(dossier['@_siren'])} rcs ${greffe}`,
     numGestion: dossier['@_num_gestion'], // '2020B02214',
     dateImmatriculation,
     dateDebutActiv: formatINPIDateField(date_debut_activ),

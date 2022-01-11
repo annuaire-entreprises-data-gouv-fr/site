@@ -1,0 +1,26 @@
+slug: mi
+short: MI
+long: Ministère de l’Intérieur (MI)
+contact: https://www.interieur.gouv.fr/Infos-du-site/Nous-contacter
+dataGouvLink: https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/
+apiMonitors:
+  - apiGouvLink: https://api.gouv.fr/les-api/api_rna
+    apiName: API Répertoire National des Associations
+    id: 788061105
+description: |
+  ## Quelles sont les données des associations publiées par le ministère de l'Intérieur ?
+
+  Le ministère de l’interieur publie toutes les données des associations enregistrées dans le [Répertoire National des Associations (RNA)](https://www.associations.gouv.fr/le-rna-repertoire-national-des-associations.html). Le RNA remplace depuis 2010 le répertoire Waldec (Web des associations librement déclarées).
+
+  Toutes les associations sont référencées au RNA, mais seule une partie d'entre elles ont un siret et sont enregistrées au répertoire Sirene de l'INSEE.
+
+  Les associations doivent demander un siret dans les cas suivants :
+
+  - pour demander une subvention
+  - pour recruter un salarié
+  - pour développer des activités commerciales
+
+  ## Corriger une erreur dans les données
+
+  Vous avez repéré une erreur ? Les données d’une association ne
+  sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](https://www.interieur.gouv.fr/Infos-du-site/Nous-contacter).

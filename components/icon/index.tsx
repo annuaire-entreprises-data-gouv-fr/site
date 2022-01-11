@@ -190,3 +190,19 @@ export {
   qrCode,
   print,
 };
+
+export const Open = () => (
+  <span
+    className="fr-fi-checkbox-circle-line success-main-525"
+    aria-hidden="true"
+    style={{ color: '#326f00' }}
+  ></span>
+);
+
+export const Closed = () => (
+  <span
+    className="fr-fi-close-circle-line red-marianne-425"
+    aria-hidden="true"
+    style={{ color: '#914141' }}
+  ></span>
+);
