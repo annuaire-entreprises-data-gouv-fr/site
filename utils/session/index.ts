@@ -1,5 +1,5 @@
-// import { redisConnection } from '../../clients/local/redis';
 import nextSession from 'next-session';
+//@ts-ignore
 import redis from 'redis';
 
 import { promisifyStore, expressSession } from 'next-session/lib/compat';

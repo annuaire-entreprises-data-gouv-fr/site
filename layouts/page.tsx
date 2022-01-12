@@ -6,7 +6,6 @@ import { Question } from '../components/question';
 import { NPSBanner } from '../components/banner/nps';
 import { WeNeedYouModal } from '../components/modal/we-need-you';
 import DownloadManager from '../components/download-manager';
-import { IUniteLegale } from '../models';
 
 interface IProps {
   headerWithSearch?: boolean;
