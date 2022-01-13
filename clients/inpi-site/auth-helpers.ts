@@ -1,13 +1,9 @@
 export interface IInpiSiteCookies {
   phpSessionId: string;
   Q71: string;
-  token: string;
 }
 
-const extractCookies = (
-  sessionCookies: any,
-  html: string
-): IInpiSiteCookies => {
+const extractCookies = (sessionCookies: any): IInpiSiteCookies => {
   if (!sessionCookies || typeof sessionCookies !== 'string') {
     throw new Error('Invalid session cookies');
   }
@@ -28,46 +24,25 @@ const extractCookies = (
     cookieSearchResult = cookieSearch.exec(sessionCookies);
   }
 
-  const token = extractTokenFromHtmlForm(html);
-
-  if (Q71 === null || phpSessionId === null || token === null) {
+  if (Q71 === null || phpSessionId === null) {
     throw new Error('Could not parse session cookies');
   }
 
   return {
     phpSessionId,
     Q71,
-    token,
   };
-};
-
-const extractTokenFromHtmlForm = (html: string) => {
-  const formSearch = RegExp(/(name="login_form\[_token\]" value="[^"]*)/, 'g');
-  const formSearchResults = formSearch.exec(html);
-
-  if (formSearchResults && formSearchResults.length > 0) {
-    const token = formSearchResults[0].replace(
-      'name="login_form[_token]" value="',
-      ''
-    );
-
-    if (token) {
-      return token;
-    }
-  }
-
-  return null;
 };
 
 const extractAuthSuccessFromHtmlForm = (html: string) => {
   return html.indexOf('alert-success alert-dismissible') > -1;
 };
 
-const loginFormData = (token: string) => {
+const loginFormData = () => {
   const login = process.env.INPI_SITE_LOGIN as string;
   const password = process.env.INPI_SITE_PASSWORD as string;
 
-  return `referer=&login_form%5BEmail%5D=${login}&login_form%5Bpassword%5D=${password}&login_form%5Blicence%5D=1&login_form%5Bsubmit%5D=&login_form%5B_token%5D=${token}`;
+  return `referer=https%3A%2F%2Fdata.inpi.fr%2Flogin&login_form%5BEmail%5D=${login}&login_form%5Bpassword%5D=${password}&login_form%5Blicence%5D=1&login_form%5Bsubmit%5D=`;
 };
 
 export { extractAuthSuccessFromHtmlForm, extractCookies, loginFormData };

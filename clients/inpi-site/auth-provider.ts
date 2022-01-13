@@ -73,10 +73,9 @@ class InpiSiteAuthProvider {
       headers: DEFAULT_HEADERS,
       timeout: INPI_SITE_IMEOUT,
     });
-    const html = response.data;
-    const sessionCookies = (response.headers['set-cookie'] || []).join('');
+    const sessionCookies = (response.headers['set-cookie'] || []).join(' ');
 
-    return extractCookies(sessionCookies, html);
+    return extractCookies(sessionCookies);
   }
 
   /**
@@ -84,8 +83,7 @@ class InpiSiteAuthProvider {
    */
   async authenticateCookies(cookies: IInpiSiteCookies) {
     const cookieString = this.formatCookies(cookies);
-    const token = cookies.token;
-    if (!cookieString || !token) {
+    if (!cookieString) {
       throw new Error('trying to authenticate empty cookies or token');
     }
 
@@ -98,7 +96,7 @@ class InpiSiteAuthProvider {
         Origin: 'https://data.inpi.fr',
         Cookie: cookieString,
       },
-      data: loginFormData(token),
+      data: loginFormData(),
       timeout: INPI_SITE_IMEOUT,
     });
 
