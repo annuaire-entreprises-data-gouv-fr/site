@@ -1,78 +1,86 @@
 import React from 'react';
+import { IDirigeantSession } from '../../hocs/with-dirigeant-session';
 import { PageContext } from '../../layouts/page-context';
 import SearchBar from '../search-bar';
 
-class HeaderSmall extends React.Component<{
+class Header extends React.Component<{
   currentSearchTerm: string;
+  simpleHeader: boolean;
   map: boolean;
+  dirigeantSession: IDirigeantSession;
 }> {
   static contextType = PageContext;
 
   render() {
-    const { currentSearchTerm = '', map = false } = this.props;
+    const { simpleHeader, currentSearchTerm = '', map = false } = this.props;
 
     return (
-      <>
-        <header role="banner" className="fr-header">
-          <div className="fr-header__body">
-            <div className="fr-container">
-              <div className="fr-header__body-row">
-                <div className="fr-header__brand">
-                  <div className="fr-header__brand-top">
-                    <div className="fr-header__logo">
-                      <a href="/" title="République française">
-                        <p className="fr-logo">
-                          République
-                          <br />
-                          française
-                        </p>
-                      </a>
-                    </div>
+      <header role="banner" className="fr-header">
+        <div className="fr-header__body">
+          <div className="fr-container">
+            <div className="fr-header__body-row">
+              <div className="fr-header__brand">
+                <div className="fr-header__brand-top">
+                  <div className="fr-header__logo">
+                    <a href="/" title="République française">
+                      <p className="fr-logo">
+                        République
+                        <br />
+                        française
+                      </p>
+                    </a>
+                  </div>
+                  {!simpleHeader && (
                     <div className="annuaire-logo">
                       <a href="/" title="L’Annuaire des Entreprises">
                         <div>L’Annuaire des Entreprises</div>
                       </a>
                     </div>
-                    <div className="fr-header__navbar"></div>
-                  </div>
+                  )}
+                  <div className="fr-header__navbar"></div>
+                </div>
+                {!simpleHeader && (
                   <div className="not-fr-search">
                     <SearchBar
                       defaultValue={currentSearchTerm}
                       url={map ? '/rechercher/carte' : '/rechercher'}
                     />
                   </div>
-                </div>
-                <div className="fr-header__tools">
-                  <div className="fr-header__tools-links">
-                    <ul className="fr-links-group">
+                )}
+              </div>
+              <div className="fr-header__tools">
+                <div className="fr-header__tools-links">
+                  <ul className="fr-links-group">
+                    <li>
+                      <a
+                        className="fr-link fr-fi-information-line"
+                        href="/comment-ca-marche"
+                      >
+                        À propos
+                      </a>
+                    </li>
+                    {this.context.dirigeantSession && (
                       <li>
                         <a
-                          className="fr-link fr-fi-information-line"
-                          href="/comment-ca-marche"
+                          className="fr-link fr-fi-account-fill"
+                          href="/api/account/logout"
                         >
-                          À propos
+                          {this.context.dirigeantSession.firstName}{' '}
+                          {this.context.dirigeantSession.name}
                         </a>
                       </li>
-                      {this.context.dirigeant && (
-                        <li>
-                          <a
-                            className="fr-link fr-fi-account-fill"
-                            href="/comment-ca-marche"
-                          >
-                            {this.context.dirigeant.firstName}{' '}
-                            {this.context.dirigeant.name}
-                          </a>
-                        </li>
-                      )}
-                    </ul>
-                  </div>
+                    )}
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
-        </header>
-
+        </div>
         <style global jsx>{`
+          header.fr-header {
+            box-shadow: ${simpleHeader ? 'none !important' : 'default'};
+          }
+
           div.annuaire-logo {
             order: 2;
           }
@@ -107,55 +115,9 @@ class HeaderSmall extends React.Component<{
             }
           }
         `}</style>
-      </>
+      </header>
     );
   }
 }
 
-const Header = () => (
-  <>
-    <header role="banner" className="fr-header">
-      <div className="fr-header__body">
-        <div className="fr-container">
-          <div className="fr-header__body-row">
-            <div className="fr-header__brand fr-enlarge-link">
-              <div className="fr-header__brand-top">
-                <div className="fr-header__logo">
-                  <a href="/" title="République française">
-                    <p className="fr-logo">
-                      République
-                      <br />
-                      française
-                    </p>
-                  </a>
-                </div>
-                <div className="fr-header__navbar"></div>
-              </div>
-            </div>
-            <div className="fr-header__tools">
-              <div className="fr-header__tools-links">
-                <ul className="fr-links-group">
-                  <li>
-                    <a
-                      className="fr-link fr-fi-information-line"
-                      href="/comment-ca-marche"
-                    >
-                      À propos
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <style jsx>{`
-      header.fr-header {
-        box-shadow: none !important;
-      }
-    `}</style>
-  </>
-);
-
-export { Header, HeaderSmall };
+export { Header };

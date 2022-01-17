@@ -3,7 +3,7 @@ import { PassportHandler } from '.';
 
 export default PassportHandler().get(
   passport.authenticate('franceConnect', {
-    failureRedirect: '/500',
-    successRedirect: '/compte/mes-entreprises',
+    failureRedirect: '/compte/echec-france-connect',
+    successRedirect: '/api/account/verify',
   })
 );

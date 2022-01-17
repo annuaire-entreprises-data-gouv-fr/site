@@ -13,6 +13,7 @@ import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
 import isUserAgentABot from '../../utils/user-agent';
 import PageEntreprise from '../../layouts/page-entreprise';
+import { withDirigeantSession } from '../../hocs/with-dirigeant-session';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -49,28 +50,30 @@ const EtablissementPage: React.FC<IProps> = ({
   </PageEntreprise>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const siret = context.params.slug as string;
+export const getServerSideProps: GetServerSideProps = withDirigeantSession(
+  async (context) => {
+    //@ts-ignore
+    const siret = context.params.slug as string;
 
-  const forceSireneOuverteForDebug = (context.query
-    .forceSireneOuverteForDebug || '') as string;
-  const isABot = isUserAgentABot(context.req);
+    const forceSireneOuverteForDebug = (context.query
+      .forceSireneOuverteForDebug || '') as string;
+    const isABot = isUserAgentABot(context.req);
 
-  try {
-    const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
-    const etablissementWithUniteLegale = forceUseOfSireneOuverte
-      ? await getEtablissementWithUniteLegaleSireneOuverteFromSlug(siret)
-      : await getEtablissementWithUniteLegaleFromSlug(siret);
+    try {
+      const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
+      const etablissementWithUniteLegale = forceUseOfSireneOuverte
+        ? await getEtablissementWithUniteLegaleSireneOuverteFromSlug(siret)
+        : await getEtablissementWithUniteLegaleFromSlug(siret);
 
-    return {
-      props: {
-        ...etablissementWithUniteLegale,
-      },
-    };
-  } catch (e: any) {
-    return redirectIfIssueWithSiretOrSiren(e, siret, context.req);
+      return {
+        props: {
+          ...etablissementWithUniteLegale,
+        },
+      };
+    } catch (e: any) {
+      return redirectIfIssueWithSiretOrSiren(e, siret, context.req);
+    }
   }
-};
+);
 
 export default EtablissementPage;

@@ -12,9 +12,14 @@ import { IsLikelyASirenOrSiretException } from '../../models';
 import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
 import StructuredDataSearchAction from '../../components/structured-data/search';
+import {
+  IDirigeantSession,
+  withDirigeantSession,
+} from '../../hocs/with-dirigeant-session';
 
 interface IProps extends ISearchResults {
   searchTerm: string;
+  dirigeantSession: IDirigeantSession;
 }
 
 const SearchResultPage: React.FC<IProps> = ({
@@ -23,11 +28,13 @@ const SearchResultPage: React.FC<IProps> = ({
   currentPage = 1,
   resultCount,
   searchTerm,
+  dirigeantSession,
 }) => (
   <Page
     currentSearchTerm={searchTerm}
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"
+    dirigeantSession={dirigeantSession}
   >
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
@@ -83,27 +90,29 @@ const SearchResultPage: React.FC<IProps> = ({
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  // get params from query string
-  const searchTermParam = (context.query.terme || '') as string;
-  const pageParam = (context.query.page || '') as string;
-  const page = parseIntWithDefaultValue(pageParam, 1);
+export const getServerSideProps: GetServerSideProps = withDirigeantSession(
+  async (context) => {
+    // get params from query string
+    const searchTermParam = (context.query.terme || '') as string;
+    const pageParam = (context.query.page || '') as string;
+    const page = parseIntWithDefaultValue(pageParam, 1);
 
-  try {
-    const results = (await search(searchTermParam, page)) || {};
-    return {
-      props: {
-        ...results,
-        searchTerm: searchTermParam,
-      },
-    };
-  } catch (e: any) {
-    if (e instanceof IsLikelyASirenOrSiretException) {
-      return redirectIfSiretOrSiren(e.message);
-    } else {
-      return redirectServerError(e.message);
+    try {
+      const results = (await search(searchTermParam, page)) || {};
+      return {
+        props: {
+          ...results,
+          searchTerm: searchTermParam,
+        },
+      };
+    } catch (e: any) {
+      if (e instanceof IsLikelyASirenOrSiretException) {
+        return redirectIfSiretOrSiren(e.message);
+      } else {
+        return redirectServerError(e.message);
+      }
     }
   }
-};
+);
 
 export default SearchResultPage;

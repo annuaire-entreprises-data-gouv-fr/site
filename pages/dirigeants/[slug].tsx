@@ -15,6 +15,7 @@ import BeneficiairesSection from '../../components/dirigeants-section/beneficiai
 import DirigeantSummary from '../../components/dirigeants-section/summary';
 import BreakPageForPrint from '../../components/print-break-page';
 import PageEntreprise from '../../layouts/page-entreprise';
+import { withDirigeantSession } from '../../hocs/with-dirigeant-session';
 
 const DirigeantsPage: React.FC<IDirigeants> = ({
   uniteLegale,
@@ -62,16 +63,18 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const slug = context.params.slug as string;
-  try {
-    return {
-      props: await getDirigeantsWithUniteLegaleFromSlug(slug),
-    };
-  } catch (e: any) {
-    return redirectIfIssueWithSiren(e, slug, context.req);
+export const getServerSideProps: GetServerSideProps = withDirigeantSession(
+  async (context) => {
+    //@ts-ignore
+    const slug = context.params.slug as string;
+    try {
+      return {
+        props: await getDirigeantsWithUniteLegaleFromSlug(slug),
+      };
+    } catch (e: any) {
+      return redirectIfIssueWithSiren(e, slug, context.req);
+    }
   }
-};
+);
 
 export default DirigeantsPage;

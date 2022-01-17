@@ -7,14 +7,11 @@ import { getSession } from '../../utils/session';
 
 const Login: React.FC = () => {
   return (
-    <Page title="Cette page est introuvable" noIndex={true}>
-      <h1>
-        Utilisez FranceConnect pour vous connecter à votre dossier numérique
-        d’entrepreneur
-      </h1>
+    <Page title="Connectez-vous à votre espace entrepreneur" noIndex={true}>
+      <h1>Connectez-vous à votre espace entrepreneur</h1>
       <p>
-        FranceConnect est la solution proposée par l’État pour sécuriser et
-        simplifier la connexion à vos services en ligne
+        En tant que dirigeant d’entreprise, accèdez aux attestations,
+        justificatifs et données privées de votre entreprise.
       </p>
       <div className="france-connect-container">
         <ButtonFranceConnect />
@@ -45,6 +42,12 @@ const Login: React.FC = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context.req, context.res);
+
+  // if visitor is coming from a siren page => add the siren in session
+  session.navigation = null;
+  if (context.query.siren) {
+    session.navigation = { origin: context.query.siren };
+  }
 
   if (session.passport && session.passport.user) {
     return {

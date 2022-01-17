@@ -16,15 +16,9 @@ export enum FICHE {
 
 export const menu = [
   {
-    title: 'Mes documents',
+    title: 'Accueil',
     type: FICHE.DOCUMENTS,
     path: (siren: string) => `/comptes/documents/${siren}`,
-    private: true,
-  },
-  {
-    title: 'Mes simulations',
-    type: FICHE.SIMULATIONS,
-    path: (siren: string) => `/comptes/simulateurs/${siren}`,
     private: true,
   },
   {
@@ -34,7 +28,7 @@ export const menu = [
     private: false,
   },
   {
-    title: 'Justificatif d’immatriculation',
+    title: 'Justificatifs',
     type: FICHE.JUSTIFICATIFS,
     path: (siren: string) => `/justificatif/${siren}`,
     private: false,
@@ -52,11 +46,18 @@ export const menu = [
     private: false,
   },
   {
-    title: 'Conventions collectives',
+    title: 'Documents',
     type: FICHE.DIVERS,
     path: (siren: string) => `/divers/${siren}`,
     private: false,
   },
+  // a ajouter avec une ligne ou un separateur
+  // {
+  //   title: 'Simulateurs',
+  //   type: FICHE.SIMULATIONS,
+  //   path: (siren: string) => `/comptes/simulateurs/${siren}`,
+  //   private: true,
+  // },
 ];
 
 export { Title, Tabs, LateralMenu };

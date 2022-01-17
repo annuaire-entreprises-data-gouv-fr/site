@@ -5,7 +5,7 @@ import Page from '../layouts';
 
 const Index: React.FC = (pageProps) => {
   return (
-    <Page headerWithSearch={false} title="L’Annuaire des Entreprises">
+    <Page simpleHeader={true} title="L’Annuaire des Entreprises">
       <StructuredDataSearchAction />
       <div className="layout-center">
         <div className="centered-search">

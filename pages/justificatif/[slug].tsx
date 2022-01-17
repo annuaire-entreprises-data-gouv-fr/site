@@ -6,6 +6,7 @@ import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import PageEntreprise from '../../layouts/page-entreprise';
+import { withDirigeantSession } from '../../hocs/with-dirigeant-session';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -28,19 +29,21 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
   </PageEntreprise>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const siren = context.params.slug as string;
+export const getServerSideProps: GetServerSideProps = withDirigeantSession(
+  async (context) => {
+    //@ts-ignore
+    const siren = context.params.slug as string;
 
-  try {
-    const justificatifs = await getJustificatifs(siren);
+    try {
+      const justificatifs = await getJustificatifs(siren);
 
-    return {
-      props: justificatifs,
-    };
-  } catch (e: any) {
-    return redirectIfIssueWithSiren(e, siren, context.req);
+      return {
+        props: justificatifs,
+      };
+    } catch (e: any) {
+      return redirectIfIssueWithSiren(e, siren, context.req);
+    }
   }
-};
+);
 
 export default JustificatifPage;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ButtonFranceConnect: React.FC<{}> = () => (
-  <form action="/api/compte/login" method="get">
+  <form action="/api/account/login" method="get">
     <button type="submit" value="Submit">
       <svg
         xmlns="http://www.w3.org/2000/svg"

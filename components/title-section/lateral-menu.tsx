@@ -12,32 +12,15 @@ export const LateralMenu: React.FC<{
     <div className="menu">
       <div className="lateral-menu">
         <div>
-          <div className="menu-label">pages privées</div>
-          {menu
-            .filter((menuItem) => menuItem.private)
-            .map((menuItem) => (
-              <a
-                key={menuItem.title}
-                className={`${ficheType === menuItem.type && 'active'}`}
-                href={menuItem.path(siren)}
-              >
-                {menuItem.title}
-              </a>
-            ))}
-        </div>
-        <div>
-          <div className="menu-label">pages publiques</div>
-          {menu
-            .filter((menuItem) => !menuItem.private)
-            .map((menuItem) => (
-              <a
-                key={menuItem.title}
-                className={`${ficheType === menuItem.type && 'active'}`}
-                href={menuItem.path(siren)}
-              >
-                {menuItem.title}
-              </a>
-            ))}
+          {menu.map((menuItem) => (
+            <a
+              key={menuItem.title}
+              className={`${ficheType === menuItem.type && 'active'}`}
+              href={menuItem.path(siren)}
+            >
+              {menuItem.title}
+            </a>
+          ))}
         </div>
       </div>
     </div>
@@ -88,12 +71,6 @@ export const LateralMenu: React.FC<{
         background-color: #dfdff1;
         border-bottom: 0;
         box-shadow: none;
-      }
-
-      .menu-label {
-        margin-top: 10px;
-        font-variant: small-caps;
-        font-size: 0.9rem;
       }
 
       @media only screen and (min-width: 1px) and (max-width: 450px) {
