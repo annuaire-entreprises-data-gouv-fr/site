@@ -24,12 +24,12 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
           <li>
             {immatriculationRNM.dateRadiation ? (
               <a href="#rnm">
-                <b>Radiée</b> du Répertoire des métiers (RNM), depuis le
+                <b>Radiée</b> du Répertoire des métiers (RNM), depuis le{' '}
                 {formatDateLong(immatriculationRNM.dateRadiation)}
               </a>
             ) : (
               <a href="#rnm">
-                <b>Inscrite</b> au Répertoire des métiers (RNM), depuis le
+                <b>Inscrite</b> au Répertoire des métiers (RNM), depuis le{' '}
                 {formatDateLong(immatriculationRNM.dateImmatriculation)}
               </a>
             )}
@@ -40,8 +40,7 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
             {immatriculationRNCS.dateRadiation ? (
               <a href="#rncs">
                 <b>Radiée</b> du Registre du Commerce et des Sociétés (RCS),
-                depuis le
-                {formatDateLong(immatriculationRNCS.dateRadiation)}
+                depuis le {formatDateLong(immatriculationRNCS.dateRadiation)}
               </a>
             ) : (
               <a href="#rncs">
@@ -55,12 +54,12 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
         <li>
           {uniteLegale.estActive ? (
             <a href="#insee">
-              <b>Inscrite</b> à l’Insee, depuis le
+              <b>Inscrite</b> à l’Insee, depuis le{' '}
               {formatDateLong(uniteLegale.dateCreation)}
             </a>
           ) : (
             <a href="#insee">
-              <b>Cessée</b> auprès de l’Insee, depuis le
+              <b>Cessée</b> auprès de l’Insee, depuis le{' '}
               {formatDateLong(uniteLegale.dateDebutActivite)}
             </a>
           )}
