@@ -4,7 +4,6 @@ import {
   formatAdresse,
   formatFirstNames,
   formatName,
-  formatNameFull,
 } from '../../utils/helpers/formatting';
 import { httpGet } from '../../utils/network';
 import routes from '../routes';
