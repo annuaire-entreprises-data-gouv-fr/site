@@ -5,10 +5,7 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
-import {
-  IImmatriculationRNCS,
-  IImmatriculationRNCSPartial,
-} from '../../models/immatriculation';
+import { IImmatriculationRNCS } from '../../models/immatriculation';
 import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
 import { INPI } from '../administrations';
@@ -22,10 +19,7 @@ import { Closed, Open } from '../icon';
 import Warning from '../alerts/warning';
 
 interface IProps {
-  immatriculation:
-    | IImmatriculationRNCS
-    | IImmatriculationRNCSPartial
-    | IAPINotRespondingError;
+  immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
   uniteLegale: IUniteLegale;
 }
 
@@ -45,6 +39,13 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
     );
   }
 
+  // inpi API call failed and fallbacked on site ping
+  const isImmatriculationIncomplete =
+    !immatriculation.dateRadiation &&
+    !immatriculation.dateImmatriculation &&
+    !immatriculation.numeroRCS &&
+    !immatriculation.denomination;
+
   return (
     <>
       {immatriculation.downloadlink && (
@@ -54,6 +55,22 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
             title="Immatriculation au RNCS"
             source={EAdministration.INPI}
           >
+            {isImmatriculationIncomplete && (
+              <Warning>
+                Le téléservice de l’
+                <INPI />, qui nous transmet les données, est partiellement{' '}
+                <b>hors service 🔴</b>.
+                <br />
+                Les données à notre disposition sont donc <b>incomplètes</b> et
+                nous ne pouvons pas afficher le capital social, le numéro RCS,
+                les dirigeants et les dates d’immatriculation ou de radiation de
+                cette entreprise.
+                <br />
+                Toutefois, vous pouvez retrouver ces données sur le PDF
+                d’immatriculation ou la page entreprise sur le site de l’
+                <INPI />
+              </Warning>
+            )}
             <p>
               Cette entité possède une fiche d’immatriculation au{' '}
               <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
@@ -61,10 +78,12 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
               tribunaux de commerce et centralisées par l’
               <INPI />.
             </p>
-            <ImmatriculationRNCSTable
-              immatriculation={immatriculation}
-              uniteLegale={uniteLegale}
-            />
+            {!isImmatriculationIncomplete && (
+              <ImmatriculationRNCSTable
+                immatriculation={immatriculation}
+                uniteLegale={uniteLegale}
+              />
+            )}
             <PrintNever>
               <p>
                 Pour accéder à l’ensemble des données contenues dans un extrait
@@ -107,22 +126,9 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
 };
 
 const ImmatriculationRNCSTable: React.FC<{
-  immatriculation: IImmatriculationRNCS | IImmatriculationRNCSPartial;
+  immatriculation: IImmatriculationRNCS;
   uniteLegale: IUniteLegale;
 }> = ({ immatriculation, uniteLegale }) => {
-  const isRNCSPartial = (
-    toBeDetermined: IImmatriculationRNCS | IImmatriculationRNCSPartial
-  ): toBeDetermined is IImmatriculationRNCSPartial => {
-    if ((toBeDetermined as IImmatriculationRNCSPartial).rncsIncomplet) {
-      return true;
-    }
-    return false;
-  };
-
-  if (isRNCSPartial(immatriculation)) {
-    return <Warning>Ca marche pas trop</Warning>;
-  }
-
   const data = [
     [
       'Statut',

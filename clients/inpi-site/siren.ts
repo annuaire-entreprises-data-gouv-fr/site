@@ -1,19 +1,32 @@
-import { IImmatriculationRNCSPartial } from '../../models/immatriculation';
+import { IImmatriculationRNCS } from '../../models/immatriculation';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { httpGet } from '../../utils/network';
 import routes from '../routes';
 
-export const fetchImmatriculationRNCSFromSiren = async (
+export const fetchRNCSImmatriculationSiteFallback = async (
   siren: Siren
-): Promise<IImmatriculationRNCSPartial> => {
+): Promise<IImmatriculationRNCS> => {
   await httpGet(routes.rncs.portail.entreprise + siren);
   return mapToDomainObject(siren);
 };
 
-const mapToDomainObject = (siren: Siren): IImmatriculationRNCSPartial => {
+const mapToDomainObject = (siren: Siren): IImmatriculationRNCS => {
   return {
     siren,
     downloadlink: routes.rncs.portail.entreprise + siren,
-    rncsIncomplet: true,
+    denomination: '',
+    codeGreffe: '',
+    greffe: '',
+    numeroRCS: '',
+    numGestion: '',
+    dateGreffe: '',
+    dateImmatriculation: '',
+    dateDebutActiv: '',
+    dateRadiation: '',
+    dateCessationActivite: '',
+    isPersonneMorale: true,
+    dateClotureExercice: '',
+    dureePersonneMorale: '',
+    capital: '',
   };
 };

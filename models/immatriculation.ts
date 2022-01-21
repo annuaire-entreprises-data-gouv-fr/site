@@ -1,6 +1,9 @@
 import { NotAValidIdRnaError } from '.';
 import { HttpNotFound, HttpServerError } from '../clients/exceptions';
-import { fetchImmatriculationRNCSFromSiren } from '../clients/inpi-site/siren';
+import {
+  fetchImmatriculationRNCSFromSiren,
+  fetchRNCSImmatriculationSiteFallback,
+} from '../clients/inpi-site/siren';
 import fetchAnnoncesJO from '../clients/open-data-soft/journal-officiel-associations';
 import { fetchRNCSImmatriculation } from '../clients/rncs';
 import { fetchRnmImmatriculation } from '../clients/rnm';
@@ -24,11 +27,6 @@ export interface IImmatriculationJOAFE extends IImmatriculation {
 
 export interface IImmatriculationRNCS extends IImmatriculation, IIdentite {
   siren: Siren;
-}
-
-export interface IImmatriculationRNCSPartial extends IImmatriculation {
-  siren: Siren;
-  rncsIncomplet: boolean;
 }
 
 export interface IImmatriculationRNM extends IImmatriculation {
@@ -71,7 +69,6 @@ export const getImmatriculationRNM = async (siren: Siren) => {
  */
 export const getImmatriculationRNCS = async (siren: Siren) => {
   try {
-    throw new HttpServerError(404, 'hrey');
     return await fetchRNCSImmatriculation(siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
@@ -79,7 +76,7 @@ export const getImmatriculationRNCS = async (siren: Siren) => {
     }
 
     try {
-      return await fetchImmatriculationRNCSFromSiren(siren);
+      return await fetchRNCSImmatriculationSiteFallback(siren);
     } catch (e2: any) {
       if (e2 instanceof HttpNotFound) {
         return APINotRespondingFactory(EAdministration.INPI, 404);

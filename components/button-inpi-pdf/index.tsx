@@ -63,6 +63,9 @@ const ButtonInpiPdf: React.FC<{ siren: string }> = ({ siren }) => {
           color: #b97800;
           font-weight: bold;
         }
+        #button-inpi-pdf {
+          white-space: initial;
+        }
       `}</style>
     </div>
   );
