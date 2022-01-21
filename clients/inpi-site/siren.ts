@@ -28,5 +28,6 @@ const mapToDomainObject = (siren: Siren): IImmatriculationRNCS => {
     dateClotureExercice: '',
     dureePersonneMorale: '',
     capital: '',
+    libelleNatureJuridique: '',
   };
 };

@@ -1,9 +1,6 @@
 import { NotAValidIdRnaError } from '.';
 import { HttpNotFound, HttpServerError } from '../clients/exceptions';
-import {
-  fetchImmatriculationRNCSFromSiren,
-  fetchRNCSImmatriculationSiteFallback,
-} from '../clients/inpi-site/siren';
+import { fetchRNCSImmatriculationSiteFallback } from '../clients/inpi-site/siren';
 import fetchAnnoncesJO from '../clients/open-data-soft/journal-officiel-associations';
 import { fetchRNCSImmatriculation } from '../clients/rncs';
 import { fetchRnmImmatriculation } from '../clients/rnm';
