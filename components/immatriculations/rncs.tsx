@@ -164,6 +164,7 @@ const ImmatriculationRNCSTable: React.FC<{
         → voir le détail du siège social
       </a>,
     ],
+    ['Nature juridique', immatriculation.libelleNatureJuridique],
     ['Date de début d’activité', formatDate(immatriculation.dateDebutActiv)],
   ];
 

@@ -42,6 +42,7 @@ export interface IIdentite {
   dateClotureExercice: string;
   dureePersonneMorale: string;
   capital: string;
+  libelleNatureJuridique: string;
 }
 
 export interface IPersonneMorale {

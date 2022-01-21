@@ -61,7 +61,6 @@ const extractDossierPrincipal = (
   } else if (principaux.length === 0) {
     logWarningInSentry('No inscription principale', { siren });
     return dossiers[0];
-    throw new HttpNotFound(404, 'No inscription principale');
   }
   return principaux[0];
 };

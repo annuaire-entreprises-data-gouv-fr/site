@@ -17,7 +17,7 @@ const ResultsList: React.FC<IProps> = ({ results }) => (
         data-siren={result.siren}
       >
         <div className="title">
-          {capitalize(result.nomComplet)}
+          {`${capitalize(result.nomComplet)}`}
           {!result.estActive && <Tag className="closed">fermée</Tag>}
         </div>
         <div>{result.libelleActivitePrincipale}</div>
