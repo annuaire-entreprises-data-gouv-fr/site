@@ -1,5 +1,6 @@
 import { NotAValidIdRnaError } from '.';
-import { HttpNotFound } from '../clients/exceptions';
+import { HttpNotFound, HttpServerError } from '../clients/exceptions';
+import { fetchRNCSImmatriculationSiteFallback } from '../clients/inpi-site/siren';
 import fetchAnnoncesJO from '../clients/open-data-soft/journal-officiel-associations';
 import { fetchRNCSImmatriculation } from '../clients/rncs';
 import { fetchRnmImmatriculation } from '../clients/rnm';
@@ -8,10 +9,7 @@ import { Siren } from '../utils/helpers/siren-and-siret';
 
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
-import {
-  APINotRespondingFactory,
-  IAPINotRespondingError,
-} from './api-not-responding';
+import { APINotRespondingFactory } from './api-not-responding';
 import { IIdentite } from './dirigeants';
 
 export interface IImmatriculation {
@@ -74,11 +72,18 @@ export const getImmatriculationRNCS = async (siren: Siren) => {
       return APINotRespondingFactory(EAdministration.INPI, 404);
     }
 
-    logErrorInSentry(new Error('Error in API INPI'), {
-      siren,
-      details: e.toString(),
-    });
-    return APINotRespondingFactory(EAdministration.INPI, 500);
+    try {
+      return await fetchRNCSImmatriculationSiteFallback(siren);
+    } catch (e2: any) {
+      if (e2 instanceof HttpNotFound) {
+        return APINotRespondingFactory(EAdministration.INPI, 404);
+      }
+      logErrorInSentry(new Error('Error in API INPI'), {
+        siren,
+        details: e.toString(),
+      });
+      return APINotRespondingFactory(EAdministration.INPI, 500);
+    }
   }
 };
 

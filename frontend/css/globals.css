@@ -17,8 +17,12 @@ p,
 .section-container,
 h1,
 h2,
-h3 {
+h3,
+.results-list {
+  /* break very long word */
   word-break: break-word;
+  /* preserve whitespace */
+  white-space: pre-wrap;
 }
 
 .layout-center {

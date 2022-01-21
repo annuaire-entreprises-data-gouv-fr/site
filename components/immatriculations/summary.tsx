@@ -44,9 +44,12 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
               </a>
             ) : (
               <a href="#rncs">
-                <b>Inscrite</b> au Registre du Commerce et des Sociétés (RCS),
-                depuis le{' '}
-                {formatDateLong(immatriculationRNCS.dateImmatriculation)}
+                <b>Inscrite</b> au Registre du Commerce et des Sociétés (RCS){' '}
+                {immatriculationRNCS.dateImmatriculation
+                  ? `, depuis le ${formatDateLong(
+                      immatriculationRNCS.dateImmatriculation
+                    )}`
+                  : ''}
               </a>
             )}
           </li>
