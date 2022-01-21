@@ -12,13 +12,17 @@ import {
   getImmatriculationJOAFE,
   getImmatriculationRNM,
   getImmatriculationRNCS,
+  IImmatriculationRNCSPartial,
 } from './immatriculation';
 import { getUniteLegaleFromSlug } from './unite-legale';
 
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;
   immatriculationRNM: IImmatriculationRNM | IAPINotRespondingError;
-  immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
+  immatriculationRNCS:
+    | IImmatriculationRNCS
+    | IImmatriculationRNCSPartial
+    | IAPINotRespondingError;
   immatriculationJOAFE: IImmatriculationJOAFE | IAPINotRespondingError;
 }
 

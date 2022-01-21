@@ -1,5 +1,6 @@
 import { NotAValidIdRnaError } from '.';
-import { HttpNotFound } from '../clients/exceptions';
+import { HttpNotFound, HttpServerError } from '../clients/exceptions';
+import { fetchImmatriculationRNCSFromSiren } from '../clients/inpi-site/siren';
 import fetchAnnoncesJO from '../clients/open-data-soft/journal-officiel-associations';
 import { fetchRNCSImmatriculation } from '../clients/rncs';
 import { fetchRnmImmatriculation } from '../clients/rnm';
@@ -8,10 +9,7 @@ import { Siren } from '../utils/helpers/siren-and-siret';
 
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
-import {
-  APINotRespondingFactory,
-  IAPINotRespondingError,
-} from './api-not-responding';
+import { APINotRespondingFactory } from './api-not-responding';
 import { IIdentite } from './dirigeants';
 
 export interface IImmatriculation {
@@ -26,6 +24,11 @@ export interface IImmatriculationJOAFE extends IImmatriculation {
 
 export interface IImmatriculationRNCS extends IImmatriculation, IIdentite {
   siren: Siren;
+}
+
+export interface IImmatriculationRNCSPartial extends IImmatriculation {
+  siren: Siren;
+  rncsIncomplet: boolean;
 }
 
 export interface IImmatriculationRNM extends IImmatriculation {
@@ -68,17 +71,25 @@ export const getImmatriculationRNM = async (siren: Siren) => {
  */
 export const getImmatriculationRNCS = async (siren: Siren) => {
   try {
+    throw new HttpServerError(404, 'hrey');
     return await fetchRNCSImmatriculation(siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INPI, 404);
     }
 
-    logErrorInSentry(new Error('Error in API INPI'), {
-      siren,
-      details: e.toString(),
-    });
-    return APINotRespondingFactory(EAdministration.INPI, 500);
+    try {
+      return await fetchImmatriculationRNCSFromSiren(siren);
+    } catch (e2: any) {
+      if (e2 instanceof HttpNotFound) {
+        return APINotRespondingFactory(EAdministration.INPI, 404);
+      }
+      logErrorInSentry(new Error('Error in API INPI'), {
+        siren,
+        details: e.toString(),
+      });
+      return APINotRespondingFactory(EAdministration.INPI, 500);
+    }
   }
 };
 
