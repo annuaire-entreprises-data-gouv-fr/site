@@ -10,7 +10,7 @@ const logAllEvents = async (req: NextApiRequest) => {
     const today = new Date();
 
     await logEventInMatomo(
-      'feedback:formulaire',
+      'feedback:nps',
       req.body['textarea'] || '',
       `mood=${req.body['radio-set-mood']}&type=${
         req.body['radio-set-visitor-type']
