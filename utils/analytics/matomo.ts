@@ -9,11 +9,9 @@ let matomo: any = null;
 
 // Initialize with your site ID and Matomo URL
 const init = () => {
-  // if (process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID) {
-  if (true) {
+  if (process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID) {
     matomo = new MatomoTracker(
-      // process.env.MATOMO_SITE_ID,
-      145,
+      process.env.MATOMO_SITE_ID,
       'https://stats.data.gouv.fr/piwik.php'
     );
   }
