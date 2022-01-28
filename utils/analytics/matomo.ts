@@ -57,9 +57,10 @@ export const logEventInMatomo = (
         },
       ];
 
-      matomo.trackBulk(events, (data: { status: string }) => {
-        if (data.status !== 'success') {
-          reject('Failed to log event in matomo');
+      matomo.trackBulk(events, (data: string) => {
+        const d = JSON.parse(data);
+        if (d['status'] !== 'success') {
+          reject('Failed to log event in matomo : ' + data);
         }
         resolve();
       });
