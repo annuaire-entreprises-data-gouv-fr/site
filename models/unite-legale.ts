@@ -98,7 +98,7 @@ const getUniteLegale = async (
  * @param page
  * @returns
  */
-const getUniteLegaleSireneOuverteFromSlug = async (
+const getUniteLegaleFromSlugForGoodBot = async (
   slug: string,
   page = 1
 ): Promise<IUniteLegale> => {
@@ -107,7 +107,14 @@ const getUniteLegaleSireneOuverteFromSlug = async (
     return await getUniteLegaleSireneOuverte(siren, page);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
-      throw new SirenNotFoundError(`Siren ${siren} was not found`);
+      // when not found in siren ouverte, fallback on insee
+      try {
+        return await fetchUniteLegaleFromInsee(siren, page);
+      } catch (e: any) {
+        if (e instanceof HttpNotFound) {
+          throw new SirenNotFoundError(`Siren ${siren} was not found`);
+        }
+      }
     }
     throw e;
   }
@@ -212,5 +219,5 @@ const createNonDiffusibleUniteLegale = (siren: Siren) => {
 export {
   getUniteLegaleFromSlug,
   getUniteLegaleWithRNAFromSlug,
-  getUniteLegaleSireneOuverteFromSlug,
+  getUniteLegaleFromSlugForGoodBot,
 };

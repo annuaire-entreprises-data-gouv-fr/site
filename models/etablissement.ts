@@ -17,7 +17,7 @@ import {
 } from '../utils/helpers/siren-and-siret';
 import {
   getUniteLegaleFromSlug,
-  getUniteLegaleSireneOuverteFromSlug,
+  getUniteLegaleFromSlugForGoodBot,
 } from './unite-legale';
 import {
   logFirstSireneInseefailed,
@@ -103,14 +103,14 @@ const getEtablissementWithLatLongFromSlug = async (
 };
 
 /**
- * Return an Etablissement and the corresponding UniteLegale from sirene ouverte
+ * Return an Etablissement and the corresponding UniteLegale - calling sirene ouverte first
  */
-const getEtablissementWithUniteLegaleSireneOuverteFromSlug = async (
+const getEtablissementWithUniteLegaleFromSlugForGoodBot = async (
   slug: string
 ): Promise<IEtablissementWithUniteLegale> => {
   try {
     const etablissement = await getEtablissementSireneOuverte(slug);
-    const uniteLegale = await getUniteLegaleSireneOuverteFromSlug(
+    const uniteLegale = await getUniteLegaleFromSlugForGoodBot(
       etablissement.siren
     );
 
@@ -140,7 +140,7 @@ const createNonDiffusibleEtablissement = (siret: Siret) => {
 
 export {
   getEtablissementWithUniteLegaleFromSlug,
-  getEtablissementWithUniteLegaleSireneOuverteFromSlug,
+  getEtablissementWithUniteLegaleFromSlugForGoodBot,
   getEtablissementWithLatLongFromSlug,
   getEtablissementFromSlug,
 };

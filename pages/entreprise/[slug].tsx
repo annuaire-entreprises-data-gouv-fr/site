@@ -11,7 +11,7 @@ import EtablissementSection from '../../components/etablissement-section';
 
 import { NonDiffusibleSection } from '../../components/non-diffusible';
 import {
-  getUniteLegaleSireneOuverteFromSlug,
+  getUniteLegaleFromSlugForGoodBot,
   getUniteLegaleWithRNAFromSlug,
 } from '../../models/unite-legale';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
@@ -106,7 +106,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
 
     const uniteLegale = forceUseOfSireneOuverte
-      ? await getUniteLegaleSireneOuverteFromSlug(siren, page)
+      ? await getUniteLegaleFromSlugForGoodBot(siren, page)
       : await getUniteLegaleWithRNAFromSlug(siren, page);
 
     return {
