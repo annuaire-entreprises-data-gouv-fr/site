@@ -31,7 +31,7 @@ const FeedBack: React.FC = () => {
                     type="radio"
                     id="radio-smiley-1"
                     name="radio-set-mood"
-                    value="0"
+                    value="1"
                   />
                   <label
                     className="fr-label"
@@ -46,7 +46,7 @@ const FeedBack: React.FC = () => {
                     type="radio"
                     id="radio-smiley-2"
                     name="radio-set-mood"
-                    value="1"
+                    value="2"
                   />
                   <label
                     className="fr-label"
@@ -61,7 +61,7 @@ const FeedBack: React.FC = () => {
                     type="radio"
                     id="radio-smiley-3"
                     name="radio-set-mood"
-                    value="2"
+                    value="3"
                   />
                   <label
                     className="fr-label"
@@ -76,7 +76,7 @@ const FeedBack: React.FC = () => {
                     type="radio"
                     id="radio-smiley-4"
                     name="radio-set-mood"
-                    value="3"
+                    value="4"
                   />
                   <label
                     className="fr-label"
@@ -91,7 +91,7 @@ const FeedBack: React.FC = () => {
                     type="radio"
                     id="radio-smiley-5"
                     name="radio-set-mood"
-                    value="4"
+                    value="5"
                   />
                   <label
                     className="fr-label"

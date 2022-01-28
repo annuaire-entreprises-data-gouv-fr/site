@@ -34,8 +34,10 @@ responses
       _id: 'AA814767-7B1F-5C81-8F1D-8E47AD7D2982',
       cdt: s.date.getTime(),
       e_a: s.comment,
-      e_c: 'feedback:formulaire',
-      e_n: `mood=${s.note}&type=${s.type}&origin=${s.origin}`,
+      e_c: 'feedback:nps',
+      e_n: `mood=${s.note}&type=${s.type}&origin=${s.origin}&date=${
+        s.date.toISOString().split('T')[0]
+      }`,
       e_v: 'nps',
     });
   });
@@ -45,21 +47,4 @@ matomo.trackBulk(events, (data) => {
   if (d['invalid']) {
     console.log('n° ' + index + ' failed');
   }
-  // resolve();
 });
-
-// events.forEach(async (event, index) => {
-//   await sleep(1000);
-//   await run(event, index);
-// });
-
-// function sleep(ms) {
-//   return new Promise((resolve) => {
-//     setTimeout(resolve, 1000);
-//   });
-// }
-// function run(event, index) {
-//   return new Promise((resolve) => {
-
-//   });
-// }
