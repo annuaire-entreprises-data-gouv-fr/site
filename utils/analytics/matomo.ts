@@ -9,7 +9,7 @@ let matomo: any = null;
 
 // Initialize with your site ID and Matomo URL
 const init = () => {
-  if (process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID) {
+  if (!matomo) {
     matomo = new MatomoTracker(
       process.env.MATOMO_SITE_ID,
       'https://stats.data.gouv.fr/piwik.php'
@@ -33,9 +33,17 @@ export const logEventInMatomo = (
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     try {
-      if (!matomo) {
-        init();
+      if (
+        process.env.NODE_ENV !== 'production' ||
+        !process.env.MATOMO_SITE_ID
+      ) {
+        reject(
+          'Provide a Site ID and run in production in order to log an event'
+        );
       }
+
+      // initialize matomo client if necessary
+      init();
 
       var events = [
         {
@@ -48,9 +56,10 @@ export const logEventInMatomo = (
           e_v: value,
         },
       ];
+
       matomo.trackBulk(events, (data: { status: string }) => {
         if (data.status !== 'success') {
-          reject();
+          reject('Failed to log event in matomo');
         }
         resolve();
       });
