@@ -49,7 +49,7 @@ export const logEventInMatomo = (
         {
           // use a constant unique ID to avoid messing up unique visitor count
           _id: 'AA814767-7B1F-5C81-8F1D-8E47AD7D2982',
-          cdt: new Date().toISOString(),
+          cdt: new Date().getTime(),
           e_a: action,
           e_c: category,
           e_n: name,
