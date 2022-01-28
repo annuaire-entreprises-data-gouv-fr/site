@@ -7,17 +7,23 @@ import logErrorInSentry from '../../../utils/sentry';
 
 const logAllEvents = async (req: NextApiRequest) => {
   try {
-    const data = {
-      username: 'clippy',
-      text: `Note : **${req.body['radio-set-mood']}/5** \nVisiteur : ${req.body['radio-set-visitor-type']} \nOrigine : ${req.body['radio-set-visitor-origin']} \nCommentaire : *${req.body['textarea']}*`,
-    };
+    const today = new Date();
 
     await logEventInMatomo(
       'feedback:formulaire',
       req.body['textarea'] || '',
-      `mood=${req.body['radio-set-mood']}&type=${req.body['radio-set-visitor-type']}&origin=${req.body['radio-set-visitor-origin']}`,
+      `mood=${req.body['radio-set-mood']}&type=${
+        req.body['radio-set-visitor-type']
+      }&origin=${req.body['radio-set-visitor-origin']}&date=${
+        today.toISOString().split('T')[0]
+      }`,
       'nps'
     );
+
+    const data = {
+      username: 'clippy',
+      text: `Note : **${req.body['radio-set-mood']}/5** \nVisiteur : ${req.body['radio-set-visitor-type']} \nOrigine : ${req.body['radio-set-visitor-origin']} \nCommentaire : *${req.body['textarea']}*`,
+    };
 
     await httpClient({
       url: process.env.MATTERMOST_HOOK,
