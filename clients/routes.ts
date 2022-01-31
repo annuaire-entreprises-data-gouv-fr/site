@@ -62,6 +62,15 @@ const routes = {
     api: 'https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
     site: 'https://code.travail.gouv.fr/outils/convention-collective',
   },
+  matomo: {
+    report: {
+      visits:
+        'https://stats.data.gouv.fr/index.php?module=API&method=API.getBulkRequest&format=json',
+      npsEvents:
+        'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=4&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
+    },
+    tracker: 'https://stats.data.gouv.fr/piwik.php',
+  },
 };
 
 export default routes;

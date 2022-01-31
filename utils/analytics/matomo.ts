@@ -4,6 +4,7 @@
 
 //@ts-ignore
 import MatomoTracker from 'matomo-tracker';
+import routes from '../../clients/routes';
 
 let matomo: any = null;
 
@@ -12,7 +13,7 @@ const init = () => {
   if (!matomo) {
     matomo = new MatomoTracker(
       process.env.MATOMO_SITE_ID,
-      'https://stats.data.gouv.fr/piwik.php'
+      routes.matomo.tracker
     );
   }
 };

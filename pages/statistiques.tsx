@@ -17,7 +17,7 @@ const StatsPage: React.FC<IProps> = ({ stats }) => (
   >
     <h1>Statistiques d’utilisation</h1>
     <p>
-      Découvrez nos statistiques d’utilisation mises à jour toutes les heures.
+      Découvrez nos statistiques d’utilisation mises à jour quotidiennement.
       Toutes les données recueillies sont <a href="vie-privee">anonymisées</a>.
     </p>
     <h2>Visites mensuelles</h2>
@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: { stats },
-    revalidate: 3600, // In seconds - 1h - which is matomo refresh time
+    revalidate: 24 * 3600, // In seconds - 1 day
   };
 };
 
