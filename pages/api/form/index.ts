@@ -9,12 +9,14 @@ const logAllEvents = async (req: NextApiRequest) => {
   try {
     const today = new Date();
 
+    const NA = 'Non renseigné';
+
     await logEventInMatomo(
       'feedback:nps',
       req.body['textarea'] || '',
       `mood=${req.body['radio-set-mood']}&type=${
-        req.body['radio-set-visitor-type']
-      }&origin=${req.body['radio-set-visitor-origin']}&date=${
+        req.body['radio-set-visitor-type'] || NA
+      }&origin=${req.body['radio-set-visitor-origin'] || NA}&date=${
         today.toISOString().split('T')[0]
       }`,
       'nps'
@@ -22,7 +24,11 @@ const logAllEvents = async (req: NextApiRequest) => {
 
     const data = {
       username: 'clippy',
-      text: `Note : **${req.body['radio-set-mood']}/5** \nVisiteur : ${req.body['radio-set-visitor-type']} \nOrigine : ${req.body['radio-set-visitor-origin']} \nCommentaire : *${req.body['textarea']}*`,
+      text: `Note : **${req.body['radio-set-mood']}/5** \nVisiteur : ${
+        req.body['radio-set-visitor-type'] || NA
+      } \nOrigine : ${
+        req.body['radio-set-visitor-origin'] || NA
+      } \nCommentaire : *${req.body['textarea'] || NA}*`,
     };
 
     await httpClient({

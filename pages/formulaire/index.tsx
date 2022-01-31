@@ -32,6 +32,7 @@ const FeedBack: React.FC = () => {
                     id="radio-smiley-1"
                     name="radio-set-mood"
                     value="1"
+                    required
                   />
                   <label
                     className="fr-label"
@@ -290,7 +291,10 @@ const FeedBack: React.FC = () => {
               margin: 5px;
             }
             .radio-group > div > input {
-              display: none;
+              opacity: 0;
+              height: 0;
+              width: 0;
+              position: absolute;
             }
 
             input[type='radio']:hover + label,
