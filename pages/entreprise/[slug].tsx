@@ -32,6 +32,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
       uniteLegale.chemin &&
       `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`
     }
+    description={`Toutes les informations officielles sur ${uniteLegale.nomComplet} :  Siren, Siret, NIC, APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, conventions collectives...`}
     noIndex={
       uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
     }

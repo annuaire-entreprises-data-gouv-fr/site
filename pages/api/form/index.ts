@@ -37,7 +37,7 @@ const logAllEvents = async (req: NextApiRequest) => {
       data,
     });
   } catch (e: any) {
-    logErrorInSentry('Error in form submission', { details: e });
+    logErrorInSentry('Error in form submission', { details: e.toString() });
   }
 };
 
