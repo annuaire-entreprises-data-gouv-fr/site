@@ -64,8 +64,7 @@ const getUniteLegale = async (
 ): Promise<IUniteLegale> => {
   try {
     // first attempt to call siren insee
-    // return await fetchUniteLegaleFromInsee(siren, page);
-    return await getUniteLegaleSireneOuverte(siren, page);
+    return await fetchUniteLegaleFromInsee(siren, page);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       throw new SirenNotFoundError(`Siren ${siren} was not found`);
@@ -82,8 +81,7 @@ const getUniteLegale = async (
       try {
         // in case sirene etalab 404 or 500, fallback on Sirene insee using fallback credentials to avoid 403
         // no pagination as this function is called when sirene etalab already failed
-        // return await fetchUniteLegaleFromInseeFallback(siren, page);
-        return await getUniteLegaleSireneOuverte(siren, page);
+        return await fetchUniteLegaleFromInseeFallback(siren, page);
       } catch (e: any) {
         logSecondSireneInseefailed({ siren, details: e.message || e });
 
@@ -113,8 +111,7 @@ const getUniteLegaleFromSlugForGoodBot = async (
     if (e instanceof HttpNotFound) {
       // when not found in siren ouverte, fallback on insee
       try {
-        // return await fetchUniteLegaleFromInsee(siren, page);
-        return await getUniteLegaleSireneOuverte(siren, page);
+        return await fetchUniteLegaleFromInsee(siren, page);
       } catch (e: any) {
         if (e instanceof HttpNotFound) {
           throw new SirenNotFoundError(`Siren ${siren} was not found`);
