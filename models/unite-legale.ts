@@ -48,6 +48,7 @@ const getUniteLegaleFromSlug = async (
 ): Promise<IUniteLegale> => {
   const siren = verifySiren(slug);
   const uniteLegale = await getUniteLegale(siren, page);
+
   if (!uniteLegale.estDiffusible) {
     uniteLegale.nomComplet = 'Entité non-diffusible';
   }
@@ -63,7 +64,8 @@ const getUniteLegale = async (
 ): Promise<IUniteLegale> => {
   try {
     // first attempt to call siren insee
-    return await fetchUniteLegaleFromInsee(siren, page);
+    // return await fetchUniteLegaleFromInsee(siren, page);
+    return await getUniteLegaleSireneOuverte(siren, page);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       throw new SirenNotFoundError(`Siren ${siren} was not found`);
