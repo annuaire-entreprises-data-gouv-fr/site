@@ -95,8 +95,8 @@ const mapToDomainObject = (
           result.code_postal,
           result.libelle_commune
         ),
-        latitude: result.latitude,
-        longitude: result.longitude,
+        latitude: result.latitude || '',
+        longitude: result.longitude || '',
         nomComplet: result.nom_complet || 'Nom inconnu',
         nombreEtablissements: result.nombre_etablissements || 1,
         chemin: result.page_path || result.siren,

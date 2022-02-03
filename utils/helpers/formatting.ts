@@ -121,7 +121,7 @@ const wrapWord = (word: string, caps = false, stop = ' ') => {
   if (caps) {
     return capitalize(word) + stop;
   }
-  return word.toLowerCase() + stop;
+  return word.toString().toLowerCase() + stop;
 };
 
 export const formatAdresse = (
