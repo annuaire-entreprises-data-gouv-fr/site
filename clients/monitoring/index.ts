@@ -47,11 +47,13 @@ const cachedMonitorings: IMonitoringCache = {
   monitorings: [],
 };
 
+const CACHE_LIFE = 55 * 1000;
+
 export const fetchMonitorings = async (
   monitoringIds: number[]
 ): Promise<IMonitoring[]> => {
   const shouldUpdate =
-    new Date().getTime() - cachedMonitorings.lastUpdate > 30 * 1000;
+    new Date().getTime() - cachedMonitorings.lastUpdate > CACHE_LIFE;
 
   if (shouldUpdate) {
     await fetchAllMonitorings();
