@@ -13,9 +13,9 @@ import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
 import isUserAgentABot from '../../utils/user-agent';
 import PageEntreprise from '../../layouts/page-entreprise';
-import { withDirigeantSession } from '../../hocs/with-dirigeant-session';
+import { IPropsWithSession, withSession } from '../../hocs/with-session';
 
-interface IProps {
+interface IProps extends IPropsWithSession {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
 }
@@ -23,11 +23,13 @@ interface IProps {
 const EtablissementPage: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
+  session,
 }) => (
   <PageEntreprise
     title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
     uniteLegale={uniteLegale}
     currentTab={FICHE.INFORMATION}
+    session={session}
   >
     <TitleEtablissementWithDenomination
       uniteLegale={uniteLegale}
@@ -50,7 +52,7 @@ const EtablissementPage: React.FC<IProps> = ({
   </PageEntreprise>
 );
 
-export const getServerSideProps: GetServerSideProps = withDirigeantSession(
+export const getServerSideProps: GetServerSideProps = withSession(
   async (context) => {
     //@ts-ignore
     const siret = context.params.slug as string;

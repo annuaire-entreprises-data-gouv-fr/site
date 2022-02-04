@@ -1,19 +1,22 @@
 import { GetServerSidePropsContext } from 'next';
 import { getSession } from '../utils/session';
+import { ISession } from '../utils/session/manageSession';
 
-export interface IDirigeantSession {}
+export interface IPropsWithSession {
+  session: ISession | null;
+}
 
-export function withDirigeantSession(
+export function withSession(
   getServerSidePropsFunction: (context: GetServerSidePropsContext) => any
 ) {
   return async (context: GetServerSidePropsContext) => {
     const comutedServerSideProps = await getServerSidePropsFunction(context);
+    const session = (await getSession(context.req, context.res)) as any;
 
-    const session = await getSession(context.req, context.res);
     return {
       props: {
         ...comutedServerSideProps.props,
-        dirigeantSession: session.passport.user || null,
+        session: session || null,
       },
     };
   };

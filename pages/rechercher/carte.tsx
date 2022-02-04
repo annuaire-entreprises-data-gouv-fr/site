@@ -14,8 +14,9 @@ import { IsLikelyASirenOrSiretException } from '../../models';
 import { redirectServerError } from '../../utils/redirects';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
 import StructuredDataSearchAction from '../../components/structured-data/search';
+import { IPropsWithSession, withSession } from '../../hocs/with-session';
 
-interface IProps extends ISearchResults {
+interface IProps extends ISearchResults, IPropsWithSession {
   searchTerm: string;
   currentPage: number;
 }
@@ -26,6 +27,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
   resultCount,
   searchTerm,
   currentPage = 1,
+  session,
 }) => (
   <Page
     currentSearchTerm={searchTerm}
@@ -33,6 +35,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
     noIndex={true}
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/carte"
+    session={session}
   >
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
@@ -120,28 +123,30 @@ const MapSearchResultPage: React.FC<IProps> = ({
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  // get params from query string
-  const searchTermParam = (context.query.terme || '') as string;
-  const pageParam = (context.query.page || '') as string;
+export const getServerSideProps: GetServerSideProps = withSession(
+  async (context) => {
+    // get params from query string
+    const searchTermParam = (context.query.terme || '') as string;
+    const pageParam = (context.query.page || '') as string;
 
-  const page = parseIntWithDefaultValue(pageParam, 1);
+    const page = parseIntWithDefaultValue(pageParam, 1);
 
-  try {
-    const results = (await search(searchTermParam, page)) || {};
-    return {
-      props: {
-        ...results,
-        searchTerm: searchTermParam,
-      },
-    };
-  } catch (e: any) {
-    if (e instanceof IsLikelyASirenOrSiretException) {
-      return redirectIfSiretOrSiren(e.message);
-    } else {
-      return redirectServerError(e.message);
+    try {
+      const results = (await search(searchTermParam, page)) || {};
+      return {
+        props: {
+          ...results,
+          searchTerm: searchTermParam,
+        },
+      };
+    } catch (e: any) {
+      if (e instanceof IsLikelyASirenOrSiretException) {
+        return redirectIfSiretOrSiren(e.message);
+      } else {
+        return redirectServerError(e.message);
+      }
     }
   }
-};
+);
 
 export default MapSearchResultPage;

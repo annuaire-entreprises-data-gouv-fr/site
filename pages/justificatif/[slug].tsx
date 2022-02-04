@@ -6,7 +6,7 @@ import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import PageEntreprise from '../../layouts/page-entreprise';
-import { withDirigeantSession } from '../../hocs/with-dirigeant-session';
+import { withSession } from '../../hocs/with-session';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,
@@ -29,7 +29,7 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
   </PageEntreprise>
 );
 
-export const getServerSideProps: GetServerSideProps = withDirigeantSession(
+export const getServerSideProps: GetServerSideProps = withSession(
   async (context) => {
     //@ts-ignore
     const siren = context.params.slug as string;

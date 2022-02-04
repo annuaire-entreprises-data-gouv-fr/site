@@ -12,14 +12,10 @@ import { IsLikelyASirenOrSiretException } from '../../models';
 import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
 import StructuredDataSearchAction from '../../components/structured-data/search';
-import {
-  IDirigeantSession,
-  withDirigeantSession,
-} from '../../hocs/with-dirigeant-session';
+import { IPropsWithSession, withSession } from '../../hocs/with-session';
 
-interface IProps extends ISearchResults {
+interface IProps extends ISearchResults, IPropsWithSession {
   searchTerm: string;
-  dirigeantSession: IDirigeantSession;
 }
 
 const SearchResultPage: React.FC<IProps> = ({
@@ -28,13 +24,13 @@ const SearchResultPage: React.FC<IProps> = ({
   currentPage = 1,
   resultCount,
   searchTerm,
-  dirigeantSession,
+  session,
 }) => (
   <Page
     currentSearchTerm={searchTerm}
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"
-    dirigeantSession={dirigeantSession}
+    session={session}
   >
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
@@ -90,7 +86,7 @@ const SearchResultPage: React.FC<IProps> = ({
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = withDirigeantSession(
+export const getServerSideProps: GetServerSideProps = withSession(
   async (context) => {
     // get params from query string
     const searchTermParam = (context.query.terme || '') as string;

@@ -7,7 +7,11 @@ import { getSession } from '../../utils/session';
 
 const Login: React.FC = () => {
   return (
-    <Page title="Connectez-vous à votre espace entrepreneur" noIndex={true}>
+    <Page
+      title="Connectez-vous à votre espace entrepreneur"
+      noIndex={true}
+      session={null}
+    >
       <h1>Connectez-vous à votre espace entrepreneur</h1>
       <p>
         En tant que dirigeant d’entreprise, accèdez aux attestations,
@@ -43,19 +47,32 @@ const Login: React.FC = () => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context.req, context.res);
 
-  // if visitor is coming from a siren page => add the siren in session
+  const alreadyAuthenticated = session.passport && session.passport.user;
+  const comeFromEntreprisePage = !!context.query.siren;
+
+  // clean session navigation from any previous verification
   session.navigation = null;
-  if (context.query.siren) {
+  if (comeFromEntreprisePage) {
+    // associate session with siren
     session.navigation = { origin: context.query.siren };
   }
 
-  if (session.passport && session.passport.user) {
-    return {
-      redirect: {
-        destination: '/compte/mes-entreprises',
-        permanent: false,
-      },
-    };
+  if (alreadyAuthenticated) {
+    if (comeFromEntreprisePage) {
+      return {
+        redirect: {
+          destination: `/api/verify`,
+          permanent: false,
+        },
+      };
+    } else {
+      return {
+        redirect: {
+          destination: '/compte/mes-entreprises',
+          permanent: false,
+        },
+      };
+    }
   }
 
   return {

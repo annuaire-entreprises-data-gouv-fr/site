@@ -15,12 +15,15 @@ import BeneficiairesSection from '../../components/dirigeants-section/beneficiai
 import DirigeantSummary from '../../components/dirigeants-section/summary';
 import BreakPageForPrint from '../../components/print-break-page';
 import PageEntreprise from '../../layouts/page-entreprise';
-import { withDirigeantSession } from '../../hocs/with-dirigeant-session';
+import { IPropsWithSession, withSession } from '../../hocs/with-session';
 
-const DirigeantsPage: React.FC<IDirigeants> = ({
+interface IProps extends IPropsWithSession, IDirigeants {}
+
+const DirigeantsPage: React.FC<IProps> = ({
   uniteLegale,
   dirigeants,
   beneficiaires,
+  session,
 }) => {
   return (
     <PageEntreprise
@@ -29,6 +32,7 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
       noIndex={true}
       uniteLegale={uniteLegale}
       currentTab={FICHE.DIRIGEANTS}
+      session={session}
     >
       <DirigeantSummary
         uniteLegale={uniteLegale}
@@ -63,7 +67,7 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withDirigeantSession(
+export const getServerSideProps: GetServerSideProps = withSession(
   async (context) => {
     //@ts-ignore
     const slug = context.params.slug as string;

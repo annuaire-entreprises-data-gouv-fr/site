@@ -1,10 +1,16 @@
 import React from 'react';
 import Page from '.';
+import BreadCrumb from '../components/bread-crumb';
+import SubHeader from '../components/header/sub-header';
 import SocialMedia from '../components/social-media';
 import Title, { FICHE, LateralMenu, Tabs } from '../components/title-section';
 import { UnitLegaleDescription } from '../components/unite-legale-description';
-import { IDirigeantSession } from '../hocs/with-dirigeant-session';
 import { IUniteLegale } from '../models';
+import {
+  getNameFromSession,
+  ISession,
+  isLoggedIn,
+} from '../utils/session/manageSession';
 
 interface IProps {
   title: string;
@@ -13,7 +19,7 @@ interface IProps {
   noIndex?: boolean;
   uniteLegale: IUniteLegale;
   currentTab: FICHE;
-  dirigeantSession: IDirigeantSession;
+  session: ISession | null;
 }
 
 const PageEntreprise: React.FC<IProps> = ({
@@ -24,23 +30,26 @@ const PageEntreprise: React.FC<IProps> = ({
   noIndex = false,
   uniteLegale,
   currentTab,
-  dirigeantSession,
+  session,
 }) => (
   <Page
     title={title}
     noIndex={noIndex}
     canonical={canonical}
     description={description}
-    dirigeantSession={dirigeantSession}
+    session={session}
   >
-    {dirigeantSession ? (
+    {session && isLoggedIn(session) ? (
       <>
-        <div className="small-caps">
-          Bienvenue sur votre espace entreprise :
-        </div>
-        <br />
-        <Title uniteLegale={uniteLegale} />
-        <br />
+        <SubHeader
+          links={[
+            {
+              label: `Mon entreprise : ${uniteLegale.nomComplet}`,
+            },
+          ]}
+          uniteLegale={uniteLegale}
+          session={session}
+        />
         <div className="content-container">
           <LateralMenu
             siren={uniteLegale.siren}
@@ -58,6 +67,9 @@ const PageEntreprise: React.FC<IProps> = ({
           .content-container {
             margin: 0 auto 0;
             display: flex;
+          }
+          .body {
+            padding: 15px;
           }
         `}</style>
       </>

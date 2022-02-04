@@ -25,7 +25,7 @@ interface IProps extends IPropsWithSession {
   uniteLegale: IUniteLegale;
 }
 
-const UniteLegalePage: React.FC<IProps> = ({ uniteLegale, session }) => (
+const AccountPage: React.FC<IProps> = ({ uniteLegale, session }) => (
   <PageEntreprise
     title={`${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
     canonical={
@@ -36,28 +36,11 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale, session }) => (
       uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
     }
     uniteLegale={uniteLegale}
-    currentTab={FICHE.INFORMATION}
+    currentTab={FICHE.ACCOUNT}
     session={session}
   >
     <StructuredDataBreadcrumb siren={uniteLegale.siren} />
-    {uniteLegale.estDiffusible ? (
-      <>
-        <UniteLegaleSection uniteLegale={uniteLegale} />
-        {uniteLegale.association && uniteLegale.association.id && (
-          <AssociationSection uniteLegale={uniteLegale} />
-        )}
-        {uniteLegale.siege && (
-          <EtablissementSection
-            uniteLegale={uniteLegale}
-            etablissement={uniteLegale.siege}
-            usedInEntreprisePage={true}
-          />
-        )}
-        <EtablissementListeSection uniteLegale={uniteLegale} />
-      </>
-    ) : (
-      <NonDiffusibleSection />
-    )}
+    Hello
   </PageEntreprise>
 );
 
@@ -116,4 +99,4 @@ export const getServerSideProps: GetServerSideProps = withSession(
   }
 );
 
-export default UniteLegalePage;
+export default AccountPage;

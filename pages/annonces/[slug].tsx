@@ -10,37 +10,28 @@ import getAnnoncesFromSlug from '../../models/annonces';
 import AnnoncesBodaccSection from '../../components/annonces-section/bodacc';
 import AnnoncesJOSection from '../../components/annonces-section/jo';
 import PageEntreprise from '../../layouts/page-entreprise';
-import {
-  IDirigeantSession,
-  withDirigeantSession,
-} from '../../hocs/with-dirigeant-session';
+import { IPropsWithSession, withSession } from '../../hocs/with-session';
 
-interface IProps {
+interface IProps extends IPropsWithSession {
   uniteLegale: IUniteLegale;
   bodacc: IAnnoncesBodacc | IAPINotRespondingError;
   jo: IAnnoncesJO | IAPINotRespondingError | null;
-  dirigeantSession: IDirigeantSession;
 }
 
-const Annonces: React.FC<IProps> = ({
-  uniteLegale,
-  bodacc,
-  jo,
-  dirigeantSession,
-}) => (
+const Annonces: React.FC<IProps> = ({ uniteLegale, bodacc, jo, session }) => (
   <PageEntreprise
     title={`Annonces légales (BODACC) - ${uniteLegale.nomComplet}`}
     noIndex={true}
     uniteLegale={uniteLegale}
     currentTab={FICHE.ANNONCES}
-    dirigeantSession={dirigeantSession}
+    session={session}
   >
     <AnnoncesBodaccSection uniteLegale={uniteLegale} bodacc={bodacc} />
     {jo && <AnnoncesJOSection uniteLegale={uniteLegale} jo={jo} />}
   </PageEntreprise>
 );
 
-export const getServerSideProps: GetServerSideProps = withDirigeantSession(
+export const getServerSideProps: GetServerSideProps = withSession(
   async (context) => {
     //@ts-ignore
     const siren = context.params.slug as string;

@@ -1,13 +1,18 @@
 import React from 'react';
-import { IDirigeantSession } from '../../hocs/with-dirigeant-session';
 import { PageContext } from '../../layouts/page-context';
+import {
+  getNameFromSession,
+  ISession,
+  isLoggedIn,
+} from '../../utils/session/manageSession';
 import SearchBar from '../search-bar';
+import UserMenu from './user-menu';
 
 class Header extends React.Component<{
   currentSearchTerm: string;
   simpleHeader: boolean;
   map: boolean;
-  dirigeantSession: IDirigeantSession;
+  session: ISession | null;
 }> {
   static contextType = PageContext;
 
@@ -59,17 +64,21 @@ class Header extends React.Component<{
                         À propos
                       </a>
                     </li>
-                    {this.context.dirigeantSession && (
-                      <li>
-                        <a
-                          className="fr-link fr-fi-account-fill"
-                          href="/api/account/logout"
-                        >
-                          {this.context.dirigeantSession.firstName}{' '}
-                          {this.context.dirigeantSession.name}
-                        </a>
-                      </li>
-                    )}
+                    {
+                      isLoggedIn(this.context.session) ? (
+                        <li>
+                          <UserMenu session={this.context.session} />
+                        </li>
+                      ) : null
+                      // <li>
+                      //   <a
+                      //     className="fr-link fr-fi-account-fill"
+                      //     href="/compte/connexion"
+                      //   >
+                      //     Se connecter
+                      //   </a>
+                      // </li>
+                    }
                   </ul>
                 </div>
               </div>

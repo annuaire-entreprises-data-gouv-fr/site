@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Footer from '../components/footer';
 import { Header } from '../components/header';
 import Meta from '../components/meta';
@@ -7,7 +7,7 @@ import { NPSBanner } from '../components/banner/nps';
 import { WeNeedYouModal } from '../components/modal/we-need-you';
 import DownloadManager from '../components/download-manager';
 import { PageContext } from './page-context';
-import { IDirigeantSession } from '../hocs/with-dirigeant-session';
+import { ISession } from '../hocs/with-session';
 
 interface IProps {
   simpleHeader?: boolean;
@@ -18,7 +18,7 @@ interface IProps {
   description?: string;
   canonical?: string;
   noIndex?: boolean;
-  dirigeantSession: IDirigeantSession;
+  session: ISession | null;
 }
 
 class Page extends React.Component<IProps> {
@@ -35,12 +35,12 @@ class Page extends React.Component<IProps> {
       description,
       canonical,
       noIndex = false,
-      dirigeantSession,
+      session,
     } = this.props;
     return (
       <PageContext.Provider
         value={{
-          dirigeantSession,
+          session,
         }}
       >
         <div id="page-layout">
@@ -55,7 +55,7 @@ class Page extends React.Component<IProps> {
           <Header
             simpleHeader={simpleHeader}
             currentSearchTerm={currentSearchTerm}
-            dirigeantSession={dirigeantSession}
+            session={session}
             map={map}
           />
           <main className="fr-container">{children}</main>

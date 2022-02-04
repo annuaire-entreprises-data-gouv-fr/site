@@ -3,7 +3,11 @@ import Page from '../../layouts';
 
 const Logout: React.FC = () => {
   return (
-    <Page title="Echec de la connexion avec FranceConnect" noIndex={true}>
+    <Page
+      title="Echec de la connexion avec FranceConnect"
+      noIndex={true}
+      session={null}
+    >
       <h1>Echec de la connexion avec FranceConnect</h1>
       <p>Merci de réessayer plus tard.</p>
       <style jsx>{`

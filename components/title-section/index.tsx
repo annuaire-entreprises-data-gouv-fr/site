@@ -12,13 +12,14 @@ export enum FICHE {
   COMPTES = 'bilans & comptes',
   ACTES = 'actes & statuts',
   DIVERS = 'conventions collectives',
+  ACCOUNT = 'accueil',
 }
 
 export const menu = [
   {
     title: 'Accueil',
-    type: FICHE.DOCUMENTS,
-    path: (siren: string) => `/comptes/documents/${siren}`,
+    type: FICHE.ACCOUNT,
+    path: (siren: string) => `/compte/${siren}`,
     private: true,
   },
   {

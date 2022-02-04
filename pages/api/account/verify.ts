@@ -7,9 +7,10 @@ export default nextConnect<NextApiRequest, NextApiResponse>().get(
     const session = await getSession(req, res); // session is set to req.session
 
     // call API dirigeant
-
     if (session.navigation && session.navigation.origin) {
-      return res.redirect(`/entreprise/${session.navigation.origin}`);
+      return res.redirect(`/compte/${session.navigation.origin}`);
+    } else {
+      return res.redirect(`/`);
     }
   }
 );
