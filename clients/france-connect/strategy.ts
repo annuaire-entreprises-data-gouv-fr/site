@@ -30,7 +30,6 @@ passport.use(
       usePKCE: false,
     },
     (_token: TokenSet, userInfo: object, done: Function) => {
-      console.log(userInfo);
       done(null, userInfo);
     }
   )

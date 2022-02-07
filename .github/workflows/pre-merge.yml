@@ -29,11 +29,26 @@ env:
   INPI_LOGIN_6: ${{ secrets.INPI_LOGIN}}
   INPI_PASSWORD_6: ${{ secrets.INPI_PASSWORD}}
   PDF_DOWNLOAD_DIRECTORY: /tmp/download
+  REDIS_URL: redis:6379
+  FC_CLIENT_ID: ${{ secrets.FC_CLIENT_ID }}
+  FC_CLIENT_SECRET: ${{ secrets.FC_CLIENT_SECRET }}
+  FC_ISSUER: ${{ secrets.FC_ISSUER }}
+  FC_REDIRECT_URI: ${{ secrets.FC_REDIRECT_URI }}
 
 jobs:
   dependencies:
     name: 'Install dependencies'
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v2
@@ -41,6 +56,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ env.node-version }}
+
       - name: Cache node modules
         uses: actions/cache@v2
         id: restore-dependencies

@@ -31,7 +31,10 @@ const DashboardJustificatifs: React.FC<{
     ],
     [
       'Avis Insee',
-      <AvisSituationLink key="avis-situation" siren={uniteLegale.siren} />,
+      <AvisSituationLink
+        key="avis-situation"
+        siret={uniteLegale.siege.siret}
+      />,
     ],
   ];
   return (

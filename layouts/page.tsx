@@ -18,7 +18,7 @@ interface IProps {
   description?: string;
   canonical?: string;
   noIndex?: boolean;
-  session: ISession | null;
+  session?: ISession | null;
 }
 
 class Page extends React.Component<IProps> {
@@ -35,7 +35,7 @@ class Page extends React.Component<IProps> {
       description,
       canonical,
       noIndex = false,
-      session,
+      session = null,
     } = this.props;
     return (
       <PageContext.Provider
@@ -55,7 +55,6 @@ class Page extends React.Component<IProps> {
           <Header
             simpleHeader={simpleHeader}
             currentSearchTerm={currentSearchTerm}
-            session={session}
             map={map}
           />
           <main className="fr-container">{children}</main>

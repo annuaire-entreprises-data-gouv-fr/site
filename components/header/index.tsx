@@ -1,23 +1,23 @@
 import React from 'react';
 import { PageContext } from '../../layouts/page-context';
-import {
-  getNameFromSession,
-  ISession,
-  isLoggedIn,
-} from '../../utils/session/manageSession';
+import { isLoggedIn } from '../../utils/session/manageSession';
 import SearchBar from '../search-bar';
 import UserMenu from './user-menu';
 
 class Header extends React.Component<{
-  currentSearchTerm: string;
-  simpleHeader: boolean;
-  map: boolean;
-  session: ISession | null;
+  currentSearchTerm?: string;
+  simpleHeader?: boolean;
+  map?: boolean;
 }> {
   static contextType = PageContext;
 
   render() {
-    const { simpleHeader, currentSearchTerm = '', map = false } = this.props;
+    const session = this.context.session || null;
+    const {
+      simpleHeader = false,
+      currentSearchTerm = '',
+      map = false,
+    } = this.props;
 
     return (
       <header role="banner" className="fr-header">
@@ -64,21 +64,11 @@ class Header extends React.Component<{
                         À propos
                       </a>
                     </li>
-                    {
-                      isLoggedIn(this.context.session) ? (
-                        <li>
-                          <UserMenu session={this.context.session} />
-                        </li>
-                      ) : null
-                      // <li>
-                      //   <a
-                      //     className="fr-link fr-fi-account-fill"
-                      //     href="/compte/connexion"
-                      //   >
-                      //     Se connecter
-                      //   </a>
-                      // </li>
-                    }
+                    {isLoggedIn(session) && (
+                      <li>
+                        <UserMenu session={session} />
+                      </li>
+                    )}
                   </ul>
                 </div>
               </div>

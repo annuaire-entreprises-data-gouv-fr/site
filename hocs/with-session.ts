@@ -14,8 +14,6 @@ export function withSession(
 
     const session = (await getSession(context.req, context.res)) as any;
 
-    console.log(session);
-
     return {
       props: {
         ...comutedServerSideProps.props,
