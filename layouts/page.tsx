@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import Footer from '../components/footer';
 import { Header } from '../components/header';
 import Meta from '../components/meta';
@@ -7,7 +7,7 @@ import { NPSBanner } from '../components/banner/nps';
 import { WeNeedYouModal } from '../components/modal/we-need-you';
 import DownloadManager from '../components/download-manager';
 import { PageContext } from './page-context';
-import { ISession } from '../hocs/with-session';
+import { ISession } from '../utils/session/manageSession';
 
 interface IProps {
   simpleHeader?: boolean;

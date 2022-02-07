@@ -54,14 +54,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   session.navigation = null;
   if (comeFromEntreprisePage) {
     // associate session with siren
-    session.navigation = { origin: context.query.siren };
+    session.navigation = {
+      sirenFrom: context.query.siren,
+      pageFrom: context.query.page || '',
+    };
   }
 
   if (alreadyAuthenticated) {
     if (comeFromEntreprisePage) {
       return {
         redirect: {
-          destination: `/api/verify`,
+          destination: `/api/account/verify`,
           permanent: false,
         },
       };

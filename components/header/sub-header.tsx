@@ -24,16 +24,18 @@ const SubHeader: React.FC<IProps> = ({ uniteLegale, session, links }) => (
       .sub-header {
         position: relative;
         display: block;
+        margin-bottom: 25px;
       }
       .sub-header:before {
         background: #f5f5fe;
+        border-radius: 4px;
         position: absolute;
         top: 0;
         bottom: 0;
         content: '';
         width: 100vw;
         z-index: -1;
-        left: calc(-50vw + 50%);
+        left: calc(-51vw + 50%);
       }
       .sub-header h1 {
         margin: 0 0;

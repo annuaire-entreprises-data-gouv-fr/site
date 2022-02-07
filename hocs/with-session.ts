@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import { getSession } from '../utils/session';
-import { ISession } from '../utils/session/manageSession';
+import { ISession, isLoggedIn } from '../utils/session/manageSession';
 
 export interface IPropsWithSession {
   session: ISession | null;
@@ -11,12 +11,15 @@ export function withSession(
 ) {
   return async (context: GetServerSidePropsContext) => {
     const comutedServerSideProps = await getServerSidePropsFunction(context);
+
     const session = (await getSession(context.req, context.res)) as any;
+
+    console.log(session);
 
     return {
       props: {
         ...comutedServerSideProps.props,
-        session: session || null,
+        session: isLoggedIn(session) ? session : null,
       },
     };
   };

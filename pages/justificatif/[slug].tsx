@@ -6,19 +6,23 @@ import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import PageEntreprise from '../../layouts/page-entreprise';
-import { withSession } from '../../hocs/with-session';
+import { IPropsWithSession, withSession } from '../../hocs/with-session';
 
-const JustificatifPage: React.FC<IJustificatifs> = ({
+interface IProps extends IJustificatifs, IPropsWithSession {}
+
+const JustificatifPage: React.FC<IProps> = ({
   uniteLegale,
   immatriculationRNM,
   immatriculationRNCS,
   immatriculationJOAFE,
+  session,
 }) => (
   <PageEntreprise
     title={`Justificatif d’immatriculation - ${uniteLegale.nomComplet}`}
     noIndex={true}
     uniteLegale={uniteLegale}
     currentTab={FICHE.JUSTIFICATIFS}
+    session={session}
   >
     <Immatriculations
       immatriculationRNM={immatriculationRNM}

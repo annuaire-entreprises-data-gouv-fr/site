@@ -32,9 +32,8 @@ export const LateralMenu: React.FC<{
         background-color: #fff;
         border-right: 1px solid #dfdff1;
         box-shadow: 12px 0 10px -10px #dfdff1;
-        margin-right: 20px;
+        margin: 10px 30px 0 0;
         padding: 0;
-        padding-top: 10px;
         height: 100vh;
         position: sticky;
         top: 0;
@@ -57,7 +56,7 @@ export const LateralMenu: React.FC<{
         border-radius: 3px;
         border: none;
         padding-left: 10px;
-        margin: 3px 10px 3px 0;
+        margin: 3px 20px 3px 0;
         text-align: left;
         justify-content: start;
         box-shadow: none;
