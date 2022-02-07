@@ -15,7 +15,6 @@ interface IProps {
 
 const EtablissementMapPage: React.FC<IProps> = ({ etablissement }) => (
   <Page
-    small={true}
     map={true}
     noIndex={true}
     title="Carte"

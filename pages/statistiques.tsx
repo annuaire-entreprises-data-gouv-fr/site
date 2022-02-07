@@ -11,7 +11,6 @@ interface IProps {
 
 const StatsPage: React.FC<IProps> = ({ stats }) => (
   <Page
-    small={true}
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"
   >

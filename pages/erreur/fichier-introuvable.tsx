@@ -7,7 +7,7 @@ import constants from '../../models/constants';
 
 const SirenOrSiretNotFoundPage = () => {
   return (
-    <Page small={true} title="Fichier introuvable" noIndex={true}>
+    <Page title="Fichier introuvable" noIndex={true}>
       <h1>Ce fichier s’est volatilisé !</h1>
       <div>
         <p>

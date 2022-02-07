@@ -1,10 +1,9 @@
 import React from 'react';
 
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
 import { IEtablissement, IUniteLegale } from '../../models';
 import EtablissementSection from '../../components/etablissement-section';
-import Title, { FICHE } from '../../components/title-section';
+import { FICHE } from '../../components/title-section';
 import { NonDiffusibleSection } from '../../components/non-diffusible';
 import {
   getEtablissementWithUniteLegaleFromSlug,
@@ -13,8 +12,10 @@ import {
 import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
 import isUserAgentABot from '../../utils/user-agent';
+import PageEntreprise from '../../layouts/page-entreprise';
+import { IPropsWithSession, withSession } from '../../hocs/with-session';
 
-interface IProps {
+interface IProps extends IPropsWithSession {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
 }
@@ -22,62 +23,59 @@ interface IProps {
 const EtablissementPage: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
+  session,
 }) => (
-  <Page
-    small={true}
+  <PageEntreprise
     title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
+    uniteLegale={uniteLegale}
+    currentTab={FICHE.INFORMATION}
+    session={session}
   >
-    <div className="content-container">
-      <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
-      <TitleEtablissementWithDenomination
-        uniteLegale={uniteLegale}
+    <TitleEtablissementWithDenomination
+      uniteLegale={uniteLegale}
+      etablissement={etablissement}
+    />
+    <br />
+    {etablissement.estDiffusible ? (
+      <EtablissementSection
         etablissement={etablissement}
+        uniteLegale={uniteLegale}
       />
-      <br />
-      {etablissement.estDiffusible ? (
-        <EtablissementSection
-          etablissement={etablissement}
-          uniteLegale={uniteLegale}
-        />
-      ) : (
-        <>
-          <p>
-            Cet établissement est <b>non-diffusible.</b>
-          </p>
-          <NonDiffusibleSection />
-        </>
-      )}
-    </div>
-    <style jsx>{`
-      .content-container {
-        margin: 20px auto 40px;
-      }
-    `}</style>
-  </Page>
+    ) : (
+      <>
+        <p>
+          Cet établissement est <b>non-diffusible.</b>
+        </p>
+        <NonDiffusibleSection />
+      </>
+    )}
+  </PageEntreprise>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const siret = context.params.slug as string;
+export const getServerSideProps: GetServerSideProps = withSession(
+  async (context) => {
+    //@ts-ignore
+    const siret = context.params.slug as string;
 
-  const forceSireneOuverteForDebug = (context.query
-    .forceSireneOuverteForDebug || '') as string;
-  const isABot = isUserAgentABot(context.req);
+    const forceSireneOuverteForDebug = (context.query
+      .forceSireneOuverteForDebug || '') as string;
+    const isABot = isUserAgentABot(context.req);
 
-  try {
-    const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
-    const etablissementWithUniteLegale = forceUseOfSireneOuverte
-      ? await getEtablissementWithUniteLegaleFromSlugForGoodBot(siret)
-      : await getEtablissementWithUniteLegaleFromSlug(siret);
+    try {
+      const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
+      const etablissementWithUniteLegale = forceUseOfSireneOuverte
+        ? await getEtablissementWithUniteLegaleFromSlugForGoodBot(siret)
+        : await getEtablissementWithUniteLegaleFromSlug(siret);
 
-    return {
-      props: {
-        ...etablissementWithUniteLegale,
-      },
-    };
-  } catch (e: any) {
-    return redirectIfIssueWithSiretOrSiren(e, siret, context.req);
+      return {
+        props: {
+          ...etablissementWithUniteLegale,
+        },
+      };
+    } catch (e: any) {
+      return redirectIfIssueWithSiretOrSiren(e, siret, context.req);
+    }
   }
-};
+);
 
 export default EtablissementPage;

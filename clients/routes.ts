@@ -62,6 +62,12 @@ const routes = {
     api: 'https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
     site: 'https://code.travail.gouv.fr/outils/convention-collective',
   },
+  franceConnect: {
+    authorization: '/api/v1/authorize',
+    token: '/api/v1/token',
+    userInfo: '/api/v1/userinfo',
+    logout: '/api/v1/logout',
+  },
   matomo: {
     report: {
       visits:

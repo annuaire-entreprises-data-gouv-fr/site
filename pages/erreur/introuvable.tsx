@@ -6,11 +6,7 @@ import ButtonLink from '../../components/button';
 
 const SirenOrSiretNotFoundPage = () => {
   return (
-    <Page
-      small={true}
-      title="Numero d’identification introuvable"
-      noIndex={true}
-    >
+    <Page title="Numero d’identification introuvable" noIndex={true}>
       <h1>Ce numéro d’identification (siren/siret) est introuvable 🔎</h1>
       <div>
         <p>Il existe plusieurs explications possibles :</p>

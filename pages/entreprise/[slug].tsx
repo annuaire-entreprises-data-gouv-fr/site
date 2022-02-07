@@ -1,11 +1,10 @@
 import React from 'react';
 
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
 import { IUniteLegale } from '../../models';
 import UniteLegaleSection from '../../components/unite-legale-section';
 import EtablissementListeSection from '../../components/etablissement-liste-section';
-import Title, { FICHE } from '../../components/title-section';
+import { FICHE } from '../../components/title-section';
 
 import EtablissementSection from '../../components/etablissement-section';
 
@@ -18,15 +17,16 @@ import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import isUserAgentABot from '../../utils/user-agent';
+import PageEntreprise from '../../layouts/page-entreprise';
 import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
+import { IPropsWithSession, withSession } from '../../hocs/with-session';
 
-interface IProps {
+interface IProps extends IPropsWithSession {
   uniteLegale: IUniteLegale;
 }
 
-const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
-  <Page
-    small={true}
+const UniteLegalePage: React.FC<IProps> = ({ uniteLegale, session }) => (
+  <PageEntreprise
     title={`${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
     canonical={
       uniteLegale.chemin &&
@@ -36,35 +36,30 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
     noIndex={
       uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
     }
+    uniteLegale={uniteLegale}
+    currentTab={FICHE.INFORMATION}
+    session={session}
   >
     <StructuredDataBreadcrumb siren={uniteLegale.siren} />
-    <div className="content-container">
-      <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
-      {uniteLegale.estDiffusible ? (
-        <>
-          <UniteLegaleSection uniteLegale={uniteLegale} />
-          {uniteLegale.association && uniteLegale.association.id && (
-            <AssociationSection uniteLegale={uniteLegale} />
-          )}
-          {uniteLegale.siege && (
-            <EtablissementSection
-              uniteLegale={uniteLegale}
-              etablissement={uniteLegale.siege}
-              usedInEntreprisePage={true}
-            />
-          )}
-          <EtablissementListeSection uniteLegale={uniteLegale} />
-        </>
-      ) : (
-        <NonDiffusibleSection />
-      )}
-    </div>
-    <style jsx>{`
-      .content-container {
-        margin: 20px auto 40px;
-      }
-    `}</style>
-  </Page>
+    {uniteLegale.estDiffusible ? (
+      <>
+        <UniteLegaleSection uniteLegale={uniteLegale} />
+        {uniteLegale.association && uniteLegale.association.id && (
+          <AssociationSection uniteLegale={uniteLegale} />
+        )}
+        {uniteLegale.siege && (
+          <EtablissementSection
+            uniteLegale={uniteLegale}
+            etablissement={uniteLegale.siege}
+            usedInEntreprisePage={true}
+          />
+        )}
+        <EtablissementListeSection uniteLegale={uniteLegale} />
+      </>
+    ) : (
+      <NonDiffusibleSection />
+    )}
+  </PageEntreprise>
 );
 
 const extractSiren = (slug: string) => {
@@ -81,43 +76,45 @@ const extractSiren = (slug: string) => {
   return '';
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const slug = context.params.slug as string;
-  const pageParam = (context.query.page || '') as string;
+export const getServerSideProps: GetServerSideProps = withSession(
+  async (context) => {
+    //@ts-ignore
+    const slug = context.params.slug as string;
+    const pageParam = (context.query.page || '') as string;
 
-  const siren = extractSiren(slug);
-  if (siren.length === 14) {
-    // 14 digits is not a siren -> but it may be a siret
-    return {
-      redirect: {
-        destination: `/etablissement/${siren}`,
-        permanent: false,
-      },
-    };
+    const siren = extractSiren(slug);
+    if (siren.length === 14) {
+      // 14 digits is not a siren -> but it may be a siret
+      return {
+        redirect: {
+          destination: `/etablissement/${siren}`,
+          permanent: false,
+        },
+      };
+    }
+
+    const page = parseIntWithDefaultValue(pageParam, 1);
+
+    const forceSireneOuverteForDebug = (context.query
+      .forceSireneOuverteForDebug || '') as string;
+    const isABot = isUserAgentABot(context.req);
+
+    try {
+      const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
+
+      const uniteLegale = forceUseOfSireneOuverte
+        ? await getUniteLegaleFromSlugForGoodBot(siren, page)
+        : await getUniteLegaleWithRNAFromSlug(siren, page);
+
+      return {
+        props: {
+          uniteLegale,
+        },
+      };
+    } catch (e: any) {
+      return redirectIfIssueWithSiren(e, siren, context.req);
+    }
   }
-
-  const page = parseIntWithDefaultValue(pageParam, 1);
-
-  const forceSireneOuverteForDebug = (context.query
-    .forceSireneOuverteForDebug || '') as string;
-  const isABot = isUserAgentABot(context.req);
-
-  try {
-    const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
-
-    const uniteLegale = forceUseOfSireneOuverte
-      ? await getUniteLegaleFromSlugForGoodBot(siren, page)
-      : await getUniteLegaleWithRNAFromSlug(siren, page);
-
-    return {
-      props: {
-        uniteLegale,
-      },
-    };
-  } catch (e: any) {
-    return redirectIfIssueWithSiren(e, siren, context.req);
-  }
-};
+);
 
 export default UniteLegalePage;

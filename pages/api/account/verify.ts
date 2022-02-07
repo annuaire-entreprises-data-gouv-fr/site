@@ -1,0 +1,27 @@
+import nextConnect from 'next-connect';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from '../../../utils/session';
+
+export default nextConnect<NextApiRequest, NextApiResponse>().get(
+  async (req, res) => {
+    const session = await getSession(req, res); // session is set to req.session
+
+    const sirenFrom = session.navigation.sirenFrom;
+    // call API dirigeant
+
+    if (session.navigation && sirenFrom) {
+      session.passport.companies = [
+        ...(session.passport.companies || []),
+        { siren: sirenFrom },
+      ];
+
+      const redirectTo = `${
+        session.navigation.pageFrom || '/compte/'
+      }/${sirenFrom}`;
+
+      return res.redirect(redirectTo);
+    } else {
+      return res.redirect(`/`);
+    }
+  }
+);

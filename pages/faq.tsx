@@ -251,7 +251,7 @@ const questions = [
 ];
 
 const FAQ: React.FC<{}> = () => (
-  <Page small={true} title="FAQ de l’Annuaire des Entreprises">
+  <Page title="FAQ de l’Annuaire des Entreprises">
     <StructuredDataFAQ
       data={questions
         .filter((q) => !q.excludeFromStructuredData)

@@ -5,7 +5,7 @@ import Page from '../layouts';
 
 const About: React.FC = () => {
   return (
-    <Page small={true} title="Comment ça marche ?">
+    <Page title="Comment ça marche ?">
       <div className="content-container text-wrapper">
         <h1>À propos de L’Annuaire des Entreprises</h1>
         <h2>Qui a développé ce site ?</h2>
