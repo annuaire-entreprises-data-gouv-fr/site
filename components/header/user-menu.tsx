@@ -15,9 +15,10 @@ const UserMenu: React.FC<{ session: ISession }> = ({ session }) => {
       <div className="user-menu">
         {companies.length > 0 && (
           <ul>
+            <label className="menu-label">mes entreprises :</label>
             {getCompaniesFromSession(session).map((company) => (
               <li key={company.siren}>
-                <a href={`/compte/${company.siren}`}>{company.siren}</a>
+                <a href={`/compte/${company.siren}`}>・{company.siren}</a>
               </li>
             ))}
           </ul>
@@ -41,7 +42,7 @@ const UserMenu: React.FC<{ session: ISession }> = ({ session }) => {
         }
         .user-menu {
           display: none;
-          width: 200px;
+          width: 270px;
           background-color: #fff;
           position: absolute;
           right: 0;
@@ -63,6 +64,14 @@ const UserMenu: React.FC<{ session: ISession }> = ({ session }) => {
           transform: rotate(45deg);
           right: 40px;
           top: -5px;
+        }
+
+        .user-menu label.menu-label {
+          font-variant: small-caps;
+          font-weight: 600;
+          color: #555;
+          padding: 0 10px;
+          font-size: 0.8rem;
         }
 
         .user-menu a {
