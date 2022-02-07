@@ -111,7 +111,7 @@ const Footer = () => (
               className="fr-footer__bottom-link"
               target="_blank"
               rel="noreferrer noopener"
-              href="https://github.com/etalab/annuaire-entreprises.data.gouv.fr"
+              href="https://github.com/etalab/annuaire-entreprises-site"
             >
               Code source
             </a>
@@ -142,6 +142,11 @@ const Footer = () => (
           <li className="fr-footer__bottom-item">
             <a className="fr-footer__bottom-link" href="/administration">
               Statut des API utilisées
+            </a>
+          </li>
+          <li className="fr-footer__bottom-item">
+            <a className="fr-footer__bottom-link" href="/statistiques">
+              Statistiques d’utilisation
             </a>
           </li>
         </ul>

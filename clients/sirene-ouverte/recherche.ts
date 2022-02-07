@@ -46,8 +46,13 @@ const getResults = async (
   page: number
 ): Promise<ISearchResults> => {
   const encodedTerms = encodeURI(searchTerms);
-  const route = `${routes.sireneOuverte.rechercheUniteLegale}?per_page=10&page=${page}&q=${encodedTerms}`;
-  const response = await httpGet(route);
+
+  const route =
+    process.env.ALTERNATIVE_SEARCH_ROUTE ||
+    routes.sireneOuverte.rechercheUniteLegale;
+
+  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}`;
+  const response = await httpGet(url);
 
   const results = (response.data || []) as ISireneOuverteSearchResults[];
 
@@ -90,8 +95,8 @@ const mapToDomainObject = (
           result.code_postal,
           result.libelle_commune
         ),
-        latitude: result.latitude,
-        longitude: result.longitude,
+        latitude: result.latitude || '',
+        longitude: result.longitude || '',
         nomComplet: result.nom_complet || 'Nom inconnu',
         nombreEtablissements: result.nombre_etablissements || 1,
         chemin: result.page_path || result.siren,

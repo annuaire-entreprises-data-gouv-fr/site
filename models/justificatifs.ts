@@ -1,10 +1,6 @@
 import { IUniteLegale } from '.';
 import { verifySiren } from '../utils/helpers/siren-and-siret';
-import { EAdministration } from './administration';
-import {
-  APINotRespondingFactory,
-  IAPINotRespondingError,
-} from './api-not-responding';
+import { IAPINotRespondingError } from './api-not-responding';
 import {
   IImmatriculationRNM,
   IImmatriculationRNCS,

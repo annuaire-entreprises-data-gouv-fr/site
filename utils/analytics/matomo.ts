@@ -1,0 +1,72 @@
+/**
+ * BE CAREFUL, this is server-side analytics only !
+ */
+
+//@ts-ignore
+import MatomoTracker from 'matomo-tracker';
+import routes from '../../clients/routes';
+
+let matomo: any = null;
+
+// Initialize with your site ID and Matomo URL
+const init = () => {
+  if (!matomo) {
+    matomo = new MatomoTracker(
+      process.env.MATOMO_SITE_ID,
+      routes.matomo.tracker
+    );
+  }
+};
+
+/**
+ * Log on event on Matomo - Server side use only
+ * @param category
+ * @param action
+ * @param name
+ * @param value (does not appear in matomo interface)
+ * @returns
+ */
+export const logEventInMatomo = (
+  category: string,
+  action: string,
+  name: string,
+  value: string
+): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    try {
+      if (
+        process.env.NODE_ENV !== 'production' ||
+        !process.env.MATOMO_SITE_ID
+      ) {
+        reject(
+          'Provide a Site ID and run in production in order to log an event'
+        );
+      }
+
+      // initialize matomo client if necessary
+      init();
+
+      var events = [
+        {
+          // use a constant unique ID to avoid messing up unique visitor count
+          _id: 'AA814767-7B1F-5C81-8F1D-8E47AD7D2982',
+          cdt: new Date().getTime(),
+          e_a: action,
+          e_c: category,
+          e_n: name,
+          e_v: value,
+        },
+      ];
+
+      matomo.trackBulk(events, (data: string) => {
+        const d = JSON.parse(data);
+        if (d['status'] !== 'success') {
+          reject('Failed to log event in matomo : ' + data);
+        }
+        resolve();
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};

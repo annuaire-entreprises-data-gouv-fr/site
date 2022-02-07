@@ -7,7 +7,7 @@ import { FICHE } from '../../components/title-section';
 import { NonDiffusibleSection } from '../../components/non-diffusible';
 import {
   getEtablissementWithUniteLegaleFromSlug,
-  getEtablissementWithUniteLegaleSireneOuverteFromSlug,
+  getEtablissementWithUniteLegaleFromSlugForGoodBot,
 } from '../../models/etablissement';
 import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
@@ -64,7 +64,7 @@ export const getServerSideProps: GetServerSideProps = withSession(
     try {
       const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
       const etablissementWithUniteLegale = forceUseOfSireneOuverte
-        ? await getEtablissementWithUniteLegaleSireneOuverteFromSlug(siret)
+        ? await getEtablissementWithUniteLegaleFromSlugForGoodBot(siret)
         : await getEtablissementWithUniteLegaleFromSlug(siret);
 
       return {

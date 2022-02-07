@@ -16,6 +16,7 @@ import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../print-visibility';
 import { Closed, Open } from '../icon';
+import Warning from '../alerts/warning';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
@@ -38,64 +39,12 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
     );
   }
 
-  const data = [
-    [
-      'Statut',
-      <>
-        {immatriculation.dateRadiation ? (
-          <b>
-            <Closed /> Radiée
-          </b>
-        ) : (
-          <b>
-            <Open /> Inscrite
-          </b>
-        )}
-      </>,
-    ],
-    [
-      'Date d’immatriculation au RNCS',
-      formatDate(immatriculation.dateImmatriculation),
-    ],
-    ['Numéro RCS', immatriculation.numeroRCS],
-    ['Numéro de Gestion', immatriculation.numGestion],
-    ['Dénomination', immatriculation.denomination],
-    ['Siren', formatIntFr(immatriculation.siren)],
-    [
-      'Dirigeant(s)',
-      <a key="dirigeant" href={`/dirigeants/${uniteLegale.siren}`}>
-        → voir les dirigeants
-      </a>,
-    ],
-    [
-      'Siège social',
-      <a key="siege" href={`/etablissement/${uniteLegale.siege.siret}`}>
-        → voir le détail du siège social
-      </a>,
-    ],
-    ['Date de début d’activité', formatDate(immatriculation.dateDebutActiv)],
-  ];
-
-  if (immatriculation.isPersonneMorale) {
-    data.push(
-      ['Capital', immatriculation.capital],
-      [
-        'Date de clôture de l’exercice comptable',
-        immatriculation.dateClotureExercice,
-      ],
-      ['Durée de la personne morale', immatriculation.dureePersonneMorale]
-    );
-  }
-
-  if (immatriculation.dateCessationActivite) {
-    data.push([
-      'Date de cessation d’activité',
-      formatDate(immatriculation.dateCessationActivite),
-    ]);
-  }
-  if (immatriculation.dateRadiation) {
-    data.push(['Date de radiation', formatDate(immatriculation.dateRadiation)]);
-  }
+  // inpi API call failed and fallbacked on site ping
+  const isImmatriculationIncomplete =
+    !immatriculation.dateRadiation &&
+    !immatriculation.dateImmatriculation &&
+    !immatriculation.numeroRCS &&
+    !immatriculation.denomination;
 
   return (
     <>
@@ -106,6 +55,22 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
             title="Immatriculation au RNCS"
             source={EAdministration.INPI}
           >
+            {isImmatriculationIncomplete && (
+              <Warning>
+                Le téléservice de l’
+                <INPI />, qui nous transmet les données, est partiellement{' '}
+                <b>hors service 🔴</b>.
+                <br />
+                Les données à notre disposition sont donc <b>incomplètes</b> et
+                nous ne pouvons pas afficher le capital social, le numéro RCS,
+                les dirigeants et les dates d’immatriculation ou de radiation de
+                cette entreprise.
+                <br />
+                Toutefois, vous pouvez retrouver ces données sur le PDF
+                d’immatriculation ou la page entreprise sur le site de l’
+                <INPI />
+              </Warning>
+            )}
             <p>
               Cette entité possède une fiche d’immatriculation au{' '}
               <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
@@ -113,7 +78,12 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
               tribunaux de commerce et centralisées par l’
               <INPI />.
             </p>
-            <TwoColumnTable body={data} />
+            {!isImmatriculationIncomplete && (
+              <ImmatriculationRNCSTable
+                immatriculation={immatriculation}
+                uniteLegale={uniteLegale}
+              />
+            )}
             <PrintNever>
               <p>
                 Pour accéder à l’ensemble des données contenues dans un extrait
@@ -153,6 +123,73 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
       )}
     </>
   );
+};
+
+const ImmatriculationRNCSTable: React.FC<{
+  immatriculation: IImmatriculationRNCS;
+  uniteLegale: IUniteLegale;
+}> = ({ immatriculation, uniteLegale }) => {
+  const data = [
+    [
+      'Statut',
+      <>
+        {immatriculation.dateRadiation ? (
+          <b>
+            <Closed /> Radiée
+          </b>
+        ) : (
+          <b>
+            <Open /> Inscrite
+          </b>
+        )}
+      </>,
+    ],
+    [
+      'Date d’immatriculation au RNCS',
+      formatDate(immatriculation.dateImmatriculation),
+    ],
+    ['Numéro RCS', immatriculation.numeroRCS],
+    ['Numéro de Gestion', immatriculation.numGestion],
+    ['Dénomination', immatriculation.denomination],
+    ['Siren', formatIntFr(immatriculation.siren)],
+    [
+      'Dirigeant(s)',
+      <a key="dirigeant" href={`/dirigeants/${uniteLegale.siren}`}>
+        → voir les dirigeants
+      </a>,
+    ],
+    [
+      'Siège social',
+      <a key="siege" href={`/etablissement/${uniteLegale.siege.siret}`}>
+        → voir le détail du siège social
+      </a>,
+    ],
+    ['Nature juridique', immatriculation.libelleNatureJuridique],
+    ['Date de début d’activité', formatDate(immatriculation.dateDebutActiv)],
+  ];
+
+  if (immatriculation.isPersonneMorale) {
+    data.push(
+      ['Capital', immatriculation.capital],
+      [
+        'Date de clôture de l’exercice comptable',
+        immatriculation.dateClotureExercice,
+      ],
+      ['Durée de la personne morale', immatriculation.dureePersonneMorale]
+    );
+  }
+
+  if (immatriculation.dateCessationActivite) {
+    data.push([
+      'Date de cessation d’activité',
+      formatDate(immatriculation.dateCessationActivite),
+    ]);
+  }
+  if (immatriculation.dateRadiation) {
+    data.push(['Date de radiation', formatDate(immatriculation.dateRadiation)]);
+  }
+
+  return <TwoColumnTable body={data} />;
 };
 
 export default ImmatriculationRNCS;

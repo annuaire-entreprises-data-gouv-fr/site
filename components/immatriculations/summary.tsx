@@ -24,12 +24,12 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
           <li>
             {immatriculationRNM.dateRadiation ? (
               <a href="#rnm">
-                <b>Radiée</b> du Répertoire des métiers (RNM), depuis le
+                <b>Radiée</b> du Répertoire des métiers (RNM), depuis le{' '}
                 {formatDateLong(immatriculationRNM.dateRadiation)}
               </a>
             ) : (
               <a href="#rnm">
-                <b>Inscrite</b> au Répertoire des métiers (RNM), depuis le
+                <b>Inscrite</b> au Répertoire des métiers (RNM), depuis le{' '}
                 {formatDateLong(immatriculationRNM.dateImmatriculation)}
               </a>
             )}
@@ -40,14 +40,16 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
             {immatriculationRNCS.dateRadiation ? (
               <a href="#rncs">
                 <b>Radiée</b> du Registre du Commerce et des Sociétés (RCS),
-                depuis le
-                {formatDateLong(immatriculationRNCS.dateRadiation)}
+                depuis le {formatDateLong(immatriculationRNCS.dateRadiation)}
               </a>
             ) : (
               <a href="#rncs">
-                <b>Inscrite</b> au Registre du Commerce et des Sociétés (RCS),
-                depuis le{' '}
-                {formatDateLong(immatriculationRNCS.dateImmatriculation)}
+                <b>Inscrite</b> au Registre du Commerce et des Sociétés (RCS){' '}
+                {immatriculationRNCS.dateImmatriculation
+                  ? `, depuis le ${formatDateLong(
+                      immatriculationRNCS.dateImmatriculation
+                    )}`
+                  : ''}
               </a>
             )}
           </li>

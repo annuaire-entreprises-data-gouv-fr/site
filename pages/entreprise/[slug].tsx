@@ -10,7 +10,7 @@ import EtablissementSection from '../../components/etablissement-section';
 
 import { NonDiffusibleSection } from '../../components/non-diffusible';
 import {
-  getUniteLegaleSireneOuverteFromSlug,
+  getUniteLegaleFromSlugForGoodBot,
   getUniteLegaleWithRNAFromSlug,
 } from '../../models/unite-legale';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
@@ -32,6 +32,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale, session }) => (
       uniteLegale.chemin &&
       `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`
     }
+    description={`Toutes les informations officielles sur ${uniteLegale.nomComplet} :  Siren, Siret, NIC, APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, conventions collectives...`}
     noIndex={
       uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
     }
@@ -102,7 +103,7 @@ export const getServerSideProps: GetServerSideProps = withSession(
       const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
 
       const uniteLegale = forceUseOfSireneOuverte
-        ? await getUniteLegaleSireneOuverteFromSlug(siren, page)
+        ? await getUniteLegaleFromSlugForGoodBot(siren, page)
         : await getUniteLegaleWithRNAFromSlug(siren, page);
 
       return {

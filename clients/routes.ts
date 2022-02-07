@@ -54,8 +54,8 @@ const routes = {
     avis: 'https://avis-situation-sirene.insee.fr/AvisPdf.action',
   },
   sireneOuverte: {
-    etablissement: `http://annuaire-entreprises.dataeng.etalab.studio/siret?q=`,
-    uniteLegale: `http://annuaire-entreprises.dataeng.etalab.studio/siren?q=`,
+    etablissement: `https://api-annuaire-entreprises.data.gouv.fr/siret?q=`,
+    uniteLegale: `https://api-annuaire-entreprises.data.gouv.fr/siren?q=`,
     rechercheUniteLegale: `http://annuaire-entreprises.dataeng.etalab.studio/search`,
   },
   conventionCollectives: {
@@ -67,6 +67,15 @@ const routes = {
     token: '/api/v1/token',
     userInfo: '/api/v1/userinfo',
     logout: '/api/v1/logout',
+  },
+  matomo: {
+    report: {
+      visits:
+        'https://stats.data.gouv.fr/index.php?module=API&method=API.getBulkRequest&format=json',
+      npsEvents:
+        'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=4&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
+    },
+    tracker: 'https://stats.data.gouv.fr/piwik.php',
   },
 };
 

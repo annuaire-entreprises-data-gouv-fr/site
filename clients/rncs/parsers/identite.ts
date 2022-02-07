@@ -61,6 +61,7 @@ const mapToDomainIdentite = (
       dureePersonneMorale: '',
       dateClotureExercice: '',
       capital: '',
+      libelleNatureJuridique: 'Entreprise individuelle',
     };
   } else {
     const {
@@ -71,6 +72,7 @@ const mapToDomainIdentite = (
       devise_cap,
       duree_pm,
       dat_cloture_exer,
+      form_jur,
     } = identite_PM;
 
     const capital =
@@ -88,6 +90,7 @@ const mapToDomainIdentite = (
       dateClotureExercice: dat_cloture_exer || '',
       capital,
       isPersonneMorale: true,
+      libelleNatureJuridique: form_jur || '',
     };
   }
 };
