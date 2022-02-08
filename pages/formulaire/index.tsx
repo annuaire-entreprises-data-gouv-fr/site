@@ -21,11 +21,11 @@ const FeedBack: React.FC = () => {
             <fieldset>
               <legend>
                 <h2>
-                  1 ・ À quel point êtes-vous satisfait de l’Annuaire des
-                  Entreprises ?
+                  1 ・ Sur une échelle de 0 à 5, à quel point
+                  recommanderiez-vous l’Annuaire des Entreprises ?
                 </h2>
               </legend>
-              <div className="radio-group smileys">
+              <div className="radio-group rating">
                 <div>
                   <input
                     type="radio"
@@ -39,7 +39,7 @@ const FeedBack: React.FC = () => {
                     htmlFor="radio-smiley-1"
                     title="Pas du tout"
                   >
-                    😟
+                    1
                   </label>
                 </div>
                 <div>
@@ -54,7 +54,7 @@ const FeedBack: React.FC = () => {
                     htmlFor="radio-smiley-2"
                     title="Peut-être"
                   >
-                    😐
+                    2
                   </label>
                 </div>
                 <div>
@@ -69,7 +69,7 @@ const FeedBack: React.FC = () => {
                     htmlFor="radio-smiley-3"
                     title="Oui, probablement"
                   >
-                    🙂
+                    3
                   </label>
                 </div>
                 <div>
@@ -84,7 +84,7 @@ const FeedBack: React.FC = () => {
                     htmlFor="radio-smiley-4"
                     title="Sans aucune hésitation"
                   >
-                    😄
+                    4
                   </label>
                 </div>
                 <div>
@@ -99,7 +99,7 @@ const FeedBack: React.FC = () => {
                     htmlFor="radio-smiley-5"
                     title="C’est génial !"
                   >
-                    🤩
+                    5
                   </label>
                 </div>
               </div>
@@ -274,14 +274,16 @@ const FeedBack: React.FC = () => {
               display: flex;
               flex-wrap: wrap;
             }
-            .radio-group.smileys {
+            .radio-group.rating {
               justify-content: center;
             }
-            .radio-group.smileys > div > label {
+            .radio-group.rating > div > label {
+              font-weight: bold;
+              color: #000091;
+              background: #e5e5f4;
               font-size: 2rem;
               line-height: 3rem;
-              margin: 15px;
-              background: none;
+              margin: 15px 10px;
             }
             .radio-group > div > label {
               border: 2px solid transparent;
@@ -297,7 +299,9 @@ const FeedBack: React.FC = () => {
               position: absolute;
             }
 
-            input[type='radio']:hover + label,
+            input[type='radio']:hover + label {
+              border: 2px dashed #000091;
+            }
             input[type='radio']:checked + label {
               border: 2px solid #000091;
             }
