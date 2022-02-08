@@ -18,6 +18,7 @@ export interface ISession {
   navigation?: {
     sirenFrom: string;
     pagefrom: string;
+    logoutRedirect?:string;
   };
 }
 
