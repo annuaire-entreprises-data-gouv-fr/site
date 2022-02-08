@@ -21,7 +21,7 @@ const FeedBack: React.FC = () => {
             <fieldset>
               <legend>
                 <h2>
-                  1 ・ Sur une échelle de 0 à 5, à quel point
+                  1 ・ Sur une échelle de 1 à 5, à quel point
                   recommanderiez-vous l’Annuaire des Entreprises ?
                 </h2>
               </legend>
