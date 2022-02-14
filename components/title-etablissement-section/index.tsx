@@ -7,6 +7,25 @@ import IsActiveTag from '../is-active-tag';
 import { Tag } from '../tag';
 
 const TitleEtablissement: React.FC<{
+  uniteLegale: IUniteLegale;
+  nomEtablissement: string | null;
+}> = ({ uniteLegale, nomEtablissement }) => (
+  <h2>
+    Information sur{' '}
+    {nomEtablissement ? (
+      `l’etablissement ${nomEtablissement}`
+    ) : (
+      <>
+        un établissement de{' '}
+        <a href={`/entreprise/${uniteLegale.siren}`}>
+          {uniteLegale.nomComplet}
+        </a>
+      </>
+    )}
+  </h2>
+);
+
+const MapTitleEtablissement: React.FC<{
   title?: string;
   etablissement: IEtablissement;
 }> = ({ title, etablissement }) => (
@@ -42,10 +61,10 @@ const TitleEtablissementWithDenomination: React.FC<{
         .
       </Warning>
     )}
-    <h2>
-      Information sur un établissement de{' '}
-      <a href={`/entreprise/${uniteLegale.siren}`}>{uniteLegale.nomComplet}</a>
-    </h2>
+    <TitleEtablissement
+      uniteLegale={uniteLegale}
+      nomEtablissement={etablissement.enseigne || etablissement.denomination}
+    />
     <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
     {etablissement.estSiege && <Tag>siège social</Tag>}
     {etablissement.estDiffusible ? (
@@ -65,4 +84,5 @@ const TitleEtablissementWithDenomination: React.FC<{
     `}</style>
   </div>
 );
-export { TitleEtablissementWithDenomination, TitleEtablissement };
+
+export { TitleEtablissementWithDenomination, MapTitleEtablissement };

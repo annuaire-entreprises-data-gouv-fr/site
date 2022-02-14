@@ -5,7 +5,7 @@ import Page from '../../layouts';
 import { IEtablissement } from '../../models';
 import MapEtablissement from '../../components/map/map-etablissement';
 import { getEtablissementWithLatLongFromSlug } from '../../models/etablissement';
-import { TitleEtablissement } from '../../components/title-etablissement-section';
+import { MapTitleEtablissement } from '../../components/title-etablissement-section';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
 
@@ -28,7 +28,7 @@ const EtablissementMapPage: React.FC<IProps> = ({ etablissement }) => (
       </a>
       <HiddenH1 title="Localisation de l’etablissement" />
       <>
-        <TitleEtablissement
+        <MapTitleEtablissement
           etablissement={etablissement}
           title="Géolocalisation de l’établissement"
         />
