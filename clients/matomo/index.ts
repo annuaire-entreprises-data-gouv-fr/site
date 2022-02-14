@@ -7,6 +7,11 @@ export interface IMatomoStat {
   number: number;
   visits: number;
   nps: number;
+  types: IVisitorTypes;
+}
+
+interface IVisitorTypes {
+  [key: string]: number;
 }
 
 /**
@@ -15,12 +20,19 @@ export interface IMatomoStat {
 const aggregateEventsByMonths = (
   matomoEventStats: { label: string; nb_events: number }[]
 ) => {
-  const months = {} as { [key: string]: { nps: number; count: number } };
+  const months = {} as {
+    [key: string]: {
+      nps: number;
+      count: number;
+      types: IVisitorTypes;
+    };
+  };
 
   matomoEventStats.forEach((stat) => {
     const responses = stat.label.split('&');
     const mood = parseInt(responses[0].replace('mood=', ''), 10);
     const date = new Date(responses[3].replace('date=', ''));
+    const type = responses[1].replace('type=', '') as string;
 
     const monthLabel = getMonthLabelFromDate(date);
 
@@ -28,18 +40,26 @@ const aggregateEventsByMonths = (
     const nps = date < new Date('2022-01-30') ? Math.round(mood / 2) : mood;
 
     if (!months[monthLabel]) {
+      const types = {} as IVisitorTypes;
+      types[type] = 1;
+
       months[monthLabel] = {
         nps,
         count: stat.nb_events,
+        types,
       };
     } else {
       const newCount = months[monthLabel].count + stat.nb_events;
       const newNps =
         (months[monthLabel].count * months[monthLabel].nps + nps) / newCount;
 
+      const newTypes = months[monthLabel].types;
+      newTypes[type] = (newTypes[type] || 0) + 1;
+
       months[monthLabel] = {
         nps: newNps,
         count: newCount,
+        types: newTypes,
       };
     }
   });
@@ -69,6 +89,7 @@ const computeStats = (
       visits: matomoMonthlyStats[i].value,
       nps: Math.round((eventByMonths[monthLabel].nps * 100) / 5),
       npsResponses: eventByMonths[monthLabel].count,
+      types: eventByMonths[monthLabel].types,
     });
   }
 
