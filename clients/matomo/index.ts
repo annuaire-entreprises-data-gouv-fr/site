@@ -36,7 +36,7 @@ const aggregateEventsByMonths = (
 
     const monthLabel = getMonthLabelFromDate(date);
 
-    // migration from 10-based nps to 5 based on 2022-01-30
+    // migration from 10-based nps to 5 based on 2022-01-30, ended on feb 15
     const is5Based =
       date > new Date('2022-01-30') && date < new Date('2022-02-15');
 
@@ -90,7 +90,7 @@ const computeStats = (
       number: lastYear.getMonth() + 1,
       label: monthLabel,
       visits: matomoMonthlyStats[i].value,
-      nps: Math.round(eventByMonths[monthLabel].nps * 100),
+      nps: Math.round(eventByMonths[monthLabel].nps * 10),
       npsResponses: eventByMonths[monthLabel].count,
       types: eventByMonths[monthLabel].types,
     });
