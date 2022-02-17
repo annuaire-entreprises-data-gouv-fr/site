@@ -26,7 +26,12 @@ const EtablissementListeSection: React.FC<{
         source={EAdministration.INSEE}
       >
         <FullTable
-          head={['SIRET', 'Activité (NAF/APE)', 'Adresse', 'Statut']}
+          head={[
+            'SIRET',
+            'Activité (NAF/APE)',
+            'Détails (adresse, enseigne)',
+            'Statut',
+          ]}
           body={uniteLegale.etablissements.map(
             (etablissement: IEtablissement) => [
               //eslint-disable-next-line
@@ -43,7 +48,15 @@ const EtablissementListeSection: React.FC<{
               !etablissement.estDiffusible ? (
                 <i>Non renseigné</i>
               ) : (
-                etablissement.adresse
+                <>
+                  {etablissement.enseigne && (
+                    <b>
+                      {etablissement.enseigne}
+                      <br />
+                    </b>
+                  )}
+                  <>{etablissement.adresse}</>
+                </>
               ),
               <>
                 {etablissement.estSiege && <Tag>siège social</Tag>}

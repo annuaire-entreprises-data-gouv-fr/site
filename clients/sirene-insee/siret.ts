@@ -13,7 +13,11 @@ import {
 } from '../../utils/labels';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
-import { formatAdresse, formatEnseigne } from '../../utils/helpers/formatting';
+import {
+  capitalize,
+  formatAdresse,
+  formatEnseigne,
+} from '../../utils/helpers/formatting';
 
 interface IInseeEtablissementResponse {
   etablissement: IInseeEtablissement;
@@ -179,10 +183,12 @@ export const mapEtablissementToDomainObject = (
     enseigne3Etablissement,
   } = lastEtatAdministratif;
 
-  const enseigne = formatEnseigne(
-    enseigne1Etablissement,
-    enseigne2Etablissement,
-    enseigne3Etablissement
+  const enseigne = capitalize(
+    formatEnseigne(
+      enseigne1Etablissement,
+      enseigne2Etablissement,
+      enseigne3Etablissement
+    ) || ''
   );
 
   const defaultEtablissement = createDefaultEtablissement();
@@ -194,7 +200,7 @@ export const mapEtablissementToDomainObject = (
     oldSiret: oldSiret || siret,
     nic,
     enseigne,
-    denomination: denominationUsuelleEtablissement,
+    denomination: capitalize(denominationUsuelleEtablissement || ''),
     dateCreation: dateCreationEtablissement,
     activitePrincipale: activitePrincipaleEtablissement,
     libelleActivitePrincipale: libelleFromCodeNaf(

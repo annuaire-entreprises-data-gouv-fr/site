@@ -24,7 +24,7 @@ const logAllEvents = async (req: NextApiRequest) => {
 
     const data = {
       username: 'clippy',
-      text: `Note : **${req.body['radio-set-mood']}/5** \nVisiteur : ${
+      text: `Note : **${req.body['radio-set-mood']}/10** \nVisiteur : ${
         req.body['radio-set-visitor-type'] || NA
       } \nOrigine : ${
         req.body['radio-set-visitor-origin'] || NA
