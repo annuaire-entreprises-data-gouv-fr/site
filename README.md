@@ -1,4 +1,4 @@
-# annuaire-entreprises.data.gouv.fr
+# Annuaire des Entreprises - [Site web]
 
 [![Pre-merge checks](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
 [![Accessibilité](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-a11y.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-a11y.yml)
@@ -8,9 +8,17 @@ Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuair
 
 Ce site a pour vocation de mettre à disposition des citoyens et des agents les données ouvertes "Open-data" des entreprises, associations et administrations dotées d'un n° siren/siret.
 
-Le moteur de recherche utilise une API dédiée dont le code est [disponible ici.](https://github.com/etalab/api-annuaire-entreprises).
+## Architecture du service 🏗
 
-## Statut
+Ce repository fait partie d'un ensemble de services qui constituent l'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
+
+| Description | Accès |
+|-|-|
+|Le site Web | [par ici 👉](https://github.com/etalab/annuaire-entreprises-site) |
+|L’API du Moteur de recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-api) |
+|L‘API de redondance de Sirene | [par ici 👉](https://github.com/etalab/annuaire-entreprises-sirene-api) |
+
+## Etat des lieux 🤓
 
 **Déploiement**
 
