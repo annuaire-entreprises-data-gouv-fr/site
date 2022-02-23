@@ -12,12 +12,18 @@ export function withSession(
   return async (context: GetServerSidePropsContext) => {
     const comutedServerSideProps = await getServerSidePropsFunction(context);
 
-    const session = (await getSession(context.req, context.res)) as any;
+    const currentSession = (await getSession(context.req, context.res)) as any;
+
+    const redirect = comutedServerSideProps.redirect;
+
+    if (redirect) {
+      return { redirect };
+    }
 
     return {
       props: {
         ...comutedServerSideProps.props,
-        session: isLoggedIn(session) ? session : null,
+        session: isLoggedIn(currentSession) ? currentSession : null,
       },
     };
   };
