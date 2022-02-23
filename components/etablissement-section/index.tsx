@@ -8,10 +8,12 @@ import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { EAdministration } from '../../models/administration';
-import AvisSituationLink from '../avis-situation-link';
+import AvisSituationLink from '../download-link';
 import { EtablissementDescription } from '../etablissement-description';
 import BreakPageForPrint from '../print-break-page';
 import { PrintNever } from '../print-visibility';
+import DownloadLink from '../download-link';
+import routes from '../../clients/routes';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -42,7 +44,10 @@ const EtablissementSection: React.FC<IProps> = ({
     [
       'Avis de situation INSEE',
       // eslint-disable-next-line
-      <AvisSituationLink siret={etablissement.siret} />,
+      <DownloadLink
+        to={`${routes.sireneInsee.avis}${etablissement.siret}`}
+        label="Avis de situation"
+      />,
     ],
   ];
 

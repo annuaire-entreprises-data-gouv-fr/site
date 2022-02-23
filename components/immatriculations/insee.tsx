@@ -6,9 +6,10 @@ import { FullTable } from '../table/full';
 import { Section } from '../section';
 import { Tag } from '../tag';
 import IsActiveTag from '../is-active-tag';
-import AvisSituationLink from '../avis-situation-link';
 import ButtonLink from '../button';
 import { INSEE } from '../administrations';
+import DownloadLink from '../download-link';
+import routes from '../../clients/routes';
 
 interface IProps {
   uniteLegale: IUniteLegale;
@@ -63,8 +64,8 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
                   </>
                 )}
               </>,
-              <AvisSituationLink
-                siret={uniteLegale.siege.siret}
+              <DownloadLink
+                to={`${routes.sireneInsee.avis}${uniteLegale.siege.siret}`}
                 label="Télécharger"
               />,
               /*eslint-enable*/

@@ -1,10 +1,8 @@
 import { IUniteLegale } from '../../models';
-import { formatIntFr } from '../../utils/helpers/formatting';
-import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import AvisSituationLink from '../avis-situation-link';
-import ButtonLink from '../button';
 import SectionDashboard from '../section-dashboard';
 import { TwoColumnTable } from '../table/simple';
+import DownloadLink from '../download-link';
+import routes from '../../clients/routes';
 
 const DashboardJustificatifs: React.FC<{
   uniteLegale: IUniteLegale;
@@ -13,39 +11,40 @@ const DashboardJustificatifs: React.FC<{
     ['Type', 'Commerciale'],
     [
       'Extrait Inpi',
-      <a key="inpi" href="test">
-        Télécharger
-      </a>,
+      <DownloadLink
+        key="inpi"
+        to={`${routes.sireneInsee.avis}${uniteLegale.siege.siret}`}
+      />,
     ],
     [
       'Extrait D1',
-      <a key="cma" href="test">
-        Télécharger
-      </a>,
+      <DownloadLink
+        key="cma"
+        to={`${routes.sireneInsee.avis}${uniteLegale.siege.siret}`}
+      />,
     ],
     [
-      'Association',
-      <a key="asso" href="test">
-        Télécharger
-      </a>,
+      'Inscription JOAFE',
+      <DownloadLink
+        key="asso"
+        to={`${routes.sireneInsee.avis}${uniteLegale.siege.siret}`}
+      />,
     ],
     [
-      'Avis Insee',
-      <AvisSituationLink
+      'Inscription Insee',
+      <DownloadLink
         key="avis-situation"
-        siret={uniteLegale.siege.siret}
+        to={`${routes.sireneInsee.avis}${uniteLegale.siege.siret}`}
+        label="Avis de situation"
       />,
     ],
   ];
   return (
-    <SectionDashboard title="Justificatifs d’existence">
+    <SectionDashboard
+      title="Justificatifs d’existence"
+      moreTo={`/justificatif/${uniteLegale.siren}`}
+    >
       <TwoColumnTable body={data} />
-      <br />
-      <div className="layout-center">
-        <ButtonLink to={`/justificatif/${uniteLegale.siren}`} alt small>
-          → Tout voir
-        </ButtonLink>
-      </div>
     </SectionDashboard>
   );
 };

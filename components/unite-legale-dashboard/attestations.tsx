@@ -1,4 +1,6 @@
+import routes from '../../clients/routes';
 import { IUniteLegale } from '../../models';
+import DownloadLink from '../download-link';
 import SectionDashboard from '../section-dashboard';
 import { TwoColumnTable } from '../table/simple';
 
@@ -7,20 +9,22 @@ const DashboardAttestations: React.FC<{
 }> = ({ uniteLegale }) => {
   const data = [
     [
-      'Vigilance',
-      <a key="vigi" href="test">
-        Télécharger
-      </a>,
+      'Sociales (Urssaf)',
+      <DownloadLink
+        key="ussaf"
+        to={`${routes.sireneInsee.avis}${uniteLegale.siege.siret}`}
+      />,
     ],
     [
-      'Fiscale',
-      <a key="fisc" href="test">
-        Télécharger
-      </a>,
+      'Fiscales (Dgfip)',
+      <DownloadLink
+        key="dgfip"
+        to={`${routes.sireneInsee.avis}${uniteLegale.siege.siret}`}
+      />,
     ],
   ];
   return (
-    <SectionDashboard title="Attestations">
+    <SectionDashboard title="Attestations de cotisations">
       <TwoColumnTable body={data} />
     </SectionDashboard>
   );
