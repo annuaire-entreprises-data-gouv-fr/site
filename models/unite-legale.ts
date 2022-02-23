@@ -108,14 +108,14 @@ const getUniteLegaleFromSlugForGoodBot = async (
   try {
     return await getUniteLegaleSireneOuverte(siren, page);
   } catch (e: any) {
+    console.log(e);
     if (e instanceof HttpNotFound) {
       // when not found in siren ouverte, fallback on insee
       try {
         return await fetchUniteLegaleFromInsee(siren, page);
-      } catch (e: any) {
-        if (e instanceof HttpNotFound) {
-          throw new SirenNotFoundError(`Siren ${siren} was not found`);
-        }
+      } catch (ee: any) {
+        // in any Insee error
+        throw new SirenNotFoundError(`Siren ${siren} was not found`);
       }
     }
     throw e;
