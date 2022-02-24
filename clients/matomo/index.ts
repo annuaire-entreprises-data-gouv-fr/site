@@ -157,7 +157,6 @@ const createEventUrl = () => {
  */
 const getLastYear = () => {
   const now = new Date();
-  now.setMonth(now.getMonth() - 1);
   now.setFullYear(now.getFullYear() - 1);
   now.setDate(1);
   return now;

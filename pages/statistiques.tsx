@@ -40,6 +40,24 @@ const StatsPage: React.FC<IProps> = ({ stats }) => (
       tooltipLabel="Visites mensuelles"
       color="#0078f3"
     />
+    <div className="layout-center">
+      <BasicChart
+        data={Object.values(stats[0].types)}
+        labels={Object.keys(stats[0].types)}
+        yLabel="Répartitition des visiteurs"
+        yRange={[0, Math.max(...stats.map((el) => el.visits))]}
+        type="doughnut"
+        tooltipLabel="Typologie de visiteur"
+      />
+      <BasicChart
+        data={Object.values(stats[stats.length - 1].types)}
+        labels={Object.keys(stats[stats.length - 1].types)}
+        yLabel="Répartitition des visiteurs"
+        yRange={[0, Math.max(...stats.map((el) => el.visits))]}
+        type="doughnut"
+        tooltipLabel="Typologie de visiteur"
+      />
+    </div>
     <h2>Satisfaction des utilisateurs</h2>
     <BasicChart
       data={stats.map((stat) => {

@@ -3,12 +3,21 @@ import randomId from '../../utils/helpers/randomId';
 
 const BasicChart: React.FC<{
   data: { x: any; y: number }[];
+  labels?: string[];
   yLabel: string;
   yRange: number[];
   tooltipLabel: string;
   color: string;
-  type: 'line' | 'bar';
-}> = ({ data, yLabel, yRange, color, tooltipLabel, type = 'line' }) => {
+  type: 'line' | 'bar' | 'doughnut';
+}> = ({
+  data,
+  labels = [],
+  yLabel,
+  yRange,
+  color = "#233d4d','#fe7f2d','#fcca46','#a1c181','#619b8a",
+  tooltipLabel,
+  type = 'line',
+}) => {
   const id = randomId();
   return (
     <>
@@ -21,12 +30,13 @@ const BasicChart: React.FC<{
         const chart${id} = new Chart(canvas${id}, {
           type: '${type}',
           data: {
+            labels: [${labels.map((item) => JSON.stringify(item))}],
             datasets: [
               {
                 label: '${tooltipLabel}',
                 data: [${data.map((item) => JSON.stringify(item))}],
-                backgroundColor: '${color || '#0078f3'}',
-                borderColor: '${color || '#0078f3'}',
+                backgroundColor: ['${color}'],
+                borderColor: ['${color}'],
                 cubicInterpolationMode: 'monotone',
                 tension: 0.4
               }
