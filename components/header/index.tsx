@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageContext } from '../../layouts/page-context';
-import { isLoggedIn } from '../../utils/session/manageSession';
+import { isLoggedIn } from '../../utils/session/accessSession';
 import SearchBar from '../search-bar';
 import UserMenu from './user-menu';
 

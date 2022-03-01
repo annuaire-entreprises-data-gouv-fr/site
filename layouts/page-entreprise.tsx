@@ -9,7 +9,7 @@ import {
   isCompanyOwner,
   ISession,
   isLoggedIn,
-} from '../utils/session/manageSession';
+} from '../utils/session/accessSession';
 
 interface IProps {
   title: string;

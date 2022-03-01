@@ -3,7 +3,7 @@ import { IUniteLegale } from '../../models';
 import {
   getNameFromSession,
   ISession,
-} from '../../utils/session/manageSession';
+} from '../../utils/session/accessSession';
 import BreadCrumb, { IBreadcrumbLink } from '../bread-crumb';
 
 interface IProps {

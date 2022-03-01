@@ -1,9 +1,10 @@
 import React from 'react';
+import { formatIntFr } from '../../utils/helpers/formatting';
 import {
   getCompaniesFromSession,
   getNameFromSession,
   ISession,
-} from '../../utils/session/manageSession';
+} from '../../utils/session/accessSession';
 
 const UserMenu: React.FC<{ session: ISession }> = ({ session }) => {
   const companies = getCompaniesFromSession(session);
@@ -18,7 +19,9 @@ const UserMenu: React.FC<{ session: ISession }> = ({ session }) => {
             <label className="menu-label">mes entreprises :</label>
             {getCompaniesFromSession(session).map((company) => (
               <li key={company.siren}>
-                <a href={`/compte/${company.siren}`}>・{company.siren}</a>
+                <a href={`/compte/${company.siren}`}>
+                  <b>{company.denomination}</b>・{formatIntFr(company.siren)}
+                </a>
               </li>
             ))}
           </ul>

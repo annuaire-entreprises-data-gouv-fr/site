@@ -9,7 +9,6 @@ import PageEntreprise from '../../layouts/page-entreprise';
 import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
 import { getUniteLegaleFromSlug } from '../../models/unite-legale';
-import SectionDashboard from '../../components/section-dashboard';
 import SectionDashboardGrid from '../../components/section-dashboard/grid';
 import DashboardInformationsGenerales from '../../components/unite-legale-dashboard/informations-generales';
 import DashboardJustificatifs from '../../components/unite-legale-dashboard/justificatifs';

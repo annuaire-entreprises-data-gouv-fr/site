@@ -6,13 +6,13 @@ export default PassportHandler().get(async (req, res, next) => {
   const session = await getSession(req, res);
   delete session.passport.companies;
   session.commit();
+  //@ts-ignore
+  req.logout();
 
   // redirect to referrer
   const redirect =
     (req.headers.referrer || req.headers.referer || '').toString() ||
     '/compte/deconnexion';
 
-  //@ts-ignore
-  req.logout();
   res.redirect(redirect);
 });

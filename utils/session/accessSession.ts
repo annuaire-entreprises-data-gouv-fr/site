@@ -1,17 +1,17 @@
 import { Siren } from '../helpers/siren-and-siret';
 
 export interface ISession {
-  passport: {
+  passport?: {
     user: IUserSession;
     companies: {
       siren: string;
       denomination: string;
-      role: string;
+      role?: string;
     }[];
   };
   navigation?: {
     sirenFrom: string;
-    pagefrom: string;
+    pageFrom: string;
     logoutRedirect?: string;
   };
 }

@@ -1,28 +1,64 @@
 import nextConnect from 'next-connect';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from '../../../utils/session';
+import { getUser, ISession } from '../../../utils/session/accessSession';
+import { verifyDirigeant } from '../../../clients/dirigeant-insee/verify';
+import { getUniteLegaleFromSlug } from '../../../models/unite-legale';
+import { verifySiren } from '../../../utils/helpers/siren-and-siret';
+import {
+  HttpServerError,
+  HttpUnauthorizedError,
+} from '../../../clients/exceptions';
+import { logWarningInSentry } from '../../../utils/sentry';
 
 export default nextConnect<NextApiRequest, NextApiResponse>().get(
   async (req, res) => {
-    const session = await getSession(req, res); // session is set to req.session
+    try {
+      const session = (await getSession(req, res)) as ISession;
 
-    const sirenFrom = session.navigation.sirenFrom;
+      if (!session.passport) {
+        throw new HttpServerError(500, 'Passport was not found in session');
+      }
 
-    if (session.navigation && sirenFrom) {
-      // call API dirigeant with siren
+      const sirenFrom = session?.navigation?.sirenFrom;
 
-      session.passport.companies = [
-        ...(session.passport.companies || []),
-        { siren: sirenFrom },
-      ];
+      if (!sirenFrom) {
+        logWarningInSentry('No sirenFrom found during dirigeant verification');
+        return res.redirect(`/`);
+      }
 
-      const redirectTo = `${
-        session.navigation.pageFrom || '/compte/'
-      }/${sirenFrom}`;
+      const siren = verifySiren(sirenFrom);
 
-      return res.redirect(redirectTo);
-    } else {
-      return res.redirect(`/`);
+      try {
+        const user = getUser(session);
+        const [uniteLegale, isDirigeant] = await Promise.all([
+          getUniteLegaleFromSlug(siren).catch((e) => {
+            return { siren: sirenFrom, nomComplet: 'Nom inconnu' };
+          }),
+          verifyDirigeant(siren, user),
+        ]);
+
+        session.passport.companies = [
+          ...(session.passport.companies || []),
+          {
+            siren,
+            denomination: uniteLegale.nomComplet,
+          },
+        ];
+
+        const redirectTo = `${
+          session?.navigation?.pageFrom || '/compte/'
+        }/${sirenFrom}`;
+
+        return res.redirect(redirectTo);
+      } catch (verificationError) {
+        if (verificationError instanceof HttpUnauthorizedError) {
+          return res.redirect(`/compte/echec-habilitation/${siren}`);
+        }
+        throw verificationError;
+      }
+    } catch (e) {
+      return res.redirect(`/compte/echec-connexion`);
     }
   }
 );

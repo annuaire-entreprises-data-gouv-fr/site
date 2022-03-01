@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import { getSession } from '../utils/session';
-import { ISession, isLoggedIn } from '../utils/session/manageSession';
+import { ISession, isLoggedIn } from '../utils/session/accessSession';
 
 export interface IPropsWithSession {
   session: ISession | null;

@@ -20,9 +20,6 @@ import isUserAgentABot from '../../utils/user-agent';
 import PageEntreprise from '../../layouts/page-entreprise';
 import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
-import { verifyDirigeant } from '../../clients/dirigeant-insee/verify';
-import { getSession } from '../../utils/session';
-import { getUser } from '../../utils/session/manageSession';
 
 interface IProps extends IPropsWithSession {
   uniteLegale: IUniteLegale;
@@ -96,12 +93,6 @@ export const getServerSideProps: GetServerSideProps = withSession(
         },
       };
     }
-
-    const session = await getSession(context.req, context.res);
-    const user = getUser(session);
-
-    console.log(session, user);
-    await verifyDirigeant(siren, user);
 
     const page = parseIntWithDefaultValue(pageParam, 1);
 

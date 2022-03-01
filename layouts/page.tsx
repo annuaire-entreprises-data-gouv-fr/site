@@ -7,7 +7,7 @@ import { NPSBanner } from '../components/banner/nps';
 import { WeNeedYouModal } from '../components/modal/we-need-you';
 import DownloadManager from '../components/download-manager';
 import { PageContext } from './page-context';
-import { ISession } from '../utils/session/manageSession';
+import { ISession } from '../utils/session/accessSession';
 
 interface IProps {
   simpleHeader?: boolean;
