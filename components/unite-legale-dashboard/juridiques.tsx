@@ -1,5 +1,4 @@
 import { IUniteLegale } from '../../models';
-import ButtonLink from '../button';
 import SectionDashboard from '../section-dashboard';
 import { TwoColumnTable } from '../table/simple';
 

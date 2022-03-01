@@ -24,8 +24,11 @@ const aggregateEventsByMonths = (
 
     const monthLabel = getMonthLabelFromDate(date);
 
-    // migration from 10-based nps to 5 based on 2022-01-30
-    const nps = date < new Date('2022-01-30') ? Math.round(mood / 2) : mood;
+    // migration from 10-based nps to 5 based on 2022-01-30, ended on 2022-02-15
+    const is5Based =
+      date > new Date('2022-01-30') && date < new Date('2022-02-15');
+
+    const nps = is5Based ? mood * 2 : mood;
 
     if (!months[monthLabel]) {
       months[monthLabel] = {
@@ -67,7 +70,7 @@ const computeStats = (
       number: lastYear.getMonth() + 1,
       label: monthLabel,
       visits: matomoMonthlyStats[i].value,
-      nps: Math.round((eventByMonths[monthLabel].nps * 100) / 5),
+      nps: Math.round(eventByMonths[monthLabel].nps * 10),
       npsResponses: eventByMonths[monthLabel].count,
     });
   }
@@ -133,6 +136,7 @@ const createEventUrl = () => {
  */
 const getLastYear = () => {
   const now = new Date();
+  now.setMonth(now.getMonth() - 1);
   now.setFullYear(now.getFullYear() - 1);
   now.setDate(1);
   return now;

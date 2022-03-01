@@ -22,7 +22,7 @@ import StructuredDataBreadcrumb from '../../components/structured-data/breadcrum
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
 import { verifyDirigeant } from '../../clients/dirigeant-insee/verify';
 import { getSession } from '../../utils/session';
-import { getUser, ISession } from '../../utils/session/manageSession';
+import { getUser } from '../../utils/session/manageSession';
 
 interface IProps extends IPropsWithSession {
   uniteLegale: IUniteLegale;

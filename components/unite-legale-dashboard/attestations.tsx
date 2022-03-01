@@ -1,6 +1,6 @@
 import routes from '../../clients/routes';
-import { IUniteLegale } from '../../models';
 import DownloadLink from '../download-link';
+import { IUniteLegale } from '../../models';
 import SectionDashboard from '../section-dashboard';
 import { TwoColumnTable } from '../table/simple';
 

@@ -58,3 +58,14 @@ describe('Search results', () => {
     cy.contains('Aucune entité n’a été trouvée').should('have.length', 1);
   });
 });
+
+describe('Redirect to siret or siren', () => {
+  it('redirects siren', () => {
+    cy.visit('/rechercher?terme=880878145');
+    cy.url().should('include', '/entreprise/880878145');
+  });
+  it('redirects siret', () => {
+    cy.visit('/rechercher?terme=88087814500015');
+    cy.url().should('include', '/entreprise/88087814500015');
+  });
+});

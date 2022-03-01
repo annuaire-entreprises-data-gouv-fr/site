@@ -34,7 +34,7 @@ export const verifyDirigeant = async (
       url: routes.dirigeantInsee.verify + encodeURI(query),
       method: 'GET',
       headers: {
-        'X-APIkey': process.env.PROXY_API_KEY,
+        'X-APIkey': process.env.PROXY_API_KEY || '',
       },
     });
 
