@@ -2,13 +2,7 @@ import { Siren } from '../helpers/siren-and-siret';
 
 export interface ISession {
   passport: {
-    user: {
-      given_name: string;
-      family_name: string;
-      birthdate: string; //'YYYY-MM-DD'
-      gender: 'female' | 'male';
-      sub: string;
-    };
+    user: IUserSession;
     companies: {
       siren: string;
       denomination: string;
@@ -18,8 +12,19 @@ export interface ISession {
   navigation?: {
     sirenFrom: string;
     pagefrom: string;
-    logoutRedirect?:string;
+    logoutRedirect?: string;
   };
+}
+
+export interface IUserSession {
+  given_name: string;
+  preferred_username: string;
+  family_name: string;
+  birthdate: string; //'YYYY-MM-DD'
+  gender: 'female' | 'male';
+  sub: string;
+  birthplace: string;
+  birthcountry: string;
 }
 
 export const getNameFromSession = (session: ISession) => {
@@ -32,6 +37,13 @@ export const getNameFromSession = (session: ISession) => {
 
 export const isLoggedIn = (session: ISession | null) => {
   return session && session.passport && session.passport.user;
+};
+
+export const getUser = (session: ISession | null) => {
+  if (session && session.passport && session.passport.user) {
+    return session.passport.user;
+  }
+  return null;
 };
 
 /**

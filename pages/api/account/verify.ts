@@ -7,9 +7,10 @@ export default nextConnect<NextApiRequest, NextApiResponse>().get(
     const session = await getSession(req, res); // session is set to req.session
 
     const sirenFrom = session.navigation.sirenFrom;
-    // call API dirigeant
 
     if (session.navigation && sirenFrom) {
+      // call API dirigeant with siren
+
       session.passport.companies = [
         ...(session.passport.companies || []),
         { siren: sirenFrom },

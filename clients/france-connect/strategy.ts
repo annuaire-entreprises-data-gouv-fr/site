@@ -25,7 +25,8 @@ passport.use(
         nonce: generators.nonce(),
         state: generators.state(),
         acr_values: 'eidas1',
-        scope: 'openid gender given_name family_name birthdate',
+        scope:
+          'openid gender given_name family_name birthdate birthplace birthcountry preferred_username',
       },
       usePKCE: false,
     },

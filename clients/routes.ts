@@ -44,6 +44,11 @@ const routes = {
         'https://www.journal-officiel.gouv.fr/document/associations_b/',
     },
   },
+  dirigeantInsee: {
+    auth: 'https://beta.auth.insee.net/auth/realms/dirigeant-sirene/protocol/openid-connect/token',
+    verify:
+      'https://proxy.annuaire-entreprises.data.gouv.fr/beta/dirigeant/v1/dirigeants/etat-dirigeant',
+  },
   sireneInsee: {
     siren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
     siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',

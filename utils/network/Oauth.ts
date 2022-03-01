@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 //@ts-ignore
 import * as oauth from 'axios-oauth-client';
 import * as tokenProvider from 'axios-token-interceptor';
