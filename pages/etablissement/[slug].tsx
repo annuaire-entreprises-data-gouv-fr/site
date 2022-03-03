@@ -13,6 +13,7 @@ import {
 import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
 import isUserAgentABot from '../../utils/user-agent';
+import { shouldNotIndex } from '../../utils/helpers/checks';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -26,6 +27,7 @@ const EtablissementPage: React.FC<IProps> = ({
   <Page
     small={true}
     title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
+    noIndex={shouldNotIndex(uniteLegale)}
   >
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />

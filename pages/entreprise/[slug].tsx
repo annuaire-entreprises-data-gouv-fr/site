@@ -19,6 +19,7 @@ import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import isUserAgentABot from '../../utils/user-agent';
 import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
+import { shouldNotIndex } from '../../utils/helpers/checks';
 
 interface IProps {
   uniteLegale: IUniteLegale;
@@ -33,9 +34,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
       `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`
     }
     description={`Toutes les informations officielles sur ${uniteLegale.nomComplet} :  Siren, Siret, NIC, APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, conventions collectives...`}
-    noIndex={
-      uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
-    }
+    noIndex={shouldNotIndex(uniteLegale)}
   >
     <StructuredDataBreadcrumb siren={uniteLegale.siren} />
     <div className="content-container">
