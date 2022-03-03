@@ -5,7 +5,7 @@
 import { IBeneficiaire } from '../../../models/dirigeants';
 import {
   formatFirstNames,
-  formatName,
+  formatNameFull,
 } from '../../../utils/helpers/formatting';
 import { libelleFromCodeBeneficiaires } from '../../../utils/labels';
 import { formatINPIDateField } from '../helper';
@@ -40,7 +40,7 @@ const mapToDomainBeneficiaires = (
 
   return {
     type: libelleFromCodeBeneficiaires(type_entite),
-    nom: formatName(nom_naissance, ''),
+    nom: formatNameFull(nom_naissance, ''),
     prenoms: formatFirstNames((prenoms || '').split(' ')),
     dateNaissance: (date_naissance || '').toString(),
     dateGreffe: formatINPIDateField(date_greffe),

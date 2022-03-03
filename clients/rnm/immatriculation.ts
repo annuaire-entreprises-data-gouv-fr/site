@@ -3,7 +3,7 @@ import { Siren } from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
   formatFirstNames,
-  formatName,
+  formatNameFull,
 } from '../../utils/helpers/formatting';
 import { httpGet } from '../../utils/network';
 import routes from '../routes';
@@ -101,7 +101,7 @@ const mapToDomainObject = (
 
   const prenomEtNom = `${formatFirstNames([
     dir_id_prenom_1 || '',
-  ])} ${formatName(dir_id_nom_naissance || '', dir_id_nom_usage || '')}`;
+  ])} ${formatNameFull(dir_id_nom_naissance || '', dir_id_nom_usage || '')}`;
 
   const denomination =
     (ent_act_denomination_sociale || eirl_denomination || prenomEtNom) +
