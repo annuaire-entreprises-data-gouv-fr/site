@@ -26,27 +26,37 @@ const HabiliationFailure: React.FC<{
             to: `/entreprise/${siren}`,
           },
           {
-            label: `Espace dirigeant`,
+            label: `Connexion refusée`,
           },
         ]}
       />
+      <div className="layout-center">
+        <h1>Vous n’êtes pas dirigeant de cette entreprise</h1>
+      </div>
+      <br />
+      <div className="layout-center">
+        <ButtonLink to="/">Retourner à la recherche</ButtonLink>
+        <ButtonLink to="/" alt>
+          Retourner sur la page de l’entreprise
+        </ButtonLink>
+      </div>
+      <br />
       <div className="content-container">
-        <h1>Vous n’êtes pas autorisé(e) à accéder à cette page</h1>
+        <h2>Explications</h2>
         <p>
           Seuls les dirigeants de l’entreprise sont autorisés à accéder à cette
           page. Selon l’
-          <INSEE /> vous n’êtes pas dirigeant(e) de cette entreprise.
+          <INSEE /> vous n’êtes pas dirigeant(e) de cette entreprise :
         </p>
-        Cela peut être du à une des raisons suivantes :
         <ul>
+          <li>
+            soit vous n’êtes <b>pas</b> dirigeant
+          </li>
           <li>
             soit vous n’êtes <b>pas encore</b> dirigeant
           </li>
           <li>
             soit vous n’êtes <b>plus</b> dirigeant
-          </li>
-          <li>
-            soit vous n’êtes <b>pas</b> dirigeant
           </li>
           <li>soit cette entreprise n’a pas de dirigeant enregistré</li>
         </ul>
@@ -58,9 +68,6 @@ const HabiliationFailure: React.FC<{
           reproduit, vous pouvez{' '}
           <a href={constants.links.mailto}>nous contacter.</a>.
         </p>
-        <div className="layout-center">
-          <ButtonLink to="/">Retourner à la recherche</ButtonLink>
-        </div>
       </div>
     </Page>
   );
