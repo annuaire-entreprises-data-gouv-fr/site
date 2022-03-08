@@ -5,7 +5,7 @@ import { Siren } from '../../utils/helpers/siren-and-siret';
 import routes from '../routes';
 
 /**
- * Checks if justificatifs exists in RNCS
+ * Checks if justificatifs exists in RNCS and  parses html response
  * @param siren
  * @returns
  */

@@ -1,5 +1,5 @@
 import { NotAValidIdRnaError } from '.';
-import { HttpNotFound, HttpServerError } from '../clients/exceptions';
+import { HttpNotFound } from '../clients/exceptions';
 import { fetchRNCSImmatriculationSiteFallback } from '../clients/inpi-site/siren';
 import fetchAnnoncesJO from '../clients/open-data-soft/journal-officiel-associations';
 import { fetchRNCSImmatriculation } from '../clients/rncs';
@@ -68,6 +68,7 @@ export const getImmatriculationRNCS = async (siren: Siren) => {
   try {
     return await fetchRNCSImmatriculation(siren);
   } catch (e: any) {
+    console.log(e);
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INPI, 404);
     }

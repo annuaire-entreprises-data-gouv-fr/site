@@ -42,6 +42,7 @@
     "axios": "^0.24.0",
     "axios-oauth-client": "^1.4.4",
     "axios-token-interceptor": "^0.2.0",
+    "cheerio": "^1.0.0-rc.10",
     "cookies": "^0.8.0",
     "core-js": "^3.19.2",
     "crawler-user-agents": "^1.0.85",
