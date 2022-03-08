@@ -4,7 +4,7 @@ import { Siren } from '../../utils/helpers/siren-and-siret';
 import routes from '../routes';
 import yauzl from 'yauzl';
 import { HttpNotFound } from '../exceptions';
-import { extractIMRFromXml } from './IMRParser';
+import { extractIMRFromXml } from './IMR-api-parser';
 import { logWarningInSentry } from '../../utils/sentry';
 
 export interface IRNCSResponse {
@@ -103,7 +103,7 @@ interface IZipFileAsBuffer {
   buffer: Buffer;
 }
 
-export const fetchRNCSIMR = async (siren: Siren) => {
+export const fetchRNCSImmatriculation = async (siren: Siren) => {
   const IMRBuffer = await fetchIMRAsBuffer(siren);
   const xmlResponse = await unzipTwiceIMR(IMRBuffer, siren);
   return mapToDomainObject(xmlResponse, siren);

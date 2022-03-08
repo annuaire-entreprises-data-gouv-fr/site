@@ -9,7 +9,7 @@ import {
 } from '../../../utils/helpers/formatting';
 import { libelleFromCodeBeneficiaires } from '../../../utils/labels';
 import { formatINPIDateField } from '../helper';
-import { IRNCSBeneficiaireResponse, IRNCSResponseDossier } from '../IMR';
+import { IRNCSBeneficiaireResponse, IRNCSResponseDossier } from '../IMR-api';
 
 export const extractBeneficiaires = (dossier: IRNCSResponseDossier) => {
   const beneficiairesObject = dossier?.beneficiaires?.beneficiaire;

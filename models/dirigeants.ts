@@ -1,6 +1,6 @@
 import { IUniteLegale } from '.';
 import { HttpNotFound } from '../clients/exceptions';
-import { fetchRNCSIMR } from '../clients/rncs/IMR';
+import { fetchRNCSImmatriculation } from '../clients/rncs/IMR-api';
 import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
@@ -8,6 +8,8 @@ import {
   IAPINotRespondingError,
   APINotRespondingFactory,
 } from './api-not-responding';
+import { getImmatriculationRNCS } from './immatriculation';
+import getIMR from './IMR';
 import { getUniteLegaleFromSlug } from './unite-legale';
 
 export interface IEtatCivil {
@@ -64,7 +66,7 @@ export const getDirigeantsWithUniteLegaleFromSlug = async (slug: string) => {
   const siren = verifySiren(slug);
   const [uniteLegale, dirigeantsAndBeneficiaires] = await Promise.all([
     getUniteLegaleFromSlug(siren),
-    getDirigeantsFromImmatriculations(siren),
+    getIMR(siren),
   ]);
 
   const { dirigeants, beneficiaires } = dirigeantsAndBeneficiaires;
@@ -79,7 +81,7 @@ export const getDirigeantsWithUniteLegaleFromSlug = async (slug: string) => {
 export const getDirigeantsFromImmatriculations = async (siren: Siren) => {
   const notFound = APINotRespondingFactory(EAdministration.INPI, 404);
   try {
-    const { dirigeants, beneficiaires } = await fetchRNCSIMR(siren);
+    const { dirigeants, beneficiaires } = await fetchRNCSImmatriculation(siren);
     return {
       dirigeants: dirigeants.length > 0 ? dirigeants : notFound,
       beneficiaires: beneficiaires.length > 0 ? beneficiaires : notFound,

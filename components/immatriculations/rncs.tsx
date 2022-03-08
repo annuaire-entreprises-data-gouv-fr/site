@@ -40,11 +40,7 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
   }
 
   // inpi API call failed and fallbacked on site ping
-  const isImmatriculationIncomplete =
-    !immatriculation.dateRadiation &&
-    !immatriculation.dateImmatriculation &&
-    !immatriculation.numeroRCS &&
-    !immatriculation.denomination;
+  const isImmatriculationIncomplete = !immatriculation.numeroRCS;
 
   return (
     <>
@@ -61,14 +57,8 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
                 <INPI />, qui nous transmet les données, est partiellement{' '}
                 <b>hors service 🔴</b>.
                 <br />
-                Les données à notre disposition sont donc <b>incomplètes</b> et
-                nous ne pouvons pas afficher le capital social, le numéro RCS,
-                les dirigeants et les dates d’immatriculation ou de radiation de
-                cette entreprise.
-                <br />
-                Toutefois, vous pouvez retrouver ces données sur le PDF
-                d’immatriculation ou la page entreprise sur le site de l’
-                <INPI />
+                Il nous manque certaines données (par exemple, le numéro RCS),
+                mais vous pouvez les retrouver sur le PDF d’immatriculation.
               </Warning>
             )}
             <p>
@@ -78,12 +68,10 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
               tribunaux de commerce et centralisées par l’
               <INPI />.
             </p>
-            {!isImmatriculationIncomplete && (
-              <ImmatriculationRNCSTable
-                immatriculation={immatriculation}
-                uniteLegale={uniteLegale}
-              />
-            )}
+            <ImmatriculationRNCSTable
+              immatriculation={immatriculation}
+              uniteLegale={uniteLegale}
+            />
             <PrintNever>
               <p>
                 Pour accéder à l’ensemble des données contenues dans un extrait

@@ -5,7 +5,7 @@
 import { IIdentite } from '../../../models/dirigeants';
 import { formatFloatFr, formatIntFr } from '../../../utils/helpers/formatting';
 import { libelleFromCodeGreffe } from '../../../utils/labels';
-import { IRNCSIdentiteResponse, IRNCSResponseDossier } from '../IMR';
+import { IRNCSIdentiteResponse, IRNCSResponseDossier } from '../IMR-api';
 import { formatINPIDateField } from '../helper';
 
 export const extractIdentite = (dossierPrincipal: IRNCSResponseDossier) => {

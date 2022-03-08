@@ -2,7 +2,7 @@ import { getImmatriculationRNCS } from '../models/immatriculation';
 import { verifyIdRna } from '../utils/helpers/id-rna';
 import { verifySiren } from '../utils/helpers/siren-and-siret';
 import { fetchAssociation } from './rna';
-import { fetchRNCSImmatriculation } from './rncs';
+import { fetchRNCSImmatriculation } from './rncs/IMR-api';
 import { fetchRnmImmatriculation } from './rnm';
 import { getUniteLegaleInsee } from './sirene-insee/siren';
 import getUniteLegaleSireneOuverte from './sirene-ouverte/siren';

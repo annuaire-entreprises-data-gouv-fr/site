@@ -1,6 +1,3 @@
-import { fetchRNCSImmatriculation } from './IMRJustificatif';
-import { fetchRNCSIMR } from './IMR';
-
 import httpClient from '../../utils/network';
 import {
   HttpAuthentificationFailure,
@@ -61,7 +58,7 @@ const fetchData = async (
     url: route,
     method: 'GET',
     headers: { Cookie: cookie },
-    timeout: 12000, // INPI API can take a looong time
+    timeout: 1500, // we know INPI API fails frequently so lets have it fail fast
   });
 };
 
@@ -85,4 +82,4 @@ const RNCSClientWrapper = async (
   }
 };
 
-export { fetchRNCSImmatriculation, fetchRNCSIMR, RNCSClientWrapper };
+export { RNCSClientWrapper };

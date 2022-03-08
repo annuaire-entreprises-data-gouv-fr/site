@@ -8,7 +8,7 @@ import {
   formatNameFull,
 } from '../../../utils/helpers/formatting';
 import { logWarningInSentry } from '../../../utils/sentry';
-import { IRNCSRepresentantResponse, IRNCSResponseDossier } from '../IMR';
+import { IRNCSRepresentantResponse, IRNCSResponseDossier } from '../IMR-api';
 
 export const extractRepresentants = (dossier: IRNCSResponseDossier) => {
   const representantsObject = dossier?.representants?.representant;

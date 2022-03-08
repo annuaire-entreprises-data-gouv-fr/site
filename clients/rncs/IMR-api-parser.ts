@@ -3,7 +3,7 @@ import { Siren } from '../../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../../utils/sentry';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 
-import { IRNCSResponse, IRNCSResponseDossier } from './IMR';
+import { IRNCSResponse, IRNCSResponseDossier } from './IMR-api';
 import { extractBeneficiaires } from './parsers/beneficiaires';
 import { extractRepresentants } from './parsers/dirigeants';
 import { extractIdentite } from './parsers/identite';
