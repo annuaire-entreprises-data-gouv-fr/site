@@ -53,7 +53,12 @@ export default nextConnect<NextApiRequest, NextApiResponse>().get(
         return res.redirect(redirectTo);
       } catch (verificationError) {
         if (verificationError instanceof HttpUnauthorizedError) {
-          return res.redirect(`/compte/echec-habilitation/${siren}`);
+          const errorWhy = verificationError.message;
+          const url = `/compte/echec-habilitation/${siren}${
+            errorWhy ? `?why=${errorWhy}}` : ''
+          }`;
+
+          return res.redirect(url);
         }
         throw verificationError;
       }

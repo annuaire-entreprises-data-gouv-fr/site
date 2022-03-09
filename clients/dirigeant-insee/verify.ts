@@ -1,24 +1,34 @@
 import inseeDirigeantClient from '.';
-import { Siren, verifySiren } from '../../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../../utils/sentry';
+import { Siren } from '../../utils/helpers/siren-and-siret';
 import { IUserSession } from '../../utils/session/accessSession';
-import { HttpUnauthorizedError } from '../exceptions';
+import { HttpServerError, HttpUnauthorizedError } from '../exceptions';
 import routes from '../routes';
 
 enum HABILITATION {
   // non-dirigeants
   _00 = '00', // ?
-  _10 = '10', // Aucun dirigeant n’est inscrit au répertoire Sirene pour cette unité légale Siren'
-  _20 = '20', // La personne n’est pas dirigeant pour le Siren
-  _30 = '30', // La personne n’est plus dirigeant pour le Siren
-  _31 = '31', // La personne n’est pas encore dirigeant pour le Siren
+  _10 = '10',
+  _20 = '20',
+  _30 = '30',
+  _31 = '31',
 
   // dirigeants
-  _40 = '40', // La personne n’a aucune habilitation
-  _50 = '50', // La personne est habilitateur principal
-  _51 = '51', // La personne n’est plus habilitateur principal
-  _52 = '52', // La personne n’est pas encore habilitateur principal
+  _40 = '40',
+  _50 = '50',
+  _51 = '51',
+  _52 = '52',
 }
+
+export const habilitationExplanations = {
+  '10': 'aucun dirigeant n’est inscrit au répertoire Sirene pour ce Siren',
+  '20': 'vous n’êtes pas dirigeant pour ce Siren',
+  '30': 'vous n’êtes plus dirigeant pour ce Siren',
+  '31': 'vous n’êtes pas encore dirigeant pour ce Siren',
+  '40': 'vous n’avez aucune habilitation',
+  '50': 'vous êtes habilitateur principal',
+  '51': 'vous n’êtes plus habilitateur principal',
+  '52': 'vous n’êtes pas encore habilitateur principal',
+} as { [key: string]: string };
 interface IInseeDirigeantResponse {
   id: number;
   siren?: string;
@@ -71,10 +81,7 @@ export const verifyDirigeant = async (
   user: IUserSession | null
 ) => {
   if (!user) {
-    throw new HttpUnauthorizedError(
-      401,
-      `Not a dirigeant: UserSession is undefined`
-    );
+    throw new HttpServerError(500, `UserSession is undefined`);
   }
 
   const query = formatQueryParams(siren, user);
@@ -92,10 +99,7 @@ export const verifyDirigeant = async (
     response.etatHabilitation && response.etatHabilitation.code;
 
   if (!codeHabilitation) {
-    throw new HttpUnauthorizedError(
-      401,
-      `Not a dirigeant: no habilitation code`
-    );
+    throw new HttpUnauthorizedError(401, HABILITATION._20);
   }
 
   if (
@@ -107,8 +111,5 @@ export const verifyDirigeant = async (
     return response;
   }
 
-  throw new HttpUnauthorizedError(
-    401,
-    `Not a dirigeant: habilitation code ${codeHabilitation}`
-  );
+  throw new HttpUnauthorizedError(401, codeHabilitation);
 };

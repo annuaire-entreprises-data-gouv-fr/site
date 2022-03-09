@@ -1,22 +1,32 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
+import { INSEE } from '../../components/administrations';
 import ButtonFranceConnect from '../../components/button-france-connect';
 
 import Page from '../../layouts';
+import PageConnexion from '../../layouts/page-connexion';
 import { getSession } from '../../utils/session';
 
 const Login: React.FC = () => {
   return (
-    <Page
-      title="Connectez-vous à votre espace entrepreneur"
+    <PageConnexion
+      title="Accédez à vos données d’entreprise"
       noIndex={true}
       session={null}
+      img={'/images/illustrations/connexion.svg'}
     >
-      <h1>Connectez-vous à votre espace entrepreneur</h1>
+      <h1>Accédez à vos données d’entreprise</h1>
       <p>
-        En tant que dirigeant d’entreprise, accèdez aux attestations,
-        justificatifs et données privées de votre entreprise.
+        En quelques clics, retrouvez toutes les données, tous les documents et
+        tous les justificatifs détenus par l’administration.
       </p>
+      <p>
+        <h3>Comment ça marche ?</h3>
+        FranceConnect nous fourni votre état civil, et l’
+        <INSEE /> nous confirme que vous êtes bien dirigeant(e) de l’entreprise
+        :
+      </p>
+      <br />
       <div className="france-connect-container">
         <ButtonFranceConnect />
         <div>
@@ -28,7 +38,7 @@ const Login: React.FC = () => {
       <style jsx>{`
         h1,
         p {
-          text-align: center;
+          text-align: left;
         }
         .france-connect-container {
           display: flex;
@@ -40,7 +50,7 @@ const Login: React.FC = () => {
           font-size: 0.8rem;
         }
       `}</style>
-    </Page>
+    </PageConnexion>
   );
 };
 

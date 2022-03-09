@@ -52,13 +52,6 @@ export const menu = [
     path: (siren: string) => `/divers/${siren}`,
     private: false,
   },
-  // a ajouter avec une ligne ou un separateur
-  // {
-  //   title: 'Simulateurs',
-  //   type: FICHE.SIMULATIONS,
-  //   path: (siren: string) => `/comptes/simulateurs/${siren}`,
-  //   private: true,
-  // },
 ];
 
 export { Title, Tabs, LateralMenu };

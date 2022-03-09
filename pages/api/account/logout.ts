@@ -10,9 +10,8 @@ export default PassportHandler().get(async (req, res, next) => {
   req.logout();
 
   // redirect to referrer
-  const redirect =
-    (req.headers.referrer || req.headers.referer || '').toString() ||
-    '/compte/deconnexion';
+  //  const redirect =(req.headers.referrer || req.headers.referer || '').toString() ||
+  // '/compte/deconnexion';
 
-  res.redirect(redirect);
+  res.redirect('/compte/deconnexion');
 });
