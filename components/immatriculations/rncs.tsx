@@ -15,8 +15,8 @@ import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../print-visibility';
 import { Closed, Open } from '../icon';
-import Warning from '../alerts/warning';
 import { IImmatriculationRNCS } from '../../models/justificatifs';
+import InpiPartiallyDownWarning from '../alerts/inpi-partially-down';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
@@ -39,9 +39,6 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
     );
   }
 
-  // inpi API call failed and fallbacked on site ping
-  const isImmatriculationIncomplete = !immatriculation.numeroRCS;
-
   return (
     <>
       {immatriculation.downloadlink && (
@@ -51,16 +48,7 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
             title="Immatriculation au RNCS"
             source={EAdministration.INPI}
           >
-            {isImmatriculationIncomplete && (
-              <Warning>
-                Le téléservice de l’
-                <INPI />, qui nous transmet les données, est partiellement{' '}
-                <b>hors service 🔴</b>.
-                <br />
-                Il nous manque certaines données (par exemple, le numéro RCS),
-                mais vous pouvez les retrouver sur le PDF d’immatriculation.
-              </Warning>
-            )}
+            {!immatriculation.numeroRCS && <InpiPartiallyDownWarning />}
             <p>
               Cette entité possède une fiche d’immatriculation au{' '}
               <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui

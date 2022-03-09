@@ -1,8 +1,9 @@
 import * as cheerio from 'cheerio';
 import { IBeneficiaire, IDirigeant, IIdentite } from '../../models/dirigeants';
-import { formatIntFr } from '../../utils/helpers/formatting';
 import { Siren } from '../../utils/helpers/siren-and-siret';
-import { formatINPIDateField } from './helper';
+import parseBeneficiaires from './site-parsers/beneficiaires';
+import parseDirigeants from './site-parsers/dirigeants';
+import parseIdentite from './site-parsers/identite';
 
 const parseSirenPageHtml = (
   html: string,
@@ -13,41 +14,26 @@ const parseSirenPageHtml = (
   identite: IIdentite;
 } => {
   const $ = cheerio.load(html);
-  const getLabel = (label: string) =>
-    $(`p:contains("${label}")`, '#notice-description').next().first().text();
 
-  const getDate = (label: string) =>
-    formatINPIDateField(
-      $(`p:contains("${label}")`, '#notice-description')
-        .next()
-        .first()
-        .text()
-        .trim()
-    );
+  const identiteHtml = $(
+    `div.row:contains("Identité")`,
+    '#notice-description'
+  ).html();
+
+  const representantsHtml = $(
+    `div.row:contains("Représentants")`,
+    '#notice-description'
+  ).html();
+
+  const beneficiairesHtml = $(
+    `div.row:contains("Bénéficiaires effectifs")`,
+    '#notice-description'
+  ).html();
 
   return {
-    identite: {
-      greffe: '',
-      codeGreffe: '',
-      numeroRCS: '',
-      numGestion: getLabel('gestion'),
-      dateImmatriculation: getDate("Date d'immatriculation"),
-      dateDebutActiv: getDate('activit'),
-      dateGreffe: '',
-      dateRadiation: $(
-        'h5:contains("Entreprise radiée le")',
-        '#notice-description'
-      ).text(),
-      dateCessationActivite: getDate("Date de cessation d'activité"),
-      denomination: getLabel('Dénomination'),
-      dureePersonneMorale: getLabel('Durée de la personne morale'),
-      dateClotureExercice: getLabel('Date de clôture'),
-      capital: getLabel('Capital social').split('.')[0] + ' EUR (fixe)',
-      isPersonneMorale: true,
-      libelleNatureJuridique: getLabel('Forme juridique'),
-    },
-    dirigeants: [],
-    beneficiaires: [],
+    identite: parseIdentite(identiteHtml || ''),
+    dirigeants: parseDirigeants(representantsHtml || ''),
+    beneficiaires: parseBeneficiaires(beneficiairesHtml || ''),
   };
 };
 
