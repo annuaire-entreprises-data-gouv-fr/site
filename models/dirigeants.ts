@@ -8,7 +8,6 @@ import {
   IAPINotRespondingError,
   APINotRespondingFactory,
 } from './api-not-responding';
-import { getImmatriculationRNCS } from './immatriculation';
 import getIMR from './IMR';
 import { getUniteLegaleFromSlug } from './unite-legale';
 

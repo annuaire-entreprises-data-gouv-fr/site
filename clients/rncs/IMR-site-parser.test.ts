@@ -4,7 +4,7 @@ import parseSirenPageHtml from './IMR-site-parser';
 
 const dummySiren = verifySiren('880878145');
 
-describe('IMR XML parser', () => {
+describe('IMR HTML parser', () => {
   it('parses the html', () => {
     const html = readFileSync(
       __dirname + '/__tests__/html_ok_simple_company.txt',
@@ -30,6 +30,8 @@ describe('IMR XML parser', () => {
         isPersonneMorale: true,
         libelleNatureJuridique: 'Société par actions simplifiée',
       },
+      beneficiaires: [],
+      dirigeants: [],
     });
   });
 

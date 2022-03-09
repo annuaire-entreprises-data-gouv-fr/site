@@ -1,4 +1,3 @@
-import { IImmatriculationRNM } from '../../models/immatriculation';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import {
   formatAdresse,
@@ -7,6 +6,7 @@ import {
 } from '../../utils/helpers/formatting';
 import { httpGet } from '../../utils/network';
 import routes from '../routes';
+import { IImmatriculationRNM } from '../../models/justificatifs';
 
 export interface IApiRNMResponse {
   ent_id_num_gestion: string;

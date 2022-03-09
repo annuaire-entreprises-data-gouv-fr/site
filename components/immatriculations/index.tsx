@@ -3,8 +3,7 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
-import { IImmatriculation } from '../../models/immatriculation';
-import { IJustificatifs } from '../../models/justificatifs';
+import { IImmatriculation, IJustificatifs } from '../../models/justificatifs';
 import AssociationCreationNotFoundAlert from '../alerts/association-creation-not-found-alert';
 import ImmatriculationNotFound from '../alerts/immatriculation-not-found-alert';
 import AvisSituationSection from './insee';

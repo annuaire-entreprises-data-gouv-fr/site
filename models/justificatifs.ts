@@ -3,7 +3,6 @@ import { verifySiren } from '../utils/helpers/siren-and-siret';
 import { IAPINotRespondingError } from './api-not-responding';
 import { NotAValidIdRnaError } from '.';
 import { HttpNotFound } from '../clients/exceptions';
-import { fetchRNCSImmatriculationSiteFallback } from '../clients/rncs/IMR-site';
 import fetchAnnoncesJO from '../clients/open-data-soft/journal-officiel-associations';
 import { fetchRnmImmatriculation } from '../clients/rnm';
 import { IdRna, verifyIdRna } from '../utils/helpers/id-rna';
@@ -14,7 +13,6 @@ import { EAdministration } from './administration';
 import { APINotRespondingFactory } from './api-not-responding';
 import { IIdentite } from './dirigeants';
 import routes from '../clients/routes';
-import { fetchRNCSImmatriculation } from '../clients/rncs/IMR-api';
 import { getUniteLegaleFromSlug } from './unite-legale';
 import getIMR from './IMR';
 

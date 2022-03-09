@@ -1,8 +1,8 @@
-import { getImmatriculationRNCS } from '../models/immatriculation';
 import { verifyIdRna } from '../utils/helpers/id-rna';
 import { verifySiren } from '../utils/helpers/siren-and-siret';
 import { fetchAssociation } from './rna';
 import { fetchRNCSImmatriculation } from './rncs/IMR-api';
+import { fetchRNCSImmatriculationSiteFallback } from './rncs/IMR-site';
 import { fetchRnmImmatriculation } from './rnm';
 import { getUniteLegaleInsee } from './sirene-insee/siren';
 import getUniteLegaleSireneOuverte from './sirene-ouverte/siren';
@@ -19,7 +19,9 @@ const ping = async (slug: string | string[]) => {
     case 'api-rncs':
       return await fetchRNCSImmatriculation(verifySiren('880878145'));
     case 'api-rncs-with-fallback':
-      return await getImmatriculationRNCS(verifySiren('880878145'));
+      return await fetchRNCSImmatriculationSiteFallback(
+        verifySiren('880878145')
+      );
     case 'api-rnm':
       return await fetchRnmImmatriculation(verifySiren('824024350'));
     case 'api-conventions-collectives':

@@ -5,7 +5,6 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
-import { IImmatriculationRNCS } from '../../models/immatriculation';
 import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
 import { INPI } from '../administrations';
@@ -17,6 +16,7 @@ import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../print-visibility';
 import { Closed, Open } from '../icon';
 import Warning from '../alerts/warning';
+import { IImmatriculationRNCS } from '../../models/justificatifs';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
