@@ -2,8 +2,8 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import { INSEE } from '../../components/administrations';
 import ButtonFranceConnect from '../../components/button-france-connect';
+import connexionPicture from '../../components/illustrations/connexion';
 
-import Page from '../../layouts';
 import PageConnexion from '../../layouts/page-connexion';
 import { getSession } from '../../utils/session';
 
@@ -13,7 +13,7 @@ const Login: React.FC = () => {
       title="Accédez à vos données d’entreprise"
       noIndex={true}
       session={null}
-      img={'/images/illustrations/connexion.svg'}
+      img={connexionPicture}
     >
       <h1>Accédez à vos données d’entreprise</h1>
       <p>
@@ -35,6 +35,7 @@ const Login: React.FC = () => {
           </a>
         </div>
       </div>
+      <br />
       <style jsx>{`
         h1,
         p {

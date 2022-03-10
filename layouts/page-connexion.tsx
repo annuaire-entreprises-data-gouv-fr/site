@@ -8,7 +8,7 @@ interface IProps {
   canonical?: string;
   noIndex?: boolean;
   session?: ISession | null;
-  img: string;
+  img: JSX.Element;
 }
 
 const PageConnexion: React.FC<IProps> = ({
@@ -28,11 +28,9 @@ const PageConnexion: React.FC<IProps> = ({
     session={session}
   >
     <div className="connect-container">
-      {img && (
-        <div className="img-container">
-          <img src={img} />
-        </div>
-      )}
+      <div className="img-container">
+        <div>{img}</div>
+      </div>
       <div className="body">{children}</div>
       <style jsx>{`
         .connect-container {
@@ -59,9 +57,25 @@ const PageConnexion: React.FC<IProps> = ({
           display: flex;
           justify-content: center;
           align-items: center;
+          padding: inherit 100px;
         }
-        img {
-          width: 80%;
+        .img-container > div {
+          max-width: 400px;
+        }
+
+        @media only screen and (min-width: 1px) and (max-width: 699px) {
+          .connect-container {
+            display: flex;
+            flex-direction: column-reverse;
+          }
+          .connect-container > div {
+            padding: 0;
+            width: 100%;
+          }
+
+          .img-container:before {
+            display: none;
+          }
         }
       `}</style>
     </div>

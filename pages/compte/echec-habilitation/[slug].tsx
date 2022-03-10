@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import { habilitationExplanations } from '../../../clients/dirigeant-insee/verify';
+import connexionRefusedPicture from '../../../components/illustrations/connexion-refused';
 import { withSession } from '../../../hocs/with-session';
 import PageConnexion from '../../../layouts/page-connexion';
 import { ISession } from '../../../utils/session/accessSession';
@@ -17,7 +18,7 @@ const HabiliationFailure: React.FC<{
       title="Vous ne pouvez pas accéder aux données privées de cette entreprise"
       noIndex={true}
       session={session}
-      img="/images/illustrations/connexion-refused.svg"
+      img={connexionRefusedPicture}
     >
       <h1>
         Vous ne pouvez pas accéder aux données privées de cette entreprise

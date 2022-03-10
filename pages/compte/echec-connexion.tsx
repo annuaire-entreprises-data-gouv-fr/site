@@ -1,16 +1,17 @@
 import React from 'react';
+import connexionFailedPicture from '../../components/illustrations/connexion-failed';
 import PageConnexion from '../../layouts/page-connexion';
 import constants from '../../models/constants';
 
 const ConnexionFailure: React.FC = () => {
   return (
     <PageConnexion
-      title="Vous ne pouvez pas accéder aux données privées de cette entreprise"
+      title="Votre tentative de connexion a échouée"
       noIndex={true}
       session={null}
-      img="/images/illustrations/connexion-failed.svg"
+      img={connexionFailedPicture}
     >
-      <h1>Votre tentative de connexion a échouée.</h1>
+      <h1>Votre tentative de connexion a échouée</h1>
       <p>
         Merci de réessayer plus tard. Si le problème se reproduit, merci de{' '}
         <a href={constants.links.mailto}>nous contacter.</a>.

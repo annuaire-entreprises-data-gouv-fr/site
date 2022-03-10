@@ -1,5 +1,5 @@
 import React from 'react';
-import Page from '../../layouts';
+import logoutPicture from '../../components/illustrations/logout';
 import PageConnexion from '../../layouts/page-connexion';
 
 const Logout: React.FC = () => (
@@ -7,7 +7,7 @@ const Logout: React.FC = () => (
     title="Vous êtes bien deconnecté(e)"
     noIndex={true}
     session={null}
-    img="/images/illustrations/logout.svg"
+    img={logoutPicture}
   >
     <h1>Vous êtes bien deconnecté(e)</h1>
     <p>Merci d’avoir visité l’espace entreprise.</p>
