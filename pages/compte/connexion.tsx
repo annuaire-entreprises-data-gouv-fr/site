@@ -30,7 +30,7 @@ const Login: React.FC = () => {
       <div className="france-connect-container">
         <ButtonFranceConnect />
         <div>
-          <a href="Qu’est-ce que FranceConnect ?">
+          <a href="https://franceconnect.gouv.fr/">
             Qu’est-ce que FranceConnect ?
           </a>
         </div>
