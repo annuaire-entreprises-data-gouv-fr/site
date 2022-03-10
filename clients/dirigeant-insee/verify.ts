@@ -29,6 +29,7 @@ export const habilitationExplanations = {
   '51': 'vous n’êtes plus habilitateur principal',
   '52': 'vous n’êtes pas encore habilitateur principal',
 } as { [key: string]: string };
+
 interface IInseeDirigeantResponse {
   id: number;
   siren?: string;

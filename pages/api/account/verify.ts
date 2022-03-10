@@ -55,7 +55,7 @@ export default nextConnect<NextApiRequest, NextApiResponse>().get(
         if (verificationError instanceof HttpUnauthorizedError) {
           const errorWhy = verificationError.message;
           const url = `/compte/echec-habilitation/${siren}${
-            errorWhy ? `?why=${errorWhy}}` : ''
+            errorWhy ? `?why=${errorWhy}` : ''
           }`;
 
           return res.redirect(url);
