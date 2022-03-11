@@ -1,5 +1,6 @@
 import React from 'react';
 import Page from '.';
+import ButtonLink from '../components/button';
 import SubHeader from '../components/header/sub-header';
 import SocialMedia from '../components/social-media';
 import Title, { FICHE, LateralMenu, Tabs } from '../components/title-section';
@@ -77,6 +78,16 @@ const PageEntreprise: React.FC<IProps> = ({
         <div className="content-container">
           <div className="header">
             <br />
+            <div className="layout-right">
+              <ButtonLink
+                alt
+                small
+                to={`/connexion/dirigeant?siren=${uniteLegale.siren}`}
+              >
+                <span className="fr-link fr-fi-account-fill"></span>
+                C’est mon entreprise, je me connecte !
+              </ButtonLink>
+            </div>
             <Title uniteLegale={uniteLegale} />
             <SocialMedia siren={uniteLegale.siren} />
             {!uniteLegale.estDiffusible ? (
@@ -86,12 +97,6 @@ const PageEntreprise: React.FC<IProps> = ({
             ) : (
               <UnitLegaleDescription uniteLegale={uniteLegale} />
             )}
-            <div>
-              C’est votre entreprise ?{' '}
-              <a href={`/connexion?siren=${uniteLegale.siren}`}>
-                → Accédez à votre espace entrepreneur.
-              </a>
-            </div>
             <br />
             <Tabs
               siren={uniteLegale.siren}
