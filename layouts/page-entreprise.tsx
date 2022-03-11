@@ -88,7 +88,7 @@ const PageEntreprise: React.FC<IProps> = ({
             )}
             <div>
               C’est votre entreprise ?{' '}
-              <a href={`/compte/connexion?siren=${uniteLegale.siren}`}>
+              <a href={`/connexion?siren=${uniteLegale.siren}`}>
                 → Accédez à votre espace entrepreneur.
               </a>
             </div>

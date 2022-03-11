@@ -11,7 +11,7 @@ export default PassportHandler().get(async (req, res, next) => {
 
   // redirect to referrer
   //  const redirect =(req.headers.referrer || req.headers.referer || '').toString() ||
-  // '/compte/deconnexion';
+  // '/connexion/au-revoir';
 
-  res.redirect('/compte/deconnexion');
+  res.redirect('/connexion/au-revoir');
 });

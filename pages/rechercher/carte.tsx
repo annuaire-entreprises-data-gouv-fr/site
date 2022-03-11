@@ -3,18 +3,16 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import PageCounter from '../../components/results-page-counter';
-import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
 
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import ResultsHeader from '../../components/results-header';
 import search, { ISearchResults } from '../../models/search';
 import ResultsList from '../../components/results-list';
 import MapResults from '../../components/map/map-results';
-import { IsLikelyASirenOrSiretException } from '../../models';
-import { redirectServerError } from '../../utils/redirects';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
 import StructuredDataSearchAction from '../../components/structured-data/search';
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
+import { withError } from '../../hocs/with-error';
 
 interface IProps extends ISearchResults, IPropsWithSession {
   searchTerm: string;
@@ -123,30 +121,22 @@ const MapSearchResultPage: React.FC<IProps> = ({
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = withSession(
-  async (context) => {
+export const getServerSideProps: GetServerSideProps = withError(
+  withSession(async (context) => {
     // get params from query string
     const searchTermParam = (context.query.terme || '') as string;
     const pageParam = (context.query.page || '') as string;
 
     const page = parseIntWithDefaultValue(pageParam, 1);
 
-    try {
-      const results = (await search(searchTermParam, page)) || {};
-      return {
-        props: {
-          ...results,
-          searchTerm: searchTermParam,
-        },
-      };
-    } catch (e: any) {
-      if (e instanceof IsLikelyASirenOrSiretException) {
-        return redirectIfSiretOrSiren(e.message);
-      } else {
-        return redirectServerError(e.message);
-      }
-    }
-  }
+    const results = (await search(searchTermParam, page)) || {};
+    return {
+      props: {
+        ...results,
+        searchTerm: searchTermParam,
+      },
+    };
+  })
 );
 
 export default MapSearchResultPage;

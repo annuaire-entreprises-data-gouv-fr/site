@@ -10,11 +10,8 @@ export function withSession(
   getServerSidePropsFunction: (context: GetServerSidePropsContext) => any
 ) {
   return async (context: GetServerSidePropsContext) => {
-    const comutedServerSideProps = await getServerSidePropsFunction(context);
-
+    const { props, redirect } = await getServerSidePropsFunction(context);
     const currentSession = (await getSession(context.req, context.res)) as any;
-
-    const redirect = comutedServerSideProps.redirect;
 
     if (redirect) {
       // if props contains a redirect, simply return it.
@@ -23,7 +20,7 @@ export function withSession(
 
     return {
       props: {
-        ...comutedServerSideProps.props,
+        ...props,
         session: isLoggedIn(currentSession) ? currentSession : null,
       },
     };

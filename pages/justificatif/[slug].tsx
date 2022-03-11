@@ -4,9 +4,9 @@ import { GetServerSideProps } from 'next';
 import { FICHE } from '../../components/title-section';
 import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
-import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import PageEntreprise from '../../layouts/page-entreprise';
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
+import { withError } from '../../hocs/with-error';
 
 interface IProps extends IJustificatifs, IPropsWithSession {}
 
@@ -33,21 +33,17 @@ const JustificatifPage: React.FC<IProps> = ({
   </PageEntreprise>
 );
 
-export const getServerSideProps: GetServerSideProps = withSession(
-  async (context) => {
+export const getServerSideProps: GetServerSideProps = withError(
+  withSession(async (context) => {
     //@ts-ignore
     const siren = context.params.slug as string;
 
-    try {
-      const justificatifs = await getJustificatifs(siren);
+    const justificatifs = await getJustificatifs(siren);
 
-      return {
-        props: justificatifs,
-      };
-    } catch (e: any) {
-      return redirectIfIssueWithSiren(e, siren, context.req);
-    }
-  }
+    return {
+      props: justificatifs,
+    };
+  })
 );
 
 export default JustificatifPage;

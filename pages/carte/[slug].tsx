@@ -8,6 +8,8 @@ import { getEtablissementWithLatLongFromSlug } from '../../models/etablissement'
 import { MapTitleEtablissement } from '../../components/title-etablissement-section';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
+import { withError } from '../../hocs/with-error';
+import { withSession } from '../../hocs/with-session';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -57,20 +59,22 @@ const EtablissementMapPage: React.FC<IProps> = ({ etablissement }) => (
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const siret = context.params.slug as string;
+export const getServerSideProps: GetServerSideProps = withError(
+  withSession(async (context) => {
+    //@ts-ignore
+    const siret = context.params.slug as string;
 
-  try {
-    const etablissement = await getEtablissementWithLatLongFromSlug(siret);
-    return {
-      props: {
-        etablissement,
-      },
-    };
-  } catch (e: any) {
-    return { props: { etablissement: { estActif: null, siret } } };
-  }
-};
+    try {
+      const etablissement = await getEtablissementWithLatLongFromSlug(siret);
+      return {
+        props: {
+          etablissement,
+        },
+      };
+    } catch (e: any) {
+      return { props: { etablissement: { estActif: null, siret } } };
+    }
+  })
+);
 
 export default EtablissementMapPage;

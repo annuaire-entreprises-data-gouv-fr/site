@@ -17,8 +17,9 @@ const Login: React.FC = () => {
     >
       <h1>Accédez à vos données d’entreprise</h1>
       <p>
-        En quelques clics, retrouvez toutes les données, tous les documents et
-        tous les justificatifs détenus par l’administration.
+        En quelques clics, retrouvez les données, documents et justificatifs
+        détenus par l’administration sur une entreprise dont vous êtes
+        dirigeant(e).
       </p>
       <p>
         <h3>Comment ça marche ?</h3>

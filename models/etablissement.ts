@@ -47,7 +47,7 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
       return createNonDiffusibleEtablissement(siret);
     }
     if (e instanceof HttpNotFound) {
-      throw new SiretNotFoundError(`Siret ${siret} was not found`);
+      throw new SiretNotFoundError(siret);
     }
 
     logFirstSireneInseefailed({ siret, details: e.message });
@@ -66,8 +66,7 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
         logSecondSireneInseefailed({ siret, details: e.message });
 
         // Siret was not found in both API, return a 404
-        const message = `Siret ${siret} was not found in both siren API`;
-        throw new SiretNotFoundError(message);
+        throw new SiretNotFoundError(siret);
       }
     }
   }
@@ -117,7 +116,7 @@ const getEtablissementWithUniteLegaleFromSlugForGoodBot = async (
     return { etablissement, uniteLegale };
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
-      throw new SiretNotFoundError(`Siret ${slug} was not found`);
+      throw new SiretNotFoundError(slug);
     }
     throw e;
   }

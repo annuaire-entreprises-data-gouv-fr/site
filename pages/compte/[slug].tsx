@@ -4,7 +4,6 @@ import { GetServerSideProps } from 'next';
 import { IUniteLegale } from '../../models';
 import { FICHE } from '../../components/title-section';
 
-import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import PageEntreprise from '../../layouts/page-entreprise';
 import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
@@ -14,6 +13,8 @@ import DashboardInformationsGenerales from '../../components/unite-legale-dashbo
 import DashboardJustificatifs from '../../components/unite-legale-dashboard/justificatifs';
 import DashboardAttestations from '../../components/unite-legale-dashboard/attestations';
 import DashboardJuridiques from '../../components/unite-legale-dashboard/juridiques';
+import { withOnlyDirigeant } from '../../hocs/with-only-dirigeant';
+import { withError } from '../../hocs/with-error';
 
 interface IProps extends IPropsWithSession {
   uniteLegale: IUniteLegale;
@@ -43,20 +44,20 @@ const AccountPage: React.FC<IProps> = ({ uniteLegale, session }) => (
   </PageEntreprise>
 );
 
-export const getServerSideProps: GetServerSideProps = withSession(
-  async (context) => {
-    //@ts-ignore
-    const siren = context.params.slug as string;
-    try {
+export const getServerSideProps: GetServerSideProps = withError(
+  withOnlyDirigeant(
+    withSession(async (context) => {
+      //@ts-ignore
+      const siren = context.params.slug as string;
+      const uniteLegale = await getUniteLegaleFromSlug(siren);
+
       return {
         props: {
-          uniteLegale: await getUniteLegaleFromSlug(siren),
+          uniteLegale,
         },
       };
-    } catch (e: any) {
-      return redirectIfIssueWithSiren(e, siren, context.req);
-    }
-  }
+    })
+  )
 );
 
 export default AccountPage;

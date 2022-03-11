@@ -9,11 +9,11 @@ import {
   getEtablissementWithUniteLegaleFromSlug,
   getEtablissementWithUniteLegaleFromSlugForGoodBot,
 } from '../../models/etablissement';
-import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
 import isUserAgentABot from '../../utils/user-agent';
 import PageEntreprise from '../../layouts/page-entreprise';
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
+import { withError } from '../../hocs/with-error';
 
 interface IProps extends IPropsWithSession {
   etablissement: IEtablissement;
@@ -52,8 +52,8 @@ const EtablissementPage: React.FC<IProps> = ({
   </PageEntreprise>
 );
 
-export const getServerSideProps: GetServerSideProps = withSession(
-  async (context) => {
+export const getServerSideProps: GetServerSideProps = withError(
+  withSession(async (context) => {
     //@ts-ignore
     const siret = context.params.slug as string;
 
@@ -61,21 +61,17 @@ export const getServerSideProps: GetServerSideProps = withSession(
       .forceSireneOuverteForDebug || '') as string;
     const isABot = isUserAgentABot(context.req);
 
-    try {
-      const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
-      const etablissementWithUniteLegale = forceUseOfSireneOuverte
-        ? await getEtablissementWithUniteLegaleFromSlugForGoodBot(siret)
-        : await getEtablissementWithUniteLegaleFromSlug(siret);
+    const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
+    const etablissementWithUniteLegale = forceUseOfSireneOuverte
+      ? await getEtablissementWithUniteLegaleFromSlugForGoodBot(siret)
+      : await getEtablissementWithUniteLegaleFromSlug(siret);
 
-      return {
-        props: {
-          ...etablissementWithUniteLegale,
-        },
-      };
-    } catch (e: any) {
-      return redirectIfIssueWithSiretOrSiren(e, siret, context.req);
-    }
-  }
+    return {
+      props: {
+        ...etablissementWithUniteLegale,
+      },
+    };
+  })
 );
 
 export default EtablissementPage;

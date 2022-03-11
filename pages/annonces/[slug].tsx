@@ -2,7 +2,6 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { FICHE } from '../../components/title-section';
 
-import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import { IAnnoncesBodacc, IAnnoncesJO } from '../../models/annonces';
 import { IUniteLegale } from '../../models';
 import { IAPINotRespondingError } from '../../models/api-not-responding';
@@ -11,6 +10,7 @@ import AnnoncesBodaccSection from '../../components/annonces-section/bodacc';
 import AnnoncesJOSection from '../../components/annonces-section/jo';
 import PageEntreprise from '../../layouts/page-entreprise';
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
+import { withError } from '../../hocs/with-error';
 
 interface IProps extends IPropsWithSession {
   uniteLegale: IUniteLegale;
@@ -31,25 +31,21 @@ const Annonces: React.FC<IProps> = ({ uniteLegale, bodacc, jo, session }) => (
   </PageEntreprise>
 );
 
-export const getServerSideProps: GetServerSideProps = withSession(
-  async (context) => {
+export const getServerSideProps: GetServerSideProps = withError(
+  withSession(async (context) => {
     //@ts-ignore
     const siren = context.params.slug as string;
 
-    try {
-      const { uniteLegale, bodacc, jo } = await getAnnoncesFromSlug(siren);
+    const { uniteLegale, bodacc, jo } = await getAnnoncesFromSlug(siren);
 
-      return {
-        props: {
-          uniteLegale,
-          bodacc,
-          jo,
-        },
-      };
-    } catch (e: any) {
-      return redirectIfIssueWithSiren(e, siren, context.req);
-    }
-  }
+    return {
+      props: {
+        uniteLegale,
+        bodacc,
+        jo,
+      },
+    };
+  })
 );
 
 export default Annonces;

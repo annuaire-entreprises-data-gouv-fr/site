@@ -15,11 +15,11 @@ import {
 } from '../../models/unite-legale';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import AssociationSection from '../../components/association-section';
-import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import isUserAgentABot from '../../utils/user-agent';
 import PageEntreprise from '../../layouts/page-entreprise';
 import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
+import { withError } from '../../hocs/with-error';
 
 interface IProps extends IPropsWithSession {
   uniteLegale: IUniteLegale;
@@ -76,8 +76,8 @@ const extractSiren = (slug: string) => {
   return '';
 };
 
-export const getServerSideProps: GetServerSideProps = withSession(
-  async (context) => {
+export const getServerSideProps: GetServerSideProps = withError(
+  withSession(async (context) => {
     //@ts-ignore
     const slug = context.params.slug as string;
     const pageParam = (context.query.page || '') as string;
@@ -100,22 +100,18 @@ export const getServerSideProps: GetServerSideProps = withSession(
       .forceSireneOuverteForDebug || '') as string;
     const isABot = isUserAgentABot(context.req);
 
-    try {
-      const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
+    const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
 
-      const uniteLegale = forceUseOfSireneOuverte
-        ? await getUniteLegaleFromSlugForGoodBot(siren, page)
-        : await getUniteLegaleWithRNAFromSlug(siren, page);
+    const uniteLegale = forceUseOfSireneOuverte
+      ? await getUniteLegaleFromSlugForGoodBot(siren, page)
+      : await getUniteLegaleWithRNAFromSlug(siren, page);
 
-      return {
-        props: {
-          uniteLegale,
-        },
-      };
-    } catch (e: any) {
-      return redirectIfIssueWithSiren(e, siren, context.req);
-    }
-  }
+    return {
+      props: {
+        uniteLegale,
+      },
+    };
+  })
 );
 
 export default UniteLegalePage;

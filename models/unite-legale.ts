@@ -68,7 +68,7 @@ const getUniteLegale = async (
     return await fetchUniteLegaleFromInsee(siren, page);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
-      throw new SirenNotFoundError(`Siren ${siren} was not found`);
+      throw new SirenNotFoundError(siren);
     }
     logFirstSireneInseefailed({ siren, details: e.message || e });
 
@@ -87,8 +87,7 @@ const getUniteLegale = async (
         logSecondSireneInseefailed({ siren, details: e.message || e });
 
         // Siren was not found in both API, return a 404
-        const message = `Siren ${siren} was not found in both siren API`;
-        throw new SirenNotFoundError(message);
+        throw new SirenNotFoundError(siren);
       }
     }
   }
@@ -115,7 +114,7 @@ const getUniteLegaleFromSlugForGoodBot = async (
         return await fetchUniteLegaleFromInsee(siren, page);
       } catch (e: any) {
         if (e instanceof HttpNotFound) {
-          throw new SirenNotFoundError(`Siren ${siren} was not found`);
+          throw new SirenNotFoundError(siren);
         }
       }
     }

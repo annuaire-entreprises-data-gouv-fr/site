@@ -4,7 +4,6 @@ import { GetServerSideProps } from 'next';
 import { FICHE } from '../../components/title-section';
 
 import { NonDiffusibleSection } from '../../components/non-diffusible';
-import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import {
   getDirigeantsWithUniteLegaleFromSlug,
   IDirigeants,
@@ -16,6 +15,7 @@ import DirigeantSummary from '../../components/dirigeants-section/summary';
 import BreakPageForPrint from '../../components/print-break-page';
 import PageEntreprise from '../../layouts/page-entreprise';
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
+import { withError } from '../../hocs/with-error';
 
 interface IProps extends IPropsWithSession, IDirigeants {}
 
@@ -67,18 +67,14 @@ const DirigeantsPage: React.FC<IProps> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSession(
-  async (context) => {
+export const getServerSideProps: GetServerSideProps = withError(
+  withSession(async (context) => {
     //@ts-ignore
     const slug = context.params.slug as string;
-    try {
-      return {
-        props: await getDirigeantsWithUniteLegaleFromSlug(slug),
-      };
-    } catch (e: any) {
-      return redirectIfIssueWithSiren(e, slug, context.req);
-    }
-  }
+    return {
+      props: await getDirigeantsWithUniteLegaleFromSlug(slug),
+    };
+  })
 );
 
 export default DirigeantsPage;

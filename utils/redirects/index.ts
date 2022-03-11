@@ -1,4 +1,5 @@
 import { ServerResponse } from 'http';
+import { hasSirenFormat, hasSiretFormat } from '../helpers/siren-and-siret';
 import logErrorInSentry, { IScope, logWarningInSentry } from '../sentry';
 
 /**
@@ -79,6 +80,23 @@ export const redirectSirenOrSiretIntrouvable = (
   return {
     redirect: {
       destination: `/erreur/introuvable?q=${sirenOrSiret}`,
+      permanent: false,
+    },
+  };
+};
+
+export const redirectIfSiretOrSiren = (siretOrSiren: string) => {
+  let destination;
+  if (hasSiretFormat(siretOrSiren)) {
+    destination = `/etablissement/${siretOrSiren}`;
+  } else if (hasSirenFormat(siretOrSiren)) {
+    destination = `/entreprise/${siretOrSiren}`;
+  } else {
+    throw new Error(`${siretOrSiren} is neither a siret or a siren`);
+  }
+  return {
+    redirect: {
+      destination,
       permanent: false,
     },
   };

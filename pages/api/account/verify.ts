@@ -54,7 +54,7 @@ export default nextConnect<NextApiRequest, NextApiResponse>().get(
       } catch (verificationError) {
         if (verificationError instanceof HttpUnauthorizedError) {
           const errorWhy = verificationError.message;
-          const url = `/compte/echec-habilitation/${siren}${
+          const url = `/connexion/echec-habilitation/${siren}${
             errorWhy ? `?why=${errorWhy}` : ''
           }`;
 
@@ -63,7 +63,7 @@ export default nextConnect<NextApiRequest, NextApiResponse>().get(
         throw verificationError;
       }
     } catch (e) {
-      return res.redirect(`/compte/echec-connexion`);
+      return res.redirect(`/connexion/echec-connexion`);
     }
   }
 );
