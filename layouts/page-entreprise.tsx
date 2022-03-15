@@ -82,7 +82,7 @@ const PageEntreprise: React.FC<IProps> = ({
               <ButtonLink
                 alt
                 small
-                to={`/connexion/dirigeant?siren=${uniteLegale.siren}`}
+                to={`/connexion/dirigeant?siren=${uniteLegale.siren}&page=compte`}
               >
                 <span className="fr-link fr-fi-account-fill"></span>
                 C’est mon entreprise, je me connecte !

@@ -14,8 +14,6 @@ export function withOnlyDirigeant(
     const siren = verifySiren(slug || '');
     const isOwner = isCompanyOwner(session, siren);
 
-    console.log(serverSideProps);
-
     if (isOwner) {
       return serverSideProps;
     }

@@ -71,7 +71,7 @@ const AnnoncesBodaccSection: React.FC<{
             body={bodacc.annonces.map((annonce) => [
               /*eslint-disable*/
               <b>{formatDate(annonce.datePublication)}</b>,
-              <Tag>n° {annonce.numeroAnnonce}</Tag>,
+              <Tag>n°&nbsp;{annonce.numeroAnnonce}</Tag>,
               <div className="annonce">
                 <b>{annonce.titre}</b>
                 <div className="font-small">

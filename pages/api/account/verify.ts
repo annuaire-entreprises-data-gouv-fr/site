@@ -46,8 +46,8 @@ export default nextConnect<NextApiRequest, NextApiResponse>().get(
           },
         ];
 
-        const redirectTo = `${
-          session?.navigation?.pageFrom || '/compte/'
+        const redirectTo = `/${
+          session?.navigation?.pageFrom || 'compte'
         }/${sirenFrom}`;
 
         return res.redirect(redirectTo);

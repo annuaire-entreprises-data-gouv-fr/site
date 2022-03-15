@@ -8,7 +8,7 @@ interface ISectionProps {
 
 export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
   <>
-    <table id={id}>
+    <table id={id} className="full-table">
       <thead>
         <tr>
           {head.map((cell) => (

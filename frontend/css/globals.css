@@ -24,6 +24,10 @@ h3,
   /* preserve whitespace */
   white-space: pre-wrap;
 }
+:not(table.full-table) {
+  /* Do not break word on full table */
+  word-break: initial;
+}
 
 .layout-center {
   display: flex;
