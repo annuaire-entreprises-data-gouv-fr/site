@@ -23,7 +23,7 @@ const Login: React.FC = () => {
       </p>
       <p>
         <h3>Comment ça marche ?</h3>
-        FranceConnect nous fourni votre état civil, et l’
+        FranceConnect nous fournit votre état civil, et l’
         <INSEE /> nous confirme que vous êtes bien dirigeant(e) de l’entreprise.
       </p>
       <div className="france-connect-container">

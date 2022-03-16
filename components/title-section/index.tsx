@@ -29,7 +29,7 @@ export const menu = [
     private: false,
   },
   {
-    title: 'Justificatifs',
+    title: 'Justificatifs d’immatriculation',
     type: FICHE.JUSTIFICATIFS,
     path: (siren: string) => `/justificatif/${siren}`,
     private: false,
@@ -48,6 +48,12 @@ export const menu = [
   },
   {
     title: 'Documents',
+    type: FICHE.DOCUMENTS,
+    path: (siren: string) => `/documents/${siren}`,
+    private: false,
+  },
+  {
+    title: 'Conventions',
     type: FICHE.DIVERS,
     path: (siren: string) => `/divers/${siren}`,
     private: false,

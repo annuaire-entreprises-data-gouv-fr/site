@@ -8,6 +8,7 @@ import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
 import { cma, inpi, insee } from '../administrations/logos';
 import Warning from '../alerts/warning';
 import DataSourceTooltip from '../information-tooltip/data-source-tooltip';
+import SectionTitle from '../section-title';
 
 interface IAdministrationsLogos {
   [key: string]: JSX.Element;
@@ -43,7 +44,7 @@ export const Section: React.FC<ISectionProps> = ({
   return (
     <>
       <div className="section-container" id={id}>
-        <h2>{title}</h2>
+        <SectionTitle>{title}</SectionTitle>
         {isOld && lastModified && (
           <Warning>
             Ces données n’ont pas été mises à jour depuis plus de deux mois.
@@ -80,17 +81,7 @@ export const Section: React.FC<ISectionProps> = ({
           padding: 1rem;
           width: ${width}%;
         }
-        .section-container > h2 {
-          margin-top: 0;
-          display: inline-block;
-          font-size: 1.1rem;
-          line-height: 1.8rem;
-          background-color: #dfdff1;
-          color: #000091;
-          padding: 0 7px;
-          border-radius: 2px;
-          max-width: calc(100% - 40px);
-        }
+
         .data-source-tooltip-wrapper {
           display: flex;
           justify-content: flex-end;

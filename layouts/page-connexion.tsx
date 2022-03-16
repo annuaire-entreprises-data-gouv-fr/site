@@ -36,6 +36,8 @@ const PageConnexion: React.FC<IProps> = ({
         .connect-container {
           display: flex;
           position: relative;
+          align-items: stretch;
+          min-height: 450px;
         }
         .connect-container > div {
           padding: 30px;
@@ -62,6 +64,9 @@ const PageConnexion: React.FC<IProps> = ({
         .img-container > div {
           max-width: 400px;
         }
+        div.body {
+          margin-bottom: 100px;
+        }
 
         @media only screen and (min-width: 1px) and (max-width: 699px) {
           .connect-container {
@@ -75,6 +80,9 @@ const PageConnexion: React.FC<IProps> = ({
 
           .img-container:before {
             display: none;
+          }
+          div.body {
+            margin-bottom: 0;
           }
         }
       `}</style>

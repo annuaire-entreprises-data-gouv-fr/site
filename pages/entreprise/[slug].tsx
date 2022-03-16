@@ -20,6 +20,7 @@ import PageEntreprise from '../../layouts/page-entreprise';
 import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
 import { withError } from '../../hocs/with-error';
+import UsefulShortcuts from '../../components/useful-shortcuts';
 
 interface IProps extends IPropsWithSession {
   uniteLegale: IUniteLegale;
@@ -47,6 +48,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale, session }) => (
         {uniteLegale.association && uniteLegale.association.id && (
           <AssociationSection uniteLegale={uniteLegale} />
         )}
+        <UsefulShortcuts uniteLegale={uniteLegale} />
         {uniteLegale.siege && (
           <EtablissementSection
             uniteLegale={uniteLegale}
