@@ -14,6 +14,7 @@ import isUserAgentABot from '../../utils/user-agent';
 import PageEntreprise from '../../layouts/page-entreprise';
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
 import { withError } from '../../hocs/with-error';
+import { shouldNotIndex } from '../../utils/helpers/checks';
 
 interface IProps extends IPropsWithSession {
   etablissement: IEtablissement;
@@ -30,6 +31,7 @@ const EtablissementPage: React.FC<IProps> = ({
     uniteLegale={uniteLegale}
     currentTab={FICHE.INFORMATION}
     session={session}
+    noIndex={shouldNotIndex(uniteLegale)}
   >
     <TitleEtablissementWithDenomination
       uniteLegale={uniteLegale}

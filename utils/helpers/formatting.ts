@@ -173,10 +173,6 @@ export const formatFirstNames = (firstNames: string[], nameCount = 0) => {
   return formatted.join(', ');
 };
 
-export const formatName = (nomPatronymique = '', nomUsage = '') => {
-  return capitalize(nomUsage || nomPatronymique || '');
-};
-
 export const formatNameFull = (nomPatronymique = '', nomUsage = '') => {
   if (nomUsage && nomPatronymique) {
     return `${capitalize(nomUsage)} (${capitalize(nomPatronymique)})`;

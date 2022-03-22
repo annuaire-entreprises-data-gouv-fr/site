@@ -21,6 +21,7 @@ import StructuredDataBreadcrumb from '../../components/structured-data/breadcrum
 import { IPropsWithSession, withSession } from '../../hocs/with-session';
 import { withError } from '../../hocs/with-error';
 import UsefulShortcuts from '../../components/useful-shortcuts';
+import { shouldNotIndex } from '../../utils/helpers/checks';
 
 interface IProps extends IPropsWithSession {
   uniteLegale: IUniteLegale;
@@ -34,12 +35,10 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale, session }) => (
       `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`
     }
     description={`Toutes les informations officielles sur ${uniteLegale.nomComplet} :  Siren, Siret, NIC, APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, conventions collectives...`}
-    noIndex={
-      uniteLegale.estEntrepreneurIndividuel && uniteLegale.estActive === false
-    }
     uniteLegale={uniteLegale}
     currentTab={FICHE.INFORMATION}
     session={session}
+    noIndex={shouldNotIndex(uniteLegale)}
   >
     <StructuredDataBreadcrumb siren={uniteLegale.siren} />
     {uniteLegale.estDiffusible ? (

@@ -18,10 +18,13 @@ const aggregateEventsByMonths = (
   const months = {} as { [key: string]: { nps: number; count: number } };
 
   matomoEventStats.forEach((stat) => {
+    if (stat.label.indexOf('mood=') === -1) {
+      return;
+    }
+
     const responses = stat.label.split('&');
     const mood = parseInt(responses[0].replace('mood=', ''), 10);
     const date = new Date(responses[3].replace('date=', ''));
-
     const monthLabel = getMonthLabelFromDate(date);
 
     // migration from 10-based nps to 5 based on 2022-01-30, ended on 2022-02-15

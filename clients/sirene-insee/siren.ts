@@ -9,7 +9,6 @@ import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers
 import {
   capitalize,
   formatFirstNames,
-  formatName,
   formatNameFull,
 } from '../../utils/helpers/formatting';
 import { Siren } from '../../utils/helpers/siren-and-siret';
@@ -141,7 +140,7 @@ const mapToDomainObject = (
 
   const nomComplet = `${
     capitalize(denominationUniteLegale) ||
-    `${formatFirstNames([prenomUsuelUniteLegale])} ${formatName(
+    `${formatFirstNames([prenomUsuelUniteLegale])} ${formatNameFull(
       nomUniteLegale,
       nomUsageUniteLegale
     )}` ||
