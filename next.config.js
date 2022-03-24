@@ -6,6 +6,11 @@ module.exports = {
         destination: '/api/account/callback',
         permanent: true,
       },
+      {
+        source: '/logout',
+        destination: '/api/account/logout/callback',
+        permanent: true,
+      },
     ];
   },
   webpack: function (config) {

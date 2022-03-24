@@ -9,12 +9,15 @@ const issuer = new Issuer({
   token_endpoint: issuerUrl + routes.franceConnect.token,
   userinfo_endpoint: issuerUrl + routes.franceConnect.userInfo,
   token_endpoint_auth_methods_supported: ['client_secret_post'],
+  end_session_endpoint: issuerUrl + routes.franceConnect.logout,
 });
-const client = new issuer.Client({
+
+export const client = new issuer.Client({
   client_id: process.env.FC_CLIENT_ID as string,
   client_secret: process.env.FC_CLIENT_SECRET as string,
   redirect_uris: [process.env.FC_REDIRECT_URI as string],
   id_token_signed_response_alg: 'HS256',
+  post_logout_redirect_uris: ['http://localhost:3000/logout'],
 });
 passport.use(
   'franceConnect',

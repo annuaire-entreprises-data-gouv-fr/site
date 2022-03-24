@@ -1,5 +1,5 @@
-import { PassportHandler } from '.';
-import { getSession } from '../../../utils/session';
+import { PassportHandler } from '..';
+import { getSession } from '../../../../utils/session';
 
 export default PassportHandler().get(async (req, res, next) => {
   // clean session
