@@ -69,7 +69,6 @@ const ResultsList: React.FC<IProps> = ({ results }) => (
       @media only screen and (min-width: 1px) and (max-width: 900px) {
         .results-wrapper {
           flex-direction: column-reverse;
-          padding-top: 20px;
         }
       }
     `}</style>

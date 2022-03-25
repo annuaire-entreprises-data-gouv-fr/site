@@ -39,6 +39,6 @@ export default nextConnect<NextApiRequest, NextApiResponse>().get(
   async (req, res) => {
     // we choose not to await as we dont want to stall the request if any logEvent fails
     logSearchNps(req);
-    return res.redirect('/formulaire/merci');
+    res.status(200).end();
   }
 );

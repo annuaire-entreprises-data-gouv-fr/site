@@ -7,6 +7,14 @@ import React from 'react';
 
 export const ResultsFeedback: React.FC<{}> = () => (
   <div id="results-feedbacks">
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `
+              <span class="close" onclick="window.closeModal('results-feedbacks')">
+              ✕
+              </span>`,
+      }}
+    />
     👋 Bonjour ! On aimerait bien savoir : avez-vous trouvé la structure que
     vous recherchez ?
     <br />
@@ -27,10 +35,20 @@ export const ResultsFeedback: React.FC<{}> = () => (
         width: 100%;
         max-width: 300px;
         background-color: #dfdff1;
-        border-radius: 6px;
+        border-radius: 3px;
         color: #000091;
         padding: 10px 20px 20px;
         display: none;
+        position: relative;
+      }
+
+      #results-feedbacks span.close {
+        font-weight: bold;
+        position: absolute;
+        right: 5px;
+        top: 0px;
+        padding: 10px;
+        cursor: pointer;
       }
 
       #results-feedbacks button {
@@ -43,6 +61,7 @@ export const ResultsFeedback: React.FC<{}> = () => (
 
       @media only screen and (min-width: 1px) and (max-width: 900px) {
         #results-feedbacks {
+          margin-top: 20px;
           max-width: 100%;
         }
       }
