@@ -17,7 +17,7 @@ const FeedBack: React.FC = () => {
           <i>(temps estimé : 1 min)</i>
         </div>
         <div className="content-container text-wrapper">
-          <form action="/api/form" method="post">
+          <form action="/api/feedback/nps" method="post">
             <fieldset>
               <legend>
                 <h2>
