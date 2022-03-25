@@ -65,6 +65,13 @@ const ResultsList: React.FC<IProps> = ({ results }) => (
         font-size: 0.9rem;
         color: rgb(112, 117, 122);
       }
+
+      @media only screen and (min-width: 1px) and (max-width: 900px) {
+        .results-wrapper {
+          flex-direction: column-reverse;
+          padding-top: 20px;
+        }
+      }
     `}</style>
   </div>
 );

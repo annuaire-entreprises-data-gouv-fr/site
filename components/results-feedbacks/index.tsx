@@ -40,6 +40,12 @@ export const ResultsFeedback: React.FC<{}> = () => (
         font-weight: bold;
         text-decoration: underline;
       }
+
+      @media only screen and (min-width: 1px) and (max-width: 900px) {
+        #results-feedbacks {
+          max-width: 100%;
+        }
+      }
     `}</style>
   </div>
 );
