@@ -19,7 +19,6 @@ interface ISireneOuverteUniteLegaleResultat {
   activite_principale: string;
   etat_administratif_etablissement: string;
   etat_administratif_unite_legale: string;
-  etatAdministratifUniteLegale: string;
   latitude: string;
   longitude: string;
   nom_complet: string;
@@ -88,7 +87,7 @@ const mapToDomainObject = (
       return {
         siren: result.siren,
         siret: result.siret,
-        estActive: result.etatAdministratifUniteLegale === 'A',
+        estActive: result.etat_administratif_unite_legale === 'A',
         adresse: formatAdresse(
           '',
           result.numero_voie,
