@@ -12,7 +12,7 @@ export const WeNeedYouModal: React.FC<{}> = () => (
         className="background-close-modal"
         dangerouslySetInnerHTML={{
           __html: `
-                <div onclick="window.closeWeNeedYouModal()" style="width:100%; height:100%; z-index:99"></div>
+                <div onclick="window.closeModal('we-need-you-modal')" style="width:100%; height:100%; z-index:99"></div>
           `,
         }}
       />
@@ -36,7 +36,7 @@ export const WeNeedYouModal: React.FC<{}> = () => (
           className="close-modal"
           dangerouslySetInnerHTML={{
             __html: `
-            <button onclick="window.closeWeNeedYouModal()" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
+            <button onclick="window.closeModal('we-need-you-modal')" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
             <b>Ne plus afficher ce message ✕</b>
             </button>
             `,

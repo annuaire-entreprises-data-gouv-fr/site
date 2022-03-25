@@ -92,6 +92,7 @@ export const mapSireneOuverteEtablissementToDomainObject = (
     dateDebutActivite: etablissement.date_debut_activite,
     dateFermeture: !estActif ? etablissement.date_debut_activite : null,
     adresse: formatAdresse(
+      '',
       etablissement.numero_voie,
       etablissement.indice_repetition,
       etablissement.type_voie,

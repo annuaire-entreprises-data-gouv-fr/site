@@ -149,6 +149,7 @@ const mapToDomainObject = (
     dateDerniereMiseAJour: date_mise_a_jour,
     nombreEtablissements: nombre_etablissements,
     adresse: formatAdresse(
+      '',
       numero_voie,
       indice_repetition,
       type_voie,

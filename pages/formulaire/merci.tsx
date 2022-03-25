@@ -10,6 +10,9 @@ const Thanks: React.FC = () => {
         <div className="layout-center">
           <h1>Merci beaucoup 🙂 !</h1>
         </div>
+        <div className="layout-center">
+          <h3>Nous avons bien pris en compte votre retour</h3>
+        </div>
         <br />
         <br />
         <div className="layout-center">

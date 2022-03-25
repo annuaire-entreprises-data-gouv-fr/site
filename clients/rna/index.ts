@@ -75,6 +75,7 @@ export const mapToDomainObject = (
     nomComplet: titre,
     objet,
     adresse: formatAdresse(
+      '',
       adresse_numero_voie,
       adresse_repetition,
       adresse_type_voie,

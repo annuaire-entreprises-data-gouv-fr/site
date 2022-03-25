@@ -50,6 +50,7 @@ interface IInseeEtablissement {
     activitePrincipaleEtablissement: string;
   }[];
   adresseEtablissement: {
+    complementAdresseEtablissement: string;
     numeroVoieEtablissement: string;
     indiceRepetitionEtablissement: string;
     typeVoieEtablissement: string;
@@ -217,6 +218,7 @@ export const mapEtablissementToDomainObject = (
       anneeEffectifsEtablissement
     ),
     adresse: formatAdresse(
+      adresseEtablissement.complementAdresseEtablissement,
       adresseEtablissement.numeroVoieEtablissement,
       adresseEtablissement.indiceRepetitionEtablissement,
       adresseEtablissement.typeVoieEtablissement,

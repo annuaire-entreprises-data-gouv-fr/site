@@ -8,7 +8,7 @@ export const NPSBanner: React.FC<{}> = () => (
         <div
           dangerouslySetInnerHTML={{
             __html: `
-              <a onclick="window.closeNPSModal()"  href="/formulaire" target="_blank">
+              <a onclick="window.closeModal('nps-modal')"  href="/formulaire" target="_blank">
                 👍👎 Quel est votre avis sur ce site ?
               </a>`,
           }}
@@ -16,7 +16,7 @@ export const NPSBanner: React.FC<{}> = () => (
         <div
           dangerouslySetInnerHTML={{
             __html: `
-              <button onclick="window.closeNPSModal()" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
+              <button onclick="window.closeModal('nps-modal')" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
                 <b>Ne plus afficher ce message ✕</b>
               </button>
         `,
