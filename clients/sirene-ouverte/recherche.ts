@@ -90,6 +90,7 @@ const mapToDomainObject = (
         siret: result.siret,
         estActive: result.etatAdministratifUniteLegale === 'A',
         adresse: formatAdresse(
+          '',
           result.numero_voie,
           result.indice_repetition,
           result.type_voie,
