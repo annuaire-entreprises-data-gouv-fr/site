@@ -119,6 +119,7 @@ const mapToDomainObject = (
     dateDebutActivite: ent_act_date_debut_activite || '',
     libelleNatureJuridique: gest_label_forme_juridique || '',
     adresse: formatAdresse(
+      '',
       ent_adr_numero_voie || '',
       ent_adr_indice_repetition || '',
       ent_adr_type_voie || '',
