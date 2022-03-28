@@ -21,7 +21,7 @@
       fetch(`/api/feedback/search-nps?value=${value}&searchTerm=${searchTerm}`);
     } catch {}
 
-    // window.closeModal('search-feedback');
+    window.closeModal('search-feedback');
   };
 })();
 
