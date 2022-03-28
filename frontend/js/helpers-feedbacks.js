@@ -16,12 +16,12 @@
     window.localStorage.setItem(modalId, true);
   };
 
-  window.logResearchFeedback = function (value) {
+  window.logResearchFeedback = function (value, searchTerm) {
     try {
-      fetch(`/api/feedback/search-nps?value=${value}`);
+      fetch(`/api/feedback/search-nps?value=${value}&searchTerm=${searchTerm}`);
     } catch {}
 
-    window.closeModal('results-feedbacks');
+    window.closeModal('search-feedback');
   };
 })();
 
@@ -49,5 +49,5 @@ function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
 }
 
 triggerModal('nps-modal', 2, '/');
-triggerModal('results-feedbacks', 2, '/rechercher');
+triggerModal('search-feedback', 2, '/rechercher');
 // triggerModal('we-need-you-modal');

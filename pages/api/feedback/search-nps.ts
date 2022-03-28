@@ -10,19 +10,22 @@ const logSearchNps = async (req: NextApiRequest) => {
     const today = new Date();
 
     const hasFound = req.query.value === '1';
+    const query = req.query.searchTerm;
 
     await logEventInMatomo(
       'feedback:search-nps',
-      req.body['value'],
-      `value=${req.body['value']}&date=${today.toISOString().split('T')[0]}`,
+      hasFound.toString(),
+      `value=${hasFound}&date=${
+        today.toISOString().split('T')[0]
+      }&query=${query}`,
       'nps'
     );
 
     const data = {
       username: 'clippy',
-      text: `Feedback : ${
-        hasFound ? '1 recherche réussie 🤩 !' : '1 recherche infructueuse 😭 !'
-      }`,
+      text: `Recherche : ${
+        hasFound ? 'réussie 🤩 !' : 'infructueuse 😭 !'
+      } \nMot-clef(s) : ${query}`,
     };
 
     await httpClient({

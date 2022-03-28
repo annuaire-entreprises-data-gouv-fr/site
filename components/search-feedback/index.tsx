@@ -1,16 +1,18 @@
 import React from 'react';
+import { serializeForClientScript } from '../../utils/helpers/formatting';
 
 /**
  * This component get hydrated in frontend with frontend bundle
  * @returns
  */
-
-export const ResultsFeedback: React.FC<{}> = () => (
-  <div id="results-feedbacks">
+export const SearchFeedback: React.FC<{ searchTerm: string }> = ({
+  searchTerm = '',
+}) => (
+  <div id="search-feedback">
     <div
       dangerouslySetInnerHTML={{
         __html: `
-              <span class="close" onclick="window.closeModal('results-feedbacks')">
+              <span class="close" onclick="window.closeModal('search-feedback')">
               ✕
               </span>`,
       }}
@@ -22,16 +24,20 @@ export const ResultsFeedback: React.FC<{}> = () => (
     <div
       dangerouslySetInnerHTML={{
         __html: `
-              <button onclick="window.logResearchFeedback(1)">
+              <button onclick="window.logResearchFeedback(1, '${serializeForClientScript(
+                searchTerm
+              )}')">
                 Oui
               </button>/
-              <button onclick="window.logResearchFeedback(0)">
+              <button onclick="window.logResearchFeedback(0, '${serializeForClientScript(
+                searchTerm
+              )}')">
                 Non
               </button>`,
       }}
     />
     <style global jsx>{`
-      #results-feedbacks {
+      #search-feedback {
         width: 100%;
         max-width: 300px;
         background-color: #dfdff1;
@@ -42,7 +48,7 @@ export const ResultsFeedback: React.FC<{}> = () => (
         position: relative;
       }
 
-      #results-feedbacks span.close {
+      #search-feedback span.close {
         font-weight: bold;
         position: absolute;
         right: 5px;
@@ -51,7 +57,7 @@ export const ResultsFeedback: React.FC<{}> = () => (
         cursor: pointer;
       }
 
-      #results-feedbacks button {
+      #search-feedback button {
         background: none;
         color: inherit;
         font-size: inherit;
@@ -60,7 +66,7 @@ export const ResultsFeedback: React.FC<{}> = () => (
       }
 
       @media only screen and (min-width: 1px) and (max-width: 900px) {
-        #results-feedbacks {
+        #search-feedback {
           margin-top: 20px;
           max-width: 100%;
         }

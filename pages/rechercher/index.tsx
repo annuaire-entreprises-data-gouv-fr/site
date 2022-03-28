@@ -4,7 +4,10 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import ResultsList from '../../components/results-list';
 import PageCounter from '../../components/results-page-counter';
-import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
+import {
+  parseIntWithDefaultValue,
+  serializeForClientScript,
+} from '../../utils/helpers/formatting';
 import search, { ISearchResults } from '../../models/search';
 import ResultsHeader from '../../components/results-header';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
@@ -41,7 +44,11 @@ const SearchResultPage: React.FC<IProps> = ({
 
       {results && (
         <div>
-          <ResultsList results={results} />
+          <ResultsList
+            results={results}
+            withFeedback={true}
+            searchTerm={searchTerm}
+          />
           <PageCounter
             totalPages={pageCount}
             querySuffix={`terme=${searchTerm}`}
@@ -61,7 +68,7 @@ const SearchResultPage: React.FC<IProps> = ({
                         window._paq.push([
                           'trackEvent',
                           'research:click',
-                          '${searchTerm}',
+                          '${serializeForClientScript(searchTerm)}',
                           'selectedSiren='+siren+'-position='+position+'-resultCount='+${resultCount},
                         ]);
                       }
