@@ -13,8 +13,8 @@ const logSearchNps = async (req: NextApiRequest) => {
 
     await logEventInMatomo(
       'feedback:search-nps',
-      req.body['value'],
-      `value=${req.body['value']}&date=${today.toISOString().split('T')[0]}`,
+      hasFound.toString(),
+      `value=${hasFound}&date=${today.toISOString().split('T')[0]}`,
       'nps'
     );
 
