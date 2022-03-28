@@ -19,14 +19,14 @@ interface IBANResponse {
 const fetchBanGeoLoc = async (
   etablissement: IEtablissement
 ): Promise<IGeoLoc> => {
-  const route = `${routes.ban}${etablissement.adresse.replace(' ', '+')}`;
+  const route = `${routes.ban}${etablissement.adresse.replaceAll(' ', '+')}`;
   const response = await httpGet(route);
 
   return mapToDomainObject(response.data as IBANResponse);
 };
 
 const reverseGeoLoc = async (adresse: string): Promise<IGeoLoc> => {
-  const route = `${routes.ban}${adresse.replace(' ', '+')}`;
+  const route = `${routes.ban}${adresse.replaceAll(' ', '+')}`;
   const response = await httpGet(route);
 
   return mapToDomainObject(response.data as IBANResponse);
