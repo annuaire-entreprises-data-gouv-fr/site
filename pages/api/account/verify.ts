@@ -16,6 +16,7 @@ export default nextConnect<NextApiRequest, NextApiResponse>().get(
     try {
       const session = (await getSession(req, res)) as ISession;
 
+      throw new Error('should use passport.authneticate ?');
       if (!session.passport) {
         throw new HttpServerError(500, 'Passport was not found in session');
       }
