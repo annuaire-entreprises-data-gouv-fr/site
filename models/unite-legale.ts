@@ -76,7 +76,6 @@ const getUniteLegale = async (
       // in case sirene INSEE 429 or 500, fallback on Siren Etalab
       return await getUniteLegaleSireneOuverte(siren, page);
     } catch (e: any) {
-      console.log(e);
       logSireneOuvertefailed({ siren, details: e.message || e });
 
       try {
@@ -108,7 +107,6 @@ const getUniteLegaleFromSlugForGoodBot = async (
   try {
     return await getUniteLegaleSireneOuverte(siren, page);
   } catch (e: any) {
-    console.log(e);
     if (e instanceof HttpNotFound) {
       // when not found in siren ouverte, fallback on insee
       try {

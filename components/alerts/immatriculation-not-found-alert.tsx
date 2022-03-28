@@ -5,16 +5,19 @@ const ImmatriculationNotFoundAlert: React.FC = () => (
   <Info full>
     <b>Pas de justificatif d’immatriculation</b>
     <p>
-      Nous n’avons <b>pas trouvé de justificatif d’immatriculation</b> chez nos
-      partenaires. Il existe plusieurs explications possibles :
+      Nous n’avons{' '}
+      <b>
+        pas trouvé de justificatif d’immatriculation (KBIS, D1, Annonce de
+        création)
+      </b>{' '}
+      chez nos partenaires. Il existe plusieurs explications possibles :
     </p>
     <ul>
       <li>
         Si l’entité est une{' '}
-        <b>entreprise individuelle ou une auto-entreprise</b>, elle n’est pas
-        nécessairement immatriculée au RNM ou RNCS. Dans ce cas{' '}
-        <a href="#insee">l’avis d’inscription à l’Insee</a> sert à prouver
-        l’existence de l’entreprise
+        <b>entreprise individuelle ou une auto-entreprise</b>. Dans ce cas{' '}
+        <a href="#insee">l’avis d’inscription à l’Insee</a> peut être utilisé
+        pour prouver l’existence de l’entreprise
       </li>
       <li>
         Si l’entité est une association,{' '}
@@ -29,7 +32,7 @@ const ImmatriculationNotFoundAlert: React.FC = () => (
         </a>
       </li>
       <li>
-        Si l’entité est une entreprise commerciale,{' '}
+        Si l’entité est une société,{' '}
         <a href="http://data.inpi.fr/">
           contactez l’INPI qui centralise les données des Greffes des tribunaux
           de commerce.

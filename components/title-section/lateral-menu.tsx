@@ -9,22 +9,39 @@ export const LateralMenu: React.FC<{
   estDirigeant: boolean;
 }> = ({ ficheType, siren }) => (
   <PrintNever>
-    <div className="menu">
-      <div className="lateral-menu">
-        <div>
-          {menu.map((menuItem) => (
-            <a
-              key={menuItem.title}
-              className={`${ficheType === menuItem.type && 'active'}`}
-              href={menuItem.path(siren)}
-            >
-              {menuItem.title}
-            </a>
-          ))}
+    <nav className="fr-sidemenu menu" aria-label="Menu latéral">
+      <div className="fr-sidemenu__inner lateral-menu">
+        <button
+          className="fr-sidemenu__btn"
+          hidden
+          aria-controls="fr-sidemenu-wrapper"
+          aria-expanded="false"
+        >
+          Dans cette rubrique
+        </button>
+        <div className="fr-collapse" id="fr-sidemenu-wrapper">
+          <ul className="fr-sidemenu__list">
+            {menu.map((menuItem) => (
+              <li
+                key={menuItem.title}
+                className={`fr-sidemenu__item ${
+                  ficheType === menuItem.type && 'fr-sidemenu__item--active'
+                }`}
+              >
+                <a
+                  className="fr-sidemenu__link"
+                  target="_self"
+                  aria-current="page"
+                  href={menuItem.path(siren)}
+                >
+                  {menuItem.title}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-    </div>
-
+    </nav>
     <style jsx>{`
       .menu {
         width: 220px;
@@ -32,60 +49,18 @@ export const LateralMenu: React.FC<{
         background-color: #fff;
         border-right: 1px solid #dfdff1;
         box-shadow: 12px 0 10px -10px #dfdff1;
-        margin: 10px 30px 0 0;
-        padding: 0;
+        margin: 0 30px 0 0;
+        padding: 20px 0 0;
         height: 100vh;
         position: sticky;
         top: 0;
       }
-      .lateral-menu {
-        display: flex;
-        flex-grow: 1;
-        font-size: 0.9rem;
-        flex-direction: column;
-        border-bottom: none;
-        margin: 0;
-      }
-      .lateral-menu > div > a {
-        color: #000091;
-        font-weight: bold;
-        padding: 5px 5px;
-        display: flex;
-        align-items: center;
-        background-color: #fff;
-        border-radius: 3px;
-        border: none;
-        padding-left: 10px;
-        margin: 3px 20px 3px 0;
-        text-align: left;
-        justify-content: start;
-        box-shadow: none;
-        border: 1px solid transparent;
-      }
-
-      .lateral-menu > div > a:hover {
-        background-color: #efeffb;
-      }
-
-      .lateral-menu > div > a.active {
-        background-color: #dfdff1;
-        border-bottom: 0;
-        box-shadow: none;
-      }
-
-      @media only screen and (min-width: 1px) and (max-width: 450px) {
-        .lateral-menu {
-          flex-direction: column;
-          border-bottom: 0;
-        }
-        .lateral-menu > div > a {
-          margin: 3px;
-        }
-        .lateral-menu > div > a.active {
-          background-color: #fff;
-          border-bottom: 2px solid #dfdff1;
-          box-shadow: none;
-        }
+      .lateral-menu,
+      .fr-sidemenu__link {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        padding-right: 5px !important;
+        padding-left: 5px !important;
       }
     `}</style>
   </PrintNever>

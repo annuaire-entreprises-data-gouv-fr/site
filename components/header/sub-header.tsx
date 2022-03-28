@@ -15,22 +15,18 @@ interface IProps {
 const SubHeader: React.FC<IProps> = ({ uniteLegale, session, links }) => (
   <div className="sub-header">
     <BreadCrumb links={links} />
-    <h1>Bonjour {getNameFromSession(session)}</h1>
-    <div>
-      Vous êtes présidente de <b>{uniteLegale.nomComplet}</b>, bienvenue sur la
-      fiche de votre entreprise :
-    </div>
+    <h1>{uniteLegale.nomComplet} : espace dirigeant(e)</h1>
     <style jsx>{`
       .sub-header {
         position: relative;
         display: block;
-        margin-bottom: 25px;
+        padding-bottom: 20px;
+        margin-bottom: 0px;
       }
       .sub-header:before {
-        background: #f5f5fe;
-        border-radius: 4px;
+        background: #dfdff1;
+        height: 2px;
         position: absolute;
-        top: 0;
         bottom: 0;
         content: '';
         width: 100vw;
@@ -38,14 +34,9 @@ const SubHeader: React.FC<IProps> = ({ uniteLegale, session, links }) => (
         left: calc(-51vw + 50%);
       }
       .sub-header h1 {
-        margin: 0 0;
-        font-size: 1.6rem;
+        margin: 0;
+        font-size: 1.4rem;
         line-height: 2rem;
-      }
-      .sub-header > div {
-        padding: 10px 0 30px;
-        font-size: 1rem;
-        line-height: 1.3rem;
       }
     `}</style>
   </div>

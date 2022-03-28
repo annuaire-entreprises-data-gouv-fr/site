@@ -19,12 +19,13 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
   const rncs =
     dirigeants &&
     !isAPINotResponding(dirigeants) &&
-    `${dirigeants.length} dirigeants inscrits au Registre du Commerce et des Sociétés (RCS)`;
+    `${dirigeants.length} dirigeant(s) inscrit(s) au Registre du Commerce et des Sociétés (RCS)`;
 
   const rbe =
-    beneficiaires &&
-    !isAPINotResponding(beneficiaires) &&
-    `${beneficiaires.length} bénéficiaires inscrits à Référentiel des Bénéficiaires Effectifs`;
+    (beneficiaires &&
+      !isAPINotResponding(beneficiaires) &&
+      `${beneficiaires.length} bénéficiaire(s) inscrit(s) au Référentiel des Bénéficiaires Effectifs`) ||
+    '0 bénéficiaire(s) inscrit(s) au Référentiel des Bénéficiaires Effectifs.';
 
   return (
     <>

@@ -46,12 +46,12 @@ export const menu = [
     path: (siren: string) => `/annonces/${siren}`,
     private: false,
   },
-  {
-    title: 'Documents',
-    type: FICHE.DOCUMENTS,
-    path: (siren: string) => `/documents/${siren}`,
-    private: false,
-  },
+  // {
+  //   title: 'Documents',
+  //   type: FICHE.DOCUMENTS,
+  //   path: (siren: string) => `/documents/${siren}`,
+  //   private: false,
+  // },
   {
     title: 'Conventions',
     type: FICHE.DIVERS,

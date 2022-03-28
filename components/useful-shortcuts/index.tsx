@@ -28,7 +28,7 @@ const ShortcutsSection: React.FC<{
       .container {
         border: 2px solid #dfdff1;
         padding: 15px;
-        width: 24%;
+        width: 30%;
       }
       .container.dark {
         background-color: #dfdff1;
@@ -37,7 +37,7 @@ const ShortcutsSection: React.FC<{
         color: #000091;
       }
       .container > div {
-        margin-bottom: 4px;
+        margin-bottom: 10px;
       }
     `}</style>
   </div>
@@ -78,11 +78,11 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
       ],
     },
     {
-      title: 'Greffe',
+      title: 'Greffe (si applicable)',
       shortcuts: [
         {
           url: `/dirigeants/${uniteLegale.siren}#beneficiaires`,
-          label: 'Bénéficiaires effectifs',
+          label: 'Bénéficiaires Effectifs',
         },
         {
           url: `/justificatif/${uniteLegale.siren}#rncs`,
@@ -94,31 +94,32 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
         },
       ],
     },
-    {
-      title: 'Dirigeant uniquement',
-      titleIcon: 'fr-fi-account-line',
-      backgroundDark: true,
-      shortcuts: [
-        {
-          url: `/connexion/dirigeant?siren=${uniteLegale.siren}&page=document`,
-          label: 'Attestation fiscale',
-        },
-        {
-          url: `/connexion/dirigeant?siren=${uniteLegale.siren}&page=document`,
-          label: 'Attestation vigilance',
-        },
-        {
-          url: `/connexion/dirigeant?siren=${uniteLegale.siren}&page=document`,
-          label: 'Statuts',
-        },
-        {
-          url: `/connexion/dirigeant?siren=${uniteLegale.siren}&page=document`,
-          label: 'Actes juridiques',
-        },
-        { url: 'https://monidenum.fr/', label: 'KBIS (via MonIdenum)' },
-      ],
-    },
+    // {
+    //   title: 'Dirigeant uniquement',
+    //   titleIcon: 'fr-fi-account-line',
+    //   backgroundDark: true,
+    //   shortcuts: [
+    //     {
+    //       url: `/connexion/dirigeant?siren=${uniteLegale.siren}&page=document`,
+    //       label: 'Attestation fiscale',
+    //     },
+    //     {
+    //       url: `/connexion/dirigeant?siren=${uniteLegale.siren}&page=document`,
+    //       label: 'Attestation vigilance',
+    //     },
+    //     {
+    //       url: `/connexion/dirigeant?siren=${uniteLegale.siren}&page=document`,
+    //       label: 'Statuts',
+    //     },
+    //     {
+    //       url: `/connexion/dirigeant?siren=${uniteLegale.siren}&page=document`,
+    //       label: 'Actes juridiques',
+    //     },
+    //     { url: 'https://monidenum.fr/', label: 'KBIS (via MonIdenum)' },
+    //   ],
+    // },
   ];
+
   return (
     <PrintNever>
       <div>
@@ -128,9 +129,9 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
             <ShortcutsSection
               key={sectionData.title}
               title={sectionData.title}
-              titleIcon={sectionData.titleIcon}
+              // titleIcon={sectionData.titleIcon}
               shortcuts={sectionData.shortcuts}
-              backgroundDark={sectionData.backgroundDark}
+              // backgroundDark={sectionData.backgroundDark}
             />
           ))}
         </div>

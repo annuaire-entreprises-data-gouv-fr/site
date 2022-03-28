@@ -14,8 +14,6 @@ export function withOnlyDirigeant(
     const siren = verifySiren(slug || '');
     const isOwner = isCompanyOwner(session, siren);
 
-    throw new Error('should use passport authenticate ?');
-
     if (isOwner) {
       return serverSideProps;
     }

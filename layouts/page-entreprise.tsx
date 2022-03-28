@@ -50,7 +50,7 @@ const PageEntreprise: React.FC<IProps> = ({
           <SubHeader
             links={[
               {
-                label: `Mon entreprise : ${uniteLegale.nomComplet}`,
+                label: uniteLegale.nomComplet,
               },
             ]}
             uniteLegale={uniteLegale}
@@ -71,6 +71,7 @@ const PageEntreprise: React.FC<IProps> = ({
             }
             .body {
               width: 100%;
+              margin-top: 10px;
             }
           `}</style>
         </>
