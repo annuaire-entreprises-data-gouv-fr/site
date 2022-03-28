@@ -46,6 +46,16 @@ export const formatFloatFr = (floatAsString = '') => {
 };
 
 /**
+ * Serialize for injection in client script
+ * @param term
+ * @returns
+ */
+export const serializeForClientScript = (term: string) => {
+  // remove signle quotes as they dont get serialize by encode/decodeUriComponent
+  return encodeURIComponent(term.replaceAll("'", ''));
+};
+
+/**
  * Normalize string and remove special chars & diacritics before using a term in search
  */
 export const escapeTerm = (term: string) => {

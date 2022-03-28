@@ -1,14 +1,20 @@
 import React from 'react';
 import { ISearchResult } from '../../models/search';
 import { capitalize } from '../../utils/helpers/formatting';
-import { ResultsFeedback } from '../results-feedbacks';
+import { SearchFeedback } from '../search-feedback';
 import { Tag } from '../tag';
 
 interface IProps {
   results: ISearchResult[];
+  searchTerm?: string;
+  withFeedback?: boolean;
 }
 
-const ResultsList: React.FC<IProps> = ({ results }) => (
+const ResultsList: React.FC<IProps> = ({
+  results,
+  withFeedback = false,
+  searchTerm = '',
+}) => (
   <div className="results-wrapper">
     <div className="results-list">
       {results.map((result) => (
@@ -34,7 +40,7 @@ const ResultsList: React.FC<IProps> = ({ results }) => (
         </a>
       ))}
     </div>
-    <ResultsFeedback />
+    {withFeedback && <SearchFeedback searchTerm={searchTerm} />}
     <style jsx>{`
       .results-wrapper {
         display: flex;
