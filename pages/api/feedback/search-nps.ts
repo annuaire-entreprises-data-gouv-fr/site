@@ -20,19 +20,6 @@ const logSearchNps = async (req: NextApiRequest) => {
       }&query=${query}`,
       'nps'
     );
-
-    const data = {
-      username: 'clippy',
-      text: `Recherche : ${
-        hasFound ? 'réussie 🤩 !' : 'infructueuse 😭 !'
-      } \nMot-clef(s) : ${query}`,
-    };
-
-    await httpClient({
-      url: process.env.MATTERMOST_HOOK,
-      method: 'POST',
-      data,
-    });
   } catch (e: any) {
     logErrorInSentry('Error in form submission', { details: e.toString() });
   }
