@@ -65,7 +65,7 @@ export const SearchFeedback: React.FC<{ searchTerm: string }> = ({
         text-decoration: underline;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 900px) {
+      @media only screen and (min-width: 1px) and (max-width: 991px) {
         #search-feedback {
           margin-top: 20px;
           max-width: 100%;

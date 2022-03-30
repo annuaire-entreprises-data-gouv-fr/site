@@ -73,7 +73,7 @@ export const CopyCell: React.FC<PropsWithChildren<{ className?: string }>> = ({
           height: 100%;
           color: green;
         }
-        @media only screen and (min-width: 1px) and (max-width: 900px) {
+        @media only screen and (min-width: 1px) and (max-width: 991px) {
           div {
             cursor: inherit;
           }

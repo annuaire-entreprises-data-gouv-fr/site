@@ -52,7 +52,7 @@ export const formatFloatFr = (floatAsString = '') => {
  */
 export const serializeForClientScript = (term: string) => {
   // remove signle quotes as they dont get serialize by encode/decodeUriComponent
-  return encodeURIComponent(term.replaceAll("'", ''));
+  return encodeURIComponent(term.replaceAll("'", '’'));
 };
 
 /**

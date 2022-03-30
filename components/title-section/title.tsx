@@ -70,7 +70,7 @@ const Title: React.FC<IProps> = ({ uniteLegale }) => (
         font-size: 1.1rem;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 900px) {
+      @media only screen and (min-width: 1px) and (max-width: 991px) {
         .title {
           margin-top: 10px;
         }

@@ -72,7 +72,7 @@ const ResultsList: React.FC<IProps> = ({
         color: rgb(112, 117, 122);
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 900px) {
+      @media only screen and (min-width: 1px) and (max-width: 991px) {
         .results-wrapper {
           flex-direction: column-reverse;
         }

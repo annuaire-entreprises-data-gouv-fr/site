@@ -11,14 +11,6 @@ export const LateralMenu: React.FC<{
   <PrintNever>
     <nav className="fr-sidemenu menu" aria-label="Menu latéral">
       <div className="fr-sidemenu__inner lateral-menu">
-        <button
-          className="fr-sidemenu__btn"
-          hidden
-          aria-controls="fr-sidemenu-wrapper"
-          aria-expanded="false"
-        >
-          Dans cette rubrique
-        </button>
         <div className="fr-collapse" id="fr-sidemenu-wrapper">
           <ul className="fr-sidemenu__list">
             {menu.map((menuItem) => (
@@ -61,6 +53,12 @@ export const LateralMenu: React.FC<{
         margin-left: 0 !important;
         padding-right: 5px !important;
         padding-left: 5px !important;
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 991px) {
+        nav.fr-sidemenu.menu {
+          display: none !important;
+        }
       }
     `}</style>
   </PrintNever>
