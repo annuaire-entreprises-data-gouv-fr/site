@@ -34,7 +34,7 @@ passport.use(
       usePKCE: false,
     },
     (_token: TokenSet, userInfo: object, done: Function) => {
-      done(null, userInfo);
+      done(null, { ...userInfo, id_token: _token.id_token });
     }
   )
 );
