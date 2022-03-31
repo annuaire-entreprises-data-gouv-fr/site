@@ -66,18 +66,25 @@ exports.handle = function (event, context) {
 
   const dateAsString = d.toISOString().split('T')[0];
 
-  const url =
-    'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=day&method=Events.getNameFromCategoryId&idSubtable=1&module=API&showColumns=label&filter_limit=9999&date=' +
-    dateAsString;
+  const categories = `https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=day&method=Events.getCategory&module=API&showColumns=label&filter_limit=9999&date=${dateAsString}`;
 
-  get(url)
+  get(categories)
+    .then(
+      (res) =>
+        res.find((el) => el.label === 'feedback:search-nps').idsubdatatable
+    )
+    .then((categoryId) =>
+      get(
+        `https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=day&method=Events.getNameFromCategoryId&idSubtable=${categoryId}&module=API&showColumns=label&filter_limit=9999&date=${dateAsString}`
+      )
+    )
     .then((res) => {
       const values = res.reduce((events, e) => {
         const rawVal = e.label.split('query=');
         if (rawVal.length === 2) {
           // only use events with query
           events.push({
-            success: rawVal[0].indexOf('value=1') === 0,
+            success: rawVal[0].indexOf('value=true') === 0,
             query: rawVal[1],
           });
         }
@@ -92,6 +99,9 @@ exports.handle = function (event, context) {
       const test = `**Feedbacks dans la recherche [${dateAsString}]**\nNombre de feedbacks : ${count} \nFeedback négatifs : ${failRate} \nMots-clefs sans résultats satisfaisants : \n${values
         .filter((e) => !e.success)
         .map((e) => `- ${e.query}`)
+        .join('\n')}\nMots-clefs ok :\n${values
+        .filter((e) => e.success)
+        .map((e) => `- ${e.query}`)
         .join('\n')}`;
 
       const data = {
@@ -99,10 +109,9 @@ exports.handle = function (event, context) {
         text: test,
       };
 
-      post(process.env.MATTERMOST_HOOK, data)
-        .then((r) => console.log(r))
-        .catch((e) => console.log(e));
+      return post(process.env.MATTERMOST_HOOK, data);
     })
+    .then((r) => console.log(r))
     .catch((e) => console.log(e));
 
   return {
