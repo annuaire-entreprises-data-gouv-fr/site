@@ -17,7 +17,7 @@ export const client = new issuer.Client({
   client_secret: process.env.FC_CLIENT_SECRET as string,
   redirect_uris: [process.env.FC_REDIRECT_URI as string],
   id_token_signed_response_alg: 'HS256',
-  post_logout_redirect_uris: ['http://localhost:3000/logout'],
+  post_logout_redirect_uris: [process.env.FC_LOGOUT_URI as string],
 });
 passport.use(
   'franceConnect',
