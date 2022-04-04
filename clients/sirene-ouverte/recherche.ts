@@ -23,6 +23,7 @@ interface ISireneOuverteUniteLegaleResultat {
   longitude: string;
   nom_complet: string;
   page_path: string;
+  complement_adresse: string;
   numero_voie: string;
   indice_repetition: string;
   type_voie: string;
@@ -52,6 +53,7 @@ const getResults = async (
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
     routes.sireneOuverte.rechercheUniteLegale;
 
+  console.log(route);
   const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}`;
   const response = await httpGet(url);
 
@@ -89,7 +91,7 @@ const mapToDomainObject = (
         siret: result.siret,
         estActive: result.etat_administratif_unite_legale === 'A',
         adresse: formatAdresse(
-          '',
+          result.complement_adresse || '',
           result.numero_voie,
           result.indice_repetition,
           result.type_voie,

@@ -156,7 +156,7 @@ export const formatAdresse = (
   }
 
   const fullLibelleFromTypeVoie = libelleFromTypeVoie(type_voie);
-  return `${wrapWord(complement)}${wrapWord(numero_voie)}${wrapWord(
+  return `${wrapWord(complement, true, ', ')}${wrapWord(numero_voie)}${wrapWord(
     indice_repetition
   )}${wrapWord(fullLibelleFromTypeVoie)}${wrapWord(libelle_voie, false, ', ')}${
     code_postal || ''
