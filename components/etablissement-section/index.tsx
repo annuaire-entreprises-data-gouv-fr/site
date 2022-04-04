@@ -29,6 +29,10 @@ const EtablissementSection: React.FC<IProps> = ({
     ['Clef NIC', etablissement.nic],
     ['N° TVA Intracommunautaire', formatIntFr(uniteLegale.numeroTva)],
     [
+      'Activité principale de l’entreprise (NAF/APE)',
+      uniteLegale.libelleActivitePrincipale,
+    ],
+    [
       'Activité principale de l’établissement (NAF/APE)',
       etablissement.libelleActivitePrincipale,
     ],
