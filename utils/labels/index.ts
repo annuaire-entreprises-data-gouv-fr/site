@@ -10,7 +10,7 @@ export const libelleFromCodeNaf = (codeNaf: string, addCode = true) => {
   const formattedNaf = (codeNaf || '').replace(/[.-]/g, '');
   //@ts-ignore
   const label = codesNaf[formattedNaf] || 'Activité inconnue';
-  return addCode && codeNaf ? `${codeNaf} - ${label}` : label;
+  return addCode && codeNaf ? `${formattedNaf} - ${label}` : label;
 };
 
 export const libelleFromCodeEffectif = (

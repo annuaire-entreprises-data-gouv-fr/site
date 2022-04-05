@@ -50,6 +50,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
               uniteLegale={uniteLegale}
               etablissement={uniteLegale.siege}
               usedInEntreprisePage={true}
+              withDenomination={false}
             />
           )}
           <EtablissementListeSection uniteLegale={uniteLegale} />
