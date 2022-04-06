@@ -3,7 +3,6 @@ import constants from '../../models/constants';
 import { IEtablissement, IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import { libelleFromCodeNaf } from '../../utils/labels';
 import IsActiveTag from '../is-active-tag';
 import PageCounter from '../results-page-counter';
 import { Section } from '../section';
@@ -42,7 +41,7 @@ const EtablissementListeSection: React.FC<{
                 {!etablissement.estDiffusible ? (
                   <i>Non renseigné</i>
                 ) : (
-                  libelleFromCodeNaf(etablissement.activitePrincipale)
+                  etablissement.libelleActivitePrincipale
                 )}
               </>,
               !etablissement.estDiffusible ? (
