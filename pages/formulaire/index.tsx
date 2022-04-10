@@ -241,6 +241,17 @@ const FeedBack: React.FC = () => {
                     value="J’utilisais le site entreprise.data.gouv.fr"
                   />
                   <label className="fr-label" htmlFor="radio-visitor-origin-5">
+                    Je connaissais déjà
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="radio-visitor-origin-5"
+                    name="radio-set-visitor-origin"
+                    value="J’utilisais le site entreprise.data.gouv.fr"
+                  />
+                  <label className="fr-label" htmlFor="radio-visitor-origin-5">
                     J’utilisais le site entreprise.data.gouv.fr
                   </label>
                 </div>
