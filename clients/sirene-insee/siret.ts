@@ -167,22 +167,15 @@ export const mapEtablissementToDomainObject = (
     periodesEtablissement,
   } = inseeEtablissement;
 
-  let lastEtatAdministratif = periodesEtablissement.find(
-    (periode) => periode.changementEtatAdministratifEtablissement === true
-  );
-
-  if (!lastEtatAdministratif) {
-    lastEtatAdministratif = periodesEtablissement[0];
-  }
-  const estActif = lastEtatAdministratif.etatAdministratifEtablissement === 'A';
-  const dateFermeture = !estActif ? lastEtatAdministratif.dateDebut : null;
+  // get last periode to obtain most recent data
   const {
     activitePrincipaleEtablissement,
     denominationUsuelleEtablissement,
     enseigne1Etablissement,
     enseigne2Etablissement,
     enseigne3Etablissement,
-  } = lastEtatAdministratif;
+    etatAdministratifEtablissement,
+  } = periodesEtablissement[0];
 
   const enseigne = capitalize(
     formatEnseigne(
@@ -191,6 +184,15 @@ export const mapEtablissementToDomainObject = (
       enseigne3Etablissement
     ) || ''
   );
+
+  const estActif = etatAdministratifEtablissement === 'A';
+
+  // get last state change to obtain closing date
+  let lastStateChange =
+    periodesEtablissement.find(
+      (periode) => periode.changementEtatAdministratifEtablissement === true
+    ) || periodesEtablissement[0];
+  const dateFermeture = !estActif ? lastStateChange.dateDebut : null;
 
   const defaultEtablissement = createDefaultEtablissement();
 

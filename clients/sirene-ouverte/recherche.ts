@@ -53,7 +53,6 @@ const getResults = async (
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
     routes.sireneOuverte.rechercheUniteLegale;
 
-  console.log(route);
   const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}`;
   const response = await httpGet(url);
 
