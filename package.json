@@ -7,7 +7,7 @@
     "npm": ">=7"
   },
   "scripts": {
-    "start:dev:frontend": "vite --host",
+    "start:dev:frontend": "vite --config ./frontend/vite.config.js",
     "start:dev:next": "NODE_ENV=development next dev",
     "dev": "run-p start:dev:*",
     "build:clean": "if [ -d 'public/assets' ]; then rm -Rf public/assets; fi",
