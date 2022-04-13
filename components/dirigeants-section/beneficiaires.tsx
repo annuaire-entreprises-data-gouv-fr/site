@@ -11,11 +11,15 @@ import AdministrationNotResponding from '../administration-not-responding';
 import routes from '../../clients/routes';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { INPI } from '../administrations';
-import { IBeneficiaire } from '../../models/dirigeants';
 import { formatDate } from '../../utils/helpers/formatting';
+import {
+  IBeneficiaire,
+  IImmatriculationRNCS,
+} from '../../models/immatriculation/rncs';
+import InpiPartiallyDownWarning from '../alerts/inpi-partially-down';
 
 interface IProps {
-  beneficiaires: IBeneficiaire[] | IAPINotRespondingError;
+  immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
   siren: Siren;
 }
 
@@ -24,19 +28,24 @@ interface IProps {
  * @param param0
  * @returns
  */
-const BeneficiairesSection: React.FC<IProps> = ({ beneficiaires, siren }) => {
-  if (isAPINotResponding(beneficiaires)) {
-    if (beneficiaires.errorType === 404) {
+const BeneficiairesSection: React.FC<IProps> = ({
+  immatriculationRNCS,
+  siren,
+}) => {
+  if (isAPINotResponding(immatriculationRNCS)) {
+    if (immatriculationRNCS.errorType === 404) {
       return null;
     }
     return (
       <AdministrationNotResponding
-        administration={beneficiaires.administration}
-        errorType={beneficiaires.errorType}
+        administration={immatriculationRNCS.administration}
+        errorType={immatriculationRNCS.errorType}
         title="Bénéficiaires Effectifs"
       />
     );
   }
+
+  const { beneficiaires } = immatriculationRNCS;
 
   const formtInfos = (beneficiaire: IBeneficiaire) => [
     ['Nom', beneficiaire.nom],
@@ -57,6 +66,10 @@ const BeneficiairesSection: React.FC<IProps> = ({ beneficiaires, siren }) => {
         source={EAdministration.INPI}
       >
         <>
+          {immatriculationRNCS.metadata.isFallback &&
+            immatriculationRNCS.beneficiaires.length > 0 && (
+              <InpiPartiallyDownWarning missing="la date de déclaration, et la différence entre le nom et le prénom" />
+            )}
           <p>
             Cette entité possède {beneficiaires.length} bénéficiaire{plural}{' '}
             effectif{plural} enregistré{plural} au{' '}

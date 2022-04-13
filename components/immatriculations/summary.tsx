@@ -37,17 +37,18 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
         )}
         {immatriculationRNCS && !isAPINotResponding(immatriculationRNCS) && (
           <li>
-            {immatriculationRNCS.dateRadiation ? (
+            {immatriculationRNCS.identite.dateRadiation ? (
               <a href="#rncs">
                 <b>Radiée</b> du Registre du Commerce et des Sociétés (RCS),
-                depuis le {formatDateLong(immatriculationRNCS.dateRadiation)}
+                depuis le{' '}
+                {formatDateLong(immatriculationRNCS.identite.dateRadiation)}
               </a>
             ) : (
               <a href="#rncs">
                 <b>Inscrite</b> au Registre du Commerce et des Sociétés (RCS){' '}
-                {immatriculationRNCS.dateImmatriculation
+                {immatriculationRNCS.identite.dateImmatriculation
                   ? `, depuis le ${formatDateLong(
-                      immatriculationRNCS.dateImmatriculation
+                      immatriculationRNCS.identite.dateImmatriculation
                     )}`
                   : ''}
               </a>

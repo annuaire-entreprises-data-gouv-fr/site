@@ -2,23 +2,23 @@
 // Representants
 //==============
 
-import { IDirigeant } from '../../../models/dirigeants';
+import { IDirigeant } from '../../../../models/immatriculation/rncs';
 import {
   formatFirstNames,
   formatNameFull,
-} from '../../../utils/helpers/formatting';
-import { logWarningInSentry } from '../../../utils/sentry';
-import { IRNCSRepresentantResponse, IRNCSResponseDossier } from '../IMR-api';
+} from '../../../../utils/helpers/formatting';
+import { logWarningInSentry } from '../../../../utils/sentry';
+import { IRNCSRepresentantResponse, IRNCSResponseDossier } from '..';
 
 export const extractRepresentants = (dossier: IRNCSResponseDossier) => {
   const representantsObject = dossier?.representants?.representant;
 
   if (!representantsObject) {
-    const representantEI = extractDirigeantFromIdentite(dossier);
-    if (!representantEI) {
+    if (!dossier.identite || !dossier.identite.identite_PP) {
       logWarningInSentry('No Dirigeant found', { siren: dossier['@_siren'] });
       return [];
     }
+    const representantEI = extractDirigeantFromIdentite(dossier);
     return [representantEI];
   }
 
@@ -72,9 +72,6 @@ const mapToDomainDirigeant = (
 export const extractDirigeantFromIdentite = (
   dossierPrincipal: IRNCSResponseDossier
 ) => {
-  if (!dossierPrincipal.identite || !dossierPrincipal.identite.identite_PP) {
-    return null;
-  }
   return mapToDomainFromIdentite(dossierPrincipal);
 };
 

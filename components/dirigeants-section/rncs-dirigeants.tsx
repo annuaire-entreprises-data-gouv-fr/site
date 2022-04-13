@@ -2,7 +2,6 @@ import React from 'react';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { EAdministration } from '../../models/administration';
-import { IEtatCivil, IPersonneMorale } from '../../models/dirigeants';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -12,6 +11,12 @@ import { formatIntFr } from '../../utils/helpers/formatting';
 import routes from '../../clients/routes';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { INPI } from '../administrations';
+import {
+  IEtatCivil,
+  IImmatriculationRNCS,
+  IPersonneMorale,
+} from '../../models/immatriculation/rncs';
+import InpiPartiallyDownWarning from '../alerts/inpi-partially-down';
 
 /**
  * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts
@@ -30,7 +35,7 @@ const isPersonneMorale = (
   return false;
 };
 interface IProps {
-  dirigeants: (IEtatCivil | IPersonneMorale)[] | IAPINotRespondingError;
+  immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
   siren: Siren;
 }
 
@@ -39,19 +44,24 @@ interface IProps {
  * @param param0
  * @returns
  */
-const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
-  if (isAPINotResponding(dirigeants)) {
-    if (dirigeants.errorType === 404) {
+const DirigeantsSection: React.FC<IProps> = ({
+  immatriculationRNCS,
+  siren,
+}) => {
+  if (isAPINotResponding(immatriculationRNCS)) {
+    if (immatriculationRNCS.errorType === 404) {
       return null;
     }
     return (
       <AdministrationNotResponding
-        administration={dirigeants.administration}
-        errorType={dirigeants.errorType}
+        administration={immatriculationRNCS.administration}
+        errorType={immatriculationRNCS.errorType}
         title="Les informations sur les dirigeants"
       />
     );
   }
+
+  const { dirigeants } = immatriculationRNCS;
 
   const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
     if (isPersonneMorale(dirigeant)) {
@@ -98,6 +108,10 @@ const DirigeantsSection: React.FC<IProps> = ({ dirigeants, siren }) => {
         source={EAdministration.INPI}
       >
         <>
+          {immatriculationRNCS.metadata.isFallback &&
+            immatriculationRNCS.dirigeants.length > 0 && (
+              <InpiPartiallyDownWarning missing="le lieu de naissance, et la distinction entre le nom et le prénom" />
+            )}
           <p>
             Cette entité possède {dirigeants.length} dirigeant{plural}{' '}
             enregistré{plural} au{' '}

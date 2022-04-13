@@ -4,7 +4,7 @@ import {
   createDefaultUniteLegale,
   IUniteLegale,
 } from '../../models';
-import { IEtatCivil } from '../../models/dirigeants';
+import { IEtatCivil } from '../../models/immatriculation/rncs';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import {
   capitalize,

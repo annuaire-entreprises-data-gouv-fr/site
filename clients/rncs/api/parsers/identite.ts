@@ -2,11 +2,14 @@
 // Identite / Immatriculation
 //==============
 
-import { IIdentite } from '../../../models/dirigeants';
-import { formatFloatFr, formatIntFr } from '../../../utils/helpers/formatting';
-import { libelleFromCodeGreffe } from '../../../utils/labels';
-import { IRNCSIdentiteResponse, IRNCSResponseDossier } from '../IMR-api';
-import { formatINPIDateField } from '../helper';
+import { IIdentite } from '../../../../models/immatriculation/rncs';
+import {
+  formatFloatFr,
+  formatIntFr,
+} from '../../../../utils/helpers/formatting';
+import { libelleFromCodeGreffe } from '../../../../utils/labels';
+import { IRNCSIdentiteResponse, IRNCSResponseDossier } from '..';
+import { formatINPIDateField } from '../../helper';
 
 export const extractIdentite = (dossierPrincipal: IRNCSResponseDossier) => {
   return mapToDomainIdentite(dossierPrincipal.identite, dossierPrincipal);

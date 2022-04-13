@@ -2,14 +2,14 @@
 // Beneficiaires
 //==============
 
-import { IBeneficiaire } from '../../../models/dirigeants';
+import { IBeneficiaire } from '../../../../models/immatriculation/rncs';
 import {
   formatFirstNames,
   formatNameFull,
-} from '../../../utils/helpers/formatting';
-import { libelleFromCodeBeneficiaires } from '../../../utils/labels';
-import { formatINPIDateField } from '../helper';
-import { IRNCSBeneficiaireResponse, IRNCSResponseDossier } from '../IMR-api';
+} from '../../../../utils/helpers/formatting';
+import { libelleFromCodeBeneficiaires } from '../../../../utils/labels';
+import { formatINPIDateField } from '../../helper';
+import { IRNCSBeneficiaireResponse, IRNCSResponseDossier } from '..';
 
 export const extractBeneficiaires = (dossier: IRNCSResponseDossier) => {
   const beneficiairesObject = dossier?.beneficiaires?.beneficiaire;

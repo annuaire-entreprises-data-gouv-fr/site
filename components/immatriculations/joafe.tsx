@@ -13,7 +13,7 @@ import { download } from '../icon';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../print-visibility';
-import { IImmatriculationJOAFE } from '../../models/justificatifs';
+import { IImmatriculationJOAFE } from '../../models/immatriculation/joafe';
 
 interface IProps {
   immatriculation: IImmatriculationJOAFE | IAPINotRespondingError;

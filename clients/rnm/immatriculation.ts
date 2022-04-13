@@ -6,7 +6,7 @@ import {
 } from '../../utils/helpers/formatting';
 import { httpGet } from '../../utils/network';
 import routes from '../routes';
-import { IImmatriculationRNM } from '../../models/justificatifs';
+import { IImmatriculationRNM } from '../../models/immatriculation/rnm';
 
 export interface IApiRNMResponse {
   ent_id_num_gestion: string;

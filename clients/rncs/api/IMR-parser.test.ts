@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
-import { verifySiren } from '../../utils/helpers/siren-and-siret';
-import { extractIMRFromXml } from './IMR-api-parser';
+import { verifySiren } from '../../../utils/helpers/siren-and-siret';
+import { extractIMRFromXml } from './IMR-parser';
 
 const dummySiren = verifySiren('880878145');
 

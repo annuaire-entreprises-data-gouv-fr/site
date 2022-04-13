@@ -1,6 +1,6 @@
 import { IdRna } from '../utils/helpers/id-rna';
 import { Siren, Siret } from '../utils/helpers/siren-and-siret';
-import { IEtatCivil } from './dirigeants';
+import { IEtatCivil } from './immatriculation/rncs';
 
 /** COMMON TYPES */
 export interface IAssociation {

@@ -1,12 +1,12 @@
 import { XMLParser } from 'fast-xml-parser';
-import { Siren } from '../../utils/helpers/siren-and-siret';
-import { logWarningInSentry } from '../../utils/sentry';
-import { HttpNotFound, HttpServerError } from '../exceptions';
+import { HttpNotFound, HttpServerError } from '../../exceptions';
 
-import { IRNCSResponse, IRNCSResponseDossier } from './IMR-api';
-import { extractBeneficiaires } from './api-parsers/beneficiaires';
-import { extractRepresentants } from './api-parsers/dirigeants';
-import { extractIdentite } from './api-parsers/identite';
+import { IRNCSResponse, IRNCSResponseDossier } from '.';
+import { extractBeneficiaires } from './parsers/beneficiaires';
+import { extractRepresentants } from './parsers/dirigeants';
+import { extractIdentite } from './parsers/identite';
+import { Siren } from '../../../utils/helpers/siren-and-siret';
+import { logWarningInSentry } from '../../../utils/sentry';
 
 export class InvalidFormatError extends HttpServerError {
   constructor(message: string) {

@@ -17,7 +17,7 @@ import { Closed, download, Open } from '../icon';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../print-visibility';
-import { IImmatriculationRNM } from '../../models/justificatifs';
+import { IImmatriculationRNM } from '../../models/immatriculation/rnm';
 
 interface IProps {
   immatriculation: IImmatriculationRNM | IAPINotRespondingError;

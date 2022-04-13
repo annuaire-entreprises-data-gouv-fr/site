@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title> Ganymède (Entreprises) - Data INPI</title>
+        <title> RED NEEDLES (Entreprises) - Data INPI</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1" viewport-fit="cover">
                     <link rel="stylesheet" href="/build/app.9300b479.css">
-
+        
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 
         <!-- Bootstrap - Jquery -->
@@ -128,9 +128,9 @@
                       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- End Google Tag Manager (noscript) -->
+    
 
-
-
+    
     <header>
         <!-- Header Galactique-->
 <div class="row galactic-header m-0">
@@ -169,7 +169,7 @@
                             </a>
         </div>
 
-
+        
 <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" id="mainMenuButton">
     <span class="navbar-toggler-icon inpi-toggler-icon"></span>
 </button>
@@ -328,7 +328,7 @@
 
     </nav>
 </div>        </div>
-
+        
         <!-- Navigation -->
 <nav class="position-fixed" id="sidebar-wrapper">
     <ul class="sidebar-nav">
@@ -374,7 +374,7 @@
                                 <h5 class="text-left inpi-bold font-size-16 mt-3">Recherche</h5>
                                 <hr class="ligne-tuto ml-0">
                                 <p class="font-size-16 text-left">Utilisez la barre de recherche pour trouver une Marque, une Entreprise, un Brevet, un Dessin ou un Modèle. Vous pouvez rechercher par nom, déposant, SIREN, etc.</p>
-                                <p class="font-size-16 text-left inpi-bold mt-4">Tapez une recherche dans la barre et cliquez sur « Je trouve »</p>
+                                <p class="font-size-16 text-left inpi-bold mt-4">Tapez une recherche dans la barre et cliquez sur « Je trouve »</p>
                             </div>
                             <img src="/build/images/tuto/arrow-right.svg" alt="Passer à la page suivante" class="position-absolute pointer arrow-right next action-button">
                         </fieldset>
@@ -384,7 +384,7 @@
                                 <h5 class="text-left inpi-bold font-size-16 mt-3">Recherche</h5>
                                 <hr class="ligne-tuto ml-0">
                                 <p class="font-size-16 text-left">Les résultats s’affichent dans 4 onglets séparés pour vous permettre de visualiser uniquement le type de titre qui vous intéresse : entreprise, marque, brevet ou dessin &amp; modèle. Vous pouvez facilement naviguer entre les bases.</p>
-                                <p class="font-size-16 text-left inpi-bold mt-4">Par exemple, cliquez sur l’onglet « Brevets » pour visualiser tous les brevets qui correspondent à votre recherche</p>
+                                <p class="font-size-16 text-left inpi-bold mt-4">Par exemple, cliquez sur l’onglet « Brevets » pour visualiser tous les brevets qui correspondent à votre recherche</p>
                             </div>
                             <img src="/build/images/tuto/arrow-left.svg" alt="Revenir à la page précédente" class="position-absolute pointer arrow-left previous action-button-previous">
                             <img src="/build/images/tuto/arrow-right.svg" alt="Passer à la page suivante" class="position-absolute pointer arrow-right next action-button">
@@ -394,8 +394,8 @@
                                 <img src="/build/images/tuto/image_03.png" alt="tuto-image3" class="img-fluid" style="max-height: 332px">
                                 <h5 class="text-left inpi-bold font-size-16 mt-3">Filtres de recherche</h5>
                                 <hr class="ligne-tuto ml-0">
-                                <p class="font-size-16 text-left">Les filtres vous permettent d’affiner votre recherche en ne gardant que les résultats qui vous intéressent. Vous pouvez réinitialiser les filtres à tout moment en cliquant sur le bouton « Réinitialiser » en haut à droite du volet des filtres.</p>
-                                <p class="font-size-16 text-left inpi-bold mt-4">Par exemple, cochez la case « Brevets de l’Union Européenne » pour n’afficher que les titres de l’UE</p>
+                                <p class="font-size-16 text-left">Les filtres vous permettent d’affiner votre recherche en ne gardant que les résultats qui vous intéressent. Vous pouvez réinitialiser les filtres à tout moment en cliquant sur le bouton « Réinitialiser » en haut à droite du volet des filtres.</p>
+                                <p class="font-size-16 text-left inpi-bold mt-4">Par exemple, cochez la case « Brevets de l’Union Européenne » pour n’afficher que les titres de l’UE</p>
                             </div>
                             <img src="/build/images/tuto/arrow-left.svg" alt="Revenir à la page précédente" class="position-absolute pointer arrow-left previous action-button-previous">
                             <img src="/build/images/tuto/arrow-right.svg" alt="Passer à la page suivante" class="position-absolute pointer arrow-right next action-button">
@@ -438,8 +438,8 @@
                                 <img src="/build/images/tuto/image_07.png" alt="tuto-image7" class="img-fluid" style="max-height: 332px">
                                 <h5 class="text-left inpi-bold font-size-16 mt-3">Documents associés</h5>
                                 <hr class="ligne-tuto ml-0">
-                                <p class="font-size-16 text-left">À l’arrivée sur la page, vous retrouvez toutes les informations disponibles sur le titre que vous avez sélectionné. Si des documents sont associés à ce titre, vous les retrouverez dans l’onglet « Documents associés ».</p>
-                                <p class="font-size-16 text-left inpi-bold mt-4">Cliquez sur l’onglet « Documents associés » pour visualiser tous les fichiers en rapport avec votre titre</p>
+                                <p class="font-size-16 text-left">À l’arrivée sur la page, vous retrouvez toutes les informations disponibles sur le titre que vous avez sélectionné. Si des documents sont associés à ce titre, vous les retrouverez dans l’onglet « Documents associés ».</p>
+                                <p class="font-size-16 text-left inpi-bold mt-4">Cliquez sur l’onglet « Documents associés » pour visualiser tous les fichiers en rapport avec votre titre</p>
                             </div>
                             <img src="/build/images/tuto/arrow-left.svg" alt="Revenir à la page précédente" class="position-absolute pointer arrow-left previous action-button-previous">
                             <img src="/build/images/tuto/arrow-right.svg" alt="Passer à la page suivante" class="position-absolute pointer arrow-right next action-button">
@@ -499,7 +499,7 @@
     });
 </script>
         <main id="content">
-
+            
         <div id="bandeau-header-gris-notices">
             <div class="container h-100 position-relative">
 
@@ -566,7 +566,7 @@
         $(this).children('input').attr('checked', !$(this).children('input').attr('checked'))
     });
 </script>
-
+                
 <div class="row m-0 breadcrumb-results">
     <div class="col-12 text-left">
         <nav aria-label="breadcrumb">
@@ -574,9 +574,9 @@
                 <li class="breadcrumb-item"><a href="/">Accueil</a></li>
 
                                     <li class="breadcrumb-item breadcrumb-categorie">Entreprises</li>
-
+                
                                                         <li class="breadcrumb-item active">
-                                                                                    Ganymède
+                                                                                    RED NEEDLES
                                                                         </li>
                                                 </ol>
         </nav>
@@ -748,7 +748,7 @@
     var resultsArray = results ? JSON.parse(results) : [];
     var totalResults = resultsArray.length;
     var q = localStorage.q;
-    var id = '880878145';
+    var id = '839517323';
     var typeNotice = 'companies';
     var basepath = 'https://data.inpi.fr';
     var searchUrl = "/search";
@@ -790,7 +790,7 @@
     </div>
 </div>
 <div class="header-notice">
-    <h3 class="inpi-light mt-3">Présentation de l&#039;entreprise <strong class="inpi-bold"> Ganymède </strong></h3>
+    <h3 class="inpi-light mt-3">Présentation de l&#039;entreprise <strong class="inpi-bold"> RED NEEDLES </strong></h3>
     <div class="row links-notice">
     <nav class="navbar-expand-lg nav-notice-company col-md-6 col-12">
         <div class="h-100">
@@ -800,7 +800,7 @@
                     <span class="position-absolute w-100 line-menu bg-blue-menu "></span>
                 </li>
                 <li class="nav-item ml-3 mr-3 position-relative m-0 link-notice pointer" show="notice-documents" id="link-documents-notice">
-                    <a role="button" tabindex="0" class="nav-link p-0">Documents associés (1)</a>
+                    <a role="button" tabindex="0" class="nav-link p-0">Documents associés (3)</a>
                     <span class="position-absolute w-100 line-menu bg-blue-menu"></span>
                 </li>
             </ul>
@@ -819,83 +819,79 @@
         <div class="row">
             <div class="col-12 first-title mb-3 d-flex justify-content-left align-items-center">
                 <h5 class="color-blue-inpi do-not-export">Identité</h5>
+                                    <p class="company-removed ml-3">(Entreprise radiée le 15/10/2021)</p>
                             </div>
             <div class="col-12 col-md-6">
                                     <div class="bloc-detail-notice mb-3">
                         <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Dénomination</p>
-                        <p class="font-size-0-9-rem font-weight-bold highlight-text">Ganymède</p>
+                        <p class="font-size-0-9-rem font-weight-bold highlight-text">RED NEEDLES</p>
                     </div>
-
-
-
+                
+                
+                
                                     <div class="bloc-detail-notice mb-3">
                         <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">SIREN (siège) </p>
-                        <p class="font-size-0-9-rem highlight-text ">880 878 145</p>
+                        <p class="font-size-0-9-rem highlight-text ">839 517 323</p>
                     </div>
-
+                
                                     <div class="bloc-detail-notice mb-3">
                         <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">N° de gestion</p>
-                        <p class="font-size-0-9-rem highlight-text">2020B02214</p>
+                        <p class="font-size-0-9-rem highlight-text">2018B04643</p>
                     </div>
-
+                
                                     <div class="bloc-detail-notice mb-3">
                         <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Date d&#039;immatriculation</p>
-                        <p class="font-size-0-9-rem highlight-text">23/01/2020</p>
+                        <p class="font-size-0-9-rem highlight-text">12/05/2018</p>
                     </div>
-
+                
                                     <div class="bloc-detail-notice mb-3">
                         <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Début d’activité</p>
-                        <p class="font-size-0-9-rem"> 13/01/2020 </p>
+                        <p class="font-size-0-9-rem"> 06/05/2018 </p>
                     </div>
-
-
-
-
-
+                
+                
+                     
+                
+                                    <div class="bloc-detail-notice">
+                        <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Date de cessation d&#039;activité</p>
+                        <p class="font-size-0-9-rem">30/06/2021</p>
+                    </div>
+                
                                     <div class="bloc-detail-notice mb-3">
                         <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Durée de la personne morale</p>
                         <p class="font-size-0-9-rem">99 ans</p>
                     </div>
-
+                
                                     <div class="bloc-detail-notice mb-3">
                         <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Date de clôture</p>
-                        <p class="font-size-0-9-rem">31 décembre</p>
+                        <p class="font-size-0-9-rem">30 Juin</p>
                     </div>
                             </div>
 
             <div class="col-12 col-md-6">
                                     <div class="bloc-detail-notice mb-3">
                         <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Forme juridique</p>
-                        <p class="font-size-0-9-rem highlight-text">Société par actions simplifiée</p>
+                        <p class="font-size-0-9-rem highlight-text">Société à responsabilité limitée</p>
                     </div>
-
+                
                                     <div class="bloc-detail-notice mb-3">
                         <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Activité principale</p>
-                        <p class="font-size-0-9-rem w-75 highlight-text">La prestation de services informatiques , le conseil en informatique et services annexes , l'animation de formations informatiques , la création, la fourniture de tous supports de formation , la création et la commercialisation d'applications mobiles ou Web</p>
+                        <p class="font-size-0-9-rem w-75 highlight-text">Conseil en informatique</p>
                     </div>
-
+                                
                                     <div class="bloc-detail-notice mb-3">
                         <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Capital social</p>
                         <p class="font-size-0-9-rem">1 000.00   €   </p>
                     </div>
-                                                                                                                                                                                                                                                    <div class="bloc-detail-notice mb-3">
-                                    <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Adresse du siège</p>
-                                    <p class="font-size-0-9-rem highlight-text">
-                                        128 rue La Boétie                                        75008                                        Paris                                        France                                    </p>
-                                </div>
-                                                                                        <div class="bloc-detail-notice mb-3">
-                                    <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Département du siège</p>
-                                    <p class="font-size-0-9-rem">75</p>
-                                </div>
-
-
+                                                                                                                                                                                                                                            
+                
             </div>
         </div>
 
+                         
 
-
-
-
+        
+                                
                                                                             <hr class="ligne-notice-description"/>
                         <div class="row">
                             <h5 class="col-12 color-blue-inpi mb-3 title-export" id="representants">
@@ -905,16 +901,16 @@
                                 <span role="button" tabindex="0" class="inpi-bold pointer font-size-0-9-rem color-blue-inpi" data-toggle="modal" id="from-representants"
                                           data-target="#loginModal">vous connecter</span>
                             </p>
-
+                                        
                     <div class="col-12  col-md-4 ">
                         <div class="d-inline-block bloc-dirigeant">
                             <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">
                                                                                                         Nom, Prénom(s)
                                                             </p>
                             <p class="font-size-0-9-rem highlight-text">
-                                                                                                        Jouppe Xavier Marie Erwan
+                                                                                                        XXX yyy
                                                                                                                                             <br>
-                                                                                                                (Président)
+                                                                                                                (Liquidateur)
                                                                                                 </p>
                         </div>
                     </div>
@@ -925,72 +921,146 @@
                     <div class="col-12  col-md-4 ">
                                                     <div class="d-inline-block bloc-dirigeant">
                                                                     <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Date de naissance (mm/aaaa)</p>
-                                    <p class="font-size-0-9-rem"> 02/1990</p>
+                                    <p class="font-size-0-9-rem"> 07/1990</p>
                                                             </div>
                                             </div>
 
                                                         </div>
+                                    
+                    <hr class="ligne-notice-description"/>
+            <div class="row rbe-wrapper">
+    <h5 class="col-12 color-blue-inpi mb-3 title-export">Bénéficiaires effectifs</h5>
+                                <div class="col-12 row mt-4">
+    <div class="col-12">
+        <div class="col-12 row p-0">
+                            <div class="bloc-detail-notice col-md-6">
+                    <p class="mb-0 font-size-13 inpi-light">Nom prénom</p>
+                    <p class="font-size-15">XXX yyy</p>
+                </div>
+                                        <div class="bloc-detail-notice col-md-6">
+                    <p class="mb-0 font-size-13 inpi-light">Nationalité</p>
+                    <p class="font-size-15">FRANCAISE</p>
+                </div>
+                    </div>
+        <div class="col-12 row p-0">
+                                        <div class="bloc-detail-notice col-md-6">
+                    <p class="mb-0 font-size-13 inpi-light">Date de naissance (mm/aaaa)</p>
+                    <p class="font-size-15">07/1990</p>
+                </div>
+                    </div>
+            </div>
+    <div class="col-12 mb-2">
+        <a class="pointer do-not-export button-collapse-rbe collapsed" data-toggle="collapse" data-target="#collapse-rbe-0" aria-expanded="false" aria-controls="collapse-rbe-0">
+            <p class="mb-0 font-size-13 d-inline-block mr-2 inpi-bold">
+                Modalités du contrôle exercé par le bénéficiaire effectif
+            </p>
+            <img class="chevron-down-rbe" src="/build/images/chevron-down.svg" alt="chevron-down">
+            <img class="chevron-up-rbe" src="/build/images/chevron-up.svg" alt="chevron-down">
+        </a>
+    </div>
+    <div class="col-12 collapse" id="collapse-rbe-0">
+                    <div class="bloc-detail-notice">
+                <p class="rbe-field"><span class="rbe-field-title">Capital total </span> : 100.0 %</p>
+            </div>
+                <div class="ml-3">
+                        <div class="ml-3">
+                                                                            </div>
+                        <div class="ml-3">
+                                <div class="ml-3">
+                                                        </div>
+                                <div class="ml-3">
+                                                        </div>
+                                <div class="ml-3">
+                                                        </div>
+                                <div class="ml-3">
+                                                        </div>
+            </div>
+        </div>
+        <br/>
+                    <p class="rbe-field">
+                <span class="rbe-field-title">Total des droits de vote </span> : 100.0%
+            </p>
+                <div class="ml-3">
+                        <div class="ml-3">
+                                                            </div>
+                        <div class="ml-3">
+                                <div class="ml-3">
+                                                                            </div>
+                                <div class="ml-3">
+                                                                            </div>
+            </div>
+        </div>
 
+        <br/>
+                <div class="ml-3">
+                                </div>
+                <br>
 
+                    </div>
+</div>
+        </div>
+
+<script>
+    const titleShowAllRBE = 'Voir les modalités';
+    const titleShowLess = 'Voir moins';
+</script>        
 
         <!-- Boucle pour afficher que le 1er etablissement -->
                                                                         <hr class="ligne-notice-description"/>
                     <h5 class="col-12 color-blue-inpi mb-4 pl-0 title-export">Établissements</h5>
                                     <div class="row">
+                                                    <div class="col-12">
+                                <p class="establishment-removed">Cet établissement a été radié le 15/10/2021</p>
+                            </div>
                                                 <div class="col-12 col-md-6">
                                                             <div class="bloc-detail-notice">
                                     <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Type d&#039;établissement</p>
                                     <p class="font-size-0-9-rem">Siège</p>
                                 </div>
-
-
-
-
+                            
+                            
+                            
+                            
                                                     </div>
                         <div class="col-12 col-md-6">
-                                                            <div class="bloc-detail-notice">
-                                    <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Type d’exploitation</p>
-                                    <p class="font-size-0-9-rem">Divers</p>
-                                </div>
-
-                                                            <div class="bloc-detail-notice">
-                                    <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Activité</p>
-                                    <p class="font-size-0-9-rem">La prestation de services informatiques , le conseil en informatique et services annexes , l'animation de formations informatiques , la création, la fourniture de tous supports de formation , la création et la commercialisation d'applications mobiles ou Web</p>
-                                </div>
-
+                            
+                            
                                                             <div class="bloc-detail-notice">
                                     <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Adresse</p>
                                     <p class="font-size-0-9-rem">
-                                        128 rue La Boétie                                        <br>                                        75008                                        Paris                                        France                                    </p>
+                                        17 Rue de Franceville                                        <br>                                        93220                                        Gagny                                        FRANCE                                    </p>
                                 </div>
-
+                            
                                                             <div class="bloc-detail-notice">
                                     <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Département</p>
-                                    <p class="font-size-0-9-rem">75</p>
+                                    <p class="font-size-0-9-rem">93</p>
                                 </div>
                                                     </div>
                     </div>
                                                     <p role="button" tabindex="0" class="pointer collapsed color-blue-inpi show-more-etablissements do-not-export" data-toggle="collapse"
                        data-target="#etablissements-other"
                        aria-expanded="false">Voir tous les établissements</p>
-
+                
                                                 <div class="row  collapse " id="etablissements-other">
                     <div class="col-12">
                                                                             <hr class="col-12 ml-0">
                                                         <div class="row">
+                                                    <div class="col-12">
+                                <p class="establishment-removed">Cet établissement a été radié le 15/10/2021</p>
+                            </div>
                                                 <div class="col-12 col-md-6">
                                                             <div class="bloc-detail-notice">
                                     <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Type d&#039;établissement</p>
                                     <p class="font-size-0-9-rem">Principal</p>
                                 </div>
-
-
-
+                            
+                            
+                            
                                                             <div class="bloc-detail-notice">
                                     <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Début d’activité</p>
-                                    <p class="font-size-0-9-rem">13/01/2020</p>
+                                    <p class="font-size-0-9-rem">06/05/2018</p>
                                 </div>
-
+                            
                                                             <div class="bloc-detail-notice">
                                     <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Origine du fonds</p>
                                     <p class="font-size-0-9-rem">Création</p>
@@ -1001,30 +1071,148 @@
                                     <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Type d’exploitation</p>
                                     <p class="font-size-0-9-rem">Exploitation directe</p>
                                 </div>
-
+                            
                                                             <div class="bloc-detail-notice">
                                     <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Activité</p>
-                                    <p class="font-size-0-9-rem">La prestation de services informatiques , le conseil en informatique et services annexes , l'animation de formations informatiques , la création, la fourniture de tous supports de formation , la création et la commercialisation d'applications mobiles ou Web</p>
+                                    <p class="font-size-0-9-rem">Conseil en informatique</p>
                                 </div>
-
+                            
                                                             <div class="bloc-detail-notice">
                                     <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Adresse</p>
                                     <p class="font-size-0-9-rem">
-                                        128 rue La Boétie                                        <br>                                        75008                                        Paris                                        France                                    </p>
+                                         17 Rue de Franceville                                                                                93220                                        Gagny                                        FRANCE                                    </p>
                                 </div>
-
+                            
                                                             <div class="bloc-detail-notice">
                                     <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Département</p>
-                                    <p class="font-size-0-9-rem">75</p>
+                                    <p class="font-size-0-9-rem">93</p>
+                                </div>
+                                                    </div>
+                    </div>
+                                
+                                                                                        <hr class="col-12 ml-0">
+                                                        <div class="row">
+                                                    <div class="col-12">
+                                <p class="establishment-removed">Cet établissement a été radié le 15/10/2021</p>
+                            </div>
+                                                <div class="col-12 col-md-6">
+                                                            <div class="bloc-detail-notice">
+                                    <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Type d&#039;établissement</p>
+                                    <p class="font-size-0-9-rem">Siège</p>
+                                </div>
+                            
+                            
+                            
+                            
+                                                    </div>
+                        <div class="col-12 col-md-6">
+                            
+                            
+                                                            <div class="bloc-detail-notice">
+                                    <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Adresse</p>
+                                    <p class="font-size-0-9-rem">
+                                         17 Rue de Franceville                                                                                93220                                        Gagny                                        FRANCE                                    </p>
+                                </div>
+                            
+                                                            <div class="bloc-detail-notice">
+                                    <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Département</p>
+                                    <p class="font-size-0-9-rem">93</p>
                                 </div>
                                                     </div>
                     </div>
                                     <p role="button" tabindex="0" class="pointer collapsed color-blue-inpi show-less-etablissements col-5 do-not-export" data-toggle="collapse"
                        data-target="#etablissements-other" aria-expanded="false">Voir moins</p>
                     </div>                      </div>
+                                
+                    
+                    <hr class="ligne-notice-description"/>
+            <h5 class="col-12 color-blue-inpi mb-4 pl-0 title-export"
+                id="observations">Observations</h5>
+                            <p class="collapsed color-black-inpi font-size-0-9-rem title-ask-connect do-not-export">Pour voir le détail des observations, veuillez
+                    <span role="button" tabindex="0" class="inpi-bold pointer font-size-0-9-rem color-blue-inpi" data-toggle="modal" id="from-observations"
+                          data-target="#loginModal">vous connecter</span>
+                </p>
+            
+            <!-- afficher que la 1ere notice -->
+                                        <div class="row">
+                    <div class="col-6">
+                        <div class="bloc-detail-notice">
+                            <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Numéro d&#039;observation</p>
+                                                            <p class="font-size-0-9-rem">71942</p>
+                                                    </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="bloc-detail-notice">
+                            <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Date d&#039;ajout</p>
+                                                            <p class="font-size-0-9-rem">15/10/2021</p>
+                                                    </div>
+                    </div>
+                                        <div class="col-12 col-md-6">
+                                                    <p tabindex="0" class="pointer collapsed color-blue-inpi show-more-observations do-not-export" data-toggle="collapse"
+                               data-target="#observations-other"
+                               aria-expanded="false">Voir toutes les observations</p>
+                                            </div>
+                </div>
+            
+            <!-- Affichage du reste des observations si y en a plus d'une-->
+                            <div class="row collapse" id="observations-other">
+                                                                                                                    <!-- Collapse pour afficher les autres éléments -->
 
+                            <hr class="col-7 ml-0">
+                            <div class="row col-12 ml-0 p-0">
+                                <div class="col-6">
+                                    <div class="bloc-detail-notice">
+                                        <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Numéro d&#039;observation</p>
+                                                                                    <p class="font-size-0-9-rem">NC</p>
+                                                                            </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="bloc-detail-notice">
+                                        <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Date d&#039;ajout</p>
+                                                                                    <p class="font-size-0-9-rem">01/07/2021</p>
+                                                                            </div>
+                                </div>
+                                                            </div>
+                                                                                                                            <!-- Collapse pour afficher les autres éléments -->
 
-            </div>
+                            <hr class="col-7 ml-0">
+                            <div class="row col-12 ml-0 p-0">
+                                <div class="col-6">
+                                    <div class="bloc-detail-notice">
+                                        <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Numéro d&#039;observation</p>
+                                                                                    <p class="font-size-0-9-rem">37526</p>
+                                                                            </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="bloc-detail-notice">
+                                        <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Date d&#039;ajout</p>
+                                                                                    <p class="font-size-0-9-rem">17/08/2020</p>
+                                                                            </div>
+                                </div>
+                                                            </div>
+                                                                                                                            <!-- Collapse pour afficher les autres éléments -->
+
+                            <hr class="col-7 ml-0">
+                            <div class="row col-12 ml-0 p-0">
+                                <div class="col-6">
+                                    <div class="bloc-detail-notice">
+                                        <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Numéro d&#039;observation</p>
+                                                                                    <p class="font-size-0-9-rem">NC</p>
+                                                                            </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="bloc-detail-notice">
+                                        <p class="mb-0 font-weight-300 font-size-0-9-rem inpi-light">Date d&#039;ajout</p>
+                                                                                    <p class="font-size-0-9-rem">12/05/2018</p>
+                                                                            </div>
+                                </div>
+                                                            </div>
+                                                            <p tabindex="0" class="pointer collapsed color-blue-inpi show-less-observations col-5 do-not-export"
+                                   data-toggle="collapse"
+                                   data-target="#observations-other"
+                                   aria-expanded="false">Voir moins</p>
+                                                                                        </div>
+                                    </div>
 
     <div class="d-flex bloc-error-link do-not-export pr-3 pr-md-0">
         <a tabindex="0" data-toggle="modal" data-target="#noticeErrorModal"
@@ -1067,35 +1255,35 @@
                                                                                                                                                             <div class="form-group d-flex flex-column  w-45 ">
                                     <label for="notice_error_form_firstname" class="required">Prénom</label>
                                     <span class="color-red-inpi">
-
+                                        
                                     </span>
                                                                             <input type="text" id="notice_error_form_firstname" name="notice_error_form[firstname]" required="required" placeholder="Prénom" />
                                                                     </div>
                                                                                                                                                             <div class="form-group d-flex flex-column  w-45 ">
                                     <label for="notice_error_form_lastname" class="required">Nom</label>
                                     <span class="color-red-inpi">
-
+                                        
                                     </span>
                                                                             <input type="text" id="notice_error_form_lastname" name="notice_error_form[lastname]" required="required" placeholder="Nom" />
                                                                     </div>
                                                                                                                                                             <div class="form-group d-flex flex-column  w-100 ">
                                     <label for="notice_error_form_email" class="required">Adresse électronique</label>
                                     <span class="color-red-inpi">
-
+                                        
                                     </span>
                                                                             <input type="email" id="notice_error_form_email" name="notice_error_form[email]" required="required" placeholder="Adresse électronique" pattern=".+@*\.[A-z]+" class="w-45" />
                                                                     </div>
                                                                                                                                                             <div class="form-group d-flex flex-column  w-45 ">
                                     <label for="notice_error_form_phoneType" class="required">Type de téléphone</label>
                                     <span class="color-red-inpi">
-
+                                        
                                     </span>
                                                                             <select id="notice_error_form_phoneType" name="notice_error_form[phoneType]"><option value="office">Bureau</option><option value="home">Domicile</option><option value="mobile">Mobile</option></select>
                                                                     </div>
                                                                                                                                                             <div class="form-group d-flex flex-column  w-45 ">
                                     <label for="notice_error_form_numberPhone">Numéro</label>
                                     <span class="color-red-inpi">
-
+                                        
                                     </span>
                                                                             <input type="tel" id="notice_error_form_numberPhone" name="notice_error_form[numberPhone]" />
                                                                     </div>
@@ -1129,27 +1317,27 @@
                                                                                                                                                             <div class="form-group d-flex flex-column  w-45 ">
                                     <label for="notice_error_form_company">Société</label>
                                     <span class="color-red-inpi">
-
+                                        
                                     </span>
                                                                             <input type="text" id="notice_error_form_company" name="notice_error_form[company]" placeholder="Société" />
                                                                     </div>
                                                                                                                                                             <div class="form-group d-flex flex-column  w-45 ">
                                     <label for="notice_error_form_sirenPi">Siren</label>
                                     <span class="color-red-inpi">
-
+                                        
                                     </span>
                                                                             <input type="text" id="notice_error_form_sirenPi" name="notice_error_form[sirenPi]" placeholder="Siren" maxlength="9" />
                                                                     </div>
                                                                                                                                                             <div class="form-group w-100 mt-5">
                                     <div class="d-flex flex-column w-45">
                                         <label for="notice_error_form_siren" class="required">SIREN de la notice Entreprise en erreur</label>
-                                        <input type="text" id="notice_error_form_siren" name="notice_error_form[siren]" disabled="disabled" required="required" value="880878145" />
+                                        <input type="text" id="notice_error_form_siren" name="notice_error_form[siren]" disabled="disabled" required="required" value="839517323" />
                                     </div>
                                 </div>
                                                                                                                                                             <div class="form-group d-flex flex-column  w-100 ">
                                     <label for="notice_error_form_description" class="required">Description de l&#039;erreur</label>
                                     <span class="color-red-inpi">
-
+                                        
                                     </span>
                                                                             <textarea id="notice_error_form_description" name="notice_error_form[description]" required="required" rows="4"></textarea>
                                                                     </div>
@@ -1162,16 +1350,16 @@
                                                                                                                                                             <div class="form-group d-flex flex-column  w-100 ">
                                     <label for="notice_error_form_captchaCode" class="required">Veuillez recopier le texte</label>
                                     <span class="color-red-inpi">
-
+                                        
                                     </span>
                                                                                 <link type="text/css" rel="stylesheet" href="../captcha-handler?get=bdc-layout-stylesheet.css" /><div class="BDC_CaptchaDiv" id="ExampleCaptchaUserRegistration_CaptchaDiv" style="width:446px; height:50px;"><!--
  --><div class="BDC_CaptchaImageDiv" id="ExampleCaptchaUserRegistration_CaptchaImageDiv" style="width:250px !important; height:50px !important;"><!--
-   --><div class="BDC_CaptchaImageDiv" style="width:250px; height:40px;"><img class="BDC_CaptchaImage" id="ExampleCaptchaUserRegistration_CaptchaImage" src="../captcha-handler?get=image&amp;c=ExampleCaptchaUserRegistration&amp;t=61e1a007e1785391586388e6184458af" alt="Retype the CAPTCHA code from the image" style="" /></div><!--
+   --><div class="BDC_CaptchaImageDiv" style="width:250px; height:40px;"><img class="BDC_CaptchaImage" id="ExampleCaptchaUserRegistration_CaptchaImage" src="../captcha-handler?get=image&amp;c=ExampleCaptchaUserRegistration&amp;t=9b9192bdd0989fae17f24d6ddaf75527" alt="Retype the CAPTCHA code from the image" style="" /></div><!--
    --><a href="//captcha.org/captcha.html?symfony" title="BotDetect CAPTCHA Library for Symfony" style="display: block !important; height: 10px !important; margin: 0 !important; padding: 0 !important; font-size: 9px !important; line-height: 9px !important; visibility: visible !important; font-family: Verdana, DejaVu Sans, Bitstream Vera Sans, Verdana Ref, sans-serif !important; vertical-align: middle !important; text-align: center !important; text-decoration: none !important; background-color: #f8f8f8 !important; color: #606060 !important;">BotDetect CAPTCHA Library for Symfony</a><!--
  --></div><!--
  --><div class="BDC_CaptchaIconsDiv" id="ExampleCaptchaUserRegistration_CaptchaIconsDiv" style="width: 190px !important;"><!--
    --><a class="BDC_ReloadLink" id="ExampleCaptchaUserRegistration_ReloadLink" href="#" title="Change the CAPTCHA code"><img class="BDC_ReloadIcon" id="ExampleCaptchaUserRegistration_ReloadIcon" src="../captcha-handler?get=bdc-reload-icon.gif" alt="Change the CAPTCHA code" /></a><!--
- --></div><script src="../captcha-handler?get=script-include&amp;c=ExampleCaptchaUserRegistration&amp;t=61e1a007e1785391586388e6184458af" type="text/javascript"></script><input type="hidden" name="BDC_UserSpecifiedCaptchaId" id="BDC_UserSpecifiedCaptchaId" value="ExampleCaptchaUserRegistration" /><input type="hidden" name="BDC_VCID_ExampleCaptchaUserRegistration" id="BDC_VCID_ExampleCaptchaUserRegistration" value="61e1a007e1785391586388e6184458af" /><input type="hidden" name="BDC_BackWorkaround_ExampleCaptchaUserRegistration" id="BDC_BackWorkaround_ExampleCaptchaUserRegistration" value="0" /><input type="hidden" name="BDC_Hs_ExampleCaptchaUserRegistration" id="BDC_Hs_ExampleCaptchaUserRegistration" value="5556e06fca3109c87714f86ab667a2016fb00d5f" /><input type="hidden" name="BDC_SP_ExampleCaptchaUserRegistration" id="BDC_SP_ExampleCaptchaUserRegistration" value="1188339811" /></div><input type="text" id="captchaCode" name="notice_error_form[captchaCode]" required="required" />
+ --></div><script src="../captcha-handler?get=script-include&amp;c=ExampleCaptchaUserRegistration&amp;t=9b9192bdd0989fae17f24d6ddaf75527" type="text/javascript"></script><input type="hidden" name="BDC_UserSpecifiedCaptchaId" id="BDC_UserSpecifiedCaptchaId" value="ExampleCaptchaUserRegistration" /><input type="hidden" name="BDC_VCID_ExampleCaptchaUserRegistration" id="BDC_VCID_ExampleCaptchaUserRegistration" value="9b9192bdd0989fae17f24d6ddaf75527" /><input type="hidden" name="BDC_BackWorkaround_ExampleCaptchaUserRegistration" id="BDC_BackWorkaround_ExampleCaptchaUserRegistration" value="0" /><input type="hidden" name="BDC_Hs_ExampleCaptchaUserRegistration" id="BDC_Hs_ExampleCaptchaUserRegistration" value="3fac514592a62e6008a6aecf361711110f6a1519" /><input type="hidden" name="BDC_SP_ExampleCaptchaUserRegistration" id="BDC_SP_ExampleCaptchaUserRegistration" value="1930274199" /></div><input type="text" id="captchaCode" name="notice_error_form[captchaCode]" required="required" />
                                                                     </div>
                                                                                                                                                                                 </div>
                             </div>
@@ -1185,10 +1373,10 @@
             </div>
         </div>
     </div>
-        <input type="hidden" id="notice_error_form__token" name="notice_error_form[_token]" value="poQ1zKglWuUEzYkIyNQ2CY9nxC4r8U3i_q_o4fD8UxY" /></form>
-
-
-
+        <input type="hidden" id="notice_error_form__token" name="notice_error_form[_token]" value="HPH4zaGrcofvABilQauzoiZOfGIHbE_L_6geYji9pes" /></form>
+    
+    
+    
                                                     </div>
 
     <div class="second-container-notice d-none" id="notice-documents">
@@ -1277,9 +1465,9 @@
 
     var regex = new RegExp( "(" + q + ")" , 'gi' );
 
-    var idNotice = '880878145';
+    var idNotice = '839517323';
     var typeNotice = 'companies';
-    var documentsListPath = '/documents/list/companies/880878145';
+    var documentsListPath = '/documents/list/companies/839517323';
     // minusImg et plusImg sont déclarés en amont
     var minusImg = '/build/images/minus.svg';
     var plusImg = '/build/images/plus.svg';
@@ -1299,7 +1487,7 @@
             </div>
 
                             <div class="mt-4 last-update-titles">
-                    Dernière mise à jour de la base Entreprises : 06/03/2022
+                    Dernière mise à jour de la base Entreprises : 13/04/2022
                 </div>
                         <a class="my-3 ml-3 opinion-notice" target="_blank" rel="noopener noreferrer" title="Je donne mon avis (nouvelle fenêtre)" href="https://voxusagers.numerique.gouv.fr/Demarches/2757?&view-mode=formulaire-avis&nd_mode=en-ligne-enti%C3%A8rement&nd_source=button&key=e765bd5fb9eae10e1ff7de0593deb163">
                 <img src="https://voxusagers.numerique.gouv.fr/static/bouton-blanc.svg" alt="Je donne mon avis" title="Je donne mon avis (nouvelle fenêtre)" />
@@ -1322,7 +1510,7 @@
         <input type="hidden" name="fromRequest" value=""/>
                     </div>
                 <div class="modal-footer centered">
-
+                    
         <div class="cancel-or-login-container w-100 d-flex justify-content-between">
             <button type="button" class="btn-inpi-secondary w-45 font-size-15" data-dismiss="modal">Annuler</button>
             <button class="btn-inpi-primary w-45 font-size-15 text-center login-btn">Se connecter</button>
@@ -1355,7 +1543,7 @@
         <input type="hidden" name="fromRequest" value=""/>
                     </div>
                 <div class="modal-footer centered">
-
+                    
         <div class="cancel-or-login-container w-100 d-flex justify-content-between">
             <button type="button" class="btn-inpi-secondary w-45 font-size-15" data-dismiss="modal">Annuler</button>
             <button class="btn-inpi-primary w-45 font-size-15 text-center login-btn">Se connecter</button>
@@ -1388,7 +1576,7 @@
         <input type="hidden" name="fromRequest" value=""/>
                     </div>
                 <div class="modal-footer centered">
-
+                    
         <div class="cancel-or-login-container w-100 d-flex justify-content-between">
             <button type="button" class="btn-inpi-secondary w-45 font-size-15" data-dismiss="modal">Annuler</button>
             <button class="btn-inpi-primary w-45 font-size-15 text-center login-btn">Se connecter</button>
@@ -1437,9 +1625,9 @@
                                     <button type="submit" id="create_alert_form_submit" name="create_alert_form[submit]" class="w-45 btn-inpi-primary">Enregistrer</button>
             </div>
         </div>
-        <input type="hidden" id="create_alert_form_notice" name="create_alert_form[notice]" class="notice-data" value="https://data.inpi.fr/entreprises/880878145" />
-        <input type="hidden" id="create_alert_form_type" name="create_alert_form[type]" class="base-type" value="https://data.inpi.fr/entreprises/880878145" />
-        <input type="hidden" id="create_alert_form__token" name="create_alert_form[_token]" value="9IAzxSkmCKtLWf4AHk6c-ov9VCezm7YbWiePW2B6Uhk" /></form>
+        <input type="hidden" id="create_alert_form_notice" name="create_alert_form[notice]" class="notice-data" value="https://data.inpi.fr/entreprises/839517323?q=red%20needles" />
+        <input type="hidden" id="create_alert_form_type" name="create_alert_form[type]" class="base-type" value="https://data.inpi.fr/entreprises/839517323?q=red%20needles" />
+        <input type="hidden" id="create_alert_form__token" name="create_alert_form[_token]" value="u-SyQYkspAyr6OX5Emd-wk_r7FHo75gy5GLjPql059g" /></form>
 
                     </div>
                 <div class="modal-footer centered">
@@ -1463,13 +1651,13 @@
         var getUserSso = "/sso/user";
         var grcSiteKey = "6Le88O8UAAAAABjRJrSRBSZoI8fasuNzo55BDWcA";
         var grcActivate = "true";
-        var documentsList = {"bilans":[],"actes":{"228784761":{"type":"","name":"D\u00e9p\u00f4t du 23\/01\/2020","date":"23\/01\/2020","format":"pdf","secondFile":""}}};
+        var documentsList = {"bilans":[],"actes":{"27074590":{"type":"Statuts constitutifs - Constitution","name":"D\u00e9p\u00f4t du 12\/05\/2018","date":"12\/05\/2018","format":"pdf","secondFile":""},"232398979":{"type":"D\u00e9cision(s) de l'associ\u00e9 unique - Dissolution ,D\u00e9cision(s) de l'associ\u00e9 unique - Nomination de liquidateur","name":"D\u00e9p\u00f4t du 01\/07\/2021","date":"01\/07\/2021","format":"pdf","secondFile":""},"233069085":{"type":"Comptes de cl\u00f4ture de la liquidation - ,D\u00e9cision(s) des associ\u00e9s - Cl\u00f4ture des op\u00e9rations de liquidation","name":"D\u00e9p\u00f4t du 15\/10\/2021","date":"15\/10\/2021","format":"pdf","secondFile":""}}};
 
         var showModal = function($selector) {
             $($selector).modal('show');
         };
 
-
+        
     </script>
 
         </main>
@@ -1478,7 +1666,7 @@
         <footer>
             <div id="bandeau-footer" class="bg-blue-inpi text-white d-flex align-items-center">
                 <div class="container">
-
+                    
 <div class="d-none d-md-block">
     <div class="row d-flex justify-content-between">
     <div class="col-auto bloc-adress">
@@ -1718,7 +1906,7 @@
                     }, 3000);
                 });
             </script>
-
+        
     <script src="/build/detail.542074b5.js"></script>
     <script src="/build/result.d9c4d5ec.js"></script>
 
