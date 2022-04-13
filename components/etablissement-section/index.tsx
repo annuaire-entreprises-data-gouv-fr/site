@@ -17,17 +17,23 @@ interface IProps {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
   usedInEntreprisePage?: Boolean;
+  withDenomination?: Boolean;
 }
 
 const EtablissementSection: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
   usedInEntreprisePage,
+  withDenomination,
 }) => {
   const data = [
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
     ['N° TVA Intracommunautaire', formatIntFr(uniteLegale.numeroTva)],
+    [
+      'Activité principale de l’entité (NAF/APE)',
+      uniteLegale.libelleActivitePrincipale,
+    ],
     [
       'Activité principale de l’établissement (NAF/APE)',
       etablissement.libelleActivitePrincipale,
@@ -56,7 +62,24 @@ const EtablissementSection: React.FC<IProps> = ({
     data.splice(0, 0, ['Enseigne de l’établissement', etablissement.enseigne]);
   }
   if (etablissement.denomination) {
-    data.splice(0, 0, ['Nom commercial', etablissement.denomination]);
+    data.splice(0, 0, [
+      'Nom commercial de l’établissement',
+      etablissement.denomination,
+    ]);
+  }
+  if (withDenomination) {
+    data.splice(0, 0, ['Dénomination de l’entité', uniteLegale.nomComplet]);
+    data.splice(0, 0, [
+      'Type d’établissement',
+      <>
+        {etablissement.estSiege ? 'Siège' : 'Secondaire'}
+        {' ( '}
+        <a key="entite" href={`/entreprise/${uniteLegale.siren}`}>
+          → voir la page de l’entité
+        </a>
+        {' )'}
+      </>,
+    ]);
   }
 
   return (

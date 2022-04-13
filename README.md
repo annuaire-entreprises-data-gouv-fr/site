@@ -17,6 +17,7 @@ Ce repository fait partie d'un ensemble de services qui constituent l'[Annuaire 
 |Le site Web | [par ici 👉](https://github.com/etalab/annuaire-entreprises-site) |
 |L’API du Moteur de recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-api) |
 |L‘API de redondance de Sirene | [par ici 👉](https://github.com/etalab/annuaire-entreprises-sirene-api) |
+|L‘infra du moteur de recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-infra) |
 
 ## Etat des lieux 🤓
 

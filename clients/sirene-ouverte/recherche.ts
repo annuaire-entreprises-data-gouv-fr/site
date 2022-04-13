@@ -18,10 +18,12 @@ interface ISireneOuverteUniteLegaleResultat {
   date_creation: string;
   activite_principale: string;
   etat_administratif_etablissement: string;
+  etat_administratif_unite_legale: string;
   latitude: string;
   longitude: string;
   nom_complet: string;
   page_path: string;
+  complement_adresse: string;
   numero_voie: string;
   indice_repetition: string;
   type_voie: string;
@@ -86,8 +88,9 @@ const mapToDomainObject = (
       return {
         siren: result.siren,
         siret: result.siret,
-        estActive: result.etat_administratif_etablissement === 'A',
+        estActive: result.etat_administratif_unite_legale === 'A',
         adresse: formatAdresse(
+          result.complement_adresse || '',
           result.numero_voie,
           result.indice_repetition,
           result.type_voie,

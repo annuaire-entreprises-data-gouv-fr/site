@@ -46,6 +46,16 @@ export const formatFloatFr = (floatAsString = '') => {
 };
 
 /**
+ * Serialize for injection in client script
+ * @param term
+ * @returns
+ */
+export const serializeForClientScript = (term: string) => {
+  // remove signle quotes as they dont get serialize by encode/decodeUriComponent
+  return encodeURIComponent(term.replaceAll("'", ''));
+};
+
+/**
  * Normalize string and remove special chars & diacritics before using a term in search
  */
 export const escapeTerm = (term: string) => {
@@ -125,6 +135,7 @@ const wrapWord = (word: string, caps = false, stop = ' ') => {
 };
 
 export const formatAdresse = (
+  complement: string,
   numero_voie: string,
   indice_repetition: string,
   type_voie: string,
@@ -134,6 +145,7 @@ export const formatAdresse = (
   pays?: string
 ) => {
   if (
+    !complement &&
     !numero_voie &&
     !type_voie &&
     !libelle_commune &&
@@ -144,13 +156,11 @@ export const formatAdresse = (
   }
 
   const fullLibelleFromTypeVoie = libelleFromTypeVoie(type_voie);
-  return `${wrapWord(numero_voie)}${wrapWord(indice_repetition)}${wrapWord(
-    fullLibelleFromTypeVoie
-  )}${wrapWord(libelle_voie, false, ', ')}${code_postal || ''} ${wrapWord(
-    libelle_commune,
-    true,
-    ''
-  )}${pays ? ', ' + pays : ''}`;
+  return `${wrapWord(complement, true, ', ')}${wrapWord(numero_voie)}${wrapWord(
+    indice_repetition
+  )}${wrapWord(fullLibelleFromTypeVoie)}${wrapWord(libelle_voie, false, ', ')}${
+    code_postal || ''
+  } ${wrapWord(libelle_commune, true, '')}${pays ? ', ' + pays : ''}`;
 };
 
 export const formatEnseigne = (

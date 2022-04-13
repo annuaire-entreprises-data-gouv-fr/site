@@ -51,16 +51,22 @@ const extractDossierPrincipal = (
     isDossierArray ? response.fichier.dossier : [response.fichier.dossier]
   ) as IRNCSResponseDossier[];
 
-  const principaux = dossiers.filter(
-    (dossier) => dossier.identite.type_inscrip === 'P'
-  );
+  // use most "inscription principale"
+  const principaux = dossiers
+    .filter((dossier) => dossier.identite.type_inscrip === 'P')
+    .sort((a, b) => {
+      return (
+        new Date(b?.identite?.dat_immat).getTime() -
+        new Date(a?.identite?.dat_immat).getTime()
+      );
+    });
 
   if (principaux.length > 1) {
     logWarningInSentry('Several inscription principale', { siren });
-    return principaux[0];
   } else if (principaux.length === 0) {
     logWarningInSentry('No inscription principale', { siren });
     return dossiers[0];
   }
+
   return principaux[0];
 };

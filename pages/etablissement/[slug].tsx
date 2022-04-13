@@ -40,6 +40,7 @@ const EtablissementPage: React.FC<IProps> = ({
         <EtablissementSection
           etablissement={etablissement}
           uniteLegale={uniteLegale}
+          withDenomination={true}
         />
       ) : (
         <>

@@ -117,10 +117,6 @@ const mapToDomainObject = (
     nomUsageUniteLegale,
   } = periodesUniteLegale[0];
 
-  const safeActivitePrincipaleUniteLegale = (
-    activitePrincipaleUniteLegale || ''
-  ).replace('.', '');
-
   const siege = createDefaultEtablissement();
 
   if (periodesUniteLegale && periodesUniteLegale.length > 0) {
@@ -130,9 +126,9 @@ const mapToDomainObject = (
     siege.nic = nicSiegeUniteLegale;
     siege.estActif = null;
     siege.dateCreation = dateDebut;
-    siege.activitePrincipale = safeActivitePrincipaleUniteLegale;
+    siege.activitePrincipale = activitePrincipaleUniteLegale;
     siege.libelleActivitePrincipale = libelleFromCodeNaf(
-      safeActivitePrincipaleUniteLegale
+      activitePrincipaleUniteLegale
     );
     siege.estSiege = true;
     siege.trancheEffectif = '';

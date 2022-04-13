@@ -6,10 +6,9 @@ import { codesVoies } from './codes-voie';
 import { categoriesEntreprise } from './categories-entreprise';
 import { codesBeneficiaires } from './codes-beneficiaires';
 
-export const libelleFromCodeNaf = (codeNaf: string, addCode = true) => {
-  const formattedNaf = (codeNaf || '').replace(/[.-]/g, '');
+export const libelleFromCodeNaf = (codeNaf = '', addCode = true) => {
   //@ts-ignore
-  const label = codesNaf[formattedNaf] || 'Activité inconnue';
+  const label = codesNaf[codeNaf] || 'Activité inconnue';
   return addCode && codeNaf ? `${codeNaf} - ${label}` : label;
 };
 
@@ -32,11 +31,6 @@ export const libelleFromCodeEffectif = (
   }
   return null;
 };
-
-export const fullLibelleFromCodeNaf = (activite_principale: string) =>
-  activite_principale
-    ? `${activite_principale} - ${libelleFromCodeNaf(activite_principale)}`
-    : '';
 
 export const libelleFromCategoriesJuridiques = (categorie: string) =>
   //@ts-ignore
