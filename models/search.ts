@@ -44,7 +44,6 @@ const search = async (searchTerm: string, page: number) => {
     const escapedSearchTerm = escapeTerm(searchTerm);
 
     const results = await getResults(escapedSearchTerm, page);
-    // const results = await getResultsFallback(escapedSearchTerm, page);
     return results;
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
@@ -54,10 +53,12 @@ const search = async (searchTerm: string, page: number) => {
         pageCount: 0,
         results: [],
       };
-    } else {
-      logErrorInSentry('Search API', { details: e.toString() });
-      return APINotRespondingFactory(EAdministration.DINUM);
     }
+    if (e instanceof IsLikelyASirenOrSiretException) {
+      throw e;
+    }
+    logErrorInSentry('Search API', { details: e.toString() });
+    return APINotRespondingFactory(EAdministration.DINUM);
   }
 };
 
