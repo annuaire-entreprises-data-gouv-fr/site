@@ -15,18 +15,15 @@ import { IsLikelyASirenOrSiretException } from '../../models';
 import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
 import StructuredDataSearchAction from '../../components/structured-data/search';
+import { isAPINotResponding } from '../../models/api-not-responding';
+import { SearchErrorExplanations } from '../../components/error-explanations';
 
-interface IProps extends ISearchResults {
+interface IProps {
   searchTerm: string;
+  results: ISearchResults;
 }
 
-const SearchResultPage: React.FC<IProps> = ({
-  results,
-  pageCount,
-  currentPage = 1,
-  resultCount,
-  searchTerm,
-}) => (
+const SearchResultPage: React.FC<IProps> = ({ results, searchTerm }) => (
   <Page
     small={true}
     currentSearchTerm={searchTerm}
@@ -36,49 +33,56 @@ const SearchResultPage: React.FC<IProps> = ({
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
     <div className="result-content-container">
-      <ResultsHeader
-        resultCount={resultCount}
-        searchTerm={searchTerm}
-        currentPage={currentPage}
-      />
-
-      {results && (
-        <div>
-          <ResultsList
-            results={results}
-            withFeedback={true}
+      {isAPINotResponding(results) ? (
+        <SearchErrorExplanations />
+      ) : (
+        <>
+          <ResultsHeader
+            resultCount={results.resultCount}
             searchTerm={searchTerm}
+            currentPage={results.currentPage}
           />
-          <PageCounter
-            totalPages={pageCount}
-            querySuffix={`terme=${searchTerm}`}
-            currentPage={currentPage}
-          />
-          <div
-            dangerouslySetInnerHTML={{
-              __html: `
+          {results && (
+            <div>
+              <ResultsList
+                results={results.results}
+                withFeedback={true}
+                searchTerm={searchTerm}
+              />
+              <PageCounter
+                totalPages={results.pageCount}
+                querySuffix={`terme=${searchTerm}`}
+                currentPage={results.currentPage}
+              />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: `
                 <script>
                   var links = document.getElementsByClassName("result-link");
                   for (let i = 0; i < links.length; i++) {
                     links[i].addEventListener("click", function() {
                       if (typeof window !== 'undefined' && window._paq) {
-                        var position = 10*${currentPage - 1}+i+1;
+                        var position = 10*${results.currentPage - 1}+i+1;
                         var siren = links[i].attributes['data-siren'].value;
 
                         window._paq.push([
                           'trackEvent',
                           'research:click',
                           '${serializeForClientScript(searchTerm)}',
-                          'selectedSiren='+siren+'-position='+position+'-resultCount='+${resultCount},
+                          'selectedSiren='+siren+'-position='+position+'-resultCount='+${
+                            results.resultCount
+                          },
                         ]);
                       }
                     });
                   }
                 </script>
               `,
-            }}
-          ></div>
-        </div>
+                }}
+              ></div>
+            </div>
+          )}
+        </>
       )}
     </div>
 
@@ -101,7 +105,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const results = (await search(searchTermParam, page)) || {};
     return {
       props: {
-        ...results,
+        results,
         searchTerm: searchTermParam,
       },
     };

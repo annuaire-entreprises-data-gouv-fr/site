@@ -1,5 +1,5 @@
 import React from 'react';
-import { ISearchResult } from '../../models/search';
+import { ISearchResult, ISearchResults } from '../../models/search';
 import { capitalize } from '../../utils/helpers/formatting';
 import { SearchFeedback } from '../search-feedback';
 import { Tag } from '../tag';

@@ -4,6 +4,12 @@ import getResults from '../clients/sirene-ouverte/recherche';
 // import getResultsFallback from '../clients/sirene-ouverte/recherche-fallback';
 import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
 import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
+import logErrorInSentry from '../utils/sentry';
+import { EAdministration } from './administration';
+import {
+  APINotRespondingFactory,
+  isAPINotResponding,
+} from './api-not-responding';
 
 export interface ISearchResult {
   siren: string;
@@ -42,9 +48,15 @@ const search = async (searchTerm: string, page: number) => {
     return results;
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
-      return [];
+      return {
+        currentPage: 1,
+        resultCount: 0,
+        pageCount: 0,
+        results: [],
+      };
     } else {
-      throw e;
+      logErrorInSentry('Search API', { details: e });
+      return APINotRespondingFactory(EAdministration.DINUM);
     }
   }
 };

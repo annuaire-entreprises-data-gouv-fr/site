@@ -61,9 +61,7 @@ const extractDossierPrincipal = (
       );
     });
 
-  if (principaux.length > 1) {
-    logWarningInSentry('Several inscription principale', { siren });
-  } else if (principaux.length === 0) {
+  if (principaux.length === 0) {
     logWarningInSentry('No inscription principale', { siren });
     return dossiers[0];
   }

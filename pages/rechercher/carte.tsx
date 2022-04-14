@@ -14,19 +14,15 @@ import { IsLikelyASirenOrSiretException } from '../../models';
 import { redirectServerError } from '../../utils/redirects';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
 import StructuredDataSearchAction from '../../components/structured-data/search';
+import { isAPINotResponding } from '../../models/api-not-responding';
+import { SearchErrorExplanations } from '../../components/error-explanations';
 
-interface IProps extends ISearchResults {
+interface IProps {
   searchTerm: string;
-  currentPage: number;
+  results: ISearchResults;
 }
 
-const MapSearchResultPage: React.FC<IProps> = ({
-  results,
-  pageCount,
-  resultCount,
-  searchTerm,
-  currentPage = 1,
-}) => (
+const MapSearchResultPage: React.FC<IProps> = ({ results, searchTerm }) => (
   <Page
     small={true}
     currentSearchTerm={searchTerm}
@@ -37,38 +33,43 @@ const MapSearchResultPage: React.FC<IProps> = ({
   >
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
-
-    {results ? (
-      <div className="map-container">
-        <MapResults results={results} />
-        <div className="results-for-map-wrapper">
-          <div className="results-list-wrapper">
-            <div className="results-counter">
-              <ResultsHeader
-                resultCount={resultCount}
-                searchTerm={searchTerm}
-                currentPage={currentPage}
-                isMap={true}
-              />
-            </div>
-            <ResultsList results={results} />
-          </div>
-          <div className="results-footer-wrapper">
-            <PageCounter
-              totalPages={pageCount}
-              currentPage={currentPage}
-              querySuffix={`terme=${searchTerm}`}
-              compact={true}
-            />
-          </div>
-        </div>
-      </div>
+    {isAPINotResponding(results) ? (
+      <SearchErrorExplanations />
     ) : (
-      <ResultsHeader
-        resultCount={resultCount}
-        searchTerm={searchTerm}
-        currentPage={currentPage}
-      />
+      <>
+        {results.results ? (
+          <div className="map-container">
+            <MapResults results={results.results} />
+            <div className="results-for-map-wrapper">
+              <div className="results-list-wrapper">
+                <div className="results-counter">
+                  <ResultsHeader
+                    resultCount={results.resultCount}
+                    searchTerm={searchTerm}
+                    currentPage={results.currentPage}
+                    isMap={true}
+                  />
+                </div>
+                <ResultsList results={results.results} />
+              </div>
+              <div className="results-footer-wrapper">
+                <PageCounter
+                  totalPages={results.pageCount}
+                  currentPage={results.currentPage}
+                  querySuffix={`terme=${searchTerm}`}
+                  compact={true}
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <ResultsHeader
+            resultCount={results.resultCount}
+            searchTerm={searchTerm}
+            currentPage={results.currentPage}
+          />
+        )}
+      </>
     )}
 
     <style jsx>{`
@@ -132,7 +133,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const results = (await search(searchTermParam, page)) || {};
     return {
       props: {
-        ...results,
+        results,
         searchTerm: searchTermParam,
       },
     };

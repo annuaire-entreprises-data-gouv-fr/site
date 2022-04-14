@@ -43,4 +43,22 @@ const ErrorNotFoundExplanations = () => (
   </ErrorTemplate>
 );
 
-export { ErrorNotFoundExplanations, ServerErrorExplanations };
+const SearchErrorExplanations = () => (
+  <div>
+    <p>
+      Le moteur de recherche est momentanément indisponible et devrait
+      fonctionner de nouveau dans quelques instants.
+    </p>
+    <p>
+      Si la situation perdure, merci de nous contacter via{' '}
+      <a href={constants.links.mailto}>{constants.links.mail}</a> pour que nous
+      puissions trouver la panne 🕵️‍♀️.
+    </p>
+  </div>
+);
+
+export {
+  ErrorNotFoundExplanations,
+  ServerErrorExplanations,
+  SearchErrorExplanations,
+};
