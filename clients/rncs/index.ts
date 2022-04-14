@@ -11,7 +11,6 @@ import { HttpNotFound, HttpServerError } from '../exceptions';
  */
 const fetchRNCSImmatriculation = async (siren: Siren) => {
   try {
-    return await fetchRNCSImmatriculationFromSite(siren);
     return await fetchRNCSImmatriculationFromAPI(siren);
   } catch (e) {
     if (e instanceof HttpNotFound) {
