@@ -1,5 +1,8 @@
 const constants = {
-  links: { mailto: 'mailto:annuaire-entreprises@data.gouv.fr' },
+  links: {
+    mailto: 'mailto:annuaire-entreprises@data.gouv.fr',
+    mail: 'annuaire-entreprises@data.gouv.fr',
+  },
   resultsPerPage: { etablissements: 200, search: 30 },
   defaultTimeout: 10000,
 };

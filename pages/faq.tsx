@@ -241,7 +241,7 @@ const questions = [
         <p>Vous pouvez nous poser une question directement :</p>
         <div className="layout-center">
           <ButtonLink to={constants.links.mailto} alt>
-            Nous écrire
+            Écrivez-nous à {constants.links.mail}
           </ButtonLink>
         </div>
       </>

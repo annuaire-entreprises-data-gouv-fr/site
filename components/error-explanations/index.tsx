@@ -7,7 +7,8 @@ const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
     {children}
     <p>
       Si vous êtes arrivé sur cette page en cliquant sur un lien du site, merci
-      de <a href={constants.links.mailto}>nous contacter</a> pour que nous
+      de nous contacter via{' '}
+      <a href={constants.links.mailto}>{constants.links.mail}</a> pour que nous
       puissions trouver la panne 🕵️‍♀️.
     </p>
     <p>En attendant, vous pouvez toujours :</p>

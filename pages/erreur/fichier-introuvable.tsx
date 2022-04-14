@@ -12,8 +12,8 @@ const SirenOrSiretNotFoundPage = () => {
       <div>
         <p>
           Si vous voyez cette page c’est que le fichier demandé n’existe plus.
-          Si le problème se reproduit, merci de{' '}
-          <a href={constants.links.mailto}>nous contacter.</a>.
+          Si le problème se reproduit, merci de nous contacter via{' '}
+          <a href={constants.links.mailto}>{constants.links.mail}</a>.
         </p>
       </div>
       <div className="layout-center">

@@ -38,8 +38,8 @@ const SirenOrSiretInvalidPage = () => {
         </ul>
         <p>
           Si vous avez effectué ces deux vérifications et que cette page
-          s’affiche toujours, n’hésitez pas à{' '}
-          <a href={constants.links.mailto}>nous contacter.</a>
+          s’affiche toujours, n’hésitez pas à nous contacter via{' '}
+          <a href={constants.links.mailto}>{constants.links.mail}</a>.
         </p>
       </div>
       <div className="layout-center">

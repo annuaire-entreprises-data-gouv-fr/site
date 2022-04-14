@@ -38,7 +38,8 @@ const Accessibility: React.FC = () => {
         </p>
         <ul>
           <li>
-            <a href={constants.links.mailto}>Écrivez-nous un email</a>
+            Écrivez-nous à{' '}
+            <a href={constants.links.mailto}>{constants.links.mail}</a>
           </li>
           <li>Adresse : DINUM 20 avenue de Ségur 75007 Paris</li>
         </ul>
