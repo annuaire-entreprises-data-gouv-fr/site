@@ -45,15 +45,14 @@ export const libelleFromeCodeCategorie = (
   codeCategorie: string,
   anneCategorie?: string
 ) => {
-  const libelle = categoriesEntreprise(codeCategorie);
+  let libelle = categoriesEntreprise(codeCategorie);
 
-  if (!!libelle && anneCategorie) {
-    return `${libelle}, en ${anneCategorie}`;
+  if (!libelle) {
+    return null;
   }
-  if (!!libelle) {
-    return libelle;
-  }
-  return null;
+
+  const yearSuffix = anneCategorie ? `, en ${anneCategorie}` : '';
+  return `${libelle} (${codeCategorie})${yearSuffix}`;
 };
 
 export const libelleFromCodeGreffe = (codeGreffe: string) => {
