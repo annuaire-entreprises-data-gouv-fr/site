@@ -55,7 +55,7 @@ const search = async (searchTerm: string, page: number) => {
         results: [],
       };
     } else {
-      logErrorInSentry('Search API', { details: e });
+      logErrorInSentry('Search API', { details: e.toString() });
       return APINotRespondingFactory(EAdministration.DINUM);
     }
   }
