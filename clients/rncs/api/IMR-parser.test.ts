@@ -1,13 +1,13 @@
 import { readFileSync } from 'fs';
-import { verifySiren } from '../../utils/helpers/siren-and-siret';
-import { extractIMRFromXml } from './IMRParser';
+import { verifySiren } from '../../../utils/helpers/siren-and-siret';
+import { extractIMRFromXml } from './IMR-parser';
 
 const dummySiren = verifySiren('880878145');
 
 describe('IMR XML parser', () => {
   it('parses the XML for company with single leader', () => {
     const okXML = readFileSync(
-      __dirname + '/__tests__/ok_simple_company.txt',
+      __dirname + '/__tests__/xml_ok_simple_company.txt',
       'utf-8'
     );
 
@@ -46,7 +46,7 @@ describe('IMR XML parser', () => {
 
   it('parses the XML for company with several leaders including a company', () => {
     const okXML = readFileSync(
-      __dirname + '/__tests__/ok_complex_company.txt',
+      __dirname + '/__tests__/xml_ok_complex_company.txt',
       'utf-8'
     );
 

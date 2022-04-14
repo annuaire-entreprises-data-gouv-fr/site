@@ -18,8 +18,7 @@ import BreakPageForPrint from '../../components/print-break-page';
 
 const DirigeantsPage: React.FC<IDirigeants> = ({
   uniteLegale,
-  dirigeants,
-  beneficiaires,
+  immatriculationRNCS,
 }) => {
   return (
     <Page
@@ -33,8 +32,7 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
         <>
           <DirigeantSummary
             uniteLegale={uniteLegale}
-            dirigeants={dirigeants}
-            beneficiaires={beneficiaires}
+            immatriculationRNCS={immatriculationRNCS}
           />
           {uniteLegale.estDiffusible ? (
             uniteLegale.estEntrepreneurIndividuel &&
@@ -55,12 +53,12 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
             </>
           )}
           <DirigeantsSection
-            dirigeants={dirigeants}
+            immatriculationRNCS={immatriculationRNCS}
             siren={uniteLegale.siren}
           />
           <BreakPageForPrint />
           <BeneficiairesSection
-            beneficiaires={beneficiaires}
+            immatriculationRNCS={immatriculationRNCS}
             siren={uniteLegale.siren}
           />
         </>

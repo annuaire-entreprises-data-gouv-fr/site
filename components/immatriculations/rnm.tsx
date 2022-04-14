@@ -5,7 +5,6 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
-import { IImmatriculationRNM } from '../../models/immatriculation';
 import {
   capitalize,
   formatDate,
@@ -18,6 +17,7 @@ import { Closed, download, Open } from '../icon';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../print-visibility';
+import { IImmatriculationRNM } from '../../models/immatriculation/rnm';
 
 interface IProps {
   immatriculation: IImmatriculationRNM | IAPINotRespondingError;

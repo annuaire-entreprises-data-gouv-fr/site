@@ -3,8 +3,8 @@ import HorizontalSeparator from '../horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { EAdministration } from '../../models/administration';
-import { IEtatCivil } from '../../models/dirigeants';
 import { INSEE } from '../administrations';
+import { IEtatCivil } from '../../models/immatriculation/rncs';
 
 interface IProps {
   dirigeant: IEtatCivil;

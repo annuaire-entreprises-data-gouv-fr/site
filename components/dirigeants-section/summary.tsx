@@ -4,27 +4,24 @@ import { INPI, INSEE } from '../administrations';
 
 const DirigeantSummary: React.FC<IDirigeants> = ({
   uniteLegale,
-  dirigeants,
-  beneficiaires,
+  immatriculationRNCS,
 }) => {
-  const notFoundInRCS =
-    isAPINotResponding(dirigeants) && dirigeants.errorType === 404;
-  const notFoundInRBE =
-    isAPINotResponding(beneficiaires) && beneficiaires.errorType === 404;
+  const notFound =
+    isAPINotResponding(immatriculationRNCS) &&
+    immatriculationRNCS.errorType === 404;
 
-  const hasNoDirigeant =
-    !uniteLegale.dirigeant && notFoundInRCS && notFoundInRBE;
+  const hasNoDirigeant = !uniteLegale.dirigeant && notFound;
 
   const insee = uniteLegale.dirigeant && '1 dirigeant(e) inscrite à l’Insee';
   const rncs =
-    dirigeants &&
-    !isAPINotResponding(dirigeants) &&
-    `${dirigeants.length} dirigeants inscrits au Registre du Commerce et des Sociétés (RCS)`;
+    !isAPINotResponding(immatriculationRNCS) &&
+    immatriculationRNCS.dirigeants &&
+    `${immatriculationRNCS.dirigeants.length} dirigeants inscrits au Registre du Commerce et des Sociétés (RCS)`;
 
   const rbe =
-    beneficiaires &&
-    !isAPINotResponding(beneficiaires) &&
-    `${beneficiaires.length} bénéficiaires inscrits à Référentiel des Bénéficiaires Effectifs`;
+    !isAPINotResponding(immatriculationRNCS) &&
+    immatriculationRNCS.beneficiaires &&
+    `${immatriculationRNCS.beneficiaires.length} bénéficiaires inscrits à Référentiel des Bénéficiaires Effectifs`;
 
   return (
     <>

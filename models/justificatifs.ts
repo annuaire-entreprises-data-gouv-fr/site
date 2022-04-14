@@ -1,15 +1,18 @@
 import { IUniteLegale } from '.';
 import { verifySiren } from '../utils/helpers/siren-and-siret';
 import { IAPINotRespondingError } from './api-not-responding';
-import {
-  IImmatriculationRNM,
-  IImmatriculationRNCS,
-  IImmatriculationJOAFE,
-  getImmatriculationJOAFE,
-  getImmatriculationRNM,
-  getImmatriculationRNCS,
-} from './immatriculation';
 import { getUniteLegaleFromSlug } from './unite-legale';
+import {
+  getImmatriculationRNM,
+  IImmatriculationRNM,
+} from './immatriculation/rnm';
+import {
+  getImmatriculationJOAFE,
+  IImmatriculationJOAFE,
+} from './immatriculation/joafe';
+import getImmatriculationRNCS, {
+  IImmatriculationRNCS,
+} from './immatriculation/rncs';
 
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;

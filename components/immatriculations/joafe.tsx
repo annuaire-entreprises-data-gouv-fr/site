@@ -5,7 +5,6 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
-import { IImmatriculationJOAFE } from '../../models/immatriculation';
 import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
 import BreakPageForPrint from '../print-break-page';
@@ -14,6 +13,7 @@ import { download } from '../icon';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../print-visibility';
+import { IImmatriculationJOAFE } from '../../models/immatriculation/joafe';
 
 interface IProps {
   immatriculation: IImmatriculationJOAFE | IAPINotRespondingError;

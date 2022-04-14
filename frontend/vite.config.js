@@ -1,3 +1,7 @@
+/**
+ * VITE CONFIG - Only used in production
+ */
+
 const legacy = require('@vitejs/plugin-legacy');
 
 const autoprefixer = require('autoprefixer');
