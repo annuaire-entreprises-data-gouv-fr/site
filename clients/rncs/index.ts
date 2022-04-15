@@ -12,17 +12,20 @@ import { HttpNotFound, HttpServerError } from '../exceptions';
 const fetchRNCSImmatriculation = async (siren: Siren) => {
   try {
     return await fetchRNCSImmatriculationFromAPI(siren);
-  } catch (e) {
-    if (e instanceof HttpNotFound) {
-      throw e;
+  } catch (error) {
+    if (error instanceof HttpNotFound) {
+      throw error;
     }
     try {
       return await fetchRNCSImmatriculationFromSite(siren);
-    } catch (e2) {
-      if (e instanceof HttpNotFound) {
-        throw e;
+    } catch (fallbackError) {
+      if (fallbackError instanceof HttpNotFound) {
+        throw fallbackError;
       }
-      throw new HttpServerError(500, `API : ${e} | Site : ${e2}`);
+      throw new HttpServerError(
+        500,
+        `API : ${error} | Site : ${fallbackError}`
+      );
     }
   }
 };
