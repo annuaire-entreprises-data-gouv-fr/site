@@ -14,16 +14,12 @@ const handleError = (error: AxiosError) => {
   if (!response) {
     if (message) {
       if (message.indexOf('timeout of') > -1) {
-        throw new HttpTimeoutError(
-          504,
-          `${message} while querying ${config.url}`
-        );
+        throw new HttpTimeoutError(`${message} while querying ${config.url}`);
       } else {
-        throw new HttpServerError(500, message);
+        throw new HttpServerError(message);
       }
     } else {
       throw new HttpServerError(
-        500,
         `Unknown server error while querying ${config.url}.`
       );
     }
@@ -31,26 +27,22 @@ const handleError = (error: AxiosError) => {
 
   switch (response.status) {
     case 429: {
-      throw new HttpTooManyRequests(
-        429,
-        response.statusText || 'Too many requests'
-      );
+      throw new HttpTooManyRequests(response.statusText || 'Too many requests');
     }
     case 404: {
-      throw new HttpNotFound(404, response.statusText || 'Not Found');
+      throw new HttpNotFound(response.statusText || 'Not Found');
     }
     case 403: {
-      throw new HttpForbiddenError(403, 'Forbidden');
+      throw new HttpForbiddenError('Forbidden');
     }
     case 401: {
-      throw new HttpUnauthorizedError(401, 'Unauthorized');
+      throw new HttpUnauthorizedError('Unauthorized');
     }
     case 504: {
-      throw new HttpTimeoutError(504, 'Timeout');
+      throw new HttpTimeoutError('Timeout');
     }
     default:
       throw new HttpServerError(
-        response.status,
         `Unknown server error while querying ${config.url}. ${response.statusText} ${message}`
       );
   }

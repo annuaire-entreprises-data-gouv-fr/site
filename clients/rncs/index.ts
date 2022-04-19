@@ -22,10 +22,7 @@ const fetchRNCSImmatriculation = async (siren: Siren) => {
       if (fallbackError instanceof HttpNotFound) {
         throw fallbackError;
       }
-      throw new HttpServerError(
-        500,
-        `API : ${error} | Site : ${fallbackError}`
-      );
+      throw new HttpServerError(`API : ${error} | Site : ${fallbackError}`);
     }
   }
 };

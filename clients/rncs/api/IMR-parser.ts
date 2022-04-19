@@ -10,7 +10,7 @@ import { logWarningInSentry } from '../../../utils/sentry';
 
 export class InvalidFormatError extends HttpServerError {
   constructor(message: string) {
-    super(500, 'Unable to parse XML :' + message);
+    super('Unable to parse XML :' + message);
   }
 }
 

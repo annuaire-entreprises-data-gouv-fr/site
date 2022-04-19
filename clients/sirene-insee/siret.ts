@@ -124,7 +124,6 @@ const getEtablissementFactory =
       }
 
       throw new HttpServerError(
-        500,
         'INSEE returns multiple siret for one etablissement'
       );
     }
@@ -151,7 +150,7 @@ export const mapEtablissementToDomainObject = (
   // as sirene.fr doesnot display it, we dont either
 
   if (!inseeEtablissement) {
-    throw new HttpNotFound(404, 'Not Found');
+    throw new HttpNotFound('Not Found');
   }
 
   const {

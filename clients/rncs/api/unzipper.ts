@@ -33,7 +33,7 @@ export const unzipTwiceIMR = async (
   );
 
   if (!zippedIMRFile) {
-    throw new HttpNotFound(404, 'No IMR found');
+    throw new HttpNotFound('No IMR found');
   }
 
   const extractedXMLBuffer = await unZipFromBuffer(zippedIMRFile.buffer);

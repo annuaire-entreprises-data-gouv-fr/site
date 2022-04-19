@@ -1,8 +1,5 @@
 import httpClient from '../../../utils/network';
-import {
-  HttpAuthentificationFailure,
-  HttpUnauthorizedError,
-} from '../../exceptions';
+import { HttpForbiddenError, HttpUnauthorizedError } from '../../exceptions';
 import routes from '../../routes';
 import { AxiosRequestConfig } from 'axios';
 
@@ -44,7 +41,7 @@ const createAndAuthenticateCookie = async (index: number) => {
     }
     COOKIE[index] = cookie.split(';')[0];
   } catch (e: any) {
-    throw new HttpAuthentificationFailure(e);
+    throw new HttpForbiddenError(e);
   }
 };
 

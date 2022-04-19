@@ -35,7 +35,7 @@ const reverseGeoLoc = async (adresse: string): Promise<IGeoLoc> => {
 const mapToDomainObject = (response: IBANResponse): IGeoLoc => {
   const { features } = response;
   if (features.length === 0) {
-    throw new HttpNotFound(404, 'No results in API BAN');
+    throw new HttpNotFound('No results in API BAN');
   }
   const coordinates = features[0].geometry.coordinates;
   return {

@@ -32,7 +32,7 @@ export const getImmatriculationJOAFE = async (
       (annonce) => annonce.typeAvisLibelle === 'Création'
     );
     if (!annonceCreation) {
-      throw new HttpNotFound(404, 'No annonces found for creation');
+      throw new HttpNotFound('No annonces found for creation');
     }
     return {
       siren,

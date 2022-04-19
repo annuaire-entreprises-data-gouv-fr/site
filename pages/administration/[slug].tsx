@@ -98,7 +98,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       (admin) => admin.slug === slug
     );
     if (administration === undefined) {
-      throw new HttpNotFound(404, `${slug}`);
+      throw new HttpNotFound(`${slug}`);
     }
 
     const monitorings = await getMonitorsWithMetaData(

@@ -65,7 +65,7 @@ const getEtablissementSireneOuverte = async (
       throw new Error();
     }
   } catch (e: any) {
-    throw new HttpNotFound(404, 'Not Found');
+    throw new HttpNotFound('Not Found');
   }
 
   return mapSireneOuverteEtablissementToDomainObject(etablissement, siret);

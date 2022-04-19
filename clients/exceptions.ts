@@ -1,39 +1,41 @@
-export class HttpNotFound extends Error {
-  constructor(public status: number, public message: string) {
-    super();
+class HttpError extends Error {
+  constructor(public message: string, public status = 500) {
+    super(message);
+    this.status = status;
   }
 }
 
-export class HttpServerError extends Error {
-  constructor(public status: number, public message: string) {
-    super();
-  }
-}
-export class HttpTimeoutError extends HttpServerError {
-  constructor(public status: number, public message: string) {
-    super(504, message);
-  }
-}
-
-export class HttpAuthentificationFailure extends Error {
+export class HttpNotFound extends HttpError {
   constructor(public message: string) {
-    super();
-  }
-}
-export class HttpTooManyRequests extends Error {
-  constructor(public status: number, public message: string) {
-    super();
+    super(message, 404);
   }
 }
 
-export class HttpUnauthorizedError extends Error {
-  constructor(public status: number, public message: string) {
-    super();
+export class HttpServerError extends HttpError {
+  constructor(public message: string) {
+    super(message, 500);
+  }
+}
+export class HttpTimeoutError extends HttpError {
+  constructor(public message: string) {
+    super(message, 408);
   }
 }
 
-export class HttpForbiddenError extends Error {
-  constructor(public status: number, public message: string) {
-    super();
+export class HttpTooManyRequests extends HttpError {
+  constructor(public message: string) {
+    super(message, 429);
+  }
+}
+
+export class HttpUnauthorizedError extends HttpError {
+  constructor(public message: string) {
+    super(message, 401);
+  }
+}
+
+export class HttpForbiddenError extends HttpError {
+  constructor(public message: string) {
+    super(message, 403);
   }
 }

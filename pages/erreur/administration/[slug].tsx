@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     (key) => administrationsMetaData[key].slug === slug
   );
   if (administrationEnum === undefined) {
-    throw new HttpNotFound(404, `${slug}`);
+    throw new HttpNotFound(`${slug}`);
   }
 
   return { props: { administration: administrationEnum } };

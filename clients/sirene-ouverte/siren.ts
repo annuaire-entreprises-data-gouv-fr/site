@@ -71,7 +71,7 @@ const getUniteLegaleSireneOuverte = async (
       throw new Error();
     }
   } catch (e: any) {
-    throw new HttpNotFound(404, siren);
+    throw new HttpNotFound(siren);
   }
 
   return mapToDomainObject(siren, uniteLegale, page);
@@ -92,7 +92,7 @@ const mapToDomainObject = (
   );
 
   if (!listOfEtablissement || listOfEtablissement.length === 0) {
-    throw new HttpServerError(500, `No etablissements found`);
+    throw new HttpServerError(`No etablissements found`);
   }
 
   const {

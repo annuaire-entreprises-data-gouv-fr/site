@@ -64,7 +64,7 @@ const getResults = async (
     !results[0].unite_legale ||
     results[0].unite_legale.length === 0
   ) {
-    throw new HttpNotFound(404, 'No results');
+    throw new HttpNotFound('No results');
   }
 
   return mapToDomainObject(results[0]);

@@ -12,7 +12,7 @@ const createPdfDownload = async (req: NextApiRequest, res: NextApiResponse) => {
   const siren = req.query.slug as string;
 
   if (!isSiren(siren)) {
-    throw new HttpNotFound(404, `${siren} is not a valid siren`);
+    throw new HttpNotFound(`${siren} is not a valid siren`);
   }
 
   try {
