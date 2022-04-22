@@ -2,6 +2,7 @@ import React from 'react';
 import { NextPage } from 'next';
 
 import Page from '../layouts/page';
+import { CMA, DILA, INPI, INSEE } from '../components/administrations';
 
 const Privacy: NextPage = () => (
   <Page title="Politique de confidentialité" noIndex={true}>
@@ -25,11 +26,13 @@ const Privacy: NextPage = () => (
         <ul>
           <li>
             Données relatives aux dirigeants : prénoms, nom, lieu et mois de
-            naissance, adresse postale;
+            naissance, adresse postale; (organisme qui produit les données :{' '}
+            <INSEE />, <DILA />, <CMA />, <INPI />)
           </li>
           <li>
             Données relatives aux bénéficiaires effectifs : prénoms, nom,
-            prénoms, date de naissance et nationalité;
+            prénoms, date de naissance et nationalité; (organisme qui produit
+            les données : <INPI />)
           </li>
         </ul>
       </p>
@@ -183,7 +186,7 @@ const Privacy: NextPage = () => (
           recommandation « Cookies »
         </a>{' '}
         de la{' '}
-        <abbr title="Commission Nationale de l'Informatique et des Libertés">
+        <abbr title="Commission Nationale de l’Informatique et des Libertés">
           CNIL
         </abbr>
         . Cela signifie que votre adresse IP, par exemple, est anonymisée avant
@@ -213,7 +216,7 @@ const Privacy: NextPage = () => (
       </p>
       <p>
         Pour aller plus loin, vous pouvez consulter les fiches proposées par la{' '}
-        <abbr title="Commission Nationale de l'Informatique et des Libertés">
+        <abbr title="Commission Nationale de l’Informatique et des Libertés">
           CNIL
         </abbr>{' '}
         :
@@ -243,10 +246,6 @@ const Privacy: NextPage = () => (
         nécessaires au bon fonctionnement de l’Application sans lesquels l’accès
         à la plateforme ne peut être pleinement garanti.{' '}
       </p>
-      <h2>Sécurité</h2>
-      <p>
-        <i>à compléter</i>
-      </p>
       <h2>
         Exercice des droits à la protection des données à caractère personnel
       </h2>
@@ -263,11 +262,32 @@ const Privacy: NextPage = () => (
         <a href="mailto:annuaire-entreprises@data.gouv.fr">
           annuaire-entreprises@data.gouv.fr
         </a>
-        .
+        ou par courrier à l’adresse suivante :
+        <ul>
+          <li>DINUM, A l’attention d’annuaire-entreprises</li>
+          <li>20 avenue de Ségur 75007 Paris</li>
+        </ul>
       </p>
       <p>
         Pour exercer votre droit de modification, nous vous invitons à vous
-        rapprocher de l’organisme qui a produit ces données.
+        rapprocher des organismes qui ont produit ces données.
+        <ul>
+          <li>
+            l’
+            <INSEE /> (Institut national de la statistique et des études
+            économiques)
+          </li>
+          <li>
+            l’
+            <INPI /> (Institut national de la propriété industrielle)
+          </li>
+          <li>
+            la <CMA /> (Chambres de Métiers et de l’Artisanat)
+          </li>
+          <li>
+            la <DILA /> (Direction de l’information légale et administrative)
+          </li>
+        </ul>
       </p>
       <p>
         Pour exercer vos droits, vous pouvez également contacter le délégué à la
