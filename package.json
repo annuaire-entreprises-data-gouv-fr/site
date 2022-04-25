@@ -18,7 +18,7 @@
     "build": "npm run build:sitemap && npm run build:site",
     "start": "NODE_ENV=production && next start",
     "test:end2end": "cypress open",
-    "test:unit": "jest",
+    "test:unit": "jest --runInBand",
     "test:a11y": "node ./node-scripts/a11y.js",
     "test:inpi-pdf-proxy": "node ./node-scripts/inpi-pdf-proxy-test.js",
     "lint": "next lint"
@@ -73,10 +73,13 @@
     "cypress": "^9.1.0",
     "jest": "^27.4.3",
     "npm-run-all": "^4.1.5",
-    "simple-git-hooks": "^2.7.0",
+    "pre-commit": "^1.2.2",
     "ts-jest": "^27.0.7"
   },
-  "simple-git-hooks": {
-    "pre-commit": "npx simple-git-hooks && npm run lint && npm run test:unit"
+  "pre-commit": {
+    "run": [
+      "lint",
+      "test:unit"
+    ]
   }
 }
