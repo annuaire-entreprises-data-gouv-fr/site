@@ -18,6 +18,7 @@ Ce repository fait partie d'un ensemble de services qui constituent l'[Annuaire 
 |L’API du Moteur de recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-api) |
 |L‘API de redondance de Sirene | [par ici 👉](https://github.com/etalab/annuaire-entreprises-sirene-api) |
 |L‘infra du moteur de recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-infra) |
+|L’API de proxy du RNCS | [par ici 👉](https://github.com/etalab/rncs-api-proxy) |
 
 ## Etat des lieux 🤓
 
