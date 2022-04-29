@@ -69,12 +69,12 @@
   },
   "devDependencies": {
     "@axe-core/cli": "^4.3.2",
+    "@swc/jest": "^0.2.20",
     "@types/jest": "^27.0.3",
     "cypress": "^9.1.0",
     "jest": "^27.4.3",
     "npm-run-all": "^4.1.5",
-    "pre-commit": "^1.2.2",
-    "ts-jest": "^27.0.7"
+    "pre-commit": "^1.2.2"
   },
   "pre-commit": {
     "run": [
