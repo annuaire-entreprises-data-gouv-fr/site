@@ -58,6 +58,7 @@ const mapToDomainObject = (
         longitude: result.longitude,
         nomComplet: result.l1_normalisee || 'Nom inconnu',
         nombreEtablissements: 1,
+        nombreEtablissementsOuverts: 0,
         chemin: result.siren,
         libelleActivitePrincipale:
           result.libelle_activite_principale_entreprise,
