@@ -15,6 +15,7 @@ interface ISireneOuverteUniteLegaleResultat {
   etablissement_siege: IEtablissement;
   categorie_juridique: string;
   nombre_etablissements: number;
+  nombre_etablissements_ouvert: number;
   date_creation: string;
   activite_principale: string;
   etat_administratif_etablissement: string;
@@ -102,6 +103,7 @@ const mapToDomainObject = (
         longitude: result.longitude || '',
         nomComplet: result.nom_complet || 'Nom inconnu',
         nombreEtablissements: result.nombre_etablissements || 1,
+        nombreEtablissementOuverts: result.nombre_etablissements_ouvert || 0,
         chemin: result.page_path || result.siren,
         libelleActivitePrincipale: libelleFromCodeNaf(
           result.activite_principale,
