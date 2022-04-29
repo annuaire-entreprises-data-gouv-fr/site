@@ -13,7 +13,7 @@ interface IProps {
 const EtablissmentTagLabel: React.FC<{ result: ISearchResult }> = ({
   result,
 }) => {
-  const openCount = result.nombreEtablissementOuverts || 'aucun';
+  const openCount = result.nombreEtablissementsOuverts || 'aucun';
   const plural = openCount > 1 ? 's' : '';
 
   return (

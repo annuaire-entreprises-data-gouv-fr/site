@@ -103,7 +103,7 @@ const mapToDomainObject = (
         longitude: result.longitude || '',
         nomComplet: result.nom_complet || 'Nom inconnu',
         nombreEtablissements: result.nombre_etablissements || 1,
-        nombreEtablissementOuverts: result.nombre_etablissements_ouvert || 0,
+        nombreEtablissementsOuverts: result.nombre_etablissements_ouvert || 0,
         chemin: result.page_path || result.siren,
         libelleActivitePrincipale: libelleFromCodeNaf(
           result.activite_principale,

@@ -15,7 +15,7 @@ export interface ISearchResult {
   siren: string;
   siret: string;
   nombreEtablissements: number;
-  nombreEtablissementOuverts: number;
+  nombreEtablissementsOuverts: number;
   libelleActivitePrincipale: string;
   estActive: boolean;
   adresse: string;
