@@ -37,7 +37,7 @@ export const getImmatriculationRNM = async (
       return APINotRespondingFactory(EAdministration.CMAFRANCE, 404);
     }
 
-    logErrorInSentry(new Error('Error in API RNM'), {
+    logErrorInSentry('Error in API RNM', {
       siren,
       details: e.toString(),
     });

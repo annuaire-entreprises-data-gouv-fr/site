@@ -62,7 +62,7 @@ const getAnnoncesJoFromIdRna = async (
   try {
     return await fetchAnnoncesJO(idRna);
   } catch (e: any) {
-    logErrorInSentry(new Error('Error in API Journal Officiel'), {
+    logErrorInSentry('Error in API Journal Officiel', {
       siren,
       details: e.toString(),
     });
@@ -77,7 +77,7 @@ const getAnnoncesBodaccFromSlug = async (
   try {
     return await fetchAnnoncesBodacc(siren);
   } catch (e: any) {
-    logErrorInSentry(new Error('Error in API BODACC'), {
+    logErrorInSentry('Error in API BODACC', {
       siren,
       details: e.toString(),
     });

@@ -45,7 +45,7 @@ export const getImmatriculationJOAFE = async (
       return APINotRespondingFactory(EAdministration.DILA, 404);
     }
 
-    logErrorInSentry(new Error('Error in API JOAFE'), {
+    logErrorInSentry('Error in API JOAFE', {
       siren,
       details: e.toString(),
     });

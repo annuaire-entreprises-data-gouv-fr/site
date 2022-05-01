@@ -26,9 +26,7 @@ const extractIMRFromHtml = (
   const dom = new JSDOM(html);
   const document = dom.window.document;
 
-  const container = document.querySelector(
-    'div#notice-description > div.bloc-without-img'
-  );
+  const container = document.querySelector('div#notice-description');
 
   if (!container) {
     throw new InvalidFormatError('Cannot find Inpi container');
@@ -49,7 +47,7 @@ const extractIMRFromHtml = (
 
   for (var i = 0; i < rowsHtml.length; i++) {
     const row = rowsHtml[i];
-    const title = clean(row.querySelector('h5')?.innerHTML);
+    const title = clean(row.querySelector('h2, h3, h4, h5')?.innerHTML);
 
     switch (title) {
       case 'Identité':
@@ -60,6 +58,7 @@ const extractIMRFromHtml = (
       case 'Bénéficiaires effectifs':
         response.beneficiaires = parseBeneficiaires(row);
       default:
+        console.log(title);
     }
   }
 
