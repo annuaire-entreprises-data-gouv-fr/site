@@ -29,7 +29,7 @@ const getAssociation = async (slug: string, uniteLegale: IUniteLegale) => {
       // no need to log warning or to make an api call, we know Id is not valid
       return {};
     } else {
-      logErrorInSentry(new Error('Error in API RNA'), more);
+      logErrorInSentry('Error in API RNA', more);
     }
     return {};
   }
@@ -64,7 +64,7 @@ const verifyAdressConsistency = async (
 
     return false;
   } catch (e: any) {
-    logErrorInSentry(new Error('Error in association adress check'), {
+    logErrorInSentry('Error in association adress check', {
       siren: uniteLegale.siren,
       details: e.toString(),
     });

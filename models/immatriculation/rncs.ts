@@ -93,7 +93,7 @@ const getImmatriculationRNCS = async (
       return APINotRespondingFactory(EAdministration.INPI, 404);
     }
 
-    logErrorInSentry(new Error('Error in INPI : API and fallback failed'), {
+    logErrorInSentry('Error in INPI : API and fallback failed', {
       siren,
       details: e.toString(),
     });

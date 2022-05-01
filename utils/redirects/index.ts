@@ -44,7 +44,7 @@ export const redirectPageNotFound = (
 };
 
 export const redirectServerError = (msg: string, scope?: IScope) => {
-  logErrorInSentry(new Error('Server Error (500)'), { details: msg, ...scope });
+  logErrorInSentry('Server Error (500)', { details: msg, ...scope });
   return {
     redirect: {
       destination: '/500',
