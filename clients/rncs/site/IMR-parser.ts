@@ -58,7 +58,6 @@ const extractIMRFromHtml = (
       case 'Bénéficiaires effectifs':
         response.beneficiaires = parseBeneficiaires(row);
       default:
-        console.log(title);
     }
   }
 
