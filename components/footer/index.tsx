@@ -76,9 +76,9 @@ const Footer = () => (
                 className="fr-footer__content-link"
                 target="_blank"
                 rel="noreferrer noopener"
-                href="https://service-public.fr"
+                href="https://entreprendre.service-public.fr/"
               >
-                service-public.fr
+                entreprendre.service-public.fr
               </a>
             </li>
             <li className="fr-footer__content-item">
