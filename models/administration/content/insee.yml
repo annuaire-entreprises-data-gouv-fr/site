@@ -15,7 +15,7 @@ description: |
 
   ## Quelles sont les données des entreprises publiées par l’Insee ?
 
-  Dans le cadre de sa mission, l’Insee a la charge du Système National d’Identification et du Répertoire des Entreprises et de leurs Établissements (SIRENE). Lors de l’enregistrement d’unz nouvelle API au répertoire, sont attribués :
+  Dans le cadre de sa mission, l’Insee a la charge du Système National d’Identification et du Répertoire des Entreprises et de leurs Établissements (SIRENE). Lors de l’enregistrement d’une nouvelle API au répertoire, sont attribués :
 
   - un numero unique d’identification SIREN (à 9 chiffre) pour l’unité légale
   - un numéro unique d’identification SIRET (à 14 chiffres) pour chaque établissement
