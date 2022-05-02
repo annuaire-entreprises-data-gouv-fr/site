@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { HttpNotFound } from '../../../../clients/exceptions';
-import { downloadInpiPdfAndSaveOnDisk } from '../../../../clients/inpi-site/pdf-immatriculation';
+import APIRncsProxyClient from '../../../../clients/rncs/rncs-proxy-client';
+import routes from '../../../../clients/routes';
 import { isSiren } from '../../../../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../../../../utils/sentry';
 
@@ -16,10 +17,13 @@ const createPdfDownload = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const slug = downloadInpiPdfAndSaveOnDisk(siren);
-    res.status(201).json({ slug });
+    const response = await APIRncsProxyClient({
+      url: routes.rncs.proxy.document.justificatif.createJob + siren,
+    });
+
+    res.status(201).json({ slug: response.data });
   } catch (e: any) {
-    logErrorInSentry('Error in INPI’s proxy PDF', {
+    logErrorInSentry('Error in INPI’s PDF job creation', {
       siren,
       details: e.toString(),
     });

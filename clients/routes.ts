@@ -9,13 +9,19 @@ const routes = {
   rncs: {
     portail: {
       entreprise: 'https://data.inpi.fr/entreprises/',
-      login: 'https://data.inpi.fr/login',
     },
-    api: {
-      login: 'https://opendata-rncs.inpi.fr/services/diffusion/login',
-      imr: {
-        find: 'https://opendata-rncs.inpi.fr/services/diffusion/imrs-saisis/find?siren=',
-        get: 'https://opendata-rncs.inpi.fr/services/diffusion/imrs-saisis/get?listeSirens=',
+    proxy: {
+      imr: 'https://proxy.annuaire-entreprises.data.gouv.fr/imr/',
+      document: {
+        justificatif: {
+          createJob:
+            'https://proxy.annuaire-entreprises.data.gouv.fr/document/justificatif/job/',
+          status:
+            'https://proxy.annuaire-entreprises.data.gouv.fr/document/justificatif/job/status',
+          get: 'https://proxy.annuaire-entreprises.data.gouv.fr/downloads/',
+          directDownload:
+            'https://proxy.annuaire-entreprises.data.gouv.fr/document/justificatif/',
+        },
       },
     },
   },
