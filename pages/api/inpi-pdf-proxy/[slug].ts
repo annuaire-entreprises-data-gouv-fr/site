@@ -19,6 +19,7 @@ const downloadPdf = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const data = await APIRncsProxyClient({
       url: routes.rncs.proxy.document.justificatif.directDownload + siren,
+      timeout: 30000,
     });
 
     res.setHeader('Content-Type', 'application/pdf');
