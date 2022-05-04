@@ -9,13 +9,13 @@ import logErrorInSentry from '../../../../utils/sentry';
 
 const getPdfStatus = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const slugs = JSON.parse(req.body);
-    console.log(slugs);
     const statuses = await APIRncsProxyClient({
       url: routes.rncs.proxy.document.justificatif.status,
-      data: slugs,
       method: 'POST',
-      headers: {},
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: req.body,
     });
 
     res.status(200).json(statuses.data);

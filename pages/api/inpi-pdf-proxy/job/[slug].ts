@@ -21,7 +21,7 @@ const createPdfDownload = async (req: NextApiRequest, res: NextApiResponse) => {
       url: routes.rncs.proxy.document.justificatif.createJob + siren,
     });
 
-    res.status(201).json({ slug: response.data });
+    res.status(201).json(response.data);
   } catch (e: any) {
     logErrorInSentry('Error in INPI’s PDF job creation', {
       siren,
