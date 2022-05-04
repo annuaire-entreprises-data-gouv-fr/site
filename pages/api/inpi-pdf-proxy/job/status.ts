@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import PDFDownloaderInstance from '../../../../utils/download-manager';
+import APIRncsProxyClient from '../../../../clients/rncs/rncs-proxy-client';
+import routes from '../../../../clients/routes';
 import logErrorInSentry from '../../../../utils/sentry';
 
 /**
@@ -8,15 +9,18 @@ import logErrorInSentry from '../../../../utils/sentry';
 
 const getPdfStatus = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const slugs = JSON.parse(req.body) as string[];
-
-    const pdfStatuses = slugs.map((slug) => {
-      const status = PDFDownloaderInstance.getDownloadStatus(slug);
-      return { slug, ...status };
+    const statuses = await APIRncsProxyClient({
+      url: routes.rncs.proxy.document.justificatif.status,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: req.body,
     });
-    res.status(200).json(pdfStatuses);
+
+    res.status(200).json(statuses.data);
   } catch (e: any) {
-    logErrorInSentry('Error in INPI’s proxy PDF', {
+    logErrorInSentry('Error in INPI’s PDF job status', {
       details: e.toString(),
     });
 

@@ -1,9 +1,8 @@
 import { verifyIdRna } from '../utils/helpers/id-rna';
 import { verifySiren } from '../utils/helpers/siren-and-siret';
+import { HttpServerError } from './exceptions';
 import { fetchAssociation } from './rna';
 import { fetchRNCSImmatriculation } from './rncs';
-import { fetchRNCSImmatriculationFromAPI } from './rncs/api';
-import { fetchRNCSImmatriculationFromSite } from './rncs/site';
 import { fetchRnmImmatriculation } from './rnm';
 import { getUniteLegaleInsee } from './sirene-insee/siren';
 import getUniteLegaleSireneOuverte from './sirene-ouverte/siren';
@@ -18,11 +17,11 @@ export class APISlugNotFound extends Error {
 const ping = async (slug: string | string[]) => {
   switch (slug) {
     case 'api-rncs':
-      return await fetchRNCSImmatriculationFromAPI(verifySiren('880878145'));
-    case 'api-rncs-from-site':
-      return await fetchRNCSImmatriculationFromSite(verifySiren('880878145'));
-    case 'api-rncs-with-fallback':
-      return await fetchRNCSImmatriculation(verifySiren('880878145'));
+      const result = await fetchRNCSImmatriculation(verifySiren('880878145'));
+      if (result.metadata && result.metadata.isFallback) {
+        throw new HttpServerError(''); // message not important as it get catch
+      }
+      return result;
     case 'api-rnm':
       return await fetchRnmImmatriculation(verifySiren('824024350'));
     case 'api-conventions-collectives':
