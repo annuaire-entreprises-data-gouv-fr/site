@@ -9,19 +9,13 @@ const routes = {
   rncs: {
     portail: {
       entreprise: 'https://data.inpi.fr/entreprises/',
+      login: 'https://data.inpi.fr/login',
     },
-    proxy: {
-      imr: 'https://rncs-proxy.api.gouv.fr/imr/',
-      document: {
-        justificatif: {
-          createJob:
-            'https://rncs-proxy.api.gouv.fr/document/justificatif/job/',
-          status:
-            'https://rncs-proxy.api.gouv.fr/document/justificatif/job/status',
-          get: 'https://rncs-proxy.api.gouv.fr/downloads/',
-          directDownload:
-            'https://rncs-proxy.api.gouv.fr/document/justificatif/',
-        },
+    api: {
+      login: 'https://opendata-rncs.inpi.fr/services/diffusion/login',
+      imr: {
+        find: 'https://opendata-rncs.inpi.fr/services/diffusion/imrs-saisis/find?siren=',
+        get: 'https://opendata-rncs.inpi.fr/services/diffusion/imrs-saisis/get?listeSirens=',
       },
     },
   },

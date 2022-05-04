@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { HttpNotFound } from '../../../clients/exceptions';
-import APIRncsProxyClient from '../../../clients/rncs/rncs-proxy-client';
-import routes from '../../../clients/routes';
+import downloadInpiPdf from '../../../clients/inpi-site/pdf-immatriculation';
 import { isSiren } from '../../../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../../../utils/sentry';
 
@@ -17,10 +16,7 @@ const downloadPdf = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const data = await APIRncsProxyClient({
-      url: routes.rncs.proxy.document.justificatif.directDownload + siren,
-    });
-
+    const data = await downloadInpiPdf(siren);
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader(
       'Content-Disposition',
@@ -28,7 +24,7 @@ const downloadPdf = async (req: NextApiRequest, res: NextApiResponse) => {
     );
     res.status(200).send(data);
   } catch (e: any) {
-    logErrorInSentry('Error in INPI’s PDF Direct Download', {
+    logErrorInSentry('Error in INPI’s proxy PDF', {
       siren,
       details: e.toString(),
     });

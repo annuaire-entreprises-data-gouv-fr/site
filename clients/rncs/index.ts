@@ -1,7 +1,7 @@
-import { IImmatriculationRNCSCore } from '../../models/immatriculation/rncs';
+import { fetchRNCSImmatriculationFromSite } from './site';
+import { fetchRNCSImmatriculationFromAPI } from './api';
 import { Siren } from '../../utils/helpers/siren-and-siret';
-import routes from '../routes';
-import APIRncsProxyClient from './rncs-proxy-client';
+import { HttpNotFound, HttpServerError } from '../exceptions';
 
 /**
  * This is the method to call in order to get RNCS immatriculation
@@ -9,10 +9,26 @@ import APIRncsProxyClient from './rncs-proxy-client';
  * @param siren
  * @returns
  */
-export const fetchRNCSImmatriculation = async (siren: Siren) => {
-  const request = await APIRncsProxyClient({
-    url: routes.rncs.proxy.imr + siren,
-  });
+const fetchRNCSImmatriculation = async (siren: Siren) => {
+  try {
+    return await fetchRNCSImmatriculationFromAPI(siren);
+  } catch (error) {
+    if (error instanceof HttpNotFound) {
+      throw error;
+    }
+    try {
+      return await fetchRNCSImmatriculationFromSite(siren);
+    } catch (fallbackError) {
+      if (fallbackError instanceof HttpNotFound) {
+        throw fallbackError;
+      }
+      throw new HttpServerError(`API : ${error} | Site : ${fallbackError}`);
+    }
+  }
+};
 
-  return request.data as IImmatriculationRNCSCore;
+export {
+  fetchRNCSImmatriculation,
+  fetchRNCSImmatriculationFromSite,
+  fetchRNCSImmatriculationFromAPI,
 };

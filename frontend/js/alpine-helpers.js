@@ -95,7 +95,7 @@
       },
       openFile(slug) {
         this.deleteDownload(slug);
-        window.open(`/api/inpi-pdf-proxy/job/get/${slug}`, '_blank');
+        window.open(`/downloads/${slug}.pdf`, '_blank');
       },
       isAlreadyDownloading(siren) {
         return Object.values(this.downloads).reduce((acc, elem) => {
