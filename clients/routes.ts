@@ -11,16 +11,16 @@ const routes = {
       entreprise: 'https://data.inpi.fr/entreprises/',
     },
     proxy: {
-      imr: 'https://proxy.annuaire-entreprises.data.gouv.fr/imr/',
+      imr: 'https://rncs-proxy.api.gouv.fr/imr/',
       document: {
         justificatif: {
           createJob:
-            'https://proxy.annuaire-entreprises.data.gouv.fr/document/justificatif/job/',
+            'https://rncs-proxy.api.gouv.fr/document/justificatif/job/',
           status:
-            'https://proxy.annuaire-entreprises.data.gouv.fr/document/justificatif/job/status',
-          get: 'https://proxy.annuaire-entreprises.data.gouv.fr/downloads/',
+            'https://rncs-proxy.api.gouv.fr/document/justificatif/job/status',
+          get: 'https://rncs-proxy.api.gouv.fr/downloads/',
           directDownload:
-            'https://proxy.annuaire-entreprises.data.gouv.fr/document/justificatif/',
+            'https://rncs-proxy.api.gouv.fr/document/justificatif/',
         },
       },
     },
