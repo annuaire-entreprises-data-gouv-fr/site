@@ -13,30 +13,31 @@ const sleep = async (seconds) => {
 const downloadAuthenticatedPdf = async (siren) => {
   let retry = 0;
   const create = await axios(
-    `https://staging.annuaire-entreprises.data.gouv.fr/api/inpi-pdf-proxy/job/${siren}`,
+    `https://staging.rncs-proxy.api.gouv.fr/document/justificatif/job/${siren}`,
     {
       timeout: 90 * 1000,
       method: 'GET',
       headers: {
-        'User-Agent': process.env.CI_TEST_USER_AGENT,
+        'X-APIKey': process.env.PROXY_API_KEY,
       },
     }
   );
-
   const slug = create.data.slug;
 
   if (!slug) {
     throw new Error('Job was not created properly');
   }
 
+  console.log(slug);
+
   while (retry <= 3) {
     await sleep(15);
     try {
       const file = await axios(
-        `https://staging.annuaire-entreprises.data.gouv.fr/downloads/${slug}.pdf`,
+        `https://staging.rncs-proxy.api.gouv.fr/downloads/${slug}.pdf`,
         {
           headers: {
-            'User-Agent': process.env.CI_TEST_USER_AGENT,
+            'X-APIkey': process.env.PROXY_API_KEY,
           },
         }
       );
