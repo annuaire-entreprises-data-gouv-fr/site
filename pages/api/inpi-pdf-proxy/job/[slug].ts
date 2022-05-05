@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { HttpNotFound } from '../../../../clients/exceptions';
-import APIRncsProxyClient from '../../../../clients/rncs/rncs-proxy-client';
+import { APIRncsProxyGet } from '../../../../clients/rncs/rncs-proxy-client';
 import routes from '../../../../clients/routes';
 import { isSiren } from '../../../../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../../../../utils/sentry';
@@ -17,9 +17,8 @@ const createPdfDownload = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const response = await APIRncsProxyClient({
-      url: routes.rncs.proxy.document.justificatif.createJob + siren,
-    });
+    const url = routes.rncs.proxy.document.justificatif.createJob + siren;
+    const response = await APIRncsProxyGet(url);
 
     res.status(201).json(response.data);
   } catch (e: any) {

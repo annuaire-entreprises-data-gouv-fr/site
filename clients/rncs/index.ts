@@ -1,18 +1,22 @@
 import { IImmatriculationRNCSCore } from '../../models/immatriculation/rncs';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import routes from '../routes';
-import APIRncsProxyClient from './rncs-proxy-client';
+import { APIRncsProxyGet } from './rncs-proxy-client';
 
 /**
- * This is the method to call in order to get RNCS immatriculation
- * First call on API IMR and fallback on INPI site parser
+ * RNCS IMR through the API Rncs proxy
  * @param siren
  * @returns
  */
-export const fetchRNCSImmatriculation = async (siren: Siren) => {
-  const request = await APIRncsProxyClient({
-    url: routes.rncs.proxy.imr + siren,
-  });
+export const fetchRNCSImmatriculation = async (
+  siren: Siren,
+  useCache = true // cache for RNCS IMR
+) => {
+  const request = await APIRncsProxyGet(
+    routes.rncs.proxy.imr + siren,
+    {},
+    useCache
+  );
 
   return request.data as IImmatriculationRNCSCore;
 };

@@ -22,7 +22,7 @@ export const httpClientOAuthFactory = (
     client_secret,
   });
 
-  const axiosInstance = axios.create({ timeout: constants.defaultTimeout });
+  const axiosInstance = axios.create({ timeout: constants.timeout.default });
   axiosInstance.interceptors.request.use(
     oauth.interceptor(tokenProvider, getClientCredentials)
   );

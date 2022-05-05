@@ -67,7 +67,8 @@ export interface IApiRNMResponse {
 export const fetchRnmImmatriculation = async (
   siren: Siren
 ): Promise<IImmatriculationRNM> => {
-  const response = await httpGet(routes.rnm + siren + '?format=json');
+  const url = routes.rnm + siren + '?format=json';
+  const response = await httpGet(url);
   return mapToDomainObject(siren, response.data);
 };
 

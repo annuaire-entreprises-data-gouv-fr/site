@@ -77,8 +77,9 @@ const getImmatriculationRNCS = async (
   siren: Siren
 ): Promise<IAPINotRespondingError | IImmatriculationRNCS> => {
   try {
+    // fetch IMR and use cache
     const { identite, dirigeants, beneficiaires, metadata } =
-      await fetchRNCSImmatriculation(siren);
+      await fetchRNCSImmatriculation(siren, true);
 
     return {
       siren,

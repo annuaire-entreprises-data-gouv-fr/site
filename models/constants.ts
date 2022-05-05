@@ -4,7 +4,11 @@ const constants = {
     mail: 'annuaire-entreprises@data.gouv.fr',
   },
   resultsPerPage: { etablissements: 200, search: 30 },
-  defaultTimeout: 10000,
+  timeout: {
+    default: 5000,
+    search: 7500,
+    pdf: 40000,
+  },
 };
 
 export default constants;
