@@ -16,6 +16,7 @@ env:
   INSEE_CLIENT_SECRET_FALLBACK: ${{ secrets.INSEE_CLIENT_SECRET_FALLBACK}}
   PDF_DOWNLOAD_DIRECTORY: /tmp/download
   PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+  REDIS_URL: redis://127.0.0.1:6379
 
 jobs:
   dependencies:
@@ -85,6 +86,11 @@ jobs:
         with:
           path: ./node_modules
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+
+      # manually install redis twice as github's service doesnot work
+      - name: Install redis
+        run: sudo apt-get install -y redis-tools redis-server
+
       - name: Build site
         run: npm run build:site
       - name: Cache site
@@ -113,6 +119,7 @@ jobs:
         with:
           path: ./node_modules
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+
       - name: Run unit tests
         run: |
           npm run test:unit
@@ -130,6 +137,11 @@ jobs:
         with:
           path: ./*
           key: ${{ github.sha }}
+
+      # manually install redis twice as github's service doesnot work
+      - name: Install redis
+        run: sudo apt-get install -y redis-tools redis-server
+
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:

@@ -7,6 +7,7 @@
     "npm": ">=7"
   },
   "scripts": {
+    "start:dev:redis": "redis-server --daemonize yes",
     "start:dev:frontend": "vite --config ./frontend/vite.config.js",
     "start:dev:next": "NODE_ENV=development next dev",
     "dev": "run-p start:dev:*",
