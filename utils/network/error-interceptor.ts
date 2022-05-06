@@ -8,7 +8,7 @@ import {
   HttpUnauthorizedError,
 } from '../../clients/exceptions';
 
-const handleError = (error: AxiosError) => {
+const errorInterceptor = (error: AxiosError) => {
   const { config, response, message } = error;
 
   if (!response) {
@@ -48,4 +48,4 @@ const handleError = (error: AxiosError) => {
   }
 };
 
-export default handleError;
+export default errorInterceptor;

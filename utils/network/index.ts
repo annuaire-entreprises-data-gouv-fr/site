@@ -1,13 +1,26 @@
 import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import constants from '../../models/constants';
-import handleError from './handle-errors';
-import httpClientOAuthFactory from './Oauth';
+import httpClientOAuthFactory from './0auth';
 import redisStorage from './redis-storage';
 import { setupCache } from 'axios-cache-interceptor';
+import logInterceptor from './log-interceptor';
+import errorInterceptor from './error-interceptor';
 
-const axiosInstanceWithCache = setupCache(Axios, {
+/**
+ *  WARNING : calling setupCache seems to have side effects in dev
+ */
+export const axiosInstanceWithCache = setupCache(Axios.create(), {
   storage: redisStorage,
+  debug: console.log,
 });
+
+/*
+ * log every response into STDOUT
+ */
+axiosInstanceWithCache.interceptors.response.use(
+  logInterceptor,
+  errorInterceptor
+);
 
 /**
  * Default axios client - not cached
@@ -21,9 +34,7 @@ const httpClient = async (
     timeout: constants.timeout.default,
     ...config,
     cache: false,
-  })
-    .then((response) => response)
-    .catch((error) => handleError(error));
+  });
 };
 
 /**
@@ -55,26 +66,28 @@ const httpGet = async (
  * @returns
  */
 const httpGetCached = async (url: string, config?: AxiosRequestConfig) => {
-  return await axiosInstanceWithCache
-    .get(url, {
-      cache: {
-        // 5 minutes lifespan as average session is < 5 min.
-        ttl: 1000 * 60 * 5,
+  return await axiosInstanceWithCache.get(url, {
+    cache: {
+      // 10 minutes lifespan as average session is ~ 3 min.
+      ttl: 1000 * 60 * 10,
 
-        // only cache 200
-        cachePredicate: {
-          statusCheck: (status) => status === 200,
+      // only cache 200
+      cachePredicate: {
+        statusCheck: (status) => status >= 200 && status < 300,
+        responseMatch: ({ data }) => {
+          // only caches if the response is not fallback
+          const isFallback = !!data?.metadata?.isFallback;
+          return !isFallback;
         },
-
-        // If we should return a old (possibly expired) cache when the current request failed
-        // to get a valid response because of a network error, invalid status or etc.
-        staleIfError: false,
       },
-      timeout: constants.timeout.default,
-      ...config,
-    })
-    .then((response) => response)
-    .catch((error) => handleError(error));
+
+      // If we should return a old (possibly expired) cache when the current request failed
+      // to get a valid response because of a network error, invalid status or etc.
+      staleIfError: false,
+    },
+    timeout: constants.timeout.default,
+    ...config,
+  });
 };
 
 export { httpClientOAuthFactory, httpClient, httpGet };

@@ -4,7 +4,8 @@ import * as oauth from 'axios-oauth-client';
 import * as tokenProvider from 'axios-token-interceptor';
 import { HttpServerError } from '../../clients/exceptions';
 import constants from '../../models/constants';
-import handleError from './handle-errors';
+import logInterceptor from './log-interceptor';
+import errorInterceptor from './error-interceptor';
 
 export const httpClientOAuthFactory = (
   token_url: string,
@@ -22,15 +23,15 @@ export const httpClientOAuthFactory = (
     client_secret,
   });
 
-  const axiosInstance = axios.create({ timeout: constants.timeout.default });
+  const axiosInstance = axios.create({
+    timeout: constants.timeout.default,
+  });
+
   axiosInstance.interceptors.request.use(
     oauth.interceptor(tokenProvider, getClientCredentials)
   );
 
-  axiosInstance.interceptors.response.use(
-    (response) => response,
-    (error) => handleError(error)
-  );
+  axiosInstance.interceptors.response.use(logInterceptor, errorInterceptor);
   return axiosInstance;
 };
 
