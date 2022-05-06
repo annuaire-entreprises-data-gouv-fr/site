@@ -17,7 +17,8 @@ export class APISlugNotFound extends Error {
 const ping = async (slug: string | string[]) => {
   switch (slug) {
     case 'api-proxy-rncs':
-      return await fetchRNCSImmatriculation(verifySiren('880878145'));
+      // fetch IRM and disable cache
+      return await fetchRNCSImmatriculation(verifySiren('880878145'), false);
     case 'api-rnm':
       return await fetchRnmImmatriculation(verifySiren('824024350'));
     case 'api-conventions-collectives':

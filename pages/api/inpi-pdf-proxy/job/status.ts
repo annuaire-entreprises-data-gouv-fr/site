@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import APIRncsProxyClient from '../../../../clients/rncs/rncs-proxy-client';
+import { APIRncsProxyPost } from '../../../../clients/rncs/rncs-proxy-client';
 import routes from '../../../../clients/routes';
 import logErrorInSentry from '../../../../utils/sentry';
 
@@ -9,9 +9,8 @@ import logErrorInSentry from '../../../../utils/sentry';
 
 const getPdfStatus = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const statuses = await APIRncsProxyClient({
-      url: routes.rncs.proxy.document.justificatif.status,
-      method: 'POST',
+    const url = routes.rncs.proxy.document.justificatif.status;
+    const statuses = await APIRncsProxyPost(url, {
       headers: {
         'Content-Type': 'application/json',
       },
