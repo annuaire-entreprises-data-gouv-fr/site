@@ -6,6 +6,8 @@ import { HttpServerError } from '../../clients/exceptions';
 import constants from '../../models/constants';
 import logInterceptor from './log-interceptor';
 import errorInterceptor from './error-interceptor';
+import { setupCache } from 'axios-cache-interceptor';
+import redisStorage from './redis-storage';
 
 export const httpClientOAuthFactory = (
   token_url: string,
@@ -23,9 +25,14 @@ export const httpClientOAuthFactory = (
     client_secret,
   });
 
-  const axiosInstance = axios.create({
-    timeout: constants.timeout.default,
-  });
+  const axiosInstance = setupCache(
+    axios.create({
+      timeout: constants.timeout.default,
+    }),
+    {
+      storage: redisStorage,
+    }
+  );
 
   axiosInstance.interceptors.request.use(
     oauth.interceptor(tokenProvider, getClientCredentials)

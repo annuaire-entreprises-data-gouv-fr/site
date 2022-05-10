@@ -67,27 +67,29 @@ const httpGet = async (
  */
 const httpGetCached = async (url: string, config?: AxiosRequestConfig) => {
   return await axiosInstanceWithCache.get(url, {
-    cache: {
-      // 10 minutes lifespan as average session is ~ 3 min.
-      ttl: 1000 * 60 * 10,
-
-      // only cache 200
-      cachePredicate: {
-        statusCheck: (status) => status >= 200 && status < 300,
-        responseMatch: ({ data }) => {
-          // only caches if the response is not fallback
-          const isFallback = !!data?.metadata?.isFallback;
-          return !isFallback;
-        },
-      },
-
-      // If we should return a old (possibly expired) cache when the current request failed
-      // to get a valid response because of a network error, invalid status or etc.
-      staleIfError: false,
-    },
+    cache: defaultCacheConfig,
     timeout: constants.timeout.default,
     ...config,
   });
+};
+
+export const defaultCacheConfig = {
+  // 10 minutes lifespan as average session is ~ 3 min.
+  ttl: 1000 * 60 * 10,
+
+  // only cache 200
+  cachePredicate: {
+    statusCheck: (status: number) => status >= 200 && status < 300,
+    responseMatch: ({ data }: { data: any }) => {
+      // only caches if the response is not fallback
+      const isFallback = !!data?.metadata?.isFallback;
+      return !isFallback;
+    },
+  },
+
+  // If we should return a old (possibly expired) cache when the current request failed
+  // to get a valid response because of a network error, invalid status or etc.
+  staleIfError: false,
 };
 
 export { httpClientOAuthFactory, httpClient, httpGet };

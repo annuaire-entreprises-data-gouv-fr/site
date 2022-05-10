@@ -3,15 +3,7 @@ import { Siren } from '../../utils/helpers/siren-and-siret';
 import routes from '../routes';
 import { APIRncsProxyGet } from './rncs-proxy-client';
 
-/**
- * RNCS IMR through the API Rncs proxy
- * @param siren
- * @returns
- */
-export const fetchRNCSImmatriculation = async (
-  siren: Siren,
-  useCache = true // cache for RNCS IMR
-) => {
+const factory = async (siren: Siren, useCache: boolean) => {
   const request = await APIRncsProxyGet(
     routes.rncs.proxy.imr + siren,
     {},
@@ -20,3 +12,17 @@ export const fetchRNCSImmatriculation = async (
 
   return request.data as IImmatriculationRNCSCore;
 };
+
+/**
+ * RNCS IMR through the API Rncs proxy
+ * @param siren
+ */
+export const fetchRNCSImmatriculation = async (siren: Siren) =>
+  factory(siren, true);
+
+/**
+ * RNCS IMR through the API Rncs proxy - disable cache
+ * @param siren
+ */
+export const fetchRNCSImmatriculationNoCache = async (siren: Siren) =>
+  factory(siren, false);

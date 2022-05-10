@@ -2,9 +2,17 @@ import { verifyIdRna } from '../utils/helpers/id-rna';
 import { verifySiren } from '../utils/helpers/siren-and-siret';
 import { HttpServerError } from './exceptions';
 import { fetchAssociation } from './rna';
-import { fetchRNCSImmatriculation } from './rncs';
+import {
+  fetchRNCSImmatriculation,
+  fetchRNCSImmatriculationNoCache,
+} from './rncs';
 import { fetchRnmImmatriculation } from './rnm';
-import { getUniteLegaleInsee } from './sirene-insee/siren';
+import { pingInsee } from './sirene-insee/ping';
+import {
+  getUniteLegaleInsee,
+  getUniteLegaleInseeNoCache,
+} from './sirene-insee/siren';
+import getResults from './sirene-ouverte/recherche';
 import getUniteLegaleSireneOuverte from './sirene-ouverte/siren';
 import fetchConventionCollectives from './siret-2-idcc';
 
@@ -18,13 +26,13 @@ const ping = async (slug: string | string[]) => {
   switch (slug) {
     case 'api-proxy-rncs':
       // fetch IRM and disable cache
-      return await fetchRNCSImmatriculation(verifySiren('880878145'), false);
+      return await fetchRNCSImmatriculationNoCache(verifySiren('880878145'));
     case 'api-rnm':
       return await fetchRnmImmatriculation(verifySiren('824024350'));
     case 'api-conventions-collectives':
       return await fetchConventionCollectives(['54205118000066']);
     case 'api-sirene-insee':
-      return await getUniteLegaleInsee(verifySiren('880878145'));
+      return await getUniteLegaleInseeNoCache(verifySiren('880878145'));
     case 'api-sirene-donnees-ouvertes':
       return await getUniteLegaleSireneOuverte(verifySiren('880878145'));
     case 'api-rna':
