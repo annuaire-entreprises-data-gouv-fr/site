@@ -1,5 +1,5 @@
 import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
-import { inseeClientGet, InseeClientOptions, INSEE_CREDENTIALS } from '.';
+import { inseeClientGet, InseeClientOptions } from '.';
 import constants from '../../models/constants';
 import {
   createDefaultEtablissement,

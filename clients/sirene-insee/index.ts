@@ -1,4 +1,3 @@
-import { AxiosRequestConfig } from 'axios';
 import {
   defaultCacheConfig,
   httpClientOAuthFactory,
@@ -21,56 +20,35 @@ import routes from '../routes';
  *
  */
 
-export enum INSEE_CREDENTIALS {
-  DEFAULT,
-  FALLBACK,
-}
-
 export interface InseeClientOptions {
   useFallback: boolean;
   useCache: boolean;
 }
 
-/**
- * Can choose between two different set of credentials in case first is rate limited
- * */
-const getCredentials = (credentials: INSEE_CREDENTIALS) => {
-  if (credentials === INSEE_CREDENTIALS.FALLBACK) {
-    return {
-      client_id: process.env.INSEE_CLIENT_ID_FALLBACK,
-      client_secret: process.env.INSEE_CLIENT_SECRET_FALLBACK,
-    };
-  }
-  return {
-    client_id: process.env.INSEE_CLIENT_ID,
-    client_secret: process.env.INSEE_CLIENT_SECRET,
-  };
-};
+const defaultClient = httpClientOAuthFactory(
+  routes.sireneInsee.auth,
+  process.env.INSEE_CLIENT_ID,
+  process.env.INSEE_CLIENT_SECRET
+);
+
+const fallbackClient = httpClientOAuthFactory(
+  routes.sireneInsee.auth,
+  process.env.INSEE_CLIENT_ID_FALLBACK,
+  process.env.INSEE_CLIENT_SECRET_FALLBACK
+);
 
 export const inseeClientWrapper = async (
   url: string,
-  method: 'GET' | 'POST',
-  clientOptions: InseeClientOptions,
-  requestOptions?: AxiosRequestConfig
+  clientOptions: InseeClientOptions
 ) => {
   const { useFallback, useCache } = clientOptions;
+  const client = useFallback ? fallbackClient : defaultClient;
 
-  const credentials = useFallback
-    ? INSEE_CREDENTIALS.FALLBACK
-    : INSEE_CREDENTIALS.DEFAULT;
-
-  const { client_id, client_secret } = getCredentials(credentials);
-
-  // il faut tester qu'on s'authentifie pas a chaque fois !!!!
-  const response = await httpClientOAuthFactory(
-    routes.sireneInsee.auth,
-    client_id,
-    client_secret
-  )({
-    ...requestOptions,
-    url,
-    method,
+  const response = await client.get(url, {
     cache: useCache ? defaultCacheConfig : false,
+    headers: {
+      Accept: 'application/json',
+    },
   });
   return response.data;
 };
@@ -78,4 +56,4 @@ export const inseeClientWrapper = async (
 export const inseeClientGet = async (
   route: string,
   options = { useFallback: false, useCache: false } as InseeClientOptions
-) => inseeClientWrapper(route, 'GET', options, {});
+) => await inseeClientWrapper(route, options);

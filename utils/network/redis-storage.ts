@@ -13,6 +13,7 @@ const redisStorage = buildStorage({
   },
 
   async set(key: string, value: any) {
+    console.log(key, value);
     await client.set(`axios-cache:${key}`, JSON.stringify(value));
   },
 

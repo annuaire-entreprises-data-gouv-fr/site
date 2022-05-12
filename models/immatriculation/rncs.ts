@@ -79,7 +79,7 @@ const getImmatriculationRNCS = async (
   try {
     // fetch IMR and use cache
     const { identite, dirigeants, beneficiaires, metadata } =
-      await fetchRNCSImmatriculation(siren, true);
+      await fetchRNCSImmatriculation(siren);
 
     return {
       siren,

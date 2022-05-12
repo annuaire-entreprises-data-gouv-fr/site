@@ -18,26 +18,29 @@ export const httpClientOAuthFactory = (
     throw new HttpServerError('Client id or client secret is undefined');
   }
 
-  const getClientCredentials = oauth.client(axios.create(), {
+  // use a different login instance - we dont want to cache login route
+  const axiosLoginInstance = axios.create();
+  axiosLoginInstance.interceptors.response.use(
+    logInterceptor,
+    errorInterceptor
+  );
+
+  const getClientCredentials = oauth.client(axiosLoginInstance, {
     url: token_url,
     grant_type: 'client_credentials',
     client_id,
     client_secret,
+    timeout: constants.timeout.default,
   });
 
-  const axiosInstance = setupCache(
-    axios.create({
-      timeout: constants.timeout.default,
-    }),
-    {
-      storage: redisStorage,
-    }
-  );
+  const axiosInstance = setupCache(axios.create(), {
+    storage: redisStorage,
+    debug: console.log,
+  });
 
   axiosInstance.interceptors.request.use(
     oauth.interceptor(tokenProvider, getClientCredentials)
   );
-
   axiosInstance.interceptors.response.use(logInterceptor, errorInterceptor);
   return axiosInstance;
 };

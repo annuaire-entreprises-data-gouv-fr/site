@@ -1,18 +1,9 @@
 import { verifyIdRna } from '../utils/helpers/id-rna';
 import { verifySiren } from '../utils/helpers/siren-and-siret';
-import { HttpServerError } from './exceptions';
 import { fetchAssociation } from './rna';
-import {
-  fetchRNCSImmatriculation,
-  fetchRNCSImmatriculationNoCache,
-} from './rncs';
+import { fetchRNCSImmatriculationNoCache } from './rncs';
 import { fetchRnmImmatriculation } from './rnm';
-import { pingInsee } from './sirene-insee/ping';
-import {
-  getUniteLegaleInsee,
-  getUniteLegaleInseeNoCache,
-} from './sirene-insee/siren';
-import getResults from './sirene-ouverte/recherche';
+import { getUniteLegaleInseeNoCache } from './sirene-insee/siren';
 import getUniteLegaleSireneOuverte from './sirene-ouverte/siren';
 import fetchConventionCollectives from './siret-2-idcc';
 

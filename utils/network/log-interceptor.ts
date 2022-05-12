@@ -5,7 +5,7 @@ import { AxiosResponse } from 'axios';
  * @param response
  */
 const logInterceptor = (response: AxiosResponse<any, any>) => {
-  if (process.env.NODE_ENV === 'production') {
+  if (true || process.env.NODE_ENV === 'production') {
     //@ts-ignore
     const cached = response?.cached || false;
     const log = `status=${response?.status} isFromCached=${cached} request=${response?.config?.url}`;
