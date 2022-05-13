@@ -165,7 +165,7 @@ const mapToDomainObjectNew = (
         ),
         latitude: result.latitude || '',
         longitude: result.longitude || '',
-        nomComplet: result.nom_raison_sociale || 'Nom inconnu',
+        nomComplet: result.nom_complet || 'Nom inconnu',
         nombreEtablissements: result.nombre_etablissements || 1,
         nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 1,
         chemin: result.page_path || result.siren,
