@@ -26,7 +26,7 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
     {uniteLegale.siege && uniteLegale.siege.adresse && (
       <>
         , dont le siège est domicilié au{' '}
-        <a href={`/rechercher/carte?siret=${uniteLegale.siege.siret}`}>
+        <a href={`/carte/${uniteLegale.siege.siret}`}>
           {uniteLegale.siege.adresse}
         </a>
       </>
