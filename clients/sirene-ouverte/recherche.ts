@@ -30,6 +30,22 @@ interface ISireneOuverteUniteLegaleResultat {
   libelle_commune: string;
   code_postal: string;
   libelle_voie: string;
+  // new fields
+  siret_siege: string;
+  tranche_effectif_salarie_siege: string;
+  commune: string;
+  date_debut_activite: string;
+  etat_administratif_siege: string;
+  activite_principale_siege: string;
+  date_creation_unite_legale: string;
+  tranche_effectif_salarie_unite_legale: string;
+  date_mise_a_jour: string;
+  categorie_entreprise: string;
+  nom_raison_sociale: string;
+  nature_juridique_unite_legale: string;
+  activite_principale_unite_legale: string;
+  nombre_etablissements_ouverts: string;
+  is_entrepreneur_individuel: string;
 }
 
 export interface ISireneOuverteSearchResults {
@@ -38,6 +54,8 @@ export interface ISireneOuverteSearchResults {
   total_pages: number;
   currentPage?: string;
   unite_legale: ISireneOuverteUniteLegaleResultat[];
+  // new fields
+  results: ISireneOuverteUniteLegaleResultat[];
 }
 
 /**
@@ -56,18 +74,28 @@ const getResults = async (
   const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}`;
   const response = await httpGet(url);
 
-  const results = (response.data || []) as ISireneOuverteSearchResults[];
+  const results = (response.data || []) as any;
 
   // Sirene Ouverte is based on a Postrgres to Rest converter and might return [] instead of 404
-  if (
-    results.length === 0 ||
-    !results[0].unite_legale ||
-    results[0].unite_legale.length === 0
-  ) {
-    throw new HttpNotFound('No results');
+  try {
+    if (
+      results.length === 0 ||
+      !results[0].unite_legale ||
+      results[0].unite_legale.length === 0
+    ) {
+      throw new HttpNotFound('No results');
+    }
+    return mapToDomainObject(results[0]);
+  } catch {
+    if (
+      results.length === 0 ||
+      !results.results ||
+      results.results.length === 0
+    ) {
+      throw new HttpNotFound('No results');
+    }
+    return mapToDomainObjectNew(results);
   }
-
-  return mapToDomainObject(results[0]);
 };
 
 const mapToDomainObject = (
@@ -105,6 +133,44 @@ const mapToDomainObject = (
         chemin: result.page_path || result.siren,
         libelleActivitePrincipale: libelleFromCodeNaf(
           result.activite_principale,
+          false
+        ),
+      };
+    }),
+  };
+};
+
+const mapToDomainObjectNew = (
+  data: ISireneOuverteSearchResults
+): ISearchResults => {
+  const { total_results = 0, total_pages = 0, results = [], page } = data;
+
+  return {
+    currentPage: page ? parseIntWithDefaultValue(page) : 1,
+    resultCount: total_results,
+    pageCount: total_pages,
+    results: results.map((result: ISireneOuverteUniteLegaleResultat) => {
+      return {
+        siren: result.siren,
+        siret: result.siret_siege,
+        estActive: result.etat_administratif_unite_legale === 'A',
+        adresse: formatAdresse(
+          result.complement_adresse || '',
+          result.numero_voie,
+          result.indice_repetition,
+          result.type_voie,
+          result.libelle_voie,
+          result.code_postal,
+          result.libelle_commune
+        ),
+        latitude: result.latitude || '',
+        longitude: result.longitude || '',
+        nomComplet: result.nom_raison_sociale || 'Nom inconnu',
+        nombreEtablissements: result.nombre_etablissements || 1,
+        nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 1,
+        chemin: result.page_path || result.siren,
+        libelleActivitePrincipale: libelleFromCodeNaf(
+          result.activite_principale_unite_legale,
           false
         ),
       };
