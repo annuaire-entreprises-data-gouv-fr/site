@@ -12,6 +12,7 @@ const button = (
   const backgroundColor = !light ? '#000091' : '#fff';
 
   try {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.status(200).send(`
     <html lang="fr">
   <head>
