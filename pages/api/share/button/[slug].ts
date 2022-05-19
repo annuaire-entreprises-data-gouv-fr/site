@@ -13,6 +13,8 @@ const button = (
 
   try {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    // authorize any domain to use button as an <iframe/>
+    res.removeHeader('X-Frame-Options');
     res.status(200).send(`
     <html lang="fr">
   <head>

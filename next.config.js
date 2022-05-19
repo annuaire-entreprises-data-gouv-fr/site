@@ -9,8 +9,8 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: '/api/qr',
-        destination: '/api/share/qr',
+        source: '/api/qr/:slug',
+        destination: '/api/share/qr/:slug',
         permanent: true,
       },
     ];

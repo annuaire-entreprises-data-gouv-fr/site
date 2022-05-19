@@ -75,14 +75,14 @@ const Partager: React.FC = () => {
             width="290"
             height="70"
             style={{ border: 'none', maxWidth: '100%' }}
-            src="/api/share/button/510973431"
+            src="https://annuaire-entreprises.data.gouv.fr/api/share/button/510973431"
           ></iframe>
           <div />
           <iframe
             width="290"
             height="70"
             style={{ border: 'none', maxWidth: '100%' }}
-            src="/api/share/button/510973431?light=true"
+            src="https://annuaire-entreprises.data.gouv.fr/api/share/button/510973431?light=true"
           ></iframe>
           <h3>Comment ajouter un lien sur mon site ?</h3>
           <p>
