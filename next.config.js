@@ -6,4 +6,13 @@ module.exports = {
     });
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/api/qr',
+        destination: '/api/share/qr',
+        permanent: true,
+      },
+    ];
+  },
 };

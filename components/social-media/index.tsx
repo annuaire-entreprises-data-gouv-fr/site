@@ -75,7 +75,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
         >
           <a
             title="Partager cette page grâce à un QR Code"
-            href={`/api/qr/${siren}`}
+            href={`/api/share/qr/${siren}`}
             download={`QR_code_page_${siren}.jpeg`}
           >
             {qrCode}
