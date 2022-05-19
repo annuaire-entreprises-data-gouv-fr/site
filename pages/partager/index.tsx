@@ -39,14 +39,14 @@ const Partager: React.FC = () => {
           </p>
           <p>Le lien est disponible en deux couleurs :</p>
           <iframe
-            width="290"
+            width="300"
             height="70"
             style={{ border: 'none', maxWidth: '100%' }}
             src="https://annuaire-entreprises.data.gouv.fr/api/share/button/510973431"
           ></iframe>
           <div />
           <iframe
-            width="290"
+            width="300"
             height="70"
             style={{ border: 'none', maxWidth: '100%' }}
             src="https://annuaire-entreprises.data.gouv.fr/api/share/button/510973431?light=true"
@@ -83,7 +83,7 @@ const Partager: React.FC = () => {
             </code>
           </p>
           <p>
-            <b>Attention :</b> pensez bien a renseigner{' '}
+            <b>Attention :</b> pensez à bien renseigner{' '}
             <code>SIREN_OR_SIRET</code> avec le siren ou le siret pour lequel
             vous voulez créer un lien !
           </p>

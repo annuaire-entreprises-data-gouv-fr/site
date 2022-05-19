@@ -14,7 +14,7 @@ const button = (
   try {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.status(200).send(`
-    <html lang="fr">
+    <!DOCTYPE html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -80,7 +80,7 @@ const button = (
         font-size: 1.15rem;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 290px) {
+      @media only screen and (min-width: 1px) and (max-width: 300px) {
         html {
           font-size:14px;
           line-height:21px;
@@ -90,7 +90,7 @@ const button = (
           padding-bottom:3px;
         }
       } 
-      @media only screen and (min-width: 290px) and (max-width: 350px) {
+      @media only screen and (min-width: 300px) and (max-width: 350px) {
         html {
           font-size:16px;
           line-height:23px;
