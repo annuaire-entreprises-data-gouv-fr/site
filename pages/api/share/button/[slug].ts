@@ -14,7 +14,8 @@ const button = (
   try {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.status(200).send(`
-    <!DOCTYPE html lang="fr">
+    <!DOCTYPE html>
+    <html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
