@@ -84,7 +84,7 @@ const Partager: React.FC = () => {
   width="290"
   height="100"
   style={ border: none; max-width: 100%; }
-  src="https://annuaire-entreprises.data.gouv.fr/api/share/button/<SIREN_OR_SIRET>"
+  src="https://annuaire-entreprises.data.gouv.fr/api/share/button/SIREN_OR_SIRET"
 ></iframe>
                   `}
             </code>
@@ -97,7 +97,7 @@ const Partager: React.FC = () => {
   width="290"
   height="100"
   style={ border: none; max-width: 100%; }
-  src="https://annuaire-entreprises.data.gouv.fr/api/share/button/<SIREN_OR_SIRET>?light=true"
+  src="https://annuaire-entreprises.data.gouv.fr/api/share/button/SIREN_OR_SIRET?light=true"
 ></iframe>
                   `}
             </code>
