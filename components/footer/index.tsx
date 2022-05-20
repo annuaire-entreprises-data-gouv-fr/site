@@ -136,12 +136,17 @@ const Footer = () => (
           </li>
           <li className="fr-footer__bottom-item">
             <a className="fr-footer__bottom-link" href="/accessibilite">
-              Accessibilité : non-conforme
+              Accessibilité : non conforme
             </a>
           </li>
           <li className="fr-footer__bottom-item">
             <a className="fr-footer__bottom-link" href="/faq">
               FAQ
+            </a>
+          </li>
+          <li className="fr-footer__bottom-item">
+            <a className="fr-footer__bottom-link" href="/partager">
+              Réutilisations & partage
             </a>
           </li>
           <li className="fr-footer__bottom-item">

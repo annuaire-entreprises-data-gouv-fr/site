@@ -65,33 +65,56 @@ const BeneficiairesSection: React.FC<IProps> = ({
         title={`Les informations sur le${plural} bénéficiaire${plural} effectif${plural}`}
         source={EAdministration.INPI}
       >
-        <>
-          {immatriculationRNCS.metadata.isFallback &&
-            immatriculationRNCS.beneficiaires.length > 0 && (
-              <InpiPartiallyDownWarning missing="la date de déclaration, et la différence entre le nom et le prénom" />
-            )}
+        {immatriculationRNCS.beneficiaires.length === 0 ? (
           <p>
-            Cette entité possède {beneficiaires.length} bénéficiaire{plural}{' '}
-            effectif{plural} enregistré{plural} au{' '}
-            <b>Registre National du Commerce et des Sociétés (RNCS)</b>{' '}
-            centralisé par l’
-            <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
+            Cette entité ne possède aucun{' '}
             <a
               rel="noreferrer noopener nofollow"
               target="_blank"
-              href={`${routes.rncs.portail.entreprise}${siren}`}
+              href="https://www.inpi.fr/fr/faq/qu-est-ce-qu-un-beneficiaire-effectif"
             >
-              la page de cette entreprise
+              bénéficiaire effectif
             </a>{' '}
-            sur le site de l’INPI&nbsp;:
+            enregistré au{' '}
+            <b>Registre National du Commerce et des Sociétés (RNCS)</b> tenu par
+            l’
+            <INPI />.
           </p>
-          {beneficiaires.map((beneficiaire, idx) => (
-            <React.Fragment key={'b' + idx}>
-              <TwoColumnTable body={formtInfos(beneficiaire)} />
-              {beneficiaires.length !== idx + 1 && <br />}
-            </React.Fragment>
-          ))}
-        </>
+        ) : (
+          <>
+            {immatriculationRNCS.metadata.isFallback && (
+              <InpiPartiallyDownWarning missing="la date de déclaration, et la différence entre le nom et le prénom" />
+            )}
+            <p>
+              Cette entité possède {beneficiaires.length}{' '}
+              <a
+                rel="noreferrer noopener nofollow"
+                target="_blank"
+                href="https://www.inpi.fr/fr/faq/qu-est-ce-qu-un-beneficiaire-effectif"
+              >
+                bénéficiaire{plural} effectif{plural}
+              </a>{' '}
+              enregistré{plural} au{' '}
+              <b>Registre National du Commerce et des Sociétés (RNCS)</b>{' '}
+              centralisé par l’
+              <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
+              <a
+                rel="noreferrer noopener nofollow"
+                target="_blank"
+                href={`${routes.rncs.portail.entreprise}${siren}`}
+              >
+                la page de cette entreprise
+              </a>{' '}
+              sur le site de l’INPI&nbsp;:
+            </p>
+            {beneficiaires.map((beneficiaire, idx) => (
+              <React.Fragment key={'b' + idx}>
+                <TwoColumnTable body={formtInfos(beneficiaire)} />
+                {beneficiaires.length !== idx + 1 && <br />}
+              </React.Fragment>
+            ))}
+          </>
+        )}
       </Section>
       <style global jsx>{`
         table > tbody > tr > td:first-of-type {

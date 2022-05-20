@@ -1,7 +1,7 @@
 import QRCode from 'qrcode';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { hasSirenFormat } from '../../../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../../../utils/sentry';
+import { hasSirenFormat } from '../../../../utils/helpers/siren-and-siret';
+import logErrorInSentry from '../../../../utils/sentry';
 
 const getUrl = (slug: string) => {
   if (hasSirenFormat(slug)) {

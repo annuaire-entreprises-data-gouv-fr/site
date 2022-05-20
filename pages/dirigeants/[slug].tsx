@@ -34,7 +34,7 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
             uniteLegale={uniteLegale}
             immatriculationRNCS={immatriculationRNCS}
           />
-          {uniteLegale.estDiffusible ? (
+          {uniteLegale.estDiffusible &&
             uniteLegale.estEntrepreneurIndividuel &&
             uniteLegale.dirigeant && (
               <>
@@ -43,15 +43,7 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
                 />
                 <BreakPageForPrint />
               </>
-            )
-          ) : (
-            <>
-              <p>
-                Cette entité est <b>non-diffusible.</b>
-              </p>
-              <NonDiffusibleSection />
-            </>
-          )}
+            )}
           <DirigeantsSection
             immatriculationRNCS={immatriculationRNCS}
             siren={uniteLegale.siren}

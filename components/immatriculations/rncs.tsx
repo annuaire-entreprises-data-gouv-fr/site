@@ -17,6 +17,7 @@ import { PrintNever } from '../print-visibility';
 import { Closed, Open } from '../icon';
 import InpiPartiallyDownWarning from '../alerts/inpi-partially-down';
 import { IImmatriculationRNCS } from '../../models/immatriculation/rncs';
+import Info from '../alerts/info';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
@@ -63,31 +64,61 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
               uniteLegale={uniteLegale}
             />
             <PrintNever>
-              <p>
-                Pour accéder à l’ensemble des données contenues dans un extrait
-                KBIS, téléchargez le justificatif d’immatriculation via le{' '}
-                <b>bouton ci-dessous</b>. Le téléchargement peut prendre
-                quelques dizaines de secondes.
-              </p>
-              <div className="layout-center">
-                <ButtonInpiPdf siren={immatriculation.siren} />
-                <div className="separator" />
-                <ButtonLink
-                  nofollow={true}
-                  target="_blank"
-                  to={`${immatriculation.downloadlink}`}
-                  alt
-                >
-                  ⇢ Voir la fiche sur le site de l’INPI
-                </ButtonLink>
-              </div>
-              <p>
-                <b>NB :</b> si le téléchargement échoue, vous pouvez accéder à
-                la donnée en allant sur le site de l’
-                <INPI />. Pour accéder à l’ensemble de la donnée en utilisant le
-                site de l’
-                <INPI /> vous devrez vous créer un compte <INPI />.
-              </p>
+              {uniteLegale.estDiffusible ? (
+                <>
+                  <p>
+                    Pour accéder à l’ensemble des données contenues dans un
+                    extrait KBIS, téléchargez le justificatif d’immatriculation
+                    via le <b>bouton ci-dessous</b>. Le téléchargement peut
+                    prendre quelques dizaines de secondes.
+                  </p>
+                  <div className="layout-center">
+                    <ButtonInpiPdf siren={immatriculation.siren} />
+                    <div className="separator" />
+                    <ButtonLink
+                      nofollow={true}
+                      target="_blank"
+                      to={`${immatriculation.downloadlink}`}
+                      alt
+                    >
+                      ⇢ Voir la fiche sur le site de l’INPI
+                    </ButtonLink>
+                  </div>
+                  <p>
+                    <b>NB :</b> si le téléchargement échoue, vous pouvez accéder
+                    à la donnée en allant sur le site de l’
+                    <INPI />. Pour accéder à l’ensemble de la donnée en
+                    utilisant le site de l’
+                    <INPI /> vous devrez vous créer un compte <INPI />.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p>
+                    <Info>
+                      Cette entité est non-diffusible. Par conséquent, son PDF
+                      d’immatriculation complet n’est pas téléchargeable.
+                    </Info>
+                    Vous pouvez :
+                    <ul>
+                      <li>
+                        soit télécharger le{' '}
+                        <a href={immatriculation.downloadlink + '?format=pdf'}>
+                          PDF public
+                        </a>
+                        , sans données personnelles.
+                      </li>
+                      <li>
+                        soit aller{' '}
+                        <a href={immatriculation.downloadlink}>
+                          sur le site de l’Inpi
+                        </a>
+                        , vous créer un compte et accéder au pdf complet.
+                      </li>
+                    </ul>
+                  </p>
+                </>
+              )}
             </PrintNever>
             <style jsx>{`
               .separator {

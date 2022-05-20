@@ -4,6 +4,7 @@ import { fetchAssociation } from './rna';
 import { fetchRNCSImmatriculationNoCache } from './rncs';
 import { fetchRnmImmatriculation } from './rnm';
 import { getUniteLegaleInseeNoCache } from './sirene-insee/siren';
+import getResults from './sirene-ouverte/recherche';
 import getUniteLegaleSireneOuverte from './sirene-ouverte/siren';
 import fetchConventionCollectives from './siret-2-idcc';
 
@@ -28,6 +29,8 @@ const ping = async (slug: string | string[]) => {
       return await getUniteLegaleSireneOuverte(verifySiren('880878145'));
     case 'api-rna':
       return await fetchAssociation(verifyIdRna('W551000280'));
+    case 'api-recherche':
+      return await getResults('test', 1);
     default:
       throw new APISlugNotFound(404, `API ping ${slug} not found`);
   }
