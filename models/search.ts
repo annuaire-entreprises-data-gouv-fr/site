@@ -1,20 +1,17 @@
 import { IsLikelyASirenOrSiretException } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import getResults from '../clients/sirene-ouverte/recherche';
-// import getResultsFallback from '../clients/sirene-ouverte/recherche-fallback';
 import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
 import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
-import {
-  APINotRespondingFactory,
-  isAPINotResponding,
-} from './api-not-responding';
+import { APINotRespondingFactory } from './api-not-responding';
 
 export interface ISearchResult {
   siren: string;
   siret: string;
   nombreEtablissements: number;
+  nombreEtablissementsOuverts: number;
   libelleActivitePrincipale: string;
   estActive: boolean;
   adresse: string;
