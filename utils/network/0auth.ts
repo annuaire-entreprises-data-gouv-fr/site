@@ -19,13 +19,14 @@ export const httpClientOAuthFactory = (
   }
 
   // use a different login instance - we dont want to cache login route
-  const axiosLoginInstance = axios.create();
-  axiosLoginInstance.interceptors.response.use(
+  const axiosGetCredentialsInstance = axios.create();
+
+  axiosGetCredentialsInstance.interceptors.response.use(
     logInterceptor,
     errorInterceptor
   );
 
-  const getClientCredentials = oauth.client(axiosLoginInstance, {
+  const getClientCredentials = oauth.client(axiosGetCredentialsInstance, {
     url: token_url,
     grant_type: 'client_credentials',
     client_id,
@@ -42,6 +43,7 @@ export const httpClientOAuthFactory = (
     oauth.interceptor(tokenProvider, getClientCredentials)
   );
   axiosInstance.interceptors.response.use(logInterceptor, errorInterceptor);
+
   return axiosInstance;
 };
 

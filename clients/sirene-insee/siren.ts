@@ -60,7 +60,7 @@ const factory = (options: InseeClientOptions) => async (siren: Siren) => {
     routes.sireneInsee.siren + siren,
     options
   );
-  const response = request as IInseeUniteLegaleResponse;
+  const response = request.data as IInseeUniteLegaleResponse;
 
   return mapToDomainObject(siren, response);
 };

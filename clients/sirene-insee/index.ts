@@ -37,23 +37,17 @@ const fallbackClient = httpClientOAuthFactory(
   process.env.INSEE_CLIENT_SECRET_FALLBACK
 );
 
-export const inseeClientWrapper = async (
-  url: string,
-  clientOptions: InseeClientOptions
+export const inseeClientGet = async (
+  route: string,
+  options = { useFallback: false, useCache: false } as InseeClientOptions
 ) => {
-  const { useFallback, useCache } = clientOptions;
+  const { useFallback, useCache } = options;
   const client = useFallback ? fallbackClient : defaultClient;
 
-  const response = await client.get(url, {
+  return await client.get(route, {
     cache: useCache ? defaultCacheConfig : false,
     headers: {
       Accept: 'application/json',
     },
   });
-  return response.data;
 };
-
-export const inseeClientGet = async (
-  route: string,
-  options = { useFallback: false, useCache: false } as InseeClientOptions
-) => await inseeClientWrapper(route, options);
