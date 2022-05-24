@@ -1,5 +1,5 @@
 import React from 'react';
-import { PrintNever } from '../print-visibility';
+import { PrintNever } from '../../components-ui/print-visibility';
 
 export const NPSBanner: React.FC<{}> = () => (
   <PrintNever>

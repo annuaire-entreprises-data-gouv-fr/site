@@ -1,4 +1,4 @@
-import { PrintNever } from '../print-visibility';
+import { PrintNever } from '../../components-ui/print-visibility';
 
 const DownloadManager = () => (
   <PrintNever>

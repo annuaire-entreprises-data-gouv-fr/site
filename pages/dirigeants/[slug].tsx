@@ -14,7 +14,7 @@ import DirigeantsEntrepriseIndividuelleSection from '../../components/dirigeants
 import DirigeantsSection from '../../components/dirigeants-section/rncs-dirigeants';
 import BeneficiairesSection from '../../components/dirigeants-section/beneficiaires';
 import DirigeantSummary from '../../components/dirigeants-section/summary';
-import BreakPageForPrint from '../../components/print-break-page';
+import BreakPageForPrint from '../../components-ui/print-break-page';
 
 const DirigeantsPage: React.FC<IDirigeants> = ({
   uniteLegale,

@@ -21,6 +21,11 @@ export interface ISearchResult {
   chemin: string;
 }
 
+export interface ISearchParams {
+  activite_principale_entreprise: string;
+  code_postal: string;
+}
+
 export interface ISearchResults {
   currentPage: number;
   resultCount: number;
@@ -28,7 +33,11 @@ export interface ISearchResults {
   results: ISearchResult[];
 }
 
-const search = async (searchTerm: string, page: number) => {
+const search = async (
+  searchTerm: string,
+  page: number,
+  searchParams: ISearchParams
+) => {
   try {
     const cleanedTerm = cleanSearchTerm(searchTerm);
 
@@ -40,7 +49,7 @@ const search = async (searchTerm: string, page: number) => {
 
     const escapedSearchTerm = escapeTerm(searchTerm);
 
-    const results = await getResults(escapedSearchTerm, page);
+    const results = await getResults(escapedSearchTerm, page, searchParams);
     return results;
   } catch (e: any) {
     if (e instanceof HttpNotFound) {

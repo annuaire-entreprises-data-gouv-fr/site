@@ -2,7 +2,7 @@ import React from 'react';
 import { ISearchResult, ISearchResults } from '../../models/search';
 import { capitalize } from '../../utils/helpers/formatting';
 import { SearchFeedback } from '../search-feedback';
-import { Tag } from '../tag';
+import { Tag } from '../../components-ui/tag';
 
 interface IProps {
   results: ISearchResult[];

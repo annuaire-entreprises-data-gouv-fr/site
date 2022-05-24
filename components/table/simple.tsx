@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { copy, copied } from '../icon';
+import { copy, copied } from '../../components-ui/icon';
 
 interface ISectionProps {
   body: any[][];

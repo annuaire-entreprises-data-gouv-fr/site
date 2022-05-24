@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 import constants from '../models/constants';
-import ButtonLink from '../components/button';
+import ButtonLink from '../components-ui/button';
 import { DILA, INPI, INSEE, METI, CMA } from '../components/administrations';
 
 import Page from '../layouts';

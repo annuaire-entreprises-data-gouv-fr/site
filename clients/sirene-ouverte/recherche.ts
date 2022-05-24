@@ -1,4 +1,4 @@
-import { ISearchResults } from '../../models/search';
+import { ISearchParams, ISearchResults } from '../../models/search';
 import {
   formatAdresse,
   parseIntWithDefaultValue,
@@ -55,7 +55,8 @@ export interface ISireneOuverteSearchResults {
  */
 const getResults = async (
   searchTerms: string,
-  page: number
+  page: number,
+  searchParams: ISearchParams
 ): Promise<ISearchResults> => {
   const encodedTerms = encodeURI(searchTerms);
 
@@ -63,7 +64,15 @@ const getResults = async (
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
     routes.sireneOuverte.rechercheUniteLegale;
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}`;
+  let url = `${route}?per_page=10&page=${page}&q=${encodedTerms}`;
+  Object.keys(searchParams).forEach((k) => {
+    //@ts-ignore
+    const value = searchParams[k];
+    console.log(!!value);
+    if (!!value) {
+      url += `&${k}=${value}`;
+    }
+  });
   const response = await httpGet(url);
 
   const results = (response.data || []) as any;

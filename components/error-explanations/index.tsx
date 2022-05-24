@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import constants from '../../models/constants';
-import ButtonLink from '../button';
+import ButtonLink from '../../components-ui/button';
 
 const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
   <div className="content-container text-wrapper">

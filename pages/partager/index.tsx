@@ -1,6 +1,6 @@
 import React from 'react';
 import Page from '../../layouts';
-import { qrCode } from '../../components/icon';
+import { qrCode } from '../../components-ui/icon';
 
 const Partager: React.FC = () => {
   return (

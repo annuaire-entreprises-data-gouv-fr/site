@@ -1,5 +1,5 @@
 import { IUniteLegale } from '../../models';
-import { INSEE, MI } from '../administrations';
+import { INSEE, MI } from '../../components/administrations';
 import Warning from './warning';
 
 const AssociationAdressAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({

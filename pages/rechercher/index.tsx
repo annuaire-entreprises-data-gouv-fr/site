@@ -9,7 +9,7 @@ import {
   parseIntWithDefaultValue,
   serializeForClientScript,
 } from '../../utils/helpers/formatting';
-import search, { ISearchResults } from '../../models/search';
+import search, { ISearchParams, ISearchResults } from '../../models/search';
 import ResultsHeader from '../../components/results-header';
 import { IsLikelyASirenOrSiretException } from '../../models';
 import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
@@ -21,12 +21,18 @@ import { SearchErrorExplanations } from '../../components/error-explanations';
 interface IProps {
   searchTerm: string;
   results: ISearchResults;
+  searchParams: ISearchParams;
 }
 
-const SearchResultPage: React.FC<IProps> = ({ results, searchTerm }) => (
+const SearchResultPage: React.FC<IProps> = ({
+  results,
+  searchTerm,
+  searchParams,
+}) => (
   <Page
     small={true}
     currentSearchTerm={searchTerm}
+    searchParams={searchParams}
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"
   >
@@ -101,12 +107,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const pageParam = (context.query.page || '') as string;
   const page = parseIntWithDefaultValue(pageParam, 1);
 
+  const searchParams = {
+    activite_principale_entreprise: (context.query
+      .activite_principale_entreprise || '') as string,
+    code_postal: (context.query.code_postal || '') as string,
+  };
+
+  const hasParams = Object.values(searchParams).some((v) => v !== '');
+
   try {
-    const results = (await search(searchTermParam, page)) || {};
+    const results = (await search(searchTermParam, page, searchParams)) || {};
     return {
       props: {
         results,
         searchTerm: searchTermParam,
+        searchParams: hasParams ? searchParams : null,
       },
     };
   } catch (e: any) {

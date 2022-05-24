@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { formatIntFr } from '../../utils/helpers/formatting';
-import { Tag } from '../tag';
-import IsActiveTag from '../is-active-tag';
+import { Tag } from '../../components-ui/tag';
+import IsActiveTag from '../../components-ui/is-active-tag';
 import { UnitLegaleDescription } from '../unite-legale-description';
 import { IUniteLegale } from '../../models';
-import SocialMedia from '../social-media';
-import { PrintNever } from '../print-visibility';
-import MultipleSirenAlert from '../alerts/multiple-siren';
-import AssociationAdressAlert from '../alerts/association-adress';
+import SocialMedia from '../../components-ui/social-media';
+import { PrintNever } from '../../components-ui/print-visibility';
+import MultipleSirenAlert from '../../components-ui/alerts/multiple-siren';
+import AssociationAdressAlert from '../../components-ui/alerts/association-adress';
 
 export enum FICHE {
   INFORMATION = 'informations générales',

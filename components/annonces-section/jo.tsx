@@ -9,13 +9,13 @@ import {
   isAPINotResponding,
 } from '../../models/api-not-responding';
 import { IAnnoncesJO } from '../../models/annonces';
-import { Tag } from '../tag';
-import ButtonLink from '../button';
+import { Tag } from '../../components-ui/tag';
+import ButtonLink from '../../components-ui/button';
 import { DILA } from '../administrations';
 import routes from '../../clients/routes';
 import { IUniteLegale } from '../../models';
 import { formatDate } from '../../utils/helpers/formatting';
-import AssociationCreationNotFoundAlert from '../alerts/association-creation-not-found-alert';
+import AssociationCreationNotFoundAlert from '../../components-ui/alerts/association-creation-not-found-alert';
 
 const AnnoncesJOSection: React.FC<{
   uniteLegale: IUniteLegale;

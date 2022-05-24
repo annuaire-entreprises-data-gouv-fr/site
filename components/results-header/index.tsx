@@ -1,5 +1,5 @@
 import React from 'react';
-import { pin } from '../icon';
+import { pin } from '../../components-ui/icon';
 
 const MapOrListSwitch = ({ isMap = false, searchTerm = '' }) => (
   <>
