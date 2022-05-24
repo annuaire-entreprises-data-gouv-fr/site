@@ -11,36 +11,34 @@ import routes from '../routes';
 
 interface ISireneOuverteUniteLegaleResultat {
   siren: string;
-  siret: string;
-  etat_administratif_unite_legale: string;
-  latitude: string;
-  longitude: string;
-  nom_complet: string;
-  page_path: string;
-  complement_adresse: string;
-  numero_voie: string;
-  indice_repetition: string;
-  type_voie: string;
-  libelle_commune: string;
-  code_postal: string;
-  libelle_voie: string;
-  // new fields
   siret_siege: string;
+  date_creation_siege: string;
   tranche_effectif_salarie_siege: string;
+  activite_principale_registre_metier: string;
+  numero_voie: string;
+  type_voie: string;
+  libelle_voie: string;
+  code_postal: string;
+  libelle_commune: string;
+  indice_repetition: string;
+  complement_adresse: string;
   commune: string;
-  date_debut_activite: string;
-  etat_administratif_siege: string;
+  date_debut_activite_siege: string;
+  etat_adiministratif_siege: string;
   activite_principale_siege: string;
+  longitude: number;
+  latitude: number;
   date_creation_unite_legale: string;
-  tranche_effectif_salarie_unite_legale: string;
-  date_mise_a_jour: string;
   categorie_entreprise: string;
+  etat_administratif_unite_legale: string;
   nom_raison_sociale: string;
   nature_juridique_unite_legale: string;
   activite_principale_unite_legale: string;
-  nombre_etablissements_ouverts: number;
+  economie_sociale_solidaire_unite_legale: string;
+  nom_complet: string;
   nombre_etablissements: number;
-  is_entrepreneur_individuel: string;
+  nombre_etablissements_ouverts: number;
+  is_entrepreneur_individuel: true;
 }
 
 export interface ISireneOuverteSearchResults {
@@ -102,8 +100,8 @@ const mapToDomainObjectNew = (
           result.code_postal,
           result.libelle_commune
         ),
-        latitude: result.latitude || '',
-        longitude: result.longitude || '',
+        latitude: result.latitude || 0,
+        longitude: result.longitude || 0,
         nomComplet: result.nom_complet || 'Nom inconnu',
         nombreEtablissements: result.nombre_etablissements || 1,
         nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
