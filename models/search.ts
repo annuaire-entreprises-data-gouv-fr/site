@@ -15,8 +15,8 @@ export interface ISearchResult {
   libelleActivitePrincipale: string;
   estActive: boolean;
   adresse: string;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
   nomComplet: string;
   chemin: string;
 }
