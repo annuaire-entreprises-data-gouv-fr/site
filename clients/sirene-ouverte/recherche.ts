@@ -105,7 +105,7 @@ const mapToDomainObjectNew = (
         nomComplet: result.nom_complet || 'Nom inconnu',
         nombreEtablissements: result.nombre_etablissements || 1,
         nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
-        chemin: result.page_path || result.siren,
+        chemin: result.siren,
         libelleActivitePrincipale: libelleFromCodeNaf(
           result.activite_principale_unite_legale,
           false
