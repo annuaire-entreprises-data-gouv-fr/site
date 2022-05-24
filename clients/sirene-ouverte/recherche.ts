@@ -1,4 +1,3 @@
-import { IEtablissement } from '../../models';
 import { ISearchResults } from '../../models/search';
 import {
   formatAdresse,

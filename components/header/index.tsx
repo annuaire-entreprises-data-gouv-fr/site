@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBar from '../search-bar';
+import AdvancedSearchBar from '../search-bar/advanced-search-bar';
 
 const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
   <>
@@ -49,6 +50,7 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
           </div>
         </div>
       </div>
+      <AdvancedSearchBar />
     </header>
 
     <style global jsx>{`
@@ -68,18 +70,19 @@ const HeaderSmall = ({ currentSearchTerm = '', map = false }) => (
       }
 
       .not-fr-search {
-        width: 420px;
-        max-width: 100%;
+        max-width: 420px;
+        width: 100%;
         flex-grow: 1;
       }
 
       @media only screen and (min-width: 1px) and (max-width: 991px) {
         .not-fr-search {
-          width: 100%;
+          max-width: 100%;
           margin: 0.75rem;
           margin-top: 0;
         }
       }
+
       @media print {
         .fr-header {
           display: none !important;
