@@ -10,6 +10,19 @@ interface IProps {
   withFeedback?: boolean;
 }
 
+const EtablissmentTagLabel: React.FC<{ result: ISearchResult }> = ({
+  result,
+}) => {
+  const openCount = result.nombreEtablissementsOuverts || 'aucun';
+  const plural = openCount > 1 ? 's' : '';
+
+  return (
+    <Tag>
+      {openCount} établissement{plural} ouvert{plural}
+    </Tag>
+  );
+};
+
 const ResultsList: React.FC<IProps> = ({
   results,
   withFeedback = false,
@@ -31,11 +44,7 @@ const ResultsList: React.FC<IProps> = ({
           <div>{result.libelleActivitePrincipale}</div>
           <div className="adress">
             {result.adresse || 'Adresse inconnue'}{' '}
-            <Tag>
-              {`${result.nombreEtablissements} établissement${
-                result.nombreEtablissements > 1 ? 's' : ''
-              }`}
-            </Tag>
+            <EtablissmentTagLabel result={result} />
           </div>
         </a>
       ))}
