@@ -5,11 +5,13 @@ const Select: React.FC<{
   label?: string;
   name?: string;
   options: { value: string; label: string }[];
+  defaultValue?: string;
 }> = ({
   label,
   options,
   placeholder = 'Selectionnez une option',
   name = '',
+  defaultValue = null,
 }) => (
   <div className="fr-select-group">
     {label && (
@@ -17,12 +19,17 @@ const Select: React.FC<{
         {label}
       </label>
     )}
-    <select name={name} className="fr-select" id="select">
-      <option value="" selected disabled hidden>
-        {placeholder}
-      </option>
+    <select
+      name={name}
+      className="fr-select"
+      id="select"
+      defaultValue={defaultValue || ''}
+    >
+      <option value="">{placeholder}</option>
       {options.map((option) => (
-        <option value={option.value}>{option.label}</option>
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
       ))}
     </select>
   </div>

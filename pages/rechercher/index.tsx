@@ -108,8 +108,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const page = parseIntWithDefaultValue(pageParam, 1);
 
   const searchParams = {
-    activite_principale_entreprise: (context.query
-      .activite_principale_entreprise || '') as string,
+    section_activite_principale: (context.query.section_activite_principale ||
+      '') as string,
     code_postal: (context.query.code_postal || '') as string,
   };
 

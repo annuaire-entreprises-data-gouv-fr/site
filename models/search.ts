@@ -22,7 +22,7 @@ export interface ISearchResult {
 }
 
 export interface ISearchParams {
-  activite_principale_entreprise: string;
+  section_activite_principale: string;
   code_postal: string;
 }
 

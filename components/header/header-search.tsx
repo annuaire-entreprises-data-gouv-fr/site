@@ -38,7 +38,7 @@ const HeaderSearch = ({
                     className="button-toggle-advanced-search"
                     htmlFor="toggle-advanced-search"
                   >
-                    {`>> recherche avancée`}
+                    {`⇢ recherche avancée`}
                   </label>
                 </div>
               </div>

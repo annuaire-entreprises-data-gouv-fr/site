@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonLink from '../../components-ui/button';
+import SelectCodeSectionNaf from '../../components-ui/select/select-section-naf';
 import { ISearchParams } from '../../models/search';
 
 const AdvancedSearchFields: React.FC<{
@@ -13,7 +14,6 @@ const AdvancedSearchFields: React.FC<{
         </label>
         <input
           className="fr-input"
-          type="search"
           id="search-code-postal"
           name="code_postal"
           pattern="((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}"
@@ -22,27 +22,13 @@ const AdvancedSearchFields: React.FC<{
           defaultValue={searchParams?.code_postal}
         />
       </div>
-      <div>
-        <label className="fr-label" htmlFor="search-code-naf">
-          Filtrer par code NAF
-        </label>
-        <input
-          className="fr-input"
-          type="search"
-          id="search-code-naf"
-          name="activite_principale_entreprise"
-          defaultValue={searchParams?.activite_principale_entreprise}
-          autoComplete="off"
-          placeholder="Code NAF"
+      <div className="select">
+        <SelectCodeSectionNaf
+          name="section_activite_principale"
+          label={`Filtrer par domaine d’activité`}
+          defaultValue={searchParams?.section_activite_principale}
         />
       </div>
-
-      {/* <div>
-        <SelectCodeNaf
-          name="codeNaf"
-          label={`Filtrer par code d’activité (<a href="">NAF</a>)`}
-        />
-      </div> */}
     </div>
     <br />
     <div className="layout-center">
@@ -60,6 +46,11 @@ const AdvancedSearchFields: React.FC<{
       .input-group > div {
         flex-grow: 1;
         min-width: 250px;
+      }
+
+      div.select {
+        flex-grow: 0;
+        max-width: 600px;
       }
     `}</style>
   </>

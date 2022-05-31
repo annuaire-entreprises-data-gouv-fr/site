@@ -68,7 +68,7 @@ const getResults = async (
   Object.keys(searchParams).forEach((k) => {
     //@ts-ignore
     const value = searchParams[k];
-    console.log(!!value);
+
     if (!!value) {
       url += `&${k}=${value}`;
     }
