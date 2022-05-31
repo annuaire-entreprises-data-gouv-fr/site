@@ -18,7 +18,7 @@ const logAllEvents = async (req: NextApiRequest) => {
         req.body['radio-set-visitor-type'] || NA
       }&origin=${req.body['radio-set-visitor-origin'] || NA}&date=${
         today.toISOString().split('T')[0]
-      }`,
+      }&uuid=${req.body['uuid']}`,
       'nps'
     );
 
