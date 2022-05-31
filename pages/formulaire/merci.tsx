@@ -2,7 +2,7 @@ import React from 'react';
 import ButtonLink from '../../components/button';
 import { Header } from '../../components/header';
 
-const Thanks: React.FC = () => {
+const Thanks: React.FC<{}> = () => {
   return (
     <div id="layout">
       <Header />
