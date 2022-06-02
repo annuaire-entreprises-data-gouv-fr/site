@@ -50,7 +50,13 @@ const AdvancedSearchFields: React.FC<{
 
       div.select {
         flex-grow: 0;
-        max-width: 600px;
+        max-width: 550px;
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 991px) {
+        div.select {
+          max-width: 100%;
+        }
       }
     `}</style>
   </>

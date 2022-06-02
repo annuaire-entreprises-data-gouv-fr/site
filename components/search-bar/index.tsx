@@ -17,6 +17,7 @@ const SearchBar = ({
       <style jsx>{`
         form {
           width: 100%;
+          max-width: 450px;
         }
       `}</style>
     </form>

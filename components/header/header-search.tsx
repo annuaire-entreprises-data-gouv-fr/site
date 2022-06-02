@@ -58,17 +58,15 @@ const HeaderSearch = ({
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="fr-container">
-        <input
-          className="toggle-advanced-search"
-          id="toggle-advanced-search"
-          type="checkbox"
-          defaultChecked={!!searchParams}
-        />
-        <div className="fields">
-          <AdvancedSearchFields searchParams={searchParams} />
+          <input
+            className="toggle-advanced-search"
+            id="toggle-advanced-search"
+            type="checkbox"
+            defaultChecked={!!searchParams}
+          />
+          <div className="fields">
+            <AdvancedSearchFields searchParams={searchParams} />
+          </div>
         </div>
       </div>
     </form>
@@ -89,13 +87,17 @@ const HeaderSearch = ({
 
       div.fields {
         max-height: 0;
-        overflow-x: hidden;
-        transition: max-height 300ms ease-in-out;
-        padding: 0 10px;
+        padding: 0;
+        opacity: 0;
+        transition: max-height 200ms ease-in-out 150ms,
+          opacity 200ms ease-in-out;
       }
 
       .toggle-advanced-search:checked ~ .fields {
+        opacity: 1;
         max-height: 1000px;
+        transition: max-height 200ms ease-in-out,
+          opacity 200ms ease-in-out 150ms;
       }
 
       div.annuaire-logo {
