@@ -11,7 +11,7 @@ export const MigrationBanner: React.FC<{}> = () => (
       <div className="fr-container">
         <div>
           Vous utilisez les API entreprise.data.gouv.fr ? Elles seront
-          décommissionnée le 1er Septembre 2022.{' '}
+          déclassées et arrêtées le 1er Septembre 2022.{' '}
           <a
             href="https://api.gouv.fr/guides/migration-entreprise-data"
             target="_blank"
