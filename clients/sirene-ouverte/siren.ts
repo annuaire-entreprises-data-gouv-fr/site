@@ -1,4 +1,5 @@
 import { createDefaultUniteLegale, IUniteLegale } from '../../models';
+import constants from '../../models/constants';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import { formatAdresse } from '../../utils/helpers/formatting';
 import { Siren } from '../../utils/helpers/siren-and-siret';
@@ -52,7 +53,8 @@ const getUniteLegaleSireneOuverte = async (
   page = 1
 ): Promise<IUniteLegale> => {
   const response = await httpGet(
-    routes.sireneOuverte.uniteLegale + siren + '&page=' + page
+    routes.sireneOuverte.uniteLegale + siren + '&page=' + page,
+    { timeout: constants.timeout.long }
   );
 
   let uniteLegale;

@@ -1,4 +1,5 @@
 import { IEtablissement } from '../../models';
+import constants from '../../models/constants';
 import { ISearchResults } from '../../models/search';
 import {
   formatAdresse,
@@ -65,7 +66,7 @@ const getResults = async (
     routes.sireneOuverte.rechercheUniteLegale;
 
   const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}`;
-  const response = await httpGet(url);
+  const response = await httpGet(url, { timeout: constants.timeout.long });
 
   const results = (response.data || []) as any;
 
