@@ -6,7 +6,6 @@ import { Question } from '../components/question';
 import { NPSBanner } from '../components/banner/nps';
 import { WeNeedYouModal } from '../components/modal/we-need-you';
 import DownloadManager from '../components/download-manager';
-import { MigrationBanner } from '../components/banner/entreprise-data';
 
 interface IProps {
   small?: boolean;
@@ -35,7 +34,7 @@ const Page: React.FC<IProps> = ({
       noIndex={noIndex}
       canonical={canonical}
     />
-    {small ? <NPSBanner /> : <MigrationBanner />}
+    <NPSBanner />
     <WeNeedYouModal />
     {small ? (
       <HeaderSmall currentSearchTerm={currentSearchTerm} map={map} />
