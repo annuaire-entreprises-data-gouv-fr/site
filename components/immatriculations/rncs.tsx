@@ -97,8 +97,8 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
                 <>
                   <p>
                     <Info>
-                      Le ou la dirigeant(e) s’est opposé à la diffusion de ses
-                      données personnelles. Par conséquent, son PDF
+                      Le ou la dirigeant(e) s’est opposé(e) à la diffusion de
+                      ses données personnelles. Par conséquent, le PDF
                       d’immatriculation complet n’est pas téléchargeable sur
                       notre site.
                     </Info>
