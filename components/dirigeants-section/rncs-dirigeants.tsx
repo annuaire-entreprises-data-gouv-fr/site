@@ -93,7 +93,6 @@ const DirigeantsSection: React.FC<IProps> = ({
         ['Nom', dirigeant.nom],
         ['Prénom', dirigeant.prenom],
         ['Année de naissance', dirigeant.dateNaissance],
-        ['Lieu de naissance', dirigeant.lieuNaissance],
       ];
     }
   };
@@ -110,7 +109,7 @@ const DirigeantsSection: React.FC<IProps> = ({
         <>
           {immatriculationRNCS.metadata.isFallback &&
             immatriculationRNCS.dirigeants.length > 0 && (
-              <InpiPartiallyDownWarning missing="le lieu de naissance, et la distinction entre le nom et le prénom" />
+              <InpiPartiallyDownWarning missing="la distinction entre le nom et le prénom" />
             )}
           <p>
             Cette entité possède {dirigeants.length} dirigeant{plural}{' '}
