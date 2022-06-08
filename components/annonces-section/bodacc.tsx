@@ -15,6 +15,7 @@ import { DILA } from '../administrations';
 import routes from '../../clients/routes';
 import { IUniteLegale } from '../../models';
 import { formatDate } from '../../utils/helpers/formatting';
+import Info from '../alerts/info';
 
 const AnnoncesBodaccSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -30,15 +31,28 @@ const AnnoncesBodaccSection: React.FC<{
     );
   }
 
+  const hasProcedure = bodacc.annonces.find(
+    (annonce) => annonce.titre === 'Procédures collectives'
+  );
+
   return (
     <Section
       title="Annonces BODACC"
       source={EAdministration.DILA}
       lastModified={bodacc.lastModified}
     >
+      {hasProcedure ? (
+        <Info>
+          Cette entité a une procédure collective (en cours ou cloturée).
+        </Info>
+      ) : (
+        <p>
+          Cette entité n’a pas de procédure collective (en cours ou cloturée).
+        </p>
+      )}
       {bodacc.annonces.length === 0 ? (
         <div>
-          Cette entité n’a aucune annonce publiée au{' '}
+          Elle n’a aucune annonce publiée au{' '}
           <a
             target="_blank"
             rel="noreferrer noopener"
@@ -51,7 +65,7 @@ const AnnoncesBodaccSection: React.FC<{
       ) : (
         <>
           <p>
-            Cette entité possède {bodacc.annonces.length} annonces publiées au{' '}
+            Elle possède {bodacc.annonces.length} annonces publiées au{' '}
             <b>
               Bulletin Officiel Des Annonces Civiles et Commerciales (BODACC)
             </b>

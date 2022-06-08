@@ -21,7 +21,7 @@ export interface IEtablissement {
   nic: string;
   estActif: boolean | null;
   estSiege: boolean;
-  estDiffusible: boolean;
+  estDiffusible: boolean; // diffusion des données autorisée - uniquement les EI
   dateCreation: string;
   dateDerniereMiseAJour: string;
   dateFermeture: string | null;
@@ -52,7 +52,8 @@ export interface IUniteLegale extends IEtablissementsList {
   dateCreation: string;
   dateDerniereMiseAJour: string;
   dateDebutActivite: string;
-  estDiffusible: boolean;
+  estDiffusible: boolean; // diffusion des données autorisée - uniquement les EI
+  estEntrepriseCommercialeDiffusible: boolean; // opposition du dirigeant - uniquement les entreprises commerciales
   estActive: boolean | null;
   estEntrepreneurIndividuel: boolean;
   estEss: boolean;
@@ -108,6 +109,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     oldSiren: siren,
     siege,
     estDiffusible: true,
+    estEntrepriseCommercialeDiffusible: true,
     estActive: null,
     estEntrepreneurIndividuel: false,
     estEss: false,

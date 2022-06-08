@@ -98,6 +98,7 @@ const EtablissementSection: React.FC<IProps> = ({
                 etablissement.estSiege ? ' (siège social)' : ''
               }`
         }
+        id="etablissement"
         source={EAdministration.INSEE}
       >
         <TwoColumnTable body={data} />

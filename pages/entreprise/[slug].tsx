@@ -20,6 +20,7 @@ import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import isUserAgentABot from '../../utils/user-agent';
 import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
 import { shouldNotIndex } from '../../utils/helpers/checks';
+import UsefulShortcuts from '../../components/useful-shortcuts';
 
 interface IProps {
   uniteLegale: IUniteLegale;
@@ -45,6 +46,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
           {uniteLegale.association && uniteLegale.association.id && (
             <AssociationSection uniteLegale={uniteLegale} />
           )}
+          <UsefulShortcuts uniteLegale={uniteLegale} />
           {uniteLegale.siege && (
             <EtablissementSection
               uniteLegale={uniteLegale}

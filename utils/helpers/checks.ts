@@ -31,5 +31,9 @@ export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
     // we dont index non diffusible
     return true;
   }
+  if (!uniteLegale.estEntrepriseCommercialeDiffusible) {
+    // we dont index entreprise that personnaly opposed diffusion
+    return true;
+  }
   return false;
 };
