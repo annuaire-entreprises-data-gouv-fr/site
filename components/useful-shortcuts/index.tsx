@@ -112,7 +112,7 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
           external: true,
         },
         {
-          url: `https://mon-entreprise.urssaf.fr/g%C3%A9rer/${uniteLegale.siren}`,
+          url: `https://place-des-entreprises.beta.gouv.fr/`,
           label: 'Besoin d’aide ? Faites-vous rappeler par un conseiller',
           external: true,
         },
