@@ -5,9 +5,9 @@ import {
 } from '../../models/administration';
 import { isTwoMonthOld } from '../../utils/helpers/checks';
 import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
+import Warning from '../../components-ui/alerts/warning';
+import DataSourceTooltip from '../../components-ui/information-tooltip/data-source-tooltip';
 import { cma, inpi, insee, dila } from '../administrations/logos';
-import Warning from '../alerts/warning';
-import DataSourceTooltip from '../information-tooltip/data-source-tooltip';
 
 interface IAdministrationsLogos {
   [key: string]: JSX.Element;

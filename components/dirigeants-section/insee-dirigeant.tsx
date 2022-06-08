@@ -1,5 +1,5 @@
 import React from 'react';
-import HorizontalSeparator from '../horizontal-separator';
+import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { EAdministration } from '../../models/administration';

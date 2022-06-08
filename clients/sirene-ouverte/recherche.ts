@@ -1,6 +1,5 @@
-import { IEtablissement } from '../../models';
-import constants from '../../models/constants';
 import { ISearchResults } from '../../models/search';
+import constants from '../../models/constants';
 import {
   formatAdresse,
   parseIntWithDefaultValue,
@@ -9,6 +8,7 @@ import { libelleFromCodeNaf } from '../../utils/labels';
 import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
+import SearchFilterParams from '../../models/search-filter-params';
 
 interface ISireneOuverteUniteLegaleResultat {
   siren: string;
@@ -57,7 +57,8 @@ export interface ISireneOuverteSearchResults {
  */
 const getResults = async (
   searchTerms: string,
-  page: number
+  page: number,
+  searchFilterParams?: SearchFilterParams
 ): Promise<ISearchResults> => {
   const encodedTerms = encodeURI(searchTerms);
 
@@ -65,7 +66,10 @@ const getResults = async (
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
     routes.sireneOuverte.rechercheUniteLegale;
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}`;
+  let url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
+    searchFilterParams?.toURI() || ''
+  }`;
+
   const response = await httpGet(url, { timeout: constants.timeout.long });
 
   const results = (response.data || []) as any;

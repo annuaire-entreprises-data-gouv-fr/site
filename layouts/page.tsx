@@ -1,16 +1,18 @@
 import React from 'react';
 import Footer from '../components/footer';
-import { Header, HeaderSmall } from '../components/header';
+import { Header, HeaderSearch } from '../components/header';
 import Meta from '../components/meta';
-import { Question } from '../components/question';
+import { Question } from '../components-ui/question';
 import { NPSBanner } from '../components/banner/nps';
 import { WeNeedYouModal } from '../components/modal/we-need-you';
 import DownloadManager from '../components/download-manager';
 import { MigrationBanner } from '../components/banner/entreprise-data';
+import { IParams } from '../models/search-filter-params';
 
 interface IProps {
   small?: boolean;
   currentSearchTerm?: string;
+  searchFilterParams?: IParams;
   map?: boolean;
   title: string;
   description?: string;
@@ -22,6 +24,7 @@ const Page: React.FC<IProps> = ({
   small,
   children,
   currentSearchTerm = '',
+  searchFilterParams,
   map = false,
   title,
   description,
@@ -38,7 +41,11 @@ const Page: React.FC<IProps> = ({
     {small ? <NPSBanner /> : <MigrationBanner />}
     <WeNeedYouModal />
     {small ? (
-      <HeaderSmall currentSearchTerm={currentSearchTerm} map={map} />
+      <HeaderSearch
+        currentSearchTerm={currentSearchTerm}
+        map={map}
+        searchFilterParams={searchFilterParams}
+      />
     ) : (
       <Header />
     )}

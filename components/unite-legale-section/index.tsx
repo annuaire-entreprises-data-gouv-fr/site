@@ -3,8 +3,8 @@ import { IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
 import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import BreakPageForPrint from '../print-break-page';
-import HorizontalSeparator from '../horizontal-separator';
+import BreakPageForPrint from '../../components-ui/print-break-page';
+import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 

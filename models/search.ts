@@ -6,6 +6,7 @@ import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
 import { APINotRespondingFactory } from './api-not-responding';
+import SearchFilterParams from './search-filter-params';
 
 export interface ISearchResult {
   siren: string;
@@ -28,7 +29,11 @@ export interface ISearchResults {
   results: ISearchResult[];
 }
 
-const search = async (searchTerm: string, page: number) => {
+const search = async (
+  searchTerm: string,
+  page: number,
+  searchFilterParams: SearchFilterParams
+) => {
   try {
     const cleanedTerm = cleanSearchTerm(searchTerm);
 
@@ -40,8 +45,7 @@ const search = async (searchTerm: string, page: number) => {
 
     const escapedSearchTerm = escapeTerm(searchTerm);
 
-    const results = await getResults(escapedSearchTerm, page);
-    return results;
+    return await getResults(escapedSearchTerm, page, searchFilterParams);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return {

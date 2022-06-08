@@ -1,7 +1,7 @@
 import React from 'react';
+import HorizontalSeparator from '../../components-ui/horizontal-separator';
+import { PrintNever } from '../../components-ui/print-visibility';
 import { IUniteLegale } from '../../models';
-import HorizontalSeparator from '../horizontal-separator';
-import { PrintNever } from '../print-visibility';
 
 const ShortcutsSection: React.FC<{
   shortcuts: { label: string; url: string; external?: boolean }[];

@@ -9,13 +9,13 @@ import {
   isAPINotResponding,
 } from '../../models/api-not-responding';
 import { IAnnoncesBodacc } from '../../models/annonces';
-import { Tag } from '../tag';
-import ButtonLink from '../button';
+import { Tag } from '../../components-ui/tag';
+import ButtonLink from '../../components-ui/button';
 import { DILA } from '../administrations';
 import routes from '../../clients/routes';
 import { IUniteLegale } from '../../models';
 import { formatDate } from '../../utils/helpers/formatting';
-import Info from '../alerts/info';
+import Info from '../../components-ui/alerts/info';
 
 const AnnoncesBodaccSection: React.FC<{
   uniteLegale: IUniteLegale;

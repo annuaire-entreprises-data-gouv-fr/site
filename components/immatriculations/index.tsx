@@ -5,8 +5,8 @@ import {
 } from '../../models/api-not-responding';
 import { IImmatriculation } from '../../models/immatriculation';
 import { IJustificatifs } from '../../models/justificatifs';
-import AssociationCreationNotFoundAlert from '../alerts/association-creation-not-found-alert';
-import ImmatriculationNotFound from '../alerts/immatriculation-not-found-alert';
+import AssociationCreationNotFoundAlert from '../../components-ui/alerts/association-creation-not-found-alert';
+import ImmatriculationNotFound from '../../components-ui/alerts/immatriculation-not-found-alert';
 import AvisSituationSection from './insee';
 import ImmatriculationJOAFE from './joafe';
 import ImmatriculationRNCS from './rncs';

@@ -16,7 +16,7 @@ import {
   IImmatriculationRNCS,
   IPersonneMorale,
 } from '../../models/immatriculation/rncs';
-import InpiPartiallyDownWarning from '../alerts/inpi-partially-down';
+import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
 
 /**
  * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts

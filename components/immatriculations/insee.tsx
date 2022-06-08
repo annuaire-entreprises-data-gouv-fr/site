@@ -4,10 +4,10 @@ import { EAdministration } from '../../models/administration';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { FullTable } from '../table/full';
 import { Section } from '../section';
-import { Tag } from '../tag';
-import IsActiveTag from '../is-active-tag';
+import { Tag } from '../../components-ui/tag';
+import IsActiveTag from '../../components-ui/is-active-tag';
 import AvisSituationLink from '../avis-situation-link';
-import ButtonLink from '../button';
+import ButtonLink from '../../components-ui/button';
 import { INSEE } from '../administrations';
 
 interface IProps {

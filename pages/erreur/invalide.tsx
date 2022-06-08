@@ -2,7 +2,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 
 import Page from '../../layouts';
-import ButtonLink from '../../components/button';
+import ButtonLink from '../../components-ui/button';
 import constants from '../../models/constants';
 
 const SirenOrSiretInvalidPage = () => {
