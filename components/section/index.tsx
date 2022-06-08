@@ -5,7 +5,7 @@ import {
 } from '../../models/administration';
 import { isTwoMonthOld } from '../../utils/helpers/checks';
 import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
-import { cma, inpi, insee } from '../administrations/logos';
+import { cma, inpi, insee, dila } from '../administrations/logos';
 import Warning from '../alerts/warning';
 import DataSourceTooltip from '../information-tooltip/data-source-tooltip';
 
@@ -17,6 +17,7 @@ const administrationsLogo: IAdministrationsLogos = {
   [EAdministration.INPI]: inpi,
   [EAdministration.CMAFRANCE]: cma,
   [EAdministration.INSEE]: insee,
+  [EAdministration.DILA]: dila,
 };
 
 interface ISectionProps {
