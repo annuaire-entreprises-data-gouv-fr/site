@@ -2,7 +2,6 @@ import React from 'react';
 import { IUniteLegale } from '../../models';
 import HorizontalSeparator from '../horizontal-separator';
 import { PrintNever } from '../print-visibility';
-import SectionTitle from '../section-title';
 
 const ShortcutsSection: React.FC<{
   shortcuts: { label: string; url: string; external?: boolean }[];
@@ -35,7 +34,8 @@ const ShortcutsSection: React.FC<{
       .container {
         border: 2px solid #dfdff1;
         padding: 15px;
-        width: 30%;
+        min-width: 200px;
+        max-width: 300px;
       }
       .container.dark {
         background-color: #dfdff1;
@@ -45,6 +45,13 @@ const ShortcutsSection: React.FC<{
       }
       .container > div {
         margin-bottom: 10px;
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 1100px) {
+        .container {
+          max-width: 100%;
+          flex-grow: 1;
+        }
       }
     `}</style>
   </div>
@@ -118,36 +125,12 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
         },
       ],
     },
-    // {
-    //   title: 'Dirigeant uniquement',
-    //   titleIcon: 'fr-fi-account-line',
-    //   backgroundDark: true,
-    //   shortcuts: [
-    //     {
-    //       url: `/connexion/dirigeant?siren=${uniteLegale.siren}&page=document`,
-    //       label: 'Attestation fiscale',
-    //     },
-    //     {
-    //       url: `/connexion/dirigeant?siren=${uniteLegale.siren}&page=document`,
-    //       label: 'Attestation vigilance',
-    //     },
-    //     {
-    //       url: `/connexion/dirigeant?siren=${uniteLegale.siren}&page=document`,
-    //       label: 'Statuts',
-    //     },
-    //     {
-    //       url: `/connexion/dirigeant?siren=${uniteLegale.siren}&page=document`,
-    //       label: 'Actes juridiques',
-    //     },
-    //     { url: 'https://monidenum.fr/', label: 'KBIS (via MonIdenum)' },
-    //   ],
-    // },
   ];
 
   return (
     <PrintNever>
       <div>
-        <div className="container">
+        <div className="wrapper">
           {data.map((sectionData) => (
             <ShortcutsSection
               key={sectionData.title}
@@ -161,10 +144,11 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
         <HorizontalSeparator />
       </div>
       <style jsx>{`
-        .container {
+        .wrapper {
           display: flex;
           justify-content: space-between;
           gap: 15px;
+          flex-wrap: wrap;
         }
       `}</style>
     </PrintNever>

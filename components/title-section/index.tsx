@@ -100,7 +100,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         box-shadow: none;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 450px) {
+      @media only screen and (min-width: 1px) and (max-width: 650px) {
         .title-tabs {
           flex-direction: column;
           border-bottom: 0;
