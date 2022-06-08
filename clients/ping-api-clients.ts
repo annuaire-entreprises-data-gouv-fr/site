@@ -1,6 +1,5 @@
 import { verifyIdRna } from '../utils/helpers/id-rna';
 import { verifySiren } from '../utils/helpers/siren-and-siret';
-import { HttpServerError } from './exceptions';
 import { fetchAssociation } from './rna';
 import { fetchRNCSImmatriculation } from './rncs';
 import { fetchRnmImmatriculation } from './rnm';

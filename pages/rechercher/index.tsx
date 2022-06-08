@@ -9,7 +9,7 @@ import {
   parseIntWithDefaultValue,
   serializeForClientScript,
 } from '../../utils/helpers/formatting';
-import search, { ISearchParams, ISearchResults } from '../../models/search';
+import search, { ISearchResults } from '../../models/search';
 import ResultsHeader from '../../components/results-header';
 import { IsLikelyASirenOrSiretException } from '../../models';
 import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
@@ -17,22 +17,23 @@ import HiddenH1 from '../../components/a11y-components/hidden-h1';
 import StructuredDataSearchAction from '../../components/structured-data/search';
 import { isAPINotResponding } from '../../models/api-not-responding';
 import { SearchErrorExplanations } from '../../components/error-explanations';
+import SearchFilterParams, { IParams } from '../../models/search-filter-params';
 
 interface IProps {
   searchTerm: string;
   results: ISearchResults;
-  searchParams: ISearchParams;
+  searchFilterParams: IParams;
 }
 
 const SearchResultPage: React.FC<IProps> = ({
   results,
   searchTerm,
-  searchParams,
+  searchFilterParams,
 }) => (
   <Page
     small={true}
     currentSearchTerm={searchTerm}
-    searchParams={searchParams}
+    searchFilterParams={searchFilterParams}
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"
   >
@@ -103,25 +104,18 @@ const SearchResultPage: React.FC<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // get params from query string
-  const searchTermParam = (context.query.terme || '') as string;
+  const searchTerm = (context.query.terme || '') as string;
   const pageParam = (context.query.page || '') as string;
   const page = parseIntWithDefaultValue(pageParam, 1);
-
-  const searchParams = {
-    section_activite_principale: (context.query.section_activite_principale ||
-      '') as string,
-    code_postal: (context.query.code_postal || '') as string,
-  };
-
-  const hasParams = Object.values(searchParams).some((v) => v !== '');
+  const searchFilterParams = new SearchFilterParams(context.query);
 
   try {
-    const results = (await search(searchTermParam, page, searchParams)) || {};
+    const results = (await search(searchTerm, page, searchFilterParams)) || {};
     return {
       props: {
         results,
-        searchTerm: searchTermParam,
-        searchParams: hasParams ? searchParams : null,
+        searchTerm,
+        searchFilterParams: searchFilterParams.toJSON(),
       },
     };
   } catch (e: any) {

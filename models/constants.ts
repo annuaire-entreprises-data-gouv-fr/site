@@ -6,6 +6,7 @@ const constants = {
   resultsPerPage: { etablissements: 200, search: 30 },
   timeout: {
     default: 5000,
+    long: 10000,
     search: 7500,
     pdf: 40000,
   },

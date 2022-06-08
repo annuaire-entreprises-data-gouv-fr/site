@@ -6,12 +6,13 @@ import { Question } from '../components-ui/question';
 import { NPSBanner } from '../components/banner/nps';
 import { WeNeedYouModal } from '../components/modal/we-need-you';
 import DownloadManager from '../components/download-manager';
-import { ISearchParams } from '../models/search';
+import { MigrationBanner } from '../components/banner/entreprise-data';
+import { IParams } from '../models/search-filter-params';
 
 interface IProps {
   small?: boolean;
   currentSearchTerm?: string;
-  searchParams?: ISearchParams;
+  searchFilterParams?: IParams;
   map?: boolean;
   title: string;
   description?: string;
@@ -23,7 +24,7 @@ const Page: React.FC<IProps> = ({
   small,
   children,
   currentSearchTerm = '',
-  searchParams = null,
+  searchFilterParams,
   map = false,
   title,
   description,
@@ -37,13 +38,13 @@ const Page: React.FC<IProps> = ({
       noIndex={noIndex}
       canonical={canonical}
     />
-    <NPSBanner />
+    {small ? <NPSBanner /> : <MigrationBanner />}
     <WeNeedYouModal />
     {small ? (
       <HeaderSearch
         currentSearchTerm={currentSearchTerm}
         map={map}
-        searchParams={searchParams}
+        searchFilterParams={searchFilterParams}
       />
     ) : (
       <Header />

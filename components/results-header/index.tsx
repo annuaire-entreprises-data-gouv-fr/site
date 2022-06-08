@@ -33,8 +33,15 @@ const ResultsHeader = ({
         <div className="results-counter">
           Aucune entité n’a été trouvée pour “<b>{searchTerm}</b>”
           <p>
-            Nous vous suggérons de vérifier l’orthographe du nom, du SIRET, ou
-            de l’adresse que vous avez utilisé.
+            Nous vous suggérons de modifier votre recherche :
+            <ul>
+              <li>vérifiez l’orthographe du nom, ou des mots-clefs utilisés</li>
+              <li>
+                si vous connaissez votre n° siren ou siret, tapez uniquement
+                celui-ci dans la barre de recherche
+              </li>
+              <li>essayez de réduire le nombre de mots-clefs</li>
+            </ul>
           </p>
         </div>
       )}

@@ -32,14 +32,16 @@ const aggregateEventsByMonths = (
       date > new Date('2022-01-30') && date < new Date('2022-02-15');
 
     const nps = is5Based ? mood * 2 : mood;
+    // we set event count to 1 rather than stat.nb_event to avoid duplicates events
+    const eventCount = 1;
 
     if (!months[monthLabel]) {
       months[monthLabel] = {
         nps,
-        count: stat.nb_events,
+        count: eventCount,
       };
     } else {
-      const newCount = months[monthLabel].count + stat.nb_events;
+      const newCount = months[monthLabel].count + eventCount;
       const newNps =
         (months[monthLabel].count * months[monthLabel].nps + nps) / newCount;
 

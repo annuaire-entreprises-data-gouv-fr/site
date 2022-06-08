@@ -6,6 +6,7 @@ import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administration';
 import { APINotRespondingFactory } from './api-not-responding';
+import SearchFilterParams from './search-filter-params';
 
 export interface ISearchResult {
   siren: string;
@@ -21,11 +22,6 @@ export interface ISearchResult {
   chemin: string;
 }
 
-export interface ISearchParams {
-  section_activite_principale: string;
-  code_postal: string;
-}
-
 export interface ISearchResults {
   currentPage: number;
   resultCount: number;
@@ -36,7 +32,7 @@ export interface ISearchResults {
 const search = async (
   searchTerm: string,
   page: number,
-  searchParams: ISearchParams
+  searchFilterParams: SearchFilterParams
 ) => {
   try {
     const cleanedTerm = cleanSearchTerm(searchTerm);
@@ -49,8 +45,7 @@ const search = async (
 
     const escapedSearchTerm = escapeTerm(searchTerm);
 
-    const results = await getResults(escapedSearchTerm, page, searchParams);
-    return results;
+    return await getResults(escapedSearchTerm, page, searchFilterParams);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return {

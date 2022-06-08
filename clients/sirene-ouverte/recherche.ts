@@ -1,4 +1,5 @@
-import { ISearchParams, ISearchResults } from '../../models/search';
+import { ISearchResults } from '../../models/search';
+import constants from '../../models/constants';
 import {
   formatAdresse,
   parseIntWithDefaultValue,
@@ -7,6 +8,7 @@ import { libelleFromCodeNaf } from '../../utils/labels';
 import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
+import SearchFilterParams from '../../models/search-filter-params';
 
 interface ISireneOuverteUniteLegaleResultat {
   siren: string;
@@ -56,7 +58,7 @@ export interface ISireneOuverteSearchResults {
 const getResults = async (
   searchTerms: string,
   page: number,
-  searchParams: ISearchParams
+  searchFilterParams?: SearchFilterParams
 ): Promise<ISearchResults> => {
   const encodedTerms = encodeURI(searchTerms);
 
@@ -64,16 +66,11 @@ const getResults = async (
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
     routes.sireneOuverte.rechercheUniteLegale;
 
-  let url = `${route}?per_page=10&page=${page}&q=${encodedTerms}`;
-  Object.keys(searchParams).forEach((k) => {
-    //@ts-ignore
-    const value = searchParams[k];
+  let url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
+    searchFilterParams?.toURI() || ''
+  }`;
 
-    if (!!value) {
-      url += `&${k}=${value}`;
-    }
-  });
-  const response = await httpGet(url);
+  const response = await httpGet(url, { timeout: constants.timeout.long });
 
   const results = (response.data || []) as any;
 

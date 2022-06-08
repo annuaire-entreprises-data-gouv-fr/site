@@ -4,7 +4,6 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import Title, { FICHE } from '../../components/title-section';
 
-import { NonDiffusibleSection } from '../../components/non-diffusible';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import {
   getDirigeantsWithUniteLegaleFromSlug,
