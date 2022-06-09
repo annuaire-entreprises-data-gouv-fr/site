@@ -3,9 +3,9 @@ import { IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
 import { isTwoMonthOld } from '../../utils/helpers/checks';
 import { formatIntFr } from '../../utils/helpers/formatting';
-import Warning from '../alerts/warning';
-import BreakPageForPrint from '../print-break-page';
-import HorizontalSeparator from '../horizontal-separator';
+import Warning from '../../components-ui/alerts/warning';
+import BreakPageForPrint from '../../components-ui/print-break-page';
+import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 

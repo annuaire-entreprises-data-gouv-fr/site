@@ -8,16 +8,16 @@ import {
 import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
 import { INPI } from '../administrations';
-import BreakPageForPrint from '../print-break-page';
-import ButtonLink from '../button';
+import BreakPageForPrint from '../../components-ui/print-break-page';
+import ButtonLink from '../../components-ui/button';
 import ButtonInpiPdf from '../button-inpi-pdf';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
-import { PrintNever } from '../print-visibility';
-import { Closed, Open } from '../icon';
-import InpiPartiallyDownWarning from '../alerts/inpi-partially-down';
+import { PrintNever } from '../../components-ui/print-visibility';
+import { Closed, Open } from '../../components-ui/icon';
+import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
 import { IImmatriculationRNCS } from '../../models/immatriculation/rncs';
-import Info from '../alerts/info';
+import Info from '../../components-ui/alerts/info';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
@@ -64,7 +64,8 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
               uniteLegale={uniteLegale}
             />
             <PrintNever>
-              {uniteLegale.estDiffusible ? (
+              {uniteLegale.estDiffusible &&
+              uniteLegale.estEntrepriseCommercialeDiffusible ? (
                 <>
                   <p>
                     Pour accéder à l’ensemble des données contenues dans un
@@ -96,8 +97,10 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
                 <>
                   <p>
                     <Info>
-                      Cette entité est non-diffusible. Par conséquent, son PDF
-                      d’immatriculation complet n’est pas téléchargeable.
+                      Le ou la dirigeant(e) s’est opposé(e) à la diffusion de
+                      ses données personnelles. Par conséquent, le PDF
+                      d’immatriculation complet n’est pas téléchargeable sur
+                      notre site.
                     </Info>
                     Vous pouvez :
                     <ul>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Page from '../../layouts';
-import { qrCode } from '../../components/icon';
+import { qrCode } from '../../components-ui/icon';
 
 const Partager: React.FC = () => {
   return (
@@ -83,7 +83,7 @@ const Partager: React.FC = () => {
 <iframe
   width="290"
   height="100"
-  style={ border: none; max-width: 100%; }
+  style="border: none; max-width: 100%;"
   src="https://annuaire-entreprises.data.gouv.fr/api/share/button/SIREN_OR_SIRET"
 ></iframe>
                   `}
@@ -96,7 +96,7 @@ const Partager: React.FC = () => {
 <iframe
   width="290"
   height="100"
-  style={ border: none; max-width: 100%; }
+  style="border: none; max-width: 100%;"
   src="https://annuaire-entreprises.data.gouv.fr/api/share/button/SIREN_OR_SIRET?light=true"
 ></iframe>
                   `}

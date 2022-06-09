@@ -2,9 +2,9 @@ import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { INSEE } from '../administrations';
-import Warning from '../alerts/warning';
-import IsActiveTag from '../is-active-tag';
-import { Tag } from '../tag';
+import Warning from '../../components-ui/alerts/warning';
+import IsActiveTag from '../../components-ui/is-active-tag';
+import { Tag } from '../../components-ui/tag';
 
 const TitleEtablissement: React.FC<{
   uniteLegale: IUniteLegale;

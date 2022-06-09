@@ -1,8 +1,10 @@
 import React from 'react';
-import ButtonLink from '../../components/button';
+import ButtonLink from '../../components-ui/button';
 import { Header } from '../../components/header';
+import randomId from '../../utils/helpers/randomId';
 
 const FeedBack: React.FC = () => {
+  const uuid = randomId();
   return (
     <div id="page-layout">
       <Header />
@@ -18,6 +20,7 @@ const FeedBack: React.FC = () => {
         </div>
         <div className="content-container text-wrapper">
           <form action="/api/feedback/nps" method="post">
+            <input name="uuid" value={uuid} style={{ display: 'none' }} />
             <fieldset>
               <legend>
                 <h2>

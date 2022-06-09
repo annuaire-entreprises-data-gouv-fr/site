@@ -3,11 +3,11 @@ import constants from '../../models/constants';
 import { IEtablissement, IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administration';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import IsActiveTag from '../is-active-tag';
+import IsActiveTag from '../../components-ui/is-active-tag';
 import PageCounter from '../results-page-counter';
 import { Section } from '../section';
 import { FullTable } from '../table/full';
-import { Tag } from '../tag';
+import { Tag } from '../../components-ui/tag';
 
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;

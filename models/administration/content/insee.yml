@@ -8,6 +8,8 @@ apiMonitors:
   - apiGouvLink: https://api.gouv.fr/les-api/sirene_v3
     apiName: API Répertoire Sirene
     id: 787859514
+  - apiName: API Avis de situation Sirene
+    id: 791856492
 description: |
   ## Qu’est-ce que l’Insee ?
 

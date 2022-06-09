@@ -1,17 +1,17 @@
 import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
-import { map, pin } from '../icon';
+import { map, pin } from '../../components-ui/icon';
 import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
-import ButtonLink from '../button';
-import HorizontalSeparator from '../horizontal-separator';
+import ButtonLink from '../../components-ui/button';
+import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { EAdministration } from '../../models/administration';
 import AvisSituationLink from '../avis-situation-link';
 import { EtablissementDescription } from '../etablissement-description';
-import BreakPageForPrint from '../print-break-page';
-import { PrintNever } from '../print-visibility';
+import BreakPageForPrint from '../../components-ui/print-break-page';
+import { PrintNever } from '../../components-ui/print-visibility';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -98,6 +98,7 @@ const EtablissementSection: React.FC<IProps> = ({
                 etablissement.estSiege ? ' (siège social)' : ''
               }`
         }
+        id="etablissement"
         source={EAdministration.INSEE}
       >
         <TwoColumnTable body={data} />

@@ -7,12 +7,12 @@ import {
 } from '../../models/api-not-responding';
 import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
-import BreakPageForPrint from '../print-break-page';
-import ButtonLink from '../button';
-import { download } from '../icon';
+import BreakPageForPrint from '../../components-ui/print-break-page';
+import ButtonLink from '../../components-ui/button';
+import { download } from '../../components-ui/icon';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
-import { PrintNever } from '../print-visibility';
+import { PrintNever } from '../../components-ui/print-visibility';
 import { IImmatriculationJOAFE } from '../../models/immatriculation/joafe';
 
 interface IProps {

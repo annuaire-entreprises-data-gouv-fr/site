@@ -1,5 +1,5 @@
-import { IEtablissement } from '../../models';
 import { ISearchResults } from '../../models/search';
+import constants from '../../models/constants';
 import {
   formatAdresse,
   parseIntWithDefaultValue,
@@ -8,44 +8,40 @@ import { libelleFromCodeNaf } from '../../utils/labels';
 import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
+import SearchFilterParams from '../../models/search-filter-params';
 
 interface ISireneOuverteUniteLegaleResultat {
   siren: string;
-  siret: string;
-  etablissement_siege: IEtablissement;
-  categorie_juridique: string;
-  nombre_etablissements: number;
+  siege: {
+    siret: string;
+    date_creation: string;
+    tranche_effectif_salarie: string;
+    date_debut_activite: string;
+    etat_adiministratif: string;
+    activite_principale: string;
+    numero_voie: string;
+    type_voie: string;
+    libelle_voie: string;
+    code_postal: string;
+    libelle_commune: string;
+    indice_repetition: string;
+    complement_adresse: string;
+    commune: string;
+    longitude: number;
+    latitude: number;
+    activite_principale_registre_metier: string;
+  };
   date_creation: string;
-  activite_principale: string;
-  etat_administratif_etablissement: string;
-  etat_administratif_unite_legale: string;
-  latitude: string;
-  longitude: string;
-  nom_complet: string;
-  page_path: string;
-  complement_adresse: string;
-  numero_voie: string;
-  indice_repetition: string;
-  type_voie: string;
-  libelle_commune: string;
-  code_postal: string;
-  libelle_voie: string;
-  // new fields
-  siret_siege: string;
-  tranche_effectif_salarie_siege: string;
-  commune: string;
-  date_debut_activite: string;
-  etat_administratif_siege: string;
-  activite_principale_siege: string;
-  date_creation_unite_legale: string;
-  tranche_effectif_salarie_unite_legale: string;
-  date_mise_a_jour: string;
   categorie_entreprise: string;
+  etat_administratif: string;
   nom_raison_sociale: string;
-  nature_juridique_unite_legale: string;
-  activite_principale_unite_legale: string;
-  nombre_etablissements_ouverts: string;
-  is_entrepreneur_individuel: string;
+  nature_juridique: string;
+  activite_principale: string;
+  economie_sociale_solidaire: string;
+  nom_complet: string;
+  nombre_etablissements: number;
+  nombre_etablissements_ouverts: number;
+  is_entrepreneur_individuel: true;
 }
 
 export interface ISireneOuverteSearchResults {
@@ -53,8 +49,6 @@ export interface ISireneOuverteSearchResults {
   total_results: number;
   total_pages: number;
   currentPage?: string;
-  unite_legale: ISireneOuverteUniteLegaleResultat[];
-  // new fields
   results: ISireneOuverteUniteLegaleResultat[];
 }
 
@@ -63,7 +57,8 @@ export interface ISireneOuverteSearchResults {
  */
 const getResults = async (
   searchTerms: string,
-  page: number
+  page: number,
+  searchFilterParams?: SearchFilterParams
 ): Promise<ISearchResults> => {
   const encodedTerms = encodeURI(searchTerms);
 
@@ -71,73 +66,22 @@ const getResults = async (
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
     routes.sireneOuverte.rechercheUniteLegale;
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}`;
-  const response = await httpGet(url);
+  let url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
+    searchFilterParams?.toURI() || ''
+  }`;
+
+  const response = await httpGet(url, { timeout: constants.timeout.long });
 
   const results = (response.data || []) as any;
 
-  // Sirene Ouverte is based on a Postrgres to Rest converter and might return [] instead of 404
-  try {
-    if (
-      results.length === 0 ||
-      !results[0].unite_legale ||
-      results[0].unite_legale.length === 0
-    ) {
-      throw new HttpNotFound('No results');
-    }
-    return mapToDomainObject(results[0]);
-  } catch {
-    if (
-      results.length === 0 ||
-      !results.results ||
-      results.results.length === 0
-    ) {
-      throw new HttpNotFound('No results');
-    }
-    return mapToDomainObjectNew(results);
+  if (
+    results.length === 0 ||
+    !results.results ||
+    results.results.length === 0
+  ) {
+    throw new HttpNotFound('No results');
   }
-};
-
-const mapToDomainObject = (
-  results: ISireneOuverteSearchResults
-): ISearchResults => {
-  const {
-    total_results = 0,
-    total_pages = 0,
-    unite_legale = [],
-    page,
-  } = results;
-
-  return {
-    currentPage: page ? parseIntWithDefaultValue(page) : 1,
-    resultCount: total_results,
-    pageCount: total_pages,
-    results: unite_legale.map((result: ISireneOuverteUniteLegaleResultat) => {
-      return {
-        siren: result.siren,
-        siret: result.siret,
-        estActive: result.etat_administratif_unite_legale === 'A',
-        adresse: formatAdresse(
-          result.complement_adresse || '',
-          result.numero_voie,
-          result.indice_repetition,
-          result.type_voie,
-          result.libelle_voie,
-          result.code_postal,
-          result.libelle_commune
-        ),
-        latitude: result.latitude || '',
-        longitude: result.longitude || '',
-        nomComplet: result.nom_complet || 'Nom inconnu',
-        nombreEtablissements: result.nombre_etablissements || 1,
-        chemin: result.page_path || result.siren,
-        libelleActivitePrincipale: libelleFromCodeNaf(
-          result.activite_principale,
-          false
-        ),
-      };
-    }),
-  };
+  return mapToDomainObjectNew(results);
 };
 
 const mapToDomainObjectNew = (
@@ -152,25 +96,25 @@ const mapToDomainObjectNew = (
     results: results.map((result: ISireneOuverteUniteLegaleResultat) => {
       return {
         siren: result.siren,
-        siret: result.siret_siege,
-        estActive: result.etat_administratif_unite_legale === 'A',
+        siret: result.siege.siret,
+        estActive: result.etat_administratif === 'A',
         adresse: formatAdresse(
-          result.complement_adresse || '',
-          result.numero_voie,
-          result.indice_repetition,
-          result.type_voie,
-          result.libelle_voie,
-          result.code_postal,
-          result.libelle_commune
+          result.siege.complement_adresse || '',
+          result.siege.numero_voie,
+          result.siege.indice_repetition,
+          result.siege.type_voie,
+          result.siege.libelle_voie,
+          result.siege.code_postal,
+          result.siege.libelle_commune
         ),
-        latitude: result.latitude || '',
-        longitude: result.longitude || '',
+        latitude: result.siege.latitude || 0,
+        longitude: result.siege.longitude || 0,
         nomComplet: result.nom_complet || 'Nom inconnu',
         nombreEtablissements: result.nombre_etablissements || 1,
-        nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 1,
-        chemin: result.page_path || result.siren,
+        nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
+        chemin: result.siren,
         libelleActivitePrincipale: libelleFromCodeNaf(
-          result.activite_principale_unite_legale,
+          result.activite_principale,
           false
         ),
       };

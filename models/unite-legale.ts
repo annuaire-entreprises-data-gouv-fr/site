@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs';
 import {
   createDefaultUniteLegale,
   IEtablissement,
@@ -26,6 +27,12 @@ import {
 import { getAssociation } from './association';
 
 /**
+ * List of siren whose owner refused diffusion
+ */
+const protectedSirenPath = 'public/protected-siren.txt';
+const protectedSiren = readFileSync(protectedSirenPath, 'utf8').split('\n');
+
+/**
  * Return an uniteLegale with RNA if
  */
 const getUniteLegaleWithRNAFromSlug = async (slug: string, page = 1) => {
@@ -49,8 +56,14 @@ const getUniteLegaleFromSlug = async (
   const siren = verifySiren(slug);
   const uniteLegale = await getUniteLegale(siren, page);
 
+  // only EI
   if (!uniteLegale.estDiffusible) {
     uniteLegale.nomComplet = 'Entité non-diffusible';
+  }
+
+  // only entreprise commerciales
+  if (protectedSiren.indexOf(uniteLegale.siren) > -1) {
+    uniteLegale.estEntrepriseCommercialeDiffusible = false;
   }
   return uniteLegale;
 };

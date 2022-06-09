@@ -1,7 +1,7 @@
 import React from 'react';
 import { administrationsMetaData } from '../../models/administration';
 import { IAPINotRespondingError } from '../../models/api-not-responding';
-import ButtonLink from '../button';
+import ButtonLink from '../../components-ui/button';
 import { Section } from '../section';
 
 interface IProps extends IAPINotRespondingError {

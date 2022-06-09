@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 import constants from '../models/constants';
-import ButtonLink from '../components/button';
+import ButtonLink from '../components-ui/button';
 import { DILA, INPI, INSEE, METI, CMA } from '../components/administrations';
 
 import Page from '../layouts';
@@ -157,8 +157,8 @@ const questions = [
           Les données du moteur de recherche sont mises à jour tous les mois.
         </p>
         <p>
-          Mais les données affichées sur chaque page entreprise sont mis à jour
-          en temps-réel. Les données proviennent des{' '}
+          Les données affichées sur chaque page entreprise sont mis à jour en
+          temps-réel. Les données proviennent des{' '}
           <a href="/administration">services informatiques</a> des différentes
           administrations concernées.
         </p>
@@ -203,35 +203,13 @@ const questions = [
   {
     title: 'Existe-t-il une API Annuaire des Entreprises ?',
     answer: (
-      <>
-        <p>
-          Toutes les données présentées sur le site sont collectées par API
-          auprès de chaque administration qui détient de la donnée pertinente.
-        </p>
-        <p>
-          Toutes ces API sont en open data et vous pouvez librement les
-          réutiliser :
-          <ul>
-            <li>
-              L’
-              <INPI queryString="#acces" />
-            </li>
-            <li>
-              L’
-              <INSEE queryString="#acces" />
-            </li>
-            <li>
-              <CMA queryString="#acces" />
-            </li>
-            <li>
-              Le <METI queryString="#acces" />
-            </li>
-            <li>
-              La <DILA queryString="#acces" />
-            </li>
-          </ul>
-        </p>
-      </>
+      <p>
+        Il n’existe pas d’API centralisée, mais un ensemble d’API ouvertes,
+        officielles et gratuites.
+        <br />
+        Vous pouvez retrouver la liste détaillée{' '}
+        <a href="/administration">sur cette page.</a>
+      </p>
     ),
   },
   {

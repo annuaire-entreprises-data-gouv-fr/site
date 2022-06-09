@@ -2,13 +2,26 @@ import React from 'react';
 import { ISearchResult, ISearchResults } from '../../models/search';
 import { capitalize } from '../../utils/helpers/formatting';
 import { SearchFeedback } from '../search-feedback';
-import { Tag } from '../tag';
+import { Tag } from '../../components-ui/tag';
 
 interface IProps {
   results: ISearchResult[];
   searchTerm?: string;
   withFeedback?: boolean;
 }
+
+const EtablissmentTagLabel: React.FC<{ result: ISearchResult }> = ({
+  result,
+}) => {
+  const openCount = result.nombreEtablissementsOuverts || 'aucun';
+  const plural = openCount > 1 ? 's' : '';
+
+  return (
+    <Tag>
+      {openCount} établissement{plural} ouvert{plural}
+    </Tag>
+  );
+};
 
 const ResultsList: React.FC<IProps> = ({
   results,
@@ -31,11 +44,7 @@ const ResultsList: React.FC<IProps> = ({
           <div>{result.libelleActivitePrincipale}</div>
           <div className="adress">
             {result.adresse || 'Adresse inconnue'}{' '}
-            <Tag>
-              {`${result.nombreEtablissements} établissement${
-                result.nombreEtablissements > 1 ? 's' : ''
-              }`}
-            </Tag>
+            <EtablissmentTagLabel result={result} />
           </div>
         </a>
       ))}

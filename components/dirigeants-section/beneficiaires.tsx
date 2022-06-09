@@ -1,5 +1,5 @@
 import React from 'react';
-import HorizontalSeparator from '../horizontal-separator';
+import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { EAdministration } from '../../models/administration';
@@ -16,7 +16,7 @@ import {
   IBeneficiaire,
   IImmatriculationRNCS,
 } from '../../models/immatriculation/rncs';
-import InpiPartiallyDownWarning from '../alerts/inpi-partially-down';
+import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
 
 interface IProps {
   immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
