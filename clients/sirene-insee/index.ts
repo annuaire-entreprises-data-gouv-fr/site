@@ -1,7 +1,4 @@
-import {
-  defaultCacheConfig,
-  httpClientOAuthFactory,
-} from '../../utils/network';
+import httpClientOAuthGetFactory from '../../utils/network/0auth';
 import routes from '../routes';
 
 /**
@@ -25,13 +22,13 @@ export interface InseeClientOptions {
   useCache: boolean;
 }
 
-const defaultClient = httpClientOAuthFactory(
+const defaultGetClient = httpClientOAuthGetFactory(
   routes.sireneInsee.auth,
   process.env.INSEE_CLIENT_ID,
   process.env.INSEE_CLIENT_SECRET
 );
 
-const fallbackClient = httpClientOAuthFactory(
+const fallbackGetClient = httpClientOAuthGetFactory(
   routes.sireneInsee.auth,
   process.env.INSEE_CLIENT_ID_FALLBACK,
   process.env.INSEE_CLIENT_SECRET_FALLBACK
@@ -42,12 +39,7 @@ export const inseeClientGet = async (
   options = { useFallback: false, useCache: false } as InseeClientOptions
 ) => {
   const { useFallback, useCache } = options;
-  const client = useFallback ? fallbackClient : defaultClient;
+  const getClient = useFallback ? fallbackGetClient : defaultGetClient;
 
-  return await client.get(route, {
-    cache: useCache ? defaultCacheConfig : false,
-    headers: {
-      Accept: 'application/json',
-    },
-  });
+  return await getClient(route, {}, useCache);
 };

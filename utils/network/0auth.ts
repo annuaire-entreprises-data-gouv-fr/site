@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 //@ts-ignore
 import * as oauth from 'axios-oauth-client';
 import * as tokenProvider from 'axios-token-interceptor';
@@ -6,10 +6,9 @@ import { HttpServerError } from '../../clients/exceptions';
 import constants from '../../models/constants';
 import logInterceptor from './log-interceptor';
 import errorInterceptor from './error-interceptor';
-import { setupCache } from 'axios-cache-interceptor';
-import redisStorage from './redis-storage';
+import { cachedAxiosInstanceFactory, defaultCacheConfig } from '.';
 
-export const httpClientOAuthFactory = (
+export const httpClientOAuthGetFactory = (
   token_url: string,
   client_id: string | undefined,
   client_secret: string | undefined
@@ -18,7 +17,6 @@ export const httpClientOAuthFactory = (
     throw new HttpServerError('Client id or client secret is undefined');
   }
 
-  // use a different login instance - we dont want to cache login route
   const axiosGetCredentialsInstance = axios.create();
 
   axiosGetCredentialsInstance.interceptors.response.use(
@@ -34,17 +32,20 @@ export const httpClientOAuthFactory = (
     timeout: constants.timeout.default,
   });
 
-  const axiosInstance = setupCache(axios.create(), {
-    storage: redisStorage,
-    debug: console.log,
-  });
+  const axiosInstance = cachedAxiosInstanceFactory();
 
   axiosInstance.interceptors.request.use(
     oauth.interceptor(tokenProvider, getClientCredentials)
   );
+
   axiosInstance.interceptors.response.use(logInterceptor, errorInterceptor);
 
-  return axiosInstance;
+  return (url: string, options: AxiosRequestConfig, useCache: boolean) =>
+    axiosInstance.get(url, {
+      timeout: constants.timeout.default,
+      ...options,
+      cache: useCache ? defaultCacheConfig : false,
+    });
 };
 
-export default httpClientOAuthFactory;
+export default httpClientOAuthGetFactory;
