@@ -37,7 +37,7 @@ const fallbackGetClient = httpClientOAuthGetFactory(
 export const inseeClientGet = async (
   route: string,
   options = { useFallback: false, useCache: false } as InseeClientOptions
-): Promise<any> => {
+) => {
   const { useFallback, useCache } = options;
   const getClient = useFallback ? fallbackGetClient : defaultGetClient;
 

@@ -151,7 +151,7 @@ const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
         getSiegeInsee(siren).catch(() => null),
       ]);
 
-    return mergeUniteLegaleFromBothApi(
+    return mergeUniteLegaleInsee(
       uniteLegaleInsee,
       allEtablissementsInsee,
       siegeInsee
@@ -177,7 +177,7 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
         getSiegeInseeFallback(siren).catch(() => null),
       ]);
 
-    return mergeUniteLegaleFromBothApi(
+    return mergeUniteLegaleInsee(
       uniteLegaleInsee,
       allEtablissementsInsee,
       siegeInsee
@@ -193,7 +193,7 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
 /**
  * Merge response form INSEE and Etalab, using best of both
  */
-const mergeUniteLegaleFromBothApi = (
+const mergeUniteLegaleInsee = (
   uniteLegaleInsee: IUniteLegale,
   allEtablissementsInsee: IEtablissementsList | null,
   siegeInsee: IEtablissement | null

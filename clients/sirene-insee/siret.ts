@@ -97,7 +97,8 @@ const getAllEtablissementsFactory =
       options
     );
 
-    const { header, etablissements } = response as IInseeEtablissementsResponse;
+    const { header, etablissements } =
+      response.data as IInseeEtablissementsResponse;
 
     return {
       currentEtablissementPage: page,
@@ -116,7 +117,7 @@ const getEtablissementFactory =
     );
 
     const { etablissement, etablissements } =
-      response as IInseeEtablissementResponse;
+      response.data as IInseeEtablissementResponse;
 
     if (!etablissement && etablissements) {
       if (etablissements.length === 1) {
@@ -133,12 +134,14 @@ const getEtablissementFactory =
 const getSiegeFactory =
   (options: InseeClientOptions) =>
   async (siren: Siren): Promise<IEtablissement> => {
-    const response = (await inseeClientGet(
+    const response = await inseeClientGet(
       routes.sireneInsee.siege + siren,
       options
-    )) as IInseeEtablissementResponse;
+    );
 
-    return mapEtablissementToDomainObject(response.etablissements[0]);
+    const { etablissements } = response.data as IInseeEtablissementResponse;
+
+    return mapEtablissementToDomainObject(etablissements[0]);
   };
 
 export const mapEtablissementToDomainObject = (
