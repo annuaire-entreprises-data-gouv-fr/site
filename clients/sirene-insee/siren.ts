@@ -1,4 +1,4 @@
-import { inseeClientGet, INSEE_CREDENTIALS } from '.';
+import { inseeClientGet, InseeClientOptions } from '.';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
@@ -55,30 +55,42 @@ interface IPeriodeUniteLegale {
   nomUsageUniteLegale: string;
 }
 
-/**
- * Call to Sirene INSEE API - can be used with the fallback token
- * @param siren
- * @param useInseeFallback
- * @returns
- */
-export const getUniteLegaleInsee = async (siren: Siren) => {
-  const request = await inseeClientGet(routes.sireneInsee.siren + siren);
-  const response = request as IInseeUniteLegaleResponse;
-
-  return mapToDomainObject(siren, response);
-};
-
-export const getUniteLegaleInseeWithFallbackCredentials = async (
-  siren: Siren
-) => {
+const factory = (options: InseeClientOptions) => async (siren: Siren) => {
   const request = await inseeClientGet(
     routes.sireneInsee.siren + siren,
-    INSEE_CREDENTIALS.FALLBACK
+    options
   );
-  const response = request as IInseeUniteLegaleResponse;
+  const response = request.data as IInseeUniteLegaleResponse;
 
   return mapToDomainObject(siren, response);
 };
+
+/**
+ * Call to Sirene INSEE API
+ * @param siren
+ */
+export const getUniteLegaleInsee = factory({
+  useCache: true,
+  useFallback: false,
+});
+
+/**
+ * Call to Sirene INSEE API - use fallback token
+ * @param siren
+ */
+export const getUniteLegaleInseeFallback = factory({
+  useCache: true,
+  useFallback: true,
+});
+
+/**
+ * Call to Sirene INSEE API - disable cache
+ * @param siren
+ */
+export const getUniteLegaleInseeNoCache = factory({
+  useCache: false,
+  useFallback: false,
+});
 
 const mapToDomainObject = (
   originalSiren: Siren,

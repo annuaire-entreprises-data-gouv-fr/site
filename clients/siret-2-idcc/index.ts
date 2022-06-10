@@ -10,7 +10,7 @@ import routes from '../routes';
  */
 const generateBatches = (sirets: string[]) => {
   const siretBatches = [];
-  for (var i = 0; i < sirets.length; i += 130) {
+  for (let i = 0; i < sirets.length; i += 130) {
     siretBatches.push(
       `${routes.conventionCollectives.api}${sirets.slice(i, i + 130).join(',')}`
     );
