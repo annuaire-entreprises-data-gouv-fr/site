@@ -7,10 +7,10 @@ interface IProps {
   querySuffix?: string;
   totalPages: number;
   compact?: boolean;
-  searchFilterParams: IParams;
+  searchFilterParams?: IParams;
 }
 
-const urlParams = (page = 1, querySuffix = '', filterParams: IParams) => {
+const urlParams = (page = 1, querySuffix = '', filterParams?: IParams) => {
   const searchFilterParams = new SearchFilterParams(filterParams);
   const suffixUri = querySuffix ? `&${querySuffix}` : '';
   return `?page=${page}${suffixUri}${searchFilterParams.toURI()}`;
@@ -101,7 +101,7 @@ const Page: React.FC<{
   pageNum: number;
   querySuffix?: string;
   currentPage: number;
-  searchFilterParams: IParams;
+  searchFilterParams?: IParams;
 }> = ({ pageNum, querySuffix, currentPage, searchFilterParams }) => (
   <li>
     <a
