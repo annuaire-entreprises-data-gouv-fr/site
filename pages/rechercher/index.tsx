@@ -60,6 +60,7 @@ const SearchResultPage: React.FC<IProps> = ({
                 totalPages={results.pageCount}
                 querySuffix={`terme=${searchTerm}`}
                 currentPage={results.currentPage}
+                searchFilterParams={searchFilterParams}
               />
               <div
                 dangerouslySetInnerHTML={{

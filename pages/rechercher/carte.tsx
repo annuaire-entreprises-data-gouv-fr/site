@@ -65,6 +65,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
                   currentPage={results.currentPage}
                   querySuffix={`terme=${searchTerm}`}
                   compact={true}
+                  searchFilterParams={searchFilterParams}
                 />
               </div>
             </div>
