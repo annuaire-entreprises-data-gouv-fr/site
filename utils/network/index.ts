@@ -11,22 +11,22 @@ const DEFAULT_AGE = 1000 * 60 * 15;
  * Returns a cache-enabled axios instance
  */
 export const cachedAxiosInstanceFactory = () => {
-  return setupCache(Axios.create(), {
+  const instance = setupCache(Axios.create(), {
     storage: redisStorage,
     // ignore cache-control headers as some API like sirene return 'no-cache' headers
     headerInterpreter: () => DEFAULT_AGE,
     debug: console.log,
   });
+
+  instance.interceptors.response.use(logInterceptor, errorInterceptor);
+
+  return instance;
 };
 
 const axiosInstanceWithCache = cachedAxiosInstanceFactory();
 /*
  * log every response into STDOUT
  */
-axiosInstanceWithCache.interceptors.response.use(
-  logInterceptor,
-  errorInterceptor
-);
 
 /**
  * Default axios client - not cached by default

@@ -38,8 +38,6 @@ export const httpClientOAuthGetFactory = (
     oauth.interceptor(tokenProvider, getClientCredentials)
   );
 
-  axiosInstance.interceptors.response.use(logInterceptor, errorInterceptor);
-
   return (url: string, options: AxiosRequestConfig, useCache: boolean) =>
     axiosInstance.get(url, {
       timeout: constants.timeout.default,

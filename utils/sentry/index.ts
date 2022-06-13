@@ -1,4 +1,8 @@
-import * as Sentry from '@sentry/node';
+// import * as Sentry from '@sentry/node';
+// const Tracing = require('@sentry/tracing');
+
+import * as Sentry from '@sentry/nextjs';
+import { SeverityLevel } from '@sentry/nextjs';
 
 export interface IScope {
   page?: string;
@@ -38,7 +42,7 @@ const init = () => {
 };
 
 const logInSentryFactory =
-  (severity = Sentry.Severity.Error) =>
+  (severity = 'error' as SeverityLevel) =>
   (errorMsg: any, extra?: IScope) => {
     if (process.env.NODE_ENV === 'development' || !process.env.SENTRY_DSN) {
       console.log(errorMsg, JSON.stringify(extra));
@@ -56,8 +60,8 @@ const logInSentryFactory =
     }
   };
 
-export const logWarningInSentry = logInSentryFactory(Sentry.Severity.Info);
+export const logWarningInSentry = logInSentryFactory('info' as SeverityLevel);
 
-export const logErrorInSentry = logInSentryFactory(Sentry.Severity.Error);
+export const logErrorInSentry = logInSentryFactory('error' as SeverityLevel);
 
 export default logErrorInSentry;
