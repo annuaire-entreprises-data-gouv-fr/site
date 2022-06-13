@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetStaticProps } from 'next';
 import Page from '../layouts';
-import changelog, { IChangelog } from '../models/changelog';
+import changelog, { IChangelog } from '../models/historique-modifications';
 
 interface IProps {
   changelog: IChangelog[];
