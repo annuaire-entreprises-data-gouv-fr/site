@@ -6,7 +6,7 @@ import { formatLog } from './format-log';
  * @param response
  */
 const logInterceptor = (response: AxiosResponse<any, any>) => {
-  if (true || process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production') {
     // logged into stdout
     console.log(
       formatLog(
