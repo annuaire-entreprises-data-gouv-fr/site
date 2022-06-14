@@ -2,31 +2,47 @@ import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import constants from '../../models/constants';
 import redisStorage from './redis-storage';
 import { CacheRequestConfig, setupCache } from 'axios-cache-interceptor';
-import logInterceptor from './log-interceptor';
+import { logInterceptor, addStartTimeInterceptor } from './log-interceptor';
 import errorInterceptor from './error-interceptor';
 
 const DEFAULT_AGE = 1000 * 60 * 15;
 
 /**
+ * Returns a regular axios instance
+ */
+export const axiosInstanceFactory = () => {
+  const regularInstance = Axios.create();
+
+  regularInstance.interceptors.request.use(addStartTimeInterceptor, (err) =>
+    Promise.reject(err)
+  );
+
+  regularInstance.interceptors.response.use(logInterceptor, errorInterceptor);
+
+  return regularInstance;
+};
+
+/**
  * Returns a cache-enabled axios instance
  */
 export const cachedAxiosInstanceFactory = () => {
-  const instance = setupCache(Axios.create(), {
+  const cachedInstance = setupCache(Axios.create(), {
     storage: redisStorage,
     // ignore cache-control headers as some API like sirene return 'no-cache' headers
     headerInterpreter: () => DEFAULT_AGE,
     debug: console.log,
   });
 
-  instance.interceptors.response.use(logInterceptor, errorInterceptor);
+  cachedInstance.interceptors.request.use(addStartTimeInterceptor, (err) =>
+    Promise.reject(err)
+  );
 
-  return instance;
+  cachedInstance.interceptors.response.use(logInterceptor, errorInterceptor);
+
+  return cachedInstance;
 };
 
 const axiosInstanceWithCache = cachedAxiosInstanceFactory();
-/*
- * log every response into STDOUT
- */
 
 /**
  * Default axios client - not cached by default

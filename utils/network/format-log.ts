@@ -1,7 +1,8 @@
 export const formatLog = (
   url: string,
   status: number,
-  isFromCached: boolean
+  isFromCached = false,
+  time = -1
 ) => {
-  return `status=${status} isFromCached=${isFromCached} request=${url}`;
+  return `status=${status} time=${time} isFromCached=${isFromCached} request=${url}`;
 };
