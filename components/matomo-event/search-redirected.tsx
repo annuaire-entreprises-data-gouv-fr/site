@@ -8,7 +8,8 @@ const MatomoEventRedirected: React.FC<{ sirenOrSiret: Siren | Siret }> = ({
     dangerouslySetInnerHTML={{
       __html: `
         <script>
-          window._paq.push([
+          var _paq = window._paq || [];
+          _paq.push([
               'trackEvent',
               'research:redirected',
               '${sirenOrSiret}',
