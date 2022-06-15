@@ -1,32 +1,37 @@
 import React from 'react';
 
 import Page from '../layouts';
-import { GetServerSideProps } from 'next';
+import { NextPage } from 'next';
 import { logErrorInSentry } from '../utils/sentry';
 import { ServerErrorExplanations } from '../components/error-explanations';
+import NextErrorComponent from 'next/error';
 
-const ServerError: React.FC<{ statusCode: number }> = () => (
+const ServerError: NextPage<{}> = () => (
   <Page small={true} title="Cette page ne fonctionne pas">
     <ServerErrorExplanations />
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const statusCode = context.res ? context.res.statusCode : 404;
-
+ServerError.getInitialProps = async ({ res, err, asPath }) => {
   try {
-    logErrorInSentry(`Server Error (500) - unknown reason`, {
-      details: JSON.stringify(context.req.headers),
+    //@ts-ignore
+    const errorInitialProps = await NextErrorComponent.getInitialProps({
+      res,
+      err,
     });
+
+    if (!err) {
+      throw new Error('error is missing');
+    }
+    logErrorInSentry(err);
+    return errorInitialProps;
   } catch {
-    logErrorInSentry(`Server Error (500) - unknown reason`);
+    logErrorInSentry(
+      `_error.js getInitialProps missing data at path: ${asPath}`
+    );
   }
 
-  return {
-    props: {
-      statusCode,
-    },
-  };
+  return { props: {} };
 };
 
 export default ServerError;
