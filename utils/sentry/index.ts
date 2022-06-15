@@ -1,3 +1,6 @@
+// import * as Sentry from '@sentry/node';
+// const Tracing = require('@sentry/tracing');
+
 import * as Sentry from '@sentry/nextjs';
 import { SeverityLevel } from '@sentry/nextjs';
 
@@ -20,6 +23,24 @@ const getScope = (extra: IScope) => {
   return scope;
 };
 
+let _isInitialized = false;
+
+const init = () => {
+  if (_isInitialized) {
+    return;
+  }
+
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 1.0,
+  });
+  _isInitialized = true;
+};
+
 const logInSentryFactory =
   (severity = 'error' as SeverityLevel) =>
   (errorMsg: any, extra?: IScope) => {
@@ -27,6 +48,7 @@ const logInSentryFactory =
       console.log(errorMsg, JSON.stringify(extra));
     }
     if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
+      init();
       const scope = getScope(extra || {});
       scope.setLevel(severity);
 

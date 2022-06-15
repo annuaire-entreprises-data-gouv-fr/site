@@ -1,7 +1,4 @@
-const paths = [
-  '/rechercher',
-  //'/rechercher/carte' // deactivate map as it get blocked on ci
-];
+const paths = ['/rechercher', '/rechercher/carte'];
 
 paths.forEach((path) => {
   describe('Advanced search on page ' + path, () => {
