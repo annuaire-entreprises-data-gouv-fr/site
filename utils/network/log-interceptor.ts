@@ -18,7 +18,7 @@ export const addStartTimeInterceptor = (config: AxiosRequestConfig) => {
  * @param response
  */
 export const logInterceptor = (response: AxiosResponse<any, any>) => {
-  if (true || process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production') {
     const endTime = new Date().getTime();
     //@ts-ignore
     const startTime = response?.config?.metadata?.startTime;

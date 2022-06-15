@@ -14,21 +14,25 @@ import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
 import isUserAgentABot from '../../utils/user-agent';
 import { shouldNotIndex } from '../../utils/helpers/checks';
+import MatomoEventRedirected from '../../components/matomo-event/search-redirected';
 
 interface IProps {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
+  redirected: boolean;
 }
 
 const EtablissementPage: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
+  redirected,
 }) => (
   <Page
     small={true}
     title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
     noIndex={shouldNotIndex(uniteLegale)}
   >
+    {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
       <TitleEtablissementWithDenomination
@@ -62,6 +66,7 @@ const EtablissementPage: React.FC<IProps> = ({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const siret = context.params.slug as string;
+  const redirected = !!context.query.redirected;
 
   const forceSireneOuverteForDebug = (context.query
     .forceSireneOuverteForDebug || '') as string;
@@ -76,6 +81,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {
         ...etablissementWithUniteLegale,
+        redirected,
       },
     };
   } catch (e: any) {
