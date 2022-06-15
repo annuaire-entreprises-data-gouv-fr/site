@@ -13,7 +13,17 @@ const errorInterceptor = (error: AxiosError) => {
   const { config, response, message } = error;
 
   if (response?.status !== 404) {
-    console.error(formatLog(config.url || '', response?.status || 500, false));
+    const endTime = new Date().getTime();
+    //@ts-ignore
+    const startTime = config?.metadata?.startTime;
+    console.error(
+      formatLog(
+        config.url || '',
+        response?.status || 500,
+        false,
+        startTime ? endTime - startTime : undefined
+      )
+    );
   }
 
   if (!response) {

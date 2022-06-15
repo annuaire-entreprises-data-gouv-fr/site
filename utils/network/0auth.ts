@@ -4,9 +4,11 @@ import * as oauth from 'axios-oauth-client';
 import * as tokenProvider from 'axios-token-interceptor';
 import { HttpServerError } from '../../clients/exceptions';
 import constants from '../../models/constants';
-import logInterceptor from './log-interceptor';
-import errorInterceptor from './error-interceptor';
-import { cachedAxiosInstanceFactory, defaultCacheConfig } from '.';
+import {
+  axiosInstanceFactory,
+  cachedAxiosInstanceFactory,
+  defaultCacheConfig,
+} from '.';
 
 export const httpClientOAuthGetFactory = (
   token_url: string,
@@ -17,12 +19,7 @@ export const httpClientOAuthGetFactory = (
     throw new HttpServerError('Client id or client secret is undefined');
   }
 
-  const axiosGetCredentialsInstance = axios.create();
-
-  axiosGetCredentialsInstance.interceptors.response.use(
-    logInterceptor,
-    errorInterceptor
-  );
+  const axiosGetCredentialsInstance = axiosInstanceFactory();
 
   const getClientCredentials = oauth.client(axiosGetCredentialsInstance, {
     url: token_url,
