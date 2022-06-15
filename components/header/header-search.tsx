@@ -14,8 +14,10 @@ const HeaderSearch: React.FC<IProps> = ({
   map = false,
   searchFilterParams,
 }) => {
-  const params = new SearchFilterParams(searchFilterParams);
-  const shouldDisplayAdvancedSearch = params?.hasParam() || false;
+  const shouldDisplayAdvancedSearch = searchFilterParams
+    ? SearchFilterParams.hasParam(searchFilterParams)
+    : false;
+
   return (
     <header role="banner" className="fr-header">
       <form action={map ? '/rechercher/carte' : '/rechercher'} method="get">

@@ -23,9 +23,9 @@ import {
 export const redirectIfSiretOrSiren = (siretOrSiren: string) => {
   let destination;
   if (hasSiretFormat(siretOrSiren)) {
-    destination = `/etablissement/${siretOrSiren}`;
+    destination = `/etablissement/${siretOrSiren}?redirected=1`;
   } else if (hasSirenFormat(siretOrSiren)) {
-    destination = `/entreprise/${siretOrSiren}`;
+    destination = `/entreprise/${siretOrSiren}?redirected=1`;
   } else {
     throw new Error(`${siretOrSiren} is neither a siret or a siren`);
   }
