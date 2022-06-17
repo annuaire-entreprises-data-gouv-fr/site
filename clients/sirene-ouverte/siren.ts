@@ -150,15 +150,14 @@ const mapToDomainObject = (
     dateDebutActivite: date_debut_activite,
     dateDerniereMiseAJour: date_mise_a_jour,
     nombreEtablissements: nombre_etablissements,
-    adresse: formatAdresse(
-      '',
-      numero_voie,
-      indice_repetition,
-      type_voie,
-      libelle_voie,
-      code_postal,
-      libelle_commune
-    ),
+    adresse: formatAdresse({
+      numeroVoie: numero_voie,
+      indiceRepetition: indice_repetition,
+      typeVoie: type_voie,
+      libelleVoie: libelle_voie,
+      codePostal: code_postal,
+      libelleCommune: libelle_commune,
+    }),
     currentEtablissementPage: page,
     dirigeant: null,
     association: identifiantAssociationUniteLegale

@@ -119,15 +119,15 @@ const mapToDomainObject = (
     dateMiseAJour: gest_date_maj || '',
     dateDebutActivite: ent_act_date_debut_activite || '',
     libelleNatureJuridique: gest_label_forme_juridique || '',
-    adresse: formatAdresse(
-      '',
-      ent_adr_numero_voie || '',
-      ent_adr_indice_repetition || '',
-      ent_adr_type_voie || '',
-      ent_adr_adresse + ' ' + ent_adr_adresse_complement,
-      ent_adr_code_postal || '',
-      ent_adr_commune || ''
-    ),
+    adresse: formatAdresse({
+      numeroVoie: ent_adr_numero_voie || '',
+      indiceRepetition: ent_adr_indice_repetition || '',
+      typeVoie: ent_adr_type_voie || '',
+      libelleVoie: ent_adr_adresse || '',
+      complement: ent_adr_adresse_complement || '',
+      codePostal: ent_adr_code_postal || '',
+      libelleCommune: ent_adr_commune || '',
+    }),
     downloadlink: routes.rnm + siren,
   };
 };

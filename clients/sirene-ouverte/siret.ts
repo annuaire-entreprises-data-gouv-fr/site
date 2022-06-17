@@ -76,6 +76,16 @@ export const mapSireneOuverteEtablissementToDomainObject = (
   siret: string
 ): IEtablissement => {
   const estActif = etablissement.etat_administratif_etablissement === 'A';
+
+  const {
+    numero_voie,
+    indice_repetition,
+    type_voie,
+    libelle_voie,
+    code_postal,
+    libelle_commune,
+  } = etablissement;
+
   return {
     ...createDefaultEtablissement(),
     enseigne: etablissement.enseigne || null,
@@ -91,15 +101,14 @@ export const mapSireneOuverteEtablissementToDomainObject = (
     dateDerniereMiseAJour: etablissement.date_mise_a_jour,
     dateDebutActivite: etablissement.date_debut_activite,
     dateFermeture: !estActif ? etablissement.date_debut_activite : null,
-    adresse: formatAdresse(
-      '',
-      etablissement.numero_voie,
-      etablissement.indice_repetition,
-      etablissement.type_voie,
-      etablissement.libelle_voie,
-      etablissement.code_postal,
-      etablissement.libelle_commune
-    ),
+    adresse: formatAdresse({
+      numeroVoie: numero_voie,
+      indiceRepetition: indice_repetition,
+      typeVoie: type_voie,
+      libelleVoie: libelle_voie,
+      codePostal: code_postal,
+      libelleCommune: libelle_commune,
+    }),
     activitePrincipale: etablissement.activite_principale,
     libelleActivitePrincipale: libelleFromCodeNaf(
       etablissement.activite_principale

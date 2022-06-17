@@ -108,59 +108,74 @@ export const parseIntWithDefaultValue = (
   }
 };
 
-export const fullAdress = (etablissement: any) => {
-  if (
-    !etablissement.libelle_commune &&
-    !etablissement.geo_l4 &&
-    !etablissement.code_postal
-  ) {
-    return 'Adresse inconnue';
-  }
-
-  const adresse = `${etablissement.geo_l4 || ''} ${
-    etablissement.code_postal || ''
-  } ${etablissement.libelle_commune || ''}`;
-
-  return adresse || 'Adresse inconnue';
-};
-
-const wrapWord = (word: string, caps = false, stop = ' ') => {
+const wrapWord = (
+  word: string | null | undefined = '',
+  punct = ' ',
+  caps = false
+) => {
   if (!word) {
     return '';
   }
   if (caps) {
-    return capitalize(word) + stop;
+    return capitalize(word) + punct;
   }
-  return word.toString().toLowerCase() + stop;
+  return word.toString().toLowerCase() + punct;
 };
 
-export const formatAdresse = (
-  complement: string,
-  numero_voie: string,
-  indice_repetition: string,
-  type_voie: string,
-  libelle_voie: string,
-  code_postal: string,
-  libelle_commune: string,
-  pays?: string
-) => {
+interface IAdressFields {
+  complement?: string | null | undefined;
+  numeroVoie?: string | null | undefined;
+  indiceRepetition?: string | null | undefined;
+  typeVoie?: string | null | undefined;
+  libelleVoie?: string | null | undefined;
+  distributionSpeciale?: string | null | undefined;
+  codePostal?: string | null | undefined;
+  libelleCommune?: string | null | undefined;
+  codeCedex?: string | null | undefined;
+  libelleCommuneCedex?: string | null | undefined;
+  pays?: string | null | undefined;
+}
+
+export const formatAdresse = ({
+  complement = '',
+  numeroVoie = '',
+  indiceRepetition = '',
+  typeVoie = '',
+  libelleVoie = '',
+  distributionSpeciale = '',
+  codePostal = '',
+  libelleCommune = '',
+  codeCedex = '',
+  libelleCommuneCedex = '',
+  pays = '',
+}: IAdressFields) => {
   if (
     !complement &&
-    !numero_voie &&
-    !type_voie &&
-    !libelle_commune &&
-    !code_postal &&
-    !libelle_voie
+    !numeroVoie &&
+    !typeVoie &&
+    !libelleCommune &&
+    !distributionSpeciale &&
+    !codePostal &&
+    !codeCedex &&
+    !libelleVoie &&
+    !pays
   ) {
     return '';
   }
 
-  const fullLibelleFromTypeVoie = libelleFromTypeVoie(type_voie);
-  return `${wrapWord(complement, true, ', ')}${wrapWord(numero_voie)}${wrapWord(
-    indice_repetition
-  )}${wrapWord(fullLibelleFromTypeVoie)}${wrapWord(libelle_voie, false, ', ')}${
-    code_postal || ''
-  } ${wrapWord(libelle_commune, true, '')}${pays ? ', ' + pays : ''}`;
+  const fullLibelleFromTypeVoie = libelleFromTypeVoie(typeVoie);
+
+  return [
+    wrapWord(complement, ', ', true),
+    wrapWord(numeroVoie),
+    wrapWord(indiceRepetition),
+    wrapWord(fullLibelleFromTypeVoie),
+    wrapWord(libelleVoie, ', '),
+    wrapWord(distributionSpeciale, ', '),
+    wrapWord(codePostal || codeCedex),
+    wrapWord(libelleCommune || libelleCommuneCedex, '', true),
+    pays ? ', ' + pays : '',
+  ].join('');
 };
 
 export const formatEnseigne = (

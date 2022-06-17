@@ -40,7 +40,9 @@ export const libelleFromCategoriesJuridiques = (categorie: string) =>
   //@ts-ignore
   categoriesJuridiques[categorie] || null;
 
-export const libelleFromTypeVoie = (codeVoie: string) => {
+export const libelleFromTypeVoie = (
+  codeVoie: string | null | undefined = ''
+) => {
   //@ts-ignore
   return codesVoies[codeVoie] || codeVoie;
 };
