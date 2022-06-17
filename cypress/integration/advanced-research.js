@@ -1,4 +1,7 @@
-const paths = ['/rechercher', '/rechercher/carte'];
+const paths = [
+  '/rechercher',
+  // '/rechercher/carte'
+];
 
 paths.forEach((path) => {
   describe('Advanced search on page ' + path, () => {
