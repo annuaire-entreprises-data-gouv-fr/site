@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { IsLikelyASirenOrSiretException, IUniteLegale } from '../../models';
+import { IUniteLegale } from '../../models';
 import UniteLegaleSection from '../../components/unite-legale-section';
 import EtablissementListeSection from '../../components/etablissement-liste-section';
 import Title, { FICHE } from '../../components/title-section';

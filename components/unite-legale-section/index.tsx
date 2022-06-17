@@ -25,6 +25,7 @@ const UniteLegaleSection: React.FC<{
       'Activité principale du siège social (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
     ],
+    ['Adresse du siège social', uniteLegale.siege.adresse],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
       'Tranche effectif salarié de l’entité',
