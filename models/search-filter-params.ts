@@ -3,6 +3,7 @@ import { ParsedUrlQuery } from 'querystring';
 export interface IParams {
   section_activite_principale: string;
   code_postal: string;
+  departement: string;
 }
 
 class SearchFilterParams {
@@ -12,10 +13,12 @@ class SearchFilterParams {
     const section_activite_principale = (query.section_activite_principale ||
       '') as string;
     const code_postal = (query.code_postal || '') as string;
+    const departement = (query.departement || '') as string;
 
     this.params = {
       section_activite_principale,
       code_postal,
+      departement,
     };
   }
 
