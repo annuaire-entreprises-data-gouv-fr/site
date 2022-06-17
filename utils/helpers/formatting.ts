@@ -108,23 +108,7 @@ export const parseIntWithDefaultValue = (
   }
 };
 
-export const fullAdress = (etablissement: any) => {
-  if (
-    !etablissement.libelle_commune &&
-    !etablissement.geo_l4 &&
-    !etablissement.code_postal
-  ) {
-    return 'Adresse inconnue';
-  }
-
-  const adresse = `${etablissement.geo_l4 || ''} ${
-    etablissement.code_postal || ''
-  } ${etablissement.libelle_commune || ''}`;
-
-  return adresse || 'Adresse inconnue';
-};
-
-const wrapWord = (word: string, caps = false, punct = ' ') => {
+const wrapWord = (word: string, punct = ' ', caps = false) => {
   if (!word) {
     return '';
   }
@@ -164,14 +148,14 @@ export const formatAdresse = ({
   const fullLibelleFromTypeVoie = libelleFromTypeVoie(typeVoie);
 
   return [
-    wrapWord(complement, true, ', '),
+    wrapWord(complement, ', ', true),
     wrapWord(numeroVoie),
     wrapWord(indiceRepetition),
     wrapWord(fullLibelleFromTypeVoie),
-    wrapWord(libelleVoie, false, ', '),
-    wrapWord(distributionSpeciale, false, ', '),
-    wrapWord(codePostal || codeCedex || '', false, ' '),
-    wrapWord(libelleCommune || libelleCommuneCedex || '', true, ''),
+    wrapWord(libelleVoie, ', '),
+    wrapWord(distributionSpeciale, ', '),
+    wrapWord(codePostal || codeCedex || ''),
+    wrapWord(libelleCommune || libelleCommuneCedex || '', '', true),
     pays ? ', ' + pays : '',
   ].join('');
 };
