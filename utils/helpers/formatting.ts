@@ -124,43 +124,56 @@ export const fullAdress = (etablissement: any) => {
   return adresse || 'Adresse inconnue';
 };
 
-const wrapWord = (word: string, caps = false, stop = ' ') => {
+const wrapWord = (word: string, caps = false, punct = ' ') => {
   if (!word) {
     return '';
   }
   if (caps) {
-    return capitalize(word) + stop;
+    return capitalize(word) + punct;
   }
-  return word.toString().toLowerCase() + stop;
+  return word.toString().toLowerCase() + punct;
 };
 
-export const formatAdresse = (
-  complement: string,
-  numero_voie: string,
-  indice_repetition: string,
-  type_voie: string,
-  libelle_voie: string,
-  code_postal: string,
-  libelle_commune: string,
-  pays?: string
-) => {
+export const formatAdresse = ({
+  complement = '',
+  numeroVoie = '',
+  indiceRepetition = '',
+  typeVoie = '',
+  libelleVoie = '',
+  distributionSpeciale = '',
+  codePostal = '',
+  libelleCommune = '',
+  codeCedex = '',
+  libelleCommuneCedex = '',
+  pays = '',
+}) => {
   if (
     !complement &&
-    !numero_voie &&
-    !type_voie &&
-    !libelle_commune &&
-    !code_postal &&
-    !libelle_voie
+    !numeroVoie &&
+    !typeVoie &&
+    !libelleCommune &&
+    !distributionSpeciale &&
+    !codePostal &&
+    !codeCedex &&
+    !libelleVoie &&
+    !pays
   ) {
     return '';
   }
 
-  const fullLibelleFromTypeVoie = libelleFromTypeVoie(type_voie);
-  return `${wrapWord(complement, true, ', ')}${wrapWord(numero_voie)}${wrapWord(
-    indice_repetition
-  )}${wrapWord(fullLibelleFromTypeVoie)}${wrapWord(libelle_voie, false, ', ')}${
-    code_postal || ''
-  } ${wrapWord(libelle_commune, true, '')}${pays ? ', ' + pays : ''}`;
+  const fullLibelleFromTypeVoie = libelleFromTypeVoie(typeVoie);
+
+  return [
+    wrapWord(complement, true, ', '),
+    wrapWord(numeroVoie),
+    wrapWord(indiceRepetition),
+    wrapWord(fullLibelleFromTypeVoie),
+    wrapWord(libelleVoie, false, ', '),
+    wrapWord(distributionSpeciale, false, ', '),
+    wrapWord(codePostal || codeCedex || '', false, ' '),
+    wrapWord(libelleCommune || libelleCommuneCedex || '', true, ''),
+    pays ? ', ' + pays : '',
+  ].join('');
 };
 
 export const formatEnseigne = (
