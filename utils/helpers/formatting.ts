@@ -123,17 +123,17 @@ const wrapWord = (
 };
 
 interface IAdressFields {
-  complement: string | null | undefined;
-  numeroVoie: string | null | undefined;
-  indiceRepetition: string | null | undefined;
-  typeVoie: string | null | undefined;
-  libelleVoie: string | null | undefined;
-  distributionSpeciale: string | null | undefined;
-  codePostal: string | null | undefined;
-  libelleCommune: string | null | undefined;
-  codeCedex: string | null | undefined;
-  libelleCommuneCedex: string | null | undefined;
-  pays: string | null | undefined;
+  complement?: string | null | undefined;
+  numeroVoie?: string | null | undefined;
+  indiceRepetition?: string | null | undefined;
+  typeVoie?: string | null | undefined;
+  libelleVoie?: string | null | undefined;
+  distributionSpeciale?: string | null | undefined;
+  codePostal?: string | null | undefined;
+  libelleCommune?: string | null | undefined;
+  codeCedex?: string | null | undefined;
+  libelleCommuneCedex?: string | null | undefined;
+  pays?: string | null | undefined;
 }
 
 export const formatAdresse = ({
