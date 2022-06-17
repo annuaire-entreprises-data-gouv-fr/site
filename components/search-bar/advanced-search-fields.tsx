@@ -1,12 +1,14 @@
 import React from 'react';
 import ButtonLink from '../../components-ui/button';
+import SelectDepartement from '../../components-ui/select/select-departement';
 import SelectCodeSectionNaf from '../../components-ui/select/select-section-naf';
 import { IParams } from '../../models/search-filter-params';
 
 const AdvancedSearchFields: React.FC<{
   searchFilterParams?: IParams;
 }> = ({ searchFilterParams }) => {
-  const { code_postal, section_activite_principale } = searchFilterParams || {};
+  const { code_postal, section_activite_principale, departement } =
+    searchFilterParams || {};
 
   return (
     <>
@@ -23,6 +25,13 @@ const AdvancedSearchFields: React.FC<{
             autoComplete="off"
             placeholder="Code postal"
             defaultValue={code_postal}
+          />
+        </div>
+        <div className="select">
+          <SelectDepartement
+            name="departement"
+            label={`Filtrer par département`}
+            defaultValue={departement}
           />
         </div>
         <div className="select">
@@ -51,7 +60,7 @@ const AdvancedSearchFields: React.FC<{
 
         div.select {
           flex-grow: 0;
-          max-width: 550px;
+          max-width: 450px;
         }
 
         span.search-button:before {
