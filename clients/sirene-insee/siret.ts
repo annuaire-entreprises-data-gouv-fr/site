@@ -58,6 +58,9 @@ interface IInseeEtablissement {
     codePostalEtablissement: string;
     libelleCommuneEtablissement: string;
     libellePaysEtrangerEtablissement?: string;
+    distributionSpecialeEtablissement: string;
+    codeCedexEtablissement: string;
+    libelleCedexEtablissement: string;
   };
   uniteLegale: IInseeetablissementUniteLegale;
 }
@@ -198,6 +201,20 @@ export const mapEtablissementToDomainObject = (
 
   const defaultEtablissement = createDefaultEtablissement();
 
+  const {
+    complementAdresseEtablissement,
+    numeroVoieEtablissement,
+    indiceRepetitionEtablissement,
+    typeVoieEtablissement,
+    libelleVoieEtablissement,
+    codePostalEtablissement,
+    libelleCommuneEtablissement,
+    libellePaysEtrangerEtablissement,
+    distributionSpecialeEtablissement,
+    codeCedexEtablissement,
+    libelleCedexEtablissement,
+  } = adresseEtablissement;
+
   return {
     ...defaultEtablissement,
     siren: extractSirenFromSiret(siret),
@@ -221,16 +238,19 @@ export const mapEtablissementToDomainObject = (
       trancheEffectifsEtablissement,
       anneeEffectifsEtablissement
     ),
-    adresse: formatAdresse(
-      adresseEtablissement.complementAdresseEtablissement,
-      adresseEtablissement.numeroVoieEtablissement,
-      adresseEtablissement.indiceRepetitionEtablissement,
-      adresseEtablissement.typeVoieEtablissement,
-      adresseEtablissement.libelleVoieEtablissement,
-      adresseEtablissement.codePostalEtablissement,
-      adresseEtablissement.libelleCommuneEtablissement,
-      adresseEtablissement.libellePaysEtrangerEtablissement
-    ),
+    adresse: formatAdresse({
+      complement: complementAdresseEtablissement,
+      numeroVoie: numeroVoieEtablissement,
+      indiceRepetition: indiceRepetitionEtablissement,
+      typeVoie: typeVoieEtablissement,
+      libelleVoie: libelleVoieEtablissement,
+      codePostal: codePostalEtablissement,
+      libelleCommune: libelleCommuneEtablissement,
+      distributionSpeciale: distributionSpecialeEtablissement,
+      codeCedex: codeCedexEtablissement,
+      libelleCommuneCedex: libelleCedexEtablissement,
+      pays: libellePaysEtrangerEtablissement,
+    }),
   };
 };
 

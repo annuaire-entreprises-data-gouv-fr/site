@@ -74,15 +74,14 @@ export const mapToDomainObject = (
     exId: id_ex_association,
     nomComplet: titre,
     objet,
-    adresse: formatAdresse(
-      '',
-      adresse_numero_voie,
-      adresse_repetition,
-      adresse_type_voie,
-      adresse_libelle_voie,
-      adresse_code_postal,
-      adresse_libelle_commune
-    ),
+    adresse: formatAdresse({
+      numeroVoie: adresse_numero_voie,
+      indiceRepetition: adresse_repetition,
+      typeVoie: adresse_type_voie,
+      libelleVoie: adresse_libelle_voie,
+      codePostal: adresse_code_postal,
+      libelleCommune: adresse_libelle_commune,
+    }),
     adresseInconsistency: false,
   };
 };
