@@ -108,7 +108,11 @@ export const parseIntWithDefaultValue = (
   }
 };
 
-const wrapWord = (word: string, punct = ' ', caps = false) => {
+const wrapWord = (
+  word: string | null | undefined = '',
+  punct = ' ',
+  caps = false
+) => {
   if (!word) {
     return '';
   }
@@ -117,6 +121,20 @@ const wrapWord = (word: string, punct = ' ', caps = false) => {
   }
   return word.toString().toLowerCase() + punct;
 };
+
+interface IAdressFields {
+  complement: string | null | undefined;
+  numeroVoie: string | null | undefined;
+  indiceRepetition: string | null | undefined;
+  typeVoie: string | null | undefined;
+  libelleVoie: string | null | undefined;
+  distributionSpeciale: string | null | undefined;
+  codePostal: string | null | undefined;
+  libelleCommune: string | null | undefined;
+  codeCedex: string | null | undefined;
+  libelleCommuneCedex: string | null | undefined;
+  pays: string | null | undefined;
+}
 
 export const formatAdresse = ({
   complement = '',
@@ -130,7 +148,7 @@ export const formatAdresse = ({
   codeCedex = '',
   libelleCommuneCedex = '',
   pays = '',
-}) => {
+}: IAdressFields) => {
   if (
     !complement &&
     !numeroVoie &&
@@ -154,8 +172,8 @@ export const formatAdresse = ({
     wrapWord(fullLibelleFromTypeVoie),
     wrapWord(libelleVoie, ', '),
     wrapWord(distributionSpeciale, ', '),
-    wrapWord(codePostal || codeCedex || ''),
-    wrapWord(libelleCommune || libelleCommuneCedex || '', '', true),
+    wrapWord(codePostal || codeCedex),
+    wrapWord(libelleCommune || libelleCommuneCedex, '', true),
     pays ? ', ' + pays : '',
   ].join('');
 };
