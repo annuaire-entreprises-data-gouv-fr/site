@@ -14,10 +14,12 @@ const SelectDepartement: React.FC<{
     name={name}
     defaultValue={defaultValue}
     placeholder={placeholder}
-    options={Object.keys(departements).map((k) => {
-      //@ts-ignore
-      return { value: k, label: `${k} - ${departements[k]}` };
-    })}
+    options={Object.keys(departements)
+      .sort()
+      .map((k) => {
+        //@ts-ignore
+        return { value: k, label: `${k} - ${departements[k]}` };
+      })}
   />
 );
 

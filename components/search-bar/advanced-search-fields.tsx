@@ -60,7 +60,7 @@ const AdvancedSearchFields: React.FC<{
 
         div.select {
           flex-grow: 0;
-          max-width: 450px;
+          max-width: 400px;
         }
 
         span.search-button:before {
