@@ -29,7 +29,7 @@ const Page: React.FC<IProps> = ({
   title,
   description,
   canonical,
-  noIndex = true,
+  noIndex = false,
 }) => (
   <div id="page-layout">
     <Meta

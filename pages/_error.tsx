@@ -6,7 +6,7 @@ import { logErrorInSentry } from '../utils/sentry';
 import { ServerErrorExplanations } from '../components/error-explanations';
 
 const ServerError: React.FC<{ statusCode: number }> = () => (
-  <Page small={true} title="Cette page ne fonctionne pas">
+  <Page small={true} title="Cette page ne fonctionne pas" noIndex={true}>
     <ServerErrorExplanations />
   </Page>
 );
