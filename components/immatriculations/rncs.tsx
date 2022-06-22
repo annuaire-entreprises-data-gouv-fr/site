@@ -18,6 +18,7 @@ import { Closed, Open } from '../../components-ui/icon';
 import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
 import { IImmatriculationRNCS } from '../../models/immatriculation/rncs';
 import Info from '../../components-ui/alerts/info';
+import Warning from '../../components-ui/alerts/warning';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
@@ -67,15 +68,15 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
               {uniteLegale.estDiffusible &&
               uniteLegale.estEntrepriseCommercialeDiffusible ? (
                 <>
-                  <p>
-                    Pour accéder à l’ensemble des données contenues dans un
-                    extrait KBIS, téléchargez le justificatif d’immatriculation
-                    via le <b>bouton ci-dessous</b>. Le téléchargement peut
-                    prendre quelques dizaines de secondes.
-                  </p>
+                  <Warning>
+                    Nous rencontrons des difficultés a télécharger les PDF de l’
+                    <INPI />
+                    <br />. Nous travaillons à rétablir le service. En
+                    attendant, vous pouvez les consulter sur le site de l’INPI.{' '}
+                    <br />
+                    Nous sommes désolé du dérangement.
+                  </Warning>
                   <div className="layout-center">
-                    <ButtonInpiPdf siren={immatriculation.siren} />
-                    <div className="separator" />
                     <ButtonLink
                       nofollow={true}
                       target="_blank"
@@ -85,13 +86,6 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
                       ⇢ Voir la fiche sur le site de l’INPI
                     </ButtonLink>
                   </div>
-                  <p>
-                    <b>NB :</b> si le téléchargement échoue, vous pouvez accéder
-                    à la donnée en allant sur le site de l’
-                    <INPI />. Pour accéder à l’ensemble de la donnée en
-                    utilisant le site de l’
-                    <INPI /> vous devrez vous créer un compte <INPI />.
-                  </p>
                 </>
               ) : (
                 <>
