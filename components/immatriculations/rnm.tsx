@@ -80,7 +80,7 @@ const ImmatriculationRNM: React.FC<IProps> = ({
 
   return (
     <>
-      {immatriculation.downloadlink && (
+      {immatriculation.downloadLink && (
         <>
           <Section
             id="rnm"
@@ -104,14 +104,14 @@ const ImmatriculationRNM: React.FC<IProps> = ({
               <div className="layout-center">
                 <ButtonLink
                   target="_blank"
-                  to={`${immatriculation.downloadlink}?format=pdf`}
+                  to={`${immatriculation.downloadLink}`}
                 >
                   {download} Télécharger le justificatif
                 </ButtonLink>
                 <div className="separator" />
                 <ButtonLink
                   target="_blank"
-                  to={`${immatriculation.downloadlink}?format=html`}
+                  to={`${immatriculation.siteLink}`}
                   alt
                 >
                   ⇢ Voir la fiche sur le site de CMA France

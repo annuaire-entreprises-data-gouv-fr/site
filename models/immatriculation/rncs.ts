@@ -83,7 +83,8 @@ const getImmatriculationRNCS = async (
 
     return {
       siren,
-      downloadlink: routes.rncs.portail.entreprise + siren,
+      downloadLink: `${routes.rncs.portail.pdf}?format=pdf&ids=[%22${siren}%22]`,
+      siteLink: `${routes.rncs.portail.entreprise}${siren}`,
       identite,
       dirigeants,
       beneficiaires,

@@ -41,7 +41,7 @@ const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
 
   return (
     <>
-      {immatriculation.downloadlink && (
+      {immatriculation.downloadLink && (
         <>
           <Section
             id="joafe"
@@ -61,7 +61,7 @@ const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
               <div className="layout-center">
                 <ButtonLink
                   target="_blank"
-                  to={`${immatriculation.downloadlink}?format=pdf`}
+                  to={`${immatriculation.downloadLink}`}
                 >
                   {download} Télécharger le justificatif
                 </ButtonLink>

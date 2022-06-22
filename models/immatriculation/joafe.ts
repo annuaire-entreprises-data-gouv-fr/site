@@ -38,7 +38,8 @@ export const getImmatriculationJOAFE = async (
       siren,
       idRna,
       datePublication: annonceCreation.datePublication,
-      downloadlink: annonceCreation.path,
+      downloadLink: annonceCreation.path + '?format=pdf',
+      siteLink: annonceCreation.path,
     } as IImmatriculationJOAFE;
   } catch (e: any) {
     if (e instanceof HttpNotFound || e instanceof NotAValidIdRnaError) {

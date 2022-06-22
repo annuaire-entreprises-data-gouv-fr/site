@@ -128,6 +128,7 @@ const mapToDomainObject = (
       codePostal: ent_adr_code_postal || '',
       libelleCommune: ent_adr_commune || '',
     }),
-    downloadlink: routes.rnm + siren,
+    downloadLink: `${routes.rnm}${siren}?format=pdf`,
+    siteLink: `${routes.rnm}${siren}?format=html`,
   };
 };

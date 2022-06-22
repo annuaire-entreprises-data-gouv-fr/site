@@ -42,7 +42,7 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
 
   return (
     <>
-      {immatriculation.downloadlink && (
+      {immatriculation.downloadLink && (
         <>
           <Section
             id="rncs"
@@ -79,7 +79,7 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
                     <ButtonLink
                       nofollow={true}
                       target="_blank"
-                      to={`${immatriculation.downloadlink}`}
+                      to={`${immatriculation.siteLink}`}
                       alt
                     >
                       ⇢ Voir la fiche sur le site de l’INPI
@@ -106,14 +106,12 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
                     <ul>
                       <li>
                         soit télécharger le{' '}
-                        <a href={immatriculation.downloadlink + '?format=pdf'}>
-                          PDF public
-                        </a>
-                        , sans données personnelles.
+                        <a href={immatriculation.downloadLink}>PDF public</a>,
+                        sans données personnelles.
                       </li>
                       <li>
                         soit aller{' '}
-                        <a href={immatriculation.downloadlink}>
+                        <a href={immatriculation.siteLink}>
                           sur le site de l’Inpi
                         </a>
                         , vous créer un compte et accéder au pdf complet.
