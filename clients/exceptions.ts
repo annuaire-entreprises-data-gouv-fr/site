@@ -12,6 +12,12 @@ export class HttpNotFound extends HttpError {
   }
 }
 
+export class HttpBadRequestError extends HttpError {
+  constructor(public message: string) {
+    super(message, 400);
+  }
+}
+
 export class HttpServerError extends HttpError {
   constructor(public message: string) {
     super(message, 500);

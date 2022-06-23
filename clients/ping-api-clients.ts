@@ -44,7 +44,7 @@ export const pingAPIClient = async (slug: string | string[]) => {
     if (e instanceof APISlugNotFound) {
       throw e;
     } else {
-      return { test: false, status: e.status | 500 };
+      return { test: false, status: e.status || 500 };
     }
   }
 };

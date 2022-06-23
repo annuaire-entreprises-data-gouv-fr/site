@@ -6,6 +6,7 @@ import {
   HttpTimeoutError,
   HttpTooManyRequests,
   HttpUnauthorizedError,
+  HttpBadRequestError,
 } from '../../clients/exceptions';
 import { formatLog } from './format-log';
 
@@ -49,6 +50,9 @@ const errorInterceptor = (error: AxiosError) => {
     }
     case 403: {
       throw new HttpForbiddenError('Forbidden');
+    }
+    case 400: {
+      throw new HttpBadRequestError('Bad Request');
     }
     case 401: {
       throw new HttpUnauthorizedError('Unauthorized');
