@@ -38,6 +38,25 @@ const adresses = [
     },
     expected: 'Chez madame genevieve guinjard, 1 rue rameau, 60300 Senlis',
   },
+  {
+    fields: {
+      complement: '17F PLATINIUM',
+      numeroVoie: null,
+      indiceRepetition: null,
+      typeVoie: null,
+      libelleVoie: 'N0 233 TAI CANG ROAD',
+      codePostal: null,
+      libelleCommune: null,
+      libelleCommuneEtranger: '200020 SHANGAI',
+      distributionSpeciale: null,
+      codeCommune: null,
+      codeCedex: null,
+      libelleCedex: null,
+      codePaysEtranger: '99216',
+      libellePaysEtranger: 'CHINE',
+    },
+    expected: '17f platinium, n0 233 tai cang road, 200020 shangai, Chine',
+  },
 ];
 
 describe('Check formatAdresse', () => {
