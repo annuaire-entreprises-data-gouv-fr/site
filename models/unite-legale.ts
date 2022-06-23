@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs';
 import {
   createDefaultUniteLegale,
   IEtablissement,
@@ -8,13 +9,13 @@ import {
 import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {
   getUniteLegaleInsee,
-  getUniteLegaleInseeWithFallbackCredentials,
+  getUniteLegaleInseeFallback,
 } from '../clients/sirene-insee/siren';
 import {
   getAllEtablissementsInsee,
-  getAllEtablissementsInseeWithFallbackCredentials,
+  getAllEtablissementsInseeFallback,
   getSiegeInsee,
-  getSiegeInseeWithFallbackCredentials,
+  getSiegeInseeFallback,
 } from '../clients/sirene-insee/siret';
 import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
 import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
@@ -24,6 +25,12 @@ import {
   logSireneOuvertefailed,
 } from '../utils/sentry/helpers';
 import { getAssociation } from './association';
+
+/**
+ * List of siren whose owner refused diffusion
+ */
+const protectedSirenPath = 'public/protected-siren.txt';
+const protectedSiren = readFileSync(protectedSirenPath, 'utf8').split('\n');
 
 /**
  * Return an uniteLegale with RNA if
@@ -49,8 +56,14 @@ const getUniteLegaleFromSlug = async (
   const siren = verifySiren(slug);
   const uniteLegale = await getUniteLegale(siren, page);
 
+  // only EI
   if (!uniteLegale.estDiffusible) {
     uniteLegale.nomComplet = 'Entité non-diffusible';
+  }
+
+  // only entreprise commerciales
+  if (protectedSiren.indexOf(uniteLegale.siren) > -1) {
+    uniteLegale.estEntrepriseCommercialeDiffusible = false;
   }
   return uniteLegale;
 };
@@ -138,7 +151,7 @@ const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
         getSiegeInsee(siren).catch(() => null),
       ]);
 
-    return mergeUniteLegaleFromBothApi(
+    return mergeUniteLegaleInsee(
       uniteLegaleInsee,
       allEtablissementsInsee,
       siegeInsee
@@ -159,14 +172,12 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
     // INSEE requires two calls to get uniteLegale with etablissements
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
-        getUniteLegaleInseeWithFallbackCredentials(siren),
-        getAllEtablissementsInseeWithFallbackCredentials(siren, page).catch(
-          () => null
-        ),
-        getSiegeInseeWithFallbackCredentials(siren).catch(() => null),
+        getUniteLegaleInseeFallback(siren),
+        getAllEtablissementsInseeFallback(siren, page).catch(() => null),
+        getSiegeInseeFallback(siren).catch(() => null),
       ]);
 
-    return mergeUniteLegaleFromBothApi(
+    return mergeUniteLegaleInsee(
       uniteLegaleInsee,
       allEtablissementsInsee,
       siegeInsee
@@ -182,7 +193,7 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
 /**
  * Merge response form INSEE and Etalab, using best of both
  */
-const mergeUniteLegaleFromBothApi = (
+const mergeUniteLegaleInsee = (
   uniteLegaleInsee: IUniteLegale,
   allEtablissementsInsee: IEtablissementsList | null,
   siegeInsee: IEtablissement | null

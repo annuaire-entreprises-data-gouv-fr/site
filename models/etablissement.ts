@@ -7,7 +7,7 @@ import {
 import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {
   getEtablissementInsee,
-  getEtablissementInseeWithFallbackCredentials,
+  getEtablissementInseeFallback,
 } from '../clients/sirene-insee/siret';
 import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
 import {
@@ -58,7 +58,7 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
       logSireneOuvertefailed({ siret, details: e.message });
 
       try {
-        return await getEtablissementInseeWithFallbackCredentials(siret);
+        return await getEtablissementInseeFallback(siret);
       } catch (e: any) {
         if (e instanceof HttpForbiddenError) {
           return createNonDiffusibleEtablissement(siret);

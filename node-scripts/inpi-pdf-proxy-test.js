@@ -1,4 +1,5 @@
 const axios = require('axios');
+const fs = require('fs');
 
 require('dotenv').config();
 
@@ -69,15 +70,19 @@ const checkINPIpdfProxy = async () => {
     const authentifiedPdfSize = authentifiedPdf.data.length;
     const ratio = unauthentifiedPdfSize / authentifiedPdfSize;
 
-    // pdf should be bigger than one mo
-    if (unauthentifiedPdfSize <= 1000000 || authentifiedPdfSize <= 1000000) {
+    // pdf should be bigger than 100ko
+    if (unauthentifiedPdfSize <= 100000 || authentifiedPdfSize <= 100000) {
       console.info(
         '=> ❌ at least one PDF is too small and might be corrupted'
       );
       process.exit(1);
     }
 
-    if (ratio <= 0.55 || ratio >= 0.85) {
+    if (
+      unauthentifiedPdfSize === authentifiedPdfSize ||
+      ratio < 0.5 ||
+      ratio > 2
+    ) {
       console.info(
         `=> ❌ size ratio is suspect. unauthenticated PDF is ${
           ratio * 100

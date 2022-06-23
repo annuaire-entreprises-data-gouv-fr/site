@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { HttpNotFound } from '../../../clients/exceptions';
 import routes from '../../../clients/routes';
-import constants from '../../../models/constants';
 import { isSiren } from '../../../utils/helpers/siren-and-siret';
 import { logWarningInSentry } from '../../../utils/sentry';
 
@@ -16,7 +15,7 @@ const downloadPdf = async (req: NextApiRequest, res: NextApiResponse) => {
     throw new HttpNotFound(`${siren} is not a valid siren`);
   }
   logWarningInSentry('Direct pdf download - redirected', { siren });
-  res.redirect(routes.rncs.portail.entreprise + siren + '.pdf');
+  res.redirect(`${routes.rncs.portail.pdf}?format=pdf&ids=[%22${siren}%22]`);
 };
 
 export default downloadPdf;

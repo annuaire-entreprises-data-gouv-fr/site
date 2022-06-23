@@ -1,4 +1,4 @@
-import { httpClientOAuthFactory } from '../../utils/network';
+import httpClientOAuthGetFactory from '../../utils/network/0auth';
 import routes from '../routes';
 
 /**
@@ -17,75 +17,29 @@ import routes from '../routes';
  *
  */
 
-export enum INSEE_CREDENTIALS {
-  DEFAULT,
-  FALLBACK,
+export interface InseeClientOptions {
+  useFallback: boolean;
+  useCache: boolean;
 }
 
-/**
- * Can choose between two different set of credentials in case first is rate limited
- * */
-const getCredentials = (credentials: INSEE_CREDENTIALS) => {
-  if (credentials === INSEE_CREDENTIALS.FALLBACK) {
-    return {
-      client_id: process.env.INSEE_CLIENT_ID_FALLBACK,
-      client_secret: process.env.INSEE_CLIENT_SECRET_FALLBACK,
-    };
-  }
-  return {
-    client_id: process.env.INSEE_CLIENT_ID,
-    client_secret: process.env.INSEE_CLIENT_SECRET,
-  };
-};
+const defaultGetClient = httpClientOAuthGetFactory(
+  routes.sireneInsee.auth,
+  process.env.INSEE_CLIENT_ID,
+  process.env.INSEE_CLIENT_SECRET
+);
 
-const inseeClientFactory = (credentials = INSEE_CREDENTIALS.DEFAULT) => {
-  const { client_id, client_secret } = getCredentials(credentials);
-
-  return httpClientOAuthFactory(
-    routes.sireneInsee.auth,
-    client_id,
-    client_secret
-  );
-};
-
-const defaultInseeClient = inseeClientFactory(INSEE_CREDENTIALS.DEFAULT);
-const fallBackInseeClient = inseeClientFactory(INSEE_CREDENTIALS.FALLBACK);
-
-const inseeClient = (credentials = INSEE_CREDENTIALS.DEFAULT) =>
-  credentials === INSEE_CREDENTIALS.DEFAULT
-    ? defaultInseeClient
-    : fallBackInseeClient;
-
-export const inseeClientWrapper = async (
-  url: string,
-  method: 'GET' | 'POST',
-  options?: RequestInit,
-  credentials?: INSEE_CREDENTIALS
-) => {
-  //@ts-ignore
-  const response = await inseeClient(credentials)({
-    ...options,
-    url,
-    method,
-  });
-  return response.data;
-};
+const fallbackGetClient = httpClientOAuthGetFactory(
+  routes.sireneInsee.auth,
+  process.env.INSEE_CLIENT_ID_FALLBACK,
+  process.env.INSEE_CLIENT_SECRET_FALLBACK
+);
 
 export const inseeClientGet = async (
   route: string,
-  credentials?: INSEE_CREDENTIALS
-) => inseeClientWrapper(route, 'GET', {}, credentials);
+  options = { useFallback: false, useCache: false } as InseeClientOptions
+) => {
+  const { useFallback, useCache } = options;
+  const getClient = useFallback ? fallbackGetClient : defaultGetClient;
 
-export const inseeClientPost = async (
-  route: string,
-  body: string,
-  credentials?: INSEE_CREDENTIALS
-) =>
-  inseeClientWrapper(
-    route,
-    'POST',
-    {
-      body,
-    },
-    credentials
-  );
+  return await getClient(route, {}, useCache);
+};

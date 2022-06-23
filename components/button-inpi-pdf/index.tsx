@@ -1,7 +1,7 @@
 import React from 'react';
 import randomId from '../../utils/helpers/randomId';
-import ButtonLink from '../button';
-import { download } from '../icon';
+import ButtonLink from '../../components-ui/button';
+import { download } from '../../components-ui/icon';
 
 /**
  * Render both a static version of the component and a Alpine component that clean static if it succesfully mount

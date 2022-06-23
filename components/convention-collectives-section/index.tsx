@@ -2,9 +2,9 @@ import React from 'react';
 
 import { FullTable } from '../table/full';
 import { EAdministration } from '../../models/administration';
-import { Tag } from '../tag';
+import { Tag } from '../../components-ui/tag';
 import { Section } from '../section';
-import ButtonLink from '../button';
+import ButtonLink from '../../components-ui/button';
 import { IConventionCollective } from '../../models/convention-collective';
 import AdministrationNotResponding from '../administration-not-responding';
 import {

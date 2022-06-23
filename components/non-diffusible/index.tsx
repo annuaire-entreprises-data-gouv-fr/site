@@ -1,6 +1,6 @@
 import React from 'react';
 import { INSEE } from '../administrations';
-import ButtonLink from '../button';
+import ButtonLink from '../../components-ui/button';
 import { Section } from '../section';
 
 const NonDiffusible = () => (

@@ -79,11 +79,12 @@ const getImmatriculationRNCS = async (
   try {
     // fetch IMR and use cache
     const { identite, dirigeants, beneficiaires, metadata } =
-      await fetchRNCSImmatriculation(siren, true);
+      await fetchRNCSImmatriculation(siren);
 
     return {
       siren,
-      downloadlink: routes.rncs.portail.entreprise + siren,
+      downloadLink: `${routes.rncs.portail.pdf}?format=pdf&ids=[%22${siren}%22]`,
+      siteLink: `${routes.rncs.portail.entreprise}${siren}`,
       identite,
       dirigeants,
       beneficiaires,

@@ -127,14 +127,6 @@ const Footer = () => (
             </a>
           </li>
           <li className="fr-footer__bottom-item">
-            <a
-              className="fr-footer__bottom-link"
-              href="https://www.notion.so/7c6f3a06b4444a328201c2f6aea9f27f?v=331f2aaec05f44df9b3d7fd286c956a5"
-            >
-              Historique des modifications
-            </a>
-          </li>
-          <li className="fr-footer__bottom-item">
             <a className="fr-footer__bottom-link" href="/accessibilite">
               Accessibilité : non conforme
             </a>
@@ -142,6 +134,14 @@ const Footer = () => (
           <li className="fr-footer__bottom-item">
             <a className="fr-footer__bottom-link" href="/faq">
               FAQ
+            </a>
+          </li>
+          <li className="fr-footer__bottom-item">
+            <a
+              className="fr-footer__bottom-link"
+              href="/historique-des-modifications"
+            >
+              Nouveautés
             </a>
           </li>
           <li className="fr-footer__bottom-item">
@@ -156,7 +156,7 @@ const Footer = () => (
           </li>
           <li className="fr-footer__bottom-item">
             <a className="fr-footer__bottom-link" href="/statistiques">
-              Statistiques d’utilisation
+              Statistiques
             </a>
           </li>
         </ul>

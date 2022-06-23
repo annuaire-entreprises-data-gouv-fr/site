@@ -15,3 +15,6 @@ Disallow: /justificatif/
 Disallow: /annonces/
 Disallow: /carte/
 Disallow: /dirigeants/
+Disallow: /divers/
+Disallow: /erreur/
+Disallow: /formulaire/

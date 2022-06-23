@@ -1,6 +1,5 @@
-import { IEtablissement } from '../../models';
-import constants from '../../models/constants';
 import { ISearchResults } from '../../models/search';
+import constants from '../../models/constants';
 import {
   formatAdresse,
   parseIntWithDefaultValue,
@@ -9,6 +8,7 @@ import { libelleFromCodeNaf } from '../../utils/labels';
 import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
+import SearchFilterParams from '../../models/search-filter-params';
 
 interface ISireneOuverteUniteLegaleResultat {
   siren: string;
@@ -57,7 +57,8 @@ export interface ISireneOuverteSearchResults {
  */
 const getResults = async (
   searchTerms: string,
-  page: number
+  page: number,
+  searchFilterParams?: SearchFilterParams
 ): Promise<ISearchResults> => {
   const encodedTerms = encodeURI(searchTerms);
 
@@ -65,7 +66,10 @@ const getResults = async (
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
     routes.sireneOuverte.rechercheUniteLegale;
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}`;
+  let url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
+    searchFilterParams?.toURI() || ''
+  }`;
+
   const response = await httpGet(url, { timeout: constants.timeout.long });
 
   const results = (response.data || []) as any;
@@ -90,19 +94,31 @@ const mapToDomainObjectNew = (
     resultCount: total_results,
     pageCount: total_pages,
     results: results.map((result: ISireneOuverteUniteLegaleResultat) => {
+      const {
+        siege: {
+          complement_adresse,
+          numero_voie,
+          indice_repetition,
+          type_voie,
+          libelle_voie,
+          code_postal,
+          libelle_commune,
+        },
+      } = result;
+
       return {
         siren: result.siren,
         siret: result.siege.siret,
         estActive: result.etat_administratif === 'A',
-        adresse: formatAdresse(
-          result.siege.complement_adresse || '',
-          result.siege.numero_voie,
-          result.siege.indice_repetition,
-          result.siege.type_voie,
-          result.siege.libelle_voie,
-          result.siege.code_postal,
-          result.siege.libelle_commune
-        ),
+        adresse: formatAdresse({
+          complement: complement_adresse,
+          numeroVoie: numero_voie,
+          indiceRepetition: indice_repetition,
+          typeVoie: type_voie,
+          libelleVoie: libelle_voie,
+          codePostal: code_postal,
+          libelleCommune: libelle_commune,
+        }),
         latitude: result.siege.latitude || 0,
         longitude: result.siege.longitude || 0,
         nomComplet: result.nom_complet || 'Nom inconnu',

@@ -1,4 +1,4 @@
-import { PrintNever } from '../print-visibility';
+import { PrintNever } from '../../components-ui/print-visibility';
 
 const DownloadManager = () => (
   <PrintNever>
@@ -22,6 +22,7 @@ const DownloadManager = () => (
                     <div>
                       <span x-text="'justificatif_'+item.siren+'.pdf'"></span>
                     </div>
+                    <div>
                       <span x-bind:class="item.status+' tag'">
                         <template x-if="item.isPending">
                           <span>
@@ -43,6 +44,12 @@ const DownloadManager = () => (
                         <button class="action" @click="$store.downloadManager.retryDownload(item.siren, item.slug)">réessayer</button>
                       </template>
                     </div>
+                    <div>
+                      <template x-if="item.status==='aborted'">
+                        <i class="inpi-warning">Le PDF de l'Inpi ne fonctionne pas toujours pour les entités avec un grand nombre d’établissements. Dans ce cas, contactez <a href="https://www.inpi.fr/contactez-nous">l’Inpi</a> .</i>
+                      </template>
+                    </div>
+                  </div>
                   <button class="close" @click="$store.downloadManager.deleteDownload(item.slug)">✖︎</button>
                 </li>
               </template>
@@ -93,6 +100,13 @@ const DownloadManager = () => (
         color: #666;
         border-radius: 3px;
       }
+
+      #download-manager i.inpi-warning {
+        font-size: 0.8rem;
+        line-height: 0.9rem;
+        margin: 5px auto;
+      }
+
       #download-manager .tag.aborted {
         color: #914141;
         background-color: #ffe5e5;

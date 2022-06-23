@@ -45,11 +45,12 @@ const Meta: React.FC<IProps> = ({
               url: '/images/linkedin.jpg',
               width: 1200,
               height: 627,
-              alt: 'api.gouv.fr',
+              alt: 'annuaire-entreprises.data.gouv.fr',
             },
           ],
           site_name: SITE_NAME,
         }}
+        noindex={noIndex}
       />
       <Head>
         {/* weird stuff going on with jsx and my kitchen recipe in _document
@@ -61,14 +62,6 @@ const Meta: React.FC<IProps> = ({
 
           {''}
         </title>
-
-        {/* custom no index as NextSEO noindex was broken */}
-        {noIndex && (
-          <>
-            <meta name="robots" content="noindex" />
-            <meta name="googlebot" content="noindex" />
-          </>
-        )}
 
         <meta char-set="utf-8" />
         <meta

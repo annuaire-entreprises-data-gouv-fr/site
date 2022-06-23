@@ -11,12 +11,12 @@ import {
   formatIntFr,
 } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
-import BreakPageForPrint from '../print-break-page';
-import ButtonLink from '../button';
-import { Closed, download, Open } from '../icon';
+import BreakPageForPrint from '../../components-ui/print-break-page';
+import ButtonLink from '../../components-ui/button';
+import { Closed, download, Open } from '../../components-ui/icon';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
-import { PrintNever } from '../print-visibility';
+import { PrintNever } from '../../components-ui/print-visibility';
 import { IImmatriculationRNM } from '../../models/immatriculation/rnm';
 
 interface IProps {
@@ -80,7 +80,7 @@ const ImmatriculationRNM: React.FC<IProps> = ({
 
   return (
     <>
-      {immatriculation.downloadlink && (
+      {immatriculation.downloadLink && (
         <>
           <Section
             id="rnm"
@@ -104,14 +104,14 @@ const ImmatriculationRNM: React.FC<IProps> = ({
               <div className="layout-center">
                 <ButtonLink
                   target="_blank"
-                  to={`${immatriculation.downloadlink}?format=pdf`}
+                  to={`${immatriculation.downloadLink}`}
                 >
                   {download} Télécharger le justificatif
                 </ButtonLink>
                 <div className="separator" />
                 <ButtonLink
                   target="_blank"
-                  to={`${immatriculation.downloadlink}?format=html`}
+                  to={`${immatriculation.siteLink}`}
                   alt
                 >
                   ⇢ Voir la fiche sur le site de CMA France

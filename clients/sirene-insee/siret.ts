@@ -1,5 +1,5 @@
 import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
-import { inseeClientGet, INSEE_CREDENTIALS } from '.';
+import { inseeClientGet, InseeClientOptions } from '.';
 import constants from '../../models/constants';
 import {
   createDefaultEtablissement,
@@ -58,6 +58,9 @@ interface IInseeEtablissement {
     codePostalEtablissement: string;
     libelleCommuneEtablissement: string;
     libellePaysEtrangerEtablissement?: string;
+    distributionSpecialeEtablissement: string;
+    codeCedexEtablissement: string;
+    libelleCedexEtablissement: string;
   };
   uniteLegale: IInseeetablissementUniteLegale;
 }
@@ -84,7 +87,7 @@ interface IInseeetablissementUniteLegale {
 }
 
 const getAllEtablissementsFactory =
-  (credential: INSEE_CREDENTIALS) =>
+  (options: InseeClientOptions) =>
   async (siren: string, page = 1): Promise<IEtablissementsList> => {
     const etablissementsPerPage = constants.resultsPerPage.etablissements;
     const cursor = Math.max(page - 1, 0) * etablissementsPerPage;
@@ -94,10 +97,11 @@ const getAllEtablissementsFactory =
         siren +
         `&nombre=${etablissementsPerPage}` +
         `&debut=${cursor}`,
-      credential
+      options
     );
 
-    const { header, etablissements } = response as IInseeEtablissementsResponse;
+    const { header, etablissements } =
+      response.data as IInseeEtablissementsResponse;
 
     return {
       currentEtablissementPage: page,
@@ -109,14 +113,14 @@ const getAllEtablissementsFactory =
   };
 
 const getEtablissementFactory =
-  (credential: INSEE_CREDENTIALS) => async (siret: Siret) => {
+  (options: InseeClientOptions) => async (siret: Siret) => {
     const response = await inseeClientGet(
       routes.sireneInsee.siret + siret,
-      credential
+      options
     );
 
     const { etablissement, etablissements } =
-      response as IInseeEtablissementResponse;
+      response.data as IInseeEtablissementResponse;
 
     if (!etablissement && etablissements) {
       if (etablissements.length === 1) {
@@ -131,14 +135,16 @@ const getEtablissementFactory =
   };
 
 const getSiegeFactory =
-  (credential: INSEE_CREDENTIALS) =>
+  (options: InseeClientOptions) =>
   async (siren: Siren): Promise<IEtablissement> => {
-    const response = (await inseeClientGet(
+    const response = await inseeClientGet(
       routes.sireneInsee.siege + siren,
-      credential
-    )) as IInseeEtablissementResponse;
+      options
+    );
 
-    return mapEtablissementToDomainObject(response.etablissements[0]);
+    const { etablissements } = response.data as IInseeEtablissementResponse;
+
+    return mapEtablissementToDomainObject(etablissements[0]);
   };
 
 export const mapEtablissementToDomainObject = (
@@ -195,6 +201,20 @@ export const mapEtablissementToDomainObject = (
 
   const defaultEtablissement = createDefaultEtablissement();
 
+  const {
+    complementAdresseEtablissement,
+    numeroVoieEtablissement,
+    indiceRepetitionEtablissement,
+    typeVoieEtablissement,
+    libelleVoieEtablissement,
+    codePostalEtablissement,
+    libelleCommuneEtablissement,
+    libellePaysEtrangerEtablissement,
+    distributionSpecialeEtablissement,
+    codeCedexEtablissement,
+    libelleCedexEtablissement,
+  } = adresseEtablissement;
+
   return {
     ...defaultEtablissement,
     siren: extractSirenFromSiret(siret),
@@ -218,16 +238,19 @@ export const mapEtablissementToDomainObject = (
       trancheEffectifsEtablissement,
       anneeEffectifsEtablissement
     ),
-    adresse: formatAdresse(
-      adresseEtablissement.complementAdresseEtablissement,
-      adresseEtablissement.numeroVoieEtablissement,
-      adresseEtablissement.indiceRepetitionEtablissement,
-      adresseEtablissement.typeVoieEtablissement,
-      adresseEtablissement.libelleVoieEtablissement,
-      adresseEtablissement.codePostalEtablissement,
-      adresseEtablissement.libelleCommuneEtablissement,
-      adresseEtablissement.libellePaysEtrangerEtablissement
-    ),
+    adresse: formatAdresse({
+      complement: complementAdresseEtablissement,
+      numeroVoie: numeroVoieEtablissement,
+      indiceRepetition: indiceRepetitionEtablissement,
+      typeVoie: typeVoieEtablissement,
+      libelleVoie: libelleVoieEtablissement,
+      codePostal: codePostalEtablissement,
+      libelleCommune: libelleCommuneEtablissement,
+      distributionSpeciale: distributionSpecialeEtablissement,
+      codeCedex: codeCedexEtablissement,
+      libelleCommuneCedex: libelleCedexEtablissement,
+      pays: libellePaysEtrangerEtablissement,
+    }),
   };
 };
 
@@ -235,22 +258,32 @@ export const mapEtablissementToDomainObject = (
 // public methods
 //=================
 
-export const getAllEtablissementsInsee = getAllEtablissementsFactory(
-  INSEE_CREDENTIALS.DEFAULT
-);
+export const getAllEtablissementsInsee = getAllEtablissementsFactory({
+  useCache: true,
+  useFallback: false,
+});
 
-export const getAllEtablissementsInseeWithFallbackCredentials =
-  getAllEtablissementsFactory(INSEE_CREDENTIALS.FALLBACK);
+export const getAllEtablissementsInseeFallback = getAllEtablissementsFactory({
+  useCache: true,
+  useFallback: true,
+});
 
-export const getEtablissementInsee = getEtablissementFactory(
-  INSEE_CREDENTIALS.DEFAULT
-);
+export const getEtablissementInsee = getEtablissementFactory({
+  useCache: true,
+  useFallback: false,
+});
 
-export const getEtablissementInseeWithFallbackCredentials =
-  getEtablissementFactory(INSEE_CREDENTIALS.FALLBACK);
+export const getEtablissementInseeFallback = getEtablissementFactory({
+  useCache: true,
+  useFallback: true,
+});
 
-export const getSiegeInsee = getSiegeFactory(INSEE_CREDENTIALS.DEFAULT);
+export const getSiegeInsee = getSiegeFactory({
+  useCache: true,
+  useFallback: false,
+});
 
-export const getSiegeInseeWithFallbackCredentials = getSiegeFactory(
-  INSEE_CREDENTIALS.FALLBACK
-);
+export const getSiegeInseeFallback = getSiegeFactory({
+  useCache: true,
+  useFallback: true,
+});

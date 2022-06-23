@@ -20,12 +20,15 @@ import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import isUserAgentABot from '../../utils/user-agent';
 import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
 import { shouldNotIndex } from '../../utils/helpers/checks';
+import UsefulShortcuts from '../../components/useful-shortcuts';
+import MatomoEventRedirected from '../../components/matomo-event/search-redirected';
 
 interface IProps {
   uniteLegale: IUniteLegale;
+  redirected: true;
 }
 
-const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
+const UniteLegalePage: React.FC<IProps> = ({ uniteLegale, redirected }) => (
   <Page
     small={true}
     title={`${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
@@ -36,6 +39,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
     description={`Toutes les informations officielles sur ${uniteLegale.nomComplet} :  Siren, Siret, NIC, APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, conventions collectives...`}
     noIndex={shouldNotIndex(uniteLegale)}
   >
+    {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
     <StructuredDataBreadcrumb siren={uniteLegale.siren} />
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
@@ -45,6 +49,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale }) => (
           {uniteLegale.association && uniteLegale.association.id && (
             <AssociationSection uniteLegale={uniteLegale} />
           )}
+          <UsefulShortcuts uniteLegale={uniteLegale} />
           {uniteLegale.siege && (
             <EtablissementSection
               uniteLegale={uniteLegale}
@@ -85,6 +90,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug as string;
   const pageParam = (context.query.page || '') as string;
+  const redirected = !!context.query.redirected;
 
   const siren = extractSiren(slug);
   if (siren.length === 14) {
@@ -113,6 +119,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {
         uniteLegale,
+        redirected,
       },
     };
   } catch (e: any) {

@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import ButtonLink from '../../components/button';
+import ButtonLink from '../../components-ui/button';
 import Page from '../../layouts';
 
 const Forbidden: React.FC = () => {

@@ -16,16 +16,24 @@ import HiddenH1 from '../../components/a11y-components/hidden-h1';
 import StructuredDataSearchAction from '../../components/structured-data/search';
 import { isAPINotResponding } from '../../models/api-not-responding';
 import { SearchErrorExplanations } from '../../components/error-explanations';
+import SearchFilterParams, { IParams } from '../../models/search-filter-params';
+import MatomoEventSearchClick from '../../components/matomo-event/search-click';
 
 interface IProps {
   searchTerm: string;
   results: ISearchResults;
+  searchFilterParams: IParams;
 }
 
-const MapSearchResultPage: React.FC<IProps> = ({ results, searchTerm }) => (
+const MapSearchResultPage: React.FC<IProps> = ({
+  results,
+  searchTerm,
+  searchFilterParams,
+}) => (
   <Page
     small={true}
     currentSearchTerm={searchTerm}
+    searchFilterParams={searchFilterParams}
     map={true}
     noIndex={true}
     title="Rechercher une entreprise"
@@ -58,6 +66,7 @@ const MapSearchResultPage: React.FC<IProps> = ({ results, searchTerm }) => (
                   currentPage={results.currentPage}
                   querySuffix={`terme=${searchTerm}`}
                   compact={true}
+                  searchFilterParams={searchFilterParams}
                 />
               </div>
             </div>
@@ -124,17 +133,18 @@ const MapSearchResultPage: React.FC<IProps> = ({ results, searchTerm }) => (
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // get params from query string
-  const searchTermParam = (context.query.terme || '') as string;
+  const searchTerm = (context.query.terme || '') as string;
   const pageParam = (context.query.page || '') as string;
-
   const page = parseIntWithDefaultValue(pageParam, 1);
+  const searchFilterParams = new SearchFilterParams(context.query);
 
   try {
-    const results = (await search(searchTermParam, page)) || {};
+    const results = (await search(searchTerm, page, searchFilterParams)) || {};
     return {
       props: {
         results,
-        searchTerm: searchTermParam,
+        searchTerm,
+        searchFilterParams: searchFilterParams.toJSON(),
       },
     };
   } catch (e: any) {

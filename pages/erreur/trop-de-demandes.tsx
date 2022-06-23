@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import ButtonLink from '../../components/button';
+import ButtonLink from '../../components-ui/button';
 import Page from '../../layouts';
 
 const TooManyRequest: React.FC = () => {
   return (
-    <Page small={true} title="Accès refusé">
+    <Page small={true} title="Accès refusé" noIndex={true}>
       <h1>Nous avons reçu trop de demandes de votre part 📈</h1>
       <p>
         Notre site a reçu trop de demandes de la part de votre adresse IP en un

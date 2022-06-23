@@ -10,6 +10,12 @@ export const libelleFromCodeNaf = (codeNaf = '', addCode = true) => {
   return addCode && codeNaf ? `${codeNaf} - ${label}` : label;
 };
 
+export const libelleFromCodeSectionNaf = (codeSectionNaf = '') => {
+  //@ts-ignore
+  const label = codeSectionNaf[codeSectionNaf] || 'Activité inconnue';
+  return label;
+};
+
 export const libelleFromCodeEffectif = (
   codeEffectif: string,
   anneeEffectif?: string,
@@ -34,7 +40,9 @@ export const libelleFromCategoriesJuridiques = (categorie: string) =>
   //@ts-ignore
   categoriesJuridiques[categorie] || null;
 
-export const libelleFromTypeVoie = (codeVoie: string) => {
+export const libelleFromTypeVoie = (
+  codeVoie: string | null | undefined = ''
+) => {
   //@ts-ignore
   return codesVoies[codeVoie] || codeVoie;
 };

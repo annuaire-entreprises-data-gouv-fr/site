@@ -1,3 +1,4 @@
 export interface IImmatriculation {
-  downloadlink: string;
+  downloadLink: string;
+  siteLink: string;
 }
