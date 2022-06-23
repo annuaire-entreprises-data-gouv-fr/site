@@ -57,10 +57,12 @@ interface IInseeEtablissement {
     libelleVoieEtablissement: string;
     codePostalEtablissement: string;
     libelleCommuneEtablissement: string;
-    libellePaysEtrangerEtablissement?: string;
     distributionSpecialeEtablissement: string;
     codeCedexEtablissement: string;
     libelleCedexEtablissement: string;
+    libelleCommuneEtrangerEtablissement: string;
+    codePaysEtrangerEtablissement: string;
+    libellePaysEtrangerEtablissement: string;
   };
   uniteLegale: IInseeetablissementUniteLegale;
 }
@@ -209,10 +211,12 @@ export const mapEtablissementToDomainObject = (
     libelleVoieEtablissement,
     codePostalEtablissement,
     libelleCommuneEtablissement,
-    libellePaysEtrangerEtablissement,
     distributionSpecialeEtablissement,
     codeCedexEtablissement,
     libelleCedexEtablissement,
+    libelleCommuneEtrangerEtablissement,
+    codePaysEtrangerEtablissement,
+    libellePaysEtrangerEtablissement,
   } = adresseEtablissement;
 
   return {
@@ -249,7 +253,9 @@ export const mapEtablissementToDomainObject = (
       distributionSpeciale: distributionSpecialeEtablissement,
       codeCedex: codeCedexEtablissement,
       libelleCommuneCedex: libelleCedexEtablissement,
-      pays: libellePaysEtrangerEtablissement,
+      libelleCommuneEtranger: libelleCommuneEtrangerEtablissement,
+      codePaysEtranger: codePaysEtrangerEtablissement,
+      libellePaysEtranger: libellePaysEtrangerEtablissement,
     }),
   };
 };

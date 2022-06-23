@@ -133,7 +133,9 @@ interface IAdressFields {
   libelleCommune?: string | null | undefined;
   codeCedex?: string | null | undefined;
   libelleCommuneCedex?: string | null | undefined;
-  pays?: string | null | undefined;
+  libelleCommuneEtranger?: string | null | undefined;
+  codePaysEtranger?: string | null | undefined;
+  libellePaysEtranger?: string | null | undefined;
 }
 
 export const formatAdresse = ({
@@ -147,7 +149,9 @@ export const formatAdresse = ({
   libelleCommune = '',
   codeCedex = '',
   libelleCommuneCedex = '',
-  pays = '',
+  libelleCommuneEtranger = '',
+  codePaysEtranger = '',
+  libellePaysEtranger = '',
 }: IAdressFields) => {
   if (
     !complement &&
@@ -158,7 +162,9 @@ export const formatAdresse = ({
     !codePostal &&
     !codeCedex &&
     !libelleVoie &&
-    !pays
+    !libelleCommuneEtranger &&
+    !codePaysEtranger &&
+    !libellePaysEtranger
   ) {
     return '';
   }
@@ -173,8 +179,12 @@ export const formatAdresse = ({
     wrapWord(libelleVoie, ', '),
     wrapWord(distributionSpeciale, ', '),
     wrapWord(codePostal || codeCedex),
-    wrapWord(libelleCommune || libelleCommuneCedex, '', true),
-    pays ? ', ' + pays : '',
+    wrapWord(
+      libelleCommune || libelleCommuneCedex || libelleCommuneEtranger,
+      '',
+      true
+    ),
+    libellePaysEtranger ? `, ${wrapWord(libellePaysEtranger, '', true)}` : '',
   ].join('');
 };
 
