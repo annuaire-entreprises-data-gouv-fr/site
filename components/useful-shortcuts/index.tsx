@@ -6,16 +6,12 @@ import { IUniteLegale } from '../../models';
 const ShortcutsSection: React.FC<{
   shortcuts: { label: string; url: string; external?: boolean }[];
   title: string;
-  titleIcon?: string;
-  backgroundDark?: boolean;
-}> = ({ shortcuts, title, titleIcon, backgroundDark = false }) => (
-  <div className={`container ${backgroundDark ? 'dark' : ''}`}>
+  shortcutCount: number;
+}> = ({ shortcuts, title, shortcutCount }) => (
+  <div className="container">
     {title && (
       <div>
-        <b className="title">
-          {titleIcon && <span className={titleIcon}>&nbsp;</span>}
-          {title}
-        </b>
+        <b className="title">{title}</b>
       </div>
     )}
     {shortcuts.map((shortcut) => (
@@ -34,15 +30,11 @@ const ShortcutsSection: React.FC<{
       .container {
         border: 2px solid #dfdff1;
         padding: 15px;
-        min-width: 200px;
-        max-width: 300px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: calc(${Math.round(100 / shortcutCount)}% - 15px);
       }
-      .container.dark {
-        background-color: #dfdff1;
-      }
-      .container.dark > div > b {
-        color: #000091;
-      }
+
       .container > div {
         margin-bottom: 10px;
       }
@@ -50,6 +42,7 @@ const ShortcutsSection: React.FC<{
       @media only screen and (min-width: 1px) and (max-width: 1100px) {
         .container {
           max-width: 100%;
+          min-width: 250px;
           flex-grow: 1;
         }
       }
@@ -72,10 +65,6 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
           url: `/entreprise/${uniteLegale.siren}#etablissements`,
           label: 'Liste des établissements',
         },
-        {
-          url: `/divers/${uniteLegale.siren}`,
-          label: 'Convention(s) collective(s)',
-        },
       ],
     },
     {
@@ -92,7 +81,25 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
       ],
     },
     {
-      title: 'Tribunaux de commerce (si applicable)',
+      title: 'Liens utiles',
+      shortcuts: [
+        {
+          url: `https://mon-entreprise.urssaf.fr/g%C3%A9rer/${uniteLegale.siren}`,
+          label: 'Simulez impôts, salaires & dividendes',
+          external: true,
+        },
+        {
+          url: `https://place-des-entreprises.beta.gouv.fr/`,
+          label: 'Besoin d’aide ? Échangez avec un conseiller',
+          external: true,
+        },
+      ],
+    },
+  ];
+
+  if (!uniteLegale.estEntrepreneurIndividuel && !uniteLegale.association) {
+    data.splice(2, 0, {
+      title: 'Tribunaux de commerce',
       shortcuts: [
         {
           url: `/dirigeants/${uniteLegale.siren}#beneficiaires`,
@@ -107,25 +114,8 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label: 'Procédure(s) collective(s)',
         },
       ],
-    },
-    {
-      title: 'Liens utiles',
-      titleIcon: 'fr-fi-account-line',
-      backgroundDark: true,
-      shortcuts: [
-        {
-          url: `https://mon-entreprise.urssaf.fr/g%C3%A9rer/${uniteLegale.siren}`,
-          label: 'Simulez impôts, salaires & dividendes',
-          external: true,
-        },
-        {
-          url: `https://place-des-entreprises.beta.gouv.fr/`,
-          label: 'Besoin d’aide ? Faites-vous rappeler par un conseiller',
-          external: true,
-        },
-      ],
-    },
-  ];
+    });
+  }
 
   return (
     <PrintNever>
@@ -135,9 +125,8 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
             <ShortcutsSection
               key={sectionData.title}
               title={sectionData.title}
-              // titleIcon={sectionData.titleIcon}
               shortcuts={sectionData.shortcuts}
-              // backgroundDark={sectionData.backgroundDark}
+              shortcutCount={data.length}
             />
           ))}
         </div>
@@ -148,7 +137,12 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
           display: flex;
           justify-content: space-between;
           gap: 15px;
-          flex-wrap: wrap;
+        }
+
+        @media only screen and (min-width: 1px) and (max-width: 1100px) {
+          .wrapper {
+            flex-wrap: wrap;
+          }
         }
       `}</style>
     </PrintNever>
