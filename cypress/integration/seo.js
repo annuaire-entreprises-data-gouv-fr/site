@@ -32,4 +32,9 @@ describe('SEO Index or noindex', () => {
     cy.visit('/entreprise/883010316');
     cy.get('meta[name="robots"][content*="noindex"]').should('have.length', 1);
   });
+
+  it('cannot index protected siren entreprise page', () => {
+    cy.visit('/entreprise/907839872');
+    cy.get('meta[name="robots"][content*="noindex"]').should('have.length', 1);
+  });
 });

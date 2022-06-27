@@ -32,6 +32,10 @@ export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
     return true;
   }
   if (!uniteLegale.estEntrepriseCommercialeDiffusible) {
+    // we dont index protected siren entities
+    return true;
+  }
+  if (!uniteLegale.estEntrepriseCommercialeDiffusible) {
     // we dont index entreprise that personnaly opposed diffusion
     return true;
   }
