@@ -9,19 +9,23 @@ redisClient.on('error', (err) =>
 
 redisClient.connect();
 
-const redisStorage = buildStorage({
-  async find(key: string) {
-    const result = await redisClient.get(`axios-cache:${key}`);
-    return result ? JSON.parse(result) : result;
-  },
+const redisStorage = (cache_timeout: number) =>
+  buildStorage({
+    async find(key: string) {
+      const result = await redisClient.get(`axios-cache:${key}`);
+      return result ? JSON.parse(result) : result;
+    },
 
-  async set(key: string, value: any) {
-    await redisClient.set(`axios-cache:${key}`, JSON.stringify(value));
-  },
+    async set(key: string, value: any) {
+      const fullKey = `axios-cache:${key}`;
+      await redisClient.set(fullKey, JSON.stringify(value), {
+        PX: cache_timeout,
+      });
+    },
 
-  async remove(key: string) {
-    await redisClient.del(`axios-cache:${key}`);
-  },
-});
+    async remove(key: string) {
+      await redisClient.del(`axios-cache:${key}`);
+    },
+  });
 
 export default redisStorage;

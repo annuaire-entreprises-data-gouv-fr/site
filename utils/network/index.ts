@@ -5,7 +5,7 @@ import { CacheRequestConfig, setupCache } from 'axios-cache-interceptor';
 import { logInterceptor, addStartTimeInterceptor } from './log-interceptor';
 import errorInterceptor from './error-interceptor';
 
-const DEFAULT_AGE = 1000 * 60 * 15;
+export const CACHE_TIMEOUT = 1000 * 60 * 15;
 
 /**
  * Returns a regular axios instance
@@ -27,9 +27,9 @@ export const axiosInstanceFactory = () => {
  */
 export const cachedAxiosInstanceFactory = () => {
   const cachedInstance = setupCache(Axios.create(), {
-    storage: redisStorage,
+    storage: redisStorage(CACHE_TIMEOUT),
     // ignore cache-control headers as some API like sirene return 'no-cache' headers
-    headerInterpreter: () => DEFAULT_AGE,
+    headerInterpreter: () => CACHE_TIMEOUT,
     debug: console.log,
   });
 
@@ -77,7 +77,7 @@ const httpGet = async (
 
 export const defaultCacheConfig = {
   // 15 minutes lifespan as average session is ~ 3 min.
-  ttl: DEFAULT_AGE,
+  ttl: CACHE_TIMEOUT,
 
   // only cache 200
   cachePredicate: {
