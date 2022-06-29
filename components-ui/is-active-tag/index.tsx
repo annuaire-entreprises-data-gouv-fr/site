@@ -1,24 +1,45 @@
 import React from 'react';
+import { IETATADMINSTRATIF } from '../../models/etat-administratif';
 import InformationTooltip from '../information-tooltip';
 import { Tag } from '../tag';
 
+const etatClass = (etat: IETATADMINSTRATIF) => {
+  switch (etat) {
+    case IETATADMINSTRATIF.ACTIF:
+      return 'open';
+    case IETATADMINSTRATIF.CESSEE:
+    case IETATADMINSTRATIF.FERME:
+      return 'closed';
+    case IETATADMINSTRATIF.NONDIFF:
+    case IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT:
+    default:
+      return 'unknown';
+  }
+};
+
+const EtatTag: React.FC<{
+  etat: IETATADMINSTRATIF;
+}> = ({ etat }) => <Tag className={etatClass(etat)}>{etat}</Tag>;
+
 const IsActiveTag: React.FC<{
-  isActive: boolean | null;
-  isUniteLegale?: boolean;
-}> = ({ isActive, isUniteLegale = false }) => (
+  etat: IETATADMINSTRATIF;
+}> = ({ etat }) => (
   <>
-    {isActive === null ? (
+    {etat === IETATADMINSTRATIF.INCONNU ||
+    etat === IETATADMINSTRATIF.NONDIFF ? (
       <InformationTooltip
         label="Nous n’avons pas les
             informations nécessaires pour savoir si cette entité est en activité
             ou si elle est fermée."
       >
-        <Tag className="unknown">Etat inconnu</Tag>
+        <EtatTag etat={etat} />
       </InformationTooltip>
-    ) : isActive ? (
-      <Tag className="open">en activité</Tag>
+    ) : etat === IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT ? (
+      <InformationTooltip label="Cette entité est active, mais tous ses établissements sont fermés.">
+        <EtatTag etat={etat} />
+      </InformationTooltip>
     ) : (
-      <Tag className="closed">{isUniteLegale ? 'cessée' : 'fermé'}</Tag>
+      <EtatTag etat={etat} />
     )}
   </>
 );

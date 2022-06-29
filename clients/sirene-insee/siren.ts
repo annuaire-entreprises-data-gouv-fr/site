@@ -4,6 +4,7 @@ import {
   createDefaultUniteLegale,
   IUniteLegale,
 } from '../../models';
+import { IETATADMINSTRATIF } from '../../models/etat-administratif';
 import { IEtatCivil } from '../../models/immatriculation/rncs';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import {
@@ -136,7 +137,6 @@ const mapToDomainObject = (
     //@ts-ignore
     siege.siret = siren + nicSiegeUniteLegale;
     siege.nic = nicSiegeUniteLegale;
-    siege.estActif = null;
     siege.dateCreation = dateDebut;
     siege.activitePrincipale = activitePrincipaleUniteLegale;
     siege.libelleActivitePrincipale = libelleFromCodeNaf(

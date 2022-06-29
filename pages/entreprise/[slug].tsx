@@ -10,10 +10,7 @@ import Title, { FICHE } from '../../components/title-section';
 import EtablissementSection from '../../components/etablissement-section';
 
 import { NonDiffusibleSection } from '../../components/non-diffusible';
-import {
-  getUniteLegaleFromSlugForGoodBot,
-  getUniteLegaleWithRNAFromSlug,
-} from '../../models/unite-legale';
+import { getUniteLegaleFromSlug } from '../../models/unite-legale';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import AssociationSection from '../../components/association-section';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
@@ -110,11 +107,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const isABot = isUserAgentABot(context.req);
 
   try {
-    const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
+    const isBot = !!forceSireneOuverteForDebug || isABot;
 
-    const uniteLegale = forceUseOfSireneOuverte
-      ? await getUniteLegaleFromSlugForGoodBot(siren, page)
-      : await getUniteLegaleWithRNAFromSlug(siren, page);
+    const uniteLegale = await getUniteLegaleFromSlug(siren, {
+      page,
+      isBot,
+      useRna: true,
+    });
 
     return {
       props: {

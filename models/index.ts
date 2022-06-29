@@ -1,5 +1,6 @@
 import { IdRna } from '../utils/helpers/id-rna';
 import { Siren, Siret } from '../utils/helpers/siren-and-siret';
+import { IETATADMINSTRATIF } from './etat-administratif';
 import { IEtatCivil } from './immatriculation/rncs';
 
 /** COMMON TYPES */
@@ -19,6 +20,7 @@ export interface IEtablissement {
   siret: Siret;
   oldSiret: Siret;
   nic: string;
+  etatAdministratif: IETATADMINSTRATIF;
   estActif: boolean | null;
   estSiege: boolean;
   estDiffusible: boolean; // diffusion des données autorisée - uniquement les EI
@@ -54,6 +56,7 @@ export interface IUniteLegale extends IEtablissementsList {
   dateDebutActivite: string;
   estDiffusible: boolean; // diffusion des données autorisée - uniquement les EI
   estEntrepriseCommercialeDiffusible: boolean; // opposition du dirigeant - uniquement les entreprises commerciales
+  etatAdministratif: IETATADMINSTRATIF;
   estActive: boolean | null;
   estEntrepreneurIndividuel: boolean;
   estEss: boolean;
@@ -82,6 +85,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     siret: '',
     //@ts-ignore
     oldSiret: '',
+    etatAdministratif: IETATADMINSTRATIF.INCONNU,
     estActif: null,
     estSiege: false,
     enseigne: null,
@@ -110,6 +114,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     siege,
     estDiffusible: true,
     estEntrepriseCommercialeDiffusible: true,
+    etatAdministratif: IETATADMINSTRATIF.INCONNU,
     estActive: null,
     estEntrepreneurIndividuel: false,
     estEss: false,

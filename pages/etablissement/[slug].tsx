@@ -6,10 +6,7 @@ import { IEtablissement, IUniteLegale } from '../../models';
 import EtablissementSection from '../../components/etablissement-section';
 import Title, { FICHE } from '../../components/title-section';
 import { NonDiffusibleSection } from '../../components/non-diffusible';
-import {
-  getEtablissementWithUniteLegaleFromSlug,
-  getEtablissementWithUniteLegaleFromSlugForGoodBot,
-} from '../../models/etablissement';
+import { getEtablissementWithUniteLegaleFromSlug } from '../../models/etablissement';
 import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
 import isUserAgentABot from '../../utils/user-agent';
@@ -73,10 +70,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const isABot = isUserAgentABot(context.req);
 
   try {
-    const forceUseOfSireneOuverte = !!forceSireneOuverteForDebug || isABot;
-    const etablissementWithUniteLegale = forceUseOfSireneOuverte
-      ? await getEtablissementWithUniteLegaleFromSlugForGoodBot(siret)
-      : await getEtablissementWithUniteLegaleFromSlug(siret);
+    const isBot = !!forceSireneOuverteForDebug || isABot;
+    const etablissementWithUniteLegale =
+      await getEtablissementWithUniteLegaleFromSlug(siret, isBot);
 
     return {
       props: {

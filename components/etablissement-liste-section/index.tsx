@@ -60,7 +60,7 @@ const EtablissementListeSection: React.FC<{
               <>
                 {etablissement.estSiege && <Tag>siège social</Tag>}
                 {!etablissement.estActif && (
-                  <IsActiveTag isActive={etablissement.estActif} />
+                  <IsActiveTag etat={etablissement.etatAdministratif} />
                 )}
                 {!etablissement.estDiffusible && <Tag>non-diffusible</Tag>}
               </>,

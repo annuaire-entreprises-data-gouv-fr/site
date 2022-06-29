@@ -52,15 +52,9 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
               </a>,
               etablissement.adresse,
               <>
-                {!uniteLegale.estDiffusible ? (
-                  <Tag>non-diffusible</Tag>
-                ) : (
-                  <>
-                    {etablissement.estSiege && <Tag>siège social</Tag>}
-                    {!etablissement.estActif && (
-                      <IsActiveTag isActive={etablissement.estActif} />
-                    )}
-                  </>
+                {etablissement.estSiege && <Tag>siège social</Tag>}
+                {!etablissement.estActif && (
+                  <IsActiveTag etat={etablissement.etatAdministratif} />
                 )}
               </>,
               <AvisSituationLink

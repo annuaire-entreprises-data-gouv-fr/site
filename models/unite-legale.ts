@@ -25,36 +25,45 @@ import {
   logSireneOuvertefailed,
 } from '../utils/sentry/helpers';
 import { getAssociation } from './association';
+import { getEtatAdministratifUniteLegale } from './etat-administratif';
 
 /**
  * List of siren whose owner refused diffusion
  */
 const protectedSirenPath = 'public/protected-siren.txt';
 const protectedSiren = readFileSync(protectedSirenPath, 'utf8').split('\n');
+const isProtectedSiren = (siren: Siren) => protectedSiren.indexOf(siren) > -1;
 
 /**
- * Return an uniteLegale with RNA if
+ * PUBLIC METHODS
  */
-const getUniteLegaleWithRNAFromSlug = async (slug: string, page = 1) => {
-  const uniteLegale = await getUniteLegaleFromSlug(slug, page);
-  if (uniteLegale.association && uniteLegale.association.id) {
+
+interface IUniteLegaleOptions {
+  page?: number;
+  isBot?: boolean;
+  useRna?: boolean;
+}
+
+/**
+ * Return an uniteLegale given an existing siren
+ */
+export const getUniteLegaleFromSlug = async (
+  slug: string,
+  options: IUniteLegaleOptions
+): Promise<IUniteLegale> => {
+  const siren = verifySiren(slug);
+  const { page = 1, isBot = false, useRna = false } = options;
+
+  const uniteLegale = isBot
+    ? await getUniteLegaleForGoodBot(siren, page)
+    : await getUniteLegale(siren, page);
+
+  if (useRna && uniteLegale.association && uniteLegale.association.id) {
     uniteLegale.association = {
       ...(await getAssociation(uniteLegale.association.id, uniteLegale)),
       id: uniteLegale.association.id,
     };
   }
-  return uniteLegale;
-};
-
-/**
- * Return an uniteLegale given an existing siren
- */
-const getUniteLegaleFromSlug = async (
-  slug: string,
-  page = 1
-): Promise<IUniteLegale> => {
-  const siren = verifySiren(slug);
-  const uniteLegale = await getUniteLegale(siren, page);
 
   // only EI
   if (!uniteLegale.estDiffusible) {
@@ -62,10 +71,43 @@ const getUniteLegaleFromSlug = async (
   }
 
   // only entreprise commerciales
-  if (protectedSiren.indexOf(uniteLegale.siren) > -1) {
+  if (isProtectedSiren(uniteLegale.siren)) {
     uniteLegale.estEntrepriseCommercialeDiffusible = false;
   }
+
+  uniteLegale.etatAdministratif = getEtatAdministratifUniteLegale(uniteLegale);
+
   return uniteLegale;
+};
+
+/** =========
+ *  Fetching
+ * ==========
+ * /
+
+/**
+ * For Indexing bot only - Fetch an uniteLegale from SireneOuverte
+ *
+ */
+const getUniteLegaleForGoodBot = async (
+  siren: Siren,
+  page = 1
+): Promise<IUniteLegale> => {
+  try {
+    const uniteLegale = await getUniteLegaleSireneOuverte(siren, page);
+    return uniteLegale;
+  } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      // when not found in siren ouverte, fallback on insee
+      try {
+        return await fetchUniteLegaleFromInsee(siren, page);
+      } catch (ee: any) {
+        // in any Insee error
+        throw new SirenNotFoundError(`Siren ${siren} was not found`);
+      }
+    }
+    throw e;
+  }
 };
 
 /**
@@ -102,34 +144,6 @@ const getUniteLegale = async (
         throw new SirenNotFoundError(message);
       }
     }
-  }
-};
-
-/**
- * Return an uniteLegale from SireneOuverte
- *
- * @param siren
- * @param page
- * @returns
- */
-const getUniteLegaleFromSlugForGoodBot = async (
-  slug: string,
-  page = 1
-): Promise<IUniteLegale> => {
-  const siren = verifySiren(slug);
-  try {
-    return await getUniteLegaleSireneOuverte(siren, page);
-  } catch (e: any) {
-    if (e instanceof HttpNotFound) {
-      // when not found in siren ouverte, fallback on insee
-      try {
-        return await fetchUniteLegaleFromInsee(siren, page);
-      } catch (ee: any) {
-        // in any Insee error
-        throw new SirenNotFoundError(`Siren ${siren} was not found`);
-      }
-    }
-    throw e;
   }
 };
 
@@ -225,10 +239,4 @@ const createNonDiffusibleUniteLegale = (siren: Siren) => {
     'Les informations de cette entité ne sont pas publiques';
 
   return uniteLegale;
-};
-
-export {
-  getUniteLegaleFromSlug,
-  getUniteLegaleWithRNAFromSlug,
-  getUniteLegaleFromSlugForGoodBot,
 };

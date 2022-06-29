@@ -134,17 +134,8 @@ const Title: React.FC<IProps> = ({
       <div>
         <span>unité légale ‣ {formatIntFr(uniteLegale.siren)}</span>
         <span>
-          {!uniteLegale.estDiffusible ? (
-            <>
-              <Tag>Non-diffusible</Tag>
-              <IsActiveTag isActive={null} isUniteLegale={true} />
-            </>
-          ) : (
-            <IsActiveTag
-              isActive={uniteLegale.estActive}
-              isUniteLegale={true}
-            />
-          )}
+          {!uniteLegale.estDiffusible && <Tag>Non-diffusible</Tag>}
+          <IsActiveTag etat={uniteLegale.etatAdministratif} />
         </span>
       </div>
     </div>
