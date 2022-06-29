@@ -1,7 +1,7 @@
 describe('Etat administratif', () => {
   it('Non diffusible"', () => {
     cy.visit('/entreprise/414847962');
-    cy.contains('inconnu (non-diffusible)').should('have.length', 1);
+    cy.contains('état inconnu (non-diffusible)').should('have.length', 1);
   });
 
   it('Diffusible', () => {

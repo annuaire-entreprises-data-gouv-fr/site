@@ -6,7 +6,7 @@ export enum IETATADMINSTRATIF {
   ACTIF = 'en activité',
   ACTIF_ZERO_ETABLISSEMENT = 'en sommeil',
   CESSEE = 'cessée',
-  NONDIFF = 'inconnu (non diffusible)',
+  NONDIFF = 'état inconnu (non-diffusible)',
   FERME = 'fermé',
 }
 
