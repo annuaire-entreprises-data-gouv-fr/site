@@ -63,7 +63,9 @@ const EtablissementPage: React.FC<IProps> = ({
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const siret = context.params.slug as string;
-  const redirected = !!context.query.redirected;
+
+  const referer = context.req.headers.referer;
+  const redirected = !!referer && !!context.query.redirected;
 
   const forceSireneOuverteForDebug = (context.query
     .forceSireneOuverteForDebug || '') as string;

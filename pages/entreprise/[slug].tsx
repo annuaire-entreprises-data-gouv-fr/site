@@ -87,7 +87,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug as string;
   const pageParam = (context.query.page || '') as string;
-  const redirected = !!context.query.redirected;
+
+  const referer = context.req.headers.referer;
+  const redirected = !!referer && !!context.query.redirected;
 
   const siren = extractSiren(slug);
   if (siren.length === 14) {
