@@ -36,7 +36,7 @@ export interface IAnnoncesJO {
 
 const getAnnoncesFromSlug = async (siren: string) => {
   const [uniteLegale, bodacc] = await Promise.all([
-    getUniteLegaleFromSlug(siren),
+    getUniteLegaleFromSlug(siren, {}),
     getAnnoncesBodaccFromSlug(siren),
   ]);
 

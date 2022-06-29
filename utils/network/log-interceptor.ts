@@ -1,5 +1,4 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { CacheAxiosResponse } from 'axios-cache-interceptor';
 import { formatLog } from './format-log';
 
 /**

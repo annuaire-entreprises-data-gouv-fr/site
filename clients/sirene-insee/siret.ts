@@ -18,6 +18,7 @@ import {
   formatAdresse,
   formatEnseigne,
 } from '../../utils/helpers/formatting';
+import { getEtatAdministratifEtablissement } from '../../models/etat-administratif';
 
 interface IInseeEtablissementResponse {
   etablissement: IInseeEtablissement;
@@ -192,13 +193,19 @@ export const mapEtablissementToDomainObject = (
     ) || ''
   );
 
-  const estActif = etatAdministratifEtablissement === 'A';
-
   // get last state change to obtain closing date
   let lastStateChange =
     periodesEtablissement.find(
       (periode) => periode.changementEtatAdministratifEtablissement === true
     ) || periodesEtablissement[0];
+
+  const estActif = etatAdministratifEtablissement === 'A';
+  const estDiffusible = statutDiffusionEtablissement !== 'N';
+  const etatAdministratif = getEtatAdministratifEtablissement(
+    estActif,
+    estDiffusible
+  );
+
   const dateFermeture = !estActif ? lastStateChange.dateDebut : null;
 
   const defaultEtablissement = createDefaultEtablissement();
@@ -235,7 +242,8 @@ export const mapEtablissementToDomainObject = (
     dateDerniereMiseAJour: dateDernierTraitementEtablissement,
     estSiege: !!etablissementSiege,
     estActif,
-    estDiffusible: statutDiffusionEtablissement !== 'N',
+    estDiffusible,
+    etatAdministratif,
     dateFermeture,
     trancheEffectif: trancheEffectifsEtablissement,
     libelleTrancheEffectif: libelleFromCodeEffectif(

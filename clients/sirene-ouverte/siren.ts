@@ -1,5 +1,6 @@
 import { createDefaultUniteLegale, IUniteLegale } from '../../models';
 import constants from '../../models/constants';
+import { IETATADMINSTRATIF } from '../../models/etat-administratif';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import { formatAdresse } from '../../utils/helpers/formatting';
 import { Siren } from '../../utils/helpers/siren-and-siret';

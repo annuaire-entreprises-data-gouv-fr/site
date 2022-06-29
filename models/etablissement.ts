@@ -15,10 +15,7 @@ import {
   Siret,
   verifySiret,
 } from '../utils/helpers/siren-and-siret';
-import {
-  getUniteLegaleFromSlug,
-  getUniteLegaleFromSlugForGoodBot,
-} from './unite-legale';
+import { getUniteLegaleFromSlug } from './unite-legale';
 import {
   logFirstSireneInseefailed,
   logSecondSireneInseefailed,
@@ -30,10 +27,18 @@ import { getGeoLoc } from './geo-loc';
  * Return an etablissement given an existing siret
  */
 const getEtablissementFromSlug = async (
-  slug: string
+  slug: string,
+  options?: { isBot: boolean }
 ): Promise<IEtablissement> => {
   const siret = verifySiret(slug);
-  return getEtablissement(siret);
+
+  const isBot = options?.isBot || false;
+
+  const etablissement = isBot
+    ? await getEtablissementForGoodBot(siret)
+    : await getEtablissement(siret);
+
+  return etablissement;
 };
 
 /**
@@ -74,13 +79,32 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
 };
 
 /**
+ * Return an Etablissement from sirene ouverte
+ */
+const getEtablissementForGoodBot = async (
+  slug: string
+): Promise<IEtablissement> => {
+  try {
+    return await getEtablissementSireneOuverte(slug);
+  } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      throw new SiretNotFoundError(`Siret ${slug} was not found`);
+    }
+    throw e;
+  }
+};
+
+/**
  * Return an Etablissement and the corresponding UniteLegale
  */
 const getEtablissementWithUniteLegaleFromSlug = async (
-  slug: string
+  slug: string,
+  isBot = false
 ): Promise<IEtablissementWithUniteLegale> => {
-  const etablissement = await getEtablissementFromSlug(slug);
-  const uniteLegale = await getUniteLegaleFromSlug(etablissement.siren);
+  const etablissement = await getEtablissementFromSlug(slug, { isBot });
+  const uniteLegale = await getUniteLegaleFromSlug(etablissement.siren, {
+    isBot,
+  });
 
   return { etablissement, uniteLegale };
 };
@@ -102,27 +126,6 @@ const getEtablissementWithLatLongFromSlug = async (
   }
 };
 
-/**
- * Return an Etablissement and the corresponding UniteLegale - calling sirene ouverte first
- */
-const getEtablissementWithUniteLegaleFromSlugForGoodBot = async (
-  slug: string
-): Promise<IEtablissementWithUniteLegale> => {
-  try {
-    const etablissement = await getEtablissementSireneOuverte(slug);
-    const uniteLegale = await getUniteLegaleFromSlugForGoodBot(
-      etablissement.siren
-    );
-
-    return { etablissement, uniteLegale };
-  } catch (e: any) {
-    if (e instanceof HttpNotFound) {
-      throw new SiretNotFoundError(`Siret ${slug} was not found`);
-    }
-    throw e;
-  }
-};
-
 //=========================
 //        API calls
 //=========================
@@ -140,7 +143,6 @@ const createNonDiffusibleEtablissement = (siret: Siret) => {
 
 export {
   getEtablissementWithUniteLegaleFromSlug,
-  getEtablissementWithUniteLegaleFromSlugForGoodBot,
   getEtablissementWithLatLongFromSlug,
   getEtablissementFromSlug,
 };

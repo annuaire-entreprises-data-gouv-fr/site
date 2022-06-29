@@ -23,7 +23,7 @@ export interface IConventions {
 const getConventionCollectivesFromSlug = async (
   slug: string
 ): Promise<IConventions> => {
-  const uniteLegale = await getUniteLegaleFromSlug(slug);
+  const uniteLegale = await getUniteLegaleFromSlug(slug, {});
   const conventionCollectives = await getConventionCollectives(uniteLegale);
   return { uniteLegale, conventionCollectives };
 };

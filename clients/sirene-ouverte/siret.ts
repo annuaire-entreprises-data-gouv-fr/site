@@ -1,4 +1,5 @@
 import { createDefaultEtablissement, IEtablissement } from '../../models';
+import { getEtatAdministratifEtablissement } from '../../models/etat-administratif';
 import { formatAdresse } from '../../utils/helpers/formatting';
 import {
   extractNicFromSiret,
@@ -76,6 +77,11 @@ export const mapSireneOuverteEtablissementToDomainObject = (
   siret: string
 ): IEtablissement => {
   const estActif = etablissement.etat_administratif_etablissement === 'A';
+  const estDiffusible = true;
+  const etatAdministratif = getEtatAdministratifEtablissement(
+    estActif,
+    estDiffusible
+  );
 
   const {
     numero_voie,
@@ -96,7 +102,8 @@ export const mapSireneOuverteEtablissementToDomainObject = (
     nic: extractNicFromSiret(siret),
     estActif,
     estSiege: etablissement.is_siege,
-    estDiffusible: true,
+    estDiffusible,
+    etatAdministratif,
     dateCreation: etablissement.date_creation,
     dateDerniereMiseAJour: etablissement.date_mise_a_jour,
     dateDebutActivite: etablissement.date_debut_activite,

@@ -3,6 +3,8 @@ import { ISearchResult, ISearchResults } from '../../models/search';
 import { capitalize } from '../../utils/helpers/formatting';
 import { SearchFeedback } from '../search-feedback';
 import { Tag } from '../../components-ui/tag';
+import IsActiveTag from '../../components-ui/is-active-tag';
+import { IETATADMINSTRATIF } from '../../models/etat-administratif';
 
 interface IProps {
   results: ISearchResult[];
@@ -39,7 +41,9 @@ const ResultsList: React.FC<IProps> = ({
         >
           <div className="title">
             {`${capitalize(result.nomComplet)}`}
-            {!result.estActive && <Tag className="closed">fermée</Tag>}
+            {!result.estActive && (
+              <IsActiveTag etat={IETATADMINSTRATIF.CESSEE} />
+            )}
           </div>
           <div>{result.libelleActivitePrincipale}</div>
           <div className="adress">
