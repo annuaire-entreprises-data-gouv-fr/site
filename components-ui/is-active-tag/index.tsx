@@ -35,7 +35,7 @@ const IsActiveTag: React.FC<{
         <EtatTag etat={etat} />
       </InformationTooltip>
     ) : etat === IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT ? (
-      <InformationTooltip label="Cette entité est active, mais tous ses établissements sont fermés.">
+      <InformationTooltip label="Cette entité est active selon l’Insee, mais tous ses établissements sont fermés. Elle est donc en sommeil.">
         <EtatTag etat={etat} />
       </InformationTooltip>
     ) : (

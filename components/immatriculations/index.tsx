@@ -6,12 +6,12 @@ import {
 import { IImmatriculation } from '../../models/immatriculation';
 import { IJustificatifs } from '../../models/justificatifs';
 import AssociationCreationNotFoundAlert from '../../components-ui/alerts/association-creation-not-found-alert';
-import ImmatriculationNotFound from '../../components-ui/alerts/immatriculation-not-found-alert';
 import AvisSituationSection from './insee';
 import ImmatriculationJOAFE from './joafe';
 import ImmatriculationRNCS from './rncs';
 import ImmatriculationRNM from './rnm';
 import ImmatriculationSummary from './summary';
+import ImmatriculationNotFoundAlert from '../../components-ui/alerts/immatriculation-not-found-alert';
 
 const isNotFound = (
   immatriculation: IImmatriculation | IAPINotRespondingError
@@ -50,11 +50,7 @@ const Immatriculations: React.FC<IJustificatifs> = ({
       />
       {noImmatriculation ? (
         <>
-          {isAnAssociation ? (
-            <AssociationCreationNotFoundAlert uniteLegale={uniteLegale} />
-          ) : (
-            <ImmatriculationNotFound />
-          )}
+          <ImmatriculationNotFoundAlert uniteLegale={uniteLegale} />
           <br />
         </>
       ) : (

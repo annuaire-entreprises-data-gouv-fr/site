@@ -72,7 +72,9 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
       shortcuts: [
         {
           url: `/justificatif/${uniteLegale.siren}`,
-          label: 'Extrait d’immatriculation ou annonce de création',
+          label: uniteLegale.association
+            ? 'Annonce de création'
+            : 'Extrait d’immatriculation',
         },
         {
           url: `/justificatif/${uniteLegale.siren}#insee`,
