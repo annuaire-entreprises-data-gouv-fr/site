@@ -16,7 +16,7 @@ export const getDirigeantsWithUniteLegaleFromSlug = async (
 ): Promise<IDirigeants> => {
   const siren = verifySiren(slug);
   const [uniteLegale, immatriculationRNCS] = await Promise.all([
-    getUniteLegaleFromSlug(siren),
+    getUniteLegaleFromSlug(siren, {}),
     getImmatriculationRNCS(siren),
   ]);
 
