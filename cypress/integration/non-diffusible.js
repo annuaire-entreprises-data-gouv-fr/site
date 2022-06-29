@@ -1,6 +1,6 @@
 describe('Non-diffusible', () => {
   it('Should be non diffusible"', () => {
-    cy.visit('/entreprise/414847962' + siren);
+    cy.visit('/entreprise/414847962');
     cy.contains('ne sont pas publiques').should('have.length', 1);
   });
 
