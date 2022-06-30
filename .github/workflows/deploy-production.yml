@@ -6,6 +6,13 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - environment: production-01
+            host: SSH_HOST_PRODUCTION_01
+          - environment: production-02
+            host: SSH_HOST_PRODUCTION_02
     steps:
       - uses: actions/checkout@v2
 
@@ -18,9 +25,9 @@ jobs:
         shell: bash
         env:
           SSH_PRIVATE_KEY: ${{secrets.SSH_MACHINE_USER_PRIVATE_KEY}}
-          SSH_HOST: ${{ secrets.SSH_HOST_PRODUCTION }}
+          SSH_HOST: ${{ secrets[matrix.host] }}
 
       - name: Deploy to production
         run: ssh -i ./deploy.key www-data@$SSH_HOST 'sh /opt/apps/annuaire-entreprises/annuaire-entreprises-deploy.sh'
         env:
-          SSH_HOST: ${{ secrets.SSH_HOST_PRODUCTION }}
+          SSH_HOST: ${{ secrets[matrix.host] }}
