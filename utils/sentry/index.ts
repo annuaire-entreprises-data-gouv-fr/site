@@ -20,6 +20,9 @@ const getScope = (extra: IScope) => {
     //@ts-ignore
     scope.setTag(key, extra[key] || 'N/A');
   });
+  if (process.env.INSTANCE_NUMBER) {
+    scope.setTag('instance_number', process.env.INSTANCE_NUMBER);
+  }
   return scope;
 };
 
