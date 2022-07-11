@@ -17,7 +17,7 @@ interface ISireneOuverteUniteLegaleResultat {
     date_creation: string;
     tranche_effectif_salarie: string;
     date_debut_activite: string;
-    etat_adiministratif: string;
+    etat_administratif: string;
     activite_principale: string;
     numero_voie: string;
     type_voie: string;
