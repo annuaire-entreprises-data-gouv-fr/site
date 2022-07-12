@@ -9,10 +9,13 @@ const isUserAgentABot = (req: IncomingMessage) => {
   if (!userAgent) {
     return false;
   }
-  // whitelist Uptime robot
-  // if (RegExp('UptimeRobot').test(userAgent)) {
-  //   return true;
-  // }
+  /**
+   * Exclude Uptime robot as we want uptime robot to test human-website first
+   * To test bot-website, use forceSireneOuverteForDebug
+   * */
+  if (userAgent.indexOf('UptimeRobot') > -1) {
+    return false;
+  }
 
   return crawlers.some((crawler) => RegExp(crawler.pattern).test(userAgent));
 };
