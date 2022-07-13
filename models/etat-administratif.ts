@@ -4,7 +4,7 @@ import logErrorInSentry from '../utils/sentry';
 export enum IETATADMINSTRATIF {
   INCONNU = 'inconnu',
   ACTIF = 'en activité',
-  ACTIF_ZERO_ETABLISSEMENT = 'en sommeil',
+  ACTIF_ZERO_ETABLISSEMENT = 'en sommeil ou présumée inactive',
   CESSEE = 'cessée',
   NONDIFF = 'état inconnu (non-diffusible)',
   FERME = 'fermé',
