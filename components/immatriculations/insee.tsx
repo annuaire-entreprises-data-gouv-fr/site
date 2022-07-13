@@ -42,6 +42,15 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
           Chaque établissement immatriculé par l’Insee au répertoire Sirene des
           entreprises possède un avis de situation.
         </div>
+        <p>
+          Si vous avez plusieurs établisements et ne savez pas quel avis de
+          situation utiliser,{' '}
+          <AvisSituationLink
+            siret={uniteLegale.siege.siret}
+            label="téléchargez celui du siège social"
+          />
+          .
+        </p>
         <FullTable
           head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
           body={uniteLegale.etablissements.map(
