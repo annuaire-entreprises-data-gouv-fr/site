@@ -21,6 +21,10 @@ export interface IAnnoncesBodacc {
     path: string;
   }[];
   lastModified: string | null;
+  procedures: {
+    date: string;
+    details: string;
+  }[];
 }
 
 export interface IAnnoncesJO {

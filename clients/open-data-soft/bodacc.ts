@@ -53,6 +53,9 @@ const fetchAnnoncesBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
   return {
     annonces: response.records.map(mapToDomainObject),
     lastModified: response.lastModified,
+    procedures: response.records
+      .map(extractProcedure)
+      .filter((a: any) => a !== null),
   };
 };
 
@@ -69,10 +72,38 @@ const mapToDomainObject = (annonce: IBodaccRecords) => {
   };
 };
 
+const extractProcedure = (annonce: IBodaccRecords): any | undefined => {
+  try {
+    if ((annonce as IBodaccA).jugement) {
+      const jugement = JSON.parse((annonce as IBodaccA).jugement || '{}');
+
+      const isProcedure = annonce.familleavis_lib === 'Procédures collectives';
+      if (isProcedure) {
+        return {
+          date: jugement.date,
+          details: jugement.nature,
+        };
+      }
+    }
+
+    return null;
+  } catch (e: any) {
+    logWarningInSentry('Unexpected error while parsing BODACC :' + e, {
+      details: annonce.registre,
+    });
+    return null;
+  }
+};
+
 const extractDetails = (annonce: IBodaccRecords): string => {
   try {
     if ((annonce as IBodaccA).jugement) {
       const jugement = JSON.parse((annonce as IBodaccA).jugement || '{}');
+
+      const isProcedure = annonce.familleavis_lib === 'Procédures collectives';
+
+      const procedure = isProcedure ? {} : undefined;
+
       return jugement.complementJugement;
     }
     if ((annonce as IBodaccA).acte) {

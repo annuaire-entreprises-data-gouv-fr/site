@@ -14,7 +14,7 @@ import ButtonLink from '../../components-ui/button';
 import { DILA } from '../administrations';
 import routes from '../../clients/routes';
 import { IUniteLegale } from '../../models';
-import { formatDate } from '../../utils/helpers/formatting';
+import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
 import Info from '../../components-ui/alerts/info';
 
 const AnnoncesBodaccSection: React.FC<{
@@ -31,9 +31,7 @@ const AnnoncesBodaccSection: React.FC<{
     );
   }
 
-  const hasProcedure = bodacc.annonces.find(
-    (annonce) => annonce.titre === 'Procédures collectives'
-  );
+  const hasProcedure = bodacc.procedures.length > 0;
 
   return (
     <Section
@@ -44,6 +42,13 @@ const AnnoncesBodaccSection: React.FC<{
       {hasProcedure ? (
         <Info>
           Cette entité a une procédure collective (en cours ou cloturée).
+          <ul>
+            {bodacc.procedures.map((procedure) => (
+              <li key={procedure.details}>
+                le {procedure.date} : {procedure.details}
+              </li>
+            ))}
+          </ul>
         </Info>
       ) : (
         <p>
