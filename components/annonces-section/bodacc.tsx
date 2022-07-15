@@ -14,7 +14,7 @@ import ButtonLink from '../../components-ui/button';
 import { DILA } from '../administrations';
 import routes from '../../clients/routes';
 import { IUniteLegale } from '../../models';
-import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
+import { formatDate } from '../../utils/helpers/formatting';
 import Info from '../../components-ui/alerts/info';
 
 const AnnoncesBodaccSection: React.FC<{
