@@ -8,6 +8,7 @@ import PageCounter from '../results-page-counter';
 import { Section } from '../section';
 import { FullTable } from '../table/full';
 import { Tag } from '../../components-ui/tag';
+import { formatDate } from '../../utils/helpers/formatting';
 
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -17,8 +18,12 @@ const EtablissementListeSection: React.FC<{
     <div id="etablissements">
       <p>
         Cette entité possède{' '}
-        {uniteLegale.nombreEtablissements || uniteLegale.etablissements.length}{' '}
-        établissement(s) :
+        <b>
+          {uniteLegale.nombreEtablissements ||
+            uniteLegale.etablissements.length}{' '}
+          établissement(s)
+        </b>
+        . Cliquez sur un n° siret pour obtenir plus d’information :
       </p>
       <Section
         title="La liste des établissements de l’entité"
@@ -29,7 +34,8 @@ const EtablissementListeSection: React.FC<{
             'SIRET',
             'Activité (NAF/APE)',
             'Détails (adresse, enseigne)',
-            'Statut',
+            'Création',
+            'Etat',
           ]}
           body={uniteLegale.etablissements.map(
             (etablissement: IEtablissement) => [
@@ -44,25 +50,35 @@ const EtablissementListeSection: React.FC<{
                   etablissement.libelleActivitePrincipale
                 )}
               </>,
-              !etablissement.estDiffusible ? (
-                <i>Non renseigné</i>
-              ) : (
-                <>
-                  {etablissement.enseigne && (
-                    <b>
-                      {etablissement.enseigne}
-                      <br />
-                    </b>
-                  )}
-                  <>{etablissement.adresse}</>
-                </>
-              ),
               <>
+                {!etablissement.estDiffusible ? (
+                  <i>Non renseigné</i>
+                ) : (
+                  <>
+                    {etablissement.enseigne && (
+                      <b>
+                        {etablissement.enseigne}
+                        <br />
+                      </b>
+                    )}
+                    <>{etablissement.adresse}</>
+                  </>
+                )}
                 {etablissement.estSiege && <Tag>siège social</Tag>}
-                {!etablissement.estActif && (
+              </>,
+              (etablissement.estDiffusible &&
+                formatDate(etablissement.dateCreation)) ||
+                '',
+              <>
+                {!etablissement.estDiffusible ? (
+                  <Tag>non-diffusible</Tag>
+                ) : etablissement.dateFermeture ? (
+                  <Tag className="closed">
+                    fermé&nbsp;le&nbsp;{formatDate(etablissement.dateFermeture)}
+                  </Tag>
+                ) : (
                   <IsActiveTag etat={etablissement.etatAdministratif} />
                 )}
-                {!etablissement.estDiffusible && <Tag>non-diffusible</Tag>}
               </>,
             ]
           )}

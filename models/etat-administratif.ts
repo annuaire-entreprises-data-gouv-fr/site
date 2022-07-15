@@ -1,12 +1,12 @@
-import { IEtablissement, IUniteLegale } from '.';
+import { IUniteLegale } from '.';
 import logErrorInSentry from '../utils/sentry';
 
 export enum IETATADMINSTRATIF {
   INCONNU = 'inconnu',
-  ACTIF = 'en activité',
-  ACTIF_ZERO_ETABLISSEMENT = 'en sommeil ou présumée inactive',
+  ACTIF = 'en\u00a0activité',
+  ACTIF_ZERO_ETABLISSEMENT = 'en\u00a0sommeil ou présumée\u00a0inactive',
   CESSEE = 'cessée',
-  NONDIFF = 'état inconnu (non-diffusible)',
+  NONDIFF = 'état\u00a0inconnu (non-diffusible)',
   FERME = 'fermé',
 }
 

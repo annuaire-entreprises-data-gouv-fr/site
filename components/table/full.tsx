@@ -78,7 +78,7 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
         font-style: italic;
         font-size: 0.9rem;
       }
-      @media only screen and (min-width: 1px) and (max-width: 600px) {
+      @media only screen and (min-width: 1px) and (max-width: 900px) {
         .mobile {
           display: block;
         }
