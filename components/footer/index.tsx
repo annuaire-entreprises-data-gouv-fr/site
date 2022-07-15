@@ -46,7 +46,7 @@ const Footer = () => (
             Ce site permet de retrouver toutes les données publiques détenues
             par l’administration sur une entreprise ou une association et{' '}
             <a href="/donnees-extrait-kbis">
-              en particulier les données contenue dans un extrait KBIS/D1
+              en particulier les données contenues dans un extrait KBIS/D1
             </a>
             .
           </p>
