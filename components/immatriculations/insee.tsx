@@ -59,13 +59,11 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
               <a href={`/etablissement/${etablissement.siret}`}>
                 {formatSiret(etablissement.siret)}
               </a>,
-              etablissement.adresse,
               <>
+                {etablissement.adresse}
                 {etablissement.estSiege && <Tag>siège social</Tag>}
-                {!etablissement.estActif && (
-                  <IsActiveTag etat={etablissement.etatAdministratif} />
-                )}
               </>,
+              <IsActiveTag etat={etablissement.etatAdministratif} />,
               <AvisSituationLink
                 siret={uniteLegale.siege.siret}
                 label="Télécharger"
