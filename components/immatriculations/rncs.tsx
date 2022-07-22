@@ -18,6 +18,7 @@ import { Closed, Open } from '../../components-ui/icon';
 import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
 import { IImmatriculationRNCS } from '../../models/immatriculation/rncs';
 import Info from '../../components-ui/alerts/info';
+import Warning from '../../components-ui/alerts/warning';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
@@ -73,6 +74,17 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
                     via le <b>bouton ci-dessous</b>. Le téléchargement peut
                     prendre quelques dizaines de secondes.
                   </p>
+                  <Warning>
+                    <b>Attention,</b> le site data.inpi.fr rencontre des
+                    difficultés techniques. Les équipes de l’
+                    <INPI /> travaillent à rétablir le service.
+                    <br />
+                    Pendant ce temps, le justificatif d’immatriculation est
+                    uniquement téléchargeable dans sa version publique (privé
+                    des observations et des informations détaillées sur les
+                    dirigeants de l’entreprise).
+                  </Warning>
+                  <br />
                   <div className="layout-center">
                     <ButtonInpiPdf siren={immatriculation.siren} />
                     <div className="separator" />
