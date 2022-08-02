@@ -168,7 +168,7 @@ const Title: React.FC<IProps> = ({
       .title h1 > a {
         margin: 0;
         padding: 0;
-        font-variant: small-caps;
+        font-variant: all-small-caps;
       }
       .title > div > span {
         color: #666;
