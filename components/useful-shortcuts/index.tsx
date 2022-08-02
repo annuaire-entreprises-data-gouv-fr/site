@@ -91,7 +91,7 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
           external: true,
         },
         {
-          url: `https://place-des-entreprises.beta.gouv.fr/`,
+          url: `https://place-des-entreprises.beta.gouv.fr/?pk_campaign=orientation-partenaire&pk_kwd=annuaire-entreprises`,
           label: 'Besoin d’aide ? Échangez avec un conseiller',
           external: true,
         },
