@@ -48,7 +48,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
   const { beneficiaires } = immatriculationRNCS;
 
   const formtInfos = (beneficiaire: IBeneficiaire) => [
-    ['Nom', beneficiaire.nom],
+    ['Nom', (beneficiaire.nom || '').toUpperCase()],
     ['Prénoms', beneficiaire.prenoms],
     ['Date de naissance', beneficiaire.dateNaissance],
     ['Nationalité', beneficiaire.nationalite],

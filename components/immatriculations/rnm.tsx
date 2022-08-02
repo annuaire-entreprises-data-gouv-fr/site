@@ -5,11 +5,7 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
-import {
-  capitalize,
-  formatDate,
-  formatIntFr,
-} from '../../utils/helpers/formatting';
+import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
 import BreakPageForPrint from '../../components-ui/print-break-page';
 import ButtonLink from '../../components-ui/button';
@@ -61,7 +57,7 @@ const ImmatriculationRNM: React.FC<IProps> = ({
     ],
     ['Code APRM', immatriculation.codeAPRM],
     ['Numéro de gestion', immatriculation.gestionId],
-    ['Dénomination', capitalize(immatriculation.denomination)],
+    ['Dénomination', immatriculation.denomination],
     ['Siren', formatIntFr(immatriculation.siren)],
     [
       'Siège social',

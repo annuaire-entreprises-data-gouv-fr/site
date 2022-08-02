@@ -106,6 +106,8 @@ const mapToDomainObjectNew = (
         },
       } = result;
 
+      const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
+
       return {
         siren: result.siren,
         siret: result.siege.siret,
@@ -121,7 +123,7 @@ const mapToDomainObjectNew = (
         }),
         latitude: result.siege.latitude || 0,
         longitude: result.siege.longitude || 0,
-        nomComplet: result.nom_complet || 'Nom inconnu',
+        nomComplet,
         nombreEtablissements: result.nombre_etablissements || 1,
         nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
         chemin: result.siren,

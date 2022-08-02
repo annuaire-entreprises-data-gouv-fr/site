@@ -90,7 +90,7 @@ const DirigeantsSection: React.FC<IProps> = ({
       return [
         //eslint-disable-next-line
         ['Rôle', dirigeant.role && <b>{dirigeant.role}</b>],
-        ['Nom', dirigeant.nom],
+        ['Nom', (dirigeant.nom || '').toUpperCase()],
         ['Prénom', dirigeant.prenom],
         ['Année de naissance', dirigeant.dateNaissance],
       ];

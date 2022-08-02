@@ -13,11 +13,7 @@ import {
 } from '../../utils/labels';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
-import {
-  capitalize,
-  formatAdresse,
-  formatEnseigne,
-} from '../../utils/helpers/formatting';
+import { formatAdresse, formatEnseigne } from '../../utils/helpers/formatting';
 import { getEtatAdministratifEtablissement } from '../../models/etat-administratif';
 
 interface IInseeEtablissementResponse {
@@ -185,13 +181,12 @@ export const mapEtablissementToDomainObject = (
     etatAdministratifEtablissement,
   } = periodesEtablissement[0];
 
-  const enseigne = capitalize(
+  const enseigne =
     formatEnseigne(
       enseigne1Etablissement,
       enseigne2Etablissement,
       enseigne3Etablissement
-    ) || ''
-  );
+    ) || '';
 
   // get last state change to obtain closing date
   let lastStateChange =
@@ -233,7 +228,7 @@ export const mapEtablissementToDomainObject = (
     oldSiret: oldSiret || siret,
     nic,
     enseigne,
-    denomination: capitalize(denominationUsuelleEtablissement || ''),
+    denomination: denominationUsuelleEtablissement || '',
     dateCreation: dateCreationEtablissement,
     activitePrincipale: activitePrincipaleEtablissement,
     libelleActivitePrincipale: libelleFromCodeNaf(

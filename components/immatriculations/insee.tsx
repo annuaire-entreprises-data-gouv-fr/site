@@ -65,7 +65,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
               </>,
               <IsActiveTag etat={etablissement.etatAdministratif} />,
               <AvisSituationLink
-                siret={uniteLegale.siege.siret}
+                siret={etablissement.siret}
                 label="Télécharger"
               />,
               /*eslint-enable*/

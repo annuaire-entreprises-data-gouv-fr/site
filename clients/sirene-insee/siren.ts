@@ -4,11 +4,9 @@ import {
   createDefaultUniteLegale,
   IUniteLegale,
 } from '../../models';
-import { IETATADMINSTRATIF } from '../../models/etat-administratif';
 import { IEtatCivil } from '../../models/immatriculation/rncs';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import {
-  capitalize,
   formatFirstNames,
   formatNameFull,
 } from '../../utils/helpers/formatting';
@@ -147,7 +145,7 @@ const mapToDomainObject = (
   }
 
   const nomComplet = `${
-    capitalize(denominationUniteLegale) ||
+    denominationUniteLegale ||
     `${formatFirstNames([prenomUsuelUniteLegale])} ${formatNameFull(
       nomUniteLegale,
       nomUsageUniteLegale

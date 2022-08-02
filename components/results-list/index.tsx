@@ -1,6 +1,5 @@
 import React from 'react';
 import { ISearchResult, ISearchResults } from '../../models/search';
-import { capitalize } from '../../utils/helpers/formatting';
 import { SearchFeedback } from '../search-feedback';
 import { Tag } from '../../components-ui/tag';
 import IsActiveTag from '../../components-ui/is-active-tag';
@@ -40,7 +39,7 @@ const ResultsList: React.FC<IProps> = ({
           data-siren={result.siren}
         >
           <div className="title">
-            {`${capitalize(result.nomComplet)}`}
+            <span>{`${result.nomComplet}`}</span>
             {!result.estActive && (
               <IsActiveTag etat={IETATADMINSTRATIF.CESSEE} />
             )}
@@ -74,6 +73,9 @@ const ResultsList: React.FC<IProps> = ({
         text-decoration: none;
         font-size: 1.1rem;
         margin-bottom: 5px 0;
+      }
+      .results-list > a .title > span:first-of-type {
+        font-variant: all-small-caps;
       }
 
       .results-list > a:hover .title {

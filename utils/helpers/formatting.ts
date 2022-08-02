@@ -181,9 +181,8 @@ export const formatAdresse = ({
     wrapWord(codePostal || codeCedex),
     wrapWord(
       libelleCommune || libelleCommuneCedex || libelleCommuneEtranger,
-      '',
-      true
-    ),
+      ''
+    ).toUpperCase(),
     libellePaysEtranger ? `, ${wrapWord(libellePaysEtranger, '', true)}` : '',
   ].join('');
 };
@@ -210,7 +209,7 @@ export const formatFirstNames = (firstNames: string[], nameCount = 0) => {
 
 export const formatNameFull = (nomPatronymique = '', nomUsage = '') => {
   if (nomUsage && nomPatronymique) {
-    return `${capitalize(nomUsage)} (${capitalize(nomPatronymique)})`;
+    return `${nomUsage} (${nomPatronymique})`;
   }
-  return capitalize(nomUsage || nomPatronymique || '');
+  return nomUsage || nomPatronymique || '';
 };
