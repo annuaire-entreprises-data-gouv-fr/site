@@ -25,7 +25,7 @@ h3,
   white-space: pre-wrap;
 }
 
-:not(table.full-table) {
+table.full-table {
   /* Do not break word on full table */
   word-break: initial;
 }
