@@ -34,6 +34,8 @@ const protectedSirenPath = 'public/protected-siren.txt';
 const protectedSiren = readFileSync(protectedSirenPath, 'utf8').split('\n');
 const isProtectedSiren = (siren: Siren) => protectedSiren.indexOf(siren) > -1;
 
+const unknownTVA = ['775092091'];
+
 /**
  * PUBLIC METHODS
  */
@@ -73,6 +75,11 @@ export const getUniteLegaleFromSlug = async (
   // only entreprise commerciales
   if (isProtectedSiren(uniteLegale.siren)) {
     uniteLegale.estEntrepriseCommercialeDiffusible = false;
+  }
+
+  // some TVA cannot be computed
+  if (unknownTVA.indexOf(uniteLegale.siren) > -1) {
+    uniteLegale.numeroTva = '';
   }
 
   uniteLegale.etatAdministratif = getEtatAdministratifUniteLegale(uniteLegale);
