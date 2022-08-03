@@ -7,6 +7,7 @@ import {
 import { IEtatCivil } from '../../models/immatriculation/rncs';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import {
+  agregateTripleFields,
   formatFirstNames,
   formatNameFull,
 } from '../../utils/helpers/formatting';
@@ -52,6 +53,9 @@ interface IPeriodeUniteLegale {
   caractereEmployeurUniteLegale: string;
   nomUniteLegale: string;
   nomUsageUniteLegale: string;
+  denominationUsuelle1UniteLegale: string;
+  denominationUsuelle2UniteLegale: string;
+  denominationUsuelle3UniteLegale: string;
 }
 
 const factory = (options: InseeClientOptions) => async (siren: Siren) => {
@@ -126,6 +130,9 @@ const mapToDomainObject = (
     caractereEmployeurUniteLegale,
     nomUniteLegale,
     nomUsageUniteLegale,
+    denominationUsuelle1UniteLegale,
+    denominationUsuelle2UniteLegale,
+    denominationUsuelle3UniteLegale,
   } = periodesUniteLegale[0];
 
   const siege = createDefaultEtablissement();
@@ -144,13 +151,22 @@ const mapToDomainObject = (
     siege.trancheEffectif = '';
   }
 
-  const nomComplet = `${
-    denominationUniteLegale ||
-    `${formatFirstNames([prenomUsuelUniteLegale])} ${formatNameFull(
-      nomUniteLegale,
-      nomUsageUniteLegale
-    )}` ||
-    'Nom inconnu'
+  // pre 2008 denomination https://www.sirene.fr/sirene/public/variable/denominationUsuelleEtablissement
+  const denominationUsuelle =
+    agregateTripleFields(
+      denominationUsuelle1UniteLegale,
+      denominationUsuelle2UniteLegale,
+      denominationUsuelle3UniteLegale
+    ) || '';
+
+  // EI names and firstName
+  const names = `${formatFirstNames([prenomUsuelUniteLegale])} ${formatNameFull(
+    nomUniteLegale,
+    nomUsageUniteLegale
+  )}`;
+
+  const nomComplet = `${denominationUniteLegale || names || 'Nom inconnu'}${
+    denominationUsuelle ? ` (${denominationUsuelle})` : ''
   }${sigleUniteLegale ? ` (${sigleUniteLegale})` : ''}`;
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);

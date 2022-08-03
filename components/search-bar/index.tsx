@@ -2,7 +2,7 @@ import React from 'react';
 import SearchField from './search-field';
 
 const SearchBar = ({
-  placeholder = 'Rechercher un nom, un SIRET ou un SIREN',
+  placeholder = 'Nom, adresse, n° SIRET/SIREN...',
   defaultValue = '',
   url = '/rechercher',
   autoFocus = false,

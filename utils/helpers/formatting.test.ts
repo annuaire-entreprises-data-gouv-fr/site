@@ -17,7 +17,7 @@ const adresses = [
       libelleCommuneCedex: null,
       pays: null,
     },
-    expected: 'Zac de courtine iv, rue rigoberta menchu, 84000 AVIGNON',
+    expected: 'ZAC DE COURTINE IV, RUE RIGOBERTA MENCHU, 84000 AVIGNON',
   },
   {
     fields: {
@@ -36,7 +36,7 @@ const adresses = [
       codePaysEtranger: null,
       libellePaysEtranger: null,
     },
-    expected: 'Chez madame genevieve guinjard, 1 rue rameau, 60300 SENLIS',
+    expected: 'CHEZ MADAME GENEVIEVE GUINJARD, 1 RUE RAMEAU, 60300 SENLIS',
   },
   {
     fields: {
@@ -55,7 +55,7 @@ const adresses = [
       codePaysEtranger: '99216',
       libellePaysEtranger: 'CHINE',
     },
-    expected: '17f platinium, n0 233 tai cang road, 200020 SHANGAI, Chine',
+    expected: '17F PLATINIUM, N0 233 TAI CANG ROAD, 200020 SHANGAI, CHINE',
   },
 ];
 

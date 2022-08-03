@@ -62,10 +62,7 @@ const EtablissementSection: React.FC<IProps> = ({
     data.splice(0, 0, ['Enseigne de l’établissement', etablissement.enseigne]);
   }
   if (etablissement.denomination) {
-    data.splice(0, 0, [
-      'Nom commercial de l’établissement',
-      etablissement.denomination,
-    ]);
+    data.splice(0, 0, ['Nom de l’établissement', etablissement.denomination]);
   }
   if (withDenomination) {
     data.splice(0, 0, ['Dénomination de l’entité', uniteLegale.nomComplet]);
@@ -108,7 +105,22 @@ const EtablissementSection: React.FC<IProps> = ({
           title="Les informations de contact"
           source={EAdministration.INSEE}
         >
-          <TwoColumnTable body={[['Adresse', etablissement.adresse]]} />
+          <TwoColumnTable
+            body={[
+              [
+                'Adresse postale',
+                <>
+                  {etablissement.denomination && (
+                    <>
+                      {etablissement.denomination}
+                      <br />
+                    </>
+                  )}
+                  {etablissement.adresse}
+                </>,
+              ],
+            ]}
+          />
           {uniteLegale.estEntrepreneurIndividuel && (
             <p className="faq-entrepreneur-individuels">
               <i>

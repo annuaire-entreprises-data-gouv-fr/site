@@ -85,6 +85,7 @@ const ResultsList: React.FC<IProps> = ({
       .results-list > a .adress {
         font-size: 0.9rem;
         color: rgb(112, 117, 122);
+        font-variant: all-small-caps;
       }
 
       @media only screen and (min-width: 1px) and (max-width: 900px) {

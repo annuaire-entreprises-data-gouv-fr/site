@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SearchField = ({
-  placeholder = 'Rechercher un nom, un SIRET ou un SIREN',
+  placeholder = 'Nom, adresse, n° SIRET/SIREN...',
   defaultValue = '',
   autoFocus = false,
 }) => (

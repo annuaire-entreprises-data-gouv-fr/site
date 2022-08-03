@@ -13,7 +13,10 @@ import {
 } from '../../utils/labels';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
-import { formatAdresse, formatEnseigne } from '../../utils/helpers/formatting';
+import {
+  formatAdresse,
+  agregateTripleFields,
+} from '../../utils/helpers/formatting';
 import { getEtatAdministratifEtablissement } from '../../models/etat-administratif';
 
 interface IInseeEtablissementResponse {
@@ -182,7 +185,7 @@ export const mapEtablissementToDomainObject = (
   } = periodesEtablissement[0];
 
   const enseigne =
-    formatEnseigne(
+    agregateTripleFields(
       enseigne1Etablissement,
       enseigne2Etablissement,
       enseigne3Etablissement
@@ -221,6 +224,22 @@ export const mapEtablissementToDomainObject = (
     libellePaysEtrangerEtablissement,
   } = adresseEtablissement;
 
+  const adresse = formatAdresse({
+    complement: complementAdresseEtablissement,
+    numeroVoie: numeroVoieEtablissement,
+    indiceRepetition: indiceRepetitionEtablissement,
+    typeVoie: typeVoieEtablissement,
+    libelleVoie: libelleVoieEtablissement,
+    codePostal: codePostalEtablissement,
+    libelleCommune: libelleCommuneEtablissement,
+    distributionSpeciale: distributionSpecialeEtablissement,
+    codeCedex: codeCedexEtablissement,
+    libelleCommuneCedex: libelleCedexEtablissement,
+    libelleCommuneEtranger: libelleCommuneEtrangerEtablissement,
+    codePaysEtranger: codePaysEtrangerEtablissement,
+    libellePaysEtranger: libellePaysEtrangerEtablissement,
+  });
+
   return {
     ...defaultEtablissement,
     siren: extractSirenFromSiret(siret),
@@ -245,21 +264,7 @@ export const mapEtablissementToDomainObject = (
       trancheEffectifsEtablissement,
       anneeEffectifsEtablissement
     ),
-    adresse: formatAdresse({
-      complement: complementAdresseEtablissement,
-      numeroVoie: numeroVoieEtablissement,
-      indiceRepetition: indiceRepetitionEtablissement,
-      typeVoie: typeVoieEtablissement,
-      libelleVoie: libelleVoieEtablissement,
-      codePostal: codePostalEtablissement,
-      libelleCommune: libelleCommuneEtablissement,
-      distributionSpeciale: distributionSpecialeEtablissement,
-      codeCedex: codeCedexEtablissement,
-      libelleCommuneCedex: libelleCedexEtablissement,
-      libelleCommuneEtranger: libelleCommuneEtrangerEtablissement,
-      codePaysEtranger: codePaysEtrangerEtablissement,
-      libellePaysEtranger: libellePaysEtrangerEtablissement,
-    }),
+    adresse,
   };
 };
 

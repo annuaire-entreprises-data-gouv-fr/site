@@ -33,7 +33,7 @@ const EtablissementListeSection: React.FC<{
           head={[
             'SIRET',
             'Activité (NAF/APE)',
-            'Détails (adresse, enseigne)',
+            'Détails (nom, enseigne, adresse)',
             'Création',
             'Etat',
           ]}
@@ -54,15 +54,15 @@ const EtablissementListeSection: React.FC<{
                 {!etablissement.estDiffusible ? (
                   <i>Non renseigné</i>
                 ) : (
-                  <>
-                    {etablissement.enseigne && (
+                  <span style={{ fontVariant: 'all-small-caps' }}>
+                    {(etablissement.enseigne || etablissement.denomination) && (
                       <b>
-                        {etablissement.enseigne}
+                        {etablissement.enseigne || etablissement.denomination}
                         <br />
                       </b>
                     )}
                     <>{etablissement.adresse}</>
-                  </>
+                  </span>
                 )}
                 {etablissement.estSiege && <Tag>siège social</Tag>}
               </>,

@@ -116,10 +116,7 @@ const wrapWord = (
   if (!word) {
     return '';
   }
-  if (caps) {
-    return capitalize(word) + punct;
-  }
-  return word.toString().toLowerCase() + punct;
+  return word.toString().toUpperCase() + punct;
 };
 
 interface IAdressFields {
@@ -172,7 +169,7 @@ export const formatAdresse = ({
   const fullLibelleFromTypeVoie = libelleFromTypeVoie(typeVoie);
 
   return [
-    wrapWord(complement, ', ', true),
+    wrapWord(complement, ', '),
     wrapWord(numeroVoie),
     wrapWord(indiceRepetition),
     wrapWord(fullLibelleFromTypeVoie),
@@ -182,21 +179,21 @@ export const formatAdresse = ({
     wrapWord(
       libelleCommune || libelleCommuneCedex || libelleCommuneEtranger,
       ''
-    ).toUpperCase(),
-    libellePaysEtranger ? `, ${wrapWord(libellePaysEtranger, '', true)}` : '',
+    ),
+    libellePaysEtranger ? `, ${wrapWord(libellePaysEtranger, '')}` : '',
   ].join('');
 };
 
-export const formatEnseigne = (
-  enseigne1: string | null,
-  enseigne2: string | null,
-  enseigne3: string | null
+export const agregateTripleFields = (
+  field1: string | null,
+  field2: string | null,
+  field3: string | null
 ) => {
-  if (!enseigne1 && !enseigne2 && !enseigne3) {
+  if (!field1 && !field2 && !field3) {
     return null;
   }
-  const enseigne = `${enseigne1 || ''} ${enseigne2 || ''} ${enseigne3 || ''}`;
-  return enseigne;
+  const field = `${field1 || ''} ${field2 || ''} ${field3 || ''}`;
+  return field.trim();
 };
 
 export const formatFirstNames = (firstNames: string[], nameCount = 0) => {
