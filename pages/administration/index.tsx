@@ -32,7 +32,7 @@ const StatusPage: React.FC<IProps> = ({ monitors }) => (
     canonical={`https://annuaire-entreprises.data.gouv.fr/administration}`}
   >
     <div className="content-container">
-      <h1>Statut des API partenaires</h1>
+      <h1>Sources de données & API partenaires</h1>
       <b>Sommaire</b>
       <ul>
         {monitors.map((monitor) => (
