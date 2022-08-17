@@ -64,14 +64,18 @@ const EtablissementListeSection: React.FC<{
                     <>{etablissement.adresse}</>
                   </span>
                 )}
-                {etablissement.estSiege && <Tag>siège social</Tag>}
+                {etablissement.estSiege && (
+                  <Tag className="info">siège social</Tag>
+                )}
+                {uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 &&
+                  !etablissement.estSiege && <Tag>ancien siège social</Tag>}
               </>,
               (etablissement.estDiffusible &&
                 formatDate(etablissement.dateCreation)) ||
                 '',
               <>
                 {!etablissement.estDiffusible ? (
-                  <Tag>non-diffusible</Tag>
+                  <Tag className="unknown">Non-diffusible</Tag>
                 ) : etablissement.dateFermeture ? (
                   <Tag className="closed">
                     fermé&nbsp;le&nbsp;{formatDate(etablissement.dateFermeture)}

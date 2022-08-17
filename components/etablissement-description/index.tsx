@@ -26,6 +26,8 @@ export const EtablissementDescription: React.FC<IProps> = ({
         <b>{statusLabel(etablissement.estActif)}.</b> C’est
         {etablissement.estSiege ? (
           <b> le siège social</b>
+        ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 ? (
+          <> un ancien siège social</>
         ) : (
           <> un établissement secondaire</>
         )}{' '}

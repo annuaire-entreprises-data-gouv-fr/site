@@ -11,7 +11,7 @@ import {
   formatFirstNames,
   formatNameFull,
 } from '../../utils/helpers/formatting';
-import { Siren } from '../../utils/helpers/siren-and-siret';
+import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
 import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
 import {
   libelleFromCategoriesJuridiques,
@@ -151,6 +151,12 @@ const mapToDomainObject = (
     siege.trancheEffectif = '';
   }
 
+  const allSiegesSiret = Array.from(
+    new Set(
+      periodesUniteLegale.map((e) => (siren + e.nicSiegeUniteLegale) as Siret)
+    )
+  );
+
   // pre 2008 denomination https://www.sirene.fr/sirene/public/variable/denominationUsuelleEtablissement
   const denominationUsuelle =
     agregateTripleFields(
@@ -196,6 +202,7 @@ const mapToDomainObject = (
       ? { id: identifiantAssociationUniteLegale }
       : null,
     siege,
+    allSiegesSiret,
     natureJuridique: categorieJuridiqueUniteLegale,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(
       categorieJuridiqueUniteLegale

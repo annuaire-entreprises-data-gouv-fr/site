@@ -61,7 +61,9 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
               </a>,
               <>
                 {etablissement.adresse}
-                {etablissement.estSiege && <Tag>siège social</Tag>}
+                {etablissement.estSiege && (
+                  <Tag className="info">siège social</Tag>
+                )}
               </>,
               <IsActiveTag etat={etablissement.etatAdministratif} />,
               <AvisSituationLink

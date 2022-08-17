@@ -69,7 +69,11 @@ const EtablissementSection: React.FC<IProps> = ({
     data.splice(0, 0, [
       'Type d’établissement',
       <>
-        {etablissement.estSiege ? 'Siège' : 'Secondaire'}
+        {etablissement.estSiege
+          ? 'Siège social'
+          : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1
+          ? 'Ancien siège social'
+          : 'Secondaire'}
         {' ( '}
         <a key="entite" href={`/entreprise/${uniteLegale.siren}`}>
           → voir la page de l’entité
