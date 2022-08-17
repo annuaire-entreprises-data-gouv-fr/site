@@ -9,14 +9,15 @@ import {
   IMonitoring,
 } from '../../models/monitoring';
 import AdministrationApiMonitoring from '../../components/administration-api-monitoring';
-import { Section } from '../../components/section';
 import { escapeTerm, trimWhitespace } from '../../utils/helpers/formatting';
 
-interface IMonitoringWithName extends IMonitoring {
+export interface IMonitoringWithName extends IMonitoring {
   short: string;
   apiGouvLink?: string;
+  dataGouvLink?: string;
   slug: string;
   apiName: string;
+  data?: string[];
 }
 
 interface IProps {
@@ -32,7 +33,13 @@ const StatusPage: React.FC<IProps> = ({ monitors }) => (
     canonical={`https://annuaire-entreprises.data.gouv.fr/administration}`}
   >
     <div className="content-container">
-      <h1>Sources de données & API partenaires</h1>
+      <h1>Sources de données & statut des API</h1>
+      <p>
+        L’Annuaire des Entreprises utilise les données de différentes
+        administrations en lien avec les personnes morales. Les données sont
+        accessibles par le biais d’API ouvertes. Cette page détaille l’origine
+        des données et la disponibilité de chaque API&nbsp;:
+      </p>
       <b>Sommaire</b>
       <ul>
         {monitors.map((monitor) => (
@@ -42,40 +49,15 @@ const StatusPage: React.FC<IProps> = ({ monitors }) => (
         ))}
       </ul>
       {monitors.map((monitor) => (
-        <div key={monitor.apiName}>
-          <h2 id={simplify(monitor.apiName)}>
-            {monitor.apiName} (
-            <a href={`/administration/${monitor.slug}`}>{monitor.short}</a>)
-          </h2>
-          {monitor.series ? (
-            <AdministrationApiMonitoring {...monitor} />
-          ) : (
-            <Section title="Suivi des performances de l'API indisponible">
-              Notre service de suivi des performances est actuellement
-              hors-ligne. Nous sommes désolés pour ce dérangement.
-            </Section>
-          )}
-          {monitor.apiGouvLink && (
-            <i>
-              <a
-                rel="noopener noreferrer"
-                target="_blank"
-                href={monitor.apiGouvLink}
-              >
-                → Pour en savoir plus, consulter la page de cette API sur
-                api.gouv.fr
-              </a>
-            </i>
-          )}
-        </div>
+        <React.Fragment key={monitor.apiName}>
+          <h2 id={simplify(monitor.apiName)}>{monitor.apiName}</h2>
+          <AdministrationApiMonitoring {...monitor} />
+        </React.Fragment>
       ))}
     </div>
     <style jsx>{`
       .content-container {
         margin: 20px auto 50px;
-      }
-      .content-container > div {
-        margin-bottom: 60px;
       }
       i {
         font-size: 0.9rem;

@@ -3,16 +3,13 @@ short: METI
 site: https://code.travail.gouv.fr/outils/convention-collective
 long: Ministère du Travail de l’Emploi et de l’Insertion (METI)
 contact: https://travail-emploi.gouv.fr/ministere/article/nous-contacter
-dataGouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/
 apiMonitors:
   - apiName: API Conventions Collectives
+    apiGouvLink: https://api.gouv.fr/les-api/api-conventions-collectives
+    dataGouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/
     id: 787859521
+    data:
+      - Convention collective
+      - N° IDCC
 description: |
-  ## Quelles sont les données des entreprises publiées par le ministère du travail ?
-
   Le ministère du travail publie toutes les conventions collectives enregistrées à la maille SIRET.
-
-  ## Corriger une erreur dans les données
-
-  Vous avez repéré une erreur ? Les données de cette administration ne
-  sont pas à jour ? 👉 [Contactez le ministère pour demander une correction](https://travail-emploi.gouv.fr/ministere/article/nous-contacter).

@@ -19,7 +19,7 @@ export const Tag: React.FC<PropsWithChildren<IProps>> = ({
         color: #666;
         border-radius: 3px;
         padding: 0 5px;
-        margin: 0 7px;
+        margin: 2px 5px;
       }
 
       .tag.closed {

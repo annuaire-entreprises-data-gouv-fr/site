@@ -80,9 +80,11 @@ export const getMonitorsWithMetaData = async (
       ...monitoring,
       short: admin.short,
       apiGouvLink: metaData.apiGouvLink || null,
-      apiName: metaData.apiName || null,
+      dataGouvLink: metaData.dataGouvLink || null,
+      apiName: metaData.apiName,
       id: metaData.id || null,
       slug: admin.slug,
+      data: metaData.data || [],
     };
   });
 };

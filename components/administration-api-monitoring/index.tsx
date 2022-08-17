@@ -1,7 +1,9 @@
 import React from 'react';
-import { IMonitoring, IRatio } from '../../models/monitoring';
+import { IRatio } from '../../models/monitoring';
 import InformationTooltip from '../../components-ui/information-tooltip';
 import { Section } from '../section';
+import { IMonitoringWithName } from '../../pages/administration';
+import { Tag } from '../../components-ui/tag';
 
 const getUptimeColor = (ratio: IRatio) => {
   if (!ratio.isActive) {
@@ -135,80 +137,123 @@ const RobotTooltip = () => (
   </>
 );
 
-const AdministrationApiMonitoring: React.FC<IMonitoring> = ({
+const AdministrationApiMonitoring: React.FC<IMonitoringWithName> = ({
   isOnline,
   series,
   uptime,
+  slug,
+  short,
+  apiGouvLink,
+  dataGouvLink,
+  data,
 }) => (
-  <Section
-    title={`Disponibilité : l’API est actuellement ${
-      isOnline ? 'en ligne ✅' : 'hors-ligne 🛑'
-    }`}
-  >
-    {isOnline ? (
-      <p>
-        L’API fonctionne normalement, vous ne devriez pas rencontrer de problème
-        en accèdant aux données.
-      </p>
+  <>
+    {!series ? (
+      <Section title="Suivi des performances de l'API indisponible">
+        Notre service de suivi des performances est actuellement hors-ligne.
+        Nous sommes désolés pour ce dérangement.
+      </Section>
     ) : (
-      <p>
-        L’API est actuellement hors-service et l’accès aux données est fortement
-        perturbé, voir impossible.
-      </p>
-    )}
-    <div className="metrics-title">
-      <h3>
-        Historique de disponibilité <RobotTooltip />
-      </h3>
-      <Metric series={series} />
-      <h3>Statistiques moyennes</h3>
-      <div className="mean-stats">
-        <div>
-          <b>24h</b>
-          <span>{uptime.day}%</span>
+      <Section
+        title={`Disponibilité : l’API est actuellement ${
+          isOnline ? 'en ligne ✅' : 'hors-ligne 🛑'
+        }`}
+      >
+        {isOnline ? (
+          <p>
+            L’API fonctionne normalement, vous ne devriez pas rencontrer de
+            problème en accèdant aux données.
+          </p>
+        ) : (
+          <p>
+            L’API est actuellement hors-service et l’accès aux données est
+            fortement perturbé, voir impossible.
+          </p>
+        )}
+        <div className="metrics-title">
+          <h3>
+            Historique de disponibilité <RobotTooltip />
+          </h3>
+          <Metric series={series} />
+          <h3>Statistiques moyennes</h3>
+          <div className="mean-stats">
+            <div>
+              <b>24h</b>
+              <span>{uptime.day}%</span>
+            </div>
+            <div>
+              <b>7 jours</b>
+              <span>{uptime.week}%</span>
+            </div>
+            <div>
+              <b>30 jours</b>
+              <span>{uptime.month}%</span>
+            </div>
+            <div>
+              <b>3 mois</b>
+              <span>{uptime.trimester}%</span>
+            </div>
+          </div>
         </div>
-        <div>
-          <b>7 jours</b>
-          <span>{uptime.week}%</span>
-        </div>
-        <div>
-          <b>30 jours</b>
-          <span>{uptime.month}%</span>
-        </div>
-        <div>
-          <b>3 mois</b>
-          <span>{uptime.trimester}%</span>
-        </div>
-      </div>
-    </div>
 
-    <style jsx>{`
-      .metrics-title {
-        display: block;
-        margin-bottom: 10px;
-      }
-      .metrics-title h3 {
-        margin-bottom: 10px;
-        margin-top: 20px;
-      }
-      .mean-stats {
-        display: flex;
-        justify-content: space-between;
-      }
-      .mean-stats > div {
-        width: 24%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .mean-stats > div b {
-        font-size: 1.1rem;
-        line-height: 2.2rem;
-      }
-      .mean-stats > div:not(:last-of-type) {
-        border-right: 2px solid #dfdff1;
-      }
-    `}</style>
-  </Section>
+        <style jsx>{`
+          .metrics-title {
+            display: block;
+            margin-bottom: 10px;
+          }
+          .metrics-title h3 {
+            margin-bottom: 10px;
+            margin-top: 20px;
+          }
+          .mean-stats {
+            display: flex;
+            justify-content: space-between;
+          }
+          .mean-stats > div {
+            width: 24%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          .mean-stats > div b {
+            font-size: 1.1rem;
+            line-height: 2.2rem;
+          }
+          .mean-stats > div:not(:last-of-type) {
+            border-right: 2px solid #dfdff1;
+          }
+        `}</style>
+      </Section>
+    )}
+    {data && data.length > 0 && (
+      <div>
+        Données de l’API utilisées sur le site :
+        {data.map((d) => (
+          <Tag key={d}>{d}</Tag>
+        ))}
+      </div>
+    )}
+    Administration responsable : <a href={`/administration/${slug}`}>{short}</a>
+    .
+    <br />
+    {(apiGouvLink || dataGouvLink) && (
+      <>
+        Aller plus loin :{' '}
+        {apiGouvLink && (
+          <a href={apiGouvLink} target="_blank" rel="noreferrer noopener">
+            voir la fiche api.gouv.fr
+          </a>
+        )}
+        {apiGouvLink && dataGouvLink && ' ou '}
+        {dataGouvLink && (
+          <a href={dataGouvLink} target="_blank" rel="noreferrer noopener">
+            télécharger les données sous licence ouverte sur data.gouv.fr
+          </a>
+        )}
+        .
+      </>
+    )}
+  </>
 );
+
 export default AdministrationApiMonitoring;

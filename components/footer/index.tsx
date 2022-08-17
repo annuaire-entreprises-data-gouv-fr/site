@@ -151,7 +151,7 @@ const Footer = () => (
           </li>
           <li className="fr-footer__bottom-item">
             <a className="fr-footer__bottom-link" href="/administration">
-              Sources de données & API
+              Sources de données & statut des API
             </a>
           </li>
           <li className="fr-footer__bottom-item">

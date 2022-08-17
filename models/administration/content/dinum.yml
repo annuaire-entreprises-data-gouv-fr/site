@@ -4,14 +4,16 @@ long: Direction Interministérielle du Numérique (DINUM)
 site: https://numerique.gouv.fr
 contact: https://www.numerique.gouv.fr/contact/
 apiMonitors:
-  - apiName: API Moteur de recherche de l’Annuaire des Entreprises
+  - apiName: API Recherche d’entreprises
+    apiGouvLink: https://api.gouv.fr/les-api/api-recherche-entreprises
     id: 787859512
+    data:
+      - Algorithme de recherche des personnes morales
   - apiName: API Base Adresse Nationale
     apiGouvLink: https://api.gouv.fr/les-api/base-adresse-nationale
+    datagouvLink:
     id: 789207932
+    data:
+      - Géolocalisation des adresses
 description: |
-  ## Qu'est-ce que la DINUM ?
-
-  La direction interministérielle du numérique (DINUM) est l’administration qui accompagne les ministères et les autres administrations dans leur transformation numérique.
-
-  Elle conseille également le gouvernement sur les sujet numérique et développe des services et ressources mises à disposition des autres administrations comme par exemple : le réseau interministériel de l’État, [FranceConnect](https://franceconnect.gouv.fr), [data.gouv.fr](https://data.gouv.fr) ou [api.gouv.fr](https://api.gouv.fr).
+  La direction interministérielle du numérique (DINUM) est l’administration qui accompagne les ministères et les autres administrations dans leur transformation numérique. Elle conseille également le gouvernement sur les sujet numérique et développe des services et ressources mises à disposition des autres administrations comme par exemple : le réseau interministériel de l’État, [FranceConnect](https://franceconnect.gouv.fr), [data.gouv.fr](https://data.gouv.fr) ou [api.gouv.fr](https://api.gouv.fr).

@@ -2,31 +2,18 @@ slug: dila
 short: DILA
 long: Direction de l’Information Légale et Administrative (DILA)
 contact: https://www.dila.premier-ministre.gouv.fr/services/api/boamp/contact
-dataGouvLink: https://www.data.gouv.fr/fr/organizations/premier-ministre/
 apiMonitors:
   - apiName: API BODACC
     apiGouvLink: https://api.gouv.fr/les-api/api-bulletin-annonces-civiles-commerciales-bodacc
+    dataGouvLink: https://www.data.gouv.fr/fr/datasets/bodacc/
     id: 788647353
-  - apiName: API annonces et comptes annuels des associations (Journal Officiel)
+    data:
+      - Annonces du Bulletin Officiel des Annonces Civiles et Commerciales (BODACC)
+  - apiName: API Annonces et comptes annuels des associations (JOAFE)
     apiGouvLink: https://api.gouv.fr/les-api/api-annonces-comptes-annuels-associations-joafe
+    dataGouvLink: https://www.data.gouv.fr/fr/datasets/associations-joafe/
     id: 789134910
+    data:
+      - Annonces du Journal officiel des associations et fondations d'entreprise (JOAFE)
 description: |
-  ## Qu'est-ce que la DILA ?
-
-  La DILA est la Direction de l'Information Légale et Administrative. C'est une administration publique française.
-
-  ## Quelles sont les données des entreprises publiées par la DILA ?
-
-  Dans le cadre de sa mission, la DILA a la charge de la diffusion des données dont la publication est obligatoire, par la publication au Journal-officiel de la République française et dans les bulletins d'annonces légale :
-
-  - actes enregistrés au Registre du Commerce et des Sociétés (RCS) ([BODACC](https://www.bodacc.fr/))
-  - information financières des entreprises cotées ([info-financière](https://www.info-financiere.fr/))
-  - annonces des marchés publics ([BOAMP](https://www.boamp.fr/))
-  - bulletin des conventions collectives ([BOCC](http://www.journal-officiel.gouv.fr/bocc/))
-
-  Pour en savoir plus sur le Journal-officiel, 👉 [c'est par ici](https://www.journal-officiel.gouv.fr/)
-
-  ## Corriger une erreur dans les données
-
-  Vous avez repéré une erreur ? Les données de cette administration ne
-  sont pas à jour ? 👉 [Contactez la DILA pour demander une correction](https://www.dila.premier-ministre.gouv.fr/services/api/boamp/contact).
+  La DILA est la Direction de l'Information Légale et Administrative. C'est une administration publique française. Dans le cadre de sa mission, la DILA a la charge de la diffusion des données dont la publication est obligatoire, par la publication au Journal-officiel de la République française et dans les bulletins d'annonces légale.

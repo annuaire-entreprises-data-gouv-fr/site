@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import ReactMarkdown from 'react-markdown';
 
 import {
   administrationsMetaData,
@@ -17,7 +16,6 @@ import {
 import { getMonitorsWithMetaData, IMonitoring } from '../../models/monitoring';
 import AdministrationApiMonitoring from '../../components/administration-api-monitoring';
 import { HttpNotFound } from '../../clients/exceptions';
-import { Section } from '../../components/section';
 
 interface IProps extends IAdministrationMetaData {
   monitorings: (IMonitoring & IAPIMonitorMetaData)[];
@@ -25,11 +23,11 @@ interface IProps extends IAdministrationMetaData {
 
 const AdministrationPage: React.FC<IProps> = ({
   long,
-  short,
   slug,
+  short,
   description,
+  contact,
   monitorings,
-  dataGouvLink,
 }) => (
   <Page
     small={true}
@@ -40,41 +38,27 @@ const AdministrationPage: React.FC<IProps> = ({
       <br />
       <a href="/administration">← Toutes les administrations partenaires</a>
       <h1>{long}</h1>
-      <ReactMarkdown children={description} />
-      {(dataGouvLink || monitorings.length > 0) && (
-        <h2 id="acces">Accéder aux données {short}</h2>
-      )}
-      {dataGouvLink && (
-        <>
-          <h3>En téléchargeant un jeu de données</h3>
-          <p>
-            Les données brutes sont téléchargeables, sous licence open-data.
-            Pour y accéder, consultez{' '}
-            <a href={dataGouvLink}>la page data.gouv.fr</a>.<br />
-          </p>
-        </>
-      )}
+      <p>{description}</p>
+      <h2>Corriger une erreur dans les données</h2>
+      <p>
+        Vous avez repéré une erreur ? Les données de cette administration ne
+        sont pas à jour ?{' '}
+        <a href={contact}>
+          👉 Contactez l’administration pour demander une correction
+        </a>
+        .
+      </p>
       {monitorings.length > 0 && (
         <>
-          <h2>En utilisant les API</h2>
+          <h2>API utilisée par l’Annuaire des Entreprises</h2>
           {monitorings.map((monitoring) => (
             <Fragment key={monitoring.id}>
-              {monitoring.apiName && <h3>{monitoring.apiName}</h3>}
-              {monitoring.apiGouvLink && (
-                <p>
-                  Les données sont accessibles par API. Pour y accéder,
-                  consultez{' '}
-                  <a href={monitoring.apiGouvLink}>la page api.gouv.fr</a>.
-                </p>
-              )}
-              {monitoring && monitoring.series ? (
-                <AdministrationApiMonitoring {...monitoring} />
-              ) : (
-                <Section title="Suivi des performances de l'API indisponible">
-                  Notre service de suivi des performances est actuellement
-                  hors-ligne. Nous sommes désolés pour ce dérangement.
-                </Section>
-              )}
+              <h3>{monitoring.apiName}</h3>
+              <AdministrationApiMonitoring
+                {...monitoring}
+                short={short}
+                slug={slug}
+              />
             </Fragment>
           ))}
         </>

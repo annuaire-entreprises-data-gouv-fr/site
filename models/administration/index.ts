@@ -47,12 +47,15 @@ export interface IAdministrationMetaData {
   site?: string;
   apiMonitors: IAPIMonitorMetaData[];
   dataGouvLink?: string;
+  data?: string[];
 }
 
 export interface IAPIMonitorMetaData {
   id: number;
   apiGouvLink?: string;
-  apiName?: string;
+  dataGouvLink?: string;
+  apiName: string;
+  data: string[];
 }
 
 export const allMonitoringIds = () =>
