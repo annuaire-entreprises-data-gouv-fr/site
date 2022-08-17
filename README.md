@@ -66,6 +66,18 @@ npm run build:site && npm run start
 
 ```
 
+### Deploiement
+
+Le déploiement se fait par [Github action](https://github.com/etalab/annuaire-entreprises-site/actions)
+
+A chaque "merge" sur master : 
+
+- Laissez le déploiement se faire automatiquement sur [staging](https://staging.annuaire-entreprises.data.gouv.fr) via l'action [deploy-staging](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-staging.yml)
+- Vérifiez vos changements sur [staging](https://staging.annuaire-entreprises.data.gouv.fr)
+- Lancez manuellement le déploiement sur [production](https://annuaire-entreprises.data.gouv.fr) : sur [deploy-production](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-production.yml) et cliquez sur "Run workflow" -> "Run workflow"
+
+NB: Si plusieurs déploiements sont déclenchés en même temps, seul le premier va jusqu'au bout. Les autres sont automatiquement interrompus.
+
 ## Licence
 
 Ce projet est sous AGPL 3.0
