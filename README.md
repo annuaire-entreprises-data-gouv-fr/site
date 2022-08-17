@@ -64,6 +64,39 @@ npm run dev
 export PORT=3000
 npm run build:site && npm run start
 
+# Lancer le site en prod avec la sitemap
+export PORT=3000
+npm run build && npm run start
+```
+
+### Tests
+
+1. Linter
+
+```bash
+npm run lint
+```
+
+2. Tests unitaires
+
+```bash
+npm run test:unit
+```
+
+3. Tests end2end
+
+```bash
+npm run test:end2end
+```
+
+4. Autres tests
+
+```bash
+// a11y
+npm run test:a11y
+
+// Inpi PDF proxy
+npm run test:inpi-pdf-proxy
 ```
 
 ### Deploiement
