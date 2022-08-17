@@ -29,8 +29,8 @@ const About: React.FC = () => {
           .
           <br />
           Les données viennent des différentes administrations habilitées à les
-          récolter et les traiter. Ce site ne fait que les aggréger et{' '}
-          <b>ne les retraite pas</b>.
+          récolter et les traiter. Ce site ne fait que centraliser les données.
+          <b>Il ne les modifie pas et ne les stocke pas</b>.
         </p>
         <div>
           <h2>D’où viennent les informations affichées sur le site ?</h2>
