@@ -64,7 +64,52 @@ npm run dev
 export PORT=3000
 npm run build:site && npm run start
 
+# Lancer le site en prod avec la sitemap
+export PORT=3000
+npm run build && npm run start
 ```
+
+### Tests
+
+1. Linter
+
+```bash
+npm run lint
+```
+
+2. Tests unitaires
+
+```bash
+npm run test:unit
+```
+
+3. Tests end2end
+
+```bash
+npm run test:end2end
+```
+
+4. Autres tests
+
+```bash
+// a11y
+npm run test:a11y
+
+// Inpi PDF proxy
+npm run test:inpi-pdf-proxy
+```
+
+### Deploiement
+
+Le déploiement se fait par [Github action](https://github.com/etalab/annuaire-entreprises-site/actions)
+
+A chaque "merge" sur master : 
+
+- Laissez le déploiement se faire automatiquement sur [staging](https://staging.annuaire-entreprises.data.gouv.fr) via l'action [deploy-staging](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-staging.yml)
+- Vérifiez vos changements sur [staging](https://staging.annuaire-entreprises.data.gouv.fr)
+- Lancez manuellement le déploiement sur [production](https://annuaire-entreprises.data.gouv.fr) : sur [deploy-production](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-production.yml) et cliquez sur "Run workflow" -> "Run workflow"
+
+NB: Si plusieurs déploiements sont déclenchés en même temps, seul le premier va jusqu'au bout. Les autres sont automatiquement interrompus.
 
 ## Licence
 
