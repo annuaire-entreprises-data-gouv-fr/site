@@ -57,10 +57,19 @@ const checkINPIpdfProxy = async () => {
 
     // let's download the regular pdf
     const [unauthentifiedPdf, authentifiedPdf] = await Promise.all([
-      axios(`https://data.inpi.fr/entreprises/${siren}?format=pdf`, {
-        timeout: 90 * 1000,
-        method: 'GET',
-      }),
+      axios(
+        `https://data.inpi.fr/export/companies?format=pdf&ids=["${siren}"]`,
+        {
+          timeout: 90 * 1000,
+          method: 'GET',
+          headers: {
+            Accept: '*/*',
+            Host: 'data.inpi.fr',
+            'User-Agent':
+              'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Gecko/20100101 Firefox/100.0',
+          },
+        }
+      ),
       // and the authenticated one
       downloadAuthenticatedPdf(siren),
     ]);
