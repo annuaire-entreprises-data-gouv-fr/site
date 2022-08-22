@@ -1,67 +1,56 @@
-const axios = require('axios');
-const fs = require('fs');
+import { Siren } from '../../utils/helpers/siren-and-siret';
+import { httpGet } from '../../utils/network';
+import { logWarningInSentry } from '../../utils/sentry';
 
-require('dotenv').config();
-
-console.info('=== INPI PDF proxy checker ===');
-
-const sleep = async (seconds) => {
+const sleep = async (seconds: number) => {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(), seconds * 1000);
+    setTimeout(() => resolve, seconds * 1000);
   });
 };
 
-const downloadAuthenticatedPdf = async (siren) => {
+const downloadAuthenticatedPdf = async (siren: Siren) => {
   let retry = 0;
-  const create = await axios(
+  const create = await httpGet(
     `https://staging.rncs-proxy.api.gouv.fr/document/justificatif/job/${siren}`,
     {
       timeout: 90 * 1000,
-      method: 'GET',
       headers: {
-        'X-APIKey': process.env.PROXY_API_KEY,
+        'X-APIKey': process.env.PROXY_API_KEY || '',
       },
     }
   );
   const slug = create.data.slug;
 
   if (!slug) {
-    throw new Error('Job was not created properly');
+    throw new Error('PDF test: job was not created properly');
   }
-
-  console.log(slug);
 
   while (retry <= 3) {
     await sleep(15);
     try {
-      const file = await axios(
+      const file = await httpGet(
         `https://staging.rncs-proxy.api.gouv.fr/downloads/${slug}.pdf`,
         {
           headers: {
-            'X-APIkey': process.env.PROXY_API_KEY,
+            'X-APIkey': process.env.PROXY_API_KEY || '',
           },
         }
       );
       return file;
-    } catch (e) {
-      console.log(`Attempt n°${retry} failed. Retrying in 15 seconds...`);
-    }
+    } catch {}
     retry += 1;
   }
+  throw new Error('PDF test: Authenticated PDF failed');
 };
 
-const checkINPIpdfProxy = async () => {
+export const checkINPIpdfProxy = async (siren: Siren) => {
   try {
-    // let's test Danone Siren
-    const siren = '552032534';
-
     // let's download the regular pdf
     const [unauthentifiedPdf, authentifiedPdf] = await Promise.all([
-      axios(
+      httpGet(
         `https://data.inpi.fr/export/companies?format=pdf&ids=["${siren}"]`,
         {
           timeout: 90 * 1000,
-          method: 'GET',
           headers: {
             Accept: '*/*',
             Host: 'data.inpi.fr',
@@ -80,11 +69,12 @@ const checkINPIpdfProxy = async () => {
     const ratio = unauthentifiedPdfSize / authentifiedPdfSize;
 
     // pdf should be bigger than 100ko
-    if (unauthentifiedPdfSize <= 100000 || authentifiedPdfSize <= 100000) {
-      console.info(
-        '=> ❌ at least one PDF is too small and might be corrupted'
-      );
-      process.exit(1);
+    if (unauthentifiedPdfSize <= 100000) {
+      throw new Error('PDF test: unauthentified PDF too small');
+    }
+
+    if (authentifiedPdfSize <= 100000) {
+      throw new Error('PDF test: authentified PDF too small');
     }
 
     if (
@@ -92,18 +82,14 @@ const checkINPIpdfProxy = async () => {
       ratio < 0.5 ||
       ratio > 2
     ) {
-      console.info(
-        `=> ❌ size ratio is suspect. unauthenticated PDF is ${
+      throw new Error(
+        `PDF test: size ratio is suspect. unauthenticated PDF is ${
           ratio * 100
         }% of authenticated (${authentifiedPdfSize})`
       );
-      process.exit(1);
     }
-    console.info('=> ✅ yaaay ! pdf proxy worked like a charm 🧙‍♂️');
-  } catch (e) {
-    console.log(e);
-    console.info('=> ❌ download failed');
-    process.exit(1);
+  } catch (error: any) {
+    logWarningInSentry('PDF test failed', { details: error.toString() });
+    throw error;
   }
 };
-checkINPIpdfProxy();

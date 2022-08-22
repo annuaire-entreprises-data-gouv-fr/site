@@ -2,6 +2,7 @@ import { verifyIdRna } from '../utils/helpers/id-rna';
 import { verifySiren } from '../utils/helpers/siren-and-siret';
 import { fetchAssociation } from './rna';
 import { fetchRNCSImmatriculationNoCache } from './rncs';
+import { checkINPIpdfProxy } from './rncs/rncs-proxy-pdf-test';
 import { fetchRnmImmatriculation } from './rnm';
 import { getUniteLegaleInseeNoCache } from './sirene-insee/siren';
 import getResults from './sirene-ouverte/recherche';
@@ -19,6 +20,9 @@ const ping = async (slug: string | string[]) => {
     case 'api-proxy-rncs':
       // fetch IRM and disable cache
       return await fetchRNCSImmatriculationNoCache(verifySiren('880878145'));
+    case 'api-proxy-rncs-pdf':
+      // fetch IRM and disable cache
+      return await checkINPIpdfProxy(verifySiren('552032534'));
     case 'api-rnm':
       return await fetchRnmImmatriculation(verifySiren('824024350'));
     case 'api-conventions-collectives':
