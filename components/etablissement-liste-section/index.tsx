@@ -85,6 +85,9 @@ const EtablissementListeSection: React.FC<{
   const etablissementsNonDiffusibles = uniteLegale.etablissements.filter(
     (e) => !e.estDiffusible
   );
+
+  const usePagination =
+    uniteLegale.nombreEtablissements > etablissementsPerPage;
   return (
     <div id="etablissements">
       <p>
@@ -103,40 +106,49 @@ const EtablissementListeSection: React.FC<{
         title="La liste des établissements de l’entité"
         source={EAdministration.INSEE}
       >
-        {etablissementsOuverts.length > 0 && (
+        {usePagination ? (
           <>
-            <h3>Etablissement(s) en activité :</h3>
             <EtablissementTable
-              etablissements={etablissementsOuverts}
+              etablissements={uniteLegale.etablissements}
               sieges={uniteLegale.allSiegesSiret}
             />
-          </>
-        )}
-        {etablissementsFermes.length > 0 && (
-          <>
-            <h3>Etablissement(s) fermé(s) :</h3>
-            <EtablissementTable
-              etablissements={etablissementsFermes}
-              sieges={uniteLegale.allSiegesSiret}
+            <PageCounter
+              currentPage={uniteLegale.currentEtablissementPage || 1}
+              totalPages={Math.ceil(
+                uniteLegale.nombreEtablissements / etablissementsPerPage
+              )}
             />
           </>
-        )}
-        {etablissementsNonDiffusibles.length > 0 && (
+        ) : (
           <>
-            <h3>Etablissement(s) non-diffusible(s) :</h3>
-            <EtablissementTable
-              etablissements={etablissementsNonDiffusibles}
-              sieges={uniteLegale.allSiegesSiret}
-            />
-          </>
-        )}
-        {uniteLegale.nombreEtablissements > etablissementsPerPage && (
-          <PageCounter
-            currentPage={uniteLegale.currentEtablissementPage || 1}
-            totalPages={Math.ceil(
-              uniteLegale.nombreEtablissements / etablissementsPerPage
+            {etablissementsOuverts.length > 0 && (
+              <>
+                <h3>Etablissement(s) en activité :</h3>
+                <EtablissementTable
+                  etablissements={etablissementsOuverts}
+                  sieges={uniteLegale.allSiegesSiret}
+                />
+              </>
             )}
-          />
+            {etablissementsFermes.length > 0 && (
+              <>
+                <h3>Etablissement(s) fermé(s) :</h3>
+                <EtablissementTable
+                  etablissements={etablissementsFermes}
+                  sieges={uniteLegale.allSiegesSiret}
+                />
+              </>
+            )}
+            {etablissementsNonDiffusibles.length > 0 && (
+              <>
+                <h3>Etablissement(s) non-diffusible(s) :</h3>
+                <EtablissementTable
+                  etablissements={etablissementsNonDiffusibles}
+                  sieges={uniteLegale.allSiegesSiret}
+                />
+              </>
+            )}
+          </>
         )}
       </Section>
     </div>
