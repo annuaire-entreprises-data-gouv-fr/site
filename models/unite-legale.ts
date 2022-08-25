@@ -25,6 +25,7 @@ import {
   logSireneOuvertefailed,
 } from '../utils/sentry/helpers';
 import { getAssociation } from './association';
+import constants from './constants';
 import { getEtatAdministratifUniteLegale } from './etat-administratif';
 
 /**
@@ -80,6 +81,16 @@ export const getUniteLegaleFromSlug = async (
   // some TVA cannot be computed
   if (unknownTVA.indexOf(uniteLegale.siren) > -1) {
     uniteLegale.numeroTva = '';
+  }
+
+  // Count open etablissements if no pagination on etablissement
+  const etablissementPerPage = constants.resultsPerPage.etablissements;
+  const usePagination = uniteLegale.nombreEtablissements > etablissementPerPage;
+  if (!usePagination) {
+    const etablissementsOuverts = uniteLegale.etablissements.filter(
+      (e) => e.estActif && e.estDiffusible
+    );
+    uniteLegale.nombreEtablissementsOuverts = etablissementsOuverts.length;
   }
 
   uniteLegale.etatAdministratif = getEtatAdministratifUniteLegale(uniteLegale);

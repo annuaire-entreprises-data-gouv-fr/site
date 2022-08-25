@@ -74,6 +74,8 @@ export interface IUniteLegale extends IEtablissementsList {
 export interface IEtablissementsList {
   etablissements: IEtablissement[];
   nombreEtablissements: number;
+  nombreEtablissementsOuverts: number | null;
+  // pagination
   currentEtablissementPage?: number;
 }
 
@@ -127,6 +129,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     libelleNatureJuridique: '',
     etablissements: [siege],
     nombreEtablissements: 1,
+    nombreEtablissementsOuverts: null,
     activitePrincipale: '',
     libelleActivitePrincipale: '',
     dateCreation: '',

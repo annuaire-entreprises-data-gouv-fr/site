@@ -36,7 +36,14 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
       <>
         Cette entité possède{' '}
         <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
-          {uniteLegale.nombreEtablissements} établissement(s).
+          {uniteLegale.nombreEtablissements} établissement(s)
+          {uniteLegale.nombreEtablissementsOuverts && (
+            <>
+              {' '}
+              dont {uniteLegale.nombreEtablissementsOuverts} sont en activité
+            </>
+          )}
+          .
         </a>
       </>
     )}

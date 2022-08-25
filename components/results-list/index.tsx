@@ -19,7 +19,7 @@ const EtablissmentTagLabel: React.FC<{ result: ISearchResult }> = ({
 
   return (
     <Tag>
-      {openCount} établissement{plural} ouvert{plural}
+      {openCount} établissement{plural} en activité
     </Tag>
   );
 };
@@ -46,7 +46,7 @@ const ResultsList: React.FC<IProps> = ({
           </div>
           <div>{result.libelleActivitePrincipale}</div>
           <div className="adress">
-            {result.adresse || 'Adresse inconnue'}{' '}
+            <span>{result.adresse || 'Adresse inconnue'} </span>
             <EtablissmentTagLabel result={result} />
           </div>
         </a>
@@ -82,7 +82,7 @@ const ResultsList: React.FC<IProps> = ({
         text-decoration: underline;
       }
 
-      .results-list > a .adress {
+      .results-list > a .adress > span {
         font-size: 0.9rem;
         color: rgb(112, 117, 122);
         font-variant: all-small-caps;
