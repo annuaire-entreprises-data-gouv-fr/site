@@ -59,11 +59,11 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
       shortcuts: [
         {
           url: `/entreprise/${uniteLegale.siren}#etablissement`,
-          label: 'Infos du siège social',
+          label: 'Infos sur le siège social',
         },
         {
           url: `/entreprise/${uniteLegale.siren}#etablissements`,
-          label: 'Liste des établissements',
+          label: `Liste des ${uniteLegale.nombreEtablissements} établissements`,
         },
       ],
     },

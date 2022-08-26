@@ -7,37 +7,40 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
 }) => (
   <p>
     <>L’unité légale {uniteLegale.nomComplet}</>{' '}
-    {uniteLegale.natureJuridique && (
-      <>
-        est une <b>{uniteLegale.libelleNatureJuridique}</b>{' '}
-      </>
-    )}
     {uniteLegale.dateCreation && (
       <>
-        créée le <b>{formatDateLong(uniteLegale.dateCreation)}</b>
+        a été créée le <b>{formatDateLong(uniteLegale.dateCreation)}</b>.{' '}
       </>
     )}
     {uniteLegale.dateDebutActivite && !uniteLegale.estActive && (
       <>
-        {' '}
-        et fermée le <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>
+        Elle a été fermée le{' '}
+        <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>.{' '}
+      </>
+    )}
+    {uniteLegale.natureJuridique && (
+      <>
+        Sa forme juridique est <b>{uniteLegale.libelleNatureJuridique}</b>.{' '}
       </>
     )}
     {uniteLegale.siege && uniteLegale.siege.adresse && (
       <>
-        , dont le siège est domicilié au{' '}
-        <a href={`/carte/${uniteLegale.siege.siret}`}>
-          {uniteLegale.siege.adresse}
-        </a>
+        Son siège social est domicilié au {uniteLegale.siege.adresse} (
+        <a href={`/carte/${uniteLegale.siege.siret}`}>voir sur la carte</a>)
       </>
     )}
     .{' '}
-    {uniteLegale.etablissements && (
+    {uniteLegale.etablissements.all && (
       <>
-        Cette entité possède{' '}
+        Elle possède {uniteLegale.nombreEtablissements} établissement(s)
+        {uniteLegale.etablissements.open.length > 0 && (
+          <b> dont {uniteLegale.etablissements.open.length} sont en activité</b>
+        )}{' '}
+        (
         <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
-          {uniteLegale.nombreEtablissements} établissement(s).
+          voir la liste
         </a>
+        ).
       </>
     )}
   </p>

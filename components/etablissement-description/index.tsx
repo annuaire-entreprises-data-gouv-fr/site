@@ -36,7 +36,9 @@ export const EtablissementDescription: React.FC<IProps> = ({
           {uniteLegale.nomComplet}
         </a>
         ,
-        {uniteLegale.etablissements && uniteLegale.etablissements.length > 1 ? (
+        {uniteLegale.etablissements &&
+        uniteLegale.etablissements.all &&
+        uniteLegale.etablissements.all.length > 1 ? (
           <>
             {' '}
             qui possède au total{' '}

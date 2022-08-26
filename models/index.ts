@@ -72,10 +72,33 @@ export interface IUniteLegale extends IEtablissementsList {
 }
 
 export interface IEtablissementsList {
-  etablissements: IEtablissement[];
+  etablissements: {
+    all: IEtablissement[];
+    open: IEtablissement[];
+    closed: IEtablissement[];
+    unknown: IEtablissement[];
+  };
   nombreEtablissements: number;
+  // pagination
   currentEtablissementPage?: number;
 }
+
+/**
+ * Split a list of etablissements by status
+ *
+ * @param all a list of Etablissements
+ * @returns
+ */
+export const splitByStatus = (all: IEtablissement[]) => {
+  const open = all
+    .filter((e) => e.estActif && e.estDiffusible)
+    .sort((a) => (a.estSiege ? -1 : 1));
+
+  const closed = all.filter((e) => !e.estActif && e.estDiffusible);
+
+  const unknown = all.filter((e) => !e.estDiffusible);
+  return { all, open, unknown, closed };
+};
 
 /** BASIC CONSTRUCTORS */
 export const createDefaultEtablissement = (): IEtablissement => {
@@ -125,7 +148,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     numeroTva: '',
     natureJuridique: '',
     libelleNatureJuridique: '',
-    etablissements: [siege],
+    etablissements: splitByStatus([siege]),
     nombreEtablissements: 1,
     activitePrincipale: '',
     libelleActivitePrincipale: '',

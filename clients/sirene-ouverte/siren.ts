@@ -1,4 +1,8 @@
-import { createDefaultUniteLegale, IUniteLegale } from '../../models';
+import {
+  createDefaultUniteLegale,
+  IUniteLegale,
+  splitByStatus,
+} from '../../models';
 import constants from '../../models/constants';
 import { IETATADMINSTRATIF } from '../../models/etat-administratif';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
@@ -90,11 +94,11 @@ const mapToDomainObject = (
     uniteLegale.etablissement_siege[0].siret
   );
 
-  const listOfEtablissement = uniteLegale.etablissements.map((etab) =>
+  const listOfEtablissements = uniteLegale.etablissements.map((etab) =>
     mapSireneOuverteEtablissementToDomainObject(etab, etab.siret)
   );
 
-  if (!listOfEtablissement || listOfEtablissement.length === 0) {
+  if (!listOfEtablissements || listOfEtablissements.length === 0) {
     throw new HttpServerError(`No etablissements found`);
   }
 
@@ -138,7 +142,7 @@ const mapToDomainObject = (
     libelleTrancheEffectif: libelleFromCodeEffectif(
       tranche_effectif_salarie_entreprise
     ),
-    etablissements: listOfEtablissement,
+    etablissements: splitByStatus(listOfEtablissements),
     estDiffusible: true,
     estActive: !!(siege && siege.estActif),
     estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(

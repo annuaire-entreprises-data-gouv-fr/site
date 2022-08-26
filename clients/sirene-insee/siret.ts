@@ -5,6 +5,7 @@ import {
   createDefaultEtablissement,
   IEtablissement,
   IEtablissementsList,
+  splitByStatus,
 } from '../../models';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
@@ -106,11 +107,13 @@ const getAllEtablissementsFactory =
     const { header, etablissements } =
       response.data as IInseeEtablissementsResponse;
 
+    const allEtablissements = etablissements.map((e) =>
+      mapEtablissementToDomainObject(e)
+    );
+
     return {
       currentEtablissementPage: page,
-      etablissements: etablissements.map((e) =>
-        mapEtablissementToDomainObject(e)
-      ),
+      etablissements: splitByStatus(allEtablissements),
       nombreEtablissements: header.total,
     };
   };
