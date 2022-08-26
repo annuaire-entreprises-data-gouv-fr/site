@@ -231,10 +231,8 @@ const mergeUniteLegaleInsee = (
     ...uniteLegaleInsee,
     siege,
     chemin,
-    etablissements: allEtablissementsInsee?.etablissements || {
-      all: [siege],
-      ...splitByStatus([siege]),
-    },
+    etablissements:
+      allEtablissementsInsee?.etablissements || splitByStatus([siege]),
     currentEtablissementPage:
       allEtablissementsInsee?.currentEtablissementPage || 0,
     nombreEtablissements: allEtablissementsInsee?.nombreEtablissements || 1,

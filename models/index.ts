@@ -97,7 +97,7 @@ export const splitByStatus = (all: IEtablissement[]) => {
   const closed = all.filter((e) => !e.estActif && e.estDiffusible);
 
   const unknown = all.filter((e) => !e.estDiffusible);
-  return { open, unknown, closed };
+  return { all, open, unknown, closed };
 };
 
 /** BASIC CONSTRUCTORS */
@@ -148,10 +148,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     numeroTva: '',
     natureJuridique: '',
     libelleNatureJuridique: '',
-    etablissements: {
-      all: [siege],
-      ...splitByStatus([siege]),
-    },
+    etablissements: splitByStatus([siege]),
     nombreEtablissements: 1,
     activitePrincipale: '',
     libelleActivitePrincipale: '',

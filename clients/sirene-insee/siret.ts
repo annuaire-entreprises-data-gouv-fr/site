@@ -112,10 +112,7 @@ const getAllEtablissementsFactory =
 
     return {
       currentEtablissementPage: page,
-      etablissements: {
-        all: allEtablissements,
-        ...splitByStatus(allEtablissements),
-      },
+      etablissements: splitByStatus(allEtablissements),
       nombreEtablissements: header.total,
     };
   };

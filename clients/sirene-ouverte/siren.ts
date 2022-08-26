@@ -142,10 +142,7 @@ const mapToDomainObject = (
     libelleTrancheEffectif: libelleFromCodeEffectif(
       tranche_effectif_salarie_entreprise
     ),
-    etablissements: {
-      all: listOfEtablissements,
-      ...splitByStatus(listOfEtablissements),
-    },
+    etablissements: splitByStatus(listOfEtablissements),
     estDiffusible: true,
     estActive: !!(siege && siege.estActif),
     estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(

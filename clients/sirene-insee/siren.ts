@@ -210,10 +210,7 @@ const mapToDomainObject = (
     ),
     activitePrincipale: siege.activitePrincipale,
     libelleActivitePrincipale: siege.libelleActivitePrincipale,
-    etablissements: {
-      all: [siege],
-      ...splitByStatus([siege]),
-    },
+    etablissements: splitByStatus([siege]),
     dateCreation: dateCreationUniteLegale,
     dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
       'T'
