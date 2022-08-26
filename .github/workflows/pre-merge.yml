@@ -130,6 +130,18 @@ jobs:
     needs: [build]
 
     steps:
+      - uses: actions/checkout@v2
+      - name: Load cached build
+        uses: actions/cache@v2
+        id: restore-build
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+
+      # manually install redis twice as github's service doesnot work
+      - name: Install redis
+        run: sudo apt-get install -y redis-tools redis-server
+
       - run: npm run start &
         env:
           PORT: 3000
