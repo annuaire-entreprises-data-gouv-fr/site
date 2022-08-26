@@ -65,7 +65,7 @@
     "vite": "^2.6.14"
   },
   "devDependencies": {
-    "@axe-core/cli": "^4.3.2",
+    "@axe-core/cli": "^4.4.4",
     "@swc/jest": "^0.2.20",
     "@types/jest": "^27.0.3",
     "cypress": "^9.1.0",
