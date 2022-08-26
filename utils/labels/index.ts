@@ -1,19 +1,37 @@
 import { categoriesJuridiques } from './categories-juridiques';
-import { codesNaf } from './codes-NAF';
+import { codesSectionNAF } from './codes-section-NAF';
+import { codesNAP } from './codes-NAP';
+import { codesNAFRev2 } from './codes-NAF-rev-2';
+import { codesNAF1993 } from './codes-NAF-1993';
+import { codesNAFRev1 } from './codes-NAF-rev-1';
 import { codesEffectifs } from './codes-effectifs';
 import { codesVoies } from './codes-voie';
 import { categoriesEntreprise } from './categories-entreprise';
 
-export const libelleFromCodeNaf = (codeNaf = '', addCode = true) => {
-  //@ts-ignore
-  const label = codesNaf[codeNaf] || 'Activité inconnue';
-  return addCode && codeNaf ? `${codeNaf} - ${label}` : label;
+const getNomenclature = (nomenclature: string) => {
+  switch (nomenclature) {
+    case 'NAP':
+      return codesNAP;
+    case 'NAFRev1':
+      return codesNAFRev1;
+    case 'NAF1993':
+      return codesNAF1993;
+    case 'NAFRev2':
+    default:
+      return codesNAFRev2;
+  }
 };
 
-export const libelleFromCodeSectionNaf = (codeSectionNaf = '') => {
+export const libelleFromCodeNAF = (
+  code = '',
+  nomenclature = 'NAFRev2',
+  addCode = true
+) => {
+  const codes = getNomenclature(nomenclature);
+
   //@ts-ignore
-  const label = codeSectionNaf[codeSectionNaf] || 'Activité inconnue';
-  return label;
+  const label = codes[code] || 'Activité inconnue';
+  return addCode && code ? `${code} - ${label}` : label;
 };
 
 export const libelleFromCodeEffectif = (

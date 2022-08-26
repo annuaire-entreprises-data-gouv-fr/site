@@ -1,4 +1,4 @@
-export const codesSectionNaf = {
+export const codesSectionNAF = {
   K: "Activités financières et d'assurance",
   T: "Activités des ménages en tant qu'employeurs",
   U: 'Activités extra-territoriales',
