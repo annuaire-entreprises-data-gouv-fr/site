@@ -97,7 +97,7 @@ const EtablissementListeSection: React.FC<{
             uniteLegale.etablissements.length}{' '}
           établissement(s)
         </b>
-        {uniteLegale.nombreEtablissementsOuverts && (
+        {(uniteLegale.nombreEtablissementsOuverts || 0) > 0 && (
           <> dont {uniteLegale.nombreEtablissementsOuverts} sont en activité</>
         )}
         . Cliquez sur un n° siret pour obtenir plus d’information :
