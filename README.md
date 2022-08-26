@@ -1,8 +1,6 @@
 # Annuaire des Entreprises - [Site web]
 
-[![Pre-merge checks](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
-[![Accessibilité](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-a11y.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-a11y.yml)
-[![Proxy PDF de l’extrait d’immatriculation INPI](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-inpi-pdf-proxy.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-inpi-pdf-proxy.yml)
+[![CI (lint, unit-tests, end2end, a11y)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
 
 Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr)
 
