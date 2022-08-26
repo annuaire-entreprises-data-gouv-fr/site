@@ -7,7 +7,7 @@ import { Siren } from '../../utils/helpers/siren-and-siret';
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
-  libelleFromCodeNaf,
+  libelleFromCodeNAF,
   libelleFromeCodeCategorie,
 } from '../../utils/labels';
 import { httpGet } from '../../utils/network';
@@ -126,7 +126,7 @@ const mapToDomainObject = (
     numeroTva: numero_tva_intra,
     siege,
     activitePrincipale: activite_principale_entreprise,
-    libelleActivitePrincipale: libelleFromCodeNaf(
+    libelleActivitePrincipale: libelleFromCodeNAF(
       activite_principale_entreprise
     ),
     libelleCategorieEntreprise: libelleFromeCodeCategorie(categorie_entreprise),

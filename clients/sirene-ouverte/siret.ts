@@ -7,7 +7,7 @@ import {
 } from '../../utils/helpers/siren-and-siret';
 import {
   libelleFromCodeEffectif,
-  libelleFromCodeNaf,
+  libelleFromCodeNAF,
 } from '../../utils/labels';
 import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
@@ -117,7 +117,7 @@ export const mapSireneOuverteEtablissementToDomainObject = (
       libelleCommune: libelle_commune,
     }),
     activitePrincipale: etablissement.activite_principale,
-    libelleActivitePrincipale: libelleFromCodeNaf(
+    libelleActivitePrincipale: libelleFromCodeNAF(
       etablissement.activite_principale
     ),
     trancheEffectif: etablissement.tranche_effectif_salarie,

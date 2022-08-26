@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from '.';
-import { codesSectionNaf } from '../../utils/labels/codes-section-NAF';
+import { codesSectionNAF } from '../../utils/labels/codes-section-NAF';
 
 const SelectCodeSectionNaf: React.FC<{
   placeholder?: string;
@@ -14,9 +14,9 @@ const SelectCodeSectionNaf: React.FC<{
     name={name}
     defaultValue={defaultValue}
     placeholder={placeholder}
-    options={Object.keys(codesSectionNaf).map((k) => {
+    options={Object.keys(codesSectionNAF).map((k) => {
       //@ts-ignore
-      return { value: k, label: codesSectionNaf[k] };
+      return { value: k, label: codesSectionNAF[k] };
     })}
   />
 );

@@ -9,7 +9,7 @@ import {
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
   libelleFromCodeEffectif,
-  libelleFromCodeNaf,
+  libelleFromCodeNAF,
 } from '../../utils/labels';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
@@ -48,6 +48,7 @@ interface IInseeEtablissement {
     etatAdministratifEtablissement: string;
     changementEtatAdministratifEtablissement: boolean;
     activitePrincipaleEtablissement: string;
+    nomenclatureActivitePrincipaleEtablissement: string;
   }[];
   adresseEtablissement: {
     complementAdresseEtablissement: string;
@@ -182,6 +183,7 @@ export const mapEtablissementToDomainObject = (
     enseigne2Etablissement,
     enseigne3Etablissement,
     etatAdministratifEtablissement,
+    nomenclatureActivitePrincipaleEtablissement,
   } = periodesEtablissement[0];
 
   const enseigne =
@@ -250,8 +252,9 @@ export const mapEtablissementToDomainObject = (
     denomination: denominationUsuelleEtablissement || '',
     dateCreation: dateCreationEtablissement,
     activitePrincipale: activitePrincipaleEtablissement,
-    libelleActivitePrincipale: libelleFromCodeNaf(
-      activitePrincipaleEtablissement
+    libelleActivitePrincipale: libelleFromCodeNAF(
+      activitePrincipaleEtablissement,
+      nomenclatureActivitePrincipaleEtablissement
     ),
     dateDerniereMiseAJour: dateDernierTraitementEtablissement,
     estSiege: !!etablissementSiege,
