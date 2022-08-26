@@ -111,6 +111,7 @@ const getAllEtablissementsFactory =
         mapEtablissementToDomainObject(e)
       ),
       nombreEtablissements: header.total,
+      nombreEtablissementsOuverts: null,
     };
   };
 
