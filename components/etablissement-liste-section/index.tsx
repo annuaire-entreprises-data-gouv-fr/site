@@ -75,30 +75,15 @@ const EtablissementListeSection: React.FC<{
 }> = ({ uniteLegale }) => {
   const etablissementsPerPage = constants.resultsPerPage.etablissements;
 
-  const etablissementsOuverts = uniteLegale.etablissements
-    .filter((e) => e.estActif && e.estDiffusible)
-    .sort((a) => (a.estSiege ? -1 : 1));
-
-  const etablissementsFermes = uniteLegale.etablissements.filter(
-    (e) => !e.estActif && e.estDiffusible
-  );
-  const etablissementsNonDiffusibles = uniteLegale.etablissements.filter(
-    (e) => !e.estDiffusible
-  );
-
   const usePagination =
     uniteLegale.nombreEtablissements > etablissementsPerPage;
   return (
     <div id="etablissements">
       <p>
         Cette entité possède{' '}
-        <b>
-          {uniteLegale.nombreEtablissements ||
-            uniteLegale.etablissements.length}{' '}
-          établissement(s)
-        </b>
-        {(uniteLegale.nombreEtablissementsOuverts || 0) > 0 && (
-          <> dont {uniteLegale.nombreEtablissementsOuverts} sont en activité</>
+        <b>{uniteLegale.etablissements.all.length} établissement(s)</b>
+        {uniteLegale.etablissements.open.length && (
+          <> dont {uniteLegale.etablissements.open.length} sont en activité</>
         )}
         . Cliquez sur un n° siret pour obtenir plus d’information :
       </p>
@@ -109,7 +94,7 @@ const EtablissementListeSection: React.FC<{
         {usePagination ? (
           <>
             <EtablissementTable
-              etablissements={uniteLegale.etablissements}
+              etablissements={uniteLegale.etablissements.all}
               sieges={uniteLegale.allSiegesSiret}
             />
             <PageCounter
@@ -121,29 +106,29 @@ const EtablissementListeSection: React.FC<{
           </>
         ) : (
           <>
-            {etablissementsOuverts.length > 0 && (
+            {uniteLegale.etablissements.open.length > 0 && (
               <>
                 <h3>Etablissement(s) en activité :</h3>
                 <EtablissementTable
-                  etablissements={etablissementsOuverts}
+                  etablissements={uniteLegale.etablissements.open}
                   sieges={uniteLegale.allSiegesSiret}
                 />
               </>
             )}
-            {etablissementsFermes.length > 0 && (
+            {uniteLegale.etablissements.closed.length > 0 && (
               <>
                 <h3>Etablissement(s) fermé(s) :</h3>
                 <EtablissementTable
-                  etablissements={etablissementsFermes}
+                  etablissements={uniteLegale.etablissements.closed}
                   sieges={uniteLegale.allSiegesSiret}
                 />
               </>
             )}
-            {etablissementsNonDiffusibles.length > 0 && (
+            {uniteLegale.etablissements.unknown.length > 0 && (
               <>
                 <h3>Etablissement(s) non-diffusible(s) :</h3>
                 <EtablissementTable
-                  etablissements={etablissementsNonDiffusibles}
+                  etablissements={uniteLegale.etablissements.unknown}
                   sieges={uniteLegale.allSiegesSiret}
                 />
               </>

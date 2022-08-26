@@ -3,6 +3,7 @@ import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
   IUniteLegale,
+  splitByStatus,
 } from '../../models';
 import { IEtatCivil } from '../../models/immatriculation/rncs';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
@@ -209,7 +210,10 @@ const mapToDomainObject = (
     ),
     activitePrincipale: siege.activitePrincipale,
     libelleActivitePrincipale: siege.libelleActivitePrincipale,
-    etablissements: [siege],
+    etablissements: {
+      all: [siege],
+      ...splitByStatus([siege]),
+    },
     dateCreation: dateCreationUniteLegale,
     dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
       'T'

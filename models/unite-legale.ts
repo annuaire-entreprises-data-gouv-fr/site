@@ -5,6 +5,7 @@ import {
   IEtablissementsList,
   IUniteLegale,
   SirenNotFoundError,
+  splitByStatus,
 } from '.';
 import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {
@@ -81,16 +82,6 @@ export const getUniteLegaleFromSlug = async (
   // some TVA cannot be computed
   if (unknownTVA.indexOf(uniteLegale.siren) > -1) {
     uniteLegale.numeroTva = '';
-  }
-
-  // Count open etablissements if no pagination on etablissement
-  const etablissementPerPage = constants.resultsPerPage.etablissements;
-  const usePagination = uniteLegale.nombreEtablissements > etablissementPerPage;
-  if (!usePagination) {
-    const etablissementsOuverts = uniteLegale.etablissements.filter(
-      (e) => e.estActif && e.estDiffusible
-    );
-    uniteLegale.nombreEtablissementsOuverts = etablissementsOuverts.length;
   }
 
   uniteLegale.etatAdministratif = getEtatAdministratifUniteLegale(uniteLegale);
@@ -240,7 +231,10 @@ const mergeUniteLegaleInsee = (
     ...uniteLegaleInsee,
     siege,
     chemin,
-    etablissements: allEtablissementsInsee?.etablissements || [siege],
+    etablissements: allEtablissementsInsee?.etablissements || {
+      all: [siege],
+      ...splitByStatus([siege]),
+    },
     currentEtablissementPage:
       allEtablissementsInsee?.currentEtablissementPage || 0,
     nombreEtablissements: allEtablissementsInsee?.nombreEtablissements || 1,

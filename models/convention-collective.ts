@@ -35,7 +35,7 @@ const getConventionCollectives = async (
     if (!uniteLegale.estDiffusible) {
       return [];
     }
-    const sirets = uniteLegale.etablissements.map((e) => e.siret);
+    const sirets = uniteLegale.etablissements.all.map((e) => e.siret);
     return await fetchConventionCollectives(sirets);
   } catch (e: any) {
     logErrorInSentry('Error in API convention collectives', {
