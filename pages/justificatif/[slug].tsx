@@ -6,6 +6,7 @@ import Title, { FICHE } from '../../components/title-section';
 import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
 import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
+import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 
 const JustificatifPage: React.FC<IJustificatifs> = ({
   uniteLegale,

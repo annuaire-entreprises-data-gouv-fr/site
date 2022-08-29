@@ -86,7 +86,6 @@ const extractSiren = (slug: string) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug as string;
-  const pageParam = (context.query.page || '') as string;
 
   const referer = context.req.headers.referer;
   const redirected = !!referer && !!context.query.redirected;
@@ -102,6 +101,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  const pageParam = (context.query.page || '') as string;
   const page = parseIntWithDefaultValue(pageParam, 1);
 
   const forceSireneOuverteForDebug = (context.query

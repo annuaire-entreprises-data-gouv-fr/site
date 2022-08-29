@@ -33,7 +33,10 @@ const MapTitleEtablissement: React.FC<{
     <h2>{title || 'Information sur l’Etablissement'}</h2>
     <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
     {etablissement.estSiege && <Tag className="info">siège social</Tag>}
-    <IsActiveTag etat={etablissement.etatAdministratif} />
+    <IsActiveTag
+      state={etablissement.etatAdministratif}
+      since={etablissement.dateFermeture}
+    />
     <style jsx>{`
       .sub-title > span {
         color: #666;
@@ -72,7 +75,10 @@ const TitleEtablissementWithDenomination: React.FC<{
     {!etablissement.estDiffusible && (
       <Tag className="unknown">Non-diffusible</Tag>
     )}
-    <IsActiveTag etat={etablissement.etatAdministratif} />
+    <IsActiveTag
+      state={etablissement.etatAdministratif}
+      since={etablissement.dateFermeture}
+    />
     <style jsx>{`
       .sub-title > span {
         color: #666;

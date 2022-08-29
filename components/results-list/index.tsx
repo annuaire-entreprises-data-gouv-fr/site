@@ -41,7 +41,7 @@ const ResultsList: React.FC<IProps> = ({
           <div className="title">
             <span>{`${result.nomComplet}`}</span>
             {!result.estActive && (
-              <IsActiveTag etat={IETATADMINSTRATIF.CESSEE} />
+              <IsActiveTag state={IETATADMINSTRATIF.CESSEE} />
             )}
           </div>
           <div>{result.libelleActivitePrincipale}</div>

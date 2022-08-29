@@ -1,47 +1,57 @@
 import React from 'react';
 import { IUniteLegale } from '../../models';
+import constants from '../../models/constants';
 import { formatDateLong } from '../../utils/helpers/formatting';
 
 export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
-}) => (
-  <p>
-    <>L’unité légale {uniteLegale.nomComplet}</>{' '}
-    {uniteLegale.dateCreation && (
-      <>
-        a été créée le <b>{formatDateLong(uniteLegale.dateCreation)}</b>.{' '}
-      </>
-    )}
-    {uniteLegale.dateDebutActivite && !uniteLegale.estActive && (
-      <>
-        Elle a été fermée le{' '}
-        <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>.{' '}
-      </>
-    )}
-    {uniteLegale.natureJuridique && (
-      <>
-        Sa forme juridique est <b>{uniteLegale.libelleNatureJuridique}</b>.{' '}
-      </>
-    )}
-    {uniteLegale.siege && uniteLegale.siege.adresse && (
-      <>
-        Son siège social est domicilié au {uniteLegale.siege.adresse} (
-        <a href={`/carte/${uniteLegale.siege.siret}`}>voir sur la carte</a>)
-      </>
-    )}
-    .{' '}
-    {uniteLegale.etablissements.all && (
-      <>
-        Elle possède {uniteLegale.nombreEtablissements} établissement(s)
-        {uniteLegale.etablissements.open.length > 0 && (
-          <b> dont {uniteLegale.etablissements.open.length} sont en activité</b>
-        )}{' '}
-        (
-        <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
-          voir la liste
-        </a>
-        ).
-      </>
-    )}
-  </p>
-);
+}) => {
+  const usePagination =
+    uniteLegale.nombreEtablissements > constants.resultsPerPage.etablissements;
+  const hasOpenEtablissements = uniteLegale.etablissements.open.length > 0;
+
+  return (
+    <p>
+      <>L’unité légale {uniteLegale.nomComplet}</>{' '}
+      {uniteLegale.dateCreation && (
+        <>
+          a été créée le <b>{formatDateLong(uniteLegale.dateCreation)}</b>.{' '}
+        </>
+      )}
+      {uniteLegale.dateDebutActivite && !uniteLegale.estActive && (
+        <>
+          Elle a été fermée le{' '}
+          <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>.{' '}
+        </>
+      )}
+      {uniteLegale.natureJuridique && (
+        <>
+          Sa forme juridique est <b>{uniteLegale.libelleNatureJuridique}</b>.{' '}
+        </>
+      )}
+      {uniteLegale.siege && uniteLegale.siege.adresse && (
+        <>
+          Son siège social est domicilié au {uniteLegale.siege.adresse} (
+          <a href={`/carte/${uniteLegale.siege.siret}`}>voir sur la carte</a>)
+        </>
+      )}
+      .{' '}
+      {uniteLegale.etablissements.all && (
+        <>
+          Elle possède {uniteLegale.nombreEtablissements} établissement(s)
+          {hasOpenEtablissements && !usePagination && (
+            <b>
+              {' '}
+              dont {uniteLegale.etablissements.open.length} sont en activité
+            </b>
+          )}{' '}
+          (
+          <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
+            voir la liste
+          </a>
+          ).
+        </>
+      )}
+    </p>
+  );
+};

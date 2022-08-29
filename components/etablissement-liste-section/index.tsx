@@ -38,33 +38,29 @@ const EtablissementTable: React.FC<{
         {!etablissement.estDiffusible ? (
           <i>Non renseigné</i>
         ) : (
-          <span style={{ fontVariant: 'all-small-caps' }}>
-            {(etablissement.enseigne || etablissement.denomination) && (
-              <b>
-                {etablissement.enseigne || etablissement.denomination}
-                <br />
-              </b>
-            )}
-            <>{etablissement.adresse}</>
-          </span>
-        )}
-        {etablissement.estSiege && <Tag className="info">siège social</Tag>}
-        {sieges.indexOf(etablissement.siret) > 0 && !etablissement.estSiege && (
-          <Tag>ancien siège social</Tag>
+          <>
+            <span style={{ fontVariant: 'all-small-caps' }}>
+              {(etablissement.enseigne || etablissement.denomination) && (
+                <b>
+                  {etablissement.enseigne || etablissement.denomination}
+                  <br />
+                </b>
+              )}
+              <>{etablissement.adresse}</>
+            </span>
+            {etablissement.estSiege && <Tag className="info">siège social</Tag>}
+            {sieges.indexOf(etablissement.siret) > 0 &&
+              !etablissement.estSiege && <Tag>ancien siège social</Tag>}
+          </>
         )}
       </>,
       (etablissement.estDiffusible && formatDate(etablissement.dateCreation)) ||
         '',
       <>
-        {!etablissement.estDiffusible ? (
-          <Tag className="unknown">Non-diffusible</Tag>
-        ) : etablissement.dateFermeture ? (
-          <Tag className="closed">
-            fermé&nbsp;le&nbsp;{formatDate(etablissement.dateFermeture)}
-          </Tag>
-        ) : (
-          <IsActiveTag etat={etablissement.etatAdministratif} />
-        )}
+        <IsActiveTag
+          state={etablissement.etatAdministratif}
+          since={etablissement.dateFermeture}
+        />
       </>,
     ])}
   />
@@ -73,16 +69,20 @@ const EtablissementTable: React.FC<{
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const etablissementsPerPage = constants.resultsPerPage.etablissements;
+  const totalPages = Math.ceil(
+    uniteLegale.nombreEtablissements / constants.resultsPerPage.etablissements
+  );
 
   const usePagination =
-    uniteLegale.nombreEtablissements > etablissementsPerPage;
+    uniteLegale.nombreEtablissements > constants.resultsPerPage.etablissements;
+  const hasOpenEtablissements = uniteLegale.etablissements.open.length > 0;
+
   return (
     <div id="etablissements">
       <p>
         Cette entité possède{' '}
-        <b>{uniteLegale.etablissements.all.length} établissement(s)</b>
-        {uniteLegale.etablissements.open.length && (
+        <b>{uniteLegale.nombreEtablissements} établissement(s)</b>
+        {hasOpenEtablissements && !usePagination && (
           <> dont {uniteLegale.etablissements.open.length} sont en activité</>
         )}
         . Cliquez sur un n° siret pour obtenir plus d’information :
@@ -99,9 +99,8 @@ const EtablissementListeSection: React.FC<{
             />
             <PageCounter
               currentPage={uniteLegale.currentEtablissementPage || 1}
-              totalPages={Math.ceil(
-                uniteLegale.nombreEtablissements / etablissementsPerPage
-              )}
+              totalPages={totalPages}
+              querySuffix="#etablissements"
             />
           </>
         ) : (

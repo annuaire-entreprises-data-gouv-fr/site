@@ -9,6 +9,36 @@ import IsActiveTag from '../../components-ui/is-active-tag';
 import AvisSituationLink from '../avis-situation-link';
 import ButtonLink from '../../components-ui/button';
 import { INSEE } from '../administrations';
+import PageCounter from '../results-page-counter';
+import constants from '../../models/constants';
+
+const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
+  etablissements,
+}) => (
+  <FullTable
+    head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
+    body={etablissements.map((etablissement: IEtablissement) => [
+      /*eslint-disable*/
+      <a href={`/etablissement/${etablissement.siret}`}>
+        {formatSiret(etablissement.siret)}
+      </a>,
+      !etablissement.estDiffusible ? (
+        <i>Non renseigné</i>
+      ) : (
+        <>
+          {etablissement.adresse}
+          {etablissement.estSiege && <Tag className="info">siège social</Tag>}
+        </>
+      ),
+      <IsActiveTag
+        state={etablissement.etatAdministratif}
+        since={etablissement.dateFermeture}
+      />,
+      <AvisSituationLink siret={etablissement.siret} label="Télécharger" />,
+      /*eslint-enable*/
+    ])}
+  />
+);
 
 interface IProps {
   uniteLegale: IUniteLegale;
@@ -51,29 +81,37 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
           />
           .
         </p>
-        <FullTable
-          head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
-          body={uniteLegale.etablissements.all.map(
-            (etablissement: IEtablissement) => [
-              /*eslint-disable*/
-              <a href={`/etablissement/${etablissement.siret}`}>
-                {formatSiret(etablissement.siret)}
-              </a>,
+        {uniteLegale.nombreEtablissements >
+        constants.resultsPerPage.etablissements ? (
+          <AvisSituationTable etablissements={uniteLegale.etablissements.all} />
+        ) : (
+          <>
+            {uniteLegale.etablissements.open.length > 0 && (
               <>
-                {etablissement.adresse}
-                {etablissement.estSiege && (
-                  <Tag className="info">siège social</Tag>
-                )}
-              </>,
-              <IsActiveTag etat={etablissement.etatAdministratif} />,
-              <AvisSituationLink
-                siret={etablissement.siret}
-                label="Télécharger"
-              />,
-              /*eslint-enable*/
-            ]
-          )}
-        />
+                <h3>Etablissement(s) en activité :</h3>
+                <AvisSituationTable
+                  etablissements={uniteLegale.etablissements.open}
+                />
+              </>
+            )}
+            {uniteLegale.etablissements.closed.length > 0 && (
+              <>
+                <h3>Etablissement(s) fermé(s) :</h3>
+                <AvisSituationTable
+                  etablissements={uniteLegale.etablissements.closed}
+                />
+              </>
+            )}
+            {uniteLegale.etablissements.unknown.length > 0 && (
+              <>
+                <h3>Etablissement(s) non-diffusible(s) :</h3>
+                <AvisSituationTable
+                  etablissements={uniteLegale.etablissements.unknown}
+                />
+              </>
+            )}
+          </>
+        )}
       </>
     ) : (
       <AvisSituationNonDiffusible />

@@ -1,10 +1,11 @@
 import React from 'react';
 import { IETATADMINSTRATIF } from '../../models/etat-administratif';
+import { formatDate } from '../../utils/helpers/formatting';
 import InformationTooltip from '../information-tooltip';
 import { Tag } from '../tag';
 
-const etatClass = (etat: IETATADMINSTRATIF) => {
-  switch (etat) {
+const classFromState = (state: IETATADMINSTRATIF) => {
+  switch (state) {
     case IETATADMINSTRATIF.ACTIF:
       return 'open';
     case IETATADMINSTRATIF.CESSEE:
@@ -18,28 +19,35 @@ const etatClass = (etat: IETATADMINSTRATIF) => {
 };
 
 const EtatTag: React.FC<{
-  etat: IETATADMINSTRATIF;
-}> = ({ etat }) => <Tag className={etatClass(etat)}>{etat}</Tag>;
+  state: IETATADMINSTRATIF;
+  since?: string;
+}> = ({ state, since = '' }) => (
+  <Tag className={classFromState(state)}>
+    {state}
+    {since && <>&nbsp;le&nbsp;{formatDate(since)}</>}
+  </Tag>
+);
 
 const IsActiveTag: React.FC<{
-  etat: IETATADMINSTRATIF;
-}> = ({ etat }) => (
+  state: IETATADMINSTRATIF;
+  since?: string | null;
+}> = ({ state, since }) => (
   <>
-    {etat === IETATADMINSTRATIF.INCONNU ||
-    etat === IETATADMINSTRATIF.NONDIFF ? (
+    {state === IETATADMINSTRATIF.INCONNU ||
+    state === IETATADMINSTRATIF.NONDIFF ? (
       <InformationTooltip
         label="Nous n’avons pas les
             informations nécessaires pour savoir si cette entité est en activité
             ou si elle est fermée."
       >
-        <EtatTag etat={etat} />
+        <EtatTag state={state} />
       </InformationTooltip>
-    ) : etat === IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT ? (
+    ) : state === IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT ? (
       <InformationTooltip label="Cette entité est active du point de vue administratif, mais n’a pas d’activité économique. Tous ses établissements sont fermés.">
-        <EtatTag etat={etat} />
+        <EtatTag state={state} />
       </InformationTooltip>
     ) : (
-      <EtatTag etat={etat} />
+      <EtatTag state={state} since={since || ''} />
     )}
   </>
 );

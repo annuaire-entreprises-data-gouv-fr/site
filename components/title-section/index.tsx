@@ -137,7 +137,7 @@ const Title: React.FC<IProps> = ({
           {!uniteLegale.estDiffusible && (
             <Tag className="unknown">Non-diffusible</Tag>
           )}
-          <IsActiveTag etat={uniteLegale.etatAdministratif} />
+          <IsActiveTag state={uniteLegale.etatAdministratif} />
         </span>
       </div>
     </div>
