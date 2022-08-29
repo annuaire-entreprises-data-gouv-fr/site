@@ -26,7 +26,7 @@ export const getEtatAdministratifUniteLegale = (uniteLegale: IUniteLegale) => {
 
     if (
       uniteLegale.estActive &&
-      !(uniteLegale.etablissements || []).find((a) => a.estActif)
+      !(uniteLegale.etablissements.all || []).find((a) => a.estActif)
     ) {
       return IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT;
     }

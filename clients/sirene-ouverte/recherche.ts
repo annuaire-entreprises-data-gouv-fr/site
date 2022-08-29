@@ -4,7 +4,7 @@ import {
   formatAdresse,
   parseIntWithDefaultValue,
 } from '../../utils/helpers/formatting';
-import { libelleFromCodeNaf } from '../../utils/labels';
+import { libelleFromCodeNAF } from '../../utils/labels';
 import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
@@ -127,8 +127,9 @@ const mapToDomainObjectNew = (
         nombreEtablissements: result.nombre_etablissements || 1,
         nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
         chemin: result.siren,
-        libelleActivitePrincipale: libelleFromCodeNaf(
+        libelleActivitePrincipale: libelleFromCodeNAF(
           result.activite_principale,
+          'NAFRev2', // search does not handle old nomenclatures yet
           false
         ),
       };

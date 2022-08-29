@@ -53,7 +53,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
         </p>
         <FullTable
           head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
-          body={uniteLegale.etablissements.map(
+          body={uniteLegale.etablissements.all.map(
             (etablissement: IEtablissement) => [
               /*eslint-disable*/
               <a href={`/etablissement/${etablissement.siret}`}>

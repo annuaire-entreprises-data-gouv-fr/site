@@ -5,11 +5,12 @@ import {
   createDefaultEtablissement,
   IEtablissement,
   IEtablissementsList,
+  splitByStatus,
 } from '../../models';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
   libelleFromCodeEffectif,
-  libelleFromCodeNaf,
+  libelleFromCodeNAF,
 } from '../../utils/labels';
 import { HttpNotFound, HttpServerError } from '../exceptions';
 import routes from '../routes';
@@ -48,6 +49,7 @@ interface IInseeEtablissement {
     etatAdministratifEtablissement: string;
     changementEtatAdministratifEtablissement: boolean;
     activitePrincipaleEtablissement: string;
+    nomenclatureActivitePrincipaleEtablissement: string;
   }[];
   adresseEtablissement: {
     complementAdresseEtablissement: string;
@@ -105,11 +107,13 @@ const getAllEtablissementsFactory =
     const { header, etablissements } =
       response.data as IInseeEtablissementsResponse;
 
+    const allEtablissements = etablissements.map((e) =>
+      mapEtablissementToDomainObject(e)
+    );
+
     return {
       currentEtablissementPage: page,
-      etablissements: etablissements.map((e) =>
-        mapEtablissementToDomainObject(e)
-      ),
+      etablissements: splitByStatus(allEtablissements),
       nombreEtablissements: header.total,
     };
   };
@@ -182,6 +186,7 @@ export const mapEtablissementToDomainObject = (
     enseigne2Etablissement,
     enseigne3Etablissement,
     etatAdministratifEtablissement,
+    nomenclatureActivitePrincipaleEtablissement,
   } = periodesEtablissement[0];
 
   const enseigne =
@@ -250,8 +255,9 @@ export const mapEtablissementToDomainObject = (
     denomination: denominationUsuelleEtablissement || '',
     dateCreation: dateCreationEtablissement,
     activitePrincipale: activitePrincipaleEtablissement,
-    libelleActivitePrincipale: libelleFromCodeNaf(
-      activitePrincipaleEtablissement
+    libelleActivitePrincipale: libelleFromCodeNAF(
+      activitePrincipaleEtablissement,
+      nomenclatureActivitePrincipaleEtablissement
     ),
     dateDerniereMiseAJour: dateDernierTraitementEtablissement,
     estSiege: !!etablissementSiege,

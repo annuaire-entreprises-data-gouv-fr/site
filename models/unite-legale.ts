@@ -5,6 +5,7 @@ import {
   IEtablissementsList,
   IUniteLegale,
   SirenNotFoundError,
+  splitByStatus,
 } from '.';
 import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {
@@ -25,6 +26,7 @@ import {
   logSireneOuvertefailed,
 } from '../utils/sentry/helpers';
 import { getAssociation } from './association';
+import constants from './constants';
 import { getEtatAdministratifUniteLegale } from './etat-administratif';
 
 /**
@@ -229,7 +231,8 @@ const mergeUniteLegaleInsee = (
     ...uniteLegaleInsee,
     siege,
     chemin,
-    etablissements: allEtablissementsInsee?.etablissements || [siege],
+    etablissements:
+      allEtablissementsInsee?.etablissements || splitByStatus([siege]),
     currentEtablissementPage:
       allEtablissementsInsee?.currentEtablissementPage || 0,
     nombreEtablissements: allEtablissementsInsee?.nombreEtablissements || 1,

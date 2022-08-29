@@ -1,8 +1,15 @@
 # Annuaire des Entreprises - [Site web]
 
-[![Pre-merge checks](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
-[![Accessibilité](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-a11y.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-a11y.yml)
-[![Proxy PDF de l’extrait d’immatriculation INPI](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-inpi-pdf-proxy.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/check-inpi-pdf-proxy.yml)
+[![CI (lint, unit-tests, end2end, a11y)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
+[![Deploy - Staging](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-staging.yml/badge.svg?branch=main)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-staging.yml)
+[![Deploy - Production](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-production.yml)
+![Page entreprise](https://img.shields.io/uptimerobot/status/m787859483-e754b64b78a0c30eea102880?label=Page%20entreprise&logo=Page%20entreprise)
+![Recherche](https://img.shields.io/uptimerobot/status/m787859512-adcc5cd05674366504f96c86?label=Recherche&logo=Page%20entreprise)
+
+**Statut des APIs utilisées sur le site :**
+
+Pour voir le détail des disponibilités des API utilisées sur le site, [consultez la page de statut](https://annuaire-entreprises.data.gouv.fr/administration).
+
 
 Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr)
 
@@ -19,23 +26,6 @@ Ce repository fait partie d'un ensemble de services qui constituent l'[Annuaire 
 |L‘API de redondance de Sirene | [par ici 👉](https://github.com/etalab/annuaire-entreprises-sirene-api) |
 |Le traitement permettant la génération de données à ingérer dans le moteur de recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-infra) |
 |L’API de proxy du RNCS | [par ici 👉](https://github.com/etalab/rncs-api-proxy) |
-
-## Etat des lieux 🤓
-
-**Déploiement**
-
-[![Deploy - Staging](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-staging.yml/badge.svg?branch=main)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-staging.yml)
-
-[![Deploy - Production](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-production.yml)
-
-**Statut du site :**
-
-![Page entreprise](https://img.shields.io/uptimerobot/status/m787859483-e754b64b78a0c30eea102880?label=Page%20entreprise&logo=Page%20entreprise)
-![Recherche](https://img.shields.io/uptimerobot/status/m787859512-adcc5cd05674366504f96c86?label=Recherche&logo=Page%20entreprise)
-
-**Statut des APIs utilisées sur le site :**
-
-Pour voir le détail des disponibilités des API utilisées sur le site, [consultez la page de statut](https://annuaire-entreprises.data.gouv.fr/administration).
 
 ## A propos des choix d'architecture
 

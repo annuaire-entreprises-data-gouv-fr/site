@@ -3,6 +3,7 @@ import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
   IUniteLegale,
+  splitByStatus,
 } from '../../models';
 import { IEtatCivil } from '../../models/immatriculation/rncs';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
@@ -16,7 +17,7 @@ import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracom
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
-  libelleFromCodeNaf,
+  libelleFromCodeNAF,
   libelleFromeCodeCategorie,
 } from '../../utils/labels';
 import routes from '../routes';
@@ -48,6 +49,7 @@ interface IPeriodeUniteLegale {
   economieSocialeSolidaireUniteLegale: string | null;
   dateDebut: string;
   activitePrincipaleUniteLegale: string;
+  nomenclatureActivitePrincipaleUniteLegale: string;
   categorieJuridiqueUniteLegale: string;
   denominationUniteLegale: string;
   caractereEmployeurUniteLegale: string;
@@ -123,6 +125,7 @@ const mapToDomainObject = (
     nicSiegeUniteLegale,
     dateDebut,
     activitePrincipaleUniteLegale = '',
+    nomenclatureActivitePrincipaleUniteLegale,
     categorieJuridiqueUniteLegale,
     denominationUniteLegale,
     economieSocialeSolidaireUniteLegale,
@@ -144,8 +147,9 @@ const mapToDomainObject = (
     siege.nic = nicSiegeUniteLegale;
     siege.dateCreation = dateDebut;
     siege.activitePrincipale = activitePrincipaleUniteLegale;
-    siege.libelleActivitePrincipale = libelleFromCodeNaf(
-      activitePrincipaleUniteLegale
+    siege.libelleActivitePrincipale = libelleFromCodeNAF(
+      activitePrincipaleUniteLegale,
+      nomenclatureActivitePrincipaleUniteLegale
     );
     siege.estSiege = true;
     siege.trancheEffectif = '';
@@ -209,7 +213,7 @@ const mapToDomainObject = (
     ),
     activitePrincipale: siege.activitePrincipale,
     libelleActivitePrincipale: siege.libelleActivitePrincipale,
-    etablissements: [siege],
+    etablissements: splitByStatus([siege]),
     dateCreation: dateCreationUniteLegale,
     dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
       'T'
