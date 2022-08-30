@@ -69,21 +69,23 @@ const EtablissementTable: React.FC<{
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const totalPages = Math.ceil(
-    uniteLegale.nombreEtablissements / constants.resultsPerPage.etablissements
-  );
+  const {
+    usePagination,
+    nombreEtablissements,
+    nombreEtablissementsOuverts,
+    currentEtablissementPage,
+  } = uniteLegale.etablissements;
 
-  const usePagination =
-    uniteLegale.nombreEtablissements > constants.resultsPerPage.etablissements;
-  const hasOpenEtablissements = uniteLegale.etablissements.open.length > 0;
+  const totalPages = Math.ceil(
+    nombreEtablissements / constants.resultsPerPage.etablissements
+  );
 
   return (
     <div id="etablissements">
       <p>
-        Cette entité possède{' '}
-        <b>{uniteLegale.nombreEtablissements} établissement(s)</b>
-        {hasOpenEtablissements && !usePagination && (
-          <> dont {uniteLegale.etablissements.open.length} sont en activité</>
+        Cette entité possède <b>{nombreEtablissements} établissement(s)</b>
+        {nombreEtablissementsOuverts && !usePagination && (
+          <> dont {nombreEtablissementsOuverts} sont en activité</>
         )}
         . Cliquez sur un n° siret pour obtenir plus d’information :
       </p>
@@ -98,14 +100,14 @@ const EtablissementListeSection: React.FC<{
               sieges={uniteLegale.allSiegesSiret}
             />
             <PageCounter
-              currentPage={uniteLegale.currentEtablissementPage || 1}
+              currentPage={currentEtablissementPage || 1}
               totalPages={totalPages}
               querySuffix="#etablissements"
             />
           </>
         ) : (
           <>
-            {uniteLegale.etablissements.open.length > 0 && (
+            {nombreEtablissementsOuverts > 0 && (
               <>
                 <h3>Etablissement(s) en activité :</h3>
                 <EtablissementTable

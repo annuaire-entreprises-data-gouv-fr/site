@@ -81,8 +81,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
           />
           .
         </p>
-        {uniteLegale.nombreEtablissements >
-        constants.resultsPerPage.etablissements ? (
+        {uniteLegale.etablissements.usePagination ? (
           <AvisSituationTable etablissements={uniteLegale.etablissements.all} />
         ) : (
           <>

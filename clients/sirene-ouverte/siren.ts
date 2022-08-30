@@ -4,7 +4,6 @@ import {
   splitByStatus,
 } from '../../models';
 import constants from '../../models/constants';
-import { IETATADMINSTRATIF } from '../../models/etat-administratif';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import { formatAdresse } from '../../utils/helpers/formatting';
 import { Siren } from '../../utils/helpers/siren-and-siret';
@@ -142,7 +141,11 @@ const mapToDomainObject = (
     libelleTrancheEffectif: libelleFromCodeEffectif(
       tranche_effectif_salarie_entreprise
     ),
-    etablissements: splitByStatus(listOfEtablissements),
+    etablissements: splitByStatus(
+      listOfEtablissements,
+      page,
+      nombre_etablissements
+    ),
     estDiffusible: true,
     estActive: !!(siege && siege.estActif),
     estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
@@ -154,7 +157,6 @@ const mapToDomainObject = (
     dateCreation: date_creation_entreprise,
     dateDebutActivite: date_debut_activite,
     dateDerniereMiseAJour: date_mise_a_jour,
-    nombreEtablissements: nombre_etablissements,
     adresse: formatAdresse({
       numeroVoie: numero_voie,
       indiceRepetition: indice_repetition,
@@ -163,7 +165,6 @@ const mapToDomainObject = (
       codePostal: code_postal,
       libelleCommune: libelle_commune,
     }),
-    currentEtablissementPage: page,
     dirigeant: null,
     association: identifiantAssociationUniteLegale
       ? { id: identifiantAssociationUniteLegale }

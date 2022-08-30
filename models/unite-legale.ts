@@ -227,15 +227,17 @@ const mergeUniteLegaleInsee = (
     .toLowerCase()
     .replaceAll(/[^a-zA-Z0-9]+/g, '-');
 
+  const etablissements =
+    allEtablissementsInsee?.etablissements || splitByStatus([siege]);
+  const { currentEtablissementPage, nombreEtablissements } = etablissements;
+
   return {
     ...uniteLegaleInsee,
     siege,
     chemin,
-    etablissements:
-      allEtablissementsInsee?.etablissements || splitByStatus([siege]),
-    currentEtablissementPage:
-      allEtablissementsInsee?.currentEtablissementPage || 0,
-    nombreEtablissements: allEtablissementsInsee?.nombreEtablissements || 1,
+    etablissements,
+    currentEtablissementPage: currentEtablissementPage || 0,
+    nombreEtablissements: nombreEtablissements || 1,
   };
 };
 

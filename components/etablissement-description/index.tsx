@@ -36,14 +36,12 @@ export const EtablissementDescription: React.FC<IProps> = ({
           {uniteLegale.nomComplet}
         </a>
         ,
-        {uniteLegale.etablissements &&
-        uniteLegale.etablissements.all &&
-        uniteLegale.etablissements.all.length > 1 ? (
+        {uniteLegale.etablissements.all.length > 1 ? (
           <>
             {' '}
             qui possède au total{' '}
             <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
-              {uniteLegale.nombreEtablissements} établissements.
+              {uniteLegale.etablissements.nombreEtablissements} établissements.
             </a>
           </>
         ) : (

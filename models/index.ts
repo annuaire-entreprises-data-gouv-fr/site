@@ -1,5 +1,6 @@
 import { IdRna } from '../utils/helpers/id-rna';
 import { Siren, Siret } from '../utils/helpers/siren-and-siret';
+import constants from './constants';
 import { IETATADMINSTRATIF } from './etat-administratif';
 import { IEtatCivil } from './immatriculation/rncs';
 
@@ -77,10 +78,12 @@ export interface IEtablissementsList {
     open: IEtablissement[];
     closed: IEtablissement[];
     unknown: IEtablissement[];
+    nombreEtablissements: number;
+    nombreEtablissementsOuverts: number;
+    // pagination
+    currentEtablissementPage: number;
+    usePagination: boolean;
   };
-  nombreEtablissements: number;
-  // pagination
-  currentEtablissementPage?: number;
 }
 
 /**
@@ -89,7 +92,11 @@ export interface IEtablissementsList {
  * @param all a list of Etablissements
  * @returns
  */
-export const splitByStatus = (all: IEtablissement[]) => {
+export const splitByStatus = (
+  all: IEtablissement[],
+  currentEtablissementPage = 0,
+  realTotal?: number
+) => {
   const open = all
     .filter((e) => e.estActif && e.estDiffusible)
     .sort((a) => (a.estSiege ? -1 : 1));
@@ -97,7 +104,23 @@ export const splitByStatus = (all: IEtablissement[]) => {
   const closed = all.filter((e) => !e.estActif && e.estDiffusible);
 
   const unknown = all.filter((e) => !e.estDiffusible);
-  return { all, open, unknown, closed };
+
+  // real total can exceede all.length if we need pagination
+  const nombreEtablissements = realTotal || all.length;
+  const usePagination =
+    nombreEtablissements > constants.resultsPerPage.etablissements;
+
+  return {
+    all,
+    open,
+    unknown,
+    closed,
+    nombreEtablissementsOuverts: open.length,
+    nombreEtablissements: nombreEtablissements,
+    // pagination
+    usePagination,
+    currentEtablissementPage,
+  };
 };
 
 /** BASIC CONSTRUCTORS */
@@ -149,7 +172,6 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     natureJuridique: '',
     libelleNatureJuridique: '',
     etablissements: splitByStatus([siege]),
-    nombreEtablissements: 1,
     activitePrincipale: '',
     libelleActivitePrincipale: '',
     dateCreation: '',

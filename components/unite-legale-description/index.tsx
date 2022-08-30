@@ -1,14 +1,14 @@
 import React from 'react';
 import { IUniteLegale } from '../../models';
-import constants from '../../models/constants';
 import { formatDateLong } from '../../utils/helpers/formatting';
 
 export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
 }) => {
-  const usePagination =
-    uniteLegale.nombreEtablissements > constants.resultsPerPage.etablissements;
-  const hasOpenEtablissements = uniteLegale.etablissements.open.length > 0;
+  const { nombreEtablissements, nombreEtablissementsOuverts, usePagination } =
+    uniteLegale.etablissements;
+
+  const hasOpenEtablissements = nombreEtablissementsOuverts > 0;
 
   return (
     <p>
@@ -38,12 +38,9 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
       .{' '}
       {uniteLegale.etablissements.all && (
         <>
-          Elle possède {uniteLegale.nombreEtablissements} établissement(s)
+          Elle possède {nombreEtablissements} établissement(s)
           {hasOpenEtablissements && !usePagination && (
-            <b>
-              {' '}
-              dont {uniteLegale.etablissements.open.length} sont en activité
-            </b>
+            <b> dont {nombreEtablissementsOuverts} sont en activité</b>
           )}{' '}
           (
           <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
