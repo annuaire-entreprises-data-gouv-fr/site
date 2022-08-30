@@ -96,7 +96,7 @@ class StaticDocument extends Document {
             nomodule="nomodule"
             src={
               //@ts-ignore
-              `/${manifest['../vite/legacy-polyfills'].file}`
+              `/${manifest['../vite/legacy-polyfills-legacy'].file}`
             }
           ></script>
           <script

@@ -116,20 +116,20 @@ const EtablissementListeSection: React.FC<{
                 />
               </>
             )}
-            {uniteLegale.etablissements.closed.length > 0 && (
-              <>
-                <h3>Etablissement(s) fermé(s) :</h3>
-                <EtablissementTable
-                  etablissements={uniteLegale.etablissements.closed}
-                  sieges={uniteLegale.allSiegesSiret}
-                />
-              </>
-            )}
             {uniteLegale.etablissements.unknown.length > 0 && (
               <>
                 <h3>Etablissement(s) non-diffusible(s) :</h3>
                 <EtablissementTable
                   etablissements={uniteLegale.etablissements.unknown}
+                  sieges={uniteLegale.allSiegesSiret}
+                />
+              </>
+            )}
+            {uniteLegale.etablissements.closed.length > 0 && (
+              <>
+                <h3>Etablissement(s) fermé(s) :</h3>
+                <EtablissementTable
+                  etablissements={uniteLegale.etablissements.closed}
                   sieges={uniteLegale.allSiegesSiret}
                 />
               </>

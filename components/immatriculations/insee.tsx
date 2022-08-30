@@ -93,19 +93,19 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
                 />
               </>
             )}
-            {uniteLegale.etablissements.closed.length > 0 && (
-              <>
-                <h3>Etablissement(s) fermé(s) :</h3>
-                <AvisSituationTable
-                  etablissements={uniteLegale.etablissements.closed}
-                />
-              </>
-            )}
             {uniteLegale.etablissements.unknown.length > 0 && (
               <>
                 <h3>Etablissement(s) non-diffusible(s) :</h3>
                 <AvisSituationTable
                   etablissements={uniteLegale.etablissements.unknown}
+                />
+              </>
+            )}
+            {uniteLegale.etablissements.closed.length > 0 && (
+              <>
+                <h3>Etablissement(s) fermé(s) :</h3>
+                <AvisSituationTable
+                  etablissements={uniteLegale.etablissements.closed}
                 />
               </>
             )}
