@@ -96,7 +96,7 @@ class StaticDocument extends Document {
             nomodule="nomodule"
             src={
               //@ts-ignore
-              `/${manifest['../\u0000vite/legacy-polyfills'].file}`
+              `/${manifest['../vite/legacy-polyfills'].file}`
             }
           ></script>
           <script
@@ -108,7 +108,7 @@ class StaticDocument extends Document {
           <link
             rel="stylesheet"
             type="text/css"
-            href={`/${manifest['js/production.js'].css}`}
+            href={`/${manifest['js/production.css'].file}`}
           />
           <script
             defer
