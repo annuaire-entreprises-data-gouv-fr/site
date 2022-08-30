@@ -87,9 +87,11 @@ export interface IEtablissementsList {
 }
 
 /**
- * Split a list of etablissements by status
+ * Split a list of etablissements by status (open/closed)
  *
- * @param all a list of Etablissements
+ * @param all
+ * @param currentEtablissementPage (optional) for pagination
+ * @param realTotal (optional) total etablissement (can exceed pagination)
  * @returns
  */
 export const splitByStatus = (
