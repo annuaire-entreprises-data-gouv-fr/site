@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import {
   administrationsMetaData,
   EAdministration,
@@ -28,7 +28,7 @@ interface ISectionProps {
   lastModified?: string | null;
 }
 
-export const Section: React.FC<ISectionProps> = ({
+export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   id,
   children,
   title,

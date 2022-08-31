@@ -9,7 +9,7 @@ const ping = async (
   res: NextApiResponse
 ) => {
   try {
-    const { test, status = 500 } = await pingAPIClient(slug);
+    const { test, status = 500 } = await pingAPIClient(slug || '');
 
     if (test) {
       res.status(200).json({ message: 'ok' });

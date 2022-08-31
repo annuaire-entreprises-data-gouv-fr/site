@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import Footer from '../components/footer';
 import { Header, HeaderSearch } from '../components/header';
 import Meta from '../components/meta';
@@ -19,7 +19,7 @@ interface IProps {
   noIndex?: boolean;
 }
 
-const Page: React.FC<IProps> = ({
+const Page: React.FC<PropsWithChildren<IProps>> = ({
   small,
   children,
   currentSearchTerm = '',

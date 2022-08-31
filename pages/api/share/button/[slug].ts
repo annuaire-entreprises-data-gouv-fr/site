@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import logErrorInSentry from '../../../../utils/sentry';
 
 const button = (
-  { query: { slug, light = '' } }: NextApiRequest,
+  { query: { slug = '', light = '' } }: NextApiRequest,
   res: NextApiResponse
 ) => {
   const isSiren = slug.length === 9;
