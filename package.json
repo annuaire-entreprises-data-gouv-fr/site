@@ -21,7 +21,6 @@
     "test:end2end": "cypress open",
     "test:unit": "jest --runInBand",
     "test:a11y": "node ./node-scripts/a11y.js",
-    "test:inpi-pdf-proxy": "node ./node-scripts/inpi-pdf-proxy-test.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -73,6 +72,9 @@
     "jest": "^29.0.1",
     "npm-run-all": "^4.1.5",
     "pre-commit": "^1.2.2"
+  },
+  "optionalDependencies": {
+    "@swc/core-linux-x64-gnu": "^1.2"
   },
   "pre-commit": {
     "run": [

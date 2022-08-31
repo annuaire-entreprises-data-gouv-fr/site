@@ -34,7 +34,7 @@ describe(`Pagination for multiple etablissement company`, () => {
     cy.get('.fr-pagination__link[aria-current="page"]').should(
       'have.attr',
       'href',
-      '?page=6'
+      '?page=6&#etablissements'
     );
   });
 
