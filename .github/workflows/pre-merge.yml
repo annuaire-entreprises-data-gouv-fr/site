@@ -173,7 +173,7 @@ jobs:
         run: sudo apt-get install -y redis-tools redis-server
 
       - name: Cypress run
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           # we have already installed all dependencies above
           browser: firefox
