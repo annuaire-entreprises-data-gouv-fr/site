@@ -34,7 +34,7 @@ const AnnoncesJOSection: React.FC<{
   return (
     <Section
       title="Annonces Journal Officiel des Associations"
-      source={EAdministration.DILA}
+      sources={[EAdministration.DILA]}
       lastModified={jo.lastModified}
     >
       {jo.annonces.filter((annonce) => annonce.typeAvisLibelle === 'Création')

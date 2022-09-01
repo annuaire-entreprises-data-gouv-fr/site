@@ -11,7 +11,7 @@ import MultipleSirenAlert from '../../components-ui/alerts/multiple-siren';
 import AssociationAdressAlert from '../../components-ui/alerts/association-adress';
 
 export enum FICHE {
-  INFORMATION = 'informations générales',
+  INFORMATION = 'résumé',
   JUSTIFICATIFS = 'justificatifs',
   ANNONCES = 'annonces',
   DIRIGEANTS = 'dirigeants',
@@ -34,7 +34,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         className={`${ficheType === FICHE.INFORMATION && 'active'}`}
         href={`/entreprise/${siren}`}
       >
-        Informations générales
+        Résumé
       </a>
       <a
         className={`${ficheType === FICHE.JUSTIFICATIFS && 'active'}`}

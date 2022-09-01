@@ -8,15 +8,6 @@ export interface ITvaIntracommunautaire {
 }
 
 /**
- * Compute TVA number from siren - include country code
- * @param siren
- * @returns
- */
-export const tvaNumberWithCountryCode = (siren: Siren) => {
-  const tvaNumberFromSiren = tvaNumber(siren);
-  return tvaNumberFromSiren ? `FR${tvaNumberFromSiren}` : '';
-};
-/**
  * Compute TVA number from siren - does not include country code
  * @param siren
  * @returns
@@ -35,19 +26,13 @@ export const tvaNumber = (siren: Siren) => {
  */
 export const tvaIntracommunautaire = async (
   siren: Siren
-): Promise<ITvaIntracommunautaire> => {
+): Promise<string | null> => {
   try {
     const tvaNumberFromSiren = tvaNumber(siren);
-    const isValid = await validateTVANumber(tvaNumberFromSiren);
-    return {
-      numero: tvaNumberWithCountryCode(siren),
-      isValid,
-    };
+    const tva = await validateTVANumber(tvaNumberFromSiren);
+    return tva;
   } catch (e: any) {
     logErrorInSentry('Error in API TVA', { details: e.toString(), siren });
-    return {
-      numero: tvaNumberWithCountryCode(siren),
-      isValid: false,
-    };
+    return null;
   }
 };

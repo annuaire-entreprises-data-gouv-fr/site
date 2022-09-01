@@ -3,7 +3,6 @@ import { Siren, Siret } from '../utils/helpers/siren-and-siret';
 import constants from './constants';
 import { IETATADMINSTRATIF } from './etat-administratif';
 import { IEtatCivil } from './immatriculation/rncs';
-import { ITvaIntracommunautaire } from './tva';
 
 /** COMMON TYPES */
 export interface IAssociation {
@@ -47,7 +46,7 @@ export interface IEtablissementWithUniteLegale {
 export interface IUniteLegale extends IEtablissementsList {
   siren: Siren;
   oldSiren: Siren;
-  numeroTva: ITvaIntracommunautaire;
+  numeroTva: string | null;
   siege: IEtablissement;
   allSiegesSiret: Siret[];
   natureJuridique: string;
@@ -171,10 +170,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     estEss: false,
     nomComplet: '',
     chemin: siren,
-    numeroTva: {
-      numero: '',
-      isValid: false,
-    },
+    numeroTva: null,
     natureJuridique: '',
     libelleNatureJuridique: '',
     etablissements: splitByStatus([siege]),

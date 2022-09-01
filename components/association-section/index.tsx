@@ -31,8 +31,8 @@ const AssociationSection: React.FC<{
   return (
     <div id="entreprise">
       <Section
-        title={`Les informations au Répertoire National des Associations`}
-        source={EAdministration.MI}
+        title={`Répertoire National des Associations`}
+        sources={[EAdministration.MI]}
       >
         {notInRna ? (
           <>

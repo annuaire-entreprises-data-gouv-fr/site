@@ -24,7 +24,7 @@ const administrationsLogo: IAdministrationsLogos = {
 interface ISectionProps {
   title: string;
   width?: number;
-  source?: EAdministration;
+  sources?: EAdministration[];
   id?: string;
   lastModified?: string | null;
 }
@@ -33,15 +33,20 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   id,
   children,
   title,
-  source,
+  sources = [],
   lastModified = null,
   width = 100,
 }) => {
-  const dataSource = source ? administrationsMetaData[source] : undefined;
-  const dataLogo = source ? administrationsLogo[source] : undefined;
+  const dataSources = sources.map((source) => {
+    return {
+      data: administrationsMetaData[source],
+      logo: administrationsLogo[source],
+    };
+  });
 
   const isOld = lastModified && isTwoMonthOld(lastModified);
   const last = lastModified || new Date();
+
   return (
     <>
       <div className="section-container" id={id}>
@@ -53,25 +58,28 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           </Warning>
         )}
         <div>{children}</div>
-        {dataSource && (
-          <>
-            <div className="data-source-tooltip-wrapper">
-              <DataSourceTooltip
-                dataSource={dataSource}
-                lastUpdatedAt={formatDate(last)}
-              />
-            </div>
-            {dataLogo && (
-              <a
-                href={`/administration/${dataSource.slug}`}
-                className="logo-wrapper"
-                title={dataSource.long}
-              >
-                {dataLogo}
-              </a>
-            )}
-          </>
-        )}
+        <div className="data-source-tooltip-wrapper">
+          {dataSources.map(
+            ({ data, logo }) =>
+              data && (
+                <>
+                  <DataSourceTooltip
+                    dataSource={data}
+                    lastUpdatedAt={formatDate(last)}
+                  />
+                  {logo && (
+                    <a
+                      href={`/administration/${data.slug}`}
+                      className="logo-wrapper"
+                      title={data.long}
+                    >
+                      {logo}
+                    </a>
+                  )}
+                </>
+              )
+          )}
+        </div>
       </div>
       <style jsx>{`
         .section-container {

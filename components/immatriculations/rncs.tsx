@@ -47,7 +47,7 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
           <Section
             id="rncs"
             title="Immatriculation au RNCS"
-            source={EAdministration.INPI}
+            sources={[EAdministration.INPI]}
           >
             {immatriculation.metadata.isFallback && (
               <InpiPartiallyDownWarning missing="le numéro RCS" />
