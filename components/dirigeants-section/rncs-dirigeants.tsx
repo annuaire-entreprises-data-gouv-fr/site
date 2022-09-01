@@ -56,7 +56,7 @@ const DirigeantsSection: React.FC<IProps> = ({
       <AdministrationNotResponding
         administration={immatriculationRNCS.administration}
         errorType={immatriculationRNCS.errorType}
-        title="Les informations sur les dirigeants"
+        title="Les dirigeants"
       />
     );
   }
@@ -103,7 +103,7 @@ const DirigeantsSection: React.FC<IProps> = ({
     <>
       <Section
         id="rncs-dirigeants"
-        title={`Les informations sur le${plural} dirigeant${plural}`}
+        title={`Dirigeant${plural}`}
         source={EAdministration.INPI}
       >
         <>

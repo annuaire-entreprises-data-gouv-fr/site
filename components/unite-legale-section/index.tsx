@@ -25,7 +25,12 @@ const UniteLegaleSection: React.FC<{
       'Activité principale du siège social (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
     ],
-    ['Adresse du siège social', uniteLegale.siege.adresse],
+    [
+      'Adresse postale',
+      `${
+        uniteLegale.siege.denomination && uniteLegale.siege.denomination + ', '
+      }${uniteLegale.siege.adresse}`,
+    ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
       'Tranche effectif salarié de l’entité',
@@ -46,10 +51,7 @@ const UniteLegaleSection: React.FC<{
 
   return (
     <div id="entreprise">
-      <Section
-        title={`Les informations sur cette entité`}
-        source={EAdministration.INSEE}
-      >
+      <Section title={`Informations générales`} source={EAdministration.INSEE}>
         <TwoColumnTable body={data} />
       </Section>
       <HorizontalSeparator />

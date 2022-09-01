@@ -11,60 +11,76 @@ import { Tag } from '../../components-ui/tag';
 import { formatDate } from '../../utils/helpers/formatting';
 
 const EtablissementTable: React.FC<{
+  label?: string;
   etablissements: IEtablissement[];
   sieges: Siret[];
-}> = ({ etablissements, sieges = [] }) => (
-  <FullTable
-    head={[
-      'SIRET',
-      'Activité (NAF/APE)',
-      'Détails (nom, enseigne, adresse)',
-      'Création',
-      'Etat',
-    ]}
-    body={etablissements.map((etablissement: IEtablissement) => [
-      //eslint-disable-next-line
-      <a href={`/etablissement/${etablissement.siret}`}>
-        {formatSiret(etablissement.siret)}
-      </a>,
-      <>
-        {!etablissement.estDiffusible ? (
-          <i>Non renseigné</i>
-        ) : (
-          etablissement.libelleActivitePrincipale
-        )}
-      </>,
-      <>
-        {!etablissement.estDiffusible ? (
-          <i>Non renseigné</i>
-        ) : (
+}> = ({ label, etablissements, sieges = [] }) => {
+  const plural = etablissements.length > 1 ? 's' : '';
+  return (
+    <>
+      {label && (
+        <h3>
+          Etablissement{plural} {label}
+          {plural}&nbsp;:
+        </h3>
+      )}
+
+      <FullTable
+        head={[
+          'SIRET',
+          'Activité (NAF/APE)',
+          'Détails (nom, enseigne, adresse)',
+          'Création',
+          'Etat',
+        ]}
+        body={etablissements.map((etablissement: IEtablissement) => [
+          //eslint-disable-next-line
+          <a href={`/etablissement/${etablissement.siret}`}>
+            {formatSiret(etablissement.siret)}
+          </a>,
           <>
-            <span style={{ fontVariant: 'all-small-caps' }}>
-              {(etablissement.enseigne || etablissement.denomination) && (
-                <b>
-                  {etablissement.enseigne || etablissement.denomination}
-                  <br />
-                </b>
-              )}
-              <>{etablissement.adresse}</>
-            </span>
-            {etablissement.estSiege && <Tag className="info">siège social</Tag>}
-            {sieges.indexOf(etablissement.siret) > 0 &&
-              !etablissement.estSiege && <Tag>ancien siège social</Tag>}
-          </>
-        )}
-      </>,
-      (etablissement.estDiffusible && formatDate(etablissement.dateCreation)) ||
-        '',
-      <>
-        <IsActiveTag
-          state={etablissement.etatAdministratif}
-          since={etablissement.dateFermeture}
-        />
-      </>,
-    ])}
-  />
-);
+            {!etablissement.estDiffusible ? (
+              <i>Non renseigné</i>
+            ) : (
+              etablissement.libelleActivitePrincipale
+            )}
+          </>,
+          <>
+            {!etablissement.estDiffusible ? (
+              <i>Non renseigné</i>
+            ) : (
+              <>
+                <span style={{ fontVariant: 'all-small-caps' }}>
+                  {(etablissement.enseigne || etablissement.denomination) && (
+                    <b>
+                      {etablissement.enseigne || etablissement.denomination}
+                      <br />
+                    </b>
+                  )}
+                  <>{etablissement.adresse}</>
+                </span>
+                {etablissement.estSiege && (
+                  <Tag className="info">siège social</Tag>
+                )}
+                {sieges.indexOf(etablissement.siret) > 0 &&
+                  !etablissement.estSiege && <Tag>ancien siège social</Tag>}
+              </>
+            )}
+          </>,
+          (etablissement.estDiffusible &&
+            formatDate(etablissement.dateCreation)) ||
+            '',
+          <>
+            <IsActiveTag
+              state={etablissement.etatAdministratif}
+              since={etablissement.dateFermeture}
+            />
+          </>,
+        ])}
+      />
+    </>
+  );
+};
 
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -80,19 +96,25 @@ const EtablissementListeSection: React.FC<{
     nombreEtablissements / constants.resultsPerPage.etablissements
   );
 
+  const plural = nombreEtablissements > 1 ? 's' : '';
+  const pluralBe = nombreEtablissementsOuverts > 1 ? 'sont' : 'est';
+
   return (
     <div id="etablissements">
       <p>
-        Cette entité possède <b>{nombreEtablissements} établissement(s)</b>
+        Cette entité possède{' '}
+        <b>
+          {nombreEtablissements} établissement{plural}
+        </b>
         {nombreEtablissementsOuverts && !usePagination && (
-          <> dont {nombreEtablissementsOuverts} sont en activité</>
+          <>
+            {' '}
+            dont {nombreEtablissementsOuverts} {pluralBe} en activité
+          </>
         )}
         . Cliquez sur un n° siret pour obtenir plus d’information :
       </p>
-      <Section
-        title="La liste des établissements de l’entité"
-        source={EAdministration.INSEE}
-      >
+      <Section title={`Etablissement${plural}`} source={EAdministration.INSEE}>
         {usePagination ? (
           <>
             <EtablissementTable
@@ -109,8 +131,8 @@ const EtablissementListeSection: React.FC<{
           <>
             {nombreEtablissementsOuverts > 0 && (
               <>
-                <h3>Etablissement(s) en activité :</h3>
                 <EtablissementTable
+                  label="actif"
                   etablissements={uniteLegale.etablissements.open}
                   sieges={uniteLegale.allSiegesSiret}
                 />
@@ -118,8 +140,8 @@ const EtablissementListeSection: React.FC<{
             )}
             {uniteLegale.etablissements.unknown.length > 0 && (
               <>
-                <h3>Etablissement(s) non-diffusible(s) :</h3>
                 <EtablissementTable
+                  label="non-diffusible"
                   etablissements={uniteLegale.etablissements.unknown}
                   sieges={uniteLegale.allSiegesSiret}
                 />
@@ -127,8 +149,8 @@ const EtablissementListeSection: React.FC<{
             )}
             {uniteLegale.etablissements.closed.length > 0 && (
               <>
-                <h3>Etablissement(s) fermé(s) :</h3>
                 <EtablissementTable
+                  label="fermé"
                   etablissements={uniteLegale.etablissements.closed}
                   sieges={uniteLegale.allSiegesSiret}
                 />

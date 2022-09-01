@@ -1,8 +1,6 @@
 import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
-import { map, pin } from '../../components-ui/icon';
 import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
-import ButtonLink from '../../components-ui/button';
 import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
@@ -27,6 +25,15 @@ const EtablissementSection: React.FC<IProps> = ({
   withDenomination,
 }) => {
   const data = [
+    ['Adresse', etablissement.adresse],
+    [
+      '',
+      <PrintNever key="adresse-link">
+        <a href={`/carte/${etablissement.siret}`}>→ voir sur la carte</a>
+        <br />
+        <br />
+      </PrintNever>,
+    ],
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
     ['N° TVA Intracommunautaire', formatIntFr(uniteLegale.numeroTva)],
@@ -46,7 +53,7 @@ const EtablissementSection: React.FC<IProps> = ({
       formatDate(etablissement.dateDerniereMiseAJour),
     ],
     [
-      'Avis de situation INSEE',
+      'Avis de situation Insee',
       // eslint-disable-next-line
       <AvisSituationLink siret={etablissement.siret} />,
     ],
@@ -94,84 +101,27 @@ const EtablissementSection: React.FC<IProps> = ({
       <Section
         title={
           usedInEntreprisePage
-            ? `Les informations sur le siège social`
-            : `Les informations sur cet établissement${
-                etablissement.estSiege ? ' (siège social)' : ''
-              }`
+            ? `Siège social`
+            : `Établissement${etablissement.estSiege ? ' (siège social)' : ''}`
         }
         id="etablissement"
         source={EAdministration.INSEE}
       >
         <TwoColumnTable body={data} />
+        <p className="faq-entrepreneur-individuels">
+          <br />
+          <i>
+            Pour en savoir plus sur l’affichage des adresses{' '}
+            <a href="/faq">consultez notre FAQ</a>
+          </i>
+        </p>
       </Section>
-      <div className="section-wrapper" id="contact">
-        <Section
-          title="Les informations de contact"
-          source={EAdministration.INSEE}
-        >
-          <TwoColumnTable
-            body={[
-              [
-                'Adresse postale',
-                <>
-                  {etablissement.denomination && (
-                    <>
-                      {etablissement.denomination}
-                      <br />
-                    </>
-                  )}
-                  {etablissement.adresse}
-                </>,
-              ],
-            ]}
-          />
-          {uniteLegale.estEntrepreneurIndividuel && (
-            <p className="faq-entrepreneur-individuels">
-              <i>
-                Pour en savoir plus sur l’affichage des adresses{' '}
-                <a href="/faq">consultez notre FAQ</a>
-              </i>
-            </p>
-          )}
-        </Section>
-        {etablissement.adresse && (
-          <PrintNever>
-            <div className="map">
-              {map}
-              <div className="layout-center">
-                <ButtonLink to={`/carte/${etablissement.siret}`} alt nofollow>
-                  {pin}
-                  Afficher sur la carte
-                </ButtonLink>
-              </div>
-            </div>
-          </PrintNever>
-        )}
-      </div>
       <HorizontalSeparator />
       <BreakPageForPrint />
       <style jsx>{`
         .section-wrapper {
           display: flex;
           flex-direction: row;
-        }
-        .section-wrapper .map {
-          background-color: #fff;
-          max-height: 130px;
-          overflow: hidden;
-          width: 220px;
-          flex-shrink: 0;
-          margin: 10px 0 10px 20px;
-          position: relative;
-        }
-        .section-wrapper .map > svg {
-          width: 100%;
-        }
-        .section-wrapper .map > div {
-          position: absolute;
-          bottom: 0;
-          height: 100%;
-          width: 100%;
         }
 
         .faq-entrepreneur-individuels {
@@ -182,12 +132,6 @@ const EtablissementSection: React.FC<IProps> = ({
         @media only screen and (min-width: 1px) and (max-width: 600px) {
           .section-wrapper {
             flex-direction: column;
-          }
-
-          .section-wrapper .map {
-            flex-direction: column;
-            width: 100%;
-            margin: auto;
           }
         }
       `}</style>

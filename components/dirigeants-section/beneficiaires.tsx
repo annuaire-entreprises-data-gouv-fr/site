@@ -62,7 +62,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
       <HorizontalSeparator />
       <Section
         id="beneficiaires"
-        title={`Les informations sur le${plural} bénéficiaire${plural} effectif${plural}`}
+        title={`Bénéficiaire${plural} effectif${plural}`}
         source={EAdministration.INPI}
       >
         {immatriculationRNCS.beneficiaires.length === 0 ? (

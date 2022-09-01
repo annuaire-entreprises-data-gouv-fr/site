@@ -10,6 +10,9 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
 
   const hasOpenEtablissements = nombreEtablissementsOuverts > 0;
 
+  const plural = nombreEtablissements > 1 ? 's' : '';
+  const pluralBe = nombreEtablissementsOuverts > 1 ? 'sont' : 'est';
+
   return (
     <p>
       <>L’unité légale {uniteLegale.nomComplet}</>{' '}
@@ -38,9 +41,12 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
       .{' '}
       {uniteLegale.etablissements.all && (
         <>
-          Elle possède {nombreEtablissements} établissement(s)
+          Elle possède {nombreEtablissements} établissement{plural}
           {hasOpenEtablissements && !usePagination && (
-            <b> dont {nombreEtablissementsOuverts} sont en activité</b>
+            <b>
+              {' '}
+              dont {nombreEtablissementsOuverts} {pluralBe} en activité
+            </b>
           )}{' '}
           (
           <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
