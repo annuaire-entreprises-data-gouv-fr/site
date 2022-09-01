@@ -49,7 +49,7 @@ const administrationsWithMonitors = Object.values(
 
 const allMonitorsMetaData = administrationsWithMonitors.reduce(
   (allApiMonitors: IAPIMonitorMetaData[], admin: IAdministrationMetaData) => {
-    return [...allApiMonitors, ...admin.apiMonitors];
+    return [...allApiMonitors, ...(admin.apiMonitors || [])];
   },
   []
 );
@@ -68,8 +68,9 @@ export const getMonitorsWithMetaData = async (
 
     const admin = administrationsWithMonitors.find(
       (admin) =>
-        admin.apiMonitors.find((monitor) => monitor.id === metaData.id) !==
-        undefined
+        (admin.apiMonitors || []).find(
+          (monitor) => monitor.id === metaData.id
+        ) !== undefined
     );
 
     if (!admin) {
