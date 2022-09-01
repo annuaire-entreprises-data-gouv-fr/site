@@ -26,8 +26,8 @@ import {
   logSireneOuvertefailed,
 } from '../utils/sentry/helpers';
 import { getAssociation } from './association';
-import constants from './constants';
 import { getEtatAdministratifUniteLegale } from './etat-administratif';
+import { tvaIntracommunautaire } from './tva';
 
 /**
  * List of siren whose owner refused diffusion
@@ -36,8 +36,6 @@ const protectedSirenPath = 'public/protected-siren.txt';
 const protectedSiren = readFileSync(protectedSirenPath, 'utf8').split('\n');
 const isProtectedSiren = (siren: Siren) => protectedSiren.indexOf(siren) > -1;
 
-const unknownTVA = ['775092091'];
-
 /**
  * PUBLIC METHODS
  */
@@ -45,7 +43,6 @@ const unknownTVA = ['775092091'];
 interface IUniteLegaleOptions {
   page?: number;
   isBot?: boolean;
-  useRna?: boolean;
 }
 
 /**
@@ -56,13 +53,22 @@ export const getUniteLegaleFromSlug = async (
   options: IUniteLegaleOptions
 ): Promise<IUniteLegale> => {
   const siren = verifySiren(slug);
-  const { page = 1, isBot = false, useRna = false } = options;
+  const { page = 1, isBot = false } = options;
 
-  const uniteLegale = isBot
-    ? await getUniteLegaleForGoodBot(siren, page)
-    : await getUniteLegale(siren, page);
+  const getUniteLegaleFunction = isBot
+    ? getUniteLegaleForGoodBot
+    : getUniteLegale;
 
-  if (useRna && uniteLegale.association && uniteLegale.association.id) {
+  const [uniteLegale, tva] = await Promise.all([
+    getUniteLegaleFunction(siren, page),
+    tvaIntracommunautaire(siren),
+  ]);
+
+  if (tva) {
+    uniteLegale.numeroTva = tva;
+  }
+
+  if (uniteLegale.association && uniteLegale.association.id) {
     uniteLegale.association = {
       ...(await getAssociation(uniteLegale.association.id, uniteLegale)),
       id: uniteLegale.association.id,
@@ -77,11 +83,6 @@ export const getUniteLegaleFromSlug = async (
   // only entreprise commerciales
   if (isProtectedSiren(uniteLegale.siren)) {
     uniteLegale.estEntrepriseCommercialeDiffusible = false;
-  }
-
-  // some TVA cannot be computed
-  if (unknownTVA.indexOf(uniteLegale.siren) > -1) {
-    uniteLegale.numeroTva = '';
   }
 
   uniteLegale.etatAdministratif = getEtatAdministratifUniteLegale(uniteLegale);

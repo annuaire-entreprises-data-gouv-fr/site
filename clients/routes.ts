@@ -78,6 +78,9 @@ const routes = {
     },
     tracker: 'https://stats.data.gouv.fr/piwik.php',
   },
+  tva: {
+    vies: 'https://ec.europa.eu/taxation_customs/vies/rest-api/ms/FR/vat/',
+  },
 };
 
 export default routes;

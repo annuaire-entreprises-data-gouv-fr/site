@@ -7,7 +7,7 @@ import { isTwoMonthOld } from '../../utils/helpers/checks';
 import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
 import Warning from '../../components-ui/alerts/warning';
 import DataSourceTooltip from '../../components-ui/information-tooltip/data-source-tooltip';
-import { cma, inpi, insee, dila } from '../administrations/logos';
+import { cma, inpi, insee, dila, vies } from '../administrations/logos';
 
 interface IAdministrationsLogos {
   [key: string]: JSX.Element;
@@ -18,6 +18,7 @@ const administrationsLogo: IAdministrationsLogos = {
   [EAdministration.CMAFRANCE]: cma,
   [EAdministration.INSEE]: insee,
   [EAdministration.DILA]: dila,
+  [EAdministration.VIES]: vies,
 };
 
 interface ISectionProps {

@@ -7,6 +7,7 @@ import BreakPageForPrint from '../../components-ui/print-break-page';
 import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
+import TvaSection from '../tva-section';
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -20,7 +21,6 @@ const UniteLegaleSection: React.FC<{
         uniteLegale.siege.siret &&
         formatSiret((uniteLegale.siege || {}).siret),
     ],
-    ['N° TVA Intracommunautaire', formatIntFr(uniteLegale.numeroTva)],
     [
       'Activité principale du siège social (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
@@ -52,6 +52,7 @@ const UniteLegaleSection: React.FC<{
       >
         <TwoColumnTable body={data} />
       </Section>
+      <TvaSection uniteLegale={uniteLegale} />
       <HorizontalSeparator />
       <BreakPageForPrint />
     </div>

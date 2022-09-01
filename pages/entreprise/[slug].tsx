@@ -114,7 +114,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const uniteLegale = await getUniteLegaleFromSlug(siren, {
       page,
       isBot,
-      useRna: true,
     });
 
     return {

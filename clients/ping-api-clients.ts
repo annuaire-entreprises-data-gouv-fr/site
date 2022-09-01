@@ -7,6 +7,7 @@ import { getUniteLegaleInseeNoCache } from './sirene-insee/siren';
 import getResults from './sirene-ouverte/recherche';
 import getUniteLegaleSireneOuverte from './sirene-ouverte/siren';
 import fetchConventionCollectives from './siret-2-idcc';
+import { validateTVANumber } from './tva';
 
 export class APISlugNotFound extends Error {
   constructor(public status: number, public message: string) {
@@ -15,6 +16,7 @@ export class APISlugNotFound extends Error {
 }
 
 const ping = async (slug: string | string[]) => {
+  const useCache = false;
   switch (slug) {
     case 'api-proxy-rncs':
       // fetch IRM and disable cache
@@ -28,7 +30,9 @@ const ping = async (slug: string | string[]) => {
     case 'api-sirene-donnees-ouvertes':
       return await getUniteLegaleSireneOuverte(verifySiren('880878145'));
     case 'api-rna':
-      return await fetchAssociation(verifyIdRna('W551000280'));
+      return await fetchAssociation(verifyIdRna('W551000280'), useCache);
+    case 'api-tva':
+      return await validateTVANumber(verifySiren('880878145'), useCache);
     case 'api-recherche':
       return await getResults('test', 1);
     default:

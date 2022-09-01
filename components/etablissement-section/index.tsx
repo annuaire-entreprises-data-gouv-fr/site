@@ -1,7 +1,7 @@
 import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
 import { map, pin } from '../../components-ui/icon';
-import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
+import { formatDate } from '../../utils/helpers/formatting';
 import ButtonLink from '../../components-ui/button';
 import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
@@ -12,6 +12,7 @@ import AvisSituationLink from '../avis-situation-link';
 import { EtablissementDescription } from '../etablissement-description';
 import BreakPageForPrint from '../../components-ui/print-break-page';
 import { PrintNever } from '../../components-ui/print-visibility';
+import TvaSection from '../tva-section';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -29,7 +30,6 @@ const EtablissementSection: React.FC<IProps> = ({
   const data = [
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
-    ['N° TVA Intracommunautaire', formatIntFr(uniteLegale.numeroTva)],
     [
       'Activité principale de l’entité (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
@@ -104,6 +104,7 @@ const EtablissementSection: React.FC<IProps> = ({
       >
         <TwoColumnTable body={data} />
       </Section>
+      {!usedInEntreprisePage && <TvaSection uniteLegale={uniteLegale} />}
       <div className="section-wrapper" id="contact">
         <Section
           title="Les informations de contact"
