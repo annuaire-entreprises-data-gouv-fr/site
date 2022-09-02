@@ -6,7 +6,7 @@ import {
 import { isTwoMonthOld } from '../../utils/helpers/checks';
 import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
 import Warning from '../../components-ui/alerts/warning';
-import DataSourceTooltip from '../../components-ui/information-tooltip/data-source-tooltip';
+import DataSourcesTooltip from '../../components-ui/information-tooltip/data-sources-tooltip';
 import { cma, inpi, insee, dila, vies } from '../administrations/logos';
 
 interface IAdministrationsLogos {
@@ -59,24 +59,25 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         )}
         <div>{children}</div>
         <div className="data-source-tooltip-wrapper">
+          {dataSources && (
+            <DataSourcesTooltip
+              dataSources={dataSources.map((src) => src.data)}
+              lastUpdatedAt={formatDate(last)}
+            />
+          )}
+        </div>
+        <div className="logo-wrapper">
           {dataSources.map(
             ({ data, logo }) =>
-              data && (
-                <>
-                  <DataSourceTooltip
-                    dataSource={data}
-                    lastUpdatedAt={formatDate(last)}
-                  />
-                  {logo && (
-                    <a
-                      href={`/administration/${data.slug}`}
-                      className="logo-wrapper"
-                      title={data.long}
-                    >
-                      {logo}
-                    </a>
-                  )}
-                </>
+              data &&
+              logo && (
+                <a
+                  key={data.long}
+                  href={`/administration/${data.slug}`}
+                  title={data.long}
+                >
+                  {logo}
+                </a>
               )
           )}
         </div>
@@ -109,12 +110,17 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
 
         .logo-wrapper {
           position: absolute;
-          min-width: 70px;
-          max-width: 100px;
-          height: 50px;
-          max-height: 50px;
           top: 16px;
           right: 16px;
+          display: flex;
+          justify-content: end;
+        }
+
+        .logo-wrapper > a {
+          min-width: 70px;
+          max-width: 100px;
+          height: 40px;
+          max-height: 50px;
           box-shadow: none;
         }
 

@@ -37,6 +37,17 @@ const protectedSiren = readFileSync(protectedSirenPath, 'utf8').split('\n');
 const isProtectedSiren = (siren: Siren) => protectedSiren.indexOf(siren) > -1;
 
 /**
+ * Return an uniteLegale given an existing siren
+ */
+export const getUniteLegaleFromSlug = async (
+  slug: string,
+  options: IUniteLegaleOptions
+): Promise<IUniteLegale> => {
+  const uniteLegale = new UniteLegale(slug);
+  return await uniteLegale.get(options);
+};
+
+/**
  * PUBLIC METHODS
  */
 
@@ -45,50 +56,52 @@ interface IUniteLegaleOptions {
   isBot?: boolean;
 }
 
-/**
- * Return an uniteLegale given an existing siren
- */
-export const getUniteLegaleFromSlug = async (
-  slug: string,
-  options: IUniteLegaleOptions
-): Promise<IUniteLegale> => {
-  const siren = verifySiren(slug);
-  const { page = 1, isBot = false } = options;
+class UniteLegale {
+  private _siren: Siren;
 
-  const getUniteLegaleFunction = isBot
-    ? getUniteLegaleForGoodBot
-    : getUniteLegale;
-
-  const [uniteLegale, tva] = await Promise.all([
-    getUniteLegaleFunction(siren, page),
-    tvaIntracommunautaire(siren),
-  ]);
-
-  if (tva) {
-    uniteLegale.numeroTva = tva;
+  constructor(slug: string) {
+    this._siren = verifySiren(slug);
   }
 
-  if (uniteLegale.association && uniteLegale.association.id) {
-    uniteLegale.association = {
-      ...(await getAssociation(uniteLegale.association.id, uniteLegale)),
-      id: uniteLegale.association.id,
-    };
+  async get({ page = 1, isBot = false }: IUniteLegaleOptions) {
+    let uniteLegale, tva;
+
+    if (isBot) {
+      uniteLegale = await getUniteLegaleForGoodBot(this._siren, page);
+    } else {
+      [uniteLegale, tva] = await Promise.all([
+        getUniteLegale(this._siren, page),
+        tvaIntracommunautaire(this._siren),
+      ]);
+
+      if (tva) {
+        uniteLegale.numeroTva = tva;
+      }
+
+      if (uniteLegale.association && uniteLegale.association.id) {
+        uniteLegale.association = {
+          ...(await getAssociation(uniteLegale.association.id, uniteLegale)),
+          id: uniteLegale.association.id,
+        };
+      }
+
+      // only EI
+      if (!uniteLegale.estDiffusible) {
+        uniteLegale.nomComplet = 'Entité non-diffusible';
+      }
+    }
+
+    // only entreprise commerciales
+    if (isProtectedSiren(uniteLegale.siren)) {
+      uniteLegale.estEntrepriseCommercialeDiffusible = false;
+    }
+
+    uniteLegale.etatAdministratif =
+      getEtatAdministratifUniteLegale(uniteLegale);
+
+    return uniteLegale;
   }
-
-  // only EI
-  if (!uniteLegale.estDiffusible) {
-    uniteLegale.nomComplet = 'Entité non-diffusible';
-  }
-
-  // only entreprise commerciales
-  if (isProtectedSiren(uniteLegale.siren)) {
-    uniteLegale.estEntrepriseCommercialeDiffusible = false;
-  }
-
-  uniteLegale.etatAdministratif = getEtatAdministratifUniteLegale(uniteLegale);
-
-  return uniteLegale;
-};
+}
 
 /** =========
  *  Fetching

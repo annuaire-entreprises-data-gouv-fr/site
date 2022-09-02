@@ -10,8 +10,6 @@ import AvisSituationLink from '../avis-situation-link';
 import { EtablissementDescription } from '../etablissement-description';
 import BreakPageForPrint from '../../components-ui/print-break-page';
 import { PrintNever } from '../../components-ui/print-visibility';
-import { NumeroTva } from '../tva';
-import InformationTooltip from '../../components-ui/information-tooltip';
 
 interface IProps {
   etablissement: IEtablissement;

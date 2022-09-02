@@ -67,12 +67,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const referer = context.req.headers.referer;
   const redirected = !!referer && !!context.query.redirected;
 
-  const forceSireneOuverteForDebug = (context.query
-    .forceSireneOuverteForDebug || '') as string;
-  const isABot = isUserAgentABot(context.req);
+  const isABotParam = (context.query.isABot || '') as string;
+  const isABotUA = isUserAgentABot(context.req);
 
   try {
-    const isBot = !!forceSireneOuverteForDebug || isABot;
+    const isBot = !!isABotParam || isABotUA;
     const etablissementWithUniteLegale =
       await getEtablissementWithUniteLegaleFromSlug(siret, isBot);
 

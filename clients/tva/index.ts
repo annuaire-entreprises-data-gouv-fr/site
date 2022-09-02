@@ -33,7 +33,7 @@ interface IVIESResponse {
 export const validateTVANumber = async (
   tva: string,
   useCache = true
-): Promise<string> => {
+): Promise<string | null> => {
   const url = `${routes.tva.vies}${tva}`;
 
   const response = await httpGet(
@@ -43,7 +43,6 @@ export const validateTVANumber = async (
     },
     useCache
   );
-  const { vatNumber } = response.data as IVIESResponse;
-
-  return vatNumber;
+  const data = response.data as IVIESResponse;
+  return data.isValid ? `FR${data.vatNumber}` : null;
 };

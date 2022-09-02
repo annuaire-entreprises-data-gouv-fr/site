@@ -5,7 +5,7 @@ const constants = {
   },
   resultsPerPage: { etablissements: 200, search: 30 },
   timeout: {
-    short: 500,
+    short: 850,
     default: 5000,
     long: 10000,
     search: 7500,

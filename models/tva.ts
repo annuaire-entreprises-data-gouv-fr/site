@@ -1,6 +1,6 @@
 import { validateTVANumber } from '../clients/tva';
 import { Siren } from '../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../utils/sentry';
+import logErrorInSentry, { logWarningInSentry } from '../utils/sentry';
 
 export interface ITvaIntracommunautaire {
   numero: string;
@@ -28,8 +28,14 @@ export const tvaIntracommunautaire = async (
   siren: Siren
 ): Promise<string | null> => {
   try {
+    logWarningInSentry('Call API TVA', { siren });
+
     const tvaNumberFromSiren = tvaNumber(siren);
     const tva = await validateTVANumber(tvaNumberFromSiren);
+
+    if (!tva) {
+      logWarningInSentry('Call API TVA : invalid', { siren });
+    }
     return tva;
   } catch (e: any) {
     logErrorInSentry('Error in API TVA', { details: e.toString(), siren });

@@ -27,9 +27,13 @@ const UniteLegaleSection: React.FC<{
     ],
     [
       'Adresse postale',
-      `${
-        uniteLegale.siege.denomination && uniteLegale.siege.denomination + ', '
-      }${uniteLegale.siege.adresse}`,
+      uniteLegale.siege.adresse
+        ? `${
+            uniteLegale.siege.denomination
+              ? `${uniteLegale.siege.denomination}, `
+              : ''
+          }${uniteLegale.siege.adresse}`
+        : '',
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
@@ -37,7 +41,6 @@ const UniteLegaleSection: React.FC<{
       uniteLegale.libelleTrancheEffectif,
     ],
     ['Catégorie d’entreprise', uniteLegale.libelleCategorieEntreprise],
-    ['Economie Sociale et Solidaire (ESS)', uniteLegale.estEss ? 'Oui' : 'Non'],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
       'Date de dernière mise à jour',
@@ -47,6 +50,10 @@ const UniteLegaleSection: React.FC<{
 
   if (uniteLegale.estActive === false) {
     data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
+  }
+
+  if (uniteLegale.estEss) {
+    data.push(['Economie Sociale et Solidaire (ESS)', 'Oui']);
   }
 
   return (
