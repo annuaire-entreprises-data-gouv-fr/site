@@ -10,11 +10,10 @@ import AdministrationNotResponding from '../administration-not-responding';
 import { INPI } from '../administrations';
 import BreakPageForPrint from '../../components-ui/print-break-page';
 import ButtonLink from '../../components-ui/button';
-import ButtonInpiPdf from '../button-inpi-pdf';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../../components-ui/print-visibility';
-import { Closed, Open } from '../../components-ui/icon';
+import { Closed, download, Open } from '../../components-ui/icon';
 import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
 import { IImmatriculationRNCS } from '../../models/immatriculation/rncs';
 import Info from '../../components-ui/alerts/info';
@@ -64,62 +63,30 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
               uniteLegale={uniteLegale}
             />
             <PrintNever>
-              {uniteLegale.estDiffusible &&
-              uniteLegale.estEntrepriseCommercialeDiffusible ? (
-                <>
-                  <p>
-                    Pour accéder à l’ensemble des données contenues dans un
-                    extrait KBIS, téléchargez le justificatif d’immatriculation
-                    via le <b>bouton ci-dessous</b>. Le téléchargement peut
-                    prendre quelques dizaines de secondes.
-                  </p>
-                  <div className="layout-center">
-                    <ButtonInpiPdf siren={immatriculation.siren} />
-                    <div className="separator" />
-                    <ButtonLink
-                      nofollow={true}
-                      target="_blank"
-                      to={`${immatriculation.siteLink}`}
-                      alt
-                    >
-                      ⇢ Voir la fiche sur le site de l’INPI
-                    </ButtonLink>
-                  </div>
-                  <p>
-                    <b>NB :</b> si le téléchargement échoue, vous pouvez accéder
-                    à la donnée en allant sur le site de l’
-                    <INPI />. Pour accéder à l’ensemble de la donnée en
-                    utilisant le site de l’
-                    <INPI /> vous devrez vous créer un compte <INPI />.
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p>
-                    <Info>
-                      Le ou la dirigeant(e) s’est opposé(e) à la diffusion de
-                      ses données personnelles. Par conséquent, le PDF
-                      d’immatriculation complet n’est pas téléchargeable sur
-                      notre site.
-                    </Info>
-                    Vous pouvez :
-                    <ul>
-                      <li>
-                        soit télécharger le{' '}
-                        <a href={immatriculation.downloadLink}>PDF public</a>,
-                        sans données personnelles.
-                      </li>
-                      <li>
-                        soit aller{' '}
-                        <a href={immatriculation.siteLink}>
-                          sur le site de l’Inpi
-                        </a>
-                        , vous créer un compte et accéder au pdf complet.
-                      </li>
-                    </ul>
-                  </p>
-                </>
-              )}
+              <>
+                <p>
+                  Pour accéder aux données contenues dans un extrait
+                  d’immatriculation (équivalent de l’extrait KBIS),{' '}
+                  <b>téléchargez le justificatif d’immatriculation</b> ou
+                  consultez la fiche complète sur le site de l’
+                  <INPI />
+                  &nbsp;:
+                </p>
+                <div className="layout-center">
+                  <ButtonLink to={`/inpi-pdf/${uniteLegale.siren}`}>
+                    {download} Télécharger le justificatif d’immatriculation
+                  </ButtonLink>
+                  <div className="separator" />
+                  <ButtonLink
+                    nofollow={true}
+                    target="_blank"
+                    to={`${immatriculation.siteLink}`}
+                    alt
+                  >
+                    ⇢ Voir la fiche sur le site de l’INPI
+                  </ButtonLink>
+                </div>
+              </>
             </PrintNever>
             <style jsx>{`
               .separator {

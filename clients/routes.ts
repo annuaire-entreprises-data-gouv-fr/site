@@ -10,6 +10,7 @@ const routes = {
     portail: {
       entreprise: 'https://data.inpi.fr/entreprises/',
       pdf: 'https://data.inpi.fr/export/companies',
+      account: 'https://data.inpi.fr/register',
     },
     proxy: {
       imr: 'https://rncs-proxy.api.gouv.fr/imr/',
