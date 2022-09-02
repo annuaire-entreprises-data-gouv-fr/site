@@ -1,6 +1,7 @@
 import React from 'react';
 import ButtonLink from '../../components-ui/button';
 import { Header } from '../../components/header';
+import constants from '../../models/constants';
 import randomId from '../../utils/helpers/randomId';
 
 const FeedBack: React.FC = () => {
@@ -12,11 +13,20 @@ const FeedBack: React.FC = () => {
         <div className="layout-center">
           <h1>Quel est votre avis sur l’Annuaire des Entreprises ?</h1>
         </div>
+        <br />
         <div className="layout-center">
-          <p>Donnez-nous votre avis en 4 réponses rapides !</p>
+          Donnez-nous votre avis en 4 réponses rapides !
         </div>
         <div className="layout-center">
           <i>(temps estimé : 1 min)</i>
+        </div>
+        <br />
+        <br />
+        <div>
+          Attention, <b>ce formulaire est anonyme</b>. Si vous avez une demande
+          précise, écrivez-nous un mail à{' '}
+          <a href={constants.links.mailto}>{constants.links.mail}</a> et nous
+          vous répondrons.
         </div>
         <div className="content-container text-wrapper">
           <form action="/api/feedback/nps" method="post">
