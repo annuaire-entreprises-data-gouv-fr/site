@@ -11,7 +11,7 @@ const isUserAgentABot = (req: IncomingMessage) => {
   }
   /**
    * Exclude Uptime robot as we want uptime robot to test human-website first
-   * To test bot-website, use forceSireneOuverteForDebug
+   * To test bot-website, use param &isABot=true
    * */
   if (userAgent.indexOf('UptimeRobot') > -1) {
     return false;

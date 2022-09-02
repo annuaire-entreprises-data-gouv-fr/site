@@ -26,8 +26,8 @@ import {
   logSireneOuvertefailed,
 } from '../utils/sentry/helpers';
 import { getAssociation } from './association';
-import constants from './constants';
 import { getEtatAdministratifUniteLegale } from './etat-administratif';
+import { tvaIntracommunautaire } from './tva';
 
 /**
  * List of siren whose owner refused diffusion
@@ -36,7 +36,16 @@ const protectedSirenPath = 'public/protected-siren.txt';
 const protectedSiren = readFileSync(protectedSirenPath, 'utf8').split('\n');
 const isProtectedSiren = (siren: Siren) => protectedSiren.indexOf(siren) > -1;
 
-const unknownTVA = ['775092091'];
+/**
+ * Return an uniteLegale given an existing siren
+ */
+export const getUniteLegaleFromSlug = async (
+  slug: string,
+  options: IUniteLegaleOptions
+): Promise<IUniteLegale> => {
+  const uniteLegale = new UniteLegale(slug);
+  return await uniteLegale.get(options);
+};
 
 /**
  * PUBLIC METHODS
@@ -45,49 +54,54 @@ const unknownTVA = ['775092091'];
 interface IUniteLegaleOptions {
   page?: number;
   isBot?: boolean;
-  useRna?: boolean;
 }
 
-/**
- * Return an uniteLegale given an existing siren
- */
-export const getUniteLegaleFromSlug = async (
-  slug: string,
-  options: IUniteLegaleOptions
-): Promise<IUniteLegale> => {
-  const siren = verifySiren(slug);
-  const { page = 1, isBot = false, useRna = false } = options;
+class UniteLegale {
+  private _siren: Siren;
 
-  const uniteLegale = isBot
-    ? await getUniteLegaleForGoodBot(siren, page)
-    : await getUniteLegale(siren, page);
-
-  if (useRna && uniteLegale.association && uniteLegale.association.id) {
-    uniteLegale.association = {
-      ...(await getAssociation(uniteLegale.association.id, uniteLegale)),
-      id: uniteLegale.association.id,
-    };
+  constructor(slug: string) {
+    this._siren = verifySiren(slug);
   }
 
-  // only EI
-  if (!uniteLegale.estDiffusible) {
-    uniteLegale.nomComplet = 'Entité non-diffusible';
+  async get({ page = 1, isBot = false }: IUniteLegaleOptions) {
+    let uniteLegale, tva;
+
+    if (isBot) {
+      uniteLegale = await getUniteLegaleForGoodBot(this._siren, page);
+    } else {
+      [uniteLegale, tva] = await Promise.all([
+        getUniteLegale(this._siren, page),
+        tvaIntracommunautaire(this._siren),
+      ]);
+
+      if (tva) {
+        uniteLegale.numeroTva = tva;
+      }
+
+      if (uniteLegale.association && uniteLegale.association.id) {
+        uniteLegale.association = {
+          ...(await getAssociation(uniteLegale.association.id, uniteLegale)),
+          id: uniteLegale.association.id,
+        };
+      }
+
+      // only EI
+      if (!uniteLegale.estDiffusible) {
+        uniteLegale.nomComplet = 'Entité non-diffusible';
+      }
+    }
+
+    // only entreprise commerciales
+    if (isProtectedSiren(uniteLegale.siren)) {
+      uniteLegale.estEntrepriseCommercialeDiffusible = false;
+    }
+
+    uniteLegale.etatAdministratif =
+      getEtatAdministratifUniteLegale(uniteLegale);
+
+    return uniteLegale;
   }
-
-  // only entreprise commerciales
-  if (isProtectedSiren(uniteLegale.siren)) {
-    uniteLegale.estEntrepriseCommercialeDiffusible = false;
-  }
-
-  // some TVA cannot be computed
-  if (unknownTVA.indexOf(uniteLegale.siren) > -1) {
-    uniteLegale.numeroTva = '';
-  }
-
-  uniteLegale.etatAdministratif = getEtatAdministratifUniteLegale(uniteLegale);
-
-  return uniteLegale;
-};
+}
 
 /** =========
  *  Fetching

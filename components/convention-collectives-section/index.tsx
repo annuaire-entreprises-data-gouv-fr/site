@@ -30,7 +30,7 @@ const ConventionCollectivesSection: React.FC<{
   const plural = conventionCollectives.length > 1 ? 's' : '';
 
   return (
-    <Section title="Conventions collectives" source={EAdministration.METI}>
+    <Section title="Conventions collectives" sources={[EAdministration.METI]}>
       {conventionCollectives.length === 0 ? (
         <div>
           Cette entité n’a pas de{' '}

@@ -54,15 +54,7 @@ const Meta: React.FC<IProps> = ({
         nofollow={true}
       />
       <Head>
-        {/* weird stuff going on with jsx and my kitchen recipe in _document
-          the second {''} seems to be required
-        */}
-
-        <title>
-          {title}
-
-          {''}
-        </title>
+        <title>{title}</title>
 
         <meta char-set="utf-8" />
         <meta

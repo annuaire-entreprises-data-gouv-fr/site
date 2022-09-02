@@ -46,7 +46,7 @@ const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
           <Section
             id="joafe"
             title="Enregistrement au JOAFE"
-            source={EAdministration.DILA}
+            sources={[EAdministration.DILA]}
           >
             <p>
               Cette entité est enregistrée au{' '}

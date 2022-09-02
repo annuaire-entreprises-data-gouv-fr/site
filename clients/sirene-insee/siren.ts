@@ -13,7 +13,6 @@ import {
   formatNameFull,
 } from '../../utils/helpers/formatting';
 import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
-import { tvaIntracommunautaireFromSiren } from '../../utils/helpers/tva-intracommunautaire';
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
@@ -201,7 +200,6 @@ const mapToDomainObject = (
     ...defaultUniteLegale,
     siren,
     oldSiren: originalSiren,
-    numeroTva: tvaIntracommunautaireFromSiren(siren),
     association: identifiantAssociationUniteLegale
       ? { id: identifiantAssociationUniteLegale }
       : null,

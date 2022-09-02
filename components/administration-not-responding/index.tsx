@@ -18,7 +18,7 @@ const AdministrationNotResponding: React.FC<IProps> = ({
       title={`${
         title || administrationMetaData.long
       } : transmission des données hors-service 🛑`}
-      source={administration}
+      sources={[administration]}
     >
       <p>
         Le service de l’administration qui nous transmet cette donnée ne

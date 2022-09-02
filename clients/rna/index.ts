@@ -45,9 +45,12 @@ interface IAssociationResponse {
  * GET Association
  */
 
-const fetchAssociation = async (numeroRna: IdRna): Promise<IAssociation> => {
+const fetchAssociation = async (
+  numeroRna: IdRna,
+  useCache = true
+): Promise<IAssociation> => {
   const route = `${routes.rna.id}${numeroRna}`;
-  const response = await httpGet(route);
+  const response = await httpGet(route, {}, useCache);
 
   return mapToDomainObject(numeroRna, response.data as IAssociationResponse);
 };

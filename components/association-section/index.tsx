@@ -32,7 +32,7 @@ const AssociationSection: React.FC<{
     <div id="entreprise">
       <Section
         title={`Répertoire National des Associations`}
-        source={EAdministration.MI}
+        sources={[EAdministration.MI]}
       >
         {notInRna ? (
           <>

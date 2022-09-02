@@ -36,7 +36,7 @@ const EtablissementSection: React.FC<IProps> = ({
     ],
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
-    ['N° TVA Intracommunautaire', formatIntFr(uniteLegale.numeroTva)],
+    ['N° TVA Intracommunautaire', formatIntFr(uniteLegale.numeroTva || '')],
     [
       'Activité principale de l’entité (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
@@ -105,7 +105,7 @@ const EtablissementSection: React.FC<IProps> = ({
             : `Établissement${etablissement.estSiege ? ' (siège social)' : ''}`
         }
         id="etablissement"
-        source={EAdministration.INSEE}
+        sources={[EAdministration.INSEE]}
       >
         <TwoColumnTable body={data} />
         <p className="faq-entrepreneur-individuels">

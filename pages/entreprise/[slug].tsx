@@ -104,17 +104,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const pageParam = (context.query.page || '') as string;
   const page = parseIntWithDefaultValue(pageParam, 1);
 
-  const forceSireneOuverteForDebug = (context.query
-    .forceSireneOuverteForDebug || '') as string;
-  const isABot = isUserAgentABot(context.req);
-
+  const isABotParam = (context.query.isABot || '') as string;
+  const isABotUA = isUserAgentABot(context.req);
   try {
-    const isBot = !!forceSireneOuverteForDebug || isABot;
+    const isBot = !!isABotParam || isABotUA;
 
     const uniteLegale = await getUniteLegaleFromSlug(siren, {
       page,
       isBot,
-      useRna: true,
     });
 
     return {

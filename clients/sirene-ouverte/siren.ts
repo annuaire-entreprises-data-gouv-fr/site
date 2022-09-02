@@ -104,7 +104,6 @@ const mapToDomainObject = (
   const {
     date_creation_entreprise,
     date_mise_a_jour,
-    numero_tva_intra,
     date_debut_activite,
     nom_complet,
     nom_url,
@@ -126,7 +125,6 @@ const mapToDomainObject = (
   return {
     ...createDefaultUniteLegale(siren),
     siren,
-    numeroTva: numero_tva_intra,
     siege,
     activitePrincipale: activite_principale_entreprise,
     libelleActivitePrincipale: libelleFromCodeNAF(

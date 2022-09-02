@@ -46,7 +46,7 @@ export interface IEtablissementWithUniteLegale {
 export interface IUniteLegale extends IEtablissementsList {
   siren: Siren;
   oldSiren: Siren;
-  numeroTva: string;
+  numeroTva: string | null;
   siege: IEtablissement;
   allSiegesSiret: Siret[];
   natureJuridique: string;
@@ -170,7 +170,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     estEss: false,
     nomComplet: '',
     chemin: siren,
-    numeroTva: '',
+    numeroTva: null,
     natureJuridique: '',
     libelleNatureJuridique: '',
     etablissements: splitByStatus([siege]),

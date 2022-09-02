@@ -20,16 +20,20 @@ const UniteLegaleSection: React.FC<{
         uniteLegale.siege.siret &&
         formatSiret((uniteLegale.siege || {}).siret),
     ],
-    ['N° TVA Intracommunautaire', formatIntFr(uniteLegale.numeroTva)],
+    ['N° TVA Intracommunautaire', formatIntFr(uniteLegale.numeroTva || '')],
     [
       'Activité principale du siège social (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
     ],
     [
       'Adresse postale',
-      `${
-        uniteLegale.siege.denomination && uniteLegale.siege.denomination + ', '
-      }${uniteLegale.siege.adresse}`,
+      uniteLegale.siege.adresse
+        ? `${
+            uniteLegale.siege.denomination
+              ? `${uniteLegale.siege.denomination}, `
+              : ''
+          }${uniteLegale.siege.adresse}`
+        : '',
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
@@ -37,7 +41,6 @@ const UniteLegaleSection: React.FC<{
       uniteLegale.libelleTrancheEffectif,
     ],
     ['Catégorie d’entreprise', uniteLegale.libelleCategorieEntreprise],
-    ['Economie Sociale et Solidaire (ESS)', uniteLegale.estEss ? 'Oui' : 'Non'],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
       'Date de dernière mise à jour',
@@ -49,9 +52,16 @@ const UniteLegaleSection: React.FC<{
     data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
   }
 
+  if (uniteLegale.estEss) {
+    data.push(['Economie Sociale et Solidaire (ESS)', 'Oui']);
+  }
+
   return (
     <div id="entreprise">
-      <Section title={`Informations générales`} source={EAdministration.INSEE}>
+      <Section
+        title={`Informations générales`}
+        sources={[EAdministration.INSEE, EAdministration.VIES]}
+      >
         <TwoColumnTable body={data} />
       </Section>
       <HorizontalSeparator />

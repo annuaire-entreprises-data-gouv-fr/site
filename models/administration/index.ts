@@ -12,6 +12,8 @@ import meti from './content/meti.yml';
 import dila from './content/dila.yml';
 /** @ts-ignore */
 import cma from './content/cma.yml';
+/** @ts-ignore */
+import vies from './content/vies.yml';
 /* tslint:enable */
 
 export enum EAdministration {
@@ -22,6 +24,7 @@ export enum EAdministration {
   DILA,
   METI,
   MI,
+  VIES,
 }
 
 export const administrationsMetaData: IAdministrationsMetaData = {
@@ -32,6 +35,7 @@ export const administrationsMetaData: IAdministrationsMetaData = {
   [EAdministration.METI]: meti,
   [EAdministration.MI]: mi,
   [EAdministration.CMAFRANCE]: cma,
+  [EAdministration.VIES]: vies,
 };
 
 export interface IAdministrationsMetaData {
@@ -45,7 +49,7 @@ export interface IAdministrationMetaData {
   description: string;
   contact: string;
   site?: string;
-  apiMonitors: IAPIMonitorMetaData[];
+  apiMonitors?: IAPIMonitorMetaData[];
   dataGouvLink?: string;
   data?: string[];
 }
@@ -60,7 +64,7 @@ export interface IAPIMonitorMetaData {
 
 export const allMonitoringIds = () =>
   Object.values(administrationsMetaData).reduce((acc, administration) => {
-    administration.apiMonitors.forEach((monitor) => {
+    (administration.apiMonitors || []).forEach((monitor) => {
       //@ts-ignore
       acc.push(monitor.id);
     });
