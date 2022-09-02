@@ -28,14 +28,8 @@ export const tvaIntracommunautaire = async (
   siren: Siren
 ): Promise<string | null> => {
   try {
-    logWarningInSentry('Call API TVA', { siren });
-
     const tvaNumberFromSiren = tvaNumber(siren);
     const tva = await validateTVANumber(tvaNumberFromSiren);
-
-    if (!tva) {
-      logWarningInSentry('Call API TVA : invalid', { siren });
-    }
     return tva;
   } catch (e: any) {
     logErrorInSentry('Error in API TVA', { details: e.toString(), siren });
