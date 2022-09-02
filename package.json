@@ -36,7 +36,6 @@
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-legacy": "^2.0.1",
     "abort-controller": "^3.0.0",
-    "alpinejs": "^3.10.3",
     "autoprefixer": "^10.4.8",
     "axios": "^0.27.2",
     "axios-cache-interceptor": "^0.10.7",
