@@ -55,6 +55,12 @@ const Meta: React.FC<IProps> = ({
       />
       <Head>
         <title>{title}</title>
+        <link
+          rel="search"
+          type="application/opensearchdescription+xml"
+          title="Annuaire des Entreprises"
+          href="https://annuaire-entreprises.data.gouv.fr/opensearch.xml"
+        />
 
         <meta char-set="utf-8" />
         <meta
