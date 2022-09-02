@@ -60,11 +60,11 @@ const DownloadPDFScript: React.FC<{ siren: string }> = ({ siren }) => (
               .then(saveAsPdf)
               .catch(function (error) {
                 setError();
-                console.error(error)
+                throw error
               });
           } else {
             setError();
-            console.error('Download failed : browser too old');
+            throw new Error('Download failed : browser too old');
           }
         }
 
@@ -113,6 +113,7 @@ const InpiPDF: React.FC<{ siren: string }> = ({ siren }) => {
   return (
     <Page
       small={true}
+      noIndex={true}
       title="Réutiliser ou partager l’Annuaire des Entreprises"
     >
       <br />
