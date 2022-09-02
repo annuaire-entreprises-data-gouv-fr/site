@@ -64,7 +64,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
   <Section
     id="insee"
     title="Inscription à l’Insee"
-    source={EAdministration.INSEE}
+    sources={[EAdministration.INSEE]}
   >
     {uniteLegale.estDiffusible ? (
       <>

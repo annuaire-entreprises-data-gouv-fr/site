@@ -86,7 +86,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     const monitorings = await getMonitorsWithMetaData(
-      administration.apiMonitors
+      administration.apiMonitors || []
     );
     return {
       props: {
@@ -103,7 +103,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
       );
     } else {
-      return redirectServerError(e);
+      return redirectServerError(e.toString());
     }
   }
 };

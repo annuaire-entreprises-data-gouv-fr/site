@@ -10,7 +10,7 @@ export const CopyCell: React.FC<PropsWithChildren<{ className?: string }>> = ({
   children,
   className = '',
 }) => {
-  const isCopyEnabled = typeof children === 'string';
+  const isCopyEnabled = typeof children === 'string' && children !== '';
   return (
     <td>
       <div

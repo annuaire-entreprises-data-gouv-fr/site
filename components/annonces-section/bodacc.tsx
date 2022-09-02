@@ -36,7 +36,7 @@ const AnnoncesBodaccSection: React.FC<{
   return (
     <Section
       title="Annonces BODACC"
-      source={EAdministration.DILA}
+      sources={[EAdministration.DILA]}
       lastModified={bodacc.lastModified}
     >
       {hasProcedure ? (

@@ -81,7 +81,7 @@ const ImmatriculationRNM: React.FC<IProps> = ({
           <Section
             id="rnm"
             title="Immatriculation au RNM"
-            source={EAdministration.CMAFRANCE}
+            sources={[EAdministration.CMAFRANCE]}
           >
             <p>
               Cette entité possède une fiche d’immatriculation sur le{' '}

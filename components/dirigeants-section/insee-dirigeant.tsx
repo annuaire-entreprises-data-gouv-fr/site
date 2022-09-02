@@ -32,7 +32,7 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
       <Section
         id="insee-dirigeant"
         title={'Dirigeant'}
-        source={EAdministration.INSEE}
+        sources={[EAdministration.INSEE]}
       >
         <p>
           Cette entité est une entreprise individuelle. Elle a un

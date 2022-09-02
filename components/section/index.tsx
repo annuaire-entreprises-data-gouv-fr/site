@@ -6,8 +6,8 @@ import {
 import { isTwoMonthOld } from '../../utils/helpers/checks';
 import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
 import Warning from '../../components-ui/alerts/warning';
-import DataSourceTooltip from '../../components-ui/information-tooltip/data-source-tooltip';
-import { cma, inpi, insee, dila } from '../administrations/logos';
+import DataSourcesTooltip from '../../components-ui/information-tooltip/data-sources-tooltip';
+import { cma, inpi, insee, dila, vies } from '../administrations/logos';
 
 interface IAdministrationsLogos {
   [key: string]: JSX.Element;
@@ -18,12 +18,13 @@ const administrationsLogo: IAdministrationsLogos = {
   [EAdministration.CMAFRANCE]: cma,
   [EAdministration.INSEE]: insee,
   [EAdministration.DILA]: dila,
+  [EAdministration.VIES]: vies,
 };
 
 interface ISectionProps {
   title: string;
   width?: number;
-  source?: EAdministration;
+  sources?: EAdministration[];
   id?: string;
   lastModified?: string | null;
 }
@@ -32,15 +33,20 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   id,
   children,
   title,
-  source,
+  sources = [],
   lastModified = null,
   width = 100,
 }) => {
-  const dataSource = source ? administrationsMetaData[source] : undefined;
-  const dataLogo = source ? administrationsLogo[source] : undefined;
+  const dataSources = sources.map((source) => {
+    return {
+      data: administrationsMetaData[source],
+      logo: administrationsLogo[source],
+    };
+  });
 
   const isOld = lastModified && isTwoMonthOld(lastModified);
   const last = lastModified || new Date();
+
   return (
     <>
       <div className="section-container" id={id}>
@@ -52,25 +58,29 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           </Warning>
         )}
         <div>{children}</div>
-        {dataSource && (
-          <>
-            <div className="data-source-tooltip-wrapper">
-              <DataSourceTooltip
-                dataSource={dataSource}
-                lastUpdatedAt={formatDate(last)}
-              />
-            </div>
-            {dataLogo && (
-              <a
-                href={`/administration/${dataSource.slug}`}
-                className="logo-wrapper"
-                title={dataSource.long}
-              >
-                {dataLogo}
-              </a>
-            )}
-          </>
-        )}
+        <div className="data-source-tooltip-wrapper">
+          {dataSources && (
+            <DataSourcesTooltip
+              dataSources={dataSources.map((src) => src.data)}
+              lastUpdatedAt={formatDate(last)}
+            />
+          )}
+        </div>
+        <div className="logo-wrapper">
+          {dataSources.map(
+            ({ data, logo }) =>
+              data &&
+              logo && (
+                <a
+                  key={data.long}
+                  href={`/administration/${data.slug}`}
+                  title={data.long}
+                >
+                  {logo}
+                </a>
+              )
+          )}
+        </div>
       </div>
       <style jsx>{`
         .section-container {
@@ -100,12 +110,17 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
 
         .logo-wrapper {
           position: absolute;
-          min-width: 70px;
-          max-width: 100px;
-          height: 50px;
-          max-height: 50px;
           top: 16px;
           right: 16px;
+          display: flex;
+          justify-content: end;
+        }
+
+        .logo-wrapper > a {
+          min-width: 70px;
+          max-width: 100px;
+          height: 40px;
+          max-height: 50px;
           box-shadow: none;
         }
 

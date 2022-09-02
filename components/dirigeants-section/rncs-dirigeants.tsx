@@ -104,7 +104,7 @@ const DirigeantsSection: React.FC<IProps> = ({
       <Section
         id="rncs-dirigeants"
         title={`Dirigeant${plural}`}
-        source={EAdministration.INPI}
+        sources={[EAdministration.INPI]}
       >
         <>
           {immatriculationRNCS.metadata.isFallback &&
