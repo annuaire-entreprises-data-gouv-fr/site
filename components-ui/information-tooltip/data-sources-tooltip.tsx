@@ -11,14 +11,14 @@ const DataSourcesTooltip: React.FC<{
     <InformationTooltip
       orientation="center"
       label={dataSources.map((dataSource) => (
-        <>
+        <React.Fragment key={dataSource.long}>
           <div>{dataSource.long}</div>
           <a rel="nofollow" href={`/administration/${dataSource.slug}`}>
             👉 En savoir plus
           </a>
           <br />
           <br />
-        </>
+        </React.Fragment>
       ))}
     >
       <div className="data-source">
