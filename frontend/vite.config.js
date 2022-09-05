@@ -30,7 +30,7 @@ module.exports = {
     emptyOutDir: false,
     manifest: true,
     rollupOptions: {
-      input: 'frontend/js/production.js',
+      input: 'frontend/js/index.js',
     },
   },
   server: {
