@@ -72,6 +72,8 @@ const DownloadPDFScript: React.FC<{ siren: string }> = ({ siren }) => (
           window.downloadInpiPDF = downloadInpiPDF;
           window.downloadInpiPDF('${siren}');
         })();
+
+        Sentry.captureMessage('This is a test in PDF')
       </script>
   `,
     }}
