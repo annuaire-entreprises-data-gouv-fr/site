@@ -10,7 +10,6 @@
 
 Pour voir le détail des disponibilités des API utilisées sur le site, [consultez la page de statut](https://annuaire-entreprises.data.gouv.fr/administration).
 
-
 Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr)
 
 Ce site a pour vocation de mettre à disposition des citoyens et des agents les données ouvertes "Open-data" des entreprises, associations et administrations dotées d'un n° siren/siret.
@@ -19,13 +18,13 @@ Ce site a pour vocation de mettre à disposition des citoyens et des agents les 
 
 Ce repository fait partie d'un ensemble de services qui constituent l'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
 
-| Description | Accès |
-|-|-|
-|Le site Web | [par ici 👉](https://github.com/etalab/annuaire-entreprises-site) |
-|L’API du Moteur de recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-api) |
-|L‘API de redondance de Sirene | [par ici 👉](https://github.com/etalab/annuaire-entreprises-sirene-api) |
-|Le traitement permettant la génération de données à ingérer dans le moteur de recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-infra) |
-|L’API de proxy du RNCS | [par ici 👉](https://github.com/etalab/rncs-api-proxy) |
+| Description                                                                             | Accès                                                                     |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Le site Web                                                                             | [par ici 👉](https://github.com/etalab/annuaire-entreprises-site)         |
+| L’API du Moteur de recherche                                                            | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-api)   |
+| L‘API de redondance de Sirene                                                           | [par ici 👉](https://github.com/etalab/annuaire-entreprises-sirene-api)   |
+| Le traitement permettant la génération de données à ingérer dans le moteur de recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-infra) |
+| L’API de proxy du RNCS                                                                  | [par ici 👉](https://github.com/etalab/rncs-api-proxy)                    |
 
 ## A propos des choix d'architecture
 
@@ -84,16 +83,13 @@ npm run test:end2end
 ```bash
 // a11y
 npm run test:a11y
-
-// Inpi PDF proxy
-npm run test:inpi-pdf-proxy
 ```
 
 ### Deploiement
 
 Le déploiement se fait par [Github action](https://github.com/etalab/annuaire-entreprises-site/actions)
 
-A chaque "merge" sur master : 
+A chaque "merge" sur master :
 
 - Laissez le déploiement se faire automatiquement sur [staging](https://staging.annuaire-entreprises.data.gouv.fr) via l'action [deploy-staging](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-staging.yml)
 - Vérifiez vos changements sur [staging](https://staging.annuaire-entreprises.data.gouv.fr)

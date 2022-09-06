@@ -48,24 +48,31 @@ const DownloadPDFScript: React.FC<{ siren: string }> = ({ siren }) => (
           window.setTimeout(setPending,10000);
 
           if (window.fetch) {
-            fetch(
-              '${routes.rncs.portail.pdf}?format=pdf&ids=[%22'+siren+'%22]'
-            )
-              .then((res) => {
-                if (!res.ok) {
-                  throw new Error('Download failed : Inpi is not answering');
-                }
-                return res.blob();
-              })
-              .then(saveAsPdf)
-              .catch(function (error) {
+              download(siren).catch(e=> {
+                return download(siren);
+              }).catch(e=> {
+                return download(siren);
+              }).catch(e=> {
                 setError();
-                throw error
-              });
+                throw e;
+              })
           } else {
             setError();
             throw new Error('Download failed : browser too old');
           }
+        }
+
+        function download(siren) {
+          return fetch(
+            '${routes.rncs.portail.pdf}?format=pdf&ids=[%22'+siren+'%22]'
+          )
+            .then((res) => {
+              if (!res.ok) {
+                throw new Error('Download failed : Inpi is not answering');
+              }
+              return res.blob();
+            })
+            .then(saveAsPdf)
         }
 
         (function init() {
