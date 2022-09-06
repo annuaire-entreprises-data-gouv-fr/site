@@ -17,6 +17,7 @@ import {
   IPersonneMorale,
 } from '../../models/immatriculation/rncs';
 import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
+import { InlineFunctions } from 'terser';
 
 /**
  * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts
@@ -72,15 +73,16 @@ const DirigeantsSection: React.FC<IProps> = ({
         ['Nature Juridique', dirigeant.natureJuridique],
       ];
       if (dirigeant.siren) {
+        infos.push(['Siren', formatIntFr(dirigeant.siren)]);
         infos.push([
-          'Siren',
+          '',
           //eslint-disable-next-line
           <a href={`/entreprise/${dirigeant.siren}`}>
-            {formatIntFr(dirigeant.siren)}
+            → voir la page de l’entreprise
           </a>,
         ]);
         infos.push([
-          'Dirigeant(s)',
+          '',
           //eslint-disable-next-line
           <a href={`/dirigeants/${dirigeant.siren}`}>→ voir les dirigeants</a>,
         ]);
