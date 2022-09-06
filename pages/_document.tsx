@@ -108,7 +108,12 @@ class StaticDocument extends Document {
           <link
             rel="stylesheet"
             type="text/css"
-            href={`/${manifest['js/index.css'].file}`}
+            href={`/${manifest['css/dsfr.min.css'].file}`}
+          />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href={`/${manifest['css/globals.css'].file}`}
           />
           <script
             defer
