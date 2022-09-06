@@ -1,6 +1,4 @@
-/**
- * VITE CONFIG - Only used in production
- */
+import { defineConfig } from 'vite';
 
 const legacy = require('@vitejs/plugin-legacy');
 
@@ -21,13 +19,15 @@ if (process.env.NODE_ENV === 'production') {
   plugins.push(require('cssnano'));
 }
 
-module.exports = {
+export default defineConfig({
   publicDir: false,
-  clearScreen: false,
+  appType: 'custom', // not a SPA
+  envDir: '..', // .env directory
+  clearScreen: false, // do not clear console
   build: {
     outDir: '../public',
     assetsDir: 'assets',
-    emptyOutDir: false,
+    emptyOutDir: false, // do not empty dir
     manifest: true,
     rollupOptions: {
       input: 'frontend/js/index.js',
@@ -47,4 +47,4 @@ module.exports = {
       plugins,
     },
   },
-};
+});

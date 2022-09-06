@@ -49,7 +49,7 @@ const DownloadPDFScript: React.FC<{ siren: string }> = ({ siren }) => (
 
           if (window.fetch) {
             fetch(
-              'https://data.inpi.fr/export/companies?format=pdf&ids=[%22'+siren+'%22]'
+              '${routes.rncs.portail.pdf}?format=pdf&ids=[%22'+siren+'%22]'
             )
               .then((res) => {
                 if (!res.ok) {
