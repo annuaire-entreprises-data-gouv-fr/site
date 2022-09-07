@@ -43,6 +43,9 @@ const DownloadPDFScript: React.FC<{ siren: string }> = ({ siren }) => (
           }
         }
 
+        window.setTimeout(()=>throw new Error('test sentry')),10000);
+
+
         function downloadInpiPDF(siren) {
           setStarted();
           window.setTimeout(setPending,10000);
