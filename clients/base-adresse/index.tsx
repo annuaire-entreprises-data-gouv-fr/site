@@ -1,4 +1,5 @@
 import { IEtablissement } from '../../models';
+import constants from '../../models/constants';
 import { IGeoLoc } from '../../models/geo-loc';
 import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
@@ -20,7 +21,7 @@ const fetchBanGeoLoc = async (
   etablissement: IEtablissement
 ): Promise<IGeoLoc> => {
   const route = `${routes.ban}${etablissement.adresse.replaceAll(' ', '+')}`;
-  const response = await httpGet(route);
+  const response = await httpGet(route, { timeout: constants.timeout.medium });
 
   return mapToDomainObject(response.data as IBANResponse);
 };
