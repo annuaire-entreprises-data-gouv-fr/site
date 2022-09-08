@@ -70,7 +70,10 @@ const getResults = async (
     searchFilterParams?.toURI() || ''
   }`;
 
-  const response = await httpGet(url, { timeout: constants.timeout.long });
+  const response = await httpGet(url, {
+    timeout: constants.timeout.long,
+    headers: { referer: 'annuaire-entreprises-site' },
+  });
 
   const results = (response.data || []) as any;
 
