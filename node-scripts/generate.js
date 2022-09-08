@@ -16,11 +16,7 @@ const fs = require('fs');
  */
 
 const SITEMAP_START = `<?xml version="1.0" encoding="UTF-8"?>
- <urlset
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
-   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
- >`;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
 const SITEMAP_END = '</urlset>';
 
@@ -108,7 +104,6 @@ async function main() {
   const names = await axios.get(url, { timeout: 120000 });
   const data = names.data;
   console.timeEnd('⏱ Time to download base SIREN');
-
   const filePath = `/tmp/sitemap-${new Date().getTime()}`;
 
   try {
