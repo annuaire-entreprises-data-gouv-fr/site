@@ -1,5 +1,7 @@
 import './helpers-copy-paste';
 import './helpers-feedbacks';
+import './async-client-update';
+import './inpi-pdf-download';
 
 import './sentry';
 

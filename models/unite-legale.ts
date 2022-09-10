@@ -27,7 +27,6 @@ import {
 } from '../utils/sentry/helpers';
 import { getAssociation } from './association';
 import { getEtatAdministratifUniteLegale } from './etat-administratif';
-import { tvaIntracommunautaire } from './tva';
 
 /**
  * List of siren whose owner refused diffusion
@@ -64,19 +63,12 @@ class UniteLegale {
   }
 
   async get({ page = 1, isBot = false }: IUniteLegaleOptions) {
-    let uniteLegale, tva;
+    let uniteLegale;
 
     if (isBot) {
       uniteLegale = await getUniteLegaleForGoodBot(this._siren, page);
     } else {
-      [uniteLegale, tva] = await Promise.all([
-        getUniteLegale(this._siren, page),
-        tvaIntracommunautaire(this._siren),
-      ]);
-
-      if (tva) {
-        uniteLegale.numeroTva = tva;
-      }
+      uniteLegale = await getUniteLegale(this._siren, page);
 
       if (uniteLegale.association && uniteLegale.association.id) {
         uniteLegale.association = {
