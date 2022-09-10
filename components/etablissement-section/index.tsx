@@ -1,15 +1,16 @@
 import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
-import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
+import { formatDate } from '../../utils/helpers/formatting';
 import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
-import { TwoColumnTable } from '../table/simple';
+import { CopyPaste, TwoColumnTable } from '../table/simple';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { EAdministration } from '../../models/administration';
 import AvisSituationLink from '../avis-situation-link';
 import { EtablissementDescription } from '../etablissement-description';
 import BreakPageForPrint from '../../components-ui/print-break-page';
 import { PrintNever } from '../../components-ui/print-visibility';
+import TVACell from '../tva-cell';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -25,18 +26,44 @@ const EtablissementSection: React.FC<IProps> = ({
   withDenomination,
 }) => {
   const data = [
-    ['Adresse', etablissement.adresse],
+    withDenomination && ['Dénomination de l’entité', uniteLegale.nomComplet],
+    withDenomination && [
+      'Type d’établissement',
+      <>
+        {etablissement.estSiege
+          ? 'Siège social'
+          : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1
+          ? 'Ancien siège social'
+          : 'Secondaire'}
+        {' ( '}
+        <a key="entite" href={`/entreprise/${uniteLegale.siren}`}>
+          → voir la page de l’entité
+        </a>
+        {' )'}
+      </>,
+    ],
+    etablissement.denomination && [
+      'Nom de l’établissement',
+      etablissement.denomination,
+    ],
+    etablissement.enseigne && [
+      'Enseigne de l’établissement',
+      etablissement.enseigne,
+    ],
     [
-      '',
-      <PrintNever key="adresse-link">
-        <a href={`/carte/${etablissement.siret}`}>→ voir sur la carte</a>
-        <br />
-        <br />
-      </PrintNever>,
+      'Adresse',
+      <>
+        <CopyPaste>{etablissement.adresse}</CopyPaste>
+        <PrintNever key="adresse-link">
+          <a href={`/carte/${etablissement.siret}`}>→ voir sur la carte</a>
+          <br />
+          <br />
+        </PrintNever>
+      </>,
     ],
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
-    ['N° TVA Intracommunautaire', formatIntFr(uniteLegale.numeroTva || '')],
+    !usedInEntreprisePage && ['N° TVA Intracommunautaire', <TVACell />],
     [
       'Activité principale de l’entité (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
@@ -54,42 +81,15 @@ const EtablissementSection: React.FC<IProps> = ({
     ],
     [
       'Avis de situation Insee',
-      // eslint-disable-next-line
       <AvisSituationLink siret={etablissement.siret} />,
     ],
-  ];
-
-  if (etablissement.estActif === false) {
-    data.push([
+    etablissement.estActif === false && [
       'Date de fermeture',
       formatDate(etablissement.dateFermeture || ''),
-    ]);
-  }
-  if (etablissement.enseigne) {
-    data.splice(0, 0, ['Enseigne de l’établissement', etablissement.enseigne]);
-  }
-  if (etablissement.denomination) {
-    data.splice(0, 0, ['Nom de l’établissement', etablissement.denomination]);
-  }
-  if (withDenomination) {
-    data.splice(0, 0, ['Dénomination de l’entité', uniteLegale.nomComplet]);
-    data.splice(0, 0, [
-      'Type d’établissement',
-      <>
-        {etablissement.estSiege
-          ? 'Siège social'
-          : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1
-          ? 'Ancien siège social'
-          : 'Secondaire'}
-        {' ( '}
-        <a key="entite" href={`/entreprise/${uniteLegale.siren}`}>
-          → voir la page de l’entité
-        </a>
-        {' )'}
-      </>,
-    ]);
-  }
+    ],
+  ].filter((element) => !!element);
 
+  console.log(data);
   return (
     <>
       {!usedInEntreprisePage && (

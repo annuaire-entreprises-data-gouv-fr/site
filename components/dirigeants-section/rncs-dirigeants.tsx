@@ -67,7 +67,6 @@ const DirigeantsSection: React.FC<IProps> = ({
   const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
     if (isPersonneMorale(dirigeant)) {
       const infos = [
-        //eslint-disable-next-line
         ['Rôle(s)', <b>{dirigeant.role}</b>],
         ['Dénomination', dirigeant.denomination],
         ['Nature Juridique', dirigeant.natureJuridique],
@@ -76,21 +75,18 @@ const DirigeantsSection: React.FC<IProps> = ({
         infos.push(['Siren', formatIntFr(dirigeant.siren)]);
         infos.push([
           '',
-          //eslint-disable-next-line
           <a href={`/entreprise/${dirigeant.siren}`}>
             → voir la page de l’entreprise
           </a>,
         ]);
         infos.push([
           '',
-          //eslint-disable-next-line
           <a href={`/dirigeants/${dirigeant.siren}`}>→ voir les dirigeants</a>,
         ]);
       }
       return infos;
     } else {
       return [
-        //eslint-disable-next-line
         ['Rôle', dirigeant.role && <b>{dirigeant.role}</b>],
         ['Nom', (dirigeant.nom || '').toUpperCase()],
         ['Prénom', dirigeant.prenom],
