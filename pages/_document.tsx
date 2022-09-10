@@ -27,7 +27,7 @@ class DevDocument extends Document {
   render() {
     return (
       <Html lang="fr">
-        <Head>
+        <CustomHead>
           <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" />
           <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml" />
           <link
@@ -60,10 +60,9 @@ class DevDocument extends Document {
             type="module"
             src="http://localhost:3001/frontend/js/index.js"
           ></script>
-        </Head>
+        </CustomHead>
         <body>
           <Main />
-          <NextScript />
         </body>
       </Html>
     );
