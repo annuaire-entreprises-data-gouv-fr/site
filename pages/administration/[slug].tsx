@@ -13,6 +13,7 @@ import {
 } from '../../utils/redirects';
 import { HttpNotFound } from '../../clients/exceptions';
 import AdministrationDescription from '../../components/administrations/administration-description';
+import HiddenH1 from '../../components/a11y-components/hidden-h1';
 
 const AdministrationPage: React.FC<{
   long: string;
@@ -26,6 +27,7 @@ const AdministrationPage: React.FC<{
     <div className="content-container">
       <br />
       <a href="/administration">← Toutes les administrations partenaires</a>
+      <HiddenH1 title={`Administration partenaire : ${long}`} />
       <AdministrationDescription slug={slug} />
     </div>
     <style jsx>{`
@@ -38,15 +40,15 @@ const AdministrationPage: React.FC<{
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
-  const administrationEnum = context.params.slug as EAdministration;
+  const slug = context.params.slug as EAdministration;
 
   try {
     const administration = Object.values(administrationsMetaData).find(
       //@ts-ignore
-      (admin) => admin.slug === administrationEnum
+      (admin) => admin.slug === slug
     );
     if (administration === undefined) {
-      throw new HttpNotFound(`${administrationEnum}`);
+      throw new HttpNotFound(`${slug}`);
     }
 
     return {
@@ -57,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return redirectPageNotFound(
-        `Administration ${administrationEnum} page does not exist`,
+        `Administration ${slug} page does not exist`,
         {
           page: context.req.url,
         }
