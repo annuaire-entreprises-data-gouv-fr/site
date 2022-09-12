@@ -5,6 +5,7 @@ User-agent: *
 Allow: /
 Allow: /entreprise/
 Allow: /administration/
+Allow: /sources-de-donnees/
 Allow: /etablissement/
 
 # Groupe 1

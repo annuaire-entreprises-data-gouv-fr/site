@@ -127,6 +127,7 @@ async function main() {
       '/',
       '/donnees-extrait-kbis',
       '/comment-ca-marche',
+      '/administration',
       '/rechercher',
       '/faq',
     ].map((path) => {

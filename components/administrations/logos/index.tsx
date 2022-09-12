@@ -1,4 +1,5 @@
 import React from 'react';
+import { EAdministration } from '../../../models/administration';
 
 export const cma = (
   <svg
@@ -396,3 +397,15 @@ export const vies = (
     />
   </svg>
 );
+
+interface IAdministrationsLogos {
+  [key: string]: JSX.Element;
+}
+
+export const administrationsLogo: IAdministrationsLogos = {
+  [EAdministration.INPI]: inpi,
+  [EAdministration.CMAFRANCE]: cma,
+  [EAdministration.INSEE]: insee,
+  [EAdministration.DILA]: dila,
+  [EAdministration.VIES]: vies,
+};

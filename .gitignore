@@ -54,3 +54,7 @@ public/manifest.json
 # direnv
 .nvmrc
 .envrc
+
+# cypress
+cypress/videos
+cypress/screenshots
