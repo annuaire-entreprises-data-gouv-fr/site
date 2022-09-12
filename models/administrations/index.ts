@@ -1,19 +1,19 @@
 /** @ts-ignore */
-import dinum from './content/dinum.yml';
+import dinum from '../data/administration/dinum.yml';
 /** @ts-ignore */
-import inpi from './content/inpi.yml';
+import inpi from '../data/administration/inpi.yml';
 /** @ts-ignore */
-import insee from './content/insee.yml';
+import insee from '../data/administration/insee.yml';
 /** @ts-ignore */
-import mi from './content/mi.yml';
+import mi from '../data/administration/mi.yml';
 /** @ts-ignore */
-import meti from './content/meti.yml';
+import meti from '../data/administration/meti.yml';
 /** @ts-ignore */
-import dila from './content/dila.yml';
+import dila from '../data/administration/dila.yml';
 /** @ts-ignore */
-import cma from './content/cma.yml';
+import cma from '../data/administration/cma.yml';
 /** @ts-ignore */
-import vies from './content/vies.yml';
+import vies from '../data/administration/vies.yml';
 /* tslint:enable */
 
 export enum EAdministration {

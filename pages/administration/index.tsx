@@ -6,7 +6,7 @@ import Page from '../../layouts';
 import {
   administrationsMetaData,
   IAdministrationMetaData,
-} from '../../models/administration';
+} from '../../models/administrations';
 import AdministrationDescription from '../../components/administrations/administration-description';
 
 const StatusPage: React.FC<{

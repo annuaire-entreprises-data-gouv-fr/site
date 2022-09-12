@@ -4,7 +4,7 @@ import { fetchRNCSImmatriculation } from '../../clients/rncs';
 import routes from '../../clients/routes';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../../utils/sentry';
-import { EAdministration } from '../administration';
+import { EAdministration } from '../administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,

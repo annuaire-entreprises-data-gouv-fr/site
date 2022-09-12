@@ -5,7 +5,7 @@ import fetchAnnoncesJO from '../../clients/open-data-soft/journal-officiel-assoc
 import { IdRna, verifyIdRna } from '../../utils/helpers/id-rna';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../../utils/sentry';
-import { EAdministration } from '../administration';
+import { EAdministration } from '../administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,

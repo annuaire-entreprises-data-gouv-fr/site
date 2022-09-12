@@ -8,7 +8,7 @@ import {
   EAdministration,
   IAdministrationMetaData,
   IAPIMonitorMetaData,
-} from '../../models/administration';
+} from '../../models/administrations';
 import {
   redirectPageNotFound,
   redirectServerError,

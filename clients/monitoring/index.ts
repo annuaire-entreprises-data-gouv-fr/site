@@ -3,7 +3,7 @@ import httpClient from '../../utils/network';
 import FormData from 'form-data';
 import routes from '../routes';
 import { DailyUptimeRatioConverter } from './series';
-import { allMonitoringIds } from '../../models/administration';
+import { allMonitoringIds } from '../../models/administrations';
 
 export interface IMonitorLog {
   id?: number;

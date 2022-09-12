@@ -40,6 +40,6 @@ jobs:
       - name: Archive sitemaps
         uses: actions/upload-artifact@v3
         with:
-          name: sitemap
+          name: sitemap-${{ github.sha }}
           path: |
             ./public/sitemap.tar.gz

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
-import { EAdministration } from '../../models/administration';
+import { EAdministration } from '../../models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,

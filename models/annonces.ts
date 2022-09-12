@@ -2,7 +2,7 @@ import fetchAnnoncesBodacc from '../clients/open-data-soft/bodacc';
 import fetchAnnoncesJO from '../clients/open-data-soft/journal-officiel-associations';
 import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
-import { EAdministration } from './administration';
+import { EAdministration } from './administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administration';
+import { EAdministration } from '../../models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,

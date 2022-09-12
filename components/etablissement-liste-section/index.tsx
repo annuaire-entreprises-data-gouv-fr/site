@@ -1,7 +1,7 @@
 import React from 'react';
 import constants from '../../models/constants';
 import { IEtablissement, IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administration';
+import { EAdministration } from '../../models/administrations';
 import { formatSiret, Siret } from '../../utils/helpers/siren-and-siret';
 import IsActiveTag from '../../components-ui/is-active-tag';
 import PageCounter from '../results-page-counter';
