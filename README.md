@@ -49,11 +49,7 @@ npm i
 # Lancer le site en dev
 npm run dev
 
-# Lancer le site en prod sans la sitemap
-export PORT=3000
-npm run build:site && npm run start
-
-# Lancer le site en prod avec la sitemap
+# Lancer le site en prod
 export PORT=3000
 npm run build && npm run start
 ```
@@ -78,11 +74,10 @@ npm run test:unit
 npm run test:end2end
 ```
 
-4. Autres tests
+4. SEO (Sitemap generation)
 
 ```bash
-// a11y
-npm run test:a11y
+npm run sitemap
 ```
 
 ### Deploiement

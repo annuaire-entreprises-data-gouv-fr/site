@@ -92,7 +92,7 @@ jobs:
         run: sudo apt-get install -y redis-tools redis-server
 
       - name: Build site
-        run: npm run build:site
+        run: npm run build
       - name: Cache site
         uses: actions/cache@v2
         id: restore-build

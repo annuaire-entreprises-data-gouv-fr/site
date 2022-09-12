@@ -36,7 +36,7 @@ const saveSitemapIndex = (indices) => {
    .join('')}
      </sitemapindex>`;
 
-  fs.writeFileSync('./public/sitemap.xml', index);
+  fs.writeFileSync('./public/sitemap/sitemap.xml', index);
 };
 
 /**
@@ -73,12 +73,12 @@ async function main() {
   let totalUrlCount = 0;
   let maxMemory = 0;
 
-  const write = (line) => {
+  const writeLine = (line) => {
     if (urlCount === 10000) {
       maxMemory = Math.max(mem(), maxMemory);
     }
     if (urlCount === 0) {
-      const newSitemapFilePath = `./public/sitemap${sitemapCount}.xml`;
+      const newSitemapFilePath = `./public/sitemap/sitemap${sitemapCount}.xml`;
       writeStream = fs.createWriteStream(newSitemapFilePath);
       writeStream.write(SITEMAP_START);
     }
@@ -100,7 +100,7 @@ async function main() {
 
   console.time('⏱ Time to download base SIREN');
   const url =
-    'https://files.data.gouv.fr/annuaire-entreprises/sitemap-name.csv';
+    'https://object.files.data.gouv.fr/opendata/ae/sitemap-name-prod.csv';
   const names = await axios.get(url, { timeout: 120000 });
   const data = names.data;
   console.timeEnd('⏱ Time to download base SIREN');
@@ -111,13 +111,19 @@ async function main() {
 
     const readStream = fs.createReadStream(filePath);
 
+    const sitemapDir = './public/sitemap/';
+    if (!fs.existsSync(sitemapDir)) {
+      console.time('📂 Creating new /sitemap folder');
+      fs.mkdirSync(sitemapDir);
+    }
+
     await new Promise((resolve, reject) => {
       readStream.on('error', (err) => reject(err));
       readStream.on('data', (chunk) => {
         const line = chunk.toString('utf-8');
         line.split('\n').map((line) => {
           const url = formatUrl(getEntrepriseUrl(line));
-          write(url);
+          writeLine(url);
         });
       });
       readStream.on('end', () => resolve());
@@ -131,12 +137,12 @@ async function main() {
       '/rechercher',
       '/faq',
     ].map((path) => {
-      write(formatUrl(WEBSITE + path));
+      writeLine(formatUrl(WEBSITE + path));
     });
 
     if (urlCount !== 0) {
       // last sitemap needs to be ended
-      write(SITEMAP_END);
+      writeLine(SITEMAP_END);
     }
   } finally {
     await fs.promises.unlink(filePath);

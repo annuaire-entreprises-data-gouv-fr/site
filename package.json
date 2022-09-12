@@ -14,14 +14,12 @@
     "build:clean": "if [ -d 'public/assets' ]; then rm -Rf public/assets; fi",
     "build:frontend": "npm run build:clean && NODE_ENV=production vite build frontend --config ./frontend/vite.config.ts",
     "build:back": "NODE_ENV=production next build",
-    "build:sitemap": "node ./node-scripts/generate.js",
-    "build:site": "npm run build:frontend && npm run build:back",
-    "build": "npm run build:sitemap && npm run build:site",
+    "build": "npm run build:frontend && npm run build:back",
     "start": "NODE_ENV=production && next start",
     "test:end2end": "cypress open",
     "test:unit": "jest --runInBand",
-    "test:a11y": "node ./node-scripts/a11y.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sitemap": "node ./node-scripts/generate-sitemap.js"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^4.1.3",
