@@ -87,9 +87,8 @@ const EtablissementSection: React.FC<IProps> = ({
       'Date de fermeture',
       formatDate(etablissement.dateFermeture || ''),
     ],
-  ].filter((element) => !!element);
+  ] as (any[] | undefined)[];
 
-  console.log(data);
   return (
     <>
       {!usedInEntreprisePage && (

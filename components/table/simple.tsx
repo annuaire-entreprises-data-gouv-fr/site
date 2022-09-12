@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { copy, copied } from '../../components-ui/icon';
 
 interface ISectionProps {
-  body: any[][];
+  body: (any[] | undefined)[];
   id?: string;
 }
 
@@ -126,60 +126,72 @@ const shouldTrim = (label: string) => {
   return false;
 };
 
-export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => (
-  <>
-    <table id={id}>
-      <tbody>
-        {body.map((row, idx) => (
-          <tr key={'a' + idx}>
-            <td>{row[0]}</td>
-            <Cell label={row[0]}>{row[1]}</Cell>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-    <style jsx>{`
-      table {
-        border-collapse: collapse;
-        text-align: left;
-        color: #081d35;
-        width: 100%;
-      }
-      tr > td:first-of-type {
-        font-weight: bold;
-        padding-right: 30px;
-        padding-left: 10px;
-        border-right: 1px solid #dfdff1;
-        vertical-align: baseline;
-      }
-      td,
-      th {
-        border: none;
-        padding: 3px;
-        background-color: #fff;
-        padding-left: 30px;
-      }
-      table > thead {
-        display: none;
-        background-color: #dfdff1;
-      }
-      @media only screen and (min-width: 1px) and (max-width: 600px) {
-        tr {
-          display: flex;
-          flex-direction: column;
-          margin: 15px 0;
-        }
-        tr > td {
-          border: none;
-          padding: 0;
-          margin: 0;
+/**
+ * Two column tables
+ * @param body two dimension array, null or undefined rows will be filtered
+ * @returns
+ */
+export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
+  // filter undefined and null row
+  const bodyNoUndefined = body.filter((element) => {
+    return element !== undefined && element !== null;
+  }) as any[][];
+
+  return (
+    <>
+      <table id={id}>
+        <tbody>
+          {bodyNoUndefined.map((row, idx) => (
+            <tr key={'a' + idx}>
+              <td>{row[0]}</td>
+              <Cell label={row[0]}>{row[1]}</Cell>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <style jsx>{`
+        table {
+          border-collapse: collapse;
+          text-align: left;
+          color: #081d35;
+          width: 100%;
         }
         tr > td:first-of-type {
-          border: none;
-          padding: 0;
-          margin: 0;
+          font-weight: bold;
+          padding-right: 30px;
+          padding-left: 10px;
+          border-right: 1px solid #dfdff1;
+          vertical-align: baseline;
         }
-      }
-    `}</style>
-  </>
-);
+        td,
+        th {
+          border: none;
+          padding: 3px;
+          background-color: #fff;
+          padding-left: 30px;
+        }
+        table > thead {
+          display: none;
+          background-color: #dfdff1;
+        }
+        @media only screen and (min-width: 1px) and (max-width: 600px) {
+          tr {
+            display: flex;
+            flex-direction: column;
+            margin: 15px 0;
+          }
+          tr > td {
+            border: none;
+            padding: 0;
+            margin: 0;
+          }
+          tr > td:first-of-type {
+            border: none;
+            padding: 0;
+            margin: 0;
+          }
+        }
+      `}</style>
+    </>
+  );
+};
