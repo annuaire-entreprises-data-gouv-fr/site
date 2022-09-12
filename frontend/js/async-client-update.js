@@ -18,7 +18,9 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
       .then((e) => e.json())
       .then((response) => {
         const resultCell = document.getElementById('tva-cell-result');
-        resultCell.innerHTML = formatIntFr(response.tva);
+        const tva = response.tva;
+        const result = tva ? formatIntFr(tva) : '<i>Non renseigné</i>';
+        resultCell.innerHTML = result;
         tvaContainer.setSuccess();
       })
       .catch((e) => {

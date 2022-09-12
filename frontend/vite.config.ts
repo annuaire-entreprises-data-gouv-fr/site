@@ -39,7 +39,6 @@ export default defineConfig({
   plugins: [
     legacy({
       targets: ['defaults', 'ie >= 11'],
-      additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
     }),
   ],
   css: {

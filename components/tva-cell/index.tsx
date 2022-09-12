@@ -10,7 +10,9 @@ const TVACell: React.FC<{}> = ({}) => {
       states={[
         <i>Non renseigné</i>,
         <Loader />,
-        <CopyPaste id="tva-cell-result">Hey</CopyPaste>,
+        <CopyPaste id="tva-cell-result">
+          <i>Non renseigné</i>
+        </CopyPaste>,
         <i>
           Le téléservice du VIES ne fonctionne pas actuellement. Merci de
           ré-essayer plus tard.
