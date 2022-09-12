@@ -40,4 +40,4 @@ jobs:
         with:
           name: sitemap
           path: |
-            ./public/siteamp/*.xml
+            ./public/sitemap/*.xml
