@@ -35,9 +35,11 @@ jobs:
         run: npm i
       - name: Build sitemaps
         run: npm run sitemap
+      - name: Compress sitemaps
+        run: tar czf ./public/sitemap.tar.gz ./public/sitemap
       - name: Archive sitemaps
         uses: actions/upload-artifact@v3
         with:
           name: sitemap
           path: |
-            ./public/sitemap/*.xml
+            ./public/sitemap.tar.gz
