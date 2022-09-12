@@ -1,0 +1,43 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests
+
+name: 'SEO'
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 1 10,25 * *'
+
+jobs:
+  dependencies:
+    name: 'Build sitemap'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Cache node modules
+        uses: actions/cache@v2
+        id: restore-dependencies
+        env:
+          cache-name: cache-node-modules
+        with:
+          # Cache node_modules. To cache global, you may try ~/.npm
+          path: ./node_modules
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-cache-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install dependencies
+        run: npm i
+      - name: Build sitemaps
+        run: npm run
+      - name: Archive sitemaps
+        uses: actions/upload-artifact@v3
+        with:
+          name: sitemap
+          path: |
+            ./public/siteamp/*.xml

@@ -43,8 +43,8 @@ yarn-error.log*
 /public/maps/*
 /public/resources/downloads/*
 /public/frontend/css/bundle.css
-/public/sitemap.xml
-/public/*.xml
+/public/sitemap
+/public/
 
 public/dist
 public/downloads
