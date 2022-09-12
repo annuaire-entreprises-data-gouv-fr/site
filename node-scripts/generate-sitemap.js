@@ -100,7 +100,7 @@ async function main() {
 
   console.time('⏱ Time to download base SIREN');
   const url =
-    'https://files.data.gouv.fr/annuaire-entreprises/sitemap-name.csv';
+    'https://object.files.data.gouv.fr/opendata/ae/sitemap-name-prod.csv';
   const names = await axios.get(url, { timeout: 120000 });
   const data = names.data;
   console.timeEnd('⏱ Time to download base SIREN');
