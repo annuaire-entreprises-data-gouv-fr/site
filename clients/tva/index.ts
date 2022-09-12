@@ -39,7 +39,7 @@ export const validateTVANumber = async (
   const response = await httpGet(
     url,
     {
-      timeout: constants.timeout.short,
+      timeout: constants.timeout.long,
     },
     useCache
   );

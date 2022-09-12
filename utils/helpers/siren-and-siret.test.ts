@@ -1,4 +1,9 @@
-import { isLuhnValid, isSiren, isSiret } from './siren-and-siret';
+import {
+  extractSirenOrSiretSlugFromUrl,
+  isLuhnValid,
+  isSiren,
+  isSiret,
+} from './siren-and-siret';
 
 describe('Check isSiren', () => {
   test('Succeed with valid siren', () => {
@@ -57,4 +62,21 @@ describe('Check isLuhnValid', () => {
   });
 });
 
+describe('Siren or siret extraction from url', () => {
+  test('It works with siren or siret', () => {
+    expect(extractSirenOrSiretSlugFromUrl('/entreprise/880878145')).toBe(
+      '880878145'
+    );
+    expect(extractSirenOrSiretSlugFromUrl('/entreprise/8808799')).toBe('');
+    expect(extractSirenOrSiretSlugFromUrl('/entreprise/88087990000')).toBe(
+      '880879900'
+    );
+  });
+
+  test('It works with siret', () => {
+    expect(extractSirenOrSiretSlugFromUrl('/entreprise/88087814500015')).toBe(
+      '88087814500015'
+    );
+  });
+});
 export {};

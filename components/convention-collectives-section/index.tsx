@@ -60,7 +60,6 @@ const ConventionCollectivesSection: React.FC<{
           <FullTable
             head={['SIRET', 'N°IDCC', 'Détails', 'Convention']}
             body={conventionCollectives.map((convention) => [
-              /*eslint-disable*/
               <a href={`/etablissement/${convention.siret}`}>
                 {convention.siret}
               </a>,
@@ -69,7 +68,6 @@ const ConventionCollectivesSection: React.FC<{
               <ButtonLink target="_blank" to={convention.url} alt small>
                 ⇢&nbsp;Consulter
               </ButtonLink>,
-              /*eslint-enable*/
             ])}
           />
         </>

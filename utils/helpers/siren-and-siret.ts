@@ -107,3 +107,22 @@ export const extractSirenFromSiretNoVerify = (siret: string): string => {
 export const extractNicFromSiret = (siret: string) => {
   return siret.slice(9);
 };
+
+/**
+ * Extract a siren/siret-like string from any url. Return empty string if nothing matches
+ * @param slug
+ * @returns
+ */
+export const extractSirenOrSiretSlugFromUrl = (slug: string) => {
+  if (!slug) {
+    return '';
+  }
+  // match a string that ends with either 9 digit or 14 like a siren or a siret
+  // we dont use a $ end match as there might be " or %22 at the end
+  const matches = slug.matchAll(/\d{14}|\d{9}/g);
+  const m = Array.from(matches, (m) => m[0]);
+  if (m && m.length > 0) {
+    return m[m.length - 1]; // last occurence of match
+  }
+  return '';
+};

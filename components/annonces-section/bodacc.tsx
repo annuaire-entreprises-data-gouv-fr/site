@@ -88,7 +88,6 @@ const AnnoncesBodaccSection: React.FC<{
           <FullTable
             head={['Publication', 'N°', 'Details', 'Lien']}
             body={bodacc.annonces.map((annonce) => [
-              /*eslint-disable*/
               <b>{formatDate(annonce.datePublication)}</b>,
               <Tag>n°&nbsp;{annonce.numeroAnnonce}</Tag>,
               <div className="annonce">
@@ -102,7 +101,6 @@ const AnnoncesBodaccSection: React.FC<{
               <ButtonLink target="_blank" to={annonce.path} alt small>
                 ⇢&nbsp;Consulter
               </ButtonLink>,
-              /*eslint-enable*/
             ])}
           />
         </>
