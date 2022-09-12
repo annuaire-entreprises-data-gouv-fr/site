@@ -16,4 +16,4 @@ apiMonitors:
     data:
       - Géolocalisation des adresses
 description: |
-  La direction interministérielle du numérique (DINUM) est l’administration qui accompagne les ministères et les autres administrations dans leur transformation numérique. Elle conseille également le gouvernement sur les sujet numérique et développe des services et ressources mises à disposition des autres administrations comme par exemple : le réseau interministériel de l’État, [FranceConnect](https://franceconnect.gouv.fr), [data.gouv.fr](https://data.gouv.fr) ou [api.gouv.fr](https://api.gouv.fr).
+  La direction interministérielle du numérique (DINUM) est l’administration qui accompagne les ministères et les autres administrations dans leur transformation numérique. Elle conseille également le gouvernement sur les sujet numérique et développe des services et ressources mises à disposition des autres administrations comme par exemple : le réseau interministériel de l’État, FranceConnect, data.gouv.fr ou api.gouv.fr.

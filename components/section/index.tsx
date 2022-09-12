@@ -7,19 +7,7 @@ import { isTwoMonthOld } from '../../utils/helpers/checks';
 import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
 import Warning from '../../components-ui/alerts/warning';
 import DataSourcesTooltip from '../../components-ui/information-tooltip/data-sources-tooltip';
-import { cma, inpi, insee, dila, vies } from '../administrations/logos';
-
-interface IAdministrationsLogos {
-  [key: string]: JSX.Element;
-}
-
-const administrationsLogo: IAdministrationsLogos = {
-  [EAdministration.INPI]: inpi,
-  [EAdministration.CMAFRANCE]: cma,
-  [EAdministration.INSEE]: insee,
-  [EAdministration.DILA]: dila,
-  [EAdministration.VIES]: vies,
-};
+import { administrationsLogo } from '../administrations/logos';
 
 interface ISectionProps {
   title: string;
