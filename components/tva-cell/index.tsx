@@ -9,7 +9,14 @@ const TVACell: React.FC<{}> = ({}) => {
       id="tva-cell-wrapper"
       states={[
         <i>Non renseigné</i>,
-        <Loader />,
+        <>
+          <Loader />
+          {/* 
+            This whitespace ensure the line will have the same height as any written line
+            It should avoid content layout shift for SEO
+          */}
+          &nbsp;
+        </>,
         <CopyPaste id="tva-cell-result">
           <i>Non renseigné</i>
         </CopyPaste>,

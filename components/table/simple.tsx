@@ -37,10 +37,8 @@ export const CopyPaste: React.FC<
         position: relative;
         border-radius: 3px;
         padding: 0 3px;
-        height: 28px;
         width: 75px;
         flex-shrink: 0;
-        border: 2px solid transparent;
         color: #000091;
         margin-left: 12px;
         opacity: 0;
@@ -88,7 +86,7 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
       <style jsx>{`
         td {
           width: auto;
-          padding: 3px;
+          padding: 5px 3px;
           background-color: #fff;
           padding-left: 30px;
         }
