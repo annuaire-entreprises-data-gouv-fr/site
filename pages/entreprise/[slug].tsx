@@ -19,6 +19,7 @@ import StructuredDataBreadcrumb from '../../components/structured-data/breadcrum
 import { shouldNotIndex } from '../../utils/helpers/checks';
 import UsefulShortcuts from '../../components/useful-shortcuts';
 import MatomoEventRedirected from '../../components/matomo-event/search-redirected';
+import { extractSirenOrSiretSlugFromUrl } from '../../utils/helpers/siren-and-siret';
 
 interface IProps {
   uniteLegale: IUniteLegale;
@@ -69,20 +70,6 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale, redirected }) => (
   </Page>
 );
 
-const extractSiren = (slug: string) => {
-  if (!slug) {
-    return '';
-  }
-  // match a string that ends with either 9 digit or 14 like a siren or a siret
-  // we dont use a $ end match as there might be " or %22 at the end
-  const matches = slug.matchAll(/\d{14}|\d{9}/g);
-  const m = Array.from(matches, (m) => m[0]);
-  if (m && m.length > 0) {
-    return m[m.length - 1]; // last occurence of match
-  }
-  return '';
-};
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //@ts-ignore
   const slug = context.params.slug as string;
@@ -90,12 +77,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const referer = context.req.headers.referer;
   const redirected = !!referer && !!context.query.redirected;
 
-  const siren = extractSiren(slug);
-  if (siren.length === 14) {
+  const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
+  if (sirenOrSiretSlug.length === 14) {
     // 14 digits is not a siren -> but it may be a siret
     return {
       redirect: {
-        destination: `/etablissement/${siren}`,
+        destination: `/etablissement/${sirenOrSiretSlug}`,
         permanent: false,
       },
     };
@@ -109,7 +96,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const isBot = !!isABotParam || isABotUA;
 
-    const uniteLegale = await getUniteLegaleFromSlug(siren, {
+    const uniteLegale = await getUniteLegaleFromSlug(sirenOrSiretSlug, {
       page,
       isBot,
     });
@@ -121,7 +108,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e: any) {
-    return redirectIfIssueWithSiren(e, siren, context.req);
+    return redirectIfIssueWithSiren(e, sirenOrSiretSlug, context.req);
   }
 };
 

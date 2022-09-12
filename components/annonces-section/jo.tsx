@@ -77,7 +77,6 @@ const AnnoncesJOSection: React.FC<{
               'Justificatif de parution',
             ]}
             body={jo.annonces.map((annonce) => [
-              /*eslint-disable*/
               <b>{formatDate(annonce.datePublication)}</b>,
               <Tag>{annonce.numeroParution}</Tag>,
               <div className="annonce">
@@ -89,7 +88,6 @@ const AnnoncesJOSection: React.FC<{
               <ButtonLink target="_blank" to={annonce.path} alt small>
                 ⇢&nbsp;Consulter
               </ButtonLink>,
-              /*eslint-enable*/
             ])}
           />
         </>

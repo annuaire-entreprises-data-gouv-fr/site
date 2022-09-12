@@ -34,7 +34,6 @@ const EtablissementTable: React.FC<{
           'Etat',
         ]}
         body={etablissements.map((etablissement: IEtablissement) => [
-          //eslint-disable-next-line
           <a href={`/etablissement/${etablissement.siret}`}>
             {formatSiret(etablissement.siret)}
           </a>,

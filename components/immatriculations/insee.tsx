@@ -18,7 +18,6 @@ const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
   <FullTable
     head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
     body={etablissements.map((etablissement: IEtablissement) => [
-      /*eslint-disable*/
       <a href={`/etablissement/${etablissement.siret}`}>
         {formatSiret(etablissement.siret)}
       </a>,
@@ -35,7 +34,6 @@ const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
         since={etablissement.dateFermeture}
       />,
       <AvisSituationLink siret={etablissement.siret} label="Télécharger" />,
-      /*eslint-enable*/
     ])}
   />
 );

@@ -6,6 +6,8 @@
     "@next/next/no-sync-scripts": "off",
     "@next/next/no-img-element": "off",
     "react/no-children-prop": "off",
+    // no need for unique key in maps as we dont use react on client/front
+    "react/jsx-key": "off",
     "@next/next/no-head-element": "off"
   }
 }

@@ -5,85 +5,9 @@ import Info from '../../components-ui/alerts/info';
 import { Loader } from '../../components-ui/loader';
 import { Tag } from '../../components-ui/tag';
 import { INPI } from '../../components/administrations';
+import FrontStateMachine from '../../components/front-state-machine';
 import Page from '../../layouts';
 import { formatIntFr } from '../../utils/helpers/formatting';
-
-const DownloadPDFScript: React.FC<{ siren: string }> = ({ siren }) => (
-  <div
-    dangerouslySetInnerHTML={{
-      __html: `
-      <script type="text/javascript" defer>
-        function saveAsPdf(blob) {
-            var url = window.URL.createObjectURL(blob);
-            var a = document.createElement("a");
-            a.style = "display: none";
-            a.href = url;
-            a.download = "extrait_immatriculation_inpi_${siren}.pdf";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-            setSuccess();
-        }
-
-        var wrapper = document.getElementById('status-wrapper');
-
-        function setError() {
-          wrapper.className="display-error"
-        }
-        function setStarted() {
-          wrapper.className="display-started"
-        }
-        function setSuccess() {
-          wrapper.className="display-success"
-        }
-        function setPending() {
-          if(wrapper.className.indexOf("display-started") > -1) {
-            wrapper.className = "display-pending";
-          }
-        }
-
-        function downloadInpiPDF(siren) {
-          setStarted();
-          window.setTimeout(setPending,10000);
-
-          if (window.fetch) {
-              download(siren).catch(e=> {
-                return download(siren);
-              }).catch(e=> {
-                return download(siren);
-              }).catch(e=> {
-                setError();
-                throw e;
-              })
-          } else {
-            setError();
-            throw new Error('Download failed : browser too old');
-          }
-        }
-
-        function download(siren) {
-          return fetch(
-            '${routes.rncs.portail.pdf}?format=pdf&ids=[%22'+siren+'%22]'
-          )
-            .then((res) => {
-              if (!res.ok) {
-                throw new Error('Download failed : Inpi is not answering');
-              }
-              return res.blob();
-            })
-            .then(saveAsPdf)
-        }
-
-        (function init() {
-          window.downloadInpiPDF = downloadInpiPDF;
-          window.downloadInpiPDF('${siren}');
-        })();
-      </script>
-  `,
-    }}
-  />
-);
 
 const Retry: React.FC<{ siren: string }> = ({ siren }) => (
   <>
@@ -91,7 +15,7 @@ const Retry: React.FC<{ siren: string }> = ({ siren }) => (
       dangerouslySetInnerHTML={{
         __html: `
             <div class="button-link small">
-                <button onclick="window.downloadInpiPDF('${siren}');">
+                <button onclick="window.downloadInpiPDF();">
                 <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -133,40 +57,43 @@ const InpiPDF: React.FC<{ siren: string }> = ({ siren }) => {
           Le téléchargement du justificatif d’immatriculation ou “extrait{' '}
           <INPI />” a commencé pour le siren {formatIntFr(siren)}.
         </p>
-        <div id="status-wrapper" className="display-started">
-          <div className="status-started">
-            <b>Statut du téléchargement :</b>
-            <Tag>
-              <Loader /> téléchargement en cours
-            </Tag>
-          </div>
-          <div className="status-pending">
-            <b>Statut du téléchargement :</b>
-            <Tag>
-              <Loader /> téléchargement en cours
-            </Tag>
-            <span className="warning">
-              (ne fermez pas cette page, le téléchargement peut prendre plus
-              d’une minute)
-            </span>
-          </div>
-          <div className="status-success">
-            <b>Statut du téléchargement :</b>
-            <Tag className="open">succés</Tag>
-          </div>
-          <div className="status-error">
-            <b>Statut du téléchargement :</b>
-            <Tag className="closed">échec</Tag>
-            <p>
-              Le téléchargement a échoué car le téléservice de l’
-              <INPI /> n’a pas réussi à générer le document. Vous pouvez soit
-              relancer le téléchargement, soit réessayer à un autre moment :
-            </p>
-            <div className="layout-center">
-              <Retry siren={siren} />
-            </div>
-          </div>
-        </div>
+        <FrontStateMachine
+          id="immatriculation-pdf-status-wrapper"
+          states={[
+            <>
+              <b>Statut du téléchargement :</b>
+              <Tag>
+                <Loader /> téléchargement en cours
+              </Tag>
+            </>,
+            <>
+              <b>Statut du téléchargement :</b>
+              <Tag>
+                <Loader /> téléchargement en cours
+              </Tag>
+              <span style={{ color: '#b97800', fontWeight: 'bold' }}>
+                (ne fermez pas cette page, le téléchargement peut prendre plus
+                d’une minute)
+              </span>
+            </>,
+            <>
+              <b>Statut du téléchargement :</b>
+              <Tag className="open">succés</Tag>
+            </>,
+            <>
+              <b>Statut du téléchargement :</b>
+              <Tag className="closed">échec</Tag>
+              <p>
+                Le téléchargement a échoué car le téléservice de l’
+                <INPI /> n’a pas réussi à générer le document. Vous pouvez soit
+                relancer le téléchargement, soit réessayer à un autre moment :
+              </p>
+              <div className="layout-center">
+                <Retry siren={siren} />
+              </div>
+            </>,
+          ]}
+        />
         <br />
         <Info>
           L’Annuaire des Entreprises ne permet plus de télécharger le PDF
@@ -206,41 +133,6 @@ const InpiPDF: React.FC<{ siren: string }> = ({ siren }) => {
           </li>
         </ol>
       </div>
-      <DownloadPDFScript siren={siren} />
-      <style global jsx>{`
-        .warning {
-          color: #b97800;
-          font-weight: bold;
-        }
-        #status-wrapper.display-started > div:not(.status-started) {
-          display: none !important;
-        }
-        #status-wrapper.display-started > div.status-started {
-          display: block;
-        }
-        #status-wrapper.display-pending > div:not(.status-pending) {
-          display: none !important;
-        }
-        #status-wrapper.display-pending > div.status-pending {
-          display: block;
-        }
-
-        // status success
-        #status-wrapper.display-success > div:not(.status-success) {
-          display: none !important;
-        }
-        #status-wrapper.display-success > div.status-success {
-          display: block;
-        }
-
-        // status error
-        #status-wrapper.display-error > div:not(.status-error) {
-          display: none !important;
-        }
-        #status-wrapper.display-error > div.status-error {
-          display: block;
-        }
-      `}</style>
     </Page>
   );
 };
