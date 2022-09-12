@@ -18,8 +18,8 @@
     "start": "NODE_ENV=production && next start",
     "test:end2end": "cypress open",
     "test:unit": "jest --runInBand",
-    "test:a11y": "node ./node-scripts/a11y.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sitemap": "node ./node-scripts/generate-sitemap.js"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^4.1.3",

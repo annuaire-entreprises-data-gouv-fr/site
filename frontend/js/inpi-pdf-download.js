@@ -2,7 +2,6 @@ import { extractSirenSlugFromUrl } from './utils';
 import FrontStateMachineFactory from './front-state-machine';
 
 function saveAsPdf(blob, siren) {
-  console.log('saving');
   var url = window.URL.createObjectURL(blob);
   var a = document.createElement('a');
   a.style = 'display: none';
