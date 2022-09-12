@@ -1,8 +1,7 @@
 import React from 'react';
-import { IRatio } from '../../models/monitoring';
+import { IMonitoring, IRatio } from '../../models/monitoring';
 import InformationTooltip from '../../components-ui/information-tooltip';
 import { Section } from '../section';
-import { IMonitoringWithName } from '../../pages/administration';
 import { Tag } from '../../components-ui/tag';
 
 const getUptimeColor = (ratio: IRatio) => {
@@ -137,7 +136,16 @@ const RobotTooltip = () => (
   </>
 );
 
-const AdministrationApiMonitoring: React.FC<IMonitoringWithName> = ({
+interface IProps extends IMonitoring {
+  short: string;
+  apiGouvLink?: string;
+  dataGouvLink?: string;
+  slug: string;
+  apiName: string;
+  data?: string[];
+}
+
+const ApiMonitoring: React.FC<IProps> = ({
   isOnline,
   series,
   uptime,
@@ -228,14 +236,11 @@ const AdministrationApiMonitoring: React.FC<IMonitoringWithName> = ({
     {data && data.length > 0 && (
       <div>
         Données de l’API utilisées sur le site :
-        {data.map((d) => (
+        {data.map((d: any) => (
           <Tag key={d}>{d}</Tag>
         ))}
       </div>
     )}
-    Administration responsable : <a href={`/administration/${slug}`}>{short}</a>
-    .
-    <br />
     {(apiGouvLink || dataGouvLink) && (
       <>
         Aller plus loin :{' '}
@@ -256,4 +261,4 @@ const AdministrationApiMonitoring: React.FC<IMonitoringWithName> = ({
   </>
 );
 
-export default AdministrationApiMonitoring;
+export default ApiMonitoring;
