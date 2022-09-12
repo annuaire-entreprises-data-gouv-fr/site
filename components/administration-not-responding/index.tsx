@@ -30,7 +30,7 @@ const AdministrationNotResponding: React.FC<IProps> = ({
         <br />
         Pour en savoir plus sur l’état du service,{' '}
         <a
-          href={`/administration/${administrationMetaData.slug}#acces`}
+          href={`/sources-de-donnees/${administrationMetaData.slug}#acces`}
           target="_blank"
           rel="noreferrer noopener"
         >

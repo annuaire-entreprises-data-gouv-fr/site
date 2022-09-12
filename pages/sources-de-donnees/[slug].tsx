@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
@@ -6,19 +6,28 @@ import Page from '../../layouts';
 import {
   administrationsMetaData,
   EAdministration,
+  IAdministrationMetaData,
+  IAPIMonitorMetaData,
 } from '../../models/administration';
 import {
   redirectPageNotFound,
   redirectServerError,
 } from '../../utils/redirects';
+import { getMonitorsWithMetaData, IMonitoring } from '../../models/monitoring';
+import ApiMonitoring from '../../components/api-monitoring';
 import { HttpNotFound } from '../../clients/exceptions';
-import AdministrationDescription from '../../components/administrations/administration-description';
-import HiddenH1 from '../../components/a11y-components/hidden-h1';
 
-const AdministrationPage: React.FC<{
-  long: string;
-  slug: string;
-}> = ({ long, slug }) => (
+interface IProps extends IAdministrationMetaData {
+  monitorings: (IMonitoring & IAPIMonitorMetaData)[];
+}
+
+const SourcesDeDonneesPage: React.FC<IProps> = ({
+  long,
+  slug,
+  short,
+  description,
+  monitorings,
+}) => (
   <Page
     small={true}
     title={long}
@@ -26,9 +35,23 @@ const AdministrationPage: React.FC<{
   >
     <div className="content-container">
       <br />
-      <a href="/administration">← Toutes les administrations partenaires</a>
-      <HiddenH1 title={`Administration partenaire : ${long}`} />
-      <AdministrationDescription slug={slug} />
+      <a href="/sources-de-donnees">← Toutes les sources de données</a>
+      <h1>{long}</h1>
+      <p>{description}</p>
+      {monitorings.length > 0 && (
+        <>
+          <h2>
+            API de cette administration utilisée
+            {monitorings.length > 1 ? 's' : ''} par l’Annuaire des Entreprises
+          </h2>
+          {monitorings.map((monitoring) => (
+            <Fragment key={monitoring.id}>
+              <h3>{monitoring.apiName}</h3>
+              <ApiMonitoring {...monitoring} short={short} slug={slug} />
+            </Fragment>
+          ))}
+        </>
+      )}
     </div>
     <style jsx>{`
       .content-container {
@@ -51,9 +74,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       throw new HttpNotFound(`${slug}`);
     }
 
+    const monitorings = await getMonitorsWithMetaData(
+      administration.apiMonitors || []
+    );
     return {
       props: {
         ...administration,
+        monitorings,
       },
     };
   } catch (e: any) {
@@ -70,4 +97,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 };
 
-export default AdministrationPage;
+export default SourcesDeDonneesPage;

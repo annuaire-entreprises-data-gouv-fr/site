@@ -17,14 +17,14 @@ import vies from './content/vies.yml';
 /* tslint:enable */
 
 export enum EAdministration {
-  DINUM = 0,
-  INPI = 1,
-  INSEE,
-  CMAFRANCE,
-  DILA,
-  METI,
-  MI,
-  VIES,
+  DINUM = 'dinum',
+  INPI = 'inpi',
+  INSEE = 'insee',
+  CMAFRANCE = 'cma',
+  DILA = 'dila',
+  METI = 'meti',
+  MI = 'mi',
+  VIES = 'vies',
 }
 
 export const administrationsMetaData: IAdministrationsMetaData = {

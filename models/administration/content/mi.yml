@@ -11,4 +11,4 @@ apiMonitors:
       - N° RNA
       - Informations générales des associations dotées d’un SIRET
 description: |
-  Le ministère de l’interieur publie toutes les données des associations enregistrées dans le [Répertoire National des Associations (RNA)](https://www.associations.gouv.fr/le-rna-repertoire-national-des-associations.html). Le RNA remplace depuis 2010 le répertoire Waldec (Web des associations librement déclarées).
+  Le ministère de l’interieur publie toutes les données des associations enregistrées dans le [Répertoire National des Associations (RNA). Le RNA remplace depuis 2010 le répertoire Waldec (Web des associations librement déclarées).
