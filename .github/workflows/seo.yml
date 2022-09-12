@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: Build sitemaps
-        run: npm run
+        run: npm run sitemap
       - name: Archive sitemaps
         uses: actions/upload-artifact@v3
         with:
