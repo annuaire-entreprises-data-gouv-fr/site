@@ -1,7 +1,7 @@
 import { IUniteLegale } from '.';
 import fetchConventionCollectives from '../clients/siret-2-idcc';
 import logErrorInSentry from '../utils/sentry';
-import { EAdministration } from './administration';
+import { EAdministration } from './administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,

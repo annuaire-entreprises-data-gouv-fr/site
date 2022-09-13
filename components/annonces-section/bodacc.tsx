@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FullTable } from '../table/full';
-import { EAdministration } from '../../models/administration';
+import { EAdministration } from '../../models/administrations';
 import { Section } from '../section';
 import AdministrationNotResponding from '../administration-not-responding';
 import {

@@ -4,7 +4,7 @@ import {
   administrationsMetaData,
   IAdministrationMetaData,
   IAPIMonitorMetaData,
-} from './administration';
+} from './administrations';
 
 export interface IRatio {
   ratio: string;

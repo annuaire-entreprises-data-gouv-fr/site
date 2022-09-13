@@ -4,7 +4,7 @@ import getResults from '../clients/sirene-ouverte/recherche';
 import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
 import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
-import { EAdministration } from './administration';
+import { EAdministration } from './administrations';
 import { APINotRespondingFactory } from './api-not-responding';
 import SearchFilterParams from './search-filter-params';
 

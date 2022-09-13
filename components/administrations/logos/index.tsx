@@ -1,5 +1,5 @@
 import React from 'react';
-import { EAdministration } from '../../../models/administration';
+import { EAdministration } from '../../../models/administrations';
 
 export const cma = (
   <svg

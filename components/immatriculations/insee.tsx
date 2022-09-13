@@ -1,6 +1,6 @@
 import React from 'react';
 import { IEtablissement, IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administration';
+import { EAdministration } from '../../models/administrations';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import { FullTable } from '../table/full';
 import { Section } from '../section';
@@ -9,8 +9,6 @@ import IsActiveTag from '../../components-ui/is-active-tag';
 import AvisSituationLink from '../avis-situation-link';
 import ButtonLink from '../../components-ui/button';
 import { INSEE } from '../administrations';
-import PageCounter from '../results-page-counter';
-import constants from '../../models/constants';
 
 const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
   etablissements,

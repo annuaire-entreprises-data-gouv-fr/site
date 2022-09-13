@@ -1,7 +1,4 @@
-import {
-  administrationsMetaData,
-  EAdministration,
-} from '../../models/administration';
+import { administrationsMetaData } from '../../models/administrations';
 import { administrationsLogo } from './logos';
 
 const AdministrationDescription: React.FC<{

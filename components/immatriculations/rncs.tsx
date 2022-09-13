@@ -1,6 +1,6 @@
 import React from 'react';
 import { IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administration';
+import { EAdministration } from '../../models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -16,7 +16,6 @@ import { PrintNever } from '../../components-ui/print-visibility';
 import { Closed, download, Open } from '../../components-ui/icon';
 import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
 import { IImmatriculationRNCS } from '../../models/immatriculation/rncs';
-import Info from '../../components-ui/alerts/info';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;

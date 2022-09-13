@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FullTable } from '../table/full';
-import { EAdministration } from '../../models/administration';
+import { EAdministration } from '../../models/administrations';
 import { Tag } from '../../components-ui/tag';
 import { Section } from '../section';
 import ButtonLink from '../../components-ui/button';

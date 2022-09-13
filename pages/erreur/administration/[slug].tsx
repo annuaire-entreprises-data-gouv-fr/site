@@ -5,7 +5,7 @@ import Page from '../../../layouts';
 import {
   administrationsMetaData,
   EAdministration,
-} from '../../../models/administration';
+} from '../../../models/administrations';
 import { HttpNotFound } from '../../../clients/exceptions';
 import AdministrationNotResponding from '../../../components/administration-not-responding';
 

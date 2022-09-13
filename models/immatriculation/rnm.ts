@@ -3,7 +3,7 @@ import { HttpNotFound } from '../../clients/exceptions';
 import { fetchRnmImmatriculation } from '../../clients/rnm';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../../utils/sentry';
-import { EAdministration } from '../administration';
+import { EAdministration } from '../administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,

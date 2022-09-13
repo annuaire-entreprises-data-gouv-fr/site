@@ -1,5 +1,5 @@
 /** @ts-ignore */
-import data from './data.yml';
+import data from '../../data/changelog.yml';
 
 export interface IChangelog {
   date: string;

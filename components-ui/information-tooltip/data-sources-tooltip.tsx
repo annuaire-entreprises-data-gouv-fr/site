@@ -1,6 +1,6 @@
 import React from 'react';
 import InformationTooltip from '.';
-import { IAdministrationMetaData } from '../../models/administration';
+import { IAdministrationMetaData } from '../../models/administrations';
 import { information } from '../icon';
 
 const DataSourcesTooltip: React.FC<{

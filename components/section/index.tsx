@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import {
   administrationsMetaData,
   EAdministration,
-} from '../../models/administration';
+} from '../../models/administrations';
 import { isTwoMonthOld } from '../../utils/helpers/checks';
 import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
 import Warning from '../../components-ui/alerts/warning';

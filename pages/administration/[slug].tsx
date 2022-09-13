@@ -6,7 +6,7 @@ import Page from '../../layouts';
 import {
   administrationsMetaData,
   EAdministration,
-} from '../../models/administration';
+} from '../../models/administrations';
 import {
   redirectPageNotFound,
   redirectServerError,

@@ -5,7 +5,7 @@ import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
 import { CopyPaste, TwoColumnTable } from '../table/simple';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import { EAdministration } from '../../models/administration';
+import { EAdministration } from '../../models/administrations';
 import AvisSituationLink from '../avis-situation-link';
 import { EtablissementDescription } from '../etablissement-description';
 import BreakPageForPrint from '../../components-ui/print-break-page';

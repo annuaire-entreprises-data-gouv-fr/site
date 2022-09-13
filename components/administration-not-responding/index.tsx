@@ -1,5 +1,5 @@
 import React from 'react';
-import { administrationsMetaData } from '../../models/administration';
+import { administrationsMetaData } from '../../models/administrations';
 import { IAPINotRespondingError } from '../../models/api-not-responding';
 import ButtonLink from '../../components-ui/button';
 import { Section } from '../section';

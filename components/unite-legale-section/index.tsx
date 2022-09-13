@@ -1,13 +1,12 @@
 import React from 'react';
 import { IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administration';
+import { EAdministration } from '../../models/administrations';
 import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
 import BreakPageForPrint from '../../components-ui/print-break-page';
 import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
-import { Loader } from '../../components-ui/loader';
 import TVACell from '../tva-cell';
 
 const UniteLegaleSection: React.FC<{
