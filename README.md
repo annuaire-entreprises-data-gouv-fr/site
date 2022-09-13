@@ -92,6 +92,10 @@ A chaque "merge" sur master :
 
 NB: Si plusieurs déploiements sont déclenchés en même temps, seul le premier va jusqu'au bout. Les autres sont automatiquement interrompus.
 
+## Sitemap
+
+La sitemap est générée deux fois par mois par une github action. Elle est ensuite stockée dans un artifact et téléchargée lors du déploiement sur les différents environnements.
+
 ## Licence
 
 Ce projet est sous AGPL 3.0
