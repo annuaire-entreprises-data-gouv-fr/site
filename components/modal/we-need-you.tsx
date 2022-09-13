@@ -17,7 +17,7 @@ export const WeNeedYouModal: React.FC<{}> = () => (
         }}
       />
       <div className="modal">
-        <h2>Nous sommes curieux ! 👀</h2>
+        <b>Nous sommes curieux ! 👀</b>
         <p>
           Dites-nous comment vous utilisez le site, comment nous pourrions
           l’améliorer et le compléter.
