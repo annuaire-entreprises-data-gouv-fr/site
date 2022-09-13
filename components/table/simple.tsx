@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { copy, copied } from '../../components-ui/icon';
 
 interface ISectionProps {
-  body: (any[] | undefined)[];
+  body: (any[] | undefined | null | string | boolean)[];
   id?: string;
 }
 
@@ -132,7 +132,12 @@ const shouldTrim = (label: string) => {
 export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
   // filter undefined and null row
   const bodyNoUndefined = body.filter((element) => {
-    return element !== undefined && element !== null;
+    return (
+      element !== undefined &&
+      element !== null &&
+      element !== false &&
+      element !== ''
+    );
   }) as any[][];
 
   return (
