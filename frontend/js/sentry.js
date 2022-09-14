@@ -10,7 +10,14 @@ if (import.meta.env.PROD && Sentry && dsn) {
     // necessary for purely manual usage
     integrations: [new BrowserTracing()],
 
-    // To set a uniform sample rate
-    tracesSampleRate: 0.2,
+    tracesSampler: (samplingContext) => {
+      const path = samplingContext?.location?.pathname || '';
+
+      return (
+        path.indexOf('/entreprise') > -1 ||
+        path.indexOf('/rechercher') > -1 ||
+        path.indexOf('/justificatif-immatriculation-pdf') > -1
+      );
+    },
   });
 }
