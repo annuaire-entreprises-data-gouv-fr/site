@@ -4,7 +4,6 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import Title, { FICHE } from '../../components/title-section';
 
-import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import {
   getDirigeantsWithUniteLegaleFromSlug,
   IDirigeants,
@@ -14,10 +13,18 @@ import DirigeantsSection from '../../components/dirigeants-section/rncs-dirigean
 import BeneficiairesSection from '../../components/dirigeants-section/beneficiaires';
 import DirigeantSummary from '../../components/dirigeants-section/summary';
 import BreakPageForPrint from '../../components-ui/print-break-page';
+import {
+  IPropsWithMetadata,
+  postServerSideProps,
+} from '../../utils/server-side-props-helper/post-server-side-props';
+import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 
-const DirigeantsPage: React.FC<IDirigeants> = ({
+interface IProps extends IPropsWithMetadata, IDirigeants {}
+
+const DirigeantsPage: React.FC<IProps> = ({
   uniteLegale,
   immatriculationRNCS,
+  metadata,
 }) => {
   return (
     <Page
@@ -25,6 +32,7 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
       title={`Dirigeants de l’entité - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
       canonical={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`}
       noIndex={true}
+      isBrowserOutdated={metadata.isBrowserOutdated}
     >
       <div className="content-container">
         <Title uniteLegale={uniteLegale} ficheType={FICHE.DIRIGEANTS} />
@@ -63,16 +71,13 @@ const DirigeantsPage: React.FC<IDirigeants> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const slug = context.params.slug as string;
-  try {
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  async (context) => {
+    const { slug } = extractParamsFromContext(context);
     return {
       props: await getDirigeantsWithUniteLegaleFromSlug(slug),
     };
-  } catch (e: any) {
-    return redirectIfIssueWithSiren(e, slug, context.req);
   }
-};
+);
 
 export default DirigeantsPage;

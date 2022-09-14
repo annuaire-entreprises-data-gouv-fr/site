@@ -9,15 +9,16 @@ import {
   IAdministrationMetaData,
   IAPIMonitorMetaData,
 } from '../../models/administrations';
-import {
-  redirectPageNotFound,
-  redirectServerError,
-} from '../../utils/redirects';
 import { getMonitorsWithMetaData, IMonitoring } from '../../models/monitoring';
 import ApiMonitoring from '../../components/api-monitoring';
 import { HttpNotFound } from '../../clients/exceptions';
+import {
+  IPropsWithMetadata,
+  postServerSideProps,
+} from '../../utils/server-side-props-helper/post-server-side-props';
+import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 
-interface IProps extends IAdministrationMetaData {
+interface IProps extends IAdministrationMetaData, IPropsWithMetadata {
   monitorings: (IMonitoring & IAPIMonitorMetaData)[];
 }
 
@@ -27,11 +28,13 @@ const SourcesDeDonneesPage: React.FC<IProps> = ({
   short,
   description,
   monitorings,
+  metadata,
 }) => (
   <Page
     small={true}
     title={long}
     canonical={`https://annuaire-entreprises.data.gouv.fr/sources-de-donnees/${slug}`}
+    isBrowserOutdated={metadata.isBrowserOutdated}
   >
     <div className="content-container">
       <br />
@@ -61,17 +64,17 @@ const SourcesDeDonneesPage: React.FC<IProps> = ({
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const slug = context.params.slug as EAdministration;
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  async (context) => {
+    //@ts-ignore
+    const { slug } = extractParamsFromContext(context);
 
-  try {
     const administration = Object.values(administrationsMetaData).find(
       //@ts-ignore
       (admin) => admin.slug === slug
     );
     if (administration === undefined) {
-      throw new HttpNotFound(`${slug}`);
+      throw new HttpNotFound(`Source de donnée ${slug} page does not exist`);
     }
 
     const monitorings = await getMonitorsWithMetaData(
@@ -83,18 +86,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         monitorings,
       },
     };
-  } catch (e: any) {
-    if (e instanceof HttpNotFound) {
-      return redirectPageNotFound(
-        `Administration ${slug} page does not exist`,
-        {
-          page: context.req.url,
-        }
-      );
-    } else {
-      return redirectServerError(e.toString());
-    }
   }
-};
+);
 
 export default SourcesDeDonneesPage;

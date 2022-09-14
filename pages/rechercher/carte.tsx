@@ -3,23 +3,23 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import PageCounter from '../../components/results-page-counter';
-import { redirectIfSiretOrSiren } from '../../utils/redirects/routers';
 
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import ResultsHeader from '../../components/results-header';
 import search, { ISearchResults } from '../../models/search';
 import ResultsList from '../../components/results-list';
 import MapResults from '../../components/map/map-results';
-import { IsLikelyASirenOrSiretException } from '../../models';
-import { redirectServerError } from '../../utils/redirects';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
 import StructuredDataSearchAction from '../../components/structured-data/search';
 import { isAPINotResponding } from '../../models/api-not-responding';
 import { SearchErrorExplanations } from '../../components/error-explanations';
 import SearchFilterParams, { IParams } from '../../models/search-filter-params';
-import MatomoEventSearchClick from '../../components/matomo-event/search-click';
+import {
+  IPropsWithMetadata,
+  postServerSideProps,
+} from '../../utils/server-side-props-helper/post-server-side-props';
 
-interface IProps {
+interface IProps extends IPropsWithMetadata {
   searchTerm: string;
   results: ISearchResults;
   searchFilterParams: IParams;
@@ -29,6 +29,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
   results,
   searchTerm,
   searchFilterParams,
+  metadata,
 }) => (
   <Page
     small={true}
@@ -38,6 +39,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
     noIndex={true}
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/carte"
+    isBrowserOutdated={metadata.isBrowserOutdated}
   >
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
@@ -131,14 +133,14 @@ const MapSearchResultPage: React.FC<IProps> = ({
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  // get params from query string
-  const searchTerm = (context.query.terme || '') as string;
-  const pageParam = (context.query.page || '') as string;
-  const page = parseIntWithDefaultValue(pageParam, 1);
-  const searchFilterParams = new SearchFilterParams(context.query);
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  async (context) => {
+    // get params from query string
+    const searchTerm = (context.query.terme || '') as string;
+    const pageParam = (context.query.page || '') as string;
+    const page = parseIntWithDefaultValue(pageParam, 1);
+    const searchFilterParams = new SearchFilterParams(context.query);
 
-  try {
     const results = (await search(searchTerm, page, searchFilterParams)) || {};
     return {
       props: {
@@ -147,13 +149,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         searchFilterParams: searchFilterParams.toJSON(),
       },
     };
-  } catch (e: any) {
-    if (e instanceof IsLikelyASirenOrSiretException) {
-      return redirectIfSiretOrSiren(e.message);
-    } else {
-      return redirectServerError(e.message);
-    }
   }
-};
+);
 
 export default MapSearchResultPage;

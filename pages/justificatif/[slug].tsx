@@ -5,19 +5,26 @@ import Page from '../../layouts';
 import Title, { FICHE } from '../../components/title-section';
 import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
 import Immatriculations from '../../components/immatriculations';
-import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
-import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
+import {
+  IPropsWithMetadata,
+  postServerSideProps,
+} from '../../utils/server-side-props-helper/post-server-side-props';
+import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 
-const JustificatifPage: React.FC<IJustificatifs> = ({
+interface IProps extends IJustificatifs, IPropsWithMetadata {}
+
+const JustificatifPage: React.FC<IProps> = ({
   uniteLegale,
   immatriculationRNM,
   immatriculationRNCS,
   immatriculationJOAFE,
+  metadata,
 }) => (
   <Page
     small={true}
     title={`Justificatif d’immatriculation - ${uniteLegale.nomComplet}`}
     noIndex={true}
+    isBrowserOutdated={metadata.isBrowserOutdated}
   >
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.JUSTIFICATIFS} />
@@ -36,19 +43,14 @@ const JustificatifPage: React.FC<IJustificatifs> = ({
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const siren = context.params.slug as string;
-
-  try {
-    const justificatifs = await getJustificatifs(siren);
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  async (context) => {
+    const { slug } = extractParamsFromContext(context);
 
     return {
-      props: justificatifs,
+      props: await getJustificatifs(slug),
     };
-  } catch (e: any) {
-    return redirectIfIssueWithSiren(e, siren, context.req);
   }
-};
+);
 
 export default JustificatifPage;

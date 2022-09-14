@@ -7,13 +7,16 @@ import EtablissementSection from '../../components/etablissement-section';
 import Title, { FICHE } from '../../components/title-section';
 import { NonDiffusibleSection } from '../../components/non-diffusible';
 import { getEtablissementWithUniteLegaleFromSlug } from '../../models/etablissement';
-import { redirectIfIssueWithSiretOrSiren } from '../../utils/redirects/routers';
 import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
-import isUserAgentABot from '../../utils/user-agent';
 import { shouldNotIndex } from '../../utils/helpers/checks';
 import MatomoEventRedirected from '../../components/matomo-event/search-redirected';
+import {
+  IPropsWithMetadata,
+  postServerSideProps,
+} from '../../utils/server-side-props-helper/post-server-side-props';
+import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 
-interface IProps {
+interface IProps extends IPropsWithMetadata {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
   redirected: boolean;
@@ -23,11 +26,13 @@ const EtablissementPage: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
   redirected,
+  metadata,
 }) => (
   <Page
     small={true}
     title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
     noIndex={shouldNotIndex(uniteLegale)}
+    isBrowserOutdated={metadata.isBrowserOutdated}
   >
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
     <div className="content-container">
@@ -60,30 +65,23 @@ const EtablissementPage: React.FC<IProps> = ({
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const siret = context.params.slug as string;
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  async (context) => {
+    const { slug, isBot, isRedirected } = extractParamsFromContext(
+      context,
+      true
+    );
 
-  const referer = context.req.headers.referer;
-  const redirected = !!referer && !!context.query.redirected;
-
-  const isABotParam = (context.query.isABot || '') as string;
-  const isABotUA = isUserAgentABot(context.req);
-
-  try {
-    const isBot = !!isABotParam || isABotUA;
     const etablissementWithUniteLegale =
-      await getEtablissementWithUniteLegaleFromSlug(siret, isBot);
+      await getEtablissementWithUniteLegaleFromSlug(slug, isBot);
 
     return {
       props: {
         ...etablissementWithUniteLegale,
-        redirected,
+        redirected: isRedirected,
       },
     };
-  } catch (e: any) {
-    return redirectIfIssueWithSiretOrSiren(e, siret, context.req);
   }
-};
+);
 
 export default EtablissementPage;

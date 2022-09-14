@@ -11,22 +11,28 @@ import EtablissementSection from '../../components/etablissement-section';
 
 import { NonDiffusibleSection } from '../../components/non-diffusible';
 import { getUniteLegaleFromSlug } from '../../models/unite-legale';
-import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import AssociationSection from '../../components/association-section';
-import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
-import isUserAgentABot from '../../utils/user-agent';
 import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
 import { shouldNotIndex } from '../../utils/helpers/checks';
 import UsefulShortcuts from '../../components/useful-shortcuts';
 import MatomoEventRedirected from '../../components/matomo-event/search-redirected';
 import { extractSirenOrSiretSlugFromUrl } from '../../utils/helpers/siren-and-siret';
+import {
+  postServerSideProps,
+  IPropsWithMetadata,
+} from '../../utils/server-side-props-helper/post-server-side-props';
+import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 
-interface IProps {
+interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
   redirected: true;
 }
 
-const UniteLegalePage: React.FC<IProps> = ({ uniteLegale, redirected }) => (
+const UniteLegalePage: React.FC<IProps> = ({
+  uniteLegale,
+  redirected,
+  metadata,
+}) => (
   <Page
     small={true}
     title={`${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
@@ -36,6 +42,7 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale, redirected }) => (
     }
     description={`Toutes les informations officielles sur ${uniteLegale.nomComplet} :  Siren, Siret, NIC, APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, conventions collectives...`}
     noIndex={shouldNotIndex(uniteLegale)}
+    isBrowserOutdated={metadata.isBrowserOutdated}
   >
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
     <StructuredDataBreadcrumb siren={uniteLegale.siren} />
@@ -70,31 +77,23 @@ const UniteLegalePage: React.FC<IProps> = ({ uniteLegale, redirected }) => (
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const slug = context.params.slug as string;
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  async (context) => {
+    const { slug, isRedirected, page, isBot } = extractParamsFromContext(
+      context,
+      true
+    );
 
-  const referer = context.req.headers.referer;
-  const redirected = !!referer && !!context.query.redirected;
-
-  const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
-  if (sirenOrSiretSlug.length === 14) {
-    // 14 digits is not a siren -> but it may be a siret
-    return {
-      redirect: {
-        destination: `/etablissement/${sirenOrSiretSlug}`,
-        permanent: false,
-      },
-    };
-  }
-
-  const pageParam = (context.query.page || '') as string;
-  const page = parseIntWithDefaultValue(pageParam, 1);
-
-  const isABotParam = (context.query.isABot || '') as string;
-  const isABotUA = isUserAgentABot(context.req);
-  try {
-    const isBot = !!isABotParam || isABotUA;
+    const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
+    if (sirenOrSiretSlug.length === 14) {
+      // 14 digits is not a siren -> but it may be a siret
+      return {
+        redirect: {
+          destination: `/etablissement/${sirenOrSiretSlug}`,
+          permanent: false,
+        },
+      };
+    }
 
     const uniteLegale = await getUniteLegaleFromSlug(sirenOrSiretSlug, {
       page,
@@ -104,12 +103,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {
         uniteLegale,
-        redirected,
+        redirected: isRedirected,
       },
     };
-  } catch (e: any) {
-    return redirectIfIssueWithSiren(e, sirenOrSiretSlug, context.req);
   }
-};
+);
 
 export default UniteLegalePage;

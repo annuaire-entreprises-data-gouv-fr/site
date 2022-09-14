@@ -8,18 +8,27 @@ import { getEtablissementWithLatLongFromSlug } from '../../models/etablissement'
 import { MapTitleEtablissement } from '../../components/title-etablissement-section';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
+import {
+  IPropsWithMetadata,
+  postServerSideProps,
+} from '../../utils/server-side-props-helper/post-server-side-props';
+import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 
-interface IProps {
+interface IProps extends IPropsWithMetadata {
   etablissement: IEtablissement;
 }
 
-const EtablissementMapPage: React.FC<IProps> = ({ etablissement }) => (
+const EtablissementMapPage: React.FC<IProps> = ({
+  etablissement,
+  metadata,
+}) => (
   <Page
     small={true}
     map={true}
     noIndex={true}
     title="Carte"
     canonical={`https://annuaire-entreprises.data.gouv.fr/carte/${etablissement.siret}`}
+    isBrowserOutdated={metadata.isBrowserOutdated}
   >
     <div className="fr-container">
       <br />
@@ -58,20 +67,21 @@ const EtablissementMapPage: React.FC<IProps> = ({ etablissement }) => (
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const siret = context.params.slug as string;
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  async (context) => {
+    const { slug } = extractParamsFromContext(context);
 
-  try {
-    const etablissement = await getEtablissementWithLatLongFromSlug(siret);
-    return {
-      props: {
-        etablissement,
-      },
-    };
-  } catch (e: any) {
-    return { props: { etablissement: { estActif: null, siret } } };
+    try {
+      const etablissement = await getEtablissementWithLatLongFromSlug(slug);
+      return {
+        props: {
+          etablissement,
+        },
+      };
+    } catch (e: any) {
+      return { props: { etablissement: { estActif: null, siret: slug } } };
+    }
   }
-};
+);
 
 export default EtablissementMapPage;

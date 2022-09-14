@@ -3,20 +3,28 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import Title, { FICHE } from '../../components/title-section';
 
-import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import ConventionCollectivesSection from '../../components/convention-collectives-section';
 import getConventionCollectivesFromSlug, {
   IConventions,
 } from '../../models/convention-collective';
+import {
+  IPropsWithMetadata,
+  postServerSideProps,
+} from '../../utils/server-side-props-helper/post-server-side-props';
+import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 
-const ConventionsCollectives: React.FC<IConventions> = ({
+interface IProps extends IPropsWithMetadata, IConventions {}
+
+const ConventionsCollectives: React.FC<IProps> = ({
   uniteLegale,
   conventionCollectives,
+  metadata,
 }) => (
   <Page
     small={true}
     title={`Conventions collectives - ${uniteLegale.nomComplet}`}
     noIndex={true}
+    isBrowserOutdated={metadata.isBrowserOutdated}
   >
     <div className="content-container">
       <Title ficheType={FICHE.DIVERS} uniteLegale={uniteLegale} />
@@ -27,13 +35,12 @@ const ConventionsCollectives: React.FC<IConventions> = ({
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const siren = context.params.slug as string;
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  async (context) => {
+    const { slug } = extractParamsFromContext(context);
 
-  try {
     const { uniteLegale, conventionCollectives } =
-      await getConventionCollectivesFromSlug(siren);
+      await getConventionCollectivesFromSlug(slug);
 
     return {
       props: {
@@ -41,9 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         conventionCollectives,
       },
     };
-  } catch (e: any) {
-    return redirectIfIssueWithSiren(e, siren, context.req);
   }
-};
+);
 
 export default ConventionsCollectives;

@@ -1,34 +1,5 @@
-import { ServerResponse } from 'http';
+import { hasSirenFormat, hasSiretFormat } from '../helpers/siren-and-siret';
 import logErrorInSentry, { IScope, logWarningInSentry } from '../sentry';
-
-/**
- * Use next js buit-in redirection when possible
- * https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering
- *
- * Use this method for /api/... methods only
- *
- * @param res
- * @param path
- */
-export const redirect = (res: ServerResponse, path: string) => {
-  res.writeHead(302, {
-    Location: path,
-  });
-  res.end();
-};
-
-export const redirectForbidden = (msg: string, scope?: IScope) => {
-  logWarningInSentry('Access Forbidden', {
-    details: msg,
-    ...scope,
-  });
-  return {
-    redirect: {
-      destination: '/erreur/acces-refuse',
-      permanent: false,
-    },
-  };
-};
 
 export const redirectPageNotFound = (
   msg: string,
@@ -84,4 +55,19 @@ export const redirectSirenOrSiretIntrouvable = (
   };
 };
 
-export default redirect;
+export const redirectIfSiretOrSiren = (siretOrSiren: string) => {
+  let destination;
+  if (hasSiretFormat(siretOrSiren)) {
+    destination = `/etablissement/${siretOrSiren}?redirected=1`;
+  } else if (hasSirenFormat(siretOrSiren)) {
+    destination = `/entreprise/${siretOrSiren}?redirected=1`;
+  } else {
+    throw new Error(`${siretOrSiren} is neither a siret or a siren`);
+  }
+  return {
+    redirect: {
+      destination,
+      permanent: false,
+    },
+  };
+};

@@ -7,22 +7,25 @@ import {
   administrationsMetaData,
   EAdministration,
 } from '../../models/administrations';
-import {
-  redirectPageNotFound,
-  redirectServerError,
-} from '../../utils/redirects';
 import { HttpNotFound } from '../../clients/exceptions';
 import AdministrationDescription from '../../components/administrations/administration-description';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
+import {
+  IPropsWithMetadata,
+  postServerSideProps,
+} from '../../utils/server-side-props-helper/post-server-side-props';
 
-const AdministrationPage: React.FC<{
+interface IProps extends IPropsWithMetadata {
   long: string;
   slug: string;
-}> = ({ long, slug }) => (
+}
+
+const AdministrationPage: React.FC<IProps> = ({ long, slug, metadata }) => (
   <Page
     small={true}
     title={long}
     canonical={`https://annuaire-entreprises.data.gouv.fr/sources-de-donnees/${slug}`}
+    isBrowserOutdated={metadata.isBrowserOutdated}
   >
     <div className="content-container">
       <br />
@@ -38,17 +41,17 @@ const AdministrationPage: React.FC<{
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const slug = context.params.slug as EAdministration;
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  async (context) => {
+    //@ts-ignore
+    const slug = context.params.slug as EAdministration;
 
-  try {
     const administration = Object.values(administrationsMetaData).find(
       //@ts-ignore
       (admin) => admin.slug === slug
     );
     if (administration === undefined) {
-      throw new HttpNotFound(`${slug}`);
+      throw new HttpNotFound(`Administration ${slug} page does not exist`);
     }
 
     return {
@@ -56,18 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         ...administration,
       },
     };
-  } catch (e: any) {
-    if (e instanceof HttpNotFound) {
-      return redirectPageNotFound(
-        `Administration ${slug} page does not exist`,
-        {
-          page: context.req.url,
-        }
-      );
-    } else {
-      return redirectServerError(e.toString());
-    }
   }
-};
+);
 
 export default AdministrationPage;

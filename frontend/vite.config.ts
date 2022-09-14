@@ -1,8 +1,5 @@
 import { defineConfig } from 'vite';
-
-const legacy = require('@vitejs/plugin-legacy');
-
-const autoprefixer = require('autoprefixer');
+import autoprefixer from 'autoprefixer';
 
 const purgeConfig = {
   content: ['./**/*.tsx', './**/*.html'],
@@ -36,11 +33,6 @@ export default defineConfig({
   server: {
     port: 3001,
   },
-  plugins: [
-    legacy({
-      targets: ['defaults', 'ie >= 11'],
-    }),
-  ],
   css: {
     postcss: {
       plugins,

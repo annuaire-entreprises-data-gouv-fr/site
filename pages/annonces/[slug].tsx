@@ -3,25 +3,30 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import Title, { FICHE } from '../../components/title-section';
 
-import { redirectIfIssueWithSiren } from '../../utils/redirects/routers';
 import { IAnnoncesBodacc, IAnnoncesJO } from '../../models/annonces';
 import { IUniteLegale } from '../../models';
 import { IAPINotRespondingError } from '../../models/api-not-responding';
 import getAnnoncesFromSlug from '../../models/annonces';
 import AnnoncesBodaccSection from '../../components/annonces-section/bodacc';
 import AnnoncesJOSection from '../../components/annonces-section/jo';
+import {
+  IPropsWithMetadata,
+  postServerSideProps,
+} from '../../utils/server-side-props-helper/post-server-side-props';
+import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 
-interface IProps {
+interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
   bodacc: IAnnoncesBodacc | IAPINotRespondingError;
   jo: IAnnoncesJO | IAPINotRespondingError | null;
 }
 
-const Annonces: React.FC<IProps> = ({ uniteLegale, bodacc, jo }) => (
+const Annonces: React.FC<IProps> = ({ uniteLegale, bodacc, jo, metadata }) => (
   <Page
     small={true}
     title={`Annonces légales (BODACC) - ${uniteLegale.nomComplet}`}
     noIndex={true}
+    isBrowserOutdated={metadata.isBrowserOutdated}
   >
     <div className="content-container">
       <Title ficheType={FICHE.ANNONCES} uniteLegale={uniteLegale} />
@@ -31,12 +36,10 @@ const Annonces: React.FC<IProps> = ({ uniteLegale, bodacc, jo }) => (
   </Page>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const siren = context.params.slug as string;
-
-  try {
-    const { uniteLegale, bodacc, jo } = await getAnnoncesFromSlug(siren);
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  async (context) => {
+    const { slug } = extractParamsFromContext(context);
+    const { uniteLegale, bodacc, jo } = await getAnnoncesFromSlug(slug);
 
     return {
       props: {
@@ -45,9 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         jo,
       },
     };
-  } catch (e: any) {
-    return redirectIfIssueWithSiren(e, siren, context.req);
   }
-};
+);
 
 export default Annonces;

@@ -6,8 +6,13 @@ import { Loader } from '../../components-ui/loader';
 import { Tag } from '../../components-ui/tag';
 import { INPI } from '../../components/administrations';
 import FrontStateMachine from '../../components/front-state-machine';
+import {
+  IPropsWithMetadata,
+  postServerSideProps,
+} from '../../utils/server-side-props-helper/post-server-side-props';
 import Page from '../../layouts';
 import { formatIntFr } from '../../utils/helpers/formatting';
+import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 
 const Retry: React.FC<{ siren: string }> = ({ siren }) => (
   <>
@@ -40,12 +45,17 @@ const Retry: React.FC<{ siren: string }> = ({ siren }) => (
   </>
 );
 
-const InpiPDF: React.FC<{ siren: string }> = ({ siren }) => {
+interface IProps extends IPropsWithMetadata {
+  siren: string;
+}
+
+const InpiPDF: React.FC<IProps> = ({ siren, metadata }) => {
   return (
     <Page
       small={true}
       noIndex={true}
       title="Réutiliser ou partager l’Annuaire des Entreprises"
+      isBrowserOutdated={metadata.isBrowserOutdated}
     >
       <br />
       <a href={`/justificatif/${siren}`}>
@@ -137,13 +147,14 @@ const InpiPDF: React.FC<{ siren: string }> = ({ siren }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  //@ts-ignore
-  const siren = context.params.slug as string;
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  async (context) => {
+    const { slug } = extractParamsFromContext(context);
 
-  return {
-    props: { siren },
-  };
-};
+    return {
+      props: { siren: slug },
+    };
+  }
+);
 
 export default InpiPDF;

@@ -6,6 +6,7 @@ import { Question } from '../components-ui/question';
 import { NPSBanner } from '../components/banner/nps';
 import { WeNeedYouModal } from '../components/modal/we-need-you';
 import { IParams } from '../models/search-filter-params';
+import { BrowserIsOutdatedBanner } from '../components/banner/browser-is-outdated';
 
 interface IProps {
   small?: boolean;
@@ -16,6 +17,7 @@ interface IProps {
   description?: string;
   canonical?: string;
   noIndex?: boolean;
+  isBrowserOutdated?: boolean;
 }
 
 const Page: React.FC<PropsWithChildren<IProps>> = ({
@@ -28,6 +30,7 @@ const Page: React.FC<PropsWithChildren<IProps>> = ({
   description,
   canonical,
   noIndex = false,
+  isBrowserOutdated = false,
 }) => (
   <div id="page-layout">
     <Meta
@@ -36,6 +39,7 @@ const Page: React.FC<PropsWithChildren<IProps>> = ({
       noIndex={noIndex}
       canonical={canonical}
     />
+    {isBrowserOutdated && <BrowserIsOutdatedBanner />}
     <NPSBanner />
     <WeNeedYouModal />
     {small ? (

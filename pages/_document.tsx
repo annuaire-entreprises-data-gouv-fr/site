@@ -1,5 +1,5 @@
 import React from 'react';
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main } from 'next/document';
 
 const manifest = (
   process.env.NODE_ENV === 'production'
@@ -89,21 +89,6 @@ class StaticDocument extends Document {
             cross-origin="use-credentials"
           />
 
-          <script
-            type="text/javascript"
-            //@ts-ignore
-            nomodule="nomodule"
-            src={
-              //@ts-ignore
-              `/${manifest['../vite/legacy-polyfills-legacy'].file}`
-            }
-          ></script>
-          <script
-            defer
-            //@ts-ignore
-            nomodule="nomodule"
-            src={`/${manifest['js/index-legacy.js'].file}`}
-          ></script>
           <link
             rel="stylesheet"
             type="text/css"
