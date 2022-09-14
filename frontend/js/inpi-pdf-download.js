@@ -20,15 +20,7 @@ function downloadInpiPDF() {
 
   if (stateMachine.exists) {
     const siren = extractSirenSlugFromUrl(window.location.pathname || '');
-    stateMachine.setStarted();
-
-    console.log(siren);
-
-    window.setTimeout(function () {
-      if (stateMachine.isStarted()) {
-        stateMachine.setPending();
-      }
-    }, 10000);
+    stateMachine.setPending();
 
     if (window.fetch) {
       download(siren, stateMachine.setSuccess)

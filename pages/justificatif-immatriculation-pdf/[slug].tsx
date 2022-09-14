@@ -71,19 +71,26 @@ const InpiPDF: React.FC<IProps> = ({ siren, metadata }) => {
           id="immatriculation-pdf-status-wrapper"
           states={[
             <>
-              <b>Statut du téléchargement :</b>
-              <Tag>
-                <Loader /> téléchargement en cours
-              </Tag>
+              <b>Statut du téléchargement :</b>{' '}
+              <i>
+                le téléchargement va commencer... (si il ne démarre pas,{' '}
+                <a
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  href={`${routes.rncs.portail.pdf}?format=pdf&ids=[%22${siren}%22]`}
+                >
+                  cliquez ici
+                </a>
+                )
+              </i>
             </>,
             <>
               <b>Statut du téléchargement :</b>
               <Tag>
                 <Loader /> téléchargement en cours
               </Tag>
-              <span style={{ color: '#b97800', fontWeight: 'bold' }}>
-                (ne fermez pas cette page, le téléchargement peut prendre plus
-                d’une minute)
+              <span style={{ color: '#777', fontWeight: 'bold' }}>
+                (temps estimé entre 10 secondes et 1 minute)
               </span>
             </>,
             <>
