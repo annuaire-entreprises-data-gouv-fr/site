@@ -20,7 +20,7 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
           rel="noreferrer noopener"
           href="https://www.ssi.gouv.fr/entreprise/precautions-elementaires/bonnes-pratiques-de-navigation-sur-linternet/"
         >
-          recommandé par l’ANSSI pour naviger sur internet en sécurité
+          recommandé par l’ANSSI pour naviguer sur internet en sécurité
         </a>
         .
       </div>

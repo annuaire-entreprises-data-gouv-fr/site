@@ -8,6 +8,7 @@ import {
   IAdministrationMetaData,
 } from '../../models/administrations';
 import AdministrationDescription from '../../components/administrations/administration-description';
+import loadFaqArticles, { getFaqArticlesByTag } from '../../models/faq';
 
 const StatusPage: React.FC<{
   allAdministrations: IAdministrationMetaData[];

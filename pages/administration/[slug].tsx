@@ -14,13 +14,20 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '../../utils/server-side-props-helper/post-server-side-props';
+import { getFaqArticlesByTag, IArticle } from '../../models/faq';
 
 interface IProps extends IPropsWithMetadata {
   long: string;
   slug: string;
+  articles: IArticle[];
 }
 
-const AdministrationPage: React.FC<IProps> = ({ long, slug, metadata }) => (
+const AdministrationPage: React.FC<IProps> = ({
+  long,
+  slug,
+  metadata,
+  articles,
+}) => (
   <Page
     small={true}
     title={long}
@@ -33,6 +40,17 @@ const AdministrationPage: React.FC<IProps> = ({ long, slug, metadata }) => (
       <HiddenH1 title={`Administration partenaire : ${long}`} />
       <AdministrationDescription slug={slug} />
     </div>
+    {articles && (
+      <>
+        <h2>Questions fréquentes</h2>
+        {articles.map((article) => (
+          <a href={article.slug}>{article.title}</a>
+        ))}
+        <br />
+        <br />
+        <br />
+      </>
+    )}
     <style jsx>{`
       .content-container {
         margin: 20px auto 40px;
@@ -57,6 +75,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     return {
       props: {
         ...administration,
+        articles: getFaqArticlesByTag([slug, 'all']),
       },
     };
   }
