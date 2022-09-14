@@ -97,7 +97,6 @@ export function handleErrorFromServerSideProps(
     try {
       return await getServerSidePropsFunction(context);
     } catch (exception: any) {
-      console.log(exception);
       return handleExceptions(exception, context.req);
     }
   };
