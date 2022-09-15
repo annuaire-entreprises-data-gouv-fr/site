@@ -16,7 +16,6 @@ import {
   postServerSideProps,
 } from '../../utils/server-side-props-helper/post-server-side-props';
 import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
-import TextWrapper from '../../components-ui/text-wrapper';
 
 interface IProps extends IAdministrationMetaData, IPropsWithMetadata {
   monitorings: (IMonitoring & IAPIMonitorMetaData)[];
@@ -36,7 +35,7 @@ const SourcesDeDonneesPage: React.FC<IProps> = ({
     canonical={`https://annuaire-entreprises.data.gouv.fr/sources-de-donnees/${slug}`}
     isBrowserOutdated={metadata.isBrowserOutdated}
   >
-    <TextWrapper>
+    <div className="content-container">
       <br />
       <a href="/sources-de-donnees">← Toutes les sources de données</a>
       <h1>Statut des API : {long}</h1>
@@ -55,7 +54,7 @@ const SourcesDeDonneesPage: React.FC<IProps> = ({
           ))}
         </>
       )}
-    </TextWrapper>
+    </div>
   </Page>
 );
 

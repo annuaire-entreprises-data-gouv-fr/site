@@ -51,7 +51,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         )}
         <div>{children}</div>
         <div className="data-source-tooltip-wrapper">
-          {dataSources && (
+          {dataSources.length > 0 && (
             <DataSourcesTooltip
               dataSources={dataSources.map((src) => src.data)}
               lastUpdatedAt={formatDate(last)}
