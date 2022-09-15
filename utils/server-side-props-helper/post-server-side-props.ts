@@ -37,8 +37,8 @@ const isBrowserOutdated = (uaString: string) => {
 /**
  * Post process a GetServerSideProps
  *
- * Usefull to enrich props with common metadata such as browser version
- * Usefull to handle error and redirects
+ * - enrich props with common metadata such as browser version
+ * - handle error and redirects
  *
  * @param getServerSidePropsFunction
  * @returns

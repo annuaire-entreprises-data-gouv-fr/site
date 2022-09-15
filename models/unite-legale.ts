@@ -177,7 +177,7 @@ const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
       await Promise.all([
         getUniteLegaleInsee(siren),
         getAllEtablissementsInsee(siren, page).catch(() => null),
-        getSiegeInsee(siren).catch(() => null),
+        getSiegeInsee(siren),
       ]);
 
     return mergeUniteLegaleInsee(
