@@ -8,14 +8,13 @@ import {
   IAdministrationMetaData,
 } from '../../models/administrations';
 import AdministrationDescription from '../../components/administrations/administration-description';
-import loadFaqArticles, { getFaqArticlesByTag } from '../../models/faq';
 
 const StatusPage: React.FC<{
   allAdministrations: IAdministrationMetaData[];
 }> = ({ allAdministrations }) => (
   <Page
     small={true}
-    title="Statut des API partenaires de l'Annuaire des Entreprises"
+    title="Administrations partenaires de l'Annuaire des Entreprises"
     canonical={`https://annuaire-entreprises.data.gouv.fr/sources-de-donnees}`}
   >
     <div className="content-container">

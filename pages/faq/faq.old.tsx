@@ -1,14 +1,14 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import constants from '../models/constants';
-import ButtonLink from '../components-ui/button';
-import { DILA, INPI, INSEE, METI, CMA } from '../components/administrations';
+import constants from '../../models/constants';
+import ButtonLink from '../../components-ui/button';
+import { DILA, INPI, INSEE, METI, CMA } from '../../components/administrations';
 
-import Page from '../layouts';
-import NonDiffusible from '../components/non-diffusible';
-import QuestionBlock from '../components/faq/question-block';
-import StructuredDataFAQ from '../components/structured-data/faq';
+import Page from '../../layouts';
+import NonDiffusible from '../../components/non-diffusible';
+import QuestionBlock from '../../components/faq/question-block';
+import StructuredDataFAQ from '../../components/structured-data/faq';
 
 const questions = [
   {

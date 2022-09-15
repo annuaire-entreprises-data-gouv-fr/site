@@ -1,10 +1,10 @@
 export interface IArticle {
   slug: string;
   administrations: string[];
-  public: string[];
+  target: string[];
   title: string;
   body: string;
-  cta: { label: string; to: string }[];
+  cta: { label: string; to: string };
 }
 
 const loadAllArticles = () => {
@@ -18,15 +18,20 @@ const loadAllArticles = () => {
   const keys = faqArticlesFolderContext.keys();
   const values = keys.map(faqArticlesFolderContext);
 
-  keys.forEach((slug: string, index: number) => {
+  keys.forEach((key: string, index: number) => {
+    const slug = key.replace('.yml', '').replace('./', '');
     articles.push({ ...values[index], slug });
   });
 
   return articles;
 };
 
-const getFaqArticles = () => {
+export const getAllFaqArticles = () => {
   return allArticles;
+};
+
+export const getFaqArticle = (slug: string) => {
+  return allArticles.find((article) => article.slug === slug);
 };
 
 export const getFaqArticlesByTag = (tagList: string[]) => {
@@ -43,5 +48,3 @@ export const getFaqArticlesByTag = (tagList: string[]) => {
 };
 
 const allArticles = loadAllArticles();
-
-export default getFaqArticles;

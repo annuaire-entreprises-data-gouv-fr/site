@@ -35,22 +35,19 @@ const AdministrationPage: React.FC<IProps> = ({
     isBrowserOutdated={metadata.isBrowserOutdated}
   >
     <div className="content-container">
+      <HiddenH1 title={long} />
       <br />
       <a href="/administration">← Toutes les administrations partenaires</a>
-      <HiddenH1 title={`Administration partenaire : ${long}`} />
       <AdministrationDescription slug={slug} />
+      {articles && (
+        <>
+          <h2>Questions fréquentes</h2>
+          {articles.map(({ slug, title }) => (
+            <a href={slug}>{title}</a>
+          ))}
+        </>
+      )}
     </div>
-    {articles && (
-      <>
-        <h2>Questions fréquentes</h2>
-        {articles.map((article) => (
-          <a href={article.slug}>{article.title}</a>
-        ))}
-        <br />
-        <br />
-        <br />
-      </>
-    )}
     <style jsx>{`
       .content-container {
         margin: 20px auto 40px;
