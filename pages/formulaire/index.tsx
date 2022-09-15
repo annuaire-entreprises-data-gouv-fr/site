@@ -249,12 +249,12 @@ const FeedBack: React.FC = () => {
                 <div>
                   <input
                     type="radio"
-                    id="radio-visitor-origin-5"
+                    id="radio-visitor-origin-6"
                     name="radio-set-visitor-origin"
-                    value="J’utilisais le site entreprise.data.gouv.fr"
+                    value="Je connaissais déjà le site"
                   />
-                  <label className="fr-label" htmlFor="radio-visitor-origin-5">
-                    J’utilisais le site entreprise.data.gouv.fr
+                  <label className="fr-label" htmlFor="radio-visitor-origin-6">
+                    Je connaissais déjà le site
                   </label>
                 </div>
                 <div>
