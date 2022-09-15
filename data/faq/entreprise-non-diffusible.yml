@@ -1,5 +1,5 @@
 administrations:
-  - all
+  - insee
 target:
   - agent
 title: Qu’est-ce qu’une entreprise non-diffusible ?

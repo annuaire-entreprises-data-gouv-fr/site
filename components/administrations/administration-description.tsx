@@ -37,10 +37,10 @@ const AdministrationDescription: React.FC<{
         }
 
         .logo-wrapper {
-          width: 130px;
+          width: 110px;
           flex-shrink: 0;
           display: flex;
-          justify-content: center;
+          justify-content: left;
           align-items: center;
         }
 

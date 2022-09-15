@@ -13,6 +13,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '../../utils/server-side-props-helper/post-server-side-props';
+import TextWrapper from '../../components-ui/text-wrapper';
 
 export interface IMonitoringWithName extends IMonitoring {
   short: string;
@@ -36,7 +37,7 @@ const StatusPage: React.FC<IProps> = ({ monitors, metadata }) => (
     canonical={`https://annuaire-entreprises.data.gouv.fr/sources-de-donnees}`}
     isBrowserOutdated={metadata.isBrowserOutdated}
   >
-    <div className="content-container">
+    <TextWrapper>
       <h1>Sources de données & statut des API</h1>
       <p>
         L’Annuaire des Entreprises utilise les données de différentes
@@ -68,15 +69,7 @@ const StatusPage: React.FC<IProps> = ({ monitors, metadata }) => (
           </div>
         </React.Fragment>
       ))}
-    </div>
-    <style jsx>{`
-      .content-container {
-        margin: 20px auto 50px;
-      }
-      i {
-        font-size: 0.9rem;
-      }
-    `}</style>
+    </TextWrapper>
   </Page>
 );
 

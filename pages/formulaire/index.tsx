@@ -28,7 +28,7 @@ const FeedBack: React.FC = () => {
           <a href={constants.links.mailto}>{constants.links.mail}</a> et nous
           vous répondrons.
         </div>
-        <div className="content-container text-wrapper">
+        <div className="content-container form-container">
           <form action="/api/feedback/nps" method="post">
             <input name="uuid" value={uuid} style={{ display: 'none' }} />
             <fieldset>
@@ -310,7 +310,7 @@ const FeedBack: React.FC = () => {
 
         <style jsx>
           {`
-            .text-wrapper {
+            .form-container {
               margin-top: 0;
             }
             fieldset {

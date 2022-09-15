@@ -1,4 +1,5 @@
 import React from 'react';
+import TextWrapper from '../components-ui/text-wrapper';
 
 import Page from '../layouts';
 import constants from '../models/constants';
@@ -6,7 +7,7 @@ import constants from '../models/constants';
 const Accessibility: React.FC = () => {
   return (
     <Page small={true} title="Déclaration d’accessibilité" noIndex={true}>
-      <div className="content-container text-wrapper">
+      <TextWrapper>
         <h1>Déclaration d’accessibilité</h1>
         <p>
           La DINUM s’engage à rendre son service accessible, conformément à
@@ -64,7 +65,7 @@ const Accessibility: React.FC = () => {
             </li>
           </ul>
         </p>
-      </div>
+      </TextWrapper>
     </Page>
   );
 };

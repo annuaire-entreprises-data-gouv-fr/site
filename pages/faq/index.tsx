@@ -3,9 +3,13 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import Page from '../../layouts';
 
-import AdministrationDescription from '../../components/administrations/administration-description';
 import { getAllFaqArticles, IArticle } from '../../models/faq';
-import { Tag } from '../../components-ui/tag';
+import TextWrapper from '../../components-ui/text-wrapper';
+import StructuredDataFAQ from '../../components/structured-data/faq';
+import { renderToStaticMarkup } from 'react-dom/server';
+import ReactMarkdown from 'react-markdown';
+import ButtonLink from '../../components-ui/button';
+import constants from '../../models/constants';
 
 const StatusPage: React.FC<{
   articles: IArticle[];
@@ -15,15 +19,33 @@ const StatusPage: React.FC<{
     title="FAQ de l'Annuaire des Entreprises"
     canonical={`https://annuaire-entreprises.data.gouv.fr/sources-de-donnees}`}
   >
-    <div className="content-container">
-      <h1>FAQ</h1>
+    <StructuredDataFAQ
+      data={articles.map(({ title, body }) => [
+        title,
+        renderToStaticMarkup(<ReactMarkdown>{body}</ReactMarkdown>),
+      ])}
+    />
+    <TextWrapper>
+      <h1>Questions Fréquentes (FAQ)</h1>
       <p>Conseils et réponses de l’équipe Annuaire des Entreprises</p>
-      {articles.map(({ slug, title }) => (
-        <div>
-          <a href={`/faq/${slug}`}>{title}</a>
-        </div>
-      ))}
-    </div>
+      <ul>
+        {articles.map(({ slug, title }) => (
+          <li>
+            <a href={`/faq/${slug}`}>{title}</a>
+          </li>
+        ))}
+      </ul>
+      <h2>Vous ne trouvez pas votre réponse ?</h2>
+      <p>
+        Vous pouvez nous écrire directement et poser vos questions à l’adresse
+        suivante&nbsp;:
+      </p>
+      <div className="layout-left">
+        <ButtonLink to={constants.links.mailto} alt small>
+          Écrivez-nous à {constants.links.mail}
+        </ButtonLink>
+      </div>
+    </TextWrapper>
   </Page>
 );
 

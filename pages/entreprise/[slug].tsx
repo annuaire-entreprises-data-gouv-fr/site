@@ -69,11 +69,6 @@ const UniteLegalePage: React.FC<IProps> = ({
         <NonDiffusibleSection />
       )}
     </div>
-    <style jsx>{`
-      .content-container {
-        margin: 20px auto 40px;
-      }
-    `}</style>
   </Page>
 );
 

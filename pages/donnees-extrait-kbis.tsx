@@ -1,4 +1,5 @@
 import React from 'react';
+import TextWrapper from '../components-ui/text-wrapper';
 import { CMA, INPI, INSEE } from '../components/administrations';
 
 import Page from '../layouts';
@@ -6,7 +7,7 @@ import Page from '../layouts';
 const ExtraitKbis: React.FC = () => {
   return (
     <Page small={true} title="Comment ça marche ?">
-      <div className="content-container text-wrapper">
+      <TextWrapper>
         <h1>
           Retrouver les données contenues dans un extrait KBIS ou un extrait D1
         </h1>
@@ -161,7 +162,7 @@ const ExtraitKbis: React.FC = () => {
             </a>
           </p>
         </div>
-      </div>
+      </TextWrapper>
     </Page>
   );
 };

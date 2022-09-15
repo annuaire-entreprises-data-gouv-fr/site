@@ -35,6 +35,10 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   const isOld = lastModified && isTwoMonthOld(lastModified);
   const last = lastModified || new Date();
 
+  const link = `/administration/${dataSources
+    .map((d) => d.data.slug)
+    .join('_')}`;
+
   return (
     <>
       <div className="section-container" id={id}>
@@ -51,6 +55,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
             <DataSourcesTooltip
               dataSources={dataSources.map((src) => src.data)}
               lastUpdatedAt={formatDate(last)}
+              link={link}
             />
           )}
         </div>
@@ -59,11 +64,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
             ({ data, logo }) =>
               data &&
               logo && (
-                <a
-                  key={data.long}
-                  href={`/administration/${data.slug}`}
-                  title={data.long}
-                >
+                <a key={data.long} href={link} title={data.long}>
                   {logo}
                 </a>
               )

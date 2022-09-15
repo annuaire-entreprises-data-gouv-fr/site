@@ -62,11 +62,6 @@ const DirigeantsPage: React.FC<IProps> = ({
           />
         </>
       </div>
-      <style jsx>{`
-        .content-container {
-          margin: 20px auto 40px;
-        }
-      `}</style>
     </Page>
   );
 };

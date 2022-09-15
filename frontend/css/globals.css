@@ -70,45 +70,34 @@ table.full-table {
 .content-container {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
+  margin-top: 20px;
 }
 main {
   min-height: 400px;
 }
 
-.text-wrapper {
-  margin: 80px auto;
-
-  @media only screen and (min-width: 864px) {
-    width: 874px;
-  }
-
-  @media only screen and (min-width: 1px) and (max-width: 864px) {
-    width: 100%;
-  }
-}
-
 h1 {
-  font-size: 2rem;
-  line-height: 3rem;
+  font-size: 1.8rem;
+  line-height: 2.6rem;
   margin: 50px 0 10px;
 }
 
 h2 {
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 1.3rem;
+  line-height: 1.8rem;
   margin: 40px 0 10px;
 }
 
 h3 {
-  font-size: 1.2rem;
-  line-height: 1.9rem;
+  font-size: 1.1rem;
+  line-height: 1.6rem;
   margin: 32px 0 10px;
 }
 
 h4 {
-  font-size: 1.2rem;
-  line-height: 1.8rem;
+  font-size: 1.1rem;
+  line-height: 1.4rem;
   margin: 22px 0 10px;
 }
 
@@ -118,14 +107,14 @@ p {
 
 @media only screen and (min-width: 1px) and (max-width: 600px) {
   h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     line-height: 2.2rem;
     margin: 40px 0 15px;
   }
 
   h2 {
-    font-size: 1.4rem;
-    line-height: 1.7rem;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
     margin: 30px 0 16px;
   }
 
