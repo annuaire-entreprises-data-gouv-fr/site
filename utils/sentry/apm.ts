@@ -21,11 +21,11 @@ export const createAPM = (url: string, operator: string) =>
 export const withAPM = (
   callback: (req: NextApiRequest, res: NextApiResponse) => Promise<void>
 ) => {
-  return (req: NextApiRequest, res: NextApiResponse) => {
+  return async (req: NextApiRequest, res: NextApiResponse) => {
     const url = req?.url || '/unknown';
     const transaction = createAPM(url, 'withAPM');
     try {
-      return callback(req, res);
+      await callback(req, res);
     } finally {
       transaction.finish();
     }
