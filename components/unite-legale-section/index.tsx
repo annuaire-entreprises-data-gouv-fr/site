@@ -31,7 +31,7 @@ const UniteLegaleSection: React.FC<{
       uniteLegale.libelleActivitePrincipale,
     ],
     [
-      'Adresse postale',
+      <FAQLink to="modifier-adresse">Adresse postale</FAQLink>,
       uniteLegale.siege.adresse
         ? `${
             uniteLegale.siege.denomination

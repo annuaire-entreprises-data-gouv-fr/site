@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { copy, copied } from '../../components-ui/icon';
+import { logWarningInSentry } from '../../utils/sentry';
 
 interface ISectionProps {
   body: (any[] | undefined | null | string | boolean)[];
@@ -112,16 +113,23 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
  * Add a css class to customize copy to clipboard behaviour
  * @param label
  */
-const shouldTrim = (label: string) => {
-  if (
-    label.indexOf('TVA') > -1 ||
-    label.indexOf('SIREN') > -1 ||
-    label.indexOf('SIRET') > -1 ||
-    label.indexOf('RNA') > -1
-  ) {
-    return true;
+const shouldTrim = (label: any) => {
+  try {
+    const labelAsString = label?.props?.children || label || '';
+
+    if (
+      labelAsString.indexOf('TVA') > -1 ||
+      labelAsString.indexOf('SIREN') > -1 ||
+      labelAsString.indexOf('SIRET') > -1 ||
+      labelAsString.indexOf('RNA') > -1
+    ) {
+      return true;
+    }
+    return false;
+  } catch (e: any) {
+    logWarningInSentry('Error in shouldTrim', { details: e.toString() });
+    return false;
   }
-  return false;
 };
 
 /**

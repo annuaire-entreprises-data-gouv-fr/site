@@ -53,6 +53,16 @@ const AdministrationDescription: React.FC<{
           justify-content: center;
           align-items: center;
         }
+        @media only screen and (min-width: 1px) and (max-width: 600px) {
+          .administration-wrapper {
+            flex-direction: column;
+            margin-top: 30px;
+          }
+          .logo-wrapper {
+            width: 70px;
+            margin-bottom: 15px;
+          }
+        }
       `}</style>
     </div>
   );

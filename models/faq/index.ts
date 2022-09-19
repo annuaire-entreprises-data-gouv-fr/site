@@ -12,17 +12,19 @@ const loadAllArticles = () => {
   const articles = [] as IArticle[];
   //@ts-ignore
   const faqArticlesFolderContext = require.context(
-    '../../data/faq',
-    true,
+    '/data/faq',
+    false,
     /\.yml$/
   );
   const keys = faqArticlesFolderContext.keys();
   const values = keys.map(faqArticlesFolderContext);
 
-  keys.forEach((key: string, index: number) => {
-    const slug = key.replace('.yml', '').replace('./', '');
-    articles.push({ ...values[index], slug });
-  });
+  keys
+    .filter((k: string) => k.indexOf('./') === 0)
+    .forEach((key: string, index: number) => {
+      const slug = key.replace('.yml', '').replace('./', '');
+      articles.push({ ...values[index], slug });
+    });
 
   return articles;
 };

@@ -112,13 +112,6 @@ const EtablissementSection: React.FC<IProps> = ({
         sources={[EAdministration.INSEE]}
       >
         <TwoColumnTable body={data} />
-        <p className="faq-entrepreneur-individuels">
-          <br />
-          <i>
-            Pour en savoir plus sur l’affichage des adresses{' '}
-            <a href="/faq">consultez notre FAQ</a>
-          </i>
-        </p>
       </Section>
       <HorizontalSeparator />
       <BreakPageForPrint />
@@ -126,11 +119,6 @@ const EtablissementSection: React.FC<IProps> = ({
         .section-wrapper {
           display: flex;
           flex-direction: row;
-        }
-
-        .faq-entrepreneur-individuels {
-          margin: 10px;
-          font-size: 0.9rem;
         }
 
         @media only screen and (min-width: 1px) and (max-width: 600px) {

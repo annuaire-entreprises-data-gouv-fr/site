@@ -17,7 +17,7 @@ const TVACell: React.FC<{}> = ({}) => {
           */}
           &nbsp;
         </>,
-        <CopyPaste id="tva-cell-result">
+        <CopyPaste id="tva-cell-result" shouldTrim={true}>
           <i>Non renseigné</i>
         </CopyPaste>,
         <i>
