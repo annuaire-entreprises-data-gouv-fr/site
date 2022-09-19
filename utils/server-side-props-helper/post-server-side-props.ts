@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import { UAParser } from 'ua-parser-js';
+import { createAPM } from '../sentry/apm';
 import { handleErrorFromServerSideProps } from './error-handler';
 
 export interface IPropsWithMetadata {
@@ -47,9 +48,14 @@ export function postServerSideProps(
   getServerSidePropsFunction: (context: GetServerSidePropsContext) => any
 ) {
   return async (context: GetServerSidePropsContext) => {
+    const url = context?.req?.url || '/unknown';
+    const transaction = createAPM(url, 'postServerSideProps');
+
     const { props, ...redirectAndOther } = await handleErrorFromServerSideProps(
       getServerSidePropsFunction
     )(context);
+
+    transaction.finish();
 
     return {
       ...redirectAndOther,

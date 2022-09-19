@@ -1,6 +1,3 @@
-// import * as Sentry from '@sentry/node';
-// const Tracing = require('@sentry/tracing');
-
 import * as Sentry from '@sentry/nextjs';
 import { SeverityLevel } from '@sentry/nextjs';
 
@@ -35,11 +32,7 @@ const init = () => {
 
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
-
-    // Set tracesSampleRate to 1.0 to capture 100%
-    // of transactions for performance monitoring.
-    // We recommend adjusting this value in production
-    tracesSampleRate: 1.0,
+    tracesSampleRate: 0.1,
   });
   _isInitialized = true;
 };
