@@ -3,10 +3,11 @@ import { NextPage } from 'next';
 
 import Page from '../layouts/page';
 import { CMA, DILA, INPI, INSEE } from '../components/administrations';
+import TextWrapper from '../components-ui/text-wrapper';
 
 const Privacy: NextPage = () => (
   <Page title="Politique de confidentialité" noIndex={true}>
-    <div className="content-container">
+    <TextWrapper>
       <h1>Politique de confidentialité</h1>
       <p>
         La DINUM est responsable des traitements de données à caractère
@@ -316,7 +317,7 @@ const Privacy: NextPage = () => (
         </a>
         .
       </p>
-    </div>
+    </TextWrapper>
     <style jsx>{`
       .matomo-optout {
         overflow: visible;

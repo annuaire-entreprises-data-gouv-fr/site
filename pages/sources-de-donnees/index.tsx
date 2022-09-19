@@ -69,14 +69,6 @@ const StatusPage: React.FC<IProps> = ({ monitors, metadata }) => (
         </React.Fragment>
       ))}
     </div>
-    <style jsx>{`
-      .content-container {
-        margin: 20px auto 50px;
-      }
-      i {
-        font-size: 0.9rem;
-      }
-    `}</style>
   </Page>
 );
 

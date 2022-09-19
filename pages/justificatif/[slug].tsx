@@ -35,11 +35,6 @@ const JustificatifPage: React.FC<IProps> = ({
         uniteLegale={uniteLegale}
       />
     </div>
-    <style jsx>{`
-      .content-container {
-        margin: 20px auto 40px;
-      }
-    `}</style>
   </Page>
 );
 

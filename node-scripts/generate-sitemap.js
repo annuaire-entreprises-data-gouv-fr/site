@@ -129,6 +129,13 @@ async function main() {
       readStream.on('end', () => resolve());
     });
 
+    const faqFiles = fs
+      .readdirSync('./data/faq')
+      .filter((file) => file.indexOf('.yml') > -1)
+      .map((file) => {
+        return `/faq/${file.replace('.yml', '')}`;
+      });
+
     [
       '/',
       '/donnees-extrait-kbis',
@@ -136,6 +143,7 @@ async function main() {
       '/administration',
       '/rechercher',
       '/faq',
+      ...faqFiles,
     ].map((path) => {
       writeLine(formatUrl(WEBSITE + path));
     });

@@ -1,6 +1,7 @@
 import React from 'react';
 import Page from '../../layouts';
 import { qrCode } from '../../components-ui/icon';
+import TextWrapper from '../../components-ui/text-wrapper';
 
 const Partager: React.FC = () => {
   return (
@@ -8,7 +9,7 @@ const Partager: React.FC = () => {
       small={true}
       title="Réutiliser ou partager l’Annuaire des Entreprises"
     >
-      <div className="content-container text-wrapper">
+      <TextWrapper>
         <h1>Réutilisations & partage</h1>
         <p>
           L’
@@ -208,7 +209,7 @@ const Partager: React.FC = () => {
             <a href="/administration">statut des API</a> pour en savoir plus.
           </p>
         </div>
-      </div>
+      </TextWrapper>
     </Page>
   );
 };

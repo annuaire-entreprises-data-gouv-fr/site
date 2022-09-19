@@ -13,22 +13,22 @@ const FrontStateMachine: React.FC<{ id?: string; states: JSX.Element[] }> = ({
 }) => {
   return (
     <div id={id} className="display-started">
-      <div className="status-started">{states[0]}</div>
-      <div className="status-pending">{states[1]}</div>
+      <div className="status-default">{states[0]}</div>
+      <div className="status-started">{states[1]}</div>
       <div className="status-success">{states[2]}</div>
       <div className="status-error">{states[3]}</div>
 
       <style global jsx>{`
+        #${id}.display-default > div:not(.status-default) {
+          display: none !important;
+        }
+        #${id}.display-default > div.status-default {
+          display: block;
+        }
         #${id}.display-started > div:not(.status-started) {
           display: none !important;
         }
         #${id}.display-started > div.status-started {
-          display: block;
-        }
-        #${id}.display-pending > div:not(.status-pending) {
-          display: none !important;
-        }
-        #${id}.display-pending > div.status-pending {
           display: block;
         }
 

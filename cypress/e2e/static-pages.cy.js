@@ -51,22 +51,3 @@ describe('Footer navigation', () => {
     });
   });
 });
-
-describe('FAQ navigation', () => {
-  it('check all section in FAQ', () => {
-    cy.visit('/faq');
-
-    let counter = 1;
-    const selector = '.questions > .container:nth-of-type(';
-    cy.get('.questions')
-      .children()
-      .each((question) => {
-        cy.get(`${selector}${counter}) > div`).not('be.visible');
-        cy.get(`${selector}${counter}) > label`).click();
-        cy.get(`${selector}${counter}) > div`).should('be.visible');
-        cy.get(`${selector}${counter}) > label`).click();
-        cy.get(`${selector}${counter}) > div`).not('be.visible');
-        counter++;
-      });
-  });
-});

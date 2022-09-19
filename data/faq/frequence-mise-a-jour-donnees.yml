@@ -1,0 +1,9 @@
+administrations:
+  - all
+target:
+  - agent
+title: Quelle est la fréquence de mise à jour des données ?
+body: |
+  Les données du **moteur de recherche** sont mises à jour tous les mois.
+
+  Les données affichées sur **chaque page d’une personne morale** sont mises à jour en temps-réel. Les données proviennent des [services informatiques](/administration) des administrations concernées.

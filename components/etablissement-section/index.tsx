@@ -11,6 +11,7 @@ import { EtablissementDescription } from '../etablissement-description';
 import BreakPageForPrint from '../../components-ui/print-break-page';
 import { PrintNever } from '../../components-ui/print-visibility';
 import TVACell from '../tva-cell';
+import FAQLink from '../../components-ui/faq-link';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -51,7 +52,7 @@ const EtablissementSection: React.FC<IProps> = ({
       etablissement.enseigne,
     ],
     [
-      'Adresse',
+      <FAQLink to="modifier-adresse">Adresse</FAQLink>,
       etablissement.adresse ? (
         <>
           <CopyPaste>{etablissement.adresse}</CopyPaste>

@@ -10,7 +10,7 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
 (function TVA() {
   const tvaContainer = FrontStateMachineFactory('tva-cell-wrapper');
   if (tvaContainer.exists) {
-    tvaContainer.setPending();
+    tvaContainer.setStarted();
 
     const siren = extractSirenSlugFromUrl(window.location.pathname || '');
 
@@ -19,9 +19,12 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
       .then((response) => {
         const resultCell = document.getElementById('tva-cell-result');
         const tva = response.tva;
-        const result = tva ? formatIntFr(tva) : '<i>Non renseigné</i>';
-        resultCell.innerHTML = result;
-        tvaContainer.setSuccess();
+        if (tva) {
+          resultCell.innerHTML = formatIntFr(tva);
+          tvaContainer.setSuccess();
+        } else {
+          tvaContainer.setDefault();
+        }
       })
       .catch((e) => {
         tvaContainer.setError();

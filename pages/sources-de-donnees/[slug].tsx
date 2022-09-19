@@ -5,7 +5,6 @@ import Page from '../../layouts';
 
 import {
   administrationsMetaData,
-  EAdministration,
   IAdministrationMetaData,
   IAPIMonitorMetaData,
 } from '../../models/administrations';
@@ -32,14 +31,14 @@ const SourcesDeDonneesPage: React.FC<IProps> = ({
 }) => (
   <Page
     small={true}
-    title={long}
+    title={`Statut des API : ${long}`}
     canonical={`https://annuaire-entreprises.data.gouv.fr/sources-de-donnees/${slug}`}
     isBrowserOutdated={metadata.isBrowserOutdated}
   >
     <div className="content-container">
       <br />
       <a href="/sources-de-donnees">← Toutes les sources de données</a>
-      <h1>{long}</h1>
+      <h1>Statut des API : {long}</h1>
       <p>{description}</p>
       {monitorings.length > 0 && (
         <>
@@ -56,11 +55,6 @@ const SourcesDeDonneesPage: React.FC<IProps> = ({
         </>
       )}
     </div>
-    <style jsx>{`
-      .content-container {
-        margin: 20px auto 40px;
-      }
-    `}</style>
   </Page>
 );
 

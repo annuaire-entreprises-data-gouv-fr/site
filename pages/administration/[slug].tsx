@@ -9,35 +9,56 @@ import {
 } from '../../models/administrations';
 import { HttpNotFound } from '../../clients/exceptions';
 import AdministrationDescription from '../../components/administrations/administration-description';
-import HiddenH1 from '../../components/a11y-components/hidden-h1';
 import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '../../utils/server-side-props-helper/post-server-side-props';
+import { getFaqArticlesByTag, IArticle } from '../../models/faq';
+import TextWrapper from '../../components-ui/text-wrapper';
 
 interface IProps extends IPropsWithMetadata {
-  long: string;
-  slug: string;
+  administrations: {
+    long: string;
+    slug: string;
+  }[];
+  title: string;
+  articles: IArticle[];
 }
 
-const AdministrationPage: React.FC<IProps> = ({ long, slug, metadata }) => (
+const AdministrationPage: React.FC<IProps> = ({
+  administrations,
+  title,
+  metadata,
+  articles,
+}) => (
   <Page
     small={true}
-    title={long}
-    canonical={`https://annuaire-entreprises.data.gouv.fr/sources-de-donnees/${slug}`}
+    title={title}
     isBrowserOutdated={metadata.isBrowserOutdated}
   >
-    <div className="content-container">
-      <br />
-      <a href="/administration">← Toutes les administrations partenaires</a>
-      <HiddenH1 title={`Administration partenaire : ${long}`} />
-      <AdministrationDescription slug={slug} />
-    </div>
-    <style jsx>{`
-      .content-container {
-        margin: 20px auto 40px;
-      }
-    `}</style>
+    <TextWrapper>
+      <h1>D’où viennent les informations de cette section ?</h1>
+      {administrations.map(({ slug }) => (
+        <AdministrationDescription slug={slug} />
+      ))}
+      {articles && (
+        <>
+          <h2>Vous avez une questions sur ces données ?</h2>
+          <ul>
+            {articles.map(({ slug, title }) => (
+              <li>
+                <a href={`/faq/${slug}`}>{title}</a>
+              </li>
+            ))}
+          </ul>
+          <br />
+          <div>
+            Vous ne trouvez pas la réponse à votre question ?{' '}
+            <a href="/faq">→ voir toutes les questions fréquentes</a>
+          </div>
+        </>
+      )}
+    </TextWrapper>
   </Page>
 );
 
@@ -45,18 +66,23 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     //@ts-ignore
     const slug = context.params.slug as EAdministration;
+    const slugs = slug.split('_');
 
-    const administration = Object.values(administrationsMetaData).find(
+    const administrations = Object.values(administrationsMetaData).filter(
       //@ts-ignore
-      (admin) => admin.slug === slug
+      (admin) => slugs.indexOf(admin.slug) > -1
     );
-    if (administration === undefined) {
-      throw new HttpNotFound(`Administration ${slug} page does not exist`);
+    if (administrations.length === 0) {
+      throw new HttpNotFound(
+        `Administration ${slugs.join(', ')} page does not exist`
+      );
     }
 
     return {
       props: {
-        ...administration,
+        administrations,
+        title: administrations.map((a) => a.long).join(' et '),
+        articles: getFaqArticlesByTag([...slugs, 'all']),
       },
     };
   }

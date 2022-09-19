@@ -1,0 +1,12 @@
+administrations:
+  - inpi
+target:
+  - agent
+title: Je suis un agent public et je cherche les données présentes dans un extrait KBIS/D1
+body: |
+  À partir de Novembre 2021, les entreprises immatriculées au RCS ou au RNM n’ont plus à fournir leur extrait KBIS dans leurs démarches administratives, le seul numéro siret suffit à l’administration pour retrouver les données nécessaire.
+
+  Ce site permet aux agents d’administrations de retrouver **toutes les informations contenues dans un KBIS**.
+cta:
+  label: ⇢ Pour en savoir plus, consultez notre guide
+  to: /donnees-extrait-kbis

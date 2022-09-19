@@ -1,0 +1,9 @@
+administrations:
+  - all
+target:
+  - agent
+title: Comment puis-je utiliser ces données dans mon site internet ?
+body: |
+  Toutes les données présentées sur le site sont publiées en open-data.
+
+  Pour en savoir plus sur les différentes sources de données, consultez [notre page dédiée](/sources-de-donnees).

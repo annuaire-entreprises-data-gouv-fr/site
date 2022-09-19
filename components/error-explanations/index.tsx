@@ -3,7 +3,7 @@ import constants from '../../models/constants';
 import ButtonLink from '../../components-ui/button';
 
 const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
-  <div className="content-container text-wrapper">
+  <div className="content-container">
     {children}
     <p>
       Si vous êtes arrivé sur cette page en cliquant sur un lien du site, merci

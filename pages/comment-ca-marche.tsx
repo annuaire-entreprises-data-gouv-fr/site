@@ -1,4 +1,5 @@
 import React from 'react';
+import TextWrapper from '../components-ui/text-wrapper';
 import { INSEE } from '../components/administrations';
 
 import Page from '../layouts';
@@ -6,7 +7,7 @@ import Page from '../layouts';
 const About: React.FC = () => {
   return (
     <Page small={true} title="Comment ça marche ?">
-      <div className="content-container text-wrapper">
+      <TextWrapper>
         <h1>À propos de L’Annuaire des Entreprises</h1>
         <h2>Qui a développé ce site ?</h2>
         <p>
@@ -229,7 +230,7 @@ const About: React.FC = () => {
             </a>
           </p>
         </div>
-      </div>
+      </TextWrapper>
     </Page>
   );
 };

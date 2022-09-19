@@ -1,0 +1,12 @@
+administrations:
+  - inpi
+target:
+  - agent
+title: La fiche d’immatriculation de mon entreprise est introuvable
+body: |
+  Les entreprises individuelles et les auto-entreprises, ne sont **pas obligées d’être immatriculées**. Il est donc possible que vous ne trouviez pas de fiche d’immatriculation pour une entreprise de ce type.
+
+  En revanche, les entreprises de toutes les autres formes juridiques **doivent être immatriculées**. Si vous ne trouvez pas de fiche d’immatriculation pour une entreprise, deux choix s’offrent à vous :
+
+  - Si l’entreprise est une entreprise artisanale, [contactez les Chambres des Métiers de l’Artisanat](https://rnm.artisanat.fr/)
+  - Si l’entreprise n’est pas une entreprise artisanale, [contactez l’INPI qui centralise les données des Greffes des tribunaux de commerce](http://data.inpi.fr/)

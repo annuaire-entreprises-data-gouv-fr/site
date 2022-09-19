@@ -2,10 +2,11 @@ import React from 'react';
 import { NextPage } from 'next';
 
 import Page from '../layouts/page';
+import TextWrapper from '../components-ui/text-wrapper';
 
 const Privacy: NextPage = () => (
   <Page title="Politique de confidentialité" noIndex={true}>
-    <div className="content-container">
+    <TextWrapper>
       <h1>Mentions légales</h1>
       <h2>Éditeur</h2>
       <p>
@@ -24,7 +25,7 @@ const Privacy: NextPage = () => (
         OVH 2 rue Kellermann - 59100 Roubaix - France Tel. 09 72 10 10 07 (prix
         d’un appel vers un poste fixe en France)
       </p>
-    </div>
+    </TextWrapper>
   </Page>
 );
 

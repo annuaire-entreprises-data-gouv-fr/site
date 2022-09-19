@@ -14,14 +14,14 @@ function FrontStateMachineFactory(stateMachineId) {
     setError: function () {
       _wrapper.className = 'display-error';
     },
-    setStarted: function () {
-      _wrapper.className = 'display-started';
+    setDefault: function () {
+      _wrapper.className = 'display-default';
     },
     setSuccess: function () {
       _wrapper.className = 'display-success';
     },
-    setPending: function () {
-      _wrapper.className = 'display-pending';
+    setStarted: function () {
+      _wrapper.className = 'display-started';
     },
     isStarted: function () {
       return _wrapper.className.indexOf('display-started') > -1;
