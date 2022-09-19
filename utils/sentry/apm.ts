@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const getTransactionNameFromUrl = (url: string) => {
   try {
-    if (url.indexOf('/entreprise') === 0) {
+    if (url.indexOf('/entreprise/') === 0) {
       return '/entreprise/:slug';
     }
     return url.replace('?redirected=1', '').replace(/\d{14}|\d{9}/g, ':slug');
