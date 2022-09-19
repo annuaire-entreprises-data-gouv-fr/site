@@ -8,7 +8,20 @@ if (import.meta.env.PROD && Sentry && dsn) {
     dsn: dsn,
     // This enables automatic instrumentation (highly recommended), but is not
     // necessary for purely manual usage
-    integrations: [new BrowserTracing()],
+    integrations: [
+      new BrowserTracing({
+        beforeNavigate: (context) => {
+          let url = location.pathname || '/unknown';
+          try {
+            url = location.pathname.replace(/\d{9}|\d{14}/g, ':slug');
+          } catch {}
+          return {
+            ...context,
+            name: url,
+          };
+        },
+      }),
+    ],
 
     tracesSampler: (samplingContext) => {
       const path = samplingContext?.location?.pathname || '';

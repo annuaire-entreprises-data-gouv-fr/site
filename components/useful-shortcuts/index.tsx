@@ -65,6 +65,10 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
           url: `/entreprise/${uniteLegale.siren}#etablissements`,
           label: `Liste des ${uniteLegale.etablissements.nombreEtablissements} établissements`,
         },
+        {
+          url: `/carte/${uniteLegale.siege.siret}`,
+          label: `Voir le siège sur la carte`,
+        },
       ],
     },
     {

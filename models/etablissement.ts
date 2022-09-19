@@ -115,15 +115,11 @@ const getEtablissementWithUniteLegaleFromSlug = async (
 const getEtablissementWithLatLongFromSlug = async (
   slug: string
 ): Promise<IEtablissement> => {
-  try {
-    const etablissement = await getEtablissementFromSlug(slug);
-    const { lat, long } = await getGeoLoc(etablissement);
-    etablissement.latitude = lat;
-    etablissement.longitude = long;
-    return etablissement;
-  } catch (e: any) {
-    throw new SiretNotFoundError(slug);
-  }
+  const etablissement = await getEtablissementFromSlug(slug);
+  const { lat, long } = await getGeoLoc(etablissement);
+  etablissement.latitude = lat;
+  etablissement.longitude = long;
+  return etablissement;
 };
 
 //=========================

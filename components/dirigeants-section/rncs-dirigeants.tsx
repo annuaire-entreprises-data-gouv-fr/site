@@ -17,7 +17,6 @@ import {
   IPersonneMorale,
 } from '../../models/immatriculation/rncs';
 import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
-import { InlineFunctions } from 'terser';
 
 /**
  * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts
