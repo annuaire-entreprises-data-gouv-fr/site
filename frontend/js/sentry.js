@@ -12,9 +12,16 @@ if (import.meta.env.PROD && Sentry && dsn) {
       new BrowserTracing({
         beforeNavigate: (context) => {
           let url = location.pathname || '/unknown';
-          try {
-            url = location.pathname.replace(/\d{9}|\d{14}/g, ':slug');
-          } catch {}
+          if (url.indexOf('/entreprise') > -1) {
+            url = '/entreprise/:slug';
+          }
+          if (url.indexOf('/rechercher') > -1) {
+            url = '/rechercher/:slug';
+          }
+          if (url.indexOf('/justificatif-immatriculation-pdf') > -1) {
+            url = '/justificatif-immatriculation-pdf/:slug';
+          }
+
           return {
             ...context,
             name: url,
