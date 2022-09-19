@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { tvaIntracommunautaire } from '../../../models/tva';
+import { withAPM } from '../../../utils/sentry/apm';
 
 const verify = async (
   { query: { slug } }: NextApiRequest,
@@ -15,4 +16,4 @@ const verify = async (
   }
 };
 
-export default verify;
+export default withAPM(verify);

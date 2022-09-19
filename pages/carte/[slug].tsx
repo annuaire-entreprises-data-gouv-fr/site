@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { IEtablissement } from '../../models';
+import { IEtablissement, SirenNotFoundError } from '../../models';
 import MapEtablissement from '../../components/map/map-etablissement';
 import { getEtablissementWithLatLongFromSlug } from '../../models/etablissement';
 import { MapTitleEtablissement } from '../../components/title-etablissement-section';
@@ -32,9 +32,7 @@ const EtablissementMapPage: React.FC<IProps> = ({
   >
     <div className="fr-container">
       <br />
-      <a href={`/entreprise/${extractSirenFromSiret(etablissement.siret)}`}>
-        ← Retour
-      </a>
+      <a href={`/entreprise/${etablissement.siren}`}>← Retour</a>
       <HiddenH1 title="Localisation de l’etablissement" />
       <>
         <MapTitleEtablissement
@@ -71,16 +69,13 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
 
-    try {
-      const etablissement = await getEtablissementWithLatLongFromSlug(slug);
-      return {
-        props: {
-          etablissement,
-        },
-      };
-    } catch (e: any) {
-      return { props: { etablissement: { estActif: null, siret: slug } } };
-    }
+    const etablissement = await getEtablissementWithLatLongFromSlug(slug);
+
+    return {
+      props: {
+        etablissement,
+      },
+    };
   }
 );
 

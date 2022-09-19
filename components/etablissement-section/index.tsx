@@ -53,14 +53,18 @@ const EtablissementSection: React.FC<IProps> = ({
     ],
     [
       <FAQLink to="modifier-adresse">Adresse</FAQLink>,
-      <>
-        <CopyPaste>{etablissement.adresse}</CopyPaste>
-        <PrintNever key="adresse-link">
-          <a href={`/carte/${etablissement.siret}`}>→ voir sur la carte</a>
-          <br />
-          <br />
-        </PrintNever>
-      </>,
+      etablissement.adresse ? (
+        <>
+          <CopyPaste>{etablissement.adresse}</CopyPaste>
+          <PrintNever key="adresse-link">
+            <a href={`/carte/${etablissement.siret}`}>→ voir sur la carte</a>
+            <br />
+            <br />
+          </PrintNever>
+        </>
+      ) : (
+        ''
+      ),
     ],
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],

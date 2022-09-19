@@ -24,7 +24,8 @@
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^4.1.3",
     "@sentry/browser": "^7.11.1",
-    "@sentry/nextjs": "^7.11.1",
+    "@sentry/nextjs": "^7.13.0",
+    "@sentry/tracing": "^7.13.0",
     "@types/axios-token-interceptor": "^0.2.3",
     "@types/cookies": "^0.7.7",
     "@types/node": "^18.7.14",
@@ -40,7 +41,6 @@
     "axios-cache-interceptor": "^0.10.7",
     "axios-oauth-client": "^1.5.0",
     "axios-token-interceptor": "^0.2.0",
-    "cookies": "^0.8.0",
     "crawler-user-agents": "^1.0.92",
     "cssnano": "^5.1.13",
     "dotenv": "^16.0.2",
@@ -58,7 +58,6 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.3",
     "redis": "^4.3.0",
-    "terser": "^5.15.0",
     "typescript": "^4.8.2",
     "ua-parser-js": "^1.0.2",
     "vite": "^3.0.9"
