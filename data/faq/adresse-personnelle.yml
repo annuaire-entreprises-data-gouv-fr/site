@@ -3,13 +3,16 @@ administrations:
   - inpi
 target:
   - agent
-title: Pourquoi mon adresse personnelle apparait-elle sur l’Annuaire des Entreprises ?
+title: Pourquoi mon adresse personnelle apparait-elle sur ce site ?
 body: |
   Les pages des entreprises individuelles et des auto-entreprises, sont susceptibles de **contenir** des informations à caractère personnel. 
 
   Dans le cadre de l’article [A123-96 du code de Commerce](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000031043097/), chaque personne physique inscrite au répertoire Sirene comme entrepreneur individuel peut choisir de rendre publiques ou non les données qui la concernent.
 
   La procédure s’appelle “changement de statut de diffusion” et elle est à effectuer auprès de l’Insee :
+more:
+  - label: Comment modifier l’adresse de mon entreprise ou association ?
+    href: /faq/modifier-adresse
 cta:
   label: ⇢ Changer le statut de diffusion de mon entreprise
   to: https://statut-diffusion-sirene.insee.fr/

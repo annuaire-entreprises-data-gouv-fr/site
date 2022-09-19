@@ -4,7 +4,11 @@ target:
   - agent
 title: Qu’est ce que le numéro de TVA intracommunautaire ?
 body: |
-  Toute entreprise assujettie à la TVA reçoit de la part de l’administration fiscale un **numéro de TVA**.
+  Le numéro de TVA intracommunautaire est un identifiant unique assigné par **l’administration fiscale** à toute entreprise assujettie à la TVA. L'entreprise utilise ensuite ce numéro dans ses factures, ses déclarations d'échange de biens et ses déclarations de TVA.
+
+  De nombreuses entreprises et associations ne sont pas assujetties à la TVA. Dans ce cas là vous trouverez sur notre site la mention *Non renseigné*.
+
+  Tous les numéros de TVA affichés sur le site sont vérifiés par [le service européen de validation des numéros de TVA (VIES)](https://ec.europa.eu/taxation_customs/vies/#/vat-validation).
 cta:
-  label: ⇢ Consulter la fiche explicative sur entreprendre.service-public.fr
+  label: ⇢ En savoir plus sur le numéro de TVA
   to: https://entreprendre.service-public.fr/vosdroits/F23570

@@ -22,7 +22,7 @@ const FAQArticle: React.FC<{ article: IArticle }> = ({ article }) => (
       ) : null}
       {article.more ? (
         <div>
-          <h2>Plus d’informations</h2>
+          <h2>Sur le même sujet</h2>
           {article.more.map(({ href, label }) => (
             <a href={href}>{label}</a>
           ))}
