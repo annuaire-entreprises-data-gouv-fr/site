@@ -1,0 +1,10 @@
+administrations:
+  - vies
+target:
+  - agent
+title: Qu’est ce que le numéro de TVA intracommunautaire ?
+body: |
+  Toute entreprise assujettie à la TVA reçoit de la part de l’administration fiscale un **numéro de TVA**.
+cta:
+  label: ⇢ Consulter la fiche explicative sur entreprendre.service-public.fr
+  to: https://entreprendre.service-public.fr/vosdroits/F23570
