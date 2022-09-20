@@ -122,8 +122,10 @@ async function main() {
       readStream.on('data', (chunk) => {
         const line = chunk.toString('utf-8');
         line.split('\n').map((line) => {
-          const url = formatUrl(getEntrepriseUrl(line));
-          writeLine(url);
+          if (!!line) {
+            const url = formatUrl(getEntrepriseUrl(line));
+            writeLine(url);
+          }
         });
       });
       readStream.on('end', () => resolve());
@@ -141,8 +143,8 @@ async function main() {
       '/donnees-extrait-kbis',
       '/comment-ca-marche',
       '/administration',
-      '/rechercher',
       '/faq',
+      '/partager',
       ...faqFiles,
     ].map((path) => {
       writeLine(formatUrl(WEBSITE + path));
