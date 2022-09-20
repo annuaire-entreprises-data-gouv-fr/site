@@ -14,7 +14,7 @@ import Page from '../../layouts';
 import { formatIntFr } from '../../utils/helpers/formatting';
 import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 
-const Retry: React.FC<{ siren: string }> = ({ siren }) => (
+const Retry: React.FC<{}> = () => (
   <>
     <div
       dangerouslySetInnerHTML={{
@@ -106,7 +106,7 @@ const InpiPDF: React.FC<IProps> = ({ siren, metadata }) => {
                 relancer le téléchargement, soit réessayer à un autre moment :
               </p>
               <div className="layout-center">
-                <Retry siren={siren} />
+                <Retry />
               </div>
             </>,
           ]}

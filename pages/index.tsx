@@ -3,39 +3,37 @@ import SearchBar from '../components/search-bar';
 import StructuredDataSearchAction from '../components/structured-data/search';
 import Page from '../layouts';
 
-const Index: React.FC = (pageProps) => {
-  return (
-    <Page title="L’Annuaire des Entreprises">
-      <StructuredDataSearchAction />
-      <div className="layout-center">
-        <div className="centered-search">
-          <h1>L’Annuaire des Entreprises</h1>
-          <h2>
-            Retrouvez toutes les informations publiques concernant les
-            entreprises françaises
-          </h2>
-          <div className="layout-center search">
-            <SearchBar autoFocus={true} />
-          </div>
+const Index: React.FC = () => (
+  <Page title="L’Annuaire des Entreprises">
+    <StructuredDataSearchAction />
+    <div className="layout-center">
+      <div className="centered-search">
+        <h1>L’Annuaire des Entreprises</h1>
+        <h2>
+          Retrouvez toutes les informations publiques concernant les entreprises
+          françaises
+        </h2>
+        <div className="layout-center search">
+          <SearchBar autoFocus={true} />
         </div>
       </div>
-      <style jsx>{`
-        h1,
-        h2 {
-          text-align: center;
-        }
+    </div>
+    <style jsx>{`
+      h1,
+      h2 {
+        text-align: center;
+      }
 
-        .search {
-          margin-top: 30px;
-        }
+      .search {
+        margin-top: 30px;
+      }
 
-        .centered-search {
-          margin-bottom: 32vh;
-          margin-top: 10vh;
-        }
-      `}</style>
-    </Page>
-  );
-};
+      .centered-search {
+        margin-bottom: 32vh;
+        margin-top: 10vh;
+      }
+    `}</style>
+  </Page>
+);
 
 export default Index;
