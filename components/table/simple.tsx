@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from 'react';
+import { JsxElement } from 'typescript';
 import { copy, copied } from '../../components-ui/icon';
 import { logWarningInSentry } from '../../utils/sentry';
 
@@ -115,6 +116,8 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
  */
 const shouldTrim = (label: any) => {
   try {
+    // in case label is a JSX element we use the children as label
+    // as this is likely to trigger an exception we use a try / catch
     const labelAsString = label?.props?.children || label || '';
 
     if (

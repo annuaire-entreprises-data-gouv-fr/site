@@ -20,6 +20,7 @@ const loadAllArticles = () => {
   const values = keys.map(faqArticlesFolderContext);
 
   keys
+    // weirdly context add duplicates - this filter removes them
     .filter((k: string) => k.indexOf('./') === 0)
     .forEach((key: string, index: number) => {
       const slug = key.replace('.yml', '').replace('./', '');

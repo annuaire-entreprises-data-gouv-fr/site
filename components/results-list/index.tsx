@@ -66,7 +66,7 @@ const ResultsList: React.FC<IProps> = ({
         color: #333;
         margin: 20px 0;
         display: block;
-        font-size: 0.9rem;
+        font-size: 1rem;
       }
       .results-list > a .title {
         color: #000091;
@@ -83,8 +83,7 @@ const ResultsList: React.FC<IProps> = ({
       }
 
       .results-list > a .adress > span {
-        font-size: 0.9rem;
-        color: rgb(112, 117, 122);
+        color: #707070;
         font-variant: all-small-caps;
       }
 
