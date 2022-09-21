@@ -34,11 +34,12 @@ const getEtablissementFromSlug = async (
 
   const isBot = options?.isBot || false;
 
-  const etablissement = isBot
-    ? await getEtablissementForGoodBot(siret)
-    : await getEtablissement(siret);
+  // const etablissement = isBot
+  //   ? await getEtablissementForGoodBot(siret)
+  //   : await getEtablissement(siret);
+  // return etablissement;
 
-  return etablissement;
+  return await getEtablissementForGoodBot(siret);
 };
 
 /**
@@ -105,7 +106,6 @@ const getEtablissementWithUniteLegaleFromSlug = async (
   const uniteLegale = await getUniteLegaleFromSlug(etablissement.siren, {
     isBot,
   });
-
   return { etablissement, uniteLegale };
 };
 
