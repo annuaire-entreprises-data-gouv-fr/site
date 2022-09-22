@@ -167,6 +167,24 @@ const print = (
   </svg>
 );
 
+const helpMessage = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    width="13"
+    height="13"
+    strokeWidth="2"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M21.8 18.8H11.2l-6 4.4v-4.4h-3a1.5 1.5 0 0 1-1.5-1.6v-15A1.5 1.5 0 0 1 2.4.8h19.4a1.5 1.5 0 0 1 1.6 1.6v15a1.5 1.5 0 0 1-1.6 1.4Z" />
+    <path d="M9 6.8a3 3 0 1 1 4 2.8 1.5 1.5 0 0 0-1 1.4v.3" />
+    <path d="M12 15a.4.4 0 0 1 0-.8M12 15a.4.4 0 0 0 0-.8" />
+  </svg>
+);
+
 export {
   download,
   pin,
@@ -178,6 +196,7 @@ export {
   twitter,
   qrCode,
   print,
+  helpMessage,
 };
 
 export const Open = () => (
