@@ -5,17 +5,20 @@ User-agent: *
 Allow: /
 Allow: /entreprise/
 Allow: /administration/
-Allow: /sources-de-donnees/
-Allow: /etablissement/
+Allow: /faq/
 
 # Groupe 1
 User-agent: *
 Disallow: /api/
 Disallow: /rechercher/carte
+Disallow: /rechercher/
 Disallow: /justificatif/
+Disallow: /justificatif-immatriculation-pdf/
 Disallow: /annonces/
 Disallow: /carte/
 Disallow: /dirigeants/
 Disallow: /divers/
 Disallow: /erreur/
 Disallow: /formulaire/
+Disallow: /sources-de-donnees/
+Disallow: /etablissement/

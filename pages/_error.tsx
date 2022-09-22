@@ -23,7 +23,10 @@ ServerError.getInitialProps = ({
   let errAsString = '';
   try {
     errAsString = err.toString();
-  } catch {}
+  } catch (e) {
+    console.log(e);
+    errAsString = 'failed to serialize error';
+  }
 
   logErrorInSentry(`Server Error (500) - unknown reason`, {
     details: errAsString,
