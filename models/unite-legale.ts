@@ -68,7 +68,8 @@ class UniteLegale {
     if (isBot) {
       uniteLegale = await getUniteLegaleForGoodBot(this._siren, page);
     } else {
-      uniteLegale = await getUniteLegale(this._siren, page);
+      // uniteLegale = await getUniteLegale(this._siren, page);
+      uniteLegale = await getUniteLegaleForGoodBot(this._siren, page);
 
       if (uniteLegale.association && uniteLegale.association.id) {
         uniteLegale.association = {
