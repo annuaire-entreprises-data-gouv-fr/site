@@ -1,4 +1,5 @@
 const { default: axios } = require('axios');
+const { randomUUID } = require('crypto');
 const fs = require('fs');
 
 /** This script generate the full sitemap
@@ -19,6 +20,8 @@ const SITEMAP_START = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
 const SITEMAP_END = '</urlset>';
+
+const dico = {};
 
 const formatUrl = (url) => `<url>
      <loc>${url}</loc>
@@ -87,7 +90,7 @@ async function main() {
     urlCount++;
     totalUrlCount++;
 
-    if (urlCount === 45000) {
+    if (urlCount === 50000) {
       urlCount = 0;
       sitemapCount++;
       writeStream.write(SITEMAP_END);
@@ -117,37 +120,26 @@ async function main() {
       fs.mkdirSync(sitemapDir);
     }
 
+    a = 0;
     await new Promise((resolve, reject) => {
       readStream.on('error', (err) => reject(err));
       readStream.on('data', (chunk) => {
         const line = chunk.toString('utf-8');
-        line.split('\n').map((line) => {
-          if (!!line) {
-            const url = formatUrl(getEntrepriseUrl(line));
-            writeLine(url);
+        console.log(line);
+        throw Error('stop');
+        a += 1;
+        if (!!line) {
+          dico[randomUUID()] = a;
+          // const url = formatUrl(getEntrepriseUrl(line));
+          // writeLine(url);
+
+          if (a / 10000 === 0) {
+            console.log(a);
+            logMem();
           }
-        });
+        }
       });
       readStream.on('end', () => resolve());
-    });
-
-    const faqFiles = fs
-      .readdirSync('./data/faq')
-      .filter((file) => file.indexOf('.yml') > -1)
-      .map((file) => {
-        return `/faq/${file.replace('.yml', '')}`;
-      });
-
-    [
-      '/',
-      '/donnees-extrait-kbis',
-      '/comment-ca-marche',
-      '/administration',
-      '/faq',
-      '/partager',
-      ...faqFiles,
-    ].map((path) => {
-      writeLine(formatUrl(WEBSITE + path));
     });
 
     if (urlCount !== 0) {
