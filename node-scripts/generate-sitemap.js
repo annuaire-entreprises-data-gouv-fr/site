@@ -78,7 +78,7 @@ async function main() {
       maxMemory = Math.max(mem(), maxMemory);
     }
     if (urlCount === 0) {
-      const newSitemapFilePath = `./public/sitemap/sitemap${sitemapCount}.xml`;
+      const newSitemapFilePath = `./public/sitemap/sitemap_${sitemapCount}.xml`;
       writeStream = fs.createWriteStream(newSitemapFilePath);
       writeStream.write(SITEMAP_START);
     }
@@ -160,7 +160,7 @@ async function main() {
 
   const indices = [];
   for (i = 1; i <= sitemapCount; i++) {
-    indices.push(getIndexUrl(`/sitemap${i}.xml`));
+    indices.push(getIndexUrl(`/sitemap_${i}.xml`));
   }
   saveSitemapIndex(indices);
 
