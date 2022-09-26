@@ -19,7 +19,7 @@
     "test:end2end": "cypress open",
     "test:unit": "jest --runInBand",
     "lint": "next lint",
-    "sitemap": "node ./node-scripts/generate-sitemap.js"
+    "sitemap": "node ./sitemap-scripts/generate-sitemap.js"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^4.1.3",
