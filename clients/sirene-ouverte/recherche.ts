@@ -58,7 +58,8 @@ export interface ISireneOuverteSearchResults {
 const getResults = async (
   searchTerms: string,
   page: number,
-  searchFilterParams?: SearchFilterParams
+  searchFilterParams?: SearchFilterParams,
+  useFallback = true
 ): Promise<ISearchResults> => {
   const encodedTerms = encodeURI(searchTerms);
 
@@ -76,10 +77,15 @@ const getResults = async (
       headers: { referer: 'annuaire-entreprises-site' },
     });
   } catch (e) {
+    if (!useFallback) {
+      // dont use fallback on staging
+      throw e;
+    }
     if (e instanceof HttpNotFound) {
       // ignore error
       throw e;
     }
+
     //fallback
     const stagingUrl = `${
       routes.sireneOuverte.rechercheUniteLegaleStaging
