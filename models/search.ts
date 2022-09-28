@@ -58,9 +58,11 @@ const search = async (
     if (e instanceof IsLikelyASirenOrSiretException) {
       throw e;
     }
+
     logErrorInSentry('Search API', {
       details: `term : ${searchTerm} - ${e.toString()}`,
     });
+
     return APINotRespondingFactory(EAdministration.DINUM);
   }
 };
