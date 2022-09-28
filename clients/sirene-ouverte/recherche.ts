@@ -66,14 +66,31 @@ const getResults = async (
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
     routes.sireneOuverte.rechercheUniteLegale;
 
-  let url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
-    searchFilterParams?.toURI() || ''
-  }`;
-
-  const response = await httpGet(url, {
-    timeout: constants.timeout.long,
-    headers: { referer: 'annuaire-entreprises-site' },
-  });
+  let response;
+  try {
+    const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
+      searchFilterParams?.toURI() || ''
+    }`;
+    response = await httpGet(url, {
+      timeout: constants.timeout.medium,
+      headers: { referer: 'annuaire-entreprises-site' },
+    });
+  } catch (e) {
+    if (e instanceof HttpNotFound) {
+      // ignore error
+      throw e;
+    }
+    //fallback
+    const stagingUrl = `${
+      routes.sireneOuverte.rechercheUniteLegaleStaging
+    }?per_page=10&page=${page}&q=${encodedTerms}${
+      searchFilterParams?.toURI() || ''
+    }`;
+    response = await httpGet(stagingUrl, {
+      timeout: constants.timeout.long,
+      headers: { referer: 'annuaire-entreprises-site' },
+    });
+  }
 
   const results = (response.data || []) as any;
 
