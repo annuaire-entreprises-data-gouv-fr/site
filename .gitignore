@@ -37,7 +37,7 @@ yarn-error.log*
 # vercel
 .vercel
 
-/sitemap-scripts/node_modules
+/seo-scripts/node_modules
 
 /public/maps/*
 /public/resources/downloads/*

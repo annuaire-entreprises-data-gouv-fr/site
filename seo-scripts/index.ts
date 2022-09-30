@@ -1,5 +1,5 @@
 import { PageTreeBuilder } from './page-tree-builder';
-import { downloadAndSaveData } from './download-data';
+import { deleteDataFile, downloadAndSaveData } from './download-data';
 import { mem } from './memory';
 import { readFileLineByLine } from './read-line';
 import { getStaticPages } from './static-pages';
@@ -46,7 +46,7 @@ async function main() {
 
     sitemap.endLastSitemap();
   } finally {
-    // await fs.promises.unlink(filePath);
+    await deleteDataFile(filePath);
   }
   console.log(`💾 Url total : ${urlCount}`);
 
