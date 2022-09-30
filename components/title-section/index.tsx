@@ -9,6 +9,8 @@ import SocialMedia from '../../components-ui/social-media';
 import { PrintNever } from '../../components-ui/print-visibility';
 import MultipleSirenAlert from '../../components-ui/alerts/multiple-siren';
 import AssociationAdressAlert from '../../components-ui/alerts/association-adress';
+import Warning from '../../components-ui/alerts/warning';
+import { INSEE } from '../administrations';
 
 export enum FICHE {
   INFORMATION = 'résumé',
@@ -124,6 +126,16 @@ const Title: React.FC<IProps> = ({
 }) => (
   <div className="header-section">
     <div className="title">
+      <Warning full>
+        Le site permettant de télécharger les avis de situation Insee est{' '}
+        <a href="/sources-de-donnees#APIAvisdesituationSirene">
+          actuellement en panne
+        </a>
+        .
+        <br />
+        Les équipes de l’
+        <INSEE /> travaillent au rétablissement du service.
+      </Warning>
       <MultipleSirenAlert uniteLegale={uniteLegale} />
       <AssociationAdressAlert uniteLegale={uniteLegale} />
       <h1>
