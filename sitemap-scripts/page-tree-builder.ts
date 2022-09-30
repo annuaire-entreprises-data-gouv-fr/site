@@ -1,40 +1,55 @@
-const fs = require('fs');
-const {
-  indexPage,
+import fs from 'fs';
+import { getDepartementFromCodePostal } from '../utils/labels';
+import {
+  getUrlFromDep,
   renderDepartementsPage,
   renderNafsPage,
   renderResultsPage,
-} = require('./page-tree-render');
+} from './page-tree-render/index';
 
 class PageTreeBuilder {
+  private dico: { [dep: string]: { [naf: string]: string[] } };
+  private pageTreeDir: string;
+  private pageCount: number;
+  private ignoredUrl: number;
+
   constructor() {
     this.dico = {};
-    this.pageTreeDir = './public/departements/';
+    this.pageTreeDir = '../public/departements/';
     this.pageCount = 0;
+    this.ignoredUrl = 0;
   }
 
-  add = (canonical, naf, codePostal) => {
-    const dep = codePostal
-      ? parseInt(codePostal.slice(0, 2)).toString()
-      : 'Inconnu';
+  add = (canonical: string, naf: string, codePostal: string) => {
+    const dep = getDepartementFromCodePostal(codePostal);
 
-    const isNafDefined = naf && naf.length === 6;
-    const cleanNaf = isNafDefined ? naf : 'Code d’activité inconnu';
+    if (!naf || !dep) {
+      this.ignoredUrl += 1;
+      return;
+    }
 
     if (!this.dico[dep]) {
       this.dico[dep] = {};
     }
-    if (!this.dico[dep][cleanNaf]) {
-      this.dico[dep][cleanNaf] = [];
+    if (!this.dico[dep][naf]) {
+      this.dico[dep][naf] = [];
     }
-    this.dico[dep][cleanNaf].push(canonical);
+    this.dico[dep][naf].push(canonical);
   };
 
   getDeps = () => Object.keys(this.dico);
 
-  getNafs = (dep) => Object.keys(this.dico[dep]);
+  getNafs = (dep: string) => Object.keys(this.dico[dep]);
 
-  get = (dep, naf) => this.dico[dep][naf];
+  get = (dep: string, naf: string) => this.dico[dep][naf];
+
+  checkIgnoredUrlCount = () => {
+    console.log(`🧽 Ignored url in pageTree : ${this.ignoredUrl}`);
+
+    if (this.ignoredUrl > 250000) {
+      throw new Error('Too many ignored url');
+    }
+  };
 
   build = () => {
     this.cleanPageTreeFolder();
@@ -46,7 +61,7 @@ class PageTreeBuilder {
     this.saveFile(this.pageTreeDir + 'index.html', departmentsPage);
 
     allDeps.forEach((dep) => {
-      const currentDepPath = `${this.pageTreeDir}${dep}/`;
+      const currentDepPath = `${this.pageTreeDir}${getUrlFromDep(dep)}/`;
       this.createFolder(currentDepPath);
 
       // saving list of all naf for current department
@@ -71,7 +86,8 @@ class PageTreeBuilder {
             naf,
             next100,
             pageNumber + 1,
-            pageCount
+            pageCount,
+            sirenList.length
           );
           this.saveFile(
             currentNafPath + (pageNumber + 1) + '.html',
@@ -80,10 +96,10 @@ class PageTreeBuilder {
         }
       });
     });
-    console.log(`💾 Page tree count : ${this.pageCount}`);
+    console.log(`💾 Page tree pages : ${this.pageCount}`);
   };
 
-  saveFile = (path, htmlAsString) => {
+  saveFile = (path: string, htmlAsString: string) => {
     this.pageCount++;
     fs.writeFileSync(path, htmlAsString);
   };
@@ -94,11 +110,18 @@ class PageTreeBuilder {
     }
   };
 
-  createFolder = (path) => {
+  createFolder = (path: string) => {
     if (!fs.existsSync(path)) {
       fs.mkdirSync(path);
     }
   };
+
+  getUrlsForSitemap = () => {
+    return [
+      '/departements/index.html',
+      this.getDeps().map((d) => `/departements/${getUrlFromDep(d)}/index.html`),
+    ];
+  };
 }
 
-module.exports = { PageTreeBuilder };
+export { PageTreeBuilder };

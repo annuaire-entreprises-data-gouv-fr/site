@@ -1,19 +1,18 @@
-const { PageTreeBuilder } = require('./page-tree-builder');
-const { downloadAndSaveData } = require('./download-data');
-const { mem } = require('./memory');
-const { readFileLineByLine } = require('./read-line');
-const { getStaticPages } = require('./static-pages');
-const { SitemapWriter } = require('./write-sitemap');
-const { WEBSITE } = require('./constants');
+import { PageTreeBuilder } from './page-tree-builder';
+import { downloadAndSaveData } from './download-data';
+import { mem } from './memory';
+import { readFileLineByLine } from './read-line';
+import { getStaticPages } from './static-pages';
+import { SitemapWriter } from './write-sitemap';
+import { WEBSITE } from './constants';
 
-const getEntrepriseUrl = (str) =>
+const getEntrepriseUrl = (str: string) =>
   `${WEBSITE}/entreprise/${encodeURIComponent(str)}`;
 
 async function main() {
   let maxMemory = 0;
 
   console.log('*** SEO script (sitemap and page tree) ***');
-
   console.time('⏱ Total time to execute script');
 
   const filePath = await downloadAndSaveData();
@@ -21,13 +20,14 @@ async function main() {
   let urlCount = 0;
   const sitemap = new SitemapWriter();
   const pageTree = new PageTreeBuilder();
+
   sitemap.createSitemapFolder();
 
   /**
-   * Generate sitemap and populate dictByDep
+   * Generate sitemap and populate pageTree database
    */
   try {
-    await readFileLineByLine(filePath, (line) => {
+    await readFileLineByLine(filePath, (line: string) => {
       const [codePostal, naf, canonical] = line.split(',');
       const url = getEntrepriseUrl(canonical);
       sitemap.writeLine(url);
@@ -40,20 +40,21 @@ async function main() {
       }
     });
 
-    getStaticPages().map((page) => {
+    [...getStaticPages(), ...pageTree.getUrlsForSitemap()].map((page) => {
       sitemap.writeLine(WEBSITE + page);
     });
 
-    // add department and naf page to the sitemap !!
-
-    sitemap.closeLastSitemap();
+    sitemap.endLastSitemap();
   } finally {
     // await fs.promises.unlink(filePath);
   }
-  console.log(`💾 Url count : ${urlCount}`);
+  console.log(`💾 Url total : ${urlCount}`);
 
+  // generate sitemap Index
   sitemap.createIndex();
 
+  // generate PageTree
+  pageTree.checkIgnoredUrlCount();
   pageTree.build();
 
   console.log(`📈 Max memory usage ${Math.round(maxMemory * 100) / 100} mo`);
@@ -61,3 +62,5 @@ async function main() {
 }
 
 main();
+
+export default {};

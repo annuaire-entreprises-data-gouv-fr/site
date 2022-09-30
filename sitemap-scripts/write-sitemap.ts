@@ -1,5 +1,5 @@
-const fs = require('fs');
-const { URL_PER_SITEMAP, WEBSITE } = require('./constants');
+import fs from 'fs';
+import { URL_PER_SITEMAP, WEBSITE } from './constants';
 
 /**
  * XML Helpers
@@ -10,22 +10,30 @@ const SITEMAP_START = `<?xml version="1.0" encoding="UTF-8"?>
 
 const SITEMAP_END = '</urlset>';
 
-const formatUrl = (url) => `<url>
+const formatUrl = (url: string) => `<url>
       <loc>${url}</loc>
       </url>`;
 
 class SitemapWriter {
+  private writeStream: fs.WriteStream | null;
+  private urlCount: number;
+  private sitemapCount: number;
+
   constructor() {
     this.writeStream = null;
     this.sitemapCount = 1;
     this.urlCount = 0;
   }
 
-  writeLine = (url) => {
+  writeLine = (url: string) => {
     if (this.urlCount === 0) {
-      const newSitemapFilePath = `./public/sitemap/sitemap_${this.sitemapCount}.xml`;
+      const newSitemapFilePath = `../public/sitemap/sitemap_${this.sitemapCount}.xml`;
       this.writeStream = fs.createWriteStream(newSitemapFilePath);
       this.writeStream.write(SITEMAP_START);
+    }
+
+    if (!this.writeStream) {
+      throw new Error('Should never happen');
     }
 
     this.writeStream.write(formatUrl(url));
@@ -56,12 +64,12 @@ class SitemapWriter {
       .join('')}
         </sitemapindex>`;
 
-    fs.writeFileSync('./public/sitemap/sitemap.xml', index);
+    fs.writeFileSync('../public/sitemap/sitemap.xml', index);
 
     console.log(`💾 Sitemap count : ${this.sitemapCount}`);
   };
 
-  closeLastSitemap() {
+  endLastSitemap() {
     if (this.urlCount !== 0) {
       // last sitemap needs to be ended
       this.writeLine(SITEMAP_END);
@@ -69,7 +77,7 @@ class SitemapWriter {
   }
 
   createSitemapFolder = () => {
-    const sitemapDir = './public/sitemap/';
+    const sitemapDir = '../public/sitemap/';
     if (!fs.existsSync(sitemapDir)) {
       console.log('📂 Creating new /sitemap folder');
       fs.mkdirSync(sitemapDir);
@@ -77,4 +85,4 @@ class SitemapWriter {
   };
 }
 
-module.exports = { SitemapWriter };
+export { SitemapWriter };

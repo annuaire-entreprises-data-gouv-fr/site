@@ -1,11 +1,10 @@
-const { default: axios } = require('axios');
-const fs = require('fs');
+import * as axios from 'axios';
+import fs from 'fs';
 
 const SOURCE_URL =
-  // 'https://object.files.data.gouv.fr/opendata/ae/sitemap-name-prod.csv';
-  'https://object.files.data.gouv.fr/opendata/ae/sitemap-name-test.csv';
+  'https://object.files.data.gouv.fr/opendata/ae/sitemap-name-prod.csv';
 
-module.exports.downloadAndSaveData = async () => {
+export const downloadAndSaveData = async () => {
   // console.time('⏱ Download and save base SIREN');
 
   // const names = await axios.get(SOURCE_URL, { timeout: 120000 });

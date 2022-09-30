@@ -1,8 +1,11 @@
-const fs = require('fs');
-const readline = require('readline');
-const events = require('events');
+import fs from 'fs';
+import readline from 'readline';
+import events from 'events';
 
-module.exports.readFileLineByLine = async (filePath, callback) => {
+export const readFileLineByLine = async (
+  filePath: string,
+  callback: (str: string) => void
+) => {
   let count = 0;
 
   const rl = readline.createInterface({

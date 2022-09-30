@@ -1,8 +1,8 @@
-const fs = require('fs');
+import fs from 'fs';
 
-module.exports.getStaticPages = () => {
+export const getStaticPages = () => {
   const faqFiles = fs
-    .readdirSync('./data/faq')
+    .readdirSync('../data/faq')
     .filter((file) => file.indexOf('.yml') > -1)
     .map((file) => {
       return `/faq/${file.replace('.yml', '')}`;
