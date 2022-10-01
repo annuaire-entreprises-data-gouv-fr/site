@@ -34,7 +34,7 @@ const ping = async (slug: string | string[]) => {
     case 'api-tva':
       return await validateTVANumber(verifySiren('880878145'), useCache);
     case 'api-recherche':
-      return await getResults('test', 1, undefined, false);
+      return await getResults('test', 1, undefined);
     default:
       throw new APISlugNotFound(404, `API ping ${slug} not found`);
   }

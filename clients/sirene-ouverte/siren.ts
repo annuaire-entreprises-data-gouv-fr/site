@@ -58,7 +58,7 @@ const getUniteLegaleSireneOuverte = async (
 ): Promise<IUniteLegale> => {
   const response = await httpGet(
     routes.sireneOuverte.uniteLegale + siren + '&page=' + page,
-    { timeout: constants.timeout.long }
+    { timeout: constants.timeout.L }
   );
 
   let uniteLegale;
