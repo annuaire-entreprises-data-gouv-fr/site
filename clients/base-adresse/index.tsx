@@ -21,7 +21,7 @@ const fetchBanGeoLoc = async (
   etablissement: IEtablissement
 ): Promise<IGeoLoc> => {
   const route = `${routes.ban}${etablissement.adresse.replaceAll(' ', '+')}`;
-  const response = await httpGet(route, { timeout: constants.timeout.default });
+  const response = await httpGet(route, { timeout: constants.timeout.L });
 
   return mapToDomainObject(response.data as IBANResponse);
 };

@@ -59,44 +59,27 @@ const getResults = async (
   searchTerms: string,
   page: number,
   searchFilterParams?: SearchFilterParams,
-  useFallback = true
+  fallbackOnStaging = false
 ): Promise<ISearchResults> => {
   const encodedTerms = encodeURI(searchTerms);
 
   const route =
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
-    routes.sireneOuverte.rechercheUniteLegale;
+    (fallbackOnStaging
+      ? routes.sireneOuverte.rechercheUniteLegaleStaging
+      : routes.sireneOuverte.rechercheUniteLegale);
 
-  let response;
-  try {
-    const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
-      searchFilterParams?.toURI() || ''
-    }`;
-    response = await httpGet(url, {
-      timeout: constants.timeout.medium,
-      headers: { referer: 'annuaire-entreprises-site' },
-    });
-  } catch (e) {
-    if (!useFallback) {
-      // dont use fallback on staging
-      throw e;
-    }
-    if (e instanceof HttpNotFound) {
-      // ignore error
-      throw e;
-    }
+  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
+    searchFilterParams?.toURI() || ''
+  }`;
+  const timeout = fallbackOnStaging
+    ? constants.timeout.XL
+    : constants.timeout.M;
 
-    //fallback
-    const stagingUrl = `${
-      routes.sireneOuverte.rechercheUniteLegaleStaging
-    }?per_page=10&page=${page}&q=${encodedTerms}${
-      searchFilterParams?.toURI() || ''
-    }`;
-    response = await httpGet(stagingUrl, {
-      timeout: constants.timeout.long,
-      headers: { referer: 'annuaire-entreprises-site' },
-    });
-  }
+  const response = await httpGet(url, {
+    timeout,
+    headers: { referer: 'annuaire-entreprises-site' },
+  });
 
   const results = (response.data || []) as any;
 
