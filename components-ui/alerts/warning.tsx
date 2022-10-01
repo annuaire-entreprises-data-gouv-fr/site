@@ -1,13 +1,12 @@
 import React, { PropsWithChildren } from 'react';
+import { alertFill } from '../icon';
 
 const Warning: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   full = false,
   children,
 }) => (
   <div className="alert">
-    <div className="icon">
-      <span className="fr-fi-alert-fill" aria-hidden="true"></span>
-    </div>
+    <div className="icon">{alertFill}</div>
     <div>{children}</div>
     <style jsx>{`
       .alert {

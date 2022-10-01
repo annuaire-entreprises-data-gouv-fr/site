@@ -152,7 +152,7 @@ jobs:
 
       - run: |
           npm install -g @axe-core/cli
-          axe http://localhost:3000  http://localhost:3000/donnees-extrait-kbis  http://localhost:3000/comment-ca-marche  http://localhost:3000/rechercher  http://localhost:3000/faq  http://localhost:3000/accessiblite  http://localhost:3000/vie-privee  http://localhost:3000/entreprise/880878145  http://localhost:3000/justificatif/880878145  http://localhost:3000/annonces/880878145  http://localhost:3000/administration/insee http://localhost:3000/administration http://localhost:3000/sources-de-donnees/insee  http://localhost:3000/sources-de-donnees/  http://localhost:3000/carte  http://localhost:3000/etablissement/88087814500015  http://localhost:3000/rechercher?terme=ganymede --disable scrollable-region-focusable --disable region --disable duplicate-id --exit
+          axe http://localhost:3000  http://localhost:3000/donnees-extrait-kbis  http://localhost:3000/comment-ca-marche  http://localhost:3000/rechercher  http://localhost:3000/faq  http://localhost:3000/accessiblite  http://localhost:3000/vie-privee  http://localhost:3000/entreprise/880878145  http://localhost:3000/justificatif/880878145  http://localhost:3000/annonces/880878145  http://localhost:3000/administration/insee http://localhost:3000/administration http://localhost:3000/sources-de-donnees/insee  http://localhost:3000/sources-de-donnees/  http://localhost:3000/carte  http://localhost:3000/etablissement/88087814500015  http://localhost:3000/rechercher?terme=ganymede  --disable scrollable-region-focusable,region,color-contrast,duplicate-id --exit
 
   testE2E:
     name: End2end tests

@@ -17,12 +17,12 @@ const FAQLink: React.FC<
         width={230}
         left="5px"
       >
-        <a className="faq-link" href={`/faq/${to}`}>
+        <a className="faq-link no-style-link" href={`/faq/${to}`}>
           {children} <span>{information}</span>
         </a>
       </InformationTooltip>
     ) : (
-      <a className="faq-link" href={`/faq/${to}`}>
+      <a className="faq-link no-style-link" href={`/faq/${to}`}>
         {children} <span>{information}</span>
       </a>
     )}
@@ -30,7 +30,6 @@ const FAQLink: React.FC<
       a.faq-link {
         margin: 0;
         padding: 0;
-        box-shadow: none;
         border-bottom: 1px dotted #666;
       }
       a.faq-link > span {

@@ -49,7 +49,6 @@ const AdministrationDescription: React.FC<{
           max-width: 80px;
           min-height: 40px;
           max-height: 50px;
-          box-shadow: none;
           justify-content: center;
           align-items: center;
         }

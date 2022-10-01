@@ -16,6 +16,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
             rel="noreferrer noopener"
             target="_blank"
             title="Partager cette page sur linkedin"
+            className="no-style-link"
           >
             {linkedin}
           </a>
@@ -31,6 +32,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
             rel="noreferrer noopener"
             target="_blank"
             title="Partager cette page sur twitter"
+            className="no-style-link"
           >
             {twitter}
           </a>
@@ -46,6 +48,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
             rel="noreferrer noopener"
             target="_blank"
             title="Partager cette page sur Facebook"
+            className="no-style-link"
           >
             {facebook}
           </a>
@@ -77,6 +80,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
             title="Partager cette page grâce à un QR Code"
             href={`/api/share/qr/${siren}`}
             download={`QR_code_page_${siren}.jpeg`}
+            className="no-style-link"
           >
             {qrCode}
           </a>
@@ -94,7 +98,6 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       .social-media span a,
       .social-media span div {
         cursor: pointer !important;
-        box-shadow: none;
       }
       .social-media span a:after {
         display: none;
