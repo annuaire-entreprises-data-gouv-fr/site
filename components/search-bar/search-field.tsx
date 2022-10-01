@@ -20,9 +20,12 @@ const SearchField = ({
       autoComplete="off"
       autoFocus={autoFocus}
     />
-    <button className="fr-btn" title="Rechercher" value="submit" type="submit">
-      <span>Lancer la recherche</span>
-    </button>
+    <button
+      className="fr-btn"
+      title="Rechercher"
+      value="submit"
+      type="submit"
+    />
     <style jsx>{`
       input[type='search'] {
         width: 100%;
