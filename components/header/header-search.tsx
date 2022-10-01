@@ -1,4 +1,5 @@
 import React from 'react';
+import { information } from '../../components-ui/icon';
 import SearchFilterParams, { IParams } from '../../models/search-filter-params';
 import { SearchField } from '../search-bar';
 import AdvancedSearchFields from '../search-bar/advanced-search-fields';
@@ -69,11 +70,8 @@ const HeaderSearch: React.FC<IProps> = ({
                 <div className="fr-header__tools-links">
                   <ul className="fr-links-group">
                     <li>
-                      <a
-                        className="fr-link fr-fi-information-line"
-                        href="/comment-ca-marche"
-                      >
-                        À propos
+                      <a className="fr-link" href="/comment-ca-marche">
+                        {information} À propos
                       </a>
                     </li>
                   </ul>

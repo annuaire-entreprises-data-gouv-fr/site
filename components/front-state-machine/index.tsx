@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * This component must be coupled with a frontend script (see /frontend/js/front-state-machine.js)
+ * This component must be coupled with a frontend script (see /frontend/src/front-state-machine.js)
  * It enable to quickly cycle through several state or status - ideal for async download / loader etc.
  *
  * @param states requires a list of 4 JSX element, each corresponding to a state (started/pending/succes/error)

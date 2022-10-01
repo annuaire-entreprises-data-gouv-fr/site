@@ -28,6 +28,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
           (nofollow ? 'nofollow' : '')
         }
         href={to}
+        className="no-style-link"
       >
         {children}
       </a>
@@ -56,7 +57,6 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         padding: 0 10px;
         border: 2px solid transparent;
         border-radius: 3px;
-        box-shadow: none;
       }
       div.button-link.small > a,
       div.button-link.small > button {

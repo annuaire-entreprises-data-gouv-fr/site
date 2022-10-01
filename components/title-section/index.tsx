@@ -31,34 +31,40 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
   <PrintNever>
     <div className="title-tabs">
       <a
-        className={`${ficheType === FICHE.INFORMATION && 'active'}`}
+        className={`${
+          ficheType === FICHE.INFORMATION && 'active'
+        } no-style-link`}
         href={`/entreprise/${siren}`}
       >
         Résumé
       </a>
       <a
-        className={`${ficheType === FICHE.JUSTIFICATIFS && 'active'}`}
+        className={`${
+          ficheType === FICHE.JUSTIFICATIFS && 'active'
+        } no-style-link`}
         href={`/justificatif/${siren}`}
         rel="nofollow"
       >
         Justificatif d’immatriculation
       </a>
       <a
-        className={`${ficheType === FICHE.DIRIGEANTS && 'active'}`}
+        className={`${
+          ficheType === FICHE.DIRIGEANTS && 'active'
+        } no-style-link`}
         href={`/dirigeants/${siren}`}
         rel="nofollow"
       >
         Dirigeants
       </a>
       <a
-        className={`${ficheType === FICHE.ANNONCES && 'active'}`}
+        className={`${ficheType === FICHE.ANNONCES && 'active'} no-style-link`}
         href={`/annonces/${siren}`}
         rel="nofollow"
       >
         Annonces
       </a>
       <a
-        className={`${ficheType === FICHE.DIVERS && 'active'}`}
+        className={`${ficheType === FICHE.DIVERS && 'active'} no-style-link`}
         href={`/divers/${siren}`}
         rel="nofollow"
       >
@@ -95,9 +101,9 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
       }
 
       .title-tabs > a.active {
+        box-shadow: none;
         background-color: #fff;
         border-bottom: 0;
-        box-shadow: none;
       }
 
       @media only screen and (min-width: 1px) and (max-width: 650px) {
@@ -111,7 +117,6 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         .title-tabs > a.active {
           background-color: #fff;
           border-bottom: 2px solid #dfdff1;
-          box-shadow: none;
         }
       }
     `}</style>
