@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "ts-node --project ./sitemap-tsconfig.json index.ts"
+    "build:seo": "ts-node --project ./sitemap-tsconfig.json index.ts"
   },
   "dependencies": {
     "axios": "^0.27.2",
