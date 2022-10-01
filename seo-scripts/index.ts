@@ -1,5 +1,9 @@
 import { PageTreeBuilder } from './page-tree-builder';
-import { deleteDataFile, downloadAndSaveData } from './download-data';
+import {
+  cleanOrCreateDistDirectory,
+  deleteDataFile,
+  downloadAndSaveData,
+} from './download-data';
 import { mem } from './memory';
 import { readFileLineByLine } from './read-line';
 import { getStaticPages } from './static-pages';
@@ -15,6 +19,7 @@ async function main() {
   console.log('*** SEO script (sitemap and page tree) ***');
   console.time('⏱ Total time to execute script');
 
+  cleanOrCreateDistDirectory();
   const filePath = await downloadAndSaveData();
 
   let urlCount = 0;

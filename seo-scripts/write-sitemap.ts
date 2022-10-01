@@ -27,7 +27,7 @@ class SitemapWriter {
 
   writeLine = (url: string) => {
     if (this.urlCount === 0) {
-      const newSitemapFilePath = `../public/sitemap/sitemap_${this.sitemapCount}.xml`;
+      const newSitemapFilePath = `./dist/sitemap/sitemap_${this.sitemapCount}.xml`;
       this.writeStream = fs.createWriteStream(newSitemapFilePath);
       this.writeStream.write(SITEMAP_START);
     }
@@ -64,7 +64,7 @@ class SitemapWriter {
       .join('')}
         </sitemapindex>`;
 
-    fs.writeFileSync('../public/sitemap/sitemap.xml', index);
+    fs.writeFileSync('./dist/sitemap/sitemap.xml', index);
 
     console.log(`💾 Sitemap count : ${this.sitemapCount}`);
   };
@@ -77,7 +77,7 @@ class SitemapWriter {
   }
 
   createSitemapFolder = () => {
-    const sitemapDir = '../public/sitemap/';
+    const sitemapDir = './dist/sitemap/';
     if (!fs.existsSync(sitemapDir)) {
       console.log('📂 Creating new /sitemap folder');
       fs.mkdirSync(sitemapDir);

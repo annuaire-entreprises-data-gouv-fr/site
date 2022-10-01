@@ -1,5 +1,5 @@
 import * as axios from 'axios';
-import fs from 'fs';
+import * as fs from 'fs';
 
 const SOURCE_URL =
   'https://object.files.data.gouv.fr/opendata/ae/sitemap-name-prod.csv';
@@ -20,4 +20,12 @@ export const downloadAndSaveData = async () => {
 
 export const deleteDataFile = async (filePath: string) => {
   await fs.promises.unlink(filePath);
+};
+
+export const cleanOrCreateDistDirectory = () => {
+  try {
+    fs.rmSync('./dist', { recursive: true, force: true });
+  } catch {}
+
+  fs.mkdirSync('./dist');
 };

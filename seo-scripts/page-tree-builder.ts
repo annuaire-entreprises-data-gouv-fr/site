@@ -15,7 +15,7 @@ class PageTreeBuilder {
 
   constructor() {
     this.dico = {};
-    this.pageTreeDir = '../public/departements/';
+    this.pageTreeDir = './dist/departements/';
     this.pageCount = 0;
     this.ignoredUrl = 0;
   }

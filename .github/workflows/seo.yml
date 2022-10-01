@@ -26,19 +26,11 @@ jobs:
         run: |
           cd ./seo-scripts
           npm run build:seo
-      - name: Compress sitemaps
-        run: tar czf ./public/sitemap.tar.gz ./public/sitemap
-      - name: Archive sitemaps
+      - name: Compress seo-files
+        run: tar czf ./seo-scripts/seo-files.tar.gz ./seo-scripts/dist
+      - name: Archive seo-files
         uses: actions/upload-artifact@v3
         with:
-          name: sitemap
+          name: seo-files
           path: |
-            ./public/sitemap.tar.gz
-      - name: Compress page tree
-        run: tar czf ./public/departements.tar.gz ./public/departements
-      - name: Archive page tree
-        uses: actions/upload-artifact@v3
-        with:
-          name: departements
-          path: |
-            ./public/departements.tar.gz
+            ./seo-scripts/seo-files.tar.gz
