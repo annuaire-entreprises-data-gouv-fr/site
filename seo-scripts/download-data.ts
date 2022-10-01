@@ -7,6 +7,7 @@ const SOURCE_URL =
 export const downloadAndSaveData = async () => {
   console.time('⏱ Download and save base SIREN');
 
+  //@ts-ignore
   const names = await axios.get(SOURCE_URL, { timeout: 120000 });
   const data = names.data;
   const filePath = `/tmp/sitemap-${new Date().getTime()}`;
