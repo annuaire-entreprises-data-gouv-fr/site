@@ -100,4 +100,11 @@ export const departements = {
   973: 'Guyane',
   974: 'La Réunion',
   976: 'Mayotte',
+  977: 'Saint-Barthélemy',
+  978: 'Saint-Martin',
+  984: 'Terres australes et antarctiques françaises',
+  986: 'Wallis-et-Futuna',
+  987: 'Polynésie française',
+  988: 'Nouvelle-Calédonie',
+  989: 'Île de Clipperton',
 };

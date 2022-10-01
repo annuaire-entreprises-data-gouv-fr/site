@@ -1,5 +1,4 @@
 import { categoriesJuridiques } from './categories-juridiques';
-import { codesSectionNAF } from './codes-section-NAF';
 import { codesNAP } from './codes-NAP';
 import { codesNAFRev2 } from './codes-NAF-rev-2';
 import { codesNAF1993 } from './codes-NAF-1993';
@@ -7,6 +6,39 @@ import { codesNAFRev1 } from './codes-NAF-rev-1';
 import { codesEffectifs } from './codes-effectifs';
 import { codesVoies } from './codes-voie';
 import { categoriesEntreprise } from './categories-entreprise';
+import { departements } from './departements';
+
+export const getDepartementFromCodePostal = (codePostal: string) => {
+  if (!codePostal || codePostal.length !== 5 || codePostal.startsWith('00')) {
+    return null;
+  }
+
+  // dom
+  if (codePostal.startsWith('97') || codePostal.startsWith('98')) {
+    return codePostal.slice(0, 3);
+  }
+  //corse
+  if (codePostal.startsWith('20')) {
+    if (codePostal.startsWith('200') || codePostal.startsWith('201')) {
+      return '2A';
+    }
+    if (codePostal.startsWith('202') || codePostal.startsWith('206')) {
+      return '2B';
+    }
+  }
+
+  return codePostal.slice(0, 2);
+};
+
+export const libelleFromDepartement = (departement: string) => {
+  //@ts-ignore
+  const label = departements[departement];
+
+  if (label) {
+    return `${departement} - ${label}`;
+  }
+  return 'Département inconnu';
+};
 
 const getNomenclature = (nomenclature: string) => {
   switch (nomenclature) {
@@ -32,6 +64,22 @@ export const libelleFromCodeNAF = (
   //@ts-ignore
   const label = codes[code] || 'Activité inconnue';
   return addCode && code ? `${code} - ${label}` : label;
+};
+
+export const libelleFromCodeNAFWithoutNomenclature = (code = '') => {
+  for (let nomenclature of [
+    codesNAFRev2,
+    codesNAFRev1,
+    codesNAF1993,
+    codesNAP,
+  ]) {
+    //@ts-ignore
+    const label = nomenclature[code];
+    if (label) {
+      return `${code} - ${label}`;
+    }
+  }
+  return 'Activité inconnue';
 };
 
 export const libelleFromCodeEffectif = (
