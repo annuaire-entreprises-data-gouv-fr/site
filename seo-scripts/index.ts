@@ -26,8 +26,6 @@ async function main() {
   const sitemap = new SitemapWriter();
   const pageTree = new PageTreeBuilder();
 
-  sitemap.createSitemapFolder();
-
   /**
    * Generate sitemap and populate pageTree database
    */
