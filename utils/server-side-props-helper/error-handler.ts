@@ -51,9 +51,10 @@ const handleExceptions = (exception: any, req: IncomingMessage | undefined) => {
       return redirectServerError(message, scope);
     }
   } catch (e: any) {
-    return redirectServerError('Error-handler failed to handle exception', {
-      details: exception.toString(),
-    });
+    console.log('=== Error-handler failed to handle exception ===');
+    console.log(exception);
+    console.log(e);
+    return redirectServerError('Error-handler failed to handle exception', {});
   }
 };
 

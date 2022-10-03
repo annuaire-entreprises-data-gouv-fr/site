@@ -22,9 +22,9 @@ ServerError.getInitialProps = ({
 }) => {
   let errAsString = '';
   try {
-    errAsString = err.toString();
-  } catch (e) {
-    console.log(e);
+    console.log('error 500 :', err);
+    errAsString = (err || '').toString();
+  } catch {
     errAsString = 'failed to serialize error';
   }
 

@@ -68,13 +68,13 @@ const getUniteLegaleSireneOuverte = async (
     const result = response.data[0] as ISireneOuverteUniteLegaleResponse;
 
     if (!result.unite_legale) {
-      throw new Error();
+      throw new Error('No unite légale');
     }
 
     uniteLegale = result.unite_legale[0];
 
     if (!uniteLegale) {
-      throw new Error();
+      throw new Error('No unite légale');
     }
   } catch (e: any) {
     throw new HttpNotFound(siren);
