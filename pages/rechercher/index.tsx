@@ -86,6 +86,10 @@ const SearchResultPage: React.FC<IProps> = ({
   </Page>
 );
 
+const sleep = async (timeout: number) => {
+  return new Promise((resolve, reject) => setTimeout(resolve, timeout));
+};
+
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     // get params from query string

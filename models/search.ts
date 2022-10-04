@@ -34,8 +34,23 @@ const search = async (
   page: number,
   searchFilterParams: SearchFilterParams
 ) => {
+<<<<<<< Updated upstream
   try {
     const cleanedTerm = cleanSearchTerm(searchTerm);
+=======
+<<<<<<< Updated upstream
+  const cleanedTerm = cleanSearchTerm(searchTerm);
+=======
+  try {
+    return {
+      currentPage: 1,
+      resultCount: 0,
+      pageCount: 0,
+      results: [],
+    };
+    const cleanedTerm = cleanSearchTerm(searchTerm);
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
     const likelyASiretOrSiren = isLikelyASiretOrSiren(cleanedTerm);
 

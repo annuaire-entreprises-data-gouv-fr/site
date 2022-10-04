@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchFilterParams, { IParams } from '../../models/search-filter-params';
 import { SearchField } from '../search-bar';
-import AdvancedSearchFields from '../search-bar/advanced-search-fields';
+import AdvancedSearchFields from '../search-bar/advanced-search-form';
 
 interface IProps {
   currentSearchTerm?: string;
@@ -54,6 +54,17 @@ const HeaderSearch: React.FC<IProps> = ({
                 </div>
                 <div className="not-fr-search">
                   <SearchField defaultValue={currentSearchTerm} />
+                  <input
+                    className="toggle-advanced-search"
+                    id="toggle-advanced-search"
+                    type="checkbox"
+                    defaultChecked={shouldDisplayAdvancedSearch}
+                  />
+                  <div className="fields">
+                    <AdvancedSearchFields
+                      searchFilterParams={searchFilterParams}
+                    />
+                  </div>
 
                   <div className="show-advanced layout-right">
                     <label
@@ -80,15 +91,6 @@ const HeaderSearch: React.FC<IProps> = ({
                 </div>
               </div>
             </div>
-            <input
-              className="toggle-advanced-search"
-              id="toggle-advanced-search"
-              type="checkbox"
-              defaultChecked={shouldDisplayAdvancedSearch}
-            />
-            <div className="fields">
-              <AdvancedSearchFields searchFilterParams={searchFilterParams} />
-            </div>
           </div>
         </div>
       </form>
@@ -108,6 +110,7 @@ const HeaderSearch: React.FC<IProps> = ({
         }
 
         div.fields {
+          position: relative;
           padding: 0;
           display: none;
         }
