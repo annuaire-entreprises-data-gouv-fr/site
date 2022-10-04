@@ -25,7 +25,7 @@ const AdministrationDescription: React.FC<{
           <br />
           {(apiMonitors?.length || 0) > 0 && (
             <a href={`/sources-de-donnees/${slug}`}>
-              → Consulter les API de cette administration
+              → Accéder aux données de cette administration
             </a>
           )}
         </p>
