@@ -29,54 +29,52 @@ export interface ISearchResults {
   results: ISearchResult[];
 }
 
+const noResults = {
+  currentPage: 1,
+  resultCount: 0,
+  pageCount: 0,
+  results: [],
+};
+
 const search = async (
   searchTerm: string,
   page: number,
   searchFilterParams: SearchFilterParams
 ) => {
-<<<<<<< Updated upstream
-  try {
-    const cleanedTerm = cleanSearchTerm(searchTerm);
-=======
-<<<<<<< Updated upstream
   const cleanedTerm = cleanSearchTerm(searchTerm);
-=======
+
+  const likelyASiretOrSiren = isLikelyASiretOrSiren(cleanedTerm);
+
+  if (likelyASiretOrSiren) {
+    throw new IsLikelyASirenOrSiretException(cleanedTerm);
+  }
+
   try {
-    return {
-      currentPage: 1,
-      resultCount: 0,
-      pageCount: 0,
-      results: [],
-    };
-    const cleanedTerm = cleanSearchTerm(searchTerm);
->>>>>>> Stashed changes
->>>>>>> Stashed changes
-
-    const likelyASiretOrSiren = isLikelyASiretOrSiren(cleanedTerm);
-
-    if (likelyASiretOrSiren) {
-      throw new IsLikelyASirenOrSiretException(cleanedTerm);
-    }
-
     const escapedSearchTerm = escapeTerm(searchTerm);
-
     return await getResults(escapedSearchTerm, page, searchFilterParams);
   } catch (e: any) {
-    if (e instanceof HttpNotFound) {
-      return {
-        currentPage: 1,
-        resultCount: 0,
-        pageCount: 0,
-        results: [],
-      };
-    }
     if (e instanceof IsLikelyASirenOrSiretException) {
       throw e;
     }
-    logErrorInSentry('Search API', {
-      details: `term : ${searchTerm} - ${e.toString()}`,
-    });
-    return APINotRespondingFactory(EAdministration.DINUM);
+    if (e instanceof HttpNotFound) {
+      return noResults;
+    }
+
+    // attempt a fallback on staging
+    try {
+      const escapedSearchTerm = escapeTerm(searchTerm);
+      return await getResults(escapedSearchTerm, page, searchFilterParams);
+    } catch (eFallback: any) {
+      if (eFallback instanceof HttpNotFound) {
+        return noResults;
+      }
+
+      logErrorInSentry('Search API', {
+        details: `term : ${searchTerm} - ${eFallback.toString()}`,
+      });
+
+      return APINotRespondingFactory(EAdministration.DINUM);
+    }
   }
 };
 

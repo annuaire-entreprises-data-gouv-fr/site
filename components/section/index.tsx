@@ -8,6 +8,7 @@ import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
 import Warning from '../../components-ui/alerts/warning';
 import DataSourcesTooltip from '../../components-ui/information-tooltip/data-sources-tooltip';
 import { administrationsLogo } from '../administrations/logos';
+import { questionnaire } from '../../components-ui/icon';
 
 interface ISectionProps {
   title: string;
@@ -50,21 +51,30 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           </Warning>
         )}
         <div>{children}</div>
-        <div className="data-source-tooltip-wrapper">
-          {dataSources.length > 0 && (
+        {dataSources.length > 0 && (
+          <div className="administration-page-link">
+            <a href={link}>
+              {questionnaire}
+              &nbsp;Une erreur ou une question sur ces données ?
+            </a>
             <DataSourcesTooltip
               dataSources={dataSources.map((src) => src.data)}
               lastUpdatedAt={formatDate(last)}
               link={link}
             />
-          )}
-        </div>
+          </div>
+        )}
         <div className="logo-wrapper">
           {dataSources.map(
             ({ data, logo }) =>
               data &&
               logo && (
-                <a key={data.long} href={link} title={data.long}>
+                <a
+                  key={data.long}
+                  href={link}
+                  title={data.long}
+                  className="no-style-link"
+                >
                   {logo}
                 </a>
               )
@@ -91,10 +101,15 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           border-radius: 2px;
           max-width: calc(100% - 40px);
         }
-        .data-source-tooltip-wrapper {
+
+        .administration-page-link {
           display: flex;
-          justify-content: flex-end;
-          margin-top: 15px;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 25px;
+        }
+        .administration-page-link > a {
+          font-size: 0.9rem;
         }
 
         .logo-wrapper {
@@ -110,12 +125,18 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           max-width: 100px;
           height: 40px;
           max-height: 50px;
-          box-shadow: none;
         }
 
-        @media only screen and (min-width: 1px) and (max-width: 600px) {
+        @media only screen and (min-width: 1px) and (max-width: 750px) {
           .logo-wrapper {
             display: none;
+          }
+
+          .administration-page-link {
+            flex-direction: column;
+          }
+          .administration-page-link > a {
+            margin-bottom: 15px;
           }
         }
       `}</style>

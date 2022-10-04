@@ -13,7 +13,7 @@ import ButtonLink from '../../components-ui/button';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../../components-ui/print-visibility';
-import { Closed, download, Open } from '../../components-ui/icon';
+import { closed, download, open } from '../../components-ui/icon';
 import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
 import { IImmatriculationRNCS } from '../../models/immatriculation/rncs';
 
@@ -113,13 +113,9 @@ const ImmatriculationRNCSTable: React.FC<{
       'Statut',
       <>
         {immatriculation.identite.dateRadiation ? (
-          <b>
-            <Closed /> Radiée
-          </b>
+          <b>{closed} Radiée</b>
         ) : (
-          <b>
-            <Open /> Inscrite
-          </b>
+          <b>{open} Inscrite</b>
         )}
       </>,
     ],

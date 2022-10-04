@@ -1,6 +1,94 @@
 import React from 'react';
 
-const download = (
+/**
+ * DSFR
+ */
+export const questionnaire = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    stroke="currentColor"
+    strokeWidth="0"
+  >
+    <path d="M21 3a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.455L2 22.5V4a1 1 0 0 1 1-1h18Zm-1 2H4v13.385L5.763 17H20V5Zm-7 9v2h-2v-2h2Zm-.54-7.972A3.501 3.501 0 0 1 12 13h-1v-2h1a1.5 1.5 0 1 0-1.471-1.794l-1.962-.393a3.501 3.501 0 0 1 3.892-2.785Z" />
+  </svg>
+);
+
+export const alertFill = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="18"
+    height="18"
+    fill="currentColor"
+    stroke="currentColor"
+  >
+    <path d="m12.866 3 9.526 16.5a1 1 0 0 1-.866 1.5H2.474a1 1 0 0 1-.866-1.5L11.134 3a1 1 0 0 1 1.732 0ZM11 16v2h2v-2h-2Zm0-7v5h2V9h-2Z" />
+  </svg>
+);
+
+export const open = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="18"
+    height="18"
+    fill="#326f00"
+    stroke="#326f00"
+  >
+    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-.997-4L6.76 11.757l1.414-1.414 2.829 2.829 5.656-5.657 1.415 1.414L11.003 16z" />
+  </svg>
+);
+
+export const closed = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="18"
+    height="18"
+    fill="#914141"
+    stroke="#914141"
+  >
+    <path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm0-2c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8zm0-9.4 2.83-2.84 1.4 1.4L13.42 12l2.84 2.83-1.4 1.4L12 13.42l-2.83 2.84-1.4-1.4L10.58 12 7.75 9.17l1.4-1.4L12 10.58z" />
+  </svg>
+);
+
+export const questionFill = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    fill="currentColor"
+    stroke="currentColor"
+    strokeWidth="0"
+  >
+    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-1-7v2h2v-2h-2Zm2-1.645A3.502 3.502 0 0 0 12 6.5a3.501 3.501 0 0 0-3.433 2.813l1.962.393A1.5 1.5 0 1 1 12 11.5a1 1 0 0 0-1 1V14h2v-.645Z" />
+  </svg>
+);
+
+export const searchLine = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="18"
+    height="18"
+    fill="currentColor"
+    stroke="currentColor"
+    strokeWidth="0"
+  >
+    <path d="m18.031 16.617 4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617Zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15Z" />
+  </svg>
+);
+
+/**
+ * CUSTOM
+ */
+
+export const download = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -18,7 +106,7 @@ const download = (
   </svg>
 );
 
-const pin = (
+export const pin = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="18"
@@ -35,7 +123,7 @@ const pin = (
   </svg>
 );
 
-const copy = (
+export const copy = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="15"
@@ -52,7 +140,7 @@ const copy = (
   </svg>
 );
 
-const copied = (
+export const copied = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="18"
@@ -68,7 +156,7 @@ const copied = (
   </svg>
 );
 
-const information = (
+export const information = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="12"
@@ -84,7 +172,7 @@ const information = (
   </svg>
 );
 
-const facebook = (
+export const facebook = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -100,7 +188,7 @@ const facebook = (
   </svg>
 );
 
-const linkedin = (
+export const linkedin = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -118,7 +206,7 @@ const linkedin = (
   </svg>
 );
 
-const twitter = (
+export const twitter = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -134,7 +222,7 @@ const twitter = (
   </svg>
 );
 
-const qrCode = (
+export const qrCode = (
   <svg
     width="15"
     height="15"
@@ -149,7 +237,7 @@ const qrCode = (
   </svg>
 );
 
-const print = (
+export const print = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -165,33 +253,4 @@ const print = (
     <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
     <rect x="6" y="14" width="12" height="8"></rect>
   </svg>
-);
-
-export {
-  download,
-  pin,
-  copy,
-  copied,
-  information,
-  facebook,
-  linkedin,
-  twitter,
-  qrCode,
-  print,
-};
-
-export const Open = () => (
-  <span
-    className="fr-fi-checkbox-circle-line success-main-525"
-    aria-hidden="true"
-    style={{ color: '#326f00' }}
-  ></span>
-);
-
-export const Closed = () => (
-  <span
-    className="fr-fi-close-circle-line red-marianne-425"
-    aria-hidden="true"
-    style={{ color: '#914141' }}
-  ></span>
 );

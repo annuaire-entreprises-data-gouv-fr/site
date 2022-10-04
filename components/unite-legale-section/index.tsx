@@ -23,7 +23,12 @@ const UniteLegaleSection: React.FC<{
         formatSiret((uniteLegale.siege || {}).siret),
     ],
     [
-      <FAQLink to="tva-intracommunautaire">N° TVA Intracommunautaire</FAQLink>,
+      <FAQLink
+        to="tva-intracommunautaire"
+        tooltipLabel="Qu’est ce que le numéro de TVA intracommunautaire ?"
+      >
+        N° TVA Intracommunautaire
+      </FAQLink>,
       <TVACell />,
     ],
     [
@@ -31,7 +36,12 @@ const UniteLegaleSection: React.FC<{
       uniteLegale.libelleActivitePrincipale,
     ],
     [
-      <FAQLink to="modifier-adresse">Adresse postale</FAQLink>,
+      <FAQLink
+        to="modifier-adresse"
+        tooltipLabel="Comment modifier une adresse ?"
+      >
+        Adresse postale
+      </FAQLink>,
       uniteLegale.siege.adresse
         ? `${
             uniteLegale.siege.denomination

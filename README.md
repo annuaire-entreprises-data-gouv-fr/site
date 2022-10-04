@@ -74,12 +74,6 @@ npm run test:unit
 npm run test:end2end
 ```
 
-4. SEO (Sitemap generation)
-
-```bash
-npm run sitemap
-```
-
 ### Deploiement
 
 Le déploiement se fait par [Github action](https://github.com/etalab/annuaire-entreprises-site/actions)
@@ -92,9 +86,24 @@ A chaque "merge" sur master :
 
 NB: Si plusieurs déploiements sont déclenchés en même temps, seul le premier va jusqu'au bout. Les autres sont automatiquement interrompus.
 
-## Sitemap
+## Sitemap & scripts SEO
 
-La sitemap est générée deux fois par mois par une github action. Elle est ensuite stockée dans un artifact et téléchargée lors du déploiement sur les différents environnements.
+Le script SEO est déclenché deux fois par mois par une github action.
+Il génère :
+
+- un ensemble de sitemaps listant les ~8M d'unite legales (~200 fichiers)
+- un arbre de page de resultats statiques avec les ~8M d’UL (~200 000 fichiers)
+
+Les fichiers sont compressés puis stockés dans un artifact et téléchargés lors du déploiement sur les différents environnements.
+
+Le script est dans son propre dossier, avec son propre `package.json` et sa propre config `typescript`.
+
+Pour lancer le script :
+
+```bash
+cd seo-script
+npm run build:seo
+```
 
 ## Licence
 

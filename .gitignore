@@ -37,13 +37,14 @@ yarn-error.log*
 # vercel
 .vercel
 
-/node-scripts/url-list.txt
-/node-scripts/sitemap-name.csv
+/seo-scripts/node_modules
+/seo-scripts/dist
 
 /public/maps/*
 /public/resources/downloads/*
-/public/frontend/css/bundle.css
+/public/frontend/style/bundle.css
 /public/sitemap
+/public/departements
 /public/
 
 public/dist

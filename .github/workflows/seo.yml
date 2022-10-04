@@ -8,8 +8,8 @@ on:
     - cron: '0 1 10,25 * *'
 
 jobs:
-  dependencies:
-    name: 'Build sitemap'
+  build:
+    name: 'Generate SEO files'
     runs-on: ubuntu-latest
 
     steps:
@@ -18,28 +18,19 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ env.node-version }}
-      - name: Cache node modules
-        uses: actions/cache@v2
-        id: restore-dependencies
-        env:
-          cache-name: cache-node-modules
-        with:
-          # Cache node_modules. To cache global, you may try ~/.npm
-          path: ./node_modules
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-cache-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Install dependencies
-        run: npm i
-      - name: Build sitemaps
-        run: npm run sitemap
-      - name: Compress sitemaps
-        run: tar czf ./public/sitemap.tar.gz ./public/sitemap
-      - name: Archive sitemaps
+      - name: Install dependencies in /seo-scripts
+        run: |
+          cd ./seo-scripts
+          npm i
+      - name: Run /seo-script/index.ts
+        run: |
+          cd ./seo-scripts
+          npm run build:seo
+      - name: Compress seo-files
+        run: tar czf ./seo-scripts/seo-files.tar.gz ./seo-scripts/dist
+      - name: Archive seo-files
         uses: actions/upload-artifact@v3
         with:
-          name: sitemap
+          name: seo-files
           path: |
-            ./public/sitemap.tar.gz
+            ./seo-scripts/seo-files.tar.gz

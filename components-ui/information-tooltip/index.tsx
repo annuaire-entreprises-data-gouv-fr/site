@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, ReactNode } from 'react';
 
-const left = (orientation: 'left' | 'right' | 'center', width = 250) => {
+const computeLeft = (orientation: 'left' | 'right' | 'center', width = 250) => {
   switch (orientation) {
     case 'right':
       return `calc(50% - ${width}px);`;
@@ -18,6 +18,7 @@ const InformationTooltip: React.FC<
     orientation?: 'left' | 'right' | 'center';
     width?: number;
     inlineBlock?: boolean;
+    left?: string;
   }>
 > = ({
   children,
@@ -25,6 +26,7 @@ const InformationTooltip: React.FC<
   orientation = 'center',
   width = 250,
   inlineBlock = true,
+  left = '',
 }) => (
   <>
     <span className="wrapper">
@@ -46,14 +48,14 @@ const InformationTooltip: React.FC<
         border-bottom-left-radius: ${orientation === 'left' ? 0 : 5}px;
         bottom: calc(100% + 10px);
         color: #fff;
-        left: ${left(orientation, width)};
+        left: ${left ? left : computeLeft(orientation, width)};
         display: block;
         visibility: hidden;
         padding: 10px;
         width: ${width}px;
         pointer-events: none;
         position: absolute;
-        z-index: 100;
+        z-index: 1000;
       }
 
       /* This bridges the gap so you can mouse into the tooltip without it disappearing */

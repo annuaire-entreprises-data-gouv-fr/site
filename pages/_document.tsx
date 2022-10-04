@@ -43,12 +43,12 @@ class DevDocument extends Document {
           <link
             rel="stylesheet"
             type="text/css"
-            href="http://localhost:3001/frontend/css/dsfr.min.css"
+            href="http://localhost:3001/frontend/style/dsfr.min.css"
           />
           <link
             rel="stylesheet"
             type="text/css"
-            href="http://localhost:3001/frontend/css/globals.css"
+            href="http://localhost:3001/frontend/style/globals.css"
           />
           <script
             defer
@@ -58,7 +58,7 @@ class DevDocument extends Document {
           <script
             defer
             type="module"
-            src="http://localhost:3001/frontend/js/index.js"
+            src="http://localhost:3001/frontend/src/index.js"
           ></script>
         </CustomHead>
         <body>
@@ -92,17 +92,17 @@ class StaticDocument extends Document {
           <link
             rel="stylesheet"
             type="text/css"
-            href={`/${manifest['css/dsfr.min.css'].file}`}
+            href={`/${manifest['style/dsfr.min.css'].file}`}
           />
           <link
             rel="stylesheet"
             type="text/css"
-            href={`/${manifest['css/globals.css'].file}`}
+            href={`/${manifest['style/globals.css'].file}`}
           />
           <script
             defer
             type="module"
-            src={`/${manifest['js/index.js'].file}`}
+            src={`/${manifest['src/index.js'].file}`}
           ></script>
         </CustomHead>
 

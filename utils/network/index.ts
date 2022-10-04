@@ -51,7 +51,7 @@ const axiosInstanceWithCache = cachedAxiosInstanceFactory();
  */
 const httpClient = async (config: CacheRequestConfig): Promise<AxiosResponse> =>
   await axiosInstanceWithCache({
-    timeout: constants.timeout.default,
+    timeout: constants.timeout.L,
     cache: false,
     ...config,
   });
@@ -70,7 +70,7 @@ const httpGet = async (
 ) =>
   await httpClient({
     url,
-    timeout: constants.timeout.default,
+    timeout: constants.timeout.L,
     ...config,
     cache: useCache ? defaultCacheConfig : false,
   });

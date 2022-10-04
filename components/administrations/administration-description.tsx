@@ -25,7 +25,7 @@ const AdministrationDescription: React.FC<{
           <br />
           {(apiMonitors?.length || 0) > 0 && (
             <a href={`/sources-de-donnees/${slug}`}>
-              → Consulter les API de cette administration
+              → Accéder aux données de cette administration
             </a>
           )}
         </p>
@@ -49,7 +49,6 @@ const AdministrationDescription: React.FC<{
           max-width: 80px;
           min-height: 40px;
           max-height: 50px;
-          box-shadow: none;
           justify-content: center;
           align-items: center;
         }

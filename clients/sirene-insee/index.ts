@@ -1,3 +1,4 @@
+import constants from '../../models/constants';
 import httpClientOAuthGetFactory from '../../utils/network/0auth';
 import routes from '../routes';
 
@@ -41,5 +42,5 @@ export const inseeClientGet = async (
   const { useFallback, useCache } = options;
   const getClient = useFallback ? fallbackGetClient : defaultGetClient;
 
-  return await getClient(route, {}, useCache);
+  return await getClient(route, { timeout: constants.timeout.L }, useCache);
 };

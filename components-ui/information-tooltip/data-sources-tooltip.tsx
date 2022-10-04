@@ -25,7 +25,7 @@ const DataSourcesTooltip: React.FC<{
         </>
       }
     >
-      <a href={link} className="data-source">
+      <a href={link} className="data-source no-style-link">
         <span className="layout-center">{information}</span>
         <span>
           &nbsp;Source des données&nbsp;:&nbsp;
@@ -40,8 +40,10 @@ const DataSourcesTooltip: React.FC<{
             color: #000091;
             padding: 2px 10px;
             border-radius: 40px;
-            box-shadow: none;
             cursor: help;
+          }
+          .data-source:hover {
+            background-color: #d3d3ec;
           }
         `}</style>
       </a>
