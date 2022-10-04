@@ -1,10 +1,6 @@
 describe('Non-diffusible', () => {
   it('Should be non diffusible"', () => {
-<<<<<<< Updated upstream
     cy.visit('/entreprise/300025764');
-=======
-    cy.visit('/entreprise/300242492');
->>>>>>> Stashed changes
     cy.contains('ne sont pas publiques').should('have.length', 1);
   });
 
