@@ -6,15 +6,7 @@ const wait = async (timeout) => {
 
 window.addEventListener('beforeunload', async () => {
   const loader = document.createElement('div');
-  loader.style.position = 'absolute';
-  loader.style.transition = 'width 150ms ease-in-out';
-  loader.style.top = '0';
-  loader.style.left = '0';
-  loader.style.background = '#000091';
-  loader.style.width = '30vw';
-  loader.style.height = '3px';
-  loader.style.zIndex = 1000;
-
+  loader.id = 'top-load-bar';
   document.body.appendChild(loader);
 
   // first two 0 = wait 200ms before triggering load bar
