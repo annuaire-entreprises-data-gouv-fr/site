@@ -58,12 +58,12 @@ const getEtablissementSireneOuverte = async (
     const result = response.data[0] as ISireneOuverteEtablissementResponse;
 
     if (!result.etablissement) {
-      throw new Error();
+      throw new Error('No etablissement');
     }
 
     etablissement = result.etablissement[0];
     if (!etablissement) {
-      throw new Error();
+      throw new Error('No etablissement');
     }
   } catch (e: any) {
     throw new HttpNotFound('Not Found');
