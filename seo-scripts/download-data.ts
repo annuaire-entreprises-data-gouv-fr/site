@@ -2,20 +2,21 @@ import * as axios from 'axios';
 import * as fs from 'fs';
 
 const SOURCE_URL =
-  'https://object.files.data.gouv.fr/opendata/ae/sitemap-name-prod.csv';
+  'https://object.files.data.gouv.fr/opendata/ae/sitemap-prod.csv';
 
 export const downloadAndSaveData = async () => {
-  console.time('⏱ Download and save base SIREN');
+  // console.time('⏱ Download and save base SIREN');
 
-  //@ts-ignore
-  const names = await axios.get(SOURCE_URL, { timeout: 120000 });
-  const data = names.data;
-  const filePath = `/tmp/sitemap-${new Date().getTime()}`;
-  await fs.promises.writeFile(filePath, data, 'utf-8');
+  // //@ts-ignore
+  // const names = await axios.get(SOURCE_URL, { timeout: 120000 });
+  // const data = names.data;
+  // const filePath = `/tmp/sitemap-${new Date().getTime()}`;
+  // await fs.promises.writeFile(filePath, data, 'utf-8');
 
-  console.timeEnd('⏱ Download and save base SIREN');
+  // console.timeEnd('⏱ Download and save base SIREN');
 
-  return filePath;
+  // return filePath;
+  return '/tmp/sitemap-1664625264891';
 };
 
 export const deleteDataFile = async (filePath: string) => {

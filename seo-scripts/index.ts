@@ -49,7 +49,7 @@ async function main() {
 
     sitemap.endLastSitemap();
   } finally {
-    await deleteDataFile(filePath);
+    // await deleteDataFile(filePath);
   }
   console.log(`💾 Url total : ${urlCount}`);
 

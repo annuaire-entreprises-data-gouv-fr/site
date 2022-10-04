@@ -25,6 +25,13 @@ class SitemapWriter {
     this.urlCount = 0;
   }
 
+  write(str: string) {
+    if (!this.writeStream) {
+      throw new Error('Should never happen');
+    }
+    this.writeStream.write(str);
+  }
+
   writeLine = (url: string) => {
     if (this.urlCount === 0) {
       const newSitemapFilePath = `./dist/sitemap_${this.sitemapCount}.xml`;
@@ -32,17 +39,13 @@ class SitemapWriter {
       this.writeStream.write(SITEMAP_START);
     }
 
-    if (!this.writeStream) {
-      throw new Error('Should never happen');
-    }
-
-    this.writeStream.write(formatUrl(url));
+    this.write(formatUrl(url));
     this.urlCount++;
 
     if (this.urlCount >= URL_PER_SITEMAP) {
       this.urlCount = 0;
       this.sitemapCount++;
-      this.writeStream.write(SITEMAP_END);
+      this.write(SITEMAP_END);
     }
   };
 
@@ -72,7 +75,7 @@ class SitemapWriter {
   endLastSitemap() {
     if (this.urlCount !== 0) {
       // last sitemap needs to be ended
-      this.writeLine(SITEMAP_END);
+      this.write(SITEMAP_END);
     }
   }
 }
