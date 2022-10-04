@@ -45,7 +45,7 @@ const UniteLegalePage: React.FC<IProps> = ({
     isBrowserOutdated={metadata.isBrowserOutdated}
   >
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
-    <StructuredDataBreadcrumb siren={uniteLegale.siren} />
+    <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
       {uniteLegale.estDiffusible ? (
