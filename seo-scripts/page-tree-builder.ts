@@ -76,10 +76,11 @@ class PageTreeBuilder {
         // saving list of 100 first results for current naf, department
         const sirenList = this.get(dep, naf);
         const pageCount = Math.ceil(sirenList.length / 100);
+
         for (let pageNumber = 0; pageNumber < pageCount; pageNumber++) {
           const next100 = sirenList.slice(
-            pageNumber,
-            Math.min(sirenList.length, pageNumber + 100)
+            pageNumber * 100,
+            Math.min(sirenList.length, pageNumber * 101)
           );
           const resultsPage = renderResultsPage(
             dep,
