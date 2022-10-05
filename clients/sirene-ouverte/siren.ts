@@ -5,7 +5,6 @@ import {
 } from '../../models';
 import constants from '../../models/constants';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
-import { formatAdresse } from '../../utils/helpers/formatting';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import {
   libelleFromCategoriesJuridiques,

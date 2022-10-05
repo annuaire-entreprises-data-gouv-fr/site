@@ -1,7 +1,10 @@
 import React from 'react';
 import { IUniteLegale } from '../../models';
 import { getUrlFromDep } from '../../seo-scripts/page-tree-render';
-import { getDepartementFromCodePostal } from '../../utils/labels';
+import {
+  getDepartementFromCodePostal,
+  libelleFromDepartement,
+} from '../../utils/labels';
 
 const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
@@ -31,7 +34,7 @@ const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
           },{
             "@type": "ListItem",
             "position": 2,
-            "name": "${dep}",
+            "name": "${libelleFromDepartement(dep)}",
             "item": "https://annuaire-entreprises.data.gouv.fr/departements/${depUrl}/index.html"
           },
           {
