@@ -55,7 +55,7 @@ const InformationTooltip: React.FC<
         width: ${width}px;
         pointer-events: none;
         position: absolute;
-        z-index: 100;
+        z-index: 1000;
       }
 
       /* This bridges the gap so you can mouse into the tooltip without it disappearing */
