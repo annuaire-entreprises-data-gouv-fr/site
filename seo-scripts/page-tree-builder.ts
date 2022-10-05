@@ -15,7 +15,7 @@ class PageTreeBuilder {
 
   constructor() {
     this.dico = {};
-    this.pageTreeDir = '../public/departements/';
+    this.pageTreeDir = './dist/departements/';
     this.pageCount = 0;
     this.ignoredUrl = 0;
   }
@@ -119,7 +119,9 @@ class PageTreeBuilder {
   getUrlsForSitemap = () => {
     return [
       '/departements/index.html',
-      this.getDeps().map((d) => `/departements/${getUrlFromDep(d)}/index.html`),
+      ...this.getDeps().map(
+        (d) => `/departements/${getUrlFromDep(d)}/index.html`
+      ),
     ];
   };
 }

@@ -2,7 +2,7 @@ import * as axios from 'axios';
 import fs from 'fs';
 
 const SOURCE_URL =
-  'https://object.files.data.gouv.fr/opendata/ae/sitemap-name-prod.csv';
+  'https://object.files.data.gouv.fr/opendata/ae/sitemap-prod.csv';
 
 export const downloadAndSaveData = async () => {
   console.time('⏱ Download and save base SIREN');
@@ -20,4 +20,16 @@ export const downloadAndSaveData = async () => {
 
 export const deleteDataFile = async (filePath: string) => {
   await fs.promises.unlink(filePath);
+};
+
+export const cleanDistFolder = () => {
+  const dir = './dist/';
+
+  if (fs.existsSync(dir)) {
+    console.log('📂 Cleaning existing /dist folder');
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+
+  console.log('📂 Creating new /dist folder');
+  fs.mkdirSync(dir);
 };

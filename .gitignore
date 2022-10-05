@@ -38,6 +38,7 @@ yarn-error.log*
 .vercel
 
 /seo-scripts/node_modules
+/seo-scripts/dist
 
 /public/maps/*
 /public/resources/downloads/*

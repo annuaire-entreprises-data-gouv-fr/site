@@ -25,24 +25,28 @@ class SitemapWriter {
     this.urlCount = 0;
   }
 
-  writeLine = (url: string) => {
-    if (this.urlCount === 0) {
-      const newSitemapFilePath = `../public/sitemap/sitemap_${this.sitemapCount}.xml`;
-      this.writeStream = fs.createWriteStream(newSitemapFilePath);
-      this.writeStream.write(SITEMAP_START);
-    }
-
+  write = (str: string) => {
     if (!this.writeStream) {
       throw new Error('Should never happen');
     }
 
-    this.writeStream.write(formatUrl(url));
+    this.writeStream.write(str);
+  };
+
+  writeLine = (url: string) => {
+    if (this.urlCount === 0) {
+      const newSitemapFilePath = `./dist/sitemap_${this.sitemapCount}.xml`;
+      this.writeStream = fs.createWriteStream(newSitemapFilePath);
+      this.write(SITEMAP_START);
+    }
+
+    this.write(formatUrl(url));
     this.urlCount++;
 
     if (this.urlCount >= URL_PER_SITEMAP) {
       this.urlCount = 0;
       this.sitemapCount++;
-      this.writeStream.write(SITEMAP_END);
+      this.write(SITEMAP_END);
     }
   };
 
@@ -64,7 +68,7 @@ class SitemapWriter {
       .join('')}
         </sitemapindex>`;
 
-    fs.writeFileSync('../public/sitemap/sitemap.xml', index);
+    fs.writeFileSync('./dist/sitemap.xml', index);
 
     console.log(`💾 Sitemap count : ${this.sitemapCount}`);
   };
@@ -72,17 +76,9 @@ class SitemapWriter {
   endLastSitemap() {
     if (this.urlCount !== 0) {
       // last sitemap needs to be ended
-      this.writeLine(SITEMAP_END);
+      this.write(SITEMAP_END);
     }
   }
-
-  createSitemapFolder = () => {
-    const sitemapDir = '../public/sitemap/';
-    if (!fs.existsSync(sitemapDir)) {
-      console.log('📂 Creating new /sitemap folder');
-      fs.mkdirSync(sitemapDir);
-    }
-  };
 }
 
 export { SitemapWriter };

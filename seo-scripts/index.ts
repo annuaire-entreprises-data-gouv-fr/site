@@ -1,5 +1,9 @@
 import { PageTreeBuilder } from './page-tree-builder';
-import { deleteDataFile, downloadAndSaveData } from './download-data';
+import {
+  cleanDistFolder,
+  deleteDataFile,
+  downloadAndSaveData,
+} from './download-data';
 import { mem } from './memory';
 import { readFileLineByLine } from './read-line';
 import { getStaticPages } from './static-pages';
@@ -17,11 +21,11 @@ async function main() {
 
   const filePath = await downloadAndSaveData();
 
+  cleanDistFolder();
+
   let urlCount = 0;
   const sitemap = new SitemapWriter();
   const pageTree = new PageTreeBuilder();
-
-  sitemap.createSitemapFolder();
 
   /**
    * Generate sitemap and populate pageTree database
