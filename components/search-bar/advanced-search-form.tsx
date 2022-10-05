@@ -35,7 +35,7 @@ const AdvancedSearchFields: React.FC<{
             />
           </div>
         </FieldGroup>
-        <FieldGroup label="informations administrative">
+        <FieldGroup label="situation administrative">
           <div className="select">
             <SelectCodeSectionNaf
               name="section_activite_principale"
@@ -43,6 +43,32 @@ const AdvancedSearchFields: React.FC<{
               defaultValue={section_activite_principale}
             />
           </div>
+        </FieldGroup>
+        <FieldGroup label="dirigeants d’entreprise">
+          <label className="fr-label" htmlFor="search-code-postal">
+            Nom
+          </label>
+          <input
+            className="fr-input"
+            id="search-code-postal"
+            name="code_postal"
+            pattern="((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}"
+            autoComplete="off"
+            placeholder="Code postal"
+            defaultValue={code_postal}
+          />
+          <label className="fr-label" htmlFor="search-code-postal">
+            Prénom
+          </label>
+          <input
+            className="fr-input"
+            id="search-code-postal"
+            name="code_postal"
+            pattern="((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}"
+            autoComplete="off"
+            placeholder="Code postal"
+            defaultValue={code_postal}
+          />
         </FieldGroup>
         <div className="layout-center">
           <ButtonLink type="submit" small>

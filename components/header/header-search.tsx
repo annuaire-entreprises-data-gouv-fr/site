@@ -115,6 +115,7 @@ const HeaderSearch: React.FC<IProps> = ({
 
         .toggle-advanced-search:checked ~ .fields {
           display: block;
+          height: 0;
         }
 
         div.annuaire-logo {
