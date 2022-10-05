@@ -155,14 +155,6 @@ const mapToDomainObject = (
     dateCreation: date_creation_entreprise,
     dateDebutActivite: date_debut_activite,
     dateDerniereMiseAJour: date_mise_a_jour,
-    adresse: formatAdresse({
-      numeroVoie: numero_voie,
-      indiceRepetition: indice_repetition,
-      typeVoie: type_voie,
-      libelleVoie: libelle_voie,
-      codePostal: code_postal,
-      libelleCommune: libelle_commune,
-    }),
     dirigeant: null,
     association: identifiantAssociationUniteLegale
       ? { id: identifiantAssociationUniteLegale }

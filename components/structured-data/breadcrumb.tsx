@@ -6,19 +6,20 @@ import { getDepartementFromCodePostal } from '../../utils/labels';
 const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
 }) => {
-  const dep = getDepartementFromCodePostal(uniteLegale.dep);
-  const depUrl = getUrlFromDep(dep);
-  const naf = uniteLegale.naf;
+  try {
+    const naf = uniteLegale.activitePrincipale;
+    const dep = getDepartementFromCodePostal(uniteLegale.siege.codePostal);
+    const depUrl = getUrlFromDep(dep || '');
 
-  if (!dep || !naf) {
-    return null;
-  }
+    if (!dep || !depUrl || !naf) {
+      throw new Error();
+    }
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: `
+    return (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: `
         {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
@@ -40,9 +41,12 @@ const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
             "item": "https://annuaire-entreprises.data.gouv.fr/departements/${depUrl}/${naf}/1.html"
           }]
         }`,
-      }}
-    />
-  );
+        }}
+      />
+    );
+  } catch {
+    return null;
+  }
 };
 
 export default StructuredDataBreadcrumb;

@@ -227,13 +227,14 @@ export const mapEtablissementToDomainObject = (
     libellePaysEtrangerEtablissement,
   } = adresseEtablissement;
 
+  const codePostal = codePostalEtablissement;
   const adresse = formatAdresse({
     complement: complementAdresseEtablissement,
     numeroVoie: numeroVoieEtablissement,
     indiceRepetition: indiceRepetitionEtablissement,
     typeVoie: typeVoieEtablissement,
     libelleVoie: libelleVoieEtablissement,
-    codePostal: codePostalEtablissement,
+    codePostal,
     libelleCommune: libelleCommuneEtablissement,
     distributionSpeciale: distributionSpecialeEtablissement,
     codeCedex: codeCedexEtablissement,
@@ -269,6 +270,7 @@ export const mapEtablissementToDomainObject = (
       anneeEffectifsEtablissement
     ),
     adresse,
+    codePostal,
   };
 };
 

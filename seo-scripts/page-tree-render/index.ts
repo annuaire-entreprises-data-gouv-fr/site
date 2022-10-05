@@ -7,8 +7,7 @@ import {
   libelleFromCodeNAFWithoutNomenclature,
   libelleFromDepartement,
 } from '../../utils/labels';
-<<<<<<< HEAD
-import { cleanSearchTerm, escapeTerm } from '../../utils/helpers/formatting';
+import { escapeTerm } from '../../utils/helpers/formatting';
 
 const renderNav = (links: string[][]) => {
   return `
@@ -29,29 +28,6 @@ export const getUrlFromDep = (dep: string) => {
   // departement label without special char
   const labelDep = escapeTerm(libelleFromDepartement(dep));
   return labelDep.replaceAll(' ', '').toLocaleLowerCase();
-=======
-import { escapeTerm } from '../../utils/helpers/formatting';
-
-export const getUrlFromDep = (dep: string) => {
-  const labelDep = libelleFromDepartement(dep);
-  return escapeTerm(labelDep.replaceAll(' ', '').toLocaleLowerCase());
-};
-
-const renderBreadcrumb = (links: string[][]) => {
-  return `
-    <nav role="navigation" class="fr-breadcrumb" aria-label="vous êtes ici :">
-      <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-1">Voir le fil d’Ariane</button>
-      <div class="fr-collapse" id="breadcrumb-1">
-          <ol class="fr-breadcrumb__list">
-            ${links.map(
-              (link) =>
-                `<li><a class="fr-breadcrumb__link" href="${link[1]}">${link[0]}</a></li>`
-            )}
-          </ol>
-      </div>
-  </nav>
-`;
->>>>>>> seo_fixes
 };
 
 const renderDepartementsPage = (departments: any[]) => {
@@ -68,23 +44,15 @@ const renderDepartementsPage = (departments: any[]) => {
 };
 
 const renderNafsPage = (dep: string, nafs: any[]) => {
-<<<<<<< HEAD
   const navBlock = renderNav([
     ['Tous les départements', '/departements/index.html'],
-=======
-  const navBlock = renderBreadcrumb([
-    ['Tous les départements', '/departements/deinx.html'],
->>>>>>> seo_fixes
     [libelleFromDepartement(dep), ''],
   ]);
 
   const titleBlock = `<h1>Les personnes morales par activité dans le département ${libelleFromDepartement(
     dep
   )}</h1>`;
-<<<<<<< HEAD
 
-=======
->>>>>>> seo_fixes
   const nafsBlock = nafs
     .map(
       (naf) =>
@@ -107,28 +75,12 @@ const renderResultsPage = (
   totalPage: number,
   totalResults: number
 ) => {
-<<<<<<< HEAD
   const depUrl = getUrlFromDep(dep);
+  const labelNaf = libelleFromCodeNAFWithoutNomenclature(naf);
 
   const navBlock = renderNav([
-    ['Tous les départements', '/departements/index.html'],
-    [libelleFromDepartement(dep), `/departements/${depUrl}/index.html`],
-    [naf, ''],
-  ]);
-
-  const titleBlock = `<h1>${libelleFromCodeNAFWithoutNomenclature(
-    naf
-  )} dans le département ${libelleFromDepartement(dep)}</h1>
-  <p>${totalResults} personnes morales trouvées :</p>
-  `;
-=======
-  const labelNaf = libelleFromCodeNAFWithoutNomenclature(naf);
-  const navBlock = renderBreadcrumb([
     ['Tous les départements', '/departements/deinx.html'],
-    [
-      libelleFromDepartement(dep),
-      `/departements/${getUrlFromDep(dep)}/index.html`,
-    ],
+    [libelleFromDepartement(dep), `/departements/${depUrl}/index.html`],
     [labelNaf, ''],
   ]);
 
@@ -138,7 +90,6 @@ const renderResultsPage = (
   <p>${totalResults} personnes morales trouvées :</p>
   `;
 
->>>>>>> seo_fixes
   const resultsBlock = results
     .map((result) => {
       const nameElements = result.split('-').slice(0, -1);
@@ -153,13 +104,9 @@ const renderResultsPage = (
       if (pageNumber === currentPage) {
         paginationBlock += `<b>${pageNumber}</b>`;
       } else {
-<<<<<<< HEAD
-        paginationBlock += `<a href="/departements/${depUrl}/${naf}/${pageNumber}.html">${pageNumber}</a>`;
-=======
         paginationBlock += `<a href="/departements/${getUrlFromDep(
           dep
         )}/${naf}/${pageNumber}.html">${pageNumber}</a>`;
->>>>>>> seo_fixes
       }
     }
     paginationBlock = `<br/><div>Autres pages de résultats :</div><div class="pagination">${paginationBlock}</div>`;
