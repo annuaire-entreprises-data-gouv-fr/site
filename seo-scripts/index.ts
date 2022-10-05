@@ -1,6 +1,6 @@
 import { PageTreeBuilder } from './page-tree-builder';
 import {
-  cleanOrCreateDistDirectory,
+  cleanDistFolder,
   deleteDataFile,
   downloadAndSaveData,
 } from './download-data';
@@ -19,14 +19,12 @@ async function main() {
   console.log('*** SEO script (sitemap and page tree) ***');
   console.time('⏱ Total time to execute script');
 
-  cleanOrCreateDistDirectory();
   const filePath = await downloadAndSaveData();
 
+  cleanDistFolder();
   let urlCount = 0;
   const sitemap = new SitemapWriter();
   const pageTree = new PageTreeBuilder();
-
-  sitemap.createSitemapFolder();
 
   /**
    * Generate sitemap and populate pageTree database

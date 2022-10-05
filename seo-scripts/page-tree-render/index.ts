@@ -7,10 +7,27 @@ import {
   libelleFromCodeNAFWithoutNomenclature,
   libelleFromDepartement,
 } from '../../utils/labels';
+import { escapeTerm } from '../../utils/helpers/formatting';
+
+const renderNav = (links: string[][]) => {
+  return `
+  <nav role="navigation" class="fr-breadcrumb" aria-label="vous êtes ici :">
+    <div class="fr-collapse" id="breadcrumb-1">
+      <ol class="fr-breadcrumb__list">
+        ${links.map(
+          (link) =>
+            `<li><a class="fr-breadcrumb__link" href="${link[1]}">${link[0]}</a></li>`
+        )}
+      </ol>
+    </div>
+  </nav>;
+  `;
+};
 
 export const getUrlFromDep = (dep: string) => {
-  const labelDep = libelleFromDepartement(dep);
-  return encodeURI(labelDep.replaceAll(' ', '').toLocaleLowerCase());
+  // departement label without special char
+  const labelDep = escapeTerm(libelleFromDepartement(dep));
+  return labelDep.replaceAll(' ', '').toLocaleLowerCase();
 };
 
 const renderDepartementsPage = (departments: any[]) => {
@@ -27,10 +44,15 @@ const renderDepartementsPage = (departments: any[]) => {
 };
 
 const renderNafsPage = (dep: string, nafs: any[]) => {
-  const navBlock = `<a href="/departements/index.html">← Toutes les départements</a><br/>`;
+  const navBlock = renderNav([
+    ['Tous les départements', '/departements/index.html'],
+    [libelleFromDepartement(dep), ''],
+  ]);
+
   const titleBlock = `<h1>Les personnes morales par activité dans le département ${libelleFromDepartement(
     dep
   )}</h1>`;
+
   const nafsBlock = nafs
     .map(
       (naf) =>
@@ -53,12 +75,21 @@ const renderResultsPage = (
   totalPage: number,
   totalResults: number
 ) => {
-  const returnBlock = `<a href="/departements/${dep}/index.html">← Toutes les activités de ce département</a><br/>`;
-  const titleBlock = `<h1>${libelleFromCodeNAFWithoutNomenclature(
-    naf
-  )} dans le département ${libelleFromDepartement(dep)}</h1>
+  const depUrl = getUrlFromDep(dep);
+  const labelNaf = libelleFromCodeNAFWithoutNomenclature(naf);
+
+  const navBlock = renderNav([
+    ['Tous les départements', '/departements/deinx.html'],
+    [libelleFromDepartement(dep), `/departements/${depUrl}/index.html`],
+    [labelNaf, ''],
+  ]);
+
+  const titleBlock = `<h1>${labelNaf} dans le département ${libelleFromDepartement(
+    dep
+  )}</h1>
   <p>${totalResults} personnes morales trouvées :</p>
   `;
+
   const resultsBlock = results
     .map((result) => {
       const nameElements = result.split('-').slice(0, -1);
@@ -81,7 +112,7 @@ const renderResultsPage = (
     paginationBlock = `<br/><div>Autres pages de résultats :</div><div class="pagination">${paginationBlock}</div>`;
   }
 
-  return renderPage(returnBlock + titleBlock + resultsBlock + paginationBlock);
+  return renderPage(navBlock + titleBlock + resultsBlock + paginationBlock);
 };
 
 export { renderDepartementsPage, renderResultsPage, renderNafsPage };

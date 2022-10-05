@@ -119,7 +119,9 @@ class PageTreeBuilder {
   getUrlsForSitemap = () => {
     return [
       '/departements/index.html',
-      this.getDeps().map((d) => `/departements/${getUrlFromDep(d)}/index.html`),
+      ...this.getDeps().map(
+        (d) => `/departements/${getUrlFromDep(d)}/index.html`
+      ),
     ];
   };
 }
