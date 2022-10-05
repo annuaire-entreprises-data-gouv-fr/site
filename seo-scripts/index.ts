@@ -1,10 +1,6 @@
 import { PageTreeBuilder } from './page-tree-builder';
 import {
-<<<<<<< HEAD
   cleanDistFolder,
-=======
-  cleanOrCreateDistDirectory,
->>>>>>> seo_fixes
   deleteDataFile,
   downloadAndSaveData,
 } from './download-data';
