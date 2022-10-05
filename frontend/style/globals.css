@@ -141,3 +141,15 @@ p {
 .maplibregl-marker {
   z-index: 10000;
 }
+
+/* Load bar  */
+#top-load-bar {
+  position: absolute;
+  transition: width 150ms ease-in-out;
+  top: 0;
+  left: 0;
+  background: #000091;
+  width: 0;
+  height: 3px;
+  z-index: 00;
+}
