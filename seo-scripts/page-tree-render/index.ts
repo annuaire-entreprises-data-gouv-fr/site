@@ -14,10 +14,12 @@ const renderNav = (links: string[][]) => {
   <nav role="navigation" class="fr-breadcrumb" aria-label="vous êtes ici :">
     <div class="fr-collapse" id="breadcrumb-1">
       <ol class="fr-breadcrumb__list">
-        ${links.map(
-          (link) =>
-            `<li><a class="fr-breadcrumb__link" href="${link[1]}">${link[0]}</a></li>`
-        )}
+        ${links
+          .map(
+            (link) =>
+              `<li>‣&nbsp;<a class="fr-breadcrumb__link" href="${link[1]}">${link[0]}</a></li>`
+          )
+          .join('')}
       </ol>
     </div>
   </nav>;
