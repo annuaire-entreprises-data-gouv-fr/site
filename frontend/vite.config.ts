@@ -3,7 +3,7 @@ import autoprefixer from 'autoprefixer';
 
 const purgeConfig = {
   content: ['./**/*.tsx', './**/*.html'],
-  css: ['frontend/css/dsfr.min.css'],
+  css: ['frontend/style/dsfr.min.css'],
   fontFace: false, // otherwise, it will remove dsfr icon
 };
 
@@ -27,7 +27,7 @@ export default defineConfig({
     emptyOutDir: false, // do not empty dir
     manifest: true,
     rollupOptions: {
-      input: 'frontend/js/index.js',
+      input: 'frontend/src/index.js',
     },
   },
   server: {

@@ -1,6 +1,10 @@
 import { PageTreeBuilder } from './page-tree-builder';
 import {
+<<<<<<< HEAD
   cleanDistFolder,
+=======
+  cleanOrCreateDistDirectory,
+>>>>>>> seo_fixes
   deleteDataFile,
   downloadAndSaveData,
 } from './download-data';
@@ -22,7 +26,6 @@ async function main() {
   const filePath = await downloadAndSaveData();
 
   cleanDistFolder();
-
   let urlCount = 0;
   const sitemap = new SitemapWriter();
   const pageTree = new PageTreeBuilder();

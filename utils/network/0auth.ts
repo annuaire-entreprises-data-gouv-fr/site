@@ -26,7 +26,7 @@ export const httpClientOAuthGetFactory = (
     grant_type: 'client_credentials',
     client_id,
     client_secret,
-    timeout: constants.timeout.default,
+    timeout: constants.timeout.L,
   });
 
   const axiosInstance = cachedAxiosInstanceFactory();
@@ -37,7 +37,7 @@ export const httpClientOAuthGetFactory = (
 
   return (url: string, options: AxiosRequestConfig, useCache: boolean) =>
     axiosInstance.get(url, {
-      timeout: constants.timeout.default,
+      timeout: constants.timeout.L,
       ...options,
       cache: useCache ? defaultCacheConfig : false,
     });

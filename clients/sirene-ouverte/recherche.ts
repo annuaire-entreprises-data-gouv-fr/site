@@ -58,20 +58,26 @@ export interface ISireneOuverteSearchResults {
 const getResults = async (
   searchTerms: string,
   page: number,
-  searchFilterParams?: SearchFilterParams
+  searchFilterParams?: SearchFilterParams,
+  fallbackOnStaging = false
 ): Promise<ISearchResults> => {
   const encodedTerms = encodeURI(searchTerms);
 
   const route =
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
-    routes.sireneOuverte.rechercheUniteLegale;
+    (fallbackOnStaging
+      ? routes.sireneOuverte.rechercheUniteLegaleStaging
+      : routes.sireneOuverte.rechercheUniteLegale);
 
-  let url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
+  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
     searchFilterParams?.toURI() || ''
   }`;
+  const timeout = fallbackOnStaging
+    ? constants.timeout.XL
+    : constants.timeout.M;
 
   const response = await httpGet(url, {
-    timeout: constants.timeout.long,
+    timeout,
     headers: { referer: 'annuaire-entreprises-site' },
   });
 

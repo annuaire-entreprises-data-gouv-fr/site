@@ -1,4 +1,5 @@
 import React from 'react';
+import { questionFill } from '../icon';
 import { PrintNever } from '../print-visibility';
 
 export const Question: React.FC<{}> = () => (
@@ -8,11 +9,9 @@ export const Question: React.FC<{}> = () => (
       aria-label="Une question"
       className="question-bottom-right layout-center"
     >
-      <a className="dont-apply-link-style" href="/faq">
-        <div>
-          <span>Une question</span>{' '}
-          <span className="fr-fi-question-fill"></span>
-        </div>
+      <a className="no-style-link" href="/faq">
+        <span>Une question&nbsp;</span>
+        {questionFill}
       </a>
     </div>
     <style jsx>{`
@@ -28,9 +27,9 @@ export const Question: React.FC<{}> = () => (
         background-color: #000091;
         color: #fff;
         border-radius: 30px;
-        padding: 15px 25px;
+        padding: 15px 20px;
         font-size: 1.1rem;
-        display: inline-block;
+        display: flex;
         color: #fff;
         text-decoration: none;
         box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
@@ -42,29 +41,20 @@ export const Question: React.FC<{}> = () => (
         margin-bottom: 5px;
       }
 
-      .tag.closed {
-        color: #914141;
-        background-color: #ffe5e5;
-      }
-      .tag.open {
-        color: #326f00;
-        background-color: #cdf2c0;
-      }
       @media only screen and (min-width: 1px) and (max-width: 600px) {
         .question-bottom-right {
           bottom: 50px;
           right: 10px;
         }
         .question-bottom-right > a {
-          height: 60px;
-          width: 60px;
+          padding: 15px;
           border-radius: 50px;
           font-weight: bold;
           display: flex;
           align-items: center;
           justify-content: center;
         }
-        .question-bottom-right span:not(.fr-fi-question-fill) {
+        .question-bottom-right span {
           display: none;
         }
       }

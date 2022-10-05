@@ -42,7 +42,7 @@ yarn-error.log*
 
 /public/maps/*
 /public/resources/downloads/*
-/public/frontend/css/bundle.css
+/public/frontend/style/bundle.css
 /public/sitemap
 /public/departements
 /public/

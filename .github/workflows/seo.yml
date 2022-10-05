@@ -8,8 +8,8 @@ on:
     - cron: '0 1 10,25 * *'
 
 jobs:
-  dependencies:
-    name: 'Build sitemap'
+  build:
+    name: 'Generate SEO files'
     runs-on: ubuntu-latest
 
     steps:
@@ -18,25 +18,19 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ env.node-version }}
-      - name: Use seo-scripts directory
-        run: cd ./seo-scripts
-      - name: Install dependencies
-        run: npm i
-      - name: Build sitemaps
-        run: npm run build
-      - name: Compress sitemaps
-        run: tar czf ./public/sitemap.tar.gz ./public/sitemap
-      - name: Archive sitemaps
+      - name: Install dependencies in /seo-scripts
+        run: |
+          cd ./seo-scripts
+          npm i
+      - name: Run /seo-script/index.ts
+        run: |
+          cd ./seo-scripts
+          npm run build:seo
+      - name: Compress seo-files
+        run: tar czf ./seo-scripts/seo-files.tar.gz ./seo-scripts/dist
+      - name: Archive seo-files
         uses: actions/upload-artifact@v3
         with:
-          name: sitemap
+          name: seo-files
           path: |
-            ./public/sitemap.tar.gz
-      - name: Compress page tree
-        run: tar czf ./public/departements.tar.gz ./public/departements
-      - name: Archive sitemaps
-        uses: actions/upload-artifact@v3
-        with:
-          name: departements
-          path: |
-            ./public/departements.tar.gz
+            ./seo-scripts/seo-files.tar.gz

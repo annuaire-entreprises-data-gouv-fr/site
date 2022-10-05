@@ -1,5 +1,5 @@
 import * as axios from 'axios';
-import fs from 'fs';
+import * as fs from 'fs';
 
 const SOURCE_URL =
   'https://object.files.data.gouv.fr/opendata/ae/sitemap-prod.csv';

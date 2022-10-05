@@ -35,7 +35,7 @@ const ResultsList: React.FC<IProps> = ({
         <a
           href={`/entreprise/${result.chemin}`}
           key={result.siret}
-          className="result-link dont-apply-link-style"
+          className="result-link no-style-link"
           data-siren={result.siren}
         >
           <div className="title">
@@ -62,7 +62,6 @@ const ResultsList: React.FC<IProps> = ({
       .results-list > a {
         text-decoration: none;
         border: none;
-        box-shadow: none;
         color: #333;
         margin: 20px 0;
         display: block;

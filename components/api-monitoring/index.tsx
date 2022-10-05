@@ -3,6 +3,7 @@ import { IMonitoring, IRatio } from '../../models/monitoring';
 import InformationTooltip from '../../components-ui/information-tooltip';
 import { Section } from '../section';
 import { Tag } from '../../components-ui/tag';
+import { information } from '../../components-ui/icon';
 
 const getUptimeColor = (ratio: IRatio) => {
   if (!ratio.isActive) {
@@ -126,11 +127,11 @@ const RobotTooltip = () => (
       orientation="right"
       label="Ces données sont obtenues via un robot qui interroge la source de données toutes les 5 minutes"
     >
-      <span className="fr-fi-information-line"></span>
+      <span>{information}</span>
     </InformationTooltip>
     <style jsx>{`
-      span.fr-fi-information-line:before {
-        font-size: 1rem !important;
+      span {
+        color: #000091;
       }
     `}</style>
   </>

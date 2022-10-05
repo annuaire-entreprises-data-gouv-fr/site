@@ -1,4 +1,5 @@
 import React from 'react';
+import { information } from '../../components-ui/icon';
 import HeaderSearch from './header-search';
 
 const Header = () => (
@@ -25,11 +26,8 @@ const Header = () => (
               <div className="fr-header__tools-links">
                 <ul className="fr-links-group">
                   <li>
-                    <a
-                      className="fr-link fr-fi-information-line"
-                      href="/comment-ca-marche"
-                    >
-                      À propos
+                    <a className="fr-link" href="/comment-ca-marche">
+                      {information} À propos
                     </a>
                   </li>
                 </ul>
@@ -40,8 +38,9 @@ const Header = () => (
       </div>
     </header>
     <style jsx>{`
-      header.fr-header {
-        box-shadow: none !important;
+      header.fr-header,
+      div.fr-header__brand {
+        background-color: transparent !important;
       }
     `}</style>
   </>

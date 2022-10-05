@@ -9,7 +9,7 @@ import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
 import BreakPageForPrint from '../../components-ui/print-break-page';
 import ButtonLink from '../../components-ui/button';
-import { Closed, download, Open } from '../../components-ui/icon';
+import { closed, download, open } from '../../components-ui/icon';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../../components-ui/print-visibility';
@@ -41,13 +41,9 @@ const ImmatriculationRNM: React.FC<IProps> = ({
       'Statut',
       <>
         {immatriculation.dateRadiation ? (
-          <b>
-            <Closed /> Radiée
-          </b>
+          <b>{closed} Radiée</b>
         ) : (
-          <b>
-            <Open /> Inscrite
-          </b>
+          <b>{open} Inscrite</b>
         )}
       </>,
     ],
