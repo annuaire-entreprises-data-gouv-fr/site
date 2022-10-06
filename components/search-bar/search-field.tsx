@@ -16,7 +16,6 @@ const SearchField = ({
       type="search"
       id="search-input-input"
       name="terme"
-      required
       autoComplete="off"
       autoFocus={autoFocus}
     />

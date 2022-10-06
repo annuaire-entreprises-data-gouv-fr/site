@@ -1,8 +1,5 @@
 import { building, humanPin, mapPin } from '../components-ui/icon';
-import {
-  libelleFromDepartement,
-  libelleFromeCodeCategorie,
-} from '../utils/labels';
+import { libelleFromDepartement } from '../utils/labels';
 
 export interface IParams {
   sap?: string;
@@ -36,8 +33,8 @@ class SearchFilterParams {
       code_postal: this.params.cp,
       section_activite_principale: this.params.sap,
       departements: this.params.dep,
-      firstName: this.params.fn,
-      name: this.params.n,
+      prenoms_dirigeant: this.params.fn,
+      nom_dirigeant: this.params.n,
     });
   }
   public toURI() {

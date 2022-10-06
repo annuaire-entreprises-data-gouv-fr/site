@@ -55,7 +55,11 @@ const AdvancedSearchFields: React.FC<{
             />
           </div>
         </FieldGroup>
-        <FieldGroup icon={humanPin} label="Dirigeant" defaultValue={false}>
+        <FieldGroup
+          icon={humanPin}
+          label="Dirigeant"
+          defaultValue={!!fn || !!n}
+        >
           <div className="field-in-line">
             <input
               className="fr-input"
