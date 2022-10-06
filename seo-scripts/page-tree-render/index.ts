@@ -48,7 +48,7 @@ const renderDepartementsPage = (departments: any[]) => {
 const renderNafsPage = (dep: string, nafs: any[]) => {
   const navBlock = renderNav([
     ['Tous les départements', '/departements/index.html'],
-    ['→ ' + libelleFromDepartement(dep), ''],
+    [libelleFromDepartement(dep), ''],
   ]);
 
   const titleBlock = `<h1>Les personnes morales par activité dans le département ${libelleFromDepartement(
@@ -82,8 +82,8 @@ const renderResultsPage = (
 
   const navBlock = renderNav([
     ['Tous les départements', '/departements/deinx.html'],
-    ['→ ' + libelleFromDepartement(dep), `/departements/${depUrl}/index.html`],
-    ['→ ' + labelNaf, ''],
+    [libelleFromDepartement(dep), `/departements/${depUrl}/index.html`],
+    [labelNaf, ''],
   ]);
 
   const titleBlock = `<h1>${labelNaf} dans le département ${libelleFromDepartement(

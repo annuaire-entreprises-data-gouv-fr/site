@@ -78,10 +78,12 @@ class PageTreeBuilder {
         const pageCount = Math.ceil(sirenList.length / 100);
 
         for (let pageNumber = 0; pageNumber < pageCount; pageNumber++) {
+          const start = pageNumber * 100;
           const next100 = sirenList.slice(
-            pageNumber * 100,
-            Math.min(sirenList.length, pageNumber * 101)
+            start,
+            Math.min(sirenList.length, start + 100)
           );
+
           const resultsPage = renderResultsPage(
             dep,
             naf,
@@ -95,6 +97,7 @@ class PageTreeBuilder {
             resultsPage
           );
         }
+        throw new Error('STOP');
       });
     });
     console.log(`💾 Page tree pages : ${this.pageCount}`);
