@@ -152,6 +152,11 @@ const Footer = () => (
             </a>
           </li>
           <li className="fr-footer__bottom-item">
+            <a className="fr-footer__bottom-link" href="/departements">
+              Personnes morales par départements
+            </a>
+          </li>
+          <li className="fr-footer__bottom-item">
             <a className="fr-footer__bottom-link" href="/administration">
               Administrations partenaires
             </a>

@@ -30,6 +30,7 @@ export interface IEtablissement {
   dateFermeture: string | null;
   dateDebutActivite: string;
   adresse: string;
+  codePostal: string;
   activitePrincipale: string;
   libelleActivitePrincipale: string;
   trancheEffectif: string;
@@ -66,7 +67,6 @@ export interface IUniteLegale extends IEtablissementsList {
   trancheEffectif: string;
   libelleTrancheEffectif: string | null;
   libelleCategorieEntreprise: string | null;
-  adresse: string;
   association: IAssociation | null;
   dirigeant: IEtatCivil | null;
 }
@@ -144,6 +144,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     dateDebutActivite: '',
     dateFermeture: '',
     adresse: '',
+    codePostal: '',
     activitePrincipale: '',
     libelleActivitePrincipale: '',
     trancheEffectif: '',
@@ -180,7 +181,6 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     trancheEffectif: '',
     libelleCategorieEntreprise: null,
     libelleTrancheEffectif: null,
-    adresse: '',
     association: null,
     dirigeant: null,
   };

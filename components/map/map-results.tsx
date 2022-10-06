@@ -23,7 +23,7 @@ const MapResults: React.FC<{ results: ISearchResult[] }> = ({ results }) => (
 
                 var popup = new maplibregl.Popup({ offset: 25 }).setHTML(
                 '<div><b>'+uniteLegale.nomComplet+'</b></div>'+
-                '<div><i>'+uniteLegale.adresse+'</i></div>'+
+                '<div><i>'+uniteLegale.siege.adresse+'</i></div>'+
                 '<div><a href="/entreprise/'+uniteLegale.siren+'">⇢ Accéder à la fiche entreprise</a></div>'
                 );
 

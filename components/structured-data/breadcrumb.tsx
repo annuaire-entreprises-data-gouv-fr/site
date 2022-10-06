@@ -1,28 +1,55 @@
 import React from 'react';
-import { Siren } from '../../utils/helpers/siren-and-siret';
+import { IUniteLegale } from '../../models';
+import { getUrlFromDep } from '../../seo-scripts/page-tree-render';
+import {
+  getDepartementFromCodePostal,
+  libelleFromDepartement,
+} from '../../utils/labels';
 
-const StructuredDataBreadcrumb: React.FC<{ siren: Siren }> = ({ siren }) => (
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: `
+const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
+  uniteLegale,
+}) => {
+  try {
+    const naf = uniteLegale.activitePrincipale;
+    const dep = getDepartementFromCodePostal(uniteLegale.siege.codePostal);
+    const depUrl = getUrlFromDep(dep || '');
+
+    if (!dep || !depUrl || !naf) {
+      throw new Error();
+    }
+
+    return (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: `
         {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [{
             "@type": "ListItem",
             "position": 1,
-            "name": "Rechercher une entreprise",
-            "item": "https://annuaire-entreprises.data.gouv.fr"
+            "name": "Entreprises par départements",
+            "item": "https://annuaire-entreprises.data.gouv.fr/departements/index.html"
           },{
             "@type": "ListItem",
             "position": 2,
-            "name": "${siren}",
-            "item": "https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}"
+            "name": "${libelleFromDepartement(dep)}",
+            "item": "https://annuaire-entreprises.data.gouv.fr/departements/${depUrl}/index.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "${naf}",
+            "item": "https://annuaire-entreprises.data.gouv.fr/departements/${depUrl}/${naf}/1.html"
           }]
         }`,
-    }}
-  />
-);
+        }}
+      />
+    );
+  } catch {
+    return null;
+  }
+};
 
 export default StructuredDataBreadcrumb;
