@@ -22,6 +22,7 @@ interface IProps extends IPropsWithMetadata {
   searchTerm: string;
   results: ISearchResults;
   searchFilterParams: IParams;
+  hasParam: boolean;
 }
 
 const SearchResultPage: React.FC<IProps> = ({
@@ -29,6 +30,7 @@ const SearchResultPage: React.FC<IProps> = ({
   searchTerm,
   searchFilterParams,
   metadata,
+  hasParam = false,
 }) => (
   <Page
     small={true}
@@ -49,6 +51,7 @@ const SearchResultPage: React.FC<IProps> = ({
             resultCount={results.resultCount}
             searchTerm={searchTerm}
             currentPage={results.currentPage}
+            searchFilterParams={searchFilterParams}
           />
           {results && (
             <div>
@@ -67,9 +70,7 @@ const SearchResultPage: React.FC<IProps> = ({
                 position={results.currentPage - 1}
                 resultCount={results.resultCount}
                 searchTerm={searchTerm}
-                isAdvancedSearch={SearchFilterParams.hasParam(
-                  searchFilterParams
-                )}
+                isAdvancedSearch={hasParam}
               />
             </div>
           )}
@@ -86,10 +87,6 @@ const SearchResultPage: React.FC<IProps> = ({
   </Page>
 );
 
-const sleep = async (timeout: number) => {
-  return new Promise((resolve, reject) => setTimeout(resolve, timeout));
-};
-
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     // get params from query string
@@ -97,6 +94,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const pageParam = (context.query.page || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
     const searchFilterParams = new SearchFilterParams(context.query);
+    const hasParam = searchFilterParams.hasParam();
 
     const results = (await search(searchTerm, page, searchFilterParams)) || {};
     return {
@@ -104,6 +102,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
         results,
         searchTerm,
         searchFilterParams: searchFilterParams.toJSON(),
+        hasParam,
       },
     };
   }

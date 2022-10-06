@@ -1,50 +1,97 @@
-import { ParsedUrlQuery } from 'querystring';
+import { building, humanPin, mapPin } from '../components-ui/icon';
+import {
+  libelleFromDepartement,
+  libelleFromeCodeCategorie,
+} from '../utils/labels';
 
 export interface IParams {
-  section_activite_principale: string;
-  code_postal: string;
-  departement: string;
+  sap?: string;
+  cp?: string;
+  dep?: string;
+  fn?: string;
+  n?: string;
 }
 
 class SearchFilterParams {
   private params: IParams;
 
-  constructor(query: ParsedUrlQuery | IParams = {}) {
-    const section_activite_principale = (query.section_activite_principale ||
-      '') as string;
-    const code_postal = (query.code_postal || '') as string;
-    const departement = (query.departement || '') as string;
+  constructor(query: IParams = {}) {
+    const { sap = '', dep = '', cp = '', fn = '', n = '' } = query;
 
     this.params = {
-      section_activite_principale,
-      code_postal,
-      departement,
+      sap,
+      cp,
+      dep,
+      fn,
+      n,
     };
   }
 
   public toJSON() {
-    return this.params || {};
+    return this.params;
   }
 
-  toURI() {
-    return Object.keys(this.params).reduce((uri, key) => {
-      //@ts-ignore
-      const value = this.params[key];
+  public toApiURI() {
+    return this.serialize({
+      code_postal: this.params.cp,
+      section_activite_principale: this.params.sap,
+      departements: this.params.dep,
+      firstName: this.params.fn,
+      name: this.params.n,
+    });
+  }
+  public toURI() {
+    return this.serialize(this.params);
+  }
+  public toFilters() {
+    const filters = [];
+    if (this.params.fn || this.params.n) {
+      filters.push({
+        icon: humanPin,
+        label: `${this.params.fn} ${this.params.n}`,
+        url: this.serialize(this.params, ['fn', 'n']),
+      });
+    }
+    if (this.params.sap) {
+      filters.push({
+        icon: building,
+        label: this.params.sap,
+        url: this.serialize(this.params, ['sap']),
+      });
+    }
+    if (this.params.cp) {
+      filters.push({
+        icon: mapPin,
+        label: this.params.cp,
+        url: this.serialize(this.params, ['cp']),
+      });
+    }
+    if (this.params.dep) {
+      filters.push({
+        icon: mapPin,
+        label: libelleFromDepartement(this.params.dep),
+        url: this.serialize(this.params, ['dep']),
+      });
+    }
 
-      if (!!value) {
+    return filters;
+  }
+
+  private serialize(obj: object, exclude: string[] = []) {
+    return Object.entries(obj).reduce((uri, [key, value]) => {
+      if (!!value && exclude.indexOf(key) === -1) {
         uri += `&${key}=${value}`;
       }
       return uri;
     }, '');
   }
 
-  isEmpty() {
+  public isEmpty() {
     return Object.values(this.params).some((v) => v !== '');
   }
 
-  static hasParam(params: IParams) {
-    const p = new SearchFilterParams(params);
-    return p.isEmpty();
+  public hasParam() {
+    return this.isEmpty();
   }
 }
 

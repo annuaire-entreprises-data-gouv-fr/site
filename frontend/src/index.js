@@ -3,6 +3,7 @@ import './helpers-feedbacks';
 import './async-client-update';
 import './inpi-pdf-download';
 import './load-bar';
+import './advanced-search';
 
 import './sentry';
 

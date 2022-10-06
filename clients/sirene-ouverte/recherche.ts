@@ -70,7 +70,7 @@ const getResults = async (
       : routes.sireneOuverte.rechercheUniteLegale);
 
   const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
-    searchFilterParams?.toURI() || ''
+    searchFilterParams?.toApiURI() || ''
   }`;
   const timeout = fallbackOnStaging
     ? constants.timeout.XL

@@ -58,6 +58,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
                     searchTerm={searchTerm}
                     currentPage={results.currentPage}
                     isMap={true}
+                    searchFilterParams={searchFilterParams}
                   />
                 </div>
                 <ResultsList results={results.results} />
@@ -78,6 +79,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
             resultCount={results.resultCount}
             searchTerm={searchTerm}
             currentPage={results.currentPage}
+            searchFilterParams={searchFilterParams}
           />
         )}
       </>
