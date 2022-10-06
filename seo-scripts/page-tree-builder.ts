@@ -97,7 +97,6 @@ class PageTreeBuilder {
             resultsPage
           );
         }
-        throw new Error('STOP');
       });
     });
     console.log(`💾 Page tree pages : ${this.pageCount}`);
