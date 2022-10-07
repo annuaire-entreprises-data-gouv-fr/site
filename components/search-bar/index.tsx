@@ -9,12 +9,14 @@ const SearchBar: React.FC<{
   url?: string;
   currentSearchTerm?: string;
   searchFilterParams?: IParams;
+  advanced: boolean;
 }> = ({
   placeholder = 'Nom, adresse, n° SIRET/SIREN...',
   currentSearchTerm = '',
   url = '/rechercher',
   autoFocus = false,
   searchFilterParams,
+  advanced = true,
 }) => {
   return (
     <form id="search-bar-form" action={url} method="get">
@@ -23,14 +25,19 @@ const SearchBar: React.FC<{
         defaultValue={currentSearchTerm}
         autoFocus={autoFocus}
       />
-      <input
-        className="toggle-advanced-search"
-        id="toggle-advanced-search"
-        type="checkbox"
-      />
-      <div id="advanced-search-container">
-        <AdvancedSearchFields searchFilterParams={searchFilterParams} />
-      </div>
+      {advanced ? (
+        <>
+          <input
+            className="toggle-advanced-search"
+            id="toggle-advanced-search"
+            type="checkbox"
+          />
+          <div id="advanced-search-container">
+            <AdvancedSearchFields searchFilterParams={searchFilterParams} />
+          </div>
+        </>
+      ) : null}
+
       <style jsx>{`
         form {
           width: 100%;

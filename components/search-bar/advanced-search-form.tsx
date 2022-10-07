@@ -110,6 +110,8 @@ const AdvancedSearchFields: React.FC<{
           border-top: none;
           padding: 10px;
           width: 100%;
+          border-bottom-left-radius: 3px;
+          border-bottom-right-radius: 3px;
         }
 
         div.select {

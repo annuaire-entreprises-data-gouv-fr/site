@@ -90,6 +90,14 @@ const DirigeantsSection: React.FC<IProps> = ({
         ['Nom', (dirigeant.nom || '').toUpperCase()],
         ['Prénom', dirigeant.prenom],
         ['Année de naissance', dirigeant.dateNaissance],
+        [
+          '',
+          <a
+            href={`/rechercher?n=${dirigeant.nom}&fn=${dirigeant.prenom}&dmin=${dirigeant.dateNaissance}-01-01&dmax=${dirigeant.dateNaissance}-01-01`}
+          >
+            → rechercher ses entreprises
+          </a>,
+        ],
       ];
     }
   };
