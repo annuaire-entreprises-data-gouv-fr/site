@@ -1,4 +1,4 @@
-import SearchFilterParams, { IParams } from '../../models/search-filter-params';
+import { extractFilters, IParams } from '../../models/search-filter-params';
 
 const Filter: React.FC<{
   label?: string;
@@ -39,10 +39,9 @@ const SelectedFilters: React.FC<{
   searchFilterParams: IParams;
   searchTerm: string;
 }> = ({ searchFilterParams, searchTerm }) => {
-  const searchParams = new SearchFilterParams(searchFilterParams);
   return (
     <div>
-      {searchParams.toFilters().map(({ icon, label, url }) => (
+      {extractFilters(searchFilterParams).map(({ icon, label, url }) => (
         <Filter icon={icon} label={label} url={`?terme=${searchTerm}${url}`} />
       ))}
       <style jsx>{`

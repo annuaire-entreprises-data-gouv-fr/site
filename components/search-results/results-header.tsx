@@ -1,17 +1,25 @@
 import React from 'react';
 import { mapPin } from '../../components-ui/icon';
-import { hasSearchParam, IParams } from '../../models/search-filter-params';
+import {
+  serializeParams,
+  IParams,
+  hasSearchParam,
+} from '../../models/search-filter-params';
 import MatomoEventSearchClick from '../matomo-event/search-click';
 import ResultsFilters from './results-filters';
 
-const MapOrListSwitch = ({ isMap = false, searchTerm = '' }) => (
+const MapOrListSwitch = ({
+  isMap = false,
+  searchTerm = '',
+  paramsSuffix = '',
+}) => (
   <>
     {isMap ? (
-      <a href={`/rechercher/?terme=${searchTerm}`}>
+      <a href={`/rechercher/?terme=${searchTerm}${paramsSuffix}`}>
         Afficher les résultats sous forme de liste
       </a>
     ) : (
-      <a href={`/rechercher/carte?terme=${searchTerm}`}>
+      <a href={`/rechercher/carte?terme=${searchTerm}${paramsSuffix}`}>
         {mapPin} Afficher sur une carte
       </a>
     )}
@@ -49,7 +57,11 @@ const ResultsHeader: React.FC<{
             searchTerm={searchTerm}
             searchFilterParams={searchFilterParams}
           />
-          <MapOrListSwitch isMap={isMap} searchTerm={searchTerm} />
+          <MapOrListSwitch
+            isMap={isMap}
+            searchTerm={searchTerm}
+            paramsSuffix={serializeParams(searchFilterParams)}
+          />
         </div>
       ) : (
         <div className="no-results">

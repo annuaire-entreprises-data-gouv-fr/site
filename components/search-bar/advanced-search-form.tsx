@@ -14,7 +14,7 @@ import FieldGroup from './advanced-search-group';
 const AdvancedSearchFields: React.FC<{
   searchFilterParams?: IParams;
 }> = ({ searchFilterParams }) => {
-  const { cp, sap, dep, fn, n } = searchFilterParams || {};
+  const { cp, sap, dep, fn, n, dmin, dmax } = searchFilterParams || {};
 
   return (
     <>
@@ -74,6 +74,23 @@ const AdvancedSearchFields: React.FC<{
               autoComplete="off"
               placeholder="Nom"
               defaultValue={n}
+            />
+          </div>
+          <label>Plage de date de naissance</label>
+          <div className="field-in-line">
+            <input
+              className="fr-input"
+              type="date"
+              id="start"
+              name="dmin"
+              defaultValue={dmin}
+            />
+            <input
+              className="fr-input"
+              type="date"
+              id="end"
+              name="dmax"
+              defaultValue={dmax}
             />
           </div>
         </FieldGroup>
