@@ -17,18 +17,18 @@ const MapResults: React.FC<{ results: ISearchResult[] }> = ({ results }) => (
               center: [2, 46], // starting position [lng, lat]
               zoom: 4.5 // starting zoom
             });
-            var uniteLegales = ${JSON.stringify(results)};
-            for (var i = 0; i < uniteLegales.length; i++) {
-                var uniteLegale = uniteLegales[i];
+            var results = ${JSON.stringify(results)};
+            for (var i = 0; i < results.length; i++) {
+                var result = results[i];
 
                 var popup = new maplibregl.Popup({ offset: 25 }).setHTML(
-                '<div><b>'+uniteLegale.nomComplet+'</b></div>'+
-                '<div><i>'+uniteLegale.siege.adresse+'</i></div>'+
-                '<div><a href="/entreprise/'+uniteLegale.siren+'">⇢ Accéder à la fiche entreprise</a></div>'
+                '<div><b>'+result.nomComplet+'</b></div>'+
+                '<div><i>'+result.adresse+'</i></div>'+
+                '<div><a href="/entreprise/'+result.siren+'">⇢ Accéder à la fiche entreprise</a></div>'
                 );
 
                 new maplibregl.Marker({ color: '#000091' })
-                .setLngLat([uniteLegale.longitude,uniteLegale.latitude])
+                .setLngLat([result.longitude,result.latitude])
                 .setPopup(popup)
                 .addTo(map);
             }
