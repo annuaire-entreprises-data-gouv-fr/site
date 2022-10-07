@@ -6,9 +6,14 @@ const Filter: React.FC<{
   url: string;
 }> = ({ label, icon = null, url }) => (
   <div className="selected-filter-container">
-    {icon}&nbsp;
-    {label}&nbsp;
-    <a href={url}>
+    {icon}
+    <span
+      dangerouslySetInnerHTML={{
+        __html: `<span class="advanced-search-filter" onclick="window.openAdvancedSearch()">&nbsp;
+    ${label}&nbsp;</span>`,
+      }}
+    />
+    <a className="no-style-link" href={url}>
       <b>✕</b>
     </a>
     <style jsx>{`
@@ -20,18 +25,25 @@ const Filter: React.FC<{
         background-color: #dfdff1;
         border-radius: 5px;
       }
+      .selected-filter-container span {
+        cursor: pointer;
+      }
+      .selected-filter-container b {
+        margin: 0 5px;
+      }
     `}</style>
   </div>
 );
 
 const SelectedFilters: React.FC<{
   searchFilterParams: IParams;
-}> = ({ searchFilterParams }) => {
+  searchTerm: string;
+}> = ({ searchFilterParams, searchTerm }) => {
   const searchParams = new SearchFilterParams(searchFilterParams);
   return (
     <div>
       {searchParams.toFilters().map(({ icon, label, url }) => (
-        <Filter icon={icon} label={label} url={url} />
+        <Filter icon={icon} label={label} url={`?terme=${searchTerm}${url}`} />
       ))}
       <style jsx>{`
         div {
@@ -39,6 +51,7 @@ const SelectedFilters: React.FC<{
           flex-grow: 1;
           display: flex;
           align-items: start;
+          flex-wrap: wrap;
           gap: 5px;
         }
       `}</style>

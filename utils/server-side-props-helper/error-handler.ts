@@ -5,6 +5,7 @@ import {
   IsLikelyASirenOrSiretException,
   NotASirenError,
   NotASiretError,
+  NotEnoughSearchParamsException,
   NotLuhnValidSirenError,
   NotLuhnValidSiretError,
   SirenNotFoundError,
@@ -17,6 +18,7 @@ import {
 } from '../helpers/siren-and-siret';
 import {
   redirectIfSiretOrSiren,
+  redirectNotEnoughParams,
   redirectPageNotFound,
   redirectServerError,
   redirectSirenOrSiretIntrouvable,
@@ -28,7 +30,9 @@ const handleExceptions = (exception: any, req: IncomingMessage | undefined) => {
     const message = exception.message;
     const scope = getScope(req, message);
 
-    if (exception instanceof IsLikelyASirenOrSiretException) {
+    if (exception instanceof NotEnoughSearchParamsException) {
+      return redirectNotEnoughParams();
+    } else if (exception instanceof IsLikelyASirenOrSiretException) {
       return redirectIfSiretOrSiren(message);
     } else if (
       exception instanceof SirenNotFoundError ||

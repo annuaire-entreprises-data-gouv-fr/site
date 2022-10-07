@@ -1,6 +1,6 @@
 const pages = [
   '/',
-  '/rechercher?term=kikou',
+  '/rechercher?terme=kikou',
   '/comment-ca-marche',
   '/faq',
   '/accessibilite',

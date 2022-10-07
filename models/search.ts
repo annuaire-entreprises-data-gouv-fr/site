@@ -1,4 +1,7 @@
-import { IsLikelyASirenOrSiretException } from '.';
+import {
+  IsLikelyASirenOrSiretException,
+  NotEnoughSearchParamsException,
+} from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import getResults from '../clients/sirene-ouverte/recherche';
 import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
@@ -6,7 +9,7 @@ import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administrations';
 import { APINotRespondingFactory } from './api-not-responding';
-import SearchFilterParams from './search-filter-params';
+import SearchFilterParams, { hasSearchParam } from './search-filter-params';
 
 export interface ISearchResult {
   siren: string;
@@ -27,6 +30,7 @@ export interface ISearchResults {
   resultCount: number;
   pageCount: number;
   results: ISearchResult[];
+  notEnoughParams?: boolean;
 }
 
 const noResults = {
@@ -34,6 +38,7 @@ const noResults = {
   resultCount: 0,
   pageCount: 0,
   results: [],
+  notEnoughParams: false,
 };
 
 const search = async (
@@ -42,6 +47,13 @@ const search = async (
   searchFilterParams: SearchFilterParams
 ) => {
   const cleanedTerm = cleanSearchTerm(searchTerm);
+
+  const hasEnoughParams =
+    searchTerm.length >= 2 || hasSearchParam(searchFilterParams.toJSON());
+
+  if (!hasEnoughParams) {
+    return { ...noResults, notEnoughParams: true };
+  }
 
   const likelyASiretOrSiren = isLikelyASiretOrSiren(cleanedTerm);
 

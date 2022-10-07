@@ -1,5 +1,8 @@
 import { building, humanPin, mapPin } from '../components-ui/icon';
-import { libelleFromDepartement } from '../utils/labels';
+import {
+  libelleFromCodeSectionNaf,
+  libelleFromDepartement,
+} from '../utils/labels';
 
 export interface IParams {
   sap?: string;
@@ -7,6 +10,7 @@ export interface IParams {
   dep?: string;
   fn?: string;
   n?: string;
+  isEmpty?: boolean;
 }
 
 class SearchFilterParams {
@@ -25,7 +29,7 @@ class SearchFilterParams {
   }
 
   public toJSON() {
-    return this.params;
+    return { ...this.params };
   }
 
   public toApiURI() {
@@ -45,14 +49,14 @@ class SearchFilterParams {
     if (this.params.fn || this.params.n) {
       filters.push({
         icon: humanPin,
-        label: `${this.params.fn} ${this.params.n}`,
+        label: `${this.params.fn}${this.params.n ? ` ${this.params.n}` : ''}`,
         url: this.serialize(this.params, ['fn', 'n']),
       });
     }
     if (this.params.sap) {
       filters.push({
         icon: building,
-        label: this.params.sap,
+        label: libelleFromCodeSectionNaf(this.params.sap),
         url: this.serialize(this.params, ['sap']),
       });
     }
@@ -82,14 +86,10 @@ class SearchFilterParams {
       return uri;
     }, '');
   }
-
-  public isEmpty() {
-    return Object.values(this.params).some((v) => v !== '');
-  }
-
-  public hasParam() {
-    return this.isEmpty();
-  }
 }
+
+export const hasSearchParam = (params: object) => {
+  return Object.values(params).some((v) => v !== '');
+};
 
 export default SearchFilterParams;

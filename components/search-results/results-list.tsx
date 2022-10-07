@@ -29,7 +29,8 @@ const ResultsList: React.FC<IProps> = ({
   withFeedback = false,
   searchTerm = '',
 }) => (
-  <div className="results-wrapper">
+  <>
+    {withFeedback && <SearchFeedback searchTerm={searchTerm} />}
     <div className="results-list">
       {results.map((result) => (
         <a
@@ -52,13 +53,7 @@ const ResultsList: React.FC<IProps> = ({
         </a>
       ))}
     </div>
-    {withFeedback && <SearchFeedback searchTerm={searchTerm} />}
     <style jsx>{`
-      .results-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-      }
       .results-list > a {
         text-decoration: none;
         border: none;
@@ -85,14 +80,8 @@ const ResultsList: React.FC<IProps> = ({
         color: #707070;
         font-variant: all-small-caps;
       }
-
-      @media only screen and (min-width: 1px) and (max-width: 900px) {
-        .results-wrapper {
-          flex-direction: column-reverse;
-        }
-      }
     `}</style>
-  </div>
+  </>
 );
 
 export default ResultsList;
