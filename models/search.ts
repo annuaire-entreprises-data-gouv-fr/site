@@ -1,7 +1,4 @@
-import {
-  IsLikelyASirenOrSiretException,
-  NotEnoughSearchParamsException,
-} from '.';
+import { IsLikelyASirenOrSiretException } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import getResults from '../clients/sirene-ouverte/recherche';
 import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
