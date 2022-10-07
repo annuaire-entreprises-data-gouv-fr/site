@@ -41,38 +41,36 @@ class SearchFilterParams {
       nom_dirigeant: this.params.n,
     });
   }
+
   public toURI() {
     return this.serialize(this.params);
   }
+
   public toFilters() {
-    const filters = [];
-    if (this.params.fn || this.params.n) {
+    const filters: { icon: JSX.Element; label: string; url: string }[] = [];
+    const add = (icon: JSX.Element, label: string, excludeParams: string[]) => {
       filters.push({
-        icon: humanPin,
-        label: `${this.params.fn}${this.params.n ? ` ${this.params.n}` : ''}`,
-        url: this.serialize(this.params, ['fn', 'n']),
+        icon,
+        label,
+        url: this.serialize(this.params, excludeParams),
       });
+    };
+
+    if (this.params.fn || this.params.n) {
+      add(
+        humanPin,
+        `${this.params.fn}${this.params.n ? ` ${this.params.n}` : ''}`,
+        ['fn', 'n']
+      );
     }
     if (this.params.sap) {
-      filters.push({
-        icon: building,
-        label: libelleFromCodeSectionNaf(this.params.sap),
-        url: this.serialize(this.params, ['sap']),
-      });
+      add(building, libelleFromCodeSectionNaf(this.params.sap), ['sap']);
     }
     if (this.params.cp) {
-      filters.push({
-        icon: mapPin,
-        label: this.params.cp,
-        url: this.serialize(this.params, ['cp']),
-      });
+      add(mapPin, this.params.cp, ['cp']);
     }
     if (this.params.dep) {
-      filters.push({
-        icon: mapPin,
-        label: libelleFromDepartement(this.params.dep),
-        url: this.serialize(this.params, ['dep']),
-      });
+      add(mapPin, libelleFromDepartement(this.params.dep), ['dep']);
     }
 
     return filters;
