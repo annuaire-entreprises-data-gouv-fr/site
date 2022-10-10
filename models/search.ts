@@ -72,7 +72,12 @@ const search = async (
     // attempt a fallback on staging
     try {
       const escapedSearchTerm = escapeTerm(searchTerm);
-      return await getResults(escapedSearchTerm, page, searchFilterParams);
+      return await getResults(
+        escapedSearchTerm,
+        page,
+        searchFilterParams,
+        true
+      );
     } catch (eFallback: any) {
       if (eFallback instanceof HttpNotFound) {
         return noResults;
