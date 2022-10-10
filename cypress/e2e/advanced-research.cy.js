@@ -29,3 +29,20 @@ paths.forEach((path) => {
     });
   });
 });
+
+describe('Minimum search conditions', () => {
+  it('No results if term < 3 and no filters', () => {
+    cy.visit('/rechercher?terme=ga');
+    cy.contains('ne contient pas assez de paramètres').should('have.length', 1);
+  });
+
+  it('Results if term >= 3 and no filters', () => {
+    cy.visit('/rechercher?terme=aga');
+    cy.contains('ne contient pas assez de paramètres').should('have.length', 0);
+  });
+
+  it('Results if term < 3 and filters', () => {
+    cy.visit('/rechercher?terme=ag&code_postal=35000');
+    cy.contains('ne contient pas assez de paramètres').should('have.length', 0);
+  });
+});

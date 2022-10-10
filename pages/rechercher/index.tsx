@@ -49,6 +49,7 @@ const SearchResultPage: React.FC<IProps> = ({
             resultCount={results.resultCount}
             searchTerm={searchTerm}
             currentPage={results.currentPage}
+            notEnoughParams={results.notEnoughParams}
           />
           {results && (
             <div>

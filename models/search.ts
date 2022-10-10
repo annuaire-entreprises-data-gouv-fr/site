@@ -27,6 +27,7 @@ export interface ISearchResults {
   resultCount: number;
   pageCount: number;
   results: ISearchResult[];
+  notEnoughParams?: boolean;
 }
 
 const noResults = {
@@ -34,6 +35,7 @@ const noResults = {
   resultCount: 0,
   pageCount: 0,
   results: [],
+  notEnoughParams: false,
 };
 
 const search = async (
@@ -42,6 +44,13 @@ const search = async (
   searchFilterParams: SearchFilterParams
 ) => {
   const cleanedTerm = cleanSearchTerm(searchTerm);
+
+  const notEnoughParams =
+    searchTerm.length < 3 && !searchFilterParams.isNotEmpty();
+
+  if (notEnoughParams) {
+    return { ...noResults, notEnoughParams: true };
+  }
 
   const likelyASiretOrSiren = isLikelyASiretOrSiren(cleanedTerm);
 

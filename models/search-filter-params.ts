@@ -38,13 +38,13 @@ class SearchFilterParams {
     }, '');
   }
 
-  isEmpty() {
+  isNotEmpty() {
     return Object.values(this.params).some((v) => v !== '');
   }
 
   static hasParam(params: IParams) {
     const p = new SearchFilterParams(params);
-    return p.isEmpty();
+    return p.isNotEmpty();
   }
 }
 
