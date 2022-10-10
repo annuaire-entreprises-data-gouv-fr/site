@@ -176,7 +176,7 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           # we have already installed all dependencies above
-          browser: firefox
+          browser: chrome
           record: false
           start: npm start
         env:
