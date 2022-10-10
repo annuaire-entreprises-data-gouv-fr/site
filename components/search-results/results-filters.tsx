@@ -1,10 +1,14 @@
-import { extractFilters, IParams } from '../../models/search-filter-params';
+import {
+  buildSearchQuery,
+  extractFilters,
+  IParams,
+} from '../../models/search-filter-params';
 
 const Filter: React.FC<{
   label?: string;
   icon?: JSX.Element;
-  url: string;
-}> = ({ label, icon = null, url }) => (
+  query: string;
+}> = ({ label, icon = null, query }) => (
   <div className="selected-filter-container">
     {icon}
     <span
@@ -13,7 +17,7 @@ const Filter: React.FC<{
     ${label}&nbsp;</span>`,
       }}
     />
-    <a className="no-style-link" href={url}>
+    <a className="no-style-link" href={query}>
       <b>✕</b>
     </a>
     <style jsx>{`
@@ -41,9 +45,19 @@ const SelectedFilters: React.FC<{
 }> = ({ searchFilterParams, searchTerm }) => {
   return (
     <div>
-      {extractFilters(searchFilterParams).map(({ icon, label, url }) => (
-        <Filter icon={icon} label={label} url={`?terme=${searchTerm}${url}`} />
-      ))}
+      {extractFilters(searchFilterParams).map(
+        ({ icon, label, excludeParams }) => (
+          <Filter
+            icon={icon}
+            label={label}
+            query={buildSearchQuery(
+              searchTerm,
+              searchFilterParams,
+              excludeParams
+            )}
+          />
+        )
+      )}
       <style jsx>{`
         div {
           margin-left: 5px;

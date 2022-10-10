@@ -68,7 +68,7 @@ const ResultsBody: React.FC<{
               <PageCounter
                 totalPages={results.pageCount}
                 currentPage={results.currentPage}
-                querySuffix={`terme=${searchTerm}`}
+                searchTerm={searchTerm}
                 compact={true}
                 searchFilterParams={searchFilterParams}
               />
@@ -142,7 +142,7 @@ const ResultsBody: React.FC<{
           />
           <PageCounter
             totalPages={results.pageCount}
-            querySuffix={`terme=${searchTerm}`}
+            searchTerm={searchTerm}
             currentPage={results.currentPage}
             searchFilterParams={searchFilterParams}
           />

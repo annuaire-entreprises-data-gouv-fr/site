@@ -49,8 +49,8 @@ class SearchFilterParams {
       code_postal: this.params.cp,
       section_activite_principale: this.params.sap,
       departements: this.params.dep,
-      prenoms_dirigeant: this.params.fn,
-      nom_dirigeant: this.params.n,
+      prenoms_dirigeant: this.params.fn?.trim(),
+      nom_dirigeant: this.params.n?.trim(),
       date_naissance_dirigeant_min: this.params.dmin,
       date_naissance_dirigeant_max: this.params.dmax,
     });
@@ -61,25 +61,41 @@ class SearchFilterParams {
   }
 }
 
-export const serializeParams = (
+const serializeParams = (
   params: IParams | object,
-  exclude: string[] = []
+  excludeParams: string[] = []
 ) => {
   return Object.entries(params).reduce((uri, [key, value]) => {
-    if (!!value && exclude.indexOf(key) === -1) {
-      uri += `&${key}=${value}`;
+    if (!!value && excludeParams.indexOf(key) === -1) {
+      uri += `&${key}=${encodeURIComponent(value)}`;
     }
     return uri;
   }, '');
 };
 
+export const buildSearchQuery = (
+  searchTerm: string,
+  params: IParams | object,
+  excludeParams: string[] = []
+) => {
+  return `?terme=${encodeURIComponent(searchTerm)}${serializeParams(
+    params,
+    excludeParams
+  )}`;
+};
+
 export const extractFilters = (params: IParams) => {
-  const filters: { icon: JSX.Element; label: string; url: string }[] = [];
+  const f: {
+    icon: JSX.Element;
+    label: string;
+    excludeParams: string[];
+  }[] = [];
+
   const add = (icon: JSX.Element, label: string, excludeParams: string[]) => {
-    filters.push({
+    f.push({
       icon,
       label,
-      url: serializeParams(params, excludeParams),
+      excludeParams,
     });
   };
 
@@ -99,7 +115,7 @@ export const extractFilters = (params: IParams) => {
     add(mapPin, libelleFromDepartement(params.dep), ['dep']);
   }
 
-  return filters;
+  return f;
 };
 
 export const hasSearchParam = (params: object) => {
