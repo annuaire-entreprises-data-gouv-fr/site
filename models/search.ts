@@ -45,10 +45,10 @@ const search = async (
 ) => {
   const cleanedTerm = cleanSearchTerm(searchTerm);
 
-  const hasEnoughParams =
-    searchTerm.length >= 2 || hasSearchParam(searchFilterParams.toJSON());
+  const notEnoughParams =
+    searchTerm.length < 3 && !hasSearchParam(searchFilterParams.toJSON());
 
-  if (!hasEnoughParams) {
+  if (notEnoughParams) {
     return { ...noResults, notEnoughParams: true };
   }
 
