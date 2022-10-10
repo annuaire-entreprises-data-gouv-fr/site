@@ -100,9 +100,10 @@ export const extractFilters = (params: IParams) => {
   };
 
   if (params.fn || params.n || params.dmin || params.dmax) {
-    const label = `${params.fn}${params.n ? ` ${params.n}` : ''}${
-      params.dmin || params.dmax ? `(plage de date)` : ''
-    }`;
+    const labelDate =
+      params.dmin || params.dmax ? '  filtre sur la date de naissance' : '';
+    const labelName = `${params.fn}${params.n ? ` ${params.n}` : ''}`;
+    const label = `${labelName}${labelDate && labelName && '・'}${labelDate}`;
     add(humanPin, label, ['fn', 'n', 'dmin', 'dmax']);
   }
   if (params.sap) {
