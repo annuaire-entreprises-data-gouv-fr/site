@@ -19,6 +19,7 @@ const ResultsHeader = ({
   resultCount = 0,
   currentPage = 0,
   searchTerm = '',
+  notEnoughParams = false,
   isMap = false,
 }) => {
   return (
@@ -29,6 +30,20 @@ const ResultsHeader = ({
           {resultCount} résultats trouvés pour “<b>{searchTerm}</b>”.
           <MapOrListSwitch isMap={isMap} searchTerm={searchTerm} />
         </div>
+      ) : notEnoughParams ? (
+        <p>
+          Votre requête ne contient pas assez de paramètres de recherche. Vous
+          pouvez :
+          <ul>
+            <li>
+              soit utiliser un terme de recherche plus long (au moins 3 lettres)
+            </li>
+            <li>
+              soit utiliser des critères de recherche géographiques ou
+              administratifs
+            </li>
+          </ul>
+        </p>
       ) : (
         <div className="results-counter">
           Aucune entité n’a été trouvée pour “<b>{searchTerm}</b>”
