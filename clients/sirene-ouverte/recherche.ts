@@ -61,7 +61,7 @@ const getResults = async (
   searchFilterParams?: SearchFilterParams,
   fallbackOnStaging = false
 ): Promise<ISearchResults> => {
-  const encodedTerms = encodeURI(searchTerms);
+  const encodedTerms = encodeURIComponent(searchTerms);
 
   const route =
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
