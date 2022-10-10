@@ -30,7 +30,7 @@ paths.forEach((path) => {
   });
 });
 
-describe('Minimum search conditions ' + path, () => {
+describe('Minimum search conditions', () => {
   it('No results if term < 3 and no filters', () => {
     cy.visit('/rechercher?terme=ga');
     cy.contains('ne contient pas assez de paramètres').should('have.length', 1);

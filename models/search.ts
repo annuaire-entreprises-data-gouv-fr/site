@@ -27,7 +27,7 @@ export interface ISearchResults {
   resultCount: number;
   pageCount: number;
   results: ISearchResult[];
-  notEnoughParams: boolean;
+  notEnoughParams?: boolean;
 }
 
 const noResults = {
