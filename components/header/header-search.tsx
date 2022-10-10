@@ -52,6 +52,7 @@ const HeaderSearch: React.FC<IProps> = ({
                 url={map ? '/rechercher/carte' : '/rechercher'}
                 currentSearchTerm={currentSearchTerm}
                 searchFilterParams={searchFilterParams}
+                useAdvancedSearch={true}
               />
             </div>
           </div>

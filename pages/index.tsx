@@ -14,7 +14,7 @@ const Index: React.FC = () => (
           françaises
         </h2>
         <div className="layout-center search">
-          <SearchBar autoFocus={true} advanced={false} />
+          <SearchBar autoFocus={true} useAdvancedSearch={false} />
         </div>
       </div>
     </div>

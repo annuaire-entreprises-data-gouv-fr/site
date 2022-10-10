@@ -4,15 +4,21 @@ import pagesArray from './pages-array';
 
 interface IProps {
   currentPage: number;
-  searchTerm?: string;
   totalPages: number;
   compact?: boolean;
+  searchTerm?: string;
   searchFilterParams?: IParams;
+  anchor?: string;
 }
 
-const urlParams = (page = 1, searchTerm = '', searchfilterParams?: IParams) => {
+const urlParams = (
+  page = 1,
+  searchTerm = '',
+  searchfilterParams?: IParams,
+  anchor = ''
+) => {
   const searchQuery = buildSearchQuery(searchTerm, searchfilterParams || {});
-  return `${searchQuery}&page=${page}`;
+  return `${searchQuery}&page=${page}${anchor}`;
 };
 
 const First: React.FC<IProps> = ({
@@ -20,13 +26,14 @@ const First: React.FC<IProps> = ({
   currentPage,
   compact,
   searchFilterParams,
+  anchor,
 }) => (
   <li>
     <a
       className="fr-pagination__link fr-pagination__link--first fr-pagination__link--lg-label"
       href={
         currentPage > 1
-          ? urlParams(1, searchTerm, searchFilterParams)
+          ? urlParams(1, searchTerm, searchFilterParams, anchor)
           : undefined
       }
     >
@@ -41,13 +48,14 @@ const Last: React.FC<IProps> = ({
   totalPages,
   compact,
   searchFilterParams,
+  anchor,
 }) => (
   <li>
     <a
       className="fr-pagination__link fr-pagination__link--last"
       href={
         currentPage < totalPages
-          ? urlParams(totalPages, searchTerm, searchFilterParams)
+          ? urlParams(totalPages, searchTerm, searchFilterParams, anchor)
           : undefined
       }
     >
@@ -60,13 +68,14 @@ const Previous: React.FC<IProps> = ({
   searchTerm,
   searchFilterParams,
   compact,
+  anchor,
 }) => (
   <li>
     <a
       className="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
       href={
         currentPage > 1
-          ? urlParams(currentPage - 1, searchTerm, searchFilterParams)
+          ? urlParams(currentPage - 1, searchTerm, searchFilterParams, anchor)
           : undefined
       }
     >
@@ -81,13 +90,14 @@ const Next: React.FC<IProps> = ({
   totalPages,
   searchFilterParams,
   compact,
+  anchor,
 }) => (
   <li>
     <a
       className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
       href={
         currentPage < totalPages
-          ? urlParams(currentPage + 1, searchTerm, searchFilterParams)
+          ? urlParams(currentPage + 1, searchTerm, searchFilterParams, anchor)
           : undefined
       }
     >
@@ -101,10 +111,11 @@ const Page: React.FC<{
   searchTerm?: string;
   currentPage: number;
   searchFilterParams?: IParams;
-}> = ({ pageNum, searchTerm, currentPage, searchFilterParams }) => (
+  anchor?: string;
+}> = ({ pageNum, searchTerm, currentPage, searchFilterParams, anchor }) => (
   <li>
     <a
-      href={urlParams(pageNum, searchTerm, searchFilterParams)}
+      href={urlParams(pageNum, searchTerm, searchFilterParams, anchor)}
       className="fr-pagination__link "
       aria-current={currentPage === pageNum ? 'page' : undefined}
       title={`Page ${pageNum}`}
@@ -124,6 +135,7 @@ const PageCounter: React.FC<IProps> = ({
   searchTerm,
   totalPages,
   searchFilterParams,
+  anchor = '',
   compact = false,
 }) => {
   const pages = pagesArray(currentPage, totalPages);
@@ -141,6 +153,7 @@ const PageCounter: React.FC<IProps> = ({
             totalPages={totalPages}
             compact={compact}
             searchFilterParams={searchFilterParams}
+            anchor={anchor}
           />
           <Previous
             currentPage={currentPage}
@@ -148,6 +161,7 @@ const PageCounter: React.FC<IProps> = ({
             totalPages={totalPages}
             compact={compact}
             searchFilterParams={searchFilterParams}
+            anchor={anchor}
           />
           {pages.map((pageNum) => {
             return (
@@ -156,6 +170,7 @@ const PageCounter: React.FC<IProps> = ({
                 currentPage={currentPage}
                 searchTerm={searchTerm}
                 pageNum={pageNum}
+                anchor={anchor}
                 key={pageNum}
               />
             );
@@ -166,6 +181,7 @@ const PageCounter: React.FC<IProps> = ({
             compact={compact}
             totalPages={totalPages}
             searchFilterParams={searchFilterParams}
+            anchor={anchor}
           />
           <Last
             currentPage={currentPage}
@@ -173,6 +189,7 @@ const PageCounter: React.FC<IProps> = ({
             searchTerm={searchTerm}
             totalPages={totalPages}
             searchFilterParams={searchFilterParams}
+            anchor={anchor}
           />
         </ul>
       </nav>

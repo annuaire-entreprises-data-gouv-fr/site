@@ -9,14 +9,14 @@ const SearchBar: React.FC<{
   url?: string;
   currentSearchTerm?: string;
   searchFilterParams?: IParams;
-  advanced: boolean;
+  useAdvancedSearch: boolean;
 }> = ({
   placeholder = 'Nom, adresse, n° SIRET/SIREN...',
   currentSearchTerm = '',
   url = '/rechercher',
   autoFocus = false,
   searchFilterParams,
-  advanced = true,
+  useAdvancedSearch = true,
 }) => {
   return (
     <form id="search-bar-form" action={url} method="get">
@@ -25,7 +25,7 @@ const SearchBar: React.FC<{
         defaultValue={currentSearchTerm}
         autoFocus={autoFocus}
       />
-      {advanced ? (
+      {useAdvancedSearch ? (
         <>
           <input
             className="toggle-advanced-search"

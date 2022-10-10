@@ -126,7 +126,7 @@ const EtablissementListeSection: React.FC<{
             <PageCounter
               currentPage={currentEtablissementPage || 1}
               totalPages={totalPages}
-              querySuffix="#etablissements"
+              anchor="#etablissements"
             />
           </>
         ) : (
