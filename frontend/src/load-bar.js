@@ -25,7 +25,7 @@ const positions = [
 (function init() {
   window.addEventListener('beforeunload', async (e) => {
     const loader = document.createElement('div');
-    loader.style.position = 'absolute';
+    loader.style.position = 'fixed';
     loader.style.transition = 'width 150ms ease-in-out';
     loader.style.top = '0';
     loader.style.left = '0';
