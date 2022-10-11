@@ -14,7 +14,12 @@ const Index: React.FC = () => (
           françaises
         </h2>
         <div className="layout-center search">
-          <SearchBar autoFocus={true} useAdvancedSearch={false} />
+          <SearchBar autoFocus={true} useAdvancedSearch={true} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: `<span class="advanced-search-filter" onclick="window.openAdvancedSearch()">→ Recherche avancée</span>`,
+            }}
+          />
         </div>
       </div>
     </div>
@@ -26,6 +31,7 @@ const Index: React.FC = () => (
 
       .search {
         margin-top: 30px;
+        flex-direction: column;
       }
 
       .centered-search {
