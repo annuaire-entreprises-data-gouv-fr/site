@@ -104,14 +104,12 @@ const AdvancedSearchFields: React.FC<{
       <style jsx>{`
         .input-group {
           position: relative;
-          top: 0;
+          top: 6px;
           background: #fff;
-          border: 1px solid #000091;
-          border-top: none;
+          border: 1px solid #ccc;
           padding: 10px;
           width: 100%;
-          border-bottom-left-radius: 3px;
-          border-bottom-right-radius: 3px;
+          border-radius: 3px;
         }
 
         div.select {

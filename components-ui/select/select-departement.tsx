@@ -20,6 +20,7 @@ const SelectDepartement: React.FC<{
         //@ts-ignore
         return { value: k, label: `${k} - ${departements[k]}` };
       })}
+    size="S"
   />
 );
 

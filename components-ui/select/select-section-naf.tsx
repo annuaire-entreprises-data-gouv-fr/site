@@ -18,6 +18,7 @@ const SelectCodeSectionNaf: React.FC<{
       //@ts-ignore
       return { value: k, label: codesSectionNAF[k] };
     })}
+    size="S"
   />
 );
 
