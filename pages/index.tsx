@@ -15,11 +15,6 @@ const Index: React.FC = () => (
         </h2>
         <div className="layout-center search">
           <SearchBar autoFocus={true} useAdvancedSearch={true} />
-          <div
-            dangerouslySetInnerHTML={{
-              __html: `<span class="advanced-search-filter" onclick="window.openAdvancedSearch()">→ Recherche avancée</span>`,
-            }}
-          />
         </div>
       </div>
     </div>

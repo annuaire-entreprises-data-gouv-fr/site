@@ -3,6 +3,7 @@ import {
   extractFilters,
   IParams,
 } from '../../models/search-filter-params';
+import OpenAdvancedSearchLink from './open-advanced-search-link';
 
 const Filter: React.FC<{
   label?: string;
@@ -11,12 +12,7 @@ const Filter: React.FC<{
 }> = ({ label, icon = null, query }) => (
   <div className="selected-filter-container">
     {icon}
-    <span
-      dangerouslySetInnerHTML={{
-        __html: `<span class="advanced-search-filter" onclick="window.openAdvancedSearch()">&nbsp;
-    ${label}&nbsp;</span>`,
-      }}
-    />
+    <OpenAdvancedSearchLink label={`&nbsp;${label}&nbsp;`} />
     <a className="no-style-link" href={query}>
       <b>✕</b>
     </a>
@@ -28,9 +24,6 @@ const Filter: React.FC<{
         color: #000091;
         background-color: #dfdff1;
         border-radius: 5px;
-      }
-      .selected-filter-container span {
-        cursor: pointer;
       }
       .selected-filter-container b {
         margin: 0 5px;

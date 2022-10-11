@@ -1,5 +1,6 @@
 import React from 'react';
 import { IParams } from '../../models/search-filter-params';
+import OpenAdvancedSearchLink from '../search-results/open-advanced-search-link';
 import AdvancedSearchFields from './advanced-search-form';
 import SearchField from './search-field';
 
@@ -38,6 +39,10 @@ const SearchBar: React.FC<{
         </>
       ) : null}
 
+      <div className="advanced-search-link-wrapper">
+        <OpenAdvancedSearchLink label={'Afficher les options de recherche'} />
+      </div>
+
       <style jsx>{`
         form {
           width: 100%;
@@ -52,6 +57,12 @@ const SearchBar: React.FC<{
           position: relative;
           padding: 0;
           display: none;
+        }
+        .advanced-search-link-wrapper {
+          cursor: pointer;
+          text-decoration: underline;
+          margin-top: 3px;
+          font-size: 0.9rem;
         }
 
         .toggle-advanced-search:checked ~ #advanced-search-container {
