@@ -5,28 +5,33 @@
 (function init() {
   const searchForm = document.getElementById('search-bar-form');
   const searchBar = document.getElementById('search-input-input');
+  const searchContainer = document.getElementById('advanced-search-container');
 
-  const advancedSearchToggle = document.getElementById(
-    'toggle-advanced-search'
-  );
+  const show = () => {
+    searchContainer.classList.add('show');
+  };
+
+  const hide = () => {
+    searchContainer.classList.remove('show');
+  };
 
   window.openAdvancedSearch = () => {
     searchBar.focus();
-    advancedSearchToggle.checked = true;
+    show();
   };
 
   searchForm.addEventListener('focusin', () => {
     if (window.location.pathname !== '/') {
-      advancedSearchToggle.checked = true;
+      show();
     }
   });
 
   document.addEventListener('click', (e) => {
-    const isFilter =
-      e.target.className.indexOf('dont-close-advanced-search') > -1;
+    const targetClass = e.target.className || '';
+    const isFilter = targetClass.indexOf('dont-close-advanced-search') > -1;
     const isInsideForm = searchForm.contains(e.target);
     if (!isFilter && !isInsideForm) {
-      advancedSearchToggle.checked = false;
+      hide();
     }
   });
 })();

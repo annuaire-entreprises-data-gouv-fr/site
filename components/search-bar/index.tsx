@@ -27,16 +27,9 @@ const SearchBar: React.FC<{
         autoFocus={autoFocus}
       />
       {useAdvancedSearch ? (
-        <>
-          <input
-            className="toggle-advanced-search"
-            id="toggle-advanced-search"
-            type="checkbox"
-          />
-          <div id="advanced-search-container">
-            <AdvancedSearchFields searchFilterParams={searchFilterParams} />
-          </div>
-        </>
+        <div id="advanced-search-container">
+          <AdvancedSearchFields searchFilterParams={searchFilterParams} />
+        </div>
       ) : null}
 
       <div className="advanced-search-link-wrapper">
@@ -49,15 +42,6 @@ const SearchBar: React.FC<{
           max-width: 450px;
         }
 
-        .toggle-advanced-search {
-          display: none;
-        }
-
-        #advanced-search-container {
-          position: relative;
-          padding: 0;
-          display: none;
-        }
         .advanced-search-link-wrapper {
           cursor: pointer;
           text-decoration: underline;
@@ -65,9 +49,16 @@ const SearchBar: React.FC<{
           font-size: 0.9rem;
         }
 
-        .toggle-advanced-search:checked ~ #advanced-search-container {
+        #advanced-search-container {
+          position: relative;
+          padding: 0;
+          display: none;
+        }
+
+        #advanced-search-container.show {
           display: block;
           height: 0;
+          z-index: 100;
         }
 
         @media only screen and (min-width: 1px) and (max-width: 991px) {
