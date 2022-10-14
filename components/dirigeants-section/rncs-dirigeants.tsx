@@ -23,7 +23,7 @@ import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-
  * @param toBeDetermined
  * @returns
  */
-const isPersonneMorale = (
+export const isPersonneMorale = (
   toBeDetermined: IEtatCivil | IPersonneMorale
 ): toBeDetermined is IPersonneMorale => {
   if (
@@ -34,6 +34,7 @@ const isPersonneMorale = (
   }
   return false;
 };
+
 interface IProps {
   immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
   siren: Siren;
@@ -85,20 +86,23 @@ const DirigeantsSection: React.FC<IProps> = ({
       }
       return infos;
     } else {
-      return [
+      const infos = [
         ['Rôle', dirigeant.role && <b>{dirigeant.role}</b>],
         ['Nom', (dirigeant.nom || '').toUpperCase()],
         ['Prénom', dirigeant.prenom],
-        ['Année de naissance', dirigeant.dateNaissance],
-        [
+        ['Mois et année de naissance', dirigeant.dateNaissancePartial],
+      ];
+      if (dirigeant.dateNaissanceFull) {
+        infos.push([
           '',
           <a
-            href={`/rechercher?n=${dirigeant.nom}&fn=${dirigeant.prenom}&dmin=${dirigeant.dateNaissance}-01-01&dmax=${dirigeant.dateNaissance}-01-01`}
+            href={`/rechercher?n=${dirigeant.nom}&fn=${dirigeant.prenom}&dmin=${dirigeant.dateNaissanceFull}&dmax=${dirigeant.dateNaissanceFull}`}
           >
             → rechercher ses entreprises
           </a>,
-        ],
-      ];
+        ]);
+      }
+      return infos;
     }
   };
 

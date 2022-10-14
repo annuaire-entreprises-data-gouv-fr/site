@@ -62,7 +62,10 @@ const ResultsBody: React.FC<{
                   searchFilterParams={searchFilterParams}
                 />
               </div>
-              <ResultsList results={results.results} />
+              <ResultsList
+                results={results.results}
+                searchFilterParams={searchFilterParams}
+              />
             </div>
             <div className="results-footer-wrapper">
               <PageCounter
@@ -139,6 +142,7 @@ const ResultsBody: React.FC<{
             results={results.results}
             withFeedback={true}
             searchTerm={searchTerm}
+            searchFilterParams={searchFilterParams}
           />
           <PageCounter
             totalPages={results.pageCount}

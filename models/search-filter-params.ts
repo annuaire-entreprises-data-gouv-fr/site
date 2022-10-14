@@ -99,7 +99,7 @@ export const extractFilters = (params: IParams) => {
     });
   };
 
-  if (params.fn || params.n || params.dmin || params.dmax) {
+  if (hasDirigeantFilter(params)) {
     const labelDate =
       params.dmin || params.dmax ? '  filtre sur la date de naissance' : '';
     const labelName = `${params.fn}${params.n ? ` ${params.n}` : ''}`;
@@ -117,6 +117,10 @@ export const extractFilters = (params: IParams) => {
   }
 
   return f;
+};
+
+export const hasDirigeantFilter = (params: IParams = {}) => {
+  return params.fn || params.n || params.dmin || params.dmax;
 };
 
 export const hasSearchParam = (params: object) => {

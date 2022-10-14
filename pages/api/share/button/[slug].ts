@@ -6,7 +6,9 @@ const button = (
   res: NextApiResponse
 ) => {
   const isSiren = slug.length === 9;
-  const path = `${isSiren ? 'entreprise' : 'etablissement'}/${slug}`;
+  const path = `${
+    isSiren ? 'entreprise' : 'etablissement'
+  }/${slug}?mtm_campaign=button-iframe`;
 
   const fontColor = !light ? '#fff' : '#000091';
   const backgroundColor = !light ? '#000091' : '#fff';

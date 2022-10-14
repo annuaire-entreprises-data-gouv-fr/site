@@ -6,6 +6,7 @@ import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administrations';
 import { APINotRespondingFactory } from './api-not-responding';
+import { IDirigeant } from './immatriculation/rncs';
 import SearchFilterParams, { hasSearchParam } from './search-filter-params';
 
 export interface ISearchResult {
@@ -20,6 +21,7 @@ export interface ISearchResult {
   longitude: number;
   nomComplet: string;
   chemin: string;
+  dirigeants: IDirigeant[];
 }
 
 export interface ISearchResults {

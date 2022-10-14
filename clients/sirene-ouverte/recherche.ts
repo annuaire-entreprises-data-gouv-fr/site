@@ -2,6 +2,7 @@ import { ISearchResults } from '../../models/search';
 import constants from '../../models/constants';
 import {
   formatAdresse,
+  formatFirstNames,
   parseIntWithDefaultValue,
 } from '../../utils/helpers/formatting';
 import { libelleFromCodeNAF } from '../../utils/labels';
@@ -9,6 +10,7 @@ import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 import SearchFilterParams from '../../models/search-filter-params';
+import { IEtatCivil, IPersonneMorale } from '../../models/immatriculation/rncs';
 
 interface ISireneOuverteUniteLegaleResultat {
   siren: string;
@@ -42,6 +44,15 @@ interface ISireneOuverteUniteLegaleResultat {
   nombre_etablissements: number;
   nombre_etablissements_ouverts: number;
   is_entrepreneur_individuel: true;
+  dirigeants: {
+    prenoms?: string;
+    nom?: string;
+    annee_de_naissance?: string;
+    qualite?: string;
+    siren?: string;
+    denomination?: string;
+    sigle?: string;
+  }[];
 }
 
 export interface ISireneOuverteSearchResults {
@@ -113,6 +124,7 @@ const mapToDomainObjectNew = (
           code_postal,
           libelle_commune,
         },
+        dirigeants,
       } = result;
 
       const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
@@ -141,6 +153,33 @@ const mapToDomainObjectNew = (
           'NAFRev2', // search does not handle old nomenclatures yet
           false
         ),
+        dirigeants: dirigeants.map((dirigeantRaw) => {
+          const {
+            siren,
+            sigle,
+            denomination,
+            prenoms,
+            nom,
+            annee_de_naissance,
+            qualite,
+          } = dirigeantRaw;
+          if (!!siren) {
+            return {
+              siren,
+              denomination: `${denomination} ${sigle ? `(${sigle})` : ''}`,
+              role: qualite,
+            } as IPersonneMorale;
+          }
+          return {
+            sexe: null,
+            nom,
+            prenom: formatFirstNames((prenoms || '').split(' '), 1),
+            role: qualite,
+            dateNaissancePartial: '',
+            dateNaissanceFull: '',
+            lieuNaissance: '',
+          } as IEtatCivil;
+        }),
       };
     }),
   };

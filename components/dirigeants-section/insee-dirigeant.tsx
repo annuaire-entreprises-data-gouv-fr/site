@@ -41,6 +41,15 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
           &nbsp;:
         </p>
         <TwoColumnTable body={data} />
+        <p>
+          Vous pouvez{' '}
+          <a href={`/rechercher?n=${dirigeant.nom}&fn=${dirigeant.prenom}`}>
+            rechercher les entreprises dirigées par {dirigeant.prenom}{' '}
+            {dirigeant.nom}
+          </a>
+          . Comme nous ne connaissons pas sa date de naissance, nous ne pourrons
+          pas le distinguer de ses éventuels homonymes.
+        </p>
       </Section>
       <HorizontalSeparator />
       <style jsx>{``}</style>
