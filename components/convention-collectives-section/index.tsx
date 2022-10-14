@@ -13,6 +13,8 @@ import {
 } from '../../models/api-not-responding';
 import routes from '../../clients/routes';
 import { METI } from '../administrations';
+import { formatSiret } from '../../utils/helpers/siren-and-siret';
+import FAQLink from '../../components-ui/faq-link';
 
 const ConventionCollectivesSection: React.FC<{
   conventionCollectives: IConventionCollective[] | IAPINotRespondingError;
@@ -45,10 +47,17 @@ const ConventionCollectivesSection: React.FC<{
         </div>
       ) : (
         <>
+          Cette entité possède {conventionCollectives.length}{' '}
+          <FAQLink
+            to="convention-collective"
+            tooltipLabel="Qu’est-ce qu’une convention collective ?"
+          >
+            convention{plural} collective{plural}
+          </FAQLink>{' '}
+          enregistrée{plural}.
           <p>
-            Cette entité possède {conventionCollectives.length} convention
-            {plural} collective{plural} enregistrée{plural}. Pour en savoir plus
-            sur les conventions collectives, vous pouvez consulter{' '}
+            Pour en savoir plus sur une convention collective en particulier,
+            consultez{' '}
             <a
               rel="noreferrer noopener nofollow"
               target="_blank"
@@ -61,7 +70,7 @@ const ConventionCollectivesSection: React.FC<{
             head={['SIRET', 'N°IDCC', 'Détails', 'Convention']}
             body={conventionCollectives.map((convention) => [
               <a href={`/etablissement/${convention.siret}`}>
-                {convention.siret}
+                {formatSiret(convention.siret)}
               </a>,
               <Tag>{convention.idccNumber}</Tag>,
               <i className="font-small">{convention.title}</i>,
