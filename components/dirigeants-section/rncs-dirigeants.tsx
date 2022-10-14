@@ -89,7 +89,7 @@ const DirigeantsSection: React.FC<IProps> = ({
         ['Rôle', dirigeant.role && <b>{dirigeant.role}</b>],
         ['Nom', (dirigeant.nom || '').toUpperCase()],
         ['Prénom', dirigeant.prenom],
-        ['Année de naissance', dirigeant.dateNaissance],
+        ['Mois et année de naissance', dirigeant.dateNaissancePartial],
       ];
     }
   };

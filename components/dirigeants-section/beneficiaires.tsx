@@ -50,7 +50,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
   const formtInfos = (beneficiaire: IBeneficiaire) => [
     ['Nom', (beneficiaire.nom || '').toUpperCase()],
     ['Prénoms', beneficiaire.prenoms],
-    ['Date de naissance', beneficiaire.dateNaissance],
+    ['Mois et année de naissance', beneficiaire.dateNaissancePartial],
     ['Nationalité', beneficiaire.nationalite],
     ['Date de déclaration', formatDate(beneficiaire.dateGreffe)],
   ];
