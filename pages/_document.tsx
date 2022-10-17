@@ -106,7 +106,8 @@ class StaticDocument extends Document {
           ></script>
         </CustomHead>
 
-        <body>
+        {/* https://instant.page/intensity */}
+        <body data-instant-intensity="mousedown">
           <Main />
           {process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID && (
             <script
