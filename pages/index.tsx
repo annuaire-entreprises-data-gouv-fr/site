@@ -1,4 +1,6 @@
 import React from 'react';
+import Logo from '../components-ui/logo';
+import HiddenH1 from '../components/a11y-components/hidden-h1';
 import SearchBar from '../components/search-bar';
 import StructuredDataSearchAction from '../components/structured-data/search';
 import Page from '../layouts';
@@ -8,7 +10,8 @@ const Index: React.FC = () => (
     <StructuredDataSearchAction />
     <div className="layout-center">
       <div className="centered-search">
-        <h1>L’Annuaire des Entreprises</h1>
+        <Logo />
+        <HiddenH1 title="L’Annuaire des Entreprises" />
         <h2>
           Retrouvez toutes les informations publiques concernant les entreprises
           françaises
@@ -19,9 +22,9 @@ const Index: React.FC = () => (
       </div>
     </div>
     <style jsx>{`
-      h1,
       h2 {
         text-align: center;
+        margin-top: 30px;
       }
 
       .search {
