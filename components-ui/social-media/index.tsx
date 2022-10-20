@@ -9,7 +9,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       <span>
         <InformationTooltip
           orientation="right"
-          label="Partager la page de cette entreprise sur Linkedin"
+          label="Partager la page de cette entité sur Linkedin"
         >
           <a
             href={`https://www.linkedin.com/shareArticle?mini=true&url=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
@@ -25,7 +25,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       <span>
         <InformationTooltip
           orientation="right"
-          label="Partager la page de cette entreprise sur Twitter"
+          label="Partager la page de cette entité sur Twitter"
         >
           <a
             href={`https://twitter.com/intent/tweet?url=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
@@ -41,7 +41,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       <span>
         <InformationTooltip
           orientation="right"
-          label="Partager la page de cette entreprise sur Facebook"
+          label="Partager la page de cette entité sur Facebook"
         >
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}

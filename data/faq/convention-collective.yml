@@ -1,0 +1,17 @@
+administrations:
+  - meti
+target:
+  - agent
+title: Qu’est-ce qu’une convention collective ?
+body: |
+  Une convention collective contient les règles de droit du travail (contrat, congés, salaires...) applicables à une entreprise. 
+
+  Elle est négociée entre les organisations syndicales des salariés et les employeurs (éventuellement réunis en syndicat).
+
+  Pour en savoir plus :
+cta:
+  label: ⇢ Lire la fiche explicative sur le code du travail numérique
+  to: https://code.travail.gouv.fr/fiche-service-public/convention-collective
+more:
+  - label: Définition d’une convention collective sur service-public.fr
+    href: https://www.service-public.fr/particuliers/vosdroits/F78

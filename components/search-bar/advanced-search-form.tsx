@@ -10,7 +10,6 @@ const AdvancedSearchFields: React.FC<{
 }> = ({ searchParams, searchTerm }) => {
   const { cp, sap, fn, n, dmin, dmax } = searchParams || {};
 
-  console.log(searchParams);
   const { localisationFilter, dirigeantFilter, administrativeFilter } =
     extractFilters(searchParams || {});
 
