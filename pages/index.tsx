@@ -13,8 +13,8 @@ const Index: React.FC = () => (
         <Logo />
         <HiddenH1 title="L’Annuaire des Entreprises" />
         <h2>
-          Retrouvez toutes les informations publiques concernant les entreprises
-          françaises
+          Retrouvez toutes les informations publiques sur une personne morale
+          (entreprise, association ou administration)
         </h2>
         <div className="layout-center search">
           <SearchBar autoFocus={true} />
@@ -34,6 +34,7 @@ const Index: React.FC = () => (
       .centered-search {
         margin-bottom: 32vh;
         margin-top: 10vh;
+        max-width: 900px;
       }
     `}</style>
   </Page>
