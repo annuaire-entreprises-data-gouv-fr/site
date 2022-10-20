@@ -1,131 +1,107 @@
 import React from 'react';
 import ButtonLink from '../../components-ui/button';
-import {
-  building,
-  france,
-  humanPin,
-  searchLine,
-} from '../../components-ui/icon';
-import SelectDepartement from '../../components-ui/select/select-departement';
 import SelectCodeSectionNaf from '../../components-ui/select/select-section-naf';
-import { IParams } from '../../models/search-filter-params';
+import { extractFilters, IParams } from '../../models/search-filter-params';
 import FieldGroup from './advanced-search-group';
 
 const AdvancedSearchFields: React.FC<{
-  searchFilterParams?: IParams;
-}> = ({ searchFilterParams }) => {
-  const { cp, sap, dep, fn, n, dmin, dmax } = searchFilterParams || {};
+  searchParams: IParams;
+  searchTerm: string;
+}> = ({ searchParams, searchTerm }) => {
+  const { cp, sap, fn, n, dmin, dmax } = searchParams || {};
+
+  console.log(searchParams);
+  const { localisationFilter, dirigeantFilter, administrativeFilter } =
+    extractFilters(searchParams || {});
 
   return (
     <>
-      <div className="input-group">
-        <b>Affiner vos résultats :</b>
-        <FieldGroup
-          icon={france}
-          label="Zone géographique"
-          defaultValue={!!cp || !!dep}
-        >
-          <input
-            className="fr-input"
-            id="search-code-postal"
-            name="cp"
-            pattern="((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}"
-            autoComplete="off"
-            placeholder="Code postal"
-            defaultValue={cp}
+      <FieldGroup
+        label="Zone géographique"
+        activeFilter={localisationFilter}
+        searchParams={searchParams}
+        searchTerm={searchTerm}
+      >
+        <label>Localisation :</label>
+        <input
+          className="fr-input refresh-on-change"
+          id="search-code-postal"
+          name="cp"
+          autoComplete="off"
+          placeholder="Saisissez une ville ou un département"
+          defaultValue={cp}
+        />
+      </FieldGroup>
+      <FieldGroup
+        label="Situation administrative"
+        activeFilter={administrativeFilter}
+        searchParams={searchParams}
+        searchTerm={searchTerm}
+      >
+        <label>Domaine d’activité :</label>
+        <div className="select">
+          <SelectCodeSectionNaf
+            name="sap"
+            className="refresh-on-change"
+            defaultValue={sap}
+            placeholder="Choisir un domaine d’activité"
           />
-          <div className="select">
-            <SelectDepartement
-              name="dep"
-              defaultValue={dep}
-              placeholder="Choisir un département"
-            />
-          </div>
-        </FieldGroup>
-        <FieldGroup
-          icon={building}
-          label="Situation administrative"
-          defaultValue={!!sap}
-        >
-          <div className="select">
-            <SelectCodeSectionNaf
-              name="sap"
-              defaultValue={sap}
-              placeholder="Choisir un domaine d’activité"
-            />
-          </div>
-        </FieldGroup>
-        <FieldGroup
-          icon={humanPin}
-          label="Dirigeant"
-          defaultValue={!!fn || !!n}
-        >
-          <div className="field-in-line">
-            <input
-              className="fr-input"
-              name="fn"
-              autoComplete="off"
-              placeholder="Prénom"
-              defaultValue={fn}
-            />
-            <input
-              className="fr-input"
-              name="n"
-              autoComplete="off"
-              placeholder="Nom"
-              defaultValue={n}
-            />
-          </div>
-          <label>Plage de date de naissance</label>
-          <div className="field-in-line">
-            <input
-              className="fr-input"
-              type="date"
-              id="start"
-              name="dmin"
-              defaultValue={dmin}
-            />
-            <input
-              className="fr-input"
-              type="date"
-              id="end"
-              name="dmax"
-              defaultValue={dmax}
-            />
-          </div>
-        </FieldGroup>
-        <div className="layout-left">
-          <ButtonLink type="submit" small>
-            {searchLine}&nbsp;Rechercher
+        </div>
+      </FieldGroup>
+      <FieldGroup
+        label="Dirigeant"
+        activeFilter={dirigeantFilter}
+        searchParams={searchParams}
+        searchTerm={searchTerm}
+      >
+        <label>Prénom et nom :</label>
+        <div className="field-in-line">
+          <input
+            className="fr-input refresh-on-change"
+            name="fn"
+            autoComplete="off"
+            placeholder="Prénom"
+            defaultValue={fn}
+          />
+          <input
+            className="fr-input refresh-on-change"
+            name="n"
+            autoComplete="off"
+            placeholder="Nom"
+            defaultValue={n}
+          />
+        </div>
+        <br />
+        <label>Né(e) entre :</label>
+        <div className="field-in-line">
+          <input
+            className="fr-input refresh-on-change"
+            type="date"
+            id="start"
+            name="dmin"
+            defaultValue={dmin}
+          />
+          &nbsp;et&nbsp;
+          <input
+            className="fr-input refresh-on-change"
+            type="date"
+            id="end"
+            name="dmax"
+            defaultValue={dmax}
+          />
+        </div>
+        <br />
+        <div className="layout-right">
+          <ButtonLink type="submit" alt small>
+            Appliquer les filtres
           </ButtonLink>
         </div>
-      </div>
-      <br />
+      </FieldGroup>
+
       <style jsx>{`
-        .input-group {
-          position: relative;
-          top: 6px;
-          background: #fff;
-          border: 1px solid #ccc;
-          padding: 10px;
-          width: 100%;
-          border-radius: 3px;
-        }
-
-        div.select {
-          margin-top: 5px;
-          font-size: 0.9rem;
-        }
-
-        .fr-input {
-          font-size: 0.9rem;
-        }
         .field-in-line {
           display: flex;
           gap: 5px;
-        }
-        div.layout-left {
-          margin-top: 15px;
         }
 
         @media only screen and (min-width: 1px) and (max-width: 991px) {

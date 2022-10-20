@@ -84,36 +84,45 @@ export const buildSearchQuery = (
   )}`;
 };
 
-export const extractFilters = (params: IParams) => {
-  const f: {
-    icon: JSX.Element;
-    label: string;
-    excludeParams: string[];
-  }[] = [];
+export interface ISearchFilter {
+  icon: JSX.Element;
+  label: string;
+  excludeParams: string[];
+}
 
-  const add = (icon: JSX.Element, label: string, excludeParams: string[]) => {
-    f.push({
-      icon,
-      label,
-      excludeParams,
-    });
+export const extractFilters = (params: IParams) => {
+  const f = {
+    dirigeantFilter: {
+      icon: humanPin,
+      label: '',
+      excludeParams: ['fn', 'n', 'dmin', 'dmax'],
+    },
+    administrativeFilter: {
+      icon: building,
+      label: '',
+      excludeParams: ['sap'],
+    },
+    localisationFilter: {
+      icon: mapPin,
+      label: '',
+      excludeParams: ['cp'],
+    },
   };
 
   if (hasDirigeantFilter(params)) {
     const labelDate =
       params.dmin || params.dmax ? '  filtre sur la date de naissance' : '';
     const labelName = `${params.fn}${params.n ? ` ${params.n}` : ''}`;
-    const label = `${labelName}${labelDate && labelName && '・'}${labelDate}`;
-    add(humanPin, label, ['fn', 'n', 'dmin', 'dmax']);
+    f.dirigeantFilter.label = `${labelName}${
+      labelDate && labelName && '・'
+    }${labelDate}`;
   }
   if (params.sap) {
-    add(building, libelleFromCodeSectionNaf(params.sap), ['sap']);
+    f.administrativeFilter.label = libelleFromCodeSectionNaf(params.sap);
   }
+
   if (params.cp) {
-    add(mapPin, params.cp, ['cp']);
-  }
-  if (params.dep) {
-    add(mapPin, libelleFromDepartement(params.dep), ['dep']);
+    f.localisationFilter.label = params.cp;
   }
 
   return f;

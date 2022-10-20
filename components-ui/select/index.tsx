@@ -6,14 +6,14 @@ const Select: React.FC<{
   name?: string;
   options: { value: string; label: string }[];
   defaultValue?: string;
-  size: 'S' | 'M';
+  className?: string;
 }> = ({
   label,
   options,
   placeholder = 'Selectionnez une option',
   name = '',
+  className = '',
   defaultValue = null,
-  size = 'M',
 }) => (
   <div className="fr-select-group">
     {label && (
@@ -21,7 +21,11 @@ const Select: React.FC<{
         {label}
       </label>
     )}
-    <select name={name} className="fr-select" defaultValue={defaultValue || ''}>
+    <select
+      name={name}
+      className={`fr-select ${className}`}
+      defaultValue={defaultValue || ''}
+    >
       <option value="">{placeholder}</option>
       {options.map((option) => (
         <option key={option.value} value={option.value}>
@@ -29,11 +33,6 @@ const Select: React.FC<{
         </option>
       ))}
     </select>
-    <style jsx>{`
-      select {
-        font-size: ${size === 'S' ? '0.9rem' : '1rem'};
-      }
-    `}</style>
   </div>
 );
 

@@ -1,7 +1,4 @@
 import React from 'react';
-import { IParams } from '../../models/search-filter-params';
-import OpenAdvancedSearchLink from '../search-results/open-advanced-search-link';
-import AdvancedSearchFields from './advanced-search-form';
 import SearchField from './search-field';
 
 const SearchBar: React.FC<{
@@ -9,15 +6,11 @@ const SearchBar: React.FC<{
   autoFocus?: boolean;
   url?: string;
   currentSearchTerm?: string;
-  searchFilterParams?: IParams;
-  useAdvancedSearch: boolean;
 }> = ({
   placeholder = 'Nom, adresse, n° SIRET/SIREN...',
   currentSearchTerm = '',
   url = '/rechercher',
   autoFocus = false,
-  searchFilterParams,
-  useAdvancedSearch = true,
 }) => {
   return (
     <form id="search-bar-form" action={url} method="get">
@@ -26,39 +19,11 @@ const SearchBar: React.FC<{
         defaultValue={currentSearchTerm}
         autoFocus={autoFocus}
       />
-      {useAdvancedSearch ? (
-        <div id="advanced-search-container">
-          <AdvancedSearchFields searchFilterParams={searchFilterParams} />
-        </div>
-      ) : null}
-
-      <div className="advanced-search-link-wrapper">
-        <OpenAdvancedSearchLink label={'Afficher les options de recherche'} />
-      </div>
 
       <style jsx>{`
         form {
           width: 100%;
           max-width: 450px;
-        }
-
-        .advanced-search-link-wrapper {
-          cursor: pointer;
-          text-decoration: underline;
-          margin-top: 3px;
-          font-size: 0.9rem;
-        }
-
-        #advanced-search-container {
-          position: relative;
-          padding: 0;
-          display: none;
-        }
-
-        #advanced-search-container.show {
-          display: block;
-          height: 0;
-          z-index: 100;
         }
 
         @media only screen and (min-width: 1px) and (max-width: 991px) {

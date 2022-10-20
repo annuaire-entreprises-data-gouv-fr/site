@@ -1,63 +1,99 @@
 import { PropsWithChildren } from 'react';
+import {
+  buildSearchQuery,
+  IParams,
+  ISearchFilter,
+} from '../../models/search-filter-params';
+import ActiveFilter from './active-filters';
 
 const FieldGroup: React.FC<
   PropsWithChildren<{
     label: string;
-    icon: JSX.Element;
-    defaultValue?: boolean;
+    activeFilter: ISearchFilter;
+    searchParams: IParams;
+    searchTerm: string;
   }>
-> = ({ children, label, icon, defaultValue = false }) => {
-  // css selector work best starting with a string
+> = ({ children, label, activeFilter, searchParams, searchTerm }) => {
   return (
-    <details open={defaultValue}>
-      <summary>
-        {icon}&nbsp;{label}
-      </summary>
-      <div>{children}</div>
+    <>
+      <div className="label">
+        {activeFilter.label ? (
+          <ActiveFilter
+            icon={activeFilter.icon}
+            label={activeFilter.label}
+            query={buildSearchQuery(
+              searchTerm,
+              searchParams,
+              activeFilter.excludeParams
+            )}
+          />
+        ) : (
+          <>
+            {activeFilter.icon}&nbsp;{label}
+          </>
+        )}
+        <div className="wrapper">
+          <div className="container">{children}</div>
+        </div>
+      </div>
       <style jsx>
         {`
-          summary {
+          div.label {
+            color: #555;
+            position: relative;
             padding: 10px;
             margin: 0;
-            border-bottom: 1px solid #eee;
-            list-style: none;
-            position: relative;
             user-select: none;
             display: flex;
             align-items: center;
-          }
-          summary:hover {
-            background: #f6f6f6;
+            cursor: pointer;
+            padding-right: 20px;
+            margin-right: 20px;
           }
 
-          details summary::after {
-            content: '+';
-            color: #000091;
+          div.label::after {
+            content: '▾';
+            color: inherit;
             font-weight: bold;
             font-size: 1.2rem;
             position: absolute;
-            right: 10px;
+            right: 0;
             top: 10px;
           }
 
-          details[open] summary::after {
-            content: '⎼';
-          }
-          summary:marker {
+          .wrapper {
             display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
           }
 
-          details {
-            font-size: 0.9rem;
+          .container {
+            display: block;
+            position: relative;
+            padding: 15px;
+            margin-top: 5px;
+            background-color: #fff;
+            border-radius: 3px;
+            width: 350px;
           }
-          details > div {
-            padding: 10px;
-            padding-right: 0;
-            font-size: 0.9rem;
+          .container:before {
+            content: ' ';
+            position: absolute;
+            bottom: 100%; /* At the bottom of the tooltip */
+            left: 25%;
+            margin-left: 0;
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent white transparent;
+          }
+
+          div.label:hover > .wrapper {
+            display: block;
           }
         `}
       </style>
-    </details>
+    </>
   );
 };
 

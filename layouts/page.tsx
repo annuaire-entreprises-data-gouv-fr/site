@@ -46,7 +46,7 @@ const Page: React.FC<PropsWithChildren<IProps>> = ({
       <HeaderSearch
         currentSearchTerm={currentSearchTerm}
         map={map}
-        searchFilterParams={searchFilterParams}
+        searchParams={searchFilterParams}
       />
     ) : (
       <Header />

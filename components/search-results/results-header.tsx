@@ -1,24 +1,6 @@
 import React from 'react';
-import { mapPin } from '../../components-ui/icon';
-import {
-  IParams,
-  hasSearchParam,
-  buildSearchQuery,
-} from '../../models/search-filter-params';
+import { IParams, hasSearchParam } from '../../models/search-filter-params';
 import MatomoEventSearchClick from '../matomo-event/search-click';
-import ResultsFilters from './results-filters';
-
-const MapOrListSwitch = ({ isMap = false, query = '' }) => (
-  <>
-    {isMap ? (
-      <a href={`/rechercher/${query}`}>
-        Afficher les résultats sous forme de liste
-      </a>
-    ) : (
-      <a href={`/rechercher/carte${query}`}>{mapPin} Afficher sur une carte</a>
-    )}
-  </>
-);
 
 const ResultsHeader: React.FC<{
   resultCount?: number;
@@ -29,7 +11,6 @@ const ResultsHeader: React.FC<{
 }> = ({
   resultCount = 0,
   currentPage = 1,
-  isMap = false,
   searchTerm = '',
   searchFilterParams,
 }) => {
@@ -47,23 +28,11 @@ const ResultsHeader: React.FC<{
             {currentPage > 1 && `Page ${currentPage} de `}
             {resultCount} résultats trouvés.
           </span>
-          <ResultsFilters
-            searchTerm={searchTerm}
-            searchFilterParams={searchFilterParams}
-          />
-          <MapOrListSwitch
-            isMap={isMap}
-            query={buildSearchQuery(searchTerm, searchFilterParams)}
-          />
         </div>
       ) : (
         <div className="no-results">
           <div className="results-counter">
             <span>Aucune entité n’a été trouvée.</span>
-            <ResultsFilters
-              searchTerm={searchTerm}
-              searchFilterParams={searchFilterParams}
-            />
           </div>
           <p>
             Nous vous suggérons de modifier votre recherche :
@@ -82,10 +51,6 @@ const ResultsHeader: React.FC<{
         .results-counter {
           margin-top: 20px;
           color: #555;
-          display: flex;
-          flex-direction: ${isMap ? 'column' : 'row'};
-          justify-content: 'space-between';
-          align-items: ${isMap ? 'start' : 'center'};
         }
       `}</style>
     </>

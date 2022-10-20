@@ -8,7 +8,8 @@ const SelectCodeSectionNaf: React.FC<{
   name?: string;
   maxWidth?: number;
   defaultValue?: string;
-}> = ({ label, placeholder, name, defaultValue = undefined }) => (
+  className: string;
+}> = ({ label, placeholder, name, defaultValue = undefined, className }) => (
   <Select
     label={label}
     name={name}
@@ -18,7 +19,7 @@ const SelectCodeSectionNaf: React.FC<{
       //@ts-ignore
       return { value: k, label: codesSectionNAF[k] };
     })}
-    size="S"
+    className={className}
   />
 );
 
