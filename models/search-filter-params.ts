@@ -1,13 +1,9 @@
 import { building, humanPin, mapPin } from '../components-ui/icon';
-import {
-  libelleFromCodeSectionNaf,
-  libelleFromDepartement,
-} from '../utils/labels';
+import { libelleFromCodeSectionNaf } from '../utils/labels';
 
 export interface IParams {
   sap?: string;
-  cp?: string;
-  dep?: string;
+  cp_dep?: string;
   fn?: string;
   n?: string;
   dmin?: string;
@@ -21,8 +17,7 @@ class SearchFilterParams {
   constructor(query: IParams = {}) {
     const {
       sap = '',
-      dep = '',
-      cp = '',
+      cp_dep = '',
       fn = '',
       n = '',
       dmin = '',
@@ -31,8 +26,7 @@ class SearchFilterParams {
 
     this.params = {
       sap,
-      cp,
-      dep,
+      cp_dep,
       fn,
       n,
       dmin,
@@ -45,10 +39,15 @@ class SearchFilterParams {
   }
 
   public toApiURI() {
+    const cp_dep = this.params.cp_dep || '';
+    const code_postal = cp_dep.length === 5 ? cp_dep : '';
+    const departement =
+      cp_dep.length === 3 || cp_dep.length === 2 ? cp_dep : '';
+
     return serializeParams({
-      code_postal: this.params.cp,
+      code_postal,
       section_activite_principale: this.params.sap,
-      departements: this.params.dep,
+      departement,
       prenoms_dirigeant: this.params.fn?.trim(),
       nom_dirigeant: this.params.n?.trim(),
       date_naissance_dirigeant_min: this.params.dmin,
@@ -105,7 +104,7 @@ export const extractFilters = (params: IParams) => {
     localisationFilter: {
       icon: mapPin,
       label: '',
-      excludeParams: ['cp'],
+      excludeParams: ['cp_dep'],
     },
   };
 
@@ -121,8 +120,8 @@ export const extractFilters = (params: IParams) => {
     f.administrativeFilter.label = libelleFromCodeSectionNaf(params.sap);
   }
 
-  if (params.cp) {
-    f.localisationFilter.label = params.cp;
+  if (params.cp_dep) {
+    f.localisationFilter.label = params.cp_dep;
   }
 
   return f;

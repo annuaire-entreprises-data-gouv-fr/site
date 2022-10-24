@@ -10,7 +10,7 @@ interface IGeoCommuneResponse {
 }
 
 const searchCommunes = async (slug: string): Promise<any> => {
-  const response = await httpGet(routes.geo.departement + slug, {
+  const response = await httpGet(routes.geo.commune + slug, {
     timeout: constants.timeout.L,
   });
 

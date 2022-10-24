@@ -4,15 +4,14 @@ import { SearchFeedback } from '../search-feedback';
 import { Tag } from '../../components-ui/tag';
 import IsActiveTag from '../../components-ui/is-active-tag';
 import { IETATADMINSTRATIF } from '../../models/etat-administratif';
-import { hasDirigeantFilter, IParams } from '../../models/search-filter-params';
 import { humanPin } from '../../components-ui/icon';
 import { isPersonneMorale } from '../dirigeants-section/rncs-dirigeants';
+import { IDirigeant } from '../../models/immatriculation/rncs';
 
 interface IProps {
   results: ISearchResult[];
   withFeedback?: boolean;
   searchTerm?: string;
-  searchFilterParams: IParams;
 }
 
 const EtablissmentTagLabel: React.FC<{ result: ISearchResult }> = ({
@@ -28,11 +27,38 @@ const EtablissmentTagLabel: React.FC<{ result: ISearchResult }> = ({
   );
 };
 
+const DirigeantsList: React.FC<{ dirigeants: IDirigeant[] }> = ({
+  dirigeants,
+}) => {
+  const displayMax = 5;
+  const firstFive = dirigeants.slice(0, displayMax);
+  const moreCount = Math.max(dirigeants.length - displayMax, 0);
+
+  return (
+    <div className="dirigeants">
+      {firstFive
+        .map((dirigeant) =>
+          isPersonneMorale(dirigeant)
+            ? `${dirigeant.denomination}`
+            : `${dirigeant.prenom} ${dirigeant.nom}`
+        )
+        .join(', ')}
+      {moreCount > 0 && `, et ${moreCount} autre${moreCount === 1 ? '' : 's'}`}
+      <style jsx>{`
+        .dirigeants {
+          font-size: 0.9rem;
+          color: #555;
+          margin: 8px auto 0;
+        }
+      `}</style>
+    </div>
+  );
+};
+
 const ResultsList: React.FC<IProps> = ({
   results,
   withFeedback = false,
   searchTerm = '',
-  searchFilterParams,
 }) => (
   <>
     {withFeedback && <SearchFeedback searchTerm={searchTerm} />}
@@ -51,18 +77,9 @@ const ResultsList: React.FC<IProps> = ({
             )}
           </div>
           <div>{result.libelleActivitePrincipale}</div>
-          {hasDirigeantFilter(searchFilterParams) ? (
-            <div className="dirigeants">
-              {humanPin}&nbsp;
-              {result.dirigeants
-                .map((dirigeant) =>
-                  isPersonneMorale(dirigeant)
-                    ? `${dirigeant.denomination}`
-                    : `${dirigeant.prenom} ${dirigeant.nom}`
-                )
-                .join(', ')}
-            </div>
-          ) : null}
+          {result.dirigeants.length > 0 && (
+            <DirigeantsList dirigeants={result.dirigeants} />
+          )}
           <div className="adress">
             <span>{result.adresse || 'Adresse inconnue'} </span>
             <EtablissmentTagLabel result={result} />
@@ -96,13 +113,6 @@ const ResultsList: React.FC<IProps> = ({
       .results-list > a .adress > span {
         color: #707070;
         font-variant: all-small-caps;
-      }
-
-      .results-list .dirigeants {
-        font-variant: all-small-caps;
-        font-size: 0.9rem;
-        color: #666;
-        margin: 6px auto 2px;
       }
     `}</style>
   </>

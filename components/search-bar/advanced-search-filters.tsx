@@ -7,7 +7,7 @@ const AdvancedSearchFilters: React.FC<{
   searchParams: IParams;
   searchTerm: string;
 }> = ({ searchParams, searchTerm }) => {
-  const { cp, sap, fn, n, dmin, dmax } = searchParams || {};
+  const { cp_dep, sap, fn, n, dmin, dmax } = searchParams || {};
 
   const { localisationFilter, dirigeantFilter, administrativeFilter } =
     extractFilters(searchParams || {});
@@ -25,12 +25,12 @@ const AdvancedSearchFilters: React.FC<{
         <input
           className="fr-input"
           id="search-localisation"
-          name="cp"
+          name="cp_dep"
           autoComplete="off"
           placeholder="ex: 35000"
-          defaultValue={cp}
+          defaultValue={cp_dep}
         />
-        <div id="search-localisation-responses"></div>
+        <div id="search-localisation-responses" />
       </Filter>
       <Filter
         label="Situation administrative"
@@ -49,13 +49,13 @@ const AdvancedSearchFilters: React.FC<{
         </div>
       </Filter>
       <Filter
-        label="Dirigeant"
+        label="Personne"
         activeFilter={dirigeantFilter}
         searchParams={searchParams}
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <label>Prénom et nom :</label>
+        <label>Rechercher les entreprises liées à une personne&nbsp;:</label>
         <div className="field-in-line">
           <input
             className="fr-input"
@@ -97,6 +97,11 @@ const AdvancedSearchFilters: React.FC<{
         .field-in-line {
           display: flex;
           gap: 5px;
+        }
+
+        #search-localisation-responses {
+          max-height: 270px;
+          overflow: auto;
         }
 
         @media only screen and (min-width: 1px) and (max-width: 991px) {

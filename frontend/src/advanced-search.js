@@ -20,17 +20,19 @@
         // gérer le debounce
         const value = localisation.value;
         if (value.length >= 2) {
-          fetch('/api/localisation/' + value)
+          fetch('/api/geo/' + value)
             .then((res) => res.json())
             .then((r) => {
               responsesContainer.innerHTML = '';
-              console.log(r);
               r.map((el) => {
                 const label = document.createElement('div');
+                label.className = 'cursor-pointer';
+                label.style.padding = '8px 0';
+                label.style.borderBottom = '1px solid #efefef';
                 label.innerText = el.label;
                 label.onclick = () => {
                   localisation.value = el.value;
-                  form.submit();
+                  responsesContainer.innerHTML = '';
                 };
                 responsesContainer.appendChild(label);
               });

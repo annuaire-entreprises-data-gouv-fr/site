@@ -59,7 +59,9 @@ const Filter: React.FC<
             <>
               <br />
               <div className="layout-space-between">
-                <a href={clearFilterLink}>Effacer</a>
+                <a className="fr-link" href={clearFilterLink}>
+                  Effacer
+                </a>
                 <ButtonLink type="submit" alt small>
                   Appliquer
                 </ButtonLink>
@@ -139,7 +141,7 @@ const Filter: React.FC<
             content: ' ';
             position: absolute;
             bottom: 100%; /* At the bottom of the tooltip */
-            left: 25%;
+            left: 10%;
             margin-left: 0;
             border-width: 10px;
             border-style: solid;

@@ -83,6 +83,7 @@ const getResults = async (
   const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
     searchFilterParams?.toApiURI() || ''
   }`;
+  console.log(url);
   const timeout = fallbackOnStaging
     ? constants.timeout.XL
     : constants.timeout.M;
@@ -155,24 +156,24 @@ const mapToDomainObjectNew = (
         ),
         dirigeants: dirigeants.map((dirigeantRaw) => {
           const {
-            siren,
-            sigle,
-            denomination,
-            prenoms,
-            nom,
-            annee_de_naissance,
-            qualite,
+            siren = '',
+            sigle = '',
+            denomination = '',
+            prenoms = '',
+            nom = '',
+            // annee_de_naissance = '',
+            qualite = '',
           } = dirigeantRaw;
           if (!!siren) {
             return {
               siren,
-              denomination: `${denomination} ${sigle ? `(${sigle})` : ''}`,
+              denomination: `${denomination}${sigle ? ` (${sigle})` : ''}`,
               role: qualite,
             } as IPersonneMorale;
           }
           return {
             sexe: null,
-            nom,
+            nom: nom.toUpperCase(),
             prenom: formatFirstNames((prenoms || '').split(' '), 1),
             role: qualite,
             dateNaissancePartial: '',

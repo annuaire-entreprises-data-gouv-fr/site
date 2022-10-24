@@ -143,7 +143,6 @@ p {
 }
 
 /* Carte Map libre */
-
 .maplibregl-marker {
   z-index: 10000;
 }
