@@ -88,7 +88,7 @@ const Filter: React.FC<
             cursor: pointer;
             border: 1px solid #ccc;
             border-radius: 3px;
-            padding: 4px 10px;
+            padding: 5px 10px;
           }
           span.search-filter-label:hover {
             border-color: #0a76f6;
