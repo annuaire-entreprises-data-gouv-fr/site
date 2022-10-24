@@ -64,6 +64,12 @@ table.full-table {
   margin: 10px auto;
 }
 
+.layout-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .font-small {
   font-size: 0.9rem;
 }

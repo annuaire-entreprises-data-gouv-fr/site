@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../components-ui/logo';
 import HiddenH1 from '../components/a11y-components/hidden-h1';
-import SearchBar from '../components/search-bar';
+import SearchBar from '../components/search-bar/search-bar';
 import StructuredDataSearchAction from '../components/structured-data/search';
 import Page from '../layouts';
 

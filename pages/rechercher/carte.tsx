@@ -35,6 +35,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/carte"
     isBrowserOutdated={metadata.isBrowserOutdated}
+    useAdvancedSearch={true}
   >
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />

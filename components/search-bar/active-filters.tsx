@@ -12,7 +12,7 @@ const ActiveFilter: React.FC<{
       .selected-filter-container {
         display: flex;
         align-items: center;
-        padding: 3px 5px;
+        padding: 5px 10px;
         color: #000091;
         background-color: #dfdff1;
         border-radius: 5px;

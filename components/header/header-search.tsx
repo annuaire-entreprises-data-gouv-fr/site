@@ -4,18 +4,20 @@ import MapOrListSwitch from '../search-bar/map-or-list';
 import Logo from '../../components-ui/logo';
 import { buildSearchQuery, IParams } from '../../models/search-filter-params';
 import SearchField from '../search-bar/search-field';
-import AdvancedSearchFields from '../search-bar/advanced-search-form';
+import AdvancedSearchFilters from '../search-bar/advanced-search-filters';
 
 interface IProps {
   currentSearchTerm?: string;
   map?: boolean;
   searchParams?: IParams;
+  useAdvancedSearch?: boolean;
 }
 
 const HeaderSearch: React.FC<IProps> = ({
   currentSearchTerm = '',
   map = false,
   searchParams = {},
+  useAdvancedSearch = false,
 }) => (
   <header role="banner" className="fr-header">
     <form
@@ -63,20 +65,22 @@ const HeaderSearch: React.FC<IProps> = ({
           </div>
         </div>
       </div>
-      <div id="search-filters-container">
-        <div className="fr-container">
-          <AdvancedSearchFields
-            searchParams={searchParams}
-            searchTerm={currentSearchTerm}
-          />
-          <div className="map-switch">
-            <MapOrListSwitch
-              isMap={map}
-              query={buildSearchQuery(currentSearchTerm, searchParams)}
+      {useAdvancedSearch && (
+        <div id="search-filters-container">
+          <div className="fr-container">
+            <AdvancedSearchFilters
+              searchParams={searchParams}
+              searchTerm={currentSearchTerm}
             />
+            <div className="map-switch">
+              <MapOrListSwitch
+                isMap={map}
+                query={buildSearchQuery(currentSearchTerm, searchParams)}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <style jsx>{`
         div.annuaire-logo {
@@ -92,12 +96,14 @@ const HeaderSearch: React.FC<IProps> = ({
 
         #search-filters-container {
           background-color: #f6f6f6;
+          display: none;
         }
 
         #search-filters-container > .fr-container {
           display: flex;
           justify-content: start;
           align-items: center;
+          flex-wrap: wrap;
         }
 
         .map-switch {

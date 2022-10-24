@@ -12,7 +12,6 @@ const Select: React.FC<{
   options,
   placeholder = 'Selectionnez une option',
   name = '',
-  className = '',
   defaultValue = null,
 }) => (
   <div className="fr-select-group">
@@ -21,11 +20,7 @@ const Select: React.FC<{
         {label}
       </label>
     )}
-    <select
-      name={name}
-      className={`fr-select ${className}`}
-      defaultValue={defaultValue || ''}
-    >
+    <select name={name} className="fr-select" defaultValue={defaultValue || ''}>
       <option value="">{placeholder}</option>
       {options.map((option) => (
         <option key={option.value} value={option.value}>

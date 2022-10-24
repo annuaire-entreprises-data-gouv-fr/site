@@ -1,10 +1,9 @@
 import React from 'react';
-import ButtonLink from '../../components-ui/button';
 import SelectCodeSectionNaf from '../../components-ui/select/select-section-naf';
 import { extractFilters, IParams } from '../../models/search-filter-params';
-import FieldGroup from './advanced-search-group';
+import Filter from './advanced-filter';
 
-const AdvancedSearchFields: React.FC<{
+const AdvancedSearchFilters: React.FC<{
   searchParams: IParams;
   searchTerm: string;
 }> = ({ searchParams, searchTerm }) => {
@@ -15,55 +14,58 @@ const AdvancedSearchFields: React.FC<{
 
   return (
     <>
-      <FieldGroup
+      <Filter
         label="Zone géographique"
         activeFilter={localisationFilter}
         searchParams={searchParams}
         searchTerm={searchTerm}
+        addSaveClearButton
       >
-        <label>Localisation :</label>
+        <label>Ville, code postal ou département :</label>
         <input
-          className="fr-input refresh-on-change"
-          id="search-code-postal"
+          className="fr-input"
+          id="search-localisation"
           name="cp"
           autoComplete="off"
-          placeholder="Saisissez une ville ou un département"
+          placeholder="ex: 35000"
           defaultValue={cp}
         />
-      </FieldGroup>
-      <FieldGroup
+        <div id="search-localisation-responses"></div>
+      </Filter>
+      <Filter
         label="Situation administrative"
         activeFilter={administrativeFilter}
         searchParams={searchParams}
         searchTerm={searchTerm}
+        addSaveClearButton
       >
-        <label>Domaine d’activité :</label>
         <div className="select">
+          <label>Domaine d’activité :</label>
           <SelectCodeSectionNaf
             name="sap"
-            className="refresh-on-change"
             defaultValue={sap}
             placeholder="Choisir un domaine d’activité"
           />
         </div>
-      </FieldGroup>
-      <FieldGroup
+      </Filter>
+      <Filter
         label="Dirigeant"
         activeFilter={dirigeantFilter}
         searchParams={searchParams}
         searchTerm={searchTerm}
+        addSaveClearButton
       >
         <label>Prénom et nom :</label>
         <div className="field-in-line">
           <input
-            className="fr-input refresh-on-change"
+            className="fr-input"
             name="fn"
             autoComplete="off"
             placeholder="Prénom"
             defaultValue={fn}
           />
           <input
-            className="fr-input refresh-on-change"
+            className="fr-input"
             name="n"
             autoComplete="off"
             placeholder="Nom"
@@ -74,7 +76,7 @@ const AdvancedSearchFields: React.FC<{
         <label>Né(e) entre :</label>
         <div className="field-in-line">
           <input
-            className="fr-input refresh-on-change"
+            className="fr-input"
             type="date"
             id="start"
             name="dmin"
@@ -82,20 +84,14 @@ const AdvancedSearchFields: React.FC<{
           />
           &nbsp;et&nbsp;
           <input
-            className="fr-input refresh-on-change"
+            className="fr-input"
             type="date"
             id="end"
             name="dmax"
             defaultValue={dmax}
           />
         </div>
-        <br />
-        <div className="layout-right">
-          <ButtonLink type="submit" alt small>
-            Appliquer les filtres
-          </ButtonLink>
-        </div>
-      </FieldGroup>
+      </Filter>
 
       <style jsx>{`
         .field-in-line {
@@ -113,4 +109,4 @@ const AdvancedSearchFields: React.FC<{
   );
 };
 
-export default AdvancedSearchFields;
+export default AdvancedSearchFilters;

@@ -32,6 +32,7 @@ const SearchResultPage: React.FC<IProps> = ({
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"
     isBrowserOutdated={metadata.isBrowserOutdated}
+    useAdvancedSearch={true}
   >
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />

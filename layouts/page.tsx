@@ -18,6 +18,7 @@ interface IProps {
   canonical?: string;
   noIndex?: boolean;
   isBrowserOutdated?: boolean;
+  useAdvancedSearch?: boolean;
 }
 
 const Page: React.FC<PropsWithChildren<IProps>> = ({
@@ -31,6 +32,7 @@ const Page: React.FC<PropsWithChildren<IProps>> = ({
   canonical,
   noIndex = false,
   isBrowserOutdated = false,
+  useAdvancedSearch = false,
 }) => (
   <div id="page-layout">
     <Meta
@@ -47,6 +49,7 @@ const Page: React.FC<PropsWithChildren<IProps>> = ({
         currentSearchTerm={currentSearchTerm}
         map={map}
         searchParams={searchFilterParams}
+        useAdvancedSearch={useAdvancedSearch}
       />
     ) : (
       <Header />
