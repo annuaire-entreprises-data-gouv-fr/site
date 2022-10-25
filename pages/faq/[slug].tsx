@@ -7,12 +7,17 @@ import { getAllFaqArticles, getFaqArticle, IArticle } from '../../models/faq';
 import ButtonLink from '../../components-ui/button';
 import constants from '../../models/constants';
 import TextWrapper from '../../components-ui/text-wrapper';
+import Breadcrumb from '../../components-ui/breadcrumb';
 
 const FAQArticle: React.FC<{ article: IArticle }> = ({ article }) => (
   <Page small={true} title="Cette administration ne répond pas" noIndex={true}>
     <TextWrapper>
-      <br />
-      <a href="/faq">← Toutes les questions fréquentes</a>
+      <Breadcrumb
+        links={[
+          { href: '/faq', label: 'Questions fréquentes' },
+          { href: '', label: article.title },
+        ]}
+      />
       <h1>{article.title}</h1>
       <ReactMarkdown>{article.body}</ReactMarkdown>
       {article.cta ? (

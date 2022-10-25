@@ -73,9 +73,6 @@ const ResultsList: React.FC<IProps> = ({
         font-size: 1.1rem;
         margin-bottom: 5px 0;
       }
-      .results-list > a .title > span:first-of-type {
-        font-variant: all-small-caps;
-      }
 
       .results-list > a:hover .title {
         text-decoration: underline;
