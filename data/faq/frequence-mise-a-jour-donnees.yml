@@ -1,5 +1,6 @@
 administrations:
   - all
+  - search
 target:
   - agent
 title: Quelle est la fréquence de mise à jour des données ?
