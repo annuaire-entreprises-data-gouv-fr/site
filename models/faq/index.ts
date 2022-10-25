@@ -38,8 +38,8 @@ export const getFaqArticle = (slug: string) => {
   return allArticles.find((article) => article.slug === slug);
 };
 
-export const getFaqArticlesByTag = (tagList: string[]) => {
-  const filteredArticles = new Set();
+export const getFaqArticlesByTag = (tagList: string[]): IArticle[] => {
+  const filteredArticles = new Set<IArticle>();
   allArticles.forEach((article) => {
     tagList.forEach((tag) => {
       if (article.administrations.indexOf(tag) > -1) {

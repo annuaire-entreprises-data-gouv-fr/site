@@ -6,7 +6,7 @@ import { SearchErrorExplanations } from '../error-explanations';
 import MapResults from '../map/map-results';
 import ResultsList from './results-list';
 import PageCounter from '../results-page-counter';
-import { getFaqArticlesByTag } from '../../models/faq';
+import { getFaqArticlesByTag, IArticle } from '../../models/faq';
 
 const ResultsBody: React.FC<{
   searchTerm: string;
@@ -19,6 +19,7 @@ const ResultsBody: React.FC<{
   }
 
   if (results.notEnoughParams) {
+    const articles = getFaqArticlesByTag(['search']);
     return (
       <div>
         <br />
@@ -68,7 +69,7 @@ const ResultsBody: React.FC<{
             recherche ?
           </b>
           <ul>
-            {getFaqArticlesByTag(['search']).map(({ slug, title }) => (
+            {articles.map(({ slug, title }) => (
               <li>
                 <a href={`/faq/${slug}`}>{title}</a>
               </li>
