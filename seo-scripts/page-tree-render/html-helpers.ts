@@ -4,7 +4,7 @@ const head = `
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="robots" content="index,follow">
+  <meta name="robots" content="index">
   <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
   <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml">
   <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon">
