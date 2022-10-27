@@ -10,7 +10,7 @@ import TextWrapper from '../../components-ui/text-wrapper';
 import Breadcrumb from '../../components-ui/breadcrumb';
 
 const FAQArticle: React.FC<{ article: IArticle }> = ({ article }) => (
-  <Page small={true} title="Cette administration ne répond pas" noIndex={true}>
+  <Page small={true} title="Cette administration ne répond pas" noIndex={false}>
     <TextWrapper>
       <Breadcrumb
         links={[

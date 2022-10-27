@@ -14,11 +14,7 @@ import constants from '../../models/constants';
 const StatusPage: React.FC<{
   articles: IArticle[];
 }> = ({ articles }) => (
-  <Page
-    small={true}
-    title="FAQ de l'Annuaire des Entreprises"
-    canonical={`https://annuaire-entreprises.data.gouv.fr/sources-de-donnees}`}
-  >
+  <Page small={true} title="FAQ de l'Annuaire des Entreprises">
     <StructuredDataFAQ
       data={articles.map(({ title, body }) => [
         title,

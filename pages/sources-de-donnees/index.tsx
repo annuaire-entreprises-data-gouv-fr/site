@@ -33,7 +33,6 @@ const StatusPage: React.FC<IProps> = ({ monitors, metadata }) => (
   <Page
     small={true}
     title="Statut des API partenaires de l'Annuaire des Entreprises"
-    canonical={`https://annuaire-entreprises.data.gouv.fr/sources-de-donnees}`}
     isBrowserOutdated={metadata.isBrowserOutdated}
   >
     <div className="content-container">
