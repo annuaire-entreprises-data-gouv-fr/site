@@ -51,7 +51,7 @@ const Meta: React.FC<IProps> = ({
           site_name: SITE_NAME,
         }}
         noindex={noIndex}
-        nofollow={true}
+        nofollow={false}
       />
       <Head>
         <title>{title}</title>

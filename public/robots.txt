@@ -6,6 +6,7 @@ Allow: /
 Allow: /entreprise/
 Allow: /administration/
 Allow: /faq/
+Allow: /departements/
 
 # Groupe 1
 User-agent: *
@@ -22,3 +23,4 @@ Disallow: /erreur/
 Disallow: /formulaire/
 Disallow: /sources-de-donnees/
 Disallow: /etablissement/
+
