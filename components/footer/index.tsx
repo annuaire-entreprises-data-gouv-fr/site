@@ -108,6 +108,16 @@ const Footer = () => (
       <div className="fr-footer__bottom">
         <ul className="fr-footer__bottom-list">
           <li className="fr-footer__bottom-item">
+            <a
+              className="fr-footer__bottom-link"
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://github.com/etalab/annuaire-entreprises-site"
+            >
+              Code source
+            </a>
+          </li>
+          <li className="fr-footer__bottom-item">
             <a className="fr-footer__bottom-link" href="/vie-privee">
               Vie privée & cookies
             </a>
@@ -123,13 +133,6 @@ const Footer = () => (
             </a>
           </li>
           <li className="fr-footer__bottom-item">
-            <a className="fr-footer__bottom-link" href="/faq">
-              FAQ
-            </a>
-          </li>
-        </ul>
-        <ul className="fr-footer__bottom-list">
-          <li className="fr-footer__bottom-item">
             <a
               className="fr-footer__bottom-link"
               href="/historique-des-modifications"
@@ -137,14 +140,11 @@ const Footer = () => (
               Historique des changements
             </a>
           </li>
+        </ul>
+        <ul className="fr-footer__bottom-list">
           <li className="fr-footer__bottom-item">
-            <a
-              className="fr-footer__bottom-link"
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://github.com/etalab/annuaire-entreprises-site"
-            >
-              Code source
+            <a className="fr-footer__bottom-link" href="/faq">
+              FAQ
             </a>
           </li>
           <li className="fr-footer__bottom-item">
@@ -153,7 +153,10 @@ const Footer = () => (
             </a>
           </li>
           <li className="fr-footer__bottom-item">
-            <a className="fr-footer__bottom-link" href="/departements">
+            <a
+              className="fr-footer__bottom-link"
+              href="/departements/index.html"
+            >
               Personnes morales par départements
             </a>
           </li>
