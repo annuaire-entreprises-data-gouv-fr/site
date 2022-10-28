@@ -6,14 +6,14 @@ import { SearchErrorExplanations } from '../error-explanations';
 import MapResults from '../map/map-results';
 import ResultsList from './results-list';
 import PageCounter from '../results-page-counter';
-import { getFaqArticlesByTag, IArticle } from '../../models/faq';
+import { getFaqArticlesByTag } from '../../models/faq';
 
 const ResultsBody: React.FC<{
-  searchTerm: string;
+  searchTerm?: string;
   results: ISearchResults;
-  searchFilterParams: IParams;
+  searchFilterParams?: IParams;
   map?: boolean;
-}> = ({ results, searchTerm, searchFilterParams, map = false }) => {
+}> = ({ results, searchTerm = '', searchFilterParams = {}, map = false }) => {
   if (isAPINotResponding(results)) {
     return <SearchErrorExplanations />;
   }
@@ -49,18 +49,19 @@ const ResultsBody: React.FC<{
           />
         </svg>
         <div>
-          <b>
-            Retrouvez toutes les informations publiques concernant les
-            entreprises françaises
-          </b>
+          <p>
+            <b>
+              Votre requête ne contient pas assez de paramètres de recherche
+              pour nous permettre de vous proposer un résultat.
+            </b>
+          </p>
+          Vous pouvez, au choix :
           <ul>
             <li>
-              Le moteur de recherche vous permet de retrouver une entreprise
-              grâce à son nom, son SIREN, ou son adresse
+              Utilisez un terme de recherche plus long (au moins 3 lettres)
             </li>
             <li>
-              Vous pouvez également rechercher grâce à sa localisation précise,
-              son domaine d’activité, ou son ou sa dirigeant(e)
+              Utilisez des critères de recherche géographiques ou administratifs
             </li>
           </ul>
           <br />
@@ -75,7 +76,9 @@ const ResultsBody: React.FC<{
               </li>
             ))}
           </ul>
-          <a href="/faq">→ Toutes les questions fréquentes</a>
+          <p>
+            <a href="/faq">→ Voir toutes les questions fréquentes</a>
+          </p>
         </div>
       </div>
     );

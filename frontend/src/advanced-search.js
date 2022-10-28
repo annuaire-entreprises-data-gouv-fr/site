@@ -58,6 +58,13 @@ function completeGeoSearch(localisationInput) {
         'input',
         debounce(() => completeGeoSearch(localisation))
       );
+      localisation.addEventListener('keydown', (event) => {
+        // prevent submit on enter as input content is not valid dep or cp code
+        if (event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+        }
+      });
     }
   }
 })();

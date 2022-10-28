@@ -126,6 +126,7 @@ const Filter: React.FC<
           }
 
           .container {
+            box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.3);
             top: 100%;
             left: 0;
             display: none;

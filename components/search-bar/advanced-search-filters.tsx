@@ -4,9 +4,9 @@ import { extractFilters, IParams } from '../../models/search-filter-params';
 import Filter from './advanced-filter';
 
 const AdvancedSearchFilters: React.FC<{
-  searchParams: IParams;
-  searchTerm: string;
-}> = ({ searchParams, searchTerm }) => {
+  searchParams?: IParams;
+  searchTerm?: string;
+}> = ({ searchParams = {}, searchTerm = '' }) => {
   const { cp_dep, sap, fn, n, dmin, dmax } = searchParams || {};
 
   const { localisationFilter, dirigeantFilter, administrativeFilter } =

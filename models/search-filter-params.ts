@@ -1,5 +1,6 @@
 import { building, humanPin, mapPin } from '../components-ui/icon';
 import { libelleFromCodeSectionNaf } from '../utils/labels';
+import { IEtatCivil } from './immatriculation/rncs';
 
 export interface IParams {
   sap?: string;
@@ -57,6 +58,18 @@ class SearchFilterParams {
 
   public toURI() {
     return serializeParams(this.params);
+  }
+
+  public getPersonne(): IEtatCivil {
+    return {
+      nom: this.params.n?.trim() || '',
+      prenom: this.params.fn?.trim() || '',
+      sexe: null,
+      dateNaissanceFull: '',
+      dateNaissancePartial: this.params.dmin || '',
+      lieuNaissance: '',
+      role: '',
+    };
   }
 }
 
