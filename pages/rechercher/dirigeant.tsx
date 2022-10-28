@@ -34,7 +34,7 @@ const SearchDirigeantPage: React.FC<IProps> = ({
     <StructuredDataSearchAction />
     <HiddenH1 title="Recherche des entitées associées à un individu" />
     <h2>
-      Ensemble des entitées associées à {personne.prenom} {personne.nom} :
+      Entitées associées à {personne.prenom} {personne.nom} :
     </h2>
     <ResultsBody results={results} />
   </Page>

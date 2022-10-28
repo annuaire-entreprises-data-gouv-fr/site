@@ -96,7 +96,7 @@ const DirigeantsSection: React.FC<IProps> = ({
         infos.push([
           '',
           <a
-            href={`/rechercher/dirigeant?n=${dirigeant.nom}&fn=${dirigeant.prenom}&dmin=${dirigeant.dateNaissanceFull}&dmax=${dirigeant.dateNaissanceFull}`}
+            href={`/rechercher/dirigeant?n=${dirigeant.nom}&fn=${dirigeant.prenom}&dmin=${dirigeant.dateNaissanceFull}`}
           >
             → rechercher ses entreprises
           </a>,
