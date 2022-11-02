@@ -12,7 +12,6 @@ import StructuredDataSearchAction from '../../components/structured-data/search'
 import { isAPINotResponding } from '../../models/api-not-responding';
 import { SearchErrorExplanations } from '../../components/error-explanations';
 import SearchFilterParams, { IParams } from '../../models/search-filter-params';
-import MatomoEventSearchClick from '../../components/matomo-event/search-click';
 import {
   IPropsWithMetadata,
   postServerSideProps,
