@@ -34,7 +34,7 @@ export const redirectSirenOrSiretInvalid = (
   logWarningInSentry('Siren or siret is invalid', scope);
   return {
     redirect: {
-      destination: `/erreur/invalide?q=${sirenOrSiret}`,
+      destination: `/erreur/invalide?slug=${sirenOrSiret}`,
       permanent: false,
     },
   };
@@ -49,7 +49,7 @@ export const redirectSirenOrSiretIntrouvable = (
   logWarningInSentry('Siren or siret not found', scope);
   return {
     redirect: {
-      destination: `/erreur/introuvable?q=${sirenOrSiret}`,
+      destination: `/erreur/introuvable?slug=${sirenOrSiret}`,
       permanent: false,
     },
   };

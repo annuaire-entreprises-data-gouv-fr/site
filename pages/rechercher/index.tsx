@@ -64,14 +64,6 @@ const SearchResultPage: React.FC<IProps> = ({
                 currentPage={results.currentPage}
                 searchFilterParams={searchFilterParams}
               />
-              <MatomoEventSearchClick
-                position={results.currentPage - 1}
-                resultCount={results.resultCount}
-                searchTerm={searchTerm}
-                isAdvancedSearch={SearchFilterParams.hasParam(
-                  searchFilterParams
-                )}
-              />
             </div>
           )}
         </>
