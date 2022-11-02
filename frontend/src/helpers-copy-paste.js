@@ -20,6 +20,9 @@ export function addCopyFunction(element) {
     window.setTimeout(function () {
       element.classList.toggle('copy-done');
     }, 800);
+
+    var _paq = window._paq || [];
+    _paq.push(['trackEvent', 'action', 'copyPaste', '']);
   };
 }
 

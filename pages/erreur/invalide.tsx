@@ -4,10 +4,12 @@ import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
 import ButtonLink from '../../components-ui/button';
 import constants from '../../models/constants';
+import MatomoEvent from '../../components/matomo-event';
 
 const SirenOrSiretInvalidPage = () => {
   return (
     <Page small={true} title="Numero d’identification invalide" noIndex={true}>
+      <MatomoEvent category="error" action="sirenOrSiretInvalid" name="" />
       <h1>⚠️ Attention : ce numéro d’identification est invalide ❗️</h1>
       <div>
         <p>
