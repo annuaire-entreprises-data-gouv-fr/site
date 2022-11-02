@@ -54,7 +54,7 @@ const InpiPDF: React.FC<IProps> = ({ siren, metadata }) => {
     <Page
       small={true}
       noIndex={true}
-      title="Réutiliser ou partager l’Annuaire des Entreprises"
+      title="Télécharger le justificatif d’immatriculation"
       isBrowserOutdated={metadata.isBrowserOutdated}
     >
       <br />
