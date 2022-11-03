@@ -6,7 +6,7 @@ const MatomoEventFromSearch: React.FC<{ sirenOrSiret: Siren | Siret }> = ({
   sirenOrSiret,
 }) => (
   <MatomoEvent
-    category="research:click"
+    category="research:redirected"
     action={sirenOrSiret}
     name={`redirected=${sirenOrSiret}`}
   />

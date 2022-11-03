@@ -2,6 +2,16 @@
  * COPY TO CLIPBOARD FUNCTION
  */
 
+function logCopyPaste(element) {
+  try {
+    const label = element.closest('tr').childNodes[0].innerText;
+    console.log(label);
+
+    var _paq = window._paq || [];
+    _paq.push(['trackEvent', 'action', 'copyPaste', `${label}`]);
+  } catch {}
+}
+
 export function addCopyFunction(element) {
   element.onclick = () => {
     element.classList.toggle('copy-done');
@@ -21,8 +31,7 @@ export function addCopyFunction(element) {
       element.classList.toggle('copy-done');
     }, 800);
 
-    var _paq = window._paq || [];
-    _paq.push(['trackEvent', 'action', 'copyPaste', '']);
+    logCopyPaste(element);
   };
 }
 
