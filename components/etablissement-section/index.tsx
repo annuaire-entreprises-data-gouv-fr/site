@@ -52,11 +52,8 @@ const EtablissementSection: React.FC<IProps> = ({
       etablissement.enseigne,
     ],
     [
-      <FAQLink
-        to="modifier-adresse"
-        tooltipLabel="Comment modifier une adresse ?"
-      >
-        Adresse
+      <FAQLink tooltipLabel="Adresse">
+        <a href="/faq/modifier-adresse">Comment modifier une adresse ?</a>
       </FAQLink>,
       etablissement.adresse ? (
         <>
