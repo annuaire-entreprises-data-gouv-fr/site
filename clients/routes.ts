@@ -35,7 +35,8 @@ const routes = {
         'https://bodacc-datadila.opendatasoft.com/api/datasets/1.0/search/?q=annonces-commerciales',
     },
     site: {
-      recherche: 'https://www.bodacc.fr/annonce/liste/',
+      recherche:
+        'https://www.bodacc.fr/pages/annonces-commerciales/?sort=dateparution',
       annonce: 'https://www.bodacc.fr/annonce/detail-annonce/',
     },
   },
