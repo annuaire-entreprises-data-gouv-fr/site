@@ -5,7 +5,6 @@
 function logCopyPaste(element) {
   try {
     const label = element.closest('tr').childNodes[0].innerText;
-    console.log(label);
 
     var _paq = window._paq || [];
     _paq.push(['trackEvent', 'action', 'copyPaste', `${label}`]);
