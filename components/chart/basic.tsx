@@ -2,17 +2,28 @@ import React from 'react';
 import randomId from '../../utils/helpers/randomId';
 
 const BasicChart: React.FC<{
-  data: { x: any; y: number }[];
   yLabel: string;
   yRange: number[];
-  tooltipLabel: string;
-  color: string;
   type: 'line' | 'bar';
-}> = ({ data, yLabel, yRange, color, tooltipLabel, type = 'line' }) => {
+  labels?: string[];
+  datasets: any[];
+  height?: number;
+  stacked?: boolean;
+  horizontal?: boolean;
+}> = ({
+  datasets,
+  yLabel,
+  yRange,
+  type = 'line',
+  labels,
+  height = 100,
+  stacked = false,
+  horizontal = false,
+}) => {
   const id = randomId();
   return (
     <>
-      <canvas id={id} width="400" height="150"></canvas>
+      <canvas id={id} width="400" height={height}></canvas>
       <div
         dangerouslySetInnerHTML={{
           __html: `
@@ -21,36 +32,31 @@ const BasicChart: React.FC<{
         const chart${id} = new Chart(canvas${id}, {
           type: '${type}',
           data: {
-            datasets: [
-              {
-                label: '${tooltipLabel}',
-                data: [${data.map((item) => JSON.stringify(item))}],
-                backgroundColor: '${color || '#0078f3'}',
-                borderColor: '${color || '#0078f3'}',
-                cubicInterpolationMode: 'monotone',
-                tension: 0.4
-              }
-            ]
+            ${labels ? `labels:${JSON.stringify(labels)},` : ''}
+            datasets: ${JSON.stringify(datasets)}
           },
           options: {
+            indexAxis: '${horizontal ? 'y' : 'x'}',
             responsive: true,
             plugins: {
               title: {
                 display: false,
               },
               legend: {
-                display:false,
+                display:true,
               }
             },
             scales: {
               x: {
                 display: true,
+                stacked:${stacked},
                 title: {
                   display: true
                 }
               },
               y: {
                 display: true,
+                stacked:${stacked},
                 title: {
                   display: true,
                   text: '${yLabel}'
