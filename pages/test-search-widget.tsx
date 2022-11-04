@@ -1,12 +1,7 @@
 import React from 'react';
 import Page from '../layouts';
-import { IMatomoStat } from '../clients/matomo';
 
-interface IProps {
-  stats: IMatomoStat[];
-}
-
-const TestSearchWidgetPage: React.FC<IProps> = () => (
+const TestSearchWidgetPage: React.FC<{}> = () => (
   <Page
     small={true}
     title="Rechercher une entreprise"
