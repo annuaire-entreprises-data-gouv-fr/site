@@ -3,7 +3,7 @@ import { information } from '../../components-ui/icon';
 import MapOrListSwitch from '../search-bar/map-or-list';
 import Logo from '../../components-ui/logo';
 import { buildSearchQuery, IParams } from '../../models/search-filter-params';
-import SearchField from '../search-bar/search-field';
+import SearchBar from '../search-bar/search-bar';
 import AdvancedSearchFilters from '../search-bar/advanced-search-filters';
 
 interface IProps {
@@ -13,7 +13,7 @@ interface IProps {
   useAdvancedSearch?: boolean;
 }
 
-const HeaderSearch: React.FC<IProps> = ({
+const HeaderWithSearch: React.FC<IProps> = ({
   currentSearchTerm = '',
   map = false,
   searchParams = {},
@@ -48,7 +48,7 @@ const HeaderSearch: React.FC<IProps> = ({
               </div>
 
               <div className="not-fr-search">
-                <SearchField defaultValue={currentSearchTerm} />
+                <SearchBar defaultValue={currentSearchTerm} />
               </div>
             </div>
             <div className="fr-header__tools">
@@ -129,4 +129,4 @@ const HeaderSearch: React.FC<IProps> = ({
   </header>
 );
 
-export default HeaderSearch;
+export default HeaderWithSearch;

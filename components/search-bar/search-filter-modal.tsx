@@ -8,7 +8,7 @@ import {
 import randomId from '../../utils/helpers/randomId';
 import ActiveFilter from './active-filters';
 
-const Filter: React.FC<
+const SearchFilterModal: React.FC<
   PropsWithChildren<{
     label: string;
     activeFilter: ISearchFilter;
@@ -172,4 +172,4 @@ const Filter: React.FC<
   );
 };
 
-export default Filter;
+export default SearchFilterModal;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchField = ({
+const SearchBar = ({
   placeholder = 'Nom, adresse, n° SIRET/SIREN...',
   defaultValue = '',
   autoFocus = false,
@@ -38,4 +38,4 @@ const SearchField = ({
   </div>
 );
 
-export default SearchField;
+export default SearchBar;

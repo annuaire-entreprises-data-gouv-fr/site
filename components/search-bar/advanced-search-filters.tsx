@@ -1,7 +1,7 @@
 import React from 'react';
 import SelectCodeSectionNaf from '../../components-ui/select/select-section-naf';
 import { extractFilters, IParams } from '../../models/search-filter-params';
-import Filter from './advanced-filter';
+import SearchFilterModal from './search-filter-modal';
 
 const AdvancedSearchFilters: React.FC<{
   searchParams?: IParams;
@@ -14,7 +14,7 @@ const AdvancedSearchFilters: React.FC<{
 
   return (
     <>
-      <Filter
+      <SearchFilterModal
         label="Zone géographique"
         activeFilter={localisationFilter}
         searchParams={searchParams}
@@ -24,17 +24,23 @@ const AdvancedSearchFilters: React.FC<{
         <label>Code postal ou numéro de département :</label>
         <input
           className="fr-input"
-          id="search-localisation"
-          name="cp_dep"
+          id="search-localisation-input"
           autoComplete="off"
           placeholder="ex: 35000"
+          defaultValue={cp_dep}
+        />
+        <input
+          id="search-localisation-value"
+          style={{ display: 'none' }}
+          aria-hidden="true"
+          name="cp_dep"
           defaultValue={cp_dep}
         />
         <div id="search-localisation-responses">
           <i>Saisissez une ville ou un département pour rechercher son code.</i>
         </div>
-      </Filter>
-      <Filter
+      </SearchFilterModal>
+      <SearchFilterModal
         label="Personne"
         activeFilter={dirigeantFilter}
         searchParams={searchParams}
@@ -77,8 +83,8 @@ const AdvancedSearchFilters: React.FC<{
             defaultValue={dmax}
           />
         </div>
-      </Filter>
-      <Filter
+      </SearchFilterModal>
+      <SearchFilterModal
         label="Situation administrative"
         activeFilter={administrativeFilter}
         searchParams={searchParams}
@@ -93,7 +99,7 @@ const AdvancedSearchFilters: React.FC<{
             placeholder="Choisir un domaine d’activité"
           />
         </div>
-      </Filter>
+      </SearchFilterModal>
 
       <style jsx>{`
         .field-in-line {

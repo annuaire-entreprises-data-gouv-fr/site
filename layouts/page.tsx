@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import Footer from '../components/footer';
-import { Header, HeaderSearch } from '../components/header';
+import { Header, HeaderWithSearch } from '../components/header';
 import Meta from '../components/meta';
 import { Question } from '../components-ui/question';
 import { NPSBanner } from '../components/banner/nps';
@@ -45,7 +45,7 @@ const Page: React.FC<PropsWithChildren<IProps>> = ({
     <NPSBanner />
     <WeNeedYouModal />
     {small ? (
-      <HeaderSearch
+      <HeaderWithSearch
         currentSearchTerm={currentSearchTerm}
         map={map}
         searchParams={searchFilterParams}

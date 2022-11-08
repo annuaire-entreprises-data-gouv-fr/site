@@ -18,6 +18,7 @@ function completeGeoSearch(localisationInput) {
   );
 
   if (localisationInput.value.length >= 2) {
+    responsesContainer.innerHTML = `<br/><i>...recherche en cours</i>`;
     fetch('/api/geo/' + localisationInput.value)
       .then((res) => res.json())
       .then((r) => {
@@ -32,7 +33,11 @@ function completeGeoSearch(localisationInput) {
             label.style.borderBottom = '1px solid #efefef';
             label.innerText = el.label;
             label.onclick = () => {
+              const localisationValue = document.getElementById(
+                'search-localisation-value'
+              );
               localisationInput.value = el.value;
+              localisationValue.value = el.value;
               responsesContainer.innerHTML = '';
             };
             responsesContainer.appendChild(label);
@@ -52,13 +57,15 @@ function completeGeoSearch(localisationInput) {
     const form = document.getElementById('search-bar-form');
 
     if (form) {
-      const localisation = document.getElementById('search-localisation');
-
-      localisation.addEventListener(
-        'input',
-        debounce(() => completeGeoSearch(localisation))
+      const localisationInput = document.getElementById(
+        'search-localisation-input'
       );
-      localisation.addEventListener('keydown', (event) => {
+
+      localisationInput.addEventListener(
+        'input',
+        debounce(() => completeGeoSearch(localisationInput))
+      );
+      localisationInput.addEventListener('keydown', (event) => {
         // prevent submit on enter as input content is not valid dep or cp code
         if (event.keyCode == 13) {
           event.preventDefault();
