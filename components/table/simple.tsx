@@ -118,7 +118,7 @@ const shouldTrim = (label: any) => {
   try {
     // in case label is a JSX element we use the children as label
     // as this is likely to trigger an exception we use a try / catch
-    const labelAsString = label?.props?.children || label || '';
+    const labelAsString = label?.props?.tooltipLabel || label || '';
 
     if (
       labelAsString.indexOf('TVA') > -1 ||

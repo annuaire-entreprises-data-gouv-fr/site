@@ -1,24 +1,15 @@
 import React from 'react';
+import MatomoEvent from '.';
 import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
 
-const MatomoEventRedirected: React.FC<{ sirenOrSiret: Siren | Siret }> = ({
+const MatomoEventFromSearch: React.FC<{ sirenOrSiret: Siren | Siret }> = ({
   sirenOrSiret,
 }) => (
-  <div
-    dangerouslySetInnerHTML={{
-      __html: `
-        <script>
-          var _paq = window._paq || [];
-          _paq.push([
-              'trackEvent',
-              'research:redirected',
-              '${sirenOrSiret}',
-              'redirected=${sirenOrSiret}',
-          ]);
-        </script>
-        `,
-    }}
-  ></div>
+  <MatomoEvent
+    category="research:redirected"
+    action={sirenOrSiret}
+    name={`redirected=${sirenOrSiret}`}
+  />
 );
 
-export default MatomoEventRedirected;
+export default MatomoEventFromSearch;

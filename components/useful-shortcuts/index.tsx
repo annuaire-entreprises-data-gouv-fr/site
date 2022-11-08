@@ -22,7 +22,9 @@ const ShortcutsSection: React.FC<{
             {shortcut.label}
           </a>
         ) : (
-          <a href={shortcut.url}>{shortcut.label}</a>
+          <a href={shortcut.url} rel="nofollow">
+            {shortcut.label}
+          </a>
         )}
       </div>
     ))}

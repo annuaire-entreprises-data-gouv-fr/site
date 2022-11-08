@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next';
 
 import Page from '../../layouts';
 import ButtonLink from '../../components-ui/button';
+import MatomoEvent from '../../components/matomo-event';
 
 const SirenOrSiretNotFoundPage = () => {
   return (
@@ -11,6 +12,7 @@ const SirenOrSiretNotFoundPage = () => {
       title="Numero d’identification introuvable"
       noIndex={true}
     >
+      <MatomoEvent category="error" action="sirenOrSiretNotFound" name="" />
       <h1>Ce numéro d’identification (siren/siret) est introuvable 🔎</h1>
       <div>
         <p>Il existe plusieurs explications possibles :</p>

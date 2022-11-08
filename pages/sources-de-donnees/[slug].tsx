@@ -32,7 +32,6 @@ const SourcesDeDonneesPage: React.FC<IProps> = ({
   <Page
     small={true}
     title={`Statut des API : ${long}`}
-    canonical={`https://annuaire-entreprises.data.gouv.fr/sources-de-donnees/${slug}`}
     isBrowserOutdated={metadata.isBrowserOutdated}
   >
     <div className="content-container">

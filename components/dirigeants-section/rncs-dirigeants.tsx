@@ -71,27 +71,35 @@ const DirigeantsSection: React.FC<IProps> = ({
         ['Dénomination', dirigeant.denomination],
         ['Nature Juridique', dirigeant.natureJuridique],
       ];
+
+      const defaultDenom = dirigeant.denomination || dirigeant.siren;
       if (dirigeant.siren) {
         infos.push(['Siren', formatIntFr(dirigeant.siren)]);
         infos.push([
           '',
           <a href={`/entreprise/${dirigeant.siren}`}>
-            → voir la page de l’entreprise
+            → voir la page de {defaultDenom}
           </a>,
         ]);
         infos.push([
           '',
-          <a href={`/dirigeants/${dirigeant.siren}`}>→ voir les dirigeants</a>,
+          <a href={`/dirigeants/${dirigeant.siren}`}>
+            → voir les dirigeants de {defaultDenom}
+          </a>,
         ]);
       }
       return infos;
     } else {
+      const nomComplet = `${dirigeant.prenom || ''}${
+        dirigeant.prenom && dirigeant.nom ? ' ' : ''
+      }${(dirigeant.nom || '').toUpperCase()}`;
+
       const infos = [
         ['Rôle', dirigeant.role && <b>{dirigeant.role}</b>],
-        ['Nom', (dirigeant.nom || '').toUpperCase()],
-        ['Prénom', dirigeant.prenom],
+        ['Nom', nomComplet],
         ['Mois et année de naissance', dirigeant.dateNaissancePartial],
       ];
+
       if (dirigeant.dateNaissanceFull) {
         infos.push([
           '',

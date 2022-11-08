@@ -41,7 +41,8 @@ const routes = {
         'https://bodacc-datadila.opendatasoft.com/api/datasets/1.0/search/?q=annonces-commerciales',
     },
     site: {
-      recherche: 'https://www.bodacc.fr/annonce/liste/',
+      recherche:
+        'https://www.bodacc.fr/pages/annonces-commerciales/?sort=dateparution',
       annonce: 'https://www.bodacc.fr/annonce/detail-annonce/',
     },
   },
@@ -83,6 +84,8 @@ const routes = {
         'https://stats.data.gouv.fr/index.php?module=API&method=API.getBulkRequest&format=json',
       npsEvents:
         'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=4&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
+      copyPasteEvents:
+        'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=7&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
     },
     tracker: 'https://stats.data.gouv.fr/piwik.php',
   },

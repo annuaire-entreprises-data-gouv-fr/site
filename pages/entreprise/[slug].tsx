@@ -25,7 +25,7 @@ import extractParamsFromContext from '../../utils/server-side-props-helper/extra
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
-  redirected: true;
+  redirected: boolean;
 }
 
 const UniteLegalePage: React.FC<IProps> = ({

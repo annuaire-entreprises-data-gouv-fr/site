@@ -48,11 +48,10 @@ const ConventionCollectivesSection: React.FC<{
       ) : (
         <>
           Cette entité possède {conventionCollectives.length}{' '}
-          <FAQLink
-            to="convention-collective"
-            tooltipLabel="Qu’est-ce qu’une convention collective ?"
-          >
-            convention{plural} collective{plural}
+          <FAQLink tooltipLabel={`convention${plural} collective${plural}`}>
+            <a href="/faq/convention-collective">
+              Qu’est-ce qu’une convention collective ?
+            </a>
           </FAQLink>{' '}
           enregistrée{plural}.
           <p>

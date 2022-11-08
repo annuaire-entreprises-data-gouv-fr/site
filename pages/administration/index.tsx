@@ -16,7 +16,6 @@ const StatusPage: React.FC<{
   <Page
     small={true}
     title="Administrations partenaires de l'Annuaire des Entreprises"
-    canonical={`https://annuaire-entreprises.data.gouv.fr/sources-de-donnees}`}
   >
     <TextWrapper>
       <h1>Administrations partenaires</h1>

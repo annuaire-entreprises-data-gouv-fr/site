@@ -2,6 +2,15 @@
  * COPY TO CLIPBOARD FUNCTION
  */
 
+function logCopyPaste(element) {
+  try {
+    const label = element.closest('tr').childNodes[0].innerText;
+
+    var _paq = window._paq || [];
+    _paq.push(['trackEvent', 'action', 'copyPaste', `${label}`]);
+  } catch {}
+}
+
 export function addCopyFunction(element) {
   element.onclick = () => {
     element.classList.toggle('copy-done');
@@ -20,6 +29,8 @@ export function addCopyFunction(element) {
     window.setTimeout(function () {
       element.classList.toggle('copy-done');
     }, 800);
+
+    logCopyPaste(element);
   };
 }
 

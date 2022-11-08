@@ -8,7 +8,7 @@ const TVACell: React.FC<{}> = ({}) => {
     <FrontStateMachine
       id="tva-cell-wrapper"
       states={[
-        <i>Non renseigné</i>,
+        <i>Non renseigné ou non assujettie</i>,
         <>
           <Loader />
           {/* 
@@ -18,7 +18,7 @@ const TVACell: React.FC<{}> = ({}) => {
           &nbsp;
         </>,
         <CopyPaste id="tva-cell-result" shouldTrim={true}>
-          <i>Non renseigné</i>
+          <i>Non renseigné ou non assujettie</i>
         </CopyPaste>,
         <i>
           Le téléservice du VIES ne fonctionne pas actuellement. Merci de

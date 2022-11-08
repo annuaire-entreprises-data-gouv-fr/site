@@ -54,7 +54,7 @@ const InpiPDF: React.FC<IProps> = ({ siren, metadata }) => {
     <Page
       small={true}
       noIndex={true}
-      title="Réutiliser ou partager l’Annuaire des Entreprises"
+      title="Télécharger le justificatif d’immatriculation"
       isBrowserOutdated={metadata.isBrowserOutdated}
     >
       <br />
@@ -114,8 +114,7 @@ const InpiPDF: React.FC<IProps> = ({ siren, metadata }) => {
         <br />
         <Info>
           L’Annuaire des Entreprises ne permet plus de télécharger le PDF
-          complet, car le téléservice de l’
-          <INPI /> est devenu trop instable.
+          complet.
           <br />
           <br />
           Le PDF qui est en cours de téléchargement est donc la version
