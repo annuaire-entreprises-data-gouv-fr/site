@@ -10,6 +10,8 @@ export interface IParams {
   dmin?: string;
   dmax?: string;
   isEmpty?: boolean;
+  ageMin?: number;
+  ageMax?: number;
 }
 
 class SearchFilterParams {
@@ -32,6 +34,8 @@ class SearchFilterParams {
       n,
       dmin,
       dmax,
+      ageMin: getAge(dmin),
+      ageMax: getAge(dmax),
     };
   }
 
@@ -72,6 +76,17 @@ class SearchFilterParams {
     };
   }
 }
+
+const getAge = (d: string) => {
+  try {
+    var ageDifMs = Date.now() - new Date(d).getTime();
+
+    // this is an approximation of age
+    return Math.floor(ageDifMs / 31557600000);
+  } catch {
+    return undefined;
+  }
+};
 
 const serializeParams = (
   params: IParams | object,

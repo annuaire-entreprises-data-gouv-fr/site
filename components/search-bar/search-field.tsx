@@ -26,6 +26,10 @@ const SearchField = ({
       type="submit"
     />
     <style jsx>{`
+      .fr-search-bar {
+        width: 100%;
+      }
+
       input[type='search'] {
         width: 100%;
         font-family: 'Marianne', sans-serif;

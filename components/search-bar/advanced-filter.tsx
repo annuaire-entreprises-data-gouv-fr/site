@@ -106,7 +106,7 @@ const Filter: React.FC<
           }
 
           label.overlay {
-            width: 100vw;
+            width: 90vw;
             height: 100vh;
             position: fixed;
             top: 0;

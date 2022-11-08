@@ -16,7 +16,7 @@ const ActiveFilter: React.FC<{
         color: #000091;
         background-color: #dfdff1;
         border-radius: 5px;
-        border: 1px solid #dfdff1;
+        border: 1px solid #000091;
       }
       .selected-filter-container:hover {
         border-color: #0a76f6;

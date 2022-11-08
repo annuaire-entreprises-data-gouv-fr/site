@@ -2,7 +2,7 @@ import { EAdministration } from './administrations';
 
 export interface IAPINotRespondingError {
   administration: EAdministration;
-  errorType: 404 | 500 | number;
+  errorType: 404 | 500 | 400 | number;
 }
 
 export const APINotRespondingFactory = (

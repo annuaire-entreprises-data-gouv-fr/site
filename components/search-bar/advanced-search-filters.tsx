@@ -21,7 +21,7 @@ const AdvancedSearchFilters: React.FC<{
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <label>Ville, code postal ou département :</label>
+        <label>Code postal ou numéro de département :</label>
         <input
           className="fr-input"
           id="search-localisation"
@@ -30,22 +30,8 @@ const AdvancedSearchFilters: React.FC<{
           placeholder="ex: 35000"
           defaultValue={cp_dep}
         />
-        <div id="search-localisation-responses" />
-      </Filter>
-      <Filter
-        label="Situation administrative"
-        activeFilter={administrativeFilter}
-        searchParams={searchParams}
-        searchTerm={searchTerm}
-        addSaveClearButton
-      >
-        <div className="select">
-          <label>Domaine d’activité :</label>
-          <SelectCodeSectionNaf
-            name="sap"
-            defaultValue={sap}
-            placeholder="Choisir un domaine d’activité"
-          />
+        <div id="search-localisation-responses">
+          <i>Saisissez une ville ou un département pour rechercher son code.</i>
         </div>
       </Filter>
       <Filter
@@ -89,6 +75,22 @@ const AdvancedSearchFilters: React.FC<{
             id="end"
             name="dmax"
             defaultValue={dmax}
+          />
+        </div>
+      </Filter>
+      <Filter
+        label="Situation administrative"
+        activeFilter={administrativeFilter}
+        searchParams={searchParams}
+        searchTerm={searchTerm}
+        addSaveClearButton
+      >
+        <div className="select">
+          <label>Domaine d’activité :</label>
+          <SelectCodeSectionNaf
+            name="sap"
+            defaultValue={sap}
+            placeholder="Choisir un domaine d’activité"
           />
         </div>
       </Filter>

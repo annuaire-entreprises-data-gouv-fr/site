@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '../components-ui/logo';
 import HiddenH1 from '../components/a11y-components/hidden-h1';
 import AdvancedSearchFilters from '../components/search-bar/advanced-search-filters';
-import SearchBar from '../components/search-bar/search-bar';
+import SearchField from '../components/search-bar/search-field';
 import StructuredDataSearchAction from '../components/structured-data/search';
 import Page from '../layouts';
 
@@ -10,18 +10,27 @@ const Index: React.FC = () => (
   <Page title="L’Annuaire des Entreprises">
     <StructuredDataSearchAction />
     <div className="layout-center">
-      <div className="centered-search">
+      <form
+        className="centered-search"
+        id="search-bar-form"
+        action={'/rechercher'}
+        method="get"
+      >
         <Logo />
         <HiddenH1 title="L’Annuaire des Entreprises" />
         <h2>
           Retrouvez toutes les informations publiques sur une personne morale
           (entreprise, association ou administration)
         </h2>
-        <div className="layout-center search">
-          <SearchBar autoFocus={true} />
+        <div className="search-bar">
+          <SearchField
+            placeholder="Nom, adresse, n° SIRET/SIREN..."
+            defaultValue=""
+            autoFocus={true}
+          />
         </div>
         <br />
-        <div className="layout-center">
+        <div className="layout-center search-filters-container">
           <input type="checkbox" id="show-advanced-search-filter" />
           <label className="more" htmlFor="show-advanced-search-filter">
             Afficher les filtres de recherche
@@ -33,7 +42,7 @@ const Index: React.FC = () => (
             Cacher les filtres de recherche
           </label>
         </div>
-      </div>
+      </form>
     </div>
     <style jsx>{`
       h2 {
@@ -41,8 +50,7 @@ const Index: React.FC = () => (
         margin-top: 30px;
       }
 
-      .search {
-        margin-top: 30px;
+      .layout-center {
         flex-direction: column;
       }
 
@@ -52,13 +60,19 @@ const Index: React.FC = () => (
         max-width: 900px;
       }
 
-      div.advanced-filter-container {
-        display: none;
+      .search-bar {
+        margin: auto;
+        margin-top: 30px;
+        flex-direction: column;
+        width: 100%;
+        max-width: 450px;
       }
 
-      .layout-center {
-        flex-direction: column;
+      div.advanced-filter-container {
+        display: none;
+        flex-wrap: wrap;
       }
+
       label {
         text-decoration: underline;
         cursor: pointer;
@@ -78,6 +92,12 @@ const Index: React.FC = () => (
       }
       input[type='checkbox']:checked ~ label.less {
         display: block;
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 991px) {
+        .search-bar {
+          max-width: 100%;
+        }
       }
     `}</style>
   </Page>
