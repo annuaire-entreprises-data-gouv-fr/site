@@ -1,5 +1,5 @@
 import React from 'react';
-import Document, { Html, Head, Main } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 const manifest = (
   process.env.NODE_ENV === 'production'
@@ -69,42 +69,91 @@ class DevDocument extends Document {
   }
 }
 
-class StaticDocument extends Document {
+class ProdDocument extends Document {
   render() {
+    const useReact = this.props.dangerousAsPath === '/statistiques';
+
     return (
       <Html lang="fr">
-        <CustomHead>
-          {/* Standard Meta */}
-          {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/223019574/D+veloppeurs */}
-          <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" />
-          <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml" />
-          <link
-            rel="shortcut icon"
-            href="/favicons/favicon.ico"
-            type="image/x-icon"
-          />
-          <link
-            rel="manifest"
-            href="/favicons/manifest.webmanifest"
-            cross-origin="use-credentials"
-          />
+        {useReact ? (
+          <Head>
+            <link
+              rel="apple-touch-icon"
+              href="/favicons/apple-touch-icon.png"
+            />
+            <link
+              rel="icon"
+              href="/favicons/favicon.svg"
+              type="image/svg+xml"
+            />
+            <link
+              rel="shortcut icon"
+              href="/favicons/favicon.ico"
+              type="image/x-icon"
+            />
+            <link
+              rel="manifest"
+              href="/favicons/manifest.webmanifest"
+              cross-origin="use-credentials"
+            />
 
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href={`/${manifest['style/dsfr.min.css'].file}`}
-          />
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href={`/${manifest['style/globals.css'].file}`}
-          />
-          <script
-            defer
-            type="module"
-            src={`/${manifest['src/index.js'].file}`}
-          ></script>
-        </CustomHead>
+            <link
+              rel="stylesheet"
+              type="text/css"
+              href={`/${manifest['style/dsfr.min.css'].file}`}
+            />
+            <link
+              rel="stylesheet"
+              type="text/css"
+              href={`/${manifest['style/globals.css'].file}`}
+            />
+            <script
+              defer
+              type="module"
+              src={`/${manifest['src/index.js'].file}`}
+            ></script>
+          </Head>
+        ) : (
+          <CustomHead>
+            {/* Standard Meta */}
+            {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/223019574/D+veloppeurs */}
+            <link
+              rel="apple-touch-icon"
+              href="/favicons/apple-touch-icon.png"
+            />
+            <link
+              rel="icon"
+              href="/favicons/favicon.svg"
+              type="image/svg+xml"
+            />
+            <link
+              rel="shortcut icon"
+              href="/favicons/favicon.ico"
+              type="image/x-icon"
+            />
+            <link
+              rel="manifest"
+              href="/favicons/manifest.webmanifest"
+              cross-origin="use-credentials"
+            />
+
+            <link
+              rel="stylesheet"
+              type="text/css"
+              href={`/${manifest['style/dsfr.min.css'].file}`}
+            />
+            <link
+              rel="stylesheet"
+              type="text/css"
+              href={`/${manifest['style/globals.css'].file}`}
+            />
+            <script
+              defer
+              type="module"
+              src={`/${manifest['src/index.js'].file}`}
+            ></script>
+          </CustomHead>
+        )}
 
         <body>
           <Main />
@@ -132,12 +181,13 @@ class StaticDocument extends Document {
               }}
             ></script>
           )}
+          {useReact && <NextScript />}
         </body>
       </Html>
     );
   }
 }
 
-export default process.env.NODE_ENV === 'production'
-  ? StaticDocument
+export default true || process.env.NODE_ENV === 'production'
+  ? ProdDocument
   : DevDocument;
