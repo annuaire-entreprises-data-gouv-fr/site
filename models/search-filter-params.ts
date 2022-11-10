@@ -10,8 +10,8 @@ export interface IParams {
   dmin?: string;
   dmax?: string;
   isEmpty?: boolean;
-  ageMin?: number;
-  ageMax?: number;
+  ageMin?: number | string;
+  ageMax?: number | string;
 }
 
 class SearchFilterParams {

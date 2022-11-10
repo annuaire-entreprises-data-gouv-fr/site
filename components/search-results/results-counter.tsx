@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ResultsHeader: React.FC<{
+const ResultsCounter: React.FC<{
   resultCount?: number;
   currentPage?: number;
 }> = ({ resultCount = 0, currentPage = 1 }) => {
@@ -41,4 +41,4 @@ const ResultsHeader: React.FC<{
   );
 };
 
-export default ResultsHeader;
+export default ResultsCounter;

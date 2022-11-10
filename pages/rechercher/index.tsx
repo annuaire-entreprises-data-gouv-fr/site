@@ -11,7 +11,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '../../utils/server-side-props-helper/post-server-side-props';
-import ResultsBody from '../../components/search-results/results-body';
+import SearchResults from '../../components/search-results';
 
 interface IProps extends IPropsWithMetadata {
   searchTerm: string;
@@ -37,7 +37,7 @@ const SearchResultPage: React.FC<IProps> = ({
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
     <div className="content-container">
-      <ResultsBody
+      <SearchResults
         results={results}
         searchTerm={searchTerm}
         searchFilterParams={searchFilterParams}

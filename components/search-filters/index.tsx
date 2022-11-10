@@ -1,9 +1,9 @@
 import React from 'react';
 import SelectCodeSectionNaf from '../../components-ui/select/select-section-naf';
 import { extractFilters, IParams } from '../../models/search-filter-params';
-import SearchFilterModal from './search-filter-modal';
+import Filter from './filter';
 
-const AdvancedSearchFilters: React.FC<{
+const SearchFilters: React.FC<{
   searchParams?: IParams;
   searchTerm?: string;
 }> = ({ searchParams = {}, searchTerm = '' }) => {
@@ -14,7 +14,7 @@ const AdvancedSearchFilters: React.FC<{
 
   return (
     <>
-      <SearchFilterModal
+      <Filter
         label="Zone géographique"
         activeFilter={localisationFilter}
         searchParams={searchParams}
@@ -39,8 +39,8 @@ const AdvancedSearchFilters: React.FC<{
         <div id="search-localisation-responses">
           <i>Saisissez une ville ou un département pour rechercher son code.</i>
         </div>
-      </SearchFilterModal>
-      <SearchFilterModal
+      </Filter>
+      <Filter
         label="Personne"
         activeFilter={dirigeantFilter}
         searchParams={searchParams}
@@ -83,8 +83,8 @@ const AdvancedSearchFilters: React.FC<{
             defaultValue={dmax}
           />
         </div>
-      </SearchFilterModal>
-      <SearchFilterModal
+      </Filter>
+      <Filter
         label="Situation administrative"
         activeFilter={administrativeFilter}
         searchParams={searchParams}
@@ -99,7 +99,7 @@ const AdvancedSearchFilters: React.FC<{
             placeholder="Choisir un domaine d’activité"
           />
         </div>
-      </SearchFilterModal>
+      </Filter>
 
       <style jsx>{`
         .field-in-line {
@@ -122,4 +122,4 @@ const AdvancedSearchFilters: React.FC<{
   );
 };
 
-export default AdvancedSearchFilters;
+export default SearchFilters;

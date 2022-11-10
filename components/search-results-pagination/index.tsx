@@ -130,7 +130,7 @@ const Page: React.FC<{
  * @param param0
  * @returns
  */
-const PageCounter: React.FC<IProps> = ({
+const ResultsPagination: React.FC<IProps> = ({
   currentPage,
   searchTerm,
   totalPages,
@@ -202,4 +202,4 @@ const PageCounter: React.FC<IProps> = ({
   );
 };
 
-export default PageCounter;
+export default ResultsPagination;

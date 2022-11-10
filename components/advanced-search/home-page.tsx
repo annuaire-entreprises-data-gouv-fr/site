@@ -1,6 +1,6 @@
-import AdvancedSearchFilters from './advanced-search-filters';
+import SearchFilters from '../search-filters';
 
-const HomePageSearchFilters = () => (
+const HomePageAdvancedSearch = () => (
   <div id="search-filters-container">
     <div className="layout-center">
       <input type="checkbox" id="show-advanced-search-filter" />
@@ -8,7 +8,7 @@ const HomePageSearchFilters = () => (
         Afficher les filtres de recherche
       </label>
       <div className="advanced-filter-container">
-        <AdvancedSearchFilters />
+        <SearchFilters />
       </div>
       <label className="less" htmlFor="show-advanced-search-filter">
         Cacher les filtres de recherche
@@ -48,4 +48,4 @@ const HomePageSearchFilters = () => (
   </div>
 );
 
-export default HomePageSearchFilters;
+export default HomePageAdvancedSearch;

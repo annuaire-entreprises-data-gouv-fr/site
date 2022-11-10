@@ -1,8 +1,8 @@
 import React from 'react';
 import Logo from '../components-ui/logo';
 import HiddenH1 from '../components/a11y-components/hidden-h1';
-import HomePageSearchFilters from '../components/search-bar/home-page-search-filters';
-import SearchBar from '../components/search-bar/search-bar';
+import HomePageAdvancedSearch from '../components/advanced-search/home-page';
+import SearchBar from '../components/search-bar';
 import StructuredDataSearchAction from '../components/structured-data/search';
 import Page from '../layouts';
 
@@ -30,7 +30,7 @@ const Index: React.FC = () => (
           />
         </div>
         <br />
-        <HomePageSearchFilters />
+        <HomePageAdvancedSearch />
       </form>
     </div>
     <style jsx>{`

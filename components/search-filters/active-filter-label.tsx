@@ -1,4 +1,4 @@
-const ActiveFilter: React.FC<{
+const ActiveFilterLabel: React.FC<{
   label?: string;
   icon?: JSX.Element;
   query: string;
@@ -29,4 +29,4 @@ const ActiveFilter: React.FC<{
   </div>
 );
 
-export default ActiveFilter;
+export default ActiveFilterLabel;

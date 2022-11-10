@@ -6,9 +6,9 @@ import {
   ISearchFilter,
 } from '../../models/search-filter-params';
 import randomId from '../../utils/helpers/randomId';
-import ActiveFilter from './active-filters';
+import ActiveFilterLabel from './active-filter-label';
 
-const SearchFilterModal: React.FC<
+const Filter: React.FC<
   PropsWithChildren<{
     label: string;
     activeFilter: ISearchFilter;
@@ -39,7 +39,7 @@ const SearchFilterModal: React.FC<
         <label htmlFor={uuid} className="overlay" />
         <label htmlFor={uuid}>
           {activeFilter.label ? (
-            <ActiveFilter
+            <ActiveFilterLabel
               icon={activeFilter.icon}
               label={activeFilter.label}
               query={clearFilterLink}
@@ -172,4 +172,4 @@ const SearchFilterModal: React.FC<
   );
 };
 
-export default SearchFilterModal;
+export default Filter;

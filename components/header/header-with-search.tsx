@@ -1,10 +1,9 @@
 import React from 'react';
 import { information } from '../../components-ui/icon';
-import MapOrListSwitch from '../search-bar/map-or-list';
 import Logo from '../../components-ui/logo';
-import { buildSearchQuery, IParams } from '../../models/search-filter-params';
-import SearchBar from '../search-bar/search-bar';
-import AdvancedSearchFilters from '../search-bar/advanced-search-filters';
+import { IParams } from '../../models/search-filter-params';
+import AdvancedSearch from '../advanced-search';
+import SearchBar from '../search-bar';
 
 interface IProps {
   currentSearchTerm?: string;
@@ -66,20 +65,11 @@ const HeaderWithSearch: React.FC<IProps> = ({
         </div>
       </div>
       {useAdvancedSearch && (
-        <div id="search-filters-container">
-          <div className="fr-container">
-            <AdvancedSearchFilters
-              searchParams={searchParams}
-              searchTerm={currentSearchTerm}
-            />
-            <div className="map-switch">
-              <MapOrListSwitch
-                isMap={map}
-                query={buildSearchQuery(currentSearchTerm, searchParams)}
-              />
-            </div>
-          </div>
-        </div>
+        <AdvancedSearch
+          searchParams={searchParams}
+          currentSearchTerm={currentSearchTerm}
+          isMap={map}
+        />
       )}
 
       <style jsx>{`
@@ -92,23 +82,6 @@ const HeaderWithSearch: React.FC<IProps> = ({
           width: 470px;
           max-width: 100%;
           flex-grow: 1;
-        }
-
-        #search-filters-container {
-          background-color: #f6f6f6;
-          display: none;
-        }
-
-        #search-filters-container > .fr-container {
-          display: flex;
-          justify-content: start;
-          align-items: center;
-          flex-wrap: wrap;
-        }
-
-        .map-switch {
-          flex-grow: 1;
-          text-align: right;
         }
 
         @media only screen and (min-width: 1px) and (max-width: 991px) {

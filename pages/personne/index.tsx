@@ -12,7 +12,7 @@ import {
 } from '../../utils/server-side-props-helper/post-server-side-props';
 import { IEtatCivil } from '../../models/immatriculation/rncs';
 import ResultsList from '../../components/search-results/results-list';
-import PageCounter from '../../components/results-page-counter';
+import PageCounter from '../../components/search-results-pagination';
 import Info from '../../components-ui/alerts/info';
 
 interface IProps extends IPropsWithMetadata {
