@@ -1,27 +1,11 @@
 import React from 'react';
-import { IParams, hasSearchParam } from '../../models/search-filter-params';
-import MatomoEventSearchClick from '../matomo-event/search-click';
 
 const ResultsHeader: React.FC<{
   resultCount?: number;
   currentPage?: number;
-  searchTerm?: string;
-  searchFilterParams: IParams;
-  isMap?: boolean;
-}> = ({
-  resultCount = 0,
-  currentPage = 1,
-  searchTerm = '',
-  searchFilterParams,
-}) => {
+}> = ({ resultCount = 0, currentPage = 1 }) => {
   return (
     <>
-      <MatomoEventSearchClick
-        position={currentPage - 1}
-        resultCount={resultCount}
-        searchTerm={searchTerm}
-        isAdvancedSearch={hasSearchParam(searchFilterParams)}
-      />
       {resultCount ? (
         <div className="results-counter">
           <span>

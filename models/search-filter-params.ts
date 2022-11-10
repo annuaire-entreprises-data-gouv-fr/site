@@ -79,12 +79,16 @@ class SearchFilterParams {
 
 const getAge = (d: string) => {
   try {
-    var ageDifMs = Date.now() - new Date(d).getTime();
+    const ageMilliseconds = Date.now() - new Date(d).getTime();
 
     // this is an approximation of age
-    return Math.floor(ageDifMs / 31557600000);
+    const age = Math.floor(ageMilliseconds / 31557600000);
+    if (isNaN(ageMilliseconds)) {
+      return '';
+    }
+    return age;
   } catch {
-    return undefined;
+    return '';
   }
 };
 

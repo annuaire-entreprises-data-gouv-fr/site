@@ -39,12 +39,14 @@ const MapSearchResultPage: React.FC<IProps> = ({
   >
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
-    <ResultsBody
-      results={results}
-      searchTerm={searchTerm}
-      searchFilterParams={searchFilterParams}
-      map={true}
-    />
+    <div className="content-container">
+      <ResultsBody
+        results={results}
+        searchTerm={searchTerm}
+        searchFilterParams={searchFilterParams}
+        map={true}
+      />
+    </div>
   </Page>
 );
 

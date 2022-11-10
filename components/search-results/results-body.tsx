@@ -7,7 +7,6 @@ import MapResults from '../map/map-results';
 import ResultsList from './results-list';
 import PageCounter from '../results-page-counter';
 import { getFaqArticlesByTag } from '../../models/faq';
-import Warning from '../../components-ui/alerts/warning';
 
 const NotEnoughParams = () => {
   const articles = getFaqArticlesByTag(['search']);
@@ -48,10 +47,11 @@ const NotEnoughParams = () => {
         </p>
         Vous pouvez, au choix :
         <ul>
-          <li>Utilisez un terme de recherche plus long (au moins 3 lettres)</li>
+          <li>Utiliser un terme de recherche plus long (au moins 3 lettres)</li>
           <li>
-            Utilisez des critères de recherche géographiques ou administratifs
+            Utiliser des critères de recherche géographiques ou administratifs
           </li>
+          <li>Rechercher toutes les entreprises associées a une personne</li>
         </ul>
         <br />
         <b>
@@ -91,9 +91,7 @@ const ResultsBody: React.FC<{
     return (
       <ResultsHeader
         resultCount={results.resultCount}
-        searchTerm={searchTerm}
         currentPage={results.currentPage}
-        searchFilterParams={searchFilterParams}
       />
     );
   }
@@ -108,10 +106,7 @@ const ResultsBody: React.FC<{
               <div className="results-counter">
                 <ResultsHeader
                   resultCount={results.resultCount}
-                  searchTerm={searchTerm}
                   currentPage={results.currentPage}
-                  isMap={true}
-                  searchFilterParams={searchFilterParams}
                 />
               </div>
               <ResultsList results={results.results} />
@@ -182,9 +177,7 @@ const ResultsBody: React.FC<{
       <>
         <ResultsHeader
           resultCount={results.resultCount}
-          searchTerm={searchTerm}
           currentPage={results.currentPage}
-          searchFilterParams={searchFilterParams}
         />
         <div>
           <ResultsList
