@@ -47,7 +47,10 @@ describe('Footer navigation', () => {
     cy.visit('/');
 
     cy.get('.fr-footer a').each((footerLink) => {
-      cy.request(footerLink.prop('href'));
+      // donot test departements/index.html as it only exists in production and staging
+      if (footerLink.prop('href').indexOf('departements/index.html') === -1) {
+        cy.request(footerLink.prop('href'));
+      }
     });
   });
 });

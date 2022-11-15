@@ -53,10 +53,10 @@ class SearchFilterParams {
       code_postal,
       section_activite_principale: this.params.sap,
       departement,
-      prenoms_dirigeant: this.params.fn?.trim(),
-      nom_dirigeant: this.params.n?.trim(),
-      date_naissance_dirigeant_min: this.params.dmin,
-      date_naissance_dirigeant_max: this.params.dmax,
+      prenoms_personne: this.params.fn?.trim(),
+      nom_personne: this.params.n?.trim(),
+      date_naissance_personne_min: this.params.dmin,
+      date_naissance_personne_max: this.params.dmax,
     });
   }
 
