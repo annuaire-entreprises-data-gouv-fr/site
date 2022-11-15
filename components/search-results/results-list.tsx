@@ -1,14 +1,17 @@
 import React from 'react';
-import { ISearchResult, ISearchResults } from '../../models/search';
+import { ISearchResult } from '../../models/search';
 import { SearchFeedback } from '../search-feedback';
 import { Tag } from '../../components-ui/tag';
 import IsActiveTag from '../../components-ui/is-active-tag';
 import { IETATADMINSTRATIF } from '../../models/etat-administratif';
+import { humanPin } from '../../components-ui/icon';
+import { isPersonneMorale } from '../dirigeants-section/rncs-dirigeants';
+import { IDirigeant } from '../../models/immatriculation/rncs';
 
 interface IProps {
   results: ISearchResult[];
-  searchTerm?: string;
   withFeedback?: boolean;
+  searchTerm?: string;
 }
 
 const EtablissmentTagLabel: React.FC<{ result: ISearchResult }> = ({
@@ -24,12 +27,41 @@ const EtablissmentTagLabel: React.FC<{ result: ISearchResult }> = ({
   );
 };
 
+const DirigeantsList: React.FC<{ dirigeants: IDirigeant[] }> = ({
+  dirigeants,
+}) => {
+  const displayMax = 5;
+  const firstFive = dirigeants.slice(0, displayMax);
+  const moreCount = Math.max(dirigeants.length - displayMax, 0);
+
+  return (
+    <div className="dirigeants">
+      {firstFive
+        .map((dirigeant) =>
+          isPersonneMorale(dirigeant)
+            ? `${dirigeant.denomination}`
+            : `${dirigeant.prenom} ${dirigeant.nom}`
+        )
+        .join(', ')}
+      {moreCount > 0 && `, et ${moreCount} autre${moreCount === 1 ? '' : 's'}`}
+      <style jsx>{`
+        .dirigeants {
+          font-size: 0.9rem;
+          color: #555;
+          margin: 8px auto 0;
+        }
+      `}</style>
+    </div>
+  );
+};
+
 const ResultsList: React.FC<IProps> = ({
   results,
   withFeedback = false,
   searchTerm = '',
 }) => (
-  <div className="results-wrapper">
+  <>
+    {withFeedback && <SearchFeedback searchTerm={searchTerm} />}
     <div className="results-list">
       {results.map((result) => (
         <a
@@ -45,6 +77,9 @@ const ResultsList: React.FC<IProps> = ({
             )}
           </div>
           <div>{result.libelleActivitePrincipale}</div>
+          {result.dirigeants.length > 0 && (
+            <DirigeantsList dirigeants={result.dirigeants} />
+          )}
           <div className="adress">
             <span>{result.adresse || 'Adresse inconnue'} </span>
             <EtablissmentTagLabel result={result} />
@@ -52,13 +87,7 @@ const ResultsList: React.FC<IProps> = ({
         </a>
       ))}
     </div>
-    {withFeedback && <SearchFeedback searchTerm={searchTerm} />}
     <style jsx>{`
-      .results-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-      }
       .results-list > a {
         text-decoration: none;
         border: none;
@@ -82,14 +111,8 @@ const ResultsList: React.FC<IProps> = ({
         color: #707070;
         font-variant: all-small-caps;
       }
-
-      @media only screen and (min-width: 1px) and (max-width: 900px) {
-        .results-wrapper {
-          flex-direction: column-reverse;
-        }
-      }
     `}</style>
-  </div>
+  </>
 );
 
 export default ResultsList;

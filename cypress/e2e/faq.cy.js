@@ -1,13 +1,13 @@
 describe(`FAQ contextual links`, () => {
   it('Adresse link', () => {
     cy.visit(`/etablissement/88087814500015`).then((resp) => {
-      cy.contains('Adresse').click();
+      cy.contains('Comment modifier une adresse ?').click({ force: true });
       cy.url().should('include', '/faq/modifier-adresse');
     });
   });
   it('TVA link', () => {
     cy.visit(`/entreprise/880878145`).then((resp) => {
-      cy.contains('N° TVA Intracommunautaire').click();
+      cy.contains('le numéro de TVA intracommunautaire').click({ force: true });
       cy.url().should('include', '/faq/tva-intracommunautaire');
     });
   });

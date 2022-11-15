@@ -6,6 +6,7 @@ const Select: React.FC<{
   name?: string;
   options: { value: string; label: string }[];
   defaultValue?: string;
+  className?: string;
 }> = ({
   label,
   options,

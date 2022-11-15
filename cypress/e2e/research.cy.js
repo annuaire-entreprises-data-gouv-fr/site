@@ -1,9 +1,10 @@
 describe('Home page’s search bar', () => {
-  it('needs a search term', () => {
+  it('Allow an empty search term', () => {
     cy.visit('/');
 
     cy.get('.fr-search-bar > button').click();
-    cy.get('input:invalid').should('have.length', 1);
+    cy.url().should('include', '/rechercher?terme=&');
+    cy.contains('Votre requête ne contient pas assez de paramètres');
   });
 
   it('allows to research "Ganymede"', () => {
@@ -17,17 +18,20 @@ describe('Home page’s search bar', () => {
 
     // Should be on a new URL which includes '/commands/actions'
     cy.url().should('include', '/rechercher?terme=Ganymede');
+    cy.contains('GANYMEDE');
   });
 });
 
 describe('Header’s search bar', () => {
-  it('needs a search term', () => {
+  it('Allow an empty search term', () => {
     cy.visit('/rechercher?terme=Kikou');
 
-    cy.get('.fr-search-bar > input').clear().should('have.value', '');
+    cy.get('.fr-search-bar > input').clear();
 
     cy.get('.fr-search-bar > button').click();
-    cy.get('input:invalid').should('have.length', 1);
+
+    cy.url().should('include', '/rechercher?terme=&');
+    cy.contains('Votre requête ne contient pas assez de paramètres');
   });
 
   it('allows to research "Ganymede"', () => {

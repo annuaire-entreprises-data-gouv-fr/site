@@ -1,6 +1,6 @@
 import logo from '../../public/images/logo';
 
-const Logo = ({ width = 300 }) => (
+const Logo = ({ width = 270 }) => (
   <div className="logo-wrapper">
     {logo}
     <style jsx>

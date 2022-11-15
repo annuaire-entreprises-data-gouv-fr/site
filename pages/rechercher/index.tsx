@@ -2,20 +2,16 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import ResultsList from '../../components/results-list';
-import PageCounter from '../../components/results-page-counter';
 import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
 import search, { ISearchResults } from '../../models/search';
-import ResultsHeader from '../../components/results-header';
 import HiddenH1 from '../../components/a11y-components/hidden-h1';
 import StructuredDataSearchAction from '../../components/structured-data/search';
-import { isAPINotResponding } from '../../models/api-not-responding';
-import { SearchErrorExplanations } from '../../components/error-explanations';
 import SearchFilterParams, { IParams } from '../../models/search-filter-params';
 import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '../../utils/server-side-props-helper/post-server-side-props';
+import SearchResults from '../../components/search-results';
 
 interface IProps extends IPropsWithMetadata {
   searchTerm: string;
@@ -36,45 +32,17 @@ const SearchResultPage: React.FC<IProps> = ({
     title="Rechercher une entreprise"
     canonical="https://annuaire-entreprises.data.gouv.fr"
     isBrowserOutdated={metadata.isBrowserOutdated}
+    useAdvancedSearch={true}
   >
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
-    <div className="result-content-container">
-      {isAPINotResponding(results) ? (
-        <SearchErrorExplanations />
-      ) : (
-        <>
-          <ResultsHeader
-            resultCount={results.resultCount}
-            searchTerm={searchTerm}
-            currentPage={results.currentPage}
-            notEnoughParams={results.notEnoughParams}
-          />
-          {results && (
-            <div>
-              <ResultsList
-                results={results.results}
-                withFeedback={true}
-                searchTerm={searchTerm}
-              />
-              <PageCounter
-                totalPages={results.pageCount}
-                querySuffix={`terme=${searchTerm}`}
-                currentPage={results.currentPage}
-                searchFilterParams={searchFilterParams}
-              />
-            </div>
-          )}
-        </>
-      )}
+    <div className="content-container">
+      <SearchResults
+        results={results}
+        searchTerm={searchTerm}
+        searchFilterParams={searchFilterParams}
+      />
     </div>
-
-    <style jsx>{`
-      .results-counter {
-        margin-top: 20px;
-        color: rgb(112, 117, 122);
-      }
-    `}</style>
   </Page>
 );
 
@@ -85,8 +53,8 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const pageParam = (context.query.page || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
     const searchFilterParams = new SearchFilterParams(context.query);
+    const results = await search(searchTerm, page, searchFilterParams);
 
-    const results = (await search(searchTerm, page, searchFilterParams)) || {};
     return {
       props: {
         results,

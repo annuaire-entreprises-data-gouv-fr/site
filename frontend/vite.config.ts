@@ -4,7 +4,6 @@ import autoprefixer from 'autoprefixer';
 const purgeConfig = {
   content: ['./**/*.tsx', './**/*.html'],
   css: ['frontend/style/dsfr.min.css'],
-  fontFace: false, // otherwise, it will remove dsfr icon
 };
 
 const purgecss = require('@fullhuman/postcss-purgecss')(purgeConfig);

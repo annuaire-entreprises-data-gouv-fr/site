@@ -23,7 +23,7 @@ import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-
  * @param toBeDetermined
  * @returns
  */
-const isPersonneMorale = (
+export const isPersonneMorale = (
   toBeDetermined: IEtatCivil | IPersonneMorale
 ): toBeDetermined is IPersonneMorale => {
   if (
@@ -34,6 +34,7 @@ const isPersonneMorale = (
   }
   return false;
 };
+
 interface IProps {
   immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
   siren: Siren;
@@ -93,11 +94,23 @@ const DirigeantsSection: React.FC<IProps> = ({
         dirigeant.prenom && dirigeant.nom ? ' ' : ''
       }${(dirigeant.nom || '').toUpperCase()}`;
 
-      return [
+      const infos = [
         ['Rôle', dirigeant.role && <b>{dirigeant.role}</b>],
         ['Nom', nomComplet],
         ['Mois et année de naissance', dirigeant.dateNaissancePartial],
       ];
+
+      if (dirigeant.dateNaissanceFull) {
+        infos.push([
+          '',
+          <a
+            href={`/personne?n=${dirigeant.nom}&fn=${dirigeant.prenom}&dmin=${dirigeant.dateNaissanceFull}&sirenFrom=${siren}`}
+          >
+            → rechercher ses entreprises
+          </a>,
+        ]);
+      }
+      return infos;
     }
   };
 

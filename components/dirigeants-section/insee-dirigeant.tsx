@@ -20,8 +20,15 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
 }) => {
   const data = [
     ['Rôle', <b>Représentant Légal</b>],
-    ['Nom', (dirigeant.sexe === 'M' ? 'M. ' : 'Mme ') + dirigeant.nom],
-    ['Prénom', dirigeant.prenom],
+    ['Nom', `${dirigeant.prenom} ${dirigeant.nom}`],
+    ['Mois et année de naissance', ''],
+    [
+      '',
+      <a href={`/rechercher?fn=${dirigeant.prenom}&n=${dirigeant.nom}`}>
+        → rechercher les entreprises dirigées par une personne appelée «{' '}
+        {dirigeant.prenom} {dirigeant.nom} »
+      </a>,
+    ],
   ];
 
   const femininMasculin = dirigeant.sexe === 'M' ? '' : 'e';
