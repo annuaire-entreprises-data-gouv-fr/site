@@ -17,7 +17,6 @@ function completeGeoSearch(localisationInput) {
     'search-localisation-responses'
   );
 
-  console.log(localisationInput.value);
   if (!isNaN(localisationInput.value)) {
     return;
   }
