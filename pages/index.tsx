@@ -7,7 +7,10 @@ import StructuredDataSearchAction from '../components/structured-data/search';
 import Page from '../layouts';
 
 const Index: React.FC = () => (
-  <Page title="L’Annuaire des Entreprises">
+  <Page
+    title="L’Annuaire des Entreprises"
+    canonical="https://annuaire-entreprises.data.gouv.fr"
+  >
     <StructuredDataSearchAction />
     <div className="layout-center">
       <form

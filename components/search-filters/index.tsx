@@ -1,4 +1,5 @@
 import React from 'react';
+import SelectCodeNaf from '../../components-ui/select/select-code-naf';
 import SelectCodeSectionNaf from '../../components-ui/select/select-section-naf';
 import { extractFilters, IParams } from '../../models/search-filter-params';
 import Filter from './filter';
@@ -7,7 +8,7 @@ const SearchFilters: React.FC<{
   searchParams?: IParams;
   searchTerm?: string;
 }> = ({ searchParams = {}, searchTerm = '' }) => {
-  const { cp_dep, sap, fn, n, dmin, dmax } = searchParams || {};
+  const { cp_dep, sap, naf, fn, n, dmin, dmax } = searchParams || {};
 
   const { localisationFilter, dirigeantFilter, administrativeFilter } =
     extractFilters(searchParams || {});
@@ -27,12 +28,6 @@ const SearchFilters: React.FC<{
           id="search-localisation-input"
           autoComplete="off"
           placeholder="ex: 35000"
-          defaultValue={cp_dep}
-        />
-        <input
-          id="search-localisation-value"
-          style={{ display: 'none' }}
-          aria-hidden="true"
           name="cp_dep"
           defaultValue={cp_dep}
         />
@@ -97,6 +92,12 @@ const SearchFilters: React.FC<{
             name="sap"
             defaultValue={sap}
             placeholder="Choisir un domaine d’activité"
+          />
+          <label>Code NAF/APE :</label>
+          <SelectCodeNaf
+            name="naf"
+            defaultValue={naf}
+            placeholder="Choisir un code NAF/APE"
           />
         </div>
       </Filter>

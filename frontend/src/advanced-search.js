@@ -17,8 +17,12 @@ function completeGeoSearch(localisationInput) {
     'search-localisation-responses'
   );
 
+  if (!isNaN(localisationInput.value)) {
+    return;
+  }
+
   if (localisationInput.value.length >= 2) {
-    responsesContainer.innerHTML = `<br/><i>...recherche en cours</i>`;
+    responsesContainer.innerHTML = `<br/><i>...recherche de suggestions</i>`;
     fetch('/api/geo/' + localisationInput.value)
       .then((res) => res.json())
       .then((r) => {
@@ -33,18 +37,16 @@ function completeGeoSearch(localisationInput) {
             label.style.borderBottom = '1px solid #efefef';
             label.innerText = el.label;
             label.onclick = () => {
-              const localisationValue = document.getElementById(
-                'search-localisation-value'
-              );
               localisationInput.value = el.value;
-              localisationValue.value = el.value;
               responsesContainer.innerHTML = '';
             };
             responsesContainer.appendChild(label);
           });
         }
       })
-      .catch();
+      .catch(() => {
+        responsesContainer.innerHTML = `<br/><b>Notre moteur de suggestion est actuellement indisponible.<br/>Vous pouvez cependant saisir directement le code postal ou le code département.</b>`;
+      });
   }
 }
 
@@ -65,6 +67,7 @@ function completeGeoSearch(localisationInput) {
         'input',
         debounce(() => completeGeoSearch(localisationInput))
       );
+
       localisationInput.addEventListener('keydown', (event) => {
         // prevent submit on enter as input content is not valid dep or cp code
         if (event.keyCode == 13) {
@@ -72,6 +75,16 @@ function completeGeoSearch(localisationInput) {
           return false;
         }
       });
+
+      const applyButton = filtersContainer.querySelector('button');
+      applyButton.onclick = (e) => {
+        localisationInput.setCustomValidity('');
+        if (isNaN(localisationInput.value)) {
+          localisationInput.setCustomValidity(
+            'Veuillez selectionner une ville ou un département dans la liste de suggestions, ou bien saisir directement le code postal ou le code département.'
+          );
+        }
+      };
     }
   }
 })();
