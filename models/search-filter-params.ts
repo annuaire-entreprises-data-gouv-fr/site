@@ -1,9 +1,10 @@
 import { building, humanPin, mapPin } from '../components-ui/icon';
-import { libelleFromCodeSectionNaf } from '../utils/labels';
+import { libelleFromCodeNAF, libelleFromCodeSectionNaf } from '../utils/labels';
 import { IEtatCivil } from './immatriculation/rncs';
 
 export interface IParams {
   sap?: string;
+  naf: string;
   cp_dep?: string;
   fn?: string;
   n?: string;
@@ -25,15 +26,18 @@ class SearchFilterParams {
       n = '',
       dmin = '',
       dmax = '',
+      naf = '',
     } = query;
 
     this.params = {
       sap,
-      cp_dep,
+      //@ts-ignore
+      cp_dep: isNaN(cp_dep) ? '' : cp_dep,
       fn,
       n,
       dmin,
       dmax,
+      naf,
       ageMin: getAge(dmin),
       ageMax: getAge(dmax),
     };
@@ -44,7 +48,7 @@ class SearchFilterParams {
   }
 
   public toApiURI() {
-    const cp_dep = this.params.cp_dep || '';
+    let cp_dep = this.params.cp_dep || '';
     const code_postal = cp_dep.length === 5 ? cp_dep : '';
     const departement =
       cp_dep.length === 3 || cp_dep.length === 2 ? cp_dep : '';
@@ -57,6 +61,7 @@ class SearchFilterParams {
       nom_personne: this.params.n?.trim(),
       date_naissance_personne_min: this.params.dmin,
       date_naissance_personne_max: this.params.dmax,
+      activite_principale: this.params.naf,
     });
   }
 
@@ -131,7 +136,7 @@ export const extractFilters = (params: IParams) => {
     administrativeFilter: {
       icon: building,
       label: '',
-      excludeParams: ['sap'],
+      excludeParams: ['sap', 'naf'],
     },
     localisationFilter: {
       icon: mapPin,
@@ -150,6 +155,12 @@ export const extractFilters = (params: IParams) => {
   }
   if (params.sap) {
     f.administrativeFilter.label = libelleFromCodeSectionNaf(params.sap);
+  }
+  if (params.sap && params.naf) {
+    f.administrativeFilter.label += '・';
+  }
+  if (params.naf) {
+    f.administrativeFilter.label += libelleFromCodeNAF(params.naf);
   }
 
   if (params.cp_dep) {
