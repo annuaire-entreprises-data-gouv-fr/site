@@ -4,7 +4,7 @@ import { IEtatCivil } from './immatriculation/rncs';
 
 export interface IParams {
   sap?: string;
-  naf: string;
+  naf?: string;
   cp_dep?: string;
   fn?: string;
   n?: string;
