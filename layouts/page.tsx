@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import Footer from '../components/footer';
-import { Header, HeaderSearch } from '../components/header';
+import { Header, HeaderWithSearch } from '../components/header';
 import Meta from '../components/meta';
 import { Question } from '../components-ui/question';
 import { NPSBanner } from '../components/banner/nps';
@@ -18,6 +18,7 @@ interface IProps {
   canonical?: string;
   noIndex?: boolean;
   isBrowserOutdated?: boolean;
+  useAdvancedSearch?: boolean;
 }
 
 const Page: React.FC<PropsWithChildren<IProps>> = ({
@@ -31,6 +32,7 @@ const Page: React.FC<PropsWithChildren<IProps>> = ({
   canonical,
   noIndex = false,
   isBrowserOutdated = false,
+  useAdvancedSearch = false,
 }) => (
   <div id="page-layout">
     <Meta
@@ -43,10 +45,11 @@ const Page: React.FC<PropsWithChildren<IProps>> = ({
     <NPSBanner />
     <WeNeedYouModal />
     {small ? (
-      <HeaderSearch
+      <HeaderWithSearch
         currentSearchTerm={currentSearchTerm}
         map={map}
-        searchFilterParams={searchFilterParams}
+        searchParams={searchFilterParams}
+        useAdvancedSearch={useAdvancedSearch}
       />
     ) : (
       <Header />

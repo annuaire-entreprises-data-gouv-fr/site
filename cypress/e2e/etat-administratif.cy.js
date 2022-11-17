@@ -5,12 +5,12 @@ describe('Etat administratif', () => {
   });
 
   it('Diffusible', () => {
-    cy.visit('/entreprise/880878145');
+    cy.visit('/entreprise/552032534');
     cy.contains('en activité').should('have.length', 1);
   });
 
   it('En sommeil', () => {
-    cy.visit('/entreprise/333257343');
+    cy.visit('/entreprise/880878145');
     cy.contains('en sommeil').should('have.length', 1);
   });
 

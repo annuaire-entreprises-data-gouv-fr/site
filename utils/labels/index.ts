@@ -7,6 +7,7 @@ import { codesEffectifs } from './codes-effectifs';
 import { codesVoies } from './codes-voie';
 import { categoriesEntreprise } from './categories-entreprise';
 import { departements } from './departements';
+import { codesSectionNAF } from './codes-section-NAF';
 
 export const getDepartementFromCodePostal = (codePostal: string) => {
   if (!codePostal || codePostal.length !== 5 || codePostal.startsWith('00')) {
@@ -64,6 +65,12 @@ export const libelleFromCodeNAF = (
   //@ts-ignore
   const label = codes[code] || 'Activité inconnue';
   return addCode && code ? `${code} - ${label}` : label;
+};
+
+export const libelleFromCodeSectionNaf = (code: string) => {
+  //@ts-ignore
+  const label = codesSectionNAF[code];
+  return label ? label : 'Section inconnue';
 };
 
 export const libelleFromCodeNAFWithoutNomenclature = (code = '') => {

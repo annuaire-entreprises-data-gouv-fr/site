@@ -1,32 +1,80 @@
-const paths = [
-  '/rechercher',
-  // '/rechercher/carte'
-];
+const path = '/rechercher';
 
-paths.forEach((path) => {
-  describe('Advanced search on page ' + path, () => {
-    it('shows filters', () => {
-      cy.visit(path + '?terme=Ganymede');
+describe('Home page', () => {
+  it('Open advanced filters', () => {
+    cy.visit('/');
 
-      cy.contains('recherche avancée').click();
-      cy.contains('Filtrer par code postal').should('be.visible');
-    });
+    cy.contains('Personne').should('not.be.visible');
+    cy.contains('Afficher les filtres').click();
+    cy.contains('Personne').should('be.visible');
+    cy.contains('Cacher les filtres de recherche').should('be.visible');
 
-    it('filters works', () => {
-      cy.visit(
-        path + '?terme=Ganymede&code_postal=75008&section_activite_principale=J'
-      );
-      cy.get('.results-list').should('have.length', 1);
-    });
+    cy.contains('Zone géographique').click({ force: true });
+    cy.get('#search-localisation-input').type(35000);
+    cy.contains('Appliquer').click();
 
-    it('Filters propagate on pagination', () => {
-      cy.visit(
-        path + '?terme=la+poste&code_postal=&section_activite_principale=A'
-      );
-      cy.get('.fr-pagination').should('exist');
-      cy.get('.fr-pagination__link[title="Page 3"]').click();
-      cy.url().should('include', 'section_activite_principale=A');
-    });
+    cy.url().should('include', '/rechercher?terme=&cp_dep=35000');
+  });
+});
+
+describe('Advanced search on page ' + path, () => {
+  it('Shows filters', () => {
+    cy.visit(path + '?terme=Ganymede');
+
+    cy.contains('Zone géographique').click({ force: true });
+    cy.contains('Code postal').should('be.visible');
+    cy.contains('Zone géographique').click({ force: true });
+    cy.contains('Code postal').should('not.be.visible');
+
+    cy.contains('Personne').click({ force: true });
+    cy.contains('Rechercher les entreprises liées à une personne').should(
+      'be.visible'
+    );
+
+    cy.contains('Situation administrative').click({ force: true });
+    cy.contains('Domaine d’activité').should('be.visible');
+  });
+
+  it('Geo filter works', () => {
+    cy.visit(path + '?terme=Ganymede');
+
+    cy.contains('Zone géographique').click({ force: true });
+    cy.get('#search-localisation-input').type(35000);
+    cy.contains('Appliquer').click();
+
+    cy.url().should('include', '/rechercher?terme=Ganymede&cp_dep=35000');
+  });
+
+  it('shows filters', () => {
+    cy.visit(path + '?terme=Ganymede');
+
+    cy.contains('Zone géographique').click({ force: true });
+    cy.contains('Code postal').should('be.visible');
+    cy.contains('Zone géographique').click({ force: true });
+    cy.contains('Code postal').should('not.be.visible');
+
+    cy.contains('Personne').click({ force: true });
+    cy.contains('Rechercher les entreprises liées à une personne').should(
+      'be.visible'
+    );
+
+    cy.contains('Situation administrative').click({ force: true });
+    cy.contains('Domaine d’activité').should('be.visible');
+  });
+
+  it('filters works', () => {
+    cy.visit(path + '?terme=Ganymede&cp_dep=75008&sap=J');
+    cy.get('.results-list').should('have.length', 1);
+
+    cy.visit(path + '?terme=Ganymede&cp_dep=35000&sap=J');
+    cy.get('.results-list').should('have.length', 0);
+  });
+
+  it('Filters propagate on pagination', () => {
+    cy.visit(path + '?terme=la+poste&cp_dep=&sap=A');
+    cy.get('.fr-pagination').should('exist');
+    cy.get('.fr-pagination__link[title="Page 3"]').click();
+    cy.url().should('include', 'sap=A');
   });
 });
 
@@ -42,7 +90,7 @@ describe('Minimum search conditions', () => {
   });
 
   it('Results if term < 3 and filters', () => {
-    cy.visit('/rechercher?terme=ag&code_postal=35000');
+    cy.visit('/rechercher?terme=ag&cp_dep=35000');
     cy.contains('ne contient pas assez de paramètres').should('have.length', 0);
   });
 });

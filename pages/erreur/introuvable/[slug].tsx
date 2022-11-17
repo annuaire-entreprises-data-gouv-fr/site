@@ -1,11 +1,11 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 
-import Page from '../../layouts';
-import ButtonLink from '../../components-ui/button';
-import MatomoEvent from '../../components/matomo-event';
+import Page from '../../../layouts';
+import ButtonLink from '../../../components-ui/button';
+import MatomoEvent from '../../../components/matomo-event';
 
-const SirenOrSiretNotFoundPage = () => {
+const SirenOrSiretNotFoundPage = ({ slug = '' }) => {
   return (
     <Page
       small={true}
@@ -13,7 +13,7 @@ const SirenOrSiretNotFoundPage = () => {
       noIndex={true}
     >
       <MatomoEvent category="error" action="sirenOrSiretNotFound" name="" />
-      <h1>Ce numéro d’identification (siren/siret) est introuvable 🔎</h1>
+      <h1>Le numéro d’identification “{slug}” n’existe pas</h1>
       <div>
         <p>Il existe plusieurs explications possibles :</p>
         <ul>
@@ -46,7 +46,9 @@ const SirenOrSiretNotFoundPage = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   context.res.statusCode = 404;
-  return { props: {} };
+  const slug = (context?.params?.slug || '') as string;
+
+  return { props: { slug } };
 };
 
 export default SirenOrSiretNotFoundPage;

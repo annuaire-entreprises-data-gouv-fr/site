@@ -1,16 +1,16 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 
-import Page from '../../layouts';
-import ButtonLink from '../../components-ui/button';
-import constants from '../../models/constants';
-import MatomoEvent from '../../components/matomo-event';
+import Page from '../../../layouts';
+import ButtonLink from '../../../components-ui/button';
+import constants from '../../../models/constants';
+import MatomoEvent from '../../../components/matomo-event';
 
-const SirenOrSiretInvalidPage = () => {
+const SirenOrSiretInvalidPage = ({ slug = '' }) => {
   return (
-    <Page small={true} title="Numero d’identification invalide" noIndex={true}>
+    <Page small={true} title="Numero invalide" noIndex={true}>
       <MatomoEvent category="error" action="sirenOrSiretInvalid" name="" />
-      <h1>⚠️ Attention : ce numéro d’identification est invalide ❗️</h1>
+      <h1>⚠️ Attention : le numéro d’identification “{slug}” est invalide</h1>
       <div>
         <p>
           Si vous voyez cette page, c’est que le numéro que vous recherchez
@@ -25,8 +25,8 @@ const SirenOrSiretInvalidPage = () => {
           </a>
         </p>
         <p>
-          Nous vous invitons à la plus grande vigilance, car il peut s’agir d’un
-          numéro frauduleux :
+          Nous vous invitons à la plus grande vigilance,{' '}
+          <b>car il peut s’agir d’un numéro frauduleux</b>&nbsp;:
         </p>
         <ul>
           <li>
@@ -53,7 +53,13 @@ const SirenOrSiretInvalidPage = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   context.res.statusCode = 400;
-  return { props: {} };
+  const slug = (context?.params?.slug || '') as string;
+
+  return {
+    props: {
+      slug,
+    },
+  };
 };
 
 export default SirenOrSiretInvalidPage;

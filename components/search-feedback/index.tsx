@@ -17,11 +17,9 @@ export const SearchFeedback: React.FC<{ searchTerm: string }> = ({
               </span>`,
       }}
     />
-    👋 Bonjour ! On aimerait bien savoir : avez-vous trouvé la structure que
-    vous recherchez ?
-    <br />
-    <br />
-    <div
+    👋 Bonjour ! On aimerait savoir : avez-vous trouvé la structure que vous
+    recherchez ?
+    <span
       dangerouslySetInnerHTML={{
         __html: `
               <button onclick="window.logResearchFeedback(1, '${serializeForClientScript(
@@ -38,12 +36,11 @@ export const SearchFeedback: React.FC<{ searchTerm: string }> = ({
     />
     <style global jsx>{`
       #search-feedback {
-        width: 100%;
-        max-width: 300px;
-        background-color: #dfdff1;
+        background-color: #fffde6;
         border-radius: 3px;
         color: #000091;
-        padding: 10px 20px 20px;
+        margin: 20px 0 10px;
+        padding: 10px 20px;
         display: none;
         position: relative;
       }

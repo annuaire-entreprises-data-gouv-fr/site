@@ -1,5 +1,6 @@
 administrations:
   - dinum
+  - search
 target:
   - agent
 title: Pourquoi je ne retrouve pas une entreprise dans les résultats de recherche ?

@@ -36,11 +36,12 @@ const Partager: React.FC = () => {
               Aider à la saisie de numéro de Siret/Siren
             </a>
           </li>
-          {/* <li>
+          <li>
             <a href="#search">
-              Ajouter le moteur de recherche des entreprises sur son site web
+              Ajouter un champ d’auto complétion de numéro siren dans un
+              formulaire
             </a>
-          </li> */}
+          </li>
           <li>
             <a href="#browser-search-engine">
               Ajouter le moteur de recherche à votre navigateur
@@ -146,13 +147,6 @@ const Partager: React.FC = () => {
               <li>Ajoutez-le à vos documents !</li>
             </ul>
           </p>
-          {/* <h2 id="search">
-            Ajouter le moteur de recherche des entreprises sur son site web
-          </h2>
-          <h3>Quand l’utiliser ?</h3>
-          <p></p>
-          <h3>Comment faire ?</h3>
-          <p></p> */}
           <h2 id="link-search">
             Aider à la saisie de numéro de siren ou siret
           </h2>
@@ -179,29 +173,49 @@ const Partager: React.FC = () => {
             `}
             </code>
           </p>
+          <h2 id="search">
+            Ajouter un champ d’auto complétion de numéro siren dans un
+            formulaire
+          </h2>
+          <h3>Quand l’utiliser ?</h3>
+          <p></p>
+          <input
+            type="text"
+            className="fr-input"
+            id="search-widget"
+            style={{ width: '400px' }}
+            placeholder="Recherchez une entreprise par son nom ou son adresse"
+          />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: `
+            <script src="/search-widget/index.js" nomodule="" defer></script>
+          `,
+            }}
+          />
+          <h3>Comment faire ?</h3>
+          <p></p>
+          <h2 id="browser-search-engine">
+            Ajouter le moteur de recherche à votre navigateur
+          </h2>
+          <h3>Quand l’utiliser ?</h3>
+          <p>
+            Si vous utilisez fréquement la recherche d’entreprises, vous pouvez
+            paramétrer votre navigateur pour que l’Annuaire des Entreprises
+            apparaisse dans votre liste de moteurs de recherche.
+          </p>
           <div>
-            <h2 id="browser-search-engine">
-              Ajouter le moteur de recherche à votre navigateur
-            </h2>
-            <h3>Quand l’utiliser ?</h3>
-            <p>
-              Si vous utilisez fréquement la recherche d’entreprises, vous
-              pouvez paramétrer votre navigateur pour que l’Annuaire des
-              Entreprises apparaisse dans votre liste de moteurs de recherche.
-            </p>
-            <div>
-              <img
-                style={{ width: '100%' }}
-                alt="exemple de liste de moteurs de recherche"
-                src="/images/Browser_example.png"
-              />
-            </div>
-            <h3>Comment faire ?</h3>
-            <p>
-              La configuration varie d’un navigateur à l’autre. Elle se fait
-              soit depuis la barre de recherche soit dans les paramètres.
-            </p>
+            <img
+              style={{ width: '100%' }}
+              alt="exemple de liste de moteurs de recherche"
+              src="/images/Browser_example.png"
+            />
           </div>
+          <h3>Comment faire ?</h3>
+          <p>
+            La configuration varie d’un navigateur à l’autre. Elle se fait soit
+            depuis la barre de recherche soit dans les paramètres.
+          </p>
           <h2 id="api">Réutiliser les données de l’Annuaire des Entreprises</h2>
           <p>
             Toutes les données utilisées sur l’Annuaire des Entreprises sont

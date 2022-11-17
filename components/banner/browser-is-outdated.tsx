@@ -11,8 +11,8 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
       <div className="fr-container">
         <b>⚠️ Votre navigateur est obsolète : </b>
         le site est utilisable mais certaines fonctionnalités comme le
-        déclenchement automatique des téléchargements ou le copier/coller ne
-        fonctionneront pas.
+        déclenchement automatique des téléchargements, la recherche avancée ou
+        le copier/coller ne fonctionneront pas.
         <br />
         Avoir un navigateur à jour est{' '}
         <a

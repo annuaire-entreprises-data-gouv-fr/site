@@ -5,9 +5,9 @@ import logErrorInSentry from '../../../../utils/sentry';
 
 const getUrl = (slug: string) => {
   if (hasSirenFormat(slug)) {
-    return `https://annuaire-entreprises.data.gouv.fr/entreprise/${slug}`;
+    return `https://annuaire-entreprises.data.gouv.fr/entreprise/${slug}?mtm_campaign=qr-code`;
   }
-  return `https://annuaire-entreprises.data.gouv.fr/etablissement/${slug}`;
+  return `https://annuaire-entreprises.data.gouv.fr/etablissement/${slug}?mtm_campaign=qr-code`;
 };
 
 const qrCode = ({ query: { slug } }: NextApiRequest, res: NextApiResponse) => {
@@ -29,7 +29,6 @@ const qrCode = ({ query: { slug } }: NextApiRequest, res: NextApiResponse) => {
           const base64Data = url.replace(/^data:image\/png;base64,/, '');
           var img = Buffer.from(base64Data, 'base64');
 
-          //
           res.writeHead(200, {
             'Content-Type': 'image/png',
             'Content-Length': img.length,

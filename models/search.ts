@@ -6,7 +6,8 @@ import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administrations';
 import { APINotRespondingFactory } from './api-not-responding';
-import SearchFilterParams from './search-filter-params';
+import { IDirigeant } from './immatriculation/rncs';
+import SearchFilterParams, { hasSearchParam } from './search-filter-params';
 
 export interface ISearchResult {
   siren: string;
@@ -20,6 +21,7 @@ export interface ISearchResult {
   longitude: number;
   nomComplet: string;
   chemin: string;
+  dirigeants: IDirigeant[];
 }
 
 export interface ISearchResults {
@@ -46,7 +48,7 @@ const search = async (
   const cleanedTerm = cleanSearchTerm(searchTerm);
 
   const notEnoughParams =
-    searchTerm.length < 3 && !searchFilterParams.isNotEmpty();
+    searchTerm.length < 3 && !hasSearchParam(searchFilterParams.toJSON());
 
   if (notEnoughParams) {
     return { ...noResults, notEnoughParams: true };

@@ -1,6 +1,12 @@
 const routes = {
   monitoring: 'https://api.uptimerobot.com/v2/getMonitors',
   ban: 'https://api-adresse.data.gouv.fr/search/?q=',
+  geo: {
+    commune:
+      'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json&nom=',
+    departement:
+      'https://geo.api.gouv.fr/departements?fields=code&format=json&nom=',
+  },
   rnm: `https://api-rnm.artisanat.fr/v2/entreprises/`,
   rna: {
     id: `https://entreprise.data.gouv.fr/api/rna/v1/id/`,
