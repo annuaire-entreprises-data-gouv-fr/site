@@ -124,7 +124,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
     await getMatomoStats();
 
   return {
-    props: { monthlyUserNps, visits, userResponses, mostCopied },
+    props: {
+      monthlyUserNps,
+      visits,
+      userResponses,
+      mostCopied,
+      // enable react hydration in browser
+      metadata: { useReact: true },
+    },
     revalidate: 4 * 3600, // In seconds - 4 hours
   };
 };

@@ -19,7 +19,7 @@ const extractParamsFromContext = (
   const page = parseIntWithDefaultValue(pageParam, 1);
 
   const isABotParam = (context?.query?.isABot || '') as string;
-  const isABotUA = isUserAgentABot(context.req);
+  const isABotUA = isUserAgentABot(context?.req?.headers['user-agent'] || '');
 
   const isBot = !!isABotParam || isABotUA;
   return {

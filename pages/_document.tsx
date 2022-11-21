@@ -71,7 +71,8 @@ class DevDocument extends Document {
 
 class ProdDocument extends Document {
   render() {
-    const useReact = this.props.dangerousAsPath === '/statistiques';
+    const useReact =
+      this.props['__NEXT_DATA__']?.props?.pageProps?.metadata?.useReact;
 
     return (
       <Html lang="fr">
@@ -188,6 +189,6 @@ class ProdDocument extends Document {
   }
 }
 
-export default true || process.env.NODE_ENV === 'production'
+export default process.env.NODE_ENV === 'production'
   ? ProdDocument
   : DevDocument;
