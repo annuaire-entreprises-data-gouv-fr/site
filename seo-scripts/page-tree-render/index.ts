@@ -17,7 +17,7 @@ const renderNav = (links: string[][]) => {
         ${links
           .map(
             (link) =>
-              `<li><a class="fr-breadcrumb__link" href="${link[1]}">${link[0]}</a></li>`
+              `<li><a class="fr-breadcrumb__link" href="${link[1]}>${link[0]}</a></li>`
           )
           .join('')}
       </ol>
@@ -48,10 +48,10 @@ const renderDepartementsPage = (departments: any[]) => {
 const renderNafsPage = (dep: string, nafs: any[]) => {
   const navBlock = renderNav([
     ['Tous les départements', '/departements/index.html'],
-    [libelleFromDepartement(dep), ''],
+    [libelleFromDepartement(dep), '#title'],
   ]);
 
-  const titleBlock = `<h1>Les personnes morales par activité dans le département ${libelleFromDepartement(
+  const titleBlock = `<h1 class="title">Les personnes morales par activité dans le département ${libelleFromDepartement(
     dep
   )}</h1>`;
 
@@ -83,10 +83,10 @@ const renderResultsPage = (
   const navBlock = renderNav([
     ['Tous les départements', '/departements/deinx.html'],
     [libelleFromDepartement(dep), `/departements/${depUrl}/index.html`],
-    [labelNaf, ''],
+    [labelNaf, '#title'],
   ]);
 
-  const titleBlock = `<h1>${labelNaf} dans le département ${libelleFromDepartement(
+  const titleBlock = `<h1 class="title">${labelNaf} dans le département ${libelleFromDepartement(
     dep
   )}</h1>
   <p>${totalResults} personnes morales trouvées :</p>

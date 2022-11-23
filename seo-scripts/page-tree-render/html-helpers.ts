@@ -1,6 +1,7 @@
 const head = `
 <head>
-  <title>L’Annuaire des Entreprises</title>
+  <title>Entreprises françaises par départements et par code NAF</title>
+  <meta name="description" content="Accédez à toutes les informations publiques détenues par l’Administration sur une personne morale (entreprise, association ou administration) : Siren, Siret, code APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, convention collective...">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,7 +11,7 @@ const head = `
   <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon">
   <link rel="manifest" href="/favicons/manifest.webmanifest" cross-origin="use-credentials">
   <link rel="stylesheet" type="text/css" href="/dsfr-departements/dsfr.min.css">
-</head>
+  </head>
 `;
 
 export const renderPage = (body: string) => {
@@ -19,7 +20,7 @@ export const renderPage = (body: string) => {
   <html lang="en">
     ${head}
     <body>
-      <style>div.body-wrapper { margin-top:40px; margin-bottom:50px; } h1 { margin-top:20px; font-size: 1.8rem; } div.body-wrapper a { margin-bottom:8px; display: inline-block; } .pagination > a { margin:5px; display: inline-block; }</style>
+      <style>div.body-wrapper { margin-top:40px; margin-bottom:50px; } h1 { margin-top:20px; font-size: 1.8rem; } div.body-wrapper a { line-height:1.5rem; display: inline-block; } .pagination > a { margin:5px; display: inline-block; }</style>
       <header role="banner" class="fr-header"><div class="fr-header__body"><div class="fr-container"><div class="fr-header__body-row"><div class="fr-header__brand fr-enlarge-link"><div class="fr-header__brand-top"><div class="fr-header__logo"><a href="/" title="République française" class=""><p class="fr-logo">République<br />française</p></a></div><div class="fr-header__navbar"></div></div></div><div class="fr-header__tools"><div class="fr-header__tools-links"><ul class="fr-links-group"><li><a href="/" class="fr-link">Rechercher une entreprise</a></li></ul></div></div></div></div></div></header>
       <div class="fr-container body-wrapper">
         ${body}
