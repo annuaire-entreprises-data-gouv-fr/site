@@ -18,19 +18,6 @@ interface IProps {
 const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
   dirigeant,
 }) => {
-  const data = [
-    ['Rôle', <b>Représentant Légal</b>],
-    ['Nom', `${dirigeant.prenom} ${dirigeant.nom}`],
-    ['Mois et année de naissance', ''],
-    [
-      '',
-      <a href={`/rechercher?fn=${dirigeant.prenom}&n=${dirigeant.nom}`}>
-        → rechercher les entreprises dirigées par une personne appelée «{' '}
-        {dirigeant.prenom} {dirigeant.nom} »
-      </a>,
-    ],
-  ];
-
   const femininMasculin = dirigeant.sexe === 'M' ? '' : 'e';
 
   return (
@@ -41,16 +28,19 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
         sources={[EAdministration.INSEE]}
       >
         <p>
-          Cette entité est une entreprise individuelle. Elle a un
-          {femininMasculin} dirigeant{femininMasculin} enregistré
-          {femininMasculin} auprès de l’
-          <INSEE />
-          &nbsp;:
+          Cette entité est l’entreprise individuelle de{' '}
+          <b>
+            {dirigeant.prenom} {dirigeant.nom}
+          </b>
+          .
         </p>
-        <TwoColumnTable body={data} />
+        Vous pouvez{' '}
+        <a href={`/rechercher?fn=${dirigeant.prenom}&n=${dirigeant.nom}`}>
+          rechercher les entreprises dirigées par une personne appelée «{' '}
+          {dirigeant.prenom} {dirigeant.nom} »
+        </a>
       </Section>
       <HorizontalSeparator />
-      <style jsx>{``}</style>
     </>
   );
 };
