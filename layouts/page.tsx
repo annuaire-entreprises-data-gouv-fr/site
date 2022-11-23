@@ -7,6 +7,7 @@ import { NPSBanner } from '../components/banner/nps';
 import { WeNeedYouModal } from '../components/modal/we-need-you';
 import { IParams } from '../models/search-filter-params';
 import { BrowserIsOutdatedBanner } from '../components/banner/browser-is-outdated';
+import SocialNetworks from '../components/social-network';
 
 interface IProps {
   small?: boolean;
@@ -55,6 +56,7 @@ const Page: React.FC<PropsWithChildren<IProps>> = ({
       <Header />
     )}
     <main className="fr-container">{children}</main>
+    <SocialNetworks />
     <Question />
     <Footer />
     <style global jsx>{`

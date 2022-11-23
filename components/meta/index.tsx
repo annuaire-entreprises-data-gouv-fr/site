@@ -16,7 +16,7 @@ const SITE_NAME = 'Annuaire des Entreprises : le moteur de recherche officiel';
 const SITE_URL =
   process.env.SITE_URL || 'https://annuaire-entreprises.data.gouv.fr';
 const SITE_DESCRIPTION =
-  'Accédez à toutes les informations publiques détenues par l’Administration sur une personne morale (entreprise, association ou administration) : Siren, Siret, code APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, convention collective...';
+  'Accédez à toutes les informations publiques détenues par l’Administration sur une entreprise, une association ou une administration : Siren, Siret, code APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, convention collective...';
 
 const Meta: React.FC<IProps> = ({
   title = SITE_NAME,
