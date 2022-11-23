@@ -21,6 +21,8 @@ const extractParamsFromContext = (
   const isABotParam = (context?.query?.isABot || '') as string;
   const isABotUA = isUserAgentABot(context.req);
 
+  console.log(context.req.headers['user-agent'], isABotUA);
+
   const isBot = !!isABotParam || isABotUA;
   return {
     slug,
