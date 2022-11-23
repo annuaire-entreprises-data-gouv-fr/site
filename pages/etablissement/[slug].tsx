@@ -70,6 +70,8 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const etablissementWithUniteLegale =
       await getEtablissementWithUniteLegaleFromSlug(slug, isBot);
 
+    console.log('IsBot : ' + isBot);
+
     return {
       props: {
         ...etablissementWithUniteLegale,

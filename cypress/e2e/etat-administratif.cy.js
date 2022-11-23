@@ -10,7 +10,7 @@ describe('Etat administratif', () => {
   });
 
   it('En sommeil', () => {
-    cy.visit('/entreprise/880878145');
+    cy.visit('/entreprise/351556394');
     cy.contains('en sommeil').should('have.length', 1);
   });
 
