@@ -44,8 +44,8 @@ const Footer = () => (
           <br />
           <p className="fr-footer__content-desc">
             Ce site permet de retrouver toutes les données publiques détenues
-            par l’administration sur une personne morale (entreprise,
-            administration ou association) et{' '}
+            par l’administration sur une entreprise, une association ou une
+            administration et{' '}
             <a href="/donnees-extrait-kbis">
               en particulier les données contenues dans un extrait KBIS/D1
             </a>

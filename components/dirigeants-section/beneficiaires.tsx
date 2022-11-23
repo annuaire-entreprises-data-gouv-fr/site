@@ -1,7 +1,6 @@
 import React from 'react';
 import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
-import { TwoColumnTable } from '../table/simple';
 import { EAdministration } from '../../models/administrations';
 import {
   IAPINotRespondingError,
@@ -11,12 +10,13 @@ import AdministrationNotResponding from '../administration-not-responding';
 import routes from '../../clients/routes';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { INPI } from '../administrations';
-import { formatDate } from '../../utils/helpers/formatting';
+import { formatDate, formatDatePartial } from '../../utils/helpers/formatting';
 import {
   IBeneficiaire,
   IImmatriculationRNCS,
 } from '../../models/immatriculation/rncs';
 import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
+import { FullTable } from '../table/full';
 
 interface IProps {
   immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
@@ -48,11 +48,14 @@ const BeneficiairesSection: React.FC<IProps> = ({
   const { beneficiaires } = immatriculationRNCS;
 
   const formtInfos = (beneficiaire: IBeneficiaire) => [
-    ['Nom', (beneficiaire.nom || '').toUpperCase()],
-    ['Prénoms', beneficiaire.prenoms],
-    ['Mois et année de naissance', beneficiaire.dateNaissancePartial],
-    ['Nationalité', beneficiaire.nationalite],
-    ['Date de déclaration', formatDate(beneficiaire.dateGreffe)],
+    formatDate(beneficiaire.dateGreffe),
+    <>
+      {beneficiaire.prenoms}
+      {beneficiaire.prenoms && ' '}
+      {(beneficiaire.nom || '').toUpperCase()}, né(e) en{' '}
+      {formatDatePartial(beneficiaire.dateNaissancePartial)}
+    </>,
+    beneficiaire.nationalite,
   ];
 
   const plural = beneficiaires.length > 1 ? 's' : '';
@@ -107,12 +110,12 @@ const BeneficiairesSection: React.FC<IProps> = ({
               </a>{' '}
               sur le site de l’INPI&nbsp;:
             </p>
-            {beneficiaires.map((beneficiaire, idx) => (
-              <React.Fragment key={'b' + idx}>
-                <TwoColumnTable body={formtInfos(beneficiaire)} />
-                {beneficiaires.length !== idx + 1 && <br />}
-              </React.Fragment>
-            ))}
+            <FullTable
+              head={['Date de déclaration', 'Détails', 'Nationalité']}
+              body={beneficiaires.map((beneficiaire) =>
+                formtInfos(beneficiaire)
+              )}
+            />
           </>
         )}
       </Section>

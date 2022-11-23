@@ -22,8 +22,8 @@ const Index: React.FC = () => (
         <Logo />
         <HiddenH1 title="L’Annuaire des Entreprises" />
         <h2>
-          Retrouvez toutes les informations publiques sur une personne morale
-          (entreprise, association ou administration)
+          Retrouvez toutes les informations publiques sur une entreprise, une
+          association ou une administration
         </h2>
         <div className="search-bar-wrapper">
           <SearchBar

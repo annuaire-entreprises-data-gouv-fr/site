@@ -1,13 +1,16 @@
 import React from 'react';
 import { Section } from '../section';
-import { TwoColumnTable } from '../table/simple';
 import { EAdministration } from '../../models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
 import AdministrationNotResponding from '../administration-not-responding';
-import { formatIntFr } from '../../utils/helpers/formatting';
+import {
+  formatDate,
+  formatDatePartial,
+  formatIntFr,
+} from '../../utils/helpers/formatting';
 import routes from '../../clients/routes';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { INPI } from '../administrations';
@@ -17,6 +20,7 @@ import {
   IPersonneMorale,
 } from '../../models/immatriculation/rncs';
 import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
+import { FullTable } from '../table/full';
 
 /**
  * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts
@@ -67,22 +71,29 @@ const DirigeantsSection: React.FC<IProps> = ({
   const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
     if (isPersonneMorale(dirigeant)) {
       const infos = [
-        ['Rôle(s)', <b>{dirigeant.role}</b>],
-        ['Dénomination', dirigeant.denomination],
-        ['Nature Juridique', dirigeant.natureJuridique],
+        dirigeant.role,
+        <>
+          <b>{dirigeant.denomination}</b>
+
+          {dirigeant.siren ? (
+            <>
+              {' - '}
+              <a href={`/entreprise/${dirigeant.siren}`}>
+                {formatIntFr(dirigeant.siren)}
+              </a>
+            </>
+          ) : (
+            ''
+          )}
+          <br />
+          {dirigeant.natureJuridique}
+        </>,
       ];
 
-      const defaultDenom = dirigeant.denomination || dirigeant.siren;
       if (dirigeant.siren) {
-        infos.push(['Siren', formatIntFr(dirigeant.siren)]);
+        const defaultDenom = dirigeant.denomination || dirigeant.siren;
+        //@ts-ignore
         infos.push([
-          '',
-          <a href={`/entreprise/${dirigeant.siren}`}>
-            → voir la page de {defaultDenom}
-          </a>,
-        ]);
-        infos.push([
-          '',
           <a href={`/dirigeants/${dirigeant.siren}`}>
             → voir les dirigeants de {defaultDenom}
           </a>,
@@ -95,18 +106,20 @@ const DirigeantsSection: React.FC<IProps> = ({
       }${(dirigeant.nom || '').toUpperCase()}`;
 
       const infos = [
-        ['Rôle', dirigeant.role && <b>{dirigeant.role}</b>],
-        ['Nom', nomComplet],
-        ['Mois et année de naissance', dirigeant.dateNaissancePartial],
+        dirigeant.role,
+        <>
+          {nomComplet}, né(e) en{' '}
+          {formatDatePartial(dirigeant.dateNaissancePartial)}
+        </>,
       ];
 
       if (dirigeant.dateNaissanceFull) {
+        //@ts-ignore
         infos.push([
-          '',
           <a
             href={`/personne?n=${dirigeant.nom}&fn=${dirigeant.prenom}&dmin=${dirigeant.dateNaissanceFull}&sirenFrom=${siren}`}
           >
-            → rechercher ses entreprises
+            → voir ses entreprises
           </a>,
         ]);
       }
@@ -143,12 +156,10 @@ const DirigeantsSection: React.FC<IProps> = ({
             </a>{' '}
             sur le site de l’INPI&nbsp;:
           </p>
-          {dirigeants.map((dirigeant, idx) => (
-            <React.Fragment key={'b' + idx}>
-              <TwoColumnTable body={formatDirigeant(dirigeant)} />
-              {dirigeants.length !== idx + 1 && <br />}
-            </React.Fragment>
-          ))}
+          <FullTable
+            head={['Role', 'Details', 'Action']}
+            body={dirigeants.map((dirigeant) => formatDirigeant(dirigeant))}
+          />
         </>
       </Section>
       <style global jsx>{`
