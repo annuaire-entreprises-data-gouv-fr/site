@@ -7,14 +7,14 @@ describe('SEO Index or noindex', () => {
   });
 
   it('can index entreprise page', () => {
-    cy.visit('/entreprise/880878145');
+    cy.visit('/entreprise/552032534');
     cy.get('meta[name="robots"][content*="noindex"]').should('have.length', 0);
     cy.get('meta[name="robots"][content*="index"]').should('have.length', 1);
     cy.get('meta[name="robots"][content*="follow"]').should('have.length', 1);
   });
 
   it('cannot index justificatif page', () => {
-    cy.visit('/justificatif/880878145');
+    cy.visit('/justificatif/552032534');
     cy.get('meta[name="robots"][content*="noindex"]').should('have.length', 1);
     cy.get('meta[name="robots"][content*="follow"]').should('have.length', 1);
   });

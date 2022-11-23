@@ -13,7 +13,7 @@ describe(`FAQ contextual links`, () => {
   });
   it('Source de données', () => {
     cy.visit(`/entreprise/880878145`).then((resp) => {
-      cy.contains('・mise à jour le').click();
+      cy.contains('Sources : Insee').click();
       cy.url().should('include', '/administration/insee_vies');
       cy.contains('Qu’est-ce qu’une entreprise non-diffusible ?').should(
         'have.length',
