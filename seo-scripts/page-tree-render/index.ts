@@ -38,7 +38,7 @@ const renderDepartementsPage = (departments: any[]) => {
     .map((dep) => {
       const labelDep = libelleFromDepartement(dep);
       const urlDep = getUrlFromDep(dep);
-      return `<div><a href="/departements/${urlDep}/index.html">${labelDep}</a></div>`;
+      return `<a href="/departements/${urlDep}/index.html">${labelDep}</a><br/>`;
     })
     .join('');
 
@@ -58,11 +58,11 @@ const renderNafsPage = (dep: string, nafs: any[]) => {
   const nafsBlock = nafs
     .map(
       (naf) =>
-        `<div><a href="/departements/${getUrlFromDep(
+        `<a href="/departements/${getUrlFromDep(
           dep
         )}/${naf}/1.html">${libelleFromCodeNAFWithoutNomenclature(
           naf
-        )}</a></div>`
+        )}</a><br/>`
     )
     .join('');
 
@@ -96,7 +96,7 @@ const renderResultsPage = (
     .map((result) => {
       const nameElements = result.split('-').slice(0, -1);
       const name = nameElements.join(' ').toUpperCase();
-      return `<div><a href="/entreprise/${result}">${name}</a></div>`;
+      return `<a href="/entreprise/${result}">${name}</a><br/>`;
     })
     .join('');
 
