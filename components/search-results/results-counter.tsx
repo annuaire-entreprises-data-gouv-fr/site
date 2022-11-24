@@ -27,6 +27,10 @@ const ResultsCounter: React.FC<{
                 celui-ci dans la barre de recherche
               </li>
               <li>essayez de réduire le nombre de mots-clefs</li>
+              <li>
+                essayez d’utiliser un filtre avancé, plus précis que la
+                recherche générale (géographique ou par nom et prénom)
+              </li>
             </ul>
           </p>
         </div>

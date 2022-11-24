@@ -170,9 +170,10 @@ const mapToDomainObjectNew = (
               role: qualite,
             } as IPersonneMorale;
           }
+
           return {
             sexe: null,
-            nom: nom.toUpperCase(),
+            nom: (nom || '').toUpperCase(),
             prenom: formatFirstNames((prenoms || '').split(' '), 1),
             role: qualite,
             dateNaissancePartial: '',

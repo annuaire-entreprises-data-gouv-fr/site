@@ -13,7 +13,8 @@ import {
 import { IEtatCivil } from '../../models/immatriculation/rncs';
 import ResultsList from '../../components/search-results/results-list';
 import PageCounter from '../../components/search-results-pagination';
-import Info from '../../components-ui/alerts/info';
+import HorizontalSeparator from '../../components-ui/horizontal-separator';
+import ButtonLink from '../../components-ui/button';
 
 interface IProps extends IPropsWithMetadata {
   results: ISearchResults;
@@ -43,7 +44,7 @@ const SearchDirigeantPage: React.FC<IProps> = ({
         </a>
       )}
       <h1>
-        Ensemble des entitées associées à {searchParams.fn} {searchParams.n}
+        Entitée(s) associée(s) à {searchParams.fn} {searchParams.n}
         {searchParams.ageMax || searchParams.ageMin
           ? ` (${searchParams.ageMax || searchParams.ageMin} ans)`
           : ''}
@@ -65,14 +66,27 @@ const SearchDirigeantPage: React.FC<IProps> = ({
           searchFilterParams={searchParams}
         />
       )}
-      <Info>
-        <div>Vous n’avez pas trouvé l’entreprise que vous recherchiez ?</div>
+      <HorizontalSeparator />
+      <div>
+        <b>Il manque une entité ?</b>
         <br />
-        <a href={`/rechercher?fn=${searchParams.fn}&n=${searchParams.n}`}>
-          → élargir la recherche à toutes les entreprises dirigées par une
-          personne appelée « {searchParams.fn} {searchParams.n} »
-        </a>
-      </Info>
+        Certaines entités n’ont pas d’âge enregistré pour leur(s) dirigeant(s)
+        et peuvent ne pas apparaître sur cette page. Pour les retrouver, vous
+        pouvez élargir la recherche à toutes les entreprises dirigées par une
+        personne appelée «&nbsp;{searchParams.fn} {searchParams.n}&nbsp;», sans
+        filtre d’âge.
+      </div>
+      <br />
+      <div className="layout-center">
+        <ButtonLink
+          alt
+          small
+          to={`/rechercher?fn=${searchParams.fn}&n=${searchParams.n}`}
+        >
+          → lancer une recherche élargie « {searchParams.fn} {searchParams.n} »
+        </ButtonLink>
+      </div>
+      <br />
     </div>
   </Page>
 );

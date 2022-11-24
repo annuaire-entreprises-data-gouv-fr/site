@@ -34,11 +34,15 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
           </b>
           .
         </p>
-        Vous pouvez{' '}
+        Nous ne connaissant pas son âge, donc nous ne pouvons pas distinguer
+        cette personne de ses homonymes éventuels.
+        <br />
+        Mais vous pouvez{' '}
         <a href={`/rechercher?fn=${dirigeant.prenom}&n=${dirigeant.nom}`}>
-          rechercher les entreprises dirigées par une personne appelée «{' '}
+          rechercher toutes les entreprises dirigées par une personne appelée «{' '}
           {dirigeant.prenom} {dirigeant.nom} »
         </a>
+        .
       </Section>
       <HorizontalSeparator />
     </>

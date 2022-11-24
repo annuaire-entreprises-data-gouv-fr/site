@@ -29,17 +29,22 @@ class SearchFilterParams {
       naf = '',
     } = query;
 
+    // ensure dmax > dmin
+    const realDmax = dmax && dmin && dmax < dmin ? dmin : dmax;
+    const realDmin = dmax && dmin && dmax < dmin ? dmax : dmin;
+
     this.params = {
       sap,
       //@ts-ignore
       cp_dep: isNaN(cp_dep) ? '' : cp_dep,
       fn,
       n,
-      dmin,
-      dmax,
+      dmin: realDmin,
+      dmax: realDmax,
       naf,
-      ageMin: getAge(dmin),
-      ageMax: getAge(dmax),
+      // careful dmin determine ageMax and vice versa
+      ageMin: getAge(realDmax),
+      ageMax: getAge(realDmin),
     };
   }
 
@@ -146,12 +151,20 @@ export const extractFilters = (params: IParams) => {
   };
 
   if (hasDirigeantFilter(params)) {
-    const labelDate =
-      params.dmin || params.dmax ? '  filtre sur la date de naissance' : '';
+    let labelAge = '';
+
+    if (params.dmin && params.dmax) {
+      labelAge = `entre ${params.ageMin} et ${params.ageMax} ans`;
+    } else if (params.dmin && !params.dmax) {
+      labelAge = `moins de ${params.ageMax} ans`;
+    } else if (!params.dmin && params.dmax) {
+      labelAge = `plus de ${params.ageMin} ans`;
+    }
+
     const labelName = `${params.fn}${params.n ? ` ${params.n}` : ''}`;
     f.dirigeantFilter.label = `${labelName}${
-      labelDate && labelName && '・'
-    }${labelDate}`;
+      labelAge && labelName && ', '
+    }${labelAge}`;
   }
   if (params.sap) {
     f.administrativeFilter.label = libelleFromCodeSectionNaf(params.sap);
