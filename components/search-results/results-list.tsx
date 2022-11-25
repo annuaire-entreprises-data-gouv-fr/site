@@ -106,6 +106,7 @@ const ResultsList: React.FC<IProps> = ({
 
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
       }
 
       .results-list > a:hover .title > span:first-of-type {
