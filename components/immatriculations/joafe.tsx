@@ -1,5 +1,5 @@
 import React from 'react';
-import { IUniteLegale } from '../../models';
+import { IAssociation } from '../../models';
 import { EAdministration } from '../../models/administrations';
 import {
   IAPINotRespondingError,
@@ -17,20 +17,24 @@ import { IImmatriculationJOAFE } from '../../models/immatriculation/joafe';
 
 interface IProps {
   immatriculation: IImmatriculationJOAFE | IAPINotRespondingError;
-  uniteLegale: IUniteLegale;
+  uniteLegale: IAssociation;
 }
 
-const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
+const ImmatriculationJOAFE: React.FC<IProps> = ({
+  immatriculation,
+  uniteLegale,
+}) => {
   if (isAPINotResponding(immatriculation)) {
     if (immatriculation.errorType === 404) {
       return null;
+    } else {
+      return (
+        <AdministrationNotResponding
+          {...immatriculation}
+          title="Enregistrement au JOAFE"
+        />
+      );
     }
-    return (
-      <AdministrationNotResponding
-        {...immatriculation}
-        title="Enregistrement au JOAFE"
-      />
-    );
   }
 
   const data = [

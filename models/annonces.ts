@@ -7,6 +7,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from './api-not-responding';
+import { isAssociation } from '.';
 import { getUniteLegaleFromSlug } from './unite-legale';
 
 export interface IAnnoncesBodacc {
@@ -45,7 +46,7 @@ const getAnnoncesFromSlug = async (siren: string) => {
   ]);
 
   let jo = null;
-  if (uniteLegale.association && uniteLegale.association.id) {
+  if (isAssociation(uniteLegale)) {
     jo = await getAnnoncesJoFromIdRna(
       uniteLegale.association.id,
       uniteLegale.siren

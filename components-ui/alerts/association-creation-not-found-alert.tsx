@@ -1,11 +1,11 @@
 import React from 'react';
 import routes from '../../clients/routes';
-import { IUniteLegale } from '../../models';
+import { IAssociation } from '../../models';
 import { formatIntFr } from '../../utils/helpers/formatting';
 import Warning from './warning';
 
 const AssociationCreationNotFoundAlert: React.FC<{
-  uniteLegale: IUniteLegale;
+  uniteLegale: IAssociation;
 }> = ({ uniteLegale }) => (
   <Warning full>
     Nous n’avons pas retrouvé l’annonce de création de cette association dans le{' '}

@@ -9,9 +9,11 @@ import SocialMedia from '../../components-ui/social-media';
 import { PrintNever } from '../../components-ui/print-visibility';
 import MultipleSirenAlert from '../../components-ui/alerts/multiple-siren';
 import AssociationAdressAlert from '../../components-ui/alerts/association-adress';
+import { isAssociation } from '../../models';
+import UniteLegaleBadge from '../unite-legale-badge';
 
 export enum FICHE {
-  INFORMATION = 'résumé',
+  INFORMATION = 'informations générales',
   JUSTIFICATIFS = 'justificatifs',
   ANNONCES = 'annonces',
   DIRIGEANTS = 'dirigeants',
@@ -36,7 +38,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         } no-style-link`}
         href={`/entreprise/${siren}`}
       >
-        Résumé
+        Informations générales
       </a>
       <a
         className={`${
@@ -130,14 +132,19 @@ const Title: React.FC<IProps> = ({
   <div className="header-section">
     <div className="title">
       <MultipleSirenAlert uniteLegale={uniteLegale} />
-      <AssociationAdressAlert uniteLegale={uniteLegale} />
+      {isAssociation(uniteLegale) && (
+        <AssociationAdressAlert uniteLegale={uniteLegale} />
+      )}
       <h1>
         <a href={`/entreprise/${uniteLegale.siren}`}>
           {uniteLegale.nomComplet}
         </a>
       </h1>
-      <div>
-        <span>unité légale ‣ {formatIntFr(uniteLegale.siren)}</span>
+      <div className="unite-legale-sub-title">
+        <UniteLegaleBadge uniteLegale={uniteLegale} />
+        <span className="siren">
+          &nbsp;‣&nbsp;{formatIntFr(uniteLegale.siren)}
+        </span>
         <span>
           {!uniteLegale.estDiffusible && (
             <Tag className="unknown">Non-diffusible</Tag>
@@ -177,12 +184,17 @@ const Title: React.FC<IProps> = ({
         padding: 0;
         font-variant: all-small-caps;
       }
-      .title > div > span {
-        color: #666;
+
+      .unite-legale-sub-title {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 5px;
       }
-      .title > div > span:first-of-type {
+      .unite-legale-sub-title > span.siren {
         font-variant: small-caps;
         font-size: 1.1rem;
+        color: #666;
       }
 
       @media only screen and (min-width: 1px) and (max-width: 900px) {
@@ -193,9 +205,6 @@ const Title: React.FC<IProps> = ({
           justify-content: start;
           align-items: flex-start;
           flex-direction: column;
-        }
-        .title > div > span:first-of-type {
-          display: block;
         }
       }
     `}</style>

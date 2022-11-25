@@ -2,6 +2,7 @@ import React from 'react';
 import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { PrintNever } from '../../components-ui/print-visibility';
 import { IUniteLegale } from '../../models';
+import { isAssociation } from '../../models';
 
 const ShortcutsSection: React.FC<{
   shortcuts: { label: string; url: string; external?: boolean }[];
@@ -78,7 +79,7 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
       shortcuts: [
         {
           url: `/justificatif/${uniteLegale.siren}`,
-          label: uniteLegale.association
+          label: isAssociation(uniteLegale)
             ? 'Annonce de création'
             : 'Extrait d’immatriculation',
         },
@@ -105,7 +106,10 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
     },
   ];
 
-  if (!uniteLegale.estEntrepreneurIndividuel && !uniteLegale.association) {
+  if (
+    !uniteLegale.complements.estEntrepreneurIndividuel &&
+    !isAssociation(uniteLegale)
+  ) {
     data.splice(2, 0, {
       title: 'Tribunaux de commerce',
       shortcuts: [

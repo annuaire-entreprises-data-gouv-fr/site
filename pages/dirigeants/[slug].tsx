@@ -42,7 +42,7 @@ const DirigeantsPage: React.FC<IProps> = ({
             immatriculationRNCS={immatriculationRNCS}
           />
           {uniteLegale.estDiffusible &&
-            uniteLegale.estEntrepreneurIndividuel &&
+            uniteLegale.complements.estEntrepreneurIndividuel &&
             uniteLegale.dirigeant && (
               <>
                 <DirigeantsEntrepriseIndividuelleSection

@@ -1,8 +1,8 @@
 import {
+  createDefaultEtablissement,
   IEtablissement,
   IEtablissementWithUniteLegale,
   SiretNotFoundError,
-  createDefaultEtablissement,
 } from '.';
 import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {

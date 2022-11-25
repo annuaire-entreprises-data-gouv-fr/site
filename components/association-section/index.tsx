@@ -1,6 +1,6 @@
 import React from 'react';
-import { IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administrations';
+import { IAssociation } from '../../models';
 import { isTwoMonthOld } from '../../utils/helpers/checks';
 import { formatIntFr } from '../../utils/helpers/formatting';
 import Warning from '../../components-ui/alerts/warning';
@@ -10,26 +10,23 @@ import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 
 const AssociationSection: React.FC<{
-  uniteLegale: IUniteLegale;
+  uniteLegale: IAssociation;
 }> = ({ uniteLegale }) => {
-  const { association } = uniteLegale;
-
-  if (!association || !association.id) {
-    throw new Error('This component should never be rendered without a RNA ID');
-  }
+  const {
+    association: { id, nomComplet, objet, adresse },
+  } = uniteLegale;
 
   const data = [
-    ['N° RNA (identifiant d’association)', formatIntFr(association.id)],
-    ['Nom', association.nomComplet],
-    ['Objet', association.objet],
-    ['Adresse', association.adresse],
+    ['N° RNA (identifiant d’association)', formatIntFr(id)],
+    ['Nom', nomComplet],
+    ['Objet', objet],
+    ['Adresse', adresse],
   ];
 
-  const notInRna =
-    !association.nomComplet && !association.objet && !association.adresse;
+  const notInRna = !nomComplet && !objet && !adresse;
 
   return (
-    <div id="entreprise">
+    <>
       <Section
         title={`Répertoire National des Associations`}
         sources={[EAdministration.MI]}
@@ -37,9 +34,8 @@ const AssociationSection: React.FC<{
         {notInRna ? (
           <>
             <Warning>
-              Cette entité possède un identifiant d’association, mais aucune
-              information n’a été trouvée dans le{' '}
-              <b>Répertoire National des Associations (RNA)</b>.
+              Cette entité est une association, mais aucune information n’a été
+              trouvée dans le <b>Répertoire National des Associations (RNA)</b>.
               {!isTwoMonthOld(uniteLegale.dateCreation) && (
                 <>
                   <br />
@@ -61,7 +57,7 @@ const AssociationSection: React.FC<{
       </Section>
       <HorizontalSeparator />
       <BreakPageForPrint />
-    </div>
+    </>
   );
 };
 

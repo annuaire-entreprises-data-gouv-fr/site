@@ -51,7 +51,7 @@ const TitleEtablissementWithDenomination: React.FC<{
   uniteLegale: IUniteLegale;
   etablissement: IEtablissement;
 }> = ({ uniteLegale, etablissement }) => (
-  <div className="sub-title">
+  <div className="etablissement-title">
     {etablissement.oldSiret && etablissement.oldSiret !== etablissement.siret && (
       <Warning full>
         Cet établissement est inscrit en double à l’
@@ -68,22 +68,31 @@ const TitleEtablissementWithDenomination: React.FC<{
       uniteLegale={uniteLegale}
       nomEtablissement={etablissement.enseigne || etablissement.denomination}
     />
-    <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
-    {etablissement.estSiege && <Tag className="info">siège social</Tag>}
-    {uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 &&
-      !etablissement.estSiege && <Tag>ancien siège social</Tag>}
-    {!etablissement.estDiffusible && (
-      <Tag className="unknown">Non-diffusible</Tag>
-    )}
-    <IsActiveTag
-      state={etablissement.etatAdministratif}
-      since={etablissement.dateFermeture}
-    />
+    <div className="etablissement-sub-title">
+      <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
+      {etablissement.estSiege && <Tag className="info">siège social</Tag>}
+      {uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 &&
+        !etablissement.estSiege && <Tag>ancien siège social</Tag>}
+      {!etablissement.estDiffusible && (
+        <Tag className="unknown">Non-diffusible</Tag>
+      )}
+      <IsActiveTag
+        state={etablissement.etatAdministratif}
+        since={etablissement.dateFermeture}
+      />
+    </div>
+
     <style jsx>{`
-      .sub-title > span {
-        color: #666;
+      .etablissement-sub-title {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 5px;
+      }
+      .etablissement-sub-title > span:first-of-type {
         font-variant: small-caps;
         font-size: 1.1rem;
+        color: #666;
       }
     `}</style>
   </div>
