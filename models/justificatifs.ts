@@ -13,6 +13,7 @@ import {
 import getImmatriculationRNCS, {
   IImmatriculationRNCS,
 } from './immatriculation/rncs';
+import { isAssociation } from '.';
 
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;
@@ -31,10 +32,9 @@ const getJustificatifs = async (slug: string) => {
       getImmatriculationRNCS(siren),
     ]);
 
-  const immatriculationJOAFE = await getImmatriculationJOAFE(
-    siren,
-    uniteLegale.association?.id || null
-  );
+  const immatriculationJOAFE = isAssociation(uniteLegale)
+    ? await getImmatriculationJOAFE(siren, uniteLegale.association.id)
+    : null;
 
   return {
     uniteLegale,

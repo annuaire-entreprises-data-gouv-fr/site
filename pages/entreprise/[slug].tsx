@@ -22,6 +22,7 @@ import {
   IPropsWithMetadata,
 } from '../../utils/server-side-props-helper/post-server-side-props';
 import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
+import { isAssociation } from '../../models';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
@@ -51,7 +52,7 @@ const UniteLegalePage: React.FC<IProps> = ({
       {uniteLegale.estDiffusible ? (
         <>
           <UniteLegaleSection uniteLegale={uniteLegale} />
-          {uniteLegale.association && uniteLegale.association.id && (
+          {isAssociation(uniteLegale) && (
             <AssociationSection uniteLegale={uniteLegale} />
           )}
           <UsefulShortcuts uniteLegale={uniteLegale} />

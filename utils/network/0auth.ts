@@ -5,7 +5,7 @@ import * as tokenProvider from 'axios-token-interceptor';
 import { HttpServerError } from '../../clients/exceptions';
 import constants from '../../models/constants';
 import {
-  axiosInstanceFactory,
+  defaultAxiosInstanceFactory,
   cachedAxiosInstanceFactory,
   defaultCacheConfig,
 } from '.';
@@ -19,7 +19,7 @@ export const httpClientOAuthGetFactory = (
     throw new HttpServerError('Client id or client secret is undefined');
   }
 
-  const axiosGetCredentialsInstance = axiosInstanceFactory();
+  const axiosGetCredentialsInstance = defaultAxiosInstanceFactory();
 
   const getClientCredentials = oauth.client(axiosGetCredentialsInstance, {
     url: token_url,

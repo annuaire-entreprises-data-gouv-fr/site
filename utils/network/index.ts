@@ -10,8 +10,8 @@ export const CACHE_TIMEOUT = 1000 * 60 * 15;
 /**
  * Returns a regular axios instance
  */
-export const axiosInstanceFactory = () => {
-  const regularInstance = Axios.create();
+export const defaultAxiosInstanceFactory = (timeout = constants.timeout.L) => {
+  const regularInstance = Axios.create({ timeout });
 
   regularInstance.interceptors.request.use(addStartTimeInterceptor, (err) =>
     Promise.reject(err)

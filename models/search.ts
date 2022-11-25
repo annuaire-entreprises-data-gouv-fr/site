@@ -1,4 +1,4 @@
-import { IsLikelyASirenOrSiretException } from '.';
+import { IsLikelyASirenOrSiretException, IUniteLegale } from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import getResults from '../clients/sirene-ouverte/recherche';
 import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
@@ -9,17 +9,9 @@ import { APINotRespondingFactory } from './api-not-responding';
 import { IDirigeant } from './immatriculation/rncs';
 import SearchFilterParams, { hasSearchParam } from './search-filter-params';
 
-export interface ISearchResult {
-  siren: string;
-  siret: string;
+export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
   nombreEtablissementsOuverts: number;
-  libelleActivitePrincipale: string;
-  estActive: boolean;
-  adresse: string;
-  latitude: number;
-  longitude: number;
-  nomComplet: string;
   chemin: string;
   dirigeants: IDirigeant[];
 }

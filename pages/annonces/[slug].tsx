@@ -14,6 +14,7 @@ import {
   postServerSideProps,
 } from '../../utils/server-side-props-helper/post-server-side-props';
 import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
+import { isAssociation } from '../../models';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
@@ -31,7 +32,9 @@ const Annonces: React.FC<IProps> = ({ uniteLegale, bodacc, jo, metadata }) => (
     <div className="content-container">
       <Title ficheType={FICHE.ANNONCES} uniteLegale={uniteLegale} />
       <AnnoncesBodaccSection uniteLegale={uniteLegale} bodacc={bodacc} />
-      {jo && <AnnoncesJOSection uniteLegale={uniteLegale} jo={jo} />}
+      {isAssociation(uniteLegale) && jo && (
+        <AnnoncesJOSection uniteLegale={uniteLegale} jo={jo} />
+      )}
     </div>
   </Page>
 );

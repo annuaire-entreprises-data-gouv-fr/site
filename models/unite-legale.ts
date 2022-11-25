@@ -2,10 +2,8 @@ import { readFileSync } from 'fs';
 import {
   createDefaultUniteLegale,
   IEtablissement,
-  IEtablissementsList,
   IUniteLegale,
   SirenNotFoundError,
-  splitByStatus,
 } from '.';
 import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {
@@ -25,8 +23,13 @@ import {
   logSecondSireneInseefailed,
   logSireneOuvertefailed,
 } from '../utils/sentry/helpers';
-import { getAssociation } from './association';
+import { isAssociation } from '.';
+import {
+  createEtablissementsList,
+  IEtablissementsList,
+} from './etablissements-list';
 import { getEtatAdministratifUniteLegale } from './etat-administratif';
+import { getAssociation } from './association';
 
 /**
  * List of siren whose owner refused diffusion
@@ -42,7 +45,7 @@ export const getUniteLegaleFromSlug = async (
   slug: string,
   options: IUniteLegaleOptions
 ): Promise<IUniteLegale> => {
-  const uniteLegale = new UniteLegale(slug);
+  const uniteLegale = new UniteLegaleFactory(slug);
   return await uniteLegale.get(options);
 };
 
@@ -55,7 +58,7 @@ interface IUniteLegaleOptions {
   isBot?: boolean;
 }
 
-class UniteLegale {
+class UniteLegaleFactory {
   private _siren: Siren;
 
   constructor(slug: string) {
@@ -70,15 +73,14 @@ class UniteLegale {
     } else {
       uniteLegale = await getUniteLegale(this._siren, page);
 
-      if (uniteLegale.association && uniteLegale.association.id) {
-        uniteLegale.association = {
-          ...(await getAssociation(uniteLegale.association.id, uniteLegale)),
-          id: uniteLegale.association.id,
-        };
+      if (isAssociation(uniteLegale)) {
+        uniteLegale = await getAssociation(uniteLegale);
       }
 
-      // only EI
-      if (!uniteLegale.estDiffusible) {
+      if (
+        uniteLegale.complements.estEntrepreneurIndividuel &&
+        !uniteLegale.estDiffusible
+      ) {
         uniteLegale.nomComplet = 'Entité non-diffusible';
       }
     }
@@ -233,7 +235,7 @@ const mergeUniteLegaleInsee = (
     .replaceAll(/[^a-zA-Z0-9]+/g, '-');
 
   const etablissements =
-    allEtablissementsInsee?.etablissements || splitByStatus([siege]);
+    allEtablissementsInsee?.etablissements || createEtablissementsList([siege]);
   const { currentEtablissementPage, nombreEtablissements } = etablissements;
 
   return {

@@ -4,6 +4,7 @@ import { FullTable } from '../table/full';
 import { EAdministration } from '../../models/administrations';
 import { Section } from '../section';
 import AdministrationNotResponding from '../administration-not-responding';
+import { IAssociation } from '../../models';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -13,12 +14,11 @@ import { Tag } from '../../components-ui/tag';
 import ButtonLink from '../../components-ui/button';
 import { DILA } from '../administrations';
 import routes from '../../clients/routes';
-import { IUniteLegale } from '../../models';
 import { formatDate } from '../../utils/helpers/formatting';
 import AssociationCreationNotFoundAlert from '../../components-ui/alerts/association-creation-not-found-alert';
 
 const AnnoncesJOSection: React.FC<{
-  uniteLegale: IUniteLegale;
+  uniteLegale: IAssociation;
   jo: IAnnoncesJO | IAPINotRespondingError;
 }> = ({ uniteLegale, jo }) => {
   if (isAPINotResponding(jo)) {

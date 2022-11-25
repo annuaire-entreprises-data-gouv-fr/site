@@ -12,6 +12,7 @@ import BreakPageForPrint from '../../components-ui/print-break-page';
 import { PrintNever } from '../../components-ui/print-visibility';
 import TVACell from '../tva-cell';
 import FAQLink from '../../components-ui/faq-link';
+import { Tag } from '../../components-ui/tag';
 
 interface IProps {
   etablissement: IEtablissement;
@@ -31,11 +32,13 @@ const EtablissementSection: React.FC<IProps> = ({
     withDenomination && [
       'Type d’établissement',
       <>
-        {etablissement.estSiege
-          ? 'Siège social'
-          : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1
-          ? 'Ancien siège social'
-          : 'Secondaire'}
+        {etablissement.estSiege ? (
+          <Tag className="info">siège social</Tag>
+        ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 ? (
+          <Tag>ancien siège social</Tag>
+        ) : (
+          <Tag>secondaire</Tag>
+        )}
         {' ( '}
         <a key="entite" href={`/entreprise/${uniteLegale.siren}`}>
           → voir la page de l’entité

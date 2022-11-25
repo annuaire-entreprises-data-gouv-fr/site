@@ -1,12 +1,7 @@
 import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
 import { inseeClientGet, InseeClientOptions } from '.';
 import constants from '../../models/constants';
-import {
-  createDefaultEtablissement,
-  IEtablissement,
-  IEtablissementsList,
-  splitByStatus,
-} from '../../models';
+import { createDefaultEtablissement, IEtablissement } from '../../models';
 import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
 import {
   libelleFromCodeEffectif,
@@ -19,6 +14,10 @@ import {
   agregateTripleFields,
 } from '../../utils/helpers/formatting';
 import { getEtatAdministratifEtablissement } from '../../models/etat-administratif';
+import {
+  createEtablissementsList,
+  IEtablissementsList,
+} from '../../models/etablissements-list';
 
 interface IInseeEtablissementResponse {
   etablissement: IInseeEtablissement;
@@ -112,7 +111,11 @@ const getAllEtablissementsFactory =
     );
 
     return {
-      etablissements: splitByStatus(allEtablissements, page, header.total),
+      etablissements: createEtablissementsList(
+        allEtablissements,
+        page,
+        header.total
+      ),
     };
   };
 

@@ -4,9 +4,9 @@ import { SearchFeedback } from '../search-feedback';
 import { Tag } from '../../components-ui/tag';
 import IsActiveTag from '../../components-ui/is-active-tag';
 import { IETATADMINSTRATIF } from '../../models/etat-administratif';
-import { humanPin } from '../../components-ui/icon';
 import { isPersonneMorale } from '../dirigeants-section/rncs-dirigeants';
 import { IDirigeant } from '../../models/immatriculation/rncs';
+import UniteLegaleBadge from '../unite-legale-badge';
 
 interface IProps {
   results: ISearchResult[];
@@ -66,12 +66,14 @@ const ResultsList: React.FC<IProps> = ({
       {results.map((result) => (
         <a
           href={`/entreprise/${result.chemin}`}
-          key={result.siret}
+          key={result.siren}
           className="result-link no-style-link"
           data-siren={result.siren}
         >
           <div className="title">
             <span>{`${result.nomComplet}`}</span>
+            &nbsp;
+            <UniteLegaleBadge uniteLegale={result} small hiddenByDefault />
             {!result.estActive && (
               <IsActiveTag state={IETATADMINSTRATIF.CESSEE} />
             )}
@@ -81,7 +83,7 @@ const ResultsList: React.FC<IProps> = ({
             <DirigeantsList dirigeants={result.dirigeants} />
           )}
           <div className="adress">
-            <span>{result.adresse || 'Adresse inconnue'} </span>
+            <span>{result.siege.adresse || 'Adresse inconnue'} </span>
             <EtablissmentTagLabel result={result} />
           </div>
         </a>
@@ -101,9 +103,12 @@ const ResultsList: React.FC<IProps> = ({
         text-decoration: none;
         font-size: 1.1rem;
         margin-bottom: 5px 0;
+
+        display: flex;
+        align-items: center;
       }
 
-      .results-list > a:hover .title {
+      .results-list > a:hover .title > span:first-of-type {
         text-decoration: underline;
       }
 

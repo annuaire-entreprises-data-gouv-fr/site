@@ -51,7 +51,7 @@ const UniteLegaleSection: React.FC<{
       'Tranche effectif salarié de l’entité',
       uniteLegale.libelleTrancheEffectif,
     ],
-    ['Catégorie d’entreprise', uniteLegale.libelleCategorieEntreprise],
+    ['Taille d’entreprise', uniteLegale.libelleCategorieEntreprise],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
       'Date de dernière mise à jour',
@@ -63,7 +63,7 @@ const UniteLegaleSection: React.FC<{
     data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
   }
 
-  if (uniteLegale.estEss) {
+  if (uniteLegale.complements.estEss) {
     data.push(['Economie Sociale et Solidaire (ESS)', 'Oui']);
   }
 

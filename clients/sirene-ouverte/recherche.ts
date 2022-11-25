@@ -1,4 +1,4 @@
-import { ISearchResults } from '../../models/search';
+import { ISearchResult, ISearchResults } from '../../models/search';
 import constants from '../../models/constants';
 import {
   formatAdresse,
@@ -11,6 +11,11 @@ import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
 import SearchFilterParams from '../../models/search-filter-params';
 import { IEtatCivil, IPersonneMorale } from '../../models/immatriculation/rncs';
+import {
+  createDefaultEtablissement,
+  createDefaultUniteLegale,
+} from '../../models';
+import { verifySiren, verifySiret } from '../../utils/helpers/siren-and-siret';
 
 interface ISireneOuverteUniteLegaleResultat {
   siren: string;
@@ -29,8 +34,8 @@ interface ISireneOuverteUniteLegaleResultat {
     indice_repetition: string;
     complement_adresse: string;
     commune: string;
-    longitude: number;
-    latitude: number;
+    longitude: string;
+    latitude: string;
     activite_principale_registre_metier: string;
   };
   date_creation: string;
@@ -44,18 +49,25 @@ interface ISireneOuverteUniteLegaleResultat {
   nombre_etablissements: number;
   nombre_etablissements_ouverts: number;
   is_entrepreneur_individuel: true;
-  dirigeants: {
-    prenoms?: string;
-    nom?: string;
-    annee_de_naissance?: string;
-    qualite?: string;
-    siren?: string;
-    denomination?: string;
-    sigle?: string;
-  }[];
+  dirigeants: ISireneOuverteDirigeant[];
+  complements: {
+    est_ess: boolean;
+    est_entrepreneur_individuel: boolean;
+    identifiant_association: string;
+  };
 }
 
-export interface ISireneOuverteSearchResults {
+interface ISireneOuverteDirigeant {
+  prenoms?: string;
+  nom?: string;
+  annee_de_naissance?: string;
+  qualite?: string;
+  siren?: string;
+  denomination?: string;
+  sigle?: string;
+}
+
+interface ISireneOuverteSearchResults {
   page: string;
   total_results: number;
   total_pages: number;
@@ -113,76 +125,108 @@ const mapToDomainObjectNew = (
     currentPage: page ? parseIntWithDefaultValue(page) : 1,
     resultCount: total_results,
     pageCount: total_pages,
-    results: results.map((result: ISireneOuverteUniteLegaleResultat) => {
-      const {
-        siege: {
-          complement_adresse,
-          numero_voie,
-          indice_repetition,
-          type_voie,
-          libelle_voie,
-          code_postal,
-          libelle_commune,
-        },
-        dirigeants,
-      } = result;
+    results: results.map(mapToUniteLegale),
+  };
+};
 
-      const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
+const mapToUniteLegale = (
+  result: ISireneOuverteUniteLegaleResultat
+): ISearchResult => {
+  const {
+    nature_juridique,
+    siege: {
+      complement_adresse,
+      numero_voie,
+      indice_repetition,
+      type_voie,
+      libelle_voie,
+      code_postal,
+      libelle_commune,
+      latitude = '0',
+      longitude = '0',
+    },
+    dirigeants,
+    complements: {
+      est_ess = false,
+      est_entrepreneur_individuel = false,
+      identifiant_association = null,
+    },
+  } = result;
 
-      return {
-        siren: result.siren,
-        siret: result.siege.siret,
-        estActive: result.etat_administratif === 'A',
-        adresse: formatAdresse({
-          complement: complement_adresse,
-          numeroVoie: numero_voie,
-          indiceRepetition: indice_repetition,
-          typeVoie: type_voie,
-          libelleVoie: libelle_voie,
-          codePostal: code_postal,
-          libelleCommune: libelle_commune,
-        }),
-        latitude: result.siege.latitude || 0,
-        longitude: result.siege.longitude || 0,
-        nomComplet,
-        nombreEtablissements: result.nombre_etablissements || 1,
-        nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
-        chemin: result.siren,
-        libelleActivitePrincipale: libelleFromCodeNAF(
-          result.activite_principale,
-          'NAFRev2', // search does not handle old nomenclatures yet
-          false
-        ),
-        dirigeants: dirigeants.map((dirigeantRaw) => {
-          const {
-            siren = '',
-            sigle = '',
-            denomination = '',
-            prenoms = '',
-            nom = '',
-            // annee_de_naissance = '',
-            qualite = '',
-          } = dirigeantRaw;
-          if (!!siren) {
-            return {
-              siren,
-              denomination: `${denomination}${sigle ? ` (${sigle})` : ''}`,
-              role: qualite,
-            } as IPersonneMorale;
-          }
+  const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
 
-          return {
-            sexe: null,
-            nom: (nom || '').toUpperCase(),
-            prenom: formatFirstNames((prenoms || '').split(' '), 1),
-            role: qualite,
-            dateNaissancePartial: '',
-            dateNaissanceFull: '',
-            lieuNaissance: '',
-          } as IEtatCivil;
-        }),
-      };
-    }),
+  const siren = verifySiren(result.siren);
+  const siret = verifySiret(result.siege.siret);
+
+  const adresse = formatAdresse({
+    complement: complement_adresse,
+    numeroVoie: numero_voie,
+    indiceRepetition: indice_repetition,
+    typeVoie: type_voie,
+    libelleVoie: libelle_voie,
+    codePostal: code_postal,
+    libelleCommune: libelle_commune,
+  });
+
+  const siege = {
+    ...createDefaultEtablissement(),
+    siret,
+    adresse,
+    latitude,
+    longitude,
+  };
+
+  return {
+    ...createDefaultUniteLegale(siren),
+    siege,
+    estActive: result.etat_administratif === 'A',
+    natureJuridique: nature_juridique,
+    nomComplet,
+    nombreEtablissements: result.nombre_etablissements || 1,
+    nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
+    chemin: result.siren,
+    libelleActivitePrincipale: libelleFromCodeNAF(
+      result.activite_principale,
+      'NAFRev2', // search does not handle old nomenclatures yet
+      false
+    ),
+    dirigeants: dirigeants.map(mapToDirigeantModel),
+    complements: {
+      estEss: est_ess,
+      estEntrepreneurIndividuel: est_entrepreneur_individuel,
+      idAssociation: identifiant_association,
+    },
+  };
+};
+
+const mapToDirigeantModel = (
+  dirigeantRaw: ISireneOuverteDirigeant
+): IEtatCivil | IPersonneMorale => {
+  const {
+    siren = '',
+    sigle = '',
+    denomination = '',
+    prenoms = '',
+    nom = '',
+    // annee_de_naissance = '',
+    qualite = '',
+  } = dirigeantRaw;
+  if (!!siren) {
+    return {
+      siren,
+      denomination: `${denomination}${sigle ? ` (${sigle})` : ''}`,
+      role: qualite,
+    } as IPersonneMorale;
+  }
+
+  return {
+    sexe: null,
+    nom: (nom || '').toUpperCase(),
+    prenom: formatFirstNames((prenoms || '').split(' '), 1),
+    role: qualite,
+    dateNaissancePartial: '',
+    dateNaissanceFull: '',
+    lieuNaissance: '',
   };
 };
 

@@ -1,8 +1,8 @@
-import { IUniteLegale } from '../../models';
 import { INSEE, MI } from '../../components/administrations';
 import Warning from './warning';
+import { IAssociation } from '../../models';
 
-const AssociationAdressAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
+const AssociationAdressAlert: React.FC<{ uniteLegale: IAssociation }> = ({
   uniteLegale,
 }) => {
   const adresseInconsistency =

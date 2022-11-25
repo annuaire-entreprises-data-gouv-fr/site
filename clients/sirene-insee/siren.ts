@@ -3,8 +3,8 @@ import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
   IUniteLegale,
-  splitByStatus,
 } from '../../models';
+import { createEtablissementsList } from '../../models/etablissements-list';
 import { IEtatCivil } from '../../models/immatriculation/rncs';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
 import {
@@ -200,9 +200,6 @@ const mapToDomainObject = (
     ...defaultUniteLegale,
     siren,
     oldSiren: originalSiren,
-    association: identifiantAssociationUniteLegale
-      ? { id: identifiantAssociationUniteLegale }
-      : null,
     siege,
     allSiegesSiret,
     natureJuridique: categorieJuridiqueUniteLegale,
@@ -211,7 +208,7 @@ const mapToDomainObject = (
     ),
     activitePrincipale: siege.activitePrincipale,
     libelleActivitePrincipale: siege.libelleActivitePrincipale,
-    etablissements: splitByStatus([siege]),
+    etablissements: createEtablissementsList([siege]),
     dateCreation: dateCreationUniteLegale,
     dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
       'T'
@@ -219,8 +216,6 @@ const mapToDomainObject = (
     dateDebutActivite: dateDebut,
     estActive: etatAdministratifUniteLegale === 'A',
     estDiffusible: statutDiffusionUniteLegale !== 'N',
-    estEntrepreneurIndividuel,
-    estEss: economieSocialeSolidaireUniteLegale === 'O',
     nomComplet,
     chemin: siren,
     trancheEffectif: trancheEffectifsUniteLegale,
@@ -234,5 +229,10 @@ const mapToDomainObject = (
       anneeCategorieEntreprise
     ),
     dirigeant: estEntrepreneurIndividuel ? dirigeant : null,
+    complements: {
+      estEntrepreneurIndividuel,
+      estEss: economieSocialeSolidaireUniteLegale === 'O',
+      idAssociation: identifiantAssociationUniteLegale || null,
+    },
   };
 };

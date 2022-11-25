@@ -15,11 +15,16 @@ export const isTwoMonthOld = (dateAsString: string) => {
   }
 };
 
+export const isAssociationFromNatureJuridique = (natureJuridique: string) =>
+  ['92', '5195', '9210', '9220', '9221', '9222', '9230', '9260'].indexOf(
+    natureJuridique
+  ) > -1;
+
 /**
  * Return true if an uniteLegale should be **ignored** by indexing bots
  */
 export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
-  if (uniteLegale.estEntrepreneurIndividuel) {
+  if (uniteLegale.complements.estEntrepreneurIndividuel) {
     // we dont index EI
     return true;
   }
