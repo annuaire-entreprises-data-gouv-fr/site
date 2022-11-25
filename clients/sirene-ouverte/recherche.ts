@@ -198,7 +198,8 @@ const mapToUniteLegale = (
     chemin: result.siren,
     natureJuridique: nature_juridique,
     libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
-      result.activite_principale
+      result.activite_principale,
+      false
     ),
     dirigeants: dirigeants.map(mapToDirigeantModel),
     complements: {

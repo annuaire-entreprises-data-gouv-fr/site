@@ -73,7 +73,10 @@ export const libelleFromCodeSectionNaf = (code: string) => {
   return label ? label : 'Section inconnue';
 };
 
-export const libelleFromCodeNAFWithoutNomenclature = (code = '') => {
+export const libelleFromCodeNAFWithoutNomenclature = (
+  code = '',
+  addCode = true
+) => {
   for (let nomenclature of [
     codesNAFRev2,
     codesNAFRev1,
@@ -83,7 +86,7 @@ export const libelleFromCodeNAFWithoutNomenclature = (code = '') => {
     //@ts-ignore
     const label = nomenclature[code];
     if (label) {
-      return `${code} - ${label}`;
+      return addCode && code ? `${code} - ${label}` : label;
     }
   }
   return 'Activité inconnue';
