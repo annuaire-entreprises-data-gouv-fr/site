@@ -153,6 +153,26 @@ export const isAssociation = (
   );
 };
 
+export interface IAdministration extends IUniteLegale {}
+
+export const isAdministration = (
+  toBeDetermined: IUniteLegale
+): toBeDetermined is IAdministration => {
+  return (
+    isAssociationFromNatureJuridique(toBeDetermined.natureJuridique) ||
+    toBeDetermined.siren.indexOf('1') === 0 ||
+    toBeDetermined.siren.indexOf('2') === 0
+  );
+};
+
+export interface ICollectiviteTerritoriale extends IUniteLegale {}
+
+export const isCollectiviteTerritoriale = (
+  toBeDetermined: IUniteLegale
+): toBeDetermined is ICollectiviteTerritoriale => {
+  return false;
+};
+
 /** COMMON ERRORS */
 
 /**

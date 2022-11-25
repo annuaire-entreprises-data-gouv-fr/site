@@ -14,9 +14,7 @@ interface IProps {
   searchTerm?: string;
 }
 
-const EtablissmentTagLabel: React.FC<{ result: ISearchResult }> = ({
-  result,
-}) => {
+const EtablissmentCount: React.FC<{ result: ISearchResult }> = ({ result }) => {
   const openCount = result.nombreEtablissementsOuverts || 'aucun';
   const plural = openCount > 1 ? 's' : '';
 
@@ -72,7 +70,6 @@ const ResultsList: React.FC<IProps> = ({
         >
           <div className="title">
             <span>{`${result.nomComplet}`}</span>
-            &nbsp;
             <UniteLegaleBadge uniteLegale={result} small hiddenByDefault />
             {!result.estActive && (
               <IsActiveTag state={IETATADMINSTRATIF.CESSEE} />
@@ -84,7 +81,7 @@ const ResultsList: React.FC<IProps> = ({
           )}
           <div className="adress">
             <span>{result.siege.adresse || 'Adresse inconnue'} </span>
-            <EtablissmentTagLabel result={result} />
+            <EtablissmentCount result={result} />
           </div>
         </a>
       ))}
@@ -94,7 +91,7 @@ const ResultsList: React.FC<IProps> = ({
         text-decoration: none;
         border: none;
         color: #333;
-        margin: 20px 0;
+        margin: 30px 0;
         display: block;
         font-size: 1rem;
       }
@@ -102,13 +99,16 @@ const ResultsList: React.FC<IProps> = ({
         color: #000091;
         text-decoration: none;
         font-size: 1.1rem;
-        margin-bottom: 5px 0;
+        margin-bottom: 3px;
 
         display: flex;
         align-items: center;
         flex-wrap: wrap;
       }
 
+      .results-list > a .title > span:first-of-type {
+        margin-right: 10px;
+      }
       .results-list > a:hover .title > span:first-of-type {
         text-decoration: underline;
       }

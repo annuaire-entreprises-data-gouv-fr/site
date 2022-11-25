@@ -72,6 +72,34 @@ export const buildingFill = (
   </svg>
 );
 
+export const administrationFill = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    fill="currentColor"
+    stroke="currentColor"
+    strokeWidth="0"
+  >
+    <path d="M22 20v2H2v-2h20ZM6 12v7H4v-7h2Zm5 0v7H9v-7h2Zm4 0v7h-2v-7h2Zm5 0v7h-2v-7h2ZM12 2l10 5v4H2V7l10-5Zm0 4a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" />
+  </svg>
+);
+
+export const collectiviteFill = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    fill="currentColor"
+    stroke="currentColor"
+    strokeWidth="0"
+  >
+    <path d="M19 3a1 1 0 0 1 1 1v2h3v2h-1v11h1v2H1v-2h1V8H1V6h3V4a1 1 0 0 1 1-1h14Zm-6 9h-2v7h2v-7Zm-5 0H6v7h2v-7Zm10 0h-2v7h2v-7Zm0-7H6v1h12V5Z" />
+  </svg>
+);
+
 export const building = (
   <svg
     xmlns="http://www.w3.org/2000/svg"

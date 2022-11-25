@@ -1,5 +1,16 @@
-import { communityFill, buildingFill, user } from '../../components-ui/icon';
-import { isAssociation, IUniteLegale } from '../../models';
+import {
+  communityFill,
+  buildingFill,
+  user,
+  administrationFill,
+  collectiviteFill,
+} from '../../components-ui/icon';
+import {
+  isAdministration,
+  isAssociation,
+  isCollectiviteTerritoriale,
+  IUniteLegale,
+} from '../../models';
 
 const determineType = (uniteLegale: IUniteLegale) => {
   if (isAssociation(uniteLegale)) {
@@ -17,12 +28,22 @@ const determineType = (uniteLegale: IUniteLegale) => {
     };
   }
 
-  // colter
-  // return {
-  //   icon: humanPin,
-  //   label: 'Collectivité territoriale',
-  //   colors: ['#f9f0d2', '#563003'],
-  // };
+  if (isCollectiviteTerritoriale(uniteLegale)) {
+    // colter before administration as it is more restrictive yet some colter might also be administration
+    return {
+      icon: collectiviteFill,
+      label: 'Collectivité territoriale',
+      colors: ['#ffe283', '#563003'],
+    };
+  }
+
+  if (isAdministration(uniteLegale)) {
+    return {
+      icon: administrationFill,
+      label: 'Administration publique',
+      colors: ['#ffe283', '#563003'],
+    };
+  }
 
   // default case
   return {
