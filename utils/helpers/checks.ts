@@ -16,14 +16,12 @@ export const isTwoMonthOld = (dateAsString: string) => {
 };
 
 export const isAssociationFromNatureJuridique = (natureJuridique: string) =>
-  ['92', '5195', '9210', '9220', '9221', '9222', '9230', '9260'].indexOf(
-    natureJuridique
-  ) > -1;
+  natureJuridique === '5195' || natureJuridique.indexOf('92') === 0;
 
 export const isAdministrationFromNatureJuridique = (natureJuridique: string) =>
-  ['92', '5195', '9210', '9220', '9221', '9222', '9230', '9260'].indexOf(
-    natureJuridique
-  ) > -1;
+  natureJuridique.indexOf('71') === 0 ||
+  natureJuridique.indexOf('73') === 0 ||
+  natureJuridique.indexOf('74') === 0;
 
 /**
  * Return true if an uniteLegale should be **ignored** by indexing bots

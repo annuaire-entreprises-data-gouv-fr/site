@@ -10,6 +10,7 @@ const ResultsCounter: React.FC<{
         <div className="results-counter">
           <span>
             {currentPage > 1 && `Page ${currentPage} de `}
+            {resultCount === 10000 && 'Plus de '}
             {resultCount} résultats trouvés.
           </span>
         </div>

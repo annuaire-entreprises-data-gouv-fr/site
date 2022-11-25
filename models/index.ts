@@ -1,6 +1,9 @@
 /** COMMON TYPES */
 
-import { isAssociationFromNatureJuridique } from '../utils/helpers/checks';
+import {
+  isAdministrationFromNatureJuridique,
+  isAssociationFromNatureJuridique,
+} from '../utils/helpers/checks';
 import { IdRna } from '../utils/helpers/id-rna';
 import { Siren, Siret } from '../utils/helpers/siren-and-siret';
 import {
@@ -159,7 +162,7 @@ export const isAdministration = (
   toBeDetermined: IUniteLegale
 ): toBeDetermined is IAdministration => {
   return (
-    isAssociationFromNatureJuridique(toBeDetermined.natureJuridique) ||
+    isAdministrationFromNatureJuridique(toBeDetermined.natureJuridique) ||
     toBeDetermined.siren.indexOf('1') === 0 ||
     toBeDetermined.siren.indexOf('2') === 0
   );
