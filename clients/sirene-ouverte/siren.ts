@@ -143,11 +143,13 @@ const mapToDomainObject = (
     dateDerniereMiseAJour: date_mise_a_jour,
     dirigeant: null,
     complements: {
-      idAssociation: identifiantAssociationUniteLegale || null,
       estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
         nature_juridique_entreprise
       ),
       estEss: economieSocialeSolidaireUniteLegale === 'O',
+    },
+    association: {
+      idAssociation: identifiantAssociationUniteLegale || null,
     },
   };
 };

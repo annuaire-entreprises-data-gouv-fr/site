@@ -48,7 +48,7 @@ const getAnnoncesFromSlug = async (siren: string) => {
   let jo = null;
   if (isAssociation(uniteLegale)) {
     jo = await getAnnoncesJoFromIdRna(
-      uniteLegale.association.id,
+      uniteLegale.association.idAssociation,
       uniteLegale.siren
     );
   }

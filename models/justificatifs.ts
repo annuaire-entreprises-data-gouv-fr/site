@@ -37,7 +37,10 @@ const getJustificatifs = async (slug: string) => {
     ]);
 
   const immatriculationJOAFE = isAssociation(uniteLegale)
-    ? await getImmatriculationJOAFE(siren, uniteLegale.association.id)
+    ? await getImmatriculationJOAFE(
+        siren,
+        uniteLegale.association.idAssociation
+      )
     : APINotRespondingFactory(EAdministration.DILA, 404);
 
   return {

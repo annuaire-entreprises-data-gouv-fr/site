@@ -98,6 +98,8 @@ export interface IUniteLegale extends IEtablissementsList {
   complements: {
     estEntrepreneurIndividuel: boolean;
     estEss: boolean;
+  };
+  association: {
     idAssociation: IdRna | string | null;
   };
 }
@@ -131,14 +133,16 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     complements: {
       estEntrepreneurIndividuel: false,
       estEss: false,
+    },
+    association: {
       idAssociation: null,
     },
   };
 };
 
-export interface IAssociation extends IUniteLegale {
+export interface IAssociation extends Omit<IUniteLegale, 'association'> {
   association: {
-    id: IdRna | string;
+    idAssociation: IdRna | string;
     exId?: string;
     nomComplet?: string;
     objet?: string;
@@ -152,7 +156,7 @@ export const isAssociation = (
 ): toBeDetermined is IAssociation => {
   return (
     isAssociationFromNatureJuridique(toBeDetermined.natureJuridique) ||
-    (toBeDetermined as IAssociation).complements.idAssociation !== null
+    (toBeDetermined as IAssociation).association.idAssociation !== null
   );
 };
 

@@ -13,11 +13,16 @@ const AssociationSection: React.FC<{
   uniteLegale: IAssociation;
 }> = ({ uniteLegale }) => {
   const {
-    association: { id, nomComplet, objet, adresse },
+    association: {
+      idAssociation = '',
+      nomComplet = '',
+      objet = '',
+      adresse = '',
+    },
   } = uniteLegale;
 
   const data = [
-    ['N° RNA (identifiant d’association)', formatIntFr(id)],
+    ['N° RNA (identifiant d’association)', formatIntFr(idAssociation)],
     ['Nom', nomComplet],
     ['Objet', objet],
     ['Adresse', adresse],

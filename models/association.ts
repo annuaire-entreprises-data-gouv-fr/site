@@ -1,3 +1,4 @@
+import { isSpreadAssignment } from 'typescript';
 import { IAssociation, IUniteLegale, NotAValidIdRnaError } from '.';
 import { reverseGeoLoc } from '../clients/base-adresse';
 import { HttpNotFound } from '../clients/exceptions';
@@ -7,24 +8,26 @@ import { verifyIdRna } from '../utils/helpers/id-rna';
 import logErrorInSentry, { logWarningInSentry } from '../utils/sentry';
 
 const getAssociation = async (
-  uniteLegale: IUniteLegale,
-  isBot: boolean
+  uniteLegale: IUniteLegale
 ): Promise<IAssociation> => {
   const uniteLegaleAsAssociation = uniteLegale as IAssociation;
-  const slug = uniteLegale.complements.idAssociation || '';
-  uniteLegaleAsAssociation.association = { id: slug };
+  const slug = uniteLegale.association.idAssociation || '';
+  uniteLegaleAsAssociation.association = { idAssociation: slug };
 
   // either we dont even have the id RNA,
   // or it is bot
   // then no need to call API RNA
-  if (!slug || isBot) {
+  if (!slug) {
     return uniteLegaleAsAssociation;
   }
 
   try {
     const idRna = verifyIdRna(slug);
     const data = await fetchAssociation(idRna);
-    uniteLegaleAsAssociation.association = data;
+    uniteLegaleAsAssociation.association = {
+      ...data,
+      idAssociation: idRna,
+    };
 
     uniteLegaleAsAssociation.association.adresseInconsistency =
       await verifyAdressConsistency(uniteLegaleAsAssociation);

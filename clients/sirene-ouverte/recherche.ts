@@ -205,6 +205,8 @@ const mapToUniteLegale = (
     complements: {
       estEss: est_ess,
       estEntrepreneurIndividuel: est_entrepreneur_individuel,
+    },
+    association: {
       idAssociation: identifiant_association,
     },
   };

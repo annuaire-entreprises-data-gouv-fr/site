@@ -232,6 +232,8 @@ const mapToDomainObject = (
     complements: {
       estEntrepreneurIndividuel,
       estEss: economieSocialeSolidaireUniteLegale === 'O',
+    },
+    association: {
       idAssociation: identifiantAssociationUniteLegale || null,
     },
   };

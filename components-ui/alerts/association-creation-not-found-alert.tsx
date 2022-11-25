@@ -13,7 +13,7 @@ const AssociationCreationNotFoundAlert: React.FC<{
     <br />
     Les annonces les plus anciennes du Journal Officiel peuvent contenir des
     erreures de saisie qui ne nous permettent pas de les retrouver grâce à leur
-    numéro RNA ({formatIntFr(uniteLegale.association?.id)}).
+    numéro RNA ({formatIntFr(uniteLegale.association?.idAssociation || '')}).
     <br />
     En revanche, vous pouvez probablement retrouver l’annonce de création grâce
     au{' '}
