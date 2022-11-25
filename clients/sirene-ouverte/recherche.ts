@@ -54,6 +54,12 @@ interface ISireneOuverteUniteLegaleResultat {
     est_ess: boolean;
     est_entrepreneur_individuel: boolean;
     identifiant_association: string;
+    collectivite_territoriale: {
+      code: string;
+      code_insee: string;
+      elus: ISireneOuverteDirigeant[];
+      niveau: string;
+    };
   };
 }
 
@@ -62,6 +68,8 @@ interface ISireneOuverteDirigeant {
   nom?: string;
   annee_de_naissance?: string;
   qualite?: string;
+  fonction?: string;
+  sexe?: string;
   siren?: string;
   denomination?: string;
   sigle?: string;
@@ -150,6 +158,7 @@ const mapToUniteLegale = (
       est_ess = false,
       est_entrepreneur_individuel = false,
       identifiant_association = null,
+      collectivite_territoriale = null,
     },
   } = result;
 

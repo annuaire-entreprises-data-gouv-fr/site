@@ -70,7 +70,7 @@ const UniteLegaleSection: React.FC<{
   return (
     <div id="entreprise">
       <Section
-        title={`Informations générales`}
+        title={`Résumé`}
         sources={[EAdministration.INSEE, EAdministration.VIES]}
       >
         <TwoColumnTable body={data} />

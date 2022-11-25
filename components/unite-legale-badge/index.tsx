@@ -28,15 +28,15 @@ const determineType = (uniteLegale: IUniteLegale) => {
   return {
     icon: buildingFill,
     label: 'Unité Légale',
-    colors: ['#d2e9f9', '#000091'],
+    colors: ['#e8edff', '#000091'],
     isDefault: true,
   };
 };
 
 const UniteLegaleBadge: React.FC<{
   uniteLegale: IUniteLegale;
-  small: boolean;
-  hiddenByDefault: boolean;
+  small?: boolean;
+  hiddenByDefault?: boolean;
 }> = ({ uniteLegale, small = false, hiddenByDefault = false }) => {
   const {
     icon,

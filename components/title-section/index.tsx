@@ -13,7 +13,7 @@ import { isAssociation } from '../../models';
 import UniteLegaleBadge from '../unite-legale-badge';
 
 export enum FICHE {
-  INFORMATION = 'résumé',
+  INFORMATION = 'informations générales',
   JUSTIFICATIFS = 'justificatifs',
   ANNONCES = 'annonces',
   DIRIGEANTS = 'dirigeants',
@@ -38,7 +38,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         } no-style-link`}
         href={`/entreprise/${siren}`}
       >
-        Résumé
+        Informations générales
       </a>
       <a
         className={`${
