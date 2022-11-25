@@ -20,6 +20,7 @@ export const isAssociationFromNatureJuridique = (natureJuridique: string) =>
 
 export const isAdministrationFromNatureJuridique = (natureJuridique: string) =>
   natureJuridique.indexOf('71') === 0 ||
+  natureJuridique.indexOf('72') === 0 ||
   natureJuridique.indexOf('73') === 0 ||
   natureJuridique.indexOf('74') === 0;
 

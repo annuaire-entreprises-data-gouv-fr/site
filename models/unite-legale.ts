@@ -72,17 +72,17 @@ class UniteLegaleFactory {
       uniteLegale = await getUniteLegaleForGoodBot(this._siren, page);
     } else {
       uniteLegale = await getUniteLegale(this._siren, page);
+    }
 
-      if (isAssociation(uniteLegale)) {
-        uniteLegale = await getAssociation(uniteLegale);
-      }
+    if (isAssociation(uniteLegale)) {
+      uniteLegale = await getAssociation(uniteLegale, isBot);
+    }
 
-      if (
-        uniteLegale.complements.estEntrepreneurIndividuel &&
-        !uniteLegale.estDiffusible
-      ) {
-        uniteLegale.nomComplet = 'Entité non-diffusible';
-      }
+    if (
+      uniteLegale.complements.estEntrepreneurIndividuel &&
+      !uniteLegale.estDiffusible
+    ) {
+      uniteLegale.nomComplet = 'Entité non-diffusible';
     }
 
     // only entreprise commerciales

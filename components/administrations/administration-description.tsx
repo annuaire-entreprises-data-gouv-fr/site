@@ -1,16 +1,17 @@
 import { administrationsMetaData } from '../../models/administrations';
-import { administrationsLogo } from './logos';
+import { administrationsLogo, marianne } from './logos';
 
 const AdministrationDescription: React.FC<{
   slug: string; // EAdministration
 }> = ({ slug }) => {
   const logo = administrationsLogo[slug];
+
   const { description, contact, long, apiMonitors } =
     administrationsMetaData[slug];
   return (
     <div className="administration-wrapper">
       <div className="logo-wrapper">
-        <span>{logo}</span>
+        {logo ? <span>{logo}</span> : <span>{marianne}</span>}
       </div>
       <div>
         <h2>{long}</h2>

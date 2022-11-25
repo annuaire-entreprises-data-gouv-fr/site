@@ -7,14 +7,17 @@ import { verifyIdRna } from '../utils/helpers/id-rna';
 import logErrorInSentry, { logWarningInSentry } from '../utils/sentry';
 
 const getAssociation = async (
-  uniteLegale: IUniteLegale
+  uniteLegale: IUniteLegale,
+  isBot: boolean
 ): Promise<IAssociation> => {
   const uniteLegaleAsAssociation = uniteLegale as IAssociation;
   const slug = uniteLegale.complements.idAssociation || '';
   uniteLegaleAsAssociation.association = { id: slug };
 
-  // when we dont even have the id RNA, no need to call API RNA
-  if (!slug) {
+  // either we dont even have the id RNA,
+  // or it is bot
+  // then no need to call API RNA
+  if (!slug || isBot) {
     return uniteLegaleAsAssociation;
   }
 

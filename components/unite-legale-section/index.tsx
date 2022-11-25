@@ -76,7 +76,6 @@ const UniteLegaleSection: React.FC<{
         <TwoColumnTable body={data} />
       </Section>
       <HorizontalSeparator />
-      <BreakPageForPrint />
     </div>
   );
 };

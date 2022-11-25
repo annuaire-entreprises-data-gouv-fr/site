@@ -23,7 +23,7 @@ const determineType = (uniteLegale: IUniteLegale) => {
   if (uniteLegale.complements.estEntrepreneurIndividuel) {
     return {
       icon: user,
-      label: 'Entreprise Individuelle',
+      label: 'Entreprise individuelle',
       colors: ['#95e3e8', '#034e6e'],
     };
   }
@@ -48,7 +48,7 @@ const determineType = (uniteLegale: IUniteLegale) => {
   // default case
   return {
     icon: buildingFill,
-    label: 'Unité Légale',
+    label: 'Unité légale',
     colors: ['#e8edff', '#000091'],
     isDefault: true,
   };

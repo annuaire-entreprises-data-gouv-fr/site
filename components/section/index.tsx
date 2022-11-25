@@ -9,6 +9,7 @@ import Warning from '../../components-ui/alerts/warning';
 import DataSourcesTooltip from '../../components-ui/information-tooltip/data-sources-tooltip';
 import { administrationsLogo } from '../administrations/logos';
 import { questionnaire } from '../../components-ui/icon';
+import { PrintNever } from '../../components-ui/print-visibility';
 
 interface ISectionProps {
   title: string;
@@ -53,10 +54,12 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         <div>{children}</div>
         {dataSources.length > 0 && (
           <div className="administration-page-link">
-            <a href={link}>
-              {questionnaire}
-              &nbsp;Une erreur ou une question sur ces données ?
-            </a>
+            <PrintNever>
+              <a href={link}>
+                {questionnaire}
+                &nbsp;Une erreur ou une question sur ces données ?
+              </a>
+            </PrintNever>
             <DataSourcesTooltip
               dataSources={dataSources.map((src) => src.data)}
               lastUpdatedAt={formatDate(last)}
