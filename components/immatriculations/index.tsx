@@ -55,10 +55,12 @@ const Immatriculations: React.FC<IJustificatifs> = ({
         </>
       ) : (
         <>
-          <ImmatriculationJOAFE
-            immatriculation={immatriculationJOAFE}
-            uniteLegale={uniteLegale}
-          />
+          {isAnAssociation && (
+            <ImmatriculationJOAFE
+              immatriculation={immatriculationJOAFE}
+              uniteLegale={uniteLegale}
+            />
+          )}
           <ImmatriculationRNM
             immatriculation={immatriculationRNM}
             uniteLegale={uniteLegale}
