@@ -5,7 +5,10 @@ import {
   formatFirstNames,
   parseIntWithDefaultValue,
 } from '../../utils/helpers/formatting';
-import { libelleFromCodeNAF } from '../../utils/labels';
+import {
+  libelleFromCodeNAF,
+  libelleFromCodeNAFWithoutNomenclature,
+} from '../../utils/labels';
 import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
@@ -189,15 +192,13 @@ const mapToUniteLegale = (
     ...createDefaultUniteLegale(siren),
     siege,
     estActive: result.etat_administratif === 'A',
-    natureJuridique: nature_juridique,
     nomComplet,
     nombreEtablissements: result.nombre_etablissements || 1,
     nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
     chemin: result.siren,
-    libelleActivitePrincipale: libelleFromCodeNAF(
-      result.activite_principale,
-      'NAFRev2', // search does not handle old nomenclatures yet
-      false
+    natureJuridique: nature_juridique,
+    libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
+      result.activite_principale
     ),
     dirigeants: dirigeants.map(mapToDirigeantModel),
     complements: {
