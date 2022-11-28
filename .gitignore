@@ -45,7 +45,6 @@ yarn-error.log*
 /public/frontend/style/bundle.css
 /public/sitemap
 /public/departements
-/public/
 
 public/dist
 public/downloads
