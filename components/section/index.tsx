@@ -7,9 +7,9 @@ import { isTwoMonthOld } from '../../utils/helpers/checks';
 import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
 import Warning from '../../components-ui/alerts/warning';
 import DataSourcesTooltip from '../../components-ui/information-tooltip/data-sources-tooltip';
-import { administrationsLogo } from '../administrations/logos';
 import { questionnaire } from '../../components-ui/icon';
 import { PrintNever } from '../../components-ui/print-visibility';
+import Logo from '../../components-ui/logo';
 
 interface ISectionProps {
   title: string;
@@ -27,19 +27,12 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   lastModified = null,
   width = 100,
 }) => {
-  const dataSources = sources.map((source) => {
-    return {
-      data: administrationsMetaData[source],
-      logo: administrationsLogo[source],
-    };
-  });
+  const dataSources = sources.map((key) => administrationsMetaData[key]);
 
   const isOld = lastModified && isTwoMonthOld(lastModified);
   const last = lastModified || new Date();
 
-  const link = `/administration/${dataSources
-    .map((d) => d.data.slug)
-    .join('_')}`;
+  const link = `/administration/${dataSources.map((d) => d.slug).join('_')}`;
 
   return (
     <>
@@ -61,24 +54,27 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
               </a>
             </PrintNever>
             <DataSourcesTooltip
-              dataSources={dataSources.map((src) => src.data)}
+              dataSources={dataSources}
               lastUpdatedAt={formatDate(last)}
               link={link}
             />
           </div>
         )}
-        <div className="logo-wrapper">
+        <div className="section-logo-wrapper">
           {dataSources.map(
-            ({ data, logo }) =>
-              data &&
-              logo && (
+            ({ slug, long, logoType }) =>
+              logoType && (
                 <a
-                  key={data.long}
+                  key={long}
                   href={link}
-                  title={data.long}
+                  title={long}
                   className="no-style-link"
                 >
-                  {logo}
+                  {logoType === 'portrait' ? (
+                    <Logo title={long} slug={slug} width={70} height={40} />
+                  ) : (
+                    <Logo title={long} slug={slug} width={170} height={40} />
+                  )}
                 </a>
               )
           )}
@@ -115,23 +111,16 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           font-size: 0.9rem;
         }
 
-        .logo-wrapper {
+        .section-logo-wrapper {
           position: absolute;
-          top: 16px;
+          top: 25px;
           right: 16px;
           display: flex;
           justify-content: end;
         }
 
-        .logo-wrapper > a {
-          min-width: 70px;
-          max-width: 100px;
-          height: 40px;
-          max-height: 50px;
-        }
-
         @media only screen and (min-width: 1px) and (max-width: 750px) {
-          .logo-wrapper {
+          .section-logo-wrapper {
             display: none;
           }
 

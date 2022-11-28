@@ -42,7 +42,12 @@ const HeaderWithSearch: React.FC<IProps> = ({
                   </div>
                   <div className="annuaire-logo">
                     <a href="/" title="L’Annuaire des Entreprises">
-                      {/* <Logo width={140} /> */}
+                      <Logo
+                        title="Logo de l’Annuaire des Entreprises"
+                        slug="annuaire-entreprises"
+                        width={140}
+                        height={54}
+                      />
                     </a>
                   </div>
                   <div className="fr-header__navbar"></div>

@@ -1,6 +1,7 @@
 slug: insee
 short: Insee
-site: https://www.sirene.fr/sirene/public/accueil
+site: https://www.insee.fr/fr/accueil
+logoType: portrait
 long: Institut national de la statistique et des études économiques (Insee)
 contact: https://www.insee.fr/fr/information/1302169
 apiMonitors:

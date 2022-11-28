@@ -19,7 +19,12 @@ const Index: React.FC = () => (
         action={'/rechercher'}
         method="get"
       >
-        <Logo />
+        <Logo
+          title="Logo de l’Annuaire des Entreprises"
+          slug="annuaire-entreprises"
+          width={270}
+          height={112}
+        />
         <HiddenH1 title="L’Annuaire des Entreprises" />
         <h2>
           Retrouvez toutes les informations publiques sur une entreprise, une

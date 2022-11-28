@@ -1,4 +1,6 @@
 import React from 'react';
+import Logo from '../../components-ui/logo';
+import { administrationsMetaData } from '../../models/administrations';
 
 const Footer = () => (
   <footer className="fr-footer" role="contentinfo" id="footer">
@@ -103,6 +105,44 @@ const Footer = () => (
               </a>
             </li>
           </ul>
+        </div>
+      </div>
+      <div className="fr-footer__partners">
+        <h4 className="fr-footer__partners-title">Nos partenaires</h4>
+        <div className="fr-footer__partners-logos">
+          <div className="fr-footer__partners-sub">
+            <ul>
+              {Object.values(administrationsMetaData).map(
+                ({ slug, logoType, long }) =>
+                  logoType && (
+                    <li>
+                      <a
+                        className="fr-footer__partners-link"
+                        href={`/administration#${slug}`}
+                      >
+                        {logoType === 'portrait' ? (
+                          <Logo
+                            title={long}
+                            slug={slug}
+                            width={80}
+                            height={50}
+                            className="fr-footer__logo"
+                          />
+                        ) : (
+                          <Logo
+                            title={long}
+                            slug={slug}
+                            width={150}
+                            height={50}
+                            className="fr-footer__logo"
+                          />
+                        )}
+                      </a>
+                    </li>
+                  )
+              )}
+            </ul>
+          </div>
         </div>
       </div>
       <div className="fr-footer__bottom">

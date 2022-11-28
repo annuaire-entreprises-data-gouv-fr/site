@@ -1,6 +1,7 @@
 slug: mi
 short: MI
 long: Ministère de l’Intérieur (MI)
+site: https://www.interieur.gouv.fr/
 contact: https://www.interieur.gouv.fr/Infos-du-site/Nous-contacter
 apiMonitors:
   - apiGouvLink: https://api.gouv.fr/les-api/api_rna

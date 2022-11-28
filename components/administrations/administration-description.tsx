@@ -1,17 +1,15 @@
+import Logo from '../../components-ui/logo';
 import { administrationsMetaData } from '../../models/administrations';
-import { administrationsLogo, marianne } from './logos';
 
 const AdministrationDescription: React.FC<{
   slug: string; // EAdministration
 }> = ({ slug }) => {
-  const logo = administrationsLogo[slug];
-
-  const { description, contact, long, apiMonitors } =
+  const { description, contact, long, apiMonitors, logoType } =
     administrationsMetaData[slug];
   return (
     <div className="administration-wrapper">
-      <div className="logo-wrapper">
-        {logo ? <span>{logo}</span> : <span>{marianne}</span>}
+      <div>
+        {logoType && <Logo title={long} slug={slug} width={80} height={80} />}
       </div>
       <div>
         <h2>{long}</h2>
@@ -37,28 +35,21 @@ const AdministrationDescription: React.FC<{
           align-items: center;
         }
 
-        .logo-wrapper {
-          width: 110px;
+        .administration-wrapper > div:first-of-type {
           flex-shrink: 0;
+          flex-grow: 0;
           display: flex;
           justify-content: left;
           align-items: center;
+          width: 120px;
         }
 
-        .logo-wrapper > span {
-          min-width: 70px;
-          max-width: 80px;
-          min-height: 40px;
-          max-height: 50px;
-          justify-content: center;
-          align-items: center;
-        }
         @media only screen and (min-width: 1px) and (max-width: 600px) {
           .administration-wrapper {
             flex-direction: column;
             margin-top: 30px;
           }
-          .logo-wrapper {
+          .administration-wrapper > div:first-of-type {
             width: 70px;
             margin-bottom: 15px;
           }

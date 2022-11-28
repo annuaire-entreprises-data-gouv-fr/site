@@ -1,6 +1,7 @@
 slug: cma
 short: CMA-France
-site: https://rnm.artisanat.fr/
+site: https://cma-france.fr/
+logoType: paysage
 long: Chambre des Métiers et de l’Artisanat (CMA-France)
 contact: http://annuairecma.artisanat.fr/
 apiMonitors:

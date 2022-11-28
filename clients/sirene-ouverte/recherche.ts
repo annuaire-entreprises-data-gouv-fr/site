@@ -5,10 +5,7 @@ import {
   formatFirstNames,
   parseIntWithDefaultValue,
 } from '../../utils/helpers/formatting';
-import {
-  libelleFromCodeNAF,
-  libelleFromCodeNAFWithoutNomenclature,
-} from '../../utils/labels';
+import { libelleFromCodeNAFWithoutNomenclature } from '../../utils/labels';
 import { httpGet } from '../../utils/network';
 import { HttpNotFound } from '../exceptions';
 import routes from '../routes';
@@ -34,6 +31,10 @@ interface ISireneOuverteUniteLegaleResultat {
     libelle_voie: string;
     code_postal: string;
     libelle_commune: string;
+    libelle_cedex: string;
+    libelle_commune_etranger: string;
+    code_pays_etranger: string;
+    libelle_pays_etranger: string;
     indice_repetition: string;
     complement_adresse: string;
     commune: string;
@@ -153,6 +154,10 @@ const mapToUniteLegale = (
       libelle_voie,
       code_postal,
       libelle_commune,
+      libelle_cedex,
+      libelle_commune_etranger,
+      code_pays_etranger,
+      libelle_pays_etranger,
       latitude = '0',
       longitude = '0',
     },
@@ -178,6 +183,10 @@ const mapToUniteLegale = (
     libelleVoie: libelle_voie,
     codePostal: code_postal,
     libelleCommune: libelle_commune,
+    libelleCommuneCedex: libelle_cedex,
+    libelleCommuneEtranger: libelle_commune_etranger,
+    codePaysEtranger: code_pays_etranger,
+    libellePaysEtranger: libelle_pays_etranger,
   });
 
   const siege = {

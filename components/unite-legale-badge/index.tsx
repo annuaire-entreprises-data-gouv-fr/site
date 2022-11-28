@@ -40,7 +40,7 @@ const determineType = (uniteLegale: IUniteLegale) => {
   if (isAdministration(uniteLegale)) {
     return {
       icon: administrationFill,
-      label: 'Administration publique',
+      label: 'Service public',
       colors: ['#ffe283', '#563003'],
     };
   }
