@@ -67,7 +67,7 @@ const getAnnoncesJoFromIdRna = async (
   try {
     return await fetchAnnoncesJO(idRna);
   } catch (e: any) {
-    logErrorInSentry('Error in API Journal Officiel', {
+    logErrorInSentry('Error in API JOAFE', {
       siren,
       details: e.toString(),
     });
