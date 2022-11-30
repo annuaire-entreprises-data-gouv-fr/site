@@ -211,7 +211,7 @@ const Footer = () => (
             </a>
           </li>
           <li className="fr-footer__bottom-item">
-            <a className="fr-footer__bottom-link" href="/statistiques">
+            <a className="fr-footer__bottom-link" href="/stats">
               Statistiques
             </a>
           </li>

@@ -91,7 +91,7 @@ const UniteLegaleBadge: React.FC<{
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding:  ${small ? '0' : '2px'} ${small ? '4px' : '7px'} ;
+        padding:  ${small ? '0 6px' : '2px 8px'};
 π      }
 
       .badge-label {
@@ -100,7 +100,7 @@ const UniteLegaleBadge: React.FC<{
         background-color: #eee;
         color: #555;
         font-weight: bold;
-        padding: ${small ? '0' : '2px'}  ${small ? '4px' : '7px'} ;
+        padding: ${small ? '0 8px 0 6px' : '2px 10px 2px 8px'}
       }
     `}</style>
     </span>

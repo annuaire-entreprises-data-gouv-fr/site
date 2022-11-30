@@ -20,7 +20,11 @@ const StatsPage: React.FC<IMatomoStats> = ({
   userResponses,
   mostCopied,
 }) => (
-  <Page small={true} title="Statisitques du site" noIndex={true}>
+  <Page
+    small={true}
+    title="Statistiques d’utilisation de l’Annuaire des Entreprises"
+    noIndex={true}
+  >
     <h1>Statistiques d’utilisation</h1>
     <p>
       Découvrez nos statistiques d’utilisation mises à jour quotidiennement.
