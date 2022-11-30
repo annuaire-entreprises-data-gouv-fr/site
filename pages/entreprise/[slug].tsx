@@ -91,7 +91,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       };
     }
 
-    const uniteLegale = await getUniteLegaleFromSlug(sirenOrSiretSlug, {
+    const uniteLegale = await getUniteLegaleFromSlug(slug, {
       page,
       isBot,
     });

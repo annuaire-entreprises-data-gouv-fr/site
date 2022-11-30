@@ -31,7 +31,7 @@ const getJustificatifs = async (slug: string) => {
 
   const [uniteLegale, immatriculationRNM, immatriculationRNCS] =
     await Promise.all([
-      getUniteLegaleFromSlug(siren, {}),
+      getUniteLegaleFromSlug(siren),
       getImmatriculationRNM(siren),
       getImmatriculationRNCS(siren),
     ]);
