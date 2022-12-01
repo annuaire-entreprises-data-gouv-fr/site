@@ -1,5 +1,5 @@
 import React from 'react';
-import { facebook, linkedin, qrCode, twitter, print } from '../icon';
+import { facebook, linkedin, qrCode, twitter, print, mail } from '../icon';
 import InformationTooltip from '../information-tooltip';
 import { PrintNever } from '../print-visibility';
 
@@ -56,6 +56,20 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       </span>
       <span>
         <InformationTooltip
+          orientation="right"
+          label="Partager la page de cette entité par Email"
+        >
+          <a
+            href={`mailto:?body=Je voudrais partager la page de cette entité avec vous https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
+            title="Partager cette page par Email"
+            className="no-style-link"
+          >
+            {mail}
+          </a>
+        </InformationTooltip>
+      </span>
+      <span>
+        <InformationTooltip
           label="Imprimer cette page ou la sauvegarder au format PDF"
           orientation="right"
         >
@@ -98,6 +112,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       .social-media span a,
       .social-media span div {
         cursor: pointer !important;
+        padding: 8px;
       }
       .social-media span a:after {
         display: none;
