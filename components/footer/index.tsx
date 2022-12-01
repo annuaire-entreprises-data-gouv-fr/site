@@ -108,7 +108,7 @@ const Footer = () => (
         </div>
       </div>
       <div className="fr-footer__partners">
-        <h4 className="fr-footer__partners-title">Nos partenaires</h4>
+        <b className="fr-footer__partners-title">Nos partenaires</b>
         <div className="fr-footer__partners-logos">
           <div className="fr-footer__partners-sub">
             <ul>
