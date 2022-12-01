@@ -9,7 +9,7 @@ interface IGeoCommuneResponse {
   code: string;
 }
 
-const searchCommunes = async (slug: string): Promise<any> => {
+const clientGeoCommunes = async (slug: string): Promise<any> => {
   const response = await httpGet(routes.geo.commune + slug, {
     timeout: constants.timeout.L,
   });
@@ -29,4 +29,4 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
   );
 };
 
-export { searchCommunes };
+export { clientGeoCommunes };

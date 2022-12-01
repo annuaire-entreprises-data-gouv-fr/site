@@ -181,7 +181,7 @@ const computeStats = (
   };
 };
 
-export const getMatomoStats = async (): Promise<IMatomoStats> => {
+export const clientMatomoStats = async (): Promise<IMatomoStats> => {
   try {
     const [matomoMonthlyStats, matomoNpsEventStats, matomoCopyPasteEventStats] =
       await Promise.all([

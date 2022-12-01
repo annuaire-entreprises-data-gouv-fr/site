@@ -1,7 +1,6 @@
 import React from 'react';
 import { ISearchResult } from '../../models/search';
 import { SearchFeedback } from '../search-feedback';
-import { Tag } from '../../components-ui/tag';
 import IsActiveTag from '../../components-ui/is-active-tag';
 import { IETATADMINSTRATIF } from '../../models/etat-administratif';
 import { isPersonneMorale } from '../dirigeants-section/rncs-dirigeants';

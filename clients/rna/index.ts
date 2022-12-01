@@ -44,7 +44,7 @@ interface IAssociationResponse {
  * GET Association
  */
 
-const fetchAssociation = async (numeroRna: IdRna, useCache = true) => {
+const clientRNA = async (numeroRna: IdRna, useCache = true) => {
   const route = `${routes.rna.id}${numeroRna}`;
   const response = await httpGet(route, {}, useCache);
 
@@ -85,4 +85,4 @@ export const mapToDomainObject = (
   };
 };
 
-export { fetchAssociation };
+export { clientRNA };

@@ -49,19 +49,19 @@ const cachedMonitorings: IMonitoringCache = {
 
 const CACHE_LIFE = 55 * 1000;
 
-export const fetchMonitorings = async (
+export const clientMonitorings = async (
   monitoringIds: number[]
 ): Promise<IMonitoring[]> => {
   const shouldUpdate =
     new Date().getTime() - cachedMonitorings.lastUpdate > CACHE_LIFE;
 
   if (shouldUpdate) {
-    await fetchAllMonitorings();
+    await updateMonitorings();
   }
   return monitoringIds.map((id) => cachedMonitorings.monitorings[id]);
 };
 
-const fetchAllMonitorings = async () => {
+const updateMonitorings = async () => {
   const monitoringIds = allMonitoringIds();
 
   const data = new FormData();
