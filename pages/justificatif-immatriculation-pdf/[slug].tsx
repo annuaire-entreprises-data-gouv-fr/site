@@ -156,7 +156,6 @@ const InpiPDF: React.FC<IProps> = ({ siren, metadata }) => {
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
-
     return {
       props: { siren: slug },
     };
