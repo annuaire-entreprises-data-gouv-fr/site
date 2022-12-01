@@ -1,6 +1,6 @@
 import { IImmatriculation } from '.';
 import { HttpNotFound } from '../../clients/exceptions';
-import { fetchRnmImmatriculation } from '../../clients/rnm';
+import { clientRNM } from '../../clients/rnm';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../../utils/sentry';
 import { EAdministration } from '../administrations';
@@ -31,7 +31,7 @@ export const getImmatriculationRNM = async (
   siren: Siren
 ): Promise<IAPINotRespondingError | IImmatriculationRNM> => {
   try {
-    return await fetchRnmImmatriculation(siren);
+    return await clientRNM(siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.CMAFRANCE, 404);

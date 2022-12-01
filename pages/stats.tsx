@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetStaticProps } from 'next';
 import Page from '../layouts';
-import { getMatomoStats, IMatomoStats } from '../clients/matomo';
+import { clientMatomoStats, IMatomoStats } from '../clients/matomo';
 import BasicChart from '../components/chart/basic';
 
 const colors = [
@@ -125,7 +125,7 @@ const StatsPage: React.FC<IMatomoStats> = ({
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { visits, monthlyUserNps, userResponses, mostCopied } =
-    await getMatomoStats();
+    await clientMatomoStats();
 
   return {
     props: { monthlyUserNps, visits, userResponses, mostCopied },

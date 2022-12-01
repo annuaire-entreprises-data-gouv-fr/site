@@ -1,8 +1,7 @@
-import { isSpreadAssignment } from 'typescript';
 import { IAssociation, IUniteLegale, NotAValidIdRnaError } from '.';
-import { reverseGeoLoc } from '../clients/base-adresse';
+import { clientBanGeoLoc } from '../clients/base-adresse';
 import { HttpNotFound } from '../clients/exceptions';
-import { fetchAssociation } from '../clients/rna';
+import { clientRNA } from '../clients/rna';
 import { escapeTerm } from '../utils/helpers/formatting';
 import { verifyIdRna } from '../utils/helpers/id-rna';
 import logErrorInSentry, { logWarningInSentry } from '../utils/sentry';
@@ -23,7 +22,7 @@ const getAssociation = async (
 
   try {
     const idRna = verifyIdRna(slug);
-    const data = await fetchAssociation(idRna);
+    const data = await clientRNA(idRna);
     uniteLegaleAsAssociation.association = {
       ...data,
       idAssociation: idRna,
@@ -68,8 +67,8 @@ const verifyAdressConsistency = async (association: IAssociation) => {
 
     if (hasDifferences) {
       const [adress1, adress2] = await Promise.all([
-        reverseGeoLoc(adressInsee),
-        reverseGeoLoc(adressAssociation),
+        clientBanGeoLoc(adressInsee),
+        clientBanGeoLoc(adressAssociation),
       ]);
       return adress1.geoCodedAdress !== adress2.geoCodedAdress;
     }

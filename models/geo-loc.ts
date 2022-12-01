@@ -1,5 +1,5 @@
 import { IEtablissement } from '.';
-import { fetchBanGeoLoc } from '../clients/base-adresse';
+import { clientBanGeoLoc } from '../clients/base-adresse';
 
 import logErrorInSentry from '../utils/sentry';
 
@@ -15,7 +15,7 @@ export interface IGeoLoc {
  */
 export const getGeoLoc = async (etablissement: IEtablissement) => {
   try {
-    return await fetchBanGeoLoc(etablissement);
+    return await clientBanGeoLoc(etablissement.adresse);
   } catch (e: any) {
     logErrorInSentry('Error in API Geoloc', {
       siren: etablissement.siren,

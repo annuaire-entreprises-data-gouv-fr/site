@@ -45,7 +45,7 @@ export interface ISireneOuverteEtablissement {
  * GET ETABLISSEMENT
  */
 
-const getEtablissementSireneOuverte = async (
+const clientEtablissementSireneOuverte = async (
   siret: string
 ): Promise<IEtablissement> => {
   const route = `${routes.sireneOuverte.etablissement}${encodeURI(siret)}`;
@@ -128,4 +128,4 @@ export const mapSireneOuverteEtablissementToDomainObject = (
   };
 };
 
-export { getEtablissementSireneOuverte };
+export { clientEtablissementSireneOuverte };

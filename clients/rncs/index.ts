@@ -1,10 +1,10 @@
 import { IImmatriculationRNCSCore } from '../../models/immatriculation/rncs';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import routes from '../routes';
-import { APIRncsProxyGet } from './rncs-proxy-client';
+import { clientRNCSProxy } from './rncs-proxy-client';
 
 const factory = async (siren: Siren, useCache: boolean) => {
-  const request = await APIRncsProxyGet(
+  const request = await clientRNCSProxy(
     routes.rncs.proxy.imr + siren,
     {},
     useCache

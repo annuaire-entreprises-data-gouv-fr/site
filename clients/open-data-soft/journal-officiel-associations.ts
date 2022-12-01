@@ -1,6 +1,5 @@
 import odsClient from '.';
 import { IAnnoncesJO } from '../../models/annonces';
-import { formatDate } from '../../utils/helpers/formatting';
 import routes from '../routes';
 
 interface IJournalOfficielAssociationRecord {
@@ -29,7 +28,7 @@ interface IJournalOfficielAssociationRecord {
   association_type_libelle: string; // 'Associations loi du 1er juillet 1901';
 }
 
-const fetchAnnoncesJO = async (idRna: string): Promise<IAnnoncesJO> => {
+const clientJOAFE = async (idRna: string): Promise<IAnnoncesJO> => {
   const searchUrl = `${routes.journalOfficielAssociations.ods.search}&q=numero_rna%3A${idRna}+source%3Ajoafe&sort=dateparution`;
   const metadataUrl = routes.journalOfficielAssociations.ods.metadata;
   const response = await odsClient(searchUrl, metadataUrl);
@@ -50,4 +49,4 @@ const mapToDomainObject = (annonce: IJournalOfficielAssociationRecord) => {
   };
 };
 
-export default fetchAnnoncesJO;
+export default clientJOAFE;

@@ -6,10 +6,10 @@ import {
 } from '.';
 import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {
-  getEtablissementInsee,
-  getEtablissementInseeFallback,
+  clientEtablissementInsee,
+  clientEtablissementInseeFallback,
 } from '../clients/sirene-insee/siret';
-import { getEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
+import { clientEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
 import {
   extractSirenFromSiret,
   Siret,
@@ -46,7 +46,7 @@ const getEtablissementFromSlug = async (
  */
 const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
   try {
-    return await getEtablissementInsee(siret);
+    return await clientEtablissementInsee(siret);
   } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleEtablissement(siret);
@@ -58,12 +58,12 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
     logFirstSireneInseefailed({ siret, details: e.message });
 
     try {
-      return await getEtablissementSireneOuverte(siret);
+      return await clientEtablissementSireneOuverte(siret);
     } catch (e: any) {
       logSireneOuvertefailed({ siret, details: e.message });
 
       try {
-        return await getEtablissementInseeFallback(siret);
+        return await clientEtablissementInseeFallback(siret);
       } catch (e: any) {
         if (e instanceof HttpForbiddenError) {
           return createNonDiffusibleEtablissement(siret);
@@ -84,7 +84,7 @@ const getEtablissementForGoodBot = async (
   slug: string
 ): Promise<IEtablissement> => {
   try {
-    return await getEtablissementSireneOuverte(slug);
+    return await clientEtablissementSireneOuverte(slug);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       throw new SiretNotFoundError(slug);

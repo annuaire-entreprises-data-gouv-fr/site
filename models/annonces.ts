@@ -1,5 +1,5 @@
-import fetchAnnoncesBodacc from '../clients/open-data-soft/bodacc';
-import fetchAnnoncesJO from '../clients/open-data-soft/journal-officiel-associations';
+import clientBodacc from '../clients/open-data-soft/bodacc';
+import clientJOAFE from '../clients/open-data-soft/journal-officiel-associations';
 import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administrations';
@@ -65,7 +65,7 @@ const getAnnoncesJoFromIdRna = async (
   siren: Siren
 ): Promise<IAnnoncesJO | IAPINotRespondingError> => {
   try {
-    return await fetchAnnoncesJO(idRna);
+    return await clientJOAFE(idRna);
   } catch (e: any) {
     logErrorInSentry('Error in API JOAFE', {
       siren,
@@ -80,7 +80,7 @@ const getAnnoncesBodaccFromSlug = async (
 ): Promise<IAnnoncesBodacc | IAPINotRespondingError> => {
   const siren = verifySiren(slug);
   try {
-    return await fetchAnnoncesBodacc(siren);
+    return await clientBodacc(siren);
   } catch (e: any) {
     logErrorInSentry('Error in API BODACC', {
       siren,
