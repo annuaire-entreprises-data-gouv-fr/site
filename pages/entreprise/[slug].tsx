@@ -23,7 +23,7 @@ import {
 } from '../../utils/server-side-props-helper/post-server-side-props';
 import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 import { isAssociation } from '../../models';
-import CollectiviteTerritorialeSection from '../../components/collectivite-section';
+import CollectiviteTerritorialeSection from '../../components/association-section copy';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
