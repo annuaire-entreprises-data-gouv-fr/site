@@ -94,7 +94,8 @@ const clientSearchSireneOuverte = async (
   searchTerms: string,
   page: number,
   searchFilterParams?: SearchFilterParams,
-  fallbackOnStaging = false
+  fallbackOnStaging = false,
+  useCache = true
 ): Promise<ISearchResults> => {
   const encodedTerms = encodeURIComponent(searchTerms);
 
@@ -111,10 +112,14 @@ const clientSearchSireneOuverte = async (
     ? constants.timeout.XL
     : constants.timeout.M;
 
-  const response = await httpGet(url, {
-    timeout,
-    headers: { referer: 'annuaire-entreprises-site' },
-  });
+  const response = await httpGet(
+    url,
+    {
+      timeout,
+      headers: { referer: 'annuaire-entreprises-site' },
+    },
+    useCache
+  );
 
   const results = (response.data || []) as any;
 
