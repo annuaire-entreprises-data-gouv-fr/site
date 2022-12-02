@@ -43,8 +43,8 @@ const SearchFilters: React.FC<{
         addSaveClearButton
       >
         <label>
-          Rechercher les structures associées à un(e) dirigeant(e) ou un(e)
-          élu(e)&nbsp;:
+          Rechercher toutes les structures liées à une personne (dirigeant(e),
+          ou élu(e))&nbsp;:
         </label>
         <div className="field-in-line">
           <input
