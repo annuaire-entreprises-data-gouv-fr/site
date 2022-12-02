@@ -28,7 +28,10 @@ const EtablissementSection: React.FC<IProps> = ({
   withDenomination,
 }) => {
   const data = [
-    withDenomination && ['Dénomination de l’entité', uniteLegale.nomComplet],
+    withDenomination && [
+      'Dénomination de l’unité légale',
+      uniteLegale.nomComplet,
+    ],
     withDenomination && [
       'Type d’établissement',
       <>
@@ -41,7 +44,7 @@ const EtablissementSection: React.FC<IProps> = ({
         )}
         {' ( '}
         <a key="entite" href={`/entreprise/${uniteLegale.siren}`}>
-          → voir la page de l’entité
+          → voir la page de l’unité légale
         </a>
         {' )'}
       </>,
@@ -75,7 +78,7 @@ const EtablissementSection: React.FC<IProps> = ({
     ['Clef NIC', etablissement.nic],
     !usedInEntreprisePage && ['N° TVA Intracommunautaire', <TVACell />],
     [
-      'Activité principale de l’entité (NAF/APE)',
+      'Activité principale de l’unité légale (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
     ],
     [

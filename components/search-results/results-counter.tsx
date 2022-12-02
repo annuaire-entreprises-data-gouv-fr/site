@@ -17,7 +17,9 @@ const ResultsCounter: React.FC<{
       ) : (
         <div className="no-results">
           <div className="results-counter">
-            <span>Aucune entité n’a été trouvée.</span>
+            <span>
+              Aucune structure n’a été trouvée pour vos critères de recherche .
+            </span>
           </div>
           <p>
             Nous vous suggérons de modifier votre recherche :

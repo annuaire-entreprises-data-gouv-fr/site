@@ -70,7 +70,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
       >
         {immatriculationRNCS.beneficiaires.length === 0 ? (
           <p>
-            Cette entité ne possède aucun{' '}
+            Cette structure ne possède aucun{' '}
             <a
               rel="noreferrer noopener nofollow"
               target="_blank"
@@ -89,7 +89,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
               <InpiPartiallyDownWarning missing="la date de déclaration, et la différence entre le nom et le prénom" />
             )}
             <p>
-              Cette entité possède {beneficiaires.length}{' '}
+              Cette entreprise possède {beneficiaires.length}{' '}
               <a
                 rel="noreferrer noopener nofollow"
                 target="_blank"

@@ -20,7 +20,10 @@ export const NotEnoughParams = () => {
           <li>
             Utiliser des critères de recherche géographiques ou administratifs
           </li>
-          <li>Rechercher toutes les entreprises associées a une personne</li>
+          <li>
+            Rechercher toutes les structures liées à une personne (dirigeant(e),
+            ou élu(e))
+          </li>
         </ul>
         <br />
         <b>

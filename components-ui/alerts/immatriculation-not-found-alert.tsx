@@ -15,7 +15,7 @@ const ImmatriculationNotFoundAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
       <Info full>
         <b>Pas de justificatif d’immatriculation au RNM ou au RNCS</b>
         <p>
-          Comme cette entité est une{' '}
+          Comme cette structure est une{' '}
           <b>entreprise individuelle ou une auto-entreprise</b>, elle n’est pas
           nécessairement immatriculée au RNM ou RNCS.
           <br />
@@ -38,20 +38,20 @@ const ImmatriculationNotFoundAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
         </p>
         <ul>
           <li>
-            Si cette entité est une entreprise artisanale,{' '}
+            Si cette structure est une entreprise artisanale,{' '}
             <a href="https://rnm.artisanat.fr/">
               contactez les Chambres des Métiers de l’Artisanat
             </a>
           </li>
           <li>
-            Si cette entité est une entreprise commerciale,{' '}
+            Si cette structure est une entreprise commerciale,{' '}
             <a href="http://data.inpi.fr/">
               contactez l’INPI qui centralise les données des Greffes des
               tribunaux de commerce.
             </a>
           </li>
           <li>
-            Si cette entié est une <b>administration publique</b>, c’est un cas
+            Si cette structure est un <b>service publique</b>, c’est un cas
             normal. Il n’existe pas de justificatif d’immatriculation.
           </li>
         </ul>

@@ -26,7 +26,7 @@ const SirenOrSiretNotFoundPage = ({ slug = '' }) => {
             <a href="/faq">non-diffusible</a>.
           </li>
           <li>
-            Ce numéro fait peut-être référence à une entité publique dont les
+            Ce numéro fait peut-être référence à une structure publique dont les
             informations sont protégées (Ministère de Défense, Gendarmerie,
             parlementaire etc.)
           </li>

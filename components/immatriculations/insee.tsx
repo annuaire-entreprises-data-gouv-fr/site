@@ -43,10 +43,10 @@ interface IProps {
 const AvisSituationNonDiffusible = () => (
   <>
     <div className="description">
-      Bien que cette entité soit <b>non-diffusible</b>, l’
+      Bien que cette entreprise soit <b>non-diffusible</b>, l’
       <INSEE /> propose une téléprocédure qui permet{' '}
-      <b>au représentant légal</b> d’une entité, d’accéder en quelques clics à
-      son avis de situation.
+      <b>au représentant légal</b> d’une entreprise d’accéder en quelques clics
+      à son avis de situation.
     </div>
     <div className="layout-center">
       <ButtonLink to="https://avis-situation-sirene.insee.fr/">

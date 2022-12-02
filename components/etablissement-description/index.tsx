@@ -31,7 +31,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
         ) : (
           <> un établissement secondaire</>
         )}{' '}
-        de l’entité{' '}
+        de la structure{' '}
         <a href={`/entreprise/${uniteLegale.siren}`}>
           {uniteLegale.nomComplet}
         </a>
