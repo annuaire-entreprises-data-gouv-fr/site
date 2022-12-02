@@ -281,32 +281,34 @@ export const mapEtablissementToDomainObject = (
 // public methods
 //=================
 
-export const getAllEtablissementsInsee = getAllEtablissementsFactory({
+export const clientAllEtablissementsInsee = getAllEtablissementsFactory({
   useCache: true,
   useFallback: false,
 });
 
-export const getAllEtablissementsInseeFallback = getAllEtablissementsFactory({
+export const clientAllEtablissementsInseeFallback = getAllEtablissementsFactory(
+  {
+    useCache: true,
+    useFallback: true,
+  }
+);
+
+export const clientEtablissementInsee = getEtablissementFactory({
+  useCache: true,
+  useFallback: false,
+});
+
+export const clientEtablissementInseeFallback = getEtablissementFactory({
   useCache: true,
   useFallback: true,
 });
 
-export const getEtablissementInsee = getEtablissementFactory({
+export const clientSiegeInsee = getSiegeFactory({
   useCache: true,
   useFallback: false,
 });
 
-export const getEtablissementInseeFallback = getEtablissementFactory({
-  useCache: true,
-  useFallback: true,
-});
-
-export const getSiegeInsee = getSiegeFactory({
-  useCache: true,
-  useFallback: false,
-});
-
-export const getSiegeInseeFallback = getSiegeFactory({
+export const clientSiegeInseeFallback = getSiegeFactory({
   useCache: true,
   useFallback: true,
 });

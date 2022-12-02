@@ -1,7 +1,6 @@
 import React from 'react';
 import { ISearchResult } from '../../models/search';
 import { SearchFeedback } from '../search-feedback';
-import { Tag } from '../../components-ui/tag';
 import IsActiveTag from '../../components-ui/is-active-tag';
 import { IETATADMINSTRATIF } from '../../models/etat-administratif';
 import { isPersonneMorale } from '../dirigeants-section/rncs-dirigeants';
@@ -13,17 +12,6 @@ interface IProps {
   withFeedback?: boolean;
   searchTerm?: string;
 }
-
-const EtablissmentCount: React.FC<{ result: ISearchResult }> = ({ result }) => {
-  const openCount = result.nombreEtablissementsOuverts || 'aucun';
-  const plural = openCount > 1 ? 's' : '';
-
-  return (
-    <Tag>
-      {openCount} établissement{plural} en activité
-    </Tag>
-  );
-};
 
 const DirigeantsList: React.FC<{ dirigeants: IDirigeant[] }> = ({
   dirigeants,
@@ -81,7 +69,12 @@ const ResultsList: React.FC<IProps> = ({
           )}
           <div className="adress">
             <span>{result.siege.adresse || 'Adresse inconnue'} </span>
-            <EtablissmentCount result={result} />
+            {result.nombreEtablissementsOuverts !== 1 ? (
+              <b>
+                ・{result.nombreEtablissementsOuverts || 'aucun'} établissement
+                {result.nombreEtablissementsOuverts > 1 ? 's' : ''} en activité
+              </b>
+            ) : null}
           </div>
         </a>
       ))}
@@ -116,6 +109,9 @@ const ResultsList: React.FC<IProps> = ({
       .results-list > a .adress > span {
         color: #707070;
         font-variant: all-small-caps;
+      }
+      .results-list > a .adress > b {
+        color: #666;
       }
     `}</style>
   </>

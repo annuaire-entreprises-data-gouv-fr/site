@@ -1,6 +1,6 @@
 import { IsLikelyASirenOrSiretException, IUniteLegale } from '.';
 import { HttpNotFound } from '../clients/exceptions';
-import getResults from '../clients/sirene-ouverte/recherche';
+import clientSearchSireneOuverte from '../clients/sirene-ouverte/recherche';
 import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
 import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
@@ -54,7 +54,11 @@ const search = async (
 
   try {
     const escapedSearchTerm = escapeTerm(searchTerm);
-    return await getResults(escapedSearchTerm, page, searchFilterParams);
+    return await clientSearchSireneOuverte(
+      escapedSearchTerm,
+      page,
+      searchFilterParams
+    );
   } catch (e: any) {
     if (e instanceof IsLikelyASirenOrSiretException) {
       throw e;
@@ -66,7 +70,7 @@ const search = async (
     // attempt a fallback on staging
     try {
       const escapedSearchTerm = escapeTerm(searchTerm);
-      return await getResults(
+      return await clientSearchSireneOuverte(
         escapedSearchTerm,
         page,
         searchFilterParams,

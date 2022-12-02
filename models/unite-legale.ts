@@ -7,16 +7,16 @@ import {
 } from '.';
 import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
 import {
-  getUniteLegaleInsee,
-  getUniteLegaleInseeFallback,
+  clientUniteLegaleInsee,
+  clientUniteLegaleInseeFallback,
 } from '../clients/sirene-insee/siren';
 import {
-  getAllEtablissementsInsee,
-  getAllEtablissementsInseeFallback,
-  getSiegeInsee,
-  getSiegeInseeFallback,
+  clientAllEtablissementsInsee,
+  clientAllEtablissementsInseeFallback,
+  clientSiegeInsee,
+  clientSiegeInseeFallback,
 } from '../clients/sirene-insee/siret';
-import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
+import clientUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
 import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
 import {
   logFirstSireneInseefailed,
@@ -128,7 +128,7 @@ const getUniteLegaleForGoodBot = async (
   page = 1
 ): Promise<IUniteLegale> => {
   try {
-    const uniteLegale = await getUniteLegaleSireneOuverte(siren, page);
+    const uniteLegale = await clientUniteLegaleSireneOuverte(siren, page);
     return uniteLegale;
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
@@ -162,7 +162,7 @@ const getUniteLegale = async (
 
     try {
       // in case sirene INSEE 429 or 500, fallback on Siren Etalab
-      return await getUniteLegaleSireneOuverte(siren, page);
+      return await clientUniteLegaleSireneOuverte(siren, page);
     } catch (e: any) {
       logSireneOuvertefailed({ siren, details: e.message || e });
 
@@ -193,9 +193,9 @@ const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
     // so we doubled our API call with sirene ouverte to get Etablissements.
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
-        getUniteLegaleInsee(siren),
-        getAllEtablissementsInsee(siren, page).catch(() => null),
-        getSiegeInsee(siren),
+        clientUniteLegaleInsee(siren),
+        clientAllEtablissementsInsee(siren, page).catch(() => null),
+        clientSiegeInsee(siren),
       ]);
 
     return mergeUniteLegaleInsee(
@@ -219,9 +219,9 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
     // INSEE requires two calls to get uniteLegale with etablissements
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
-        getUniteLegaleInseeFallback(siren),
-        getAllEtablissementsInseeFallback(siren, page).catch(() => null),
-        getSiegeInseeFallback(siren).catch(() => null),
+        clientUniteLegaleInseeFallback(siren),
+        clientAllEtablissementsInseeFallback(siren, page).catch(() => null),
+        clientSiegeInseeFallback(siren).catch(() => null),
       ]);
 
     return mergeUniteLegaleInsee(

@@ -1,7 +1,7 @@
 import { IImmatriculation } from '.';
 import { NotAValidIdRnaError } from '..';
 import { HttpNotFound } from '../../clients/exceptions';
-import fetchAnnoncesJO from '../../clients/open-data-soft/journal-officiel-associations';
+import clientJOAFE from '../../clients/open-data-soft/journal-officiel-associations';
 import { IdRna, verifyIdRna } from '../../utils/helpers/id-rna';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../../utils/sentry';
@@ -27,7 +27,7 @@ export const getImmatriculationJOAFE = async (
 ): Promise<IAPINotRespondingError | IImmatriculationJOAFE> => {
   try {
     const idRna = verifyIdRna(idRnaAsString || '');
-    const annoncesJO = await fetchAnnoncesJO(idRna);
+    const annoncesJO = await clientJOAFE(idRna);
     const annonceCreation = annoncesJO.annonces.find(
       (annonce) => annonce.typeAvisLibelle === 'Création'
     );

@@ -1,9 +1,12 @@
 import React from 'react';
-import { facebook, linkedin, qrCode, twitter, print } from '../icon';
+import { IUniteLegale } from '../../models';
+import { facebook, linkedin, qrCode, twitter, print, mail } from '../icon';
 import InformationTooltip from '../information-tooltip';
 import { PrintNever } from '../print-visibility';
 
-const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
+const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
+  uniteLegale: { siren, nomComplet },
+}) => (
   <PrintNever>
     <div className="social-media layout-right">
       <span>
@@ -56,6 +59,20 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       </span>
       <span>
         <InformationTooltip
+          orientation="right"
+          label="Partager la page de cette entité par Email"
+        >
+          <a
+            href={`mailto:?subject=A découvrir sur l’Annuaire des Entreprises, la page de ${nomComplet}&body=Je voudrais partager la page ${nomComplet} avec vous https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
+            title="Partager cette page par Email"
+            className="no-style-link"
+          >
+            {mail}
+          </a>
+        </InformationTooltip>
+      </span>
+      <span>
+        <InformationTooltip
           label="Imprimer cette page ou la sauvegarder au format PDF"
           orientation="right"
         >
@@ -88,16 +105,13 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       </span>
     </div>
     <style jsx>{`
-      .social-media {
-        color: #000091;
-      }
-
       .social-media span {
         margin: 0 5px;
       }
       .social-media span a,
       .social-media span div {
         cursor: pointer !important;
+        padding: 8px;
       }
       .social-media span a:after {
         display: none;

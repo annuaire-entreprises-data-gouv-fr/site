@@ -48,7 +48,7 @@ interface ISireneOuverteUniteLegaleResponse {
   unite_legale: ISireneOuverteUniteLegale[];
 }
 
-const getUniteLegaleSireneOuverte = async (
+const clientUniteLegaleSireneOuverte = async (
   siren: Siren,
   page = 1
 ): Promise<IUniteLegale> => {
@@ -154,4 +154,4 @@ const mapToDomainObject = (
   };
 };
 
-export default getUniteLegaleSireneOuverte;
+export default clientUniteLegaleSireneOuverte;

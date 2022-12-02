@@ -1,5 +1,5 @@
 import { IUniteLegale } from '.';
-import fetchConventionCollectives from '../clients/siret-2-idcc';
+import clientSiret2Idcc from '../clients/siret-2-idcc';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administrations';
 import {
@@ -36,7 +36,7 @@ const getConventionCollectives = async (
       return [];
     }
     const sirets = uniteLegale.etablissements.all.map((e) => e.siret);
-    return await fetchConventionCollectives(sirets);
+    return await clientSiret2Idcc(sirets);
   } catch (e: any) {
     logErrorInSentry('Error in API convention collectives', {
       siren: uniteLegale.siren,

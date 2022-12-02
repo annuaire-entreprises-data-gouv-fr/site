@@ -90,7 +90,7 @@ interface ISireneOuverteSearchResults {
 /**
  * Get results for searchTerms from Sirene ouverte API
  */
-const getResults = async (
+const clientSearchSireneOuverte = async (
   searchTerms: string,
   page: number,
   searchFilterParams?: SearchFilterParams,
@@ -252,4 +252,4 @@ const mapToDirigeantModel = (
   };
 };
 
-export default getResults;
+export default clientSearchSireneOuverte;

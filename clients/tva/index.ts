@@ -30,7 +30,7 @@ interface IVIESResponse {
  * @param tva
  * @returns TVA number if valid else null
  */
-export const validateTVANumber = async (
+export const clientTVA = async (
   tva: string,
   useCache = true
 ): Promise<string | null> => {

@@ -73,7 +73,7 @@ const factory = (options: InseeClientOptions) => async (siren: Siren) => {
  * Call to Sirene INSEE API
  * @param siren
  */
-export const getUniteLegaleInsee = factory({
+export const clientUniteLegaleInsee = factory({
   useCache: true,
   useFallback: false,
 });
@@ -82,7 +82,7 @@ export const getUniteLegaleInsee = factory({
  * Call to Sirene INSEE API - use fallback token
  * @param siren
  */
-export const getUniteLegaleInseeFallback = factory({
+export const clientUniteLegaleInseeFallback = factory({
   useCache: true,
   useFallback: true,
 });
@@ -91,7 +91,7 @@ export const getUniteLegaleInseeFallback = factory({
  * Call to Sirene INSEE API - disable cache
  * @param siren
  */
-export const getUniteLegaleInseeNoCache = factory({
+export const clientUniteLegaleInseeNoCache = factory({
   useCache: false,
   useFallback: false,
 });
