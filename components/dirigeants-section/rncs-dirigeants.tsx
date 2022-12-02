@@ -117,7 +117,7 @@ const DirigeantsSection: React.FC<IProps> = ({
         //@ts-ignore
         infos.push([
           <a
-            href={`/personne?n=${dirigeant.nom}&fn=${dirigeant.prenom}&dmin=${dirigeant.dateNaissanceFull}&sirenFrom=${siren}`}
+            href={`/personne?n=${dirigeant.nom}&fn=${dirigeant.prenom}&dmin=${dirigeant.dateNaissanceFull}&dmax=${dirigeant.dateNaissanceFull}&sirenFrom=${siren}`}
           >
             → voir ses entreprises
           </a>,
