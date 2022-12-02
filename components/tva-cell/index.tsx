@@ -17,9 +17,9 @@ const TVACell: React.FC<{}> = ({}) => {
           */}
           &nbsp;
         </>,
-        <CopyPaste id="tva-cell-result" shouldTrim={true}>
+        <div className="copy-button trim" id="tva-cell-result">
           <i>Non renseigné ou non assujettie</i>
-        </CopyPaste>,
+        </div>,
         <i>
           Le téléservice du VIES ne fonctionne pas actuellement. Merci de
           ré-essayer plus tard.

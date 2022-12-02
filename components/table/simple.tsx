@@ -1,73 +1,10 @@
-import React, { PropsWithChildren } from 'react';
-import { JsxElement } from 'typescript';
-import { copy, copied } from '../../components-ui/icon';
+import React, { PropsWithChildren, useState } from 'react';
 import { logWarningInSentry } from '../../utils/sentry';
 
 interface ISectionProps {
   body: (any[] | undefined | null | string | boolean)[];
   id?: string;
 }
-
-export const CopyPaste: React.FC<
-  PropsWithChildren<{ shouldTrim?: boolean; id?: string }>
-> = ({ children, shouldTrim = false, id = undefined }) => (
-  <div
-    className={`copy-wrapper ${
-      shouldTrim ? 'trim' : ''
-    } copy-to-clipboard-anchor`}
-  >
-    <span id={id}>{children}</span>
-    <span className="label">
-      <span className="copy">{copy}&nbsp;copier</span>
-      <span className="copied">{copied}&nbsp;copié!</span>
-    </span>
-    <style jsx>{`
-      div.copy-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        cursor: pointer;
-        position: relative;
-      }
-      div.copy-done span.copy {
-        display: none;
-      }
-      div.copy-done span.copied {
-        display: flex;
-      }
-      div > span.label {
-        position: relative;
-        border-radius: 3px;
-        padding: 0 3px;
-        width: 75px;
-        flex-shrink: 0;
-        color: #000091;
-        margin-left: 12px;
-        opacity: 0;
-        background-color: #dfdff1;
-        font-size: 0.9rem;
-      }
-      div:hover > span.label {
-        opacity: 1;
-      }
-      span.copy {
-        display: flex;
-        align-items: center;
-      }
-      span.copied {
-        display: none;
-        align-items: center;
-        height: 100%;
-        color: green;
-      }
-      @media only screen and (min-width: 1px) and (max-width: 991px) {
-        div {
-          cursor: inherit;
-        }
-      }
-    `}</style>
-  </div>
-);
 
 const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
   children,
@@ -77,9 +14,11 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
   return (
     <td>
       {isCopyEnabled ? (
-        <CopyPaste shouldTrim={shouldTrim(label)}>
-          {children || <i>Non renseigné</i>}
-        </CopyPaste>
+        <div>
+          <div className={`copy-button ${shouldTrim(label) ? 'trim' : ''}`}>
+            <span>{children || <i>Non renseigné</i>}</span>
+          </div>
+        </div>
       ) : (
         <div className="default-cell">
           <span>{children || <i>Non renseigné</i>}</span>
@@ -92,6 +31,7 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
           background-color: #fff;
           padding-left: 30px;
         }
+
         div.default-cell {
           display: flex;
           align-items: center;
