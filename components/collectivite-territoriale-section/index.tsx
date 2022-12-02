@@ -1,7 +1,6 @@
 import React from 'react';
 import { EAdministration } from '../../models/administrations';
 import { ICollectiviteTerritoriale } from '../../models';
-import Warning from '../../components-ui/alerts/warning';
 import BreakPageForPrint from '../../components-ui/print-break-page';
 import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
