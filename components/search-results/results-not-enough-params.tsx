@@ -32,7 +32,7 @@ export const NotEnoughParams = () => {
         </b>
         <ul>
           {articles.map(({ slug, title }) => (
-            <li>
+            <li key={slug}>
               <a href={`/faq/${slug}`}>{title}</a>
             </li>
           ))}

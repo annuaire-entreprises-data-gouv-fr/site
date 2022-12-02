@@ -12,7 +12,7 @@ import {
 } from '../../utils/server-side-props-helper/post-server-side-props';
 import { IEtatCivil } from '../../models/immatriculation/rncs';
 import ResultsList from '../../components/search-results/results-list';
-import PageCounter from '../../components/search-results-pagination';
+import PageCounter from '../../components/search-results/results-pagination';
 import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import ButtonLink from '../../components-ui/button';
 

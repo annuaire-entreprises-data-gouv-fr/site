@@ -17,6 +17,21 @@ describe('Home page', () => {
   });
 });
 
+describe('Dirigeants and Elus search', () => {
+  it('Search an élu with dirigeants filters', () => {
+    cy.visit('/rechercher?terme=&fn=anne&n=hidalgo');
+
+    cy.contains('36 RUE DES PIPISRELLES').should('be.visible');
+    cy.contains('METROPOLE DU GRAND PARIS (MGP)').should('be.visible');
+  });
+
+  it('Search a dirigeant with main search bar', () => {
+    cy.visit('/rechercher?terme=xavier+jouppe');
+    cy.contains('SCI DE LASLAUDIE').should('be.visible');
+    cy.contains('Bernard JOUPPE').should('be.visible');
+  });
+});
+
 describe('Advanced search on page ' + path, () => {
   it('Shows filters', () => {
     cy.visit(path + '?terme=Ganymede');

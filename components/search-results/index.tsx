@@ -6,7 +6,7 @@ import MapResults from '../map/map-results';
 import { NotEnoughParams } from './results-not-enough-params';
 import ResultsCounter from './results-counter';
 import ResultsList from './results-list';
-import ResultsPagination from '../search-results-pagination';
+import ResultsPagination from './results-pagination';
 
 const SearchResults: React.FC<{
   searchTerm?: string;

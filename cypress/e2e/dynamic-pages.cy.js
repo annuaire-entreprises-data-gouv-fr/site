@@ -5,6 +5,7 @@ const siret = [
   '55203253400646', // cac-40
   '30021082000068', // non-diff
   '13002526500013', // administration
+  '20005478100022', // collectivité
 ];
 
 siret.forEach((siret) => {
@@ -15,7 +16,13 @@ siret.forEach((siret) => {
       });
     });
 
-    ['annonces', 'entreprise', 'divers'].map((pagePrefix) => {
+    it('/etablissement page loads', () => {
+      cy.request(`/etablissement/${siret}`).then((resp) => {
+        expect(resp.status).to.eq(200);
+      });
+    });
+
+    ['annonces', 'entreprise', 'justificatif', 'divers'].map((pagePrefix) => {
       const path = `/${pagePrefix}/${siret.slice(0, 9)}`;
       it(`/${pagePrefix} page loads`, () => {
         cy.request(path).then((resp) => {
@@ -23,5 +30,17 @@ siret.forEach((siret) => {
         });
       });
     });
+  });
+});
+
+describe(`Dirigeants and élus pages`, () => {
+  it('Dirigeant page loads', () => {
+    cy.visit(`/dirigeants/552032534`);
+    cy.contains('Antoine BERNARD DE SAINT AFFRIQUE').should('be.visible');
+  });
+
+  it('Elus page loads', () => {
+    cy.visit(`/elus/200054781`);
+    cy.contains('Anne HIDALGO').should('be.visible');
   });
 });

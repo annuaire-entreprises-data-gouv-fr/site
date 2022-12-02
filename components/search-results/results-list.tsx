@@ -6,6 +6,7 @@ import { IETATADMINSTRATIF } from '../../models/etat-administratif';
 import { isPersonneMorale } from '../dirigeants-section/rncs-dirigeants';
 import { IDirigeant } from '../../models/immatriculation/rncs';
 import UniteLegaleBadge from '../unite-legale-badge';
+import { isCollectiviteTerritoriale } from '../../models';
 
 interface IProps {
   results: ISearchResult[];
@@ -13,25 +14,29 @@ interface IProps {
   searchTerm?: string;
 }
 
-const DirigeantsList: React.FC<{ dirigeants: IDirigeant[] }> = ({
-  dirigeants,
+const DirigeantsOrElusList: React.FC<{ dirigeantsOrElus: IDirigeant[] }> = ({
+  dirigeantsOrElus,
 }) => {
   const displayMax = 5;
-  const firstFive = dirigeants.slice(0, displayMax);
-  const moreCount = Math.max(dirigeants.length - displayMax, 0);
+  const firstFive = dirigeantsOrElus.slice(0, displayMax);
+  const moreCount = Math.max(dirigeantsOrElus.length - displayMax, 0);
+
+  if (dirigeantsOrElus.length === 0) {
+    return null;
+  }
 
   return (
-    <div className="dirigeants">
+    <div className="dirigeants-or-elus">
       {firstFive
-        .map((dirigeant) =>
-          isPersonneMorale(dirigeant)
-            ? `${dirigeant.denomination}`
-            : `${dirigeant.prenom} ${dirigeant.nom}`
+        .map((dirigeantOrElu) =>
+          isPersonneMorale(dirigeantOrElu)
+            ? `${dirigeantOrElu.denomination}`
+            : `${dirigeantOrElu.prenom} ${dirigeantOrElu.nom}`
         )
         .join(', ')}
       {moreCount > 0 && `, et ${moreCount} autre${moreCount === 1 ? '' : 's'}`}
       <style jsx>{`
-        .dirigeants {
+        .dirigeants-or-elus {
           font-size: 0.9rem;
           color: #555;
           margin: 8px auto 0;
@@ -64,9 +69,13 @@ const ResultsList: React.FC<IProps> = ({
             )}
           </div>
           <div>{result.libelleActivitePrincipale}</div>
-          {result.dirigeants.length > 0 && (
-            <DirigeantsList dirigeants={result.dirigeants} />
-          )}
+          <DirigeantsOrElusList
+            dirigeantsOrElus={
+              isCollectiviteTerritoriale(result)
+                ? result.colter.elus
+                : result.dirigeants
+            }
+          />
           <div className="adress">
             <span>{result.siege.adresse || 'Adresse inconnue'} </span>
             {result.nombreEtablissementsOuverts !== 1 ? (
