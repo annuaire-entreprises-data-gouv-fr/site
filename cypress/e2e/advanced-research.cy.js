@@ -4,9 +4,9 @@ describe('Home page', () => {
   it('Open advanced filters', () => {
     cy.visit('/');
 
-    cy.contains('Personne').should('not.be.visible');
+    cy.contains('Dirigeant').should('not.be.visible');
     cy.contains('Afficher les filtres').click();
-    cy.contains('Personne').should('be.visible');
+    cy.contains('Dirigeant').should('be.visible');
     cy.contains('Cacher les filtres de recherche').should('be.visible');
 
     cy.contains('Zone géographique').click({ force: true });
@@ -26,10 +26,10 @@ describe('Advanced search on page ' + path, () => {
     cy.contains('Zone géographique').click({ force: true });
     cy.contains('Code postal').should('not.be.visible');
 
-    cy.contains('Personne').click({ force: true });
-    cy.contains('Rechercher les entreprises liées à une personne').should(
-      'be.visible'
-    );
+    cy.contains('Dirigeant').click({ force: true });
+    cy.contains(
+      'Rechercher les structures associées à un(e) dirigeant(e) ou un(e) élu(e)'
+    ).should('be.visible');
 
     cy.contains('Situation administrative').click({ force: true });
     cy.contains('Domaine d’activité').should('be.visible');
@@ -53,10 +53,10 @@ describe('Advanced search on page ' + path, () => {
     cy.contains('Zone géographique').click({ force: true });
     cy.contains('Code postal').should('not.be.visible');
 
-    cy.contains('Personne').click({ force: true });
-    cy.contains('Rechercher les entreprises liées à une personne').should(
-      'be.visible'
-    );
+    cy.contains('Dirigeant').click({ force: true });
+    cy.contains(
+      'Rechercher les structures associées à un(e) dirigeant(e) ou un(e) élu(e)'
+    ).should('be.visible');
 
     cy.contains('Situation administrative').click({ force: true });
     cy.contains('Domaine d’activité').should('be.visible');
