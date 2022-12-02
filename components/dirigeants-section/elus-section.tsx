@@ -42,7 +42,7 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
       <Section
         id="collectivite-elus"
         title={`Élu${plural}`}
-        sources={[EAdministration.INPI]}
+        sources={[EAdministration.MI]}
       >
         {elus.length > 0 ? (
           <>

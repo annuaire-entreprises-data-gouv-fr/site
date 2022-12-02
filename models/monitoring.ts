@@ -23,18 +23,15 @@ export interface IMonitoring {
   series: IRatio[];
 }
 
-const logError = (e: Error) =>
-  logErrorInSentry('Error while fecthing monitoring', {
-    details: e.message,
-  });
-
 const getMonitorings = async (
   monitoringIds: number[]
 ): Promise<IMonitoring[]> => {
   try {
     return await clientMonitorings(monitoringIds);
   } catch (e: any) {
-    logError(e);
+    logErrorInSentry('Error while fetching monitoring', {
+      details: e.message,
+    });
     return [];
   }
 };

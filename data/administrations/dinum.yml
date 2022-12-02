@@ -9,6 +9,8 @@ apiMonitors:
     id: 787859512
     data:
       - Algorithme de recherche des personnes morales
+      - Code Officiel Géographique
+      - Élus
   - apiName: API Base Adresse Nationale
     apiGouvLink: https://api.gouv.fr/les-api/base-adresse-nationale
     datagouvLink:
