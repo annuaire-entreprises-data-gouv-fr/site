@@ -29,7 +29,7 @@ const DirigeantsPage: React.FC<IProps> = ({
   return (
     <Page
       small={true}
-      title={`Dirigeants de l’entité - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
+      title={`Dirigeants de la structure - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
       canonical={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`}
       noIndex={true}
       isBrowserOutdated={metadata.isBrowserOutdated}

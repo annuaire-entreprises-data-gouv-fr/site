@@ -28,7 +28,7 @@ describe('Advanced search on page ' + path, () => {
 
     cy.contains('Dirigeant').click({ force: true });
     cy.contains(
-      'Rechercher les structures associées à un(e) dirigeant(e) ou un(e) élu(e)'
+      'Rechercher toutes les structures liées à une personne (dirigeant(e), ou élu(e))'
     ).should('be.visible');
 
     cy.contains('Situation administrative').click({ force: true });
@@ -55,7 +55,7 @@ describe('Advanced search on page ' + path, () => {
 
     cy.contains('Dirigeant').click({ force: true });
     cy.contains(
-      'Rechercher les structures associées à un(e) dirigeant(e) ou un(e) élu(e)'
+      'Rechercher toutes les structures liées à une personne (dirigeant(e), ou élu(e))'
     ).should('be.visible');
 
     cy.contains('Situation administrative').click({ force: true });

@@ -37,13 +37,13 @@ const IsActiveTag: React.FC<{
     state === IETATADMINSTRATIF.NONDIFF ? (
       <InformationTooltip
         label="Nous n’avons pas les
-            informations nécessaires pour savoir si cette entité est en activité
+            informations nécessaires pour savoir si cette structure est en activité
             ou si elle est fermée."
       >
         <EtatTag state={state} />
       </InformationTooltip>
     ) : state === IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT ? (
-      <InformationTooltip label="Cette entité est active du point de vue administratif, mais n’a pas d’activité économique. Tous ses établissements sont fermés.">
+      <InformationTooltip label="Cette structure est active du point de vue administratif, mais n’a pas d’activité économique. Tous ses établissements sont fermés.">
         <EtatTag state={state} />
       </InformationTooltip>
     ) : (

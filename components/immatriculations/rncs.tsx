@@ -51,7 +51,7 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
               <InpiPartiallyDownWarning missing="le numéro RCS" />
             )}
             <p>
-              Cette entité possède une fiche d’immatriculation au{' '}
+              Cette structure possède une fiche d’immatriculation au{' '}
               <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
               liste les entreprises enregistrées auprès des Greffes des
               tribunaux de commerce et centralisées par l’

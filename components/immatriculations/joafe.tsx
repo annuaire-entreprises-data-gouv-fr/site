@@ -53,7 +53,7 @@ const ImmatriculationJOAFE: React.FC<IProps> = ({
             sources={[EAdministration.DILA]}
           >
             <p>
-              Cette entité est enregistrée au{' '}
+              Cette structure est enregistrée au{' '}
               <b>Journal Officiel des Association (JOAFE)</b>.
             </p>
             <TwoColumnTable body={data} />

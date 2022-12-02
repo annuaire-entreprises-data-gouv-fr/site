@@ -142,7 +142,7 @@ const DirigeantsSection: React.FC<IProps> = ({
               <InpiPartiallyDownWarning missing="la distinction entre le nom et le prénom" />
             )}
           <p>
-            Cette entité possède {dirigeants.length} dirigeant{plural}{' '}
+            Cette entreprise possède {dirigeants.length} dirigeant{plural}{' '}
             enregistré{plural} au{' '}
             <b>Registre National du Commerce et des Sociétés (RNCS)</b>{' '}
             centralisé par l’

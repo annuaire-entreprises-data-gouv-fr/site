@@ -41,7 +41,7 @@ const AnnoncesBodaccSection: React.FC<{
     >
       {hasProcedure ? (
         <Info>
-          Cette entité a une procédure collective (en cours ou cloturée).
+          Cette structure a une procédure collective (en cours ou cloturée).
           <ul>
             {bodacc.procedures.map((procedure) => (
               <li key={procedure.details}>
@@ -52,7 +52,8 @@ const AnnoncesBodaccSection: React.FC<{
         </Info>
       ) : (
         <p>
-          Cette entité n’a pas de procédure collective (en cours ou cloturée).
+          Cette structure n’a pas de procédure collective (en cours ou
+          cloturée).
         </p>
       )}
       {bodacc.annonces.length === 0 ? (

@@ -35,7 +35,7 @@ const ConventionCollectivesSection: React.FC<{
     <Section title="Conventions collectives" sources={[EAdministration.METI]}>
       {conventionCollectives.length === 0 ? (
         <div>
-          Cette entité n’a pas de{' '}
+          Cette structure n’a pas de{' '}
           <a
             target="_blank"
             rel="noreferrer noopener"
@@ -47,7 +47,7 @@ const ConventionCollectivesSection: React.FC<{
         </div>
       ) : (
         <>
-          Cette entité possède {conventionCollectives.length}{' '}
+          Cette structure possède {conventionCollectives.length}{' '}
           <FAQLink tooltipLabel={`convention${plural} collective${plural}`}>
             <a href="/faq/convention-collective">
               Qu’est-ce qu’une convention collective ?

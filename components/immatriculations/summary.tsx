@@ -10,7 +10,7 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
 }) => {
   return (
     <>
-      Cette entité est :
+      Cette structure est :
       <ul>
         {immatriculationJOAFE && !isAPINotResponding(immatriculationJOAFE) && (
           <li>
