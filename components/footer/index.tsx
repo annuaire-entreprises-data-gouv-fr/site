@@ -115,7 +115,7 @@ const Footer = () => (
               {Object.values(administrationsMetaData).map(
                 ({ slug, logoType, long }) =>
                   logoType && (
-                    <li>
+                    <li key={long}>
                       <a
                         className="fr-footer__partners-link"
                         href={`/administration#${slug}`}
