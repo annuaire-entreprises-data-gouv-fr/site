@@ -88,7 +88,6 @@ class StaticDocument extends Document {
             href="/favicons/manifest.webmanifest"
             cross-origin="use-credentials"
           />
-
           <link
             rel="stylesheet"
             type="text/css"
@@ -105,7 +104,6 @@ class StaticDocument extends Document {
             src={`/${manifest['src/index.js'].file}`}
           ></script>
         </CustomHead>
-
         <body>
           <Main />
           {process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID && (

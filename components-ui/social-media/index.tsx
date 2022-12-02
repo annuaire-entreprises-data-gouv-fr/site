@@ -1,9 +1,12 @@
 import React from 'react';
+import { IUniteLegale } from '../../models';
 import { facebook, linkedin, qrCode, twitter, print, mail } from '../icon';
 import InformationTooltip from '../information-tooltip';
 import { PrintNever } from '../print-visibility';
 
-const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
+const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
+  uniteLegale: { siren, nomComplet },
+}) => (
   <PrintNever>
     <div className="social-media layout-right">
       <span>
@@ -60,7 +63,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
           label="Partager la page de cette entité par Email"
         >
           <a
-            href={`mailto:?body=Je voudrais partager la page de cette entité avec vous https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
+            href={`mailto:?subject=A découvrir sur l’Annuaire des Entreprises, la page de ${nomComplet}&body=Je voudrais partager la page ${nomComplet} avec vous https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
             title="Partager cette page par Email"
             className="no-style-link"
           >
@@ -102,10 +105,6 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       </span>
     </div>
     <style jsx>{`
-      .social-media {
-        color: #000091;
-      }
-
       .social-media span {
         margin: 0 5px;
       }

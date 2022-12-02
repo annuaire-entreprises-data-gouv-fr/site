@@ -153,7 +153,7 @@ const Title: React.FC<IProps> = ({
         </span>
       </div>
     </div>
-    <SocialMedia siren={uniteLegale.siren} />
+    <SocialMedia uniteLegale={uniteLegale} />
     {!uniteLegale.estDiffusible ? (
       <p>Les informations concernant cette entité ne sont pas publiques.</p>
     ) : (
