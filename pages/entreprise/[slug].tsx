@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GetServerSideProps } from 'next';
 import Page from '../../layouts';
-import { IUniteLegale } from '../../models';
+import { isCollectiviteTerritoriale, IUniteLegale } from '../../models';
 import UniteLegaleSection from '../../components/unite-legale-section';
 import EtablissementListeSection from '../../components/etablissement-liste-section';
 import Title, { FICHE } from '../../components/title-section';
@@ -23,6 +23,7 @@ import {
 } from '../../utils/server-side-props-helper/post-server-side-props';
 import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 import { isAssociation } from '../../models';
+import CollectiviteTerritorialeSection from '../../components/collectivite-territoriale-section';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
@@ -54,6 +55,9 @@ const UniteLegalePage: React.FC<IProps> = ({
           <UniteLegaleSection uniteLegale={uniteLegale} />
           {isAssociation(uniteLegale) && (
             <AssociationSection uniteLegale={uniteLegale} />
+          )}
+          {isCollectiviteTerritoriale(uniteLegale) && (
+            <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
           )}
           <UsefulShortcuts uniteLegale={uniteLegale} />
           {uniteLegale.siege && (
@@ -91,7 +95,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       };
     }
 
-    const uniteLegale = await getUniteLegaleFromSlug(sirenOrSiretSlug, {
+    const uniteLegale = await getUniteLegaleFromSlug(slug, {
       page,
       isBot,
     });

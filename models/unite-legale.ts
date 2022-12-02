@@ -30,6 +30,7 @@ import {
 } from './etablissements-list';
 import { getEtatAdministratifUniteLegale } from './etat-administratif';
 import { getAssociation } from './association';
+import clientComplementsSireneOuverte from '../clients/recherche-entreprise/siren';
 
 /**
  * List of siren whose owner refused diffusion
@@ -37,17 +38,6 @@ import { getAssociation } from './association';
 const protectedSirenPath = 'public/protected-siren.txt';
 const protectedSiren = readFileSync(protectedSirenPath, 'utf8').split('\n');
 const isProtectedSiren = (siren: Siren) => protectedSiren.indexOf(siren) > -1;
-
-/**
- * Return an uniteLegale given an existing siren
- */
-export const getUniteLegaleFromSlug = async (
-  slug: string,
-  options: IUniteLegaleOptions
-): Promise<IUniteLegale> => {
-  const uniteLegale = new UniteLegaleFactory(slug);
-  return await uniteLegale.get(options);
-};
 
 /**
  * PUBLIC METHODS
@@ -58,31 +48,59 @@ interface IUniteLegaleOptions {
   isBot?: boolean;
 }
 
+/**
+ * Return an uniteLegale given an existing siren
+ */
+export const getUniteLegaleFromSlug = async (
+  slug: string,
+  options: IUniteLegaleOptions = {}
+): Promise<IUniteLegale> => {
+  const { isBot = false, page = 1 } = options;
+  const uniteLegale = new UniteLegaleFactory(slug, isBot, page);
+  return await uniteLegale.get();
+};
+
 class UniteLegaleFactory {
   private _siren: Siren;
+  private _isBot: boolean;
+  private _page: number;
+  private _getUniteLegaleCore: (
+    siren: Siren,
+    page: number
+  ) => Promise<IUniteLegale>;
 
-  constructor(slug: string) {
+  constructor(slug: string, isBot = false, page = 1) {
     this._siren = verifySiren(slug);
+    this._isBot = isBot;
+    this._page = page;
+
+    this._getUniteLegaleCore = isBot
+      ? getUniteLegaleForGoodBot
+      : getUniteLegale;
   }
 
-  async get({ page = 1, isBot = false }: IUniteLegaleOptions) {
-    let uniteLegale;
+  async get() {
+    let [uniteLegale, { complements, colter }] = await Promise.all([
+      this._getUniteLegaleCore(this._siren, this._page),
+      // colter, labels and certificates, from sirene ouverte
+      clientComplementsSireneOuverte(this._siren).catch(() => {
+        return { complements: null, colter: { codeColter: null } };
+      }),
+    ]);
 
-    if (isBot) {
-      uniteLegale = await getUniteLegaleForGoodBot(this._siren, page);
-    } else {
-      uniteLegale = await getUniteLegale(this._siren, page);
+    uniteLegale.complements = { ...uniteLegale.complements, ...complements };
+    uniteLegale.colter = { ...uniteLegale.colter, ...colter };
 
-      if (isAssociation(uniteLegale)) {
-        uniteLegale = await getAssociation(uniteLegale);
-      }
+    // no need to call API association for bot
+    if (!this._isBot && isAssociation(uniteLegale)) {
+      uniteLegale = await getAssociation(uniteLegale);
+    }
 
-      if (
-        uniteLegale.complements.estEntrepreneurIndividuel &&
-        !uniteLegale.estDiffusible
-      ) {
-        uniteLegale.nomComplet = 'Entreprise non-diffusible';
-      }
+    if (
+      uniteLegale.complements.estEntrepreneurIndividuel &&
+      !uniteLegale.estDiffusible
+    ) {
+      uniteLegale.nomComplet = 'Entreprise non-diffusible';
     }
 
     // only entreprise commerciales

@@ -113,7 +113,7 @@ const Footer = () => (
           <div className="fr-footer__partners-sub">
             <ul>
               {Object.values(administrationsMetaData).map(
-                ({ slug, logoType, long }) =>
+                ({ slug, logoType, long, site }) =>
                   logoType && (
                     <li key={long}>
                       <a

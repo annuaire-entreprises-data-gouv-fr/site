@@ -9,13 +9,12 @@ import logErrorInSentry, { logWarningInSentry } from '../utils/sentry';
 const getAssociation = async (
   uniteLegale: IUniteLegale
 ): Promise<IAssociation> => {
+  // Create a valid association (especially for case when id RNA is empty)
   const uniteLegaleAsAssociation = uniteLegale as IAssociation;
   const slug = uniteLegale.association.idAssociation || '';
   uniteLegaleAsAssociation.association = { idAssociation: slug };
 
-  // either we dont even have the id RNA,
-  // or it is bot
-  // then no need to call API RNA
+  // If no Id RNA no need to go further
   if (!slug) {
     return uniteLegaleAsAssociation;
   }

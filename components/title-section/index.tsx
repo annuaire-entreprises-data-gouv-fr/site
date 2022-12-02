@@ -4,7 +4,7 @@ import { formatIntFr } from '../../utils/helpers/formatting';
 import { Tag } from '../../components-ui/tag';
 import IsActiveTag from '../../components-ui/is-active-tag';
 import { UnitLegaleDescription } from '../unite-legale-description';
-import { IUniteLegale } from '../../models';
+import { isCollectiviteTerritoriale, IUniteLegale } from '../../models';
 import SocialMedia from '../../components-ui/social-media';
 import { PrintNever } from '../../components-ui/print-visibility';
 import MultipleSirenAlert from '../../components-ui/alerts/multiple-siren';
@@ -17,6 +17,7 @@ export enum FICHE {
   JUSTIFICATIFS = 'justificatifs',
   ANNONCES = 'annonces',
   DIRIGEANTS = 'dirigeants',
+  ELUS = 'élus',
   COMPTES = 'bilans & comptes',
   ACTES = 'actes & statuts',
   DIVERS = 'conventions collectives',
@@ -26,9 +27,9 @@ interface IProps {
   uniteLegale: IUniteLegale;
 }
 
-const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
+const Tabs: React.FC<{ ficheType: FICHE; uniteLegale: IUniteLegale }> = ({
   ficheType,
-  siren,
+  uniteLegale,
 }) => (
   <PrintNever>
     <div className="title-tabs">
@@ -36,7 +37,7 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         className={`${
           ficheType === FICHE.INFORMATION && 'active'
         } no-style-link`}
-        href={`/entreprise/${siren}`}
+        href={`/entreprise/${uniteLegale.siren}`}
       >
         Informations générales
       </a>
@@ -44,30 +45,40 @@ const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
         className={`${
           ficheType === FICHE.JUSTIFICATIFS && 'active'
         } no-style-link`}
-        href={`/justificatif/${siren}`}
+        href={`/justificatif/${uniteLegale.siren}`}
         rel="nofollow"
       >
         Justificatif d’immatriculation
       </a>
-      <a
-        className={`${
-          ficheType === FICHE.DIRIGEANTS && 'active'
-        } no-style-link`}
-        href={`/dirigeants/${siren}`}
-        rel="nofollow"
-      >
-        Dirigeants
-      </a>
+      {isCollectiviteTerritoriale(uniteLegale) ? (
+        <a
+          className={`${ficheType === FICHE.ELUS && 'active'} no-style-link`}
+          href={`/elus/${uniteLegale.siren}`}
+          rel="nofollow"
+        >
+          Élus
+        </a>
+      ) : (
+        <a
+          className={`${
+            ficheType === FICHE.DIRIGEANTS && 'active'
+          } no-style-link`}
+          href={`/dirigeants/${uniteLegale.siren}`}
+          rel="nofollow"
+        >
+          Dirigeants
+        </a>
+      )}
       <a
         className={`${ficheType === FICHE.ANNONCES && 'active'} no-style-link`}
-        href={`/annonces/${siren}`}
+        href={`/annonces/${uniteLegale.siren}`}
         rel="nofollow"
       >
         Annonces
       </a>
       <a
         className={`${ficheType === FICHE.DIVERS && 'active'} no-style-link`}
-        href={`/divers/${siren}`}
+        href={`/divers/${uniteLegale.siren}`}
         rel="nofollow"
       >
         Conventions collectives
@@ -159,7 +170,7 @@ const Title: React.FC<IProps> = ({
     ) : (
       <UnitLegaleDescription uniteLegale={uniteLegale} />
     )}
-    <Tabs siren={uniteLegale.siren} ficheType={ficheType} />
+    <Tabs uniteLegale={uniteLegale} ficheType={ficheType} />
 
     <style jsx>{`
       .header-section {

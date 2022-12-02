@@ -102,6 +102,9 @@ export interface IUniteLegale extends IEtablissementsList {
   association: {
     idAssociation: IdRna | string | null;
   };
+  colter: {
+    codeColter: string | null;
+  };
 }
 
 export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
@@ -136,6 +139,9 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     },
     association: {
       idAssociation: null,
+    },
+    colter: {
+      codeColter: null,
     },
   };
 };
@@ -172,12 +178,22 @@ export const isAdministration = (
   );
 };
 
-export interface ICollectiviteTerritoriale extends IUniteLegale {}
+export interface ICollectiviteTerritoriale
+  extends Omit<IUniteLegale, 'colter'> {
+  colter: {
+    codeColter: string;
+    codeInsee: string;
+    niveau: string;
+    elus: IEtatCivil[];
+  };
+}
 
 export const isCollectiviteTerritoriale = (
   toBeDetermined: IUniteLegale
 ): toBeDetermined is ICollectiviteTerritoriale => {
-  return false;
+  return (
+    (toBeDetermined as ICollectiviteTerritoriale).colter.codeColter !== null
+  );
 };
 
 /** COMMON ERRORS */
