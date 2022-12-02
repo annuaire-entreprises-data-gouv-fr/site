@@ -39,7 +39,7 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
         <br />
         Mais vous pouvez{' '}
         <a href={`/rechercher?fn=${dirigeant.prenom}&n=${dirigeant.nom}`}>
-          Rechercher toutes les structures liées à une personne appelée «{' '}
+          rechercher toutes les structures liées à une personne appelée «{' '}
           {dirigeant.prenom} {dirigeant.nom} »
         </a>
         .
