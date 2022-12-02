@@ -181,8 +181,10 @@ export const isAdministration = (
 export interface ICollectiviteTerritoriale
   extends Omit<IUniteLegale, 'colter'> {
   colter: {
-    codeColter: IdRna | string;
-    elus: any[];
+    codeColter: string;
+    codeInsee: string;
+    niveau: string;
+    elus: IEtatCivil[];
   };
 }
 

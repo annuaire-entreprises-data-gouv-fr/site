@@ -1,6 +1,6 @@
 import { IsLikelyASirenOrSiretException, IUniteLegale } from '.';
 import { HttpNotFound } from '../clients/exceptions';
-import clientSearchSireneOuverte from '../clients/sirene-ouverte/recherche';
+import clientSearchSireneOuverte from '../clients/recherche-entreprise';
 import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
 import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';

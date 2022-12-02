@@ -37,20 +37,18 @@ const AssociationSection: React.FC<{
         sources={[EAdministration.MI]}
       >
         {notInRna ? (
-          <>
-            <Warning>
-              Cette entité est une association, mais aucune information n’a été
-              trouvée dans le <b>Répertoire National des Associations (RNA)</b>.
-              {!isTwoMonthOld(uniteLegale.dateCreation) && (
-                <>
-                  <br />
-                  Cette entité a été créée il y a moins de deux mois. Il est
-                  donc possible qu’elle n’ait pas encore été publiée au RNA et
-                  qu’elle le soit prochainement.
-                </>
-              )}
-            </Warning>
-          </>
+          <Warning>
+            Cette entité est une association, mais aucune information n’a été
+            trouvée dans le <b>Répertoire National des Associations (RNA)</b>.
+            {!isTwoMonthOld(uniteLegale.dateCreation) && (
+              <>
+                <br />
+                Cette entité a été créée il y a moins de deux mois. Il est donc
+                possible qu’elle n’ait pas encore été publiée au RNA et qu’elle
+                le soit prochainement.
+              </>
+            )}
+          </Warning>
         ) : (
           <p>
             Cette entité est inscrite au{' '}

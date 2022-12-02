@@ -1,10 +1,10 @@
 import { verifyIdRna } from '../utils/helpers/id-rna';
 import { verifySiren } from '../utils/helpers/siren-and-siret';
+import clientSearchSireneOuverte from './recherche-entreprise';
 import { clientRNA } from './rna';
 import { fetchRNCSImmatriculationNoCache } from './rncs';
 import { clientRNM } from './rnm';
 import { clientUniteLegaleInseeNoCache } from './sirene-insee/siren';
-import clientSearchSireneOuverte from './sirene-ouverte/recherche';
 import clientUniteLegaleSireneOuverte from './sirene-ouverte/siren';
 import clientSiret2Idcc from './siret-2-idcc';
 import { clientTVA } from './tva';

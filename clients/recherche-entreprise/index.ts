@@ -197,6 +197,15 @@ const mapToUniteLegale = (
     longitude,
   };
 
+  const colter = collectivite_territoriale
+    ? {
+        codeColter: collectivite_territoriale.code || null,
+        codeInsee: collectivite_territoriale.code_insee || null,
+        niveau: collectivite_territoriale.niveau || null,
+        elus: (collectivite_territoriale?.elus || []).map(mapToElusModel),
+      }
+    : { codeColter: null };
+
   return {
     ...createDefaultUniteLegale(siren),
     siege,
@@ -218,6 +227,7 @@ const mapToUniteLegale = (
     association: {
       idAssociation: identifiant_association,
     },
+    colter,
   };
 };
 
@@ -247,6 +257,20 @@ const mapToDirigeantModel = (
     prenom: formatFirstNames((prenoms || '').split(' '), 1),
     role: qualite,
     dateNaissancePartial: '',
+    dateNaissanceFull: '',
+    lieuNaissance: '',
+  };
+};
+
+const mapToElusModel = (eluRaw: any): IEtatCivil => {
+  const { nom, prenoms, annee_de_naissance, fonction, sexe } = eluRaw;
+
+  return {
+    sexe,
+    nom: (nom || '').toUpperCase(),
+    prenom: formatFirstNames((prenoms || '').split(' '), 1),
+    role: fonction,
+    dateNaissancePartial: annee_de_naissance,
     dateNaissanceFull: '',
     lieuNaissance: '',
   };
