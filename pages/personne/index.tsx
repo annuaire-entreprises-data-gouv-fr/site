@@ -44,7 +44,7 @@ const SearchDirigeantPage: React.FC<IProps> = ({
         </a>
       )}
       <h1>
-        Entitée(s) associée(s) à {searchParams.fn} {searchParams.n}
+        Liste des structures associées à {searchParams.fn} {searchParams.n}
         {searchParams.ageMax || searchParams.ageMin
           ? ` (${searchParams.ageMax || searchParams.ageMin} ans)`
           : ''}
@@ -68,13 +68,13 @@ const SearchDirigeantPage: React.FC<IProps> = ({
       )}
       <HorizontalSeparator />
       <div>
-        <b>Il manque une entité ?</b>
+        <b>Il manque une structure ?</b>
         <br />
-        Certaines entités n’ont pas d’âge enregistré pour leur(s) dirigeant(s)
-        et peuvent ne pas apparaître sur cette page. Pour les retrouver, vous
-        pouvez élargir la recherche à toutes les entreprises dirigées par une
-        personne appelée «&nbsp;{searchParams.fn} {searchParams.n}&nbsp;», sans
-        filtre d’âge.
+        Certaines structures n’ont pas d’âge enregistré pour leur(s)
+        dirigeant(s) et peuvent ne pas apparaître sur cette page. Pour les
+        retrouver, vous pouvez élargir la recherche à toutes les structures
+        liées à une personne appelée «&nbsp;{searchParams.fn} {searchParams.n}
+        &nbsp;», sans filtre d’âge.
       </div>
       <br />
       <div className="layout-center">

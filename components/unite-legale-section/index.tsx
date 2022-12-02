@@ -3,7 +3,6 @@ import { IUniteLegale } from '../../models';
 import { EAdministration } from '../../models/administrations';
 import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import BreakPageForPrint from '../../components-ui/print-break-page';
 import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
@@ -48,10 +47,10 @@ const UniteLegaleSection: React.FC<{
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
-      'Tranche effectif salarié de l’entité',
+      'Tranche effectif salarié de la structure',
       uniteLegale.libelleTrancheEffectif,
     ],
-    ['Taille d’entreprise', uniteLegale.libelleCategorieEntreprise],
+    ['Taille de la structure', uniteLegale.libelleCategorieEntreprise],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
       'Date de dernière mise à jour',

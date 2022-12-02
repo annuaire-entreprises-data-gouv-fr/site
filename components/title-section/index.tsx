@@ -166,7 +166,7 @@ const Title: React.FC<IProps> = ({
     </div>
     <SocialMedia uniteLegale={uniteLegale} />
     {!uniteLegale.estDiffusible ? (
-      <p>Les informations concernant cette entité ne sont pas publiques.</p>
+      <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
     ) : (
       <UnitLegaleDescription uniteLegale={uniteLegale} />
     )}

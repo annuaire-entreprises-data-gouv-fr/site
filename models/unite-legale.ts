@@ -100,7 +100,7 @@ class UniteLegaleFactory {
       uniteLegale.complements.estEntrepreneurIndividuel &&
       !uniteLegale.estDiffusible
     ) {
-      uniteLegale.nomComplet = 'Entité non-diffusible';
+      uniteLegale.nomComplet = 'Entreprise non-diffusible';
     }
 
     // only entreprise commerciales
@@ -273,7 +273,7 @@ const createNonDiffusibleUniteLegale = (siren: Siren) => {
   const uniteLegale = createDefaultUniteLegale(siren);
   uniteLegale.estDiffusible = false;
   uniteLegale.nomComplet =
-    'Les informations de cette entité ne sont pas publiques';
+    'Les informations de cette entreprise ne sont pas publiques';
 
   return uniteLegale;
 };

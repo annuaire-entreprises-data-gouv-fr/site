@@ -28,7 +28,7 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
         sources={[EAdministration.INSEE]}
       >
         <p>
-          Cette entité est l’entreprise individuelle de{' '}
+          Cette structure est l’entreprise individuelle de{' '}
           <b>
             {dirigeant.prenom} {dirigeant.nom}
           </b>
@@ -39,7 +39,7 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
         <br />
         Mais vous pouvez{' '}
         <a href={`/rechercher?fn=${dirigeant.prenom}&n=${dirigeant.nom}`}>
-          rechercher toutes les entreprises dirigées par une personne appelée «{' '}
+          rechercher toutes les structures liées à une personne appelée «{' '}
           {dirigeant.prenom} {dirigeant.nom} »
         </a>
         .

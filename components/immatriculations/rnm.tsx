@@ -80,7 +80,7 @@ const ImmatriculationRNM: React.FC<IProps> = ({
             sources={[EAdministration.CMAFRANCE]}
           >
             <p>
-              Cette entité possède une fiche d’immatriculation sur le{' '}
+              Cette structure possède une fiche d’immatriculation sur le{' '}
               <b>Répertoire National des Métiers (RNM)</b> qui liste les
               entreprises artisanales enregistrées auprès des Chambres des
               Métiers et de l’Artisanat (CMA France).

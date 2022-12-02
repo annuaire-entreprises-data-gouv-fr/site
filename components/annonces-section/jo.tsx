@@ -43,7 +43,7 @@ const AnnoncesJOSection: React.FC<{
       )}
       {jo.annonces.length === 0 ? (
         <div>
-          Cette entité n’a aucune annonce publiée au{' '}
+          Cette structure n’a aucune annonce publiée au{' '}
           <a
             target="_blank"
             rel="noreferrer noopener"
@@ -56,7 +56,7 @@ const AnnoncesJOSection: React.FC<{
       ) : (
         <>
           <p>
-            Cette entité possède {jo.annonces.length} annonces publiées au{' '}
+            Cette structure possède {jo.annonces.length} annonces publiées au{' '}
             <b>Journal Officiel des Associations (JOAFE)</b>
             , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
             consulter{' '}

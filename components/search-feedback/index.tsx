@@ -18,7 +18,7 @@ export const SearchFeedback: React.FC<{ searchTerm: string }> = ({
       }}
     />
     👋 Bonjour ! On aimerait savoir : avez-vous trouvé la structure que vous
-    recherchez ?
+    recherchiez ?
     <span
       dangerouslySetInnerHTML={{
         __html: `

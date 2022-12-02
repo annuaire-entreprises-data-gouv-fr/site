@@ -115,8 +115,11 @@ const Footer = () => (
               {Object.values(administrationsMetaData).map(
                 ({ slug, logoType, long, site }) =>
                   logoType && (
-                    <li>
-                      <a className="fr-footer__partners-link" href={site}>
+                    <li key={long}>
+                      <a
+                        className="fr-footer__partners-link"
+                        href={`/administration#${slug}`}
+                      >
                         {logoType === 'portrait' ? (
                           <Logo
                             title={long}

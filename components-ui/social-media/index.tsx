@@ -12,7 +12,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
       <span>
         <InformationTooltip
           orientation="right"
-          label="Partager la page de cette entité sur Linkedin"
+          label="Partager cette page sur Linkedin"
         >
           <a
             href={`https://www.linkedin.com/shareArticle?mini=true&url=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
@@ -28,7 +28,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
       <span>
         <InformationTooltip
           orientation="right"
-          label="Partager la page de cette entité sur Twitter"
+          label="Partager cette page sur Twitter"
         >
           <a
             href={`https://twitter.com/intent/tweet?url=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
@@ -44,7 +44,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
       <span>
         <InformationTooltip
           orientation="right"
-          label="Partager la page de cette entité sur Facebook"
+          label="Partager cette page sur Facebook"
         >
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
@@ -60,7 +60,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
       <span>
         <InformationTooltip
           orientation="right"
-          label="Partager la page de cette entité par Email"
+          label="Partager cette page par Email"
         >
           <a
             href={`mailto:?subject=A découvrir sur l’Annuaire des Entreprises, la page de ${nomComplet}&body=Je voudrais partager la page ${nomComplet} avec vous https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
@@ -90,7 +90,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
       </span>
       <span>
         <InformationTooltip
-          label="Télécharger un QR Code à inclure dans un courier ou dans un devis, pour partager cet url."
+          label="Télécharger un QR Code à inclure dans un courier ou dans un devis, pour partager cette page"
           orientation="right"
         >
           <a

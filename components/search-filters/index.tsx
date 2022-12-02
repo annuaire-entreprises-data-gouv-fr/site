@@ -36,13 +36,16 @@ const SearchFilters: React.FC<{
         </div>
       </Filter>
       <Filter
-        label="Personne"
+        label="Dirigeant"
         activeFilter={dirigeantFilter}
         searchParams={searchParams}
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <label>Rechercher les entreprises liées à une personne&nbsp;:</label>
+        <label>
+          Rechercher toutes les structures liées à une personne (dirigeant(e),
+          ou élu(e))&nbsp;:
+        </label>
         <div className="field-in-line">
           <input
             className="fr-input"

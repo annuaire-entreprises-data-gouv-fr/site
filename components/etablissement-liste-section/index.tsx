@@ -101,7 +101,7 @@ const EtablissementListeSection: React.FC<{
   return (
     <div id="etablissements">
       <p>
-        Cette entité possède{' '}
+        Cette structure possède{' '}
         <b>
           {nombreEtablissements} établissement{plural}
         </b>
