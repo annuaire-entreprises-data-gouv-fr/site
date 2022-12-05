@@ -27,114 +27,123 @@ interface IProps {
   uniteLegale: IUniteLegale;
 }
 
-const Tabs: React.FC<{ ficheType: FICHE; uniteLegale: IUniteLegale }> = ({
-  ficheType,
-  uniteLegale,
-}) => (
-  <PrintNever>
-    <div className="title-tabs">
-      <a
-        className={`${
-          ficheType === FICHE.INFORMATION && 'active'
-        } no-style-link`}
-        href={`/entreprise/${uniteLegale.siren}`}
-      >
-        Informations générales
-      </a>
-      <a
-        className={`${
-          ficheType === FICHE.JUSTIFICATIFS && 'active'
-        } no-style-link`}
-        href={`/justificatif/${uniteLegale.siren}`}
-        rel="nofollow"
-      >
-        Justificatif d’immatriculation
-      </a>
-      {isCollectiviteTerritoriale(uniteLegale) ? (
-        <a
-          className={`${ficheType === FICHE.ELUS && 'active'} no-style-link`}
-          href={`/elus/${uniteLegale.siren}`}
-          rel="nofollow"
-        >
-          Élus
-        </a>
-      ) : (
-        <a
-          className={`${
-            ficheType === FICHE.DIRIGEANTS && 'active'
-          } no-style-link`}
-          href={`/dirigeants/${uniteLegale.siren}`}
-          rel="nofollow"
-        >
-          Dirigeants
-        </a>
-      )}
-      <a
-        className={`${ficheType === FICHE.ANNONCES && 'active'} no-style-link`}
-        href={`/annonces/${uniteLegale.siren}`}
-        rel="nofollow"
-      >
-        Annonces
-      </a>
-      <a
-        className={`${ficheType === FICHE.DIVERS && 'active'} no-style-link`}
-        href={`/divers/${uniteLegale.siren}`}
-        rel="nofollow"
-      >
-        Conventions collectives
-      </a>
-    </div>
+const Tabs: React.FC<{
+  currentFicheType: FICHE;
+  uniteLegale: IUniteLegale;
+}> = ({ currentFicheType, uniteLegale }) => {
+  const tabs = [
+    {
+      ficheType: FICHE.INFORMATION,
+      label: 'Informations générales',
+      pathPrefix: '/entreprise/',
+      noFollow: false,
+      shouldDisplay: true,
+    },
+    {
+      ficheType: FICHE.JUSTIFICATIFS,
+      label: 'Justificatif d’immatriculation',
+      pathPrefix: '/justificatif/',
+      noFollow: true,
+      shouldDisplay: true,
+    },
+    {
+      ficheType: FICHE.ELUS,
+      label: 'Élus',
+      pathPrefix: '/elus/',
+      noFollow: true,
+      shouldDisplay: isCollectiviteTerritoriale(uniteLegale),
+    },
+    {
+      ficheType: FICHE.DIRIGEANTS,
+      label: 'Dirigeants',
+      pathPrefix: '/dirigeants/',
+      noFollow: true,
+      shouldDisplay: !isCollectiviteTerritoriale(uniteLegale),
+    },
+    {
+      ficheType: FICHE.ANNONCES,
+      label: 'Annonces',
+      pathPrefix: '/annonces/',
+      noFollow: true,
+      shouldDisplay: true,
+    },
+    {
+      ficheType: FICHE.DIVERS,
+      label: 'Conventions collectives',
+      pathPrefix: '/divers/',
+      noFollow: true,
+      shouldDisplay: true,
+    },
+  ];
+  return (
+    <PrintNever>
+      <div className="title-tabs">
+        {tabs
+          .filter(({ shouldDisplay }) => shouldDisplay)
+          .map(({ pathPrefix, ficheType, label, noFollow }) => (
+            <a
+              className={`${
+                currentFicheType === ficheType && 'active'
+              } no-style-link`}
+              href={`${pathPrefix}${uniteLegale.siren}`}
+              rel={noFollow ? 'nofollow' : ''}
+            >
+              {label}
+            </a>
+          ))}
+      </div>
 
-    <style jsx>{`
-      .title-tabs {
-        display: flex;
-        flex-grow: 1;
-        font-size: 0.9rem;
-        border-bottom: 2px solid #dfdff1;
-      }
-      .title-tabs > a {
-        color: #000091;
-        font-weight: bold;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-        margin: 0 4px;
-        padding: 10px 5px;
-        border: 2px solid #dfdff1;
-        background-color: #efeffb;
-        margin-bottom: -2px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        box-shadow: 0 -8px 5px -5px #dfdff1 inset;
-      }
-
-      .title-tabs > a:hover {
-        background-color: #dfdff1;
-      }
-
-      .title-tabs > a.active {
-        box-shadow: none;
-        background-color: #fff;
-        border-bottom: 0;
-      }
-
-      @media only screen and (min-width: 1px) and (max-width: 650px) {
+      <style jsx>{`
         .title-tabs {
-          flex-direction: column;
-          border-bottom: 0;
-        }
-        .title-tabs > a {
-          margin: 3px;
-        }
-        .title-tabs > a.active {
-          background-color: #fff;
+          display: flex;
+          flex-grow: 1;
+          font-size: 0.9rem;
           border-bottom: 2px solid #dfdff1;
         }
-      }
-    `}</style>
-  </PrintNever>
-);
+        .title-tabs > a {
+          color: #000091;
+          font-weight: bold;
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px;
+          margin: 0 4px;
+          padding: 10px 5px;
+          border: 2px solid #dfdff1;
+          background-color: #efeffb;
+          margin-bottom: -2px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          box-shadow: 0 -8px 5px -5px #dfdff1 inset;
+        }
+
+        .title-tabs > a:hover {
+          background-color: #dfdff1;
+        }
+
+        .title-tabs > a.active {
+          box-shadow: none;
+          background-color: #fff;
+          border-bottom: 0;
+        }
+
+        @media only screen and (min-width: 1px) and (max-width: 650px) {
+          .title-tabs {
+            flex-direction: column;
+            border-bottom: 0;
+          }
+          .title-tabs > a {
+            margin: 3px;
+          }
+          .title-tabs > a.active {
+            background-color: #fff;
+            border-bottom: 2px solid #dfdff1;
+          }
+        }
+      `}</style>
+    </PrintNever>
+  );
+};
 
 const Title: React.FC<IProps> = ({
   ficheType = FICHE.INFORMATION,
@@ -170,7 +179,7 @@ const Title: React.FC<IProps> = ({
     ) : (
       <UnitLegaleDescription uniteLegale={uniteLegale} />
     )}
-    <Tabs uniteLegale={uniteLegale} ficheType={ficheType} />
+    <Tabs uniteLegale={uniteLegale} currentFicheType={ficheType} />
 
     <style jsx>{`
       .header-section {
