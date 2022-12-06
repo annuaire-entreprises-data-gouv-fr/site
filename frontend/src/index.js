@@ -3,7 +3,7 @@ import './helpers-feedbacks';
 import './advanced-search';
 
 import './helpers-copy-paste';
-import './async-client-update';
+import './fetch-tva';
 import './inpi-pdf-download';
 import './load-bar';
 

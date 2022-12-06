@@ -15,7 +15,12 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
     const siren = extractSirenSlugFromUrl(window.location.pathname || '');
 
     fetch(`/api/verify-tva/${siren}`)
-      .then((e) => e.json())
+      .then((e) => {
+        if (!e.ok) {
+          throw new Error(e.status);
+        }
+        return e.json();
+      })
       .then((response) => {
         const resultCell = document.getElementById('tva-cell-result');
         const tva = response.tva;
