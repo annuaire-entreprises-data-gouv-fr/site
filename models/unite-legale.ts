@@ -31,7 +31,6 @@ import {
 import { getEtatAdministratifUniteLegale } from './etat-administratif';
 import { getAssociation } from './association';
 import clientComplementsSireneOuverte from '../clients/recherche-entreprise/siren';
-import { resolve } from 'path';
 
 /**
  * List of siren whose owner refused diffusion
