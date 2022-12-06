@@ -37,10 +37,6 @@ export const tvaIntracommunautaire = async (
     try {
       return await clientTVA(tvaNumberFromSiren);
     } catch (eFallback: any) {
-      logErrorInSentry('Error in API TVA', {
-        details: eFallback.toString(),
-        siren: slug,
-      });
       throw eFallback;
     }
   }
