@@ -91,6 +91,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         }
         .section-container > h2 {
           margin-top: 0;
+          margin-bottom: 25px;
           display: inline-block;
           font-size: 1.1rem;
           line-height: 1.8rem;
