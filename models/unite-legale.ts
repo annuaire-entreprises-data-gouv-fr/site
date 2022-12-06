@@ -69,8 +69,6 @@ class UniteLegaleFactory {
     page: number
   ) => Promise<IUniteLegale>;
 
-  private _getComplements: (siren: Siren) => Promise<any>;
-
   constructor(slug: string, isBot = false, page = 1) {
     this._siren = verifySiren(slug);
     this._isBot = isBot;
@@ -79,22 +77,13 @@ class UniteLegaleFactory {
     this._getUniteLegaleCore = isBot
       ? getUniteLegaleForGoodBot
       : getUniteLegale;
-
-    // tmp fix : dont call elastic for bot
-    this._getComplements = isBot
-      ? () => {
-          return new Promise((resolve) =>
-            resolve({ complements: null, colter: { codeColter: null } })
-          );
-        }
-      : clientComplementsSireneOuverte;
   }
 
   async get() {
     let [uniteLegale, { complements, colter }] = await Promise.all([
       this._getUniteLegaleCore(this._siren, this._page),
       // colter, labels and certificates, from sirene ouverte
-      this._getComplements(this._siren).catch(() => {
+      clientComplementsSireneOuverte(this._siren).catch(() => {
         return { complements: null, colter: { codeColter: null } };
       }),
     ]);
