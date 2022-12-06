@@ -6,6 +6,14 @@ interface ISectionProps {
   id?: string;
 }
 
+export const CopyPaste: React.FC<
+  PropsWithChildren<{ shouldTrim?: boolean; id?: string }>
+> = ({ children, shouldTrim = false, id = undefined }) => (
+  <div className={`copy-button ${shouldTrim ? 'trim' : ''}`}>
+    <span id={id}>{children}</span>
+  </div>
+);
+
 const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
   children,
   label = '',
@@ -14,13 +22,11 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
   return (
     <td>
       {isCopyEnabled ? (
-        <div>
-          <div className={`copy-button ${shouldTrim(label) ? 'trim' : ''}`}>
-            <span>{children || <i>Non renseigné</i>}</span>
-          </div>
-        </div>
+        <CopyPaste shouldTrim={shouldTrim(label)}>
+          {children || <i>Non renseigné</i>}
+        </CopyPaste>
       ) : (
-        <div className="default-cell">
+        <div>
           <span>{children || <i>Non renseigné</i>}</span>
         </div>
       )}
@@ -30,14 +36,6 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
           padding: 5px 3px;
           background-color: #fff;
           padding-left: 30px;
-        }
-
-        div.default-cell {
-          display: flex;
-          align-items: center;
-          justify-content: start;
-          cursor: inherit;
-          position: relative;
         }
         @media only screen and (min-width: 1px) and (max-width: 600px) {
           td {

@@ -44,63 +44,49 @@ function logCopyPaste(element) {
 }
 
 function createCopyButton(element) {
-  const widthFallback = document.createElement('div');
-  widthFallback.style.width = '87px';
-  element.append(widthFallback);
-
-  element.style.display = 'flex';
-  element.style.alignItems = 'center';
   element.style.cursor = 'pointer';
+  element.style.position = 'relative';
 
   const copyWrapper = document.createElement('div');
   copyWrapper.style.cursor = 'pointer';
-  copyWrapper.style.display = 'flex';
-  copyWrapper.style.alignItems = 'center';
-  copyWrapper.style.justifyContent = 'start';
-  copyWrapper.style.position = 'relative';
+  copyWrapper.style.position = 'absolute';
+  copyWrapper.style.right = '20px';
+  copyWrapper.style.top = '0';
 
-  let copyLabel;
-  let copyButton;
+  const copyLabel = document.createElement('span');
+  copyLabel.style.position = 'relative';
+  copyLabel.style.borderRadius = '3px';
+  copyLabel.style.padding = '0 3px';
+  copyLabel.style.marginLeft = '12px';
+  copyLabel.style.backgroundColor = '#dfdff1';
+  copyLabel.style.fontSize = '0.9rem';
+  copyLabel.style.display = 'flex';
+  copyLabel.style.alignItems = 'center';
+  copyLabel.style.flexDirection = 'row';
+  copyLabel.style.boxShadow = '-15px 0 5px  #fff';
+
   element.addEventListener(
     'mouseenter',
     (event) => {
-      widthFallback.remove();
-      copyLabel = document.createElement('span');
-      copyLabel.style.position = 'relative';
-      copyLabel.style.borderRadius = '3px';
-      copyLabel.style.padding = '0 3px';
-      copyLabel.style.width = '75px';
-      copyLabel.style.flexShrink = 0;
       copyLabel.style.color = '#000091';
-      copyLabel.style.marginLeft = '12px';
-      copyLabel.style.backgroundColor = '#dfdff1';
-      copyLabel.style.fontSize = '0.9rem';
-
-      copyButton = document.createElement('span');
-      copyButton.style.display = 'flex';
-      copyButton.style.alignItems = 'center';
-      copyButton.innerHTML += htmlCopyButton;
-
+      copyLabel.innerHTML = htmlCopyButton;
       copyWrapper.append(copyLabel);
-      copyLabel.append(copyButton);
       element.append(copyWrapper);
     },
     false
   );
+
   element.addEventListener('mouseleave', (event) => {
-    element.append(widthFallback);
     copyWrapper.remove();
     copyLabel.remove();
   });
 
   element.onclick = () => {
     copyLabel.style.color = 'green';
-    copyButton.innerHTML = htmlCopiedButton;
-    setTimeout(() => {
-      copyButton.innerHTML = htmlCopyButton;
-      copyLabel.style.color = '#000091';
-    }, 600);
+    copyLabel.innerHTML = htmlCopiedButton;
+
     const el = document.createElement('textarea');
+    console.log(element.children);
     let toCopy = element.children[0].innerHTML;
     if (element.className.indexOf('trim') > -1) {
       toCopy = toCopy.split(' ').join('');
