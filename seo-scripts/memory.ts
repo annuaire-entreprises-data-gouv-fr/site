@@ -8,7 +8,7 @@ const mem = () => {
 
 const logMem = () => {
   const used = mem();
-  console.log(
+  console.info(
     `The script uses approximately ${Math.round(used * 100) / 100} MB`
   );
 };

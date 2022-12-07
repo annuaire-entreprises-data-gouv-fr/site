@@ -26,10 +26,10 @@ export const cleanDistFolder = () => {
   const dir = './dist/';
 
   if (fs.existsSync(dir)) {
-    console.log('📂 Cleaning existing /dist folder');
+    console.info('📂 Cleaning existing /dist folder');
     fs.rmSync(dir, { recursive: true, force: true });
   }
 
-  console.log('📂 Creating new /dist folder');
+  console.info('📂 Creating new /dist folder');
   fs.mkdirSync(dir);
 };

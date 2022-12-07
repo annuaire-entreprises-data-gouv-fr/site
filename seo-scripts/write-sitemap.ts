@@ -70,7 +70,7 @@ class SitemapWriter {
 
     fs.writeFileSync('./dist/sitemap.xml', index);
 
-    console.log(`💾 Sitemap count : ${this.sitemapCount}`);
+    console.info(`💾 Sitemap count : ${this.sitemapCount}`);
   };
 
   endLastSitemap() {
