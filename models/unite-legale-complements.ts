@@ -1,3 +1,4 @@
+import { HttpNotFound } from '../clients/exceptions';
 import clientComplementsSireneOuverte from '../clients/recherche-entreprise/siren';
 import { Siren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
@@ -36,10 +37,12 @@ export const getUniteLegaleComplements = async (
 
     return await clientComplementsSireneOuverte(siren);
   } catch (e: any) {
-    logErrorInSentry('Error in Search API : complements', {
-      siren,
-      details: e.toString(),
-    });
+    if (!(e instanceof HttpNotFound)) {
+      logErrorInSentry('Error in Search API : complements', {
+        siren,
+        details: e.toString(),
+      });
+    }
     return emptyComplements;
   }
 };

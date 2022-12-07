@@ -30,8 +30,6 @@ import {
 } from './etablissements-list';
 import { getEtatAdministratifUniteLegale } from './etat-administratif';
 import { getAssociation } from './association';
-import clientComplementsSireneOuverte from '../clients/recherche-entreprise/siren';
-import { isBot } from 'next/dist/server/web/spec-extension/user-agent';
 import { getUniteLegaleComplements } from './unite-legale-complements';
 
 /**
