@@ -106,10 +106,11 @@ class StaticDocument extends Document {
         </CustomHead>
         <body>
           <Main />
-          {process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID && (
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
+          {process.env.NODE_ENV === 'production' &&
+            process.env.MATOMO_SITE_ID && (
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
               var _paq = window._paq || [];
               _paq.push(['trackPageView']);
               _paq.push(['enableLinkTracking']);
@@ -127,9 +128,9 @@ class StaticDocument extends Document {
                 s.parentNode.insertBefore(g, s);
               })();
               `,
-              }}
-            ></script>
-          )}
+                }}
+              ></script>
+            )}
         </body>
       </Html>
     );
