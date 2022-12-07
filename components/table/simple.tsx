@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { logWarningInSentry } from '../../utils/sentry';
 
 interface ISectionProps {
