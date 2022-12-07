@@ -31,6 +31,8 @@ import {
 import { getEtatAdministratifUniteLegale } from './etat-administratif';
 import { getAssociation } from './association';
 import clientComplementsSireneOuverte from '../clients/recherche-entreprise/siren';
+import { isBot } from 'next/dist/server/web/spec-extension/user-agent';
+import { getUniteLegaleComplements } from './unite-legale-complements';
 
 /**
  * List of siren whose owner refused diffusion
@@ -83,9 +85,7 @@ class UniteLegaleFactory {
     let [uniteLegale, { complements, colter }] = await Promise.all([
       this._getUniteLegaleCore(this._siren, this._page),
       // colter, labels and certificates, from sirene ouverte
-      clientComplementsSireneOuverte(this._siren).catch(() => {
-        return { complements: null, colter: { codeColter: null } };
-      }),
+      getUniteLegaleComplements(this._siren, this._isBot),
     ]);
 
     uniteLegale.complements = { ...uniteLegale.complements, ...complements };
