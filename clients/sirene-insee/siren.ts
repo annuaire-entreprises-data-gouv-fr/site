@@ -215,7 +215,7 @@ const mapToDomainObject = (
     )[0],
     dateDebutActivite: dateDebut,
     estActive: etatAdministratifUniteLegale === 'A',
-    estDiffusible: statutDiffusionUniteLegale !== 'N',
+    estDiffusible: statutDiffusionUniteLegale === 'O',
     nomComplet,
     chemin: siren,
     trancheEffectif: trancheEffectifsUniteLegale,
