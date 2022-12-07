@@ -54,7 +54,9 @@ const routes = {
         'https://journal-officiel-datadila.opendatasoft.com/api/datasets/1.0/search/?q=jo_associations',
     },
     site: {
-      recherche: 'https://www.journal-officiel.gouv.fr/associations/recherche/',
+      dca: 'https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce',
+      recherche:
+        'https://www.journal-officiel.gouv.fr/pages/associations-recherche',
       justificatif:
         'https://www.journal-officiel.gouv.fr/document/associations_b/',
     },
