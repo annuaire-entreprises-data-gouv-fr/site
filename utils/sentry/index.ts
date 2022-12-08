@@ -41,7 +41,7 @@ const logInSentryFactory =
   (severity = 'error' as SeverityLevel) =>
   (errorMsg: any, extra?: IScope) => {
     if (process.env.NODE_ENV === 'development' || !process.env.SENTRY_DSN) {
-      console.log(errorMsg, JSON.stringify(extra));
+      console.error(errorMsg, JSON.stringify(extra));
     }
     if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
       init();

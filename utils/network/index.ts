@@ -30,7 +30,7 @@ export const cachedAxiosInstanceFactory = () => {
     storage: redisStorage(CACHE_TIMEOUT),
     // ignore cache-control headers as some API like sirene return 'no-cache' headers
     headerInterpreter: () => CACHE_TIMEOUT,
-    debug: console.log,
+    debug: console.info,
   });
 
   cachedInstance.interceptors.request.use(addStartTimeInterceptor, (err) =>

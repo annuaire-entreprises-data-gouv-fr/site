@@ -16,7 +16,7 @@ const getEntrepriseUrl = (str: string) =>
 async function main() {
   let maxMemory = 0;
 
-  console.log('*** SEO script (sitemap and page tree) ***');
+  console.info('*** SEO script (sitemap and page tree) ***');
   console.time('⏱ Total time to execute script');
 
   const filePath = await downloadAndSaveData();
@@ -51,7 +51,7 @@ async function main() {
   } finally {
     await deleteDataFile(filePath);
   }
-  console.log(`💾 Url total : ${urlCount}`);
+  console.info(`💾 Url total : ${urlCount}`);
 
   // generate sitemap Index
   sitemap.createIndex();
@@ -60,7 +60,7 @@ async function main() {
   pageTree.checkIgnoredUrlCount();
   pageTree.build();
 
-  console.log(`📈 Max memory usage ${Math.round(maxMemory * 100) / 100} mo`);
+  console.info(`📈 Max memory usage ${Math.round(maxMemory * 100) / 100} mo`);
   console.timeEnd('⏱ Total time to execute script');
 }
 

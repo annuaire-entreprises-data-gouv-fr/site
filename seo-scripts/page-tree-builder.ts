@@ -44,7 +44,7 @@ class PageTreeBuilder {
   get = (dep: string, naf: string) => this.dico[dep][naf];
 
   checkIgnoredUrlCount = () => {
-    console.log(`🧽 Ignored url in pageTree : ${this.ignoredUrl}`);
+    console.info(`🧽 Ignored url in pageTree : ${this.ignoredUrl}`);
 
     if (this.ignoredUrl > 250000) {
       throw new Error('Too many ignored url');
@@ -99,7 +99,7 @@ class PageTreeBuilder {
         }
       });
     });
-    console.log(`💾 Page tree pages : ${this.pageCount}`);
+    console.info(`💾 Page tree pages : ${this.pageCount}`);
   };
 
   saveFile = (path: string, htmlAsString: string) => {

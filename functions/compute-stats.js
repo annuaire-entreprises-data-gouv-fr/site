@@ -35,7 +35,7 @@ const post = (url, data) => {
 
   return new Promise((resolve, reject) => {
     var req = https.request(url, options, (res) => {
-      console.log('statusCode:', res.statusCode);
+      console.info('statusCode:', res.statusCode);
 
       const body = [];
       res.on('data', (chunk) => body.push(chunk));
@@ -111,8 +111,8 @@ exports.handle = function (event, context) {
 
       return post(process.env.MATTERMOST_HOOK, data);
     })
-    .then((r) => console.log(r))
-    .catch((e) => console.log(e));
+    .then((r) => console.info(r))
+    .catch((e) => console.error(e));
 
   return {
     body: JSON.stringify({
