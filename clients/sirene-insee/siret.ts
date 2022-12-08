@@ -204,7 +204,7 @@ export const mapEtablissementToDomainObject = (
     ) || periodesEtablissement[0];
 
   const estActif = etatAdministratifEtablissement === 'A';
-  const estDiffusible = statutDiffusionEtablissement !== 'N';
+  const estDiffusible = statutDiffusionEtablissement === 'O';
   const etatAdministratif = getEtatAdministratifEtablissement(
     estActif,
     estDiffusible
