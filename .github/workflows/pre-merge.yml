@@ -87,7 +87,6 @@ jobs:
           path: ./node_modules
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
 
-      # manually install redis twice as github's service doesnot work
       - name: Install redis
         run: sudo apt-get install -y redis-tools redis-server
 
@@ -124,35 +123,34 @@ jobs:
         run: |
           npm run test:unit
 
-  a11y:
-    name: A11y tests
-    runs-on: ubuntu-latest
-    needs: [build]
+  # a11y:
+  #   name: A11y tests
+  #   runs-on: ubuntu-latest
+  #   needs: [build]
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Load cached build
-        uses: actions/cache@v2
-        id: restore-build
-        with:
-          path: ./*
-          key: ${{ github.sha }}
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Load cached build
+  #       uses: actions/cache@v2
+  #       id: restore-build
+  #       with:
+  #         path: ./*
+  #         key: ${{ github.sha }}
 
-      # manually install redis twice as github's service doesnot work
-      - name: Install redis
-        run: sudo apt-get install -y redis-tools redis-server
+  #     - name: Install redis
+  #       run: sudo apt-get install -y redis-tools redis-server
 
-      - run: npm run start &
-        env:
-          PORT: 3000
+  #     - run: npm run start &
+  #       env:
+  #         PORT: 3000
 
-      # wait for the server to start responding. We expect Bad Request 400 once it starts listening.
-      # so override the shell and have the last command be the : { null } command to force exit code 0.
-      - run: wget --retry-connrefused --waitretry=5 --read-timeout=10 --timeout=15 -t 50 http://localhost:3000/comment-ca-marche
+  #     # wait for the server to start responding. We expect Bad Request 400 once it starts listening.
+  #     # so override the shell and have the last command be the : { null } command to force exit code 0.
+  #     - run: wget --retry-connrefused --waitretry=5 --read-timeout=10 --timeout=15 -t 50 http://localhost:3000/comment-ca-marche
 
-      - run: |
-          npm install -g @axe-core/cli
-          axe http://localhost:3000  http://localhost:3000/donnees-extrait-kbis  http://localhost:3000/comment-ca-marche  http://localhost:3000/rechercher  http://localhost:3000/faq  http://localhost:3000/accessiblite  http://localhost:3000/vie-privee  http://localhost:3000/entreprise/880878145  http://localhost:3000/justificatif/880878145  http://localhost:3000/annonces/880878145  http://localhost:3000/administration/insee http://localhost:3000/administration http://localhost:3000/sources-de-donnees/insee  http://localhost:3000/sources-de-donnees/  http://localhost:3000/carte  http://localhost:3000/etablissement/88087814500015  http://localhost:3000/rechercher?terme=ganymede  --disable scrollable-region-focusable,region,color-contrast,duplicate-id --exit
+  #     - run: |
+  #         npm install -g @axe-core/cli
+  #         axe http://localhost:3000  http://localhost:3000/donnees-extrait-kbis  http://localhost:3000/comment-ca-marche  http://localhost:3000/rechercher  http://localhost:3000/faq  http://localhost:3000/accessiblite  http://localhost:3000/vie-privee  http://localhost:3000/entreprise/880878145  http://localhost:3000/justificatif/880878145  http://localhost:3000/annonces/880878145  http://localhost:3000/administration/insee http://localhost:3000/administration http://localhost:3000/sources-de-donnees/insee  http://localhost:3000/sources-de-donnees/  http://localhost:3000/carte  http://localhost:3000/etablissement/88087814500015  http://localhost:3000/rechercher?terme=ganymede  --disable scrollable-region-focusable,region,color-contrast,duplicate-id --exit
 
   testE2E:
     name: End2end tests
@@ -168,7 +166,6 @@ jobs:
           path: ./*
           key: ${{ github.sha }}
 
-      # manually install redis twice as github's service doesnot work
       - name: Install redis
         run: sudo apt-get install -y redis-tools redis-server
 
