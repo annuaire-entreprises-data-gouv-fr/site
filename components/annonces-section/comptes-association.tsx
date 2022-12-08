@@ -9,41 +9,36 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '../../models/api-not-responding';
-import { IAnnoncesJO } from '../../models/annonces';
 import { Tag } from '../../components-ui/tag';
 import ButtonLink from '../../components-ui/button';
 import { DILA } from '../administrations';
 import routes from '../../clients/routes';
 import { formatDate } from '../../utils/helpers/formatting';
-import AssociationCreationNotFoundAlert from '../../components-ui/alerts/association-creation-not-found-alert';
+import { IComptesAssociation } from '../../models/annonces';
 
-const AnnoncesJOSection: React.FC<{
+export const ComptesAssociationSection: React.FC<{
   uniteLegale: IAssociation;
-  jo: IAnnoncesJO | IAPINotRespondingError;
-}> = ({ uniteLegale, jo }) => {
-  if (isAPINotResponding(jo)) {
+  comptesAssociation: IComptesAssociation | IAPINotRespondingError;
+}> = ({ uniteLegale, comptesAssociation }) => {
+  if (isAPINotResponding(comptesAssociation)) {
     return (
       <AdministrationNotResponding
-        administration={jo.administration}
-        errorType={jo.errorType}
-        title="Annonces Journal Officiel des Associations"
+        administration={comptesAssociation.administration}
+        errorType={comptesAssociation.errorType}
+        title="Dépôt des Comptes Association"
       />
     );
   }
 
   return (
     <Section
-      title="Annonces Journal Officiel des Associations"
+      title="Dépôt de Comptes des Associations"
       sources={[EAdministration.DILA]}
-      lastModified={jo.lastModified}
+      lastModified={comptesAssociation.lastModified}
     >
-      {jo.annonces.filter((annonce) => annonce.typeAvisLibelle === 'Création')
-        .length === 0 && (
-        <AssociationCreationNotFoundAlert uniteLegale={uniteLegale} />
-      )}
-      {jo.annonces.length === 0 ? (
+      {comptesAssociation.comptes.length === 0 ? (
         <div>
-          Cette structure n’a aucune annonce publiée au{' '}
+          Cette association n’a aucun compte déposé au{' '}
           <a
             target="_blank"
             rel="noreferrer noopener"
@@ -56,14 +51,14 @@ const AnnoncesJOSection: React.FC<{
       ) : (
         <>
           <p>
-            Cette structure possède {jo.annonces.length} annonces publiées au{' '}
-            <b>Journal Officiel des Associations (JOAFE)</b>
+            Cette structure possède {comptesAssociation.comptes.length} comptes
+            publiés au <b>Journal Officiel des Associations (JOAFE)</b>
             , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
             consulter{' '}
             <a
               rel="noreferrer noopener nofollow"
               target="_blank"
-              href={`${routes.journalOfficielAssociations.site.recherche}/${uniteLegale.siren}`}
+              href={`${routes.journalOfficielAssociations.site.recherche}?q=${uniteLegale.siren}`}
             >
               la page de cette association
             </a>{' '}
@@ -71,21 +66,19 @@ const AnnoncesJOSection: React.FC<{
           </p>
           <FullTable
             head={[
-              'Publication',
+              'Date de déclaration',
               'N° parution',
-              'Type d’annonce',
-              'Justificatif de parution',
+              'Détails',
+              'Dépôt des comptes',
             ]}
-            body={jo.annonces.map((annonce) => [
-              <b>{formatDate(annonce.datePublication)}</b>,
-              <Tag>{annonce.numeroParution}</Tag>,
-              <div className="annonce">
-                <b>{annonce.typeAvisLibelle}</b>
-                <div className="font-small">
-                  <i>{annonce.details}</i>
-                </div>
+            body={comptesAssociation.comptes.map((compte) => [
+              <b>{formatDate(compte.dateparution)}</b>,
+              <Tag>{compte.numeroParution}</Tag>,
+              <div>
+                <b>Comptes {compte.anneeCloture}</b> <br />
+                clôturés le {formatDate(compte.datecloture)}
               </div>,
-              <ButtonLink target="_blank" to={annonce.path} alt small>
+              <ButtonLink target="_blank" to={compte.permalinkUrl} alt small>
                 ⇢&nbsp;Consulter
               </ButtonLink>,
             ])}
@@ -100,4 +93,3 @@ const AnnoncesJOSection: React.FC<{
     </Section>
   );
 };
-export default AnnoncesJOSection;

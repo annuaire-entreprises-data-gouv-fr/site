@@ -4,7 +4,13 @@ import { HttpNotFound } from '../clients/exceptions';
 import { clientRNA } from '../clients/rna';
 import { escapeTerm } from '../utils/helpers/formatting';
 import { verifyIdRna } from '../utils/helpers/id-rna';
+import { Siren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry, { logWarningInSentry } from '../utils/sentry';
+import { EAdministration } from './administrations';
+import {
+  APINotRespondingFactory,
+  IAPINotRespondingError,
+} from './api-not-responding';
 
 const getAssociation = async (
   uniteLegale: IUniteLegale

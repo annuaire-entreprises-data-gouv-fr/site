@@ -14,6 +14,18 @@ const longDatePartial = {
   month: 'long',
 };
 
+const yearOption = {
+  year: 'numeric',
+};
+
+export const formatDateYear = (date: string | Date) => {
+  if (!date) {
+    return undefined;
+  }
+  //@ts-ignore
+  return new Intl.DateTimeFormat('fr-FR', yearOption).format(castDate(date));
+};
+
 export const formatDatePartial = (date: string | Date) => {
   if (!date) {
     return undefined;

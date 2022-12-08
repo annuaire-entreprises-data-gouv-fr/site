@@ -3,6 +3,10 @@
 #redis
 dump.rdb
 
+#cspell 
+cspell.json
+.vscode/settings.json
+
 # dependencies
 /node_modules
 /.pnp
