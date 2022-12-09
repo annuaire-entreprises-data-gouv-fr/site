@@ -46,7 +46,9 @@ export const httpClientOAuthGetFactory = (
   cachedAxiosInstance.interceptors.request.use(
     tokenProvider({
       getToken: cache,
-      headerFormatter: (body: any) => 'Bearer ' + body.access_token,
+      headerFormatter: (body: any) => {
+        return `Bearer ${body.access_token}`;
+      },
     })
   );
 
