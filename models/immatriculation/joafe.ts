@@ -1,7 +1,7 @@
 import { IImmatriculation } from '.';
 import { NotAValidIdRnaError } from '..';
 import { HttpNotFound } from '../../clients/exceptions';
-import clientJOAFE from '../../clients/open-data-soft/journal-officiel-associations';
+import { clientJOAFE } from '../../clients/open-data-soft/journal-officiel-associations';
 import { IdRna, verifyIdRna } from '../../utils/helpers/id-rna';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../../utils/sentry';

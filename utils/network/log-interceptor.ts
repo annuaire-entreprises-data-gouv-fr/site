@@ -24,7 +24,7 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
     const startTime = response?.config?.metadata?.startTime;
 
     // logged into stdout
-    console.log(
+    console.info(
       formatLog(
         response?.config?.url || '',
         response?.status,

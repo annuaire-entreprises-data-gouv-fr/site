@@ -17,7 +17,7 @@ export const readFileLineByLine = async (
     callback(line);
     count++;
   });
-  rl.on('error', (err) => console.log(err));
+  rl.on('error', (err) => console.error(err));
 
   await events.once(rl, 'close');
   return count;

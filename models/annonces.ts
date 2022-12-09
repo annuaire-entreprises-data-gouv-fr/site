@@ -1,5 +1,8 @@
 import clientBodacc from '../clients/open-data-soft/bodacc';
-import clientJOAFE from '../clients/open-data-soft/journal-officiel-associations';
+import {
+  clientDCA,
+  clientJOAFE,
+} from '../clients/open-data-soft/journal-officiel-associations';
 import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administrations';
@@ -9,6 +12,18 @@ import {
 } from './api-not-responding';
 import { isAssociation } from '.';
 import { getUniteLegaleFromSlug } from './unite-legale';
+import { IdRna } from '../utils/helpers/id-rna';
+
+export interface IComptesAssociation {
+  comptes: {
+    dateparution: string;
+    numeroParution: string;
+    datecloture: string;
+    permalinkUrl: string;
+    anneeCloture: string;
+  }[];
+  lastModified: string | null;
+}
 
 export interface IAnnoncesBodacc {
   annonces: {
@@ -28,7 +43,7 @@ export interface IAnnoncesBodacc {
   }[];
 }
 
-export interface IAnnoncesJO {
+export interface IAnnoncesAssociation {
   annonces: {
     typeAvisLibelle: string;
     numeroParution: string;
@@ -45,29 +60,53 @@ const getAnnoncesFromSlug = async (siren: string) => {
     getAnnoncesBodaccFromSlug(siren),
   ]);
 
-  let jo = null;
+  let annoncesAssociation = null;
+  let comptesAssociation = null;
+
   if (isAssociation(uniteLegale)) {
-    jo = await getAnnoncesJoFromIdRna(
-      uniteLegale.association.idAssociation,
-      uniteLegale.siren
-    );
+    [annoncesAssociation, comptesAssociation] = await Promise.all([
+      getAnnoncesAssociation(
+        uniteLegale.association.idAssociation,
+        uniteLegale.siren
+      ),
+      getComptesAssociation(
+        uniteLegale.siren,
+        uniteLegale.association.idAssociation
+      ),
+    ]);
   }
 
   return {
-    uniteLegale,
     bodacc,
-    jo,
+    comptesAssociation,
+    uniteLegale,
+    annoncesAssociation,
   };
 };
 
-const getAnnoncesJoFromIdRna = async (
+const getComptesAssociation = async (
+  siren: Siren,
+  idRna: IdRna | string
+): Promise<IComptesAssociation | IAPINotRespondingError> => {
+  try {
+    return await clientDCA(siren, idRna);
+  } catch (e: any) {
+    logErrorInSentry('Error in API JOAFE : COMPTES', {
+      siren,
+      details: e.toString(),
+    });
+    return APINotRespondingFactory(EAdministration.DILA, 500);
+  }
+};
+
+const getAnnoncesAssociation = async (
   idRna: string,
   siren: Siren
-): Promise<IAnnoncesJO | IAPINotRespondingError> => {
+): Promise<IAnnoncesAssociation | IAPINotRespondingError> => {
   try {
     return await clientJOAFE(idRna);
   } catch (e: any) {
-    logErrorInSentry('Error in API JOAFE', {
+    logErrorInSentry('Error in API JOAFE: ANNONCES', {
       siren,
       details: e.toString(),
     });
@@ -90,4 +129,4 @@ const getAnnoncesBodaccFromSlug = async (
   }
 };
 
-export default getAnnoncesFromSlug;
+export { getAnnoncesFromSlug };
