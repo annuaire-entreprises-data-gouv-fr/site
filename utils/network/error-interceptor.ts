@@ -11,7 +11,7 @@ import {
 import { formatLog } from './format-log';
 
 const errorInterceptor = (error: AxiosError) => {
-  const { config, response, message } = error;
+  const { config = {}, response, message } = error;
 
   if (response?.status !== 404) {
     const endTime = new Date().getTime();
