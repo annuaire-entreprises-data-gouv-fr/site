@@ -18,7 +18,7 @@ export const isTwoMonthOld = (dateAsString: string) => {
 export const isAssociationFromNatureJuridique = (natureJuridique: string) =>
   natureJuridique === '5195' || natureJuridique.indexOf('92') === 0;
 
-export const isAdministrationFromNatureJuridique = (natureJuridique: string) =>
+export const isServicePublicFromNatureJuridique = (natureJuridique: string) =>
   natureJuridique === '3210' ||
   natureJuridique === '3110' ||
   natureJuridique.indexOf('4') === 0 ||

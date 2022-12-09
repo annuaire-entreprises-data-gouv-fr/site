@@ -1,6 +1,6 @@
 import React from 'react';
 import AvisSituationLink from '../../components/avis-situation-link';
-import { IUniteLegale } from '../../models';
+import { isServicePublic, IUniteLegale } from '../../models';
 import { isAssociation } from '../../models';
 import AssociationCreationNotFoundAlert from './association-creation-not-found-alert';
 import Info from './info';
@@ -28,6 +28,9 @@ const ImmatriculationNotFoundAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
         </p>
       </Info>
     );
+  }
+  if (isServicePublic(uniteLegale)) {
+    return null;
   } else {
     return (
       <Info full>

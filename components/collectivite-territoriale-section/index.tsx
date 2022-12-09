@@ -19,7 +19,7 @@ const CollectiviteTerritorialeSection: React.FC<{
     [
       'Élus',
       elus.length > 0 ? (
-        <a href={`/elus/${uniteLegale.siren}`}>
+        <a href={`/elus/${uniteLegale.siren}`} rel="nofollow">
           → voir les {elus.length} élu(s)
         </a>
       ) : (
