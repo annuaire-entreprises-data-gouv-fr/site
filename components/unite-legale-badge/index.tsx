@@ -6,7 +6,7 @@ import {
   collectiviteFill,
 } from '../../components-ui/icon';
 import {
-  isAdministration,
+  isServicePublic,
   isAssociation,
   isCollectiviteTerritoriale,
   IUniteLegale,
@@ -37,7 +37,7 @@ const determineType = (uniteLegale: IUniteLegale) => {
     };
   }
 
-  if (isAdministration(uniteLegale)) {
+  if (isServicePublic(uniteLegale)) {
     return {
       icon: administrationFill,
       label: 'Service public',

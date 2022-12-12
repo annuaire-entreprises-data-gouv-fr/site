@@ -1,7 +1,7 @@
 /** COMMON TYPES */
 
 import {
-  isAdministrationFromNatureJuridique,
+  isServicePublicFromNatureJuridique,
   isAssociationFromNatureJuridique,
 } from '../utils/helpers/checks';
 import { IdRna } from '../utils/helpers/id-rna';
@@ -166,13 +166,13 @@ export const isAssociation = (
   );
 };
 
-export interface IAdministration extends IUniteLegale {}
+export interface IServicePublic extends IUniteLegale {}
 
-export const isAdministration = (
+export const isServicePublic = (
   toBeDetermined: IUniteLegale
-): toBeDetermined is IAdministration => {
+): toBeDetermined is IServicePublic => {
   return (
-    isAdministrationFromNatureJuridique(toBeDetermined.natureJuridique) ||
+    isServicePublicFromNatureJuridique(toBeDetermined.natureJuridique) ||
     toBeDetermined.siren.indexOf('1') === 0 ||
     toBeDetermined.siren.indexOf('2') === 0
   );

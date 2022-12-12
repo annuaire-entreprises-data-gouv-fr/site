@@ -18,6 +18,10 @@ import {
   createEtablissementsList,
   IEtablissementsList,
 } from '../../models/etablissements-list';
+import {
+  estActiveFromEtatAdministratifInsee,
+  estDiffusibleFromStatutDiffusionInsee,
+} from './helpers';
 
 interface IInseeEtablissementResponse {
   etablissement: IInseeEtablissement;
@@ -203,8 +207,14 @@ export const mapEtablissementToDomainObject = (
       (periode) => periode.changementEtatAdministratifEtablissement === true
     ) || periodesEtablissement[0];
 
-  const estActif = etatAdministratifEtablissement === 'A';
-  const estDiffusible = statutDiffusionEtablissement === 'O';
+  const estActif = estActiveFromEtatAdministratifInsee(
+    etatAdministratifEtablissement
+  );
+
+  const estDiffusible = estDiffusibleFromStatutDiffusionInsee(
+    statutDiffusionEtablissement
+  );
+
   const etatAdministratif = getEtatAdministratifEtablissement(
     estActif,
     estDiffusible

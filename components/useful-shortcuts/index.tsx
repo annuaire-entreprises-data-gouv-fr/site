@@ -1,11 +1,16 @@
 import React from 'react';
 import HorizontalSeparator from '../../components-ui/horizontal-separator';
 import { PrintNever } from '../../components-ui/print-visibility';
-import { IUniteLegale } from '../../models';
+import { isServicePublic, IUniteLegale } from '../../models';
 import { isAssociation } from '../../models';
 
 const ShortcutsSection: React.FC<{
-  shortcuts: { label: string; url: string; external?: boolean }[];
+  shortcuts: {
+    label: string;
+    url: string;
+    external?: boolean;
+    hide?: boolean;
+  }[];
   title: string;
   shortcutCount: number;
 }> = ({ shortcuts, title, shortcutCount }) => (
@@ -15,20 +20,22 @@ const ShortcutsSection: React.FC<{
         <b className="title">{title}</b>
       </div>
     )}
-    {shortcuts.map((shortcut) => (
-      <div key={shortcut.label}>
-        →{' '}
-        {shortcut.external ? (
-          <a href={shortcut.url} target="_blank" rel="noreferrer noopener">
-            {shortcut.label}
-          </a>
-        ) : (
-          <a href={shortcut.url} rel="nofollow">
-            {shortcut.label}
-          </a>
-        )}
-      </div>
-    ))}
+    {shortcuts
+      .filter((s) => !s.hide)
+      .map((shortcut) => (
+        <div key={shortcut.label}>
+          →{' '}
+          {shortcut.external ? (
+            <a href={shortcut.url} target="_blank" rel="noreferrer noopener">
+              {shortcut.label}
+            </a>
+          ) : (
+            <a href={shortcut.url} rel="nofollow">
+              {shortcut.label}
+            </a>
+          )}
+        </div>
+      ))}
     <style jsx>{`
       .container {
         border: 2px solid #dfdff1;
@@ -82,6 +89,7 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label: isAssociation(uniteLegale)
             ? 'Annonce de création'
             : 'Extrait d’immatriculation',
+          hide: isServicePublic(uniteLegale),
         },
         {
           url: `/justificatif/${uniteLegale.siren}#insee`,
@@ -90,27 +98,6 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
       ],
     },
     {
-      title: 'Liens utiles',
-      shortcuts: [
-        {
-          url: `https://mon-entreprise.urssaf.fr/g%C3%A9rer/${uniteLegale.siren}`,
-          label: 'Simulez impôts, salaires & dividendes',
-          external: true,
-        },
-        {
-          url: `https://place-des-entreprises.beta.gouv.fr/?pk_campaign=orientation-partenaire&pk_kwd=annuaire-entreprises`,
-          label: 'Besoin d’aide ? Échangez avec un conseiller',
-          external: true,
-        },
-      ],
-    },
-  ];
-
-  if (
-    !uniteLegale.complements.estEntrepreneurIndividuel &&
-    !isAssociation(uniteLegale)
-  ) {
-    data.splice(2, 0, {
       title: 'Tribunaux de commerce',
       shortcuts: [
         {
@@ -126,21 +113,43 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label: 'Procédure(s) collective(s)',
         },
       ],
-    });
-  }
+      hide:
+        uniteLegale.complements.estEntrepreneurIndividuel ||
+        isAssociation(uniteLegale) ||
+        isServicePublic(uniteLegale),
+    },
+    {
+      title: 'Liens utiles',
+      shortcuts: [
+        {
+          url: `https://mon-entreprise.urssaf.fr/g%C3%A9rer/${uniteLegale.siren}`,
+          label: 'Simulez impôts, salaires & dividendes',
+          external: true,
+        },
+        {
+          url: `https://place-des-entreprises.beta.gouv.fr/?pk_campaign=orientation-partenaire&pk_kwd=annuaire-entreprises`,
+          label: 'Besoin d’aide ? Échangez avec un conseiller',
+          external: true,
+        },
+      ],
+      hide: isServicePublic(uniteLegale),
+    },
+  ];
 
   return (
     <PrintNever>
       <div>
         <div className="wrapper">
-          {data.map((sectionData) => (
-            <ShortcutsSection
-              key={sectionData.title}
-              title={sectionData.title}
-              shortcuts={sectionData.shortcuts}
-              shortcutCount={data.length}
-            />
-          ))}
+          {data
+            .filter((d) => !d.hide)
+            .map((sectionData) => (
+              <ShortcutsSection
+                key={sectionData.title}
+                title={sectionData.title}
+                shortcuts={sectionData.shortcuts}
+                shortcutCount={data.length}
+              />
+            ))}
         </div>
         <HorizontalSeparator />
       </div>

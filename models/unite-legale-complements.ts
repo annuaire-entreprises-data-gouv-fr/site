@@ -24,17 +24,9 @@ export interface IUniteLegaleComplements {
  * @param siren
  * @returns
  */
-export const getUniteLegaleComplements = async (
-  siren: Siren,
-  isBot = false
-) => {
+export const getUniteLegaleComplements = async (siren: Siren) => {
   const emptyComplements = { complements: null, colter: { codeColter: null } };
   try {
-    if (isBot) {
-      // as of today we dont want to return complements for bot as it might triggers Search API rate limiting
-      return emptyComplements;
-    }
-
     return await clientComplementsSireneOuverte(siren);
   } catch (e: any) {
     if (!(e instanceof HttpNotFound)) {
