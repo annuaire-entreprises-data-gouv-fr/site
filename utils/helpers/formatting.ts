@@ -1,4 +1,4 @@
-import { libelleFromTypeVoie } from '../labels';
+import { libelleFromTypeVoie } from '#utils/labels';
 
 const castDate = (date: string | Date) =>
   typeof date === 'string' ? new Date(date) : date;

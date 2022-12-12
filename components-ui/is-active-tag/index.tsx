@@ -1,8 +1,8 @@
 import React from 'react';
-import { IETATADMINSTRATIF } from '../../models/etat-administratif';
-import { formatDate } from '../../utils/helpers/formatting';
-import InformationTooltip from '../information-tooltip';
-import { Tag } from '../tag';
+import InformationTooltip from '#components-ui/information-tooltip';
+import { Tag } from '#components-ui/tag';
+import { IETATADMINSTRATIF } from '#models/etat-administratif';
+import { formatDate } from '#utils/helpers';
 
 const classFromState = (state: IETATADMINSTRATIF) => {
   switch (state) {

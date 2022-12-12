@@ -1,5 +1,5 @@
+import constants from '#models/constants';
 import { IEtablissement } from '.';
-import constants from './constants';
 
 export interface IEtablissementsList {
   etablissements: {

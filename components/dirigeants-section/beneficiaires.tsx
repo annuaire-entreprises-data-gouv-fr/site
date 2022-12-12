@@ -1,22 +1,22 @@
 import React from 'react';
-import HorizontalSeparator from '../../components-ui/horizontal-separator';
-import { Section } from '../section';
-import { EAdministration } from '../../models/administrations';
+import routes from '#clients/routes';
+import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
+import HorizontalSeparator from '#components-ui/horizontal-separator';
+import { INPI } from '#components/administrations';
+import { Section } from '#components/section';
+import { FullTable } from '#components/table/full';
+import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '../../models/api-not-responding';
-import AdministrationNotResponding from '../administration-not-responding';
-import routes from '../../clients/routes';
-import { Siren } from '../../utils/helpers/siren-and-siret';
-import { INPI } from '../administrations';
-import { formatDate, formatDatePartial } from '../../utils/helpers/formatting';
+} from '#models/api-not-responding';
 import {
   IBeneficiaire,
   IImmatriculationRNCS,
-} from '../../models/immatriculation/rncs';
-import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
-import { FullTable } from '../table/full';
+} from '#models/immatriculation/rncs';
+import { formatDate, formatDatePartial } from '#utils/helpers';
+import { Siren } from '#utils/helpers';
+import AdministrationNotResponding from '../administration-not-responding';
 
 interface IProps {
   immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;

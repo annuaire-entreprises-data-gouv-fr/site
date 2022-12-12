@@ -1,8 +1,7 @@
 import React from 'react';
-
+import { ErrorNotFoundExplanations } from '#components/error-explanations';
+import MatomoEvent from '#components/matomo-event';
 import Page from '../layouts';
-import { ErrorNotFoundExplanations } from '../components/error-explanations';
-import MatomoEvent from '../components/matomo-event';
 
 const NotFound: React.FC = () => {
   return (

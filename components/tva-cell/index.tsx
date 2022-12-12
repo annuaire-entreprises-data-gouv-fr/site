@@ -1,7 +1,7 @@
 import React from 'react';
-import { Loader } from '../../components-ui/loader';
-import FrontStateMachine from '../front-state-machine';
-import { CopyPaste } from '../table/simple';
+import { Loader } from '#components-ui/loader';
+import FrontStateMachine from '#components/front-state-machine';
+import { CopyPaste } from '#components/table/simple';
 
 const TVACell: React.FC<{}> = ({}) => {
   return (

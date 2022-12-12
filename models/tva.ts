@@ -1,6 +1,5 @@
-import { clientTVA } from '../clients/tva';
-import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../utils/sentry';
+import { clientTVA } from '#clients/tva';
+import { Siren, verifySiren } from '#utils/helpers';
 
 export interface ITvaIntracommunautaire {
   numero: string;

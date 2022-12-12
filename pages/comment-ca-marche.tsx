@@ -1,7 +1,6 @@
 import React from 'react';
-import TextWrapper from '../components-ui/text-wrapper';
-import { INSEE } from '../components/administrations';
-
+import TextWrapper from '#components-ui/text-wrapper';
+import { INSEE } from '#components/administrations';
 import Page from '../layouts';
 
 const About: React.FC = () => {

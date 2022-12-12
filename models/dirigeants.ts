@@ -1,10 +1,10 @@
-import { IUniteLegale } from '.';
-import { verifySiren } from '../utils/helpers/siren-and-siret';
-import { IAPINotRespondingError } from './api-not-responding';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import getImmatriculationRNCS, {
   IImmatriculationRNCS,
-} from './immatriculation/rncs';
-import { getUniteLegaleFromSlug } from './unite-legale';
+} from '#models/immatriculation/rncs';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { verifySiren } from '#utils/helpers';
+import { IUniteLegale } from '.';
 
 export interface IDirigeants {
   uniteLegale: IUniteLegale;

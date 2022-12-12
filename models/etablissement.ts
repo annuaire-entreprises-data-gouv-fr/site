@@ -1,27 +1,23 @@
+import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
+import {
+  clientEtablissementInsee,
+  clientEtablissementInseeFallback,
+} from '#clients/sirene-insee/siret';
+import { clientEtablissementSireneOuverte } from '#clients/sirene-ouverte/siret';
+import { getGeoLoc } from '#models/geo-loc';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { extractSirenFromSiret, Siret, verifySiret } from '#utils/helpers';
+import {
+  logFirstSireneInseefailed,
+  logSecondSireneInseefailed,
+  logSireneOuvertefailed,
+} from '#utils/sentry/helpers';
 import {
   createDefaultEtablissement,
   IEtablissement,
   IEtablissementWithUniteLegale,
   SiretNotFoundError,
 } from '.';
-import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
-import {
-  clientEtablissementInsee,
-  clientEtablissementInseeFallback,
-} from '../clients/sirene-insee/siret';
-import { clientEtablissementSireneOuverte } from '../clients/sirene-ouverte/siret';
-import {
-  extractSirenFromSiret,
-  Siret,
-  verifySiret,
-} from '../utils/helpers/siren-and-siret';
-import { getUniteLegaleFromSlug } from './unite-legale';
-import {
-  logFirstSireneInseefailed,
-  logSecondSireneInseefailed,
-  logSireneOuvertefailed,
-} from '../utils/sentry/helpers';
-import { getGeoLoc } from './geo-loc';
 
 /*
  * Return an etablissement given an existing siret

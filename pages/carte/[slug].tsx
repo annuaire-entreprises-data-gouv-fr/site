@@ -1,18 +1,16 @@
-import React from 'react';
-
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import { IEtablissement, SirenNotFoundError } from '../../models';
-import MapEtablissement from '../../components/map/map-etablissement';
-import { getEtablissementWithLatLongFromSlug } from '../../models/etablissement';
-import { MapTitleEtablissement } from '../../components/title-etablissement-section';
-import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
-import HiddenH1 from '../../components/a11y-components/hidden-h1';
+import React from 'react';
+import HiddenH1 from '#components/a11y-components/hidden-h1';
+import MapEtablissement from '#components/map/map-etablissement';
+import { MapTitleEtablissement } from '#components/title-etablissement-section';
+import { getEtablissementWithLatLongFromSlug } from '#models/etablissement';
+import { IEtablissement } from '#models/index';
+import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '../../utils/server-side-props-helper/post-server-side-props';
-import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
+} from '#utils/server-side-props-helper/post-server-side-props';
+import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   etablissement: IEtablissement;

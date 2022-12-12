@@ -1,10 +1,10 @@
-import { clientMonitorings } from '../clients/monitoring';
-import logErrorInSentry from '../utils/sentry';
+import { clientMonitorings } from '#clients/monitoring';
 import {
   administrationsMetaData,
   IAdministrationMetaData,
   IAPIMonitorMetaData,
-} from './administrations';
+} from '#models/administrations';
+import logErrorInSentry from '#utils/sentry';
 
 export interface IRatio {
   ratio: string;

@@ -3,7 +3,7 @@ import {
   NotASiretError,
   NotLuhnValidSirenError,
   NotLuhnValidSiretError,
-} from '../../models';
+} from '#models/index';
 
 /**
  * Siren and siret types

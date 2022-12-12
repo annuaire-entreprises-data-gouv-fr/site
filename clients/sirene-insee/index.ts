@@ -1,6 +1,6 @@
-import constants from '../../models/constants';
-import httpClientOAuthGetFactory from '../../utils/network/0auth';
-import routes from '../routes';
+import routes from '#clients/routes';
+import constants from '#models/constants';
+import httpClientOAuthGetFactory from '#utils/network/0auth';
 
 /**
  * API SIRENE by INSEE

@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
-import { information } from '../icon';
-import InformationTooltip from '../information-tooltip';
+import { information } from '#components-ui/icon';
+import InformationTooltip from '#components-ui/information-tooltip';
 
 const FAQLink: React.FC<PropsWithChildren<{ tooltipLabel: string }>> = ({
   tooltipLabel,

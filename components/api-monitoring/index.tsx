@@ -1,9 +1,9 @@
 import React from 'react';
-import { IMonitoring, IRatio } from '../../models/monitoring';
-import InformationTooltip from '../../components-ui/information-tooltip';
-import { Section } from '../section';
-import { Tag } from '../../components-ui/tag';
-import { information } from '../../components-ui/icon';
+import { information } from '#components-ui/icon';
+import InformationTooltip from '#components-ui/information-tooltip';
+import { Tag } from '#components-ui/tag';
+import { Section } from '#components/section';
+import { IMonitoring, IRatio } from '#models/monitoring';
 
 const getUptimeColor = (ratio: IRatio) => {
   if (!ratio.isActive) {

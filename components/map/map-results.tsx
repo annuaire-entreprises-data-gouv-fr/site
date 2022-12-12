@@ -1,6 +1,6 @@
 import React from 'react';
+import { ISearchResult } from '#models/search';
 import MaplibreInstance from '.';
-import { ISearchResult } from '../../models/search';
 
 const MapResults: React.FC<{ results: ISearchResult[] }> = ({ results }) => (
   <>

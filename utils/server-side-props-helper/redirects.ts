@@ -1,5 +1,5 @@
-import { hasSirenFormat, hasSiretFormat } from '../helpers/siren-and-siret';
-import logErrorInSentry, { IScope, logWarningInSentry } from '../sentry';
+import { hasSirenFormat, hasSiretFormat } from '#utils/helpers';
+import logErrorInSentry, { IScope, logWarningInSentry } from '#utils/sentry';
 
 export const redirectPageNotFound = (
   msg: string,

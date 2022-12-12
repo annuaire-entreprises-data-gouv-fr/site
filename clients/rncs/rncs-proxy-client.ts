@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import httpClient, { httpGet } from '../../utils/network';
+import httpClient, { httpGet } from '#utils/network';
 
 /**
  * GET for RNCS Proxy api

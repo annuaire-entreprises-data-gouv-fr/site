@@ -1,7 +1,7 @@
 import React from 'react';
-import ButtonLink from '../../components-ui/button';
-import { Header } from '../../components/header';
-import constants from '../../models/constants';
+import ButtonLink from '#components-ui/button';
+import { Header } from '#components/header';
+import constants from '#models/constants';
 
 const Thanks: React.FC<{}> = () => {
   return (

@@ -1,4 +1,4 @@
-import { INPI } from '../../components/administrations';
+import { INPI } from '#components/administrations';
 import Warning from './warning';
 
 const InpiPartiallyDownWarning: React.FC<{ missing?: string }> = ({

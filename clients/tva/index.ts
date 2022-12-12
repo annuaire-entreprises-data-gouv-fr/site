@@ -1,6 +1,6 @@
-import constants from '../../models/constants';
-import { httpGet } from '../../utils/network';
-import routes from '../routes';
+import routes from '#clients/routes';
+import constants from '#models/constants';
+import { httpGet } from '#utils/network';
 
 interface IVIESResponse {
   isValid: boolean;

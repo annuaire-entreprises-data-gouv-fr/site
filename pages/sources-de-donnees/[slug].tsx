@@ -1,21 +1,19 @@
-import React, { Fragment } from 'react';
-
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-
+import React, { Fragment } from 'react';
+import { HttpNotFound } from '#clients/exceptions';
+import ApiMonitoring from '#components/api-monitoring';
 import {
   administrationsMetaData,
   IAdministrationMetaData,
   IAPIMonitorMetaData,
-} from '../../models/administrations';
-import { getMonitorsWithMetaData, IMonitoring } from '../../models/monitoring';
-import ApiMonitoring from '../../components/api-monitoring';
-import { HttpNotFound } from '../../clients/exceptions';
+} from '#models/administrations';
+import { getMonitorsWithMetaData, IMonitoring } from '#models/monitoring';
+import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '../../utils/server-side-props-helper/post-server-side-props';
-import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
+} from '#utils/server-side-props-helper/post-server-side-props';
+import Page from '../../layouts';
 
 interface IProps extends IAdministrationMetaData, IPropsWithMetadata {
   monitorings: (IMonitoring & IAPIMonitorMetaData)[];

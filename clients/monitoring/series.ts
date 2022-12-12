@@ -1,5 +1,5 @@
+import { IRatio } from '#models/monitoring';
 import { IMonitorLog } from '.';
-import { IRatio } from '../../models/monitoring';
 
 interface ILog {
   date: Date;

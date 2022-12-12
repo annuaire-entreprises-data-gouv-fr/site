@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-
-import { logEventInMatomo } from '../../../utils/analytics/matomo';
-import httpClient from '../../../utils/network';
-import logErrorInSentry from '../../../utils/sentry';
+import { logEventInMatomo } from '#utils/analytics/matomo';
+import httpClient from '#utils/network';
+import logErrorInSentry from '#utils/sentry';
 
 const logAllEvents = async (req: NextApiRequest) => {
   try {

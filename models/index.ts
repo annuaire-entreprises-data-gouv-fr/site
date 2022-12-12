@@ -1,17 +1,17 @@
 /** COMMON TYPES */
 
 import {
-  isServicePublicFromNatureJuridique,
-  isAssociationFromNatureJuridique,
-} from '../utils/helpers/checks';
-import { IdRna } from '../utils/helpers/id-rna';
-import { Siren, Siret } from '../utils/helpers/siren-and-siret';
-import {
   createEtablissementsList,
   IEtablissementsList,
-} from './etablissements-list';
-import { IETATADMINSTRATIF } from './etat-administratif';
-import { IEtatCivil } from './immatriculation/rncs';
+} from '#models/etablissements-list';
+import { IETATADMINSTRATIF } from '#models/etat-administratif';
+import { IEtatCivil } from '#models/immatriculation/rncs';
+import {
+  isAssociationFromNatureJuridique,
+  isServicePublicFromNatureJuridique,
+} from '#utils/helpers';
+import { Siren, Siret } from '#utils/helpers';
+import { IdRna } from '#utils/helpers';
 
 export interface IEtablissement {
   enseigne: string | null;

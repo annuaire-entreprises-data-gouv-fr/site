@@ -1,6 +1,6 @@
 import { IncomingMessage } from 'http';
 import { GetServerSidePropsContext } from 'next';
-import { HttpNotFound } from '../../clients/exceptions';
+import { HttpNotFound } from '#clients/exceptions';
 import {
   IsLikelyASirenOrSiretException,
   NotASirenError,
@@ -9,12 +9,12 @@ import {
   NotLuhnValidSiretError,
   SirenNotFoundError,
   SiretNotFoundError,
-} from '../../models';
+} from '#models/index';
 import {
   extractSirenFromSiretNoVerify,
   verifySiren,
   verifySiret,
-} from '../helpers/siren-and-siret';
+} from '#utils/helpers';
 import {
   redirectIfSiretOrSiren,
   redirectPageNotFound,

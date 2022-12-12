@@ -1,5 +1,5 @@
 import React from 'react';
-import { serializeForClientScript } from '../../utils/helpers/formatting';
+import { serializeForClientScript } from '#utils/helpers';
 
 /**
  * This component get hydrated in frontend with frontend bundle

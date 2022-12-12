@@ -1,10 +1,8 @@
 import React from 'react';
-import HorizontalSeparator from '../../components-ui/horizontal-separator';
-import { Section } from '../section';
-import { TwoColumnTable } from '../table/simple';
-import { EAdministration } from '../../models/administrations';
-import { INSEE } from '../administrations';
-import { IEtatCivil } from '../../models/immatriculation/rncs';
+import HorizontalSeparator from '#components-ui/horizontal-separator';
+import { Section } from '#components/section';
+import { EAdministration } from '#models/administrations';
+import { IEtatCivil } from '#models/immatriculation/rncs';
 
 interface IProps {
   dirigeant: IEtatCivil;

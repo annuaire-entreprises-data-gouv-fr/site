@@ -1,21 +1,21 @@
 import React from 'react';
-import { IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administrations';
+import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
+import ButtonLink from '#components-ui/button';
+import { closed, download, open } from '#components-ui/icon';
+import BreakPageForPrint from '#components-ui/print-break-page';
+import { PrintNever } from '#components-ui/print-visibility';
+import { INPI } from '#components/administrations';
+import { Section } from '#components/section';
+import { TwoColumnTable } from '#components/table/simple';
+import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '../../models/api-not-responding';
-import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
+} from '#models/api-not-responding';
+import { IImmatriculationRNCS } from '#models/immatriculation/rncs';
+import { IUniteLegale } from '#models/index';
+import { formatDate, formatIntFr } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
-import { INPI } from '../administrations';
-import BreakPageForPrint from '../../components-ui/print-break-page';
-import ButtonLink from '../../components-ui/button';
-import { Section } from '../section';
-import { TwoColumnTable } from '../table/simple';
-import { PrintNever } from '../../components-ui/print-visibility';
-import { closed, download, open } from '../../components-ui/icon';
-import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
-import { IImmatriculationRNCS } from '../../models/immatriculation/rncs';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;

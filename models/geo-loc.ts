@@ -1,7 +1,6 @@
+import { clientBanGeoLoc } from '#clients/base-adresse';
+import logErrorInSentry from '#utils/sentry';
 import { IEtablissement } from '.';
-import { clientBanGeoLoc } from '../clients/base-adresse';
-
-import logErrorInSentry from '../utils/sentry';
 
 export interface IGeoLoc {
   lat: string;

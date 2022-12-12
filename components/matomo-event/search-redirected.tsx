@@ -1,6 +1,6 @@
 import React from 'react';
+import { Siren, Siret } from '#utils/helpers';
 import MatomoEvent from '.';
-import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
 
 const MatomoEventFromSearch: React.FC<{ sirenOrSiret: Siren | Siret }> = ({
   sirenOrSiret,

@@ -2,12 +2,12 @@
  * Render index page with list of all departments
  */
 
-import { renderPage } from './html-helpers';
+import { escapeTerm } from '#utils/helpers';
 import {
   libelleFromCodeNAFWithoutNomenclature,
   libelleFromDepartement,
-} from '../../utils/labels';
-import { escapeTerm } from '../../utils/helpers/formatting';
+} from '#utils/labels';
+import { renderPage } from './html-helpers';
 
 const renderNav = (links: string[][]) => {
   return `

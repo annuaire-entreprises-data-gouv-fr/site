@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
-import { parseIntWithDefaultValue } from '../helpers/formatting';
-import isUserAgentABot from '../user-agent';
+import { parseIntWithDefaultValue } from '#utils/helpers';
+import isUserAgentABot from '#utils/user-agent';
 
 const extractParamsFromContext = (
   context: GetServerSidePropsContext,

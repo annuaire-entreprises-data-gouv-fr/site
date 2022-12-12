@@ -1,7 +1,7 @@
+import { HttpNotFound } from '#clients/exceptions';
+import { IUniteLegaleComplements } from '#models/unite-legale-complements';
+import { Siren } from '#utils/helpers';
 import clientSearchSireneOuverte from '.';
-import { IUniteLegaleComplements } from '../../models/unite-legale-complements';
-import { Siren } from '../../utils/helpers/siren-and-siret';
-import { HttpNotFound } from '../exceptions';
 
 const clientComplementsSireneOuverte = async (
   siren: Siren

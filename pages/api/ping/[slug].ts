@@ -1,8 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import {
-  APISlugNotFound,
-  pingAPIClient,
-} from '../../../clients/ping-api-clients';
+import { APISlugNotFound, pingAPIClient } from '#clients/ping-api-clients';
 
 const ping = async (
   { query: { slug } }: NextApiRequest,

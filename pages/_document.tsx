@@ -1,5 +1,5 @@
-import React from 'react';
 import Document, { Html, Head, Main } from 'next/document';
+import React from 'react';
 
 const manifest = (
   process.env.NODE_ENV === 'production'

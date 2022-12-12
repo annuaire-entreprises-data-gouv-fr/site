@@ -1,13 +1,12 @@
+import { GetStaticPaths, GetStaticProps } from 'next';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { GetStaticPaths, GetStaticProps } from 'next';
-
+import Breadcrumb from '#components-ui/breadcrumb';
+import ButtonLink from '#components-ui/button';
+import TextWrapper from '#components-ui/text-wrapper';
+import constants from '#models/constants';
+import { getAllFaqArticles, getFaqArticle, IArticle } from '#models/faq';
 import Page from '../../layouts';
-import { getAllFaqArticles, getFaqArticle, IArticle } from '../../models/faq';
-import ButtonLink from '../../components-ui/button';
-import constants from '../../models/constants';
-import TextWrapper from '../../components-ui/text-wrapper';
-import Breadcrumb from '../../components-ui/breadcrumb';
 
 const FAQArticle: React.FC<{ article: IArticle }> = ({ article }) => (
   <Page small={true} title="Cette administration ne répond pas" noIndex={false}>
