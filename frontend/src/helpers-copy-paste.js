@@ -44,13 +44,23 @@ function logCopyPaste(element) {
 }
 
 function createCopyButton(element) {
+  const childElement =
+    element.children && element.children.length > 0 && element.children[0];
+  const childElementWidth = childElement?.offsetWidth || 0;
+
+  // position copy/paste either next to text or justified to the right
+  let rightPosition = 0;
+  if (childElementWidth !== 0 && element.offsetWidth - childElementWidth > 75) {
+    rightPosition = element.offsetWidth - 75 - childElementWidth;
+  }
+
   element.style.cursor = 'pointer';
   element.style.position = 'relative';
 
   const copyWrapper = document.createElement('div');
   copyWrapper.style.cursor = 'pointer';
   copyWrapper.style.position = 'absolute';
-  copyWrapper.style.right = '20px';
+  copyWrapper.style.right = `${rightPosition}px`;
   copyWrapper.style.top = '0';
 
   const copyLabel = document.createElement('span');
@@ -63,7 +73,7 @@ function createCopyButton(element) {
   copyLabel.style.display = 'flex';
   copyLabel.style.alignItems = 'center';
   copyLabel.style.flexDirection = 'row';
-  copyLabel.style.boxShadow = '-15px 0 5px  #fff';
+  copyLabel.style.boxShadow = rightPosition === 0 ? '-25px 0 8px  #fff' : '';
 
   element.addEventListener(
     'mouseenter',
@@ -86,7 +96,6 @@ function createCopyButton(element) {
     copyLabel.innerHTML = htmlCopiedButton;
 
     const el = document.createElement('textarea');
-    console.log(element.children);
     let toCopy = element.children[0].innerHTML;
     if (element.className.indexOf('trim') > -1) {
       toCopy = toCopy.split(' ').join('');
@@ -104,6 +113,8 @@ function createCopyButton(element) {
   const copyList = document.getElementsByClassName('copy-button');
   for (var i = 0; i < copyList.length; i++) {
     const element = copyList[i];
-    createCopyButton(element);
+    if (element) {
+      createCopyButton(element);
+    }
   }
 })();
