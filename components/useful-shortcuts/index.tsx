@@ -8,7 +8,7 @@ const ShortcutsSection: React.FC<{
   shortcuts: {
     label: string;
     url: string;
-    external?: BooleanConstructor;
+    external?: boolean;
     hide?: boolean;
   }[];
   title: string;
@@ -89,6 +89,7 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label: isAssociation(uniteLegale)
             ? 'Annonce de création'
             : 'Extrait d’immatriculation',
+          hide: isServicePublic(uniteLegale),
         },
         {
           url: `/justificatif/${uniteLegale.siren}#insee`,
