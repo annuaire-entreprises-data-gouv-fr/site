@@ -97,6 +97,7 @@ export interface IUniteLegale extends IEtablissementsList {
   dirigeant: IEtatCivil | null;
   complements: {
     estEntrepreneurIndividuel: boolean;
+    estRGE: boolean;
     estEss: boolean;
   };
   association: {

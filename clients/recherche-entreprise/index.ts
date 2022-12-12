@@ -123,6 +123,8 @@ const clientSearchSireneOuverte = async (
 
   const results = (response.data || []) as any;
 
+  console.log(results);
+
   if (
     results.length === 0 ||
     !results.results ||

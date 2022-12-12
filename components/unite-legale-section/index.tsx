@@ -53,18 +53,27 @@ const UniteLegaleSection: React.FC<{
     ['Taille de la structure', uniteLegale.libelleCategorieEntreprise],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
-      'Date de dernière mise à jour',
+      'Dernière modification des données Insee',
       formatDate(uniteLegale.dateDerniereMiseAJour),
     ],
+    uniteLegale.estActive === false
+      ? ['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]
+      : null,
+    ['', <br />],
+    uniteLegale.complements.estEss || uniteLegale.complements.estRGE
+      ? [
+          'Label(s) & certification(s)',
+          <>
+            {uniteLegale.complements.estEss && (
+              <div>ESS - Entreprise Sociale et Solidaire</div>
+            )}
+            {uniteLegale.complements.estEss && (
+              <div>RGE - Reconnu Garant de l’Environnement</div>
+            )}
+          </>,
+        ]
+      : null,
   ];
-
-  if (uniteLegale.estActive === false) {
-    data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
-  }
-
-  if (uniteLegale.complements.estEss) {
-    data.push(['Economie Sociale et Solidaire (ESS)', 'Oui']);
-  }
 
   return (
     <div id="entreprise">
