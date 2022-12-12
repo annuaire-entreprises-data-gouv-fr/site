@@ -20,6 +20,10 @@ import {
   libelleFromeCodeCategorie,
 } from '../../utils/labels';
 import routes from '../routes';
+import {
+  estActiveFromEtatAdministratifInsee,
+  estDiffusibleFromStatutDiffusionInsee,
+} from './helpers';
 
 interface IInseeUniteLegaleResponse {
   uniteLegale: {
@@ -214,8 +218,12 @@ const mapToDomainObject = (
       'T'
     )[0],
     dateDebutActivite: dateDebut,
-    estActive: etatAdministratifUniteLegale === 'A',
-    estDiffusible: statutDiffusionUniteLegale === 'O',
+    estActive: estActiveFromEtatAdministratifInsee(
+      etatAdministratifUniteLegale
+    ),
+    estDiffusible: estDiffusibleFromStatutDiffusionInsee(
+      statutDiffusionUniteLegale
+    ),
     nomComplet,
     chemin: siren,
     trancheEffectif: trancheEffectifsUniteLegale,
