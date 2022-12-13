@@ -1,5 +1,4 @@
 import {
-  createDefaultUniteLegale,
   createDefaultUniteLegaleComplements,
   IUniteLegaleComplements,
 } from '.';
@@ -27,7 +26,6 @@ export interface IComplements {
  * @returns
  */
 export const getComplements = async (siren: Siren) => {
-  const emptyComplements = createDefaultUniteLegaleComplements();
   try {
     return await clientComplementsSireneOuverte(siren);
   } catch (e: any) {
@@ -37,6 +35,9 @@ export const getComplements = async (siren: Siren) => {
         details: e.toString(),
       });
     }
-    return emptyComplements;
+    return {
+      complements: createDefaultUniteLegaleComplements(),
+      colter: { codeColter: null },
+    };
   }
 };

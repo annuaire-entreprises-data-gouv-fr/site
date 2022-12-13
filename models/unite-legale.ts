@@ -30,7 +30,7 @@ import {
 } from './etablissements-list';
 import { getEtatAdministratifUniteLegale } from './etat-administratif';
 import { getAssociation } from './association';
-import { getComplements, getUniteLegaleComplements } from './complements';
+import { getComplements } from './complements';
 
 /**
  * List of siren whose owner refused diffusion

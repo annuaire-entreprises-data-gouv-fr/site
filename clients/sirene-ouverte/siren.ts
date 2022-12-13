@@ -112,8 +112,9 @@ const mapToDomainObject = (
     activite_principale_entreprise,
   } = uniteLegale;
 
+  const defaultUniteLegale = createDefaultUniteLegale(siren);
   return {
-    ...createDefaultUniteLegale(siren),
+    ...defaultUniteLegale,
     siren,
     siege,
     activitePrincipale: activite_principale_entreprise,
@@ -143,6 +144,7 @@ const mapToDomainObject = (
     dateDerniereMiseAJour: date_mise_a_jour,
     dirigeant: null,
     complements: {
+      ...defaultUniteLegale.complements,
       estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
         nature_juridique_entreprise
       ),

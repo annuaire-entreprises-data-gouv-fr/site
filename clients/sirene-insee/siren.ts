@@ -2,6 +2,7 @@ import { inseeClientGet, InseeClientOptions } from '.';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
+  createDefaultUniteLegaleComplements,
   IUniteLegale,
 } from '../../models';
 import { createEtablissementsList } from '../../models/etablissements-list';
@@ -238,6 +239,7 @@ const mapToDomainObject = (
     ),
     dirigeant: estEntrepreneurIndividuel ? dirigeant : null,
     complements: {
+      ...defaultUniteLegale.complements,
       estEntrepreneurIndividuel,
       estEss: economieSocialeSolidaireUniteLegale === 'O',
     },
