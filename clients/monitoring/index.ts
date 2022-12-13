@@ -4,6 +4,7 @@ import FormData from 'form-data';
 import routes from '../routes';
 import { DailyUptimeRatioConverter } from './series';
 import { allMonitoringIds } from '../../models/administrations';
+import constants from '../../models/constants';
 
 export interface IMonitorLog {
   id?: number;
@@ -84,7 +85,11 @@ const updateMonitorings = async () => {
     url: routes.monitoring + `?api_key=${process.env.UPTIME_ROBOT_API_KEY}`,
     method: 'POST',
     data,
-    headers: data.getHeaders(),
+    headers: {
+      ...data.getHeaders(),
+      'Accept-Encoding': 'gzip,deflate,compress',
+    },
+    timeout: constants.timeout.S,
   });
 
   const result = response.data as IUptimeRobotResponse;
