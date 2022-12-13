@@ -8,10 +8,16 @@ import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import TVACell from '../tva-cell';
 import FAQLink from '../../components-ui/faq-link';
+import {
+  LabelsAndCertificates,
+  checkHasLabelsAndCertificates,
+} from '../labels-and-certificates';
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
+  const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
+
   const data = [
     ['Dénomination', uniteLegale.nomComplet],
     ['SIREN', formatIntFr(uniteLegale.siren)],
@@ -59,18 +65,12 @@ const UniteLegaleSection: React.FC<{
     uniteLegale.estActive === false
       ? ['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]
       : null,
-    ['', <br />],
-    uniteLegale.complements.estEss || uniteLegale.complements.estRGE
+    // jump line and add label and certificates
+    hasLabelsAndCertificates ? ['', <br />] : null,
+    hasLabelsAndCertificates
       ? [
-          'Label(s) & certification(s)',
-          <>
-            {uniteLegale.complements.estEss && (
-              <div>ESS - Entreprise Sociale et Solidaire</div>
-            )}
-            {uniteLegale.complements.estEss && (
-              <div>RGE - Reconnu Garant de l’Environnement</div>
-            )}
-          </>,
+          'Label ou certification',
+          <LabelsAndCertificates uniteLegale={uniteLegale} />,
         ]
       : null,
   ];
@@ -79,7 +79,11 @@ const UniteLegaleSection: React.FC<{
     <div id="entreprise">
       <Section
         title={`Résumé`}
-        sources={[EAdministration.INSEE, EAdministration.VIES]}
+        sources={[
+          EAdministration.INSEE,
+          EAdministration.VIES,
+          EAdministration.DINUM,
+        ]}
       >
         <TwoColumnTable body={data} />
       </Section>

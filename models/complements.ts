@@ -1,14 +1,16 @@
+import {
+  createDefaultUniteLegale,
+  createDefaultUniteLegaleComplements,
+  IUniteLegaleComplements,
+} from '.';
 import { HttpNotFound } from '../clients/exceptions';
 import clientComplementsSireneOuverte from '../clients/recherche-entreprise/siren';
 import { Siren } from '../utils/helpers/siren-and-siret';
 import logErrorInSentry from '../utils/sentry';
 import { IEtatCivil } from './immatriculation/rncs';
 
-export interface IUniteLegaleComplements {
-  complements: {
-    estEntrepreneurIndividuel: boolean;
-    estEss: boolean;
-  };
+export interface IComplements {
+  complements: IUniteLegaleComplements;
   colter:
     | {
         codeColter: string;
@@ -24,8 +26,8 @@ export interface IUniteLegaleComplements {
  * @param siren
  * @returns
  */
-export const getUniteLegaleComplements = async (siren: Siren) => {
-  const emptyComplements = { complements: null, colter: { codeColter: null } };
+export const getComplements = async (siren: Siren) => {
+  const emptyComplements = createDefaultUniteLegaleComplements();
   try {
     return await clientComplementsSireneOuverte(siren);
   } catch (e: any) {

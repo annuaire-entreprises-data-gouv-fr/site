@@ -30,7 +30,7 @@ import {
 } from './etablissements-list';
 import { getEtatAdministratifUniteLegale } from './etat-administratif';
 import { getAssociation } from './association';
-import { getUniteLegaleComplements } from './unite-legale-complements';
+import { getComplements, getUniteLegaleComplements } from './complements';
 
 /**
  * List of siren whose owner refused diffusion
@@ -83,7 +83,7 @@ class UniteLegaleFactory {
     let [uniteLegale, { complements, colter }] = await Promise.all([
       this._getUniteLegaleCore(this._siren, this._page),
       // colter, labels and certificates, from sirene ouverte
-      getUniteLegaleComplements(this._siren),
+      getComplements(this._siren),
     ]);
 
     uniteLegale.complements = { ...uniteLegale.complements, ...complements };

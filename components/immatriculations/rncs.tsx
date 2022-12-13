@@ -13,9 +13,10 @@ import ButtonLink from '../../components-ui/button';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../../components-ui/print-visibility';
-import { closed, download, open } from '../../components-ui/icon';
+import { download } from '../../components-ui/icon';
 import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
 import { IImmatriculationRNCS } from '../../models/immatriculation/rncs';
+import { VerifiedTag } from '../../components-ui/verified-tag';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
@@ -111,13 +112,9 @@ const ImmatriculationRNCSTable: React.FC<{
   const data = [
     [
       'Statut',
-      <>
-        {immatriculation.identite.dateRadiation ? (
-          <b>{closed} Radiée</b>
-        ) : (
-          <b>{open} Inscrite</b>
-        )}
-      </>,
+      <VerifiedTag isVerified={!immatriculation.identite.dateRadiation}>
+        {immatriculation.identite.dateRadiation ? 'Radiée' : 'Inscrite'}
+      </VerifiedTag>,
     ],
     [
       'Date d’immatriculation au RNCS',

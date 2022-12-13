@@ -55,9 +55,14 @@ interface ISireneOuverteUniteLegaleResultat {
   is_entrepreneur_individuel: true;
   dirigeants: ISireneOuverteDirigeant[];
   complements: {
-    est_ess: boolean;
-    est_entrepreneur_individuel: boolean;
     identifiant_association: string;
+    convention_collective_renseignee: boolean;
+    est_entrepreneur_individuel: boolean;
+    est_entrepreneur_spectacle: boolean;
+    est_ess: boolean;
+    est_finess: boolean;
+    est_rge: boolean;
+    est_uai: boolean;
     collectivite_territoriale: {
       code: string;
       code_insee: string;
@@ -123,8 +128,6 @@ const clientSearchSireneOuverte = async (
 
   const results = (response.data || []) as any;
 
-  console.log(results);
-
   if (
     results.length === 0 ||
     !results.results ||
@@ -170,10 +173,14 @@ const mapToUniteLegale = (
     },
     dirigeants,
     complements: {
-      est_ess = false,
       est_entrepreneur_individuel = false,
       identifiant_association = null,
       collectivite_territoriale = null,
+      est_ess = false,
+      est_entrepreneur_spectacle = false,
+      est_finess = false,
+      est_rge = false,
+      est_uai = false,
     },
   } = result;
 
@@ -230,6 +237,10 @@ const mapToUniteLegale = (
     complements: {
       estEss: est_ess,
       estEntrepreneurIndividuel: est_entrepreneur_individuel,
+      estEntrepreneurSpectacle: est_entrepreneur_spectacle,
+      estFiness: est_finess,
+      estRge: est_rge,
+      estUai: est_uai,
     },
     association: {
       idAssociation: identifiant_association,

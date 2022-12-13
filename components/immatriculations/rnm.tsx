@@ -9,11 +9,12 @@ import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
 import AdministrationNotResponding from '../administration-not-responding';
 import BreakPageForPrint from '../../components-ui/print-break-page';
 import ButtonLink from '../../components-ui/button';
-import { closed, download, open } from '../../components-ui/icon';
+import { download } from '../../components-ui/icon';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 import { PrintNever } from '../../components-ui/print-visibility';
 import { IImmatriculationRNM } from '../../models/immatriculation/rnm';
+import { VerifiedTag } from '../../components-ui/verified-tag';
 
 interface IProps {
   immatriculation: IImmatriculationRNM | IAPINotRespondingError;
@@ -39,13 +40,9 @@ const ImmatriculationRNM: React.FC<IProps> = ({
   const data = [
     [
       'Statut',
-      <>
-        {immatriculation.dateRadiation ? (
-          <b>{closed} Radiée</b>
-        ) : (
-          <b>{open} Inscrite</b>
-        )}
-      </>,
+      <VerifiedTag isVerified={!immatriculation.dateRadiation}>
+        {immatriculation.dateRadiation ? 'Radiée' : 'Inscrite'}
+      </VerifiedTag>,
     ],
     [
       'Date d’immatriculation au RNM',

@@ -1,11 +1,11 @@
 import clientSearchSireneOuverte from '.';
-import { IUniteLegaleComplements } from '../../models/unite-legale-complements';
+import { IComplements } from '../../models/complements';
 import { Siren } from '../../utils/helpers/siren-and-siret';
 import { HttpNotFound } from '../exceptions';
 
 const clientComplementsSireneOuverte = async (
   siren: Siren
-): Promise<IUniteLegaleComplements> => {
+): Promise<IComplements> => {
   const { results } = await clientSearchSireneOuverte(siren, 1);
   if (results.length > 0) {
     const { complements, colter } = results[0];
