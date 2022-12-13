@@ -78,12 +78,10 @@ const ResultsList: React.FC<IProps> = ({
           />
           <div className="adress">
             <span>{result.siege.adresse || 'Adresse inconnue'} </span>
-            {result.nombreEtablissementsOuverts !== 1 ? (
-              <b>
-                ・{result.nombreEtablissementsOuverts || 'aucun'} établissement
-                {result.nombreEtablissementsOuverts > 1 ? 's' : ''} en activité
-              </b>
-            ) : null}
+            <b>
+              ・{result.nombreEtablissementsOuverts || 'aucun'} établissement
+              {result.nombreEtablissementsOuverts > 1 ? 's' : ''} en activité
+            </b>
           </div>
         </a>
       ))}
