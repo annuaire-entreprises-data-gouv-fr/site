@@ -19,6 +19,7 @@ export enum FICHE {
   JUSTIFICATIFS = 'justificatifs',
   ANNONCES = 'annonces',
   DIRIGEANTS = 'dirigeants',
+  RGE = 'attestations et certificats',
   ELUS = 'élus',
   COMPTES = 'bilans & comptes',
   ACTES = 'actes & statuts',
@@ -71,6 +72,13 @@ const Tabs: React.FC<{
       shouldDisplay: true,
     },
     {
+      ficheType: FICHE.RGE,
+      label: 'Attestations et certificats',
+      pathPrefix: '/reconnu-garant-environnement/',
+      noFollow: true,
+      shouldDisplay: true,
+    },
+    {
       ficheType: FICHE.DIVERS,
       label: 'Conventions collectives',
       pathPrefix: '/divers/',
@@ -95,7 +103,6 @@ const Tabs: React.FC<{
             </a>
           ))}
       </div>
-
       <style jsx>{`
         .title-tabs {
           display: flex;

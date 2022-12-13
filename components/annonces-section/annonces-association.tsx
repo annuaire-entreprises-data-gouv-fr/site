@@ -13,11 +13,11 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
-import { IAssociation } from '#models/index';
+import { IUniteLegale } from '#models/index';
 import { formatDate } from '#utils/helpers';
 
 const AnnoncesAssociationSection: React.FC<{
-  uniteLegale: IAssociation;
+  uniteLegale: IUniteLegale;
   annoncesAssociation: IAnnoncesAssociation | IAPINotRespondingError;
 }> = ({ uniteLegale, annoncesAssociation }) => {
   if (isAPINotResponding(annoncesAssociation)) {
