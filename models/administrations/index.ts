@@ -56,14 +56,14 @@ export interface IAdministrationMetaData {
   contact: string;
   site: string;
   apiMonitors?: IAPIMonitorMetaData[];
-  dataGouvLink?: string;
+  datagouv?: { label: string; link: string }[];
   data?: string[];
 }
 
 export interface IAPIMonitorMetaData {
   id: number;
-  apiGouvLink?: string;
-  dataGouvLink?: string;
+  apigouvLink?: string;
+  datagouv?: { label: string; link: string }[];
   apiName: string;
   data: string[];
 }

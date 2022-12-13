@@ -4,8 +4,10 @@ long: Ministère de l’Intérieur (MI)
 site: https://www.interieur.gouv.fr/
 contact: https://www.interieur.gouv.fr/Infos-du-site/Nous-contacter
 apiMonitors:
-  - apiGouvLink: https://api.gouv.fr/les-api/api_rna
-    dataGouvLink: https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/
+  - apigouvLink: https://api.gouv.fr/les-api/api_rna
+    datagouv:
+      - label: Répertoire National des Associations (RNA)
+        link: https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/
     apiName: API Répertoire National des Associations
     id: 788061105
     data:

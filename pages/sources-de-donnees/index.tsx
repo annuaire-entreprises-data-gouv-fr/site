@@ -16,8 +16,8 @@ import {
 
 export interface IMonitoringWithName extends IMonitoring {
   short: string;
-  apiGouvLink?: string;
-  dataGouvLink?: string;
+  apigouvLink?: string;
+  datagouv?: { label: string; link: string }[];
   slug: string;
   apiName: string;
   data?: string[];
@@ -61,7 +61,7 @@ const StatusPage: React.FC<IProps> = ({ monitors, metadata }) => (
           <div>
             {monitor.short} :{' '}
             <a href={`/sources-de-donnees/${monitor.slug}`}>
-              voir toutes les API de cette adminstration
+              voir toutes les API de cette administration
             </a>
             .
           </div>

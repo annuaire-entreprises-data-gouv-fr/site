@@ -139,8 +139,8 @@ const RobotTooltip = () => (
 
 interface IProps extends IMonitoring {
   short: string;
-  apiGouvLink?: string;
-  dataGouvLink?: string;
+  apigouvLink?: string;
+  datagouv?: { label: string; link: string }[];
   slug: string;
   apiName: string;
   data?: string[];
@@ -150,10 +150,8 @@ const ApiMonitoring: React.FC<IProps> = ({
   isOnline,
   series,
   uptime,
-  slug,
-  short,
-  apiGouvLink,
-  dataGouvLink,
+  apigouvLink,
+  datagouv,
   data,
 }) => (
   <>
@@ -242,20 +240,26 @@ const ApiMonitoring: React.FC<IProps> = ({
         ))}
       </div>
     )}
-    {(apiGouvLink || dataGouvLink) && (
+    {(apigouvLink || datagouv) && (
       <>
         Aller plus loin :{' '}
-        {apiGouvLink && (
-          <a href={apiGouvLink} target="_blank" rel="noreferrer noopener">
+        {apigouvLink && (
+          <a href={apigouvLink} target="_blank" rel="noreferrer noopener">
             voir la fiche api.gouv.fr
           </a>
         )}
-        {apiGouvLink && dataGouvLink && ' ou '}
-        {dataGouvLink && (
-          <a href={dataGouvLink} target="_blank" rel="noreferrer noopener">
-            télécharger les données sous licence ouverte sur data.gouv.fr
-          </a>
-        )}
+        {apigouvLink &&
+          datagouv &&
+          ' ou télécharger les données brutes sur data.gouv.fr : '}
+        {datagouv &&
+          datagouv.map(({ label, link }, index) => (
+            <>
+              <a href={link} target="_blank" rel="noreferrer noopener">
+                {label}
+              </a>
+              {index < datagouv.length - 1 && ', '}
+            </>
+          ))}
         .
       </>
     )}
