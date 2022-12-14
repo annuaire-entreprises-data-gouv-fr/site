@@ -5,8 +5,10 @@ long: Ministère du Travail de l’Emploi et de l’Insertion (METI)
 contact: https://travail-emploi.gouv.fr/ministere/article/nous-contacter
 apiMonitors:
   - apiName: API Conventions Collectives
-    apiGouvLink: https://api.gouv.fr/les-api/api-conventions-collectives
-    dataGouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/
+    apigouvLink: https://api.gouv.fr/les-api/api-conventions-collectives
+    datagouv:
+      - label: Liste des conventions collectives
+        link: https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/
     id: 787859521
     data:
       - Convention collective

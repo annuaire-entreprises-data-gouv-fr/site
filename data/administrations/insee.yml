@@ -5,8 +5,10 @@ logoType: portrait
 long: Institut national de la statistique et des études économiques (Insee)
 contact: https://www.insee.fr/fr/information/1302169
 apiMonitors:
-  - apiGouvLink: https://api.gouv.fr/les-api/sirene_v3
-    dataGouvLink: https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/
+  - apigouvLink: https://api.gouv.fr/les-api/sirene_v3
+    datagouv:
+      - label: Base Sirene des Entreprises
+        link: https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/
     apiName: API Répertoire Sirene
     id: 787859514
     data:

@@ -5,8 +5,10 @@ site: https://www.inpi.fr/
 logoType: portrait
 contact: https://www.inpi.fr/fr/contactez-nous?about=030
 apiMonitors:
-  - apiGouvLink: https://api.gouv.fr/les-api/api-rncs
-    dataGouvLink: https://www.data.gouv.fr/fr/organizations/institut-national-de-la-propriete-industrielle-inpi/
+  - apigouvLink: https://api.gouv.fr/les-api/api-rncs
+    datagouv:
+      - label: Immatriculations, modifications, radiations des sociétés
+        link: https://www.data.gouv.fr/fr/datasets/immatriculations-modifications-radiations-des-societes/
     apiName: API Registre National du Commerce et des Sociétés
     id: 787859523
     data:

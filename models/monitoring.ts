@@ -77,8 +77,8 @@ export const getMonitorsWithMetaData = async (
     return {
       ...monitoring,
       short: admin.short,
-      apiGouvLink: metaData.apiGouvLink || null,
-      dataGouvLink: metaData.dataGouvLink || null,
+      apigouvLink: metaData.apigouvLink || null,
+      datagouv: metaData.datagouv || null,
       apiName: metaData.apiName,
       id: metaData.id || null,
       slug: admin.slug,
