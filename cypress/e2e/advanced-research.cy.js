@@ -48,6 +48,7 @@ describe('Advanced search on page ' + path, () => {
 
     cy.contains('Situation administrative').click({ force: true });
     cy.contains('Domaine d’activité').should('be.visible');
+    cy.contains('Etat administratif').should('be.visible');
   });
 
   it('Geo filter works', () => {
@@ -82,6 +83,14 @@ describe('Advanced search on page ' + path, () => {
     cy.get('.results-list').should('have.length', 1);
 
     cy.visit(path + '?terme=Ganymede&cp_dep=35000&sap=J');
+    cy.get('.results-list').should('have.length', 0);
+  });
+
+  it('Etat administratif filters', () => {
+    cy.visit(path + '?terme=ganymede&cp_dep=&fn=&n=jouppe&etat=C');
+    cy.get('.results-list').should('have.length', 1);
+
+    cy.visit(path + '?terme=ganymede&cp_dep=&fn=&n=jouppe&etat=A');
     cy.get('.results-list').should('have.length', 0);
   });
 
