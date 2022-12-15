@@ -10,7 +10,7 @@ apiMonitors:
     datagouv:
       - label: Liste des entreprises RGE
         link: https://www.data.gouv.fr/fr/datasets/liste-des-entreprises-rge-1/
-    # id: 787859512 @TODO ADD ID UPTIME ROBOT
+    id: 793262360
     data:
       - Le recensement des professionnels RGE (Reconnu Garant de l'Environnement)
 description: |
