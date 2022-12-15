@@ -27,27 +27,29 @@ const EtablissementSection: React.FC<IProps> = ({
   withDenomination,
 }) => {
   const data = [
-    withDenomination && [
-      'Dénomination de l’unité légale',
-      uniteLegale.nomComplet,
-    ],
-    withDenomination && [
-      'Type d’établissement',
-      <>
-        {etablissement.estSiege ? (
-          <Tag className="info">siège social</Tag>
-        ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 ? (
-          <Tag>ancien siège social</Tag>
-        ) : (
-          <Tag>secondaire</Tag>
-        )}
-        {' ( '}
-        <a key="entite" href={`/entreprise/${uniteLegale.siren}`}>
-          → voir la page de l’unité légale
-        </a>
-        {' )'}
-      </>,
-    ],
+    ...(withDenomination
+      ? [
+          ['Dénomination de l’unité légale', uniteLegale.nomComplet],
+          [
+            'Type d’établissement',
+            <>
+              {etablissement.estSiege ? (
+                <Tag className="info">siège social</Tag>
+              ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) >
+                -1 ? (
+                <Tag>ancien siège social</Tag>
+              ) : (
+                <Tag>secondaire</Tag>
+              )}
+              {' ( '}
+              <a key="entite" href={`/entreprise/${uniteLegale.siren}`}>
+                → voir la page de l’unité légale
+              </a>
+              {' )'}
+            </>,
+          ],
+        ]
+      : []),
     etablissement.denomination && [
       'Nom de l’établissement',
       etablissement.denomination,
@@ -75,7 +77,9 @@ const EtablissementSection: React.FC<IProps> = ({
     ],
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
-    !usedInEntreprisePage && ['N° TVA Intracommunautaire', <TVACell />],
+    ...(!usedInEntreprisePage
+      ? [['N° TVA Intracommunautaire', <TVACell />]]
+      : []),
     [
       'Activité principale de l’unité légale (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
@@ -95,11 +99,10 @@ const EtablissementSection: React.FC<IProps> = ({
       'Avis de situation Insee',
       <AvisSituationLink siret={etablissement.siret} />,
     ],
-    etablissement.estActif === false && [
-      'Date de fermeture',
-      formatDate(etablissement.dateFermeture || ''),
-    ],
-  ] as (any[] | undefined)[];
+    ...(etablissement.estActif === false
+      ? [['Date de fermeture', formatDate(etablissement.dateFermeture || '')]]
+      : []),
+  ];
 
   return (
     <>
