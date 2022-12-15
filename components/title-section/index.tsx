@@ -1,16 +1,18 @@
 import React from 'react';
-
-import { formatIntFr } from '../../utils/helpers/formatting';
-import { Tag } from '../../components-ui/tag';
-import IsActiveTag from '../../components-ui/is-active-tag';
-import { UnitLegaleDescription } from '../unite-legale-description';
-import { isCollectiviteTerritoriale, IUniteLegale } from '../../models';
-import SocialMedia from '../../components-ui/social-media';
-import { PrintNever } from '../../components-ui/print-visibility';
-import MultipleSirenAlert from '../../components-ui/alerts/multiple-siren';
-import AssociationAdressAlert from '../../components-ui/alerts/association-adress';
-import { isAssociation } from '../../models';
-import UniteLegaleBadge from '../unite-legale-badge';
+import AssociationAdressAlert from '#components-ui/alerts/association-adress';
+import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
+import IsActiveTag from '#components-ui/is-active-tag';
+import { PrintNever } from '#components-ui/print-visibility';
+import SocialMedia from '#components-ui/social-media';
+import { Tag } from '#components-ui/tag';
+import UniteLegaleBadge from '#components/unite-legale-badge';
+import { UnitLegaleDescription } from '#components/unite-legale-description';
+import {
+  isCollectiviteTerritoriale,
+  IUniteLegale,
+  isAssociation,
+} from '#models/index';
+import { formatIntFr } from '#utils/helpers';
 
 export enum FICHE {
   INFORMATION = 'informations générales',
@@ -22,6 +24,7 @@ export enum FICHE {
   ACTES = 'actes & statuts',
   DIVERS = 'conventions collectives',
 }
+
 interface IProps {
   ficheType?: FICHE;
   uniteLegale: IUniteLegale;

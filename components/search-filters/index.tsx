@@ -1,14 +1,15 @@
 import React from 'react';
-import SelectCodeNaf from '../../components-ui/select/select-code-naf';
-import SelectCodeSectionNaf from '../../components-ui/select/select-section-naf';
-import { extractFilters, IParams } from '../../models/search-filter-params';
+import Select from '#components-ui/select';
+import SelectCodeNaf from '#components-ui/select/select-code-naf';
+import SelectCodeSectionNaf from '#components-ui/select/select-section-naf';
+import { extractFilters, IParams } from '#models/search-filter-params';
 import Filter from './filter';
 
 const SearchFilters: React.FC<{
   searchParams?: IParams;
   searchTerm?: string;
 }> = ({ searchParams = {}, searchTerm = '' }) => {
-  const { cp_dep, sap, naf, fn, n, dmin, dmax } = searchParams || {};
+  const { etat, cp_dep, sap, naf, fn, n, dmin, dmax } = searchParams || {};
 
   const { localisationFilter, dirigeantFilter, administrativeFilter } =
     extractFilters(searchParams || {});
@@ -90,6 +91,16 @@ const SearchFilters: React.FC<{
         addSaveClearButton
       >
         <div className="select">
+          <label>Etat administratif :</label>
+          <Select
+            options={[
+              { value: 'A', label: 'En activité' },
+              { value: 'C', label: 'Cessée' },
+            ]}
+            name="etat"
+            defaultValue={etat}
+            placeholder="Choisir un état administratif"
+          />
           <label>Domaine d’activité :</label>
           <SelectCodeSectionNaf
             name="sap"

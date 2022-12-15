@@ -1,8 +1,7 @@
 import React from 'react';
-import TextWrapper from '../components-ui/text-wrapper';
-
+import TextWrapper from '#components-ui/text-wrapper';
+import constants from '#models/constants';
 import Page from '../layouts';
-import constants from '../models/constants';
 
 const Accessibility: React.FC = () => {
   return (

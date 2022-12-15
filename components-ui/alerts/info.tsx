@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { information } from '../icon';
+import { information } from '#components-ui/icon';
 
 const Info: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   full = false,

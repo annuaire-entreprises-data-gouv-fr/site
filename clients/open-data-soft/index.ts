@@ -1,4 +1,4 @@
-import { httpGet } from '../../utils/network';
+import { httpGet } from '#utils/network';
 
 export interface IODSResponse {
   records: {

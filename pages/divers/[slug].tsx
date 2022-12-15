@@ -1,17 +1,16 @@
-import React from 'react';
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import Title, { FICHE } from '../../components/title-section';
-
-import ConventionCollectivesSection from '../../components/convention-collectives-section';
+import React from 'react';
+import ConventionCollectivesSection from '#components/convention-collectives-section';
+import Title, { FICHE } from '#components/title-section';
 import getConventionCollectivesFromSlug, {
   IConventions,
-} from '../../models/convention-collective';
+} from '#models/convention-collective';
+import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '../../utils/server-side-props-helper/post-server-side-props';
-import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
+} from '#utils/server-side-props-helper/post-server-side-props';
+import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata, IConventions {}
 

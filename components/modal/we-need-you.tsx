@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonLink from '../../components-ui/button';
+import ButtonLink from '#components-ui/button';
 
 export const WeNeedYouModal: React.FC<{}> = () => (
   <>

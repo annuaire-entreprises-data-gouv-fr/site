@@ -1,35 +1,35 @@
 import { readFileSync } from 'fs';
+import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
+import {
+  clientUniteLegaleInsee,
+  clientUniteLegaleInseeFallback,
+} from '#clients/sirene-insee/siren';
+import {
+  clientAllEtablissementsInsee,
+  clientAllEtablissementsInseeFallback,
+  clientSiegeInsee,
+  clientSiegeInseeFallback,
+} from '#clients/sirene-insee/siret';
+import clientUniteLegaleSireneOuverte from '#clients/sirene-ouverte/siren';
+import { getAssociation } from '#models/association';
+import {
+  createEtablissementsList,
+  IEtablissementsList,
+} from '#models/etablissements-list';
+import { getEtatAdministratifUniteLegale } from '#models/etat-administratif';
+import { Siren, verifySiren } from '#utils/helpers';
+import {
+  logFirstSireneInseefailed,
+  logSecondSireneInseefailed,
+  logSireneOuvertefailed,
+} from '#utils/sentry/helpers';
 import {
   createDefaultUniteLegale,
   IEtablissement,
   IUniteLegale,
   SirenNotFoundError,
 } from '.';
-import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
-import {
-  clientUniteLegaleInsee,
-  clientUniteLegaleInseeFallback,
-} from '../clients/sirene-insee/siren';
-import {
-  clientAllEtablissementsInsee,
-  clientAllEtablissementsInseeFallback,
-  clientSiegeInsee,
-  clientSiegeInseeFallback,
-} from '../clients/sirene-insee/siret';
-import clientUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
-import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
-import {
-  logFirstSireneInseefailed,
-  logSecondSireneInseefailed,
-  logSireneOuvertefailed,
-} from '../utils/sentry/helpers';
 import { isAssociation } from '.';
-import {
-  createEtablissementsList,
-  IEtablissementsList,
-} from './etablissements-list';
-import { getEtatAdministratifUniteLegale } from './etat-administratif';
-import { getAssociation } from './association';
 import { getComplements } from './complements';
 
 /**

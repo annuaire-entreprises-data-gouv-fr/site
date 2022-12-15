@@ -1,5 +1,5 @@
-import Logo from '../../components-ui/logo';
-import { administrationsMetaData } from '../../models/administrations';
+import Logo from '#components-ui/logo';
+import { administrationsMetaData } from '#models/administrations';
 
 const AdministrationDescription: React.FC<{
   slug: string; // EAdministration

@@ -1,6 +1,6 @@
 import React from 'react';
-import { questionFill } from '../icon';
-import { PrintNever } from '../print-visibility';
+import { questionFill } from '#components-ui/icon';
+import { PrintNever } from '#components-ui/print-visibility';
 
 export const Question: React.FC<{}> = () => (
   <PrintNever>

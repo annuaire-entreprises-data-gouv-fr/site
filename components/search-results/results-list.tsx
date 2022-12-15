@@ -1,12 +1,12 @@
 import React from 'react';
-import { ISearchResult } from '../../models/search';
-import { SearchFeedback } from '../search-feedback';
-import IsActiveTag from '../../components-ui/is-active-tag';
-import { IETATADMINSTRATIF } from '../../models/etat-administratif';
-import { isPersonneMorale } from '../dirigeants-section/rncs-dirigeants';
-import { IDirigeant } from '../../models/immatriculation/rncs';
-import UniteLegaleBadge from '../unite-legale-badge';
-import { isCollectiviteTerritoriale } from '../../models';
+import IsActiveTag from '#components-ui/is-active-tag';
+import { isPersonneMorale } from '#components/dirigeants-section/rncs-dirigeants';
+import { SearchFeedback } from '#components/search-feedback';
+import UniteLegaleBadge from '#components/unite-legale-badge';
+import { IETATADMINSTRATIF } from '#models/etat-administratif';
+import { IDirigeant } from '#models/immatriculation/rncs';
+import { isCollectiviteTerritoriale } from '#models/index';
+import { ISearchResult } from '#models/search';
 
 interface IProps {
   results: ISearchResult[];
@@ -78,12 +78,10 @@ const ResultsList: React.FC<IProps> = ({
           />
           <div className="adress">
             <span>{result.siege.adresse || 'Adresse inconnue'} </span>
-            {result.nombreEtablissementsOuverts !== 1 ? (
-              <b>
-                ・{result.nombreEtablissementsOuverts || 'aucun'} établissement
-                {result.nombreEtablissementsOuverts > 1 ? 's' : ''} en activité
-              </b>
-            ) : null}
+            <b>
+              ・{result.nombreEtablissementsOuverts || 'aucun'} établissement
+              {result.nombreEtablissementsOuverts > 1 ? 's' : ''} en activité
+            </b>
           </div>
         </a>
       ))}

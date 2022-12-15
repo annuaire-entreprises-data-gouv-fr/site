@@ -1,12 +1,12 @@
+import { HttpNotFound } from '#clients/exceptions';
+import clientComplementsSireneOuverte from '#clients/recherche-entreprise/siren';
+import { IEtatCivil } from '#models/immatriculation/rncs';
+import { Siren } from '#utils/helpers';
+import logErrorInSentry from '#utils/sentry';
 import {
   createDefaultUniteLegaleComplements,
   IUniteLegaleComplements,
 } from '.';
-import { HttpNotFound } from '../clients/exceptions';
-import clientComplementsSireneOuverte from '../clients/recherche-entreprise/siren';
-import { Siren } from '../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../utils/sentry';
-import { IEtatCivil } from './immatriculation/rncs';
 
 export interface IComplements {
   complements: IUniteLegaleComplements;

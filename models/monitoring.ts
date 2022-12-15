@@ -1,10 +1,10 @@
-import { clientMonitorings } from '../clients/monitoring';
-import logErrorInSentry from '../utils/sentry';
+import { clientMonitorings } from '#clients/monitoring';
 import {
   administrationsMetaData,
   IAdministrationMetaData,
   IAPIMonitorMetaData,
-} from './administrations';
+} from '#models/administrations';
+import logErrorInSentry from '#utils/sentry';
 
 export interface IRatio {
   ratio: string;
@@ -77,8 +77,8 @@ export const getMonitorsWithMetaData = async (
     return {
       ...monitoring,
       short: admin.short,
-      apiGouvLink: metaData.apiGouvLink || null,
-      dataGouvLink: metaData.dataGouvLink || null,
+      apigouvLink: metaData.apigouvLink || null,
+      datagouv: metaData.datagouv || null,
       apiName: metaData.apiName,
       id: metaData.id || null,
       slug: admin.slug,

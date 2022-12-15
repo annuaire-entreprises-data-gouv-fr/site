@@ -1,6 +1,6 @@
 import React from 'react';
+import { codesSectionNAF } from '#utils/labels/codes-section-NAF';
 import Select from '.';
-import { codesSectionNAF } from '../../utils/labels/codes-section-NAF';
 
 const SelectCodeSectionNaf: React.FC<{
   placeholder?: string;

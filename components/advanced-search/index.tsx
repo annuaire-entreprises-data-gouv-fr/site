@@ -1,6 +1,6 @@
-import { buildSearchQuery, IParams } from '../../models/search-filter-params';
-import SearchFilters from '../search-filters';
-import MapOrListSwitch from './map-or-list';
+import MapOrListSwitch from '#components/advanced-search/map-or-list';
+import SearchFilters from '#components/search-filters';
+import { buildSearchQuery, IParams } from '#models/search-filter-params';
 
 interface IProps {
   searchParams: IParams;

@@ -1,20 +1,18 @@
-import React from 'react';
-
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-
+import React from 'react';
+import { HttpNotFound } from '#clients/exceptions';
+import TextWrapper from '#components-ui/text-wrapper';
+import AdministrationDescription from '#components/administrations/administration-description';
 import {
   administrationsMetaData,
   EAdministration,
-} from '../../models/administrations';
-import { HttpNotFound } from '../../clients/exceptions';
-import AdministrationDescription from '../../components/administrations/administration-description';
+} from '#models/administrations';
+import { getFaqArticlesByTag, IArticle } from '#models/faq';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '../../utils/server-side-props-helper/post-server-side-props';
-import { getFaqArticlesByTag, IArticle } from '../../models/faq';
-import TextWrapper from '../../components-ui/text-wrapper';
+} from '#utils/server-side-props-helper/post-server-side-props';
+import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   administrations: {

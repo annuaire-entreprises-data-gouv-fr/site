@@ -1,7 +1,7 @@
 import React from 'react';
+import { qrCode } from 'components-ui/icon';
+import TextWrapper from 'components-ui/text-wrapper';
 import Page from '../../layouts';
-import { qrCode } from '../../components-ui/icon';
-import TextWrapper from '../../components-ui/text-wrapper';
 
 const Partager: React.FC = () => {
   return (

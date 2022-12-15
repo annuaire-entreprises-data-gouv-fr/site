@@ -1,6 +1,6 @@
-import { isAPINotResponding } from '../../models/api-not-responding';
-import { IJustificatifs } from '../../models/justificatifs';
-import { formatDateLong } from '../../utils/helpers/formatting';
+import { isAPINotResponding } from '#models/api-not-responding';
+import { IJustificatifs } from '#models/justificatifs';
+import { formatDateLong } from '#utils/helpers';
 
 const ImmatriculationSummary: React.FC<IJustificatifs> = ({
   uniteLegale,

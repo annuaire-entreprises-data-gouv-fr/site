@@ -1,8 +1,9 @@
-import { building, humanPin, mapPin } from '../components-ui/icon';
-import { libelleFromCodeNAF, libelleFromCodeSectionNaf } from '../utils/labels';
-import { IEtatCivil } from './immatriculation/rncs';
+import { building, humanPin, mapPin } from '#components-ui/icon';
+import { IEtatCivil } from '#models/immatriculation/rncs';
+import { libelleFromCodeNAF, libelleFromCodeSectionNaf } from '#utils/labels';
 
 export interface IParams {
+  etat?: string;
   sap?: string;
   naf?: string;
   cp_dep?: string;
@@ -20,6 +21,7 @@ class SearchFilterParams {
 
   constructor(query: IParams = {}) {
     const {
+      etat = '',
       sap = '',
       cp_dep = '',
       fn = '',
@@ -34,6 +36,7 @@ class SearchFilterParams {
     const realDmin = dmax && dmin && dmax < dmin ? dmax : dmin;
 
     this.params = {
+      etat,
       sap,
       //@ts-ignore
       cp_dep: isNaN(cp_dep) ? '' : cp_dep,
@@ -59,6 +62,7 @@ class SearchFilterParams {
       cp_dep.length === 3 || cp_dep.length === 2 ? cp_dep : '';
 
     return serializeParams({
+      etat_administratif: this.params.etat,
       code_postal,
       section_activite_principale: this.params.sap,
       departement,
@@ -141,7 +145,7 @@ export const extractFilters = (params: IParams) => {
     administrativeFilter: {
       icon: building,
       label: '',
-      excludeParams: ['sap', 'naf'],
+      excludeParams: ['sap', 'naf', 'etat'],
     },
     localisationFilter: {
       icon: mapPin,
@@ -166,14 +170,21 @@ export const extractFilters = (params: IParams) => {
       labelAge && labelName && ', '
     }${labelAge}`;
   }
-  if (params.sap) {
-    f.administrativeFilter.label = libelleFromCodeSectionNaf(params.sap);
+  if (params.etat) {
+    f.administrativeFilter.label = `Etat : ${
+      params.etat === 'A' ? 'en activité' : 'cessée'
+    }`;
   }
-  if (params.sap && params.naf) {
-    f.administrativeFilter.label += '・';
+  let administrativeFilterCounter = 0;
+  if (params.sap) {
+    administrativeFilterCounter += 1;
   }
   if (params.naf) {
-    f.administrativeFilter.label += libelleFromCodeNAF(params.naf);
+    administrativeFilterCounter += 1;
+  }
+
+  if (administrativeFilterCounter > 0) {
+    f.administrativeFilter.label += ` + ${administrativeFilterCounter} filtre administratif`;
   }
 
   if (params.cp_dep) {

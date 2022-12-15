@@ -1,4 +1,4 @@
-import { PrintOnly } from '../print-visibility';
+import { PrintOnly } from '#components-ui/print-visibility';
 
 const BreakPageForPrint = () => (
   <PrintOnly>

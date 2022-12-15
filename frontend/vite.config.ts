@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite';
 import autoprefixer from 'autoprefixer';
+import { defineConfig } from 'vite';
 
 const purgeConfig = {
   content: ['./**/*.tsx', './**/*.html'],

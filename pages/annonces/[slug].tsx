@@ -1,25 +1,23 @@
-import React from 'react';
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import Title, { FICHE } from '../../components/title-section';
-
+import React from 'react';
+import AnnoncesAssociationSection from '#components/annonces-section/annonces-association';
+import AnnoncesBodaccSection from '#components/annonces-section/bodacc';
+import { ComptesAssociationSection } from '#components/annonces-section/comptes-association';
+import Title, { FICHE } from '#components/title-section';
 import {
   IAnnoncesBodacc,
   IAnnoncesAssociation,
   IComptesAssociation,
-} from '../../models/annonces';
-import { IUniteLegale } from '../../models';
-import { IAPINotRespondingError } from '../../models/api-not-responding';
-import { getAnnoncesFromSlug } from '../../models/annonces';
-import AnnoncesBodaccSection from '../../components/annonces-section/bodacc';
+} from '#models/annonces';
+import { getAnnoncesFromSlug } from '#models/annonces';
+import { IAPINotRespondingError } from '#models/api-not-responding';
+import { isAssociation, IUniteLegale } from '#models/index';
+import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '../../utils/server-side-props-helper/post-server-side-props';
-import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
-import { isAssociation } from '../../models';
-import AnnoncesAssociationSection from '../../components/annonces-section/annonces-association';
-import { ComptesAssociationSection } from '../../components/annonces-section/comptes-association';
+} from '#utils/server-side-props-helper/post-server-side-props';
+import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   annoncesAssociation: IAnnoncesAssociation | IAPINotRespondingError | null;

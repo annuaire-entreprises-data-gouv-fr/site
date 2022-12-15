@@ -1,9 +1,8 @@
-import React from 'react';
-
 import { GetStaticProps } from 'next';
+import React from 'react';
+import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
+import BasicChart from '#components/chart/basic';
 import Page from '../layouts';
-import { clientMatomoStats, IMatomoStats } from '../clients/matomo';
-import BasicChart from '../components/chart/basic';
 
 const colors = [
   '#0078f3',

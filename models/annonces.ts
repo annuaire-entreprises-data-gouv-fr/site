@@ -1,18 +1,18 @@
-import clientBodacc from '../clients/open-data-soft/bodacc';
+import clientBodacc from '#clients/open-data-soft/bodacc';
 import {
   clientDCA,
   clientJOAFE,
-} from '../clients/open-data-soft/journal-officiel-associations';
-import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../utils/sentry';
-import { EAdministration } from './administrations';
+} from '#clients/open-data-soft/journal-officiel-associations';
+import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from './api-not-responding';
+} from '#models/api-not-responding';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { Siren, verifySiren } from '#utils/helpers';
+import { IdRna } from '#utils/helpers';
+import logErrorInSentry from '#utils/sentry';
 import { isAssociation } from '.';
-import { getUniteLegaleFromSlug } from './unite-legale';
-import { IdRna } from '../utils/helpers/id-rna';
 
 export interface IComptesAssociation {
   comptes: {

@@ -1,6 +1,6 @@
 import React from 'react';
+import { departements } from '#utils/labels/departements';
 import Select from '.';
-import { departements } from '../../utils/labels/departements';
 
 const SelectDepartement: React.FC<{
   placeholder?: string;

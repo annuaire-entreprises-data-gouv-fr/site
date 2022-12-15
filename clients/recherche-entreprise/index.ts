@@ -1,21 +1,22 @@
-import { ISearchResult, ISearchResults } from '../../models/search';
-import constants from '../../models/constants';
-import {
-  formatAdresse,
-  formatFirstNames,
-  parseIntWithDefaultValue,
-} from '../../utils/helpers/formatting';
-import { libelleFromCodeNAFWithoutNomenclature } from '../../utils/labels';
-import { httpGet } from '../../utils/network';
-import { HttpNotFound } from '../exceptions';
-import routes from '../routes';
-import SearchFilterParams from '../../models/search-filter-params';
-import { IEtatCivil, IPersonneMorale } from '../../models/immatriculation/rncs';
+import { HttpNotFound } from '#clients/exceptions';
+import routes from '#clients/routes';
+import constants from '#models/constants';
+import { IEtatCivil, IPersonneMorale } from '#models/immatriculation/rncs';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
-} from '../../models';
-import { verifySiren, verifySiret } from '../../utils/helpers/siren-and-siret';
+} from '#models/index';
+import { ISearchResult, ISearchResults } from '#models/search';
+import SearchFilterParams from '#models/search-filter-params';
+import {
+  verifySiren,
+  verifySiret,
+  formatAdresse,
+  formatFirstNames,
+  parseIntWithDefaultValue,
+} from '#utils/helpers';
+import { libelleFromCodeNAFWithoutNomenclature } from '#utils/labels';
+import { httpGet } from '#utils/network';
 
 interface ISireneOuverteUniteLegaleResultat {
   siren: string;

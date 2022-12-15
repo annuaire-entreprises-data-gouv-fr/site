@@ -15,13 +15,6 @@ siret.forEach((siret) => {
         expect(resp.status).to.eq(200);
       });
     });
-
-    it('/etablissement page loads', () => {
-      cy.request(`/etablissement/${siret}`).then((resp) => {
-        expect(resp.status).to.eq(200);
-      });
-    });
-
     ['annonces', 'entreprise', 'justificatif', 'divers'].map((pagePrefix) => {
       const path = `/${pagePrefix}/${siret.slice(0, 9)}`;
       it(`/${pagePrefix} page loads`, () => {
@@ -61,6 +54,6 @@ describe(`Labels and certificates`, () => {
 
   it('No certificates', () => {
     cy.visit(`/entreprise/880878145`);
-    cy.contains('Label ou certification').should('not.be.visible');
+    cy.contains('Label ou certification').should('have.length', 0);
   });
 });

@@ -5,15 +5,27 @@ site: https://numerique.gouv.fr
 contact: https://www.numerique.gouv.fr/contact/
 apiMonitors:
   - apiName: API Recherche d’entreprises
-    apiGouvLink: https://api.gouv.fr/les-api/api-recherche-entreprises
+    apigouvLink: https://api.gouv.fr/les-api/api-recherche-entreprises
+    datagouv:
+      - label: Base Sirene des Entreprises
+        link: https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/
+      - label: Immatriculations, modifications, radiations des sociétés
+        link: https://www.data.gouv.fr/fr/datasets/immatriculations-modifications-radiations-des-societes/
+      - label: Répertoire National des Élus
+        link: https://www.data.gouv.fr/fr/datasets/repertoire-national-des-elus-1/
+      - label: Liste des Entreprises RGE
+        link: https://www.data.gouv.fr/fr/datasets/liste-des-entreprises-rge-1/
     id: 787859512
     data:
-      - Algorithme de recherche des personnes morales
-      - Code Officiel Géographique
-      - Élus
+      - Recherche de dénomination
+      - Recherche d’élu
+      - Recherche de dirigeant
+      - Code Officiel Géographique des collectivités
   - apiName: API Base Adresse Nationale
-    apiGouvLink: https://api.gouv.fr/les-api/base-adresse-nationale
-    datagouvLink:
+    apigouvLink: https://api.gouv.fr/les-api/base-adresse-nationale
+    datagouv:
+      - label: Base Adresse Nationale
+        link: https://www.data.gouv.fr/fr/datasets/base-adresse-nationale/
     id: 789207932
     data:
       - Géolocalisation des adresses

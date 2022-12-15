@@ -1,6 +1,6 @@
 import React from 'react';
-import { IUniteLegale } from '../../models';
-import { formatDateLong } from '../../utils/helpers/formatting';
+import { IUniteLegale } from '#models/index';
+import { formatDateLong } from '#utils/helpers';
 
 export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,

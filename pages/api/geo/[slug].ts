@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { clientGeoCommunes } from '../../../clients/geo/communes';
-import { clientGeoDepartements } from '../../../clients/geo/departements';
-import logErrorInSentry from '../../../utils/sentry';
-import { withAPM } from '../../../utils/sentry/apm';
+import { clientGeoCommunes } from '#clients/geo/communes';
+import { clientGeoDepartements } from '#clients/geo/departements';
+import logErrorInSentry from '#utils/sentry';
+import { withAPM } from '#utils/sentry/apm';
 
 const geo = async (
   { query: { slug } }: NextApiRequest,

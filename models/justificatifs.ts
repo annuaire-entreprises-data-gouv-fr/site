@@ -1,23 +1,23 @@
-import { IUniteLegale } from '.';
-import { verifySiren } from '../utils/helpers/siren-and-siret';
+import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from './api-not-responding';
-import { getUniteLegaleFromSlug } from './unite-legale';
-import {
-  getImmatriculationRNM,
-  IImmatriculationRNM,
-} from './immatriculation/rnm';
+} from '#models/api-not-responding';
 import {
   getImmatriculationJOAFE,
   IImmatriculationJOAFE,
-} from './immatriculation/joafe';
+} from '#models/immatriculation/joafe';
 import getImmatriculationRNCS, {
   IImmatriculationRNCS,
-} from './immatriculation/rncs';
+} from '#models/immatriculation/rncs';
+import {
+  getImmatriculationRNM,
+  IImmatriculationRNM,
+} from '#models/immatriculation/rnm';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { verifySiren } from '#utils/helpers';
 import { isAssociation } from '.';
-import { EAdministration } from './administrations';
+import { IUniteLegale } from '.';
 
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;

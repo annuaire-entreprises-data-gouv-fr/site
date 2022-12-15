@@ -1,7 +1,7 @@
 import clientSearchSireneOuverte from '.';
-import { IComplements } from '../../models/complements';
-import { Siren } from '../../utils/helpers/siren-and-siret';
-import { HttpNotFound } from '../exceptions';
+import { HttpNotFound } from '#clients/exceptions';
+import { IComplements } from '#models/complements';
+import { Siren } from '#utils/helpers';
 
 const clientComplementsSireneOuverte = async (
   siren: Siren

@@ -1,12 +1,12 @@
-import { Siren } from '../../utils/helpers/siren-and-siret';
+import routes from '#clients/routes';
+import { IImmatriculationRNM } from '#models/immatriculation/rnm';
 import {
   formatAdresse,
   formatFirstNames,
   formatNameFull,
-} from '../../utils/helpers/formatting';
-import { httpGet } from '../../utils/network';
-import routes from '../routes';
-import { IImmatriculationRNM } from '../../models/immatriculation/rnm';
+  Siren,
+} from '#utils/helpers';
+import { httpGet } from '#utils/network';
 
 export interface IApiRNMResponse {
   ent_id_num_gestion: string;

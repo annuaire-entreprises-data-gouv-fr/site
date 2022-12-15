@@ -1,10 +1,10 @@
 import React from 'react';
-import { IEtablissement, IUniteLegale } from '../../models';
-import { formatSiret } from '../../utils/helpers/siren-and-siret';
+import Warning from '#components-ui/alerts/warning';
+import IsActiveTag from '#components-ui/is-active-tag';
+import { Tag } from '#components-ui/tag';
+import { IEtablissement, IUniteLegale } from '#models/index';
+import { formatSiret } from '#utils/helpers';
 import { INSEE } from '../administrations';
-import Warning from '../../components-ui/alerts/warning';
-import IsActiveTag from '../../components-ui/is-active-tag';
-import { Tag } from '../../components-ui/tag';
 
 const TitleEtablissement: React.FC<{
   uniteLegale: IUniteLegale;
@@ -52,18 +52,19 @@ const TitleEtablissementWithDenomination: React.FC<{
   etablissement: IEtablissement;
 }> = ({ uniteLegale, etablissement }) => (
   <div className="etablissement-title">
-    {etablissement.oldSiret && etablissement.oldSiret !== etablissement.siret && (
-      <Warning full>
-        Cet établissement est inscrit en double à l’
-        <INSEE /> : {formatSiret(etablissement.oldSiret)} et{' '}
-        {formatSiret(etablissement.siret)}. Pour voir les informations
-        complètes, consultez la page{' '}
-        <a href={`/etablissement/${etablissement.siret}`}>
-          {formatSiret(etablissement.siret)}
-        </a>
-        .
-      </Warning>
-    )}
+    {etablissement.oldSiret &&
+      etablissement.oldSiret !== etablissement.siret && (
+        <Warning full>
+          Cet établissement est inscrit en double à l’
+          <INSEE /> : {formatSiret(etablissement.oldSiret)} et{' '}
+          {formatSiret(etablissement.siret)}. Pour voir les informations
+          complètes, consultez la page{' '}
+          <a href={`/etablissement/${etablissement.siret}`}>
+            {formatSiret(etablissement.siret)}
+          </a>
+          .
+        </Warning>
+      )}
     <TitleEtablissement
       uniteLegale={uniteLegale}
       nomEtablissement={etablissement.enseigne || etablissement.denomination}

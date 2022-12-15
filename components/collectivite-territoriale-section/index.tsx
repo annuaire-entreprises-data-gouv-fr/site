@@ -1,10 +1,10 @@
 import React from 'react';
-import { EAdministration } from '../../models/administrations';
-import { ICollectiviteTerritoriale } from '../../models';
-import BreakPageForPrint from '../../components-ui/print-break-page';
-import HorizontalSeparator from '../../components-ui/horizontal-separator';
-import { Section } from '../section';
-import { TwoColumnTable } from '../table/simple';
+import HorizontalSeparator from '#components-ui/horizontal-separator';
+import BreakPageForPrint from '#components-ui/print-break-page';
+import { Section } from '#components/section';
+import { TwoColumnTable } from '#components/table/simple';
+import { EAdministration } from '#models/administrations';
+import { ICollectiviteTerritoriale } from '#models/index';
 
 const CollectiviteTerritorialeSection: React.FC<{
   uniteLegale: ICollectiviteTerritoriale;

@@ -1,4 +1,4 @@
-import { IUniteLegale } from '../../models';
+import { IUniteLegale } from '#models/index';
 
 export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string

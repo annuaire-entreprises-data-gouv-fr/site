@@ -1,12 +1,7 @@
+import routes from '#clients/routes';
+import { IAnnoncesAssociation, IComptesAssociation } from '#models/annonces';
+import { formatDateYear, IdRna, Siren } from '#utils/helpers';
 import odsClient from '.';
-import {
-  IAnnoncesAssociation,
-  IComptesAssociation,
-} from '../../models/annonces';
-import { formatDateYear } from '../../utils/helpers/formatting';
-import { IdRna } from '../../utils/helpers/id-rna';
-import { Siren } from '../../utils/helpers/siren-and-siret';
-import routes from '../routes';
 
 interface IJournalOfficielAssociationRecord {
   association_type: string; // 'assoLoi1901';

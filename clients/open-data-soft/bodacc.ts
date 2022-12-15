@@ -1,9 +1,8 @@
+import routes from '#clients/routes';
+import { IAnnoncesBodacc } from '#models/annonces';
+import { Siren, formatDate } from '#utils/helpers';
+import { logWarningInSentry } from '#utils/sentry';
 import odsClient from '.';
-import { IAnnoncesBodacc } from '../../models/annonces';
-import { formatDate } from '../../utils/helpers/formatting';
-import { Siren } from '../../utils/helpers/siren-and-siret';
-import { logWarningInSentry } from '../../utils/sentry';
-import routes from '../routes';
 
 type IBodaccRecords = IBodaccA | IBodaccB | IBodaccC;
 

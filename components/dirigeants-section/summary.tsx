@@ -1,6 +1,6 @@
-import { isAPINotResponding } from '../../models/api-not-responding';
-import { IDirigeants } from '../../models/dirigeants';
-import { INPI, INSEE } from '../administrations';
+import { INPI, INSEE } from '#components/administrations';
+import { isAPINotResponding } from '#models/api-not-responding';
+import { IDirigeants } from '#models/dirigeants';
 
 const DirigeantSummary: React.FC<IDirigeants> = ({
   uniteLegale,

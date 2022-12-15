@@ -1,10 +1,9 @@
 import React from 'react';
+import { EAdministration } from '#models/administrations';
+import { IEtatCivil } from '#models/immatriculation/rncs';
+import { isCollectiviteTerritoriale, IUniteLegale } from '#models/index';
 import { Section } from '../section';
-import { EAdministration } from '../../models/administrations';
-import { formatDatePartial } from '../../utils/helpers/formatting';
-import { IEtatCivil } from '../../models/immatriculation/rncs';
 import { FullTable } from '../table/full';
-import { isCollectiviteTerritoriale, IUniteLegale } from '../../models';
 
 /**
  * Elus section

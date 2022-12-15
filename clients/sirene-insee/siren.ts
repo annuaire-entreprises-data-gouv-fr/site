@@ -1,26 +1,27 @@
-import { inseeClientGet, InseeClientOptions } from '.';
+import routes from '#clients/routes';
+import { createEtablissementsList } from '#models/etablissements-list';
+import { IEtatCivil } from '#models/immatriculation/rncs';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
   createDefaultUniteLegaleComplements,
   IUniteLegale,
-} from '../../models';
-import { createEtablissementsList } from '../../models/etablissements-list';
-import { IEtatCivil } from '../../models/immatriculation/rncs';
-import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
+} from '#models/index';
 import {
   agregateTripleFields,
   formatFirstNames,
   formatNameFull,
-} from '../../utils/helpers/formatting';
-import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
+  Siren,
+  Siret,
+  isEntrepreneurIndividuelFromNatureJuridique,
+} from '#utils/helpers';
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
   libelleFromCodeNAF,
   libelleFromeCodeCategorie,
-} from '../../utils/labels';
-import routes from '../routes';
+} from '#utils/labels';
+import { inseeClientGet, InseeClientOptions } from '.';
 import {
   estActiveFromEtatAdministratifInsee,
   estDiffusibleFromStatutDiffusionInsee,

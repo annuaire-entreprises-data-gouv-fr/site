@@ -1,9 +1,8 @@
-import React from 'react';
 import { GetServerSideProps } from 'next';
-
+import React from 'react';
+import ButtonLink from '#components-ui/button';
+import MatomoEvent from '#components/matomo-event';
 import Page from '../../../layouts';
-import ButtonLink from '../../../components-ui/button';
-import MatomoEvent from '../../../components/matomo-event';
 
 const SirenOrSiretNotFoundPage = ({ slug = '' }) => {
   return (

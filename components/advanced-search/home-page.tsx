@@ -1,4 +1,4 @@
-import SearchFilters from '../search-filters';
+import SearchFilters from '#components/search-filters';
 
 const HomePageAdvancedSearch = () => (
   <div id="search-filters-container">

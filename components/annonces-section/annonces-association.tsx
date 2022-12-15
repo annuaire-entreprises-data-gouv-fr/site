@@ -1,21 +1,20 @@
 import React from 'react';
-
-import { FullTable } from '../table/full';
-import { EAdministration } from '../../models/administrations';
-import { Section } from '../section';
-import AdministrationNotResponding from '../administration-not-responding';
-import { IAssociation } from '../../models';
+import routes from '#clients/routes';
+import AssociationCreationNotFoundAlert from '#components-ui/alerts/association-creation-not-found-alert';
+import ButtonLink from '#components-ui/button';
+import { Tag } from '#components-ui/tag';
+import AdministrationNotResponding from '#components/administration-not-responding';
+import { DILA } from '#components/administrations';
+import { Section } from '#components/section';
+import { FullTable } from '#components/table/full';
+import { EAdministration } from '#models/administrations';
+import { IAnnoncesAssociation } from '#models/annonces';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '../../models/api-not-responding';
-import { IAnnoncesAssociation } from '../../models/annonces';
-import { Tag } from '../../components-ui/tag';
-import ButtonLink from '../../components-ui/button';
-import { DILA } from '../administrations';
-import routes from '../../clients/routes';
-import { formatDate } from '../../utils/helpers/formatting';
-import AssociationCreationNotFoundAlert from '../../components-ui/alerts/association-creation-not-found-alert';
+} from '#models/api-not-responding';
+import { IAssociation } from '#models/index';
+import { formatDate } from '#utils/helpers';
 
 const AnnoncesAssociationSection: React.FC<{
   uniteLegale: IAssociation;

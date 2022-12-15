@@ -1,13 +1,13 @@
+import { categoriesEntreprise } from './categories-entreprise';
 import { categoriesJuridiques } from './categories-juridiques';
-import { codesNAP } from './codes-NAP';
-import { codesNAFRev2 } from './codes-NAF-rev-2';
 import { codesNAF1993 } from './codes-NAF-1993';
 import { codesNAFRev1 } from './codes-NAF-rev-1';
+import { codesNAFRev2 } from './codes-NAF-rev-2';
+import { codesNAP } from './codes-NAP';
 import { codesEffectifs } from './codes-effectifs';
-import { codesVoies } from './codes-voie';
-import { categoriesEntreprise } from './categories-entreprise';
-import { departements } from './departements';
 import { codesSectionNAF } from './codes-section-NAF';
+import { codesVoies } from './codes-voie';
+import { departements } from './departements';
 
 export const getDepartementFromCodePostal = (codePostal: string) => {
   if (!codePostal || codePostal.length !== 5 || codePostal.startsWith('00')) {

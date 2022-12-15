@@ -1,20 +1,20 @@
 import React from 'react';
-import { IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administrations';
+import ButtonLink from '#components-ui/button';
+import { download } from '#components-ui/icon';
+import BreakPageForPrint from '#components-ui/print-break-page';
+import { PrintNever } from '#components-ui/print-visibility';
+import AdministrationNotResponding from '#components/administration-not-responding';
+import { Section } from '#components/section';
+import { TwoColumnTable } from '#components/table/simple';
+import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '../../models/api-not-responding';
-import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
-import AdministrationNotResponding from '../administration-not-responding';
-import BreakPageForPrint from '../../components-ui/print-break-page';
-import ButtonLink from '../../components-ui/button';
-import { download } from '../../components-ui/icon';
-import { Section } from '../section';
-import { TwoColumnTable } from '../table/simple';
-import { PrintNever } from '../../components-ui/print-visibility';
-import { IImmatriculationRNM } from '../../models/immatriculation/rnm';
-import { VerifiedTag } from '../../components-ui/verified-tag';
+} from '#models/api-not-responding';
+import { IImmatriculationRNM } from '#models/immatriculation/rnm';
+import { IUniteLegale } from '#models/index';
+import { formatDate, formatIntFr } from '#utils/helpers';
+import { VerifiedTag } from '#components-ui/verified-tag';
 
 interface IProps {
   immatriculation: IImmatriculationRNM | IAPINotRespondingError;

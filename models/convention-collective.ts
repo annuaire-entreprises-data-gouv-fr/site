@@ -1,6 +1,6 @@
+import clientSiret2Idcc from '#clients/siret-2-idcc';
+import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '.';
-import clientSiret2Idcc from '../clients/siret-2-idcc';
-import logErrorInSentry from '../utils/sentry';
 import { EAdministration } from './administrations';
 import {
   APINotRespondingFactory,

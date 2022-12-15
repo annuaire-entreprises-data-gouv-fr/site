@@ -1,14 +1,14 @@
 import React from 'react';
-import { IEtablissement, IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administrations';
-import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import { FullTable } from '../table/full';
-import { Section } from '../section';
-import { Tag } from '../../components-ui/tag';
-import IsActiveTag from '../../components-ui/is-active-tag';
-import AvisSituationLink from '../avis-situation-link';
-import ButtonLink from '../../components-ui/button';
-import { INSEE } from '../administrations';
+import ButtonLink from '#components-ui/button';
+import IsActiveTag from '#components-ui/is-active-tag';
+import { Tag } from '#components-ui/tag';
+import { INSEE } from '#components/administrations';
+import AvisSituationLink from '#components/avis-situation-link';
+import { Section } from '#components/section';
+import { FullTable } from '#components/table/full';
+import { EAdministration } from '#models/administrations';
+import { IEtablissement, IUniteLegale } from '#models/index';
+import { formatSiret } from '#utils/helpers';
 
 const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
   etablissements,

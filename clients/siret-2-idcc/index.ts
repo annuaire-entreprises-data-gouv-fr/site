@@ -1,6 +1,6 @@
-import { IConventionCollective } from '../../models/convention-collective';
-import { httpGet } from '../../utils/network';
-import routes from '../routes';
+import routes from '#clients/routes';
+import { IConventionCollective } from '#models/convention-collective';
+import { httpGet } from '#utils/network';
 
 /**
  * The Convention Collective API expects a list of SIRET.
