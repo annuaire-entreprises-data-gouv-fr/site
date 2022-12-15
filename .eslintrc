@@ -6,7 +6,6 @@
         "allow": ["warn", "error"]
       }
     ],
-    // no need for unique key in maps as we dont use react on client/front
     "import/order": [
       "error",
       {
@@ -54,6 +53,7 @@
     "@next/next/no-html-link-for-pages": "off",
     "@next/next/no-img-element": "off",
     "@next/next/no-sync-scripts": "off",
+    // no need for unique key in maps as we dont use react on client/front
     "react/jsx-key": "off",
     "react/no-children-prop": "off"
   },
