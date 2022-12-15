@@ -2,13 +2,13 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import { CertificationsRGESection } from '#components/certifications-rge-section';
 import Title, { FICHE } from '#components/title-section';
-import { getAnnoncesFromSlug } from '#models/annonces';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
   getRGECertificationsFromSlug,
   IRGECompanyCertifications,
-} from '#models/garant-environement';
+} from '#models/certifications';
 import { IUniteLegale } from '#models/index';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -29,12 +29,12 @@ const RGE: React.FC<IProps> = ({
   return (
     <Page
       small={true}
-      title={`Annonces légales (BODACC) - ${uniteLegale.nomComplet}`}
+      title={`Labels et certifications - ${uniteLegale.nomComplet}`}
       noIndex={true}
       isBrowserOutdated={metadata.isBrowserOutdated}
     >
       <div className="content-container">
-        <Title ficheType={FICHE.RGE} uniteLegale={uniteLegale} />
+        <Title ficheType={FICHE.CERTIFICATS} uniteLegale={uniteLegale} />
         <CertificationsRGESection
           uniteLegale={uniteLegale}
           certificationsRGE={certificationsRGE}
@@ -47,7 +47,7 @@ const RGE: React.FC<IProps> = ({
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
-    const { uniteLegale } = await getAnnoncesFromSlug(slug);
+    const uniteLegale = await getUniteLegaleFromSlug(slug);
     const certificationsRGE = await getRGECertificationsFromSlug(slug);
     return {
       props: {

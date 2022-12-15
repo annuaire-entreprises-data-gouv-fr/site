@@ -9,7 +9,7 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IImmatriculationJOAFE } from '#models/immatriculation/joafe';
-import { IUniteLegale } from '#models/index';
+import { IAssociation } from '#models/index';
 import { formatDate, formatIntFr } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
 import { Section } from '../section';
@@ -17,13 +17,9 @@ import { TwoColumnTable } from '../table/simple';
 
 interface IProps {
   immatriculation: IImmatriculationJOAFE | IAPINotRespondingError;
-  uniteLegale: IUniteLegale;
 }
 
-const ImmatriculationJOAFE: React.FC<IProps> = ({
-  immatriculation,
-  uniteLegale,
-}) => {
+const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
   if (isAPINotResponding(immatriculation)) {
     if (immatriculation.errorType === 404) {
       return null;

@@ -1,15 +1,10 @@
 import routes from '#clients/routes';
 import {
   IRGECompanyCertifications,
-  NomCertificat,
-} from '#models/garant-environement';
+  INomCertificat,
+} from '#models/certifications';
 import { Siren, Siret } from '#utils/helpers';
 import { httpGet } from '#utils/network';
-
-/*
- * Reconnu Garant de l'Environnement (RGE)
- * https://france-renov.gouv.fr/annuaire-rge
- */
 
 export enum WORKING_WITH_ENUM {
   PROFESSIONAL = 'PROFESSIONAL',
@@ -24,7 +19,7 @@ interface IRGEResponse {
     commune: string;
     domaine: string;
     email: string;
-    nom_certificat: NomCertificat;
+    nom_certificat: INomCertificat;
     nom_entreprise: string;
     nom_qualification: string;
     organisme: string;
@@ -36,23 +31,18 @@ interface IRGEResponse {
   }[];
 }
 
-const clientRGE = async (
-  siren: Siren,
-  useCache = true
-): Promise<IRGECompanyCertifications | {}> => {
-  const route = routes.rge.lines;
-  const response = await httpGet(
-    route,
-    { params: { qs: `siret:${siren}*` } },
-    useCache
-  );
+/**
+ * Reconnu Garant de l'Environnement (RGE)
+ * https://france-renov.gouv.fr/annuaire-rge
+ */
+const clientRGE = async (siren: Siren): Promise<IRGECompanyCertifications> => {
+  const route = routes.certifications.rge;
+  const response = await httpGet(route, { params: { qs: `siret:${siren}*` } });
 
   return mapToDomainObject(response.data as IRGEResponse);
 };
 
-export const mapToDomainObject = (
-  rge: IRGEResponse
-): IRGECompanyCertifications => {
+const mapToDomainObject = (rge: IRGEResponse): IRGECompanyCertifications => {
   if (!rge.results.length) {
     return {
       companyInfo: null,
@@ -106,7 +96,6 @@ export const mapToDomainObject = (
         organisme,
         url_qualification,
       } = result;
-
       certifications.push({
         codeQualification: code_qualification,
         domaines: [domaine],

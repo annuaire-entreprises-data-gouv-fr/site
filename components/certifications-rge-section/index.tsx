@@ -9,7 +9,7 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
-import { IRGECompanyCertifications } from '#models/garant-environement';
+import { IRGECompanyCertifications } from '#models/certifications';
 import { IUniteLegale } from '#models/index';
 import { formatIntFr } from '#utils/helpers';
 import { certificatLogo } from './map-certicat-to-logo';

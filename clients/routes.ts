@@ -50,9 +50,8 @@ const routes = {
     tracker: 'https://stats.data.gouv.fr/piwik.php',
   },
   monitoring: 'https://api.uptimerobot.com/v2/getMonitors',
-  rge: {
-    lines:
-      'https://data.ademe.fr/data-fair/api/v1/datasets/liste-des-entreprises-rge-2/lines/',
+  certifications: {
+    rge: 'https://data.ademe.fr/data-fair/api/v1/datasets/liste-des-entreprises-rge-2/lines/',
   },
   rna: {
     id: 'https://entreprise.data.gouv.fr/api/rna/v1/id/',

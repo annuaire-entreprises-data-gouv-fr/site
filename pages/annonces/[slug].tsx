@@ -11,7 +11,7 @@ import {
 } from '#models/annonces';
 import { getAnnoncesFromSlug } from '#models/annonces';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { isAssociation, IUniteLegale } from '#models/index';
+import { IAssociation, isAssociation, IUniteLegale } from '#models/index';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -47,13 +47,13 @@ const Annonces: React.FC<IProps> = ({
           <>
             {annoncesAssociation && (
               <AnnoncesAssociationSection
-                uniteLegale={uniteLegale}
+                association={uniteLegale}
                 annoncesAssociation={annoncesAssociation}
               />
             )}
             {comptesAssociation && (
               <ComptesAssociationSection
-                uniteLegale={uniteLegale}
+                association={uniteLegale}
                 comptesAssociation={comptesAssociation}
               />
             )}
@@ -69,7 +69,6 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const { slug } = extractParamsFromContext(context);
     const { uniteLegale, bodacc, comptesAssociation, annoncesAssociation } =
       await getAnnoncesFromSlug(slug);
-
     return {
       props: {
         annoncesAssociation,

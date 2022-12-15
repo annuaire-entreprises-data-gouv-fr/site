@@ -7,9 +7,10 @@ contact: https://www.ademe.fr/contact/
 apiMonitors:
   - apiName: API Professionnels RGE
     apiGouvLink: https://api.gouv.fr/les-api/api_professionnels_rge
-    dataGouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-entreprises-rge-1/
-    # id: 787859525
-    # TODO UPDATE ID WITH UPTIME ROBOT ?
+    datagouv:
+      - label: Liste des entreprises RGE
+        link: https://www.data.gouv.fr/fr/datasets/liste-des-entreprises-rge-1/
+    # id: 787859512 @TODO ADD ID UPTIME ROBOT
     data:
       - Le recensement des professionnels RGE (Reconnu Garant de l'Environnement)
 description: |

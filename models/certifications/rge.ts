@@ -7,7 +7,7 @@ import {
 import { Siret, verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 
-export type NomCertificat =
+export type INomCertificat =
   | 'QUALIBAT-RGE'
   | 'QualiPAC Chauffage'
   | 'Qualibois module Eau'
@@ -39,7 +39,7 @@ export interface IRGECompanyCertifications {
   } | null;
   certifications: {
     codeQualification: string;
-    nomCertificat: NomCertificat;
+    nomCertificat: INomCertificat;
     domaines: string[];
     nomQualification: string;
     organisme: string;
@@ -47,7 +47,7 @@ export interface IRGECompanyCertifications {
   }[];
 }
 
-const getRGECertificationsFromSlug = async (
+export const getRGECertificationsFromSlug = async (
   slug: string
 ): Promise<IRGECompanyCertifications | IAPINotRespondingError | {}> => {
   const siren = verifySiren(slug);
@@ -61,5 +61,3 @@ const getRGECertificationsFromSlug = async (
     return APINotRespondingFactory(EAdministration.ADEME, 500);
   }
 };
-
-export { getRGECertificationsFromSlug };

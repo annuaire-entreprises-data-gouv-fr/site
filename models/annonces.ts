@@ -13,6 +13,7 @@ import { Siren, verifySiren } from '#utils/helpers';
 import { IdRna } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { isAssociation } from '.';
+import { getAssociation } from './association';
 
 export interface IComptesAssociation {
   comptes: {
@@ -61,6 +62,7 @@ const getAnnoncesFromSlug = async (siren: string) => {
   ]);
 
   let annoncesAssociation = null;
+  let association = null;
   let comptesAssociation = null;
 
   if (isAssociation(uniteLegale)) {
@@ -77,10 +79,10 @@ const getAnnoncesFromSlug = async (siren: string) => {
   }
 
   return {
+    annoncesAssociation,
     bodacc,
     comptesAssociation,
     uniteLegale,
-    annoncesAssociation,
   };
 };
 
