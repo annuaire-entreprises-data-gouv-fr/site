@@ -1,8 +1,15 @@
 import React from 'react';
-import { IUniteLegale } from '../../models';
-import { facebook, linkedin, qrCode, twitter, print, mail } from '../icon';
-import InformationTooltip from '../information-tooltip';
-import { PrintNever } from '../print-visibility';
+import {
+  facebook,
+  linkedin,
+  qrCode,
+  twitter,
+  print,
+  mail,
+} from '#components-ui/icon';
+import InformationTooltip from '#components-ui/information-tooltip';
+import { PrintNever } from '#components-ui/print-visibility';
+import { IUniteLegale } from '#models/index';
 
 const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale: { siren, nomComplet },

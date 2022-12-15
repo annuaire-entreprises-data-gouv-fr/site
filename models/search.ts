@@ -1,13 +1,18 @@
+import { HttpNotFound } from '#clients/exceptions';
+import clientSearchSireneOuverte from '#clients/recherche-entreprise';
+import { EAdministration } from '#models/administrations';
+import { APINotRespondingFactory } from '#models/api-not-responding';
+import { IDirigeant } from '#models/immatriculation/rncs';
+import SearchFilterParams, {
+  hasSearchParam,
+} from '#models/search-filter-params';
+import {
+  cleanSearchTerm,
+  escapeTerm,
+  isLikelyASiretOrSiren,
+} from '#utils/helpers';
+import logErrorInSentry from '#utils/sentry';
 import { IsLikelyASirenOrSiretException, IUniteLegale } from '.';
-import { HttpNotFound } from '../clients/exceptions';
-import clientSearchSireneOuverte from '../clients/recherche-entreprise';
-import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
-import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../utils/sentry';
-import { EAdministration } from './administrations';
-import { APINotRespondingFactory } from './api-not-responding';
-import { IDirigeant } from './immatriculation/rncs';
-import SearchFilterParams, { hasSearchParam } from './search-filter-params';
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;

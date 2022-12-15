@@ -1,6 +1,6 @@
-import { INSEE, MI } from '../../components/administrations';
+import { INSEE, MI } from '#components/administrations';
+import { IAssociation } from '#models/index';
 import Warning from './warning';
-import { IAssociation } from '../../models';
 
 const AssociationAdressAlert: React.FC<{ uniteLegale: IAssociation }> = ({
   uniteLegale,

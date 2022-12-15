@@ -1,17 +1,19 @@
-import { createDefaultUniteLegale, IUniteLegale } from '../../models';
-import constants from '../../models/constants';
-import { createEtablissementsList } from '../../models/etablissements-list';
-import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
-import { Siren } from '../../utils/helpers/siren-and-siret';
+import { HttpNotFound, HttpServerError } from '#clients/exceptions';
+import routes from '#clients/routes';
+import constants from '#models/constants';
+import { createEtablissementsList } from '#models/etablissements-list';
+import { createDefaultUniteLegale, IUniteLegale } from '#models/index';
+import {
+  isEntrepreneurIndividuelFromNatureJuridique,
+  Siren,
+} from '#utils/helpers';
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
   libelleFromCodeNAF,
   libelleFromeCodeCategorie,
-} from '../../utils/labels';
-import { httpGet } from '../../utils/network';
-import { HttpNotFound, HttpServerError } from '../exceptions';
-import routes from '../routes';
+} from '#utils/labels';
+import { httpGet } from '#utils/network';
 import {
   ISireneOuverteEtablissement,
   mapSireneOuverteEtablissementToDomainObject,

@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import oauth from 'axios-oauth-client';
 import tokenProvider from 'axios-token-interceptor';
-import { HttpServerError } from '../../clients/exceptions';
-import constants from '../../models/constants';
+import { HttpServerError } from '#clients/exceptions';
+import constants from '#models/constants';
 import {
   defaultAxiosInstanceFactory,
   cachedAxiosInstanceFactory,

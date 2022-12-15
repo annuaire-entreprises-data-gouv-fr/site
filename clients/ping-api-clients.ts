@@ -1,13 +1,12 @@
-import { verifyIdRna } from '../utils/helpers/id-rna';
-import { verifySiren } from '../utils/helpers/siren-and-siret';
-import clientSearchSireneOuverte from './recherche-entreprise';
-import { clientRNA } from './rna';
-import { fetchRNCSImmatriculationNoCache } from './rncs';
-import { clientRNM } from './rnm';
-import { clientUniteLegaleInseeNoCache } from './sirene-insee/siren';
-import clientUniteLegaleSireneOuverte from './sirene-ouverte/siren';
-import clientSiret2Idcc from './siret-2-idcc';
-import { clientTVA } from './tva';
+import clientSearchSireneOuverte from '#clients/recherche-entreprise';
+import { clientRNA } from '#clients/rna';
+import { fetchRNCSImmatriculationNoCache } from '#clients/rncs';
+import { clientRNM } from '#clients/rnm';
+import { clientUniteLegaleInseeNoCache } from '#clients/sirene-insee/siren';
+import clientUniteLegaleSireneOuverte from '#clients/sirene-ouverte/siren';
+import clientSiret2Idcc from '#clients/siret-2-idcc';
+import { clientTVA } from '#clients/tva';
+import { verifyIdRna, verifySiren } from '#utils/helpers';
 
 export class APISlugNotFound extends Error {
   constructor(public status: number, public message: string) {

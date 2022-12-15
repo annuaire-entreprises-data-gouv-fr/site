@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-
 import nextConnect from 'next-connect';
-import { logEventInMatomo } from '../../../utils/analytics/matomo';
-import logErrorInSentry from '../../../utils/sentry';
+import { logEventInMatomo } from '#utils/analytics/matomo';
+import logErrorInSentry from '#utils/sentry';
 
 const logSearchNps = async (req: NextApiRequest) => {
   try {

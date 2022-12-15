@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import logErrorInSentry from '../../../../utils/sentry';
+import logErrorInSentry from '#utils/sentry';
 
 const button = (
   { query: { slug = '', light = '' } }: NextApiRequest,

@@ -1,26 +1,26 @@
 import React from 'react';
-import { Section } from '../section';
-import { EAdministration } from '../../models/administrations';
+import routes from '#clients/routes';
+import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
+import AdministrationNotResponding from '#components/administration-not-responding';
+import { INPI } from '#components/administrations';
+import { Section } from '#components/section';
+import { FullTable } from '#components/table/full';
+import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '../../models/api-not-responding';
-import AdministrationNotResponding from '../administration-not-responding';
-import {
-  formatDate,
-  formatDatePartial,
-  formatIntFr,
-} from '../../utils/helpers/formatting';
-import routes from '../../clients/routes';
-import { Siren } from '../../utils/helpers/siren-and-siret';
-import { INPI } from '../administrations';
+} from '#models/api-not-responding';
 import {
   IEtatCivil,
   IImmatriculationRNCS,
   IPersonneMorale,
-} from '../../models/immatriculation/rncs';
-import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
-import { FullTable } from '../table/full';
+} from '#models/immatriculation/rncs';
+import {
+  formatDate,
+  formatDatePartial,
+  formatIntFr,
+  Siren,
+} from '#utils/helpers';
 
 /**
  * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts

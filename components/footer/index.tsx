@@ -1,6 +1,6 @@
 import React from 'react';
-import Logo from '../../components-ui/logo';
-import { administrationsMetaData } from '../../models/administrations';
+import Logo from '#components-ui/logo';
+import { administrationsMetaData } from '#models/administrations';
 
 const Footer = () => (
   <footer className="fr-footer" role="contentinfo" id="footer">

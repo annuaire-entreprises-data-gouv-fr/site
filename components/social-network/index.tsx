@@ -1,4 +1,4 @@
-import { PrintNever } from '../../components-ui/print-visibility';
+import { PrintNever } from '#components-ui/print-visibility';
 
 const SocialNetworks = () => (
   <PrintNever>

@@ -1,5 +1,5 @@
-import { NotEnoughParamsIllustration } from '../../components-ui/illustration';
-import { getFaqArticlesByTag } from '../../models/faq';
+import { NotEnoughParamsIllustration } from '#components-ui/illustration';
+import { getFaqArticlesByTag } from '#models/faq';
 
 export const NotEnoughParams = () => {
   const articles = getFaqArticlesByTag(['search']);

@@ -1,23 +1,21 @@
-import React from 'react';
-
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import Title, { FICHE } from '../../components/title-section';
-
+import React from 'react';
+import BreakPageForPrint from '#components-ui/print-break-page';
+import BeneficiairesSection from '#components/dirigeants-section/beneficiaires';
+import DirigeantsEntrepriseIndividuelleSection from '#components/dirigeants-section/insee-dirigeant';
+import DirigeantsSection from '#components/dirigeants-section/rncs-dirigeants';
+import DirigeantSummary from '#components/dirigeants-section/summary';
+import Title, { FICHE } from '#components/title-section';
 import {
   getDirigeantsWithUniteLegaleFromSlug,
   IDirigeants,
-} from '../../models/dirigeants';
-import DirigeantsEntrepriseIndividuelleSection from '../../components/dirigeants-section/insee-dirigeant';
-import DirigeantsSection from '../../components/dirigeants-section/rncs-dirigeants';
-import BeneficiairesSection from '../../components/dirigeants-section/beneficiaires';
-import DirigeantSummary from '../../components/dirigeants-section/summary';
-import BreakPageForPrint from '../../components-ui/print-break-page';
+} from '#models/dirigeants';
+import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '../../utils/server-side-props-helper/post-server-side-props';
-import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
+} from '#utils/server-side-props-helper/post-server-side-props';
+import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata, IDirigeants {}
 

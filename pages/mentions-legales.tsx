@@ -1,8 +1,7 @@
-import React from 'react';
 import { NextPage } from 'next';
-
+import React from 'react';
+import TextWrapper from '#components-ui/text-wrapper';
 import Page from '../layouts/page';
-import TextWrapper from '../components-ui/text-wrapper';
 
 const Privacy: NextPage = () => (
   <Page title="Politique de confidentialité" noIndex={true}>

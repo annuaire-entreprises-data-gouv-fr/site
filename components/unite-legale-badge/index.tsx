@@ -4,13 +4,13 @@ import {
   user,
   administrationFill,
   collectiviteFill,
-} from '../../components-ui/icon';
+} from '#components-ui/icon';
 import {
   isServicePublic,
   isAssociation,
   isCollectiviteTerritoriale,
   IUniteLegale,
-} from '../../models';
+} from '#models/index';
 
 const determineType = (uniteLegale: IUniteLegale) => {
   if (isAssociation(uniteLegale)) {

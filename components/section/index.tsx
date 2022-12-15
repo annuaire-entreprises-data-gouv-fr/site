@@ -1,15 +1,14 @@
 import React, { PropsWithChildren } from 'react';
+import Warning from '#components-ui/alerts/warning';
+import { questionnaire } from '#components-ui/icon';
+import DataSourcesTooltip from '#components-ui/information-tooltip/data-sources-tooltip';
+import Logo from '#components-ui/logo';
+import { PrintNever } from '#components-ui/print-visibility';
 import {
   administrationsMetaData,
   EAdministration,
-} from '../../models/administrations';
-import { isTwoMonthOld } from '../../utils/helpers/checks';
-import { formatDate, formatDateLong } from '../../utils/helpers/formatting';
-import Warning from '../../components-ui/alerts/warning';
-import DataSourcesTooltip from '../../components-ui/information-tooltip/data-sources-tooltip';
-import { questionnaire } from '../../components-ui/icon';
-import { PrintNever } from '../../components-ui/print-visibility';
-import Logo from '../../components-ui/logo';
+} from '#models/administrations';
+import { formatDate, isTwoMonthOld, formatDateLong } from '#utils/helpers';
 
 interface ISectionProps {
   title: string;

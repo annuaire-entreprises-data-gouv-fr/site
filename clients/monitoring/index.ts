@@ -1,10 +1,10 @@
-import { IMonitoring } from '../../models/monitoring';
-import httpClient from '../../utils/network';
 import FormData from 'form-data';
-import routes from '../routes';
+import routes from '#clients/routes';
+import { allMonitoringIds } from '#models/administrations';
+import constants from '#models/constants';
+import { IMonitoring } from '#models/monitoring';
+import httpClient from '#utils/network';
 import { DailyUptimeRatioConverter } from './series';
-import { allMonitoringIds } from '../../models/administrations';
-import constants from '../../models/constants';
 
 export interface IMonitorLog {
   id?: number;

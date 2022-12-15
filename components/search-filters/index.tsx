@@ -1,8 +1,8 @@
 import React from 'react';
-import Select from '../../components-ui/select';
-import SelectCodeNaf from '../../components-ui/select/select-code-naf';
-import SelectCodeSectionNaf from '../../components-ui/select/select-section-naf';
-import { extractFilters, IParams } from '../../models/search-filter-params';
+import Select from '#components-ui/select';
+import SelectCodeNaf from '#components-ui/select/select-code-naf';
+import SelectCodeSectionNaf from '#components-ui/select/select-section-naf';
+import { extractFilters, IParams } from '#models/search-filter-params';
 import Filter from './filter';
 
 const SearchFilters: React.FC<{

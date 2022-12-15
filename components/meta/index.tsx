@@ -1,9 +1,8 @@
-import React from 'react';
+import { NextSeo } from 'next-seo';
 import Head from 'next/head';
+import React from 'react';
 
 //@ts-ignore
-
-import { NextSeo } from 'next-seo';
 
 interface IProps {
   title: string;

@@ -1,9 +1,8 @@
-import React from 'react';
 import { NextPage } from 'next';
-
+import React from 'react';
+import TextWrapper from '#components-ui/text-wrapper';
+import { CMA, DILA, INPI, INSEE } from '#components/administrations';
 import Page from '../layouts/page';
-import { CMA, DILA, INPI, INSEE } from '../components/administrations';
-import TextWrapper from '../components-ui/text-wrapper';
 
 const Privacy: NextPage = () => (
   <Page title="Politique de confidentialité" noIndex={true}>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { IEtablissement, IUniteLegale } from '../../models';
-import { formatDateLong } from '../../utils/helpers/formatting';
+import { IEtablissement, IUniteLegale } from '#models/index';
+import { formatDateLong } from '#utils/helpers';
 
 interface IProps {
   etablissement: IEtablissement;

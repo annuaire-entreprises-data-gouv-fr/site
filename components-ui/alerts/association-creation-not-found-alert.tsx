@@ -1,7 +1,7 @@
 import React from 'react';
-import routes from '../../clients/routes';
-import { IAssociation } from '../../models';
-import { formatIntFr } from '../../utils/helpers/formatting';
+import routes from '#clients/routes';
+import { IAssociation } from '#models/index';
+import { formatIntFr } from '#utils/helpers';
 import Warning from './warning';
 
 const AssociationCreationNotFoundAlert: React.FC<{

@@ -1,6 +1,6 @@
-import { httpGet } from '../../utils/network';
-import logErrorInSentry from '../../utils/sentry';
-import routes from '../routes';
+import routes from '#clients/routes';
+import { httpGet } from '#utils/network';
+import logErrorInSentry from '#utils/sentry';
 
 export interface IMatomoStats {
   visits: {

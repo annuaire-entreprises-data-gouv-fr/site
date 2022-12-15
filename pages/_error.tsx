@@ -1,9 +1,8 @@
-import React from 'react';
-
-import Page from '../layouts';
-import { ServerErrorExplanations } from '../components/error-explanations';
-import logErrorInSentry from '../utils/sentry';
 import { IncomingMessage } from 'http';
+import React from 'react';
+import { ServerErrorExplanations } from '#components/error-explanations';
+import logErrorInSentry from '#utils/sentry';
+import Page from '../layouts';
 
 const ServerError = () => {
   return (

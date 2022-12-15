@@ -1,6 +1,6 @@
-import { IUniteLegale } from '../../models';
-import { formatIntFr } from '../../utils/helpers/formatting';
-import { INSEE } from '../../components/administrations';
+import { INSEE } from '#components/administrations';
+import { IUniteLegale } from '#models/index';
+import { formatIntFr } from '#utils/helpers';
 import Warning from './warning';
 
 const MultipleSirenAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({

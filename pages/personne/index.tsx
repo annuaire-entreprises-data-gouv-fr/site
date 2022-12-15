@@ -1,20 +1,19 @@
-import React from 'react';
-
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
-import search, { ISearchResults } from '../../models/search';
-import StructuredDataSearchAction from '../../components/structured-data/search';
-import SearchFilterParams, { IParams } from '../../models/search-filter-params';
+import React from 'react';
+import ButtonLink from '#components-ui/button';
+import HorizontalSeparator from '#components-ui/horizontal-separator';
+import ResultsList from '#components/search-results/results-list';
+import PageCounter from '#components/search-results/results-pagination';
+import StructuredDataSearchAction from '#components/structured-data/search';
+import { IEtatCivil } from '#models/immatriculation/rncs';
+import search, { ISearchResults } from '#models/search';
+import SearchFilterParams, { IParams } from '#models/search-filter-params';
+import { parseIntWithDefaultValue } from '#utils/helpers';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '../../utils/server-side-props-helper/post-server-side-props';
-import { IEtatCivil } from '../../models/immatriculation/rncs';
-import ResultsList from '../../components/search-results/results-list';
-import PageCounter from '../../components/search-results/results-pagination';
-import HorizontalSeparator from '../../components-ui/horizontal-separator';
-import ButtonLink from '../../components-ui/button';
+} from '#utils/server-side-props-helper/post-server-side-props';
+import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   results: ISearchResults;

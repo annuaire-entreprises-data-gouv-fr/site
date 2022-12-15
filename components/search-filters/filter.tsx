@@ -1,11 +1,11 @@
 import { PropsWithChildren } from 'react';
-import ButtonLink from '../../components-ui/button';
+import ButtonLink from '#components-ui/button';
 import {
   buildSearchQuery,
   IParams,
   ISearchFilter,
-} from '../../models/search-filter-params';
-import randomId from '../../utils/helpers/randomId';
+} from '#models/search-filter-params';
+import { randomId } from '#utils/helpers';
 import ActiveFilterLabel from './active-filter-label';
 
 const Filter: React.FC<

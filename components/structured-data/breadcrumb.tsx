@@ -1,10 +1,10 @@
 import React from 'react';
-import { IUniteLegale } from '../../models';
-import { getUrlFromDep } from '../../seo-scripts/page-tree-render';
+import { IUniteLegale } from '#models/index';
 import {
   getDepartementFromCodePostal,
   libelleFromDepartement,
-} from '../../utils/labels';
+} from '#utils/labels';
+import { getUrlFromDep } from '../../seo-scripts/page-tree-render';
 
 const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,

@@ -1,20 +1,19 @@
-import React from 'react';
-
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import { IEtablissement, IUniteLegale } from '../../models';
-import EtablissementSection from '../../components/etablissement-section';
-import Title, { FICHE } from '../../components/title-section';
-import { NonDiffusibleSection } from '../../components/non-diffusible';
-import { getEtablissementWithUniteLegaleFromSlug } from '../../models/etablissement';
-import { TitleEtablissementWithDenomination } from '../../components/title-etablissement-section';
-import { shouldNotIndex } from '../../utils/helpers/checks';
-import MatomoEventRedirected from '../../components/matomo-event/search-redirected';
+import React from 'react';
+import { shouldNotIndex } from '#utils/helpers';
+import EtablissementSection from 'components/etablissement-section';
+import MatomoEventRedirected from 'components/matomo-event/search-redirected';
+import { NonDiffusibleSection } from 'components/non-diffusible';
+import { TitleEtablissementWithDenomination } from 'components/title-etablissement-section';
+import Title, { FICHE } from 'components/title-section';
+import { getEtablissementWithUniteLegaleFromSlug } from 'models/etablissement';
+import { IEtablissement, IUniteLegale } from 'models/index';
+import extractParamsFromContext from 'utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '../../utils/server-side-props-helper/post-server-side-props';
-import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
+} from 'utils/server-side-props-helper/post-server-side-props';
+import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   etablissement: IEtablissement;

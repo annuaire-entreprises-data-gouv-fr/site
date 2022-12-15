@@ -1,15 +1,14 @@
-import { IImmatriculation } from '.';
-import { NotAValidIdRnaError } from '..';
-import { HttpNotFound } from '../../clients/exceptions';
-import { clientJOAFE } from '../../clients/open-data-soft/journal-officiel-associations';
-import { IdRna, verifyIdRna } from '../../utils/helpers/id-rna';
-import { Siren } from '../../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../../utils/sentry';
-import { EAdministration } from '../administrations';
+import { HttpNotFound } from '#clients/exceptions';
+import { clientJOAFE } from '#clients/open-data-soft/journal-officiel-associations';
+import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from '../api-not-responding';
+} from '#models/api-not-responding';
+import { IdRna, verifyIdRna, Siren } from '#utils/helpers';
+import logErrorInSentry from '#utils/sentry';
+import { IImmatriculation } from '.';
+import { NotAValidIdRnaError } from '..';
 
 export interface IImmatriculationJOAFE extends IImmatriculation {
   siren: Siren;

@@ -1,7 +1,6 @@
 import React from 'react';
-import AvisSituationLink from '../../components/avis-situation-link';
-import { isServicePublic, IUniteLegale } from '../../models';
-import { isAssociation } from '../../models';
+import AvisSituationLink from '#components/avis-situation-link';
+import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
 import AssociationCreationNotFoundAlert from './association-creation-not-found-alert';
 import Info from './info';
 

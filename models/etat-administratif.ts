@@ -1,5 +1,5 @@
+import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '.';
-import logErrorInSentry from '../utils/sentry';
 
 export enum IETATADMINSTRATIF {
   INCONNU = 'inconnu',

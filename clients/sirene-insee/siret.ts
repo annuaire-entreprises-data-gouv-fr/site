@@ -1,23 +1,21 @@
-import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
-import { inseeClientGet, InseeClientOptions } from '.';
-import constants from '../../models/constants';
-import { createDefaultEtablissement, IEtablissement } from '../../models';
-import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
-import {
-  libelleFromCodeEffectif,
-  libelleFromCodeNAF,
-} from '../../utils/labels';
-import { HttpNotFound, HttpServerError } from '../exceptions';
-import routes from '../routes';
-import {
-  formatAdresse,
-  agregateTripleFields,
-} from '../../utils/helpers/formatting';
-import { getEtatAdministratifEtablissement } from '../../models/etat-administratif';
+import { HttpNotFound, HttpServerError } from '#clients/exceptions';
+import routes from '#clients/routes';
+import constants from '#models/constants';
 import {
   createEtablissementsList,
   IEtablissementsList,
-} from '../../models/etablissements-list';
+} from '#models/etablissements-list';
+import { getEtatAdministratifEtablissement } from '#models/etat-administratif';
+import { createDefaultEtablissement, IEtablissement } from '#models/index';
+import {
+  formatAdresse,
+  agregateTripleFields,
+  Siren,
+  Siret,
+  extractSirenFromSiret,
+} from '#utils/helpers';
+import { libelleFromCodeEffectif, libelleFromCodeNAF } from '#utils/labels';
+import { inseeClientGet, InseeClientOptions } from '.';
 import {
   estActiveFromEtatAdministratifInsee,
   estDiffusibleFromStatutDiffusionInsee,

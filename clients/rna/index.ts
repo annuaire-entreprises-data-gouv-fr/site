@@ -1,7 +1,6 @@
-import { formatAdresse } from '../../utils/helpers/formatting';
-import { IdRna } from '../../utils/helpers/id-rna';
-import { httpGet } from '../../utils/network';
-import routes from '../routes';
+import routes from '#clients/routes';
+import { formatAdresse, IdRna } from '#utils/helpers';
+import { httpGet } from '#utils/network';
 
 interface IAssociationResponse {
   association: {

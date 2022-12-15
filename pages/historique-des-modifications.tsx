@@ -1,8 +1,7 @@
-import React from 'react';
-
 import { GetStaticProps } from 'next';
+import React from 'react';
+import changelog, { IChangelog } from '#models/historique-modifications';
 import Page from '../layouts';
-import changelog, { IChangelog } from '../models/historique-modifications';
 
 interface IProps {
   changelog: IChangelog[];

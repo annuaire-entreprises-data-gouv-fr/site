@@ -7,7 +7,7 @@ import {
   HttpTooManyRequests,
   HttpUnauthorizedError,
   HttpBadRequestError,
-} from '../../clients/exceptions';
+} from '#clients/exceptions';
 import { formatLog } from './format-log';
 
 const errorInterceptor = (error: AxiosError) => {

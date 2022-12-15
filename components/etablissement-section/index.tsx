@@ -1,18 +1,17 @@
 import React from 'react';
-import { IEtablissement, IUniteLegale } from '../../models';
-import { formatDate } from '../../utils/helpers/formatting';
-import HorizontalSeparator from '../../components-ui/horizontal-separator';
-import { Section } from '../section';
-import { CopyPaste, TwoColumnTable } from '../table/simple';
-import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import { EAdministration } from '../../models/administrations';
-import AvisSituationLink from '../avis-situation-link';
-import { EtablissementDescription } from '../etablissement-description';
-import BreakPageForPrint from '../../components-ui/print-break-page';
-import { PrintNever } from '../../components-ui/print-visibility';
-import TVACell from '../tva-cell';
-import FAQLink from '../../components-ui/faq-link';
-import { Tag } from '../../components-ui/tag';
+import FAQLink from '#components-ui/faq-link';
+import HorizontalSeparator from '#components-ui/horizontal-separator';
+import BreakPageForPrint from '#components-ui/print-break-page';
+import { PrintNever } from '#components-ui/print-visibility';
+import { Tag } from '#components-ui/tag';
+import AvisSituationLink from '#components/avis-situation-link';
+import { EtablissementDescription } from '#components/etablissement-description';
+import { Section } from '#components/section';
+import { CopyPaste, TwoColumnTable } from '#components/table/simple';
+import TVACell from '#components/tva-cell';
+import { EAdministration } from '#models/administrations';
+import { IEtablissement, IUniteLegale } from '#models/index';
+import { formatDate, formatSiret } from '#utils/helpers';
 
 interface IProps {
   etablissement: IEtablissement;

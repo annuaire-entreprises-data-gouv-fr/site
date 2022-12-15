@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { logWarningInSentry } from '../../utils/sentry';
+import { logWarningInSentry } from '#utils/sentry';
 
 interface ISectionProps {
   body: (any[] | undefined | null | string | boolean)[];

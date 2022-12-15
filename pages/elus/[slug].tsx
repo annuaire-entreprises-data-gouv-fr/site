@@ -1,17 +1,15 @@
-import React from 'react';
-
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import Title, { FICHE } from '../../components/title-section';
-
+import React from 'react';
+import ElusSection from '#components/dirigeants-section/elus-section';
+import Title, { FICHE } from '#components/title-section';
+import { IUniteLegale } from '#models/index';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '../../utils/server-side-props-helper/post-server-side-props';
-import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
-import { getUniteLegaleFromSlug } from '../../models/unite-legale';
-import { IUniteLegale } from '../../models';
-import ElusSection from '../../components/dirigeants-section/elus-section';
+} from '#utils/server-side-props-helper/post-server-side-props';
+import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;

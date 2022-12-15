@@ -1,6 +1,6 @@
-import { building, humanPin, mapPin } from '../components-ui/icon';
-import { libelleFromCodeNAF, libelleFromCodeSectionNaf } from '../utils/labels';
-import { IEtatCivil } from './immatriculation/rncs';
+import { building, humanPin, mapPin } from '#components-ui/icon';
+import { IEtatCivil } from '#models/immatriculation/rncs';
+import { libelleFromCodeNAF, libelleFromCodeSectionNaf } from '#utils/labels';
 
 export interface IParams {
   etat?: string;

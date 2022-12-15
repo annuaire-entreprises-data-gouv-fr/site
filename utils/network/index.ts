@@ -1,9 +1,9 @@
 import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import constants from '../../models/constants';
-import redisStorage from './redis-storage';
 import { CacheRequestConfig, setupCache } from 'axios-cache-interceptor';
-import { logInterceptor, addStartTimeInterceptor } from './log-interceptor';
+import constants from '#models/constants';
 import errorInterceptor from './error-interceptor';
+import { logInterceptor, addStartTimeInterceptor } from './log-interceptor';
+import redisStorage from './redis-storage';
 
 export const CACHE_TIMEOUT = 1000 * 60 * 15;
 

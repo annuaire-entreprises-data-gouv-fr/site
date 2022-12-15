@@ -1,9 +1,9 @@
 import React from 'react';
-import Logo from '../components-ui/logo';
-import HiddenH1 from '../components/a11y-components/hidden-h1';
-import HomePageAdvancedSearch from '../components/advanced-search/home-page';
-import SearchBar from '../components/search-bar';
-import StructuredDataSearchAction from '../components/structured-data/search';
+import Logo from '#components-ui/logo';
+import HiddenH1 from '#components/a11y-components/hidden-h1';
+import HomePageAdvancedSearch from '#components/advanced-search/home-page';
+import SearchBar from '#components/search-bar';
+import StructuredDataSearchAction from '#components/structured-data/search';
 import Page from '../layouts';
 
 const Index: React.FC = () => (
