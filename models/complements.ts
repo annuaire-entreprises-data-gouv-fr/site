@@ -3,12 +3,13 @@ import clientComplementsSireneOuverte from '#clients/recherche-entreprise/siren'
 import { IEtatCivil } from '#models/immatriculation/rncs';
 import { Siren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
+import {
+  createDefaultUniteLegaleComplements,
+  IUniteLegaleComplements,
+} from '.';
 
-export interface IUniteLegaleComplements {
-  complements: {
-    estEntrepreneurIndividuel: boolean;
-    estEss: boolean;
-  };
+export interface IComplements {
+  complements: IUniteLegaleComplements;
   colter:
     | {
         codeColter: string;
@@ -24,8 +25,7 @@ export interface IUniteLegaleComplements {
  * @param siren
  * @returns
  */
-export const getUniteLegaleComplements = async (siren: Siren) => {
-  const emptyComplements = { complements: null, colter: { codeColter: null } };
+export const getComplements = async (siren: Siren) => {
   try {
     return await clientComplementsSireneOuverte(siren);
   } catch (e: any) {
@@ -35,6 +35,9 @@ export const getUniteLegaleComplements = async (siren: Siren) => {
         details: e.toString(),
       });
     }
-    return emptyComplements;
+    return {
+      complements: createDefaultUniteLegaleComplements(),
+      colter: { codeColter: null },
+    };
   }
 };

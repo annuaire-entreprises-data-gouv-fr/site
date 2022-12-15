@@ -95,10 +95,7 @@ export interface IUniteLegale extends IEtablissementsList {
   libelleTrancheEffectif: string | null;
   libelleCategorieEntreprise: string | null;
   dirigeant: IEtatCivil | null;
-  complements: {
-    estEntrepreneurIndividuel: boolean;
-    estEss: boolean;
-  };
+  complements: IUniteLegaleComplements;
   association: {
     idAssociation: IdRna | string | null;
   };
@@ -133,16 +130,32 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     libelleCategorieEntreprise: null,
     libelleTrancheEffectif: null,
     dirigeant: null,
-    complements: {
-      estEntrepreneurIndividuel: false,
-      estEss: false,
-    },
+    complements: createDefaultUniteLegaleComplements(),
     association: {
       idAssociation: null,
     },
     colter: {
       codeColter: null,
     },
+  };
+};
+
+export interface IUniteLegaleComplements {
+  estEntrepreneurIndividuel: boolean;
+  estEss: boolean;
+  estEntrepreneurSpectacle: boolean;
+  estFiness: boolean;
+  estRge: boolean;
+  estUai: boolean;
+}
+export const createDefaultUniteLegaleComplements = () => {
+  return {
+    estEntrepreneurIndividuel: false,
+    estEss: false,
+    estEntrepreneurSpectacle: false,
+    estFiness: false,
+    estRge: false,
+    estUai: false,
   };
 };
 

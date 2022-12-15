@@ -1,9 +1,10 @@
 import React from 'react';
 import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
 import ButtonLink from '#components-ui/button';
-import { closed, download, open } from '#components-ui/icon';
+import { download } from '#components-ui/icon';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
+import { VerifiedTag } from '#components-ui/verified-tag';
 import { INPI } from '#components/administrations';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
@@ -111,13 +112,9 @@ const ImmatriculationRNCSTable: React.FC<{
   const data = [
     [
       'Statut',
-      <>
-        {immatriculation.identite.dateRadiation ? (
-          <b>{closed} Radiée</b>
-        ) : (
-          <b>{open} Inscrite</b>
-        )}
-      </>,
+      <VerifiedTag isVerified={!immatriculation.identite.dateRadiation}>
+        {immatriculation.identite.dateRadiation ? 'Radiée' : 'Inscrite'}
+      </VerifiedTag>,
     ],
     [
       'Date d’immatriculation au RNCS',

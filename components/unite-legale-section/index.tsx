@@ -1,6 +1,10 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import HorizontalSeparator from '#components-ui/horizontal-separator';
+import {
+  checkHasLabelsAndCertificates,
+  LabelsAndCertificates,
+} from '#components/labels-and-certificates';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
@@ -11,6 +15,8 @@ import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
+  const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
+
   const data = [
     ['Dénomination', uniteLegale.nomComplet],
     ['SIREN', formatIntFr(uniteLegale.siren)],
@@ -52,24 +58,31 @@ const UniteLegaleSection: React.FC<{
     ['Taille de la structure', uniteLegale.libelleCategorieEntreprise],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
-      'Date de dernière mise à jour',
+      'Dernière modification des données Insee',
       formatDate(uniteLegale.dateDerniereMiseAJour),
     ],
+    uniteLegale.estActive === false
+      ? ['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]
+      : null,
+    // jump line and add label and certificates
+    hasLabelsAndCertificates ? ['', <br />] : null,
+    hasLabelsAndCertificates
+      ? [
+          'Label ou certification',
+          <LabelsAndCertificates uniteLegale={uniteLegale} />,
+        ]
+      : null,
   ];
-
-  if (uniteLegale.estActive === false) {
-    data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
-  }
-
-  if (uniteLegale.complements.estEss) {
-    data.push(['Economie Sociale et Solidaire (ESS)', 'Oui']);
-  }
 
   return (
     <div id="entreprise">
       <Section
         title={`Résumé`}
-        sources={[EAdministration.INSEE, EAdministration.VIES]}
+        sources={[
+          EAdministration.INSEE,
+          EAdministration.VIES,
+          EAdministration.DINUM,
+        ]}
       >
         <TwoColumnTable body={data} />
       </Section>

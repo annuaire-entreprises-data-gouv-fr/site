@@ -4,6 +4,7 @@ import { IEtatCivil } from '#models/immatriculation/rncs';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
+  createDefaultUniteLegaleComplements,
   IUniteLegale,
 } from '#models/index';
 import {
@@ -239,6 +240,7 @@ const mapToDomainObject = (
     ),
     dirigeant: estEntrepreneurIndividuel ? dirigeant : null,
     complements: {
+      ...defaultUniteLegale.complements,
       estEntrepreneurIndividuel,
       estEss: economieSocialeSolidaireUniteLegale === 'O',
     },

@@ -1,8 +1,9 @@
 import React from 'react';
 import ButtonLink from '#components-ui/button';
-import { closed, download, open } from '#components-ui/icon';
+import { download } from '#components-ui/icon';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
+import { VerifiedTag } from '#components-ui/verified-tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
@@ -39,13 +40,9 @@ const ImmatriculationRNM: React.FC<IProps> = ({
   const data = [
     [
       'Statut',
-      <>
-        {immatriculation.dateRadiation ? (
-          <b>{closed} Radiée</b>
-        ) : (
-          <b>{open} Inscrite</b>
-        )}
-      </>,
+      <VerifiedTag isVerified={!immatriculation.dateRadiation}>
+        {immatriculation.dateRadiation ? 'Radiée' : 'Inscrite'}
+      </VerifiedTag>,
     ],
     [
       'Date d’immatriculation au RNM',

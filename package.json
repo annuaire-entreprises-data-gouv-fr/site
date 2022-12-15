@@ -16,7 +16,7 @@
     "build:back": "NODE_ENV=production next build",
     "build": "npm run build:frontend && npm run build:back",
     "start": "NODE_ENV=production && next start",
-    "test:end2end": "cypress open",
+    "test:end2end": "cypress run",
     "test:unit": "jest --runInBand",
     "lint": "next lint"
   },

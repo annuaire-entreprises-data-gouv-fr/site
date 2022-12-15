@@ -17,7 +17,6 @@ import {
   IEtablissementsList,
 } from '#models/etablissements-list';
 import { getEtatAdministratifUniteLegale } from '#models/etat-administratif';
-import { getUniteLegaleComplements } from '#models/unite-legale-complements';
 import { Siren, verifySiren } from '#utils/helpers';
 import {
   logFirstSireneInseefailed,
@@ -31,6 +30,7 @@ import {
   SirenNotFoundError,
 } from '.';
 import { isAssociation } from '.';
+import { getComplements } from './complements';
 
 /**
  * List of siren whose owner refused diffusion
@@ -83,7 +83,7 @@ class UniteLegaleFactory {
     let [uniteLegale, { complements, colter }] = await Promise.all([
       this._getUniteLegaleCore(this._siren, this._page),
       // colter, labels and certificates, from sirene ouverte
-      getUniteLegaleComplements(this._siren),
+      getComplements(this._siren),
     ]);
 
     uniteLegale.complements = { ...uniteLegale.complements, ...complements };
