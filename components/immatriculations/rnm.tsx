@@ -3,6 +3,7 @@ import ButtonLink from '#components-ui/button';
 import { download } from '#components-ui/icon';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
+import { VerifiedTag } from '#components-ui/verified-tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
@@ -14,7 +15,6 @@ import {
 import { IImmatriculationRNM } from '#models/immatriculation/rnm';
 import { IUniteLegale } from '#models/index';
 import { formatDate, formatIntFr } from '#utils/helpers';
-import { VerifiedTag } from '#components-ui/verified-tag';
 
 interface IProps {
   immatriculation: IImmatriculationRNM | IAPINotRespondingError;
