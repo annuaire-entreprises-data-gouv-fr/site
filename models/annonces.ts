@@ -61,7 +61,6 @@ const getAnnoncesFromSlug = async (siren: string) => {
   ]);
 
   let annoncesAssociation = null;
-  let association = null;
   let comptesAssociation = null;
 
   if (isAssociation(uniteLegale)) {
