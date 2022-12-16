@@ -5,6 +5,7 @@ import IsActiveTag from '#components-ui/is-active-tag';
 import { PrintNever } from '#components-ui/print-visibility';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
+import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UnitLegaleDescription } from '#components/unite-legale-description';
 import {
@@ -76,7 +77,7 @@ const Tabs: React.FC<{
       label: 'Attestations et certificats',
       pathPrefix: '/labels-certifications/',
       noFollow: true,
-      shouldDisplay: true,
+      shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
     },
     {
       ficheType: FICHE.DIVERS,

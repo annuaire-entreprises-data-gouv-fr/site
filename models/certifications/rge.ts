@@ -1,3 +1,4 @@
+import { HttpNotFound } from '#clients/exceptions';
 import { clientRGE } from '#clients/rge';
 import { EAdministration } from '#models/administrations';
 import {
@@ -54,6 +55,9 @@ export const getRGECertificationsFromSlug = async (
   try {
     return await clientRGE(siren);
   } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      return APINotRespondingFactory(EAdministration.ADEME, 404);
+    }
     logErrorInSentry('Error in API RGE', {
       siren,
       details: e.toString(),
