@@ -57,6 +57,12 @@ export const CertificationsRGESection: React.FC<{
       ['Téléphone', telephone],
       ['Site internet', siteInternet],
       ['Email', email],
+      [
+        'Travaille avec',
+        <div>
+          <div>HELLO</div>
+        </div>,
+      ],
     ];
   }
 
