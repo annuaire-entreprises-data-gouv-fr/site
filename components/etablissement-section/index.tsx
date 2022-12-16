@@ -50,14 +50,12 @@ const EtablissementSection: React.FC<IProps> = ({
           ],
         ]
       : []),
-    etablissement.denomination && [
-      'Nom de l’établissement',
-      etablissement.denomination,
-    ],
-    etablissement.enseigne && [
-      'Enseigne de l’établissement',
-      etablissement.enseigne,
-    ],
+    ...(etablissement.denomination
+      ? [['Nom de l’établissement', etablissement.denomination]]
+      : []),
+    ...(etablissement.enseigne
+      ? [['Enseigne de l’établissement', etablissement.enseigne]]
+      : []),
     [
       <FAQLink tooltipLabel="Adresse">
         <a href="/faq/modifier-adresse">Comment modifier une adresse ?</a>
