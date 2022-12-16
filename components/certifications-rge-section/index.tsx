@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { ReactComponentElement, ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
+import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
@@ -45,10 +46,10 @@ export const CertificationsRGESection: React.FC<{
     );
   }
 
-  let data: string[][] = [];
+  let data: Array<[string, string | ReactElement]> = [];
 
   if (certificationsRGE.companyInfo) {
-    const { adresse, telephone, siteInternet, email } =
+    const { adresse, telephone, siteInternet, email, workingWithIndividual } =
       certificationsRGE.companyInfo;
     data = [
       ['Dénomination', uniteLegale.nomComplet],
@@ -60,7 +61,8 @@ export const CertificationsRGESection: React.FC<{
       [
         'Travaille avec',
         <div>
-          <div>HELLO</div>
+          <Tag>Professionnel</Tag>
+          {workingWithIndividual && <Tag>Particulier</Tag>}
         </div>,
       ],
     ];
