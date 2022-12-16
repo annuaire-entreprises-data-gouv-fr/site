@@ -2,19 +2,13 @@ import React from 'react';
 
 export const SimpleSeparator = () => (
   <>
-    <div className="simple-horizontal-separator">
-      <span className="line" />
-    </div>
+    <div className="simple-horizontal-separator" />
     <style jsx>{`
       div.simple-horizontal-separator {
+        margin: 15px 0;
         width: 100%;
-        padding: 40px 0;
-      }
-      div.simple-horizontal-separator > span.line {
-        width: 50px;
         background-color: #dfdff1;
-        height: 2px;
-        margin: 0 10px;
+        height: 1px;
       }
     `}</style>
   </>
