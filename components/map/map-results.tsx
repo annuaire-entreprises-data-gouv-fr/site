@@ -28,7 +28,7 @@ const MapResults: React.FC<{ results: ISearchResult[] }> = ({ results }) => (
                 );
 
                 new maplibregl.Marker({ color: '#000091' })
-                .setLngLat([result.longitude,result.latitude])
+                .setLngLat([result.siege.longitude,result.siege.latitude])
                 .setPopup(popup)
                 .addTo(map);
             }
