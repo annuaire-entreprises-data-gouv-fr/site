@@ -19,6 +19,23 @@ export const CertificationsRGESection: React.FC<{
   certificationsRGE: IRGECompanyCertifications | IAPINotRespondingError;
 }> = ({ uniteLegale, certificationsRGE }) => {
   if (isAPINotResponding(certificationsRGE)) {
+    const isNotFound = certificationsRGE.errorType === 404;
+    if (isNotFound) {
+      return (
+        <Section
+          title="Recensement des professionnels RGE (Reconnu Garant de l'Environnement)"
+          sources={[EAdministration.ADEME]}
+        >
+          <p>
+            Nous n’avons pas retrouvé les certifications RGE de cette entreprise
+            dans l’annuaire des professionnels qualifiés. En revanche, vous
+            pouvez probablement retrouver les certifications RGE grâce au
+            [moteur de recherche France Renov
+            Officiel](https://france-renov.gouv.fr/annuaire-rge).
+          </p>
+        </Section>
+      );
+    }
     return (
       <AdministrationNotResponding
         administration={certificationsRGE.administration}

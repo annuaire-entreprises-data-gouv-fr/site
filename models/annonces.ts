@@ -13,7 +13,6 @@ import { Siren, verifySiren } from '#utils/helpers';
 import { IdRna } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { isAssociation } from '.';
-import { getAssociation } from './association';
 
 export interface IComptesAssociation {
   comptes: {

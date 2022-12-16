@@ -1,3 +1,4 @@
+import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import {
   IRGECompanyCertifications,
@@ -5,11 +6,6 @@ import {
 } from '#models/certifications';
 import { Siren, Siret } from '#utils/helpers';
 import { httpGet } from '#utils/network';
-
-export enum WORKING_WITH_ENUM {
-  PROFESSIONAL = 'PROFESSIONAL',
-  INDIVIDUAL = 'INDIVIDUAL',
-}
 
 interface IRGEResponse {
   results: {
@@ -23,7 +19,7 @@ interface IRGEResponse {
     nom_entreprise: string;
     nom_qualification: string;
     organisme: string;
-    particulier: Boolean;
+    particulier: boolean;
     siret: Siret;
     site_internet: string;
     telephone: string;
@@ -39,17 +35,16 @@ const clientRGE = async (siren: Siren): Promise<IRGECompanyCertifications> => {
   const route = routes.certifications.rge;
   const response = await httpGet(route, { params: { qs: `siret:${siren}*` } });
 
-  return mapToDomainObject(response.data as IRGEResponse);
+  const data = response.data as IRGEResponse;
+  if (!data.results.length) {
+    throw new HttpNotFound(
+      `Cannot found certifications associate to siren : ${siren}`
+    );
+  }
+  return mapToDomainObject(response.data);
 };
 
 const mapToDomainObject = (rge: IRGEResponse): IRGECompanyCertifications => {
-  if (!rge.results.length) {
-    return {
-      companyInfo: null,
-      certifications: [],
-    };
-  }
-
   const [firstResult] = rge.results;
 
   const {
@@ -71,21 +66,18 @@ const mapToDomainObject = (rge: IRGEResponse): IRGECompanyCertifications => {
     siret: siret,
     siteInternet: site_internet,
     telephone: telephone,
-    workingWith: [
-      WORKING_WITH_ENUM.PROFESSIONAL,
-      ...(particulier ? [WORKING_WITH_ENUM.INDIVIDUAL] : []),
-    ],
+    workingWithIndividual: particulier,
   };
 
   const certifications: IRGECompanyCertifications['certifications'] = [];
 
   rge.results.forEach((result) => {
-    const pos = certifications.findIndex(
+    const findCertification = certifications.findIndex(
       (certification) => certification.nomCertificat === result.nom_certificat
     );
-    if (pos !== -1) {
+    if (findCertification !== -1) {
       if (result.domaine !== 'Inconnu') {
-        certifications[pos].domaines.push(result.domaine);
+        certifications[findCertification].domaines.push(result.domaine);
       }
     } else {
       const {
@@ -106,7 +98,6 @@ const mapToDomainObject = (rge: IRGEResponse): IRGECompanyCertifications => {
       });
     }
   });
-
   return {
     companyInfo,
     certifications,

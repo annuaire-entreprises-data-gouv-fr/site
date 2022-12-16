@@ -1,4 +1,4 @@
-import { clientRGE, WORKING_WITH_ENUM } from '#clients/rge';
+import { clientRGE } from '#clients/rge';
 import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
@@ -35,8 +35,8 @@ export interface IRGECompanyCertifications {
     siret: Siret;
     siteInternet: string;
     telephone: string;
-    workingWith: WORKING_WITH_ENUM[];
-  } | null;
+    workingWithIndividual: boolean;
+  };
   certifications: {
     codeQualification: string;
     nomCertificat: INomCertificat;
