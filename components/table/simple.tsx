@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { logWarningInSentry } from '#utils/sentry';
 
 interface ISectionProps {
-  body: (any[] | undefined | null | string | boolean)[];
+  body: any[][];
   id?: string;
 }
 
@@ -79,28 +79,16 @@ const shouldTrim = (label: any) => {
  * @returns
  */
 export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
-  // filter undefined and null row
-  const bodyNoUndefined = body.filter((element) => {
-    return (
-      element !== undefined &&
-      element !== null &&
-      element !== false &&
-      element !== ''
-    );
-  }) as any[][];
-
   return (
-    <>
-      <table id={id}>
-        <tbody>
-          {bodyNoUndefined.map((row, idx) => (
-            <tr key={'a' + idx}>
-              <td>{row[0]}</td>
-              <Cell label={row[0]}>{row[1]}</Cell>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <table id={id}>
+      <tbody>
+        {body.map((row, idx) => (
+          <tr key={'a' + idx}>
+            <td>{row[0]}</td>
+            <Cell label={row[0]}>{row[1]}</Cell>
+          </tr>
+        ))}
+      </tbody>
       <style jsx>{`
         table {
           border-collapse: collapse;
@@ -144,6 +132,6 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
           }
         }
       `}</style>
-    </>
+    </table>
   );
 };

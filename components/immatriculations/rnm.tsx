@@ -61,11 +61,10 @@ const ImmatriculationRNM: React.FC<IProps> = ({
     ['Nature juridique', immatriculation.libelleNatureJuridique],
     ['Date de début d’activité', formatDate(immatriculation.dateDebutActivite)],
     ['Date de dernière mise à jour', formatDate(immatriculation.dateMiseAJour)],
+    ...(immatriculation.dateRadiation
+      ? [['Date de radiation', formatDate(immatriculation.dateRadiation)]]
+      : []),
   ];
-
-  if (immatriculation.dateRadiation) {
-    data.push(['Date de radiation', formatDate(immatriculation.dateRadiation)]);
-  }
 
   return (
     <>

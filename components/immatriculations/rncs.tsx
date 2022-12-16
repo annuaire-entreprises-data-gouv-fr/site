@@ -109,11 +109,14 @@ const ImmatriculationRNCSTable: React.FC<{
   immatriculation: IImmatriculationRNCS;
   uniteLegale: IUniteLegale;
 }> = ({ immatriculation, uniteLegale }) => {
+  const { dateRadiation, dateCessationActivite, isPersonneMorale } =
+    immatriculation.identite;
+
   const data = [
     [
       'Statut',
-      <VerifiedTag isVerified={!immatriculation.identite.dateRadiation}>
-        {immatriculation.identite.dateRadiation ? 'Radiée' : 'Inscrite'}
+      <VerifiedTag isVerified={!dateRadiation}>
+        {dateRadiation ? 'Radiée' : 'Inscrite'}
       </VerifiedTag>,
     ],
     [
@@ -141,34 +144,26 @@ const ImmatriculationRNCSTable: React.FC<{
       'Date de début d’activité',
       formatDate(immatriculation.identite.dateDebutActiv),
     ],
+    ...(isPersonneMorale
+      ? [
+          ['Capital', immatriculation.identite.capital],
+          [
+            'Date de clôture de l’exercice comptable',
+            immatriculation.identite.dateClotureExercice,
+          ],
+          [
+            'Durée de la personne morale',
+            immatriculation.identite.dureePersonneMorale,
+          ],
+        ]
+      : []),
+    ...(dateCessationActivite
+      ? [['Date de cessation d’activité', formatDate(dateCessationActivite)]]
+      : []),
+    ...(dateRadiation
+      ? [['Date de radiation', formatDate(dateRadiation)]]
+      : []),
   ];
-
-  if (immatriculation.identite.isPersonneMorale) {
-    data.push(
-      ['Capital', immatriculation.identite.capital],
-      [
-        'Date de clôture de l’exercice comptable',
-        immatriculation.identite.dateClotureExercice,
-      ],
-      [
-        'Durée de la personne morale',
-        immatriculation.identite.dureePersonneMorale,
-      ]
-    );
-  }
-
-  if (immatriculation.identite.dateCessationActivite) {
-    data.push([
-      'Date de cessation d’activité',
-      formatDate(immatriculation.identite.dateCessationActivite),
-    ]);
-  }
-  if (immatriculation.identite.dateRadiation) {
-    data.push([
-      'Date de radiation',
-      formatDate(immatriculation.identite.dateRadiation),
-    ]);
-  }
 
   return <TwoColumnTable body={data} />;
 };

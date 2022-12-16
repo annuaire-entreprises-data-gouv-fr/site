@@ -61,17 +61,19 @@ const UniteLegaleSection: React.FC<{
       'Dernière modification des données Insee',
       formatDate(uniteLegale.dateDerniereMiseAJour),
     ],
-    uniteLegale.estActive === false
-      ? ['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]
-      : null,
+    ...(uniteLegale.estActive === false
+      ? [['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]]
+      : []),
     // jump line and add label and certificates
-    hasLabelsAndCertificates ? ['', <br />] : null,
-    hasLabelsAndCertificates
+    ...(hasLabelsAndCertificates
       ? [
-          'Label ou certification',
-          <LabelsAndCertificates uniteLegale={uniteLegale} />,
+          ['', <br />],
+          [
+            'Label ou certification',
+            <LabelsAndCertificates uniteLegale={uniteLegale} />,
+          ],
         ]
-      : null,
+      : []),
   ];
 
   return (
