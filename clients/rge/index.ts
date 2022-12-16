@@ -36,6 +36,7 @@ const clientRGE = async (siren: Siren): Promise<IRGECompanyCertifications> => {
   const response = await httpGet(route, { params: { qs: `siret:${siren}*` } });
 
   const data = response.data as IRGEResponse;
+
   if (!data.results.length) {
     throw new HttpNotFound(
       `Cannot found certifications associate to siren : ${siren}`
