@@ -44,7 +44,7 @@ describe(`Labels and certificates`, () => {
     cy.contains('RGE - Reconnu Garant de l’Environnement').should('be.visible');
   });
 
-  it('ESS en Spectacle vivant', () => {
+  it('ESS et Spectacle vivant', () => {
     cy.visit(`/entreprise/842019051`);
     cy.contains('Label ou certification').should('be.visible');
     cy.contains('ESS - Entreprise Sociale et Solidaire').should('be.visible');

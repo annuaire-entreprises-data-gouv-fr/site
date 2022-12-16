@@ -8,6 +8,16 @@ export const INSEE = ({ queryString = '' }) => (
   </a>
 );
 
+export const ADEME = ({ queryString = '' }) => (
+  <a
+    rel="nofollow"
+    href={`/administration/ademe${queryString}`}
+    title="ADEME - Agence de la transition écologique "
+  >
+    ADEME
+  </a>
+);
+
 export const INPI = ({ queryString = '' }) => (
   <a
     rel="nofollow"

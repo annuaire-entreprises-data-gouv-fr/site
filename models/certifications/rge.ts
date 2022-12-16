@@ -5,7 +5,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import { Siret, verifySiren } from '#utils/helpers';
+import { Siren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 
 export type INomCertificat =
@@ -28,12 +28,12 @@ export type INomCertificat =
   | 'Qualiforage module Nappe'
   | 'Qualisol Collectif';
 
-export interface IRGECompanyCertifications {
+export interface IRGECertification {
   companyInfo: {
     nomEntreprise: string;
     adresse: string;
     email: string;
-    siret: Siret;
+    siret: string;
     siteInternet: string;
     telephone: string;
     workingWithIndividual: boolean;
@@ -48,10 +48,9 @@ export interface IRGECompanyCertifications {
   }[];
 }
 
-export const getRGECertificationsFromSlug = async (
-  slug: string
-): Promise<IRGECompanyCertifications | IAPINotRespondingError | {}> => {
-  const siren = verifySiren(slug);
+export const getRGECertifications = async (
+  siren: Siren
+): Promise<IRGECertification | IAPINotRespondingError> => {
   try {
     return await clientRGE(siren);
   } catch (e: any) {

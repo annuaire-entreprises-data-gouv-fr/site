@@ -1,14 +1,15 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import { CertificationsRGESection } from '#components/certifications-rge-section';
+import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates';
+import { Section } from '#components/section';
 import Title, { FICHE } from '#components/title-section';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
-  getRGECertificationsFromSlug,
-  IRGECompanyCertifications,
+  getCertificationsFromSlug,
+  IRGECertification,
 } from '#models/certifications';
 import { IUniteLegale } from '#models/index';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -17,15 +18,11 @@ import {
 import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
-  certificationsRGE: IRGECompanyCertifications | IAPINotRespondingError;
+  rge: IRGECertification | IAPINotRespondingError;
   uniteLegale: IUniteLegale;
 }
 
-const RGE: React.FC<IProps> = ({
-  certificationsRGE,
-  uniteLegale,
-  metadata,
-}) => {
+const RGE: React.FC<IProps> = ({ rge, uniteLegale, metadata }) => {
   return (
     <Page
       small={true}
@@ -35,10 +32,21 @@ const RGE: React.FC<IProps> = ({
     >
       <div className="content-container">
         <Title ficheType={FICHE.CERTIFICATS} uniteLegale={uniteLegale} />
-        <CertificationsRGESection
-          uniteLegale={uniteLegale}
-          certificationsRGE={certificationsRGE}
-        />
+        {!checkHasLabelsAndCertificates(uniteLegale) && (
+          <p>Cette structure ne possède aucun label ou certificat.</p>
+        )}
+        {uniteLegale.complements.estRge && (
+          <CertificationsRGESection
+            uniteLegale={uniteLegale}
+            certificationsRGE={rge}
+          />
+        )}
+        {uniteLegale.complements.estEss && (
+          <Section title="ESS - Entreprise Sociale et Solidaire" />
+        )}
+        {uniteLegale.complements.estEntrepreneurSpectacle && (
+          <Section title="Entrepreneur de spectacles vivants" />
+        )}
       </div>
     </Page>
   );
@@ -47,11 +55,12 @@ const RGE: React.FC<IProps> = ({
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
-    const uniteLegale = await getUniteLegaleFromSlug(slug);
-    const certificationsRGE = await getRGECertificationsFromSlug(slug);
+
+    const { uniteLegale, rge } = await getCertificationsFromSlug(slug);
+
     return {
       props: {
-        certificationsRGE,
+        rge,
         uniteLegale,
       },
     };
