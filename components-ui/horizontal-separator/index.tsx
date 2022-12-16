@@ -1,6 +1,26 @@
 import React from 'react';
 
-const HorizontalSeparator = () => (
+export const SimpleSeparator = () => (
+  <>
+    <div className="simple-horizontal-separator">
+      <span className="line" />
+    </div>
+    <style jsx>{`
+      div.simple-horizontal-separator {
+        width: 100%;
+        padding: 40px 0;
+      }
+      div.simple-horizontal-separator > span.line {
+        width: 50px;
+        background-color: #dfdff1;
+        height: 2px;
+        margin: 0 10px;
+      }
+    `}</style>
+  </>
+);
+
+export const HorizontalSeparator = () => (
   <>
     <div className="horizontal-separator layout-center">
       <span className="line" />
@@ -27,4 +47,3 @@ const HorizontalSeparator = () => (
     `}</style>
   </>
 );
-export default HorizontalSeparator;

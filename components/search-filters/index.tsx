@@ -1,4 +1,6 @@
 import React from 'react';
+import { Checkbox } from '#components-ui/checkbox';
+import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import Select from '#components-ui/select';
 import SelectCodeNaf from '#components-ui/select/select-code-naf';
 import SelectCodeSectionNaf from '#components-ui/select/select-section-naf';
@@ -90,6 +92,12 @@ const SearchFilters: React.FC<{
         searchTerm={searchTerm}
         addSaveClearButton
       >
+        <div>
+          <Checkbox />
+          <Checkbox />
+          <Checkbox />
+        </div>
+        <SimpleSeparator />
         <div className="select">
           <label>Etat administratif :</label>
           <Select

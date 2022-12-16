@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import ButtonLink from '#components-ui/button';
-import HorizontalSeparator from '#components-ui/horizontal-separator';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';

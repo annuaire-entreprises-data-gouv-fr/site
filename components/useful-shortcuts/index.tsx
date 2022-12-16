@@ -1,5 +1,5 @@
 import React from 'react';
-import HorizontalSeparator from 'components-ui/horizontal-separator';
+import { HorizontalSeparator } from 'components-ui/horizontal-separator';
 import { PrintNever } from 'components-ui/print-visibility';
 import { IUniteLegale, isAssociation, isServicePublic } from 'models/index';
 
