@@ -1,9 +1,10 @@
 export enum EAdministration {
+  ADEME = 'ademe',
+  CMAFRANCE = 'cma',
+  DILA = 'dila',
   DINUM = 'dinum',
   INPI = 'inpi',
   INSEE = 'insee',
-  CMAFRANCE = 'cma',
-  DILA = 'dila',
   METI = 'meti',
   MI = 'mi',
   VIES = 'vies',

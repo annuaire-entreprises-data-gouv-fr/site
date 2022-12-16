@@ -17,9 +17,9 @@ import { IAssociation } from '#models/index';
 import { formatDate } from '#utils/helpers';
 
 const AnnoncesAssociationSection: React.FC<{
-  uniteLegale: IAssociation;
+  association: IAssociation;
   annoncesAssociation: IAnnoncesAssociation | IAPINotRespondingError;
-}> = ({ uniteLegale, annoncesAssociation }) => {
+}> = ({ association, annoncesAssociation }) => {
   if (isAPINotResponding(annoncesAssociation)) {
     return (
       <AdministrationNotResponding
@@ -39,7 +39,7 @@ const AnnoncesAssociationSection: React.FC<{
       {annoncesAssociation.annonces.filter(
         (annonce) => annonce.typeAvisLibelle === 'Création'
       ).length === 0 && (
-        <AssociationCreationNotFoundAlert uniteLegale={uniteLegale} />
+        <AssociationCreationNotFoundAlert association={association} />
       )}
       {annoncesAssociation.annonces.length === 0 ? (
         <div>
@@ -64,7 +64,7 @@ const AnnoncesAssociationSection: React.FC<{
             <a
               rel="noreferrer noopener nofollow"
               target="_blank"
-              href={`${routes.journalOfficielAssociations.site.recherche}?q=${uniteLegale.siren}`}
+              href={`${routes.journalOfficielAssociations.site.recherche}?q=${association.siren}`}
             >
               la page de cette association
             </a>{' '}

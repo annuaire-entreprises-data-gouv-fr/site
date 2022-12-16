@@ -8,7 +8,7 @@ const ImmatriculationNotFoundAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
 }) => {
   if (isAssociation(uniteLegale)) {
-    return <AssociationCreationNotFoundAlert uniteLegale={uniteLegale} />;
+    return <AssociationCreationNotFoundAlert association={uniteLegale} />;
   } else if (uniteLegale.complements.estEntrepreneurIndividuel) {
     return (
       <Info full>

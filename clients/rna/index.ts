@@ -50,10 +50,7 @@ const clientRNA = async (numeroRna: IdRna, useCache = true) => {
   return mapToDomainObject(numeroRna, response.data as IAssociationResponse);
 };
 
-export const mapToDomainObject = (
-  idRna: IdRna,
-  association: IAssociationResponse
-) => {
+const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
   const {
     association: {
       titre,

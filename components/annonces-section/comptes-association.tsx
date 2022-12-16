@@ -16,9 +16,9 @@ import { IAssociation } from '#models/index';
 import { formatDate } from '#utils/helpers';
 
 export const ComptesAssociationSection: React.FC<{
-  uniteLegale: IAssociation;
+  association: IAssociation;
   comptesAssociation: IComptesAssociation | IAPINotRespondingError;
-}> = ({ uniteLegale, comptesAssociation }) => {
+}> = ({ association, comptesAssociation }) => {
   if (isAPINotResponding(comptesAssociation)) {
     return (
       <AdministrationNotResponding
@@ -57,7 +57,7 @@ export const ComptesAssociationSection: React.FC<{
             <a
               rel="noreferrer noopener nofollow"
               target="_blank"
-              href={`${routes.journalOfficielAssociations.site.recherche}?q=${uniteLegale.siren}`}
+              href={`${routes.journalOfficielAssociations.site.recherche}?q=${association.siren}`}
             >
               la page de cette association
             </a>{' '}

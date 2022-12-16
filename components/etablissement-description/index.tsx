@@ -5,10 +5,10 @@ import { formatDateLong } from '#utils/helpers';
 interface IProps {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
-  usedInEntreprisePage?: Boolean;
+  usedInEntreprisePage?: boolean;
 }
 
-const statusLabel = (estActif: Boolean | null) => {
+const statusLabel = (estActif: boolean | null) => {
   if (estActif === null) {
     return ' dans un état administratif inconnu';
   }

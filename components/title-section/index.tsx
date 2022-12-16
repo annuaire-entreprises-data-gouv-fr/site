@@ -5,6 +5,7 @@ import IsActiveTag from '#components-ui/is-active-tag';
 import { PrintNever } from '#components-ui/print-visibility';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
+import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UnitLegaleDescription } from '#components/unite-legale-description';
 import {
@@ -19,6 +20,7 @@ export enum FICHE {
   JUSTIFICATIFS = 'justificatifs',
   ANNONCES = 'annonces',
   DIRIGEANTS = 'dirigeants',
+  CERTIFICATS = 'attestations et certificats',
   ELUS = 'élus',
   COMPTES = 'bilans & comptes',
   ACTES = 'actes & statuts',
@@ -71,6 +73,13 @@ const Tabs: React.FC<{
       shouldDisplay: true,
     },
     {
+      ficheType: FICHE.CERTIFICATS,
+      label: 'Attestations et certificats',
+      pathPrefix: '/labels-certifications/',
+      noFollow: true,
+      shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
+    },
+    {
       ficheType: FICHE.DIVERS,
       label: 'Conventions collectives',
       pathPrefix: '/divers/',
@@ -95,7 +104,6 @@ const Tabs: React.FC<{
             </a>
           ))}
       </div>
-
       <style jsx>{`
         .title-tabs {
           display: flex;

@@ -6,7 +6,7 @@ interface IProps {
   type?: 'submit' | null;
   alt?: boolean;
   target?: '_blank';
-  nofollow?: Boolean;
+  nofollow?: boolean;
 }
 
 const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({

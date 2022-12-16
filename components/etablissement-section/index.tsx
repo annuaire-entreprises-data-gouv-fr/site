@@ -16,8 +16,8 @@ import { formatDate, formatSiret } from '#utils/helpers';
 interface IProps {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
-  usedInEntreprisePage?: Boolean;
-  withDenomination?: Boolean;
+  usedInEntreprisePage?: boolean;
+  withDenomination?: boolean;
 }
 
 const EtablissementSection: React.FC<IProps> = ({
