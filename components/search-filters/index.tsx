@@ -1,5 +1,4 @@
 import React from 'react';
-import { Checkbox } from '#components-ui/checkbox';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import Select from '#components-ui/select';
 import SelectCodeNaf from '#components-ui/select/select-code-naf';

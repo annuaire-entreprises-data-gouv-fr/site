@@ -71,7 +71,7 @@ class SearchFilterParams {
       etat_administratif: this.params.etat,
       est_rge: this.params.label === 'rge',
       est_ess: this.params.label === 'ess',
-      est_entrepreneur_spectacle: this.params.label === 'sv',
+      est_entrepreneur_spectacle: this.params.label === 'esv',
       est_association: this.params.type === 'asso',
       est_collectivite_territoriale: this.params.type === 'ct',
       est_entrepreneur_individuel: this.params.type === 'ei',
