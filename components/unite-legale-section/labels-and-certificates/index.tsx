@@ -1,6 +1,6 @@
-import InformationTooltip from '../../components-ui/information-tooltip';
-import { VerifiedTag } from '../../components-ui/verified-tag';
-import { IUniteLegale } from '../../models';
+import InformationTooltip from '../../../components-ui/information-tooltip';
+import { VerifiedTag } from '../../../components-ui/verified-tag';
+import { IUniteLegale } from '../../../models';
 
 export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estEntrepreneurSpectacle ||

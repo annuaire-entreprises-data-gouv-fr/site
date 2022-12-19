@@ -57,3 +57,9 @@ export const CMA = ({ queryString = '' }) => (
     CMA-France
   </a>
 );
+
+export const MC = ({ queryString = '' }) => (
+  <a href={`/administration/mc${queryString}`} title="Ministère de la Culture">
+    Ministère de la Culture
+  </a>
+);

@@ -1,6 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import { INomCertificat, IRGECertification } from '#models/certifications';
+import { INomCertificat, IRGECertification } from '#models/certifications/rge';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 
@@ -42,7 +42,7 @@ const clientRGE = async (siren: Siren): Promise<IRGECertification> => {
   return mapToDomainObject(response.data);
 };
 
-const mapToDomainObject = (rge: IRGEResponse): IRGECertification => {
+const mapToDomainObject = (rge: IRGEResponse) => {
   const [firstResult] = rge.results;
 
   const {

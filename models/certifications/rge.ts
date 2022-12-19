@@ -7,6 +7,7 @@ import {
 } from '#models/api-not-responding';
 import { Siren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
+import { IUniteLegale } from '..';
 
 export type INomCertificat =
   | 'QUALIBAT-RGE'
@@ -49,16 +50,20 @@ export interface IRGECertification {
 }
 
 export const getRGECertifications = async (
-  siren: Siren
+  uniteLegale: IUniteLegale
 ): Promise<IRGECertification | IAPINotRespondingError> => {
   try {
-    return await clientRGE(siren);
+    if (!uniteLegale.complements.estRge) {
+      throw new HttpNotFound('Not a RGE company');
+    }
+
+    return await clientRGE(uniteLegale.siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.ADEME, 404);
     }
     logErrorInSentry('Error in API RGE', {
-      siren,
+      siren: uniteLegale.siren,
       details: e.toString(),
     });
     return APINotRespondingFactory(EAdministration.ADEME, 500);

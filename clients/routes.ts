@@ -55,6 +55,14 @@ const routes = {
       api: 'https://data.ademe.fr/data-fair/api/v1/datasets/liste-des-entreprises-rge-2/lines/',
       site: 'https://france-renov.gouv.fr/annuaire-rge',
     },
+    entrepreneurSpectacles: {
+      ods: {
+        metadata:
+          'https://data.culture.gouv.fr/api/datasets/1.0/search/?q=declarations-des-entrepreneurs-de-spectacles-vivants',
+        search:
+          'https://data.culture.gouv.fr/api/records/1.0/search/?dataset=declarations-des-entrepreneurs-de-spectacles-vivants',
+      },
+    },
   },
   rna: {
     id: 'https://entreprise.data.gouv.fr/api/rna/v1/id/',

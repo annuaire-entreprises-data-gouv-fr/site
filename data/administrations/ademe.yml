@@ -2,7 +2,7 @@ slug: ademe
 short: ADEME
 site: https://www.ademe.fr/
 logoType: portrait
-long: Agence de la transition écologique
+long: Agence de l'Environnement et de la Maîtrise de l'Energie
 contact: https://www.ademe.fr/contact/
 apiMonitors:
   - apiName: API Professionnels RGE
@@ -14,4 +14,4 @@ apiMonitors:
     data:
       - Le recensement des professionnels RGE (Reconnu Garant de l'Environnement)
 description: |
-  L'agence de la transition écologique a pour mission d’accompagner la transition écologique et énergétique notamment en participant au financement de projets ou à la recherche pour leur mise en œuvre.
+  L'Agence de l'Environnement et de la Maîtrise de l'Energie a pour mission d’accompagner la transition écologique et énergétique notamment en participant au financement de projets ou à la recherche pour leur mise en œuvre.

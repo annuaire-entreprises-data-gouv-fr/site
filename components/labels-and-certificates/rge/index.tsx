@@ -1,4 +1,3 @@
-import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
 import { Tag } from '#components-ui/tag';
@@ -11,8 +10,9 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
-import { IRGECertification } from '#models/certifications';
+import { IRGECertification } from '#models/certifications/rge';
 import { IUniteLegale } from '#models/index';
+import React from 'react';
 import { certificatLogo } from './map-certicat-to-logo';
 
 const renovLink = (slug: string) => {
@@ -79,8 +79,8 @@ export const CertificationsRGESection: React.FC<{
     [
       'Travaille avec',
       <div>
-        <Tag className="info">Professionnel</Tag>
-        {workingWithIndividual && <Tag className="info">Particulier</Tag>}
+        <Tag className="info">Professionnels</Tag>
+        {workingWithIndividual && <Tag className="info">Particuliers</Tag>}
       </div>,
     ],
   ];
@@ -112,12 +112,14 @@ export const CertificationsRGESection: React.FC<{
       <FullTable
         head={['Certificat', 'Domaine(s) certifié(s)', 'Lien']}
         body={certificationsRGE.certifications.map((certification) => [
-          <div className="font-small">
-            <div className="logo-wrapper" style={{ width: 72 }}>
+          <div className="font-small layout-left">
+            <div style={{ width: 72 }}>
               {certification.nomCertificat in certificatLogo && (
                 <img
-                  //@ts-ignore
-                  src={certificatLogo[certification.nomCertificat]}
+                  src={`/images/rge/logo-rge-${
+                    //@ts-ignore
+                    certificatLogo[certification.nomCertificat]
+                  }`}
                   alt={`Logo ${certification.nomCertificat}`}
                   title={`Logo ${certification.nomCertificat}`}
                   width="100%"
@@ -125,15 +127,13 @@ export const CertificationsRGESection: React.FC<{
                 />
               )}
             </div>
-            <i>{certification.nomCertificat}</i>
+            <div> {certification.nomCertificat}</div>
           </div>,
-          <div>
-            <ul>
-              {certification.domaines.map((domaine) => (
-                <li className="font-small">{domaine}</li>
-              ))}
-            </ul>
-          </div>,
+          <ul>
+            {certification.domaines.map((domaine) => (
+              <li className="font-small">{domaine}</li>
+            ))}
+          </ul>,
           <ButtonLink
             target="_blank"
             to={certification.urlQualification}

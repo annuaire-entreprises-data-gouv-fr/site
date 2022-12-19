@@ -3,6 +3,7 @@ export enum EAdministration {
   CMAFRANCE = 'cma',
   DILA = 'dila',
   DINUM = 'dinum',
+  MC = 'mc',
   INPI = 'inpi',
   INSEE = 'insee',
   METI = 'meti',
