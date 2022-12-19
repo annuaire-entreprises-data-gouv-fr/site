@@ -42,5 +42,5 @@ export const inseeClientGet = async (
   const { useFallback, useCache } = options;
   const getClient = useFallback ? fallbackGetClient : defaultGetClient;
 
-  return await getClient(route, { timeout: constants.timeout.L }, useCache);
+  return await getClient(route, { timeout: constants.timeout.M }, useCache);
 };
