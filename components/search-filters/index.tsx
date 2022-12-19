@@ -122,7 +122,7 @@ const SearchFilters: React.FC<{
         <Select
           options={[
             { value: 'rge', label: 'RGE - Reconnu Garant de l’Environnement' },
-            { value: 'ess', label: 'ESS - Economie Sociale et Solidaire' },
+            // { value: 'ess', label: 'ESS - Economie Sociale et Solidaire' },
             { value: 'esv', label: 'Entreprise du Spectacle Vivant' },
           ]}
           name="label"
