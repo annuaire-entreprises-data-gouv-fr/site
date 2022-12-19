@@ -1,3 +1,4 @@
+import React from 'react';
 import AssociationAdressAlert from '#components-ui/alerts/association-adress';
 import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
 import IsActiveTag from '#components-ui/is-active-tag';
@@ -13,7 +14,6 @@ import {
   IUniteLegale,
 } from '#models/index';
 import { formatIntFr } from '#utils/helpers';
-import React from 'react';
 
 export enum FICHE {
   INFORMATION = 'informations générales',

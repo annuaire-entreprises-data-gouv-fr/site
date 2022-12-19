@@ -1,3 +1,4 @@
+import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import HorizontalSeparator from '#components-ui/horizontal-separator';
 import { Section } from '#components/section';
@@ -10,7 +11,6 @@ import {
 import { EAdministration } from '#models/administrations';
 import { IUniteLegale } from '#models/index';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
-import React from 'react';
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;

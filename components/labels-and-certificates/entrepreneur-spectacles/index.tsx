@@ -1,3 +1,4 @@
+import React from 'react';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { MC } from '#components/administrations';
@@ -10,7 +11,6 @@ import {
 } from '#models/api-not-responding';
 import { IEntrepreneurSpectaclesCertification } from '#models/certifications/entrepreneur-spectacles';
 import { formatDateLong } from '#utils/helpers';
-import React from 'react';
 
 export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
   entrepreneurSpectacles:

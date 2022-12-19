@@ -1,3 +1,4 @@
+import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
 import { Tag } from '#components-ui/tag';
@@ -12,7 +13,6 @@ import {
 } from '#models/api-not-responding';
 import { IRGECertification } from '#models/certifications/rge';
 import { IUniteLegale } from '#models/index';
-import React from 'react';
 import { certificatLogo } from './map-certicat-to-logo';
 
 const renovLink = (slug: string) => {

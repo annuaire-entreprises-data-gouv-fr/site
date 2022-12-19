@@ -1,3 +1,5 @@
+import { GetServerSideProps } from 'next';
+import React from 'react';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
 import { CertificationESSSection } from '#components/labels-and-certificates/ess';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
@@ -12,8 +14,6 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { GetServerSideProps } from 'next';
-import React from 'react';
 import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata, ICertifications {}
