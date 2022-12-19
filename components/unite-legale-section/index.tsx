@@ -1,16 +1,16 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
-import HorizontalSeparator from '#components-ui/horizontal-separator';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
-import {
-  checkHasLabelsAndCertificates,
-  LabelsAndCertificates,
-} from '#components/unite-legale-section/labels-and-certificates';
 import { EAdministration } from '#models/administrations';
 import { IUniteLegale } from '#models/index';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
+import {
+  checkHasLabelsAndCertificates,
+  LabelsAndCertificates,
+} from './labels-and-certificates';
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;

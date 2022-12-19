@@ -1,4 +1,5 @@
 import React from 'react';
+import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import Select from '#components-ui/select';
 import SelectCodeNaf from '#components-ui/select/select-code-naf';
 import SelectCodeSectionNaf from '#components-ui/select/select-section-naf';
@@ -9,7 +10,8 @@ const SearchFilters: React.FC<{
   searchParams?: IParams;
   searchTerm?: string;
 }> = ({ searchParams = {}, searchTerm = '' }) => {
-  const { etat, cp_dep, sap, naf, fn, n, dmin, dmax } = searchParams || {};
+  const { etat, type, label, cp_dep, sap, naf, fn, n, dmin, dmax } =
+    searchParams || {};
 
   const { localisationFilter, dirigeantFilter, administrativeFilter } =
     extractFilters(searchParams || {});
@@ -90,17 +92,44 @@ const SearchFilters: React.FC<{
         searchTerm={searchTerm}
         addSaveClearButton
       >
+        <label>Etat administratif :</label>
+        <Select
+          options={[
+            { value: 'A', label: 'En activité' },
+            { value: 'C', label: 'Cessée' },
+          ]}
+          name="etat"
+          defaultValue={etat}
+          placeholder="Choisir un état administratif"
+        />
+        <SimpleSeparator />
+        <span>Type de structure :</span>
+        <Select
+          options={[
+            {
+              value: 'ei',
+              label: 'Entreprise individuelle',
+            },
+            { value: 'ct', label: 'Collectivité territoriale' },
+            { value: 'asso', label: 'Association' },
+          ]}
+          name="type"
+          defaultValue={type}
+          placeholder="Choisir un type de structure"
+        />
+        <span>Labels & certificats :</span>
+        <Select
+          options={[
+            { value: 'rge', label: 'RGE - Reconnu Garant de l’Environnement' },
+            { value: 'ess', label: 'ESS - Economie Sociale et Solidaire' },
+            { value: 'esv', label: 'Entreprise du Spectacle Vivant' },
+          ]}
+          name="label"
+          defaultValue={label}
+          placeholder="Choisir un label ou un certificat"
+        />
+        <SimpleSeparator />
         <div className="select">
-          <label>Etat administratif :</label>
-          <Select
-            options={[
-              { value: 'A', label: 'En activité' },
-              { value: 'C', label: 'Cessée' },
-            ]}
-            name="etat"
-            defaultValue={etat}
-            placeholder="Choisir un état administratif"
-          />
           <label>Domaine d’activité :</label>
           <SelectCodeSectionNaf
             name="sap"

@@ -1,6 +1,6 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
-import HorizontalSeparator from '#components-ui/horizontal-separator';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';

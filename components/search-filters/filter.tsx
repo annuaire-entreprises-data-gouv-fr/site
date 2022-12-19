@@ -54,7 +54,7 @@ const Filter: React.FC<
           Fermer ✕
         </label>
         <div className="container">
-          {children}
+          <div className="filter-container">{children}</div>
           {addSaveClearButton && (
             <>
               <br />
@@ -135,7 +135,7 @@ const Filter: React.FC<
             margin-top: 5px;
             background-color: #fff;
             border-radius: 3px;
-            width: 400px;
+            width: 450px;
             z-index: 10000;
           }
           .container:before {
@@ -147,6 +147,11 @@ const Filter: React.FC<
             border-width: 10px;
             border-style: solid;
             border-color: transparent transparent white transparent;
+          }
+
+          .container > .filter-container {
+            max-height: 350px;
+            overflow-y: auto;
           }
 
           @media only screen and (min-width: 1px) and (max-width: 991px) {

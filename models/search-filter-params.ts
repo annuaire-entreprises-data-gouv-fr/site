@@ -4,6 +4,8 @@ import { libelleFromCodeNAF, libelleFromCodeSectionNaf } from '#utils/labels';
 
 export interface IParams {
   etat?: string;
+  type?: string;
+  label?: string;
   sap?: string;
   naf?: string;
   cp_dep?: string;
@@ -22,6 +24,8 @@ class SearchFilterParams {
   constructor(query: IParams = {}) {
     const {
       etat = '',
+      type = '',
+      label = '',
       sap = '',
       cp_dep = '',
       fn = '',
@@ -37,6 +41,8 @@ class SearchFilterParams {
 
     this.params = {
       etat,
+      type,
+      label,
       sap,
       //@ts-ignore
       cp_dep: isNaN(cp_dep) ? '' : cp_dep,
@@ -63,6 +69,12 @@ class SearchFilterParams {
 
     return serializeParams({
       etat_administratif: this.params.etat,
+      est_rge: this.params.label === 'rge',
+      est_ess: this.params.label === 'ess',
+      est_entrepreneur_spectacle: this.params.label === 'esv',
+      est_association: this.params.type === 'asso',
+      est_collectivite_territoriale: this.params.type === 'ct',
+      est_entrepreneur_individuel: this.params.type === 'ei',
       code_postal,
       section_activite_principale: this.params.sap,
       departement,
@@ -145,7 +157,7 @@ export const extractFilters = (params: IParams) => {
     administrativeFilter: {
       icon: building,
       label: '',
-      excludeParams: ['sap', 'naf', 'etat'],
+      excludeParams: ['sap', 'naf', 'etat', 'type', 'label'],
     },
     localisationFilter: {
       icon: mapPin,
@@ -175,8 +187,15 @@ export const extractFilters = (params: IParams) => {
       params.etat === 'A' ? 'en activité' : 'cessée'
     }`;
   }
+
   let administrativeFilterCounter = 0;
   if (params.sap) {
+    administrativeFilterCounter += 1;
+  }
+  if (params.type) {
+    administrativeFilterCounter += 1;
+  }
+  if (params.label) {
     administrativeFilterCounter += 1;
   }
   if (params.naf) {
@@ -184,7 +203,8 @@ export const extractFilters = (params: IParams) => {
   }
 
   if (administrativeFilterCounter > 0) {
-    f.administrativeFilter.label += ` + ${administrativeFilterCounter} filtre administratif`;
+    const plural = administrativeFilterCounter ? 's' : '';
+    f.administrativeFilter.label += ` + ${administrativeFilterCounter} filtre${plural} administratif${plural}`;
   }
 
   if (params.cp_dep) {
