@@ -17,13 +17,9 @@ import { TwoColumnTable } from '../table/simple';
 
 interface IProps {
   immatriculation: IImmatriculationJOAFE | IAPINotRespondingError;
-  uniteLegale: IAssociation;
 }
 
-const ImmatriculationJOAFE: React.FC<IProps> = ({
-  immatriculation,
-  uniteLegale,
-}) => {
+const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
   if (isAPINotResponding(immatriculation)) {
     if (immatriculation.errorType === 404) {
       return null;

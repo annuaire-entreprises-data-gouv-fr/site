@@ -7,10 +7,11 @@ import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UnitLegaleDescription } from '#components/unite-legale-description';
+import { checkHasLabelsAndCertificates } from '#components/unite-legale-section/labels-and-certificates';
 import {
+  isAssociation,
   isCollectiviteTerritoriale,
   IUniteLegale,
-  isAssociation,
 } from '#models/index';
 import { formatIntFr } from '#utils/helpers';
 
@@ -22,6 +23,7 @@ export enum FICHE {
   ELUS = 'élus',
   COMPTES = 'bilans & comptes',
   ACTES = 'actes & statuts',
+  CERTIFICATS = 'Labels ou certifications',
   DIVERS = 'conventions collectives',
 }
 
@@ -71,6 +73,13 @@ const Tabs: React.FC<{
       shouldDisplay: true,
     },
     {
+      ficheType: FICHE.CERTIFICATS,
+      label: 'Labels ou certifications',
+      pathPrefix: '/labels-certifications/',
+      noFollow: true,
+      shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
+    },
+    {
       ficheType: FICHE.DIVERS,
       label: 'Conventions collectives',
       pathPrefix: '/divers/',
@@ -95,7 +104,6 @@ const Tabs: React.FC<{
             </a>
           ))}
       </div>
-
       <style jsx>{`
         .title-tabs {
           display: flex;

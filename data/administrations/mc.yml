@@ -1,0 +1,15 @@
+slug: mc
+short: MC
+long: Ministère de la culture (MC)
+site: https://www.culture.gouv.fr/
+contact: https://www.culture.gouv.fr/Nous-contacter
+apiMonitors:
+  - apiName: API Déclarations des entrepreneurs de spectacles vivants
+    datagouv:
+      - label: Déclarations des entrepreneurs de spectacles vivants
+        link: https://www.data.gouv.fr/fr/datasets/declarations-des-entrepreneurs-de-spectacles-vivants/
+    id: 793285299
+    data:
+      - Entrepreneurs de spectacles vivants
+description: |
+  Le ministère de l’interieur publie les déclarations des entrepreneurs de spectacles vivants.

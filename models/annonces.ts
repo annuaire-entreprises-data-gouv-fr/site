@@ -77,10 +77,10 @@ const getAnnoncesFromSlug = async (siren: string) => {
   }
 
   return {
+    annoncesAssociation,
     bodacc,
     comptesAssociation,
     uniteLegale,
-    annoncesAssociation,
   };
 };
 
