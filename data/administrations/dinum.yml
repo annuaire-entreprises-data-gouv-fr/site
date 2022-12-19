@@ -15,12 +15,15 @@ apiMonitors:
         link: https://www.data.gouv.fr/fr/datasets/repertoire-national-des-elus-1/
       - label: Liste des Entreprises RGE
         link: https://www.data.gouv.fr/fr/datasets/liste-des-entreprises-rge-1/
+      - label: Déclarations des entrepreneurs de spectacles vivants
+        link: https://www.data.gouv.fr/fr/datasets/declarations-des-entrepreneurs-de-spectacles-vivants/
     id: 787859512
     data:
       - Recherche de dénomination
       - Recherche d’élu
       - Recherche de dirigeant
       - Code Officiel Géographique des collectivités
+      - Entrepreneurs de spectacles vivants
   - apiName: API Base Adresse Nationale
     apigouvLink: https://api.gouv.fr/les-api/base-adresse-nationale
     datagouv:

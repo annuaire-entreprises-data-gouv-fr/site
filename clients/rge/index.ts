@@ -1,10 +1,7 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import {
-  IRGECompanyCertifications,
-  INomCertificat,
-} from '#models/certifications';
-import { Siren, Siret } from '#utils/helpers';
+import { INomCertificat, IRGECertification } from '#models/certifications/rge';
+import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 
 interface IRGEResponse {
@@ -20,7 +17,7 @@ interface IRGEResponse {
     nom_qualification: string;
     organisme: string;
     particulier: boolean;
-    siret: Siret;
+    siret: string;
     site_internet: string;
     telephone: string;
     url_qualification: string;
@@ -31,8 +28,8 @@ interface IRGEResponse {
  * Reconnu Garant de l'Environnement (RGE)
  * https://france-renov.gouv.fr/annuaire-rge
  */
-const clientRGE = async (siren: Siren): Promise<IRGECompanyCertifications> => {
-  const route = routes.certifications.rge;
+const clientRGE = async (siren: Siren): Promise<IRGECertification> => {
+  const route = routes.certifications.rge.api;
   const response = await httpGet(route, { params: { qs: `siret:${siren}*` } });
 
   const data = response.data as IRGEResponse;
@@ -45,7 +42,7 @@ const clientRGE = async (siren: Siren): Promise<IRGECompanyCertifications> => {
   return mapToDomainObject(response.data);
 };
 
-const mapToDomainObject = (rge: IRGEResponse): IRGECompanyCertifications => {
+const mapToDomainObject = (rge: IRGEResponse) => {
   const [firstResult] = rge.results;
 
   const {
@@ -60,7 +57,7 @@ const mapToDomainObject = (rge: IRGEResponse): IRGECompanyCertifications => {
     email,
   } = firstResult;
 
-  const companyInfo: IRGECompanyCertifications['companyInfo'] = {
+  const companyInfo = {
     adresse: `${adresse}, ${code_postal}, ${commune}`,
     email,
     nomEntreprise: nom_entreprise,
@@ -70,7 +67,7 @@ const mapToDomainObject = (rge: IRGEResponse): IRGECompanyCertifications => {
     workingWithIndividual: particulier,
   };
 
-  const certifications: IRGECompanyCertifications['certifications'] = [];
+  const certifications: IRGECertification['certifications'] = [];
 
   rge.results.forEach((result) => {
     const findCertification = certifications.findIndex(

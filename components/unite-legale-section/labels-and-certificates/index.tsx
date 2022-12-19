@@ -1,6 +1,6 @@
-import InformationTooltip from '../../components-ui/information-tooltip';
-import { VerifiedTag } from '../../components-ui/verified-tag';
-import { IUniteLegale } from '../../models';
+import InformationTooltip from '../../../components-ui/information-tooltip';
+import { VerifiedTag } from '../../../components-ui/verified-tag';
+import { IUniteLegale } from '../../../models';
 
 export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estEntrepreneurSpectacle ||
@@ -39,6 +39,14 @@ export const LabelsAndCertificates: React.FC<{ uniteLegale: IUniteLegale }> = ({
             <VerifiedTag>Entrepreneur de spectacles vivants</VerifiedTag>
           </InformationTooltip>
           <br />
+        </>
+      )}
+      {checkHasLabelsAndCertificates(uniteLegale) && (
+        <>
+          <br />
+          <a rel="nofollow" href={`/label-certifications/${uniteLegale.siren}`}>
+            → en savoir plus
+          </a>
         </>
       )}
     </>

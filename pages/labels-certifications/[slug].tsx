@@ -1,14 +1,14 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import { CertificationsRGESection } from '#components/certifications-rge-section';
+import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
+import { CertificationESSSection } from '#components/labels-and-certificates/ess';
+import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
 import Title, { FICHE } from '#components/title-section';
-import { IAPINotRespondingError } from '#models/api-not-responding';
+import { checkHasLabelsAndCertificates } from '#components/unite-legale-section/labels-and-certificates';
 import {
-  getRGECertificationsFromSlug,
-  IRGECompanyCertifications,
+  getCertificationsFromSlug,
+  ICertifications,
 } from '#models/certifications';
-import { IUniteLegale } from '#models/index';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -16,14 +16,12 @@ import {
 } from '#utils/server-side-props-helper/post-server-side-props';
 import Page from '../../layouts';
 
-interface IProps extends IPropsWithMetadata {
-  certificationsRGE: IRGECompanyCertifications | IAPINotRespondingError;
-  uniteLegale: IUniteLegale;
-}
+interface IProps extends IPropsWithMetadata, ICertifications {}
 
 const RGE: React.FC<IProps> = ({
-  certificationsRGE,
+  rge,
   uniteLegale,
+  entrepreneurSpectacles,
   metadata,
 }) => {
   return (
@@ -35,10 +33,21 @@ const RGE: React.FC<IProps> = ({
     >
       <div className="content-container">
         <Title ficheType={FICHE.CERTIFICATS} uniteLegale={uniteLegale} />
-        <CertificationsRGESection
-          uniteLegale={uniteLegale}
-          certificationsRGE={certificationsRGE}
-        />
+        {!checkHasLabelsAndCertificates(uniteLegale) && (
+          <p>Cette structure ne possède aucun label ou certificat.</p>
+        )}
+        {uniteLegale.complements.estRge && (
+          <CertificationsRGESection
+            uniteLegale={uniteLegale}
+            certificationsRGE={rge}
+          />
+        )}
+        {uniteLegale.complements.estEss && <CertificationESSSection />}
+        {uniteLegale.complements.estEntrepreneurSpectacle && (
+          <CertificationsEntrepreneurSpectaclesSection
+            entrepreneurSpectacles={entrepreneurSpectacles}
+          />
+        )}
       </div>
     </Page>
   );
@@ -47,12 +56,15 @@ const RGE: React.FC<IProps> = ({
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
-    const uniteLegale = await getUniteLegaleFromSlug(slug);
-    const certificationsRGE = await getRGECertificationsFromSlug(slug);
+
+    const { uniteLegale, rge, entrepreneurSpectacles } =
+      await getCertificationsFromSlug(slug);
+
     return {
       props: {
-        certificationsRGE,
+        rge,
         uniteLegale,
+        entrepreneurSpectacles,
       },
     };
   }

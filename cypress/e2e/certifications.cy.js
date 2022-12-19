@@ -11,3 +11,17 @@ describe.only('Certifications', () => {
     });
   });
 });
+
+describe.only('Certifications', () => {
+  describe('ESS & Spectacles vivants', () => {
+    it('Should display ESS and scpetacles vivants', () => {
+      cy.visit('/labels-certifications/842019051');
+      cy.contains('ESS');
+      cy.contains('Numéro de récipissé');
+    });
+    it('Should display only spectacles vivants', () => {
+      cy.visit('/labels-certifications/399463603');
+      cy.contains('Numéro de récipissé');
+    });
+  });
+});

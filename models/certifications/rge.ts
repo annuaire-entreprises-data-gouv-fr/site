@@ -5,8 +5,9 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import { Siret, verifySiren } from '#utils/helpers';
+import { Siren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
+import { IUniteLegale } from '..';
 
 export type INomCertificat =
   | 'QUALIBAT-RGE'
@@ -28,12 +29,12 @@ export type INomCertificat =
   | 'Qualiforage module Nappe'
   | 'Qualisol Collectif';
 
-export interface IRGECompanyCertifications {
+export interface IRGECertification {
   companyInfo: {
     nomEntreprise: string;
     adresse: string;
     email: string;
-    siret: Siret;
+    siret: string;
     siteInternet: string;
     telephone: string;
     workingWithIndividual: boolean;
@@ -48,18 +49,21 @@ export interface IRGECompanyCertifications {
   }[];
 }
 
-export const getRGECertificationsFromSlug = async (
-  slug: string
-): Promise<IRGECompanyCertifications | IAPINotRespondingError | {}> => {
-  const siren = verifySiren(slug);
+export const getRGECertifications = async (
+  uniteLegale: IUniteLegale
+): Promise<IRGECertification | IAPINotRespondingError> => {
   try {
-    return await clientRGE(siren);
+    if (!uniteLegale.complements.estRge) {
+      throw new HttpNotFound('Not a RGE company');
+    }
+
+    return await clientRGE(uniteLegale.siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.ADEME, 404);
     }
     logErrorInSentry('Error in API RGE', {
-      siren,
+      siren: uniteLegale.siren,
       details: e.toString(),
     });
     return APINotRespondingFactory(EAdministration.ADEME, 500);
