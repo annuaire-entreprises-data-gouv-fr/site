@@ -4,7 +4,6 @@ import { IEtatCivil } from '#models/immatriculation/rncs';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
-  createDefaultUniteLegaleComplements,
   IUniteLegale,
 } from '#models/index';
 import {
@@ -208,7 +207,7 @@ const mapToDomainObject = (
     oldSiren: originalSiren,
     siege,
     allSiegesSiret,
-    natureJuridique: categorieJuridiqueUniteLegale,
+    natureJuridique: categorieJuridiqueUniteLegale || '',
     libelleNatureJuridique: libelleFromCategoriesJuridiques(
       categorieJuridiqueUniteLegale
     ),

@@ -229,7 +229,7 @@ const mapToUniteLegale = (
     nombreEtablissements: result.nombre_etablissements || 1,
     nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
     chemin: result.siren,
-    natureJuridique: nature_juridique,
+    natureJuridique: nature_juridique || '',
     libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
       result.activite_principale,
       false
