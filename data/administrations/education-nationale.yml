@@ -1,0 +1,17 @@
+slug: education-nationale
+short: Education nationale
+site: https://www.education.gouv.fr/
+logoType: portrait
+long: Ministère de l'éducation nationale et de la jeunesse
+contact: https://www.education.gouv.fr/contactez-nous-41633
+apiMonitors:
+  - apiName: API Éducation Nationale
+    apiGouvLink: https://api.gouv.fr/documentation/api-annuaire-education
+    datagouv:
+      - label: Annuaire de l’Education Nationale
+        link: https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-annuaire-education'
+    # id: 793262360 @TODO SHOULD BE UPDATE
+    data:
+      - Annuaire de l’Education Nationale
+description: |
+  Le ministère de l'éducation nationale et de la jeunesse met en œuvre dans l'académie la politique éducative définie au niveau national. Il a autorité sur le premier degré (écoles maternelles et élémentaires) et le second degré (collèges et lycées).

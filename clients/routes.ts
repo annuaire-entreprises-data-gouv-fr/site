@@ -17,6 +17,8 @@ const routes = {
     api: 'https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
     site: 'https://code.travail.gouv.fr/outils/convention-collective',
   },
+  educationNationale:
+    'https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-annuaire-education',
   geo: {
     commune:
       'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json&nom=',

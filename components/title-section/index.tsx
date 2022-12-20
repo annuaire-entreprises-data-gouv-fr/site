@@ -7,7 +7,10 @@ import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UnitLegaleDescription } from '#components/unite-legale-description';
-import { checkHasLabelsAndCertificates } from '#components/unite-legale-section/labels-and-certificates';
+import {
+  checkHasLabelsAndCertificates,
+  checkHasUAI,
+} from '#components/unite-legale-section/labels-and-certificates';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
@@ -16,15 +19,16 @@ import {
 import { formatIntFr } from '#utils/helpers';
 
 export enum FICHE {
+  ACTES = 'actes & statuts',
+  ANNONCES = 'annonces',
+  CERTIFICATS = 'Labels ou certifications',
+  COMPTES = 'bilans & comptes',
+  DIRIGEANTS = 'dirigeants',
+  DIVERS = 'conventions collectives',
+  ELUS = 'élus',
+  ETABLISSEMENTS_SCOLAIRE = 'établissement scolaire',
   INFORMATION = 'informations générales',
   JUSTIFICATIFS = 'justificatifs',
-  ANNONCES = 'annonces',
-  DIRIGEANTS = 'dirigeants',
-  ELUS = 'élus',
-  COMPTES = 'bilans & comptes',
-  ACTES = 'actes & statuts',
-  CERTIFICATS = 'Labels et certificats',
-  DIVERS = 'conventions collectives',
 }
 
 interface IProps {
@@ -78,6 +82,13 @@ const Tabs: React.FC<{
       pathPrefix: '/labels-certifications/',
       noFollow: true,
       shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
+    },
+    {
+      ficheType: FICHE.ETABLISSEMENTS_SCOLAIRE,
+      label: 'Etablissement scolaire',
+      pathPrefix: '/etablissements-scolaire/',
+      noFollow: true,
+      shouldDisplay: checkHasUAI(uniteLegale),
     },
     {
       ficheType: FICHE.DIVERS,

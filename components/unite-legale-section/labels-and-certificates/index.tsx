@@ -7,6 +7,9 @@ export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estEss ||
   uniteLegale.complements.estRge;
 
+export const checkHasUAI = (uniteLegale: IUniteLegale) =>
+  uniteLegale.complements.estUai;
+
 export const LabelsAndCertificates: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
 }) => {
