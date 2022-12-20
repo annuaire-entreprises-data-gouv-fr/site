@@ -40,13 +40,13 @@ describe(`Dirigeants and élus pages`, () => {
 describe(`Labels and certificates`, () => {
   it('RGE', () => {
     cy.visit(`/entreprise/518286976`);
-    cy.contains('Label ou certification').should('be.visible');
+    cy.contains('Labels et certificats').should('be.visible');
     cy.contains('RGE - Reconnu Garant de l’Environnement').should('be.visible');
   });
 
   it('ESS et Spectacle vivant', () => {
     cy.visit(`/entreprise/842019051`);
-    cy.contains('Label ou certification').should('be.visible');
+    cy.contains('Labels et certificats').should('be.visible');
     cy.contains('ESS - Entreprise Sociale et Solidaire').should('be.visible');
     cy.contains('Entrepreneur de spectacles vivants').should('be.visible');
   });

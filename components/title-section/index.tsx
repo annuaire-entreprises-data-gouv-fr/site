@@ -23,7 +23,7 @@ export enum FICHE {
   ELUS = 'élus',
   COMPTES = 'bilans & comptes',
   ACTES = 'actes & statuts',
-  CERTIFICATS = 'Labels ou certifications',
+  CERTIFICATS = 'Labels et certificats',
   DIVERS = 'conventions collectives',
 }
 
@@ -74,8 +74,8 @@ const Tabs: React.FC<{
     },
     {
       ficheType: FICHE.CERTIFICATS,
-      label: 'Labels ou certifications',
-      pathPrefix: '/labels-certifications/',
+      label: 'Labels et certificats',
+      pathPrefix: '/labels-certificats/',
       noFollow: true,
       shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
     },

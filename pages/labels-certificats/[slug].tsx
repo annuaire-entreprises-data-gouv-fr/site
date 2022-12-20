@@ -27,7 +27,7 @@ const RGE: React.FC<IProps> = ({
   return (
     <Page
       small={true}
-      title={`Labels et certifications - ${uniteLegale.nomComplet}`}
+      title={`Labels et certificats - ${uniteLegale.nomComplet}`}
       noIndex={true}
       isBrowserOutdated={metadata.isBrowserOutdated}
     >

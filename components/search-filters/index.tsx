@@ -117,7 +117,7 @@ const SearchFilters: React.FC<{
           defaultValue={type}
           placeholder="Choisir un type de structure"
         />
-        <span>Labels & certificats :</span>
+        <span>Labels et certificats :</span>
         <Select
           options={[
             { value: 'rge', label: 'RGE - Reconnu Garant de l’Environnement' },
