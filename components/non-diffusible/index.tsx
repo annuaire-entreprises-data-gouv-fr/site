@@ -3,6 +3,22 @@ import ButtonLink from '#components-ui/button';
 import { INSEE } from '#components/administrations';
 import { Section } from '#components/section';
 
+const HowToChange = () => (
+  <>
+    <p>
+      Si cette entreprise est la votre et que vous souhaitez vous rendre
+      diffusible de nouveau la démarche est à effectuer auprès de l’
+      <INSEE />
+      &nbsp;:
+    </p>
+    <div className="layout-center">
+      <ButtonLink to="https://statut-diffusion-sirene.insee.fr/" alt>
+        ⇢ Rendre mon entreprise diffusible
+      </ButtonLink>
+    </div>
+  </>
+);
+
 const NonDiffusible = () => (
   <>
     <p>
@@ -19,23 +35,23 @@ const NonDiffusible = () => (
       Pour des raisons de sécurité, certaines associations et les organismes
       relevant du Ministère de la Défense ne sont pas diffusibles non plus.
     </p>
-    <p>
-      Si cette entreprise est la votre et que vous souhaitez vous rendre
-      diffusible de nouveau la démarche est à effectuer auprès de l’
-      <INSEE />
-      &nbsp;:
-    </p>
-    <div className="layout-center">
-      <ButtonLink to="https://statut-diffusion-sirene.insee.fr/" alt>
-        ⇢ Rendre mon entreprise diffusible
-      </ButtonLink>
-    </div>
+    <HowToChange />
   </>
 );
 
 export const NonDiffusibleSection = () => (
   <Section title="Qu’est ce qu’une entreprise non-diffusible ?">
     <NonDiffusible />
+  </Section>
+);
+
+export const DirigeantsNonDiffusibleSection = () => (
+  <Section title="Données non-diffusibles">
+    <p>
+      Les dirigeant(e)s de cette entreprise ont demandé à de que leurs
+      informations ne soient pas diffusées.
+    </p>
+    <HowToChange />
   </Section>
 );
 

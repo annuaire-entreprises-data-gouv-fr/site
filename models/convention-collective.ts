@@ -6,6 +6,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from './api-not-responding';
+import { estDiffusible } from './statut-diffusion';
 import { getUniteLegaleFromSlug } from './unite-legale';
 
 export interface IConventionCollective {
@@ -32,7 +33,7 @@ const getConventionCollectives = async (
   uniteLegale: IUniteLegale
 ): Promise<IConventionCollective[] | IAPINotRespondingError> => {
   try {
-    if (!uniteLegale.estDiffusible) {
+    if (!estDiffusible(uniteLegale)) {
       return [];
     }
     const sirets = uniteLegale.etablissements.all.map((e) => e.siret);

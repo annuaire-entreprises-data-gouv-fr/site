@@ -1,4 +1,5 @@
 import { isAPINotResponding } from '#models/api-not-responding';
+import { estActif } from '#models/etat-administratif';
 import { IJustificatifs } from '#models/justificatifs';
 import { formatDateLong } from '#utils/helpers';
 
@@ -56,7 +57,7 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
           </li>
         )}
         <li>
-          {uniteLegale.estActive ? (
+          {estActif(uniteLegale) ? (
             <a href="#insee">
               <b>Inscrite</b> à l’Insee, depuis le{' '}
               {formatDateLong(uniteLegale.dateCreation)}

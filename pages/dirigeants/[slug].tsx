@@ -5,11 +5,13 @@ import BeneficiairesSection from '#components/dirigeants-section/beneficiaires';
 import DirigeantsEntrepriseIndividuelleSection from '#components/dirigeants-section/insee-dirigeant';
 import DirigeantsSection from '#components/dirigeants-section/rncs-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
+import { DirigeantsNonDiffusibleSection } from '#components/non-diffusible';
 import Title, { FICHE } from '#components/title-section';
 import {
   getDirigeantsWithUniteLegaleFromSlug,
   IDirigeants,
 } from '#models/dirigeants';
+import { estDiffusible } from '#models/statut-diffusion';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -39,25 +41,30 @@ const DirigeantsPage: React.FC<IProps> = ({
             uniteLegale={uniteLegale}
             immatriculationRNCS={immatriculationRNCS}
           />
-          {uniteLegale.estDiffusible &&
-            uniteLegale.complements.estEntrepreneurIndividuel &&
-            uniteLegale.dirigeant && (
-              <>
-                <DirigeantsEntrepriseIndividuelleSection
-                  dirigeant={uniteLegale.dirigeant}
-                />
-                <BreakPageForPrint />
-              </>
-            )}
-          <DirigeantsSection
-            immatriculationRNCS={immatriculationRNCS}
-            siren={uniteLegale.siren}
-          />
-          <BreakPageForPrint />
-          <BeneficiairesSection
-            immatriculationRNCS={immatriculationRNCS}
-            siren={uniteLegale.siren}
-          />
+          {estDiffusible(uniteLegale) ? (
+            <>
+              {uniteLegale.complements.estEntrepreneurIndividuel &&
+                uniteLegale.dirigeant && (
+                  <>
+                    <DirigeantsEntrepriseIndividuelleSection
+                      dirigeant={uniteLegale.dirigeant}
+                    />
+                    <BreakPageForPrint />
+                  </>
+                )}
+              <DirigeantsSection
+                immatriculationRNCS={immatriculationRNCS}
+                siren={uniteLegale.siren}
+              />
+              <BreakPageForPrint />
+              <BeneficiairesSection
+                immatriculationRNCS={immatriculationRNCS}
+                siren={uniteLegale.siren}
+              />
+            </>
+          ) : (
+            <DirigeantsNonDiffusibleSection />
+          )}
         </>
       </div>
     </Page>

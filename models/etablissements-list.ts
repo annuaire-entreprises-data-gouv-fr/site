@@ -1,5 +1,7 @@
 import constants from '#models/constants';
 import { IEtablissement } from '.';
+import { estActif } from './etat-administratif';
+import { estDiffusible } from './statut-diffusion';
 
 export interface IEtablissementsList {
   etablissements: {
@@ -29,12 +31,12 @@ export const createEtablissementsList = (
   realTotal?: number
 ) => {
   const open = all
-    .filter((e) => e.estActif && e.estDiffusible)
+    .filter((e) => estActif(e) && estDiffusible(e))
     .sort((a) => (a.estSiege ? -1 : 1));
 
-  const closed = all.filter((e) => !e.estActif && e.estDiffusible);
+  const closed = all.filter((e) => !estActif(e) && estDiffusible(e));
 
-  const unknown = all.filter((e) => !e.estDiffusible);
+  const unknown = all.filter((e) => !estDiffusible(e));
 
   // real total can exceede all.length if we need pagination
   const nombreEtablissements = realTotal || all.length;

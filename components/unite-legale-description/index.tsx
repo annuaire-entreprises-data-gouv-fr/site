@@ -1,4 +1,5 @@
 import React from 'react';
+import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
 import { formatDateLong } from '#utils/helpers';
 
@@ -21,7 +22,7 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
           a été créée le <b>{formatDateLong(uniteLegale.dateCreation)}</b>.{' '}
         </>
       )}
-      {uniteLegale.dateDebutActivite && !uniteLegale.estActive && (
+      {uniteLegale.dateDebutActivite && !estActif(uniteLegale) && (
         <>
           Elle a été fermée le{' '}
           <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>.{' '}

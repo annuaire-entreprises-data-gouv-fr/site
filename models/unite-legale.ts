@@ -16,7 +16,7 @@ import {
   createEtablissementsList,
   IEtablissementsList,
 } from '#models/etablissements-list';
-import { getEtatAdministratifUniteLegale } from '#models/etat-administratif';
+import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { Siren, verifySiren } from '#utils/helpers';
 import {
   logFirstSireneInseefailed,
@@ -31,6 +31,7 @@ import {
 } from '.';
 import { isAssociation } from '.';
 import { getComplements } from './complements';
+import { estDiffusible, ISTATUTDIFFUSION } from './statut-diffusion';
 
 /**
  * List of siren whose owner refused diffusion
@@ -96,18 +97,23 @@ class UniteLegaleFactory {
 
     if (
       uniteLegale.complements.estEntrepreneurIndividuel &&
-      !uniteLegale.estDiffusible
+      !estDiffusible(uniteLegale)
     ) {
       uniteLegale.nomComplet = 'Entreprise non-diffusible';
     }
 
-    // only entreprise commerciales
     if (isProtectedSiren(uniteLegale.siren)) {
-      uniteLegale.estEntrepriseCommercialeDiffusible = false;
+      uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PARTIAL;
     }
 
-    uniteLegale.etatAdministratif =
-      getEtatAdministratifUniteLegale(uniteLegale);
+    // en sommeil
+    if (
+      estActif(uniteLegale) &&
+      !(uniteLegale.etablissements.all || []).find((a) => estActif(a))
+    ) {
+      uniteLegale.etatAdministratif =
+        IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT;
+    }
 
     return uniteLegale;
   }
@@ -269,7 +275,7 @@ const mergeUniteLegaleInsee = (
  */
 const createNonDiffusibleUniteLegale = (siren: Siren) => {
   const uniteLegale = createDefaultUniteLegale(siren);
-  uniteLegale.estDiffusible = false;
+  uniteLegale.statutDiffusion = ISTATUTDIFFUSION.NONDIFF;
   uniteLegale.nomComplet =
     'Les informations de cette entreprise ne sont pas publiques';
 

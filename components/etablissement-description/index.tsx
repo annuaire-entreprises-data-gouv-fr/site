@@ -1,5 +1,7 @@
 import React from 'react';
+import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/index';
+import { estDiffusible } from '#models/statut-diffusion';
 import { formatDateLong } from '#utils/helpers';
 
 interface IProps {
@@ -8,11 +10,17 @@ interface IProps {
   usedInEntreprisePage?: boolean;
 }
 
-const statusLabel = (estActif: boolean | null) => {
-  if (estActif === null) {
-    return ' dans un état administratif inconnu';
+const statusLabel = (etatAdministratif: IETATADMINSTRATIF) => {
+  if (etatAdministratif === IETATADMINSTRATIF.ACTIF) {
+    return ' en activité';
   }
-  return estActif ? ' en activité' : ' fermé';
+  if (
+    etatAdministratif === IETATADMINSTRATIF.CESSEE ||
+    etatAdministratif === IETATADMINSTRATIF.FERME
+  ) {
+    return ' fermé';
+  }
+  return ' dans un état administratif inconnu';
 };
 
 export const EtablissementDescription: React.FC<IProps> = ({
@@ -20,10 +28,10 @@ export const EtablissementDescription: React.FC<IProps> = ({
   uniteLegale,
 }) => (
   <>
-    {uniteLegale.estDiffusible && (
+    {estDiffusible(uniteLegale) && (
       <p>
         Cet établissement est
-        <b>{statusLabel(etablissement.estActif)}.</b> C’est
+        <b>{statusLabel(etablissement.etatAdministratif)}.</b> C’est
         {etablissement.estSiege ? (
           <b> le siège social</b>
         ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 ? (
@@ -63,7 +71,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
           <b>{formatDateLong(etablissement.dateCreation)}</b>
         </>
       )}{' '}
-      {etablissement.dateDebutActivite && !etablissement.estActif && (
+      {etablissement.dateDebutActivite && !estActif(etablissement) && (
         <>
           et il a été fermé le{' '}
           <b>{formatDateLong(etablissement.dateDebutActivite)}</b>

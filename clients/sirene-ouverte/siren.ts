@@ -2,7 +2,9 @@ import { HttpNotFound, HttpServerError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { createEtablissementsList } from '#models/etablissements-list';
+import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { createDefaultUniteLegale, IUniteLegale } from '#models/index';
+import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
 import {
   isEntrepreneurIndividuelFromNatureJuridique,
   Siren,
@@ -137,8 +139,11 @@ const mapToDomainObject = (
       page,
       nombre_etablissements
     ),
-    estDiffusible: true,
-    estActive: !!(siege && siege.estActif),
+    statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
+    etatAdministratif:
+      siege && estActif(siege)
+        ? IETATADMINSTRATIF.ACTIF
+        : IETATADMINSTRATIF.CESSEE,
     nomComplet: nom_complet || 'Nom inconnu',
     chemin: nom_url,
     dateCreation: date_creation_entreprise,

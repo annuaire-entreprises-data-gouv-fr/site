@@ -1,5 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import { etatFromEtatAdministratifInsee } from '#clients/sirene-insee/helpers';
 import constants from '#models/constants';
 import { IEtatCivil, IPersonneMorale } from '#models/immatriculation/rncs';
 import {
@@ -224,7 +225,10 @@ const mapToUniteLegale = (
   return {
     ...createDefaultUniteLegale(siren),
     siege,
-    estActive: result.etat_administratif === 'A',
+    etatAdministratif: etatFromEtatAdministratifInsee(
+      result.etat_administratif,
+      siren
+    ),
     nomComplet,
     nombreEtablissements: result.nombre_etablissements || 1,
     nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,

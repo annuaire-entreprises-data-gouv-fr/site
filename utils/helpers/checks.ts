@@ -1,4 +1,6 @@
+import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
+import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
 
 export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string
@@ -35,16 +37,12 @@ export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
     // we dont index EI
     return true;
   }
-  if (!uniteLegale.estActive) {
+  if (!estActif(uniteLegale)) {
     // we dont index closed entities
     return true;
   }
-  if (!uniteLegale.estDiffusible) {
-    // we dont index non diffusible
-    return true;
-  }
-  if (!uniteLegale.estEntrepriseCommercialeDiffusible) {
-    // we dont index entreprise that personnaly opposed diffusion
+  if (uniteLegale.statutDiffusion !== ISTATUTDIFFUSION.DIFFUSIBLE) {
+    // we dont index non diffusible or partially diffusible
     return true;
   }
   return false;

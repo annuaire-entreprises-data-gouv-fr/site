@@ -1,3 +1,5 @@
+import { IETATADMINSTRATIF } from '#models/etat-administratif';
+import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
 import logErrorInSentry from '../../utils/sentry';
 
 /**
@@ -7,25 +9,23 @@ import logErrorInSentry from '../../utils/sentry';
  * @param siret
  * @returns
  */
-export const estActiveFromEtatAdministratifInsee = (
+export const etatFromEtatAdministratifInsee = (
   etatAdministratifInsee: 'A' | 'C' | 'F' | string = '',
-  siren = '',
-  siret = ''
+  sirenOrSiret: string
 ) => {
   switch (etatAdministratifInsee) {
     case 'A':
-      return true;
+      return IETATADMINSTRATIF.ACTIF;
     case 'C':
-      return false;
+      return IETATADMINSTRATIF.CESSEE;
     case 'F':
-      return false;
+      return IETATADMINSTRATIF.FERME;
     default:
       logErrorInSentry('API Sirene - Unknown Etat Administratif', {
-        siren,
-        siret,
+        siret: sirenOrSiret,
         details: etatAdministratifInsee,
       });
-      return false;
+      return IETATADMINSTRATIF.INCONNU;
   }
 };
 
@@ -36,24 +36,22 @@ export const estActiveFromEtatAdministratifInsee = (
  * @param siret
  * @returns
  */
-export const estDiffusibleFromStatutDiffusionInsee = (
+export const statuDiffusionFromStatutDiffusionInsee = (
   statutDiffusionInsee: 'O' | 'N' | 'P' | string = '',
-  siren = '',
-  siret = ''
+  sirenOrSiret: string
 ) => {
   switch (statutDiffusionInsee) {
     case 'O':
-      return true;
+      return ISTATUTDIFFUSION.DIFFUSIBLE;
     case 'N':
-      return false;
+      return ISTATUTDIFFUSION.NONDIFF;
     case 'P':
-      return false;
+      return ISTATUTDIFFUSION.PARTIAL;
     default:
       logErrorInSentry('API Sirene - Unknown Statut Diffusion', {
-        siren,
-        siret,
+        siret: sirenOrSiret,
         details: statutDiffusionInsee,
       });
-      return false;
+      return ISTATUTDIFFUSION.DIFFUSIBLE;
   }
 };

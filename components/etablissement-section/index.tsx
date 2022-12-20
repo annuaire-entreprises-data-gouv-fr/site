@@ -10,6 +10,7 @@ import { Section } from '#components/section';
 import { CopyPaste, TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations';
+import { estActif } from '#models/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import { formatDate, formatSiret } from '#utils/helpers';
 
@@ -97,7 +98,7 @@ const EtablissementSection: React.FC<IProps> = ({
       'Avis de situation Insee',
       <AvisSituationLink siret={etablissement.siret} />,
     ],
-    ...(etablissement.estActif === false
+    ...(!estActif(etablissement)
       ? [['Date de fermeture', formatDate(etablissement.dateFermeture || '')]]
       : []),
   ];

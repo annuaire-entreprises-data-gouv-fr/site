@@ -5,7 +5,7 @@ import {
   createEtablissementsList,
   IEtablissementsList,
 } from '#models/etablissements-list';
-import { getEtatAdministratifEtablissement } from '#models/etat-administratif';
+import { estActif } from '#models/etat-administratif';
 import { createDefaultEtablissement, IEtablissement } from '#models/index';
 import {
   formatAdresse,
@@ -17,8 +17,8 @@ import {
 import { libelleFromCodeEffectif, libelleFromCodeNAF } from '#utils/labels';
 import { inseeClientGet, InseeClientOptions } from '.';
 import {
-  estActiveFromEtatAdministratifInsee,
-  estDiffusibleFromStatutDiffusionInsee,
+  etatFromEtatAdministratifInsee,
+  statuDiffusionFromStatutDiffusionInsee,
 } from './helpers';
 
 interface IInseeEtablissementResponse {
@@ -205,20 +205,19 @@ export const mapEtablissementToDomainObject = (
       (periode) => periode.changementEtatAdministratifEtablissement === true
     ) || periodesEtablissement[0];
 
-  const estActif = estActiveFromEtatAdministratifInsee(
-    etatAdministratifEtablissement
+  const statutDiffusion = statuDiffusionFromStatutDiffusionInsee(
+    statutDiffusionEtablissement,
+    siret
   );
 
-  const estDiffusible = estDiffusibleFromStatutDiffusionInsee(
-    statutDiffusionEtablissement
+  const etatAdministratif = etatFromEtatAdministratifInsee(
+    etatAdministratifEtablissement,
+    siret
   );
 
-  const etatAdministratif = getEtatAdministratifEtablissement(
-    estActif,
-    estDiffusible
-  );
-
-  const dateFermeture = !estActif ? lastStateChange.dateDebut : null;
+  const dateFermeture = !estActif({ etatAdministratif })
+    ? lastStateChange.dateDebut
+    : null;
 
   const defaultEtablissement = createDefaultEtablissement();
 
@@ -271,8 +270,7 @@ export const mapEtablissementToDomainObject = (
     ),
     dateDerniereMiseAJour: dateDernierTraitementEtablissement,
     estSiege: !!etablissementSiege,
-    estActif,
-    estDiffusible,
+    statutDiffusion,
     etatAdministratif,
     dateFermeture,
     trancheEffectif: trancheEffectifsEtablissement,
