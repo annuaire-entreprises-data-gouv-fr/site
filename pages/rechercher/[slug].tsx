@@ -39,6 +39,7 @@ const LandingPage: React.FC<IProps> = ({
           style={{ display: 'none' }}
           name={filter.name}
           value={filter.value}
+          readOnly
         />
         <div className="search-bar-wrapper">
           <SearchBar
