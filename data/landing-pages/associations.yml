@@ -1,0 +1,9 @@
+slug: associations
+title: Annuaire des associations
+description: Retrouvez n’importe quelle association pourvue d’un numéro SIRET
+filter:
+  name: type
+  value: asso
+seo:
+  title:
+  description:

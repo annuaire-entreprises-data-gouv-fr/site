@@ -1,0 +1,9 @@
+slug: ess
+title: Moteur de recherche des Entreprises ESS
+description: Retrouvez une entreprise appartenant au champ de l’Economie Sociale et Solidaire)
+filter:
+  name: label
+  value: ess
+seo:
+  title:
+  description:

@@ -4,6 +4,117 @@ import { administrationsMetaData } from '#models/administrations';
 
 const Footer = () => (
   <footer className="fr-footer" role="contentinfo" id="footer">
+    <div className="fr-footer__top">
+      <div className="fr-container">
+        <div className="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
+          <div className="fr-col-12 fr-col-sm-3 fr-col-md-3">
+            <h3 className="fr-footer__top-cat">Moteurs de recherche</h3>
+            <ul className="fr-footer__top-list">
+              <li>
+                <a className="fr-footer__top-link" href="/rechercher/ess">
+                  ESS - Economie Sociale et Solidaire
+                </a>
+              </li>
+              <li>
+                <a className="fr-footer__top-link" href="/rechercher/rge">
+                  RGE - Reconnu Garant de l’Environnement
+                </a>
+              </li>
+              <li>
+                <a
+                  className="fr-footer__top-link"
+                  href="/rechercher/spectacles-vivants"
+                >
+                  Entrepreneurs de Spectacles Vivants
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="fr-col-12 fr-col-sm-3 fr-col-md-3">
+            <h3 className="fr-footer__top-cat">Retrouver</h3>
+            <ul className="fr-footer__top-list">
+              <li>
+                <a
+                  className="fr-footer__top-link"
+                  href="/rechercher/entreprises-individuelles"
+                >
+                  Entreprises individuelles
+                </a>
+              </li>
+              <li>
+                <a
+                  className="fr-footer__top-link"
+                  href="/rechercher/collectivites"
+                >
+                  Collectivités territoriales
+                </a>
+              </li>
+              <li>
+                <a
+                  className="fr-footer__top-link"
+                  href="/rechercher/associations"
+                >
+                  Associations
+                </a>
+              </li>
+              <li>
+                <a
+                  className="fr-footer__top-link"
+                  href="/departements/index.html"
+                >
+                  Annuaire par département
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="fr-col-12 fr-col-sm-3 fr-col-md-3">
+            <h3 className="fr-footer__top-cat">Aide</h3>
+            <ul className="fr-footer__top-list">
+              <li>
+                <a className="fr-footer__top-link" href="/faq">
+                  Questions fréquentes
+                </a>
+              </li>
+              <li>
+                <a className="fr-footer__top-link" href="/partager">
+                  Réutiliser & partager
+                </a>
+              </li>
+              <li>
+                <a className="fr-footer__top-link" href="/sources-de-donnees">
+                  Sources de données & statut des API
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="fr-col-12 fr-col-sm-3 fr-col-md-3">
+            <h3 className="fr-footer__top-cat">Annuaire des Entreprises</h3>
+            <ul className="fr-footer__top-list">
+              <li>
+                <a className="fr-footer__top-link" href="/administration">
+                  Administrations partenaires
+                </a>
+              </li>
+              <li>
+                <a className="fr-footer__top-link" href="/stats">
+                  Statistiques
+                </a>
+              </li>
+              <li>
+                <a
+                  className="fr-footer__top-link"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  href="https://github.com/etalab/annuaire-entreprises-site"
+                >
+                  Code source
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     <div className="fr-container">
       <div className="fr-footer__body">
         <div className="fr-footer__brand">
@@ -148,16 +259,6 @@ const Footer = () => (
       <div className="fr-footer__bottom">
         <ul className="fr-footer__bottom-list">
           <li className="fr-footer__bottom-item">
-            <a
-              className="fr-footer__bottom-link"
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://github.com/etalab/annuaire-entreprises-site"
-            >
-              Code source
-            </a>
-          </li>
-          <li className="fr-footer__bottom-item">
             <a className="fr-footer__bottom-link" href="/vie-privee">
               Vie privée & cookies
             </a>
@@ -178,41 +279,6 @@ const Footer = () => (
               href="/historique-des-modifications"
             >
               Historique des changements
-            </a>
-          </li>
-        </ul>
-        <ul className="fr-footer__bottom-list">
-          <li className="fr-footer__bottom-item">
-            <a className="fr-footer__bottom-link" href="/faq">
-              FAQ
-            </a>
-          </li>
-          <li className="fr-footer__bottom-item">
-            <a className="fr-footer__bottom-link" href="/partager">
-              Réutilisations & partage
-            </a>
-          </li>
-          <li className="fr-footer__bottom-item">
-            <a
-              className="fr-footer__bottom-link"
-              href="/departements/index.html"
-            >
-              Personnes morales par départements
-            </a>
-          </li>
-          <li className="fr-footer__bottom-item">
-            <a className="fr-footer__bottom-link" href="/administration">
-              Administrations partenaires
-            </a>
-          </li>
-          <li className="fr-footer__bottom-item">
-            <a className="fr-footer__bottom-link" href="/sources-de-donnees">
-              Sources de données & statut des API
-            </a>
-          </li>
-          <li className="fr-footer__bottom-item">
-            <a className="fr-footer__bottom-link" href="/stats">
-              Statistiques
             </a>
           </li>
         </ul>

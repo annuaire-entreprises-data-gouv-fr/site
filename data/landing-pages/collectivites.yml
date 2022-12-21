@@ -1,0 +1,9 @@
+slug: collecitvites
+title: Annuaire des collectivités territoriales
+description: Retrouvez toutes les ionformations administratives de votre ville, département ou région
+filter:
+  name: type
+  value: ct
+seo:
+  title:
+  description:

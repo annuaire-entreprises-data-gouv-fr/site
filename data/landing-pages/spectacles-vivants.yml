@@ -1,0 +1,9 @@
+slug: spectacles-vivants
+title: Moteur de recherche des entrepreneurs du spectacles vivants
+description: Retrouvez un(e) entrepreneur du spectacles vivants
+filter:
+  name: label
+  value: esv
+seo:
+  title:
+  description:

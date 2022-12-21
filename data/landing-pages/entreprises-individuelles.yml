@@ -1,0 +1,9 @@
+slug: entreprise-individuelle
+title: Annuaire des entreprises individuelles
+description: Retrouvez les informations administratives d’une entreprises individuelles (auto-entreprise, micro-entreprise etc.)
+filter:
+  name: type
+  value: ei
+seo:
+  title:
+  description:
