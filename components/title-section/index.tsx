@@ -7,10 +7,7 @@ import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UnitLegaleDescription } from '#components/unite-legale-description';
-import {
-  checkHasLabelsAndCertificates,
-  checkHasUAI,
-} from '#components/unite-legale-section/labels-and-certificates';
+import { checkHasLabelsAndCertificates } from '#components/unite-legale-section/labels-and-certificates';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
@@ -26,7 +23,7 @@ export enum FICHE {
   DIRIGEANTS = 'dirigeants',
   DIVERS = 'conventions collectives',
   ELUS = 'élus',
-  ETABLISSEMENTS_SCOLAIRE = 'établissement scolaire',
+  ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
   INFORMATION = 'informations générales',
   JUSTIFICATIFS = 'justificatifs',
 }
@@ -84,11 +81,11 @@ const Tabs: React.FC<{
       shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
     },
     {
-      ficheType: FICHE.ETABLISSEMENTS_SCOLAIRE,
+      ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
       label: 'Etablissement scolaire',
       pathPrefix: '/etablissements-scolaire/',
       noFollow: true,
-      shouldDisplay: checkHasUAI(uniteLegale),
+      shouldDisplay: uniteLegale.complements.estUai,
     },
     {
       ficheType: FICHE.DIVERS,

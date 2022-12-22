@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import { EducationNationaleEtablisssmentsSection } from '#components/education-nationale';
+import { EducationNationaleSection } from '#components/education-nationale';
 import Title, { FICHE } from '#components/title-section';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
@@ -34,10 +34,10 @@ const EtablissementScolaire: React.FC<IProps> = ({
     >
       <div className="content-container">
         <Title
-          ficheType={FICHE.ETABLISSEMENTS_SCOLAIRE}
+          ficheType={FICHE.ETABLISSEMENTS_SCOLAIRES}
           uniteLegale={uniteLegale}
         />
-        <EducationNationaleEtablisssmentsSection etablissements={uai} />
+        <EducationNationaleSection etablissements={uai} />
       </div>
     </Page>
   );
