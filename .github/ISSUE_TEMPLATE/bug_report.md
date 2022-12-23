@@ -12,7 +12,11 @@ Décrivez votre problème ici.
 
 ## Comment le reproduire ?
 
-Étapes à suivre pour faire apparaître le bug.
+Étapes à suivre pour faire apparaître le bug :
+1. Aller à `…`
+2. Cliquer sur `…`
+3. Naviguer jusqu’à `…`
+4. Constater le bug
 
 ## Comportement attendu
 
