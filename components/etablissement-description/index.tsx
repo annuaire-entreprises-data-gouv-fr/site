@@ -1,7 +1,7 @@
 import React from 'react';
 import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/index';
-import { estDiffusible } from '#models/statut-diffusion';
+import { estDiffusible, estNonDiffusible } from '#models/statut-diffusion';
 import { formatDateLong } from '#utils/helpers';
 
 interface IProps {
@@ -28,7 +28,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
   uniteLegale,
 }) => (
   <>
-    {estDiffusible(uniteLegale) && (
+    {!estNonDiffusible(uniteLegale) && (
       <p>
         Cet établissement est
         <b>{statusLabel(etablissement.etatAdministratif)}.</b> C’est

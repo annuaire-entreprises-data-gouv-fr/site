@@ -22,7 +22,6 @@ export interface ISireneOuverteEtablissement {
   nic: string;
   etat_administratif_etablissement: 'A' | null;
   date_creation: string;
-  geo_adresse: string;
   etablissement_siege: string;
   activite_principale: string;
   date_mise_a_jour: string;

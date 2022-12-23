@@ -3,7 +3,7 @@ import Warning from '#components-ui/alerts/warning';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { Tag } from '#components-ui/tag';
 import { IEtablissement, IUniteLegale } from '#models/index';
-import { estDiffusible } from '#models/statut-diffusion';
+import { estNonDiffusible } from '#models/statut-diffusion';
 import { formatSiret } from '#utils/helpers';
 import { INSEE } from '../administrations';
 
@@ -54,18 +54,19 @@ const TitleEtablissementWithDenomination: React.FC<{
   etablissement: IEtablissement;
 }> = ({ uniteLegale, etablissement }) => (
   <div className="etablissement-title">
-    {etablissement.oldSiret && etablissement.oldSiret !== etablissement.siret && (
-      <Warning full>
-        Cet établissement est inscrit en double à l’
-        <INSEE /> : {formatSiret(etablissement.oldSiret)} et{' '}
-        {formatSiret(etablissement.siret)}. Pour voir les informations
-        complètes, consultez la page{' '}
-        <a href={`/etablissement/${etablissement.siret}`}>
-          {formatSiret(etablissement.siret)}
-        </a>
-        .
-      </Warning>
-    )}
+    {etablissement.oldSiret &&
+      etablissement.oldSiret !== etablissement.siret && (
+        <Warning full>
+          Cet établissement est inscrit en double à l’
+          <INSEE /> : {formatSiret(etablissement.oldSiret)} et{' '}
+          {formatSiret(etablissement.siret)}. Pour voir les informations
+          complètes, consultez la page{' '}
+          <a href={`/etablissement/${etablissement.siret}`}>
+            {formatSiret(etablissement.siret)}
+          </a>
+          .
+        </Warning>
+      )}
     <TitleEtablissement
       uniteLegale={uniteLegale}
       nomEtablissement={etablissement.enseigne || etablissement.denomination}
@@ -75,7 +76,7 @@ const TitleEtablissementWithDenomination: React.FC<{
       {etablissement.estSiege && <Tag className="info">siège social</Tag>}
       {uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 &&
         !etablissement.estSiege && <Tag>ancien siège social</Tag>}
-      {!estDiffusible(etablissement) && (
+      {estNonDiffusible(etablissement) && (
         <Tag className="unknown">non-diffusible</Tag>
       )}
       <IsActiveTag

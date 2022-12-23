@@ -5,7 +5,7 @@ import {
 } from '#clients/sirene-insee/siret';
 import { clientEtablissementSireneOuverte } from '#clients/sirene-ouverte/siret';
 import { getGeoLoc } from '#models/geo-loc';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { getUniteLegaleFromSlug, isProtectedSiren } from '#models/unite-legale';
 import { extractSirenFromSiret, Siret, verifySiret } from '#utils/helpers';
 import {
   logFirstSireneInseefailed,
@@ -18,6 +18,7 @@ import {
   IEtablissementWithUniteLegale,
   SiretNotFoundError,
 } from '.';
+import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 /*
  * Return an etablissement given an existing siret
@@ -33,6 +34,10 @@ const getEtablissementFromSlug = async (
   const etablissement = isBot
     ? await getEtablissementForGoodBot(siret)
     : await getEtablissement(siret);
+
+  if (isProtectedSiren(etablissement.siren)) {
+    etablissement.statutDiffusion = ISTATUTDIFFUSION.PARTIAL;
+  }
 
   return etablissement;
 };

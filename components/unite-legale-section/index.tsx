@@ -30,7 +30,7 @@ const UniteLegaleSection: React.FC<{
     [
       <FAQLink tooltipLabel="N° TVA Intracommunautaire">
         <a href="/faq/tva-intracommunautaire">
-          Qu’est ce que le numéro de TVA intracommunautaire ?
+          Comprendre le numéro de TVA intracommunautaire
         </a>
       </FAQLink>,
       <TVACell />,
@@ -43,13 +43,7 @@ const UniteLegaleSection: React.FC<{
       <FAQLink tooltipLabel="Adresse postale">
         <a href="/faq/modifier-adresse">Comment modifier une adresse ?</a>
       </FAQLink>,
-      uniteLegale.siege.adresse
-        ? `${
-            uniteLegale.siege.denomination
-              ? `${uniteLegale.siege.denomination}, `
-              : ''
-          }${uniteLegale.siege.adresse}`
-        : '',
+      uniteLegale.siege.adressePostale,
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [

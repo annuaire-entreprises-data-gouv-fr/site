@@ -2,22 +2,7 @@ import React from 'react';
 import ButtonLink from '#components-ui/button';
 import { INSEE } from '#components/administrations';
 import { Section } from '#components/section';
-
-const HowToChange = () => (
-  <>
-    <p>
-      Si cette entreprise est la votre et que vous souhaitez vous rendre
-      diffusible de nouveau la démarche est à effectuer auprès de l’
-      <INSEE />
-      &nbsp;:
-    </p>
-    <div className="layout-center">
-      <ButtonLink to="https://statut-diffusion-sirene.insee.fr/" alt>
-        ⇢ Rendre mon entreprise diffusible
-      </ButtonLink>
-    </div>
-  </>
-);
+import constants from '#models/constants';
 
 const NonDiffusible = () => (
   <>
@@ -35,7 +20,17 @@ const NonDiffusible = () => (
       Pour des raisons de sécurité, certaines associations et les organismes
       relevant du Ministère de la Défense ne sont pas diffusibles non plus.
     </p>
-    <HowToChange />
+    <p>
+      Si cette entreprise est la vôtre et que vous souhaitez vous la rendre de
+      nouveau diffusible, la démarche est à effectuer auprès de l’
+      <INSEE />
+      &nbsp;:
+    </p>
+    <div className="layout-center">
+      <ButtonLink to="https://statut-diffusion-sirene.insee.fr/" alt>
+        ⇢ Rendre mon entreprise diffusible
+      </ButtonLink>
+    </div>
   </>
 );
 
@@ -46,12 +41,19 @@ export const NonDiffusibleSection = () => (
 );
 
 export const DirigeantsNonDiffusibleSection = () => (
-  <Section title="Données non-diffusibles">
+  <Section title="Entreprise non-diffusible">
     <p>
-      Les dirigeant(e)s de cette entreprise ont demandé à de que leurs
-      informations ne soient pas diffusées.
+      Les dirigeants de cette entreprise ont demandé à ce que leurs informations
+      ne soient pas diffusées.
+      <br />
+      Si cette entreprise est la vôtre et que vous souhaitez rendre ces données
+      publiques, merci de nous écrire&nbsp;:
     </p>
-    <HowToChange />
+    <div className="layout-center">
+      <ButtonLink to={constants.links.mailto} alt>
+        {constants.links.mail}
+      </ButtonLink>
+    </div>
   </Section>
 );
 

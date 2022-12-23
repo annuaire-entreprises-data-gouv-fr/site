@@ -254,6 +254,14 @@ export const mapEtablissementToDomainObject = (
     libellePaysEtranger: libellePaysEtrangerEtablissement,
   });
 
+  const adressePostale = adresse
+    ? `${
+        denominationUsuelleEtablissement
+          ? `${denominationUsuelleEtablissement}, `
+          : ''
+      }${adresse}`
+    : '';
+
   return {
     ...defaultEtablissement,
     siren: extractSirenFromSiret(siret),
@@ -279,6 +287,7 @@ export const mapEtablissementToDomainObject = (
       anneeEffectifsEtablissement
     ),
     adresse,
+    adressePostale,
     codePostal,
   };
 };

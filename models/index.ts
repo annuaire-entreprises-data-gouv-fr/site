@@ -29,6 +29,7 @@ export interface IEtablissement {
   dateFermeture: string | null;
   dateDebutActivite: string;
   adresse: string;
+  adressePostale: string;
   codePostal: string;
   activitePrincipale: string;
   libelleActivitePrincipale: string;
@@ -63,6 +64,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     dateDebutActivite: '',
     dateFermeture: '',
     adresse: '',
+    adressePostale: '',
     codePostal: '',
     activitePrincipale: '',
     libelleActivitePrincipale: '',

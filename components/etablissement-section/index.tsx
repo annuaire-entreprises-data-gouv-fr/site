@@ -77,7 +77,16 @@ const EtablissementSection: React.FC<IProps> = ({
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
     ...(!usedInEntreprisePage
-      ? [['N° TVA Intracommunautaire', <TVACell />]]
+      ? [
+          [
+            <FAQLink tooltipLabel="N° TVA Intracommunautaire">
+              <a href="/faq/tva-intracommunautaire">
+                Comprendre le numéro de TVA intracommunautaire
+              </a>
+            </FAQLink>,
+            <TVACell />,
+          ],
+        ]
       : []),
     [
       'Activité principale de l’unité légale (NAF/APE)',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
+import { estDiffusible } from '#models/statut-diffusion';
 import { formatDateLong } from '#utils/helpers';
 
 export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
@@ -35,25 +36,28 @@ export const UnitLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> = ({
       )}
       {uniteLegale.siege && uniteLegale.siege.adresse && (
         <>
-          Son siège social est domicilié au {uniteLegale.siege.adresse} (
-          <a href={`/carte/${uniteLegale.siege.siret}`}>voir sur la carte</a>)
+          Son{' '}
+          <a href={`/etablissement/${uniteLegale.siege.siret}`}>siège social</a>{' '}
+          est domicilié au{' '}
+          <a href={`/carte/${uniteLegale.siege.siret}`}>
+            {uniteLegale.siege.adresse}
+          </a>
+          {'. '}
         </>
       )}
-      .{' '}
       {uniteLegale.etablissements.all && (
         <>
           Elle possède {nombreEtablissements} établissement{plural}
           {hasOpenEtablissements && !usePagination && (
             <b>
               {' '}
-              dont {nombreEtablissementsOuverts} {pluralBe} en activité
+              dont{' '}
+              <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
+                {nombreEtablissementsOuverts} {pluralBe} en activité
+              </a>
             </b>
-          )}{' '}
-          (
-          <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
-            voir la liste
-          </a>
-          ).
+          )}
+          .
         </>
       )}
     </p>

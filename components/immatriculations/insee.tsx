@@ -8,7 +8,7 @@ import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { IEtablissement, IUniteLegale } from '#models/index';
-import { estDiffusible } from '#models/statut-diffusion';
+import { estNonDiffusible } from '#models/statut-diffusion';
 import { formatSiret } from '#utils/helpers';
 
 const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
@@ -20,7 +20,7 @@ const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
       <a href={`/etablissement/${etablissement.siret}`}>
         {formatSiret(etablissement.siret)}
       </a>,
-      !estDiffusible(etablissement) ? (
+      estNonDiffusible(etablissement) ? (
         <i>Non renseigné</i>
       ) : (
         <>
@@ -64,7 +64,9 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
     title="Inscription à l’Insee"
     sources={[EAdministration.INSEE]}
   >
-    {estDiffusible(uniteLegale) ? (
+    {estNonDiffusible(uniteLegale) ? (
+      <AvisSituationNonDiffusible />
+    ) : (
       <>
         <div className="description">
           Chaque établissement immatriculé par l’Insee au répertoire Sirene des
@@ -110,8 +112,6 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
           </>
         )}
       </>
-    ) : (
-      <AvisSituationNonDiffusible />
     )}
   </Section>
 );

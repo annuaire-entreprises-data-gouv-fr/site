@@ -31,18 +31,19 @@ import {
 } from '.';
 import { isAssociation } from '.';
 import { getComplements } from './complements';
-import { estDiffusible, ISTATUTDIFFUSION } from './statut-diffusion';
+import { estNonDiffusible, ISTATUTDIFFUSION } from './statut-diffusion';
+
+/**
+ * PUBLIC METHODS
+ */
 
 /**
  * List of siren whose owner refused diffusion
  */
 const protectedSirenPath = 'public/protected-siren.txt';
 const protectedSiren = readFileSync(protectedSirenPath, 'utf8').split('\n');
-const isProtectedSiren = (siren: Siren) => protectedSiren.indexOf(siren) > -1;
-
-/**
- * PUBLIC METHODS
- */
+export const isProtectedSiren = (siren: Siren) =>
+  protectedSiren.indexOf(siren) > -1;
 
 interface IUniteLegaleOptions {
   page?: number;
@@ -95,15 +96,12 @@ class UniteLegaleFactory {
       uniteLegale = await getAssociation(uniteLegale);
     }
 
-    if (
-      uniteLegale.complements.estEntrepreneurIndividuel &&
-      !estDiffusible(uniteLegale)
-    ) {
-      uniteLegale.nomComplet = 'Entreprise non-diffusible';
-    }
-
     if (isProtectedSiren(uniteLegale.siren)) {
       uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PARTIAL;
+    }
+
+    if (estNonDiffusible(uniteLegale)) {
+      uniteLegale.nomComplet = 'Entreprise non-diffusible';
     }
 
     // en sommeil

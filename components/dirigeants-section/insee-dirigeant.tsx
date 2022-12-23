@@ -32,8 +32,8 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
           </b>
           .
         </p>
-        Nous ne connaissant pas son âge, donc nous ne pouvons pas distinguer
-        cette personne de ses homonymes éventuels.
+        Ne connaissant pas son âge, nous ne pouvons pas distinguer cette
+        personne de ses homonymes éventuels.
         <br />
         Mais vous pouvez{' '}
         <a href={`/rechercher?fn=${dirigeant.prenom}&n=${dirigeant.nom}`}>
