@@ -75,7 +75,7 @@ const Tabs: React.FC<{
     {
       ficheType: FICHE.CERTIFICATS,
       label: 'Labels et certificats',
-      pathPrefix: '/labels-certificats/',
+      pathPrefix: '/labels-certifications/',
       noFollow: true,
       shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
     },
