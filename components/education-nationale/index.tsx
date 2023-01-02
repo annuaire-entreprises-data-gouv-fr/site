@@ -2,7 +2,7 @@ import React from 'react';
 import routes from '#clients/routes';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
-import { EDUCNAT, INPI } from '#components/administrations';
+import { EDUCNAT } from '#components/administrations';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
