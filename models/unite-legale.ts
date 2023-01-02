@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs';
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
 import {
   clientUniteLegaleInsee,
@@ -18,6 +17,7 @@ import {
 } from '#models/etablissements-list';
 import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { Siren, verifySiren } from '#utils/helpers';
+import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import {
   logFirstSireneInseefailed,
   logSecondSireneInseefailed,
@@ -36,14 +36,6 @@ import { estNonDiffusible, ISTATUTDIFFUSION } from './statut-diffusion';
 /**
  * PUBLIC METHODS
  */
-
-/**
- * List of siren whose owner refused diffusion
- */
-const protectedSirenPath = 'public/protected-siren.txt';
-const protectedSiren = readFileSync(protectedSirenPath, 'utf8').split('\n');
-export const isProtectedSiren = (siren: Siren) =>
-  protectedSiren.indexOf(siren) > -1;
 
 interface IUniteLegaleOptions {
   page?: number;

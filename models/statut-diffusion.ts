@@ -18,19 +18,6 @@ export const estDiffusible = (uniteLegaleOrEtablissement: {
 };
 
 /**
- * Only partially diffusible. Exclude diffusible and non-diffusible
- * @param uniteLegaleOrEtablissement
- * @returns
- */
-export const estPartialDiffusible = (uniteLegaleOrEtablissement: {
-  statutDiffusion: ISTATUTDIFFUSION;
-}) => {
-  return (
-    uniteLegaleOrEtablissement.statutDiffusion === ISTATUTDIFFUSION.PARTIAL
-  );
-};
-
-/**
  * Only strict non-diffusible. Exclude partially diffusible and diffusible
  * @param uniteLegaleOrEtablissement
  * @returns

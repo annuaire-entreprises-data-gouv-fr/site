@@ -4,8 +4,8 @@ import { INSEE } from '#components/administrations';
 import { Section } from '#components/section';
 import constants from '#models/constants';
 
-const NonDiffusible = () => (
-  <>
+export const NonDiffusibleSection = () => (
+  <Section title="Qu’est ce qu’une entreprise non-diffusible ?">
     <p>
       Certaines entreprises demandent à ne pas figurer sur les listes de
       diffusion publique en vertu de{' '}
@@ -30,24 +30,19 @@ const NonDiffusible = () => (
       <ButtonLink to="https://statut-diffusion-sirene.insee.fr/" alt>
         ⇢ Rendre mon entreprise diffusible
       </ButtonLink>
-    </div>
-  </>
-);
-
-export const NonDiffusibleSection = () => (
-  <Section title="Qu’est ce qu’une entreprise non-diffusible ?">
-    <NonDiffusible />
+    </div>{' '}
   </Section>
 );
 
 export const DirigeantsNonDiffusibleSection = () => (
-  <Section title="Entreprise non-diffusible">
+  <Section title="Données privées">
     <p>
-      Les dirigeants de cette entreprise ont demandé à ce que leurs informations
-      ne soient pas diffusées.
+      Les dirigeants de cette entreprise ont demandé à ce que ces informations
+      ne soient pas rendues publiques.
       <br />
       Si cette entreprise est la vôtre et que vous souhaitez rendre ces données
-      publiques, merci de nous écrire&nbsp;:
+      publiques, ou si vous êtes un agent public qui a besoin d’accéder a ces
+      données, merci de nous écrire&nbsp;:
     </p>
     <div className="layout-center">
       <ButtonLink to={constants.links.mailto} alt>
@@ -56,5 +51,3 @@ export const DirigeantsNonDiffusibleSection = () => (
     </div>
   </Section>
 );
-
-export default NonDiffusible;
