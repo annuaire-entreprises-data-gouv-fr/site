@@ -1,6 +1,8 @@
 import React from 'react';
 import routes from '#clients/routes';
+import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
+import { EDUCNAT, INPI } from '#components/administrations';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
@@ -25,11 +27,13 @@ export const EducationNationaleSection: React.FC<{
           sources={[EAdministration.EDUCATION_NATIONALE]}
         >
           <p>
-            Nous n’avons pas retrouvé les établissement scolaire de cette entité
-            dans l’annuaire de l&apos;éducation nationale. En revanche, vous
-            pouvez peut-être les retrouver grâce au{' '}
+            Nous n’avons pas retrouvé les établissements scolaires de cette
+            entité dans l’annuaire de l’
+            <EDUCNAT />. En revanche, vous pouvez peut-être les retrouver grâce
+            au{' '}
             <a href={routes.educationNationale.site}>
-              moteur de recherche de l&apos;éducation nationale
+              moteur de recherche de l’
+              <EDUCNAT />
             </a>
             .
           </p>
@@ -54,11 +58,11 @@ export const EducationNationaleSection: React.FC<{
       sources={[EAdministration.EDUCATION_NATIONALE]}
     >
       <p>
-        Cette structure possède <b>{etablissements.length}</b> établissements
-        scolaire{plural}&nbsp;:
+        Cette structure possède <b>{etablissements.length}</b> établissement
+        {plural} scolaire{plural}&nbsp;:
       </p>
       <FullTable
-        head={['UAI', 'Nom', 'Académie', "Nombre d'élèves", 'Coordonnées']}
+        head={['N° UAI', 'Académie', 'Détails', 'Contact', 'Nb d’élèves']}
         body={etablissements.map(
           ({
             adresse,
@@ -72,33 +76,19 @@ export const EducationNationaleSection: React.FC<{
             uai,
             zone,
           }) => [
-            <div className="font-small">
-              <div>
-                <b>{uai}</b>
-              </div>
-            </div>,
-            <div className="font-small">
-              <div>{nomEtablissement}</div>
-            </div>,
-            <div className="font-small">
-              <div>
-                {libelleAcademie} {zone ? `- zone ${zone}` : null}
-              </div>
-            </div>,
-            <div className="font-small">
-              <div>{nombreEleves}</div>
-            </div>,
-            <div>
-              <div className="font-small">
-                {adresse}, {codePostal}, {nomCommune}
-              </div>
-              <div className="font-small">{mail}</div>
-              <div className="font-small">
-                <a href={`tel:${telephone}`}>
-                  {telephone.match(/.{1,2}/g)?.join(' ')}
-                </a>
-              </div>
-            </div>,
+            <Tag>{uai}</Tag>,
+            `${libelleAcademie} ${zone ? `- zone ${zone}` : null}`,
+            <>
+              {nomEtablissement}
+              <br />
+              {adresse}, {codePostal}, {nomCommune}
+            </>,
+            <>
+              <a href={`mailto:${mail}`}>{mail}</a>
+              <br />
+              <a href={`tel:${telephone}`}>{telephone}</a>
+            </>,
+            nombreEleves,
           ]
         )}
       />

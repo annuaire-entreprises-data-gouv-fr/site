@@ -28,7 +28,7 @@ const EtablissementScolaire: React.FC<IProps> = ({
   return (
     <Page
       small={true}
-      title={'Établissement scolaire'}
+      title={'Établissements scolaires'}
       noIndex={true}
       isBrowserOutdated={metadata.isBrowserOutdated}
     >

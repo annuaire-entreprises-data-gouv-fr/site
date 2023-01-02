@@ -82,8 +82,8 @@ const Tabs: React.FC<{
     },
     {
       ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
-      label: 'Etablissement scolaire',
-      pathPrefix: '/etablissements-scolaire/',
+      label: 'Établissements scolaires',
+      pathPrefix: '/etablissements-scolaires/',
       noFollow: true,
       shouldDisplay: uniteLegale.complements.estUai,
     },
