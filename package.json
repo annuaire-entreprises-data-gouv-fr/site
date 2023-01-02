@@ -20,8 +20,8 @@
     "test:unit": "jest --runInBand",
     "lint": "next lint",
     "script:seo": " ts-node --project ./seo-script/seo-script-tsconfig.json ./seo-script/index.ts",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook:start": "start-storybook -p 6006",
+    "build-storybook:build": "build-storybook"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "~5.0.0",
