@@ -54,7 +54,25 @@ export PORT=3000
 npm run build && npm run start
 ```
 
-### Tests
+## Tooling Dev Experience
+
+### Commitlint
+
+Nous utilisons [commitlint](https://commitlint.js.org/#/guides-local-setup) pour vérifier que les messages.
+
+### Eslint
+
+Afin d'améliorer votre expérience de dev vous pouvez utiliser [l'extenstion Eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+
+Ajouter la configuration ci-dessous pour fixer les problèmes de linting automatiquement
+
+```
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+```
+
+## Tests
 
 1. Linter
 
@@ -74,7 +92,7 @@ npm run test:unit
 npm run test:end2end
 ```
 
-### Deploiement
+## Deploiement
 
 Le déploiement se fait par [Github action](https://github.com/etalab/annuaire-entreprises-site/actions)
 
