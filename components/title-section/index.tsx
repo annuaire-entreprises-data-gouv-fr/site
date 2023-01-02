@@ -16,15 +16,16 @@ import {
 import { formatIntFr } from '#utils/helpers';
 
 export enum FICHE {
+  ACTES = 'actes & statuts',
+  ANNONCES = 'annonces',
+  CERTIFICATS = 'Labels ou certifications',
+  COMPTES = 'bilans & comptes',
+  DIRIGEANTS = 'dirigeants',
+  DIVERS = 'conventions collectives',
+  ELUS = 'élus',
+  ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
   INFORMATION = 'informations générales',
   JUSTIFICATIFS = 'justificatifs',
-  ANNONCES = 'annonces',
-  DIRIGEANTS = 'dirigeants',
-  ELUS = 'élus',
-  COMPTES = 'bilans & comptes',
-  ACTES = 'actes & statuts',
-  CERTIFICATS = 'Labels et certificats',
-  DIVERS = 'conventions collectives',
 }
 
 interface IProps {
@@ -78,6 +79,13 @@ const Tabs: React.FC<{
       pathPrefix: '/labels-certificats/',
       noFollow: true,
       shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
+    },
+    {
+      ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
+      label: 'Établissements scolaires',
+      pathPrefix: '/etablissements-scolaires/',
+      noFollow: true,
+      shouldDisplay: uniteLegale.complements.estUai,
     },
     {
       ficheType: FICHE.DIVERS,

@@ -148,6 +148,7 @@ export interface IUniteLegaleComplements {
   estRge: boolean;
   estUai: boolean;
 }
+
 export const createDefaultUniteLegaleComplements = () => {
   return {
     estEntrepreneurIndividuel: false,

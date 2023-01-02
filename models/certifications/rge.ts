@@ -56,7 +56,6 @@ export const getRGECertifications = async (
     if (!uniteLegale.complements.estRge) {
       throw new HttpNotFound('Not a RGE company');
     }
-
     return await clientRGE(uniteLegale.siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {

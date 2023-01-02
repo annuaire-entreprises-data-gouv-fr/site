@@ -63,3 +63,12 @@ export const MC = ({ queryString = '' }) => (
     Ministère de la Culture
   </a>
 );
+
+export const EDUCNAT = ({ queryString = '' }) => (
+  <a
+    href={`/administration/education-nationale${queryString}`}
+    title="Éducation nationale"
+  >
+    Éducation nationale
+  </a>
+);
