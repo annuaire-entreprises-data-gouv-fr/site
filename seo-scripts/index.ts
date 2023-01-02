@@ -1,14 +1,14 @@
-import { PageTreeBuilder } from './page-tree-builder';
+import { WEBSITE } from './constants';
 import {
   cleanDistFolder,
   deleteDataFile,
   downloadAndSaveData,
 } from './download-data';
 import { mem } from './memory';
+import { PageTreeBuilder } from './page-tree-builder';
 import { readFileLineByLine } from './read-line';
 import { getStaticPages } from './static-pages';
 import { SitemapWriter } from './write-sitemap';
-import { WEBSITE } from './constants';
 
 const getEntrepriseUrl = (str: string) =>
   `${WEBSITE}/entreprise/${encodeURIComponent(str)}`;
