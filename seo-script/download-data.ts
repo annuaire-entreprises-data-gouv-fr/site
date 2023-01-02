@@ -1,5 +1,5 @@
-import * as axios from 'axios';
 import * as fs from 'fs';
+import * as axios from 'axios';
 
 const SOURCE_URL =
   'https://object.files.data.gouv.fr/opendata/ae/sitemap-prod.csv';
@@ -23,7 +23,7 @@ export const deleteDataFile = async (filePath: string) => {
 };
 
 export const cleanDistFolder = () => {
-  const dir = './dist/';
+  const dir = './seo-script/dist/';
 
   if (fs.existsSync(dir)) {
     console.info('📂 Cleaning existing /dist folder');

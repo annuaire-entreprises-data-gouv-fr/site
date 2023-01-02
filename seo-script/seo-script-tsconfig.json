@@ -1,16 +1,15 @@
 {
   "compilerOptions": {
-    "baseUrl": "..",
     "esModuleInterop": true,
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "paths": {
-      "#clients/*": ["./clients/*"],
-      "#components/*": ["./components/*"],
-      "#components-ui/*": ["./components-ui/*"],
-      "#models/*": ["./models/*"],
-      "#utils/*": ["./utils/*"]
+      "#clients/*": ["../clients/*"],
+      "#components/*": ["../components/*"],
+      "#components-ui/*": ["../components-ui/*"],
+      "#models/*": ["../models/*"],
+      "#utils/*": ["../utils/*"]
     }
   },
   "ts-node": {

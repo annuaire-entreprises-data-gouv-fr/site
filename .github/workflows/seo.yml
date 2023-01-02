@@ -18,14 +18,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ env.node-version }}
-      - name: Install dependencies in /seo-scripts
-        run: |
-          cd ./seo-scripts
-          npm i
+      - name: Install dependencies
+        run: npm i
       - name: Run /seo-script/index.ts
-        run: |
-          cd ./seo-scripts
-          npm run build:seo
+        run: npm run script:seo
       - name: Compress seo-files
         run: tar czf ./seo-scripts/seo-files.tar.gz ./seo-scripts/dist
       - name: Archive seo-files

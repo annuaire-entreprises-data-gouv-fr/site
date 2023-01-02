@@ -18,7 +18,8 @@
     "start": "NODE_ENV=production && next start",
     "test:end2end": "cypress run",
     "test:unit": "jest --runInBand",
-    "lint": "next lint"
+    "lint": "next lint",
+    "script:seo": " ts-node --project ./seo-script/seo-script-tsconfig.json ./seo-script/index.ts"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "~5.0.0",
@@ -58,7 +59,8 @@
     "redis": "~4.5.1",
     "typescript": "~4.9.4",
     "ua-parser-js": "~1.0.32",
-    "vite": "~3.2.5"
+    "vite": "~3.2.5",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@axe-core/cli": "~4.5.2",
@@ -74,6 +76,7 @@
     "ts-jest": "~29.0.3"
   },
   "optionalDependencies": {
-    "@swc/core-linux-x64-gnu": "~1.3.21"
+    "@swc/core-linux-x64-gnu": "~1.3.21",
+    "tsconfig-paths": "^4.1.2"
   }
 }

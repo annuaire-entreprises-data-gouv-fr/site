@@ -35,7 +35,7 @@ class SitemapWriter {
 
   writeLine = (url: string) => {
     if (this.urlCount === 0) {
-      const newSitemapFilePath = `./dist/sitemap_${this.sitemapCount}.xml`;
+      const newSitemapFilePath = `./seo-script/dist/sitemap_${this.sitemapCount}.xml`;
       this.writeStream = fs.createWriteStream(newSitemapFilePath);
       this.write(SITEMAP_START);
     }
@@ -68,7 +68,7 @@ class SitemapWriter {
       .join('')}
         </sitemapindex>`;
 
-    fs.writeFileSync('./dist/sitemap.xml', index);
+    fs.writeFileSync('./seo-script/dist/sitemap.xml', index);
 
     console.info(`💾 Sitemap count : ${this.sitemapCount}`);
   };
