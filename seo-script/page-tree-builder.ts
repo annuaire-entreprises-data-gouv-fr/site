@@ -1,7 +1,9 @@
 import fs from 'fs';
-import { getDepartementFromCodePostal } from '../utils/labels';
 import {
-  getUrlFromDep,
+  getDepartementFromCodePostal,
+  getUrlFromDepartement,
+} from '../utils/labels';
+import {
   renderDepartementsPage,
   renderNafsPage,
   renderResultsPage,
@@ -61,7 +63,9 @@ class PageTreeBuilder {
     this.saveFile(this.pageTreeDir + 'index.html', departmentsPage);
 
     allDeps.forEach((dep) => {
-      const currentDepPath = `${this.pageTreeDir}${getUrlFromDep(dep)}/`;
+      const currentDepPath = `${this.pageTreeDir}${getUrlFromDepartement(
+        dep
+      )}/`;
       this.createFolder(currentDepPath);
 
       // saving list of all naf for current department
@@ -123,7 +127,7 @@ class PageTreeBuilder {
     return [
       '/departements/index.html',
       ...this.getDeps().map(
-        (d) => `/departements/${getUrlFromDep(d)}/index.html`
+        (d) => `/departements/${getUrlFromDepartement(d)}/index.html`
       ),
     ];
   };

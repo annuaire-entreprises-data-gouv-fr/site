@@ -2,9 +2,9 @@ import React from 'react';
 import { IUniteLegale } from '#models/index';
 import {
   getDepartementFromCodePostal,
+  getUrlFromDepartement,
   libelleFromDepartement,
 } from '#utils/labels';
-import { getUrlFromDep } from '../../seo-scripts/page-tree-render';
 
 const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
@@ -12,7 +12,7 @@ const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
   try {
     const naf = uniteLegale.activitePrincipale;
     const dep = getDepartementFromCodePostal(uniteLegale.siege.codePostal);
-    const depUrl = getUrlFromDep(dep || '');
+    const depUrl = getUrlFromDepartement(dep || '');
 
     if (!dep || !depUrl || !naf) {
       throw new Error();

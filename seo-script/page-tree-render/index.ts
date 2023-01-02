@@ -2,8 +2,8 @@
  * Render index page with list of all departments
  */
 
-import { escapeTerm } from '#utils/helpers/formatting';
 import {
+  getUrlFromDepartement,
   libelleFromCodeNAFWithoutNomenclature,
   libelleFromDepartement,
 } from '#utils/labels';
@@ -26,18 +26,12 @@ const renderNav = (links: string[][]) => {
   `;
 };
 
-export const getUrlFromDep = (dep: string) => {
-  // departement label without special char
-  const labelDep = escapeTerm(libelleFromDepartement(dep));
-  return labelDep.replaceAll(' ', '').toLocaleLowerCase();
-};
-
 const renderDepartementsPage = (departments: any[]) => {
   const titleBlock = `<h1>Personnes morales par département</h1>`;
   const debBlock = departments
     .map((dep) => {
       const labelDep = libelleFromDepartement(dep);
-      const urlDep = getUrlFromDep(dep);
+      const urlDep = getUrlFromDepartement(dep);
       return `<a href="/departements/${urlDep}/index.html">${labelDep}</a><br/>`;
     })
     .join('');
@@ -58,7 +52,7 @@ const renderNafsPage = (dep: string, nafs: any[]) => {
   const nafsBlock = nafs
     .map(
       (naf) =>
-        `<a href="/departements/${getUrlFromDep(
+        `<a href="/departements/${getUrlFromDepartement(
           dep
         )}/${naf}/1.html">${libelleFromCodeNAFWithoutNomenclature(
           naf
@@ -77,7 +71,7 @@ const renderResultsPage = (
   totalPage: number,
   totalResults: number
 ) => {
-  const depUrl = getUrlFromDep(dep);
+  const depUrl = getUrlFromDepartement(dep);
   const labelNaf = libelleFromCodeNAFWithoutNomenclature(naf);
 
   const navBlock = renderNav([
@@ -106,7 +100,7 @@ const renderResultsPage = (
       if (pageNumber === currentPage) {
         paginationBlock += `<b>${pageNumber}</b>`;
       } else {
-        paginationBlock += `<a href="/departements/${getUrlFromDep(
+        paginationBlock += `<a href="/departements/${getUrlFromDepartement(
           dep
         )}/${naf}/${pageNumber}.html">${pageNumber}</a>`;
       }
