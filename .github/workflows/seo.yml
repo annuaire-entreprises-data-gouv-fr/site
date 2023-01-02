@@ -23,10 +23,10 @@ jobs:
       - name: Run /seo-script/index.ts
         run: npm run script:seo
       - name: Compress seo-files
-        run: tar czf ./seo-scripts/seo-files.tar.gz ./seo-scripts/dist
+        run: tar czf ./seo-script/seo-files.tar.gz ./seo-script/dist
       - name: Archive seo-files
         uses: actions/upload-artifact@v3
         with:
           name: seo-files
           path: |
-            ./seo-scripts/seo-files.tar.gz
+            ./seo-script/seo-files.tar.gz
