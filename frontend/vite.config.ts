@@ -1,4 +1,3 @@
-import path from 'path';
 import autoprefixer from 'autoprefixer';
 import { defineConfig } from 'vite';
 
@@ -21,30 +20,6 @@ export default defineConfig({
   appType: 'custom', // not a SPA
   envDir: '..', // .env directory
   clearScreen: false, // do not clear console
-  resolve: {
-    alias: [
-      {
-        find: '#clients',
-        replacement: path.resolve(__dirname, '../clients'),
-      },
-      {
-        find: '#components',
-        replacement: path.resolve(__dirname, '../components'),
-      },
-      {
-        find: '#components-ui',
-        replacement: path.resolve(__dirname, '../components-ui'),
-      },
-      {
-        find: '#models',
-        replacement: path.resolve(__dirname, '../models'),
-      },
-      {
-        find: '#utils',
-        replacement: path.resolve(__dirname, '../utils'),
-      },
-    ],
-  },
   build: {
     outDir: '../public',
     assetsDir: 'assets',
