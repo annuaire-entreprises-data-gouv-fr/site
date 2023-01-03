@@ -9,7 +9,7 @@ apiMonitors:
     datagouv:
       - label: Annuaire de l’Education Nationale
         link: https://data.gouv.fr/fr/datasets/annuaire-de-leducation'
-    # id: 793262360 @TODO SHOULD BE UPDATE
+    id: 793392963
     data:
       - Annuaire de l’Éducation nationale
 description: |
