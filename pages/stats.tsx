@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import React, { useState } from 'react';
+import React from 'react';
 import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
 import BasicChart from '#components/chart/basic';
 import Page from '../layouts';
@@ -13,11 +13,6 @@ const colors = [
   '#291720',
 ];
 
-const Test = () => {
-  const [test, setTest] = useState(0);
-  return <button onClick={() => setTest(test + 1)}>{test}</button>;
-};
-
 const StatsPage: React.FC<IMatomoStats> = ({
   monthlyUserNps,
   visits,
@@ -29,7 +24,6 @@ const StatsPage: React.FC<IMatomoStats> = ({
     title="Statistiques d’utilisation de l’Annuaire des Entreprises"
     noIndex={true}
   >
-    <Test />
     <h1>Statistiques d’utilisation</h1>
     <p>
       Découvrez nos statistiques d’utilisation mises à jour quotidiennement.
@@ -133,14 +127,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     await clientMatomoStats();
 
   return {
-    props: {
-      monthlyUserNps,
-      visits,
-      userResponses,
-      mostCopied,
-      // enable react hydration in browser
-      metadata: { useReact: true },
-    },
+    props: { monthlyUserNps, visits, userResponses, mostCopied },
     revalidate: 4 * 3600, // In seconds - 4 hours
   };
 };
