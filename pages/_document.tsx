@@ -84,41 +84,21 @@ class CustomHead extends Head {
   }
 }
 
-class DevDocument extends Document {
+class CustomDocument extends Document {
   render() {
-    return (
-      <Html lang="fr">
-        <CustomHead>
-          <LinksAndScripts dev={true} />
-        </CustomHead>
-        <body>
-          <Main />
-        </body>
-      </Html>
-    );
-  }
-}
-
-class ProdDocument extends Document {
-  render() {
+    const isProd = process.env.NODE_ENV === 'production';
     const useReact =
       this.props['__NEXT_DATA__']?.props?.pageProps?.metadata?.useReact;
 
+    const HeadToUse = useReact ? Head : CustomHead;
     return (
       <Html lang="fr">
-        {useReact ? (
-          <Head>
-            <LinksAndScripts dev={false} />
-          </Head>
-        ) : (
-          <CustomHead>
-            <LinksAndScripts dev={false} />
-          </CustomHead>
-        )}
-
+        <HeadToUse>
+          <LinksAndScripts dev={!isProd} />
+        </HeadToUse>
         <body>
           <Main />
-          {process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID && (
+          {isProd && process.env.MATOMO_SITE_ID && (
             <script
               dangerouslySetInnerHTML={{
                 __html: `
@@ -149,6 +129,4 @@ class ProdDocument extends Document {
   }
 }
 
-export default process.env.NODE_ENV === 'production'
-  ? ProdDocument
-  : DevDocument;
+export default CustomDocument;
