@@ -11,9 +11,9 @@ export default {
 const Template: ComponentStory<typeof Breadcrumb> = () => (
   <Breadcrumb
     links={[
-      { href: '/a', label: 'Entité' },
-      { href: '/b', label: 'question' },
-      { href: '/c', label: 'demande' },
+      { href: '/', label: 'Entité' },
+      { href: '/', label: 'question' },
+      { href: '/', label: 'demande' },
     ]}
   />
 );
