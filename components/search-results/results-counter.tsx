@@ -10,13 +10,16 @@ const ResultsCounter: React.FC<{
         <div className="results-counter">
           <span>
             {currentPage > 1 && `Page ${currentPage} de `}
+            {resultCount === 10000 && 'Plus de '}
             {resultCount} résultats trouvés.
           </span>
         </div>
       ) : (
         <div className="no-results">
           <div className="results-counter">
-            <span>Aucune entité n’a été trouvée.</span>
+            <span>
+              Aucune structure n’a été trouvée pour vos critères de recherche .
+            </span>
           </div>
           <p>
             Nous vous suggérons de modifier votre recherche :
@@ -27,6 +30,10 @@ const ResultsCounter: React.FC<{
                 celui-ci dans la barre de recherche
               </li>
               <li>essayez de réduire le nombre de mots-clefs</li>
+              <li>
+                essayez d’utiliser un filtre avancé, plus précis que la
+                recherche générale (géographique ou par nom et prénom)
+              </li>
             </ul>
           </p>
         </div>

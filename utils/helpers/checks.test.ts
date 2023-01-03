@@ -28,12 +28,12 @@ describe('Check shouldIndex', () => {
   test('Standard fails', () => {
     const u = createDefaultUniteLegale('000000000' as Siren);
     u.estActive = true;
-    u.estEntrepreneurIndividuel = false;
+    u.complements.estEntrepreneurIndividuel = false;
     expect(shouldNotIndex(u)).toBe(false);
   });
   test('EI fails', () => {
     const u = createDefaultUniteLegale('000000000' as Siren);
-    u.estEntrepreneurIndividuel = true;
+    u.complements.estEntrepreneurIndividuel = true;
     expect(shouldNotIndex(u)).toBe(true);
   });
   test('Closed succeed', () => {

@@ -59,6 +59,6 @@ describe('Search results', () => {
   it('shows no results for "Rififi the mighty rifter"', () => {
     cy.visit('/rechercher?terme=Rififi+the+mighty+rifter');
 
-    cy.contains('Aucune entité n’a été trouvée').should('have.length', 1);
+    cy.contains('Aucune structure n’a été trouvée').should('have.length', 1);
   });
 });

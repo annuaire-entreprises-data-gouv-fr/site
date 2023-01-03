@@ -1,5 +1,5 @@
 import React from 'react';
-import randomId from '../../utils/helpers/randomId';
+import { randomId } from '#utils/helpers';
 
 const BasicChart: React.FC<{
   yLabel: string;

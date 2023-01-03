@@ -1,6 +1,5 @@
-import { validateTVANumber } from '../clients/tva';
-import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../utils/sentry';
+import { clientTVA } from '#clients/tva';
+import { Siren, verifySiren } from '#utils/helpers';
 
 export interface ITvaIntracommunautaire {
   numero: string;
@@ -31,16 +30,12 @@ export const tvaIntracommunautaire = async (
   const tvaNumberFromSiren = tvaNumber(siren);
 
   try {
-    return await validateTVANumber(tvaNumberFromSiren);
+    return await clientTVA(tvaNumberFromSiren);
   } catch {
-    // retry once
+    // retry once as VIES randomely reset connection
     try {
-      return await validateTVANumber(tvaNumberFromSiren);
+      return await clientTVA(tvaNumberFromSiren);
     } catch (eFallback: any) {
-      logErrorInSentry('Error in API TVA', {
-        details: eFallback.toString(),
-        siren: slug,
-      });
       throw eFallback;
     }
   }

@@ -1,9 +1,8 @@
+import routes from '#clients/routes';
+import { IAnnoncesBodacc } from '#models/annonces';
+import { Siren, formatDate } from '#utils/helpers';
+import { logWarningInSentry } from '#utils/sentry';
 import odsClient from '.';
-import { IAnnoncesBodacc } from '../../models/annonces';
-import { formatDate } from '../../utils/helpers/formatting';
-import { Siren } from '../../utils/helpers/siren-and-siret';
-import { logWarningInSentry } from '../../utils/sentry';
-import routes from '../routes';
 
 type IBodaccRecords = IBodaccA | IBodaccB | IBodaccC;
 
@@ -45,7 +44,7 @@ interface IBodaccB extends IBodaccCoreRecord {
   radiationaurcs?: string; // "{\"radiationPM\": \"O\"}"
 }
 
-const fetchAnnoncesBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
+const clientBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
   const searchUrl = `${routes.bodacc.ods.search}&q=registre%3A${siren}&sort=dateparution&facet=publicationavis&facet=publicationavis_facette&facet=typeavis&facet=typeavis_lib&facet=familleavis&facet=familleavis_lib&facet=numerodepartement&facet=departement_nom_officiel`;
   const metadataUrl = routes.bodacc.ods.metadata;
   const response = await odsClient(searchUrl, metadataUrl);
@@ -150,4 +149,4 @@ const extractDetails = (annonce: IBodaccRecords): string => {
   }
 };
 
-export default fetchAnnoncesBodacc;
+export default clientBodacc;

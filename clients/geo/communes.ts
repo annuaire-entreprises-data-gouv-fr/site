@@ -1,7 +1,7 @@
+import routes from '#clients/routes';
+import constants from '#models/constants';
+import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
-import constants from '../../models/constants';
-import { httpGet } from '../../utils/network';
-import routes from '../routes';
 
 interface IGeoCommuneResponse {
   codesPostaux: string[];
@@ -9,7 +9,7 @@ interface IGeoCommuneResponse {
   code: string;
 }
 
-const searchCommunes = async (slug: string): Promise<any> => {
+const clientGeoCommunes = async (slug: string): Promise<any> => {
   const response = await httpGet(routes.geo.commune + slug, {
     timeout: constants.timeout.L,
   });
@@ -29,4 +29,4 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
   );
 };
 
-export { searchCommunes };
+export { clientGeoCommunes };

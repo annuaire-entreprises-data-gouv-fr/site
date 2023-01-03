@@ -1,19 +1,19 @@
 import React from 'react';
-import routes from '../../clients/routes';
-import { IUniteLegale } from '../../models';
-import { formatIntFr } from '../../utils/helpers/formatting';
+import routes from '#clients/routes';
+import { IAssociation } from '#models/index';
+import { formatIntFr } from '#utils/helpers';
 import Warning from './warning';
 
 const AssociationCreationNotFoundAlert: React.FC<{
-  uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => (
+  association: IAssociation;
+}> = ({ association }) => (
   <Warning full>
     Nous n’avons pas retrouvé l’annonce de création de cette association dans le{' '}
     <b>Journal Officiel des Association (JOAFE).</b>
     <br />
     Les annonces les plus anciennes du Journal Officiel peuvent contenir des
     erreures de saisie qui ne nous permettent pas de les retrouver grâce à leur
-    numéro RNA ({formatIntFr(uniteLegale.association?.id)}).
+    numéro RNA ({formatIntFr(association.association?.idAssociation || '')}).
     <br />
     En revanche, vous pouvez probablement retrouver l’annonce de création grâce
     au{' '}

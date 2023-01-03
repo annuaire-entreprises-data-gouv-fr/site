@@ -1,10 +1,10 @@
-import { fetchMonitorings } from '../clients/monitoring';
-import logErrorInSentry from '../utils/sentry';
+import { clientMonitorings } from '#clients/monitoring';
 import {
   administrationsMetaData,
   IAdministrationMetaData,
   IAPIMonitorMetaData,
-} from './administrations';
+} from '#models/administrations';
+import logErrorInSentry from '#utils/sentry';
 
 export interface IRatio {
   ratio: string;
@@ -23,18 +23,15 @@ export interface IMonitoring {
   series: IRatio[];
 }
 
-const logError = (e: Error) =>
-  logErrorInSentry('Error while fecthing monitoring', {
-    details: e.message,
-  });
-
 const getMonitorings = async (
   monitoringIds: number[]
 ): Promise<IMonitoring[]> => {
   try {
-    return await fetchMonitorings(monitoringIds);
+    return await clientMonitorings(monitoringIds);
   } catch (e: any) {
-    logError(e);
+    logErrorInSentry('Error while fetching monitoring', {
+      details: e.message,
+    });
     return [];
   }
 };
@@ -80,8 +77,8 @@ export const getMonitorsWithMetaData = async (
     return {
       ...monitoring,
       short: admin.short,
-      apiGouvLink: metaData.apiGouvLink || null,
-      dataGouvLink: metaData.dataGouvLink || null,
+      apigouvLink: metaData.apigouvLink || null,
+      datagouv: metaData.datagouv || null,
       apiName: metaData.apiName,
       id: metaData.id || null,
       slug: admin.slug,

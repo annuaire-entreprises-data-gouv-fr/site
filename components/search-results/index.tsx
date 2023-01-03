@@ -1,12 +1,12 @@
-import { isAPINotResponding } from '../../models/api-not-responding';
-import { ISearchResults } from '../../models/search';
-import { IParams } from '../../models/search-filter-params';
-import { SearchErrorExplanations } from '../error-explanations';
-import MapResults from '../map/map-results';
-import { NotEnoughParams } from './results-not-enough-params';
+import { SearchErrorExplanations } from '#components/error-explanations';
+import MapResults from '#components/map/map-results';
+import { isAPINotResponding } from '#models/api-not-responding';
+import { ISearchResults } from '#models/search';
+import { IParams } from '#models/search-filter-params';
 import ResultsCounter from './results-counter';
 import ResultsList from './results-list';
-import ResultsPagination from '../search-results-pagination';
+import { NotEnoughParams } from './results-not-enough-params';
+import ResultsPagination from './results-pagination';
 
 const SearchResults: React.FC<{
   searchTerm?: string;

@@ -1,21 +1,22 @@
 import React from 'react';
-import { IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administrations';
+import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
+import ButtonLink from '#components-ui/button';
+import { download } from '#components-ui/icon';
+import BreakPageForPrint from '#components-ui/print-break-page';
+import { PrintNever } from '#components-ui/print-visibility';
+import { VerifiedTag } from '#components-ui/verified-tag';
+import { INPI } from '#components/administrations';
+import { Section } from '#components/section';
+import { TwoColumnTable } from '#components/table/simple';
+import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '../../models/api-not-responding';
-import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
+} from '#models/api-not-responding';
+import { IImmatriculationRNCS } from '#models/immatriculation/rncs';
+import { IUniteLegale } from '#models/index';
+import { formatDate, formatIntFr } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
-import { INPI } from '../administrations';
-import BreakPageForPrint from '../../components-ui/print-break-page';
-import ButtonLink from '../../components-ui/button';
-import { Section } from '../section';
-import { TwoColumnTable } from '../table/simple';
-import { PrintNever } from '../../components-ui/print-visibility';
-import { closed, download, open } from '../../components-ui/icon';
-import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
-import { IImmatriculationRNCS } from '../../models/immatriculation/rncs';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
@@ -51,7 +52,7 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
               <InpiPartiallyDownWarning missing="le numéro RCS" />
             )}
             <p>
-              Cette entité possède une fiche d’immatriculation au{' '}
+              Cette structure possède une fiche d’immatriculation au{' '}
               <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
               liste les entreprises enregistrées auprès des Greffes des
               tribunaux de commerce et centralisées par l’
@@ -108,16 +109,15 @@ const ImmatriculationRNCSTable: React.FC<{
   immatriculation: IImmatriculationRNCS;
   uniteLegale: IUniteLegale;
 }> = ({ immatriculation, uniteLegale }) => {
+  const { dateRadiation, dateCessationActivite, isPersonneMorale } =
+    immatriculation.identite;
+
   const data = [
     [
       'Statut',
-      <>
-        {immatriculation.identite.dateRadiation ? (
-          <b>{closed} Radiée</b>
-        ) : (
-          <b>{open} Inscrite</b>
-        )}
-      </>,
+      <VerifiedTag isVerified={!dateRadiation}>
+        {dateRadiation ? 'Radiée' : 'Inscrite'}
+      </VerifiedTag>,
     ],
     [
       'Date d’immatriculation au RNCS',
@@ -144,34 +144,26 @@ const ImmatriculationRNCSTable: React.FC<{
       'Date de début d’activité',
       formatDate(immatriculation.identite.dateDebutActiv),
     ],
+    ...(isPersonneMorale
+      ? [
+          ['Capital', immatriculation.identite.capital],
+          [
+            'Date de clôture de l’exercice comptable',
+            immatriculation.identite.dateClotureExercice,
+          ],
+          [
+            'Durée de la personne morale',
+            immatriculation.identite.dureePersonneMorale,
+          ],
+        ]
+      : []),
+    ...(dateCessationActivite
+      ? [['Date de cessation d’activité', formatDate(dateCessationActivite)]]
+      : []),
+    ...(dateRadiation
+      ? [['Date de radiation', formatDate(dateRadiation)]]
+      : []),
   ];
-
-  if (immatriculation.identite.isPersonneMorale) {
-    data.push(
-      ['Capital', immatriculation.identite.capital],
-      [
-        'Date de clôture de l’exercice comptable',
-        immatriculation.identite.dateClotureExercice,
-      ],
-      [
-        'Durée de la personne morale',
-        immatriculation.identite.dureePersonneMorale,
-      ]
-    );
-  }
-
-  if (immatriculation.identite.dateCessationActivite) {
-    data.push([
-      'Date de cessation d’activité',
-      formatDate(immatriculation.identite.dateCessationActivite),
-    ]);
-  }
-  if (immatriculation.identite.dateRadiation) {
-    data.push([
-      'Date de radiation',
-      formatDate(immatriculation.identite.dateRadiation),
-    ]);
-  }
 
   return <TwoColumnTable body={data} />;
 };

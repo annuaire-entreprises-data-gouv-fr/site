@@ -1,17 +1,17 @@
 import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import constants from '../../models/constants';
-import redisStorage from './redis-storage';
 import { CacheRequestConfig, setupCache } from 'axios-cache-interceptor';
-import { logInterceptor, addStartTimeInterceptor } from './log-interceptor';
+import constants from '#models/constants';
 import errorInterceptor from './error-interceptor';
+import { logInterceptor, addStartTimeInterceptor } from './log-interceptor';
+import redisStorage from './redis-storage';
 
 export const CACHE_TIMEOUT = 1000 * 60 * 15;
 
 /**
  * Returns a regular axios instance
  */
-export const axiosInstanceFactory = () => {
-  const regularInstance = Axios.create();
+export const defaultAxiosInstanceFactory = (timeout = constants.timeout.L) => {
+  const regularInstance = Axios.create({ timeout });
 
   regularInstance.interceptors.request.use(addStartTimeInterceptor, (err) =>
     Promise.reject(err)
@@ -30,13 +30,14 @@ export const cachedAxiosInstanceFactory = () => {
     storage: redisStorage(CACHE_TIMEOUT),
     // ignore cache-control headers as some API like sirene return 'no-cache' headers
     headerInterpreter: () => CACHE_TIMEOUT,
-    debug: console.log,
+    debug: console.info,
   });
 
   cachedInstance.interceptors.request.use(addStartTimeInterceptor, (err) =>
     Promise.reject(err)
   );
 
+  //@ts-ignore
   cachedInstance.interceptors.response.use(logInterceptor, errorInterceptor);
 
   return cachedInstance;

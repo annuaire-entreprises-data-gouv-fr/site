@@ -1,10 +1,8 @@
 import React from 'react';
-import HorizontalSeparator from '../../components-ui/horizontal-separator';
-import { Section } from '../section';
-import { TwoColumnTable } from '../table/simple';
-import { EAdministration } from '../../models/administrations';
-import { INSEE } from '../administrations';
-import { IEtatCivil } from '../../models/immatriculation/rncs';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import { Section } from '#components/section';
+import { EAdministration } from '#models/administrations';
+import { IEtatCivil } from '#models/immatriculation/rncs';
 
 interface IProps {
   dirigeant: IEtatCivil;
@@ -18,19 +16,6 @@ interface IProps {
 const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
   dirigeant,
 }) => {
-  const data = [
-    ['Rôle', <b>Représentant Légal</b>],
-    ['Nom', `${dirigeant.prenom} ${dirigeant.nom}`],
-    ['Mois et année de naissance', ''],
-    [
-      '',
-      <a href={`/rechercher?fn=${dirigeant.prenom}&n=${dirigeant.nom}`}>
-        → rechercher les entreprises dirigées par une personne appelée «{' '}
-        {dirigeant.prenom} {dirigeant.nom} »
-      </a>,
-    ],
-  ];
-
   const femininMasculin = dirigeant.sexe === 'M' ? '' : 'e';
 
   return (
@@ -41,16 +26,23 @@ const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
         sources={[EAdministration.INSEE]}
       >
         <p>
-          Cette entité est une entreprise individuelle. Elle a un
-          {femininMasculin} dirigeant{femininMasculin} enregistré
-          {femininMasculin} auprès de l’
-          <INSEE />
-          &nbsp;:
+          Cette structure est l’entreprise individuelle de{' '}
+          <b>
+            {dirigeant.prenom} {dirigeant.nom}
+          </b>
+          .
         </p>
-        <TwoColumnTable body={data} />
+        Nous ne connaissant pas son âge, donc nous ne pouvons pas distinguer
+        cette personne de ses homonymes éventuels.
+        <br />
+        Mais vous pouvez{' '}
+        <a href={`/rechercher?fn=${dirigeant.prenom}&n=${dirigeant.nom}`}>
+          rechercher toutes les structures liées à une personne appelée «{' '}
+          {dirigeant.prenom} {dirigeant.nom} »
+        </a>
+        .
       </Section>
       <HorizontalSeparator />
-      <style jsx>{``}</style>
     </>
   );
 };

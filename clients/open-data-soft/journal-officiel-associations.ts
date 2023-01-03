@@ -1,7 +1,7 @@
+import routes from '#clients/routes';
+import { IAnnoncesAssociation, IComptesAssociation } from '#models/annonces';
+import { formatDateYear, IdRna, Siren } from '#utils/helpers';
 import odsClient from '.';
-import { IAnnoncesJO } from '../../models/annonces';
-import { formatDate } from '../../utils/helpers/formatting';
-import routes from '../routes';
 
 interface IJournalOfficielAssociationRecord {
   association_type: string; // 'assoLoi1901';
@@ -29,25 +29,80 @@ interface IJournalOfficielAssociationRecord {
   association_type_libelle: string; // 'Associations loi du 1er juillet 1901';
 }
 
-const fetchAnnoncesJO = async (idRna: string): Promise<IAnnoncesJO> => {
-  const searchUrl = `${routes.journalOfficielAssociations.ods.search}&q=numero_rna%3A${idRna}+source%3Ajoafe&sort=dateparution`;
+interface IDCACompte {
+  datasetid: string;
+  recordid: string;
+  fields: IDCAField[];
+  record_timestamp: string;
+}
+
+interface IDCAField {
+  departement_code: string;
+  dca_siren: string;
+  localisation_facette: string;
+  titre: string;
+  region_libelle: string;
+  cronosort: string;
+  dateparution: string;
+  departement_libelle: string;
+  association_type: string;
+  titre_search: string;
+  siteweb: string;
+  numero_rna: string;
+  annonce_type_facette: string;
+  dca_datecloture: string;
+  dca_codepostal: string;
+  source: string;
+  dca_rectificatif_version: number;
+  id: string;
+  region_code: string;
+  association_type_libelle: string;
+  dca_datevalidation: string;
+}
+
+const clientJOAFE = async (idRna: string): Promise<IAnnoncesAssociation> => {
+  const searchUrl = `${routes.journalOfficielAssociations.ods.search}&q=numero_rna=${idRna}+refine.source=joafe&sort=dateparution`;
   const metadataUrl = routes.journalOfficielAssociations.ods.metadata;
   const response = await odsClient(searchUrl, metadataUrl);
 
   return {
-    annonces: response.records.map(mapToDomainObject),
+    annonces: response.records.map(
+      (annonce: IJournalOfficielAssociationRecord) => ({
+        typeAvisLibelle: annonce.typeavis || '',
+        datePublication: annonce.dateparution || '',
+        numeroParution: annonce.id,
+        details: annonce.association_type_libelle,
+        path: `${routes.journalOfficielAssociations.site.justificatif}${annonce.id}`,
+      })
+    ),
     lastModified: response.lastModified,
   };
 };
 
-const mapToDomainObject = (annonce: IJournalOfficielAssociationRecord) => {
+/**
+ * DCA Dépôt des Compotes des Associations
+ **/
+const clientDCA = async (
+  siren: Siren,
+  idRna: IdRna | string
+): Promise<IComptesAssociation> => {
+  const filterParam = `&q=dca_siren=${siren}+OR+numero_rna=${idRna}+&refine.source=dca&sort=dca_datecloture`;
+
+  const searchUrl = `${routes.journalOfficielAssociations.ods.search}${filterParam}`;
+  const metadataUrl = routes.journalOfficielAssociations.ods.metadata;
+
+  const response = await odsClient(searchUrl, metadataUrl);
+
   return {
-    typeAvisLibelle: annonce.typeavis || '',
-    datePublication: annonce.dateparution || '',
-    numeroParution: annonce.id,
-    details: annonce.association_type_libelle,
-    path: `${routes.journalOfficielAssociations.site.justificatif}${annonce.id}`,
+    comptes: response.records.map((compte: IDCAField) => ({
+      dateparution: compte.dateparution,
+      numeroParution: compte.id,
+      datecloture: compte.dca_datecloture || '',
+      anneeCloture: formatDateYear(compte.dca_datecloture) || '',
+      permalinkUrl: `${routes.journalOfficielAssociations.site.dca}/?q.id=id:${compte.id}`,
+    })),
+    lastModified: response.lastModified,
   };
 };
 
-export default fetchAnnoncesJO;
+export { clientJOAFE, clientDCA };

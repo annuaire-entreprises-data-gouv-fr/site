@@ -1,13 +1,20 @@
+import { escapeTerm } from '#utils/helpers';
+import { categoriesEntreprise } from './categories-entreprise';
 import { categoriesJuridiques } from './categories-juridiques';
-import { codesNAP } from './codes-NAP';
-import { codesNAFRev2 } from './codes-NAF-rev-2';
 import { codesNAF1993 } from './codes-NAF-1993';
 import { codesNAFRev1 } from './codes-NAF-rev-1';
+import { codesNAFRev2 } from './codes-NAF-rev-2';
+import { codesNAP } from './codes-NAP';
 import { codesEffectifs } from './codes-effectifs';
-import { codesVoies } from './codes-voie';
-import { categoriesEntreprise } from './categories-entreprise';
-import { departements } from './departements';
 import { codesSectionNAF } from './codes-section-NAF';
+import { codesVoies } from './codes-voie';
+import { departements } from './departements';
+
+export const getUrlFromDepartement = (dep: string) => {
+  // departement label without special char
+  const labelDep = escapeTerm(libelleFromDepartement(dep));
+  return labelDep.replaceAll(' ', '').toLocaleLowerCase();
+};
 
 export const getDepartementFromCodePostal = (codePostal: string) => {
   if (!codePostal || codePostal.length !== 5 || codePostal.startsWith('00')) {
@@ -73,7 +80,10 @@ export const libelleFromCodeSectionNaf = (code: string) => {
   return label ? label : 'Section inconnue';
 };
 
-export const libelleFromCodeNAFWithoutNomenclature = (code = '') => {
+export const libelleFromCodeNAFWithoutNomenclature = (
+  code = '',
+  addCode = true
+) => {
   for (let nomenclature of [
     codesNAFRev2,
     codesNAFRev1,
@@ -83,7 +93,7 @@ export const libelleFromCodeNAFWithoutNomenclature = (code = '') => {
     //@ts-ignore
     const label = nomenclature[code];
     if (label) {
-      return `${code} - ${label}`;
+      return addCode && code ? `${code} - ${label}` : label;
     }
   }
   return 'Activité inconnue';

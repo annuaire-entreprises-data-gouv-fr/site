@@ -1,7 +1,7 @@
 import React from 'react';
+import { information } from '#components-ui/icon';
+import { IAdministrationMetaData } from '#models/administrations';
 import InformationTooltip from '.';
-import { IAdministrationMetaData } from '../../models/administrations';
-import { information } from '../icon';
 
 const DataSourcesTooltip: React.FC<{
   dataSources: IAdministrationMetaData[];
@@ -28,9 +28,15 @@ const DataSourcesTooltip: React.FC<{
       <a href={link} className="data-source no-style-link">
         <span className="layout-center">{information}</span>
         <span>
-          &nbsp;Source des données&nbsp;:&nbsp;
+          &nbsp;Source{dataSources.length > 1 ? 's' : ''}&nbsp;:&nbsp;
           {dataSources.map((dataSource) => dataSource.short).join(', ')}
-          {lastUpdatedAt ? <>&nbsp;・&nbsp;{lastUpdatedAt}</> : ''}
+          {lastUpdatedAt ? (
+            <>
+              &nbsp;・&nbsp;mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastUpdatedAt}
+            </>
+          ) : (
+            ''
+          )}
         </span>
         <style jsx>{`
           .data-source {

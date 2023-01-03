@@ -1,5 +1,5 @@
 import React from 'react';
-import { serializeForClientScript } from '../../utils/helpers/formatting';
+import { serializeForClientScript } from '#utils/helpers';
 
 /**
  * This component get hydrated in frontend with frontend bundle
@@ -18,7 +18,7 @@ export const SearchFeedback: React.FC<{ searchTerm: string }> = ({
       }}
     />
     👋 Bonjour ! On aimerait savoir : avez-vous trouvé la structure que vous
-    recherchez ?
+    recherchiez ?
     <span
       dangerouslySetInnerHTML={{
         __html: `

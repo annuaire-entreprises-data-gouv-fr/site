@@ -1,13 +1,12 @@
-import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-
-import Page from '../../../layouts';
+import React from 'react';
+import { HttpNotFound } from '#clients/exceptions';
+import AdministrationNotResponding from '#components/administration-not-responding';
 import {
   administrationsMetaData,
   EAdministration,
-} from '../../../models/administrations';
-import { HttpNotFound } from '../../../clients/exceptions';
-import AdministrationNotResponding from '../../../components/administration-not-responding';
+} from '#models/administrations';
+import Page from '../../../layouts';
 
 const AdministrationError: React.FC<{ administration: EAdministration }> = ({
   administration,

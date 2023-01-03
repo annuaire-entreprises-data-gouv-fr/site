@@ -1,4 +1,6 @@
 import React from 'react';
+import Logo from '#components-ui/logo';
+import { administrationsMetaData } from '#models/administrations';
 
 const Footer = () => (
   <footer className="fr-footer" role="contentinfo" id="footer">
@@ -44,8 +46,8 @@ const Footer = () => (
           <br />
           <p className="fr-footer__content-desc">
             Ce site permet de retrouver toutes les données publiques détenues
-            par l’administration sur une personne morale (entreprise,
-            administration ou association) et{' '}
+            par l’administration sur une entreprise, une association ou une
+            administration et{' '}
             <a href="/donnees-extrait-kbis">
               en particulier les données contenues dans un extrait KBIS/D1
             </a>
@@ -103,6 +105,44 @@ const Footer = () => (
               </a>
             </li>
           </ul>
+        </div>
+      </div>
+      <div className="fr-footer__partners">
+        <b className="fr-footer__partners-title">Nos partenaires</b>
+        <div className="fr-footer__partners-logos">
+          <div className="fr-footer__partners-sub">
+            <ul>
+              {Object.values(administrationsMetaData).map(
+                ({ slug, logoType, long, site }) =>
+                  logoType && (
+                    <li key={long}>
+                      <a
+                        className="fr-footer__partners-link"
+                        href={`/administration#${slug}`}
+                      >
+                        {logoType === 'portrait' ? (
+                          <Logo
+                            title={long}
+                            slug={slug}
+                            width={80}
+                            height={50}
+                            className="fr-footer__logo"
+                          />
+                        ) : (
+                          <Logo
+                            title={long}
+                            slug={slug}
+                            width={150}
+                            height={50}
+                            className="fr-footer__logo"
+                          />
+                        )}
+                      </a>
+                    </li>
+                  )
+              )}
+            </ul>
+          </div>
         </div>
       </div>
       <div className="fr-footer__bottom">
@@ -171,7 +211,7 @@ const Footer = () => (
             </a>
           </li>
           <li className="fr-footer__bottom-item">
-            <a className="fr-footer__bottom-link" href="/statistiques">
+            <a className="fr-footer__bottom-link" href="/stats">
               Statistiques
             </a>
           </li>

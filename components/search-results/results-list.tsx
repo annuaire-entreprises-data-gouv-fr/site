@@ -1,12 +1,12 @@
 import React from 'react';
-import { ISearchResult } from '../../models/search';
-import { SearchFeedback } from '../search-feedback';
-import { Tag } from '../../components-ui/tag';
-import IsActiveTag from '../../components-ui/is-active-tag';
-import { IETATADMINSTRATIF } from '../../models/etat-administratif';
-import { humanPin } from '../../components-ui/icon';
-import { isPersonneMorale } from '../dirigeants-section/rncs-dirigeants';
-import { IDirigeant } from '../../models/immatriculation/rncs';
+import IsActiveTag from '#components-ui/is-active-tag';
+import { isPersonneMorale } from '#components/dirigeants-section/rncs-dirigeants';
+import { SearchFeedback } from '#components/search-feedback';
+import UniteLegaleBadge from '#components/unite-legale-badge';
+import { IETATADMINSTRATIF } from '#models/etat-administratif';
+import { IDirigeant } from '#models/immatriculation/rncs';
+import { isCollectiviteTerritoriale } from '#models/index';
+import { ISearchResult } from '#models/search';
 
 interface IProps {
   results: ISearchResult[];
@@ -14,38 +14,29 @@ interface IProps {
   searchTerm?: string;
 }
 
-const EtablissmentTagLabel: React.FC<{ result: ISearchResult }> = ({
-  result,
-}) => {
-  const openCount = result.nombreEtablissementsOuverts || 'aucun';
-  const plural = openCount > 1 ? 's' : '';
-
-  return (
-    <Tag>
-      {openCount} établissement{plural} en activité
-    </Tag>
-  );
-};
-
-const DirigeantsList: React.FC<{ dirigeants: IDirigeant[] }> = ({
-  dirigeants,
+const DirigeantsOrElusList: React.FC<{ dirigeantsOrElus: IDirigeant[] }> = ({
+  dirigeantsOrElus,
 }) => {
   const displayMax = 5;
-  const firstFive = dirigeants.slice(0, displayMax);
-  const moreCount = Math.max(dirigeants.length - displayMax, 0);
+  const firstFive = dirigeantsOrElus.slice(0, displayMax);
+  const moreCount = Math.max(dirigeantsOrElus.length - displayMax, 0);
+
+  if (dirigeantsOrElus.length === 0) {
+    return null;
+  }
 
   return (
-    <div className="dirigeants">
+    <div className="dirigeants-or-elus">
       {firstFive
-        .map((dirigeant) =>
-          isPersonneMorale(dirigeant)
-            ? `${dirigeant.denomination}`
-            : `${dirigeant.prenom} ${dirigeant.nom}`
+        .map((dirigeantOrElu) =>
+          isPersonneMorale(dirigeantOrElu)
+            ? `${dirigeantOrElu.denomination}`
+            : `${dirigeantOrElu.prenom} ${dirigeantOrElu.nom}`
         )
         .join(', ')}
       {moreCount > 0 && `, et ${moreCount} autre${moreCount === 1 ? '' : 's'}`}
       <style jsx>{`
-        .dirigeants {
+        .dirigeants-or-elus {
           font-size: 0.9rem;
           color: #555;
           margin: 8px auto 0;
@@ -66,23 +57,31 @@ const ResultsList: React.FC<IProps> = ({
       {results.map((result) => (
         <a
           href={`/entreprise/${result.chemin}`}
-          key={result.siret}
+          key={result.siren}
           className="result-link no-style-link"
           data-siren={result.siren}
         >
           <div className="title">
             <span>{`${result.nomComplet}`}</span>
+            <UniteLegaleBadge uniteLegale={result} small hiddenByDefault />
             {!result.estActive && (
               <IsActiveTag state={IETATADMINSTRATIF.CESSEE} />
             )}
           </div>
           <div>{result.libelleActivitePrincipale}</div>
-          {result.dirigeants.length > 0 && (
-            <DirigeantsList dirigeants={result.dirigeants} />
-          )}
+          <DirigeantsOrElusList
+            dirigeantsOrElus={
+              isCollectiviteTerritoriale(result)
+                ? result.colter.elus
+                : result.dirigeants
+            }
+          />
           <div className="adress">
-            <span>{result.adresse || 'Adresse inconnue'} </span>
-            <EtablissmentTagLabel result={result} />
+            <span>{result.siege.adresse || 'Adresse inconnue'} </span>
+            <b>
+              ・{result.nombreEtablissementsOuverts || 'aucun'} établissement
+              {result.nombreEtablissementsOuverts > 1 ? 's' : ''} en activité
+            </b>
           </div>
         </a>
       ))}
@@ -92,7 +91,7 @@ const ResultsList: React.FC<IProps> = ({
         text-decoration: none;
         border: none;
         color: #333;
-        margin: 20px 0;
+        margin: 30px 0;
         display: block;
         font-size: 1rem;
       }
@@ -100,16 +99,26 @@ const ResultsList: React.FC<IProps> = ({
         color: #000091;
         text-decoration: none;
         font-size: 1.1rem;
-        margin-bottom: 5px 0;
+        margin-bottom: 3px;
+
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
       }
 
-      .results-list > a:hover .title {
+      .results-list > a .title > span:first-of-type {
+        margin-right: 10px;
+      }
+      .results-list > a:hover .title > span:first-of-type {
         text-decoration: underline;
       }
 
       .results-list > a .adress > span {
         color: #707070;
         font-variant: all-small-caps;
+      }
+      .results-list > a .adress > b {
+        color: #666;
       }
     `}</style>
   </>

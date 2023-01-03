@@ -1,14 +1,13 @@
 import React from 'react';
-import constants from '../../models/constants';
-import { IEtablissement, IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administrations';
-import { formatSiret, Siret } from '../../utils/helpers/siren-and-siret';
-import IsActiveTag from '../../components-ui/is-active-tag';
-import PageCounter from '../search-results-pagination';
-import { Section } from '../section';
-import { FullTable } from '../table/full';
-import { Tag } from '../../components-ui/tag';
-import { formatDate } from '../../utils/helpers/formatting';
+import IsActiveTag from '#components-ui/is-active-tag';
+import { Tag } from '#components-ui/tag';
+import PageCounter from '#components/search-results/results-pagination';
+import { Section } from '#components/section';
+import { FullTable } from '#components/table/full';
+import { EAdministration } from '#models/administrations';
+import constants from '#models/constants';
+import { IEtablissement, IUniteLegale } from '#models/index';
+import { formatDate, formatSiret, Siret } from '#utils/helpers';
 
 const EtablissementTable: React.FC<{
   label?: string;
@@ -101,7 +100,7 @@ const EtablissementListeSection: React.FC<{
   return (
     <div id="etablissements">
       <p>
-        Cette entité possède{' '}
+        Cette structure possède{' '}
         <b>
           {nombreEtablissements} établissement{plural}
         </b>

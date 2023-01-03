@@ -1,9 +1,8 @@
-import React from 'react';
-
-import Page from '../layouts';
-import { ServerErrorExplanations } from '../components/error-explanations';
-import logErrorInSentry from '../utils/sentry';
 import { IncomingMessage } from 'http';
+import React from 'react';
+import { ServerErrorExplanations } from '#components/error-explanations';
+import logErrorInSentry from '#utils/sentry';
+import Page from '../layouts';
 
 const ServerError = () => {
   return (
@@ -22,7 +21,7 @@ ServerError.getInitialProps = ({
 }) => {
   let errAsString = '';
   try {
-    console.log('error 500 :', err);
+    console.error('error 500 :', err);
     errAsString = (err || '').toString();
   } catch {
     errAsString = 'failed to serialize error';

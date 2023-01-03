@@ -1,14 +1,14 @@
-import { IImmatriculation } from '.';
-import { HttpNotFound } from '../../clients/exceptions';
-import { fetchRNCSImmatriculation } from '../../clients/rncs';
-import routes from '../../clients/routes';
-import { Siren } from '../../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../../utils/sentry';
-import { EAdministration } from '../administrations';
+import { HttpNotFound } from '#clients/exceptions';
+import { fetchRNCSImmatriculation } from '#clients/rncs';
+import routes from '#clients/routes';
+import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from '../api-not-responding';
+} from '#models/api-not-responding';
+import { Siren } from '#utils/helpers';
+import logErrorInSentry from '#utils/sentry';
+import { IImmatriculation } from '.';
 
 export interface IEtatCivil {
   sexe: 'M' | 'F' | null;

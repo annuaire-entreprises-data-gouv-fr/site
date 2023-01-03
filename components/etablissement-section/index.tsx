@@ -1,23 +1,23 @@
 import React from 'react';
-import { IEtablissement, IUniteLegale } from '../../models';
-import { formatDate } from '../../utils/helpers/formatting';
-import HorizontalSeparator from '../../components-ui/horizontal-separator';
-import { Section } from '../section';
-import { CopyPaste, TwoColumnTable } from '../table/simple';
-import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import { EAdministration } from '../../models/administrations';
-import AvisSituationLink from '../avis-situation-link';
-import { EtablissementDescription } from '../etablissement-description';
-import BreakPageForPrint from '../../components-ui/print-break-page';
-import { PrintNever } from '../../components-ui/print-visibility';
-import TVACell from '../tva-cell';
-import FAQLink from '../../components-ui/faq-link';
+import FAQLink from '#components-ui/faq-link';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import BreakPageForPrint from '#components-ui/print-break-page';
+import { PrintNever } from '#components-ui/print-visibility';
+import { Tag } from '#components-ui/tag';
+import AvisSituationLink from '#components/avis-situation-link';
+import { EtablissementDescription } from '#components/etablissement-description';
+import { Section } from '#components/section';
+import { CopyPaste, TwoColumnTable } from '#components/table/simple';
+import TVACell from '#components/tva-cell';
+import { EAdministration } from '#models/administrations';
+import { IEtablissement, IUniteLegale } from '#models/index';
+import { formatDate, formatSiret } from '#utils/helpers';
 
 interface IProps {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
-  usedInEntreprisePage?: Boolean;
-  withDenomination?: Boolean;
+  usedInEntreprisePage?: boolean;
+  withDenomination?: boolean;
 }
 
 const EtablissementSection: React.FC<IProps> = ({
@@ -27,30 +27,35 @@ const EtablissementSection: React.FC<IProps> = ({
   withDenomination,
 }) => {
   const data = [
-    withDenomination && ['Dénomination de l’entité', uniteLegale.nomComplet],
-    withDenomination && [
-      'Type d’établissement',
-      <>
-        {etablissement.estSiege
-          ? 'Siège social'
-          : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1
-          ? 'Ancien siège social'
-          : 'Secondaire'}
-        {' ( '}
-        <a key="entite" href={`/entreprise/${uniteLegale.siren}`}>
-          → voir la page de l’entité
-        </a>
-        {' )'}
-      </>,
-    ],
-    etablissement.denomination && [
-      'Nom de l’établissement',
-      etablissement.denomination,
-    ],
-    etablissement.enseigne && [
-      'Enseigne de l’établissement',
-      etablissement.enseigne,
-    ],
+    ...(withDenomination
+      ? [
+          ['Dénomination de l’unité légale', uniteLegale.nomComplet],
+          [
+            'Type d’établissement',
+            <>
+              {etablissement.estSiege ? (
+                <Tag className="info">siège social</Tag>
+              ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) >
+                -1 ? (
+                <Tag>ancien siège social</Tag>
+              ) : (
+                <Tag>secondaire</Tag>
+              )}
+              {' ( '}
+              <a key="entite" href={`/entreprise/${uniteLegale.siren}`}>
+                → voir la page de l’unité légale
+              </a>
+              {' )'}
+            </>,
+          ],
+        ]
+      : []),
+    ...(etablissement.denomination
+      ? [['Nom de l’établissement', etablissement.denomination]]
+      : []),
+    ...(etablissement.enseigne
+      ? [['Enseigne de l’établissement', etablissement.enseigne]]
+      : []),
     [
       <FAQLink tooltipLabel="Adresse">
         <a href="/faq/modifier-adresse">Comment modifier une adresse ?</a>
@@ -70,9 +75,11 @@ const EtablissementSection: React.FC<IProps> = ({
     ],
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
-    !usedInEntreprisePage && ['N° TVA Intracommunautaire', <TVACell />],
+    ...(!usedInEntreprisePage
+      ? [['N° TVA Intracommunautaire', <TVACell />]]
+      : []),
     [
-      'Activité principale de l’entité (NAF/APE)',
+      'Activité principale de l’unité légale (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
     ],
     [
@@ -90,11 +97,10 @@ const EtablissementSection: React.FC<IProps> = ({
       'Avis de situation Insee',
       <AvisSituationLink siret={etablissement.siret} />,
     ],
-    etablissement.estActif === false && [
-      'Date de fermeture',
-      formatDate(etablissement.dateFermeture || ''),
-    ],
-  ] as (any[] | undefined)[];
+    ...(etablissement.estActif === false
+      ? [['Date de fermeture', formatDate(etablissement.dateFermeture || '')]]
+      : []),
+  ];
 
   return (
     <>

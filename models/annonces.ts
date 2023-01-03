@@ -1,13 +1,29 @@
-import fetchAnnoncesBodacc from '../clients/open-data-soft/bodacc';
-import fetchAnnoncesJO from '../clients/open-data-soft/journal-officiel-associations';
-import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../utils/sentry';
-import { EAdministration } from './administrations';
+import clientBodacc from '#clients/open-data-soft/bodacc';
+import {
+  clientDCA,
+  clientJOAFE,
+} from '#clients/open-data-soft/journal-officiel-associations';
+import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
-} from './api-not-responding';
-import { getUniteLegaleFromSlug } from './unite-legale';
+} from '#models/api-not-responding';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { Siren, verifySiren } from '#utils/helpers';
+import { IdRna } from '#utils/helpers';
+import logErrorInSentry from '#utils/sentry';
+import { isAssociation } from '.';
+
+export interface IComptesAssociation {
+  comptes: {
+    dateparution: string;
+    numeroParution: string;
+    datecloture: string;
+    permalinkUrl: string;
+    anneeCloture: string;
+  }[];
+  lastModified: string | null;
+}
 
 export interface IAnnoncesBodacc {
   annonces: {
@@ -27,7 +43,7 @@ export interface IAnnoncesBodacc {
   }[];
 }
 
-export interface IAnnoncesJO {
+export interface IAnnoncesAssociation {
   annonces: {
     typeAvisLibelle: string;
     numeroParution: string;
@@ -44,29 +60,53 @@ const getAnnoncesFromSlug = async (siren: string) => {
     getAnnoncesBodaccFromSlug(siren),
   ]);
 
-  let jo = null;
-  if (uniteLegale.association && uniteLegale.association.id) {
-    jo = await getAnnoncesJoFromIdRna(
-      uniteLegale.association.id,
-      uniteLegale.siren
-    );
+  let annoncesAssociation = null;
+  let comptesAssociation = null;
+
+  if (isAssociation(uniteLegale)) {
+    [annoncesAssociation, comptesAssociation] = await Promise.all([
+      getAnnoncesAssociation(
+        uniteLegale.association.idAssociation,
+        uniteLegale.siren
+      ),
+      getComptesAssociation(
+        uniteLegale.siren,
+        uniteLegale.association.idAssociation
+      ),
+    ]);
   }
 
   return {
-    uniteLegale,
+    annoncesAssociation,
     bodacc,
-    jo,
+    comptesAssociation,
+    uniteLegale,
   };
 };
 
-const getAnnoncesJoFromIdRna = async (
+const getComptesAssociation = async (
+  siren: Siren,
+  idRna: IdRna | string
+): Promise<IComptesAssociation | IAPINotRespondingError> => {
+  try {
+    return await clientDCA(siren, idRna);
+  } catch (e: any) {
+    logErrorInSentry('Error in API JOAFE : COMPTES', {
+      siren,
+      details: e.toString(),
+    });
+    return APINotRespondingFactory(EAdministration.DILA, 500);
+  }
+};
+
+const getAnnoncesAssociation = async (
   idRna: string,
   siren: Siren
-): Promise<IAnnoncesJO | IAPINotRespondingError> => {
+): Promise<IAnnoncesAssociation | IAPINotRespondingError> => {
   try {
-    return await fetchAnnoncesJO(idRna);
+    return await clientJOAFE(idRna);
   } catch (e: any) {
-    logErrorInSentry('Error in API Journal Officiel', {
+    logErrorInSentry('Error in API JOAFE: ANNONCES', {
       siren,
       details: e.toString(),
     });
@@ -79,7 +119,7 @@ const getAnnoncesBodaccFromSlug = async (
 ): Promise<IAnnoncesBodacc | IAPINotRespondingError> => {
   const siren = verifySiren(slug);
   try {
-    return await fetchAnnoncesBodacc(siren);
+    return await clientBodacc(siren);
   } catch (e: any) {
     logErrorInSentry('Error in API BODACC', {
       siren,
@@ -89,4 +129,4 @@ const getAnnoncesBodaccFromSlug = async (
   }
 };
 
-export default getAnnoncesFromSlug;
+export { getAnnoncesFromSlug };

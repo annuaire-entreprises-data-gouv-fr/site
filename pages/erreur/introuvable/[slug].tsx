@@ -1,9 +1,8 @@
-import React from 'react';
 import { GetServerSideProps } from 'next';
-
+import React from 'react';
+import ButtonLink from '#components-ui/button';
+import MatomoEvent from '#components/matomo-event';
 import Page from '../../../layouts';
-import ButtonLink from '../../../components-ui/button';
-import MatomoEvent from '../../../components/matomo-event';
 
 const SirenOrSiretNotFoundPage = ({ slug = '' }) => {
   return (
@@ -26,7 +25,7 @@ const SirenOrSiretNotFoundPage = ({ slug = '' }) => {
             <a href="/faq">non-diffusible</a>.
           </li>
           <li>
-            Ce numéro fait peut-être référence à une entité publique dont les
+            Ce numéro fait peut-être référence à une structure publique dont les
             informations sont protégées (Ministère de Défense, Gendarmerie,
             parlementaire etc.)
           </li>

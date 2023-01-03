@@ -1,18 +1,23 @@
-import { IUniteLegale } from '.';
-import { verifySiren } from '../utils/helpers/siren-and-siret';
-import { IAPINotRespondingError } from './api-not-responding';
-import { getUniteLegaleFromSlug } from './unite-legale';
+import { EAdministration } from '#models/administrations';
 import {
-  getImmatriculationRNM,
-  IImmatriculationRNM,
-} from './immatriculation/rnm';
+  APINotRespondingFactory,
+  IAPINotRespondingError,
+} from '#models/api-not-responding';
 import {
   getImmatriculationJOAFE,
   IImmatriculationJOAFE,
-} from './immatriculation/joafe';
+} from '#models/immatriculation/joafe';
 import getImmatriculationRNCS, {
   IImmatriculationRNCS,
-} from './immatriculation/rncs';
+} from '#models/immatriculation/rncs';
+import {
+  getImmatriculationRNM,
+  IImmatriculationRNM,
+} from '#models/immatriculation/rnm';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { verifySiren } from '#utils/helpers';
+import { isAssociation } from '.';
+import { IUniteLegale } from '.';
 
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;
@@ -26,15 +31,17 @@ const getJustificatifs = async (slug: string) => {
 
   const [uniteLegale, immatriculationRNM, immatriculationRNCS] =
     await Promise.all([
-      getUniteLegaleFromSlug(siren, {}),
+      getUniteLegaleFromSlug(siren),
       getImmatriculationRNM(siren),
       getImmatriculationRNCS(siren),
     ]);
 
-  const immatriculationJOAFE = await getImmatriculationJOAFE(
-    siren,
-    uniteLegale.association?.id || null
-  );
+  const immatriculationJOAFE = isAssociation(uniteLegale)
+    ? await getImmatriculationJOAFE(
+        siren,
+        uniteLegale.association.idAssociation
+      )
+    : APINotRespondingFactory(EAdministration.DILA, 404);
 
   return {
     uniteLegale,

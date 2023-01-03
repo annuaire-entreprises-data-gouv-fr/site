@@ -4,9 +4,9 @@ describe('Home page', () => {
   it('Open advanced filters', () => {
     cy.visit('/');
 
-    cy.contains('Personne').should('not.be.visible');
+    cy.contains('Dirigeant').should('not.be.visible');
     cy.contains('Afficher les filtres').click();
-    cy.contains('Personne').should('be.visible');
+    cy.contains('Dirigeant').should('be.visible');
     cy.contains('Cacher les filtres de recherche').should('be.visible');
 
     cy.contains('Zone géographique').click({ force: true });
@@ -14,6 +14,21 @@ describe('Home page', () => {
     cy.contains('Appliquer').click();
 
     cy.url().should('include', '/rechercher?terme=&cp_dep=35000');
+  });
+});
+
+describe('Dirigeants and Elus search', () => {
+  it('Search an élu with dirigeants filters', () => {
+    cy.visit('/rechercher?terme=&fn=anne&n=hidalgo');
+
+    cy.contains('36 RUE DES PIPISRELLES').should('be.visible');
+    cy.contains('METROPOLE DU GRAND PARIS (MGP)').should('be.visible');
+  });
+
+  it('Search a dirigeant with main search bar', () => {
+    cy.visit('/rechercher?terme=xavier+jouppe');
+    cy.contains('SCI DE LASLAUDIE').should('be.visible');
+    cy.contains('Bernard JOUPPE').should('be.visible');
   });
 });
 
@@ -26,13 +41,14 @@ describe('Advanced search on page ' + path, () => {
     cy.contains('Zone géographique').click({ force: true });
     cy.contains('Code postal').should('not.be.visible');
 
-    cy.contains('Personne').click({ force: true });
-    cy.contains('Rechercher les entreprises liées à une personne').should(
-      'be.visible'
-    );
+    cy.contains('Dirigeant').click({ force: true });
+    cy.contains(
+      'Rechercher toutes les structures liées à une personne (dirigeant(e), ou élu(e))'
+    ).should('be.visible');
 
     cy.contains('Situation administrative').click({ force: true });
     cy.contains('Domaine d’activité').should('be.visible');
+    cy.contains('Etat administratif').should('be.visible');
   });
 
   it('Geo filter works', () => {
@@ -53,10 +69,10 @@ describe('Advanced search on page ' + path, () => {
     cy.contains('Zone géographique').click({ force: true });
     cy.contains('Code postal').should('not.be.visible');
 
-    cy.contains('Personne').click({ force: true });
-    cy.contains('Rechercher les entreprises liées à une personne').should(
-      'be.visible'
-    );
+    cy.contains('Dirigeant').click({ force: true });
+    cy.contains(
+      'Rechercher toutes les structures liées à une personne (dirigeant(e), ou élu(e))'
+    ).should('be.visible');
 
     cy.contains('Situation administrative').click({ force: true });
     cy.contains('Domaine d’activité').should('be.visible');
@@ -67,6 +83,14 @@ describe('Advanced search on page ' + path, () => {
     cy.get('.results-list').should('have.length', 1);
 
     cy.visit(path + '?terme=Ganymede&cp_dep=35000&sap=J');
+    cy.get('.results-list').should('have.length', 0);
+  });
+
+  it('Etat administratif filters', () => {
+    cy.visit(path + '?terme=ganymede&cp_dep=&fn=&n=jouppe&etat=C');
+    cy.get('.results-list').should('have.length', 1);
+
+    cy.visit(path + '?terme=ganymede&cp_dep=&fn=&n=jouppe&etat=A');
     cy.get('.results-list').should('have.length', 0);
   });
 

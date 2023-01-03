@@ -1,14 +1,47 @@
-import logo from '../../public/images/logo';
+interface IProps {
+  title: string;
+  width: number;
+  height: number;
+  slug: string;
+  className?: string;
+}
 
-const Logo = ({ width = 270 }) => (
-  <div className="logo-wrapper">
-    {logo}
-    <style jsx>
+const Logo: React.FC<IProps> = ({
+  title = 'Annuaire des Entreprises',
+  width,
+  height,
+  slug = 'marianne',
+  className = '',
+}) => (
+  <div
+    className="logo-wrapper"
+    style={{
+      width: `${width}px`,
+      height: `${height}px`,
+    }}
+  >
+    <img
+      className={className}
+      src={`/images/logos/${slug || 'marianne'}.svg`}
+      alt={title}
+      title={title}
+      width="100%"
+      height="100%"
+    />
+    <style global jsx>
       {`
         .logo-wrapper {
           max-width: 90%;
-          width: ${width}px;
           margin: 0 auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .logo-wrapper > img {
+          margin: auto;
+          display: block;
+          max-width: 100%;
+          max-height: 100%;
         }
       `}
     </style>

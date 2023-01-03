@@ -1,27 +1,28 @@
-import React from 'react';
-
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import { IUniteLegale } from '../../models';
-import UniteLegaleSection from '../../components/unite-legale-section';
-import EtablissementListeSection from '../../components/etablissement-liste-section';
-import Title, { FICHE } from '../../components/title-section';
-
-import EtablissementSection from '../../components/etablissement-section';
-
-import { NonDiffusibleSection } from '../../components/non-diffusible';
-import { getUniteLegaleFromSlug } from '../../models/unite-legale';
-import AssociationSection from '../../components/association-section';
-import StructuredDataBreadcrumb from '../../components/structured-data/breadcrumb';
-import { shouldNotIndex } from '../../utils/helpers/checks';
-import UsefulShortcuts from '../../components/useful-shortcuts';
-import MatomoEventRedirected from '../../components/matomo-event/search-redirected';
-import { extractSirenOrSiretSlugFromUrl } from '../../utils/helpers/siren-and-siret';
+import React from 'react';
+import AssociationSection from '#components/association-section';
+import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
+import EtablissementListeSection from '#components/etablissement-liste-section';
+import EtablissementSection from '#components/etablissement-section';
+import MatomoEventRedirected from '#components/matomo-event/search-redirected';
+import { NonDiffusibleSection } from '#components/non-diffusible';
+import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
+import Title, { FICHE } from '#components/title-section';
+import UniteLegaleSection from '#components/unite-legale-section';
+import UsefulShortcuts from '#components/useful-shortcuts';
+import {
+  isCollectiviteTerritoriale,
+  IUniteLegale,
+  isAssociation,
+} from '#models/index';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { extractSirenOrSiretSlugFromUrl, shouldNotIndex } from '#utils/helpers';
+import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   postServerSideProps,
   IPropsWithMetadata,
-} from '../../utils/server-side-props-helper/post-server-side-props';
-import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
+} from '#utils/server-side-props-helper/post-server-side-props';
+import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
@@ -51,8 +52,11 @@ const UniteLegalePage: React.FC<IProps> = ({
       {uniteLegale.estDiffusible ? (
         <>
           <UniteLegaleSection uniteLegale={uniteLegale} />
-          {uniteLegale.association && uniteLegale.association.id && (
+          {isAssociation(uniteLegale) && (
             <AssociationSection uniteLegale={uniteLegale} />
+          )}
+          {isCollectiviteTerritoriale(uniteLegale) && (
+            <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
           )}
           <UsefulShortcuts uniteLegale={uniteLegale} />
           {uniteLegale.siege && (

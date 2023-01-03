@@ -1,18 +1,22 @@
 import React from 'react';
-import { IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administrations';
-import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
-import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import BreakPageForPrint from '../../components-ui/print-break-page';
-import HorizontalSeparator from '../../components-ui/horizontal-separator';
-import { Section } from '../section';
-import { TwoColumnTable } from '../table/simple';
-import TVACell from '../tva-cell';
-import FAQLink from '../../components-ui/faq-link';
+import FAQLink from '#components-ui/faq-link';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import { Section } from '#components/section';
+import { TwoColumnTable } from '#components/table/simple';
+import TVACell from '#components/tva-cell';
+import { EAdministration } from '#models/administrations';
+import { IUniteLegale } from '#models/index';
+import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
+import {
+  checkHasLabelsAndCertificates,
+  LabelsAndCertificates,
+} from './labels-and-certificates';
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
+  const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
+
   const data = [
     ['Dénomination', uniteLegale.nomComplet],
     ['SIREN', formatIntFr(uniteLegale.siren)],
@@ -48,35 +52,43 @@ const UniteLegaleSection: React.FC<{
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
-      'Tranche effectif salarié de l’entité',
+      'Tranche effectif salarié de la structure',
       uniteLegale.libelleTrancheEffectif,
     ],
-    ['Catégorie d’entreprise', uniteLegale.libelleCategorieEntreprise],
+    ['Taille de la structure', uniteLegale.libelleCategorieEntreprise],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
-      'Date de dernière mise à jour',
+      'Dernière modification des données Insee',
       formatDate(uniteLegale.dateDerniereMiseAJour),
     ],
+    ...(uniteLegale.estActive === false
+      ? [['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]]
+      : []),
+    // jump line and add label and certificates
+    ...(hasLabelsAndCertificates
+      ? [
+          ['', <br />],
+          [
+            'Label ou certification',
+            <LabelsAndCertificates uniteLegale={uniteLegale} />,
+          ],
+        ]
+      : []),
   ];
-
-  if (uniteLegale.estActive === false) {
-    data.push(['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]);
-  }
-
-  if (uniteLegale.estEss) {
-    data.push(['Economie Sociale et Solidaire (ESS)', 'Oui']);
-  }
 
   return (
     <div id="entreprise">
       <Section
-        title={`Informations générales`}
-        sources={[EAdministration.INSEE, EAdministration.VIES]}
+        title={`Résumé`}
+        sources={[
+          EAdministration.INSEE,
+          EAdministration.VIES,
+          EAdministration.DINUM,
+        ]}
       >
         <TwoColumnTable body={data} />
       </Section>
       <HorizontalSeparator />
-      <BreakPageForPrint />
     </div>
   );
 };

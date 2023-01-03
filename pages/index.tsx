@@ -1,15 +1,16 @@
 import React from 'react';
-import Logo from '../components-ui/logo';
-import HiddenH1 from '../components/a11y-components/hidden-h1';
-import HomePageAdvancedSearch from '../components/advanced-search/home-page';
-import SearchBar from '../components/search-bar';
-import StructuredDataSearchAction from '../components/structured-data/search';
+import Logo from '#components-ui/logo';
+import HiddenH1 from '#components/a11y-components/hidden-h1';
+import HomePageAdvancedSearch from '#components/advanced-search/home-page';
+import SearchBar from '#components/search-bar';
+import StructuredDataSearchAction from '#components/structured-data/search';
 import Page from '../layouts';
 
 const Index: React.FC = () => (
   <Page
-    title="L’Annuaire des Entreprises"
+    title="L’Annuaire des Entreprises françaises : les informations juridiques officielles de l’administration"
     canonical="https://annuaire-entreprises.data.gouv.fr"
+    description="L’administration permet aux particuliers et agents publics de vérifier les informations juridiques officielles d’une entreprise : SIREN, SIRET, TVA Intracommunautaire, code APE/NAF, capital social, justificatif d’immatriculation, dirigeants, convention collective…"
   >
     <StructuredDataSearchAction />
     <div className="layout-center">
@@ -19,11 +20,16 @@ const Index: React.FC = () => (
         action={'/rechercher'}
         method="get"
       >
-        <Logo />
-        <HiddenH1 title="L’Annuaire des Entreprises" />
+        <Logo
+          title="Logo de l’Annuaire des Entreprises"
+          slug="annuaire-entreprises"
+          width={270}
+          height={112}
+        />
+        <HiddenH1 title="Bienvenue sur L’Annuaire des Entreprises" />
         <h2>
-          Retrouvez toutes les informations publiques sur une personne morale
-          (entreprise, association ou administration)
+          Vérifiez toutes les informations juridiques publiques d’une entreprise
+          française
         </h2>
         <div className="search-bar-wrapper">
           <SearchBar

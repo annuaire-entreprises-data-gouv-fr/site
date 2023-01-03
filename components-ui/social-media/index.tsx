@@ -1,15 +1,25 @@
 import React from 'react';
-import { facebook, linkedin, qrCode, twitter, print } from '../icon';
-import InformationTooltip from '../information-tooltip';
-import { PrintNever } from '../print-visibility';
+import {
+  facebook,
+  linkedin,
+  qrCode,
+  twitter,
+  print,
+  mail,
+} from '#components-ui/icon';
+import InformationTooltip from '#components-ui/information-tooltip';
+import { PrintNever } from '#components-ui/print-visibility';
+import { IUniteLegale } from '#models/index';
 
-const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
+const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
+  uniteLegale: { siren, nomComplet },
+}) => (
   <PrintNever>
     <div className="social-media layout-right">
       <span>
         <InformationTooltip
           orientation="right"
-          label="Partager la page de cette entité sur Linkedin"
+          label="Partager cette page sur Linkedin"
         >
           <a
             href={`https://www.linkedin.com/shareArticle?mini=true&url=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
@@ -25,7 +35,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       <span>
         <InformationTooltip
           orientation="right"
-          label="Partager la page de cette entité sur Twitter"
+          label="Partager cette page sur Twitter"
         >
           <a
             href={`https://twitter.com/intent/tweet?url=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
@@ -41,7 +51,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       <span>
         <InformationTooltip
           orientation="right"
-          label="Partager la page de cette entité sur Facebook"
+          label="Partager cette page sur Facebook"
         >
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
@@ -51,6 +61,20 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
             className="no-style-link"
           >
             {facebook}
+          </a>
+        </InformationTooltip>
+      </span>
+      <span>
+        <InformationTooltip
+          orientation="right"
+          label="Partager cette page par Email"
+        >
+          <a
+            href={`mailto:?subject=A découvrir sur l’Annuaire des Entreprises, la page de ${nomComplet}&body=Je voudrais partager la page ${nomComplet} avec vous https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
+            title="Partager cette page par Email"
+            className="no-style-link"
+          >
+            {mail}
           </a>
         </InformationTooltip>
       </span>
@@ -73,7 +97,7 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       </span>
       <span>
         <InformationTooltip
-          label="Télécharger un QR Code à inclure dans un courier ou dans un devis, pour partager cet url."
+          label="Télécharger un QR Code à inclure dans un courier ou dans un devis, pour partager cette page"
           orientation="right"
         >
           <a
@@ -88,16 +112,13 @@ const SocialMedia: React.FC<{ siren: string }> = ({ siren }) => (
       </span>
     </div>
     <style jsx>{`
-      .social-media {
-        color: #000091;
-      }
-
       .social-media span {
         margin: 0 5px;
       }
       .social-media span a,
       .social-media span div {
         cursor: pointer !important;
+        padding: 8px;
       }
       .social-media span a:after {
         display: none;

@@ -1,17 +1,17 @@
 import React from 'react';
+import ImmatriculationNotFoundAlert from '#components-ui/alerts/immatriculation-not-found-alert';
+import AvisSituationSection from '#components/immatriculations/insee';
+import ImmatriculationJOAFE from '#components/immatriculations/joafe';
+import ImmatriculationRNCS from '#components/immatriculations/rncs';
+import ImmatriculationRNM from '#components/immatriculations/rnm';
+import ImmatriculationSummary from '#components/immatriculations/summary';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '../../models/api-not-responding';
-import { IImmatriculation } from '../../models/immatriculation';
-import { IJustificatifs } from '../../models/justificatifs';
-import AssociationCreationNotFoundAlert from '../../components-ui/alerts/association-creation-not-found-alert';
-import AvisSituationSection from './insee';
-import ImmatriculationJOAFE from './joafe';
-import ImmatriculationRNCS from './rncs';
-import ImmatriculationRNM from './rnm';
-import ImmatriculationSummary from './summary';
-import ImmatriculationNotFoundAlert from '../../components-ui/alerts/immatriculation-not-found-alert';
+} from '#models/api-not-responding';
+import { IImmatriculation } from '#models/immatriculation';
+import { isAssociation } from '#models/index';
+import { IJustificatifs } from '#models/justificatifs';
 
 const isNotFound = (
   immatriculation: IImmatriculation | IAPINotRespondingError
@@ -27,7 +27,7 @@ const Immatriculations: React.FC<IJustificatifs> = ({
   immatriculationJOAFE,
   uniteLegale,
 }) => {
-  const isAnAssociation = !!uniteLegale.association;
+  const isAnAssociation = isAssociation(uniteLegale);
 
   const noAssociationImmatriculation =
     !isAnAssociation || (isAnAssociation && isNotFound(immatriculationJOAFE));
@@ -55,10 +55,9 @@ const Immatriculations: React.FC<IJustificatifs> = ({
         </>
       ) : (
         <>
-          <ImmatriculationJOAFE
-            immatriculation={immatriculationJOAFE}
-            uniteLegale={uniteLegale}
-          />
+          {isAnAssociation && (
+            <ImmatriculationJOAFE immatriculation={immatriculationJOAFE} />
+          )}
           <ImmatriculationRNM
             immatriculation={immatriculationRNM}
             uniteLegale={uniteLegale}

@@ -1,18 +1,18 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import routes from '../../clients/routes';
-import Info from '../../components-ui/alerts/info';
-import { Loader } from '../../components-ui/loader';
-import { Tag } from '../../components-ui/tag';
-import { INPI } from '../../components/administrations';
-import FrontStateMachine from '../../components/front-state-machine';
+import routes from '#clients/routes';
+import Info from '#components-ui/alerts/info';
+import { Loader } from '#components-ui/loader';
+import { Tag } from '#components-ui/tag';
+import { INPI } from '#components/administrations';
+import FrontStateMachine from '#components/front-state-machine';
+import { formatIntFr } from '#utils/helpers';
+import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '../../utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-props-helper/post-server-side-props';
 import Page from '../../layouts';
-import { formatIntFr } from '../../utils/helpers/formatting';
-import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
 
 const Retry: React.FC<{}> = () => (
   <>
@@ -156,7 +156,6 @@ const InpiPDF: React.FC<IProps> = ({ siren, metadata }) => {
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
-
     return {
       props: { siren: slug },
     };

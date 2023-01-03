@@ -1,17 +1,16 @@
-import React from 'react';
-
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import { parseIntWithDefaultValue } from '../../utils/helpers/formatting';
-import search, { ISearchResults } from '../../models/search';
-import HiddenH1 from '../../components/a11y-components/hidden-h1';
-import StructuredDataSearchAction from '../../components/structured-data/search';
-import SearchFilterParams, { IParams } from '../../models/search-filter-params';
+import React from 'react';
+import HiddenH1 from '#components/a11y-components/hidden-h1';
+import SearchResults from '#components/search-results';
+import StructuredDataSearchAction from '#components/structured-data/search';
+import search, { ISearchResults } from '#models/search';
+import SearchFilterParams, { IParams } from '#models/search-filter-params';
+import { parseIntWithDefaultValue } from '#utils/helpers';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '../../utils/server-side-props-helper/post-server-side-props';
-import SearchResults from '../../components/search-results';
+} from '#utils/server-side-props-helper/post-server-side-props';
+import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   searchTerm: string;
@@ -54,7 +53,6 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const page = parseIntWithDefaultValue(pageParam, 1);
     const searchFilterParams = new SearchFilterParams(context.query);
     const results = await search(searchTerm, page, searchFilterParams);
-
     return {
       props: {
         results,

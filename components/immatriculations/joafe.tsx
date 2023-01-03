@@ -1,36 +1,36 @@
 import React from 'react';
-import { IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administrations';
+import ButtonLink from '#components-ui/button';
+import { download } from '#components-ui/icon';
+import BreakPageForPrint from '#components-ui/print-break-page';
+import { PrintNever } from '#components-ui/print-visibility';
+import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '../../models/api-not-responding';
-import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
+} from '#models/api-not-responding';
+import { IImmatriculationJOAFE } from '#models/immatriculation/joafe';
+import { IAssociation } from '#models/index';
+import { formatDate, formatIntFr } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
-import BreakPageForPrint from '../../components-ui/print-break-page';
-import ButtonLink from '../../components-ui/button';
-import { download } from '../../components-ui/icon';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
-import { PrintNever } from '../../components-ui/print-visibility';
-import { IImmatriculationJOAFE } from '../../models/immatriculation/joafe';
 
 interface IProps {
   immatriculation: IImmatriculationJOAFE | IAPINotRespondingError;
-  uniteLegale: IUniteLegale;
 }
 
 const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
   if (isAPINotResponding(immatriculation)) {
     if (immatriculation.errorType === 404) {
       return null;
+    } else {
+      return (
+        <AdministrationNotResponding
+          {...immatriculation}
+          title="Enregistrement au JOAFE"
+        />
+      );
     }
-    return (
-      <AdministrationNotResponding
-        {...immatriculation}
-        title="Enregistrement au JOAFE"
-      />
-    );
   }
 
   const data = [
@@ -49,7 +49,7 @@ const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
             sources={[EAdministration.DILA]}
           >
             <p>
-              Cette entité est enregistrée au{' '}
+              Cette structure est enregistrée au{' '}
               <b>Journal Officiel des Association (JOAFE)</b>.
             </p>
             <TwoColumnTable body={data} />

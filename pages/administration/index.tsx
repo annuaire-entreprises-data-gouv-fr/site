@@ -1,14 +1,12 @@
-import React from 'react';
-
 import { GetStaticProps } from 'next';
-import Page from '../../layouts';
-
+import React from 'react';
+import TextWrapper from '#components-ui/text-wrapper';
+import AdministrationDescription from '#components/administrations/administration-description';
 import {
   administrationsMetaData,
   IAdministrationMetaData,
-} from '../../models/administrations';
-import AdministrationDescription from '../../components/administrations/administration-description';
-import TextWrapper from '../../components-ui/text-wrapper';
+} from '#models/administrations';
+import Page from '../../layouts';
 
 const StatusPage: React.FC<{
   allAdministrations: IAdministrationMetaData[];

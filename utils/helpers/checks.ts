@@ -1,4 +1,4 @@
-import { IUniteLegale } from '../../models';
+import { IUniteLegale } from '#models/index';
 
 export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string
@@ -15,11 +15,23 @@ export const isTwoMonthOld = (dateAsString: string) => {
   }
 };
 
+export const isAssociationFromNatureJuridique = (natureJuridique = '') =>
+  natureJuridique === '5195' || natureJuridique.indexOf('92') === 0;
+
+export const isServicePublicFromNatureJuridique = (natureJuridique = '') =>
+  natureJuridique === '3210' ||
+  natureJuridique === '3110' ||
+  natureJuridique.indexOf('4') === 0 ||
+  natureJuridique.indexOf('71') === 0 ||
+  natureJuridique.indexOf('72') === 0 ||
+  natureJuridique.indexOf('73') === 0 ||
+  natureJuridique.indexOf('74') === 0;
+
 /**
  * Return true if an uniteLegale should be **ignored** by indexing bots
  */
 export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
-  if (uniteLegale.estEntrepreneurIndividuel) {
+  if (uniteLegale.complements.estEntrepreneurIndividuel) {
     // we dont index EI
     return true;
   }

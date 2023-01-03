@@ -1,4 +1,14 @@
-import { libelleFromTypeVoie } from '../labels';
+import { libelleFromTypeVoie } from '#utils/labels';
+import logErrorInSentry from '#utils/sentry';
+
+const safe = (castAndFormat: (toBeFormated: any) => any) => (d: any) => {
+  try {
+    return castAndFormat(d);
+  } catch (e: any) {
+    logErrorInSentry('Error while formating date', { details: d });
+    return d;
+  }
+};
 
 const castDate = (date: string | Date) =>
   typeof date === 'string' ? new Date(date) : date;
@@ -9,7 +19,34 @@ const longDateOptions = {
   day: 'numeric',
 };
 
-export const formatDateLong = (date: string | Date) => {
+const longDatePartial = {
+  year: 'numeric',
+  month: 'long',
+};
+
+const yearOption = {
+  year: 'numeric',
+};
+
+export const formatDateYear = safe((date: string | Date) => {
+  if (!date) {
+    return undefined;
+  }
+  //@ts-ignore
+  return new Intl.DateTimeFormat('fr-FR', yearOption).format(castDate(date));
+});
+
+export const formatDatePartial = safe((date: string | Date) => {
+  if (!date) {
+    return undefined;
+  }
+  //@ts-ignore
+  return new Intl.DateTimeFormat('fr-FR', longDatePartial).format(
+    castDate(date)
+  );
+});
+
+export const formatDateLong = safe((date: string | Date) => {
   if (!date) {
     return undefined;
   }
@@ -17,10 +54,11 @@ export const formatDateLong = (date: string | Date) => {
   return new Intl.DateTimeFormat('fr-FR', longDateOptions).format(
     castDate(date)
   );
-};
+});
 
-export const formatDate = (date: string | Date) =>
-  date ? new Intl.DateTimeFormat('fr-FR').format(castDate(date)) : undefined;
+export const formatDate = safe((date: string | Date) =>
+  date ? new Intl.DateTimeFormat('fr-FR').format(castDate(date)) : undefined
+);
 
 export const capitalize = (str: string) => {
   if (!str) return str;
@@ -28,22 +66,22 @@ export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
 };
 
-export const formatIntFr = (intAsString = '') => {
+export const formatIntFr = safe((intAsString = '') => {
   try {
     return intAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
   } catch (e: any) {
     return intAsString;
   }
-};
+});
 
-export const formatFloatFr = (floatAsString = '') => {
+export const formatFloatFr = safe((floatAsString = '') => {
   try {
     const floatAsNumber = parseFloat(floatAsString);
     return new Intl.NumberFormat('fr-FR').format(floatAsNumber);
   } catch {
     return floatAsString;
   }
-};
+});
 
 /**
  * Serialize for injection in client script

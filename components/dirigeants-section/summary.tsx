@@ -1,6 +1,6 @@
-import { isAPINotResponding } from '../../models/api-not-responding';
-import { IDirigeants } from '../../models/dirigeants';
-import { INPI, INSEE } from '../administrations';
+import { INPI, INSEE } from '#components/administrations';
+import { isAPINotResponding } from '#models/api-not-responding';
+import { IDirigeants } from '#models/dirigeants';
 
 const DirigeantSummary: React.FC<IDirigeants> = ({
   uniteLegale,
@@ -27,15 +27,15 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
     <>
       {hasNoDirigeant ? (
         <p>
-          Cette entité n’a pas de dirigeant(e) enregistré(e), que ce soit auprès
-          de l’
+          Cette structure n’a pas de dirigeant(e) enregistré(e), que ce soit
+          auprès de l’
           <INSEE /> ou auprès de l’
           <INPI />.
         </p>
       ) : (
         (insee || rncs || rbe) && (
           <>
-            Cette entité possède :
+            Cette structure possède :
             <ul>
               {insee && (
                 <li>

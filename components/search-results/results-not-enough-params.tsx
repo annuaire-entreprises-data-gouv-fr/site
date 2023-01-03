@@ -1,5 +1,5 @@
-import { NotEnoughParamsIllustration } from '../../components-ui/illustration';
-import { getFaqArticlesByTag } from '../../models/faq';
+import { NotEnoughParamsIllustration } from '#components-ui/illustration';
+import { getFaqArticlesByTag } from '#models/faq';
 
 export const NotEnoughParams = () => {
   const articles = getFaqArticlesByTag(['search']);
@@ -20,7 +20,10 @@ export const NotEnoughParams = () => {
           <li>
             Utiliser des critères de recherche géographiques ou administratifs
           </li>
-          <li>Rechercher toutes les entreprises associées a une personne</li>
+          <li>
+            Rechercher toutes les structures liées à une personne (dirigeant(e),
+            ou élu(e))
+          </li>
         </ul>
         <br />
         <b>
@@ -29,7 +32,7 @@ export const NotEnoughParams = () => {
         </b>
         <ul>
           {articles.map(({ slug, title }) => (
-            <li>
+            <li key={slug}>
               <a href={`/faq/${slug}`}>{title}</a>
             </li>
           ))}

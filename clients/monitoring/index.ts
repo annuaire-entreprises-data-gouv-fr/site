@@ -1,9 +1,10 @@
-import { IMonitoring } from '../../models/monitoring';
-import httpClient from '../../utils/network';
 import FormData from 'form-data';
-import routes from '../routes';
+import routes from '#clients/routes';
+import { allMonitoringIds } from '#models/administrations';
+import constants from '#models/constants';
+import { IMonitoring } from '#models/monitoring';
+import httpClient from '#utils/network';
 import { DailyUptimeRatioConverter } from './series';
-import { allMonitoringIds } from '../../models/administrations';
 
 export interface IMonitorLog {
   id?: number;
@@ -49,19 +50,19 @@ const cachedMonitorings: IMonitoringCache = {
 
 const CACHE_LIFE = 55 * 1000;
 
-export const fetchMonitorings = async (
+export const clientMonitorings = async (
   monitoringIds: number[]
 ): Promise<IMonitoring[]> => {
   const shouldUpdate =
     new Date().getTime() - cachedMonitorings.lastUpdate > CACHE_LIFE;
 
   if (shouldUpdate) {
-    await fetchAllMonitorings();
+    await updateMonitorings();
   }
   return monitoringIds.map((id) => cachedMonitorings.monitorings[id]);
 };
 
-const fetchAllMonitorings = async () => {
+const updateMonitorings = async () => {
   const monitoringIds = allMonitoringIds();
 
   const data = new FormData();
@@ -84,7 +85,11 @@ const fetchAllMonitorings = async () => {
     url: routes.monitoring + `?api_key=${process.env.UPTIME_ROBOT_API_KEY}`,
     method: 'POST',
     data,
-    headers: data.getHeaders(),
+    headers: {
+      ...data.getHeaders(),
+      'Accept-Encoding': 'gzip,deflate,compress',
+    },
+    timeout: constants.timeout.S,
   });
 
   const result = response.data as IUptimeRobotResponse;

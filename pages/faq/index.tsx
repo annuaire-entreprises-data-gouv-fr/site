@@ -1,15 +1,13 @@
-import React from 'react';
-
 import { GetStaticProps } from 'next';
-import Page from '../../layouts';
-
-import { getAllFaqArticles, IArticle } from '../../models/faq';
-import TextWrapper from '../../components-ui/text-wrapper';
-import StructuredDataFAQ from '../../components/structured-data/faq';
+import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import ReactMarkdown from 'react-markdown';
-import ButtonLink from '../../components-ui/button';
-import constants from '../../models/constants';
+import ButtonLink from '#components-ui/button';
+import TextWrapper from '#components-ui/text-wrapper';
+import StructuredDataFAQ from '#components/structured-data/faq';
+import constants from '#models/constants';
+import { getAllFaqArticles, IArticle } from '#models/faq';
+import Page from '../../layouts';
 
 const StatusPage: React.FC<{
   articles: IArticle[];

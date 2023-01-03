@@ -1,6 +1,6 @@
-import constants from '../../models/constants';
-import httpClientOAuthGetFactory from '../../utils/network/0auth';
-import routes from '../routes';
+import routes from '#clients/routes';
+import constants from '#models/constants';
+import httpClientOAuthGetFactory from '#utils/network/0auth';
 
 /**
  * API SIRENE by INSEE
@@ -42,5 +42,5 @@ export const inseeClientGet = async (
   const { useFallback, useCache } = options;
   const getClient = useFallback ? fallbackGetClient : defaultGetClient;
 
-  return await getClient(route, { timeout: constants.timeout.L }, useCache);
+  return await getClient(route, { timeout: constants.timeout.M }, useCache);
 };

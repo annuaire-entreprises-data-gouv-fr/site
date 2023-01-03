@@ -1,20 +1,19 @@
 import React from 'react';
-
-import { FullTable } from '../table/full';
-import { EAdministration } from '../../models/administrations';
-import { Tag } from '../../components-ui/tag';
-import { Section } from '../section';
-import ButtonLink from '../../components-ui/button';
-import { IConventionCollective } from '../../models/convention-collective';
-import AdministrationNotResponding from '../administration-not-responding';
+import routes from '#clients/routes';
+import ButtonLink from '#components-ui/button';
+import FAQLink from '#components-ui/faq-link';
+import { Tag } from '#components-ui/tag';
+import AdministrationNotResponding from '#components/administration-not-responding';
+import { METI } from '#components/administrations';
+import { Section } from '#components/section';
+import { FullTable } from '#components/table/full';
+import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '../../models/api-not-responding';
-import routes from '../../clients/routes';
-import { METI } from '../administrations';
-import { formatSiret } from '../../utils/helpers/siren-and-siret';
-import FAQLink from '../../components-ui/faq-link';
+} from '#models/api-not-responding';
+import { IConventionCollective } from '#models/convention-collective';
+import { formatSiret } from '#utils/helpers';
 
 const ConventionCollectivesSection: React.FC<{
   conventionCollectives: IConventionCollective[] | IAPINotRespondingError;
@@ -35,7 +34,7 @@ const ConventionCollectivesSection: React.FC<{
     <Section title="Conventions collectives" sources={[EAdministration.METI]}>
       {conventionCollectives.length === 0 ? (
         <div>
-          Cette entité n’a pas de{' '}
+          Cette structure n’a pas de{' '}
           <a
             target="_blank"
             rel="noreferrer noopener"
@@ -47,7 +46,7 @@ const ConventionCollectivesSection: React.FC<{
         </div>
       ) : (
         <>
-          Cette entité possède {conventionCollectives.length}{' '}
+          Cette structure possède {conventionCollectives.length}{' '}
           <FAQLink tooltipLabel={`convention${plural} collective${plural}`}>
             <a href="/faq/convention-collective">
               Qu’est-ce qu’une convention collective ?

@@ -1,6 +1,6 @@
-import { IConventionCollective } from '../../models/convention-collective';
-import { httpGet } from '../../utils/network';
-import routes from '../routes';
+import routes from '#clients/routes';
+import { IConventionCollective } from '#models/convention-collective';
+import { httpGet } from '#utils/network';
 
 /**
  * The Convention Collective API expects a list of SIRET.
@@ -33,7 +33,7 @@ interface IConventionObject {
   siret?: string;
 }
 
-const fetchConventionCollectives = async (
+const clientSiret2Idcc = async (
   sirets: string[]
 ): Promise<IConventionCollective[]> => {
   const batches = generateBatches(sirets);
@@ -71,4 +71,4 @@ const mapToDomainObject = (
   }, []);
 };
 
-export default fetchConventionCollectives;
+export default clientSiret2Idcc;

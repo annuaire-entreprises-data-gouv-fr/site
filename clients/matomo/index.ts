@@ -1,6 +1,6 @@
-import { httpGet } from '../../utils/network';
-import logErrorInSentry from '../../utils/sentry';
-import routes from '../routes';
+import routes from '#clients/routes';
+import { httpGet } from '#utils/network';
+import logErrorInSentry from '#utils/sentry';
 
 export interface IMatomoStats {
   visits: {
@@ -181,7 +181,7 @@ const computeStats = (
   };
 };
 
-export const getMatomoStats = async (): Promise<IMatomoStats> => {
+export const clientMatomoStats = async (): Promise<IMatomoStats> => {
   try {
     const [matomoMonthlyStats, matomoNpsEventStats, matomoCopyPasteEventStats] =
       await Promise.all([

@@ -1,22 +1,22 @@
 import React from 'react';
-import HorizontalSeparator from '../../components-ui/horizontal-separator';
-import { Section } from '../section';
-import { TwoColumnTable } from '../table/simple';
-import { EAdministration } from '../../models/administrations';
+import routes from '#clients/routes';
+import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import { INPI } from '#components/administrations';
+import { Section } from '#components/section';
+import { FullTable } from '#components/table/full';
+import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '../../models/api-not-responding';
-import AdministrationNotResponding from '../administration-not-responding';
-import routes from '../../clients/routes';
-import { Siren } from '../../utils/helpers/siren-and-siret';
-import { INPI } from '../administrations';
-import { formatDate } from '../../utils/helpers/formatting';
+} from '#models/api-not-responding';
 import {
   IBeneficiaire,
   IImmatriculationRNCS,
-} from '../../models/immatriculation/rncs';
-import InpiPartiallyDownWarning from '../../components-ui/alerts/inpi-partially-down';
+} from '#models/immatriculation/rncs';
+import { formatDate, formatDatePartial } from '#utils/helpers';
+import { Siren } from '#utils/helpers';
+import AdministrationNotResponding from '../administration-not-responding';
 
 interface IProps {
   immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
@@ -48,11 +48,14 @@ const BeneficiairesSection: React.FC<IProps> = ({
   const { beneficiaires } = immatriculationRNCS;
 
   const formtInfos = (beneficiaire: IBeneficiaire) => [
-    ['Nom', (beneficiaire.nom || '').toUpperCase()],
-    ['Prénoms', beneficiaire.prenoms],
-    ['Mois et année de naissance', beneficiaire.dateNaissancePartial],
-    ['Nationalité', beneficiaire.nationalite],
-    ['Date de déclaration', formatDate(beneficiaire.dateGreffe)],
+    formatDate(beneficiaire.dateGreffe),
+    <>
+      {beneficiaire.prenoms}
+      {beneficiaire.prenoms && ' '}
+      {(beneficiaire.nom || '').toUpperCase()}, né(e) en{' '}
+      {formatDatePartial(beneficiaire.dateNaissancePartial)}
+    </>,
+    beneficiaire.nationalite,
   ];
 
   const plural = beneficiaires.length > 1 ? 's' : '';
@@ -67,7 +70,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
       >
         {immatriculationRNCS.beneficiaires.length === 0 ? (
           <p>
-            Cette entité ne possède aucun{' '}
+            Cette structure ne possède aucun{' '}
             <a
               rel="noreferrer noopener nofollow"
               target="_blank"
@@ -86,7 +89,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
               <InpiPartiallyDownWarning missing="la date de déclaration, et la différence entre le nom et le prénom" />
             )}
             <p>
-              Cette entité possède {beneficiaires.length}{' '}
+              Cette entreprise possède {beneficiaires.length}{' '}
               <a
                 rel="noreferrer noopener nofollow"
                 target="_blank"
@@ -107,12 +110,12 @@ const BeneficiairesSection: React.FC<IProps> = ({
               </a>{' '}
               sur le site de l’INPI&nbsp;:
             </p>
-            {beneficiaires.map((beneficiaire, idx) => (
-              <React.Fragment key={'b' + idx}>
-                <TwoColumnTable body={formtInfos(beneficiaire)} />
-                {beneficiaires.length !== idx + 1 && <br />}
-              </React.Fragment>
-            ))}
+            <FullTable
+              head={['Date de déclaration', 'Détails', 'Nationalité']}
+              body={beneficiaires.map((beneficiaire) =>
+                formtInfos(beneficiaire)
+              )}
+            />
           </>
         )}
       </Section>

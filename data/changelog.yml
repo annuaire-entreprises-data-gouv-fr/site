@@ -1,4 +1,14 @@
 ---
+- date: 02/01/2023
+  title: Ajout de l’onglet Établissements Scolaires avec la liste des établissements UAI
+- date: 20/12/2022
+  title: Ajout de l'onglet labels & certificats avec les entreprises RGE, ESS, et Spectacle Vivant
+- date: 08/12/2022
+  title: Ajout des dépots de comptes des associations, à retrouver sur l'onglet "Annonces"
+- date: 02/12/2022
+  title: Gestion des collectivités territoriales. Ajout des codes géographiques des communes, départements et régions, ainsi que des élus
+- date: 25/11/2022
+  title: 'Création de badges distinguants les différents types de personnes morales : Administration publique, Entreprise individuelle, Association'
 - date: 17/11/2022
   title: Ajout des dirigeant(e)s d’entreprise dans la recherche
 - date: 12/11/2022

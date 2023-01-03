@@ -1,20 +1,19 @@
+import { HttpNotFound, HttpServerError } from '#clients/exceptions';
+import routes from '#clients/routes';
+import constants from '#models/constants';
+import { createEtablissementsList } from '#models/etablissements-list';
+import { createDefaultUniteLegale, IUniteLegale } from '#models/index';
 import {
-  createDefaultUniteLegale,
-  IUniteLegale,
-  splitByStatus,
-} from '../../models';
-import constants from '../../models/constants';
-import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
-import { Siren } from '../../utils/helpers/siren-and-siret';
+  isEntrepreneurIndividuelFromNatureJuridique,
+  Siren,
+} from '#utils/helpers';
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
   libelleFromCodeNAF,
   libelleFromeCodeCategorie,
-} from '../../utils/labels';
-import { httpGet } from '../../utils/network';
-import { HttpNotFound, HttpServerError } from '../exceptions';
-import routes from '../routes';
+} from '#utils/labels';
+import { httpGet } from '#utils/network';
 import {
   ISireneOuverteEtablissement,
   mapSireneOuverteEtablissementToDomainObject,
@@ -51,7 +50,7 @@ interface ISireneOuverteUniteLegaleResponse {
   unite_legale: ISireneOuverteUniteLegale[];
 }
 
-const getUniteLegaleSireneOuverte = async (
+const clientUniteLegaleSireneOuverte = async (
   siren: Siren,
   page = 1
 ): Promise<IUniteLegale> => {
@@ -106,13 +105,7 @@ const mapToDomainObject = (
     date_debut_activite,
     nom_complet,
     nom_url,
-    numero_voie,
-    indice_repetition,
-    type_voie,
     categorie_entreprise,
-    libelle_commune,
-    code_postal,
-    libelle_voie,
     nombre_etablissements,
     nature_juridique_entreprise,
     tranche_effectif_salarie_entreprise,
@@ -121,8 +114,9 @@ const mapToDomainObject = (
     activite_principale_entreprise,
   } = uniteLegale;
 
+  const defaultUniteLegale = createDefaultUniteLegale(siren);
   return {
-    ...createDefaultUniteLegale(siren),
+    ...defaultUniteLegale,
     siren,
     siege,
     activitePrincipale: activite_principale_entreprise,
@@ -130,7 +124,7 @@ const mapToDomainObject = (
       activite_principale_entreprise
     ),
     libelleCategorieEntreprise: libelleFromeCodeCategorie(categorie_entreprise),
-    natureJuridique: nature_juridique_entreprise,
+    natureJuridique: nature_juridique_entreprise || '',
     libelleNatureJuridique: libelleFromCategoriesJuridiques(
       nature_juridique_entreprise
     ),
@@ -138,27 +132,30 @@ const mapToDomainObject = (
     libelleTrancheEffectif: libelleFromCodeEffectif(
       tranche_effectif_salarie_entreprise
     ),
-    etablissements: splitByStatus(
+    etablissements: createEtablissementsList(
       listOfEtablissements,
       page,
       nombre_etablissements
     ),
     estDiffusible: true,
     estActive: !!(siege && siege.estActif),
-    estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
-      nature_juridique_entreprise
-    ),
-    estEss: economieSocialeSolidaireUniteLegale === 'O',
     nomComplet: nom_complet || 'Nom inconnu',
     chemin: nom_url,
     dateCreation: date_creation_entreprise,
     dateDebutActivite: date_debut_activite,
     dateDerniereMiseAJour: date_mise_a_jour,
     dirigeant: null,
-    association: identifiantAssociationUniteLegale
-      ? { id: identifiantAssociationUniteLegale }
-      : null,
+    complements: {
+      ...defaultUniteLegale.complements,
+      estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
+        nature_juridique_entreprise
+      ),
+      estEss: economieSocialeSolidaireUniteLegale === 'O',
+    },
+    association: {
+      idAssociation: identifiantAssociationUniteLegale || null,
+    },
   };
 };
 
-export default getUniteLegaleSireneOuverte;
+export default clientUniteLegaleSireneOuverte;

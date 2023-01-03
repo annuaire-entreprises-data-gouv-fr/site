@@ -1,7 +1,7 @@
 import React from 'react';
+import { qrCode } from 'components-ui/icon';
+import TextWrapper from 'components-ui/text-wrapper';
 import Page from '../../layouts';
-import { qrCode } from '../../components-ui/icon';
-import TextWrapper from '../../components-ui/text-wrapper';
 
 const Partager: React.FC = () => {
   return (
@@ -15,8 +15,7 @@ const Partager: React.FC = () => {
           L’
           <a href="/comment-ca-marche">Annuaire des Entreprises</a> permet de
           facilement retrouver l’ensemble des informations publiques disponibles
-          sur une personne morale (entreprise, association, entrepreneur
-          individuel…).
+          sur une entreprise, une association ou une administration.
           <br />
           Retrouvez sur cette page comment rendre ces données accessibles à vos
           utilisateurs et partenaires.
@@ -36,12 +35,12 @@ const Partager: React.FC = () => {
               Aider à la saisie de numéro de Siret/Siren
             </a>
           </li>
-          <li>
+          {/* <li>
             <a href="#search">
               Ajouter un champ d’auto complétion de numéro siren dans un
               formulaire
             </a>
-          </li>
+          </li> */}
           <li>
             <a href="#browser-search-engine">
               Ajouter le moteur de recherche à votre navigateur
@@ -173,7 +172,7 @@ const Partager: React.FC = () => {
             `}
             </code>
           </p>
-          <h2 id="search">
+          {/* <h2 id="search">
             Ajouter un champ d’auto complétion de numéro siren dans un
             formulaire
           </h2>
@@ -194,7 +193,7 @@ const Partager: React.FC = () => {
             }}
           />
           <h3>Comment faire ?</h3>
-          <p></p>
+          <p></p> */}
           <h2 id="browser-search-engine">
             Ajouter le moteur de recherche à votre navigateur
           </h2>

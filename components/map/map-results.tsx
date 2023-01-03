@@ -1,6 +1,6 @@
 import React from 'react';
+import { ISearchResult } from '#models/search';
 import MaplibreInstance from '.';
-import { ISearchResult } from '../../models/search';
 
 const MapResults: React.FC<{ results: ISearchResult[] }> = ({ results }) => (
   <>
@@ -28,7 +28,7 @@ const MapResults: React.FC<{ results: ISearchResult[] }> = ({ results }) => (
                 );
 
                 new maplibregl.Marker({ color: '#000091' })
-                .setLngLat([result.longitude,result.latitude])
+                .setLngLat([result.siege.longitude,result.siege.latitude])
                 .setPopup(popup)
                 .addTo(map);
             }

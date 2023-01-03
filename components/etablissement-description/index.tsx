@@ -1,14 +1,14 @@
 import React from 'react';
-import { IEtablissement, IUniteLegale } from '../../models';
-import { formatDateLong } from '../../utils/helpers/formatting';
+import { IEtablissement, IUniteLegale } from '#models/index';
+import { formatDateLong } from '#utils/helpers';
 
 interface IProps {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
-  usedInEntreprisePage?: Boolean;
+  usedInEntreprisePage?: boolean;
 }
 
-const statusLabel = (estActif: Boolean | null) => {
+const statusLabel = (estActif: boolean | null) => {
   if (estActif === null) {
     return ' dans un état administratif inconnu';
   }
@@ -31,7 +31,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
         ) : (
           <> un établissement secondaire</>
         )}{' '}
-        de l’entité{' '}
+        de la structure{' '}
         <a href={`/entreprise/${uniteLegale.siren}`}>
           {uniteLegale.nomComplet}
         </a>

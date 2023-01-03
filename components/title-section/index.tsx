@@ -1,127 +1,168 @@
 import React from 'react';
-
-import { formatIntFr } from '../../utils/helpers/formatting';
-import { Tag } from '../../components-ui/tag';
-import IsActiveTag from '../../components-ui/is-active-tag';
-import { UnitLegaleDescription } from '../unite-legale-description';
-import { IUniteLegale } from '../../models';
-import SocialMedia from '../../components-ui/social-media';
-import { PrintNever } from '../../components-ui/print-visibility';
-import MultipleSirenAlert from '../../components-ui/alerts/multiple-siren';
-import AssociationAdressAlert from '../../components-ui/alerts/association-adress';
+import AssociationAdressAlert from '#components-ui/alerts/association-adress';
+import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
+import IsActiveTag from '#components-ui/is-active-tag';
+import { PrintNever } from '#components-ui/print-visibility';
+import SocialMedia from '#components-ui/social-media';
+import { Tag } from '#components-ui/tag';
+import UniteLegaleBadge from '#components/unite-legale-badge';
+import { UnitLegaleDescription } from '#components/unite-legale-description';
+import { checkHasLabelsAndCertificates } from '#components/unite-legale-section/labels-and-certificates';
+import {
+  isAssociation,
+  isCollectiviteTerritoriale,
+  IUniteLegale,
+} from '#models/index';
+import { formatIntFr } from '#utils/helpers';
 
 export enum FICHE {
-  INFORMATION = 'résumé',
-  JUSTIFICATIFS = 'justificatifs',
-  ANNONCES = 'annonces',
-  DIRIGEANTS = 'dirigeants',
-  COMPTES = 'bilans & comptes',
   ACTES = 'actes & statuts',
+  ANNONCES = 'annonces',
+  CERTIFICATS = 'Labels ou certifications',
+  COMPTES = 'bilans & comptes',
+  DIRIGEANTS = 'dirigeants',
   DIVERS = 'conventions collectives',
+  ELUS = 'élus',
+  ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
+  INFORMATION = 'informations générales',
+  JUSTIFICATIFS = 'justificatifs',
 }
+
 interface IProps {
   ficheType?: FICHE;
   uniteLegale: IUniteLegale;
 }
 
-const Tabs: React.FC<{ ficheType: FICHE; siren: string }> = ({
-  ficheType,
-  siren,
-}) => (
-  <PrintNever>
-    <div className="title-tabs">
-      <a
-        className={`${
-          ficheType === FICHE.INFORMATION && 'active'
-        } no-style-link`}
-        href={`/entreprise/${siren}`}
-      >
-        Résumé
-      </a>
-      <a
-        className={`${
-          ficheType === FICHE.JUSTIFICATIFS && 'active'
-        } no-style-link`}
-        href={`/justificatif/${siren}`}
-        rel="nofollow"
-      >
-        Justificatif d’immatriculation
-      </a>
-      <a
-        className={`${
-          ficheType === FICHE.DIRIGEANTS && 'active'
-        } no-style-link`}
-        href={`/dirigeants/${siren}`}
-        rel="nofollow"
-      >
-        Dirigeants
-      </a>
-      <a
-        className={`${ficheType === FICHE.ANNONCES && 'active'} no-style-link`}
-        href={`/annonces/${siren}`}
-        rel="nofollow"
-      >
-        Annonces
-      </a>
-      <a
-        className={`${ficheType === FICHE.DIVERS && 'active'} no-style-link`}
-        href={`/divers/${siren}`}
-        rel="nofollow"
-      >
-        Conventions collectives
-      </a>
-    </div>
-
-    <style jsx>{`
-      .title-tabs {
-        display: flex;
-        flex-grow: 1;
-        font-size: 0.9rem;
-        border-bottom: 2px solid #dfdff1;
-      }
-      .title-tabs > a {
-        color: #000091;
-        font-weight: bold;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-        margin: 0 4px;
-        padding: 10px 5px;
-        border: 2px solid #dfdff1;
-        background-color: #efeffb;
-        margin-bottom: -2px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        box-shadow: 0 -8px 5px -5px #dfdff1 inset;
-      }
-
-      .title-tabs > a:hover {
-        background-color: #dfdff1;
-      }
-
-      .title-tabs > a.active {
-        box-shadow: none;
-        background-color: #fff;
-        border-bottom: 0;
-      }
-
-      @media only screen and (min-width: 1px) and (max-width: 650px) {
+const Tabs: React.FC<{
+  currentFicheType: FICHE;
+  uniteLegale: IUniteLegale;
+}> = ({ currentFicheType, uniteLegale }) => {
+  const tabs = [
+    {
+      ficheType: FICHE.INFORMATION,
+      label: 'Informations générales',
+      pathPrefix: '/entreprise/',
+      noFollow: false,
+      shouldDisplay: true,
+    },
+    {
+      ficheType: FICHE.JUSTIFICATIFS,
+      label: 'Justificatif d’immatriculation',
+      pathPrefix: '/justificatif/',
+      noFollow: true,
+      shouldDisplay: true,
+    },
+    {
+      ficheType: FICHE.ELUS,
+      label: 'Élus',
+      pathPrefix: '/elus/',
+      noFollow: true,
+      shouldDisplay: isCollectiviteTerritoriale(uniteLegale),
+    },
+    {
+      ficheType: FICHE.DIRIGEANTS,
+      label: 'Dirigeants',
+      pathPrefix: '/dirigeants/',
+      noFollow: true,
+      shouldDisplay: !isCollectiviteTerritoriale(uniteLegale),
+    },
+    {
+      ficheType: FICHE.ANNONCES,
+      label: 'Annonces',
+      pathPrefix: '/annonces/',
+      noFollow: true,
+      shouldDisplay: true,
+    },
+    {
+      ficheType: FICHE.CERTIFICATS,
+      label: 'Labels et certificats',
+      pathPrefix: '/labels-certificats/',
+      noFollow: true,
+      shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
+    },
+    {
+      ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
+      label: 'Établissements scolaires',
+      pathPrefix: '/etablissements-scolaires/',
+      noFollow: true,
+      shouldDisplay: uniteLegale.complements.estUai,
+    },
+    {
+      ficheType: FICHE.DIVERS,
+      label: 'Conventions collectives',
+      pathPrefix: '/divers/',
+      noFollow: true,
+      shouldDisplay: true,
+    },
+  ];
+  return (
+    <PrintNever>
+      <div className="title-tabs">
+        {tabs
+          .filter(({ shouldDisplay }) => shouldDisplay)
+          .map(({ pathPrefix, ficheType, label, noFollow }) => (
+            <a
+              className={`${
+                currentFicheType === ficheType && 'active'
+              } no-style-link`}
+              href={`${pathPrefix}${uniteLegale.siren}`}
+              rel={noFollow ? 'nofollow' : ''}
+            >
+              {label}
+            </a>
+          ))}
+      </div>
+      <style jsx>{`
         .title-tabs {
-          flex-direction: column;
-          border-bottom: 0;
-        }
-        .title-tabs > a {
-          margin: 3px;
-        }
-        .title-tabs > a.active {
-          background-color: #fff;
+          display: flex;
+          flex-grow: 1;
+          font-size: 0.9rem;
           border-bottom: 2px solid #dfdff1;
         }
-      }
-    `}</style>
-  </PrintNever>
-);
+        .title-tabs > a {
+          color: #000091;
+          font-weight: bold;
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px;
+          margin: 0 4px;
+          padding: 10px 5px;
+          border: 2px solid #dfdff1;
+          background-color: #efeffb;
+          margin-bottom: -2px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          box-shadow: 0 -8px 5px -5px #dfdff1 inset;
+        }
+
+        .title-tabs > a:hover {
+          background-color: #dfdff1;
+        }
+
+        .title-tabs > a.active {
+          box-shadow: none;
+          background-color: #fff;
+          border-bottom: 0;
+        }
+
+        @media only screen and (min-width: 1px) and (max-width: 650px) {
+          .title-tabs {
+            flex-direction: column;
+            border-bottom: 0;
+          }
+          .title-tabs > a {
+            margin: 3px;
+          }
+          .title-tabs > a.active {
+            background-color: #fff;
+            border-bottom: 2px solid #dfdff1;
+          }
+        }
+      `}</style>
+    </PrintNever>
+  );
+};
 
 const Title: React.FC<IProps> = ({
   ficheType = FICHE.INFORMATION,
@@ -130,14 +171,19 @@ const Title: React.FC<IProps> = ({
   <div className="header-section">
     <div className="title">
       <MultipleSirenAlert uniteLegale={uniteLegale} />
-      <AssociationAdressAlert uniteLegale={uniteLegale} />
+      {isAssociation(uniteLegale) && (
+        <AssociationAdressAlert uniteLegale={uniteLegale} />
+      )}
       <h1>
         <a href={`/entreprise/${uniteLegale.siren}`}>
           {uniteLegale.nomComplet}
         </a>
       </h1>
-      <div>
-        <span>unité légale ‣ {formatIntFr(uniteLegale.siren)}</span>
+      <div className="unite-legale-sub-title">
+        <UniteLegaleBadge uniteLegale={uniteLegale} />
+        <span className="siren">
+          &nbsp;‣&nbsp;{formatIntFr(uniteLegale.siren)}
+        </span>
         <span>
           {!uniteLegale.estDiffusible && (
             <Tag className="unknown">Non-diffusible</Tag>
@@ -146,13 +192,13 @@ const Title: React.FC<IProps> = ({
         </span>
       </div>
     </div>
-    <SocialMedia siren={uniteLegale.siren} />
+    <SocialMedia uniteLegale={uniteLegale} />
     {!uniteLegale.estDiffusible ? (
-      <p>Les informations concernant cette entité ne sont pas publiques.</p>
+      <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
     ) : (
       <UnitLegaleDescription uniteLegale={uniteLegale} />
     )}
-    <Tabs siren={uniteLegale.siren} ficheType={ficheType} />
+    <Tabs uniteLegale={uniteLegale} currentFicheType={ficheType} />
 
     <style jsx>{`
       .header-section {
@@ -177,12 +223,17 @@ const Title: React.FC<IProps> = ({
         padding: 0;
         font-variant: all-small-caps;
       }
-      .title > div > span {
-        color: #666;
+
+      .unite-legale-sub-title {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 5px;
       }
-      .title > div > span:first-of-type {
+      .unite-legale-sub-title > span.siren {
         font-variant: small-caps;
         font-size: 1.1rem;
+        color: #666;
       }
 
       @media only screen and (min-width: 1px) and (max-width: 900px) {
@@ -193,9 +244,6 @@ const Title: React.FC<IProps> = ({
           justify-content: start;
           align-items: flex-start;
           flex-direction: column;
-        }
-        .title > div > span:first-of-type {
-          display: block;
         }
       }
     `}</style>

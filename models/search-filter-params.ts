@@ -1,8 +1,11 @@
-import { building, humanPin, mapPin } from '../components-ui/icon';
-import { libelleFromCodeNAF, libelleFromCodeSectionNaf } from '../utils/labels';
-import { IEtatCivil } from './immatriculation/rncs';
+import { building, humanPin, mapPin } from '#components-ui/icon';
+import { IEtatCivil } from '#models/immatriculation/rncs';
+import { libelleFromCodeNAF, libelleFromCodeSectionNaf } from '#utils/labels';
 
 export interface IParams {
+  etat?: string;
+  type?: string;
+  label?: string;
   sap?: string;
   naf?: string;
   cp_dep?: string;
@@ -20,6 +23,9 @@ class SearchFilterParams {
 
   constructor(query: IParams = {}) {
     const {
+      etat = '',
+      type = '',
+      label = '',
       sap = '',
       cp_dep = '',
       fn = '',
@@ -29,17 +35,25 @@ class SearchFilterParams {
       naf = '',
     } = query;
 
+    // ensure dmax > dmin
+    const realDmax = dmax && dmin && dmax < dmin ? dmin : dmax;
+    const realDmin = dmax && dmin && dmax < dmin ? dmax : dmin;
+
     this.params = {
+      etat,
+      type,
+      label,
       sap,
       //@ts-ignore
       cp_dep: isNaN(cp_dep) ? '' : cp_dep,
       fn,
       n,
-      dmin,
-      dmax,
+      dmin: realDmin,
+      dmax: realDmax,
       naf,
-      ageMin: getAge(dmin),
-      ageMax: getAge(dmax),
+      // careful dmin determine ageMax and vice versa
+      ageMin: getAge(realDmax),
+      ageMax: getAge(realDmin),
     };
   }
 
@@ -54,6 +68,13 @@ class SearchFilterParams {
       cp_dep.length === 3 || cp_dep.length === 2 ? cp_dep : '';
 
     return serializeParams({
+      etat_administratif: this.params.etat,
+      est_rge: this.params.label === 'rge',
+      est_ess: this.params.label === 'ess',
+      est_entrepreneur_spectacle: this.params.label === 'esv',
+      est_association: this.params.type === 'asso',
+      est_collectivite_territoriale: this.params.type === 'ct',
+      est_entrepreneur_individuel: this.params.type === 'ei',
       code_postal,
       section_activite_principale: this.params.sap,
       departement,
@@ -136,7 +157,7 @@ export const extractFilters = (params: IParams) => {
     administrativeFilter: {
       icon: building,
       label: '',
-      excludeParams: ['sap', 'naf'],
+      excludeParams: ['sap', 'naf', 'etat', 'type', 'label'],
     },
     localisationFilter: {
       icon: mapPin,
@@ -146,21 +167,44 @@ export const extractFilters = (params: IParams) => {
   };
 
   if (hasDirigeantFilter(params)) {
-    const labelDate =
-      params.dmin || params.dmax ? '  filtre sur la date de naissance' : '';
+    let labelAge = '';
+
+    if (params.dmin && params.dmax) {
+      labelAge = `entre ${params.ageMin} et ${params.ageMax} ans`;
+    } else if (params.dmin && !params.dmax) {
+      labelAge = `moins de ${params.ageMax} ans`;
+    } else if (!params.dmin && params.dmax) {
+      labelAge = `plus de ${params.ageMin} ans`;
+    }
+
     const labelName = `${params.fn}${params.n ? ` ${params.n}` : ''}`;
     f.dirigeantFilter.label = `${labelName}${
-      labelDate && labelName && '・'
-    }${labelDate}`;
+      labelAge && labelName && ', '
+    }${labelAge}`;
   }
+  if (params.etat) {
+    f.administrativeFilter.label = `Etat : ${
+      params.etat === 'A' ? 'en activité' : 'cessée'
+    }`;
+  }
+
+  let administrativeFilterCounter = 0;
   if (params.sap) {
-    f.administrativeFilter.label = libelleFromCodeSectionNaf(params.sap);
+    administrativeFilterCounter += 1;
   }
-  if (params.sap && params.naf) {
-    f.administrativeFilter.label += '・';
+  if (params.type) {
+    administrativeFilterCounter += 1;
+  }
+  if (params.label) {
+    administrativeFilterCounter += 1;
   }
   if (params.naf) {
-    f.administrativeFilter.label += libelleFromCodeNAF(params.naf);
+    administrativeFilterCounter += 1;
+  }
+
+  if (administrativeFilterCounter > 0) {
+    const plural = administrativeFilterCounter ? 's' : '';
+    f.administrativeFilter.label += ` + ${administrativeFilterCounter} filtre${plural} administratif${plural}`;
   }
 
   if (params.cp_dep) {

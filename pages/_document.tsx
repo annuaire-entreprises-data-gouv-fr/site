@@ -1,11 +1,72 @@
-import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import React from 'react';
 
 const manifest = (
   process.env.NODE_ENV === 'production'
     ? require('../public/manifest.json')
     : {}
 ) as { [key: string]: any };
+
+const LinksAndScripts = ({ dev = false }) => (
+  <>
+    {/* Standard Meta */}
+    {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/223019574/D+veloppeurs */}
+    <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" />
+    <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="shortcut icon"
+      href="/favicons/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="manifest"
+      href="/favicons/manifest.webmanifest"
+      cross-origin="use-credentials"
+    />
+    {dev ? (
+      <>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="http://localhost:3001/frontend/style/dsfr.min.css"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="http://localhost:3001/frontend/style/globals.css"
+        />
+        <script
+          defer
+          type="module"
+          src="http://localhost:3001/@vite/client"
+        ></script>
+        <script
+          defer
+          type="module"
+          src="http://localhost:3001/frontend/src/index.js"
+        ></script>
+      </>
+    ) : (
+      <>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href={`/${manifest['style/dsfr.min.css'].file}`}
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href={`/${manifest['style/globals.css'].file}`}
+        />
+        <script
+          defer
+          type="module"
+          src={`/${manifest['src/index.js'].file}`}
+        ></script>
+      </>
+    )}
+  </>
+);
 
 class CustomHead extends Head {
   render() {
@@ -28,38 +89,7 @@ class DevDocument extends Document {
     return (
       <Html lang="fr">
         <CustomHead>
-          <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" />
-          <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml" />
-          <link
-            rel="shortcut icon"
-            href="/favicons/favicon.ico"
-            type="image/x-icon"
-          />
-          <link
-            rel="manifest"
-            href="/favicons/manifest.webmanifest"
-            cross-origin="use-credentials"
-          />
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href="http://localhost:3001/frontend/style/dsfr.min.css"
-          />
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href="http://localhost:3001/frontend/style/globals.css"
-          />
-          <script
-            defer
-            type="module"
-            src="http://localhost:3001/@vite/client"
-          ></script>
-          <script
-            defer
-            type="module"
-            src="http://localhost:3001/frontend/src/index.js"
-          ></script>
+          <LinksAndScripts dev={true} />
         </CustomHead>
         <body>
           <Main />
@@ -78,81 +108,11 @@ class ProdDocument extends Document {
       <Html lang="fr">
         {useReact ? (
           <Head>
-            <link
-              rel="apple-touch-icon"
-              href="/favicons/apple-touch-icon.png"
-            />
-            <link
-              rel="icon"
-              href="/favicons/favicon.svg"
-              type="image/svg+xml"
-            />
-            <link
-              rel="shortcut icon"
-              href="/favicons/favicon.ico"
-              type="image/x-icon"
-            />
-            <link
-              rel="manifest"
-              href="/favicons/manifest.webmanifest"
-              cross-origin="use-credentials"
-            />
-
-            <link
-              rel="stylesheet"
-              type="text/css"
-              href={`/${manifest['style/dsfr.min.css'].file}`}
-            />
-            <link
-              rel="stylesheet"
-              type="text/css"
-              href={`/${manifest['style/globals.css'].file}`}
-            />
-            <script
-              defer
-              type="module"
-              src={`/${manifest['src/index.js'].file}`}
-            ></script>
+            <LinksAndScripts dev={false} />
           </Head>
         ) : (
           <CustomHead>
-            {/* Standard Meta */}
-            {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/223019574/D+veloppeurs */}
-            <link
-              rel="apple-touch-icon"
-              href="/favicons/apple-touch-icon.png"
-            />
-            <link
-              rel="icon"
-              href="/favicons/favicon.svg"
-              type="image/svg+xml"
-            />
-            <link
-              rel="shortcut icon"
-              href="/favicons/favicon.ico"
-              type="image/x-icon"
-            />
-            <link
-              rel="manifest"
-              href="/favicons/manifest.webmanifest"
-              cross-origin="use-credentials"
-            />
-
-            <link
-              rel="stylesheet"
-              type="text/css"
-              href={`/${manifest['style/dsfr.min.css'].file}`}
-            />
-            <link
-              rel="stylesheet"
-              type="text/css"
-              href={`/${manifest['style/globals.css'].file}`}
-            />
-            <script
-              defer
-              type="module"
-              src={`/${manifest['src/index.js'].file}`}
-            ></script>
+            <LinksAndScripts dev={false} />
           </CustomHead>
         )}
 

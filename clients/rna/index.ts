@@ -1,8 +1,6 @@
-import { IAssociation } from '../../models';
-import { formatAdresse } from '../../utils/helpers/formatting';
-import { IdRna } from '../../utils/helpers/id-rna';
-import { httpGet } from '../../utils/network';
-import routes from '../routes';
+import routes from '#clients/routes';
+import { formatAdresse, IdRna } from '#utils/helpers';
+import { httpGet } from '#utils/network';
 
 interface IAssociationResponse {
   association: {
@@ -45,20 +43,14 @@ interface IAssociationResponse {
  * GET Association
  */
 
-const fetchAssociation = async (
-  numeroRna: IdRna,
-  useCache = true
-): Promise<IAssociation> => {
+const clientRNA = async (numeroRna: IdRna, useCache = true) => {
   const route = `${routes.rna.id}${numeroRna}`;
   const response = await httpGet(route, {}, useCache);
 
   return mapToDomainObject(numeroRna, response.data as IAssociationResponse);
 };
 
-export const mapToDomainObject = (
-  idRna: IdRna,
-  association: IAssociationResponse
-): IAssociation => {
+const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
   const {
     association: {
       titre,
@@ -89,4 +81,4 @@ export const mapToDomainObject = (
   };
 };
 
-export { fetchAssociation };
+export { clientRNA };

@@ -1,25 +1,22 @@
-import { IsLikelyASirenOrSiretException } from '.';
-import { HttpNotFound } from '../clients/exceptions';
-import getResults from '../clients/sirene-ouverte/recherche';
-import { cleanSearchTerm, escapeTerm } from '../utils/helpers/formatting';
-import { isLikelyASiretOrSiren } from '../utils/helpers/siren-and-siret';
-import logErrorInSentry from '../utils/sentry';
-import { EAdministration } from './administrations';
-import { APINotRespondingFactory } from './api-not-responding';
-import { IDirigeant } from './immatriculation/rncs';
-import SearchFilterParams, { hasSearchParam } from './search-filter-params';
+import { HttpNotFound } from '#clients/exceptions';
+import clientSearchSireneOuverte from '#clients/recherche-entreprise';
+import { EAdministration } from '#models/administrations';
+import { APINotRespondingFactory } from '#models/api-not-responding';
+import { IDirigeant } from '#models/immatriculation/rncs';
+import SearchFilterParams, {
+  hasSearchParam,
+} from '#models/search-filter-params';
+import {
+  cleanSearchTerm,
+  escapeTerm,
+  isLikelyASiretOrSiren,
+} from '#utils/helpers';
+import logErrorInSentry from '#utils/sentry';
+import { IsLikelyASirenOrSiretException, IUniteLegale } from '.';
 
-export interface ISearchResult {
-  siren: string;
-  siret: string;
+export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
   nombreEtablissementsOuverts: number;
-  libelleActivitePrincipale: string;
-  estActive: boolean;
-  adresse: string;
-  latitude: number;
-  longitude: number;
-  nomComplet: string;
   chemin: string;
   dirigeants: IDirigeant[];
 }
@@ -62,7 +59,11 @@ const search = async (
 
   try {
     const escapedSearchTerm = escapeTerm(searchTerm);
-    return await getResults(escapedSearchTerm, page, searchFilterParams);
+    return await clientSearchSireneOuverte(
+      escapedSearchTerm,
+      page,
+      searchFilterParams
+    );
   } catch (e: any) {
     if (e instanceof IsLikelyASirenOrSiretException) {
       throw e;
@@ -74,7 +75,7 @@ const search = async (
     // attempt a fallback on staging
     try {
       const escapedSearchTerm = escapeTerm(searchTerm);
-      return await getResults(
+      return await clientSearchSireneOuverte(
         escapedSearchTerm,
         page,
         searchFilterParams,

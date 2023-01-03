@@ -1,14 +1,14 @@
+import routes from '#clients/routes';
+import constants from '#models/constants';
+import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
-import constants from '../../models/constants';
-import { httpGet } from '../../utils/network';
-import routes from '../routes';
 
 interface IGeoDepartementResponse {
   nom: string;
   code: string;
 }
 
-const searchDepartements = async (slug: string): Promise<any> => {
+const clientGeoDepartements = async (slug: string): Promise<any> => {
   const response = await httpGet(routes.geo.departement + slug, {
     timeout: constants.timeout.L,
   });
@@ -27,4 +27,4 @@ const mapToDomainObject = (
   });
 };
 
-export { searchDepartements };
+export { clientGeoDepartements };

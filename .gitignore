@@ -3,6 +3,10 @@
 #redis
 dump.rdb
 
+#cspell 
+cspell.json
+.vscode/settings.json
+
 # dependencies
 /node_modules
 /.pnp
@@ -37,15 +41,13 @@ yarn-error.log*
 # vercel
 .vercel
 
-/seo-scripts/node_modules
-/seo-scripts/dist
+/seo-script/dist
 
 /public/maps/*
 /public/resources/downloads/*
 /public/frontend/style/bundle.css
 /public/sitemap
 /public/departements
-/public/
 
 public/dist
 public/downloads

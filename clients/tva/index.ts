@@ -1,6 +1,6 @@
-import constants from '../../models/constants';
-import { httpGet } from '../../utils/network';
-import routes from '../routes';
+import routes from '#clients/routes';
+import constants from '#models/constants';
+import { httpGet } from '#utils/network';
 
 interface IVIESResponse {
   isValid: boolean;
@@ -30,7 +30,7 @@ interface IVIESResponse {
  * @param tva
  * @returns TVA number if valid else null
  */
-export const validateTVANumber = async (
+export const clientTVA = async (
   tva: string,
   useCache = true
 ): Promise<string | null> => {

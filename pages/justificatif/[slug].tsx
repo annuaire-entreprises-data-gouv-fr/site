@@ -1,15 +1,14 @@
-import React from 'react';
-
 import { GetServerSideProps } from 'next';
-import Page from '../../layouts';
-import Title, { FICHE } from '../../components/title-section';
-import getJustificatifs, { IJustificatifs } from '../../models/justificatifs';
-import Immatriculations from '../../components/immatriculations';
+import React from 'react';
+import Immatriculations from '#components/immatriculations';
+import Title, { FICHE } from '#components/title-section';
+import getJustificatifs, { IJustificatifs } from '#models/justificatifs';
+import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '../../utils/server-side-props-helper/post-server-side-props';
-import extractParamsFromContext from '../../utils/server-side-props-helper/extract-params-from-context';
+} from '#utils/server-side-props-helper/post-server-side-props';
+import Page from '../../layouts';
 
 interface IProps extends IJustificatifs, IPropsWithMetadata {}
 

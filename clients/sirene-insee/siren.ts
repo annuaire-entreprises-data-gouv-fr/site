@@ -1,25 +1,30 @@
-import { inseeClientGet, InseeClientOptions } from '.';
+import routes from '#clients/routes';
+import { createEtablissementsList } from '#models/etablissements-list';
+import { IEtatCivil } from '#models/immatriculation/rncs';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
   IUniteLegale,
-  splitByStatus,
-} from '../../models';
-import { IEtatCivil } from '../../models/immatriculation/rncs';
-import { isEntrepreneurIndividuelFromNatureJuridique } from '../../utils/helpers/checks';
+} from '#models/index';
 import {
   agregateTripleFields,
   formatFirstNames,
   formatNameFull,
-} from '../../utils/helpers/formatting';
-import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
+  Siren,
+  Siret,
+  isEntrepreneurIndividuelFromNatureJuridique,
+} from '#utils/helpers';
 import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeEffectif,
   libelleFromCodeNAF,
   libelleFromeCodeCategorie,
-} from '../../utils/labels';
-import routes from '../routes';
+} from '#utils/labels';
+import { inseeClientGet, InseeClientOptions } from '.';
+import {
+  estActiveFromEtatAdministratifInsee,
+  estDiffusibleFromStatutDiffusionInsee,
+} from './helpers';
 
 interface IInseeUniteLegaleResponse {
   uniteLegale: {
@@ -73,7 +78,7 @@ const factory = (options: InseeClientOptions) => async (siren: Siren) => {
  * Call to Sirene INSEE API
  * @param siren
  */
-export const getUniteLegaleInsee = factory({
+export const clientUniteLegaleInsee = factory({
   useCache: true,
   useFallback: false,
 });
@@ -82,7 +87,7 @@ export const getUniteLegaleInsee = factory({
  * Call to Sirene INSEE API - use fallback token
  * @param siren
  */
-export const getUniteLegaleInseeFallback = factory({
+export const clientUniteLegaleInseeFallback = factory({
   useCache: true,
   useFallback: true,
 });
@@ -91,7 +96,7 @@ export const getUniteLegaleInseeFallback = factory({
  * Call to Sirene INSEE API - disable cache
  * @param siren
  */
-export const getUniteLegaleInseeNoCache = factory({
+export const clientUniteLegaleInseeNoCache = factory({
   useCache: false,
   useFallback: false,
 });
@@ -200,27 +205,26 @@ const mapToDomainObject = (
     ...defaultUniteLegale,
     siren,
     oldSiren: originalSiren,
-    association: identifiantAssociationUniteLegale
-      ? { id: identifiantAssociationUniteLegale }
-      : null,
     siege,
     allSiegesSiret,
-    natureJuridique: categorieJuridiqueUniteLegale,
+    natureJuridique: categorieJuridiqueUniteLegale || '',
     libelleNatureJuridique: libelleFromCategoriesJuridiques(
       categorieJuridiqueUniteLegale
     ),
     activitePrincipale: siege.activitePrincipale,
     libelleActivitePrincipale: siege.libelleActivitePrincipale,
-    etablissements: splitByStatus([siege]),
+    etablissements: createEtablissementsList([siege]),
     dateCreation: dateCreationUniteLegale,
     dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
       'T'
     )[0],
     dateDebutActivite: dateDebut,
-    estActive: etatAdministratifUniteLegale === 'A',
-    estDiffusible: statutDiffusionUniteLegale !== 'N',
-    estEntrepreneurIndividuel,
-    estEss: economieSocialeSolidaireUniteLegale === 'O',
+    estActive: estActiveFromEtatAdministratifInsee(
+      etatAdministratifUniteLegale
+    ),
+    estDiffusible: estDiffusibleFromStatutDiffusionInsee(
+      statutDiffusionUniteLegale
+    ),
     nomComplet,
     chemin: siren,
     trancheEffectif: trancheEffectifsUniteLegale,
@@ -234,5 +238,13 @@ const mapToDomainObject = (
       anneeCategorieEntreprise
     ),
     dirigeant: estEntrepreneurIndividuel ? dirigeant : null,
+    complements: {
+      ...defaultUniteLegale.complements,
+      estEntrepreneurIndividuel,
+      estEss: economieSocialeSolidaireUniteLegale === 'O',
+    },
+    association: {
+      idAssociation: identifiantAssociationUniteLegale || null,
+    },
   };
 };

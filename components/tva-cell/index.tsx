@@ -1,7 +1,7 @@
 import React from 'react';
-import { Loader } from '../../components-ui/loader';
-import FrontStateMachine from '../front-state-machine';
-import { CopyPaste } from '../table/simple';
+import { Loader } from '#components-ui/loader';
+import FrontStateMachine from '#components/front-state-machine';
+import { CopyPaste } from '#components/table/simple';
 
 const TVACell: React.FC<{}> = ({}) => {
   return (
@@ -17,7 +17,7 @@ const TVACell: React.FC<{}> = ({}) => {
           */}
           &nbsp;
         </>,
-        <CopyPaste id="tva-cell-result" shouldTrim={true}>
+        <CopyPaste shouldTrim={true} id="tva-cell-result">
           <i>Non renseigné ou non assujettie</i>
         </CopyPaste>,
         <i>

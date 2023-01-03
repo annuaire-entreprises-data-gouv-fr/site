@@ -3,7 +3,7 @@ import {
   NotASiretError,
   NotLuhnValidSirenError,
   NotLuhnValidSiretError,
-} from '../../models';
+} from '#models/index';
 
 /**
  * Siren and siret types
@@ -82,7 +82,7 @@ export const isLuhnValid = (str: string) => {
   if (str.indexOf('356000000') === 0) {
     return true;
   }
-  return luhnChecksum(str) % 10 == 0;
+  return luhnChecksum(str) % 10 === 0;
 };
 
 export const isLikelyASiretOrSiren = (slug: string) => {

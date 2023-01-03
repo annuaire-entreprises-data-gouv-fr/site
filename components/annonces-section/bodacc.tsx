@@ -1,21 +1,20 @@
 import React from 'react';
-
-import { FullTable } from '../table/full';
-import { EAdministration } from '../../models/administrations';
-import { Section } from '../section';
-import AdministrationNotResponding from '../administration-not-responding';
+import routes from '#clients/routes';
+import Info from '#components-ui/alerts/info';
+import ButtonLink from '#components-ui/button';
+import { Tag } from '#components-ui/tag';
+import { DILA } from '#components/administrations';
+import { Section } from '#components/section';
+import { FullTable } from '#components/table/full';
+import { EAdministration } from '#models/administrations';
+import { IAnnoncesBodacc } from '#models/annonces';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '../../models/api-not-responding';
-import { IAnnoncesBodacc } from '../../models/annonces';
-import { Tag } from '../../components-ui/tag';
-import ButtonLink from '../../components-ui/button';
-import { DILA } from '../administrations';
-import routes from '../../clients/routes';
-import { IUniteLegale } from '../../models';
-import { formatDate } from '../../utils/helpers/formatting';
-import Info from '../../components-ui/alerts/info';
+} from '#models/api-not-responding';
+import { IUniteLegale } from '#models/index';
+import { formatDate } from '#utils/helpers';
+import AdministrationNotResponding from '../administration-not-responding';
 
 const AnnoncesBodaccSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -41,7 +40,7 @@ const AnnoncesBodaccSection: React.FC<{
     >
       {hasProcedure ? (
         <Info>
-          Cette entité a une procédure collective (en cours ou cloturée).
+          Cette structure a une procédure collective (en cours ou cloturée).
           <ul>
             {bodacc.procedures.map((procedure) => (
               <li key={procedure.details}>
@@ -52,7 +51,8 @@ const AnnoncesBodaccSection: React.FC<{
         </Info>
       ) : (
         <p>
-          Cette entité n’a pas de procédure collective (en cours ou cloturée).
+          Cette structure n’a pas de procédure collective (en cours ou
+          cloturée).
         </p>
       )}
       {bodacc.annonces.length === 0 ? (

@@ -1,17 +1,23 @@
 slug: dila
 short: DILA
 long: Direction de l’Information Légale et Administrative (DILA)
+logoType: paysage
+site: https://www.dila.premier-ministre.gouv.fr/
 contact: https://www.dila.premier-ministre.gouv.fr/services/api/boamp/contact
 apiMonitors:
   - apiName: API BODACC
-    apiGouvLink: https://api.gouv.fr/les-api/api-bulletin-annonces-civiles-commerciales-bodacc
-    dataGouvLink: https://www.data.gouv.fr/fr/datasets/bodacc/
+    apigouvLink: https://api.gouv.fr/les-api/api-bulletin-annonces-civiles-commerciales-bodacc
+    datagouv:
+      - label: Bulletin officiel des annonces civiles et commerciales (BODACC)
+        link: https://www.data.gouv.fr/fr/datasets/bodacc/
     id: 788647353
     data:
       - Annonces du Bulletin Officiel des Annonces Civiles et Commerciales (BODACC)
   - apiName: API Annonces et comptes annuels des associations (JOAFE)
-    apiGouvLink: https://api.gouv.fr/les-api/api-annonces-comptes-annuels-associations-joafe
-    dataGouvLink: https://www.data.gouv.fr/fr/datasets/associations-joafe/
+    apigouvLink: https://api.gouv.fr/les-api/api-annonces-comptes-annuels-associations-joafe
+    datagouv:
+      - label: Journal Officiel des Associations (JOAFE)
+        link: https://www.data.gouv.fr/fr/datasets/associations-joafe/
     id: 789134910
     data:
       - Annonces du Journal officiel des associations et fondations d'entreprise (JOAFE)

@@ -1,18 +1,17 @@
-import { IdRna } from '../utils/helpers/id-rna';
-import { Siren, Siret } from '../utils/helpers/siren-and-siret';
-import constants from './constants';
-import { IETATADMINSTRATIF } from './etat-administratif';
-import { IEtatCivil } from './immatriculation/rncs';
-
 /** COMMON TYPES */
-export interface IAssociation {
-  id: IdRna | string;
-  exId?: string;
-  nomComplet?: string;
-  objet?: string;
-  adresse?: string;
-  adresseInconsistency?: boolean;
-}
+
+import {
+  createEtablissementsList,
+  IEtablissementsList,
+} from '#models/etablissements-list';
+import { IETATADMINSTRATIF } from '#models/etat-administratif';
+import { IEtatCivil } from '#models/immatriculation/rncs';
+import {
+  isAssociationFromNatureJuridique,
+  isServicePublicFromNatureJuridique,
+} from '#utils/helpers';
+import { Siren, Siret } from '#utils/helpers';
+import { IdRna } from '#utils/helpers';
 
 export interface IEtablissement {
   enseigne: string | null;
@@ -44,86 +43,6 @@ export interface IEtablissementWithUniteLegale {
   uniteLegale: IUniteLegale;
 }
 
-export interface IUniteLegale extends IEtablissementsList {
-  siren: Siren;
-  oldSiren: Siren;
-  siege: IEtablissement;
-  allSiegesSiret: Siret[];
-  natureJuridique: string;
-  libelleNatureJuridique: string;
-  activitePrincipale: string;
-  libelleActivitePrincipale: string;
-  dateCreation: string;
-  dateDerniereMiseAJour: string;
-  dateDebutActivite: string;
-  estDiffusible: boolean; // diffusion des données autorisée - uniquement les EI
-  estEntrepriseCommercialeDiffusible: boolean; // opposition du dirigeant - uniquement les entreprises commerciales
-  etatAdministratif: IETATADMINSTRATIF;
-  estActive: boolean | null;
-  estEntrepreneurIndividuel: boolean;
-  estEss: boolean;
-  nomComplet: string;
-  chemin: string;
-  trancheEffectif: string;
-  libelleTrancheEffectif: string | null;
-  libelleCategorieEntreprise: string | null;
-  association: IAssociation | null;
-  dirigeant: IEtatCivil | null;
-}
-
-export interface IEtablissementsList {
-  etablissements: {
-    all: IEtablissement[];
-    open: IEtablissement[];
-    closed: IEtablissement[];
-    unknown: IEtablissement[];
-    nombreEtablissements: number;
-    nombreEtablissementsOuverts: number;
-    // pagination
-    currentEtablissementPage: number;
-    usePagination: boolean;
-  };
-}
-
-/**
- * Split a list of etablissements by status (open/closed)
- *
- * @param all
- * @param currentEtablissementPage (optional) for pagination
- * @param realTotal (optional) total etablissement (can exceed pagination)
- * @returns
- */
-export const splitByStatus = (
-  all: IEtablissement[],
-  currentEtablissementPage = 0,
-  realTotal?: number
-) => {
-  const open = all
-    .filter((e) => e.estActif && e.estDiffusible)
-    .sort((a) => (a.estSiege ? -1 : 1));
-
-  const closed = all.filter((e) => !e.estActif && e.estDiffusible);
-
-  const unknown = all.filter((e) => !e.estDiffusible);
-
-  // real total can exceede all.length if we need pagination
-  const nombreEtablissements = realTotal || all.length;
-  const usePagination =
-    nombreEtablissements > constants.resultsPerPage.etablissements;
-
-  return {
-    all,
-    open,
-    unknown,
-    closed,
-    nombreEtablissementsOuverts: open.length,
-    nombreEtablissements: nombreEtablissements,
-    // pagination
-    usePagination,
-    currentEtablissementPage,
-  };
-};
-
 /** BASIC CONSTRUCTORS */
 export const createDefaultEtablissement = (): IEtablissement => {
   return {
@@ -154,6 +73,37 @@ export const createDefaultEtablissement = (): IEtablissement => {
   };
 };
 
+export interface IUniteLegale extends IEtablissementsList {
+  siren: Siren;
+  oldSiren: Siren;
+  siege: IEtablissement;
+  allSiegesSiret: Siret[];
+  natureJuridique: string;
+  libelleNatureJuridique: string;
+  activitePrincipale: string;
+  libelleActivitePrincipale: string;
+  dateCreation: string;
+  dateDerniereMiseAJour: string;
+  dateDebutActivite: string;
+  estDiffusible: boolean; // diffusion des données autorisée - uniquement les EI
+  estEntrepriseCommercialeDiffusible: boolean; // opposition du dirigeant - uniquement les entreprises commerciales
+  etatAdministratif: IETATADMINSTRATIF;
+  estActive: boolean | null;
+  nomComplet: string;
+  chemin: string;
+  trancheEffectif: string;
+  libelleTrancheEffectif: string | null;
+  libelleCategorieEntreprise: string | null;
+  dirigeant: IEtatCivil | null;
+  complements: IUniteLegaleComplements;
+  association: {
+    idAssociation: IdRna | string | null;
+  };
+  colter: {
+    codeColter: string | null;
+  };
+}
+
 export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
   const siege = createDefaultEtablissement();
   siege.estSiege = true;
@@ -166,13 +116,11 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     estEntrepriseCommercialeDiffusible: true,
     etatAdministratif: IETATADMINSTRATIF.INCONNU,
     estActive: null,
-    estEntrepreneurIndividuel: false,
-    estEss: false,
     nomComplet: '',
     chemin: siren,
     natureJuridique: '',
     libelleNatureJuridique: '',
-    etablissements: splitByStatus([siege]),
+    etablissements: createEtablissementsList([siege]),
     activitePrincipale: '',
     libelleActivitePrincipale: '',
     dateCreation: '',
@@ -181,9 +129,85 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     trancheEffectif: '',
     libelleCategorieEntreprise: null,
     libelleTrancheEffectif: null,
-    association: null,
     dirigeant: null,
+    complements: createDefaultUniteLegaleComplements(),
+    association: {
+      idAssociation: null,
+    },
+    colter: {
+      codeColter: null,
+    },
   };
+};
+
+export interface IUniteLegaleComplements {
+  estEntrepreneurIndividuel: boolean;
+  estEss: boolean;
+  estEntrepreneurSpectacle: boolean;
+  estFiness: boolean;
+  estRge: boolean;
+  estUai: boolean;
+}
+
+export const createDefaultUniteLegaleComplements = () => {
+  return {
+    estEntrepreneurIndividuel: false,
+    estEss: false,
+    estEntrepreneurSpectacle: false,
+    estFiness: false,
+    estRge: false,
+    estUai: false,
+  };
+};
+
+export interface IAssociation extends Omit<IUniteLegale, 'association'> {
+  association: {
+    idAssociation: IdRna | string;
+    exId?: string;
+    nomComplet?: string;
+    objet?: string;
+    adresse?: string;
+    adresseInconsistency?: boolean;
+  };
+}
+
+export const isAssociation = (
+  toBeDetermined: IUniteLegale
+): toBeDetermined is IAssociation => {
+  return (
+    isAssociationFromNatureJuridique(toBeDetermined.natureJuridique) ||
+    (toBeDetermined as IAssociation).association.idAssociation !== null
+  );
+};
+
+export interface IServicePublic extends IUniteLegale {}
+
+export const isServicePublic = (
+  toBeDetermined: IUniteLegale
+): toBeDetermined is IServicePublic => {
+  return (
+    isServicePublicFromNatureJuridique(toBeDetermined.natureJuridique) ||
+    toBeDetermined.siren.indexOf('1') === 0 ||
+    toBeDetermined.siren.indexOf('2') === 0
+  );
+};
+
+export interface ICollectiviteTerritoriale
+  extends Omit<IUniteLegale, 'colter'> {
+  colter: {
+    codeColter: string;
+    codeInsee: string;
+    niveau: string;
+    elus: IEtatCivil[];
+  };
+}
+
+export const isCollectiviteTerritoriale = (
+  toBeDetermined: IUniteLegale
+): toBeDetermined is ICollectiviteTerritoriale => {
+  return (
+    (toBeDetermined as ICollectiviteTerritoriale).colter.codeColter !== null
+  );
 };
 
 /** COMMON ERRORS */

@@ -1,6 +1,6 @@
 import { IncomingMessage } from 'http';
 import { GetServerSidePropsContext } from 'next';
-import { HttpNotFound } from '../../clients/exceptions';
+import { HttpNotFound } from '#clients/exceptions';
 import {
   IsLikelyASirenOrSiretException,
   NotASirenError,
@@ -9,12 +9,12 @@ import {
   NotLuhnValidSiretError,
   SirenNotFoundError,
   SiretNotFoundError,
-} from '../../models';
+} from '#models/index';
 import {
   extractSirenFromSiretNoVerify,
   verifySiren,
   verifySiret,
-} from '../helpers/siren-and-siret';
+} from '#utils/helpers';
 import {
   redirectIfSiretOrSiren,
   redirectPageNotFound,
@@ -51,9 +51,9 @@ const handleExceptions = (exception: any, req: IncomingMessage | undefined) => {
       return redirectServerError(message, scope);
     }
   } catch (e: any) {
-    console.log('=== Error-handler failed to handle exception ===');
-    console.log(exception);
-    console.log(e);
+    console.error('=== Error-handler failed to handle exception ===');
+    console.error(exception);
+    console.error(e);
     return redirectServerError('Error-handler failed to handle exception', {});
   }
 };

@@ -1,24 +1,25 @@
-import { Siren, Siret } from '../../utils/helpers/siren-and-siret';
-import { inseeClientGet, InseeClientOptions } from '.';
-import constants from '../../models/constants';
+import { HttpNotFound, HttpServerError } from '#clients/exceptions';
+import routes from '#clients/routes';
+import constants from '#models/constants';
 import {
-  createDefaultEtablissement,
-  IEtablissement,
+  createEtablissementsList,
   IEtablissementsList,
-  splitByStatus,
-} from '../../models';
-import { extractSirenFromSiret } from '../../utils/helpers/siren-and-siret';
-import {
-  libelleFromCodeEffectif,
-  libelleFromCodeNAF,
-} from '../../utils/labels';
-import { HttpNotFound, HttpServerError } from '../exceptions';
-import routes from '../routes';
+} from '#models/etablissements-list';
+import { getEtatAdministratifEtablissement } from '#models/etat-administratif';
+import { createDefaultEtablissement, IEtablissement } from '#models/index';
 import {
   formatAdresse,
   agregateTripleFields,
-} from '../../utils/helpers/formatting';
-import { getEtatAdministratifEtablissement } from '../../models/etat-administratif';
+  Siren,
+  Siret,
+  extractSirenFromSiret,
+} from '#utils/helpers';
+import { libelleFromCodeEffectif, libelleFromCodeNAF } from '#utils/labels';
+import { inseeClientGet, InseeClientOptions } from '.';
+import {
+  estActiveFromEtatAdministratifInsee,
+  estDiffusibleFromStatutDiffusionInsee,
+} from './helpers';
 
 interface IInseeEtablissementResponse {
   etablissement: IInseeEtablissement;
@@ -112,7 +113,11 @@ const getAllEtablissementsFactory =
     );
 
     return {
-      etablissements: splitByStatus(allEtablissements, page, header.total),
+      etablissements: createEtablissementsList(
+        allEtablissements,
+        page,
+        header.total
+      ),
     };
   };
 
@@ -200,8 +205,14 @@ export const mapEtablissementToDomainObject = (
       (periode) => periode.changementEtatAdministratifEtablissement === true
     ) || periodesEtablissement[0];
 
-  const estActif = etatAdministratifEtablissement === 'A';
-  const estDiffusible = statutDiffusionEtablissement !== 'N';
+  const estActif = estActiveFromEtatAdministratifInsee(
+    etatAdministratifEtablissement
+  );
+
+  const estDiffusible = estDiffusibleFromStatutDiffusionInsee(
+    statutDiffusionEtablissement
+  );
+
   const etatAdministratif = getEtatAdministratifEtablissement(
     estActif,
     estDiffusible
@@ -278,32 +289,34 @@ export const mapEtablissementToDomainObject = (
 // public methods
 //=================
 
-export const getAllEtablissementsInsee = getAllEtablissementsFactory({
+export const clientAllEtablissementsInsee = getAllEtablissementsFactory({
   useCache: true,
   useFallback: false,
 });
 
-export const getAllEtablissementsInseeFallback = getAllEtablissementsFactory({
+export const clientAllEtablissementsInseeFallback = getAllEtablissementsFactory(
+  {
+    useCache: true,
+    useFallback: true,
+  }
+);
+
+export const clientEtablissementInsee = getEtablissementFactory({
+  useCache: true,
+  useFallback: false,
+});
+
+export const clientEtablissementInseeFallback = getEtablissementFactory({
   useCache: true,
   useFallback: true,
 });
 
-export const getEtablissementInsee = getEtablissementFactory({
+export const clientSiegeInsee = getSiegeFactory({
   useCache: true,
   useFallback: false,
 });
 
-export const getEtablissementInseeFallback = getEtablissementFactory({
-  useCache: true,
-  useFallback: true,
-});
-
-export const getSiegeInsee = getSiegeFactory({
-  useCache: true,
-  useFallback: false,
-});
-
-export const getSiegeInseeFallback = getSiegeFactory({
+export const clientSiegeInseeFallback = getSiegeFactory({
   useCache: true,
   useFallback: true,
 });

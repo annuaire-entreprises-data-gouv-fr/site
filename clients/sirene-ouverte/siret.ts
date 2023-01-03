@@ -1,17 +1,14 @@
-import { createDefaultEtablissement, IEtablissement } from '../../models';
-import { getEtatAdministratifEtablissement } from '../../models/etat-administratif';
-import { formatAdresse } from '../../utils/helpers/formatting';
+import { HttpNotFound } from '#clients/exceptions';
+import routes from '#clients/routes';
+import { getEtatAdministratifEtablissement } from '#models/etat-administratif';
+import { createDefaultEtablissement, IEtablissement } from '#models/index';
 import {
   extractNicFromSiret,
   extractSirenFromSiret,
-} from '../../utils/helpers/siren-and-siret';
-import {
-  libelleFromCodeEffectif,
-  libelleFromCodeNAF,
-} from '../../utils/labels';
-import { httpGet } from '../../utils/network';
-import { HttpNotFound } from '../exceptions';
-import routes from '../routes';
+  formatAdresse,
+} from '#utils/helpers';
+import { libelleFromCodeEffectif, libelleFromCodeNAF } from '#utils/labels';
+import { httpGet } from '#utils/network';
 
 interface ISireneOuverteEtablissementResponse {
   etablissement: ISireneOuverteEtablissement[];
@@ -45,7 +42,7 @@ export interface ISireneOuverteEtablissement {
  * GET ETABLISSEMENT
  */
 
-const getEtablissementSireneOuverte = async (
+const clientEtablissementSireneOuverte = async (
   siret: string
 ): Promise<IEtablissement> => {
   const route = `${routes.sireneOuverte.etablissement}${encodeURI(siret)}`;
@@ -128,4 +125,4 @@ export const mapSireneOuverteEtablissementToDomainObject = (
   };
 };
 
-export { getEtablissementSireneOuverte };
+export { clientEtablissementSireneOuverte };

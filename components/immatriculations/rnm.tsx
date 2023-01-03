@@ -1,19 +1,20 @@
 import React from 'react';
-import { IUniteLegale } from '../../models';
-import { EAdministration } from '../../models/administrations';
+import ButtonLink from '#components-ui/button';
+import { download } from '#components-ui/icon';
+import BreakPageForPrint from '#components-ui/print-break-page';
+import { PrintNever } from '#components-ui/print-visibility';
+import { VerifiedTag } from '#components-ui/verified-tag';
+import AdministrationNotResponding from '#components/administration-not-responding';
+import { Section } from '#components/section';
+import { TwoColumnTable } from '#components/table/simple';
+import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
-} from '../../models/api-not-responding';
-import { formatDate, formatIntFr } from '../../utils/helpers/formatting';
-import AdministrationNotResponding from '../administration-not-responding';
-import BreakPageForPrint from '../../components-ui/print-break-page';
-import ButtonLink from '../../components-ui/button';
-import { closed, download, open } from '../../components-ui/icon';
-import { Section } from '../section';
-import { TwoColumnTable } from '../table/simple';
-import { PrintNever } from '../../components-ui/print-visibility';
-import { IImmatriculationRNM } from '../../models/immatriculation/rnm';
+} from '#models/api-not-responding';
+import { IImmatriculationRNM } from '#models/immatriculation/rnm';
+import { IUniteLegale } from '#models/index';
+import { formatDate, formatIntFr } from '#utils/helpers';
 
 interface IProps {
   immatriculation: IImmatriculationRNM | IAPINotRespondingError;
@@ -39,13 +40,9 @@ const ImmatriculationRNM: React.FC<IProps> = ({
   const data = [
     [
       'Statut',
-      <>
-        {immatriculation.dateRadiation ? (
-          <b>{closed} Radiée</b>
-        ) : (
-          <b>{open} Inscrite</b>
-        )}
-      </>,
+      <VerifiedTag isVerified={!immatriculation.dateRadiation}>
+        {immatriculation.dateRadiation ? 'Radiée' : 'Inscrite'}
+      </VerifiedTag>,
     ],
     [
       'Date d’immatriculation au RNM',
@@ -64,11 +61,10 @@ const ImmatriculationRNM: React.FC<IProps> = ({
     ['Nature juridique', immatriculation.libelleNatureJuridique],
     ['Date de début d’activité', formatDate(immatriculation.dateDebutActivite)],
     ['Date de dernière mise à jour', formatDate(immatriculation.dateMiseAJour)],
+    ...(immatriculation.dateRadiation
+      ? [['Date de radiation', formatDate(immatriculation.dateRadiation)]]
+      : []),
   ];
-
-  if (immatriculation.dateRadiation) {
-    data.push(['Date de radiation', formatDate(immatriculation.dateRadiation)]);
-  }
 
   return (
     <>
@@ -80,7 +76,7 @@ const ImmatriculationRNM: React.FC<IProps> = ({
             sources={[EAdministration.CMAFRANCE]}
           >
             <p>
-              Cette entité possède une fiche d’immatriculation sur le{' '}
+              Cette structure possède une fiche d’immatriculation sur le{' '}
               <b>Répertoire National des Métiers (RNM)</b> qui liste les
               entreprises artisanales enregistrées auprès des Chambres des
               Métiers et de l’Artisanat (CMA France).

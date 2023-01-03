@@ -1,9 +1,8 @@
-import { IEtablissement } from '../../models';
-import constants from '../../models/constants';
-import { IGeoLoc } from '../../models/geo-loc';
-import { httpGet } from '../../utils/network';
-import { HttpNotFound } from '../exceptions';
-import routes from '../routes';
+import { HttpNotFound } from '#clients/exceptions';
+import routes from '#clients/routes';
+import constants from '#models/constants';
+import { IGeoLoc } from '#models/geo-loc';
+import { httpGet } from '#utils/network';
 
 interface IBANResponse {
   features: {
@@ -15,20 +14,11 @@ interface IBANResponse {
 }
 
 /**
- * GET adress for geoloc
+ * GET address for geoloc
  */
-const fetchBanGeoLoc = async (
-  etablissement: IEtablissement
-): Promise<IGeoLoc> => {
-  const route = `${routes.ban}${etablissement.adresse.replaceAll(' ', '+')}`;
-  const response = await httpGet(route, { timeout: constants.timeout.L });
-
-  return mapToDomainObject(response.data as IBANResponse);
-};
-
-const reverseGeoLoc = async (adresse: string): Promise<IGeoLoc> => {
+const clientBanGeoLoc = async (adresse: string): Promise<IGeoLoc> => {
   const route = `${routes.ban}${adresse.replaceAll(' ', '+')}`;
-  const response = await httpGet(route);
+  const response = await httpGet(route, { timeout: constants.timeout.L });
 
   return mapToDomainObject(response.data as IBANResponse);
 };
@@ -46,4 +36,4 @@ const mapToDomainObject = (response: IBANResponse): IGeoLoc => {
   };
 };
 
-export { fetchBanGeoLoc, reverseGeoLoc };
+export { clientBanGeoLoc };

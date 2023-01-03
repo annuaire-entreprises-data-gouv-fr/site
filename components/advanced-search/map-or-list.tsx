@@ -1,4 +1,4 @@
-import { mapPin } from '../../components-ui/icon';
+import { mapPin } from '#components-ui/icon';
 
 const MapOrListSwitch = ({ isMap = false, query = '' }) => (
   <>
@@ -11,4 +11,5 @@ const MapOrListSwitch = ({ isMap = false, query = '' }) => (
     )}
   </>
 );
+
 export default MapOrListSwitch;

@@ -1,11 +1,10 @@
-import axios, { AxiosRequestConfig } from 'axios';
-//@ts-ignore
-import * as oauth from 'axios-oauth-client';
-import * as tokenProvider from 'axios-token-interceptor';
-import { HttpServerError } from '../../clients/exceptions';
-import constants from '../../models/constants';
+import { AxiosRequestConfig } from 'axios';
+import oauth from 'axios-oauth-client';
+import tokenProvider from 'axios-token-interceptor';
+import { HttpServerError } from '#clients/exceptions';
+import constants from '#models/constants';
 import {
-  axiosInstanceFactory,
+  defaultAxiosInstanceFactory,
   cachedAxiosInstanceFactory,
   defaultCacheConfig,
 } from '.';
@@ -19,24 +18,42 @@ export const httpClientOAuthGetFactory = (
     throw new HttpServerError('Client id or client secret is undefined');
   }
 
-  const axiosGetCredentialsInstance = axiosInstanceFactory();
-
-  const getClientCredentials = oauth.client(axiosGetCredentialsInstance, {
-    url: token_url,
-    grant_type: 'client_credentials',
+  // function that get oauth2 token
+  const getAuthorizationCode = oauth.clientCredentials(
+    defaultAxiosInstanceFactory(constants.timeout.L),
+    token_url,
     client_id,
-    client_secret,
-    timeout: constants.timeout.L,
-  });
-
-  const axiosInstance = cachedAxiosInstanceFactory();
-
-  axiosInstance.interceptors.request.use(
-    oauth.interceptor(tokenProvider, getClientCredentials)
+    client_secret
   );
 
-  return (url: string, options: AxiosRequestConfig, useCache: boolean) =>
-    axiosInstance.get(url, {
+  const cachedAxiosInstance = cachedAxiosInstanceFactory();
+
+  // memory cache to avoid getting token from insee at every call
+  // when it reaches max-age, it gets refresh
+  const cache = tokenProvider.tokenCache(
+    () =>
+      getAuthorizationCode('OPTIONAL_SCOPES').then((response: any) => {
+        return response;
+      }),
+    {
+      getMaxAge: (res: any) => {
+        return res.expires_in * 1000;
+      },
+    }
+  );
+
+  // interceptor that retrieve token from cache at every used of cachedAxiosInstance
+  cachedAxiosInstance.interceptors.request.use(
+    tokenProvider({
+      getToken: cache,
+      headerFormatter: (body: any) => {
+        return `Bearer ${body.access_token}`;
+      },
+    })
+  );
+
+  return async (url: string, options: AxiosRequestConfig, useCache: boolean) =>
+    cachedAxiosInstance.get(url, {
       timeout: constants.timeout.L,
       ...options,
       cache: useCache ? defaultCacheConfig : false,

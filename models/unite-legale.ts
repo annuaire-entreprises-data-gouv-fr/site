@@ -1,32 +1,36 @@
 import { readFileSync } from 'fs';
+import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
 import {
-  createDefaultUniteLegale,
-  IEtablissement,
+  clientUniteLegaleInsee,
+  clientUniteLegaleInseeFallback,
+} from '#clients/sirene-insee/siren';
+import {
+  clientAllEtablissementsInsee,
+  clientAllEtablissementsInseeFallback,
+  clientSiegeInsee,
+  clientSiegeInseeFallback,
+} from '#clients/sirene-insee/siret';
+import clientUniteLegaleSireneOuverte from '#clients/sirene-ouverte/siren';
+import { getAssociation } from '#models/association';
+import {
+  createEtablissementsList,
   IEtablissementsList,
-  IUniteLegale,
-  SirenNotFoundError,
-  splitByStatus,
-} from '.';
-import { HttpForbiddenError, HttpNotFound } from '../clients/exceptions';
-import {
-  getUniteLegaleInsee,
-  getUniteLegaleInseeFallback,
-} from '../clients/sirene-insee/siren';
-import {
-  getAllEtablissementsInsee,
-  getAllEtablissementsInseeFallback,
-  getSiegeInsee,
-  getSiegeInseeFallback,
-} from '../clients/sirene-insee/siret';
-import getUniteLegaleSireneOuverte from '../clients/sirene-ouverte/siren';
-import { Siren, verifySiren } from '../utils/helpers/siren-and-siret';
+} from '#models/etablissements-list';
+import { getEtatAdministratifUniteLegale } from '#models/etat-administratif';
+import { Siren, verifySiren } from '#utils/helpers';
 import {
   logFirstSireneInseefailed,
   logSecondSireneInseefailed,
   logSireneOuvertefailed,
-} from '../utils/sentry/helpers';
-import { getAssociation } from './association';
-import { getEtatAdministratifUniteLegale } from './etat-administratif';
+} from '#utils/sentry/helpers';
+import {
+  createDefaultUniteLegale,
+  IEtablissement,
+  IUniteLegale,
+  SirenNotFoundError,
+} from '.';
+import { isAssociation } from '.';
+import { getComplements } from './complements';
 
 /**
  * List of siren whose owner refused diffusion
@@ -34,17 +38,6 @@ import { getEtatAdministratifUniteLegale } from './etat-administratif';
 const protectedSirenPath = 'public/protected-siren.txt';
 const protectedSiren = readFileSync(protectedSirenPath, 'utf8').split('\n');
 const isProtectedSiren = (siren: Siren) => protectedSiren.indexOf(siren) > -1;
-
-/**
- * Return an uniteLegale given an existing siren
- */
-export const getUniteLegaleFromSlug = async (
-  slug: string,
-  options: IUniteLegaleOptions
-): Promise<IUniteLegale> => {
-  const uniteLegale = new UniteLegale(slug);
-  return await uniteLegale.get(options);
-};
 
 /**
  * PUBLIC METHODS
@@ -55,32 +48,57 @@ interface IUniteLegaleOptions {
   isBot?: boolean;
 }
 
-class UniteLegale {
-  private _siren: Siren;
+/**
+ * Return an uniteLegale given an existing siren
+ */
+export const getUniteLegaleFromSlug = async (
+  slug: string,
+  options: IUniteLegaleOptions = {}
+): Promise<IUniteLegale> => {
+  const { isBot = false, page = 1 } = options;
+  const uniteLegale = new UniteLegaleFactory(slug, isBot, page);
+  return await uniteLegale.get();
+};
 
-  constructor(slug: string) {
+class UniteLegaleFactory {
+  private _siren: Siren;
+  private _isBot: boolean;
+  private _page: number;
+  private _getUniteLegaleCore: (
+    siren: Siren,
+    page: number
+  ) => Promise<IUniteLegale>;
+
+  constructor(slug: string, isBot = false, page = 1) {
     this._siren = verifySiren(slug);
+    this._isBot = isBot;
+    this._page = page;
+
+    this._getUniteLegaleCore = isBot
+      ? getUniteLegaleForGoodBot
+      : getUniteLegale;
   }
 
-  async get({ page = 1, isBot = false }: IUniteLegaleOptions) {
-    let uniteLegale;
+  async get() {
+    let [uniteLegale, { complements, colter }] = await Promise.all([
+      this._getUniteLegaleCore(this._siren, this._page),
+      // colter, labels and certificates, from sirene ouverte
+      getComplements(this._siren),
+    ]);
 
-    if (isBot) {
-      uniteLegale = await getUniteLegaleForGoodBot(this._siren, page);
-    } else {
-      uniteLegale = await getUniteLegale(this._siren, page);
+    uniteLegale.complements = { ...uniteLegale.complements, ...complements };
+    uniteLegale.colter = { ...uniteLegale.colter, ...colter };
 
-      if (uniteLegale.association && uniteLegale.association.id) {
-        uniteLegale.association = {
-          ...(await getAssociation(uniteLegale.association.id, uniteLegale)),
-          id: uniteLegale.association.id,
-        };
-      }
+    // no need to call API association for bot
+    if (!this._isBot && isAssociation(uniteLegale)) {
+      uniteLegale = await getAssociation(uniteLegale);
+    }
 
-      // only EI
-      if (!uniteLegale.estDiffusible) {
-        uniteLegale.nomComplet = 'Entité non-diffusible';
-      }
+    if (
+      uniteLegale.complements.estEntrepreneurIndividuel &&
+      !uniteLegale.estDiffusible
+    ) {
+      uniteLegale.nomComplet = 'Entreprise non-diffusible';
     }
 
     // only entreprise commerciales
@@ -109,7 +127,7 @@ const getUniteLegaleForGoodBot = async (
   page = 1
 ): Promise<IUniteLegale> => {
   try {
-    const uniteLegale = await getUniteLegaleSireneOuverte(siren, page);
+    const uniteLegale = await clientUniteLegaleSireneOuverte(siren, page);
     return uniteLegale;
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
@@ -143,7 +161,7 @@ const getUniteLegale = async (
 
     try {
       // in case sirene INSEE 429 or 500, fallback on Siren Etalab
-      return await getUniteLegaleSireneOuverte(siren, page);
+      return await clientUniteLegaleSireneOuverte(siren, page);
     } catch (e: any) {
       logSireneOuvertefailed({ siren, details: e.message || e });
 
@@ -174,9 +192,9 @@ const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
     // so we doubled our API call with sirene ouverte to get Etablissements.
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
-        getUniteLegaleInsee(siren),
-        getAllEtablissementsInsee(siren, page).catch(() => null),
-        getSiegeInsee(siren),
+        clientUniteLegaleInsee(siren),
+        clientAllEtablissementsInsee(siren, page).catch(() => null),
+        clientSiegeInsee(siren),
       ]);
 
     return mergeUniteLegaleInsee(
@@ -200,9 +218,9 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
     // INSEE requires two calls to get uniteLegale with etablissements
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
-        getUniteLegaleInseeFallback(siren),
-        getAllEtablissementsInseeFallback(siren, page).catch(() => null),
-        getSiegeInseeFallback(siren).catch(() => null),
+        clientUniteLegaleInseeFallback(siren),
+        clientAllEtablissementsInseeFallback(siren, page).catch(() => null),
+        clientSiegeInseeFallback(siren).catch(() => null),
       ]);
 
     return mergeUniteLegaleInsee(
@@ -233,7 +251,7 @@ const mergeUniteLegaleInsee = (
     .replaceAll(/[^a-zA-Z0-9]+/g, '-');
 
   const etablissements =
-    allEtablissementsInsee?.etablissements || splitByStatus([siege]);
+    allEtablissementsInsee?.etablissements || createEtablissementsList([siege]);
   const { currentEtablissementPage, nombreEtablissements } = etablissements;
 
   return {
@@ -253,7 +271,7 @@ const createNonDiffusibleUniteLegale = (siren: Siren) => {
   const uniteLegale = createDefaultUniteLegale(siren);
   uniteLegale.estDiffusible = false;
   uniteLegale.nomComplet =
-    'Les informations de cette entité ne sont pas publiques';
+    'Les informations de cette entreprise ne sont pas publiques';
 
   return uniteLegale;
 };

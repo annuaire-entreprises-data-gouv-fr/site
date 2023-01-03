@@ -1,71 +1,16 @@
 import React, { PropsWithChildren } from 'react';
-import { JsxElement } from 'typescript';
-import { copy, copied } from '../../components-ui/icon';
-import { logWarningInSentry } from '../../utils/sentry';
+import { logWarningInSentry } from '#utils/sentry';
 
 interface ISectionProps {
-  body: (any[] | undefined | null | string | boolean)[];
+  body: any[][];
   id?: string;
 }
 
 export const CopyPaste: React.FC<
   PropsWithChildren<{ shouldTrim?: boolean; id?: string }>
 > = ({ children, shouldTrim = false, id = undefined }) => (
-  <div
-    className={`copy-wrapper ${
-      shouldTrim ? 'trim' : ''
-    } copy-to-clipboard-anchor`}
-  >
+  <div className={`copy-button ${shouldTrim ? 'trim' : ''}`}>
     <span id={id}>{children}</span>
-    <span className="label">
-      <span className="copy">{copy}&nbsp;copier</span>
-      <span className="copied">{copied}&nbsp;copié!</span>
-    </span>
-    <style jsx>{`
-      div.copy-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        cursor: pointer;
-        position: relative;
-      }
-      div.copy-done span.copy {
-        display: none;
-      }
-      div.copy-done span.copied {
-        display: flex;
-      }
-      div > span.label {
-        position: relative;
-        border-radius: 3px;
-        padding: 0 3px;
-        width: 75px;
-        flex-shrink: 0;
-        color: #000091;
-        margin-left: 12px;
-        opacity: 0;
-        background-color: #dfdff1;
-        font-size: 0.9rem;
-      }
-      div:hover > span.label {
-        opacity: 1;
-      }
-      span.copy {
-        display: flex;
-        align-items: center;
-      }
-      span.copied {
-        display: none;
-        align-items: center;
-        height: 100%;
-        color: green;
-      }
-      @media only screen and (min-width: 1px) and (max-width: 991px) {
-        div {
-          cursor: inherit;
-        }
-      }
-    `}</style>
   </div>
 );
 
@@ -81,7 +26,7 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
           {children || <i>Non renseigné</i>}
         </CopyPaste>
       ) : (
-        <div className="default-cell">
+        <div>
           <span>{children || <i>Non renseigné</i>}</span>
         </div>
       )}
@@ -91,13 +36,6 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
           padding: 5px 3px;
           background-color: #fff;
           padding-left: 30px;
-        }
-        div.default-cell {
-          display: flex;
-          align-items: center;
-          justify-content: start;
-          cursor: inherit;
-          position: relative;
         }
         @media only screen and (min-width: 1px) and (max-width: 600px) {
           td {
@@ -141,28 +79,16 @@ const shouldTrim = (label: any) => {
  * @returns
  */
 export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
-  // filter undefined and null row
-  const bodyNoUndefined = body.filter((element) => {
-    return (
-      element !== undefined &&
-      element !== null &&
-      element !== false &&
-      element !== ''
-    );
-  }) as any[][];
-
   return (
-    <>
-      <table id={id}>
-        <tbody>
-          {bodyNoUndefined.map((row, idx) => (
-            <tr key={'a' + idx}>
-              <td>{row[0]}</td>
-              <Cell label={row[0]}>{row[1]}</Cell>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <table id={id}>
+      <tbody>
+        {body.map((row, idx) => (
+          <tr key={'a' + idx}>
+            <td>{row[0]}</td>
+            <Cell label={row[0]}>{row[1]}</Cell>
+          </tr>
+        ))}
+      </tbody>
       <style jsx>{`
         table {
           border-collapse: collapse;
@@ -206,6 +132,6 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
           }
         }
       `}</style>
-    </>
+    </table>
   );
 };
