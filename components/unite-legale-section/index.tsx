@@ -69,7 +69,7 @@ const UniteLegaleSection: React.FC<{
       ? [
           ['', <br />],
           [
-            'Label ou certification',
+            'Label(s) et certificat(s)',
             <LabelsAndCertificates uniteLegale={uniteLegale} />,
           ],
         ]
