@@ -28,8 +28,8 @@ const Index: React.FC = () => (
         />
         <HiddenH1 title="Bienvenue sur L’Annuaire des Entreprises" />
         <h2>
-          Vérifiez toutes les informations juridiques publiques d’une entreprise
-          française
+          Vérifiez toutes les informations juridiques publiques des entreprises
+          françaises
         </h2>
         <div className="search-bar-wrapper">
           <SearchBar
