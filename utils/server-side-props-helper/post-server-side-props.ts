@@ -56,9 +56,8 @@ export function postServerSideProps(
     const url = context?.req?.url || '/unknown';
     const transaction = createAPM(url, 'postServerSideProps');
 
-    const { props, ...redirectAndOther } = await handleErrorFromServerSideProps(
-      getServerSidePropsFunction
-    )(context);
+    const { props = {}, ...redirectAndOther } =
+      await handleErrorFromServerSideProps(getServerSidePropsFunction)(context);
 
     transaction.finish();
 

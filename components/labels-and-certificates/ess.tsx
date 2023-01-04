@@ -1,3 +1,4 @@
+import FAQLink from '#components-ui/faq-link';
 import { INSEE } from '#components/administrations';
 import { Section } from '#components/section';
 import { EAdministration } from '#models/administrations';
@@ -9,12 +10,18 @@ export const CertificationESSSection = () => (
   >
     Cette structure est enregistrée auprès de l’
     <INSEE /> comme appartenant au champ de{' '}
-    <a
-      target="_blank"
-      rel="noreferrer noopener"
-      href="https://www.economie.gouv.fr/cedef/economie-sociale-et-solidaire"
-    >
-      l’Economie Sociale et Solidaire
-    </a>
+    <FAQLink tooltipLabel="l’Economie Sociale et Solidaire">
+      L’Economie Sociale et Solidaire (ESS) regroupe&nbsp;:
+      <br />
+      <ul>
+        <li>Les associations</li>
+        <li>Les fondations </li>
+        <li>Les coopératives</li>
+        <li>Les mutuelles </li>
+        <li>Les « entreprises de l’ESS »</li>
+      </ul>
+      <a href="/faq/economie-sociale-et-solidaire">→ En savoir plus</a>
+    </FAQLink>
+    .
   </Section>
 );
