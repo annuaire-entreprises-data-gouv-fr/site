@@ -40,12 +40,17 @@ describe('Check shouldIndex', () => {
   });
   test('Closed succeed', () => {
     const u = createDefaultUniteLegale('000000000' as Siren);
-    u.statutDiffusion = ISTATUTDIFFUSION.NONDIFF;
+    u.etatAdministratif = IETATADMINSTRATIF.CESSEE;
     expect(shouldNotIndex(u)).toBe(true);
   });
   test('NonDiffusible succeed', () => {
     const u = createDefaultUniteLegale('000000000' as Siren);
-    u.etatAdministratif = IETATADMINSTRATIF.CESSEE;
+    u.statutDiffusion = ISTATUTDIFFUSION.NONDIFF;
+    expect(shouldNotIndex(u)).toBe(true);
+  });
+  test('PartiallyDiffusible succeed', () => {
+    const u = createDefaultUniteLegale('000000000' as Siren);
+    u.statutDiffusion = ISTATUTDIFFUSION.PARTIAL;
     expect(shouldNotIndex(u)).toBe(true);
   });
 });
