@@ -17,10 +17,10 @@ export const isTwoMonthOld = (dateAsString: string) => {
   }
 };
 
-export const isAssociationFromNatureJuridique = (natureJuridique: string) =>
+export const isAssociationFromNatureJuridique = (natureJuridique = '') =>
   natureJuridique === '5195' || natureJuridique.indexOf('92') === 0;
 
-export const isServicePublicFromNatureJuridique = (natureJuridique: string) =>
+export const isServicePublicFromNatureJuridique = (natureJuridique = '') =>
   natureJuridique === '3210' ||
   natureJuridique === '3110' ||
   natureJuridique.indexOf('4') === 0 ||

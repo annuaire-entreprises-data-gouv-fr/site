@@ -1,11 +1,16 @@
 import { GetServerSidePropsContext } from 'next';
 import { UAParser } from 'ua-parser-js';
 import { createAPM } from '../sentry/apm';
+import isUserAgentABot from '../user-agent';
 import { handleErrorFromServerSideProps } from './error-handler';
 
 export interface IPropsWithMetadata {
   metadata: {
+    // display outdated browser banner
     isBrowserOutdated: boolean;
+    isBot: boolean;
+    // enable react hydration in browser
+    useReact?: boolean;
   };
 }
 
@@ -51,20 +56,21 @@ export function postServerSideProps(
     const url = context?.req?.url || '/unknown';
     const transaction = createAPM(url, 'postServerSideProps');
 
-    const { props, ...redirectAndOther } = await handleErrorFromServerSideProps(
-      getServerSidePropsFunction
-    )(context);
+    const { props = {}, ...redirectAndOther } =
+      await handleErrorFromServerSideProps(getServerSidePropsFunction)(context);
 
     transaction.finish();
+
+    const userAgent = context?.req?.headers['user-agent'] || '';
 
     return {
       ...redirectAndOther,
       props: {
         ...props,
         metadata: {
-          isBrowserOutdated: isBrowserOutdated(
-            context?.req?.headers['user-agent'] || ''
-          ),
+          ...props.metadata,
+          isBrowserOutdated: isBrowserOutdated(userAgent),
+          isBot: isUserAgentABot(userAgent),
         },
       },
     };

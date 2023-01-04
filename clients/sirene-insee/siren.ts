@@ -207,7 +207,7 @@ const mapToDomainObject = (
     oldSiren: originalSiren,
     siege,
     allSiegesSiret,
-    natureJuridique: categorieJuridiqueUniteLegale,
+    natureJuridique: categorieJuridiqueUniteLegale || '',
     libelleNatureJuridique: libelleFromCategoriesJuridiques(
       categorieJuridiqueUniteLegale
     ),

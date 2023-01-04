@@ -8,8 +8,9 @@ import Page from '../layouts';
 
 const Index: React.FC = () => (
   <Page
-    title="L’Annuaire des Entreprises"
+    title="L’Annuaire des Entreprises françaises : les informations juridiques officielles de l’administration"
     canonical="https://annuaire-entreprises.data.gouv.fr"
+    description="L’administration permet aux particuliers et agents publics de vérifier les informations juridiques officielles d’une entreprise : SIREN, SIRET, TVA Intracommunautaire, code APE/NAF, capital social, justificatif d’immatriculation, dirigeants, convention collective…"
   >
     <StructuredDataSearchAction />
     <div className="layout-center">
@@ -25,10 +26,10 @@ const Index: React.FC = () => (
           width={270}
           height={112}
         />
-        <HiddenH1 title="L’Annuaire des Entreprises" />
+        <HiddenH1 title="Bienvenue sur L’Annuaire des Entreprises" />
         <h2>
-          Retrouvez toutes les informations publiques sur une entreprise, une
-          association ou une administration
+          Vérifiez toutes les informations juridiques publiques des entreprises
+          françaises
         </h2>
         <div className="search-bar-wrapper">
           <SearchBar

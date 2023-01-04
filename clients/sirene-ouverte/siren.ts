@@ -126,7 +126,7 @@ const mapToDomainObject = (
       activite_principale_entreprise
     ),
     libelleCategorieEntreprise: libelleFromeCodeCategorie(categorie_entreprise),
-    natureJuridique: nature_juridique_entreprise,
+    natureJuridique: nature_juridique_entreprise || '',
     libelleNatureJuridique: libelleFromCategoriesJuridiques(
       nature_juridique_entreprise
     ),

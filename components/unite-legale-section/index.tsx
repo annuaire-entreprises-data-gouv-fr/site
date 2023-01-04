@@ -27,21 +27,14 @@ const UniteLegaleSection: React.FC<{
         uniteLegale.siege.siret &&
         formatSiret((uniteLegale.siege || {}).siret),
     ],
-    [
-      <FAQLink tooltipLabel="N° TVA Intracommunautaire">
-        <a href="/faq/tva-intracommunautaire">
-          Comprendre le numéro de TVA intracommunautaire
-        </a>
-      </FAQLink>,
-      <TVACell />,
-    ],
+    ['N° TVA Intracommunautaire', <TVACell />],
     [
       'Activité principale du siège social (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
     ],
     [
-      <FAQLink tooltipLabel="Adresse postale">
-        <a href="/faq/modifier-adresse">Comment modifier une adresse ?</a>
+      <FAQLink to="/faq/modifier-adresse" tooltipLabel="Adresse postale">
+        Comment modifier une adresse ?
       </FAQLink>,
       uniteLegale.siege.adressePostale,
     ],
@@ -64,7 +57,7 @@ const UniteLegaleSection: React.FC<{
       ? [
           ['', <br />],
           [
-            'Label ou certification',
+            'Label(s) et certificat(s)',
             <LabelsAndCertificates uniteLegale={uniteLegale} />,
           ],
         ]

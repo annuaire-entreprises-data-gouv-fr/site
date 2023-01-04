@@ -42,9 +42,12 @@ export const LabelsAndCertificates: React.FC<{ uniteLegale: IUniteLegale }> = ({
         </>
       )}
       {checkHasLabelsAndCertificates(uniteLegale) && (
-        <a rel="nofollow" href={`/labels-certifications/${uniteLegale.siren}`}>
-          → en savoir plus
-        </a>
+        <>
+          <br />
+          <a rel="nofollow" href={`/labels-certificats/${uniteLegale.siren}`}>
+            → en savoir plus
+          </a>
+        </>
       )}
     </>
   );

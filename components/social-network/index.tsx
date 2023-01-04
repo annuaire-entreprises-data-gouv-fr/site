@@ -7,7 +7,7 @@ const SocialNetworks = () => (
         <div className="fr-grid-row">
           <div className="fr-col-12">
             <div className="fr-follow__social">
-              <h2 className="fr-h5">Retrouvez-nous sur les réseaux sociaux</h2>
+              <b className="fr-h5">Retrouvez-nous sur les réseaux sociaux</b>
               <ul className="fr-btns-group">
                 <li>
                   <a

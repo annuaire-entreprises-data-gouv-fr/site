@@ -2,13 +2,12 @@ import React, { PropsWithChildren } from 'react';
 import { information } from '#components-ui/icon';
 import InformationTooltip from '#components-ui/information-tooltip';
 
-const FAQLink: React.FC<PropsWithChildren<{ tooltipLabel: string }>> = ({
-  tooltipLabel,
-  children,
-}) => (
+const FAQLink: React.FC<
+  PropsWithChildren<{ tooltipLabel: string; to?: string }>
+> = ({ to, tooltipLabel, children }) => (
   <>
     <InformationTooltip
-      label={children}
+      label={to ? <a href={to}>{children}</a> : children}
       orientation="left"
       width={230}
       left="5px"

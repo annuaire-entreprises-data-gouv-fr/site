@@ -58,8 +58,8 @@ const EtablissementSection: React.FC<IProps> = ({
       ? [['Enseigne de l’établissement', etablissement.enseigne]]
       : []),
     [
-      <FAQLink tooltipLabel="Adresse">
-        <a href="/faq/modifier-adresse">Comment modifier une adresse ?</a>
+      <FAQLink to="/faq/modifier-adresse" tooltipLabel="Adresse">
+        Comment modifier une adresse ?
       </FAQLink>,
       etablissement.adresse ? (
         <>

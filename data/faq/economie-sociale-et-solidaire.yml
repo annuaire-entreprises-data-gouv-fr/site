@@ -1,0 +1,26 @@
+administrations:
+  - insee
+target:
+  - agent
+title: Qu’est ce que l’Economie Sociale et Solidaire ?
+body: |
+  Selon l’INSEE, l’Economie Sociale et Solidaire (ESS) regroupe cinq formes d’organisation : 
+
+  - Les associations
+  - Les fondations
+  - Les coopératives
+  - Les mutuelles
+  - Les « entreprises de l’ESS »
+
+  La dernière catégorie est la plus récente et recense les sociétés commerciales qui adhèrent aux principes suivants : 
+
+  - Poursuivre un but social autre que le seul partage des bénéfices
+  - Promouvoir une lucrativité encadrée (notamment des bénéfices, à consacrer au maintien et au développement de l’activité)
+  - Avoir une gouvernance démocratique et participative
+
+  Pour faire partie du secteur de l’ESS, les sociétés doivent être valablement enregistrées au registre du commerce et des sociétés (RCS) sous cette dénomination.
+
+  **A ne pas confondre avec le [label ESUS](https://www.economie.gouv.fr/entreprises/agrement-entreprise-solidaire-utilite-sociale-ess) du ministère de l’économie.**
+cta:
+  label: ⇢ En savoir plus sur l’Economie Sociale et Solidaire
+  to: https://www.economie.gouv.fr/cedef/economie-sociale-et-solidaire
