@@ -1,7 +1,10 @@
 import { HttpNotFound } from '#clients/exceptions';
 import clientSearchSireneOuverte from '#clients/recherche-entreprise';
 import { EAdministration } from '#models/administrations';
-import { APINotRespondingFactory } from '#models/api-not-responding';
+import {
+  APINotRespondingFactory,
+  isAPINotResponding,
+} from '#models/api-not-responding';
 import { IDirigeant } from '#models/immatriculation/rncs';
 import SearchFilterParams, {
   hasSearchParam,
@@ -11,6 +14,7 @@ import {
   escapeTerm,
   isLikelyASiretOrSiren,
 } from '#utils/helpers';
+import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import logErrorInSentry from '#utils/sentry';
 import { IsLikelyASirenOrSiretException, IUniteLegale } from '.';
 
@@ -95,4 +99,33 @@ const search = async (
   }
 };
 
-export default search;
+/**
+ * Research a search query but remove any protected Siren from result list
+ * @param searchTerm
+ * @param page
+ * @param searchFilterParams
+ * @returns
+ */
+const searchWithoutProtectedSiren = async (
+  searchTerm: string,
+  page: number,
+  searchFilterParams: SearchFilterParams
+) => {
+  const results = await search(searchTerm, page, searchFilterParams);
+
+  if (isAPINotResponding(results)) {
+    return results;
+  }
+
+  results.results = results.results.filter((result) => {
+    if (isProtectedSiren(result.siren)) {
+      results.resultCount -= 1;
+      return false;
+    }
+    return true;
+  });
+
+  return results;
+};
+
+export default searchWithoutProtectedSiren;

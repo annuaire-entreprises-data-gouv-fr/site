@@ -2,7 +2,8 @@ import { readFileSync } from 'fs';
 import { extractSirenFromSiret, Siren, Siret } from './siren-and-siret';
 
 /**
- * List of siren whose owner refused diffusion
+ * List of siren whose owner asked to be removed from website
+ * See /public/protected-siren.txt
  */
 class ProtectedSirenList {
   public _list: string[] = [];
