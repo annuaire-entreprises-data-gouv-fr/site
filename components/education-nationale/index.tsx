@@ -94,11 +94,13 @@ export const EducationNationaleSection: React.FC<{
           ]
         )}
       />
-      <ResultsPagination
-        totalPages={etablissements.pageCount}
-        currentPage={etablissements.currentPage}
-        compact={true}
-      />
+      {etablissements.pageCount > 1 && (
+        <ResultsPagination
+          totalPages={etablissements.pageCount}
+          currentPage={etablissements.currentPage}
+          compact={true}
+        />
+      )}
     </Section>
   );
 };

@@ -15,7 +15,7 @@ import {
  * https://api.gouv.fr/documentation/api-annuaire-education
  */
 const clientEducationNationale = async (siren: Siren, page: number) => {
-  const rows = 10;
+  const rows = 30;
   const response = await httpGet(routes.educationNationale.api, {
     params: {
       q: `#startswith(siren_siret, ${siren})`,
