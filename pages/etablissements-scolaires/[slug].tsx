@@ -8,6 +8,7 @@ import {
   IEducationNationaleEtablissement,
 } from '#models/education-nationale';
 import { IUniteLegale } from '#models/index';
+import { parseIntWithDefaultValue } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -17,7 +18,7 @@ import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
-  uai: IEducationNationaleEtablissement[] | IAPINotRespondingError;
+  uai: IEducationNationaleEtablissement | IAPINotRespondingError;
 }
 
 const EtablissementScolaire: React.FC<IProps> = ({
@@ -45,8 +46,11 @@ const EtablissementScolaire: React.FC<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
+    const pageParam = (context.query.page || '') as string;
+    const page = parseIntWithDefaultValue(pageParam, 1);
     const { slug } = extractParamsFromContext(context);
-    const { uniteLegale, uai } = await getUaiFromSlug(slug);
+    const { uniteLegale, uai } = await getUaiFromSlug(slug, page);
+
     return {
       props: {
         uniteLegale,
