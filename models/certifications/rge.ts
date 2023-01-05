@@ -5,7 +5,6 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import { Siren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '..';
 
