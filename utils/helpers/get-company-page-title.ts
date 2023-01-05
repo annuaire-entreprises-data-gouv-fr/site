@@ -6,14 +6,16 @@ import {
 } from '#models/index';
 
 export const getCompanyPageTitle = (uniteLegale: IUniteLegale) => {
+  const description = `- SIREN ${uniteLegale.siren}, ${uniteLegale.siege.siret}, ${uniteLegale.libelleActivitePrincipale} | Annuaire Entreprises`;
+
   switch (true) {
     case isAssociation(uniteLegale):
-      return `Association ${uniteLegale.nomComplet} - SIREN ${uniteLegale.siren}, ${uniteLegale.siege.siret}, ${uniteLegale.libelleActivitePrincipale} | Annuaire Entreprises`;
+      return `Association ${description}`;
     case isServicePublic(uniteLegale):
-      return `Service public ${uniteLegale.nomComplet} - SIREN ${uniteLegale.siren}, ${uniteLegale.siege.siret}, ${uniteLegale.libelleActivitePrincipale} | Annuaire Entreprises`;
+      return `Service public ${description}`;
     case isCollectiviteTerritoriale(uniteLegale):
-      return `Collectivité territoriale ${uniteLegale.nomComplet} - SIREN ${uniteLegale.siren}, ${uniteLegale.siege.siret}, ${uniteLegale.libelleActivitePrincipale} | Annuaire Entreprises`;
+      return `Collectivité territoriale ${description}`;
     default:
-      return `Société ${uniteLegale.nomComplet} - SIREN ${uniteLegale.siren}, ${uniteLegale.siege.siret}, ${uniteLegale.libelleActivitePrincipale} | Annuaire Entreprises`;
+      return `Société ${description}`;
   }
 };
