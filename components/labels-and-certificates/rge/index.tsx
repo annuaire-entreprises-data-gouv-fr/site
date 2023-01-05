@@ -119,8 +119,8 @@ export const CertificationsRGESection: React.FC<{
         head={['Certificat', 'Domaine(s) certifié(s)', 'Lien']}
         body={certificationsRGE.certifications.map((certification) => [
           <div className="font-small layout-left">
-            <div style={{ width: 72 }}>
-              {certification.nomCertificat in certificatLogo && (
+            {certification.nomCertificat in certificatLogo && (
+              <div style={{ width: 72 }}>
                 <img
                   src={`/images/rge/logo-rge-${
                     //@ts-ignore
@@ -131,8 +131,8 @@ export const CertificationsRGESection: React.FC<{
                   width="100%"
                   height="100%"
                 />
-              )}
-            </div>
+              </div>
+            )}
             <div> {certification.nomCertificat}</div>
           </div>,
           <ul>
