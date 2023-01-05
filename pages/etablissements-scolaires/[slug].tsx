@@ -1,12 +1,12 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import { EducationNationaleSection } from '#components/education-nationale';
+import { EtablissementsScolairesSection } from '#components/education-nationale';
 import Title, { FICHE } from '#components/title-section';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
-  getUaiFromSlug,
-  IEducationNationaleEtablissement,
-} from '#models/education-nationale';
+  getEtablissementsScolairesFromSlug,
+  IEtablissementsScolaires,
+} from '#models/etablissements-scolaires';
 import { IUniteLegale } from '#models/index';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
@@ -18,13 +18,13 @@ import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
-  uai: IEducationNationaleEtablissement | IAPINotRespondingError;
+  etablissementsScolaires: IEtablissementsScolaires | IAPINotRespondingError;
 }
 
 const EtablissementScolaire: React.FC<IProps> = ({
   uniteLegale,
   metadata,
-  uai,
+  etablissementsScolaires,
 }) => {
   return (
     <Page
@@ -38,7 +38,9 @@ const EtablissementScolaire: React.FC<IProps> = ({
           ficheType={FICHE.ETABLISSEMENTS_SCOLAIRES}
           uniteLegale={uniteLegale}
         />
-        <EducationNationaleSection etablissements={uai} />
+        <EtablissementsScolairesSection
+          etablissements={etablissementsScolaires}
+        />
       </div>
     </Page>
   );
@@ -49,12 +51,13 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const pageParam = (context.query.page || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
     const { slug } = extractParamsFromContext(context);
-    const { uniteLegale, uai } = await getUaiFromSlug(slug, page);
+    const { uniteLegale, etablissementsScolaires } =
+      await getEtablissementsScolairesFromSlug(slug, page);
 
     return {
       props: {
         uniteLegale,
-        uai,
+        etablissementsScolaires: etablissementsScolaires,
       },
     };
   }

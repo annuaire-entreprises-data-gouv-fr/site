@@ -11,12 +11,12 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
-import { IEducationNationaleEtablissement } from '#models/education-nationale';
+import { IEtablissementsScolaires } from '#models/etablissements-scolaires';
 
-export const EducationNationaleSection: React.FC<{
-  etablissements: IEducationNationaleEtablissement | IAPINotRespondingError;
+export const EtablissementsScolairesSection: React.FC<{
+  etablissements: IEtablissementsScolaires | IAPINotRespondingError;
 }> = ({ etablissements }) => {
-  const sectionTitle = 'Éducation nationale';
+  const sectionTitle = 'Annuaire de l’Education Nationale';
 
   if (isAPINotResponding(etablissements)) {
     const isNotFound = etablissements.errorType === 404;

@@ -4,7 +4,7 @@ site: https://www.education.gouv.fr/
 long: Ministère de l'Éducation nationale et de la jeunesse
 contact: https://www.education.gouv.fr/contactez-nous-41633
 apiMonitors:
-  - apiName: API Éducation nationale
+  - apiName: API Etablissements Scolaires
     apiGouvLink: https://api.gouv.fr/documentation/api-annuaire-education
     datagouv:
       - label: Annuaire de l’Education Nationale

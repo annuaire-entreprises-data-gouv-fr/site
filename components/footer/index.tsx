@@ -17,15 +17,16 @@ const Footer = () => (
         </div>
         <div className="fr-footer__content">
           <p className="fr-footer__content-desc">
-            Ceci est un service de l’Etat français 🇫🇷, crée par{' '}
-            <a
-              href="https://etalab.gouv.fr"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Etalab
-            </a>{' '}
-            (le département d’ouverture des données de la{' '}
+            Ce site permet de retrouver toutes les données publiques détenues
+            par l’administration sur une entreprise, une association ou une
+            administration et{' '}
+            <a href="/donnees-extrait-kbis">
+              en particulier les données contenues dans un extrait KBIS/D1
+            </a>
+            .
+          </p>
+          <p className="fr-footer__content-desc">
+            Il est opéré par la{' '}
             <a
               href="https://numerique.gouv.fr"
               rel="noopener noreferrer"
@@ -40,19 +41,10 @@ const Footer = () => (
               target="_blank"
             >
               Direction Générale des Entreprises
-            </a>{' '}
-            en 2020.
-          </p>
-          <br />
-          <p className="fr-footer__content-desc">
-            Ce site permet de retrouver toutes les données publiques détenues
-            par l’administration sur une entreprise, une association ou une
-            administration et{' '}
-            <a href="/donnees-extrait-kbis">
-              en particulier les données contenues dans un extrait KBIS/D1
             </a>
             .
           </p>
+          <br />
           <ul className="fr-footer__content-list">
             <li className="fr-footer__content-item">
               <a

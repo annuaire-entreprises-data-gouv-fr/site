@@ -9,7 +9,7 @@ import { Siren, verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { getUniteLegaleFromSlug } from './unite-legale';
 
-export interface IEducationNationaleEtablissement {
+export interface IEtablissementsScolaires {
   currentPage: number;
   resultCount: number;
   pageCount: number;
@@ -30,10 +30,10 @@ export interface IEducationNationaleEtablissement {
   }[];
 }
 
-export const getUAI = async (
+export const getEtablissementsScolaires = async (
   siren: Siren,
   page: number
-): Promise<IEducationNationaleEtablissement | IAPINotRespondingError> => {
+): Promise<IEtablissementsScolaires | IAPINotRespondingError> => {
   try {
     return await clientEducationNationale(siren, page);
   } catch (e: any) {
@@ -48,15 +48,18 @@ export const getUAI = async (
   }
 };
 
-export const getUaiFromSlug = async (slug: string, page: number) => {
+export const getEtablissementsScolairesFromSlug = async (
+  slug: string,
+  page: number
+) => {
   const siren = verifySiren(slug);
-  const [uniteLegale, uai] = await Promise.all([
+  const [uniteLegale, etablissementsScolaires] = await Promise.all([
     getUniteLegaleFromSlug(siren),
-    getUAI(siren, page),
+    getEtablissementsScolaires(siren, page),
   ]);
 
   return {
     uniteLegale,
-    uai,
+    etablissementsScolaires,
   };
 };

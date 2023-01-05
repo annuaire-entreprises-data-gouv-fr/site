@@ -1,7 +1,7 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import { IEducationNationaleEtablissement } from '#models/education-nationale';
-import { Siren, parseIntWithDefaultValue } from '#utils/helpers';
+import { IEtablissementsScolaires } from '#models/etablissements-scolaires';
+import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 import { zoneMapping } from './helpers';
 import {
@@ -40,7 +40,7 @@ const clientEducationNationale = async (siren: Siren, page: number) => {
 
 const mapToDomainObject = (
   records: IEducationNationaleRecord[]
-): IEducationNationaleEtablissement['results'] => {
+): IEtablissementsScolaires['results'] => {
   return records.map(({ fields }) => ({
     adresse: fields.adresse_1 || '',
     codePostal: fields.code_postal || '',
