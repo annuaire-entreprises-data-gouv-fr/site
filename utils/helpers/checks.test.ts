@@ -1,3 +1,5 @@
+import { IETATADMINSTRATIF } from '#models/etat-administratif';
+import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
 import { createDefaultUniteLegale } from '../../models';
 import {
   isEntrepreneurIndividuelFromNatureJuridique,
@@ -27,7 +29,7 @@ describe('Check isEntrepreneurIndividuel', () => {
 describe('Check shouldIndex', () => {
   test('Standard fails', () => {
     const u = createDefaultUniteLegale('000000000' as Siren);
-    u.estActive = true;
+    u.etatAdministratif = IETATADMINSTRATIF.ACTIF;
     u.complements.estEntrepreneurIndividuel = false;
     expect(shouldNotIndex(u)).toBe(false);
   });
@@ -38,12 +40,17 @@ describe('Check shouldIndex', () => {
   });
   test('Closed succeed', () => {
     const u = createDefaultUniteLegale('000000000' as Siren);
-    u.estDiffusible = false;
+    u.etatAdministratif = IETATADMINSTRATIF.CESSEE;
     expect(shouldNotIndex(u)).toBe(true);
   });
   test('NonDiffusible succeed', () => {
     const u = createDefaultUniteLegale('000000000' as Siren);
-    u.estActive = false;
+    u.statutDiffusion = ISTATUTDIFFUSION.NONDIFF;
+    expect(shouldNotIndex(u)).toBe(true);
+  });
+  test('PartiallyDiffusible succeed', () => {
+    const u = createDefaultUniteLegale('000000000' as Siren);
+    u.statutDiffusion = ISTATUTDIFFUSION.PARTIAL;
     expect(shouldNotIndex(u)).toBe(true);
   });
 });

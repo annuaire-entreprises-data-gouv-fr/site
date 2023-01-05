@@ -13,6 +13,7 @@ import {
   isCollectiviteTerritoriale,
   IUniteLegale,
 } from '#models/index';
+import { estDiffusible, estNonDiffusible } from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
 
 export enum FICHE {
@@ -185,15 +186,18 @@ const Title: React.FC<IProps> = ({
           &nbsp;‣&nbsp;{formatIntFr(uniteLegale.siren)}
         </span>
         <span>
-          {!uniteLegale.estDiffusible && (
-            <Tag className="unknown">Non-diffusible</Tag>
+          {estNonDiffusible(uniteLegale) && (
+            <Tag className="unknown">non-diffusible</Tag>
           )}
-          <IsActiveTag state={uniteLegale.etatAdministratif} />
+          <IsActiveTag
+            etatAdministratif={uniteLegale.etatAdministratif}
+            statutDiffusion={uniteLegale.statutDiffusion}
+          />
         </span>
       </div>
     </div>
     <SocialMedia uniteLegale={uniteLegale} />
-    {!uniteLegale.estDiffusible ? (
+    {estNonDiffusible(uniteLegale) ? (
       <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
     ) : (
       <UnitLegaleDescription uniteLegale={uniteLegale} />

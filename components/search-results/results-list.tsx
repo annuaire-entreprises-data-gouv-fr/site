@@ -3,10 +3,11 @@ import IsActiveTag from '#components-ui/is-active-tag';
 import { isPersonneMorale } from '#components/dirigeants-section/rncs-dirigeants';
 import { SearchFeedback } from '#components/search-feedback';
 import UniteLegaleBadge from '#components/unite-legale-badge';
-import { IETATADMINSTRATIF } from '#models/etat-administratif';
+import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IDirigeant } from '#models/immatriculation/rncs';
 import { isCollectiviteTerritoriale } from '#models/index';
 import { ISearchResult } from '#models/search';
+import { estDiffusible, ISTATUTDIFFUSION } from '#models/statut-diffusion';
 
 interface IProps {
   results: ISearchResult[];
@@ -64,8 +65,11 @@ const ResultsList: React.FC<IProps> = ({
           <div className="title">
             <span>{`${result.nomComplet}`}</span>
             <UniteLegaleBadge uniteLegale={result} small hiddenByDefault />
-            {!result.estActive && (
-              <IsActiveTag state={IETATADMINSTRATIF.CESSEE} />
+            {!estActif(result) && (
+              <IsActiveTag
+                etatAdministratif={IETATADMINSTRATIF.CESSEE}
+                statutDiffusion={result.statutDiffusion}
+              />
             )}
           </div>
           <div>{result.libelleActivitePrincipale}</div>

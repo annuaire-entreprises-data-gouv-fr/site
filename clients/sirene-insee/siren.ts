@@ -22,8 +22,8 @@ import {
 } from '#utils/labels';
 import { inseeClientGet, InseeClientOptions } from '.';
 import {
-  estActiveFromEtatAdministratifInsee,
-  estDiffusibleFromStatutDiffusionInsee,
+  etatFromEtatAdministratifInsee,
+  statuDiffusionFromStatutDiffusionInsee,
 } from './helpers';
 
 interface IInseeUniteLegaleResponse {
@@ -219,11 +219,13 @@ const mapToDomainObject = (
       'T'
     )[0],
     dateDebutActivite: dateDebut,
-    estActive: estActiveFromEtatAdministratifInsee(
-      etatAdministratifUniteLegale
+    etatAdministratif: etatFromEtatAdministratifInsee(
+      etatAdministratifUniteLegale,
+      siren
     ),
-    estDiffusible: estDiffusibleFromStatutDiffusionInsee(
-      statutDiffusionUniteLegale
+    statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
+      statutDiffusionUniteLegale,
+      siren
     ),
     nomComplet,
     chemin: siren,

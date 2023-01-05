@@ -10,6 +10,7 @@ import { Section } from '#components/section';
 import { CopyPaste, TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations';
+import { estActif } from '#models/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import { formatDate, formatSiret } from '#utils/helpers';
 
@@ -76,7 +77,16 @@ const EtablissementSection: React.FC<IProps> = ({
     ['SIRET', formatSiret(etablissement.siret)],
     ['Clef NIC', etablissement.nic],
     ...(!usedInEntreprisePage
-      ? [['N° TVA Intracommunautaire', <TVACell />]]
+      ? [
+          [
+            <FAQLink tooltipLabel="N° TVA Intracommunautaire">
+              <a href="/faq/tva-intracommunautaire">
+                Comprendre le numéro de TVA intracommunautaire
+              </a>
+            </FAQLink>,
+            <TVACell />,
+          ],
+        ]
       : []),
     [
       'Activité principale de l’unité légale (NAF/APE)',
@@ -97,7 +107,7 @@ const EtablissementSection: React.FC<IProps> = ({
       'Avis de situation Insee',
       <AvisSituationLink siret={etablissement.siret} />,
     ],
-    ...(etablissement.estActif === false
+    ...(!estActif(etablissement)
       ? [['Date de fermeture', formatDate(etablissement.dateFermeture || '')]]
       : []),
   ];

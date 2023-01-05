@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs';
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
 import {
   clientUniteLegaleInsee,
@@ -16,8 +15,9 @@ import {
   createEtablissementsList,
   IEtablissementsList,
 } from '#models/etablissements-list';
-import { getEtatAdministratifUniteLegale } from '#models/etat-administratif';
+import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { Siren, verifySiren } from '#utils/helpers';
+import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import {
   logFirstSireneInseefailed,
   logSecondSireneInseefailed,
@@ -31,13 +31,7 @@ import {
 } from '.';
 import { isAssociation } from '.';
 import { getComplements } from './complements';
-
-/**
- * List of siren whose owner refused diffusion
- */
-const protectedSirenPath = 'public/protected-siren.txt';
-const protectedSiren = readFileSync(protectedSirenPath, 'utf8').split('\n');
-const isProtectedSiren = (siren: Siren) => protectedSiren.indexOf(siren) > -1;
+import { estNonDiffusible, ISTATUTDIFFUSION } from './statut-diffusion';
 
 /**
  * PUBLIC METHODS
@@ -94,20 +88,22 @@ class UniteLegaleFactory {
       uniteLegale = await getAssociation(uniteLegale);
     }
 
-    if (
-      uniteLegale.complements.estEntrepreneurIndividuel &&
-      !uniteLegale.estDiffusible
-    ) {
+    if (isProtectedSiren(uniteLegale.siren)) {
+      uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PARTIAL;
+    }
+
+    if (estNonDiffusible(uniteLegale)) {
       uniteLegale.nomComplet = 'Entreprise non-diffusible';
     }
 
-    // only entreprise commerciales
-    if (isProtectedSiren(uniteLegale.siren)) {
-      uniteLegale.estEntrepriseCommercialeDiffusible = false;
+    // en sommeil
+    if (
+      estActif(uniteLegale) &&
+      !(uniteLegale.etablissements.all || []).find((a) => estActif(a))
+    ) {
+      uniteLegale.etatAdministratif =
+        IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT;
     }
-
-    uniteLegale.etatAdministratif =
-      getEtatAdministratifUniteLegale(uniteLegale);
 
     return uniteLegale;
   }
@@ -269,7 +265,7 @@ const mergeUniteLegaleInsee = (
  */
 const createNonDiffusibleUniteLegale = (siren: Siren) => {
   const uniteLegale = createDefaultUniteLegale(siren);
-  uniteLegale.estDiffusible = false;
+  uniteLegale.statutDiffusion = ISTATUTDIFFUSION.NONDIFF;
   uniteLegale.nomComplet =
     'Les informations de cette entreprise ne sont pas publiques';
 

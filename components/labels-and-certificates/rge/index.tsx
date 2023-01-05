@@ -70,7 +70,7 @@ export const CertificationsRGESection: React.FC<{
 
   const data = [
     ['Dénomination', uniteLegale.nomComplet],
-    ['Adresse postale', adresse],
+    ['Adresse', adresse],
     ['Téléphone', telephone && <a href={`tel:${telephone}`}>{telephone}</a>],
     [
       'Site internet',

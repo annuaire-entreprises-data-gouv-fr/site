@@ -15,6 +15,7 @@ import {
   IUniteLegale,
   isAssociation,
 } from '#models/index';
+import { estNonDiffusible } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { extractSirenOrSiretSlugFromUrl, shouldNotIndex } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
@@ -49,7 +50,9 @@ const UniteLegalePage: React.FC<IProps> = ({
     <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
-      {uniteLegale.estDiffusible ? (
+      {estNonDiffusible(uniteLegale) ? (
+        <NonDiffusibleSection />
+      ) : (
         <>
           <UniteLegaleSection uniteLegale={uniteLegale} />
           {isAssociation(uniteLegale) && (
@@ -69,8 +72,6 @@ const UniteLegalePage: React.FC<IProps> = ({
           )}
           <EtablissementListeSection uniteLegale={uniteLegale} />
         </>
-      ) : (
-        <NonDiffusibleSection />
       )}
     </div>
   </Page>

@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
+import { estNonDiffusible } from '#models/statut-diffusion';
 import { shouldNotIndex } from '#utils/helpers';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
@@ -41,19 +42,19 @@ const EtablissementPage: React.FC<IProps> = ({
         etablissement={etablissement}
       />
       <br />
-      {etablissement.estDiffusible ? (
-        <EtablissementSection
-          etablissement={etablissement}
-          uniteLegale={uniteLegale}
-          withDenomination={true}
-        />
-      ) : (
+      {estNonDiffusible(etablissement) ? (
         <>
           <p>
             Cet établissement est <b>non-diffusible.</b>
           </p>
           <NonDiffusibleSection />
         </>
+      ) : (
+        <EtablissementSection
+          etablissement={etablissement}
+          uniteLegale={uniteLegale}
+          withDenomination={true}
+        />
       )}
     </div>
   </Page>

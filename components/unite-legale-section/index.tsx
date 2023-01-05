@@ -5,6 +5,7 @@ import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations';
+import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import {
@@ -35,13 +36,7 @@ const UniteLegaleSection: React.FC<{
       <FAQLink to="/faq/modifier-adresse" tooltipLabel="Adresse postale">
         Comment modifier une adresse ?
       </FAQLink>,
-      uniteLegale.siege.adresse
-        ? `${
-            uniteLegale.siege.denomination
-              ? `${uniteLegale.siege.denomination}, `
-              : ''
-          }${uniteLegale.siege.adresse}`
-        : '',
+      uniteLegale.siege.adressePostale,
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
@@ -54,7 +49,7 @@ const UniteLegaleSection: React.FC<{
       'Dernière modification des données Insee',
       formatDate(uniteLegale.dateDerniereMiseAJour),
     ],
-    ...(uniteLegale.estActive === false
+    ...(!estActif(uniteLegale)
       ? [['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]]
       : []),
     // jump line and add label and certificates
