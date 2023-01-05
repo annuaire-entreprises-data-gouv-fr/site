@@ -18,6 +18,7 @@ import {
 import { estNonDiffusible } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { extractSirenOrSiretSlugFromUrl, shouldNotIndex } from '#utils/helpers';
+import { getCompanyPageTitle } from '#utils/helpers/get-company-page-title';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   postServerSideProps,
@@ -37,7 +38,7 @@ const UniteLegalePage: React.FC<IProps> = ({
 }) => (
   <Page
     small={true}
-    title={`${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
+    title={getCompanyPageTitle(uniteLegale)}
     canonical={
       uniteLegale.chemin &&
       `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`
