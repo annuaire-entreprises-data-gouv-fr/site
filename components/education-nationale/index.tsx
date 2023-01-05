@@ -3,6 +3,7 @@ import routes from '#clients/routes';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { EDUCNAT } from '#components/administrations';
+import ResultsPagination from '#components/search-results/results-pagination';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
@@ -13,7 +14,7 @@ import {
 import { IEducationNationaleEtablissement } from '#models/education-nationale';
 
 export const EducationNationaleSection: React.FC<{
-  etablissements: IEducationNationaleEtablissement[] | IAPINotRespondingError;
+  etablissements: IEducationNationaleEtablissement | IAPINotRespondingError;
 }> = ({ etablissements }) => {
   const sectionTitle = 'Éducation nationale';
 
@@ -50,7 +51,7 @@ export const EducationNationaleSection: React.FC<{
     );
   }
 
-  const plural = etablissements.length > 1 ? 's' : '';
+  const plural = etablissements.results.length > 1 ? 's' : '';
 
   return (
     <Section
@@ -58,12 +59,13 @@ export const EducationNationaleSection: React.FC<{
       sources={[EAdministration.EDUCATION_NATIONALE]}
     >
       <p>
-        Cette structure possède <b>{etablissements.length}</b> établissement
+        Cette structure possède <b>{etablissements.resultCount}</b>{' '}
+        établissement
         {plural} scolaire{plural}&nbsp;:
       </p>
       <FullTable
         head={['N° UAI', 'Académie', 'Détails', 'Contact', 'Nb d’élèves']}
-        body={etablissements.map(
+        body={etablissements.results.map(
           ({
             adresse,
             codePostal,
@@ -92,6 +94,13 @@ export const EducationNationaleSection: React.FC<{
           ]
         )}
       />
+      {etablissements.pageCount > 1 && (
+        <ResultsPagination
+          totalPages={etablissements.pageCount}
+          currentPage={etablissements.currentPage}
+          compact={true}
+        />
+      )}
     </Section>
   );
 };

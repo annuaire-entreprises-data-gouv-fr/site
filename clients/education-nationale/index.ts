@@ -1,7 +1,7 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { IEducationNationaleEtablissement } from '#models/education-nationale';
-import { Siren } from '#utils/helpers';
+import { Siren, parseIntWithDefaultValue } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 import { zoneMapping } from './helpers';
 import {
@@ -14,11 +14,13 @@ import {
  * https://www.education.gouv.fr/annuaire
  * https://api.gouv.fr/documentation/api-annuaire-education
  */
-const clientEducationNationale = async (siren: Siren) => {
-  const route = routes.educationNationale.api;
-  const response = await httpGet(route, {
+const clientEducationNationale = async (siren: Siren, page: number) => {
+  const rows = 30;
+  const response = await httpGet(routes.educationNationale.api, {
     params: {
       q: `#startswith(siren_siret, ${siren})`,
+      start: (page - 1) * rows,
+      rows,
     },
   });
 
@@ -28,12 +30,17 @@ const clientEducationNationale = async (siren: Siren) => {
     throw new HttpNotFound(`Cannot found education establishment : ${siren}`);
   }
 
-  return mapToDomainObject(data.records);
+  return {
+    currentPage: page,
+    resultCount: data.nhits,
+    pageCount: Math.round(data.nhits / data.parameters.rows),
+    results: mapToDomainObject(data.records),
+  };
 };
 
 const mapToDomainObject = (
   records: IEducationNationaleRecord[]
-): IEducationNationaleEtablissement[] => {
+): IEducationNationaleEtablissement['results'] => {
   return records.map(({ fields }) => ({
     adresse: fields.adresse_1 || '',
     codePostal: fields.code_postal || '',
