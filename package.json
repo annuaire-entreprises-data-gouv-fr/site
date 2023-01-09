@@ -67,8 +67,6 @@
   "devDependencies": {
     "@axe-core/cli": "~4.5.2",
     "@babel/core": "^7.20.7",
-    "@commitlint/cli": "~17.3.0",
-    "@commitlint/config-conventional": "~17.3.0",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-interactions": "^6.5.15",
