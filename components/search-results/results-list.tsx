@@ -7,7 +7,6 @@ import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IDirigeant } from '#models/immatriculation/rncs';
 import { isCollectiviteTerritoriale } from '#models/index';
 import { ISearchResult } from '#models/search';
-import { estDiffusible, ISTATUTDIFFUSION } from '#models/statut-diffusion';
 
 interface IProps {
   results: ISearchResult[];
@@ -56,38 +55,49 @@ const ResultsList: React.FC<IProps> = ({
     {withFeedback && <SearchFeedback searchTerm={searchTerm} />}
     <div className="results-list">
       {results.map((result) => (
-        <a
-          href={`/entreprise/${result.chemin}`}
-          key={result.siren}
-          className="result-link no-style-link"
-          data-siren={result.siren}
-        >
-          <div className="title">
-            <span>{`${result.nomComplet}`}</span>
-            <UniteLegaleBadge uniteLegale={result} small hiddenByDefault />
-            {!estActif(result) && (
-              <IsActiveTag
-                etatAdministratif={IETATADMINSTRATIF.CESSEE}
-                statutDiffusion={result.statutDiffusion}
-              />
-            )}
-          </div>
-          <div>{result.libelleActivitePrincipale}</div>
-          <DirigeantsOrElusList
-            dirigeantsOrElus={
-              isCollectiviteTerritoriale(result)
-                ? result.colter.elus
-                : result.dirigeants
-            }
-          />
-          <div className="adress">
-            <span>{result.siege.adresse || 'Adresse inconnue'} </span>
-            <b>
-              ・{result.nombreEtablissementsOuverts || 'aucun'} établissement
-              {result.nombreEtablissementsOuverts > 1 ? 's' : ''} en activité
-            </b>
-          </div>
-        </a>
+        <>
+          <a
+            href={`/entreprise/${result.chemin}`}
+            key={result.siren}
+            className="result-link no-style-link"
+            data-siren={result.siren}
+          >
+            <div className="title">
+              <span>{`${result.nomComplet}`}</span>
+              <UniteLegaleBadge uniteLegale={result} small hiddenByDefault />
+              {!estActif(result) && (
+                <IsActiveTag
+                  etatAdministratif={IETATADMINSTRATIF.CESSEE}
+                  statutDiffusion={result.statutDiffusion}
+                />
+              )}
+            </div>
+            <div>{result.libelleActivitePrincipale}</div>
+            <DirigeantsOrElusList
+              dirigeantsOrElus={
+                isCollectiviteTerritoriale(result)
+                  ? result.colter.elus
+                  : result.dirigeants
+              }
+            />
+            <div className="adress">
+              <span>{result.siege.adresse || 'Adresse inconnue'} </span>
+              <b>
+                ・{result.nombreEtablissementsOuverts || 'aucun'} établissement
+                {result.nombreEtablissementsOuverts > 1 ? 's' : ''} en activité
+              </b>
+            </div>
+          </a>
+          <ul>
+            {result.matchingEtablissements.map((etablissement) => (
+              <li>
+                <a href={`/etablissement/${etablissement.siret}`}>
+                  {etablissement.adresse}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
       ))}
     </div>
     <style jsx>{`

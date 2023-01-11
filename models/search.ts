@@ -16,12 +16,17 @@ import {
 } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import logErrorInSentry from '#utils/sentry';
-import { IsLikelyASirenOrSiretException, IUniteLegale } from '.';
+import {
+  IEtablissement,
+  IsLikelyASirenOrSiretException,
+  IUniteLegale,
+} from '.';
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
   nombreEtablissementsOuverts: number;
   chemin: string;
+  matchingEtablissements: IEtablissement[];
   dirigeants: IDirigeant[];
 }
 
