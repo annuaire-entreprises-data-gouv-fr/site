@@ -20,10 +20,9 @@ const MapResults: React.FC<{ results: ISearchResult[] }> = ({ results }) => (
             var results = ${JSON.stringify(results)};
             for (var i = 0; i < results.length; i++) {
                 var result = results[i];
-
                 var popup = new maplibregl.Popup({ offset: 25 }).setHTML(
                 '<div><b>'+result.nomComplet+'</b></div>'+
-                '<div><i>'+result.adresse+'</i></div>'+
+                '<div><i>'+result.siege.adresse+'</i></div>'+
                 '<div><a href="/entreprise/'+result.siren+'">⇢ Accéder à la fiche entreprise</a></div>'
                 );
 
