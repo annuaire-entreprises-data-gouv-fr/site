@@ -1,4 +1,22 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 [ -n "$CI" ] && exit 0
-npx --no -- commitlint --edit ${1}
+
+message="$(cat $1)"
+requiredPattern='^((build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test): .{1,100}|^Merge branch.*)$'
+if ! [[ $message =~ $requiredPattern ]];
+then
+  echo ""
+  echo "🚨 Oh noooo, your commit message is not valid ! 😱😭"
+  echo ""
+  echo "The commit message must be shorter than 100 characters and follow conventional commits rules (https://www.conventionalcommits.org/) :"
+  echo ""
+  echo "<type>(optional scope): <description>"
+  echo ""
+  echo "Authorized types : build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test"
+  echo ""
+  echo "Unfortunately, your commit message was 😔 :"
+  echo $message
+  echo ""
+  exit 1
+fi
