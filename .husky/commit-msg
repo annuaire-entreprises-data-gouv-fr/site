@@ -3,7 +3,7 @@
 [ -n "$CI" ] && exit 0
 
 message="$(cat $1)"
-requiredPattern='^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test): .{1,100}$'
+requiredPattern='^((build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test): .{1,100}|^Merge branch.*)$'
 if ! [[ $message =~ $requiredPattern ]];
 then
   echo ""
