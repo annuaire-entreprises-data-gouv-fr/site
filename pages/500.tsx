@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { ServerErrorExplanations } from '#components/error-explanations';
+import { Layout } from '#components/layout';
 import MatomoEvent from '#components/matomo-event';
-import Page from '../layouts';
+import Meta from '#components/meta';
+import { NextPageWithLayout } from './_app';
 
-const ServerError: React.FC = () => {
+const ServerError: NextPageWithLayout = () => {
   return (
-    <Page small={true} title="Cette page est introuvable" noIndex={true}>
+    <>
+      <Meta title="Cette page est introuvable" noIndex={true} />
       <MatomoEvent category="error" action="serverError" name="" />
       <ServerErrorExplanations />
-    </Page>
+    </>
   );
+};
+
+ServerError.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default ServerError;

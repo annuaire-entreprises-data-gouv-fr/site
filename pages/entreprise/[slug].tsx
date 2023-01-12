@@ -1,10 +1,12 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
 import EtablissementListeSection from '#components/etablissement-liste-section';
 import EtablissementSection from '#components/etablissement-section';
+import { Layout } from '#components/layout';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
+import Meta from '#components/meta';
 import { NonDiffusibleSection } from '#components/non-diffusible';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title, { FICHE } from '#components/title-section';
@@ -24,29 +26,27 @@ import {
   postServerSideProps,
   IPropsWithMetadata,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
   redirected: boolean;
 }
 
-const UniteLegalePage: React.FC<IProps> = ({
+const UniteLegalePage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   redirected,
-  metadata,
 }) => (
-  <Page
-    small={true}
-    title={getCompanyPageTitle(uniteLegale)}
-    canonical={
-      uniteLegale.chemin &&
-      `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`
-    }
-    description={`Toutes les informations officielles sur ${uniteLegale.nomComplet} :  Siren, Siret, NIC, APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, conventions collectives...`}
-    noIndex={shouldNotIndex(uniteLegale)}
-    isBrowserOutdated={metadata.isBrowserOutdated}
-  >
+  <>
+    <Meta
+      title={getCompanyPageTitle(uniteLegale)}
+      description={`Toutes les informations officielles sur ${uniteLegale.nomComplet} :  Siren, Siret, NIC, APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, conventions collectives...`}
+      noIndex={shouldNotIndex(uniteLegale)}
+      canonical={
+        uniteLegale.chemin &&
+        `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`
+      }
+    />
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
     <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
     <div className="content-container">
@@ -75,7 +75,7 @@ const UniteLegalePage: React.FC<IProps> = ({
         </>
       )}
     </div>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
@@ -109,5 +109,12 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+UniteLegalePage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
+};
 
 export default UniteLegalePage;

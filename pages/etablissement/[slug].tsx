@@ -1,5 +1,7 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import { estNonDiffusible } from '#models/statut-diffusion';
 import { shouldNotIndex } from '#utils/helpers';
 import EtablissementSection from 'components/etablissement-section';
@@ -9,12 +11,12 @@ import { TitleEtablissementWithDenomination } from 'components/title-etablisseme
 import Title, { FICHE } from 'components/title-section';
 import { getEtablissementWithUniteLegaleFromSlug } from 'models/etablissement';
 import { IEtablissement, IUniteLegale } from 'models/index';
+import { NextPageWithLayout } from 'pages/_app';
 import extractParamsFromContext from 'utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
 } from 'utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   etablissement: IEtablissement;
@@ -22,18 +24,16 @@ interface IProps extends IPropsWithMetadata {
   redirected: boolean;
 }
 
-const EtablissementPage: React.FC<IProps> = ({
+const EtablissementPage: NextPageWithLayout<IProps> = ({
   etablissement,
   uniteLegale,
   redirected,
-  metadata,
 }) => (
-  <Page
-    small={true}
-    title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
-    noIndex={shouldNotIndex(uniteLegale)}
-    isBrowserOutdated={metadata.isBrowserOutdated}
-  >
+  <>
+    <Meta
+      title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
+      noIndex={shouldNotIndex(uniteLegale)}
+    />
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
@@ -57,7 +57,7 @@ const EtablissementPage: React.FC<IProps> = ({
         />
       )}
     </div>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
@@ -78,5 +78,12 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+EtablissementPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
+};
 
 export default EtablissementPage;

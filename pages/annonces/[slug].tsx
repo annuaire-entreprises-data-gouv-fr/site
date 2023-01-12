@@ -1,8 +1,10 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import AnnoncesAssociationSection from '#components/annonces-section/annonces-association';
 import AnnoncesBodaccSection from '#components/annonces-section/bodacc';
 import { ComptesAssociationSection } from '#components/annonces-section/comptes-association';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';
 import {
   IAnnoncesBodacc,
@@ -11,13 +13,13 @@ import {
 } from '#models/annonces';
 import { getAnnoncesFromSlug } from '#models/annonces';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IAssociation, isAssociation, IUniteLegale } from '#models/index';
+import { isAssociation, IUniteLegale } from '#models/index';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   annoncesAssociation: IAnnoncesAssociation | IAPINotRespondingError | null;
@@ -26,7 +28,7 @@ interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
 }
 
-const Annonces: React.FC<IProps> = ({
+const Annonces: NextPageWithLayout<IProps> = ({
   annoncesAssociation,
   bodacc,
   comptesAssociation,
@@ -34,12 +36,11 @@ const Annonces: React.FC<IProps> = ({
   uniteLegale,
 }) => {
   return (
-    <Page
-      small={true}
-      title={`Annonces légales (BODACC) - ${uniteLegale.nomComplet}`}
-      noIndex={true}
-      isBrowserOutdated={metadata.isBrowserOutdated}
-    >
+    <>
+      <Meta
+        title={`Annonces légales (BODACC) - ${uniteLegale.nomComplet}`}
+        noIndex={true}
+      />
       <div className="content-container">
         <Title ficheType={FICHE.ANNONCES} uniteLegale={uniteLegale} />
         <AnnoncesBodaccSection uniteLegale={uniteLegale} bodacc={bodacc} />
@@ -60,7 +61,7 @@ const Annonces: React.FC<IProps> = ({
           </>
         )}
       </div>
-    </Page>
+    </>
   );
 };
 
@@ -79,5 +80,9 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+Annonces.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
+};
 
 export default Annonces;

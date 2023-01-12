@@ -1,10 +1,12 @@
 import { IncomingMessage } from 'http';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { ServerErrorExplanations } from '#components/error-explanations';
+import { Layout } from '#components/layout';
 import logErrorInSentry from '#utils/sentry';
 import Page from '../layouts';
+import { NextPageWithLayout } from './_app';
 
-const ServerError = () => {
+const ServerError: NextPageWithLayout = () => {
   return (
     <Page small={true} title="Cette page ne fonctionne pas" noIndex={true}>
       <ServerErrorExplanations />
@@ -33,6 +35,13 @@ ServerError.getInitialProps = ({
   });
 
   return { statusCode: 500 };
+};
+
+ServerError.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default ServerError;

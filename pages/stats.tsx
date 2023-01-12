@@ -1,8 +1,10 @@
 import { GetStaticProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
 import BasicChart from '#components/chart/basic';
-import Page from '../layouts';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
+import { NextPageWithLayout } from './_app';
 
 const colors = [
   '#0078f3',
@@ -13,17 +15,17 @@ const colors = [
   '#291720',
 ];
 
-const StatsPage: React.FC<IMatomoStats> = ({
+const StatsPage: NextPageWithLayout<IMatomoStats> = ({
   monthlyUserNps,
   visits,
   userResponses,
   mostCopied,
 }) => (
-  <Page
-    small={true}
-    title="Statistiques d’utilisation de l’Annuaire des Entreprises"
-    noIndex={true}
-  >
+  <>
+    <Meta
+      title="Statistiques d’utilisation de l’Annuaire des Entreprises"
+      noIndex={true}
+    />
     <h1>Statistiques d’utilisation</h1>
     <p>
       Découvrez nos statistiques d’utilisation mises à jour quotidiennement.
@@ -119,7 +121,7 @@ const StatsPage: React.FC<IMatomoStats> = ({
         };
       })}
     />
-  </Page>
+  </>
 );
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -130,6 +132,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: { monthlyUserNps, visits, userResponses, mostCopied },
     revalidate: 4 * 3600, // In seconds - 4 hours
   };
+};
+
+StatsPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default StatsPage;

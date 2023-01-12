@@ -1,11 +1,15 @@
 import React from 'react';
+import { ReactElement } from 'react-markdown/lib/react-markdown';
 import TextWrapper from '#components-ui/text-wrapper';
 import { CMA, INPI, INSEE } from '#components/administrations';
-import Page from '../layouts';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
+import { NextPageWithLayout } from './_app';
 
-const ExtraitKbis: React.FC = () => {
+const ExtraitKbis: NextPageWithLayout = () => {
   return (
-    <Page small={true} title="Comment ça marche ?">
+    <>
+      <Meta title="Comment ça marche ?" />
       <TextWrapper>
         <h1>
           Retrouver les données contenues dans un extrait KBIS ou un extrait D1
@@ -162,8 +166,15 @@ const ExtraitKbis: React.FC = () => {
           </p>
         </div>
       </TextWrapper>
-    </Page>
+    </>
   );
+};
+
+ExtraitKbis.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default ExtraitKbis;

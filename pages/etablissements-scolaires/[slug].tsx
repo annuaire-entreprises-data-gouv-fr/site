@@ -1,6 +1,8 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { EtablissementsScolairesSection } from '#components/education-nationale';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
@@ -14,25 +16,20 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
   etablissementsScolaires: IEtablissementsScolaires | IAPINotRespondingError;
 }
 
-const EtablissementScolaire: React.FC<IProps> = ({
+const EtablissementScolaire: NextPageWithLayout<IProps> = ({
   uniteLegale,
-  metadata,
   etablissementsScolaires,
 }) => {
   return (
-    <Page
-      small={true}
-      title={'Établissements scolaires'}
-      noIndex={true}
-      isBrowserOutdated={metadata.isBrowserOutdated}
-    >
+    <>
+      <Meta title={'Établissements scolaires'} noIndex={true} />
       <div className="content-container">
         <Title
           ficheType={FICHE.ETABLISSEMENTS_SCOLAIRES}
@@ -42,7 +39,7 @@ const EtablissementScolaire: React.FC<IProps> = ({
           etablissements={etablissementsScolaires}
         />
       </div>
-    </Page>
+    </>
   );
 };
 
@@ -62,5 +59,12 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+EtablissementScolaire.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
+};
 
 export default EtablissementScolaire;

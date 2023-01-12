@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import { qrCode } from 'components-ui/icon';
 import TextWrapper from 'components-ui/text-wrapper';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
-const Partager: React.FC = () => {
+const Partager: NextPageWithLayout = () => {
   return (
-    <Page
-      small={true}
-      title="Réutiliser ou partager l’Annuaire des Entreprises"
-    >
+    <>
+      <Meta title="Réutiliser ou partager l’Annuaire des Entreprises" />
       <TextWrapper>
         <h1>Réutilisations & partage</h1>
         <p>
@@ -223,8 +223,12 @@ const Partager: React.FC = () => {
           </p>
         </div>
       </TextWrapper>
-    </Page>
+    </>
   );
+};
+
+Partager.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default Partager;

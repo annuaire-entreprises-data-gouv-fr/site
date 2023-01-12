@@ -1,22 +1,21 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { HttpNotFound } from '#clients/exceptions';
 import AdministrationNotResponding from '#components/administration-not-responding';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import {
   administrationsMetaData,
   EAdministration,
 } from '#models/administrations';
-import Page from '../../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
-const AdministrationError: React.FC<{ administration: EAdministration }> = ({
-  administration,
-}) => {
+const AdministrationError: NextPageWithLayout<{
+  administration: EAdministration;
+}> = ({ administration }) => {
   return (
-    <Page
-      small={true}
-      title="Cette administration ne répond pas"
-      noIndex={true}
-    >
+    <>
+      <Meta title="Cette administration ne répond pas" noIndex={true} />
       <div className="content-container">
         <h1>Le téléservice ne répond pas</h1>
         <AdministrationNotResponding
@@ -24,7 +23,7 @@ const AdministrationError: React.FC<{ administration: EAdministration }> = ({
           errorType={500}
         />
       </div>
-    </Page>
+    </>
   );
 };
 
@@ -54,6 +53,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   return { props: { administration: administrationEnum } };
+};
+
+AdministrationError.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default AdministrationError;

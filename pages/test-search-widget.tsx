@@ -1,13 +1,15 @@
-import React from 'react';
-import Page from '../layouts';
+import React, { ReactElement } from 'react';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
+import { NextPageWithLayout } from './_app';
 
-const TestSearchWidgetPage: React.FC<{}> = () => (
-  <Page
-    small={true}
-    title="Rechercher une entreprise"
-    canonical="https://annuaire-entreprises.data.gouv.fr"
-    noIndex={true}
-  >
+const TestSearchWidgetPage: NextPageWithLayout = () => (
+  <>
+    <Meta
+      title="Rechercher une entreprise"
+      canonical="https://annuaire-entreprises.data.gouv.fr"
+      noIndex
+    />
     <h2 id="search">Test d’auto complétion de n° Siren</h2>
     <input
       type="text"
@@ -23,7 +25,14 @@ const TestSearchWidgetPage: React.FC<{}> = () => (
           `,
       }}
     />
-  </Page>
+  </>
 );
+
+TestSearchWidgetPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
+};
 
 export default TestSearchWidgetPage;

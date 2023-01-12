@@ -1,6 +1,8 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import ElusSection from '#components/dirigeants-section/elus-section';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';
 import { IUniteLegale } from '#models/index';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
@@ -9,26 +11,25 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
 }
 
-const ElusPage: React.FC<IProps> = ({ uniteLegale, metadata }) => {
+const ElusPage: NextPageWithLayout<IProps> = ({ uniteLegale, metadata }) => {
   return (
-    <Page
-      small={true}
-      title={`Élus de ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
-      canonical={`https://annuaire-entreprises.data.gouv.fr/elus/${uniteLegale.siren}`}
-      noIndex={true}
-      isBrowserOutdated={metadata.isBrowserOutdated}
-    >
+    <>
+      <Meta
+        title={`Élus de ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
+        canonical={`https://annuaire-entreprises.data.gouv.fr/elus/${uniteLegale.siren}`}
+        noIndex={true}
+      />
       <div className="content-container">
         <Title uniteLegale={uniteLegale} ficheType={FICHE.ELUS} />
         <ElusSection uniteLegale={uniteLegale} />
       </div>
-    </Page>
+    </>
   );
 };
 
@@ -42,5 +43,9 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+ElusPage.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
+};
 
 export default ElusPage;

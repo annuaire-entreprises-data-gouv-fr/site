@@ -1,13 +1,15 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import ApiMonitoring from '#components/api-monitoring';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import { getAllMonitorsWithMetaData, IMonitoring } from '#models/monitoring';
 import { escapeTerm, trimWhitespace } from '#utils/helpers';
 import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 export interface IMonitoringWithName extends IMonitoring {
   short: string;
@@ -24,12 +26,9 @@ interface IProps extends IPropsWithMetadata {
 
 const simplify = (str: string) => escapeTerm(trimWhitespace(str));
 
-const StatusPage: React.FC<IProps> = ({ monitors, metadata }) => (
-  <Page
-    small={true}
-    title="Statut des API partenaires de l'Annuaire des Entreprises"
-    isBrowserOutdated={metadata.isBrowserOutdated}
-  >
+const StatusPage: NextPageWithLayout<IProps> = ({ monitors }) => (
+  <>
+    <Meta title="Statut des API partenaires de l'Annuaire des Entreprises" />
     <div className="content-container">
       <h1>Sources de données & statut des API</h1>
       <p>
@@ -63,7 +62,7 @@ const StatusPage: React.FC<IProps> = ({ monitors, metadata }) => (
         </React.Fragment>
       ))}
     </div>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
@@ -74,5 +73,12 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+StatusPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
+};
 
 export default StatusPage;

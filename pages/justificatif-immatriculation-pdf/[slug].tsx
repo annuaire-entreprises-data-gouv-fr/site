@@ -1,18 +1,20 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import routes from '#clients/routes';
 import Info from '#components-ui/alerts/info';
 import { Loader } from '#components-ui/loader';
 import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';
 import FrontStateMachine from '#components/front-state-machine';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import { formatIntFr } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 const Retry: React.FC<{}> = () => (
   <>
@@ -49,14 +51,13 @@ interface IProps extends IPropsWithMetadata {
   siren: string;
 }
 
-const InpiPDF: React.FC<IProps> = ({ siren, metadata }) => {
+const InpiPDF: NextPageWithLayout<IProps> = ({ siren, metadata }) => {
   return (
-    <Page
-      small={true}
-      noIndex={true}
-      title="Télécharger le justificatif d’immatriculation"
-      isBrowserOutdated={metadata.isBrowserOutdated}
-    >
+    <>
+      <Meta
+        title="Télécharger le justificatif d’immatriculation"
+        noIndex={true}
+      />
       <br />
       <a href={`/justificatif/${siren}`}>
         ← Retour à la page justificatif d’immatriculation
@@ -149,7 +150,7 @@ const InpiPDF: React.FC<IProps> = ({ siren, metadata }) => {
           </li>
         </ol>
       </div>
-    </Page>
+    </>
   );
 };
 
@@ -161,5 +162,9 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+InpiPDF.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
+};
 
 export default InpiPDF;

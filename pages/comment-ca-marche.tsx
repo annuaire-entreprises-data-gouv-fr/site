@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import { INSEE } from '#components/administrations';
-import Page from '../layouts';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
+import { NextPageWithLayout } from './_app';
 
-const About: React.FC = () => {
+const About: NextPageWithLayout = () => {
   return (
-    <Page small={true} title="Comment ça marche ?">
+    <>
+      <Meta title="Comment ça marche ?" />
       <TextWrapper>
         <h1>À propos de L’Annuaire des Entreprises</h1>
         <h2>Qui a développé ce site ?</h2>
@@ -230,8 +233,12 @@ const About: React.FC = () => {
           </p>
         </div>
       </TextWrapper>
-    </Page>
+    </>
   );
+};
+
+About.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default About;

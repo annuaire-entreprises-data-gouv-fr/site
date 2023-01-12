@@ -1,8 +1,10 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
 import { CertificationESSSection } from '#components/labels-and-certificates/ess';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';
 import { checkHasLabelsAndCertificates } from '#components/unite-legale-section/labels-and-certificates';
 import {
@@ -14,23 +16,22 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, ICertifications {}
 
-const RGE: React.FC<IProps> = ({
+const RGE: NextPageWithLayout<IProps> = ({
   rge,
   uniteLegale,
   entrepreneurSpectacles,
   metadata,
 }) => {
   return (
-    <Page
-      small={true}
-      title={`Labels et certificats - ${uniteLegale.nomComplet}`}
-      noIndex={true}
-      isBrowserOutdated={metadata.isBrowserOutdated}
-    >
+    <>
+      <Meta
+        title={`Labels et certificats - ${uniteLegale.nomComplet}`}
+        noIndex={true}
+      />
       <div className="content-container">
         <Title ficheType={FICHE.CERTIFICATS} uniteLegale={uniteLegale} />
         {!checkHasLabelsAndCertificates(uniteLegale) && (
@@ -49,7 +50,7 @@ const RGE: React.FC<IProps> = ({
           />
         )}
       </div>
-    </Page>
+    </>
   );
 };
 
@@ -69,5 +70,9 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+RGE.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
+};
 
 export default RGE;

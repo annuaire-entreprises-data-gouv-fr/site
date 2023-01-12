@@ -1,8 +1,10 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { HttpNotFound } from '#clients/exceptions';
 import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import {
   administrationsMetaData,
   EAdministration,
@@ -12,7 +14,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   administrations: {
@@ -23,17 +25,13 @@ interface IProps extends IPropsWithMetadata {
   articles: IArticle[];
 }
 
-const AdministrationPage: React.FC<IProps> = ({
+const AdministrationPage: NextPageWithLayout<IProps> = ({
   administrations,
   title,
-  metadata,
   articles,
 }) => (
-  <Page
-    small={true}
-    title={title}
-    isBrowserOutdated={metadata.isBrowserOutdated}
-  >
+  <>
+    <Meta title={title} />
     <TextWrapper>
       <h1>D’où viennent les informations de cette section ?</h1>
       {administrations.map(({ slug }) => (
@@ -57,7 +55,7 @@ const AdministrationPage: React.FC<IProps> = ({
         </>
       )}
     </TextWrapper>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
@@ -85,5 +83,12 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+AdministrationPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
+};
 
 export default AdministrationPage;

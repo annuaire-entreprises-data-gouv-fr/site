@@ -1,18 +1,20 @@
 import { GetStaticProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import changelog, { IChangelog } from '#models/historique-modifications';
-import Page from '../layouts';
+import { NextPageWithLayout } from './_app';
 
 interface IProps {
   changelog: IChangelog[];
 }
 
-const Changelog: React.FC<IProps> = ({ changelog }) => (
-  <Page
-    small={true}
-    title="Rechercher une entreprise"
-    canonical="https://annuaire-entreprises.data.gouv.fr"
-  >
+const Changelog: NextPageWithLayout<IProps> = ({ changelog }) => (
+  <>
+    <Meta
+      title="Rechercher une entreprise"
+      canonical="https://annuaire-entreprises.data.gouv.fr"
+    />
     <h1>Nouveautés</h1>
     <p>
       Découvrez les dernières fonctionnalités ajoutées au site internet&nbsp;:
@@ -45,7 +47,7 @@ const Changelog: React.FC<IProps> = ({ changelog }) => (
         flex-shrink: 0;
       }
     `}</style>
-  </Page>
+  </>
 );
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -53,6 +55,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: { changelog },
     revalidate: 24 * 3600, // In seconds - 1 day
   };
+};
+
+Changelog.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default Changelog;

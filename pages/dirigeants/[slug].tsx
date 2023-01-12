@@ -1,10 +1,12 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import BeneficiairesSection from '#components/dirigeants-section/beneficiaires';
 import DirigeantsEntrepriseIndividuelleSection from '#components/dirigeants-section/insee-dirigeant';
 import DirigeantsSection from '#components/dirigeants-section/rncs-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import { DirigeantsNonDiffusibleSection } from '#components/non-diffusible';
 import Title, { FICHE } from '#components/title-section';
 import {
@@ -17,23 +19,21 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, IDirigeants {}
 
-const DirigeantsPage: React.FC<IProps> = ({
+const DirigeantsPage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   immatriculationRNCS,
-  metadata,
 }) => {
   return (
-    <Page
-      small={true}
-      title={`Dirigeants de la structure - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
-      canonical={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`}
-      noIndex={true}
-      isBrowserOutdated={metadata.isBrowserOutdated}
-    >
+    <>
+      <Meta
+        canonical={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`}
+        noIndex={true}
+        title={`Dirigeants de la structure - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
+      />
       <div className="content-container">
         <Title uniteLegale={uniteLegale} ficheType={FICHE.DIRIGEANTS} />
         <>
@@ -67,7 +67,7 @@ const DirigeantsPage: React.FC<IProps> = ({
           )}
         </>
       </div>
-    </Page>
+    </>
   );
 };
 
@@ -79,5 +79,12 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+DirigeantsPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
+};
 
 export default DirigeantsPage;

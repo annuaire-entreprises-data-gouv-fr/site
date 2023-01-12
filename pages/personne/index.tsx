@@ -1,7 +1,9 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';
@@ -13,7 +15,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   results: ISearchResults;
@@ -22,19 +24,17 @@ interface IProps extends IPropsWithMetadata {
   sirenFrom: string;
 }
 
-const SearchDirigeantPage: React.FC<IProps> = ({
+const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
   results,
   metadata,
   searchParams,
   sirenFrom,
 }) => (
-  <Page
-    small={true}
-    title="Rechercher une entreprise"
-    canonical="https://annuaire-entreprises.data.gouv.fr"
-    isBrowserOutdated={metadata.isBrowserOutdated}
-    useAdvancedSearch={false}
-  >
+  <>
+    <Meta
+      title="Rechercher une entreprise"
+      canonical="https://annuaire-entreprises.data.gouv.fr"
+    />
     <div className="content-container">
       <StructuredDataSearchAction />
       {sirenFrom && (
@@ -87,7 +87,7 @@ const SearchDirigeantPage: React.FC<IProps> = ({
       </div>
       <br />
     </div>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
@@ -111,5 +111,20 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+SearchDirigeantPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return (
+    <Layout
+      isBrowserOutdated={isBrowserOutdated}
+      searchBar
+      useAdvancedSearch={false}
+    >
+      {page}
+    </Layout>
+  );
+};
 
 export default SearchDirigeantPage;
