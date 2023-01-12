@@ -1,4 +1,3 @@
-import { IncomingMessage } from 'http';
 import React, { ReactElement } from 'react';
 import { ServerErrorExplanations } from '#components/error-explanations';
 import { Layout } from '#components/layout';
@@ -14,13 +13,7 @@ const ServerError: NextPageWithLayout = () => {
   );
 };
 
-ServerError.getInitialProps = ({
-  res,
-  err,
-}: {
-  res: IncomingMessage;
-  err: any;
-}) => {
+ServerError.getInitialProps = ({ res, err }) => {
   let errAsString = '';
   try {
     console.error('error 500 :', err);
@@ -31,7 +24,7 @@ ServerError.getInitialProps = ({
 
   logErrorInSentry(`Server Error (500) - unknown reason`, {
     details: errAsString,
-    page: res?.url,
+    page: res?.req.url,
   });
 
   return { statusCode: 500 };
