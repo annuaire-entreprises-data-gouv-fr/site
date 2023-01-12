@@ -117,7 +117,7 @@ const clientSearchSireneOuverte = async (
   }`;
   const timeout = fallbackOnStaging
     ? constants.timeout.XL
-    : constants.timeout.M;
+    : constants.timeout.L;
 
   const response = await httpGet(
     url,
