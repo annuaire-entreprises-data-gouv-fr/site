@@ -169,7 +169,7 @@ const ResultsList: React.FC<IProps> = ({
       }
       .results-list ul.matching-etablissement .down {
         border-bottom: none;
-        height: 28px;
+        height: 100%;
       }
 
       .results-list span.adress {
