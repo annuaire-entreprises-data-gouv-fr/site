@@ -105,8 +105,7 @@ const routes = {
   },
   sireneOuverte: {
     etablissement: 'https://api-annuaire-entreprises.data.gouv.fr/siret?q=',
-    rechercheUniteLegale:
-      'https://staging.recherche-entreprises.api.gouv.fr/search',
+    rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
     rechercheUniteLegaleStaging:
       'https://staging.recherche-entreprises.api.gouv.fr/search',
     uniteLegale: 'https://api-annuaire-entreprises.data.gouv.fr/siren?q=',

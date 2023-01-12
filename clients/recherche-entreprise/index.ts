@@ -16,6 +16,7 @@ import {
   formatFirstNames,
   parseIntWithDefaultValue,
   verifySiret,
+  agregateTripleFields,
 } from '#utils/helpers';
 import { libelleFromCodeNAFWithoutNomenclature } from '#utils/labels';
 import { httpGet } from '#utils/network';
@@ -29,6 +30,9 @@ interface ISirenOuverteEtablissement {
   tranche_effectif_salarie: string;
   date_debut_activite: string;
   etat_administratif: string;
+  enseigne_1: string;
+  enseigne_2: string;
+  enseigne_3: string;
   numero_voie: string;
   type_voie: string;
   libelle_voie: string;
@@ -192,8 +196,10 @@ const mapToUniteLegale = (
 
   return {
     ...createDefaultUniteLegale(siren),
-    siege: mapToEtablissement(siege),
-    matchingEtablissements: matching_etablissements.map(mapToEtablissement),
+    siege: mapToEtablissement(siege, siege.siret),
+    matchingEtablissements: matching_etablissements
+      .map((e) => mapToEtablissement(e, siege.siret))
+      .filter((e) => e.siret !== siege.siret),
     etatAdministratif: etatFromEtatAdministratifInsee(
       result.etat_administratif,
       siren
@@ -269,7 +275,8 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
 };
 
 const mapToEtablissement = (
-  etablissement: ISirenOuverteEtablissement
+  etablissement: ISirenOuverteEtablissement,
+  siretSiege: string
 ): IEtablissement => {
   const {
     siret,
@@ -286,7 +293,14 @@ const mapToEtablissement = (
     libelle_commune_etranger,
     code_pays_etranger,
     libelle_pays_etranger,
+    enseigne_1,
+    enseigne_2,
+    enseigne_3,
+    etat_administratif,
   } = etablissement;
+
+  const enseigne =
+    agregateTripleFields(enseigne_1, enseigne_2, enseigne_3) || '';
 
   const adresse = formatAdresse({
     complement: complement_adresse,
@@ -302,12 +316,23 @@ const mapToEtablissement = (
     libellePaysEtranger: libelle_pays_etranger,
   });
 
+  const adressePostale = adresse
+    ? `${enseigne ? `${enseigne}, ` : ''}${adresse}`
+    : '';
+
+  const etatAdministratif = etatFromEtatAdministratifInsee(
+    etat_administratif,
+    siret
+  );
   return {
     ...createDefaultEtablissement(),
     siret: verifySiret(siret),
     adresse,
+    adressePostale,
     latitude,
     longitude,
+    estSiege: siret === siretSiege,
+    etatAdministratif,
   };
 };
 
