@@ -12,7 +12,6 @@ const clientGeoDepartements = async (slug: string): Promise<any> => {
   const response = await httpGet(routes.geo.departement + slug, {
     timeout: constants.timeout.L,
   });
-
   return mapToDomainObject(response.data || []);
 };
 

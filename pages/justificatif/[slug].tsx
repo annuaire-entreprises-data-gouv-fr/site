@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import Immatriculations from '#components/immatriculations';
+import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';
 import getJustificatifs, { IJustificatifs } from '#models/justificatifs';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
@@ -8,23 +9,21 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IJustificatifs, IPropsWithMetadata {}
 
-const JustificatifPage: React.FC<IProps> = ({
+const JustificatifPage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   immatriculationRNM,
   immatriculationRNCS,
   immatriculationJOAFE,
-  metadata,
 }) => (
-  <Page
-    small={true}
-    title={`Justificatif d’immatriculation - ${uniteLegale.nomComplet}`}
-    noIndex={true}
-    isBrowserOutdated={metadata.isBrowserOutdated}
-  >
+  <>
+    <Meta
+      title={`Justificatif d’immatriculation - ${uniteLegale.nomComplet}`}
+      noIndex={true}
+    />
     <div className="content-container">
       <Title uniteLegale={uniteLegale} ficheType={FICHE.JUSTIFICATIFS} />
       <Immatriculations
@@ -34,7 +33,7 @@ const JustificatifPage: React.FC<IProps> = ({
         uniteLegale={uniteLegale}
       />
     </div>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(

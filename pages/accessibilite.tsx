@@ -1,11 +1,13 @@
 import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
+import Meta from '#components/meta';
 import constants from '#models/constants';
-import Page from '../layouts';
+import { NextPageWithLayout } from './_app';
 
-const Accessibility: React.FC = () => {
+const Accessibility: NextPageWithLayout = () => {
   return (
-    <Page small={true} title="Déclaration d’accessibilité" noIndex={true}>
+    <>
+      <Meta title="Déclaration d’accessibilité" noIndex={true} />
       <TextWrapper>
         <h1>Déclaration d’accessibilité</h1>
         <p>
@@ -65,7 +67,7 @@ const Accessibility: React.FC = () => {
           </ul>
         </p>
       </TextWrapper>
-    </Page>
+    </>
   );
 };
 

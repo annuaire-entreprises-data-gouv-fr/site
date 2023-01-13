@@ -1,10 +1,10 @@
-import { IncomingMessage } from 'http';
 import React from 'react';
 import { ServerErrorExplanations } from '#components/error-explanations';
 import logErrorInSentry from '#utils/sentry';
 import Page from '../layouts';
+import { NextPageWithLayout } from './_app';
 
-const ServerError = () => {
+const ServerError: NextPageWithLayout = () => {
   return (
     <Page small={true} title="Cette page ne fonctionne pas" noIndex={true}>
       <ServerErrorExplanations />
@@ -12,13 +12,7 @@ const ServerError = () => {
   );
 };
 
-ServerError.getInitialProps = ({
-  res,
-  err,
-}: {
-  res: IncomingMessage;
-  err: any;
-}) => {
+ServerError.getInitialProps = ({ res, err }) => {
   let errAsString = '';
   try {
     console.error('error 500 :', err);
@@ -29,7 +23,7 @@ ServerError.getInitialProps = ({
 
   logErrorInSentry(`Server Error (500) - unknown reason`, {
     details: errAsString,
-    page: res?.url,
+    page: res?.req.url,
   });
 
   return { statusCode: 500 };

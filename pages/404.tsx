@@ -1,14 +1,16 @@
 import React from 'react';
 import { ErrorNotFoundExplanations } from '#components/error-explanations';
 import MatomoEvent from '#components/matomo-event';
-import Page from '../layouts';
+import Meta from '#components/meta';
+import { NextPageWithLayout } from './_app';
 
-const NotFound: React.FC = () => {
+const NotFound: NextPageWithLayout = () => {
   return (
-    <Page small={true} title="Cette page est introuvable" noIndex={true}>
+    <>
+      <Meta title="Cette page est introuvable" noIndex />
       <MatomoEvent category="error" action="notFound" name="" />
       <ErrorNotFoundExplanations />
-    </Page>
+    </>
   );
 };
 
