@@ -1,5 +1,4 @@
-import React, { ReactElement } from 'react';
-import { Layout } from '#components/layout';
+import React from 'react';
 import Meta from '#components/meta';
 import { qrCode } from 'components-ui/icon';
 import TextWrapper from 'components-ui/text-wrapper';
@@ -225,10 +224,6 @@ const Partager: NextPageWithLayout = () => {
       </TextWrapper>
     </>
   );
-};
-
-Partager.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default Partager;

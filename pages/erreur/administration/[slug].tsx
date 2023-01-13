@@ -1,8 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { HttpNotFound } from '#clients/exceptions';
 import AdministrationNotResponding from '#components/administration-not-responding';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import {
   administrationsMetaData,
@@ -53,13 +52,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   return { props: { administration: administrationEnum } };
-};
-
-AdministrationError.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default AdministrationError;

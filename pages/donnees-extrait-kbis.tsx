@@ -1,8 +1,6 @@
 import React from 'react';
-import { ReactElement } from 'react-markdown/lib/react-markdown';
 import TextWrapper from '#components-ui/text-wrapper';
 import { CMA, INPI, INSEE } from '#components/administrations';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import { NextPageWithLayout } from './_app';
 
@@ -168,13 +166,6 @@ const ExtraitKbis: NextPageWithLayout = () => {
       </TextWrapper>
     </>
   );
-};
-
-ExtraitKbis.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default ExtraitKbis;

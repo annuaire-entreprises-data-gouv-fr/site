@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import ButtonLink from '#components-ui/button';
-import { Layout } from '#components/layout';
 import MatomoEvent from '#components/matomo-event';
 import Meta from '#components/meta';
 import { NextPageWithLayout } from 'pages/_app';
@@ -52,13 +51,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const slug = (context?.params?.slug || '') as string;
 
   return { props: { slug } };
-};
-
-SirenOrSiretNotFoundPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default SirenOrSiretNotFoundPage;

@@ -1,8 +1,7 @@
 import { GetServerSideProps } from 'next';
-import React, { Fragment, ReactElement } from 'react';
+import React, { Fragment } from 'react';
 import { HttpNotFound } from '#clients/exceptions';
 import ApiMonitoring from '#components/api-monitoring';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import {
   administrationsMetaData,
@@ -77,12 +76,5 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
-
-SourcesDeDonneesPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
-};
 
 export default SourcesDeDonneesPage;

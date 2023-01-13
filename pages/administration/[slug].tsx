@@ -1,9 +1,8 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { HttpNotFound } from '#clients/exceptions';
 import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import {
   administrationsMetaData,
@@ -83,12 +82,5 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
-
-AdministrationPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
-};
 
 export default AdministrationPage;

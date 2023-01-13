@@ -1,6 +1,5 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
-import { Layout } from '#components/layout';
+import React from 'react';
 import Meta from '#components/meta';
 import { estNonDiffusible } from '#models/statut-diffusion';
 import { shouldNotIndex } from '#utils/helpers';
@@ -78,12 +77,5 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
-
-EtablissementPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
-};
 
 export default EtablissementPage;

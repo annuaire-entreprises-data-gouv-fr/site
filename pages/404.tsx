@@ -1,6 +1,5 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { ErrorNotFoundExplanations } from '#components/error-explanations';
-import { Layout } from '#components/layout';
 import MatomoEvent from '#components/matomo-event';
 import Meta from '#components/meta';
 import { NextPageWithLayout } from './_app';
@@ -13,10 +12,6 @@ const NotFound: NextPageWithLayout = () => {
       <ErrorNotFoundExplanations />
     </>
   );
-};
-
-NotFound.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default NotFound;

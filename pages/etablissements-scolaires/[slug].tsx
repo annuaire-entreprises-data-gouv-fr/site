@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { EtablissementsScolairesSection } from '#components/education-nationale';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -59,12 +58,5 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
-
-EtablissementScolaire.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
-};
 
 export default EtablissementScolaire;

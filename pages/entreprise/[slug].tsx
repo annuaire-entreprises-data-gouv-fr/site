@@ -1,10 +1,9 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
 import EtablissementListeSection from '#components/etablissement-liste-section';
 import EtablissementSection from '#components/etablissement-section';
-import { Layout } from '#components/layout';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
 import Meta from '#components/meta';
 import { NonDiffusibleSection } from '#components/non-diffusible';
@@ -109,12 +108,5 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
-
-UniteLegalePage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
-};
 
 export default UniteLegalePage;

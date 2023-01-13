@@ -1,6 +1,5 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import constants from '#models/constants';
 import { NextPageWithLayout } from './_app';
@@ -70,13 +69,6 @@ const Accessibility: NextPageWithLayout = () => {
       </TextWrapper>
     </>
   );
-};
-
-Accessibility.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default Accessibility;

@@ -1,7 +1,6 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import { CMA, DILA, INPI, INSEE } from '#components/administrations';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import { NextPageWithLayout } from './_app';
 
@@ -328,9 +327,5 @@ const Privacy: NextPageWithLayout = () => (
     `}</style>
   </div>
 );
-
-Privacy.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
-};
 
 export default Privacy;

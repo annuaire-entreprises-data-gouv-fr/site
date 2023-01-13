@@ -1,12 +1,11 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import routes from '#clients/routes';
 import Info from '#components-ui/alerts/info';
 import { Loader } from '#components-ui/loader';
 import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';
 import FrontStateMachine from '#components/front-state-machine';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import { formatIntFr } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
@@ -162,9 +161,5 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
-
-InpiPDF.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
-};
 
 export default InpiPDF;

@@ -1,11 +1,10 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import BeneficiairesSection from '#components/dirigeants-section/beneficiaires';
 import DirigeantsEntrepriseIndividuelleSection from '#components/dirigeants-section/insee-dirigeant';
 import DirigeantsSection from '#components/dirigeants-section/rncs-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import { DirigeantsNonDiffusibleSection } from '#components/non-diffusible';
 import Title, { FICHE } from '#components/title-section';
@@ -79,12 +78,5 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
-
-DirigeantsPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
-};
 
 export default DirigeantsPage;

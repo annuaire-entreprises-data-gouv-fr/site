@@ -1,5 +1,4 @@
-import React, { ReactElement } from 'react';
-import { Layout } from '#components/layout';
+import React from 'react';
 import Meta from '#components/meta';
 import { NextPageWithLayout } from './_app';
 
@@ -27,12 +26,5 @@ const TestSearchWidgetPage: NextPageWithLayout = () => (
     />
   </>
 );
-
-TestSearchWidgetPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
-};
 
 export default TestSearchWidgetPage;

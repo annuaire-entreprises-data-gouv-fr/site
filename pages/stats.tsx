@@ -1,8 +1,7 @@
 import { GetStaticProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
 import BasicChart from '#components/chart/basic';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import { NextPageWithLayout } from './_app';
 
@@ -132,13 +131,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: { monthlyUserNps, visits, userResponses, mostCopied },
     revalidate: 4 * 3600, // In seconds - 4 hours
   };
-};
-
-StatsPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default StatsPage;

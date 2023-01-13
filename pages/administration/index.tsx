@@ -1,8 +1,7 @@
 import { GetStaticProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import {
   administrationsMetaData,
@@ -32,13 +31,6 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: { allAdministrations: Object.values(administrationsMetaData) },
   };
-};
-
-StatusPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default StatusPage;

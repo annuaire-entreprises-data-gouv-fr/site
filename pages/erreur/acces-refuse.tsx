@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import ButtonLink from '#components-ui/button';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import { NextPageWithLayout } from 'pages/_app';
 
@@ -33,13 +32,6 @@ const Forbidden: NextPageWithLayout = () => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   context.res.statusCode = 403;
   return { props: {} };
-};
-
-Forbidden.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default Forbidden;

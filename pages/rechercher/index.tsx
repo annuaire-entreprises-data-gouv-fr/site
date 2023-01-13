@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import SearchResults from '#components/search-results';
 import StructuredDataSearchAction from '#components/structured-data/search';
@@ -10,6 +10,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
+import { NextPageWithLayout } from 'pages/_app';
 import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
@@ -18,7 +19,7 @@ interface IProps extends IPropsWithMetadata {
   searchFilterParams: IParams;
 }
 
-const SearchResultPage: React.FC<IProps> = ({
+const SearchResultPage: NextPageWithLayout<IProps> = ({
   results,
   searchTerm,
   searchFilterParams,
@@ -62,5 +63,9 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+SearchResultPage.getLayout = function getLayout(page: ReactElement) {
+  return <>{page}</>;
+};
 
 export default SearchResultPage;

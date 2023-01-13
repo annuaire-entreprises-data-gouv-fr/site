@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next';
-import React, { ReactElement } from 'react';
-import { Layout } from '#components/layout';
+import React from 'react';
 import Meta from '#components/meta';
 import changelog, { IChangelog } from '#models/historique-modifications';
 import { NextPageWithLayout } from './_app';
@@ -55,13 +54,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: { changelog },
     revalidate: 24 * 3600, // In seconds - 1 day
   };
-};
-
-Changelog.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default Changelog;

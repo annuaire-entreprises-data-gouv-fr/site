@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import ApiMonitoring from '#components/api-monitoring';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import { getAllMonitorsWithMetaData, IMonitoring } from '#models/monitoring';
 import { escapeTerm, trimWhitespace } from '#utils/helpers';
@@ -73,12 +72,5 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
-
-StatusPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
-};
 
 export default StatusPage;

@@ -1,10 +1,9 @@
 import { GetStaticProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import ReactMarkdown from 'react-markdown';
 import ButtonLink from '#components-ui/button';
 import TextWrapper from '#components-ui/text-wrapper';
-import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import StructuredDataFAQ from '#components/structured-data/faq';
 import constants from '#models/constants';
@@ -52,13 +51,6 @@ export const getStaticProps: GetStaticProps = async () => {
       articles: getAllFaqArticles(),
     },
   };
-};
-
-StatusPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default StatusPage;

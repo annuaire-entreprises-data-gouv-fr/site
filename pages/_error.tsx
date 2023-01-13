@@ -1,6 +1,5 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { ServerErrorExplanations } from '#components/error-explanations';
-import { Layout } from '#components/layout';
 import logErrorInSentry from '#utils/sentry';
 import Page from '../layouts';
 import { NextPageWithLayout } from './_app';
@@ -28,13 +27,6 @@ ServerError.getInitialProps = ({ res, err }) => {
   });
 
   return { statusCode: 500 };
-};
-
-ServerError.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default ServerError;
