@@ -1,0 +1,28 @@
+administrations:
+  - insee
+target:
+  - agent
+title: Qu’est ce que le label « Entrepreneur de spectacles vivants » ?
+body: |
+  “Entrepreneur de spectacles vivants” désigne toute structure (entrepreneur individuel, particulier-employeur, société, association, commune) qui exerce une activité d'exploitation de lieux de spectacles, de production ou de diffusion de spectacles. 
+
+  Tout entrepreneur de spectacles vivants dispose d’un récipicissé qui équivaut à une licence d’activité, délivré pour une durée de 5 ans renouvelable.  
+
+  ## Comment être reconnu comme entrepreneur de spectacles vivants ?
+
+  L'entrepreneur de spectacles doit remplir certaines conditions pour que sa déclaration soit acceptée. Les conditions varient selon que l'entrepreneur est une **personne physique** (entrepreneur individuel, particulier-employeur) ou une **personne morale** (société, association, commune).
+
+  La déclaration **peut être refusée** par le préfet, notamment si l'entrepreneur de spectacles ne respecte pas les conditions requises.
+
+  ## Quelles sont les conditions à remplir pour devenir entrepreneur de spectacles vivants ?
+
+  Pour une **personne physique,** l’entrepreneur de spectacles doit être **majeur** et remplir **l'une des conditions** suivantes  (et une personne morale devra justifier qu'au moins un de ses membres les remplissent) :
+
+  - Être diplômé de l'enseignement supérieur ou être titulaire d'un titre de même niveau inscrit au [répertoire national des certifications professionnelles](https://entreprendre.service-public.fr/vosdroits/R40438) ;
+  - Avoir une expérience professionnelle d'au moins 6 mois dans le spectacle vivant (artiste, technicien, administratif dans le spectacle vivant) ;
+  - Avoir suivi une formation d'au moins 125 heures ou avoir un ensemble de compétences dans le spectacle vivant.
+
+  La personne déclarante doit également avoir suivi une **formation à la sécurité des spectacles**. Enfin, l'entrepreneur de spectacles ne doit pas avoir fait l'objet d'une décision judiciaire interdisant l'exercice d'une activité commerciale.
+cta:
+  label: ⇢ Devenir entrepreneur de spectacles vivants
+  to: https://entreprendre.service-public.fr/vosdroits/F22365
