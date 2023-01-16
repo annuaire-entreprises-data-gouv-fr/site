@@ -8,7 +8,7 @@ import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';
 import { IEtatCivil } from '#models/immatriculation/rncs';
-import search, { ISearchResults } from '#models/search';
+import { searchWithoutProtectedSiren, ISearchResults } from '#models/search';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import {
@@ -94,7 +94,11 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const sirenFrom = (context.query.sirenFrom || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
     const searchFilterParams = new SearchFilterParams(context.query);
-    const results = await search(searchTerm, page, searchFilterParams);
+    const results = await searchWithoutProtectedSiren(
+      searchTerm,
+      page,
+      searchFilterParams
+    );
 
     const searchParams = searchFilterParams.toJSON();
 
@@ -113,11 +117,7 @@ SearchDirigeantPage.getLayout = function getLayout(
   isBrowserOutdated
 ) {
   return (
-    <Layout
-      isBrowserOutdated={isBrowserOutdated}
-      searchBar
-      useAdvancedSearch={false}
-    >
+    <Layout isBrowserOutdated={isBrowserOutdated} searchBar>
       {page}
     </Layout>
   );

@@ -21,6 +21,5 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         {page}
       </DefaultLayout>
     ));
-
   return getLayout(<Component {...pageProps} />, isBrowserOutdated);
 }

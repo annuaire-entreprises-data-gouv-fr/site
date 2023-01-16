@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import SearchResults from '#components/search-results';
 import StructuredDataSearchAction from '#components/structured-data/search';
-import search, { ISearchResults } from '#models/search';
+import { searchWithoutProtectedSiren, ISearchResults } from '#models/search';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import {
@@ -56,8 +56,11 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const pageParam = (context.query.page || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
     const searchFilterParams = new SearchFilterParams(context.query);
-    const results = await search(searchTerm, page, searchFilterParams);
-
+    const results = await searchWithoutProtectedSiren(
+      searchTerm,
+      page,
+      searchFilterParams
+    );
     return {
       props: {
         results,
