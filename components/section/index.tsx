@@ -35,7 +35,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
 
   return (
     <>
-      <div className="section-container" id={id}>
+      <div className="section-container protected-data" id={id}>
         <h2>{title}</h2>
         {isOld && lastModified && (
           <Warning>
@@ -88,6 +88,28 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           padding: 1rem;
           width: ${width}%;
         }
+
+        .section-container.protected-data {
+          border-color: #9900a6;
+          position: relative;
+        }
+        .section-container.protected-data:before {
+          content: 'Données sensibles';
+          background: #9900a6;
+          color: #fff;
+          top: -25px;
+          height: 25px;
+          width: 150px;
+          left: calc(50% - 75px);
+          text-align: center;
+          font-size: 0.9rem;
+          font-weight: bold;
+          position: absolute;
+          border-top-left-radius: 6px;
+          border-top-right-radius: 6px;
+          padding: 0 5px;
+        }
+
         .section-container > h2 {
           margin-top: 0;
           margin-bottom: 25px;
