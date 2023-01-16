@@ -1,4 +1,5 @@
 import React from 'react';
+import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { MC } from '#components/administrations';
@@ -18,6 +19,16 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
     | IAPINotRespondingError;
 }> = ({ entrepreneurSpectacles }) => {
   const sectionTitle = "RGE - Reconnu Garant de l'Environnement";
+  const FAQ = () => (
+    <FAQLink tooltipLabel="d’entrepreneur de spectacles vivants">
+      Un entrepreneur de spectacles vivants désigne toute personne qui exerce
+      une activité d’exploitation de lieux de spectacles, de production ou de
+      diffusion de spectacles.
+      <br />
+      <br />
+      <a href="/faq/entrepreneur-spectacles-vivants">→ En savoir plus</a>
+    </FAQLink>
+  );
 
   if (isAPINotResponding(entrepreneurSpectacles)) {
     const isNotFound = entrepreneurSpectacles.errorType === 404;
@@ -26,8 +37,8 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
       return (
         <Section title={sectionTitle} sources={[EAdministration.MC]}>
           <p>
-            Nous n’avons pas retrouvé de récipissé de déclaration d’entrepreneur
-            de spectacles vivants déposé auprès du <MC /> pour cette structure.
+            Nous n’avons pas retrouvé de récipissé de déclaration <FAQ /> déposé
+            auprès du <MC /> pour cette structure.
           </p>
           <p>
             Pour effectuer une déclaration, rendez-vous sur{' '}
@@ -60,7 +71,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
       lastModified={entrepreneurSpectacles.lastModified}
     >
       Cette structure possède {plural ? 'plusieurs' : 'un'} récépissé{plural} de
-      déclaration d’activité d’entrepreneur de spectacles déposé{plural} sur{' '}
+      déclaration d’activité <FAQ /> déposé{plural} sur{' '}
       <a
         target="_blank"
         rel="noreferrer noopener"
