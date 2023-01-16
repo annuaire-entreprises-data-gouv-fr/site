@@ -1,6 +1,8 @@
 import { GetServerSideProps } from 'next';
 import React, { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
+import { Layout } from '#components/layouts/layoutSearch';
+import Meta from '#components/meta';
 import SearchResults from '#components/search-results';
 import StructuredDataSearchAction from '#components/structured-data/search';
 import { searchWithoutProtectedSiren, ISearchResults } from '#models/search';
@@ -11,7 +13,6 @@ import {
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
-import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   searchTerm: string;
@@ -25,17 +26,12 @@ const MapSearchResultPage: NextPageWithLayout<IProps> = ({
   searchFilterParams,
   metadata,
 }) => (
-  <Page
-    small={true}
-    currentSearchTerm={searchTerm}
-    searchFilterParams={searchFilterParams}
-    map={true}
-    noIndex={true}
-    title="Rechercher une entreprise"
-    canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/carte"
-    isBrowserOutdated={metadata.isBrowserOutdated}
-    useAdvancedSearch={true}
-  >
+  <>
+    <Meta
+      title="Rechercher une entreprise"
+      canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/carte"
+      noIndex={true}
+    />
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
     <div className="content-container">
@@ -46,7 +42,7 @@ const MapSearchResultPage: NextPageWithLayout<IProps> = ({
         map={true}
       />
     </div>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
@@ -73,6 +69,17 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
 
 MapSearchResultPage.getLayout = function getLayout(page: ReactElement) {
   return <>{page}</>;
+};
+
+MapSearchResultPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return (
+    <Layout isBrowserOutdated={isBrowserOutdated} map={true}>
+      {page}
+    </Layout>
+  );
 };
 
 export default MapSearchResultPage;
