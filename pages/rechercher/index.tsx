@@ -1,6 +1,8 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
+import { Layout } from '#components/layout';
+import Meta from '#components/meta';
 import SearchResults from '#components/search-results';
 import { AdvancedSearchTutorial } from '#components/search-results/advanced-search-tutorial';
 import StructuredDataSearchAction from '#components/structured-data/search';
@@ -15,7 +17,6 @@ import {
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
-import Page from '../../layouts';
 
 interface IProps extends IPropsWithMetadata {
   searchTerm: string;
@@ -25,7 +26,6 @@ interface IProps extends IPropsWithMetadata {
 
 const SearchResultPage: NextPageWithLayout<IProps> = ({
   results,
-  searchTerm,
   searchFilterParams,
   metadata,
 }) => (
@@ -68,13 +68,23 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
         results,
         searchTerm,
         searchFilterParams: searchFilterParams.toJSON(),
+        metadata: {
+          useReact: true,
+        },
       },
     };
   }
 );
 
-SearchResultPage.getLayout = function getLayout(page: ReactElement) {
-  return <>{page}</>;
+SearchResultPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return (
+    <Layout useAdvancedSearch={true} isBrowserOutdated={isBrowserOutdated}>
+      {page}
+    </Layout>
+  );
 };
 
 export default SearchResultPage;

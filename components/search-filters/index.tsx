@@ -144,7 +144,6 @@ const SearchFilters: React.FC<{
           />
         </div>
       </Filter>
-
       <style jsx>{`
         .field-in-line {
           display: flex;

@@ -16,7 +16,6 @@ interface IProps {
 const HeaderWithSearch: React.FC<IProps> = ({
   currentSearchTerm = '',
   map = false,
-  searchParams = {},
   useAdvancedSearch = false,
 }) => (
   <header role="banner" className="fr-header">
@@ -71,14 +70,7 @@ const HeaderWithSearch: React.FC<IProps> = ({
             </div>
           </div>
         </div>
-        {useAdvancedSearch && (
-          <AdvancedSearch
-            searchParams={searchParams}
-            currentSearchTerm={currentSearchTerm}
-            isMap={map}
-          />
-        )}
-
+        {useAdvancedSearch && <AdvancedSearch isMap={map} />}
         <style jsx>{`
           div.annuaire-logo {
             order: 2;

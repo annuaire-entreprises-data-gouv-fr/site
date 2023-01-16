@@ -1,4 +1,5 @@
-import { PropsWithChildren } from 'react';
+import { useRouter } from 'next/router';
+import { PropsWithChildren, ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
 import {
   buildSearchQuery,
@@ -8,22 +9,24 @@ import {
 import { randomId } from '#utils/helpers';
 import ActiveFilterLabel from './active-filter-label';
 
-const Filter: React.FC<
-  PropsWithChildren<{
-    label: string;
-    activeFilter: ISearchFilter;
-    searchParams: IParams;
-    searchTerm: string;
-    addSaveClearButton: boolean;
-  }>
-> = ({
+type FilterProps = {
+  children: ReactElement[];
+  label: string;
+  activeFilter: ISearchFilter;
+  searchParams: IParams;
+  searchTerm: string;
+  addSaveClearButton: boolean;
+};
+
+const Filter = ({
   children,
   label,
   activeFilter,
   searchParams,
   searchTerm,
   addSaveClearButton = false,
-}) => {
+}: FilterProps) => {
+  const router = useRouter();
   const uuid = `toggle-${randomId()}`;
 
   const clearFilterLink = buildSearchQuery(
@@ -32,6 +35,13 @@ const Filter: React.FC<
     activeFilter.excludeParams
   );
 
+  const handleClick = () => {
+    // @TODO use next router to push advanced search in URL
+    // console.log(clearFilterLink);
+    // router.push({
+    //   query:
+    // })
+  };
   return (
     <>
       <div className="search-filter-label-container">
@@ -62,9 +72,7 @@ const Filter: React.FC<
                 <a className="fr-link" href={clearFilterLink}>
                   Effacer
                 </a>
-                <ButtonLink type="submit" alt small>
-                  Appliquer
-                </ButtonLink>
+                <button onClick={handleClick}>Appliquer</button>
               </div>
             </>
           )}
