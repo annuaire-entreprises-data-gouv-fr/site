@@ -11,7 +11,7 @@ import { NextPageWithLayout } from 'pages/_app';
 
 const FAQArticle: NextPageWithLayout<{ article: IArticle }> = ({ article }) => (
   <>
-    <Meta title="Cette administration ne répond pas" noIndex={false} />
+    <Meta title={article.title} noIndex={false} />
     <TextWrapper>
       <Breadcrumb
         links={[
