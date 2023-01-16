@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { PropsWithChildren, ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
 import {
@@ -26,22 +25,12 @@ const Filter = ({
   searchTerm,
   addSaveClearButton = false,
 }: FilterProps) => {
-  const router = useRouter();
   const uuid = `toggle-${randomId()}`;
-
   const clearFilterLink = buildSearchQuery(
     searchTerm,
     searchParams,
     activeFilter.excludeParams
   );
-
-  const handleClick = () => {
-    // @TODO use next router to push advanced search in URL
-    // console.log(clearFilterLink);
-    // router.push({
-    //   query:
-    // })
-  };
   return (
     <>
       <div className="search-filter-label-container">
@@ -72,7 +61,9 @@ const Filter = ({
                 <a className="fr-link" href={clearFilterLink}>
                   Effacer
                 </a>
-                <button onClick={handleClick}>Appliquer</button>
+                <ButtonLink type="submit" alt small>
+                  Appliquer
+                </ButtonLink>
               </div>
             </>
           )}
