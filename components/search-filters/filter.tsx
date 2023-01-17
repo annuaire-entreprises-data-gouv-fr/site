@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
 import {
   buildSearchQuery,
@@ -111,7 +111,6 @@ const Filter = ({
             top: 0;
             left: 0;
             display: none;
-            z-index: 9999;
           }
 
           label.close-container {
@@ -121,7 +120,6 @@ const Filter = ({
             right: 20px;
             content: 'Fermer ✕';
             cursor: pointer;
-            z-index: 10001;
           }
 
           .container {
@@ -135,7 +133,6 @@ const Filter = ({
             background-color: #fff;
             border-radius: 3px;
             width: 450px;
-            z-index: 10000;
           }
           .container:before {
             content: ' ';
@@ -151,6 +148,7 @@ const Filter = ({
           .container > .filter-container {
             max-height: 350px;
             overflow-y: auto;
+            z-index: 100px;
           }
 
           @media only screen and (min-width: 1px) and (max-width: 991px) {

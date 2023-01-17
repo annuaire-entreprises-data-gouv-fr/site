@@ -1,4 +1,6 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import AsyncSelect from 'react-select/async';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import Select from '#components-ui/select';
 import SelectCodeNaf from '#components-ui/select/select-code-naf';
@@ -6,12 +8,40 @@ import SelectCodeSectionNaf from '#components-ui/select/select-section-naf';
 import { extractFilters, IParams } from '#models/search-filter-params';
 import Filter from './filter';
 
+export interface ColourOption {
+  readonly value: string;
+  readonly label: string;
+  readonly color: string;
+  readonly isFixed?: boolean;
+  readonly isDisabled?: boolean;
+}
+
 const SearchFilters: React.FC<{
   searchParams?: IParams;
   searchTerm?: string;
 }> = ({ searchParams = {}, searchTerm = '' }) => {
-  const { etat, type, label, cp_dep, sap, naf, fn, n, dmin, dmax } =
-    searchParams || {};
+  const {
+    etat,
+    type,
+    label,
+    cp_dep,
+    cp_dep_label,
+    sap,
+    naf,
+    fn,
+    n,
+    dmin,
+    dmax,
+  } = searchParams || {};
+
+  const [labelDep, setLabelDep] = useState(cp_dep_label);
+
+  const loadOptions = async (
+    inputText: string
+  ): Promise<[{ label: string; value: string }]> =>
+    axios.get(`/api/geo/${inputText || '*'}`).then((response) => {
+      return response.data;
+    });
 
   const { localisationFilter, dirigeantFilter, administrativeFilter } =
     extractFilters(searchParams || {});
@@ -26,17 +56,48 @@ const SearchFilters: React.FC<{
         addSaveClearButton
       >
         <label>Code postal ou numéro de département :</label>
-        <input
-          className="fr-input"
-          id="search-localisation-input"
-          autoComplete="off"
-          placeholder="ex: 35000"
+        <AsyncSelect
+          cacheOptions
+          defaultOptions
           name="cp_dep"
-          defaultValue={cp_dep}
+          noOptionsMessage={() =>
+            'Saisissez une ville ou un département pour rechercher son code.'
+          }
+          menuPosition="fixed"
+          placeholder="ex: 35000"
+          defaultValue={{ value: cp_dep, label: cp_dep_label }}
+          onChange={(data) => {
+            if (data?.label) {
+              setLabelDep(data.label);
+            }
+          }}
+          loadOptions={loadOptions}
+          styles={{
+            menuPortal: (base) => ({ ...base, zIndex: 10 }),
+            dropdownIndicator: (base) => ({
+              ...base,
+              color: 'black',
+              '&:hover': {
+                color: 'black',
+              },
+            }),
+            control: (baseStyles) => ({
+              ...baseStyles,
+              backgroundColor: '#eeeeee',
+              border: 'none',
+              borderRadius: '0.25rem 0.25rem 0 0',
+              borderBottom: '2px solid black',
+              '&:hover': {
+                borderBottom: '2px solid black',
+              },
+            }),
+          }}
         />
-        <div id="search-localisation-responses">
-          <i>Saisissez une ville ou un département pour rechercher son code.</i>
-        </div>
+        <input
+          style={{ display: 'none' }}
+          name="cp_dep_label"
+          value={labelDep}
+        />
       </Filter>
       <Filter
         label="Dirigeant"
