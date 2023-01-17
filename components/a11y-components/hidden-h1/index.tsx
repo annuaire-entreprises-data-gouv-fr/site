@@ -11,7 +11,7 @@ const HiddenH1: React.FC<{ title: string }> = ({ title }) => (
         position: absolute;
         white-space: nowrap;
         width: 1px;
-        z-index: -1000;
+        z-index: -1;
         user-select: none;
       }
     `}</style>

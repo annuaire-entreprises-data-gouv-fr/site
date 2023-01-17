@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { Question } from '#components-ui/question';
 import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
 import { NPSBanner } from '#components/banner/nps';
@@ -24,20 +24,23 @@ export const Layout = ({
   children,
   isBrowserOutdated,
   map,
-  searchFilterParams,
 }: PropsWithChildren<IProps>) => {
   const router = useRouter();
+  const { terme, ...rest } = router.query;
+
   return (
     <div id="page-layout">
       {isBrowserOutdated && <BrowserIsOutdatedBanner />}
+
       <NPSBanner />
       <WeNeedYouModal />
       <HeaderWithSearch
-        currentSearchTerm={(router.query.terme || '') as string}
+        currentSearchTerm={(terme || '') as string}
         map={map}
-        searchParams={searchFilterParams}
+        searchParams={rest}
         useAdvancedSearch={true}
       />
+
       <main className="fr-container">{children}</main>
       <SocialNetworks />
       <Question />
