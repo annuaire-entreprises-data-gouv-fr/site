@@ -1,8 +1,8 @@
 import React from 'react';
 import ButtonLink from '#components-ui/button';
+import { Layout } from '#components/layout';
 import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
-import { Layout } from '#components/layout';
 
 const FeedBack: React.FC = () => {
   const uuid = randomId();
