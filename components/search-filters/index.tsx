@@ -39,9 +39,7 @@ const SearchFilters: React.FC<{
   const loadOptions = async (
     inputText: string
   ): Promise<[{ label: string; value: string }]> =>
-    axios.get(`/api/geo/${inputText || '*'}`).then((response) => {
-      return response.data;
-    });
+    axios.get(`/api/geo/${inputText || '*'}`).then((response) => response.data);
 
   const { localisationFilter, dirigeantFilter, administrativeFilter } =
     extractFilters(searchParams || {});
@@ -65,7 +63,9 @@ const SearchFilters: React.FC<{
           }
           menuPosition="fixed"
           placeholder="ex: 35000"
-          defaultValue={{ value: cp_dep, label: cp_dep_label }}
+          id="long-value-select"
+          instanceId="long-value-select"
+          defaultValue={{ value: cp_dep || '', label: cp_dep_label || '' }}
           onChange={(data) => {
             if (data?.label) {
               setLabelDep(data.label);
@@ -96,6 +96,7 @@ const SearchFilters: React.FC<{
         <input
           style={{ display: 'none' }}
           name="cp_dep_label"
+          onChange={() => undefined}
           value={labelDep}
         />
       </Filter>

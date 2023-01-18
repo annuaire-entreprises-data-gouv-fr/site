@@ -5,7 +5,6 @@ import {
   IParams,
   ISearchFilter,
 } from '#models/search-filter-params';
-import { randomId } from '#utils/helpers';
 import ActiveFilterLabel from './active-filter-label';
 
 type FilterProps = {
@@ -25,7 +24,6 @@ const Filter = ({
   searchTerm,
   addSaveClearButton = false,
 }: FilterProps) => {
-  const uuid = `toggle-${randomId()}`;
   const clearFilterLink = buildSearchQuery(
     searchTerm,
     searchParams,
@@ -34,9 +32,9 @@ const Filter = ({
   return (
     <>
       <div className="search-filter-label-container">
-        <input type="checkbox" id={uuid} />
-        <label htmlFor={uuid} className="overlay" />
-        <label htmlFor={uuid}>
+        <input type="checkbox" />
+        <label className="overlay" />
+        <label>
           {activeFilter.label ? (
             <ActiveFilterLabel
               icon={activeFilter.icon}
@@ -49,9 +47,7 @@ const Filter = ({
             </span>
           )}
         </label>
-        <label htmlFor={uuid} className="close-container">
-          Fermer ✕
-        </label>
+        <label className="close-container">Fermer ✕</label>
         <div className="container">
           <div className="filter-container">{children}</div>
           {addSaveClearButton && (
