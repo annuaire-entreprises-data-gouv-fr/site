@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
 import { Layout } from '#components/layout';
 import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
+import { NextPageWithLayout } from 'pages/_app';
 
-const FeedBack: React.FC = () => {
+const FeedBackPage: NextPageWithLayout = () => {
   const uuid = randomId();
   return (
     <div id="page-layout">
@@ -370,7 +371,10 @@ const FeedBack: React.FC = () => {
   );
 };
 
-feedback.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
+FeedBackPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
   return (
     <Layout isBrowserOutdated={isBrowserOutdated} searchBar={false}>
       {page}
@@ -378,4 +382,4 @@ feedback.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
   );
 };
 
-export default FeedBack;
+export default FeedBackPage;
