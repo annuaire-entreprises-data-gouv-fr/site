@@ -8,14 +8,6 @@ import SelectCodeSectionNaf from '#components-ui/select/select-section-naf';
 import { extractFilters, IParams } from '#models/search-filter-params';
 import Filter from './filter';
 
-export interface ColourOption {
-  readonly value: string;
-  readonly label: string;
-  readonly color: string;
-  readonly isFixed?: boolean;
-  readonly isDisabled?: boolean;
-}
-
 const SearchFilters: React.FC<{
   searchParams?: IParams;
   searchTerm?: string;

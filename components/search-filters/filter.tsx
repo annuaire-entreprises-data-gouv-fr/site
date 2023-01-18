@@ -29,6 +29,11 @@ const Filter = ({
     searchParams,
     activeFilter.excludeParams
   );
+
+  const handleHeaderClick = (event) => {
+    event.stopPropagation();
+  };
+
   return (
     <>
       <div className="search-filter-label-container">
@@ -106,7 +111,6 @@ const Filter = ({
             position: fixed;
             top: 0;
             left: 0;
-            display: none;
           }
 
           label.close-container {
