@@ -1,12 +1,11 @@
 import React from 'react';
 import ButtonLink from '#components-ui/button';
-import { Header } from '#components/header';
+import { Layout } from '#components/layout';
 import constants from '#models/constants';
 
 const Thanks: React.FC<{}> = () => {
   return (
     <div id="layout">
-      <Header />
       <main>
         <div className="layout-center">
           <h1>Merci beaucoup pour votre retour 🙂 !</h1>
@@ -25,6 +24,14 @@ const Thanks: React.FC<{}> = () => {
         </div>
       </main>
     </div>
+  );
+};
+
+Thanks.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
+  return (
+    <Layout isBrowserOutdated={isBrowserOutdated} searchBar={false}>
+      {page}
+    </Layout>
   );
 };
 

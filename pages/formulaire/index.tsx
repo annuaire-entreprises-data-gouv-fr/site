@@ -1,14 +1,13 @@
 import React from 'react';
 import ButtonLink from '#components-ui/button';
-import { Header } from '#components/header';
 import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
+import { Layout } from '#components/layout';
 
 const FeedBack: React.FC = () => {
   const uuid = randomId();
   return (
     <div id="page-layout">
-      <Header />
       <main className="fr-container">
         <div className="layout-center">
           <h1>Quel est votre avis sur l’Annuaire des Entreprises ?</h1>
@@ -368,6 +367,14 @@ const FeedBack: React.FC = () => {
         </style>
       </main>
     </div>
+  );
+};
+
+feedback.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
+  return (
+    <Layout isBrowserOutdated={isBrowserOutdated} searchBar={false}>
+      {page}
+    </Layout>
   );
 };
 
