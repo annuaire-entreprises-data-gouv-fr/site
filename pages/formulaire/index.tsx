@@ -8,7 +8,6 @@ const FeedBack: React.FC = () => {
   const uuid = randomId();
   return (
     <div id="page-layout">
-      <Header />
       <main className="fr-container">
         <div className="layout-center">
           <h1>Quel est votre avis sur l’Annuaire des Entreprises ?</h1>
