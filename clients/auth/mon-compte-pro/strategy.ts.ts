@@ -1,33 +1,32 @@
-import { Issuer, generators } from 'openid-client';
+import logErrorInSentry from '#utils/sentry';
+import { Issuer, generators, BaseClient } from 'openid-client';
 
-const _init = false;
+let _client = undefined as BaseClient | undefined;
 
+// store the code_verifier in your framework's session mechanism, if it is a cookie based solution
+// it should be httpOnly (not readable by javascript) and encrypted.
 const code_verifier = generators.codeVerifier();
 
 export const getClient = async () => {
-  if (_init) {
-    return;
+  if (_client) {
+    return _client;
   } else {
     const monCompteProIssuer = await Issuer.discover(
       'https://app-test.moncomptepro.beta.gouv.fr/'
     );
 
-    const client = new monCompteProIssuer.Client({
+    _client = new monCompteProIssuer.Client({
       client_id: 'prout',
       client_secret: 'test',
       redirect_uris: ['https://localhost:3000/api/auth/callback'],
       id_token_signed_response_alg: 'HS256',
       post_logout_redirect_uris: ['https://localhost:3000/api/auth/logout'],
     });
-
-    return client;
+    return _client;
   }
 };
 
-export const authorize = async () => {
-  // store the code_verifier in your framework's session mechanism, if it is a cookie based solution
-  // it should be httpOnly (not readable by javascript) and encrypted.
-
+export const monCompteProAuthorizeUrl = async () => {
   const code_challenge = generators.codeChallenge(code_verifier);
 
   const client = await getClient();

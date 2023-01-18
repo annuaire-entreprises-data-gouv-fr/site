@@ -67,10 +67,7 @@ export function postServerSideProps(
     const userAgent = context?.req?.headers['user-agent'] || '';
 
     // sessions
-    const { navigation, passport } = (await getSession(
-      context.req,
-      context.res
-    )) as any;
+    // const { navigation } = (await getSession(context.req, context.res)) as any;
 
     return {
       ...redirectAndOther,
@@ -80,9 +77,9 @@ export function postServerSideProps(
           ...props.metadata,
           isBrowserOutdated: isBrowserOutdated(userAgent),
           isBot: isUserAgentABot(userAgent),
-          session: isLoggedIn({ navigation, passport })
-            ? { navigation, passport }
-            : null,
+          // session: isLoggedIn({ navigation, passport })
+          //   ? { navigation, passport }
+          //   : null,
         },
       },
     };

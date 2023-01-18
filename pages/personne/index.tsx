@@ -26,7 +26,6 @@ interface IProps extends IPropsWithMetadata {
 
 const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
   results,
-  metadata,
   searchParams,
   sirenFrom,
 }) => (

@@ -20,7 +20,6 @@ interface IProps extends IPropsWithMetadata {
 
 const EtablissementMapPage: NextPageWithLayout<IProps> = ({
   etablissement,
-  metadata,
 }) => (
   <>
     <Meta

@@ -13,7 +13,7 @@ import {
   isCollectiviteTerritoriale,
   IUniteLegale,
 } from '#models/index';
-import { estDiffusible, estNonDiffusible } from '#models/statut-diffusion';
+import { estNonDiffusible } from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
 
 export enum FICHE {
@@ -27,6 +27,7 @@ export enum FICHE {
   ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
   INFORMATION = 'informations générales',
   JUSTIFICATIFS = 'justificatifs',
+  OCTROI = 'octroi',
 }
 
 interface IProps {
@@ -104,7 +105,7 @@ const Tabs: React.FC<{
           .map(({ pathPrefix, ficheType, label, noFollow }) => (
             <a
               className={`${
-                currentFicheType === ficheType && 'active'
+                currentFicheType === ficheType ? 'active' : ''
               } no-style-link`}
               href={`${pathPrefix}${uniteLegale.siren}`}
               rel={noFollow ? 'nofollow' : ''}
@@ -112,6 +113,14 @@ const Tabs: React.FC<{
               {label}
             </a>
           ))}
+        <a
+          className={`${
+            currentFicheType === FICHE.OCTROI ? 'active' : ''
+          } no-style-link`}
+          href={`/octroi/${uniteLegale.siren}`}
+        >
+          Marchés publics <span className="beta">beta</span>
+        </a>
       </div>
       <style jsx>{`
         .title-tabs {
@@ -145,6 +154,15 @@ const Tabs: React.FC<{
           box-shadow: none;
           background-color: #fff;
           border-bottom: 0;
+        }
+        .title-tabs > a > span.beta {
+          border-radius: 45px;
+          margin: 0 5px;
+          padding: 0 8px;
+          background-color: #640091;
+          color: #fbeff9;
+          font-variant: small-caps;
+          font-size: 0.8rem;
         }
 
         @media only screen and (min-width: 1px) and (max-width: 650px) {
