@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import React, { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import { Layout } from '#components/layout';
+import { Layout } from '#components/layouts';
 import Meta from '#components/meta';
 import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';

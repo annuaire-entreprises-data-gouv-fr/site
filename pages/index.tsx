@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import Logo from '#components-ui/logo';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import HomePageAdvancedSearch from '#components/advanced-search/home-page';
-import { Layout } from '#components/layout';
+import { Layout } from '#components/layouts';
 import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
 import StructuredDataSearchAction from '#components/structured-data/search';

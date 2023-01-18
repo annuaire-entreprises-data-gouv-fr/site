@@ -1,6 +1,8 @@
 import { GetServerSidePropsContext } from 'next';
 import { UAParser } from 'ua-parser-js';
 import { createAPM } from '../sentry/apm';
+import { getSession } from '../session';
+import { ISession, isLoggedIn } from '../session/accessSession';
 import isUserAgentABot from '../user-agent';
 import { handleErrorFromServerSideProps } from './error-handler';
 
@@ -11,6 +13,7 @@ export interface IPropsWithMetadata {
     isBot: boolean;
     // enable react hydration in browser
     useReact?: boolean;
+    session: ISession | null;
   };
 }
 
@@ -63,6 +66,12 @@ export function postServerSideProps(
 
     const userAgent = context?.req?.headers['user-agent'] || '';
 
+    // sessions
+    const { navigation, passport } = (await getSession(
+      context.req,
+      context.res
+    )) as any;
+
     return {
       ...redirectAndOther,
       props: {
@@ -71,6 +80,9 @@ export function postServerSideProps(
           ...props.metadata,
           isBrowserOutdated: isBrowserOutdated(userAgent),
           isBot: isUserAgentABot(userAgent),
+          session: isLoggedIn({ navigation, passport })
+            ? { navigation, passport }
+            : null,
         },
       },
     };

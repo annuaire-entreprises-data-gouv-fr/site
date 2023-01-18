@@ -13,6 +13,17 @@ module.exports = {
         destination: '/api/share/qr/:slug',
         permanent: true,
       },
+      // FC
+      {
+        source: '/callback',
+        destination: '/api/auth/callback',
+        permanent: true,
+      },
+      {
+        source: '/logout',
+        destination: '/api/auth/logout/callback',
+        permanent: true,
+      },
     ];
   },
 };

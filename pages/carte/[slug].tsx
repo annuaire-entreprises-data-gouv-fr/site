@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import React, { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
-import { Layout } from '#components/layout';
+import { Layout } from '#components/layouts';
 import MapEtablissement from '#components/map/map-etablissement';
 import Meta from '#components/meta';
 import { MapTitleEtablissement } from '#components/title-etablissement-section';

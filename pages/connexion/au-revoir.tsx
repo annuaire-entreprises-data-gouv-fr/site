@@ -1,0 +1,24 @@
+import React, { ReactElement } from 'react';
+import logoutPicture from '#components-ui/illustrations/logout';
+import ConnexionLayout from '#components/layouts/page-connexion';
+import Meta from '#components/meta';
+import { NextPageWithLayout } from 'pages/_app';
+
+const Logout: NextPageWithLayout = () => (
+  <>
+    <Meta
+      title="Vous êtes bien deconnecté"
+      canonical="https://annuaire-entreprises.data.gouv.fr/connexion/au-revoir"
+      noIndex={false}
+    />
+    <h1>Vous êtes bien déconnecté(e)</h1>
+    <p>Merci de votre visite</p>
+    <a href="/">← Revenir au moteur de recherche</a>
+  </>
+);
+
+Logout.getLayout = function getLayout(page: ReactElement) {
+  return <ConnexionLayout img={logoutPicture}>{page}</ConnexionLayout>;
+};
+
+export default Logout;
