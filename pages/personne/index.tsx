@@ -1,12 +1,12 @@
 import { GetServerSideProps } from 'next';
 import React, { ReactElement } from 'react';
-import ButtonLink from '#components-ui/button';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';
+import ButtonLink from '#components-ui/button';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { IEtatCivil } from '#models/immatriculation/rncs';
 import search, { ISearchResults } from '#models/search';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';

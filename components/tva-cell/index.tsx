@@ -1,8 +1,8 @@
 import React from 'react';
-import FAQLink from '#components-ui/faq-link';
-import { Loader } from '#components-ui/loader';
 import FrontStateMachine from '#components/front-state-machine';
 import { CopyPaste } from '#components/table/simple';
+import FAQLink from '#components-ui/faq-link';
+import { Loader } from '#components-ui/loader';
 
 const TVACell: React.FC<{}> = ({}) => {
   const Unknown = (

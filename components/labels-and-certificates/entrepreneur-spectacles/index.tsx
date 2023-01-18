@@ -1,10 +1,10 @@
 import React from 'react';
-import FAQLink from '#components-ui/faq-link';
-import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { MC } from '#components/administrations';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
+import FAQLink from '#components-ui/faq-link';
+import { Tag } from '#components-ui/tag';
 import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,

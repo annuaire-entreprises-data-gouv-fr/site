@@ -1,8 +1,8 @@
 import React from 'react';
+import { Section } from '#components/section';
 import { information } from '#components-ui/icon';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
-import { Section } from '#components/section';
 import { IMonitoring, IRatio } from '#models/monitoring';
 
 const getUptimeColor = (ratio: IRatio) => {

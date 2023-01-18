@@ -1,9 +1,9 @@
 import React from 'react';
-import { information } from '#components-ui/icon';
-import Logo from '#components-ui/logo';
-import { PrintNever, PrintOnly } from '#components-ui/print-visibility';
 import AdvancedSearch from '#components/advanced-search';
 import SearchBar from '#components/search-bar';
+import { information } from '#components-ui/icon';
+import Logo from '#components-ui/logo';
+import { PrintNever } from '#components-ui/print-visibility';
 import { IParams } from '#models/search-filter-params';
 
 interface IProps {

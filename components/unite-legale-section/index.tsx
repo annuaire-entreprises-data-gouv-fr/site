@@ -1,9 +1,9 @@
 import React from 'react';
-import FAQLink from '#components-ui/faq-link';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
+import FAQLink from '#components-ui/faq-link';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { EAdministration } from '#models/administrations';
 import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';

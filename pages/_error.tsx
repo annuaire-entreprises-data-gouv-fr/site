@@ -1,8 +1,8 @@
 import React from 'react';
 import { ServerErrorExplanations } from '#components/error-explanations';
 import logErrorInSentry from '#utils/sentry';
-import Page from '../layouts';
 import { NextPageWithLayout } from './_app';
+import Page from '../layouts';
 
 const ServerError: NextPageWithLayout = () => {
   return (

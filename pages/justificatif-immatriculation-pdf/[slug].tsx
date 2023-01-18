@@ -1,12 +1,12 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import routes from '#clients/routes';
-import Info from '#components-ui/alerts/info';
-import { Loader } from '#components-ui/loader';
-import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';
 import FrontStateMachine from '#components/front-state-machine';
 import Meta from '#components/meta';
+import Info from '#components-ui/alerts/info';
+import { Loader } from '#components-ui/loader';
+import { Tag } from '#components-ui/tag';
 import { formatIntFr } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {

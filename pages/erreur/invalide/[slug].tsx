@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import ButtonLink from '#components-ui/button';
 import MatomoEvent from '#components/matomo-event';
 import Meta from '#components/meta';
+import ButtonLink from '#components-ui/button';
 import constants from '#models/constants';
 import { NextPageWithLayout } from 'pages/_app';
 

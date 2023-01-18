@@ -1,11 +1,11 @@
 import React from 'react';
-import ButtonLink from '#components-ui/button';
-import IsActiveTag from '#components-ui/is-active-tag';
-import { Tag } from '#components-ui/tag';
 import { INSEE } from '#components/administrations';
 import AvisSituationLink from '#components/avis-situation-link';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
+import ButtonLink from '#components-ui/button';
+import IsActiveTag from '#components-ui/is-active-tag';
+import { Tag } from '#components-ui/tag';
 import { EAdministration } from '#models/administrations';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import { estNonDiffusible } from '#models/statut-diffusion';

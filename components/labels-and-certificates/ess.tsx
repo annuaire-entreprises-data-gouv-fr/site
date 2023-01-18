@@ -1,6 +1,6 @@
-import FAQLink from '#components-ui/faq-link';
 import { INSEE } from '#components/administrations';
 import { Section } from '#components/section';
+import FAQLink from '#components-ui/faq-link';
 import { EAdministration } from '#models/administrations';
 
 export const CertificationESSSection = () => (

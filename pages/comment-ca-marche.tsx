@@ -1,7 +1,7 @@
 import React from 'react';
-import TextWrapper from '#components-ui/text-wrapper';
 import { INSEE } from '#components/administrations';
 import Meta from '#components/meta';
+import TextWrapper from '#components-ui/text-wrapper';
 import { NextPageWithLayout } from './_app';
 
 const About: NextPageWithLayout = () => {

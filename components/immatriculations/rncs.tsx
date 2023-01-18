@@ -1,13 +1,13 @@
 import React from 'react';
+import { INPI } from '#components/administrations';
+import { Section } from '#components/section';
+import { TwoColumnTable } from '#components/table/simple';
 import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
 import ButtonLink from '#components-ui/button';
 import { download } from '#components-ui/icon';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import { VerifiedTag } from '#components-ui/verified-tag';
-import { INPI } from '#components/administrations';
-import { Section } from '#components/section';
-import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,

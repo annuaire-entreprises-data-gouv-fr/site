@@ -1,8 +1,8 @@
 import React from 'react';
-import IsActiveTag from '#components-ui/is-active-tag';
 import { isPersonneMorale } from '#components/dirigeants-section/rncs-dirigeants';
 import { SearchFeedback } from '#components/search-feedback';
 import UniteLegaleBadge from '#components/unite-legale-badge';
+import IsActiveTag from '#components-ui/is-active-tag';
 import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IDirigeant } from '#models/immatriculation/rncs';
 import { isCollectiviteTerritoriale } from '#models/index';

@@ -1,13 +1,13 @@
 import React from 'react';
+import UniteLegaleBadge from '#components/unite-legale-badge';
+import { UnitLegaleDescription } from '#components/unite-legale-description';
+import { checkHasLabelsAndCertificates } from '#components/unite-legale-section/labels-and-certificates';
 import AssociationAdressAlert from '#components-ui/alerts/association-adress';
 import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { PrintNever } from '#components-ui/print-visibility';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
-import UniteLegaleBadge from '#components/unite-legale-badge';
-import { UnitLegaleDescription } from '#components/unite-legale-description';
-import { checkHasLabelsAndCertificates } from '#components/unite-legale-section/labels-and-certificates';
 import {
   isAssociation,
   isCollectiviteTerritoriale,

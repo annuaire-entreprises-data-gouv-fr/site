@@ -1,6 +1,6 @@
 import React from 'react';
-import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
+import TextWrapper from '#components-ui/text-wrapper';
 import { NextPageWithLayout } from './_app';
 
 const Privacy: NextPageWithLayout = () => (

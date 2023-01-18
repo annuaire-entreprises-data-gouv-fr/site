@@ -1,6 +1,6 @@
 import React from 'react';
-import { information } from '#components-ui/icon';
 import HeaderWithSearch from '#components/header/header-with-search';
+import { information } from '#components-ui/icon';
 
 const Header = () => (
   <>

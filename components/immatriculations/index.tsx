@@ -1,10 +1,10 @@
 import React from 'react';
-import ImmatriculationNotFoundAlert from '#components-ui/alerts/immatriculation-not-found-alert';
 import AvisSituationSection from '#components/immatriculations/insee';
 import ImmatriculationJOAFE from '#components/immatriculations/joafe';
 import ImmatriculationRNCS from '#components/immatriculations/rncs';
 import ImmatriculationRNM from '#components/immatriculations/rnm';
 import ImmatriculationSummary from '#components/immatriculations/summary';
+import ImmatriculationNotFoundAlert from '#components-ui/alerts/immatriculation-not-found-alert';
 import {
   IAPINotRespondingError,
   isAPINotResponding,

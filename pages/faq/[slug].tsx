@@ -1,10 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import Meta from '#components/meta';
 import Breadcrumb from '#components-ui/breadcrumb';
 import ButtonLink from '#components-ui/button';
 import TextWrapper from '#components-ui/text-wrapper';
-import Meta from '#components/meta';
 import constants from '#models/constants';
 import { getAllFaqArticles, getFaqArticle, IArticle } from '#models/faq';
 import { NextPageWithLayout } from 'pages/_app';

@@ -1,9 +1,9 @@
 import React from 'react';
+import { Section } from '#components/section';
+import { TwoColumnTable } from '#components/table/simple';
 import Warning from '#components-ui/alerts/warning';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
-import { Section } from '#components/section';
-import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
 import { IAssociation } from '#models/index';
 import { isTwoMonthOld } from '#utils/helpers/checks';

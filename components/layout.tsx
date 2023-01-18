@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from 'react';
-import { Question } from '#components-ui/question';
 import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
 import { Header, HeaderWithSearch } from '#components/header';
 import { WeNeedYouModal } from '#components/modal/we-need-you';
 import SocialNetworks from '#components/social-network';
+import { Question } from '#components-ui/question';
 import { IParams } from '#models/search-filter-params';
 
 interface IProps {

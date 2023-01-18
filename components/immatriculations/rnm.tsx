@@ -1,12 +1,12 @@
 import React from 'react';
+import AdministrationNotResponding from '#components/administration-not-responding';
+import { Section } from '#components/section';
+import { TwoColumnTable } from '#components/table/simple';
 import ButtonLink from '#components-ui/button';
 import { download } from '#components-ui/icon';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import { VerifiedTag } from '#components-ui/verified-tag';
-import AdministrationNotResponding from '#components/administration-not-responding';
-import { Section } from '#components/section';
-import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,

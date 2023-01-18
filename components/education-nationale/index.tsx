@@ -1,11 +1,11 @@
 import React from 'react';
 import routes from '#clients/routes';
-import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { EDUCNAT } from '#components/administrations';
 import ResultsPagination from '#components/search-results/results-pagination';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
+import { Tag } from '#components-ui/tag';
 import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,

@@ -1,8 +1,8 @@
 import { GetStaticProps } from 'next';
 import React from 'react';
-import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
 import Meta from '#components/meta';
+import TextWrapper from '#components-ui/text-wrapper';
 import {
   administrationsMetaData,
   IAdministrationMetaData,

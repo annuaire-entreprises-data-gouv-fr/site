@@ -1,9 +1,9 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import { HttpNotFound } from '#clients/exceptions';
-import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
 import Meta from '#components/meta';
+import TextWrapper from '#components-ui/text-wrapper';
 import {
   administrationsMetaData,
   EAdministration,

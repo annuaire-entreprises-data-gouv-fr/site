@@ -1,7 +1,7 @@
 import React from 'react';
-import ButtonLink from '#components-ui/button';
 import { INSEE } from '#components/administrations';
 import { Section } from '#components/section';
+import ButtonLink from '#components-ui/button';
 import constants from '#models/constants';
 
 export const NonDiffusibleSection = () => (

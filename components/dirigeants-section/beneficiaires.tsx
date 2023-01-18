@@ -1,10 +1,10 @@
 import React from 'react';
 import routes from '#clients/routes';
-import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { INPI } from '#components/administrations';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
+import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,
