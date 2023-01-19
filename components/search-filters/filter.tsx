@@ -1,11 +1,11 @@
-import { ReactElement, useState } from 'react';
+import { MouseEvent, ReactElement, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import {
   buildSearchQuery,
   IParams,
   ISearchFilter,
 } from '#models/search-filter-params';
-import { useOutsideClick } from 'frontend/src/hooks/useOutsideClick';
+import { useOutsideClick } from 'frontend/src/hooks';
 import ActiveFilterLabel from './active-filter-label';
 
 type FilterProps = {
@@ -35,7 +35,7 @@ const Filter = ({
 
   const ref = useOutsideClick(() => setOpen(false));
 
-  const handleHeaderClick = (event) => {
+  const handleHeaderClick = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
   };
 
@@ -60,7 +60,6 @@ const Filter = ({
             )}
           </label>
         </div>
-        <label className="close-container">Fermer ✕</label>
         {open && (
           <div className="container">
             <div className="filter-container" ref={ref}>
@@ -105,23 +104,6 @@ const Filter = ({
           span.search-filter-label:hover {
             border-color: #0a76f6;
             background-color: #fefefe;
-          }
-
-          label.overlay {
-            width: 90vw;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-          }
-
-          label.close-container {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            content: 'Fermer ✕';
-            cursor: pointer;
           }
 
           .container {
