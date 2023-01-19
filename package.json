@@ -17,6 +17,7 @@
     "build": "npm run build:frontend && npm run build:back",
     "start": "NODE_ENV=production && next start",
     "test:end2end": "cypress run",
+    "test:end2end:open": "cypress open",
     "test:unit": "jest --runInBand",
     "lint": "next lint",
     "script:seo": " ts-node --project ./seo-script/seo-script-tsconfig.json ./seo-script/index.ts",

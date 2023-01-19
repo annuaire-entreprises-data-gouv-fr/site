@@ -3,8 +3,8 @@ describe('Home page’s search bar', () => {
     cy.visit('/');
 
     cy.get('.fr-search-bar > button').click();
-    cy.url().should('include', '/rechercher?terme=&');
-    cy.contains('Votre requête ne contient pas assez de paramètres');
+    cy.url().should('include', '/rechercher');
+    cy.contains('Grâce aux filtres de recherche, retrouvez n’importe');
   });
 
   it('allows to research "Ganymede"', () => {

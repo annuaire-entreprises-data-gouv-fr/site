@@ -1,13 +1,9 @@
 const path = '/rechercher';
 
 describe('Home page', () => {
-  it('Open advanced filters', () => {
+  it('Open advanced search page', () => {
     cy.visit('/');
-
-    cy.contains('Dirigeant').should('not.be.visible');
-    cy.contains('Afficher les filtres').click();
-    cy.contains('Dirigeant').should('be.visible');
-    cy.contains('Cacher les filtres de recherche').should('be.visible');
+    cy.contains('recherche avancée').click();
 
     cy.contains('Zone géographique').click({ force: true });
     cy.get('#search-localisation-input').type(35000);
