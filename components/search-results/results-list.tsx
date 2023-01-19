@@ -1,17 +1,14 @@
 import React from 'react';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { isPersonneMorale } from '#components/dirigeants-section/rncs-dirigeants';
-import { SearchFeedback } from '#components/search-feedback';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IDirigeant } from '#models/immatriculation/rncs';
 import { isCollectiviteTerritoriale } from '#models/index';
 import { ISearchResult } from '#models/search';
-import { estDiffusible, ISTATUTDIFFUSION } from '#models/statut-diffusion';
 
 interface IProps {
   results: ISearchResult[];
-  withFeedback?: boolean;
   searchTerm?: string;
 }
 
@@ -47,13 +44,8 @@ const DirigeantsOrElusList: React.FC<{ dirigeantsOrElus: IDirigeant[] }> = ({
   );
 };
 
-const ResultsList: React.FC<IProps> = ({
-  results,
-  withFeedback = false,
-  searchTerm = '',
-}) => (
+const ResultsList: React.FC<IProps> = ({ results, searchTerm = '' }) => (
   <>
-    {withFeedback && <SearchFeedback searchTerm={searchTerm} />}
     <div className="results-list">
       {results.map((result) => (
         <a

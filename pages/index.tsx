@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import Logo from '#components-ui/logo';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
-import HomePageAdvancedSearch from '#components/advanced-search/home-page';
 import { Layout } from '#components/layout';
 import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
@@ -42,7 +41,9 @@ const Index: NextPageWithLayout = () => (
           />
         </div>
         <br />
-        <HomePageAdvancedSearch />
+        <div className="layout-center">
+          <a href="/rechercher">→ Effectuer une recherche avancée</a>
+        </div>
       </form>
     </div>
     <style jsx>{`

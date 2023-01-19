@@ -115,11 +115,7 @@ const SearchResults: React.FC<{
           currentPage={results.currentPage}
         />
         <div>
-          <ResultsList
-            results={results.results}
-            withFeedback={true}
-            searchTerm={searchTerm}
-          />
+          <ResultsList results={results.results} searchTerm={searchTerm} />
           <ResultsPagination
             totalPages={results.pageCount}
             searchTerm={searchTerm}
