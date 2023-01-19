@@ -6,10 +6,11 @@ import Meta from '#components/meta';
 import SearchResults from '#components/search-results';
 import { AdvancedSearchTutorial } from '#components/search-results/advanced-search-tutorial';
 import StructuredDataSearchAction from '#components/structured-data/search';
-import search, { ISearchResults } from '#models/search';
+import { ISearchResults } from '#models/search';
+import { searchWithoutProtectedSiren } from '#models/search';
 import SearchFilterParams, {
-  hasSearchParam,
   IParams,
+  hasSearchParam,
 } from '#models/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import {
@@ -27,32 +28,32 @@ interface IProps extends IPropsWithMetadata {
 const SearchResultPage: NextPageWithLayout<IProps> = ({
   results,
   searchFilterParams,
-  metadata,
-}) => (
-  <Page
-    small={true}
-    currentSearchTerm={searchTerm}
-    searchFilterParams={searchFilterParams}
-    title="Rechercher une entreprise"
-    canonical="https://annuaire-entreprises.data.gouv.fr"
-    isBrowserOutdated={metadata.isBrowserOutdated}
-    useAdvancedSearch={true}
-  >
-    <StructuredDataSearchAction />
-    <HiddenH1 title="Résultats de recherche" />
-    <div className="content-container">
-      {!hasSearchParam(searchFilterParams) && !searchTerm ? (
-        <AdvancedSearchTutorial />
-      ) : (
-        <SearchResults
-          results={results}
-          searchTerm={searchTerm}
-          searchFilterParams={searchFilterParams}
-        />
-      )}
-    </div>
-  </Page>
-);
+  searchTerm,
+}) => {
+  return (
+    <>
+      <Meta
+        title="Rechercher une entreprise"
+        canonical="https://annuaire-entreprises.data.gouv.fr"
+      />
+      <StructuredDataSearchAction />
+      <HiddenH1 title="Résultats de recherche" />
+      <div className="content-container">
+        <div className="content-container">
+          {!hasSearchParam(searchFilterParams) && !searchTerm ? (
+            <AdvancedSearchTutorial />
+          ) : (
+            <SearchResults
+              results={results}
+              searchTerm={searchTerm}
+              searchFilterParams={searchFilterParams}
+            />
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
@@ -61,8 +62,11 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const pageParam = (context.query.page || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
     const searchFilterParams = new SearchFilterParams(context.query);
-    const results = await search(searchTerm, page, searchFilterParams);
-
+    const results = await searchWithoutProtectedSiren(
+      searchTerm,
+      page,
+      searchFilterParams
+    );
     return {
       props: {
         results,

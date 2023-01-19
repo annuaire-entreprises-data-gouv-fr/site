@@ -1,21 +1,20 @@
 import { useEffect, useRef } from 'react';
 
-export const useOutsideClick = (callback) => {
-  const ref = useRef();
+export const useOutsideClick = (callback: () => void) => {
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClick = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+    const handleClick = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         callback();
       }
     };
 
     document.addEventListener('click', handleClick, true);
-
     return () => {
       document.removeEventListener('click', handleClick, true);
     };
-  }, [ref]);
+  }, [callback, ref]);
 
   return ref;
 };
