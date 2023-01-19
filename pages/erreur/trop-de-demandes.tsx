@@ -1,11 +1,13 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import ButtonLink from '#components-ui/button';
-import Page from '../../layouts';
+import Meta from '#components/meta';
+import { NextPageWithLayout } from 'pages/_app';
 
-const TooManyRequest: React.FC = () => {
+const TooManyRequest: NextPageWithLayout = () => {
   return (
-    <Page small={true} title="Accès refusé" noIndex={true}>
+    <>
+      <Meta title="Accès refusé" noIndex={true} />
       <h1>Nous avons reçu trop de demandes de votre part 📈</h1>
       <p>
         Notre site a reçu trop de demandes de la part de votre adresse IP en un
@@ -35,7 +37,7 @@ const TooManyRequest: React.FC = () => {
         <span>&nbsp;</span>
         <ButtonLink to="/">Retourner à la page d’accueil</ButtonLink>
       </div>
-    </Page>
+    </>
   );
 };
 

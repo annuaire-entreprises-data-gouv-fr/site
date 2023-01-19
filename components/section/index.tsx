@@ -88,6 +88,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           padding: 1rem;
           width: ${width}%;
         }
+
         .section-container > h2 {
           margin-top: 0;
           margin-bottom: 25px;

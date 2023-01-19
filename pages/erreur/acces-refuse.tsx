@@ -1,11 +1,13 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import ButtonLink from '#components-ui/button';
-import Page from '../../layouts';
+import Meta from '#components/meta';
+import { NextPageWithLayout } from 'pages/_app';
 
-const Forbidden: React.FC = () => {
+const Forbidden: NextPageWithLayout = () => {
   return (
-    <Page small={true} title="Accès refusé">
+    <>
+      <Meta title="Accès refusé" />
       <h1>Accès refusé 🚫</h1>
       <p>
         Notre algorithme de détection pense que vous êtes un robot. <br />
@@ -23,7 +25,7 @@ const Forbidden: React.FC = () => {
         <span>&nbsp;</span>
         <ButtonLink to="/">Retourner à la page d’accueil</ButtonLink>
       </div>
-    </Page>
+    </>
   );
 };
 

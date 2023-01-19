@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import ConventionCollectivesSection from '#components/convention-collectives-section';
+import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';
 import getConventionCollectivesFromSlug, {
   IConventions,
@@ -10,28 +11,26 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, IConventions {}
 
-const ConventionsCollectives: React.FC<IProps> = ({
+const ConventionsCollectives: NextPageWithLayout<IProps> = ({
   uniteLegale,
   conventionCollectives,
-  metadata,
 }) => (
-  <Page
-    small={true}
-    title={`Conventions collectives - ${uniteLegale.nomComplet}`}
-    noIndex={true}
-    isBrowserOutdated={metadata.isBrowserOutdated}
-  >
+  <>
+    <Meta
+      title={`Conventions collectives - ${uniteLegale.nomComplet}`}
+      noIndex={true}
+    />
     <div className="content-container">
       <Title ficheType={FICHE.DIVERS} uniteLegale={uniteLegale} />
       <ConventionCollectivesSection
         conventionCollectives={conventionCollectives}
       />
     </div>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(

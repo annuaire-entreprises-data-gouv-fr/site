@@ -2,6 +2,7 @@ import { GetServerSideProps } from 'next';
 import React, { Fragment } from 'react';
 import { HttpNotFound } from '#clients/exceptions';
 import ApiMonitoring from '#components/api-monitoring';
+import Meta from '#components/meta';
 import {
   administrationsMetaData,
   IAdministrationMetaData,
@@ -13,25 +14,21 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IAdministrationMetaData, IPropsWithMetadata {
   monitorings: (IMonitoring & IAPIMonitorMetaData)[];
 }
 
-const SourcesDeDonneesPage: React.FC<IProps> = ({
+const SourcesDeDonneesPage: NextPageWithLayout<IProps> = ({
   long,
   slug,
   short,
   description,
   monitorings,
-  metadata,
 }) => (
-  <Page
-    small={true}
-    title={`Statut des API : ${long}`}
-    isBrowserOutdated={metadata.isBrowserOutdated}
-  >
+  <>
+    <Meta title={`Statut des API : ${long}`} />
     <div className="content-container">
       <br />
       <a href="/sources-de-donnees">← Toutes les sources de données</a>
@@ -52,7 +49,7 @@ const SourcesDeDonneesPage: React.FC<IProps> = ({
         </>
       )}
     </div>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(

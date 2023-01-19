@@ -1,7 +1,9 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
+import { Layout } from '#components/layout';
 import MapEtablissement from '#components/map/map-etablissement';
+import Meta from '#components/meta';
 import { MapTitleEtablissement } from '#components/title-etablissement-section';
 import { getEtablissementWithLatLongFromSlug } from '#models/etablissement';
 import { IEtablissement } from '#models/index';
@@ -10,24 +12,22 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   etablissement: IEtablissement;
 }
 
-const EtablissementMapPage: React.FC<IProps> = ({
+const EtablissementMapPage: NextPageWithLayout<IProps> = ({
   etablissement,
   metadata,
 }) => (
-  <Page
-    small={true}
-    map={true}
-    noIndex={true}
-    title="Carte"
-    canonical={`https://annuaire-entreprises.data.gouv.fr/carte/${etablissement.siret}`}
-    isBrowserOutdated={metadata.isBrowserOutdated}
-  >
+  <>
+    <Meta
+      noIndex={true}
+      title="Carte"
+      canonical={`https://annuaire-entreprises.data.gouv.fr/carte/${etablissement.siret}`}
+    />
     <div className="fr-container">
       <br />
       <a href={`/entreprise/${etablissement.siren}`}>← Retour</a>
@@ -60,7 +60,7 @@ const EtablissementMapPage: React.FC<IProps> = ({
         }
       `}
     </style>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
@@ -76,5 +76,16 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
+
+EtablissementMapPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return (
+    <Layout isBrowserOutdated={isBrowserOutdated} searchBar map>
+      {page}
+    </Layout>
+  );
+};
 
 export default EtablissementMapPage;

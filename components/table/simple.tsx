@@ -84,7 +84,9 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
       <tbody>
         {body.map((row, idx) => (
           <tr key={'a' + idx}>
-            <td>{row[0]}</td>
+            <td>
+              <div>{row[0]}</div>
+            </td>
             <Cell label={row[0]}>{row[1]}</Cell>
           </tr>
         ))}
@@ -102,6 +104,9 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
           padding-left: 10px;
           border-right: 1px solid #dfdff1;
           vertical-align: baseline;
+        }
+        tr > td:first-of-type > div {
+          min-width: 140px;
         }
         td,
         th {

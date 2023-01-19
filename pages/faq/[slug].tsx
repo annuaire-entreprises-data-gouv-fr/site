@@ -4,12 +4,14 @@ import ReactMarkdown from 'react-markdown';
 import Breadcrumb from '#components-ui/breadcrumb';
 import ButtonLink from '#components-ui/button';
 import TextWrapper from '#components-ui/text-wrapper';
+import Meta from '#components/meta';
 import constants from '#models/constants';
 import { getAllFaqArticles, getFaqArticle, IArticle } from '#models/faq';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
-const FAQArticle: React.FC<{ article: IArticle }> = ({ article }) => (
-  <Page small={true} title="Cette administration ne répond pas" noIndex={false}>
+const FAQArticle: NextPageWithLayout<{ article: IArticle }> = ({ article }) => (
+  <>
+    <Meta title={article.title} noIndex={false} />
     <TextWrapper>
       <Breadcrumb
         links={[
@@ -47,7 +49,7 @@ const FAQArticle: React.FC<{ article: IArticle }> = ({ article }) => (
         </ButtonLink>
       </div>
     </TextWrapper>
-  </Page>
+  </>
 );
 
 export const getStaticPaths: GetStaticPaths = async () => {

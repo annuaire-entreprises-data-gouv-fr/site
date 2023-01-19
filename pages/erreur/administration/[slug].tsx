@@ -2,21 +2,19 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import React from 'react';
 import { HttpNotFound } from '#clients/exceptions';
 import AdministrationNotResponding from '#components/administration-not-responding';
+import Meta from '#components/meta';
 import {
   administrationsMetaData,
   EAdministration,
 } from '#models/administrations';
-import Page from '../../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
-const AdministrationError: React.FC<{ administration: EAdministration }> = ({
-  administration,
-}) => {
+const AdministrationError: NextPageWithLayout<{
+  administration: EAdministration;
+}> = ({ administration }) => {
   return (
-    <Page
-      small={true}
-      title="Cette administration ne répond pas"
-      noIndex={true}
-    >
+    <>
+      <Meta title="Cette administration ne répond pas" noIndex={true} />
       <div className="content-container">
         <h1>Le téléservice ne répond pas</h1>
         <AdministrationNotResponding
@@ -24,7 +22,7 @@ const AdministrationError: React.FC<{ administration: EAdministration }> = ({
           errorType={500}
         />
       </div>
-    </Page>
+    </>
   );
 };
 

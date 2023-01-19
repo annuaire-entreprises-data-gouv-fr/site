@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
-import { Header } from '#components/header';
+import { Layout } from '#components/layout';
 import constants from '#models/constants';
+import { NextPageWithLayout } from 'pages/_app';
 
-const Thanks: React.FC<{}> = () => {
+const ThanksPage: NextPageWithLayout = () => {
   return (
     <div id="layout">
-      <Header />
       <main>
         <div className="layout-center">
           <h1>Merci beaucoup pour votre retour 🙂 !</h1>
@@ -28,4 +28,15 @@ const Thanks: React.FC<{}> = () => {
   );
 };
 
-export default Thanks;
+ThanksPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return (
+    <Layout isBrowserOutdated={isBrowserOutdated} searchBar={false}>
+      {page}
+    </Layout>
+  );
+};
+
+export default ThanksPage;

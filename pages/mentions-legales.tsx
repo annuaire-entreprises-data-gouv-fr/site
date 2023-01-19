@@ -1,10 +1,11 @@
-import { NextPage } from 'next';
 import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
-import Page from '../layouts/page';
+import Meta from '#components/meta';
+import { NextPageWithLayout } from './_app';
 
-const Privacy: NextPage = () => (
-  <Page title="Politique de confidentialité" noIndex={true}>
+const Privacy: NextPageWithLayout = () => (
+  <>
+    <Meta title="Politique de confidentialité" noIndex={true} />
     <TextWrapper>
       <h1>Mentions légales</h1>
       <h2>Éditeur</h2>
@@ -25,7 +26,7 @@ const Privacy: NextPage = () => (
         d’un appel vers un poste fixe en France)
       </p>
     </TextWrapper>
-  </Page>
+  </>
 );
 
 export default Privacy;

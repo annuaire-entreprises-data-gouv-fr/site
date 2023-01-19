@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
-import { Header } from '#components/header';
+import { Layout } from '#components/layout';
 import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
+import { NextPageWithLayout } from 'pages/_app';
 
-const FeedBack: React.FC = () => {
+const FeedBackPage: NextPageWithLayout = () => {
   const uuid = randomId();
   return (
     <div id="page-layout">
-      <Header />
       <main className="fr-container">
         <div className="layout-center">
           <h1>Quel est votre avis sur l’Annuaire des Entreprises ?</h1>
@@ -371,4 +371,15 @@ const FeedBack: React.FC = () => {
   );
 };
 
-export default FeedBack;
+FeedBackPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return (
+    <Layout isBrowserOutdated={isBrowserOutdated} searchBar={false}>
+      {page}
+    </Layout>
+  );
+};
+
+export default FeedBackPage;
