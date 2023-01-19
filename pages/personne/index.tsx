@@ -52,11 +52,7 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
         {results.currentPage > 1 && `Page ${results.currentPage} de `}
         {results.resultCount} résultats trouvés.
       </span>
-      <ResultsList
-        results={results.results}
-        withFeedback={false}
-        searchTerm=""
-      />
+      <ResultsList results={results.results} searchTerm="" />
       {results.pageCount > 0 && (
         <PageCounter
           totalPages={results.pageCount}
