@@ -1,10 +1,11 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import {
   buildSearchQuery,
   IParams,
   ISearchFilter,
 } from '#models/search-filter-params';
+import { useOutsideClick } from 'frontend/src/hooks/useOutsideClick';
 import ActiveFilterLabel from './active-filter-label';
 
 type FilterProps = {
@@ -30,45 +31,56 @@ const Filter = ({
     activeFilter.excludeParams
   );
 
+  const [open, setOpen] = useState(false);
+
+  const ref = useOutsideClick(() => setOpen(false));
+
   const handleHeaderClick = (event) => {
     event.stopPropagation();
   };
 
   return (
     <>
-      <div className="search-filter-label-container">
-        <input type="checkbox" />
-        <label className="overlay" />
-        <label>
-          {activeFilter.label ? (
-            <ActiveFilterLabel
-              icon={activeFilter.icon}
-              label={activeFilter.label}
-              query={clearFilterLink}
-            />
-          ) : (
-            <span className="search-filter-label">
-              {activeFilter.icon}&nbsp;{label}&nbsp;&nbsp;▾
-            </span>
-          )}
-        </label>
-        <label className="close-container">Fermer ✕</label>
-        <div className="container">
-          <div className="filter-container">{children}</div>
-          {addSaveClearButton && (
-            <>
-              <br />
-              <div className="layout-space-between">
-                <a className="fr-link" href={clearFilterLink}>
-                  Effacer
-                </a>
-                <ButtonLink type="submit" alt small>
-                  Appliquer
-                </ButtonLink>
-              </div>
-            </>
-          )}
+      <div
+        className="search-filter-label-container"
+        onClick={handleHeaderClick}
+      >
+        <div onClick={() => setOpen(true)}>
+          <label>
+            {activeFilter.label ? (
+              <ActiveFilterLabel
+                icon={activeFilter.icon}
+                label={activeFilter.label}
+                query={clearFilterLink}
+              />
+            ) : (
+              <span className="search-filter-label">
+                {activeFilter.icon}&nbsp;{label}&nbsp;&nbsp;▾
+              </span>
+            )}
+          </label>
         </div>
+        <label className="close-container">Fermer ✕</label>
+        {open && (
+          <div className="container">
+            <div className="filter-container" ref={ref}>
+              {children}
+            </div>
+            {addSaveClearButton && (
+              <>
+                <br />
+                <div className="layout-space-between">
+                  <a className="fr-link" href={clearFilterLink}>
+                    Effacer
+                  </a>
+                  <ButtonLink type="submit" alt small>
+                    Appliquer
+                  </ButtonLink>
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </div>
       <style jsx>
         {`
@@ -95,16 +107,6 @@ const Filter = ({
             background-color: #fefefe;
           }
 
-          input[type='checkbox'] {
-            display: none;
-          }
-          input[type='checkbox']:checked ~ .overlay {
-            display: block;
-          }
-          input[type='checkbox']:checked ~ .container {
-            display: block;
-          }
-
           label.overlay {
             width: 90vw;
             height: 100vh;
@@ -126,7 +128,6 @@ const Filter = ({
             box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.3);
             top: 100%;
             left: 0;
-            display: none;
             position: absolute;
             padding: 15px;
             margin-top: 5px;
@@ -160,12 +161,6 @@ const Filter = ({
               width: 100vw;
               height: 100vh;
               margin-top: 0;
-            }
-            input[type='checkbox']:checked ~ .overlay {
-              display: none;
-            }
-            input[type='checkbox']:checked ~ .close-container {
-              display: block;
             }
           }
         `}
