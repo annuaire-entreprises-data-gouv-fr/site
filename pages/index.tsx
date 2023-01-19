@@ -42,7 +42,7 @@ const Index: NextPageWithLayout = () => (
         </div>
         <br />
         <div className="layout-center">
-          <a href="/rechercher">→ recherche avancée</a>
+          <a href="/rechercher">→ Effectuer une recherche avancée</a>
         </div>
       </form>
     </div>

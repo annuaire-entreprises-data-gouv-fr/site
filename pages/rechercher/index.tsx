@@ -2,9 +2,13 @@ import { GetServerSideProps } from 'next';
 import React, { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import SearchResults from '#components/search-results';
+import { AdvancedSearchTutorial } from '#components/search-results/advanced-search-tutorial';
 import StructuredDataSearchAction from '#components/structured-data/search';
 import search, { ISearchResults } from '#models/search';
-import SearchFilterParams, { IParams } from '#models/search-filter-params';
+import SearchFilterParams, {
+  hasSearchParam,
+  IParams,
+} from '#models/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import {
   IPropsWithMetadata,
@@ -37,11 +41,15 @@ const SearchResultPage: NextPageWithLayout<IProps> = ({
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
     <div className="content-container">
-      <SearchResults
-        results={results}
-        searchTerm={searchTerm}
-        searchFilterParams={searchFilterParams}
-      />
+      {!hasSearchParam(searchFilterParams) && !searchTerm ? (
+        <AdvancedSearchTutorial />
+      ) : (
+        <SearchResults
+          results={results}
+          searchTerm={searchTerm}
+          searchFilterParams={searchFilterParams}
+        />
+      )}
     </div>
   </Page>
 );
@@ -54,6 +62,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const page = parseIntWithDefaultValue(pageParam, 1);
     const searchFilterParams = new SearchFilterParams(context.query);
     const results = await search(searchTerm, page, searchFilterParams);
+
     return {
       props: {
         results,
