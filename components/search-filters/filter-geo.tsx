@@ -15,7 +15,7 @@ export const FilterGeo: React.FC<{ cp_dep?: string; cp_dep_label?: string }> =
     const [isLoading, setLoading] = useState(false);
     const [geoSuggests, setGeoSuggests] = useState([]);
 
-    const geoSearchRef = useRef(null);
+    const geoSearchRef = useRef<HTMLInputElement | null>(null);
 
     const search = debounce(async (inputElement: any) => {
       const term = inputElement.target.value;
