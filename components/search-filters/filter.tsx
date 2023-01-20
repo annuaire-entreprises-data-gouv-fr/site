@@ -60,24 +60,26 @@ const Filter = ({
             </label>
           )}
         </div>
-        {open && (
-          <div className="container" ref={ref}>
-            <div className="filter-container">{children}</div>
-            {addSaveClearButton && (
-              <>
-                <br />
-                <div className="layout-space-between">
-                  <a className="fr-link" href={clearFilterLink}>
-                    Effacer
-                  </a>
-                  <ButtonLink type="submit" alt small>
-                    Appliquer
-                  </ButtonLink>
-                </div>
-              </>
-            )}
-          </div>
-        )}
+        <div
+          className="container"
+          ref={ref}
+          style={{ display: open ? 'block' : 'none' }}
+        >
+          <div className="filter-container">{children}</div>
+          {addSaveClearButton && (
+            <>
+              <br />
+              <div className="layout-space-between">
+                <a className="fr-link" href={clearFilterLink}>
+                  Effacer
+                </a>
+                <ButtonLink type="submit" alt small>
+                  Appliquer
+                </ButtonLink>
+              </div>
+            </>
+          )}
+        </div>
       </div>
       <style jsx>
         {`
