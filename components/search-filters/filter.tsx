@@ -1,4 +1,4 @@
-import { MouseEvent, ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import {
   buildSearchQuery,
@@ -143,6 +143,7 @@ const Filter = ({
             max-height: 350px;
             overflow-y: auto;
             z-index: 100;
+            padding: 0 4px;
           }
 
           @media only screen and (min-width: 1px) and (max-width: 991px) {
