@@ -40,8 +40,8 @@ const Filter = ({
   return (
     <>
       <div className="search-filter-label-container">
-        <div onClick={() => setOpen(!open)}>
-          <label>
+        <div>
+          <label onClick={() => setOpen(!open)}>
             {activeFilter.label ? (
               <ActiveFilterLabel
                 icon={activeFilter.icon}
@@ -54,6 +54,11 @@ const Filter = ({
               </span>
             )}
           </label>
+          {open && (
+            <label onClick={() => setOpen(false)} className="close-container">
+              Fermer ✕
+            </label>
+          )}
         </div>
         {open && (
           <div className="container" ref={ref}>
@@ -99,6 +104,16 @@ const Filter = ({
             background-color: #fefefe;
           }
 
+          label.close-container {
+            z-index: 99999;
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            content: 'Fermer ✕';
+            cursor: pointer;
+          }
+
           .container {
             box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.3);
             top: 100%;
@@ -109,6 +124,7 @@ const Filter = ({
             background-color: #fff;
             border-radius: 3px;
             width: 450px;
+            z-index: 1000;
           }
           .container:before {
             content: ' ';
@@ -124,7 +140,7 @@ const Filter = ({
           .container > .filter-container {
             max-height: 350px;
             overflow-y: auto;
-            z-index: 100px;
+            z-index: 100;
           }
 
           @media only screen and (min-width: 1px) and (max-width: 991px) {
@@ -136,6 +152,9 @@ const Filter = ({
               width: 100vw;
               height: 100vh;
               margin-top: 0;
+            }
+            label.close-container {
+              display: block;
             }
           }
         `}
