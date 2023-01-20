@@ -39,9 +39,13 @@ const Filter = ({
 
   return (
     <>
-      <div className="search-filter-label-container">
+      <div ref={ref} className="search-filter-label-container">
         <div>
-          <label onClick={() => setOpen(!open)}>
+          <label
+            onClick={() => {
+              setOpen(!open);
+            }}
+          >
             {activeFilter.label ? (
               <ActiveFilterLabel
                 icon={activeFilter.icon}
@@ -60,11 +64,7 @@ const Filter = ({
             </label>
           )}
         </div>
-        <div
-          className="container"
-          ref={ref}
-          style={{ display: open ? 'block' : 'none' }}
-        >
+        <div className="container" style={{ display: open ? 'block' : 'none' }}>
           <div className="filter-container">{children}</div>
           {addSaveClearButton && (
             <>
