@@ -1,12 +1,11 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import AsyncSelect from 'react-select/async';
+import React from 'react';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import Select from '#components-ui/select';
 import SelectCodeNaf from '#components-ui/select/select-code-naf';
 import SelectCodeSectionNaf from '#components-ui/select/select-section-naf';
 import { extractFilters, IParams } from '#models/search-filter-params';
 import Filter from './filter';
+import { FilterGeo } from './filter-geo';
 
 const SearchFilters: React.FC<{
   searchParams?: IParams;
@@ -26,15 +25,6 @@ const SearchFilters: React.FC<{
     dmax,
   } = searchParams || {};
 
-  const [labelDep, setLabelDep] = useState(cp_dep_label);
-
-  const loadOptions = async (
-    inputText: string
-  ): Promise<[{ label: string; value: string }]> =>
-    inputText
-      ? axios.get(`/api/geo/${inputText}`).then((response) => response.data)
-      : [];
-
   const { localisationFilter, dirigeantFilter, administrativeFilter } =
     extractFilters(searchParams || {});
 
@@ -48,51 +38,7 @@ const SearchFilters: React.FC<{
         addSaveClearButton
       >
         <label>Code postal ou numéro de département :</label>
-        <AsyncSelect
-          cacheOptions
-          defaultOptions
-          name="cp_dep"
-          noOptionsMessage={() =>
-            'Saisissez une ville ou un département pour rechercher son code.'
-          }
-          menuPosition="fixed"
-          placeholder="ex: 35000"
-          id="long-value-select"
-          instanceId="long-value-select"
-          defaultValue={{ value: cp_dep || '', label: cp_dep_label || '' }}
-          onChange={(data) => {
-            if (data?.label) {
-              setLabelDep(data.label);
-            }
-          }}
-          loadOptions={loadOptions}
-          styles={{
-            menuPortal: (base) => ({ ...base, zIndex: 10 }),
-            dropdownIndicator: (base) => ({
-              ...base,
-              color: 'black',
-              '&:hover': {
-                color: 'black',
-              },
-            }),
-            control: (baseStyles) => ({
-              ...baseStyles,
-              backgroundColor: '#eeeeee',
-              border: 'none',
-              borderRadius: '0.25rem 0.25rem 0 0',
-              borderBottom: '2px solid black',
-              '&:hover': {
-                borderBottom: '2px solid black',
-              },
-            }),
-          }}
-        />
-        <input
-          style={{ display: 'none' }}
-          name="cp_dep_label"
-          onChange={() => undefined}
-          value={labelDep}
-        />
+        <FilterGeo cp_dep={cp_dep} cp_dep_label={cp_dep_label} />
       </Filter>
       <Filter
         label="Dirigeant"
