@@ -33,19 +33,14 @@ const Filter = ({
 
   const [open, setOpen] = useState(false);
 
-  const ref = useOutsideClick(() => setOpen(false));
-
-  const handleHeaderClick = (event: MouseEvent<HTMLElement>) => {
-    event.stopPropagation();
-  };
+  const ref = useOutsideClick(() => {
+    setOpen(false);
+  });
 
   return (
     <>
-      <div
-        className="search-filter-label-container"
-        onClick={handleHeaderClick}
-      >
-        <div onClick={() => setOpen(true)}>
+      <div className="search-filter-label-container">
+        <div onClick={() => setOpen(!open)}>
           <label>
             {activeFilter.label ? (
               <ActiveFilterLabel
@@ -61,10 +56,8 @@ const Filter = ({
           </label>
         </div>
         {open && (
-          <div className="container">
-            <div className="filter-container" ref={ref}>
-              {children}
-            </div>
+          <div className="container" ref={ref}>
+            <div className="filter-container">{children}</div>
             {addSaveClearButton && (
               <>
                 <br />

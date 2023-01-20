@@ -31,7 +31,9 @@ const SearchFilters: React.FC<{
   const loadOptions = async (
     inputText: string
   ): Promise<[{ label: string; value: string }]> =>
-    axios.get(`/api/geo/${inputText || '*'}`).then((response) => response.data);
+    inputText
+      ? axios.get(`/api/geo/${inputText}`).then((response) => response.data)
+      : [];
 
   const { localisationFilter, dirigeantFilter, administrativeFilter } =
     extractFilters(searchParams || {});
