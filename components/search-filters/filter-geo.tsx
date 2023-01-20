@@ -34,8 +34,9 @@ export const FilterGeo: React.FC<{ cp_dep?: string; cp_dep_label?: string }> =
       setDep(value);
       setLabelDep(label);
       setGeoSuggests([]);
-      //@ts-ignore
-      geoSearchRef.current.value = label;
+      if (geoSearchRef.current) {
+        geoSearchRef.current.value = label;
+      }
     };
 
     return (
