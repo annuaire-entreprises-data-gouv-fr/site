@@ -58,6 +58,21 @@ export const HomeH1 = () => (
         .home-h1 > h1 > b:nth-of-type(2) {
           margin-left: 25px;
         }
+
+        @media only screen and (min-width: 1px) and (max-width: 600px) {
+          .home-h1 {
+            width: 210px;
+            height: 90px;
+          }
+          .home-h1 > svg {
+            height: 90px;
+          }
+          .home-h1 > h1 {
+            font-size: 1.5rem;
+            line-height: 1.5rem;
+            left: 30px;
+          }
+        }
       `}
     </style>
   </div>
