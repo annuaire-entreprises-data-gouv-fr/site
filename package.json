@@ -15,6 +15,7 @@
     "build:frontend": "npm run build:clean && NODE_ENV=production vite build frontend --config ./frontend/vite.config.ts",
     "build:back": "NODE_ENV=production next build",
     "build": "npm run build:frontend && npm run build:back",
+    "build:analyze": "ANALYZE=true npm run build",
     "start": "NODE_ENV=production && next start",
     "test:end2end": "cypress run",
     "test:end2end:open": "cypress open",
@@ -69,6 +70,7 @@
   "devDependencies": {
     "@axe-core/cli": "~4.5.2",
     "@babel/core": "^7.20.7",
+    "@next/bundle-analyzer": "^13.1.5",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-interactions": "^6.5.15",

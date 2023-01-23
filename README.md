@@ -60,6 +60,10 @@ npm run build && npm run start
 
 Nous utilisons [commitlint](https://commitlint.js.org/#/guides-local-setup) pour vérifier que les messages.
 
+### Bundle analyzer
+
+[@next/bundle-analyzer](https://www.npmjs.com/package/@next/bundle-analyzer) is installed in this project to run an analyze use `npm run build:analyze`
+
 ### Eslint
 
 Afin d'améliorer votre expérience de dev vous pouvez utiliser [l'extenstion Eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
