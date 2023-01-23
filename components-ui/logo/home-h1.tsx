@@ -1,0 +1,64 @@
+/**
+ * Render website's logo using a mix of SVG and text, SEO good practises
+ *
+ * @returns
+ */
+export const HomeH1 = () => (
+  <div className="home-h1">
+    <svg
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 53 61"
+      width="100"
+      height="100"
+    >
+      <path
+        d="m26.5 0 26.4 15.3v30.4L26.5 61 .1 45.7V15.3L26.5 0Z"
+        fill="#E8EDFF"
+      />
+    </svg>
+    <h1>
+      L’<b>Annuaire</b> des
+      <br />
+      <b>Entreprises</b>
+    </h1>
+    <style jsx>
+      {`
+        .home-h1 {
+          width: 260px;
+          height: 100px;
+          max-width: 90%;
+          margin: 0 auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+        }
+        .home-h1 > svg {
+          position: absolute;
+          z-index: 0;
+          left: 0;
+          top: 0;
+        }
+        .home-h1 > h1 {
+          position: absolute;
+          z-index: 1;
+          font-weight: 100;
+          font-size: 2rem;
+          line-height: 2rem;
+          top: 20px;
+          left: 25px;
+          padding: 0;
+          margin: 0;
+        }
+
+        .home-h1 > h1 > b {
+          font-weight: 900;
+        }
+        .home-h1 > h1 > b:nth-of-type(2) {
+          margin-left: 25px;
+        }
+      `}
+    </style>
+  </div>
+);

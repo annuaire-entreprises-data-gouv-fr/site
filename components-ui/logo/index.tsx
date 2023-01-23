@@ -6,6 +6,13 @@ interface IProps {
   className?: string;
 }
 
+/**
+ * Logo renderer
+ * uses a slug to render any logo from /public/images/logos/...
+ *
+ * @param param0
+ * @returns
+ */
 const Logo: React.FC<IProps> = ({
   title = 'Annuaire des Entreprises',
   width,
