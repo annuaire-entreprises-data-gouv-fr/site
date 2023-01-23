@@ -13,7 +13,7 @@ import {
   isCollectiviteTerritoriale,
   IUniteLegale,
 } from '#models/index';
-import { estDiffusible, estNonDiffusible } from '#models/statut-diffusion';
+import { estNonDiffusible } from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
 
 export enum FICHE {
@@ -25,7 +25,7 @@ export enum FICHE {
   DIVERS = 'conventions collectives',
   ELUS = 'élus',
   ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
-  INFORMATION = 'informations générales',
+  INFORMATION = 'résumé',
   JUSTIFICATIFS = 'justificatifs',
 }
 
@@ -41,7 +41,7 @@ const Tabs: React.FC<{
   const tabs = [
     {
       ficheType: FICHE.INFORMATION,
-      label: 'Informations générales',
+      label: 'Résumé',
       pathPrefix: '/entreprise/',
       noFollow: false,
       shouldDisplay: true,
@@ -109,7 +109,7 @@ const Tabs: React.FC<{
               href={`${pathPrefix}${uniteLegale.siren}`}
               rel={noFollow ? 'nofollow' : ''}
             >
-              {label}
+              {currentFicheType === ficheType ? label : <h2>{label}</h2>}
             </a>
           ))}
       </div>
@@ -121,20 +121,31 @@ const Tabs: React.FC<{
           border-bottom: 2px solid #dfdff1;
         }
         .title-tabs > a {
-          color: #000091;
-          font-weight: bold;
           border-top-left-radius: 3px;
           border-top-right-radius: 3px;
-          margin: 0 4px;
-          padding: 10px 5px;
           border: 2px solid #dfdff1;
           background-color: #efeffb;
-          margin-bottom: -2px;
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
           box-shadow: 0 -8px 5px -5px #dfdff1 inset;
+          margin: 0 4px;
+          padding: 10px 5px;
+          margin-bottom: -2px;
+        }
+
+        .title-tabs > a,
+        .title-tabs > a > h2 {
+          color: #000091;
+          font-weight: bold;
+          font-size: 0.9rem;
+          line-height: 1.5rem;
+        }
+
+        .title-tabs > a > h2 {
+          margin: 0;
+          padding: 0;
         }
 
         .title-tabs > a:hover {

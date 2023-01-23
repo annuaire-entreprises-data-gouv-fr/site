@@ -289,6 +289,7 @@ export const mapEtablissementToDomainObject = (
     adresse,
     adressePostale,
     codePostal,
+    commune: libelleCommuneEtablissement,
   };
 };
 

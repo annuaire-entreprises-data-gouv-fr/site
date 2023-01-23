@@ -115,7 +115,7 @@ const EtablissementListeSection: React.FC<{
         . Cliquez sur un n° siret pour obtenir plus d’information :
       </p>
       <Section
-        title={`Etablissement${plural}`}
+        title={`${nombreEtablissements} établissement${plural} de ${uniteLegale.nomComplet}`}
         sources={[EAdministration.INSEE]}
       >
         {usePagination ? (
