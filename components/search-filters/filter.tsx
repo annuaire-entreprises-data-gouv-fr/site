@@ -5,7 +5,7 @@ import {
   IParams,
   ISearchFilter,
 } from '#models/search-filter-params';
-import { useOutsideClick } from 'frontend/src/hooks';
+import { useOutsideClick } from 'hooks';
 import ActiveFilterLabel from './active-filter-label';
 
 type FilterProps = {

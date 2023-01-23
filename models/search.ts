@@ -41,7 +41,7 @@ const noResults = {
   notEnoughParams: false,
 };
 
-export const search = async (
+const search = async (
   searchTerm: string,
   page: number,
   searchFilterParams: SearchFilterParams

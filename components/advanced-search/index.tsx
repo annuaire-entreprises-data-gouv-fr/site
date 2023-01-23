@@ -13,7 +13,7 @@ const AdvancedSearch: React.FC<IProps> = ({
   currentSearchTerm = '',
   isMap = false,
 }) => (
-  <div className="search-filters-container">
+  <div id="search-filters-container">
     <div className="fr-container">
       <SearchFilters
         searchParams={searchParams}
@@ -27,11 +27,11 @@ const AdvancedSearch: React.FC<IProps> = ({
       </div>
     </div>
     <style jsx>{`
-      .search-filters-container {
+      #search-filters-container {
         background-color: #f6f6f6;
       }
 
-      .search-filters-container > .fr-container {
+      #search-filters-container > .fr-container {
         display: flex;
         justify-content: start;
         align-items: center;
