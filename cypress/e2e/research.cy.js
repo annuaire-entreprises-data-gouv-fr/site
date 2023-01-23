@@ -23,7 +23,10 @@ describe('Home page’s search bar', () => {
 });
 
 describe('Header’s search bar', () => {
-  it('Allow an empty search term', () => {
+  it('Tutorial on empty search term', () => {
+    cy.visit('/rechercher');
+    cy.contains('Grâce aux filtres de recherche,');
+
     cy.visit('/rechercher?terme=Kikou');
 
     cy.get('.fr-search-bar > input').clear();
@@ -31,6 +34,11 @@ describe('Header’s search bar', () => {
     cy.get('.fr-search-bar > button').click();
 
     cy.url().should('include', '/rechercher?terme=&');
+    cy.contains('Grâce aux filtres de recherche,');
+  });
+
+  it('Not enough params', () => {
+    cy.visit('/rechercher?terme=df');
     cy.contains('Votre requête ne contient pas assez de paramètres');
   });
 
