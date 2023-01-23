@@ -6,7 +6,7 @@ import {
 } from '#models/index';
 
 export const getCompanyPageTitle = (uniteLegale: IUniteLegale) => {
-  const description = `${uniteLegale.nomComplet} à ${uniteLegale.siege.commune} siren ${uniteLegale.siren} sur Annuaire Entreprises`;
+  const description = `${uniteLegale.nomComplet} à ${uniteLegale.siege.commune}, siren ${uniteLegale.siren}, sur Annuaire Entreprises`;
 
   switch (true) {
     case isAssociation(uniteLegale):
