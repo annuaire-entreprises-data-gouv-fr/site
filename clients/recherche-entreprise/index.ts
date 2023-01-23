@@ -12,40 +12,29 @@ import { ISearchResult, ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
 import {
   verifySiren,
-  formatAdresse,
   formatFirstNames,
   parseIntWithDefaultValue,
   verifySiret,
-  agregateTripleFields,
 } from '#utils/helpers';
 import { libelleFromCodeNAFWithoutNomenclature } from '#utils/labels';
 import { httpGet } from '#utils/network';
 
 interface ISirenOuverteEtablissement {
-  siret: string;
-  longitude: string;
-  latitude: string;
   activite_principale: string;
-  date_creation: string;
-  tranche_effectif_salarie: string;
-  date_debut_activite: string;
-  etat_administratif: string;
-  enseigne_1: string;
-  enseigne_2: string;
-  enseigne_3: string;
-  numero_voie: string;
-  type_voie: string;
-  libelle_voie: string;
+  adresse: string;
   code_postal: string;
-  libelle_commune: string;
-  libelle_cedex: string;
-  libelle_commune_etranger: string;
-  code_pays_etranger: string;
-  libelle_pays_etranger: string;
-  indice_repetition: string;
-  complement_adresse: string;
-  commune: string;
-  activite_principale_registre_metier: string;
+  est_siege: boolean;
+  etat_administratif: string;
+  geo_id: string;
+  latitude: string;
+  enseignes: string[];
+  liste_finess: [];
+  liste_idcc: [];
+  liste_rge: [];
+  liste_uai: [];
+  longitude: string;
+  nom_commercial: string;
+  siret: string;
 }
 
 interface ISireneOuverteUniteLegaleResultat {
@@ -123,6 +112,7 @@ const clientSearchSireneOuverte = async (
   const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
     searchFilterParams?.toApiURI() || ''
   }`;
+
   const timeout = fallbackOnStaging
     ? constants.timeout.XL
     : constants.timeout.L;
@@ -196,9 +186,9 @@ const mapToUniteLegale = (
 
   return {
     ...createDefaultUniteLegale(siren),
-    siege: mapToEtablissement(siege, siege.siret),
+    siege: mapToEtablissement(siege),
     matchingEtablissements: matching_etablissements
-      .map((e) => mapToEtablissement(e, siege.siret))
+      .map((e) => mapToEtablissement(e))
       .filter((e) => e.siret !== siege.siret),
     etatAdministratif: etatFromEtatAdministratifInsee(
       result.etat_administratif,
@@ -275,46 +265,19 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
 };
 
 const mapToEtablissement = (
-  etablissement: ISirenOuverteEtablissement,
-  siretSiege: string
+  etablissement: ISirenOuverteEtablissement
 ): IEtablissement => {
   const {
     siret,
     latitude = '0',
     longitude = '0',
-    complement_adresse,
-    numero_voie,
-    indice_repetition,
-    type_voie,
-    libelle_voie,
-    code_postal,
-    libelle_commune,
-    libelle_cedex,
-    libelle_commune_etranger,
-    code_pays_etranger,
-    libelle_pays_etranger,
-    enseigne_1,
-    enseigne_2,
-    enseigne_3,
+    adresse,
+    enseignes,
     etat_administratif,
+    est_siege,
   } = etablissement;
 
-  const enseigne =
-    agregateTripleFields(enseigne_1, enseigne_2, enseigne_3) || '';
-
-  const adresse = formatAdresse({
-    complement: complement_adresse,
-    numeroVoie: numero_voie,
-    indiceRepetition: indice_repetition,
-    typeVoie: type_voie,
-    libelleVoie: libelle_voie,
-    codePostal: code_postal,
-    libelleCommune: libelle_commune,
-    libelleCommuneCedex: libelle_cedex,
-    libelleCommuneEtranger: libelle_commune_etranger,
-    codePaysEtranger: code_pays_etranger,
-    libellePaysEtranger: libelle_pays_etranger,
-  });
+  const enseigne = enseignes.join(' ');
 
   const adressePostale = adresse
     ? `${enseigne ? `${enseigne}, ` : ''}${adresse}`
@@ -331,7 +294,7 @@ const mapToEtablissement = (
     adressePostale,
     latitude,
     longitude,
-    estSiege: siret === siretSiege,
+    estSiege: est_siege,
     etatAdministratif,
   };
 };

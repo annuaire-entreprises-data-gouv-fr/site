@@ -188,7 +188,7 @@ const ResultsList: React.FC<IProps> = ({
     {withFeedback && <SearchFeedback searchTerm={searchTerm} />}
     <div className="results-list">
       {results.map((result) => (
-        <ResultItem result={result} />
+        <ResultItem key={result.siren} result={result} />
       ))}
     </div>
   </>
