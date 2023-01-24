@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "~5.0.0",
-    "@next/bundle-analyzer": "^13.1.5",
     "@sentry/browser": "~7.24.2",
     "@sentry/nextjs": "~7.24.2",
     "@sentry/tracing": "~7.24.2",
@@ -69,6 +68,7 @@
     "vite": "~3.2.5"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^13.1.5",
     "@axe-core/cli": "~4.5.2",
     "@babel/core": "^7.20.7",
     "@next/bundle-analyzer": "^13.1.5",
