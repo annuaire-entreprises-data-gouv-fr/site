@@ -34,7 +34,7 @@ export const AdvancedSearchTutorial = () => {
             </li>
             <li>
               <span>{building}</span> <b>Situation administrative</b> : filtrez
-              par domaine d’activité, type de structure ou été (actif/cessée)
+              par domaine d’activité, type de structure ou état (En activité/Cessée)
             </li>
           </ul>
         </div>
