@@ -62,6 +62,9 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
         results,
         searchTerm,
         searchFilterParams: searchFilterParams.toJSON(),
+        metadata: {
+          useReact: true,
+        },
       },
     };
   }

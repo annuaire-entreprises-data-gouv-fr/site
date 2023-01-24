@@ -179,7 +179,7 @@ export const extractFilters = (params: IParams) => {
       labelAge = `plus de ${params.ageMin} ans`;
     }
 
-    const labelName = `${params.fn}${params.n ? ` ${params.n}` : ''}`;
+    const labelName = `${params.fn || ''}${params.n ? ` ${params.n}` : ''}`;
     f.dirigeantFilter.label = `${labelName}${
       labelAge && labelName && ', '
     }${labelAge}`;

@@ -34,7 +34,7 @@ const SearchResultPage: NextPageWithLayout<IProps> = ({
     <>
       <Meta
         title="Rechercher une entreprise"
-        canonical="https://annuaire-entreprises.data.gouv.fr"
+        canonical="https://annuaire-entreprises.data.gouv.fr/rechercher"
       />
       <StructuredDataSearchAction />
       <HiddenH1 title="Résultats de recherche" />
