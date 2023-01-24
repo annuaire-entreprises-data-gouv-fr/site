@@ -4,19 +4,19 @@ describe('Home page', () => {
   it('Open advanced search page', () => {
     cy.visit('/');
     cy.contains('recherche avancée').click();
-
-    cy.contains('Zone géographique').click({ force: true });
-    cy.get('#search-localisation-input').type(35000);
+    cy.contains('Zone géographique').click();
+    cy.get(`input[name="cp_dep_label"]`).type('Nice');
+    cy.contains('Nice (06000)').click();
     cy.contains('Appliquer').click();
-
-    cy.url().should('include', '/rechercher?terme=&cp_dep=35000');
+    cy.location().should((loc) => {
+      expect(loc.search).includes(`cp_dep=06000`);
+    });
   });
 });
 
 describe('Dirigeants and Elus search', () => {
   it('Search an élu with dirigeants filters', () => {
     cy.visit('/rechercher?terme=&fn=anne&n=hidalgo');
-
     cy.contains('36 RUE DES PIPISRELLES').should('be.visible');
     cy.contains('METROPOLE DU GRAND PARIS (MGP)').should('be.visible');
   });
@@ -31,46 +31,35 @@ describe('Dirigeants and Elus search', () => {
 describe('Advanced search on page ' + path, () => {
   it('Shows filters', () => {
     cy.visit(path + '?terme=Ganymede');
-
-    cy.contains('Zone géographique').click({ force: true });
+    cy.contains('Zone géographique').click();
     cy.contains('Code postal').should('be.visible');
-    cy.contains('Zone géographique').click({ force: true });
+    cy.contains('Zone géographique').click();
     cy.contains('Code postal').should('not.be.visible');
 
-    cy.contains('Dirigeant').click({ force: true });
+    cy.contains('Dirigeant').click();
     cy.contains(
       'Rechercher toutes les structures liées à une personne (dirigeant(e), ou élu(e))'
     ).should('be.visible');
 
-    cy.contains('Situation administrative').click({ force: true });
+    cy.contains('Situation administrative').click();
     cy.contains('Domaine d’activité').should('be.visible');
     cy.contains('Etat administratif').should('be.visible');
-  });
-
-  it('Geo filter works', () => {
-    cy.visit(path + '?terme=Ganymede');
-
-    cy.contains('Zone géographique').click({ force: true });
-    cy.get('#search-localisation-input').type(35000);
-    cy.contains('Appliquer').click();
-
-    cy.url().should('include', '/rechercher?terme=Ganymede&cp_dep=35000');
   });
 
   it('shows filters', () => {
     cy.visit(path + '?terme=Ganymede');
 
-    cy.contains('Zone géographique').click({ force: true });
+    cy.contains('Zone géographique').click();
     cy.contains('Code postal').should('be.visible');
-    cy.contains('Zone géographique').click({ force: true });
+    cy.contains('Zone géographique').click();
     cy.contains('Code postal').should('not.be.visible');
 
-    cy.contains('Dirigeant').click({ force: true });
+    cy.contains('Dirigeant').click();
     cy.contains(
       'Rechercher toutes les structures liées à une personne (dirigeant(e), ou élu(e))'
     ).should('be.visible');
 
-    cy.contains('Situation administrative').click({ force: true });
+    cy.contains('Situation administrative').click();
     cy.contains('Domaine d’activité').should('be.visible');
   });
 

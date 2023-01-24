@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import React, { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
-import { Layout } from '#components/layout';
+import { Layout } from '#components/layouts/layoutDefault';
 import MapEtablissement from '#components/map/map-etablissement';
 import Meta from '#components/meta';
 import { MapTitleEtablissement } from '#components/title-etablissement-section';
@@ -81,11 +81,7 @@ EtablissementMapPage.getLayout = function getLayout(
   page: ReactElement,
   isBrowserOutdated
 ) {
-  return (
-    <Layout isBrowserOutdated={isBrowserOutdated} searchBar map>
-      {page}
-    </Layout>
-  );
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default EtablissementMapPage;

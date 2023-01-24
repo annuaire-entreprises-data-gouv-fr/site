@@ -1,59 +1,70 @@
-import { PropsWithChildren } from 'react';
+import { ReactElement, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import {
   buildSearchQuery,
   IParams,
   ISearchFilter,
 } from '#models/search-filter-params';
-import { randomId } from '#utils/helpers';
+import { useOutsideClick } from 'hooks';
 import ActiveFilterLabel from './active-filter-label';
 
-const Filter: React.FC<
-  PropsWithChildren<{
-    label: string;
-    activeFilter: ISearchFilter;
-    searchParams: IParams;
-    searchTerm: string;
-    addSaveClearButton: boolean;
-  }>
-> = ({
+type FilterProps = {
+  children: ReactElement[];
+  label: string;
+  activeFilter: ISearchFilter;
+  searchParams: IParams;
+  searchTerm: string;
+  addSaveClearButton: boolean;
+};
+
+const Filter = ({
   children,
   label,
   activeFilter,
   searchParams,
   searchTerm,
   addSaveClearButton = false,
-}) => {
-  const uuid = `toggle-${randomId()}`;
-
+}: FilterProps) => {
   const clearFilterLink = buildSearchQuery(
     searchTerm,
     searchParams,
     activeFilter.excludeParams
   );
 
+  const [open, setOpen] = useState(false);
+
+  const ref = useOutsideClick(() => {
+    setOpen(false);
+  });
+
   return (
     <>
-      <div className="search-filter-label-container">
-        <input type="checkbox" id={uuid} />
-        <label htmlFor={uuid} className="overlay" />
-        <label htmlFor={uuid}>
-          {activeFilter.label ? (
-            <ActiveFilterLabel
-              icon={activeFilter.icon}
-              label={activeFilter.label}
-              query={clearFilterLink}
-            />
-          ) : (
-            <span className="search-filter-label">
-              {activeFilter.icon}&nbsp;{label}&nbsp;&nbsp;▾
-            </span>
+      <div ref={ref} className="search-filter-label-container">
+        <div>
+          <label
+            onClick={() => {
+              setOpen(!open);
+            }}
+          >
+            {activeFilter.label ? (
+              <ActiveFilterLabel
+                icon={activeFilter.icon}
+                label={activeFilter.label}
+                query={clearFilterLink}
+              />
+            ) : (
+              <span className="search-filter-label">
+                {activeFilter.icon}&nbsp;{label}&nbsp;&nbsp;▾
+              </span>
+            )}
+          </label>
+          {open && (
+            <label onClick={() => setOpen(false)} className="close-container">
+              Fermer ✕
+            </label>
           )}
-        </label>
-        <label htmlFor={uuid} className="close-container">
-          Fermer ✕
-        </label>
-        <div className="container">
+        </div>
+        <div className="container" style={{ display: open ? 'block' : 'none' }}>
           <div className="filter-container">{children}</div>
           {addSaveClearButton && (
             <>
@@ -95,48 +106,27 @@ const Filter: React.FC<
             background-color: #fefefe;
           }
 
-          input[type='checkbox'] {
-            display: none;
-          }
-          input[type='checkbox']:checked ~ .overlay {
-            display: block;
-          }
-          input[type='checkbox']:checked ~ .container {
-            display: block;
-          }
-
-          label.overlay {
-            width: 90vw;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: none;
-            z-index: 9999;
-          }
-
           label.close-container {
+            z-index: 99999;
             display: none;
             position: fixed;
             top: 20px;
             right: 20px;
             content: 'Fermer ✕';
             cursor: pointer;
-            z-index: 10001;
           }
 
           .container {
             box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.3);
             top: 100%;
             left: 0;
-            display: none;
             position: absolute;
             padding: 15px;
             margin-top: 5px;
             background-color: #fff;
             border-radius: 3px;
             width: 450px;
-            z-index: 10000;
+            z-index: 1000;
           }
           .container:before {
             content: ' ';
@@ -152,6 +142,8 @@ const Filter: React.FC<
           .container > .filter-container {
             max-height: 350px;
             overflow-y: auto;
+            z-index: 100;
+            padding: 0 4px;
           }
 
           @media only screen and (min-width: 1px) and (max-width: 991px) {
@@ -164,10 +156,7 @@ const Filter: React.FC<
               height: 100vh;
               margin-top: 0;
             }
-            input[type='checkbox']:checked ~ .overlay {
-              display: none;
-            }
-            input[type='checkbox']:checked ~ .close-container {
+            label.close-container {
               display: block;
             }
           }

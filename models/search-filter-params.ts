@@ -1,6 +1,5 @@
 import { building, humanPin, mapPin } from '#components-ui/icon';
 import { IEtatCivil } from '#models/immatriculation/rncs';
-import { libelleFromCodeNAF, libelleFromCodeSectionNaf } from '#utils/labels';
 
 export interface IParams {
   etat?: string;
@@ -9,6 +8,7 @@ export interface IParams {
   sap?: string;
   naf?: string;
   cp_dep?: string;
+  cp_dep_label?: string;
   fn?: string;
   n?: string;
   dmin?: string;
@@ -28,6 +28,7 @@ class SearchFilterParams {
       label = '',
       sap = '',
       cp_dep = '',
+      cp_dep_label = '',
       fn = '',
       n = '',
       dmin = '',
@@ -46,6 +47,7 @@ class SearchFilterParams {
       sap,
       //@ts-ignore
       cp_dep: isNaN(cp_dep) ? '' : cp_dep,
+      cp_dep_label,
       fn,
       n,
       dmin: realDmin,
@@ -162,7 +164,7 @@ export const extractFilters = (params: IParams) => {
     localisationFilter: {
       icon: mapPin,
       label: '',
-      excludeParams: ['cp_dep'],
+      excludeParams: ['cp_dep', 'cp_dep_label'],
     },
   };
 
@@ -177,11 +179,12 @@ export const extractFilters = (params: IParams) => {
       labelAge = `plus de ${params.ageMin} ans`;
     }
 
-    const labelName = `${params.fn}${params.n ? ` ${params.n}` : ''}`;
+    const labelName = `${params.fn || ''}${params.n ? ` ${params.n}` : ''}`;
     f.dirigeantFilter.label = `${labelName}${
       labelAge && labelName && ', '
     }${labelAge}`;
   }
+
   if (params.etat) {
     f.administrativeFilter.label = `Etat : ${
       params.etat === 'A' ? 'en activité' : 'cessée'
@@ -207,8 +210,8 @@ export const extractFilters = (params: IParams) => {
     f.administrativeFilter.label += ` + ${administrativeFilterCounter} filtre${plural} administratif${plural}`;
   }
 
-  if (params.cp_dep) {
-    f.localisationFilter.label = params.cp_dep;
+  if (params.cp_dep_label) {
+    f.localisationFilter.label = params.cp_dep_label;
   }
 
   return f;

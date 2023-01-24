@@ -106,7 +106,7 @@ const search = async (
  * @param searchFilterParams
  * @returns
  */
-const searchWithoutProtectedSiren = async (
+export const searchWithoutProtectedSiren = async (
   searchTerm: string,
   page: number,
   searchFilterParams: SearchFilterParams
@@ -127,5 +127,3 @@ const searchWithoutProtectedSiren = async (
 
   return results;
 };
-
-export default searchWithoutProtectedSiren;

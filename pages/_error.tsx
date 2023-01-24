@@ -1,14 +1,15 @@
 import React from 'react';
 import { ServerErrorExplanations } from '#components/error-explanations';
+import Meta from '#components/meta';
 import logErrorInSentry from '#utils/sentry';
-import Page from '../layouts';
 import { NextPageWithLayout } from './_app';
 
 const ServerError: NextPageWithLayout = () => {
   return (
-    <Page small={true} title="Cette page ne fonctionne pas" noIndex={true}>
+    <>
+      <Meta title="Cette page ne fonctionne pas" noIndex={true} />
       <ServerErrorExplanations />
-    </Page>
+    </>
   );
 };
 
