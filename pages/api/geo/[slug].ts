@@ -14,7 +14,6 @@ const geo = async (
       clientGeoCommunes(term),
       clientGeoDepartements(term),
     ]);
-
     const results = [...departements.slice(0, 5), ...communes.slice(0, 10)];
     res.status(200).json(results);
   } catch (e: any) {

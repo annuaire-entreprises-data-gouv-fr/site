@@ -5,13 +5,25 @@ import SelectCodeNaf from '#components-ui/select/select-code-naf';
 import SelectCodeSectionNaf from '#components-ui/select/select-section-naf';
 import { extractFilters, IParams } from '#models/search-filter-params';
 import Filter from './filter';
+import { FilterGeo } from './filter-geo';
 
 const SearchFilters: React.FC<{
   searchParams?: IParams;
   searchTerm?: string;
 }> = ({ searchParams = {}, searchTerm = '' }) => {
-  const { etat, type, label, cp_dep, sap, naf, fn, n, dmin, dmax } =
-    searchParams || {};
+  const {
+    etat,
+    type,
+    label,
+    cp_dep,
+    cp_dep_label,
+    sap,
+    naf,
+    fn,
+    n,
+    dmin,
+    dmax,
+  } = searchParams || {};
 
   const { localisationFilter, dirigeantFilter, administrativeFilter } =
     extractFilters(searchParams || {});
@@ -26,17 +38,7 @@ const SearchFilters: React.FC<{
         addSaveClearButton
       >
         <label>Code postal ou numéro de département :</label>
-        <input
-          className="fr-input"
-          id="search-localisation-input"
-          autoComplete="off"
-          placeholder="ex: 35000"
-          name="cp_dep"
-          defaultValue={cp_dep}
-        />
-        <div id="search-localisation-responses">
-          <i>Saisissez une ville ou un département pour rechercher son code.</i>
-        </div>
+        <FilterGeo cp_dep={cp_dep} cp_dep_label={cp_dep_label} />
       </Filter>
       <Filter
         label="Dirigeant"
@@ -144,7 +146,6 @@ const SearchFilters: React.FC<{
           />
         </div>
       </Filter>
-
       <style jsx>{`
         .field-in-line {
           display: flex;

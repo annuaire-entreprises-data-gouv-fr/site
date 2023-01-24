@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
-import { Layout as DefaultLayout } from '#components/layout';
+import { Layout as DefaultLayout } from '#components/layouts/layoutDefault';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement, isBrowserOutdated: boolean) => ReactNode;
@@ -21,6 +21,5 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         {page}
       </DefaultLayout>
     ));
-
   return getLayout(<Component {...pageProps} />, isBrowserOutdated);
 }
