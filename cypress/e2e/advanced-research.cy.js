@@ -1,11 +1,11 @@
 const path = '/rechercher';
 
-describe('Home page', () => {
+describe('Search page', () => {
   it('Open advanced search page', () => {
     cy.visit('/');
     cy.contains('recherche avancée').click();
     cy.contains('Zone géographique').click();
-    cy.get(`input[name="cp_dep_label"]`).type('Nice');
+    cy.get('#geo-search-input').type('Nice');
     cy.contains('Nice (06000)').click();
     cy.contains('Appliquer').click();
     cy.location().should((loc) => {

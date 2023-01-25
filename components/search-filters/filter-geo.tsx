@@ -97,6 +97,7 @@ export const FilterGeo: React.FC<{
   return (
     <>
       <input
+        id="geo-search-input"
         className="fr-input"
         onChange={onChange}
         placeholder="ex : Rennes"
