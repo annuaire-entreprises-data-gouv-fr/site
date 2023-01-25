@@ -115,7 +115,7 @@ const clientSearchSireneOuverte = async (
 
   const filters = searchFilterParams?.toApiURI();
 
-  if (!filters && !encodedTerms) {
+  if (!filters && (!encodedTerms || encodedTerms.length < 3)) {
     throw new NotEnoughParamsException('');
   }
 
