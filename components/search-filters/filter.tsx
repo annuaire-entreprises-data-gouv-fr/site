@@ -110,7 +110,7 @@ const Filter = ({
           }
 
           label.close-container {
-            z-index: 99999;
+            z-index: 100;
             display: none;
             position: fixed;
             top: 20px;
