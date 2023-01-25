@@ -115,6 +115,7 @@ const clientSearchSireneOuverte = async (
   const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
     searchFilterParams?.toApiURI() || ''
   }`;
+
   const timeout = fallbackOnStaging
     ? constants.timeout.XL
     : constants.timeout.L;
