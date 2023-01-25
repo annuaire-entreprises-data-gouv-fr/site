@@ -42,8 +42,11 @@ const SelectCodeSectionNaf: React.FC<{
               color: 'black',
             },
           }),
-          control: (baseStyles) => ({
+          control: (baseStyles, state) => ({
             ...baseStyles,
+            boxShadow: '0 !important',
+            outline: state.isFocused ? '2px solid #0476f5' : '',
+            outlineOffset: state.isFocused ? '2px' : '',
             backgroundColor: '#eeeeee',
             border: 'none',
             borderRadius: '0.25rem 0.25rem 0 0',
