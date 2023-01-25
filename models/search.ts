@@ -9,6 +9,7 @@ import {
 } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import {
+  IEtablissement,
   IsLikelyASirenOrSiretException,
   IUniteLegale,
   NotEnoughParamsException,
@@ -19,6 +20,7 @@ export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
   nombreEtablissementsOuverts: number;
   chemin: string;
+  matchingEtablissements: IEtablissement[];
   dirigeants: IDirigeant[];
 }
 

@@ -67,14 +67,13 @@ const SearchResults: React.FC<{
           }
           .results-for-map-wrapper > .results-list-wrapper {
             padding: 0 10px;
-            height: calc(100% - 50px);
+            height: calc(100% - 60px);
             overflow: auto;
           }
           .results-for-map-wrapper > .results-footer-wrapper {
-            height: 50px;
+            height: 60px;
             width: 100%;
             display: flex;
-            border-top: 1px solid #dfdff1;
           }
           .results-counter {
             margin-top: 10px;
@@ -109,7 +108,7 @@ const SearchResults: React.FC<{
           currentPage={results.currentPage}
         />
         <div>
-          <ResultsList results={results.results} searchTerm={searchTerm} />
+          <ResultsList results={results.results} />
           <ResultsPagination
             totalPages={results.pageCount}
             searchTerm={searchTerm}
