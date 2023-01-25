@@ -30,7 +30,7 @@ const FeedBackPage: NextPageWithLayout = () => {
         </div>
         <div className="content-container form-container">
           <form action="/api/feedback/nps" method="post">
-            <input name="uuid" value={uuid} style={{ display: 'none' }} />
+            <input name="uuid" value={uuid} type="hidden" />
             <fieldset>
               <legend>
                 <h2>
