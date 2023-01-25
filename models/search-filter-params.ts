@@ -9,6 +9,7 @@ export interface IParams {
   naf?: string;
   cp_dep?: string;
   cp_dep_label?: string;
+  cp_dep_type?: string;
   fn?: string;
   n?: string;
   dmin?: string;
@@ -29,6 +30,7 @@ class SearchFilterParams {
       sap = '',
       cp_dep = '',
       cp_dep_label = '',
+      cp_dep_type = '',
       fn = '',
       n = '',
       dmin = '',
@@ -46,8 +48,9 @@ class SearchFilterParams {
       label,
       sap,
       //@ts-ignore
-      cp_dep: isNaN(cp_dep) ? '' : cp_dep,
+      cp_dep,
       cp_dep_label,
+      cp_dep_type,
       fn,
       n,
       dmin: realDmin,
@@ -64,10 +67,10 @@ class SearchFilterParams {
   }
 
   public toApiURI() {
-    let cp_dep = this.params.cp_dep || '';
-    const code_postal = cp_dep.length === 5 ? cp_dep : '';
-    const departement =
-      cp_dep.length === 3 || cp_dep.length === 2 ? cp_dep : '';
+    const { cp_dep, cp_dep_type } = this.params;
+    const departement = cp_dep_type === 'dep' ? cp_dep : '';
+    const code_postal = cp_dep_type === 'cp' ? cp_dep : '';
+    const code_commune = cp_dep_type === 'insee' ? cp_dep : '';
 
     return serializeParams({
       etat_administratif: this.params.etat,
@@ -78,6 +81,7 @@ class SearchFilterParams {
       est_collectivite_territoriale: this.params.type === 'ct',
       est_entrepreneur_individuel: this.params.type === 'ei',
       code_postal,
+      code_commune,
       section_activite_principale: this.params.sap,
       departement,
       prenoms_personne: this.params.fn?.trim(),

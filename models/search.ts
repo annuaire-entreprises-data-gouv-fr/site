@@ -1,22 +1,19 @@
 import { HttpNotFound } from '#clients/exceptions';
 import clientSearchSireneOuverte from '#clients/recherche-entreprise';
-import { EAdministration } from '#models/administrations';
-import {
-  APINotRespondingFactory,
-  isAPINotResponding,
-} from '#models/api-not-responding';
 import { IDirigeant } from '#models/immatriculation/rncs';
-import SearchFilterParams, {
-  hasSearchParam,
-} from '#models/search-filter-params';
+import SearchFilterParams from '#models/search-filter-params';
 import {
   cleanSearchTerm,
   escapeTerm,
   isLikelyASiretOrSiren,
 } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
-import logErrorInSentry from '#utils/sentry';
-import { IsLikelyASirenOrSiretException, IUniteLegale } from '.';
+import {
+  IsLikelyASirenOrSiretException,
+  IUniteLegale,
+  NotEnoughParamsException,
+  SearchEngineError,
+} from '.';
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
@@ -47,14 +44,6 @@ const search = async (
   searchFilterParams: SearchFilterParams
 ) => {
   const cleanedTerm = cleanSearchTerm(searchTerm);
-
-  const notEnoughParams =
-    searchTerm.length < 3 && !hasSearchParam(searchFilterParams.toJSON());
-
-  if (notEnoughParams) {
-    return { ...noResults, notEnoughParams: true };
-  }
-
   const likelyASiretOrSiren = isLikelyASiretOrSiren(cleanedTerm);
 
   if (likelyASiretOrSiren) {
@@ -75,6 +64,9 @@ const search = async (
     if (e instanceof HttpNotFound) {
       return noResults;
     }
+    if (e instanceof NotEnoughParamsException) {
+      return { ...noResults, notEnoughParams: true };
+    }
 
     // attempt a fallback on staging
     try {
@@ -90,11 +82,9 @@ const search = async (
         return noResults;
       }
 
-      logErrorInSentry('Search API', {
-        details: `term : ${searchTerm} - ${eFallback.toString()}`,
-      });
-
-      return APINotRespondingFactory(EAdministration.DINUM);
+      throw new SearchEngineError(
+        `term : ${searchTerm} - ${eFallback.toString()}`
+      );
     }
   }
 };
@@ -112,10 +102,6 @@ export const searchWithoutProtectedSiren = async (
   searchFilterParams: SearchFilterParams
 ) => {
   const results = await search(searchTerm, page, searchFilterParams);
-
-  if (isAPINotResponding(results)) {
-    return results;
-  }
 
   results.results = results.results.filter((result) => {
     if (isProtectedSiren(result.siren)) {

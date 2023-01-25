@@ -23,6 +23,7 @@ const SearchFilters: React.FC<{
     n,
     dmin,
     dmax,
+    cp_dep_type,
   } = searchParams || {};
 
   const { localisationFilter, dirigeantFilter, administrativeFilter } =
@@ -37,8 +38,12 @@ const SearchFilters: React.FC<{
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <label>Code postal ou numéro de département :</label>
-        <FilterGeo cp_dep={cp_dep} cp_dep_label={cp_dep_label} />
+        <label>Ville ou département :</label>
+        <FilterGeo
+          cp_dep={cp_dep}
+          cp_dep_label={cp_dep_label}
+          cp_dep_type={cp_dep_type}
+        />
       </Filter>
       <Filter
         label="Dirigeant"

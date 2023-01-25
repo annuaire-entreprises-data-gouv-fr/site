@@ -1,11 +1,11 @@
 const path = '/rechercher';
 
-describe('Home page', () => {
+describe('Search page', () => {
   it('Open advanced search page', () => {
     cy.visit('/');
     cy.contains('recherche avancée').click();
     cy.contains('Zone géographique').click();
-    cy.get(`input[name="cp_dep_label"]`).type('Nice');
+    cy.get('#geo-search-input').type('Nice');
     cy.contains('Nice (06000)').click();
     cy.contains('Appliquer').click();
     cy.location().should((loc) => {
@@ -33,9 +33,9 @@ describe('Advanced search on page ' + path, () => {
     cy.visit(path + '?terme=Ganymede');
 
     cy.contains('Zone géographique').click();
-    cy.contains('Code postal').should('be.visible');
+    cy.contains('Ville ou département').should('be.visible');
     cy.contains('Zone géographique').click();
-    cy.contains('Code postal').should('not.be.visible');
+    cy.contains('Ville ou département').should('not.be.visible');
 
     cy.contains('Dirigeant').click();
     cy.contains(
@@ -48,11 +48,17 @@ describe('Advanced search on page ' + path, () => {
   });
 
   it('filters works', () => {
-    cy.visit(path + '?terme=Ganymede&cp_dep=75008&sap=J');
+    cy.visit(path + '?terme=Ganymede&cp_dep=75008&cp_dep_type=cp&sap=J');
     cy.get('.results-list').should('have.length', 1);
 
-    cy.visit(path + '?terme=Ganymede&cp_dep=35000&sap=J');
+    cy.visit(path + '?terme=Ganymede&cp_dep=35000&cp_dep_type=cp&sap=J');
     cy.get('.results-list').should('have.length', 0);
+
+    cy.visit(
+      path +
+        '?terme=Ganymede&cp_dep=35000&cp_dep_label=Rennes+(35000)&cp_dep_type=cp&sap=J'
+    );
+    cy.contains('Rennes (35000)').should('be.visible');
   });
 
   it('Etat administratif filters', () => {
@@ -83,7 +89,7 @@ describe('Minimum search conditions', () => {
   });
 
   it('Results if term < 3 and filters', () => {
-    cy.visit('/rechercher?terme=ag&cp_dep=35000');
+    cy.visit('/rechercher?terme=ag&cp_dep=35000&cp_dep_type=cp');
     cy.contains('ne contient pas assez de paramètres').should('have.length', 0);
   });
 });
