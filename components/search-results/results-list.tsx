@@ -82,8 +82,8 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
     <ul className="matching-etablissement">
       {(result.matchingEtablissements || [])
         .slice(0, 5)
-        .map((etablissement, index) => (
-          <li>
+        .map((etablissement) => (
+          <li key={etablissement.siret}>
             <a
               className="adress"
               href={`/etablissement/${etablissement.siret}`}
