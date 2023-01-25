@@ -8,7 +8,7 @@ import {
 import { useOutsideClick } from 'hooks';
 import ActiveFilterLabel from './active-filter-label';
 
-type FilterProps = {
+type FilterMenuProps = {
   children: ReactElement[];
   label: string;
   activeFilter: ISearchFilter;
@@ -17,14 +17,14 @@ type FilterProps = {
   addSaveClearButton: boolean;
 };
 
-const Filter = ({
+export const FilterMenu = ({
   children,
   label,
   activeFilter,
   searchParams,
   searchTerm,
   addSaveClearButton = false,
-}: FilterProps) => {
+}: FilterMenuProps) => {
   const clearFilterLink = buildSearchQuery(
     searchTerm,
     searchParams,
@@ -168,5 +168,3 @@ const Filter = ({
     </>
   );
 };
-
-export default Filter;

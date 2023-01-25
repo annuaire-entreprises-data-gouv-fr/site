@@ -1,10 +1,10 @@
 import React from 'react';
+import { FilterMenu } from '#components-ui/filter-menu';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
-import Select from '#components-ui/select';
-import SelectCodeNaf from '#components-ui/select/select-code-naf';
-import SelectCodeSectionNaf from '#components-ui/select/select-section-naf';
+import { MultiSelect, Select } from '#components-ui/select';
 import { extractFilters, IParams } from '#models/search-filter-params';
-import Filter from './filter';
+import { codesNAFRev2 } from '#utils/labels/codes-NAF-rev-2';
+import { codesSectionNAF } from '#utils/labels/codes-section-NAF';
 import { FilterGeo } from './filter-geo';
 
 const SearchFilters: React.FC<{
@@ -31,7 +31,7 @@ const SearchFilters: React.FC<{
 
   return (
     <>
-      <Filter
+      <FilterMenu
         label="Zone géographique"
         activeFilter={localisationFilter}
         searchParams={searchParams}
@@ -44,8 +44,8 @@ const SearchFilters: React.FC<{
           cp_dep_label={cp_dep_label}
           cp_dep_type={cp_dep_type}
         />
-      </Filter>
-      <Filter
+      </FilterMenu>
+      <FilterMenu
         label="Dirigeant"
         activeFilter={dirigeantFilter}
         searchParams={searchParams}
@@ -91,8 +91,8 @@ const SearchFilters: React.FC<{
             defaultValue={dmax}
           />
         </div>
-      </Filter>
-      <Filter
+      </FilterMenu>
+      <FilterMenu
         label="Situation administrative"
         activeFilter={administrativeFilter}
         searchParams={searchParams}
@@ -138,19 +138,33 @@ const SearchFilters: React.FC<{
         <SimpleSeparator />
         <div className="select">
           <label>Domaine d’activité :</label>
-          <SelectCodeSectionNaf
+          <MultiSelect
             name="sap"
             defaultValue={sap}
             placeholder="Choisir un domaine d’activité"
+            id="sap-multi-select"
+            instanceId="sap-multi-select"
+            options={Object.keys(codesSectionNAF).map((k) => ({
+              value: k,
+              label: codesSectionNAF[k as keyof typeof codesSectionNAF],
+            }))}
           />
           <label>Code NAF/APE :</label>
-          <SelectCodeNaf
+          <MultiSelect
             name="naf"
             defaultValue={naf}
             placeholder="Choisir un code NAF/APE"
+            id="naf-multi-select"
+            instanceId="naf-multi-select"
+            options={Object.keys(codesNAFRev2).map((code) => ({
+              value: code,
+              label: `${code} - ${
+                codesNAFRev2[code as keyof typeof codesNAFRev2]
+              }`,
+            }))}
           />
         </div>
-      </Filter>
+      </FilterMenu>
       <style jsx>{`
         .field-in-line {
           display: flex;
