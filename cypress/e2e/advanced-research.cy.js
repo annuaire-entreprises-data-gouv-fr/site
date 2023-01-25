@@ -31,6 +31,7 @@ describe('Dirigeants and Elus search', () => {
 describe('Advanced search on page ' + path, () => {
   it('Shows filters', () => {
     cy.visit(path + '?terme=Ganymede');
+
     cy.contains('Zone géographique').click();
     cy.contains('Code postal').should('be.visible');
     cy.contains('Zone géographique').click();
@@ -44,23 +45,6 @@ describe('Advanced search on page ' + path, () => {
     cy.contains('Situation administrative').click();
     cy.contains('Domaine d’activité').should('be.visible');
     cy.contains('Etat administratif').should('be.visible');
-  });
-
-  it('shows filters', () => {
-    cy.visit(path + '?terme=Ganymede');
-
-    cy.contains('Zone géographique').click();
-    cy.contains('Code postal').should('be.visible');
-    cy.contains('Zone géographique').click();
-    cy.contains('Code postal').should('not.be.visible');
-
-    cy.contains('Dirigeant').click();
-    cy.contains(
-      'Rechercher toutes les structures liées à une personne (dirigeant(e), ou élu(e))'
-    ).should('be.visible');
-
-    cy.contains('Situation administrative').click();
-    cy.contains('Domaine d’activité').should('be.visible');
   });
 
   it('filters works', () => {
