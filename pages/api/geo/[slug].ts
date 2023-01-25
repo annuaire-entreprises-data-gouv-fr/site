@@ -15,15 +15,20 @@ const geo = async (
     const term = slug as string;
     const isNumber = /^[0-9]+$/.test(term);
     if (isNumber) {
-      // code departement or CP
-      if (term.length === 2 || term.length === 3) {
-        const dep = await clientDepartementByCode(term);
-        res.status(200).json(dep);
-        return;
-      } else if (term.length === 5) {
-        let commune = await clientCommuneByCp(term);
-        res.status(200).json(commune);
+      if (term.length < 6) {
+        // code departement or CP
+
+        let suggests = [];
+        if (term.length <= 2) {
+          const testDepCode = `${term}${'0'.repeat(2 - term.length)}`;
+          suggests = await clientDepartementByCode(testDepCode);
+        } else {
+          const testCommuneCode = `${term}${'0'.repeat(5 - term.length)}`;
+          suggests = await clientCommuneByCp(testCommuneCode);
+        }
+        res.status(200).json(suggests);
       }
+
       res.status(404).end();
     } else {
       const [communes, departements] = await Promise.all([
