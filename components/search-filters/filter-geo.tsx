@@ -99,11 +99,16 @@ export const FilterGeo: React.FC<{
       <input
         className="fr-input"
         onChange={onChange}
-        name="cp_dep_label"
         placeholder="ex : Rennes"
         autoComplete="off"
         type="search"
         value={searchTerm}
+      />
+      <input
+        name="cp_dep_label"
+        value={labelDep}
+        style={{ display: 'none' }}
+        onChange={() => {}}
       />
       <input
         name="cp_dep"
