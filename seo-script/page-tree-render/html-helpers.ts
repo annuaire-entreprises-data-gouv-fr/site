@@ -1,7 +1,13 @@
-const head = `
+const head = (title: string, description: string) => `
 <head>
-  <title>Entreprises françaises par départements et par code NAF</title>
-  <meta name="description" content="L’administration permet aux particuliers et agents publics de vérifier les informations juridiques officielles d’une entreprise : SIREN, SIRET, TVA Intracommunautaire, code APE/NAF, capital social, justificatif d’immatriculation, dirigeants, convention collective…">
+  <title>${
+    title ||
+    'Les entreprises, associations et services publics de France, classés par départements et par code NAF'
+  }</title>
+  <meta name="description" content="${
+    description ||
+    'L’administration permet aux particuliers et agents publics de vérifier les informations juridiques officielles d’une entreprise : SIREN, SIRET, TVA Intracommunautaire, code APE/NAF, capital social, justificatif d’immatriculation, dirigeants, convention collective…'
+  }">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -14,11 +20,11 @@ const head = `
   </head>
 `;
 
-export const renderPage = (body: string) => {
+export const renderPage = (body: string, title = '', description = '') => {
   return `
   <!DOCTYPE html>
   <html lang="en">
-    ${head}
+    ${head(title, description)}
     <body>
       <style>div.body-wrapper { margin-top:40px; margin-bottom:50px; } h1 { margin-top:20px; font-size: 1.8rem; } div.body-wrapper a:not(.fr-breadcrumb__link) { line-height:2.1rem; } .pagination > a { padding: 0 5px; margin:5px 10px; display: inline-block; }</style>
       <header role="banner" class="fr-header"><div class="fr-header__body"><div class="fr-container"><div class="fr-header__body-row"><div class="fr-header__brand fr-enlarge-link"><div class="fr-header__brand-top"><div class="fr-header__logo"><a href="/" title="République française" class=""><p class="fr-logo">République<br />française</p></a></div><div class="fr-header__navbar"></div></div></div><div class="fr-header__tools"><div class="fr-header__tools-links"><ul class="fr-links-group"><li><a href="/" class="fr-link">Rechercher une entreprise</a></li></ul></div></div></div></div></div></header>

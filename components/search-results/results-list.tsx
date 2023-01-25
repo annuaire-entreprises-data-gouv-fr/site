@@ -2,7 +2,6 @@ import React from 'react';
 import { humanPin, mapPin } from '#components-ui/icon';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { isPersonneMorale } from '#components/dirigeants-section/rncs-dirigeants';
-import { SearchFeedback } from '#components/search-feedback';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IDirigeant } from '#models/immatriculation/rncs';
@@ -11,7 +10,6 @@ import { ISearchResult } from '#models/search';
 
 interface IProps {
   results: ISearchResult[];
-  withFeedback?: boolean;
   searchTerm?: string;
 }
 
@@ -179,13 +177,8 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
   </div>
 );
 
-const ResultsList: React.FC<IProps> = ({
-  results,
-  withFeedback = false,
-  searchTerm = '',
-}) => (
+const ResultsList: React.FC<IProps> = ({ results }) => (
   <>
-    {withFeedback && <SearchFeedback searchTerm={searchTerm} />}
     <div className="results-list">
       {results.map((result) => (
         <ResultItem key={result.siren} result={result} />

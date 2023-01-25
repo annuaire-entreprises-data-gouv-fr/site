@@ -19,7 +19,7 @@ import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, ICertifications {}
 
-const RGE: NextPageWithLayout<IProps> = ({
+const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   rge,
   uniteLegale,
   entrepreneurSpectacles,
@@ -70,4 +70,4 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   }
 );
 
-export default RGE;
+export default LabelsAndCertificatsPage;

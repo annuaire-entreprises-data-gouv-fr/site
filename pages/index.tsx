@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 import Logo from '#components-ui/logo';
+import { HomeH1 } from '#components-ui/logo/home-h1';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
-import HomePageAdvancedSearch from '#components/advanced-search/home-page';
-import { Layout } from '#components/layout';
+import { Layout } from '#components/layouts/layoutDefault';
 import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
 import StructuredDataSearchAction from '#components/structured-data/search';
@@ -23,13 +23,7 @@ const Index: NextPageWithLayout = () => (
         action={'/rechercher'}
         method="get"
       >
-        <Logo
-          title="Logo de l’Annuaire des Entreprises"
-          slug="annuaire-entreprises"
-          width={270}
-          height={112}
-        />
-        <HiddenH1 title="Bienvenue sur L’Annuaire des Entreprises" />
+        <HomeH1 />
         <h2>
           Vérifiez les informations juridiques publiques des entreprises,
           associations et services publics en France
@@ -42,7 +36,9 @@ const Index: NextPageWithLayout = () => (
           />
         </div>
         <br />
-        <HomePageAdvancedSearch />
+        <div className="layout-center">
+          <a href="/rechercher">→ Effectuer une recherche avancée</a>
+        </div>
       </form>
     </div>
     <style jsx>{`

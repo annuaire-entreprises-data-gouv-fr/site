@@ -26,11 +26,9 @@ const AdvancedSearch: React.FC<IProps> = ({
         />
       </div>
     </div>
-
     <style jsx>{`
       #search-filters-container {
         background-color: #f6f6f6;
-        display: none;
       }
 
       #search-filters-container > .fr-container {

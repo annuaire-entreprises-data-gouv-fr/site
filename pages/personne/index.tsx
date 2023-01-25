@@ -2,13 +2,13 @@ import { GetServerSideProps } from 'next';
 import React, { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import { Layout } from '#components/layout';
+import { Layout } from '#components/layouts/layoutDefault';
 import Meta from '#components/meta';
 import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';
 import { IEtatCivil } from '#models/immatriculation/rncs';
-import search, { ISearchResults } from '#models/search';
+import { searchWithoutProtectedSiren, ISearchResults } from '#models/search';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import {
@@ -52,11 +52,7 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
         {results.currentPage > 1 && `Page ${results.currentPage} de `}
         {results.resultCount} résultats trouvés.
       </span>
-      <ResultsList
-        results={results.results}
-        withFeedback={false}
-        searchTerm=""
-      />
+      <ResultsList results={results.results} />
       {results.pageCount > 0 && (
         <PageCounter
           totalPages={results.pageCount}
@@ -98,7 +94,11 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const sirenFrom = (context.query.sirenFrom || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
     const searchFilterParams = new SearchFilterParams(context.query);
-    const results = await search(searchTerm, page, searchFilterParams);
+    const results = await searchWithoutProtectedSiren(
+      searchTerm,
+      page,
+      searchFilterParams
+    );
 
     const searchParams = searchFilterParams.toJSON();
 
@@ -116,15 +116,7 @@ SearchDirigeantPage.getLayout = function getLayout(
   page: ReactElement,
   isBrowserOutdated
 ) {
-  return (
-    <Layout
-      isBrowserOutdated={isBrowserOutdated}
-      searchBar
-      useAdvancedSearch={false}
-    >
-      {page}
-    </Layout>
-  );
+  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
 };
 
 export default SearchDirigeantPage;

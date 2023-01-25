@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
-import { Layout } from '#components/layout';
+import { Layout } from '#components/layouts/layoutDefault';
 import constants from '#models/constants';
 import { NextPageWithLayout } from 'pages/_app';
 

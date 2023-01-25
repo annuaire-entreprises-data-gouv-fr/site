@@ -1,7 +1,7 @@
 import React from 'react';
 import { information } from '#components-ui/icon';
 import Logo from '#components-ui/logo';
-import { PrintNever, PrintOnly } from '#components-ui/print-visibility';
+import { PrintNever } from '#components-ui/print-visibility';
 import AdvancedSearch from '#components/advanced-search';
 import SearchBar from '#components/search-bar';
 import { IParams } from '#models/search-filter-params';
@@ -15,8 +15,8 @@ interface IProps {
 
 const HeaderWithSearch: React.FC<IProps> = ({
   currentSearchTerm = '',
-  map = false,
   searchParams = {},
+  map = false,
   useAdvancedSearch = false,
 }) => (
   <header role="banner" className="fr-header">
@@ -52,7 +52,6 @@ const HeaderWithSearch: React.FC<IProps> = ({
                   </div>
                   <div className="fr-header__navbar"></div>
                 </div>
-
                 <div className="not-fr-search">
                   <SearchBar defaultValue={currentSearchTerm} />
                 </div>
@@ -78,7 +77,6 @@ const HeaderWithSearch: React.FC<IProps> = ({
             isMap={map}
           />
         )}
-
         <style jsx>{`
           div.annuaire-logo {
             order: 2;

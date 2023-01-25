@@ -1,6 +1,4 @@
-import { SearchErrorExplanations } from '#components/error-explanations';
 import MapResults from '#components/map/map-results';
-import { isAPINotResponding } from '#models/api-not-responding';
 import { ISearchResults } from '#models/search';
 import { IParams } from '#models/search-filter-params';
 import ResultsCounter from './results-counter';
@@ -14,10 +12,6 @@ const SearchResults: React.FC<{
   searchFilterParams?: IParams;
   map?: boolean;
 }> = ({ results, searchTerm = '', searchFilterParams = {}, map = false }) => {
-  if (isAPINotResponding(results)) {
-    return <SearchErrorExplanations />;
-  }
-
   if (results.notEnoughParams) {
     return <NotEnoughParams />;
   }
@@ -114,11 +108,7 @@ const SearchResults: React.FC<{
           currentPage={results.currentPage}
         />
         <div>
-          <ResultsList
-            results={results.results}
-            withFeedback={true}
-            searchTerm={searchTerm}
-          />
+          <ResultsList results={results.results} />
           <ResultsPagination
             totalPages={results.pageCount}
             searchTerm={searchTerm}

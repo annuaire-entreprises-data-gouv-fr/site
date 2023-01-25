@@ -31,6 +31,7 @@ export interface IEtablissement {
   adresse: string;
   adressePostale: string;
   codePostal: string;
+  commune: string;
   activitePrincipale: string;
   libelleActivitePrincipale: string;
   trancheEffectif: string;
@@ -66,6 +67,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     adresse: '',
     adressePostale: '',
     codePostal: '',
+    commune: '',
     activitePrincipale: '',
     libelleActivitePrincipale: '',
     trancheEffectif: '',
@@ -275,6 +277,19 @@ export class NotAValidIdRnaError extends Error {
 
 /** COMMON EXCEPTIONS */
 export class IsLikelyASirenOrSiretException extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+// search engine exception
+export class NotEnoughParamsException extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+export class SearchEngineError extends Error {
   constructor(public message: string) {
     super();
   }

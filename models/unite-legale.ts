@@ -77,7 +77,9 @@ class UniteLegaleFactory {
     let [uniteLegale, { complements, colter }] = await Promise.all([
       this._getUniteLegaleCore(this._siren, this._page),
       // colter, labels and certificates, from sirene ouverte
-      getComplements(this._siren),
+      getComplements(this._siren).catch(() => {
+        return { colter: {}, complements: {} };
+      }),
     ]);
 
     uniteLegale.complements = { ...uniteLegale.complements, ...complements };

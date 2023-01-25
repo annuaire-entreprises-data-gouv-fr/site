@@ -7,6 +7,7 @@ import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
   IEtablissement,
+  NotEnoughParamsException,
 } from '#models/index';
 import { ISearchResult, ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
@@ -108,6 +109,12 @@ const clientSearchSireneOuverte = async (
     (fallbackOnStaging
       ? routes.sireneOuverte.rechercheUniteLegaleStaging
       : routes.sireneOuverte.rechercheUniteLegale);
+
+  const filters = searchFilterParams?.toApiURI();
+
+  if (!filters && (!encodedTerms || encodedTerms.length < 3)) {
+    throw new NotEnoughParamsException('');
+  }
 
   const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
     searchFilterParams?.toApiURI() || ''

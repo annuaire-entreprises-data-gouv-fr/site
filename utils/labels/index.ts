@@ -12,8 +12,8 @@ import { departements } from './departements';
 
 export const getUrlFromDepartement = (dep: string) => {
   // departement label without special char
-  const labelDep = escapeTerm(libelleFromDepartement(dep));
-  return labelDep.replaceAll(' ', '').toLocaleLowerCase();
+  const labelDep = escapeTerm(libelleFromDepartement(dep, false));
+  return `${dep}-${labelDep.replaceAll(' ', '').toLocaleLowerCase()}`;
 };
 
 export const getDepartementFromCodePostal = (codePostal: string) => {
@@ -38,12 +38,16 @@ export const getDepartementFromCodePostal = (codePostal: string) => {
   return codePostal.slice(0, 2);
 };
 
-export const libelleFromDepartement = (departement: string) => {
+export const libelleFromDepartement = (
+  codeDepartement: string,
+  addCode = true
+) => {
   //@ts-ignore
-  const label = departements[departement];
+  const label = departements[codeDepartement];
 
   if (label) {
-    return `${departement} - ${label}`;
+    const code = addCode ? ` (${codeDepartement})` : '';
+    return `${label}${code}`;
   }
   return 'Département inconnu';
 };

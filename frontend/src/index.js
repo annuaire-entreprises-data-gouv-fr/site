@@ -1,6 +1,5 @@
 // load first to lowser CLS
 import './helpers-feedbacks';
-import './advanced-search';
 
 import './helpers-copy-paste';
 import './fetch-tva';
