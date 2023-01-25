@@ -39,17 +39,15 @@ const SearchResultPage: NextPageWithLayout<IProps> = ({
       <StructuredDataSearchAction />
       <HiddenH1 title="Résultats de recherche" />
       <div className="content-container">
-        <div className="content-container">
-          {!hasSearchParam(searchFilterParams) && !searchTerm ? (
-            <AdvancedSearchTutorial />
-          ) : (
-            <SearchResults
-              results={results}
-              searchTerm={searchTerm}
-              searchFilterParams={searchFilterParams}
-            />
-          )}
-        </div>
+        {!hasSearchParam(searchFilterParams) && !searchTerm ? (
+          <AdvancedSearchTutorial />
+        ) : (
+          <SearchResults
+            results={results}
+            searchTerm={searchTerm}
+            searchFilterParams={searchFilterParams}
+          />
+        )}
       </div>
     </>
   );

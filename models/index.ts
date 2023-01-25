@@ -282,8 +282,14 @@ export class IsLikelyASirenOrSiretException extends Error {
   }
 }
 
-// search engin exception
+// search engine exception
 export class NotEnoughParamsException extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+export class SearchEngineError extends Error {
   constructor(public message: string) {
     super();
   }

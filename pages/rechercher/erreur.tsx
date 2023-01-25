@@ -15,15 +15,13 @@ const SearchResultPage: NextPageWithLayout<IPropsWithMetadata> = ({}) => {
   return (
     <>
       <Meta
-        title="Rechercher une entreprise"
-        canonical="https://annuaire-entreprises.data.gouv.fr/rechercher"
+        title="Une erreur est survenue lors de votre recherche"
+        canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/erreur"
       />
       <StructuredDataSearchAction />
-      <HiddenH1 title="Erreur dans la recherche" />
+      <HiddenH1 title="Une erreur est survenue lors de votre recherche" />
       <div className="content-container">
-        <div className="content-container">
-          <SearchErrorExplanations />
-        </div>
+        <SearchErrorExplanations />
       </div>
     </>
   );
