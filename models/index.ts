@@ -281,3 +281,10 @@ export class IsLikelyASirenOrSiretException extends Error {
     super();
   }
 }
+
+// search engin exception
+export class NotEnoughParamsException extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}

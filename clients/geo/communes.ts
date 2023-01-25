@@ -9,8 +9,16 @@ interface IGeoCommuneResponse {
   code: string;
 }
 
-const clientGeoCommunes = async (slug: string): Promise<any> => {
-  const response = await httpGet(routes.geo.commune + slug, {
+const clientCommunesByName = async (slug: string): Promise<any> => {
+  const response = await httpGet(`${routes.geo.commune}&nom=${slug}`, {
+    timeout: constants.timeout.L,
+  });
+
+  return mapToDomainObject(response.data || []);
+};
+
+const clientCommuneByCp = async (cp: string): Promise<any> => {
+  const response = await httpGet(`${routes.geo.commune}&codePostal=${cp}`, {
     timeout: constants.timeout.L,
   });
 
@@ -21,12 +29,17 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
   return response.reduce(
     (communes: IGeoElement[], commune) => [
       ...communes,
+      {
+        type: 'insee',
+        value: commune.code,
+        label: `${commune.nom} (Toute la ville)`,
+      },
       ...commune.codesPostaux.map((cp) => {
-        return { label: `${commune.nom} (${cp})`, value: cp };
+        return { label: `${commune.nom} (${cp})`, value: cp, type: 'cp' };
       }),
     ],
     []
   );
 };
 
-export { clientGeoCommunes };
+export { clientCommunesByName, clientCommuneByCp };

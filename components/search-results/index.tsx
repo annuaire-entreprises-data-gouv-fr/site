@@ -1,4 +1,4 @@
-import { SearchErrorExplanations } from '#components/error-explanations';
+import { useRouter } from 'next/router';
 import MapResults from '#components/map/map-results';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { ISearchResults } from '#models/search';
@@ -14,8 +14,10 @@ const SearchResults: React.FC<{
   searchFilterParams?: IParams;
   map?: boolean;
 }> = ({ results, searchTerm = '', searchFilterParams = {}, map = false }) => {
+  const router = useRouter();
+
   if (isAPINotResponding(results)) {
-    return <SearchErrorExplanations />;
+    router.push('/rechercher/erreur');
   }
 
   if (results.notEnoughParams) {

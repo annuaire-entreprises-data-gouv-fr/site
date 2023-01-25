@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import { Layout } from '#components/layouts/layoutSearch';
 import Meta from '#components/meta';

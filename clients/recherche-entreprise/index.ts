@@ -6,6 +6,7 @@ import { IEtatCivil, IPersonneMorale } from '#models/immatriculation/rncs';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
+  NotEnoughParamsException,
 } from '#models/index';
 import { ISearchResult, ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
@@ -112,9 +113,16 @@ const clientSearchSireneOuverte = async (
       ? routes.sireneOuverte.rechercheUniteLegaleStaging
       : routes.sireneOuverte.rechercheUniteLegale);
 
+  const filters = searchFilterParams?.toApiURI();
+
+  if (!filters && !encodedTerms) {
+    throw new NotEnoughParamsException('');
+  }
+
   const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
     searchFilterParams?.toApiURI() || ''
   }`;
+
   const timeout = fallbackOnStaging
     ? constants.timeout.XL
     : constants.timeout.L;

@@ -54,7 +54,7 @@ const Filter = ({
               />
             ) : (
               <span className="search-filter-label">
-                {activeFilter.icon}&nbsp;{label}&nbsp;&nbsp;▾
+                <span>{activeFilter.icon}</span>&nbsp;{label}&nbsp;&nbsp;▾
               </span>
             )}
           </label>
@@ -100,6 +100,9 @@ const Filter = ({
             border: 1px solid #ccc;
             border-radius: 3px;
             padding: 5px 10px;
+          }
+          span.search-filter-label > span {
+            color: #000091;
           }
           span.search-filter-label:hover {
             border-color: #0a76f6;
