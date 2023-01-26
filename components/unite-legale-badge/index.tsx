@@ -5,6 +5,7 @@ import {
   administrationFill,
   collectiviteFill,
 } from '#components-ui/icon';
+import { Badge } from '#components-ui/tag/badge';
 import {
   isServicePublic,
   isAssociation,
@@ -12,99 +13,109 @@ import {
   IUniteLegale,
 } from '#models/index';
 
-const determineType = (uniteLegale: IUniteLegale) => {
-  if (isAssociation(uniteLegale)) {
-    return {
-      icon: communityFill,
-      label: 'Association',
-      colors: ['#e5d2f9;', '#3d0d71'],
-    };
-  }
-  if (uniteLegale.complements.estEntrepreneurIndividuel) {
-    return {
-      icon: user,
-      label: 'Entreprise individuelle',
-      colors: ['#95e3e8', '#034e6e'],
-    };
-  }
-
-  if (isCollectiviteTerritoriale(uniteLegale)) {
-    // colter before administration as it is more restrictive yet some colter might also be administration
-    return {
-      icon: collectiviteFill,
-      label: 'Collectivité territoriale',
-      colors: ['#ffe283', '#563003'],
-    };
-  }
-
-  if (isServicePublic(uniteLegale)) {
-    return {
-      icon: administrationFill,
-      label: 'Service public',
-      colors: ['#ffe283', '#563003'],
-    };
-  }
-
-  // default case
-  return {
-    icon: buildingFill,
-    label: 'Unité légale',
-    colors: ['#e8edff', '#000091'],
-    isDefault: true,
-  };
-};
+export const AssociationBadge = ({
+  small = false,
+  isSelected = false,
+  onClick = null,
+}) => (
+  <Badge
+    small={small}
+    onClick={onClick}
+    icon={communityFill}
+    isSelected={isSelected}
+    label="Association"
+    fontColor="#3d0d71"
+    backgroundColor="#e5d2f9"
+  />
+);
+export const EntrepriseIndividuelleBadge = ({
+  small = false,
+  isSelected = false,
+  onClick = null,
+}) => (
+  <Badge
+    icon={user}
+    small={small}
+    onClick={onClick}
+    isSelected={isSelected}
+    label="Entreprise individuelle"
+    fontColor="#034e6e"
+    backgroundColor="#95e3e8"
+  />
+);
+export const CollectiviteTerritorialeBadge = ({
+  small = false,
+  isSelected = false,
+  onClick = null,
+}) => (
+  <Badge
+    icon={collectiviteFill}
+    small={small}
+    onClick={onClick}
+    isSelected={isSelected}
+    label="Collectivité territoriale"
+    fontColor="#563003"
+    backgroundColor="#ffe283"
+  />
+);
+export const ServicePublicBadge = ({
+  small = false,
+  isSelected = false,
+  onClick = null,
+}) => (
+  <Badge
+    icon={administrationFill}
+    small={small}
+    onClick={onClick}
+    isSelected={isSelected}
+    label="Service public"
+    fontColor="#563003"
+    backgroundColor="#ffe283"
+  />
+);
+export const DefaultBadge = ({
+  label = 'Unité légale',
+  small = false,
+  isSelected = false,
+  onClick = null,
+}) => (
+  <Badge
+    icon={buildingFill}
+    small={small}
+    onClick={onClick}
+    label={label}
+    isSelected={isSelected}
+    fontColor="#000091"
+    backgroundColor="#e8edff"
+  />
+);
 
 const UniteLegaleBadge: React.FC<{
   uniteLegale: IUniteLegale;
   small?: boolean;
   hiddenByDefault?: boolean;
 }> = ({ uniteLegale, small = false, hiddenByDefault = false }) => {
-  const {
-    icon,
-    label,
-    isDefault = false,
-    colors: [background, font],
-  } = determineType(uniteLegale);
-
-  if (hiddenByDefault && isDefault) {
-    return null;
+  if (isAssociation(uniteLegale)) {
+    return <AssociationBadge small={small} />;
+  }
+  if (uniteLegale.complements.estEntrepreneurIndividuel) {
+    return <EntrepriseIndividuelleBadge small={small} />;
   }
 
-  return (
-    <span className="badge-wrapper">
-      <span className="badge-icon">{icon}</span>
-      <span className="badge-label">{label}</span>
-      <style jsx>{`
-      .badge-wrapper {
-        display: flex;
-        align-items: stretch;
-        justify-content: center;
-        font-size: ${small ? '0.9rem' : '1rem'};
-        margin:2px 0;
-      }
+  if (isCollectiviteTerritoriale(uniteLegale)) {
+    // colter before administration as it is more restrictive yet some colter might also be administration
+    return <CollectiviteTerritorialeBadge small={small} />;
+  }
 
-      .badge-icon {
-        border-top-left-radius: 50px;
-        border-bottom-left-radius: 50px;
-        background-color: ${background};
-        color: ${font};
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding:  ${small ? '0 6px' : '2px 8px'};
-π      }
+  if (isServicePublic(uniteLegale)) {
+    return <ServicePublicBadge small={small} />;
+  }
 
-      .badge-label {
-        border-top-right-radius: 50px;
-        border-bottom-right-radius: 50px;
-        background-color: #eee;
-        color: #555;
-        font-weight: bold;
-        padding: ${small ? '0 8px 0 6px' : '2px 10px 2px 8px'}
-      }
-    `}</style>
-    </span>
-  );
+  if (hiddenByDefault) {
+    return null;
+  }
+  // default case
+  return <DefaultBadge small={small} />;
 };
 
 export default UniteLegaleBadge;

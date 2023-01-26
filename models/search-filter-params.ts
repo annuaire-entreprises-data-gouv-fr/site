@@ -223,11 +223,11 @@ export const extractFilters = (params: IParams) => {
 
   if (structureFilterCounter > 0) {
     const plural = structureFilterCounter ? 's' : '';
-    f.structureFilter.label += ` + ${structureFilterCounter} filtre${plural} structure${plural}`;
+    f.structureFilter.label += ` ${structureFilterCounter} filtre${plural} structure${plural}`;
   }
 
   if (params.cp_dep_label) {
-    f.structureFilter.label = params.cp_dep_label;
+    f.localisationFilter.label = params.cp_dep_label;
   }
 
   return f;

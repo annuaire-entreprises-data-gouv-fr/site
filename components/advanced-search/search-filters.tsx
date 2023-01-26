@@ -6,6 +6,7 @@ import { extractFilters, IParams } from '#models/search-filter-params';
 import { codesNAFRev2 } from '#utils/labels/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/labels/codes-section-NAF';
 import { FilterGeo } from './filter-geo';
+import { FilterStructure } from './filter-structure';
 
 const SearchFilters: React.FC<{
   searchParams?: IParams;
@@ -103,31 +104,7 @@ const SearchFilters: React.FC<{
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <span>Type de structure :</span>
-        <Select
-          options={[
-            {
-              value: 'ei',
-              label: 'Entreprise individuelle',
-            },
-            { value: 'ct', label: 'Collectivité territoriale' },
-            { value: 'asso', label: 'Association' },
-          ]}
-          name="type"
-          defaultValue={type}
-          placeholder="Choisir un type de structure"
-        />
-        <span>Labels et certificats :</span>
-        <Select
-          options={[
-            { value: 'rge', label: 'RGE - Reconnu Garant de l’Environnement' },
-            { value: 'ess', label: 'ESS - Economie Sociale et Solidaire' },
-            { value: 'esv', label: 'Entreprise du Spectacle Vivant' },
-          ]}
-          name="label"
-          defaultValue={label}
-          placeholder="Choisir un label ou un certificat"
-        />
+        <FilterStructure label={label} type={type} />
       </FilterMenu>
       <FilterMenu
         label="Situation administrative"
