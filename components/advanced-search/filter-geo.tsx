@@ -34,7 +34,7 @@ export const FilterGeo: React.FC<{
   const [geoSuggests, setGeoSuggests] = useState([]);
 
   const [suggestsHistory, setSuggestsHistory] = useLocalStorage(
-    'geo-search-history',
+    'geo-search-history-2',
     []
   );
   const [showSuggestsHistory, setShowSuggestsHistory] = useState(false);
@@ -67,10 +67,10 @@ export const FilterGeo: React.FC<{
     saveSuggestsHistory({ label, value, type });
   };
 
-  const saveSuggestsHistory = ({ label, value }: IGeoSuggest) => {
+  const saveSuggestsHistory = ({ label, value, type }: IGeoSuggest) => {
     try {
       const newSuggestHistory = [
-        { label, value },
+        { label, value, type },
         ...suggestsHistory.filter((s: IGeoSuggest) => s.value !== value),
       ];
 
