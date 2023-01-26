@@ -279,12 +279,12 @@ const mapToEtablissement = (
     latitude = '0',
     longitude = '0',
     adresse,
-    enseignes,
+    liste_enseignes,
     etat_administratif,
     est_siege,
   } = etablissement;
 
-  const enseigne = enseignes.join(' ');
+  const enseigne = (liste_enseignes||[]).join(' ');
 
   const adressePostale = adresse
     ? `${enseigne ? `${enseigne}, ` : ''}${adresse}`
