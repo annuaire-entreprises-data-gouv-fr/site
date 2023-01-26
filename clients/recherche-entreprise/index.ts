@@ -28,7 +28,7 @@ interface ISirenOuverteEtablissement {
   etat_administratif: string;
   geo_id: string;
   latitude: string;
-  enseignes: string[];
+  liste_enseignes: string[];
   liste_finess: [];
   liste_idcc: [];
   liste_rge: [];
