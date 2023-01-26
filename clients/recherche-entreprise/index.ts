@@ -28,7 +28,7 @@ interface ISirenOuverteEtablissement {
   etat_administratif: string;
   geo_id: string;
   latitude: string;
-  enseignes: string[];
+  liste_enseignes: string[];
   liste_finess: [];
   liste_idcc: [];
   liste_rge: [];
@@ -279,12 +279,12 @@ const mapToEtablissement = (
     latitude = '0',
     longitude = '0',
     adresse,
-    enseignes,
+    liste_enseignes,
     etat_administratif,
     est_siege,
   } = etablissement;
 
-  const enseigne = enseignes.join(' ');
+  const enseigne = (liste_enseignes||[]).join(' ');
 
   const adressePostale = adresse
     ? `${enseigne ? `${enseigne}, ` : ''}${adresse}`
