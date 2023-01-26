@@ -346,3 +346,20 @@ export const mail = (
     <polyline points="22,6 12,13 2,6"></polyline>
   </svg>
 );
+
+export const file = (
+  <svg
+    width="14"
+    height="16"
+    viewBox="0 0 14 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M13 0.5C13.4142 0.5 13.75 0.835786 13.75 1.25V14.75C13.75 15.1642 13.4142 15.5 13 15.5H1C0.585786 15.5 0.25 15.1642 0.25 14.75V1.25C0.25 0.835786 0.585786 0.5 1 0.5H13ZM12.25 2H1.75V14H12.25V2ZM10.75 11V12.5H3.25V11H10.75ZM10.75 8V9.5H3.25V8H10.75ZM6.25 3.5V6.5H3.25V3.5H6.25ZM10.75 4.25V5.75H7.75V4.25H10.75Z"
+      fill="#000091"
+    />
+  </svg>
+);

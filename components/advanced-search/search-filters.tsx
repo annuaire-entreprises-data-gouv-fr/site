@@ -26,8 +26,12 @@ const SearchFilters: React.FC<{
     cp_dep_type,
   } = searchParams || {};
 
-  const { localisationFilter, dirigeantFilter, administrativeFilter } =
-    extractFilters(searchParams || {});
+  const {
+    localisationFilter,
+    dirigeantFilter,
+    administrativeFilter,
+    structureFilter,
+  } = extractFilters(searchParams || {});
 
   return (
     <>
@@ -93,23 +97,12 @@ const SearchFilters: React.FC<{
         </div>
       </FilterMenu>
       <FilterMenu
-        label="Situation administrative"
-        activeFilter={administrativeFilter}
+        label="Structure"
+        activeFilter={structureFilter}
         searchParams={searchParams}
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <label>Etat administratif :</label>
-        <Select
-          options={[
-            { value: 'A', label: 'En activité' },
-            { value: 'C', label: 'Cessée' },
-          ]}
-          name="etat"
-          defaultValue={etat}
-          placeholder="Choisir un état administratif"
-        />
-        <SimpleSeparator />
         <span>Type de structure :</span>
         <Select
           options={[
@@ -134,6 +127,24 @@ const SearchFilters: React.FC<{
           name="label"
           defaultValue={label}
           placeholder="Choisir un label ou un certificat"
+        />
+      </FilterMenu>
+      <FilterMenu
+        label="Situation administrative"
+        activeFilter={administrativeFilter}
+        searchParams={searchParams}
+        searchTerm={searchTerm}
+        addSaveClearButton
+      >
+        <label>Etat administratif :</label>
+        <Select
+          options={[
+            { value: 'A', label: 'En activité' },
+            { value: 'C', label: 'Cessée' },
+          ]}
+          name="etat"
+          defaultValue={etat}
+          placeholder="Choisir un état administratif"
         />
         <SimpleSeparator />
         <div className="select">
