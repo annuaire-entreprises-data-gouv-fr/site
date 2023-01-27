@@ -20,7 +20,7 @@ export const FilterStructure: React.FC<{
       <input
         name="type"
         value={structureType}
-        style={{ display: 'none' }}
+        type="hidden"
         onChange={() => {}}
       />
       <div className="badge-wrapper">
@@ -54,7 +54,7 @@ export const FilterStructure: React.FC<{
       <input
         name="label"
         value={labelSelected}
-        style={{ display: 'none' }}
+        type="hidden"
         onChange={() => {}}
       />
       <div className="badge-wrapper">
