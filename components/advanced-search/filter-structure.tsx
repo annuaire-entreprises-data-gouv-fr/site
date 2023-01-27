@@ -1,18 +1,19 @@
 import { useState } from 'react';
-import { SimpleSeparator } from '#components-ui/horizontal-separator';
-import { Select } from '#components-ui/select';
+import { LabelAndCertificateBadge } from '#components-ui/badge/frequent';
 import {
   AssociationBadge,
   CollectiviteTerritorialeBadge,
-  DefaultBadge,
+  DefaultStructureBadge,
   EntrepriseIndividuelleBadge,
-} from '#components/unite-legale-badge';
+} from '#components-ui/badge/frequent';
+import { SimpleSeparator } from '#components-ui/horizontal-separator';
 
 export const FilterStructure: React.FC<{
   type?: string;
   label?: string;
 }> = ({ type = '', label = '' }) => {
   const [structureType, setStructureType] = useState(type);
+  const [labelSelected, setLabelSelected] = useState(label);
   return (
     <>
       <label>Type de structure :</label>
@@ -22,8 +23,8 @@ export const FilterStructure: React.FC<{
         style={{ display: 'none' }}
         onChange={() => {}}
       />
-      <div className="type-structure">
-        <DefaultBadge
+      <div className="badge-wrapper">
+        <DefaultStructureBadge
           label="Tous"
           small
           onClick={() => setStructureType('')}
@@ -50,18 +51,43 @@ export const FilterStructure: React.FC<{
       </div>
       <SimpleSeparator />
       <label>Labels et certificats :</label>
-      <Select
-        options={[
-          { value: 'rge', label: 'RGE - Reconnu Garant de l’Environnement' },
-          { value: 'ess', label: 'ESS - Economie Sociale et Solidaire' },
-          { value: 'esv', label: 'Entreprise du Spectacle Vivant' },
-        ]}
+      <input
         name="label"
-        defaultValue={label}
-        placeholder="Choisir un label ou un certificat"
+        value={labelSelected}
+        style={{ display: 'none' }}
+        onChange={() => {}}
       />
+      <div className="badge-wrapper">
+        <LabelAndCertificateBadge
+          label="Tous"
+          isSelected={labelSelected === ''}
+          small
+          onClick={() => setLabelSelected('')}
+        />
+        &nbsp;
+        <LabelAndCertificateBadge
+          label="ESS - Entreprise Sociale et Solidaire"
+          isSelected={labelSelected === 'ess'}
+          small
+          onClick={() => setLabelSelected('ess')}
+        />
+        &nbsp;
+        <LabelAndCertificateBadge
+          label="RGE - Reconnu Garant de l’Environnement"
+          isSelected={labelSelected === 'rge'}
+          small
+          onClick={() => setLabelSelected('rge')}
+        />
+        &nbsp;
+        <LabelAndCertificateBadge
+          label="Entrepreneur de spectacles vivants"
+          isSelected={labelSelected === 'esv'}
+          small
+          onClick={() => setLabelSelected('esv')}
+        />
+      </div>
       <style jsx>{`
-        .type-structure {
+        .badge-wrapper {
           display: flex;
           flex-wrap: wrap;
         }

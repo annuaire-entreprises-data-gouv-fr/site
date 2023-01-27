@@ -1,11 +1,16 @@
-interface IProps {
+import { MouseEventHandler } from 'react';
+
+interface IProps extends IPartialBadgeProps {
   icon: JSX.Element;
-  label: string;
-  small: boolean;
-  isSelected: boolean;
-  backgroundColor: string;
-  fontColor: string;
-  onClick: Function | null;
+  backgroundColor?: string;
+  fontColor?: string;
+}
+
+export interface IPartialBadgeProps {
+  label?: string;
+  small?: boolean;
+  isSelected?: boolean;
+  onClick?: MouseEventHandler;
 }
 
 export const Badge: React.FC<IProps> = ({
@@ -15,7 +20,7 @@ export const Badge: React.FC<IProps> = ({
   isSelected = false,
   backgroundColor,
   fontColor,
-  onClick = null,
+  onClick,
 }) => (
   <span
     className={`badge-wrapper ${isSelected ? 'active' : ''}`}
@@ -25,14 +30,14 @@ export const Badge: React.FC<IProps> = ({
     <span className="badge-label">{label}</span>
     <style jsx>{`
       .badge-wrapper {
-        display: flex;
+        display: inline-flex;
         align-items: stretch;
         justify-content: center;
         font-size: ${small ? '0.9rem' : '1rem'};
         margin: 2px 0;
         border: 2px solid transparent;
         border-radius: 50px;
-        cursor: ${onClick ? 'pointer' : 'initial'};
+        cursor: ${onClick ? 'pointer' : 'inherit'};
       }
 
       .badge-wrapper:hover {
