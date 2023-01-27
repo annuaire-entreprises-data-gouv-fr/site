@@ -10,8 +10,8 @@ import { IUniteLegale } from '#models/index';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import {
   checkHasLabelsAndCertificates,
-  LabelsAndCertificates,
-} from './labels-and-certificates';
+  LabelsAndCertificatesBadgesSection,
+} from '../labels-and-certificates-badges-section';
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -58,7 +58,7 @@ const UniteLegaleSection: React.FC<{
           ['', <br />],
           [
             'Label(s) et certificat(s)',
-            <LabelsAndCertificates uniteLegale={uniteLegale} />,
+            <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />,
           ],
         ]
       : []),

@@ -6,6 +6,7 @@ import { extractFilters, IParams } from '#models/search-filter-params';
 import { codesNAFRev2 } from '#utils/labels/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/labels/codes-section-NAF';
 import { FilterGeo } from './filter-geo';
+import { FilterStructure } from './filter-structure';
 
 const SearchFilters: React.FC<{
   searchParams?: IParams;
@@ -26,8 +27,12 @@ const SearchFilters: React.FC<{
     cp_dep_type,
   } = searchParams || {};
 
-  const { localisationFilter, dirigeantFilter, administrativeFilter } =
-    extractFilters(searchParams || {});
+  const {
+    localisationFilter,
+    dirigeantFilter,
+    administrativeFilter,
+    structureFilter,
+  } = extractFilters(searchParams || {});
 
   return (
     <>
@@ -93,6 +98,15 @@ const SearchFilters: React.FC<{
         </div>
       </FilterMenu>
       <FilterMenu
+        label="Structure"
+        activeFilter={structureFilter}
+        searchParams={searchParams}
+        searchTerm={searchTerm}
+        addSaveClearButton
+      >
+        <FilterStructure label={label} type={type} />
+      </FilterMenu>
+      <FilterMenu
         label="Situation administrative"
         activeFilter={administrativeFilter}
         searchParams={searchParams}
@@ -108,32 +122,6 @@ const SearchFilters: React.FC<{
           name="etat"
           defaultValue={etat}
           placeholder="Choisir un état administratif"
-        />
-        <SimpleSeparator />
-        <span>Type de structure :</span>
-        <Select
-          options={[
-            {
-              value: 'ei',
-              label: 'Entreprise individuelle',
-            },
-            { value: 'ct', label: 'Collectivité territoriale' },
-            { value: 'asso', label: 'Association' },
-          ]}
-          name="type"
-          defaultValue={type}
-          placeholder="Choisir un type de structure"
-        />
-        <span>Labels et certificats :</span>
-        <Select
-          options={[
-            { value: 'rge', label: 'RGE - Reconnu Garant de l’Environnement' },
-            { value: 'ess', label: 'ESS - Economie Sociale et Solidaire' },
-            { value: 'esv', label: 'Entreprise du Spectacle Vivant' },
-          ]}
-          name="label"
-          defaultValue={label}
-          placeholder="Choisir un label ou un certificat"
         />
         <SimpleSeparator />
         <div className="select">

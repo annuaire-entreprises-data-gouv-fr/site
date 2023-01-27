@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
+import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
 import { CertificationESSSection } from '#components/labels-and-certificates/ess';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
 import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';
-import { checkHasLabelsAndCertificates } from '#components/unite-legale-section/labels-and-certificates';
 import {
   getCertificationsFromSlug,
   ICertifications,
