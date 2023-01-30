@@ -14,19 +14,24 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
 
   return (
     <>
-      {estEss && <InformationTooltip
-        label="Cette structure appartient au champ de
+      {estEss && (
+        <InformationTooltip
+          label="Cette structure appartient au champ de
         l’Economie Sociale et Solidaire"
-      >
-        <LabelAndCertificateBadge label="ESS - Entreprise Sociale et Solidaire" />
-      </InformationTooltip>}
-      {estRge && <InformationTooltip label="Cette structure est Reconnue Garante de l’Environnement">
-        <LabelAndCertificateBadge label="RGE - Reconnu Garant de l’Environnement" />
-      </InformationTooltip>}
-      {estEntrepreneurSpectacle &&
+        >
+          <LabelAndCertificateBadge label="ESS - Entreprise Sociale et Solidaire" />
+        </InformationTooltip>
+      )}
+      {estRge && (
+        <InformationTooltip label="Cette structure est Reconnue Garante de l’Environnement">
+          <LabelAndCertificateBadge label="RGE - Reconnu Garant de l’Environnement" />
+        </InformationTooltip>
+      )}
+      {estEntrepreneurSpectacle && (
         <InformationTooltip label="Cette structure a une licence d’entrepreneur de spectacles vivants">
           <LabelAndCertificateBadge label="Entrepreneur de spectacles vivants" />
-        </InformationTooltip>}
+        </InformationTooltip>
+      )}
       {checkHasLabelsAndCertificates(uniteLegale) && (
         <>
           <br />
