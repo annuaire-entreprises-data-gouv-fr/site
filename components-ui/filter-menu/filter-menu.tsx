@@ -32,7 +32,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
 
   const [open, setOpen] = useState(false);
 
-  const ref = useOutsideClick((e) => {
+  const ref = useOutsideClick(() => {
     setOpen(false);
   });
 
