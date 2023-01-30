@@ -15,6 +15,7 @@ import {
 } from '#models/index';
 import { estNonDiffusible } from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
+import { ISession, isLoggedIn } from '#utils/session';
 
 export enum FICHE {
   ACTES = 'actes & statuts',
@@ -27,17 +28,20 @@ export enum FICHE {
   ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
   INFORMATION = 'résumé',
   JUSTIFICATIFS = 'justificatifs',
+  OCTROI = 'octroi',
 }
 
 interface IProps {
   ficheType?: FICHE;
   uniteLegale: IUniteLegale;
+  session: ISession | null;
 }
 
 const Tabs: React.FC<{
   currentFicheType: FICHE;
   uniteLegale: IUniteLegale;
-}> = ({ currentFicheType, uniteLegale }) => {
+  session: ISession | null;
+}> = ({ currentFicheType, uniteLegale, session }) => {
   const tabs = [
     {
       ficheType: FICHE.INFORMATION,
@@ -104,7 +108,7 @@ const Tabs: React.FC<{
           .map(({ pathPrefix, ficheType, label, noFollow }) => (
             <a
               className={`${
-                currentFicheType === ficheType && 'active'
+                currentFicheType === ficheType ? 'active' : ''
               } no-style-link`}
               href={`${pathPrefix}${uniteLegale.siren}`}
               rel={noFollow ? 'nofollow' : ''}
@@ -112,6 +116,16 @@ const Tabs: React.FC<{
               {currentFicheType === ficheType ? label : <h2>{label}</h2>}
             </a>
           ))}
+        {isLoggedIn(session) && (
+          <a
+            className={`${
+              currentFicheType === FICHE.OCTROI ? 'active' : ''
+            } no-style-link`}
+            href={`/espace-agent/octroi/${uniteLegale.siren}`}
+          >
+            Marchés publics <span className="agent">agent public</span>
+          </a>
+        )}
       </div>
       <style jsx>{`
         .title-tabs {
@@ -157,6 +171,15 @@ const Tabs: React.FC<{
           background-color: #fff;
           border-bottom: 0;
         }
+        .title-tabs > a > span.agent {
+          border-radius: 45px;
+          margin: 0 5px;
+          padding: 0 8px;
+          background-color: #640091;
+          color: #fbeff9;
+          font-variant: small-caps;
+          font-size: 0.8rem;
+        }
 
         @media only screen and (min-width: 1px) and (max-width: 650px) {
           .title-tabs {
@@ -179,6 +202,7 @@ const Tabs: React.FC<{
 const Title: React.FC<IProps> = ({
   ficheType = FICHE.INFORMATION,
   uniteLegale,
+  session,
 }) => (
   <div className="header-section">
     <div className="title">
@@ -213,7 +237,11 @@ const Title: React.FC<IProps> = ({
     ) : (
       <UnitLegaleDescription uniteLegale={uniteLegale} />
     )}
-    <Tabs uniteLegale={uniteLegale} currentFicheType={ficheType} />
+    <Tabs
+      uniteLegale={uniteLegale}
+      currentFicheType={ficheType}
+      session={session}
+    />
 
     <style jsx>{`
       .header-section {

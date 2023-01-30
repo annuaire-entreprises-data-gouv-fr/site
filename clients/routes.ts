@@ -40,6 +40,12 @@ const routes = {
         'https://www.journal-officiel.gouv.fr/pages/associations-recherche',
     },
   },
+  franceConnect: {
+    authorization: '/api/v1/authorize',
+    token: '/api/v1/token',
+    userInfo: '/api/v1/userinfo',
+    logout: '/api/v1/logout',
+  },
   matomo: {
     report: {
       copyPasteEvents:

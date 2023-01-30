@@ -18,6 +18,7 @@ interface IProps extends IPropsWithMetadata, IConventions {}
 const ConventionsCollectives: NextPageWithLayout<IProps> = ({
   uniteLegale,
   conventionCollectives,
+  metadata: { session },
 }) => (
   <>
     <Meta
@@ -25,7 +26,11 @@ const ConventionsCollectives: NextPageWithLayout<IProps> = ({
       noIndex={true}
     />
     <div className="content-container">
-      <Title ficheType={FICHE.DIVERS} uniteLegale={uniteLegale} />
+      <Title
+        ficheType={FICHE.DIVERS}
+        uniteLegale={uniteLegale}
+        session={session}
+      />
       <ConventionCollectivesSection
         conventionCollectives={conventionCollectives}
       />

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
-import { Layout } from '#components/layouts/layoutDefault';
+import { LayoutDefault } from '#components/layouts/layout-default';
 import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
 import { NextPageWithLayout } from 'pages/_app';
@@ -376,9 +376,9 @@ FeedBackPage.getLayout = function getLayout(
   isBrowserOutdated
 ) {
   return (
-    <Layout isBrowserOutdated={isBrowserOutdated} searchBar={false}>
+    <LayoutDefault isBrowserOutdated={isBrowserOutdated} searchBar={false}>
       {page}
-    </Layout>
+    </LayoutDefault>
   );
 };
 

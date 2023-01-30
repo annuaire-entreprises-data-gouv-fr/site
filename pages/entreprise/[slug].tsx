@@ -38,6 +38,7 @@ interface IProps extends IPropsWithMetadata {
 const UniteLegalePage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   redirected,
+  metadata: { session },
 }) => (
   <>
     <Meta
@@ -52,7 +53,11 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
     <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
     <div className="content-container">
-      <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
+      <Title
+        uniteLegale={uniteLegale}
+        ficheType={FICHE.INFORMATION}
+        session={session}
+      />
       {estNonDiffusible(uniteLegale) ? (
         <NonDiffusibleSection />
       ) : (

@@ -27,6 +27,7 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
   etablissement,
   uniteLegale,
   redirected,
+  metadata: { session },
 }) => (
   <>
     <Meta
@@ -35,7 +36,11 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
     />
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
     <div className="content-container">
-      <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
+      <Title
+        uniteLegale={uniteLegale}
+        ficheType={FICHE.INFORMATION}
+        session={session}
+      />
       <TitleEtablissementWithDenomination
         uniteLegale={uniteLegale}
         etablissement={etablissement}
