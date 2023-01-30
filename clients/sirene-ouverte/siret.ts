@@ -118,6 +118,7 @@ export const mapSireneOuverteEtablissementToDomainObject = (
       libelleCommune: libelle_commune,
     }),
     codePostal: code_postal,
+    commune: libelle_commune,
     activitePrincipale: etablissement.activite_principale,
     libelleActivitePrincipale: libelleFromCodeNAF(
       etablissement.activite_principale

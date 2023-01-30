@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import logoutPicture from '#components-ui/illustrations/logout';
-import ConnexionLayout from '#components/layouts/page-connexion';
+import { LayoutConnexion } from '#components/layouts/layout-connexion';
 import Meta from '#components/meta';
 import { NextPageWithLayout } from 'pages/_app';
 
@@ -18,7 +18,7 @@ const Logout: NextPageWithLayout = () => (
 );
 
 Logout.getLayout = function getLayout(page: ReactElement) {
-  return <ConnexionLayout img={logoutPicture}>{page}</ConnexionLayout>;
+  return <LayoutConnexion img={logoutPicture}>{page}</LayoutConnexion>;
 };
 
 export default Logout;

@@ -22,10 +22,8 @@ const routes = {
     site: 'https://www.education.gouv.fr/annuaire',
   },
   geo: {
-    commune:
-      'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json&nom=',
-    departement:
-      'https://geo.api.gouv.fr/departements?fields=code&format=json&nom=',
+    commune: 'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json',
+    departement: 'https://geo.api.gouv.fr/departements?fields=code&format=json',
   },
   journalOfficielAssociations: {
     ods: {

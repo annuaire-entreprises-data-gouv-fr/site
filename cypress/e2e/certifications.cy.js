@@ -1,4 +1,4 @@
-describe.only('Certifications', () => {
+describe('Certifications', () => {
   describe('RGE', () => {
     it('Should display certification name', () => {
       cy.visit('/labels-certificats/528163777');
@@ -12,7 +12,7 @@ describe.only('Certifications', () => {
   });
 });
 
-describe.only('Certifications', () => {
+describe('Certifications', () => {
   describe('ESS & Spectacles vivants', () => {
     it('Should display ESS and scpetacles vivants', () => {
       cy.visit('/labels-certificats/842019051');

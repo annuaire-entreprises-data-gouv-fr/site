@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ButtonMonComptePro: React.FC<{}> = () => (
-  <form action="/api/auth/login" method="get">
+  <form action="/api/auth/mon-compte-pro/login" method="get">
     <div className="fr-connect-group">
       <button className="fr-connect">
         <span className="fr-connect__login">S’identifier avec</span>

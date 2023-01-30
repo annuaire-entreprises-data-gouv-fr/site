@@ -1,8 +1,9 @@
+import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSidePropsContext } from 'next';
 import { UAParser } from 'ua-parser-js';
 import { createAPM } from '../sentry/apm';
-import { getSession } from '../session';
-import { ISession, isLoggedIn } from '../session/accessSession';
+import { sessionOptions } from '../session';
+import { ISession } from '../session';
 import isUserAgentABot from '../user-agent';
 import { handleErrorFromServerSideProps } from './error-handler';
 
@@ -55,8 +56,9 @@ const isBrowserOutdated = (uaString: string) => {
 export function postServerSideProps(
   getServerSidePropsFunction: (context: GetServerSidePropsContext) => any
 ) {
-  return async (context: GetServerSidePropsContext) => {
+  return withIronSessionSsr(async (context: GetServerSidePropsContext) => {
     const url = context?.req?.url || '/unknown';
+
     const transaction = createAPM(url, 'postServerSideProps');
 
     const { props = {}, ...redirectAndOther } =
@@ -66,9 +68,6 @@ export function postServerSideProps(
 
     const userAgent = context?.req?.headers['user-agent'] || '';
 
-    // sessions
-    // const { navigation } = (await getSession(context.req, context.res)) as any;
-
     return {
       ...redirectAndOther,
       props: {
@@ -77,11 +76,9 @@ export function postServerSideProps(
           ...props.metadata,
           isBrowserOutdated: isBrowserOutdated(userAgent),
           isBot: isUserAgentABot(userAgent),
-          // session: isLoggedIn({ navigation, passport })
-          //   ? { navigation, passport }
-          //   : null,
+          session: context.req.session,
         },
       },
     };
-  };
+  }, sessionOptions);
 }

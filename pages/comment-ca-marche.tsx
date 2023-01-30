@@ -106,7 +106,7 @@ const About: NextPageWithLayout = () => {
             À partir de Novembre 2021, les entreprises immatriculées au RCS ou
             au RNM n’ont plus à fournir leur extrait KBIS dans leurs démarches
             administratives, le seul numéro siret suffit à l’administration pour
-            retrouver les données nécessaire.
+            retrouver les données nécessaires.
           </p>
           <p>
             Ce site permet aux agents d’administrations de retrouver{' '}
@@ -212,12 +212,12 @@ const About: NextPageWithLayout = () => {
           <p>
             Il existe une API spéciale (nommée API Entreprise) réservée aux
             administrations et à certaines entreprises éligibles, qui permet
-            d’accéder aux informations des entreprises détenue par
+            d’accéder aux informations des entreprises détenues par
             l’administration :
           </p>
           <ul>
             <li>les informations d’immatriculation</li>
-            <li>le chiffre d’affaire</li>
+            <li>le chiffre d’affaires</li>
             <li>les certifications professionnelles</li>
             <li>... et bien d’autres</li>
           </ul>

@@ -1,4 +1,8 @@
-module.exports = {
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer({
   webpack: function (config) {
     config.module.rules.push({
       test: /\.ya?ml$/,
@@ -13,17 +17,6 @@ module.exports = {
         destination: '/api/share/qr/:slug',
         permanent: true,
       },
-      // FC
-      {
-        source: '/callback',
-        destination: '/api/auth/callback',
-        permanent: true,
-      },
-      {
-        source: '/logout',
-        destination: '/api/auth/logout/callback',
-        permanent: true,
-      },
     ];
   },
-};
+});

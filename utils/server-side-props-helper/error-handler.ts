@@ -7,6 +7,7 @@ import {
   NotASiretError,
   NotLuhnValidSirenError,
   NotLuhnValidSiretError,
+  SearchEngineError,
   SirenNotFoundError,
   SiretNotFoundError,
 } from '#models/index';
@@ -18,6 +19,7 @@ import {
 import {
   redirectIfSiretOrSiren,
   redirectPageNotFound,
+  redirectSearchEngineError,
   redirectServerError,
   redirectSirenOrSiretIntrouvable,
   redirectSirenOrSiretInvalid,
@@ -47,6 +49,8 @@ const handleExceptions = (exception: any, req: IncomingMessage | undefined) => {
       return redirectPageNotFound(message, scope);
     } else if (exception instanceof HttpNotFound) {
       return redirectPageNotFound(message, scope);
+    } else if (exception instanceof SearchEngineError) {
+      return redirectSearchEngineError(message, scope);
     } else {
       return redirectServerError(message, scope);
     }

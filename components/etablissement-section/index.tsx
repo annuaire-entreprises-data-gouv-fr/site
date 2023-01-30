@@ -123,7 +123,7 @@ const EtablissementSection: React.FC<IProps> = ({
       <Section
         title={
           usedInEntreprisePage
-            ? `Siège social`
+            ? `Siège social de ${uniteLegale.nomComplet}`
             : `Établissement${etablissement.estSiege ? ' (siège social)' : ''}`
         }
         id="etablissement"

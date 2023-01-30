@@ -15,6 +15,7 @@ import {
 } from '#models/index';
 import { estNonDiffusible } from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
+import { ISession, isLoggedIn } from '#utils/session';
 
 export enum FICHE {
   ACTES = 'actes & statuts',
@@ -25,7 +26,7 @@ export enum FICHE {
   DIVERS = 'conventions collectives',
   ELUS = 'élus',
   ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
-  INFORMATION = 'informations générales',
+  INFORMATION = 'résumé',
   JUSTIFICATIFS = 'justificatifs',
   OCTROI = 'octroi',
 }
@@ -33,16 +34,18 @@ export enum FICHE {
 interface IProps {
   ficheType?: FICHE;
   uniteLegale: IUniteLegale;
+  session: ISession | null;
 }
 
 const Tabs: React.FC<{
   currentFicheType: FICHE;
   uniteLegale: IUniteLegale;
-}> = ({ currentFicheType, uniteLegale }) => {
+  session: ISession | null;
+}> = ({ currentFicheType, uniteLegale, session }) => {
   const tabs = [
     {
       ficheType: FICHE.INFORMATION,
-      label: 'Informations générales',
+      label: 'Résumé',
       pathPrefix: '/entreprise/',
       noFollow: false,
       shouldDisplay: true,
@@ -110,17 +113,19 @@ const Tabs: React.FC<{
               href={`${pathPrefix}${uniteLegale.siren}`}
               rel={noFollow ? 'nofollow' : ''}
             >
-              {label}
+              {currentFicheType === ficheType ? label : <h2>{label}</h2>}
             </a>
           ))}
-        <a
-          className={`${
-            currentFicheType === FICHE.OCTROI ? 'active' : ''
-          } no-style-link`}
-          href={`/octroi/${uniteLegale.siren}`}
-        >
-          Marchés publics <span className="beta">beta</span>
-        </a>
+        {isLoggedIn(session) && (
+          <a
+            className={`${
+              currentFicheType === FICHE.OCTROI ? 'active' : ''
+            } no-style-link`}
+            href={`/espace-agent/octroi/${uniteLegale.siren}`}
+          >
+            Marchés publics <span className="agent">agent public</span>
+          </a>
+        )}
       </div>
       <style jsx>{`
         .title-tabs {
@@ -130,20 +135,31 @@ const Tabs: React.FC<{
           border-bottom: 2px solid #dfdff1;
         }
         .title-tabs > a {
-          color: #000091;
-          font-weight: bold;
           border-top-left-radius: 3px;
           border-top-right-radius: 3px;
-          margin: 0 4px;
-          padding: 10px 5px;
           border: 2px solid #dfdff1;
           background-color: #efeffb;
-          margin-bottom: -2px;
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
           box-shadow: 0 -8px 5px -5px #dfdff1 inset;
+          margin: 0 4px;
+          padding: 10px 5px;
+          margin-bottom: -2px;
+        }
+
+        .title-tabs > a,
+        .title-tabs > a > h2 {
+          color: #000091;
+          font-weight: bold;
+          font-size: 0.9rem;
+          line-height: 1.5rem;
+        }
+
+        .title-tabs > a > h2 {
+          margin: 0;
+          padding: 0;
         }
 
         .title-tabs > a:hover {
@@ -155,7 +171,7 @@ const Tabs: React.FC<{
           background-color: #fff;
           border-bottom: 0;
         }
-        .title-tabs > a > span.beta {
+        .title-tabs > a > span.agent {
           border-radius: 45px;
           margin: 0 5px;
           padding: 0 8px;
@@ -186,6 +202,7 @@ const Tabs: React.FC<{
 const Title: React.FC<IProps> = ({
   ficheType = FICHE.INFORMATION,
   uniteLegale,
+  session,
 }) => (
   <div className="header-section">
     <div className="title">
@@ -220,7 +237,11 @@ const Title: React.FC<IProps> = ({
     ) : (
       <UnitLegaleDescription uniteLegale={uniteLegale} />
     )}
-    <Tabs uniteLegale={uniteLegale} currentFicheType={ficheType} />
+    <Tabs
+      uniteLegale={uniteLegale}
+      currentFicheType={ficheType}
+      session={session}
+    />
 
     <style jsx>{`
       .header-section {

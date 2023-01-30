@@ -6,12 +6,17 @@ interface IProps {
   img: JSX.Element;
 }
 
-const ConnexionLayout: React.FC<PropsWithChildren<IProps>> = ({
+export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
   children,
   img,
 }) => (
   <div id="page-layout">
-    <Header />
+    <Header
+      useSearchBar={false}
+      useLogo={true}
+      useAdvancedSearch={false}
+      useMap={false}
+    />
     <div className="connect-container">
       <div className="img-container">
         <div>{img}</div>
@@ -76,5 +81,3 @@ const ConnexionLayout: React.FC<PropsWithChildren<IProps>> = ({
     <Footer />
   </div>
 );
-
-export default ConnexionLayout;

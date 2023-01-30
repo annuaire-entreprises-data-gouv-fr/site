@@ -25,6 +25,7 @@ interface IProps extends IPropsWithMetadata {
 const EtablissementScolaire: NextPageWithLayout<IProps> = ({
   uniteLegale,
   etablissementsScolaires,
+  metadata: { session },
 }) => {
   return (
     <>
@@ -33,6 +34,7 @@ const EtablissementScolaire: NextPageWithLayout<IProps> = ({
         <Title
           ficheType={FICHE.ETABLISSEMENTS_SCOLAIRES}
           uniteLegale={uniteLegale}
+          session={session}
         />
         <EtablissementsScolairesSection
           etablissements={etablissementsScolaires}

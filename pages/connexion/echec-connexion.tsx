@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import connexionFailedPicture from '#components-ui/illustrations/connexion-failed';
-import ConnexionLayout from '#components/layouts/page-connexion';
+import { LayoutConnexion } from '#components/layouts/layout-connexion';
 import Meta from '#components/meta';
 import constants from '#models/constants';
 import { NextPageWithLayout } from 'pages/_app';
@@ -18,7 +18,7 @@ const ConnexionFailure: NextPageWithLayout = () => (
 );
 
 ConnexionFailure.getLayout = function getLayout(page: ReactElement) {
-  return <ConnexionLayout img={connexionFailedPicture}>{page}</ConnexionLayout>;
+  return <LayoutConnexion img={connexionFailedPicture}>{page}</LayoutConnexion>;
 };
 
 export default ConnexionFailure;

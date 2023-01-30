@@ -16,7 +16,10 @@ interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
 }
 
-const ElusPage: NextPageWithLayout<IProps> = ({ uniteLegale, metadata }) => {
+const ElusPage: NextPageWithLayout<IProps> = ({
+  uniteLegale,
+  metadata: { session },
+}) => {
   return (
     <>
       <Meta
@@ -25,7 +28,11 @@ const ElusPage: NextPageWithLayout<IProps> = ({ uniteLegale, metadata }) => {
         noIndex={true}
       />
       <div className="content-container">
-        <Title uniteLegale={uniteLegale} ficheType={FICHE.ELUS} />
+        <Title
+          uniteLegale={uniteLegale}
+          ficheType={FICHE.ELUS}
+          session={session}
+        />
         <ElusSection uniteLegale={uniteLegale} />
       </div>
     </>

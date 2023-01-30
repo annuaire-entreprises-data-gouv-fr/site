@@ -1,19 +1,21 @@
 import type { IronSessionOptions } from 'iron-session';
 
+declare module 'iron-session' {
+  interface IronSessionData extends ISession {}
+}
+
+export interface ISession {
+  user?: { email?: string };
+}
+
 export const sessionOptions: IronSessionOptions = {
-  password: 'complex_password_at_least_32_characters_long',
-  cookieName: 'myapp_cookiename',
+  password: process.env.IRON_SESSION_PWD as string,
+  cookieName: 'annuaire-entreprises-session',
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
   },
 };
 
-// export const getSession = (req: NextApiRequest, res: NextApiResponse) =>
-//   getIronSession(req, res, {
-//     cookieName: 'myapp_cookiename',
-//     password: 'complex_password_at_least_32_characters_long',
-//     // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
-//     cookieOptions: {
-//       secure: process.env.NODE_ENV === 'production',
-//     },
-//   });
+export const isLoggedIn = (session: ISession | null) => {
+  return !!session?.user?.email;
+};

@@ -1,6 +1,5 @@
 import { building, humanPin, mapPin } from '#components-ui/icon';
 import { IEtatCivil } from '#models/immatriculation/rncs';
-import { libelleFromCodeNAF, libelleFromCodeSectionNaf } from '#utils/labels';
 
 export interface IParams {
   etat?: string;
@@ -9,6 +8,8 @@ export interface IParams {
   sap?: string;
   naf?: string;
   cp_dep?: string;
+  cp_dep_label?: string;
+  cp_dep_type?: string;
   fn?: string;
   n?: string;
   dmin?: string;
@@ -28,6 +29,8 @@ class SearchFilterParams {
       label = '',
       sap = '',
       cp_dep = '',
+      cp_dep_label = '',
+      cp_dep_type = '',
       fn = '',
       n = '',
       dmin = '',
@@ -45,7 +48,9 @@ class SearchFilterParams {
       label,
       sap,
       //@ts-ignore
-      cp_dep: isNaN(cp_dep) ? '' : cp_dep,
+      cp_dep,
+      cp_dep_label,
+      cp_dep_type,
       fn,
       n,
       dmin: realDmin,
@@ -62,10 +67,10 @@ class SearchFilterParams {
   }
 
   public toApiURI() {
-    let cp_dep = this.params.cp_dep || '';
-    const code_postal = cp_dep.length === 5 ? cp_dep : '';
-    const departement =
-      cp_dep.length === 3 || cp_dep.length === 2 ? cp_dep : '';
+    const { cp_dep, cp_dep_type } = this.params;
+    const departement = cp_dep_type === 'dep' ? cp_dep : '';
+    const code_postal = cp_dep_type === 'cp' ? cp_dep : '';
+    const code_commune = cp_dep_type === 'insee' ? cp_dep : '';
 
     return serializeParams({
       etat_administratif: this.params.etat,
@@ -76,13 +81,14 @@ class SearchFilterParams {
       est_collectivite_territoriale: this.params.type === 'ct',
       est_entrepreneur_individuel: this.params.type === 'ei',
       code_postal,
+      code_commune,
       section_activite_principale: this.params.sap,
+      activite_principale: this.params.naf,
       departement,
       prenoms_personne: this.params.fn?.trim(),
       nom_personne: this.params.n?.trim(),
       date_naissance_personne_min: this.params.dmin,
       date_naissance_personne_max: this.params.dmax,
-      activite_principale: this.params.naf,
     });
   }
 
@@ -162,7 +168,7 @@ export const extractFilters = (params: IParams) => {
     localisationFilter: {
       icon: mapPin,
       label: '',
-      excludeParams: ['cp_dep'],
+      excludeParams: ['cp_dep', 'cp_dep_label'],
     },
   };
 
@@ -177,11 +183,12 @@ export const extractFilters = (params: IParams) => {
       labelAge = `plus de ${params.ageMin} ans`;
     }
 
-    const labelName = `${params.fn}${params.n ? ` ${params.n}` : ''}`;
+    const labelName = `${params.fn || ''}${params.n ? ` ${params.n}` : ''}`;
     f.dirigeantFilter.label = `${labelName}${
       labelAge && labelName && ', '
     }${labelAge}`;
   }
+
   if (params.etat) {
     f.administrativeFilter.label = `Etat : ${
       params.etat === 'A' ? 'en activité' : 'cessée'
@@ -207,8 +214,8 @@ export const extractFilters = (params: IParams) => {
     f.administrativeFilter.label += ` + ${administrativeFilterCounter} filtre${plural} administratif${plural}`;
   }
 
-  if (params.cp_dep) {
-    f.localisationFilter.label = params.cp_dep;
+  if (params.cp_dep_label) {
+    f.localisationFilter.label = params.cp_dep_label;
   }
 
   return f;

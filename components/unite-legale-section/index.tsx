@@ -67,7 +67,7 @@ const UniteLegaleSection: React.FC<{
   return (
     <div id="entreprise">
       <Section
-        title={`Résumé`}
+        title={`Informations légales de ${uniteLegale.nomComplet}`}
         sources={[
           EAdministration.INSEE,
           EAdministration.VIES,

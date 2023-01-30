@@ -19,7 +19,10 @@ import {
 import { estNonDiffusible } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { extractSirenOrSiretSlugFromUrl, shouldNotIndex } from '#utils/helpers';
-import { getCompanyPageTitle } from '#utils/helpers/get-company-page-title';
+import {
+  getCompanyPageDescription,
+  getCompanyPageTitle,
+} from '#utils/helpers/get-company-page-title';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   postServerSideProps,
@@ -35,11 +38,12 @@ interface IProps extends IPropsWithMetadata {
 const UniteLegalePage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   redirected,
+  metadata: { session },
 }) => (
   <>
     <Meta
       title={getCompanyPageTitle(uniteLegale)}
-      description={`Toutes les informations officielles sur ${uniteLegale.nomComplet} :  Siren, Siret, NIC, APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, conventions collectives...`}
+      description={getCompanyPageDescription(uniteLegale)}
       noIndex={shouldNotIndex(uniteLegale)}
       canonical={
         uniteLegale.chemin &&
@@ -49,7 +53,11 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
     <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
     <div className="content-container">
-      <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
+      <Title
+        uniteLegale={uniteLegale}
+        ficheType={FICHE.INFORMATION}
+        session={session}
+      />
       {estNonDiffusible(uniteLegale) ? (
         <NonDiffusibleSection />
       ) : (

@@ -19,11 +19,11 @@ import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, ICertifications {}
 
-const RGE: NextPageWithLayout<IProps> = ({
+const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   rge,
   uniteLegale,
   entrepreneurSpectacles,
-  metadata,
+  metadata: { session },
 }) => {
   return (
     <>
@@ -32,7 +32,11 @@ const RGE: NextPageWithLayout<IProps> = ({
         noIndex={true}
       />
       <div className="content-container">
-        <Title ficheType={FICHE.CERTIFICATS} uniteLegale={uniteLegale} />
+        <Title
+          ficheType={FICHE.CERTIFICATS}
+          uniteLegale={uniteLegale}
+          session={session}
+        />
         {!checkHasLabelsAndCertificates(uniteLegale) && (
           <p>Cette structure ne possède aucun label ou certificat.</p>
         )}
@@ -70,4 +74,4 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   }
 );
 
-export default RGE;
+export default LabelsAndCertificatsPage;

@@ -1,44 +1,51 @@
 import React from 'react';
+import { FilterMenu } from '#components-ui/filter-menu';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
-import Select from '#components-ui/select';
-import SelectCodeNaf from '#components-ui/select/select-code-naf';
-import SelectCodeSectionNaf from '#components-ui/select/select-section-naf';
+import { MultiSelect, Select } from '#components-ui/select';
 import { extractFilters, IParams } from '#models/search-filter-params';
-import Filter from './filter';
+import { codesNAFRev2 } from '#utils/labels/codes-NAF-rev-2';
+import { codesSectionNAF } from '#utils/labels/codes-section-NAF';
+import { FilterGeo } from './filter-geo';
 
 const SearchFilters: React.FC<{
   searchParams?: IParams;
   searchTerm?: string;
 }> = ({ searchParams = {}, searchTerm = '' }) => {
-  const { etat, type, label, cp_dep, sap, naf, fn, n, dmin, dmax } =
-    searchParams || {};
+  const {
+    etat,
+    type,
+    label,
+    cp_dep,
+    cp_dep_label,
+    sap,
+    naf,
+    fn,
+    n,
+    dmin,
+    dmax,
+    cp_dep_type,
+  } = searchParams || {};
 
   const { localisationFilter, dirigeantFilter, administrativeFilter } =
     extractFilters(searchParams || {});
 
   return (
     <>
-      <Filter
+      <FilterMenu
         label="Zone géographique"
         activeFilter={localisationFilter}
         searchParams={searchParams}
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <label>Code postal ou numéro de département :</label>
-        <input
-          className="fr-input"
-          id="search-localisation-input"
-          autoComplete="off"
-          placeholder="ex: 35000"
-          name="cp_dep"
-          defaultValue={cp_dep}
+        <label>Ville ou département :</label>
+        <FilterGeo
+          cp_dep={cp_dep}
+          cp_dep_label={cp_dep_label}
+          cp_dep_type={cp_dep_type}
         />
-        <div id="search-localisation-responses">
-          <i>Saisissez une ville ou un département pour rechercher son code.</i>
-        </div>
-      </Filter>
-      <Filter
+      </FilterMenu>
+      <FilterMenu
         label="Dirigeant"
         activeFilter={dirigeantFilter}
         searchParams={searchParams}
@@ -84,8 +91,8 @@ const SearchFilters: React.FC<{
             defaultValue={dmax}
           />
         </div>
-      </Filter>
-      <Filter
+      </FilterMenu>
+      <FilterMenu
         label="Situation administrative"
         activeFilter={administrativeFilter}
         searchParams={searchParams}
@@ -131,20 +138,33 @@ const SearchFilters: React.FC<{
         <SimpleSeparator />
         <div className="select">
           <label>Domaine d’activité :</label>
-          <SelectCodeSectionNaf
+          <MultiSelect
             name="sap"
             defaultValue={sap}
             placeholder="Choisir un domaine d’activité"
+            id="sap-multi-select"
+            instanceId="sap-multi-select"
+            options={Object.keys(codesSectionNAF).map((k) => ({
+              value: k,
+              label: codesSectionNAF[k as keyof typeof codesSectionNAF],
+            }))}
           />
           <label>Code NAF/APE :</label>
-          <SelectCodeNaf
+          <MultiSelect
             name="naf"
             defaultValue={naf}
             placeholder="Choisir un code NAF/APE"
+            id="naf-multi-select"
+            instanceId="naf-multi-select"
+            options={Object.keys(codesNAFRev2).map((code) => ({
+              value: code,
+              label: `${code} - ${
+                codesNAFRev2[code as keyof typeof codesNAFRev2]
+              }`,
+            }))}
           />
         </div>
-      </Filter>
-
+      </FilterMenu>
       <style jsx>{`
         .field-in-line {
           display: flex;

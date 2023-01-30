@@ -24,6 +24,16 @@ export const redirectServerError = (msg: string, scope?: IScope) => {
   };
 };
 
+export const redirectSearchEngineError = (msg: string, scope?: IScope) => {
+  logErrorInSentry('Search engine error', { details: msg, ...scope });
+  return {
+    redirect: {
+      destination: '/rechercher/erreur',
+      permanent: false,
+    },
+  };
+};
+
 /**
  * Siren/Siret is NOT valid
  */

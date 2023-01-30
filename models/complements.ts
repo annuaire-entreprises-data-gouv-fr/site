@@ -35,9 +35,6 @@ export const getComplements = async (siren: Siren) => {
         details: e.toString(),
       });
     }
-    return {
-      complements: createDefaultUniteLegaleComplements(),
-      colter: { codeColter: null },
-    };
+    throw e;
   }
 };

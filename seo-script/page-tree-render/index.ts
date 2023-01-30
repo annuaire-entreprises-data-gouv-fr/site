@@ -27,8 +27,13 @@ const renderNav = (links: string[][]) => {
 };
 
 const renderDepartementsPage = (departments: any[]) => {
-  const titleBlock = `<h1>Personnes morales par département</h1>`;
+  const title =
+    'Les entreprises, associations et services publics de france classés par département';
+  const titleBlock = `<h1>${title}</h1>`;
+  const description = `L’administration met à disposition des particuliers, entrepreneurs et agents publics la liste officielle des entreprises françaises par département, selon leur activité (code APE/NAF).`;
+
   const debBlock = departments
+    .sort()
     .map((dep) => {
       const labelDep = libelleFromDepartement(dep);
       const urlDep = getUrlFromDepartement(dep);
@@ -36,31 +41,42 @@ const renderDepartementsPage = (departments: any[]) => {
     })
     .join('');
 
-  return renderPage(titleBlock + debBlock);
+  return renderPage(titleBlock + debBlock, title, description);
 };
 
 const renderNafsPage = (dep: string, nafs: any[]) => {
+  const departementLabel = libelleFromDepartement(dep);
+
   const navBlock = renderNav([
     ['Tous les départements', '/departements/index.html'],
-    [libelleFromDepartement(dep), '#title'],
+    [departementLabel, '#title'],
   ]);
 
-  const titleBlock = `<h1 id="title">Les personnes morales par activité dans le département ${libelleFromDepartement(
-    dep
-  )}</h1>`;
+  const title = `Les entreprises, associations et services publics de France, classés par activité, dans le département : ${departementLabel} | Annuaire Entreprises`;
+  const description = `L’administration met à disposition des particuliers, entrepreneurs et agents publics la liste officielle des entreprises françaises pour le département : ${departementLabel}`;
 
+  const titleBlock = `<h1 id="title">${title}</h1>`;
+
+  // naf links sorted alphabetically
   const nafsBlock = nafs
+    .sort((naf1, naf2) =>
+      libelleFromCodeNAFWithoutNomenclature(naf1, false) <
+      libelleFromCodeNAFWithoutNomenclature(naf2, false)
+        ? -1
+        : 1
+    )
     .map(
       (naf) =>
         `<a href="/departements/${getUrlFromDepartement(
           dep
         )}/${naf}/1.html">${libelleFromCodeNAFWithoutNomenclature(
-          naf
-        )}</a><br/>`
+          naf,
+          false
+        )} - ${naf}</a><br/>`
     )
     .join('');
 
-  return renderPage(navBlock + titleBlock + nafsBlock);
+  return renderPage(navBlock + titleBlock + nafsBlock, title, description);
 };
 
 const renderResultsPage = (
@@ -72,19 +88,21 @@ const renderResultsPage = (
   totalResults: number
 ) => {
   const depUrl = getUrlFromDepartement(dep);
-  const labelNaf = libelleFromCodeNAFWithoutNomenclature(naf);
+  const labelNaf = libelleFromCodeNAFWithoutNomenclature(naf, false);
+  const departementLabel = libelleFromDepartement(dep);
 
   const navBlock = renderNav([
     ['Tous les départements', '/departements/deinx.html'],
-    [libelleFromDepartement(dep), `/departements/${depUrl}/index.html`],
+    [departementLabel, `/departements/${depUrl}/index.html`],
     [labelNaf, '#title'],
   ]);
 
-  const titleBlock = `<h1 id="title">${labelNaf} dans le département ${libelleFromDepartement(
-    dep
-  )}</h1>
+  const title = `Les entreprises, associations et services publics de France dans le secteur : ${labelNaf} (${naf}) et le département : ${departementLabel}`;
+  const titleBlock = `<h1 id="title">${title}</h1>
   <p>${totalResults} personnes morales trouvées :</p>
   `;
+
+  const description = `L’administration met à disposition des particuliers, entrepreneurs et agents publics la liste officielle des entreprises françaises dans le secteur ${naf} et le département ${departementLabel}.`;
 
   const resultsBlock = results
     .map((result) => {
@@ -108,7 +126,11 @@ const renderResultsPage = (
     paginationBlock = `<br/><div>Autres pages de résultats :</div><div class="pagination">${paginationBlock}</div>`;
   }
 
-  return renderPage(navBlock + titleBlock + resultsBlock + paginationBlock);
+  return renderPage(
+    navBlock + titleBlock + resultsBlock + paginationBlock,
+    title,
+    description
+  );
 };
 
 export { renderDepartementsPage, renderResultsPage, renderNafsPage };
