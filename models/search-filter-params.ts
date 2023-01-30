@@ -1,4 +1,4 @@
-import { building, humanPin, mapPin } from '#components-ui/icon';
+import { building, humanPin, mapPin, file } from '#components-ui/icon';
 import { IEtatCivil } from '#models/immatriculation/rncs';
 
 export interface IParams {
@@ -161,9 +161,14 @@ export const extractFilters = (params: IParams) => {
       excludeParams: ['fn', 'n', 'dmin', 'dmax'],
     },
     administrativeFilter: {
+      icon: file,
+      label: '',
+      excludeParams: ['sap', 'naf', 'etat'],
+    },
+    structureFilter: {
       icon: building,
       label: '',
-      excludeParams: ['sap', 'naf', 'etat', 'type', 'label'],
+      excludeParams: ['type', 'label'],
     },
     localisationFilter: {
       icon: mapPin,
@@ -196,13 +201,8 @@ export const extractFilters = (params: IParams) => {
   }
 
   let administrativeFilterCounter = 0;
+  let structureFilterCounter = 0;
   if (params.sap) {
-    administrativeFilterCounter += 1;
-  }
-  if (params.type) {
-    administrativeFilterCounter += 1;
-  }
-  if (params.label) {
     administrativeFilterCounter += 1;
   }
   if (params.naf) {
@@ -212,6 +212,18 @@ export const extractFilters = (params: IParams) => {
   if (administrativeFilterCounter > 0) {
     const plural = administrativeFilterCounter ? 's' : '';
     f.administrativeFilter.label += ` + ${administrativeFilterCounter} filtre${plural} administratif${plural}`;
+  }
+
+  if (params.type) {
+    structureFilterCounter += 1;
+  }
+  if (params.label) {
+    structureFilterCounter += 1;
+  }
+
+  if (structureFilterCounter > 0) {
+    const plural = structureFilterCounter ? 's' : '';
+    f.structureFilter.label += ` ${structureFilterCounter} filtre${plural} structure`;
   }
 
   if (params.cp_dep_label) {
