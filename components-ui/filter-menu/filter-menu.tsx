@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { PropsWithChildren, ReactElement, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import {
   buildSearchQuery,
@@ -9,7 +9,6 @@ import { useOutsideClick } from 'hooks';
 import ActiveFilterLabel from './active-filter-label';
 
 type FilterMenuProps = {
-  children: ReactElement[];
   label: string;
   activeFilter: ISearchFilter;
   searchParams: IParams;
@@ -17,14 +16,14 @@ type FilterMenuProps = {
   addSaveClearButton: boolean;
 };
 
-export const FilterMenu = ({
+export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
   children,
   label,
   activeFilter,
   searchParams,
   searchTerm,
   addSaveClearButton = false,
-}: FilterMenuProps) => {
+}) => {
   const clearFilterLink = buildSearchQuery(
     searchTerm,
     searchParams,

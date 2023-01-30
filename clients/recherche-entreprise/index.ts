@@ -116,7 +116,7 @@ const clientSearchSireneOuverte = async (
     throw new NotEnoughParamsException('');
   }
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
+  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3${
     searchFilterParams?.toApiURI() || ''
   }`;
 
@@ -284,7 +284,7 @@ const mapToEtablissement = (
     est_siege,
   } = etablissement;
 
-  const enseigne = (liste_enseignes||[]).join(' ');
+  const enseigne = (liste_enseignes || []).join(' ');
 
   const adressePostale = adresse
     ? `${enseigne ? `${enseigne}, ` : ''}${adresse}`

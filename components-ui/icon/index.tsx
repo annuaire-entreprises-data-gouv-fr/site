@@ -86,6 +86,19 @@ export const administrationFill = (
   </svg>
 );
 
+export const awardFill = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    fill="currentColor"
+    stroke="currentColor"
+    strokeWidth="0"
+  >
+    <path d="M12 1.001a8 8 0 0 1 5 14.245v6.871a.5.5 0 0 1-.757.429L12 20l-4.243 2.546a.5.5 0 0 1-.757-.43v-6.87a8 8 0 0 1 5-14.245ZM12 3a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" />
+  </svg>
+);
 export const collectiviteFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -344,5 +357,22 @@ export const mail = (
   >
     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
     <polyline points="22,6 12,13 2,6"></polyline>
+  </svg>
+);
+
+export const file = (
+  <svg
+    width="14"
+    height="16"
+    viewBox="0 0 14 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M13 0.5C13.4142 0.5 13.75 0.835786 13.75 1.25V14.75C13.75 15.1642 13.4142 15.5 13 15.5H1C0.585786 15.5 0.25 15.1642 0.25 14.75V1.25C0.25 0.835786 0.585786 0.5 1 0.5H13ZM12.25 2H1.75V14H12.25V2ZM10.75 11V12.5H3.25V11H10.75ZM10.75 8V9.5H3.25V8H10.75ZM6.25 3.5V6.5H3.25V3.5H6.25ZM10.75 4.25V5.75H7.75V4.25H10.75Z"
+      fill="#000091"
+    />
   </svg>
 );

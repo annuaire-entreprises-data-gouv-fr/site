@@ -75,6 +75,17 @@ describe('Advanced search on page ' + path, () => {
     cy.get('.fr-pagination__link[title="Page 3"]').click();
     cy.url().should('include', 'sap=A');
   });
+
+  it('Structure filters', () => {
+    cy.visit(path + '?terme=');
+    cy.contains('Structure').click();
+    cy.contains('Labels et certificats').should('be.visible');
+    cy.contains('Collectivité').click();
+    cy.contains('RGE - ').click();
+    cy.contains('Appliquer').click({ force: true });
+
+    cy.contains('LE MURETAIN AGGLO').should('be.visible');
+  });
 });
 
 describe('Minimum search conditions', () => {

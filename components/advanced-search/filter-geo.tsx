@@ -108,21 +108,16 @@ export const FilterGeo: React.FC<{
       <input
         name="cp_dep_label"
         value={labelDep}
-        style={{ display: 'none' }}
-        onChange={() => {}}
-      />
-      <input
-        name="cp_dep"
-        value={dep}
-        style={{ display: 'none' }}
+        type="hidden"
         onChange={() => {}}
       />
       <input
         name="cp_dep_type"
         value={typeDep}
-        style={{ display: 'none' }}
+        type="hidden"
         onChange={() => {}}
       />
+      <input name="cp_dep" value={dep} type="hidden" onChange={() => {}} />
       {issue !== Issue.NONE ? (
         issue === Issue.NORESULT ? (
           <Info>Aucun résultat ne correspond à votre recherche.</Info>
