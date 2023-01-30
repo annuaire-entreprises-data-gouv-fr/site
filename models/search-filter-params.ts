@@ -168,7 +168,7 @@ export const extractFilters = (params: IParams) => {
     localisationFilter: {
       icon: mapPin,
       label: '',
-      excludeParams: ['cp_dep', 'cp_dep_label'],
+      excludeParams: ['cp_dep', 'cp_dep_label', 'cp_dep_type'],
     },
   };
 
