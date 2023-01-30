@@ -4,6 +4,7 @@
 
 //@ts-ignore
 import MatomoTracker from 'matomo-tracker';
+import env from '#env';
 import routes from '../../clients/routes';
 
 let matomo: any = null;
@@ -11,10 +12,7 @@ let matomo: any = null;
 // Initialize with your site ID and Matomo URL
 const init = () => {
   if (!matomo) {
-    matomo = new MatomoTracker(
-      process.env.MATOMO_SITE_ID,
-      routes.matomo.tracker
-    );
+    matomo = new MatomoTracker(env.MATOMO_SITE_ID, routes.matomo.tracker);
   }
 };
 
@@ -34,10 +32,7 @@ export const logEventInMatomo = (
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     try {
-      if (
-        process.env.NODE_ENV !== 'production' ||
-        !process.env.MATOMO_SITE_ID
-      ) {
+      if (process.env.NODE_ENV !== 'production' || !env.MATOMO_SITE_ID) {
         reject(
           'Provide a Site ID and run in production in order to log an event'
         );

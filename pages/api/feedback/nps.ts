@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import env from '#env';
 import { logEventInMatomo } from '#utils/analytics/matomo';
 import httpClient from '#utils/network';
 import logErrorInSentry from '#utils/sentry';
@@ -30,7 +31,7 @@ const logAllEvents = async (req: NextApiRequest) => {
     };
 
     await httpClient({
-      url: process.env.MATTERMOST_HOOK,
+      url: env.MATTERMOST_HOOK,
       method: 'POST',
       data,
     });

@@ -1,4 +1,5 @@
 import { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
+import env from '#env';
 import { httpGet } from '#utils/network';
 
 /**
@@ -19,7 +20,7 @@ const clientRNCSProxy = async (
     {
       ...options,
       headers: {
-        'X-APIkey': process.env.PROXY_API_KEY || '',
+        'X-APIkey': env.PROXY_API_KEY || '',
         ...(options?.headers as RawAxiosRequestHeaders),
       },
     },

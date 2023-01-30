@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/nextjs';
 import { SeverityLevel } from '@sentry/nextjs';
+import env from '#env';
 
 export interface IScope {
   page?: string;
@@ -14,8 +15,7 @@ export interface IScope {
 const getScope = (extra: IScope) => {
   const scope = new Sentry.Scope();
   Object.keys(extra).forEach((key) => {
-    //@ts-ignore
-    scope.setTag(key, extra[key] || 'N/A');
+    scope.setTag(key, extra[key as keyof typeof extra] || 'N/A');
   });
   if (process.env.INSTANCE_NUMBER) {
     scope.setTag('instance_number', process.env.INSTANCE_NUMBER);
@@ -40,10 +40,10 @@ const init = () => {
 const logInSentryFactory =
   (severity = 'error' as SeverityLevel) =>
   (errorMsg: any, extra?: IScope) => {
-    if (process.env.NODE_ENV === 'development' || !process.env.SENTRY_DSN) {
+    if (process.env.NODE_ENV === 'development' || !env.SENTRY_DSN) {
       console.error(errorMsg, JSON.stringify(extra));
     }
-    if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
+    if (process.env.NODE_ENV === 'production' && env.SENTRY_DSN) {
       init();
       const scope = getScope(extra || {});
       scope.setLevel(severity);

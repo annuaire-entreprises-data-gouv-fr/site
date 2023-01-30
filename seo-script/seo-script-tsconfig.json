@@ -2,17 +2,36 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "paths": {
-      "#clients/*": ["../clients/*"],
-      "#components/*": ["../components/*"],
-      "#components-ui/*": ["../components-ui/*"],
-      "#models/*": ["../models/*"],
-      "#utils/*": ["../utils/*"]
+      "#clients/*": [
+        "../clients/*"
+      ],
+      "#env": [
+        "../env"
+      ],
+      "#components/*": [
+        "../components/*"
+      ],
+      "#components-ui/*": [
+        "../components-ui/*"
+      ],
+      "#models/*": [
+        "../models/*"
+      ],
+      "#utils/*": [
+        "../utils/*"
+      ]
     }
   },
   "ts-node": {
-    "require": ["tsconfig-paths/register"]
+    "require": [
+      "tsconfig-paths/register"
+    ]
   }
 }

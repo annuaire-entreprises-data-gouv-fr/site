@@ -1,6 +1,7 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { etatFromEtatAdministratifInsee } from '#clients/sirene-insee/helpers';
+import env from '#env';
 import constants from '#models/constants';
 import { IEtatCivil, IPersonneMorale } from '#models/immatriculation/rncs';
 import {
@@ -105,7 +106,7 @@ const clientSearchSireneOuverte = async (
   const encodedTerms = encodeURIComponent(searchTerms);
 
   const route =
-    process.env.ALTERNATIVE_SEARCH_ROUTE ||
+    env.ALTERNATIVE_SEARCH_ROUTE ||
     (fallbackOnStaging
       ? routes.sireneOuverte.rechercheUniteLegaleStaging
       : routes.sireneOuverte.rechercheUniteLegale);

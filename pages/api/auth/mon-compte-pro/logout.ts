@@ -4,8 +4,6 @@ import { monCompteProLogoutUrl } from '#clients/auth/mon-compte-pro/strategy';
 import logErrorInSentry from '#utils/sentry';
 import { sessionOptions } from '#utils/session';
 
-export default withIronSessionApiRoute(loginRoute, sessionOptions);
-
 async function loginRoute(_req: NextApiRequest, res: NextApiResponse) {
   try {
     const url = await monCompteProLogoutUrl();
@@ -15,3 +13,5 @@ async function loginRoute(_req: NextApiRequest, res: NextApiResponse) {
     res.redirect('/connexion/au-revoir');
   }
 }
+
+export default withIronSessionApiRoute(loginRoute, sessionOptions);

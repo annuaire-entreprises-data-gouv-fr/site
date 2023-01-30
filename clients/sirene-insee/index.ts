@@ -1,4 +1,5 @@
 import routes from '#clients/routes';
+import env from '#env';
 import constants from '#models/constants';
 import httpClientOAuthGetFactory from '#utils/network/0auth';
 
@@ -25,14 +26,14 @@ export interface InseeClientOptions {
 
 const defaultGetClient = httpClientOAuthGetFactory(
   routes.sireneInsee.auth,
-  process.env.INSEE_CLIENT_ID,
-  process.env.INSEE_CLIENT_SECRET
+  env.INSEE_CLIENT_ID,
+  env.INSEE_CLIENT_SECRET
 );
 
 const fallbackGetClient = httpClientOAuthGetFactory(
   routes.sireneInsee.auth,
-  process.env.INSEE_CLIENT_ID_FALLBACK,
-  process.env.INSEE_CLIENT_SECRET_FALLBACK
+  env.INSEE_CLIENT_ID_FALLBACK,
+  env.INSEE_CLIENT_SECRET_FALLBACK
 );
 
 export const inseeClientGet = async (

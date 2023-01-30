@@ -1,5 +1,6 @@
 import FormData from 'form-data';
 import routes from '#clients/routes';
+import env from '#env';
 import { allMonitoringIds } from '#models/administrations';
 import constants from '#models/constants';
 import { IMonitoring } from '#models/monitoring';
@@ -82,7 +83,7 @@ const updateMonitorings = async () => {
   data.append('logs_start_date', Math.floor(from.getTime() / 1000));
 
   const response = await httpClient({
-    url: routes.monitoring + `?api_key=${process.env.UPTIME_ROBOT_API_KEY}`,
+    url: routes.monitoring + `?api_key=${env.UPTIME_ROBOT_API_KEY}`,
     method: 'POST',
     data,
     headers: {

@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import React from 'react';
+import env from '#env';
 
 const manifest = (
   process.env.NODE_ENV === 'production'
@@ -98,7 +99,7 @@ class CustomDocument extends Document {
         </HeadToUse>
         <body>
           <Main />
-          {isProd && process.env.MATOMO_SITE_ID && (
+          {isProd && env.MATOMO_SITE_ID && (
             <script
               dangerouslySetInnerHTML={{
                 __html: `
@@ -108,7 +109,7 @@ class CustomDocument extends Document {
               (function () {
                 var u = 'https://stats.data.gouv.fr/';
                 _paq.push(['setTrackerUrl', u + 'piwik.php']);
-                _paq.push(['setSiteId', ${process.env.MATOMO_SITE_ID}]);
+                _paq.push(['setSiteId', ${env.MATOMO_SITE_ID}]);
                 var d = document,
                   g = d.createElement('script'),
                   s = d.getElementsByTagName('script')[0];

@@ -3,8 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import logErrorInSentry from '#utils/sentry';
 import { sessionOptions } from '#utils/session';
 
-export default withIronSessionApiRoute(loginCallback, sessionOptions);
-
 async function loginCallback(req: NextApiRequest, res: NextApiResponse) {
   try {
     req.session.destroy();
@@ -15,3 +13,5 @@ async function loginCallback(req: NextApiRequest, res: NextApiResponse) {
     res.redirect('/connexion/au-revoir');
   }
 }
+
+export default withIronSessionApiRoute(loginCallback, sessionOptions);

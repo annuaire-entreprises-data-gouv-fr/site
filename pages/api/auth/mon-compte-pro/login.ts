@@ -4,8 +4,6 @@ import { monCompteProAuthorizeUrl } from '#clients/auth/mon-compte-pro/strategy'
 import logErrorInSentry from '#utils/sentry';
 import { sessionOptions } from '#utils/session';
 
-export default withIronSessionApiRoute(loginRoute, sessionOptions);
-
 async function loginRoute(_req: NextApiRequest, res: NextApiResponse) {
   try {
     const url = await monCompteProAuthorizeUrl();
@@ -15,3 +13,5 @@ async function loginRoute(_req: NextApiRequest, res: NextApiResponse) {
     res.redirect('/connexion/echec-connexion');
   }
 }
+
+export default withIronSessionApiRoute(loginRoute, sessionOptions);

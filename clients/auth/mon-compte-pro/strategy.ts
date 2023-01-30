@@ -1,14 +1,14 @@
 import { Issuer, BaseClient } from 'openid-client';
 import { HttpForbiddenError } from '#clients/exceptions';
+import env from '#env';
 
 let _client = undefined as BaseClient | undefined;
 
-const CLIENT_ID = process.env.MONCOMPTEPRO_CLIENT_ID;
-const ISSUER_URL = process.env.MONCOMPTEPRO_URL;
-const CLIENT_SECRET = process.env.MONCOMPTEPRO_CLIENT_SECRET;
-const REDIRECT_URI = process.env.MONCOMPTEPRO_REDIRECT_URI;
-const POST_LOGOUT_REDIRECT_URI =
-  process.env.MONCOMPTEPRO_POST_LOGOUT_REDIRECT_URI;
+const CLIENT_ID = env.MONCOMPTEPRO_CLIENT_ID;
+const ISSUER_URL = env.MONCOMPTEPRO_URL;
+const CLIENT_SECRET = env.MONCOMPTEPRO_CLIENT_SECRET;
+const REDIRECT_URI = env.MONCOMPTEPRO_REDIRECT_URI;
+const POST_LOGOUT_REDIRECT_URI = env.MONCOMPTEPRO_POST_LOGOUT_REDIRECT_URI;
 
 if (
   !CLIENT_ID ||

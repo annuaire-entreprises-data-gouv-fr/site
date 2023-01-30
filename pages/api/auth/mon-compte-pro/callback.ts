@@ -4,8 +4,6 @@ import { monCompteProGetToken } from '#clients/auth/mon-compte-pro/strategy';
 import logErrorInSentry from '#utils/sentry';
 import { sessionOptions } from '#utils/session';
 
-export default withIronSessionApiRoute(callbackRoute, sessionOptions);
-
 async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     const userInfo = await monCompteProGetToken(req);
@@ -21,3 +19,5 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
     res.redirect('/connexion/echec-connexion');
   }
 }
+
+export default withIronSessionApiRoute(callbackRoute, sessionOptions);

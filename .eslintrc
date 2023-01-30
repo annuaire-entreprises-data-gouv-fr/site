@@ -1,15 +1,24 @@
 {
+  "extends": "next",
   "rules": {
-    "no-console": [
-      "error",
-      {
-        "allow": ["warn", "error"]
-      }
-    ],
+    "@next/next/no-css-tags": "off",
+    "@next/next/no-head-element": "off",
+    "@next/next/no-html-link-for-pages": "off",
+    "@next/next/no-img-element": "off",
+    "@next/next/no-sync-scripts": "off",
     "import/order": [
       "error",
       {
-        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc"
+        },
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling", "index"]
+        ],
+        "newlines-between": "never",
         "pathGroups": [
           {
             "group": "internal",
@@ -18,6 +27,10 @@
           {
             "group": "internal",
             "pattern": "#components/**"
+          },
+          {
+            "group": "internal",
+            "pattern": "#env"
           },
           {
             "group": "internal",
@@ -36,26 +49,17 @@
             "pattern": "#utils/*"
           }
         ],
-        "newlines-between": "never",
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          ["parent", "sibling", "index"]
-        ],
-        "alphabetize": {
-          "order": "asc"
-        }
+        "pathGroupsExcludedImportTypes": ["builtin"]
       }
     ],
-    "@next/next/no-css-tags": "off",
-    "@next/next/no-head-element": "off",
-    "@next/next/no-html-link-for-pages": "off",
-    "@next/next/no-img-element": "off",
-    "@next/next/no-sync-scripts": "off",
+    "no-console": [
+      "error",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
     // no need for unique key in maps as we dont use react on client/front
     "react/jsx-key": "off",
     "react/no-children-prop": "off"
-  },
-  "extends": "next"
+  }
 }

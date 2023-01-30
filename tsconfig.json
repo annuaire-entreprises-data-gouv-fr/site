@@ -15,6 +15,7 @@
       "#clients/*": ["./clients/*"],
       "#components/*": ["./components/*"],
       "#components-ui/*": ["./components-ui/*"],
+      "#env": ["./env.ts"],
       "#models/*": ["./models/*"],
       "#utils/*": ["./utils/*"]
     },
