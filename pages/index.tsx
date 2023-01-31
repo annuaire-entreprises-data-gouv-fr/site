@@ -23,7 +23,7 @@ const Index: NextPageWithLayout = () => (
       >
         <HomeH1 />
         <h2>
-          Vérifiez les informations juridiques publiques des entreprises,
+          Vérifiez les informations légales publiques des entreprises,
           associations et services publics en France
         </h2>
         <div className="search-bar-wrapper">
