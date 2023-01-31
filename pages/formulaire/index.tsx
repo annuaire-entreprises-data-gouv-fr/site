@@ -166,10 +166,10 @@ const FeedBackPage: NextPageWithLayout = () => {
                     type="radio"
                     id="radio-visitor-type-1"
                     name="radio-set-visitor-type"
-                    value="Administration publique"
+                    value="Agent public"
                   />
                   <label className="fr-label" htmlFor="radio-visitor-type-1">
-                    Administration publique
+                    Agent public
                   </label>
                 </div>
                 <div>
@@ -177,10 +177,21 @@ const FeedBackPage: NextPageWithLayout = () => {
                     type="radio"
                     id="radio-visitor-type-2"
                     name="radio-set-visitor-type"
-                    value="Entreprise privée"
+                    value="Dirigeant"
                   />
                   <label className="fr-label" htmlFor="radio-visitor-type-2">
-                    Entreprise privée
+                    Dirigeant(e) d’entreprise ou d’association
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="radio-visitor-type-6"
+                    name="radio-set-visitor-type"
+                    value="Indépendant"
+                  />
+                  <label className="fr-label" htmlFor="radio-visitor-type-2">
+                    Indépendant(e)
                   </label>
                 </div>
                 <div>
@@ -188,10 +199,10 @@ const FeedBackPage: NextPageWithLayout = () => {
                     type="radio"
                     id="radio-visitor-type-5"
                     name="radio-set-visitor-type"
-                    value="Association"
+                    value="Salarié"
                   />
                   <label className="fr-label" htmlFor="radio-visitor-type-5">
-                    Association
+                    Salarié(e) d’entreprise ou d’association
                   </label>
                 </div>
                 <div>

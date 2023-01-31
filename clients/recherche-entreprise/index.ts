@@ -282,12 +282,15 @@ const mapToEtablissement = (
     liste_enseignes,
     etat_administratif,
     est_siege,
+    nom_commercial,
   } = etablissement;
 
   const enseigne = (liste_enseignes || []).join(' ');
 
   const adressePostale = adresse
-    ? `${enseigne ? `${enseigne}, ` : ''}${adresse}`
+    ? `${
+        enseigne ? `${enseigne}, ` : nom_commercial ? `${nom_commercial}, ` : ''
+      }${adresse}`
     : '';
 
   const etatAdministratif = etatFromEtatAdministratifInsee(

@@ -75,7 +75,7 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
       <div>
         {mapPin}{' '}
         <span className="adress">
-          {result.siege.adresse || 'Adresse inconnue'}{' '}
+          {result.siege.adressePostale || 'Adresse inconnue'}{' '}
         </span>
       </div>
     </a>
