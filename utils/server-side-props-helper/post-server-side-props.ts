@@ -1,6 +1,9 @@
+import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSidePropsContext } from 'next';
 import { UAParser } from 'ua-parser-js';
 import { createAPM } from '../sentry/apm';
+import { sessionOptions } from '../session';
+import { ISession } from '../session';
 import isUserAgentABot from '../user-agent';
 import { handleErrorFromServerSideProps } from './error-handler';
 
@@ -11,6 +14,7 @@ export interface IPropsWithMetadata {
     isBot: boolean;
     // enable react hydration in browser
     useReact?: boolean;
+    session: ISession | null;
   };
 }
 
@@ -52,8 +56,9 @@ const isBrowserOutdated = (uaString: string) => {
 export function postServerSideProps(
   getServerSidePropsFunction: (context: GetServerSidePropsContext) => any
 ) {
-  return async (context: GetServerSidePropsContext) => {
+  return withIronSessionSsr(async (context: GetServerSidePropsContext) => {
     const url = context?.req?.url || '/unknown';
+
     const transaction = createAPM(url, 'postServerSideProps');
 
     const { props = {}, ...redirectAndOther } =
@@ -71,8 +76,9 @@ export function postServerSideProps(
           ...props.metadata,
           isBrowserOutdated: isBrowserOutdated(userAgent),
           isBot: isUserAgentABot(userAgent),
+          session: context.req.session,
         },
       },
     };
-  };
+  }, sessionOptions);
 }

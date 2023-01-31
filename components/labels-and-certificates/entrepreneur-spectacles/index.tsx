@@ -1,5 +1,6 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
+import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { MC } from '#components/administrations';
@@ -12,6 +13,39 @@ import {
 } from '#models/api-not-responding';
 import { IEntrepreneurSpectaclesCertification } from '#models/certifications/entrepreneur-spectacles';
 import { formatDateLong } from '#utils/helpers';
+
+const Validity = ({ statut = '', dateDeValidite = '' }) => {
+  switch (statut) {
+    case 'valide':
+      return (
+        <InformationTooltip label="La déclaration vaut récépissé. L'exercice de la profession est licite.">
+          <Tag className="open">valide</Tag>
+          {dateDeValidite ? ` depuis le ${dateDeValidite}` : ''}
+        </InformationTooltip>
+      );
+    case 'en instruction':
+      return (
+        <InformationTooltip label="Instruction du dossier en cours. L'exercice de la profession au titre de cette déclaration est interdit.">
+          <Tag className="info">En instruction</Tag>
+        </InformationTooltip>
+      );
+    case 'invalidé':
+      return (
+        <InformationTooltip label="Le récépissé a été retirée après une période de validité.">
+          <Tag className="closed">Invalidé</Tag>
+          {dateDeValidite ? ` depuis le ${dateDeValidite}` : ''}
+        </InformationTooltip>
+      );
+    case 'invalide':
+      return (
+        <InformationTooltip label="La déclaration a été refusée. L'exercice de la profession au titre de cette déclaration est interdit.">
+          <Tag className="closed">Invalide</Tag>
+        </InformationTooltip>
+      );
+    default:
+      return <Tag className="unknown">Etat inconnu</Tag>;
+  }
+};
 
 export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
   entrepreneurSpectacles:
@@ -80,6 +114,19 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
         la plateforme PLATES
       </a>{' '}
       du <MC />.
+      <p>
+        Le <b>numéro de récépissé est le numéro de déclaration</b>. Le récépissé est
+        valide 30 jours après que le dossier ait été reçu complet et conforme à
+        la réglementation. Un récépissé de déclaration au statut valide est <b>valable pour cinq ans</b>.
+      </p>
+      <p>
+        Si une déclaration que vous avez faite n’apparaît pas sur le tableau
+        après plus d’un mois, veuillez contacter{' '}
+        <a href="https://mesdemarches.culture.gouv.fr/loc_fr/mcc/?__CSRFTOKEN__=ade60dc8-891d-439e-b355-0438dea9a33c">
+          le service des démarches en lignes
+        </a>{' '}
+        du <MC />.
+      </p>
       <FullTable
         head={[
           'Numéro de récipissé',
@@ -91,13 +138,10 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
           <Tag>{licence.numeroRecepisse}</Tag>,
           formatDateLong(licence.dateDepot),
           licence.type,
-          licence.statut === 'Invalide' ? (
-            <Tag className="closed">invalide</Tag>
-          ) : licence.dateValidite ? (
-            <Tag className="open">valide jusqu’au {licence.dateValidite}</Tag>
-          ) : (
-            ''
-          ),
+          <Validity
+            statut={(licence.statut || '').toLowerCase()}
+            dateDeValidite={licence.dateValidite}
+          />,
         ])}
       />
     </Section>

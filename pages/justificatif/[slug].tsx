@@ -18,6 +18,7 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
   immatriculationRNM,
   immatriculationRNCS,
   immatriculationJOAFE,
+  metadata: { session },
 }) => (
   <>
     <Meta
@@ -25,7 +26,11 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
       noIndex={true}
     />
     <div className="content-container">
-      <Title uniteLegale={uniteLegale} ficheType={FICHE.JUSTIFICATIFS} />
+      <Title
+        uniteLegale={uniteLegale}
+        ficheType={FICHE.JUSTIFICATIFS}
+        session={session}
+      />
       <Immatriculations
         immatriculationRNM={immatriculationRNM}
         immatriculationRNCS={immatriculationRNCS}

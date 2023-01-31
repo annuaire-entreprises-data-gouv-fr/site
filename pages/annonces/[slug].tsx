@@ -31,7 +31,7 @@ const Annonces: NextPageWithLayout<IProps> = ({
   annoncesAssociation,
   bodacc,
   comptesAssociation,
-  metadata,
+  metadata: { session },
   uniteLegale,
 }) => {
   return (
@@ -41,7 +41,11 @@ const Annonces: NextPageWithLayout<IProps> = ({
         noIndex={true}
       />
       <div className="content-container">
-        <Title ficheType={FICHE.ANNONCES} uniteLegale={uniteLegale} />
+        <Title
+          ficheType={FICHE.ANNONCES}
+          uniteLegale={uniteLegale}
+          session={session}
+        />
         <AnnoncesBodaccSection uniteLegale={uniteLegale} bodacc={bodacc} />
         {isAssociation(uniteLegale) && (
           <>

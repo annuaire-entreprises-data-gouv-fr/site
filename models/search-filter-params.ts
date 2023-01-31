@@ -83,12 +83,12 @@ class SearchFilterParams {
       code_postal,
       code_commune,
       section_activite_principale: this.params.sap,
+      activite_principale: this.params.naf,
       departement,
       prenoms_personne: this.params.fn?.trim(),
       nom_personne: this.params.n?.trim(),
       date_naissance_personne_min: this.params.dmin,
       date_naissance_personne_max: this.params.dmax,
-      activite_principale: this.params.naf,
     });
   }
 
@@ -173,7 +173,7 @@ export const extractFilters = (params: IParams) => {
     localisationFilter: {
       icon: mapPin,
       label: '',
-      excludeParams: ['cp_dep', 'cp_dep_label'],
+      excludeParams: ['cp_dep', 'cp_dep_label', 'cp_dep_type'],
     },
   };
 

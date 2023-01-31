@@ -23,7 +23,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   rge,
   uniteLegale,
   entrepreneurSpectacles,
-  metadata,
+  metadata: { session },
 }) => {
   return (
     <>
@@ -32,7 +32,11 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
         noIndex={true}
       />
       <div className="content-container">
-        <Title ficheType={FICHE.CERTIFICATS} uniteLegale={uniteLegale} />
+        <Title
+          ficheType={FICHE.CERTIFICATS}
+          uniteLegale={uniteLegale}
+          session={session}
+        />
         {!checkHasLabelsAndCertificates(uniteLegale) && (
           <p>Cette structure ne possède aucun label ou certificat.</p>
         )}

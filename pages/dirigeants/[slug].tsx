@@ -25,6 +25,7 @@ interface IProps extends IPropsWithMetadata, IDirigeants {}
 const DirigeantsPage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   immatriculationRNCS,
+  metadata: { session },
 }) => {
   return (
     <>
@@ -34,7 +35,11 @@ const DirigeantsPage: NextPageWithLayout<IProps> = ({
         title={`Dirigeants de la structure - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
       />
       <div className="content-container">
-        <Title uniteLegale={uniteLegale} ficheType={FICHE.DIRIGEANTS} />
+        <Title
+          uniteLegale={uniteLegale}
+          ficheType={FICHE.DIRIGEANTS}
+          session={session}
+        />
         <>
           <DirigeantSummary
             uniteLegale={uniteLegale}

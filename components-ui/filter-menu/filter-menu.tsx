@@ -40,19 +40,23 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
     <>
       <div ref={ref} className="search-filter-label-container">
         <div>
-          <label
-            onClick={() => {
-              setOpen(!open);
-            }}
-          >
+          <label>
             {activeFilter.label ? (
               <ActiveFilterLabel
                 icon={activeFilter.icon}
                 label={activeFilter.label}
                 query={clearFilterLink}
+                onClick={() => {
+                  setOpen(!open);
+                }}
               />
             ) : (
-              <span className="search-filter-label">
+              <span
+                className="search-filter-label"
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
                 <span>{activeFilter.icon}</span>&nbsp;{label}&nbsp;&nbsp;▾
               </span>
             )}

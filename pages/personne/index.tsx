@@ -1,8 +1,7 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import ButtonLink from '#components-ui/button';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import { Layout } from '#components/layouts/layoutDefault';
 import Meta from '#components/meta';
 import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';
@@ -26,7 +25,6 @@ interface IProps extends IPropsWithMetadata {
 
 const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
   results,
-  metadata,
   searchParams,
   sirenFrom,
 }) => (
@@ -111,12 +109,5 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     };
   }
 );
-
-SearchDirigeantPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return <Layout isBrowserOutdated={isBrowserOutdated}>{page}</Layout>;
-};
 
 export default SearchDirigeantPage;

@@ -1,8 +1,6 @@
 import React, { ReactElement } from 'react';
-import Logo from '#components-ui/logo';
 import { HomeH1 } from '#components-ui/logo/home-h1';
-import HiddenH1 from '#components/a11y-components/hidden-h1';
-import { Layout } from '#components/layouts/layoutDefault';
+import { LayoutDefault } from '#components/layouts/layout-default';
 import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
 import StructuredDataSearchAction from '#components/structured-data/search';
@@ -11,9 +9,9 @@ import { NextPageWithLayout } from './_app';
 const Index: NextPageWithLayout = () => (
   <>
     <Meta
-      title="L’Annuaire des Entreprises françaises : les informations juridiques officielles de l’administration"
+      title="L’Annuaire des Entreprises françaises : les informations légales officielles de l’administration"
       canonical="https://annuaire-entreprises.data.gouv.fr"
-      description="L’administration permet aux particuliers et agents publics de vérifier les informations juridiques officielles d’une entreprise : SIREN, SIRET, TVA Intracommunautaire, code APE/NAF, capital social, justificatif d’immatriculation, dirigeants, convention collective…"
+      description="L’administration permet aux particuliers, entrepreneurs et agents publics de vérifier les informations informations légales des entreprises, associations et services publics en France."
     />
     <StructuredDataSearchAction />
     <div className="layout-center">
@@ -25,7 +23,7 @@ const Index: NextPageWithLayout = () => (
       >
         <HomeH1 />
         <h2>
-          Vérifiez les informations juridiques publiques des entreprises,
+          Vérifiez les informations légales publiques des entreprises,
           associations et services publics en France
         </h2>
         <div className="search-bar-wrapper">
@@ -66,9 +64,9 @@ const Index: NextPageWithLayout = () => (
 
 Index.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
   return (
-    <Layout isBrowserOutdated={isBrowserOutdated} searchBar={false}>
+    <LayoutDefault isBrowserOutdated={isBrowserOutdated} searchBar={false}>
       {page}
-    </Layout>
+    </LayoutDefault>
   );
 };
 

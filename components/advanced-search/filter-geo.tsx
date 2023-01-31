@@ -111,13 +111,13 @@ export const FilterGeo: React.FC<{
         type="hidden"
         onChange={() => {}}
       />
-      <input name="cp_dep" value={dep} type="hidden" onChange={() => {}} />
       <input
         name="cp_dep_type"
         value={typeDep}
         type="hidden"
         onChange={() => {}}
       />
+      <input name="cp_dep" value={dep} type="hidden" onChange={() => {}} />
       {issue !== Issue.NONE ? (
         issue === Issue.NORESULT ? (
           <Info>Aucun résultat ne correspond à votre recherche.</Info>

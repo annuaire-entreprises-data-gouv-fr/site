@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import React, { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
-import { Layout } from '#components/layouts/layoutSearch';
+import { LayoutSearch } from '#components/layouts/layout-search';
 import Meta from '#components/meta';
 import SearchResults from '#components/search-results';
 import StructuredDataSearchAction from '#components/structured-data/search';
@@ -79,9 +79,9 @@ MapSearchResultPage.getLayout = function getLayout(
   isBrowserOutdated
 ) {
   return (
-    <Layout isBrowserOutdated={isBrowserOutdated} map={true}>
+    <LayoutSearch isBrowserOutdated={isBrowserOutdated} map={true}>
       {page}
-    </Layout>
+    </LayoutSearch>
   );
 };
 
