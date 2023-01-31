@@ -10,16 +10,6 @@ const CLIENT_SECRET = env.MONCOMPTEPRO_CLIENT_SECRET;
 const REDIRECT_URI = env.MONCOMPTEPRO_REDIRECT_URI;
 const POST_LOGOUT_REDIRECT_URI = env.MONCOMPTEPRO_POST_LOGOUT_REDIRECT_URI;
 
-if (
-  !CLIENT_ID ||
-  !ISSUER_URL ||
-  !CLIENT_SECRET ||
-  !REDIRECT_URI ||
-  !POST_LOGOUT_REDIRECT_URI
-) {
-  throw new Error('MON COMPTE PRO ENV variables are not defined');
-}
-
 export const getClient = async () => {
   if (_client) {
     return _client;

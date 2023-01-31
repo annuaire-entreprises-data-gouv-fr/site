@@ -21,20 +21,22 @@ const logAllEvents = async (req: NextApiRequest) => {
       'nps'
     );
 
-    const data = {
-      username: 'clippy',
-      text: `Note : **${req.body['radio-set-mood']}/10** \nVisiteur : ${
-        req.body['radio-set-visitor-type'] || NA
-      } \nOrigine : ${
-        req.body['radio-set-visitor-origin'] || NA
-      } \nCommentaire : *${req.body['textarea'] || NA}*`,
-    };
+    if (env.MATTERMOST_HOOK) {
+      const data = {
+        username: 'clippy',
+        text: `Note : **${req.body['radio-set-mood']}/10** \nVisiteur : ${
+          req.body['radio-set-visitor-type'] || NA
+        } \nOrigine : ${
+          req.body['radio-set-visitor-origin'] || NA
+        } \nCommentaire : *${req.body['textarea'] || NA}*`,
+      };
 
-    await httpClient({
-      url: env.MATTERMOST_HOOK,
-      method: 'POST',
-      data,
-    });
+      await httpClient({
+        url: env.MATTERMOST_HOOK,
+        method: 'POST',
+        data,
+      });
+    }
   } catch (e: any) {
     logErrorInSentry('Error in form submission', { details: e.toString() });
   }

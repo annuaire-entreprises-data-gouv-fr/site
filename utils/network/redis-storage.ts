@@ -2,7 +2,9 @@ import { buildStorage } from 'axios-cache-interceptor';
 import { createClient } from 'redis';
 import env from '#env';
 
-export const redisClient = createClient({ url: env.REDIS_URL });
+export const redisClient = createClient({
+  url: env.REDIS_URL || 'redis://127.0.0.1:6379',
+});
 
 redisClient.on('error', (err) =>
   console.error('Redis redisClient Error : ', err)

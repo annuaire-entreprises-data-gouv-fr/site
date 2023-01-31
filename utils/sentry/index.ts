@@ -17,8 +17,8 @@ const getScope = (extra: IScope) => {
   Object.keys(extra).forEach((key) => {
     scope.setTag(key, extra[key as keyof typeof extra] || 'N/A');
   });
-  if (process.env.INSTANCE_NUMBER) {
-    scope.setTag('instance_number', process.env.INSTANCE_NUMBER);
+  if (env.INSTANCE_NUMBER) {
+    scope.setTag('instance_number', env.INSTANCE_NUMBER);
   }
   return scope;
 };
@@ -31,7 +31,7 @@ const init = () => {
   }
 
   Sentry.init({
-    dsn: process.env.SENTRY_DSN,
+    dsn: env.SENTRY_DSN,
     tracesSampleRate: 0.1,
   });
   _isInitialized = true;

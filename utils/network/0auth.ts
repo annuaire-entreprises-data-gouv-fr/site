@@ -1,7 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import oauth from 'axios-oauth-client';
 import tokenProvider from 'axios-token-interceptor';
-import { HttpServerError } from '#clients/exceptions';
 import constants from '#models/constants';
 import {
   defaultAxiosInstanceFactory,
@@ -14,10 +13,6 @@ export const httpClientOAuthGetFactory = (
   client_id: string | undefined,
   client_secret: string | undefined
 ) => {
-  if ((!client_id || !client_secret) && process.env.NODE_ENV === 'production') {
-    throw new HttpServerError('Client id or client secret is undefined');
-  }
-
   // function that get oauth2 token
   const getAuthorizationCode = oauth.clientCredentials(
     defaultAxiosInstanceFactory(constants.timeout.L),
