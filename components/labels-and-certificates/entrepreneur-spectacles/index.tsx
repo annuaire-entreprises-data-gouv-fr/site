@@ -18,7 +18,7 @@ const Validity = ({ statut = '', dateDeValidite = '' }) => {
   switch (statut) {
     case 'valide':
       return (
-        <InformationTooltip label="La déclaration vaut licence. L'exercice de la profession est licite.">
+        <InformationTooltip label="La déclaration vaut récépissé. L'exercice de la profession est licite.">
           <Tag className="open">valide</Tag>
           {dateDeValidite ? ` depuis le ${dateDeValidite}` : ''}
         </InformationTooltip>
@@ -31,14 +31,14 @@ const Validity = ({ statut = '', dateDeValidite = '' }) => {
       );
     case 'invalidé':
       return (
-        <InformationTooltip label="La licence a été retirée après une période de validité.">
+        <InformationTooltip label="Le récépissé a été retirée après une période de validité.">
           <Tag className="closed">Invalidé</Tag>
           {dateDeValidite ? ` depuis le ${dateDeValidite}` : ''}
         </InformationTooltip>
       );
     case 'invalide':
       return (
-        <InformationTooltip label="La licence a été refusée. L'exercice de la profession au titre de cette déclaration est interdit.">
+        <InformationTooltip label="La déclaration a été refusée. L'exercice de la profession au titre de cette déclaration est interdit.">
           <Tag className="closed">Invalide</Tag>
         </InformationTooltip>
       );
@@ -115,10 +115,9 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
       </a>{' '}
       du <MC />.
       <p>
-        Le <b>numéro de licence est le numéro de déclaration</b>. La licence est
+        Le <b>numéro de récépissé est le numéro de déclaration</b>. Le récépissé est
         valide 30 jours après que le dossier ait été reçu complet et conforme à
-        la réglementation. Une déclaration au statut valide vaut{' '}
-        <b>licence d’entrepreneur de spectacles vivants pour cinq ans</b>.
+        la réglementation. Un récépissé de déclaration au statut valide est <b>valable pour cinq ans</b>.
       </p>
       <p>
         Si une déclaration que vous avez faite n’apparaît pas sur le tableau
