@@ -25,17 +25,5 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
         .
       </div>
     </div>
-    <style jsx>{`
-      .browser-is-outdated {
-        padding-top: 15px;
-        padding-bottom: 15px;
-        font-size: 0.9rem;
-        width: 100%;
-        background-color: #ffd0d0;
-        color: #000;
-        font-family: 'Marianne', sans-serif;
-        border-bottom: 2px solid #000091;
-      }
-    `}</style>
   </PrintNever>
 );

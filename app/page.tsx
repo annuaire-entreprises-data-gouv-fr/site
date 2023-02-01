@@ -1,18 +1,11 @@
-'use client';
 import React from 'react';
 import { HomeH1 } from '#components-ui/logo/home-h1';
-import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
 import StructuredDataSearchAction from '#components/structured-data/search';
 
 export default function Page() {
   return (
     <>
-      <Meta
-        title="L’Annuaire des Entreprises françaises : les informations légales officielles de l’administration"
-        canonical="https://annuaire-entreprises.data.gouv.fr"
-        description="L’administration permet aux particuliers, entrepreneurs et agents publics de vérifier les informations informations légales des entreprises, associations et services publics en France."
-      />
       <StructuredDataSearchAction />
       <div className="layout-center">
         <form

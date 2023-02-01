@@ -14,6 +14,7 @@ type AppPropsWithLayout = AppProps & {
 export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const isBrowserOutdated = pageProps?.metadata?.isBrowserOutdated || false;
   const session = pageProps?.metadata?.session || null;
+
   // Use the layout defined at the page level, otherwise fallback on layout with default settings.
   const getLayout =
     Component.getLayout ??

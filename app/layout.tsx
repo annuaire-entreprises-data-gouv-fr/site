@@ -1,3 +1,5 @@
+import StyledJsxRegistry from './registry';
+
 export default function RootLayout({
   children,
 }: {
@@ -5,40 +7,33 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" />
-      <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml" />
-      <link
-        rel="shortcut icon"
-        href="/favicons/favicon.ico"
-        type="image/x-icon"
-      />
-      <link
-        rel="manifest"
-        href="/favicons/manifest.webmanifest"
-        cross-origin="use-credentials"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="http://localhost:3001/frontend/style/dsfr.min.css"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="http://localhost:3001/frontend/style/globals.css"
-      />
-      <script
-        defer
-        type="module"
-        src="http://localhost:3001/@vite/client"
-      ></script>
-      <script
-        defer
-        type="module"
-        src="http://localhost:3001/frontend/src/index.js"
-      ></script>
-
-      <body>{children}</body>
+      <head />
+      <body>
+        {process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+          var _paq = window._paq || [];
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function () {
+            var u = 'https://stats.data.gouv.fr/';
+            _paq.push(['setTrackerUrl', u + 'piwik.php']);
+            _paq.push(['setSiteId', ${process.env.MATOMO_SITE_ID}]);
+            var d = document,
+              g = d.createElement('script'),
+              s = d.getElementsByTagName('script')[0];
+            g.type = 'text/javascript';
+            g.async = true;
+            g.defer = true;
+            g.src = u + 'piwik.js';
+            s.parentNode.insertBefore(g, s);
+          })();`,
+            }}
+          ></script>
+        )}
+        <StyledJsxRegistry>{children}</StyledJsxRegistry>
+      </body>
     </html>
   );
 }

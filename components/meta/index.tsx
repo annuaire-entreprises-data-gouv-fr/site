@@ -1,5 +1,5 @@
 import { NextSeo } from 'next-seo';
-import Head from 'next/head';
+// import Head from 'next/head';
 import React from 'react';
 
 //@ts-ignore
@@ -52,32 +52,6 @@ const Meta: React.FC<IProps> = ({
         noindex={noIndex}
         nofollow={false}
       />
-      <Head>
-        <title>{title}</title>
-        <link
-          rel="search"
-          type="application/opensearchdescription+xml"
-          title="Annuaire des Entreprises"
-          href="https://annuaire-entreprises.data.gouv.fr/opensearch.xml"
-        />
-
-        <meta char-set="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-
-        {/* Search Engine */}
-        <meta name="description" content={description || SITE_DESCRIPTION} />
-        <meta name="image" content="/images/api.gouv.fr.svg" />
-
-        {/* Schema.org for Google */}
-        <meta itemProp="name" content={title || SITE_NAME} />
-        <meta
-          itemProp="description"
-          content={description || SITE_DESCRIPTION}
-        />
-      </Head>
     </>
   );
 };

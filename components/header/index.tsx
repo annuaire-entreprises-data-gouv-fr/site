@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { information, user } from '#components-ui/icon';
 import Logo from '#components-ui/logo';
@@ -113,43 +114,5 @@ export const Header: React.FC<IProps> = ({
         </form>
       </PrintNever>
     </header>
-    <style jsx>{`
-      ${!useSearchBar
-        ? `header.fr-header {
-        filter: none !important;
-      }`
-        : ''}
-
-      div.annuaire-logo {
-        order: 2;
-        margin-right: 15px;
-      }
-
-      .not-fr-search {
-        width: 470px;
-        max-width: 100%;
-        flex-grow: 1;
-      }
-
-      @media only screen and (min-width: 1px) and (max-width: 991px) {
-        .not-fr-search {
-          width: 100%;
-          margin: 0.75rem;
-          margin-top: 0;
-        }
-      }
-      div.with-session-banner {
-        background-color: #640091;
-        color: #fff;
-        font-size: 2rem;
-        line-height: 3rem;
-      }
-
-      @media print {
-        .fr-header {
-          display: none !important;
-        }
-      }
-    `}</style>
   </>
 );
