@@ -3,6 +3,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 module.exports = withBundleAnalyzer({
+  experimental: {
+    appDir: true,
+  },
   webpack: function (config) {
     config.module.rules.push({
       test: /\.ya?ml$/,
