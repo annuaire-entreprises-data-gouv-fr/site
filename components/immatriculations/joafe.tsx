@@ -1,6 +1,7 @@
 import React from 'react';
 import ButtonLink from '#components-ui/button';
 import { download } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import { EAdministration } from '#models/administrations';
@@ -62,7 +63,7 @@ const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
                   target="_blank"
                   to={`${immatriculation.downloadLink}`}
                 >
-                  {download} Télécharger le justificatif
+                  <Icon slug="download">Télécharger le justificatif</Icon>
                 </ButtonLink>
               </div>
             </PrintNever>

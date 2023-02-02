@@ -29,7 +29,7 @@ export const Badge: React.FC<IProps> = ({
     onClick={onClick ? onClick : () => {}}
   >
     <span className="badge-icon">
-      <Icon slug={icon} />
+      <Icon size={16} slug={icon} />
     </span>
     <span className="badge-label">{label}</span>
     <style jsx>{`

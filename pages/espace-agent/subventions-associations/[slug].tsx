@@ -5,6 +5,7 @@ import { Loader } from '#components-ui/loader';
 import Meta from '#components/meta';
 import { ProtectedSection } from '#components/section/protected-section';
 import Title, { FICHE } from '#components/title-section';
+import { EAdministration } from '#models/administrations';
 import { IUniteLegale } from '#models/index';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
@@ -35,7 +36,12 @@ const OctroiPage: NextPageWithLayout<IProps> = ({
           uniteLegale={uniteLegale}
           session={session}
         />
-        <ProtectedSection title="Subventions des Associations" />
+        <ProtectedSection
+          title="Subventions des Associations"
+          sources={[EAdministration.MI]}
+        >
+          🚧 En construction
+        </ProtectedSection>
       </div>
     </>
   );
@@ -54,7 +60,6 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
 
     const { slug } = extractParamsFromContext(context);
     const uniteLegale = await getUniteLegaleFromSlug(slug);
-    console.log(await clientApiEntrepriseAssociation());
 
     return {
       props: {

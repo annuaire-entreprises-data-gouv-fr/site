@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import Warning from '#components-ui/alerts/warning';
-import { questionnaire } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
 import DataSourcesTooltip from '#components-ui/information-tooltip/data-sources-tooltip';
 import Logo from '#components-ui/logo';
 import { PrintNever } from '#components-ui/print-visibility';
@@ -53,8 +53,9 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           <div className="administration-page-link">
             <PrintNever>
               <a href={link}>
-                {questionnaire}
-                &nbsp;Une erreur ou une question sur ces données ?
+                <Icon size={14} slug="questionnaire">
+                  Une erreur ou une question sur ces données ?
+                </Icon>
               </a>
             </PrintNever>
             <DataSourcesTooltip

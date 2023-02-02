@@ -114,6 +114,7 @@ const Tabs: React.FC<{
               } no-style-link`}
               href={`${pathPrefix}${uniteLegale.siren}`}
               rel={noFollow ? 'nofollow' : ''}
+              key={label}
             >
               {currentFicheType === ficheType ? label : <h2>{label}</h2>}
             </a>

@@ -117,7 +117,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
           }
 
           label.close-container {
-            z-index: 100;
+            z-index: 10010;
             display: none;
             position: fixed;
             top: 20px;

@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  facebook,
-  linkedin,
-  qrCode,
-  twitter,
-  print,
-  mail,
-} from '#components-ui/icon';
+import { qrCode } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { PrintNever } from '#components-ui/print-visibility';
 import constants from '#models/constants';
@@ -29,7 +23,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
             title="Partager cette page sur linkedin"
             className="no-style-link"
           >
-            {linkedin}
+            <Icon slug="linkedin" />
           </a>
         </InformationTooltip>
       </span>
@@ -45,7 +39,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
             title="Partager cette page sur twitter"
             className="no-style-link"
           >
-            {twitter}
+            <Icon slug="twitter" />
           </a>
         </InformationTooltip>
       </span>
@@ -61,7 +55,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
             title="Partager cette page sur Facebook"
             className="no-style-link"
           >
-            {facebook}
+            <Icon slug="facebook" />
           </a>
         </InformationTooltip>
       </span>
@@ -75,25 +69,8 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
             title="Partager cette page par Email"
             className="no-style-link"
           >
-            {mail}
+            <Icon slug="mail" />
           </a>
-        </InformationTooltip>
-      </span>
-      <span>
-        <InformationTooltip
-          label="Imprimer cette page ou la sauvegarder au format PDF"
-          orientation="right"
-        >
-          <div id="print-icon">{print}</div>
-          <script
-            type="text/javascript"
-            dangerouslySetInnerHTML={{
-              __html: `
-              var openPrintAlert = function() { window.print() };
-              document.getElementById("print-icon").onclick=openPrintAlert;
-          `,
-            }}
-          ></script>
         </InformationTooltip>
       </span>
       <span>
@@ -107,8 +84,25 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
             download={`QR_code_page_${siren}.jpeg`}
             className="no-style-link"
           >
-            {qrCode}
+            <Icon slug="qrCode" />
           </a>
+        </InformationTooltip>
+      </span>
+      <span>
+        <InformationTooltip
+          label="Imprimer cette page ou la sauvegarder au format PDF"
+          orientation="right"
+        >
+          <Icon id="print-icon" className="cursor-pointer" slug="print" />
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: `
+              var openPrintAlert = function() { window.print() };
+              document.getElementById("print-icon").onclick=openPrintAlert;
+          `,
+            }}
+          ></script>
         </InformationTooltip>
       </span>
     </div>

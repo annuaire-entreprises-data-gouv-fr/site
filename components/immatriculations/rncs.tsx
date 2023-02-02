@@ -3,6 +3,7 @@ import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down'
 import { OpenClosedTag } from '#components-ui/badge/frequent';
 import ButtonLink from '#components-ui/button';
 import { download } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import { INPI } from '#components/administrations';
@@ -77,7 +78,9 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
                     nofollow={true}
                     to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
                   >
-                    {download} Télécharger le justificatif d’immatriculation
+                    <Icon slug="download">
+                      Télécharger le justificatif d’immatriculation
+                    </Icon>
                   </ButtonLink>
                   <div className="separator" />
                   <ButtonLink

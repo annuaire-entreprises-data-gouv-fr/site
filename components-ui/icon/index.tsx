@@ -4,12 +4,12 @@ import React from 'react';
  * DSFR
  */
 
-export const communityFill = (
+const communityFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -18,12 +18,12 @@ export const communityFill = (
   </svg>
 );
 
-export const humanPin = (
+const humanPin = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -31,12 +31,12 @@ export const humanPin = (
     <path d="M12 2c5.523 0 10 4.477 10 10 0 4.747-3.308 8.722-7.745 9.745L12 24l-2.255-2.255C5.308 20.722 2 16.747 2 12 2 6.477 6.477 2 12 2Zm.16 14c-2.036 0-3.87.87-5.148 2.257a7.953 7.953 0 0 0 3.182 1.539l.56.129L12 21.172l1.247-1.247.56-.13a7.956 7.956 0 0 0 3.36-1.686A6.979 6.979 0 0 0 12.16 16ZM6.554 6.14a8 8 0 0 0-.938 10.681v-.001A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634A8 8 0 0 0 6.554 6.141ZM12 5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
   </svg>
 );
-export const user = (
+const user = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -45,12 +45,12 @@ export const user = (
   </svg>
 );
 
-export const buildingFill = (
+const buildingFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -59,12 +59,12 @@ export const buildingFill = (
   </svg>
 );
 
-export const administrationFill = (
+const administrationFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -73,12 +73,12 @@ export const administrationFill = (
   </svg>
 );
 
-export const awardFill = (
+const awardFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -86,12 +86,12 @@ export const awardFill = (
     <path d="M12 1.001a8 8 0 0 1 5 14.245v6.871a.5.5 0 0 1-.757.429L12 20l-4.243 2.546a.5.5 0 0 1-.757-.43v-6.87a8 8 0 0 1 5-14.245ZM12 3a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" />
   </svg>
 );
-export const collectiviteFill = (
+const collectiviteFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -100,12 +100,12 @@ export const collectiviteFill = (
   </svg>
 );
 
-export const building = (
+const building = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -114,11 +114,11 @@ export const building = (
   </svg>
 );
 
-export const questionnaire = (
+const questionnaire = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="18"
-    height="18"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="currentColor"
     stroke="currentColor"
@@ -128,12 +128,12 @@ export const questionnaire = (
   </svg>
 );
 
-export const alertFill = (
+const alertFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="18"
-    height="18"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
   >
@@ -141,7 +141,7 @@ export const alertFill = (
   </svg>
 );
 
-export const lockFill = (
+const lockFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -154,25 +154,24 @@ export const lockFill = (
   </svg>
 );
 
-export const open = (
+const open = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="18"
-    height="18"
+    width="100%"
+    height="100%"
     fill="#326f00"
     stroke="#326f00"
   >
     <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-.997-4L6.76 11.757l1.414-1.414 2.829 2.829 5.656-5.657 1.415 1.414L11.003 16z" />
   </svg>
 );
-
-export const closed = (
+const closed = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="18"
-    height="18"
+    width="100%"
+    height="100%"
     fill="#914141"
     stroke="#914141"
   >
@@ -180,12 +179,12 @@ export const closed = (
   </svg>
 );
 
-export const questionFill = (
+const questionFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="24"
-    height="24"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -194,29 +193,15 @@ export const questionFill = (
   </svg>
 );
 
-export const searchLine = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    width="18"
-    height="18"
-    fill="currentColor"
-    stroke="currentColor"
-    strokeWidth="0"
-  >
-    <path d="m18.031 16.617 4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617Zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15Z" />
-  </svg>
-);
-
 /**
  * CUSTOM
  */
 
-export const download = (
+const download = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -230,12 +215,12 @@ export const download = (
   </svg>
 );
 
-export const mapPin = (
+const mapPin = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -244,11 +229,11 @@ export const mapPin = (
   </svg>
 );
 
-export const information = (
+const information = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="12"
-    height="12"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     strokeWidth="3"
     strokeLinecap="round"
@@ -260,11 +245,11 @@ export const information = (
   </svg>
 );
 
-export const facebook = (
+const facebook = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="currentColor"
     stroke="none"
@@ -276,11 +261,11 @@ export const facebook = (
   </svg>
 );
 
-export const linkedin = (
+const linkedin = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="currentColor"
     stroke="none"
@@ -294,11 +279,11 @@ export const linkedin = (
   </svg>
 );
 
-export const twitter = (
+const twitter = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="currentColor"
     stroke="none"
@@ -310,10 +295,10 @@ export const twitter = (
   </svg>
 );
 
-export const qrCode = (
+const qrCode = (
   <svg
-    width="15"
-    height="15"
+    width="90%"
+    height="100%"
     viewBox="0 0 16 16"
     fill="currentColor"
     stroke="none"
@@ -325,11 +310,11 @@ export const qrCode = (
   </svg>
 );
 
-export const print = (
+const print = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -343,11 +328,11 @@ export const print = (
   </svg>
 );
 
-export const mail = (
+const mail = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -360,10 +345,10 @@ export const mail = (
   </svg>
 );
 
-export const file = (
+const file = (
   <svg
-    width="14"
-    height="16"
+    width="70%"
+    height="100%"
     viewBox="0 0 14 16"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -376,3 +361,30 @@ export const file = (
     />
   </svg>
 );
+
+export const icons = {
+  lockFill,
+  user,
+  communityFill,
+  collectiviteFill,
+  awardFill,
+  administrationFill,
+  buildingFill,
+  open,
+  closed,
+  humanPin,
+  file,
+  building,
+  mapPin,
+  information,
+  mail,
+  print,
+  twitter,
+  linkedin,
+  facebook,
+  qrCode,
+  download,
+  questionFill,
+  alertFill,
+  questionnaire,
+};
