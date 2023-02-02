@@ -15,7 +15,7 @@ const constants = {
   colors: {
     frBlue: '#000091',
     pastelBlue: '#dfdff1',
-    espaceAgent: '#640091',
+    espaceAgent: '#263b58',
   },
 };
 
