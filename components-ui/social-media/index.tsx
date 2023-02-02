@@ -9,6 +9,7 @@ import {
 } from '#components-ui/icon';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { PrintNever } from '#components-ui/print-visibility';
+import constants from '#models/constants';
 import { IUniteLegale } from '#models/index';
 
 const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
@@ -124,7 +125,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
         display: none;
       }
       .social-media {
-        color: #000091;
+        color: ${constants.colors.frBlue};
         margin: 0 0 12px 0;
       }
     `}</style>

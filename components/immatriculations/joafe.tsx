@@ -9,7 +9,6 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IImmatriculationJOAFE } from '#models/immatriculation/joafe';
-import { IAssociation } from '#models/index';
 import { formatDate, formatIntFr } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
 import { Section } from '../section';

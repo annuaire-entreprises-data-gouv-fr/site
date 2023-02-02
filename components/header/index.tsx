@@ -1,9 +1,10 @@
 import React from 'react';
-import { information, user } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
 import Logo from '#components-ui/logo';
 import { PrintNever } from '#components-ui/print-visibility';
 import { AdvancedSearch } from '#components/advanced-search';
 import SearchBar from '#components/search-bar';
+import constants from '#models/constants';
 import { IParams } from '#models/search-filter-params';
 import { ISession, isLoggedIn } from '#utils/session';
 
@@ -77,8 +78,10 @@ export const Header: React.FC<IProps> = ({
                             className="fr-link"
                             href="/api/auth/mon-compte-pro/logout"
                           >
-                            {user} Se déconnecter (
-                            {session?.user?.email || 'Utilisateur inconnu'})
+                            <Icon slug="user">
+                              Se déconnecter (
+                              {session?.user?.email || 'Utilisateur inconnu'})
+                            </Icon>
                           </a>
                         </li>
                       </ul>
@@ -86,7 +89,7 @@ export const Header: React.FC<IProps> = ({
                       <ul className="fr-links-group">
                         <li>
                           <a className="fr-link" href="/comment-ca-marche">
-                            {information} À propos
+                            <Icon slug="information">À propos</Icon>
                           </a>
                         </li>
                       </ul>
@@ -139,7 +142,7 @@ export const Header: React.FC<IProps> = ({
         }
       }
       div.with-session-banner {
-        background-color: #640091;
+        background-color: ${constants.colors.espaceAgent};
         color: #fff;
         font-size: 2rem;
         line-height: 3rem;

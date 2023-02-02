@@ -1,7 +1,9 @@
 import { GetServerSideProps } from 'next';
 import React, { useEffect, useState } from 'react';
+import { clientApiEntrepriseAssociation } from '#clients/api-entreprise/association';
 import { Loader } from '#components-ui/loader';
 import Meta from '#components/meta';
+import { ProtectedSection } from '#components/section/protected-section';
 import Title, { FICHE } from '#components/title-section';
 import { IUniteLegale } from '#models/index';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
@@ -13,16 +15,6 @@ import {
 import { isLoggedIn } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
-const Test = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    window.setTimeout(() => setIsLoading(false), 3000);
-  }, [setIsLoading]);
-
-  return <>{isLoading ? <Loader /> : <span>Hello world !</span>}</>;
-};
-
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
 }
@@ -33,14 +25,17 @@ const OctroiPage: NextPageWithLayout<IProps> = ({
 }) => {
   return (
     <>
-      <Meta title={`Octroi - test`} noIndex={true} />
+      <Meta
+        title={`Espace Agent Public - Subventions des Associations | Annuaire des Entreprises`}
+        noIndex={true}
+      />
       <div className="content-container">
         <Title
-          ficheType={FICHE.OCTROI}
+          ficheType={FICHE.AGENT_SUBVENTIONS}
           uniteLegale={uniteLegale}
           session={session}
         />
-        <Test />
+        <ProtectedSection title="Subventions des Associations" />
       </div>
     </>
   );
@@ -59,6 +54,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
 
     const { slug } = extractParamsFromContext(context);
     const uniteLegale = await getUniteLegaleFromSlug(slug);
+    console.log(await clientApiEntrepriseAssociation());
 
     return {
       props: {

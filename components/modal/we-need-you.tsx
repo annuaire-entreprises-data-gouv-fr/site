@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonLink from '#components-ui/button';
+import constants from '#models/constants';
 
 export const WeNeedYouModal: React.FC<{}> = () => (
   <>
@@ -69,8 +70,8 @@ export const WeNeedYouModal: React.FC<{}> = () => (
       }
       .modal:before {
         position: absolute;
-        border-top: 3px solid #000091;
-        border-left: 3px solid #000091;
+        border-top: 3px solid ${constants.colors.frBlue};
+        border-left: 3px solid ${constants.colors.frBlue};
         content: '';
         height: 30px;
         width: 30px;
@@ -79,8 +80,8 @@ export const WeNeedYouModal: React.FC<{}> = () => (
       }
       .modal:after {
         position: absolute;
-        border-bottom: 3px solid #000091;
-        border-right: 3px solid #000091;
+        border-bottom: 3px solid ${constants.colors.frBlue};
+        border-right: 3px solid ${constants.colors.frBlue};
         content: '';
         height: 30px;
         width: 30px;

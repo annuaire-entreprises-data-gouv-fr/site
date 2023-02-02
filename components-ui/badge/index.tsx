@@ -1,7 +1,9 @@
 import { MouseEventHandler } from 'react';
+import { Icon } from '#components-ui/icon/wrapper';
+import constants from '#models/constants';
 
 interface IProps extends IPartialBadgeProps {
-  icon: JSX.Element;
+  icon: string;
   backgroundColor?: string;
   fontColor?: string;
 }
@@ -26,7 +28,9 @@ export const Badge: React.FC<IProps> = ({
     className={`badge-wrapper ${isSelected ? 'active' : ''}`}
     onClick={onClick ? onClick : () => {}}
   >
-    <span className="badge-icon">{icon}</span>
+    <span className="badge-icon">
+      <Icon slug={icon} />
+    </span>
     <span className="badge-label">{label}</span>
     <style jsx>{`
       .badge-wrapper {
@@ -41,10 +45,10 @@ export const Badge: React.FC<IProps> = ({
       }
 
       .badge-wrapper:hover {
-        border: 2px dashed ${onClick ? '#000091' : 'transparent'};
+        border: 2px dashed ${onClick ? constants.colors.frBlue : 'transparent'};
       }
       .badge-wrapper.active {
-        border: 2px solid #000091;
+        border: 2px solid ${constants.colors.frBlue};
       }
 
       .badge-icon {

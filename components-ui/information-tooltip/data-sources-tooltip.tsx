@@ -1,6 +1,7 @@
 import React from 'react';
 import { information } from '#components-ui/icon';
 import { IAdministrationMetaData } from '#models/administrations';
+import constants from '#models/constants';
 import InformationTooltip from '.';
 
 const DataSourcesTooltip: React.FC<{
@@ -42,8 +43,8 @@ const DataSourcesTooltip: React.FC<{
           .data-source {
             display: inline-flex;
             font-size: 0.7rem;
-            background-color: #dfdff1;
-            color: #000091;
+            background-color: ${constants.colors.pastelBlue};
+            color: ${constants.colors.frBlue};
             padding: 2px 10px;
             border-radius: 40px;
             cursor: help;

@@ -1,5 +1,7 @@
 import { PropsWithChildren, ReactElement, useState } from 'react';
 import ButtonLink from '#components-ui/button';
+import { Icon } from '#components-ui/icon/wrapper';
+import constants from '#models/constants';
 import {
   buildSearchQuery,
   IParams,
@@ -57,7 +59,9 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
                   setOpen(!open);
                 }}
               >
-                <span>{activeFilter.icon}</span>&nbsp;{label}&nbsp;&nbsp;▾
+                <Icon color={constants.colors.frBlue} slug={activeFilter.icon}>
+                  {label}&nbsp;&nbsp;▾
+                </Icon>
               </span>
             )}
           </label>
@@ -105,7 +109,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
             padding: 5px 10px;
           }
           span.search-filter-label > span {
-            color: #000091;
+            color: ${constants.colors.frBlue};
           }
           span.search-filter-label:hover {
             border-color: #0a76f6;

@@ -1,4 +1,5 @@
 import React from 'react';
+import constants from '#models/constants';
 import { HorizontalSeparator } from 'components-ui/horizontal-separator';
 import { PrintNever } from 'components-ui/print-visibility';
 import { IUniteLegale, isAssociation, isServicePublic } from 'models/index';
@@ -37,7 +38,7 @@ const ShortcutsSection: React.FC<{
       ))}
     <style jsx>{`
       .container {
-        border: 2px solid #dfdff1;
+        border: 2px solid ${constants.colors.pastelBlue};
         padding: 15px;
         flex-grow: 0;
         flex-shrink: 0;

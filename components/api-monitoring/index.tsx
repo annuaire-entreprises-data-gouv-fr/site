@@ -3,6 +3,7 @@ import { information } from '#components-ui/icon';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
 import { Section } from '#components/section';
+import constants from '#models/constants';
 import { IMonitoring, IRatio } from '#models/monitoring';
 
 const getUptimeColor = (ratio: IRatio) => {
@@ -131,7 +132,7 @@ const RobotTooltip = () => (
     </InformationTooltip>
     <style jsx>{`
       span {
-        color: #000091;
+        color: ${constants.colors.frBlue};
       }
     `}</style>
   </>
@@ -227,7 +228,7 @@ const ApiMonitoring: React.FC<IProps> = ({
             line-height: 2.2rem;
           }
           .mean-stats > div:not(:last-of-type) {
-            border-right: 2px solid #dfdff1;
+            border-right: 2px solid ${constants.colors.pastelBlue};
           }
         `}</style>
       </Section>

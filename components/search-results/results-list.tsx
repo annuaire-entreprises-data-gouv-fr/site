@@ -3,6 +3,7 @@ import { humanPin, mapPin } from '#components-ui/icon';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { isPersonneMorale } from '#components/dirigeants-section/rncs-dirigeants';
 import UniteLegaleBadge from '#components/unite-legale-badge';
+import constants from '#models/constants';
 import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IDirigeant } from '#models/immatriculation/rncs';
 import { isCollectiviteTerritoriale } from '#models/index';
@@ -129,7 +130,7 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
         font-size: 1rem;
       }
       .result-item > a .title {
-        color: #000091;
+        color: ${constants.colors.frBlue};
         text-decoration: none;
         font-size: 1.1rem;
         margin-bottom: 3px;
