@@ -1,4 +1,3 @@
-import { building, humanPin, mapPin, file } from '#components-ui/icon';
 import { IEtatCivil } from '#models/immatriculation/rncs';
 
 export interface IParams {
@@ -148,7 +147,7 @@ export const buildSearchQuery = (
 };
 
 export interface ISearchFilter {
-  icon: JSX.Element;
+  icon: string;
   label: string;
   excludeParams: string[];
 }
@@ -156,22 +155,22 @@ export interface ISearchFilter {
 export const extractFilters = (params: IParams) => {
   const f = {
     dirigeantFilter: {
-      icon: humanPin,
+      icon: 'humanPin',
       label: '',
       excludeParams: ['fn', 'n', 'dmin', 'dmax'],
     },
     administrativeFilter: {
-      icon: file,
+      icon: 'file',
       label: '',
       excludeParams: ['sap', 'naf', 'etat'],
     },
     structureFilter: {
-      icon: building,
+      icon: 'building',
       label: '',
       excludeParams: ['type', 'label'],
     },
     localisationFilter: {
-      icon: mapPin,
+      icon: 'mapPin',
       label: '',
       excludeParams: ['cp_dep', 'cp_dep_label', 'cp_dep_type'],
     },

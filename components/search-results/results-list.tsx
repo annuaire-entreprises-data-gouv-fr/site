@@ -1,8 +1,9 @@
 import React from 'react';
-import { humanPin, mapPin } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { isPersonneMorale } from '#components/dirigeants-section/rncs-dirigeants';
 import UniteLegaleBadge from '#components/unite-legale-badge';
+import constants from '#models/constants';
 import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IDirigeant } from '#models/immatriculation/rncs';
 import { isCollectiviteTerritoriale } from '#models/index';
@@ -26,15 +27,17 @@ const DirigeantsOrElusList: React.FC<{ dirigeantsOrElus: IDirigeant[] }> = ({
 
   return (
     <div className="dirigeants-or-elus">
-      {humanPin}{' '}
-      {firstFive
-        .map((dirigeantOrElu) =>
-          isPersonneMorale(dirigeantOrElu)
-            ? `${dirigeantOrElu.denomination}`
-            : `${dirigeantOrElu.prenom} ${dirigeantOrElu.nom}`
-        )
-        .join(', ')}
-      {moreCount > 0 && `, et ${moreCount} autre${moreCount === 1 ? '' : 's'}`}
+      <Icon slug="humanPin">
+        {firstFive
+          .map((dirigeantOrElu) =>
+            isPersonneMorale(dirigeantOrElu)
+              ? `${dirigeantOrElu.denomination}`
+              : `${dirigeantOrElu.prenom} ${dirigeantOrElu.nom}`
+          )
+          .join(', ')}
+        {moreCount > 0 &&
+          `, et ${moreCount} autre${moreCount === 1 ? '' : 's'}`}
+      </Icon>
       <style jsx>{`
         .dirigeants-or-elus {
           font-size: 0.9rem;
@@ -73,10 +76,11 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
         }
       />
       <div>
-        {mapPin}{' '}
-        <span className="adress">
-          {result.siege.adressePostale || 'Adresse inconnue'}{' '}
-        </span>
+        <Icon slug="mapPin">
+          <span className="adress">
+            {result.siege.adressePostale || 'Adresse inconnue'}{' '}
+          </span>
+        </Icon>
       </div>
     </a>
     <ul className="matching-etablissement">
@@ -129,7 +133,7 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
         font-size: 1rem;
       }
       .result-item > a .title {
-        color: #000091;
+        color: ${constants.colors.frBlue};
         text-decoration: none;
         font-size: 1.1rem;
         margin-bottom: 3px;

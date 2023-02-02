@@ -1,6 +1,6 @@
 import React from 'react';
+import { Icon } from '#components-ui/icon/wrapper';
 import Meta from '#components/meta';
-import { qrCode } from 'components-ui/icon';
 import TextWrapper from 'components-ui/text-wrapper';
 import { NextPageWithLayout } from 'pages/_app';
 
@@ -139,7 +139,7 @@ const Partager: NextPageWithLayout = () => {
               <li>Trouvez l’entreprise et accédez à sa fiche</li>
               <li>
                 Cliquez en haut à droite de la page, sur le petit logo{' '}
-                <span>{qrCode}</span>
+                <Icon slug="qrCode" />
               </li>
               <li>Sauvegardez le QR code ainsi généré</li>
               <li>Ajoutez-le à vos documents !</li>

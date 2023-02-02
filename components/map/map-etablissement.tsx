@@ -1,4 +1,5 @@
 import React from 'react';
+import constants from '#models/constants';
 import { IEtablissement } from '#models/index';
 import MaplibreInstance from '.';
 
@@ -29,7 +30,7 @@ const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
                   });
                   ${
                     etablissement
-                      ? `new maplibregl.Marker({ color: '#000091' })
+                      ? `new maplibregl.Marker({ color: '${constants.colors.frBlue}' })
                     .setLngLat(coords)
                     .addTo(map);`
                       : ''

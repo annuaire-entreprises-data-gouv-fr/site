@@ -1,14 +1,18 @@
 import { MouseEventHandler } from 'react';
+import { Icon } from '#components-ui/icon/wrapper';
+import constants from '#models/constants';
 
 const ActiveFilterLabel: React.FC<{
   label?: string;
-  icon?: JSX.Element;
+  icon: string;
   query: string;
   onClick: MouseEventHandler;
-}> = ({ label, icon = null, query, onClick }) => (
+}> = ({ label, icon, query, onClick }) => (
   <div className="selected-filter-container cursor-pointer">
     <span onClick={onClick}>
-      {icon}&nbsp;{label}
+      <Icon color={constants.colors.frBlue} slug={icon}>
+        &nbsp;{label}
+      </Icon>
     </span>
     <a className="no-style-link" href={query}>
       ✕
@@ -18,10 +22,10 @@ const ActiveFilterLabel: React.FC<{
         display: flex;
         align-items: center;
         padding: 5px 30px 5px 10px;
-        color: #000091;
-        background-color: #dfdff1;
+        color: ${constants.colors.frBlue};
+        background-color: ${constants.colors.pastelBlue};
         border-radius: 5px;
-        border: 1px solid #000091;
+        border: 1px solid ${constants.colors.frBlue};
       }
       .selected-filter-container:hover {
         border-color: #0a76f6;
@@ -34,7 +38,7 @@ const ActiveFilterLabel: React.FC<{
         right: 0;
       }
       .selected-filter-container > a:hover {
-        background-color: #00009111;
+        background-color: ${constants.colors.frBlue}11;
       }
     `}</style>
   </div>

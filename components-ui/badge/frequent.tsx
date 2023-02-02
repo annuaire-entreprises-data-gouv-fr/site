@@ -1,12 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { awardFill, closed, open } from '#components-ui/icon';
-import {
-  administrationFill,
-  buildingFill,
-  collectiviteFill,
-  communityFill,
-  user,
-} from '#components-ui/icon';
+import constants from '#models/constants';
 import { Badge, IPartialBadgeProps } from '.';
 
 export const LabelAndCertificateBadge = ({
@@ -17,11 +10,11 @@ export const LabelAndCertificateBadge = ({
 }: IPartialBadgeProps) => (
   <Badge
     label={label}
-    icon={awardFill}
+    icon="awardFill"
     onClick={onClick}
     isSelected={isSelected}
     small={small}
-    fontColor="#000091"
+    fontColor={constants.colors.frBlue}
     backgroundColor="#ddd"
   />
 );
@@ -34,7 +27,7 @@ export const AssociationBadge = ({
   <Badge
     small={small}
     onClick={onClick}
-    icon={communityFill}
+    icon="communityFill"
     isSelected={isSelected}
     label="Association"
     fontColor="#3d0d71"
@@ -47,7 +40,7 @@ export const EntrepriseIndividuelleBadge = ({
   onClick,
 }: IPartialBadgeProps) => (
   <Badge
-    icon={user}
+    icon="user"
     small={small}
     onClick={onClick}
     isSelected={isSelected}
@@ -62,7 +55,7 @@ export const CollectiviteTerritorialeBadge = ({
   onClick,
 }: IPartialBadgeProps) => (
   <Badge
-    icon={collectiviteFill}
+    icon="collectiviteFill"
     small={small}
     onClick={onClick}
     isSelected={isSelected}
@@ -77,7 +70,7 @@ export const ServicePublicBadge = ({
   onClick,
 }: IPartialBadgeProps) => (
   <Badge
-    icon={administrationFill}
+    icon="administrationFill"
     small={small}
     onClick={onClick}
     isSelected={isSelected}
@@ -93,12 +86,12 @@ export const DefaultStructureBadge = ({
   onClick,
 }: IPartialBadgeProps) => (
   <Badge
-    icon={buildingFill}
+    icon="buildingFill"
     small={small}
     onClick={onClick}
     label={label}
     isSelected={isSelected}
-    fontColor="#000091"
+    fontColor={constants.colors.frBlue}
     backgroundColor="#e8edff"
   />
 );
@@ -108,7 +101,7 @@ export const OpenClosedTag: React.FC<
 > = ({ label = '', isVerified = true }) => (
   <div className="layout-left">
     <Badge
-      icon={isVerified ? open : closed}
+      icon={isVerified ? 'open' : 'closed'}
       label={label}
       backgroundColor="#ddd"
       fontColor="#555"

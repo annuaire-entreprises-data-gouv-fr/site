@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react';
-import { information } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
+import constants from '#models/constants';
 
 const FAQLink: React.FC<
   PropsWithChildren<{ tooltipLabel: string; to?: string }>
@@ -13,7 +14,8 @@ const FAQLink: React.FC<
       left="5px"
     >
       <span className="faq-label">
-        {tooltipLabel} <span>{information}</span>
+        {tooltipLabel}{' '}
+        <Icon color={constants.colors.frBlue} size={12} slug="information" />
       </span>
     </InformationTooltip>
 
@@ -22,9 +24,6 @@ const FAQLink: React.FC<
         margin: 0;
         padding: 0;
         border-bottom: 1px dotted #666;
-      }
-      span.faq-label > span {
-        color: #000091;
       }
     `}</style>
   </>

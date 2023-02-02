@@ -1,8 +1,11 @@
 import { GetServerSideProps } from 'next';
 import React, { useEffect, useState } from 'react';
+import { clientApiEntrepriseAssociation } from '#clients/api-entreprise/association';
 import { Loader } from '#components-ui/loader';
 import Meta from '#components/meta';
+import { ProtectedSection } from '#components/section/protected-section';
 import Title, { FICHE } from '#components/title-section';
+import { EAdministration } from '#models/administrations';
 import { IUniteLegale } from '#models/index';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
@@ -12,16 +15,6 @@ import {
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { isLoggedIn } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
-
-const Test = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    window.setTimeout(() => setIsLoading(false), 3000);
-  }, [setIsLoading]);
-
-  return <>{isLoading ? <Loader /> : <span>Hello world !</span>}</>;
-};
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
@@ -33,14 +26,22 @@ const OctroiPage: NextPageWithLayout<IProps> = ({
 }) => {
   return (
     <>
-      <Meta title={`Octroi - test`} noIndex={true} />
+      <Meta
+        title={`Espace Agent Public - Subventions des Associations | Annuaire des Entreprises`}
+        noIndex={true}
+      />
       <div className="content-container">
         <Title
-          ficheType={FICHE.OCTROI}
+          ficheType={FICHE.AGENT_SUBVENTIONS}
           uniteLegale={uniteLegale}
           session={session}
         />
-        <Test />
+        <ProtectedSection
+          title="Subventions des Associations"
+          sources={[EAdministration.MI]}
+        >
+          🚧 En construction
+        </ProtectedSection>
       </div>
     </>
   );

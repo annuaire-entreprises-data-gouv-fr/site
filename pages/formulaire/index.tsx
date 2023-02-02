@@ -338,7 +338,7 @@ const FeedBackPage: NextPageWithLayout = () => {
             }
             .radio-group.rating > div > label {
               font-weight: bold;
-              color: #000091;
+              color: ${constants.colors.frBlue};
               background: #e5e5f4;
               font-size: 2rem;
               line-height: 3rem;
@@ -359,10 +359,10 @@ const FeedBackPage: NextPageWithLayout = () => {
             }
 
             input[type='radio']:hover + label {
-              border: 2px dashed #000091;
+              border: 2px dashed ${constants.colors.frBlue};
             }
             input[type='radio']:checked + label {
-              border: 2px solid #000091;
+              border: 2px solid ${constants.colors.frBlue};
             }
 
             h2 {

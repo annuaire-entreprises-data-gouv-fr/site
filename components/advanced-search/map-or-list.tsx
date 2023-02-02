@@ -1,4 +1,5 @@
-import { mapPin } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
+import constants from '#models/constants';
 
 const MapOrListSwitch = ({ isMap = false, query = '' }) => (
   <>
@@ -7,7 +8,11 @@ const MapOrListSwitch = ({ isMap = false, query = '' }) => (
         Afficher les résultats sous forme de liste
       </a>
     ) : (
-      <a href={`/rechercher/carte${query}`}>{mapPin} Afficher sur une carte</a>
+      <a href={`/rechercher/carte${query}`}>
+        <Icon color={constants.colors.frBlue} slug="mapPin">
+          Afficher sur une carte
+        </Icon>
+      </a>
     )}
   </>
 );

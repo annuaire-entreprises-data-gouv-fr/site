@@ -1,6 +1,7 @@
 import React from 'react';
 import AssociationAdressAlert from '#components-ui/alerts/association-adress';
 import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
+import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { PrintNever } from '#components-ui/print-visibility';
 import SocialMedia from '#components-ui/social-media';
@@ -8,6 +9,7 @@ import { Tag } from '#components-ui/tag';
 import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UnitLegaleDescription } from '#components/unite-legale-description';
+import constants from '#models/constants';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
@@ -28,7 +30,7 @@ export enum FICHE {
   ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
   INFORMATION = 'résumé',
   JUSTIFICATIFS = 'justificatifs',
-  OCTROI = 'octroi',
+  AGENT_SUBVENTIONS = 'subventions associations',
 }
 
 interface IProps {
@@ -112,6 +114,7 @@ const Tabs: React.FC<{
               } no-style-link`}
               href={`${pathPrefix}${uniteLegale.siren}`}
               rel={noFollow ? 'nofollow' : ''}
+              key={label}
             >
               {currentFicheType === ficheType ? label : <h2>{label}</h2>}
             </a>
@@ -119,11 +122,11 @@ const Tabs: React.FC<{
         {isLoggedIn(session) && (
           <a
             className={`${
-              currentFicheType === FICHE.OCTROI ? 'active' : ''
+              currentFicheType === FICHE.AGENT_SUBVENTIONS ? 'active' : ''
             } no-style-link`}
-            href={`/espace-agent/octroi/${uniteLegale.siren}`}
+            href={`/espace-agent/subventions-associations/${uniteLegale.siren}`}
           >
-            Marchés publics <span className="agent">agent public</span>
+            <Icon slug="lockFill">Subventions associations</Icon>
           </a>
         )}
       </div>
@@ -132,18 +135,18 @@ const Tabs: React.FC<{
           display: flex;
           flex-grow: 1;
           font-size: 0.9rem;
-          border-bottom: 2px solid #dfdff1;
+          border-bottom: 2px solid ${constants.colors.pastelBlue};
         }
         .title-tabs > a {
           border-top-left-radius: 3px;
           border-top-right-radius: 3px;
-          border: 2px solid #dfdff1;
+          border: 2px solid ${constants.colors.pastelBlue};
           background-color: #efeffb;
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
-          box-shadow: 0 -8px 5px -5px #dfdff1 inset;
+          box-shadow: 0 -8px 5px -5px ${constants.colors.pastelBlue} inset;
           margin: 0 4px;
           padding: 10px 5px;
           margin-bottom: -2px;
@@ -151,7 +154,7 @@ const Tabs: React.FC<{
 
         .title-tabs > a,
         .title-tabs > a > h2 {
-          color: #000091;
+          color: ${constants.colors.frBlue};
           font-weight: bold;
           font-size: 0.9rem;
           line-height: 1.5rem;
@@ -163,22 +166,13 @@ const Tabs: React.FC<{
         }
 
         .title-tabs > a:hover {
-          background-color: #dfdff1;
+          background-color: ${constants.colors.pastelBlue};
         }
 
         .title-tabs > a.active {
           box-shadow: none;
           background-color: #fff;
           border-bottom: 0;
-        }
-        .title-tabs > a > span.agent {
-          border-radius: 45px;
-          margin: 0 5px;
-          padding: 0 8px;
-          background-color: #640091;
-          color: #fbeff9;
-          font-variant: small-caps;
-          font-size: 0.8rem;
         }
 
         @media only screen and (min-width: 1px) and (max-width: 650px) {
@@ -191,7 +185,7 @@ const Tabs: React.FC<{
           }
           .title-tabs > a.active {
             background-color: #fff;
-            border-bottom: 2px solid #dfdff1;
+            border-bottom: 2px solid ${constants.colors.pastelBlue};
           }
         }
       `}</style>

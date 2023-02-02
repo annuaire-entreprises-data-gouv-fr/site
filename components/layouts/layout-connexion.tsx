@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import Footer from '#components/footer';
 import { Header } from '#components/header';
+import constants from '#models/constants';
 
 interface IProps {
   img: JSX.Element;
@@ -28,7 +29,7 @@ export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
           position: relative;
           align-items: stretch;
           min-height: 450px;
-          border-top: 2px solid #000091;
+          border-top: 2px solid ${constants.colors.frBlue};
         }
         .connect-container > div {
           padding: 30px;

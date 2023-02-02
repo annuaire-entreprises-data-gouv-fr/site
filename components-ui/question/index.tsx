@@ -1,5 +1,5 @@
 import React from 'react';
-import { questionFill } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 
 export const Question: React.FC<{}> = () => (
@@ -11,7 +11,7 @@ export const Question: React.FC<{}> = () => (
     >
       <a className="no-style-link" href="/faq">
         <span>Une question&nbsp;</span>
-        {questionFill}
+        <Icon size={24} slug="questionFill"></Icon>
       </a>
     </div>
     <style jsx>{`

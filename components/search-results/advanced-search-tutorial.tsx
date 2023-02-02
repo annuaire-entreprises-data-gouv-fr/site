@@ -1,4 +1,5 @@
-import { building, humanPin, mapPin } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
+import constants from '#models/constants';
 
 export const AdvancedSearchTutorial = () => {
   return (
@@ -25,16 +26,27 @@ export const AdvancedSearchTutorial = () => {
           <br />
           <ul>
             <li>
-              <span>{mapPin}</span> <b>Zone géographique</b> : filtrez par ville
-              ou par département
+              <Icon color={constants.colors.frBlue} slug="mapPin">
+                <b>Zone géographique</b>: filtrez par ville ou par département
+              </Icon>
             </li>
             <li>
-              <span>{humanPin}</span> <b>Dirigeant</b> : filtrez par le nom ou
-              le prénom d’un(e) dirigeant(e)
+              <Icon color={constants.colors.frBlue} slug="humanPin">
+                <b>Dirigeant</b> : filtrez par le nom ou le prénom d’un(e)
+                dirigeant(e)
+              </Icon>
             </li>
             <li>
-              <span>{building}</span> <b>Situation administrative</b> : filtrez
-              par domaine d’activité, type de structure ou état (En activité/Cessée)
+              <Icon color={constants.colors.frBlue} slug="building">
+                <b>Structure</b>: filtrez par type de structure ou labels (RGE,
+                ESS, Spectacle vivant)
+              </Icon>
+            </li>
+            <li>
+              <Icon color={constants.colors.frBlue} slug="file">
+                <b>Situation administrative</b>: filtrez par domaine d’activité
+                ou état administratif (En activité/Cessée)
+              </Icon>
             </li>
           </ul>
         </div>
@@ -62,7 +74,7 @@ export const AdvancedSearchTutorial = () => {
             margin: 0 0 20px;
           }
           .tutorial li > span {
-            color: #000091;
+            color: ${constants.colors.frBlue};
           }
 
           @media only screen and (min-width: 1px) and (max-width: 600px) {

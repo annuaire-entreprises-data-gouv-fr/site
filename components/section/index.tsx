@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import Warning from '#components-ui/alerts/warning';
-import { questionnaire } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
 import DataSourcesTooltip from '#components-ui/information-tooltip/data-sources-tooltip';
 import Logo from '#components-ui/logo';
 import { PrintNever } from '#components-ui/print-visibility';
@@ -8,14 +8,17 @@ import {
   administrationsMetaData,
   EAdministration,
 } from '#models/administrations';
+import constants from '#models/constants';
 import { formatDate, isTwoMonthOld, formatDateLong } from '#utils/helpers';
 
-interface ISectionProps {
+export interface ISectionProps {
   title: string;
   width?: number;
   sources?: EAdministration[];
   id?: string;
   lastModified?: string | null;
+  borderColor?: string;
+  titleColor?: string;
 }
 
 export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
@@ -25,6 +28,8 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   sources = [],
   lastModified = null,
   width = 100,
+  borderColor = constants.colors.pastelBlue,
+  titleColor = constants.colors.frBlue,
 }) => {
   const dataSources = sources.map((key) => administrationsMetaData[key]);
 
@@ -48,8 +53,9 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           <div className="administration-page-link">
             <PrintNever>
               <a href={link}>
-                {questionnaire}
-                &nbsp;Une erreur ou une question sur ces données ?
+                <Icon size={14} slug="questionnaire">
+                  Une erreur ou une question sur ces données ?
+                </Icon>
               </a>
             </PrintNever>
             <DataSourcesTooltip
@@ -81,7 +87,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
       </div>
       <style jsx>{`
         .section-container {
-          border: 2px solid #dfdff1;
+          border: 2px solid ${borderColor};
           border-radius: 2px;
           position: relative;
           margin: 10px 0 10px;
@@ -95,8 +101,8 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           display: inline-block;
           font-size: 1.1rem;
           line-height: 1.8rem;
-          background-color: #dfdff1;
-          color: #000091;
+          background-color: ${borderColor};
+          color: ${titleColor};
           padding: 0 7px;
           border-radius: 2px;
           max-width: calc(100% - 40px);

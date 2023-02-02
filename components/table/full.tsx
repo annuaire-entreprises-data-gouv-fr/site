@@ -1,4 +1,5 @@
 import React from 'react';
+import constants from '#models/constants';
 
 interface ISectionProps {
   head: string[];
@@ -44,7 +45,7 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
 
       tr td,
       th {
-        border: 1px solid #dfdff1;
+        border: 1px solid ${constants.colors.pastelBlue};
         border-left: none;
         border-right: none;
         border: none;
@@ -62,7 +63,7 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
       }
 
       table tr:hover > td {
-        background-color: #dfdff166;
+        background-color: ${constants.colors.pastelBlue}66;
       }
 
       .mobile {
