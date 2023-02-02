@@ -106,9 +106,11 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           display: flex;
           justify-content: space-between;
           align-items: center;
+          gap: 10px;
+          flex-wrap: wrap;
           margin-top: 25px;
         }
-        .administration-page-link > a {
+        .administration-page-link a {
           font-size: 0.9rem;
         }
 
@@ -123,13 +125,6 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         @media only screen and (min-width: 1px) and (max-width: 750px) {
           .section-logo-wrapper {
             display: none;
-          }
-
-          .administration-page-link {
-            flex-direction: column;
-          }
-          .administration-page-link > a {
-            margin-bottom: 15px;
           }
         }
       `}</style>
