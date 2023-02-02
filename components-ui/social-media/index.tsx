@@ -1,5 +1,4 @@
 import React from 'react';
-import { qrCode } from '#components-ui/icon';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { PrintNever } from '#components-ui/print-visibility';

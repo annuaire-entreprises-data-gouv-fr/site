@@ -1,5 +1,4 @@
 import React from 'react';
-import { information } from '#components-ui/icon';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';

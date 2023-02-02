@@ -1,6 +1,5 @@
 import React from 'react';
 import ButtonLink from '#components-ui/button';
-import { download } from '#components-ui/icon';
 import { Icon } from '#components-ui/icon/wrapper';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
