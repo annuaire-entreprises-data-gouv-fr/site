@@ -34,7 +34,7 @@ export const FilterGeo: React.FC<{
   const [geoSuggests, setGeoSuggests] = useState([]);
 
   const [suggestsHistory, setSuggestsHistory] = useLocalStorage(
-    'geo-search-history-2',
+    'geo-search-history-3',
     []
   );
   const [showSuggestsHistory, setShowSuggestsHistory] = useState(false);
@@ -46,10 +46,10 @@ export const FilterGeo: React.FC<{
         .get(`/api/geo/${term}`, { timeout: constants.timeout.L })
         .then((response) => {
           setGeoSuggests(response.data);
-          setLoading(false);
           if (response.data.length === 0) {
             setIssue(Issue.NORESULT);
           }
+          setLoading(false);
         })
         .catch((e) => {
           setIssue(e?.request?.status === 404 ? Issue.NORESULT : Issue.ERROR);
@@ -86,9 +86,12 @@ export const FilterGeo: React.FC<{
     setIssue(Issue.NONE);
     if (!searchTerm || searchTerm === labelDep) {
       setGeoSuggests([]);
+      // in case of remaining pending requests
+      setLoading(false);
       return;
+    } else {
+      search(searchTerm);
     }
-    search(searchTerm);
   }, [searchTerm, setGeoSuggests, setIssue, labelDep, search]);
 
   // only show suggest history on browser to avoid rehydration conflict with server rendered html
@@ -100,6 +103,7 @@ export const FilterGeo: React.FC<{
         id="geo-search-input"
         className="fr-input"
         onChange={onChange}
+        onFocus={() => setSearchTerm('')}
         placeholder="ex : Rennes"
         autoComplete="off"
         type="search"

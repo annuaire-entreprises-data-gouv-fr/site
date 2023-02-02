@@ -31,7 +31,7 @@ const geo = async (
 
       res.status(404).end();
     } else {
-      const [communes, departements] = await Promise.all([
+      const [departements, communes] = await Promise.all([
         clientDepartementsByName(term),
         clientCommunesByName(term),
       ]);

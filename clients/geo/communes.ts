@@ -26,24 +26,27 @@ const clientCommuneByCp = async (cp: string): Promise<any> => {
 };
 
 const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
-  return response.reduce(
-    (communes: IGeoElement[], commune) => [
-      ...communes,
-      ...(commune.codesPostaux.length > 1
-        ? [
-            {
-              type: 'insee',
-              value: commune.code,
-              label: `${commune.nom} (Toute la ville)`,
-            },
-          ]
-        : []),
-      ...commune.codesPostaux.map((cp) => {
-        return { label: `${commune.nom} (${cp})`, value: cp, type: 'cp' };
-      }),
-    ],
-    []
-  );
+  return response
+    .sort((a, b) => b.codesPostaux.length - a.codesPostaux.length)
+    .reduce(
+      (communes: IGeoElement[], commune) => [
+        ...communes,
+        ...(commune.codesPostaux.length > 1 &&
+        ['Paris', 'Lyon', 'Marseille'].indexOf(commune.nom) === -1
+          ? [
+              {
+                type: 'cp',
+                value: commune.codesPostaux.join(','),
+                label: `${commune.nom} (Toute la ville)`,
+              },
+            ]
+          : []),
+        ...commune.codesPostaux.map((cp) => {
+          return { label: `${commune.nom} (${cp})`, value: cp, type: 'cp' };
+        }),
+      ],
+      []
+    );
 };
 
 export { clientCommunesByName, clientCommuneByCp };
