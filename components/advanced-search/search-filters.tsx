@@ -3,7 +3,7 @@ import { FilterMenu } from '#components-ui/filter-menu';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import { MultiSelect, Select } from '#components-ui/select';
 import { extractFilters, IParams } from '#models/search-filter-params';
-import { categoriesJuridiquesSearch } from '#utils/labels/categories-juridiques-search';
+import { categoriesJuridiques } from '#utils/labels/categories-juridiques';
 import { codesNAFRev2 } from '#utils/labels/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/labels/codes-section-NAF';
 import { FilterGeo } from './filter-geo';
@@ -35,6 +35,20 @@ const SearchFilters: React.FC<{
     administrativeFilter,
     structureFilter,
   } = extractFilters(searchParams || {});
+
+  /**
+   * For the search api `nature_juridique` must be a string
+   * of 4 characters.
+   */
+  const getNaturesJuridiques = () =>
+    Object.keys(categoriesJuridiques)
+      .filter((k) => k.length === 4)
+      .map((categorie) => ({
+        value: categorie,
+        label: `${categorie} - ${
+          categoriesJuridiques[categorie as keyof typeof categoriesJuridiques]
+        }`,
+      }));
 
   return (
     <>
@@ -163,16 +177,7 @@ const SearchFilters: React.FC<{
             placeholder="Choisir une nature juridique"
             id="nature-juridique-multi-select"
             instanceId="nature-juridique-multi-select"
-            options={Object.keys(categoriesJuridiquesSearch).map(
-              (categorie) => ({
-                value: categorie,
-                label: `${categorie} - ${
-                  categoriesJuridiquesSearch[
-                    categorie as keyof typeof categoriesJuridiquesSearch
-                  ]
-                }`,
-              })
-            )}
+            options={getNaturesJuridiques()}
           />
         </div>
       </FilterMenu>
