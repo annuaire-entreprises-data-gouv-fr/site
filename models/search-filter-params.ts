@@ -1,21 +1,22 @@
 import { IEtatCivil } from '#models/immatriculation/rncs';
 
 export interface IParams {
-  etat?: string;
-  type?: string;
-  label?: string;
-  sap?: string;
-  naf?: string;
-  cp_dep?: string;
+  ageMax?: number | string;
+  ageMin?: number | string;
   cp_dep_label?: string;
   cp_dep_type?: string;
-  fn?: string;
-  n?: string;
-  dmin?: string;
+  cp_dep?: string;
   dmax?: string;
+  dmin?: string;
+  etat?: string;
+  fn?: string;
   isEmpty?: boolean;
-  ageMin?: number | string;
-  ageMax?: number | string;
+  label?: string;
+  n?: string;
+  naf?: string;
+  nature_juridique?: string;
+  sap?: string;
+  type?: string;
 }
 
 class SearchFilterParams {
@@ -23,18 +24,19 @@ class SearchFilterParams {
 
   constructor(query: IParams = {}) {
     const {
-      etat = '',
-      type = '',
-      label = '',
-      sap = '',
       cp_dep = '',
       cp_dep_label = '',
       cp_dep_type = '',
-      fn = '',
-      n = '',
-      dmin = '',
       dmax = '',
+      dmin = '',
+      etat = '',
+      fn = '',
+      label = '',
+      n = '',
       naf = '',
+      nature_juridique = '',
+      sap = '',
+      type = '',
     } = query;
 
     // ensure dmax > dmin
@@ -42,22 +44,22 @@ class SearchFilterParams {
     const realDmin = dmax && dmin && dmax < dmin ? dmax : dmin;
 
     this.params = {
-      etat,
-      type,
-      label,
-      sap,
-      //@ts-ignore
-      cp_dep,
+      // careful dmin determine ageMax and vice versa
+      ageMax: getAge(realDmin),
+      ageMin: getAge(realDmax),
       cp_dep_label,
       cp_dep_type,
-      fn,
-      n,
-      dmin: realDmin,
+      cp_dep,
       dmax: realDmax,
+      dmin: realDmin,
+      etat,
+      fn,
+      label,
+      n,
       naf,
-      // careful dmin determine ageMax and vice versa
-      ageMin: getAge(realDmax),
-      ageMax: getAge(realDmin),
+      nature_juridique,
+      sap,
+      type,
     };
   }
 
@@ -82,6 +84,7 @@ class SearchFilterParams {
       code_postal,
       code_commune,
       section_activite_principale: this.params.sap,
+      nature_juridique: this.params.nature_juridique,
       activite_principale: this.params.naf,
       departement,
       prenoms_personne: this.params.fn?.trim(),
@@ -162,7 +165,7 @@ export const extractFilters = (params: IParams) => {
     administrativeFilter: {
       icon: 'file',
       label: '',
-      excludeParams: ['sap', 'naf', 'etat'],
+      excludeParams: ['sap', 'naf', 'etat', 'nature_juridique'],
     },
     structureFilter: {
       icon: 'building',
@@ -207,6 +210,9 @@ export const extractFilters = (params: IParams) => {
   if (params.naf) {
     administrativeFilterCounter += 1;
   }
+  if (params.nature_juridique) {
+    administrativeFilterCounter += 1;
+  }
 
   if (administrativeFilterCounter > 0) {
     const plural = administrativeFilterCounter ? 's' : '';
@@ -228,7 +234,6 @@ export const extractFilters = (params: IParams) => {
   if (params.cp_dep_label) {
     f.localisationFilter.label = params.cp_dep_label;
   }
-
   return f;
 };
 
