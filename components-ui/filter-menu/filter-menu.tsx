@@ -156,7 +156,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
             padding: 0 4px;
           }
 
-          @media only screen and (min-width: 1px) and (max-width: 991px) {
+          @media only screen and (min-width: 1px) and (max-width: 992px) {
             .container {
               position: fixed;
               top: 0;

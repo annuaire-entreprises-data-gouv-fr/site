@@ -108,12 +108,12 @@ const Metric: React.FC<{
         height: 46px;
       }
 
-      @media only screen and (min-width: 550px) and (max-width: 700px) {
+      @media only screen and (min-width: 576px) and (max-width: 768px) {
         .hide-tablet {
           display: none;
         }
       }
-      @media only screen and (min-width: 1px) and (max-width: 550px) {
+      @media only screen and (min-width: 1px) and (max-width: 576px) {
         .hide-mobile {
           display: none;
         }

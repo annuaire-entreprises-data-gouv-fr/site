@@ -32,6 +32,7 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
           display: inline-flex;
           align-items: center;
           flex-direction: row;
+          flex-wrap: wrap;
         }
         .icon {
           height: ${size}px;

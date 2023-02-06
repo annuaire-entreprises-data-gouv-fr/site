@@ -128,7 +128,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           justify-content: end;
         }
 
-        @media only screen and (min-width: 1px) and (max-width: 750px) {
+        @media only screen and (min-width: 1px) and (max-width: 768px) {
           .section-logo-wrapper {
             display: none;
           }

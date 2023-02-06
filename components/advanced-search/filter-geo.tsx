@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
 import Info from '#components-ui/alerts/info';
 import Warning from '#components-ui/alerts/warning';
 import { Loader } from '#components-ui/loader';
@@ -82,6 +82,27 @@ export const FilterGeo: React.FC<{
     setSearchTerm(inputElement.target.value);
   };
 
+  const onKeyDown: KeyboardEventHandler = (event) => {
+    // select first entry and submit
+    if (event.keyCode === 13) {
+      if (searchTerm === labelDep) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (geoSuggests && geoSuggests.length > 0) {
+        selectDep(geoSuggests[0]);
+      } else if (
+        showSuggestsHistory &&
+        suggestsHistory &&
+        suggestsHistory.length > 0
+      ) {
+        selectDep(suggestsHistory[0]);
+      }
+    }
+  };
+
   useEffect(() => {
     setIssue(Issue.NONE);
     if (!searchTerm || searchTerm === labelDep) {
@@ -103,6 +124,7 @@ export const FilterGeo: React.FC<{
         id="geo-search-input"
         className="fr-input"
         onChange={onChange}
+        onKeyDown={onKeyDown}
         onFocus={() => setSearchTerm('')}
         placeholder="ex : Rennes"
         autoComplete="off"
