@@ -31,9 +31,7 @@ const InformationTooltip: React.FC<
   <>
     <span className="wrapper">
       {children}
-      <div className="fixed-wrapper-for-mobile">
-        <div className={`tooltip ${orientation}`}>{label}</div>
-      </div>
+      <div className={`tooltip ${orientation}`}>{label}</div>
     </span>
     <style jsx>{`
       .wrapper {
@@ -107,23 +105,25 @@ const InformationTooltip: React.FC<
       }
 
       @media only screen and (min-width: 1px) and (max-width: 600px) {
-        .fixed-wrapper-for-mobile {
-          width: 100%;
+        .wrapper:hover .tooltip {
+          visibility: visible;
+          pointer-events: auto;
+          opacity: 0.95;
+        }
+        .wrapper .tooltip {
+          transition: opacity 300ms ease-in-out;
+          opacity: 0;
           position: fixed;
-          left: 0;
+          width: auto;
           top: 0;
-          display: block;
-          z-index: 1000;
+          left: 0;
+          right: 0;
+          border-radius: 0;
+          height: 30%;
+          overflow: auto;
         }
-        .fixed-wrapper-for-mobile .tooltip {
-          position: relative;
-          left: 10px;
-          top: 10px;
-          width: calc(100% - 20px);
-          border-radius: 5px;
-        }
-        .tooltip:before,
-        .tooltip:after {
+        .wrapper .tooltip:after,
+        .wrapper .tooltip:before {
           display: none;
         }
       }
