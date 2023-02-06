@@ -7,7 +7,9 @@ describe(`FAQ contextual links`, () => {
   });
   it('TVA link', () => {
     cy.visit(`/entreprise/880878145`).then((resp) => {
-      cy.contains('le numéro de TVA intracommunautaire').click({ force: true });
+      cy.contains('Que signifie “inconnu ou non-assujettie à la TVA” ?').click({
+        force: true,
+      });
       cy.url().should('include', '/faq/tva-intracommunautaire');
     });
   });

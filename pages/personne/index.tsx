@@ -2,18 +2,19 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import ButtonLink from '#components-ui/button';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import Meta from '#components/meta';
 import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';
 import { IEtatCivil } from '#models/immatriculation/rncs';
-import search, { ISearchResults } from '#models/search';
+import { searchWithoutProtectedSiren, ISearchResults } from '#models/search';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   results: ISearchResults;
@@ -22,19 +23,16 @@ interface IProps extends IPropsWithMetadata {
   sirenFrom: string;
 }
 
-const SearchDirigeantPage: React.FC<IProps> = ({
+const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
   results,
-  metadata,
   searchParams,
   sirenFrom,
 }) => (
-  <Page
-    small={true}
-    title="Rechercher une entreprise"
-    canonical="https://annuaire-entreprises.data.gouv.fr"
-    isBrowserOutdated={metadata.isBrowserOutdated}
-    useAdvancedSearch={false}
-  >
+  <>
+    <Meta
+      title="Rechercher une entreprise"
+      canonical="https://annuaire-entreprises.data.gouv.fr"
+    />
     <div className="content-container">
       <StructuredDataSearchAction />
       {sirenFrom && (
@@ -52,11 +50,7 @@ const SearchDirigeantPage: React.FC<IProps> = ({
         {results.currentPage > 1 && `Page ${results.currentPage} de `}
         {results.resultCount} résultats trouvés.
       </span>
-      <ResultsList
-        results={results.results}
-        withFeedback={false}
-        searchTerm=""
-      />
+      <ResultsList results={results.results} />
       {results.pageCount > 0 && (
         <PageCounter
           totalPages={results.pageCount}
@@ -87,7 +81,7 @@ const SearchDirigeantPage: React.FC<IProps> = ({
       </div>
       <br />
     </div>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
@@ -98,7 +92,11 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const sirenFrom = (context.query.sirenFrom || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
     const searchFilterParams = new SearchFilterParams(context.query);
-    const results = await search(searchTerm, page, searchFilterParams);
+    const results = await searchWithoutProtectedSiren(
+      searchTerm,
+      page,
+      searchFilterParams
+    );
 
     const searchParams = searchFilterParams.toJSON();
 

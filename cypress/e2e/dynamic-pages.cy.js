@@ -53,6 +53,6 @@ describe(`Labels and certificates`, () => {
 
   it('No certificates', () => {
     cy.visit(`/entreprise/880878145`);
-    cy.contains('Label ou certification').should('have.length', 0);
+    cy.contains('Label(s) et certificat(s)').should('have.length', 0);
   });
 });

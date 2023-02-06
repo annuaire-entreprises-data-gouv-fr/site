@@ -1,10 +1,11 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
+import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
 import { CertificationESSSection } from '#components/labels-and-certificates/ess';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
+import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';
-import { checkHasLabelsAndCertificates } from '#components/unite-legale-section/labels-and-certificates';
 import {
   getCertificationsFromSlug,
   ICertifications,
@@ -14,25 +15,28 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, ICertifications {}
 
-const RGE: React.FC<IProps> = ({
+const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   rge,
   uniteLegale,
   entrepreneurSpectacles,
-  metadata,
+  metadata: { session },
 }) => {
   return (
-    <Page
-      small={true}
-      title={`Labels et certificats - ${uniteLegale.nomComplet}`}
-      noIndex={true}
-      isBrowserOutdated={metadata.isBrowserOutdated}
-    >
+    <>
+      <Meta
+        title={`Labels et certificats - ${uniteLegale.nomComplet}`}
+        noIndex={true}
+      />
       <div className="content-container">
-        <Title ficheType={FICHE.CERTIFICATS} uniteLegale={uniteLegale} />
+        <Title
+          ficheType={FICHE.CERTIFICATS}
+          uniteLegale={uniteLegale}
+          session={session}
+        />
         {!checkHasLabelsAndCertificates(uniteLegale) && (
           <p>Cette structure ne possède aucun label ou certificat.</p>
         )}
@@ -49,7 +53,7 @@ const RGE: React.FC<IProps> = ({
           />
         )}
       </div>
-    </Page>
+    </>
   );
 };
 
@@ -70,4 +74,4 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   }
 );
 
-export default RGE;
+export default LabelsAndCertificatsPage;

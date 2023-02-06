@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from 'react';
+import constants from '#models/constants';
 import { logWarningInSentry } from '#utils/sentry';
 
 interface ISectionProps {
@@ -84,7 +85,9 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
       <tbody>
         {body.map((row, idx) => (
           <tr key={'a' + idx}>
-            <td>{row[0]}</td>
+            <td>
+              <div>{row[0]}</div>
+            </td>
             <Cell label={row[0]}>{row[1]}</Cell>
           </tr>
         ))}
@@ -100,8 +103,11 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
           font-weight: bold;
           padding-right: 30px;
           padding-left: 10px;
-          border-right: 1px solid #dfdff1;
+          border-right: 1px solid ${constants.colors.pastelBlue};
           vertical-align: baseline;
+        }
+        tr > td:first-of-type > div {
+          min-width: 140px;
         }
         td,
         th {
@@ -112,7 +118,7 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
         }
         table > thead {
           display: none;
-          background-color: #dfdff1;
+          background-color: ${constants.colors.pastelBlue};
         }
         @media only screen and (min-width: 1px) and (max-width: 600px) {
           tr {

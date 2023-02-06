@@ -12,7 +12,7 @@ const AssociationCreationNotFoundAlert: React.FC<{
     <b>Journal Officiel des Association (JOAFE).</b>
     <br />
     Les annonces les plus anciennes du Journal Officiel peuvent contenir des
-    erreures de saisie qui ne nous permettent pas de les retrouver grâce à leur
+    erreurs de saisie qui ne nous permettent pas de les retrouver grâce à leur
     numéro RNA ({formatIntFr(association.association?.idAssociation || '')}).
     <br />
     En revanche, vous pouvez probablement retrouver l’annonce de création grâce

@@ -2,19 +2,18 @@ import { GetStaticProps } from 'next';
 import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
+import Meta from '#components/meta';
 import {
   administrationsMetaData,
   IAdministrationMetaData,
 } from '#models/administrations';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
-const StatusPage: React.FC<{
+const StatusPage: NextPageWithLayout<{
   allAdministrations: IAdministrationMetaData[];
 }> = ({ allAdministrations }) => (
-  <Page
-    small={true}
-    title="Administrations partenaires de l'Annuaire des Entreprises"
-  >
+  <>
+    <Meta title="Administrations partenaires de l'Annuaire des Entreprises" />
     <TextWrapper>
       <h1>Administrations partenaires</h1>
       <p>
@@ -25,7 +24,7 @@ const StatusPage: React.FC<{
         <AdministrationDescription slug={slug} key={slug} />
       ))}
     </TextWrapper>
-  </Page>
+  </>
 );
 
 export const getStaticProps: GetStaticProps = async () => {

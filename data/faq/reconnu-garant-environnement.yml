@@ -1,0 +1,17 @@
+administrations:
+  - ademe
+target:
+  - agent
+title: Qu’est ce qu’une entreprise RGE - Reconnu Garant de l’Environnement ?
+body: |
+  Créée en 2011, la mention **« reconnu garant de l'environnement » (ou RGE)** est accordée par les pouvoirs publics aux professionnels du bâtiment spécialisés dans les travaux de **rénovation énergétique**, l'installation d'équipements utilisant des **énergies renouvelables** ou encore les études liées aux **performances énergétiques** (diagnostic thermique, audit énergétique, projets d'architecture avec conception bioclimatique...).
+
+  Les certifications RGE sont délivrées par les organismes accrédités selon la nature de l’activité, pour une durée de 4 ans à chaque fois.
+more:
+  - label: Le tutoriel du ministère de l’économie sur la certification RGE
+    href: https://www.economie.gouv.fr/entreprises/batiment-label-rge
+  - label: Le portail de la rénovation énergétique France Rénov’
+    href: https://france-renov.gouv.fr/
+cta:
+  label: → Devenir une entreprise RGE
+  to: https://expertises.ademe.fr/professionnels/entreprises/labels-certifications/entreprises-batiment/dossier/devenir-professionnel-reconnu-garant-lenvironnement-rge/obtenir-qualification-reconnu-garant-lenvironnement-rge-travaux-renovation-energetique

@@ -1,21 +1,22 @@
-import { building, humanPin, mapPin } from '#components-ui/icon';
 import { IEtatCivil } from '#models/immatriculation/rncs';
-import { libelleFromCodeNAF, libelleFromCodeSectionNaf } from '#utils/labels';
 
 export interface IParams {
-  etat?: string;
-  type?: string;
-  label?: string;
-  sap?: string;
-  naf?: string;
-  cp_dep?: string;
-  fn?: string;
-  n?: string;
-  dmin?: string;
-  dmax?: string;
-  isEmpty?: boolean;
-  ageMin?: number | string;
   ageMax?: number | string;
+  ageMin?: number | string;
+  cp_dep_label?: string;
+  cp_dep_type?: string;
+  cp_dep?: string;
+  dmax?: string;
+  dmin?: string;
+  etat?: string;
+  fn?: string;
+  isEmpty?: boolean;
+  label?: string;
+  n?: string;
+  naf?: string;
+  nature_juridique?: string;
+  sap?: string;
+  type?: string;
 }
 
 class SearchFilterParams {
@@ -23,16 +24,19 @@ class SearchFilterParams {
 
   constructor(query: IParams = {}) {
     const {
-      etat = '',
-      type = '',
-      label = '',
-      sap = '',
       cp_dep = '',
-      fn = '',
-      n = '',
-      dmin = '',
+      cp_dep_label = '',
+      cp_dep_type = '',
       dmax = '',
+      dmin = '',
+      etat = '',
+      fn = '',
+      label = '',
+      n = '',
       naf = '',
+      nature_juridique = '',
+      sap = '',
+      type = '',
     } = query;
 
     // ensure dmax > dmin
@@ -40,20 +44,22 @@ class SearchFilterParams {
     const realDmin = dmax && dmin && dmax < dmin ? dmax : dmin;
 
     this.params = {
-      etat,
-      type,
-      label,
-      sap,
-      //@ts-ignore
-      cp_dep: isNaN(cp_dep) ? '' : cp_dep,
-      fn,
-      n,
-      dmin: realDmin,
-      dmax: realDmax,
-      naf,
       // careful dmin determine ageMax and vice versa
-      ageMin: getAge(realDmax),
       ageMax: getAge(realDmin),
+      ageMin: getAge(realDmax),
+      cp_dep_label,
+      cp_dep_type,
+      cp_dep,
+      dmax: realDmax,
+      dmin: realDmin,
+      etat,
+      fn,
+      label,
+      n,
+      naf,
+      nature_juridique,
+      sap,
+      type,
     };
   }
 
@@ -62,10 +68,10 @@ class SearchFilterParams {
   }
 
   public toApiURI() {
-    let cp_dep = this.params.cp_dep || '';
-    const code_postal = cp_dep.length === 5 ? cp_dep : '';
-    const departement =
-      cp_dep.length === 3 || cp_dep.length === 2 ? cp_dep : '';
+    const { cp_dep, cp_dep_type } = this.params;
+    const departement = cp_dep_type === 'dep' ? cp_dep : '';
+    const code_postal = cp_dep_type === 'cp' ? cp_dep : '';
+    const code_commune = cp_dep_type === 'insee' ? cp_dep : '';
 
     return serializeParams({
       etat_administratif: this.params.etat,
@@ -76,13 +82,15 @@ class SearchFilterParams {
       est_collectivite_territoriale: this.params.type === 'ct',
       est_entrepreneur_individuel: this.params.type === 'ei',
       code_postal,
+      code_commune,
       section_activite_principale: this.params.sap,
+      nature_juridique: this.params.nature_juridique,
+      activite_principale: this.params.naf,
       departement,
       prenoms_personne: this.params.fn?.trim(),
       nom_personne: this.params.n?.trim(),
       date_naissance_personne_min: this.params.dmin,
       date_naissance_personne_max: this.params.dmax,
-      activite_principale: this.params.naf,
     });
   }
 
@@ -142,7 +150,7 @@ export const buildSearchQuery = (
 };
 
 export interface ISearchFilter {
-  icon: JSX.Element;
+  icon: string;
   label: string;
   excludeParams: string[];
 }
@@ -150,19 +158,24 @@ export interface ISearchFilter {
 export const extractFilters = (params: IParams) => {
   const f = {
     dirigeantFilter: {
-      icon: humanPin,
+      icon: 'humanPin',
       label: '',
       excludeParams: ['fn', 'n', 'dmin', 'dmax'],
     },
     administrativeFilter: {
-      icon: building,
+      icon: 'file',
       label: '',
-      excludeParams: ['sap', 'naf', 'etat', 'type', 'label'],
+      excludeParams: ['sap', 'naf', 'etat', 'nature_juridique'],
+    },
+    structureFilter: {
+      icon: 'building',
+      label: '',
+      excludeParams: ['type', 'label'],
     },
     localisationFilter: {
-      icon: mapPin,
+      icon: 'mapPin',
       label: '',
-      excludeParams: ['cp_dep'],
+      excludeParams: ['cp_dep', 'cp_dep_label', 'cp_dep_type'],
     },
   };
 
@@ -177,11 +190,12 @@ export const extractFilters = (params: IParams) => {
       labelAge = `plus de ${params.ageMin} ans`;
     }
 
-    const labelName = `${params.fn}${params.n ? ` ${params.n}` : ''}`;
+    const labelName = `${params.fn || ''}${params.n ? ` ${params.n}` : ''}`;
     f.dirigeantFilter.label = `${labelName}${
       labelAge && labelName && ', '
     }${labelAge}`;
   }
+
   if (params.etat) {
     f.administrativeFilter.label = `Etat : ${
       params.etat === 'A' ? 'en activité' : 'cessée'
@@ -189,16 +203,14 @@ export const extractFilters = (params: IParams) => {
   }
 
   let administrativeFilterCounter = 0;
+  let structureFilterCounter = 0;
   if (params.sap) {
     administrativeFilterCounter += 1;
   }
-  if (params.type) {
-    administrativeFilterCounter += 1;
-  }
-  if (params.label) {
-    administrativeFilterCounter += 1;
-  }
   if (params.naf) {
+    administrativeFilterCounter += 1;
+  }
+  if (params.nature_juridique) {
     administrativeFilterCounter += 1;
   }
 
@@ -207,10 +219,21 @@ export const extractFilters = (params: IParams) => {
     f.administrativeFilter.label += ` + ${administrativeFilterCounter} filtre${plural} administratif${plural}`;
   }
 
-  if (params.cp_dep) {
-    f.localisationFilter.label = params.cp_dep;
+  if (params.type) {
+    structureFilterCounter += 1;
+  }
+  if (params.label) {
+    structureFilterCounter += 1;
   }
 
+  if (structureFilterCounter > 0) {
+    const plural = structureFilterCounter ? 's' : '';
+    f.structureFilter.label += ` ${structureFilterCounter} filtre${plural} structure`;
+  }
+
+  if (params.cp_dep_label) {
+    f.localisationFilter.label = params.cp_dep_label;
+  }
   return f;
 };
 

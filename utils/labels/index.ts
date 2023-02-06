@@ -1,3 +1,4 @@
+import { escapeTerm } from '#utils/helpers';
 import { categoriesEntreprise } from './categories-entreprise';
 import { categoriesJuridiques } from './categories-juridiques';
 import { codesNAF1993 } from './codes-NAF-1993';
@@ -8,6 +9,12 @@ import { codesEffectifs } from './codes-effectifs';
 import { codesSectionNAF } from './codes-section-NAF';
 import { codesVoies } from './codes-voie';
 import { departements } from './departements';
+
+export const getUrlFromDepartement = (dep: string) => {
+  // departement label without special char
+  const labelDep = escapeTerm(libelleFromDepartement(dep, false));
+  return `${dep}-${labelDep.replaceAll(' ', '').toLocaleLowerCase()}`;
+};
 
 export const getDepartementFromCodePostal = (codePostal: string) => {
   if (!codePostal || codePostal.length !== 5 || codePostal.startsWith('00')) {
@@ -31,12 +38,16 @@ export const getDepartementFromCodePostal = (codePostal: string) => {
   return codePostal.slice(0, 2);
 };
 
-export const libelleFromDepartement = (departement: string) => {
+export const libelleFromDepartement = (
+  codeDepartement: string,
+  addCode = true
+) => {
   //@ts-ignore
-  const label = departements[departement];
+  const label = departements[codeDepartement];
 
   if (label) {
-    return `${departement} - ${label}`;
+    const code = addCode ? ` (${codeDepartement})` : '';
+    return `${label}${code}`;
   }
   return 'Département inconnu';
 };

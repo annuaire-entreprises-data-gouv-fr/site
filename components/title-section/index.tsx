@@ -1,45 +1,53 @@
 import React from 'react';
 import AssociationAdressAlert from '#components-ui/alerts/association-adress';
 import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
+import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { PrintNever } from '#components-ui/print-visibility';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
+import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UnitLegaleDescription } from '#components/unite-legale-description';
-import { checkHasLabelsAndCertificates } from '#components/unite-legale-section/labels-and-certificates';
+import constants from '#models/constants';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
   IUniteLegale,
 } from '#models/index';
+import { estNonDiffusible } from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
+import { ISession, isLoggedIn } from '#utils/session';
 
 export enum FICHE {
-  INFORMATION = 'informations générales',
-  JUSTIFICATIFS = 'justificatifs',
-  ANNONCES = 'annonces',
-  DIRIGEANTS = 'dirigeants',
-  ELUS = 'élus',
-  COMPTES = 'bilans & comptes',
   ACTES = 'actes & statuts',
-  CERTIFICATS = 'Labels et certificats',
+  ANNONCES = 'annonces',
+  CERTIFICATS = 'Labels ou certifications',
+  COMPTES = 'bilans & comptes',
+  DIRIGEANTS = 'dirigeants',
   DIVERS = 'conventions collectives',
+  ELUS = 'élus',
+  ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
+  INFORMATION = 'résumé',
+  JUSTIFICATIFS = 'justificatifs',
+  AGENT_SUBVENTIONS = 'subventions associations',
 }
 
 interface IProps {
   ficheType?: FICHE;
   uniteLegale: IUniteLegale;
+  session: ISession | null;
 }
 
 const Tabs: React.FC<{
   currentFicheType: FICHE;
   uniteLegale: IUniteLegale;
-}> = ({ currentFicheType, uniteLegale }) => {
+  session: ISession | null;
+}> = ({ currentFicheType, uniteLegale, session }) => {
   const tabs = [
     {
       ficheType: FICHE.INFORMATION,
-      label: 'Informations générales',
+      label: 'Résumé',
       pathPrefix: '/entreprise/',
       noFollow: false,
       shouldDisplay: true,
@@ -80,6 +88,13 @@ const Tabs: React.FC<{
       shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
     },
     {
+      ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
+      label: 'Établissements scolaires',
+      pathPrefix: '/etablissements-scolaires/',
+      noFollow: true,
+      shouldDisplay: uniteLegale.complements.estUai,
+    },
+    {
       ficheType: FICHE.DIVERS,
       label: 'Conventions collectives',
       pathPrefix: '/divers/',
@@ -95,41 +110,63 @@ const Tabs: React.FC<{
           .map(({ pathPrefix, ficheType, label, noFollow }) => (
             <a
               className={`${
-                currentFicheType === ficheType && 'active'
+                currentFicheType === ficheType ? 'active' : ''
               } no-style-link`}
               href={`${pathPrefix}${uniteLegale.siren}`}
               rel={noFollow ? 'nofollow' : ''}
+              key={label}
             >
-              {label}
+              {currentFicheType === ficheType ? label : <h2>{label}</h2>}
             </a>
           ))}
+        {isLoggedIn(session) && (
+          <a
+            className={`${
+              currentFicheType === FICHE.AGENT_SUBVENTIONS ? 'active' : ''
+            } no-style-link`}
+            href={`/espace-agent/subventions-associations/${uniteLegale.siren}`}
+          >
+            <Icon slug="lockFill">Subventions associations</Icon>
+          </a>
+        )}
       </div>
       <style jsx>{`
         .title-tabs {
           display: flex;
           flex-grow: 1;
           font-size: 0.9rem;
-          border-bottom: 2px solid #dfdff1;
+          border-bottom: 2px solid ${constants.colors.pastelBlue};
         }
         .title-tabs > a {
-          color: #000091;
-          font-weight: bold;
           border-top-left-radius: 3px;
           border-top-right-radius: 3px;
-          margin: 0 4px;
-          padding: 10px 5px;
-          border: 2px solid #dfdff1;
+          border: 2px solid ${constants.colors.pastelBlue};
           background-color: #efeffb;
-          margin-bottom: -2px;
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
-          box-shadow: 0 -8px 5px -5px #dfdff1 inset;
+          box-shadow: 0 -8px 5px -5px ${constants.colors.pastelBlue} inset;
+          margin: 0 4px;
+          padding: 10px 5px;
+          margin-bottom: -2px;
+        }
+
+        .title-tabs > a,
+        .title-tabs > a > h2 {
+          color: ${constants.colors.frBlue};
+          font-weight: bold;
+          font-size: 0.9rem;
+          line-height: 1.5rem;
+        }
+
+        .title-tabs > a > h2 {
+          margin: 0;
+          padding: 0;
         }
 
         .title-tabs > a:hover {
-          background-color: #dfdff1;
+          background-color: ${constants.colors.pastelBlue};
         }
 
         .title-tabs > a.active {
@@ -148,7 +185,7 @@ const Tabs: React.FC<{
           }
           .title-tabs > a.active {
             background-color: #fff;
-            border-bottom: 2px solid #dfdff1;
+            border-bottom: 2px solid ${constants.colors.pastelBlue};
           }
         }
       `}</style>
@@ -159,6 +196,7 @@ const Tabs: React.FC<{
 const Title: React.FC<IProps> = ({
   ficheType = FICHE.INFORMATION,
   uniteLegale,
+  session,
 }) => (
   <div className="header-section">
     <div className="title">
@@ -177,20 +215,27 @@ const Title: React.FC<IProps> = ({
           &nbsp;‣&nbsp;{formatIntFr(uniteLegale.siren)}
         </span>
         <span>
-          {!uniteLegale.estDiffusible && (
-            <Tag className="unknown">Non-diffusible</Tag>
+          {estNonDiffusible(uniteLegale) && (
+            <Tag className="unknown">non-diffusible</Tag>
           )}
-          <IsActiveTag state={uniteLegale.etatAdministratif} />
+          <IsActiveTag
+            etatAdministratif={uniteLegale.etatAdministratif}
+            statutDiffusion={uniteLegale.statutDiffusion}
+          />
         </span>
       </div>
     </div>
     <SocialMedia uniteLegale={uniteLegale} />
-    {!uniteLegale.estDiffusible ? (
+    {estNonDiffusible(uniteLegale) ? (
       <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
     ) : (
       <UnitLegaleDescription uniteLegale={uniteLegale} />
     )}
-    <Tabs uniteLegale={uniteLegale} currentFicheType={ficheType} />
+    <Tabs
+      uniteLegale={uniteLegale}
+      currentFicheType={ficheType}
+      session={session}
+    />
 
     <style jsx>{`
       .header-section {

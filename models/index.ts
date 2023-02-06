@@ -12,6 +12,7 @@ import {
 } from '#utils/helpers';
 import { Siren, Siret } from '#utils/helpers';
 import { IdRna } from '#utils/helpers';
+import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 export interface IEtablissement {
   enseigne: string | null;
@@ -21,15 +22,16 @@ export interface IEtablissement {
   oldSiret: Siret;
   nic: string;
   etatAdministratif: IETATADMINSTRATIF;
-  estActif: boolean | null;
+  statutDiffusion: ISTATUTDIFFUSION;
   estSiege: boolean;
-  estDiffusible: boolean; // diffusion des données autorisée - uniquement les EI
   dateCreation: string;
   dateDerniereMiseAJour: string;
   dateFermeture: string | null;
   dateDebutActivite: string;
   adresse: string;
+  adressePostale: string;
   codePostal: string;
+  commune: string;
   activitePrincipale: string;
   libelleActivitePrincipale: string;
   trancheEffectif: string;
@@ -53,7 +55,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     //@ts-ignore
     oldSiret: '',
     etatAdministratif: IETATADMINSTRATIF.INCONNU,
-    estActif: null,
+    statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     estSiege: false,
     enseigne: null,
     denomination: null,
@@ -63,7 +65,9 @@ export const createDefaultEtablissement = (): IEtablissement => {
     dateDebutActivite: '',
     dateFermeture: '',
     adresse: '',
+    adressePostale: '',
     codePostal: '',
+    commune: '',
     activitePrincipale: '',
     libelleActivitePrincipale: '',
     trancheEffectif: '',
@@ -85,10 +89,8 @@ export interface IUniteLegale extends IEtablissementsList {
   dateCreation: string;
   dateDerniereMiseAJour: string;
   dateDebutActivite: string;
-  estDiffusible: boolean; // diffusion des données autorisée - uniquement les EI
-  estEntrepriseCommercialeDiffusible: boolean; // opposition du dirigeant - uniquement les entreprises commerciales
+  statutDiffusion: ISTATUTDIFFUSION; // diffusion des données autorisée - uniquement les EI
   etatAdministratif: IETATADMINSTRATIF;
-  estActive: boolean | null;
   nomComplet: string;
   chemin: string;
   trancheEffectif: string;
@@ -112,10 +114,8 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     oldSiren: siren,
     siege,
     allSiegesSiret: [],
-    estDiffusible: true,
-    estEntrepriseCommercialeDiffusible: true,
+    statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     etatAdministratif: IETATADMINSTRATIF.INCONNU,
-    estActive: null,
     nomComplet: '',
     chemin: siren,
     natureJuridique: '',
@@ -148,6 +148,7 @@ export interface IUniteLegaleComplements {
   estRge: boolean;
   estUai: boolean;
 }
+
 export const createDefaultUniteLegaleComplements = () => {
   return {
     estEntrepreneurIndividuel: false,
@@ -276,6 +277,19 @@ export class NotAValidIdRnaError extends Error {
 
 /** COMMON EXCEPTIONS */
 export class IsLikelyASirenOrSiretException extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+// search engine exception
+export class NotEnoughParamsException extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+export class SearchEngineError extends Error {
   constructor(public message: string) {
     super();
   }

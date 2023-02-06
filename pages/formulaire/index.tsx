@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
-import { Header } from '#components/header';
+import { LayoutDefault } from '#components/layouts/layout-default';
 import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
+import { NextPageWithLayout } from 'pages/_app';
 
-const FeedBack: React.FC = () => {
+const FeedBackPage: NextPageWithLayout = () => {
   const uuid = randomId();
   return (
     <div id="page-layout">
-      <Header />
       <main className="fr-container">
         <div className="layout-center">
           <h1>Quel est votre avis sur l’Annuaire des Entreprises ?</h1>
@@ -30,7 +30,7 @@ const FeedBack: React.FC = () => {
         </div>
         <div className="content-container form-container">
           <form action="/api/feedback/nps" method="post">
-            <input name="uuid" value={uuid} style={{ display: 'none' }} />
+            <input name="uuid" value={uuid} type="hidden" />
             <fieldset>
               <legend>
                 <h2>
@@ -166,10 +166,10 @@ const FeedBack: React.FC = () => {
                     type="radio"
                     id="radio-visitor-type-1"
                     name="radio-set-visitor-type"
-                    value="Administration publique"
+                    value="Agent public"
                   />
                   <label className="fr-label" htmlFor="radio-visitor-type-1">
-                    Administration publique
+                    Agent public
                   </label>
                 </div>
                 <div>
@@ -177,10 +177,21 @@ const FeedBack: React.FC = () => {
                     type="radio"
                     id="radio-visitor-type-2"
                     name="radio-set-visitor-type"
-                    value="Entreprise privée"
+                    value="Dirigeant"
                   />
                   <label className="fr-label" htmlFor="radio-visitor-type-2">
-                    Entreprise privée
+                    Dirigeant(e) d’entreprise ou d’association
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="radio-visitor-type-6"
+                    name="radio-set-visitor-type"
+                    value="Indépendant"
+                  />
+                  <label className="fr-label" htmlFor="radio-visitor-type-2">
+                    Indépendant(e)
                   </label>
                 </div>
                 <div>
@@ -188,10 +199,10 @@ const FeedBack: React.FC = () => {
                     type="radio"
                     id="radio-visitor-type-5"
                     name="radio-set-visitor-type"
-                    value="Association"
+                    value="Salarié"
                   />
                   <label className="fr-label" htmlFor="radio-visitor-type-5">
-                    Association
+                    Salarié(e) d’entreprise ou d’association
                   </label>
                 </div>
                 <div>
@@ -327,7 +338,7 @@ const FeedBack: React.FC = () => {
             }
             .radio-group.rating > div > label {
               font-weight: bold;
-              color: #000091;
+              color: ${constants.colors.frBlue};
               background: #e5e5f4;
               font-size: 2rem;
               line-height: 3rem;
@@ -348,10 +359,10 @@ const FeedBack: React.FC = () => {
             }
 
             input[type='radio']:hover + label {
-              border: 2px dashed #000091;
+              border: 2px dashed ${constants.colors.frBlue};
             }
             input[type='radio']:checked + label {
-              border: 2px solid #000091;
+              border: 2px solid ${constants.colors.frBlue};
             }
 
             h2 {
@@ -371,4 +382,15 @@ const FeedBack: React.FC = () => {
   );
 };
 
-export default FeedBack;
+FeedBackPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return (
+    <LayoutDefault isBrowserOutdated={isBrowserOutdated} searchBar={false}>
+      {page}
+    </LayoutDefault>
+  );
+};
+
+export default FeedBackPage;

@@ -57,6 +57,22 @@ const AssociationSection: React.FC<{
           </p>
         )}
         <TwoColumnTable body={data} />
+        <br />
+        Pour en savoir plus,{' '}
+        <a
+          href={`https://www.data-asso.fr/annuaire/association/${idAssociation}`}
+        >
+          consultez la fiche identité de cette association
+        </a>{' '}
+        sur{' '}
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://www.data-asso.fr"
+        >
+          data-asso
+        </a>
+        .
       </Section>
       <HorizontalSeparator />
       <BreakPageForPrint />

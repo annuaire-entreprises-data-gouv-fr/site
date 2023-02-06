@@ -1,4 +1,5 @@
 import React from 'react';
+import constants from '#models/constants';
 import { ISearchResult } from '#models/search';
 import MaplibreInstance from '.';
 
@@ -20,14 +21,13 @@ const MapResults: React.FC<{ results: ISearchResult[] }> = ({ results }) => (
             var results = ${JSON.stringify(results)};
             for (var i = 0; i < results.length; i++) {
                 var result = results[i];
-
                 var popup = new maplibregl.Popup({ offset: 25 }).setHTML(
                 '<div><b>'+result.nomComplet+'</b></div>'+
-                '<div><i>'+result.adresse+'</i></div>'+
+                '<div><i>'+result.siege.adresse+'</i></div>'+
                 '<div><a href="/entreprise/'+result.siren+'">⇢ Accéder à la fiche entreprise</a></div>'
                 );
 
-                new maplibregl.Marker({ color: '#000091' })
+                new maplibregl.Marker({ color: '${constants.colors.frBlue}' })
                 .setLngLat([result.siege.longitude,result.siege.latitude])
                 .setPopup(popup)
                 .addTo(map);

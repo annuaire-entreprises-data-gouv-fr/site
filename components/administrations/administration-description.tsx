@@ -7,7 +7,7 @@ const AdministrationDescription: React.FC<{
   const { description, contact, long, apiMonitors, logoType } =
     administrationsMetaData[slug];
   return (
-    <div className="administration-wrapper">
+    <div className="administration-wrapper" id={slug}>
       <div>
         {logoType && <Logo title={long} slug={slug} width={80} height={80} />}
       </div>

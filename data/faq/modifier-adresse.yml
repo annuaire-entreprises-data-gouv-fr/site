@@ -5,10 +5,10 @@ target:
   - agent
 title: Comment modifier l’adresse de mon entreprise ou association ?
 body: |
-  Comme expliqué par l’Insee dans sa [documentation aux entreprises](https://www.insee.fr/fr/information/2015441#titre-bloc-1), tout changement d’adresse est à déclarer auprès de son centre de formalités des entreprises (CFE).
+  Vous pouvez modifier votre adresse sur le guichet unique pour les déclarations de création et modification d'entreprise.
 more:
   - label: Pourquoi mon adresse personnelle apparait-elle sur ce site ?
     href: /faq/adresse-personnelle
 cta:
-  label: ⇢ Trouver son CFE
-  to: https://www.insee.fr/fr/information/1972060
+  label: ⇢ Modifier son adresse
+  to: https://formalites.entreprises.gouv.fr/

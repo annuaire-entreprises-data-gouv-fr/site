@@ -1,14 +1,25 @@
 import React from 'react';
+import FAQLink from '#components-ui/faq-link';
 import { Loader } from '#components-ui/loader';
 import FrontStateMachine from '#components/front-state-machine';
 import { CopyPaste } from '#components/table/simple';
 
 const TVACell: React.FC<{}> = ({}) => {
+  const Unknown = (
+    <i>
+      <FAQLink
+        to="/faq/tva-intracommunautaire"
+        tooltipLabel="Numéro de TVA inconnu ou structure non assujettie à la TVA"
+      >
+        Que signifie “inconnu ou non-assujettie à la TVA” ?
+      </FAQLink>
+    </i>
+  );
   return (
     <FrontStateMachine
       id="tva-cell-wrapper"
       states={[
-        <i>Non renseigné ou non assujettie</i>,
+        Unknown,
         <>
           <Loader />
           {/* 
@@ -18,7 +29,7 @@ const TVACell: React.FC<{}> = ({}) => {
           &nbsp;
         </>,
         <CopyPaste shouldTrim={true} id="tva-cell-result">
-          <i>Non renseigné ou non assujettie</i>
+          Unknown
         </CopyPaste>,
         <i>
           Le téléservice du VIES ne fonctionne pas actuellement. Merci de

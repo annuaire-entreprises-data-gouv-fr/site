@@ -5,12 +5,13 @@ import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations';
+import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import {
   checkHasLabelsAndCertificates,
-  LabelsAndCertificates,
-} from './labels-and-certificates';
+  LabelsAndCertificatesBadgesSection,
+} from '../labels-and-certificates-badges-section';
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -26,29 +27,16 @@ const UniteLegaleSection: React.FC<{
         uniteLegale.siege.siret &&
         formatSiret((uniteLegale.siege || {}).siret),
     ],
-    [
-      <FAQLink tooltipLabel="N° TVA Intracommunautaire">
-        <a href="/faq/tva-intracommunautaire">
-          Qu’est ce que le numéro de TVA intracommunautaire ?
-        </a>
-      </FAQLink>,
-      <TVACell />,
-    ],
+    ['N° TVA Intracommunautaire', <TVACell />],
     [
       'Activité principale du siège social (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,
     ],
     [
-      <FAQLink tooltipLabel="Adresse postale">
-        <a href="/faq/modifier-adresse">Comment modifier une adresse ?</a>
+      <FAQLink to="/faq/modifier-adresse" tooltipLabel="Adresse postale">
+        Comment modifier une adresse ?
       </FAQLink>,
-      uniteLegale.siege.adresse
-        ? `${
-            uniteLegale.siege.denomination
-              ? `${uniteLegale.siege.denomination}, `
-              : ''
-          }${uniteLegale.siege.adresse}`
-        : '',
+      uniteLegale.siege.adressePostale,
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
@@ -61,7 +49,7 @@ const UniteLegaleSection: React.FC<{
       'Dernière modification des données Insee',
       formatDate(uniteLegale.dateDerniereMiseAJour),
     ],
-    ...(uniteLegale.estActive === false
+    ...(!estActif(uniteLegale)
       ? [['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]]
       : []),
     // jump line and add label and certificates
@@ -69,8 +57,8 @@ const UniteLegaleSection: React.FC<{
       ? [
           ['', <br />],
           [
-            'Label ou certification',
-            <LabelsAndCertificates uniteLegale={uniteLegale} />,
+            'Label(s) et certificat(s)',
+            <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />,
           ],
         ]
       : []),
@@ -79,7 +67,7 @@ const UniteLegaleSection: React.FC<{
   return (
     <div id="entreprise">
       <Section
-        title={`Résumé`}
+        title={`Informations légales de ${uniteLegale.nomComplet}`}
         sources={[
           EAdministration.INSEE,
           EAdministration.VIES,

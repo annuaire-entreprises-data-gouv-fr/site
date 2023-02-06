@@ -1,7 +1,9 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import { getEtatAdministratifEtablissement } from '#models/etat-administratif';
+import { etatFromEtatAdministratifInsee } from '#clients/sirene-insee/helpers';
+import { estActif } from '#models/etat-administratif';
 import { createDefaultEtablissement, IEtablissement } from '#models/index';
+import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
 import {
   extractNicFromSiret,
   extractSirenFromSiret,
@@ -20,7 +22,6 @@ export interface ISireneOuverteEtablissement {
   nic: string;
   etat_administratif_etablissement: 'A' | null;
   date_creation: string;
-  geo_adresse: string;
   etablissement_siege: string;
   activite_principale: string;
   date_mise_a_jour: string;
@@ -73,12 +74,16 @@ export const mapSireneOuverteEtablissementToDomainObject = (
   etablissement: ISireneOuverteEtablissement,
   siret: string
 ): IEtablissement => {
-  const estActif = etablissement.etat_administratif_etablissement === 'A';
-  const estDiffusible = true;
-  const etatAdministratif = getEtatAdministratifEtablissement(
-    estActif,
-    estDiffusible
+  const { etat_administratif_etablissement } = etablissement;
+  const statutDiffusion = ISTATUTDIFFUSION.DIFFUSIBLE;
+  const etatAdministratif = etatFromEtatAdministratifInsee(
+    etat_administratif_etablissement || '',
+    siret
   );
+
+  const dateFermeture = !estActif({ etatAdministratif })
+    ? etablissement.date_debut_activite
+    : null;
 
   const {
     numero_voie,
@@ -97,14 +102,13 @@ export const mapSireneOuverteEtablissementToDomainObject = (
     //@ts-ignore
     siret,
     nic: extractNicFromSiret(siret),
-    estActif,
     estSiege: etablissement.is_siege,
-    estDiffusible,
+    statutDiffusion,
     etatAdministratif,
     dateCreation: etablissement.date_creation,
     dateDerniereMiseAJour: etablissement.date_mise_a_jour,
     dateDebutActivite: etablissement.date_debut_activite,
-    dateFermeture: !estActif ? etablissement.date_debut_activite : null,
+    dateFermeture,
     adresse: formatAdresse({
       numeroVoie: numero_voie,
       indiceRepetition: indice_repetition,
@@ -114,6 +118,7 @@ export const mapSireneOuverteEtablissementToDomainObject = (
       libelleCommune: libelle_commune,
     }),
     codePostal: code_postal,
+    commune: libelle_commune,
     activitePrincipale: etablissement.activite_principale,
     libelleActivitePrincipale: libelleFromCodeNAF(
       etablissement.activite_principale

@@ -3,7 +3,6 @@
  *
  *
  */
-
 import FrontStateMachineFactory from './front-state-machine';
 import { extractSirenSlugFromUrl, formatIntFr } from './utils';
 

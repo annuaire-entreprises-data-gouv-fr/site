@@ -5,6 +5,7 @@ import CollectiviteTerritorialeSection from '#components/collectivite-territoria
 import EtablissementListeSection from '#components/etablissement-liste-section';
 import EtablissementSection from '#components/etablissement-section';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
+import Meta from '#components/meta';
 import { NonDiffusibleSection } from '#components/non-diffusible';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title, { FICHE } from '#components/title-section';
@@ -15,41 +16,51 @@ import {
   IUniteLegale,
   isAssociation,
 } from '#models/index';
+import { estNonDiffusible } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { extractSirenOrSiretSlugFromUrl, shouldNotIndex } from '#utils/helpers';
+import {
+  getCompanyPageDescription,
+  getCompanyPageTitle,
+} from '#utils/helpers/get-company-page-title';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   postServerSideProps,
   IPropsWithMetadata,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
   redirected: boolean;
 }
 
-const UniteLegalePage: React.FC<IProps> = ({
+const UniteLegalePage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   redirected,
-  metadata,
+  metadata: { session },
 }) => (
-  <Page
-    small={true}
-    title={`${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
-    canonical={
-      uniteLegale.chemin &&
-      `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`
-    }
-    description={`Toutes les informations officielles sur ${uniteLegale.nomComplet} :  Siren, Siret, NIC, APE/NAF, N° TVA, capital social, justificatif d’immatriculation, dirigeants, conventions collectives...`}
-    noIndex={shouldNotIndex(uniteLegale)}
-    isBrowserOutdated={metadata.isBrowserOutdated}
-  >
+  <>
+    <Meta
+      title={getCompanyPageTitle(uniteLegale)}
+      description={getCompanyPageDescription(uniteLegale)}
+      noIndex={shouldNotIndex(uniteLegale)}
+      canonical={
+        uniteLegale.chemin &&
+        `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`
+      }
+    />
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
     <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
     <div className="content-container">
-      <Title uniteLegale={uniteLegale} ficheType={FICHE.INFORMATION} />
-      {uniteLegale.estDiffusible ? (
+      <Title
+        uniteLegale={uniteLegale}
+        ficheType={FICHE.INFORMATION}
+        session={session}
+      />
+      {estNonDiffusible(uniteLegale) ? (
+        <NonDiffusibleSection />
+      ) : (
         <>
           <UniteLegaleSection uniteLegale={uniteLegale} />
           {isAssociation(uniteLegale) && (
@@ -69,11 +80,9 @@ const UniteLegalePage: React.FC<IProps> = ({
           )}
           <EtablissementListeSection uniteLegale={uniteLegale} />
         </>
-      ) : (
-        <NonDiffusibleSection />
       )}
     </div>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(

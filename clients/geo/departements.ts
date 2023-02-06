@@ -8,11 +8,17 @@ interface IGeoDepartementResponse {
   code: string;
 }
 
-const clientGeoDepartements = async (slug: string): Promise<any> => {
-  const response = await httpGet(routes.geo.departement + slug, {
+const clientDepartementsByName = async (slug: string): Promise<any> => {
+  const response = await httpGet(`${routes.geo.departement}&nom=${slug}`, {
     timeout: constants.timeout.L,
   });
+  return mapToDomainObject(response.data || []);
+};
 
+const clientDepartementByCode = async (code: string): Promise<any> => {
+  const response = await httpGet(`${routes.geo.departement}&code=${code}`, {
+    timeout: constants.timeout.L,
+  });
   return mapToDomainObject(response.data || []);
 };
 
@@ -23,8 +29,9 @@ const mapToDomainObject = (
     return {
       label: `${departement.nom} (${departement.code})`,
       value: departement.code,
+      type: 'dep',
     };
   });
 };
 
-export { clientGeoDepartements };
+export { clientDepartementsByName, clientDepartementByCode };

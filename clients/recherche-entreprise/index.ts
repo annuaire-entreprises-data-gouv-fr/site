@@ -1,48 +1,46 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import { etatFromEtatAdministratifInsee } from '#clients/sirene-insee/helpers';
 import constants from '#models/constants';
 import { IEtatCivil, IPersonneMorale } from '#models/immatriculation/rncs';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
+  IEtablissement,
+  NotEnoughParamsException,
 } from '#models/index';
 import { ISearchResult, ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
 import {
   verifySiren,
-  verifySiret,
-  formatAdresse,
   formatFirstNames,
   parseIntWithDefaultValue,
+  verifySiret,
 } from '#utils/helpers';
 import { libelleFromCodeNAFWithoutNomenclature } from '#utils/labels';
 import { httpGet } from '#utils/network';
 
+interface ISirenOuverteEtablissement {
+  activite_principale: string;
+  adresse: string;
+  code_postal: string;
+  est_siege: boolean;
+  etat_administratif: string;
+  geo_id: string;
+  latitude: string;
+  liste_enseignes: string[];
+  liste_finess: [];
+  liste_idcc: [];
+  liste_rge: [];
+  liste_uai: [];
+  longitude: string;
+  nom_commercial: string;
+  siret: string;
+}
+
 interface ISireneOuverteUniteLegaleResultat {
   siren: string;
-  siege: {
-    siret: string;
-    date_creation: string;
-    tranche_effectif_salarie: string;
-    date_debut_activite: string;
-    etat_administratif: string;
-    activite_principale: string;
-    numero_voie: string;
-    type_voie: string;
-    libelle_voie: string;
-    code_postal: string;
-    libelle_commune: string;
-    libelle_cedex: string;
-    libelle_commune_etranger: string;
-    code_pays_etranger: string;
-    libelle_pays_etranger: string;
-    indice_repetition: string;
-    complement_adresse: string;
-    commune: string;
-    longitude: string;
-    latitude: string;
-    activite_principale_registre_metier: string;
-  };
+  siege: ISirenOuverteEtablissement;
   date_creation: string;
   categorie_entreprise: string;
   etat_administratif: string;
@@ -67,10 +65,11 @@ interface ISireneOuverteUniteLegaleResultat {
     collectivite_territoriale: {
       code: string;
       code_insee: string;
-      elus: ISireneOuverteDirigeant[];
+      elus: ISirenOuverteEtablissement[];
       niveau: string;
     };
   };
+  matching_etablissements: ISirenOuverteEtablissement[];
 }
 
 interface ISireneOuverteDirigeant {
@@ -111,12 +110,19 @@ const clientSearchSireneOuverte = async (
       ? routes.sireneOuverte.rechercheUniteLegaleStaging
       : routes.sireneOuverte.rechercheUniteLegale);
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}${
+  const filters = searchFilterParams?.toApiURI();
+
+  if (!filters && (!encodedTerms || encodedTerms.length < 3)) {
+    throw new NotEnoughParamsException('');
+  }
+
+  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3${
     searchFilterParams?.toApiURI() || ''
   }`;
+
   const timeout = fallbackOnStaging
     ? constants.timeout.XL
-    : constants.timeout.M;
+    : constants.timeout.L;
 
   const response = await httpGet(
     url,
@@ -157,21 +163,7 @@ const mapToUniteLegale = (
 ): ISearchResult => {
   const {
     nature_juridique,
-    siege: {
-      complement_adresse,
-      numero_voie,
-      indice_repetition,
-      type_voie,
-      libelle_voie,
-      code_postal,
-      libelle_commune,
-      libelle_cedex,
-      libelle_commune_etranger,
-      code_pays_etranger,
-      libelle_pays_etranger,
-      latitude = '0',
-      longitude = '0',
-    },
+    siege,
     dirigeants,
     complements: {
       est_entrepreneur_individuel = false,
@@ -183,34 +175,12 @@ const mapToUniteLegale = (
       est_rge = false,
       est_uai = false,
     },
+    matching_etablissements,
   } = result;
 
   const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
 
   const siren = verifySiren(result.siren);
-  const siret = verifySiret(result.siege.siret);
-
-  const adresse = formatAdresse({
-    complement: complement_adresse,
-    numeroVoie: numero_voie,
-    indiceRepetition: indice_repetition,
-    typeVoie: type_voie,
-    libelleVoie: libelle_voie,
-    codePostal: code_postal,
-    libelleCommune: libelle_commune,
-    libelleCommuneCedex: libelle_cedex,
-    libelleCommuneEtranger: libelle_commune_etranger,
-    codePaysEtranger: code_pays_etranger,
-    libellePaysEtranger: libelle_pays_etranger,
-  });
-
-  const siege = {
-    ...createDefaultEtablissement(),
-    siret,
-    adresse,
-    latitude,
-    longitude,
-  };
 
   const colter = collectivite_territoriale
     ? {
@@ -223,8 +193,14 @@ const mapToUniteLegale = (
 
   return {
     ...createDefaultUniteLegale(siren),
-    siege,
-    estActive: result.etat_administratif === 'A',
+    siege: mapToEtablissement(siege),
+    matchingEtablissements: matching_etablissements
+      .map((e) => mapToEtablissement(e))
+      .filter((e) => e.siret !== siege.siret),
+    etatAdministratif: etatFromEtatAdministratifInsee(
+      result.etat_administratif,
+      siren
+    ),
     nomComplet,
     nombreEtablissements: result.nombre_etablissements || 1,
     nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
@@ -292,6 +268,44 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
     dateNaissancePartial: annee_de_naissance,
     dateNaissanceFull: '',
     lieuNaissance: '',
+  };
+};
+
+const mapToEtablissement = (
+  etablissement: ISirenOuverteEtablissement
+): IEtablissement => {
+  const {
+    siret,
+    latitude = '0',
+    longitude = '0',
+    adresse,
+    liste_enseignes,
+    etat_administratif,
+    est_siege,
+    nom_commercial,
+  } = etablissement;
+
+  const enseigne = (liste_enseignes || []).join(' ');
+
+  const adressePostale = adresse
+    ? `${
+        enseigne ? `${enseigne}, ` : nom_commercial ? `${nom_commercial}, ` : ''
+      }${adresse}`
+    : '';
+
+  const etatAdministratif = etatFromEtatAdministratifInsee(
+    etat_administratif,
+    siret
+  );
+  return {
+    ...createDefaultEtablissement(),
+    siret: verifySiret(siret),
+    adresse,
+    adressePostale,
+    latitude,
+    longitude,
+    estSiege: est_siege,
+    etatAdministratif,
   };
 };
 

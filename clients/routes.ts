@@ -17,11 +17,13 @@ const routes = {
     api: 'https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
     site: 'https://code.travail.gouv.fr/outils/convention-collective',
   },
+  educationNationale: {
+    api: 'https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-annuaire-education',
+    site: 'https://www.education.gouv.fr/annuaire',
+  },
   geo: {
-    commune:
-      'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json&nom=',
-    departement:
-      'https://geo.api.gouv.fr/departements?fields=code&format=json&nom=',
+    commune: 'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json',
+    departement: 'https://geo.api.gouv.fr/departements?fields=code&format=json',
   },
   journalOfficielAssociations: {
     ods: {
@@ -37,6 +39,12 @@ const routes = {
       recherche:
         'https://www.journal-officiel.gouv.fr/pages/associations-recherche',
     },
+  },
+  franceConnect: {
+    authorization: '/api/v1/authorize',
+    token: '/api/v1/token',
+    userInfo: '/api/v1/userinfo',
+    logout: '/api/v1/logout',
   },
   matomo: {
     report: {

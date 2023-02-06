@@ -4,25 +4,12 @@ import React from 'react';
  * DSFR
  */
 
-export const france = (
+const communityFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
-    fill="currentColor"
-    stroke="currentColor"
-    strokeWidth="0"
-  >
-    <path d="M12.648 1.986a.729.729 0 0 1 .77.284l.217.31h.113c.317 0 .592.2.683.499l.04.125a.716.716 0 0 1 .41.254.712.712 0 0 1 .187.063l.287.14a.717.717 0 0 1 .294.267l.236-.055a.724.724 0 0 1 .608.13.693.693 0 0 1 .273.551v.251l.485.322a.727.727 0 0 1 .328.059l.077.033.1-.04a.735.735 0 0 1 .475-.024l.388.115c.137.04.257.118.347.226l.28.336.374-.037a.735.735 0 0 1 .41.079l.226.12.331.006c.133.002.26.04.371.11l.289.179a.7.7 0 0 1 .25.92l-.312.578-.016.174a.693.693 0 0 1-.034.16l-.222.63.017 1.045a.69.69 0 0 1-.256.549l-.408.333a.726.726 0 0 1-.242.13l-.7.885c.24.06.44.238.512.482l.076.256.098.12.228.334a.694.694 0 0 1-.016.801l.27.317a.696.696 0 0 1 .166.482l-.02.365a.706.706 0 0 1-.28.52l.05.048a.689.689 0 0 1 .06.95l.086.058.09-.031a.72.72 0 0 1 .888.365l.117.25a.687.687 0 0 1-.079.712l-.04.055a.691.691 0 0 1-.247.642l-.72.586-.313.197a.692.692 0 0 1-.062.317.71.71 0 0 1-.403.369l-.63.228a.764.764 0 0 1-.15.037l-.472.066a.73.73 0 0 1-.273-.013l-.97-.222-.646-.185a.65.65 0 0 1-.05-.016.727.727 0 0 1-.428-.078l-.222-.12a.726.726 0 0 1-.528-.096l-.608.36-.192.38.186.643a.696.696 0 0 1-.5.868l-.768.2a.71.71 0 0 1-.184.024l-.102-.008-.644-.112-.292.058a.74.74 0 0 1-.45-.054l-.344-.163a.709.709 0 0 1-.372-.428l-.282-.113-.118-.025a.72.72 0 0 1-.652.25l-1.216-.161a.717.717 0 0 1-.27-.094l-.206-.119h-.31a.723.723 0 0 1-.52-.22l-.208-.217-.696-.294a.714.714 0 0 1-.34-.298l-.141-.245-.298-.161a.693.693 0 0 1-.209-1.06l.464-.554.257-1.379a.7.7 0 0 1 .024-.092.687.687 0 0 1-.04-.329l.213-1.822a.688.688 0 0 1 .019-.1.694.694 0 0 1 .138-.857.693.693 0 0 1-.075-.216l-.328-.165a.71.71 0 0 1-.247-.206l-.559-.728a.693.693 0 0 1-.126-.265l-.165-.737-.002-.008-.074-.05a.708.708 0 0 1-.162-.152l-.24-.312-1.343-.524h-.386a.72.72 0 0 1-.617-.347l-.164-.275a.69.69 0 0 1-.083-.495.713.713 0 0 1-.276-.35L1.754 8.1a.695.695 0 0 1 .373-.866l1.017-.465a.734.734 0 0 1 .241-.063l1.4-.124a.738.738 0 0 1 .575.207l.259.259.054-.021a.727.727 0 0 1 .393-.036l.188.033-.253-.596-.19-.757a.691.691 0 0 1 .12-.583.713.713 0 0 1 .535-.284l.574-.029a.707.707 0 0 1 .558.222l.493.519.639.123.007-.08a.702.702 0 0 1 .481-.604l1.213-.409.326-.292-.046-.71a.7.7 0 0 1 .06-.331l.254-.546a.71.71 0 0 1 .47-.387Zm-.188 1.978-.33.081-.036.073.055.815a.64.64 0 0 1-.227.528l-.673.578a.707.707 0 0 1-.249.138l-.737.238.228.157-.283.135a.675.675 0 0 1-.347.378l-.483.23a.756.756 0 0 1-.45.06l-1.19-.22v.006l.057.799c.024.342-.23.64-.59.693l-.305.045a.744.744 0 0 1-.235-.003l-.589-.1-.299.11a.733.733 0 0 1-.755-.152l-.346-.33-.924.078-.038.016c.15.132.23.317.221.506.004 0 .007.002.01.003l1.626.608c.124.047.225.12.301.215l.206.257a.745.745 0 0 1 .397.078l.398.205c.16.083.28.223.333.385l.553.285-.595.197a.685.685 0 0 1-.316.298l.35.437.616.296a.645.645 0 0 1 .362.735l-.007.027.134.237c.107.19.107.41.01.596l.057.044a.666.666 0 0 1 .218.304l.387 1.1a.617.617 0 0 1-.036.495l.262.745-.722-.397a.743.743 0 0 1-.272.012.644.644 0 0 1-.085.177l-.305.451-.26 1.335a.64.64 0 0 1-.15.301l-.075.087a.53.53 0 0 1 .042.063l.12.197.6.242c.093.04.168.09.233.153l.097.097h.19c.124 0 .246.031.353.09l.25.139.385.048a.69.69 0 0 1 .136-.139.74.74 0 0 1 .58-.134l.98.208.69.263a.692.692 0 0 1 .37.328l.033-.006a.73.73 0 0 1 .14-.013l.104.007.506.085-.05-.164a.624.624 0 0 1 .048-.475l.397-.753a.67.67 0 0 1 .268-.273l1.165-.658a.731.731 0 0 1 .672-.026.735.735 0 0 1 .54-.06l.255.074a.686.686 0 0 1 .034.01.736.736 0 0 1 .674.077l.38.258c.1.068.18.16.229.266l.529.115.261-.035.053-.018a.654.654 0 0 1 .104-.17l.228-.268a.691.691 0 0 1 .17-.143l.44-.265.176-.138-.572-.374a.647.647 0 0 1-.3-.532l-.01-.636-.238-.214a.636.636 0 0 1-.217-.476v-.231c0-.265.167-.502.426-.606l-.093-.104a.636.636 0 0 1-.161-.385l-.02-.29a.686.686 0 0 1 .001-.082.743.743 0 0 1-.824-.013l-.202-.144a.637.637 0 0 1-.228-.76l.106-.259.03-.334a.634.634 0 0 1 .11-.303l.447-.64.461-.561a.618.618 0 0 1 .01-.232.663.663 0 0 1 .36-.44l.238-.116a.732.732 0 0 1 .252-.071l-.012-.69a.617.617 0 0 1 .04-.23l.226-.614.021-.214a.628.628 0 0 1 .039-.164.68.68 0 0 1-.083-.036l-.179-.09-.526.05a.73.73 0 0 1-.614-.239l-.348-.4-.106.041a.743.743 0 0 1-.543-.005l-.19-.077-.053.004a.745.745 0 0 1-.443-.106l-.861-.548a.679.679 0 0 1-.135-.113.733.733 0 0 1-.2-.008l-.461-.08a.679.679 0 0 1-.57-.58l-.012-.106a.704.704 0 0 1-.474-.313l-.01-.016a.719.719 0 0 1-.296-.146l-.172-.143a.672.672 0 0 1-.113-.12.709.709 0 0 1-.52-.284l-.235-.324Z" />
-  </svg>
-);
-export const communityFill = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -31,12 +18,12 @@ export const communityFill = (
   </svg>
 );
 
-export const humanPin = (
+const humanPin = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -44,12 +31,12 @@ export const humanPin = (
     <path d="M12 2c5.523 0 10 4.477 10 10 0 4.747-3.308 8.722-7.745 9.745L12 24l-2.255-2.255C5.308 20.722 2 16.747 2 12 2 6.477 6.477 2 12 2Zm.16 14c-2.036 0-3.87.87-5.148 2.257a7.953 7.953 0 0 0 3.182 1.539l.56.129L12 21.172l1.247-1.247.56-.13a7.956 7.956 0 0 0 3.36-1.686A6.979 6.979 0 0 0 12.16 16ZM6.554 6.14a8 8 0 0 0-.938 10.681v-.001A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634A8 8 0 0 0 6.554 6.141ZM12 5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
   </svg>
 );
-export const user = (
+const user = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -58,12 +45,12 @@ export const user = (
   </svg>
 );
 
-export const buildingFill = (
+const buildingFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -72,12 +59,12 @@ export const buildingFill = (
   </svg>
 );
 
-export const administrationFill = (
+const administrationFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -86,12 +73,25 @@ export const administrationFill = (
   </svg>
 );
 
-export const collectiviteFill = (
+const awardFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
+    fill="currentColor"
+    stroke="currentColor"
+    strokeWidth="0"
+  >
+    <path d="M12 1.001a8 8 0 0 1 5 14.245v6.871a.5.5 0 0 1-.757.429L12 20l-4.243 2.546a.5.5 0 0 1-.757-.43v-6.87a8 8 0 0 1 5-14.245ZM12 3a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" />
+  </svg>
+);
+const collectiviteFill = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -100,12 +100,12 @@ export const collectiviteFill = (
   </svg>
 );
 
-export const building = (
+const building = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -114,11 +114,11 @@ export const building = (
   </svg>
 );
 
-export const questionnaire = (
+const questionnaire = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="18"
-    height="18"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="currentColor"
     stroke="currentColor"
@@ -128,12 +128,12 @@ export const questionnaire = (
   </svg>
 );
 
-export const alertFill = (
+const alertFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="18"
-    height="18"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
   >
@@ -141,25 +141,37 @@ export const alertFill = (
   </svg>
 );
 
-export const open = (
+const lockFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="18"
-    height="18"
+    width="100%"
+    height="100%"
+    fill="currentColor"
+    stroke="currentColor"
+  >
+    <path d="M19 10h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V11a1 1 0 0 1 1-1h1V9a7 7 0 0 1 14 0v1Zm-2 0V9A5 5 0 1 0 7 9v1h10Zm-6 4v4h2v-4h-2Z" />
+  </svg>
+);
+
+const open = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="100%"
+    height="100%"
     fill="#326f00"
     stroke="#326f00"
   >
     <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-.997-4L6.76 11.757l1.414-1.414 2.829 2.829 5.656-5.657 1.415 1.414L11.003 16z" />
   </svg>
 );
-
-export const closed = (
+const closed = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="18"
-    height="18"
+    width="100%"
+    height="100%"
     fill="#914141"
     stroke="#914141"
   >
@@ -167,12 +179,12 @@ export const closed = (
   </svg>
 );
 
-export const questionFill = (
+const questionFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="24"
-    height="24"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -181,29 +193,15 @@ export const questionFill = (
   </svg>
 );
 
-export const searchLine = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    width="18"
-    height="18"
-    fill="currentColor"
-    stroke="currentColor"
-    strokeWidth="0"
-  >
-    <path d="m18.031 16.617 4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617Zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15Z" />
-  </svg>
-);
-
 /**
  * CUSTOM
  */
 
-export const download = (
+const download = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -217,12 +215,12 @@ export const download = (
   </svg>
 );
 
-export const mapPin = (
+const mapPin = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     fill="currentColor"
     stroke="currentColor"
     strokeWidth="0"
@@ -231,11 +229,11 @@ export const mapPin = (
   </svg>
 );
 
-export const information = (
+const information = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="12"
-    height="12"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     strokeWidth="3"
     strokeLinecap="round"
@@ -247,11 +245,11 @@ export const information = (
   </svg>
 );
 
-export const facebook = (
+const facebook = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="currentColor"
     stroke="none"
@@ -263,11 +261,11 @@ export const facebook = (
   </svg>
 );
 
-export const linkedin = (
+const linkedin = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="currentColor"
     stroke="none"
@@ -281,11 +279,11 @@ export const linkedin = (
   </svg>
 );
 
-export const twitter = (
+const twitter = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="currentColor"
     stroke="none"
@@ -297,10 +295,10 @@ export const twitter = (
   </svg>
 );
 
-export const qrCode = (
+const qrCode = (
   <svg
-    width="15"
-    height="15"
+    width="90%"
+    height="100%"
     viewBox="0 0 16 16"
     fill="currentColor"
     stroke="none"
@@ -312,11 +310,11 @@ export const qrCode = (
   </svg>
 );
 
-export const print = (
+const print = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -330,11 +328,11 @@ export const print = (
   </svg>
 );
 
-export const mail = (
+const mail = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
+    width="100%"
+    height="100%"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -346,3 +344,47 @@ export const mail = (
     <polyline points="22,6 12,13 2,6"></polyline>
   </svg>
 );
+
+const file = (
+  <svg
+    width="70%"
+    height="100%"
+    viewBox="0 0 14 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M13 0.5C13.4142 0.5 13.75 0.835786 13.75 1.25V14.75C13.75 15.1642 13.4142 15.5 13 15.5H1C0.585786 15.5 0.25 15.1642 0.25 14.75V1.25C0.25 0.835786 0.585786 0.5 1 0.5H13ZM12.25 2H1.75V14H12.25V2ZM10.75 11V12.5H3.25V11H10.75ZM10.75 8V9.5H3.25V8H10.75ZM6.25 3.5V6.5H3.25V3.5H6.25ZM10.75 4.25V5.75H7.75V4.25H10.75Z"
+      fill="#000091"
+    />
+  </svg>
+);
+
+export const icons = {
+  lockFill,
+  user,
+  communityFill,
+  collectiviteFill,
+  awardFill,
+  administrationFill,
+  buildingFill,
+  open,
+  closed,
+  humanPin,
+  file,
+  building,
+  mapPin,
+  information,
+  mail,
+  print,
+  twitter,
+  linkedin,
+  facebook,
+  qrCode,
+  download,
+  questionFill,
+  alertFill,
+  questionnaire,
+};

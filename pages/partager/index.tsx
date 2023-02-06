@@ -1,14 +1,13 @@
 import React from 'react';
-import { qrCode } from 'components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
+import Meta from '#components/meta';
 import TextWrapper from 'components-ui/text-wrapper';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
-const Partager: React.FC = () => {
+const Partager: NextPageWithLayout = () => {
   return (
-    <Page
-      small={true}
-      title="Réutiliser ou partager l’Annuaire des Entreprises"
-    >
+    <>
+      <Meta title="Réutiliser ou partager l’Annuaire des Entreprises" />
       <TextWrapper>
         <h1>Réutiliser & partager</h1>
         <p>
@@ -140,7 +139,7 @@ const Partager: React.FC = () => {
               <li>Trouvez l’entreprise et accédez à sa fiche</li>
               <li>
                 Cliquez en haut à droite de la page, sur le petit logo{' '}
-                <span>{qrCode}</span>
+                <Icon slug="qrCode" />
               </li>
               <li>Sauvegardez le QR code ainsi généré</li>
               <li>Ajoutez-le à vos documents !</li>
@@ -223,7 +222,7 @@ const Partager: React.FC = () => {
           </p>
         </div>
       </TextWrapper>
-    </Page>
+    </>
   );
 };
 

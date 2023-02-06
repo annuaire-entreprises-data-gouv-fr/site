@@ -5,62 +5,73 @@ import BeneficiairesSection from '#components/dirigeants-section/beneficiaires';
 import DirigeantsEntrepriseIndividuelleSection from '#components/dirigeants-section/insee-dirigeant';
 import DirigeantsSection from '#components/dirigeants-section/rncs-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
+import Meta from '#components/meta';
+import { DirigeantsNonDiffusibleSection } from '#components/non-diffusible';
 import Title, { FICHE } from '#components/title-section';
 import {
   getDirigeantsWithUniteLegaleFromSlug,
   IDirigeants,
 } from '#models/dirigeants';
+import { estDiffusible } from '#models/statut-diffusion';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, IDirigeants {}
 
-const DirigeantsPage: React.FC<IProps> = ({
+const DirigeantsPage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   immatriculationRNCS,
-  metadata,
+  metadata: { session },
 }) => {
   return (
-    <Page
-      small={true}
-      title={`Dirigeants de la structure - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
-      canonical={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`}
-      noIndex={true}
-      isBrowserOutdated={metadata.isBrowserOutdated}
-    >
+    <>
+      <Meta
+        canonical={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`}
+        noIndex={true}
+        title={`Dirigeants de la structure - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
+      />
       <div className="content-container">
-        <Title uniteLegale={uniteLegale} ficheType={FICHE.DIRIGEANTS} />
+        <Title
+          uniteLegale={uniteLegale}
+          ficheType={FICHE.DIRIGEANTS}
+          session={session}
+        />
         <>
           <DirigeantSummary
             uniteLegale={uniteLegale}
             immatriculationRNCS={immatriculationRNCS}
           />
-          {uniteLegale.estDiffusible &&
-            uniteLegale.complements.estEntrepreneurIndividuel &&
-            uniteLegale.dirigeant && (
-              <>
-                <DirigeantsEntrepriseIndividuelleSection
-                  dirigeant={uniteLegale.dirigeant}
-                />
-                <BreakPageForPrint />
-              </>
-            )}
-          <DirigeantsSection
-            immatriculationRNCS={immatriculationRNCS}
-            siren={uniteLegale.siren}
-          />
-          <BreakPageForPrint />
-          <BeneficiairesSection
-            immatriculationRNCS={immatriculationRNCS}
-            siren={uniteLegale.siren}
-          />
+          {estDiffusible(uniteLegale) ? (
+            <>
+              {uniteLegale.complements.estEntrepreneurIndividuel &&
+                uniteLegale.dirigeant && (
+                  <>
+                    <DirigeantsEntrepriseIndividuelleSection
+                      dirigeant={uniteLegale.dirigeant}
+                    />
+                    <BreakPageForPrint />
+                  </>
+                )}
+              <DirigeantsSection
+                immatriculationRNCS={immatriculationRNCS}
+                siren={uniteLegale.siren}
+              />
+              <BreakPageForPrint />
+              <BeneficiairesSection
+                immatriculationRNCS={immatriculationRNCS}
+                siren={uniteLegale.siren}
+              />
+            </>
+          ) : (
+            <DirigeantsNonDiffusibleSection />
+          )}
         </>
       </div>
-    </Page>
+    </>
   );
 };
 

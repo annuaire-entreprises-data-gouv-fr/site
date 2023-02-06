@@ -1,4 +1,3 @@
-import { NotEnoughParamsIllustration } from '#components-ui/illustration';
 import { getFaqArticlesByTag } from '#models/faq';
 
 export const NotEnoughParams = () => {
@@ -6,14 +5,11 @@ export const NotEnoughParams = () => {
   return (
     <div>
       <br />
-      <NotEnoughParamsIllustration />
       <div>
-        <p>
-          <b>
-            Votre requête ne contient pas assez de paramètres de recherche pour
-            nous permettre de vous proposer un résultat.
-          </b>
-        </p>
+        <h3>
+          Votre requête ne contient pas assez de paramètres de recherche pour
+          nous permettre de vous proposer un résultat.
+        </h3>
         Vous pouvez, au choix :
         <ul>
           <li>Utiliser un terme de recherche plus long (au moins 3 lettres)</li>
@@ -41,6 +37,7 @@ export const NotEnoughParams = () => {
           <a href="/faq">→ Voir toutes les questions fréquentes</a>
         </p>
       </div>
+      <br />
     </div>
   );
 };

@@ -1,16 +1,18 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
+import { LayoutSearch } from '#components/layouts/layout-search';
+import Meta from '#components/meta';
 import SearchResults from '#components/search-results';
 import StructuredDataSearchAction from '#components/structured-data/search';
-import search, { ISearchResults } from '#models/search';
+import { searchWithoutProtectedSiren, ISearchResults } from '#models/search';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   searchTerm: string;
@@ -18,23 +20,18 @@ interface IProps extends IPropsWithMetadata {
   searchFilterParams: IParams;
 }
 
-const MapSearchResultPage: React.FC<IProps> = ({
+const MapSearchResultPage: NextPageWithLayout<IProps> = ({
   results,
   searchTerm,
   searchFilterParams,
   metadata,
 }) => (
-  <Page
-    small={true}
-    currentSearchTerm={searchTerm}
-    searchFilterParams={searchFilterParams}
-    map={true}
-    noIndex={true}
-    title="Rechercher une entreprise"
-    canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/carte"
-    isBrowserOutdated={metadata.isBrowserOutdated}
-    useAdvancedSearch={true}
-  >
+  <>
+    <Meta
+      title="Rechercher une entreprise"
+      canonical="https://annuaire-entreprises.data.gouv.fr/rechercher/carte"
+      noIndex={true}
+    />
     <StructuredDataSearchAction />
     <HiddenH1 title="Résultats de recherche" />
     <div className="content-container">
@@ -45,7 +42,7 @@ const MapSearchResultPage: React.FC<IProps> = ({
         map={true}
       />
     </div>
-  </Page>
+  </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
@@ -55,16 +52,37 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const pageParam = (context.query.page || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
     const searchFilterParams = new SearchFilterParams(context.query);
-    const results = await search(searchTerm, page, searchFilterParams);
-
+    const results = await searchWithoutProtectedSiren(
+      searchTerm,
+      page,
+      searchFilterParams
+    );
     return {
       props: {
         results,
         searchTerm,
         searchFilterParams: searchFilterParams.toJSON(),
+        metadata: {
+          useReact: true,
+        },
       },
     };
   }
 );
+
+MapSearchResultPage.getLayout = function getLayout(page: ReactElement) {
+  return <>{page}</>;
+};
+
+MapSearchResultPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated
+) {
+  return (
+    <LayoutSearch isBrowserOutdated={isBrowserOutdated} map={true}>
+      {page}
+    </LayoutSearch>
+  );
+};
 
 export default MapSearchResultPage;

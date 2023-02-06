@@ -1,4 +1,5 @@
 import React from 'react';
+import constants from '#models/constants';
 
 const MaplibreInstance = () => (
   <>
@@ -11,13 +12,12 @@ const MaplibreInstance = () => (
 
     <style jsx>{`
       #map {
-        background: #dfdff1;
+        background: ${constants.colors.pastelBlue};
         width: 100%;
         z-index: 0;
       }
       @media only screen and (min-width: 1px) and (max-width: 1100px) {
         #map {
-          background: #dfdff1;
           min-height: 30vh;
         }
       }

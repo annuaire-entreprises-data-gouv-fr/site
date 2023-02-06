@@ -1,12 +1,14 @@
 import React, { PropsWithChildren } from 'react';
-import { information } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
 
 const Info: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   full = false,
   children,
 }) => (
   <div className="alert">
-    <div className="icon">{information}</div>
+    <div>
+      <Icon color="#3ca3ff" size={16} slug="information" />
+    </div>
     <div>{children}</div>
     <style jsx>{`
       .alert {
@@ -20,10 +22,8 @@ const Info: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
         align-items: start;
         width: ${full ? '100%' : 'auto'};
       }
-
-      .icon {
-        color: #3ca3ff;
-        padding-right: 10px;
+      .alert > div:first-of-type {
+        margin-right: 10px;
       }
     `}</style>
   </div>

@@ -106,6 +106,16 @@ const mapToDomainObject = (
     (ent_act_denomination_sociale || eirl_denomination || prenomEtNom) +
     (ent_act_sigle ? `(${ent_act_sigle})` : '');
 
+  const adresse = formatAdresse({
+    numeroVoie: ent_adr_numero_voie || '',
+    indiceRepetition: ent_adr_indice_repetition || '',
+    typeVoie: ent_adr_type_voie || '',
+    libelleVoie: ent_adr_adresse || '',
+    complement: ent_adr_adresse_complement || '',
+    codePostal: ent_adr_code_postal || '',
+    libelleCommune: ent_adr_commune || '',
+  });
+
   return {
     siren,
     gestionId: ent_id_num_gestion,
@@ -117,15 +127,7 @@ const mapToDomainObject = (
     dateMiseAJour: gest_date_maj || '',
     dateDebutActivite: ent_act_date_debut_activite || '',
     libelleNatureJuridique: gest_label_forme_juridique || '',
-    adresse: formatAdresse({
-      numeroVoie: ent_adr_numero_voie || '',
-      indiceRepetition: ent_adr_indice_repetition || '',
-      typeVoie: ent_adr_type_voie || '',
-      libelleVoie: ent_adr_adresse || '',
-      complement: ent_adr_adresse_complement || '',
-      codePostal: ent_adr_code_postal || '',
-      libelleCommune: ent_adr_commune || '',
-    }),
+    adresse,
     downloadLink: `${routes.rnm}${siren}?format=pdf`,
     siteLink: `${routes.rnm}${siren}?format=html`,
   };

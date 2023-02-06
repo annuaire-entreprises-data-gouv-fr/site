@@ -1,16 +1,18 @@
-import React from 'react';
-import Logo from '#components-ui/logo';
-import HiddenH1 from '#components/a11y-components/hidden-h1';
-import HomePageAdvancedSearch from '#components/advanced-search/home-page';
+import React, { ReactElement } from 'react';
+import { HomeH1 } from '#components-ui/logo/home-h1';
+import { LayoutDefault } from '#components/layouts/layout-default';
+import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
 import StructuredDataSearchAction from '#components/structured-data/search';
-import Page from '../layouts';
+import { NextPageWithLayout } from './_app';
 
-const Index: React.FC = () => (
-  <Page
-    title="L’Annuaire des Entreprises"
-    canonical="https://annuaire-entreprises.data.gouv.fr"
-  >
+const Index: NextPageWithLayout = () => (
+  <>
+    <Meta
+      title="L’Annuaire des Entreprises françaises : les informations légales officielles de l’administration"
+      canonical="https://annuaire-entreprises.data.gouv.fr"
+      description="L’administration permet aux particuliers, entrepreneurs et agents publics de vérifier les informations informations légales des entreprises, associations et services publics en France."
+    />
     <StructuredDataSearchAction />
     <div className="layout-center">
       <form
@@ -19,16 +21,10 @@ const Index: React.FC = () => (
         action={'/rechercher'}
         method="get"
       >
-        <Logo
-          title="Logo de l’Annuaire des Entreprises"
-          slug="annuaire-entreprises"
-          width={270}
-          height={112}
-        />
-        <HiddenH1 title="L’Annuaire des Entreprises" />
+        <HomeH1 />
         <h2>
-          Retrouvez toutes les informations publiques sur une entreprise, une
-          association ou une administration
+          Vérifiez les informations légales publiques des entreprises,
+          associations et services publics en France
         </h2>
         <div className="search-bar-wrapper">
           <SearchBar
@@ -38,7 +34,9 @@ const Index: React.FC = () => (
           />
         </div>
         <br />
-        <HomePageAdvancedSearch />
+        <div className="layout-center">
+          <a href="/rechercher">→ Effectuer une recherche avancée</a>
+        </div>
       </form>
     </div>
     <style jsx>{`
@@ -61,7 +59,15 @@ const Index: React.FC = () => (
         max-width: 450px;
       }
     `}</style>
-  </Page>
+  </>
 );
+
+Index.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
+  return (
+    <LayoutDefault isBrowserOutdated={isBrowserOutdated} searchBar={false}>
+      {page}
+    </LayoutDefault>
+  );
+};
 
 export default Index;

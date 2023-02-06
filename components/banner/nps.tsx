@@ -1,5 +1,6 @@
 import React from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
+import constants from '#models/constants';
 
 export const NPSBanner: React.FC<{}> = () => (
   <PrintNever>
@@ -33,7 +34,7 @@ export const NPSBanner: React.FC<{}> = () => (
         width: 100%;
         background-color: #fffde6;
         font-family: 'Marianne', sans-serif;
-        border-bottom: 2px solid #000091;
+        border-bottom: 2px solid ${constants.colors.frBlue};
       }
       #nps-modal .fr-container {
         display: flex;

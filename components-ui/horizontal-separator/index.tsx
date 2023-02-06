@@ -1,4 +1,5 @@
 import React from 'react';
+import constants from '#models/constants';
 
 export const SimpleSeparator = () => (
   <>
@@ -7,7 +8,7 @@ export const SimpleSeparator = () => (
       div.simple-horizontal-separator {
         margin: 15px 0;
         width: 100%;
-        background-color: #dfdff1;
+        background-color: ${constants.colors.pastelBlue};
         height: 1px;
       }
     `}</style>
@@ -28,7 +29,7 @@ export const HorizontalSeparator = () => (
       }
       div.horizontal-separator > span.line {
         width: 50px;
-        background-color: #dfdff1;
+        background-color: ${constants.colors.pastelBlue};
         height: 2px;
         margin: 0 10px;
       }
@@ -36,7 +37,7 @@ export const HorizontalSeparator = () => (
         width: 7px;
         height: 7px;
         border-radius: 20px;
-        background-color: #dfdff1;
+        background-color: ${constants.colors.pastelBlue};
       }
     `}</style>
   </>

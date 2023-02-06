@@ -1,6 +1,7 @@
 import React from 'react';
-import { information } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
 import { IAdministrationMetaData } from '#models/administrations';
+import constants from '#models/constants';
 import InformationTooltip from '.';
 
 const DataSourcesTooltip: React.FC<{
@@ -26,7 +27,9 @@ const DataSourcesTooltip: React.FC<{
       }
     >
       <a href={link} className="data-source no-style-link">
-        <span className="layout-center">{information}</span>
+        <span className="layout-center">
+          <Icon color={constants.colors.frBlue} size={12} slug="information" />
+        </span>
         <span>
           &nbsp;Source{dataSources.length > 1 ? 's' : ''}&nbsp;:&nbsp;
           {dataSources.map((dataSource) => dataSource.short).join(', ')}
@@ -42,8 +45,8 @@ const DataSourcesTooltip: React.FC<{
           .data-source {
             display: inline-flex;
             font-size: 0.7rem;
-            background-color: #dfdff1;
-            color: #000091;
+            background-color: ${constants.colors.pastelBlue};
+            color: ${constants.colors.frBlue};
             padding: 2px 10px;
             border-radius: 40px;
             cursor: help;

@@ -5,7 +5,6 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import { Siren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '..';
 
@@ -56,7 +55,6 @@ export const getRGECertifications = async (
     if (!uniteLegale.complements.estRge) {
       throw new HttpNotFound('Not a RGE company');
     }
-
     return await clientRGE(uniteLegale.siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {

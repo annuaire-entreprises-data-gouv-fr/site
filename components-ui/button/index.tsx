@@ -1,4 +1,5 @@
-import React, { PropsWithChildren } from 'react';
+import React, { MouseEventHandler, PropsWithChildren } from 'react';
+import constants from '#models/constants';
 
 interface IProps {
   small?: boolean;
@@ -7,6 +8,7 @@ interface IProps {
   alt?: boolean;
   target?: '_blank';
   nofollow?: boolean;
+  onClick?: MouseEventHandler;
 }
 
 const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
@@ -16,10 +18,13 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   alt = false,
   target = '',
   nofollow = false,
+  onClick = () => {},
 }) => (
   <div className={`button-link ${alt ? 'alt' : ''} ${small ? 'small' : ''}`}>
     {!to ? (
-      <button type="submit">{children}</button>
+      <button type="submit" onClick={onClick}>
+        {children}
+      </button>
     ) : (
       <a
         target={target}
@@ -48,7 +53,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         align-items: center;
         justify-content: center;
         border-radius: 0;
-        background-color: #000091;
+        background-color: ${constants.colors.frBlue};
         color: #fff;
         text-decoration: none;
         font-size: 1rem;
@@ -66,8 +71,8 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
 
       div.button-link.alt > a,
       div.button-link.alt > button {
-        border: 2px solid #000091;
-        color: #000091;
+        border: 2px solid ${constants.colors.frBlue};
+        color: ${constants.colors.frBlue};
         background-color: #fff;
       }
 
@@ -82,7 +87,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
       div.button-link.alt:hover > a,
       div.button-link.alt:hover > button {
         color: #0b01c3;
-        background-color: #dfdff1;
+        background-color: ${constants.colors.pastelBlue};
       }
     `}</style>
   </div>

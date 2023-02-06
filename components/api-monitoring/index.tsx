@@ -1,8 +1,9 @@
 import React from 'react';
-import { information } from '#components-ui/icon';
+import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
 import { Section } from '#components/section';
+import constants from '#models/constants';
 import { IMonitoring, IRatio } from '#models/monitoring';
 
 const getUptimeColor = (ratio: IRatio) => {
@@ -122,19 +123,12 @@ const Metric: React.FC<{
 );
 
 const RobotTooltip = () => (
-  <>
-    <InformationTooltip
-      orientation="right"
-      label="Ces données sont obtenues via un robot qui interroge la source de données toutes les 5 minutes"
-    >
-      <span>{information}</span>
-    </InformationTooltip>
-    <style jsx>{`
-      span {
-        color: #000091;
-      }
-    `}</style>
-  </>
+  <InformationTooltip
+    orientation="right"
+    label="Ces données sont obtenues via un robot qui interroge la source de données toutes les 5 minutes"
+  >
+    <Icon color={constants.colors.frBlue} size={12} slug="information" />
+  </InformationTooltip>
 );
 
 interface IProps extends IMonitoring {
@@ -227,7 +221,7 @@ const ApiMonitoring: React.FC<IProps> = ({
             line-height: 2.2rem;
           }
           .mean-stats > div:not(:last-of-type) {
-            border-right: 2px solid #dfdff1;
+            border-right: 2px solid ${constants.colors.pastelBlue};
           }
         `}</style>
       </Section>

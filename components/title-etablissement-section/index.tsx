@@ -3,6 +3,7 @@ import Warning from '#components-ui/alerts/warning';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { Tag } from '#components-ui/tag';
 import { IEtablissement, IUniteLegale } from '#models/index';
+import { estNonDiffusible } from '#models/statut-diffusion';
 import { formatSiret } from '#utils/helpers';
 import { INSEE } from '../administrations';
 
@@ -34,7 +35,8 @@ const MapTitleEtablissement: React.FC<{
     <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
     {etablissement.estSiege && <Tag className="info">siège social</Tag>}
     <IsActiveTag
-      state={etablissement.etatAdministratif}
+      etatAdministratif={etablissement.etatAdministratif}
+      statutDiffusion={etablissement.statutDiffusion}
       since={etablissement.dateFermeture}
     />
     <style jsx>{`
@@ -74,11 +76,12 @@ const TitleEtablissementWithDenomination: React.FC<{
       {etablissement.estSiege && <Tag className="info">siège social</Tag>}
       {uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 &&
         !etablissement.estSiege && <Tag>ancien siège social</Tag>}
-      {!etablissement.estDiffusible && (
-        <Tag className="unknown">Non-diffusible</Tag>
+      {estNonDiffusible(etablissement) && (
+        <Tag className="unknown">non-diffusible</Tag>
       )}
       <IsActiveTag
-        state={etablissement.etatAdministratif}
+        etatAdministratif={etablissement.etatAdministratif}
+        statutDiffusion={etablissement.statutDiffusion}
         since={etablissement.dateFermeture}
       />
     </div>

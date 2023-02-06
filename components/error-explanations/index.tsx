@@ -46,8 +46,8 @@ const ErrorNotFoundExplanations = () => (
 const SearchErrorExplanations = () => (
   <div>
     <p>
-      Le moteur de recherche est momentanément indisponible et devrait
-      fonctionner de nouveau dans quelques instants.
+      Le moteur de recherche est momentanément indisponible et devrait{' '}
+      <a href="/rechercher">fonctionner de nouveau</a> dans quelques instants.
     </p>
     <p>
       Si la situation perdure, merci de nous contacter via{' '}

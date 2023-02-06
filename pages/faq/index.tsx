@@ -4,15 +4,17 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import ReactMarkdown from 'react-markdown';
 import ButtonLink from '#components-ui/button';
 import TextWrapper from '#components-ui/text-wrapper';
+import Meta from '#components/meta';
 import StructuredDataFAQ from '#components/structured-data/faq';
 import constants from '#models/constants';
 import { getAllFaqArticles, IArticle } from '#models/faq';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
-const StatusPage: React.FC<{
+const StatusPage: NextPageWithLayout<{
   articles: IArticle[];
 }> = ({ articles }) => (
-  <Page small={true} title="FAQ de l'Annuaire des Entreprises">
+  <>
+    <Meta title="FAQ de l'Annuaire des Entreprises" />
     <StructuredDataFAQ
       data={articles.map(({ title, body }) => [
         title,
@@ -40,7 +42,7 @@ const StatusPage: React.FC<{
         </ButtonLink>
       </div>
     </TextWrapper>
-  </Page>
+  </>
 );
 
 export const getStaticProps: GetStaticProps = async () => {

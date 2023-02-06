@@ -1,6 +1,7 @@
 import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
+import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { Section } from '#components/section';
@@ -69,7 +70,7 @@ export const CertificationsRGESection: React.FC<{
 
   const data = [
     ['Dénomination', uniteLegale.nomComplet],
-    ['Adresse postale', adresse],
+    ['Adresse', adresse],
     ['Téléphone', telephone && <a href={`tel:${telephone}`}>{telephone}</a>],
     [
       'Site internet',
@@ -90,10 +91,15 @@ export const CertificationsRGESection: React.FC<{
 
   return (
     <Section title={sectionTitle} sources={[EAdministration.ADEME]}>
-      <p>
-        Cette structure est une entreprise certifiée RGE - Reconnu Garant de
-        l’Environnement.
-      </p>
+      Cette structure est une entreprise{' '}
+      <FAQLink tooltipLabel="certifiée RGE - Reconnu Garant de l’Environnement">
+        La certification RGE est accordée par les pouvoirs publics aux
+        professionnels du bâtiment spécialisés dans les travaux de rénovation
+        énergétique.
+        <br />
+        <a href="/faq/reconnu-garant-environnement">→ En savoir plus</a>
+      </FAQLink>
+      .
       <p>
         {linkFranceRenov && (
           <>
@@ -113,8 +119,8 @@ export const CertificationsRGESection: React.FC<{
         head={['Certificat', 'Domaine(s) certifié(s)', 'Lien']}
         body={certificationsRGE.certifications.map((certification) => [
           <div className="font-small layout-left">
-            <div style={{ width: 72 }}>
-              {certification.nomCertificat in certificatLogo && (
+            {certification.nomCertificat in certificatLogo && (
+              <div style={{ width: 72 }}>
                 <img
                   src={`/images/rge/logo-rge-${
                     //@ts-ignore
@@ -125,8 +131,8 @@ export const CertificationsRGESection: React.FC<{
                   width="100%"
                   height="100%"
                 />
-              )}
-            </div>
+              </div>
+            )}
             <div> {certification.nomCertificat}</div>
           </div>,
           <ul>
