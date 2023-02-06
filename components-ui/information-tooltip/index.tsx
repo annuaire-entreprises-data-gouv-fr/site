@@ -104,7 +104,7 @@ const InformationTooltip: React.FC<
         pointer-events: auto;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 600px) {
+      @media only screen and (min-width: 1px) and (max-width: 576px) {
         .wrapper:hover .tooltip {
           visibility: visible;
           pointer-events: auto;

@@ -38,7 +38,7 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
           background-color: #fff;
           padding-left: 30px;
         }
-        @media only screen and (min-width: 1px) and (max-width: 600px) {
+        @media only screen and (min-width: 1px) and (max-width: 576px) {
           td {
             padding: 0;
             margin: 0;
@@ -120,7 +120,7 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
           display: none;
           background-color: ${constants.colors.pastelBlue};
         }
-        @media only screen and (min-width: 1px) and (max-width: 600px) {
+        @media only screen and (min-width: 1px) and (max-width: 576px) {
           tr {
             display: flex;
             flex-direction: column;

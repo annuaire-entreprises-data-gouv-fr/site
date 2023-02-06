@@ -148,7 +148,7 @@ export const Header: React.FC<IProps> = ({
           display: none !important;
         }
       }
-      @media only screen and (min-width: 1px) and (max-width: 991px) {
+      @media only screen and (min-width: 1px) and (max-width: 992px) {
         .not-fr-search {
           width: 100%;
           margin: 0.75rem;

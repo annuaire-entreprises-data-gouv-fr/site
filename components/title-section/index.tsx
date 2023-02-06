@@ -175,7 +175,7 @@ const Tabs: React.FC<{
           border-bottom: 0;
         }
 
-        @media only screen and (min-width: 1px) and (max-width: 650px) {
+        @media only screen and (min-width: 1px) and (max-width: 768px) {
           .title-tabs {
             flex-direction: column;
             border-bottom: 0;
@@ -273,7 +273,7 @@ const Title: React.FC<IProps> = ({
         color: #666;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 900px) {
+      @media only screen and (min-width: 1px) and (max-width: 992px) {
         .title {
           margin-top: 10px;
         }

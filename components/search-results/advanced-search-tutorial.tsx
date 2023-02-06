@@ -78,7 +78,7 @@ export const AdvancedSearchTutorial = () => {
             color: ${constants.colors.frBlue};
           }
 
-          @media only screen and (min-width: 1px) and (max-width: 600px) {
+          @media only screen and (min-width: 1px) and (max-width: 576px) {
             svg {
               rotate: 225deg;
               height: 60px;
