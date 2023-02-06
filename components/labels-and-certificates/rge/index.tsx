@@ -137,7 +137,9 @@ export const CertificationsRGESection: React.FC<{
           </div>,
           <ul>
             {certification.domaines.map((domaine) => (
-              <li className="font-small">{domaine}</li>
+              <li key={domaine} className="font-small">
+                {domaine}
+              </li>
             ))}
           </ul>,
           <ButtonLink

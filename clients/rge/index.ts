@@ -46,15 +46,15 @@ const mapToDomainObject = (rge: IRGEResponse) => {
   const [firstResult] = rge.results;
 
   const {
-    adresse,
-    code_postal,
-    commune,
-    nom_entreprise,
-    particulier,
+    adresse = '',
+    code_postal = '',
+    commune = '',
+    nom_entreprise = '',
+    particulier = false,
     siret,
-    telephone,
-    site_internet,
-    email,
+    telephone = '',
+    site_internet = '',
+    email = '',
   } = firstResult;
 
   const companyInfo = {
@@ -79,12 +79,12 @@ const mapToDomainObject = (rge: IRGEResponse) => {
       }
     } else {
       const {
-        code_qualification,
-        domaine,
+        code_qualification = '',
+        domaine = '',
         nom_certificat,
-        nom_qualification,
-        organisme,
-        url_qualification,
+        nom_qualification = '',
+        organisme = '',
+        url_qualification = '',
       } = result;
       certifications.push({
         codeQualification: code_qualification,
