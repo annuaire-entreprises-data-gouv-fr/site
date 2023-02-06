@@ -80,7 +80,10 @@ export const AdvancedSearchTutorial = () => {
 
           @media only screen and (min-width: 1px) and (max-width: 600px) {
             svg {
-              display: none;
+              rotate: 225deg;
+              height: 60px;
+              position: absolute;
+              top: -40px;
             }
 
             .tutorial {
