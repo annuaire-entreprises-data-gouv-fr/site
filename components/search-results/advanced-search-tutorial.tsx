@@ -27,25 +27,25 @@ export const AdvancedSearchTutorial = () => {
           <ul>
             <li>
               <Icon color={constants.colors.frBlue} slug="mapPin">
-                <b>Zone géographique&nbsp;:</b> filtrez par ville ou par
+                <b>Zone géographique&nbsp;:</b>&#8200;filtrez par ville ou par
                 département
               </Icon>
             </li>
             <li>
               <Icon color={constants.colors.frBlue} slug="humanPin">
-                <b>Dirigeant&nbsp;:</b> filtrez par le nom ou le prénom d’un(e)
-                dirigeant(e)
+                <b>Dirigeant&nbsp;:</b>&#8200;filtrez par le nom ou le prénom
+                d’un(e) dirigeant(e)
               </Icon>
             </li>
             <li>
               <Icon color={constants.colors.frBlue} slug="building">
-                <b>Structure&nbsp;:</b> filtrez par type de structure ou labels
-                (RGE, ESS, Spectacle vivant)
+                <b>Structure&nbsp;:</b>&#8200;filtrez par type de structure ou
+                labels (RGE, ESS, Spectacle vivant)
               </Icon>
             </li>
             <li>
               <Icon color={constants.colors.frBlue} slug="file">
-                <b>Situation administrative&nbsp;:</b> filtrez par domaine
+                <b>Situation administrative&nbsp;:</b>&#8200;filtrez par domaine
                 d’activité ou état administratif (En activité/Cessée)
               </Icon>
             </li>
