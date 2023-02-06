@@ -13,6 +13,10 @@ import {
 import { getAnnoncesFromSlug } from '#models/annonces';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { isAssociation, IUniteLegale } from '#models/index';
+import {
+  getCompanyPageDescription,
+  getCompanyPageTitle,
+} from '#utils/helpers/get-company-page-title';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -37,7 +41,10 @@ const Annonces: NextPageWithLayout<IProps> = ({
   return (
     <>
       <Meta
-        title={`Annonces légales (BODACC) - ${uniteLegale.nomComplet}`}
+        title={`Annonces légales (BODACC, JOAFE) - ${getCompanyPageTitle(
+          uniteLegale
+        )}`}
+        description={getCompanyPageDescription(uniteLegale)}
         noIndex={true}
       />
       <div className="content-container">
