@@ -106,12 +106,12 @@ const EtablissementListeSection: React.FC<{
         <b>
           {nombreEtablissements} établissement{plural}
         </b>
-        {nombreEtablissementsOuverts && !usePagination && (
+        {nombreEtablissementsOuverts && !usePagination ? (
           <>
             {' '}
             dont {nombreEtablissementsOuverts} {pluralBe} en activité
           </>
-        )}
+        ) : null}
         . Cliquez sur un n° siret pour obtenir plus d’information :
       </p>
       <Section
