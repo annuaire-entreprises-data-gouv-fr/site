@@ -1,6 +1,6 @@
 slug: ess
 title: Moteur de recherche ESS
-description: Retrouvez une structure appartenant au champ de l’Economie Sociale et Solidaire
+description: Retrouvez rapidement les associations et entreprises de l'Économie Sociale et Solidaire (ESS) en France, grâce au moteur de recherche de l'Annuaire des Entreprises.
 filter:
   name: label
   value: ess

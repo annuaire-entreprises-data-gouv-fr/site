@@ -1,31 +1,33 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import React from 'react';
+import React, { ReactElement } from 'react';
+import { HomeH1 } from '#components-ui/logo/home-h1';
+import { LayoutDefault } from '#components/layouts/layout-default';
+import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
-import StructuredDataSearchAction from '#components/structured-data/search';
 import {
   getAllLandingPages,
   getLandingPage,
   ILandingPage,
 } from '#models/landing-pages';
 import { IPropsWithMetadata } from '#utils/server-side-props-helper/post-server-side-props';
-import Page from '../../layouts';
+import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, ILandingPage {}
 
-const LandingPage: React.FC<IProps> = ({
+const LandingPage: NextPageWithLayout<IProps> = ({
   slug,
   title,
   description,
   filter,
   seo,
 }) => (
-  <Page
-    title={seo.title || title}
-    canonical={`https://annuaire-entreprises.data.gouv.fr/rechercher/${slug}`}
-    description={seo.description || description}
-    noIndex={false}
-  >
-    <StructuredDataSearchAction />
+  <>
+    <Meta
+      title={seo.title || title}
+      canonical={`https://annuaire-entreprises.data.gouv.fr/rechercher/${slug}`}
+      description={seo.description || description}
+      noIndex={false}
+    />
     <div className="layout-center">
       <form
         className="centered-search"
@@ -33,7 +35,10 @@ const LandingPage: React.FC<IProps> = ({
         action={`/rechercher`}
         method="get"
       >
-        <h1>{title}</h1>
+        <HomeH1>
+          <b>{title}</b>
+        </HomeH1>
+
         <h2>{description}</h2>
         <input
           style={{ display: 'none' }}
@@ -74,8 +79,19 @@ const LandingPage: React.FC<IProps> = ({
         max-width: 450px;
       }
     `}</style>
-  </Page>
+  </>
 );
+
+LandingPage.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated: boolean
+) {
+  return (
+    <LayoutDefault isBrowserOutdated={isBrowserOutdated} searchBar={false}>
+      {page}
+    </LayoutDefault>
+  );
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {

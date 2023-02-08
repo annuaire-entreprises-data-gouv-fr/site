@@ -15,19 +15,19 @@ const Footer = () => (
               </h3>
               <ul className="fr-footer__top-list">
                 <li>
-                  <a className="fr-footer__top-link" href="/rechercher/ess">
+                  <a className="fr-footer__top-link" href="/rechercher/lp/ess">
                     Entreprises de l’ESS (Economie Sociale et Solidaire)
                   </a>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/rechercher/rge">
+                  <a className="fr-footer__top-link" href="/rechercher/lp/rge">
                     Entreprises RGE (Reconnu Garant de l’Environnement)
                   </a>
                 </li>
                 <li>
                   <a
                     className="fr-footer__top-link"
-                    href="/rechercher/entreprises-individuelles"
+                    href="/rechercher/lp/entreprises-individuelles"
                   >
                     Entreprises individuelles
                   </a>
@@ -35,7 +35,7 @@ const Footer = () => (
                 <li>
                   <a
                     className="fr-footer__top-link"
-                    href="/rechercher/spectacles-vivants"
+                    href="/rechercher/lp/spectacles-vivants"
                   >
                     Entrepreneurs de Spectacles Vivants
                   </a>
@@ -43,7 +43,7 @@ const Footer = () => (
                 <li>
                   <a
                     className="fr-footer__top-link"
-                    href="/rechercher/collectivites"
+                    href="/rechercher/lp/collectivites"
                   >
                     Collectivités territoriales
                   </a>
@@ -51,7 +51,7 @@ const Footer = () => (
                 <li>
                   <a
                     className="fr-footer__top-link"
-                    href="/rechercher/associations"
+                    href="/rechercher/lp/associations"
                   >
                     Associations
                   </a>
