@@ -52,6 +52,7 @@ export const MultiSelect = ({
         placeholder={placeholder}
         styles={{
           clearIndicator: (base) => ({ ...base, color: '#000' }),
+          placeholder: (base) => ({ ...base, color: '#161616' }),
           control: (baseStyles, state) => ({
             ...baseStyles,
             boxShadow: '0 !important',
