@@ -34,7 +34,7 @@ const EtablissementTable: React.FC<{
           'Etat',
         ]}
         body={etablissements.map((etablissement: IEtablissement) => [
-          <a href={`/etablissement/${etablissement.siret}`} rel="nofollow">
+          <a href={`/etablissement/${etablissement.siret}`}>
             {formatSiret(etablissement.siret)}
           </a>,
           <>
