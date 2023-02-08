@@ -59,7 +59,7 @@ export const HomeH1 = () => (
           margin-left: 25px;
         }
 
-        @media only screen and (min-width: 1px) and (max-width: 600px) {
+        @media only screen and (min-width: 1px) and (max-width: 576px) {
           .home-h1 {
             width: 210px;
             height: 90px;

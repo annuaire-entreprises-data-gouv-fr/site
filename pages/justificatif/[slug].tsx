@@ -4,6 +4,10 @@ import Immatriculations from '#components/immatriculations';
 import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';
 import getJustificatifs, { IJustificatifs } from '#models/justificatifs';
+import {
+  getCompanyPageDescription,
+  getCompanyPageTitle,
+} from '#utils/helpers/get-company-page-title';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -22,7 +26,10 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
 }) => (
   <>
     <Meta
-      title={`Justificatif d’immatriculation - ${uniteLegale.nomComplet}`}
+      title={`Justificatif d’immatriculation - ${getCompanyPageTitle(
+        uniteLegale
+      )}`}
+      description={getCompanyPageDescription(uniteLegale)}
       noIndex={true}
     />
     <div className="content-container">

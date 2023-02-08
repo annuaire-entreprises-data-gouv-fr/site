@@ -369,7 +369,7 @@ const FeedBackPage: NextPageWithLayout = () => {
               font-size: 1.3rem;
             }
 
-            @media only screen and (min-width: 1px) and (max-width: 600px) {
+            @media only screen and (min-width: 1px) and (max-width: 576px) {
               .radio-group.smileys {
                 flex-direction: column;
                 align-items: center;

@@ -34,7 +34,7 @@ const EtablissementTable: React.FC<{
           'Etat',
         ]}
         body={etablissements.map((etablissement: IEtablissement) => [
-          <a href={`/etablissement/${etablissement.siret}`} rel="nofollow">
+          <a href={`/etablissement/${etablissement.siret}`}>
             {formatSiret(etablissement.siret)}
           </a>,
           <>
@@ -106,12 +106,12 @@ const EtablissementListeSection: React.FC<{
         <b>
           {nombreEtablissements} établissement{plural}
         </b>
-        {nombreEtablissementsOuverts && !usePagination && (
+        {nombreEtablissementsOuverts && !usePagination ? (
           <>
             {' '}
             dont {nombreEtablissementsOuverts} {pluralBe} en activité
           </>
-        )}
+        ) : null}
         . Cliquez sur un n° siret pour obtenir plus d’information :
       </p>
       <Section

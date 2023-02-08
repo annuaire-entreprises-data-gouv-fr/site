@@ -13,6 +13,10 @@ import {
   IDirigeants,
 } from '#models/dirigeants';
 import { estDiffusible } from '#models/statut-diffusion';
+import {
+  getCompanyPageDescription,
+  getCompanyPageTitle,
+} from '#utils/helpers/get-company-page-title';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -32,7 +36,10 @@ const DirigeantsPage: NextPageWithLayout<IProps> = ({
       <Meta
         canonical={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`}
         noIndex={true}
-        title={`Dirigeants de la structure - ${uniteLegale.nomComplet} - ${uniteLegale.siren}`}
+        title={`Dirigeants de la structure - ${getCompanyPageTitle(
+          uniteLegale
+        )}`}
+        description={getCompanyPageDescription(uniteLegale)}
       />
       <div className="content-container">
         <Title

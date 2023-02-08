@@ -6,7 +6,7 @@ import {
 } from '#models/index';
 
 export const getCompanyPageTitle = (uniteLegale: IUniteLegale) => {
-  const description = `${uniteLegale.nomComplet} à ${uniteLegale.siege.commune}, siren ${uniteLegale.siren}, sur Annuaire Entreprises`;
+  const description = `${uniteLegale.nomComplet} à ${uniteLegale.siege.commune} - SIREN ${uniteLegale.siren} | Annuaire des Entreprises`;
 
   switch (true) {
     case isAssociation(uniteLegale):
@@ -20,4 +20,4 @@ export const getCompanyPageTitle = (uniteLegale: IUniteLegale) => {
 };
 
 export const getCompanyPageDescription = (uniteLegale: IUniteLegale) =>
-  `L’administration permet aux particuliers et agents publics de vérifier les informations juridiques officielles de ${uniteLegale.nomComplet}, ${uniteLegale.siege.adresse} : SIREN, SIRET, TVA Intracommunautaire, Code APE/NAF, dirigeant, adresse, justificatif  d'immatriculation...`;
+  `L’administration permet aux particuliers et agents publics de vérifier les informations légales officielles de ${uniteLegale.nomComplet}, ${uniteLegale.siege.adresse} : SIREN, SIRET, TVA Intracommunautaire, Code APE/NAF, dirigeant, adresse, justificatif  d'immatriculation...`;

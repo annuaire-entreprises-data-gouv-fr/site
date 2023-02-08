@@ -124,7 +124,7 @@ export const Header: React.FC<IProps> = ({
     </header>
     <style jsx>{`
       ${!useSearchBar
-        ? `header.fr-header {
+        ? `header.fr-header, div.fr-header__brand {
         filter: none !important;
       }`
         : ''}
@@ -140,13 +140,6 @@ export const Header: React.FC<IProps> = ({
         flex-grow: 1;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 991px) {
-        .not-fr-search {
-          width: 100%;
-          margin: 0.75rem;
-          margin-top: 0;
-        }
-      }
       div.with-session-banner {
         background-color: ${constants.colors.espaceAgent};
         color: #fff;
@@ -167,6 +160,13 @@ export const Header: React.FC<IProps> = ({
       @media print {
         .fr-header {
           display: none !important;
+        }
+      }
+      @media only screen and (min-width: 1px) and (max-width: 992px) {
+        .not-fr-search {
+          width: 100%;
+          margin: 0.75rem;
+          margin-top: 0;
         }
       }
     `}</style>

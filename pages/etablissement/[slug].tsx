@@ -3,6 +3,10 @@ import React from 'react';
 import Meta from '#components/meta';
 import { estNonDiffusible } from '#models/statut-diffusion';
 import { shouldNotIndex } from '#utils/helpers';
+import {
+  getCompanyPageDescription,
+  getCompanyPageTitle,
+} from '#utils/helpers/get-company-page-title';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
 import { NonDiffusibleSection } from 'components/non-diffusible';
@@ -31,7 +35,10 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
 }) => (
   <>
     <Meta
-      title={`Etablissement - ${uniteLegale.nomComplet} - ${etablissement.siret}`}
+      title={`${
+        etablissement.estSiege ? 'Siège social' : 'Etablissement secondaire'
+      } - ${getCompanyPageTitle(uniteLegale)}`}
+      description={getCompanyPageDescription(uniteLegale)}
       noIndex={shouldNotIndex(uniteLegale)}
     />
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}

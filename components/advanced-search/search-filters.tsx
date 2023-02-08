@@ -192,7 +192,7 @@ const SearchFilters: React.FC<{
           overflow: auto;
         }
 
-        @media only screen and (min-width: 1px) and (max-width: 991px) {
+        @media only screen and (min-width: 1px) and (max-width: 992px) {
           div.select {
             max-width: 100%;
           }
