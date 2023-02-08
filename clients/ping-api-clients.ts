@@ -1,5 +1,5 @@
+import { clientAssociation } from '#clients/association';
 import clientSearchSireneOuverte from '#clients/recherche-entreprise';
-import { clientRNA } from '#clients/rna';
 import { fetchRNCSImmatriculationNoCache } from '#clients/rncs';
 import { clientRNM } from '#clients/rnm';
 import { clientUniteLegaleInseeNoCache } from '#clients/sirene-insee/siren';
@@ -29,7 +29,7 @@ const ping = async (slug: string | string[]) => {
     case 'api-sirene-donnees-ouvertes':
       return await clientUniteLegaleSireneOuverte(verifySiren('880878145'));
     case 'api-rna':
-      return await clientRNA(verifyIdRna('W551000280'), useCache);
+      return await clientAssociation(verifyIdRna('W551000280'), useCache);
     case 'api-tva':
       return await clientTVA(verifySiren('880878145'), useCache);
     case 'api-recherche':

@@ -7,7 +7,7 @@ import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
 import { IAssociation } from '#models/index';
 import { isTwoMonthOld } from '#utils/helpers/checks';
-import { formatIntFr } from '#utils/helpers/formatting';
+import { formatDate, formatIntFr } from '#utils/helpers/formatting';
 
 const AssociationSection: React.FC<{
   uniteLegale: IAssociation;
@@ -17,18 +17,52 @@ const AssociationSection: React.FC<{
       idAssociation = '',
       nomComplet = '',
       objet = '',
-      adresse = '',
+      adresseGestion = '',
+      adresseSiege = '',
+      libelleFamille = '',
+      formeJuridique = '',
+      datePublicationJournalOfficiel = '',
+      dateCreation = '',
+      dateDissolution,
+      telephone,
+      mail,
+      siteWeb,
+      agrement = [],
+      eligibiliteCEC,
     },
   } = uniteLegale;
 
   const data = [
     ['N° RNA (identifiant d’association)', formatIntFr(idAssociation)],
     ['Nom', nomComplet],
+    ['Famille', libelleFamille],
     ['Objet', objet],
-    ['Adresse', adresse],
+    ['Forme juridique', formeJuridique],
+    [
+      'Date de publication au journal officiel',
+      formatDate(datePublicationJournalOfficiel),
+    ],
+    ['Date de création', formatDate(dateCreation)],
+    ...(dateDissolution && dateDissolution > dateCreation
+      ? [['Date dissolution', formatDate(dateDissolution)]]
+      : []),
+    ['Adresse du siège', adresseSiege],
+    ['Adresse de gestion', adresseGestion],
+    ['Téléphone', telephone],
+    ['Email', mail],
+    ['Site web', siteWeb],
+    [
+      'Agrement admininstratif',
+      <ul>
+        {agrement.map((agr) => {
+          return <li>{agr.attributeur}</li>;
+        })}
+      </ul>,
+    ],
+    ['Eligible CEC', eligibiliteCEC ? 'Oui' : 'Non'],
   ];
 
-  const notInRna = !nomComplet && !objet && !adresse;
+  const notInRna = !nomComplet && !objet && !adresseSiege;
 
   return (
     <>
