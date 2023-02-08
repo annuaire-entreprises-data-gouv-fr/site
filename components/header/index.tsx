@@ -29,6 +29,14 @@ export const Header: React.FC<IProps> = ({
 }) => (
   <>
     <header role="banner" className="fr-header">
+      <div
+        id="loader-bar"
+        style={{
+          background: isLoggedIn(session)
+            ? constants.colors.espaceAgent
+            : 'transparent',
+        }}
+      />
       <PrintNever>
         <form
           id="search-bar-form"
@@ -78,6 +86,9 @@ export const Header: React.FC<IProps> = ({
                             className="fr-link"
                             href="/api/auth/mon-compte-pro/logout"
                           >
+                            <div style={{ fontVariant: 'small-caps' }}>
+                              espace agent public
+                            </div>
                             <Icon slug="user">
                               Se déconnecter (
                               {session?.user?.email || 'Utilisateur inconnu'})
@@ -108,13 +119,6 @@ export const Header: React.FC<IProps> = ({
               isMap={useMap}
             />
           ) : null}
-          {isLoggedIn(session) && (
-            <div className="with-session-banner">
-              <div className="fr-container">
-                <b>Espace agent public</b>
-              </div>
-            </div>
-          )}
         </form>
       </PrintNever>
     </header>
@@ -148,6 +152,16 @@ export const Header: React.FC<IProps> = ({
         color: #fff;
         font-size: 2rem;
         line-height: 3rem;
+      }
+
+      #loader-bar {
+        transition: width 150ms ease-in-out;
+        width: 100%;
+        height: 3px;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        position: absolute;
       }
 
       @media print {
