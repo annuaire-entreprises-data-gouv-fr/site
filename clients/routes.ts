@@ -73,10 +73,6 @@ const routes = {
     },
   },
   association: 'https://siva-integ1.cegedim.cloud/apim/api-asso/api/structure/',
-  rna: {
-    id: 'https://entreprise.data.gouv.fr/api/rna/v1/id/',
-    siren: 'https://entreprise.data.gouv.fr/api/rna/v1/siret/',
-  },
   rncs: {
     portail: {
       account: 'https://data.inpi.fr/register',

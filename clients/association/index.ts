@@ -1,13 +1,12 @@
+import { fetchAssociation } from '#clients/api-proxy';
 import routes from '#clients/routes';
 import { formatAdresse, IdRna } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 import { IAssociationResponse } from './interfaces';
 
-const clientAssociation = async (numeroRna: IdRna, useCache = true) => {
-  const route = `${routes.association}${numeroRna}`;
-  const response = await httpGet(route, {}, useCache);
-
-  return mapToDomainObject(numeroRna, response.data as IAssociationResponse);
+const clientAssociation = async (numeroRna: IdRna) => {
+  const response = await fetchAssociation(numeroRna);
+  return mapToDomainObject(numeroRna, response as IAssociationResponse);
 };
 
 const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
@@ -15,12 +14,14 @@ const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
     activites: { objet, lib_famille1 },
     identite: {
       nom,
-      id_ex,
+      id_ex = '',
       lib_forme_juridique,
       date_pub_jo,
       date_creat,
       date_dissolution,
       eligibilite_cec,
+      regime,
+      util_publique,
     },
     coordonnees: {
       adresse_siege: { num_voie, type_voie, cp, commune, voie },
@@ -36,6 +37,7 @@ const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
     },
     agrement,
   } = association;
+
   return {
     id: idRna,
     exId: id_ex,
@@ -50,6 +52,8 @@ const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
       dateAttribution: agr.date_attribution,
     })),
     formeJuridique: lib_forme_juridique,
+    utilPublique: util_publique,
+    regime,
     datePublicationJournalOfficiel: date_pub_jo,
     dateCreation: date_creat,
     dateDissolution: date_dissolution,

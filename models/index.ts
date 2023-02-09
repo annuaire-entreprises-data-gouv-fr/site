@@ -169,6 +169,8 @@ export interface IAssociation extends Omit<IUniteLegale, 'association'> {
     libelleFamille?: string;
     mail?: string;
     siteWeb?: string;
+    utilPublique?: boolean;
+    regime?: string;
     agrement?: {
       type?: string;
       numero?: string;

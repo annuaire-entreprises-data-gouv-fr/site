@@ -21,6 +21,8 @@ const AssociationSection: React.FC<{
       adresseSiege = '',
       libelleFamille = '',
       formeJuridique = '',
+      regime = '',
+      utilPublique = false,
       datePublicationJournalOfficiel = '',
       dateCreation = '',
       dateDissolution,
@@ -37,7 +39,12 @@ const AssociationSection: React.FC<{
     ['Nom', nomComplet],
     ['Famille', libelleFamille],
     ['Objet', objet],
-    ['Forme juridique', formeJuridique],
+    [
+      'Forme juridique',
+      `${regime}, ${formeJuridique} ${
+        utilPublique ? ", reconnue d'utilité publique" : ''
+      }`,
+    ],
     [
       'Date de publication au journal officiel',
       formatDate(datePublicationJournalOfficiel),
@@ -48,14 +55,24 @@ const AssociationSection: React.FC<{
       : []),
     ['Adresse du siège', adresseSiege],
     ['Adresse de gestion', adresseGestion],
-    ['Téléphone', telephone],
-    ['Email', mail],
+    ['Téléphone', <a href={`tel:${telephone}`}>{telephone}</a>],
+    ['Email', <a href={`mailto:${mail}`}>{mail}</a>],
     ['Site web', siteWeb],
     [
       'Agrement admininstratif',
       <ul>
         {agrement.map((agr) => {
-          return <li>{agr.attributeur}</li>;
+          return (
+            <>
+              <li>
+                <b>{agr.type}</b>
+              </li>
+              <ul>
+                <li>Attributeur : {agr.attributeur}</li>
+                <li>Date attribution : {formatDate(agr.dateAttribution)}</li>
+              </ul>
+            </>
+          );
         })}
       </ul>,
     ],
@@ -92,13 +109,15 @@ const AssociationSection: React.FC<{
         )}
         <TwoColumnTable body={data} />
         <br />
-        Pour en savoir plus,{' '}
+        Retrouver plus d&apos;informations sur la{' '}
         <a
+          target="_blank"
           href={`https://www.data-asso.fr/annuaire/association/${idAssociation}`}
+          rel="noreferrer"
         >
-          consultez la fiche identité de cette association
+          fiche de cette association
         </a>{' '}
-        sur{' '}
+        (comptes, effectifs et documents) sur{' '}
         <a
           target="_blank"
           rel="noreferrer noopener"
