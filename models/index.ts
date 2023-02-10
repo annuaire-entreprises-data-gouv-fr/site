@@ -1,5 +1,4 @@
 /** COMMON TYPES */
-
 import {
   createEtablissementsList,
   IEtablissementsList,
@@ -166,7 +165,27 @@ export interface IAssociation extends Omit<IUniteLegale, 'association'> {
     exId?: string;
     nomComplet?: string;
     objet?: string;
-    adresse?: string;
+    telephone?: string;
+    libelleFamille?: string;
+    mail?: string;
+    siteWeb?: string;
+    utilPublique?: boolean;
+    regime?: string;
+    agrement?: {
+      type?: string;
+      numero?: string;
+      niveau?: string;
+      attributeur?: string;
+      id?: number;
+      dateAttribution?: string;
+    }[];
+    formeJuridique?: string;
+    datePublicationJournalOfficiel?: string;
+    dateCreation?: string;
+    dateDissolution?: string;
+    eligibiliteCEC?: boolean;
+    adresseSiege?: string;
+    adresseGestion?: string;
     adresseInconsistency?: boolean;
   };
 }

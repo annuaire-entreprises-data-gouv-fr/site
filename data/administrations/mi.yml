@@ -4,14 +4,17 @@ long: Ministère de l’Intérieur (MI)
 site: https://www.interieur.gouv.fr/
 contact: https://www.interieur.gouv.fr/Infos-du-site/Nous-contacter
 apiMonitors:
-  - apigouvLink: https://api.gouv.fr/les-api/api_rna
+  - apiName: API Association
     datagouv:
-      - label: Répertoire National des Associations (RNA)
+      - label: Répertoire National des Associations
         link: https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/
-    apiName: API Répertoire National des Associations
-    id: 788061105
+    id: 793681421
     data:
       - N° RNA
-      - Informations générales des associations dotées d’un SIRET
+      - agréments administratifs
+      - éligibilité CEC
+      - informations de contact (email, site web, téléphone)
+      - association d'intérêt public
+      - régime d’association
 description: |
   Le ministère de l’interieur publie toutes les données des associations enregistrées dans le [Répertoire National des Associations (RNA). Le RNA remplace depuis 2010 le répertoire Waldec (Web des associations librement déclarées).

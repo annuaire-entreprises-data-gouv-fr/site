@@ -1,12 +1,12 @@
+import { clientAssociation } from '#clients/association';
 import clientSearchSireneOuverte from '#clients/recherche-entreprise';
-import { clientRNA } from '#clients/rna';
-import { fetchRNCSImmatriculationNoCache } from '#clients/rncs';
 import { clientRNM } from '#clients/rnm';
 import { clientUniteLegaleInseeNoCache } from '#clients/sirene-insee/siren';
 import clientUniteLegaleSireneOuverte from '#clients/sirene-ouverte/siren';
 import clientSiret2Idcc from '#clients/siret-2-idcc';
 import { clientTVA } from '#clients/tva';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
+import { fetchRNCSImmatriculationNoCache } from './api-proxy';
 
 export class APISlugNotFound extends Error {
   constructor(public status: number, public message: string) {
@@ -28,8 +28,8 @@ const ping = async (slug: string | string[]) => {
       return await clientUniteLegaleInseeNoCache(verifySiren('880878145'));
     case 'api-sirene-donnees-ouvertes':
       return await clientUniteLegaleSireneOuverte(verifySiren('880878145'));
-    case 'api-rna':
-      return await clientRNA(verifyIdRna('W551000280'), useCache);
+    case 'api-association':
+      return await clientAssociation(verifyIdRna('W551000280'));
     case 'api-tva':
       return await clientTVA(verifySiren('880878145'), useCache);
     case 'api-recherche':
