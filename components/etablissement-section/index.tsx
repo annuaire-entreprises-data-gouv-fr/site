@@ -51,11 +51,11 @@ const EtablissementSection: React.FC<IProps> = ({
           ],
         ]
       : []),
-    ...(etablissement.denomination
-      ? [['Nom de l’établissement', etablissement.denomination]]
-      : []),
     ...(etablissement.enseigne
       ? [['Enseigne de l’établissement', etablissement.enseigne]]
+      : []),
+    ...(etablissement.denomination
+      ? [['Nom de l’établissement', etablissement.denomination]]
       : []),
     [
       <FAQLink to="/faq/modifier-adresse" tooltipLabel="Adresse">
