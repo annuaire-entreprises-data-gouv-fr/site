@@ -15,5 +15,11 @@ apiMonitors:
       - Immatriculations et radiations des sociétés
       - Dirigeants
       - Bénéficiaires effectifs (RBE)
+  - apiName: API Registre National des Entreprises
+    id: 793687425
+    data:
+      - Créations, Modifications, cessations
+      - Dirigeants
+      - Bénéficiaires effectifs (RBE)
 description: |
   L’INPI est l’Institut National de la Protection Intellectuelle. C’est un établissement public à caractère administratif,  qui relève du ministère de l’Économie.

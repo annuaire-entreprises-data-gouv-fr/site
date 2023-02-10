@@ -8,11 +8,36 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
   immatriculationRNM,
   immatriculationRNCS,
   immatriculationJOAFE,
+  immatriculationRNE,
 }) => {
   return (
     <>
       Cette structure est :
       <ul>
+        {immatriculationRNE && !isAPINotResponding(immatriculationRNE) && (
+          <li>
+            {!!immatriculationRNE.identite?.dateRadiation ? (
+              <a href="#rncs">
+                <b>Radiée</b> du Registre du Commerce et des Sociétés (RCS),
+                depuis le{' '}
+                {formatDateLong(immatriculationRNE.identite.dateRadiation)}
+              </a>
+            ) : (
+              <a href="#rne">
+                <b>Inscrite</b> au Registre National des Entreprises (RNE)
+                {!!immatriculationRNE.identite?.dateImmatriculation && (
+                  <>
+                    , depuis le{' '}
+                    {formatDateLong(
+                      immatriculationRNE.identite?.dateImmatriculation
+                    )}
+                  </>
+                )}
+              </a>
+            )}
+          </li>
+        )}
+
         {immatriculationJOAFE && !isAPINotResponding(immatriculationJOAFE) && (
           <li>
             <a href="#joafe">

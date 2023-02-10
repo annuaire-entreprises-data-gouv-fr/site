@@ -22,6 +22,7 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
   immatriculationRNM,
   immatriculationRNCS,
   immatriculationJOAFE,
+  immatriculationRNE,
   metadata: { session },
 }) => (
   <>
@@ -42,6 +43,7 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
         immatriculationRNM={immatriculationRNM}
         immatriculationRNCS={immatriculationRNCS}
         immatriculationJOAFE={immatriculationJOAFE}
+        immatriculationRNE={immatriculationRNE}
         uniteLegale={uniteLegale}
       />
     </div>

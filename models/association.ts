@@ -1,4 +1,4 @@
-import { clientAssociation } from '#clients/association';
+import { clientAssociation } from '#clients/api-proxy/association';
 import { clientBanGeoLoc } from '#clients/base-adresse';
 import { HttpNotFound } from '#clients/exceptions';
 import { escapeTerm, verifyIdRna } from '#utils/helpers';

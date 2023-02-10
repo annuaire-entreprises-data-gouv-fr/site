@@ -1,9 +1,17 @@
-import { fetchAssociation } from '#clients/api-proxy';
+import routes from '#clients/routes';
 import { formatAdresse, IdRna } from '#utils/helpers';
+import { clientAPIProxy } from '../client';
 import { IAssociationResponse } from './interfaces';
 
-const clientAssociation = async (numeroRna: IdRna) => {
-  const response = await fetchAssociation(numeroRna);
+/**
+ * Association through the API proxy
+ * @param idRna
+ */
+const clientAssociation = async (numeroRna: IdRna, useCache = true) => {
+  const response = await clientAPIProxy(
+    routes.association + numeroRna,
+    useCache
+  );
   return mapToDomainObject(numeroRna, response as IAssociationResponse);
 };
 

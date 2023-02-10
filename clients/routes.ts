@@ -73,6 +73,14 @@ const routes = {
     },
   },
   association: 'https://rncs-proxy.api.gouv.fr/association/',
+  rne: {
+    portail: {
+      pdf: 'https://data.inpi.fr/export/companies',
+    },
+    proxy: {
+      rne: 'https://rncs-proxy.api.gouv.fr/rne/',
+    },
+  },
   rncs: {
     portail: {
       account: 'https://data.inpi.fr/register',

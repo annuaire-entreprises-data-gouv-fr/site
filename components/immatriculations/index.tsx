@@ -12,6 +12,7 @@ import {
 import { IImmatriculation } from '#models/immatriculation';
 import { isAssociation } from '#models/index';
 import { IJustificatifs } from '#models/justificatifs';
+import ImmatriculationRNE from './rne';
 
 const isNotFound = (
   immatriculation: IImmatriculation | IAPINotRespondingError
@@ -25,6 +26,7 @@ const Immatriculations: React.FC<IJustificatifs> = ({
   immatriculationRNM,
   immatriculationRNCS,
   immatriculationJOAFE,
+  immatriculationRNE,
   uniteLegale,
 }) => {
   const isAnAssociation = isAssociation(uniteLegale);
@@ -46,6 +48,7 @@ const Immatriculations: React.FC<IJustificatifs> = ({
         immatriculationRNM={immatriculationRNM}
         immatriculationRNCS={immatriculationRNCS}
         immatriculationJOAFE={immatriculationJOAFE}
+        immatriculationRNE={immatriculationRNE}
         uniteLegale={uniteLegale}
       />
       {noImmatriculation ? (
@@ -58,6 +61,10 @@ const Immatriculations: React.FC<IJustificatifs> = ({
           {isAnAssociation && (
             <ImmatriculationJOAFE immatriculation={immatriculationJOAFE} />
           )}
+          <ImmatriculationRNE
+            immatriculation={immatriculationRNE}
+            uniteLegale={uniteLegale}
+          />
           <ImmatriculationRNM
             immatriculation={immatriculationRNM}
             uniteLegale={uniteLegale}
