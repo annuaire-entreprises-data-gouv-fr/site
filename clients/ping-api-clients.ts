@@ -28,7 +28,7 @@ const ping = async (slug: string | string[]) => {
       return await clientUniteLegaleInseeNoCache(verifySiren('880878145'));
     case 'api-sirene-donnees-ouvertes':
       return await clientUniteLegaleSireneOuverte(verifySiren('880878145'));
-    case 'api-rna':
+    case 'api-association':
       return await clientAssociation(verifyIdRna('W551000280'));
     case 'api-tva':
       return await clientTVA(verifySiren('880878145'), useCache);

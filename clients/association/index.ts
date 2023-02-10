@@ -1,7 +1,5 @@
 import { fetchAssociation } from '#clients/api-proxy';
-import routes from '#clients/routes';
 import { formatAdresse, IdRna } from '#utils/helpers';
-import { httpGet } from '#utils/network';
 import { IAssociationResponse } from './interfaces';
 
 const clientAssociation = async (numeroRna: IdRna) => {
@@ -11,29 +9,35 @@ const clientAssociation = async (numeroRna: IdRna) => {
 
 const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
   const {
-    activites: { objet, lib_famille1 },
+    activites: { objet = '', lib_famille1 = '' },
     identite: {
-      nom,
+      nom = '',
       id_ex = '',
-      lib_forme_juridique,
-      date_pub_jo,
-      date_creat,
-      date_dissolution,
-      eligibilite_cec,
-      regime,
-      util_publique,
+      lib_forme_juridique = '',
+      date_pub_jo = '',
+      date_creat = '',
+      date_dissolution = '',
+      eligibilite_cec = false,
+      regime = '',
+      util_publique = false,
     },
     coordonnees: {
-      adresse_siege: { num_voie, type_voie, cp, commune, voie },
-      adresse_gestion: {
-        commune: communeGestion,
-        cp: cpGestion,
-        pays: paysGestion,
-        voie: voieGestion,
+      adresse_siege: {
+        num_voie = '',
+        type_voie = '',
+        cp = '',
+        commune = '',
+        voie = '',
       },
-      telephone,
-      courriel,
-      site_web,
+      adresse_gestion: {
+        commune: communeGestion = '',
+        cp: cpGestion = '',
+        pays: paysGestion = '',
+        voie: voieGestion = '',
+      },
+      telephone = '',
+      courriel = '',
+      site_web = '',
     },
     agrement,
   } = association;

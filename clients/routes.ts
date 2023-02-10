@@ -72,7 +72,7 @@ const routes = {
       },
     },
   },
-  association: 'https://siva-integ1.cegedim.cloud/apim/api-asso/api/structure/',
+  association: 'https://rncs-proxy.api.gouv.fr/association/',
   rncs: {
     portail: {
       account: 'https://data.inpi.fr/register',

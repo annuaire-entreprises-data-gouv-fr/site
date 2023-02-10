@@ -39,12 +39,16 @@ const AssociationSection: React.FC<{
     ['Nom', nomComplet],
     ['Famille', libelleFamille],
     ['Objet', objet],
-    [
-      'Forme juridique',
-      `${regime}, ${formeJuridique} ${
-        utilPublique ? ", reconnue d'utilité publique" : ''
-      }`,
-    ],
+    ...(regime
+      ? [
+          [
+            'Forme juridique',
+            `${regime}, ${formeJuridique} ${
+              utilPublique ? ", reconnue d'utilité publique" : ''
+            }`,
+          ],
+        ]
+      : []),
     [
       'Date de publication au journal officiel',
       formatDate(datePublicationJournalOfficiel),
@@ -57,7 +61,7 @@ const AssociationSection: React.FC<{
     ['Adresse de gestion', adresseGestion],
     ['Téléphone', <a href={`tel:${telephone}`}>{telephone}</a>],
     ['Email', <a href={`mailto:${mail}`}>{mail}</a>],
-    ['Site web', siteWeb],
+    ['Site web', <a href={siteWeb}>{siteWeb}</a>],
     [
       'Agrement admininstratif',
       <ul>
@@ -112,7 +116,7 @@ const AssociationSection: React.FC<{
         Retrouver plus d&apos;informations sur la{' '}
         <a
           target="_blank"
-          href={`https://www.data-asso.fr/annuaire/association/${idAssociation}`}
+          href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
           rel="noreferrer"
         >
           fiche de cette association
