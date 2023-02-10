@@ -20,10 +20,10 @@ const ping = async (slug: string | string[]) => {
   switch (slug) {
     case 'api-proxy-rncs':
       // fetch IRM and disable cache
-      return await fetchRNCSImmatriculation(verifySiren('880878145'), useCache);
+      return await fetchRNCSImmatriculation(verifySiren('552032534'), useCache);
     case 'api-proxy-rne':
       // fetch IRM and disable cache
-      return await fetchRNEImmatriculation(verifySiren('880878145'), useCache);
+      return await fetchRNEImmatriculation(verifySiren('552032534'), useCache);
     case 'api-rnm':
       return await clientRNM(verifySiren('824024350'));
     case 'api-conventions-collectives':
