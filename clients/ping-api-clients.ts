@@ -7,6 +7,7 @@ import clientSiret2Idcc from '#clients/siret-2-idcc';
 import { clientTVA } from '#clients/tva';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
 import { fetchRNCSImmatriculation } from './api-proxy/rncs';
+import { fetchRNEImmatriculation } from './api-proxy/rne';
 
 export class APISlugNotFound extends Error {
   constructor(public status: number, public message: string) {
@@ -20,6 +21,9 @@ const ping = async (slug: string | string[]) => {
     case 'api-proxy-rncs':
       // fetch IRM and disable cache
       return await fetchRNCSImmatriculation(verifySiren('880878145'), useCache);
+    case 'api-proxy-rne':
+      // fetch IRM and disable cache
+      return await fetchRNEImmatriculation(verifySiren('880878145'), useCache);
     case 'api-rnm':
       return await clientRNM(verifySiren('824024350'));
     case 'api-conventions-collectives':
