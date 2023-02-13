@@ -3,7 +3,8 @@ import { administrationsMetaData } from '#models/administrations';
 
 const AdministrationDescription: React.FC<{
   slug: string; // EAdministration
-}> = ({ slug }) => {
+  titleLevel?: 'h2' | 'h3';
+}> = ({ slug, titleLevel = 'h2' }) => {
   const { description, contact, long, apiMonitors, logoType } =
     administrationsMetaData[slug];
   return (
@@ -12,7 +13,7 @@ const AdministrationDescription: React.FC<{
         {logoType && <Logo title={long} slug={slug} width={80} height={80} />}
       </div>
       <div>
-        <h2>{long}</h2>
+        {titleLevel === 'h2' ? <h2>{long}</h2> : <h3>{long}</h3>}
         <p>
           {description}
           <br />

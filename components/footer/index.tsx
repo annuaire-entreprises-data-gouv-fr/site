@@ -2,10 +2,93 @@ import React from 'react';
 import Logo from '#components-ui/logo';
 import { PrintNever } from '#components-ui/print-visibility';
 import { administrationsMetaData } from '#models/administrations';
+import { getAllLandingPages } from '#models/landing-pages';
 
 const Footer = () => (
-  <footer className="fr-footer" role="contentinfo" id="footer">
-    <PrintNever>
+  <PrintNever>
+    <footer className="fr-footer" role="contentinfo" id="footer">
+      <div className="fr-footer__top">
+        <div className="fr-container">
+          <div className="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
+            <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
+              <h3 className="fr-footer__top-cat">
+                Vérifier les informations légales d’une entreprise
+              </h3>
+              <ul className="fr-footer__top-list">
+                {getAllLandingPages().map(({ slug, footerLabel }) => (
+                  <li>
+                    <a
+                      className="fr-footer__top-link"
+                      href={`/rechercher/lp/${slug}`}
+                    >
+                      {footerLabel}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
+              <h3 className="fr-footer__top-cat">
+                Consulter la liste officielle des entreprises françaises
+              </h3>
+              <ul className="fr-footer__top-list">
+                <li>
+                  <a
+                    className="fr-footer__top-link"
+                    href="/departements/index.html"
+                  >
+                    Entreprises françaises par département
+                  </a>
+                </li>
+              </ul>
+              <br />
+              <h3 className="fr-footer__top-cat">Aide</h3>
+              <ul className="fr-footer__top-list">
+                <li>
+                  <a className="fr-footer__top-link" href="/faq">
+                    Questions fréquentes
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/partager">
+                    Réutiliser & partager
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/sources-de-donnees">
+                    Sources de données & statut des API
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
+              <h3 className="fr-footer__top-cat">Annuaire des Entreprises</h3>
+              <ul className="fr-footer__top-list">
+                <li>
+                  <a className="fr-footer__top-link" href="/administration">
+                    Administrations partenaires
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/stats">
+                    Statistiques
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="fr-footer__top-link"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href="https://github.com/etalab/annuaire-entreprises-site"
+                  >
+                    Code source
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="fr-container">
         <div className="fr-footer__body">
           <div className="fr-footer__brand">
@@ -36,7 +119,7 @@ const Footer = () => (
               >
                 Direction Interministérielle du Numérique
               </a>
-              )&nbsp;et la&nbsp;
+              &nbsp;et la&nbsp;
               <a
                 href="https://entreprises.gouv.fr"
                 rel="noopener noreferrer"
@@ -107,7 +190,7 @@ const Footer = () => (
             <div className="fr-footer__partners-sub">
               <ul>
                 {Object.values(administrationsMetaData).map(
-                  ({ slug, logoType, long, site }) =>
+                  ({ slug, logoType, long }) =>
                     logoType && (
                       <li key={long}>
                         <a
@@ -142,16 +225,6 @@ const Footer = () => (
         <div className="fr-footer__bottom">
           <ul className="fr-footer__bottom-list">
             <li className="fr-footer__bottom-item">
-              <a
-                className="fr-footer__bottom-link"
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://github.com/etalab/annuaire-entreprises-site"
-              >
-                Code source
-              </a>
-            </li>
-            <li className="fr-footer__bottom-item">
               <a className="fr-footer__bottom-link" href="/vie-privee">
                 Vie privée & cookies
               </a>
@@ -175,41 +248,6 @@ const Footer = () => (
               </a>
             </li>
           </ul>
-          <ul className="fr-footer__bottom-list">
-            <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/faq">
-                FAQ
-              </a>
-            </li>
-            <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/partager">
-                Réutilisations & partage
-              </a>
-            </li>
-            <li className="fr-footer__bottom-item">
-              <a
-                className="fr-footer__bottom-link"
-                href="/departements/index.html"
-              >
-                Personnes morales par départements
-              </a>
-            </li>
-            <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/administration">
-                Administrations partenaires
-              </a>
-            </li>
-            <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/sources-de-donnees">
-                Sources de données & statut des API
-              </a>
-            </li>
-            <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/stats">
-                Statistiques
-              </a>
-            </li>
-          </ul>
           <div className="fr-footer__bottom-copy">
             <p>
               Sauf mention contraire, tous les textes de ce site sont sous{' '}
@@ -224,15 +262,8 @@ const Footer = () => (
           </div>
         </div>
       </div>
-      <style jsx>{`
-        @media print {
-          .fr-footer {
-            display: none !important;
-          }
-        }
-      `}</style>
-    </PrintNever>
-  </footer>
+    </footer>
+  </PrintNever>
 );
 
 export default Footer;

@@ -1,3 +1,17 @@
+export const diamond = (
+  <svg
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 53 61"
+    width="100"
+    height="100"
+  >
+    <path
+      d="m26.5 0 26.4 15.3v30.4L26.5 61 .1 45.7V15.3L26.5 0Z"
+      fill="currentColor"
+    />
+  </svg>
+);
 /**
  * Render website's logo using a mix of SVG and text, SEO good practises
  *
@@ -5,18 +19,7 @@
  */
 export const HomeH1 = () => (
   <div className="home-h1">
-    <svg
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 53 61"
-      width="100"
-      height="100"
-    >
-      <path
-        d="m26.5 0 26.4 15.3v30.4L26.5 61 .1 45.7V15.3L26.5 0Z"
-        fill="#E8EDFF"
-      />
-    </svg>
+    <span>{diamond}</span>
     <h1>
       L’<b>Annuaire</b> des
       <br />
@@ -34,11 +37,12 @@ export const HomeH1 = () => (
           align-items: center;
           position: relative;
         }
-        .home-h1 > svg {
+        .home-h1 > span {
           position: absolute;
           z-index: 0;
           left: 0;
           top: 0;
+          color: #e8edff;
         }
         .home-h1 > h1 {
           position: absolute;
