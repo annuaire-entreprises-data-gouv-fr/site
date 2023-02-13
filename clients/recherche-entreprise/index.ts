@@ -11,86 +11,16 @@ import {
 } from '#models/index';
 import { ISearchResult, ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
-import {
-  verifySiren,
-  formatFirstNames,
-  parseIntWithDefaultValue,
-  verifySiret,
-} from '#utils/helpers';
+import { verifySiren, formatFirstNames, verifySiret } from '#utils/helpers';
 import { libelleFromCodeNAFWithoutNomenclature } from '#utils/labels';
 import { httpGet } from '#utils/network';
-
-interface ISirenOuverteEtablissement {
-  activite_principale: string;
-  adresse: string;
-  code_postal: string;
-  est_siege: boolean;
-  etat_administratif: string;
-  geo_id: string;
-  latitude: string;
-  liste_enseignes: string[];
-  liste_finess: [];
-  liste_idcc: [];
-  liste_rge: [];
-  liste_uai: [];
-  longitude: string;
-  nom_commercial: string;
-  siret: string;
-}
-
-interface ISireneOuverteUniteLegaleResultat {
-  siren: string;
-  siege: ISirenOuverteEtablissement;
-  date_creation: string;
-  categorie_entreprise: string;
-  etat_administratif: string;
-  nom_raison_sociale: string;
-  nature_juridique: string;
-  activite_principale: string;
-  economie_sociale_solidaire: string;
-  nom_complet: string;
-  nombre_etablissements: number;
-  nombre_etablissements_ouverts: number;
-  is_entrepreneur_individuel: true;
-  dirigeants: ISireneOuverteDirigeant[];
-  complements: {
-    identifiant_association: string;
-    convention_collective_renseignee: boolean;
-    est_entrepreneur_individuel: boolean;
-    est_entrepreneur_spectacle: boolean;
-    est_ess: boolean;
-    est_finess: boolean;
-    est_rge: boolean;
-    est_uai: boolean;
-    collectivite_territoriale: {
-      code: string;
-      code_insee: string;
-      elus: ISirenOuverteEtablissement[];
-      niveau: string;
-    };
-  };
-  matching_etablissements: ISirenOuverteEtablissement[];
-}
-
-interface ISireneOuverteDirigeant {
-  prenoms?: string;
-  nom?: string;
-  annee_de_naissance?: string;
-  qualite?: string;
-  fonction?: string;
-  sexe?: string;
-  siren?: string;
-  denomination?: string;
-  sigle?: string;
-}
-
-interface ISireneOuverteSearchResults {
-  page: string;
-  total_results: number;
-  total_pages: number;
-  currentPage?: string;
-  results: ISireneOuverteUniteLegaleResultat[];
-}
+import {
+  SearchResponse,
+  Result,
+  Siege,
+  MatchingEtablissement,
+  Dirigeant,
+} from './interface';
 
 /**
  * Get results for searchTerms from Sirene ouverte API
@@ -133,34 +63,26 @@ const clientSearchSireneOuverte = async (
     useCache
   );
 
-  const results = (response.data || []) as any;
+  const results = response.data as SearchResponse;
 
-  if (
-    results.length === 0 ||
-    !results.results ||
-    results.results.length === 0
-  ) {
+  if (!results.results || results.results.length === 0) {
     throw new HttpNotFound('No results');
   }
   return mapToDomainObjectNew(results);
 };
 
-const mapToDomainObjectNew = (
-  data: ISireneOuverteSearchResults
-): ISearchResults => {
+const mapToDomainObjectNew = (data: SearchResponse): ISearchResults => {
   const { total_results = 0, total_pages = 0, results = [], page } = data;
 
   return {
-    currentPage: page ? parseIntWithDefaultValue(page) : 1,
+    currentPage: page || 1,
     resultCount: total_results,
     pageCount: total_pages,
     results: results.map(mapToUniteLegale),
   };
 };
 
-const mapToUniteLegale = (
-  result: ISireneOuverteUniteLegaleResultat
-): ISearchResult => {
+const mapToUniteLegale = (result: Result): ISearchResult => {
   const {
     nature_juridique,
     siege,
@@ -195,7 +117,7 @@ const mapToUniteLegale = (
     ...createDefaultUniteLegale(siren),
     siege: mapToEtablissement(siege),
     matchingEtablissements: matching_etablissements
-      .map((e) => mapToEtablissement(e))
+      .map((matchingEtablissement) => mapToEtablissement(matchingEtablissement))
       .filter((e) => e.siret !== siege.siret),
     etatAdministratif: etatFromEtatAdministratifInsee(
       result.etat_administratif,
@@ -227,7 +149,7 @@ const mapToUniteLegale = (
 };
 
 const mapToDirigeantModel = (
-  dirigeantRaw: ISireneOuverteDirigeant
+  dirigeant: Dirigeant
 ): IEtatCivil | IPersonneMorale => {
   const {
     siren = '',
@@ -235,9 +157,9 @@ const mapToDirigeantModel = (
     denomination = '',
     prenoms = '',
     nom = '',
-    // annee_de_naissance = '',
     qualite = '',
-  } = dirigeantRaw;
+  } = dirigeant;
+
   if (!!siren) {
     return {
       siren,
@@ -272,7 +194,7 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
 };
 
 const mapToEtablissement = (
-  etablissement: ISirenOuverteEtablissement
+  etablissement: Siege | MatchingEtablissement
 ): IEtablissement => {
   const {
     siret,
