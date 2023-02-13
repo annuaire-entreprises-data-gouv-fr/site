@@ -45,16 +45,15 @@ const getImmatriculationRNE = async (
 ): Promise<IAPINotRespondingError | IImmatriculationRNE> => {
   try {
     // fetch IMR and use cache
-    const { identite = null, metadata } = await fetchRNEImmatriculation(siren);
-
     return {
       siren,
       downloadLink: `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`,
       siteLink: `${routes.rncs.portail.entreprise}${siren}`,
       metadata: { isFallback: false },
+      identite: null,
     };
     // fetch IMR and use cache
-    // const { identite, metadata } = await fetchRNEImmatriculation(siren);
+    // const { identite = null, metadata } = await fetchRNEImmatriculation(siren);
 
     // return {
     //   siren,
