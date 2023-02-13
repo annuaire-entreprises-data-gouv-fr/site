@@ -1,6 +1,6 @@
+import { clientAssociation } from '#clients/api-proxy/association';
 import { clientBanGeoLoc } from '#clients/base-adresse';
 import { HttpNotFound } from '#clients/exceptions';
-import { clientRNA } from '#clients/rna';
 import { escapeTerm, verifyIdRna } from '#utils/helpers';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import { IAssociation, IUniteLegale, NotAValidIdRnaError } from '.';
@@ -20,7 +20,7 @@ const getAssociation = async (
 
   try {
     const idRna = verifyIdRna(slug);
-    const data = await clientRNA(idRna);
+    const data = await clientAssociation(idRna);
     uniteLegaleAsAssociation.association = {
       ...data,
       idAssociation: idRna,
@@ -42,7 +42,7 @@ const getAssociation = async (
       // no need to log warning or to make an api call, we know Id is not valid
       return uniteLegaleAsAssociation;
     } else {
-      logErrorInSentry('Error in API RNA', more);
+      logErrorInSentry('Error in API ASSOCIATION', more);
     }
     return uniteLegaleAsAssociation;
   }
@@ -59,7 +59,7 @@ const verifyAdressConsistency = async (association: IAssociation) => {
   try {
     const adressInsee = escapeTerm(association.siege.adresse.toLowerCase());
     const adressAssociation = escapeTerm(
-      (association.association.adresse || '').toLowerCase()
+      (association.association.adresseSiege || '').toLowerCase()
     );
     const hasDifferences = adressInsee !== adressAssociation;
 

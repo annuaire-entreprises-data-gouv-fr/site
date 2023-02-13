@@ -54,7 +54,6 @@ const button = (
         background-color: ${backgroundColor};
         color: ${fontColor};
         font-size:1rem;
-        padding: 7px;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -65,8 +64,7 @@ const button = (
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
-        padding-top: 15px;
-        padding-bottom: 15px;
+        padding: 15px;
       }
       .btn-container .img {
         width: 40px;
@@ -80,28 +78,30 @@ const button = (
         width: 100%;
         display: block;
       }
-      .btn-container .large {
-        font-size: 1.15rem;
+      .btn-container .label {
+        flex-grow:1;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 300px) {
+      .btn-container:hover {
+        background-color: ${light ? '#f0f0ff' : '#000060'};
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 355px) {
         html {
           font-size:14px;
           line-height:21px;
         }
         .btn-container {
-          padding-top:3px;
-          padding-bottom:3px;
+          padding:3px;
         }
       } 
-      @media only screen and (min-width: 300px) and (max-width: 350px) {
+      @media only screen and (min-width: 355px) and (max-width: 450px) {
         html {
-          font-size:16px;
+          font-size:15px;
           line-height:23px;
         }
         .btn-container {
-          padding-top:5px;
-          padding-bottom:5px;
+          padding:5px;
         }
       } 
     </style>
@@ -113,7 +113,8 @@ const button = (
           target="_blank"
           rel="noopener"
           class="btn-container"
-          ><div class="img">
+          >
+          <div class="img">
             <svg
               viewBox="0 0 196 196"
               fill="none"
@@ -147,13 +148,10 @@ const button = (
               </defs>
             </svg>
           </div>
-          <div>
-            <div >Voir plus d’informations sur</div>
-            <div class=" large">
-              L’Annuaire des Entreprises
-            </div>
-          </div></a
-        >
+          <div class="label">
+            Voir les <b>informations légales</b> sur
+            <div>l’<b>Annuaire</b> des <b>Entreprises</b></div>
+          </div></a>
       </div>
   </body>
 </html>

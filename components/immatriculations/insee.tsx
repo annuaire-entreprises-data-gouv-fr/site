@@ -77,7 +77,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
           situation utiliser,{' '}
           <AvisSituationLink
             siret={uniteLegale.siege.siret}
-            label="téléchargez celui du siège social"
+            label="téléchargez l’avis de situation Sirene du siège social"
           />
           .
         </p>

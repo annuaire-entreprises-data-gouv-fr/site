@@ -9,7 +9,7 @@ const ActiveFilterLabel: React.FC<{
   onClick: MouseEventHandler;
 }> = ({ label, icon, query, onClick }) => (
   <div className="selected-filter-container cursor-pointer">
-    <span onClick={onClick}>
+    <span onClick={onClick} className="layout-center">
       <Icon color={constants.colors.frBlue} slug={icon}>
         &nbsp;{label}
       </Icon>
@@ -21,7 +21,8 @@ const ActiveFilterLabel: React.FC<{
       .selected-filter-container {
         display: flex;
         align-items: center;
-        padding: 3px 30px 3px 10px;
+        padding: 5px 30px 5px 10px;
+        justify-content: center;
         color: ${constants.colors.frBlue};
         background-color: ${constants.colors.pastelBlue};
         border-radius: 3px;

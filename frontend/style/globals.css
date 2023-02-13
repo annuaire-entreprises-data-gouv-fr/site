@@ -116,7 +116,7 @@ p {
   margin: 20px 0;
 }
 
-@media only screen and (min-width: 1px) and (max-width: 600px) {
+@media only screen and (min-width: 1px) and (max-width: 576px) {
   h1 {
     font-size: 1.6rem;
     line-height: 2.2rem;

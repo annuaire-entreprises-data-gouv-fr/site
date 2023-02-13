@@ -105,7 +105,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           color: ${titleColor};
           padding: 0 7px;
           border-radius: 2px;
-          max-width: calc(100% - 40px);
+          max-width: calc(100% - 250px);
         }
 
         .administration-page-link {
@@ -128,9 +128,13 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           justify-content: end;
         }
 
-        @media only screen and (min-width: 1px) and (max-width: 750px) {
+        @media only screen and (min-width: 1px) and (max-width: 768px) {
           .section-logo-wrapper {
             display: none;
+          }
+
+          .section-container > h2 {
+            max-width: 100%;
           }
         }
       `}</style>

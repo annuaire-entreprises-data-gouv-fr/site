@@ -45,9 +45,8 @@ const SearchFilters: React.FC<{
       .filter((k) => k.length === 4)
       .map((categorie) => ({
         value: categorie,
-        label: `${categorie} - ${
-          categoriesJuridiques[categorie as keyof typeof categoriesJuridiques]
-        }`,
+        label:
+          categoriesJuridiques[categorie as keyof typeof categoriesJuridiques],
       }));
 
   return (
@@ -192,7 +191,7 @@ const SearchFilters: React.FC<{
           overflow: auto;
         }
 
-        @media only screen and (min-width: 1px) and (max-width: 991px) {
+        @media only screen and (min-width: 1px) and (max-width: 992px) {
           div.select {
             max-width: 100%;
           }

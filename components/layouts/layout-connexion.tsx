@@ -60,7 +60,7 @@ export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
           margin-bottom: 100px;
         }
 
-        @media only screen and (min-width: 1px) and (max-width: 699px) {
+        @media only screen and (min-width: 1px) and (max-width: 768px) {
           .connect-container {
             display: flex;
             flex-direction: column-reverse;

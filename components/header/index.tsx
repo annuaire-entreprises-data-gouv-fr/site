@@ -29,6 +29,14 @@ export const Header: React.FC<IProps> = ({
 }) => (
   <>
     <header role="banner" className="fr-header">
+      <div
+        id="loader-bar"
+        style={{
+          background: isLoggedIn(session)
+            ? constants.colors.espaceAgent
+            : 'transparent',
+        }}
+      />
       <PrintNever>
         <form
           id="search-bar-form"
@@ -78,6 +86,9 @@ export const Header: React.FC<IProps> = ({
                             className="fr-link"
                             href="/api/auth/mon-compte-pro/logout"
                           >
+                            <div style={{ fontVariant: 'small-caps' }}>
+                              espace agent public
+                            </div>
                             <Icon slug="user">
                               Se déconnecter (
                               {session?.user?.email || 'Utilisateur inconnu'})
@@ -108,19 +119,12 @@ export const Header: React.FC<IProps> = ({
               isMap={useMap}
             />
           ) : null}
-          {isLoggedIn(session) && (
-            <div className="with-session-banner">
-              <div className="fr-container">
-                <b>Espace agent public</b>
-              </div>
-            </div>
-          )}
         </form>
       </PrintNever>
     </header>
     <style jsx>{`
       ${!useSearchBar
-        ? `header.fr-header {
+        ? `header.fr-header, div.fr-header__brand {
         filter: none !important;
       }`
         : ''}
@@ -136,13 +140,6 @@ export const Header: React.FC<IProps> = ({
         flex-grow: 1;
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 991px) {
-        .not-fr-search {
-          width: 100%;
-          margin: 0.75rem;
-          margin-top: 0;
-        }
-      }
       div.with-session-banner {
         background-color: ${constants.colors.espaceAgent};
         color: #fff;
@@ -150,9 +147,26 @@ export const Header: React.FC<IProps> = ({
         line-height: 3rem;
       }
 
+      #loader-bar {
+        transition: width 150ms ease-in-out;
+        width: 100%;
+        height: 3px;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        position: absolute;
+      }
+
       @media print {
         .fr-header {
           display: none !important;
+        }
+      }
+      @media only screen and (min-width: 1px) and (max-width: 992px) {
+        .not-fr-search {
+          width: 100%;
+          margin: 0.75rem;
+          margin-top: 0;
         }
       }
     `}</style>

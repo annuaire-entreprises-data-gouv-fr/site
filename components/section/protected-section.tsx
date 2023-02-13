@@ -83,7 +83,7 @@ export const ProtectedSection: React.FC<PropsWithChildren<ISectionProps>> = ({
           filter: blur(5px);
           user-select: none;
         }
-        @media only screen and (min-width: 1px) and (max-width: 900px) {
+        @media only screen and (min-width: 1px) and (max-width: 992px) {
           .protected-data {
             background: ${constants.colors.espaceAgent};
             top: -14px;

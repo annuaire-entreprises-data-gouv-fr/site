@@ -192,12 +192,7 @@ const mapToDomainObject = (
 
   const dirigeant = {
     sexe: sexeUniteLegale,
-    prenom: formatFirstNames([
-      prenom1UniteLegale,
-      prenom2UniteLegale,
-      prenom3UniteLegale,
-      prenom4UniteLegale,
-    ]),
+    prenom: formatFirstNames([prenomUsuelUniteLegale]),
     nom: formatNameFull(nomUniteLegale, nomUsageUniteLegale),
   } as IEtatCivil;
 

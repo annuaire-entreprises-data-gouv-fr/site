@@ -45,7 +45,7 @@ const AdministrationDescription: React.FC<{
           width: 120px;
         }
 
-        @media only screen and (min-width: 1px) and (max-width: 600px) {
+        @media only screen and (min-width: 1px) and (max-width: 576px) {
           .administration-wrapper {
             flex-direction: column;
             margin-top: 30px;

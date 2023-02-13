@@ -2,14 +2,14 @@ import { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
 import { httpGet } from '#utils/network';
 
 /**
- * GET for RNCS Proxy api
+ * GET for API Proxy api
  *
  * @param url
  * @param options
  * @param useCache by default, cache is deactivated
  * @returns
  */
-const clientRNCSProxy = async (
+const getAPIProxy = async (
   url: string,
   options?: AxiosRequestConfig,
   useCache = false // by default we dont cache response
@@ -26,4 +26,10 @@ const clientRNCSProxy = async (
     useCache
   );
 
-export { clientRNCSProxy };
+const clientAPIProxy = async (route: string, useCache: boolean) => {
+  const request = await getAPIProxy(route, {}, useCache);
+
+  return request.data;
+};
+
+export { clientAPIProxy };

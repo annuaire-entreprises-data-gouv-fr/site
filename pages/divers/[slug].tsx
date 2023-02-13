@@ -6,6 +6,10 @@ import Title, { FICHE } from '#components/title-section';
 import getConventionCollectivesFromSlug, {
   IConventions,
 } from '#models/convention-collective';
+import {
+  getCompanyPageDescription,
+  getCompanyPageTitle,
+} from '#utils/helpers/get-company-page-title';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -22,8 +26,9 @@ const ConventionsCollectives: NextPageWithLayout<IProps> = ({
 }) => (
   <>
     <Meta
-      title={`Conventions collectives - ${uniteLegale.nomComplet}`}
       noIndex={true}
+      title={`Conventions collectives - ${getCompanyPageTitle(uniteLegale)}`}
+      description={getCompanyPageDescription(uniteLegale)}
     />
     <div className="content-container">
       <Title

@@ -1,12 +1,13 @@
+import { clientAssociation } from '#clients/api-proxy/association';
 import clientSearchSireneOuverte from '#clients/recherche-entreprise';
-import { clientRNA } from '#clients/rna';
-import { fetchRNCSImmatriculationNoCache } from '#clients/rncs';
 import { clientRNM } from '#clients/rnm';
 import { clientUniteLegaleInseeNoCache } from '#clients/sirene-insee/siren';
 import clientUniteLegaleSireneOuverte from '#clients/sirene-ouverte/siren';
 import clientSiret2Idcc from '#clients/siret-2-idcc';
 import { clientTVA } from '#clients/tva';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
+import { fetchRNCSImmatriculation } from './api-proxy/rncs';
+import { fetchRNEImmatriculation } from './api-proxy/rne';
 
 export class APISlugNotFound extends Error {
   constructor(public status: number, public message: string) {
@@ -19,7 +20,10 @@ const ping = async (slug: string | string[]) => {
   switch (slug) {
     case 'api-proxy-rncs':
       // fetch IRM and disable cache
-      return await fetchRNCSImmatriculationNoCache(verifySiren('880878145'));
+      return await fetchRNCSImmatriculation(verifySiren('552032534'), useCache);
+    case 'api-proxy-rne':
+      // fetch IRM and disable cache
+      return await fetchRNEImmatriculation(verifySiren('552032534'), useCache);
     case 'api-rnm':
       return await clientRNM(verifySiren('824024350'));
     case 'api-conventions-collectives':
@@ -28,8 +32,8 @@ const ping = async (slug: string | string[]) => {
       return await clientUniteLegaleInseeNoCache(verifySiren('880878145'));
     case 'api-sirene-donnees-ouvertes':
       return await clientUniteLegaleSireneOuverte(verifySiren('880878145'));
-    case 'api-rna':
-      return await clientRNA(verifyIdRna('W551000280'), useCache);
+    case 'api-association':
+      return await clientAssociation(verifyIdRna('W551000280'), useCache);
     case 'api-tva':
       return await clientTVA(verifySiren('880878145'), useCache);
     case 'api-recherche':
@@ -38,7 +42,7 @@ const ping = async (slug: string | string[]) => {
         1,
         undefined,
         false,
-        false
+        useCache
       );
     default:
       throw new APISlugNotFound(404, `API ping ${slug} not found`);

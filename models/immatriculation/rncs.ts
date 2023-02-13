@@ -1,5 +1,5 @@
+import { fetchRNCSImmatriculation } from '#clients/api-proxy/rncs';
 import { HttpNotFound } from '#clients/exceptions';
-import { fetchRNCSImmatriculation } from '#clients/rncs';
 import routes from '#clients/routes';
 import { EAdministration } from '#models/administrations';
 import {

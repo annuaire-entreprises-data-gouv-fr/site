@@ -72,9 +72,14 @@ const routes = {
       },
     },
   },
-  rna: {
-    id: 'https://entreprise.data.gouv.fr/api/rna/v1/id/',
-    siren: 'https://entreprise.data.gouv.fr/api/rna/v1/siret/',
+  association: 'https://rncs-proxy.api.gouv.fr/association/',
+  rne: {
+    portail: {
+      pdf: 'https://data.inpi.fr/export/companies',
+    },
+    proxy: {
+      rne: 'https://rncs-proxy.api.gouv.fr/rne/',
+    },
   },
   rncs: {
     portail: {
