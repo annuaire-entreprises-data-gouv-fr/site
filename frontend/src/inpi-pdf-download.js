@@ -1,5 +1,5 @@
-import { extractSirenSlugFromUrl } from './utils';
 import FrontStateMachineFactory from './front-state-machine';
+import { extractSirenSlugFromUrl } from './utils';
 
 function saveAsPdf(blob, siren) {
   var url = window.URL.createObjectURL(blob);
@@ -13,6 +13,10 @@ function saveAsPdf(blob, siren) {
   window.URL.revokeObjectURL(url);
 }
 
+function handleError(msg) {
+  throw new Error('Error while downloading INPI PDF');
+}
+
 function downloadInpiPDF() {
   const stateMachine = FrontStateMachineFactory(
     'immatriculation-pdf-status-wrapper'
@@ -23,33 +27,51 @@ function downloadInpiPDF() {
     stateMachine.setStarted();
 
     if (window.fetch) {
-      download(siren, stateMachine.setSuccess)
+      const attemptDownload = () =>
+        download(siren, stateMachine.setSuccess, stateMachine.setNotFound);
+      // first try
+      attemptDownload()
+        // second try
         .catch((e) => {
-          return download(siren, stateMachine.setSuccess);
+          return attemptDownload();
         })
+        // third try
         .catch((e) => {
-          return download(siren, stateMachine.setSuccess);
+          return attemptDownload();
         })
+        // drop it
         .catch((e) => {
           stateMachine.setError();
-          throw e;
+          handleError();
         });
     } else {
       stateMachine.setError();
-      throw new Error('Download failed : browser too old');
+      handleError();
     }
   }
 }
 
-function download(siren, onSuccessCallback = function () {}) {
+function download(
+  siren,
+  onSuccessCallback = function () {},
+  onNotFoundCallback = function () {}
+) {
   return fetch(
     'https://data.inpi.fr/export/companies?format=pdf&ids=[%22' + siren + '%22]'
   )
     .then((res) => {
       if (!res.ok) {
-        throw new Error('Download failed : Inpi is not answering');
+        res.json().then(function (msg) {
+          if (msg === 'Siren non existant') {
+            onNotFoundCallback();
+          } else {
+            throw new Error();
+          }
+          return;
+        });
+      } else {
+        return res.blob();
       }
-      return res.blob();
     })
     .then(function (blob) {
       saveAsPdf(blob, siren);
