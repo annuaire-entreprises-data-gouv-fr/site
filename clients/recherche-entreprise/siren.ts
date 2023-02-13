@@ -7,6 +7,7 @@ import { IComplements } from '#models/complements';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { createDefaultUniteLegale, IUniteLegale } from '#models/index';
+import { ISearchResult } from '#models/search';
 import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
 import {
   isEntrepreneurIndividuelFromNatureJuridique,
@@ -65,19 +66,19 @@ const clientUniteLegaleSireneOuverte = async (
 ): Promise<IUniteLegale> => {
   const { results } = await clientSearchSireneOuverte(siren, 1);
   const result = results[0];
+  return mapToDomainObject(siren, result);
 };
 
 const mapToDomainObject = (
   siren: Siren,
-  uniteLegale: ISireneOuverteUniteLegale,
-  page: number
+  searchResult: ISearchResult
 ): IUniteLegale => {
   const siege = mapSireneOuverteEtablissementToDomainObject(
-    uniteLegale.etablissement_siege[0],
-    uniteLegale.etablissement_siege[0].siret
+    searchResult.siege,
+    searchResult.siege[0].siret
   );
 
-  const listOfEtablissements = uniteLegale.etablissements.map((etab) =>
+  const listOfEtablissements = searchResult.matchingEtablissements.map((etab) =>
     mapSireneOuverteEtablissementToDomainObject(etab, etab.siret)
   );
 
@@ -98,7 +99,7 @@ const mapToDomainObject = (
     identifiantAssociationUniteLegale,
     economieSocialeSolidaireUniteLegale,
     activite_principale_entreprise,
-  } = uniteLegale;
+  } = searchResult;
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
   return {

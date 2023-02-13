@@ -11,15 +11,20 @@ import {
 } from '#models/index';
 import { ISearchResult, ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
-import { verifySiren, formatFirstNames, verifySiret } from '#utils/helpers';
+import {
+  verifySiren,
+  formatFirstNames,
+  verifySiret,
+  parseIntWithDefaultValue,
+} from '#utils/helpers';
 import { libelleFromCodeNAFWithoutNomenclature } from '#utils/labels';
 import { httpGet } from '#utils/network';
 import {
-  SearchResponse,
-  Result,
-  Siege,
-  MatchingEtablissement,
-  Dirigeant,
+  ISearchResponse,
+  IResult,
+  ISiege,
+  IMatchingEtablissement,
+  IDirigeant,
 } from './interface';
 
 /**
@@ -63,7 +68,7 @@ const clientSearchSireneOuverte = async (
     useCache
   );
 
-  const results = response.data as SearchResponse;
+  const results = response.data as ISearchResponse;
 
   if (!results.results || results.results.length === 0) {
     throw new HttpNotFound('No results');
@@ -71,18 +76,18 @@ const clientSearchSireneOuverte = async (
   return mapToDomainObjectNew(results);
 };
 
-const mapToDomainObjectNew = (data: SearchResponse): ISearchResults => {
+const mapToDomainObjectNew = (data: ISearchResponse): ISearchResults => {
   const { total_results = 0, total_pages = 0, results = [], page } = data;
 
   return {
-    currentPage: page || 1,
+    currentPage: parseIntWithDefaultValue(page as string, 1),
     resultCount: total_results,
     pageCount: total_pages,
     results: results.map(mapToUniteLegale),
   };
 };
 
-const mapToUniteLegale = (result: Result): ISearchResult => {
+const mapToUniteLegale = (result: IResult): ISearchResult => {
   const {
     nature_juridique,
     siege,
@@ -149,7 +154,7 @@ const mapToUniteLegale = (result: Result): ISearchResult => {
 };
 
 const mapToDirigeantModel = (
-  dirigeant: Dirigeant
+  dirigeant: IDirigeant
 ): IEtatCivil | IPersonneMorale => {
   const {
     siren = '',
@@ -194,7 +199,7 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
 };
 
 const mapToEtablissement = (
-  etablissement: Siege | MatchingEtablissement
+  etablissement: ISiege | IMatchingEtablissement
 ): IEtablissement => {
   const {
     siret,

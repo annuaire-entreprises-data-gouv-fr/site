@@ -1,32 +1,32 @@
-export interface SearchResponse {
-  results: Result[];
+export interface ISearchResponse {
+  results: IResult[];
   total_results: number;
-  page: number;
+  page: unknown;
   per_page: number;
   total_pages: number;
 }
 
-export interface Result {
+export interface IResult {
   siren: string;
   nom_complet: string;
   nombre_etablissements: number;
   nombre_etablissements_ouverts: number;
-  siege: Siege;
+  siege: ISiege;
   activite_principale: string;
   categorie_entreprise?: string;
   date_creation: string;
   date_mise_a_jour: string;
-  dirigeants: Dirigeant[];
+  dirigeants: IDirigeant[];
   etat_administratif: string;
   nature_juridique: string;
   nom_raison_sociale?: string;
   section_activite_principale: string;
   tranche_effectif_salarie?: string;
-  matching_etablissements: MatchingEtablissement[];
-  complements: Complements;
+  matching_etablissements: IMatchingEtablissement[];
+  complements: IComplements;
 }
 
-export interface Siege {
+export interface ISiege {
   activite_principale: string;
   activite_principale_registre_metier: any;
   adresse: string;
@@ -64,7 +64,7 @@ export interface Siege {
   type_voie?: string;
 }
 
-export interface Dirigeant {
+export interface IDirigeant {
   nom?: string;
   prenoms?: string;
   annee_de_naissance?: string;
@@ -75,7 +75,7 @@ export interface Dirigeant {
   sigle: any;
 }
 
-export interface MatchingEtablissement {
+export interface IMatchingEtablissement {
   activite_principale: string;
   adresse: string;
   commune: string;
@@ -93,8 +93,8 @@ export interface MatchingEtablissement {
   siret: string;
 }
 
-export interface Complements {
-  collectivite_territoriale?: CollectiviteTerritoriale;
+export interface IComplements {
+  collectivite_territoriale?: ICollectiviteTerritoriale;
   convention_collective_renseignee: boolean;
   est_entrepreneur_individuel: boolean;
   est_entrepreneur_spectacle: boolean;
@@ -105,14 +105,14 @@ export interface Complements {
   identifiant_association?: string;
 }
 
-export interface CollectiviteTerritoriale {
+export interface ICollectiviteTerritoriale {
   code: string;
   code_insee: string;
-  elus: Elu[];
+  elus: IElu[];
   niveau: string;
 }
 
-export interface Elu {
+export interface IElu {
   nom: string;
   prenoms: string;
   annee_de_naissance: string;
