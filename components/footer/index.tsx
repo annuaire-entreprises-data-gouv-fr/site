@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '#components-ui/logo';
 import { PrintNever } from '#components-ui/print-visibility';
 import { administrationsMetaData } from '#models/administrations';
+import { getAllLandingPages } from '#models/landing-pages';
 
 const Footer = () => (
   <PrintNever>
@@ -14,48 +15,16 @@ const Footer = () => (
                 Vérifier les informations légales d’une entreprise
               </h3>
               <ul className="fr-footer__top-list">
-                <li>
-                  <a className="fr-footer__top-link" href="/rechercher/lp/ess">
-                    Entreprises de l’ESS (Economie Sociale et Solidaire)
-                  </a>
-                </li>
-                <li>
-                  <a className="fr-footer__top-link" href="/rechercher/lp/rge">
-                    Entreprises RGE (Reconnu Garant de l’Environnement)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="fr-footer__top-link"
-                    href="/rechercher/lp/entreprises-individuelles"
-                  >
-                    Entreprises individuelles
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="fr-footer__top-link"
-                    href="/rechercher/lp/spectacles-vivants"
-                  >
-                    Entrepreneurs de Spectacles Vivants
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="fr-footer__top-link"
-                    href="/rechercher/lp/collectivites"
-                  >
-                    Collectivités territoriales
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="fr-footer__top-link"
-                    href="/rechercher/lp/associations"
-                  >
-                    Associations
-                  </a>
-                </li>
+                {getAllLandingPages().map(({ slug, footerLabel }) => (
+                  <li>
+                    <a
+                      className="fr-footer__top-link"
+                      href={`/rechercher/lp/${slug}`}
+                    >
+                      {footerLabel}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">

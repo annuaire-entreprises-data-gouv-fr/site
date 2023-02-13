@@ -1,5 +1,7 @@
 slug: rge
 title: Moteur de recherche des entreprises RGE
+footerLabel: Entreprises RGE (Reconnu Garant de l’Environnement)
+published: false
 description: Retrouvez une entreprise Reconnue Garant de l’Environnement
 filter:
   name: label

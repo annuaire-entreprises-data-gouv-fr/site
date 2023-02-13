@@ -1,6 +1,8 @@
 export interface ILandingPage {
   slug: string;
   title: string;
+  footerLabel: string;
+  published: boolean;
   description: string;
   filter: {
     name: string;
@@ -10,6 +12,9 @@ export interface ILandingPage {
     title: string;
     description: string;
   };
+  reassurance: { title: string; body: string }[];
+  datasources: string[];
+  body: string;
 }
 
 const loadAllLandingPages = () => {
@@ -31,7 +36,7 @@ const loadAllLandingPages = () => {
       landingPages.push({ ...values[index], slug });
     });
 
-  return landingPages;
+  return landingPages.filter((page) => page.published || false);
 };
 
 export const getAllLandingPages = () => {

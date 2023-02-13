@@ -21,10 +21,10 @@ const ActiveFilterLabel: React.FC<{
       .selected-filter-container {
         display: flex;
         align-items: center;
-        padding: 5px 30px 5px 10px;
+        padding: 3px 30px 3px 10px;
         color: ${constants.colors.frBlue};
         background-color: ${constants.colors.pastelBlue};
-        border-radius: 5px;
+        border-radius: 3px;
         border: 1px solid ${constants.colors.frBlue};
       }
       .selected-filter-container:hover {

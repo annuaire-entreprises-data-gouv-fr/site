@@ -1,5 +1,7 @@
 slug: associations
 title: Annuaire des associations
+footerLabel: Associations
+published: false
 description: Retrouvez n’importe quelle association pourvue d’un numéro SIRET
 filter:
   name: type

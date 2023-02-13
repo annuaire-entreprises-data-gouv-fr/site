@@ -1,5 +1,7 @@
 slug: collecitvites
 title: Annuaire des collectivités territoriales
+footerLabel: Collectivités territoriales
+published: false
 description: Retrouvez toutes les ionformations administratives de votre ville, département ou région
 filter:
   name: type
