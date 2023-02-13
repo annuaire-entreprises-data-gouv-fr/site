@@ -14,6 +14,9 @@ function FrontStateMachineFactory(stateMachineId) {
     setError: function () {
       _wrapper.className = 'display-error';
     },
+    setNotFound: function () {
+      _wrapper.className = 'display-not-found';
+    },
     setDefault: function () {
       _wrapper.className = 'display-default';
     },

@@ -18,7 +18,7 @@ export interface IImmatriculationRNCSCore {
 }
 
 export interface IImmatriculationRNE extends IImmatriculation {
-  identite?: {
+  identite: {
     denomination: string;
     dateImmatriculation: string;
     dateDebutActiv: string;
@@ -29,7 +29,7 @@ export interface IImmatriculationRNE extends IImmatriculation {
     dureePersonneMorale: string;
     capital: string;
     codeNatureJuridique: string;
-  };
+  } | null;
   metadata: {
     isFallback: boolean;
   };
@@ -45,7 +45,7 @@ const getImmatriculationRNE = async (
 ): Promise<IAPINotRespondingError | IImmatriculationRNE> => {
   try {
     // fetch IMR and use cache
-    const { identite, metadata } = await fetchRNEImmatriculation(siren);
+    const { identite = null, metadata } = await fetchRNEImmatriculation(siren);
 
     return {
       siren,

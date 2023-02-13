@@ -51,6 +51,7 @@ interface IProps extends IPropsWithMetadata {
 }
 
 const InpiPDF: NextPageWithLayout<IProps> = ({ siren, metadata }) => {
+  const downloadLink = `${routes.rncs.portail.pdf}?format=pdf&ids=[%22${siren}%22]`;
   return (
     <>
       <Meta
@@ -77,7 +78,7 @@ const InpiPDF: NextPageWithLayout<IProps> = ({ siren, metadata }) => {
                 <a
                   target="_blank"
                   rel="noreferrer noopener"
-                  href={`${routes.rncs.portail.pdf}?format=pdf&ids=[%22${siren}%22]`}
+                  href={downloadLink}
                 >
                   cliquez ici
                 </a>
@@ -102,18 +103,31 @@ const InpiPDF: NextPageWithLayout<IProps> = ({ siren, metadata }) => {
               <Tag className="closed">échec</Tag>
               <p>
                 Le téléchargement a échoué car le téléservice de l’
-                <INPI /> n’a pas réussi à générer le document. Vous pouvez soit
-                relancer le téléchargement, soit réessayer à un autre moment :
+                <INPI /> est actuellement indisponible.{' '}
+                <b>Nous sommes désolé pour ce désagrément</b>.<br />
+                Vous pouvez soit relancer le téléchargement, soit réessayer à un
+                autre moment :
               </p>
               <div className="layout-center">
                 <Retry />
               </div>
             </>,
+            <>
+              <b>Statut du téléchargement :</b>
+              <Tag className="closed">introuvable</Tag>
+              <p>
+                Le document que vous recherchez n’a pas été retrouvé dans les
+                systèmes informatique de l’
+                <INPI />. Cette structure n’est donc vraisemblablement{' '}
+                <b>pas enregistrée</b> au Registre National des Entreprises
+                (RNE).
+              </p>
+            </>,
           ]}
         />
         <br />
         <Info>
-          L’Annuaire des Entreprises ne permet plus de télécharger le PDF
+          L’Annuaire des Entreprises ne permet pas de télécharger le PDF
           complet.
           <br />
           <br />
