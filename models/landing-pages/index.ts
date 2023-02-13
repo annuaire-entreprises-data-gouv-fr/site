@@ -33,6 +33,7 @@ const loadAllLandingPages = () => {
     .filter((k: string) => k.indexOf('./') === 0)
     .forEach((key: string, index: number) => {
       const slug = key.replace('.yml', '').replace('./', '');
+      //@ts-ignore
       landingPages.push({ ...values[index], slug });
     });
 
