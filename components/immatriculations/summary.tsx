@@ -14,7 +14,7 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
     <>
       Cette structure est :
       <ul>
-        {immatriculationRNE && !isAPINotResponding(immatriculationRNE) && (
+        {/* {immatriculationRNE && !isAPINotResponding(immatriculationRNE) && (
           <li>
             {!!immatriculationRNE.identite?.dateRadiation ? (
               <a href="#rncs">
@@ -36,7 +36,7 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
               </a>
             )}
           </li>
-        )}
+        )} */}
 
         {immatriculationJOAFE && !isAPINotResponding(immatriculationJOAFE) && (
           <li>

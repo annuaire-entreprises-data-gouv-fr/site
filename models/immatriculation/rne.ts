@@ -51,9 +51,18 @@ const getImmatriculationRNE = async (
       siren,
       downloadLink: `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`,
       siteLink: `${routes.rncs.portail.entreprise}${siren}`,
-      identite,
-      metadata,
+      metadata: { isFallback: false },
     };
+    // fetch IMR and use cache
+    // const { identite, metadata } = await fetchRNEImmatriculation(siren);
+
+    // return {
+    //   siren,
+    //   downloadLink: `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`,
+    //   siteLink: `${routes.rncs.portail.entreprise}${siren}`,
+    //   identite,
+    //   metadata,
+    // };
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INPI, 404);
