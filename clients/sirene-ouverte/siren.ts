@@ -25,28 +25,28 @@ import {
  * GET UNITE LEGALE
  */
 interface ISireneOuverteUniteLegale {
-  etablissement_siege: ISireneOuverteEtablissement[];
-  etablissements: ISireneOuverteEtablissement[];
-  date_creation: string;
-  date_creation_entreprise: string;
-  date_mise_a_jour: string;
-  numero_tva_intra: string;
-  date_debut_activite: string;
-  tranche_effectif_salarie_entreprise: string;
-  categorie_entreprise: string;
-  nature_juridique_entreprise: string;
-  nombre_etablissements: number;
-  nom_complet: string;
-  nom_url: string;
-  numero_voie: string;
-  indice_repetition: string;
-  type_voie: string;
-  libelle_commune: string;
-  code_postal: string;
-  libelle_voie: string;
-  activite_principale_entreprise: string;
-  identifiantAssociationUniteLegale: string;
-  economieSocialeSolidaireUniteLegale: string;
+  etablissement_siege: ISireneOuverteEtablissement[]; //Siege
+  etablissements: ISireneOuverteEtablissement[]; //matching_etablissements
+  date_creation: string; //RESULT => date_creation
+  date_creation_entreprise: string; //unknow
+  date_mise_a_jour: string; //date_mise_a_jour
+  numero_tva_intra: string; //TO_BE_GENERATE
+  date_debut_activite: string; //RESULT => date_debut_activite
+  tranche_effectif_salarie_entreprise: string; //SIEGE => tranche_effectif_salarie
+  categorie_entreprise: string; // RESULT => categorie_entreprise
+  nature_juridique_entreprise: string; // RESULT => nature_juridique_entreprise
+  nombre_etablissements: number; // RESULT => nombre_etablissements
+  nom_complet: string; // RESULT => nom_complet
+  nom_url: string; //Unknow
+  numero_voie: string; //SIEGE => numero_voie
+  indice_repetition: string; //SIEGE => indice_repetition
+  type_voie: string; // RESULT => type_voie
+  libelle_commune: string; //SIEGE => libelle_commune
+  code_postal: string; //SIEGE => code_postal
+  libelle_voie: string; //SIEGE => libelle_voie
+  activite_principale_entreprise: string; //SIEGE => activite_principale
+  identifiantAssociationUniteLegale: string; //Complements => identifiant_association
+  economieSocialeSolidaireUniteLegale: string; //Unknow
 }
 interface ISireneOuverteUniteLegaleResponse {
   unite_legale: ISireneOuverteUniteLegale[];
