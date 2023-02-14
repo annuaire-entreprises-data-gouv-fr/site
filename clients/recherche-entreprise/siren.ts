@@ -1,53 +1,11 @@
 import { HttpNotFound, HttpServerError } from '#clients/exceptions';
-import {
-  ISireneOuverteEtablissement,
-  mapSireneOuverteEtablissementToDomainObject,
-} from '#clients/sirene-ouverte/siret';
 import { IComplements } from '#models/complements';
 import { createEtablissementsList } from '#models/etablissements-list';
-import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
-import { createDefaultUniteLegale, IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/index';
 import { ISearchResult } from '#models/search';
 import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
-import {
-  isEntrepreneurIndividuelFromNatureJuridique,
-  Siren,
-} from '#utils/helpers';
-import {
-  libelleFromCategoriesJuridiques,
-  libelleFromCodeEffectif,
-  libelleFromCodeNAF,
-  libelleFromeCodeCategorie,
-} from '#utils/labels';
+import { Siren } from '#utils/helpers';
 import clientSearchSireneOuverte from '.';
-
-/**
- * GET UNITE LEGALE
- */
-interface ISireneOuverteUniteLegale {
-  etablissement_siege: ISireneOuverteEtablissement[];
-  etablissements: ISireneOuverteEtablissement[];
-  date_creation: string;
-  date_creation_entreprise: string;
-  date_mise_a_jour: string;
-  numero_tva_intra: string;
-  date_debut_activite: string;
-  tranche_effectif_salarie_entreprise: string;
-  categorie_entreprise: string;
-  nature_juridique_entreprise: string;
-  nombre_etablissements: number;
-  nom_complet: string;
-  nom_url: string;
-  numero_voie: string;
-  indice_repetition: string;
-  type_voie: string;
-  libelle_commune: string;
-  code_postal: string;
-  libelle_voie: string;
-  activite_principale_entreprise: string;
-  identifiantAssociationUniteLegale: string;
-  economieSocialeSolidaireUniteLegale: string;
-}
 
 export const clientComplementsSireneOuverte = async (
   siren: Siren
@@ -61,89 +19,36 @@ export const clientComplementsSireneOuverte = async (
   throw new HttpNotFound(siren);
 };
 
-const clientUniteLegaleSireneOuverte = async (
-  siren: Siren
+export const clientUniteLegaleSireneOuverte = async (
+  siren: Siren,
+  page = 1
 ): Promise<IUniteLegale> => {
   const { results } = await clientSearchSireneOuverte(siren, 1);
   const result = results[0];
-  return mapToDomainObject(siren, result);
+  return mapToDomainObject(siren, result, page);
 };
 
 const mapToDomainObject = (
   siren: Siren,
-  searchResult: ISearchResult
+  searchResult: ISearchResult,
+  page = 1
 ): IUniteLegale => {
-  const siege = mapSireneOuverteEtablissementToDomainObject(
-    searchResult.siege,
-    searchResult.siege[0].siret
-  );
-
-  const listOfEtablissements = searchResult.matchingEtablissements.map((etab) =>
-    mapSireneOuverteEtablissementToDomainObject(etab, etab.siret)
-  );
-
-  if (!listOfEtablissements || listOfEtablissements.length === 0) {
+  const { nombreEtablissements, matchingEtablissements } = searchResult;
+  if (
+    !searchResult.matchingEtablissements ||
+    searchResult.matchingEtablissements.length === 0
+  ) {
     throw new HttpServerError(`No etablissements found`);
   }
 
-  const {
-    date_creation_entreprise,
-    date_mise_a_jour,
-    date_debut_activite,
-    nom_complet,
-    nom_url,
-    categorie_entreprise,
-    nombre_etablissements,
-    nature_juridique_entreprise,
-    tranche_effectif_salarie_entreprise,
-    identifiantAssociationUniteLegale,
-    economieSocialeSolidaireUniteLegale,
-    activite_principale_entreprise,
-  } = searchResult;
-
-  const defaultUniteLegale = createDefaultUniteLegale(siren);
   return {
-    ...defaultUniteLegale,
+    ...searchResult,
     siren,
-    siege,
-    activitePrincipale: activite_principale_entreprise,
-    libelleActivitePrincipale: libelleFromCodeNAF(
-      activite_principale_entreprise
-    ),
-    libelleCategorieEntreprise: libelleFromeCodeCategorie(categorie_entreprise),
-    natureJuridique: nature_juridique_entreprise || '',
-    libelleNatureJuridique: libelleFromCategoriesJuridiques(
-      nature_juridique_entreprise
-    ),
-    trancheEffectif: tranche_effectif_salarie_entreprise,
-    libelleTrancheEffectif: libelleFromCodeEffectif(
-      tranche_effectif_salarie_entreprise
-    ),
     etablissements: createEtablissementsList(
-      listOfEtablissements,
+      matchingEtablissements,
       page,
-      nombre_etablissements
+      nombreEtablissements
     ),
     statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
-    etatAdministratif:
-      siege && estActif(siege)
-        ? IETATADMINSTRATIF.ACTIF
-        : IETATADMINSTRATIF.CESSEE,
-    nomComplet: nom_complet || 'Nom inconnu',
-    chemin: nom_url,
-    dateCreation: date_creation_entreprise,
-    dateDebutActivite: date_debut_activite,
-    dateDerniereMiseAJour: date_mise_a_jour,
-    dirigeant: null,
-    complements: {
-      ...defaultUniteLegale.complements,
-      estEntrepreneurIndividuel: isEntrepreneurIndividuelFromNatureJuridique(
-        nature_juridique_entreprise
-      ),
-      estEss: economieSocialeSolidaireUniteLegale === 'O',
-    },
-    association: {
-      idAssociation: identifiantAssociationUniteLegale || null,
-    },
   };
 };

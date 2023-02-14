@@ -1,4 +1,5 @@
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
+import { clientUniteLegaleSireneOuverte } from '#clients/recherche-entreprise/siren';
 import {
   clientUniteLegaleInsee,
   clientUniteLegaleInseeFallback,
@@ -9,7 +10,6 @@ import {
   clientSiegeInsee,
   clientSiegeInseeFallback,
 } from '#clients/sirene-insee/siret';
-import clientUniteLegaleSireneOuverte from '#clients/sirene-ouverte/siren';
 import { getAssociation } from '#models/association';
 import {
   createEtablissementsList,
@@ -110,11 +110,6 @@ class UniteLegaleFactory {
     return uniteLegale;
   }
 }
-
-/** =========
- *  Fetching
- * ==========
- * /
 
 /**
  * For Indexing bot only - Fetch an uniteLegale from SireneOuverte

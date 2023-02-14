@@ -13,15 +13,15 @@ export interface IResult {
   nombre_etablissements_ouverts: number;
   siege: ISiege;
   activite_principale: string;
-  categorie_entreprise?: string;
+  categorie_entreprise: string;
   date_creation: string;
   date_mise_a_jour: string;
   dirigeants: IDirigeant[];
   etat_administratif: string;
   nature_juridique: string;
-  nom_raison_sociale?: string;
+  nom_raison_sociale: string;
   section_activite_principale: string;
-  tranche_effectif_salarie?: string;
+  tranche_effectif_salarie: string;
   matching_etablissements: IMatchingEtablissement[];
   complements: IComplements;
 }
@@ -34,7 +34,7 @@ export interface ISiege {
   code_pays_etranger: any;
   code_postal: string;
   commune: string;
-  complement_adresse?: string;
+  complement_adresse: string;
   coordonnees: string;
   date_creation: string;
   date_debut_activite: string;
@@ -50,28 +50,28 @@ export interface ISiege {
   libelle_commune: string;
   libelle_commune_etranger: any;
   libelle_pays_etranger: any;
-  libelle_voie?: string;
-  liste_enseignes?: string[];
+  libelle_voie: string;
+  liste_enseignes: string[];
   liste_finess: any;
-  liste_idcc?: string[];
+  liste_idcc: string[];
   liste_rge: any;
   liste_uai: any;
   longitude: string;
-  nom_commercial?: string;
-  numero_voie?: string;
+  nom_commercial: string;
+  numero_voie: string;
   siret: string;
-  tranche_effectif_salarie?: string;
-  type_voie?: string;
+  tranche_effectif_salarie: string;
+  type_voie: string;
 }
 
 export interface IDirigeant {
-  nom?: string;
-  prenoms?: string;
-  annee_de_naissance?: string;
-  qualite?: string;
+  nom: string;
+  prenoms: string;
+  annee_de_naissance: string;
+  qualite: string;
   type_dirigeant: string;
-  siren?: string;
-  denomination?: string;
+  siren: string;
+  denomination: string;
   sigle: any;
 }
 
@@ -83,18 +83,18 @@ export interface IMatchingEtablissement {
   etat_administratif: string;
   geo_id: string;
   latitude: string;
-  liste_enseignes?: string[];
+  liste_enseignes: string[];
   liste_finess: any;
-  liste_idcc?: string[];
+  liste_idcc: string[];
   liste_rge: any;
-  liste_uai?: string[];
+  liste_uai: string[];
   longitude: string;
-  nom_commercial?: string;
+  nom_commercial: string;
   siret: string;
 }
 
 export interface IComplements {
-  collectivite_territoriale?: ICollectiviteTerritoriale;
+  collectivite_territoriale: ICollectiviteTerritoriale;
   convention_collective_renseignee: boolean;
   est_entrepreneur_individuel: boolean;
   est_entrepreneur_spectacle: boolean;
@@ -102,7 +102,7 @@ export interface IComplements {
   est_finess: boolean;
   est_rge: boolean;
   est_uai: boolean;
-  identifiant_association?: string;
+  identifiant_association: string;
 }
 
 export interface ICollectiviteTerritoriale {
@@ -116,6 +116,6 @@ export interface IElu {
   nom: string;
   prenoms: string;
   annee_de_naissance: string;
-  fonction?: string;
+  fonction: string;
   sexe: string;
 }

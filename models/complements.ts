@@ -1,5 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
-import clientComplementsSireneOuverte from '#clients/recherche-entreprise/siren';
+import { clientComplementsSireneOuverte } from '#clients/recherche-entreprise/siren';
 import { IEtatCivil } from '#models/immatriculation/rncs';
 import { Siren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';

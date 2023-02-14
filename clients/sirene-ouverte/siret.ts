@@ -15,6 +15,7 @@ import { httpGet } from '#utils/network';
 interface ISireneOuverteEtablissementResponse {
   etablissement: ISireneOuverteEtablissement[];
 }
+
 export interface ISireneOuverteEtablissement {
   enseigne?: string;
   siren: string;
@@ -74,7 +75,8 @@ export const mapSireneOuverteEtablissementToDomainObject = (
   etablissement: ISireneOuverteEtablissement,
   siret: string
 ): IEtablissement => {
-  const { etat_administratif_etablissement } = etablissement;
+  const { etat_administratif_etablissement, date_debut_activite } =
+    etablissement;
   const statutDiffusion = ISTATUTDIFFUSION.DIFFUSIBLE;
   const etatAdministratif = etatFromEtatAdministratifInsee(
     etat_administratif_etablissement || '',
@@ -82,7 +84,7 @@ export const mapSireneOuverteEtablissementToDomainObject = (
   );
 
   const dateFermeture = !estActif({ etatAdministratif })
-    ? etablissement.date_debut_activite
+    ? date_debut_activite
     : null;
 
   const {

@@ -2,12 +2,12 @@ import { clientAssociation } from '#clients/api-proxy/association';
 import clientSearchSireneOuverte from '#clients/recherche-entreprise';
 import { clientRNM } from '#clients/rnm';
 import { clientUniteLegaleInseeNoCache } from '#clients/sirene-insee/siren';
-import clientUniteLegaleSireneOuverte from '#clients/sirene-ouverte/siren';
 import clientSiret2Idcc from '#clients/siret-2-idcc';
 import { clientTVA } from '#clients/tva';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
 import { fetchRNCSImmatriculation } from './api-proxy/rncs';
 import { fetchRNEImmatriculation } from './api-proxy/rne';
+import { clientUniteLegaleSireneOuverte } from './recherche-entreprise/siren';
 
 export class APISlugNotFound extends Error {
   constructor(public status: number, public message: string) {

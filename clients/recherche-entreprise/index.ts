@@ -17,7 +17,12 @@ import {
   verifySiret,
   parseIntWithDefaultValue,
 } from '#utils/helpers';
-import { libelleFromCodeNAFWithoutNomenclature } from '#utils/labels';
+import {
+  libelleFromCategoriesJuridiques,
+  libelleFromCodeEffectif,
+  libelleFromCodeNAFWithoutNomenclature,
+  libelleFromeCodeCategorie,
+} from '#utils/labels';
 import { httpGet } from '#utils/network';
 import {
   ISearchResponse,
@@ -103,6 +108,8 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       est_uai = false,
     },
     matching_etablissements,
+    categorie_entreprise,
+    tranche_effectif_salarie,
   } = result;
 
   const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
@@ -120,6 +127,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
 
   return {
     ...createDefaultUniteLegale(siren),
+    libelleCategorieEntreprise: libelleFromeCodeCategorie(categorie_entreprise),
     siege: mapToEtablissement(siege),
     matchingEtablissements: matching_etablissements
       .map((matchingEtablissement) => mapToEtablissement(matchingEtablissement))
@@ -129,6 +137,8 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       siren
     ),
     nomComplet,
+    libelleNatureJuridique: libelleFromCategoriesJuridiques(nature_juridique),
+    libelleTrancheEffectif: libelleFromCodeEffectif(tranche_effectif_salarie),
     nombreEtablissements: result.nombre_etablissements || 1,
     nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
     chemin: result.siren,
