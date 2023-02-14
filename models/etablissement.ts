@@ -1,13 +1,12 @@
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
+import { clientEtablissementSireneOuverte } from '#clients/recherche-entreprise/siren';
 import {
   clientEtablissementInsee,
   clientEtablissementInseeFallback,
 } from '#clients/sirene-insee/siret';
-import { clientEtablissementSireneOuverte } from '#clients/sirene-ouverte/siret';
 import { getGeoLoc } from '#models/geo-loc';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { extractSirenFromSiret, Siret, verifySiret } from '#utils/helpers';
-import { isProtectedSiret } from '#utils/helpers/is-protected-siren-or-siret';
 import {
   logFirstSireneInseefailed,
   logSecondSireneInseefailed,
@@ -19,7 +18,6 @@ import {
   IEtablissementWithUniteLegale,
   SiretNotFoundError,
 } from '.';
-import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 /*
  * Return an etablissement given an existing siret

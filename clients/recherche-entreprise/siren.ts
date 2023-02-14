@@ -1,7 +1,7 @@
 import { HttpNotFound, HttpServerError } from '#clients/exceptions';
 import { IComplements } from '#models/complements';
 import { createEtablissementsList } from '#models/etablissements-list';
-import { IUniteLegale } from '#models/index';
+import { IEtablissement, IUniteLegale } from '#models/index';
 import { ISearchResult } from '#models/search';
 import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
 import { Siren } from '#utils/helpers';
@@ -17,6 +17,14 @@ export const clientComplementsSireneOuverte = async (
     return { complements, colter };
   }
   throw new HttpNotFound(siren);
+};
+
+export const clientEtablissementSireneOuverte = async (
+  siret: string
+): Promise<IEtablissement> => {
+  const { results } = await clientSearchSireneOuverte(siret, 1);
+  const result = results[0];
+  return result.matchingEtablissements[0];
 };
 
 export const clientUniteLegaleSireneOuverte = async (
