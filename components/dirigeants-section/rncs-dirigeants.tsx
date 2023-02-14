@@ -148,7 +148,7 @@ const DirigeantsSection: React.FC<IProps> = ({
             centralisé par l’
             <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
             <a
-              rel="noreferrer noopener nofollow"
+              rel="noreferrer noopener"
               target="_blank"
               href={`${routes.rncs.portail.entreprise}${siren}`}
             >

@@ -55,7 +55,7 @@ export const ComptesAssociationSection: React.FC<{
             , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
             consulter{' '}
             <a
-              rel="noreferrer noopener nofollow"
+              rel="noreferrer noopener"
               target="_blank"
               href={`${routes.journalOfficielAssociations.site.recherche}?q=${association.siren}`}
             >

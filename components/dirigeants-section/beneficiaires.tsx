@@ -72,7 +72,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
           <p>
             Cette structure ne possède aucun{' '}
             <a
-              rel="noreferrer noopener nofollow"
+              rel="noreferrer noopener"
               target="_blank"
               href="https://www.inpi.fr/fr/faq/qu-est-ce-qu-un-beneficiaire-effectif"
             >
@@ -91,7 +91,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
             <p>
               Cette entreprise possède {beneficiaires.length}{' '}
               <a
-                rel="noreferrer noopener nofollow"
+                rel="noreferrer noopener"
                 target="_blank"
                 href="https://www.inpi.fr/fr/faq/qu-est-ce-qu-un-beneficiaire-effectif"
               >
@@ -102,7 +102,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
               centralisé par l’
               <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
               <a
-                rel="noreferrer noopener nofollow"
+                rel="noreferrer noopener"
                 target="_blank"
                 href={`${routes.rncs.portail.entreprise}${siren}`}
               >

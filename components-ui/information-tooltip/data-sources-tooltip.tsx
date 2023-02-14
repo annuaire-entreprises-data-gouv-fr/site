@@ -20,9 +20,7 @@ const DataSourcesTooltip: React.FC<{
             </React.Fragment>
           ))}
           <br />
-          <a rel="nofollow" href={link}>
-            👉 En savoir plus
-          </a>
+          <a href={link}>👉 En savoir plus</a>
         </>
       }
     >

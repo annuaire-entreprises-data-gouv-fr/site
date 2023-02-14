@@ -58,7 +58,7 @@ const ConventionCollectivesSection: React.FC<{
             Pour en savoir plus sur une convention collective en particulier,
             consultez{' '}
             <a
-              rel="noreferrer noopener nofollow"
+              rel="noreferrer noopener"
               target="_blank"
               href="https://code.travail.gouv.fr/outils/convention-collective"
             >
