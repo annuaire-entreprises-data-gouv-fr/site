@@ -18,7 +18,7 @@ export interface IImmatriculationRNCSCore {
 }
 
 export interface IImmatriculationRNE extends IImmatriculation {
-  identite?: {
+  identite: {
     denomination: string;
     dateImmatriculation: string;
     dateDebutActiv: string;
@@ -29,7 +29,7 @@ export interface IImmatriculationRNE extends IImmatriculation {
     dureePersonneMorale: string;
     capital: string;
     codeNatureJuridique: string;
-  };
+  } | null;
   metadata: {
     isFallback: boolean;
   };
@@ -45,15 +45,23 @@ const getImmatriculationRNE = async (
 ): Promise<IAPINotRespondingError | IImmatriculationRNE> => {
   try {
     // fetch IMR and use cache
-    const { identite, metadata } = await fetchRNEImmatriculation(siren);
-
     return {
       siren,
       downloadLink: `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`,
       siteLink: `${routes.rncs.portail.entreprise}${siren}`,
-      identite,
-      metadata,
+      metadata: { isFallback: false },
+      identite: null,
     };
+    // fetch IMR and use cache
+    // const { identite = null, metadata } = await fetchRNEImmatriculation(siren);
+
+    // return {
+    //   siren,
+    //   downloadLink: `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`,
+    //   siteLink: `${routes.rncs.portail.entreprise}${siren}`,
+    //   identite,
+    //   metadata,
+    // };
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INPI, 404);

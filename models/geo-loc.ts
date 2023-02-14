@@ -16,7 +16,7 @@ export const getGeoLoc = async (etablissement: IEtablissement) => {
   try {
     return await clientBanGeoLoc(etablissement.adresse);
   } catch (e: any) {
-    logErrorInSentry('Error in API Geoloc', {
+    logErrorInSentry('Error in API BAN', {
       siren: etablissement.siren,
       details: JSON.stringify(e.message),
     });

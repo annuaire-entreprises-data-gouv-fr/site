@@ -21,8 +21,8 @@ const ActiveFilterLabel: React.FC<{
       .selected-filter-container {
         display: flex;
         align-items: center;
-        justify-content: center;
         padding: 5px 30px 5px 10px;
+        justify-content: center;
         color: ${constants.colors.frBlue};
         background-color: ${constants.colors.pastelBlue};
         border-radius: 3px;

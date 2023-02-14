@@ -73,7 +73,7 @@ const verifyAdressConsistency = async (association: IAssociation) => {
 
     return false;
   } catch (e: any) {
-    logErrorInSentry('Error in association adress check', {
+    logErrorInSentry('Error in API BAN', {
       siren: association.siren,
       details: e.toString(),
     });

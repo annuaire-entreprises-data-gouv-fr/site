@@ -1,6 +1,4 @@
 import React from 'react';
-import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
-import { OpenClosedTag } from '#components-ui/badge/frequent';
 import ButtonLink from '#components-ui/button';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
@@ -8,7 +6,6 @@ import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import { INPI } from '#components/administrations';
 import { Section } from '#components/section';
-import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,
@@ -16,7 +13,6 @@ import {
 } from '#models/api-not-responding';
 import { IImmatriculationRNE } from '#models/immatriculation/rne';
 import { IUniteLegale } from '#models/index';
-import { formatDate, formatIntFr } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
 
 interface IProps {
@@ -42,25 +38,21 @@ const ImmatriculationRNE: React.FC<IProps> = ({
 
   return (
     <>
-      {immatriculation.downloadLink && (
+      {true && (
         <>
           <Section
             id="rne"
             title="Justificatif d’immatriculation au RNE"
             sources={[EAdministration.INPI]}
           >
-            <p>
-              Cette structure est enregistrée au{' '}
-              <b>Registre National des Entreprises (RNE)</b>.
-            </p>
             <PrintNever>
               <>
                 <p>
-                  Pour obtenir un <b>justificatif d’immatriculation</b>{' '}
+                  Pour vérifier si cette structure est enregistrée au{' '}
+                  <b>Registre National des Entreprises (RNE)</b> essayez de
+                  télécharger son <b>justificatif d’immatriculation</b>{' '}
                   (équivalent de l’extrait KBIS ou D1 pour les entreprises
-                  artisanales),{' '}
-                  <b>téléchargez l’extrait d’immatriculation au RNE</b> ou
-                  consultez la fiche complète sur le site de l’
+                  artisanales), ou de consultez sa fiche sur le site de l’
                   <INPI />
                   &nbsp;:
                 </p>

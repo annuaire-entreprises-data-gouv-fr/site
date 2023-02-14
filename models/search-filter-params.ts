@@ -203,7 +203,6 @@ export const extractFilters = (params: IParams) => {
   }
 
   let administrativeFilterCounter = 0;
-  let structureFilterCounter = 0;
   if (params.sap) {
     administrativeFilterCounter += 1;
   }
@@ -219,16 +218,27 @@ export const extractFilters = (params: IParams) => {
     f.administrativeFilter.label += ` + ${administrativeFilterCounter} filtre${plural} administratif${plural}`;
   }
 
+  const structureLabels = {
+    ess: 'Label : ESS',
+    rge: 'Label : RGE',
+    esv: 'Label : entreprenur de spectacle vivant',
+    ei: 'Type : Entreprise Individuelle ',
+    ct: 'Type : Collectivité territoriale ',
+    asso: 'Type : Association ',
+  };
+
   if (params.type) {
-    structureFilterCounter += 1;
+    f.structureFilter.label =
+      //@ts-ignore
+      structureLabels[params.type] || 'filtre sur le type';
+  }
+  if (params.label && params.type) {
+    f.structureFilter.label += ' + ';
   }
   if (params.label) {
-    structureFilterCounter += 1;
-  }
-
-  if (structureFilterCounter > 0) {
-    const plural = structureFilterCounter ? 's' : '';
-    f.structureFilter.label += ` ${structureFilterCounter} filtre${plural} structure`;
+    f.structureFilter.label +=
+      //@ts-ignore
+      structureLabels[params.label] || 'filtre sur le label';
   }
 
   if (params.cp_dep_label) {

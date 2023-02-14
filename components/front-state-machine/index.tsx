@@ -18,6 +18,10 @@ const FrontStateMachine: React.FC<{ id?: string; states: JSX.Element[] }> = ({
       <div className="status-success">{states[2]}</div>
       <div className="status-error">{states[3]}</div>
 
+      {states && states.length === 5 ? (
+        <div className="status-not-found">{states[4]}</div>
+      ) : null}
+
       <style global jsx>{`
         #${id}.display-default > div:not(.status-default) {
           display: none !important;
@@ -43,6 +47,13 @@ const FrontStateMachine: React.FC<{ id?: string; states: JSX.Element[] }> = ({
           display: none !important;
         }
         #${id}.display-error > div.status-error {
+          display: block;
+        }
+
+        #${id}.display-not-found > div:not(.status-not-found) {
+          display: none !important;
+        }
+        #${id}.display-not-found > div.status-not-found {
           display: block;
         }
       `}</style>

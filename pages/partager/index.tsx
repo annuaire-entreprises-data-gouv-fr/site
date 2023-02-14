@@ -9,7 +9,7 @@ const Partager: NextPageWithLayout = () => {
     <>
       <Meta title="Réutiliser ou partager l’Annuaire des Entreprises" />
       <TextWrapper>
-        <h1>Réutilisations & partage</h1>
+        <h1>Réutiliser & partager</h1>
         <p>
           L’
           <a href="/comment-ca-marche">Annuaire des Entreprises</a> permet de

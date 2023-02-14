@@ -22,7 +22,7 @@ const StatusPage: NextPageWithLayout<{
       ])}
     />
     <TextWrapper>
-      <h1>Questions Fréquentes (FAQ)</h1>
+      <h1>Questions fréquentes (FAQ)</h1>
       <p>Conseils et réponses de l’équipe Annuaire des Entreprises</p>
       <ul>
         {articles.map(({ slug, title }) => (
