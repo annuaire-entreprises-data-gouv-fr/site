@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
-import Breadcrumb from '#components-ui/breadcrumb';
+import Breadcrumb from '../components-ui/breadcrumb';
 
 export default {
   title: 'Breacrumb',

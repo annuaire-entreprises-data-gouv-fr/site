@@ -58,9 +58,7 @@ const EtablissementTable: React.FC<{
                   )}
                   <>{etablissement.adresse}</>
                 </span>
-                {etablissement.estSiege && (
-                  <Tag className="info">siège social</Tag>
-                )}
+                {etablissement.estSiege && <Tag color="info">siège social</Tag>}
                 {sieges.indexOf(etablissement.siret) > 0 &&
                   !etablissement.estSiege && <Tag>ancien siège social</Tag>}
               </>
