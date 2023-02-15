@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 const purgeConfig = {
   content: ['./**/*.tsx', './**/*.html'],
   css: ['frontend/style/dsfr.min.css'],
+  safelist: [],
 };
 
 const purgecss = require('@fullhuman/postcss-purgecss')(purgeConfig);
