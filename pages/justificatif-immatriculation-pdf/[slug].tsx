@@ -96,11 +96,11 @@ const InpiPDF: NextPageWithLayout<IProps> = ({ siren, metadata }) => {
             </>,
             <>
               <b>Statut du téléchargement :</b>
-              <Tag className="open">succés</Tag>
+              <Tag color="success">succés</Tag>
             </>,
             <>
               <b>Statut du téléchargement :</b>
-              <Tag className="closed">échec</Tag>
+              <Tag color="error">échec</Tag>
               <p>
                 Le téléchargement a échoué car le téléservice de l’
                 <INPI /> est actuellement indisponible.{' '}
@@ -114,7 +114,7 @@ const InpiPDF: NextPageWithLayout<IProps> = ({ siren, metadata }) => {
             </>,
             <>
               <b>Statut du téléchargement :</b>
-              <Tag className="closed">introuvable</Tag>
+              <Tag color="error">introuvable</Tag>
               <p>
                 Le document que vous recherchez n’a pas été retrouvé dans les
                 systèmes informatique de l’

@@ -35,7 +35,7 @@ const EtablissementSection: React.FC<IProps> = ({
             'Type d’établissement',
             <>
               {etablissement.estSiege ? (
-                <Tag className="info">siège social</Tag>
+                <Tag color="info">siège social</Tag>
               ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) >
                 -1 ? (
                 <Tag>ancien siège social</Tag>

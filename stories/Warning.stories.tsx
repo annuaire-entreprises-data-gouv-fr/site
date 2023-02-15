@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
-import Warning from '#components-ui/alerts/warning';
+import Warning from '../components-ui/alerts/warning';
 
 export default {
   title: 'Alert/Warning',

@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import { HorizontalSeparator } from '../components-ui/horizontal-separator';
 
 export default {
   title: 'Separator/Horizontal',

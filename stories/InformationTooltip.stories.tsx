@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
-import InformationTooltip from '#components-ui/information-tooltip';
+import InformationTooltip from '../components-ui/information-tooltip';
 
 export default {
   title: 'Information Tooltip',

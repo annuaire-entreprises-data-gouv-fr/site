@@ -9,13 +9,13 @@ import { formatDate } from '#utils/helpers';
 const classFromState = (state: IETATADMINSTRATIF) => {
   switch (state) {
     case IETATADMINSTRATIF.ACTIF:
-      return 'open';
+      return 'success';
     case IETATADMINSTRATIF.CESSEE:
     case IETATADMINSTRATIF.FERME:
-      return 'closed';
+      return 'error';
     case IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT:
     default:
-      return 'unknown';
+      return 'new';
   }
 };
 
@@ -23,7 +23,7 @@ const EtatTag: React.FC<{
   state: IETATADMINSTRATIF;
   since?: string;
 }> = ({ state, since = '' }) => (
-  <Tag className={classFromState(state)}>
+  <Tag color={classFromState(state)}>
     {state}
     {since && <>&nbsp;le&nbsp;{formatDate(since)}</>}
   </Tag>

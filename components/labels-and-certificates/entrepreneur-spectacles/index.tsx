@@ -19,31 +19,31 @@ const Validity = ({ statut = '', dateDeValidite = '' }) => {
     case 'valide':
       return (
         <InformationTooltip label="La déclaration vaut récépissé. L'exercice de la profession est licite.">
-          <Tag className="open">valide</Tag>
+          <Tag color="success">valide</Tag>
           {dateDeValidite ? ` depuis le ${dateDeValidite}` : ''}
         </InformationTooltip>
       );
     case 'en instruction':
       return (
         <InformationTooltip label="Instruction du dossier en cours. L'exercice de la profession au titre de cette déclaration est interdit.">
-          <Tag className="info">En instruction</Tag>
+          <Tag color="info">En instruction</Tag>
         </InformationTooltip>
       );
     case 'invalidé':
       return (
         <InformationTooltip label="Le récépissé a été retirée après une période de validité.">
-          <Tag className="closed">Invalidé</Tag>
+          <Tag color="error">Invalidé</Tag>
           {dateDeValidite ? ` depuis le ${dateDeValidite}` : ''}
         </InformationTooltip>
       );
     case 'invalide':
       return (
         <InformationTooltip label="La déclaration a été refusée. L'exercice de la profession au titre de cette déclaration est interdit.">
-          <Tag className="closed">Invalide</Tag>
+          <Tag color="error">Invalide</Tag>
         </InformationTooltip>
       );
     default:
-      return <Tag className="unknown">Etat inconnu</Tag>;
+      return <Tag color="new">Etat inconnu</Tag>;
   }
 };
 
@@ -115,9 +115,10 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
       </a>{' '}
       du <MC />.
       <p>
-        Le <b>numéro de récépissé est le numéro de déclaration</b>. Le récépissé est
-        valide 30 jours après que le dossier ait été reçu complet et conforme à
-        la réglementation. Un récépissé de déclaration au statut valide est <b>valable pour cinq ans</b>.
+        Le <b>numéro de récépissé est le numéro de déclaration</b>. Le récépissé
+        est valide 30 jours après que le dossier ait été reçu complet et
+        conforme à la réglementation. Un récépissé de déclaration au statut
+        valide est <b>valable pour cinq ans</b>.
       </p>
       <p>
         Si une déclaration que vous avez faite n’apparaît pas sur le tableau

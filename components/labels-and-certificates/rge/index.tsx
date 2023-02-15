@@ -80,8 +80,8 @@ export const CertificationsRGESection: React.FC<{
     [
       'Travaille avec',
       <div>
-        <Tag className="info">Professionnels</Tag>
-        {workingWithIndividual && <Tag className="info">Particuliers</Tag>}
+        <Tag color="info">Professionnels</Tag>
+        {workingWithIndividual && <Tag color="info">Particuliers</Tag>}
       </div>,
     ],
   ];

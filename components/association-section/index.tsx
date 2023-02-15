@@ -46,10 +46,8 @@ const AssociationSection: React.FC<{
         <>
           {regime ? `${regime}, ` : ''}
           {formeJuridique}
-          {utilPublique && (
-            <Tag className="info">Reconnue d’utilité publique</Tag>
-          )}
-          {eligibiliteCEC && <Tag className="info">Éligible CEC</Tag>}
+          {utilPublique && <Tag color="info">Reconnue d’utilité publique</Tag>}
+          {eligibiliteCEC && <Tag color="info">Éligible CEC</Tag>}
         </>
       ) : (
         ''

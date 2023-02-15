@@ -1,54 +1,36 @@
 import React, { PropsWithChildren } from 'react';
 
-interface IProps {
-  className?: string;
+interface ITagProps {
+  size?: 'medium' | 'small';
+  color?: 'default' | 'error' | 'info' | 'new' | 'success' | 'warning';
 }
 
-export const Tag: React.FC<PropsWithChildren<IProps>> = ({
+export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   children,
-  className = '',
-}) => (
-  <>
-    <span className={`tag ${className}`}>{children}</span>
-    <style jsx>{`
-      .tag {
-        font-size: 0.9rem;
-        font-weight: bold;
-        display: inline-block;
-        background-color: #eee;
-        color: #666;
-        border-radius: 3px;
-        padding: 0 5px;
-        margin: 2px 5px;
-        border: 1px solid #eee;
-        font-style: initial;
-      }
+  size = 'medium',
+  color = 'default',
+}) => {
+  const badgeSize = {
+    small: 'fr-badge--sm',
+    medium: 'fr-badge--md',
+  };
 
-      .tag.closed {
-        color: #914141;
-        background-color: #ffe5e5;
-        border: 1px solid #ffe5e5;
-      }
-      .tag.open {
-        color: #326f00;
-        background-color: #cdf2c0;
-        border: 1px solid #cdf2c0;
-      }
-      .tag.unknown {
-        color: #6f0000;
-        background-color: #ffe585;
-        border: 1px solid #ffe585;
-      }
-      .tag.info {
-        color: #0461b5;
-        border: 1px solid #e5f3ff;
-        background-color: #e5f3ff;
-      }
-      .tag.alt {
-        color: #777;
-        border: 1px solid #ccc;
-        background-color: transparent;
-      }
-    `}</style>
-  </>
-);
+  return (
+    <>
+      &nbsp;
+      <span
+        className={`fr-badge fr-badge--no-icon ${badgeSize[size]} ${
+          color ? `fr-badge--${color}` : ''
+        }`}
+      >
+        {children}
+      </span>
+      &nbsp;
+      <style jsx>{`
+        .fr-badge {
+          display: inline;
+        }
+      `}</style>
+    </>
+  );
+};

@@ -25,7 +25,7 @@ const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
       ) : (
         <>
           {etablissement.adresse}
-          {etablissement.estSiege && <Tag className="info">siège social</Tag>}
+          {etablissement.estSiege && <Tag color="info">siège social</Tag>}
         </>
       ),
       <IsActiveTag

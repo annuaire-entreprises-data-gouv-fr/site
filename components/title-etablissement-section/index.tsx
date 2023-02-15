@@ -33,7 +33,7 @@ const MapTitleEtablissement: React.FC<{
   <div className="sub-title">
     <h2>{title || 'Information sur l’Etablissement'}</h2>
     <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
-    {etablissement.estSiege && <Tag className="info">siège social</Tag>}
+    {etablissement.estSiege && <Tag color="info">siège social</Tag>}
     <IsActiveTag
       etatAdministratif={etablissement.etatAdministratif}
       statutDiffusion={etablissement.statutDiffusion}
@@ -54,31 +54,28 @@ const TitleEtablissementWithDenomination: React.FC<{
   etablissement: IEtablissement;
 }> = ({ uniteLegale, etablissement }) => (
   <div className="etablissement-title">
-    {etablissement.oldSiret &&
-      etablissement.oldSiret !== etablissement.siret && (
-        <Warning full>
-          Cet établissement est inscrit en double à l’
-          <INSEE /> : {formatSiret(etablissement.oldSiret)} et{' '}
-          {formatSiret(etablissement.siret)}. Pour voir les informations
-          complètes, consultez la page{' '}
-          <a href={`/etablissement/${etablissement.siret}`}>
-            {formatSiret(etablissement.siret)}
-          </a>
-          .
-        </Warning>
-      )}
+    {etablissement.oldSiret && etablissement.oldSiret !== etablissement.siret && (
+      <Warning full>
+        Cet établissement est inscrit en double à l’
+        <INSEE /> : {formatSiret(etablissement.oldSiret)} et{' '}
+        {formatSiret(etablissement.siret)}. Pour voir les informations
+        complètes, consultez la page{' '}
+        <a href={`/etablissement/${etablissement.siret}`}>
+          {formatSiret(etablissement.siret)}
+        </a>
+        .
+      </Warning>
+    )}
     <TitleEtablissement
       uniteLegale={uniteLegale}
       nomEtablissement={etablissement.enseigne || etablissement.denomination}
     />
     <div className="etablissement-sub-title">
       <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
-      {etablissement.estSiege && <Tag className="info">siège social</Tag>}
+      {etablissement.estSiege && <Tag color="info">siège social</Tag>}
       {uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 &&
         !etablissement.estSiege && <Tag>ancien siège social</Tag>}
-      {estNonDiffusible(etablissement) && (
-        <Tag className="unknown">non-diffusible</Tag>
-      )}
+      {estNonDiffusible(etablissement) && <Tag color="new">non-diffusible</Tag>}
       <IsActiveTag
         etatAdministratif={etablissement.etatAdministratif}
         statutDiffusion={etablissement.statutDiffusion}
