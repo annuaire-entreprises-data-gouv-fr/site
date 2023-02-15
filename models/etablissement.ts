@@ -77,13 +77,13 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
  * Return an Etablissement from sirene ouverte
  */
 const getEtablissementForGoodBot = async (
-  slug: string
+  siret: Siret
 ): Promise<IEtablissement> => {
   try {
-    return await clientEtablissementSireneOuverte(slug);
+    return await clientEtablissementSireneOuverte(siret);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
-      throw new SiretNotFoundError(slug);
+      throw new SiretNotFoundError(siret);
     }
     throw e;
   }

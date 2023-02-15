@@ -9,13 +9,15 @@ export const clientEtablissementSireneOuverte = async (
     searchTerms: siret,
     page: 1,
   });
+
   if (
     !results.length ||
     !results[0] ||
-    !results[0].matchingEtablissements.length
+    results[0].matchingEtablissements.length === 0
   ) {
     throw new HttpNotFound(siret);
   }
+
   const result = results[0];
   return result.matchingEtablissements[0];
 };

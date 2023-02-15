@@ -23,6 +23,7 @@ export interface IResult {
   section_activite_principale: string;
   tranche_effectif_salarie: string;
   matching_etablissements: IMatchingEtablissement[];
+  etablissements?: IMatchingEtablissement[];
   complements: IComplements;
 }
 

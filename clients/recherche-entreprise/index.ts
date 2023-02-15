@@ -2,6 +2,7 @@ import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { etatFromEtatAdministratifInsee } from '#clients/sirene-insee/helpers';
 import constants from '#models/constants';
+import { createEtablissementsList } from '#models/etablissements-list';
 import { IEtatCivil, IPersonneMorale } from '#models/immatriculation/rncs';
 import {
   createDefaultEtablissement,
@@ -11,11 +12,14 @@ import {
 } from '#models/index';
 import { ISearchResult, ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
+import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
 import {
   verifySiren,
   formatFirstNames,
   verifySiret,
   parseIntWithDefaultValue,
+  extractSirenFromSiret,
+  extractNicFromSiret,
 } from '#utils/helpers';
 import {
   libelleFromCategoriesJuridiques,
@@ -120,6 +124,9 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     matching_etablissements,
     categorie_entreprise,
     tranche_effectif_salarie,
+    date_creation = '',
+    date_mise_a_jour = '',
+    etablissements = [],
   } = result;
 
   const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
@@ -135,13 +142,29 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       }
     : { codeColter: null };
 
+  const etablissementSiege = mapToEtablissement(siege);
+
+  const matchingEtablissements = matching_etablissements.map(
+    (matchingEtablissement) => mapToEtablissement(matchingEtablissement)
+  );
+
   return {
     ...createDefaultUniteLegale(siren),
     libelleCategorieEntreprise: libelleFromeCodeCategorie(categorie_entreprise),
-    siege: mapToEtablissement(siege),
-    matchingEtablissements: matching_etablissements
-      .map((matchingEtablissement) => mapToEtablissement(matchingEtablissement))
-      .filter((e) => e.siret !== siege.siret),
+    siege: etablissementSiege,
+    matchingEtablissements,
+    nombreEtablissements: result.nombre_etablissements || 1,
+    nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
+    etablissements: createEtablissementsList(
+      etablissements.length > 0
+        ? etablissements.map(mapToEtablissement)
+        : [etablissementSiege],
+      // hard code 1 for page as we dont paginate etablissement on recherche-entreprise
+      1,
+      // pretend we only have up to 100 etablissement
+      result.nombre_etablissements
+    ),
+    statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     etatAdministratif: etatFromEtatAdministratifInsee(
       result.etat_administratif,
       siren
@@ -149,8 +172,6 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     nomComplet,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(nature_juridique),
     libelleTrancheEffectif: libelleFromCodeEffectif(tranche_effectif_salarie),
-    nombreEtablissements: result.nombre_etablissements || 1,
-    nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
     chemin: result.siren,
     natureJuridique: nature_juridique || '',
     libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
@@ -170,6 +191,8 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       idAssociation: identifiant_association,
     },
     colter,
+    dateCreation: date_creation,
+    dateDerniereMiseAJour: date_mise_a_jour,
   };
 };
 
@@ -228,8 +251,9 @@ const mapToEtablissement = (
     adresse,
     liste_enseignes,
     etat_administratif,
-    est_siege,
-    nom_commercial,
+    est_siege = false,
+    nom_commercial = '',
+    activite_principale = '',
   } = etablissement;
 
   const enseigne = (liste_enseignes || []).join(' ');
@@ -246,6 +270,8 @@ const mapToEtablissement = (
   );
   return {
     ...createDefaultEtablissement(),
+    siren: extractSirenFromSiret(siret),
+    nic: extractNicFromSiret(siret),
     siret: verifySiret(siret),
     adresse,
     adressePostale,
@@ -253,6 +279,10 @@ const mapToEtablissement = (
     longitude,
     estSiege: est_siege,
     etatAdministratif,
+    activitePrincipale: activite_principale,
+    denomination: nom_commercial,
+    libelleActivitePrincipale:
+      libelleFromCodeNAFWithoutNomenclature(activite_principale),
   };
 };
 
