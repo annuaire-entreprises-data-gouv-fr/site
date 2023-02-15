@@ -32,14 +32,14 @@ const Validity = ({ statut = '', dateDeValidite = '' }) => {
     case 'invalidé':
       return (
         <InformationTooltip label="Le récépissé a été retirée après une période de validité.">
-          <Tag color="warning">Invalidé</Tag>
+          <Tag color="error">Invalidé</Tag>
           {dateDeValidite ? ` depuis le ${dateDeValidite}` : ''}
         </InformationTooltip>
       );
     case 'invalide':
       return (
         <InformationTooltip label="La déclaration a été refusée. L'exercice de la profession au titre de cette déclaration est interdit.">
-          <Tag color="warning">Invalide</Tag>
+          <Tag color="error">Invalide</Tag>
         </InformationTooltip>
       );
     default:

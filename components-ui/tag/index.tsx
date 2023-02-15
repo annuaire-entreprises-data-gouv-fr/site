@@ -15,20 +15,22 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
     medium: 'fr-badge--md',
   };
 
-  const badgeColor = {
-    default: '',
-    success: 'fr-badge--success',
-    error: 'fr-badge--error',
-    info: 'fr-badge--info',
-    warning: 'fr-badge--warning',
-    new: 'fr-badge--new',
-  };
-
   return (
-    <p
-      className={`fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`}
-    >
-      {children}
-    </p>
+    <>
+      &nbsp;
+      <span
+        className={`fr-badge fr-badge--no-icon ${badgeSize[size]} ${
+          color ? `fr-badge--${color}` : ''
+        }`}
+      >
+        {children}
+      </span>
+      &nbsp;
+      <style jsx>{`
+        .fr-badge {
+          display: inline;
+        }
+      `}</style>
+    </>
   );
 };

@@ -12,7 +12,7 @@ const classFromState = (state: IETATADMINSTRATIF) => {
       return 'success';
     case IETATADMINSTRATIF.CESSEE:
     case IETATADMINSTRATIF.FERME:
-      return 'warning';
+      return 'error';
     case IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT:
     default:
       return 'new';
