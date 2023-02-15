@@ -54,11 +54,11 @@ const search = async (
 
   try {
     const escapedSearchTerm = escapeTerm(searchTerm);
-    return await clientSearchSireneOuverte(
-      escapedSearchTerm,
+    return await clientSearchSireneOuverte({
+      searchTerms: escapedSearchTerm,
       page,
-      searchFilterParams
-    );
+      searchFilterParams,
+    });
   } catch (e: any) {
     if (e instanceof IsLikelyASirenOrSiretException) {
       throw e;
@@ -73,17 +73,16 @@ const search = async (
     // attempt a fallback on staging
     try {
       const escapedSearchTerm = escapeTerm(searchTerm);
-      return await clientSearchSireneOuverte(
-        escapedSearchTerm,
+      return await clientSearchSireneOuverte({
+        searchTerms: escapedSearchTerm,
         page,
         searchFilterParams,
-        true
-      );
+        fallbackOnStaging: true,
+      });
     } catch (eFallback: any) {
       if (eFallback instanceof HttpNotFound) {
         return noResults;
       }
-
       throw new SearchEngineError(
         `term : ${searchTerm} - ${eFallback.toString()}`
       );

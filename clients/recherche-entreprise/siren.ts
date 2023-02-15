@@ -10,7 +10,10 @@ import clientSearchSireneOuverte from '.';
 export const clientComplementsSireneOuverte = async (
   siren: Siren
 ): Promise<IComplements> => {
-  const { results } = await clientSearchSireneOuverte(siren, 1);
+  const { results } = await clientSearchSireneOuverte({
+    searchTerms: siren,
+    page: 1,
+  });
 
   if (results.length > 0) {
     const { complements, colter } = results[0];
@@ -22,7 +25,17 @@ export const clientComplementsSireneOuverte = async (
 export const clientEtablissementSireneOuverte = async (
   siret: string
 ): Promise<IEtablissement> => {
-  const { results } = await clientSearchSireneOuverte(siret, 1);
+  const { results } = await clientSearchSireneOuverte({
+    searchTerms: siret,
+    page: 1,
+  });
+  if (
+    results.length ||
+    !results[0] ||
+    !results[0].matchingEtablissements.length
+  ) {
+    throw new HttpNotFound(siret);
+  }
   const result = results[0];
   return result.matchingEtablissements[0];
 };
@@ -31,7 +44,18 @@ export const clientUniteLegaleSireneOuverte = async (
   siren: Siren,
   page = 1
 ): Promise<IUniteLegale> => {
-  const { results } = await clientSearchSireneOuverte(siren, 1);
+  const { results } = await clientSearchSireneOuverte({
+    searchTerms: siren,
+    page: 1,
+    inclureEtablissements: true,
+  });
+  if (
+    results.length ||
+    !results[0] ||
+    !results[0].matchingEtablissements.length
+  ) {
+    throw new HttpNotFound(siren);
+  }
   const result = results[0];
   return mapToDomainObject(siren, result, page);
 };

@@ -32,16 +32,26 @@ import {
   IDirigeant,
 } from './interface';
 
+type ClientSearchSireneOuverte = {
+  searchTerms: string;
+  page: number;
+  searchFilterParams?: SearchFilterParams;
+  fallbackOnStaging?: boolean;
+  useCache?: boolean;
+  inclureEtablissements?: boolean;
+};
+
 /**
  * Get results for searchTerms from Sirene ouverte API
  */
-const clientSearchSireneOuverte = async (
-  searchTerms: string,
-  page: number,
-  searchFilterParams?: SearchFilterParams,
+const clientSearchSireneOuverte = async ({
+  searchTerms,
+  page,
+  searchFilterParams,
   fallbackOnStaging = false,
-  useCache = true
-): Promise<ISearchResults> => {
+  useCache = false,
+  inclureEtablissements = false,
+}: ClientSearchSireneOuverte): Promise<ISearchResults> => {
   const encodedTerms = encodeURIComponent(searchTerms);
 
   const route =
@@ -56,7 +66,7 @@ const clientSearchSireneOuverte = async (
     throw new NotEnoughParamsException('');
   }
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3${
+  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3&inclure_etablissements=${inclureEtablissements}${
     searchFilterParams?.toApiURI() || ''
   }`;
 

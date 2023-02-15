@@ -37,13 +37,14 @@ const ping = async (slug: string | string[]) => {
     case 'api-tva':
       return await clientTVA(verifySiren('880878145'), useCache);
     case 'api-recherche':
-      return await clientSearchSireneOuverte(
-        'test',
-        1,
-        undefined,
-        false,
-        useCache
-      );
+      return await clientSearchSireneOuverte({
+        searchTerms: 'test',
+        page: 1,
+        searchFilterParams: undefined,
+        fallbackOnStaging: false,
+        useCache,
+        inclureEtablissements: false,
+      });
     default:
       throw new APISlugNotFound(404, `API ping ${slug} not found`);
   }
