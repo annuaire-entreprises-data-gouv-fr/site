@@ -22,24 +22,6 @@ export const clientComplementsSireneOuverte = async (
   throw new HttpNotFound(siren);
 };
 
-export const clientEtablissementSireneOuverte = async (
-  siret: string
-): Promise<IEtablissement> => {
-  const { results } = await clientSearchSireneOuverte({
-    searchTerms: siret,
-    page: 1,
-  });
-  if (
-    results.length ||
-    !results[0] ||
-    !results[0].matchingEtablissements.length
-  ) {
-    throw new HttpNotFound(siret);
-  }
-  const result = results[0];
-  return result.matchingEtablissements[0];
-};
-
 export const clientUniteLegaleSireneOuverte = async (
   siren: Siren,
   page = 1
@@ -50,7 +32,7 @@ export const clientUniteLegaleSireneOuverte = async (
     inclureEtablissements: true,
   });
   if (
-    results.length ||
+    !results.length ||
     !results[0] ||
     !results[0].matchingEtablissements.length
   ) {

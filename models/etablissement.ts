@@ -1,5 +1,5 @@
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
-import { clientEtablissementSireneOuverte } from '#clients/recherche-entreprise/siren';
+import { clientEtablissementSireneOuverte } from '#clients/recherche-entreprise/siret';
 import {
   clientEtablissementInsee,
   clientEtablissementInseeFallback,
