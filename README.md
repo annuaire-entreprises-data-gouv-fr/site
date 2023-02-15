@@ -127,6 +127,10 @@ cd seo-script
 npm run build:seo
 ```
 
+## Vie privée 
+
+Pour modifier la liste des siren protégés en diffusion [mettre à jour la liste suivante](https://github.com/etalab/annuaire-entreprises-site/edit/main/public/protected-siren.txt) 
+
 ## Licence
 
 Ce projet est sous AGPL 3.0
