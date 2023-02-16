@@ -15,6 +15,7 @@ import {
 import { IImmatriculationRNM } from '#models/immatriculation/rnm';
 import { IUniteLegale } from '#models/index';
 import { formatDate, formatIntFr } from '#utils/helpers';
+import { RnmRncsEOLWarning } from './end-of-life-warning';
 
 interface IProps {
   immatriculation: IImmatriculationRNM | IAPINotRespondingError;
@@ -76,6 +77,7 @@ const ImmatriculationRNM: React.FC<IProps> = ({
             title="Immatriculation au RNM"
             sources={[EAdministration.CMAFRANCE]}
           >
+            <RnmRncsEOLWarning />
             <p>
               Cette structure possède une fiche d’immatriculation sur le{' '}
               <b>Répertoire National des Métiers (RNM)</b> qui liste les

@@ -1,6 +1,6 @@
 import React from 'react';
 import AvisSituationLink from '#components/avis-situation-link';
-import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
+import { IUniteLegale, isAssociation } from '#models/index';
 import AssociationCreationNotFoundAlert from './association-creation-not-found-alert';
 import Info from './info';
 
@@ -9,27 +9,6 @@ const ImmatriculationNotFoundAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
 }) => {
   if (isAssociation(uniteLegale)) {
     return <AssociationCreationNotFoundAlert association={uniteLegale} />;
-  } else if (uniteLegale.complements.estEntrepreneurIndividuel) {
-    return (
-      <Info full>
-        <b>Pas de justificatif d’immatriculation au RNM ou au RNCS</b>
-        <p>
-          Comme cette structure est une{' '}
-          <b>entreprise individuelle ou une auto-entreprise</b>, elle n’est pas
-          nécessairement immatriculée au RNM ou RNCS.
-          <br />
-          Dans ce cas,{' '}
-          <AvisSituationLink
-            siret={uniteLegale.siege.siret}
-            label="l’avis de situation du siège social"
-          />{' '}
-          sert à prouver l’existence de l’entreprise.
-        </p>
-      </Info>
-    );
-  }
-  if (isServicePublic(uniteLegale)) {
-    return null;
   } else {
     return (
       <Info full>
@@ -40,23 +19,23 @@ const ImmatriculationNotFoundAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
         </p>
         <ul>
           <li>
-            Si cette structure est une entreprise artisanale,{' '}
-            <a href="https://rnm.artisanat.fr/">
-              contactez les Chambres des Métiers de l’Artisanat
-            </a>
-          </li>
-          <li>
-            Si cette structure est une entreprise commerciale,{' '}
-            <a href="http://data.inpi.fr/">
-              contactez l’INPI qui centralise les données des Greffes des
-              tribunaux de commerce.
-            </a>
+            Si cette structure est une <b>entreprise</b> (commerciale,
+            artisanale, agricole, ou entreprise individuelle),{' '}
+            <a href="http://data.inpi.fr/">contactez l’INPI</a>. En effet,
+            l’INPI opére le Registre National des Entreprises (RNE), dans lequel
+            devrait apparaitre l’entreprise.
           </li>
           <li>
             Si cette structure est un <b>service publique</b>, c’est un cas
             normal. Il n’existe pas de justificatif d’immatriculation.
           </li>
         </ul>
+        En l’absence de justificatif d’immatriculation,{' '}
+        <AvisSituationLink
+          siret={uniteLegale.siege.siret}
+          label="l’avis de situation du siège social"
+        />{' '}
+        permet de prouver l’existence de l’entreprise.
       </Info>
     );
   }

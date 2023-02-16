@@ -17,6 +17,7 @@ import { IImmatriculationRNCS } from '#models/immatriculation/rncs';
 import { IUniteLegale } from '#models/index';
 import { formatDate, formatIntFr } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
+import { RnmRncsEOLWarning } from './end-of-life-warning';
 
 interface IProps {
   immatriculation: IImmatriculationRNCS | IAPINotRespondingError;
@@ -48,6 +49,8 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
             title="Immatriculation au RNCS"
             sources={[EAdministration.INPI]}
           >
+            <RnmRncsEOLWarning />
+
             {immatriculation.metadata.isFallback && (
               <InpiPartiallyDownWarning missing="le numéro RCS" />
             )}
