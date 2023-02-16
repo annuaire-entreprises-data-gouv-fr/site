@@ -86,7 +86,7 @@ const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
   } = { ...defaultAssociation, ...association };
 
   return {
-    id: idRna,
+    idAssociation: idRna,
     exId: id_ex,
     nomComplet: nom,
     objet,

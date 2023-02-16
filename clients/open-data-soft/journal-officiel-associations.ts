@@ -61,7 +61,7 @@ interface IDCAField {
 }
 
 const clientJOAFE = async (idRna: string): Promise<IAnnoncesAssociation> => {
-  const searchUrl = `${routes.journalOfficielAssociations.ods.search}&q=numero_rna=${idRna}+refine.source=joafe&sort=dateparution`;
+  const searchUrl = `${routes.journalOfficielAssociations.ods.search}&q=numero_rna=${idRna}&refine.source=joafe&sort=dateparution`;
   const metadataUrl = routes.journalOfficielAssociations.ods.metadata;
   const response = await odsClient(searchUrl, metadataUrl);
 
@@ -86,7 +86,7 @@ const clientDCA = async (
   siren: Siren,
   idRna: IdRna | string
 ): Promise<IComptesAssociation> => {
-  const filterParam = `&q=dca_siren=${siren}+OR+numero_rna=${idRna}+&refine.source=dca&sort=dca_datecloture`;
+  const filterParam = `&q=dca_siren=${siren}+OR+numero_rna=${idRna}&refine.source=dca&sort=dca_datecloture`;
 
   const searchUrl = `${routes.journalOfficielAssociations.ods.search}${filterParam}`;
   const metadataUrl = routes.journalOfficielAssociations.ods.metadata;

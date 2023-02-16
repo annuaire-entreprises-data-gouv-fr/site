@@ -36,12 +36,10 @@ const Immatriculations: React.FC<IJustificatifs> = ({
 
   const noRNMImmatriculation = isNotFound(immatriculationRNM);
   const noRNCSImmatriculation = isNotFound(immatriculationRNCS);
-  const noRNEImmatriculation = isNotFound(immatriculationRNE);
 
   const noImmatriculation =
     noAssociationImmatriculation &&
     noRNCSImmatriculation &&
-    noRNEImmatriculation &&
     noRNMImmatriculation;
 
   return (
