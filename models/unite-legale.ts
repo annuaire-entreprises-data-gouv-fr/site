@@ -120,7 +120,7 @@ class UniteLegaleFactory {
 }
 
 /**
- * For Indexing bot only - Fetch an uniteLegale from RechclientUniteLegaleRechercheEntreprise
+ * For Indexing bot only - Fetch an uniteLegale from clientUniteLegaleRechercheEntreprise
  *
  */
 const getUniteLegaleForGoodBot = async (
