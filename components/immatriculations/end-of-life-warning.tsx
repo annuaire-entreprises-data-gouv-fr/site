@@ -3,7 +3,7 @@ import { INPI } from '#components/administrations';
 
 export const RnmRncsEOLWarning = () => (
   <Info>
-    A compté du 1er Janvier 2023, toutes les entreprises (commerciales,
+    A compter du 1er Janvier 2023, toutes les entreprises (commerciales,
     agricoles ou artisanales et indépendantes) doivent être{' '}
     <a
       href="https://www.inpi.fr/le-registre-national-des-entreprises"
