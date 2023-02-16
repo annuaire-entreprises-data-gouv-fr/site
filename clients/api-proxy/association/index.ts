@@ -1,3 +1,4 @@
+import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { formatAdresse, IdRna } from '#utils/helpers';
 import { clientAPIProxy } from '../client';
@@ -16,6 +17,40 @@ const clientAssociation = async (numeroRna: IdRna, useCache = true) => {
 };
 
 const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
+  const defaultAssociation = {
+    activites: { objet: '', lib_famille1: '' },
+    identite: {
+      nom: '',
+      id_ex: '',
+      lib_forme_juridique: '',
+      date_pub_jo: '',
+      date_creat: '',
+      date_dissolution: '',
+      eligibilite_cec: false,
+      regime: '',
+      util_publique: false,
+    },
+    coordonnees: {
+      adresse_siege: {
+        num_voie: '',
+        type_voie: '',
+        cp: '',
+        commune: '',
+        voie: '',
+      },
+      adresse_gestion: {
+        commune: '',
+        cp: '',
+        pays: '',
+        voie: '',
+      },
+      telephone: '',
+      courriel: '',
+      site_web: '',
+    },
+    agrement: [{ date_attribution: '' }],
+  };
+
   const {
     activites: { objet = '', lib_famille1 = '' },
     identite: {
@@ -48,7 +83,7 @@ const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
       site_web = '',
     },
     agrement,
-  } = association;
+  } = { ...defaultAssociation, ...association };
 
   return {
     id: idRna,
