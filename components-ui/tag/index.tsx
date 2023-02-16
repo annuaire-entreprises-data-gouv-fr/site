@@ -24,18 +24,28 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
     success: 'fr-badge--success',
   };
 
+  let serializedTag = '';
+  try {
+    serializedTag = children?.toString() || '';
+  } catch {}
+
   return (
     <>
       <span
         className={`fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`}
+        title={serializedTag}
       >
         {children}
       </span>
       <style jsx>{`
         .fr-badge {
-          display: inline;
           white-space: nowrap;
-          margin: 0 5px;
+          display: inline-block;
+          vertical-align: middle;
+          margin: 3px 5px;
+          max-width: 80vw;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       `}</style>
     </>
