@@ -2,6 +2,7 @@ import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { etatFromEtatAdministratifInsee } from '#clients/sirene-insee/helpers';
 import constants from '#models/constants';
+import { createEtablissementsList } from '#models/etablissements-list';
 import { IEtatCivil, IPersonneMorale } from '#models/immatriculation/rncs';
 import {
   createDefaultEtablissement,
@@ -11,97 +12,50 @@ import {
 } from '#models/index';
 import { ISearchResult, ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
+import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
 import {
   verifySiren,
   formatFirstNames,
-  parseIntWithDefaultValue,
   verifySiret,
+  parseIntWithDefaultValue,
+  extractSirenFromSiret,
+  extractNicFromSiret,
 } from '#utils/helpers';
-import { libelleFromCodeNAFWithoutNomenclature } from '#utils/labels';
+import {
+  libelleFromCategoriesJuridiques,
+  libelleFromCodeEffectif,
+  libelleFromCodeNAFWithoutNomenclature,
+  libelleFromeCodeCategorie,
+} from '#utils/labels';
 import { httpGet } from '#utils/network';
+import {
+  ISearchResponse,
+  IResult,
+  ISiege,
+  IMatchingEtablissement,
+  IDirigeant,
+} from './interface';
 
-interface ISirenOuverteEtablissement {
-  activite_principale: string;
-  adresse: string;
-  code_postal: string;
-  est_siege: boolean;
-  etat_administratif: string;
-  geo_id: string;
-  latitude: string;
-  liste_enseignes: string[];
-  liste_finess: [];
-  liste_idcc: [];
-  liste_rge: [];
-  liste_uai: [];
-  longitude: string;
-  nom_commercial: string;
-  siret: string;
-}
-
-interface ISireneOuverteUniteLegaleResultat {
-  siren: string;
-  siege: ISirenOuverteEtablissement;
-  date_creation: string;
-  categorie_entreprise: string;
-  etat_administratif: string;
-  nom_raison_sociale: string;
-  nature_juridique: string;
-  activite_principale: string;
-  economie_sociale_solidaire: string;
-  nom_complet: string;
-  nombre_etablissements: number;
-  nombre_etablissements_ouverts: number;
-  is_entrepreneur_individuel: true;
-  dirigeants: ISireneOuverteDirigeant[];
-  complements: {
-    identifiant_association: string;
-    convention_collective_renseignee: boolean;
-    est_entrepreneur_individuel: boolean;
-    est_entrepreneur_spectacle: boolean;
-    est_ess: boolean;
-    est_finess: boolean;
-    est_rge: boolean;
-    est_uai: boolean;
-    collectivite_territoriale: {
-      code: string;
-      code_insee: string;
-      elus: ISirenOuverteEtablissement[];
-      niveau: string;
-    };
-  };
-  matching_etablissements: ISirenOuverteEtablissement[];
-}
-
-interface ISireneOuverteDirigeant {
-  prenoms?: string;
-  nom?: string;
-  annee_de_naissance?: string;
-  qualite?: string;
-  fonction?: string;
-  sexe?: string;
-  siren?: string;
-  denomination?: string;
-  sigle?: string;
-}
-
-interface ISireneOuverteSearchResults {
-  page: string;
-  total_results: number;
-  total_pages: number;
-  currentPage?: string;
-  results: ISireneOuverteUniteLegaleResultat[];
-}
+type ClientSearchSireneOuverte = {
+  searchTerms: string;
+  page: number;
+  searchFilterParams?: SearchFilterParams;
+  fallbackOnStaging?: boolean;
+  useCache?: boolean;
+  inclureEtablissements?: boolean;
+};
 
 /**
  * Get results for searchTerms from Sirene ouverte API
  */
-const clientSearchSireneOuverte = async (
-  searchTerms: string,
-  page: number,
-  searchFilterParams?: SearchFilterParams,
+const clientSearchSireneOuverte = async ({
+  searchTerms,
+  page,
+  searchFilterParams,
   fallbackOnStaging = false,
-  useCache = true
-): Promise<ISearchResults> => {
+  useCache = false,
+  inclureEtablissements = false,
+}: ClientSearchSireneOuverte): Promise<ISearchResults> => {
   const encodedTerms = encodeURIComponent(searchTerms);
 
   const route =
@@ -116,7 +70,7 @@ const clientSearchSireneOuverte = async (
     throw new NotEnoughParamsException('');
   }
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3${
+  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3&inclure_etablissements=${inclureEtablissements}${
     searchFilterParams?.toApiURI() || ''
   }`;
 
@@ -133,34 +87,26 @@ const clientSearchSireneOuverte = async (
     useCache
   );
 
-  const results = (response.data || []) as any;
+  const results = response.data as ISearchResponse;
 
-  if (
-    results.length === 0 ||
-    !results.results ||
-    results.results.length === 0
-  ) {
+  if (!results.results || results.results.length === 0) {
     throw new HttpNotFound('No results');
   }
   return mapToDomainObjectNew(results);
 };
 
-const mapToDomainObjectNew = (
-  data: ISireneOuverteSearchResults
-): ISearchResults => {
+const mapToDomainObjectNew = (data: ISearchResponse): ISearchResults => {
   const { total_results = 0, total_pages = 0, results = [], page } = data;
 
   return {
-    currentPage: page ? parseIntWithDefaultValue(page) : 1,
+    currentPage: parseIntWithDefaultValue(page as string, 1),
     resultCount: total_results,
     pageCount: total_pages,
     results: results.map(mapToUniteLegale),
   };
 };
 
-const mapToUniteLegale = (
-  result: ISireneOuverteUniteLegaleResultat
-): ISearchResult => {
+const mapToUniteLegale = (result: IResult): ISearchResult => {
   const {
     nature_juridique,
     siege,
@@ -176,6 +122,11 @@ const mapToUniteLegale = (
       est_uai = false,
     },
     matching_etablissements,
+    categorie_entreprise,
+    tranche_effectif_salarie,
+    date_creation = '',
+    date_mise_a_jour = '',
+    etablissements = [],
   } = result;
 
   const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
@@ -191,19 +142,36 @@ const mapToUniteLegale = (
       }
     : { codeColter: null };
 
+  const etablissementSiege = mapToEtablissement(siege);
+
+  const matchingEtablissements = matching_etablissements.map(
+    (matchingEtablissement) => mapToEtablissement(matchingEtablissement)
+  );
+
   return {
     ...createDefaultUniteLegale(siren),
-    siege: mapToEtablissement(siege),
-    matchingEtablissements: matching_etablissements
-      .map((e) => mapToEtablissement(e))
-      .filter((e) => e.siret !== siege.siret),
+    libelleCategorieEntreprise: libelleFromeCodeCategorie(categorie_entreprise),
+    siege: etablissementSiege,
+    matchingEtablissements,
+    nombreEtablissements: result.nombre_etablissements || 1,
+    nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
+    etablissements: createEtablissementsList(
+      etablissements.length > 0
+        ? etablissements.map(mapToEtablissement)
+        : [etablissementSiege],
+      // hard code 1 for page as we dont paginate etablissement on recherche-entreprise
+      1,
+      // pretend we only have up to 100 etablissement
+      result.nombre_etablissements
+    ),
+    statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     etatAdministratif: etatFromEtatAdministratifInsee(
       result.etat_administratif,
       siren
     ),
     nomComplet,
-    nombreEtablissements: result.nombre_etablissements || 1,
-    nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
+    libelleNatureJuridique: libelleFromCategoriesJuridiques(nature_juridique),
+    libelleTrancheEffectif: libelleFromCodeEffectif(tranche_effectif_salarie),
     chemin: result.siren,
     natureJuridique: nature_juridique || '',
     libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
@@ -223,11 +191,13 @@ const mapToUniteLegale = (
       idAssociation: identifiant_association,
     },
     colter,
+    dateCreation: date_creation,
+    dateDerniereMiseAJour: date_mise_a_jour,
   };
 };
 
 const mapToDirigeantModel = (
-  dirigeantRaw: ISireneOuverteDirigeant
+  dirigeant: IDirigeant
 ): IEtatCivil | IPersonneMorale => {
   const {
     siren = '',
@@ -235,9 +205,9 @@ const mapToDirigeantModel = (
     denomination = '',
     prenoms = '',
     nom = '',
-    // annee_de_naissance = '',
     qualite = '',
-  } = dirigeantRaw;
+  } = dirigeant;
+
   if (!!siren) {
     return {
       siren,
@@ -272,7 +242,7 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
 };
 
 const mapToEtablissement = (
-  etablissement: ISirenOuverteEtablissement
+  etablissement: ISiege | IMatchingEtablissement
 ): IEtablissement => {
   const {
     siret,
@@ -281,8 +251,9 @@ const mapToEtablissement = (
     adresse,
     liste_enseignes,
     etat_administratif,
-    est_siege,
-    nom_commercial,
+    est_siege = false,
+    nom_commercial = '',
+    activite_principale = '',
   } = etablissement;
 
   const enseigne = (liste_enseignes || []).join(' ');
@@ -299,6 +270,8 @@ const mapToEtablissement = (
   );
   return {
     ...createDefaultEtablissement(),
+    siren: extractSirenFromSiret(siret),
+    nic: extractNicFromSiret(siret),
     siret: verifySiret(siret),
     adresse,
     adressePostale,
@@ -306,6 +279,10 @@ const mapToEtablissement = (
     longitude,
     estSiege: est_siege,
     etatAdministratif,
+    activitePrincipale: activite_principale,
+    denomination: nom_commercial,
+    libelleActivitePrincipale:
+      libelleFromCodeNAFWithoutNomenclature(activite_principale),
   };
 };
 

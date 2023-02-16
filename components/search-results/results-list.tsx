@@ -84,20 +84,25 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
       </div>
     </a>
     <ul className="matching-etablissement">
-      {(result.matchingEtablissements || []).map((etablissement) => (
-        <li key={etablissement.siret}>
-          <a className="adress" href={`/etablissement/${etablissement.siret}`}>
-            {etablissement.adressePostale}
-            <span className="down" />
-          </a>
-          {!estActif(etablissement) && (
-            <IsActiveTag
-              etatAdministratif={etablissement.etatAdministratif}
-              statutDiffusion={etablissement.statutDiffusion}
-            />
-          )}
-        </li>
-      ))}
+      {(result.matchingEtablissements || [])
+        .filter((e) => !e.estSiege)
+        .map((etablissement) => (
+          <li key={etablissement.siret}>
+            <a
+              className="adress"
+              href={`/etablissement/${etablissement.siret}`}
+            >
+              {etablissement.adressePostale}
+              <span className="down" />
+            </a>
+            {!estActif(etablissement) && (
+              <IsActiveTag
+                etatAdministratif={etablissement.etatAdministratif}
+                statutDiffusion={etablissement.statutDiffusion}
+              />
+            )}
+          </li>
+        ))}
       <li>
         <a
           className="fr-link"

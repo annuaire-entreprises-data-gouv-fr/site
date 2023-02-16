@@ -2,12 +2,12 @@ import { clientAssociation } from '#clients/api-proxy/association';
 import clientSearchSireneOuverte from '#clients/recherche-entreprise';
 import { clientRNM } from '#clients/rnm';
 import { clientUniteLegaleInseeNoCache } from '#clients/sirene-insee/siren';
-import clientUniteLegaleSireneOuverte from '#clients/sirene-ouverte/siren';
 import clientSiret2Idcc from '#clients/siret-2-idcc';
 import { clientTVA } from '#clients/tva';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
 import { fetchRNCSImmatriculation } from './api-proxy/rncs';
 import { fetchRNEImmatriculation } from './api-proxy/rne';
+import { clientUniteLegaleSireneOuverte } from './recherche-entreprise/siren';
 
 export class APISlugNotFound extends Error {
   constructor(public status: number, public message: string) {
@@ -37,13 +37,14 @@ const ping = async (slug: string | string[]) => {
     case 'api-tva':
       return await clientTVA(verifySiren('880878145'), useCache);
     case 'api-recherche':
-      return await clientSearchSireneOuverte(
-        'test',
-        1,
-        undefined,
-        false,
-        useCache
-      );
+      return await clientSearchSireneOuverte({
+        searchTerms: 'test',
+        page: 1,
+        searchFilterParams: undefined,
+        fallbackOnStaging: false,
+        useCache,
+        inclureEtablissements: false,
+      });
     default:
       throw new APISlugNotFound(404, `API ping ${slug} not found`);
   }

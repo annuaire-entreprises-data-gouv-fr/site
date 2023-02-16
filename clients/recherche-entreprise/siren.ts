@@ -1,18 +1,20 @@
 import { HttpNotFound } from '#clients/exceptions';
-import { IComplements } from '#models/complements';
+import { IUniteLegale } from '#models/index';
 import { Siren } from '#utils/helpers';
 import clientSearchSireneOuverte from '.';
 
-const clientComplementsSireneOuverte = async (
-  siren: Siren
-): Promise<IComplements> => {
-  const { results } = await clientSearchSireneOuverte(siren, 1);
-
-  if (results.length > 0) {
-    const { complements, colter } = results[0];
-    return { complements, colter };
+export const clientUniteLegaleSireneOuverte = async (
+  siren: Siren,
+  fallbackOnStaging = false
+): Promise<IUniteLegale> => {
+  const { results } = await clientSearchSireneOuverte({
+    searchTerms: siren,
+    page: 1,
+    inclureEtablissements: true,
+    fallbackOnStaging,
+  });
+  if (!results.length || !results[0]) {
+    throw new HttpNotFound(siren);
   }
-  throw new HttpNotFound(siren);
+  return results[0];
 };
-
-export default clientComplementsSireneOuverte;

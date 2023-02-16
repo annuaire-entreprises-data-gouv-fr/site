@@ -1,4 +1,5 @@
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
+import { clientUniteLegaleSireneOuverte } from '#clients/recherche-entreprise/siren';
 import {
   clientUniteLegaleInsee,
   clientUniteLegaleInseeFallback,
@@ -9,7 +10,6 @@ import {
   clientSiegeInsee,
   clientSiegeInseeFallback,
 } from '#clients/sirene-insee/siret';
-import clientUniteLegaleSireneOuverte from '#clients/sirene-ouverte/siren';
 import { getAssociation } from '#models/association';
 import {
   createEtablissementsList,
@@ -30,7 +30,6 @@ import {
   SirenNotFoundError,
 } from '.';
 import { isAssociation } from '.';
-import { getComplements } from './complements';
 import { estNonDiffusible, ISTATUTDIFFUSION } from './statut-diffusion';
 
 /**
@@ -58,33 +57,41 @@ class UniteLegaleFactory {
   private _siren: Siren;
   private _isBot: boolean;
   private _page: number;
-  private _getUniteLegaleCore: (
-    siren: Siren,
-    page: number
-  ) => Promise<IUniteLegale>;
 
   constructor(slug: string, isBot = false, page = 1) {
     this._siren = verifySiren(slug);
     this._isBot = isBot;
     this._page = page;
-
-    this._getUniteLegaleCore = isBot
-      ? getUniteLegaleForGoodBot
-      : getUniteLegale;
   }
 
   async get() {
-    let [uniteLegale, { complements, colter }] = await Promise.all([
-      this._getUniteLegaleCore(this._siren, this._page),
-      // colter, labels and certificates, from sirene ouverte
-      getComplements(this._siren).catch(() => {
-        return { colter: {}, complements: {} };
-      }),
-    ]);
+    if (this._isBot) {
+      const uniteLegale = await getUniteLegaleForGoodBot(
+        this._siren,
+        this._page
+      );
+      return await this.postProcessUniteLegale(uniteLegale);
+    } else {
+      const [uniteLegale, { colter = {}, complements = {} }] =
+        await Promise.all([
+          getUniteLegale(this._siren, this._page),
+          // colter, labels and certificates, from sirene ouverte
+          getUniteLegaleForGoodBot(this._siren).catch(() => {
+            return { colter: {}, complements: {} };
+          }),
+        ]);
 
-    uniteLegale.complements = { ...uniteLegale.complements, ...complements };
-    uniteLegale.colter = { ...uniteLegale.colter, ...colter };
+      uniteLegale.complements = {
+        ...uniteLegale.complements,
+        ...complements,
+      };
+      uniteLegale.colter = { ...uniteLegale.colter, ...colter };
 
+      return await this.postProcessUniteLegale(uniteLegale);
+    }
+  }
+
+  postProcessUniteLegale = async (uniteLegale: IUniteLegale) => {
     // no need to call API association for bot
     if (!this._isBot && isAssociation(uniteLegale)) {
       uniteLegale = await getAssociation(uniteLegale);
@@ -108,13 +115,8 @@ class UniteLegaleFactory {
     }
 
     return uniteLegale;
-  }
+  };
 }
-
-/** =========
- *  Fetching
- * ==========
- * /
 
 /**
  * For Indexing bot only - Fetch an uniteLegale from SireneOuverte
@@ -125,8 +127,7 @@ const getUniteLegaleForGoodBot = async (
   page = 1
 ): Promise<IUniteLegale> => {
   try {
-    const uniteLegale = await clientUniteLegaleSireneOuverte(siren, page);
-    return uniteLegale;
+    return await clientUniteLegaleSireneOuverte(siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       // when not found in siren ouverte, fallback on insee
@@ -136,8 +137,10 @@ const getUniteLegaleForGoodBot = async (
         // in any Insee error
         throw new SirenNotFoundError(siren);
       }
+    } else {
+      const fallbackOnStaging = true;
+      return await clientUniteLegaleSireneOuverte(siren, fallbackOnStaging);
     }
-    throw e;
   }
 };
 
@@ -159,7 +162,7 @@ const getUniteLegale = async (
 
     try {
       // in case sirene INSEE 429 or 500, fallback on Siren Etalab
-      return await clientUniteLegaleSireneOuverte(siren, page);
+      return await clientUniteLegaleSireneOuverte(siren);
     } catch (e: any) {
       logSireneOuvertefailed({ siren, details: e.message || e });
 

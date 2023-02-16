@@ -1,13 +1,12 @@
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
+import { clientEtablissementSireneOuverte } from '#clients/recherche-entreprise/siret';
 import {
   clientEtablissementInsee,
   clientEtablissementInseeFallback,
 } from '#clients/sirene-insee/siret';
-import { clientEtablissementSireneOuverte } from '#clients/sirene-ouverte/siret';
 import { getGeoLoc } from '#models/geo-loc';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { extractSirenFromSiret, Siret, verifySiret } from '#utils/helpers';
-import { isProtectedSiret } from '#utils/helpers/is-protected-siren-or-siret';
 import {
   logFirstSireneInseefailed,
   logSecondSireneInseefailed,
@@ -19,7 +18,6 @@ import {
   IEtablissementWithUniteLegale,
   SiretNotFoundError,
 } from '.';
-import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 /*
  * Return an etablissement given an existing siret
@@ -79,13 +77,13 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
  * Return an Etablissement from sirene ouverte
  */
 const getEtablissementForGoodBot = async (
-  slug: string
+  siret: Siret
 ): Promise<IEtablissement> => {
   try {
-    return await clientEtablissementSireneOuverte(slug);
+    return await clientEtablissementSireneOuverte(siret);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
-      throw new SiretNotFoundError(slug);
+      throw new SiretNotFoundError(siret);
     }
     throw e;
   }
