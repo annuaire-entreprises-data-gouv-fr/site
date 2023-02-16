@@ -21,6 +21,7 @@ const getAssociation = async (
   try {
     const idRna = verifyIdRna(slug);
     const data = await clientAssociation(idRna);
+
     uniteLegaleAsAssociation.association = {
       ...data,
       idAssociation: idRna,

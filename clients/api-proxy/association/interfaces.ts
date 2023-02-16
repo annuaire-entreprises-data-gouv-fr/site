@@ -1,18 +1,18 @@
 export interface IAssociationResponse {
   identite: Identite;
-  activites: Activites;
-  coordonnees: Coordonnees;
-  commentaire: Commentaire;
+  activites?: Activites;
+  coordonnees?: Coordonnees;
+  commentaire?: Commentaire;
   nbDocDac: number;
   nbDocRna: number;
   nbEtabsActifs: number;
-  reseau_affiliation: ReseauAffiliation[];
-  adherent_personne_morale: AdherentPersonneMorale[];
+  reseau_affiliation?: ReseauAffiliation[];
+  adherent_personne_morale?: AdherentPersonneMorale[];
   representant_legal: any[];
-  rh: Rh[];
-  agrement: Agrement[];
+  rh?: Rh[];
+  agrement?: Agrement[];
   compte: any[];
-  etablissement: Etablissement[];
+  etablissement?: Etablissement[];
   rib: any[];
   document_dac: any[];
   document_rna: any[];
