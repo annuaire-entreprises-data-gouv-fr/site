@@ -17,12 +17,6 @@ const clientAssociation = async (numeroRna: IdRna, useCache = true) => {
 };
 
 const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
-  if (!association?.identite?.date_creat) {
-    throw new HttpNotFound(
-      `Cannot found association informations with id rna: ${idRna}`
-    );
-  }
-
   const defaultAssociation = {
     activites: { objet: '', lib_famille1: '' },
     identite: {
