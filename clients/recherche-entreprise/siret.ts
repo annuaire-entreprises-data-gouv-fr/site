@@ -1,11 +1,11 @@
 import { HttpNotFound } from '#clients/exceptions';
 import { IEtablissement } from '#models/index';
-import clientSearchSireneOuverte from '.';
+import clientSearchRechercheEntreprise from '.';
 
-export const clientEtablissementSireneOuverte = async (
+export const clientEtablissementRechercheEntreprise = async (
   siret: string
 ): Promise<IEtablissement> => {
-  const { results } = await clientSearchSireneOuverte({
+  const { results } = await clientSearchRechercheEntreprise({
     searchTerms: siret,
     page: 1,
   });

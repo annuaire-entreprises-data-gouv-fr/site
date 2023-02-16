@@ -2,20 +2,26 @@
 //    Sentry logs helpers
 //=========================
 
-import { IScope, logWarningInSentry } from '.';
+import logErrorInSentry, { IScope, logWarningInSentry } from '.';
 
 export const logFirstSireneInseefailed = (sentryScope: IScope) =>
   logWarningInSentry(
-    'Server error in Sirene Insee, fallback on Sirene Ouverte (Etalab)',
+    'Error in Sirene Insee, fallback on Sirene Good Bot',
     sentryScope
   );
-export const logSireneOuvertefailed = (sentryScope: IScope) =>
+export const logRechercheEntreprisefailed = (sentryScope: IScope) =>
   logWarningInSentry(
-    'Server error in SireneEtalab, fallback to Sirene Insee with fallback token',
+    'Error in Sirene Good Bot, fallback to Sirene Insee with fallback token',
     sentryScope
   );
+export const logRechercheEntrepriseForGoodBotfailed = (sentryScope: IScope) =>
+  logErrorInSentry(
+    'Error in Sirene Good Bot, fallback to Sirene Insee or staging',
+    sentryScope
+  );
+
 export const logSecondSireneInseefailed = (sentryScope: IScope) =>
   logWarningInSentry(
-    'Server error in Sirene Insee using Fallback token, return 404',
+    'Error in Sirene Insee using Fallback token, return 404',
     sentryScope
   );

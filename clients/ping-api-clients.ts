@@ -1,5 +1,4 @@
 import { clientAssociation } from '#clients/api-proxy/association';
-import clientSearchSireneOuverte from '#clients/recherche-entreprise';
 import { clientRNM } from '#clients/rnm';
 import { clientUniteLegaleInseeNoCache } from '#clients/sirene-insee/siren';
 import clientSiret2Idcc from '#clients/siret-2-idcc';
@@ -7,7 +6,8 @@ import { clientTVA } from '#clients/tva';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
 import { fetchRNCSImmatriculation } from './api-proxy/rncs';
 import { fetchRNEImmatriculation } from './api-proxy/rne';
-import { clientUniteLegaleSireneOuverte } from './recherche-entreprise/siren';
+import clientSearchRechercheEntreprise from './recherche-entreprise';
+import { clientUniteLegaleRechercheEntreprise } from './recherche-entreprise/siren';
 
 export class APISlugNotFound extends Error {
   constructor(public status: number, public message: string) {
@@ -31,13 +31,15 @@ const ping = async (slug: string | string[]) => {
     case 'api-sirene-insee':
       return await clientUniteLegaleInseeNoCache(verifySiren('880878145'));
     case 'api-sirene-donnees-ouvertes':
-      return await clientUniteLegaleSireneOuverte(verifySiren('880878145'));
+      return await clientUniteLegaleRechercheEntreprise(
+        verifySiren('880878145')
+      );
     case 'api-association':
       return await clientAssociation(verifyIdRna('W551000280'), useCache);
     case 'api-tva':
       return await clientTVA(verifySiren('880878145'), useCache);
     case 'api-recherche':
-      return await clientSearchSireneOuverte({
+      return await clientSearchRechercheEntreprise({
         searchTerms: 'test',
         page: 1,
         searchFilterParams: undefined,

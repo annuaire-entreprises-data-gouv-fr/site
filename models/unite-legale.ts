@@ -1,5 +1,5 @@
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
-import { clientUniteLegaleSireneOuverte } from '#clients/recherche-entreprise/siren';
+import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
 import {
   clientUniteLegaleInsee,
   clientUniteLegaleInseeFallback,
@@ -20,8 +20,9 @@ import { Siren, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import {
   logFirstSireneInseefailed,
+  logRechercheEntreprisefailed,
+  logRechercheEntrepriseForGoodBotfailed,
   logSecondSireneInseefailed,
-  logSireneOuvertefailed,
 } from '#utils/sentry/helpers';
 import {
   createDefaultUniteLegale,
@@ -119,7 +120,7 @@ class UniteLegaleFactory {
 }
 
 /**
- * For Indexing bot only - Fetch an uniteLegale from SireneOuverte
+ * For Indexing bot only - Fetch an uniteLegale from clientUniteLegaleRechercheEntreprise
  *
  */
 const getUniteLegaleForGoodBot = async (
@@ -127,19 +128,27 @@ const getUniteLegaleForGoodBot = async (
   page = 1
 ): Promise<IUniteLegale> => {
   try {
-    return await clientUniteLegaleSireneOuverte(siren);
+    return await clientUniteLegaleRechercheEntreprise(siren);
   } catch (e: any) {
-    if (e instanceof HttpNotFound) {
-      // when not found in siren ouverte, fallback on insee
-      try {
+    try {
+      if (e instanceof HttpNotFound) {
+        // when not found in siren ouverte, fallback on insee
         return await fetchUniteLegaleFromInsee(siren, page);
-      } catch (ee: any) {
-        // in any Insee error
-        throw new SirenNotFoundError(siren);
+      } else {
+        const fallbackOnStaging = true;
+        return await clientUniteLegaleRechercheEntreprise(
+          siren,
+          fallbackOnStaging
+        );
       }
-    } else {
-      const fallbackOnStaging = true;
-      return await clientUniteLegaleSireneOuverte(siren, fallbackOnStaging);
+    } catch (ee: any) {
+      if (ee instanceof HttpNotFound) {
+        logRechercheEntrepriseForGoodBotfailed({
+          siren,
+          details: e.message || e,
+        });
+      }
+      throw new SirenNotFoundError(siren);
     }
   }
 };
@@ -162,9 +171,12 @@ const getUniteLegale = async (
 
     try {
       // in case sirene INSEE 429 or 500, fallback on Siren Etalab
-      return await clientUniteLegaleSireneOuverte(siren);
+      return await clientUniteLegaleRechercheEntreprise(siren);
     } catch (e: any) {
-      logSireneOuvertefailed({ siren, details: e.message || e });
+      logRechercheEntreprisefailed({
+        siren,
+        details: e.message || e,
+      });
 
       try {
         // in case sirene etalab 404 or 500, fallback on Sirene insee using fallback credentials to avoid 403
