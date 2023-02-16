@@ -112,7 +112,7 @@ const routes = {
     siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',
     siretBySiren: 'https://api.insee.fr/entreprises/sirene/V3/siret?q=siren:',
   },
-  sireneOuverte: {
+  rechercheEntreprise: {
     etablissement: 'https://api-annuaire-entreprises.data.gouv.fr/siret?q=',
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
     rechercheUniteLegaleStaging:

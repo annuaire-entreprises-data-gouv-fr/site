@@ -1,5 +1,5 @@
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
-import { clientEtablissementSireneOuverte } from '#clients/recherche-entreprise/siret';
+import { clientEtablissementRechercheEntreprise } from '#clients/recherche-entreprise/siret';
 import {
   clientEtablissementInsee,
   clientEtablissementInseeFallback,
@@ -9,8 +9,8 @@ import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { extractSirenFromSiret, Siret, verifySiret } from '#utils/helpers';
 import {
   logFirstSireneInseefailed,
+  logRechercheEntreprisefailed,
   logSecondSireneInseefailed,
-  logSireneOuvertefailed,
 } from '#utils/sentry/helpers';
 import {
   createDefaultEtablissement,
@@ -54,9 +54,9 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
     logFirstSireneInseefailed({ siret, details: e.message });
 
     try {
-      return await clientEtablissementSireneOuverte(siret);
+      return await clientEtablissementRechercheEntreprise(siret);
     } catch (e: any) {
-      logSireneOuvertefailed({ siret, details: e.message });
+      logRechercheEntreprisefailed({ siret, details: e.message });
 
       try {
         return await clientEtablissementInseeFallback(siret);
@@ -80,7 +80,7 @@ const getEtablissementForGoodBot = async (
   siret: Siret
 ): Promise<IEtablissement> => {
   try {
-    return await clientEtablissementSireneOuverte(siret);
+    return await clientEtablissementRechercheEntreprise(siret);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       throw new SiretNotFoundError(siret);

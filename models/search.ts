@@ -1,5 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
-import clientSearchSireneOuverte from '#clients/recherche-entreprise';
+import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
 import { IDirigeant } from '#models/immatriculation/rncs';
 import SearchFilterParams from '#models/search-filter-params';
 import {
@@ -54,7 +54,7 @@ const search = async (
 
   try {
     const escapedSearchTerm = escapeTerm(searchTerm);
-    return await clientSearchSireneOuverte({
+    return await clientSearchRechercheEntreprise({
       searchTerms: escapedSearchTerm,
       page,
       searchFilterParams,
@@ -73,7 +73,7 @@ const search = async (
     // attempt a fallback on staging
     try {
       const escapedSearchTerm = escapeTerm(searchTerm);
-      return await clientSearchSireneOuverte({
+      return await clientSearchRechercheEntreprise({
         searchTerms: escapedSearchTerm,
         page,
         searchFilterParams,

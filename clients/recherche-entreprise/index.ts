@@ -36,7 +36,7 @@ import {
   IDirigeant,
 } from './interface';
 
-type ClientSearchSireneOuverte = {
+type ClientSearchRechercheEntreprise = {
   searchTerms: string;
   page: number;
   searchFilterParams?: SearchFilterParams;
@@ -48,21 +48,21 @@ type ClientSearchSireneOuverte = {
 /**
  * Get results for searchTerms from Sirene ouverte API
  */
-const clientSearchSireneOuverte = async ({
+const clientSearchRechercheEntreprise = async ({
   searchTerms,
   page,
   searchFilterParams,
   fallbackOnStaging = false,
   useCache = false,
   inclureEtablissements = false,
-}: ClientSearchSireneOuverte): Promise<ISearchResults> => {
+}: ClientSearchRechercheEntreprise): Promise<ISearchResults> => {
   const encodedTerms = encodeURIComponent(searchTerms);
 
   const route =
     process.env.ALTERNATIVE_SEARCH_ROUTE ||
     (fallbackOnStaging
-      ? routes.sireneOuverte.rechercheUniteLegaleStaging
-      : routes.sireneOuverte.rechercheUniteLegale);
+      ? routes.rechercheEntreprise.rechercheUniteLegaleStaging
+      : routes.rechercheEntreprise.rechercheUniteLegale);
 
   const filters = searchFilterParams?.toApiURI();
 
@@ -161,7 +161,6 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
         : [etablissementSiege],
       // hard code 1 for page as we dont paginate etablissement on recherche-entreprise
       1,
-      // pretend we only have up to 100 etablissement
       result.nombre_etablissements
     ),
     statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
@@ -286,4 +285,4 @@ const mapToEtablissement = (
   };
 };
 
-export default clientSearchSireneOuverte;
+export default clientSearchRechercheEntreprise;
