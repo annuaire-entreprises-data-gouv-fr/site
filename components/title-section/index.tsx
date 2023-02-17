@@ -124,7 +124,7 @@ const Tabs: React.FC<{
             className={`${
               currentFicheType === FICHE.AGENT_SUBVENTIONS ? 'active' : ''
             } no-style-link`}
-            href={`/espace-agent/subventions-associations/${uniteLegale.siren}`}
+            href={`/espace-agent/subventions-association/${uniteLegale.siren}`}
           >
             <Icon slug="lockFill">Subventions associations</Icon>
           </a>

@@ -1,5 +1,9 @@
 import { HttpNotFound } from '#clients/exceptions';
+import routes from '#clients/routes';
+import constants from '#models/constants';
 import { IGeoLoc } from '#models/geo-loc';
+import { Siren } from '#utils/helpers';
+import httpClient, { httpGet } from '#utils/network';
 import { mock } from './mock';
 
 export interface IApiEntrepriseAssociation {
@@ -185,10 +189,21 @@ export interface Meta {
 /**
  * GET
  */
-export const clientApiEntrepriseAssociation = async () => {
-  const response = mock as IApiEntrepriseAssociation;
+export const clientApiEntrepriseAssociation = async (siren: Siren) => {
+  // const response = mock as IApiEntrepriseAssociation;
 
-  return mapToDomainObject(response.data);
+  const response = await httpGet(
+    routes.apiEntreprise.association +
+      `${siren}?object=espace-agent-public&context=annuaire-entreprises&recipient=13002526500013`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.API_ENTREPRISE_TOKEN}`,
+      },
+      timeout: constants.timeout.M,
+    }
+  );
+
+  return mapToDomainObject(response.data?.data);
 };
 
 const mapToStatuts = (documentsRna: IDataAssociation['documents_rna']) => {
@@ -208,7 +223,7 @@ const mapToDac = (
   type: string
 ) => {
   return documentsDac
-    .filter((d) => d.type === type)
+    .filter((d) => d.type.indexOf(type) === 0)
     .map((d) => {
       return {
         nom: d.nom,
@@ -234,7 +249,7 @@ const mapToDomainObject = (response: IDataAssociation) => {
     dac: response.etablissements.map((e) => {
       return {
         siret: e.siret,
-        comptes: mapToDac(e.documents_dac, 'Comptes du dernier exercice clos'),
+        comptes: mapToDac(e.documents_dac, 'Comptes'),
         rapportFinancier: mapToDac(e.documents_dac, 'Rapport financier'),
         rapportActivite: mapToDac(e.documents_dac, "Rapport d'activité"),
         exerciceComptable: mapToComptes(e.comptes),
