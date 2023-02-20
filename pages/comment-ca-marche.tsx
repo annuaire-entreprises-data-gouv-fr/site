@@ -1,9 +1,16 @@
+import { GetStaticProps } from 'next';
 import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
+import {
+  administrationsMetaData,
+  IAdministrationMetaData,
+} from '#models/administrations';
 import { NextPageWithLayout } from './_app';
 
-const About: NextPageWithLayout = () => {
+const About: NextPageWithLayout<{
+  allAdministrations: IAdministrationMetaData[];
+}> = ({ allAdministrations }) => {
   return (
     <>
       <Meta title="Comment ça marche ?" />
@@ -94,7 +101,15 @@ const About: NextPageWithLayout = () => {
             Ces bases de données sont récupérées grâce aux téléservices
             développés par les{' '}
             <a href="/administration">administrations partenaires</a> :
-            {/* @TODO adding anchore to each section see notion document */}
+            <ul>
+              {allAdministrations.map((administration) => (
+                <li>
+                  <a href={`/administration#${administration.slug}`}>
+                    {administration.long}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </p>
           <h2>
             A quel point les données utilisées par l’Annuaire des Entreprises
@@ -238,6 +253,12 @@ const About: NextPageWithLayout = () => {
       </TextWrapper>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: { allAdministrations: Object.values(administrationsMetaData) },
+  };
 };
 
 export default About;
