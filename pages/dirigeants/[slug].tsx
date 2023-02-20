@@ -1,17 +1,21 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import BreakPageForPrint from '#components-ui/print-break-page';
+import { INPI, INSEE } from '#components/administrations';
 import BeneficiairesSection from '#components/dirigeants-section/beneficiaires';
 import DirigeantsEntrepriseIndividuelleSection from '#components/dirigeants-section/insee-dirigeant';
 import DirigeantsSection from '#components/dirigeants-section/rncs-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
 import Meta from '#components/meta';
 import { DirigeantsNonDiffusibleSection } from '#components/non-diffusible';
+import { Section } from '#components/section';
 import Title, { FICHE } from '#components/title-section';
+import { EAdministration } from '#models/administrations';
 import {
   getDirigeantsWithUniteLegaleFromSlug,
   IDirigeants,
 } from '#models/dirigeants';
+import { isServicePublic } from '#models/index';
 import { estDiffusible } from '#models/statut-diffusion';
 import {
   getCompanyPageDescription,
@@ -63,6 +67,45 @@ const DirigeantsPage: NextPageWithLayout<IProps> = ({
                     <BreakPageForPrint />
                   </>
                 )}
+              {uniteLegale.association.idAssociation && !uniteLegale.dirigeant && (
+                <Section
+                  id="rncs-dirigeants"
+                  title="Dirigeant(e) d’association"
+                  sources={[EAdministration.MI]}
+                >
+                  <p>
+                    Nous n’avons pas retrouvé de dirigeants enreigstrés auprès
+                    de l’
+                    <INSEE /> ou auprès de <INPI />.
+                  </p>
+                  <p>
+                    Si des dirigeants de cette strucure ont été déclarés auprès
+                    du <a href="https://www.interieur.gouv.fr">MI</a>, vous les
+                    retrouverez sur l&apos;onglet dirigeant de :{' '}
+                    <a
+                      target="_blank"
+                      href={`https://www.data-asso.fr/annuaire/association/${uniteLegale.association.idAssociation}?docFields=documentsDac,documentsRna`}
+                      rel="noreferrer"
+                    >
+                      data-asso
+                    </a>{' '}
+                  </p>
+                </Section>
+              )}
+              {isServicePublic(uniteLegale) && !uniteLegale.dirigeant && (
+                <Section
+                  id="rncs-dirigeants"
+                  title="Dirigeant(e) de service public"
+                  sources={[EAdministration.DINUM]}
+                >
+                  <p>
+                    Les administrations centrales, ministères et autres services
+                    public, n&apos;ont pas de dirigeants enregistrés dans les
+                    base de données de l’
+                    <INSEE /> ou de <INPI />.
+                  </p>
+                </Section>
+              )}
               <DirigeantsSection
                 immatriculationRNCS={immatriculationRNCS}
                 siren={uniteLegale.siren}
