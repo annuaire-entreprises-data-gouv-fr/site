@@ -71,7 +71,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
       return (
         <Section title={sectionTitle} sources={[EAdministration.MC]}>
           <p>
-            Nous n’avons pas retrouvé de récipissé de déclaration <FAQ /> déposé
+            Nous n’avons pas retrouvé de récépissé de déclaration <FAQ /> déposé
             auprès du <MC /> pour cette structure.
           </p>
           <p>
@@ -130,7 +130,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
       </p>
       <FullTable
         head={[
-          'Numéro de récipissé',
+          'Numéro de récépissé',
           'Date de déclaration',
           'Type',
           'Validité',

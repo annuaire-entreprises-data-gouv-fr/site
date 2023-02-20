@@ -17,11 +17,11 @@ describe('Certifications', () => {
     it('Should display ESS and scpetacles vivants', () => {
       cy.visit('/labels-certificats/842019051');
       cy.contains('ESS');
-      cy.contains('Numéro de récipissé');
+      cy.contains('Numéro de récépissé');
     });
     it('Should display only spectacles vivants', () => {
       cy.visit('/labels-certificats/399463603');
-      cy.contains('Numéro de récipissé');
+      cy.contains('Numéro de récépissé');
     });
   });
 });

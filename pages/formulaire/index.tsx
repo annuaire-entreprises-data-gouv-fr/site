@@ -232,7 +232,7 @@ const FeedBackPage: NextPageWithLayout = () => {
 
             <fieldset>
               <legend>
-                <h2>3 ・ Comment êtes-vous arrivé jusqu’ici ?</h2>
+                <h2>3 ・ Comment êtes-vous arrivé(e) jusqu’ici ?</h2>
               </legend>
               <div className="radio-group">
                 <div>
