@@ -1,6 +1,5 @@
 import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
-import { INSEE } from '#components/administrations';
 import Meta from '#components/meta';
 import { NextPageWithLayout } from './_app';
 
@@ -10,201 +9,212 @@ const About: NextPageWithLayout = () => {
       <Meta title="Comment ça marche ?" />
       <TextWrapper>
         <h1>À propos de L’Annuaire des Entreprises</h1>
-        <h2>Qui a développé ce site ?</h2>
+        <h2>Qui développe l’Annuaire des Entreprises ?</h2>
         <p>
-          Ce site a été développé et est maintenu par{' '}
-          <a
-            target="_blank"
-            rel="noreferrer noopener"
-            href="https://etalab.gouv.fr"
-          >
+          Ce site public est développé et maintenu par{' '}
+          <a href="https://etalab.gouv.fr/" target="_blank" rel="noreferrer">
             Etalab
-          </a>{' '}
-          et la{' '}
+          </a>
+          , au sein de la Direction interministérielle du numérique{' '}
           <a
+            href="https://www.numerique.gouv.fr/dinum/"
             target="_blank"
-            rel="noreferrer noopener"
-            href="https://entreprises.gouv.fr"
+            rel="noreferrer"
+          >
+            (DINUM)
+          </a>
+          , en coopération avec la{' '}
+          <a
+            href="https://entreprises.gouv.fr/"
+            target="_blank"
+            rel="noreferrer"
           >
             Direction Générale des Entreprises (DGE)
           </a>
-          .
-          <br />
-          Les données viennent des différentes administrations habilitées à les
-          récolter et les traiter. Ce site ne fait que centraliser les données.
-          <b>Il ne les modifie pas et ne les stocke pas</b>.
+          . Les informations utilisées proviennent d’administrations publiques
+          habilitées à récolter et traiter des données publiques sur les
+          entreprises.
+        </p>
+        <p>
+          L’Annuaire des Entreprises ne{' '}
+          <b>
+            fait que centraliser les données. Il ne les modifie pas et ne les
+            stocke pas.
+          </b>
         </p>
         <div>
-          <h2>D’où viennent les informations affichées sur le site ?</h2>
+          <h2>
+            Comment sont structurées les fiches de l’Annuaire des Entreprises ?{' '}
+          </h2>
           <p>
-            Toutes les informations affichées sur le site sont des informations
+            Les fiches de l’Annuaire regroupe des informations légales sur
+            toutes les personnes morales basées en France (entreprises,
+            associations, administrations, entrepreneurs…) à travers plusieurs
+            onglets :
+          </p>
+          <ul>
+            <li>
+              “Résumé” : les informations générales (adresse, SIRET, SIREN, code
+              NAF/ APE, numéro de TVA, RNA pour les associations…), les
+              informations sur le siège social ainsi que la liste des
+              établissements.
+            </li>
+            <li>
+              Justificatif d’immatriculation : permettant d’obtenir le document
+              pour prouver l’existence d’une entreprise ou d’une association
+              (équivalent des extraits KBIS et D1)
+            </li>
+            <li>
+              Informations sur les dirigeants (d’entreprises) ou élus
+              (collectivités)
+            </li>
+            <li>
+              Annonces légales : annonces officielles au Journal Officiel et au
+              BODACC (Bulletin Officiel Des Annonces Civiles et Commerciales)
+            </li>
+            <li>
+              Labels et certificats : RGE, ESS, Entrepreneurs de spectacles
+              vivants.
+            </li>
+            <li>
+              Conventions collectives : documents enregistrés auprès du
+              ministère du travail, du plein l’emploi et de l’insertion
+            </li>
+          </ul>
+          <h2>
+            D’où viennent les informations affichées par l’Annuaire des
+            Entreprises ?
+          </h2>
+          <p>
+            Toutes les informations affichées sur ce site sont des informations
             publiques, accessibles librement et gratuitement. On appelle cela
-            les données ouvertes ou l’open data.
+            des données ouvertes ou open data.
           </p>
           <p>
-            <b>NB :</b> toutes les données ouvertes (open data) de
-            l’administration sont accessibles sur{' '}
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://data.gouv.fr"
-            >
+            Ces bases de données sont récupérées grâce aux téléservices
+            développés par les{' '}
+            <a href="/administration">administrations partenaires</a> :
+            {/* @TODO adding anchore to each section see notion document */}
+          </p>
+          <h2>
+            A quel point les données utilisées par l’Annuaire des Entreprises
+            sont ouvertes et disponibles ?{' '}
+          </h2>
+          <p>
+            Toutes les données utilisées sont ouvertes en open data et
+            accessibles sur{' '}
+            <a href="https://data.gouv.fr/" target="_blank" rel="noreferrer">
               data.gouv.fr
             </a>
           </p>
-          <h3>Les fiches entreprises et etablissements</h3>
           <p>
-            Les informations comme le SIRET, l’adresse du siège social, la
-            dénomination sont issues de la{' '}
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/"
-            >
-              base Sirene des entreprises
-            </a>{' '}
-            publiée par l’
-            <INSEE />, et accessible à tous.
+            Si vous souhaitez les réutiliser, vous pouvez utiliser les APIs du
+            service public qui sont référencées sur
+            <a href="https://api.gouv.fr/" target="_blank" rel="noreferrer">
+              api.gouv.fr
+            </a>
           </p>
-          <h3>Les fiches d’immatriculation</h3>
           <p>
-            Les informations de la fiche d’immatriculation sont issues du{' '}
+            Vous pouvez également retrouver les sources de données de l’Annuaire
+            et le statut des API utilisées ici :
             <a
+              href="https://annuaire-entreprises.data.gouv.fr/sources-de-donnees"
               target="_blank"
-              rel="noreferrer noopener"
-              href="http://data.inpi.fr/"
+              rel="noreferrer"
             >
-              Registre National du Commerce et des Sociétés (RNCS)
-            </a>{' '}
-            ou du{' '}
+              https://annuaire-entreprises.data.gouv.fr/sources-de-donnees
+            </a>
+          </p>
+          <p>
+            <b>NB</b> : L’Annuaire des Entreprises a développé sa propre API
+            pour son moteur de recherche et la met également à disposition
+            gratuitement :
             <a
+              href="https://api.gouv.fr/les-api/api-recherche-entreprises"
               target="_blank"
-              rel="noreferrer noopener"
-              href="https://rnm.artisanat.fr/"
+              rel="noreferrer"
             >
-              Répertoire National des Métiers (RNM)
-            </a>{' '}
-            (dans le cas des entreprises artisanales).
+              l’API Recherche d’entreprises
+            </a>
+          </p>
+          <h2>Réutiliser et partager l’Annuaire des Entreprises</h2>
+          <p>Vous souhaitez : </p>
+          <ul>
+            <li>Ajouter des liens vers des fiches Annuaire sur votre site ?</li>
+            <li>
+              Aider à la saisie de SIRET et SIREN sur des pages spécifiques ?
+            </li>
+            <li>Ajouter le moteur de recherche à votre navigateur ?</li>
+            <li>Réutiliser nos données ?</li>
+            <li>Générer un QR code ?</li>
+          </ul>
+          <p>
+            Découvrez notre guide ici (
+            <a
+              href="https://annuaire-entreprises.data.gouv.fr/partager"
+              target={'_blank'}
+              rel="noreferrer"
+            >
+              https://annuaire-entreprises.data.gouv.fr/partager
+            </a>
+            ) et n’hésitez pas à nous contacter afin que nous puissions vous
+            aider :{' '}
+            <a href="mailto:annuaire-entreprises@data.gouv.fr">
+              annuaire-entreprises@data.gouv.fr
+            </a>
           </p>
           <h2>
-            Utilisation du site dans le cadre de démarches administratives
+            Utilisation du site dans le cadre de démarches et de vérifications
+            administratives administratives
           </h2>
           <p>
             L’Annuaire des Entreprises est un des services clefs mis en oeuvre
             par l’Etat pour faciliter les démarches des entreprises. Parmi ses
             fonctionnalités, on peut citer :
           </p>
-          <h3>Recherche de numéro siret, de numéro siren</h3>
-          <p>
-            L’Annuaire des Entreprises propose une recherche puissante et simple
-            qui permet aux entrepreneurs de retrouver facilement le numéro siret
-            de leur(s) entreprise(s) pour l’utiliser dans leurs démarches
-            administratives.
-          </p>
-          <h3>Suppression du KBIS dans les démarches des entreprises</h3>
-          <p>
-            À partir de Novembre 2021, les entreprises immatriculées au RCS ou
-            au RNM n’ont plus à fournir leur extrait KBIS dans leurs démarches
-            administratives, le seul numéro siret suffit à l’administration pour
-            retrouver les données nécessaires.
-          </p>
-          <p>
-            Ce site permet aux agents d’administrations de retrouver{' '}
-            <b>toutes les informations contenues dans un KBIS</b>.
-          </p>
-          <p>
-            <a href="/donnees-extrait-kbis">
-              ⇢ Vous êtes un agent ? Consultez notre guide.
-            </a>
-          </p>
-          <div className="layout-center"></div>
-          <h2>Comment utiliser ces données dans mon site internet ?</h2>
-          <p>
-            Toutes les sources de données citées précédement sont accessibles
-            grâce à des APIs :
-          </p>
           <ul>
             <li>
+              Proposer aux entrepreneur(e)s un moyen simple et efficace de
+              retrouver facilement les informations légales de leur entreprise :
+              <b>numéro SIRET, numéro SIREN, numéro de TVA etc.</b> afin de les
+              utiliser dans leurs démarches administratives.
+            </li>
+            <li>
+              Permettre aux agents publics de retrouver{' '}
+              <b>
+                toutes les informations contenues dans un extrait KBIS ou D1
+              </b>
+              <br />
               <a
+                href="https://annuaire-entreprises.data.gouv.fr/donnees-extrait-kbis"
                 target="_blank"
-                rel="noreferrer noopener"
-                href="https://api.gouv.fr/guides/quelle-api-sirene"
+                rel="noreferrer"
               >
-                API Sirene données ouvertes
-              </a>{' '}
-              : qui donne accès à la base Sirene des entreprises de l’
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://www.insee.fr/fr/accueil"
-              >
-                INSEE
+                ⇢ Vous êtes un agent ? Consultez notre guide.
               </a>
             </li>
             <li>
+              Permettre à tout un chacun de vérifier qu’une entreprise existe,
+              de consulter ses informations et de lutter contre la fraude. En
+              cas de problème, contactez les services de la{' '}
               <a
+                href="https://www.economie.gouv.fr/dgccrf"
                 target="_blank"
-                rel="noreferrer noopener"
-                href="https://api.gouv.fr/les-api/api_rnm"
+                rel="noreferrer"
               >
-                API Répertoire National des Métiers
+                DGCCRF
               </a>{' '}
-              : les immatriculations d’entreprises artisanales, auprès de{' '}
+              et plus particulièrement{' '}
               <a
+                href="https://signal.conso.gouv.fr"
                 target="_blank"
-                rel="noreferrer noopener"
-                href="https://cma-france.fr/"
+                rel="noreferrer"
               >
-                CMA France
+                Signal Conso
               </a>
-            </li>
-            <li>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://api.gouv.fr/les-api/api_inpi"
-              >
-                API Registre National du Commerce et des Sociétés
-              </a>{' '}
-              : les immatriculations d’entreprises auprès des Greffes de
-              tribunal de Commerce, centralisées par l’
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://www.inpi.fr/fr"
-              >
-                INPI
-              </a>
-              .
-            </li>
-            <li>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://api.gouv.fr/les-api/api_rna"
-              >
-                API Répertoire National des Associations
-              </a>{' '}
-              : les informations des associations, centralisées par le{' '}
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://www.interieur.gouv.fr"
-              >
-                Ministère de l’Intérieur
-              </a>
+              dans les cas de fraudes à la consommation.
             </li>
           </ul>
-          <p>
-            <b>NB :</b>Toutes les APIs du service public sont référencées sur{' '}
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://api.gouv.fr"
-            >
-              api.gouv.fr
-            </a>
-          </p>
           <h2>
             Je suis une administration, comment utiliser ces données directement
             dans une démarche ou un back office ?
@@ -221,15 +231,9 @@ const About: NextPageWithLayout = () => {
             <li>les certifications professionnelles</li>
             <li>... et bien d’autres</li>
           </ul>
-          <p>
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://api.gouv.fr/les-api/api-entreprise"
-            >
-              ⇢ En savoir plus sur API Entreprise
-            </a>
-          </p>
+          <a href="https://api.gouv.fr/les-api/api-entreprise">
+            ⇢ En savoir plus sur API Entreprise
+          </a>
         </div>
       </TextWrapper>
     </>
