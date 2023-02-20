@@ -1,16 +1,11 @@
-import { GetStaticProps } from 'next';
 import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
-import {
-  administrationsMetaData,
-  IAdministrationMetaData,
-} from '#models/administrations';
+import { administrationsMetaData } from '#models/administrations';
 import { NextPageWithLayout } from './_app';
 
-const About: NextPageWithLayout<{
-  allAdministrations: IAdministrationMetaData[];
-}> = ({ allAdministrations }) => {
+const About: NextPageWithLayout = () => {
+  const allAdministrations = Object.values(administrationsMetaData);
   return (
     <>
       <Meta title="Comment ça marche ?" />
@@ -61,7 +56,7 @@ const About: NextPageWithLayout<{
           </p>
           <ul>
             <li>
-              “Résumé” : les informations générales (adresse, SIRET, SIREN, code
+              Résumé : les informations générales (adresse, SIRET, SIREN, code
               NAF/ APE, numéro de TVA, RNA pour les associations…), les
               informations sur le siège social ainsi que la liste des
               établissements.
@@ -253,12 +248,6 @@ const About: NextPageWithLayout<{
       </TextWrapper>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: { allAdministrations: Object.values(administrationsMetaData) },
-  };
 };
 
 export default About;
