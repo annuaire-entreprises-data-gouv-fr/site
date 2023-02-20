@@ -27,17 +27,17 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
     immatriculationRNCS.beneficiaires &&
     `${immatriculationRNCS.beneficiaires.length} bénéficiaires inscrits à Référentiel des Bénéficiaires Effectifs`;
 
-  if (uniteLegale.association.idAssociation && !uniteLegale.dirigeant) {
+  if (hasNoDirigeant) {
     return (
       <>
         <p>
-          Cette association n’a pas de dirigeant(e) enregistré auprès de l’
+          Cette association n’a pas de dirigeant(e) enregistré(e) auprès de l’
           <INSEE /> ou auprès de l’
           <INPI />
         </p>
         <p>
-          Si des dirigeants de cette strucure ont été déclarés auprès du <MI />{' '}
-          vous les retrouverez sur l&apos;onglet personnes physiques de :{' '}
+          Si des dirigeants ont été déclarés auprès du <MI /> vous les
+          retrouverez sur l&apos;onglet “personnes physiques“ de :{' '}
           <a
             target="_blank"
             href={`https://www.data-asso.fr/annuaire/association/${uniteLegale.association.idAssociation}?docFields=documentsDac,documentsRna`}
@@ -54,7 +54,8 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
     return (
       <p>
         Les administrations centrales, ministères et autres services public,
-        n&apos;ont pas de dirigeants enregistrés dans les base de données de l’
+        n&apos;ont pas de dirigeant(e) enregistré(e) dans les bases de données
+        de l’
         <INSEE /> ou de <INPI />.
       </p>
     );

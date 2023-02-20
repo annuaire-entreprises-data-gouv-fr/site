@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import BreakPageForPrint from '#components-ui/print-break-page';
-import { INPI, INSEE, MI } from '#components/administrations';
 import BeneficiairesSection from '#components/dirigeants-section/beneficiaires';
 import DirigeantsEntrepriseIndividuelleSection from '#components/dirigeants-section/insee-dirigeant';
 import DirigeantsSection from '#components/dirigeants-section/rncs-dirigeants';
@@ -15,7 +14,6 @@ import {
   getDirigeantsWithUniteLegaleFromSlug,
   IDirigeants,
 } from '#models/dirigeants';
-import { isServicePublic } from '#models/index';
 import { estDiffusible } from '#models/statut-diffusion';
 import {
   getCompanyPageDescription,
