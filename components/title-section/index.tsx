@@ -121,7 +121,7 @@ const Tabs: React.FC<{
           ))}
         {isLoggedIn(session) && (
           <a
-            className={`${
+            className={`agent-tab ${
               currentFicheType === FICHE.AGENT_SUBVENTIONS ? 'active' : ''
             } no-style-link`}
             href={`/espace-agent/subventions-association/${uniteLegale.siren}`}
@@ -152,6 +152,15 @@ const Tabs: React.FC<{
           margin-bottom: -2px;
         }
 
+        .title-tabs > a.agent-tab {
+          border-top: 2px solid ${constants.colors.espaceAgent}22;
+          border-left: 2px solid ${constants.colors.espaceAgent}22;
+          border-right: 2px solid ${constants.colors.espaceAgent}22;
+          background-color: ${constants.colors.espaceAgentPastel};
+          color: ${constants.colors.espaceAgent};
+          box-shadow: 0 -8px 5px -5px ${constants.colors.espaceAgent}11 inset;
+        }
+
         .title-tabs > a,
         .title-tabs > a > h2 {
           color: ${constants.colors.frBlue};
@@ -175,6 +184,10 @@ const Tabs: React.FC<{
           border-bottom: 0;
         }
 
+        .title-tabs > a.agent-tab:not(.active):hover {
+          background-color: ${constants.colors.espaceAgent}33;
+        }
+
         @media only screen and (min-width: 1px) and (max-width: 768px) {
           .title-tabs {
             flex-direction: column;
@@ -186,6 +199,9 @@ const Tabs: React.FC<{
           .title-tabs > a.active {
             background-color: #fff;
             border-bottom: 2px solid ${constants.colors.pastelBlue};
+          }
+          .title-tabs > a.agent-tab {
+            border-bottom: 2px solid ${constants.colors.espaceAgent}22;
           }
         }
       `}</style>

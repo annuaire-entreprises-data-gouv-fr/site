@@ -70,16 +70,17 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   }
 );
 
-MapSearchResultPage.getLayout = function getLayout(page: ReactElement) {
-  return <>{page}</>;
-};
-
 MapSearchResultPage.getLayout = function getLayout(
   page: ReactElement,
-  isBrowserOutdated
+  isBrowserOutdated,
+  session
 ) {
   return (
-    <LayoutSearch isBrowserOutdated={isBrowserOutdated} map={true}>
+    <LayoutSearch
+      isBrowserOutdated={isBrowserOutdated}
+      map={true}
+      session={session}
+    >
       {page}
     </LayoutSearch>
   );

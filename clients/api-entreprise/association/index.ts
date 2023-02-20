@@ -1,10 +1,7 @@
-import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
-import { IGeoLoc } from '#models/geo-loc';
-import { Siren } from '#utils/helpers';
-import httpClient, { httpGet } from '#utils/network';
-import { mock } from './mock';
+import { formatAdresse, Siren } from '#utils/helpers';
+import { httpGet } from '#utils/network';
 
 export interface IApiEntrepriseAssociation {
   data: IDataAssociation;
@@ -193,7 +190,8 @@ export const clientApiEntrepriseAssociation = async (siren: Siren) => {
   // const response = mock as IApiEntrepriseAssociation;
 
   const response = await httpGet(
-    routes.apiEntreprise.association +
+    process.env.API_ENTREPRISE_URL +
+      routes.apiEntreprise.association +
       `${siren}?object=espace-agent-public&context=annuaire-entreprises&recipient=13002526500013`,
     {
       headers: {
@@ -246,14 +244,26 @@ const mapToDomainObject = (response: IDataAssociation) => {
 
   return {
     statuts,
-    dac: response.etablissements.map((e) => {
-      return {
-        siret: e.siret,
-        comptes: mapToDac(e.documents_dac, 'Comptes'),
-        rapportFinancier: mapToDac(e.documents_dac, 'Rapport financier'),
-        rapportActivite: mapToDac(e.documents_dac, "Rapport d'activité"),
-        exerciceComptable: mapToComptes(e.comptes),
-      };
-    }),
+    dac: response.etablissements
+      .map((e) => {
+        return {
+          siret: e.siret,
+          estSiege: e.siege,
+          adresse: formatAdresse({
+            complement: e.adresse?.complement,
+            numeroVoie: e.adresse?.numero_voie,
+            typeVoie: e.adresse?.type_voie,
+            libelleVoie: e.adresse?.libelle_voie,
+            codePostal: e.adresse?.code_postal,
+            libelleCommune: e.adresse?.commune,
+            distributionSpeciale: e.adresse?.distribution,
+          }),
+          comptes: mapToDac(e.documents_dac, 'Comptes'),
+          rapportFinancier: mapToDac(e.documents_dac, 'Rapport financier'),
+          rapportActivite: mapToDac(e.documents_dac, "Rapport d'activité"),
+          exerciceComptable: mapToComptes(e.comptes),
+        };
+      })
+      .sort((a, b) => (a.estSiege ? -1 : 1)),
   };
 };

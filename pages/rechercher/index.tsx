@@ -81,10 +81,13 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
 
 SearchResultPage.getLayout = function getLayout(
   page: ReactElement,
-  isBrowserOutdated
+  isBrowserOutdated,
+  session
 ) {
   return (
-    <LayoutSearch isBrowserOutdated={isBrowserOutdated}>{page}</LayoutSearch>
+    <LayoutSearch isBrowserOutdated={isBrowserOutdated} session={session}>
+      {page}
+    </LayoutSearch>
   );
 };
 

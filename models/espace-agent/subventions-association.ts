@@ -10,7 +10,7 @@ import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '..';
 
-interface IAssoDocument {
+export interface IAssoDocument {
   nom: string;
   etat: string;
   commentaire: string;
@@ -22,6 +22,8 @@ export interface ISubventionsDocument {
   statuts: { annee: string; url: string };
   dac: {
     siret: string;
+    adresse: string;
+    estSiege: boolean;
     comptes: IAssoDocument[];
     rapportFinancier: IAssoDocument[];
     rapportActivite: IAssoDocument[];

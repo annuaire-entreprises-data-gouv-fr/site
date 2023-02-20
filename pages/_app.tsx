@@ -2,9 +2,14 @@ import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
 import { LayoutDefault } from '#components/layouts/layout-default';
+import { ISession } from '#utils/session';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement, isBrowserOutdated: boolean) => ReactNode;
+  getLayout?: (
+    page: ReactElement,
+    isBrowserOutdated: boolean,
+    session?: ISession | null
+  ) => ReactNode;
 };
 
 type AppPropsWithLayout = AppProps & {
@@ -22,5 +27,5 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         {page}
       </LayoutDefault>
     ));
-  return getLayout(<Component {...pageProps} />, isBrowserOutdated);
+  return getLayout(<Component {...pageProps} />, isBrowserOutdated, session);
 }
