@@ -118,6 +118,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       est_ess = false,
       est_entrepreneur_spectacle = false,
       est_finess = false,
+      est_service_public = false,
       est_rge = false,
       est_uai = false,
     },
@@ -180,6 +181,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     dirigeants: dirigeants.map(mapToDirigeantModel),
     complements: {
       estEss: est_ess,
+      estServicePublic: est_service_public,
       estEntrepreneurIndividuel: est_entrepreneur_individuel,
       estEntrepreneurSpectacle: est_entrepreneur_spectacle,
       estFiness: est_finess,

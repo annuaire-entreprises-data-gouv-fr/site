@@ -80,6 +80,7 @@ class SearchFilterParams {
       est_entrepreneur_spectacle: this.params.label === 'esv',
       est_association: this.params.type === 'asso',
       est_collectivite_territoriale: this.params.type === 'ct',
+      est_service_public: this.params.type === 'sp',
       est_entrepreneur_individuel: this.params.type === 'ei',
       code_postal,
       code_commune,
@@ -224,6 +225,7 @@ export const extractFilters = (params: IParams) => {
     esv: 'Label : entreprenur de spectacle vivant',
     ei: 'Type : Entreprise Individuelle ',
     ct: 'Type : Collectivité territoriale ',
+    sp: 'Type : Service public ',
     asso: 'Type : Association ',
   };
 
