@@ -2,7 +2,7 @@ slug: ademe
 short: ADEME
 site: https://www.ademe.fr/
 logoType: portrait
-long: Agence de l'Environnement et de la Maîtrise de l'Energie
+long: Agence de l'Environnement et de la Maîtrise de l'Energie (ADEME)
 contact: https://www.ademe.fr/contact/
 apiMonitors:
   - apiName: API Professionnels RGE

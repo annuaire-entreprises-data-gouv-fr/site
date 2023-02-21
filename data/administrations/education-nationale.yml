@@ -1,7 +1,7 @@
 slug: education-nationale
 short: Education nationale
 site: https://www.education.gouv.fr/
-long: Ministère de l'Éducation nationale et de la jeunesse
+long: Ministère de l'Éducation nationale et de la jeunesse (MENJ)
 contact: https://www.education.gouv.fr/contactez-nous-41633
 apiMonitors:
   - apiName: API Etablissements Scolaires
