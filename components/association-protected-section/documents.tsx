@@ -33,7 +33,8 @@ const DocumentList: React.FC<{ label: string; documentList: IAssoDocument[] }> =
 
 const DocumentsNotFound = () => (
   <ProtectedSection title="Statuts" sources={[EAdministration.MI]}>
-    Nous n’avons pas retrouvé de documents pour cette association.
+    Nous n’avons retrouvé aucun documents ou exercice comptable pour cette
+    association.
   </ProtectedSection>
 );
 
@@ -53,6 +54,18 @@ export const AssociationDocumentSection = ({
     );
   }
 
+  const noDocument = subventionsDocuments.dac.filter(
+    (etablissement) => !etablissement.hasDocument
+  );
+
+  const withDocument = subventionsDocuments.dac.filter(
+    (etablissement) => etablissement.hasDocument
+  );
+
+  if (withDocument.length === 0) {
+    return <DocumentsNotFound />;
+  }
+
   return (
     <ProtectedSection title="Documents" sources={[EAdministration.MI]}>
       <p>
@@ -60,36 +73,31 @@ export const AssociationDocumentSection = ({
         et les exercices comptables de cette association, pour chaque
         établissement&nbsp;:
       </p>
+
       <FullTable
         head={['Siret', 'Détails de l’établissement']}
-        body={subventionsDocuments.dac.map(
-          (
-            {
-              siret,
-              adresse,
-              estSiege,
-              comptes,
-              rapportFinancier,
-              rapportActivite,
-              exerciceComptable,
-            },
-            index
-          ) => [
-            <a href={`/etablissement/${siret}`}>{siret}</a>,
-            <div className="details-etablissement">
-              {adresse}
-              {estSiege ? <Tag color="info">siège social</Tag> : null}
-              <span style={{ flexGrow: 1 }} />
-              {comptes.length === 0 &&
-              rapportActivite.length === 0 &&
-              rapportFinancier.length === 0 &&
-              exerciceComptable.length === 0 ? (
-                <>
-                  <br/>
-                  <i>Aucun document n’a été déclaré pour cet établissement.</i>
-                </>
-              ) : (
-                <div id={`etablissement-${siret}`} className="documents">
+        body={withDocument
+          .filter((etablissement) => etablissement.hasDocument)
+          .map(
+            (
+              {
+                siret,
+                adresse,
+                estSiege,
+                comptes,
+                rapportFinancier,
+                rapportActivite,
+                exerciceComptable,
+              },
+              index
+            ) => [
+              <a id={`etablissement-${siret}`} href={`/etablissement/${siret}`}>
+                {siret}
+              </a>,
+              <div className="details-etablissement">
+                {adresse}
+                {estSiege ? <Tag color="info">siège social</Tag> : null}
+                <div className="documents">
                   <input
                     type="checkbox"
                     id={`toggle-${index}`}
@@ -148,11 +156,31 @@ export const AssociationDocumentSection = ({
                     <SimpleSeparator />
                   </div>
                 </div>
-              )}
-            </div>,
-          ]
-        )}
+              </div>,
+            ]
+          )}
       />
+
+      {noDocument.length > 0 && (
+        <>
+          <br />
+          <b>
+            Liste des établissements sans documents ou exercice comptable&nbsp;:
+          </b>
+          <FullTable
+            head={['Siret', 'Adresse de l’établissement']}
+            body={noDocument.map(({ siret, adresse, estSiege }, index) => [
+              <a id={`etablissement-${siret}`} href={`/etablissement/${siret}`}>
+                {siret}
+              </a>,
+              <div className="details-etablissement">
+                {adresse}
+                {estSiege ? <Tag color="info">siège social</Tag> : null}
+              </div>,
+            ])}
+          />
+        </>
+      )}
       <br />
       <br />
       <style jsx>{`

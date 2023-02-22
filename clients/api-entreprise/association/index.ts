@@ -270,6 +270,14 @@ const mapToDomainObject = (response: IDataAssociation) => {
           exerciceComptable: mapToComptes(e.comptes),
         };
       })
+      .map((e) => {
+        const hasDocument =
+          e.comptes.length > 0 ||
+          e.rapportFinancier.length > 0 ||
+          e.rapportActivite.length > 0 ||
+          e.exerciceComptable.length > 0;
+        return { ...e, hasDocument };
+      })
       .sort((a, b) => (a.estSiege ? -1 : 1)),
   };
 };

@@ -24,6 +24,7 @@ export interface ISubventionsDocument {
     siret: string;
     adresse: string;
     estSiege: boolean;
+    hasDocument: boolean;
     comptes: IAssoDocument[];
     rapportFinancier: IAssoDocument[];
     rapportActivite: IAssoDocument[];
