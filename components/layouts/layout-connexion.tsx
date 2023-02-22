@@ -57,10 +57,10 @@ export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
           max-width: 400px;
         }
         div.body {
-          margin: 30px 0;
           margin-left: -80px;
           border-radius: 8px;
           background-color: #fff;
+          padding-bottom: 60px !important;
         }
 
         @media only screen and (min-width: 1px) and (max-width: 768px) {

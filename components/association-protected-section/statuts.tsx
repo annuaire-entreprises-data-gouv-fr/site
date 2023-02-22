@@ -5,10 +5,19 @@ import { EAdministration } from '#models/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { ISubventionsAssociation } from '#models/espace-agent/subventions-association';
 
+const StatutsNotFound = () => (
+  <ProtectedSection title="Statuts" sources={[EAdministration.MI]}>
+    Nous n’avons pas retrouvé les statuts de cette association.
+  </ProtectedSection>
+);
+
 export const AssociationStatutsSection = ({
   subventionsDocuments,
 }: ISubventionsAssociation) => {
   if (isAPINotResponding(subventionsDocuments)) {
+    if (subventionsDocuments.errorType === 404) {
+      return <StatutsNotFound />;
+    }
     return (
       <AdministrationNotResponding
         administration={subventionsDocuments.administration}
@@ -16,6 +25,10 @@ export const AssociationStatutsSection = ({
         title="Statuts"
       />
     );
+  }
+
+  if (!subventionsDocuments.statuts) {
+    return <StatutsNotFound />;
   }
 
   return (

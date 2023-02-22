@@ -19,7 +19,7 @@ export interface IAssoDocument {
 }
 
 export interface ISubventionsDocument {
-  statuts: { annee: string; url: string };
+  statuts: { annee: string; url: string } | null;
   dac: {
     siret: string;
     adresse: string;

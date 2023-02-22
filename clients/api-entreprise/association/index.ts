@@ -1,3 +1,4 @@
+import { HttpNotFound, HttpUnauthorizedError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { formatAdresse, Siren } from '#utils/helpers';
@@ -184,10 +185,12 @@ export interface Meta {
 }
 
 /**
- * GET
+ * GET documents from API Entreprise
  */
 export const clientApiEntrepriseAssociation = async (siren: Siren) => {
-  // const response = mock as IApiEntrepriseAssociation;
+  if (!process.env.API_ENTREPRISE_URL || !process.env.API_ENTREPRISE_TOKEN) {
+    throw new HttpUnauthorizedError('Missing API Entreprise credentials');
+  }
 
   const response = await httpGet(
     process.env.API_ENTREPRISE_URL +
@@ -240,7 +243,7 @@ const mapToComptes = (
 };
 
 const mapToDomainObject = (response: IDataAssociation) => {
-  const [statuts, _rest] = mapToStatuts(response.documents_rna);
+  const [statuts = null, _rest = null] = mapToStatuts(response.documents_rna);
 
   return {
     statuts,

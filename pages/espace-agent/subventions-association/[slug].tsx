@@ -50,6 +50,7 @@ const SubventionsAssociationPage: NextPageWithLayout<IProps> = ({
               uniteLegale={uniteLegale}
               subventionsDocuments={subventionsDocuments}
             />
+            <br />
             <AssociationDocumentSection
               uniteLegale={uniteLegale}
               subventionsDocuments={subventionsDocuments}
