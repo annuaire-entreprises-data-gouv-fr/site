@@ -3,7 +3,7 @@ const fs = require('fs');
 
 process.argv.slice(2).forEach(function (val, index, array) {
   const emails = val.split(',');
-  const addedEmails = [];
+  const hashToAdd = [];
   const ignoredEmails = [];
 
   const list = fs
@@ -30,16 +30,16 @@ process.argv.slice(2).forEach(function (val, index, array) {
       console.error(`❌ ${email} is already an authorized user`);
       ignoredEmails.push(email);
     } else {
-      fs.writeFileSync(
-        'public/authorized-agents.txt',
-        [...list, hash].join('\n')
-      );
-      addedEmails.push(email);
+      hashToAdd.push(hash);
     }
   });
+  fs.writeFileSync(
+    'public/authorized-agents.txt',
+    [...list, ...hashToAdd].join('\n')
+  );
   console.info(`🙈 Ignored : ${ignoredEmails.length} emails`);
-  console.info(`🐣 Added : ${addedEmails.length} emails`);
+  console.info(`🐣 Added : ${hashToAdd.length} emails`);
   console.info(
-    `🌟 Total authorized agents : ${list.length + addedEmails.length}`
+    `🌟 Total authorized agents : ${list.length + hashToAdd.length}`
   );
 });
