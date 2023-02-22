@@ -164,12 +164,13 @@ export const AssociationDocumentSection = ({
       {noDocument.length > 0 && (
         <>
           <br />
-          <b>
-            Liste des établissements sans documents ou exercice comptable&nbsp;:
-          </b>
+          <h3>
+            {noDocument.length} établissement(s) sans documents ou exercice
+            comptable&nbsp;:
+          </h3>
           <FullTable
             head={['Siret', 'Adresse de l’établissement']}
-            body={noDocument.map(({ siret, adresse, estSiege }, index) => [
+            body={noDocument.map(({ siret, adresse, estSiege }) => [
               <a id={`etablissement-${siret}`} href={`/etablissement/${siret}`}>
                 {siret}
               </a>,
