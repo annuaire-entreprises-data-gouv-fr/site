@@ -1,9 +1,11 @@
+import { GetServerSideProps } from 'next';
 import React, { ReactElement } from 'react';
 import { HomeH1 } from '#components-ui/logo/home-h1';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
 import StructuredDataSearchAction from '#components/structured-data/search';
+import { postServerSideProps } from '#utils/server-side-props-helper/post-server-side-props';
 import { NextPageWithLayout } from './_app';
 
 const Index: NextPageWithLayout = () => (
@@ -62,9 +64,25 @@ const Index: NextPageWithLayout = () => (
   </>
 );
 
-Index.getLayout = function getLayout(page: ReactElement, isBrowserOutdated) {
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  async () => {
+    return {
+      props: {},
+    };
+  }
+);
+
+Index.getLayout = function getLayout(
+  page: ReactElement,
+  isBrowserOutdated,
+  session
+) {
   return (
-    <LayoutDefault isBrowserOutdated={isBrowserOutdated} searchBar={false}>
+    <LayoutDefault
+      isBrowserOutdated={isBrowserOutdated}
+      searchBar={false}
+      session={session}
+    >
       {page}
     </LayoutDefault>
   );

@@ -26,7 +26,6 @@ const positions = [
   window.addEventListener('beforeunload', async (e) => {
     const loader = document.getElementById('loader-bar');
 
-    loader.style.width = '0';
     loader.style.position = 'fixed';
 
     if (loader.style.backgroundColor === 'transparent') {

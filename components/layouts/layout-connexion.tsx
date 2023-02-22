@@ -1,7 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import Footer from '#components/footer';
 import { Header } from '#components/header';
-import constants from '#models/constants';
 
 interface IProps {
   img: JSX.Element;
@@ -27,23 +25,24 @@ export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
         .connect-container {
           display: flex;
           position: relative;
-          align-items: stretch;
-          min-height: 450px;
-          border-top: 2px solid ${constants.colors.frBlue};
+          align-items: center;
+          justify-content: center;
+          margin: 50px 0;
         }
+
         .connect-container > div {
-          padding: 30px;
+          padding: 0 40px;
           width: 50%;
         }
 
         .img-container:before {
           background-color: #f5f5fe;
-          border-radius: 4px;
+          border-radius: 8px;
           position: absolute;
           top: 0;
           bottom: 0;
           content: '';
-          width: 50vw;
+          width: 55vw;
           z-index: -1;
           left: calc(-51vw + 50%);
         }
@@ -51,34 +50,33 @@ export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
           display: flex;
           justify-content: center;
           align-items: center;
+          min-height: 450px;
           padding: inherit 100px;
         }
         .img-container > div {
           max-width: 400px;
         }
         div.body {
-          margin-bottom: 100px;
+          margin-left: -80px;
+          border-radius: 8px;
+          background-color: #fff;
+          padding-bottom: 60px !important;
         }
 
         @media only screen and (min-width: 1px) and (max-width: 768px) {
-          .connect-container {
-            display: flex;
-            flex-direction: column-reverse;
-          }
-          .connect-container > div {
-            padding: 0;
-            width: 100%;
-          }
-
-          .img-container:before {
+          .img-container {
             display: none;
           }
           div.body {
-            margin-bottom: 0;
+            margin: 0;
+          }
+          .connect-container > div {
+            padding: 40px;
+            padding-top: 0;
+            width: 100%;
           }
         }
       `}</style>
     </div>
-    <Footer />
   </div>
 );

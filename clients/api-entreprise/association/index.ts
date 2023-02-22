@@ -1,6 +1,8 @@
-import { HttpNotFound } from '#clients/exceptions';
-import { IGeoLoc } from '#models/geo-loc';
-import { mock } from './mock';
+import { HttpNotFound, HttpUnauthorizedError } from '#clients/exceptions';
+import routes from '#clients/routes';
+import constants from '#models/constants';
+import { formatAdresse, Siren } from '#utils/helpers';
+import { httpGet } from '#utils/network';
 
 export interface IApiEntrepriseAssociation {
   data: IDataAssociation;
@@ -183,12 +185,29 @@ export interface Meta {
 }
 
 /**
- * GET
+ * GET documents from API Entreprise
  */
-export const clientApiEntrepriseAssociation = async () => {
-  const response = mock as IApiEntrepriseAssociation;
+export const clientApiEntrepriseAssociation = async (siren: Siren) => {
+  if (!process.env.API_ENTREPRISE_URL || !process.env.API_ENTREPRISE_TOKEN) {
+    throw new HttpUnauthorizedError('Missing API Entreprise credentials');
+  }
 
-  return mapToDomainObject(response.data);
+  const response = await httpGet(
+    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.association}${siren}`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.API_ENTREPRISE_TOKEN}`,
+      },
+      timeout: constants.timeout.M,
+      params: {
+        object: 'espace-agent-public',
+        context: 'annuaire-entreprises',
+        recipient: 13002526500013,
+      },
+    }
+  );
+
+  return mapToDomainObject(response.data?.data);
 };
 
 const mapToStatuts = (documentsRna: IDataAssociation['documents_rna']) => {
@@ -208,7 +227,7 @@ const mapToDac = (
   type: string
 ) => {
   return documentsDac
-    .filter((d) => d.type === type)
+    .filter((d) => d.type.indexOf(type) === 0)
     .map((d) => {
       return {
         nom: d.nom,
@@ -227,18 +246,30 @@ const mapToComptes = (
 };
 
 const mapToDomainObject = (response: IDataAssociation) => {
-  const [statuts, _rest] = mapToStatuts(response.documents_rna);
+  const [statuts = null, _rest = null] = mapToStatuts(response.documents_rna);
 
   return {
     statuts,
-    dac: response.etablissements.map((e) => {
-      return {
-        siret: e.siret,
-        comptes: mapToDac(e.documents_dac, 'Comptes du dernier exercice clos'),
-        rapportFinancier: mapToDac(e.documents_dac, 'Rapport financier'),
-        rapportActivite: mapToDac(e.documents_dac, "Rapport d'activité"),
-        exerciceComptable: mapToComptes(e.comptes),
-      };
-    }),
+    dac: response.etablissements
+      .map((e) => {
+        return {
+          siret: e.siret,
+          estSiege: e.siege,
+          adresse: formatAdresse({
+            complement: e.adresse?.complement,
+            numeroVoie: e.adresse?.numero_voie,
+            typeVoie: e.adresse?.type_voie,
+            libelleVoie: e.adresse?.libelle_voie,
+            codePostal: e.adresse?.code_postal,
+            libelleCommune: e.adresse?.commune,
+            distributionSpeciale: e.adresse?.distribution,
+          }),
+          comptes: mapToDac(e.documents_dac, 'Comptes'),
+          rapportFinancier: mapToDac(e.documents_dac, 'Rapport financier'),
+          rapportActivite: mapToDac(e.documents_dac, "Rapport d'activité"),
+          exerciceComptable: mapToComptes(e.comptes),
+        };
+      })
+      .sort((a, b) => (a.estSiege ? -1 : 1)),
   };
 };
