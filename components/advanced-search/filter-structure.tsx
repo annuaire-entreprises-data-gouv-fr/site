@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { LabelAndCertificateBadge } from '#components-ui/badge/frequent';
+import {
+  LabelAndCertificateBadge,
+  ServicePublicBadge,
+} from '#components-ui/badge/frequent';
 import {
   AssociationBadge,
   CollectiviteTerritorialeBadge,
@@ -41,6 +44,12 @@ export const FilterStructure: React.FC<{
           isSelected={structureType === 'asso'}
           small
           onClick={() => setStructureType('asso')}
+        />
+        &nbsp;
+        <ServicePublicBadge
+          isSelected={structureType === 'sp'}
+          small
+          onClick={() => setStructureType('sp')}
         />
         &nbsp;
         <EntrepriseIndividuelleBadge

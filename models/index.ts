@@ -144,6 +144,7 @@ export interface IUniteLegaleComplements {
   estEss: boolean;
   estEntrepreneurSpectacle: boolean;
   estFiness: boolean;
+  estServicePublic: boolean;
   estRge: boolean;
   estUai: boolean;
 }
@@ -153,6 +154,7 @@ export const createDefaultUniteLegaleComplements = () => {
     estEntrepreneurIndividuel: false,
     estEss: false,
     estEntrepreneurSpectacle: false,
+    estServicePublic: false,
     estFiness: false,
     estRge: false,
     estUai: false,
@@ -201,15 +203,8 @@ export const isAssociation = (
 
 export interface IServicePublic extends IUniteLegale {}
 
-export const isServicePublic = (
-  toBeDetermined: IUniteLegale
-): toBeDetermined is IServicePublic => {
-  return (
-    isServicePublicFromNatureJuridique(toBeDetermined.natureJuridique) ||
-    toBeDetermined.siren.indexOf('1') === 0 ||
-    toBeDetermined.siren.indexOf('2') === 0
-  );
-};
+export const isServicePublic = (uniteLegale: IUniteLegale): boolean =>
+  uniteLegale.complements.estServicePublic;
 
 export interface ICollectiviteTerritoriale
   extends Omit<IUniteLegale, 'colter'> {
