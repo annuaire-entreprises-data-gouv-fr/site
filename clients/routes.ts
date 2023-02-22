@@ -1,6 +1,6 @@
 const routes = {
   apiEntreprise: {
-    association: '/v4/ministere_interieur/api-association/associations/',
+    association: '/v4/djepva/api-association/associations/',
   },
   ban: 'https://api-adresse.data.gouv.fr/search/?q=',
   bodacc: {

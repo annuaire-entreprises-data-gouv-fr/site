@@ -193,14 +193,17 @@ export const clientApiEntrepriseAssociation = async (siren: Siren) => {
   }
 
   const response = await httpGet(
-    process.env.API_ENTREPRISE_URL +
-      routes.apiEntreprise.association +
-      `${siren}?object=espace-agent-public&context=annuaire-entreprises&recipient=13002526500013`,
+    `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.association}${siren}`,
     {
       headers: {
         Authorization: `Bearer ${process.env.API_ENTREPRISE_TOKEN}`,
       },
       timeout: constants.timeout.M,
+      params: {
+        object: 'espace-agent-public',
+        context: 'annuaire-entreprises',
+        recipient: 13002526500013,
+      },
     }
   );
 
