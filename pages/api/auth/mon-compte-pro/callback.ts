@@ -35,6 +35,6 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
     }
   } catch (e: any) {
     logErrorInSentry('Connexion failed', { details: e.toString() });
-    res.redirect('/connexion/echec-connexion');
+    res.redirect('/connexion/echec-authorisation-requise');
   }
 }
