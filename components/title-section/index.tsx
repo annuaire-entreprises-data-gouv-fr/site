@@ -22,6 +22,7 @@ import { ISession, isLoggedIn } from '#utils/session';
 export enum FICHE {
   ACTES = 'actes & statuts',
   ANNONCES = 'annonces',
+  FINNANCES = 'finnances',
   CERTIFICATS = 'Labels ou certifications',
   COMPTES = 'bilans & comptes',
   DIRIGEANTS = 'dirigeants',

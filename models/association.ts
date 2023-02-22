@@ -5,7 +5,7 @@ import { escapeTerm, verifyIdRna } from '#utils/helpers';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import { IAssociation, IUniteLegale, NotAValidIdRnaError } from '.';
 
-const getAssociation = async (
+export const getAssociation = async (
   uniteLegale: IUniteLegale
 ): Promise<IAssociation> => {
   // Create a valid association (especially for case when id RNA is empty)
@@ -71,7 +71,6 @@ const verifyAdressConsistency = async (association: IAssociation) => {
       ]);
       return adress1.geoCodedAdress !== adress2.geoCodedAdress;
     }
-
     return false;
   } catch (e: any) {
     logErrorInSentry('Error in API BAN', {
@@ -81,5 +80,3 @@ const verifyAdressConsistency = async (association: IAssociation) => {
     return false;
   }
 };
-
-export { getAssociation };
