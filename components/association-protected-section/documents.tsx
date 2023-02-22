@@ -84,7 +84,10 @@ export const AssociationDocumentSection = ({
               rapportActivite.length === 0 &&
               rapportFinancier.length === 0 &&
               exerciceComptable.length === 0 ? (
-                <i>Aucun document n’a été déclaré pour cet établissement.</i>
+                <>
+                  <br/>
+                  <i>Aucun document n’a été déclaré pour cet établissement.</i>
+                </>
               ) : (
                 <div id={`etablissement-${siret}`} className="documents">
                   <input
