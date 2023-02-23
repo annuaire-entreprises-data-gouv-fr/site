@@ -187,7 +187,10 @@ export interface Meta {
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseAssociation = async (siren: Siren) => {
+export const clientApiEntrepriseAssociation = async (
+  siren: Siren,
+  useCache = true
+) => {
   if (!process.env.API_ENTREPRISE_URL || !process.env.API_ENTREPRISE_TOKEN) {
     throw new HttpUnauthorizedError('Missing API Entreprise credentials');
   }
@@ -204,7 +207,8 @@ export const clientApiEntrepriseAssociation = async (siren: Siren) => {
         context: 'annuaire-entreprises',
         recipient: 13002526500013,
       },
-    }
+    },
+    useCache
   );
 
   return mapToDomainObject(response.data?.data);

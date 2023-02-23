@@ -4,6 +4,7 @@ import { clientUniteLegaleInseeNoCache } from '#clients/sirene-insee/siren';
 import clientSiret2Idcc from '#clients/siret-2-idcc';
 import { clientTVA } from '#clients/tva';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
+import { clientApiEntrepriseAssociation } from './api-entreprise/association';
 import { fetchRNCSImmatriculation } from './api-proxy/rncs';
 import { fetchRNEImmatriculation } from './api-proxy/rne';
 import clientSearchRechercheEntreprise from './recherche-entreprise';
@@ -38,6 +39,11 @@ const ping = async (slug: string | string[]) => {
       return await clientAssociation(verifyIdRna('W551000280'), useCache);
     case 'api-tva':
       return await clientTVA(verifySiren('880878145'), useCache);
+    case 'api-entreprise-association':
+      return await clientApiEntrepriseAssociation(
+        verifySiren('842019051'),
+        useCache
+      );
     case 'api-recherche':
       return await clientSearchRechercheEntreprise({
         searchTerms: 'test',
