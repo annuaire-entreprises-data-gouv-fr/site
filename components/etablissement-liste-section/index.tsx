@@ -51,10 +51,12 @@ const EtablissementTable: React.FC<{
               <>
                 <span style={{ fontVariant: 'all-small-caps' }}>
                   {(etablissement.enseigne || etablissement.denomination) && (
-                    <b>
-                      {etablissement.enseigne || etablissement.denomination}
-                      <br />
-                    </b>
+                    <a href={`/etablissement/${etablissement.siret}`}>
+                      <b>
+                        {etablissement.enseigne || etablissement.denomination}
+                        <br />
+                      </b>
+                    </a>
                   )}
                   <>{etablissement.adresse}</>
                 </span>
