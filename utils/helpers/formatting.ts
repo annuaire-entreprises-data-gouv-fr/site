@@ -48,7 +48,7 @@ export const formatPercentage = (value: string) => {
 };
 
 export const formatNumber = (value: string) => {
-  let number = parseInt(value);
+  let number = parseInt(value, 10);
   if (!number) {
     return value;
   }

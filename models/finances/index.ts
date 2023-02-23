@@ -7,7 +7,7 @@ export interface IFinancesFromSlug {
   finances: IFinance[];
 }
 
-export const getFinnancesFromSlug = async (
+export const getFinancesFromSlug = async (
   slug: string
 ): Promise<IFinancesFromSlug> => {
   const uniteLegale = await getUniteLegaleFromSlug(slug);

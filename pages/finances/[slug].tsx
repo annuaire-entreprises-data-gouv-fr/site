@@ -5,7 +5,7 @@ import Meta from '#components/meta';
 import { Section } from '#components/section';
 import Title, { FICHE } from '#components/title-section';
 import { EAdministration } from '#models/administrations';
-import { getFinnancesFromSlug, IFinancesFromSlug } from '#models/finances';
+import { getFinancesFromSlug, IFinancesFromSlug } from '#models/finances';
 import {
   formatDateYear,
   formatNumber,
@@ -31,15 +31,15 @@ type FormatedData = {
   };
 };
 
-const FianancePage: NextPageWithLayout<IProps> = ({
+const FinancePage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   finances,
   metadata: { session },
 }) => {
   const sortedFinances = finances.sort(
     (a, b) =>
-      new Date(b.dateClotureExercice).getTime() -
-      new Date(a.dateClotureExercice).getTime()
+      new Date(a.dateClotureExercice).getTime() -
+      new Date(b.dateClotureExercice).getTime()
   );
 
   const formatedData: FormatedData = {
@@ -128,8 +128,6 @@ const FianancePage: NextPageWithLayout<IProps> = ({
       }
     }
   });
-
-  const chartFinance = [...sortedFinances].reverse();
   return (
     <>
       <Meta
@@ -138,7 +136,7 @@ const FianancePage: NextPageWithLayout<IProps> = ({
       />
       <div className="content-container">
         <Title
-          ficheType={FICHE.FINNANCES}
+          ficheType={FICHE.FINANCES}
           uniteLegale={uniteLegale}
           session={session}
         />
@@ -167,14 +165,14 @@ const FianancePage: NextPageWithLayout<IProps> = ({
           <h2>Représentation graphique</h2>
           <FinanceChart
             data={{
-              labels: chartFinance.map((finance) =>
+              labels: sortedFinances.map((finance) =>
                 formatDateYear(finance.dateClotureExercice)
               ),
               datasets: [
                 {
                   label: "Chiffre d'affaires",
                   tension: 0.3,
-                  data: chartFinance.map(
+                  data: sortedFinances.map(
                     (finance) => finance.chiffreDAffaires ?? 0
                   ),
                   borderColor: 'red',
@@ -183,14 +181,16 @@ const FianancePage: NextPageWithLayout<IProps> = ({
                 {
                   label: 'Resultat net',
                   tension: 0.3,
-                  data: chartFinance.map((finance) => finance.resultatNet ?? 0),
+                  data: sortedFinances.map(
+                    (finance) => finance.resultatNet ?? 0
+                  ),
                   borderColor: 'blue',
                   backgroundColor: 'rgba(53, 162, 235, 0.5)',
                 },
                 {
                   label: 'EBIT',
                   tension: 0.3,
-                  data: chartFinance.map((finance) => finance.ebit ?? 0),
+                  data: sortedFinances.map((finance) => finance.ebit ?? 0),
                   borderColor: 'green',
                   backgroundColor: 'rgba(53, 162, 235, 0.5)',
                 },
@@ -216,7 +216,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
 
-    const { uniteLegale, finances } = await getFinnancesFromSlug(slug);
+    const { uniteLegale, finances } = await getFinancesFromSlug(slug);
 
     return {
       props: {
@@ -228,4 +228,4 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   }
 );
 
-export default FianancePage;
+export default FinancePage;
