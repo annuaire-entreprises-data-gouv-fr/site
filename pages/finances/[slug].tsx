@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
+import { FinanceChart } from '#components/charts/finances';
 import Meta from '#components/meta';
 import { Section } from '#components/section';
 import Title, { FICHE } from '#components/title-section';
@@ -128,6 +129,7 @@ const FianancePage: NextPageWithLayout<IProps> = ({
     }
   });
 
+  const chartFinance = [...sortedFinances].reverse();
   return (
     <>
       <Meta
@@ -145,12 +147,11 @@ const FianancePage: NextPageWithLayout<IProps> = ({
             Les données financières des établissements nous sont fournies par le
             Ministère de l&apos;économie et des finances :
           </p>
-
           <table style={{ width: '100%' }}>
             {Object.keys(formatedData).map((key) => {
               const data = formatedData[key];
               return (
-                <tr style={data.rowStyle} className="row">
+                <tr key={data.title} style={data.rowStyle} className="row">
                   <th className="title">
                     <b>{data.title}</b>
                   </th>
@@ -163,6 +164,39 @@ const FianancePage: NextPageWithLayout<IProps> = ({
               );
             })}
           </table>
+          <h2>Représentation graphique</h2>
+          <FinanceChart
+            data={{
+              labels: chartFinance.map((finance) =>
+                formatDateYear(finance.dateClotureExercice)
+              ),
+              datasets: [
+                {
+                  label: "Chiffre d'affaires",
+                  tension: 0.3,
+                  data: chartFinance.map(
+                    (finance) => finance.chiffreDAffaires ?? 0
+                  ),
+                  borderColor: 'red',
+                  backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                },
+                {
+                  label: 'Resultat net',
+                  tension: 0.3,
+                  data: chartFinance.map((finance) => finance.resultatNet ?? 0),
+                  borderColor: 'blue',
+                  backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                },
+                {
+                  label: 'EBIT',
+                  tension: 0.3,
+                  data: chartFinance.map((finance) => finance.ebit ?? 0),
+                  borderColor: 'green',
+                  backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                },
+              ],
+            }}
+          />
         </Section>
       </div>
       <style jsx>{`
@@ -188,6 +222,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       props: {
         uniteLegale,
         finances,
+        metadata: { useReact: true },
       },
     };
   }
