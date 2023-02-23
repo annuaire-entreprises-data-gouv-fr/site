@@ -9,6 +9,7 @@ import {
   IAssoDocument,
   ISubventionsAssociation,
 } from '#models/espace-agent/subventions-association';
+import { formatSiret } from '#utils/helpers';
 
 const DocumentList: React.FC<{ label: string; documentList: IAssoDocument[] }> =
   ({ label, documentList }) => (
@@ -32,8 +33,8 @@ const DocumentList: React.FC<{ label: string; documentList: IAssoDocument[] }> =
   );
 
 const DocumentsNotFound = () => (
-  <ProtectedSection title="Statuts" sources={[EAdministration.MI]}>
-    Nous n’avons retrouvé aucun documents ou exercice comptable pour cette
+  <ProtectedSection title="Documents" sources={[EAdministration.MI]}>
+    Nous n’avons retrouvé aucun document ou exercice comptable pour cette
     association.
   </ProtectedSection>
 );
@@ -92,7 +93,7 @@ export const AssociationDocumentSection = ({
               index
             ) => [
               <a id={`etablissement-${siret}`} href={`/etablissement/${siret}`}>
-                {siret}
+                {formatSiret(siret)}
               </a>,
               <div className="details-etablissement">
                 {adresse}
@@ -165,7 +166,7 @@ export const AssociationDocumentSection = ({
         <>
           <br />
           <h3>
-            {noDocument.length} établissement(s) sans documents ou exercice
+            {noDocument.length} établissement(s) sans document ou exercice
             comptable&nbsp;:
           </h3>
           <FullTable

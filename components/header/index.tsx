@@ -92,7 +92,7 @@ export const Header: React.FC<IProps> = ({
                                 color: constants.colors.espaceAgent,
                               }}
                             >
-                              <b>espace agent public</b>
+                              <b>agent public</b>
                             </div>
                             <Icon slug="user">
                               Se déconnecter (

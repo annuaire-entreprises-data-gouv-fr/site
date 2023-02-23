@@ -1,4 +1,3 @@
-import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { formatAdresse, IdRna } from '#utils/helpers';
 import { clientAPIProxy } from '../client';
