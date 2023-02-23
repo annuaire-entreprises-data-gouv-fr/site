@@ -14,28 +14,29 @@ const AssociationSection: React.FC<{
   uniteLegale: IAssociation;
 }> = ({ uniteLegale }) => {
   const {
-    association: {
-      idAssociation = '',
-      nomComplet = '',
-      objet = '',
-      adresseGestion = '',
-      adresseSiege = '',
-      libelleFamille = '',
-      formeJuridique = '',
-      regime = '',
-      utilPublique = false,
-      datePublicationJournalOfficiel = '',
-      dateCreation = '',
-      dateDissolution = '',
-      telephone = '',
-      mail = '',
-      siteWeb = '',
-      agrement = [],
-      eligibiliteCEC = false,
-    },
+    association: { idAssociation = '', data },
   } = uniteLegale;
 
-  const data = [
+  const {
+    nomComplet = '',
+    objet = '',
+    adresseGestion = '',
+    adresseSiege = '',
+    libelleFamille = '',
+    formeJuridique = '',
+    regime = '',
+    utilPublique = false,
+    datePublicationJournalOfficiel = '',
+    dateCreation = '',
+    dateDissolution = '',
+    telephone = '',
+    mail = '',
+    siteWeb = '',
+    agrement = [],
+    eligibiliteCEC = false,
+  } = data || {};
+
+  const lines = [
     ['N°RNA', formatIntFr(idAssociation)],
     ['Nom', nomComplet],
     ['Famille', libelleFamille],
@@ -86,7 +87,7 @@ const AssociationSection: React.FC<{
     ['Site web', siteWeb ? <a href={siteWeb}>{siteWeb}</a> : ''],
   ];
 
-  const notInRna = !nomComplet && !objet && !adresseSiege;
+  const notInRna = !data;
 
   return (
     <>
@@ -118,7 +119,7 @@ const AssociationSection: React.FC<{
               <b>Répertoire National des Associations (RNA)</b>, qui contient
               les informations suivantes&nbsp;:
             </p>
-            <TwoColumnTable body={data} />
+            <TwoColumnTable body={lines} />
           </>
         )}
         {idAssociation && (

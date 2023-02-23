@@ -1,39 +1,33 @@
 import { clientAssociation } from '#clients/api-proxy/association';
 import { clientBanGeoLoc } from '#clients/base-adresse';
 import { HttpNotFound } from '#clients/exceptions';
-import { escapeTerm, verifyIdRna } from '#utils/helpers';
+import { escapeTerm, Siren, verifyIdRna } from '#utils/helpers';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
-import { IAssociation, IUniteLegale, NotAValidIdRnaError } from '.';
+import { IDataAssociation, IUniteLegale, NotAValidIdRnaError } from '.';
 
 const getAssociation = async (
   uniteLegale: IUniteLegale
-): Promise<IAssociation> => {
-  // Create a valid association (especially for case when id RNA is empty)
-  const uniteLegaleAsAssociation = uniteLegale as IAssociation;
+): Promise<null | IDataAssociation> => {
   const slug = uniteLegale.association.idAssociation || '';
-  uniteLegaleAsAssociation.association = { idAssociation: slug };
-
-  // If no Id RNA no need to go further
-  if (!slug) {
-    return uniteLegaleAsAssociation;
-  }
+  const { siren } = uniteLegale;
 
   try {
     const idRna = verifyIdRna(slug);
     const data = await clientAssociation(idRna);
 
-    uniteLegaleAsAssociation.association = {
+    const adresseInconsistency = await verifyAdressConsistency(
+      siren,
+      uniteLegale.siege.adresse,
+      data.adresseSiege
+    );
+
+    return {
       ...data,
-      idAssociation: idRna,
+      adresseInconsistency,
     };
-
-    uniteLegaleAsAssociation.association.adresseInconsistency =
-      await verifyAdressConsistency(uniteLegaleAsAssociation);
-
-    return uniteLegale as IAssociation;
   } catch (e: any) {
     const more = {
-      siren: uniteLegale.siren,
+      siren,
       details: `n°RNA ${slug} - ${e.message}`,
     };
 
@@ -41,11 +35,10 @@ const getAssociation = async (
       logWarningInSentry('Id RNA not found', more);
     } else if (e instanceof NotAValidIdRnaError) {
       // no need to log warning or to make an api call, we know Id is not valid
-      return uniteLegaleAsAssociation;
     } else {
       logErrorInSentry('Error in API ASSOCIATION', more);
     }
-    return uniteLegaleAsAssociation;
+    return null;
   }
 };
 
@@ -56,18 +49,25 @@ const getAssociation = async (
  * @param association
  * @returns
  */
-const verifyAdressConsistency = async (association: IAssociation) => {
+const verifyAdressConsistency = async (
+  siren: Siren,
+  adress1 = '',
+  adress2 = ''
+) => {
   try {
-    const adressInsee = escapeTerm(association.siege.adresse.toLowerCase());
-    const adressAssociation = escapeTerm(
-      (association.association.adresseSiege || '').toLowerCase()
-    );
-    const hasDifferences = adressInsee !== adressAssociation;
+    const adress1formatted = escapeTerm(adress1.toLowerCase());
+    const adress2formatted = escapeTerm(adress2.toLowerCase());
+
+    const hasDifferences = adress1formatted !== adress2formatted;
 
     if (hasDifferences) {
+      if (!adress1formatted || !adress2formatted) {
+        return true;
+      }
+
       const [adress1, adress2] = await Promise.all([
-        clientBanGeoLoc(adressInsee),
-        clientBanGeoLoc(adressAssociation),
+        clientBanGeoLoc(adress1formatted),
+        clientBanGeoLoc(adress2formatted),
       ]);
       return adress1.geoCodedAdress !== adress2.geoCodedAdress;
     }
@@ -75,7 +75,7 @@ const verifyAdressConsistency = async (association: IAssociation) => {
     return false;
   } catch (e: any) {
     logErrorInSentry('Error in API BAN', {
-      siren: association.siren,
+      siren,
       details: e.toString(),
     });
     return false;

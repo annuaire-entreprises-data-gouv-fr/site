@@ -190,6 +190,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     },
     association: {
       idAssociation: identifiant_association,
+      data: null,
     },
     colter,
     dateCreation: date_creation,

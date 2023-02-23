@@ -1,3 +1,4 @@
+import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { formatAdresse, IdRna } from '#utils/helpers';
 import { clientAPIProxy } from '../client';
@@ -12,6 +13,10 @@ const clientAssociation = async (numeroRna: IdRna, useCache = true) => {
     routes.association + numeroRna,
     useCache
   );
+  if (response.identite && Object.keys(response.identite).length === 1) {
+    throw new HttpNotFound(numeroRna);
+  }
+
   return mapToDomainObject(numeroRna, response as IAssociationResponse);
 };
 

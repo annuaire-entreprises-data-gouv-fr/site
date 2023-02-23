@@ -7,9 +7,7 @@ import DirigeantsSection from '#components/dirigeants-section/rncs-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
 import Meta from '#components/meta';
 import { DirigeantsNonDiffusibleSection } from '#components/non-diffusible';
-import { Section } from '#components/section';
 import Title, { FICHE } from '#components/title-section';
-import { EAdministration } from '#models/administrations';
 import {
   getDirigeantsWithUniteLegaleFromSlug,
   IDirigeants,

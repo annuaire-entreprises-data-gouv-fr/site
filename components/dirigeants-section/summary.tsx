@@ -7,14 +7,13 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
   uniteLegale,
   immatriculationRNCS,
 }) => {
-  const notFound =
-    isAPINotResponding(immatriculationRNCS) &&
-    immatriculationRNCS.errorType === 404;
+  const noDirigeantsRncs =
+    (isAPINotResponding(immatriculationRNCS) &&
+      immatriculationRNCS.errorType === 404) ||
+    (!isAPINotResponding(immatriculationRNCS) &&
+      immatriculationRNCS?.dirigeants.length === 0);
 
-  const hasNoDirigeant =
-    (!uniteLegale.dirigeant && notFound) ||
-    //@ts-ignore
-    (!uniteLegale.dirigeant && !(immatriculationRNCS?.dirigeants.length > 0));
+  const hasNoDirigeant = !uniteLegale.dirigeant && noDirigeantsRncs;
 
   const insee = uniteLegale.dirigeant && '1 dirigeant(e) inscrit(e) à l’Insee';
   const rncs =

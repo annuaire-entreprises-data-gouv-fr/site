@@ -5,10 +5,7 @@ import {
 } from '#models/etablissements-list';
 import { IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IEtatCivil } from '#models/immatriculation/rncs';
-import {
-  isAssociationFromNatureJuridique,
-  isServicePublicFromNatureJuridique,
-} from '#utils/helpers';
+import { isAssociationFromNatureJuridique } from '#utils/helpers';
 import { Siren, Siret } from '#utils/helpers';
 import { IdRna } from '#utils/helpers';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
@@ -99,6 +96,7 @@ export interface IUniteLegale extends IEtablissementsList {
   complements: IUniteLegaleComplements;
   association: {
     idAssociation: IdRna | string | null;
+    data: null | IDataAssociation;
   };
   colter: {
     codeColter: string | null;
@@ -132,6 +130,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     complements: createDefaultUniteLegaleComplements(),
     association: {
       idAssociation: null,
+      data: null,
     },
     colter: {
       codeColter: null,
@@ -164,32 +163,36 @@ export const createDefaultUniteLegaleComplements = () => {
 export interface IAssociation extends Omit<IUniteLegale, 'association'> {
   association: {
     idAssociation: IdRna | string;
-    exId?: string;
-    nomComplet?: string;
-    objet?: string;
-    telephone?: string;
-    libelleFamille?: string;
-    mail?: string;
-    siteWeb?: string;
-    utilPublique?: boolean;
-    regime?: string;
-    agrement?: {
-      type?: string;
-      numero?: string;
-      niveau?: string;
-      attributeur?: string;
-      id?: number;
-      dateAttribution?: string;
-    }[];
-    formeJuridique?: string;
-    datePublicationJournalOfficiel?: string;
-    dateCreation?: string;
-    dateDissolution?: string;
-    eligibiliteCEC?: boolean;
-    adresseSiege?: string;
-    adresseGestion?: string;
-    adresseInconsistency?: boolean;
+    data: null | IDataAssociation;
   };
+}
+
+export interface IDataAssociation {
+  exId?: string;
+  nomComplet?: string;
+  objet?: string;
+  telephone?: string;
+  libelleFamille?: string;
+  mail?: string;
+  siteWeb?: string;
+  utilPublique?: boolean;
+  regime?: string;
+  agrement?: {
+    type?: string;
+    numero?: string;
+    niveau?: string;
+    attributeur?: string;
+    id?: number;
+    dateAttribution?: string;
+  }[];
+  formeJuridique?: string;
+  datePublicationJournalOfficiel?: string;
+  dateCreation?: string;
+  dateDissolution?: string;
+  eligibiliteCEC?: boolean;
+  adresseSiege?: string;
+  adresseGestion?: string;
+  adresseInconsistency?: boolean;
 }
 
 export const isAssociation = (

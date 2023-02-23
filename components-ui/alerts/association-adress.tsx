@@ -6,10 +6,9 @@ const AssociationAdressAlert: React.FC<{ uniteLegale: IAssociation }> = ({
   uniteLegale,
 }) => {
   const adresseInconsistency =
-    uniteLegale.association && uniteLegale.association.adresseInconsistency;
+    uniteLegale.association?.data?.adresseInconsistency;
 
-  const associationAdresse =
-    uniteLegale.association && uniteLegale.association.adresseSiege;
+  const associationAdresse = uniteLegale.association?.data?.adresseSiege;
 
   return (
     <>

@@ -95,7 +95,7 @@ class UniteLegaleFactory {
   postProcessUniteLegale = async (uniteLegale: IUniteLegale) => {
     // no need to call API association for bot
     if (!this._isBot && isAssociation(uniteLegale)) {
-      uniteLegale = await getAssociation(uniteLegale);
+      uniteLegale.association.data = await getAssociation(uniteLegale);
     }
 
     if (isProtectedSiren(uniteLegale.siren)) {
