@@ -1,8 +1,10 @@
 administrations:
   - insee
   - inpi
-target:
-  - agent
+targets:
+  - particulier
+  - dirigeant
+  - independant
 title: Pourquoi mon adresse personnelle apparait-elle sur ce site ?
 body: |
   Les pages des entreprises individuelles et des auto-entreprises, sont susceptibles de **contenir** des informations à caractère personnel. 

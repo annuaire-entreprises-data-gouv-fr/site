@@ -2,17 +2,23 @@ import { GetStaticProps } from 'next';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import ReactMarkdown from 'react-markdown';
-import ButtonLink from '#components-ui/button';
+import { MultiChoice } from '#components-ui/multi-choice';
 import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
 import StructuredDataFAQ from '#components/structured-data/faq';
 import constants from '#models/constants';
-import { getAllFaqArticles, IArticle } from '#models/faq';
+import {
+  faqTargets,
+  getAllFaqArticles,
+  getAllFaqArticlesByTarget,
+  IArticle,
+} from '#models/faq';
 import { NextPageWithLayout } from 'pages/_app';
 
 const StatusPage: NextPageWithLayout<{
+  articlesByTarget: { [key: string]: IArticle[] };
   articles: IArticle[];
-}> = ({ articles }) => (
+}> = ({ articlesByTarget, articles }) => (
   <>
     <Meta title="FAQ de l'Annuaire des Entreprises" />
     <StructuredDataFAQ
@@ -22,25 +28,43 @@ const StatusPage: NextPageWithLayout<{
       ])}
     />
     <TextWrapper>
-      <h1>Questions fréquentes (FAQ)</h1>
-      <p>Conseils et réponses de l’équipe Annuaire des Entreprises</p>
-      <ul>
-        {articles.map(({ slug, title }) => (
-          <li>
-            <a href={`/faq/${slug}`}>{title}</a>
-          </li>
+      <h1>Une question ? Comment pouvons-nous vous aider ?</h1>
+      <h2>
+        Dites-nous qui vous-êtes pour nous aider à vous répondre plus
+        précisément :
+      </h2>
+      <MultiChoice
+        values={Object.keys(faqTargets).map((key) => {
+          //@ts-ignore
+          return { value: `#${key}`, label: faqTargets[key] };
+        })}
+        links
+      />
+      <h2>Toutes les questions fréquentes (FAQ) :</h2>
+      {Object.keys(articlesByTarget)
+        .sort()
+        .map((groupKey) => (
+          <React.Fragment key={groupKey}>
+            <h3 id={groupKey}>
+              {
+                //@ts-ignore
+                faqTargets[groupKey]
+              }
+            </h3>
+            <ul>
+              {articlesByTarget[groupKey].map(({ slug, title }) => (
+                <li key={slug}>
+                  <a href={`/faq/${slug}`}>{title}</a>
+                </li>
+              ))}
+            </ul>
+          </React.Fragment>
         ))}
-      </ul>
       <h2>Vous ne trouvez pas votre réponse ?</h2>
       <p>
-        Vous pouvez nous écrire directement et poser vos questions à l’adresse
-        suivante&nbsp;:
+        <a href={constants.links.mailto}>Écrivez-nous directement</a> et
+        posez-nous votre question.
       </p>
-      <div className="layout-left">
-        <ButtonLink to={constants.links.mailto} alt small>
-          Écrivez-nous à {constants.links.mail}
-        </ButtonLink>
-      </div>
     </TextWrapper>
   </>
 );
@@ -48,6 +72,7 @@ const StatusPage: NextPageWithLayout<{
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
+      articlesByTarget: getAllFaqArticlesByTarget(),
       articles: getAllFaqArticles(),
     },
   };
