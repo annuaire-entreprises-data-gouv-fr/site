@@ -2,26 +2,27 @@
 //    Sentry logs helpers
 //=========================
 
-import logErrorInSentry, { IScope, logWarningInSentry } from '.';
+import { IScope, logWarningInSentry } from '.';
 
 export const logFirstSireneInseefailed = (sentryScope: IScope) =>
   logWarningInSentry(
-    'Error in Sirene Insee, fallback on Sirene Good Bot',
+    'GetUniteLegale : Sirene Insee failed, fallback on Sirene Good Bot',
     sentryScope
   );
 export const logRechercheEntreprisefailed = (sentryScope: IScope) =>
   logWarningInSentry(
-    'Error in Sirene Good Bot, fallback to Sirene Insee with fallback token',
+    'GetUniteLegale : Sirene Good Bot failed, fallback to Sirene Insee fallback',
     sentryScope
   );
+
 export const logRechercheEntrepriseForGoodBotfailed = (sentryScope: IScope) =>
-  logErrorInSentry(
-    'Error in Sirene Good Bot, fallback to Sirene Insee or staging',
+  logWarningInSentry(
+    'GetUniteLegale(Bot) : Sirene Good Bot and  staging/insee fallback failed, return 404',
     sentryScope
   );
 
 export const logSecondSireneInseefailed = (sentryScope: IScope) =>
   logWarningInSentry(
-    'Error in Sirene Insee using Fallback token, return 404',
+    'GetUniteLegale : Sirene Insee fallback failed, return 404',
     sentryScope
   );

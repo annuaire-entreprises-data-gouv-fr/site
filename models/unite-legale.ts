@@ -141,11 +141,11 @@ const getUniteLegaleForGoodBot = async (
           fallbackOnStaging
         );
       }
-    } catch (ee: any) {
-      if (ee instanceof HttpNotFound) {
+    } catch (eFallback: any) {
+      if (!(eFallback instanceof HttpNotFound)) {
         logRechercheEntrepriseForGoodBotfailed({
           siren,
-          details: e.message || e,
+          details: eFallback.message || eFallback,
         });
       }
       throw new SirenNotFoundError(siren);
