@@ -5,6 +5,7 @@ export interface IScope {
   page?: string;
   siret?: string;
   siren?: string;
+  slug?: string;
   details?: string;
   referrer?: string;
   browser?: string;

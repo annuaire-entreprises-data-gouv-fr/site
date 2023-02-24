@@ -63,30 +63,33 @@ const handleExceptions = (exception: any, req: IncomingMessage | undefined) => {
 };
 
 const getScope = (req: IncomingMessage | undefined, slug: string) => {
-  let siren = null;
-  let siret = null;
-  let sirenAndSiret = {};
+  let sirenOrSiret = {} as any;
 
   try {
-    siren = verifySiren(slug);
-    sirenAndSiret = { siren };
+    sirenOrSiret = { siren: verifySiren(slug) };
   } catch {
     try {
-      siret = verifySiret(slug);
-      siren = extractSirenFromSiretNoVerify(siret || '');
-      sirenAndSiret = { siret, siren };
-    } catch {}
+      sirenOrSiret = {
+        siret: verifySiret(slug),
+      };
+    } catch {
+      sirenOrSiret.slug = slug;
+    }
   }
 
-  const headers = req && req.headers ? req.headers : {};
-  return req
+  const headers = req?.headers || {};
+  const metadata = req
     ? {
-        ...sirenAndSiret,
         page: req.url,
         referer: headers['referer'],
         browser: headers['user-agent'] as string,
       }
     : {};
+
+  return {
+    ...metadata,
+    ...sirenOrSiret,
+  };
 };
 
 /**
