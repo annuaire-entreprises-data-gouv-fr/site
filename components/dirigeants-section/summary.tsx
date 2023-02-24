@@ -3,94 +3,101 @@ import { isAPINotResponding } from '#models/api-not-responding';
 import { IDirigeants } from '#models/dirigeants';
 import { isServicePublic } from '#models/index';
 
+const NoDirigeantAssociation = ({ idAssociation = '' }) => (
+  <>
+    <p>
+      Cette association n’a pas de dirigeant(e) enregistré(e) auprès de l’
+      <INSEE /> ou auprès de l’
+      <INPI />
+    </p>
+    <p>
+      Si des dirigeants ont été déclarés auprès du <MI /> vous les retrouverez
+      sur l&apos;onglet “personnes physiques“ de{' '}
+      <a
+        target="_blank"
+        href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
+        rel="noreferrer"
+      >
+        sa fiche data-asso
+      </a>
+      .
+    </p>
+  </>
+);
+
+const NoDirigeantServicePublic = () => (
+  <p>
+    Les administrations centrales, ministères et autres services public,
+    n&apos;ont pas de dirigeant(e) enregistré(e) dans les bases de données de l’
+    <INSEE /> ou de <INPI />.
+  </p>
+);
+
+const NoDirigeantDefault = () => (
+  <p>
+    Cette structure n’a pas de dirigeant(e) enregistré(e), que ce soit auprès de
+    l’
+    <INSEE /> ou auprès de l’
+    <INPI />.
+  </p>
+);
+
 const DirigeantSummary: React.FC<IDirigeants> = ({
   uniteLegale,
   immatriculationRNCS,
 }) => {
-  const noDirigeantsRncs =
-    (isAPINotResponding(immatriculationRNCS) &&
-      immatriculationRNCS.errorType === 404) ||
-    (!isAPINotResponding(immatriculationRNCS) &&
-      immatriculationRNCS?.dirigeants.length === 0);
+  const summaries = [];
+  const inseeDirigeant =
+    uniteLegale.dirigeant && '1 dirigeant(e) inscrit(e) à l’Insee';
 
-  const hasNoDirigeant = !uniteLegale.dirigeant && noDirigeantsRncs;
+  if (inseeDirigeant) {
+    summaries.push(<a href="#insee-dirigeant">{inseeDirigeant}</a>);
+  }
 
-  const insee = uniteLegale.dirigeant && '1 dirigeant(e) inscrit(e) à l’Insee';
-  const rncs =
-    !isAPINotResponding(immatriculationRNCS) &&
-    immatriculationRNCS.dirigeants &&
-    `${immatriculationRNCS.dirigeants.length} dirigeants inscrits au Registre du Commerce et des Sociétés (RCS)`;
+  if (!isAPINotResponding(immatriculationRNCS)) {
+    const dirigeantsCount = (immatriculationRNCS?.dirigeants || []).length;
+    summaries.push(
+      <a href="#rncs-dirigeants">
+        {dirigeantsCount} dirigeants inscrits au Registre du Commerce et des
+        Sociétés (RCS)
+      </a>
+    );
 
-  const rbe =
-    !isAPINotResponding(immatriculationRNCS) &&
-    immatriculationRNCS.beneficiaires &&
-    `${immatriculationRNCS.beneficiaires.length} bénéficiaires inscrits à Référentiel des Bénéficiaires Effectifs`;
-
-  if (hasNoDirigeant) {
-    if (uniteLegale.association.idAssociation) {
-      return (
-        <>
-          <p>
-            Cette association n’a pas de dirigeant(e) enregistré(e) auprès de l’
-            <INSEE /> ou auprès de l’
-            <INPI />
-          </p>
-          <p>
-            Si des dirigeants ont été déclarés auprès du <MI /> vous les
-            retrouverez sur l&apos;onglet “personnes physiques“ de :{' '}
-            <a
-              target="_blank"
-              href={`https://www.data-asso.fr/annuaire/association/${uniteLegale.association.idAssociation}?docFields=documentsDac,documentsRna`}
-              rel="noreferrer"
-            >
-              data-asso
-            </a>{' '}
-          </p>
-        </>
-      );
-    } else if (isServicePublic(uniteLegale)) {
-      return (
-        <p>
-          Les administrations centrales, ministères et autres services public,
-          n&apos;ont pas de dirigeant(e) enregistré(e) dans les bases de données
-          de l’
-          <INSEE /> ou de <INPI />.
-        </p>
-      );
-    }
-    return (
-      <p>
-        Cette structure n’a pas de dirigeant(e) enregistré(e), que ce soit
-        auprès de l’
-        <INSEE /> ou auprès de l’
-        <INPI />.
-      </p>
+    const beneficiairesCount = (immatriculationRNCS?.beneficiaires || [])
+      .length;
+    summaries.push(
+      <a href="#beneficiaires">
+        {beneficiairesCount} bénéficiaires inscrits à Référentiel des
+        Bénéficiaires Effectifs
+      </a>
     );
   }
 
-  return insee || rncs || rbe ? (
+  const hasNoDirigeant = summaries.length === 0;
+  if (hasNoDirigeant) {
+    if (uniteLegale.association.idAssociation) {
+      return (
+        <NoDirigeantAssociation
+          idAssociation={uniteLegale.association.idAssociation}
+        />
+      );
+    } else if (isServicePublic(uniteLegale)) {
+      return <NoDirigeantServicePublic />;
+    }
+    return <NoDirigeantDefault />;
+  }
+
+  return (
     <>
       Cette structure possède :
       <ul>
-        {insee && (
-          <li>
-            <a href="#insee-dirigeant">{insee}</a>
-          </li>
-        )}
-        {rncs && (
-          <li>
-            <a href="#rncs-dirigeants">{rncs}</a>
-          </li>
-        )}
-        {rbe && (
-          <li>
-            <a href="#beneficiaires">{rbe}</a>
-          </li>
-        )}
+        {summaries.map((summary) => (
+          <li>{summary}</li>
+        ))}
       </ul>
       <br />
     </>
-  ) : null;
+  );
 };
 
 export default DirigeantSummary;

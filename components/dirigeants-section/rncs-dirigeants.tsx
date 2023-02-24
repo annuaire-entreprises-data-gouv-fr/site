@@ -141,25 +141,35 @@ const DirigeantsSection: React.FC<IProps> = ({
             immatriculationRNCS.dirigeants.length > 0 && (
               <InpiPartiallyDownWarning missing="la distinction entre le nom et le prénom" />
             )}
-          <p>
-            Cette entreprise possède {dirigeants.length} dirigeant{plural}{' '}
-            enregistré{plural} au{' '}
-            <b>Registre National du Commerce et des Sociétés (RNCS)</b>{' '}
-            centralisé par l’
-            <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
-            <a
-              rel="noreferrer noopener"
-              target="_blank"
-              href={`${routes.rncs.portail.entreprise}${siren}`}
-            >
-              la page de cette entreprise
-            </a>{' '}
-            sur le site de l’INPI&nbsp;:
-          </p>
-          <FullTable
-            head={['Role', 'Details', 'Action']}
-            body={dirigeants.map((dirigeant) => formatDirigeant(dirigeant))}
-          />
+          {dirigeants.length === 0 ? (
+            <p>
+              Cette entreprise est enregistrée au{' '}
+              <b>Registre National du Commerce et des Sociétés (RNCS)</b>, mais
+              n’y possède aucun dirigeant.
+            </p>
+          ) : (
+            <>
+              <p>
+                Cette entreprise possède {dirigeants.length} dirigeant{plural}{' '}
+                enregistré{plural} au{' '}
+                <b>Registre National du Commerce et des Sociétés (RNCS)</b>{' '}
+                centralisé par l’
+                <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
+                <a
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  href={`${routes.rncs.portail.entreprise}${siren}`}
+                >
+                  la page de cette entreprise
+                </a>{' '}
+                sur le site de l’INPI&nbsp;:
+              </p>
+              <FullTable
+                head={['Role', 'Details', 'Action']}
+                body={dirigeants.map((dirigeant) => formatDirigeant(dirigeant))}
+              />
+            </>
+          )}
         </>
       </Section>
       <style global jsx>{`
