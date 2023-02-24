@@ -1,8 +1,10 @@
 administrations:
   - insee
   - inpi
-target:
-  - agent
+targets:
+  - salarie
+  - dirigeant
+  - independant
 title: Comment modifier l’adresse de mon entreprise ou association ?
 body: |
   Vous pouvez modifier votre adresse sur le guichet unique pour les déclarations de création et modification d'entreprise.

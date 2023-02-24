@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
+import { MultiChoice } from '#components-ui/multi-choice';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
@@ -32,267 +33,79 @@ const FeedBackPage: NextPageWithLayout = () => {
           <form action="/api/feedback/nps" method="post">
             <input name="uuid" value={uuid} type="hidden" />
             <fieldset>
-              <legend>
-                <h2>
-                  1 ・ Sur une échelle de 1 à 10, à quel point
-                  recommanderiez-vous l’Annuaire des Entreprises ?
-                </h2>
-              </legend>
-              <div className="radio-group rating">
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-smiley-1"
-                    name="radio-set-mood"
-                    value="1"
-                    required
-                  />
-                  <label className="fr-label" htmlFor="radio-smiley-1">
-                    1
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-smiley-2"
-                    name="radio-set-mood"
-                    value="2"
-                  />
-                  <label className="fr-label" htmlFor="radio-smiley-2">
-                    2
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-smiley-3"
-                    name="radio-set-mood"
-                    value="3"
-                  />
-                  <label className="fr-label" htmlFor="radio-smiley-3">
-                    3
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-smiley-4"
-                    name="radio-set-mood"
-                    value="4"
-                  />
-                  <label className="fr-label" htmlFor="radio-smiley-4">
-                    4
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-smiley-5"
-                    name="radio-set-mood"
-                    value="5"
-                  />
-                  <label className="fr-label" htmlFor="radio-smiley-5">
-                    5
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-smiley-6"
-                    name="radio-set-mood"
-                    value="6"
-                  />
-                  <label className="fr-label" htmlFor="radio-smiley-6">
-                    6
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-smiley-7"
-                    name="radio-set-mood"
-                    value="7"
-                  />
-                  <label className="fr-label" htmlFor="radio-smiley-7">
-                    7
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-smiley-8"
-                    name="radio-set-mood"
-                    value="8"
-                  />
-                  <label className="fr-label" htmlFor="radio-smiley-8">
-                    8
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-smiley-9"
-                    name="radio-set-mood"
-                    value="9"
-                  />
-                  <label className="fr-label" htmlFor="radio-smiley-9">
-                    9
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-smiley-10"
-                    name="radio-set-mood"
-                    value="10"
-                  />
-                  <label className="fr-label" htmlFor="radio-smiley-10">
-                    10
-                  </label>
-                </div>
-              </div>
+              <MultiChoice
+                legend="1 ・ Sur une échelle de 1 à 10, à quel point recommanderiez-vous l’Annuaire des Entreprises ?"
+                values={[
+                  { value: '1', label: '1' },
+                  { value: '2', label: '2' },
+                  { value: '3', label: '3' },
+                  { value: '4', label: '4' },
+                  { value: '5', label: '5' },
+                  { value: '6', label: '6' },
+                  { value: '7', label: '7' },
+                  { value: '8', label: '8' },
+                  { value: '9', label: '9' },
+                  { value: '10', label: '10' },
+                ]}
+                name="radio-set-mood"
+                idPrefix="radio-smiley"
+                required={true}
+                centered
+                large
+              />
             </fieldset>
 
             <fieldset>
-              <legend>
-                <h2>
-                  2 ・ Vous êtes venu(e) sur l’Annuaire des Entreprises en tant
-                  que :
-                </h2>
-              </legend>
-              <div className="radio-group">
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-visitor-type-1"
-                    name="radio-set-visitor-type"
-                    value="Agent public"
-                  />
-                  <label className="fr-label" htmlFor="radio-visitor-type-1">
-                    Agent public
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-visitor-type-2"
-                    name="radio-set-visitor-type"
-                    value="Dirigeant"
-                  />
-                  <label className="fr-label" htmlFor="radio-visitor-type-2">
-                    Dirigeant(e) d’entreprise ou d’association
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-visitor-type-6"
-                    name="radio-set-visitor-type"
-                    value="Indépendant"
-                  />
-                  <label className="fr-label" htmlFor="radio-visitor-type-2">
-                    Indépendant(e)
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-visitor-type-5"
-                    name="radio-set-visitor-type"
-                    value="Salarié"
-                  />
-                  <label className="fr-label" htmlFor="radio-visitor-type-5">
-                    Salarié(e) d’entreprise ou d’association
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-visitor-type-3"
-                    name="radio-set-visitor-type"
-                    value="Particulier"
-                  />
-                  <label className="fr-label" htmlFor="radio-visitor-type-3">
-                    Particulier
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-visitor-type-4"
-                    name="radio-set-visitor-type"
-                    value="Autre"
-                  />
-                  <label className="fr-label" htmlFor="radio-visitor-type-4">
-                    Autre
-                  </label>
-                </div>
-              </div>
+              <MultiChoice
+                legend="2 ・ Vous êtes venu(e) sur l’Annuaire des Entreprises en tant que :"
+                values={[
+                  {
+                    value: 'Agent public',
+                    label: 'Agent public',
+                  },
+                  {
+                    value: 'Dirigeant',
+                    label: 'Dirigeant(e) d’entreprise ou d’association',
+                  },
+                  { value: 'Indépendant', label: 'Indépendant(e)' },
+                  {
+                    value: 'Salarié',
+                    label: 'Salarié(e) d’entreprise ou d’association',
+                  },
+                  { value: 'Particulier', label: 'Particulier' },
+                  { value: 'Autre', label: 'Autre' },
+                ]}
+                name="radio-set-visitor-type"
+                idPrefix="radio-visitor-type"
+                required={false}
+              />
             </fieldset>
-
             <fieldset>
-              <legend>
-                <h2>3 ・ Comment êtes-vous arrivé(e) jusqu’ici ?</h2>
-              </legend>
-              <div className="radio-group">
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-visitor-origin-1"
-                    name="radio-set-visitor-origin"
-                    value="Bouche à oreille"
-                  />
-                  <label className="fr-label" htmlFor="radio-visitor-origin-1">
-                    Bouche à oreille
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-visitor-origin-2"
-                    name="radio-set-visitor-origin"
-                    value="Moteur de recherche"
-                  />
-                  <label className="fr-label" htmlFor="radio-visitor-origin-2">
-                    Moteur de recherche
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-visitor-origin-6"
-                    name="radio-set-visitor-origin"
-                    value="Je connaissais déjà le site"
-                  />
-                  <label className="fr-label" htmlFor="radio-visitor-origin-6">
-                    Je connaissais déjà le site
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-visitor-origin-3"
-                    name="radio-set-visitor-origin"
-                    value="J’ai cliqué sur un lien depuis un autre site internet"
-                  />
-                  <label className="fr-label" htmlFor="radio-visitor-origin-3">
-                    J’ai cliqué sur un lien depuis un autre site internet
-                  </label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="radio-visitor-origin-4"
-                    name="radio-set-visitor-origin"
-                    value="autre"
-                  />
-                  <label className="fr-label" htmlFor="radio-visitor-origin-4">
-                    Autre
-                  </label>
-                </div>
-              </div>
+              <MultiChoice
+                legend="3 ・ Comment êtes-vous arrivé(e) jusqu’ici ?"
+                values={[
+                  { value: 'Bouche à oreille', label: 'Bouche à oreille' },
+                  {
+                    value: 'Moteur de recherche',
+                    label: 'Moteur de recherche',
+                  },
+                  {
+                    value: 'Je connaissais déjà le site',
+                    label: 'Je connaissais déjà le site',
+                  },
+                  {
+                    value:
+                      'J’ai cliqué sur un lien depuis un autre site internet',
+                    label:
+                      'J’ai cliqué sur un lien depuis un autre site internet',
+                  },
+                  { value: 'Autre', label: 'Autre' },
+                ]}
+                name="radio-set-visitor-origin"
+                idPrefix="radio-visitor-origin"
+                required={false}
+              />
             </fieldset>
-
             <fieldset>
               <legend>
                 <h2>4 ・ Avez-vous quelque chose d’autre à nous dire ?</h2>
@@ -328,52 +141,6 @@ const FeedBackPage: NextPageWithLayout = () => {
               border: none;
               margin: 40px 0;
               padding: 0;
-            }
-            .radio-group {
-              display: flex;
-              flex-wrap: wrap;
-            }
-            .radio-group.rating {
-              justify-content: center;
-            }
-            .radio-group.rating > div > label {
-              font-weight: bold;
-              color: ${constants.colors.frBlue};
-              background: #e5e5f4;
-              font-size: 2rem;
-              line-height: 3rem;
-              margin: 15px 10px;
-            }
-            .radio-group > div > label {
-              border: 2px solid transparent;
-              border-radius: 6px;
-              background: #e5e5f4;
-              padding: 4px 10px;
-              margin: 5px;
-            }
-            .radio-group > div > input {
-              opacity: 0;
-              height: 0;
-              width: 0;
-              position: absolute;
-            }
-
-            input[type='radio']:hover + label {
-              border: 2px dashed ${constants.colors.frBlue};
-            }
-            input[type='radio']:checked + label {
-              border: 2px solid ${constants.colors.frBlue};
-            }
-
-            h2 {
-              font-size: 1.3rem;
-            }
-
-            @media only screen and (min-width: 1px) and (max-width: 576px) {
-              .radio-group.smileys {
-                flex-direction: column;
-                align-items: center;
-              }
             }
           `}
         </style>
