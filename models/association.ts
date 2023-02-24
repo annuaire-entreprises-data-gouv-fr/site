@@ -28,7 +28,7 @@ const getAssociation = async (
   } catch (e: any) {
     const more = {
       siren,
-      details: `n°RNA ${slug} - ${e.message}`,
+      details: `RNA : ${slug}`,
     };
 
     if (e instanceof HttpNotFound) {
