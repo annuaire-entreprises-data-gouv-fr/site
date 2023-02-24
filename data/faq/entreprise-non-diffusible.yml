@@ -2,6 +2,7 @@ administrations:
   - insee
 target:
   - agent
+  - independant
 title: Qu’est-ce qu’une entreprise non-diffusible ?
 body: |
   Certaines entreprises demandent à ne pas figurer sur les listes de diffusion publiques en vertu de [l’article A123-96 du code du commerce](https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=C505A51DBC1A4EB1FFF3764C69ACDB1C.tpdjo11v_1?idArticle=LEGIARTI000020165030&cidTexte=LEGITEXT000005634379&dateTexte=20100702).

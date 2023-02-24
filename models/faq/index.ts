@@ -1,12 +1,21 @@
 export interface IArticle {
   slug: string;
   administrations: string[];
-  target: string[];
+  targets: string[];
   title: string;
   body: string;
   cta: { label: string; to: string };
   more: { label: string; href: string }[];
 }
+
+export const faqTargets = {
+  agent: 'Agent public',
+  dirigeant: 'Dirigeant(e) d’entreprise ou d’association',
+  independant: 'Indépendant(e)',
+  salarie: 'Salarié(e) d’entreprise ou d’association',
+  particulier: 'Particulier',
+  tous: 'Toutes les questions',
+};
 
 const loadAllArticles = () => {
   const articles = [] as IArticle[];
@@ -33,6 +42,24 @@ const loadAllArticles = () => {
 
 export const getAllFaqArticles = () => {
   return allArticles;
+};
+
+export const getAllFaqArticlesByTarget = () => {
+  const articlesByTargets: { [key: string]: IArticle[] } = {};
+  allArticles.forEach((article) => {
+    const targets = [...(article.targets || []), 'tous'];
+    targets.forEach((target) => {
+      if (Object.keys(faqTargets).indexOf(target) === -1) {
+        throw new Error(`${target} is not a valid target`);
+      }
+      articlesByTargets[target] = [
+        ...(articlesByTargets[target] || []),
+        article,
+      ];
+    });
+  });
+
+  return articlesByTargets;
 };
 
 export const getFaqArticle = (slug: string) => {

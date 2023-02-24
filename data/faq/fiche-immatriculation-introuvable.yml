@@ -1,7 +1,9 @@
 administrations:
   - inpi
-target:
-  - agent
+targets:
+  - salarie
+  - dirigeant
+  - independant
 title: La fiche d’immatriculation de mon entreprise est introuvable
 body: |
   Les entreprises individuelles et les auto-entreprises, ne sont **pas obligées d’être immatriculées**. Il est donc possible que vous ne trouviez pas de fiche d’immatriculation pour une entreprise de ce type.

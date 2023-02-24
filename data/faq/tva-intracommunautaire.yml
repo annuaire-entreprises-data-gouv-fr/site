@@ -1,7 +1,10 @@
 administrations:
   - vies
-target:
+targets:
   - agent
+  - salarie
+  - dirigeant
+  - independant
 title: Qu’est ce que le numéro de TVA intracommunautaire ?
 body: |
   Le numéro de TVA intracommunautaire est un identifiant unique assigné par **l’administration fiscale** à toute entreprise assujettie à la TVA. L'entreprise utilise ensuite ce numéro dans ses factures, ses déclarations d'échange de biens et ses déclarations de TVA.
