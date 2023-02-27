@@ -4,12 +4,11 @@ long: Ministère de l'Économie et des Finances
 site: https://www.economie.gouv.fr/
 contact: https://www.economie.gouv.fr/contact
 apiMonitors:
-  - apiName: Economie gouv
+  - apiName: API Données financières
     datagouv:
       - label: Ratios Financiers (BCE / INPI)
         link: https://data.economie.gouv.fr/explore/dataset/ratios_inpi_bce/information/
-    # @TODO UPDATE WITH NEW UPTIME ROBOT ID
-    id: 793285299
+    id: 793687425
     data:
       - Données financières
 description: |

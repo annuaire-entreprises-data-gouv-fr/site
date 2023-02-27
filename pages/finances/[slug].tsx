@@ -1,10 +1,12 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
+import AdministrationNotResponding from '#components/administration-not-responding';
 import { FinanceChart } from '#components/charts/finances';
 import Meta from '#components/meta';
 import { Section } from '#components/section';
 import Title, { FICHE } from '#components/title-section';
 import { EAdministration } from '#models/administrations';
+import { isAPINotResponding } from '#models/api-not-responding';
 import { getFinancesFromSlug, IFinancesFromSlug } from '#models/finances';
 import {
   formatDateYear,
@@ -36,6 +38,27 @@ const FinancePage: NextPageWithLayout<IProps> = ({
   finances,
   metadata: { session },
 }) => {
+  if (isAPINotResponding(finances)) {
+    const isNotFound = finances.errorType === 404;
+    if (isNotFound) {
+      return (
+        <Section title="Données financières" sources={[EAdministration.MEF]}>
+          <p>
+            {/* @TODO UPDATE WORDING */}
+            Nous n’avons pas retrouvé de données fiancières cette entreprise
+          </p>
+        </Section>
+      );
+    }
+    return (
+      <AdministrationNotResponding
+        administration={finances.administration}
+        errorType={finances.errorType}
+        title="Données financières"
+      />
+    );
+  }
+
   const sortedFinances = finances.sort(
     (a, b) =>
       new Date(a.dateClotureExercice).getTime() -
@@ -128,6 +151,7 @@ const FinancePage: NextPageWithLayout<IProps> = ({
       }
     }
   });
+
   return (
     <>
       <Meta
@@ -140,7 +164,7 @@ const FinancePage: NextPageWithLayout<IProps> = ({
           uniteLegale={uniteLegale}
           session={session}
         />
-        <Section title={`Données financières`} sources={[EAdministration.MEF]}>
+        <Section title="Données financières" sources={[EAdministration.MEF]}>
           <p>
             Les données financières des établissements nous sont fournies par le
             Ministère de l&apos;économie et des finances :

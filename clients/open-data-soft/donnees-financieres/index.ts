@@ -1,8 +1,8 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { Siren } from '#utils/helpers';
-import { httpGet } from '#utils/network';
-import { IResponseFinance, IRecord } from './interface';
+import odsClient from '..';
+import { IFields, IResponseFinance } from './interface';
 
 export interface IFinance {
   ratioDeVetuste: number | null;
@@ -32,20 +32,28 @@ export interface IFinance {
  * https://data.economie.gouv.fr/explore/dataset/ratios_inpi_bce/api
  */
 export const clientFinance = async (siren: Siren) => {
-  const route = routes.finance;
-  const response = await httpGet(route, { params: { q: `siren:${siren}` } });
+  const { search: searchUrl, metadata: metadataUrl } =
+    routes.donneesFinancieres.ods;
 
-  const data = response.data as IResponseFinance;
+  const response: IResponseFinance = await odsClient(
+    {
+      url: searchUrl,
+      config: { params: { q: `siren:${siren}` } },
+    },
+    { url: metadataUrl }
+  );
 
-  if (!data.records.length) {
+  if (!response.records.length) {
     throw new HttpNotFound(
       `Cannot found financial data associate to siren : ${siren}`
     );
   }
-  return data.records.map((financialData) => mapToDomainObject(financialData));
+  return response.records.map((financialData) =>
+    mapToDomainObject(financialData)
+  );
 };
 
-const mapToDomainObject = (financialData: IRecord): IFinance => {
+const mapToDomainObject = (financialData: IFields): IFinance => {
   const {
     ratio_de_vetuste = null,
     rotation_des_stocks_jours = null,
@@ -67,7 +75,7 @@ const mapToDomainObject = (financialData: IRecord): IFinance => {
     capacite_de_remboursement = null,
     ratio_de_liquidite = null,
     taux_d_endettement = null,
-  } = financialData.fields;
+  } = financialData;
   return {
     ratioDeVetuste: ratio_de_vetuste,
     rotationDesStocksJours: rotation_des_stocks_jours,

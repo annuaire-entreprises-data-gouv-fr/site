@@ -20,6 +20,14 @@ const routes = {
     api: 'https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
     site: 'https://code.travail.gouv.fr/outils/convention-collective',
   },
+  donneesFinancieres: {
+    ods: {
+      metadata:
+        'https://data.economie.gouv.fr/api/datasets/1.0/search/?dataset=ratios_inpi_bce',
+      search:
+        'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce',
+    },
+  },
   educationNationale: {
     api: 'https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-annuaire-education',
     site: 'https://www.education.gouv.fr/annuaire',
@@ -75,8 +83,6 @@ const routes = {
       },
     },
   },
-  finance:
-    'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce',
   association: 'https://rncs-proxy.api.gouv.fr/association/',
   rne: {
     portail: {

@@ -36,7 +36,7 @@ export const FinanceChart = ({ data }: FinanceChatProps) => {
             y: {
               border: { display: false },
               ticks: {
-                callback: (label, index, labels) => {
+                callback: (label) => {
                   return formatNumber(label.toString());
                 },
               },

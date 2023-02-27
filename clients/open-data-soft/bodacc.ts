@@ -47,7 +47,7 @@ interface IBodaccB extends IBodaccCoreRecord {
 const clientBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
   const searchUrl = `${routes.bodacc.ods.search}&q=registre%3A${siren}&sort=dateparution&facet=publicationavis&facet=publicationavis_facette&facet=typeavis&facet=typeavis_lib&facet=familleavis&facet=familleavis_lib&facet=numerodepartement&facet=departement_nom_officiel`;
   const metadataUrl = routes.bodacc.ods.metadata;
-  const response = await odsClient(searchUrl, metadataUrl);
+  const response = await odsClient({ url: searchUrl }, { url: metadataUrl });
 
   return {
     annonces: response.records.map(mapToDomainObject),

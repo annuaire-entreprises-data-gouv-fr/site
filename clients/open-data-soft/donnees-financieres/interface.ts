@@ -1,7 +1,7 @@
 export interface IResponseFinance {
   nhits: number;
   parameters: IParameters;
-  records: IRecord[];
+  records: IFields[];
 }
 
 interface IParameters {
@@ -13,14 +13,7 @@ interface IParameters {
   timezone: string;
 }
 
-export interface IRecord {
-  datasetid: string;
-  recordid: string;
-  fields: IFields;
-  record_timestamp: string;
-}
-
-interface IFields {
+export interface IFields {
   ratio_de_vetuste: number;
   rotation_des_stocks_jours: number;
   marge_ebe: number;
