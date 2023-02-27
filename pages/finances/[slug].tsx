@@ -4,6 +4,7 @@ import AdministrationNotResponding from '#components/administration-not-respondi
 import { FinanceChart } from '#components/charts/finances';
 import Meta from '#components/meta';
 import { Section } from '#components/section';
+import { FullTable } from '#components/table/full';
 import Title, { FICHE } from '#components/title-section';
 import { EAdministration } from '#models/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
@@ -28,8 +29,6 @@ type FormatedData = {
     title: string;
     values: string[];
     formatter?: (value: string) => string;
-    valueStyle?: React.CSSProperties | undefined;
-    rowStyle?: React.CSSProperties | undefined;
   };
 };
 
@@ -70,8 +69,6 @@ const FinancePage: NextPageWithLayout<IProps> = ({
       title: 'Période Fiscale',
       values: [],
       formatter: formatDateYear,
-      valueStyle: { fontWeight: 'bold' },
-      rowStyle: { backgroundColor: '#efeffb !important' },
     },
     chiffreDAffaires: {
       title: "Chiffre d'affaires",
@@ -169,23 +166,13 @@ const FinancePage: NextPageWithLayout<IProps> = ({
             Les données financières des établissements nous sont fournies par le
             Ministère de l&apos;économie et des finances :
           </p>
-          <table style={{ width: '100%' }}>
-            {Object.keys(formatedData).map((key) => {
-              const data = formatedData[key];
-              return (
-                <tr key={data.title} style={data.rowStyle} className="row">
-                  <th className="title">
-                    <b>{data.title}</b>
-                  </th>
-                  {data.values.map((value) => (
-                    <td className="data" style={data.valueStyle}>
-                      {value}
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
-          </table>
+          <FullTable
+            head={[]}
+            body={Object.keys(formatedData).map((key) => [
+              formatedData[key].title,
+              ...formatedData[key].values.map((value) => value),
+            ])}
+          />
           <h2>Représentation graphique</h2>
           <FinanceChart
             data={{
