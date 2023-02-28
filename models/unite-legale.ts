@@ -50,7 +50,7 @@ export const getUniteLegaleFromSlug = async (
   options: IUniteLegaleOptions = {}
 ): Promise<IUniteLegale> => {
   const { isBot = false, page = 1 } = options;
-  const uniteLegale = new UniteLegaleFactory(slug, isBot, page);
+  const uniteLegale = new UniteLegaleFactory(slug, true, page);
   return await uniteLegale.get();
 };
 
