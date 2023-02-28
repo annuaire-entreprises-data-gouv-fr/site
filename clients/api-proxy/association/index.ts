@@ -89,6 +89,9 @@ const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
     agrement,
   } = { ...defaultAssociation, ...association };
 
+  const protocol = (site_web || '').indexOf('http') === 0 ? '' : 'https://';
+  const siteWeb = site_web ? `${protocol}${site_web}` : null;
+
   return {
     idAssociation: idRna,
     exId: id_ex,
@@ -97,7 +100,7 @@ const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
     telephone,
     libelleFamille: lib_famille1,
     mail: courriel,
-    siteWeb: site_web,
+    siteWeb,
     agrement: agrement.map((agr) => ({
       ...agr,
       dateAttribution: agr.date_attribution,

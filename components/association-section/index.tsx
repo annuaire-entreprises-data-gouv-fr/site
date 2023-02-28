@@ -84,7 +84,16 @@ const AssociationSection: React.FC<{
       telephone ? <a href={`tel:${telephone}`}>{telephone}</a> : '',
     ],
     ['Email', mail ? <a href={`mailto:${mail}`}>{mail}</a> : ''],
-    ['Site web', siteWeb ? <a href={siteWeb}>{siteWeb}</a> : ''],
+    [
+      'Site web',
+      siteWeb ? (
+        <a href={siteWeb} target="_blank" rel="noreferrer">
+          {siteWeb}
+        </a>
+      ) : (
+        ''
+      ),
+    ],
   ];
 
   const notInRna = !data;
@@ -125,21 +134,14 @@ const AssociationSection: React.FC<{
         {idAssociation && (
           <>
             <br />
-            Retrouvez plus d&apos;informations sur la{' '}
+            Retrouvez plus d&apos;informations (comptes, effectifs et documents
+            administratifs) sur la{' '}
             <a
               target="_blank"
               href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
               rel="noreferrer"
             >
-              fiche de cette association
-            </a>{' '}
-            (comptes, effectifs et documents) sur{' '}
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://www.data-asso.fr"
-            >
-              data-asso
+              fiche data-asso de cette association
             </a>
             .
           </>
