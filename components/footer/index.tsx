@@ -11,9 +11,9 @@ const Footer = () => (
         <div className="fr-container">
           <div className="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
-              <h3 className="fr-footer__top-cat">
+              <b className="fr-footer__top-cat">
                 Vérifier les informations légales d’une entreprise
-              </h3>
+              </b>
               <ul className="fr-footer__top-list">
                 {getAllLandingPages().map(({ slug, footerLabel }) => (
                   <li key="slug">
@@ -28,9 +28,9 @@ const Footer = () => (
               </ul>
             </div>
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
-              <h3 className="fr-footer__top-cat">
+              <b className="fr-footer__top-cat">
                 Consulter la liste officielle des entreprises françaises
-              </h3>
+              </b>
               <ul className="fr-footer__top-list">
                 <li>
                   <a
@@ -42,7 +42,7 @@ const Footer = () => (
                 </li>
               </ul>
               <br />
-              <h3 className="fr-footer__top-cat">Aide</h3>
+              <b className="fr-footer__top-cat">Aide</b>
               <ul className="fr-footer__top-list">
                 <li>
                   <a className="fr-footer__top-link" href="/faq">
@@ -62,7 +62,7 @@ const Footer = () => (
               </ul>
             </div>
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
-              <h3 className="fr-footer__top-cat">Annuaire des Entreprises</h3>
+              <b className="fr-footer__top-cat">Annuaire des Entreprises</b>
               <ul className="fr-footer__top-list">
                 <li>
                   <a className="fr-footer__top-link" href="/administration">
