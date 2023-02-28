@@ -8,7 +8,7 @@ import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
 import UniteLegaleBadge from '#components/unite-legale-badge';
-import { UnitLegaleDescription } from '#components/unite-legale-description';
+import { UniteLegaleDescription } from '#components/unite-legale-description';
 import constants from '#models/constants';
 import {
   isAssociation,
@@ -245,7 +245,7 @@ const Title: React.FC<IProps> = ({
     {estNonDiffusible(uniteLegale) ? (
       <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
     ) : (
-      <UnitLegaleDescription uniteLegale={uniteLegale} />
+      <UniteLegaleDescription uniteLegale={uniteLegale} />
     )}
     <Tabs
       uniteLegale={uniteLegale}

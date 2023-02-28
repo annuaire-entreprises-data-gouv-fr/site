@@ -4,19 +4,28 @@ import {
   isCollectiviteTerritoriale,
   IUniteLegale,
 } from '#models/index';
+import { capitalize } from './formatting';
 
-export const getCompanyPageTitle = (uniteLegale: IUniteLegale) => {
-  const description = `${uniteLegale.nomComplet} à ${uniteLegale.siege.commune} - SIREN ${uniteLegale.siren} | Annuaire des Entreprises`;
-
+export const getCompanyLabel = (uniteLegale: IUniteLegale) => {
   switch (true) {
     case isAssociation(uniteLegale):
-      return `Association ${description}`;
+      return `association`;
     case isCollectiviteTerritoriale(uniteLegale):
     case isServicePublic(uniteLegale):
-      return `Administration ${description}`;
+      return `administration`;
+    case uniteLegale.complements.estEntrepreneurIndividuel:
+      return `entreprise individuelle`;
     default:
-      return `Société ${description}`;
+      return `unité légale`;
   }
+};
+
+export const getCompanyPageTitle = (uniteLegale: IUniteLegale) => {
+  return `${capitalize(getCompanyLabel(uniteLegale))} ${
+    uniteLegale.nomComplet
+  } à ${uniteLegale.siege.codePostal} - SIREN ${
+    uniteLegale.siren
+  } | Annuaire des Entreprises`;
 };
 
 export const getCompanyPageDescription = (uniteLegale: IUniteLegale) =>

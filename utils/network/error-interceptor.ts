@@ -8,19 +8,24 @@ import {
   HttpUnauthorizedError,
   HttpBadRequestError,
 } from '#clients/exceptions';
+import logErrorInSentry from '#utils/sentry';
 import { formatLog } from './format-log';
 
 const errorInterceptor = (error: AxiosError) => {
-  const { config = {}, response, message } = error;
+  const { config, response, message } = error || {};
 
-  if (response?.status !== 404) {
+  const url = config?.url || 'an unknown url';
+  const status = response?.status;
+  const statusText = response?.statusText;
+
+  if (status !== 404) {
     const endTime = new Date().getTime();
     //@ts-ignore
     const startTime = config?.metadata?.startTime;
     console.error(
       formatLog(
-        config.url || '',
-        response?.status || 500,
+        url,
+        status || 500,
         false,
         startTime ? endTime - startTime : undefined
       )
@@ -30,23 +35,21 @@ const errorInterceptor = (error: AxiosError) => {
   if (!response) {
     if (message) {
       if (message.indexOf('timeout of') > -1) {
-        throw new HttpTimeoutError(`${message} while querying ${config.url}`);
+        throw new HttpTimeoutError(`${message} while querying ${url}`);
       } else {
         throw new HttpServerError(message);
       }
     } else {
-      throw new HttpServerError(
-        `Unknown server error while querying ${config.url}.`
-      );
+      throw new HttpServerError(`Unknown server error while querying ${url}.`);
     }
   }
 
-  switch (response.status) {
+  switch (response?.status) {
     case 429: {
-      throw new HttpTooManyRequests(response.statusText || 'Too many requests');
+      throw new HttpTooManyRequests(statusText || 'Too many requests');
     }
     case 404: {
-      throw new HttpNotFound(response.statusText || 'Not Found');
+      throw new HttpNotFound(statusText || 'Not Found');
     }
     case 403: {
       throw new HttpForbiddenError('Forbidden');
@@ -62,7 +65,7 @@ const errorInterceptor = (error: AxiosError) => {
     }
     default:
       throw new HttpServerError(
-        `Unknown server error while querying ${config.url}. ${response.statusText} ${message}`
+        `Unknown server error while querying ${url}. ${statusText} ${message}`
       );
   }
 };

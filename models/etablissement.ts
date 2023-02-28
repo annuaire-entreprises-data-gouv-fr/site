@@ -55,16 +55,22 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
 
     try {
       return await clientEtablissementRechercheEntreprise(siret);
-    } catch (e: any) {
-      logRechercheEntreprisefailed({ siret, details: e.message });
+    } catch (firstFallback: any) {
+      logRechercheEntreprisefailed({
+        siret,
+        details: firstFallback.message || firstFallback,
+      });
 
       try {
         return await clientEtablissementInseeFallback(siret);
-      } catch (e: any) {
+      } catch (lastFallback: any) {
         if (e instanceof HttpForbiddenError) {
           return createNonDiffusibleEtablissement(siret);
         }
-        logSecondSireneInseefailed({ siret, details: e.message });
+        logSecondSireneInseefailed({
+          siret,
+          details: lastFallback.message || lastFallback,
+        });
 
         // Siret was not found in both API, return a 404
         throw new SiretNotFoundError(siret);

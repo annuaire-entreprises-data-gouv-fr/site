@@ -172,18 +172,21 @@ const getUniteLegale = async (
     try {
       // in case sirene INSEE 429 or 500, fallback on Siren Etalab
       return await clientUniteLegaleRechercheEntreprise(siren);
-    } catch (e: any) {
+    } catch (firstFallback: any) {
       logRechercheEntreprisefailed({
         siren,
-        details: e.message || e,
+        details: firstFallback.message || firstFallback,
       });
 
       try {
         // in case sirene etalab 404 or 500, fallback on Sirene insee using fallback credentials to avoid 403
         // no pagination as this function is called when sirene etalab already failed
         return await fetchUniteLegaleFromInseeFallback(siren, page);
-      } catch (e: any) {
-        logSecondSireneInseefailed({ siren, details: e.message || e });
+      } catch (lastFallback: any) {
+        logSecondSireneInseefailed({
+          siren,
+          details: lastFallback.message || lastFallback,
+        });
 
         // Siren was not found in both API, return a 404
         throw new SirenNotFoundError(siren);
