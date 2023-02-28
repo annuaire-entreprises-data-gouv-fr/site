@@ -1,5 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import { IDataAssociation } from '#models/index';
 import { formatAdresse, IdRna } from '#utils/helpers';
 import { clientAPIProxy } from '../client';
 import { IAssociationResponse } from './interfaces';
@@ -20,7 +21,10 @@ const clientAssociation = async (numeroRna: IdRna, useCache = true) => {
   return mapToDomainObject(numeroRna, response as IAssociationResponse);
 };
 
-const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
+const mapToDomainObject = (
+  idRna: IdRna,
+  association: IAssociationResponse
+): IDataAssociation => {
   const defaultAssociation = {
     activites: { objet: '', lib_famille1: '' },
     identite: {
@@ -52,7 +56,17 @@ const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
       courriel: '',
       site_web: '',
     },
-    agrement: [{ date_attribution: '' }],
+    agrement: [
+      {
+        date_attribution: '',
+        type: '',
+        numero: '',
+        niveau: '',
+        attributeur: '',
+        id: 0,
+        dateAttribution: '',
+      },
+    ],
   };
 
   const {
@@ -90,10 +104,9 @@ const mapToDomainObject = (idRna: IdRna, association: IAssociationResponse) => {
   } = { ...defaultAssociation, ...association };
 
   const protocol = (site_web || '').indexOf('http') === 0 ? '' : 'https://';
-  const siteWeb = site_web ? `${protocol}${site_web}` : null;
+  const siteWeb = site_web ? `${protocol}${site_web}` : '';
 
   return {
-    idAssociation: idRna,
     exId: id_ex,
     nomComplet: nom,
     objet,

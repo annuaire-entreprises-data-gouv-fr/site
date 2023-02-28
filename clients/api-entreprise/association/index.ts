@@ -1,15 +1,15 @@
-import { HttpNotFound, HttpUnauthorizedError } from '#clients/exceptions';
+import { HttpUnauthorizedError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { formatAdresse, Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 
 export interface IApiEntrepriseAssociation {
-  data: IDataAssociation;
+  data: IAPIEntrepriseDataAssociation;
   meta: Meta;
 }
 
-export interface IDataAssociation {
+export interface IAPIEntrepriseDataAssociation {
   rna: string;
   ancien_id: string;
   siren: string;
@@ -214,7 +214,9 @@ export const clientApiEntrepriseAssociation = async (
   return mapToDomainObject(response.data?.data);
 };
 
-const mapToStatuts = (documentsRna: IDataAssociation['documents_rna']) => {
+const mapToStatuts = (
+  documentsRna: IAPIEntrepriseDataAssociation['documents_rna']
+) => {
   return documentsRna
     .filter((d) => d.sous_type.code === 'STC')
     .sort((a, b) => parseInt(a.annee_depot, 10) - parseInt(b.annee_depot))
@@ -227,7 +229,7 @@ const mapToStatuts = (documentsRna: IDataAssociation['documents_rna']) => {
 };
 
 const mapToDac = (
-  documentsDac: IDataAssociation['etablissements'][0]['documents_dac'],
+  documentsDac: IAPIEntrepriseDataAssociation['etablissements'][0]['documents_dac'],
   type: string
 ) => {
   return documentsDac
@@ -244,12 +246,12 @@ const mapToDac = (
 };
 
 const mapToComptes = (
-  comptes: IDataAssociation['etablissements'][0]['comptes']
+  comptes: IAPIEntrepriseDataAssociation['etablissements'][0]['comptes']
 ) => {
   return comptes;
 };
 
-const mapToDomainObject = (response: IDataAssociation) => {
+const mapToDomainObject = (response: IAPIEntrepriseDataAssociation) => {
   const [statuts = null, _rest = null] = mapToStatuts(response.documents_rna);
 
   return {
