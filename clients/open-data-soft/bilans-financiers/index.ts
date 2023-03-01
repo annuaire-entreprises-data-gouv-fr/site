@@ -4,34 +4,11 @@ import { Siren } from '#utils/helpers';
 import odsClient from '..';
 import { IFields, IResponseFinance } from './interface';
 
-export interface IFinance {
-  ratioDeVetuste: number | null;
-  rotationDesStocksJours: number | null;
-  margeEbe: number | null;
-  resultatCourantAvantImpotsSurCa: number | null;
-  couvertureDesInterets: number | null;
-  poidsBfrExploitationSurCaJours: number | null;
-  creditClientsJours: number | null;
-  chiffreDAffaires: number | null;
-  cafSurCa: number | null;
-  ebitda: number | null;
-  dateClotureExercice: string;
-  ebit: number | null;
-  margeBrute: number | null;
-  resultatNet: number | null;
-  siren: string;
-  poidsBfrExploitationSurCa: number | null;
-  autonomieFinanciere: number | null;
-  capaciteDeRemboursement: number | null;
-  ratioDeLiquidite: number | null;
-  tauxDEndettement: number | null;
-}
-
 /**
  * Données financière (Ratios Financiers (BCE / INPI))
  * https://data.economie.gouv.fr/explore/dataset/ratios_inpi_bce/api
  */
-export const clientFinance = async (siren: Siren) => {
+export const clientBilansFinanciers = async (siren: Siren) => {
   const { search: searchUrl, metadata: metadataUrl } =
     routes.donneesFinancieres.ods;
 
@@ -53,29 +30,30 @@ export const clientFinance = async (siren: Siren) => {
   );
 };
 
-const mapToDomainObject = (financialData: IFields): IFinance => {
+const mapToDomainObject = (financialData: IFields) => {
   const {
-    ratio_de_vetuste = null,
-    rotation_des_stocks_jours = null,
-    marge_ebe = null,
-    resultat_courant_avant_impots_sur_ca = null,
-    couverture_des_interets = null,
-    poids_bfr_exploitation_sur_ca_jours = null,
-    credit_clients_jours = null,
-    chiffre_d_affaires = null,
-    caf_sur_ca = null,
-    ebitda = null,
+    ratio_de_vetuste = 0,
+    rotation_des_stocks_jours = 0,
+    marge_ebe = 0,
+    resultat_courant_avant_impots_sur_ca = 0,
+    couverture_des_interets = 0,
+    poids_bfr_exploitation_sur_ca_jours = 0,
+    credit_clients_jours = 0,
+    chiffre_d_affaires = 0,
+    caf_sur_ca = 0,
+    ebitda = 0,
     date_cloture_exercice = '',
-    ebit = null,
-    marge_brute = null,
-    resultat_net = null,
+    ebit = 0,
+    marge_brute = 0,
+    resultat_net = 0,
     siren,
-    poids_bfr_exploitation_sur_ca = null,
-    autonomie_financiere = null,
-    capacite_de_remboursement = null,
-    ratio_de_liquidite = null,
-    taux_d_endettement = null,
+    poids_bfr_exploitation_sur_ca = 0,
+    autonomie_financiere = 0,
+    capacite_de_remboursement = 0,
+    ratio_de_liquidite = 0,
+    taux_d_endettement = 0,
   } = financialData;
+
   return {
     ratioDeVetuste: ratio_de_vetuste,
     rotationDesStocksJours: rotation_des_stocks_jours,

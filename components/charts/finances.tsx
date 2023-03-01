@@ -10,7 +10,7 @@ import {
   ChartData,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { formatNumber } from '#utils/helpers';
+import { formatMoney } from '#utils/helpers';
 
 ChartJS.register(
   CategoryScale,
@@ -22,22 +22,24 @@ ChartJS.register(
   Legend
 );
 
-type FinanceChatProps = {
+type LineChatProps = {
+  height?: number;
   data: ChartData<'line', number[], string>;
 };
 
-export const FinanceChart = ({ data }: FinanceChatProps) => {
+export const LineChart = ({ data, height = 250 }: LineChatProps) => {
   return (
-    <div>
+    <div style={{ height: `${height}px` }}>
       <Line
         options={{
           responsive: true,
+          maintainAspectRatio: false,
           scales: {
             y: {
               border: { display: false },
               ticks: {
                 callback: (label) => {
-                  return formatNumber(label.toString());
+                  return formatMoney(label.toString());
                 },
               },
             },

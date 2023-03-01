@@ -1,8 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
-import {
-  clientFinance,
-  IFinance,
-} from '#clients/open-data-soft/donnees-financieres';
+import { clientBilansFinanciers } from '#clients/open-data-soft/bilans-financiers';
 import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
@@ -13,18 +10,41 @@ import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '..';
 
-export interface IFinancesFromSlug {
+export interface IDonneesFinancieres {
   uniteLegale: IUniteLegale;
-  finances: IFinance[] | IAPINotRespondingError;
+  bilansFinanciers: IBilanFinancier[] | IAPINotRespondingError;
 }
 
-export const getFinancesFromSlug = async (
+export interface IBilanFinancier {
+  ratioDeVetuste: number;
+  rotationDesStocksJours: number;
+  margeEbe: number;
+  resultatCourantAvantImpotsSurCa: number;
+  couvertureDesInterets: number;
+  poidsBfrExploitationSurCaJours: number;
+  creditClientsJours: number;
+  chiffreDAffaires: number;
+  cafSurCa: number;
+  ebitda: number;
+  dateClotureExercice: string;
+  ebit: number;
+  margeBrute: number;
+  resultatNet: number;
+  siren: string;
+  poidsBfrExploitationSurCa: number;
+  autonomieFinanciere: number;
+  capaciteDeRemboursement: number;
+  ratioDeLiquidite: number;
+  tauxDEndettement: number;
+}
+
+export const getDonneesFinancieresFromSlug = async (
   slug: string
-): Promise<IFinancesFromSlug> => {
+): Promise<IBilansFinanciers> => {
   const siren = verifySiren(slug);
-  const [uniteLegale, finances] = await Promise.all([
+  const [uniteLegale, bilansFinanciers] = await Promise.all([
     getUniteLegaleFromSlug(siren),
-    clientFinance(siren).catch((e) => {
+    clientBilansFinanciers(siren).catch((e) => {
       if (e instanceof HttpNotFound) {
         return APINotRespondingFactory(EAdministration.MEF, 404);
       }
@@ -37,6 +57,6 @@ export const getFinancesFromSlug = async (
   ]);
   return {
     uniteLegale,
-    finances,
+    bilansFinanciers,
   };
 };

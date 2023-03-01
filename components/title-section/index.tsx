@@ -96,6 +96,13 @@ const Tabs: React.FC<{
       shouldDisplay: uniteLegale.complements.estUai,
     },
     {
+      ficheType: FICHE.FINANCES,
+      label: 'Données financières',
+      pathPrefix: '/donnees-financieres/',
+      noFollow: false,
+      shouldDisplay: false,
+    },
+    {
       ficheType: FICHE.DIVERS,
       label: 'Conventions collectives',
       pathPrefix: '/divers/',
