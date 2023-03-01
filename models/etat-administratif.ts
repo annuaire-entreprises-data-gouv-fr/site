@@ -8,4 +8,7 @@ export enum IETATADMINSTRATIF {
 
 export const estActif = (uniteLegaleOrEtablissement: {
   etatAdministratif: IETATADMINSTRATIF;
-}) => uniteLegaleOrEtablissement.etatAdministratif === IETATADMINSTRATIF.ACTIF;
+}) =>
+  [IETATADMINSTRATIF.ACTIF, IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT].indexOf(
+    uniteLegaleOrEtablissement.etatAdministratif
+  ) > -1;
