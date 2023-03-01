@@ -98,7 +98,7 @@ const Tabs: React.FC<{
       ficheType: FICHE.DIVERS,
       label: 'Conventions collectives',
       pathPrefix: '/divers/',
-      noFollow: true,
+      noFollow: false,
       shouldDisplay: true,
     },
   ];
