@@ -9,6 +9,7 @@ Allow: /faq/
 Allow: /departements/
 Allow: /etablissement/
 Allow: /carte/
+Allow: /lp/
 
 # Groupe 1
 User-agent: *

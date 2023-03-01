@@ -17,10 +17,7 @@ const Footer = () => (
               <ul className="fr-footer__top-list">
                 {getAllLandingPages().map(({ slug, footerLabel }) => (
                   <li key="slug">
-                    <a
-                      className="fr-footer__top-link"
-                      href={`/rechercher/lp/${slug}`}
-                    >
+                    <a className="fr-footer__top-link" href={`/lp/${slug}`}>
                       {footerLabel}
                     </a>
                   </li>

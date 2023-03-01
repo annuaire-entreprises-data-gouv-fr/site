@@ -6,7 +6,6 @@ import AdministrationDescription from '#components/administrations/administratio
 import { LayoutDefault } from '#components/layouts/layout-default';
 import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
-import constants from '#models/constants';
 import {
   getAllLandingPages,
   getLandingPage,
@@ -30,7 +29,7 @@ const LandingPage: NextPageWithLayout<IProps> = ({
   <>
     <Meta
       title={seo.title || title}
-      canonical={`https://annuaire-entreprises.data.gouv.fr/rechercher/${slug}`}
+      canonical={`https://annuaire-entreprises.data.gouv.fr/lp/${slug}`}
       description={seo.description || description}
       noIndex={false}
     />

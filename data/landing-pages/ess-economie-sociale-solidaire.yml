@@ -1,4 +1,4 @@
-slug: ess
+slug: ess-economie-sociale-solidaire
 title: Moteur de recherche de l’ESS
 footerLabel: Entreprises de l’ESS (Economie Sociale et Solidaire)
 published: true
@@ -13,7 +13,7 @@ reassurance:
   - title: Définition de l’Économie Sociale et Solidaire
     body: |
       L'ESS désigne un ensemble d'entreprises et d'associations dont le fonctionnement interne et les activités sont fondés sur un principe de solidarité et d'utilité sociale.
-  - title: Bénéficier des informations officielles les plus à jour
+  - title: Bénéficier de la base de donnée publique la plus récente
     body: |
       - Dénomination sociale de l'organisation
       - Adresse
