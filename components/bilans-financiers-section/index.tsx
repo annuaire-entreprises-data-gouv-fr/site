@@ -1,5 +1,5 @@
 import AdministrationNotResponding from '#components/administration-not-responding';
-import { LineChart } from '#components/charts/finances';
+import { LineChart } from '#components/chart/line';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
