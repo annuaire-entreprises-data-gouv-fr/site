@@ -44,13 +44,11 @@ const yearOption = {
  * @returns
  */
 export const formatPercentage = safe((value: string, digits = 1) => {
-  let number = parseInt(value, 10);
+  let number = parseFloat(value);
   if (!number) {
-    return value;
+    return undefined;
   }
-  if (typeof value !== 'string' || !value) {
-    return value;
-  }
+
   return parseFloat(value).toFixed(digits) + '%';
 });
 
@@ -64,8 +62,9 @@ export const formatCurrency = safe((value: string) => {
 
   const orderOfMagnitude = Math.floor((number.toString().length - 1) / 3);
   const magnitude = Math.pow(1000, orderOfMagnitude);
+  const roundedValue = Math.floor(Math.abs(number / magnitude) * 10) / 10;
 
-  return `${sign * Math.abs(number / magnitude)} ${unitlist[orderOfMagnitude]}`;
+  return `${sign * roundedValue} ${unitlist[orderOfMagnitude]}`;
 });
 
 export const formatDateYear = safe((date: string | Date) => {

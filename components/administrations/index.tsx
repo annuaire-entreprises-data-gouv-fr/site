@@ -49,6 +49,15 @@ export const MI = ({ queryString = '' }) => (
   </a>
 );
 
+export const MEF = ({ queryString = '' }) => (
+  <a
+    href={`/administration/mef${queryString}`}
+    title="Ministère de l’Économie et des Finances"
+  >
+    Ministère de l’Économie et des Finances
+  </a>
+);
+
 export const CMA = ({ queryString = '' }) => (
   <a
     href={`/administration/cma-france${queryString}`}

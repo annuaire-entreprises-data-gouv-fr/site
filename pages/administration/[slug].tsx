@@ -41,7 +41,7 @@ const AdministrationPage: NextPageWithLayout<IProps> = ({
           <h2>Vous avez une questions sur ces données ?</h2>
           <ul>
             {articles.map(({ slug, title }) => (
-              <li>
+              <li key={slug}>
                 <a href={`/faq/${slug}`}>{title}</a>
               </li>
             ))}

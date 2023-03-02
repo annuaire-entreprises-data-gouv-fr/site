@@ -219,7 +219,7 @@ const mapToStatuts = (
 ) => {
   return documentsRna
     .filter((d) => d.sous_type.code === 'STC')
-    .sort((a, b) => parseInt(a.annee_depot, 10) - parseInt(b.annee_depot))
+    .sort((a, b) => parseInt(a.annee_depot, 10) - parseInt(b.annee_depot, 10))
     .map((d) => {
       return {
         annee: d.annee_depot,

@@ -47,7 +47,6 @@ export const MultiSelect = ({
         isMulti
         menuPosition="fixed"
         name={name}
-        // @Todo find a way to fix this type safe
         options={options as OptionsOrGroups<{}, GroupBase<{}>>}
         placeholder={placeholder}
         styles={{

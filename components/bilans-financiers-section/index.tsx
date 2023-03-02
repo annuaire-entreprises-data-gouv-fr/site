@@ -1,11 +1,16 @@
 import AdministrationNotResponding from '#components/administration-not-responding';
+import { INPI, MEF } from '#components/administrations';
 import { LineChart } from '#components/chart/line';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { IDonneesFinancieres } from '#models/donnees-financieres';
-import { formatDateYear, formatCurrency } from '#utils/helpers';
+import {
+  formatDateYear,
+  formatCurrency,
+  formatPercentage,
+} from '#utils/helpers';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>⏺</span>
@@ -50,19 +55,22 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
       <>
         <ColorCircle color={colorCA} /> Chiffre d’affaires
       </>,
-      ...sortedBilans.map((a) => formatCurrency(a.chiffreDAffaires.toString())),
+      ...sortedBilans.map((a) => formatCurrency(a.chiffreDAffaires)),
+    ],
+    [
+      'Marge commerciale ou marge brute',
+      ...sortedBilans.map((a) => formatCurrency(a.margeBrute)),
+    ],
+    [
+      'Marge d’Excédent Brut d’Exploitation (EBE)',
+      ...sortedBilans.map((a) => formatPercentage(a.margeEbe)),
     ],
     [
       <>
         <ColorCircle color={colorResultat} /> Résultat net
       </>,
-      ...sortedBilans.map((a) => formatCurrency(a.resultatNet.toString())),
+      ...sortedBilans.map((a) => formatCurrency(a.resultatNet)),
     ],
-    [
-      'Marge brute',
-      ...sortedBilans.map((a) => formatCurrency(a.margeBrute.toString())),
-    ],
-    ['EBITDA', ...sortedBilans.map((a) => formatCurrency(a.ebitda.toString()))],
   ];
 
   return (
@@ -71,6 +79,15 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
       sources={[EAdministration.MEF]}
       lastModified={bilansFinanciers.lastModified}
     >
+      <p>
+        Voici les {sortedBilans.length} derniers bilans déclarés auprès de l’
+        <INPI /> pour cette structure.
+      </p>
+      <p>
+        À partir des bilans, les équipes du <MEF /> ont calculé et publié les
+        indicateurs et ratios financiers suivants&nbsp;:
+      </p>
+      <br />
       <LineChart
         height={250}
         data={{

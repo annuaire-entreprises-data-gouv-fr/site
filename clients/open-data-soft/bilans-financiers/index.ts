@@ -20,6 +20,10 @@ export const clientBilansFinanciers = async (siren: Siren) => {
     metaDataUrl
   );
 
+  if (response.records.length === 0) {
+    throw new HttpNotFound(siren);
+  }
+
   return {
     bilans: response.records.map(mapToDomainObject),
     lastModified: response.lastModified,
