@@ -30,9 +30,13 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
     <div className="mobile">
       {body.map((row, idx) => (
         <div key={'row-' + idx}>
-          {row.map((cell, idy) => (
-            <div key={'cell-' + idy}>{cell}</div>
-          ))}
+          {row.map((cell, idy) =>
+            !cell && cell !== 0 ? null : (
+              <div key={'cell-' + idy}>
+                <b>{head[idy]}&nbsp;:</b> {cell}
+              </div>
+            )
+          )}
         </div>
       ))}
     </div>
@@ -72,13 +76,7 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
       .mobile > div {
         margin: 20px 0;
       }
-      .mobile > div > div:nth-of-type(1) {
-        margin-bottom: 10px;
-      }
-      .mobile > div > div:nth-of-type(3) {
-        font-style: italic;
-        font-size: 0.9rem;
-      }
+
       @media only screen and (min-width: 1px) and (max-width: 992px) {
         .mobile {
           display: block;

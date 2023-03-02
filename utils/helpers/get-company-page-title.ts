@@ -16,7 +16,7 @@ export const getCompanyLabel = (uniteLegale: IUniteLegale) => {
     case uniteLegale.complements.estEntrepreneurIndividuel:
       return `entreprise individuelle`;
     default:
-      return `unité légale`;
+      return `société`;
   }
 };
 

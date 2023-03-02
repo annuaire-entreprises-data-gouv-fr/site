@@ -115,7 +115,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
       <br />
       <FullTable
         head={[
-          'Année fiscale',
+          'Indicateurs',
           ...sortedBilans.map((a) => formatDateYear(a.dateClotureExercice)),
         ]}
         body={body}
