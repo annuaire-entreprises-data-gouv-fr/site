@@ -5,7 +5,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { IDonneesFinancieres } from '#models/donnees-financieres';
-import { formatDateYear, formatMoney } from '#utils/helpers';
+import { formatDateYear, formatCurrency } from '#utils/helpers';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>⏺</span>
@@ -48,21 +48,21 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
   const body = [
     [
       <>
-        Chiffre d’affaires <ColorCircle color={colorCA} />
+        <ColorCircle color={colorCA} /> Chiffre d’affaires
       </>,
-      ...sortedBilans.map((a) => formatMoney(a.chiffreDAffaires.toString())),
+      ...sortedBilans.map((a) => formatCurrency(a.chiffreDAffaires.toString())),
     ],
     [
       <>
-        Résultat net <ColorCircle color={colorResultat} />
+        <ColorCircle color={colorResultat} /> Résultat net
       </>,
-      ...sortedBilans.map((a) => formatMoney(a.resultatNet.toString())),
+      ...sortedBilans.map((a) => formatCurrency(a.resultatNet.toString())),
     ],
     [
       'Marge brute',
-      ...sortedBilans.map((a) => formatMoney(a.margeBrute.toString())),
+      ...sortedBilans.map((a) => formatCurrency(a.margeBrute.toString())),
     ],
-    ['EBITDA', ...sortedBilans.map((a) => formatMoney(a.ebitda.toString()))],
+    ['EBITDA', ...sortedBilans.map((a) => formatCurrency(a.ebitda.toString()))],
   ];
 
   return (

@@ -10,12 +10,12 @@ const safe =
   (castAndFormat: Function) =>
   (...args: any) => {
     try {
-      return castAndFormat(args);
+      return castAndFormat.apply(null, args);
     } catch (e: any) {
       logErrorInSentry('Error while using formatting function', {
-        details: e || args,
+        details: e.toString() || args,
       });
-      return '';
+      return args;
     }
   };
 
@@ -55,23 +55,17 @@ export const formatPercentage = safe((value: string, digits = 1) => {
 });
 
 export const formatCurrency = safe((value: string) => {
-  try {
-    let number = parseInt(value, 10);
-    if (!number) {
-      return value;
-    }
-    const unitlist = ['', 'K €', 'M €', 'Mds €'];
-    const sign = Math.sign(number);
-    let unit = 0;
-    while (Math.abs(number) >= 1000) {
-      unit = unit + 1;
-      number = Math.floor(Math.abs(number) / 100) / 10;
-    }
-    return sign * Math.abs(number) + unitlist[unit];
-  } catch {
-    logErrorInSentry('Failed to format money', { details: value });
-    return 0;
+  const number = parseInt(value, 10);
+  if (!number) {
+    return value;
   }
+  const unitlist = [' €', 'K €', 'M €', 'Mds €'];
+  const sign = Math.sign(number);
+
+  const orderOfMagnitude = Math.floor((number.toString().length - 1) / 3);
+  const magnitude = Math.pow(1000, orderOfMagnitude);
+
+  return `${sign * Math.abs(number / magnitude)} ${unitlist[orderOfMagnitude]}`;
 });
 
 export const formatDateYear = safe((date: string | Date) => {

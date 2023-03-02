@@ -10,7 +10,7 @@ import {
   ChartData,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { formatMoney } from '#utils/helpers';
+import { formatCurrency } from '#utils/helpers';
 
 ChartJS.register(
   CategoryScale,
@@ -36,7 +36,7 @@ export const LineChart = ({ data, height = 250 }: LineChatProps) => {
             tooltip: {
               callbacks: {
                 label(tooltipItem) {
-                  return formatMoney(
+                  return formatCurrency(
                     tooltipItem.parsed.y.toString()
                   ).toString();
                 },
@@ -50,7 +50,7 @@ export const LineChart = ({ data, height = 250 }: LineChatProps) => {
               border: { display: false },
               ticks: {
                 callback: (label) => {
-                  return formatMoney(label.toString());
+                  return formatCurrency(label.toString());
                 },
               },
             },
