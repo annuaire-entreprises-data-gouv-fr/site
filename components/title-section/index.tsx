@@ -22,6 +22,7 @@ import { ISession, isLoggedIn } from '#utils/session';
 export enum FICHE {
   ACTES = 'actes & statuts',
   ANNONCES = 'annonces',
+  FINANCES = 'finances',
   CERTIFICATS = 'Labels ou certifications',
   COMPTES = 'bilans & comptes',
   DIRIGEANTS = 'dirigeants',
@@ -93,6 +94,13 @@ const Tabs: React.FC<{
       pathPrefix: '/etablissements-scolaires/',
       noFollow: true,
       shouldDisplay: uniteLegale.complements.estUai,
+    },
+    {
+      ficheType: FICHE.FINANCES,
+      label: 'Données financières',
+      pathPrefix: '/donnees-financieres/',
+      noFollow: false,
+      shouldDisplay: false,
     },
     {
       ficheType: FICHE.DIVERS,

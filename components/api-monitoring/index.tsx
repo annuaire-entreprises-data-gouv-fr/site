@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
@@ -247,12 +247,12 @@ const ApiMonitoring: React.FC<IProps> = ({
           ' ou télécharger les données brutes sur data.gouv.fr : '}
         {datagouv &&
           datagouv.map(({ label, link }, index) => (
-            <>
+            <Fragment key={index}>
               <a href={link} target="_blank" rel="noreferrer noopener">
                 {label}
               </a>
               {index < datagouv.length - 1 && ', '}
-            </>
+            </Fragment>
           ))}
         .
       </>

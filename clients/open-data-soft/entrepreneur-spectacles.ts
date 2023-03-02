@@ -26,8 +26,9 @@ const clientEntrepreneurSpectacles = async (
   // siret column is an int. Does not support string search query so fallback on either exactmatch or int range
   const q = `siren_personne_physique_siret_personne_morale=${siren} OR (siren_personne_physique_siret_personne_morale > ${siren}00000 AND siren_personne_physique_siret_personne_morale < ${siren}99999)`;
   const searchUrl = `${routes.certifications.entrepreneurSpectacles.ods.search}&q=${q}&sort=date_de_depot_de_la_declaration_inscrite_sur_le_recepisse`;
-  const metadataUrl = routes.certifications.entrepreneurSpectacles.ods.metadata;
-  const response = await odsClient(searchUrl, metadataUrl);
+  const metaDataUrl = routes.certifications.entrepreneurSpectacles.ods.metadata;
+
+  const response = await odsClient({ url: searchUrl }, metaDataUrl);
 
   return {
     licences: response.records.map((record: ISpectaclesVivantsRecord) => ({

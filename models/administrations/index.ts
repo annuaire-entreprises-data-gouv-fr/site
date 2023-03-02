@@ -5,6 +5,7 @@ export enum EAdministration {
   DILA = 'dila',
   DINUM = 'dinum',
   MC = 'mc',
+  MEF = 'mef',
   INPI = 'inpi',
   INSEE = 'insee',
   METI = 'meti',

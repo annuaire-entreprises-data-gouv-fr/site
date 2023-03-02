@@ -1,0 +1,15 @@
+slug: mef
+short: MEF
+long: Ministère de l'Économie et des Finances
+site: https://www.economie.gouv.fr/
+contact: https://www.economie.gouv.fr/contact
+apiMonitors:
+  - apiName: API Bilans Financiers
+    datagouv:
+      - label: Ratios Financiers (BCE / INPI)
+        link: https://www.data.gouv.fr/fr/datasets/indicateurs-sectoriels-financiers-bce-inpi/
+    id: 788647353
+    data:
+      - Bilans financiers
+description: |
+  Le ministère de l’Économie et des Finances, communément appelé « Bercy », est le ministère chargé des finances publiques d’une part (budget) et de la politique économique de la France d’autre part.

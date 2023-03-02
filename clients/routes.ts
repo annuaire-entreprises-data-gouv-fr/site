@@ -20,6 +20,14 @@ const routes = {
     api: 'https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
     site: 'https://code.travail.gouv.fr/outils/convention-collective',
   },
+  donneesFinancieres: {
+    ods: {
+      metadata:
+        'https://data.economie.gouv.fr/api/datasets/1.0/search/?q=ratios_inpi_bce',
+      search:
+        'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce',
+    },
+  },
   educationNationale: {
     api: 'https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-annuaire-education',
     site: 'https://www.education.gouv.fr/annuaire',
@@ -122,6 +130,7 @@ const routes = {
       'https://staging.recherche-entreprises.api.gouv.fr/search',
     uniteLegale: 'https://api-annuaire-entreprises.data.gouv.fr/siren?q=',
   },
+
   tva: {
     vies: 'https://ec.europa.eu/taxation_customs/vies/rest-api/ms/FR/vat/',
   },

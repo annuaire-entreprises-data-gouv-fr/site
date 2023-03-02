@@ -5,7 +5,7 @@ import { escapeTerm, Siren, verifyIdRna } from '#utils/helpers';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import { IDataAssociation, IUniteLegale, NotAValidIdRnaError } from '.';
 
-const getAssociation = async (
+export const getAssociation = async (
   uniteLegale: IUniteLegale
 ): Promise<null | IDataAssociation> => {
   const slug = uniteLegale.association.idAssociation || '';
@@ -71,7 +71,6 @@ const verifyAdressConsistency = async (
       ]);
       return adress1.geoCodedAdress !== adress2.geoCodedAdress;
     }
-
     return false;
   } catch (e: any) {
     logErrorInSentry('Error in API BAN', {
@@ -81,5 +80,3 @@ const verifyAdressConsistency = async (
     return false;
   }
 };
-
-export { getAssociation };

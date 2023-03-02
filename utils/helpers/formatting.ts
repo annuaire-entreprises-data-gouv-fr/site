@@ -28,6 +28,45 @@ const yearOption = {
   year: 'numeric',
 };
 
+export const safeParse = (value: string) => {
+  let number = parseInt(value);
+  if (!number) {
+    return value;
+  }
+  return number.toString();
+};
+
+export const formatPercentage = (value: string) => {
+  let number = parseInt(value);
+  if (!number) {
+    return value;
+  }
+  if (typeof value !== 'string' || !value) {
+    return value;
+  }
+  return parseFloat(value).toFixed(1) + '%';
+};
+
+export const formatMoney = (value: string) => {
+  try {
+    let number = parseInt(value, 10);
+    if (!number) {
+      return value;
+    }
+    const unitlist = ['', 'K €', 'M €', 'Mds €'];
+    const sign = Math.sign(number);
+    let unit = 0;
+    while (Math.abs(number) >= 1000) {
+      unit = unit + 1;
+      number = Math.floor(Math.abs(number) / 100) / 10;
+    }
+    return sign * Math.abs(number) + unitlist[unit];
+  } catch {
+    logErrorInSentry('Fail to formatMoney', { details: value });
+    return 0;
+  }
+};
+
 export const formatDateYear = safe((date: string | Date) => {
   if (!date) {
     return undefined;
