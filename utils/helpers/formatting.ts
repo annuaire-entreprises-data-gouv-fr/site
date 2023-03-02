@@ -1,14 +1,23 @@
 import { libelleFromTypeVoie } from '#utils/labels';
 import logErrorInSentry from '#utils/sentry';
 
-const safe = (castAndFormat: (toBeFormated: any) => any) => (d: any) => {
-  try {
-    return castAndFormat(d);
-  } catch (e: any) {
-    logErrorInSentry('Error while formating date', { details: d });
-    return d;
-  }
-};
+/**
+ * Wrapper that ensure every formatter is safe to run
+ * @param castAndFormat
+ * @returns
+ */
+const safe =
+  (castAndFormat: Function) =>
+  (...args: any) => {
+    try {
+      return castAndFormat(args);
+    } catch (e: any) {
+      logErrorInSentry('Error while using formatting function', {
+        details: e || args,
+      });
+      return '';
+    }
+  };
 
 const castDate = (date: string | Date) =>
   typeof date === 'string' ? new Date(date) : date;
@@ -28,26 +37,24 @@ const yearOption = {
   year: 'numeric',
 };
 
-export const safeParse = (value: string) => {
-  let number = parseInt(value);
-  if (!number) {
-    return value;
-  }
-  return number.toString();
-};
-
-export const formatPercentage = (value: string) => {
-  let number = parseInt(value);
+/**
+ * Format a string as percentage
+ * @param value
+ * @param digits number of digits
+ * @returns
+ */
+export const formatPercentage = safe((value: string, digits = 1) => {
+  let number = parseInt(value, 10);
   if (!number) {
     return value;
   }
   if (typeof value !== 'string' || !value) {
     return value;
   }
-  return parseFloat(value).toFixed(1) + '%';
-};
+  return parseFloat(value).toFixed(digits) + '%';
+});
 
-export const formatMoney = (value: string) => {
+export const formatCurrency = safe((value: string) => {
   try {
     let number = parseInt(value, 10);
     if (!number) {
@@ -62,10 +69,10 @@ export const formatMoney = (value: string) => {
     }
     return sign * Math.abs(number) + unitlist[unit];
   } catch {
-    logErrorInSentry('Fail to formatMoney', { details: value });
+    logErrorInSentry('Failed to format money', { details: value });
     return 0;
   }
-};
+});
 
 export const formatDateYear = safe((date: string | Date) => {
   if (!date) {
@@ -99,27 +106,19 @@ export const formatDate = safe((date: string | Date) =>
   date ? new Intl.DateTimeFormat('fr-FR').format(castDate(date)) : undefined
 );
 
-export const capitalize = (str: string) => {
+export const capitalize = safe((str: string) => {
   if (!str) return str;
 
   return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
-};
+});
 
 export const formatIntFr = safe((intAsString = '') => {
-  try {
-    return intAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
-  } catch (e: any) {
-    return intAsString;
-  }
+  return intAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
 });
 
 export const formatFloatFr = safe((floatAsString = '') => {
-  try {
-    const floatAsNumber = parseFloat(floatAsString);
-    return new Intl.NumberFormat('fr-FR').format(floatAsNumber);
-  } catch {
-    return floatAsString;
-  }
+  const floatAsNumber = parseFloat(floatAsString);
+  return new Intl.NumberFormat('fr-FR').format(floatAsNumber);
 });
 
 /**
@@ -185,11 +184,7 @@ export const parseIntWithDefaultValue = (
   }
 };
 
-const wrapWord = (
-  word: string | null | undefined = '',
-  punct = ' ',
-  caps = false
-) => {
+const wrapWord = (word: string | null | undefined = '', punct = ' ') => {
   if (!word) {
     return '';
   }

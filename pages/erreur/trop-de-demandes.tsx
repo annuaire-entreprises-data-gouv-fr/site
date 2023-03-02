@@ -2,6 +2,7 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import ButtonLink from '#components-ui/button';
 import Meta from '#components/meta';
+import constants from '#models/constants';
 import { NextPageWithLayout } from 'pages/_app';
 
 const TooManyRequest: NextPageWithLayout = () => {
@@ -14,17 +15,19 @@ const TooManyRequest: NextPageWithLayout = () => {
         temps très court, par conséquent nous ne pouvons pas répondre à votre
         requête.
       </p>
+
       <ul>
         <li>
-          Soit cela est du à une coincidence malheureuse et dans ce cas vous
-          pouvez continuer a naviguer sur le site, cela ne devrait plus se
-          produire.
+          Si vous travaillez <b>pour un service public</b> (administration,
+          ministère, collectivité),{' '}
+          <a href={`mailto:${constants.links.mailto}`}>contactez-nous</a> et
+          nous ferons le nécessaire pour que cela ne se reproduise pas.
         </li>
         <li>
-          Soit cela est du au fait que vous partagez votre connexion avec de
-          nombreuses autres personnes (le réseau internet de votre entreprise ou
-          de votre administration) et dans ce cas cela peut se produire de
-          nouveau.
+          Si <b>vous utilisez des robots 🤖</b> pour scrapper les données du
+          site. <b>Sachez que toutes les données sont publiques !</b> Alors{' '}
+          <a href="/sources-de-donnees">utilisez les API</a>. Cela sera plus
+          stable et efficace pour tout le monde.
         </li>
       </ul>
       <p>
