@@ -32,6 +32,17 @@ export const LineChart = ({ data, height = 250 }: LineChatProps) => {
     <div style={{ height: `${height}px` }}>
       <Line
         options={{
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label(tooltipItem) {
+                  return formatMoney(
+                    tooltipItem.parsed.y.toString()
+                  ).toString();
+                },
+              },
+            },
+          },
           responsive: true,
           maintainAspectRatio: false,
           scales: {
