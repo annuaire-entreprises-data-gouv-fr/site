@@ -12,7 +12,12 @@ import { IUniteLegale } from '..';
 
 export interface IDonneesFinancieres {
   uniteLegale: IUniteLegale;
-  bilansFinanciers: IBilanFinancier[] | IAPINotRespondingError;
+  bilansFinanciers:
+    | {
+        bilans: IBilanFinancier[];
+        lastModified: string | null;
+      }
+    | IAPINotRespondingError;
 }
 
 export interface IBilanFinancier {
@@ -40,7 +45,7 @@ export interface IBilanFinancier {
 
 export const getDonneesFinancieresFromSlug = async (
   slug: string
-): Promise<IBilansFinanciers> => {
+): Promise<IDonneesFinancieres> => {
   const siren = verifySiren(slug);
   const [uniteLegale, bilansFinanciers] = await Promise.all([
     getUniteLegaleFromSlug(siren),

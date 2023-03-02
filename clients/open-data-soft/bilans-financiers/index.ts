@@ -2,35 +2,31 @@ import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { Siren } from '#utils/helpers';
 import odsClient from '..';
-import { IFields, IResponseFinance } from './interface';
+import { IAPIBilanResponse } from './interface';
 
 /**
  * Données financière (Ratios Financiers (BCE / INPI))
  * https://data.economie.gouv.fr/explore/dataset/ratios_inpi_bce/api
  */
 export const clientBilansFinanciers = async (siren: Siren) => {
-  const { search: searchUrl, metadata: metadataUrl } =
-    routes.donneesFinancieres.ods;
+  const url = routes.donneesFinancieres.ods.search;
+  const metaDataUrl = routes.donneesFinancieres.ods.metadata;
 
-  const response: IResponseFinance = await odsClient(
+  const response = await odsClient(
     {
-      url: searchUrl,
+      url,
       config: { params: { q: `siren:${siren}` } },
     },
-    { url: metadataUrl }
+    metaDataUrl
   );
 
-  if (!response.records.length) {
-    throw new HttpNotFound(
-      `Cannot found financial data associate to siren : ${siren}`
-    );
-  }
-  return response.records.map((financialData) =>
-    mapToDomainObject(financialData)
-  );
+  return {
+    bilans: response.records.map(mapToDomainObject),
+    lastModified: response.lastModified,
+  };
 };
 
-const mapToDomainObject = (financialData: IFields) => {
+const mapToDomainObject = (financialData: IAPIBilanResponse) => {
   const {
     ratio_de_vetuste = 0,
     rotation_des_stocks_jours = 0,

@@ -6,7 +6,7 @@ import Title, { FICHE } from '#components/title-section';
 import {
   getDonneesFinancieresFromSlug,
   IDonneesFinancieres,
-} from '#models/finances';
+} from '#models/donnees-financieres';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,

@@ -1,19 +1,4 @@
-export interface IResponseFinance {
-  nhits: number;
-  parameters: IParameters;
-  records: IFields[];
-}
-
-interface IParameters {
-  dataset: string;
-  q: string;
-  rows: number;
-  start: number;
-  format: string;
-  timezone: string;
-}
-
-export interface IFields {
+export interface IAPIBilanResponse {
   ratio_de_vetuste: number;
   rotation_des_stocks_jours: number;
   marge_ebe: number;

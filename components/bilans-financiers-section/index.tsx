@@ -4,7 +4,7 @@ import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
-import { IDonneesFinancieres } from '#models/finances';
+import { IDonneesFinancieres } from '#models/donnees-financieres';
 import { formatDateYear, formatMoney } from '#utils/helpers';
 
 const ColorCircle = ({ color }: { color: string }) => (
@@ -33,7 +33,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
   }
 
   // only five last bilans sorted from oldest to latest
-  const sortedBilans = bilansFinanciers
+  const sortedBilans = bilansFinanciers.bilans
     .sort(
       (a, b) =>
         new Date(b.dateClotureExercice).getTime() -
@@ -66,7 +66,11 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
   ];
 
   return (
-    <Section title="Bilans financiers" sources={[EAdministration.MEF]}>
+    <Section
+      title="Bilans financiers"
+      sources={[EAdministration.MEF]}
+      lastModified={bilansFinanciers.lastModified}
+    >
       <LineChart
         height={250}
         data={{

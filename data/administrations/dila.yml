@@ -10,7 +10,7 @@ apiMonitors:
     datagouv:
       - label: Bulletin officiel des annonces civiles et commerciales (BODACC)
         link: https://www.data.gouv.fr/fr/datasets/bodacc/
-    id: 788647353
+    id: 793828554
     data:
       - Annonces du Bulletin Officiel des Annonces Civiles et Commerciales (BODACC)
   - apiName: API Annonces et comptes annuels des associations (JOAFE)

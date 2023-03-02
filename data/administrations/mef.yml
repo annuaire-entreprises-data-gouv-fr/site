@@ -8,7 +8,7 @@ apiMonitors:
     datagouv:
       - label: Ratios Financiers (BCE / INPI)
         link: https://www.data.gouv.fr/fr/datasets/indicateurs-sectoriels-financiers-bce-inpi/
-    id: 793687425
+    id: 788647353
     data:
       - Bilans financiers
 description: |

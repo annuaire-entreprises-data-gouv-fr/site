@@ -26,16 +26,16 @@ const extractLastModifiedDate = (metadata: IODSMetadata) => {
  */
 const odsClient = async (
   search: { url: string; config?: AxiosRequestConfig<any> },
-  metaData: { url: string; config?: AxiosRequestConfig<any> }
+  metaDataUrl: string
 ): Promise<any> => {
-  const [response, metadata] = await Promise.all([
+  const [response, responseMetaData] = await Promise.all([
     httpGet(search.url, search.config),
-    httpGet(metaData.url, metaData.config),
+    httpGet(metaDataUrl),
   ]);
 
   const results = (response.data || []) as IODSResponse;
 
-  const lastModified = extractLastModifiedDate(metadata.data);
+  const lastModified = extractLastModifiedDate(responseMetaData.data);
 
   return {
     records: results.records.map((record) => record.fields),

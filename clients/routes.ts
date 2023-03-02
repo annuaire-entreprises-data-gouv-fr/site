@@ -23,7 +23,7 @@ const routes = {
   donneesFinancieres: {
     ods: {
       metadata:
-        'https://data.economie.gouv.fr/api/datasets/1.0/search/?dataset=ratios_inpi_bce',
+        'https://data.economie.gouv.fr/api/datasets/1.0/search/?q=ratios_inpi_bce',
       search:
         'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce',
     },
