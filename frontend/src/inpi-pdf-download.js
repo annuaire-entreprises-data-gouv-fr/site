@@ -14,7 +14,7 @@ function saveAsPdf(blob, siren) {
 }
 
 function handleError() {
-  throw new Error('INPI PDF Download : 500');
+  throw new Error('INPI PDF Download : failed and redirected');
 }
 
 function handleNotFound() {
@@ -24,13 +24,9 @@ function wait(ttw) {
   return new Promise((resolve) => setTimeout(resolve, ttw));
 }
 
-async function download(siren) {
+async function download(url) {
   try {
-    const res = await fetch(
-      'https://data.inpi.fr/export/companies?format=pdf&ids=[%22' +
-        siren +
-        '%22]'
-    );
+    const res = await fetch(url);
 
     if (!res.ok) {
       return res.json().then(function (msg) {
@@ -61,8 +57,7 @@ async function downloadInpiPDF() {
       handleNotFound();
     }
     if (res === 500) {
-      stateMachine.setError();
-      handleError();
+      // lets do nothing and retry
     }
     if (res === 200) {
       stateMachine.setSuccess();
@@ -71,29 +66,37 @@ async function downloadInpiPDF() {
 
   if (stateMachine.exists) {
     const siren = extractSirenSlugFromUrl(window.location.pathname || '');
+    const url =
+      'https://data.inpi.fr/export/companies?format=pdf&ids=[%22' +
+      siren +
+      '%22]';
+
     stateMachine.setStarted();
 
     if (window.fetch) {
       // first try
-      const res = await download(siren);
+      console.info('first attempt');
+      const res = await download(url);
       handleResponse(res);
 
       // second try
       if (res !== 200) {
-        const res2 = await download(siren);
+        console.info('second attempt');
+        const res2 = await download(url);
         handleResponse(res2);
 
         // third try
         if (res2 !== 200) {
-          await wait(30 * 1000);
-          const res3 = await download(siren);
-          handleResponse(res3);
+          console.info('redirect attempt');
 
-          if (res3 !== 200) {
-            // nevermind - it was a bad idea anyway
-            stateMachine.setError();
-            handleError();
+          if (typeof window !== 'undefined') {
+            window.location = url;
           }
+
+          await wait(45 * 1000);
+          // nevermind - it was a bad idea anyway
+          stateMachine.setError();
+          handleError();
         }
       }
     } else {
