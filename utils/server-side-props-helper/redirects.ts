@@ -1,11 +1,11 @@
 import { hasSirenFormat, hasSiretFormat } from '#utils/helpers';
-import logErrorInSentry, { IScope, logWarningInSentry } from '#utils/sentry';
+import { IScope, logWarningInSentry } from '#utils/sentry';
 
 export const redirectPageNotFound = (
   msg: string,
   scope?: IScope
 ): { notFound: true } => {
-  logWarningInSentry('Unknown url (404)', {
+  logWarningInSentry('Redirect 404 page', {
     details: msg,
     ...scope,
   });
@@ -15,7 +15,10 @@ export const redirectPageNotFound = (
 };
 
 export const redirectServerError = (msg: string, scope?: IScope) => {
-  logErrorInSentry('Server Error (500)', { details: msg, ...scope });
+  logWarningInSentry('Redirect 500 page', {
+    details: msg,
+    ...scope,
+  });
   return {
     redirect: {
       destination: '/500',
@@ -25,7 +28,10 @@ export const redirectServerError = (msg: string, scope?: IScope) => {
 };
 
 export const redirectSearchEngineError = (msg: string, scope?: IScope) => {
-  logErrorInSentry('Search engine error', { details: msg, ...scope });
+  logWarningInSentry('Redirect search error page', {
+    details: msg,
+    ...scope,
+  });
   return {
     redirect: {
       destination: '/rechercher/erreur',
@@ -41,7 +47,7 @@ export const redirectSirenOrSiretInvalid = (
   sirenOrSiret: string,
   scope?: IScope
 ) => {
-  logWarningInSentry('Siren or siret is invalid', scope);
+  logWarningInSentry('Redirect siren or siret invalid', scope);
   return {
     redirect: {
       destination: `/erreur/invalide/${sirenOrSiret}`,
@@ -56,7 +62,7 @@ export const redirectSirenOrSiretIntrouvable = (
   sirenOrSiret: string,
   scope?: IScope
 ) => {
-  logWarningInSentry('Siren or siret not found', scope);
+  logWarningInSentry('Redirect siren or siret not found', scope);
   return {
     redirect: {
       destination: `/erreur/introuvable/${sirenOrSiret}`,

@@ -89,7 +89,7 @@ const updateMonitorings = async () => {
       ...data.getHeaders(),
       'Accept-Encoding': 'gzip,deflate,compress',
     },
-    timeout: constants.timeout.S,
+    timeout: constants.timeout.L,
   });
 
   const result = response.data as IUptimeRobotResponse;
