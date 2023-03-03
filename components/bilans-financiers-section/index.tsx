@@ -13,7 +13,7 @@ import {
 } from '#utils/helpers';
 
 const ColorCircle = ({ color }: { color: string }) => (
-  <span style={{ color }}>⏺</span>
+  <span style={{ color }}>◆</span>
 );
 
 export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({

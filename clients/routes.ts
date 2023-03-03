@@ -60,9 +60,9 @@ const routes = {
   matomo: {
     report: {
       copyPasteEvents:
-        'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=7&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
+        'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=5&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
       npsEvents:
-        'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=4&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
+        'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=2&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
       visits:
         'https://stats.data.gouv.fr/index.php?module=API&method=API.getBulkRequest&format=json',
     },
