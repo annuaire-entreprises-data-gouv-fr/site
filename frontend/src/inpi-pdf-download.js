@@ -24,7 +24,7 @@ function wait(ttw) {
   return new Promise((resolve) => setTimeout(resolve, ttw));
 }
 
-async function download(url) {
+async function download(url, siren) {
   try {
     const res = await fetch(url);
 
@@ -37,11 +37,12 @@ async function download(url) {
         }
       });
     } else {
-      const blob = res.blob();
+      const blob = await res.blob();
       saveAsPdf(blob, siren);
       return 200;
     }
   } catch (e) {
+    console.log(e);
     return 500;
   }
 }
@@ -76,13 +77,13 @@ async function downloadInpiPDF() {
     if (window.fetch) {
       // first try
       console.info('first attempt');
-      const res = await download(url);
+      const res = await download(url, siren);
       handleResponse(res);
 
       // second try
       if (res !== 200) {
         console.info('second attempt');
-        const res2 = await download(url);
+        const res2 = await download(url, siren);
         handleResponse(res2);
 
         // third try
