@@ -7,13 +7,13 @@ import logErrorInSentry from '#utils/sentry';
  * @returns
  */
 const safe =
-  (castAndFormat: Function, name = '') =>
+  (castAndFormat: Function) =>
   (...args: any) => {
     try {
       return castAndFormat.apply(null, args);
     } catch (e: any) {
       logErrorInSentry('Error while using formatting function', {
-        details: `${name} - ${e.toString() || args}`,
+        details: e.toString() || args,
       });
       return args;
     }
@@ -50,7 +50,7 @@ export const formatPercentage = safe((value: string, digits = 1) => {
   }
 
   return parseFloat(value).toFixed(digits) + '%';
-}, 'percent');
+});
 
 export const formatCurrency = safe((value: string) => {
   const number = parseInt(value, 10);
@@ -65,7 +65,7 @@ export const formatCurrency = safe((value: string) => {
   const roundedValue = Math.floor(Math.abs(number / magnitude) * 10) / 10;
 
   return `${sign * roundedValue} ${unitlist[orderOfMagnitude]}`;
-}, 'currency');
+});
 
 export const formatDateYear = safe((date: string | Date) => {
   if (!date) {
@@ -73,7 +73,7 @@ export const formatDateYear = safe((date: string | Date) => {
   }
   //@ts-ignore
   return new Intl.DateTimeFormat('fr-FR', yearOption).format(castDate(date));
-}, 'dateYear');
+});
 
 export const formatDatePartial = safe((date: string | Date) => {
   if (!date) {
@@ -83,7 +83,7 @@ export const formatDatePartial = safe((date: string | Date) => {
   return new Intl.DateTimeFormat('fr-FR', longDatePartial).format(
     castDate(date)
   );
-}, 'datePartial');
+});
 
 export const formatDateLong = safe((date: string | Date) => {
   if (!date) {
@@ -93,7 +93,7 @@ export const formatDateLong = safe((date: string | Date) => {
   return new Intl.DateTimeFormat('fr-FR', longDateOptions).format(
     castDate(date)
   );
-}, 'dateLong');
+});
 
 export const formatDate = safe((date: string | Date) =>
   date ? new Intl.DateTimeFormat('fr-FR').format(castDate(date)) : undefined
@@ -103,16 +103,22 @@ export const capitalize = safe((str: string) => {
   if (!str) return str;
 
   return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
-}, 'date');
+});
 
 export const formatIntFr = safe((intAsString = '') => {
+  if (!intAsString) {
+    return intAsString;
+  }
   return intAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
-}, 'int');
+});
 
 export const formatFloatFr = safe((floatAsString = '') => {
+  if (!floatAsString) {
+    return floatAsString;
+  }
   const floatAsNumber = parseFloat(floatAsString);
   return new Intl.NumberFormat('fr-FR').format(floatAsNumber);
-}, 'float');
+});
 
 /**
  * Serialize for injection in client script
