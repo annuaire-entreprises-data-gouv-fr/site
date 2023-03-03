@@ -1,5 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import constants from '#models/constants';
 import { IDataAssociation } from '#models/index';
 import { formatAdresse, IdRna } from '#utils/helpers';
 import { clientAPIProxy } from '../client';
@@ -12,6 +13,7 @@ import { IAssociationResponse } from './interfaces';
 const clientAssociation = async (numeroRna: IdRna, useCache = true) => {
   const response = await clientAPIProxy(
     routes.association + numeroRna,
+    { timeout: constants.timeout.L },
     useCache
   );
   if (response.identite && Object.keys(response.identite).length === 1) {

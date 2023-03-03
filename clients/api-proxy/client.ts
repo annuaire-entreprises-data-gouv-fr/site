@@ -26,8 +26,12 @@ const getAPIProxy = async (
     useCache
   );
 
-const clientAPIProxy = async (route: string, useCache: boolean) => {
-  const request = await getAPIProxy(route, {}, useCache);
+const clientAPIProxy = async (
+  route: string,
+  options: AxiosRequestConfig,
+  useCache: boolean
+) => {
+  const request = await getAPIProxy(route, options, useCache);
 
   return request.data;
 };

@@ -13,70 +13,94 @@ function saveAsPdf(blob, siren) {
   window.URL.revokeObjectURL(url);
 }
 
-function handleError(msg) {
-  throw new Error('Error while downloading INPI PDF');
+function handleError() {
+  throw new Error('INPI PDF Download : 500');
 }
 
-function downloadInpiPDF() {
+function handleNotFound() {
+  throw new Error('INPI PDF Download : 404');
+}
+function wait(ttw) {
+  return new Promise((resolve) => setTimeout(resolve, ttw));
+}
+
+async function download(siren) {
+  try {
+    const res = await fetch(
+      'https://data.inpi.fr/export/companies?format=pdf&ids=[%22' +
+        siren +
+        '%22]'
+    );
+
+    if (!res.ok) {
+      return res.json().then(function (msg) {
+        if (msg === 'Siren non existant') {
+          return 404;
+        } else {
+          return 500;
+        }
+      });
+    } else {
+      const blob = res.blob();
+      saveAsPdf(blob, siren);
+      return 200;
+    }
+  } catch (e) {
+    return 500;
+  }
+}
+
+async function downloadInpiPDF() {
   const stateMachine = FrontStateMachineFactory(
     'immatriculation-pdf-status-wrapper'
   );
+
+  const handleResponse = (res) => {
+    if (res === 404) {
+      stateMachine.setNotFound();
+      handleNotFound();
+    }
+    if (res === 500) {
+      stateMachine.setError();
+      handleError();
+    }
+    if (res === 200) {
+      stateMachine.setSuccess();
+    }
+  };
 
   if (stateMachine.exists) {
     const siren = extractSirenSlugFromUrl(window.location.pathname || '');
     stateMachine.setStarted();
 
     if (window.fetch) {
-      const attemptDownload = () =>
-        download(siren, stateMachine.setSuccess, stateMachine.setNotFound);
       // first try
-      attemptDownload()
-        // second try
-        .catch((e) => {
-          return attemptDownload();
-        })
+      const res = await download(siren);
+      handleResponse(res);
+
+      // second try
+      if (res !== 200) {
+        const res2 = await download(siren);
+        handleResponse(res2);
+
         // third try
-        .catch((e) => {
-          return attemptDownload();
-        })
-        // drop it
-        .catch((e) => {
-          stateMachine.setError();
-          handleError();
-        });
+        if (res2 !== 200) {
+          await wait(30 * 1000);
+          const res3 = await download(siren);
+          handleResponse(res3);
+
+          if (res3 !== 200) {
+            // nevermind - it was a bad idea anyway
+            stateMachine.setError();
+            handleError();
+          }
+        }
+      }
     } else {
       stateMachine.setError();
       handleError();
     }
   }
-}
-
-function download(
-  siren,
-  onSuccessCallback = function () {},
-  onNotFoundCallback = function () {}
-) {
-  return fetch(
-    'https://data.inpi.fr/export/companies?format=pdf&ids=[%22' + siren + '%22]'
-  )
-    .then((res) => {
-      if (!res.ok) {
-        res.json().then(function (msg) {
-          if (msg === 'Siren non existant') {
-            onNotFoundCallback();
-          } else {
-            throw new Error();
-          }
-          return;
-        });
-      } else {
-        return res.blob();
-      }
-    })
-    .then(function (blob) {
-      saveAsPdf(blob, siren);
-    })
-    .then(onSuccessCallback);
 }
 
 (function init() {
