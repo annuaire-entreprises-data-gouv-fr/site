@@ -39,7 +39,7 @@ const SubventionsAssociationPage: NextPageWithLayout<IProps> = ({
           session={session}
         />
         <ProtectedData>
-          Cette page contient des informations sensibles réservées aux{' '}
+          Cette page contient des informations réservées aux{' '}
           <b>agents publics</b>.
         </ProtectedData>
         {isAssociation(uniteLegale) ? (

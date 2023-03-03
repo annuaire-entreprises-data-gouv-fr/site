@@ -56,30 +56,31 @@ const About: NextPageWithLayout = () => {
           </p>
           <ul>
             <li>
-              Résumé : les informations générales (adresse, SIRET, SIREN, code
-              NAF/ APE, numéro de TVA, RNA pour les associations…), les
+              <b>Résumé :</b> les informations générales (adresse, SIRET, SIREN,
+              code NAF/ APE, numéro de TVA, RNA pour les associations…), les
               informations sur le siège social ainsi que la liste des
               établissements.
             </li>
             <li>
-              Justificatif d’immatriculation : permettant d’obtenir le document
-              pour prouver l’existence d’une entreprise ou d’une association
-              (équivalent des extraits KBIS et D1)
+              <b>Justificatif d’immatriculation :</b> permettant d’obtenir le
+              document pour prouver l’existence d’une entreprise ou d’une
+              association (équivalent des extraits KBIS et D1)
             </li>
             <li>
-              Informations sur les dirigeants (d’entreprises) ou élus
+              Informations sur les <b>dirigeants</b> (d’entreprises) ou élus
               (collectivités)
             </li>
             <li>
-              Annonces légales : annonces officielles au Journal Officiel et au
-              BODACC (Bulletin Officiel Des Annonces Civiles et Commerciales)
+              <b>Annonces légales :</b> annonces officielles au Journal Officiel
+              et au BODACC (Bulletin Officiel Des Annonces Civiles et
+              Commerciales)
             </li>
             <li>
-              Labels et certificats : RGE, ESS, Entrepreneurs de spectacles
-              vivants.
+              <b>Labels et certificats :</b> RGE, ESS, Entrepreneurs de
+              spectacles vivants.
             </li>
             <li>
-              Conventions collectives : documents enregistrés auprès du
+              <b>Conventions collectives :</b> documents enregistrés auprès du
               ministère du travail, du plein l’emploi et de l’insertion
             </li>
           </ul>
@@ -116,29 +117,28 @@ const About: NextPageWithLayout = () => {
             <a href="https://data.gouv.fr/" target="_blank" rel="noreferrer">
               data.gouv.fr
             </a>
+            .
           </p>
           <p>
             Si vous souhaitez les réutiliser, vous pouvez utiliser les APIs du
-            service public qui sont référencées sur
+            service public qui sont référencées sur{' '}
             <a href="https://api.gouv.fr/" target="_blank" rel="noreferrer">
               api.gouv.fr
             </a>
+            .
           </p>
           <p>
             Vous pouvez également retrouver les sources de données de l’Annuaire
-            et le statut des API utilisées ici :
-            <a
-              href="https://annuaire-entreprises.data.gouv.fr/sources-de-donnees"
-              target="_blank"
-              rel="noreferrer"
-            >
-              https://annuaire-entreprises.data.gouv.fr/sources-de-donnees
+            et le statut des API utilisées{' '}
+            <a href="https://annuaire-entreprises.data.gouv.fr/sources-de-donnees">
+              sur notre page dédiée
             </a>
+            .
           </p>
           <p>
             <b>NB</b> : L’Annuaire des Entreprises a développé sa propre API
             pour son moteur de recherche et la met également à disposition
-            gratuitement :
+            gratuitement :{' '}
             <a
               href="https://api.gouv.fr/les-api/api-recherche-entreprises"
               target="_blank"
@@ -146,6 +146,7 @@ const About: NextPageWithLayout = () => {
             >
               l’API Recherche d’entreprises
             </a>
+            .
           </p>
           <h2>Réutiliser et partager l’Annuaire des Entreprises</h2>
           <p>Vous souhaitez : </p>
@@ -159,19 +160,16 @@ const About: NextPageWithLayout = () => {
             <li>Générer un QR code ?</li>
           </ul>
           <p>
-            Découvrez notre guide ici (
-            <a
-              href="https://annuaire-entreprises.data.gouv.fr/partager"
-              target={'_blank'}
-              rel="noreferrer"
-            >
-              https://annuaire-entreprises.data.gouv.fr/partager
-            </a>
-            ) et n’hésitez pas à nous contacter afin que nous puissions vous
-            aider :{' '}
+            Découvrez notre{' '}
+            <a href="https://annuaire-entreprises.data.gouv.fr/partager">
+              guide sur le sujet
+            </a>{' '}
+            et n’hésitez pas à nous contacter afin que nous puissions vous aider
+            :{' '}
             <a href="mailto:annuaire-entreprises@data.gouv.fr">
               annuaire-entreprises@data.gouv.fr
             </a>
+            .
           </p>
           <h2>
             Utilisation du site dans le cadre de démarches et de vérifications
@@ -185,23 +183,16 @@ const About: NextPageWithLayout = () => {
           <ul>
             <li>
               Proposer aux entrepreneur(e)s un moyen simple et efficace de
-              retrouver facilement les informations légales de leur entreprise :
+              retrouver facilement les informations légales de leur entreprise :{' '}
               <b>numéro SIRET, numéro SIREN, numéro de TVA etc.</b> afin de les
               utiliser dans leurs démarches administratives.
             </li>
             <li>
               Permettre aux agents publics de retrouver{' '}
-              <b>
+              <a href="https://annuaire-entreprises.data.gouv.fr/donnees-extrait-kbis">
                 toutes les informations contenues dans un extrait KBIS ou D1
-              </b>
-              <br />
-              <a
-                href="https://annuaire-entreprises.data.gouv.fr/donnees-extrait-kbis"
-                target="_blank"
-                rel="noreferrer"
-              >
-                ⇢ Vous êtes un agent ? Consultez notre guide.
               </a>
+              .
             </li>
             <li>
               Permettre à tout un chacun de vérifier qu’une entreprise existe,
@@ -221,7 +212,7 @@ const About: NextPageWithLayout = () => {
                 rel="noreferrer"
               >
                 Signal Conso
-              </a>
+              </a>{' '}
               dans les cas de fraudes à la consommation.
             </li>
           </ul>

@@ -16,7 +16,7 @@ export const ProtectedSection: React.FC<PropsWithChildren<ISectionProps>> = ({
   >
     <div className="protected-data">
       <Icon size={12} slug="lockFill">
-        Données sensibles
+        Réservé à l’administration
       </Icon>
     </div>
     {children}
