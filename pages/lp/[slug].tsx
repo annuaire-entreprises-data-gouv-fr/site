@@ -83,7 +83,7 @@ const LandingPage: NextPageWithLayout<IProps> = ({
 
     <style jsx>{`
       h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         text-align: center;
         position: relative;
       }
@@ -92,12 +92,12 @@ const LandingPage: NextPageWithLayout<IProps> = ({
         top: -30px;
         left: -30px;
         z-index: -1;
-        color: #ffe8e8;
+        color: #ffeff0;
       }
 
       .sub-title {
         text-align: center;
-        margin-top: 30px;
+        margin-top: 20px;
       }
 
       .centered-search {
@@ -124,6 +124,21 @@ const LandingPage: NextPageWithLayout<IProps> = ({
       }
       .reassurance h2 {
         margin-top: 10px;
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 576px) {
+        h1 {
+          font-size: 1.5rem;
+          line-height: 2rem;
+        }
+        .diamond {
+          top: -25px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .centered-search {
+          margin-bottom: 15vh;
+        }
       }
     `}</style>
   </>
