@@ -31,7 +31,6 @@ interface IRGEResponse {
 const clientRGE = async (siren: Siren): Promise<IRGECertification> => {
   const route = routes.certifications.rge.api;
   const response = await httpGet(route, { params: { qs: `siret:${siren}*` } });
-
   const data = response.data as IRGEResponse;
 
   if (!data.results.length) {

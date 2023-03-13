@@ -17,7 +17,6 @@ const geo = async (
     if (isNumber) {
       if (term.length < 6) {
         // code departement or CP
-
         let suggests = [];
         if (term.length <= 2) {
           const testDepCode = `${term}${'0'.repeat(2 - term.length)}`;

@@ -60,6 +60,8 @@ const search = async (
       searchFilterParams,
     });
   } catch (e: any) {
+    // eslint-disable-next-line no-console
+    console.log(e);
     if (e instanceof IsLikelyASirenOrSiretException) {
       throw e;
     }

@@ -205,7 +205,7 @@ jobs:
         # https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v5
         with:
-          start: npm start
+          start: npm run start:dev:frontend
           record: false
           browser: chrome
         env:

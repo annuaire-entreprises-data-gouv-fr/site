@@ -17,7 +17,6 @@ import httpClientOAuthGetFactory from '#utils/network/0auth';
  * IN all three first cases, API SIRENE by INSEE can answer, and we map the answer to the UniteLegale type
  *
  */
-
 export interface InseeClientOptions {
   useFallback: boolean;
   useCache: boolean;
