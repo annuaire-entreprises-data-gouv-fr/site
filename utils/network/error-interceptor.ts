@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import {
   HttpForbiddenError,
   HttpNotFound,
@@ -8,14 +8,23 @@ import {
   HttpUnauthorizedError,
   HttpBadRequestError,
 } from '#clients/exceptions';
-import logErrorInSentry from '#utils/sentry';
 import { formatLog } from './format-log';
+
+const getStatus = (response?: AxiosResponse, message?: string) => {
+  if (response?.status) {
+    return response.status;
+  }
+  if ((message || '').indexOf('timeout of') > -1) {
+    return 408;
+  }
+  return 500;
+};
 
 const errorInterceptor = (error: AxiosError) => {
   const { config, response, message } = error || {};
 
   const url = config?.url || 'an unknown url';
-  const status = response?.status;
+  const status = getStatus(response, message);
   const statusText = response?.statusText;
 
   if (status !== 404) {
@@ -23,28 +32,11 @@ const errorInterceptor = (error: AxiosError) => {
     //@ts-ignore
     const startTime = config?.metadata?.startTime;
     console.error(
-      formatLog(
-        url,
-        status || 500,
-        false,
-        startTime ? endTime - startTime : undefined
-      )
+      formatLog(url, status, false, startTime ? endTime - startTime : undefined)
     );
   }
 
-  if (!response) {
-    if (message) {
-      if (message.indexOf('timeout of') > -1) {
-        throw new HttpTimeoutError(`${message} while querying ${url}`);
-      } else {
-        throw new HttpServerError(message);
-      }
-    } else {
-      throw new HttpServerError(`Unknown server error while querying ${url}.`);
-    }
-  }
-
-  switch (response?.status) {
+  switch (status) {
     case 429: {
       throw new HttpTooManyRequests(statusText || 'Too many requests');
     }
@@ -65,7 +57,9 @@ const errorInterceptor = (error: AxiosError) => {
     }
     default:
       throw new HttpServerError(
-        `Unknown server error while querying ${url}. ${statusText} ${message}`
+        `Unknown server error while querying ${url}. ${statusText || ''} ${
+          message || ''
+        }`
       );
   }
 };
