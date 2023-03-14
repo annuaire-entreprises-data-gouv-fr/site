@@ -2,7 +2,7 @@ slug: ess-economie-sociale-solidaire
 title: Moteur de recherche de l’ESS
 footerLabel: Entreprises de l’ESS (Economie Sociale et Solidaire)
 published: true
-description: Retrouvez rapidement les associations et entreprises de l'Économie Sociale et Solidaire (ESS) en France, grâce au moteur de recherche de l'Annuaire des Entreprises.
+description: Retrouvez rapidement les associations et entreprises de l'Économie Sociale et Solidaire (ESS) en France.
 filter:
   name: label
   value: ess
