@@ -30,13 +30,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: restore-dependencies
         env:
           cache-name: cache-node-modules
@@ -57,13 +57,13 @@ jobs:
     needs: [dependencies]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
       - name: Load node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: restore-dependencies
         env:
           cache-name: cache-node-modules
@@ -79,13 +79,13 @@ jobs:
     needs: [dependencies]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
       - name: Load node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: restore-dependencies
         env:
           cache-name: cache-node-modules
@@ -99,7 +99,7 @@ jobs:
       - name: Build site
         run: npm run build
       - name: Cache site
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: restore-build
         with:
           path: ./*
@@ -111,13 +111,13 @@ jobs:
     needs: [dependencies]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
       - name: Load node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: restore-dependencies
         env:
           cache-name: cache-node-modules
@@ -135,9 +135,9 @@ jobs:
   #   needs: [build]
 
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3
   #     - name: Load cached build
-  #       uses: actions/cache@v2
+  #       uses: actions/cache@v3
   #       id: restore-build
   #       with:
   #         path: ./*
@@ -186,10 +186,10 @@ jobs:
       matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Load cached build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: restore-build
         with:
           path: ./*
