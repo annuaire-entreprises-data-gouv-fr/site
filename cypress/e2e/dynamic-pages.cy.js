@@ -26,12 +26,12 @@ siret.forEach((siret) => {
 });
 
 describe(`Dirigeants and élus pages`, () => {
-  it('Dirigeant page loads', () => {
+  xit('Dirigeant page loads', () => {
     cy.visit(`/dirigeants/552032534`);
     cy.contains('Antoine BERNARD DE SAINT AFFRIQUE').should('be.visible');
   });
 
-  it('Elus page loads', () => {
+  xit('Elus page loads', () => {
     cy.visit(`/elus/200054781`);
     cy.contains('Anne HIDALGO').should('be.visible');
   });

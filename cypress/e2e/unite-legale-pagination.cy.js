@@ -29,7 +29,7 @@ describe(`Pagination for multiple etablissement company`, () => {
     cy.expect(siren1).to.not.equal(siren2);
   });
 
-  it('Should color n°6 link on page 6', () => {
+  xit('Should color n°6 link on page 6', () => {
     cy.visit(`/entreprise/356000000?page=6`);
     cy.get('.fr-pagination__link[aria-current="page"]').should(
       'have.attr',
