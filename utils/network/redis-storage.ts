@@ -1,11 +1,16 @@
 import { buildStorage } from 'axios-cache-interceptor';
 import { createClient } from 'redis';
+import { logWarningInSentry } from '#utils/sentry';
 
-export const redisClient = createClient({ url: process.env.REDIS_URL });
+export const redisClient = createClient({
+  url: process.env.REDIS_URL,
+  pingInterval: 1000,
+});
 
-redisClient.on('error', (err) =>
-  console.error('Redis redisClient Error : ', err)
-);
+redisClient.on('error', (err) => {
+  logWarningInSentry('Error in Redis', { details: err });
+  console.error('Redis redisClient Error : ', err);
+});
 
 redisClient.connect();
 
