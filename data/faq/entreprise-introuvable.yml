@@ -14,6 +14,9 @@ body: |
   - Vous avez pu faire une faute de frappe en tapant le nom de l’entreprise.
   - Si l’entreprise est récente, les données peuvent ne pas encore être à jour (les données du moteur de recherche sont mises à jour tous les mois)
   - C’est une entreprise non-diffusible (voir l’explication ci-dessous)
+more:
+  - label: Qu’est ce qu’une entreprise non-diffusible
+    href: /faq/entreprise-non-diffusible
 cta:
   label: ⇢ Effectuer une nouvelle recherche
   to: /

@@ -1,0 +1,26 @@
+administrations:
+  - insee
+  - inpi
+targets:
+  - dirigeant
+  - independant
+  - particulier
+title: Comment supprimer les données personnelles de mon entreprise ?
+body: |
+  En tant que dirigeant(e) d’entreprise, les données publiques de votre entreprise peuvent contenir des informations personnelles accessibles sur internet.
+
+  Ces données sont publiques mais vous pouvez vous opposer à ce qu’un site internet les publie.
+
+  En particulier, pour disparaitre du site Annuaire des Entreprises vous pouvez [suivre notre procédure détaillée](/vie-privee).
+
+  **Cas particulier des entreprises individuelles**
+
+  Les entreprises individuelles étant des personnes physiques, leurs données comportent de nombreuses données personnelles. 
+
+  Pour protéger les entrepreneurs individuels, l’Insee propose une [procédure spéciale qui permet de disparaitre de tous les sites internet](https://statut-diffusion-sirene.insee.fr/) réutilisant la données des entreprises.
+more:
+  - label: Changer de statut de diffusion (entreprise individuelle)
+    href: https://statut-diffusion-sirene.insee.fr/
+cta:
+  label: ⇢ Consulter notre politique de confidentialité
+  to: /vie-privee
