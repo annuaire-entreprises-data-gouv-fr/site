@@ -67,9 +67,12 @@ class UniteLegaleFactory {
 
   async get() {
     if (this._isBot) {
+      // deactivate cache when bot as bot scrap, so they only come once per page
+      const useCache = false;
       const uniteLegale = await getUniteLegaleForGoodBot(
         this._siren,
-        this._page
+        this._page,
+        useCache
       );
       return await this.postProcessUniteLegale(uniteLegale);
     } else {
@@ -77,7 +80,7 @@ class UniteLegaleFactory {
         await Promise.all([
           getUniteLegale(this._siren, this._page),
           // colter, labels and certificates, from sirene ouverte
-          getUniteLegaleForGoodBot(this._siren).catch(() => {
+          getUniteLegaleForGoodBot(this._siren, 1, true).catch(() => {
             return { colter: {}, complements: {} };
           }),
         ]);
@@ -125,20 +128,27 @@ class UniteLegaleFactory {
  */
 const getUniteLegaleForGoodBot = async (
   siren: Siren,
-  page = 1
+  page = 1,
+  useCache = false
 ): Promise<IUniteLegale> => {
+  let fallbackOnStaging = false;
   try {
-    return await clientUniteLegaleRechercheEntreprise(siren);
+    return await clientUniteLegaleRechercheEntreprise(
+      siren,
+      fallbackOnStaging,
+      useCache
+    );
   } catch (e: any) {
     try {
       if (e instanceof HttpNotFound) {
         // when not found in siren ouverte, fallback on insee
         return await fetchUniteLegaleFromInsee(siren, page);
       } else {
-        const fallbackOnStaging = true;
+        fallbackOnStaging = true;
         return await clientUniteLegaleRechercheEntreprise(
           siren,
-          fallbackOnStaging
+          fallbackOnStaging,
+          useCache
         );
       }
     } catch (eFallback: any) {
