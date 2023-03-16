@@ -253,21 +253,26 @@ const Privacy: NextPageWithLayout = () => (
       <p>
         Vous disposez d’un droit d’accès et de modification des données à
         caractère personnel qui vous concernent. Vous pouvez également vous
-        opposer aux traitements réalisés par le Service.
+        opposer aux traitements réalisés par l’Annuaire des Entreprises.
       </p>
       <p>
-        Le droit à l’effacement de vos données n’est pas applicable en
-        application de l’article 17 3, b) du règlement général sur la protection
-        des données.Vos droits d’accès et de modification s’exercent auprès de
-        la DINUM à l’adresse{' '}
+        Vos droits d’accès et d’opposition s’exercent auprès de la DINUM à
+        l’adresse{' '}
         <a href="mailto:annuaire-entreprises@data.gouv.fr">
           annuaire-entreprises@data.gouv.fr
-        </a>
+        </a>{' '}
         ou par courrier à l’adresse suivante :
         <ul>
           <li>DINUM, A l’attention d’annuaire-entreprises</li>
           <li>20 avenue de Ségur 75007 Paris</li>
         </ul>
+      </p>
+      <p>
+        Si vous vous opposez au traitement de vos données à caractère personnel,
+        celles-ci ne seront plus diffusées en open data dans la rubrique
+        « dirigeants » de votre entreprise. Elles resteront cependant
+        accessibles sur demande aux administrations qui ont besoin d’en
+        connaître dans le cadre de leurs missions.
       </p>
       <p>
         Pour exercer votre droit de modification, nous vous invitons à vous
