@@ -26,17 +26,18 @@ export const getAssociation = async (
       adresseInconsistency,
     };
   } catch (e: any) {
-    const more = {
-      siren,
-      details: `RNA : ${slug}`,
-    };
-
     if (e instanceof HttpNotFound) {
-      logWarningInSentry('Id RNA not found', more);
+      logWarningInSentry('Id RNA not found', {
+        siren,
+        details: `RNA : ${slug}`,
+      });
     } else if (e instanceof NotAValidIdRnaError) {
       // no need to log warning or to make an api call, we know Id is not valid
     } else {
-      logErrorInSentry('Error in API ASSOCIATION', more);
+      logErrorInSentry('Error in API ASSOCIATION', {
+        siren,
+        details: e.toString(),
+      });
     }
     return null;
   }
