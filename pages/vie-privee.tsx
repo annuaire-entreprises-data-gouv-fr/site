@@ -257,11 +257,10 @@ const Privacy: NextPageWithLayout = () => (
       </p>
       <p>
         Vos droits d’accès et d’opposition s’exercent auprès de la DINUM à
-        l’adresse annuaire-entreprises@data.gouv.fr ou par courrier à l’adresse
-        suivante :
+        l’adresse{' '}
         <a href="mailto:annuaire-entreprises@data.gouv.fr">
           annuaire-entreprises@data.gouv.fr
-        </a>
+        </a>{' '}
         ou par courrier à l’adresse suivante :
         <ul>
           <li>DINUM, A l’attention d’annuaire-entreprises</li>
