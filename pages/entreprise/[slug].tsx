@@ -45,10 +45,9 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
       title={getCompanyPageTitle(uniteLegale)}
       description={getCompanyPageDescription(uniteLegale)}
       noIndex={shouldNotIndex(uniteLegale)}
-      canonical={
-        uniteLegale.chemin &&
-        `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`
-      }
+      canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${
+        uniteLegale.chemin || uniteLegale.siren
+      }`}
     />
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
     <StructuredDataBreadcrumb uniteLegale={uniteLegale} />

@@ -43,7 +43,7 @@ const EtablissementSection: React.FC<IProps> = ({
                 <Tag>secondaire</Tag>
               )}
               {' ( '}
-              <a key="entite" href={`/entreprise/${uniteLegale.siren}`}>
+              <a key="entite" href={`/entreprise/${uniteLegale.chemin}`}>
                 → voir la page de l’unité légale
               </a>
               {' )'}

@@ -13,7 +13,7 @@ const MultipleSirenAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
         <INSEE /> : {formatIntFr(uniteLegale.oldSiren)} et{' '}
         {formatIntFr(uniteLegale.siren)}. Pour voir les informations complètes,
         consultez la page{' '}
-        <a href={`/entreprise/${uniteLegale.siren}`}>
+        <a href={`/entreprise/${uniteLegale.chemin}`}>
           {formatIntFr(uniteLegale.siren)}
         </a>
         .
