@@ -110,6 +110,101 @@ class SearchFilterParams {
       role: '',
     };
   }
+
+  public extractFilters = () => {
+    const f = {
+      dirigeantFilter: {
+        icon: 'humanPin',
+        label: '',
+        excludeParams: ['fn', 'n', 'dmin', 'dmax'],
+      },
+      administrativeFilter: {
+        icon: 'file',
+        label: '',
+        excludeParams: ['sap', 'naf', 'etat', 'nature_juridique'],
+      },
+      structureFilter: {
+        icon: 'building',
+        label: '',
+        excludeParams: ['type', 'label'],
+      },
+      localisationFilter: {
+        icon: 'mapPin',
+        label: '',
+        excludeParams: ['cp_dep', 'cp_dep_label', 'cp_dep_type'],
+      },
+    };
+
+    if (hasDirigeantFilter(this.params)) {
+      let labelAge = '';
+
+      if (this.params.dmin && this.params.dmax) {
+        labelAge = `entre ${this.params.ageMin} et ${this.params.ageMax} ans`;
+      } else if (this.params.dmin && !this.params.dmax) {
+        labelAge = `moins de ${this.params.ageMax} ans`;
+      } else if (!this.params.dmin && this.params.dmax) {
+        labelAge = `plus de ${this.params.ageMin} ans`;
+      }
+
+      const labelName = `${this.params.fn || ''}${
+        this.params.n ? ` ${this.params.n}` : ''
+      }`;
+      f.dirigeantFilter.label = `${labelName}${
+        labelAge && labelName && ', '
+      }${labelAge}`;
+    }
+
+    if (this.params.etat) {
+      f.administrativeFilter.label = `Etat : ${
+        this.params.etat === 'A' ? 'en activité' : 'cessée'
+      }`;
+    }
+
+    let administrativeFilterCounter = 0;
+    if (this.params.sap) {
+      administrativeFilterCounter += 1;
+    }
+    if (this.params.naf) {
+      administrativeFilterCounter += 1;
+    }
+    if (this.params.nature_juridique) {
+      administrativeFilterCounter += 1;
+    }
+
+    if (administrativeFilterCounter > 0) {
+      const plural = administrativeFilterCounter ? 's' : '';
+      f.administrativeFilter.label += ` + ${administrativeFilterCounter} filtre${plural} administratif${plural}`;
+    }
+
+    const structureLabels = {
+      ess: 'Label : ESS',
+      rge: 'Label : RGE',
+      esv: 'Label : entreprenur de spectacle vivant',
+      ei: 'Type : Entreprise Individuelle ',
+      ct: 'Type : Collectivité territoriale ',
+      sp: 'Type : Service public ',
+      asso: 'Type : Association ',
+    };
+
+    if (this.params.type) {
+      f.structureFilter.label =
+        //@ts-ignore
+        structureLabels[this.params.type] || 'filtre sur le type';
+    }
+    if (this.params.label && this.params.type) {
+      f.structureFilter.label += ' + ';
+    }
+    if (this.params.label) {
+      f.structureFilter.label +=
+        //@ts-ignore
+        structureLabels[this.params.label] || 'filtre sur le label';
+    }
+
+    if (this.params.cp_dep_label) {
+      f.localisationFilter.label = this.params.cp_dep_label;
+    }
+    return f;
+  };
 }
 
 const getAge = (d: string) => {
@@ -155,99 +250,6 @@ export interface ISearchFilter {
   label: string;
   excludeParams: string[];
 }
-
-export const extractFilters = (params: IParams) => {
-  const f = {
-    dirigeantFilter: {
-      icon: 'humanPin',
-      label: '',
-      excludeParams: ['fn', 'n', 'dmin', 'dmax'],
-    },
-    administrativeFilter: {
-      icon: 'file',
-      label: '',
-      excludeParams: ['sap', 'naf', 'etat', 'nature_juridique'],
-    },
-    structureFilter: {
-      icon: 'building',
-      label: '',
-      excludeParams: ['type', 'label'],
-    },
-    localisationFilter: {
-      icon: 'mapPin',
-      label: '',
-      excludeParams: ['cp_dep', 'cp_dep_label', 'cp_dep_type'],
-    },
-  };
-
-  if (hasDirigeantFilter(params)) {
-    let labelAge = '';
-
-    if (params.dmin && params.dmax) {
-      labelAge = `entre ${params.ageMin} et ${params.ageMax} ans`;
-    } else if (params.dmin && !params.dmax) {
-      labelAge = `moins de ${params.ageMax} ans`;
-    } else if (!params.dmin && params.dmax) {
-      labelAge = `plus de ${params.ageMin} ans`;
-    }
-
-    const labelName = `${params.fn || ''}${params.n ? ` ${params.n}` : ''}`;
-    f.dirigeantFilter.label = `${labelName}${
-      labelAge && labelName && ', '
-    }${labelAge}`;
-  }
-
-  if (params.etat) {
-    f.administrativeFilter.label = `Etat : ${
-      params.etat === 'A' ? 'en activité' : 'cessée'
-    }`;
-  }
-
-  let administrativeFilterCounter = 0;
-  if (params.sap) {
-    administrativeFilterCounter += 1;
-  }
-  if (params.naf) {
-    administrativeFilterCounter += 1;
-  }
-  if (params.nature_juridique) {
-    administrativeFilterCounter += 1;
-  }
-
-  if (administrativeFilterCounter > 0) {
-    const plural = administrativeFilterCounter ? 's' : '';
-    f.administrativeFilter.label += ` + ${administrativeFilterCounter} filtre${plural} administratif${plural}`;
-  }
-
-  const structureLabels = {
-    ess: 'Label : ESS',
-    rge: 'Label : RGE',
-    esv: 'Label : entreprenur de spectacle vivant',
-    ei: 'Type : Entreprise Individuelle ',
-    ct: 'Type : Collectivité territoriale ',
-    sp: 'Type : Service public ',
-    asso: 'Type : Association ',
-  };
-
-  if (params.type) {
-    f.structureFilter.label =
-      //@ts-ignore
-      structureLabels[params.type] || 'filtre sur le type';
-  }
-  if (params.label && params.type) {
-    f.structureFilter.label += ' + ';
-  }
-  if (params.label) {
-    f.structureFilter.label +=
-      //@ts-ignore
-      structureLabels[params.label] || 'filtre sur le label';
-  }
-
-  if (params.cp_dep_label) {
-    f.localisationFilter.label = params.cp_dep_label;
-  }
-  return f;
-};
 
 export const hasDirigeantFilter = (params: IParams = {}) => {
   return params.fn || params.n || params.dmin || params.dmax;
