@@ -1,3 +1,4 @@
+import { argv } from 'process';
 import { libelleFromTypeVoie } from '#utils/labels';
 import logErrorInSentry from '#utils/sentry';
 
@@ -246,9 +247,9 @@ export const formatAdresse = ({
     wrapWord(fullLibelleFromTypeVoie),
     wrapWord(libelleVoie, ', '),
     wrapWord(distributionSpeciale, ', '),
-    wrapWord(codePostal || codeCedex),
+    wrapWord(codeCedex || codePostal),
     wrapWord(
-      libelleCommune || libelleCommuneCedex || libelleCommuneEtranger,
+      libelleCommuneCedex || libelleCommune || libelleCommuneEtranger,
       ''
     ),
     libellePaysEtranger ? `, ${wrapWord(libellePaysEtranger, '')}` : '',
