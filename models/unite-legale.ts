@@ -31,7 +31,7 @@ import {
   SirenNotFoundError,
 } from '.';
 import { isAssociation } from '.';
-import { estNonDiffusible, ISTATUTDIFFUSION } from './statut-diffusion';
+import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 /**
  * PUBLIC METHODS
@@ -50,8 +50,10 @@ export const getUniteLegaleFromSlug = async (
   options: IUniteLegaleOptions = {}
 ): Promise<IUniteLegale> => {
   const { isBot = false, page = 1 } = options;
+
   const uniteLegale = new UniteLegaleFactory(slug, isBot, page);
-  return await uniteLegale.get();
+
+  return await uniteLegale.build();
 };
 
 class UniteLegaleFactory {
@@ -65,34 +67,42 @@ class UniteLegaleFactory {
     this._page = page;
   }
 
-  async get() {
+  build = async () => {
+    const uniteLegaleRaw = await this.get();
+    const uniteLegale = this.postProcess(uniteLegaleRaw);
+    return uniteLegale;
+  };
+
+  get = async () => {
     if (this._isBot) {
-      const uniteLegale = await getUniteLegaleForGoodBot(
-        this._siren,
-        this._page
-      );
-      return await this.postProcessUniteLegale(uniteLegale);
+      return await this.getForBot();
     } else {
-      const [uniteLegale, { colter = {}, complements = {} }] =
-        await Promise.all([
-          getUniteLegale(this._siren, this._page),
-          // colter, labels and certificates, from sirene ouverte
-          getUniteLegaleForGoodBot(this._siren).catch(() => {
-            return { colter: {}, complements: {} };
-          }),
-        ]);
-
-      uniteLegale.complements = {
-        ...uniteLegale.complements,
-        ...complements,
-      };
-      uniteLegale.colter = { ...uniteLegale.colter, ...colter };
-
-      return await this.postProcessUniteLegale(uniteLegale);
+      return await this.getForUser();
     }
-  }
+  };
 
-  postProcessUniteLegale = async (uniteLegale: IUniteLegale) => {
+  getForUser = async () => {
+    const [uniteLegale, { colter = {}, complements = {} }] = await Promise.all([
+      getUniteLegale(this._siren, this._page),
+      // colter, labels and certificates, from sirene ouverte
+      getUniteLegaleForGoodBot(this._siren).catch(() => {
+        return { colter: {}, complements: {} };
+      }),
+    ]);
+
+    uniteLegale.complements = {
+      ...uniteLegale.complements,
+      ...complements,
+    };
+    uniteLegale.colter = { ...uniteLegale.colter, ...colter };
+    return uniteLegale;
+  };
+
+  getForBot = async () => {
+    return await getUniteLegaleForGoodBot(this._siren, this._page);
+  };
+
+  postProcess = async (uniteLegale: IUniteLegale) => {
     // no need to call API association for bot
     if (!this._isBot && isAssociation(uniteLegale)) {
       uniteLegale.association.data = await getAssociation(uniteLegale);
@@ -100,10 +110,6 @@ class UniteLegaleFactory {
 
     if (isProtectedSiren(uniteLegale.siren)) {
       uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PARTIAL;
-    }
-
-    if (estNonDiffusible(uniteLegale)) {
-      uniteLegale.nomComplet = 'Entreprise non-diffusible';
     }
 
     // en sommeil
@@ -286,8 +292,7 @@ const mergeUniteLegaleInsee = (
 const createNonDiffusibleUniteLegale = (siren: Siren) => {
   const uniteLegale = createDefaultUniteLegale(siren);
   uniteLegale.statutDiffusion = ISTATUTDIFFUSION.NONDIFF;
-  uniteLegale.nomComplet =
-    'Les informations de cette entreprise ne sont pas publiques';
+  uniteLegale.nomComplet = 'Entreprise non-diffusible';
 
   return uniteLegale;
 };

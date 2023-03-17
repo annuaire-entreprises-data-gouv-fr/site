@@ -1,6 +1,7 @@
 import React from 'react';
 import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
+import { getNomComplet } from '#models/statut-diffusion';
 import { formatDateLong } from '#utils/helpers';
 import { getCompanyLabel } from '#utils/helpers/get-company-page-title';
 
@@ -17,7 +18,7 @@ export const UniteLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> =
     return (
       <p>
         <>
-          L’{getCompanyLabel(uniteLegale)} {uniteLegale.nomComplet}
+          L’{getCompanyLabel(uniteLegale)} {getNomComplet(uniteLegale)}
         </>{' '}
         {uniteLegale.dateCreation && (
           <>

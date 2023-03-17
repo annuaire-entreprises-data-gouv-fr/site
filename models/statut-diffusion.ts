@@ -1,3 +1,5 @@
+import { IUniteLegale } from '.';
+
 export enum ISTATUTDIFFUSION {
   PARTIAL = 'partiellement diffusible',
   NONDIFF = 'non-diffusible',
@@ -28,4 +30,11 @@ export const estNonDiffusible = (uniteLegaleOrEtablissement: {
   return (
     uniteLegaleOrEtablissement.statutDiffusion === ISTATUTDIFFUSION.NONDIFF
   );
+};
+
+export const getNomComplet = (uniteLegale: IUniteLegale) => {
+  if (estNonDiffusible(uniteLegale)) {
+    return 'Entreprise non-diffusible';
+  }
+  return uniteLegale.nomComplet;
 };

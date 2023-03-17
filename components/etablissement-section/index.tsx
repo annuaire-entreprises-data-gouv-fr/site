@@ -12,6 +12,7 @@ import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations';
 import { estActif } from '#models/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/index';
+import { getNomComplet } from '#models/statut-diffusion';
 import { formatDate, formatSiret } from '#utils/helpers';
 
 interface IProps {
@@ -30,7 +31,7 @@ const EtablissementSection: React.FC<IProps> = ({
   const data = [
     ...(withDenomination
       ? [
-          ['Dénomination de l’unité légale', uniteLegale.nomComplet],
+          ['Dénomination de l’unité légale', getNomComplet(uniteLegale)],
           [
             'Type d’établissement',
             <>
@@ -123,7 +124,7 @@ const EtablissementSection: React.FC<IProps> = ({
       <Section
         title={
           usedInEntreprisePage
-            ? `Siège social de ${uniteLegale.nomComplet}`
+            ? `Siège social de ${getNomComplet(uniteLegale)}`
             : `Établissement${etablissement.estSiege ? ' (siège social)' : ''}`
         }
         id="etablissement"

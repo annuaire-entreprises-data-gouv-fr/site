@@ -15,7 +15,7 @@ import {
   isCollectiviteTerritoriale,
   IUniteLegale,
 } from '#models/index';
-import { estNonDiffusible } from '#models/statut-diffusion';
+import { estNonDiffusible, getNomComplet } from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
 import { ISession, isLoggedIn } from '#utils/session';
 
@@ -230,7 +230,7 @@ const Title: React.FC<IProps> = ({
       )}
       <h1>
         <a href={`/entreprise/${uniteLegale.siren}`}>
-          {uniteLegale.nomComplet}
+          {getNomComplet(uniteLegale)}
         </a>
       </h1>
       <div className="unite-legale-sub-title">

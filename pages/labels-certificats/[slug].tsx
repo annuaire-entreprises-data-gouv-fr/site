@@ -10,6 +10,7 @@ import {
   getCertificationsFromSlug,
   ICertifications,
 } from '#models/certifications';
+import { getNomComplet } from '#models/statut-diffusion';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -28,7 +29,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   return (
     <>
       <Meta
-        title={`Labels et certificats - ${uniteLegale.nomComplet}`}
+        title={`Labels et certificats - ${getNomComplet(uniteLegale)}`}
         noIndex={true}
       />
       <div className="content-container">

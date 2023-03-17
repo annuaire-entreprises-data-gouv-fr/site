@@ -7,7 +7,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import constants from '#models/constants';
 import { IEtablissement, IUniteLegale } from '#models/index';
-import { estNonDiffusible } from '#models/statut-diffusion';
+import { estNonDiffusible, getNomComplet } from '#models/statut-diffusion';
 import { formatDate, formatSiret, Siret } from '#utils/helpers';
 
 const EtablissementTable: React.FC<{
@@ -115,7 +115,9 @@ const EtablissementListeSection: React.FC<{
         . Cliquez sur un n° siret pour obtenir plus d’information :
       </p>
       <Section
-        title={`${nombreEtablissements} établissement${plural} de ${uniteLegale.nomComplet}`}
+        title={`${nombreEtablissements} établissement${plural} de ${getNomComplet(
+          uniteLegale
+        )}`}
         sources={[EAdministration.INSEE]}
       >
         {usePagination ? (
