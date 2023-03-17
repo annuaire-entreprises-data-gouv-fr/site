@@ -1,4 +1,3 @@
-import { argv } from 'process';
 import { libelleFromTypeVoie } from '#utils/labels';
 import logErrorInSentry from '#utils/sentry';
 
