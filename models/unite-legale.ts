@@ -263,10 +263,6 @@ const mergeUniteLegaleInsee = (
 ) => {
   const siege = siegeInsee || uniteLegaleInsee.siege;
 
-  const chemin = `${uniteLegaleInsee.nomComplet}-${uniteLegaleInsee.siren}`
-    .toLowerCase()
-    .replaceAll(/[^a-zA-Z0-9]+/g, '-');
-
   const etablissements =
     allEtablissementsInsee?.etablissements || createEtablissementsList([siege]);
   const { currentEtablissementPage, nombreEtablissements } = etablissements;
@@ -274,7 +270,6 @@ const mergeUniteLegaleInsee = (
   return {
     ...uniteLegaleInsee,
     siege,
-    chemin,
     etablissements,
     currentEtablissementPage: currentEtablissementPage || 0,
     nombreEtablissements: nombreEtablissements || 1,
