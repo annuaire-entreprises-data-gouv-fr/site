@@ -22,20 +22,45 @@ const positions = [
   96, 96, 97,
 ];
 
+const init = () => {
+  const loader = document.getElementById('loader-bar');
+
+  loader.style.position = 'fixed';
+
+  if (loader.style.backgroundColor === 'transparent') {
+    loader.style.background = '#000091';
+  }
+
+  document.body.appendChild(loader);
+  return loader;
+};
+
+const loadBarFactory = () => {
+  const _loader = null;
+  let _currentJobId = null;
+
+  return {
+    run: async function () {
+      const jobId = Math.random().toString(16).substring(7);
+      this._currentJobId = jobId;
+      if (!this._loader) {
+        this._loader = init();
+      }
+
+      for (let w of positions) {
+        // interrupt job if another job has been triggered by another beforeunload event
+        if (this._currentJobId !== jobId) {
+          return;
+        }
+        this._loader.style.width = `${w}vw`;
+        await wait(200);
+      }
+    },
+  };
+};
+
+const loadBar = loadBarFactory();
+
 (function init() {
-  window.addEventListener('beforeunload', async (e) => {
-    const loader = document.getElementById('loader-bar');
-
-    loader.style.position = 'fixed';
-
-    if (loader.style.backgroundColor === 'transparent') {
-      loader.style.background = '#000091';
-    }
-
-    document.body.appendChild(loader);
-    for (let w of positions) {
-      loader.style.width = `${w}vw`;
-      await wait(200);
-    }
-  });
+  window.addEventListener('beforeunload', loadBar.run);
 })();
