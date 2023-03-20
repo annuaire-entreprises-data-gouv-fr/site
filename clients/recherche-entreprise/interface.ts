@@ -25,7 +25,7 @@ export interface IResult {
   matching_etablissements: IMatchingEtablissement[];
   etablissements?: IMatchingEtablissement[];
   complements: IComplements;
-  slug_annuaire_entreprise: string;
+  slug_annuaire_entreprises: string;
 }
 
 export interface ISiege {
