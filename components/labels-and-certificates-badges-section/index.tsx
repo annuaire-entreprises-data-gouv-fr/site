@@ -10,7 +10,12 @@ export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
 export const LabelsAndCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const { estEntrepreneurSpectacle, estEss, estRge } = uniteLegale.complements;
+  const {
+    estEntrepreneurSpectacle,
+    estEss,
+    estRge,
+    statutEntrepreneurSpectacle,
+  } = uniteLegale.complements;
 
   return (
     <>
@@ -27,8 +32,12 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
           <LabelAndCertificateBadge label="RGE - Reconnu Garant de l’Environnement" />
         </InformationTooltip>
       )}
-      {estEntrepreneurSpectacle && (
-        <InformationTooltip label="Cette structure a une licence d’entrepreneur de spectacles vivants">
+      {estEntrepreneurSpectacle && statutEntrepreneurSpectacle !== 'valide' ? (
+        <InformationTooltip label="Cette structure a demandé un récépissé de déclaration d’entrepreneur de spectacles vivants, mais le statut du récépissé n’est pas valide (en cours d’instruction ou invalide)">
+          <LabelAndCertificateBadge label="Entrepreneur de spectacles vivants (pas de récépissé valide)" />
+        </InformationTooltip>
+      ) : (
+        <InformationTooltip label="Cette structure possède un récépissé de déclaration d’entrepreneur de spectacles vivants">
           <LabelAndCertificateBadge label="Entrepreneur de spectacles vivants" />
         </InformationTooltip>
       )}
