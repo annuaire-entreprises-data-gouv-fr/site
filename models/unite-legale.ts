@@ -73,12 +73,12 @@ class UniteLegaleFactory {
       );
       return await this.postProcessUniteLegale(uniteLegale);
     } else {
-      const [uniteLegale, { colter = {}, complements = {} }] =
+      const [uniteLegale, { colter = {}, complements = {}, chemin }] =
         await Promise.all([
           getUniteLegale(this._siren, this._page),
           // colter, labels and certificates, from sirene ouverte
           getUniteLegaleForGoodBot(this._siren).catch(() => {
-            return { colter: {}, complements: {} };
+            return { colter: {}, complements: {}, chemin: this._siren };
           }),
         ]);
 
@@ -87,6 +87,7 @@ class UniteLegaleFactory {
         ...complements,
       };
       uniteLegale.colter = { ...uniteLegale.colter, ...colter };
+      uniteLegale.chemin = chemin;
 
       return await this.postProcessUniteLegale(uniteLegale);
     }
@@ -262,10 +263,6 @@ const mergeUniteLegaleInsee = (
 ) => {
   const siege = siegeInsee || uniteLegaleInsee.siege;
 
-  const chemin = `${uniteLegaleInsee.nomComplet}-${uniteLegaleInsee.siren}`
-    .toLowerCase()
-    .replaceAll(/[^a-zA-Z0-9]+/g, '-');
-
   const etablissements =
     allEtablissementsInsee?.etablissements || createEtablissementsList([siege]);
   const { currentEtablissementPage, nombreEtablissements } = etablissements;
@@ -273,7 +270,6 @@ const mergeUniteLegaleInsee = (
   return {
     ...uniteLegaleInsee,
     siege,
-    chemin,
     etablissements,
     currentEtablissementPage: currentEtablissementPage || 0,
     nombreEtablissements: nombreEtablissements || 1,
