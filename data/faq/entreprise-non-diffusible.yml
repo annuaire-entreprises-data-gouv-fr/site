@@ -3,15 +3,26 @@ administrations:
 target:
   - agent
   - independant
+  - dirigeant
+  - particulier
 title: Qu’est-ce qu’une entreprise non-diffusible ?
 body: |
   Certaines entreprises demandent à ne pas figurer sur les listes de diffusion publiques en vertu de [l’article A123-96 du code du commerce](https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=C505A51DBC1A4EB1FFF3764C69ACDB1C.tpdjo11v_1?idArticle=LEGIARTI000020165030&cidTexte=LEGITEXT000005634379&dateTexte=20100702).
 
-  On parle d’entreprises **non-diffusible** et dans ce cas nous **ne diffusons pas les informations** de cette entreprise sur l’Annuaire des Entreprises.
+  On parle d’entreprises **non-diffusibles** auprès de l’Insee.
 
-  Pour des raisons de sécurité, certaines associations et les organismes relevant du Ministère de la Défense ne sont pas diffusibles non plus.
+  Si une entreprise est **non-diffusible**, alors **ses informations ne seront pas accessibles sur l’Annuaire des Entreprises.** 
 
-  Si cette entreprise est la votre et que vous souhaitez vous rendre diffusible de nouveau la démarche est à effectuer auprès de l’Insee :
+  Pour des raisons de sécurité, certaines associations et les organismes relevant du ministère de la Défense ne sont pas diffusibles non plus.
+
+  Si vous êtes un entrepreneur individuel ou un travailleur indépendant et que vous souhaitez modifier votre statut de diffusion, la démarche est à effectuer auprès de l’Insee.
+more:
+  - label: Pourquoi mon adresse personnelle apparait-elle sur ce site ?
+    href: /faq/adresse-personnelle
+  - label: Comment supprimer les données personnelles de mon entreprise ?
+    href: /faq/supprimer-donnees-personnelles-entreprise
+  - label: Comment rendre mon entreprise individuelle non-diffusible ?
+    href: /faq/rendre-mon-entreprise-non-diffusible
 cta:
   label: ⇢ Rendre mon entreprise diffusible
   to: https://statut-diffusion-sirene.insee.fr/

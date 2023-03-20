@@ -246,9 +246,9 @@ export const formatAdresse = ({
     wrapWord(fullLibelleFromTypeVoie),
     wrapWord(libelleVoie, ', '),
     wrapWord(distributionSpeciale, ', '),
-    wrapWord(codePostal || codeCedex),
+    wrapWord(codeCedex || codePostal),
     wrapWord(
-      libelleCommune || libelleCommuneCedex || libelleCommuneEtranger,
+      libelleCommuneCedex || libelleCommune || libelleCommuneEtranger,
       ''
     ),
     libellePaysEtranger ? `, ${wrapWord(libellePaysEtranger, '')}` : '',

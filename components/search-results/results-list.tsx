@@ -106,7 +106,7 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
       <li>
         <a
           className="fr-link"
-          href={`/entreprise/${result.siren}#etablissements`}
+          href={`/entreprise/${result.chemin}#etablissements`}
         >
           {result.nombreEtablissementsOuverts === 0
             ? `aucun établissement en activité`

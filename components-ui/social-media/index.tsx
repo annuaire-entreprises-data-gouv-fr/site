@@ -6,7 +6,7 @@ import constants from '#models/constants';
 import { IUniteLegale } from '#models/index';
 
 const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
-  uniteLegale: { siren, nomComplet },
+  uniteLegale: { siren, nomComplet, chemin },
 }) => (
   <PrintNever>
     <div className="social-media layout-right">
@@ -16,7 +16,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label="Partager cette page sur Linkedin"
         >
           <a
-            href={`https://www.linkedin.com/shareArticle?mini=true&url=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
+            href={`https://www.linkedin.com/shareArticle?mini=true&url=https://annuaire-entreprises.data.gouv.fr/entreprise/${chemin}`}
             rel="noreferrer noopener"
             target="_blank"
             title="Partager cette page sur linkedin"
@@ -32,7 +32,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label="Partager cette page sur Twitter"
         >
           <a
-            href={`https://twitter.com/intent/tweet?url=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
+            href={`https://twitter.com/intent/tweet?url=https://annuaire-entreprises.data.gouv.fr/entreprise/${chemin}`}
             rel="noreferrer noopener"
             target="_blank"
             title="Partager cette page sur twitter"
@@ -48,7 +48,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label="Partager cette page sur Facebook"
         >
           <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
+            href={`https://www.facebook.com/sharer/sharer.php?u=https://annuaire-entreprises.data.gouv.fr/entreprise/${chemin}`}
             rel="noreferrer noopener"
             target="_blank"
             title="Partager cette page sur Facebook"
@@ -64,7 +64,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label="Partager cette page par Email"
         >
           <a
-            href={`mailto:?subject=A découvrir sur l’Annuaire des Entreprises, la page de ${nomComplet}&body=Je voudrais partager la page ${nomComplet} avec vous https://annuaire-entreprises.data.gouv.fr/entreprise/${siren}`}
+            href={`mailto:?subject=A découvrir sur l’Annuaire des Entreprises, la page de ${nomComplet}&body=Je voudrais partager la page ${nomComplet} avec vous https://annuaire-entreprises.data.gouv.fr/entreprise/${chemin}`}
             title="Partager cette page par Email"
             className="no-style-link"
           >

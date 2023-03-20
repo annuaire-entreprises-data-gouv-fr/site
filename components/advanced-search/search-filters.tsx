@@ -2,7 +2,7 @@ import React from 'react';
 import { FilterMenu } from '#components-ui/filter-menu';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import { MultiSelect, Select } from '#components-ui/select';
-import { extractFilters, IParams } from '#models/search-filter-params';
+import SearchFilterParams, { IParams } from '#models/search-filter-params';
 import { categoriesJuridiques } from '#utils/labels/categories-juridiques';
 import { codesNAFRev2 } from '#utils/labels/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/labels/codes-section-NAF';
@@ -29,12 +29,14 @@ const SearchFilters: React.FC<{
     type,
   } = searchParams || {};
 
+  const filters = new SearchFilterParams(searchParams || {});
+
   const {
     localisationFilter,
     dirigeantFilter,
     administrativeFilter,
     structureFilter,
-  } = extractFilters(searchParams || {});
+  } = filters.extractFilters();
 
   /**
    * For the search api `nature_juridique` must be a string

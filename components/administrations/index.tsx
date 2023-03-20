@@ -60,7 +60,7 @@ export const MEF = ({ queryString = '' }) => (
 
 export const CMA = ({ queryString = '' }) => (
   <a
-    href={`/administration/cma-france${queryString}`}
+    href={`/administration/cma${queryString}`}
     title="Chambre des Métiers et de l’Artisanat"
   >
     CMA-France

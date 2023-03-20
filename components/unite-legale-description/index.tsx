@@ -55,7 +55,7 @@ export const UniteLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> =
         {uniteLegale.etablissements.all && (
           <>
             Elle possède{' '}
-            <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
+            <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
               {nombreEtablissements} établissement{plural}
             </a>
             {hasOpenEtablissements && !usePagination && (

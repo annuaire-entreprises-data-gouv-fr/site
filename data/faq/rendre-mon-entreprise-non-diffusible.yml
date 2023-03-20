@@ -1,0 +1,24 @@
+administrations:
+  - insee
+targets:
+  - particulier
+  - independant
+title: Comment rendre mon entreprise individuelle diffusible ou non-diffusible ?
+body: |
+  Si vous **êtes entrepreneur(e) individuel(le)**, changer votre statut de diffusion permet : 
+  - de rendre privées les données de votre entreprise (devenir non-diffusible)
+  - de rendre publiques les données de votre entreprise (devenir diffusible)
+
+  Pour changer le statut de diffusion de votre entreprise, vous devez en faire la demande auprès de l'Insee qui publie ces données dans le répertoire Sirene. 
+
+  Une fois votre demande envoyée, la mise à jour s’effectue dans le répertoire Sirene. Celui-ci alimente directement les informations publiées sur l’Annuaire des Entreprises et sur tous les sites internet qui réutilisent les données de l’Insee. 
+
+  La prise en compte des changements peut prendre quelques jours.
+more:
+  - label: Qu’est ce qu’une entreprise non-diffusible ?
+    href: /faq/entreprise-non-diffusible
+  - label: Comment supprimer les données personnelles de mon entreprise ?
+    href: /faq/supprimer-donnees-personnelles-entreprise
+cta:
+  label: ⇢ Changer de statut de diffusion
+  to: https://statut-diffusion-sirene.insee.fr/

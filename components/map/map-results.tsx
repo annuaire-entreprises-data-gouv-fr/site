@@ -24,7 +24,7 @@ const MapResults: React.FC<{ results: ISearchResult[] }> = ({ results }) => (
                 var popup = new maplibregl.Popup({ offset: 25 }).setHTML(
                 '<div><b>'+result.nomComplet+'</b></div>'+
                 '<div><i>'+result.siege.adresse+'</i></div>'+
-                '<div><a href="/entreprise/'+result.siren+'">⇢ Accéder à la fiche entreprise</a></div>'
+                '<div><a href="/entreprise/'+result.chemin+'">⇢ Accéder à la fiche entreprise</a></div>'
                 );
 
                 new maplibregl.Marker({ color: '${constants.colors.frBlue}' })
