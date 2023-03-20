@@ -8,9 +8,9 @@ filter:
   value: esv
 seo:
   title: Moteur de recherche d’entrepreneur de spectacles vivants
-  description: Retrouveez facilement les récépissés de déclaration d’activité d’entrepreneur de spectacles vivants en France.
+  description: Retrouvez facilement les récépissés de déclaration d’activité d’entrepreneur de spectacles vivants en France.
 reassurance:
-  - title: Entrepreneur de spectacles vivants : définition
+  - title: "Entrepreneur de spectacles vivants : définition"
     body: |
       Ce terme désigne toute personne ou structure (entrepreneur individuel, particulier-employeur, société, association, commune) qui dispose d'une autorisation pour exercer une activité d'exploitation de lieux, de production ou de diffusion de spectacles vivants.
   - title: Bénéficier de la base de donnée publique la plus récente
