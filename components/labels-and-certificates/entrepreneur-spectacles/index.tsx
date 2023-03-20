@@ -1,5 +1,6 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
+import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
@@ -13,6 +14,29 @@ import {
 } from '#models/api-not-responding';
 import { IEntrepreneurSpectaclesCertification } from '#models/certifications/entrepreneur-spectacles';
 import { formatDateLong } from '#utils/helpers';
+
+const formatLicence = (categorie: number, nomLieu = '') => {
+  switch (categorie) {
+    case 1:
+      return (
+        <>
+          <b>Exploitant de lieu de spectacles vivant</b>
+          {nomLieu && (
+            <>
+              <br />
+              <Icon slug="mapPin">{nomLieu}</Icon>
+            </>
+          )}
+        </>
+      );
+    case 2:
+      return <b>Producteurs de spectacles ou entrepreneurs de tournées</b>;
+    case 3:
+      return <b>Diffuseurs de spectacles</b>;
+    default:
+      return <i>Non renseigné</i>;
+  }
+};
 
 const Validity = ({ statut = '', dateDeValidite = '' }) => {
   switch (statut) {
@@ -131,19 +155,31 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
       <FullTable
         head={[
           'Numéro de récépissé',
+          'Type de déclaration',
           'Date de déclaration',
-          'Type',
+          'Demande',
           'Validité',
         ]}
-        body={entrepreneurSpectacles.licences.map((licence) => [
-          <Tag>{licence.numeroRecepisse}</Tag>,
-          formatDateLong(licence.dateDepot),
-          licence.type,
-          <Validity
-            statut={(licence.statut || '').toLowerCase()}
-            dateDeValidite={licence.dateValidite}
-          />,
-        ])}
+        body={entrepreneurSpectacles.licences.map(
+          ({
+            numeroRecepisse,
+            categorie,
+            nomLieu,
+            type,
+            dateDepot,
+            dateValidite,
+            statut,
+          }) => [
+            <Tag>{numeroRecepisse}</Tag>,
+            formatLicence(categorie, nomLieu),
+            formatDateLong(dateDepot),
+            type,
+            <Validity
+              statut={(statut || '').toLowerCase()}
+              dateDeValidite={dateValidite}
+            />,
+          ]
+        )}
       />
     </Section>
   );

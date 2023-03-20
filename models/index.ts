@@ -141,6 +141,7 @@ export interface IUniteLegaleComplements {
   estEntrepreneurIndividuel: boolean;
   estEss: boolean;
   estEntrepreneurSpectacle: boolean;
+  statutEntrepreneurSpectacle: string;
   estFiness: boolean;
   estServicePublic: boolean;
   estRge: boolean;
@@ -152,6 +153,7 @@ export const createDefaultUniteLegaleComplements = () => {
     estEntrepreneurIndividuel: false,
     estEss: false,
     estEntrepreneurSpectacle: false,
+    statutEntrepreneurSpectacle: '',
     estServicePublic: false,
     estFiness: false,
     estRge: false,
