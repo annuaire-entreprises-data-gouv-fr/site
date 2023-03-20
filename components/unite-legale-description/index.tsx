@@ -2,7 +2,10 @@ import React from 'react';
 import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
 import { formatDateLong } from '#utils/helpers';
-import { getCompanyLabel } from '#utils/helpers/get-company-page-title';
+import {
+  getCompanyLabel,
+  getCompanyPronoun,
+} from '#utils/helpers/get-company-page-title';
 
 export const UniteLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> =
   ({ uniteLegale }) => {
@@ -17,7 +20,8 @@ export const UniteLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> =
     return (
       <p>
         <>
-          L’{getCompanyLabel(uniteLegale)} {uniteLegale.nomComplet}
+          {getCompanyPronoun(uniteLegale)}
+          {getCompanyLabel(uniteLegale)} {uniteLegale.nomComplet}
         </>{' '}
         {uniteLegale.dateCreation && (
           <>
@@ -51,7 +55,7 @@ export const UniteLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> =
         {uniteLegale.etablissements.all && (
           <>
             Elle possède{' '}
-            <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
+            <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
               {nombreEtablissements} établissement{plural}
             </a>
             {hasOpenEtablissements && !usePagination && (

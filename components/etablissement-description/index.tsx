@@ -40,7 +40,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
           <> un établissement secondaire</>
         )}{' '}
         de la structure{' '}
-        <a href={`/entreprise/${uniteLegale.siren}`}>
+        <a href={`/entreprise/${uniteLegale.chemin}`}>
           {uniteLegale.nomComplet}
         </a>
         ,
@@ -48,7 +48,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
           <>
             {' '}
             qui possède au total{' '}
-            <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
+            <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
               {uniteLegale.etablissements.nombreEtablissements} établissements.
             </a>
           </>
@@ -56,7 +56,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
           <>
             {' '}
             et{' '}
-            <a href={`/entreprise/${uniteLegale.siren}#etablissements`}>
+            <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
               son unique établissement
             </a>
           </>

@@ -172,7 +172,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     nomComplet,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(nature_juridique),
     libelleTrancheEffectif: libelleFromCodeEffectif(tranche_effectif_salarie),
-    chemin: result.siren,
+    chemin: result.slug_annuaire_entreprises || result.siren,
     natureJuridique: nature_juridique || '',
     libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
       result.activite_principale,

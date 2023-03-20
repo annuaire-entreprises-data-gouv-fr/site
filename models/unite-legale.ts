@@ -67,18 +67,21 @@ class UniteLegaleFactory {
 
   async get() {
     if (this._isBot) {
+      // deactivate cache when bot as bot scrap, so they only come once per page
+      const useCache = false;
       const uniteLegale = await getUniteLegaleForGoodBot(
         this._siren,
-        this._page
+        this._page,
+        useCache
       );
       return await this.postProcessUniteLegale(uniteLegale);
     } else {
-      const [uniteLegale, { colter = {}, complements = {} }] =
+      const [uniteLegale, { colter = {}, complements = {}, chemin }] =
         await Promise.all([
           getUniteLegale(this._siren, this._page),
           // colter, labels and certificates, from sirene ouverte
-          getUniteLegaleForGoodBot(this._siren).catch(() => {
-            return { colter: {}, complements: {} };
+          getUniteLegaleForGoodBot(this._siren, 1, true).catch(() => {
+            return { colter: {}, complements: {}, chemin: this._siren };
           }),
         ]);
 
@@ -87,6 +90,7 @@ class UniteLegaleFactory {
         ...complements,
       };
       uniteLegale.colter = { ...uniteLegale.colter, ...colter };
+      uniteLegale.chemin = chemin;
 
       return await this.postProcessUniteLegale(uniteLegale);
     }
@@ -125,20 +129,27 @@ class UniteLegaleFactory {
  */
 const getUniteLegaleForGoodBot = async (
   siren: Siren,
-  page = 1
+  page = 1,
+  useCache = false
 ): Promise<IUniteLegale> => {
+  let fallbackOnStaging = false;
   try {
-    return await clientUniteLegaleRechercheEntreprise(siren);
+    return await clientUniteLegaleRechercheEntreprise(
+      siren,
+      fallbackOnStaging,
+      useCache
+    );
   } catch (e: any) {
     try {
       if (e instanceof HttpNotFound) {
         // when not found in siren ouverte, fallback on insee
         return await fetchUniteLegaleFromInsee(siren, page);
       } else {
-        const fallbackOnStaging = true;
+        fallbackOnStaging = true;
         return await clientUniteLegaleRechercheEntreprise(
           siren,
-          fallbackOnStaging
+          fallbackOnStaging,
+          useCache
         );
       }
     } catch (eFallback: any) {
@@ -262,10 +273,6 @@ const mergeUniteLegaleInsee = (
 ) => {
   const siege = siegeInsee || uniteLegaleInsee.siege;
 
-  const chemin = `${uniteLegaleInsee.nomComplet}-${uniteLegaleInsee.siren}`
-    .toLowerCase()
-    .replaceAll(/[^a-zA-Z0-9]+/g, '-');
-
   const etablissements =
     allEtablissementsInsee?.etablissements || createEtablissementsList([siege]);
   const { currentEtablissementPage, nombreEtablissements } = etablissements;
@@ -273,7 +280,6 @@ const mergeUniteLegaleInsee = (
   return {
     ...uniteLegaleInsee,
     siege,
-    chemin,
     etablissements,
     currentEtablissementPage: currentEtablissementPage || 0,
     nombreEtablissements: nombreEtablissements || 1,
