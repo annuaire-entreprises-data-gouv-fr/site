@@ -25,8 +25,7 @@ const clientEntrepreneurSpectacles = async (
   siren: Siren
 ): Promise<IEntrepreneurSpectaclesCertification> => {
   // siret column is an int. Does not support string search query so fallback on either exactmatch or int range
-  // const q = `siren_personne_physique_siret_personne_morale=${siren} OR (siren_personne_physique_siret_personne_morale > ${siren}00000 AND siren_personne_physique_siret_personne_morale < ${siren}99999)`;
-
+  
   const url = routes.certifications.entrepreneurSpectacles.ods.search;
   const metaDataUrl = routes.certifications.entrepreneurSpectacles.ods.metadata;
 
