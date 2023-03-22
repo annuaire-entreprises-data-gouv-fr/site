@@ -139,6 +139,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
 };
 
 export interface IUniteLegaleComplements {
+  estBio: boolean;
   estEntrepreneurIndividuel: boolean;
   estEss: boolean;
   estEntrepreneurSpectacle: boolean;
@@ -153,6 +154,7 @@ export const createDefaultUniteLegaleComplements = () => {
   return {
     estEntrepreneurIndividuel: false,
     estEss: false,
+    estBio: false,
     estEntrepreneurSpectacle: false,
     statutEntrepreneurSpectacle: '',
     estServicePublic: false,

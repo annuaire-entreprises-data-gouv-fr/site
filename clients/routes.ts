@@ -74,6 +74,10 @@ const routes = {
       api: 'https://data.ademe.fr/data-fair/api/v1/datasets/liste-des-entreprises-rge-2/lines/',
       site: 'https://france-renov.gouv.fr/annuaire-rge',
     },
+    bio: {
+      site: 'https://annuaire.agencebio.org/',
+      api: 'https://opendata.agencebio.org/api/gouv/operateurs/',
+    },
     entrepreneurSpectacles: {
       ods: {
         metadata:

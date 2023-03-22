@@ -116,6 +116,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       identifiant_association = null,
       collectivite_territoriale = null,
       est_ess = false,
+      est_bio = false,
       est_entrepreneur_spectacle = false,
       statut_entrepreneur_spectacle = '',
       est_finess = false,
@@ -181,6 +182,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     ),
     dirigeants: dirigeants.map(mapToDirigeantModel),
     complements: {
+      estBio: est_bio,
       estEss: est_ess,
       estServicePublic: est_service_public,
       estEntrepreneurIndividuel: est_entrepreneur_individuel,

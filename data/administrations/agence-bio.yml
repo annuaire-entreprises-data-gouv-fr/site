@@ -1,0 +1,23 @@
+slug: agence-bio
+short: Agence Bio
+site: https://www.agencebio.org/
+logoType: portrait
+long: Agence française pour le Développement et la Promotion de l'Agriculture Biologique
+contact: https://www.agencebio.org/pied-de-page/contact/
+apiMonitors:
+  - apiName: API Professionnels BIO
+    apiGouvLink: https://api.gouv.fr/les-api/api-professionnels-bio
+    datagouv:
+      - label: Liste des professionnels engagés en BIO
+        link: https://www.data.gouv.fr/fr/datasets/professionnels-engages-en-bio/
+    # TODO Should be update with the right uptime robot
+    id: 793262360
+    data:
+      - Identifiant fonctionnel de l'opérateur BIO utilisé également dans d'autres outils de l'administration publique
+      - Catégorie de l'opérateur
+      - Liste des productions certifiées bio de l'opérateur
+      - Liste des activités BIO de l'opérateur (plusieurs activités possibles)
+      - Lien vers les certificats en ligne de l’opérateur
+      - Site officiel de l'opérateur et liens vers les pages des réseaux sociaux
+description: |
+  Liste des opérateurs économiques engagés en bio et notifiés auprès de l’Agence Bio avec les principales informations publiques qui leur sont rattachées (identification de l’établissement, activité, produits certifiés, lien vers le certificat bio)

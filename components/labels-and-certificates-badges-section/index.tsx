@@ -5,6 +5,7 @@ import { IUniteLegale } from '../../models';
 export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estEntrepreneurSpectacle ||
   uniteLegale.complements.estEss ||
+  uniteLegale.complements.estBio ||
   uniteLegale.complements.estRge;
 
 export const LabelsAndCertificatesBadgesSection: React.FC<{
