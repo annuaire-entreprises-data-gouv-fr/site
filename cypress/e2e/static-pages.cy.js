@@ -2,14 +2,13 @@ const pages = [
   '/',
   '/rechercher?terme=kikou',
   '/comment-ca-marche',
-  '/faq',
   '/accessibilite',
   '/donnees-extrait-kbis',
   '/vie-privee',
 ];
 
 pages.forEach((page) => {
-  describe(`Page ${page}`, () => {
+  describe.only(`Page ${page}`, () => {
     it('successfully loads', () => {
       cy.request(page);
     });

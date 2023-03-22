@@ -84,7 +84,6 @@ describe('Advanced search on page ' + path, () => {
     cy.contains(
       'Rechercher toutes les structures liées à une personne (dirigeant(e), ou élu(e))'
     ).should('be.visible');
-
     cy.contains('Situation administrative').click();
     cy.contains('Domaine d’activité').should('be.visible');
     cy.contains('Etat administratif').should('be.visible');
