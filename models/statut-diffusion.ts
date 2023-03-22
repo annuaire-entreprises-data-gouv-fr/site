@@ -108,3 +108,28 @@ export const getAdresseEtablissement = (
     codePostal
   );
 };
+
+/**
+ * Return adresse depending on diffusibility status (https://www.insee.fr/fr/information/6683782)
+ * @param uniteLegale
+ * @returns
+ */
+export const getCoordsEtablissement = (etablissement: IEtablissement) => {
+  const defaultLat = '47.394144';
+  const defaultLong = '0.68484';
+
+  const { latitude = defaultLat, longitude = defaultLong } =
+    etablissement || {};
+
+  if (!estDiffusible(etablissement)) {
+    try {
+      const long = parseFloat(longitude).toFixed(2);
+      const lat = parseFloat(latitude).toFixed(2);
+      return [long, lat];
+    } catch {
+      return [defaultLong, defaultLat];
+    }
+  }
+
+  return [etablissement.longitude, etablissement.latitude];
+};

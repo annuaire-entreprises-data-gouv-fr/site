@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import Info from '#components-ui/alerts/info';
+import { Icon } from '#components-ui/icon/wrapper';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import MapEtablissement from '#components/map/map-etablissement';
 import Meta from '#components/meta';
@@ -44,7 +45,9 @@ const EtablissementMapPage: NextPageWithLayout<IProps> = ({
           <Info>
             Cette structure est non-diffusible. <br />
             Son adresse complète n’est pas publique, mais sa commune de
-            domiciliation est : {getAdresseEtablissement(etablissement)}
+            domiciliation est : {getAdresseEtablissement(etablissement)}.
+            <br />
+            Le curseur ci-dessous <b>n’est pas placé</b> sur l’adresse réelle.
           </Info>
         )}
         <br />

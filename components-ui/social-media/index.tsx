@@ -4,9 +4,10 @@ import InformationTooltip from '#components-ui/information-tooltip';
 import { PrintNever } from '#components-ui/print-visibility';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/index';
+import { getNomComplet } from '#models/statut-diffusion';
 
 const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
-  uniteLegale: { siren, nomComplet, chemin },
+  uniteLegale,
 }) => (
   <PrintNever>
     <div className="social-media layout-right">
@@ -16,7 +17,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label="Partager cette page sur Linkedin"
         >
           <a
-            href={`https://www.linkedin.com/shareArticle?mini=true&url=https://annuaire-entreprises.data.gouv.fr/entreprise/${chemin}`}
+            href={`https://www.linkedin.com/shareArticle?mini=true&url=https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
             rel="noreferrer noopener"
             target="_blank"
             title="Partager cette page sur linkedin"
@@ -32,7 +33,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label="Partager cette page sur Twitter"
         >
           <a
-            href={`https://twitter.com/intent/tweet?url=https://annuaire-entreprises.data.gouv.fr/entreprise/${chemin}`}
+            href={`https://twitter.com/intent/tweet?url=https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
             rel="noreferrer noopener"
             target="_blank"
             title="Partager cette page sur twitter"
@@ -48,7 +49,7 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label="Partager cette page sur Facebook"
         >
           <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=https://annuaire-entreprises.data.gouv.fr/entreprise/${chemin}`}
+            href={`https://www.facebook.com/sharer/sharer.php?u=https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
             rel="noreferrer noopener"
             target="_blank"
             title="Partager cette page sur Facebook"
@@ -64,7 +65,13 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label="Partager cette page par Email"
         >
           <a
-            href={`mailto:?subject=A découvrir sur l’Annuaire des Entreprises, la page de ${nomComplet}&body=Je voudrais partager la page ${nomComplet} avec vous https://annuaire-entreprises.data.gouv.fr/entreprise/${chemin}`}
+            href={`mailto:?subject=A découvrir sur l’Annuaire des Entreprises, la page de ${getNomComplet(
+              uniteLegale
+            )}&body=Je voudrais partager la page ${getNomComplet(
+              uniteLegale
+            )} avec vous https://annuaire-entreprises.data.gouv.fr/entreprise/${
+              uniteLegale.chemin
+            }`}
             title="Partager cette page par Email"
             className="no-style-link"
           >
@@ -79,8 +86,8 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
         >
           <a
             title="Partager cette page grâce à un QR Code"
-            href={`/api/share/qr/${siren}`}
-            download={`QR_code_page_${siren}.jpeg`}
+            href={`/api/share/qr/${uniteLegale.siren}`}
+            download={`QR_code_page_${uniteLegale.siren}.jpeg`}
             className="no-style-link"
           >
             <Icon slug="qrCode" />

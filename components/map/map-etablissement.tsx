@@ -1,7 +1,7 @@
 import React from 'react';
 import constants from '#models/constants';
 import { IEtablissement } from '#models/index';
-import { estDiffusible } from '#models/statut-diffusion';
+import { getCoordsEtablissement } from '#models/statut-diffusion';
 import MaplibreInstance from '.';
 
 const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
@@ -15,11 +15,9 @@ const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
       dangerouslySetInnerHTML={{
         __html: `
                 function initMap(style) {
-                  var coords = ${
-                    etablissement
-                      ? `[${etablissement.longitude},${etablissement.latitude}]`
-                      : '[0.68484,47.394144]'
-                  };
+                  var coords = [${getCoordsEtablissement(etablissement).join(
+                    ','
+                  )}]
 
                   var zoom = ${etablissement ? '12' : '4.5'};
 
@@ -30,7 +28,7 @@ const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
                     zoom: zoom // starting zoom
                   });
                   ${
-                    etablissement && estDiffusible(etablissement)
+                    etablissement
                       ? `new maplibregl.Marker({ color: '${constants.colors.frBlue}' })
                     .setLngLat(coords)
                     .addTo(map);`
