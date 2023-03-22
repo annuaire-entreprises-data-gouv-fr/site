@@ -27,6 +27,7 @@ export interface IEtablissement {
   adresse: string;
   adressePostale: string;
   codePostal: string;
+  commune: string;
   activitePrincipale: string;
   libelleActivitePrincipale: string;
   trancheEffectif: string;

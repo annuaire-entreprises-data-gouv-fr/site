@@ -7,7 +7,11 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import constants from '#models/constants';
 import { IEtablissement, IUniteLegale } from '#models/index';
-import { estNonDiffusible, getNomComplet } from '#models/statut-diffusion';
+import {
+  estNonDiffusible,
+  getAdresseEtablissement,
+  getNomComplet,
+} from '#models/statut-diffusion';
 import { formatDate, formatSiret, Siret } from '#utils/helpers';
 
 const EtablissementTable: React.FC<{
@@ -58,7 +62,7 @@ const EtablissementTable: React.FC<{
                       </b>
                     </a>
                   )}
-                  <>{etablissement.adresse}</>
+                  <>{getAdresseEtablissement(etablissement)}</>
                 </span>
                 {etablissement.estSiege && <Tag color="info">siège social</Tag>}
                 {sieges.indexOf(etablissement.siret) > 0 &&

@@ -32,7 +32,7 @@ const ImmatriculationNotFoundAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
         </ul>
         En l’absence de justificatif d’immatriculation,{' '}
         <AvisSituationLink
-          siret={uniteLegale.siege.siret}
+          etablissement={uniteLegale.siege}
           label="l’avis de situation du siège social"
         />{' '}
         permet de prouver l’existence de l’entreprise.

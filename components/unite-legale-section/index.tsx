@@ -7,7 +7,7 @@ import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations';
 import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
-import { getNomComplet } from '#models/statut-diffusion';
+import { getAdresseUniteLegale, getNomComplet } from '#models/statut-diffusion';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import {
   checkHasLabelsAndCertificates,
@@ -37,7 +37,7 @@ const UniteLegaleSection: React.FC<{
       <FAQLink to="/faq/modifier-adresse" tooltipLabel="Adresse postale">
         Comment modifier une adresse ?
       </FAQLink>,
-      uniteLegale.siege.adressePostale,
+      getAdresseUniteLegale(uniteLegale, true),
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
