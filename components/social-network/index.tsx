@@ -12,10 +12,10 @@ const SocialNetworks = () => (
                 <li>
                   <a
                     className="fr-btn--twitter fr-btn"
-                    href="https://twitter.com/Etalab"
+                    href="https://twitter.com/_DINUM"
                     target="_blank"
                     rel="noreferrer noopener"
-                    title="Page twitter Etalab"
+                    title="Page twitter de la DINUM"
                   >
                     twitter
                   </a>
