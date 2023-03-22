@@ -10,11 +10,13 @@ import { IUniteLegale } from '..';
 
 export interface IEntrepreneurSpectaclesCertification {
   licences: {
+    categorie: number;
     numeroRecepisse: string;
     statut: string;
     dateValidite: string;
     dateDepot: string;
     type: string;
+    nomLieu: string;
   }[];
   lastModified: string | null;
 }

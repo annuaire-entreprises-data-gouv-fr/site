@@ -229,7 +229,7 @@ const Title: React.FC<IProps> = ({
         <AssociationAdressAlert uniteLegale={uniteLegale} />
       )}
       <h1>
-        <a href={`/entreprise/${uniteLegale.siren}`}>
+        <a href={`/entreprise/${uniteLegale.chemin}`}>
           {getNomComplet(uniteLegale)}
         </a>
       </h1>

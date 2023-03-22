@@ -18,7 +18,7 @@ const TitleEtablissement: React.FC<{
     ) : (
       <>
         un établissement de{' '}
-        <a href={`/entreprise/${uniteLegale.siren}`}>
+        <a href={`/entreprise/${uniteLegale.chemin}`}>
           {getNomComplet(uniteLegale)}
         </a>
       </>
