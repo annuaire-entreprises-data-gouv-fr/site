@@ -32,7 +32,8 @@ export const estNonDiffusible = (uniteLegaleOrEtablissement: {
   );
 };
 
-export const nonDiffusibleDataFormatter = (e: string) => `✴ ✴ ✴ ${e} ✴ ✴ ✴`;
+export const nonDiffusibleDataFormatter = (e: string) =>
+  `▪︎ ▪︎ ▪︎ ${e} ▪︎ ▪︎ ▪︎`;
 
 /**
  * Return full name depending on diffusibility status (https://www.insee.fr/fr/information/6683782)
