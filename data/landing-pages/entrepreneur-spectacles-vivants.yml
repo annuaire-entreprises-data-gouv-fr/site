@@ -1,0 +1,52 @@
+slug: entrepreneur-spectacles-vivants
+title: Rechercher un(e) entrepreneur de spectacles vivants
+footerLabel: Entrepreneurs de Spectacles Vivants
+published: true
+description: Retrouvez facilement des informations sur les déclarations et les récépissés des entrepreneurs de spectacles en France.
+filter:
+  name: label
+  value: esv
+seo:
+  title: Moteur de recherche d’entrepreneur de spectacles vivants
+  description: Retrouvez facilement les récépissés de déclaration d’activité d’entrepreneur de spectacles vivants en France.
+reassurance:
+  - title: "Entrepreneur de spectacles vivants : définition"
+    body: |
+      Ce terme désigne toute personne ou structure (entrepreneur individuel, particulier-employeur, société, association, commune) qui dispose d'une autorisation pour exercer une activité d'exploitation de lieux, de production ou de diffusion de spectacles vivants.
+  - title: Bénéficier de la base de donnée publique la plus récente
+    body: |
+      - Statut de validité du récépissé (valide / invalide)
+      - Numéro de récépissé
+      - Nature de la demande
+      - Date et type de déclaration
+      - Adresse
+      - SIREN / SIRET
+      - Avis de situation
+  - title: Comment ça marche ?
+    body: |
+      Tous les entrepreneurs du spectacle vivant - quelle que soit leur forme juridique - possèdent un numéro SIRET et par conséquent une fiche sur l'Annuaire des Entreprises.
+datasources:
+  - insee
+  - mc
+body: |
+  ## Que recouvre le titre d'entrepreneur de spectacles vivants ?
+
+  Les entrepreneurs de spectacles vivants sont les seules personnes physiques ou morales qui ont l'autorisation d'exploiter, de produire ou de diffuser des spectacles vivants en France.
+
+  Pour obtenir ce titre, une déclaration doit être déposée auprès des services préfectoraux (DRAC) qui peuvent refuser d'accorder le statut si les conditions ne sont pas remplies.
+
+  Si la déclaration est valide, un récépissé valable pour cinq ans est accordé à l'entrepreneur de spectacles vivants.
+
+  Depuis 2019, la licence est remplacée par un récépissé de déclaration d'activité d'entrepreneur de spectacles.
+
+  ## Quels sont les critères à respecter ?
+
+  Pour obtenir le titre d'entrepreneur de spectacles vivants, une personne physique doit être majeure et remplir l'une des conditions suivantes (une personne morale devra justifier qu'au moins un de ses membres les remplissent) :
+
+  - Être diplômé de l'enseignement supérieur ou être titulaire d'un titre de même niveau inscrit au [répertoire national des certifications professionnelles](https://entreprendre.service-public.fr/vosdroits/R40438)
+  - Avoir une expérience professionnelle d'au moins 6 mois dans le spectacle vivant (artiste, technicien, administratif dans le spectacle vivant)
+  - Avoir suivi une formation d'au moins 125 heures ou avoir un ensemble de compétences dans le spectacle vivant
+
+  La personne déclarante doit également avoir suivi une formation à la sécurité des spectacles. Enfin, l'entrepreneur de spectacles ne doit pas avoir fait l'objet d'une décision judiciaire interdisant l'exercice d'une activité commerciale.
+
+  Plus d'information [sur notre FAQ](https://annuaire-entreprises.data.gouv.fr/faq/entrepreneur-spectacles-vivants).

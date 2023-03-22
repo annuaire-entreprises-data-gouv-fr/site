@@ -100,6 +100,7 @@ export interface IComplements {
   convention_collective_renseignee: boolean;
   est_entrepreneur_individuel: boolean;
   est_entrepreneur_spectacle: boolean;
+  statut_entrepreneur_spectacle: 'invalide' | 'valide';
   est_ess: boolean;
   est_finess: boolean;
   est_service_public: boolean;
