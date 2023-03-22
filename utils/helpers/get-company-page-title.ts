@@ -4,6 +4,7 @@ import {
   isCollectiviteTerritoriale,
   IUniteLegale,
 } from '#models/index';
+import { getNomComplet } from '#models/statut-diffusion';
 import { capitalize } from './formatting';
 
 export const getCompanyPronoun = (uniteLegale: IUniteLegale) => {
@@ -36,12 +37,16 @@ export const getCompanyLabel = (uniteLegale: IUniteLegale) => {
 };
 
 export const getCompanyPageTitle = (uniteLegale: IUniteLegale) => {
-  return `${capitalize(getCompanyLabel(uniteLegale))} ${
-    uniteLegale.nomComplet
-  } à ${uniteLegale.siege.codePostal} - SIREN ${
+  return `${capitalize(getCompanyLabel(uniteLegale))} ${getNomComplet(
+    uniteLegale
+  )} à ${uniteLegale.siege.codePostal} - SIREN ${
     uniteLegale.siren
   } | Annuaire des Entreprises`;
 };
 
 export const getCompanyPageDescription = (uniteLegale: IUniteLegale) =>
-  `L’administration permet aux particuliers et agents publics de vérifier les informations légales officielles de ${uniteLegale.nomComplet}, ${uniteLegale.siege.adresse} : SIREN, SIRET, TVA Intracommunautaire, Code APE/NAF, dirigeant, adresse, justificatif  d'immatriculation...`;
+  `L’administration permet aux particuliers et agents publics de vérifier les informations légales officielles de ${getNomComplet(
+    uniteLegale
+  )}, ${
+    uniteLegale.siege.adresse
+  } : SIREN, SIRET, TVA Intracommunautaire, Code APE/NAF, dirigeant, adresse, justificatif  d'immatriculation...`;

@@ -12,6 +12,11 @@ import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations';
 import { estActif } from '#models/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/index';
+import {
+  estDiffusible,
+  getAdresseEtablissement,
+  getNomComplet,
+} from '#models/statut-diffusion';
 import { formatDate, formatSiret } from '#utils/helpers';
 
 interface IProps {
@@ -30,7 +35,7 @@ const EtablissementSection: React.FC<IProps> = ({
   const data = [
     ...(withDenomination
       ? [
-          ['Dénomination de l’unité légale', uniteLegale.nomComplet],
+          ['Dénomination de l’unité légale', getNomComplet(uniteLegale)],
           [
             'Type d’établissement',
             <>
@@ -63,7 +68,7 @@ const EtablissementSection: React.FC<IProps> = ({
       </FAQLink>,
       etablissement.adresse ? (
         <>
-          <CopyPaste>{etablissement.adresse}</CopyPaste>
+          <CopyPaste>{getAdresseEtablissement(etablissement)}</CopyPaste>
           <PrintNever key="adresse-link">
             <a href={`/carte/${etablissement.siret}`}>→ voir sur la carte</a>
             <br />
@@ -105,7 +110,7 @@ const EtablissementSection: React.FC<IProps> = ({
     ],
     [
       'Avis de situation Insee',
-      <AvisSituationLink siret={etablissement.siret} />,
+      <AvisSituationLink etablissement={etablissement} />,
     ],
     ...(!estActif(etablissement)
       ? [['Date de fermeture', formatDate(etablissement.dateFermeture || '')]]
@@ -123,7 +128,7 @@ const EtablissementSection: React.FC<IProps> = ({
       <Section
         title={
           usedInEntreprisePage
-            ? `Siège social de ${uniteLegale.nomComplet}`
+            ? `Siège social de ${getNomComplet(uniteLegale)}`
             : `Établissement${etablissement.estSiege ? ' (siège social)' : ''}`
         }
         id="etablissement"

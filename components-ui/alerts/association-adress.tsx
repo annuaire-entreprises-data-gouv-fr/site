@@ -1,5 +1,6 @@
 import { INSEE, MI } from '#components/administrations';
 import { IAssociation } from '#models/index';
+import { getAdresseUniteLegale } from '#models/statut-diffusion';
 import Warning from './warning';
 
 const AssociationAdressAlert: React.FC<{ uniteLegale: IAssociation }> = ({
@@ -19,7 +20,7 @@ const AssociationAdressAlert: React.FC<{ uniteLegale: IAssociation }> = ({
           L’une est déclarée au <MI /> (en préfecture) :{' '}
           <b>{associationAdresse || 'Non renseignée'}</b>, l’autre est déclarée
           à l’
-          <INSEE /> : <b>{uniteLegale.siege.adresse || 'Non renseignée'}</b>.
+          <INSEE /> : <b>{getAdresseUniteLegale(uniteLegale)}</b>.
           <br />
           Si vous êtes membre de cette association. Contactez l’administration
           concernée pour corriger l’erreur.

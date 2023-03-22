@@ -1,7 +1,11 @@
 import React from 'react';
 import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/index';
-import { estDiffusible, estNonDiffusible } from '#models/statut-diffusion';
+import {
+  estNonDiffusible,
+  getAdresseEtablissement,
+  getNomComplet,
+} from '#models/statut-diffusion';
 import { formatDateLong } from '#utils/helpers';
 
 interface IProps {
@@ -41,7 +45,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
         )}{' '}
         de la structure{' '}
         <a href={`/entreprise/${uniteLegale.chemin}`}>
-          {uniteLegale.nomComplet}
+          {getNomComplet(uniteLegale)}
         </a>
         ,
         {uniteLegale.etablissements.all.length > 1 ? (
@@ -79,7 +83,10 @@ export const EtablissementDescription: React.FC<IProps> = ({
       )}{' '}
       {etablissement.adresse && (
         <>
-          et il est domicilié au <a href="#contact">{etablissement.adresse}</a>
+          et il est domicilié au{' '}
+          <a href={`/carte/${uniteLegale.siege.siret}`}>
+            {getAdresseEtablissement(etablissement)}
+          </a>
         </>
       )}
       .

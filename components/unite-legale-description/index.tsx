@@ -1,6 +1,7 @@
 import React from 'react';
 import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
+import { getAdresseUniteLegale, getNomComplet } from '#models/statut-diffusion';
 import { formatDateLong } from '#utils/helpers';
 import {
   getCompanyLabel,
@@ -21,7 +22,7 @@ export const UniteLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> =
       <p>
         <>
           {getCompanyPronoun(uniteLegale)}
-          {getCompanyLabel(uniteLegale)} {uniteLegale.nomComplet}
+          {getCompanyLabel(uniteLegale)} {getNomComplet(uniteLegale)}
         </>{' '}
         {uniteLegale.dateCreation && (
           <>
@@ -47,7 +48,7 @@ export const UniteLegaleDescription: React.FC<{ uniteLegale: IUniteLegale }> =
             </a>{' '}
             est domicilié au{' '}
             <a href={`/carte/${uniteLegale.siege.siret}`}>
-              {uniteLegale.siege.adresse}
+              {getAdresseUniteLegale(uniteLegale)}
             </a>
             {'. '}
           </>

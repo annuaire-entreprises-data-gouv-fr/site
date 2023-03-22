@@ -1,11 +1,16 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
+import Info from '#components-ui/alerts/info';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import MapEtablissement from '#components/map/map-etablissement';
 import Meta from '#components/meta';
 import { MapTitleEtablissement } from '#components/title-etablissement-section';
 import { getEtablissementWithLatLongFromSlug } from '#models/etablissement';
 import { IEtablissement } from '#models/index';
+import {
+  estDiffusible,
+  getAdresseEtablissement,
+} from '#models/statut-diffusion';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -35,6 +40,13 @@ const EtablissementMapPage: NextPageWithLayout<IProps> = ({
           etablissement={etablissement}
           title="Géolocalisation de l’établissement"
         />
+        {!estDiffusible(etablissement) && (
+          <Info>
+            Cette structure est non-diffusible. <br />
+            Son adresse complète n’est pas publique, mais sa commune de
+            domiciliation est : {getAdresseEtablissement(etablissement)}
+          </Info>
+        )}
         <br />
         {etablissement.latitude && etablissement.longitude ? (
           <div className="map-container">

@@ -8,6 +8,10 @@ import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IDirigeant } from '#models/immatriculation/rncs';
 import { isCollectiviteTerritoriale } from '#models/index';
 import { ISearchResult } from '#models/search';
+import {
+  getAdresseEtablissement,
+  getAdresseUniteLegale,
+} from '#models/statut-diffusion';
 
 interface IProps {
   results: ISearchResult[];
@@ -77,9 +81,7 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
       />
       <div>
         <Icon slug="mapPin">
-          <span className="adress">
-            {result.siege.adressePostale || 'Adresse inconnue'}{' '}
-          </span>
+          <span className="adress">{getAdresseUniteLegale(result, true)} </span>
         </Icon>
       </div>
     </a>
@@ -92,7 +94,7 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
               className="adress"
               href={`/etablissement/${etablissement.siret}`}
             >
-              {etablissement.adressePostale}
+              {getAdresseEtablissement(etablissement, true)}
               <span className="down" />
             </a>
             {!estActif(etablissement) && (

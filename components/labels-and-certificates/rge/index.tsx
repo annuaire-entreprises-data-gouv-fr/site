@@ -14,6 +14,7 @@ import {
 } from '#models/api-not-responding';
 import { IRGECertification } from '#models/certifications/rge';
 import { IUniteLegale } from '#models/index';
+import { getNomComplet } from '#models/statut-diffusion';
 import { certificatLogo } from './map-certicat-to-logo';
 
 const renovLink = (slug: string) => {
@@ -69,7 +70,7 @@ export const CertificationsRGESection: React.FC<{
   } = certificationsRGE.companyInfo;
 
   const data = [
-    ['Dénomination', uniteLegale.nomComplet],
+    ['Dénomination', getNomComplet(uniteLegale)],
     ['Adresse', adresse],
     ['Téléphone', telephone && <a href={`tel:${telephone}`}>{telephone}</a>],
     [

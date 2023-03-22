@@ -7,6 +7,7 @@ import {
   getDonneesFinancieresFromSlug,
   IDonneesFinancieres,
 } from '#models/donnees-financieres';
+import { getCompanyPageTitle } from '#utils/helpers/get-company-page-title';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -24,7 +25,7 @@ const FinancePage: NextPageWithLayout<IProps> = ({
   return (
     <>
       <Meta
-        title={`Données financières - ${uniteLegale.nomComplet}`}
+        title={`Données financières - ${getCompanyPageTitle(uniteLegale)}`}
         noIndex={true}
       />
       <div className="content-container">

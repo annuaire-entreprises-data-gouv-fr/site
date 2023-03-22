@@ -8,7 +8,11 @@ import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { IEtablissement, IUniteLegale } from '#models/index';
-import { estNonDiffusible } from '#models/statut-diffusion';
+import {
+  estDiffusible,
+  estNonDiffusible,
+  getAdresseEtablissement,
+} from '#models/statut-diffusion';
 import { formatSiret } from '#utils/helpers';
 
 const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
@@ -20,20 +24,16 @@ const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
       <a href={`/etablissement/${etablissement.siret}`}>
         {formatSiret(etablissement.siret)}
       </a>,
-      estNonDiffusible(etablissement) ? (
-        <i>Non renseigné</i>
-      ) : (
-        <>
-          {etablissement.adresse}
-          {etablissement.estSiege && <Tag color="info">siège social</Tag>}
-        </>
-      ),
+      <>
+        {getAdresseEtablissement(etablissement)}
+        {etablissement.estSiege && <Tag color="info">siège social</Tag>}
+      </>,
       <IsActiveTag
         etatAdministratif={etablissement.etatAdministratif}
         statutDiffusion={etablissement.statutDiffusion}
         since={etablissement.dateFermeture}
       />,
-      <AvisSituationLink siret={etablissement.siret} label="Télécharger" />,
+      <AvisSituationLink etablissement={etablissement} label="Télécharger" />,
     ])}
   />
 );
@@ -76,7 +76,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
           Si vous avez plusieurs établisements et ne savez pas quel avis de
           situation utiliser,{' '}
           <AvisSituationLink
-            siret={uniteLegale.siege.siret}
+            etablissement={uniteLegale.siege}
             label="téléchargez l’avis de situation Sirene du siège social"
           />
           .

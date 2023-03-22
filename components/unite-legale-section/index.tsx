@@ -7,6 +7,7 @@ import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations';
 import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
+import { getAdresseUniteLegale, getNomComplet } from '#models/statut-diffusion';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import {
   checkHasLabelsAndCertificates,
@@ -19,7 +20,7 @@ const UniteLegaleSection: React.FC<{
   const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
 
   const data = [
-    ['Dénomination', uniteLegale.nomComplet],
+    ['Dénomination', getNomComplet(uniteLegale)],
     ['SIREN', formatIntFr(uniteLegale.siren)],
     [
       'SIRET du siège social',
@@ -36,7 +37,7 @@ const UniteLegaleSection: React.FC<{
       <FAQLink to="/faq/modifier-adresse" tooltipLabel="Adresse postale">
         Comment modifier une adresse ?
       </FAQLink>,
-      uniteLegale.siege.adressePostale,
+      getAdresseUniteLegale(uniteLegale, true),
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
@@ -67,7 +68,7 @@ const UniteLegaleSection: React.FC<{
   return (
     <div id="entreprise">
       <Section
-        title={`Informations légales de ${uniteLegale.nomComplet}`}
+        title={`Informations légales de ${getNomComplet(uniteLegale)}`}
         sources={[
           EAdministration.INSEE,
           EAdministration.VIES,

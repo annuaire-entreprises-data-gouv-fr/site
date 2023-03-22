@@ -1,6 +1,7 @@
 import React from 'react';
 import constants from '#models/constants';
 import { IEtablissement } from '#models/index';
+import { estDiffusible } from '#models/statut-diffusion';
 import MaplibreInstance from '.';
 
 const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
@@ -29,7 +30,7 @@ const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
                     zoom: zoom // starting zoom
                   });
                   ${
-                    etablissement
+                    etablissement && estDiffusible(etablissement)
                       ? `new maplibregl.Marker({ color: '${constants.colors.frBlue}' })
                     .setLngLat(coords)
                     .addTo(map);`

@@ -3,7 +3,7 @@ import Warning from '#components-ui/alerts/warning';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { Tag } from '#components-ui/tag';
 import { IEtablissement, IUniteLegale } from '#models/index';
-import { estNonDiffusible } from '#models/statut-diffusion';
+import { estNonDiffusible, getNomComplet } from '#models/statut-diffusion';
 import { formatSiret } from '#utils/helpers';
 import { INSEE } from '../administrations';
 
@@ -19,7 +19,7 @@ const TitleEtablissement: React.FC<{
       <>
         un établissement de{' '}
         <a href={`/entreprise/${uniteLegale.chemin}`}>
-          {uniteLegale.nomComplet}
+          {getNomComplet(uniteLegale)}
         </a>
       </>
     )}
