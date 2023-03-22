@@ -84,7 +84,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
       {etablissement.adresse && (
         <>
           et il est domicilié au{' '}
-          <a href={`/carte/${uniteLegale.siege.siret}`}>
+          <a href={`/carte/${etablissement.siret}`}>
             {getAdresseEtablissement(etablissement)}
           </a>
         </>
