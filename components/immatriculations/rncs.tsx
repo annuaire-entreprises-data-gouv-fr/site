@@ -50,10 +50,6 @@ const ImmatriculationRNCS: React.FC<IProps> = ({
             sources={[EAdministration.INPI]}
           >
             <RnmRncsEOLWarning />
-
-            {immatriculation.metadata.isFallback && (
-              <InpiPartiallyDownWarning missing="le numéro RCS" />
-            )}
             <p>
               Cette structure possède une fiche d’immatriculation au{' '}
               <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
@@ -129,8 +125,6 @@ const ImmatriculationRNCSTable: React.FC<{
       'Date d’immatriculation au RNCS',
       formatDate(immatriculation.identite.dateImmatriculation),
     ],
-    ['Numéro RCS', immatriculation.identite.numeroRCS],
-    ['Numéro de Gestion', immatriculation.identite.numGestion],
     ['Dénomination', immatriculation.identite.denomination],
     ['Siren', formatIntFr(uniteLegale.siren)],
     [

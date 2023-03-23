@@ -30,11 +30,6 @@ export interface IBeneficiaire {
 }
 export interface IIdentite {
   denomination: string;
-  codeGreffe: string;
-  greffe: string;
-  numeroRCS: string;
-  numGestion: string;
-  dateGreffe: string;
   dateImmatriculation: string;
   dateDebutActiv: string;
   dateRadiation: string;
