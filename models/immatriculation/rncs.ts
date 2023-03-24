@@ -39,6 +39,7 @@ export interface IIdentite {
   dureePersonneMorale: string;
   capital: string;
   libelleNatureJuridique: string;
+  natureEntreprise?: string;
 }
 
 export interface IPersonneMorale {

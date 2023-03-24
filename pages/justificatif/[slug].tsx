@@ -19,8 +19,6 @@ interface IProps extends IJustificatifs, IPropsWithMetadata {}
 
 const JustificatifPage: NextPageWithLayout<IProps> = ({
   uniteLegale,
-  immatriculationRNM,
-  immatriculationRNCS,
   immatriculationJOAFE,
   immatriculationRNE,
   metadata: { session },
@@ -40,8 +38,6 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
         session={session}
       />
       <Immatriculations
-        immatriculationRNM={immatriculationRNM}
-        immatriculationRNCS={immatriculationRNCS}
         immatriculationJOAFE={immatriculationJOAFE}
         immatriculationRNE={immatriculationRNE}
         uniteLegale={uniteLegale}

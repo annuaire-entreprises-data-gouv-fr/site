@@ -2,7 +2,7 @@ import React from 'react';
 import AvisSituationLink from '#components/avis-situation-link';
 import { IUniteLegale, isAssociation } from '#models/index';
 import AssociationCreationNotFoundAlert from './association-creation-not-found-alert';
-import Info from './info';
+import Warning from './warning';
 
 const ImmatriculationNotFoundAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
@@ -11,19 +11,19 @@ const ImmatriculationNotFoundAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
     return <AssociationCreationNotFoundAlert association={uniteLegale} />;
   } else {
     return (
-      <Info full>
+      <Warning full>
         <b>Pas de justificatif d’immatriculation</b>
         <p>
-          Nous n’avons <b>pas trouvé de justificatif d’immatriculation</b> chez
-          nos partenaires. Il existe plusieurs explications possibles :
+          Nous n’avons <b>pas retrouvé le justificatif d’immatriculation</b>. Il
+          existe plusieurs explications possibles :
         </p>
         <ul>
           <li>
             Si cette structure est une <b>entreprise</b> (commerciale,
             artisanale, agricole, ou entreprise individuelle),{' '}
             <a href="http://data.inpi.fr/">contactez l’INPI</a>. En effet,
-            l’INPI opére le Registre National des Entreprises (RNE), dans lequel
-            devrait apparaitre l’entreprise.
+            l’INPI tient le Registre National des Entreprises (RNE), dans lequel{' '}
+            <b>l’entreprise doit apparaître</b>.
           </li>
           <li>
             Si cette structure est un <b>service publique</b>, c’est un cas
@@ -36,7 +36,7 @@ const ImmatriculationNotFoundAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label="l’avis de situation du siège social"
         />{' '}
         permet de prouver l’existence de l’entreprise.
-      </Info>
+      </Warning>
     );
   }
 };

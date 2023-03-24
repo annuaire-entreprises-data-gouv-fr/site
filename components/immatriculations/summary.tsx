@@ -5,8 +5,6 @@ import { formatDateLong } from '#utils/helpers';
 
 const ImmatriculationSummary: React.FC<IJustificatifs> = ({
   uniteLegale,
-  immatriculationRNM,
-  immatriculationRNCS,
   immatriculationJOAFE,
   immatriculationRNE,
 }) => {
@@ -14,7 +12,7 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
     <>
       Cette structure est :
       <ul>
-        {/* {immatriculationRNE && !isAPINotResponding(immatriculationRNE) && (
+        {immatriculationRNE && !isAPINotResponding(immatriculationRNE) && (
           <li>
             {!!immatriculationRNE.identite?.dateRadiation ? (
               <a href="#rncs">
@@ -36,49 +34,13 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
               </a>
             )}
           </li>
-        )} */}
-
+        )}
         {immatriculationJOAFE && !isAPINotResponding(immatriculationJOAFE) && (
           <li>
             <a href="#joafe">
               <b>Enregistrée</b> au Journal Officiel des Associations (JOAFE),
               depuis le {formatDateLong(immatriculationJOAFE.datePublication)}
             </a>
-          </li>
-        )}
-        {immatriculationRNM && !isAPINotResponding(immatriculationRNM) && (
-          <li>
-            {immatriculationRNM.dateRadiation ? (
-              <a href="#rnm">
-                <b>Radiée</b> du Répertoire des métiers (RNM), depuis le{' '}
-                {formatDateLong(immatriculationRNM.dateRadiation)}
-              </a>
-            ) : (
-              <a href="#rnm">
-                <b>Inscrite</b> au Répertoire des métiers (RNM), depuis le{' '}
-                {formatDateLong(immatriculationRNM.dateImmatriculation)}
-              </a>
-            )}
-          </li>
-        )}
-        {immatriculationRNCS && !isAPINotResponding(immatriculationRNCS) && (
-          <li>
-            {immatriculationRNCS.identite.dateRadiation ? (
-              <a href="#rncs">
-                <b>Radiée</b> du Registre du Commerce et des Sociétés (RCS),
-                depuis le{' '}
-                {formatDateLong(immatriculationRNCS.identite.dateRadiation)}
-              </a>
-            ) : (
-              <a href="#rncs">
-                <b>Inscrite</b> au Registre du Commerce et des Sociétés (RCS){' '}
-                {immatriculationRNCS.identite.dateImmatriculation
-                  ? `, depuis le ${formatDateLong(
-                      immatriculationRNCS.identite.dateImmatriculation
-                    )}`
-                  : ''}
-              </a>
-            )}
           </li>
         )}
         <li>

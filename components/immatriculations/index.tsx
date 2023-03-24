@@ -2,8 +2,6 @@ import React from 'react';
 import ImmatriculationNotFoundAlert from '#components-ui/alerts/immatriculation-not-found-alert';
 import AvisSituationSection from '#components/immatriculations/insee';
 import ImmatriculationJOAFE from '#components/immatriculations/joafe';
-import ImmatriculationRNCS from '#components/immatriculations/rncs';
-import ImmatriculationRNM from '#components/immatriculations/rnm';
 import ImmatriculationSummary from '#components/immatriculations/summary';
 import {
   IAPINotRespondingError,
@@ -23,8 +21,6 @@ const isNotFound = (
 };
 
 const Immatriculations: React.FC<IJustificatifs> = ({
-  immatriculationRNM,
-  immatriculationRNCS,
   immatriculationJOAFE,
   immatriculationRNE,
   uniteLegale,
@@ -34,19 +30,14 @@ const Immatriculations: React.FC<IJustificatifs> = ({
   const noAssociationImmatriculation =
     !isAnAssociation || (isAnAssociation && isNotFound(immatriculationJOAFE));
 
-  const noRNMImmatriculation = isNotFound(immatriculationRNM);
-  const noRNCSImmatriculation = isNotFound(immatriculationRNCS);
+  const noRNEImmatriculation = isNotFound(immatriculationRNE);
 
   const noImmatriculation =
-    noAssociationImmatriculation &&
-    noRNCSImmatriculation &&
-    noRNMImmatriculation;
+    noAssociationImmatriculation && noRNEImmatriculation;
 
   return (
     <>
       <ImmatriculationSummary
-        immatriculationRNM={immatriculationRNM}
-        immatriculationRNCS={immatriculationRNCS}
         immatriculationJOAFE={immatriculationJOAFE}
         immatriculationRNE={immatriculationRNE}
         uniteLegale={uniteLegale}
@@ -61,18 +52,12 @@ const Immatriculations: React.FC<IJustificatifs> = ({
           {isAnAssociation && (
             <ImmatriculationJOAFE immatriculation={immatriculationJOAFE} />
           )}
-          <ImmatriculationRNE
-            immatriculation={immatriculationRNE}
-            uniteLegale={uniteLegale}
-          />
-          <ImmatriculationRNM
-            immatriculation={immatriculationRNM}
-            uniteLegale={uniteLegale}
-          />
-          <ImmatriculationRNCS
-            immatriculation={immatriculationRNCS}
-            uniteLegale={uniteLegale}
-          />
+          {!noRNEImmatriculation && (
+            <ImmatriculationRNE
+              immatriculation={immatriculationRNE}
+              uniteLegale={uniteLegale}
+            />
+          )}
         </>
       )}
       <AvisSituationSection uniteLegale={uniteLegale} />
