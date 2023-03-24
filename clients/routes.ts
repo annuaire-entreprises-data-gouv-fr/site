@@ -87,29 +87,15 @@ const routes = {
   rne: {
     portail: {
       pdf: 'https://data.inpi.fr/export/companies',
+      entreprise: 'https://data.inpi.fr/entreprises/',
+      account: 'https://data.inpi.fr/register',
     },
     proxy: {
       rne: 'https://rncs-proxy.api.gouv.fr/rne/',
     },
   },
   rncs: {
-    portail: {
-      account: 'https://data.inpi.fr/register',
-      entreprise: 'https://data.inpi.fr/entreprises/',
-      pdf: 'https://data.inpi.fr/export/companies',
-    },
     proxy: {
-      document: {
-        justificatif: {
-          createJob:
-            'https://rncs-proxy.api.gouv.fr/document/justificatif/job/',
-          directDownload:
-            'https://rncs-proxy.api.gouv.fr/document/justificatif/',
-          get: 'https://rncs-proxy.api.gouv.fr/downloads/',
-          status:
-            'https://rncs-proxy.api.gouv.fr/document/justificatif/job/status',
-        },
-      },
       imr: 'https://rncs-proxy.api.gouv.fr/imr/',
     },
   },

@@ -7,13 +7,6 @@ import {
   getImmatriculationJOAFE,
   IImmatriculationJOAFE,
 } from '#models/immatriculation/joafe';
-import getImmatriculationRNCS, {
-  IImmatriculationRNCS,
-} from '#models/immatriculation/rncs';
-import {
-  getImmatriculationRNM,
-  IImmatriculationRNM,
-} from '#models/immatriculation/rnm';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { verifySiren } from '#utils/helpers';
 import { isAssociation } from '.';
@@ -25,23 +18,14 @@ import getImmatriculationRNE, {
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;
   immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError;
-  immatriculationRNM: IImmatriculationRNM | IAPINotRespondingError;
-  immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
   immatriculationJOAFE: IImmatriculationJOAFE | IAPINotRespondingError;
 }
 
 const getJustificatifs = async (slug: string) => {
   const siren = verifySiren(slug);
 
-  const [
-    uniteLegale,
-    immatriculationRNM,
-    immatriculationRNCS,
-    immatriculationRNE,
-  ] = await Promise.all([
+  const [uniteLegale, immatriculationRNE] = await Promise.all([
     getUniteLegaleFromSlug(siren),
-    getImmatriculationRNM(siren),
-    getImmatriculationRNCS(siren),
     getImmatriculationRNE(siren),
   ]);
 
@@ -54,8 +38,6 @@ const getJustificatifs = async (slug: string) => {
 
   return {
     uniteLegale,
-    immatriculationRNM,
-    immatriculationRNCS,
     immatriculationJOAFE,
     immatriculationRNE,
   };

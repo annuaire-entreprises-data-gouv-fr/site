@@ -51,7 +51,7 @@ interface IProps extends IPropsWithMetadata {
 }
 
 const InpiPDF: NextPageWithLayout<IProps> = ({ siren, metadata }) => {
-  const downloadLink = `${routes.rncs.portail.pdf}?format=pdf&ids=[%22${siren}%22]`;
+  const downloadLink = `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`;
   return (
     <>
       <Meta
@@ -141,7 +141,7 @@ const InpiPDF: NextPageWithLayout<IProps> = ({ siren, metadata }) => {
         <ol>
           <li>
             Créez-vous un compte sur{' '}
-            <a href={routes.rncs.portail.account}>data.inpi.fr</a>
+            <a href={routes.rne.portail.account}>data.inpi.fr</a>
           </li>
           <li>
             <b>Authentifiez-vous</b>
@@ -151,7 +151,7 @@ const InpiPDF: NextPageWithLayout<IProps> = ({ siren, metadata }) => {
             <a
               target="_blank"
               rel="noreferrer noopener"
-              href={routes.rncs.portail.entreprise + siren}
+              href={routes.rne.portail.entreprise + siren}
             >
               sur la fiche INPI
             </a>{' '}

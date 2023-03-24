@@ -1,6 +1,6 @@
 import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
-import { CMA, DILA, INPI, INSEE } from '#components/administrations';
+import { DILA, INPI, INSEE } from '#components/administrations';
 import Meta from '#components/meta';
 import { NextPageWithLayout } from './_app';
 
@@ -28,7 +28,7 @@ const Privacy: NextPageWithLayout = () => (
           <li>
             Données relatives aux dirigeants : prénoms, nom, lieu et mois de
             naissance, adresse postale; (organisme qui produit les données :{' '}
-            <INSEE />, <DILA />, <CMA />, <INPI />)
+            <INSEE />, <DILA />, <INPI />)
           </li>
           <li>
             Données relatives aux bénéficiaires effectifs : prénoms, nom,
@@ -286,9 +286,6 @@ const Privacy: NextPageWithLayout = () => (
           <li>
             l’
             <INPI /> (Institut national de la propriété industrielle)
-          </li>
-          <li>
-            la <CMA /> (Chambres de Métiers et de l’Artisanat)
           </li>
           <li>
             la <DILA /> (Direction de l’information légale et administrative)

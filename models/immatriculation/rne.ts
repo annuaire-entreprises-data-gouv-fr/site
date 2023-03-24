@@ -8,33 +8,9 @@ import {
 } from '#models/api-not-responding';
 import { Siren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
-import { IImmatriculation } from '.';
+import { IImmatriculationRNCS } from './rncs';
 
-export interface IImmatriculationRNCSCore {
-  identite: {};
-  metadata: {
-    isFallback: boolean;
-  };
-}
-
-export interface IImmatriculationRNE extends IImmatriculation {
-  identite: {
-    denomination: string;
-    dateImmatriculation: string;
-    dateDebutActiv: string;
-    dateRadiation: string;
-    dateCessationActivite: string;
-    isPersonneMorale: boolean;
-    dateClotureExercice: string;
-    dureePersonneMorale: string;
-    capital: string;
-    codeNatureJuridique: string;
-  } | null;
-  metadata: {
-    isFallback: boolean;
-  };
-  siren: Siren;
-}
+export interface IImmatriculationRNE extends IImmatriculationRNCS {}
 
 /*
  * Request Immatriculation from INPI's RNCS
@@ -44,24 +20,19 @@ const getImmatriculationRNE = async (
   siren: Siren
 ): Promise<IAPINotRespondingError | IImmatriculationRNE> => {
   try {
-    // fetch IMR and use cache
+    // fetch RNE and use cache
+    const { identite, metadata, dirigeants, beneficiaires } =
+      await fetchRNEImmatriculation(siren);
+
     return {
       siren,
       downloadLink: `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`,
-      siteLink: `${routes.rncs.portail.entreprise}${siren}`,
-      metadata: { isFallback: false },
-      identite: null,
+      siteLink: `${routes.rne.portail.entreprise}${siren}`,
+      identite,
+      dirigeants,
+      beneficiaires,
+      metadata,
     };
-    // fetch IMR and use cache
-    // const { identite = null, metadata } = await fetchRNEImmatriculation(siren);
-
-    // return {
-    //   siren,
-    //   downloadLink: `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`,
-    //   siteLink: `${routes.rncs.portail.entreprise}${siren}`,
-    //   identite,
-    //   metadata,
-    // };
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INPI, 404);
