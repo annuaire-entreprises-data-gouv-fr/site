@@ -50,9 +50,8 @@ const ImmatriculationRNE: React.FC<IProps> = ({
           >
             <p>
               Cette structure possède une fiche d’immatriculation au{' '}
-              <b>Registre National du Commerce et des Sociétés (RNCS)</b> qui
-              liste les entreprises enregistrées auprès des Greffes des
-              tribunaux de commerce et centralisées par l’
+              <b>Registre National des Entreprises (RNE)</b> qui liste les
+              entreprises de France et qui est tenu par l’
               <INPI />.
             </p>
 
@@ -124,7 +123,7 @@ const ImmatriculationRNETable: React.FC<{
       />,
     ],
     [
-      'Date d’immatriculation au RNCS',
+      'Date d’immatriculation au RNE',
       formatDate(immatriculation.identite.dateImmatriculation),
     ],
     ['Dénomination', immatriculation.identite.denomination],

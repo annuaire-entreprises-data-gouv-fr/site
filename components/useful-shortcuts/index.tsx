@@ -105,7 +105,7 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
           label: 'Bénéficiaires Effectifs',
         },
         {
-          url: `/justificatif/${uniteLegale.siren}#rncs`,
+          url: `/justificatif/${uniteLegale.siren}#rne`,
           label: 'Capital social',
         },
         {

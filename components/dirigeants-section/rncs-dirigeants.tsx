@@ -158,7 +158,7 @@ const DirigeantsSection: React.FC<IProps> = ({
                 <a
                   rel="noreferrer noopener"
                   target="_blank"
-                  href={`${routes.rncs.portail.entreprise}${siren}`}
+                  href={`${routes.rne.portail.entreprise}${siren}`}
                 >
                   la page de cette entreprise
                 </a>{' '}

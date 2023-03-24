@@ -27,7 +27,7 @@ const getImmatriculationRNE = async (
     return {
       siren,
       downloadLink: `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`,
-      siteLink: `${routes.rncs.portail.entreprise}${siren}`,
+      siteLink: `${routes.rne.portail.entreprise}${siren}`,
       identite,
       dirigeants,
       beneficiaires,

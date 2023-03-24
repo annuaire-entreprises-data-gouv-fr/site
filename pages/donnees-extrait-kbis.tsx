@@ -46,9 +46,9 @@ const ExtraitKbis: NextPageWithLayout = () => {
           </p>
           <p>
             Une fois sur la page de l’entreprise, consultez l’onglet{' '}
-            <b>justificatifs</b> et retrouvez-y les données d’immatriculations,
-            soit au Registre National du Commerce et des Sociétés (RNCS), soit
-            au Répertoire National des Métiers (RNM).
+            <b>justificatifs</b> et retrouvez-y les données d’immatriculations
+            issues du Registre National des Entreprises (RNE) tenu par l’
+            <INPI />.
           </p>
           <h2>
             Comment intégrer les données d’un extrait d’immatriculation à son

@@ -15,10 +15,9 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
         {immatriculationRNE && !isAPINotResponding(immatriculationRNE) && (
           <li>
             {!!immatriculationRNE.identite?.dateRadiation ? (
-              <a href="#rncs">
-                <b>Radiée</b> du Registre du Commerce et des Sociétés (RCS),
-                depuis le{' '}
-                {formatDateLong(immatriculationRNE.identite.dateRadiation)}
+              <a href="#rne">
+                <b>Radiée</b> du Registre National des Entreprises (RNE), depuis
+                le {formatDateLong(immatriculationRNE.identite.dateRadiation)}
               </a>
             ) : (
               <a href="#rne">
