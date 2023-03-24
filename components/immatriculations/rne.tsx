@@ -1,4 +1,5 @@
 import React from 'react';
+import { OpenClosedTag } from '#components-ui/badge/frequent';
 import ButtonLink from '#components-ui/button';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
@@ -6,6 +7,7 @@ import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import { INPI } from '#components/administrations';
 import { Section } from '#components/section';
+import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
 import {
   IAPINotRespondingError,
@@ -13,6 +15,7 @@ import {
 } from '#models/api-not-responding';
 import { IImmatriculationRNE } from '#models/immatriculation/rne';
 import { IUniteLegale } from '#models/index';
+import { formatDate, formatIntFr } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
 
 interface IProps {
@@ -31,7 +34,7 @@ const ImmatriculationRNE: React.FC<IProps> = ({
     return (
       <AdministrationNotResponding
         {...immatriculation}
-        title="Justificatif d’Immatriculation au RNE"
+        title="Inscription au RNE"
       />
     );
   }
@@ -42,40 +45,52 @@ const ImmatriculationRNE: React.FC<IProps> = ({
         <>
           <Section
             id="rne"
-            title="Justificatif d’immatriculation au RNE"
+            title="Inscription au RNE"
             sources={[EAdministration.INPI]}
           >
+            <p>
+              Cette structure possède une fiche d’immatriculation au{' '}
+              <b>Registre National des Entreprises (RNE)</b> qui liste les
+              entreprises de France et qui est tenu par l’
+              <INPI />.
+            </p>
+
+            <ImmatriculationRNETable
+              immatriculation={immatriculation}
+              uniteLegale={uniteLegale}
+            />
             <PrintNever>
-              <>
-                <p>
-                  Pour vérifier si cette structure est enregistrée au{' '}
-                  <b>Registre National des Entreprises (RNE)</b> essayez de
-                  télécharger son <b>justificatif d’immatriculation</b>{' '}
-                  (équivalent de l’extrait KBIS ou D1 pour les entreprises
-                  artisanales), ou de consultez sa fiche sur le site de l’
-                  <INPI />
-                  &nbsp;:
-                </p>
-                <div className="layout-center">
-                  <ButtonLink
-                    nofollow={true}
-                    to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
-                  >
-                    <Icon slug="download">
-                      Télécharger le justificatif d’immatriculation
-                    </Icon>
-                  </ButtonLink>
-                  <div className="separator" />
-                  <ButtonLink
-                    nofollow={true}
-                    target="_blank"
-                    to={`${immatriculation.siteLink}`}
-                    alt
-                  >
-                    ⇢ Voir la fiche sur le site de l’INPI
-                  </ButtonLink>
-                </div>
-              </>
+              <p>
+                Pour accéder aux données contenues dans un extrait
+                d’immatriculation (équivalent de <b>l’extrait KBIS ou D1</b>),{' '}
+                téléchargez le{' '}
+                <b>
+                  justificatif d’immatriculation au Registre National des
+                  Entreprises (RNE)
+                </b>
+                . ou consultez la fiche complète sur le site de l’
+                <INPI />
+                &nbsp;:
+              </p>
+              <div className="layout-center">
+                <ButtonLink
+                  nofollow={true}
+                  to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
+                >
+                  <Icon slug="download">
+                    Télécharger le justificatif d’immatriculation
+                  </Icon>
+                </ButtonLink>
+                <div className="separator" />
+                <ButtonLink
+                  nofollow={true}
+                  target="_blank"
+                  to={`${immatriculation.siteLink}`}
+                  alt
+                >
+                  ⇢ Voir la fiche sur le site de l’INPI
+                </ButtonLink>
+              </div>
             </PrintNever>
             <style jsx>{`
               .separator {
@@ -90,6 +105,69 @@ const ImmatriculationRNE: React.FC<IProps> = ({
       )}
     </>
   );
+};
+
+const ImmatriculationRNETable: React.FC<{
+  immatriculation: IImmatriculationRNE;
+  uniteLegale: IUniteLegale;
+}> = ({ immatriculation, uniteLegale }) => {
+  const { dateRadiation, dateCessationActivite, isPersonneMorale } =
+    immatriculation.identite;
+
+  const data = [
+    [
+      'Statut',
+      <OpenClosedTag
+        isVerified={!dateRadiation}
+        label={dateRadiation ? 'Radiée' : 'Inscrite'}
+      />,
+    ],
+    [
+      'Date d’immatriculation au RNE',
+      formatDate(immatriculation.identite.dateImmatriculation),
+    ],
+    ['Dénomination', immatriculation.identite.denomination],
+    ['Siren', formatIntFr(uniteLegale.siren)],
+    ['Nature de l’entreprise', immatriculation.identite.natureEntreprise],
+    ['Forme juridique', immatriculation.identite.libelleNatureJuridique],
+    [
+      'Dirigeant(s)',
+      <a key="dirigeant" href={`/dirigeants/${uniteLegale.siren}`}>
+        → voir les dirigeants
+      </a>,
+    ],
+    [
+      'Siège social',
+      <a key="siege" href={`/etablissement/${uniteLegale.siege.siret}`}>
+        → voir le détail du siège social
+      </a>,
+    ],
+    [
+      'Date de début d’activité',
+      formatDate(immatriculation.identite.dateDebutActiv),
+    ],
+    ...(isPersonneMorale
+      ? [
+          ['Capital', immatriculation.identite.capital],
+          [
+            'Date de clôture de l’exercice comptable',
+            immatriculation.identite.dateClotureExercice,
+          ],
+          [
+            'Durée de la personne morale',
+            immatriculation.identite.dureePersonneMorale,
+          ],
+        ]
+      : []),
+    ...(dateCessationActivite
+      ? [['Date de cessation d’activité', formatDate(dateCessationActivite)]]
+      : []),
+    ...(dateRadiation
+      ? [['Date de radiation', formatDate(dateRadiation)]]
+      : []),
+  ];
+
+  return <TwoColumnTable body={data} />;
 };
 
 export default ImmatriculationRNE;
