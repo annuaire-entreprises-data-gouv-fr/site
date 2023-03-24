@@ -1,6 +1,6 @@
 import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
-import { CMA, INPI, INSEE } from '#components/administrations';
+import { INPI, INSEE } from '#components/administrations';
 import Meta from '#components/meta';
 import { NextPageWithLayout } from './_app';
 
@@ -61,8 +61,8 @@ const ExtraitKbis: NextPageWithLayout = () => {
           </p>
           <ol>
             <li>
-              Utiliser les API : intégrez directement les API de l’
-              <INPI /> et de <CMA /> à votre système d’information.
+              Utiliser les API : intégrez directement l’API de l’
+              <INPI /> à votre système d’information.
             </li>
             <li>
               Intégrer le lien vers la page Annuaire des Entreprises dans votre
@@ -82,47 +82,9 @@ const ExtraitKbis: NextPageWithLayout = () => {
           </h2>
           <p>
             Toutes les sources de données affichées sur le site sont accessibles
-            grâce à deux API :
+            grâce à l’API Registre National des Entreprises de l’
+            <INPI />.
           </p>
-          <ul>
-            <li>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://api.gouv.fr/les-api/api_rnm"
-              >
-                API Répertoire National des Métiers
-              </a>{' '}
-              : les immatriculations d’entreprises artisanales, auprès de{' '}
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://cma-france.fr/"
-              >
-                CMA France
-              </a>
-              .
-            </li>
-            <li>
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://api.gouv.fr/les-api/api_inpi"
-              >
-                API Registre National du Commerce et des Sociétés
-              </a>{' '}
-              : les immatriculations d’entreprises auprès des Greffes de
-              tribunal de Commerce, centralisées par l’
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://www.inpi.fr/fr"
-              >
-                INPI
-              </a>
-              .
-            </li>
-          </ul>
           <p>
             <b>NB :</b> toutes les APIs du service public sont référencées sur{' '}
             <a

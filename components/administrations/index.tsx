@@ -58,15 +58,6 @@ export const MEF = ({ queryString = '' }) => (
   </a>
 );
 
-export const CMA = ({ queryString = '' }) => (
-  <a
-    href={`/administration/cma${queryString}`}
-    title="Chambre des Métiers et de l’Artisanat"
-  >
-    CMA-France
-  </a>
-);
-
 export const MC = ({ queryString = '' }) => (
   <a href={`/administration/mc${queryString}`} title="Ministère de la Culture">
     Ministère de la Culture

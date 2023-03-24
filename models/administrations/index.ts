@@ -1,7 +1,6 @@
 export enum EAdministration {
   EDUCATION_NATIONALE = 'education-nationale',
   ADEME = 'ademe',
-  CMAFRANCE = 'cma',
   DILA = 'dila',
   DINUM = 'dinum',
   MC = 'mc',
