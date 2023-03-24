@@ -1,6 +1,14 @@
 ---
 - date: 22/03/2023
-  title: "Nouvelle politique de non-diffusion des données des entrepreneurs individuels. En savoir plus sur https://www.insee.fr/fr/information/6683782"
+  title: 'La page justificatif d’immatriculation fait peau neuve :'
+  description: |
+    Suite à la création du [Guichet unique](https://procedures.inpi.fr/?/) la base de donnée de référence pour prouver l’immatriculation d’une entreprise, retrouver ses bénéficiaires effectifs et ses dirigeants, est désormais le Registre National des Entreprises (RNE).
+
+    Ces données sont accessibles via [l’API RNE de l’Inpi](/administration/inpi).
+- date: 22/03/2023
+  title: 'L’[Insee](/administration/insee) a mis en place une nouvelle politique de non-diffusion des données des entrepreneurs individuels :'
+  description: |
+    Désormais, seuls l’adresse et les nom et prénom de l’entrepreneur ne sont pas diffusés. Le reste des informations sont publiques ([en savoir plus](https://www.insee.fr/fr/information/6683782)).
 - date: 09/02/2023
   title: "Enrichissement de la section association : agréments administratif, éligibilité CEC, information de contact (email, site web, tel), association d'intérêt public et régime d’association."
 - date: 27/01/2023
@@ -24,9 +32,9 @@
 - date: 12/11/2022
   title: Ajout d’un filtre géographique avec auto complétion
 - date: 19/09/2022
-  title: Refonte de la page Questions fréquentes
+  title: Refonte de la page [Questions fréquentes](/faq)
 - date: 02/09/2022
-  title: Mise en place d’une vérification dynamique du numéro de TVA par le VIES
+  title: Mise en place d’une vérification dynamique du numéro de TVA par le [VIES](/administration/vies)
 - date: 29/08/2022
   title: Nouvelle mise en page de la liste des établissements
 - date: 17/08/2022
@@ -42,7 +50,7 @@
 - date: 09/06/2022
   title: Ajout de raccourcis de navigation dans la page "Informations Générales"
 - date: 09/06/2022
-  title: Recherche avancée
+  title: 'Mise en place de filtres de recherche avancés :'
   description: |
     Vous pouvez désormais affiner vos résultats de recherche par code postal et par domaine d'activité.
 - date: 08/06/2022

@@ -100,7 +100,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
               enregistré{plural} au{' '}
               <b>Registre National du Commerce et des Sociétés (RNCS)</b>{' '}
               centralisé par l’
-              <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
+              <INPI />. Retrouvez le détail des modalités de contrôle sur{' '}
               <a
                 rel="noreferrer noopener"
                 target="_blank"
