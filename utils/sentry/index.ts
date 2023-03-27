@@ -26,6 +26,8 @@ const getScope = (extra: IScope) => {
 
 let _isInitialized = false;
 
+export const isSentryInitialized = () => _isInitialized;
+
 const init = () => {
   if (_isInitialized) {
     return;
@@ -40,7 +42,7 @@ const init = () => {
 
 const logInSentryFactory =
   (severity = 'error' as SeverityLevel) =>
-  (errorMsg: any, extra?: IScope) => {
+  (errorMsg: any, extra: IScope = {}) => {
     if (process.env.NODE_ENV === 'development' || !process.env.SENTRY_DSN) {
       console.error(errorMsg, JSON.stringify(extra));
     }
