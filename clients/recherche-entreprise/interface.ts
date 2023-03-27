@@ -81,6 +81,7 @@ export interface IMatchingEtablissement {
   activite_principale: string;
   adresse: string;
   commune: string;
+  libelle_commune: string;
   est_siege: boolean;
   etat_administratif: string;
   geo_id: string;

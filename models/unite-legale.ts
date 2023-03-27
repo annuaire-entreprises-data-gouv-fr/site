@@ -84,19 +84,21 @@ class UniteLegaleFactory {
   getForUser = async () => {
     const page = 1;
     const useCache = true;
-    const [uniteLegale, { colter = {}, complements = {} }] = await Promise.all([
-      getUniteLegale(this._siren, this._page),
-      // colter, labels and certificates, from sirene ouverte
-      getUniteLegaleForGoodBot(this._siren, page, useCache).catch(() => {
-        return { colter: {}, complements: {}, chemin: this._siren };
-      }),
-    ]);
+    const [uniteLegale, { colter = {}, complements = {}, chemin }] =
+      await Promise.all([
+        getUniteLegale(this._siren, this._page),
+        // colter, labels and certificates, from sirene ouverte
+        getUniteLegaleForGoodBot(this._siren, page, useCache).catch(() => {
+          return { colter: {}, complements: {}, chemin: this._siren };
+        }),
+      ]);
 
     uniteLegale.complements = {
       ...uniteLegale.complements,
       ...complements,
     };
     uniteLegale.colter = { ...uniteLegale.colter, ...colter };
+    uniteLegale.chemin = chemin;
     return uniteLegale;
   };
 
