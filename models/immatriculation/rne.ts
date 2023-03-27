@@ -10,7 +10,13 @@ import { Siren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { IImmatriculationRNCS } from './rncs';
 
-export interface IImmatriculationRNE extends IImmatriculationRNCS {}
+export interface IImmatriculationRNE extends IImmatriculationRNCS {
+  observations: {
+    numObservation: string;
+    dateAjout: string;
+    description: string;
+  }[];
+}
 
 /*
  * Request Immatriculation from INPI's RNCS
@@ -21,8 +27,13 @@ const getImmatriculationRNE = async (
 ): Promise<IAPINotRespondingError | IImmatriculationRNE> => {
   try {
     // fetch RNE and use cache
-    const { identite, metadata, dirigeants, beneficiaires } =
-      await fetchRNEImmatriculation(siren);
+    const {
+      identite,
+      metadata,
+      dirigeants,
+      beneficiaires,
+      observations = [],
+    } = await fetchRNEImmatriculation(siren);
 
     return {
       siren,
@@ -31,6 +42,7 @@ const getImmatriculationRNE = async (
       identite,
       dirigeants,
       beneficiaires,
+      observations,
       metadata,
     };
   } catch (e: any) {

@@ -5,8 +5,10 @@ import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
+import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';
 import { Section } from '#components/section';
+import { FullTable } from '#components/table/full';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
 import {
@@ -92,6 +94,26 @@ const ImmatriculationRNE: React.FC<IProps> = ({
                 </ButtonLink>
               </div>
             </PrintNever>
+
+            {immatriculation.observations &&
+            immatriculation.observations.length > 0 ? (
+              <>
+                <br />
+                <p>
+                  Cette structure possède également{' '}
+                  {immatriculation.observations.length} observation au{' '}
+                  <b>RNE</b>&nbsp;:
+                </p>
+                <FullTable
+                  head={['Date d’ajout', 'Numéro d’observation', 'Description']}
+                  body={immatriculation.observations.map((o) => [
+                    o.dateAjout,
+                    o.numObservation ? <Tag>{o.numObservation}</Tag> : '',
+                    o.description,
+                  ])}
+                />
+              </>
+            ) : null}
             <style jsx>{`
               .separator {
                 width: 10px;
