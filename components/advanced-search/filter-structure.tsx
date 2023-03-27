@@ -101,6 +101,13 @@ export const FilterStructure: React.FC<{
           small
           onClick={() => setLabelSelected('esv')}
         />
+        &nbsp;
+        <LabelAndCertificateBadge
+          label="Egapro renseignée"
+          isSelected={labelSelected === 'egapro'}
+          small
+          onClick={() => setLabelSelected('egapro')}
+        />
       </div>
       <style jsx>{`
         .badge-wrapper {

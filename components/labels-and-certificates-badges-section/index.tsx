@@ -5,7 +5,11 @@ import { IUniteLegale } from '../../models';
 export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estEntrepreneurSpectacle ||
   uniteLegale.complements.estEss ||
+<<<<<<< HEAD
   uniteLegale.complements.estBio ||
+=======
+  uniteLegale.complements.egaproRenseignee ||
+>>>>>>> ae3cc914 (feat: adding egapro data)
   uniteLegale.complements.estRge;
 
 export const LabelsAndCertificatesBadgesSection: React.FC<{

@@ -107,6 +107,7 @@ export interface IComplements {
   est_ess: boolean;
   est_finess: boolean;
   est_service_public: boolean;
+  egapro_renseignee: boolean;
   est_rge: boolean;
   est_uai: boolean;
   identifiant_association: string;
