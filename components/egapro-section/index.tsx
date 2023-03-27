@@ -39,26 +39,42 @@ export const EgaproSection: React.FC<{
   }
 
   const body = [
-    ['Index', ...egapro.scores.map((score) => score.notes)],
+    ['Index Egapro', ...egapro.scores.map((score) => score.notes || 'NC')],
     [
       'Écart rémunérations',
-      ...egapro.scores.map((score) => score.notes_remunerations),
+      ...egapro.scores.map((score) => score.notes_remunerations || 'NC'),
     ],
     [
       "Écart taux d'augmentation",
-      ...egapro.scores.map((score) => score.notes_augmentations),
+      ...egapro.scores.map((score) => score.notes_augmentations || 'NC'),
+    ],
+    [
+      'Écart taux promotion',
+      ...egapro.scores.map((score) => score.notes_promotions || 'NC'),
     ],
     [
       'Hautes rémunérations',
-      ...egapro.scores.map((score) => score.notes_hautes_rémunérations),
+      ...egapro.scores.map((score) => score.notes_hautes_rémunérations || 'NC'),
+    ],
+    [
+      'Retour congé maternité',
+      ...egapro.scores.map((score) => score.notes_conges_maternite || 'NC'),
     ],
   ];
 
   return (
     <div id="entreprise">
       <Section title={sectionTitle} sources={[EAdministration.MT]}>
+        <p>
+          Selon les données Egapro du ministère du travail l&apos;effectif de
+          l&apos;entreprise {getNomComplet(uniteLegale)} est de{' '}
+          <b>{egapro.employeesSizeRange}</b>
+        </p>
         <FullTable
-          head={['Indicateurs', ...egapro.scores.map((score) => score.annee)]}
+          head={[
+            'Indicateurs',
+            ...egapro.scores.map((score) => score.annee as string),
+          ]}
           body={body}
         />
       </Section>

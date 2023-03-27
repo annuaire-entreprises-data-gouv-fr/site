@@ -35,8 +35,10 @@ export type EntreprisesEntity = {
   siren: string;
 };
 
+export type TrancheType = '50:250' | '251:999' | '1000:';
+
 export type Effectif = {
-  tranche: string;
+  tranche: TrancheType;
 };
 
 export type Notes = {

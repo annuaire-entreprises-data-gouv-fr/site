@@ -4,7 +4,7 @@ import { IEgapro } from '#models/egapro';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 import { DataEntity, EgaproResponse } from './type';
-import { formatScore } from './utils';
+import { employeesSizeRangeMapping, formatScore } from './utils';
 
 /**
  * EGAPRO
@@ -35,7 +35,8 @@ const mapToDomainObject = (egapro: DataEntity) => {
     notes_remunerations,
   } = egapro;
   return {
-    employeesSizeRange: egapro.entreprise?.effectif?.tranche,
+    employeesSizeRange:
+      employeesSizeRangeMapping[egapro.entreprise?.effectif?.tranche],
     scores: formatScore({
       notes,
       notes_augmentations,

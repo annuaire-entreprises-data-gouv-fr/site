@@ -11,7 +11,7 @@ import { IUniteLegale } from '.';
 export interface IEgapro {
   employeesSizeRange: string;
   scores: {
-    annee: string;
+    annee?: string;
     notes?: number;
     notes_augmentations?: number;
     notes_augmentations_et_promotions?: number;

@@ -2,7 +2,7 @@ import { IAPINotRespondingError } from '#models/api-not-responding';
 import { getEgaproIndexs, IEgapro } from '#models/egapro';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { IUniteLegale } from '..';
-import { getBio } from './bio';
+import { getBio, IEtablissementsBio } from './bio';
 import {
   getEntrepreneurSpectaclesCertification,
   IEntrepreneurSpectaclesCertification,
@@ -11,7 +11,7 @@ import { getRGECertifications, IRGECertification } from './rge';
 
 export interface ICertifications {
   uniteLegale: IUniteLegale;
-  bio: any;
+  bio: IEtablissementsBio | IAPINotRespondingError;
   rge: IRGECertification | IAPINotRespondingError;
   entrepreneurSpectacles:
     | IEntrepreneurSpectaclesCertification
@@ -32,6 +32,7 @@ export const getCertificationsFromSlug = async (
   ]);
 
   return {
+    bio,
     egapro,
     uniteLegale,
     rge,
