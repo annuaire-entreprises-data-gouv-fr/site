@@ -76,6 +76,7 @@ class SearchFilterParams {
     return serializeParams({
       etat_administratif: this.params.etat,
       est_rge: this.params.label === 'rge',
+      est_bio: this.params.label === 'bio',
       est_ess: this.params.label === 'ess',
       est_entrepreneur_spectacle: this.params.label === 'esv',
       est_association: this.params.type === 'asso',

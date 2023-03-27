@@ -6,7 +6,7 @@ long: Agence de l'Environnement et de la Maîtrise de l'Energie (ADEME)
 contact: https://www.ademe.fr/contact/
 apiMonitors:
   - apiName: API Professionnels RGE
-    apiGouvLink: https://api.gouv.fr/les-api/api_professionnels_rge
+    apigouvLink: https://api.gouv.fr/les-api/api_professionnels_rge
     datagouv:
       - label: Liste des entreprises RGE
         link: https://www.data.gouv.fr/fr/datasets/liste-des-entreprises-rge-1/

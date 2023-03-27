@@ -13,6 +13,7 @@ export const CACHE_TIMEOUT = 1000 * 60 * 15;
 export const defaultAxiosInstanceFactory = (timeout = constants.timeout.L) => {
   const regularInstance = Axios.create({ timeout });
 
+  //@ts-ignore
   regularInstance.interceptors.request.use(addStartTimeInterceptor, (err) =>
     Promise.reject(err)
   );
@@ -33,6 +34,7 @@ export const cachedAxiosInstanceFactory = () => {
     debug: console.info,
   });
 
+  //@ts-ignore
   cachedInstance.interceptors.request.use(addStartTimeInterceptor, (err) =>
     Promise.reject(err)
   );

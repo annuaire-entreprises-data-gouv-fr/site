@@ -39,7 +39,7 @@ export const getCompanyLabel = (uniteLegale: IUniteLegale) => {
 export const getCompanyPageTitle = (uniteLegale: IUniteLegale) => {
   return `${capitalize(getCompanyLabel(uniteLegale))} ${getNomComplet(
     uniteLegale
-  )} à ${uniteLegale.siege.codePostal} - SIREN ${
+  )} à ${uniteLegale.siege.codePostal} ${uniteLegale.siege.commune} - SIREN ${
     uniteLegale.siren
   } | Annuaire des Entreprises`;
 };

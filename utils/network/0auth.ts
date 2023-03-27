@@ -44,6 +44,7 @@ export const httpClientOAuthGetFactory = (
 
   // interceptor that retrieve token from cache at every used of cachedAxiosInstance
   cachedAxiosInstance.interceptors.request.use(
+    //@ts-ignore
     tokenProvider({
       getToken: cache,
       headerFormatter: (body: any) => {
