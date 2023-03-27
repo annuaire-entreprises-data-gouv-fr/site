@@ -75,6 +75,13 @@ export const FilterStructure: React.FC<{
         />
         &nbsp;
         <LabelAndCertificateBadge
+          label="Professionnel du Bio"
+          isSelected={labelSelected === 'bio'}
+          small
+          onClick={() => setLabelSelected('bio')}
+        />
+        &nbsp;
+        <LabelAndCertificateBadge
           label="ESS - Entreprise Sociale et Solidaire"
           isSelected={labelSelected === 'ess'}
           small
