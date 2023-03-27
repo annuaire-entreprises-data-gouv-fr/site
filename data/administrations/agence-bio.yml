@@ -6,7 +6,7 @@ long: Agence française pour le Développement et la Promotion de l'Agriculture 
 contact: https://www.agencebio.org/pied-de-page/contact/
 apiMonitors:
   - apiName: API Professionnels du BIO
-    apiGouvLink: https://api.gouv.fr/les-api/api-professionnels-bio
+    apigouvLink: https://api.gouv.fr/les-api/api-professionnels-bio
     datagouv:
       - label: Liste des professionnels engagés en BIO
         link: https://www.data.gouv.fr/fr/datasets/professionnels-engages-en-bio/
