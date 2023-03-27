@@ -115,7 +115,7 @@ const Partager: NextPageWithLayout = () => {
           <h2 id="qr">Générer un QR code vers une fiche entreprise</h2>
           <h3>Quand l’utiliser ?</h3>
           <p>
-            Si vous êtes un professionel, insérer dans vos factures ou vos
+            Si vous êtes un professionnel, insérer dans vos factures ou vos
             couriers un QR code vers votre page de l’Annuaire, vous permettra
             d’apporter toutes les informations légales nécessaires.
           </p>

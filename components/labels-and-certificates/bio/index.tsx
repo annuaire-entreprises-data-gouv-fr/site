@@ -25,13 +25,11 @@ export const CertificationsBioSection: React.FC<{
   const sectionTitle = 'Agence BIO';
 
   if (isAPINotResponding(bio)) {
-    const isNotFound = bio.errorType === 404;
-
-    if (isNotFound) {
+    if (bio.errorType === 404) {
       return (
         <Section title={sectionTitle} sources={[EAdministration.AGENCE_BIO]}>
           <p>
-            Nous n’avons pas retrouvé les certifications BIO de cette
+            Nous n’avons pas retrouvé les certifications Bio de cette
             entreprise. En revanche, vous pouvez peut-être les retrouver grâce
             au{' '}
             <a
@@ -39,7 +37,7 @@ export const CertificationsBioSection: React.FC<{
               target="_blank"
               rel="noreferrer"
             >
-              moteur de recherche de l&apos;agence Bio
+              moteur de recherche de l&apos;Agence Bio
             </a>
             .
           </p>
@@ -57,7 +55,6 @@ export const CertificationsBioSection: React.FC<{
 
   const {
     numeroBio,
-    phone,
     businessPhone,
     email,
     websites,
@@ -69,19 +66,8 @@ export const CertificationsBioSection: React.FC<{
   const hasMultipleWebsite = websites ? websites?.length > 1 : false;
 
   const data = [
-    [
-      "Lien vers l'annuaire BIO",
-      <a
-        target="_blank"
-        href={`https://annuaire.agencebio.org/fiche/${numeroBio}`}
-        rel="noreferrer"
-      >
-        https://annuaire.agencebio.org/fiche/{numeroBio}
-      </a>,
-    ],
-    ['Numéro BIO', `${numeroBio}`],
-    ['Numéro de téléphone', phone],
-    ['Numéro de téléphone commerciale', businessPhone],
+    ['Numéro BIO', <Tag>{numeroBio}</Tag>],
+    ['Numéro de téléphone', businessPhone],
     ['E-mail', email],
     [
       `Site${hasMultipleWebsite ? 's' : ''} web`,
@@ -137,14 +123,17 @@ export const CertificationsBioSection: React.FC<{
 
   return (
     <Section title={sectionTitle} sources={[EAdministration.AGENCE_BIO]}>
-      Cette structure est une entreprise{' '}
-      <FAQLink tooltipLabel="certifiée bio">
-        La certification BIO est accordée par les pouvoirs.
-        <br />
-        {/* TODO : SHOULD ADD FAQ LINK */}
-        <a href="/faq/agence-bio">→ En savoir plus</a>
-      </FAQLink>
-      .
+      Cette structure est certifiée professionnel du Bio.
+      <p>
+        Vous pouvez consulter{' '}
+        <a
+          href={`${routes.certifications.bio.entreprise}${numeroBio}`}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          sa fiche sur l’Annuaire Bio.
+        </a>
+      </p>
       <div style={{ marginTop: 24 }}>
         <TwoColumnTable body={data} />
       </div>
@@ -153,7 +142,12 @@ export const CertificationsBioSection: React.FC<{
         {plural}&nbsp;:
       </p>
       <FullTable
-        head={['Organisme', 'Date de notification', 'État', 'Lien']}
+        head={[
+          'Organisme',
+          'Date de notification',
+          'État',
+          'Lien vers le certificat',
+        ]}
         body={bio.certifications.map((certification) => [
           <div className="font-small layout-left">
             {certification.organization || 'Non renseigné'}

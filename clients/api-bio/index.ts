@@ -3,16 +3,15 @@ import routes from '#clients/routes';
 import { IBioCompany } from '#models/certifications/bio';
 import { Siret } from '#utils/helpers';
 import { httpGet } from '#utils/network';
-import { IBioResponse } from './type';
+import { IBioResponse } from './interface';
 
 /**
- * Reconnu Garant de l'Environnement (RGE)
- * https://france-renov.gouv.fr/annuaire-rge
+ * BIO
+ * https://annuaire.agencebio.org/
  */
-const clientBio = async (siret: Siret): Promise<IBioCompany> => {
-  if (!siret) {
-    throw new HttpNotFound(`Siret not existing`);
-  }
+export const clientProfessionnelBio = async (
+  siret: Siret
+): Promise<IBioCompany> => {
   const route = routes.certifications.bio.api;
   const response = await httpGet(route, { params: { siret } });
   const data = response.data as IBioResponse;
@@ -29,27 +28,24 @@ const clientBio = async (siret: Siret): Promise<IBioCompany> => {
 
 const mapToDomainObject = (bio: IBioResponse['items'][0]): IBioCompany => {
   return {
-    numeroBio: bio.numeroBio.toString(),
-    phone: bio.telephone,
+    numeroBio: (bio.numeroBio || '').toString(),
     businessPhone: bio.telephoneCommerciale,
-    email: bio.email,
+    email: bio.email || '',
     websites: bio.siteWebs?.map((site) => site.url),
     activities: bio.activites?.map((activity) => activity.nom),
     categories: bio.categories?.map((category) => category.nom),
     products: bio.productions?.map((product) => product.nom),
-    totalyBio: bio.mixite === 'Non',
+    onlyBio: bio.mixite === 'Non',
     certifications: bio.certificats.map((certification) => ({
       date: {
-        end: certification.dateArret,
-        start: certification.dateEngagement,
-        suspension: certification.dateSuspension,
-        notification: certification.dateNotification,
+        end: certification.dateArret || '',
+        start: certification.dateEngagement || '',
+        suspension: certification.dateSuspension || '',
+        notification: certification.dateNotification || '',
       },
-      url: certification.url,
-      organization: certification.organisme,
-      status: certification.etatCertification,
+      url: certification.url || '',
+      organization: certification.organisme || '',
+      status: certification.etatCertification || '',
     })),
   };
 };
-
-export { clientBio };

@@ -76,6 +76,7 @@ const routes = {
     },
     bio: {
       site: 'https://annuaire.agencebio.org/',
+      entreprise: 'https://annuaire.agencebio.org/fiche/',
       api: 'https://opendata.agencebio.org/api/gouv/operateurs/',
     },
     entrepreneurSpectacles: {
