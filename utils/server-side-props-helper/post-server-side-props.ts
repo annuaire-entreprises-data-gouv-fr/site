@@ -1,7 +1,7 @@
 import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSidePropsContext } from 'next';
 import { UAParser } from 'ua-parser-js';
-import { createAPM } from '../sentry/apm';
+import { closeAPM, createAPM } from '../sentry/apm';
 import { sessionOptions } from '../session';
 import { ISession } from '../session';
 import isUserAgentABot from '../user-agent';
@@ -64,7 +64,7 @@ export function postServerSideProps(
     const { props = {}, ...redirectAndOther } =
       await handleErrorFromServerSideProps(getServerSidePropsFunction)(context);
 
-    transaction.finish();
+    closeAPM(transaction);
 
     const userAgent = context?.req?.headers['user-agent'] || '';
 
