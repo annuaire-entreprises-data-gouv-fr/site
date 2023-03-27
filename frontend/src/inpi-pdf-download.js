@@ -42,7 +42,7 @@ async function download(url, siren) {
       return 200;
     }
   } catch (e) {
-    console.log(e);
+    console.info(e);
     return 500;
   }
 }
@@ -81,23 +81,26 @@ async function downloadInpiPDF() {
       handleResponse(res);
 
       // second try
-      if (res !== 200) {
+      if (res === 500) {
+        await wait(1 * 1000);
+
         console.info('second attempt');
         const res2 = await download(url, siren);
         handleResponse(res2);
 
         // third try
-        if (res2 !== 200) {
-          console.info('redirect attempt');
+        if (res2 === 500) {
+          await wait(3 * 1000);
 
-          if (typeof window !== 'undefined') {
-            window.location = url;
+          console.info('third attempt');
+          const res3 = await download(url, siren);
+          handleResponse(res3);
+
+          if (res3 === 500) {
+            // nevermind - it was a bad idea anyway
+            stateMachine.setError();
+            handleError();
           }
-
-          await wait(45 * 1000);
-          // nevermind - it was a bad idea anyway
-          stateMachine.setError();
-          handleError();
         }
       }
     } else {
