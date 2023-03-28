@@ -6,7 +6,8 @@ export type IBioResponse = {
 export type Item = {
   id: number;
   raisonSociale: string;
-  denominationcourante?: string;
+  denominationcourante: string;
+  reseau: string;
   siret?: string;
   numeroBio: number;
   telephone?: string;
@@ -15,7 +16,6 @@ export type Item = {
   gerant?: string;
   dateMaj: string;
   telephoneCommerciale?: string;
-  reseau: string;
   categories: Category[];
   siteWebs: SiteWeb[];
   adressesOperateurs: AdressesOperateur[];

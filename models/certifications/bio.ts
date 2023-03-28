@@ -6,19 +6,25 @@ import { APINotRespondingFactory } from '#models/api-not-responding';
 import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '..';
 
-export interface IBioCompany {
+export interface IEtablissementsBio {
+  etablissementsBio: IEtablissementBio[];
+}
+
+export interface IEtablissementBio {
+  siret: string;
+  enseigne: string;
+  denomination: string;
+  adresse: string;
   numeroBio: string;
-  businessPhone?: string;
-  email: string;
   websites: string[];
   activities: string[];
   categories: string[];
   products: string[];
   onlyBio: boolean;
-  certifications: IBioCertification[];
+  certificat: IBioCertification;
 }
 
-interface IBioCertification {
+export interface IBioCertification {
   date: {
     end: string;
     start: string;
@@ -33,9 +39,9 @@ interface IBioCertification {
 export const getBio = async (uniteLegale: IUniteLegale) => {
   try {
     if (!uniteLegale.complements.estBio) {
-      throw new HttpNotFound('Not bio company');
+      return APINotRespondingFactory(EAdministration.AGENCE_BIO, 404);
     }
-    return await clientProfessionnelBio(uniteLegale.siege.siret);
+    return await clientProfessionnelBio(uniteLegale.siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.AGENCE_BIO, 404);

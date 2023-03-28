@@ -20,8 +20,6 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     statutBio,
   } = uniteLegale.complements;
 
-  const exBio = statutBio !== 'valide';
-
   return (
     <>
       {estBio &&
@@ -30,8 +28,8 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
             <LabelAndCertificateBadge label="Professionnel du Bio" />
           </InformationTooltip>
         ) : (
-          <InformationTooltip label="Cette structure est un professionnel du Bio, mais n’a aucun certificat en cours de validité">
-            <LabelAndCertificateBadge label="Professionnel du Bio (sans certificat valide)" />
+          <InformationTooltip label="Cette structure est un professionnel du Bio, mais n’a pas de certificat en cours de validité">
+            <LabelAndCertificateBadge label="Professionnel du Bio (non certifié)" />
           </InformationTooltip>
         ))}
       {estEss && (
