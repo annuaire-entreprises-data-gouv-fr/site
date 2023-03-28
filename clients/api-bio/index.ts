@@ -17,7 +17,7 @@ export const clientProfessionnelBio = async (
 ): Promise<IEtablissementsBio> => {
   const route = routes.certifications.bio.api;
   // siret actually accept both siren and siret
-  const response = await httpGet(route, { params: { siren, nb: 100 } });
+  const response = await httpGet(route, { params: { siret: siren, nb: 100 } });
   const data = response.data as IBioResponse;
   if (!data.items || data.items.length === 0) {
     throw new HttpNotFound(`No certifications found for : ${siren}`);
@@ -59,7 +59,7 @@ const mapToDomainObject = (
   return {
     numeroBio: (bio.numeroBio || '').toString(),
     enseigne: bio.reseau || '',
-    denomination: bio.denomination || '',
+    denomination: bio.denominationcourante || bio.raisonSociale || '',
     adresse,
     siret,
     websites: bio.siteWebs?.map((site) => site.url),
