@@ -26,7 +26,7 @@ export const getEntrepreneurSpectaclesCertification = async (
 ): Promise<IEntrepreneurSpectaclesCertification | IAPINotRespondingError> => {
   try {
     if (!uniteLegale.complements.estEntrepreneurSpectacle) {
-      throw new HttpNotFound('Not entrepreneur spectacles vivants');
+      return APINotRespondingFactory(EAdministration.MC, 404);
     }
     return await clientEntrepreneurSpectacles(uniteLegale.siren);
   } catch (e: any) {

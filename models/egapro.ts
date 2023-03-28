@@ -22,14 +22,12 @@ export interface IEgapro {
   }[];
 }
 
-export const getEgaproIndexs = async (
+export const getEgapro = async (
   uniteLegale: IUniteLegale
 ): Promise<IEgapro | IAPINotRespondingError> => {
   try {
     if (!uniteLegale.complements.egaproRenseignee) {
-      throw new HttpNotFound(
-        "This legal unit doesn't have egapro informations"
-      );
+      return APINotRespondingFactory(EAdministration.METI, 404);
     }
     return await clientEgapro(uniteLegale.siren);
   } catch (e: any) {
