@@ -34,12 +34,12 @@ export const getEgaproIndexs = async (
     return await clientEgapro(uniteLegale.siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
-      return APINotRespondingFactory(EAdministration.MT, 404);
+      return APINotRespondingFactory(EAdministration.METI, 404);
     }
     logErrorInSentry('Error in API EGAPRO', {
       siren: uniteLegale.siren,
       details: e.toString(),
     });
-    return APINotRespondingFactory(EAdministration.MT, 500);
+    return APINotRespondingFactory(EAdministration.METI, 500);
   }
 };

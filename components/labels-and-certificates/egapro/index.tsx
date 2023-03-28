@@ -24,7 +24,7 @@ export const EgaproSection: React.FC<{
     if (isNotFound) {
       // @TODO revoir wording
       return (
-        <Section title={sectionTitle} sources={[EAdministration.MT]}>
+        <Section title={sectionTitle} sources={[EAdministration.METI]}>
           <p>
             Nous n’avons pas retrouvé les déclarations d’égalité professionnelle
             - Egapro de cette structure.
@@ -69,7 +69,7 @@ export const EgaproSection: React.FC<{
 
   return (
     <div id="entreprise">
-      <Section title={sectionTitle} sources={[EAdministration.MT]}>
+      <Section title={sectionTitle} sources={[EAdministration.METI]}>
         <p>
           Cette entreprise de <b>{egapro.employeesSizeRange}</b> a effectué{' '}
           {plural ? 'plusieurs' : 'une'} déclaration{plural} d’égalité entre les
