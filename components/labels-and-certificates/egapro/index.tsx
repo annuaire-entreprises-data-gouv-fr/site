@@ -16,7 +16,7 @@ export const EgaproSection: React.FC<{
   uniteLegale: IUniteLegale;
   egapro: IEgapro | IAPINotRespondingError;
 }> = ({ uniteLegale, egapro }) => {
-  const sectionTitle = `Index Egapro de ${getNomComplet(uniteLegale)}`;
+  const sectionTitle = `Égalité professionnelle - Egapro`;
 
   if (isAPINotResponding(egapro)) {
     const isNotFound = egapro.errorType === 404;
@@ -25,7 +25,10 @@ export const EgaproSection: React.FC<{
       // @TODO revoir wording
       return (
         <Section title={sectionTitle} sources={[EAdministration.MT]}>
-          <p>Nous n’avons pas retrouvé les indexs Egapro de cette entreprise</p>
+          <p>
+            Nous n’avons pas retrouvé les déclarations d’égalité professionnelle
+            - Egapro de cette structure.
+          </p>
         </Section>
       );
     }
@@ -62,13 +65,15 @@ export const EgaproSection: React.FC<{
     ],
   ];
 
+  const plural = egapro.scores.length > 0;
+
   return (
     <div id="entreprise">
       <Section title={sectionTitle} sources={[EAdministration.MT]}>
         <p>
-          Selon les données Egapro du ministère du travail l&apos;effectif de
-          l&apos;entreprise {getNomComplet(uniteLegale)} est de{' '}
-          <b>{egapro.employeesSizeRange}</b>
+          Cette entreprise de <b>{egapro.employeesSizeRange}</b> a effectué{' '}
+          {plural ? 'plusieurs' : 'une'} déclaration{plural} d’égalité entre les
+          hommes et les femmes.
         </p>
         <FullTable
           head={[

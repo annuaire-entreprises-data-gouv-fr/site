@@ -19,6 +19,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     estRge,
     estBio,
     statutBio,
+    egaproRenseignee,
   } = uniteLegale.complements;
 
   return (
@@ -44,6 +45,11 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       {estRge && (
         <InformationTooltip label="Cette structure est Reconnue Garante de l’Environnement">
           <LabelAndCertificateBadge label="RGE - Reconnu Garant de l’Environnement" />
+        </InformationTooltip>
+      )}
+      {egaproRenseignee && (
+        <InformationTooltip label="Cette structure a renseigné son indice d’égalité entre les femmes et les hommes">
+          <LabelAndCertificateBadge label="Egapro" />
         </InformationTooltip>
       )}
       {estEntrepreneurSpectacle &&

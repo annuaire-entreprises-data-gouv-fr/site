@@ -103,7 +103,7 @@ export const FilterStructure: React.FC<{
         />
         &nbsp;
         <LabelAndCertificateBadge
-          label="Egapro renseignée"
+          label="Egapro"
           isSelected={labelSelected === 'egapro'}
           small
           onClick={() => setLabelSelected('egapro')}
