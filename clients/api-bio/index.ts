@@ -1,7 +1,10 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import { IBioCompany } from '#models/certifications/bio';
-import { Siret } from '#utils/helpers';
+import {
+  IEtablissementBio,
+  IEtablissementsBio,
+} from '#models/certifications/bio';
+import { Siren, formatAdresse, verifySiret } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 import { IBioResponse } from './interface';
 
@@ -10,42 +13,70 @@ import { IBioResponse } from './interface';
  * https://annuaire.agencebio.org/
  */
 export const clientProfessionnelBio = async (
-  siret: Siret
-): Promise<IBioCompany> => {
+  siren: Siren
+): Promise<IEtablissementsBio> => {
   const route = routes.certifications.bio.api;
-  const response = await httpGet(route, { params: { siret } });
+  // siret actually accept both siren and siret
+  const response = await httpGet(route, { params: { siren, nb: 100 } });
   const data = response.data as IBioResponse;
-  if (!data.items || !data.items.length) {
-    throw new HttpNotFound(
-      `Cannot found certifications associate to siret : ${siret}`
-    );
+  if (!data.items || data.items.length === 0) {
+    throw new HttpNotFound(`No certifications found for : ${siren}`);
   }
 
-  const item = data.items[0];
-
-  return mapToDomainObject(item);
+  return { etablissementsBio: data.items.map(mapToDomainObject) };
 };
 
-const mapToDomainObject = (bio: IBioResponse['items'][0]): IBioCompany => {
+const mapToDomainObject = (
+  bio: IBioResponse['items'][0]
+): IEtablissementBio => {
+  const {
+    lieu = '',
+    codePostal = '',
+    ville = '',
+  } = (bio?.adressesOperateurs || [])[0] || {};
+  const adresse = formatAdresse({
+    libelleVoie: lieu,
+    libelleCommune: ville,
+    codePostal,
+  });
+
+  // reset invalide siret
+  let siret = '';
+  try {
+    siret = verifySiret(bio.siret || '');
+  } catch {}
+
+  const {
+    dateArret = '',
+    dateEngagement = '',
+    dateSuspension = '',
+    dateNotification = '',
+    url = '',
+    organisme = '',
+    etatCertification = '',
+  } = (bio.certificats || []).length > 0 ? bio.certificats[0] : {};
+
   return {
     numeroBio: (bio.numeroBio || '').toString(),
-    businessPhone: bio.telephoneCommerciale,
-    email: bio.email || '',
+    enseigne: bio.reseau || '',
+    denomination: bio.denomination || '',
+    adresse,
+    siret,
     websites: bio.siteWebs?.map((site) => site.url),
     activities: bio.activites?.map((activity) => activity.nom),
     categories: bio.categories?.map((category) => category.nom),
     products: bio.productions?.map((product) => product.nom),
     onlyBio: bio.mixite === 'Non',
-    certifications: bio.certificats.map((certification) => ({
+    certificat: {
       date: {
-        end: certification.dateArret || '',
-        start: certification.dateEngagement || '',
-        suspension: certification.dateSuspension || '',
-        notification: certification.dateNotification || '',
+        end: dateArret,
+        start: dateEngagement,
+        suspension: dateSuspension,
+        notification: dateNotification,
       },
-      url: certification.url || '',
-      organization: certification.organisme || '',
-      status: certification.etatCertification || '',
-    })),
+      url,
+      organization: organisme,
+      status: etatCertification,
+    },
   };
 };

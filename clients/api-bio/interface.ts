@@ -6,7 +6,7 @@ export type IBioResponse = {
 export type Item = {
   id: number;
   raisonSociale: string;
-  denominationcourante?: string;
+  denomination?: string;
   siret?: string;
   numeroBio: number;
   telephone?: string;
