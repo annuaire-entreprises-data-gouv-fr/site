@@ -103,7 +103,6 @@ export interface IComplements {
   est_entrepreneur_spectacle: boolean;
   statut_entrepreneur_spectacle: 'invalide' | 'valide';
   est_bio: boolean;
-  statut_bio: 'invalide' | 'valide';
   est_ess: boolean;
   est_finess: boolean;
   est_service_public: boolean;

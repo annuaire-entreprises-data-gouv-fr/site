@@ -88,7 +88,7 @@ export const CertificationsBioSection: React.FC<{
       <FullTable
         head={[
           'Détail établissement',
-          'Fiche Bio',
+          'Annuaire professionnels Bio',
           'Statut certification',
           'Certificat',
         ]}

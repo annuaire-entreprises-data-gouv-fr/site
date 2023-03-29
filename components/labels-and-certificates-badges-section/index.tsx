@@ -17,21 +17,15 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     estEss,
     estRge,
     estBio,
-    statutBio,
   } = uniteLegale.complements;
 
   return (
     <>
-      {estBio &&
-        (statutBio === 'valide' ? (
-          <InformationTooltip label="Cette structure est un professionnel du Bio">
-            <LabelAndCertificateBadge label="Professionnel du Bio" />
-          </InformationTooltip>
-        ) : (
-          <InformationTooltip label="Cette structure est un professionnel du Bio, mais n’a pas de certificat en cours de validité">
-            <LabelAndCertificateBadge label="Professionnel du Bio (non certifié)" />
-          </InformationTooltip>
-        ))}
+      {estBio && (
+        <InformationTooltip label="Cette structure est un professionnel du Bio">
+          <LabelAndCertificateBadge label="Professionnel du Bio" />
+        </InformationTooltip>
+      )}
       {estEss && (
         <InformationTooltip
           label="Cette structure appartient au champ de
