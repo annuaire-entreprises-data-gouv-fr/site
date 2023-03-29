@@ -71,7 +71,7 @@ const clientSearchRechercheEntreprise = async ({
     throw new NotEnoughParamsException('');
   }
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3&inclure_etablissements=${inclureEtablissements}${
+  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3&inclure_slug=true&inclure_etablissements=${inclureEtablissements}${
     searchFilterParams?.toApiURI() || ''
   }`;
 
@@ -115,7 +115,6 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     complements: {
       collectivite_territoriale = null,
       est_bio = false,
-      statut_bio = '',
       egapro_renseignee = false,
       est_entrepreneur_individuel = false,
       est_entrepreneur_spectacle = false,
@@ -186,7 +185,6 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     dirigeants: dirigeants.map(mapToDirigeantModel),
     complements: {
       estBio: est_bio,
-      statutBio: statut_bio,
       estEss: est_ess,
       estServicePublic: est_service_public,
       estEntrepreneurIndividuel: est_entrepreneur_individuel,
