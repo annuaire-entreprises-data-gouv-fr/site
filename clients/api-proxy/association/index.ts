@@ -4,7 +4,7 @@ import constants from '#models/constants';
 import { IDataAssociation } from '#models/index';
 import { formatAdresse, IdRna } from '#utils/helpers';
 import { clientAPIProxy } from '../client';
-import { IAssociationResponse } from './interfaces';
+import { IAssociationResponse } from './types';
 
 /**
  * Association through the API proxy

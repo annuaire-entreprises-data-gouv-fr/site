@@ -4,7 +4,7 @@ import { INomCertificat, IRGECertification } from '#models/certifications/rge';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 
-interface IRGEResponse {
+type IRGEResponse = {
   results: {
     adresse: string;
     code_postal: string;
@@ -22,7 +22,7 @@ interface IRGEResponse {
     telephone: string;
     url_qualification: string;
   }[];
-}
+};
 
 /**
  * Reconnu Garant de l'Environnement (RGE)

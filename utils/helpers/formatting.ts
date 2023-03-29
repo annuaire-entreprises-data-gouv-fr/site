@@ -190,7 +190,7 @@ const wrapWord = (word: string | null | undefined = '', punct = ' ') => {
   return word.toString().toUpperCase() + punct;
 };
 
-interface IAdressFields {
+type IAdressFields = {
   complement?: string | null | undefined;
   numeroVoie?: string | null | undefined;
   indiceRepetition?: string | null | undefined;
@@ -204,7 +204,7 @@ interface IAdressFields {
   libelleCommuneEtranger?: string | null | undefined;
   codePaysEtranger?: string | null | undefined;
   libellePaysEtranger?: string | null | undefined;
-}
+};
 
 export const formatAdresse = ({
   complement = '',

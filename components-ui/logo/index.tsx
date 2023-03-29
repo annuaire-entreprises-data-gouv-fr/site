@@ -1,10 +1,10 @@
-interface IProps {
+type IProps = {
   title: string;
   width: number;
   height: number;
   slug: string;
   className?: string;
-}
+};
 
 /**
  * Logo renderer

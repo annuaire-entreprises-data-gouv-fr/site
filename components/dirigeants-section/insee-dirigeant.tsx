@@ -4,9 +4,9 @@ import { Section } from '#components/section';
 import { EAdministration } from '#models/administrations';
 import { IEtatCivil } from '#models/immatriculation/rncs';
 
-interface IProps {
+type IProps = {
   dirigeant: IEtatCivil;
-}
+};
 
 /**
  * Specific section for EI

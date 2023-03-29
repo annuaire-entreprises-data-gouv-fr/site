@@ -1,4 +1,4 @@
-export interface IGeoElement {
+export type IGeoElement = {
   label: string;
   value: string;
-}
+};

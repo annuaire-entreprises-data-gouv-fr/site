@@ -8,11 +8,11 @@ import {
 } from '#models/statut-diffusion';
 import { formatDateLong } from '#utils/helpers';
 
-interface IProps {
+type IProps = {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
   usedInEntreprisePage?: boolean;
-}
+};
 
 const statusLabel = (etatAdministratif: IETATADMINSTRATIF) => {
   if (etatAdministratif === IETATADMINSTRATIF.ACTIF) {

@@ -3,11 +3,11 @@ import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
 
-interface IGeoCommuneResponse {
+type IGeoCommuneResponse = {
   codesPostaux: string[];
   nom: string;
   code: string;
-}
+};
 
 const clientCommunesByName = async (slug: string): Promise<any> => {
   const response = await httpGet(`${routes.geo.commune}&nom=${slug}`, {

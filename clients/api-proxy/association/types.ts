@@ -1,4 +1,4 @@
-export interface IAssociationResponse {
+export type IAssociationResponse = {
   identite: Identite;
   activites?: Activites;
   coordonnees?: Coordonnees;
@@ -16,9 +16,9 @@ export interface IAssociationResponse {
   rib: any[];
   document_dac: any[];
   document_rna: any[];
-}
+};
 
-interface Identite {
+type Identite = {
   nom: string;
   nom_sirene: string;
   sigle: string;
@@ -44,9 +44,9 @@ interface Identite {
   eligibilite_cec: boolean;
   regime: string;
   impots_commerciaux: boolean;
-}
+};
 
-interface Activites {
+type Activites = {
   objet: string;
   domaine: string;
   id_objet_social1: string;
@@ -65,18 +65,18 @@ interface Activites {
   effectif_salarie_cent: number;
   annee_effectif_salarie_cent: number;
   appartenance_ess: string;
-}
+};
 
-interface Coordonnees {
+type Coordonnees = {
   telephone: string;
   courriel: string;
   adresse_siege: AdresseSiege;
   adresse_gestion: AdresseGestion;
   site_web: string;
   adresse_siege_sirene: AdresseSiegeSirene;
-}
+};
 
-interface AdresseSiege {
+type AdresseSiege = {
   cplt_3: string;
   num_voie: string;
   voie: string;
@@ -84,17 +84,17 @@ interface AdresseSiege {
   code_insee: string;
   cp: string;
   type_voie: string;
-}
+};
 
-interface AdresseGestion {
+type AdresseGestion = {
   cplt_3: string;
   voie: string;
   commune: string;
   cp: string;
   pays: string;
-}
+};
 
-interface AdresseSiegeSirene {
+type AdresseSiegeSirene = {
   cplt_3: string;
   num_voie: string;
   voie: string;
@@ -102,13 +102,13 @@ interface AdresseSiegeSirene {
   code_insee: string;
   cp: string;
   type_voie: string;
-}
+};
 
-interface Commentaire {
+type Commentaire = {
   note: string;
-}
+};
 
-interface ReseauAffiliation {
+type ReseauAffiliation = {
   nom: string;
   objet: string;
   adresse: Adresse;
@@ -118,23 +118,23 @@ interface ReseauAffiliation {
   nb_licencies: number;
   nb_licencies_h: number;
   nb_licencies_f: number;
-}
+};
 
-interface Adresse {
+type Adresse = {
   cplt_3: string;
   num_voie: string;
   voie: string;
   commune: string;
   cp: string;
   type_voie: string;
-}
+};
 
-interface AdherentPersonneMorale {
+type AdherentPersonneMorale = {
   id: number;
   nom: string;
-}
+};
 
-interface Rh {
+type Rh = {
   nb_benevoles: number;
   nb_volontaires: number;
   nb_salaries: number;
@@ -146,18 +146,18 @@ interface Rh {
   nb_adherents_h: number;
   nb_adherents_f: number;
   annee: number;
-}
+};
 
-interface Agrement {
+type Agrement = {
   type: string;
   numero: string;
   niveau: string;
   attributeur: string;
   id: number;
   date_attribution: string;
-}
+};
 
-interface Etablissement {
+type Etablissement = {
   actif: boolean;
   adresse: Adresse2;
   id_siret: string;
@@ -171,9 +171,9 @@ interface Etablissement {
   annee_effectif_salarie_cent: number;
   id_tranche_effectif: string;
   lib_tranche_effectif: string;
-}
+};
 
-interface Adresse2 {
+type Adresse2 = {
   num_voie: string;
   voie: string;
   commune: string;
@@ -181,4 +181,4 @@ interface Adresse2 {
   cp: string;
   cplt_1: string;
   type_voie: string;
-}
+};

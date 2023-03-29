@@ -3,7 +3,7 @@ import { IEntrepreneurSpectaclesCertification } from '#models/certifications/ent
 import { Siren } from '#utils/helpers';
 import odsClient from '.';
 
-interface ISpectaclesVivantsRecord {
+type ISpectaclesVivantsRecord = {
   geoloc_cp: string[];
   raison_sociale_personne_morale_ou_nom_personne_physique: string; //"MANAKIN PRODUCTION"
   nom_du_lieu: string;
@@ -19,13 +19,13 @@ interface ISpectaclesVivantsRecord {
   code_postal_de_l_etablissement_principal_personne_morale_ou_de_la_personne_physique: string; //"75018"
   code_naf_ape: string; //"90.01Z - Arts du spectacle vivant"
   statut_du_recepisse: string; //"Valide"
-}
+};
 
 const clientEntrepreneurSpectacles = async (
   siren: Siren
 ): Promise<IEntrepreneurSpectaclesCertification> => {
   // siret column is an int. Does not support string search query so fallback on either exactmatch or int range
-  
+
   const url = routes.certifications.entrepreneurSpectacles.ods.search;
   const metaDataUrl = routes.certifications.entrepreneurSpectacles.ods.metadata;
 

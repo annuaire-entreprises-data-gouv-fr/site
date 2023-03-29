@@ -19,12 +19,12 @@ import {
 } from '#models/statut-diffusion';
 import { formatDate, formatSiret } from '#utils/helpers';
 
-interface IProps {
+type IProps = {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
   usedInEntreprisePage?: boolean;
   withDenomination?: boolean;
-}
+};
 
 const EtablissementSection: React.FC<IProps> = ({
   etablissement,

@@ -40,11 +40,11 @@ export enum FICHE {
   AGENT_SUBVENTIONS = 'subventions associations',
 }
 
-interface IProps {
+type IProps = {
   ficheType?: FICHE;
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}
+};
 
 const Tabs: React.FC<{
   currentFicheType: FICHE;

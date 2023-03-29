@@ -1,7 +1,7 @@
 import React, { MouseEventHandler, PropsWithChildren } from 'react';
 import constants from '#models/constants';
 
-interface IProps {
+type IProps = {
   small?: boolean;
   to?: string;
   type?: 'submit' | null;
@@ -9,7 +9,7 @@ interface IProps {
   target?: '_blank';
   nofollow?: boolean;
   onClick?: MouseEventHandler;
-}
+};
 
 const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   to,

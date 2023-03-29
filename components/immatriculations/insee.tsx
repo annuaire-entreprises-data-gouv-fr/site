@@ -38,9 +38,9 @@ const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
   />
 );
 
-interface IProps {
+type IProps = {
   uniteLegale: IUniteLegale;
-}
+};
 
 const AvisSituationNonDiffusible = () => (
   <>

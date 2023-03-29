@@ -39,10 +39,10 @@ export const isPersonneMorale = (
   return false;
 };
 
-interface IProps {
+type IProps = {
   immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
   siren: Siren;
-}
+};
 
 /**
  * Dirigeants section

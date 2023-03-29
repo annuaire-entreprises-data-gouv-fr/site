@@ -26,7 +26,7 @@ import {
   statuDiffusionFromStatutDiffusionInsee,
 } from './helpers';
 
-interface IInseeUniteLegaleResponse {
+type IInseeUniteLegaleResponse = {
   uniteLegale: {
     siren: Siren;
     sigleUniteLegale: string;
@@ -46,8 +46,9 @@ interface IInseeUniteLegaleResponse {
     sexeUniteLegale: 'M' | 'F';
     identifiantAssociationUniteLegale: string | null;
   };
-}
-interface IPeriodeUniteLegale {
+};
+
+type IPeriodeUniteLegale = {
   nicSiegeUniteLegale: string;
   etatAdministratifUniteLegale: string;
   economieSocialeSolidaireUniteLegale: string | null;
@@ -62,7 +63,7 @@ interface IPeriodeUniteLegale {
   denominationUsuelle1UniteLegale: string;
   denominationUsuelle2UniteLegale: string;
   denominationUsuelle3UniteLegale: string;
-}
+};
 
 const factory = (options: InseeClientOptions) => async (siren: Siren) => {
   const request = await inseeClientGet(

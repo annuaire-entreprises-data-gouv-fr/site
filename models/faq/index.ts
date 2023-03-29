@@ -1,4 +1,4 @@
-export interface IArticle {
+export type IArticle = {
   slug: string;
   administrations: string[];
   targets: string[];
@@ -6,7 +6,7 @@ export interface IArticle {
   body: string;
   cta: { label: string; to: string };
   more: { label: string; href: string }[];
-}
+};
 
 export const faqTargets = {
   agent: 'Agent public',

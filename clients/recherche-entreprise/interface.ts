@@ -1,12 +1,12 @@
-export interface ISearchResponse {
+export type ISearchResponse = {
   results: IResult[];
   total_results: number;
   page: unknown;
   per_page: number;
   total_pages: number;
-}
+};
 
-export interface IResult {
+export type IResult = {
   siren: string;
   nom_complet: string;
   nombre_etablissements: number;
@@ -26,9 +26,9 @@ export interface IResult {
   etablissements?: IMatchingEtablissement[];
   complements: IComplements;
   slug_annuaire_entreprises: string;
-}
+};
 
-export interface ISiege {
+export type ISiege = {
   activite_principale: string;
   activite_principale_registre_metier: any;
   adresse: string;
@@ -64,9 +64,9 @@ export interface ISiege {
   siret: string;
   tranche_effectif_salarie: string;
   type_voie: string;
-}
+};
 
-export interface IDirigeant {
+export type IDirigeant = {
   nom: string;
   prenoms: string;
   annee_de_naissance: string;
@@ -75,9 +75,9 @@ export interface IDirigeant {
   siren: string;
   denomination: string;
   sigle: any;
-}
+};
 
-export interface IMatchingEtablissement {
+export type IMatchingEtablissement = {
   activite_principale: string;
   adresse: string;
   commune: string;
@@ -94,9 +94,9 @@ export interface IMatchingEtablissement {
   longitude: string;
   nom_commercial: string;
   siret: string;
-}
+};
 
-export interface IComplements {
+export type IComplements = {
   collectivite_territoriale: ICollectiviteTerritoriale;
   convention_collective_renseignee: boolean;
   est_entrepreneur_individuel: boolean;
@@ -110,19 +110,19 @@ export interface IComplements {
   est_rge: boolean;
   est_uai: boolean;
   identifiant_association: string;
-}
+};
 
-export interface ICollectiviteTerritoriale {
+export type ICollectiviteTerritoriale = {
   code: string;
   code_insee: string;
   elus: IElu[];
   niveau: string;
-}
+};
 
-export interface IElu {
+export type IElu = {
   nom: string;
   prenoms: string;
   annee_de_naissance: string;
   fonction: string;
   sexe: string;
-}
+};

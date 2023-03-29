@@ -1,12 +1,12 @@
 import { IRatio } from '#models/monitoring';
 import { IMonitorLog } from '.';
 
-interface ILog {
+type ILog = {
   date: Date;
   downtime: number;
   monitorExists: boolean;
   uptime: number;
-}
+};
 
 const SECONDS_IN_A_DAY = 3600 * 24;
 

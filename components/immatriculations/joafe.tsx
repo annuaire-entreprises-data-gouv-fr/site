@@ -14,9 +14,9 @@ import AdministrationNotResponding from '../administration-not-responding';
 import { Section } from '../section';
 import { TwoColumnTable } from '../table/simple';
 
-interface IProps {
+type IProps = {
   immatriculation: IImmatriculationJOAFE | IAPINotRespondingError;
-}
+};
 
 const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
   if (isAPINotResponding(immatriculation)) {

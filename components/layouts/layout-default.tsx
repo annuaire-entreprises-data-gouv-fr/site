@@ -8,11 +8,11 @@ import { WeNeedYouModal } from '#components/modal/we-need-you';
 import SocialNetworks from '#components/social-network';
 import { ISession } from '#utils/session';
 
-interface IProps {
+type IProps = {
   isBrowserOutdated: boolean;
   searchBar?: boolean;
   session?: ISession | null;
-}
+};
 
 export const LayoutDefault = ({
   children,

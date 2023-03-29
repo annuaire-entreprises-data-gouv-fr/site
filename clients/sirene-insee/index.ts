@@ -18,10 +18,10 @@ import httpClientOAuthGetFactory from '#utils/network/0auth';
  *
  */
 
-export interface InseeClientOptions {
+export type InseeClientOptions = {
   useFallback: boolean;
   useCache: boolean;
-}
+};
 
 const defaultGetClient = httpClientOAuthGetFactory(
   routes.sireneInsee.auth,

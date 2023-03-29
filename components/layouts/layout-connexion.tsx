@@ -1,9 +1,9 @@
 import React, { PropsWithChildren } from 'react';
 import { Header } from '#components/header';
 
-interface IProps {
+type IProps = {
   img: JSX.Element;
-}
+};
 
 export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
   children,

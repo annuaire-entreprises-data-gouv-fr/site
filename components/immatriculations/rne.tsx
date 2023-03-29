@@ -20,10 +20,10 @@ import { IUniteLegale } from '#models/index';
 import { formatDate, formatIntFr } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
 
-interface IProps {
+type IProps = {
   immatriculation: IImmatriculationRNE | IAPINotRespondingError;
   uniteLegale: IUniteLegale;
-}
+};
 
 const ImmatriculationRNE: React.FC<IProps> = ({
   immatriculation,

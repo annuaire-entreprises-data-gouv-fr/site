@@ -1,26 +1,26 @@
-export interface IEducationNationaleRecords {
+export type IEducationNationaleRecords = {
   nhits: number;
   parameters: IEducationNationaleParameters;
   records: IEducationNationaleRecord[];
-}
+};
 
-export interface IEducationNationaleParameters {
+export type IEducationNationaleParameters = {
   dataset: string;
   rows: number;
   start: number;
   format: string;
   timezone: string;
-}
+};
 
-export interface IEducationNationaleRecord {
+export type IEducationNationaleRecord = {
   datasetid: string;
   recordid: string;
   fields: IEducationNationaleFields;
   geometry: IEducationNationaleGeometry;
   record_timestamp: string;
-}
+};
 
-export interface IEducationNationaleFields {
+export type IEducationNationaleFields = {
   adresse_1?: string | null;
   adresse_2?: string | null;
   adresse_3?: string | null;
@@ -90,9 +90,9 @@ export interface IEducationNationaleFields {
   voie_professionnelle?: string | null;
   voie_technologique?: string | null;
   web?: string | null;
-}
+};
 
-export interface IEducationNationaleGeometry {
+export type IEducationNationaleGeometry = {
   type?: string | null;
   coordinates?: number[] | null;
-}
+};

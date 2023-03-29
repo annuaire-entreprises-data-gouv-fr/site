@@ -18,12 +18,12 @@ const generateBatches = (sirets: string[]) => {
   return siretBatches;
 };
 
-interface ISiret2idccResponse {
+type ISiret2idccResponse = {
   siret: string;
   conventions?: IConventionObject[];
-}
+};
 
-interface IConventionObject {
+type IConventionObject = {
   active: boolean;
   title: string;
   shortTitle: string;
@@ -31,7 +31,7 @@ interface IConventionObject {
   num: number;
   etat: 'VIGUEUR' | 'VIGUEUR_ETEN';
   siret?: string;
-}
+};
 
 const clientSiret2Idcc = async (
   sirets: string[]
