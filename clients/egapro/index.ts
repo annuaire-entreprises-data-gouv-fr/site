@@ -3,7 +3,7 @@ import routes from '#clients/routes';
 import { IEgapro } from '#models/egapro';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
-import { DataEntity, EgaproResponse } from './type';
+import { IDataEntity, IEgaproResponse } from './types';
 import { employeesSizeRangeMapping, formatScore } from './utils';
 
 /**
@@ -14,7 +14,7 @@ export const clientEgapro = async (siren: Siren): Promise<IEgapro> => {
   const route = routes.egapro.api;
   const response = await httpGet(route, { params: { q: siren } });
 
-  const data = response.data?.data as EgaproResponse['data'];
+  const data = response.data?.data as IEgaproResponse['data'];
 
   if (!data || !data?.length) {
     throw new HttpNotFound(
@@ -24,7 +24,7 @@ export const clientEgapro = async (siren: Siren): Promise<IEgapro> => {
   return mapToDomainObject(data[0]);
 };
 
-const mapToDomainObject = (egapro: DataEntity) => {
+const mapToDomainObject = (egapro: IDataEntity) => {
   const {
     notes,
     notes_augmentations,
