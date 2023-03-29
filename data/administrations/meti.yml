@@ -16,7 +16,7 @@ apiMonitors:
   - apiName: API Egapro
     datagouv:
       - label: Index de l’égalité professionnelle et représentation équilibrée femmes - hommes
-        link: https://www.data.gouv.fr/fr/datasets/declarations-des-entrepreneurs-de-spectacles-vivants/
+        link: https://www.data.gouv.fr/fr/datasets/index-egalite-professionnelle-f-h-des-entreprises-de-50-salaries-ou-plus
     id: 794017147
     data:
       - Déclaration Egapro
