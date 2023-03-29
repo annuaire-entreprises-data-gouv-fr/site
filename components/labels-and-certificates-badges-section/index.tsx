@@ -7,6 +7,7 @@ export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estEss ||
   uniteLegale.complements.estBio ||
   uniteLegale.complements.egaproRenseignee ||
+  uniteLegale.complements.estOrganismeFormation ||
   uniteLegale.complements.estRge;
 
 export const LabelsAndCertificatesBadgesSection: React.FC<{
@@ -17,6 +18,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     statutEntrepreneurSpectacle,
     estEss,
     estRge,
+    estOrganismeFormation,
     estBio,
     egaproRenseignee,
   } = uniteLegale.complements;

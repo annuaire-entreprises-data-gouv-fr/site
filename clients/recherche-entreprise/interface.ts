@@ -104,6 +104,7 @@ export interface IComplements {
   statut_entrepreneur_spectacle: 'invalide' | 'valide';
   est_bio: boolean;
   est_ess: boolean;
+  est_organisme_formation: boolean;
   est_finess: boolean;
   est_service_public: boolean;
   egapro_renseignee: boolean;
