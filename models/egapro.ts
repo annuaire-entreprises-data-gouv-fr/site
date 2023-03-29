@@ -11,14 +11,14 @@ import { IUniteLegale } from '.';
 export interface IEgapro {
   employeesSizeRange: string;
   scores: {
-    annee?: string;
-    notes?: number;
-    notes_augmentations?: number;
-    notes_augmentations_et_promotions?: number;
-    notes_conges_maternite?: number;
-    notes_hautes_rémunérations?: number;
-    notes_promotions?: number;
-    notes_remunerations?: number;
+    annee: string;
+    notes: number;
+    notes_augmentations: number;
+    notes_augmentations_et_promotions: number;
+    notes_conges_maternite: number;
+    notes_hautes_rémunérations: number;
+    notes_promotions: number;
+    notes_remunerations: number;
   }[];
 }
 

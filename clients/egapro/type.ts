@@ -47,6 +47,13 @@ export type Notes = {
   2020?: number | null;
   2021?: number | null;
   2022?: number | null;
+  2023?: number | null;
+  2024?: number | null;
+  2025?: number | null;
+  2027?: number | null;
+  2028?: number | null;
+  2029?: number | null;
+  2030?: number | null;
 };
 
 export type AllNote = Omit<DataEntity, 'entreprise' | 'label'>;
@@ -64,12 +71,16 @@ export type FormattedScores = {
 };
 
 export type Score = {
-  annee?: string;
-  notes?: number;
-  notes_augmentations?: number;
-  notes_augmentations_et_promotions?: number;
-  notes_conges_maternite?: number;
-  notes_hautes_rémunérations?: number;
-  notes_promotions?: number;
-  notes_remunerations?: number;
+  annee: string;
+  notes: number;
+  notes_augmentations: number;
+  notes_augmentations_et_promotions: number;
+  notes_conges_maternite: number;
+  notes_hautes_rémunérations: number;
+  notes_promotions: number;
+  notes_remunerations: number;
 };
+
+export type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];
