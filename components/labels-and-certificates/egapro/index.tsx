@@ -22,7 +22,6 @@ export const EgaproSection: React.FC<{
     const isNotFound = egapro.errorType === 404;
 
     if (isNotFound) {
-      // @TODO revoir wording
       return (
         <Section title={sectionTitle} sources={[EAdministration.METI]}>
           <p>
