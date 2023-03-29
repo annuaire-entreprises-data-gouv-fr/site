@@ -31,10 +31,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
         </InformationTooltip>
       )}
       {estEss && (
-        <InformationTooltip
-          label="Cette structure appartient au champ de
-        l’Economie Sociale et Solidaire"
-        >
+        <InformationTooltip label="Cette structure appartient au champ de l’Economie Sociale et Solidaire">
           <LabelAndCertificateBadge label="ESS - Entreprise Sociale et Solidaire" />
         </InformationTooltip>
       )}

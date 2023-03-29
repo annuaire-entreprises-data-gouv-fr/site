@@ -118,7 +118,6 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       egapro_renseignee = false,
       est_entrepreneur_individuel = false,
       est_organisme_formation = false,
-      statut_bio = '',
       est_entrepreneur_spectacle = false,
       est_ess = false,
       est_finess = false,
