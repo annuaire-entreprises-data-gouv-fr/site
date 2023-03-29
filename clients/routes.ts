@@ -69,6 +69,10 @@ const routes = {
     tracker: 'https://stats.data.gouv.fr/piwik.php',
   },
   monitoring: 'https://api.uptimerobot.com/v2/getMonitors',
+  egapro: {
+    api: 'https://egapro.travail.gouv.fr/api/search',
+    site: 'https://egapro.travail.gouv.fr',
+  },
   certifications: {
     rge: {
       api: 'https://data.ademe.fr/data-fair/api/v1/datasets/liste-des-entreprises-rge-2/lines/',

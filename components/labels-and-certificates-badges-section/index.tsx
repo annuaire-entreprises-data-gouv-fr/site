@@ -6,6 +6,7 @@ export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estEntrepreneurSpectacle ||
   uniteLegale.complements.estEss ||
   uniteLegale.complements.estBio ||
+  uniteLegale.complements.egaproRenseignee ||
   uniteLegale.complements.estRge;
 
 export const LabelsAndCertificatesBadgesSection: React.FC<{
@@ -17,6 +18,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     estEss,
     estRge,
     estBio,
+    egaproRenseignee,
   } = uniteLegale.complements;
 
   return (
@@ -37,6 +39,11 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       {estRge && (
         <InformationTooltip label="Cette structure est Reconnue Garante de l’Environnement">
           <LabelAndCertificateBadge label="RGE - Reconnu Garant de l’Environnement" />
+        </InformationTooltip>
+      )}
+      {egaproRenseignee && (
+        <InformationTooltip label="Cette structure a renseigné son indice d’égalité entre les femmes et les hommes">
+          <LabelAndCertificateBadge label="Egapro" />
         </InformationTooltip>
       )}
       {estEntrepreneurSpectacle &&

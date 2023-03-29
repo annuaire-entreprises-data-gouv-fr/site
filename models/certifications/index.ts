@@ -1,7 +1,8 @@
 import { IAPINotRespondingError } from '#models/api-not-responding';
+import { getEgapro, IEgapro } from '#models/egapro';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { IUniteLegale } from '..';
-import { getBio } from './bio';
+import { getBio, IEtablissementsBio } from './bio';
 import {
   getEntrepreneurSpectaclesCertification,
   IEntrepreneurSpectaclesCertification,
@@ -10,11 +11,12 @@ import { getRGECertifications, IRGECertification } from './rge';
 
 export interface ICertifications {
   uniteLegale: IUniteLegale;
-  bio: any;
+  bio: IEtablissementsBio | IAPINotRespondingError;
   rge: IRGECertification | IAPINotRespondingError;
   entrepreneurSpectacles:
     | IEntrepreneurSpectaclesCertification
     | IAPINotRespondingError;
+  egapro: IEgapro | IAPINotRespondingError;
 }
 
 export const getCertificationsFromSlug = async (
@@ -22,14 +24,16 @@ export const getCertificationsFromSlug = async (
 ): Promise<ICertifications> => {
   const uniteLegale = await getUniteLegaleFromSlug(slug);
 
-  const [rge, entrepreneurSpectacles, bio] = await Promise.all([
+  const [rge, entrepreneurSpectacles, bio, egapro] = await Promise.all([
     getRGECertifications(uniteLegale),
     getEntrepreneurSpectaclesCertification(uniteLegale),
     getBio(uniteLegale),
+    getEgapro(uniteLegale),
   ]);
 
   return {
     bio,
+    egapro,
     uniteLegale,
     rge,
     entrepreneurSpectacles,
