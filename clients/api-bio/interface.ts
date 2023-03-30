@@ -1,9 +1,9 @@
 export type IBioResponse = {
   nbTotal: string;
-  items: Item[];
+  items: IBioItem[];
 };
 
-export type Item = {
+export type IBioItem = {
   id: number;
   raisonSociale: string;
   denominationcourante: string;
