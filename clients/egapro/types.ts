@@ -1,52 +1,38 @@
 export type IEgaproResponse = {
-  data?: IDataEntity[] | null;
+  data?: IEgaproItem[] | null;
   count: number;
 };
 
-export type IDataEntity = {
-  entreprise: IEntreprise;
-  notes: INotes;
-  notes_remunerations: INotes;
-  notes_augmentations: INotes;
-  notes_promotions: INotes;
-  notes_augmentations_et_promotions: INotes;
-  notes_conges_maternite: INotes;
-  notes_hautes_rémunérations: INotes;
+export type IEgaproItem = {
+  entreprise: {
+    raison_sociale: string;
+    siren: string;
+    région?: string | null;
+    département?: string | null;
+    code_naf: string;
+    ues?: IUes | null;
+    effectif: {
+      tranche: '50:250' | '251:999' | '1000:';
+    };
+  };
+  notes: { [key: string]: number };
+  notes_remunerations: { [key: string]: number };
+  notes_augmentations: { [key: string]: number };
+  notes_promotions: { [key: string]: number };
+  notes_augmentations_et_promotions: { [key: string]: number };
+  notes_conges_maternite: { [key: string]: number };
+  notes_hautes_rémunérations: { [key: string]: number };
   label: string;
-};
-
-export type IEntreprise = {
-  raison_sociale: string;
-  siren: string;
-  région?: string | null;
-  département?: string | null;
-  code_naf: string;
-  ues?: IUes | null;
-  effectif: IEffectif;
 };
 
 export type IUes = {
   nom: string;
-  entreprises?: IEntreprisesEntity[] | null;
-};
-
-export type IEntreprisesEntity = {
-  raison_sociale: string;
-  siren: string;
-};
-
-export type IEffectif = {
-  tranche: ITrancheType;
-};
-
-export type ITrancheType = '50:250' | '251:999' | '1000:';
-
-export type INotes = Record<string, number | null>;
-
-export type IEgaproNote = Omit<IDataEntity, 'entreprise' | 'label'>;
-
-export type IFormattedScores = {
-  [key: string]: IEgaproScore;
+  entreprises?:
+    | {
+        raison_sociale: string;
+        siren: string;
+      }[]
+    | null;
 };
 
 export type IEgaproScore = {

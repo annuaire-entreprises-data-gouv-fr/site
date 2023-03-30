@@ -56,7 +56,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
         )}
         {uniteLegale.complements.estEss && <CertificationESSSection />}
         {uniteLegale.complements.egaproRenseignee && (
-          <EgaproSection uniteLegale={uniteLegale} egapro={egapro} />
+          <EgaproSection egapro={egapro} />
         )}
         {uniteLegale.complements.estEntrepreneurSpectacle && (
           <CertificationsEntrepreneurSpectaclesSection
