@@ -18,7 +18,7 @@ export const clientProfessionnelBio = async (
   const route = routes.certifications.bio.api;
   // siret actually accept both siren and siret
   const response = await httpGet(route, {
-    params: { siret: siren, nb: 100000 },
+    params: { siret: siren, nb: 1500 },
   });
   const data = response.data as IBioResponse;
   if (!data.items || data.items.length === 0) {
