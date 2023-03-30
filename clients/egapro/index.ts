@@ -58,15 +58,17 @@ const mapToDomainObject = (egapro: IEgaproItem) => {
       employeesSizeRangeMapping[egapro.entreprise?.effectif?.tranche || ''],
     years,
     scores: {
-      notes: years.map((y) => notes[y]),
-      augmentations: years.map((y) => notes_augmentations[y]),
+      notes: years.map((y) => notes[y] ?? null),
+      augmentations: years.map((y) => notes_augmentations[y] ?? null),
       augmentationsPromotions: years.map(
-        (y) => notes_augmentations_et_promotions[y]
+        (y) => notes_augmentations_et_promotions[y] ?? null
       ),
-      congesMaternite: years.map((y) => notes_conges_maternite[y]),
-      hautesRemunerations: years.map((y) => notes_hautes_rémunérations[y]),
-      promotions: years.map((y) => notes_promotions[y]),
-      remunerations: years.map((y) => notes_remunerations[y]),
+      congesMaternite: years.map((y) => notes_conges_maternite[y] ?? null),
+      hautesRemunerations: years.map(
+        (y) => notes_hautes_rémunérations[y] ?? null
+      ),
+      promotions: years.map((y) => notes_promotions[y] ?? null),
+      remunerations: years.map((y) => notes_remunerations[y] ?? null),
     },
   };
 };

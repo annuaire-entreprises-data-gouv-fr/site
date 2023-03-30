@@ -75,7 +75,7 @@ export const FilterStructure: React.FC<{
         />
         &nbsp;
         <LabelAndCertificateBadge
-          label="Professionnel du Bio"
+          label="Professionnels du Bio"
           isSelected={labelSelected === 'bio'}
           small
           onClick={() => setLabelSelected('bio')}
@@ -103,7 +103,7 @@ export const FilterStructure: React.FC<{
         />
         &nbsp;
         <LabelAndCertificateBadge
-          label="Egapro"
+          label="Index Egapro"
           isSelected={labelSelected === 'egapro'}
           small
           onClick={() => setLabelSelected('egapro')}

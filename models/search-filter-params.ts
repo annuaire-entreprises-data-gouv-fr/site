@@ -181,7 +181,9 @@ class SearchFilterParams {
     const structureLabels = {
       ess: 'Label : ESS',
       rge: 'Label : RGE',
-      esv: 'Label : entrepreneur de spectacle vivant',
+      esv: 'Label : Entrepreneur de spectacle vivant',
+      bio: 'Label : Professionnels du bio',
+      egapro: 'Label : Index Egapro',
       ei: 'Type : Entreprise Individuelle ',
       ct: 'Type : Collectivité territoriale ',
       sp: 'Type : Service public ',
