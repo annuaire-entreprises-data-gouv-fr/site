@@ -72,6 +72,11 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
+                  <a className="fr-footer__top-link" href="/budget">
+                    Budget
+                  </a>
+                </li>
+                <li>
                   <a
                     className="fr-footer__top-link"
                     target="_blank"

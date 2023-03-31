@@ -18,10 +18,8 @@ const Budget: NextPageWithLayout = () => (
       <h2>Principes</h2>
       <p>
         Nous suivons{' '}
-        <a href="https://beta.gouv.fr/approche/manifeste">
-          le manifeste beta.gouv
-        </a>{' '}
-        dont nous rappelons les principes ici :
+        <a href="https://beta.gouv.fr/manifeste">le manifeste beta.gouv</a> dont
+        nous rappelons les principes ici :
       </p>
       <div className="fr-highlight">
         <ul>
@@ -36,16 +34,40 @@ const Budget: NextPageWithLayout = () => (
         </ul>
       </div>
       <h2>Budget consommé</h2>
+      <p>Répartition des sources de financements :</p>
+      <ul>
+        <li>
+          <b>2021</b> : le projet est une experimentation financée à 100% par la{' '}
+          <a href="https://numerique.gouv.fr/" target="_blank" rel="noopener">
+            Direction Interministérielle du Numérique (DINUM)
+          </a>
+        </li>
+        <li>
+          <b>2022</b> : la DINUM continue d’assurer le financement du projet. Le
+          projet bénéficie également du programme{' '}
+          <a
+            href="https://france-relance.transformation.gouv.fr/"
+            target="_blank"
+            rel="noopener"
+          >
+            France Relance
+          </a>{' '}
+          à hauteur de 145 536 €.
+        </li>
+      </ul>
+      <p>Répartition des dépenses effectuées :</p>
       <FullTable
-        head={['Poste de dépense', '2021', '2022', '2023 (projection)']}
+        head={['Poste de dépense', '2021', '2022']}
         body={[
-          ['Développement', '', ''],
-          ['Déploiement', '', ''],
-          ['Design', '', ''],
-          ['Hébergement & infrastructure', '', ''],
-          [<b>Total TTC</b>, '', ''],
+          ['Développement', '165 000 €', '133 000 €'],
+          ['Déploiement', '5 000 €', '54 000 €'],
+          ['Design', '25 000 €', '17 000 €'],
+          ['Logiciels', '-', '12 000 €'],
+          ['Hébergement', '1000 €', '3000 €'],
+          [<b>Total TTC</b>, <b>196 000 €</b>, <b>219 000 €</b>],
         ]}
       ></FullTable>
+      <br />
       <Info>
         <b>À propos de la TVA</b>
         <p>
