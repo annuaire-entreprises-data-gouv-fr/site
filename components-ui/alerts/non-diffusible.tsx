@@ -1,7 +1,7 @@
-import Warning from './warning';
+import Info from './info';
 
 const NonDiffusibleAlert = () => (
-  <Warning full>
+  <Info full>
     Cette structure est non-diffusible. Cela signifie que certaines informations
     ne sont pas publiquement accessibles.
     <br />
@@ -9,6 +9,6 @@ const NonDiffusibleAlert = () => (
     <a href="https://statut-diffusion-sirene.insee.fr/">
       vous pouvez en faire la demande sur le site de l’Insee.
     </a>
-  </Warning>
+  </Info>
 );
 export default NonDiffusibleAlert;
