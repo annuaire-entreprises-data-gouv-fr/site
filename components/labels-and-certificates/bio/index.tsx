@@ -1,6 +1,7 @@
 import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
+import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { Section } from '#components/section';
@@ -88,9 +89,9 @@ export const CertificationsBioSection: React.FC<{
       <FullTable
         head={[
           'Détail établissement',
-          'Annuaire professionnels Bio',
           'Statut certification',
           'Certificat',
+          'Annuaire professionnels Bio',
         ]}
         body={bio.etablissementsBio.map(
           ({
@@ -113,9 +114,6 @@ export const CertificationsBioSection: React.FC<{
               )}
               {adresse && <div>{adresse}</div>}
             </>,
-            <a href={`${routes.certifications.bio.entreprise}${numeroBio}`}>
-              →&nbsp;consulter
-            </a>,
             <>
               {getCertificationDate(certificat)}
               {certificat.organization && (
@@ -124,13 +122,29 @@ export const CertificationsBioSection: React.FC<{
             </>,
             <>
               {certificat.url ? (
-                <ButtonLink target="_blank" to={certificat.url} alt small>
-                  ⇢&nbsp;Consulter
-                </ButtonLink>
+                <a
+                  target="_blank"
+                  rel="noreferre noopener"
+                  href={certificat.url}
+                >
+                  <Icon slug="file" color="black">
+                    certificat
+                  </Icon>
+                </a>
               ) : (
                 ''
               )}
             </>,
+            <div className="layout-right">
+              <ButtonLink
+                target="_blank"
+                alt
+                small
+                to={`${routes.certifications.bio.entreprise}${numeroBio}`}
+              >
+                →&nbsp;consulter
+              </ButtonLink>
+            </div>,
           ]
         )}
       />

@@ -10,16 +10,16 @@ import { IUniteLegale } from '.';
 
 export interface IEgapro {
   employeesSizeRange: string;
+  years: string[];
   scores: {
-    annee: string | null;
-    notes: number | null;
-    notes_augmentations: number | null;
-    notes_augmentations_et_promotions: number | null;
-    notes_conges_maternite: number | null;
-    notes_hautes_rémunérations: number | null;
-    notes_promotions: number | null;
-    notes_remunerations: number | null;
-  }[];
+    notes: number[];
+    augmentations: number[];
+    augmentationsPromotions: number[];
+    congesMaternite: number[];
+    hautesRemunerations: number[];
+    promotions: number[];
+    remunerations: number[];
+  };
 }
 
 export const getEgapro = async (

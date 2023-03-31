@@ -43,7 +43,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       )}
       {egaproRenseignee && (
         <InformationTooltip label="Cette structure a renseigné son indice d’égalité entre les femmes et les hommes">
-          <LabelAndCertificateBadge label="Egapro" />
+          <LabelAndCertificateBadge label="Index Egapro" />
         </InformationTooltip>
       )}
       {estEntrepreneurSpectacle &&

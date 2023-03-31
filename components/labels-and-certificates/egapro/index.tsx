@@ -9,13 +9,10 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IEgapro } from '#models/egapro';
-import { IUniteLegale } from '#models/index';
-import { getNomComplet } from '#models/statut-diffusion';
 
 export const EgaproSection: React.FC<{
-  uniteLegale: IUniteLegale;
   egapro: IEgapro | IAPINotRespondingError;
-}> = ({ uniteLegale, egapro }) => {
+}> = ({ egapro }) => {
   const sectionTitle = `Égalité professionnelle - Egapro`;
 
   if (isAPINotResponding(egapro)) {
@@ -41,30 +38,15 @@ export const EgaproSection: React.FC<{
   }
 
   const body = [
-    ['Index Egapro', ...egapro.scores.map((score) => score.notes || 'NC')],
-    [
-      'Écart rémunérations',
-      ...egapro.scores.map((score) => score.notes_remunerations || 'NC'),
-    ],
-    [
-      "Écart taux d'augmentation",
-      ...egapro.scores.map((score) => score.notes_augmentations || 'NC'),
-    ],
-    [
-      'Écart taux promotion',
-      ...egapro.scores.map((score) => score.notes_promotions || 'NC'),
-    ],
-    [
-      'Hautes rémunérations',
-      ...egapro.scores.map((score) => score.notes_hautes_rémunérations || 'NC'),
-    ],
-    [
-      'Retour congé maternité',
-      ...egapro.scores.map((score) => score.notes_conges_maternite || 'NC'),
-    ],
+    ['Index Egapro', ...egapro.scores.notes],
+    ['Écart rémunérations', ...egapro.scores.remunerations],
+    ["Écart taux d'augmentation", ...egapro.scores.augmentations],
+    ['Écart taux promotion', ...egapro.scores.promotions],
+    ['Hautes rémunérations', ...egapro.scores.hautesRemunerations],
+    ['Retour congé maternité', ...egapro.scores.congesMaternite],
   ];
 
-  const plural = egapro.scores.length > 0;
+  const plural = egapro.years.length > 0;
 
   return (
     <div id="entreprise">
@@ -74,15 +56,8 @@ export const EgaproSection: React.FC<{
           {plural ? 'plusieurs' : 'une'} déclaration{plural} d’égalité entre les
           hommes et les femmes.
         </p>
-        <FullTable
-          head={[
-            'Indicateurs',
-            ...egapro.scores.map((score) => score.annee as string),
-          ]}
-          body={body}
-        />
+        <FullTable head={['Indicateurs', ...egapro.years]} body={body} />
       </Section>
-      <HorizontalSeparator />
     </div>
   );
 };

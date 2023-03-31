@@ -51,17 +51,18 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
             certificationsRGE={rge}
           />
         )}
-        {uniteLegale.complements.estBio && (
-          <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
-        )}
         {uniteLegale.complements.estEss && <CertificationESSSection />}
         {uniteLegale.complements.egaproRenseignee && (
-          <EgaproSection uniteLegale={uniteLegale} egapro={egapro} />
+          <EgaproSection egapro={egapro} />
         )}
         {uniteLegale.complements.estEntrepreneurSpectacle && (
           <CertificationsEntrepreneurSpectaclesSection
             entrepreneurSpectacles={entrepreneurSpectacles}
           />
+        )}
+        {/* Can be quite long  */}
+        {uniteLegale.complements.estBio && (
+          <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
         )}
       </div>
     </>
