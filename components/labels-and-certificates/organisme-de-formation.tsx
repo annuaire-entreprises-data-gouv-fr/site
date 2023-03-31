@@ -1,17 +1,12 @@
 import { Section } from '#components/section';
 import { EAdministration } from '#models/administrations';
 
-export const OrganismeDeFormation = () => (
+export const OrganismeDeFormationSection = () => (
   <Section
-    title="Organisme de formation"
-    sources={[EAdministration.DINUM, EAdministration.METI]}
+    title="Qualiopi - Organisme de formation"
+    sources={[EAdministration.METI]}
   >
-    {/* TEST SHOULD UPDATE ORDING */}
-    Cette structure est un organisme de formation
-    <div>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet possimus,
-      earum obcaecati explicabo maxime nemo minus expedita, commodi eaque sint
-      nostrum doloribus corrupti soluta ad esse recusandae id. Eveniet, fuga?
-    </div>
+    Cette structure est certifiée Qualiopi. Cela signifie que c’est un organisme
+    qui dispense des formations pouvant obtenir un financement public.
   </Section>
 );

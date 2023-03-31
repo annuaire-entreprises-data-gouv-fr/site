@@ -97,9 +97,9 @@ export const FilterStructure: React.FC<{
         &nbsp;
         <LabelAndCertificateBadge
           label="Organisme de formation"
-          isSelected={labelSelected === 'estOrganismeFormation'}
+          isSelected={labelSelected === 'qualiopi'}
           small
-          onClick={() => setLabelSelected('estOrganismeFormation')}
+          onClick={() => setLabelSelected('qualiopi')}
         />
         &nbsp;
         <LabelAndCertificateBadge

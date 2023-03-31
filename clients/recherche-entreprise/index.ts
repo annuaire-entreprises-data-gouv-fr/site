@@ -1,4 +1,3 @@
-import { stat } from 'fs';
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { etatFromEtatAdministratifInsee } from '#clients/sirene-insee/helpers';
