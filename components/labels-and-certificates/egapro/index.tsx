@@ -58,7 +58,6 @@ export const EgaproSection: React.FC<{
         </p>
         <FullTable head={['Indicateurs', ...egapro.years]} body={body} />
       </Section>
-      <HorizontalSeparator />
     </div>
   );
 };
