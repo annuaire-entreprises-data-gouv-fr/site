@@ -101,16 +101,14 @@ export const CertificationsRGESection: React.FC<{
         <a href="/faq/reconnu-garant-environnement">→ En savoir plus</a>
       </FAQLink>
       .
-      <p>
-        {linkFranceRenov && (
-          <>
-            Vous pouvez consulter{' '}
-            <a href={linkFranceRenov} target="_blank" rel="noreferrer noopener">
-              sa fiche sur le site France Renov.
-            </a>
-          </>
-        )}
-      </p>
+      {linkFranceRenov && (
+        <p>
+          Vous pouvez consulter{' '}
+          <a href={linkFranceRenov} target="_blank" rel="noreferrer noopener">
+            sa fiche sur le site France Renov.
+          </a>
+        </p>
+      )}
       <TwoColumnTable body={data} />
       <p>
         Cette structure possède <b>{certificationsRGE.certifications.length}</b>{' '}

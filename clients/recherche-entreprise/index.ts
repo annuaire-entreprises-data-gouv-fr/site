@@ -1,3 +1,4 @@
+import { stat } from 'fs';
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { etatFromEtatAdministratifInsee } from '#clients/sirene-insee/helpers';
@@ -70,7 +71,7 @@ const clientSearchRechercheEntreprise = async ({
     throw new NotEnoughParamsException('');
   }
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3&inclure_etablissements=${inclureEtablissements}${
+  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3&inclure_slug=true&inclure_etablissements=${inclureEtablissements}${
     searchFilterParams?.toApiURI() || ''
   }`;
 
@@ -112,16 +113,18 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     siege,
     dirigeants,
     complements: {
-      est_entrepreneur_individuel = false,
-      identifiant_association = null,
       collectivite_territoriale = null,
-      est_ess = false,
+      est_bio = false,
+      egapro_renseignee = false,
+      est_entrepreneur_individuel = false,
       est_entrepreneur_spectacle = false,
-      statut_entrepreneur_spectacle = '',
+      est_ess = false,
       est_finess = false,
-      est_service_public = false,
       est_rge = false,
+      est_service_public = false,
       est_uai = false,
+      identifiant_association = null,
+      statut_entrepreneur_spectacle = '',
     },
     matching_etablissements,
     categorie_entreprise,
@@ -181,12 +184,14 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     ),
     dirigeants: dirigeants.map(mapToDirigeantModel),
     complements: {
+      estBio: est_bio,
       estEss: est_ess,
       estServicePublic: est_service_public,
       estEntrepreneurIndividuel: est_entrepreneur_individuel,
       estEntrepreneurSpectacle: est_entrepreneur_spectacle,
       statutEntrepreneurSpectacle: statut_entrepreneur_spectacle,
       estFiness: est_finess,
+      egaproRenseignee: egapro_renseignee,
       estRge: est_rge,
       estUai: est_uai,
     },
@@ -253,6 +258,7 @@ const mapToEtablissement = (
     latitude = '0',
     longitude = '0',
     commune = '',
+    libelle_commune = '',
     adresse,
     liste_enseignes,
     etat_administratif,
@@ -280,6 +286,7 @@ const mapToEtablissement = (
     siret: verifySiret(siret),
     adresse,
     codePostal: commune,
+    commune: libelle_commune,
     adressePostale,
     latitude,
     longitude,

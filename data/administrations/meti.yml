@@ -1,7 +1,7 @@
 slug: meti
 short: METI
 site: https://travail-emploi.gouv.fr/
-long: Ministère du Travail de l’Emploi et de l’Insertion (METI)
+long: Ministère du Travail, du Plein emploi et de l'Insertion (METI)
 contact: https://travail-emploi.gouv.fr/ministere/article/nous-contacter
 apiMonitors:
   - apiName: API Conventions Collectives
@@ -13,5 +13,12 @@ apiMonitors:
     data:
       - Convention collective
       - N° IDCC
+  - apiName: API Egapro
+    datagouv:
+      - label: Index de l’égalité professionnelle et représentation équilibrée femmes - hommes
+        link: https://www.data.gouv.fr/fr/datasets/index-egalite-professionnelle-f-h-des-entreprises-de-50-salaries-ou-plus
+    id: 794017147
+    data:
+      - Déclaration Egapro
 description: |
   Le ministère du travail publie toutes les conventions collectives enregistrées à la maille SIRET.

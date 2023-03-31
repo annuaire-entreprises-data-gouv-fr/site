@@ -81,6 +81,7 @@ export interface IMatchingEtablissement {
   activite_principale: string;
   adresse: string;
   commune: string;
+  libelle_commune: string;
   est_siege: boolean;
   etat_administratif: string;
   geo_id: string;
@@ -101,9 +102,11 @@ export interface IComplements {
   est_entrepreneur_individuel: boolean;
   est_entrepreneur_spectacle: boolean;
   statut_entrepreneur_spectacle: 'invalide' | 'valide';
+  est_bio: boolean;
   est_ess: boolean;
   est_finess: boolean;
   est_service_public: boolean;
+  egapro_renseignee: boolean;
   est_rge: boolean;
   est_uai: boolean;
   identifiant_association: string;

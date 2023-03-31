@@ -86,10 +86,13 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
       shortcuts: [
         {
           url: `/justificatif/${uniteLegale.siren}`,
-          label: isAssociation(uniteLegale)
-            ? 'Annonce de création'
-            : 'Extrait d’immatriculation',
-          hide: isServicePublic(uniteLegale),
+          label: 'Extrait d’immatriculation',
+          hide: isServicePublic(uniteLegale) || isAssociation(uniteLegale),
+        },
+        {
+          url: `/justificatif/${uniteLegale.siren}`,
+          label: 'Annonce de création',
+          hide: isServicePublic(uniteLegale) || !isAssociation(uniteLegale),
         },
         {
           url: `/justificatif/${uniteLegale.siren}#insee`,
@@ -98,7 +101,7 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
       ],
     },
     {
-      title: 'Tribunaux de commerce',
+      title: 'Entreprise Commerciale',
       shortcuts: [
         {
           url: `/dirigeants/${uniteLegale.siren}#beneficiaires`,

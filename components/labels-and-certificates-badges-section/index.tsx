@@ -5,6 +5,8 @@ import { IUniteLegale } from '../../models';
 export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estEntrepreneurSpectacle ||
   uniteLegale.complements.estEss ||
+  uniteLegale.complements.estBio ||
+  uniteLegale.complements.egaproRenseignee ||
   uniteLegale.complements.estRge;
 
 export const LabelsAndCertificatesBadgesSection: React.FC<{
@@ -12,13 +14,20 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
 }> = ({ uniteLegale }) => {
   const {
     estEntrepreneurSpectacle,
+    statutEntrepreneurSpectacle,
     estEss,
     estRge,
-    statutEntrepreneurSpectacle,
+    estBio,
+    egaproRenseignee,
   } = uniteLegale.complements;
 
   return (
     <>
+      {estBio && (
+        <InformationTooltip label="Cette structure est un professionnel du Bio">
+          <LabelAndCertificateBadge label="Professionnel du Bio" />
+        </InformationTooltip>
+      )}
       {estEss && (
         <InformationTooltip
           label="Cette structure appartient au champ de
@@ -30,6 +39,11 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       {estRge && (
         <InformationTooltip label="Cette structure est Reconnue Garante de l’Environnement">
           <LabelAndCertificateBadge label="RGE - Reconnu Garant de l’Environnement" />
+        </InformationTooltip>
+      )}
+      {egaproRenseignee && (
+        <InformationTooltip label="Cette structure a renseigné son indice d’égalité entre les femmes et les hommes">
+          <LabelAndCertificateBadge label="Egapro" />
         </InformationTooltip>
       )}
       {estEntrepreneurSpectacle &&

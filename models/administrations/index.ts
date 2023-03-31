@@ -1,5 +1,6 @@
 export enum EAdministration {
   EDUCATION_NATIONALE = 'education-nationale',
+  AGENCE_BIO = 'agence-bio',
   ADEME = 'ademe',
   DILA = 'dila',
   DINUM = 'dinum',

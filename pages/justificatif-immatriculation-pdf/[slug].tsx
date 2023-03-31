@@ -100,13 +100,17 @@ const InpiPDF: NextPageWithLayout<IProps> = ({ siren, metadata }) => {
             </>,
             <>
               <b>Statut du téléchargement :</b>
-              <Tag color="error">échec</Tag>
+              <Tag color="error">échec</Tag> (
+              <a target="_blank" rel="noreferrer noopener" href={downloadLink}>
+                cliquez ici pour relancer un téléchargement direct
+              </a>
+              )
               <p>
                 Le téléchargement a échoué car le téléservice de l’
                 <INPI /> est actuellement indisponible.{' '}
                 <b>Nous sommes désolé pour ce désagrément</b>.<br />
-                Vous pouvez soit relancer le téléchargement, soit réessayer à un
-                autre moment :
+                Vous pouvez relancer le téléchargement ou bien réessayer plus
+                tard&nbsp;:
               </p>
               <div className="layout-center">
                 <Retry />
