@@ -1,5 +1,6 @@
 import React from 'react';
 import AvisSituationLink from '#components/avis-situation-link';
+import constants from '#models/constants';
 import { IUniteLegale, isAssociation } from '#models/index';
 import AssociationCreationNotFoundAlert from './association-creation-not-found-alert';
 import Warning from './warning';
@@ -21,7 +22,7 @@ const ImmatriculationNotFoundAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
           <li>
             Si cette structure est une <b>entreprise</b> (commerciale,
             artisanale, agricole, ou entreprise individuelle),{' '}
-            <a href="http://data.inpi.fr/">contactez l’INPI</a>. En effet,
+            <a href={constants.links.mailtoInpi}>contactez l’INPI</a>. En effet,
             l’INPI tient le Registre National des Entreprises (RNE), dans lequel{' '}
             <b>l’entreprise doit apparaître</b>.
           </li>
