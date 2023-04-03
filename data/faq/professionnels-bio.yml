@@ -1,6 +1,6 @@
 administrations:
   - agence-bio
-targets:
+targets: # no targets
 title: Que signifie le label “Professionnel du Bio” ?
 body: |
   Le label “Professionnel du bio” concerne les structures certifiées bio selon la classification de l’[Agence Bio](https://annuaire.agencebio.org).
