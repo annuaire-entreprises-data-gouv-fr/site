@@ -73,7 +73,7 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
             <br />
             Un téléchargement normal prend <b>entre 10 et 20 secondes</b>.{' '}
             <br />
-            Mais quand le service est surchargé, cle téléchargement peut
+            Mais quand le service est surchargé, le téléchargement peut
             atteindre plusieurs minutes <b>voire même échouer</b>.
           </Info>
           <p>
