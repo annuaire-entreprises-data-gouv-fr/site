@@ -41,6 +41,7 @@ const Budget: NextPageWithLayout = () => (
           <a href="https://numerique.gouv.fr/" target="_blank" rel="noopener">
             Direction Interministérielle du Numérique (DINUM)
           </a>
+          .
         </li>
         <li>
           <b>2022</b> : la DINUM continue d’assurer le financement du projet. Le
