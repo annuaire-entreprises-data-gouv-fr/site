@@ -1,4 +1,5 @@
 import React from 'react';
+import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { Section } from '#components/section';
@@ -14,8 +15,30 @@ const CollectiviteTerritorialeSection: React.FC<{
   } = uniteLegale;
 
   const data = [
-    ['Code Insee', codeInsee],
-    ['Type', niveau],
+    [
+      <FAQLink
+        to="https://www.insee.fr/fr/information/2560452"
+        tooltipLabel="Code Insee"
+      >
+        Le Code Insee ou Code Officiel Géographique (COG) est utilisé par
+        l’Insee pour désigner une commune
+      </FAQLink>,
+      codeInsee,
+    ],
+    [
+      'Type',
+      niveau === 'particulier' ? (
+        <FAQLink
+          to="https://www.insee.fr/fr/information/3528272"
+          tooltipLabel={niveau}
+        >
+          {uniteLegale.nomComplet} est une collectivité territoriale à statut
+          particulier
+        </FAQLink>
+      ) : (
+        niveau
+      ),
+    ],
     [
       'Élus',
       elus.length > 0 ? (

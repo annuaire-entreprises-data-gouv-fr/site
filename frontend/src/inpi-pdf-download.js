@@ -90,7 +90,7 @@ async function downloadInpiPDF() {
 
         // third try
         if (res2 === 500) {
-          await wait(3 * 1000);
+          await wait(50 * 1000);
 
           console.info('third attempt');
           const res3 = await download(url, siren);

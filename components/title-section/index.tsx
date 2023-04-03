@@ -1,12 +1,14 @@
 import React from 'react';
 import AssociationAdressAlert from '#components-ui/alerts/association-adress';
 import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
+import NonDiffusibleAlert from '#components-ui/alerts/non-diffusible';
 import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { PrintNever } from '#components-ui/print-visibility';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
+import { NonDiffusibleSection } from '#components/non-diffusible';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
 import constants from '#models/constants';
@@ -15,7 +17,11 @@ import {
   isCollectiviteTerritoriale,
   IUniteLegale,
 } from '#models/index';
-import { estNonDiffusible, getNomComplet } from '#models/statut-diffusion';
+import {
+  estDiffusible,
+  estNonDiffusible,
+  getNomComplet,
+} from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
 import { ISession, isLoggedIn } from '#utils/session';
 
@@ -224,6 +230,7 @@ const Title: React.FC<IProps> = ({
 }) => (
   <div className="header-section">
     <div className="title">
+      {!estDiffusible(uniteLegale) && <NonDiffusibleAlert />}
       <MultipleSirenAlert uniteLegale={uniteLegale} />
       {isAssociation(uniteLegale) && (
         <AssociationAdressAlert uniteLegale={uniteLegale} />

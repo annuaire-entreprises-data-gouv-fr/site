@@ -7,12 +7,13 @@ import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';
 import FrontStateMachine from '#components/front-state-machine';
 import Meta from '#components/meta';
+import { Section } from '#components/section';
+import { TwoColumnTable } from '#components/table/simple';
+import { EAdministration } from '#models/administrations';
+import constants from '#models/constants';
 import { formatIntFr } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
-import {
-  IPropsWithMetadata,
-  postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+import { postServerSideProps } from '#utils/server-side-props-helper/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
 const Retry: React.FC<{}> = () => (
@@ -46,11 +47,7 @@ const Retry: React.FC<{}> = () => (
   </>
 );
 
-interface IProps extends IPropsWithMetadata {
-  siren: string;
-}
-
-const InpiPDF: NextPageWithLayout<IProps> = ({ siren, metadata }) => {
+const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
   const downloadLink = `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`;
   return (
     <>
@@ -64,108 +61,100 @@ const InpiPDF: NextPageWithLayout<IProps> = ({ siren, metadata }) => {
       </a>
       <div className="content-container">
         <h1>Téléchargement du justificatif d’immatriculation</h1>
-        <p>
-          Le téléchargement du justificatif d’immatriculation ou “extrait{' '}
-          <INPI />” a commencé pour le siren {formatIntFr(siren)}.
-        </p>
-        <FrontStateMachine
-          id="immatriculation-pdf-status-wrapper"
-          states={[
-            <>
-              <b>Statut du téléchargement :</b>{' '}
-              <i>
-                le téléchargement va commencer... (si il ne démarre pas,{' '}
-                <a
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  href={downloadLink}
-                >
-                  cliquez ici
-                </a>
-                )
-              </i>
-            </>,
-            <>
-              <b>Statut du téléchargement :</b>
-              <Tag>
-                <Loader /> téléchargement en cours
-              </Tag>
-              <span style={{ color: '#777', fontWeight: 'bold' }}>
-                (temps estimé entre 10 secondes et 1 minute)
-              </span>
-            </>,
-            <>
-              <b>Statut du téléchargement :</b>
-              <Tag color="success">succés</Tag>
-            </>,
-            <>
-              <b>Statut du téléchargement :</b>
-              <Tag color="error">échec</Tag> (
-              <a target="_blank" rel="noreferrer noopener" href={downloadLink}>
-                cliquez ici pour relancer un téléchargement direct
-              </a>
-              )
-              <p>
-                Le téléchargement a échoué car le téléservice de l’
-                <INPI /> est actuellement indisponible.{' '}
-                <b>Nous sommes désolé pour ce désagrément</b>.<br />
-                Vous pouvez relancer le téléchargement ou bien réessayer plus
-                tard&nbsp;:
-              </p>
-              <div className="layout-center">
-                <Retry />
-              </div>
-            </>,
-            <>
-              <b>Statut du téléchargement :</b>
-              <Tag color="error">introuvable</Tag>
-              <p>
-                Le document que vous recherchez n’a pas été retrouvé dans les
-                systèmes informatique de l’
-                <INPI />. Cette structure n’est donc vraisemblablement{' '}
-                <b>pas enregistrée</b> au Registre National des Entreprises
-                (RNE).
-              </p>
-            </>,
-          ]}
-        />
-        <br />
-        <Info>
-          L’Annuaire des Entreprises ne permet pas de télécharger le PDF
-          complet.
-          <br />
-          <br />
-          Le PDF qui est en cours de téléchargement est donc la version
-          publique,{' '}
-          <b>privée des informations personnelles et des observations</b>.
-        </Info>
-        <br />
-        Si les informations du PDF public ne vous suffisent pas, vous pouvez
-        toujours accéder au PDF complet&nbsp;:
-        <ol>
-          <li>
-            Créez-vous un compte sur{' '}
-            <a href={routes.rne.portail.account}>data.inpi.fr</a>
-          </li>
-          <li>
-            <b>Authentifiez-vous</b>
-          </li>
-          <li>
-            Rendez-vous{' '}
-            <a
-              target="_blank"
-              rel="noreferrer noopener"
-              href={routes.rne.portail.entreprise + siren}
-            >
-              sur la fiche INPI
-            </a>{' '}
-            de cette entreprise
-          </li>
-          <li>
-            Lancez-le téléchargement en cliquant sur l’icone télécharger{' '}
-            <b>en haut à droite</b> de la fiche
-          </li>
-        </ol>
+
+        <Section
+          title="Justificatif d’immatriculation au RNE"
+          sources={[EAdministration.INPI]}
+        >
+          <Info full>
+            Le téléservice de l’
+            <INPI /> peut malheureusement être victime de son succés et avoir{' '}
+            <b>du mal à répondre à toutes les demandes</b> de document.
+            <br />
+            Un téléchargement normal prend <b>entre 10 et 20 secondes</b>.{' '}
+            <br />
+            Mais quand le service est surchargé, cle téléchargement peut
+            atteindre plusieurs minutes <b>voire même échouer</b>.
+          </Info>
+          <p>
+            Le téléchargement de l’extrait d’immatriculation au Répertoire
+            National des Entreprises (RNE) a commencé pour le siren{' '}
+            <a href={`/entreprise/${siren}`}>{formatIntFr(siren)}</a>.
+          </p>
+          <TwoColumnTable
+            body={[
+              [
+                'Statut du téléchargement',
+                <FrontStateMachine
+                  id="immatriculation-pdf-status-wrapper"
+                  states={[
+                    <i>
+                      le téléchargement va commencer... (si il ne démarre pas,{' '}
+                      <a
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        href={downloadLink}
+                      >
+                        cliquez ici
+                      </a>
+                      )
+                    </i>,
+                    <>
+                      <Tag>
+                        <Loader /> téléchargement en cours
+                      </Tag>
+                      <span style={{ color: '#777', fontWeight: 'bold' }}>
+                        (temps estimé entre 10 secondes et 2 minute)
+                      </span>
+                    </>,
+                    <>
+                      <Tag color="success">succés</Tag>
+                    </>,
+                    <>
+                      <Tag color="error">échec</Tag>
+                      <p>
+                        Le téléchargement a échoué car le téléservice de l’
+                        <INPI /> ne fonctionne pas actuellement.{' '}
+                        <b>Nous sommes désolé pour ce désagrément</b>.
+                      </p>
+                      <a
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        href={downloadLink}
+                      >
+                        Cliquez ici pour ré-essayer de télécharger le document
+                      </a>
+                    </>,
+                    <>
+                      <Tag color="error">introuvable</Tag>
+                      <p>
+                        Le document que vous recherchez n’a pas été retrouvé par
+                        le téléservice de l’
+                        <INPI />.
+                      </p>
+                      <p>
+                        Il arrive que certaines structures soient correctement
+                        immatriculées mais que le document justificatif soit{' '}
+                        <b>introuvable</b>.
+                      </p>
+                      <p>
+                        Quand c’est le cas,{' '}
+                        <a href={constants.links.mailtoInpi}>
+                          écrivez à l’INPI pour leur demander le document.
+                        </a>{' '}
+                        L’
+                        <INPI /> étant à la fois l’opérateur du Registre
+                        National des Entreprises (RNE) et du téléservice qui
+                        produit les justificatifs, eux seuls sont en mesure de
+                        résoudre le problème.
+                      </p>
+                    </>,
+                  ]}
+                />,
+              ],
+            ]}
+          />
+        </Section>
       </div>
     </>
   );
