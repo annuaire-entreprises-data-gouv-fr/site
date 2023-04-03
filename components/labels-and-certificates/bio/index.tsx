@@ -1,6 +1,7 @@
 import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
+import FAQLink from '#components-ui/faq-link';
 import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
@@ -44,6 +45,16 @@ const getCertificationDate = (certificat: IBioCertification) => {
   return status ? mapping[status] : 'Non renseigné';
 };
 
+const FAQBio = ({ label = 'certification Bio' }) => (
+  <FAQLink tooltipLabel={label}>
+    Le label “Professionnel du bio” concerne les entreprises dont tout ou partie
+    de leur activité est certifiée Bio par des organismes certificateurs,
+    encadrés par l’Agence Bio.
+    <br />
+    <a href="/faq/professionnels-bio">→ En savoir plus</a>
+  </FAQLink>
+);
+
 export const CertificationsBioSection: React.FC<{
   uniteLegale: IUniteLegale;
   bio: IEtablissementsBio | IAPINotRespondingError;
@@ -54,10 +65,7 @@ export const CertificationsBioSection: React.FC<{
     if (bio.errorType === 404) {
       return (
         <Section title={sectionTitle} sources={[EAdministration.AGENCE_BIO]}>
-          <p>
-            Nous n’avons pas retrouvé de certification Bio pourrez cette
-            structure.
-          </p>
+          Nous n’avons pas retrouvé de <FAQBio /> pour cette structure.
           <p>
             Vous pourrez peut-être les trouver sur le{' '}
             <a
@@ -84,14 +92,15 @@ export const CertificationsBioSection: React.FC<{
       />
     );
   }
-  const plural = bio.etablissementsBio.length > 0 ? 's' : '';
+  const plural = bio.etablissementsBio.length > 1 ? 's' : '';
 
   return (
     <Section title={sectionTitle} sources={[EAdministration.AGENCE_BIO]}>
-      <p>
-        Cette structure possède {bio.etablissementsBio.length} établissement
-        {plural} certifié{plural} professionnel{plural} du Bio&nbsp;:
-      </p>
+      Cette structure possède {bio.etablissementsBio.length} établissement
+      {plural} <FAQBio label={`certifié${plural} “Professionnel du Bio”`} />{' '}
+      &nbsp;:
+      <br />
+      <br />
       <FullTable
         head={[
           'Détail établissement',

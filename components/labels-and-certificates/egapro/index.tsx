@@ -1,5 +1,5 @@
 import React from 'react';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import FAQLink from '#components-ui/faq-link';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
@@ -9,6 +9,17 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IEgapro } from '#models/egapro';
+
+const FAQEgapro = () => (
+  <FAQLink
+    tooltipLabel={`index d’égalité professionnelle entre les femmes et les hommes.`}
+  >
+    L’Index Egapro permet de mesurer l’égalité professionnelle entre les femmes
+    et les hommes dans les entreprises de plus de 50 salariés.
+    <br />
+    <a href="/faq/egalite-professionnelle-femme-homme">→ En savoir plus</a>
+  </FAQLink>
+);
 
 export const EgaproSection: React.FC<{
   egapro: IEgapro | IAPINotRespondingError;
@@ -21,10 +32,8 @@ export const EgaproSection: React.FC<{
     if (isNotFound) {
       return (
         <Section title={sectionTitle} sources={[EAdministration.METI]}>
-          <p>
-            Nous n’avons pas retrouvé les déclarations d’égalité professionnelle
-            (Index Egapro) de cette structure.
-          </p>
+          Nous n’avons pas retrouvé d’
+          <FAQEgapro /> pour cette entreprise.
         </Section>
       );
     }
@@ -49,19 +58,14 @@ export const EgaproSection: React.FC<{
   const plural = egapro.years.length > 0;
 
   return (
-    <div id="entreprise">
-      <Section title={sectionTitle} sources={[EAdministration.METI]}>
-        <p>
-          Cette entreprise de <b>{egapro.employeesSizeRange}</b> a effectué{' '}
-          {plural ? 'plusieurs' : 'une'} déclaration{plural} d’égalité entre les
-          femmes et les hommes.
-        </p>
-        <p>
-          Les données déclarées pour une année sont récoltées l’année
-          précédente. Par exemple, les données 2018 ont été récoltées en 2017.
-        </p>
-        <FullTable head={['Année', ...egapro.years]} body={body} />
-      </Section>
-    </div>
+    <Section title={sectionTitle} sources={[EAdministration.METI]}>
+      Cette entreprise de <b>{egapro.employeesSizeRange}</b> a déclaré{' '}
+      {plural ? 'plusieurs' : 'une'} <FAQEgapro />
+      <p>
+        Les données déclarées pour une année sont récoltées l’année précédente.
+        Par exemple, les données 2018 ont été récoltées en 2017.
+      </p>
+      <FullTable head={['Année', ...egapro.years]} body={body} />
+    </Section>
   );
 };
