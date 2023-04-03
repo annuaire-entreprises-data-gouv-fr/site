@@ -1,6 +1,7 @@
 import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
+import FAQLink from '#components-ui/faq-link';
 import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
@@ -24,25 +25,35 @@ const getCertificationDate = (certificat: IBioCertification) => {
     ARRETEE: (
       <>
         <Tag color="error">Arrêtée</Tag>
-        le {formatDate(date.end)},{' '}
+        {date?.end && `le ${formatDate(date.end)}, `}
       </>
     ),
     ENGAGEE: (
       <>
         <Tag color="success">Engagée</Tag>
-        le {formatDate(date.start)},{' '}
+        {date?.start && `le ${formatDate(date.start)}, `}
       </>
     ),
     'NON ENGAGEE': <Tag>Non engagée</Tag>,
     SUSPENDUE: (
       <>
         <Tag color="warning">Suspendue</Tag>
-        le {date.suspension},{' '}
+        {date?.suspension && `le ${date.suspension}, `}
       </>
     ),
   };
   return status ? mapping[status] : 'Non renseigné';
 };
+
+const FAQBio = ({ label = 'certification Bio' }) => (
+  <FAQLink tooltipLabel={label}>
+    Le label “Professionnel du bio” concerne les entreprises dont tout ou partie
+    de leur activité est certifiée Bio par des organismes certificateurs,
+    encadrés par l’Agence Bio.
+    <br />
+    <a href="/faq/professionnels-bio">→ En savoir plus</a>
+  </FAQLink>
+);
 
 export const CertificationsBioSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -54,10 +65,9 @@ export const CertificationsBioSection: React.FC<{
     if (bio.errorType === 404) {
       return (
         <Section title={sectionTitle} sources={[EAdministration.AGENCE_BIO]}>
+          Nous n’avons pas retrouvé de <FAQBio /> pour cette structure.
           <p>
-            Nous n’avons pas retrouvé les certifications Bio de cette
-            entreprise. En revanche, vous pouvez peut-être les retrouver grâce
-            au{' '}
+            Vous pourrez peut-être les trouver sur le{' '}
             <a
               href={routes.certifications.bio.site}
               target="_blank"
@@ -66,6 +76,10 @@ export const CertificationsBioSection: React.FC<{
               moteur de recherche de l&apos;Agence Bio
             </a>
             .
+          </p>
+          <p>
+            Seules les structures avec un certificat en cours de validité
+            apparaissent sur cette page.
           </p>
         </Section>
       );
@@ -78,14 +92,15 @@ export const CertificationsBioSection: React.FC<{
       />
     );
   }
-  const plural = bio.etablissementsBio.length > 0 ? 's' : '';
+  const plural = bio.etablissementsBio.length > 1 ? 's' : '';
 
   return (
     <Section title={sectionTitle} sources={[EAdministration.AGENCE_BIO]}>
-      <p>
-        Cette structure possède {bio.etablissementsBio.length} établissement
-        {plural} certifié{plural} professionnel{plural} du Bio&nbsp;:
-      </p>
+      Cette structure possède {bio.etablissementsBio.length} établissement
+      {plural} <FAQBio label={`certifié${plural} “Professionnel du Bio”`} />{' '}
+      &nbsp;:
+      <br />
+      <br />
       <FullTable
         head={[
           'Détail établissement',
@@ -121,7 +136,9 @@ export const CertificationsBioSection: React.FC<{
               )}
             </>,
             <>
-              {certificat.url ? (
+              {certificat.exempted ? (
+                <i>Dispensé de certification</i>
+              ) : certificat.url ? (
                 <a
                   target="_blank"
                   rel="noreferre noopener"
@@ -132,7 +149,7 @@ export const CertificationsBioSection: React.FC<{
                   </Icon>
                 </a>
               ) : (
-                ''
+                <i>document introuvable</i>
               )}
             </>,
             <div className="layout-right">

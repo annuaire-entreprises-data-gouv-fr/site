@@ -3,7 +3,7 @@ short: DILA
 long: Direction de l’Information Légale et Administrative (DILA)
 logoType: paysage
 site: https://www.dila.premier-ministre.gouv.fr/
-contact: https://www.dila.premier-ministre.gouv.fr/services/api/boamp/contact
+contact: https://www.dila.premier-ministre.gouv.fr/contacts/nous-contacter
 apiMonitors:
   - apiName: API BODACC
     apigouvLink: https://api.gouv.fr/les-api/api-bulletin-annonces-civiles-commerciales-bodacc

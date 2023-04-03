@@ -1,6 +1,6 @@
 administrations:
   - insee
-targets:
+targets: # no targets
 title: Qu’est ce que l’Economie Sociale et Solidaire ?
 body: |
   Selon l’INSEE, l’Economie Sociale et Solidaire (ESS) regroupe cinq formes d’organisation : 

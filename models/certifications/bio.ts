@@ -34,6 +34,7 @@ export interface IBioCertification {
   url: string;
   organization: string;
   status: IBioResponse['items'][0]['certificats'][0]['etatCertification'] | '';
+  exempted: boolean;
 }
 
 export const getBio = async (uniteLegale: IUniteLegale) => {

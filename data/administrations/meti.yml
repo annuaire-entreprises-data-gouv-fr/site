@@ -19,6 +19,6 @@ apiMonitors:
         link: https://www.data.gouv.fr/fr/datasets/index-egalite-professionnelle-f-h-des-entreprises-de-50-salaries-ou-plus
     id: 794017147
     data:
-      - Déclaration Egapro
+      - Index Egapro
 description: |
   Le ministère du travail publie toutes les conventions collectives enregistrées à la maille SIRET.
