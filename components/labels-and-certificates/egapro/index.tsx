@@ -65,7 +65,7 @@ export const EgaproSection: React.FC<{
         Les données déclarées pour une année sont récoltées l’année précédente.
         Par exemple, les données 2018 ont été récoltées en 2017.
       </p>
-      <FullTable head={['Année', ...egapro.years]} body={body} />
+      <FullTable head={['Année', ...egapro.indexYears]} body={body} />
     </Section>
   );
 };

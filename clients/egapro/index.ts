@@ -53,10 +53,20 @@ const mapToDomainObject = (egapro: IEgaproItem) => {
     ])
   );
 
+  // index is valid for declaration year + 1
+  const indexYears = years.map((y) => {
+    try {
+      return (parseInt(y, 10) + 1).toString();
+    } catch {
+      return y;
+    }
+  });
+
   return {
     employeesSizeRange:
       employeesSizeRangeMapping[egapro.entreprise?.effectif?.tranche || ''],
     years,
+    indexYears,
     scores: {
       notes: years.map((y) => notes[y] ?? null),
       augmentations: years.map((y) => notes_augmentations[y] ?? null),
