@@ -24,20 +24,20 @@ const getCertificationDate = (certificat: IBioCertification) => {
     ARRETEE: (
       <>
         <Tag color="error">Arrêtée</Tag>
-        le {formatDate(date.end)},{' '}
+        {date?.end && `le ${formatDate(date.end)}, `}
       </>
     ),
     ENGAGEE: (
       <>
         <Tag color="success">Engagée</Tag>
-        le {formatDate(date.start)},{' '}
+        {date?.start && `le ${formatDate(date.start)}, `}
       </>
     ),
     'NON ENGAGEE': <Tag>Non engagée</Tag>,
     SUSPENDUE: (
       <>
         <Tag color="warning">Suspendue</Tag>
-        le {date.suspension},{' '}
+        {date?.suspension && `le ${date.suspension}, `}
       </>
     ),
   };
@@ -127,7 +127,9 @@ export const CertificationsBioSection: React.FC<{
               )}
             </>,
             <>
-              {certificat.url ? (
+              {certificat.exempted ? (
+                <i>Dispensé de certification</i>
+              ) : certificat.url ? (
                 <a
                   target="_blank"
                   rel="noreferre noopener"
@@ -138,7 +140,7 @@ export const CertificationsBioSection: React.FC<{
                   </Icon>
                 </a>
               ) : (
-                ''
+                <i>document introuvable</i>
               )}
             </>,
             <div className="layout-right">

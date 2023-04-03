@@ -92,6 +92,7 @@ const mapToDomainObject = (bioItems: IBioItem[]): IEtablissementBio[] => {
           url,
           organization: organisme,
           status: etatCertification,
+          exempted: !organisme && !url,
         },
       });
     }
