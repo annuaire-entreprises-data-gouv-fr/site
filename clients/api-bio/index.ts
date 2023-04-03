@@ -21,14 +21,16 @@ export const clientProfessionnelBio = async (
     params: { siret: siren, nb: 1500 },
   });
   const data = response.data as IBioResponse;
+  const msgNotFound = `No certifications bio found for : ${siren}`
+  
   if (!data.items || data.items.length === 0) {
-    throw new HttpNotFound(`No certifications found for : ${siren}`);
+    throw new HttpNotFound(msgNotFound);
   }
 
   const etablissementsBio = mapToDomainObject(data.items);
 
   if (etablissementsBio.length === 0) {
-    throw new HttpNotFound(`No certifications found for : ${siren}`);
+    throw new HttpNotFound(msgNotFound);
   }
   return {
     etablissementsBio,
