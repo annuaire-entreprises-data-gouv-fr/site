@@ -25,8 +25,13 @@ export const clientProfessionnelBio = async (
     throw new HttpNotFound(`No certifications found for : ${siren}`);
   }
 
+  const etablissementsBio = mapToDomainObject(data.items);
+
+  if (etablissementsBio.length === 0) {
+    throw new HttpNotFound(`No certifications found for : ${siren}`);
+  }
   return {
-    etablissementsBio: mapToDomainObject(data.items),
+    etablissementsBio,
   };
 };
 

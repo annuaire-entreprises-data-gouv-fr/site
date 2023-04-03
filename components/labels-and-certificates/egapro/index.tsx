@@ -13,7 +13,7 @@ import { IEgapro } from '#models/egapro';
 export const EgaproSection: React.FC<{
   egapro: IEgapro | IAPINotRespondingError;
 }> = ({ egapro }) => {
-  const sectionTitle = `Égalité professionnelle - Egapro`;
+  const sectionTitle = `Égalité professionnelle - Index Egapro`;
 
   if (isAPINotResponding(egapro)) {
     const isNotFound = egapro.errorType === 404;
@@ -23,7 +23,7 @@ export const EgaproSection: React.FC<{
         <Section title={sectionTitle} sources={[EAdministration.METI]}>
           <p>
             Nous n’avons pas retrouvé les déclarations d’égalité professionnelle
-            - Egapro de cette structure.
+            (Index Egapro) de cette structure.
           </p>
         </Section>
       );
@@ -38,7 +38,7 @@ export const EgaproSection: React.FC<{
   }
 
   const body = [
-    ['Index Egapro', ...egapro.scores.notes],
+    ['Index', ...egapro.scores.notes],
     ['Écart rémunérations', ...egapro.scores.remunerations],
     ["Écart taux d'augmentation", ...egapro.scores.augmentations],
     ['Écart taux promotion', ...egapro.scores.promotions],
@@ -54,9 +54,13 @@ export const EgaproSection: React.FC<{
         <p>
           Cette entreprise de <b>{egapro.employeesSizeRange}</b> a effectué{' '}
           {plural ? 'plusieurs' : 'une'} déclaration{plural} d’égalité entre les
-          hommes et les femmes.
+          femmes et les hommes.
         </p>
-        <FullTable head={['Indicateurs', ...egapro.years]} body={body} />
+        <p>
+          Les données déclarées pour une année sont récoltées l’année
+          précédente. Par exemple, les données 2018 ont été récoltées en 2017.
+        </p>
+        <FullTable head={['Année', ...egapro.years]} body={body} />
       </Section>
     </div>
   );

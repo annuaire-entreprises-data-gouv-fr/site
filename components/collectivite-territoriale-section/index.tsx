@@ -32,7 +32,11 @@ const CollectiviteTerritorialeSection: React.FC<{
     <>
       <Section
         title={`Collectivité territoriale`}
-        sources={[EAdministration.INSEE, EAdministration.MI]}
+        sources={[
+          EAdministration.INSEE,
+          EAdministration.MI,
+          EAdministration.DINUM,
+        ]}
       >
         <p>Cette structure est une collectivite territoriale&nbsp;:</p>
         <TwoColumnTable body={data} />

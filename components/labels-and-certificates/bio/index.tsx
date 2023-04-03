@@ -55,9 +55,11 @@ export const CertificationsBioSection: React.FC<{
       return (
         <Section title={sectionTitle} sources={[EAdministration.AGENCE_BIO]}>
           <p>
-            Nous n’avons pas retrouvé les certifications Bio de cette
-            entreprise. En revanche, vous pouvez peut-être les retrouver grâce
-            au{' '}
+            Nous n’avons pas retrouvé de certification Bio pourrez cette
+            structure.
+          </p>
+          <p>
+            Vous pourrez peut-être les trouver sur le{' '}
             <a
               href={routes.certifications.bio.site}
               target="_blank"
@@ -66,6 +68,10 @@ export const CertificationsBioSection: React.FC<{
               moteur de recherche de l&apos;Agence Bio
             </a>
             .
+          </p>
+          <p>
+            Seules les structures avec un certificat en cours de validité
+            apparaissent sur cette page.
           </p>
         </Section>
       );
