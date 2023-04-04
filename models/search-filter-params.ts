@@ -185,10 +185,10 @@ class SearchFilterParams {
       esv: 'Label : Entrepreneur de spectacle vivant',
       bio: 'Label : Professionnels du bio',
       egapro: 'Label : Index Egapro',
+      qualiopi: 'Label : Qualiopi',
       ei: 'Type : Entreprise Individuelle ',
       ct: 'Type : Collectivité territoriale ',
       sp: 'Type : Service public',
-      qualiopi: 'Organisme de formation',
       asso: 'Type : Association ',
     };
 

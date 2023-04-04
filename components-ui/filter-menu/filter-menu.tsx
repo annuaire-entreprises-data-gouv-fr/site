@@ -135,7 +135,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
             margin-top: 5px;
             background-color: #fff;
             border-radius: 3px;
-            width: 450px;
+            width: 480px;
             z-index: 1000;
           }
           .container:before {
@@ -150,7 +150,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
           }
 
           .container > .filter-container {
-            max-height: 350px;
+            max-height: 400px;
             overflow-y: auto;
             z-index: 100;
             padding: 0 4px;

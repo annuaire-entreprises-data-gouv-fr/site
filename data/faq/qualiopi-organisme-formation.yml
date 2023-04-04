@@ -1,0 +1,26 @@
+administrations:
+  - meti
+targets: # no targets
+title: Qu’est ce que le certificat Qualiopi - Organisme de formation ?
+body: |
+  Le certificat Qualiopi est une accréditation de qualité accordée aux organismes de formation qui remplissent les conditions fixées par le Ministère du travail, du plein emploi et de l’insertion. 
+
+  ## A quoi sert le certificat Qualiopi ?
+
+  Il permet d’attester de la qualité des formations dispensés à travers un [Référentiel National de Qualité Qualiopi](https://travail-emploi.gouv.fr/demarches-ressources-documentaires/documentation-et-publications-officielles/guides/guide-referentiel-national-qualite), qui comporte 7 critères répartis en 32 indicateurs. 
+
+  [La loi pour choisir son avenir professionnel du 5 septembre 2018](https://www.legifrance.gouv.fr/loda/id/JORFTEXT000037367660) conditionne les demandes de fonds publics à l’obtention du label Qualiopi. 
+
+  ## Comment être certifié Qualiopi - Organisme de formation ?
+
+  Le certificat est accordé par les organismes certificateurs indépendants et reconnus par le [Ministère du travail, du plein emploi et de l’insertion.](https://travail-emploi.gouv.fr) 
+
+  Pour être certifié, vous devez formuler une demande de certification auprès d’un organisme certificateur :
+more:
+  - label: Consulter la page Qualiopi du ministère du travail
+    href: https://travail-emploi.gouv.fr/formation-professionnelle/acteurs-cadre-et-qualite-de-la-formation-professionnelle/article/qualiopi-marque-de-certification-qualite-des-prestataires-de-formation
+  - label: Consulter la liste de tous les organismes certifiés Qualiopi sur data.gouv.fr
+    href: https://www.data.gouv.fr/fr/datasets/liste-publique-des-organismes-de-formation-l-6351-7-1-du-code-du-travail/
+cta:
+  label: ⇢ Trouver un organisme certificateur
+  to: https://travail-emploi.gouv.fr/formation-professionnelle/acteurs-cadre-et-qualite-de-la-formation-professionnelle/liste-organismes-certificateurs

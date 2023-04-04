@@ -25,9 +25,19 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
 
   return (
     <>
+      {estOrganismeFormation && (
+        <InformationTooltip label="Cette structure est certifiée Qualiopi - Organisme de formation">
+          <LabelAndCertificateBadge label="Qualiopi - Organisme de formation" />
+        </InformationTooltip>
+      )}
       {estBio && (
         <InformationTooltip label="Cette structure est un professionnel du Bio">
           <LabelAndCertificateBadge label="Professionnel du Bio" />
+        </InformationTooltip>
+      )}
+      {egaproRenseignee && (
+        <InformationTooltip label="Cette structure a renseigné son indice d’égalité entre les femmes et les hommes">
+          <LabelAndCertificateBadge label="Index Egapro" />
         </InformationTooltip>
       )}
       {estEss && (
@@ -38,11 +48,6 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       {estRge && (
         <InformationTooltip label="Cette structure est Reconnue Garante de l’Environnement">
           <LabelAndCertificateBadge label="RGE - Reconnu Garant de l’Environnement" />
-        </InformationTooltip>
-      )}
-      {egaproRenseignee && (
-        <InformationTooltip label="Cette structure a renseigné son indice d’égalité entre les femmes et les hommes">
-          <LabelAndCertificateBadge label="Index Egapro" />
         </InformationTooltip>
       )}
       {estEntrepreneurSpectacle &&

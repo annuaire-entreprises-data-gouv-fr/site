@@ -17,7 +17,9 @@ const FAQEgapro = () => (
     L’Index Egapro permet de mesurer l’égalité professionnelle entre les femmes
     et les hommes dans les entreprises de plus de 50 salariés.
     <br />
-    <a href="/faq/egalite-professionnelle-femme-homme">→ En savoir plus</a>
+    <a href="/faq/egapro-egalite-professionnelle-femme-homme">
+      → En savoir plus
+    </a>
   </FAQLink>
 );
 

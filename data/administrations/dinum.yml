@@ -17,6 +17,8 @@ apiMonitors:
         link: https://www.data.gouv.fr/fr/datasets/liste-des-entreprises-rge-1/
       - label: Déclarations des entrepreneurs de spectacles vivants
         link: https://www.data.gouv.fr/fr/datasets/declarations-des-entrepreneurs-de-spectacles-vivants/
+      - label: Liste des organismes de formation Qualiopi
+        link: https://www.data.gouv.fr/fr/datasets/liste-publique-des-organismes-de-formation-l-6351-7-1-du-code-du-travail/
     id: 787859512
     data:
       - Recherche de dénomination
@@ -24,6 +26,7 @@ apiMonitors:
       - Recherche de dirigeant
       - Code Officiel Géographique des collectivités
       - Entrepreneurs de spectacles vivants
+      - Qualiopi - Organisme de formation
   - apiName: API Base Adresse Nationale
     apigouvLink: https://api.gouv.fr/les-api/base-adresse-nationale
     datagouv:
