@@ -97,14 +97,14 @@ export const CertificationsBioSection: React.FC<{
   return (
     <Section title={sectionTitle} sources={[EAdministration.AGENCE_BIO]}>
       Cette structure possède {bio.etablissementsBio.length} établissement
-      {plural} <FAQBio label={`certifié${plural} “Professionnel du Bio”`} />{' '}
+      {plural} <FAQBio label={`engagé${plural} “Professionnel du Bio”`} />{' '}
       &nbsp;:
       <br />
       <br />
       <FullTable
         head={[
           'Détail établissement',
-          'Statut certification',
+          'Statut',
           'Certificat',
           'Annuaire professionnels Bio',
         ]}
@@ -137,7 +137,9 @@ export const CertificationsBioSection: React.FC<{
             </>,
             <>
               {certificat.exempted ? (
-                <i>Dispensé de certification</i>
+                <i>
+                  Dispensé de certification de par la nature de son activité.
+                </i>
               ) : certificat.url ? (
                 <a
                   target="_blank"
@@ -152,7 +154,7 @@ export const CertificationsBioSection: React.FC<{
                 <i>document introuvable</i>
               )}
             </>,
-            <div className="layout-right">
+            <div className="layout-center">
               <ButtonLink
                 target="_blank"
                 alt

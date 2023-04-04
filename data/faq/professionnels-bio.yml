@@ -11,6 +11,10 @@ body: |
 
   Pour être engagé en Bio, il faut **en faire la demande** et être certifiés par [les organismes certificateurs agréés par l’Institut NAtional de l’Origine et de la qualité (INAO)](https://www.inao.gouv.fr/Espace-professionnel-et-outils/Controles-des-signes-d-identification-de-l-origine-et-de-la-qualite-SIQO/Les-organismes-de-controle).
 more:
+  - label: Qu’est ce que l’agriculture Biologique ?
+    href: https://agriculture.gouv.fr/quest-ce-que-lagriculture-biologique
+  - label: Consulter la page de l’INAO sur le Bio
+    href: https://www.inao.gouv.fr/Les-signes-officiels-de-la-qualite-et-de-l-origine-SIQO/Agriculture-biologique
   - label: Consulter le site de l’Agence Bio
     href: https://www.agencebio.org/
   - label: Consulter l’Annuaire des professionnels du Bio
