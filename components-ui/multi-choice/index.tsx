@@ -1,6 +1,6 @@
 import constants from '#models/constants';
 
-interface IProps {
+export type IProps = {
   values: { label: string; value: string }[];
   legend?: string;
   idPrefix?: string;
@@ -9,7 +9,7 @@ interface IProps {
   centered?: boolean;
   large?: boolean;
   links?: boolean;
-}
+};
 
 export const MultiChoice: React.FC<IProps> = ({
   values,

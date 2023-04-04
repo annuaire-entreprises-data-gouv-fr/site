@@ -18,10 +18,10 @@ import { formatDate, formatDatePartial } from '#utils/helpers';
 import { Siren } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
 
-interface IProps {
+type IProps = {
   immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
   siren: Siren;
-}
+};
 
 /**
  * Dirigeants section

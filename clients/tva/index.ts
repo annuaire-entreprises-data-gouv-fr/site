@@ -2,7 +2,7 @@ import routes from '#clients/routes';
 import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 
-interface IVIESResponse {
+type IVIESResponse = {
   isValid: boolean;
   requestDate: string; //'2022-08-31T17:46:07.763Z';
   userError: string; //'VALID';
@@ -23,7 +23,7 @@ interface IVIESResponse {
   //   matchCity: 3;
   //   matchCompanyType: 3;
   // };
-}
+};
 
 /**
  * Call VIES to validate a French TVA number

@@ -8,7 +8,7 @@ import constants from '#models/constants';
 import { IParams } from '#models/search-filter-params';
 import { ISession, isLoggedIn } from '#utils/session';
 
-interface IProps {
+type IProps = {
   currentSearchTerm?: string;
   useMap?: boolean;
   searchParams?: IParams;
@@ -16,7 +16,7 @@ interface IProps {
   useLogo?: boolean;
   useSearchBar?: boolean;
   session?: ISession | null;
-}
+};
 
 export const Header: React.FC<IProps> = ({
   currentSearchTerm = '',

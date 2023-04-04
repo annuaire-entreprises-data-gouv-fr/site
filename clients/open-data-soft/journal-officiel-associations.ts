@@ -3,7 +3,7 @@ import { IAnnoncesAssociation, IComptesAssociation } from '#models/annonces';
 import { formatDateYear, IdRna, Siren } from '#utils/helpers';
 import odsClient from '.';
 
-interface IJournalOfficielAssociationRecord {
+type IJournalOfficielAssociationRecord = {
   association_type: string; // 'assoLoi1901';
   annonce_type_facette: string; // 'Associations loi du 1er juillet 1901/Création/Initial';
   internal_contenu_subnode: string; // 'creation';
@@ -27,16 +27,16 @@ interface IJournalOfficielAssociationRecord {
   metadonnees_type_code: string; // '1';
   source: string; // 'joafe';
   association_type_libelle: string; // 'Associations loi du 1er juillet 1901';
-}
+};
 
-interface IDCACompte {
+type IDCACompte = {
   datasetid: string;
   recordid: string;
   fields: IDCAField[];
   record_timestamp: string;
-}
+};
 
-interface IDCAField {
+type IDCAField = {
   departement_code: string;
   dca_siren: string;
   localisation_facette: string;
@@ -58,7 +58,7 @@ interface IDCAField {
   region_code: string;
   association_type_libelle: string;
   dca_datevalidation: string;
-}
+};
 
 const clientJOAFE = async (idRna: string): Promise<IAnnoncesAssociation> => {
   const searchUrl = `${routes.journalOfficielAssociations.ods.search}&q=numero_rna=${idRna}&refine.source=joafe&sort=dateparution`;

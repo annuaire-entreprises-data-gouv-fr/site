@@ -10,13 +10,13 @@ import SocialNetworks from '#components/social-network';
 import { IParams } from '#models/search-filter-params';
 import { ISession } from '#utils/session';
 
-interface IProps {
+type IProps = {
   currentSearchTerm?: string;
   isBrowserOutdated: boolean;
   map?: boolean;
   searchFilterParams?: IParams;
   session?: ISession | null;
-}
+};
 
 /**
  * This Layout should be use only for the page /recherche and /rechercher/carte who use

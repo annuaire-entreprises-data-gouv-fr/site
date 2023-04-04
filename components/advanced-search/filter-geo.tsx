@@ -7,11 +7,11 @@ import constants from '#models/constants';
 import { debounce } from '#utils/helpers/debounce';
 import { useLocalStorage } from 'hooks';
 
-interface IGeoSuggest {
+type IGeoSuggest = {
   label: string;
   value: string;
   type: 'insee' | 'cp' | 'dep';
-}
+};
 
 enum Issue {
   NONE = 2,

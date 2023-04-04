@@ -6,7 +6,7 @@ import { IMonitoring } from '#models/monitoring';
 import httpClient from '#utils/network';
 import { DailyUptimeRatioConverter } from './series';
 
-export interface IMonitorLog {
+export type IMonitorLog = {
   id?: number;
   type?: number;
   datetime: number; // timestamp in seconds
@@ -15,9 +15,9 @@ export interface IMonitorLog {
     code: string;
     detail: string;
   };
-}
+};
 
-interface IUptimeRobotMonitor {
+type IUptimeRobotMonitor = {
   id: number;
   friendly_name: string;
   create_datetime: number;
@@ -26,9 +26,9 @@ interface IUptimeRobotMonitor {
   all_time_uptime_ratio: string;
   custom_uptime_ratio: string;
   custom_down_durations: string;
-}
+};
 
-interface IUptimeRobotResponse {
+type IUptimeRobotResponse = {
   stat: 'ok' | 'fail';
   pagination: {
     offset: number;
@@ -36,12 +36,12 @@ interface IUptimeRobotResponse {
     total: number;
   };
   monitors: IUptimeRobotMonitor[];
-}
+};
 
-interface IMonitoringCache {
+type IMonitoringCache = {
   lastUpdate: number;
   monitorings: IMonitoring[];
-}
+};
 
 const cachedMonitorings: IMonitoringCache = {
   lastUpdate: 0,

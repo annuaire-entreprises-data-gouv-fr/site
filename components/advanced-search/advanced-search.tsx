@@ -2,11 +2,11 @@ import SearchFilters from '#components/advanced-search/search-filters';
 import { buildSearchQuery, IParams } from '#models/search-filter-params';
 import MapOrListSwitch from './map-or-list';
 
-interface IProps {
+type IProps = {
   searchParams: IParams;
   currentSearchTerm: string;
   isMap: boolean;
-}
+};
 
 export const AdvancedSearch: React.FC<IProps> = ({
   searchParams = {},

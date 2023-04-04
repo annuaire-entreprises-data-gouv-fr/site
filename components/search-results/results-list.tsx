@@ -13,10 +13,10 @@ import {
   getAdresseUniteLegale,
 } from '#models/statut-diffusion';
 
-interface IProps {
+type IProps = {
   results: ISearchResult[];
   searchTerm?: string;
-}
+};
 
 const DirigeantsOrElusList: React.FC<{ dirigeantsOrElus: IDirigeant[] }> = ({
   dirigeantsOrElus,

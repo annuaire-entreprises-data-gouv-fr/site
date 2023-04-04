@@ -4,12 +4,12 @@ import constants from '#models/constants';
 import { formatAdresse, Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 
-export interface IApiEntrepriseAssociation {
+export type IApiEntrepriseAssociation = {
   data: IAPIEntrepriseDataAssociation;
   meta: Meta;
-}
+};
 
-export interface IAPIEntrepriseDataAssociation {
+export type IAPIEntrepriseDataAssociation = {
   rna: string;
   ancien_id: string;
   siren: string;
@@ -165,9 +165,9 @@ export interface IAPIEntrepriseDataAssociation {
     annee_depot: string;
     url: string;
   }[];
-}
+};
 
-export interface Adresse {
+export type Adresse = {
   complement: string;
   numero_voie: string;
   type_voie: string;
@@ -176,13 +176,13 @@ export interface Adresse {
   code_insee: string;
   code_postal: string;
   commune: string;
-}
+};
 
-export interface Meta {
+export type Meta = {
   internal_id: string;
   date_derniere_mise_a_jour_sirene: string;
   date_derniere_mise_a_jour_rna: string;
-}
+};
 
 /**
  * GET documents from API Entreprise

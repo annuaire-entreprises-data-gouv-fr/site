@@ -1,13 +1,13 @@
 import { PropsWithChildren } from 'react';
 import { icons } from '.';
 
-interface IProps {
+type IProps = {
   id?: string;
   className?: string;
   size?: number;
   color?: string;
   slug: string;
-}
+};
 
 export const Icon: React.FC<PropsWithChildren<IProps>> = ({
   id,

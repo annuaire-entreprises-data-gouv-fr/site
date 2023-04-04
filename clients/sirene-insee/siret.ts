@@ -21,16 +21,17 @@ import {
   statuDiffusionFromStatutDiffusionInsee,
 } from './helpers';
 
-interface IInseeEtablissementResponse {
+type IInseeEtablissementResponse = {
   etablissement: IInseeEtablissement;
   etablissements: IInseeEtablissement[];
-}
-interface IInseeEtablissementsResponse {
+};
+
+type IInseeEtablissementsResponse = {
   header: { total: number; debut: number; nombre: number };
   etablissements: IInseeEtablissement[];
-}
+};
 
-interface IInseeEtablissement {
+type IInseeEtablissement = {
   siret: Siret;
   nic: string;
   etablissementSiege: string;
@@ -68,7 +69,7 @@ interface IInseeEtablissement {
     libellePaysEtrangerEtablissement: string;
   };
   uniteLegale: IInseeetablissementUniteLegale;
-}
+};
 
 interface IInseeetablissementUniteLegale {
   sigleUniteLegale: string;

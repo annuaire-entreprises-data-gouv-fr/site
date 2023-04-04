@@ -4,14 +4,14 @@ import constants from '#models/constants';
 import { IGeoLoc } from '#models/geo-loc';
 import { httpGet } from '#utils/network';
 
-interface IBANResponse {
+type IBANResponse = {
   features: {
     geometry: {
       coordinates: number[];
     };
     properties: { label: string };
   }[];
-}
+};
 
 /**
  * GET address for geoloc

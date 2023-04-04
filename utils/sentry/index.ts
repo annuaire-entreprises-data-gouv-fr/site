@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/nextjs';
 import { SeverityLevel } from '@sentry/nextjs';
 
-export interface IScope {
+export type IScope = {
   page?: string;
   siret?: string;
   siren?: string;
@@ -9,7 +9,7 @@ export interface IScope {
   details?: string;
   referrer?: string;
   browser?: string;
-}
+};
 
 // scope allows to log stuff in tags in sentry
 const getScope = (extra: IScope) => {

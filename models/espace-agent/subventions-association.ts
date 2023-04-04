@@ -10,13 +10,13 @@ import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '..';
 
-export interface IAssoDocument {
+export type IAssoDocument = {
   nom: string;
   etat: string;
   commentaire: string;
   annee: string;
   url: string;
-}
+};
 
 export interface ISubventionsDocument {
   statuts: { annee: string; url: string } | null;

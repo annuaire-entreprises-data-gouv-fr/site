@@ -3,10 +3,10 @@ import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
 
-interface IGeoDepartementResponse {
+type IGeoDepartementResponse = {
   nom: string;
   code: string;
-}
+};
 
 const clientDepartementsByName = async (slug: string): Promise<any> => {
   const response = await httpGet(`${routes.geo.departement}&nom=${slug}`, {

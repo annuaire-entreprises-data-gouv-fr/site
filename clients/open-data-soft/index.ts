@@ -1,17 +1,17 @@
 import { AxiosRequestConfig } from 'axios';
 import { httpGet } from '#utils/network';
 
-export interface IODSResponse {
+export type IODSResponse = {
   records: {
     datasetid: string;
     recordid: string;
     fields: any;
   }[];
-}
+};
 
-export interface IODSMetadata {
+export type IODSMetadata = {
   datasets: { metas: { modified: string; data_processed: string } }[];
-}
+};
 
 const extractLastModifiedDate = (metadata: IODSMetadata) => {
   if (!(metadata.datasets.length > 0)) {

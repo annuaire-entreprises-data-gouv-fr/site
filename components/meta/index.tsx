@@ -4,12 +4,12 @@ import React from 'react';
 
 //@ts-ignore
 
-interface IProps {
+type IProps = {
   title: string;
   description?: string;
   noIndex?: boolean;
   canonical?: string;
-}
+};
 
 const SITE_NAME = 'Annuaire des Entreprises : le moteur de recherche officiel';
 const SITE_URL =

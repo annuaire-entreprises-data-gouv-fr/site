@@ -3,14 +3,14 @@ import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { buildSearchQuery, IParams } from '#models/search-filter-params';
 import pagesArray from './pages-array';
 
-interface IProps {
+type IProps = {
   currentPage: number;
   totalPages: number;
   compact?: boolean;
   searchTerm?: string;
   searchFilterParams?: IParams;
   anchor?: string;
-}
+};
 
 const urlParams = (
   page = 1,

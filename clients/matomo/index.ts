@@ -2,7 +2,7 @@ import routes from '#clients/routes';
 import { httpGet } from '#utils/network';
 import logErrorInSentry from '#utils/sentry';
 
-export interface IMatomoStats {
+export type IMatomoStats = {
   visits: {
     label: string;
     number: number;
@@ -16,7 +16,7 @@ export interface IMatomoStats {
   }[];
   userResponses: { [key: string]: { value: number; tooltip: string } };
   mostCopied: { [key: string]: number };
-}
+};
 
 const getLabel = (labelAsString: string, index: number) => {
   if (

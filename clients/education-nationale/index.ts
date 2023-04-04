@@ -4,10 +4,7 @@ import { IEtablissementsScolaires } from '#models/etablissements-scolaires';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 import { zoneMapping } from './helpers';
-import {
-  IEducationNationaleRecord,
-  IEducationNationaleRecords,
-} from './interfaces';
+import { IEducationNationaleRecord, IEducationNationaleRecords } from './types';
 
 /**
  * Education nationale

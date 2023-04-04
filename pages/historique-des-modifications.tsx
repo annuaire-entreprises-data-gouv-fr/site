@@ -5,9 +5,9 @@ import Meta from '#components/meta';
 import changelog, { IChangelog } from '#models/historique-modifications';
 import { NextPageWithLayout } from './_app';
 
-interface IProps {
+type IProps = {
   changelog: IChangelog[];
-}
+};
 
 const Changelog: NextPageWithLayout<IProps> = ({ changelog }) => (
   <>
