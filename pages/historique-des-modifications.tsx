@@ -5,11 +5,11 @@ import Meta from '#components/meta';
 import changelog, { IChangelog } from '#models/historique-modifications';
 import { NextPageWithLayout } from './_app';
 
-type Props = {
+type IProps = {
   changelog: IChangelog[];
 };
 
-const Changelog: NextPageWithLayout<Props> = ({ changelog }) => (
+const Changelog: NextPageWithLayout<IProps> = ({ changelog }) => (
   <>
     <Meta
       title="Rechercher une entreprise"
