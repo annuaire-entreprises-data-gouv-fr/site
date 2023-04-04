@@ -5,6 +5,7 @@ import { CertificationsBioSection } from '#components/labels-and-certificates/bi
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
 import { CertificationESSSection } from '#components/labels-and-certificates/ess';
+import { OrganismeDeFormationSection } from '#components/labels-and-certificates/organisme-de-formation';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
 import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';

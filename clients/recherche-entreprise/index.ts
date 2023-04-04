@@ -1,4 +1,3 @@
-import { stat } from 'fs';
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { etatFromEtatAdministratifInsee } from '#clients/sirene-insee/helpers';
@@ -117,6 +116,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       est_bio = false,
       egapro_renseignee = false,
       est_entrepreneur_individuel = false,
+      est_organisme_formation = false,
       est_entrepreneur_spectacle = false,
       est_ess = false,
       est_finess = false,
@@ -193,6 +193,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       estFiness: est_finess,
       egaproRenseignee: egapro_renseignee,
       estRge: est_rge,
+      estOrganismeFormation: est_organisme_formation,
       estUai: est_uai,
     },
     association: {

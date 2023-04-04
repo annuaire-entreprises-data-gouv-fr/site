@@ -79,6 +79,7 @@ class SearchFilterParams {
       est_bio: this.params.label === 'bio',
       egapro_renseignee: this.params.label === 'egapro',
       est_ess: this.params.label === 'ess',
+      est_organisme_formation: this.params.label === 'qualiopi',
       est_entrepreneur_spectacle: this.params.label === 'esv',
       est_association: this.params.type === 'asso',
       est_collectivite_territoriale: this.params.type === 'ct',
@@ -186,7 +187,8 @@ class SearchFilterParams {
       egapro: 'Label : Index Egapro',
       ei: 'Type : Entreprise Individuelle ',
       ct: 'Type : Collectivité territoriale ',
-      sp: 'Type : Service public ',
+      sp: 'Type : Service public',
+      qualiopi: 'Organisme de formation',
       asso: 'Type : Association ',
     };
 

@@ -148,6 +148,7 @@ export interface IUniteLegaleComplements {
   egaproRenseignee: boolean;
   estServicePublic: boolean;
   estRge: boolean;
+  estOrganismeFormation: boolean;
   estUai: boolean;
 }
 
@@ -162,6 +163,7 @@ export const createDefaultUniteLegaleComplements = () => {
     estServicePublic: false,
     estFiness: false,
     estRge: false,
+    estOrganismeFormation: false,
     estUai: false,
   };
 };
