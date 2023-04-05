@@ -8,7 +8,7 @@ export enum EAdministration {
   MEF = 'mef',
   INPI = 'inpi',
   INSEE = 'insee',
-  METI = 'meti',
+  MTPEI = 'mtpei',
   MI = 'mi',
   VIES = 'vies',
 }

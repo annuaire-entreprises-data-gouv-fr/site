@@ -43,7 +43,7 @@ const getConventionCollectives = async (
       siren: uniteLegale.siren,
       details: `Error : ${e}`,
     });
-    return APINotRespondingFactory(EAdministration.METI, 500);
+    return APINotRespondingFactory(EAdministration.MTPEI, 500);
   }
 };
 

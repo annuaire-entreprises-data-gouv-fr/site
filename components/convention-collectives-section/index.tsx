@@ -4,7 +4,7 @@ import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
-import { METI } from '#components/administrations';
+import { MTPEI } from '#components/administrations';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
@@ -31,7 +31,7 @@ const ConventionCollectivesSection: React.FC<{
   const plural = conventionCollectives.length > 1 ? 's' : '';
 
   return (
-    <Section title="Conventions collectives" sources={[EAdministration.METI]}>
+    <Section title="Conventions collectives" sources={[EAdministration.MTPEI]}>
       {conventionCollectives.length === 0 ? (
         <div>
           Cette structure n’a pas de{' '}
@@ -42,7 +42,7 @@ const ConventionCollectivesSection: React.FC<{
           >
             convention collective enregistrée
           </a>{' '}
-          auprès du <METI />.
+          auprès du <MTPEI />.
         </div>
       ) : (
         <>

@@ -10,7 +10,12 @@ const AdministrationDescription: React.FC<{
   return (
     <div className="administration-wrapper" id={slug}>
       <div>
-        {logoType && <Logo title={long} slug={slug} width={80} height={80} />}
+        <Logo
+          title={long}
+          slug={logoType ? slug : 'rf'}
+          width={80}
+          height={80}
+        />
       </div>
       <div>
         {titleLevel === 'h2' ? <h2>{long}</h2> : <h3>{long}</h3>}

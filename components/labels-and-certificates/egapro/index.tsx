@@ -33,7 +33,7 @@ export const EgaproSection: React.FC<{
 
     if (isNotFound) {
       return (
-        <Section title={sectionTitle} sources={[EAdministration.METI]}>
+        <Section title={sectionTitle} sources={[EAdministration.MTPEI]}>
           Nous n’avons pas retrouvé d’
           <FAQEgapro /> pour cette entreprise.
         </Section>
@@ -60,7 +60,7 @@ export const EgaproSection: React.FC<{
   const plural = egapro.years.length > 0;
 
   return (
-    <Section title={sectionTitle} sources={[EAdministration.METI]}>
+    <Section title={sectionTitle} sources={[EAdministration.MTPEI]}>
       Cette entreprise de <b>{egapro.employeesSizeRange}</b> a déclaré{' '}
       {plural ? 'plusieurs' : 'une'} <FAQEgapro />
       <p>
