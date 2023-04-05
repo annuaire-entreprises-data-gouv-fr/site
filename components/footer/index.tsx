@@ -191,35 +191,53 @@ const Footer = () => (
           <div className="fr-footer__partners-logos">
             <div className="fr-footer__partners-sub">
               <ul>
-                {Object.values(administrationsMetaData).map(
-                  ({ slug, logoType, long }) =>
-                    logoType && (
-                      <li key={long}>
-                        <a
-                          className="fr-footer__partners-link"
-                          href={`/administration#${slug}`}
-                        >
-                          {logoType === 'portrait' ? (
-                            <Logo
-                              title={long}
-                              slug={slug}
-                              width={80}
-                              height={50}
-                              className="fr-footer__logo"
-                            />
-                          ) : (
-                            <Logo
-                              title={long}
-                              slug={slug}
-                              width={150}
-                              height={50}
-                              className="fr-footer__logo"
-                            />
-                          )}
-                        </a>
-                      </li>
-                    )
-                )}
+                {Object.values(administrationsMetaData)
+                  .filter(({ logoType }) => !!logoType)
+                  .map(({ slug, logoType, long }) => (
+                    <li key={long}>
+                      <a
+                        className="fr-footer__partners-link"
+                        href={`/administration#${slug}`}
+                      >
+                        {logoType === 'portrait' ? (
+                          <Logo
+                            title={long}
+                            slug={slug}
+                            width={80}
+                            height={50}
+                            className="fr-footer__logo"
+                          />
+                        ) : (
+                          <Logo
+                            title={long}
+                            slug={slug}
+                            width={150}
+                            height={50}
+                            className="fr-footer__logo"
+                          />
+                        )}
+                      </a>
+                    </li>
+                  ))}
+                <li key="all">
+                  <a
+                    className="fr-footer__partners-link"
+                    href="/administration"
+                  >
+                    <Logo
+                      title={[
+                        'Ainsi que : ',
+                        ...Object.values(administrationsMetaData)
+                          .filter(({ logoType }) => !logoType)
+                          .map(({ long }) => long),
+                      ].join('\r\n')}
+                      slug="rf"
+                      width={80}
+                      height={50}
+                      className="fr-footer__logo"
+                    />
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
