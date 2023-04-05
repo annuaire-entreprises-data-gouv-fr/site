@@ -1,5 +1,4 @@
 import React from 'react';
-import { render } from 'react-dom';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
 import { IETATADMINSTRATIF } from '#models/etat-administratif';
@@ -51,7 +50,7 @@ const IsActiveTag: React.FC<{
 
   if (etatAdministratif === IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT) {
     return (
-      <InformationTooltip label="Cette structure est active du point de vue administratif, mais n’a pas d’activité économique. Tous ses établissements sont fermés.">
+      <InformationTooltip label="Cette structure est en sommeil ou présumée inactive. Elle est active du point de vue administratif mais tous ses établissements sont fermés. Elle n’a pas d’activité économique.">
         <EtatTag state={etatAdministratif} />
       </InformationTooltip>
     );

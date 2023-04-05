@@ -3,6 +3,7 @@ import routes from '#clients/routes';
 import { etatFromEtatAdministratifInsee } from '#clients/sirene-insee/helpers';
 import constants from '#models/constants';
 import { createEtablissementsList } from '#models/etablissements-list';
+import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
 import { IEtatCivil, IPersonneMorale } from '#models/immatriculation/rncs';
 import {
   createDefaultEtablissement,
@@ -153,6 +154,18 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     (matchingEtablissement) => mapToEtablissement(matchingEtablissement)
   );
 
+  // case no open etablisssment
+  let etatAdministratif = etatFromEtatAdministratifInsee(
+    result.etat_administratif,
+    siren
+  );
+  if (
+    estActif({ etatAdministratif }) &&
+    result.nombre_etablissements_ouverts === 0
+  ) {
+    etatAdministratif = IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT;
+  }
+
   return {
     ...createDefaultUniteLegale(siren),
     libelleCategorieEntreprise: libelleFromeCodeCategorie(categorie_entreprise),
@@ -169,10 +182,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       result.nombre_etablissements
     ),
     statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
-    etatAdministratif: etatFromEtatAdministratifInsee(
-      result.etat_administratif,
-      siren
-    ),
+    etatAdministratif,
     nomComplet,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(nature_juridique),
     libelleTrancheEffectif: libelleFromCodeEffectif(tranche_effectif_salarie),
