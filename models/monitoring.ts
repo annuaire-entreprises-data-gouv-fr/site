@@ -2,12 +2,12 @@ import { clientMonitorings } from '#clients/monitoring';
 import logErrorInSentry from '#utils/sentry';
 import { administrationsMetaData, EAdministration } from './administrations';
 
-export interface IRatio {
+export type IRatio = {
   ratio: string;
   isActive: boolean;
   date?: string;
-}
-export interface IMonitoring {
+};
+export type IMonitoring = {
   id: number;
   isOnline: boolean;
   uptime: {
@@ -17,7 +17,7 @@ export interface IMonitoring {
     trimester: string;
   };
   series: IRatio[];
-}
+};
 
 export interface IMonitoringWithMetaData extends IMonitoring {
   apigouvLink?: string;
