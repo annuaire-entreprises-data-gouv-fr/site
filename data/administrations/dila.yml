@@ -6,20 +6,21 @@ site: https://www.dila.premier-ministre.gouv.fr/
 contact: https://www.dila.premier-ministre.gouv.fr/contacts/nous-contacter
 apiMonitors:
   - apiName: API BODACC
+    apiSlug: bodacc
     apigouvLink: https://api.gouv.fr/les-api/api-bulletin-annonces-civiles-commerciales-bodacc
-    datagouv:
-      - label: Bulletin officiel des annonces civiles et commerciales (BODACC)
-        link: https://www.data.gouv.fr/fr/datasets/bodacc/
     id: 793828554
-    data:
-      - Annonces du Bulletin Officiel des Annonces Civiles et Commerciales (BODACC)
   - apiName: API Annonces et comptes annuels des associations (JOAFE)
+    apiSlug: joafe
     apigouvLink: https://api.gouv.fr/les-api/api-annonces-comptes-annuels-associations-joafe
-    datagouv:
-      - label: Journal Officiel des Associations (JOAFE)
-        link: https://www.data.gouv.fr/fr/datasets/associations-joafe/
     id: 789134910
-    data:
-      - Annonces du Journal officiel des associations et fondations d'entreprise (JOAFE)
+dataSources:
+  - label: Bulletin officiel des annonces civiles et commerciales (BODACC)
+    apiSlug: bodacc
+    datagouvLink: https://www.data.gouv.fr/fr/datasets/bodacc/
+    keywords: Annonces du BODACC
+  - label: Journal Officiel des Associations (JOAFE)
+    apiSlug: joafe
+    datagouvLink: https://www.data.gouv.fr/fr/datasets/associations-joafe/
+    keywords: Annonces du JOAFE
 description: |
   La DILA est la Direction de l'Information Légale et Administrative. C'est une administration publique française. Dans le cadre de sa mission, la DILA a la charge de la diffusion des données dont la publication est obligatoire, par la publication au Journal-officiel de la République française et dans les bulletins d'annonces légale.

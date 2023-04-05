@@ -5,12 +5,13 @@ long: Ministère de l'Éducation nationale et de la jeunesse (MENJ)
 contact: https://www.education.gouv.fr/contactez-nous-41633
 apiMonitors:
   - apiName: API Etablissements Scolaires
+    apiSlug: annuaire-education
     apigouvLink: https://api.gouv.fr/documentation/api-annuaire-education
-    datagouv:
-      - label: Annuaire de l’Education Nationale
-        link: https://data.gouv.fr/fr/datasets/annuaire-de-leducation'
     id: 793392963
-    data:
-      - Annuaire de l’Éducation nationale
+dataSources:
+  - label: Annuaire de l’Education Nationale
+    apiSlug: annuaire-education
+    datagouvLink: https://data.gouv.fr/fr/datasets/annuaire-de-leducation
+    keywords: Liste des établissements scolaires
 description: |
   Le ministère de l'Éducation nationale et de la jeunesse met en œuvre dans l'académie la politique éducative définie au niveau national. Il a autorité sur le premier degré (écoles maternelles et élémentaires) et le second degré (collèges et lycées).

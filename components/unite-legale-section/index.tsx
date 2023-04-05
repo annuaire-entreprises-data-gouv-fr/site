@@ -69,11 +69,7 @@ const UniteLegaleSection: React.FC<{
     <div id="entreprise">
       <Section
         title={`Informations légales de ${getNomComplet(uniteLegale)}`}
-        sources={[
-          EAdministration.INSEE,
-          EAdministration.VIES,
-          EAdministration.DINUM,
-        ]}
+        sources={[EAdministration.INSEE, EAdministration.VIES]}
       >
         <TwoColumnTable body={data} />
       </Section>

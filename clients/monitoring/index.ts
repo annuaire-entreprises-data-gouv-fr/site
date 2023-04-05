@@ -38,33 +38,7 @@ type IUptimeRobotResponse = {
   monitors: IUptimeRobotMonitor[];
 };
 
-type IMonitoringCache = {
-  lastUpdate: number;
-  monitorings: IMonitoring[];
-};
-
-const cachedMonitorings: IMonitoringCache = {
-  lastUpdate: 0,
-  monitorings: [],
-};
-
-const CACHE_LIFE = 55 * 1000;
-
-export const clientMonitorings = async (
-  monitoringIds: number[]
-): Promise<IMonitoring[]> => {
-  const shouldUpdate =
-    new Date().getTime() - cachedMonitorings.lastUpdate > CACHE_LIFE;
-
-  if (shouldUpdate) {
-    await updateMonitorings();
-  }
-  return monitoringIds.map((id) => cachedMonitorings.monitorings[id]);
-};
-
-const updateMonitorings = async () => {
-  const monitoringIds = allMonitoringIds();
-
+export const clientMonitorings = async (): Promise<IMonitoring[]> => {
   const data = new FormData();
   const to = new Date();
   const from = new Date();
@@ -73,7 +47,7 @@ const updateMonitorings = async () => {
   from.setUTCMinutes(0);
   from.setUTCSeconds(0);
 
-  data.append('monitors', monitoringIds.join('-'));
+  data.append('monitors', allMonitoringIds.join('-'));
   data.append('logs', '1');
   data.append('format', 'json');
   data.append('custom_uptime_ratios', '1-7-30-90');
@@ -89,18 +63,12 @@ const updateMonitorings = async () => {
       ...data.getHeaders(),
       'Accept-Encoding': 'gzip,deflate,compress',
     },
-    timeout: constants.timeout.L,
+    timeout: constants.timeout.XL,
   });
 
   const result = response.data as IUptimeRobotResponse;
 
-  result.monitors.forEach((monitor) => {
-    cachedMonitorings.monitorings[monitor.id] = mapToDomainObject(
-      monitor,
-      from
-    );
-  });
-  cachedMonitorings.lastUpdate = new Date().getTime();
+  return result.monitors.map((monitor) => mapToDomainObject(monitor, from));
 };
 
 const mapToDomainObject = (

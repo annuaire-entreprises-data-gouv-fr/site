@@ -23,6 +23,5 @@ Disallow: /dirigeants/
 Disallow: /divers/
 Disallow: /erreur/
 Disallow: /formulaire/
-Disallow: /sources-de-donnees/
 
 

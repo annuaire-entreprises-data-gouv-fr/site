@@ -28,13 +28,14 @@ const AdministrationNotResponding: React.FC<IProps> = ({
         Cela vient probablement d’une surcharge ponctuelle de leurs services.
         Merci de ré-essayer plus tard. Nous sommes désolés pour le dérangement.
         <br />
-        Pour en savoir plus sur l’état du service,{' '}
+        Pour en savoir plus sur l’état du service, consultez la section de cette
+        administration{' '}
         <a
-          href={`/sources-de-donnees/${administrationMetaData.slug}#acces`}
+          href={`/donnees/api${administrationMetaData.slug}`}
           target="_blank"
           rel="noreferrer noopener"
         >
-          consultez cette page
+          dans la page statut des API
         </a>
         .
       </p>

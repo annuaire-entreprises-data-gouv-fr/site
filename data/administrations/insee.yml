@@ -6,23 +6,19 @@ long: Institut national de la statistique et des études économiques (Insee)
 contact: https://www.insee.fr/fr/information/1302169
 apiMonitors:
   - apigouvLink: https://api.gouv.fr/les-api/sirene_v3
-    datagouv:
-      - label: Base Sirene des Entreprises
-        link: https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/
+    apiSlug: sirene
     apiName: API Répertoire Sirene
     id: 787859514
-    data:
-      - Nom de la personne morale
-      - Adresse
-      - Code NAF
-      - Forme juridique
-      - N° SIREN
-      - N° SIRET
-      - ESUS
-      - N° RNA
   - apiName: API Avis de situation Sirene
     id: 791856492
-    data:
-      - Avis de situation Sirene
+dataSources:
+  - label: Base Sirene des Entreprises
+    apiSlug: sirene
+    datagouvLink: https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/
+    keywords: Dénomination, Adresse, NAF, Forme juridique, SIREN, SIRET, ESS, N°RNA
+  - label: Code Officiel Géographiques (COG)
+    apiSlug: recherche-entreprise
+    datagouvLink: https://www.data.gouv.fr/fr/datasets/code-officiel-geographique-cog/
+    keywords: Code Officiel Géographique
 description: |
   L’Insee est l’Institut National de la Statistique et des Études Économiques. C’est une direction générale du ministère des finances. Dans le cadre de sa mission, l’Insee a la charge du Système National d’Identification et du Répertoire des Entreprises et de leurs Établissements (SIRENE).

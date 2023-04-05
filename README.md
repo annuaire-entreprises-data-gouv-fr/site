@@ -8,7 +8,7 @@
 
 **Statut des APIs utilisées sur le site :**
 
-Pour voir le détail des disponibilités des API utilisées sur le site, [consultez la page de statut](https://annuaire-entreprises.data.gouv.fr/sources-de-donnees).
+Pour voir le détail des disponibilités des API utilisées sur le site, [consultez la page de statut](https://annuaire-entreprises.data.gouv.fr/donnees/api).
 
 Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr)
 
@@ -24,7 +24,7 @@ Ce repository fait partie d'un ensemble de services qui constituent l'[Annuaire 
 | L’API du Moteur de recherche                                                            | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-api)   |
 | L‘API de redondance de Sirene                                                           | [par ici 👉](https://github.com/etalab/annuaire-entreprises-sirene-api)   |
 | Le traitement permettant la génération de données à ingérer dans le moteur de recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-infra) |
-| Le proxy API du site              | [par ici 👉](https://github.com/etalab/annuaire-entreprises-api-proxy)                    |
+| Le proxy API du site                                                                    | [par ici 👉](https://github.com/etalab/annuaire-entreprises-api-proxy)    |
 
 ## A propos des choix d'architecture
 
@@ -127,9 +127,9 @@ cd seo-script
 npm run build:seo
 ```
 
-## Vie privée 
+## Vie privée
 
-Pour modifier la liste des siren protégés en diffusion [mettre à jour la liste suivante](https://github.com/etalab/annuaire-entreprises-site/edit/main/public/protected-siren.txt) 
+Pour modifier la liste des siren protégés en diffusion [mettre à jour la liste suivante](https://github.com/etalab/annuaire-entreprises-site/edit/main/public/protected-siren.txt)
 
 ## Licence
 

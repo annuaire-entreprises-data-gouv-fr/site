@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
-import { IAdministrationMetaData } from '#models/administrations';
+import { IAdministrationMetaData } from '#models/administrations/types';
 import constants from '#models/constants';
 import InformationTooltip from '.';
 
@@ -20,7 +20,7 @@ const DataSourcesTooltip: React.FC<{
             </React.Fragment>
           ))}
           <br />
-          <a href={link}>👉 En savoir plus</a>
+          <a href={link}>→ En savoir plus</a>
         </>
       }
     >

@@ -3,10 +3,8 @@ import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
 import Meta from '#components/meta';
-import {
-  administrationsMetaData,
-  IAdministrationMetaData,
-} from '#models/administrations';
+import { administrationsMetaData } from '#models/administrations';
+import { IAdministrationMetaData } from '#models/administrations/types';
 import { NextPageWithLayout } from 'pages/_app';
 
 const StatusPage: NextPageWithLayout<{
@@ -17,8 +15,10 @@ const StatusPage: NextPageWithLayout<{
     <TextWrapper>
       <h1>Administrations partenaires</h1>
       <p>
-        L’Annuaire des Entreprises utilise les données de différentes
-        administrations en charge des données des personnes morales :
+        L’Annuaire des Entreprises est conçu en partenariat avec{' '}
+        {allAdministrations.length} administrations différentes, qui nous
+        transmettent les données qu’elles possèdent sur les entreprises, les
+        associations ou les services publics&nbsp;:
       </p>
       {allAdministrations.map(({ slug }) => (
         <AdministrationDescription slug={slug} key={slug} />

@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
-import { Tag } from '#components-ui/tag';
 import { Section } from '#components/section';
 import constants from '#models/constants';
-import { IMonitoring, IRatio } from '#models/monitoring';
+import { IMonitoringWithMetaData, IRatio } from '#models/monitoring';
 
 const getUptimeColor = (ratio: IRatio) => {
   if (!ratio.isActive) {
@@ -131,22 +130,11 @@ const RobotTooltip = () => (
   </InformationTooltip>
 );
 
-interface IProps extends IMonitoring {
-  short: string;
-  apigouvLink?: string;
-  datagouv?: { label: string; link: string }[];
-  slug: string;
-  apiName: string;
-  data?: string[];
-}
-
-const ApiMonitoring: React.FC<IProps> = ({
+const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
   isOnline,
   series,
   uptime,
   apigouvLink,
-  datagouv,
-  data,
 }) => (
   <>
     {!series ? (
@@ -224,38 +212,19 @@ const ApiMonitoring: React.FC<IProps> = ({
             border-right: 2px solid ${constants.colors.pastelBlue};
           }
         `}</style>
-      </Section>
-    )}
-    {data && data.length > 0 && (
-      <div>
-        Données de l’API utilisées sur le site :
-        {data.map((d: any) => (
-          <Tag key={d}>{d}</Tag>
-        ))}
-      </div>
-    )}
-    {(apigouvLink || datagouv) && (
-      <>
-        Aller plus loin :{' '}
+
         {apigouvLink && (
-          <a href={apigouvLink} target="_blank" rel="noreferrer noopener">
-            voir la fiche api.gouv.fr
-          </a>
-        )}
-        {apigouvLink &&
-          datagouv &&
-          ' ou télécharger les données brutes sur data.gouv.fr : '}
-        {datagouv &&
-          datagouv.map(({ label, link }, index) => (
-            <Fragment key={index}>
-              <a href={link} target="_blank" rel="noreferrer noopener">
-                {label}
+          <i>
+            <br />
+            Envie de réutiliser cette API ?{' '}
+            {apigouvLink && (
+              <a href={apigouvLink} target="_blank" rel="noreferrer noopener">
+                Consulter la fiche api.gouv.fr
               </a>
-              {index < datagouv.length - 1 && ', '}
-            </Fragment>
-          ))}
-        .
-      </>
+            )}
+          </i>
+        )}
+      </Section>
     )}
   </>
 );

@@ -128,12 +128,9 @@ const About: NextPageWithLayout = () => {
             .
           </p>
           <p>
-            Vous pouvez également retrouver les sources de données de l’Annuaire
-            et le statut des API utilisées{' '}
-            <a href="https://annuaire-entreprises.data.gouv.fr/sources-de-donnees">
-              sur notre page dédiée
-            </a>
-            .
+            Vous pouvez également retrouver les{' '}
+            <a href="/donnees/sources">sources de données</a> de l’Annuaire et{' '}
+            <a href="/donnees/api">statut des API utilisées</a>.
           </p>
           <p>
             <b>NB</b> : L’Annuaire des Entreprises a développé sa propre API

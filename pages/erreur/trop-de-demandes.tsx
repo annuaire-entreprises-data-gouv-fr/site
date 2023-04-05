@@ -26,8 +26,10 @@ const TooManyRequest: NextPageWithLayout = () => {
         <li>
           Si <b>vous utilisez des robots 🤖</b> pour scrapper les données du
           site. <b>Sachez que toutes les données sont publiques !</b> Alors{' '}
-          <a href="/sources-de-donnees">utilisez les API</a>. Cela sera plus
-          stable et efficace pour tout le monde.
+          <a href="/donnees/sources">
+            utilisez les jeux de données directement ou l’API
+          </a>
+          . Cela sera plus stable et efficace pour tout le monde.
         </li>
       </ul>
       <p>
