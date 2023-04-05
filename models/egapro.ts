@@ -28,17 +28,17 @@ export const getEgapro = async (
 ): Promise<IEgapro | IAPINotRespondingError> => {
   try {
     if (!uniteLegale.complements.egaproRenseignee) {
-      return APINotRespondingFactory(EAdministration.METI, 404);
+      return APINotRespondingFactory(EAdministration.MTPEI, 404);
     }
     return await clientEgapro(uniteLegale.siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
-      return APINotRespondingFactory(EAdministration.METI, 404);
+      return APINotRespondingFactory(EAdministration.MTPEI, 404);
     }
     logErrorInSentry('Error in API EGAPRO', {
       siren: uniteLegale.siren,
       details: e.toString(),
     });
-    return APINotRespondingFactory(EAdministration.METI, 500);
+    return APINotRespondingFactory(EAdministration.MTPEI, 500);
   }
 };

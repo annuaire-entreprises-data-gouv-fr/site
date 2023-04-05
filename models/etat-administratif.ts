@@ -1,7 +1,7 @@
 export enum IETATADMINSTRATIF {
   INCONNU = 'inconnu',
   ACTIF = 'en\u00a0activité',
-  ACTIF_ZERO_ETABLISSEMENT = 'en\u00a0sommeil ou présumée\u00a0inactive',
+  ACTIF_ZERO_ETABLISSEMENT = 'en\u00a0sommeil',
   CESSEE = 'cessée',
   FERME = 'fermé',
 }

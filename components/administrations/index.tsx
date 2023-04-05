@@ -34,12 +34,12 @@ export const DILA = ({ queryString = '' }) => (
   </a>
 );
 
-export const METI = ({ queryString = '' }) => (
+export const MTPEI = ({ queryString = '' }) => (
   <a
-    href={`/administration/meti${queryString}`}
+    href={`/administration/mtpei${queryString}`}
     title="Ministère du Travail de l’Emploi et de l’Insertion"
   >
-    Ministère du Travail
+    Ministère du Travail de l’Emploi et de l’Insertion
   </a>
 );
 

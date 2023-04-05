@@ -1,7 +1,7 @@
-slug: meti
-short: METI
+slug: mtpei
+short: MTPEI
 site: https://travail-emploi.gouv.fr/
-long: Ministère du Travail, du Plein emploi et de l'Insertion (METI)
+long: Ministère du Travail, du Plein Emploi et de l'Insertion (MTPEI)
 contact: https://travail-emploi.gouv.fr/ministere/article/nous-contacter
 apiMonitors:
   - apiName: API Conventions Collectives

@@ -66,7 +66,7 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
         <UniteLegaleBadge uniteLegale={result} small hiddenByDefault />
         {!estActif(result) && (
           <IsActiveTag
-            etatAdministratif={IETATADMINSTRATIF.CESSEE}
+            etatAdministratif={result.etatAdministratif}
             statutDiffusion={result.statutDiffusion}
           />
         )}
@@ -97,12 +97,6 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
               {getAdresseEtablissement(etablissement, true)}
               <span className="down" />
             </a>
-            {!estActif(etablissement) && (
-              <IsActiveTag
-                etatAdministratif={etablissement.etatAdministratif}
-                statutDiffusion={etablissement.statutDiffusion}
-              />
-            )}
           </li>
         ))}
       <li>
