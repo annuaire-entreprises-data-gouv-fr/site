@@ -1,3 +1,5 @@
+import { mockMapping } from '../../mocks/utils';
+
 describe('SEO Index or noindex', () => {
   it('can index home page', () => {
     cy.visit('/');
@@ -7,14 +9,14 @@ describe('SEO Index or noindex', () => {
   });
 
   it('can index entreprise page', () => {
-    cy.visit(`/entreprise/${mockingMap.danone}`);
+    cy.visit(`/entreprise/${mockMapping.danone}`);
     cy.get('meta[name="robots"][content*="noindex"]').should('have.length', 0);
     cy.get('meta[name="robots"][content*="index"]').should('have.length', 1);
     cy.get('meta[name="robots"][content*="follow"]').should('have.length', 1);
   });
 
   it('cannot index justificatif page', () => {
-    cy.visit(`/ustificatif/${mockingMap.danone}`);
+    cy.visit(`/ustificatif/${mockMapping.danone}`);
     cy.get('meta[name="robots"][content*="noindex"]').should('have.length', 1);
     cy.get('meta[name="robots"][content*="follow"]').should('have.length', 1);
   });

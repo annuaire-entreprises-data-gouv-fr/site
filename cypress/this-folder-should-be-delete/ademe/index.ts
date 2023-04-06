@@ -1,1 +1,0 @@
-export { rgeMock } from './rge';

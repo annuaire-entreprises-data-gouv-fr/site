@@ -2,7 +2,7 @@ import { rest } from 'msw';
 
 export const handlers = [
   rest.get(
-    'https://ec.europa.eu/taxation_customs/vies/rest-api/ms/FR/vat/29528163777',
+    'https://ec.europa.eu/taxation_customs/vies/rest-api/ms/FR/vat/*',
     (_req, res, ctx) => {
       return res(
         ctx.json({
