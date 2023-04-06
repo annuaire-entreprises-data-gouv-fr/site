@@ -3,7 +3,7 @@ import { mockMapping } from 'mocks/utils';
 export const resultRge = {
   results: [
     {
-      siren: '528163777',
+      siren: mockMapping.rge,
       nom_complet: 'COMPANY WITH RGE CERTIFICATIONS',
       nom_raison_sociale: 'COMPANY WITH RGE CERTIFICATIONS',
       sigle: 'G.S.E.P.T.',

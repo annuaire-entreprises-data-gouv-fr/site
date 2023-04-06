@@ -1,4 +1,4 @@
-const dataset = {
+export const dataset = {
   nhits: 1,
   parameters: {
     q: 'declarations-des-entrepreneurs-de-spectacles-vivants',

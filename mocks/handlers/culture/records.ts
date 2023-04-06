@@ -1,4 +1,4 @@
-const records = {
+export const records = {
   nhits: 1,
   parameters: {
     dataset: 'declarations-des-entrepreneurs-de-spectacles-vivants',
