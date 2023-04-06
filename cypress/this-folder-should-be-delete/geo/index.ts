@@ -1,1 +1,0 @@
-export { communesMock } from './communes';

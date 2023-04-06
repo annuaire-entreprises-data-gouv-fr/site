@@ -33,6 +33,5 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
       )
     );
   }
-  console.log(JSON.stringify(response.data, null, 2));
   return response;
 };
