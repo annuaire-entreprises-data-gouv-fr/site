@@ -13,13 +13,13 @@ export const handlers = [
     }
   ),
   rest.get(
-    `https://api.insee.fr/entreprises/sirene/V3/siren/${mockMapping.ess}`,
+    `https://api.insee.fr/entreprises/sirene/V3/siren/${mockMapping.essSpectacleVivant}`,
     (_req, res, ctx) => {
       return res(ctx.json({}));
     }
   ),
   rest.get(
-    `https://api.insee.fr/entreprises/sirene/V3/siren/${mockMapping.spectacleVivant}`,
+    `https://api.insee.fr/entreprises/sirene/V3/siren/${mockMapping.grandParis}`,
     (_req, res, ctx) => {
       return res(ctx.json({}));
     }

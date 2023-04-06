@@ -21,9 +21,5 @@ describe.only('Certifications', () => {
       cy.contains('ESS');
       cy.contains('Numéro de récépissé');
     });
-    xit('Should display only spectacles vivants', () => {
-      cy.visit(`/labels-certificats/${mockMapping.spectacleVivant}`);
-      cy.contains('Numéro de récépissé');
-    });
   });
 });

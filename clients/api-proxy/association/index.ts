@@ -16,6 +16,7 @@ const clientAssociation = async (numeroRna: IdRna, useCache = true) => {
     { timeout: constants.timeout.L },
     useCache
   );
+
   if (response.identite && Object.keys(response.identite).length === 1) {
     throw new HttpNotFound(numeroRna);
   }

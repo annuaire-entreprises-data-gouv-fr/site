@@ -32,7 +32,6 @@ const clientAPIProxy = async (
   useCache: boolean
 ) => {
   const request = await getAPIProxy(route, options, useCache);
-
   return request.data;
 };
 

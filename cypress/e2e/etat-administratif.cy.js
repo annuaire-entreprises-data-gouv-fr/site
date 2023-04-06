@@ -1,3 +1,5 @@
+import { mockMapping } from '../../mocks/utils';
+
 describe('Etat administratif', () => {
   // pass failing test as Insee is very instable in CI
   xit('Non diffusible"', () => {
@@ -6,7 +8,7 @@ describe('Etat administratif', () => {
   });
 
   it('Diffusible', () => {
-    cy.visit('/entreprise/552032534');
+    cy.visit(`/entreprise/${mockMapping.danone}`);
     cy.contains('en activité').should('have.length', 1);
   });
 
