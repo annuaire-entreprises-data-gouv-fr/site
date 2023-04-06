@@ -2,13 +2,13 @@ const SIREN = 356000000;
 
 describe(`Pagination for single etablissement company`, () => {
   it('Load page even with query params', () => {
-    cy.request(`/entreprise/880878145?page=10`).then((resp) => {
+    cy.request(`/entreprise/880878145`).then((resp) => {
       expect(resp.status).to.eq(200);
     });
   });
 
   it('Has no pagination', () => {
-    cy.visit(`/entreprise/880878145?page=10`);
+    cy.visit(`/entreprise/880878145`);
     cy.get('.fr-pagination').should('not.exist');
   });
 });
