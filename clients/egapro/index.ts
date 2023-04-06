@@ -66,6 +66,7 @@ const mapToDomainObject = (egapro: IEgaproItem) => {
     employeesSizeRange:
       employeesSizeRangeMapping[egapro.entreprise?.effectif?.tranche || ''],
     years,
+    lessThan250: egapro.entreprise?.effectif?.tranche === '50:250',
     indexYears,
     scores: {
       notes: years.map((y) => notes[y] ?? null),
