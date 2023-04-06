@@ -184,7 +184,7 @@ class SearchFilterParams {
       rge: 'Label : RGE',
       esv: 'Label : Entrepreneur de spectacle vivant',
       bio: 'Label : Professionnels du bio',
-      egapro: 'Label : Index Egapro',
+      egapro: 'Label : Égalité professionnelle',
       qualiopi: 'Label : Qualiopi',
       ei: 'Type : Entreprise Individuelle ',
       ct: 'Type : Collectivité territoriale ',

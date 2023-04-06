@@ -21,6 +21,8 @@ body: |
 more:
   - label: Consulter le jeu de données Egapro sur data.gouv.fr
     href: https://www.data.gouv.fr/fr/datasets/index-egalite-professionnelle-f-h-des-entreprises-de-50-salaries-ou-plus
+  - label: Consulter l’explication de la méthode de calcul de l’index Egapro
+    href: https://egapro.travail.gouv.fr/aide-simulation
 cta:
   label: ⇢ Déclarer l’index Egapro de mon entreprise
   to: https://egapro.travail.gouv.fr/

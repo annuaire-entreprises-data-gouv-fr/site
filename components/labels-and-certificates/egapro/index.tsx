@@ -1,5 +1,7 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
+import { Icon } from '#components-ui/icon/wrapper';
+import InformationTooltip from '#components-ui/information-tooltip';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
@@ -9,6 +11,20 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IEgapro } from '#models/egapro';
+
+const getColor = (note: number) => {
+  try {
+    if (note > 75) {
+      return '#18753c';
+    }
+    if (note > 50) {
+      return '#9f551b';
+    }
+    return '#cf0b06';
+  } catch {
+    return '#000';
+  }
+};
 
 const FAQEgapro = () => (
   <FAQLink
@@ -23,10 +39,16 @@ const FAQEgapro = () => (
   </FAQLink>
 );
 
+const NC = () => (
+  <InformationTooltip label="Cette année là, cette structure n’était pas concernée par ce critère.">
+    <i>NC</i>
+  </InformationTooltip>
+);
+
 export const EgaproSection: React.FC<{
   egapro: IEgapro | IAPINotRespondingError;
 }> = ({ egapro }) => {
-  const sectionTitle = `Égalité professionnelle - Index Egapro`;
+  const sectionTitle = `Égalité professionnelle - Egapro`;
 
   if (isAPINotResponding(egapro)) {
     const isNotFound = egapro.errorType === 404;
@@ -48,24 +70,65 @@ export const EgaproSection: React.FC<{
     );
   }
 
+  const mapToNc = (e: any) => e ?? <NC />;
+  const {
+    notes = [],
+    remunerations = [],
+    augmentations = [],
+    promotions = [],
+    congesMaternite = [],
+    hautesRemunerations = [],
+  } = egapro?.scores || {};
+
   const body = [
-    ['Index', ...egapro.scores.notes],
-    ['Écart rémunérations', ...egapro.scores.remunerations],
-    ["Écart taux d'augmentation", ...egapro.scores.augmentations],
-    ['Écart taux promotion', ...egapro.scores.promotions],
-    ['Hautes rémunérations', ...egapro.scores.hautesRemunerations],
-    ['Retour congé maternité', ...egapro.scores.congesMaternite],
+    [
+      'Index (sur 100)',
+      ...notes
+        .map((note) =>
+          note ? <b style={{ color: getColor(note) }}>{note}</b> : null
+        )
+        .map(mapToNc),
+    ],
+    [
+      <b>
+        <FAQLink tooltipLabel="Détails">
+          L’index est une synthèse des différents indicateurs ci-dessous
+          <br />
+          <a href="https://egapro.travail.gouv.fr/aide-simulation">
+            → En savoir plus
+          </a>
+        </FAQLink>
+      </b>,
+      ...egapro.years.map(() => ''),
+    ],
+    ['    Écart rémunérations (sur 40)', ...remunerations.map(mapToNc)],
+    ...[
+      !egapro.lessThan250
+        ? [
+            "    Écart taux d'augmentation (sur 20)",
+            ...augmentations.map(mapToNc),
+          ]
+        : [],
+    ],
+    ...[
+      !egapro.lessThan250
+        ? ['    Écart taux promotion (sur 15)', ...promotions.map(mapToNc)]
+        : [],
+    ],
+    ['    Retour congé maternité (sur 15)', ...congesMaternite.map(mapToNc)],
+    ['    Hautes rémunérations (sur 10)', ...hautesRemunerations.map(mapToNc)],
   ];
 
   const plural = egapro.years.length > 0;
 
   return (
     <Section title={sectionTitle} sources={[EAdministration.MTPEI]}>
-      Cette entreprise de <b>{egapro.employeesSizeRange}</b> a déclaré{' '}
+      Cette structure de <b>{egapro.employeesSizeRange}</b> a déclaré{' '}
       {plural ? 'plusieurs' : 'une'} <FAQEgapro />
       <p>
-        Les données déclarées pour une année sont récoltées l’année précédente.
-        Par exemple, les données 2018 ont été récoltées en 2017.
+        Chaque déclaration se fait l’année <b>N</b> au titre de l’année{' '}
+        <b>N-1</b> (par exemple : les données déclarées en 2023 sont celles de
+        2022).
       </p>
       <FullTable head={['Année', ...egapro.indexYears]} body={body} />
     </Section>

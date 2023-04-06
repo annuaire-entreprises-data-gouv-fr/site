@@ -10,6 +10,7 @@ import { IUniteLegale } from '.';
 
 export interface IEgapro {
   employeesSizeRange: string;
+  lessThan250: boolean;
   years: string[];
   indexYears: string[];
   scores: {
