@@ -7,7 +7,6 @@ contact: https://ec.europa.eu/info/about-european-commission/contact_fr
 description: |
   Le VIES est un dispositif international de vérification des numéros de TVA des pays de l’Union Européenne. C’est un service proposé par la Commission européenne.
 apiMonitors:
-  - apiName: API TVA (VIES)
+  - apiName: API TVA
+    apiSlug: tva
     id: 792592201
-    data:
-      - N° TVA vérifié par le VIES

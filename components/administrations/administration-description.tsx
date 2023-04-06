@@ -5,8 +5,9 @@ const AdministrationDescription: React.FC<{
   slug: string; // EAdministration
   titleLevel?: 'h2' | 'h3';
 }> = ({ slug, titleLevel = 'h2' }) => {
-  const { description, contact, long, apiMonitors, logoType } =
+  const { description, contact, long, dataSources, logoType } =
     administrationsMetaData[slug];
+
   return (
     <div className="administration-wrapper" id={slug}>
       <div>
@@ -21,17 +22,26 @@ const AdministrationDescription: React.FC<{
         {titleLevel === 'h2' ? <h2>{long}</h2> : <h3>{long}</h3>}
         <p>
           {description}
-          <br />
-          {contact && (
-            <a rel="noreferrer noopener" target="_blank" href={contact}>
-              → Contacter cette administration
-            </a>
+          {dataSources.length > 0 && (
+            <div>
+              Données transmises :
+              <ul>
+                {dataSources.map(({ keywords }) =>
+                  keywords.split(', ').map((kw) => (
+                    <li key={kw}>
+                      <a href={`/donnees/sources#${slug}`}>{kw}</a>
+                    </li>
+                  ))
+                )}
+              </ul>
+            </div>
           )}
-          <br />
-          {(apiMonitors?.length || 0) > 0 && (
-            <a href={`/sources-de-donnees/${slug}`}>
-              → Accéder aux données de cette administration
-            </a>
+          {contact && (
+            <p>
+              <a rel="noreferrer noopener" target="_blank" href={contact}>
+                → Contacter cette administration
+              </a>
+            </p>
           )}
         </p>
       </div>

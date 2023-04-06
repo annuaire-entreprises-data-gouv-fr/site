@@ -1,17 +1,13 @@
 import { clientMonitorings } from '#clients/monitoring';
-import {
-  administrationsMetaData,
-  IAdministrationMetaData,
-  IAPIMonitorMetaData,
-} from '#models/administrations';
 import logErrorInSentry from '#utils/sentry';
+import { administrationsMetaData, EAdministration } from './administrations';
 
-export interface IRatio {
+export type IRatio = {
   ratio: string;
   isActive: boolean;
   date?: string;
-}
-export interface IMonitoring {
+};
+export type IMonitoring = {
   id: number;
   isOnline: boolean;
   uptime: {
@@ -21,13 +17,17 @@ export interface IMonitoring {
     trimester: string;
   };
   series: IRatio[];
+};
+
+export interface IMonitoringWithMetaData extends IMonitoring {
+  apigouvLink?: string;
+  apiSlug: string;
+  apiName: string;
 }
 
-const getMonitorings = async (
-  monitoringIds: number[]
-): Promise<IMonitoring[]> => {
+const getMonitorings = async (): Promise<IMonitoring[]> => {
   try {
-    return await clientMonitorings(monitoringIds);
+    return await clientMonitorings();
   } catch (e: any) {
     logErrorInSentry('Error while fetching monitoring', {
       details: e.message,
@@ -36,56 +36,32 @@ const getMonitorings = async (
   }
 };
 
-/**
- * Merge Administration & API Monitoring
- */
+export const getMonitorsByAdministration = async (): Promise<{
+  [key: string]: IMonitoringWithMetaData[];
+}> => {
+  const monitoringsFromUptimeRobot = await getMonitorings();
 
-const administrationsWithMonitors = Object.values(
-  administrationsMetaData
-).filter((administration) => !!administration.apiMonitors);
+  return Object.values(administrationsMetaData).reduce(
+    (allMonitorsByAdministration, { apiMonitors = [], administrationEnum }) => {
+      const administrationMonitors = apiMonitors.map(
+        ({ id, apigouvLink = null, apiName = null, apiSlug = null }) => {
+          const monitoring = monitoringsFromUptimeRobot.find(
+            (monitor) => monitor.id === id
+          );
 
-const allMonitorsMetaData = administrationsWithMonitors.reduce(
-  (allApiMonitors: IAPIMonitorMetaData[], admin: IAdministrationMetaData) => {
-    return [...allApiMonitors, ...(admin.apiMonitors || [])];
-  },
-  []
-);
+          return {
+            apigouvLink,
+            apiSlug,
+            apiName,
+            ...monitoring,
+          };
+        }
+      );
 
-export const getMonitorsWithMetaData = async (
-  monitorsMetaData: IAPIMonitorMetaData[]
-) => {
-  const monitoringsFromUptimeRobot = await getMonitorings(
-    monitorsMetaData.map((monitor) => monitor.id)
+      // @ts-ignore
+      allMonitorsByAdministration[administrationEnum] = administrationMonitors;
+      return allMonitorsByAdministration;
+    },
+    {}
   );
-
-  return monitorsMetaData.map((metaData) => {
-    const monitoring = monitoringsFromUptimeRobot.find(
-      (monitor) => monitor.id === metaData.id
-    );
-
-    const admin = administrationsWithMonitors.find(
-      (admin) =>
-        (admin.apiMonitors || []).find(
-          (monitor) => monitor.id === metaData.id
-        ) !== undefined
-    );
-
-    if (!admin) {
-      throw new Error('Should not happen');
-    }
-
-    return {
-      ...monitoring,
-      short: admin.short,
-      apigouvLink: metaData.apigouvLink || null,
-      datagouv: metaData.datagouv || null,
-      apiName: metaData.apiName,
-      id: metaData.id || null,
-      slug: admin.slug,
-      data: metaData.data || [],
-    };
-  });
 };
-
-export const getAllMonitorsWithMetaData = () =>
-  getMonitorsWithMetaData(allMonitorsMetaData);

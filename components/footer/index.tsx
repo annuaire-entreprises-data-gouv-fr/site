@@ -52,8 +52,13 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/sources-de-donnees">
-                    Sources de données & statut des API
+                  <a className="fr-footer__top-link" href="/donnees/sources">
+                    Sources de données
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/donnees/api">
+                    Statut des API utilisées
                   </a>
                 </li>
               </ul>

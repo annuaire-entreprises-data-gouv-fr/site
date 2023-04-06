@@ -1,3 +1,5 @@
+import { IAdministrationMetaData, IAdministrationsMetaData } from './types';
+
 export enum EAdministration {
   EDUCATION_NATIONALE = 'education-nationale',
   AGENCE_BIO = 'agence-bio',
@@ -18,7 +20,10 @@ export enum EAdministration {
  * @param a
  * @returns
  */
-const validateMetaData = (a: IAdministrationMetaData) => {
+const validateMetaData = (
+  a: IAdministrationMetaData,
+  administrationEnum: EAdministration
+) => {
   const logoTypeIsValid =
     typeof a.logoType === 'undefined' ||
     a.logoType === 'portrait' ||
@@ -28,7 +33,11 @@ const validateMetaData = (a: IAdministrationMetaData) => {
     throw new Error('Invalid administrationMetadata : ' + a.slug);
   }
 
-  return a;
+  return {
+    // default values
+    ...{ apiMonitors: [], dataSources: [], administrationEnum },
+    ...a,
+  };
 };
 
 /**
@@ -38,41 +47,19 @@ const validateMetaData = (a: IAdministrationMetaData) => {
 const loadMetadata = (): IAdministrationsMetaData => {
   const metadata = {} as { [k: string]: IAdministrationMetaData };
 
-  Object.values(EAdministration).forEach((k) => {
-    const data = require(`../../data/administrations/${k.toString()}.yml`);
+  Object.values(EAdministration).forEach((administrationEnum) => {
+    const data = require(`../../data/administrations/${administrationEnum.toString()}.yml`);
 
-    metadata[k] = validateMetaData(data);
+    metadata[administrationEnum] = validateMetaData(data, administrationEnum);
   });
   return metadata;
 };
 
-export const administrationsMetaData = loadMetadata();
-
-export interface IAdministrationsMetaData {
-  [key: string]: IAdministrationMetaData;
-}
-export interface IAdministrationMetaData {
-  long: string;
-  short: string;
-  logoType: 'portrait' | 'paysage' | null;
-  slug: string;
-  description: string;
-  contact: string;
-  site: string;
-  apiMonitors?: IAPIMonitorMetaData[];
-  datagouv?: { label: string; link: string }[];
-  data?: string[];
-}
-
-export interface IAPIMonitorMetaData {
-  id: number;
-  apigouvLink?: string;
-  datagouv?: { label: string; link: string }[];
-  apiName: string;
-  data: string[];
-}
-
-export const allMonitoringIds = () =>
+/**
+ * Load list of all api monitoring id. Should run once
+ * @returns
+ */
+const loadMonitoringIds = () =>
   Object.values(administrationsMetaData).reduce((acc, administration) => {
     (administration.apiMonitors || []).forEach((monitor) => {
       //@ts-ignore
@@ -80,3 +67,7 @@ export const allMonitoringIds = () =>
     });
     return acc;
   }, []) as number[];
+
+export const administrationsMetaData: IAdministrationsMetaData = loadMetadata();
+
+export const allMonitoringIds = loadMonitoringIds();

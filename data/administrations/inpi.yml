@@ -6,20 +6,20 @@ logoType: portrait
 contact: https://www.inpi.fr/fr/contactez-nous?about=030
 apiMonitors:
   - apigouvLink: https://api.gouv.fr/les-api/api-rncs
-    datagouv:
-      - label: Immatriculations, modifications, radiations des sociétés
-        link: https://www.data.gouv.fr/fr/datasets/immatriculations-modifications-radiations-des-societes/
+    apiSlug: rncs
     apiName: API Registre National du Commerce et des Sociétés
     id: 787859523
-    data:
-      - Immatriculations et radiations des sociétés
-      - Dirigeants
-      - Bénéficiaires effectifs (RBE)
   - apiName: API Registre National des Entreprises
+    apiSlug: rne
     id: 793687425
-    data:
-      - Créations, Modifications, cessations
-      - Dirigeants
-      - Bénéficiaires effectifs (RBE)
+dataSources:
+  - label: Immatriculations, modifications, radiations des sociétés
+    apiSlug: rncs
+    datagouvLink: https://www.data.gouv.fr/fr/datasets/immatriculations-modifications-radiations-des-societes/
+    keywords: Dirigeants, Bénéficaires Effectifs
+  - label: Registre National des Entreprises
+    apiSlug: rne
+    datagouvLink: https://data.inpi.fr
+    keywords: Immatriculations des entreprises
 description: |
   L’INPI est l’Institut National de la Protection Intellectuelle. C’est un établissement public à caractère administratif,  qui relève du ministère de l’Économie.
