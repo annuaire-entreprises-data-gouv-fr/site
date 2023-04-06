@@ -17,7 +17,7 @@ describe('Certifications', () => {
 describe.only('Certifications', () => {
   describe('ESS & Spectacles vivants', () => {
     it('Should display ESS and spectacles vivants', () => {
-      cy.visit(`/labels-certificats/${mockMapping.ess}`);
+      cy.visit(`/labels-certificats/${mockMapping.essSpectacleVivant}`);
       cy.contains('ESS');
       cy.contains('Numéro de récépissé');
     });
