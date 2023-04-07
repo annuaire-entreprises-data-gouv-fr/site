@@ -73,8 +73,6 @@ const factory = (options: InseeClientOptions) => async (siren: Siren) => {
 
   const data = response.data as IInseeUniteLegaleResponse;
 
-  console.log(JSON.stringify(data));
-
   return mapToDomainObject(siren, data);
 };
 

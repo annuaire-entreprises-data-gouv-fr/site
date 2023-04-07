@@ -17,8 +17,8 @@ describe('Etat administratif', () => {
     cy.contains('en sommeil').should('have.length', 1);
   });
 
-  it('Cessée', () => {
-    cy.visit('/entreprise/839517323');
+  it.only('Cessée', () => {
+    cy.visit(`/entreprise/${mockMapping.rge}`);
     cy.contains('cessée').should('have.length', 1);
   });
 });

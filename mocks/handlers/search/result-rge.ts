@@ -24,7 +24,7 @@ export const resultRge = {
         departement: '93',
         distribution_speciale: null,
         est_siege: true,
-        etat_administratif: 'A',
+        etat_administratif: 'C',
         geo_adresse: '5 Rue Morand 93400 Saint-Ouen-sur-Seine',
         geo_id: '93070_6178_00005',
         indice_repetition: null,
