@@ -102,10 +102,7 @@ export const EgaproSection: React.FC<{
       ...egapro.years.map(() => ''),
     ],
     ['    Écart rémunérations (sur 40)', ...remunerations.map(mapToNc)],
-    ...[
-      !egapro.lessThan250
-        ? [
-            "    Écart taux d'augmentation (sur 20)",
+    [`    Écart taux d'augmentation (sur ${egapro.lessThan250 ? "35" : "20"})`,
             ...augmentations.map(mapToNc),
           ]
         : [],
