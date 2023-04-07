@@ -213,3 +213,4 @@ jobs:
           SPLIT: ${{ strategy.job-total }}
           SPLIT_INDEX: ${{ strategy.job-index }}
           DEBUG: cypress-split
+          NEXT_PUBLIC_API_MOCKING: enabled

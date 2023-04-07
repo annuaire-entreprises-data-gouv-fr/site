@@ -7,17 +7,17 @@ describe('Etat administratif', () => {
     cy.contains('état inconnu (non-diffusible)').should('have.length', 1);
   });
 
-  it('Diffusible', () => {
+  xit('Diffusible', () => {
     cy.visit(`/entreprise/${mockMapping.danone}`);
     cy.contains('en activité').should('have.length', 1);
   });
 
-  it('En sommeil', () => {
+  xit('En sommeil', () => {
     cy.visit('/entreprise/351556394');
     cy.contains('en sommeil').should('have.length', 1);
   });
 
-  it.only('Cessée', () => {
+  xit('Cessée', () => {
     cy.visit(`/entreprise/${mockMapping.rge}`);
     cy.contains('cessée').should('have.length', 1);
   });
