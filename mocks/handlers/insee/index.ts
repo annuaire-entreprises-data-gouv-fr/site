@@ -1,5 +1,6 @@
 import { rest } from 'msw';
 import { mockMapping } from 'mocks/utils';
+import { sireneNonDiffusible } from './sirene-non-diffusible';
 import { token } from './token';
 
 export const handlers = [
@@ -22,6 +23,12 @@ export const handlers = [
     `https://api.insee.fr/entreprises/sirene/V3/siren/${mockMapping.grandParis}`,
     (_req, res, ctx) => {
       return res(ctx.json({}));
+    }
+  ),
+  rest.get(
+    `https://api.insee.fr/entreprises/sirene/V3/siren/${mockMapping.nonDiffusible}`,
+    (_req, res, ctx) => {
+      return res(ctx.json(sireneNonDiffusible));
     }
   ),
   rest.get(

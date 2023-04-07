@@ -1,4 +1,4 @@
-const association = {
+export const association = {
   identite: {
     nom: 'MANAKIN PRODUCTION',
     nom_sirene: 'MANAKIN PRODUCTION',

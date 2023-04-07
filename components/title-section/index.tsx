@@ -267,7 +267,6 @@ const Title: React.FC<IProps> = ({
       currentFicheType={ficheType}
       session={session}
     />
-
     <style jsx>{`
       .header-section {
         display: block;
