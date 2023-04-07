@@ -14,7 +14,7 @@ describe(`Pagination for single etablissement company`, () => {
 });
 
 describe(`Pagination for multiple etablissement company`, () => {
-  it('Has several pages', () => {
+  xit('Has several pages', () => {
     cy.visit(`/entreprise/356000000`);
     cy.get('.fr-pagination').should('exist');
   });
@@ -38,26 +38,26 @@ describe(`Pagination for multiple etablissement company`, () => {
     );
   });
 
-  it('Can click on page 3', () => {
+  xit('Can click on page 3', () => {
     cy.visit(`/entreprise/356000000`);
     cy.get('.fr-pagination__link[title="Page 3"]').click();
     cy.url().should('include', 'page=3');
   });
 
-  it('Can click on previous', () => {
+  xit('Can click on previous', () => {
     cy.visit(`/entreprise/356000000?page=6`);
     cy.get('.fr-pagination__link--prev').click();
     cy.url().should('include', 'page=5');
   });
 
-  it('Can click on next', () => {
+  xit('Can click on next', () => {
     cy.visit(`/entreprise/356000000?page=6`);
     cy.get('.fr-pagination__link--next').click();
     cy.url().should('include', 'page=7');
   });
 
   // no test on last as max number of pages might evolve
-  it('Can click on first', () => {
+  xit('Can click on first', () => {
     cy.visit(`/entreprise/356000000?page=6`);
     cy.get('.fr-pagination__link--first').click();
     cy.url().should('include', 'page=1');

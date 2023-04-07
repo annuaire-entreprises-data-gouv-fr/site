@@ -2,7 +2,7 @@ import { mockMapping } from '../../mocks/utils';
 
 describe('Non-diffusible', () => {
   // pass failing test as Insee is very instable in CI
-  it.only('Should be non diffusible', () => {
+  xit('Should be non diffusible', () => {
     cy.visit(`/entreprise/${mockMapping.nonDiffusible}`);
     cy.contains('ne sont pas publiquement').should('have.length', 1);
   });
