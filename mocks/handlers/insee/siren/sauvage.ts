@@ -1,4 +1,4 @@
-export const sireneNonDiffusible = {
+export const sauvage = {
   header: {
     statut: 200,
     message: 'OK',

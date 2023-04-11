@@ -1,9 +1,11 @@
-import { mockMapping } from 'mocks/utils';
-
-export const resultRge = {
+/**
+ * This uniteLegale has the characteristics
+ * (RGE)
+ */
+export const resultSolutionEnergie = {
   results: [
     {
-      siren: mockMapping.rge,
+      siren: '528163777',
       nom_complet: 'COMPANY WITH RGE CERTIFICATIONS',
       nom_raison_sociale: 'COMPANY WITH RGE CERTIFICATIONS',
       sigle: 'G.S.E.P.T.',

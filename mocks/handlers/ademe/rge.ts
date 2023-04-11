@@ -1,5 +1,5 @@
 export const rge = {
-  total: 3,
+  id: '528163777',
   results: [
     {
       site_internet: '',

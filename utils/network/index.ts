@@ -39,9 +39,6 @@ export const cachedAxiosInstanceFactory = () => {
     Promise.reject(err)
   );
 
-  cachedInstance.interceptors.request.use((config) => {
-    return config;
-  });
   //@ts-ignore
   cachedInstance.interceptors.response.use(logInterceptor, errorInterceptor);
 
