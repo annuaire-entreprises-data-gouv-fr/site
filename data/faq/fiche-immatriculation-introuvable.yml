@@ -4,11 +4,18 @@ targets:
   - salarie
   - dirigeant
   - independant
-title: La fiche d’immatriculation de mon entreprise est introuvable
+  - agent
+title: Le justificatif d’immatriculation au RNE d’une entreprise est introuvable
 body: |
-  Les entreprises individuelles et les auto-entreprises, ne sont **pas obligées d’être immatriculées**. Il est donc possible que vous ne trouviez pas de fiche d’immatriculation pour une entreprise de ce type.
+  Toutes les **entreprises** :
+  - **doivent être enregistrées dans la base Sirene** tenue par l’Insee
+  - **doivent être immatriculées au RNE** (Registre National des Entreprises) tenu par l’Inpi
 
-  En revanche, les entreprises de toutes les autres formes juridiques **doivent être immatriculées**. Si vous ne trouvez pas de fiche d’immatriculation pour une entreprise, deux choix s’offrent à vous :
+  Selon l’[Art.L123-36 du Code de Commerce](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044046311), en vigueur depuis le 01 janvier 2023 :
 
-  - Si l’entreprise est une entreprise artisanale, [contactez les Chambres des Métiers de l’Artisanat](https://rnm.artisanat.fr/)
-  - Si l’entreprise n’est pas une entreprise artisanale, [contactez l’INPI qui centralise les données des Greffes des tribunaux de commerce](http://data.inpi.fr/)
+  *“il est tenu un registre national des entreprises, auquel s’immatriculent les entreprises exerçant sur le territoire français une activité de nature commerciale, artisanale, agricole ou indépendante.”*
+
+  Si le justificatif d’immatriculation d’une entreprise commerciale, artisanale, agricole ou indépendante, est introuvable, **le problème doit être remonté à l’INPI** pour y être résolu.
+cta:
+  label: ⇢ Remonter le problème à l’INPI
+  to: https://www.inpi.fr/contactez-nous
