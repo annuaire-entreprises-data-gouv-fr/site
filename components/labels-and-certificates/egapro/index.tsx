@@ -1,6 +1,5 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
-import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { Section } from '#components/section';
