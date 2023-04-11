@@ -22,7 +22,7 @@ const EtatTag: React.FC<{
   state: IETATADMINSTRATIF;
   since?: string;
 }> = ({ state, since = '' }) => (
-  <Tag color={classFromState(state)}>
+  <Tag color={classFromState(state)} title={state}>
     {state}
     {since && <>&nbsp;le&nbsp;{formatDate(since)}</>}
   </Tag>

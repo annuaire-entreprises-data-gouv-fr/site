@@ -1,5 +1,5 @@
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { getEgapro, IEgapro } from '#models/egapro';
+import { getEgapro, IEgapro } from '#models/certifications/egapro';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { IUniteLegale } from '..';
 import { getBio, IEtablissementsBio } from './bio';

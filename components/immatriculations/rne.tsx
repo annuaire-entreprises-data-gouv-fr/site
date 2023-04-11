@@ -121,7 +121,6 @@ const ImmatriculationRNE: React.FC<IProps> = ({
             `}</style>
           </Section>
           <HorizontalSeparator />
-          <BreakPageForPrint />
         </>
       )}
     </>

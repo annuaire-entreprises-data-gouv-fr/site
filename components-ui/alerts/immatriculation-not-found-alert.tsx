@@ -1,6 +1,7 @@
 import React from 'react';
+import ButtonLink from '#components-ui/button';
+import { INPI } from '#components/administrations';
 import AvisSituationLink from '#components/avis-situation-link';
-import constants from '#models/constants';
 import { IUniteLegale, isAssociation } from '#models/index';
 import AssociationCreationNotFoundAlert from './association-creation-not-found-alert';
 import Warning from './warning';
@@ -13,30 +14,47 @@ const ImmatriculationNotFoundAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
   } else {
     return (
       <Warning full>
-        <b>Pas de justificatif d’immatriculation</b>
+        <b>
+          L’Immatriculation au Registre National des Entreprises (RNE) est
+          introuvable
+        </b>
         <p>
-          Nous n’avons <b>pas retrouvé le justificatif d’immatriculation</b>. Il
-          existe plusieurs explications possibles :
+          Nous n’avons <b>pas retrouvé l’immatriculation</b> de cette entreprise
+          dans le RNE tenu par l’
+          <INPI />.
         </p>
-        <ul>
-          <li>
-            Si cette structure est une <b>entreprise</b> (commerciale,
-            artisanale, agricole, ou entreprise individuelle),{' '}
-            <a href={constants.links.mailtoInpi}>contactez l’INPI</a>. En effet,
-            l’INPI tient le Registre National des Entreprises (RNE), dans lequel{' '}
-            <b>l’entreprise doit apparaître</b>.
-          </li>
-          <li>
-            Si cette structure est un <b>service publique</b>, c’est un cas
-            normal. Il n’existe pas de justificatif d’immatriculation.
-          </li>
-        </ul>
-        En l’absence de justificatif d’immatriculation,{' '}
+        <p>
+          Selon l’
+          <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044046311">
+            Art.L123-36 du Code de Commerce
+          </a>
+          , en vigueur depuis le 01 janvier 2023 :{' '}
+          <i>
+            “il est tenu un registre national des entreprises, auquel
+            s’immatriculent les entreprises exerçant sur le territoire français
+            une activité de nature commerciale, artisanale, agricole ou
+            indépendante.”
+          </i>
+        </p>
+        <p>
+          Si cette structure est une entreprise commerciale, artisanale,
+          agricole ou indépendante, <b>elle doit être enregistrée au RNE</b>. Le
+          fait qu’elle soit introuvable{' '}
+          <b>est anormal et le problème doit être remonté</b> à l’
+          <INPI /> pour y être résolu.
+        </p>
+        <div className="layout-center">
+          <ButtonLink to="https://www.inpi.fr/contactez-nous" alt small>
+            Remonter le problème à l’INPI
+          </ButtonLink>
+        </div>
+        <br />
+        En l’absence de justificatif d’immatriculation, vous pouvez télécharger{' '}
         <AvisSituationLink
           etablissement={uniteLegale.siege}
-          label="l’avis de situation du siège social"
-        />{' '}
-        permet de prouver l’existence de l’entreprise.
+          label="l’avis de situation Insee du siège social"
+        />
+        .
       </Warning>
     );
   }

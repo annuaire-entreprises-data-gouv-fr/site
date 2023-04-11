@@ -1,6 +1,5 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
-import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { Section } from '#components/section';
@@ -10,7 +9,7 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
-import { IEgapro } from '#models/egapro';
+import { IEgapro } from '#models/certifications/egapro';
 
 const getColor = (note: number) => {
   try {

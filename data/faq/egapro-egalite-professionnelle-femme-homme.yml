@@ -1,24 +1,28 @@
 administrations:
   - mtpei
 targets: # no targets
-title: 'Qu’est ce qu’Egapro : l’Index d’égalité professionnelle entre les femmes et les hommes ?'
-description: L’Index Egapro est une mesure de l’égalité professionnelle entre les femmes et les hommes dans les entreprises de plus de 50 salariés.
+title: 'Qu’est-ce qu’Egapro : l’Index d’égalité professionnelle entre les femmes et les hommes ?'
+description: L’Index Egapro permet de mesurer l’égalité professionnelle entre les femmes et les hommes dans les entreprises de plus de 50 salariés. Il est construit à partir d’indicateurs permettant de mesurer les écarts de rémunération entre les sexes.
 body: |
   L’Index [Egapro](https://egapro.travail.gouv.fr) permet de mesurer l’égalité professionnelle entre les femmes et les hommes dans les **entreprises de plus de 50 salariés**.
+
+  ## Qu’est-ce que l’Index Egapro ?
 
   Issu de la [loi pour la liberté de choisir son avenir professionnel du 5 septembre 2018](https://www.economie.gouv.fr/entreprises/index-egalite-professionnelle-obligatoire), cet index est construit à partir d’indicateurs permettant de mesurer les écarts de rémunération entre les sexes, comme : 
 
   - Les écarts de rémunération femmes / hommes
-  - Les écarts de taux d’augmentation individuelles
-  - Le nombre de salariés augmentées suite à un congé maternité
-  - Le degré de partie parmi les 10 plus hautes rémunérations de l’entreprise
-  - Les écarts de taux de promotions pour les entreprises de plus de 250 salariés
+  - Les écarts de taux d’augmentation individuelle
+  - Le nombre de salariées augmentées suite à un congé maternité
+  - Le degré de parité parmi les 10 plus hautes rémunérations de l’entreprise
+  - Les écarts de taux de promotion pour les entreprises de plus de 250 salariés
 
-  Le score d’index Egapro est donné sur 100 points. Il doit être publié - **au plus tard le 1er mars** - sur le site internet des entreprises, déclaré à l’inspection du travail et communiqué au CSE (comité social et économique. 
+  ## Comment est calculé l’Index Egapro ?
+
+  Le score d’index Egapro est donné sur 100 points. Il doit être publié - **au plus tard le 1er mars** - sur le site internet des entreprises, déclaré à l’inspection du travail et communiqué au CSE (comité social et économique). 
 
   Depuis le 1er mars 2020, une entreprise qui ne publierait pas son index tous les ans **peut être redevable d’une pénalité financière** pouvant aller jusqu’à 1% de sa masse salariale. 
 
-  Des mesures d’ajustement et de correction doivent être prises en cas de score en dessous de 85 puis de 75 points.
+  Des mesures d’ajustement et de correction doivent être prises en cas de score en dessous de 85 points.
 more:
   - label: Consulter le jeu de données Egapro sur data.gouv.fr
     href: https://www.data.gouv.fr/fr/datasets/index-egalite-professionnelle-f-h-des-entreprises-de-50-salaries-ou-plus

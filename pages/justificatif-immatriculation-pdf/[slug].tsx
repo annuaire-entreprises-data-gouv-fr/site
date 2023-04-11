@@ -10,7 +10,6 @@ import Meta from '#components/meta';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
-import constants from '#models/constants';
 import { formatIntFr } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import { postServerSideProps } from '#utils/server-side-props-helper/post-server-side-props';
@@ -139,7 +138,7 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
                       </p>
                       <p>
                         Quand c’est le cas,{' '}
-                        <a href={constants.links.mailtoInpi}>
+                        <a href="https://www.inpi.fr/contactez-nous">
                           écrivez à l’INPI pour leur demander le document.
                         </a>{' '}
                         L’
