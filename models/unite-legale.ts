@@ -93,6 +93,12 @@ class UniteLegaleFactory {
         }),
       ]);
 
+    const t = await getUniteLegaleForGoodBot(this._siren, page, useCache).catch(
+      () => {
+        return { colter: {}, complements: {}, chemin: this._siren };
+      }
+    );
+
     uniteLegale.complements = {
       ...uniteLegale.complements,
       ...complements,
@@ -186,7 +192,6 @@ const getUniteLegale = async (
       throw new SirenNotFoundError(siren);
     }
     logFirstSireneInseefailed({ siren, details: e.message || e });
-
     try {
       // in case sirene INSEE 429 or 500, fallback on Siren Etalab
       return await clientUniteLegaleRechercheEntreprise(siren);

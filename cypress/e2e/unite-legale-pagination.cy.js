@@ -1,4 +1,6 @@
-const SIREN = 356000000;
+import { sirenSiege } from '../../mocks/handlers/search/result-la-poste';
+
+const SIREN = sirenSiege;
 
 describe(`Pagination for single etablissement company`, () => {
   it('Load page even with query params', () => {
@@ -14,23 +16,23 @@ describe(`Pagination for single etablissement company`, () => {
 });
 
 describe(`Pagination for multiple etablissement company`, () => {
-  xit('Has several pages', () => {
-    cy.visit(`/entreprise/356000000`);
+  it('Has several pages', () => {
+    cy.visit(`/entreprise/${SIREN}`);
     cy.get('.fr-pagination').should('exist');
   });
 
   it('Has different companies on different pages', () => {
-    cy.visit(`/entreprise/356000000?page=1`);
+    cy.visit(`/entreprise/${SIREN}?page=1`);
     const siren1 = cy.get('#etablissements tbody > tr > td:first-of-type');
 
-    cy.visit(`/entreprise/356000000?page=6`);
+    cy.visit(`/entreprise/${SIREN}?page=6`);
     const siren2 = cy.get('#etablissements tbody > tr > td:first-of-type');
 
     cy.expect(siren1).to.not.equal(siren2);
   });
 
   it('Should color n°6 link on page 6', () => {
-    cy.visit(`/entreprise/356000000?page=6`);
+    cy.visit(`/entreprise/${SIREN}?page=6`);
     cy.get('.fr-pagination__link[aria-current="page"]').should(
       'have.attr',
       'href',
@@ -38,27 +40,27 @@ describe(`Pagination for multiple etablissement company`, () => {
     );
   });
 
-  xit('Can click on page 3', () => {
-    cy.visit(`/entreprise/356000000`);
+  it('Can click on page 3', () => {
+    cy.visit(`/entreprise/${SIREN}`);
     cy.get('.fr-pagination__link[title="Page 3"]').click();
     cy.url().should('include', 'page=3');
   });
 
-  xit('Can click on previous', () => {
-    cy.visit(`/entreprise/356000000?page=6`);
+  it('Can click on previous', () => {
+    cy.visit(`/entreprise/${SIREN}?page=6`);
     cy.get('.fr-pagination__link--prev').click();
     cy.url().should('include', 'page=5');
   });
 
-  xit('Can click on next', () => {
-    cy.visit(`/entreprise/356000000?page=6`);
+  it('Can click on next', () => {
+    cy.visit(`/entreprise/${SIREN}?page=6`);
     cy.get('.fr-pagination__link--next').click();
     cy.url().should('include', 'page=7');
   });
 
   // no test on last as max number of pages might evolve
-  xit('Can click on first', () => {
-    cy.visit(`/entreprise/356000000?page=6`);
+  it('Can click on first', () => {
+    cy.visit(`/entreprise/${SIREN}?page=6`);
     cy.get('.fr-pagination__link--first').click();
     cy.url().should('include', 'page=1');
   });

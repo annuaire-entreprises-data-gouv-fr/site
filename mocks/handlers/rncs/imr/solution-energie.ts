@@ -1,7 +1,9 @@
-import { mockMapping } from 'mocks/utils';
-
-export const imr = {
-  siren: mockMapping.rge,
+/**
+ * This uniteLegale has the characteristics
+ * (RGE)
+ */
+export const solutionEnergie = {
+  siren: '528163777',
   dirigeants: [
     {
       prenom: 'Ilan',
@@ -41,7 +43,7 @@ export const imr = {
     denomination: 'GROUPE SOLUTION ENERGIE POLE TECHNIQUE(G.S.E.P.T.)',
     dureePersonneMorale: '99 ans',
     dateClotureExercice: '30 Septembre',
-    capital: '26 000 Euros (fixe)',
+    capital: '26000 Euros (fixe)',
     isPersonneMorale: true,
     libelleNatureJuridique: 'Société par actions simplifiée',
     natureEntreprise: '',

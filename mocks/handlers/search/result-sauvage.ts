@@ -1,4 +1,7 @@
-export const resultNonDiffusible = {
+/**
+ * This uniteLegale is used in test for its (non diffusible) status
+ */
+export const resultSauvage = {
   results: [
     {
       siren: '300025764',

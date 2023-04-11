@@ -1,3 +1,7 @@
+/**
+ * This uniteLegale has the characteristics
+ * (Collectivité territoriale)
+ */
 export const resultGrandParis = {
   results: [
     {

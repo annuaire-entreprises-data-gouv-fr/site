@@ -1,9 +1,11 @@
-import { mockMapping } from 'mocks/utils';
-
-export const resultEssSpectacle = {
+/**
+ * This uniteLegale has the characteristics
+ * ASSOCIATION | ESS | Entrepreneur de spectacles vivants
+ */
+export const resultManakinProduction = {
   results: [
     {
-      siren: mockMapping.essSpectacleVivant,
+      siren: '842019051',
       nom_complet: 'MANAKIN PRODUCTION',
       nom_raison_sociale: 'MANAKIN PRODUCTION',
       sigle: null,

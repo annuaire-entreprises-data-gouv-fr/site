@@ -1,3 +1,7 @@
+/**
+ * This uniteLegale has the characteristics
+ * ASSOCIATION | ESS | Entrepreneur de spectacles vivants
+ */
 export const association = {
   identite: {
     nom: 'MANAKIN PRODUCTION',
