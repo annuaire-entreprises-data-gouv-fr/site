@@ -67,10 +67,6 @@ const Meta: React.FC<IProps> = ({
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
 
-        {/* Search Engine */}
-        <meta name="description" content={description || SITE_DESCRIPTION} />
-        <meta name="image" content="/images/api.gouv.fr.svg" />
-
         {/* Schema.org for Google */}
         <meta itemProp="name" content={title || SITE_NAME} />
         <meta
