@@ -3,12 +3,14 @@ import React, { PropsWithChildren } from 'react';
 interface ITagProps {
   size?: 'medium' | 'small';
   color?: 'default' | 'error' | 'info' | 'new' | 'success' | 'warning';
+  title?: string;
 }
 
 export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   children,
   size = 'medium',
   color = 'default',
+  title = '',
 }) => {
   const badgeSize = {
     small: 'fr-badge--sm',
@@ -33,7 +35,7 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
     <>
       <span
         className={`fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`}
-        title={serializedTag}
+        title={title || serializedTag}
       >
         {children}
       </span>
