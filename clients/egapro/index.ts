@@ -1,6 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import { IEgapro } from '#models/egapro';
+import { IEgapro } from '#models/certifications/egapro';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 import { IEgaproItem, IEgaproResponse } from './types';

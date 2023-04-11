@@ -9,7 +9,6 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import {
-  estDiffusible,
   estNonDiffusible,
   getAdresseEtablissement,
 } from '#models/statut-diffusion';

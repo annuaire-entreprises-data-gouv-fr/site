@@ -9,7 +9,7 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
-import { IEgapro } from '#models/egapro';
+import { IEgapro } from '#models/certifications/egapro';
 
 const getColor = (note: number) => {
   try {

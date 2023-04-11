@@ -6,7 +6,7 @@ import {
   IAPINotRespondingError,
 } from '#models/api-not-responding';
 import logErrorInSentry from '#utils/sentry';
-import { IUniteLegale } from '.';
+import { IUniteLegale } from '..';
 
 export interface IEgapro {
   employeesSizeRange: string;
