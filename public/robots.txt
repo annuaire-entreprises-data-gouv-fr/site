@@ -8,7 +8,6 @@ Allow: /administration/
 Allow: /faq/
 Allow: /departements/
 Allow: /etablissement/
-Allow: /carte/
 Allow: /lp/
 
 # Groupe 1
@@ -23,5 +22,6 @@ Disallow: /dirigeants/
 Disallow: /divers/
 Disallow: /erreur/
 Disallow: /formulaire/
+Disallow: /carte/
 
 

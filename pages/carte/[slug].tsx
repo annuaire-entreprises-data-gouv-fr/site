@@ -28,7 +28,7 @@ const EtablissementMapPage: NextPageWithLayout<IProps> = ({
 }) => (
   <>
     <Meta
-      noIndex={false}
+      noIndex={true}
       title="Carte"
       canonical={`https://annuaire-entreprises.data.gouv.fr/carte/${etablissement.siret}`}
     />
