@@ -11,7 +11,12 @@ import { NextPageWithLayout } from 'pages/_app';
 
 const FAQArticle: NextPageWithLayout<{ article: IArticle }> = ({ article }) => (
   <>
-    <Meta title={article.title} noIndex={false} />
+    <Meta
+      title={article.title}
+      description={article.description}
+      noIndex={false}
+      canonical={`https://annuaire-entreprises.data.gouv.fr/faq/${article.slug}`}
+    />
     <TextWrapper>
       <Breadcrumb
         links={[

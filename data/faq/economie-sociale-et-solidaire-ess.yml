@@ -2,6 +2,7 @@ administrations:
   - insee
 targets: # no targets
 title: Qu’est ce que l’Economie Sociale et Solidaire ?
+description: L’Economie Sociale et Solidaire (ESS) regroupe les associations, fondations, coopératives, mutuelles et entreprises de l’ESS
 body: |
   Selon l’INSEE, l’Economie Sociale et Solidaire (ESS) regroupe cinq formes d’organisation : 
 

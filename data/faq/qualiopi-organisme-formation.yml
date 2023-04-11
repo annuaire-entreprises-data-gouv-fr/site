@@ -1,11 +1,12 @@
 administrations:
   - mtpei
 targets: # no targets
-title: Qu’est ce que le certificat Qualiopi - Organisme de formation ?
+title: Qu’est ce que la certification Qualiopi - Organisme de formation ?
+description: La certification Qualiopi permet d’attester de la qualité des formations dispensées à travers un Référentiel National de Qualité Qualiopi qui comporte 7 critères répartis en 32 indicateurs.
 body: |
-  Le certificat Qualiopi est une accréditation de qualité accordée aux organismes de formation qui remplissent les conditions fixées par le Ministère du travail, du plein emploi et de l’insertion. 
+  Le certification Qualiopi est une accréditation de qualité accordée aux organismes de formation qui remplissent les conditions fixées par le Ministère du travail, du plein emploi et de l’insertion. 
 
-  ## A quoi sert le certificat Qualiopi ?
+  ## A quoi sert le certification Qualiopi ?
 
   Il permet d’attester de la qualité des formations dispensés à travers un [Référentiel National de Qualité Qualiopi](https://travail-emploi.gouv.fr/demarches-ressources-documentaires/documentation-et-publications-officielles/guides/guide-referentiel-national-qualite), qui comporte 7 critères répartis en 32 indicateurs. 
 
@@ -13,7 +14,7 @@ body: |
 
   ## Comment être certifié Qualiopi - Organisme de formation ?
 
-  Le certificat est accordé par les organismes certificateurs indépendants et reconnus par le [Ministère du travail, du plein emploi et de l’insertion.](https://travail-emploi.gouv.fr) 
+  Le certification est accordé par les organismes certificateurs indépendants et reconnus par le [Ministère du travail, du plein emploi et de l’insertion.](https://travail-emploi.gouv.fr) 
 
   Pour être certifié, vous devez formuler une demande de certification auprès d’un organisme certificateur :
 more:
