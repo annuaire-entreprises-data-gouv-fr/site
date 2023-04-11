@@ -85,7 +85,6 @@ const ImmatriculationRNE: React.FC<IProps> = ({
                 </ButtonLink>
                 <div className="separator" />
                 <ButtonLink
-                  nofollow={true}
                   target="_blank"
                   to={`${immatriculation.siteLink}`}
                   alt

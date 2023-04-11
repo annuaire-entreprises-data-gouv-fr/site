@@ -63,7 +63,7 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       {checkHasLabelsAndCertificates(uniteLegale) && (
         <>
           <br />
-          <a rel="nofollow" href={`/labels-certificats/${uniteLegale.siren}`}>
+          <a href={`/labels-certificats/${uniteLegale.siren}`}>
             → en savoir plus
           </a>
         </>
