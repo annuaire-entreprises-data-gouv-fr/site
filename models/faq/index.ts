@@ -3,6 +3,7 @@ export type IArticle = {
   administrations: string[];
   targets: string[];
   title: string;
+  description: string;
   body: string;
   cta: { label: string; to: string };
   more: { label: string; href: string }[];

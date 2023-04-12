@@ -6,6 +6,7 @@ targets:
   - independant
   - agent
 title: Le justificatif d’immatriculation au RNE d’une entreprise est introuvable
+description: Toutes les entreprises doivent être immatriculées au RNE et posséder un justificatif d'immatriculation
 body: |
   Toutes les **entreprises** :
   - **doivent être enregistrées dans la base Sirene** tenue par l’Insee

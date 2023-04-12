@@ -1,15 +1,16 @@
 administrations:
   - agence-bio
 targets: # no targets
-title: Que signifie le label “Professionnel du Bio” ?
+title: 'Le label « Professionnel du Bio » : définition'
+description: Le label « Professionnel du bio » concerne les structures certifiées bio, selon la classification de l’Agence Bio. Il regroupe diverses catégories professionnels.
 body: |
-  Le label “Professionnel du bio” concerne les structures certifiées bio selon la classification de l’[Agence Bio](https://annuaire.agencebio.org).
+  Le label « Professionnel du bio » concerne les structures certifiées bio selon la classification de l’[Agence Bio](https://annuaire.agencebio.org).
 
-  Il regroupe diverses catégories professionnels :
+  Il regroupe diverses catégories professionnelles :
   - les producteurs labellisés bio (traitement des animaux et des terres agricoles).
   - les distributeurs, revendeurs et importateurs
 
-  Pour être engagé en Bio, il faut **en faire la demande** et être certifiés par [les organismes certificateurs agréés par l’Institut NAtional de l’Origine et de la qualité (INAO)](https://www.inao.gouv.fr/Espace-professionnel-et-outils/Controles-des-signes-d-identification-de-l-origine-et-de-la-qualite-SIQO/Les-organismes-de-controle).
+  Pour être engagé en Bio, il faut **en faire la demande** et être certifié par [les organismes certificateurs agréés par l’Institut NAtional de l’Origine et de la qualité (INAO)](https://www.inao.gouv.fr/Espace-professionnel-et-outils/Controles-des-signes-d-identification-de-l-origine-et-de-la-qualite-SIQO/Les-organismes-de-controle).
 more:
   - label: Qu’est ce que l’agriculture Biologique ?
     href: https://agriculture.gouv.fr/quest-ce-que-lagriculture-biologique

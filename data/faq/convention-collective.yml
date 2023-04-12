@@ -5,6 +5,7 @@ targets:
   - dirigeant
   - salarie
 title: Qu’est-ce qu’une convention collective ?
+description: Une convention collective contient les règles de droit du travail (contrat, congés, salaires...) applicables à une entreprise.
 body: |
   Une convention collective contient les règles de droit du travail (contrat, congés, salaires...) applicables à une entreprise. 
 

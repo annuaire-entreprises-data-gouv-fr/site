@@ -5,6 +5,7 @@ targets:
   - dirigeant
   - independant
 title: Pourquoi mon adresse personnelle apparait-elle sur ce site ?
+description: Les pages des entreprises individuelles et des auto-entreprises, sont susceptibles de contenir des informations à caractère personnel.
 body: |
   Les pages des entreprises individuelles et des auto-entreprises, sont susceptibles de contenir des informations à caractère personnel.
 

@@ -2,6 +2,7 @@ administrations:
   - all
 targets:
 title: Comment puis-je utiliser ces données dans mon site internet ?
+description: Toutes les données présentées sur le site sont publiées en open-data et lbrement réutilisables.
 body: |
   Toutes les données présentées sur le site sont publiées en open-data.
 
