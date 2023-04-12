@@ -182,9 +182,9 @@ const getUniteLegale = async (
     // first attempt to call siren insee
     return await fetchUniteLegaleFromInsee(siren, page);
   } catch (e: any) {
-    if (e instanceof HttpNotFound) {
-      throw new SirenNotFoundError(siren);
-    }
+    // if (e instanceof HttpNotFound) {
+    //  throw new SirenNotFoundError(siren);
+    //}
     logFirstSireneInseefailed({ siren, details: e.message || e });
 
     try {
