@@ -18,7 +18,7 @@ const constants = {
     frBlue: '#000091',
     pastelBlue: '#dfdff1',
     espaceAgent: '#CC007A',
-    espaceAgentPastel: '#fbe5f2',
+    espaceAgentPastel: '#ffe8f4',
   },
 };
 
