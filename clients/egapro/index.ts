@@ -1,6 +1,7 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { IEgapro } from '#models/certifications/egapro';
+import { IUniteLegale } from '#models/index';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 import { IEgaproItem, IEgaproResponse } from './types';
@@ -16,18 +17,18 @@ const employeesSizeRangeMapping = {
  * https://egapro.travail.gouv.fr/
  */
 export const clientEgapro = async (siren: Siren): Promise<IEgapro> => {
-  const route = routes.egapro.api;
-  const response = await httpGet(route, { params: { q: siren } });
+  const response = await httpGet(routes.egapro.search.api, {
+    params: { q: siren },
+  });
 
-  const data = response.data?.data as IEgaproResponse['data'];
+  const dataSearch = response.data?.data as IEgaproResponse['data'];
 
-  if (!data || !data?.length) {
+  if (!dataSearch || !dataSearch?.length) {
     throw new HttpNotFound(
       `Cannot found egapro data associate to siren : ${siren}`
     );
   }
-
-  return mapToDomainObject(data[0]);
+  return mapToDomainObject(dataSearch[0]);
 };
 
 const mapToDomainObject = (egapro: IEgaproItem) => {

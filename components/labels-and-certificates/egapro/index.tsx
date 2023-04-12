@@ -10,6 +10,7 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IEgapro } from '#models/certifications/egapro';
+import { IEgaproRepresentation } from '#models/certifications/egapro-respresentation-equilibre';
 
 const getColor = (note: number) => {
   try {
@@ -46,8 +47,29 @@ const NC = () => (
 
 export const EgaproSection: React.FC<{
   egapro: IEgapro | IAPINotRespondingError;
-}> = ({ egapro }) => {
+  egaproRepresentation: IEgaproRepresentation | IAPINotRespondingError;
+}> = ({ egapro, egaproRepresentation }) => {
   const sectionTitle = `Égalité professionnelle - Egapro`;
+
+  if (isAPINotResponding(egaproRepresentation)) {
+    const isNotFound = egaproRepresentation.errorType === 404;
+
+    if (isNotFound) {
+      return (
+        <Section title={sectionTitle} sources={[EAdministration.MTPEI]}>
+          Nous n’avons pas retrouvé d’
+          <FAQEgapro /> pour cette entreprise.
+        </Section>
+      );
+    }
+    return (
+      <AdministrationNotResponding
+        administration={egaproRepresentation.administration}
+        errorType={egaproRepresentation.errorType}
+        title={sectionTitle}
+      />
+    );
+  }
 
   if (isAPINotResponding(egapro)) {
     const isNotFound = egapro.errorType === 404;
@@ -130,18 +152,50 @@ export const EgaproSection: React.FC<{
     ['    Hautes rémunérations (sur 10)', ...hautesRemunerations.map(mapToNc)],
   ];
 
+  const bodyRepresentation = [
+    [
+      '    Cadres dirigeants femmes (pourcentage)',
+      ...egaproRepresentation.scores.pourcentageFemmesCadres.map(mapToNc),
+    ],
+    [
+      '    Cadres dirigeants hommes (pourcentage)',
+      ...egaproRepresentation.scores.pourcentageHommesCadres.map(mapToNc),
+    ],
+    [
+      '    Membres instances dirigeantes femme (pourcentage)',
+      ...egaproRepresentation.scores.pourcentageFemmesMembres.map(mapToNc),
+    ],
+    [
+      '    Membres instances dirigeantes homme (pourcentage)',
+      ...egaproRepresentation.scores.pourcentageHommesCadres.map(mapToNc),
+    ],
+  ];
+
   const plural = egapro.years.length > 0;
 
   return (
-    <Section title={sectionTitle} sources={[EAdministration.MTPEI]}>
-      Cette structure de <b>{egapro.employeesSizeRange}</b> a déclaré{' '}
-      {plural ? 'plusieurs' : 'une'} <FAQEgapro />
-      <p>
-        Chaque déclaration se fait l’année <b>N</b> au titre de l’année{' '}
-        <b>N-1</b> (par exemple : les données déclarées en 2023 sont celles de
-        2022).
-      </p>
-      <FullTable head={['Année', ...egapro.indexYears]} body={body} />
-    </Section>
+    <>
+      <Section title={sectionTitle} sources={[EAdministration.MTPEI]}>
+        Cette structure de <b>{egapro.employeesSizeRange}</b> a déclaré{' '}
+        {plural ? 'plusieurs' : 'une'} <FAQEgapro />
+        <p>
+          Chaque déclaration se fait l’année <b>N</b> au titre de l’année{' '}
+          <b>N-1</b> (par exemple : les données déclarées en 2023 sont celles de
+          2022).
+        </p>
+        <FullTable head={['Année', ...egapro.indexYears]} body={body} />
+        <div>Donneés de la représentation équilibrée de l&lsquo;entreprise</div>
+        <FullTable
+          head={['Année', ...egaproRepresentation.years]}
+          body={bodyRepresentation}
+        />
+      </Section>
+      <style jsx>{`
+        div {
+          margin-top: 16px;
+          margin-bottom: 16px;
+        }
+      `}</style>
+    </>
   );
 };

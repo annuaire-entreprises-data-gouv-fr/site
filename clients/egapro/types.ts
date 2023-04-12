@@ -1,3 +1,29 @@
+export type IEgaproRepresentationResponse = {
+  data: IEgaproRepresentationItem[];
+  count: number;
+};
+
+export type IEgaproRepresentationItem = {
+  entreprise: {
+    raison_sociale: string;
+    siren: string;
+    région: string;
+    département: string;
+    code_naf: string;
+  };
+  représentation_équilibrée: {
+    [year: string]: {
+      pourcentage_femmes_cadres: number;
+      pourcentage_hommes_cadres: number;
+      pourcentage_femmes_membres: number;
+      pourcentage_hommes_membres: number;
+      motif_non_calculabilité_cadres: null;
+      motif_non_calculabilité_membres: null;
+    };
+  };
+  label: string;
+};
+
 export type IEgaproResponse = {
   data?: IEgaproItem[] | null;
   count: number;
