@@ -33,11 +33,7 @@ const SubventionsAssociationPage: NextPageWithLayout<IProps> = ({
         noIndex={true}
       />
       <div className="content-container">
-        <Title
-          ficheType={FICHE.AGENT_SUBVENTIONS}
-          uniteLegale={uniteLegale}
-          session={session}
-        />
+        <Title uniteLegale={uniteLegale} session={session} />
         <ProtectedData>
           Cette page contient des informations réservées aux{' '}
           <b>agents publics</b>.
