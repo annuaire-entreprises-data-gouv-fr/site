@@ -128,6 +128,14 @@ export const EgaproSection: React.FC<{
     ],
     ['    Retour congé maternité (sur 15)', ...congesMaternite.map(mapToNc)],
     ['    Hautes rémunérations (sur 10)', ...hautesRemunerations.map(mapToNc)],
+    [
+      '    Cadre dirigeant Femme (pourcentage)',
+      ...hautesRemunerations.map(mapToNc),
+    ],
+    [
+      '    Cadre dirigeant Homme (pourcentage)',
+      ...hautesRemunerations.map(mapToNc),
+    ],
   ];
 
   const plural = egapro.years.length > 0;
