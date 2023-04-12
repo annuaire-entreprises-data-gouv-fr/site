@@ -11,14 +11,12 @@ import {
 } from './handlers';
 
 export const server = setupServer(
-  ...[
-    ...adameHandlers,
-    ...banHandlers,
-    ...cultureHandlers,
-    ...geoHandlers,
-    ...inseeHandlers,
-    ...rncsHandlers,
-    ...searchHandlers,
-    ...tvaHandlers,
-  ]
+  ...adameHandlers,
+  ...banHandlers,
+  ...cultureHandlers,
+  ...geoHandlers,
+  ...inseeHandlers,
+  ...rncsHandlers,
+  ...searchHandlers,
+  ...tvaHandlers
 );
