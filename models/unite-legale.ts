@@ -222,13 +222,12 @@ const getUniteLegale = async (
  */
 const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
   try {
-    // INSEE does not provide enough information to paginate etablissement list
-    // so we doubled our API call with sirene ouverte to get Etablissements.
+    // INSEE requires three calls to get uniteLegale with etablissementsand siege
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
         clientUniteLegaleInsee(siren),
         clientAllEtablissementsInsee(siren, page).catch(() => null),
-        clientSiegeInsee(siren),
+        clientSiegeInsee(siren).catch(() => null),
       ]);
 
     return mergeUniteLegaleInsee(
@@ -249,7 +248,7 @@ const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
  */
 const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
   try {
-    // INSEE requires two calls to get uniteLegale with etablissements
+    // INSEE requires three calls to get uniteLegale with etablissementsand siege
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
         clientUniteLegaleInseeFallback(siren),

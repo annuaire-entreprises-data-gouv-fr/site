@@ -188,6 +188,16 @@ const Footer = () => (
                   data.gouv.fr
                 </a>
               </li>
+              <li className="fr-footer__content-item">
+                <a
+                  className="fr-footer__content-link"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  href="https://formalites.entreprises.gouv.fr"
+                >
+                  formalites.entreprises.gouv.fr
+                </a>
+              </li>
             </ul>
           </div>
         </div>
