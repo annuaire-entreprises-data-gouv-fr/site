@@ -31,7 +31,7 @@ export const getEgapro = async (
     if (!uniteLegale.complements.egaproRenseignee) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);
     }
-    return await clientEgapro(uniteLegale.siren);
+    return await clientEgapro(uniteLegale);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);

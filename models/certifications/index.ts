@@ -29,6 +29,7 @@ export const getCertificationsFromSlug = async (
     getEntrepreneurSpectaclesCertification(uniteLegale),
     getBio(uniteLegale),
     getEgapro(uniteLegale),
+    getEgapro(uniteLegale),
   ]);
 
   return {

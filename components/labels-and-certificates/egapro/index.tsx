@@ -129,11 +129,19 @@ export const EgaproSection: React.FC<{
     ['    Retour congé maternité (sur 15)', ...congesMaternite.map(mapToNc)],
     ['    Hautes rémunérations (sur 10)', ...hautesRemunerations.map(mapToNc)],
     [
-      '    Cadre dirigeant Femme (pourcentage)',
+      '    Cadre dirigeant homme (pourcentage)',
       ...hautesRemunerations.map(mapToNc),
     ],
     [
-      '    Cadre dirigeant Homme (pourcentage)',
+      '    Cadre dirigeant femme (pourcentage)',
+      ...hautesRemunerations.map(mapToNc),
+    ],
+    [
+      '    Membres instances dirigeantes homme (pourcentage)',
+      ...hautesRemunerations.map(mapToNc),
+    ],
+    [
+      '    Membres instances dirigeantes femme (pourcentage)',
       ...hautesRemunerations.map(mapToNc),
     ],
   ];
