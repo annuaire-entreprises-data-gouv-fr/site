@@ -13,7 +13,6 @@ import { EAdministration } from '#models/administrations';
 import { estActif } from '#models/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import {
-  estDiffusible,
   getAdresseEtablissement,
   getNomComplet,
 } from '#models/statut-diffusion';

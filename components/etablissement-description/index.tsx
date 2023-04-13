@@ -39,9 +39,9 @@ export const EtablissementDescription: React.FC<IProps> = ({
         {etablissement.estSiege ? (
           <b> le siège social</b>
         ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 ? (
-          <> un ancien siège social</>
+          'un ancien siège social'
         ) : (
-          <> un établissement secondaire</>
+          'un établissement secondaire'
         )}{' '}
         de la structure{' '}
         <a href={`/entreprise/${uniteLegale.chemin}`}>

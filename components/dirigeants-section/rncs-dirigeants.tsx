@@ -107,10 +107,9 @@ const DirigeantsSection: React.FC<IProps> = ({
 
       const infos = [
         dirigeant.role,
-        <>
-          {nomComplet}, né(e) en{' '}
-          {formatDatePartial(dirigeant.dateNaissancePartial)}
-        </>,
+        `${nomComplet}, né(e) en ${formatDatePartial(
+          dirigeant.dateNaissancePartial
+        )}`,
       ];
 
       if (dirigeant.dateNaissanceFull) {

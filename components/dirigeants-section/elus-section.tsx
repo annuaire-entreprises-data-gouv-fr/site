@@ -26,9 +26,7 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
 
     const infos = [
       elu.role,
-      <>
-        {nomComplet}, né(e) en {elu.dateNaissancePartial}
-      </>,
+      `${nomComplet}, né(e) en ${elu.dateNaissancePartial}`,
     ];
 
     return infos;
