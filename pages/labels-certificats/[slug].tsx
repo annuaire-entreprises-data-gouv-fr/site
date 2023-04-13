@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
@@ -27,6 +26,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   bio,
   rge,
   egapro,
+  egaproRepresentation,
   uniteLegale,
   entrepreneurSpectacles,
   metadata: { session },
@@ -57,7 +57,10 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
         )}
         {uniteLegale.complements.estEss && <CertificationESSSection />}
         {uniteLegale.complements.egaproRenseignee && (
-          <EgaproSection egapro={egapro} />
+          <EgaproSection
+            egaproRepresentation={egaproRepresentation}
+            egapro={egapro}
+          />
         )}
         {uniteLegale.complements.estEntrepreneurSpectacle && (
           <CertificationsEntrepreneurSpectaclesSection
@@ -77,13 +80,20 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
 
-    const { uniteLegale, rge, entrepreneurSpectacles, egapro, bio } =
-      await getCertificationsFromSlug(slug);
+    const {
+      uniteLegale,
+      rge,
+      entrepreneurSpectacles,
+      egapro,
+      bio,
+      egaproRepresentation,
+    } = await getCertificationsFromSlug(slug);
 
     return {
       props: {
         bio,
         egapro,
+        egaproRepresentation,
         entrepreneurSpectacles,
         rge,
         uniteLegale,

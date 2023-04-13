@@ -1,4 +1,4 @@
-import { clientEgapro } from '#clients/egapro';
+import { clientEgaproRepresentationEquilibre } from '#clients/egapro/representationEquilibre';
 import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations';
 import {
@@ -8,30 +8,24 @@ import {
 import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '..';
 
-export interface IEgapro {
-  employeesSizeRange: string;
-  lessThan250: boolean;
+export interface IEgaproRepresentation {
   years: string[];
-  indexYears: string[];
   scores: {
-    notes: number[];
-    augmentations: number[];
-    augmentationsPromotions: number[];
-    congesMaternite: number[];
-    hautesRemunerations: number[];
-    promotions: number[];
-    remunerations: number[];
+    pourcentageFemmesCadres: number[];
+    pourcentageHommesCadres: number[];
+    pourcentageFemmesMembres: number[];
+    pourcentageHommesMembres: number[];
   };
 }
 
-export const getEgapro = async (
+export const getEgaproRepresentation = async (
   uniteLegale: IUniteLegale
-): Promise<IEgapro | IAPINotRespondingError> => {
+): Promise<IEgaproRepresentation | IAPINotRespondingError> => {
   try {
     if (!uniteLegale.complements.egaproRenseignee) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);
     }
-    return await clientEgapro(uniteLegale.siren);
+    return await clientEgaproRepresentationEquilibre(uniteLegale.siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);
