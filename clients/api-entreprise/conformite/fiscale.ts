@@ -7,7 +7,9 @@ import { httpGet } from '#utils/network';
 export type IAPIEntrepriseConformiteFiscale = {
   data: {
     document_url: string;
-    expires_in: number;
+    document_url_expires_in: number;
+    date_delivrance_attestation: string;
+    date_periode_analysee: string;
   };
   links: {};
   meta: {};

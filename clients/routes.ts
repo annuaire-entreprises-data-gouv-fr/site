@@ -2,7 +2,7 @@ const routes = {
   apiEntreprise: {
     association: '/v4/djepva/api-association/associations/',
     conformite: {
-      fiscale: '/v3/dgfip/unites_legales/',
+      fiscale: '/v4/dgfip/unites_legales/',
       vigilance: '/v4/urssaf/unites_legales/',
       msa: '/v3/msa/etablissements/',
     },
