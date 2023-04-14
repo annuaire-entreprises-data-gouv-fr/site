@@ -16,8 +16,8 @@ const employeesSizeRangeMapping = {
  * EGAPRO
  * https://egapro.travail.gouv.fr/
  */
-export const clientEgapro = async (siren: Siren): Promise<IEgapro> => {
-  const response = await httpGet(routes.egapro.search.api, {
+export const clientEgapro = async (siren: Siren): Promise<IEgapro['index']> => {
+  const response = await httpGet(routes.egapro.index, {
     params: { q: siren },
   });
 
@@ -31,7 +31,7 @@ export const clientEgapro = async (siren: Siren): Promise<IEgapro> => {
   return mapToDomainObject(dataSearch[0]);
 };
 
-const mapToDomainObject = (egapro: IEgaproItem) => {
+const mapToDomainObject = (egapro: IEgaproItem): IEgapro['index'] => {
   const {
     notes,
     notes_augmentations,
@@ -67,6 +67,7 @@ const mapToDomainObject = (egapro: IEgaproItem) => {
     employeesSizeRange:
       employeesSizeRangeMapping[egapro.entreprise?.effectif?.tranche || ''],
     years,
+    moreThan1000: egapro.entreprise?.effectif?.tranche === '1000:',
     lessThan250: egapro.entreprise?.effectif?.tranche === '50:250',
     indexYears,
     scores: {

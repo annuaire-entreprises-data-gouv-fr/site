@@ -1,6 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import { IEgaproRepresentation } from '#models/certifications/egapro-respresentation-equilibre';
+import { IEgapro } from '#models/certifications/egapro';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 import {
@@ -8,15 +8,22 @@ import {
   IEgaproRepresentationItem,
 } from './types';
 
+type IEgaproRepresentation = {
+  years: string[];
+  scores: {
+    pourcentageFemmesCadres: number[];
+    pourcentageHommesCadres: number[];
+    pourcentageFemmesMembres: number[];
+    pourcentageHommesMembres: number[];
+  };
+};
+
 export const clientEgaproRepresentationEquilibre = async (
   siren: Siren
-): Promise<IEgaproRepresentation> => {
-  const responseSearchApi = await httpGet(
-    routes.egapro.representationEquilibree.api,
-    {
-      params: { q: siren },
-    }
-  );
+): Promise<IEgapro['representation']> => {
+  const responseSearchApi = await httpGet(routes.egapro.representation, {
+    params: { q: siren },
+  });
 
   const dataSearch = responseSearchApi.data
     ?.data as IEgaproRepresentationResponse['data'];

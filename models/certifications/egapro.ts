@@ -1,4 +1,5 @@
 import { clientEgapro } from '#clients/egapro';
+import { clientEgaproRepresentationEquilibre } from '#clients/egapro/representationEquilibre';
 import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations';
 import {
@@ -9,18 +10,30 @@ import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '..';
 
 export interface IEgapro {
-  employeesSizeRange: string;
-  lessThan250: boolean;
-  years: string[];
-  indexYears: string[];
-  scores: {
-    notes: number[];
-    augmentations: number[];
-    augmentationsPromotions: number[];
-    congesMaternite: number[];
-    hautesRemunerations: number[];
-    promotions: number[];
-    remunerations: number[];
+  index: {
+    employeesSizeRange: string;
+    moreThan1000: boolean;
+    lessThan250: boolean;
+    years: string[];
+    indexYears: string[];
+    scores: {
+      notes: number[];
+      augmentations: number[];
+      augmentationsPromotions: number[];
+      congesMaternite: number[];
+      hautesRemunerations: number[];
+      promotions: number[];
+      remunerations: number[];
+    };
+  };
+  representation?: {
+    years: string[];
+    scores: {
+      pourcentageFemmesCadres: number[];
+      pourcentageHommesCadres: number[];
+      pourcentageFemmesMembres: number[];
+      pourcentageHommesMembres: number[];
+    };
   };
 }
 
@@ -31,7 +44,17 @@ export const getEgapro = async (
     if (!uniteLegale.complements.egaproRenseignee) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);
     }
-    return await clientEgapro(uniteLegale.siren);
+    const indexAgapro = await clientEgapro(uniteLegale.siren);
+    return {
+      index: indexAgapro,
+      ...(indexAgapro.moreThan1000
+        ? {
+            representation: await clientEgaproRepresentationEquilibre(
+              uniteLegale.siren
+            ),
+          }
+        : {}),
+    };
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);

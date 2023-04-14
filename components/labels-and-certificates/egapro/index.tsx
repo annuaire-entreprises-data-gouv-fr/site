@@ -10,7 +10,6 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IEgapro } from '#models/certifications/egapro';
-import { IEgaproRepresentation } from '#models/certifications/egapro-respresentation-equilibre';
 
 const getColor = (note: number) => {
   try {
@@ -45,35 +44,23 @@ const NC = () => (
   </InformationTooltip>
 );
 
+type IEgaproRepresentation = {
+  years: string[];
+  scores: {
+    pourcentageFemmesCadres: number[];
+    pourcentageHommesCadres: number[];
+    pourcentageFemmesMembres: number[];
+    pourcentageHommesMembres: number[];
+  };
+};
+
 export const EgaproSection: React.FC<{
   egapro: IEgapro | IAPINotRespondingError;
-  egaproRepresentation: IEgaproRepresentation | IAPINotRespondingError;
-}> = ({ egapro, egaproRepresentation }) => {
+}> = ({ egapro }) => {
   const sectionTitle = `Égalité professionnelle - Egapro`;
-
-  if (isAPINotResponding(egaproRepresentation)) {
-    const isNotFound = egaproRepresentation.errorType === 404;
-
-    if (isNotFound) {
-      return (
-        <Section title={sectionTitle} sources={[EAdministration.MTPEI]}>
-          Nous n’avons pas retrouvé d’
-          <FAQEgapro /> pour cette entreprise.
-        </Section>
-      );
-    }
-    return (
-      <AdministrationNotResponding
-        administration={egaproRepresentation.administration}
-        errorType={egaproRepresentation.errorType}
-        title={sectionTitle}
-      />
-    );
-  }
 
   if (isAPINotResponding(egapro)) {
     const isNotFound = egapro.errorType === 404;
-
     if (isNotFound) {
       return (
         <Section title={sectionTitle} sources={[EAdministration.MTPEI]}>
@@ -100,7 +87,7 @@ export const EgaproSection: React.FC<{
     promotions = [],
     congesMaternite = [],
     hautesRemunerations = [],
-  } = egapro?.scores || {};
+  } = egapro?.index.scores || {};
 
   const body = [
     [
@@ -121,12 +108,12 @@ export const EgaproSection: React.FC<{
           </a>
         </FAQLink>
       </b>,
-      ...egapro.years.map(() => ''),
+      ...egapro.index.years.map(() => ''),
     ],
     ['    Écart rémunérations (sur 40)', ...remunerations.map(mapToNc)],
     // only less than 250
     ...[
-      egapro.lessThan250
+      egapro.index.lessThan250
         ? [
             `    Écart taux d'augmentation (sur 35)`,
             ...augmentationsPromotions.map(mapToNc),
@@ -135,7 +122,7 @@ export const EgaproSection: React.FC<{
     ],
     // only more than 250
     ...[
-      !egapro.lessThan250
+      !egapro.index.lessThan250
         ? [
             `    Écart taux d'augmentation (sur 20)`,
             ...augmentations.map(mapToNc),
@@ -144,7 +131,7 @@ export const EgaproSection: React.FC<{
     ],
     // only more than 250
     ...[
-      !egapro.lessThan250
+      !egapro.index.lessThan250
         ? ['    Écart taux promotion (sur 15)', ...promotions.map(mapToNc)]
         : [],
     ],
@@ -152,50 +139,55 @@ export const EgaproSection: React.FC<{
     ['    Hautes rémunérations (sur 10)', ...hautesRemunerations.map(mapToNc)],
   ];
 
-  const bodyRepresentation = [
-    [
-      '    Cadres dirigeants femmes (pourcentage)',
-      ...egaproRepresentation.scores.pourcentageFemmesCadres.map(mapToNc),
-    ],
-    [
-      '    Cadres dirigeants hommes (pourcentage)',
-      ...egaproRepresentation.scores.pourcentageHommesCadres.map(mapToNc),
-    ],
-    [
-      '    Membres instances dirigeantes femme (pourcentage)',
-      ...egaproRepresentation.scores.pourcentageFemmesMembres.map(mapToNc),
-    ],
-    [
-      '    Membres instances dirigeantes homme (pourcentage)',
-      ...egaproRepresentation.scores.pourcentageHommesCadres.map(mapToNc),
-    ],
-  ];
-
-  const plural = egapro.years.length > 0;
+  const plural = egapro.index.years.length > 0;
 
   return (
-    <>
-      <Section title={sectionTitle} sources={[EAdministration.MTPEI]}>
-        Cette structure de <b>{egapro.employeesSizeRange}</b> a déclaré{' '}
-        {plural ? 'plusieurs' : 'une'} <FAQEgapro />
-        <p>
-          Chaque déclaration se fait l’année <b>N</b> au titre de l’année{' '}
-          <b>N-1</b> (par exemple : les données déclarées en 2023 sont celles de
-          2022).
-        </p>
-        <FullTable head={['Année', ...egapro.indexYears]} body={body} />
-        <div>Donneés de la représentation équilibrée de l&lsquo;entreprise</div>
-        <FullTable
-          head={['Année', ...egaproRepresentation.years]}
-          body={bodyRepresentation}
-        />
-      </Section>
-      <style jsx>{`
-        div {
-          margin-top: 16px;
-          margin-bottom: 16px;
-        }
-      `}</style>
-    </>
+    <Section title={sectionTitle} sources={[EAdministration.MTPEI]}>
+      Cette structure de <b>{egapro.index.employeesSizeRange}</b> a déclaré{' '}
+      {plural ? 'plusieurs' : 'une'} <FAQEgapro />
+      <p>
+        Chaque déclaration se fait l’année <b>N</b> au titre de l’année{' '}
+        <b>N-1</b> (par exemple : les données déclarées en 2023 sont celles de
+        2022).
+      </p>
+      <FullTable head={['Année', ...egapro.index.indexYears]} body={body} />
+      {egapro.representation ? (
+        <>
+          <p>
+            Cette structure a également déclaré ses écarts de représentation
+            entre les femmes et les hommes dans les postes de direction&nbsp;
+          </p>
+          <FullTable
+            head={['Année', ...egapro.representation.years]}
+            body={[
+              [
+                'Femmes parmi les cadres dirigeants (%)',
+                ...egapro.representation.scores.pourcentageFemmesCadres.map(
+                  mapToNc
+                ),
+              ],
+              [
+                'Hommes parmi les cadres dirigeants (%)',
+                ...egapro.representation.scores.pourcentageHommesCadres.map(
+                  mapToNc
+                ),
+              ],
+              [
+                'Femmes dans les instances dirigeantes (%)',
+                ...egapro.representation.scores.pourcentageFemmesMembres.map(
+                  mapToNc
+                ),
+              ],
+              [
+                'Hommes dans les instances dirigeantes (%)',
+                ...egapro.representation.scores.pourcentageHommesCadres.map(
+                  mapToNc
+                ),
+              ],
+            ]}
+          />
+        </>
+      ) : null}
+    </Section>
   );
 };

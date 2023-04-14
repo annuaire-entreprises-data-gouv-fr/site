@@ -26,7 +26,6 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   bio,
   rge,
   egapro,
-  egaproRepresentation,
   uniteLegale,
   entrepreneurSpectacles,
   metadata: { session },
@@ -57,10 +56,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
         )}
         {uniteLegale.complements.estEss && <CertificationESSSection />}
         {uniteLegale.complements.egaproRenseignee && (
-          <EgaproSection
-            egaproRepresentation={egaproRepresentation}
-            egapro={egapro}
-          />
+          <EgaproSection egapro={egapro} />
         )}
         {uniteLegale.complements.estEntrepreneurSpectacle && (
           <CertificationsEntrepreneurSpectaclesSection
@@ -80,20 +76,13 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
 
-    const {
-      uniteLegale,
-      rge,
-      entrepreneurSpectacles,
-      egapro,
-      bio,
-      egaproRepresentation,
-    } = await getCertificationsFromSlug(slug);
+    const { uniteLegale, rge, entrepreneurSpectacles, egapro, bio } =
+      await getCertificationsFromSlug(slug);
 
     return {
       props: {
         bio,
         egapro,
-        egaproRepresentation,
         entrepreneurSpectacles,
         rge,
         uniteLegale,
