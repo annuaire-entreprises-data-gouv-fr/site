@@ -102,7 +102,7 @@ const LandingPage: NextPageWithLayout<IProps> = ({
 
       .centered-search {
         margin: auto;
-        margin-bottom: 26vh;
+        margin-bottom: 18vh;
         margin-top: 10vh;
         max-width: 900px;
         flex-direction: column;

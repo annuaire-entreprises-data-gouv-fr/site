@@ -3,6 +3,7 @@ export interface ILandingPage {
   title: string;
   footerLabel: string;
   published: boolean;
+  isServicePublic: boolean;
   description: string;
   filter: {
     name: string;
