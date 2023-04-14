@@ -31,14 +31,7 @@ Ce repository fait partie d'un ensemble de services qui constituent l'[Annuaire 
 Ce site utilise Next.js de manière modifiée :
 
 - en developpement, next.js tourne de manière normale.
-- en production, la ré-hydratation de react dans le navigateur est désactivée. Next.js se comporte comme un framework de rendu serveur traditionnel.
-
-Pourquoi désactiver la ré-hydratation ? Par soucis d'inclusivité et de frugalité :
-
-1. Le site peut fonctionner en mode dégradé sans javascript
-2. Les pages du site sont beaucoup, beaucoup, beaucoup plus légères, ce qui avec un bon débit donne le même confort qu'une SPA, et avec un mauvais débit est plus utilisable q'une SPA
-
-Dans ce cas pourquoi utiliser Next.js ? Pour bénéficier de l'écosystème, de l'outillage dev (HotReload en local, typescript) et pour des raisons de compétences et de préférences.
+- en production, la ré-hydratation de react dans le navigateur est uniquement activée sur les pages où c'est pertinent. Pour le reste des pages, Next.js se comporte comme un framework de rendu serveur traditionnel.
 
 ## Installation
 
