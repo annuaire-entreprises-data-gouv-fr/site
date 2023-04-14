@@ -2,6 +2,7 @@ import React from 'react';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
+import { Tag } from '#components-ui/tag';
 import { ProtectedSection } from '#components/section/protected-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
@@ -55,15 +56,13 @@ export const DonneesRestreintesSection: NextPageWithLayout<IProps> = ({
 }) => {
   return (
     <PrintNever>
-      <ProtectedSection
-        title="Conformité & Immatriculation"
-        sources={[EAdministration.DINUM]}
-      >
+      <ProtectedSection title="Conformité & Immatriculation">
         <TwoColumnTable
           body={[
             ['Conformité fiscale', <Conformite data={fiscale} />],
             ['Conformité sociale', <Conformite data={vigilance} />],
             ['Conformité sociale (agricole)', <Conformite data={msa} />],
+            ['', <br />],
             [
               'Dirigeants et registre des bénéficiaires effectifs',
               <a href={`/dirigeants/${uniteLegale.siren}`}>
@@ -84,6 +83,15 @@ export const DonneesRestreintesSection: NextPageWithLayout<IProps> = ({
                 <Icon slug="download">
                   Télécharger l’extrait d’immatriculation au RNE
                 </Icon>
+              </a>,
+            ],
+            ['', <br />],
+            [
+              <>
+                Données financières <Tag color="new">Service en beta test</Tag>
+              </>,
+              <a href={`/donnees-financieres/${uniteLegale.siren}`}>
+                → Consulter les derniers bilans
               </a>,
             ],
           ]}
