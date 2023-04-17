@@ -53,5 +53,6 @@ const mapToDomainObject = (response: IAPIEntrepriseConformiteVigilance) => {
   return {
     url: response.data.document_url,
     isValid: response.data?.entity_status?.code === 'ok',
+    label: 'Attestation de vigilance',
   };
 };

@@ -43,5 +43,9 @@ export const clientApiEntrepriseConformiteMSA = async (
 };
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteMSA) => {
-  return { isValid: response.data?.status === 'up_to_date', url: null };
+  return {
+    isValid: response.data?.status === 'up_to_date',
+    url: null,
+    label: null,
+  };
 };

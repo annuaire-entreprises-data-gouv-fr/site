@@ -13,6 +13,7 @@ import logErrorInSentry from '#utils/sentry';
 export type IConformite = {
   isValid: boolean | null;
   url: string | null;
+  label: string | null;
 };
 
 export type IDonneesRestreinteUniteLegale = {

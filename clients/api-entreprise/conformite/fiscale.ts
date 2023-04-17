@@ -46,5 +46,9 @@ export const clientApiEntrepriseConformiteFiscale = async (
 };
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteFiscale) => {
-  return { url: response.data.document_url, isValid: null };
+  return {
+    url: response.data.document_url,
+    isValid: true,
+    label: 'Attestation fiscale',
+  };
 };
