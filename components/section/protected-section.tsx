@@ -16,7 +16,7 @@ export const ProtectedSection: React.FC<PropsWithChildren<ISectionProps>> = ({
   >
     <div className="protected-data">
       <Icon size={12} slug="lockFill">
-        Réservé à l’administration
+        Réservé aux agents publics
       </Icon>
     </div>
     {children}
@@ -25,8 +25,8 @@ export const ProtectedSection: React.FC<PropsWithChildren<ISectionProps>> = ({
         position: absolute;
         background: ${constants.colors.espaceAgentPastel};
         top: 0;
-        left: calc(50% - 80px);
-        width: 160px;
+        left: calc(50% - 115px);
+        width: 230px;
         text-align: center;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;

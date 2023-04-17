@@ -2,6 +2,7 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
+import DonneesRestreintesSection from '#components/donnees-restreintes-section/[slug]';
 import EtablissementListeSection from '#components/etablissement-liste-section';
 import EtablissementSection from '#components/etablissement-section';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
@@ -11,6 +12,10 @@ import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title, { FICHE } from '#components/title-section';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
+import {
+  IDonneesRestreinteUniteLegale,
+  getDonneesRestreintesEntreprise,
+} from '#models/espace-agent/donnees-restreintes-entreprise';
 import {
   isCollectiviteTerritoriale,
   IUniteLegale,
@@ -28,15 +33,18 @@ import {
   postServerSideProps,
   IPropsWithMetadata,
 } from '#utils/server-side-props-helper/post-server-side-props';
+import { isLoggedIn } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
+  donneesRestreintesUniteLegale: IDonneesRestreinteUniteLegale;
   redirected: boolean;
 }
 
 const UniteLegalePage: NextPageWithLayout<IProps> = ({
   uniteLegale,
+  donneesRestreintesUniteLegale,
   redirected,
   metadata: { session },
 }) => (
@@ -62,6 +70,12 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
       ) : (
         <>
           <UniteLegaleSection uniteLegale={uniteLegale} />
+          {isLoggedIn(session) && donneesRestreintesUniteLegale ? (
+            <DonneesRestreintesSection
+              uniteLegale={uniteLegale}
+              conformite={donneesRestreintesUniteLegale?.conformite}
+            />
+          ) : null}
           {isAssociation(uniteLegale) && (
             <AssociationSection uniteLegale={uniteLegale} />
           )}
@@ -107,9 +121,19 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       isBot,
     });
 
+    let donneesRestreintesUniteLegale = null;
+    if (isLoggedIn(context.req?.session)) {
+      const { siren, siege } = uniteLegale;
+      donneesRestreintesUniteLegale = await getDonneesRestreintesEntreprise(
+        siren,
+        siege.siret
+      );
+    }
+
     return {
       props: {
         uniteLegale,
+        donneesRestreintesUniteLegale,
         redirected: isRedirected,
       },
     };

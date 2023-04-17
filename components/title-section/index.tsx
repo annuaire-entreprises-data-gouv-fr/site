@@ -2,13 +2,13 @@ import React from 'react';
 import AssociationAdressAlert from '#components-ui/alerts/association-adress';
 import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
 import NonDiffusibleAlert from '#components-ui/alerts/non-diffusible';
+import ProtectedData from '#components-ui/alerts/protected-data';
 import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { PrintNever } from '#components-ui/print-visibility';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
-import { NonDiffusibleSection } from '#components/non-diffusible';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
 import constants from '#models/constants';
@@ -37,7 +37,6 @@ export enum FICHE {
   ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
   INFORMATION = 'résumé',
   JUSTIFICATIFS = 'justificatifs',
-  AGENT_SUBVENTIONS = 'subventions associations',
 }
 
 type IProps = {
@@ -50,7 +49,7 @@ const Tabs: React.FC<{
   currentFicheType: FICHE;
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ currentFicheType, uniteLegale, session }) => {
+}> = ({ currentFicheType, uniteLegale }) => {
   const tabs = [
     {
       ficheType: FICHE.INFORMATION,
@@ -133,16 +132,6 @@ const Tabs: React.FC<{
               {currentFicheType === ficheType ? label : <h2>{label}</h2>}
             </a>
           ))}
-        {isLoggedIn(session) && (
-          <a
-            className={`agent-tab ${
-              currentFicheType === FICHE.AGENT_SUBVENTIONS ? 'active' : ''
-            } no-style-link`}
-            href={`/espace-agent/subventions-association/${uniteLegale.siren}`}
-          >
-            <Icon slug="lockFill">Subventions associations</Icon>
-          </a>
-        )}
       </div>
       <style jsx>{`
         .title-tabs {
@@ -164,15 +153,6 @@ const Tabs: React.FC<{
           margin: 0 4px;
           padding: 10px 5px;
           margin-bottom: -2px;
-        }
-
-        .title-tabs > a.agent-tab {
-          border-top: 2px solid ${constants.colors.espaceAgent}22;
-          border-left: 2px solid ${constants.colors.espaceAgent}22;
-          border-right: 2px solid ${constants.colors.espaceAgent}22;
-          background-color: ${constants.colors.espaceAgentPastel};
-          color: ${constants.colors.espaceAgent};
-          box-shadow: 0 -8px 5px -5px ${constants.colors.espaceAgent}11 inset;
         }
 
         .title-tabs > a,
@@ -198,10 +178,6 @@ const Tabs: React.FC<{
           border-bottom: 0;
         }
 
-        .title-tabs > a.agent-tab:not(.active):hover {
-          background-color: ${constants.colors.espaceAgent}33;
-        }
-
         @media only screen and (min-width: 1px) and (max-width: 768px) {
           .title-tabs {
             flex-direction: column;
@@ -213,9 +189,6 @@ const Tabs: React.FC<{
           .title-tabs > a.active {
             background-color: #fff;
             border-bottom: 2px solid ${constants.colors.pastelBlue};
-          }
-          .title-tabs > a.agent-tab {
-            border-bottom: 2px solid ${constants.colors.espaceAgent}22;
           }
         }
       `}</style>
@@ -230,6 +203,17 @@ const Title: React.FC<IProps> = ({
 }) => (
   <div className="header-section">
     <div className="title">
+      {isLoggedIn(session) && (
+        <ProtectedData full>
+          Vous êtes connecté avec un compte <b>agent public</b>. Ce compte vous
+          donne accés à certaines données exclusivement réservées à
+          l’administration, identifiables par la mention “
+          <Icon size={12} slug="lockFill">
+            Réservé aux agents publics
+          </Icon>
+          ” .
+        </ProtectedData>
+      )}
       {!estDiffusible(uniteLegale) && <NonDiffusibleAlert />}
       <MultipleSirenAlert uniteLegale={uniteLegale} />
       {isAssociation(uniteLegale) && (
