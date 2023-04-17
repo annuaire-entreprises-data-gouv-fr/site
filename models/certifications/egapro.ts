@@ -44,16 +44,12 @@ export const getEgapro = async (
     if (!uniteLegale.complements.egaproRenseignee) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);
     }
-    const indexAgapro = await clientEgapro(uniteLegale.siren);
+    const indexEgapro = await clientEgapro(uniteLegale.siren);
     return {
-      index: indexAgapro,
-      ...(indexAgapro.moreThan1000
-        ? {
-            representation: await clientEgaproRepresentationEquilibre(
+      index: indexEgapro,
+      representation: indexEgapro.moreThan1000 ? await clientEgaproRepresentationEquilibre(
               uniteLegale.siren
-            ),
-          }
-        : {}),
+            ) : null,
     };
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
