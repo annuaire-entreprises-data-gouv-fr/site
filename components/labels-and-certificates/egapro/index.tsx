@@ -1,5 +1,6 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
+import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import InformationTooltip from '#components-ui/information-tooltip';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { Section } from '#components/section';
@@ -43,16 +44,6 @@ const NC = () => (
     <i>NC</i>
   </InformationTooltip>
 );
-
-type IEgaproRepresentation = {
-  years: string[];
-  scores: {
-    pourcentageFemmesCadres: number[];
-    pourcentageHommesCadres: number[];
-    pourcentageFemmesMembres: number[];
-    pourcentageHommesMembres: number[];
-  };
-};
 
 export const EgaproSection: React.FC<{
   egapro: IEgapro | IAPINotRespondingError;
@@ -153,9 +144,11 @@ export const EgaproSection: React.FC<{
       <FullTable head={['Année', ...egapro.index.indexYears]} body={body} />
       {egapro.representation ? (
         <>
+          <br />
+          <SimpleSeparator />
           <p>
             Cette structure a également déclaré ses écarts de représentation
-            entre les femmes et les hommes dans les postes de direction&nbsp;
+            entre les femmes et les hommes dans les postes de direction&nbsp;:
           </p>
           <FullTable
             head={['Année', ...egapro.representation.years]}

@@ -26,7 +26,7 @@ export interface IEgapro {
       remunerations: number[];
     };
   };
-  representation?: {
+  representation: {
     years: string[];
     scores: {
       pourcentageFemmesCadres: number[];
@@ -34,7 +34,7 @@ export interface IEgapro {
       pourcentageFemmesMembres: number[];
       pourcentageHommesMembres: number[];
     };
-  };
+  } | null;
 }
 
 export const getEgapro = async (
@@ -44,12 +44,20 @@ export const getEgapro = async (
     if (!uniteLegale.complements.egaproRenseignee) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);
     }
-    const indexEgapro = await clientEgapro(uniteLegale.siren);
+    const index = await clientEgapro(uniteLegale.siren);
     return {
-      index: indexEgapro,
-      representation: indexEgapro.moreThan1000 ? await clientEgaproRepresentationEquilibre(
-              uniteLegale.siren
-            ) : null,
+      index,
+      representation: index.moreThan1000
+        ? await clientEgaproRepresentationEquilibre(uniteLegale.siren).catch(
+            (e) => {
+              if (e instanceof HttpNotFound) {
+                // some moreThan1000 uniteLegale dont have representation
+                return null;
+              }
+              throw e;
+            }
+          )
+        : null,
     };
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
