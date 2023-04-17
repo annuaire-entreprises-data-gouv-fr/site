@@ -70,7 +70,9 @@ const routes = {
   },
   monitoring: 'https://api.uptimerobot.com/v2/getMonitors',
   egapro: {
-    api: 'https://egapro.travail.gouv.fr/api/search',
+    index: 'https://egapro.travail.gouv.fr/api/search',
+    representation:
+      'https://egapro.travail.gouv.fr/api/representation-equilibree/search',
     site: 'https://egapro.travail.gouv.fr',
   },
   certifications: {
