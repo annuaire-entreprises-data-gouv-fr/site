@@ -74,7 +74,7 @@ class UniteLegaleFactory {
   };
 
   get = async () => {
-    if (true || this._isBot) {
+    if (this._isBot) {
       return await this.getForBot();
     } else {
       return await this.getForUser();
