@@ -1,0 +1,40 @@
+slug: collectivites-territoriales
+title: Rechercher une collectivité territoriale
+footerLabel: Collectivités territoriales
+published: true
+isServicePublic: true
+description: Retrouvez rapidement les informations légales des communes, départements et des régions de France.
+filter:
+  name: type
+  value: ct
+seo:
+  title: Moteur de recherche des informations légales des communes, départements et des régions de France
+  description: Retrouvez rapidement les informations légales des communes, départements et des régions de France.
+reassurance:
+  - title: 'Collectivités territoriales : de quoi parle-t-on ?'
+    body: |
+      La Constitution française reconnaît plusieurs formes de collectivités territoriales :
+
+      - Les communes (36 000)
+      - Les départements (100)
+      - Les régions (18)
+      - Les collectivités à statut particulier (Paris, Lyon, Marseille...)
+      - Les collectivités d'outre-mer (DROM et COM)
+  - title: Bénéficier des informations officielles les plus à jour
+    body: |
+      - Adresse de la collectivité
+      - Liste des élus
+      - Etablissements scolaires associés pour les communes
+  - title: Comment ça marche ?
+    body: |
+      Les collectivités territoriales (communes, départements, régions) - quelle que soit leur taille - possèdent toutes un numéro SIRET et par conséquent une fiche sur l'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).
+datasources:
+  - insee
+  - mi
+  - education-nationale
+body: |
+  ## Comment identifier une collectivité territoriale ?
+
+  Les collectivités territoriales sont des entités publiques distinctes de l'Etat qui disposent de l'autonomie juridique et s'administrent librement avec des conseils exécutifs élus. Ceux-ci exercent leur autorité, dans la limite des compétences accordées par la loi, sur leur territoire.
+
+  Certaines collectivités ont des spécificités (statuts particuliers, autonomie plus ou moins importante...) qui peuvent expliquer des disparités dans les données et les appellations dans le moteur de recherche.

@@ -5,6 +5,10 @@ const AdministrationDescription: React.FC<{
   slug: string; // EAdministration
   titleLevel?: 'h2' | 'h3';
 }> = ({ slug, titleLevel = 'h2' }) => {
+  if (!administrationsMetaData[slug]) {
+    throw new Error(`Administration ${slug} does not exist`);
+  }
+
   const { description, contact, long, dataSources, logoType } =
     administrationsMetaData[slug];
 

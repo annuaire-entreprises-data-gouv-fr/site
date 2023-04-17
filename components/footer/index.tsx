@@ -12,16 +12,34 @@ const Footer = () => (
           <div className="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
               <b className="fr-footer__top-cat">
-                Vérifier les informations légales d’une entreprise
+                Vérifier les informations légales d’une entreprise ou
+                association
               </b>
               <ul className="fr-footer__top-list">
-                {getAllLandingPages().map(({ slug, footerLabel }) => (
-                  <li key="slug">
-                    <a className="fr-footer__top-link" href={`/lp/${slug}`}>
-                      {footerLabel}
-                    </a>
-                  </li>
-                ))}
+                {getAllLandingPages()
+                  .filter((lp) => !lp.isServicePublic)
+                  .map(({ slug, footerLabel }) => (
+                    <li key="slug">
+                      <a className="fr-footer__top-link" href={`/lp/${slug}`}>
+                        {footerLabel}
+                      </a>
+                    </li>
+                  ))}
+              </ul>
+              <br />
+              <b className="fr-footer__top-cat">
+                Vérifier les informations légales d’une administration
+              </b>
+              <ul className="fr-footer__top-list">
+                {getAllLandingPages()
+                  .filter((lp) => lp.isServicePublic)
+                  .map(({ slug, footerLabel }) => (
+                    <li key="slug">
+                      <a className="fr-footer__top-link" href={`/lp/${slug}`}>
+                        {footerLabel}
+                      </a>
+                    </li>
+                  ))}
               </ul>
             </div>
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">

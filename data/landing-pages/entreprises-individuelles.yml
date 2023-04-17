@@ -1,11 +1,49 @@
-slug: entreprise-individuelle
-title: Annuaire des entreprises individuelles
+slug: entreprises-individuelles
+title: Rechercher une auto-entreprise
 footerLabel: Entreprises individuelles
-published: false
-description: Retrouvez les informations administratives d’une entreprises individuelles (auto-entreprise, micro-entreprise etc.)
+published: true
+description: Retrouvez les informations légales des auto-entrepreneurs, micro-entreprises et entreprises individuelles en France
 filter:
   name: type
   value: ei
 seo:
-  title:
-  description:
+  title: Rechercher une auto-entreprise
+  description: Retrouvez les informations légales des auto-entrepreneurs, micro-entreprises et entreprises individuelles en France
+reassurance:
+  - title: 'Entreprise individuelle : définition'
+    body: |
+      Une entreprise individuelle est un régime juridique particulier où l'entreprise n'a pas une personnalité morale distincte de son dirigeant. Contrairement aux entreprises "classiques", l'entrepreneur et son entreprise individuelle sont les mêmes personnes au sens du droit.
+  - title: Bénéficier des informations officielles les plus à jour
+    body: |
+      - SIRET
+      - SIREN
+      - Numéro de TVA
+      - Code NAF / APE
+      - Avis de situation
+      - Extrait d’Immatriculation au RNE
+  - title: "Entrepreneurs : pourquoi utiliser l'Annuaire dans vos démarches ?"
+    body: |
+      L'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) centralise les informations qui sont le plus souvent demandées lors des démarches administratives des entrepreneurs et des indépendants.
+datasources:
+  - insee
+  - inpi
+body: |
+  ## Entreprise individuelle, auto-entrepreneur, micro-entreprise : quelles différences ?
+
+  Toutes ces structures sont des entreprises individuelles !
+
+  - La **différence entre entrepreneur individuel "simple" et micro-entreprise** est **surtout fiscale** : l'entrepreneur individuel "simple" est soumis à un régime réel d'imposition alors que le "micro-entrepreneur" est un entrepreneur individuel soumis au régime fiscal de la micro-entreprise ou micro-social. Certaines activités - notamment agricoles - sont aussi interdites aux micro-entrepreneurs. **Le choix entre régime classique de l'entreprise individuelle et micro-entreprise revient à l'entrepreneur**
+  - **Depuis 2016, les statuts de micro-entreprise et d'auto-entrepreneur ont fusionné.** Il n'y a aucune différence entre les deux, même si les formulations usuelles optent souvent pour le terme d' "auto-entrepreneur" pour les décrire.
+
+  ## Rendre les informations de son entreprise individuelle non diffusibles
+
+  A la différence des entreprises classiques, les entreprises individuelles sont aussi des personnes physiques. L’[article A123-96 du code de Commerce](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000045515238) indique alors que toute personne physique peut choisir de rendre publiques ou non ses données personnelles.
+
+  Les entrepreneurs et travailleurs indépendants qui le souhaitent **peuvent donc [rendre leurs informations non diffusibles](https://statut-diffusion-sirene.insee.fr) auprès de l'INSEE**.
+
+  ## Pourquoi je ne retrouve pas mon entreprise individuelle dans le moteur de recherche ?
+
+  Rendre les informations d’une entreprise individuelle non diffusibles a pour conséquence de **rendre l’entreprise introuvable sur le moteur de recherche de l'Annuaire des Entreprises**.
+
+
+  Plus d’informations [sur notre FAQ](https://annuaire-entreprises.data.gouv.fr/faq#independant).
