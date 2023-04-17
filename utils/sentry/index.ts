@@ -43,22 +43,20 @@ const init = () => {
 const logInSentryFactory =
   (severity = 'error' as SeverityLevel) =>
   (errorMsg: any, extra: IScope = {}) => {
-    console.error(errorMsg, JSON.stringify(extra));
-    return;
-    // if (process.env.NODE_ENV === 'development' || !process.env.SENTRY_DSN) {
-    //   console.error(errorMsg, JSON.stringify(extra));
-    // }
-    // if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
-    //   init();
-    //   const scope = getScope(extra || {});
-    //   scope.setLevel(severity);
+    if (process.env.NODE_ENV === 'development' || !process.env.SENTRY_DSN) {
+      console.error(errorMsg, JSON.stringify(extra));
+    }
+    if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
+      init();
+      const scope = getScope(extra || {});
+      scope.setLevel(severity);
 
-    //   if (typeof errorMsg === 'string') {
-    //     Sentry.captureMessage(errorMsg, scope);
-    //   } else {
-    //     Sentry.captureException(errorMsg, scope);
-    //   }
-    // }
+      if (typeof errorMsg === 'string') {
+        Sentry.captureMessage(errorMsg, scope);
+      } else {
+        Sentry.captureException(errorMsg, scope);
+      }
+    }
   };
 
 export const logWarningInSentry = logInSentryFactory('info' as SeverityLevel);
