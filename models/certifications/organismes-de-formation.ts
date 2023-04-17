@@ -1,5 +1,4 @@
-import { clientDGEFP } from '#clients/dgefp';
-import { IOrganismesFormationResponse } from '#clients/dgefp/type';
+import { IOrganismeFormation, clientOrganismeFormation } from '#clients/dgefp';
 import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations';
 import {
@@ -11,17 +10,17 @@ import { IUniteLegale } from '..';
 
 export const getOrganismesDeFormation = async (
   uniteLegale: IUniteLegale
-): Promise<IOrganismesFormationResponse | IAPINotRespondingError> => {
+): Promise<IOrganismeFormation | IAPINotRespondingError> => {
   try {
     if (!uniteLegale.complements.estOrganismeFormation) {
       throw new HttpNotFound('Not organisme de formation');
     }
-    return await clientDGEFP(uniteLegale.siren);
+    return await clientOrganismeFormation(uniteLegale.siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);
     }
-    logErrorInSentry('Error in API RGE', {
+    logErrorInSentry('Error in Organisme de formation', {
       siren: uniteLegale.siren,
       details: e.toString(),
     });

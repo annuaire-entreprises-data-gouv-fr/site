@@ -28,8 +28,12 @@ const routes = {
         'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce',
     },
   },
-  dgefp:
-    'https://dgefp.opendatasoft.com/api/records/1.0/search/?dataset=liste-publique-des-of-v2',
+  dgefp: {
+    metadata:
+      'https://dgefp.opendatasoft.com/api/datasets/1.0/search/?q=liste-publique-des-of-v2',
+    search:
+      'https://dgefp.opendatasoft.com/api/records/1.0/search/?dataset=liste-publique-des-of-v2',
+  },
   educationNationale: {
     api: 'https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-annuaire-education',
     site: 'https://www.education.gouv.fr/annuaire',

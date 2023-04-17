@@ -1,3 +1,4 @@
+import { IOrganismeFormation } from '#clients/dgefp';
 import { IOrganismesFormationResponse } from '#clients/dgefp/type';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { getEgapro, IEgapro } from '#models/certifications/egapro';
@@ -19,7 +20,7 @@ export interface ICertifications {
     | IEntrepreneurSpectaclesCertification
     | IAPINotRespondingError;
   egapro: IEgapro | IAPINotRespondingError;
-  organismesDeFormation: IOrganismesFormationResponse | IAPINotRespondingError;
+  organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
 }
 
 export const getCertificationsFromSlug = async (

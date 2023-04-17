@@ -1,3 +1,4 @@
+import { IOrganismeFormation } from '#clients/dgefp';
 import { IOrganismesFormationResponse } from '#clients/dgefp/type';
 import FAQLink from '#components-ui/faq-link';
 import AdministrationNotResponding from '#components/administration-not-responding';
@@ -11,7 +12,7 @@ import {
 } from '#models/api-not-responding';
 
 type OrganismeDeFormationSectionProps = {
-  organismesDeFormation: IOrganismesFormationResponse | IAPINotRespondingError;
+  organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
 };
 
 const FAQQaliopi = () => (
@@ -36,8 +37,9 @@ export const OrganismeDeFormationSection = ({
           sources={[EAdministration.ADEME]}
         >
           <p>
-            Nous n&lsquo;avons pas trouvé les formations peuvent obtenir un
-            financement public.
+            Cette structure est <FAQQaliopi />. C’est un organisme dont les
+            formations peuvent obtenir un financement public. En revanche nous
+            n’avons pas retrouvé le détail de ses certifications auprès de la{' '}
           </p>
         </Section>
       );
@@ -54,6 +56,7 @@ export const OrganismeDeFormationSection = ({
     <Section
       title="Qualiopi - Organisme de formation"
       sources={[EAdministration.MTPEI, EAdministration.DINUM]}
+      lastModified={organismesDeFormation.lastModified}
     >
       Cette structure est <FAQQaliopi />. C’est un organisme dont les formations
       peuvent obtenir un financement public.
@@ -67,7 +70,7 @@ export const OrganismeDeFormationSection = ({
           'Dates',
           'Certifications',
         ]}
-        body={organismesDeFormation.records.map(({ fields }) => [
+        body={organismesDeFormation.records.map((fields) => [
           fields.numerodeclarationactivite,
           fields.certifications_actionsdeformation,
           fields.informationsdeclarees_nbstagiaires,

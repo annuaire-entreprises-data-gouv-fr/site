@@ -17,7 +17,6 @@ const extractLastModifiedDate = (metadata: IODSMetadata) => {
   if (!(metadata.datasets.length > 0)) {
     return null;
   }
-
   return metadata.datasets[0].metas.data_processed;
 };
 
