@@ -36,6 +36,7 @@ const init = () => {
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
     tracesSampleRate: 0.1,
+    debug: false, // dont log console.log|error|info
   });
   _isInitialized = true;
 };
