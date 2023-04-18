@@ -23,11 +23,11 @@ Le contenu est centralisé de manière très pratique dans le dossier [/data](ht
 
 ## Et pour créer un nouveau fichier ? 
 
-[Créer une page d'administration](https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administrations?filename=nouvelle-administration.md&value=test)
+[Créer une page d'administration](https://github.com/etalab/annuaire-entreprises-site/new/main/data/administrations?filename=nouvelle-administration.md&value=test)
 
-[Créer une page de FAQ](https://github.com/etalab/annuaire-entreprises-site/tree/main/data/faq?filename=nouvelle-faq.md&value=test)
+[Créer une page de FAQ](https://github.com/etalab/annuaire-entreprises-site/new/main/data/faq?filename=nouvelle-faq.md&value=test)
 
-[Créer une landing page](https://github.com/etalab/annuaire-entreprises-site/tree/main/data/landing-pages?filename=nouvelle-landing-page.md&value=test)  
+[Créer une landing page](https://github.com/etalab/annuaire-entreprises-site/new/main/data/landing-pages?filename=nouvelle-landing-page.md&value=test)  
 
 ## Faire une review
 
