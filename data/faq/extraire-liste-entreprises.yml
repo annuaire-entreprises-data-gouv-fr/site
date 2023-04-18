@@ -1,9 +1,23 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
 administrations:
   - insee
 targets:
   - agent
 title: Extraire une liste d’entreprises, d’associations ou de services publics
-description: L’Insee propose un outil dédié pour constituer des listes d'entreprises.
+seo:
+  description: L’Insee propose un outil dédié pour constituer des listes d'entreprises.
 body: |
   Si vous avez besoin d’extraire une liste de structures, filtrée selon des critères géographiques ou administratifs (état, code APE, forme juridique...) l’[Insee](/administration#insee) propose 
   un outil dédié :

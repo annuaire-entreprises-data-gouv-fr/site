@@ -12,8 +12,8 @@ import { NextPageWithLayout } from 'pages/_app';
 const FAQArticle: NextPageWithLayout<{ article: IArticle }> = ({ article }) => (
   <>
     <Meta
-      title={article.title}
-      description={article.description}
+      title={article.seo.title || article.title}
+      description={article.seo.description}
       noIndex={false}
       canonical={`https://annuaire-entreprises.data.gouv.fr/faq/${article.slug}`}
     />
