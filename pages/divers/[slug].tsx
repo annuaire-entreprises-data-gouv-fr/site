@@ -27,8 +27,11 @@ const ConventionsCollectives: NextPageWithLayout<IProps> = ({
   <>
     <Meta
       noIndex={true}
-      title={`Conventions collectives - ${getCompanyPageTitle(uniteLegale)}`}
-      description={getCompanyPageDescription(uniteLegale)}
+      title={`Conventions collectives - ${getCompanyPageTitle(
+        uniteLegale,
+        session
+      )}`}
+      description={getCompanyPageDescription(uniteLegale, session)}
     />
     <div className="content-container">
       <Title

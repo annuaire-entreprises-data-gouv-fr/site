@@ -50,8 +50,8 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
 }) => (
   <>
     <Meta
-      title={getCompanyPageTitle(uniteLegale)}
-      description={getCompanyPageDescription(uniteLegale)}
+      title={getCompanyPageTitle(uniteLegale, session)}
+      description={getCompanyPageDescription(uniteLegale, session)}
       noIndex={shouldNotIndex(uniteLegale)}
       canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${
         uniteLegale.chemin || uniteLegale.siren
@@ -69,7 +69,7 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
         <NonDiffusibleSection />
       ) : (
         <>
-          <UniteLegaleSection uniteLegale={uniteLegale} />
+          <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
           {isLoggedIn(session) && donneesRestreintesUniteLegale ? (
             <DonneesRestreintesSection
               uniteLegale={uniteLegale}
@@ -89,9 +89,13 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
               etablissement={uniteLegale.siege}
               usedInEntreprisePage={true}
               withDenomination={false}
+              session={session}
             />
           )}
-          <EtablissementListeSection uniteLegale={uniteLegale} />
+          <EtablissementListeSection
+            uniteLegale={uniteLegale}
+            session={session}
+          />
         </>
       )}
     </div>

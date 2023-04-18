@@ -33,7 +33,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   return (
     <>
       <Meta
-        title={`Labels et certificats - ${getNomComplet(uniteLegale)}`}
+        title={`Labels et certificats - ${getNomComplet(uniteLegale, session)}`}
         noIndex={true}
       />
       <div className="content-container">
@@ -52,6 +52,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
           <CertificationsRGESection
             uniteLegale={uniteLegale}
             certificationsRGE={rge}
+            session={session}
           />
         )}
         {uniteLegale.complements.estEss && <CertificationESSSection />}

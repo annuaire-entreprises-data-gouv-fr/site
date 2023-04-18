@@ -25,6 +25,7 @@ interface IProps extends IPropsWithMetadata {
 
 const EtablissementMapPage: NextPageWithLayout<IProps> = ({
   etablissement,
+  metadata: { session },
 }) => (
   <>
     <Meta
@@ -45,7 +46,8 @@ const EtablissementMapPage: NextPageWithLayout<IProps> = ({
           <Info>
             Cette structure est non-diffusible. <br />
             Son adresse complète n’est pas publique, mais sa commune de
-            domiciliation est : {getAdresseEtablissement(etablissement)}.
+            domiciliation est :{' '}
+            {getAdresseEtablissement(etablissement, session)}.
             <br />
             Le curseur ci-dessous <b>n’est pas placé</b> sur l’adresse réelle.
           </Info>

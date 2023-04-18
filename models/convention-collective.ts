@@ -6,7 +6,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from './api-not-responding';
-import { estDiffusible, estNonDiffusible } from './statut-diffusion';
+import { estNonDiffusible } from './statut-diffusion';
 import { getUniteLegaleFromSlug } from './unite-legale';
 
 export interface IConventionCollective {

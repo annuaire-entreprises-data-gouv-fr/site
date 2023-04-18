@@ -66,6 +66,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       page,
       searchFilterParams
     );
+
     return {
       props: {
         results,

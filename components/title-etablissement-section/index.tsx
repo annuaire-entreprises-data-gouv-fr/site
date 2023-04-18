@@ -5,12 +5,14 @@ import { Tag } from '#components-ui/tag';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import { estNonDiffusible, getNomComplet } from '#models/statut-diffusion';
 import { formatSiret } from '#utils/helpers';
+import { ISession } from '#utils/session';
 import { INSEE } from '../administrations';
 
 const TitleEtablissement: React.FC<{
   uniteLegale: IUniteLegale;
   nomEtablissement: string | null;
-}> = ({ uniteLegale, nomEtablissement }) => (
+  session: ISession | null;
+}> = ({ uniteLegale, nomEtablissement, session }) => (
   <h2>
     Information sur{' '}
     {nomEtablissement ? (
@@ -19,7 +21,7 @@ const TitleEtablissement: React.FC<{
       <>
         un établissement de{' '}
         <a href={`/entreprise/${uniteLegale.chemin}`}>
-          {getNomComplet(uniteLegale)}
+          {getNomComplet(uniteLegale, session)}
         </a>
       </>
     )}
@@ -52,7 +54,8 @@ const MapTitleEtablissement: React.FC<{
 const TitleEtablissementWithDenomination: React.FC<{
   uniteLegale: IUniteLegale;
   etablissement: IEtablissement;
-}> = ({ uniteLegale, etablissement }) => (
+  session: ISession | null;
+}> = ({ uniteLegale, etablissement, session }) => (
   <div className="etablissement-title">
     {etablissement.oldSiret && etablissement.oldSiret !== etablissement.siret && (
       <Warning full>
@@ -69,6 +72,7 @@ const TitleEtablissementWithDenomination: React.FC<{
     <TitleEtablissement
       uniteLegale={uniteLegale}
       nomEtablissement={etablissement.enseigne || etablissement.denomination}
+      session={session}
     />
     <div className="etablissement-sub-title">
       <span>établissement ‣ {formatSiret(etablissement.siret)}</span>

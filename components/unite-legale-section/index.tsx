@@ -9,6 +9,7 @@ import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
 import { getAdresseUniteLegale, getNomComplet } from '#models/statut-diffusion';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
+import { ISession } from '#utils/session';
 import {
   checkHasLabelsAndCertificates,
   LabelsAndCertificatesBadgesSection,
@@ -16,11 +17,12 @@ import {
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => {
   const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
 
   const data = [
-    ['Dénomination', getNomComplet(uniteLegale)],
+    ['Dénomination', getNomComplet(uniteLegale, session)],
     ['SIREN', formatIntFr(uniteLegale.siren)],
     [
       'SIRET du siège social',
@@ -37,7 +39,7 @@ const UniteLegaleSection: React.FC<{
       <FAQLink to="/faq/modifier-adresse" tooltipLabel="Adresse postale">
         Comment modifier une adresse ?
       </FAQLink>,
-      getAdresseUniteLegale(uniteLegale, true),
+      getAdresseUniteLegale(uniteLegale, session, true),
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
@@ -68,7 +70,7 @@ const UniteLegaleSection: React.FC<{
   return (
     <div id="entreprise">
       <Section
-        title={`Informations légales de ${getNomComplet(uniteLegale)}`}
+        title={`Informations légales de ${getNomComplet(uniteLegale, session)}`}
         sources={[EAdministration.INSEE, EAdministration.VIES]}
       >
         <TwoColumnTable body={data} />

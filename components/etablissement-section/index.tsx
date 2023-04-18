@@ -13,13 +13,14 @@ import { EAdministration } from '#models/administrations';
 import { estActif } from '#models/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import {
-  estDiffusible,
   getAdresseEtablissement,
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatDate, formatSiret } from '#utils/helpers';
+import { ISession } from '#utils/session';
 
 type IProps = {
+  session: ISession | null;
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
   usedInEntreprisePage?: boolean;
@@ -31,11 +32,15 @@ const EtablissementSection: React.FC<IProps> = ({
   uniteLegale,
   usedInEntreprisePage,
   withDenomination,
+  session,
 }) => {
   const data = [
     ...(withDenomination
       ? [
-          ['Dénomination de l’unité légale', getNomComplet(uniteLegale)],
+          [
+            'Dénomination de l’unité légale',
+            getNomComplet(uniteLegale, session),
+          ],
           [
             'Type d’établissement',
             <>
@@ -68,7 +73,9 @@ const EtablissementSection: React.FC<IProps> = ({
       </FAQLink>,
       etablissement.adresse ? (
         <>
-          <CopyPaste>{getAdresseEtablissement(etablissement)}</CopyPaste>
+          <CopyPaste>
+            {getAdresseEtablissement(etablissement, session)}
+          </CopyPaste>
           <PrintNever key="adresse-link">
             <a href={`/carte/${etablissement.siret}`}>→ voir sur la carte</a>
             <br />
@@ -123,12 +130,13 @@ const EtablissementSection: React.FC<IProps> = ({
         <EtablissementDescription
           etablissement={etablissement}
           uniteLegale={uniteLegale}
+          session={session}
         />
       )}
       <Section
         title={
           usedInEntreprisePage
-            ? `Siège social de ${getNomComplet(uniteLegale)}`
+            ? `Siège social de ${getNomComplet(uniteLegale, session)}`
             : `Établissement${etablissement.estSiege ? ' (siège social)' : ''}`
         }
         id="etablissement"

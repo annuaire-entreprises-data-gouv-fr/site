@@ -1,3 +1,5 @@
+import { isLoggedIn } from '#utils/session';
+import { ISession } from '#utils/session';
 import { IEtablissement, IUniteLegale } from '.';
 
 export enum ISTATUTDIFFUSION {
@@ -40,7 +42,14 @@ export const nonDiffusibleDataFormatter = (e: string) =>
  * @param uniteLegale
  * @returns
  */
-export const getNomComplet = (uniteLegale: IUniteLegale) => {
+export const getNomComplet = (
+  uniteLegale: IUniteLegale,
+  session: ISession | null
+) => {
+  if (session && isLoggedIn(session)) {
+    return uniteLegale.nomComplet;
+  }
+
   if (uniteLegale.complements.estEntrepreneurIndividuel) {
     if (estDiffusible(uniteLegale)) {
       return uniteLegale.nomComplet;
@@ -78,13 +87,17 @@ const formatAdresseForDiffusion = (
  */
 export const getAdresseUniteLegale = (
   uniteLegale: IUniteLegale,
+  session: ISession | null,
   postale = false
 ) => {
   const { adressePostale, adresse, commune, codePostal } =
     uniteLegale?.siege || {};
 
+  const shouldDiff =
+    session && isLoggedIn(session) ? true : estDiffusible(uniteLegale);
+
   return formatAdresseForDiffusion(
-    estDiffusible(uniteLegale),
+    shouldDiff,
     postale ? adressePostale : adresse,
     commune,
     codePostal
@@ -98,12 +111,16 @@ export const getAdresseUniteLegale = (
  */
 export const getAdresseEtablissement = (
   etablissement: IEtablissement,
+  session: ISession | null,
   postale = false
 ) => {
   const { adressePostale, adresse, commune, codePostal } = etablissement || {};
 
+  const shouldDiff =
+    session && isLoggedIn(session) ? true : estDiffusible(etablissement);
+
   return formatAdresseForDiffusion(
-    estDiffusible(etablissement),
+    shouldDiff,
     postale ? adressePostale : adresse,
     commune,
     codePostal

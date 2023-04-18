@@ -5,10 +5,12 @@ import { PrintNever } from '#components-ui/print-visibility';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/index';
 import { getNomComplet } from '#models/statut-diffusion';
+import { ISession } from '#utils/session';
 
-const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
-  uniteLegale,
-}) => (
+const SocialMedia: React.FC<{
+  uniteLegale: IUniteLegale;
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => (
   <PrintNever>
     <div className="social-media layout-right">
       <span>
@@ -66,9 +68,11 @@ const SocialMedia: React.FC<{ uniteLegale: IUniteLegale }> = ({
         >
           <a
             href={`mailto:?subject=A découvrir sur l’Annuaire des Entreprises, la page de ${getNomComplet(
-              uniteLegale
+              uniteLegale,
+              session
             )}&body=Je voudrais partager la page ${getNomComplet(
-              uniteLegale
+              uniteLegale,
+              session
             )} avec vous https://annuaire-entreprises.data.gouv.fr/entreprise/${
               uniteLegale.chemin
             }`}

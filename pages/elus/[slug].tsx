@@ -24,7 +24,9 @@ const ElusPage: NextPageWithLayout<IProps> = ({
   return (
     <>
       <Meta
-        title={`Élus de ${getNomComplet(uniteLegale)} - ${uniteLegale.siren}`}
+        title={`Élus de ${getNomComplet(uniteLegale, session)} - ${
+          uniteLegale.siren
+        }`}
         canonical={`https://annuaire-entreprises.data.gouv.fr/elus/${uniteLegale.siren}`}
         noIndex={true}
       />

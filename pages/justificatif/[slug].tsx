@@ -26,9 +26,10 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
   <>
     <Meta
       title={`Justificatif d’immatriculation - ${getCompanyPageTitle(
-        uniteLegale
+        uniteLegale,
+        session
       )}`}
-      description={getCompanyPageDescription(uniteLegale)}
+      description={getCompanyPageDescription(uniteLegale, session)}
       noIndex={true}
     />
     <div className="content-container">
@@ -41,6 +42,7 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
         immatriculationJOAFE={immatriculationJOAFE}
         immatriculationRNE={immatriculationRNE}
         uniteLegale={uniteLegale}
+        session={session}
       />
     </div>
   </>

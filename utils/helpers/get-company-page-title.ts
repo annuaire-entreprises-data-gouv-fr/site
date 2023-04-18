@@ -5,6 +5,7 @@ import {
   IUniteLegale,
 } from '#models/index';
 import { getNomComplet } from '#models/statut-diffusion';
+import { ISession } from '#utils/session';
 import { capitalize } from './formatting';
 
 export const getCompanyPronoun = (uniteLegale: IUniteLegale) => {
@@ -36,17 +37,25 @@ export const getCompanyLabel = (uniteLegale: IUniteLegale) => {
   }
 };
 
-export const getCompanyPageTitle = (uniteLegale: IUniteLegale) => {
+export const getCompanyPageTitle = (
+  uniteLegale: IUniteLegale,
+  session: ISession | null
+) => {
   return `${capitalize(getCompanyLabel(uniteLegale))} ${getNomComplet(
-    uniteLegale
+    uniteLegale,
+    session
   )} à ${uniteLegale.siege.codePostal} ${uniteLegale.siege.commune} - SIREN ${
     uniteLegale.siren
   } | Annuaire des Entreprises`;
 };
 
-export const getCompanyPageDescription = (uniteLegale: IUniteLegale) =>
+export const getCompanyPageDescription = (
+  uniteLegale: IUniteLegale,
+  session: ISession | null
+) =>
   `L’administration permet aux particuliers et agents publics de vérifier les informations légales officielles de ${getNomComplet(
-    uniteLegale
+    uniteLegale,
+    session
   )}, ${
     uniteLegale.siege.adresse
   } : SIREN, SIRET, TVA Intracommunautaire, Code APE/NAF, dirigeant, adresse, justificatif  d'immatriculation...`;

@@ -25,7 +25,10 @@ const FinancePage: NextPageWithLayout<IProps> = ({
   return (
     <>
       <Meta
-        title={`Données financières - ${getCompanyPageTitle(uniteLegale)}`}
+        title={`Données financières - ${getCompanyPageTitle(
+          uniteLegale,
+          session
+        )}`}
         noIndex={true}
       />
       <div className="content-container">
