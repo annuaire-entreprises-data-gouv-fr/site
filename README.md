@@ -10,13 +10,13 @@
 
 Pour voir le détail des disponibilités des API utilisées sur le site, [consultez la page de statut](https://annuaire-entreprises.data.gouv.fr/donnees/api).
 
-Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr)
+Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).
 
 Ce site a pour vocation de mettre à disposition des citoyens et des agents les données ouvertes "Open-data" des entreprises, associations et administrations dotées d'un n° siren/siret.
 
 ## Comment contribuer ?
 
-Vous êtes un contributeur exterieur ? [Soumettez-nous une nouvelle issue ou une pull request.](https://github.com/etalab/annuaire-entreprises-site/issues/new/choose)
+Vous êtes un contributeur exterieur ? [Soumettez-nous une nouvelle issue ou une pull request](https://github.com/etalab/annuaire-entreprises-site/issues/new/choose)
 
 Vous faîtes partie de l’équipe contenu ? [Consultez le tutoriel](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/tree/main/contribute-content-tutorial.md)
 
