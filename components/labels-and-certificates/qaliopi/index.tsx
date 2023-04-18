@@ -1,6 +1,6 @@
 import { IOrganismeFormation } from '#clients/dgefp';
-import { IOrganismesFormationResponse } from '#clients/dgefp/type';
 import FAQLink from '#components-ui/faq-link';
+import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { MTPEI } from '#components/administrations';
 import { Section } from '#components/section';
@@ -10,6 +10,7 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
+import { formatIntFr } from '#utils/helpers';
 
 type OrganismeDeFormationSectionProps = {
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
@@ -39,7 +40,8 @@ export const OrganismeDeFormationSection = ({
           <p>
             Cette structure est <FAQQaliopi />. C’est un organisme dont les
             formations peuvent obtenir un financement public. En revanche nous
-            n’avons pas retrouvé le détail de ses certifications auprès de la{' '}
+            n’avons pas retrouvé le détail de ses certifications auprès de la
+            DGEFP
           </p>
         </Section>
       );
@@ -65,17 +67,19 @@ export const OrganismeDeFormationSection = ({
       <FullTable
         head={[
           'Numéro Déclaration Activité',
-          'Actions de formation',
+          "Nom de l'organisme de formation",
+          "Siret de l'établissement certifié ",
           'Nombre de stagiaires',
-          'Dates',
           'Certifications',
         ]}
         body={organismesDeFormation.records.map((fields) => [
-          fields.numerodeclarationactivite,
-          fields.certifications_actionsdeformation,
-          fields.informationsdeclarees_nbstagiaires,
-          fields.informationsdeclarees_datedernieredeclaration,
-          fields.certifications,
+          formatIntFr(fields.numerodeclarationactivite),
+          fields.denomination,
+          fields.siretetablissementdeclarant,
+          formatIntFr(fields.informationsdeclarees_nbstagiaires),
+          fields.certifications
+            .split('/')
+            .map((certification) => <Tag>{certification}</Tag>),
         ])}
       />
     </Section>
