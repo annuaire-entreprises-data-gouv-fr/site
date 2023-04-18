@@ -3,7 +3,6 @@ import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
-import { Tag } from '#components-ui/tag';
 import { ProtectedSection } from '#components/section/protected-section';
 import { TwoColumnTable } from '#components/table/simple';
 import {
@@ -19,7 +18,8 @@ import { NextPageWithLayout } from 'pages/_app';
 
 const Conformite: React.FC<{
   data: IConformite | IAPINotRespondingError;
-}> = ({ data }) => {
+  prefix?: string;
+}> = ({ data, prefix }) => {
   return isAPINotResponding(data) ? (
     data.errorType === 404 ? (
       <i>Introuvable</i>
@@ -30,9 +30,11 @@ const Conformite: React.FC<{
     <div className="layout-space-between">
       {typeof data.isValid === 'boolean' ? (
         data.isValid ? (
-          <Icon slug="open">conforme</Icon>
+          <Icon slug="open">{prefix && <b>{prefix}&nbsp;: </b>} conforme</Icon>
         ) : (
-          <Icon slug="closed">non conforme</Icon>
+          <Icon slug="closed">
+            {prefix && <b>{prefix}&nbsp;: </b>} non conforme
+          </Icon>
         )
       ) : (
         <span />
@@ -63,8 +65,8 @@ export const DonneesRestreintesSection: NextPageWithLayout<IProps> = ({
             [
               'Conformité sociale',
               <>
-                <Conformite data={vigilance} />
-                <Conformite data={msa} />
+                <Conformite data={vigilance} prefix="Urssaf" />
+                <Conformite data={msa} prefix="MSA" />
               </>,
             ],
             ['', <br />],
@@ -102,9 +104,7 @@ export const DonneesRestreintesSection: NextPageWithLayout<IProps> = ({
             ],
             ['', <br />],
             [
-              <>
-                Données financières <Tag color="new">beta test</Tag>
-              </>,
+              <>Données financières</>,
               <a href={`/donnees-financieres/${uniteLegale.siren}`}>
                 → Consulter les derniers bilans
               </a>,

@@ -15,13 +15,13 @@ export type IAPIEntrepriseConformiteMSA = {
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseConformiteMSA = async (
-  siret: Siret,
-  useCache = true
-) => {
+export const clientApiEntrepriseConformiteMSA = async (siret: Siret) => {
   if (!process.env.API_ENTREPRISE_URL || !process.env.API_ENTREPRISE_TOKEN) {
     throw new HttpUnauthorizedError('Missing API Entreprise credentials');
   }
+
+  // never cache any API Entreprise request
+  const useCache = false;
 
   const response = await httpGet(
     `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.msa}${siret}/conformite_cotisations`,
@@ -29,7 +29,7 @@ export const clientApiEntrepriseConformiteMSA = async (
       headers: {
         Authorization: `Bearer ${process.env.API_ENTREPRISE_TOKEN}`,
       },
-      timeout: constants.timeout.XL,
+      timeout: constants.timeout.M,
       params: {
         object: 'espace-agent-public',
         context: 'annuaire-entreprises',
