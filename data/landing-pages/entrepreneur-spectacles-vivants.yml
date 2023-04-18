@@ -19,9 +19,9 @@ reassurance:
       - Numéro de récépissé
       - Nature de la demande
       - Date et type de déclaration
-      - Adresse
+      - Adresse postale
       - SIREN / SIRET
-      - Avis de situation Insee
+      - Avis de situation
   - title: Comment ça marche ?
     body: |
       Tous les entrepreneurs du spectacle vivant - quelle que soit leur forme juridique - possèdent un numéro SIRET et par conséquent une fiche sur l'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).
