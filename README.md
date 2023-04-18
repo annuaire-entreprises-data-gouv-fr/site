@@ -16,9 +16,9 @@ Ce site a pour vocation de mettre à disposition des citoyens et des agents les 
 
 ## Comment contribuer ?
 
-Vous êtes un contributeur exterieur ? [Soumettez-nous une nouvelle issue ou une pull request](https://github.com/etalab/annuaire-entreprises-site/issues/new/choose)
+Vous êtes un contributeur exterieur ? [Soumettez-nous une nouvelle issue ou une pull request.](https://github.com/etalab/annuaire-entreprises-site/issues/new/choose)
 
-Vous faîtes partie de l’équipe contenu ? [Consultez le tutoriel](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/tree/main/contribute-content-tutorial.md)
+Vous faîtes partie de l’équipe contenu ? [Consultez le tutoriel.](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/tree/main/contribute-content-tutorial.md)
 
 ## Architecture du service 🏗
 
