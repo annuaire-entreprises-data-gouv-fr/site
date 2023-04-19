@@ -11,6 +11,9 @@ apiMonitors:
   - apiName: API Egapro
     apiSlug: egapro
     id: 794017147
+  - apiName: API Liste des organismes de formation (Qualiopi)
+    apiSlug: qualiopi
+    id: 794191533
 dataSources:
   - label: Index de l’égalité professionnelle et représentation équilibrée femmes - hommes
     apiSlug: egapro
@@ -21,7 +24,7 @@ dataSources:
     datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/
     keywords: Conventions Collectives des Entreprises
   - label: Liste des organismes de formation (Qualiopi)
-    apiSlug: recherche-entreprise
+    apiSlug: qualiopi
     datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-publique-des-organismes-de-formation-l-6351-7-1-du-code-du-travail/
     keywords: Liste des Organismes de formation
 description: |
