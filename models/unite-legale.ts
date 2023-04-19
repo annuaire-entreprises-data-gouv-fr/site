@@ -21,7 +21,6 @@ import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import {
   logFirstSireneInseefailed,
   logRechercheEntreprisefailed,
-  logRechercheEntrepriseForGoodBotfailed,
   logSecondSireneInseefailed,
 } from '#utils/sentry/helpers';
 import {
@@ -31,6 +30,12 @@ import {
   SirenNotFoundError,
 } from '.';
 import { isAssociation } from '.';
+import { EAdministration } from './administrations';
+import {
+  APINotRespondingFactory,
+  IAPINotRespondingError,
+  isAPINotResponding,
+} from './api-not-responding';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 /**
@@ -51,12 +56,12 @@ export const getUniteLegaleFromSlug = async (
 ): Promise<IUniteLegale> => {
   const { isBot = false, page = 1 } = options;
 
-  const uniteLegale = new UniteLegaleFactory(slug, isBot, page);
+  const uniteLegale = new UniteLegaleBuilder(slug, isBot, page);
 
   return await uniteLegale.build();
 };
 
-class UniteLegaleFactory {
+class UniteLegaleBuilder {
   private _siren: Siren;
   private _isBot: boolean;
   private _page: number;
@@ -68,46 +73,24 @@ class UniteLegaleFactory {
   }
 
   build = async () => {
-    const uniteLegaleRaw = await this.get();
-    const uniteLegale = this.postProcess(uniteLegaleRaw);
-    return uniteLegale;
-  };
+    const getUniteLegaleInsee = this._isBot
+      ? async () => await fetchUniteLegaleFromInsee(this._siren, this._page)
+      : () => APINotRespondingFactory(EAdministration.INSEE, 422);
 
-  get = async () => {
-    if (this._isBot) {
-      return await this.getForBot();
-    } else {
-      return await this.getForUser();
-    }
-  };
+    // dont use cache for bot
+    const useCache = !this._isBot;
 
-  getForUser = async () => {
-    const page = 1;
-    const useCache = true;
-    const [uniteLegale, { colter = {}, complements = {}, chemin }] =
+    const [uniteLegaleInsee, uniteLegaleRechercheEntreprise] =
       await Promise.all([
-        getUniteLegale(this._siren, this._page),
-        // colter, labels and certificates, from sirene ouverte
-        getUniteLegaleForGoodBot(this._siren, page, useCache).catch(() => {
-          return { colter: {}, complements: {}, chemin: this._siren };
-        }),
+        getUniteLegaleInsee(),
+        fetchUniteLegaleFromRechercheEntreprise(this._siren, useCache),
       ]);
 
-    uniteLegale.complements = {
-      ...uniteLegale.complements,
-      ...complements,
-    };
-    uniteLegale.colter = { ...uniteLegale.colter, ...colter };
-    uniteLegale.chemin = chemin;
-    return uniteLegale;
-  };
+    const uniteLegale = await this.mergeInseeAndRechercheEntreprise(
+      uniteLegaleInsee,
+      uniteLegaleRechercheEntreprise
+    );
 
-  getForBot = async () => {
-    const useCache = false;
-    return await getUniteLegaleForGoodBot(this._siren, this._page, useCache);
-  };
-
-  postProcess = async (uniteLegale: IUniteLegale) => {
     // no need to call API association for bot
     if (!this._isBot && isAssociation(uniteLegale)) {
       uniteLegale.association.data = await getAssociation(uniteLegale);
@@ -128,97 +111,69 @@ class UniteLegaleFactory {
 
     return uniteLegale;
   };
-}
 
-/**
- * For Indexing bot only - Fetch an uniteLegale from clientUniteLegaleRechercheEntreprise
- *
- */
-const getUniteLegaleForGoodBot = async (
-  siren: Siren,
-  page = 1,
-  useCache = false
-): Promise<IUniteLegale> => {
-  let fallbackOnStaging = false;
-  try {
-    return await clientUniteLegaleRechercheEntreprise(
-      siren,
-      fallbackOnStaging,
-      useCache
-    );
-  } catch (e: any) {
-    try {
-      if (e instanceof HttpNotFound) {
-        // when not found in siren ouverte, fallback on insee
-        return await fetchUniteLegaleFromInsee(siren, page);
+  mergeInseeAndRechercheEntreprise = async (
+    uniteLegaleInsee: IUniteLegale | IAPINotRespondingError,
+    uniteLegaleRechercheEntreprise: IUniteLegale | IAPINotRespondingError
+  ): Promise<IUniteLegale> => {
+    if (isAPINotResponding(uniteLegaleInsee)) {
+      if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
+        return await fetchUniteLegaleFromInseeFallback(this._siren, this._page);
       } else {
-        fallbackOnStaging = true;
-        return await clientUniteLegaleRechercheEntreprise(
-          siren,
-          fallbackOnStaging,
-          useCache
-        );
+        return uniteLegaleRechercheEntreprise;
       }
-    } catch (eFallback: any) {
-      if (!(eFallback instanceof HttpNotFound)) {
-        logRechercheEntrepriseForGoodBotfailed({
-          siren,
-          details: eFallback.message || eFallback,
-        });
-      }
-      throw new SirenNotFoundError(siren);
-    }
-  }
-};
-
-/**
- * Fetch Unite Legale from Etalab SIRENE API with a fallback on INSEE's API
- */
-const getUniteLegale = async (
-  siren: Siren,
-  page = 1
-): Promise<IUniteLegale> => {
-  try {
-    // first attempt to call siren insee
-    return await fetchUniteLegaleFromInsee(siren, page);
-  } catch (e: any) {
-    if (e instanceof HttpNotFound) {
-      throw new SirenNotFoundError(siren);
-    }
-    logFirstSireneInseefailed({ siren, details: e.message || e });
-
-    try {
-      // in case sirene INSEE 429 or 500, fallback on Siren Etalab
-      return await clientUniteLegaleRechercheEntreprise(siren);
-    } catch (firstFallback: any) {
-      logRechercheEntreprisefailed({
-        siren,
-        details: firstFallback.message || firstFallback,
-      });
-
-      try {
-        // in case sirene etalab 404 or 500, fallback on Sirene insee using fallback credentials to avoid 403
-        // no pagination as this function is called when sirene etalab already failed
-        return await fetchUniteLegaleFromInseeFallback(siren, page);
-      } catch (lastFallback: any) {
-        logSecondSireneInseefailed({
-          siren,
-          details: lastFallback.message || lastFallback,
-        });
-
-        // Siren was not found in both API, return a 404
-        throw new SirenNotFoundError(siren);
+    } else {
+      if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
+        return uniteLegaleInsee;
+      } else {
+        return {
+          ...uniteLegaleInsee,
+          ...uniteLegaleRechercheEntreprise,
+          complements: {
+            ...uniteLegaleInsee?.complements,
+            ...uniteLegaleRechercheEntreprise.complements,
+          },
+          colter: {
+            ...uniteLegaleInsee?.colter,
+            ...uniteLegaleRechercheEntreprise.colter,
+          },
+          chemin: uniteLegaleRechercheEntreprise.chemin,
+        };
       }
     }
-  }
-};
+  };
+}
 
 //=========================
 //        API calls
 //=========================
 
 /**
- * Fetch Unite Legale from Sirene INSEE and Etalab
+ * Fetch Unite Legale from Sirene Recherche Entreprise
+ */
+const fetchUniteLegaleFromRechercheEntreprise = async (
+  siren: Siren,
+  useCache: boolean
+) => {
+  try {
+    const useFallback = false;
+    return await clientUniteLegaleRechercheEntreprise(
+      siren,
+      useFallback,
+      useCache
+    );
+  } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      return APINotRespondingFactory(EAdministration.DINUM, 404);
+    }
+
+    logRechercheEntreprisefailed({ siren, details: e.message || e });
+    return APINotRespondingFactory(EAdministration.INSEE, 500);
+  }
+};
+
+/**
+ * Fetch Unite Legale from Sirene INSEE
  */
 const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
   try {
@@ -239,7 +194,12 @@ const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
     if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleUniteLegale(siren);
     }
-    throw e;
+    if (e instanceof HttpNotFound) {
+      throw new SirenNotFoundError(siren);
+    }
+
+    logFirstSireneInseefailed({ siren, details: e.message || e });
+    return APINotRespondingFactory(EAdministration.INSEE, 500);
   }
 };
 
@@ -265,12 +225,14 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
     if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleUniteLegale(siren);
     }
-    throw e;
+
+    logSecondSireneInseefailed({ siren, details: e.message || e });
+    throw new SirenNotFoundError(siren);
   }
 };
 
 /**
- * Merge response form INSEE and Etalab, using best of both
+ * Merge all three responses form INSEE
  */
 const mergeUniteLegaleInsee = (
   uniteLegaleInsee: IUniteLegale,
