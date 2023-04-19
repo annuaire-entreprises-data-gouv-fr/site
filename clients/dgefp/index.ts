@@ -28,6 +28,7 @@ export const clientOrganismeFormation = async (
   const safetyRecords = fields.map(
     (field: IOrganismesFormationResponse['records'][0]['fields']) => ({
       ...organismeFormationDefaultField,
+      certification: field.certifications.split('/'),
       ...field,
     })
   );

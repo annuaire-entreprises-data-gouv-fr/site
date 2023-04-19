@@ -35,13 +35,13 @@ export const OrganismeDeFormationSection = ({
       return (
         <Section
           title="Qualiopi - Organisme de formation"
-          sources={[EAdministration.ADEME]}
+          sources={[EAdministration.MTPEI]}
         >
           <p>
             Cette structure est <FAQQaliopi />. C’est un organisme dont les
             formations peuvent obtenir un financement public. En revanche nous
             n’avons pas retrouvé le détail de ses certifications auprès de la
-            DGEFP
+            <MTPEI />
           </p>
         </Section>
       );
@@ -57,7 +57,7 @@ export const OrganismeDeFormationSection = ({
   return (
     <Section
       title="Qualiopi - Organisme de formation"
-      sources={[EAdministration.MTPEI, EAdministration.DINUM]}
+      sources={[EAdministration.MTPEI]}
       lastModified={organismesDeFormation.lastModified}
     >
       Cette structure est <FAQQaliopi />. C’est un organisme dont les formations
@@ -67,14 +67,12 @@ export const OrganismeDeFormationSection = ({
       <FullTable
         head={[
           'Numéro Déclaration Activité',
-          "Nom de l'organisme de formation",
-          "Siret de l'établissement certifié ",
+          "Siret de l'établissement certifié",
           'Nombre de stagiaires',
           'Certifications',
         ]}
         body={organismesDeFormation.records.map((fields) => [
           formatIntFr(fields.numerodeclarationactivite),
-          fields.denomination,
           fields.siretetablissementdeclarant,
           formatIntFr(fields.informationsdeclarees_nbstagiaires),
           fields.certifications
