@@ -98,86 +98,77 @@ const ImmatriculationRNE: React.FC<IProps> = ({
 
   return (
     <>
-      {true && (
-        <>
-          <Section
-            id="rne"
-            title="Inscription au RNE"
-            sources={[EAdministration.INPI]}
-          >
+      <Section
+        id="rne"
+        title="Inscription au RNE"
+        sources={[EAdministration.INPI]}
+      >
+        <p>
+          Cette structure possède une fiche d’immatriculation au{' '}
+          <b>Registre National des Entreprises (RNE)</b> qui liste les
+          entreprises de France et qui est tenu par l’
+          <INPI />.
+        </p>
+
+        <ImmatriculationRNETable
+          immatriculation={immatriculation}
+          uniteLegale={uniteLegale}
+        />
+        <PrintNever>
+          <p>
+            Pour accéder aux données contenues dans un extrait d’immatriculation
+            (équivalent de <b>l’extrait KBIS ou D1</b>), téléchargez le{' '}
+            <b>
+              justificatif d’immatriculation au Registre National des
+              Entreprises (RNE)
+            </b>
+            . ou consultez la fiche complète sur le site de l’
+            <INPI />
+            &nbsp;:
+          </p>
+          <div className="layout-center">
+            <ButtonLink
+              nofollow={true}
+              to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
+            >
+              <Icon slug="download">
+                Télécharger le justificatif d’immatriculation
+              </Icon>
+            </ButtonLink>
+            <div className="separator" />
+            <ButtonLink target="_blank" to={`${immatriculation.siteLink}`} alt>
+              ⇢ Voir la fiche sur le site de l’INPI
+            </ButtonLink>
+          </div>
+        </PrintNever>
+
+        {immatriculation.observations &&
+        immatriculation.observations.length > 0 ? (
+          <>
+            <br />
             <p>
-              Cette structure possède une fiche d’immatriculation au{' '}
-              <b>Registre National des Entreprises (RNE)</b> qui liste les
-              entreprises de France et qui est tenu par l’
-              <INPI />.
+              Cette structure possède également{' '}
+              {immatriculation.observations.length} observation au <b>RNE</b>
+              &nbsp;:
             </p>
-
-            <ImmatriculationRNETable
-              immatriculation={immatriculation}
-              uniteLegale={uniteLegale}
+            <FullTable
+              head={['Date d’ajout', 'Numéro d’observation', 'Description']}
+              body={immatriculation.observations.map((o) => [
+                o.dateAjout,
+                o.numObservation ? <Tag>{o.numObservation}</Tag> : '',
+                o.description,
+              ])}
             />
-            <PrintNever>
-              <p>
-                Pour accéder aux données contenues dans un extrait
-                d’immatriculation (équivalent de <b>l’extrait KBIS ou D1</b>),{' '}
-                téléchargez le{' '}
-                <b>
-                  justificatif d’immatriculation au Registre National des
-                  Entreprises (RNE)
-                </b>
-                . ou consultez la fiche complète sur le site de l’
-                <INPI />
-                &nbsp;:
-              </p>
-              <div className="layout-center">
-                <ButtonLink
-                  nofollow={true}
-                  to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
-                >
-                  <Icon slug="download">
-                    Télécharger le justificatif d’immatriculation
-                  </Icon>
-                </ButtonLink>
-                <div className="separator" />
-                <ButtonLink
-                  target="_blank"
-                  to={`${immatriculation.siteLink}`}
-                  alt
-                >
-                  ⇢ Voir la fiche sur le site de l’INPI
-                </ButtonLink>
-              </div>
-            </PrintNever>
-
-            {immatriculation.observations &&
-            immatriculation.observations.length > 0 ? (
-              <>
-                <br />
-                <p>
-                  Cette structure possède également{' '}
-                  {immatriculation.observations.length} observation au{' '}
-                  <b>RNE</b>&nbsp;:
-                </p>
-                <FullTable
-                  head={['Date d’ajout', 'Numéro d’observation', 'Description']}
-                  body={immatriculation.observations.map((o) => [
-                    o.dateAjout,
-                    o.numObservation ? <Tag>{o.numObservation}</Tag> : '',
-                    o.description,
-                  ])}
-                />
-              </>
-            ) : null}
-            <style jsx>{`
-              .separator {
-                width: 10px;
-                height: 10px;
-              }
-            `}</style>
-          </Section>
-          <HorizontalSeparator />
-        </>
-      )}
+          </>
+        ) : null}
+        <style jsx>{`
+          .separator {
+            width: 10px;
+            height: 10px;
+          }
+        `}</style>
+      </Section>
+      <HorizontalSeparator />
     </>
   );
 };
