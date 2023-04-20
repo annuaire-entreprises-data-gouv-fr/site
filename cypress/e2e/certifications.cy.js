@@ -7,19 +7,19 @@ describe('Certifications', () => {
     });
     it('Should display company phone number', () => {
       cy.visit('/labels-certificats/528163777');
-      cy.contains('01 49 48 14 50');
+      cy.contains('06 98 39 31 19');
     });
   });
 });
 
 describe('Certifications', () => {
   describe('ESS & Spectacles vivants', () => {
-    xit('Should display ESS and scpetacles vivants', () => {
+    it('Should display ESS and spetacles vivants', () => {
       cy.visit('/labels-certificats/842019051');
       cy.contains('ESS');
       cy.contains('Numéro de récépissé');
     });
-    xit('Should display only spectacles vivants', () => {
+    it('Should display only spectacles vivants', () => {
       cy.visit('/labels-certificats/399463603');
       cy.contains('Numéro de récépissé');
     });
