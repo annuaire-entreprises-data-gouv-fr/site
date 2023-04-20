@@ -6,6 +6,7 @@ import SearchFilterParams, { IParams } from '#models/search-filter-params';
 import { categoriesJuridiques } from '#utils/labels/categories-juridiques';
 import { codesNAFRev2 } from '#utils/labels/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/labels/codes-section-NAF';
+import { tranchesEffectifs } from '#utils/labels/tranches-effectifs';
 import { FilterGeo } from './filter-geo';
 import { FilterStructure } from './filter-structure';
 
@@ -25,6 +26,7 @@ const SearchFilters: React.FC<{
     n,
     naf,
     nature_juridique,
+    tranche_effectif_salarie,
     sap,
     type,
   } = searchParams || {};
@@ -179,6 +181,18 @@ const SearchFilters: React.FC<{
             id="nature-juridique-multi-select"
             instanceId="nature-juridique-multi-select"
             options={getNaturesJuridiques()}
+          />
+        </div>
+        <SimpleSeparator />
+        <div>
+          <label>Taille d&apos;entreprise</label>
+          <MultiSelect
+            name="tranche_effectif_salarie"
+            defaultValue={tranche_effectif_salarie}
+            placeholder="Choisir une taille d'entreprise"
+            id="effectif-salarie-multi-select"
+            instanceId="effectif-salarie-multi-select"
+            options={tranchesEffectifs}
           />
         </div>
       </FilterMenu>
