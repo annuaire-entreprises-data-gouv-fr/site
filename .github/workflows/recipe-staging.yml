@@ -1,6 +1,6 @@
-# This workflow will run all e2e tests on staging
+# This workflow will run recipe's tests on staging
 
-name: Post - Deploy to Staging
+name: Recipe on staging
 
 on:
   workflow_run:
@@ -11,9 +11,8 @@ on:
   #   - cron: '0 1 10,25 * *'
 
 jobs:
-  testE2E:
-    needs: prepare
-    name: End2end tests
+  recipe:
+    name: Recipe on staging
     runs-on: ubuntu-latest
     steps:
       - name: Cypress run
