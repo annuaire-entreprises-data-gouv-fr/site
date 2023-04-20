@@ -77,7 +77,7 @@ const ImmatriculationRNE: React.FC<IProps> = ({
               <div className="separator" />
               <ButtonLink
                 target="_blank"
-                to={`${routes.rne.portail.entreprise}${uniteLegale}`}
+                to={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
                 alt
               >
                 ⇢ Voir la fiche sur le site de l’INPI
