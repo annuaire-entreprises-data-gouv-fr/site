@@ -1,3 +1,16 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
 administrations:
   - insee
   - inpi
@@ -6,7 +19,8 @@ targets:
   - independant
   - particulier
 title: Comment supprimer les données personnelles de mon entreprise ?
-description: Les données d’une entreprise sont publiques mais une personne physique peut s’oppposer à ce qu’un site internet les publie.
+seo:
+  description: Les données d’une entreprise sont publiques mais une personne physique peut s’oppposer à ce qu’un site internet les publie.
 body: |
   En tant que dirigeant(e) d’entreprise, les données publiques de votre entreprise peuvent contenir des informations personnelles accessibles sur internet.
 

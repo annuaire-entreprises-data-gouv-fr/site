@@ -1,9 +1,29 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
 administrations:
   - all
 targets:
 title: Comment puis-je utiliser ces données dans mon site internet ?
-description: Toutes les données présentées sur le site sont publiées en open-data et lbrement réutilisables.
+seo:
+  description: Toutes les données présentées sur le site sont publiées en open-data et lbrement réutilisables.
 body: |
   Toutes les données présentées sur le site sont publiées en open-data.
 
-  Pour en savoir plus sur les différentes sources de données, consultez [notre page dédiée](/donnees/sources).
+  Pour en savoir plus sur les différentes sources de données, consultez notre page dédiée :
+cta:
+  label: → Consulter la liste des jeux de données que nous utilisons
+  to: /donnees/sources
+more:
+  - label: Consulter la liste des API que nous utilisons
+    href: /donnees/api

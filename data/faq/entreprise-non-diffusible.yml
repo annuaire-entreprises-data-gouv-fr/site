@@ -1,3 +1,16 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
 administrations:
   - insee
 target:
@@ -6,7 +19,8 @@ target:
   - dirigeant
   - particulier
 title: 'Entreprise non-diffusible : définition'
-description: Certaines entreprises demandent à ne pas figurer sur les listes de diffusion publiques. On parle d’entreprises non-diffusibles auprès de l’Insee.
+seo:
+  description: Certaines entreprises demandent à ne pas figurer sur les listes de diffusion publiques. On parle d’entreprises non-diffusibles auprès de l’Insee.
 body: |
   Certaines entreprises demandent à ne pas figurer sur les listes de diffusion publiques en vertu de [l’article A123-96 du code du commerce](https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=C505A51DBC1A4EB1FFF3764C69ACDB1C.tpdjo11v_1?idArticle=LEGIARTI000020165030&cidTexte=LEGITEXT000005634379&dateTexte=20100702).
 
