@@ -75,9 +75,9 @@ export const OrganismeDeFormationSection = ({
           formatIntFr(fields.numerodeclarationactivite),
           fields.siretetablissementdeclarant,
           formatIntFr(fields.informationsdeclarees_nbstagiaires),
-          fields.certifications
-            .split('/')
-            .map((certification) => <Tag>{certification}</Tag>),
+          fields.certifications.map((certification) => (
+            <Tag>{certification}</Tag>
+          )),
         ])}
       />
     </Section>

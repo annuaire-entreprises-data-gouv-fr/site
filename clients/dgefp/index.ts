@@ -2,10 +2,13 @@ import odsClient from '#clients/open-data-soft';
 import routes from '#clients/routes';
 import { Siren } from '#utils/helpers';
 import { organismeFormationDefaultField } from './default-field';
-import { IOrganismesFormationResponse } from './type';
+import {
+  IOrganismesFormationRecord,
+  IOrganismesFormationResponse,
+} from './type';
 
 export type IOrganismeFormation = {
-  records: IOrganismesFormationResponse['records'][0]['fields'][];
+  records: IOrganismesFormationRecord[];
   lastModified: string | null;
 };
 
@@ -25,10 +28,10 @@ export const clientOrganismeFormation = async (
   );
 
   const fields = response.records;
-  const safetyRecords = fields.map(
+  const safetyRecords: IOrganismesFormationRecord[] = fields.map(
     (field: IOrganismesFormationResponse['records'][0]['fields']) => ({
       ...organismeFormationDefaultField,
-      certification: field.certifications.split('/'),
+      certification: field.certifications?.split('/'),
       ...field,
     })
   );
