@@ -31,8 +31,8 @@ export const clientOrganismeFormation = async (
   const safetyRecords: IOrganismesFormationRecord[] = fields.map(
     (field: IOrganismesFormationResponse['records'][0]['fields']) => ({
       ...organismeFormationDefaultField,
-      certification: field.certifications?.split('/'),
       ...field,
+      certifications: field.certifications?.split('/') || [],
     })
   );
   return {

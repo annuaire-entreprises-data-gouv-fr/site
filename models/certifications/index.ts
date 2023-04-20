@@ -1,5 +1,5 @@
-import { IOrganismeFormation } from '#clients/dgefp';
-import { IOrganismesFormationResponse } from '#clients/dgefp/type';
+import { IOrganismeFormation } from '#clients/open-data-soft/dgefp';
+import { IOrganismesFormationResponse } from '#clients/open-data-soft/dgefp/type';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { getEgapro, IEgapro } from '#models/certifications/egapro';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';

@@ -1,4 +1,7 @@
-import { IOrganismeFormation, clientOrganismeFormation } from '#clients/dgefp';
+import {
+  IOrganismeFormation,
+  clientOrganismeFormation,
+} from '#clients/open-data-soft/dgefp';
 import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations';
 import {

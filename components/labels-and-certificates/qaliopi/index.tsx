@@ -1,4 +1,4 @@
-import { IOrganismeFormation } from '#clients/dgefp';
+import { IOrganismeFormation } from '#clients/open-data-soft/dgefp';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
@@ -10,7 +10,7 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
-import { formatIntFr } from '#utils/helpers';
+import { formatIntFr, formatSiret } from '#utils/helpers';
 
 type OrganismeDeFormationSectionProps = {
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
@@ -73,7 +73,9 @@ export const OrganismeDeFormationSection = ({
         ]}
         body={organismesDeFormation.records.map((fields) => [
           formatIntFr(fields.numerodeclarationactivite),
-          fields.siretetablissementdeclarant,
+          <a href={`/etablissement/${fields.siretetablissementdeclarant}`}>
+            {formatSiret(fields.siretetablissementdeclarant)}
+          </a>,
           formatIntFr(fields.informationsdeclarees_nbstagiaires),
           fields.certifications.map((certification) => (
             <Tag>{certification}</Tag>
