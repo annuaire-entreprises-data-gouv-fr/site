@@ -74,8 +74,8 @@ class UniteLegaleBuilder {
 
   build = async () => {
     const getUniteLegaleInsee = this._isBot
-      ? async () => await fetchUniteLegaleFromInsee(this._siren, this._page)
-      : () => APINotRespondingFactory(EAdministration.INSEE, 422);
+      ? () => APINotRespondingFactory(EAdministration.INSEE, 422)
+      : async () => await fetchUniteLegaleFromInsee(this._siren, this._page);
 
     // dont use cache for bot
     const useCache = !this._isBot;
