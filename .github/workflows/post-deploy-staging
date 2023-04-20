@@ -1,0 +1,25 @@
+# This workflow will run all e2e tests on staging
+
+name: Test on staging
+
+on:
+  workflow_run:
+    workflows: ['Deploy - Staging']
+    types: [completed]
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '0 1 10,25 * *'
+
+jobs:
+  testE2E:
+    needs: prepare
+    name: End2end tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          # we have already installed all dependencies above
+          browser: chrome
+          record: false
+          config: baseUrl=https://staging.annuaire-entreprises.data.gouv.fr
