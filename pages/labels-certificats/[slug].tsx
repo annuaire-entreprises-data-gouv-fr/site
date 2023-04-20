@@ -28,6 +28,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   egapro,
   uniteLegale,
   entrepreneurSpectacles,
+  organismesDeFormation,
   metadata: { session },
 }) => {
   return (
@@ -46,7 +47,9 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
           <p>Cette structure ne possède aucun label ou certificat.</p>
         )}
         {uniteLegale.complements.estOrganismeFormation && (
-          <OrganismeDeFormationSection />
+          <OrganismeDeFormationSection
+            organismesDeFormation={organismesDeFormation}
+          />
         )}
         {uniteLegale.complements.estRge && (
           <CertificationsRGESection
@@ -76,8 +79,14 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
 
-    const { uniteLegale, rge, entrepreneurSpectacles, egapro, bio } =
-      await getCertificationsFromSlug(slug);
+    const {
+      uniteLegale,
+      rge,
+      entrepreneurSpectacles,
+      egapro,
+      bio,
+      organismesDeFormation,
+    } = await getCertificationsFromSlug(slug);
 
     return {
       props: {
@@ -86,6 +95,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
         entrepreneurSpectacles,
         rge,
         uniteLegale,
+        organismesDeFormation,
       },
     };
   }

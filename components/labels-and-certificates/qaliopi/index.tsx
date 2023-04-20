@@ -1,7 +1,20 @@
+import { IOrganismeFormation } from '#clients/dgefp';
 import FAQLink from '#components-ui/faq-link';
+import { Tag } from '#components-ui/tag';
+import AdministrationNotResponding from '#components/administration-not-responding';
 import { MTPEI } from '#components/administrations';
 import { Section } from '#components/section';
+import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
+import {
+  IAPINotRespondingError,
+  isAPINotResponding,
+} from '#models/api-not-responding';
+import { formatIntFr } from '#utils/helpers';
+
+type OrganismeDeFormationSectionProps = {
+  organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
+};
 
 const FAQQaliopi = () => (
   <FAQLink tooltipLabel="certifiée Qualiopi">
@@ -12,12 +25,61 @@ const FAQQaliopi = () => (
   </FAQLink>
 );
 
-export const OrganismeDeFormationSection = () => (
-  <Section
-    title="Qualiopi - Organisme de formation"
-    sources={[EAdministration.MTPEI, EAdministration.DINUM]}
-  >
-    Cette structure est <FAQQaliopi />. C’est un organisme dont les formations
-    peuvent obtenir un financement public.
-  </Section>
-);
+export const OrganismeDeFormationSection = ({
+  organismesDeFormation,
+}: OrganismeDeFormationSectionProps) => {
+  if (isAPINotResponding(organismesDeFormation)) {
+    const isNotFound = organismesDeFormation.errorType === 404;
+
+    if (isNotFound) {
+      return (
+        <Section
+          title="Qualiopi - Organisme de formation"
+          sources={[EAdministration.MTPEI]}
+        >
+          <p>
+            Cette structure est <FAQQaliopi />. C’est un organisme dont les
+            formations peuvent obtenir un financement public. En revanche nous
+            n’avons pas retrouvé le détail de ses certifications auprès de la
+            <MTPEI />
+          </p>
+        </Section>
+      );
+    }
+    return (
+      <AdministrationNotResponding
+        administration={organismesDeFormation.administration}
+        errorType={organismesDeFormation.errorType}
+      />
+    );
+  }
+
+  return (
+    <Section
+      title="Qualiopi - Organisme de formation"
+      sources={[EAdministration.MTPEI]}
+      lastModified={organismesDeFormation.lastModified}
+    >
+      Cette structure est <FAQQaliopi />. C’est un organisme dont les formations
+      peuvent obtenir un financement public.
+      <br />
+      <br />
+      <FullTable
+        head={[
+          'Numéro Déclaration Activité',
+          "Siret de l'établissement certifié",
+          'Nombre de stagiaires',
+          'Certifications',
+        ]}
+        body={organismesDeFormation.records.map((fields) => [
+          formatIntFr(fields.numerodeclarationactivite),
+          fields.siretetablissementdeclarant,
+          formatIntFr(fields.informationsdeclarees_nbstagiaires),
+          fields.certifications.map((certification) => (
+            <Tag>{certification}</Tag>
+          )),
+        ])}
+      />
+    </Section>
+  );
+};

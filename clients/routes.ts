@@ -33,6 +33,12 @@ const routes = {
         'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce',
     },
   },
+  dgefp: {
+    metadata:
+      'https://dgefp.opendatasoft.com/api/datasets/1.0/search/?q=liste-publique-des-of-v2',
+    search:
+      'https://dgefp.opendatasoft.com/api/records/1.0/search/?dataset=liste-publique-des-of-v2',
+  },
   educationNationale: {
     api: 'https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-annuaire-education',
     site: 'https://www.education.gouv.fr/annuaire',
@@ -132,7 +138,6 @@ const routes = {
       'https://staging.recherche-entreprises.api.gouv.fr/search',
     uniteLegale: 'https://api-annuaire-entreprises.data.gouv.fr/siren?q=',
   },
-
   tva: {
     vies: 'https://ec.europa.eu/taxation_customs/vies/rest-api/ms/FR/vat/',
   },
