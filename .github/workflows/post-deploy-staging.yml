@@ -1,6 +1,6 @@
 # This workflow will run all e2e tests on staging
 
-name: Test on staging
+name: Post - Deploy to Staging
 
 on:
   workflow_run:
