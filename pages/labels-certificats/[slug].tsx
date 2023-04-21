@@ -46,11 +46,6 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
         {!checkHasLabelsAndCertificates(uniteLegale) && (
           <p>Cette structure ne possède aucun label ou certificat.</p>
         )}
-        {uniteLegale.complements.estOrganismeFormation && (
-          <OrganismeDeFormationSection
-            organismesDeFormation={organismesDeFormation}
-          />
-        )}
         {uniteLegale.complements.estRge && (
           <CertificationsRGESection
             uniteLegale={uniteLegale}
@@ -58,6 +53,11 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
           />
         )}
         {uniteLegale.complements.estEss && <CertificationESSSection />}
+        {uniteLegale.complements.estOrganismeFormation && (
+          <OrganismeDeFormationSection
+            organismesDeFormation={organismesDeFormation}
+          />
+        )}
         {uniteLegale.complements.egaproRenseignee && (
           <EgaproSection egapro={egapro} />
         )}

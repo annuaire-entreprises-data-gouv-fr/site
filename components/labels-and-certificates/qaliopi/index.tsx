@@ -66,19 +66,19 @@ export const OrganismeDeFormationSection = ({
       <br />
       <FullTable
         head={[
-          'Numéro Déclaration Activité',
           "Siret de l'établissement certifié",
+          'Numéro Déclaration Activité',
           'Nombre de stagiaires',
           'Certifications',
         ]}
         body={organismesDeFormation.records.map((fields) => [
-          formatIntFr(fields.numerodeclarationactivite),
           <a href={`/etablissement/${fields.siretetablissementdeclarant}`}>
             {formatSiret(fields.siretetablissementdeclarant)}
           </a>,
-          formatIntFr(fields.informationsdeclarees_nbstagiaires),
+          <Tag>{formatIntFr(fields.numerodeclarationactivite)}</Tag>,
+          fields.informationsdeclarees_nbstagiaires || '',
           fields.certifications.map((certification) => (
-            <Tag>{certification}</Tag>
+            <Tag color="info">{certification}</Tag>
           )),
         ])}
       />
