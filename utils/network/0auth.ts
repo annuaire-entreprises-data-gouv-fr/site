@@ -55,7 +55,7 @@ export const httpClientOAuthGetFactory = (
 
   return async (url: string, options: AxiosRequestConfig, useCache: boolean) =>
     cachedAxiosInstance.get(url, {
-      timeout: constants.timeout.L,
+      timeout: constants.timeout.M,
       ...options,
       cache: useCache ? defaultCacheConfig : false,
     });
