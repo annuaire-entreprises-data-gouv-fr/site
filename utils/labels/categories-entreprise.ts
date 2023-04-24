@@ -8,3 +8,18 @@ export const categoriesEntreprise = (code: string) => {
   }
   return null;
 };
+
+export const categoriesEntrepriseFilter = [
+  {
+    label: 'Grande Entreprise',
+    value: 'GE',
+  },
+  {
+    label: 'Entreprise de Taille Intermédiaire',
+    value: 'ETI',
+  },
+  {
+    label: 'Petite ou Moyenne Entreprise',
+    value: 'PME',
+  },
+];

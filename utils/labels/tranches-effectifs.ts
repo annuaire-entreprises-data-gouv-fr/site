@@ -11,19 +11,19 @@ export const tranchesEffectifs = [
     value: '00,NN',
   },
   {
-    label: 'Très petites entreprises (1 - 19 salariés)',
+    label: '1 - 19 salariés',
     value: '01,02,03,11',
   },
   {
-    label: 'Petites et moyennes entreprises (20 - 249 salariés)',
+    label: '20 - 249 salariés',
     value: '12,21,22,31',
   },
   {
-    label: 'Entreprises de taille intermédiaire (250 - 4999 salariés)',
+    label: '250 - 4999 salariés',
     value: '32,41,42,51',
   },
   {
-    label: 'Grandes entreprises (5000 salariés et plus)',
+    label: '5000 salariés et plus',
     value: '52,53',
   },
 ];
