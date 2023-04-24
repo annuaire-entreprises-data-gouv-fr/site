@@ -138,9 +138,7 @@ const routes = {
       'https://staging.recherche-entreprises.api.gouv.fr/search',
     uniteLegale: 'https://api-annuaire-entreprises.data.gouv.fr/siren?q=',
   },
-  tva: {
-    vies: 'https://ec.europa.eu/taxation_customs/vies/rest-api/ms/FR/vat/',
-  },
+  tva: 'https://rncs-proxy.api.gouv.fr/tva/',
 };
 
 export default routes;

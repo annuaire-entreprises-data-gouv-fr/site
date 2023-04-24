@@ -1,4 +1,4 @@
-import { TVAUserException, clientTVA } from '#clients/tva';
+import { TVAUserException, clientTVA } from '#clients/api-proxy/tva';
 import { Siren, verifySiren } from '#utils/helpers';
 
 export interface ITvaIntracommunautaire {

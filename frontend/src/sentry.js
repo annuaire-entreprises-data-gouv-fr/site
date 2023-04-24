@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/browser';
 
 var dsn = import.meta.env.VITE_SENTRY_FRONT_DSN;
 
-if (import.meta.env.PROD && Sentry && dsn) {
+if (true || (import.meta.env.PROD && Sentry && dsn)) {
   Sentry.init({
     dsn: dsn,
     // This enables automatic instrumentation (highly recommended), but is not
