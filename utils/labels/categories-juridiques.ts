@@ -68,7 +68,7 @@ export const categoriesJuridiques = {
   '5505': "SA à participation ouvrière à conseil d'administration",
   '5510': "SA nationale à conseil d'administration",
   '5515': "SA d'économie mixte à conseil d'administration",
-  '5520': "Fonds à forme sociétale&nbsp;à conseil d'administration",
+  '5520': "Fonds à forme sociétale à conseil d'administration",
   '5522':
     "SA immobilière pour le commerce et l'industrie (SICOMI) à conseil d'administration",
   '5525': "SA immobilière d'investissement à conseil d'administration",
@@ -99,7 +99,7 @@ export const categoriesJuridiques = {
   '5605': 'SA à participation ouvrière à directoire',
   '5610': 'SA nationale à directoire',
   '5615': "SA d'économie mixte à directoire",
-  '5620': 'Fonds à forme sociétale&nbsp;à directoire',
+  '5620': 'Fonds à forme sociétale à directoire',
   '5622':
     "SA immobilière pour le commerce et l'industrie (SICOMI) à directoire",
   '5625': "SA immobilière d'investissement à directoire",
@@ -135,7 +135,7 @@ export const categoriesJuridiques = {
   '6317': 'Société coopérative agricole',
   '6318': 'Union de sociétés coopératives agricoles',
   '6411': "Société d'assurance à forme mutuelle",
-  '6511': 'Sociétés Interprofessionnelles de Soins Ambulatoires&nbsp;',
+  '6511': 'Sociétés Interprofessionnelles de Soins Ambulatoires',
   '6521': 'Société civile de placement collectif immobilier (SCPI)',
   '6532': "Société civile d'intérêt collectif agricole (SICA)",
   '6533': "Groupement agricole d'exploitation en commun (GAEC)",
