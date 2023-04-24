@@ -1,3 +1,5 @@
+import { CaptureConsole as CaptureConsoleIntegration } from '@sentry/integrations';
+import { addGlobalEventProcessor } from '@sentry/nextjs';
 import * as Sentry from '@sentry/nextjs';
 import { SeverityLevel } from '@sentry/nextjs';
 
@@ -36,7 +38,14 @@ const init = () => {
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
     tracesSampleRate: 0.1,
-    debug: false, // dont log console.log|error|info
+    maxBreadcrumbs: 0, // dont log breadcrumb
+    integrations: [
+      new CaptureConsoleIntegration({
+        // array of methods that should be captured
+        // defaults to ['log', 'info', 'warn', 'error', 'debug', 'assert']
+        levels: [],
+      }),
+    ],
   });
   _isInitialized = true;
 };
