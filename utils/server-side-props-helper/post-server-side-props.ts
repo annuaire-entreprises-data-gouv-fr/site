@@ -1,7 +1,7 @@
 import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSidePropsContext } from 'next';
 import { UAParser } from 'ua-parser-js';
-import { closeAPM, createAPM } from '../sentry/apm';
+import { closeAPM, createAPM } from '../sentry/tracing';
 import { sessionOptions } from '../session';
 import { ISession } from '../session';
 import isUserAgentABot from '../user-agent';

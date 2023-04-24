@@ -1,3 +1,5 @@
+import { CaptureConsole as CaptureConsoleIntegration } from '@sentry/integrations';
+import { addGlobalEventProcessor } from '@sentry/nextjs';
 import * as Sentry from '@sentry/nextjs';
 import { SeverityLevel } from '@sentry/nextjs';
 
@@ -36,9 +38,42 @@ const init = () => {
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
     tracesSampleRate: 0.1,
-    debug: false, // dont log console.log|error|info
+    maxBreadcrumbs: 0, // dont log breadcrumb
+    integrations: [
+      new CaptureConsoleIntegration({
+        // array of methods that should be captured
+        // defaults to ['log', 'info', 'warn', 'error', 'debug', 'assert']
+        levels: [],
+      }),
+    ],
   });
   _isInitialized = true;
+};
+
+addGlobalEventProcessor((event: Sentry.Event) => {
+  if (event.type === 'transaction') {
+    event.transaction = sanitizeTransactionName(event.transaction);
+  }
+  return event;
+});
+
+const sanitizeTransactionName = (transaction?: string) => {
+  console.log(transaction);
+  const url = 'test';
+  return url;
+  try {
+    if (url.indexOf('/entreprise/') === 0) {
+      return '/entreprise/:slug';
+    }
+    if (url.indexOf('/rechercher/carte') > -1) {
+      return '/rechercher/carte';
+    } else if (url.indexOf('/rechercher') > -1) {
+      return '/rechercher';
+    }
+    return url.replace('?redirected=1', '').replace(/\d{14}|\d{9}/g, ':slug');
+  } catch {
+    return url;
+  }
 };
 
 const logInSentryFactory =
