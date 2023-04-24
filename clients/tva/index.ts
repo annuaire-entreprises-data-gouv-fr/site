@@ -26,6 +26,15 @@ type IVIESResponse = {
 };
 
 /**
+ * Specific exception raised by VIES endpoint
+ */
+export class TVAUserException extends Error {
+  constructor(public message: string) {
+    super(message);
+    this.message = message;
+  }
+}
+/**
  * Call VIES to validate a French TVA number
  * @param tva
  * @returns TVA number if valid else null
@@ -45,10 +54,9 @@ export const clientTVA = async (
   );
   const data = response.data as IVIESResponse;
 
-  if (data.isValid) {
-    return `FR${data.vatNumber}`;
-  } else {
-    console.error(data);
-    return null;
+  if (data.userError && ['VALID', 'INVALID'].indexOf(data.userError) === -1) {
+    throw new TVAUserException(data.userError);
   }
+
+  return data.isValid ? `FR${data.vatNumber}` : null;
 };
