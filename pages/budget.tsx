@@ -11,9 +11,12 @@ const Budget: NextPageWithLayout = () => (
     <TextWrapper>
       <h1>Budget</h1>
       <p>
-        L’<b>Annuaire des Entreprises</b> est un service public numérique, c’est
-        pourquoi nous sommes transparents sur les ressources allouées et la
-        manière dont elles sont employées.
+        L’
+        <a href="https://annuaire-entreprises.data.gouv.fr">
+          <b>Annuaire des Entreprises</b>
+        </a>{' '}
+        est un service public numérique, c’est pourquoi nous sommes transparents
+        sur les ressources allouées et la manière dont elles sont employées.
       </p>
       <h2>Principes</h2>
       <p>

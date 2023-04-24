@@ -101,7 +101,12 @@ const Footer = () => (
                 </li>
                 <li>
                   <a className="fr-footer__top-link" href="/equipe">
-                    Équipe
+                    Qui sommes-nous ?
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/comment-ca-marche">
+                    A propos
                   </a>
                 </li>
                 <li>
