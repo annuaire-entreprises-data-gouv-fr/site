@@ -36,7 +36,7 @@ const FAQArticle: NextPageWithLayout<{ article: IArticle }> = ({ article }) => (
           <h2>Sur le même sujet</h2>
           <ul>
             {article.more.map(({ href, label }) => (
-              <li>
+              <li key={href}>
                 <a href={href}>{label}</a>
               </li>
             ))}

@@ -1,6 +1,8 @@
+import { resultSolutionEnergie } from '../../mocks/handlers/search/result-solution-energie';
+
 describe('TVA validation', () => {
-  it('552032534 is valid', () => {
-    cy.visit('/entreprise/552032534');
+  it(`should display the IVA number`, () => {
+    cy.visit(`/entreprise/${resultSolutionEnergie.results[0].siren}`);
     cy.contains('FR27 552 032 534').should('have.length', 1);
   });
 });
