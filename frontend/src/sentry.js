@@ -2,13 +2,13 @@ import * as Sentry from '@sentry/browser';
 
 var dsn = import.meta.env.VITE_SENTRY_FRONT_DSN;
 
-if (true || (import.meta.env.PROD && Sentry && dsn)) {
+if (import.meta.env.PROD && Sentry && dsn) {
   Sentry.init({
     dsn: dsn,
     // This enables automatic instrumentation (highly recommended), but is not
     // necessary for purely manual usage
     integrations: [
-      new Sentry.Integrations.BrowserTracing({
+      new Sentry.BrowserTracing({
         beforeNavigate: (context) => {
           let url = location.pathname || '/unknown';
           if (url.indexOf('/entreprise/') > -1) {
