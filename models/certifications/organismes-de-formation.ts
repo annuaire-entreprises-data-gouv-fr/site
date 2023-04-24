@@ -1,8 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
-import {
-  IOrganismeFormation,
-  clientOrganismeFormation,
-} from '#clients/open-data-soft/qualiopi';
+import { clientOrganismeFormation } from '#clients/open-data-soft/qualiopi';
 import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
