@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
 import { LayoutDefault } from '#components/layouts/layout-default';
-import constants from '#models/constants';
 import { NextPageWithLayout } from 'pages/_app';
 
 const ThanksPage: NextPageWithLayout = () => {
@@ -9,14 +8,12 @@ const ThanksPage: NextPageWithLayout = () => {
     <div id="layout">
       <main>
         <div className="layout-center">
-          <h1>Merci beaucoup pour votre retour 🙂 !</h1>
+          <h1>Merci beaucoup pour vos suggestions 🙂 !</h1>
         </div>
         <br />
         <div className="fr-container" style={{ textAlign: 'center' }}>
-          Le formulaire que vous avez rempli <b>est anonyme</b>. Si vous avez
-          une demande précise, écrivez-nous un mail à{' '}
-          <a href={constants.links.mailto}>{constants.links.mail}</a> et nous
-          vous répondrons.
+          Notre équipe prend en charge votre demande et nous vous répondrons dès
+          que possible.
         </div>
         <br />
         <br />

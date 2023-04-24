@@ -2,7 +2,6 @@ import { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
 import { MultiChoice } from '#components-ui/multi-choice';
 import { LayoutDefault } from '#components/layouts/layout-default';
-import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
 import { NextPageWithLayout } from 'pages/_app';
 
@@ -12,52 +11,20 @@ const FeedBackPage: NextPageWithLayout = () => {
     <div id="page-layout">
       <main className="fr-container">
         <div className="layout-center">
-          <h1>Quel est votre avis sur l’Annuaire des Entreprises ?</h1>
+          <h1>Vous avez des suggestions pour l’Annuaire des Entreprises ?</h1>
         </div>
         <br />
-        <div className="layout-center">
-          Donnez-nous votre avis en 4 réponses rapides !
-        </div>
         <div className="layout-center">
           <i>(temps estimé : 1 min)</i>
         </div>
         <br />
         <br />
-        <div>
-          Attention, <b>ce formulaire est anonyme</b>. Si vous avez une demande
-          précise, écrivez-nous un mail à{' '}
-          <a href={constants.links.mailto}>{constants.links.mail}</a> et nous
-          vous répondrons.
-        </div>
         <div className="content-container form-container">
-          <form action="/api/feedback/nps" method="post">
+          <form action="/api/feedback/suggestion" method="post">
             <input name="uuid" value={uuid} type="hidden" />
             <fieldset>
               <MultiChoice
-                legend="1 ・ Sur une échelle de 1 à 10, à quel point recommanderiez-vous l’Annuaire des Entreprises ?"
-                values={[
-                  { value: '1', label: '1' },
-                  { value: '2', label: '2' },
-                  { value: '3', label: '3' },
-                  { value: '4', label: '4' },
-                  { value: '5', label: '5' },
-                  { value: '6', label: '6' },
-                  { value: '7', label: '7' },
-                  { value: '8', label: '8' },
-                  { value: '9', label: '9' },
-                  { value: '10', label: '10' },
-                ]}
-                name="radio-set-mood"
-                idPrefix="radio-smiley"
-                required={true}
-                centered
-                large
-              />
-            </fieldset>
-
-            <fieldset>
-              <MultiChoice
-                legend="2 ・ Vous êtes venu(e) sur l’Annuaire des Entreprises en tant que :"
+                legend="1 ・ Vous êtes venu(e) sur l’Annuaire des Entreprises en tant que :"
                 values={[
                   {
                     value: 'Agent public',
@@ -81,36 +48,19 @@ const FeedBackPage: NextPageWithLayout = () => {
               />
             </fieldset>
             <fieldset>
-              <MultiChoice
-                legend="3 ・ Comment êtes-vous arrivé(e) jusqu’ici ?"
-                values={[
-                  { value: 'Bouche à oreille', label: 'Bouche à oreille' },
-                  {
-                    value: 'Moteur de recherche',
-                    label: 'Moteur de recherche',
-                  },
-                  {
-                    value: 'Je connaissais déjà le site',
-                    label: 'Je connaissais déjà le site',
-                  },
-                  {
-                    value:
-                      'J’ai cliqué sur un lien depuis un autre site internet',
-                    label:
-                      'J’ai cliqué sur un lien depuis un autre site internet',
-                  },
-                  { value: 'Autre', label: 'Autre' },
-                ]}
-                name="radio-set-visitor-origin"
-                idPrefix="radio-visitor-origin"
-                required={false}
-              />
+              <legend>
+                <h2>2 ・ Quelle est votre e-mail ? (optionel)</h2>
+              </legend>
+              <label className="fr-label" htmlFor="textarea">
+                Nous vous contacterons si nous avons besoin de plus
+                d’informations.
+              </label>
+              <input className="fr-input" id="textarea" name="email" />
             </fieldset>
             <fieldset>
               <legend>
-                <h2>4 ・ Avez-vous quelque chose d’autre à nous dire ?</h2>
+                <h2>3 ・ Que voulez-vous nous dire ?</h2>
               </legend>
-
               <div className="fr-input-group">
                 <label className="fr-label" htmlFor="textarea">
                   Vous rêvez d’une fonctionnalité ? Vous détestez le bleu ?
@@ -131,7 +81,6 @@ const FeedBackPage: NextPageWithLayout = () => {
             </div>
           </form>
         </div>
-
         <style jsx>
           {`
             .form-container {

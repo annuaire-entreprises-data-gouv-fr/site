@@ -42,6 +42,7 @@ const logAllEvents = async (req: NextApiRequest) => {
 const saveAndRedirect = async (req: NextApiRequest, res: NextApiResponse) => {
   // we choose not to await as we dont want to stall the request if any logEvent fails
   logAllEvents(req);
+
   res.writeHead(302, {
     Location: '/formulaire/merci',
   });
