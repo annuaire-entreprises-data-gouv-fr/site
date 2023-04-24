@@ -66,13 +66,14 @@ type IPeriodeUniteLegale = {
 };
 
 const factory = (options: InseeClientOptions) => async (siren: Siren) => {
-  const request = await inseeClientGet(
+  const response = await inseeClientGet(
     routes.sireneInsee.siren + siren,
     options
   );
-  const response = request.data as IInseeUniteLegaleResponse;
 
-  return mapToDomainObject(siren, response);
+  const data = response.data as IInseeUniteLegaleResponse;
+
+  return mapToDomainObject(siren, data);
 };
 
 /**
@@ -115,10 +116,6 @@ const mapToDomainObject = (
     trancheEffectifsUniteLegale,
     anneeEffectifsUniteLegale,
     statutDiffusionUniteLegale,
-    prenom1UniteLegale,
-    prenom2UniteLegale,
-    prenom3UniteLegale,
-    prenom4UniteLegale,
     prenomUsuelUniteLegale,
     sexeUniteLegale,
     identifiantAssociationUniteLegale,

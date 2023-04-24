@@ -136,7 +136,6 @@ const getEtablissementFactory =
       if (etablissements.length === 1) {
         return mapEtablissementToDomainObject(etablissements[0], siret);
       }
-
       throw new HttpServerError(
         'INSEE returns multiple siret for one etablissement'
       );
@@ -151,7 +150,6 @@ const getSiegeFactory =
       routes.sireneInsee.siege + siren,
       options
     );
-
     const { etablissements } = response.data as IInseeEtablissementResponse;
 
     return mapEtablissementToDomainObject(etablissements[0]);

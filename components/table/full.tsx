@@ -12,28 +12,28 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
     <table id={id} className="full-table">
       <thead>
         <tr>
-          {head.map((cell) => (
-            <th key={cell}>{cell}</th>
+          {head.map((cell, index) => (
+            <th key={index}>{cell}</th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {body.map((row, idx) => (
-          <tr key={'row-' + idx}>
-            {row.map((cell, idy) => (
-              <td key={'cell-' + idy}>{cell}</td>
+        {body.map((row, bodyIndex) => (
+          <tr key={'row-' + bodyIndex}>
+            {row.map((cell, rowIndex) => (
+              <td key={'cell-' + rowIndex}>{cell}</td>
             ))}
           </tr>
         ))}
       </tbody>
     </table>
     <div className="mobile">
-      {body.map((row, idx) => (
-        <div key={'row-' + idx}>
-          {row.map((cell, idy) =>
+      {body.map((row, bodyIndex) => (
+        <div key={'row-' + bodyIndex}>
+          {row.map((cell, rowIndex) =>
             !cell && cell !== 0 ? null : (
-              <div key={'cell-' + idy}>
-                <b>{head[idy]}&nbsp;:</b> {cell}
+              <div key={rowIndex}>
+                <b>{head[rowIndex]}&nbsp;:</b> {cell}
               </div>
             )
           )}

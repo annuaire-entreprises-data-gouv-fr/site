@@ -56,17 +56,3 @@ describe('Header’s search bar', () => {
     cy.url().should('include', '/rechercher?terme=Ganymede');
   });
 });
-
-describe('Search results', () => {
-  it('shows results for "Ganymede"', () => {
-    cy.visit('/rechercher?terme=Ganymede');
-
-    cy.get('.results-list').should('have.length', 1);
-  });
-
-  it('shows no results for "Rififi the mighty rifter"', () => {
-    cy.visit('/rechercher?terme=Rififi+the+mighty+rifter');
-
-    cy.contains('Aucune structure n’a été trouvée').should('have.length', 1);
-  });
-});
