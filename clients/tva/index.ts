@@ -44,5 +44,11 @@ export const clientTVA = async (
     useCache
   );
   const data = response.data as IVIESResponse;
-  return data.isValid ? `FR${data.vatNumber}` : null;
+
+  if (data.isValid) {
+    return `FR${data.vatNumber}`;
+  } else {
+    console.error(data);
+    return null;
+  }
 };
