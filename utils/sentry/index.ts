@@ -50,32 +50,6 @@ const init = () => {
   _isInitialized = true;
 };
 
-addGlobalEventProcessor((event: Sentry.Event) => {
-  if (event.type === 'transaction') {
-    event.transaction = sanitizeTransactionName(event.transaction);
-  }
-  return event;
-});
-
-const sanitizeTransactionName = (transaction?: string) => {
-  console.log(transaction);
-  const url = 'test';
-  return url;
-  try {
-    if (url.indexOf('/entreprise/') === 0) {
-      return '/entreprise/:slug';
-    }
-    if (url.indexOf('/rechercher/carte') > -1) {
-      return '/rechercher/carte';
-    } else if (url.indexOf('/rechercher') > -1) {
-      return '/rechercher';
-    }
-    return url.replace('?redirected=1', '').replace(/\d{14}|\d{9}/g, ':slug');
-  } catch {
-    return url;
-  }
-};
-
 const logInSentryFactory =
   (severity = 'error' as SeverityLevel) =>
   (errorMsg: any, extra: IScope = {}) => {
