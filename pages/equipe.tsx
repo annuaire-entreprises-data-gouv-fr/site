@@ -77,13 +77,6 @@ const Equipe: NextPageWithLayout = () => {
           </a>
           .
         </p>
-        <p>
-          L’Annuaire des Entreprises ne{' '}
-          <b>
-            fait que centraliser les données. Il ne les modifie pas et ne les
-            stocke pas.
-          </b>
-        </p>
 
         <h2>Notre méthode</h2>
         <p>
