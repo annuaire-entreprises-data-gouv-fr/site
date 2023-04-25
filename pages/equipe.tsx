@@ -52,7 +52,7 @@ const Equipe: NextPageWithLayout = () => {
       <Meta noIndex title="Équipe de l'Annuaire des Entreprises"></Meta>
       <TextWrapper>
         <h1>Qui sommes-nous ?</h1>
-        <h2>Qui fait l’Annuaire des Entreprises ?</h2>
+        <h2>Qui construit l’Annuaire des Entreprises ?</h2>
         <p>
           Ce site public est développé et maintenu par la Direction
           interministérielle du numérique{' '}
