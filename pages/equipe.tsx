@@ -38,6 +38,12 @@ const team = [
     fullname: 'Anais Tailhade',
     role: 'Responsable du support utilisateur',
   },
+  {
+    photoUrl: 
+      'https://media.licdn.com/dms/image/C4E03AQHzG-_DEKHuAw/profile-displayphoto-shrink_400_400/0/1580212866105?e=1687996800&v=beta&t=9SPkCg8ekw_2M2DQK8htFrkX0t7z_oZV75I-tUBjbbw',
+    fullname: 'Jérémie Cook',
+    role: 'UX Designer',
+  }
 ];
 
 const Equipe: NextPageWithLayout = () => {
