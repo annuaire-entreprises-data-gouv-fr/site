@@ -63,12 +63,12 @@ const Budget: NextPageWithLayout = () => (
       <FullTable
         head={['Poste de dépense', '2021', '2022']}
         body={[
-          ['Développement', '165 000 €', '133 000 €'],
-          ['Déploiement', '5 000 €', '54 000 €'],
-          ['Design', '25 000 €', '17 000 €'],
+          ['Développement', '165 000 €', '193 000 €'],
+          ['Déploiement', '5 000 €', '78 000 €'],
+          ['Design', '25 000 €', '24 000 €'],
           ['Logiciels', '-', '12 000 €'],
           ['Hébergement', '1000 €', '3000 €'],
-          [<b>Total TTC</b>, <b>196 000 €</b>, <b>219 000 €</b>],
+          [<b>Total TTC</b>, <b>196 000 €</b>, <b>310 000 €</b>],
         ]}
       ></FullTable>
       <br />
