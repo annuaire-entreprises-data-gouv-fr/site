@@ -17,6 +17,13 @@ const About: NextPageWithLayout = () => {
           administration.
         </p>
         <p>
+          Ce site ne fait{' '}
+          <b>
+            que centraliser les données. Il ne les modifie pas et ne les
+            stocke pas.
+          </b>
+        </p>
+        <p>
           Il est opéré par{' '}
           <a href="/equipe">
             une équipe de la Direction Interministérielle du Numérique
