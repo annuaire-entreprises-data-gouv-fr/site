@@ -156,7 +156,7 @@ const getUniteLegaleForGoodBot = async (
     try {
       if (e instanceof HttpNotFound) {
         // when not found in siren ouverte, fallback on insee
-        return await fetchUniteLegaleFromInsee(siren, page);
+        throw new SirenNotFoundError(siren);
       } else {
         fallbackOnStaging = true;
         return await clientUniteLegaleRechercheEntreprise(
