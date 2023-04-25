@@ -20,7 +20,7 @@ export const httpClientOAuthGetFactory = (
 
   // function that get oauth2 token
   const getAuthorizationCode = oauth.clientCredentials(
-    defaultAxiosInstanceFactory(constants.timeout.L),
+    defaultAxiosInstanceFactory(constants.timeout.XS),
     token_url,
     client_id,
     client_secret
