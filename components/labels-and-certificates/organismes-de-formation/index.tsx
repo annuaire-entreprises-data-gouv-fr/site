@@ -1,4 +1,3 @@
-import { IOrganismeFormation } from '#clients/open-data-soft/dgefp';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
@@ -10,6 +9,7 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
+import { IOrganismeFormation } from '#models/certifications/organismes-de-formation';
 import { formatIntFr, formatSiret } from '#utils/helpers';
 
 type OrganismeDeFormationSectionProps = {
@@ -69,16 +69,22 @@ export const OrganismeDeFormationSection = ({
           "Siret de l'établissement certifié",
           'Numéro Déclaration Activité',
           'Nombre de stagiaires',
-          'Certifications',
+          'Certification(s)',
         ]}
         body={organismesDeFormation.records.map((fields) => [
-          <a href={`/etablissement/${fields.siretetablissementdeclarant}`}>
-            {formatSiret(fields.siretetablissementdeclarant)}
-          </a>,
-          <Tag>{formatIntFr(fields.numerodeclarationactivite)}</Tag>,
-          fields.informationsdeclarees_nbstagiaires || '',
+          fields.siret ? (
+            <a href={`/etablissement/${fields.siret}`}>
+              {formatSiret(fields.siret)}
+            </a>
+          ) : (
+            <i>Non renseigné</i>
+          ),
+          <Tag>{fields.nda ? formatIntFr(fields.nda) : 'Inconnu'}</Tag>,
+          fields.stagiaires ? fields.stagiaires : <i>Non renseigné</i>,
           fields.certifications.map((certification) => (
-            <Tag color="info">{certification}</Tag>
+            <Tag color="info" key={certification}>
+              {certification}
+            </Tag>
           )),
         ])}
       />

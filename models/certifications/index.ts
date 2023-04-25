@@ -1,5 +1,3 @@
-import { IOrganismeFormation } from '#clients/open-data-soft/dgefp';
-import { IOrganismesFormationResponse } from '#clients/open-data-soft/dgefp/type';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { getEgapro, IEgapro } from '#models/certifications/egapro';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
@@ -9,7 +7,10 @@ import {
   getEntrepreneurSpectaclesCertification,
   IEntrepreneurSpectaclesCertification,
 } from './entrepreneur-spectacles';
-import { getOrganismesDeFormation } from './organismes-de-formation';
+import {
+  getOrganismesDeFormation,
+  IOrganismeFormation,
+} from './organismes-de-formation';
 import { getRGECertifications, IRGECertification } from './rge';
 
 export interface ICertifications {
