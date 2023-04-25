@@ -92,68 +92,74 @@ interface IInseeetablissementUniteLegale {
   nomUniteLegale: string;
 }
 
-const getAllEtablissementsFactory =
-  (options: InseeClientOptions) =>
-  async (siren: string, page = 1): Promise<IEtablissementsList> => {
-    const etablissementsPerPage = constants.resultsPerPage.etablissements;
-    const cursor = Math.max(page - 1, 0) * etablissementsPerPage;
+export const clientAllEtablissementsInsee = async (
+  siren: string,
+  page = 1,
+  options: InseeClientOptions
+): Promise<IEtablissementsList> => {
+  const etablissementsPerPage = constants.resultsPerPage.etablissements;
+  const cursor = Math.max(page - 1, 0) * etablissementsPerPage;
 
-    const response = await inseeClientGet(
-      routes.sireneInsee.siretBySiren +
-        siren +
-        `&nombre=${etablissementsPerPage}` +
-        `&debut=${cursor}`,
-      options
-    );
+  const response = await inseeClientGet(routes.sireneInsee.siret, options, {
+    params: {
+      q: `siren:${siren}`,
+      nombre: etablissementsPerPage,
+      debut: cursor,
+    },
+  });
 
-    const { header, etablissements } =
-      response.data as IInseeEtablissementsResponse;
+  const { header, etablissements } =
+    response.data as IInseeEtablissementsResponse;
 
-    const allEtablissements = etablissements.map((e) =>
-      mapEtablissementToDomainObject(e)
-    );
+  const allEtablissements = etablissements.map((e) =>
+    mapEtablissementToDomainObject(e)
+  );
 
-    return {
-      etablissements: createEtablissementsList(
-        allEtablissements,
-        page,
-        header.total
-      ),
-    };
+  return {
+    etablissements: createEtablissementsList(
+      allEtablissements,
+      page,
+      header.total
+    ),
   };
+};
 
-const getEtablissementFactory =
-  (options: InseeClientOptions) => async (siret: Siret) => {
-    const response = await inseeClientGet(
-      routes.sireneInsee.siret + siret,
-      options
-    );
+export const clientEtablissementInsee = async (
+  siret: Siret,
+  options: InseeClientOptions
+) => {
+  const response = await inseeClientGet(
+    routes.sireneInsee.siret + siret,
+    options
+  );
 
-    const { etablissement, etablissements } =
-      response.data as IInseeEtablissementResponse;
+  const { etablissement, etablissements } =
+    response.data as IInseeEtablissementResponse;
 
-    if (!etablissement && etablissements) {
-      if (etablissements.length === 1) {
-        return mapEtablissementToDomainObject(etablissements[0], siret);
-      }
-      throw new HttpServerError(
-        'INSEE returns multiple siret for one etablissement'
-      );
+  if (!etablissement && etablissements) {
+    if (etablissements.length === 1) {
+      return mapEtablissementToDomainObject(etablissements[0], siret);
     }
-    return mapEtablissementToDomainObject(etablissement, siret);
-  };
-
-const getSiegeFactory =
-  (options: InseeClientOptions) =>
-  async (siren: Siren): Promise<IEtablissement> => {
-    const response = await inseeClientGet(
-      routes.sireneInsee.siege + siren,
-      options
+    throw new HttpServerError(
+      'INSEE returns multiple siret for one etablissement'
     );
-    const { etablissements } = response.data as IInseeEtablissementResponse;
+  }
+  return mapEtablissementToDomainObject(etablissement, siret);
+};
 
-    return mapEtablissementToDomainObject(etablissements[0]);
-  };
+export const clientSiegeInsee = async (
+  siren: Siren,
+  options: InseeClientOptions
+): Promise<IEtablissement> => {
+  const response = await inseeClientGet(routes.sireneInsee.siret, options, {
+    params: {
+      q: `etablissementSiege:true AND siren:${siren}`,
+    },
+  });
+  const { etablissements } = response.data as IInseeEtablissementResponse;
+
+  return mapEtablissementToDomainObject(etablissements[0]);
+};
 
 export const mapEtablissementToDomainObject = (
   inseeEtablissement: IInseeEtablissement,
@@ -291,39 +297,3 @@ export const mapEtablissementToDomainObject = (
     commune: libelleCommuneEtablissement,
   };
 };
-
-//=================
-// public methods
-//=================
-
-export const clientAllEtablissementsInsee = getAllEtablissementsFactory({
-  useCache: true,
-  useFallback: false,
-});
-
-export const clientAllEtablissementsInseeFallback = getAllEtablissementsFactory(
-  {
-    useCache: true,
-    useFallback: true,
-  }
-);
-
-export const clientEtablissementInsee = getEtablissementFactory({
-  useCache: true,
-  useFallback: false,
-});
-
-export const clientEtablissementInseeFallback = getEtablissementFactory({
-  useCache: true,
-  useFallback: true,
-});
-
-export const clientSiegeInsee = getSiegeFactory({
-  useCache: true,
-  useFallback: false,
-});
-
-export const clientSiegeInseeFallback = getSiegeFactory({
-  useCache: true,
-  useFallback: true,
-});

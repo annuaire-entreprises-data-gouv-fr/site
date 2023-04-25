@@ -2,11 +2,9 @@ import { useRouter } from 'next/router';
 import React, { PropsWithChildren } from 'react';
 import { Question } from '#components-ui/question';
 import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
-import { InfoBanner } from '#components/banner/info-banner';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
 import { Header } from '#components/header';
-import { WeNeedYouModal } from '#components/modal/we-need-you';
 import SocialNetworks from '#components/social-network';
 import { IParams } from '#models/search-filter-params';
 import { ISession } from '#utils/session';
@@ -37,8 +35,6 @@ export const LayoutSearch = ({
       {isBrowserOutdated && <BrowserIsOutdatedBanner />}
 
       <NPSBanner />
-      <InfoBanner />
-      <WeNeedYouModal />
       <Header
         currentSearchTerm={(terme || '') as string}
         useMap={map}

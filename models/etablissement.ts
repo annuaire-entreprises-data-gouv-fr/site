@@ -1,9 +1,6 @@
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
 import { clientEtablissementRechercheEntreprise } from '#clients/recherche-entreprise/siret';
-import {
-  clientEtablissementInsee,
-  clientEtablissementInseeFallback,
-} from '#clients/sirene-insee/siret';
+import { clientEtablissementInsee } from '#clients/sirene-insee/siret';
 import { getGeoLoc } from '#models/geo-loc';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { extractSirenFromSiret, Siret, verifySiret } from '#utils/helpers';
@@ -42,7 +39,10 @@ const getEtablissementFromSlug = async (
  */
 const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
   try {
-    return await clientEtablissementInsee(siret);
+    return await clientEtablissementInsee(siret, {
+      useCache: true,
+      useFallback: false,
+    });
   } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleEtablissement(siret);
@@ -62,7 +62,10 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
       });
 
       try {
-        return await clientEtablissementInseeFallback(siret);
+        return await clientEtablissementInsee(siret, {
+          useCache: true,
+          useFallback: true,
+        });
       } catch (lastFallback: any) {
         if (e instanceof HttpForbiddenError) {
           return createNonDiffusibleEtablissement(siret);

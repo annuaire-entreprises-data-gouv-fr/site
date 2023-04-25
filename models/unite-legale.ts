@@ -1,14 +1,13 @@
-import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
-import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
 import {
-  clientUniteLegaleInsee,
-  clientUniteLegaleInseeFallback,
-} from '#clients/sirene-insee/siren';
+  HttpForbiddenError,
+  HttpNotFound,
+  HttpServerError,
+} from '#clients/exceptions';
+import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
+import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
 import {
   clientAllEtablissementsInsee,
-  clientAllEtablissementsInseeFallback,
   clientSiegeInsee,
-  clientSiegeInseeFallback,
 } from '#clients/sirene-insee/siret';
 import { getAssociation } from '#models/association';
 import {
@@ -74,7 +73,7 @@ class UniteLegaleFactory {
   };
 
   get = async () => {
-    if (true || this._isBot) {
+    if (this._isBot) {
       return await this.getForBot();
     } else {
       return await this.getForUser();
@@ -166,13 +165,14 @@ const getUniteLegaleForGoodBot = async (
         );
       }
     } catch (eFallback: any) {
-      if (!(eFallback instanceof HttpNotFound)) {
-        logRechercheEntrepriseForGoodBotfailed({
-          siren,
-          details: eFallback.message || eFallback,
-        });
+      if (eFallback instanceof HttpNotFound) {
+        throw new SirenNotFoundError(siren);
       }
-      throw new SirenNotFoundError(siren);
+      logRechercheEntrepriseForGoodBotfailed({
+        siren,
+        details: eFallback.message || eFallback,
+      });
+      throw new HttpServerError('Recherche entreprise for good bot failed');
     }
   }
 };
@@ -206,13 +206,17 @@ const getUniteLegale = async (
         // no pagination as this function is called when sirene etalab already failed
         return await fetchUniteLegaleFromInseeFallback(siren, page);
       } catch (lastFallback: any) {
+        if (lastFallback instanceof HttpNotFound) {
+          throw new SirenNotFoundError(siren);
+        }
+
         logSecondSireneInseefailed({
           siren,
           details: lastFallback.message || lastFallback,
         });
 
-        // Siren was not found in both API, return a 404
-        throw new SirenNotFoundError(siren);
+        // Siren was not found in both API, return a 500
+        throw new HttpServerError('Both API failed');
       }
     }
   }
@@ -226,13 +230,19 @@ const getUniteLegale = async (
  * Fetch Unite Legale from Sirene INSEE and Etalab
  */
 const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
+  const inseeOptions = {
+    useCache: true,
+    useFallback: false,
+  };
   try {
     // INSEE requires three calls to get uniteLegale with etablissementsand siege
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
-        clientUniteLegaleInsee(siren),
-        clientAllEtablissementsInsee(siren, page).catch(() => null),
-        clientSiegeInsee(siren).catch(() => null),
+        clientUniteLegaleInsee(siren, inseeOptions),
+        clientAllEtablissementsInsee(siren, page, inseeOptions).catch(
+          () => null
+        ),
+        clientSiegeInsee(siren, inseeOptions).catch(() => null),
       ]);
 
     return mergeUniteLegaleInsee(
@@ -252,13 +262,19 @@ const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
  * Fetch Unite Legale from Sirene INSEE only, using fallback credentials
  */
 const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
+  const inseeOptions = {
+    useCache: true,
+    useFallback: true,
+  };
   try {
     // INSEE requires three calls to get uniteLegale with etablissementsand siege
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
-        clientUniteLegaleInseeFallback(siren),
-        clientAllEtablissementsInseeFallback(siren, page).catch(() => null),
-        clientSiegeInseeFallback(siren).catch(() => null),
+        clientUniteLegaleInsee(siren, { useCache: true, useFallback: true }),
+        clientAllEtablissementsInsee(siren, page, inseeOptions).catch(
+          () => null
+        ),
+        clientSiegeInsee(siren, inseeOptions).catch(() => null),
       ]);
 
     return mergeUniteLegaleInsee(

@@ -1,6 +1,7 @@
+import { AxiosRequestConfig } from 'axios';
 import routes from '#clients/routes';
 import constants from '#models/constants';
-import httpClientOAuthGetFactory from '#utils/network/0auth';
+import { httpClientOAuth } from '#utils/network/0auth';
 
 /**
  * API SIRENE by INSEE
@@ -23,13 +24,13 @@ export type InseeClientOptions = {
   useCache: boolean;
 };
 
-const defaultGetClient = httpClientOAuthGetFactory(
+const defaultClient = new httpClientOAuth(
   routes.sireneInsee.auth,
   process.env.INSEE_CLIENT_ID,
   process.env.INSEE_CLIENT_SECRET
 );
 
-const fallbackGetClient = httpClientOAuthGetFactory(
+const fallbackClient = new httpClientOAuth(
   routes.sireneInsee.auth,
   process.env.INSEE_CLIENT_ID_FALLBACK,
   process.env.INSEE_CLIENT_SECRET_FALLBACK
@@ -37,10 +38,15 @@ const fallbackGetClient = httpClientOAuthGetFactory(
 
 export const inseeClientGet = async (
   route: string,
-  options = { useFallback: false, useCache: false } as InseeClientOptions
+  options = { useFallback: false, useCache: false } as InseeClientOptions,
+  axiosConfig: AxiosRequestConfig = {}
 ) => {
   const { useFallback, useCache } = options;
 
-  const getClient = useFallback ? fallbackGetClient : defaultGetClient;
-  return await getClient(route, { timeout: constants.timeout.XS }, useCache);
+  const client = useFallback ? fallbackClient : defaultClient;
+  return await client.get(
+    route,
+    { timeout: constants.timeout.XS, ...axiosConfig },
+    useCache
+  );
 };

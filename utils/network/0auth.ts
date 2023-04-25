@@ -1,64 +1,96 @@
 import { AxiosRequestConfig } from 'axios';
-import oauth from 'axios-oauth-client';
-import tokenProvider from 'axios-token-interceptor';
-import { HttpServerError } from '#clients/exceptions';
+import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
 import constants from '#models/constants';
+import { logWarningInSentry } from '#utils/sentry';
 import {
   defaultAxiosInstanceFactory,
   cachedAxiosInstanceFactory,
   defaultCacheConfig,
 } from '.';
 
-export const httpClientOAuthGetFactory = (
-  token_url: string,
-  client_id: string | undefined,
-  client_secret: string | undefined
-) => {
-  if ((!client_id || !client_secret) && process.env.NODE_ENV === 'production') {
-    throw new HttpServerError('Client id or client secret is undefined');
+type IAccessToken = {
+  data: {
+    access_token: string;
+    expires_in: number;
+    scope: string;
+    token_type: 'Bearer' | string;
+  };
+  tokenExpiryTime: number;
+};
+
+export class httpClientOAuth {
+  private _token: IAccessToken | null;
+  private _cachedAxiosInstance;
+
+  constructor(
+    private token_url: string,
+    private client_id: string | undefined,
+    private client_secret: string | undefined
+  ) {
+    if (
+      (!this.client_id || !this.client_secret || !this.token_url) &&
+      process.env.NODE_ENV === 'production'
+    ) {
+      throw new HttpServerError('Client id or client secret is undefined');
+    }
+    this._cachedAxiosInstance = cachedAxiosInstanceFactory();
+    this._token = null;
   }
 
-  // function that get oauth2 token
-  const getAuthorizationCode = oauth.clientCredentials(
-    defaultAxiosInstanceFactory(constants.timeout.XS),
-    token_url,
-    client_id,
-    client_secret
-  );
-
-  const cachedAxiosInstance = cachedAxiosInstanceFactory();
-
-  // memory cache to avoid getting token from insee at every call
-  // when it reaches max-age, it gets refresh
-  const cache = tokenProvider.tokenCache(
-    () =>
-      getAuthorizationCode('OPTIONAL_SCOPES').then((response: any) => {
-        return response;
-      }),
-    {
-      getMaxAge: (res: any) => {
-        return res.expires_in * 1000;
-      },
+  refreshToken = async () => {
+    try {
+      const clientWithNoCache = defaultAxiosInstanceFactory();
+      const { data } = await clientWithNoCache(this.token_url, {
+        method: 'POST',
+        timeout: constants.timeout.XXS,
+        params: {
+          client_id: this.client_id,
+          client_secret: this.client_secret,
+          grant_type: 'client_credentials',
+          validity_period: 604800,
+        },
+      });
+      this._token = {
+        data,
+        tokenExpiryTime: new Date().getTime() + data.expires_in * 1000,
+      };
+    } catch (e) {
+      this._token = null;
     }
-  );
+  };
 
-  // interceptor that retrieve token from cache at every used of cachedAxiosInstance
-  cachedAxiosInstance.interceptors.request.use(
-    //@ts-ignore
-    tokenProvider({
-      getToken: cache,
-      headerFormatter: (body: any) => {
-        return `Bearer ${body.access_token}`;
-      },
-    })
-  );
+  verifiedToken = async () => {
+    // in case something went wrong during the last refresh
+    if (!this._token) {
+      await this.refreshToken();
+      if (!this._token) {
+        throw new HttpUnauthorizedError('Failed to refresh token');
+      }
+    }
 
-  return async (url: string, options: AxiosRequestConfig, useCache: boolean) =>
-    cachedAxiosInstance.get(url, {
+    const now = new Date().getTime();
+    const isTokenExpired = now > this._token.tokenExpiryTime;
+    if (isTokenExpired) {
+      logWarningInSentry('Refreshing Insee token');
+      await this.refreshToken();
+      if (!this._token) {
+        throw new HttpUnauthorizedError('Failed to refresh token');
+      }
+    }
+    return this._token;
+  };
+
+  get = async (url: string, options: AxiosRequestConfig, useCache: boolean) => {
+    const token = await this.verifiedToken();
+
+    return this._cachedAxiosInstance.get(url, {
       timeout: constants.timeout.M,
       ...options,
       cache: useCache ? defaultCacheConfig : false,
+      headers: {
+        ...options.headers,
+        Authorization: `Bearer ${token.data.access_token}`,
+      },
     });
-};
-
-export default httpClientOAuthGetFactory;
+  };
+}

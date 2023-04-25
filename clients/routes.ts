@@ -125,11 +125,8 @@ const routes = {
   sireneInsee: {
     auth: 'https://api.insee.fr/token',
     avis: 'https://avis-situation-sirene.insee.fr/AvisPdf.action',
-    siege:
-      'https://api.insee.fr/entreprises/sirene/V3/siret?q=etablissementSiege:true%20AND%20siren:',
     siren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
     siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',
-    siretBySiren: 'https://api.insee.fr/entreprises/sirene/V3/siret?q=siren:',
   },
   rechercheEntreprise: {
     etablissement: 'https://api-annuaire-entreprises.data.gouv.fr/siret?q=',
