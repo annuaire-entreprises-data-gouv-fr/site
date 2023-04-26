@@ -4,44 +4,28 @@ import { MultiChoice } from '#components-ui/multi-choice';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import { randomId } from '#utils/helpers';
 import { NextPageWithLayout } from 'pages/_app';
+import { visitorTypes } from '../nps';
 
-const FeedBackPage: NextPageWithLayout = () => {
+const SuggestionPage: NextPageWithLayout = () => {
   const uuid = randomId();
   return (
     <div id="page-layout">
       <main className="fr-container">
         <div className="layout-center">
-          <h1>Vous avez des suggestions pour l’Annuaire des Entreprises ?</h1>
+          <h1>Vos idées nous intéressent !</h1>
         </div>
         <br />
         <div className="layout-center">
-          <i>(temps estimé : 1 min)</i>
+          Un retour ? Une idée d’amélioration ? Dites-le-nous, cela nous aide à
+          améliorer le site.
         </div>
-        <br />
-        <br />
         <div className="content-container form-container">
           <form action="/api/feedback/suggestion" method="post">
             <input name="uuid" value={uuid} type="hidden" />
             <fieldset>
               <MultiChoice
                 legend="1 ・ Vous êtes venu(e) sur l’Annuaire des Entreprises en tant que :"
-                values={[
-                  {
-                    value: 'Agent public',
-                    label: 'Agent public',
-                  },
-                  {
-                    value: 'Dirigeant',
-                    label: 'Dirigeant(e) d’entreprise ou d’association',
-                  },
-                  { value: 'Indépendant', label: 'Indépendant(e)' },
-                  {
-                    value: 'Salarié',
-                    label: 'Salarié(e) d’entreprise ou d’association',
-                  },
-                  { value: 'Particulier', label: 'Particulier' },
-                  { value: 'Autre', label: 'Autre' },
-                ]}
+                values={visitorTypes}
                 name="radio-set-visitor-type"
                 idPrefix="radio-visitor-type"
                 required={false}
@@ -49,43 +33,47 @@ const FeedBackPage: NextPageWithLayout = () => {
             </fieldset>
             <fieldset>
               <legend>
-                <h2>2 ・ Quelle est votre e-mail ? (optionel)</h2>
+                <h2>2 ・ Quel est votre e-mail (requis) ?</h2>
               </legend>
-              <label className="fr-label" htmlFor="textarea">
+              <label className="fr-label" htmlFor="email">
                 Nous vous contacterons si nous avons besoin de plus
                 d’informations.
               </label>
-              <input className="fr-input" id="textarea" name="email" />
+              <input
+                className="fr-input"
+                id="email"
+                name="email"
+                required
+                type="email"
+              />
             </fieldset>
             <fieldset>
               <legend>
-                <h2>3 ・ Que voulez-vous nous dire ?</h2>
+                <h2>3 ・ Que pouvons-nous améliorer (requis) ?</h2>
               </legend>
               <div className="fr-input-group">
-                <label className="fr-label" htmlFor="textarea">
+                <label className="fr-label" htmlFor="feedback">
                   Vous rêvez d’une fonctionnalité ? Vous détestez le bleu ?
                   Dites-nous tout !
                 </label>
                 <textarea
                   className="fr-input"
-                  id="textarea"
+                  id="feedback"
                   name="textarea"
+                  required
                 ></textarea>
               </div>
             </fieldset>
             <br />
             <div className="layout-center">
               <ButtonLink small={false} type="submit">
-                Soumettre le formulaire
+                Envoyer
               </ButtonLink>
             </div>
           </form>
         </div>
         <style jsx>
           {`
-            .form-container {
-              margin-top: 0;
-            }
             fieldset {
               border: none;
               margin: 40px 0;
@@ -98,7 +86,7 @@ const FeedBackPage: NextPageWithLayout = () => {
   );
 };
 
-FeedBackPage.getLayout = function getLayout(
+SuggestionPage.getLayout = function getLayout(
   page: ReactElement,
   isBrowserOutdated
 ) {
@@ -109,4 +97,4 @@ FeedBackPage.getLayout = function getLayout(
   );
 };
 
-export default FeedBackPage;
+export default SuggestionPage;

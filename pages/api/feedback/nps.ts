@@ -1,39 +1,31 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { logEventInMatomo } from '#utils/analytics/matomo';
-import httpClient from '#utils/network';
+import logInMattermost from '#utils/integrations/mattermost';
 import logErrorInSentry from '#utils/sentry';
 
 const logAllEvents = async (req: NextApiRequest) => {
   try {
     const today = new Date();
-
     const NA = 'Non renseigné';
+    const visitorType = req.body['radio-set-visitor-type'] || NA;
+    const mood = req.body['radio-set-mood'];
+    const uuid = req.body['uuid'];
+    const origin = req.body['radio-set-visitor-origin'] || NA;
 
-    await logEventInMatomo(
-      'feedback:nps',
-      '',
-      `mood=${req.body['radio-set-mood']}&type=${
-        req.body['radio-set-visitor-type'] || NA
-      }&origin=${req.body['radio-set-visitor-origin'] || NA}&date=${
-        today.toISOString().split('T')[0]
-      }&uuid=${req.body['uuid']}`,
-      'nps'
-    );
-
-    const data = {
+    const mattermostData = {
       username: 'clippy',
-      text: `Note : **${req.body['radio-set-mood']}/10** \nVisiteur : ${
-        req.body['radio-set-visitor-type'] || NA
-      } \nOrigine : ${
-        req.body['radio-set-visitor-origin'] || NA
-      } \nCommentaire : *${req.body['textarea'] || NA}*`,
+      text: `Note : **${mood}/10** \nVisiteur : ${visitorType} \nOrigine : ${origin}`,
     };
 
-    await httpClient({
-      url: process.env.MATTERMOST_HOOK,
-      method: 'POST',
-      data,
-    });
+    await logInMattermost(mattermostData);
+    await logEventInMatomo(
+      'feedback:nps',
+      NA,
+      `mood=${mood}&type=${visitorType}&origin=${origin}&date=${
+        today.toISOString().split('T')[0]
+      }&uuid=${uuid}`,
+      'nps'
+    );
   } catch (e: any) {
     logErrorInSentry('Error in form submission', { details: e.toString() });
   }
@@ -44,7 +36,7 @@ const saveAndRedirect = async (req: NextApiRequest, res: NextApiResponse) => {
   logAllEvents(req);
 
   res.writeHead(302, {
-    Location: '/formulaire/merci',
+    Location: '/formulaire/nps/merci',
   });
   res.end();
 };

@@ -77,7 +77,7 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
     />
     <h2>Satisfaction des utilisateurs</h2>
     Analyse des réponses au{' '}
-    <a href="/formulaire">questionnaire de statisfaction</a>.
+    <a href="/formulaire/nps">questionnaire de statisfaction</a>.
     <h3>Score de satisfaction</h3>
     Ce qui nous intéresse avec ce score n’est pas sa valeur, mais ses
     variations. Si le score augmente, c’est que le service évolue dans le bon

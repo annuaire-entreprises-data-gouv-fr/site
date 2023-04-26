@@ -6,6 +6,24 @@ import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
 import { NextPageWithLayout } from 'pages/_app';
 
+export const visitorTypes = [
+  {
+    value: 'Agent public',
+    label: 'Agent public',
+  },
+  {
+    value: 'Dirigeant',
+    label: 'Dirigeant(e) d’entreprise ou d’association',
+  },
+  { value: 'Indépendant', label: 'Indépendant(e)' },
+  {
+    value: 'Salarié',
+    label: 'Salarié(e) d’entreprise ou d’association',
+  },
+  { value: 'Particulier', label: 'Particulier' },
+  { value: 'Autre', label: 'Autre' },
+];
+
 const FeedBackPage: NextPageWithLayout = () => {
   const uuid = randomId();
   return (
@@ -58,23 +76,7 @@ const FeedBackPage: NextPageWithLayout = () => {
             <fieldset>
               <MultiChoice
                 legend="2 ・ Vous êtes venu(e) sur l’Annuaire des Entreprises en tant que :"
-                values={[
-                  {
-                    value: 'Agent public',
-                    label: 'Agent public',
-                  },
-                  {
-                    value: 'Dirigeant',
-                    label: 'Dirigeant(e) d’entreprise ou d’association',
-                  },
-                  { value: 'Indépendant', label: 'Indépendant(e)' },
-                  {
-                    value: 'Salarié',
-                    label: 'Salarié(e) d’entreprise ou d’association',
-                  },
-                  { value: 'Particulier', label: 'Particulier' },
-                  { value: 'Autre', label: 'Autre' },
-                ]}
+                values={visitorTypes}
                 name="radio-set-visitor-type"
                 idPrefix="radio-visitor-type"
                 required={false}
@@ -106,27 +108,10 @@ const FeedBackPage: NextPageWithLayout = () => {
                 required={false}
               />
             </fieldset>
-            <fieldset>
-              <legend>
-                <h2>4 ・ Avez-vous quelque chose d’autre à nous dire ?</h2>
-              </legend>
-
-              <div className="fr-input-group">
-                <label className="fr-label" htmlFor="textarea">
-                  Vous rêvez d’une fonctionnalité ? Vous détestez le bleu ?
-                  Dites-nous tout !
-                </label>
-                <textarea
-                  className="fr-input"
-                  id="textarea"
-                  name="textarea"
-                ></textarea>
-              </div>
-            </fieldset>
             <br />
             <div className="layout-center">
               <ButtonLink small={false} type="submit">
-                Soumettre le formulaire
+                Envoyer
               </ButtonLink>
             </div>
           </form>
@@ -134,9 +119,6 @@ const FeedBackPage: NextPageWithLayout = () => {
 
         <style jsx>
           {`
-            .form-container {
-              margin-top: 0;
-            }
             fieldset {
               border: none;
               margin: 40px 0;

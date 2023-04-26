@@ -8,12 +8,7 @@ const ThanksPage: NextPageWithLayout = () => {
     <div id="layout">
       <main>
         <div className="layout-center">
-          <h1>Merci beaucoup pour vos suggestions 🙂 !</h1>
-        </div>
-        <br />
-        <div className="fr-container" style={{ textAlign: 'center' }}>
-          Notre équipe prend en charge votre demande et nous vous répondrons dès
-          que possible.
+          <h1>Merci beaucoup pour votre suggestion 🙂 !</h1>
         </div>
         <br />
         <br />
