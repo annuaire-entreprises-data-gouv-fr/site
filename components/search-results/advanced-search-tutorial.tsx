@@ -40,13 +40,14 @@ export const AdvancedSearchTutorial = () => {
             <li>
               <Icon color={constants.colors.frBlue} slug="building">
                 <b>Structure&nbsp;:</b>&#8200;filtrez par type de structure ou
-                labels (RGE, ESS, Spectacle vivant)
+                labels (RGE, ESS, Spectacle vivant, Qualiopi, Bio)
               </Icon>
             </li>
             <li>
               <Icon color={constants.colors.frBlue} slug="file">
                 <b>Situation administrative&nbsp;:</b>&#8200;filtrez par domaine
-                d’activité ou état administratif (En activité/Cessée)
+                d’activité, état administratif (En activité/Cessée) ou taille
+                d’entreprise
               </Icon>
             </li>
           </ul>
