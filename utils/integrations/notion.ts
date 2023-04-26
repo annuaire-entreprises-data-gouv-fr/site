@@ -1,7 +1,7 @@
 import { Client } from '@notionhq/client';
 
 const notion = new Client({ auth: process.env.NOTION_API_SECRET });
-const databaseId = process.env.NOTION_DATABASE_ID;
+export const notionDatabaseId = process.env.NOTION_DATABASE_ID;
 
 export default async function logSuggestionToNotion(
   visitorType: string,
@@ -9,7 +9,7 @@ export default async function logSuggestionToNotion(
   suggestion: string
 ) {
   await notion.pages.create({
-    parent: { database_id: databaseId as string },
+    parent: { database_id: notionDatabaseId as string },
     properties: {
       Email: {
         title: [

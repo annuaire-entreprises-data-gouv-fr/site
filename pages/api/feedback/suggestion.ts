@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import logInMattermost from '#utils/integrations/mattermost';
-import logSuggestionToNotion from '#utils/integrations/notion';
+import logSuggestionToNotion, {
+  notionDatabaseId,
+} from '#utils/integrations/notion';
 import logErrorInSentry from '#utils/sentry';
 
 const logAllEvents = async (req: NextApiRequest) => {
@@ -12,7 +14,7 @@ const logAllEvents = async (req: NextApiRequest) => {
 
     const mattermostData = {
       username: 'clippy',
-      text: `Visiteur : ${visitorType} \nSuggestion : ${suggestion} \nLien notion : https://www.notion.so/apigouv/ce7d271037bb4fa0a363e52ac1411e8b?v=a5c2c84d69e7486d9c1c9b9ae90e9f2f&pvs=4`,
+      text: `Visiteur : ${visitorType} \nSuggestion : ${suggestion} \nLien notion : https://www.notion.so/apigouv/${notionDatabaseId}?v=a5c2c84d69e7486d9c1c9b9ae90e9f2f&pvs=4`,
     };
 
     await logInMattermost(mattermostData);
