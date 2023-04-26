@@ -104,7 +104,7 @@ const Equipe: NextPageWithLayout = () => {
           </li>
           <li>
             Participer à une meilleure transparence de l’information publique
-            ouverte (logique d&quot;open data, de données ouvertes)
+            ouverte (logique d’open data, de données ouvertes)
           </li>
         </ul>
 
