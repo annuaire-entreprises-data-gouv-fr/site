@@ -1,11 +1,7 @@
 /**
- * TPE (Très Petites Entreprises)
- * PME (Petite ou moyenne entreprise)
- * ETI (Entreprise de taille intermédiaire)
- * GE  (Grandes entreprises)
  * @see https://github.com/etalab/annuaire-entreprises-search-api/blob/main/aio/aio-proxy/aio_proxy/labels/tranches-effectifs.json
  */
-export const tranchesEffectifs = [
+export const tranchesEffectifsOptions = [
   {
     label: 'Entreprise sans salarié ou nombre de salarié inconnu',
     value: '00,NN',

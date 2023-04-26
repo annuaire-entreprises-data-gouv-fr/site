@@ -3,11 +3,11 @@ import { FilterMenu } from '#components-ui/filter-menu';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import { MultiSelect, Select } from '#components-ui/select';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';
-import { categoriesEntrepriseFilter } from '#utils/labels/categories-entreprise';
+import { categoriesEntrepriseFilterOptions } from '#utils/labels/categories-entreprise';
 import { categoriesJuridiques } from '#utils/labels/categories-juridiques';
 import { codesNAFRev2 } from '#utils/labels/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/labels/codes-section-NAF';
-import { tranchesEffectifs } from '#utils/labels/tranches-effectifs';
+import { tranchesEffectifsOptions } from '#utils/labels/tranches-effectifs-options';
 import { FilterGeo } from './filter-geo';
 import { FilterStructure } from './filter-structure';
 
@@ -187,25 +187,25 @@ const SearchFilters: React.FC<{
         </div>
         <SimpleSeparator />
         <div>
-          <label>Effectif global</label>
+          <label>Effectif salarié</label>
           <MultiSelect
             name="tranche_effectif_salarie"
             defaultValue={tranche_effectif_salarie}
             placeholder="Choisir une tranche d'effectif"
             id="effectif-salarie-multi-select"
             instanceId="effectif-salarie-multi-select"
-            options={tranchesEffectifs}
+            options={tranchesEffectifsOptions}
           />
         </div>
         <div>
-          <label>Catégorie d&apos;entreprise</label>
+          <label>Taille d’entreprise</label>
           <MultiSelect
             name="categorie_entreprise"
             defaultValue={categorie_entreprise}
             placeholder="Choisir une catégorie d'entreprise"
             id="categorie-entreprise-multi-select"
             instanceId="categorie-entreprise-multi-select"
-            options={categoriesEntrepriseFilter}
+            options={categoriesEntrepriseFilterOptions}
           />
         </div>
       </FilterMenu>

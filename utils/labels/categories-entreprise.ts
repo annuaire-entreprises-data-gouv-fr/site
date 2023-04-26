@@ -9,7 +9,7 @@ export const categoriesEntreprise = (code: string) => {
   return null;
 };
 
-export const categoriesEntrepriseFilter = [
+export const categoriesEntrepriseFilterOptions = [
   {
     label: 'Grande Entreprise',
     value: 'GE',
