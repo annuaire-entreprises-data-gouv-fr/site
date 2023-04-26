@@ -8,7 +8,7 @@ if (import.meta.env.PROD && Sentry && dsn) {
     // This enables automatic instrumentation (highly recommended), but is not
     // necessary for purely manual usage
     integrations: [
-      new Sentry.Integrations.BrowserTracing({
+      new Sentry.BrowserTracing({
         beforeNavigate: (context) => {
           let url = location.pathname || '/unknown';
           if (url.indexOf('/entreprise/') > -1) {

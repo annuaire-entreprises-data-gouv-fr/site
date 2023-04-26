@@ -1,7 +1,7 @@
 import { clientAssociation } from '#clients/api-proxy/association';
 import { clientUniteLegaleInseeNoCache } from '#clients/sirene-insee/siren';
 import clientSiret2Idcc from '#clients/siret-2-idcc';
-import { clientTVA } from '#clients/tva';
+import { clientTVA } from '#clients/api-proxy/tva';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
 import { clientApiEntrepriseAssociation } from './api-entreprise/association';
 import { fetchRNCSImmatriculation } from './api-proxy/rncs';

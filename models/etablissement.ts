@@ -30,7 +30,7 @@ const getEtablissementFromSlug = async (
 
   const isBot = options?.isBot || false;
 
-  const etablissement = isBot
+  const etablissement = true
     ? await getEtablissementForGoodBot(siret)
     : await getEtablissement(siret);
 

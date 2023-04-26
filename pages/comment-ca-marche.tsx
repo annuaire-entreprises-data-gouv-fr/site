@@ -11,43 +11,27 @@ const About: NextPageWithLayout = () => {
       <Meta title="Comment ça marche ?" />
       <TextWrapper>
         <h1>À propos de L’Annuaire des Entreprises</h1>
-        <h2>Qui développe l’Annuaire des Entreprises ?</h2>
         <p>
-          Ce site public est développé et maintenu par{' '}
-          <a href="https://etalab.gouv.fr/" target="_blank" rel="noreferrer">
-            Etalab
-          </a>
-          , au sein de la Direction interministérielle du numérique{' '}
-          <a
-            href="https://www.numerique.gouv.fr/dinum/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            (DINUM)
-          </a>
-          , en coopération avec la{' '}
-          <a
-            href="https://entreprises.gouv.fr/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Direction Générale des Entreprises (DGE)
-          </a>
-          . Les informations utilisées proviennent d’administrations publiques
-          habilitées à récolter et traiter des données publiques sur les
-          entreprises.
+          Ce site permet de retrouver toutes les données publiques détenues par
+          l’administration sur une entreprise, une association ou une
+          administration.
         </p>
         <p>
-          L’Annuaire des Entreprises ne{' '}
+          Ce site ne fait{' '}
           <b>
-            fait que centraliser les données. Il ne les modifie pas et ne les
+            que centraliser les données. Il ne les modifie pas et ne les
             stocke pas.
           </b>
         </p>
+        <p>
+          Il est opéré par{' '}
+          <a href="/equipe">
+            une équipe de la Direction Interministérielle du Numérique
+          </a>
+          .
+        </p>
         <div>
-          <h2>
-            Comment sont structurées les fiches de l’Annuaire des Entreprises ?{' '}
-          </h2>
+          <h2>Que trouve-t-on dans l’Annuaire des Entreprises ?</h2>
           <p>
             Les fiches de l’Annuaire regroupe des informations légales sur
             toutes les personnes morales basées en France (entreprises,

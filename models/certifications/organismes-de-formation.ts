@@ -1,8 +1,5 @@
-import {
-  IOrganismeFormation,
-  clientOrganismeFormation,
-} from '#clients/open-data-soft/dgefp';
 import { HttpNotFound } from '#clients/exceptions';
+import { clientOrganismeFormation } from '#clients/open-data-soft/qualiopi';
 import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
@@ -10,6 +7,16 @@ import {
 } from '#models/api-not-responding';
 import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '..';
+
+export type IOrganismeFormation = {
+  records: {
+    nda: string | null;
+    siret: string | null;
+    stagiaires: number | null;
+    certifications: string[];
+  }[];
+  lastModified: string | null;
+};
 
 export const getOrganismesDeFormation = async (
   uniteLegale: IUniteLegale

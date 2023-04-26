@@ -214,12 +214,10 @@ const SearchFilters: React.FC<{
           display: flex;
           gap: 5px;
         }
-
         #search-localisation-responses {
           max-height: 270px;
           overflow: auto;
         }
-
         @media only screen and (min-width: 1px) and (max-width: 992px) {
           div.select {
             max-width: 100%;
