@@ -67,16 +67,19 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
           useFallback: true,
         });
       } catch (lastFallback: any) {
-        if (e instanceof HttpForbiddenError) {
+        if (lastFallback instanceof HttpForbiddenError) {
           return createNonDiffusibleEtablissement(siret);
+        }
+        if (lastFallback instanceof HttpNotFound) {
+          throw new SiretNotFoundError(siret);
         }
         logSecondSireneInseefailed({
           siret,
           details: lastFallback.message || lastFallback,
         });
 
-        // Siret was not found in both API, return a 404
-        throw new SiretNotFoundError(siret);
+        // both API failed to fetch this siren, return a 500
+        throw lastFallback;
       }
     }
   }

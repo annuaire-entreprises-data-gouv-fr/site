@@ -215,8 +215,8 @@ const getUniteLegale = async (
           details: lastFallback.message || lastFallback,
         });
 
-        // Siren was not found in both API, return a 500
-        throw new HttpServerError('Both API failed');
+        // both API failed to fetch this siren, return a 500
+        throw lastFallback;
       }
     }
   }
@@ -270,7 +270,7 @@ const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
     // INSEE requires three calls to get uniteLegale with etablissementsand siege
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
-        clientUniteLegaleInsee(siren, { useCache: true, useFallback: true }),
+        clientUniteLegaleInsee(siren, inseeOptions),
         clientAllEtablissementsInsee(siren, page, inseeOptions).catch(
           () => null
         ),

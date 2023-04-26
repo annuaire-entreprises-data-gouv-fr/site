@@ -37,7 +37,7 @@ export class httpClientOAuth {
     this._token = null;
   }
 
-  refreshToken = async () => {
+  newToken = async () => {
     try {
       const clientWithNoCache = defaultAxiosInstanceFactory();
       const { data } = await clientWithNoCache(this.token_url, {
@@ -59,20 +59,17 @@ export class httpClientOAuth {
     }
   };
 
-  verifiedToken = async () => {
-    // in case something went wrong during the last refresh
-    if (!this._token) {
-      await this.refreshToken();
-      if (!this._token) {
-        throw new HttpUnauthorizedError('Failed to refresh token');
-      }
-    }
-
+  isTokenExpired = () => {
     const now = new Date().getTime();
-    const isTokenExpired = now > this._token.tokenExpiryTime;
-    if (isTokenExpired) {
+    const tokenExpiryTime = this._token ? this._token.tokenExpiryTime : 0;
+    return now > tokenExpiryTime;
+  };
+
+  getToken = async () => {
+    // in case something went wrong during the last refresh
+    if (!this._token || this.isTokenExpired()) {
       logWarningInSentry('Refreshing Insee token');
-      await this.refreshToken();
+      await this.newToken();
       if (!this._token) {
         throw new HttpUnauthorizedError('Failed to refresh token');
       }
@@ -81,7 +78,7 @@ export class httpClientOAuth {
   };
 
   get = async (url: string, options: AxiosRequestConfig, useCache: boolean) => {
-    const token = await this.verifiedToken();
+    const token = await this.getToken();
 
     return this._cachedAxiosInstance.get(url, {
       timeout: constants.timeout.M,

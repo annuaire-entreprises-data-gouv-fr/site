@@ -4,19 +4,14 @@ import constants from '#models/constants';
 import { httpClientOAuth } from '#utils/network/0auth';
 
 /**
- * API SIRENE by INSEE
+ * Insee client
  *
- * This route calls the official INSEE API, that has several limitations :
- * instable + not many concurrent request allowed.
+ * 0Auth client gets instanced twice :
  *
- * The idea is to only call it when the Etalab SIRENE does not answer :
- * - API Etalab is down
- * - requested company is non-diffusible
- * - requested company is very recent and API Etalab is not yet up to dat
- * - requested company does not exist
+ * One default client used for most calls
+ * One fallback client that use a different secret/id - used when first client gets rate limited
  *
- * IN all three first cases, API SIRENE by INSEE can answer, and we map the answer to the UniteLegale type
- *
+ * NB: we want to limit instance to share the /token authentication calls
  */
 
 export type InseeClientOptions = {
@@ -36,6 +31,18 @@ const fallbackClient = new httpClientOAuth(
   process.env.INSEE_CLIENT_SECRET_FALLBACK
 );
 
+/**
+ * Insee API client
+ *
+ * Two main different config options :
+ * useCache : to activate result caching and avoid unecessary calls
+ * useFallback : to use fallback credentials and avoid rate limiting
+ *
+ * @param route
+ * @param options
+ * @param axiosConfig
+ * @returns
+ */
 export const inseeClientGet = async (
   route: string,
   options = { useFallback: false, useCache: false } as InseeClientOptions,
