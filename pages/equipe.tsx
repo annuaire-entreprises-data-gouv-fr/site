@@ -4,46 +4,40 @@ import { NextPageWithLayout } from './_app';
 
 const team = [
   {
-    photoUrl:
-      'https://media.licdn.com/dms/image/C5603AQGIAb1ihRg0ng/profile-displayphoto-shrink_400_400/0/1643020506289?e=1687996800&v=beta&t=iN937FiOIKwaWpSyLd2NOCFmTvM-yWn8dxj4o1_tT4o',
+    photoUrl: '/images/team/xavier.jpg',
     fullname: 'Xavier Jouppe',
     role: 'Intrapreneur',
   },
   {
-    photoUrl: 'https://avatars3.githubusercontent.com/haekadi?s=600',
+    photoUrl: '/images/team/hajar.jpg',
     fullname: 'Hajar AIT EL KADI',
     role: 'Data engineer',
   },
   {
-    photoUrl:
-      'https://media.licdn.com/dms/image/C5603AQEVYzrMNeEk1A/profile-displayphoto-shrink_400_400/0/1571905688713?e=1687996800&v=beta&t=9FcktZgpPF3AQyjwUkyu_yrGhkw8_r4hmnf85L3xIs8',
+    photoUrl: '/images/team/yoan.jpg',
     fullname: 'Yoan Ficadiere',
     role: 'Développeur',
   },
   {
-    photoUrl:
-      'https://media.licdn.com/dms/image/C4E03AQFC-guw6_nQew/profile-displayphoto-shrink_400_400/0/1517369358753?e=1687996800&v=beta&t=Ij9LlxFEFueOo_8NWMVuiOkYW-Mm2kiVlJSHqOXcO_I',
+    photoUrl: '/images/team/jonathan.jpg',
     fullname: 'Jonathan Louis',
     role: 'Chargé de déploiement SEO',
   },
   {
-    photoUrl:
-      'https://media.licdn.com/dms/image/C4E03AQETVFgZWggrCg/profile-displayphoto-shrink_400_400/0/1525470173766?e=1687996800&v=beta&t=jVgQwkB7rFz5262tZko1HX04lWHBhWQVyTzh3yXf5Lw',
+    photoUrl: '/images/team/karen.jpg',
     fullname: 'Karen Mazmanian',
     role: 'Chargé de déploiement et de communication',
   },
   {
-    photoUrl:
-      'https://media.licdn.com/dms/image/C4D03AQEqDf6tgafatQ/profile-displayphoto-shrink_800_800/0/1637158128002?e=1687996800&v=beta&t=1rdNgdmGxkEg3ov_MHb9NovN4Us3gaIskAcWbaP38dw',
+    photoUrl: '/images/team/anais.jpg',
     fullname: 'Anais Tailhade',
     role: 'Responsable du support utilisateur',
   },
   {
-    photoUrl: 
-      'https://media.licdn.com/dms/image/C4E03AQHzG-_DEKHuAw/profile-displayphoto-shrink_400_400/0/1580212866105?e=1687996800&v=beta&t=9SPkCg8ekw_2M2DQK8htFrkX0t7z_oZV75I-tUBjbbw',
+    photoUrl: '/images/team/jeremie.jpg',
     fullname: 'Jérémie Cook',
     role: 'UX Designer',
-  }
+  },
 ];
 
 const Equipe: NextPageWithLayout = () => {
