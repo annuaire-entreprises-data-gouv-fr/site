@@ -3,6 +3,6 @@ import { resultSolutionEnergie } from '../../mocks/handlers/search/result-soluti
 describe('TVA validation', () => {
   it(`should display the TVA number`, () => {
     cy.visit(`/entreprise/${resultSolutionEnergie.results[0].siren}`);
-    cy.contains('FR27 552 032 534').should('have.length', 1);
+    cy.contains('FR29 528 163 777').should('have.length', 1);
   });
 });
