@@ -17,12 +17,12 @@ export const logRechercheEntreprisefailed = (sentryScope: IScope) =>
 
 export const logRechercheEntrepriseForGoodBotfailed = (sentryScope: IScope) =>
   logWarningInSentry(
-    'GetUniteLegale(Bot) : Sirene Good Bot and  staging/insee fallback failed, return 404',
+    'GetUniteLegale(Bot) : Sirene Good Bot and  staging/insee fallback failed, return 500',
     sentryScope
   );
 
 export const logSecondSireneInseefailed = (sentryScope: IScope) =>
   logWarningInSentry(
-    'GetUniteLegale : Sirene Insee fallback failed, return 404',
+    'GetUniteLegale : Sirene Insee fallback failed, return 500',
     sentryScope
   );

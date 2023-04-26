@@ -8,7 +8,7 @@ import redisStorage from './redis-storage';
 export const CACHE_TIMEOUT = 1000 * 60 * 15;
 
 /**
- * Returns a regular axios instance
+ * Returns a regular axios instance - no cache enabled
  */
 export const defaultAxiosInstanceFactory = (timeout = constants.timeout.L) => {
   const regularInstance = Axios.create({ timeout });

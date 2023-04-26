@@ -7,6 +7,7 @@ const constants = {
   },
   resultsPerPage: { etablissements: 200, search: 30 },
   timeout: {
+    XXS: 350,
     XS: 850,
     S: 1500,
     M: 3000,

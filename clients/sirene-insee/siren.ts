@@ -65,7 +65,10 @@ type IPeriodeUniteLegale = {
   denominationUsuelle3UniteLegale: string;
 };
 
-const factory = (options: InseeClientOptions) => async (siren: Siren) => {
+export const clientUniteLegaleInsee = async (
+  siren: Siren,
+  options: InseeClientOptions
+) => {
   const response = await inseeClientGet(
     routes.sireneInsee.siren + siren,
     options
@@ -75,33 +78,6 @@ const factory = (options: InseeClientOptions) => async (siren: Siren) => {
 
   return mapToDomainObject(siren, data);
 };
-
-/**
- * Call to Sirene INSEE API
- * @param siren
- */
-export const clientUniteLegaleInsee = factory({
-  useCache: true,
-  useFallback: false,
-});
-
-/**
- * Call to Sirene INSEE API - use fallback token
- * @param siren
- */
-export const clientUniteLegaleInseeFallback = factory({
-  useCache: true,
-  useFallback: true,
-});
-
-/**
- * Call to Sirene INSEE API - disable cache
- * @param siren
- */
-export const clientUniteLegaleInseeNoCache = factory({
-  useCache: false,
-  useFallback: false,
-});
 
 const mapToDomainObject = (
   originalSiren: Siren,
