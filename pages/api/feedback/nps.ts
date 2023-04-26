@@ -11,7 +11,7 @@ const logAllEvents = async (req: NextApiRequest) => {
 
     await logEventInMatomo(
       'feedback:nps',
-      req.body['textarea'] || NA,
+      '',
       `mood=${req.body['radio-set-mood']}&type=${
         req.body['radio-set-visitor-type'] || NA
       }&origin=${req.body['radio-set-visitor-origin'] || NA}&date=${

@@ -1,6 +1,5 @@
 import { Client } from '@notionhq/client';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { logEventInMatomo } from '#utils/analytics/matomo';
 import httpClient from '#utils/network';
 import logErrorInSentry from '#utils/sentry';
 
@@ -9,33 +8,8 @@ const databaseId = process.env.NOTION_DATABASE_ID;
 
 const logAllEvents = async (req: NextApiRequest) => {
   try {
-    const today = new Date();
-
-    const NA = 'Non renseigné';
-
-    await logEventInMatomo(
-      'feedback:suggestion',
-      req.body['textarea'] || NA,
-      `type=${req.body['radio-set-visitor-type'] || NA}&date=${
-        today.toISOString().split('T')[0]
-      }&uuid=${req.body['uuid']}`,
-      'suggestion'
-    );
-
-    const data = {
-      username: 'clippy',
-      text: `Note : **${req.body['radio-set-mood']}/10** \nVisiteur : ${
-        req.body['radio-set-visitor-type'] || NA
-      } \nOrigine : ${
-        req.body['radio-set-visitor-origin'] || NA
-      } \nCommentaire : *${req.body['textarea'] || NA}*`,
-    };
-
-    await httpClient({
-      url: process.env.MATTERMOST_HOOK,
-      method: 'POST',
-      data,
-    });
+    await logSuggestionToNotion(req);
+    await logInMattermost(req);
   } catch (e: any) {
     logErrorInSentry('Error in form submission matomo', {
       details: e.toString(),
@@ -43,7 +17,24 @@ const logAllEvents = async (req: NextApiRequest) => {
   }
 };
 
-async function addItemToNotion(req: NextApiRequest) {
+async function logInMattermost(req: NextApiRequest) {
+  const NA = 'Non renseigné';
+  const data = {
+    username: 'clippy',
+    text: `Visiteur : ${
+      req.body['radio-set-visitor-type'] || NA
+    } \nSuggestion : ${
+      req.body['textarea'] || NA
+    } \nLien notion : https://www.notion.so/apigouv/ce7d271037bb4fa0a363e52ac1411e8b?v=a5c2c84d69e7486d9c1c9b9ae90e9f2f&pvs=4`,
+  };
+  await httpClient({
+    url: process.env.MATTERMOST_HOOK,
+    method: 'POST',
+    data,
+  });
+}
+
+async function logSuggestionToNotion(req: NextApiRequest) {
   try {
     await notion.pages.create({
       parent: { database_id: databaseId as string },
@@ -85,7 +76,6 @@ async function addItemToNotion(req: NextApiRequest) {
 const saveAndRedirect = async (req: NextApiRequest, res: NextApiResponse) => {
   // we choose not to await as we dont want to stall the request if any logEvent fails
   logAllEvents(req);
-  addItemToNotion(req);
   res.writeHead(302, {
     Location: '/suggestion/merci',
   });
