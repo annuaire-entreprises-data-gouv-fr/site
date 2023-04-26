@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import constants from '#models/constants';
@@ -13,10 +13,8 @@ const ThanksPage: NextPageWithLayout = () => {
         </div>
         <br />
         <div className="fr-container" style={{ textAlign: 'center' }}>
-          Le formulaire que vous avez rempli <b>est anonyme</b>. Si vous avez
-          une demande précise, écrivez-nous un mail à{' '}
-          <a href={constants.links.mailto}>{constants.links.mail}</a> et nous
-          vous répondrons.
+          Si vous le souhaitez, vous pouvez aussi{' '}
+          <a href="/formulaire/suggestion">nous faire une suggestion</a>.
         </div>
         <br />
         <br />
