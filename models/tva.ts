@@ -1,4 +1,4 @@
-import { clientTVA } from '#clients/tva';
+import { TVAUserException, clientTVA } from '#clients/api-proxy/tva';
 import { Siren, verifySiren } from '#utils/helpers';
 
 export interface ITvaIntracommunautaire {
@@ -31,7 +31,10 @@ export const tvaIntracommunautaire = async (
 
   try {
     return await clientTVA(tvaNumberFromSiren);
-  } catch {
+  } catch (eFirstTry: any) {
+    if (eFirstTry instanceof TVAUserException) {
+      throw eFirstTry;
+    }
     // retry once as VIES randomely reset connection
     try {
       return await clientTVA(tvaNumberFromSiren);

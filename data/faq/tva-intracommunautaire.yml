@@ -1,3 +1,16 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
 administrations:
   - vies
 targets:
@@ -6,7 +19,8 @@ targets:
   - dirigeant
   - independant
 title: Qu’est ce que le numéro de TVA intracommunautaire ?
-description: Le numéro de TVA intracommunautaire est un identifiant unique assigné par l’administration fiscale** à toute entreprise assujettie à la TVA.
+seo:
+  description: Le numéro de TVA intracommunautaire est un identifiant unique assigné par l’administration fiscale** à toute entreprise assujettie à la TVA.
 body: |
   Le numéro de TVA intracommunautaire est un identifiant unique assigné par **l’administration fiscale** à toute entreprise assujettie à la TVA. L'entreprise utilise ensuite ce numéro dans ses factures, ses déclarations d'échange de biens et ses déclarations de TVA.
 

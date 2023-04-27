@@ -1,4 +1,10 @@
 ---
+- date: 26/04/2023
+  title: Ajout de filtres sur la taille d’entreprise et le nombre de salarié
+  description: |
+    Ajout du [filtre catégorie d'entreprise](https://sirene.fr/static-resources/htm/v_sommaire.htm#6) et du filtre [effectif salarié](https://sirene.fr/static-resources/htm/v_sommaire.htm#27)
+- date: 25/04/2023
+  title: 'Ajout de la page notre équipe'
 - date: 17/04/2023
   title: 'Ajout des représentation équilibrée d’une entreprise - Egapro dans le moteur de recherche et la page Labels et certificats'
 - date: 04/04/2023

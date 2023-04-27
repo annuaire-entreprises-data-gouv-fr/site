@@ -1,3 +1,16 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
 administrations:
   - mtpei
 targets:
@@ -5,7 +18,8 @@ targets:
   - dirigeant
   - salarie
 title: Qu’est-ce qu’une convention collective ?
-description: Une convention collective contient les règles de droit du travail (contrat, congés, salaires...) applicables à une entreprise.
+seo:
+  description: Une convention collective contient les règles de droit du travail (contrat, congés, salaires...) applicables à une entreprise.
 body: |
   Une convention collective contient les règles de droit du travail (contrat, congés, salaires...) applicables à une entreprise. 
 

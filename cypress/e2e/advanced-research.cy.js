@@ -20,7 +20,6 @@ describe('Dirigeants and Elus search', () => {
     cy.contains('36 RUE DES PIPISRELLES').should('be.visible');
     cy.contains('METROPOLE DU GRAND PARIS (MGP)').should('be.visible');
   });
-
   it('Search a dirigeant with main search bar', () => {
     cy.visit('/rechercher?terme=xavier+jouppe');
     cy.contains('SCI DE LASLAUDIE').should('be.visible');
@@ -47,28 +46,6 @@ describe('Advanced search on page ' + path, () => {
     cy.contains('Etat administratif').should('be.visible');
   });
 
-  it('filters works', () => {
-    cy.visit(path + '?terme=Ganymede&cp_dep=75008&cp_dep_type=cp&sap=J');
-    cy.get('.results-list').should('have.length', 1);
-
-    cy.visit(path + '?terme=Ganymede&cp_dep=35000&cp_dep_type=cp&sap=J');
-    cy.get('.results-list').should('have.length', 0);
-
-    cy.visit(
-      path +
-        '?terme=Ganymede&cp_dep=35000&cp_dep_label=Rennes+(35000)&cp_dep_type=cp&sap=J'
-    );
-    cy.contains('Rennes (35000)').should('be.visible');
-  });
-
-  it('Etat administratif filters', () => {
-    cy.visit(path + '?terme=ganymede&cp_dep=&fn=&n=jouppe&etat=C');
-    cy.get('.results-list').should('have.length', 1);
-
-    cy.visit(path + '?terme=ganymede&cp_dep=&fn=&n=jouppe&etat=A');
-    cy.get('.results-list').should('have.length', 0);
-  });
-
   it('Filters propagate on pagination', () => {
     cy.visit(path + '?terme=la+poste&cp_dep=&sap=A');
     cy.get('.fr-pagination').should('exist');
@@ -83,14 +60,13 @@ describe('Advanced search on page ' + path, () => {
     cy.contains('Collectivité').click();
     cy.contains('RGE - ').click();
     cy.contains('Appliquer').click({ force: true });
-
-    cy.contains('LE MURETAIN AGGLO').should('be.visible');
   });
 });
 
 describe('Minimum search conditions', () => {
   it('No results if term < 3 and no filters', () => {
     cy.visit('/rechercher?terme=ga');
+
     cy.contains('ne contient pas assez de paramètres').should('have.length', 1);
   });
 

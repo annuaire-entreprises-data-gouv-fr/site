@@ -33,6 +33,12 @@ const routes = {
         'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce',
     },
   },
+  dgefp: {
+    metadata:
+      'https://dgefp.opendatasoft.com/api/datasets/1.0/search/?q=liste-publique-des-of-v2',
+    search:
+      'https://dgefp.opendatasoft.com/api/records/1.0/search/?dataset=liste-publique-des-of-v2',
+  },
   educationNationale: {
     api: 'https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-annuaire-education',
     site: 'https://www.education.gouv.fr/annuaire',
@@ -119,11 +125,8 @@ const routes = {
   sireneInsee: {
     auth: 'https://api.insee.fr/token',
     avis: 'https://avis-situation-sirene.insee.fr/AvisPdf.action',
-    siege:
-      'https://api.insee.fr/entreprises/sirene/V3/siret?q=etablissementSiege:true%20AND%20siren:',
     siren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
     siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',
-    siretBySiren: 'https://api.insee.fr/entreprises/sirene/V3/siret?q=siren:',
   },
   rechercheEntreprise: {
     etablissement: 'https://api-annuaire-entreprises.data.gouv.fr/siret?q=',
@@ -132,10 +135,7 @@ const routes = {
       'https://staging.recherche-entreprises.api.gouv.fr/search',
     uniteLegale: 'https://api-annuaire-entreprises.data.gouv.fr/siren?q=',
   },
-
-  tva: {
-    vies: 'https://ec.europa.eu/taxation_customs/vies/rest-api/ms/FR/vat/',
-  },
+  tva: 'https://rncs-proxy.api.gouv.fr/tva/',
 };
 
 export default routes;

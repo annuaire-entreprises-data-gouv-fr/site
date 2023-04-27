@@ -1,3 +1,21 @@
+# slug: ici mettre le nom du fichier
+# title: titre de la page
+# description: sous-titre
+# footerLabel: libellé dans le footer
+# published: true ou false, si a false la page n'est pas visible dans le footer
+# filter: # demander de l'aide des développeurs
+# seo:
+#   title: titre SEO
+#   description: description SEO
+# reassurance:
+#   - title: titre bloc 1
+#     body: corps bloc 1
+#   - title: titre bloc 2
+#     body: body block 2
+#   - title: titre bloc 3
+#     body: body block 3
+# datasources: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
+# body: le corps du texte, en markdown
 slug: associations
 title: Annuaire des associations
 footerLabel: Associations

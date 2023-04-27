@@ -1,3 +1,16 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
 administrations:
   - inpi
 targets:
@@ -6,7 +19,8 @@ targets:
   - independant
   - agent
 title: Le justificatif d’immatriculation au RNE d’une entreprise est introuvable
-description: Toutes les entreprises doivent être immatriculées au RNE et posséder un justificatif d'immatriculation
+seo:
+  description: Toutes les entreprises doivent être immatriculées au RNE et posséder un justificatif d'immatriculation
 body: |
   Toutes les **entreprises** :
   - **doivent être enregistrées dans la base Sirene** tenue par l’Insee

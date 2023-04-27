@@ -9,7 +9,7 @@ export const NPSBanner: React.FC<{}> = () => (
         <div
           dangerouslySetInnerHTML={{
             __html: `
-              <a onclick="window.closeModal('nps-modal')"  href="/formulaire" target="_blank">
+              <a onclick="window.closeModal('nps-modal')"  href="/formulaire/nps" target="_blank">
                 👍👎 Quel est votre avis sur ce site ?
               </a>`,
           }}

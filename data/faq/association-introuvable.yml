@@ -1,3 +1,16 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
 administrations:
   - mi
   - insee
@@ -5,7 +18,8 @@ targets:
   - agent
   - dirigeant
 title: Pourquoi je ne retrouve pas une association dans les résultats de recherche ?
-description: Seules les associations qui possèdent un numéro SIREN et un numéro SIRET ont une fiche dans l'Annuaire des Entreprises.
+seo:
+  description: Seules les associations qui possèdent un numéro SIREN et un numéro SIRET ont une fiche dans l'Annuaire des Entreprises.
 body: |
   Seules les associations qui possèdent un numéro SIREN et un numéro SIRET ont une fiche dans l'Annuaire des Entreprises.
 

@@ -1,51 +1,28 @@
-const siret = [
-  '35600000000048', // La poste
-  '88087814500015', // SASU
-  '88301031600015', // EI
-  '55203253400646', // cac-40
-  '13002526500013', // administration
-  '20005478100022', // collectivité
-];
-
-siret.forEach((siret) => {
-  describe(`Siret ${siret}`, () => {
-    it('/etablissement page loads', () => {
-      cy.request(`/etablissement/${siret}`).then((resp) => {
-        expect(resp.status).to.eq(200);
-      });
-    });
-    ['annonces', 'entreprise', 'justificatif', 'divers'].map((pagePrefix) => {
-      const path = `/${pagePrefix}/${siret.slice(0, 9)}`;
-      it(`/${pagePrefix} page loads`, () => {
-        cy.request(path).then((resp) => {
-          expect(resp.status).to.eq(200);
-        });
-      });
-    });
-  });
-});
+import { resultGrandParis } from '../../mocks/handlers/search/result-grand-paris';
+import { resultManakinProduction } from '../../mocks/handlers/search/result-manakin-production';
+import { resultSolutionEnergie } from '../../mocks/handlers/search/result-solution-energie';
 
 describe(`Dirigeants and élus pages`, () => {
-  xit('Dirigeant page loads', () => {
-    cy.visit(`/dirigeants/552032534`);
-    cy.contains('Antoine BERNARD DE SAINT AFFRIQUE').should('be.visible');
+  it('Dirigeant page loads', () => {
+    cy.visit(`/dirigeants/${resultSolutionEnergie.results[0].siren}`);
+    cy.contains('Ilan LEVY').should('be.visible');
   });
 
-  xit('Elus page loads', () => {
-    cy.visit(`/elus/200054781`);
+  it('Elus page loads', () => {
+    cy.visit(`/elus/${resultGrandParis.results[0].siren}`);
     cy.contains('Anne HIDALGO').should('be.visible');
   });
 });
 
 describe(`Labels and certificates`, () => {
   it('RGE', () => {
-    cy.visit(`/entreprise/518286976`);
+    cy.visit(`/entreprise/${resultSolutionEnergie.results[0].siren}`);
     cy.contains('Labels et certificats').should('be.visible');
     cy.contains('RGE - Reconnu Garant de l’Environnement').should('be.visible');
   });
 
   it('ESS et Spectacle vivant', () => {
-    cy.visit(`/entreprise/842019051`);
+    cy.visit(`/entreprise/${resultManakinProduction.results[0].siren}`);
     cy.contains('Labels et certificats').should('be.visible');
     cy.contains('ESS - Entreprise Sociale et Solidaire').should('be.visible');
     cy.contains('Entrepreneur de spectacles vivants').should('be.visible');

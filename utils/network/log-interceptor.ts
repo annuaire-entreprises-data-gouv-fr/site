@@ -17,21 +17,20 @@ export const addStartTimeInterceptor = (config: AxiosRequestConfig) => {
  * @param response
  */
 export const logInterceptor = (response: AxiosResponse<any, any>) => {
-  if (process.env.NODE_ENV === 'production') {
-    const endTime = new Date().getTime();
-    //@ts-ignore
-    const startTime = response?.config?.metadata?.startTime;
+  const endTime = new Date().getTime();
+  //@ts-ignore
+  const startTime = response?.config?.metadata?.startTime;
 
-    // logged into stdout
-    console.info(
-      formatLog(
-        response?.config?.url || '',
-        response?.status,
-        //@ts-ignore
-        response?.cached,
-        startTime ? endTime - startTime : undefined
-      )
-    );
-  }
+  // logged into stdout
+  // eslint-disable-next-line no-console
+  console.info(
+    formatLog(
+      response?.config?.url || '',
+      response?.status,
+      //@ts-ignore
+      response?.cached,
+      startTime ? endTime - startTime : undefined
+    )
+  );
   return response;
 };

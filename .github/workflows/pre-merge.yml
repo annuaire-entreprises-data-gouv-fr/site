@@ -15,6 +15,7 @@ env:
   INSEE_CLIENT_ID_FALLBACK: ${{ secrets.INSEE_CLIENT_ID_FALLBACK }}
   INSEE_CLIENT_SECRET_FALLBACK: ${{ secrets.INSEE_CLIENT_SECRET_FALLBACK}}
   PDF_DOWNLOAD_DIRECTORY: /tmp/download
+  NEXT_PUBLIC_API_MOCKING: enabled
   PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
   REDIS_URL: redis://127.0.0.1:6379
   MONCOMPTEPRO_CLIENT_ID: ${{ secrets.MONCOMPTEPRO_CLIENT_ID }}
@@ -172,7 +173,7 @@ jobs:
         # for reusable workflow, must use the full action reference
         uses: bahmutov/gh-build-matrix@main
         with:
-          n: 12 # number of containers to output
+          n: 4 # number of containers to output
 
       - name: Print result 🖨
         run: echo '${{ steps.prepare.outputs.matrix }}'

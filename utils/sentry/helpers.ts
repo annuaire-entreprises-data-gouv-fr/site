@@ -4,19 +4,15 @@
 
 import { IScope, logWarningInSentry } from '.';
 
-export const logFirstSireneInseefailed = (sentryScope: IScope) =>
-  logWarningInSentry(
-    'GetUniteLegale : Sirene Insee failed, fallbacking',
-    sentryScope
-  );
 export const logRechercheEntreprisefailed = (sentryScope: IScope) =>
-  logWarningInSentry(
-    'GetUniteLegale : Recherche Entreprise failed, fallbacking',
-    sentryScope
-  );
+  logWarningInSentry('Recherche Entreprise failed, fallbacking', sentryScope);
 
-export const logSecondSireneInseefailed = (sentryScope: IScope) =>
+export const logSireneInseefailed = (
+  sentryScope: IScope,
+  useFallback = false
+) => {
   logWarningInSentry(
-    'GetUniteLegale : Sirene Insee fallback failed, return 404',
+    `Sirene Insee ${useFallback && 'fallback '}failed`,
     sentryScope
   );
+};

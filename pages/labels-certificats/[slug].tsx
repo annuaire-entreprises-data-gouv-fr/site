@@ -4,7 +4,7 @@ import { CertificationsBioSection } from '#components/labels-and-certificates/bi
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
 import { CertificationESSSection } from '#components/labels-and-certificates/ess';
-import { OrganismeDeFormationSection } from '#components/labels-and-certificates/qaliopi';
+import { OrganismeDeFormationSection } from '#components/labels-and-certificates/organismes-de-formation';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
 import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';
@@ -28,6 +28,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   egapro,
   uniteLegale,
   entrepreneurSpectacles,
+  organismesDeFormation,
   metadata: { session },
 }) => {
   return (
@@ -45,9 +46,6 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
         {!checkHasLabelsAndCertificates(uniteLegale) && (
           <p>Cette structure ne possède aucun label ou certificat.</p>
         )}
-        {uniteLegale.complements.estOrganismeFormation && (
-          <OrganismeDeFormationSection />
-        )}
         {uniteLegale.complements.estRge && (
           <CertificationsRGESection
             uniteLegale={uniteLegale}
@@ -55,6 +53,11 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
           />
         )}
         {uniteLegale.complements.estEss && <CertificationESSSection />}
+        {uniteLegale.complements.estOrganismeFormation && (
+          <OrganismeDeFormationSection
+            organismesDeFormation={organismesDeFormation}
+          />
+        )}
         {uniteLegale.complements.egaproRenseignee && (
           <EgaproSection egapro={egapro} />
         )}
@@ -76,8 +79,14 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
 
-    const { uniteLegale, rge, entrepreneurSpectacles, egapro, bio } =
-      await getCertificationsFromSlug(slug);
+    const {
+      uniteLegale,
+      rge,
+      entrepreneurSpectacles,
+      egapro,
+      bio,
+      organismesDeFormation,
+    } = await getCertificationsFromSlug(slug);
 
     return {
       props: {
@@ -86,6 +95,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
         entrepreneurSpectacles,
         rge,
         uniteLegale,
+        organismesDeFormation,
       },
     };
   }
