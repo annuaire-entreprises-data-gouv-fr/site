@@ -147,6 +147,7 @@ export interface IUniteLegaleComplements {
   estFiness: boolean;
   egaproRenseignee: boolean;
   estServicePublic: boolean;
+  estQualiopi: boolean;
   estRge: boolean;
   estOrganismeFormation: boolean;
   estUai: boolean;

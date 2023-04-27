@@ -105,6 +105,7 @@ export type IComplements = {
   est_bio: boolean;
   est_ess: boolean;
   est_organisme_formation: boolean;
+  est_qualiopi: boolean;
   est_finess: boolean;
   est_service_public: boolean;
   egapro_renseignee: boolean;

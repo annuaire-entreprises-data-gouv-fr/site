@@ -34,7 +34,7 @@ export const OrganismeDeFormationSection = ({
     if (isNotFound) {
       return (
         <Section
-          title="Qualiopi - Organisme de formation"
+          title="Organisme de formation"
           sources={[EAdministration.MTPEI]}
         >
           <p>
@@ -56,7 +56,7 @@ export const OrganismeDeFormationSection = ({
 
   return (
     <Section
-      title="Qualiopi - Organisme de formation"
+      title="Organisme de formation"
       sources={[EAdministration.MTPEI]}
       lastModified={organismesDeFormation.lastModified}
     >

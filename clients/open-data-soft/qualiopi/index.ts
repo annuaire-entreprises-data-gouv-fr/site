@@ -30,7 +30,6 @@ const mapToDomainObject = (record: IOrganismesFormationRecord) => {
   return {
     nda: record.numerodeclarationactivite || null,
     stagiaires: record.informationsdeclarees_nbstagiaires || null,
-    siret: record.siretetablissementdeclarant || null,
     certifications: (record.certifications || '').split('/'),
   };
 };
