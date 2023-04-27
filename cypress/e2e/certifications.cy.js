@@ -10,7 +10,7 @@ describe('Certifications', () => {
     });
     it('Should display company phone number', () => {
       cy.visit(`/labels-certificats/${resultSolutionEnergie.results[0].siren}`);
-      cy.contains('06 98 39 31 19');
+      cy.contains('01 49 48 14 50');
     });
   });
 });
