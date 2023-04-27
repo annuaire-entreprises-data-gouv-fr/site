@@ -127,7 +127,6 @@ class UniteLegaleBuilder {
       } else {
         return {
           ...uniteLegaleInsee,
-          ...uniteLegaleRechercheEntreprise,
           complements: {
             ...uniteLegaleInsee?.complements,
             ...uniteLegaleRechercheEntreprise.complements,
