@@ -14,7 +14,7 @@ const logAllEvents = async (req: NextApiRequest) => {
 
     const mattermostData = {
       username: 'clippy',
-      text: `Visiteur : ${visitorType} \nSuggestion : ${suggestion} \nLien notion : https://www.notion.so/apigouv/${notionDatabaseId}?v=a5c2c84d69e7486d9c1c9b9ae90e9f2f&pvs=4`,
+      text: `**Nouvelle suggestion** \nVisiteur : ${visitorType} \nSuggestion : ${suggestion} \nLien notion : [👉 ici](https://www.notion.so/apigouv/${notionDatabaseId}?v=a5c2c84d69e7486d9c1c9b9ae90e9f2f&pvs=4)`,
     };
 
     await logInMattermost(mattermostData);
