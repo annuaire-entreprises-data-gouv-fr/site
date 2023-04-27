@@ -4,25 +4,15 @@
 
 import { IScope, logWarningInSentry } from '.';
 
-export const logFirstSireneInseefailed = (sentryScope: IScope) =>
-  logWarningInSentry(
-    'GetUniteLegale : Sirene Insee failed, fallback on Sirene Good Bot',
-    sentryScope
-  );
 export const logRechercheEntreprisefailed = (sentryScope: IScope) =>
-  logWarningInSentry(
-    'GetUniteLegale : Sirene Good Bot failed, fallback to Sirene Insee fallback',
-    sentryScope
-  );
+  logWarningInSentry('Recherche Entreprise failed, fallbacking', sentryScope);
 
-export const logRechercheEntrepriseForGoodBotfailed = (sentryScope: IScope) =>
+export const logSireneInseefailed = (
+  sentryScope: IScope,
+  useFallback = false
+) => {
   logWarningInSentry(
-    'GetUniteLegale(Bot) : Sirene Good Bot and  staging/insee fallback failed, return 500',
+    `Sirene Insee ${useFallback && 'fallback '}failed`,
     sentryScope
   );
-
-export const logSecondSireneInseefailed = (sentryScope: IScope) =>
-  logWarningInSentry(
-    'GetUniteLegale : Sirene Insee fallback failed, return 500',
-    sentryScope
-  );
+};
