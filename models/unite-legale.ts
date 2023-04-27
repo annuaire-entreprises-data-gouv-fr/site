@@ -38,7 +38,7 @@ interface IUniteLegaleOptions {
 }
 
 /**
- * Return an uniteLegale given an existing siren
+ * Return an uniteLegale if and only if siren is valid and exists otherwise throw SirenInvalid or SirenNotFound errors
  */
 export const getUniteLegaleFromSlug = async (
   slug: string,
