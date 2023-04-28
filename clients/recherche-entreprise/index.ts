@@ -1,6 +1,9 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import { etatFromEtatAdministratifInsee } from '#clients/sirene-insee/helpers';
+import {
+  etatFromEtatAdministratifInsee,
+  statuDiffusionFromStatutDiffusionInsee,
+} from '#clients/sirene-insee/helpers';
 import constants from '#models/constants';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
@@ -133,6 +136,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     tranche_effectif_salarie,
     date_creation = '',
     date_mise_a_jour = '',
+    statut_diffusion = 'O',
     etablissements = [],
   } = result;
 
@@ -182,8 +186,11 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       1,
       result.nombre_etablissements
     ),
-    statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     etatAdministratif,
+    statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
+      statut_diffusion,
+      siren
+    ),
     nomComplet,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(nature_juridique),
     libelleTrancheEffectif: libelleFromCodeEffectif(tranche_effectif_salarie),

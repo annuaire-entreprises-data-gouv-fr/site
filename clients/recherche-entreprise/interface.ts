@@ -18,6 +18,7 @@ export type IResult = {
   date_mise_a_jour: string;
   dirigeants: IDirigeant[];
   etat_administratif: string;
+  statut_diffusion: 'O' | 'P';
   nature_juridique: string;
   nom_raison_sociale: string;
   section_activite_principale: string;

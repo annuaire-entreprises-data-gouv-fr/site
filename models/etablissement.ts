@@ -5,9 +5,8 @@ import { getGeoLoc } from '#models/geo-loc';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { extractSirenFromSiret, Siret, verifySiret } from '#utils/helpers';
 import {
-  logFirstSireneInseefailed,
   logRechercheEntreprisefailed,
-  logSecondSireneInseefailed,
+  logSireneInseefailed,
 } from '#utils/sentry/helpers';
 import {
   createDefaultEtablissement,
@@ -27,9 +26,10 @@ const getEtablissementFromSlug = async (
 
   const isBot = options?.isBot || false;
 
-  const etablissement = true
-    ? await getEtablissementForGoodBot(siret)
-    : await getEtablissement(siret);
+  const etablissement =
+    true || isBot
+      ? await getEtablissementForGoodBot(siret)
+      : await getEtablissement(siret);
 
   return etablissement;
 };
@@ -51,7 +51,7 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
       throw new SiretNotFoundError(siret);
     }
 
-    logFirstSireneInseefailed({ siret, details: e.message });
+    logSireneInseefailed({ siret, details: e.message }, false);
 
     try {
       return await clientEtablissementRechercheEntreprise(siret);
@@ -73,10 +73,13 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
         if (lastFallback instanceof HttpNotFound) {
           throw new SiretNotFoundError(siret);
         }
-        logSecondSireneInseefailed({
-          siret,
-          details: lastFallback.message || lastFallback,
-        });
+        logSireneInseefailed(
+          {
+            siret,
+            details: lastFallback.message || lastFallback,
+          },
+          true
+        );
 
         // both API failed to fetch this siren, return a 500
         throw lastFallback;

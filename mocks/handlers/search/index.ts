@@ -1,7 +1,10 @@
 import { rest } from 'msw';
 import { resultFinassure } from './result-finassure';
 import { resultGrandParis } from './result-grand-paris';
-import { resultLaPoste } from './result-la-poste';
+import {
+  resultLaPoste,
+  sirenSiege as sirenSiegeLaPoste,
+} from './result-la-poste';
 import { resultManakinProduction } from './result-manakin-production';
 import { resultRaphael } from './result-raphael';
 import { resultRedNeedles } from './result-red-needles';
@@ -46,6 +49,9 @@ export const handlers = [
         return res(ctx.json(resultRedNeedles));
       }
       if (_req.url.searchParams.get('q') === resultLaPoste.results[0].siren) {
+        return res(ctx.json(resultLaPoste));
+      }
+      if (_req.url.searchParams.get('q') === sirenSiegeLaPoste) {
         return res(ctx.json(resultLaPoste));
       }
       if (_req.url.searchParams.get('q') === resultRaphael.results[0].siren) {
