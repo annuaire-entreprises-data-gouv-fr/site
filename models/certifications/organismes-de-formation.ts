@@ -11,9 +11,12 @@ import { IUniteLegale } from '..';
 export type IOrganismeFormation = {
   records: {
     nda: string | null;
-    siret: string | null;
+    exNda: string | null;
     stagiaires: number | null;
     certifications: string[];
+    specialite: string;
+    dateDeclaration: string | null;
+    region: string | null;
   }[];
   lastModified: string | null;
 };

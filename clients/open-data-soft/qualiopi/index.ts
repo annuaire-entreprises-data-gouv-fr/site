@@ -29,6 +29,11 @@ export const clientOrganismeFormation = async (
 const mapToDomainObject = (record: IOrganismesFormationRecord) => {
   return {
     nda: record.numerodeclarationactivite || null,
+    exNda: record.numerosdeclarationactiviteprecedent || null,
+    region: record.reg_name || null,
+    dateDeclaration:
+      record.informationsdeclarees_datedernieredeclaration || null,
+    specialite: record.toutes_specialites,
     stagiaires: record.informationsdeclarees_nbstagiaires || null,
     certifications: (record.certifications || '').split('/'),
   };

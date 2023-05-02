@@ -29,11 +29,11 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     <>
       {estOrganismeFormation &&
         (estQualiopi ? (
-          <InformationTooltip label="Cette structure est déclarée en tant qu’Organisme de formation et elle est certifiée Qualiopi">
+          <InformationTooltip label="Cette structure est déclarée en tant qu’organisme de formation et elle est certifiée Qualiopi">
             <LabelAndCertificateBadge label="Organisme de formation (certifié Qualiopi)" />
           </InformationTooltip>
         ) : (
-          <InformationTooltip label="Cette structure est déclarée en tant qu’Organisme de formation">
+          <InformationTooltip label="Cette structure est déclarée en tant qu’organisme de formation">
             <LabelAndCertificateBadge label="Organisme de formation" />
           </InformationTooltip>
         ))}

@@ -10,10 +10,12 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IOrganismeFormation } from '#models/certifications/organismes-de-formation';
-import { formatIntFr, formatSiret } from '#utils/helpers';
+import { IUniteLegale } from '#models/index';
+import { formatIntFr } from '#utils/helpers';
 
 type OrganismeDeFormationSectionProps = {
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
+  uniteLegale: IUniteLegale;
 };
 
 const FAQQaliopi = () => (
@@ -25,9 +27,28 @@ const FAQQaliopi = () => (
   </FAQLink>
 );
 
+const OrganismeFormationLabel = ({ estQualiopi = false }) => (
+  <>
+    <p>Cette structure est un organisme de formation déclaré. </p>
+    {estQualiopi ? (
+      <>
+        Cette structure est <FAQQaliopi />. C’est un organisme dont les
+        formations peuvent obtenir un financement public.
+      </>
+    ) : (
+      <>
+        Cette structure n’est pas <FAQQaliopi />.
+      </>
+    )}
+  </>
+);
+
 export const OrganismeDeFormationSection = ({
   organismesDeFormation,
+  uniteLegale,
 }: OrganismeDeFormationSectionProps) => {
+  const estQualiopi = uniteLegale.complements.estQualiopi;
+
   if (isAPINotResponding(organismesDeFormation)) {
     const isNotFound = organismesDeFormation.errorType === 404;
 
@@ -37,12 +58,7 @@ export const OrganismeDeFormationSection = ({
           title="Organisme de formation"
           sources={[EAdministration.MTPEI]}
         >
-          <p>
-            Cette structure est <FAQQaliopi />. C’est un organisme dont les
-            formations peuvent obtenir un financement public. En revanche nous
-            n’avons pas retrouvé le détail de ses certifications auprès de la
-            <MTPEI />
-          </p>
+          <OrganismeFormationLabel estQualiopi={estQualiopi} />
         </Section>
       );
     }
@@ -54,40 +70,66 @@ export const OrganismeDeFormationSection = ({
     );
   }
 
+  const head = [
+    'Numéro Déclaration Activité (NDA)',
+    'Détails',
+    ...(estQualiopi ? ['Certification(s) Qualiopi'] : []),
+  ];
+
+  const body = organismesDeFormation.records.map((fields) => [
+    <Tag>{fields.nda ? fields.nda : 'Inconnu'}</Tag>,
+    <>
+      {fields.specialite && (
+        <>
+          <b>Spécialité :</b> {fields.specialite}
+          <br />
+        </>
+      )}
+      {fields.stagiaires && (
+        <>
+          <b>Nombre de stagiaires :</b> {fields.stagiaires}
+          <br />
+        </>
+      )}
+      {fields.dateDeclaration && (
+        <>
+          <b>Déclaration : </b> le {fields.dateDeclaration}
+          {fields.region && <> en région {fields.region}</>}
+          <br />
+        </>
+      )}
+
+      {fields.exNda && (
+        <>
+          <br />
+          <i>Anciens n° NDA : </i>
+          {fields.exNda}
+        </>
+      )}
+    </>,
+    ...(estQualiopi
+      ? [
+          fields.certifications.map((certification) => (
+            <Tag color="info" key={certification}>
+              {certification}
+            </Tag>
+          )),
+        ]
+      : []),
+  ]);
+
   return (
     <Section
       title="Organisme de formation"
       sources={[EAdministration.MTPEI]}
       lastModified={organismesDeFormation.lastModified}
     >
-      Cette structure est <FAQQaliopi />. C’est un organisme dont les formations
-      peuvent obtenir un financement public.
-      <br />
-      <br />
-      <FullTable
-        head={[
-          "Siret de l'établissement certifié",
-          'Numéro Déclaration Activité',
-          'Nombre de stagiaires',
-          'Certification(s)',
-        ]}
-        body={organismesDeFormation.records.map((fields) => [
-          fields.siret ? (
-            <a href={`/etablissement/${fields.siret}`}>
-              {formatSiret(fields.siret)}
-            </a>
-          ) : (
-            <i>Non renseigné</i>
-          ),
-          <Tag>{fields.nda ? formatIntFr(fields.nda) : 'Inconnu'}</Tag>,
-          fields.stagiaires ? fields.stagiaires : <i>Non renseigné</i>,
-          fields.certifications.map((certification) => (
-            <Tag color="info" key={certification}>
-              {certification}
-            </Tag>
-          )),
-        ])}
+      <OrganismeFormationLabel
+        estQualiopi={uniteLegale.complements.estQualiopi}
       />
+      <br />
+      <br />
+      <FullTable head={head} body={body} />
     </Section>
   );
 };
