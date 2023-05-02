@@ -1,4 +1,4 @@
-export interface IAPIBilanResponse {
+export type IAPIBilanResponse = {
   ratio_de_vetuste: number;
   rotation_des_stocks_jours: number;
   marge_ebe: number;
@@ -19,4 +19,4 @@ export interface IAPIBilanResponse {
   capacite_de_remboursement: number;
   ratio_de_liquidite: number;
   taux_d_endettement: number;
-}
+};

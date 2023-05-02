@@ -1,4 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
+import { clientAgregatsComptableCollectivite } from '#clients/open-data-soft/agregats-comptable-collectivite';
 import { clientBilansFinanciers } from '#clients/open-data-soft/bilans-financiers';
 import { EAdministration } from '#models/administrations';
 import {
@@ -54,6 +55,16 @@ export const getDonneesFinancieresFromSlug = async (
         return APINotRespondingFactory(EAdministration.MEF, 404);
       }
       logErrorInSentry('Error in API data financieres', {
+        siren,
+        details: e.toString(),
+      });
+      return APINotRespondingFactory(EAdministration.MEF, e.status || 500);
+    }),
+    clientAgregatsComptableCollectivite(siren).catch((e) => {
+      if (e instanceof HttpNotFound) {
+        return APINotRespondingFactory(EAdministration.MEF, 404);
+      }
+      logErrorInSentry('Error in API agregats comptable collectivite', {
         siren,
         details: e.toString(),
       });

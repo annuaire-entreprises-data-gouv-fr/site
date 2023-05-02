@@ -1,12 +1,14 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import { BilansFinanciersSection } from '#components/bilans-financiers-section';
+import { AgregatsComptableCollectivite } from '#components/donnees-financieres/agregats-comptable-collectivite';
+import { BilansFinanciersSection } from '#components/donnees-financieres/bilans-financiers';
 import Meta from '#components/meta';
 import Title, { FICHE } from '#components/title-section';
 import {
   getDonneesFinancieresFromSlug,
   IDonneesFinancieres,
 } from '#models/donnees-financieres';
+import { isCollectiviteTerritoriale } from '#models/index';
 import { getCompanyPageTitle } from '#utils/helpers/get-company-page-title';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
@@ -38,6 +40,12 @@ const FinancePage: NextPageWithLayout<IProps> = ({
           bilansFinanciers={bilansFinanciers}
           uniteLegale={uniteLegale}
         />
+        {isCollectiviteTerritoriale(uniteLegale) && (
+          <AgregatsComptableCollectivite
+            agregatsComptable={agregatsComptable}
+            uniteLegale={uniteLegale}
+          />
+        )}
       </div>
     </>
   );
