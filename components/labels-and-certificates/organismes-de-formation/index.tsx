@@ -29,14 +29,23 @@ const FAQQaliopi = () => (
 
 const OrganismeFormationLabel = ({ estQualiopi = false }) => (
   <>
-    <p>Cette structure est un organisme de formation déclaré. </p>
+    Cette structure est un organisme de formation,{' '}
+    <FAQLink tooltipLabel="à jour de ses obligation.">
+      Un organisme de formation est à jour de ses obligations si il a bien
+      déclaré auprès du Préfet de Région territorialement compétent son Bilan
+      Pédagogique et Financier.
+    </FAQLink>
     {estQualiopi ? (
       <>
+        <br />
+        <br />
         Cette structure est <FAQQaliopi />. C’est un organisme dont les
         formations peuvent obtenir un financement public.
       </>
     ) : (
       <>
+        <br />
+        <br />
         Cette structure n’est pas <FAQQaliopi />.
       </>
     )}
@@ -94,16 +103,8 @@ export const OrganismeDeFormationSection = ({
       {fields.dateDeclaration && (
         <>
           <b>Déclaration : </b> le {fields.dateDeclaration}
-          {fields.region && <> en région {fields.region}</>}
+          {fields.region && <>, en région {fields.region}</>}
           <br />
-        </>
-      )}
-
-      {fields.exNda && (
-        <>
-          <br />
-          <i>Anciens n° NDA : </i>
-          {fields.exNda}
         </>
       )}
     </>,
