@@ -33,23 +33,7 @@ const SuggestionPage: NextPageWithLayout = () => {
             </fieldset>
             <fieldset>
               <legend>
-                <h2>2 ・ Quel est votre e-mail (requis) ?</h2>
-              </legend>
-              <label className="fr-label" htmlFor="email">
-                Nous vous contacterons si nous avons besoin de plus
-                d’informations.
-              </label>
-              <input
-                className="fr-input"
-                id="email"
-                name="email"
-                required
-                type="email"
-              />
-            </fieldset>
-            <fieldset>
-              <legend>
-                <h2>3 ・ Que pouvons-nous améliorer (requis) ?</h2>
+                <h2>2 ・ Que pouvons-nous améliorer (requis) ?</h2>
               </legend>
               <div className="fr-input-group">
                 <label className="fr-label" htmlFor="feedback">
@@ -61,8 +45,25 @@ const SuggestionPage: NextPageWithLayout = () => {
                   id="feedback"
                   name="textarea"
                   required
+                  rows={5}
                 ></textarea>
               </div>
+            </fieldset>
+            <fieldset>
+              <legend>
+                <h2>3 ・ Quel est votre e-mail ?</h2>
+              </legend>
+              <label className="fr-label" htmlFor="email">
+                Vous pouvez nous laisser votre adresse email si vous acceptez
+                d’être recontacté.
+              </label>
+              <input
+                className="fr-input"
+                id="email"
+                name="email"
+                required
+                type="email"
+              />
             </fieldset>
             <br />
             <div className="layout-center">
