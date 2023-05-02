@@ -16,7 +16,6 @@ import {
 } from '#models/index';
 import { ISearchResult, ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
-import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
 import {
   verifySiren,
   formatFirstNames,

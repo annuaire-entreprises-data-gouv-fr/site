@@ -165,6 +165,7 @@ export const createDefaultUniteLegaleComplements = () => {
     estFiness: false,
     estRge: false,
     estOrganismeFormation: false,
+    estQualiopi: false,
     estUai: false,
   };
 };
