@@ -22,6 +22,7 @@ interface IProps extends IPropsWithMetadata, IDonneesFinancieres {}
 const FinancePage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   bilansFinanciers,
+  agregatsComptableCollectivite,
   metadata: { session },
 }) => {
   return (
@@ -42,7 +43,7 @@ const FinancePage: NextPageWithLayout<IProps> = ({
         />
         {isCollectiviteTerritoriale(uniteLegale) && (
           <AgregatsComptableCollectivite
-            agregatsComptable={agregatsComptable}
+            agregatsComptableCollectivite={agregatsComptableCollectivite}
             uniteLegale={uniteLegale}
           />
         )}
@@ -55,11 +56,12 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
 
-    const { uniteLegale, bilansFinanciers } =
+    const { uniteLegale, bilansFinanciers, agregatsComptableCollectivite } =
       await getDonneesFinancieresFromSlug(slug);
 
     return {
       props: {
+        agregatsComptableCollectivite,
         uniteLegale,
         bilansFinanciers,
         metadata: { useReact: true },

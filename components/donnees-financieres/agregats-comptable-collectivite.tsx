@@ -19,11 +19,11 @@ const ColorCircle = ({ color }: { color: string }) => (
 );
 
 export const AgregatsComptableCollectivite: React.FC<IDonneesFinancieres> = ({
-  agregatsComptable,
+  agregatsComptableCollectivite,
 }) => {
   const title = 'Agrégats comptables';
-  if (isAPINotResponding(agregatsComptable)) {
-    const isNotFound = agregatsComptable.errorType === 404;
+  if (isAPINotResponding(agregatsComptableCollectivite)) {
+    const isNotFound = agregatsComptableCollectivite.errorType === 404;
     if (isNotFound) {
       return (
         <Section title={title} sources={[EAdministration.MEF]}>
@@ -35,15 +35,15 @@ export const AgregatsComptableCollectivite: React.FC<IDonneesFinancieres> = ({
     }
     return (
       <AdministrationNotResponding
-        administration={agregatsComptable.administration}
-        errorType={agregatsComptable.errorType}
+        administration={agregatsComptableCollectivite.administration}
+        errorType={agregatsComptableCollectivite.errorType}
         title={title}
       />
     );
   }
 
   // only five last bilans sorted from oldest to latest
-  const sortedAgregatsComptable = agregatsComptable.bilans
+  const sortedAgregatsComptable = agregatsComptableCollectivite.bilans
     .sort(
       (a, b) =>
         new Date(b.dateClotureExercice).getTime() -

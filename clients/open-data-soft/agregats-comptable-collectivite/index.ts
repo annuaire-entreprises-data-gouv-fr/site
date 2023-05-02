@@ -4,6 +4,17 @@ import { Siren } from '#utils/helpers';
 import odsClient from '..';
 import { IAPIAgregatsComptableResponse } from './interface';
 
+export type IAgregatComptable = {
+  actifImmobilise: number;
+  immobilisationsIncorporelles: number;
+  subventionsVersees: number;
+  immobilisationsIncorporellesCours: number;
+  immobilisationsCorporelles: number;
+  capitauxPropres: number;
+  resultat: number;
+  subventionsTransferables: number;
+  dettes: number;
+};
 /**
  * Agrégats comptables 2019 des collectivités et des établissements publics locaux
  * https://data.economie.gouv.fr/explore/dataset/agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-2019/api/
@@ -24,15 +35,16 @@ export const clientAgregatsComptableCollectivite = async (siren: Siren) => {
     throw new HttpNotFound(siren);
   }
 
+  const records = response.records as IAPIAgregatsComptableResponse[];
   return {
-    bilans: response.records.map(mapToDomainObject),
+    agregatsComptable: records.map(mapToDomainObject),
     lastModified: response.lastModified,
   };
 };
 
 const mapToDomainObject = (
-  agregatsComptableCollectivite: IAPIAgregatsComptableResponse
-) => {
+  agregatComptableCollectivite: IAPIAgregatsComptableResponse
+): IAgregatComptable => {
   const {
     a1 = 0,
     a11 = 0,
@@ -43,7 +55,7 @@ const mapToDomainObject = (
     p13 = 0,
     p14 = 0,
     p3 = 0,
-  } = agregatsComptableCollectivite;
+  } = agregatComptableCollectivite;
 
   return {
     actifImmobilise: a1,

@@ -1,5 +1,8 @@
 import { HttpNotFound } from '#clients/exceptions';
-import { clientAgregatsComptableCollectivite } from '#clients/open-data-soft/agregats-comptable-collectivite';
+import {
+  IAgregatComptable,
+  clientAgregatsComptableCollectivite,
+} from '#clients/open-data-soft/agregats-comptable-collectivite';
 import { clientBilansFinanciers } from '#clients/open-data-soft/bilans-financiers';
 import { EAdministration } from '#models/administrations';
 import {
@@ -9,13 +12,19 @@ import {
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
-import { IUniteLegale } from '..';
+import { IUniteLegale, isCollectiviteTerritoriale } from '..';
 
 export interface IDonneesFinancieres {
   uniteLegale: IUniteLegale;
   bilansFinanciers:
     | {
         bilans: IBilanFinancier[];
+        lastModified: string | null;
+      }
+    | IAPINotRespondingError;
+  agregatsComptableCollectivite?:
+    | {
+        agregatsComptable: IAgregatComptable[];
         lastModified: string | null;
       }
     | IAPINotRespondingError;
@@ -43,6 +52,7 @@ export interface IBilanFinancier {
   ratioDeLiquidite: number;
   tauxDEndettement: number;
 }
+export interface IAggregatsComptableCollectivite {}
 
 export const getDonneesFinancieresFromSlug = async (
   slug: string
@@ -60,17 +70,27 @@ export const getDonneesFinancieresFromSlug = async (
       });
       return APINotRespondingFactory(EAdministration.MEF, e.status || 500);
     }),
-    clientAgregatsComptableCollectivite(siren).catch((e) => {
-      if (e instanceof HttpNotFound) {
-        return APINotRespondingFactory(EAdministration.MEF, 404);
-      }
-      logErrorInSentry('Error in API agregats comptable collectivite', {
-        siren,
-        details: e.toString(),
-      });
-      return APINotRespondingFactory(EAdministration.MEF, e.status || 500);
-    }),
   ]);
+
+  if (isCollectiviteTerritoriale(uniteLegale)) {
+    const agregatsComptableCollectivite =
+      await clientAgregatsComptableCollectivite(siren).catch((e) => {
+        if (e instanceof HttpNotFound) {
+          return APINotRespondingFactory(EAdministration.MEF, 404);
+        }
+        logErrorInSentry('Error in API agregats comptable collectivite', {
+          siren,
+          details: e.toString(),
+        });
+        return APINotRespondingFactory(EAdministration.MEF, e.status || 500);
+      });
+    return {
+      uniteLegale,
+      bilansFinanciers,
+      agregatsComptableCollectivite,
+    };
+  }
+
   return {
     uniteLegale,
     bilansFinanciers,
