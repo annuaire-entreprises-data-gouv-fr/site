@@ -111,11 +111,13 @@ export const OrganismeDeFormationSection = ({
     </>,
     ...(estQualiopi
       ? [
-          fields.certifications.map((certification) => (
-            <Tag color="info" key={certification}>
-              {certification}
-            </Tag>
-          )),
+          fields.certifications.map((certification) =>
+            certification ? (
+              <Tag color="info" key={certification}>
+                {certification}
+              </Tag>
+            ) : null
+          ),
         ]
       : []),
   ]);
