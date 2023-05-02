@@ -56,6 +56,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
         {uniteLegale.complements.estOrganismeFormation && (
           <OrganismeDeFormationSection
             organismesDeFormation={organismesDeFormation}
+            uniteLegale={uniteLegale}
           />
         )}
         {uniteLegale.complements.egaproRenseignee && (
