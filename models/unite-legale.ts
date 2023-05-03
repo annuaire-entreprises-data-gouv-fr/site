@@ -107,18 +107,18 @@ class UniteLegaleBuilder {
 
     if (isAPINotResponding(uniteLegaleInsee)) {
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
-        const uniteLegaleInseeFallbacked = await fetchUniteLegaleFromInsee(
-          this._siren,
-          this._page,
-          {
-            useFallback: true,
-            useCache,
-          }
-        );
-        if (isAPINotResponding(uniteLegaleInseeFallbacked)) {
-          throw new HttpServerError('Sirene Insee fallback failed, return 500');
-        }
-        return uniteLegaleInseeFallbacked;
+        // const uniteLegaleInseeFallbacked = await fetchUniteLegaleFromInsee(
+        //   this._siren,
+        //   this._page,
+        //   {
+        //     useFallback: true,
+        //     useCache,
+        //   }
+        // );
+        // if (isAPINotResponding(uniteLegaleInseeFallbacked)) {
+        // }
+        // return uniteLegaleInseeFallbacked;
+        throw new HttpServerError('Sirene Insee fallback failed, return 500');
       } else {
         return uniteLegaleRechercheEntreprise;
       }
