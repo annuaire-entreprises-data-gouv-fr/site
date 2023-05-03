@@ -1,6 +1,9 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import { etatFromEtatAdministratifInsee } from '#clients/sirene-insee/helpers';
+import {
+  etatFromEtatAdministratifInsee,
+  statuDiffusionFromStatutDiffusionInsee,
+} from '#clients/sirene-insee/helpers';
 import constants from '#models/constants';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
@@ -13,7 +16,6 @@ import {
 } from '#models/index';
 import { ISearchResult, ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
-import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
 import {
   verifySiren,
   formatFirstNames,
@@ -118,6 +120,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       egapro_renseignee = false,
       est_entrepreneur_individuel = false,
       est_organisme_formation = false,
+      est_qualiopi = false,
       est_entrepreneur_spectacle = false,
       est_ess = false,
       est_finess = false,
@@ -132,6 +135,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     tranche_effectif_salarie,
     date_creation = '',
     date_mise_a_jour = '',
+    statut_diffusion = 'O',
     etablissements = [],
   } = result;
 
@@ -181,8 +185,11 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       1,
       result.nombre_etablissements
     ),
-    statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     etatAdministratif,
+    statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
+      statut_diffusion,
+      siren
+    ),
     nomComplet,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(nature_juridique),
     libelleTrancheEffectif: libelleFromCodeEffectif(tranche_effectif_salarie),
@@ -204,6 +211,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       egaproRenseignee: egapro_renseignee,
       estRge: est_rge,
       estOrganismeFormation: est_organisme_formation,
+      estQualiopi: est_qualiopi,
       estUai: est_uai,
     },
     association: {
@@ -276,6 +284,8 @@ const mapToEtablissement = (
     est_siege = false,
     nom_commercial = '',
     activite_principale = '',
+    date_creation = '',
+    date_debut_activite = '',
   } = etablissement;
 
   const enseigne = (liste_enseignes || []).join(' ');
@@ -307,6 +317,8 @@ const mapToEtablissement = (
     denomination: nom_commercial,
     libelleActivitePrincipale:
       libelleFromCodeNAFWithoutNomenclature(activite_principale),
+    dateCreation: date_creation,
+    dateDebutActivite: date_debut_activite,
   };
 };
 

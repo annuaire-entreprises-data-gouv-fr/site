@@ -18,6 +18,7 @@ export type IResult = {
   date_mise_a_jour: string;
   dirigeants: IDirigeant[];
   etat_administratif: string;
+  statut_diffusion: 'O' | 'P';
   nature_juridique: string;
   nom_raison_sociale: string;
   section_activite_principale: string;
@@ -94,6 +95,8 @@ export type IMatchingEtablissement = {
   longitude: string;
   nom_commercial: string;
   siret: string;
+  date_creation: string;
+  date_debut_activite: string;
 };
 
 export type IComplements = {
@@ -105,6 +108,7 @@ export type IComplements = {
   est_bio: boolean;
   est_ess: boolean;
   est_organisme_formation: boolean;
+  est_qualiopi: boolean;
   est_finess: boolean;
   est_service_public: boolean;
   egapro_renseignee: boolean;

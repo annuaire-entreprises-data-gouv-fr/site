@@ -1,7 +1,7 @@
 import { clientAssociation } from '#clients/api-proxy/association';
-import { clientUniteLegaleInseeNoCache } from '#clients/sirene-insee/siren';
+import { clientTVA } from '#clients/api-proxy/tva';
+import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
 import clientSiret2Idcc from '#clients/siret-2-idcc';
-import { clientTVA } from '#clients/tva';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
 import { clientApiEntrepriseAssociation } from './api-entreprise/association';
 import { fetchRNCSImmatriculation } from './api-proxy/rncs';
@@ -27,7 +27,10 @@ const ping = async (slug: string | string[]) => {
     case 'api-conventions-collectives':
       return await clientSiret2Idcc(['54205118000066']);
     case 'api-sirene-insee':
-      return await clientUniteLegaleInseeNoCache(verifySiren('880878145'));
+      return await clientUniteLegaleInsee(verifySiren('880878145'), {
+        useCache,
+        useFallback: false,
+      });
     case 'api-sirene-donnees-ouvertes':
       return await clientUniteLegaleRechercheEntreprise(
         verifySiren('880878145')

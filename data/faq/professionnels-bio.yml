@@ -1,8 +1,23 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
 administrations:
   - agence-bio
 targets: # no targets
 title: 'Le label « Professionnel du Bio » : définition'
-description: Le label « Professionnel du bio » concerne les structures certifiées bio, selon la classification de l’Agence Bio. Il regroupe diverses catégories professionnels.
+seo:
+  title: Que signifie le label « Professionnel du Bio » ?
+  description: Le label « Professionnel du bio » concerne les structures certifiées bio, selon la classification de l’Agence Bio. Il regroupe diverses catégories professionnels.
 body: |
   Le label « Professionnel du bio » concerne les structures certifiées bio selon la classification de l’[Agence Bio](https://annuaire.agencebio.org).
 

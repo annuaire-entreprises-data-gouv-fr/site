@@ -11,9 +11,12 @@ const Budget: NextPageWithLayout = () => (
     <TextWrapper>
       <h1>Budget</h1>
       <p>
-        L’<b>Annuaire des Entreprises</b> est un service public numérique, c’est
-        pourquoi nous sommes transparents sur les ressources allouées et la
-        manière dont elles sont employées.
+        L’
+        <a href="https://annuaire-entreprises.data.gouv.fr">
+          <b>Annuaire des Entreprises</b>
+        </a>{' '}
+        est un service public numérique, c’est pourquoi nous sommes transparents
+        sur les ressources allouées et la manière dont elles sont employées.
       </p>
       <h2>Principes</h2>
       <p>
@@ -60,12 +63,12 @@ const Budget: NextPageWithLayout = () => (
       <FullTable
         head={['Poste de dépense', '2021', '2022']}
         body={[
-          ['Développement', '165 000 €', '133 000 €'],
-          ['Déploiement', '5 000 €', '54 000 €'],
-          ['Design', '25 000 €', '17 000 €'],
+          ['Développement', '165 000 €', '193 000 €'],
+          ['Déploiement', '5 000 €', '78 000 €'],
+          ['Design', '25 000 €', '24 000 €'],
           ['Logiciels', '-', '12 000 €'],
           ['Hébergement', '1000 €', '3000 €'],
-          [<b>Total TTC</b>, <b>196 000 €</b>, <b>219 000 €</b>],
+          [<b>Total TTC</b>, <b>196 000 €</b>, <b>310 000 €</b>],
         ]}
       ></FullTable>
       <br />

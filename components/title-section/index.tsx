@@ -49,7 +49,7 @@ const Tabs: React.FC<{
   currentFicheType: FICHE;
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ currentFicheType, uniteLegale }) => {
+}> = ({ currentFicheType, uniteLegale, session }) => {
   const tabs = [
     {
       ficheType: FICHE.INFORMATION,
@@ -80,6 +80,13 @@ const Tabs: React.FC<{
       shouldDisplay: !isCollectiviteTerritoriale(uniteLegale),
     },
     {
+      ficheType: FICHE.FINANCES,
+      label: 'Données financières',
+      pathPrefix: '/donnees-financieres/',
+      noFollow: false,
+      shouldDisplay: isLoggedIn(session),
+    },
+    {
       ficheType: FICHE.ANNONCES,
       label: 'Annonces',
       pathPrefix: '/annonces/',
@@ -99,13 +106,6 @@ const Tabs: React.FC<{
       pathPrefix: '/etablissements-scolaires/',
       noFollow: false,
       shouldDisplay: uniteLegale.complements.estUai,
-    },
-    {
-      ficheType: FICHE.FINANCES,
-      label: 'Données financières',
-      pathPrefix: '/donnees-financieres/',
-      noFollow: false,
-      shouldDisplay: false,
     },
     {
       ficheType: FICHE.DIVERS,
@@ -260,7 +260,6 @@ const Title: React.FC<IProps> = ({
       currentFicheType={ficheType}
       session={session}
     />
-
     <style jsx>{`
       .header-section {
         display: block;

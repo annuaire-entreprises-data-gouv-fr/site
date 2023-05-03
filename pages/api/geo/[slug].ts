@@ -5,7 +5,7 @@ import {
   clientDepartementsByName,
 } from '#clients/geo/departements';
 import logErrorInSentry from '#utils/sentry';
-import { withAPM } from '#utils/sentry/apm';
+import { withAPM } from '#utils/sentry/tracing';
 
 const geo = async (
   { query: { slug = '' } }: NextApiRequest,

@@ -3,7 +3,12 @@ import Warning from '#components-ui/alerts/warning';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { Tag } from '#components-ui/tag';
 import { IEtablissement, IUniteLegale } from '#models/index';
-import { estNonDiffusible, getNomComplet } from '#models/statut-diffusion';
+import {
+  estNonDiffusible,
+  getDenominationEtablissement,
+  getEnseigneEtablissement,
+  getNomComplet,
+} from '#models/statut-diffusion';
 import { formatSiret } from '#utils/helpers';
 import { ISession } from '#utils/session';
 import { INSEE } from '../administrations';
@@ -57,22 +62,26 @@ const TitleEtablissementWithDenomination: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, etablissement, session }) => (
   <div className="etablissement-title">
-    {etablissement.oldSiret && etablissement.oldSiret !== etablissement.siret && (
-      <Warning full>
-        Cet établissement est inscrit en double à l’
-        <INSEE /> : {formatSiret(etablissement.oldSiret)} et{' '}
-        {formatSiret(etablissement.siret)}. Pour voir les informations
-        complètes, consultez la page{' '}
-        <a href={`/etablissement/${etablissement.siret}`}>
-          {formatSiret(etablissement.siret)}
-        </a>
-        .
-      </Warning>
-    )}
+    {etablissement.oldSiret &&
+      etablissement.oldSiret !== etablissement.siret && (
+        <Warning full>
+          Cet établissement est inscrit en double à l’
+          <INSEE /> : {formatSiret(etablissement.oldSiret)} et{' '}
+          {formatSiret(etablissement.siret)}. Pour voir les informations
+          complètes, consultez la page{' '}
+          <a href={`/etablissement/${etablissement.siret}`}>
+            {formatSiret(etablissement.siret)}
+          </a>
+          .
+        </Warning>
+      )}
     <TitleEtablissement
       uniteLegale={uniteLegale}
-      nomEtablissement={etablissement.enseigne || etablissement.denomination}
       session={session}
+      nomEtablissement={
+        getEnseigneEtablissement(etablissement) ||
+        getDenominationEtablissement(etablissement)
+      }
     />
     <div className="etablissement-sub-title">
       <span>établissement ‣ {formatSiret(etablissement.siret)}</span>

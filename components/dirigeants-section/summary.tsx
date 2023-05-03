@@ -91,8 +91,8 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
     <>
       Cette structure possède :
       <ul>
-        {summaries.map((summary) => (
-          <li>{summary}</li>
+        {summaries.map((summary, index) => (
+          <li key={index}>{summary}</li>
         ))}
       </ul>
       <br />

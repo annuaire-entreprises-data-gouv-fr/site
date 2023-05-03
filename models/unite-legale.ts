@@ -1,36 +1,31 @@
-import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
-import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
 import {
-  clientUniteLegaleInsee,
-  clientUniteLegaleInseeFallback,
-} from '#clients/sirene-insee/siren';
+  HttpForbiddenError,
+  HttpNotFound,
+  HttpServerError,
+} from '#clients/exceptions';
+import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
+import { InseeClientOptions } from '#clients/sirene-insee';
+import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
 import {
   clientAllEtablissementsInsee,
-  clientAllEtablissementsInseeFallback,
   clientSiegeInsee,
-  clientSiegeInseeFallback,
 } from '#clients/sirene-insee/siret';
 import { getAssociation } from '#models/association';
-import {
-  createEtablissementsList,
-  IEtablissementsList,
-} from '#models/etablissements-list';
+import { createEtablissementsList } from '#models/etablissements-list';
 import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { Siren, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import {
-  logFirstSireneInseefailed,
   logRechercheEntreprisefailed,
-  logRechercheEntrepriseForGoodBotfailed,
-  logSecondSireneInseefailed,
+  logSireneInseefailed,
 } from '#utils/sentry/helpers';
-import {
-  createDefaultUniteLegale,
-  IEtablissement,
-  IUniteLegale,
-  SirenNotFoundError,
-} from '.';
+import { createDefaultUniteLegale, IUniteLegale, SirenNotFoundError } from '.';
 import { isAssociation } from '.';
+import { EAdministration } from './administrations';
+import {
+  APINotRespondingFactory,
+  isAPINotResponding,
+} from './api-not-responding';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 /**
@@ -43,7 +38,7 @@ interface IUniteLegaleOptions {
 }
 
 /**
- * Return an uniteLegale given an existing siren
+ * Return an uniteLegale if and only if siren is valid and exists otherwise throw SirenInvalid or SirenNotFound errors
  */
 export const getUniteLegaleFromSlug = async (
   slug: string,
@@ -51,12 +46,12 @@ export const getUniteLegaleFromSlug = async (
 ): Promise<IUniteLegale> => {
   const { isBot = false, page = 1 } = options;
 
-  const uniteLegale = new UniteLegaleFactory(slug, isBot, page);
+  const uniteLegale = new UniteLegaleBuilder(slug, isBot, page);
 
   return await uniteLegale.build();
 };
 
-class UniteLegaleFactory {
+class UniteLegaleBuilder {
   private _siren: Siren;
   private _isBot: boolean;
   private _page: number;
@@ -68,47 +63,9 @@ class UniteLegaleFactory {
   }
 
   build = async () => {
-    const uniteLegaleRaw = await this.get();
-    const uniteLegale = this.postProcess(uniteLegaleRaw);
-    return uniteLegale;
-  };
+    const uniteLegale = await this.fetchFromClients();
 
-  get = async () => {
-    if (this._isBot) {
-      return await this.getForBot();
-    } else {
-      return await this.getForUser();
-    }
-  };
-
-  getForUser = async () => {
-    const page = 1;
-    const useCache = true;
-    const [uniteLegale, { colter = {}, complements = {}, chemin }] =
-      await Promise.all([
-        getUniteLegale(this._siren, this._page),
-        // colter, labels and certificates, from sirene ouverte
-        getUniteLegaleForGoodBot(this._siren, page, useCache).catch(() => {
-          return { colter: {}, complements: {}, chemin: this._siren };
-        }),
-      ]);
-
-    uniteLegale.complements = {
-      ...uniteLegale.complements,
-      ...complements,
-    };
-    uniteLegale.colter = { ...uniteLegale.colter, ...colter };
-    uniteLegale.chemin = chemin;
-    return uniteLegale;
-  };
-
-  getForBot = async () => {
-    const useCache = false;
-    return await getUniteLegaleForGoodBot(this._siren, this._page, useCache);
-  };
-
-  postProcess = async (uniteLegale: IUniteLegale) => {
-    // no need to call API association for bot
+    // no need to call API association for bots
     if (!this._isBot && isAssociation(uniteLegale)) {
       uniteLegale.association.data = await getAssociation(uniteLegale);
     }
@@ -128,177 +85,143 @@ class UniteLegaleFactory {
 
     return uniteLegale;
   };
-}
 
-/**
- * For Indexing bot only - Fetch an uniteLegale from clientUniteLegaleRechercheEntreprise
- *
- */
-const getUniteLegaleForGoodBot = async (
-  siren: Siren,
-  page = 1,
-  useCache = false
-): Promise<IUniteLegale> => {
-  let fallbackOnStaging = false;
-  try {
-    return await clientUniteLegaleRechercheEntreprise(
-      siren,
-      fallbackOnStaging,
-      useCache
-    );
-  } catch (e: any) {
-    try {
-      if (e instanceof HttpNotFound) {
-        // when not found in siren ouverte, fallback on insee
-        return await fetchUniteLegaleFromInsee(siren, page);
-      } else {
-        fallbackOnStaging = true;
-        return await clientUniteLegaleRechercheEntreprise(
-          siren,
-          fallbackOnStaging,
-          useCache
+  fetchFromClients = async (): Promise<IUniteLegale> => {
+    // no cache for bot as they scrap so they tend not to call the same siren twice
+    const useCache = !this._isBot;
+
+    const getUniteLegaleInsee =
+      true || this._isBot
+        ? () => APINotRespondingFactory(EAdministration.INSEE, 403) // never call Insee for bot
+        : async () =>
+            await fetchUniteLegaleFromInsee(this._siren, this._page, {
+              useFallback: false,
+              useCache,
+            });
+
+    const [uniteLegaleInsee, uniteLegaleRechercheEntreprise] =
+      await Promise.all([
+        getUniteLegaleInsee(),
+        fetchUniteLegaleFromRechercheEntreprise(this._siren, useCache),
+      ]);
+
+    if (isAPINotResponding(uniteLegaleInsee)) {
+      if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
+        const uniteLegaleInseeFallbacked = await fetchUniteLegaleFromInsee(
+          this._siren,
+          this._page,
+          {
+            useFallback: true,
+            useCache,
+          }
         );
+        if (isAPINotResponding(uniteLegaleInseeFallbacked)) {
+          throw new HttpServerError('Sirene Insee fallback failed, return 500');
+        }
+        return uniteLegaleInseeFallbacked;
+      } else {
+        return uniteLegaleRechercheEntreprise;
       }
-    } catch (eFallback: any) {
-      if (!(eFallback instanceof HttpNotFound)) {
-        logRechercheEntrepriseForGoodBotfailed({
-          siren,
-          details: eFallback.message || eFallback,
-        });
-      }
-      throw new SirenNotFoundError(siren);
-    }
-  }
-};
-
-/**
- * Fetch Unite Legale from Etalab SIRENE API with a fallback on INSEE's API
- */
-const getUniteLegale = async (
-  siren: Siren,
-  page = 1
-): Promise<IUniteLegale> => {
-  try {
-    // first attempt to call siren insee
-    return await fetchUniteLegaleFromInsee(siren, page);
-  } catch (e: any) {
-    if (e instanceof HttpNotFound) {
-      throw new SirenNotFoundError(siren);
-    }
-    logFirstSireneInseefailed({ siren, details: e.message || e });
-
-    try {
-      // in case sirene INSEE 429 or 500, fallback on Siren Etalab
-      return await clientUniteLegaleRechercheEntreprise(siren);
-    } catch (firstFallback: any) {
-      logRechercheEntreprisefailed({
-        siren,
-        details: firstFallback.message || firstFallback,
-      });
-
-      try {
-        // in case sirene etalab 404 or 500, fallback on Sirene insee using fallback credentials to avoid 403
-        // no pagination as this function is called when sirene etalab already failed
-        return await fetchUniteLegaleFromInseeFallback(siren, page);
-      } catch (lastFallback: any) {
-        logSecondSireneInseefailed({
-          siren,
-          details: lastFallback.message || lastFallback,
-        });
-
-        // Siren was not found in both API, return a 404
-        throw new SirenNotFoundError(siren);
+    } else {
+      if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
+        return uniteLegaleInsee;
+      } else {
+        return {
+          ...uniteLegaleInsee,
+          complements: {
+            ...uniteLegaleInsee?.complements,
+            ...uniteLegaleRechercheEntreprise.complements,
+          },
+          colter: {
+            ...uniteLegaleInsee?.colter,
+            ...uniteLegaleRechercheEntreprise.colter,
+          },
+          chemin: uniteLegaleRechercheEntreprise.chemin,
+        };
       }
     }
-  }
-};
+  };
+}
 
 //=========================
 //        API calls
 //=========================
 
 /**
- * Fetch Unite Legale from Sirene INSEE and Etalab
+ * Fetch Unite Legale from Sirene Recherche Entreprise
  */
-const fetchUniteLegaleFromInsee = async (siren: Siren, page = 1) => {
-  try {
-    // INSEE requires three calls to get uniteLegale with etablissementsand siege
-    const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
-      await Promise.all([
-        clientUniteLegaleInsee(siren),
-        clientAllEtablissementsInsee(siren, page).catch(() => null),
-        clientSiegeInsee(siren).catch(() => null),
-      ]);
-
-    return mergeUniteLegaleInsee(
-      uniteLegaleInsee,
-      allEtablissementsInsee,
-      siegeInsee
-    );
-  } catch (e: any) {
-    if (e instanceof HttpForbiddenError) {
-      return createNonDiffusibleUniteLegale(siren);
-    }
-    throw e;
-  }
-};
-
-/**
- * Fetch Unite Legale from Sirene INSEE only, using fallback credentials
- */
-const fetchUniteLegaleFromInseeFallback = async (siren: Siren, page = 1) => {
-  try {
-    // INSEE requires three calls to get uniteLegale with etablissementsand siege
-    const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
-      await Promise.all([
-        clientUniteLegaleInseeFallback(siren),
-        clientAllEtablissementsInseeFallback(siren, page).catch(() => null),
-        clientSiegeInseeFallback(siren).catch(() => null),
-      ]);
-
-    return mergeUniteLegaleInsee(
-      uniteLegaleInsee,
-      allEtablissementsInsee,
-      siegeInsee
-    );
-  } catch (e: any) {
-    if (e instanceof HttpForbiddenError) {
-      return createNonDiffusibleUniteLegale(siren);
-    }
-    throw e;
-  }
-};
-
-/**
- * Merge response form INSEE and Etalab, using best of both
- */
-const mergeUniteLegaleInsee = (
-  uniteLegaleInsee: IUniteLegale,
-  allEtablissementsInsee: IEtablissementsList | null,
-  siegeInsee: IEtablissement | null
+const fetchUniteLegaleFromRechercheEntreprise = async (
+  siren: Siren,
+  useCache: boolean
 ) => {
-  const siege = siegeInsee || uniteLegaleInsee.siege;
-
-  const etablissements =
-    allEtablissementsInsee?.etablissements || createEtablissementsList([siege]);
-  const { currentEtablissementPage, nombreEtablissements } = etablissements;
-
-  return {
-    ...uniteLegaleInsee,
-    siege,
-    etablissements,
-    currentEtablissementPage: currentEtablissementPage || 0,
-    nombreEtablissements: nombreEtablissements || 1,
-  };
+  try {
+    const useFallback = false;
+    return await clientUniteLegaleRechercheEntreprise(
+      siren,
+      useFallback,
+      useCache
+    );
+  } catch (e: any) {
+    if (!(e instanceof HttpNotFound)) {
+      logRechercheEntreprisefailed({ siren, details: e.message || e });
+    }
+    // we dont care about the type of exception here as HttpNotFound and HttpServerError will both be useless to us
+    return APINotRespondingFactory(EAdministration.DINUM, 500);
+  }
 };
 
 /**
- * Create a default UniteLegale that will display as non diffusible
+ * Fetch Unite Legale from Sirene INSEE
  */
-const createNonDiffusibleUniteLegale = (siren: Siren) => {
-  const uniteLegale = createDefaultUniteLegale(siren);
-  uniteLegale.statutDiffusion = ISTATUTDIFFUSION.NONDIFF;
-  uniteLegale.nomComplet = 'Entreprise non-diffusible';
+const fetchUniteLegaleFromInsee = async (
+  siren: Siren,
+  page = 1,
+  inseeOptions: InseeClientOptions
+) => {
+  try {
+    // INSEE requires three calls to get uniteLegale with etablissements and siege
+    const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
+      await Promise.all([
+        clientUniteLegaleInsee(siren, inseeOptions),
+        clientAllEtablissementsInsee(siren, page, inseeOptions).catch(
+          () => null
+        ),
+        clientSiegeInsee(siren, inseeOptions).catch(() => null),
+      ]);
 
-  return uniteLegale;
+    const siege = siegeInsee || uniteLegaleInsee.siege;
+
+    const etablissements =
+      allEtablissementsInsee?.etablissements ||
+      createEtablissementsList([siege]);
+
+    const { currentEtablissementPage = 0, nombreEtablissements = 1 } =
+      etablissements;
+
+    return {
+      ...uniteLegaleInsee,
+      siege,
+      etablissements,
+      currentEtablissementPage,
+      nombreEtablissements,
+    };
+  } catch (e: any) {
+    if (e instanceof HttpForbiddenError) {
+      const uniteLegale = createDefaultUniteLegale(siren);
+      uniteLegale.statutDiffusion = ISTATUTDIFFUSION.NONDIFF;
+      uniteLegale.nomComplet = 'Entreprise non-diffusible';
+
+      return uniteLegale;
+    }
+    if (e instanceof HttpNotFound) {
+      throw new SirenNotFoundError(siren);
+    }
+
+    logSireneInseefailed(
+      { siren, details: e.message || e },
+      inseeOptions.useFallback
+    );
+
+    return APINotRespondingFactory(EAdministration.INSEE, 500);
+  }
 };

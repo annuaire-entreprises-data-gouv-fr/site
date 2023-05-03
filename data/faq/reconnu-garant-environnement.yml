@@ -1,8 +1,22 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
 administrations:
   - ademe
 targets: # no targets
 title: Qu’est ce qu’une entreprise RGE - Reconnu Garant de l’Environnement ?
-description: La mention « reconnu garant de l'environnement » (ou RGE)** est accordée par les pouvoirs publics aux professionnels du bâtiment spécialisés dans les travaux de rénovation énergétique.
+seo:
+  description: La mention « reconnu garant de l'environnement » (ou RGE)** est accordée par les pouvoirs publics aux professionnels du bâtiment spécialisés dans les travaux de rénovation énergétique.
 body: |
   Créée en 2011, la mention **« reconnu garant de l'environnement » (ou RGE)** est accordée par les pouvoirs publics aux professionnels du bâtiment spécialisés dans les travaux de **rénovation énergétique**, l'installation d'équipements utilisant des **énergies renouvelables** ou encore les études liées aux **performances énergétiques** (diagnostic thermique, audit énergétique, projets d'architecture avec conception bioclimatique...).
 

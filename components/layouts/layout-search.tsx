@@ -5,7 +5,6 @@ import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated'
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
 import { Header } from '#components/header';
-import { WeNeedYouModal } from '#components/modal/we-need-you';
 import SocialNetworks from '#components/social-network';
 import { IParams } from '#models/search-filter-params';
 import { ISession } from '#utils/session';
@@ -36,7 +35,6 @@ export const LayoutSearch = ({
       {isBrowserOutdated && <BrowserIsOutdatedBanner />}
 
       <NPSBanner />
-      <WeNeedYouModal />
       <Header
         currentSearchTerm={(terme || '') as string}
         useMap={map}

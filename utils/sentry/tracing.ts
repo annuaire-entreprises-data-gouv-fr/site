@@ -19,13 +19,17 @@ const getTransactionNameFromUrl = (url: string) => {
   }
 };
 
-export const createAPM = (url: string, operator: string) =>
-  Sentry.startTransaction({
+export const createAPM = (url: string, operator: string) => {
+  if (!isSentryInitialized()) {
+    return;
+  }
+  return Sentry.startTransaction({
     op: operator,
     name: getTransactionNameFromUrl(url),
   });
+};
 
-export const closeAPM = (transaction: Transaction) => {
+export const closeAPM = (transaction: Transaction | undefined) => {
   if (transaction) {
     transaction.finish();
   } else if (isSentryInitialized()) {
@@ -43,7 +47,9 @@ export const withAPM = (
     try {
       await callback(req, res);
     } finally {
-      closeAPM(transaction);
+      if (transaction) {
+        closeAPM(transaction);
+      }
     }
   };
 };

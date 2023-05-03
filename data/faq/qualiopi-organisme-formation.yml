@@ -1,8 +1,22 @@
+# administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
+# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
+# title: titre
+# seo: description et titre pour le SEO
+#   description:
+#   title: si pas de titre spécifié, le titre principal sera utilisé
+# body: corps de texte (markdown)
+# cta:
+#   label: libellé du CTA
+#   to: url (externe (https://) ou interne en commencant par /)
+# more:
+#   - label: libellé
+#     href: url
 administrations:
   - mtpei
 targets: # no targets
 title: Qu’est-ce que la certification Qualiopi - Organisme de formation ?
-description: La certification Qualiopi permet d’attester de la qualité des formations dispensées à travers un Référentiel National de Qualité Qualiopi qui comporte 7 critères répartis en 32 indicateurs.
+seo:
+  description: La certification Qualiopi permet d’attester de la qualité des formations dispensées à travers un Référentiel National de Qualité Qualiopi qui comporte 7 critères répartis en 32 indicateurs.
 body: |
   Le certification Qualiopi est une accréditation de qualité accordée aux organismes de formation qui remplissent les conditions fixées par le Ministère du travail, du plein emploi et de l’insertion. 
 

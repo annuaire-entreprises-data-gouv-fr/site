@@ -15,6 +15,8 @@ export interface IParams {
   n?: string;
   naf?: string;
   nature_juridique?: string;
+  categorie_entreprise?: string;
+  tranche_effectif_salarie?: string;
   sap?: string;
   type?: string;
 }
@@ -35,6 +37,8 @@ class SearchFilterParams {
       n = '',
       naf = '',
       nature_juridique = '',
+      tranche_effectif_salarie = '',
+      categorie_entreprise = '',
       sap = '',
       type = '',
     } = query;
@@ -58,6 +62,8 @@ class SearchFilterParams {
       n,
       naf,
       nature_juridique,
+      tranche_effectif_salarie,
+      categorie_entreprise,
       sap,
       type,
     };
@@ -79,7 +85,8 @@ class SearchFilterParams {
       est_bio: this.params.label === 'bio',
       egapro_renseignee: this.params.label === 'egapro',
       est_ess: this.params.label === 'ess',
-      est_organisme_formation: this.params.label === 'qualiopi',
+      est_organisme_formation: this.params.label === 'of',
+      est_qualiopi: this.params.label === 'qualiopi',
       est_entrepreneur_spectacle: this.params.label === 'esv',
       est_association: this.params.type === 'asso',
       est_collectivite_territoriale: this.params.type === 'ct',
@@ -88,7 +95,9 @@ class SearchFilterParams {
       code_postal,
       code_commune,
       section_activite_principale: this.params.sap,
+      categorie_entreprise: this.params.categorie_entreprise,
       nature_juridique: this.params.nature_juridique,
+      tranche_effectif_salarie: this.params.tranche_effectif_salarie,
       activite_principale: this.params.naf,
       departement,
       prenoms_personne: this.params.fn?.trim(),
@@ -124,7 +133,14 @@ class SearchFilterParams {
       administrativeFilter: {
         icon: 'file',
         label: '',
-        excludeParams: ['sap', 'naf', 'etat', 'nature_juridique'],
+        excludeParams: [
+          'sap',
+          'naf',
+          'etat',
+          'nature_juridique',
+          'tranche_effectif_salarie',
+          'categorie_entreprise',
+        ],
       },
       structureFilter: {
         icon: 'building',
@@ -173,6 +189,12 @@ class SearchFilterParams {
     if (this.params.nature_juridique) {
       administrativeFilterCounter += 1;
     }
+    if (this.params.categorie_entreprise) {
+      administrativeFilterCounter += 1;
+    }
+    if (this.params.tranche_effectif_salarie) {
+      administrativeFilterCounter += 1;
+    }
 
     if (administrativeFilterCounter > 0) {
       const plural = administrativeFilterCounter ? 's' : '';
@@ -186,6 +208,7 @@ class SearchFilterParams {
       bio: 'Label : Professionnels du bio',
       egapro: 'Label : Égalité professionnelle',
       qualiopi: 'Label : Qualiopi',
+      of: 'Label : Organisme de formation',
       ei: 'Type : Entreprise Individuelle ',
       ct: 'Type : Collectivité territoriale ',
       sp: 'Type : Service public',

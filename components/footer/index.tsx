@@ -100,6 +100,16 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
+                  <a className="fr-footer__top-link" href="/equipe">
+                    Qui sommes-nous ?
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/comment-ca-marche">
+                    A propos
+                  </a>
+                </li>
+                <li>
                   <a
                     className="fr-footer__top-link"
                     target="_blank"

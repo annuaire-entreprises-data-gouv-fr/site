@@ -17,10 +17,9 @@ describe(`FAQ contextual links`, () => {
     cy.visit(`/entreprise/880878145`).then((resp) => {
       cy.contains('Sources : Insee').click();
       cy.url().should('include', '/administration/insee_vies');
-      cy.contains('Qu’est-ce qu’une entreprise non-diffusible ?').should(
-        'have.length',
-        1
-      );
+      cy.contains(
+        'Comment rendre mon entreprise individuelle diffusible ou non-diffusible ?'
+      ).should('have.length', 1);
     });
   });
 });

@@ -1,3 +1,4 @@
+import Info from '#components-ui/alerts/info';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { INPI, MEF } from '#components/administrations';
 import { LineChart } from '#components/chart/line';
@@ -5,6 +6,7 @@ import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
+import constants from '#models/constants';
 import { IDonneesFinancieres } from '#models/donnees-financieres';
 import {
   formatDateYear,
@@ -79,6 +81,14 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
       sources={[EAdministration.MEF]}
       lastModified={bilansFinanciers.lastModified}
     >
+      <Info>
+        Cette section est un travail en cours. Les bilans financiers sont des
+        données difficiles à maitriser et notre travail peut contenir des
+        erreurs.
+        <br />
+        Si vous découvrez une erreur, merci de nous en faire part en nous
+        écrivant à <a href={constants.links.mailto}>{constants.links.mail}</a>
+      </Info>
       <p>
         Voici les {sortedBilans.length} derniers bilans déclarés auprès de l’
         <INPI /> pour cette structure.

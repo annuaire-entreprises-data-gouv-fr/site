@@ -1,16 +1,12 @@
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
 import { clientEtablissementRechercheEntreprise } from '#clients/recherche-entreprise/siret';
-import {
-  clientEtablissementInsee,
-  clientEtablissementInseeFallback,
-} from '#clients/sirene-insee/siret';
+import { clientEtablissementInsee } from '#clients/sirene-insee/siret';
 import { getGeoLoc } from '#models/geo-loc';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { extractSirenFromSiret, Siret, verifySiret } from '#utils/helpers';
 import {
-  logFirstSireneInseefailed,
   logRechercheEntreprisefailed,
-  logSecondSireneInseefailed,
+  logSireneInseefailed,
 } from '#utils/sentry/helpers';
 import {
   createDefaultEtablissement,
@@ -30,9 +26,10 @@ const getEtablissementFromSlug = async (
 
   const isBot = options?.isBot || false;
 
-  const etablissement = isBot
-    ? await getEtablissementForGoodBot(siret)
-    : await getEtablissement(siret);
+  const etablissement =
+    true || isBot
+      ? await getEtablissementForGoodBot(siret)
+      : await getEtablissement(siret);
 
   return etablissement;
 };
@@ -42,7 +39,10 @@ const getEtablissementFromSlug = async (
  */
 const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
   try {
-    return await clientEtablissementInsee(siret);
+    return await clientEtablissementInsee(siret, {
+      useCache: true,
+      useFallback: false,
+    });
   } catch (e: any) {
     if (e instanceof HttpForbiddenError) {
       return createNonDiffusibleEtablissement(siret);
@@ -51,7 +51,7 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
       throw new SiretNotFoundError(siret);
     }
 
-    logFirstSireneInseefailed({ siret, details: e.message });
+    logSireneInseefailed({ siret, details: e.message }, false);
 
     try {
       return await clientEtablissementRechercheEntreprise(siret);
@@ -62,18 +62,27 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
       });
 
       try {
-        return await clientEtablissementInseeFallback(siret);
+        return await clientEtablissementInsee(siret, {
+          useCache: true,
+          useFallback: true,
+        });
       } catch (lastFallback: any) {
-        if (e instanceof HttpForbiddenError) {
+        if (lastFallback instanceof HttpForbiddenError) {
           return createNonDiffusibleEtablissement(siret);
         }
-        logSecondSireneInseefailed({
-          siret,
-          details: lastFallback.message || lastFallback,
-        });
+        if (lastFallback instanceof HttpNotFound) {
+          throw new SiretNotFoundError(siret);
+        }
+        logSireneInseefailed(
+          {
+            siret,
+            details: lastFallback.message || lastFallback,
+          },
+          true
+        );
 
-        // Siret was not found in both API, return a 404
-        throw new SiretNotFoundError(siret);
+        // both API failed to fetch this siren, return a 500
+        throw lastFallback;
       }
     }
   }

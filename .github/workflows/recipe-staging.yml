@@ -1,0 +1,26 @@
+# This workflow will run recipe's tests on staging
+
+name: Recipe on staging
+
+on:
+  workflow_run:
+    workflows: ['Deploy - Staging']
+    types: [completed]
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '0 1 10,25 * *'
+
+jobs:
+  recipe:
+    name: Recipe on staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          # we have already installed all dependencies above
+          browser: chrome
+          record: false
+          config: baseUrl=https://staging.annuaire-entreprises.data.gouv.fr

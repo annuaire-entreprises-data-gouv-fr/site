@@ -3,8 +3,10 @@ import { FilterMenu } from '#components-ui/filter-menu';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import { MultiSelect, Select } from '#components-ui/select';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';
+import { categoriesEntreprisesOptions } from '#utils/labels/categories-entreprise';
 import { categoriesJuridiques } from '#utils/labels/categories-juridiques';
 import { codesNAFRev2 } from '#utils/labels/codes-NAF-rev-2';
+import { codesEffectifsOptions } from '#utils/labels/codes-effectifs';
 import { codesSectionNAF } from '#utils/labels/codes-section-NAF';
 import { FilterGeo } from './filter-geo';
 import { FilterStructure } from './filter-structure';
@@ -25,6 +27,8 @@ const SearchFilters: React.FC<{
     n,
     naf,
     nature_juridique,
+    tranche_effectif_salarie,
+    categorie_entreprise,
     sap,
     type,
   } = searchParams || {};
@@ -181,18 +185,39 @@ const SearchFilters: React.FC<{
             options={getNaturesJuridiques()}
           />
         </div>
+        <SimpleSeparator />
+        <div>
+          <label>Effectif salarié</label>
+          <MultiSelect
+            name="tranche_effectif_salarie"
+            defaultValue={tranche_effectif_salarie}
+            placeholder="Choisir une tranche d'effectif"
+            id="effectif-salarie-multi-select"
+            instanceId="effectif-salarie-multi-select"
+            options={codesEffectifsOptions}
+          />
+        </div>
+        <div>
+          <label>Taille d’entreprise</label>
+          <MultiSelect
+            name="categorie_entreprise"
+            defaultValue={categorie_entreprise}
+            placeholder="Choisir une catégorie d'entreprise"
+            id="categorie-entreprise-multi-select"
+            instanceId="categorie-entreprise-multi-select"
+            options={categoriesEntreprisesOptions}
+          />
+        </div>
       </FilterMenu>
       <style jsx>{`
         .field-in-line {
           display: flex;
           gap: 5px;
         }
-
         #search-localisation-responses {
           max-height: 270px;
           overflow: auto;
         }
-
         @media only screen and (min-width: 1px) and (max-width: 992px) {
           div.select {
             max-width: 100%;

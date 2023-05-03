@@ -8,6 +8,7 @@ export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estBio ||
   uniteLegale.complements.egaproRenseignee ||
   uniteLegale.complements.estOrganismeFormation ||
+  uniteLegale.complements.estQualiopi ||
   uniteLegale.complements.estRge;
 
 export const LabelsAndCertificatesBadgesSection: React.FC<{
@@ -19,17 +20,23 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     estEss,
     estRge,
     estOrganismeFormation,
+    estQualiopi,
     estBio,
     egaproRenseignee,
   } = uniteLegale.complements;
 
   return (
     <>
-      {estOrganismeFormation && (
-        <InformationTooltip label="Cette structure est certifiée Qualiopi - Organisme de formation">
-          <LabelAndCertificateBadge label="Qualiopi - Organisme de formation" />
-        </InformationTooltip>
-      )}
+      {estOrganismeFormation &&
+        (estQualiopi ? (
+          <InformationTooltip label="Cette structure est déclarée en tant qu’organisme de formation et elle est certifiée Qualiopi">
+            <LabelAndCertificateBadge label="Organisme de formation (certifié Qualiopi)" />
+          </InformationTooltip>
+        ) : (
+          <InformationTooltip label="Cette structure est déclarée en tant qu’organisme de formation">
+            <LabelAndCertificateBadge label="Organisme de formation" />
+          </InformationTooltip>
+        ))}
       {estBio && (
         <InformationTooltip label="Cette structure est un professionnel du Bio">
           <LabelAndCertificateBadge label="Professionnel du Bio" />
