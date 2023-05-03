@@ -55,6 +55,20 @@ export const getNomComplet = (uniteLegale: IUniteLegale) => {
   }
 };
 
+export const getEnseigneEtablissement = (etablissement: IEtablissement) => {
+  if (!estDiffusible(etablissement)) {
+    return nonDiffusibleDataFormatter('information non-diffusible');
+  }
+  return etablissement.enseigne;
+};
+
+export const getDenominationEtablissement = (etablissement: IEtablissement) => {
+  if (!estDiffusible(etablissement)) {
+    return nonDiffusibleDataFormatter('information non-diffusible');
+  }
+  return etablissement.denomination;
+};
+
 const formatAdresseForDiffusion = (
   estDiffusible: boolean,
   adresse: string,

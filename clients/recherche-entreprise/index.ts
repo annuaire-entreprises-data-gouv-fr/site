@@ -284,6 +284,8 @@ const mapToEtablissement = (
     est_siege = false,
     nom_commercial = '',
     activite_principale = '',
+    date_creation = '',
+    date_debut_activite = '',
   } = etablissement;
 
   const enseigne = (liste_enseignes || []).join(' ');
@@ -315,6 +317,8 @@ const mapToEtablissement = (
     denomination: nom_commercial,
     libelleActivitePrincipale:
       libelleFromCodeNAFWithoutNomenclature(activite_principale),
+    dateCreation: date_creation,
+    dateDebutActivite: date_debut_activite,
   };
 };
 

@@ -10,6 +10,8 @@ import { IEtablissement, IUniteLegale } from '#models/index';
 import {
   estNonDiffusible,
   getAdresseEtablissement,
+  getDenominationEtablissement,
+  getEnseigneEtablissement,
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatDate, formatSiret, Siret } from '#utils/helpers';
@@ -57,7 +59,8 @@ const EtablissementTable: React.FC<{
                   {(etablissement.enseigne || etablissement.denomination) && (
                     <a href={`/etablissement/${etablissement.siret}`}>
                       <b>
-                        {etablissement.enseigne || etablissement.denomination}
+                        {getEnseigneEtablissement(etablissement) ||
+                          getDenominationEtablissement(etablissement)}
                         <br />
                       </b>
                     </a>

@@ -15,6 +15,8 @@ import { IEtablissement, IUniteLegale } from '#models/index';
 import {
   estDiffusible,
   getAdresseEtablissement,
+  getDenominationEtablissement,
+  getEnseigneEtablissement,
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatDate, formatSiret } from '#utils/helpers';
@@ -57,10 +59,20 @@ const EtablissementSection: React.FC<IProps> = ({
         ]
       : []),
     ...(etablissement.enseigne
-      ? [['Enseigne de l’établissement', etablissement.enseigne]]
+      ? [
+          [
+            'Enseigne de l’établissement',
+            getEnseigneEtablissement(etablissement),
+          ],
+        ]
       : []),
     ...(etablissement.denomination
-      ? [['Nom de l’établissement', etablissement.denomination]]
+      ? [
+          [
+            'Nom de l’établissement',
+            getDenominationEtablissement(etablissement),
+          ],
+        ]
       : []),
     [
       <FAQLink to="/faq/modifier-adresse" tooltipLabel="Adresse">

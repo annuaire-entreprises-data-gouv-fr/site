@@ -95,6 +95,8 @@ export type IMatchingEtablissement = {
   longitude: string;
   nom_commercial: string;
   siret: string;
+  date_creation: string;
+  date_debut_activite: string;
 };
 
 export type IComplements = {
