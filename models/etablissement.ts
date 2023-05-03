@@ -26,10 +26,9 @@ const getEtablissementFromSlug = async (
 
   const isBot = options?.isBot || false;
 
-  const etablissement =
-    true || isBot
-      ? await getEtablissementForGoodBot(siret)
-      : await getEtablissement(siret);
+  const etablissement = isBot
+    ? await getEtablissementForGoodBot(siret)
+    : await getEtablissement(siret);
 
   return etablissement;
 };
