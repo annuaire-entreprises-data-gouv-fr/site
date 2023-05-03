@@ -12,7 +12,7 @@ export const logSireneInseefailed = (
   useFallback = false
 ) => {
   logWarningInSentry(
-    `Sirene Insee ${useFallback && 'fallback '}failed`,
+    `Sirene Insee ${useFallback ? 'fallback ' : ''}failed`,
     sentryScope
   );
 };
