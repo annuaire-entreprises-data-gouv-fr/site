@@ -7,6 +7,7 @@ export type IMatomoStats = {
     label: string;
     number: number;
     visits: number;
+    unique: number;
   }[];
   monthlyUserNps: {
     label: string;
@@ -121,7 +122,7 @@ const aggregateEvents = (
  * Turns matomo response into monthly stats
  */
 const computeStats = (
-  matomoMonthlyStats: { value: number }[],
+  matomoMonthlyStats: { nb_uniq_visitors: number; nb_visits: number }[],
   matomoNpsEventStats: { label: string; nb_events: number }[],
   matomoCopyPasteEventStats: { label: string; nb_events: number }[]
 ) => {
@@ -145,7 +146,8 @@ const computeStats = (
     visits.push({
       number: lastYear.getMonth() + 1,
       label: monthLabel,
-      visits: matomoMonthlyStats[i].value,
+      visits: matomoMonthlyStats[i].nb_visits,
+      unique: matomoMonthlyStats[i].nb_uniq_visitors,
     });
 
     const monthlyNps = events.months[monthLabel]['all'];
@@ -202,6 +204,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       details: e.toString(),
     });
     return {
+      uniqueVisitors: [],
       visits: [],
       monthlyUserNps: [],
       userResponses: {},
@@ -225,7 +228,7 @@ const createPageViewUrl = () => {
     lastYear.setMonth(lastYear.getMonth() + 1);
     baseUrl += `&urls[${i}]=`;
 
-    const subRequest = `idSite=145&period=month&method=API.get&module=API&showColumns=nb_visits&date=${YYYYMMDD(
+    const subRequest = `idSite=145&period=month&method=API.get&module=API&showColumns=nb_visits,nb_uniq_visitors&date=${YYYYMMDD(
       lastYear
     )}`;
 
