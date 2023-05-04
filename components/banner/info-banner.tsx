@@ -14,10 +14,12 @@ export const InfoBanner: React.FC<{}> = () => (
         ⚠️ Suite à une instabilité des services de nos partenaires (
         <INSEE />,
         <INPI />
-        ), le site connaît actuellement des ralentissements et certaines fonctionnalités peuvent ne pas fonctionner (par exemple la pagination des établissements secondaires).
-        <br>
-        Veuillez nous excuser pour la gêne occasionnée, nous faisons de notre mieux pour
-        rétablir le service.
+        ), le site connaît actuellement des ralentissements et certaines
+        fonctionnalités peuvent ne pas fonctionner (par exemple la pagination
+        des établissements secondaires).
+        <br />
+        Veuillez nous excuser pour la gêne occasionnée, nous faisons de notre
+        mieux pour rétablir le service.
       </div>
     </div>
     <style jsx>{`
