@@ -36,7 +36,6 @@ body: |
 more:
   - label: Changer de statut de diffusion (entreprise individuelle)
     href: https://statut-diffusion-sirene.insee.fr/
-more:
   - label: Pourquoi mon adresse personnelle apparaît-elle sur ce site ?
     href: /faq/adresse-personnelle
 cta:
