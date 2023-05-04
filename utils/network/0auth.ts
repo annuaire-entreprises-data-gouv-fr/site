@@ -76,7 +76,7 @@ export class httpClientOAuth {
     const token = await this.getToken();
 
     return httpGet(
-      'http://localhost:4000/test',
+      url,
       {
         timeout: constants.timeout.M,
         ...options,
