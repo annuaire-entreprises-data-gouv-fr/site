@@ -2,11 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
 import constants from '#models/constants';
 import { logWarningInSentry } from '#utils/sentry';
-import {
-  defaultAxiosInstanceFactory,
-  cachedAxiosInstanceFactory,
-  defaultCacheConfig,
-} from '.';
+import httpClient, { httpGet } from '.';
 
 type IAccessToken = {
   data: {
@@ -20,7 +16,6 @@ type IAccessToken = {
 
 export class httpClientOAuth {
   private _token: IAccessToken | null;
-  private _cachedAxiosInstance;
 
   constructor(
     private token_url: string,
@@ -33,14 +28,13 @@ export class httpClientOAuth {
     ) {
       throw new HttpServerError('Client id or client secret is undefined');
     }
-    this._cachedAxiosInstance = cachedAxiosInstanceFactory();
     this._token = null;
   }
 
   newToken = async () => {
     try {
-      const clientWithNoCache = defaultAxiosInstanceFactory();
-      const { data } = await clientWithNoCache(this.token_url, {
+      const { data } = await httpClient({
+        url: this.token_url,
         method: 'POST',
         timeout: constants.timeout.XXS,
         params: {
@@ -49,6 +43,7 @@ export class httpClientOAuth {
           grant_type: 'client_credentials',
           validity_period: 604800,
         },
+        cache: false,
       });
       this._token = {
         data,
@@ -77,17 +72,20 @@ export class httpClientOAuth {
     return this._token;
   };
 
-  get = async (url: string, options: AxiosRequestConfig, useCache: boolean) => {
+  get = async (url: string, options: AxiosRequestConfig, useCache = false) => {
     const token = await this.getToken();
 
-    return this._cachedAxiosInstance.get(url, {
-      timeout: constants.timeout.M,
-      ...options,
-      cache: useCache ? defaultCacheConfig : false,
-      headers: {
-        ...options.headers,
-        Authorization: `Bearer ${token.data.access_token}`,
+    return httpGet(
+      'http://localhost:4000/test',
+      {
+        timeout: constants.timeout.M,
+        ...options,
+        headers: {
+          ...options.headers,
+          Authorization: `Bearer ${token.data.access_token}`,
+        },
       },
-    });
+      useCache
+    );
   };
 }

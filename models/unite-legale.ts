@@ -90,14 +90,13 @@ class UniteLegaleBuilder {
     // no cache for bot as they scrap so they tend not to call the same siren twice
     const useCache = !this._isBot;
 
-    const getUniteLegaleInsee =
-      true || this._isBot
-        ? () => APINotRespondingFactory(EAdministration.INSEE, 403) // never call Insee for bot
-        : async () =>
-            await fetchUniteLegaleFromInsee(this._siren, this._page, {
-              useFallback: false,
-              useCache,
-            });
+    const getUniteLegaleInsee = this._isBot
+      ? () => APINotRespondingFactory(EAdministration.INSEE, 403) // never call Insee for bot
+      : async () =>
+          await fetchUniteLegaleFromInsee(this._siren, this._page, {
+            useFallback: false,
+            useCache,
+          });
 
     const [uniteLegaleInsee, uniteLegaleRechercheEntreprise] =
       await Promise.all([
