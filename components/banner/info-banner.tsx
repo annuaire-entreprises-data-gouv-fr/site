@@ -12,12 +12,19 @@ export const InfoBanner: React.FC<{}> = () => (
     >
       <div className="fr-container">
         ⚠️ Suite à une instabilité des services de nos partenaires (
-        <INSEE />,
-        <INPI />
-        ), le site connaît actuellement des ralentissements et certaines
-        fonctionnalités peuvent ne pas fonctionner (par exemple la pagination
-        des établissements secondaires).
-        <br />
+        <INSEE />
+        ), les fonctionnalités suivantes sont dégradées :
+        <ul>
+          <li>
+            Sur la page d’un établissement ou d’un siège social, le nombre de
+            salariés, la date de fermeture et la date de dernière mise à jour
+            sont <i>Non renseigné</i>
+          </li>
+          <li>
+            Si une entreprise a plus de 100 établissements, la liste de ses
+            établissements ne fonctionne plus.
+          </li>
+        </ul>
         Veuillez nous excuser pour la gêne occasionnée, nous faisons de notre
         mieux pour rétablir le service.
       </div>
