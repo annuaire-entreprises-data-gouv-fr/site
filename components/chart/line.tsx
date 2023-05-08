@@ -22,12 +22,12 @@ ChartJS.register(
   Legend
 );
 
-type LineChatProps = {
+type LineChartProps = {
   height?: number;
   data: ChartData<'line', number[], string>;
 };
 
-export const LineChart = ({ data, height = 250 }: LineChatProps) => {
+export const LineChart = ({ data, height = 250 }: LineChartProps) => {
   return (
     <div style={{ height: `${height}px` }}>
       <Line

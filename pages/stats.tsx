@@ -1,17 +1,7 @@
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
 import { GetStaticProps } from 'next';
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
 import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
 import BasicChart from '#components/chart/basic';
+import { StackedBarChart } from '#components/chart/stack-bar';
 import Meta from '#components/meta';
 import { NextPageWithLayout } from './_app';
 
@@ -24,60 +14,25 @@ const colors = [
   '#291720',
 ];
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-export const options = {
-  plugins: {
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart - Stacked',
-    },
-  },
-  responsive: true,
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-    },
-  },
-};
-
 const StatsPage: NextPageWithLayout<IMatomoStats> = ({
   monthlyUserNps,
   visits,
   userResponses,
   mostCopied,
 }) => {
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-  ];
-
   const data = {
-    labels,
     datasets: [
       {
-        label: 'Visites mensuelles',
-        data: visits.map(({ unique, visits }) => visits),
+        label: 'Visites unique',
+        data: visits.map(({ unique, label }) => ({ y: unique, x: label })),
         backgroundColor: 'rgb(255, 99, 132)',
       },
       {
-        label: 'Visiteur unique mensuel',
-        data: visits.map(({ unique, visits }) => visits - unique),
+        label: 'Nouveau visiteur',
+        data: visits.map(({ returning, label }) => ({
+          y: returning,
+          x: label,
+        })),
         backgroundColor: 'rgb(75, 192, 192)',
       },
     ],
@@ -103,28 +58,8 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
         crossOrigin="anonymous"
         referrerPolicy="no-referrer"
       ></script>
-      <Bar options={options} data={data} />
-      <BasicChart
-        yLabel="Nombre de visites"
-        yRange={[0, Math.max(...visits.map((el) => el.visits))]}
-        type="line"
-        datasets={[
-          {
-            label: 'Visites mensuelles',
-            data: visits.map((stat) => {
-              return {
-                y: stat.visits,
-                x: stat.label,
-              };
-            }),
-            backgroundColor: '#0078f3',
-            borderColor: '#0078f3',
-            cubicInterpolationMode: 'monotone',
-            tension: 0.4,
-          },
-        ]}
-      />
       <h3>Informations les plus utilisées par les usagers</h3>
+      <StackedBarChart data={data} />
       <BasicChart
         yLabel="Informations"
         stacked={true}
