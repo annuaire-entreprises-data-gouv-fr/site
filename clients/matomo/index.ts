@@ -6,8 +6,8 @@ export type IMatomoStats = {
   visits: {
     label: string;
     number: number;
-    visits: number;
     unique: number;
+    returning: number;
   }[];
   monthlyUserNps: {
     label: string;
@@ -122,7 +122,12 @@ const aggregateEvents = (
  * Turns matomo response into monthly stats
  */
 const computeStats = (
-  matomoMonthlyStats: { nb_uniq_visitors: number; nb_visits: number }[],
+  matomoMonthlyStats: {
+    nb_uniq_visitors_new: number;
+    nb_uniq_visitors_returning: number;
+    nb_visits_new: number;
+    nb_visits_returning: number;
+  }[],
   matomoNpsEventStats: { label: string; nb_events: number }[],
   matomoCopyPasteEventStats: { label: string; nb_events: number }[]
 ) => {
@@ -146,8 +151,11 @@ const computeStats = (
     visits.push({
       number: lastYear.getMonth() + 1,
       label: monthLabel,
-      visits: matomoMonthlyStats[i].nb_visits,
-      unique: matomoMonthlyStats[i].nb_uniq_visitors,
+      // TODO: check if returning is the right metric
+      returning: matomoMonthlyStats[i].nb_visits_returning,
+      unique:
+        matomoMonthlyStats[i].nb_uniq_visitors_returning +
+        matomoMonthlyStats[i].nb_uniq_visitors_new,
     });
 
     const monthlyNps = events.months[monthLabel]['all'];
@@ -204,7 +212,6 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       details: e.toString(),
     });
     return {
-      uniqueVisitors: [],
       visits: [],
       monthlyUserNps: [],
       userResponses: {},
@@ -227,13 +234,19 @@ const createPageViewUrl = () => {
   for (let i = 0; i < 12; i++) {
     lastYear.setMonth(lastYear.getMonth() + 1);
     baseUrl += `&urls[${i}]=`;
-
-    const subRequest = `idSite=145&period=month&method=API.get&module=API&showColumns=nb_visits,nb_uniq_visitors&date=${YYYYMMDD(
+    const subRequest = `idSite=145&period=month&method=VisitFrequency.get&module=VisitFrequency&date=${YYYYMMDD(
       lastYear
     )}`;
-
+    // const subRequest = `idSite=145&period=month&method=API.get&module=API&showColumns=nb_visits,nb_uniq_visitors&date=${YYYYMMDD(
+    //   lastYear
+    // )}`;
     baseUrl += encodeURIComponent(subRequest);
   }
+
+  `https://stats.data.gouv.fr/index.php?module=API&method=VisitFrequency.get&idSite=145&period=month&date=${YYYYMMDD(
+    lastYear
+  )}&format=JSON&token_auth=anonymous`;
+
   return baseUrl;
 };
 
