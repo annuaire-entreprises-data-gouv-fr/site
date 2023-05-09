@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next';
+import { useState } from 'react';
 import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
 import BasicChart from '#components/chart/basic';
 import { StackedBarChart } from '#components/chart/stack-bar';
@@ -20,17 +21,21 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
   userResponses,
   mostCopied,
 }) => {
+  const [statsType, setStatsType] = useState<'visits' | 'visitor'>('visits');
   const data = {
     datasets: [
       {
-        label: 'Visites unique',
-        data: visits.map(({ unique, label }) => ({ y: unique, x: label })),
+        label: 'Visite',
+        data: visits.map(({ label, visitor }) => ({
+          y: visitor.returning,
+          x: label,
+        })),
         backgroundColor: 'rgb(255, 99, 132)',
       },
       {
-        label: 'Nouveau visiteur',
-        data: visits.map(({ returning, label }) => ({
-          y: returning,
+        label: 'Nouvelle visite',
+        data: visits.map(({ label, visitor }) => ({
+          y: visitor.new,
           x: label,
         })),
         backgroundColor: 'rgb(75, 192, 192)',
@@ -59,6 +64,46 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
         referrerPolicy="no-referrer"
       ></script>
       <h3>Informations les plus utilisées par les usagers</h3>
+      <fieldset
+        style={{ display: 'flex', flexDirection: 'row', gap: 32 }}
+        className="fr-fieldset"
+        id="radio-inline"
+        aria-labelledby="radio-inline-legend radio-inline-messages"
+      >
+        <div
+          onChange={(values) => console.log(values)}
+          className="fr-fieldset__element fr-fieldset__element--inline"
+        >
+          <div className="fr-radio-group">
+            <input
+              type="radio"
+              name="stats-type"
+              value="visits"
+              onClick={() => setStatsType('visits')}
+            />
+            <label className="fr-label">Visites</label>
+          </div>
+        </div>
+        <div className="fr-fieldset__element fr-fieldset__element--inline">
+          <div className="fr-radio-group">
+            <input
+              type="radio"
+              name="stats-type"
+              value="visitor"
+              onClick={() => {
+                setStatsType('visitor');
+              }}
+            />
+            <label className="fr-label">Visiteurs</label>
+          </div>
+        </div>
+
+        <div
+          className="fr-messages-group"
+          id="radio-inline-messages"
+          aria-live="assertive"
+        ></div>
+      </fieldset>
       <StackedBarChart data={data} />
       <BasicChart
         yLabel="Informations"
@@ -125,7 +170,7 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const { visits, monthlyUserNps, userResponses, mostCopied } =
     await clientMatomoStats();
   return {
