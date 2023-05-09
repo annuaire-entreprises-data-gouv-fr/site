@@ -6,8 +6,14 @@ export type IMatomoStats = {
   visits: {
     label: string;
     number: number;
-    unique: number;
-    returning: number;
+    visit: {
+      returning: number;
+      new: number;
+    };
+    visitor: {
+      returning: number;
+      new: number;
+    };
   }[];
   monthlyUserNps: {
     label: string;
@@ -151,12 +157,14 @@ const computeStats = (
     visits.push({
       number: lastYear.getMonth() + 1,
       label: monthLabel,
-      // TODO: check if returning is the right metric
-      // {visit : {}, visitor: {}}
-      returning: matomoMonthlyStats[i].nb_visits_returning,
-      unique:
-        matomoMonthlyStats[i].nb_uniq_visitors_returning +
-        matomoMonthlyStats[i].nb_uniq_visitors_new,
+      visit: {
+        returning: matomoMonthlyStats[i].nb_visits_returning,
+        new: matomoMonthlyStats[i].nb_visits_new,
+      },
+      visitor: {
+        returning: matomoMonthlyStats[i].nb_uniq_visitors_returning,
+        new: matomoMonthlyStats[i].nb_uniq_visitors_new,
+      },
     });
 
     const monthlyNps = events.months[monthLabel]['all'];
