@@ -152,6 +152,7 @@ const computeStats = (
       number: lastYear.getMonth() + 1,
       label: monthLabel,
       // TODO: check if returning is the right metric
+      // {visit : {}, visitor: {}}
       returning: matomoMonthlyStats[i].nb_visits_returning,
       unique:
         matomoMonthlyStats[i].nb_uniq_visitors_returning +
@@ -237,9 +238,7 @@ const createPageViewUrl = () => {
     const subRequest = `idSite=145&period=month&method=VisitFrequency.get&module=VisitFrequency&date=${YYYYMMDD(
       lastYear
     )}`;
-    // const subRequest = `idSite=145&period=month&method=API.get&module=API&showColumns=nb_visits,nb_uniq_visitors&date=${YYYYMMDD(
-    //   lastYear
-    // )}`;
+
     baseUrl += encodeURIComponent(subRequest);
   }
 
