@@ -90,10 +90,10 @@ class UniteLegaleBuilder {
     // no cache for bot as they scrap so they tend not to call the same siren twice
     const useCache = !this._isBot;
 
-    const useInsee = process.env.INSEE_ENABLED === 'enabled' || true;
+    const shouldNotUseInsee = process.env.INSEE_ENABLED !== 'enabled';
 
     const getUniteLegaleInsee =
-      useInsee || this._isBot
+      shouldNotUseInsee || this._isBot
         ? () => APINotRespondingFactory(EAdministration.INSEE, 403) // never call Insee for bot
         : async () =>
             await fetchUniteLegaleFromInsee(this._siren, this._page, {
@@ -109,24 +109,21 @@ class UniteLegaleBuilder {
 
     if (isAPINotResponding(uniteLegaleInsee)) {
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
-        if (useInsee) {
-          const uniteLegaleInseeFallbacked = await fetchUniteLegaleFromInsee(
-            this._siren,
-            this._page,
-            {
-              useFallback: true,
-              useCache,
-            }
-          );
-          if (isAPINotResponding(uniteLegaleInseeFallbacked)) {
-            throw new HttpServerError(
-              'Sirene Insee fallback failed, return 500'
-            );
-          }
-          return uniteLegaleInseeFallbacked;
-        } else {
+        if (shouldNotUseInsee) {
           throw new HttpServerError('Sirene Insee fallback failed, return 500');
         }
+        const uniteLegaleInseeFallbacked = await fetchUniteLegaleFromInsee(
+          this._siren,
+          this._page,
+          {
+            useFallback: true,
+            useCache,
+          }
+        );
+        if (isAPINotResponding(uniteLegaleInseeFallbacked)) {
+          throw new HttpServerError('Sirene Insee fallback failed, return 500');
+        }
+        return uniteLegaleInseeFallbacked;
       } else {
         return uniteLegaleRechercheEntreprise;
       }
