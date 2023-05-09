@@ -71,7 +71,9 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
         aria-labelledby="radio-inline-legend radio-inline-messages"
       >
         <div
-          onChange={(values) => console.log(values)}
+          onChange={(values) => {
+            // console.log(values);
+          }}
           className="fr-fieldset__element fr-fieldset__element--inline"
         >
           <div className="fr-radio-group">
