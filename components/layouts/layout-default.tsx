@@ -23,6 +23,7 @@ export const LayoutDefault = ({
     <div id="page-layout">
       {isBrowserOutdated && <BrowserIsOutdatedBanner />}
       <NPSBanner />
+
       <Header
         useSearchBar={searchBar}
         useAdvancedSearch={false}

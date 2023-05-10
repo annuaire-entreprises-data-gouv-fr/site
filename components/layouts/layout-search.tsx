@@ -35,6 +35,7 @@ export const LayoutSearch = ({
       {isBrowserOutdated && <BrowserIsOutdatedBanner />}
 
       <NPSBanner />
+
       <Header
         currentSearchTerm={(terme || '') as string}
         useMap={map}
