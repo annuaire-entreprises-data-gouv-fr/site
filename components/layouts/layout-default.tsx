@@ -1,7 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { Question } from '#components-ui/question';
 import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
-import { InfoBanner } from '#components/banner/info-banner';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
 import { Header } from '#components/header';
@@ -24,7 +23,6 @@ export const LayoutDefault = ({
     <div id="page-layout">
       {isBrowserOutdated && <BrowserIsOutdatedBanner />}
       <NPSBanner />
-      <InfoBanner />
 
       <Header
         useSearchBar={searchBar}
