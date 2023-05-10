@@ -5,7 +5,7 @@ import logErrorInSentry from '#utils/sentry';
 export type IMatomoStats = {
   visits: {
     label: string;
-    number: string;
+    number: number;
     visitReturning: number;
     visitUnknown: number;
     visitorReturning: number;
