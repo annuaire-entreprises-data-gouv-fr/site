@@ -43,9 +43,17 @@ const options = {
 
 export const StackedBarChart = ({
   data,
-  height = 450,
+  height = 500,
 }: StackedBarChartProps) => {
   return (
-    <Bar options={options} data={data} style={{ height: `${height}px` }} />
+    <div
+      style={{
+        height: `${height}px`,
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
+      <Bar options={options} data={data} />
+    </div>
   );
 };
