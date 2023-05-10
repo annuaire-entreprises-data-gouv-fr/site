@@ -19,7 +19,7 @@ const Footer = () => (
                 {getAllLandingPages()
                   .filter((lp) => !lp.isServicePublic)
                   .map(({ slug, footerLabel }) => (
-                    <li key="slug">
+                    <li key={slug}>
                       <a className="fr-footer__top-link" href={`/lp/${slug}`}>
                         {footerLabel}
                       </a>
@@ -34,7 +34,7 @@ const Footer = () => (
                 {getAllLandingPages()
                   .filter((lp) => lp.isServicePublic)
                   .map(({ slug, footerLabel }) => (
-                    <li key="slug">
+                    <li key={slug}>
                       <a className="fr-footer__top-link" href={`/lp/${slug}`}>
                         {footerLabel}
                       </a>

@@ -6,7 +6,10 @@ export type IMatomoStats = {
   visits: {
     label: string;
     number: number;
-    visits: number;
+    visitReturning: number;
+    visitUnknown: number;
+    visitorReturning: number;
+    visitorUnknown: number;
   }[];
   monthlyUserNps: {
     label: string;
@@ -121,7 +124,12 @@ const aggregateEvents = (
  * Turns matomo response into monthly stats
  */
 const computeStats = (
-  matomoMonthlyStats: { value: number }[],
+  matomoMonthlyStats: {
+    nb_uniq_visitors_new: number;
+    nb_uniq_visitors_returning: number;
+    nb_visits_new: number;
+    nb_visits_returning: number;
+  }[],
   matomoNpsEventStats: { label: string; nb_events: number }[],
   matomoCopyPasteEventStats: { label: string; nb_events: number }[]
 ) => {
@@ -141,11 +149,21 @@ const computeStats = (
 
     const monthLabel = getMonthLabelFromDate(lastYear);
 
+    const {
+      nb_visits_returning,
+      nb_visits_new,
+      nb_uniq_visitors_returning,
+      nb_uniq_visitors_new,
+    } = matomoMonthlyStats[i];
+
     // getMonth is 0-indexed
     visits.push({
       number: lastYear.getMonth() + 1,
       label: monthLabel,
-      visits: matomoMonthlyStats[i].value,
+      visitReturning: nb_visits_returning,
+      visitUnknown: nb_visits_new,
+      visitorReturning: nb_uniq_visitors_returning,
+      visitorUnknown: nb_uniq_visitors_new,
     });
 
     const monthlyNps = events.months[monthLabel]['all'];
@@ -224,13 +242,17 @@ const createPageViewUrl = () => {
   for (let i = 0; i < 12; i++) {
     lastYear.setMonth(lastYear.getMonth() + 1);
     baseUrl += `&urls[${i}]=`;
-
-    const subRequest = `idSite=145&period=month&method=API.get&module=API&showColumns=nb_visits&date=${YYYYMMDD(
+    const subRequest = `idSite=145&period=month&method=VisitFrequency.get&module=VisitFrequency&date=${YYYYMMDD(
       lastYear
     )}`;
 
     baseUrl += encodeURIComponent(subRequest);
   }
+
+  `https://stats.data.gouv.fr/index.php?module=API&method=VisitFrequency.get&idSite=145&period=month&date=${YYYYMMDD(
+    lastYear
+  )}&format=JSON&token_auth=anonymous`;
+
   return baseUrl;
 };
 
