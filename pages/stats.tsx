@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
 import BasicChart from '#components/chart/basic';
 import { StackedBarChart } from '#components/chart/stack-bar';
@@ -21,26 +21,34 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
   userResponses,
   mostCopied,
 }) => {
-  const [statsType, setStatsType] = useState<'visits' | 'visitor'>('visits');
+  const [statsType, setStatsType] = useState('visit');
   const data = {
     datasets: [
       {
-        label: 'Visite',
-        data: visits.map(({ label, visitor }) => ({
-          y: visitor.returning,
+        label:
+          statsType === 'visit' ? 'Nombre de visite' : 'Nombre de visiteur',
+        data: visits.map(({ label, visitor, visit }) => ({
+          y: statsType === 'visit' ? visit.returning : visitor.returning,
           x: label,
         })),
         backgroundColor: 'rgb(255, 99, 132)',
       },
       {
-        label: 'Nouvelle visite',
-        data: visits.map(({ label, visitor }) => ({
-          y: visitor.new,
+        label:
+          statsType === 'visit'
+            ? 'Nombre de nouvelle visite'
+            : 'Nombre de nouveau visiteur',
+        data: visits.map(({ label, visitor, visit }) => ({
+          y: statsType === 'visit' ? visit.new : visitor.new,
           x: label,
         })),
         backgroundColor: 'rgb(75, 192, 192)',
       },
     ],
+  };
+
+  const onOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setStatsType(e.target.value);
   };
 
   return (
@@ -63,27 +71,25 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
         crossOrigin="anonymous"
         referrerPolicy="no-referrer"
       ></script>
-      <h3>Informations les plus utilisées par les usagers</h3>
       <fieldset
         style={{ display: 'flex', flexDirection: 'row', gap: 32 }}
         className="fr-fieldset"
         id="radio-inline"
         aria-labelledby="radio-inline-legend radio-inline-messages"
       >
-        <div
-          onChange={(values) => {
-            // console.log(values);
-          }}
-          className="fr-fieldset__element fr-fieldset__element--inline"
-        >
+        <div className="fr-fieldset__element fr-fieldset__element--inline">
           <div className="fr-radio-group">
             <input
               type="radio"
               name="stats-type"
-              value="visits"
-              onClick={() => setStatsType('visits')}
+              value="visit"
+              id="visit"
+              checked={statsType === 'visit'}
+              onChange={onOptionChange}
             />
-            <label className="fr-label">Visites</label>
+            <label htmlFor="visit" className="fr-label">
+              Nombre de visite
+            </label>
           </div>
         </div>
         <div className="fr-fieldset__element fr-fieldset__element--inline">
@@ -92,21 +98,20 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
               type="radio"
               name="stats-type"
               value="visitor"
-              onClick={() => {
-                setStatsType('visitor');
-              }}
+              id="visitor"
+              checked={statsType === 'visitor'}
+              onChange={onOptionChange}
             />
-            <label className="fr-label">Visiteurs</label>
+            <label htmlFor="visitor" className="fr-label">
+              Nombre de visiteur unique
+            </label>
           </div>
         </div>
-
-        <div
-          className="fr-messages-group"
-          id="radio-inline-messages"
-          aria-live="assertive"
-        ></div>
       </fieldset>
-      <StackedBarChart data={data} />
+      <div style={{ marginBottom: 64 }}>
+        <StackedBarChart data={data} />
+      </div>
+      <h3>Informations les plus utilisées par les usagers</h3>
       <BasicChart
         yLabel="Informations"
         stacked={true}
