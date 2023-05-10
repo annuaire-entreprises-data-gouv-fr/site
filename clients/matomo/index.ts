@@ -5,15 +5,11 @@ import logErrorInSentry from '#utils/sentry';
 export type IMatomoStats = {
   visits: {
     label: string;
-    number: number;
-    visit: {
-      returning: number;
-      new: number;
-    };
-    visitor: {
-      returning: number;
-      new: number;
-    };
+    number: string;
+    visitReturning: number;
+    visitUnknown: number;
+    visitorReturning: number;
+    visitorUnknown: number;
   }[];
   monthlyUserNps: {
     label: string;
@@ -153,18 +149,21 @@ const computeStats = (
 
     const monthLabel = getMonthLabelFromDate(lastYear);
 
+    const {
+      nb_visits_returning,
+      nb_visits_new,
+      nb_uniq_visitors_returning,
+      nb_uniq_visitors_new,
+    } = matomoMonthlyStats[i];
+
     // getMonth is 0-indexed
     visits.push({
       number: lastYear.getMonth() + 1,
       label: monthLabel,
-      visit: {
-        returning: matomoMonthlyStats[i].nb_visits_returning,
-        new: matomoMonthlyStats[i].nb_visits_new,
-      },
-      visitor: {
-        returning: matomoMonthlyStats[i].nb_uniq_visitors_returning,
-        new: matomoMonthlyStats[i].nb_uniq_visitors_new,
-      },
+      visitReturning: nb_visits_returning,
+      visitUnknown: nb_visits_new,
+      visitorReturning: nb_uniq_visitors_returning,
+      visitorUnknown: nb_uniq_visitors_new,
     });
 
     const monthlyNps = events.months[monthLabel]['all'];

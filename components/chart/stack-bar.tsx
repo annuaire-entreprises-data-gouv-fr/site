@@ -21,6 +21,7 @@ ChartJS.register(
 
 type StackedBarChartProps = {
   height?: number;
+  width?: number;
   data: ChartData<'bar', any, unknown>;
 };
 
@@ -43,17 +44,8 @@ const options = {
 
 export const StackedBarChart = ({
   data,
-  height = 500,
+  height = 150,
+  width = 400,
 }: StackedBarChartProps) => {
-  return (
-    <div
-      style={{
-        height: `${height}px`,
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-    >
-      <Bar options={options} data={data} />
-    </div>
-  );
+  return <Bar options={options} width={width} height={height} data={data} />;
 };
