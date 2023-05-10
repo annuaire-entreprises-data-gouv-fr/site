@@ -4,7 +4,7 @@ import { StackedBarChart } from '#components/chart/stack-bar';
 
 export const TraficStats: React.FC<{
   visits: {
-    number: string;
+    number: number;
     label: string;
     visitReturning: number;
     visitUnknown: number;
