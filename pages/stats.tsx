@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next';
 import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
 import BasicChart from '#components/chart/basic';
 import Meta from '#components/meta';
+import { RedirectAndCopyPasteChart } from '#components/stats/redirect-copy-paste';
 import { TraficStats } from '#components/stats/trafic';
 import { NextPageWithLayout } from './_app';
 
@@ -22,6 +23,8 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
   visits,
   userResponses,
   mostCopied,
+  copyPasteAction,
+  redirectedSiren,
 }) => (
   <>
     <Meta
@@ -42,6 +45,10 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
     <h2>Utilisation du service</h2>
     <h3>Trafic mensuel</h3>
     <TraficStats visits={visits} colors={colors} />
+    <RedirectAndCopyPasteChart
+      copyPasteAction={copyPasteAction}
+      redirectedSiren={redirectedSiren}
+    />
     <br />
     <h3>Informations les plus utilisées par les usagers</h3>
     <BasicChart
@@ -109,14 +116,22 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { visits, monthlyUserNps, userResponses, mostCopied } =
-    await clientMatomoStats();
+  const {
+    visits,
+    monthlyUserNps,
+    userResponses,
+    mostCopied,
+    copyPasteAction,
+    redirectedSiren,
+  } = await clientMatomoStats();
   return {
     props: {
       monthlyUserNps,
       visits,
       userResponses,
       mostCopied,
+      copyPasteAction,
+      redirectedSiren,
       metadata: {
         useReact: true,
       },
