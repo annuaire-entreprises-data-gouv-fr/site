@@ -297,6 +297,7 @@ const createEventsCategoryUrl = () => {
     )}`;
     baseUrl += encodeURIComponent(subRequest);
   }
+
   return baseUrl;
 };
 

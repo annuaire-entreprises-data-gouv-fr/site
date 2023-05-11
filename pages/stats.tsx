@@ -45,13 +45,13 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
     <h2>Utilisation du service</h2>
     <h3>Trafic mensuel</h3>
     <TraficStats visits={visits} colors={colors} />
+    <br />
+    <h3>Informations les plus utilisées par les usagers</h3>
     <RedirectAndCopyPasteChart
       copyPasteAction={copyPasteAction}
       redirectedSiren={redirectedSiren}
     />
-    <br />
-    <h3>Informations les plus utilisées par les usagers</h3>
-    <BasicChart
+    {/* <BasicChart
       yLabel="Informations"
       stacked={true}
       horizontal={true}
@@ -66,7 +66,7 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
           backgroundColor: colors[index],
         };
       })}
-    />
+    /> */}
     <h2>Satisfaction des utilisateurs</h2>
     Analyse des réponses au{' '}
     <a href="/formulaire/nps">questionnaire de statisfaction</a>.

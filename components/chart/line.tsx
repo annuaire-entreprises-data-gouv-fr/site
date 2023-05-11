@@ -8,9 +8,9 @@ import {
   Tooltip,
   Legend,
   ChartData,
+  ChartOptions,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { formatCurrency } from '#utils/helpers';
 
 ChartJS.register(
   CategoryScale,
@@ -25,39 +25,17 @@ ChartJS.register(
 type LineChartProps = {
   height?: number;
   data: ChartData<'line', number[], string>;
+  options?: ChartOptions<'line'>;
 };
 
-export const LineChart = ({ data, height = 250 }: LineChartProps) => {
+export const LineChart = ({
+  data,
+  options = {},
+  height = 500,
+}: LineChartProps) => {
   return (
     <div style={{ height: `${height}px` }}>
-      <Line
-        options={{
-          plugins: {
-            tooltip: {
-              callbacks: {
-                label(tooltipItem) {
-                  return formatCurrency(
-                    tooltipItem.parsed.y.toString()
-                  ).toString();
-                },
-              },
-            },
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              border: { display: false },
-              ticks: {
-                callback: (label) => {
-                  return formatCurrency(label.toString());
-                },
-              },
-            },
-          },
-        }}
-        data={data}
-      />
+      <Line options={options} data={data} />
     </div>
   );
 };
