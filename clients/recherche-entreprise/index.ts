@@ -170,6 +170,9 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     etatAdministratif = IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT;
   }
 
+  // when unknwon, dateCreation is set to 1900-01-01 by Insee instead of null
+  const dateCreation = date_creation === '1900-01-01' ? '' : date_creation;
+
   return {
     ...createDefaultUniteLegale(siren),
     libelleCategorieEntreprise: libelleFromeCodeCategorie(categorie_entreprise),
@@ -219,7 +222,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       data: null,
     },
     colter,
-    dateCreation: date_creation,
+    dateCreation,
     dateDerniereMiseAJour: date_mise_a_jour,
   };
 };

@@ -26,8 +26,10 @@ const getEtablissementFromSlug = async (
 
   const isBot = options?.isBot || false;
 
+  const shouldNotUseInsee = process.env.INSEE_ENABLED === 'disabled';
+
   const etablissement =
-    true || isBot
+    shouldNotUseInsee || isBot
       ? await getEtablissementForGoodBot(siret)
       : await getEtablissement(siret);
 
