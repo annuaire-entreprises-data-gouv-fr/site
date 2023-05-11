@@ -120,9 +120,13 @@ export const OrganismeDeFormationSection = ({
       : []),
   ]);
 
+  const title = `Organisme de formation${
+    uniteLegale.complements.estQualiopi ? ' certifié Qualiopi' : ''
+  }`;
+
   return (
     <Section
-      title="Organisme de formation"
+      title={title}
       sources={[EAdministration.MTPEI]}
       lastModified={organismesDeFormation.lastModified}
     >
