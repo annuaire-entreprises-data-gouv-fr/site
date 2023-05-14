@@ -94,6 +94,14 @@ export const UsageStats: React.FC<{
         .chart-container > div:first-of-type {
           max-width: 60%;
         }
+        @media only screen and (min-width: 1px) and (max-width: 992px) {
+          .chart-container {
+            flex-direction: column;
+          }
+          .chart-container > div {
+            width: 100%;
+          }
+        }
       `}</style>
     </div>
   );
