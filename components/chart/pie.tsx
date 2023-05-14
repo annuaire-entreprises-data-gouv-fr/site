@@ -1,55 +1,39 @@
 import {
   Chart as ChartJS,
   CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
+  Title as ChartTitle,
   Tooltip,
   Legend,
   ChartData,
+  ArcElement,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, ArcElement, ChartTitle, Tooltip, Legend);
 
 type StackedBarChartProps = {
   height?: number | string;
   width?: number | string;
-  data: ChartData<'bar', any, unknown>;
+  data: ChartData<'doughnut', any, unknown>;
 };
 
 const options = {
   plugins: {
-    title: {
-      display: true,
-    },
+    legend: { position: 'right' },
+    title: false,
   },
   responsive: true,
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-    },
-  },
+  cutout: '65%',
 };
 
-export const StackedBarChart = ({
+export const PieChart = ({
   data,
   height = '400px',
   width = '100%',
 }: StackedBarChartProps) => {
   return (
     <div>
-      <Bar
+      <Doughnut
         options={{ ...options, maintainAspectRatio: false }}
         width={width}
         height={height}

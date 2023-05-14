@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { Select } from '#components-ui/select';
 import { StackedBarChart } from '#components/chart/stack-bar';
+import constants from '#models/constants';
 
 export const TraficStats: React.FC<{
   visits: {
@@ -11,8 +12,7 @@ export const TraficStats: React.FC<{
     visitorReturning: number;
     visitorUnknown: number;
   }[];
-  colors: string[];
-}> = ({ visits, colors }) => {
+}> = ({ visits }) => {
   const [statsType, setStatsType] = useState('visit');
 
   const data = {
@@ -26,7 +26,7 @@ export const TraficStats: React.FC<{
           y: statsType === 'visit' ? visitReturning : visitorReturning,
           x: label,
         })),
-        backgroundColor: colors[0],
+        backgroundColor: constants.chartColors[0],
       },
       {
         label:
@@ -37,7 +37,7 @@ export const TraficStats: React.FC<{
           y: statsType === 'visit' ? visitUnknown : visitorUnknown,
           x: label,
         })),
-        backgroundColor: colors[1],
+        backgroundColor: constants.chartColors[1],
       },
     ],
   };
@@ -59,9 +59,7 @@ export const TraficStats: React.FC<{
           onChange={onOptionChange}
         />
       </div>
-      <div>
-        <StackedBarChart data={data} />
-      </div>
+      <StackedBarChart data={data} />
     </>
   );
 };

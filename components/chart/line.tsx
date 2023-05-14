@@ -23,19 +23,26 @@ ChartJS.register(
 );
 
 type LineChartProps = {
-  height?: number;
-  data: ChartData<'line', number[], string>;
+  data: ChartData<'line', (number | null)[], string>;
   options?: ChartOptions<'line'>;
+  height?: number | string;
+  width?: number | string;
 };
 
 export const LineChart = ({
   data,
   options = {},
-  height = 500,
+  height = '400px',
+  width = '100%',
 }: LineChartProps) => {
   return (
-    <div style={{ height: `${height}px` }}>
-      <Line options={options} data={data} />
+    <div>
+      <Line
+        options={{ ...options, maintainAspectRatio: false }}
+        data={data}
+        width={width}
+        height={height}
+      />
     </div>
   );
 };
