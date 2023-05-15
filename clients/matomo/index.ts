@@ -18,7 +18,7 @@ export type IMatomoStats = {
     npsResponses: number;
   }[];
   userResponses: { [key: string]: { value: number; tooltip: string } };
-  mostCopied: { [key: string]: number };
+  mostCopied: { label: string; count: number }[];
   copyPasteAction: { value: number; label: string }[];
   redirectedSiren: { value: number; label: string }[];
 };
@@ -206,14 +206,24 @@ const computeStats = (
     }
   }
 
-  const mostCopied = {} as { [key: string]: number };
+  const mostCopiedAggregator = {} as { [key: string]: number };
 
-  matomoCopyPasteEventStats
-    .sort((a, b) => b.nb_events - a.nb_events)
-    .forEach((copyPasteStat, index) => {
-      const label = getLabel(copyPasteStat.label, index);
-      mostCopied[label] = (mostCopied[label] || 0) + copyPasteStat.nb_events;
-    });
+  matomoCopyPasteEventStats.forEach((copyPasteStat, index) => {
+    const label = getLabel(copyPasteStat.label, index);
+    mostCopiedAggregator[label] =
+      (mostCopiedAggregator[label] || 0) + copyPasteStat.nb_events;
+  });
+
+  const mostCopied = Object.keys(mostCopiedAggregator)
+    .reduce((acc: { label: string; count: number }[], key) => {
+      if (key !== 'Autre') {
+        acc.push({ label: key, count: mostCopiedAggregator[key] });
+      }
+      return acc;
+    }, [])
+    .sort((a, b) => b.count - a.count);
+
+  mostCopied.push({ label: 'Autre', count: mostCopiedAggregator['Autre'] });
 
   return {
     copyPasteAction,
@@ -255,7 +265,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       visits: [],
       monthlyUserNps: [],
       userResponses: {},
-      mostCopied: {},
+      mostCopied: [],
       copyPasteAction: [],
       redirectedSiren: [],
     };

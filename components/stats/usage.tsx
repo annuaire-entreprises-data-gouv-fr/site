@@ -12,7 +12,7 @@ export const UsageStats: React.FC<{
     value: number;
     label: string;
   }[];
-  mostCopied: { [key: string]: number };
+  mostCopied: { label: string; count: number }[];
 }> = ({ redirectedSiren, copyPasteAction, mostCopied }) => {
   const data: ChartData<'line', (number | null)[], string> = {
     labels: redirectedSiren.map((redirected) => redirected.label),
@@ -67,18 +67,44 @@ export const UsageStats: React.FC<{
         </div>
         <div>
           <DoughnutChart
-            height={'200px'}
+            height="200px"
             data={{
-              labels: Object.keys(mostCopied),
+              labels: mostCopied.map((el) => el.label),
               datasets: [
                 {
                   label: 'Nombre de copier-coller',
-                  data: Object.values(mostCopied),
+                  data: mostCopied.map((el) => el.count),
                   backgroundColor: constants.chartColors,
                   borderColor: 'transparent',
                   hoverOffset: 4,
                 },
               ],
+            }}
+            pluginOptions={{
+              tooltip: {
+                callbacks: {
+                  label(context) {
+                    const safeData = context.dataset.data as number[];
+                    const total = safeData.reduce(
+                      (previousValue, currentValue) => {
+                        return previousValue + currentValue;
+                      },
+                      0
+                    );
+                    return Math.round((context.parsed * 100) / total) + '%';
+                  },
+                },
+              },
+              title: {
+                display: true,
+                text: 'Ci-dessus : répartition des données les plus copiées-collées.',
+                position: 'bottom',
+                align: 'center',
+              },
+              legend: {
+                position: 'right',
+                align: 'start',
+              },
             }}
           />
         </div>
@@ -91,15 +117,20 @@ export const UsageStats: React.FC<{
         .chart-container > div {
           flex-grow: 1;
         }
-        .chart-container > div:first-of-type {
-          max-width: 60%;
+
+        @media only screen and (min-width: 992px) {
+          .chart-container > div:first-of-type {
+            max-width: 60%;
+          }
         }
+
         @media only screen and (min-width: 1px) and (max-width: 992px) {
           .chart-container {
             flex-direction: column;
           }
           .chart-container > div {
             width: 100%;
+            max-width: 100%;
           }
         }
       `}</style>
