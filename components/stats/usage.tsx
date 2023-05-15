@@ -68,6 +68,29 @@ export const UsageStats: React.FC<{
         <div>
           <DoughnutChart
             height={'200px'}
+            options={{
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label(context) {
+                      const safeData = context.dataset.data as number[];
+                      const total = safeData.reduce(
+                        (previousValue, currentValue) => {
+                          return previousValue + currentValue;
+                        },
+                        0
+                      );
+                      return (
+                        context.dataset.label +
+                        ': ' +
+                        Math.round((context.parsed * 100) / total) +
+                        '%'
+                      );
+                    },
+                  },
+                },
+              },
+            }}
             data={{
               labels: Object.keys(mostCopied),
               datasets: [
