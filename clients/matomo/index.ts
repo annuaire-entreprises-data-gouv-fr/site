@@ -11,11 +11,17 @@ export type IMatomoStats = {
     visitorReturning: number;
     visitorUnknown: number;
   }[];
+  monthlyAgentNps: {
+    label: string;
+    number: number;
+    nps: number | null;
+    npsResponses: number | null;
+  }[];
   monthlyUserNps: {
     label: string;
     number: number;
-    nps: number;
-    npsResponses: number;
+    nps: number | null;
+    npsResponses: number | null;
   }[];
   userResponses: { [key: string]: { value: number; tooltip: string } };
   mostCopied: { label: string; count: number }[];
@@ -57,13 +63,13 @@ const getLabel = (labelAsString: string, index: number) => {
 const aggregateEvents = (
   matomoEventStats: { label: string; nb_events: number }[]
 ) => {
-  const months = {} as {
+  const months: {
     [monthKey: string]: { [userTypeKey: string]: number[] };
-  };
+  } = {};
 
-  const totals = {} as {
+  const totals: {
     [userTypeKey: string]: { value: number; tooltip: string };
-  };
+  } = {};
 
   matomoEventStats.forEach((stat) => {
     if (stat.label.indexOf('mood=') === -1) {
@@ -140,20 +146,15 @@ const computeStats = (
   }[][]
 ) => {
   const events = aggregateEvents(matomoNpsEventStats);
-  const monthlyUserNps = [] as {
-    label: string;
-    number: number;
-    nps: number;
-    npsResponses: number;
-  }[];
   const lastYear = getLastYear();
-
   const visits = [];
   const redirectedSiren = [];
   /* Currently the only action we have in matomo is copyPaste
    *  https://stats.data.gouv.fr/index.php?module=CoreHome&action=index&idSite=145&period=range&date=previous30#?period=range&date=previous30&idSite=145&category=General_Actions&subcategory=Events_Events
    */
   const copyPasteAction = [];
+  const monthlyAgentNps: IMatomoStats['monthlyAgentNps'] = [];
+  const monthlyUserNps: IMatomoStats['monthlyUserNps'] = [];
 
   for (let i = 0; i < 12; i++) {
     lastYear.setMonth(lastYear.getMonth() + 1);
@@ -191,17 +192,44 @@ const computeStats = (
         0,
     });
 
-    const monthlyNps = events.months[monthLabel]['all'];
-    if (monthlyNps) {
-      const count = monthlyNps.length;
-      const avg = monthlyNps.reduce((sum, el = 0) => sum + el, 0) / count;
+    const monthlyNpsAgent = events.months[monthLabel]['Agent public'];
+    const monthlyNpsAll = events.months[monthLabel]['all'];
 
+    if (monthlyNpsAgent) {
+      const count = monthlyNpsAgent.length;
+      const avg = monthlyNpsAgent.reduce((sum, el = 0) => sum + el, 0) / count;
+      monthlyAgentNps.push({
+        number: lastYear.getMonth() + 1,
+        label: monthLabel,
+        // prefer display 1 rather than 0
+        nps: Math.max(1, Math.round(avg * 10)) / 10,
+        npsResponses: monthlyNpsAgent.length,
+      });
+    } else {
+      monthlyAgentNps.push({
+        number: lastYear.getMonth() + 1,
+        label: monthLabel,
+        nps: null,
+        npsResponses: null,
+      });
+    }
+
+    if (monthlyNpsAll) {
+      const count = monthlyNpsAll.length;
+      const avg = monthlyNpsAll.reduce((sum, el = 0) => sum + el, 0) / count;
       monthlyUserNps.push({
         number: lastYear.getMonth() + 1,
         label: monthLabel,
         // prefer display 1 rather than 0
         nps: Math.max(1, Math.round(avg * 10)) / 10,
-        npsResponses: monthlyNps.length,
+        npsResponses: monthlyNpsAll.length,
+      });
+    } else {
+      monthlyUserNps.push({
+        number: lastYear.getMonth() + 1,
+        label: monthLabel,
+        nps: null,
+        npsResponses: null,
       });
     }
   }
@@ -228,6 +256,7 @@ const computeStats = (
   return {
     copyPasteAction,
     monthlyUserNps,
+    monthlyAgentNps,
     mostCopied,
     redirectedSiren,
     userResponses: events.totals,
@@ -263,6 +292,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
     });
     return {
       visits: [],
+      monthlyAgentNps: [],
       monthlyUserNps: [],
       userResponses: {},
       mostCopied: [],

@@ -23,7 +23,7 @@ ChartJS.register(
 );
 
 type LineChartProps = {
-  data: ChartData<'line', (number | null)[], string>;
+  data: ChartData<'line'>;
   options?: ChartOptions<'line'>;
   height?: number | string;
   width?: number | string;

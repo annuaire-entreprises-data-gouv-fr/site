@@ -7,6 +7,7 @@ import {
   Tooltip,
   Legend,
   ChartData,
+  ChartOptions,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
@@ -23,9 +24,10 @@ type StackedBarChartProps = {
   height?: number | string;
   width?: number | string;
   data: ChartData<'bar', any, unknown>;
+  pluginOption?: ChartOptions<'bar'>['plugins'];
 };
 
-const options = {
+const defaultOptions = {
   plugins: {
     title: {
       display: true,
@@ -46,11 +48,19 @@ export const StackedBarChart = ({
   data,
   height = '400px',
   width = '100%',
+  pluginOption,
 }: StackedBarChartProps) => {
   return (
     <div>
       <Bar
-        options={{ ...options, maintainAspectRatio: false }}
+        options={{
+          ...defaultOptions,
+          plugins: {
+            ...defaultOptions.plugins,
+            ...pluginOption,
+          },
+          maintainAspectRatio: false,
+        }}
         width={width}
         height={height}
         data={data}

@@ -2,12 +2,14 @@ import { GetStaticProps } from 'next';
 import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
 import BasicChart from '#components/chart/basic';
 import Meta from '#components/meta';
+import { ScoreNpsStats } from '#components/stats/score-nps';
 import { TraficStats } from '#components/stats/trafic';
 import { UsageStats } from '#components/stats/usage';
 import constants from '#models/constants';
 import { NextPageWithLayout } from './_app';
 
 const StatsPage: NextPageWithLayout<IMatomoStats> = ({
+  monthlyAgentNps,
   monthlyUserNps,
   visits,
   userResponses,
@@ -48,26 +50,9 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
     Ce qui nous intéresse avec ce score n’est pas sa valeur, mais ses
     variations. Si le score augmente, c’est que le service évolue dans le bon
     sens et inversement.
-    <BasicChart
-      yLabel="Note sur 10"
-      type="bar"
-      yRange={[0, 10]}
-      datasets={[
-        {
-          label: 'Note moyenne',
-          data: monthlyUserNps.map((month) => {
-            return {
-              y: month.nps,
-              x: month.label,
-            };
-          }),
-          type: 'line',
-          backgroundColor: constants.chartColors[0],
-          borderColor: constants.chartColors[0],
-          cubicInterpolationMode: 'monotone',
-          tension: 0.4,
-        },
-      ]}
+    <ScoreNpsStats
+      monthlyAgentNps={monthlyAgentNps}
+      monthlyUserNps={monthlyUserNps}
     />
     <h3>Répartition des réponses par catégorie d’utilisateurs</h3>
     <BasicChart
@@ -92,6 +77,7 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
 export const getStaticProps: GetStaticProps = async () => {
   const {
     visits,
+    monthlyAgentNps,
     monthlyUserNps,
     userResponses,
     mostCopied,
@@ -100,6 +86,7 @@ export const getStaticProps: GetStaticProps = async () => {
   } = await clientMatomoStats();
   return {
     props: {
+      monthlyAgentNps,
       monthlyUserNps,
       visits,
       userResponses,
