@@ -26,7 +26,7 @@ const options = {
   cutout: '65%',
 };
 
-export const PieChart = ({
+export const DoughnutChart = ({
   data,
   height = '400px',
   width = '100%',
@@ -34,6 +34,7 @@ export const PieChart = ({
   return (
     <div>
       <Doughnut
+        //@ts-ignore
         options={{ ...options, maintainAspectRatio: false }}
         width={width}
         height={height}

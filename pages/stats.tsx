@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next';
 import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
 import BasicChart from '#components/chart/basic';
-import { PieChart } from '#components/chart/pie';
 import Meta from '#components/meta';
 import { TraficStats } from '#components/stats/trafic';
 import { UsageStats } from '#components/stats/usage';

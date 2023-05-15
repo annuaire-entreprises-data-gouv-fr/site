@@ -1,6 +1,6 @@
 import { ChartData } from 'chart.js';
+import { DoughnutChart } from '#components/chart/doughnut';
 import { LineChart } from '#components/chart/line';
-import { PieChart } from '#components/chart/pie';
 import constants from '#models/constants';
 
 export const UsageStats: React.FC<{
@@ -66,7 +66,7 @@ export const UsageStats: React.FC<{
           </p>
         </div>
         <div>
-          <PieChart
+          <DoughnutChart
             height={'200px'}
             data={{
               labels: Object.keys(mostCopied),
