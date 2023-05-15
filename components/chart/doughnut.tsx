@@ -13,16 +13,14 @@ import { Doughnut } from 'react-chartjs-2';
 ChartJS.register(CategoryScale, ArcElement, ChartTitle, Tooltip, Legend);
 
 type StackedBarChartProps = {
-  options?: ChartOptions<'doughnut'>;
   height?: number | string;
   width?: number | string;
   data: ChartData<'doughnut', any, unknown>;
+  usePercentage?: boolean;
+  pluginOptions?: ChartOptions<'doughnut'>['plugins'];
 };
 
-const defaultOptions: ChartOptions<'doughnut'> = {
-  plugins: {
-    legend: { position: 'right' },
-  },
+const options: ChartOptions<'doughnut'> = {
   responsive: true,
   cutout: '65%',
   maintainAspectRatio: false,
@@ -30,24 +28,24 @@ const defaultOptions: ChartOptions<'doughnut'> = {
 
 export const DoughnutChart = ({
   data,
-  options = {},
   height = '400px',
   width = '100%',
+  pluginOptions = {},
 }: StackedBarChartProps) => {
   return (
     <div>
       <Doughnut
+        title="hey"
         options={{
-          ...defaultOptions,
           ...options,
           plugins: {
-            ...defaultOptions.plugins,
             ...options.plugins,
+            ...pluginOptions,
           },
         }}
         width={width}
         height={height}
-        data={{ ...data }}
+        data={data}
       />
     </div>
   );
