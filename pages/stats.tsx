@@ -3,25 +3,17 @@ import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
 import BasicChart from '#components/chart/basic';
 import Meta from '#components/meta';
 import { TraficStats } from '#components/stats/trafic';
+import { UsageStats } from '#components/stats/usage';
+import constants from '#models/constants';
 import { NextPageWithLayout } from './_app';
-
-const colors = [
-  '#e60049',
-  '#0bb4ff',
-  '#50e991',
-  '#e6d800',
-  '#9b19f5',
-  '#ffa300',
-  '#dc0ab4',
-  '#b3d4ff',
-  '#00bfa0',
-];
 
 const StatsPage: NextPageWithLayout<IMatomoStats> = ({
   monthlyUserNps,
   visits,
   userResponses,
   mostCopied,
+  copyPasteAction,
+  redirectedSiren,
 }) => (
   <>
     <Meta
@@ -40,25 +32,14 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
       Toutes les données recueillies sont <a href="vie-privee">anonymisées</a>.
     </p>
     <h2>Utilisation du service</h2>
-    <h3>Trafic mensuel</h3>
-    <TraficStats visits={visits} colors={colors} />
+    <h3>Volume de visite</h3>
+    <TraficStats visits={visits} />
     <br />
-    <h3>Informations les plus utilisées par les usagers</h3>
-    <BasicChart
-      yLabel="Informations"
-      stacked={true}
-      horizontal={true}
-      height={50}
-      yRange={[0, 100]}
-      type="bar"
-      labels={['']}
-      datasets={Object.keys(mostCopied).map((copiedKey, index) => {
-        return {
-          label: copiedKey,
-          data: [mostCopied[copiedKey]],
-          backgroundColor: colors[index],
-        };
-      })}
+    <h3>À quoi sert l’Annuaire des Entreprises ?</h3>
+    <UsageStats
+      copyPasteAction={copyPasteAction}
+      redirectedSiren={redirectedSiren}
+      mostCopied={mostCopied}
     />
     <h2>Satisfaction des utilisateurs</h2>
     Analyse des réponses au{' '}
@@ -81,8 +62,8 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
             };
           }),
           type: 'line',
-          backgroundColor: colors[0],
-          borderColor: colors[0],
+          backgroundColor: constants.chartColors[0],
+          borderColor: constants.chartColors[0],
           cubicInterpolationMode: 'monotone',
           tension: 0.4,
         },
@@ -101,7 +82,7 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
         return {
           label: userTypeKey,
           data: [userResponses[userTypeKey].value],
-          backgroundColor: colors[index + 1],
+          backgroundColor: constants.chartColors[index + 1],
         };
       })}
     />
@@ -109,14 +90,22 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { visits, monthlyUserNps, userResponses, mostCopied } =
-    await clientMatomoStats();
+  const {
+    visits,
+    monthlyUserNps,
+    userResponses,
+    mostCopied,
+    copyPasteAction,
+    redirectedSiren,
+  } = await clientMatomoStats();
   return {
     props: {
       monthlyUserNps,
       visits,
       userResponses,
       mostCopied,
+      copyPasteAction,
+      redirectedSiren,
       metadata: {
         useReact: true,
       },

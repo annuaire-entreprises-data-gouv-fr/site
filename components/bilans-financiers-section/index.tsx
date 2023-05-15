@@ -99,6 +99,31 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
       </p>
       <br />
       <LineChart
+        options={{
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label(tooltipItem) {
+                  return formatCurrency(
+                    tooltipItem.parsed.y.toString()
+                  ).toString();
+                },
+              },
+            },
+          },
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              border: { display: false },
+              ticks: {
+                callback: (label) => {
+                  return formatCurrency(label.toString());
+                },
+              },
+            },
+          },
+        }}
         height={250}
         data={{
           labels: sortedBilans.map((bilan) =>
