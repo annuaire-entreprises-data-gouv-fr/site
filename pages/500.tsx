@@ -7,7 +7,11 @@ import { NextPageWithLayout } from './_app';
 const ServerError: NextPageWithLayout = () => {
   return (
     <>
-      <Meta title="Cette page est introuvable" noIndex={true} />
+      <Meta
+        title="Cette page est introuvable"
+        noIndex={true}
+        canonical="https://annuaire-entreprises.data.gouv.fr/500"
+      />
       <MatomoEvent category="error" action="serverError" name="" />
       <ServerErrorExplanations />
     </>

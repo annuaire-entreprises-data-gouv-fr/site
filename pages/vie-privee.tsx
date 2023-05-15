@@ -6,7 +6,11 @@ import { NextPageWithLayout } from './_app';
 
 const Privacy: NextPageWithLayout = () => (
   <div>
-    <Meta noIndex title="Politique de confidentialité"></Meta>
+    <Meta
+      noIndex
+      title="Politique de confidentialité"
+      canonical="https://annuaire-entreprises.data.gouv.fr/vie-privee"
+    />
     <TextWrapper>
       <h1>Politique de confidentialité</h1>
       <p>

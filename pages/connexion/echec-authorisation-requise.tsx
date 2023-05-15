@@ -9,6 +9,7 @@ const ConnexionFailure: NextPageWithLayout = () => (
   <>
     <Meta
       title="Vous n’êtes pas autorisé(e) à accéder à cette partie du site"
+      canonical="https://annuaire-entreprises.data.gouv.fr/connexion/echec-authoriastion-requise"
       noIndex={true}
     />
     <h1>Vous n’êtes pas autorisé(e) à accéder à cette partie du site</h1>

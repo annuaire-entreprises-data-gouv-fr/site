@@ -7,7 +7,11 @@ import { NextPageWithLayout } from './_app';
 const ServerError: NextPageWithLayout = () => {
   return (
     <>
-      <Meta title="Cette page ne fonctionne pas" noIndex={true} />
+      <Meta
+        title="Cette page ne fonctionne pas"
+        noIndex={true}
+        canonical="https://annuaire-entreprises.data.gouv.fr/500"
+      />
       <ServerErrorExplanations />
     </>
   );

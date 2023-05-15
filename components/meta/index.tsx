@@ -8,7 +8,7 @@ type IProps = {
   title: string;
   description?: string;
   noIndex?: boolean;
-  canonical?: string;
+  canonical: string;
 };
 
 const SITE_NAME = 'Annuaire des Entreprises : le moteur de recherche officiel';

@@ -30,8 +30,9 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
 }) => (
   <>
     <Meta
-      title="Rechercher une entreprise"
-      canonical="https://annuaire-entreprises.data.gouv.fr"
+      title="Liste des structures associées à un individu"
+      canonical="https://annuaire-entreprises.data.gouv.fr/personne"
+      noIndex={true}
     />
     <div className="content-container">
       <StructuredDataSearchAction />

@@ -43,7 +43,11 @@ const team = [
 const Equipe: NextPageWithLayout = () => {
   return (
     <div>
-      <Meta noIndex title="Équipe de l'Annuaire des Entreprises"></Meta>
+      <Meta
+        noIndex
+        title="Qui est l’équipe derrière l'Annuaire des Entreprises"
+        canonical="https://annuaire-entreprises.data.gouv.fr/equipe"
+      />
       <TextWrapper>
         <h1>Qui sommes-nous ?</h1>
         <h2>Qui construit l’Annuaire des Entreprises ?</h2>

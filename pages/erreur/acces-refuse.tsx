@@ -7,7 +7,10 @@ import { NextPageWithLayout } from 'pages/_app';
 const Forbidden: NextPageWithLayout = () => {
   return (
     <>
-      <Meta title="Accès refusé" />
+      <Meta
+        title="Accès refusé"
+        canonical="https://annuaire-entreprises.data.gouv.fr/erreur/acces-refuse"
+      />
       <h1>Accès refusé 🚫</h1>
       <p>
         Notre algorithme de détection pense que vous êtes un robot. <br />

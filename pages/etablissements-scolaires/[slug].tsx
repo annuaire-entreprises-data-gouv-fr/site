@@ -29,7 +29,11 @@ const EtablissementScolaire: NextPageWithLayout<IProps> = ({
 }) => {
   return (
     <>
-      <Meta title={'Établissements scolaires'} noIndex={true} />
+      <Meta
+        title={'Établissements scolaires'}
+        noIndex={true}
+        canonical={`https://annuaire-entreprises.data.gouv.fr/etablissements-scolaires/${uniteLegale.siren}`}
+      />
       <div className="content-container">
         <Title
           ficheType={FICHE.ETABLISSEMENTS_SCOLAIRES}

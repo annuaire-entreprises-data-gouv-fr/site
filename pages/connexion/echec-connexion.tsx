@@ -7,7 +7,11 @@ import { NextPageWithLayout } from 'pages/_app';
 
 const ConnexionFailure: NextPageWithLayout = () => (
   <>
-    <Meta title="Votre tentative de connexion a échouée" noIndex={true} />
+    <Meta
+      title="Votre tentative de connexion a échouée"
+      noIndex={true}
+      canonical="https://annuaire-entreprises.data.gouv.fr/connexion/echec-connexion"
+    />
     <h1>Votre tentative de connexion a échouée</h1>
     <p>
       Merci de réessayer plus tard. Si le problème se reproduit, merci de{' '}

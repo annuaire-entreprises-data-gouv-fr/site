@@ -26,6 +26,7 @@ const StatusPage: NextPageWithLayout<IProps> = ({
   <>
     <Meta
       title="Statut des API utilisées par l'Annuaire des Entreprises"
+      canonical="https://annuaire-entreprises.data.gouv.fr/donnees/api"
       noIndex
     />
     <div className="content-container">

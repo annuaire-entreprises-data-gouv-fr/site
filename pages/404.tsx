@@ -7,7 +7,11 @@ import { NextPageWithLayout } from './_app';
 const NotFound: NextPageWithLayout = () => {
   return (
     <>
-      <Meta title="Cette page est introuvable" noIndex />
+      <Meta
+        title="Cette page est introuvable"
+        canonical="https://annuaire-entreprises.data.gouv.fr/404"
+        noIndex
+      />
       <MatomoEvent category="error" action="notFound" name="" />
       <ErrorNotFoundExplanations />
     </>

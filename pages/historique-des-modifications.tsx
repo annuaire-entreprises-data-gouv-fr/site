@@ -13,7 +13,7 @@ const Changelog: NextPageWithLayout<IProps> = ({ changelog }) => (
   <>
     <Meta
       title="Rechercher une entreprise"
-      canonical="https://annuaire-entreprises.data.gouv.fr"
+      canonical="https://annuaire-entreprises.data.gouv.fr/historique-des-modifications"
     />
     <h1>Nouveautés</h1>
     <p>
