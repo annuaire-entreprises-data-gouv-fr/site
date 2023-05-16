@@ -31,7 +31,7 @@ const SubventionsAssociationPage: NextPageWithLayout<IProps> = ({
       <Meta
         title={`Espace Agent Public - Subventions Association | Annuaire des Entreprises`}
         noIndex={true}
-        canonical="https://annuaire-entreprises.data.gouv.fr/espace-agent/subventions-assoication"
+        canonical="https://annuaire-entreprises.data.gouv.fr/espace-agent/subventions-association"
       />
       <div className="content-container">
         <Title uniteLegale={uniteLegale} session={session} />
