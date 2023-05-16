@@ -8,7 +8,7 @@ const Privacy: NextPageWithLayout = () => (
     <Meta
       title="Mentions légales"
       noIndex={true}
-      canonical="https://annuaire-entreprises.data.gouv.fr/mentions-legales"
+      canonical=
     />
     <TextWrapper>
       <h1>Mentions légales</h1>
