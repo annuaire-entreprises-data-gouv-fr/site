@@ -9,7 +9,7 @@ const Privacy: NextPageWithLayout = () => (
     <Meta
       noIndex
       title="Politique de confidentialité"
-      canonical="https://annuaire-entreprises.data.gouv.fr/vie-privee"
+      canonical=
     />
     <TextWrapper>
       <h1>Politique de confidentialité</h1>
