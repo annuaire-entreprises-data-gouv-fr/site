@@ -16,7 +16,7 @@ const AdministrationError: NextPageWithLayout<{
     <>
       <Meta
         title="Cette administration ne répond pas"
-        canonical="https://annuaire-entreprises.data.gouv.fr/erreur/administration"
+        canonical=
       />
       <div className="content-container">
         <h1>Le téléservice ne répond pas</h1>
