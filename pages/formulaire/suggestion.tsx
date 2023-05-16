@@ -4,7 +4,7 @@ import { MultiChoice } from '#components-ui/multi-choice';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import { randomId } from '#utils/helpers';
 import { NextPageWithLayout } from 'pages/_app';
-import { visitorTypes } from '../nps';
+import { visitorTypes } from './nps';
 
 const SuggestionPage: NextPageWithLayout = () => {
   const uuid = randomId();
