@@ -46,7 +46,7 @@ const Equipe: NextPageWithLayout = () => {
       <Meta
         noIndex
         title="Qui est l’équipe derrière l'Annuaire des Entreprises"
-        canonical="https://annuaire-entreprises.data.gouv.fr/equipe"
+        canonical=
       />
       <TextWrapper>
         <h1>Qui sommes-nous ?</h1>
