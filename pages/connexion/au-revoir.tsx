@@ -8,7 +8,7 @@ const Logout: NextPageWithLayout = () => (
   <>
     <Meta
       title="Vous êtes bien deconnecté"
-      canonical="https://annuaire-entreprises.data.gouv.fr/connexion/au-revoir"
+      canonical=
       noIndex={true}
     />
     <h1>Vous êtes bien déconnecté(e)</h1>
