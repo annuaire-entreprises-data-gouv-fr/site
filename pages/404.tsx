@@ -9,7 +9,7 @@ const NotFound: NextPageWithLayout = () => {
     <>
       <Meta
         title="Cette page est introuvable"
-        canonical="https://annuaire-entreprises.data.gouv.fr/404"
+        canonical=
         noIndex
       />
       <MatomoEvent category="error" action="notFound" name="" />
