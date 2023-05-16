@@ -10,7 +10,7 @@ const ServerError: NextPageWithLayout = () => {
       <Meta
         title="Cette page est introuvable"
         noIndex={true}
-        canonical="https://annuaire-entreprises.data.gouv.fr/500"
+        canonical=
       />
       <MatomoEvent category="error" action="serverError" name="" />
       <ServerErrorExplanations />
