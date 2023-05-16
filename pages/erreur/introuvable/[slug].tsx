@@ -17,7 +17,7 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
       <Meta
         title="Numero d’identification introuvable"
         noIndex={true}
-        canonical="https://annuaire-entreprises.data.gouv.fr/erreur/introuvable"
+        canonical=
       />
       <MatomoEvent category="error" action="sirenOrSiretNotFound" name="" />
       <h1>Le numéro d’identification “{slug}” n’existe pas</h1>
