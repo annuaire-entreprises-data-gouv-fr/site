@@ -18,7 +18,7 @@ const SirenOrSiretInvalidPage: NextPageWithLayout<
       <Meta
         title="Numero invalide"
         noIndex={true}
-        canonical="https://annuaire-entreprises.data.gouv.fr/erreur/invalide"
+        canonical=
       />
       <MatomoEvent category="error" action="sirenOrSiretInvalid" name="" />
       <h1>⚠️ Attention : le numéro d’identification “{slug}” est invalide</h1>
