@@ -9,7 +9,7 @@ const Forbidden: NextPageWithLayout = () => {
     <>
       <Meta
         title="Accès refusé"
-        canonical="https://annuaire-entreprises.data.gouv.fr/erreur/acces-refuse"
+        canonical=
       />
       <h1>Accès refusé 🚫</h1>
       <p>
