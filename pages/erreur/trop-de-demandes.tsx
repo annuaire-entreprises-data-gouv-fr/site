@@ -11,7 +11,7 @@ const TooManyRequest: NextPageWithLayout = () => {
       <Meta
         title="Trop de requête de votre part"
         noIndex={true}
-        canonical="https://annuaire-entreprises.data.gouv.fr/erreur/trop-de-demandes"
+        canonical=
       />
       <h1>Nous avons reçu trop de demandes de votre part 📈</h1>
       <p>
