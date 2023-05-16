@@ -1,6 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
-import routes from '#clients/routes';
-import { Siren } from '#utils/helpers';
+import { Siret } from '#utils/helpers';
 import odsClient from '..';
 import { IAPIAgregatsComptableResponse } from './interface';
 
@@ -19,26 +18,33 @@ export type IAgregatComptable = {
  * Agrégats comptables 2019 des collectivités et des établissements publics locaux
  * https://data.economie.gouv.fr/explore/dataset/agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-2019/api/
  */
-export const clientAgregatsComptableCollectivite = async (siren: Siren) => {
-  const url = routes.agregatsComptableCollectivite.ods.search;
-  const metaDataUrl = routes.agregatsComptableCollectivite.ods.metadata;
+export const clientAgregatsComptableCollectivite = async (
+  siret: Siret,
+  metadata: string,
+  search: string,
+  year: string
+) => {
+  const url = search;
+  const metaDataUrl = metadata;
 
   const response = await odsClient(
     {
       url,
-      config: { params: { q: `siren:${siren}` } },
+      config: { params: { q: `ident:${siret}` } },
     },
     metaDataUrl
   );
 
   if (response.records.length === 0) {
-    throw new HttpNotFound(siren);
+    throw new HttpNotFound(siret);
   }
 
   const records = response.records as IAPIAgregatsComptableResponse[];
+
   return {
-    agregatsComptable: records.map(mapToDomainObject),
+    agregatsComptable: mapToDomainObject(records[0]),
     lastModified: response.lastModified,
+    year,
   };
 };
 

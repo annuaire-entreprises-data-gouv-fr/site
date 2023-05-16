@@ -56,8 +56,11 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
 
-    const { uniteLegale, bilansFinanciers, agregatsComptableCollectivite } =
-      await getDonneesFinancieresFromSlug(slug);
+    const {
+      uniteLegale,
+      bilansFinanciers,
+      agregatsComptableCollectivite = [],
+    } = await getDonneesFinancieresFromSlug(slug);
 
     return {
       props: {
