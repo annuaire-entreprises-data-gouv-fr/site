@@ -10,7 +10,7 @@ const ServerError: NextPageWithLayout = () => {
       <Meta
         title="Cette page ne fonctionne pas"
         noIndex={true}
-        canonical="https://annuaire-entreprises.data.gouv.fr/500"
+        canonical=
       />
       <ServerErrorExplanations />
     </>
