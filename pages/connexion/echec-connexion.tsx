@@ -10,7 +10,7 @@ const ConnexionFailure: NextPageWithLayout = () => (
     <Meta
       title="Votre tentative de connexion a échouée"
       noIndex={true}
-      canonical="https://annuaire-entreprises.data.gouv.fr/connexion/echec-connexion"
+      canonical=
     />
     <h1>Votre tentative de connexion a échouée</h1>
     <p>
