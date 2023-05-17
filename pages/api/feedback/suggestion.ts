@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import logInMattermost from '#utils/integrations/mattermost';
-import logSuggestionToNotion, {
-  notionDatabaseId,
+import {
+  logSuggestionToNotion,
+  notionFeedbacksLink,
 } from '#utils/integrations/notion';
 import logErrorInSentry from '#utils/sentry';
 
@@ -14,7 +15,7 @@ const logAllEvents = async (req: NextApiRequest) => {
 
     const mattermostData = {
       username: 'clippy',
-      text: `**Nouvelle suggestion** \nVisiteur : ${visitorType} \nSuggestion : ${suggestion} \nLien notion : [👉 ici](https://www.notion.so/apigouv/${notionDatabaseId}?v=a5c2c84d69e7486d9c1c9b9ae90e9f2f&pvs=4)`,
+      text: `**Nouvelle suggestion** \nVisiteur : ${visitorType} \nSuggestion : ${suggestion} \nLien notion : [👉 ici](${notionFeedbacksLink})`,
     };
 
     // async functions but no need to await them
