@@ -23,7 +23,6 @@
     "test:unit": "jest --runInBand",
     "lint": "next lint",
     "script:seo": " ts-node --project ./seo-script/seo-script-tsconfig.json ./seo-script/index.ts",
-    "script:add-agent": "node ./utils/cli/add-authorized-user.js",
     "storybook:start": "start-storybook -p 6006",
     "build-storybook:build": "build-storybook"
   },

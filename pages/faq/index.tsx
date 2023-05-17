@@ -20,7 +20,10 @@ const StatusPage: NextPageWithLayout<{
   articles: IArticle[];
 }> = ({ articlesByTarget, articles }) => (
   <>
-    <Meta title="FAQ de l'Annuaire des Entreprises" />
+    <Meta
+      title="FAQ de l'Annuaire des Entreprises"
+      canonical="https://annuaire-entreprises.data.gouv.fr/faq"
+    />
     <StructuredDataFAQ
       data={articles.map(({ title, body }) => [
         title,

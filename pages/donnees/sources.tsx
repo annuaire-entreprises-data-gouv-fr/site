@@ -18,7 +18,10 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
   allAdministrations,
 }) => (
   <>
-    <Meta title="Sources des données utilisées dans l'Annuaire des Entreprises" />
+    <Meta
+      title="Sources des données utilisées dans l'Annuaire des Entreprises"
+      canonical="https://annuaire-entreprises.data.gouv.fr/donnees/sources"
+    />
     <div className="content-container">
       <h1>Sources de données</h1>
       <p>

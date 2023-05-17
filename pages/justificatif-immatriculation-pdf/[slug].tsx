@@ -52,6 +52,7 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
     <>
       <Meta
         title="Télécharger le justificatif d’immatriculation"
+        canonical={`https://annuaire-entreprises.data.gouv.fr/justificatif-immatriculation-pdf/${siren}`}
         noIndex={true}
       />
       <br />
