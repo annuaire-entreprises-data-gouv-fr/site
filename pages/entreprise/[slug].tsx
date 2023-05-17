@@ -28,7 +28,6 @@ import {
   getCompanyPageDescription,
   getCompanyPageTitle,
 } from '#utils/helpers/get-company-page-title';
-import { isAuthorizedAgent } from '#utils/helpers/is-authorized-agent';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   postServerSideProps,
