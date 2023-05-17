@@ -134,7 +134,6 @@ const FeedBackPage: NextPageWithLayout = () => {
                   className="fr-input"
                   id="email"
                   name="email"
-                  required
                   type="email"
                 />
               </div>
