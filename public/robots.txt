@@ -19,6 +19,7 @@ Disallow: /justificatif/
 Disallow: /justificatif-immatriculation-pdf/
 Disallow: /annonces/
 Disallow: /dirigeants/
+Disallow: /personne/
 Disallow: /elus/
 Disallow: /divers/
 Disallow: /erreur/

@@ -7,7 +7,11 @@ import { NextPageWithLayout } from './_app';
 
 const Budget: NextPageWithLayout = () => (
   <div>
-    <Meta noIndex title="Politique de confidentialité"></Meta>
+    <Meta
+      noIndex
+      title="Politique de confidentialité"
+      canonical="https://annuaire-entreprises.data.gouv.fr/budget"
+    />
     <TextWrapper>
       <h1>Budget</h1>
       <p>

@@ -8,7 +8,7 @@ import { NextPageWithLayout } from 'pages/_app';
 const TooManyRequest: NextPageWithLayout = () => {
   return (
     <>
-      <Meta title="Accès refusé" noIndex={true} />
+      <Meta title="Trop de requête de votre part" noIndex={true} />
       <h1>Nous avons reçu trop de demandes de votre part 📈</h1>
       <p>
         Notre site a reçu trop de demandes de la part de votre adresse IP en un

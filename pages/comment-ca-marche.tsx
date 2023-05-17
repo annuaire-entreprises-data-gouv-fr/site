@@ -8,7 +8,10 @@ const About: NextPageWithLayout = () => {
   const allAdministrations = Object.values(administrationsMetaData);
   return (
     <>
-      <Meta title="Comment ça marche ?" />
+      <Meta
+        title="Comment ça marche ?"
+        canonical="https://annuaire-entreprises.data.gouv.fr/comment-ca-marche"
+      />
       <TextWrapper>
         <h1>À propos de L’Annuaire des Entreprises</h1>
         <p>
@@ -19,8 +22,8 @@ const About: NextPageWithLayout = () => {
         <p>
           Ce site ne fait{' '}
           <b>
-            que centraliser les données. Il ne les modifie pas et ne les
-            stocke pas.
+            que centraliser les données. Il ne les modifie pas et ne les stocke
+            pas.
           </b>
         </p>
         <p>
