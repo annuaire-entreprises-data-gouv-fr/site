@@ -129,24 +129,39 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
                       <p>
                         Le document que vous recherchez n’a pas été retrouvé par
                         le téléservice de l’
-                        <INPI />.
+                        <INPI />. Si la structure est bien une entreprise,{' '}
+                        <b>cela ne devrait pas arriver</b>. Vous pouvez :
                       </p>
-                      <p>
-                        Il arrive que certaines structures soient correctement
-                        immatriculées mais que le document justificatif soit{' '}
-                        <b>introuvable</b>.
-                      </p>
-                      <p>
-                        Quand c’est le cas,{' '}
-                        <a href="https://www.inpi.fr/contactez-nous">
-                          écrivez à l’INPI pour leur demander le document.
-                        </a>{' '}
-                        L’
-                        <INPI /> étant à la fois l’opérateur du Registre
-                        National des Entreprises (RNE) et du téléservice qui
-                        produit les justificatifs, eux seuls sont en mesure de
-                        résoudre le problème.
-                      </p>
+                      <ol>
+                        <li>
+                          Soit ré-essayer de télécharger le document en{' '}
+                          <a
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            href={downloadLink}
+                          >
+                            cliquant ici
+                          </a>
+                          .
+                        </li>
+                        <li>
+                          Soit{' '}
+                          <a href="https://www.inpi.fr/contactez-nous">
+                            écrire à l’INPI pour leur demander le document.
+                          </a>
+                        </li>
+                        <p>
+                          L’
+                          <INPI /> est à la fois l’opérateur du Registre
+                          National des Entreprises (RNE) et du téléservice qui
+                          produit les justificatifs, c’est{' '}
+                          <b>
+                            la seule administration en mesure de résoudre le
+                            problème
+                          </b>
+                          .
+                        </p>
+                      </ol>
                     </>,
                   ]}
                 />,
