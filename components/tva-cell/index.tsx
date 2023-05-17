@@ -3,8 +3,10 @@ import FAQLink from '#components-ui/faq-link';
 import { Loader } from '#components-ui/loader';
 import FrontStateMachine from '#components/front-state-machine';
 import { CopyPaste } from '#components/table/simple';
+import { tvaNumber } from '#models/tva/utils';
+import { Siren, formatIntFr } from '#utils/helpers';
 
-const TVACell: React.FC<{}> = ({}) => {
+const TVACell: React.FC<{ siren: Siren }> = ({ siren }) => {
   const Unknown = (
     <i>
       <FAQLink
@@ -15,6 +17,9 @@ const TVACell: React.FC<{}> = ({}) => {
       </FAQLink>
     </i>
   );
+
+  const unverifiedTvaNumber = tvaNumber(siren);
+
   return (
     <FrontStateMachine
       id="tva-cell-wrapper"
@@ -22,7 +27,7 @@ const TVACell: React.FC<{}> = ({}) => {
         Unknown,
         <>
           <Loader />
-          {/* 
+          {/*
             This whitespace ensure the line will have the same height as any written line
             It should avoid content layout shift for SEO
           */}
@@ -32,8 +37,13 @@ const TVACell: React.FC<{}> = ({}) => {
           Unknown
         </CopyPaste>,
         <i>
-          Le téléservice du VIES ne fonctionne pas actuellement. Merci de
-          ré-essayer plus tard.
+          Le téléservice du VIES ne fonctionne pas actuellement.{' '}
+          {unverifiedTvaNumber
+            ? `Nous n’avons pas pu vérifier si le numéro FR${formatIntFr(
+                unverifiedTvaNumber
+              )} est valide.`
+            : ''}{' '}
+          Merci de ré-essayer plus tard.
         </i>,
       ]}
     />

@@ -7,7 +7,11 @@ import { NextPageWithLayout } from './_app';
 const Accessibility: NextPageWithLayout = () => {
   return (
     <>
-      <Meta title="Déclaration d’accessibilité" noIndex={true} />
+      <Meta
+        title="Déclaration d’accessibilité"
+        noIndex={true}
+        canonical="https://annuaire-entreprises.data.gouv.fr/accessibilite"
+      />
       <TextWrapper>
         <h1>Déclaration d’accessibilité</h1>
         <p>

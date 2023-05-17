@@ -2,46 +2,58 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
-  Title as ChartTitle,
+  BarElement,
+  Title,
   Tooltip,
   Legend,
   ChartData,
-  ChartOptions,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
-  ChartTitle,
+  BarElement,
+  Title,
   Tooltip,
   Legend
 );
 
-type LineChartProps = {
-  data: ChartData<'line', (number | null)[], string>;
-  options?: ChartOptions<'line'>;
+type StackedBarChartProps = {
   height?: number | string;
   width?: number | string;
+  data: ChartData<'bar', any, unknown>;
 };
 
-export const LineChart = ({
+const options = {
+  plugins: {
+    title: {
+      display: true,
+    },
+  },
+  responsive: true,
+  scales: {
+    x: {
+      stacked: true,
+    },
+    y: {
+      stacked: true,
+    },
+  },
+};
+
+export const StackedBarChart = ({
   data,
-  options = {},
   height = '400px',
   width = '100%',
-}: LineChartProps) => {
+}: StackedBarChartProps) => {
   return (
     <div>
-      <Line
+      <Bar
         options={{ ...options, maintainAspectRatio: false }}
-        data={data}
         width={width}
         height={height}
+        data={data}
       />
     </div>
   );

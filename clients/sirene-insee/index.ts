@@ -53,7 +53,7 @@ export const inseeClientGet = async (
   const client = useFallback ? fallbackClient : defaultClient;
   return await client.get(
     route,
-    { timeout: constants.timeout.XS, ...axiosConfig },
+    { timeout: constants.timeout.S, ...axiosConfig },
     useCache
   );
 };

@@ -32,6 +32,7 @@ const ConventionsCollectives: NextPageWithLayout<IProps> = ({
         session
       )}`}
       description={getCompanyPageDescription(uniteLegale, session)}
+      canonical={`https://annuaire-entreprises.data.gouv.fr/divers/${uniteLegale.siren}`}
     />
     <div className="content-container">
       <Title

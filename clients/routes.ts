@@ -74,7 +74,7 @@ const routes = {
         'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=5&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
       npsEvents:
         'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=2&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
-      visits:
+      bulkRequest:
         'https://stats.data.gouv.fr/index.php?module=API&method=API.getBulkRequest&format=json',
     },
     tracker: 'https://stats.data.gouv.fr/piwik.php',

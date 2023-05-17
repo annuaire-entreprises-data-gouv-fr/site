@@ -35,6 +35,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
     <>
       <Meta
         title={`Labels et certificats - ${getNomComplet(uniteLegale, session)}`}
+        canonical={`https://annuaire-entreprises.data.gouv.fr/labels-certificats/${uniteLegale.siren}`}
         noIndex={true}
       />
       <div className="content-container">

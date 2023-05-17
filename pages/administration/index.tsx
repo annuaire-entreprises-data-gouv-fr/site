@@ -11,7 +11,10 @@ const StatusPage: NextPageWithLayout<{
   allAdministrations: IAdministrationMetaData[];
 }> = ({ allAdministrations }) => (
   <>
-    <Meta title="Administrations partenaires de l'Annuaire des Entreprises" />
+    <Meta
+      title="Liste des administrations partenaires de l'Annuaire des Entreprises"
+      canonical="https://annuaire-entreprises.data.gouv.fr/administration"
+    />
     <TextWrapper>
       <h1>Administrations partenaires</h1>
       <p>

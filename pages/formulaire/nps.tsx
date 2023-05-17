@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
+import { Checkbox } from '#components-ui/checkbox';
 import { MultiChoice } from '#components-ui/multi-choice';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import constants from '#models/constants';
@@ -108,6 +109,37 @@ const FeedBackPage: NextPageWithLayout = () => {
                 required={false}
               />
             </fieldset>
+            <fieldset>
+              <legend>
+                <h2>4 ・ Avez-vous quelque chose d’autre à nous dire ?</h2>
+              </legend>
+
+              <div className="fr-input-group">
+                <label className="fr-label" htmlFor="textarea">
+                  Vous rêvez d’une fonctionnalité ? Vous détestez le bleu ?
+                  Dites-nous tout !
+                </label>
+                <textarea
+                  className="fr-input"
+                  id="textarea"
+                  name="textarea"
+                ></textarea>
+              </div>
+              <div className="fr-input-group">
+                <label className="fr-label" htmlFor="textarea">
+                  Facultatif : laissez-nous votre email si vous acceptez d’être
+                  recontacté.
+                </label>
+                <input
+                  className="fr-input"
+                  id="email"
+                  name="email"
+                  required
+                  type="email"
+                />
+              </div>
+            </fieldset>
+
             <br />
             <div className="layout-center">
               <ButtonLink small={false} type="submit">

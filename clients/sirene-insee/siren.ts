@@ -164,6 +164,10 @@ const mapToDomainObject = (
     categorieJuridiqueUniteLegale
   );
 
+  // when unknwon, dateCreation is set to 1900-01-01 by Insee instead of null
+  const dateCreation =
+    dateCreationUniteLegale === '1900-01-01' ? '' : dateCreationUniteLegale;
+
   const dirigeant = {
     sexe: sexeUniteLegale,
     prenom: formatFirstNames([prenomUsuelUniteLegale]),
@@ -183,7 +187,7 @@ const mapToDomainObject = (
     activitePrincipale: siege.activitePrincipale,
     libelleActivitePrincipale: siege.libelleActivitePrincipale,
     etablissements: createEtablissementsList([siege]),
-    dateCreation: dateCreationUniteLegale,
+    dateCreation,
     dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
       'T'
     )[0],

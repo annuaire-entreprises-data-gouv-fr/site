@@ -30,6 +30,7 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
         session
       )}`}
       description={getCompanyPageDescription(uniteLegale, session)}
+      canonical={`https://annuaire-entreprises.data.gouv.fr/justificatif/${uniteLegale.siren}`}
       noIndex={true}
     />
     <div className="content-container">

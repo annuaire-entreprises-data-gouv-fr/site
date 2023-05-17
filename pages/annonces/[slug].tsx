@@ -46,6 +46,7 @@ const Annonces: NextPageWithLayout<IProps> = ({
           session
         )}`}
         description={getCompanyPageDescription(uniteLegale, session)}
+        canonical={`https://annuaire-entreprises.data.gouv.fr/annonces/${uniteLegale.siren}`}
         noIndex={true}
       />
       <div className="content-container">

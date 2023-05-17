@@ -1,24 +1,11 @@
 import { TVAUserException, clientTVA } from '#clients/api-proxy/tva';
-import { Siren, verifySiren } from '#utils/helpers';
+import { verifySiren } from '#utils/helpers';
+import { tvaNumber } from './utils';
 
 export interface ITvaIntracommunautaire {
   numero: string;
   isValid: boolean;
 }
-
-/**
- * Compute TVA number from siren - does not include country code
- * @param siren
- * @returns
- */
-export const tvaNumber = (siren: Siren) => {
-  try {
-    const tvaNumber = (12 + ((3 * parseInt(siren, 10)) % 97)) % 97;
-    return `${tvaNumber < 10 ? '0' : ''}${tvaNumber}${siren}`;
-  } catch {
-    return '';
-  }
-};
 
 /**
  * build TVA number from siren and then validate it

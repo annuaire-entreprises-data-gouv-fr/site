@@ -29,6 +29,7 @@ const FinancePage: NextPageWithLayout<IProps> = ({
           uniteLegale,
           session
         )}`}
+        canonical={`https://annuaire-entreprises.data.gouv.fr/donnees-financieres/${uniteLegale.siren}`}
         noIndex={true}
       />
       <div className="content-container">

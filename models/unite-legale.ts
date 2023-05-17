@@ -90,7 +90,7 @@ class UniteLegaleBuilder {
     // no cache for bot as they scrap so they tend not to call the same siren twice
     const useCache = !this._isBot;
 
-    const shouldNotUseInsee = process.env.INSEE_ENABLED !== 'enabled';
+    const shouldNotUseInsee = process.env.INSEE_ENABLED === 'disabled';
 
     const getUniteLegaleInsee =
       shouldNotUseInsee || this._isBot
