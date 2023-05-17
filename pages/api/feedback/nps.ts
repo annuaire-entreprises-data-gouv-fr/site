@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { logEventInMatomo } from '#utils/analytics/matomo';
 import logInMattermost from '#utils/integrations/mattermost';
-import logSuggestionToNotion, {
-  notionDatabaseId,
+import {
+  logSuggestionToNotion,
+  notionFeedbacksLink,
 } from '#utils/integrations/notion';
 import logErrorInSentry from '#utils/sentry';
 
@@ -18,7 +19,7 @@ const logAllEvents = async (req: NextApiRequest) => {
     const email = req.body['email'] || NA;
 
     const commentaire = text
-      ? ` \nCommentaire : *${text}* \nEmail : ${email} \nLien notion : [👉 ici](https://www.notion.so/apigouv/${notionDatabaseId}?v=a5c2c84d69e7486d9c1c9b9ae90e9f2f&pvs=4)`
+      ? ` \nCommentaire : *${text}* \nEmail : ${email} \nLien notion : [👉 ici](${notionFeedbacksLink})`
       : '';
 
     const mattermostData = {
