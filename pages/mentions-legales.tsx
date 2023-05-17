@@ -5,11 +5,7 @@ import { NextPageWithLayout } from './_app';
 
 const Privacy: NextPageWithLayout = () => (
   <>
-    <Meta
-      title="Mentions légales"
-      noIndex={true}
-      canonical=
-    />
+    <Meta title="Mentions légales" noIndex={true} />
     <TextWrapper>
       <h1>Mentions légales</h1>
       <h2>Éditeur</h2>

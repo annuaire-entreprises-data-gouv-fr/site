@@ -7,11 +7,7 @@ import { NextPageWithLayout } from './_app';
 const NotFound: NextPageWithLayout = () => {
   return (
     <>
-      <Meta
-        title="Cette page est introuvable"
-        canonical=
-        noIndex
-      />
+      <Meta title="Cette page est introuvable" noIndex />
       <MatomoEvent category="error" action="notFound" name="" />
       <ErrorNotFoundExplanations />
     </>

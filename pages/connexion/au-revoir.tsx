@@ -6,11 +6,7 @@ import { NextPageWithLayout } from 'pages/_app';
 
 const Logout: NextPageWithLayout = () => (
   <>
-    <Meta
-      title="Vous êtes bien deconnecté"
-      canonical=
-      noIndex={true}
-    />
+    <Meta title="Vous êtes bien deconnecté" noIndex={true} />
     <h1>Vous êtes bien déconnecté(e)</h1>
     <p>Merci de votre visite</p>
     <a href="/">← Revenir au moteur de recherche</a>

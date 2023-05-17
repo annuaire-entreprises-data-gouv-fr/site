@@ -15,11 +15,7 @@ const SirenOrSiretInvalidPage: NextPageWithLayout<
 > = ({ slug = '' }) => {
   return (
     <>
-      <Meta
-        title="Numero invalide"
-        noIndex={true}
-        canonical=
-      />
+      <Meta title="Numero invalide" noIndex={true} />
       <MatomoEvent category="error" action="sirenOrSiretInvalid" name="" />
       <h1>⚠️ Attention : le numéro d’identification “{slug}” est invalide</h1>
       <div>

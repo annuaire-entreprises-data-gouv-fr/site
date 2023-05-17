@@ -18,7 +18,6 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
   <>
     <Meta
       title="Statistiques d’utilisation de l’Annuaire des Entreprises"
-      canonical=
       noIndex={true}
     />
     <script

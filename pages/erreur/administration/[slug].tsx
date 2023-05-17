@@ -14,10 +14,7 @@ const AdministrationError: NextPageWithLayout<{
 }> = ({ administration }) => {
   return (
     <>
-      <Meta
-        title="Cette administration ne répond pas"
-        canonical=
-      />
+      <Meta title="Cette administration ne répond pas" />
       <div className="content-container">
         <h1>Le téléservice ne répond pas</h1>
         <AdministrationNotResponding

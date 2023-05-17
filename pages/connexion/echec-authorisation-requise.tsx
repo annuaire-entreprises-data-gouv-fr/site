@@ -9,7 +9,6 @@ const ConnexionFailure: NextPageWithLayout = () => (
   <>
     <Meta
       title="Vous n’êtes pas autorisé(e) à accéder à cette partie du site"
-      canonical=
       noIndex={true}
     />
     <h1>Vous n’êtes pas autorisé(e) à accéder à cette partie du site</h1>

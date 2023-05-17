@@ -7,11 +7,7 @@ import { NextPageWithLayout } from './_app';
 const ServerError: NextPageWithLayout = () => {
   return (
     <>
-      <Meta
-        title="Cette page ne fonctionne pas"
-        noIndex={true}
-        canonical=
-      />
+      <Meta title="Cette page ne fonctionne pas" noIndex={true} />
       <ServerErrorExplanations />
     </>
   );

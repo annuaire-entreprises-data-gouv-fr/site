@@ -7,10 +7,7 @@ import { NextPageWithLayout } from 'pages/_app';
 const Forbidden: NextPageWithLayout = () => {
   return (
     <>
-      <Meta
-        title="Accès refusé"
-        canonical=
-      />
+      <Meta title="Accès refusé" />
       <h1>Accès refusé 🚫</h1>
       <p>
         Notre algorithme de détection pense que vous êtes un robot. <br />
