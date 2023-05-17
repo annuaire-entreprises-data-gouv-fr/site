@@ -1,4 +1,4 @@
-import { isLoggedIn } from '#utils/session';
+import { isAgent, isSuperAgent } from '#utils/session';
 import { ISession } from '#utils/session';
 import { IEtablissement, IUniteLegale } from '.';
 
@@ -7,6 +7,9 @@ export enum ISTATUTDIFFUSION {
   NONDIFF = 'non-diffusible',
   DIFFUSIBLE = 'diffusible',
 }
+
+const canSeeNonDiffusible = (session: ISession | null) =>
+  session && (isAgent(session) || isSuperAgent(session));
 
 /**
  * Only diffusible. Exclude partially diffusible and non-diffusible
@@ -46,7 +49,7 @@ export const getNomComplet = (
   uniteLegale: IUniteLegale,
   session: ISession | null
 ) => {
-  if (session && isLoggedIn(session)) {
+  if (session && canSeeNonDiffusible(session)) {
     return uniteLegale.nomComplet;
   }
 
@@ -64,15 +67,21 @@ export const getNomComplet = (
   }
 };
 
-export const getEnseigneEtablissement = (etablissement: IEtablissement) => {
-  if (!estDiffusible(etablissement)) {
+export const getEnseigneEtablissement = (
+  etablissement: IEtablissement,
+  session: ISession | null
+) => {
+  if (!estDiffusible(etablissement) && !canSeeNonDiffusible(session)) {
     return nonDiffusibleDataFormatter('information non-diffusible');
   }
   return etablissement.enseigne;
 };
 
-export const getDenominationEtablissement = (etablissement: IEtablissement) => {
-  if (!estDiffusible(etablissement)) {
+export const getDenominationEtablissement = (
+  etablissement: IEtablissement,
+  session: ISession | null
+) => {
+  if (!estDiffusible(etablissement) && !canSeeNonDiffusible(session)) {
     return nonDiffusibleDataFormatter('information non-diffusible');
   }
   return etablissement.denomination;
@@ -107,8 +116,9 @@ export const getAdresseUniteLegale = (
   const { adressePostale, adresse, commune, codePostal } =
     uniteLegale?.siege || {};
 
-  const shouldDiff =
-    session && isLoggedIn(session) ? true : estDiffusible(uniteLegale);
+  const shouldDiff = canSeeNonDiffusible(session)
+    ? true
+    : estDiffusible(uniteLegale);
 
   return formatAdresseForDiffusion(
     shouldDiff,
@@ -130,8 +140,9 @@ export const getAdresseEtablissement = (
 ) => {
   const { adressePostale, adresse, commune, codePostal } = etablissement || {};
 
-  const shouldDiff =
-    session && isLoggedIn(session) ? true : estDiffusible(etablissement);
+  const shouldDiff = canSeeNonDiffusible(session)
+    ? true
+    : estDiffusible(etablissement);
 
   return formatAdresseForDiffusion(
     shouldDiff,

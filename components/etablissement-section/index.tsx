@@ -67,7 +67,7 @@ const EtablissementSection: React.FC<IProps> = ({
       ? [
           [
             'Enseigne de l’établissement',
-            getEnseigneEtablissement(etablissement),
+            getEnseigneEtablissement(etablissement, session),
           ],
         ]
       : []),
@@ -75,7 +75,7 @@ const EtablissementSection: React.FC<IProps> = ({
       ? [
           [
             'Nom de l’établissement',
-            getDenominationEtablissement(etablissement),
+            getDenominationEtablissement(etablissement, session),
           ],
         ]
       : []),

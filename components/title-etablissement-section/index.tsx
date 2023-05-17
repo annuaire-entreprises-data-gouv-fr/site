@@ -79,8 +79,8 @@ const TitleEtablissementWithDenomination: React.FC<{
       uniteLegale={uniteLegale}
       session={session}
       nomEtablissement={
-        getEnseigneEtablissement(etablissement) ||
-        getDenominationEtablissement(etablissement)
+        getEnseigneEtablissement(etablissement, session) ||
+        getDenominationEtablissement(etablissement, session)
       }
     />
     <div className="etablissement-sub-title">

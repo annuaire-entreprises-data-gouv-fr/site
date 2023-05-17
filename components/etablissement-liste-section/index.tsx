@@ -61,8 +61,8 @@ const EtablissementTable: React.FC<{
                   {(etablissement.enseigne || etablissement.denomination) && (
                     <a href={`/etablissement/${etablissement.siret}`}>
                       <b>
-                        {getEnseigneEtablissement(etablissement) ||
-                          getDenominationEtablissement(etablissement)}
+                        {getEnseigneEtablissement(etablissement, session) ||
+                          getDenominationEtablissement(etablissement, session)}
                         <br />
                       </b>
                     </a>
