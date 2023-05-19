@@ -22,15 +22,20 @@ interface IProps extends IPropsWithMetadata {
   }[];
   title: string;
   articles: IArticle[];
+  path: string;
 }
 
 const AdministrationPage: NextPageWithLayout<IProps> = ({
   administrations,
   title,
   articles,
+  path,
 }) => (
   <>
-    <Meta title={title} />
+    <Meta
+      title={title}
+      canonical={`https://annuaire-entreprises.data.gouv.fr/administration/${path}`}
+    />
     <TextWrapper>
       <h1>D’où viennent les informations de cette section ?</h1>
       {administrations.map(({ slug }) => (
@@ -78,6 +83,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
         administrations,
         title: administrations.map((a) => a.long).join(' et '),
         articles: getFaqArticlesByTag([...slugs, 'all']),
+        path: slug,
       },
     };
   }

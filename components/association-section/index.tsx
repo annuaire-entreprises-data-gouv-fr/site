@@ -125,8 +125,8 @@ const AssociationSection: React.FC<{
           <>
             <p>
               Cette structure est inscrite au{' '}
-              <b>Répertoire National des Associations (RNA)</b>, qui contient
-              les informations suivantes&nbsp;:
+              <b>Répertoire National des Associations (RNA)</b>, avec les
+              informations suivantes&nbsp;:
             </p>
             <TwoColumnTable body={lines} />
           </>

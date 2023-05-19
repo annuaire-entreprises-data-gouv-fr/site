@@ -13,7 +13,6 @@ import { EAdministration } from '#models/administrations';
 import { estActif } from '#models/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import {
-  estDiffusible,
   getAdresseEtablissement,
   getDenominationEtablissement,
   getEnseigneEtablissement,
@@ -101,7 +100,7 @@ const EtablissementSection: React.FC<IProps> = ({
                 Comprendre le numéro de TVA intracommunautaire
               </a>
             </FAQLink>,
-            <TVACell />,
+            <TVACell siren={uniteLegale.siren} />,
           ],
         ]
       : []),

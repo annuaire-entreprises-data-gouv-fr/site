@@ -28,7 +28,7 @@ const UniteLegaleSection: React.FC<{
         uniteLegale.siege.siret &&
         formatSiret((uniteLegale.siege || {}).siret),
     ],
-    ['N° TVA Intracommunautaire', <TVACell />],
+    ['N° TVA Intracommunautaire', <TVACell siren={uniteLegale.siren} />],
     [
       'Activité principale du siège social (NAF/APE)',
       uniteLegale.libelleActivitePrincipale,

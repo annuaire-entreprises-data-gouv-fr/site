@@ -18,7 +18,7 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
       const isTestAccount =
         email === 'user@yopmail.com' && process.env.NODE_ENV !== 'production';
 
-      const authorized = isAuthorizedAgent(email);
+      const authorized = await isAuthorizedAgent(email);
 
       if (isTestAccount || authorized) {
         req.session.user = {

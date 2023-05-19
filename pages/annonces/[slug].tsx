@@ -44,6 +44,7 @@ const Annonces: NextPageWithLayout<IProps> = ({
         title={`Annonces légales (BODACC, JOAFE) - ${getCompanyPageTitle(
           uniteLegale
         )}`}
+        canonical={`https://annuaire-entreprises.data.gouv.fr/annonces/${uniteLegale.siren}`}
         description={getCompanyPageDescription(uniteLegale)}
         noIndex={true}
       />

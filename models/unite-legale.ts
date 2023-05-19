@@ -90,13 +90,16 @@ class UniteLegaleBuilder {
     // no cache for bot as they scrap so they tend not to call the same siren twice
     const useCache = !this._isBot;
 
-    const getUniteLegaleInsee = this._isBot
-      ? () => APINotRespondingFactory(EAdministration.INSEE, 403) // never call Insee for bot
-      : async () =>
-          await fetchUniteLegaleFromInsee(this._siren, this._page, {
-            useFallback: false,
-            useCache,
-          });
+    const shouldNotUseInsee = process.env.INSEE_ENABLED === 'disabled';
+
+    const getUniteLegaleInsee =
+      shouldNotUseInsee || this._isBot
+        ? () => APINotRespondingFactory(EAdministration.INSEE, 403) // never call Insee for bot
+        : async () =>
+            await fetchUniteLegaleFromInsee(this._siren, this._page, {
+              useFallback: false,
+              useCache,
+            });
 
     const [uniteLegaleInsee, uniteLegaleRechercheEntreprise] =
       await Promise.all([
@@ -106,18 +109,21 @@ class UniteLegaleBuilder {
 
     if (isAPINotResponding(uniteLegaleInsee)) {
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
-        // const uniteLegaleInseeFallbacked = await fetchUniteLegaleFromInsee(
-        //   this._siren,
-        //   this._page,
-        //   {
-        //     useFallback: true,
-        //     useCache,
-        //   }
-        // );
-        // if (isAPINotResponding(uniteLegaleInseeFallbacked)) {
-        // }
-        // return uniteLegaleInseeFallbacked;
-        throw new HttpServerError('Sirene Insee fallback failed, return 500');
+        if (shouldNotUseInsee) {
+          throw new HttpServerError('Sirene Insee fallback failed, return 500');
+        }
+        const uniteLegaleInseeFallbacked = await fetchUniteLegaleFromInsee(
+          this._siren,
+          this._page,
+          {
+            useFallback: true,
+            useCache,
+          }
+        );
+        if (isAPINotResponding(uniteLegaleInseeFallbacked)) {
+          throw new HttpServerError('Sirene Insee fallback failed, return 500');
+        }
+        return uniteLegaleInseeFallbacked;
       } else {
         return uniteLegaleRechercheEntreprise;
       }

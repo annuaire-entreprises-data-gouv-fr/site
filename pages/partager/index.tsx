@@ -7,7 +7,10 @@ import { NextPageWithLayout } from 'pages/_app';
 const Partager: NextPageWithLayout = () => {
   return (
     <>
-      <Meta title="Réutiliser ou partager l’Annuaire des Entreprises" />
+      <Meta
+        title="Réutiliser ou partager l’Annuaire des Entreprises"
+        canonical="https://annuaire-entreprises.data.gouv.fr/partager"
+      />
       <TextWrapper>
         <h1>Réutiliser & partager</h1>
         <p>

@@ -26,6 +26,7 @@ const FinancePage: NextPageWithLayout<IProps> = ({
     <>
       <Meta
         title={`Données financières - ${getCompanyPageTitle(uniteLegale)}`}
+        canonical={`https://annuaire-entreprises.data.gouv.fr/donnees-financieres/${uniteLegale.siren}`}
         noIndex={true}
       />
       <div className="content-container">

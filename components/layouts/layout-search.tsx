@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import React, { PropsWithChildren } from 'react';
 import { Question } from '#components-ui/question';
 import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
-import { InfoBanner } from '#components/banner/info-banner';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
 import { Header } from '#components/header';
@@ -36,7 +35,6 @@ export const LayoutSearch = ({
       {isBrowserOutdated && <BrowserIsOutdatedBanner />}
 
       <NPSBanner />
-      <InfoBanner />
 
       <Header
         currentSearchTerm={(terme || '') as string}

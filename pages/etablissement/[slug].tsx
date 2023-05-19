@@ -39,6 +39,7 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
         etablissement.estSiege ? 'Siège social' : 'Etablissement secondaire'
       } - ${getCompanyPageTitle(uniteLegale)}`}
       description={getCompanyPageDescription(uniteLegale)}
+      canonical={`https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`}
       noIndex={shouldNotIndex(uniteLegale)}
     />
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}

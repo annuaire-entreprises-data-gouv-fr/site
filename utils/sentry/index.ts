@@ -18,7 +18,8 @@ const getScope = (extra: IScope) => {
   const scope = new Sentry.Scope();
   Object.keys(extra).forEach((key) => {
     //@ts-ignore
-    scope.setTag(key, extra[key] || 'N/A');
+    const value = (extra[key] || 'N/A').substring(0, 195);
+    scope.setTag(key, value);
   });
   if (process.env.INSTANCE_NUMBER) {
     scope.setTag('instance_number', process.env.INSTANCE_NUMBER);

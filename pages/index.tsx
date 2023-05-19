@@ -12,8 +12,8 @@ const Index: NextPageWithLayout = () => (
   <>
     <Meta
       title="L’Annuaire des Entreprises françaises : les informations légales officielles de l’administration"
-      canonical="https://annuaire-entreprises.data.gouv.fr"
       description="L’administration permet aux particuliers, entrepreneurs et agents publics de vérifier les informations informations légales des entreprises, associations et services publics en France."
+      canonical="https://annuaire-entreprises.data.gouv.fr"
     />
     <StructuredDataSearchAction />
     <div className="layout-center">

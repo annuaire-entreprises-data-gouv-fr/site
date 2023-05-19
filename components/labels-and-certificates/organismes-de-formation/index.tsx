@@ -30,7 +30,7 @@ const FAQQaliopi = () => (
 const OrganismeFormationLabel = ({ estQualiopi = false }) => (
   <>
     Cette structure est un organisme de formation,{' '}
-    <FAQLink tooltipLabel="à jour de ses obligation">
+    <FAQLink tooltipLabel="à jour de ses obligations">
       Un organisme de formation est à jour de ses obligations si il a bien
       déclaré auprès du Préfet de Région territorialement compétent son Bilan
       Pédagogique et Financier.
@@ -120,9 +120,13 @@ export const OrganismeDeFormationSection = ({
       : []),
   ]);
 
+  const title = `Organisme de formation${
+    uniteLegale.complements.estQualiopi ? ' certifié Qualiopi' : ''
+  }`;
+
   return (
     <Section
-      title="Organisme de formation"
+      title={title}
       sources={[EAdministration.MTPEI]}
       lastModified={organismesDeFormation.lastModified}
     >

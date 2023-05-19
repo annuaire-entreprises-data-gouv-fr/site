@@ -2,15 +2,18 @@ import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { IDataAssociation } from '#models/index';
-import { formatAdresse, IdRna } from '#utils/helpers';
+import { formatAdresse, IdRna, Siren } from '#utils/helpers';
+import { association } from 'mocks/handlers/rncs/association/manakin-production';
 import { clientAPIProxy } from '../client';
 import { IAssociationResponse } from './types';
 
 /**
  * Association through the API proxy
+ *
+ * Takes either a RNA or Siren, but Siren seems to work much better
  * @param idRna
  */
-const clientAssociation = async (numeroRna: IdRna, useCache = true) => {
+const clientAssociation = async (numeroRna: IdRna | Siren, useCache = true) => {
   const response = await clientAPIProxy(
     routes.association + numeroRna,
     { timeout: constants.timeout.L },
@@ -21,90 +24,45 @@ const clientAssociation = async (numeroRna: IdRna, useCache = true) => {
     throw new HttpNotFound(numeroRna);
   }
 
-  return mapToDomainObject(numeroRna, response as IAssociationResponse);
+  return mapToDomainObject(response as IAssociationResponse);
 };
 
 const mapToDomainObject = (
-  idRna: IdRna,
   association: IAssociationResponse
 ): IDataAssociation => {
-  const defaultAssociation = {
-    activites: { objet: '', lib_famille1: '' },
-    identite: {
-      nom: '',
-      id_ex: '',
-      lib_forme_juridique: '',
-      date_pub_jo: '',
-      date_creat: '',
-      date_dissolution: '',
-      eligibilite_cec: false,
-      regime: '',
-      util_publique: false,
-    },
-    coordonnees: {
-      adresse_siege: {
-        num_voie: '',
-        type_voie: '',
-        cp: '',
-        commune: '',
-        voie: '',
-      },
-      adresse_gestion: {
-        commune: '',
-        cp: '',
-        pays: '',
-        voie: '',
-      },
-      telephone: '',
-      courriel: '',
-      site_web: '',
-    },
-    agrement: [
-      {
-        date_attribution: '',
-        type: '',
-        numero: '',
-        niveau: '',
-        attributeur: '',
-        id: 0,
-        dateAttribution: '',
-      },
-    ],
-  };
+  const { agrement = [] } = association;
+  const { objet = '', lib_famille1 = '' } = association.activites || {};
+  const {
+    nom = '',
+    id_ex = '',
+    lib_forme_juridique = '',
+    date_pub_jo = '',
+    date_creat = '',
+    date_dissolution = '',
+    eligibilite_cec = false,
+    regime = '',
+    util_publique = false,
+  } = association.identite || {};
 
   const {
-    activites: { objet = '', lib_famille1 = '' },
-    identite: {
-      nom = '',
-      id_ex = '',
-      lib_forme_juridique = '',
-      date_pub_jo = '',
-      date_creat = '',
-      date_dissolution = '',
-      eligibilite_cec = false,
-      regime = '',
-      util_publique = false,
-    },
-    coordonnees: {
-      adresse_siege: {
-        num_voie = '',
-        type_voie = '',
-        cp = '',
-        commune = '',
-        voie = '',
-      },
-      adresse_gestion: {
-        commune: communeGestion = '',
-        cp: cpGestion = '',
-        pays: paysGestion = '',
-        voie: voieGestion = '',
-      },
-      telephone = '',
-      courriel = '',
-      site_web = '',
-    },
-    agrement,
-  } = { ...defaultAssociation, ...association };
+    num_voie = '',
+    type_voie = '',
+    cp = '',
+    commune = '',
+    voie = '',
+  } = association?.coordonnees?.adresse_siege || {};
+
+  const {
+    commune: communeGestion = '',
+    cp: cpGestion = '',
+    pays: paysGestion = '',
+    voie: voieGestion = '',
+  } = association?.coordonnees?.adresse_gestion || {};
+  const {
+    telephone = '',
+    courriel = '',
+    site_web = '',
+  } = association?.coordonnees || {};
 
   const protocol = (site_web || '').indexOf('http') === 0 ? '' : 'https://';
   const siteWeb = site_web ? `${protocol}${site_web}` : '';
