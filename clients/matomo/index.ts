@@ -23,6 +23,12 @@ export type IMatomoStats = {
     nps: number | null;
     npsResponses: number | null;
   }[];
+  monthlyUserResponses: {
+    label: string;
+    number: number;
+    nps: number | null;
+    npsResponses: number | null;
+  }[];
   userResponses: { [key: string]: { value: number; tooltip: string } };
   mostCopied: { label: string; count: number }[];
   copyPasteAction: { value: number; label: string }[];
@@ -155,6 +161,7 @@ const computeStats = (
   const copyPasteAction = [];
   const monthlyAgentNps: IMatomoStats['monthlyAgentNps'] = [];
   const monthlyUserNps: IMatomoStats['monthlyUserNps'] = [];
+  const monthlyUserResponses: IMatomoStats['monthlyUserResponses'] = [];
 
   for (let i = 0; i < 12; i++) {
     lastYear.setMonth(lastYear.getMonth() + 1);
@@ -192,10 +199,30 @@ const computeStats = (
         0,
     });
 
+    const userResponses = events.months[monthLabel];
+
     const monthlyNpsAdministration =
       events.months[monthLabel]['Administration publique'];
     const monthlyNpsAgent = events.months[monthLabel]['Agent public'];
     const monthlyNpsAll = events.months[monthLabel]['all'];
+
+    if (userResponses) {
+      for (const [key] of Object.entries(userResponses)) {
+        const count = userResponses[key].length;
+        const avg =
+          userResponses[key].reduce((sum, el = 0) => sum + el, 0) / count;
+        userResponses[key].avg = Math.max(1, Math.round(avg * 10)) / 10;
+      }
+      // const count = userResponses.length;
+      //
+      // monthlyAgentNps.push({
+      //   number: lastYear.getMonth() + 1,
+      //   label: monthLabel,
+      //   // prefer display 1 rather than 0
+      //   nps: Math.max(1, Math.round(avg * 10)) / 10,
+      //   npsResponses: monthlyNpsAgent.length,
+      // });
+    }
 
     if (monthlyNpsAgent) {
       const count = monthlyNpsAgent.length;
@@ -300,6 +327,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       visits: [],
       monthlyAgentNps: [],
       monthlyUserNps: [],
+      monthlyUserResponses: [],
       userResponses: {},
       mostCopied: [],
       copyPasteAction: [],
