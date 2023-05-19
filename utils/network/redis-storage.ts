@@ -17,21 +17,19 @@ redisClient.connect();
 const redisStorage = (cache_timeout: number) =>
   buildStorage({
     async find(key: string) {
-      const result = await promiseTimeout(
-        redisClient.get(`axios-cache:${key}`),
-        100
-      ).catch((err) => {
-        logWarningInSentry('Redis client timeout', {});
-        return null;
-      });
+      const result = await promiseTimeout(redisClient.get(key), 100).catch(
+        (err) => {
+          logWarningInSentry('Redis client timeout', { details: err });
+          return null;
+        }
+      );
 
       return result ? JSON.parse(result) : result;
     },
 
     async set(key: string, value: any) {
-      const fullKey = `axios-cache:${key}`;
       await promiseTimeout(
-        redisClient.set(fullKey, JSON.stringify(value), {
+        redisClient.set(key, JSON.stringify(value), {
           PX: cache_timeout,
         }),
         200
@@ -41,7 +39,7 @@ const redisStorage = (cache_timeout: number) =>
     },
 
     async remove(key: string) {
-      await redisClient.del(`axios-cache:${key}`);
+      await redisClient.del(key);
     },
   });
 
