@@ -135,13 +135,13 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
                       </p>
                       <ol>
                         <li>
-                          Soit ré-essayer de télécharger le document en{' '}
+                          Soit essayer de télécharger le document{' '}
                           <a
                             target="_blank"
                             rel="noreferrer noopener"
                             href={downloadLink}
                           >
-                            cliquant ici
+                            directement sur le site de l’INPI
                           </a>
                           .
                         </li>

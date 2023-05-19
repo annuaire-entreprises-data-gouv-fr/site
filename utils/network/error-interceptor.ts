@@ -23,7 +23,7 @@ const getStatus = (response?: AxiosResponse, message?: string) => {
 const errorInterceptor = (error: AxiosError) => {
   const { config, response, message } = error || {};
 
-  const url = config?.url || 'an unknown url';
+  const url = (config?.url || 'an unknown url').substring(0, 100);
   const status = getStatus(response, message);
   const statusText = response?.statusText;
 
