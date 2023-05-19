@@ -46,7 +46,7 @@ export const UsageStats: React.FC<{
         deux indicateurs sont corrélés à l’application du{' '}
         <b>Dites-Le-Nous-Une-Fois</b> (DLNUF).
       </p>
-      <LineChart data={data} />
+      <LineChart height="300px" data={data} />
       <br />
       <div className="chart-container">
         <div>
