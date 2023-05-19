@@ -10,6 +10,7 @@ import {
 import { IImmatriculation } from '#models/immatriculation';
 import { isAssociation } from '#models/index';
 import { IJustificatifs } from '#models/justificatifs';
+import { ISession } from '#utils/session';
 import ImmatriculationRNE from './rne';
 
 const isNotFound = (
@@ -19,11 +20,15 @@ const isNotFound = (
     isAPINotResponding(immatriculation) && immatriculation.errorType === 404
   );
 };
+interface IProps extends IJustificatifs {
+  session: ISession | null;
+}
 
-const Immatriculations: React.FC<IJustificatifs> = ({
+const Immatriculations: React.FC<IProps> = ({
   immatriculationJOAFE,
   immatriculationRNE,
   uniteLegale,
+  session,
 }) => {
   const isAnAssociation = isAssociation(uniteLegale);
 
@@ -60,7 +65,7 @@ const Immatriculations: React.FC<IJustificatifs> = ({
           )}
         </>
       )}
-      <AvisSituationSection uniteLegale={uniteLegale} />
+      <AvisSituationSection uniteLegale={uniteLegale} session={session} />
     </>
   );
 };

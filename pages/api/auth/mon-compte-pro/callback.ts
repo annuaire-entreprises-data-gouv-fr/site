@@ -4,7 +4,11 @@ import { monCompteProGetToken } from '#clients/auth/mon-compte-pro/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { isAuthorizedAgent } from '#utils/helpers/is-authorized-agent';
 import logErrorInSentry from '#utils/sentry';
-import { sessionOptions } from '#utils/session';
+import {
+  ISessionPrivilege,
+  sessionOptions,
+  setAgentSession,
+} from '#utils/session';
 
 export default withIronSessionApiRoute(callbackRoute, sessionOptions);
 
@@ -18,14 +22,18 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
       const isTestAccount =
         email === 'user@yopmail.com' && process.env.NODE_ENV !== 'production';
 
-      const authorized = await isAuthorizedAgent(email);
+      let userPrivilege = 'none' as ISessionPrivilege;
+      const isAdministration = true;
 
-      if (isTestAccount || authorized) {
-        req.session.user = {
-          email,
-        };
-        await req.session.save();
+      if (isAdministration) {
+        userPrivilege = 'agent';
 
+        const authorized = await isAuthorizedAgent(email);
+        if (isTestAccount || authorized) {
+          userPrivilege = 'super-agent';
+        }
+
+        await setAgentSession(email, userPrivilege, req.session);
         res.redirect('/');
       } else {
         throw new HttpForbiddenError(`${email} is not an authorized email`);

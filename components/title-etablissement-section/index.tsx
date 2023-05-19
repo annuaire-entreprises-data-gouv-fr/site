@@ -10,12 +10,14 @@ import {
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatSiret } from '#utils/helpers';
+import { ISession } from '#utils/session';
 import { INSEE } from '../administrations';
 
 const TitleEtablissement: React.FC<{
   uniteLegale: IUniteLegale;
   nomEtablissement: string | null;
-}> = ({ uniteLegale, nomEtablissement }) => (
+  session: ISession | null;
+}> = ({ uniteLegale, nomEtablissement, session }) => (
   <h2>
     Information sur{' '}
     {nomEtablissement ? (
@@ -24,7 +26,7 @@ const TitleEtablissement: React.FC<{
       <>
         un établissement de{' '}
         <a href={`/entreprise/${uniteLegale.chemin}`}>
-          {getNomComplet(uniteLegale)}
+          {getNomComplet(uniteLegale, session)}
         </a>
       </>
     )}
@@ -57,7 +59,8 @@ const MapTitleEtablissement: React.FC<{
 const TitleEtablissementWithDenomination: React.FC<{
   uniteLegale: IUniteLegale;
   etablissement: IEtablissement;
-}> = ({ uniteLegale, etablissement }) => (
+  session: ISession | null;
+}> = ({ uniteLegale, etablissement, session }) => (
   <div className="etablissement-title">
     {etablissement.oldSiret &&
       etablissement.oldSiret !== etablissement.siret && (
@@ -74,9 +77,10 @@ const TitleEtablissementWithDenomination: React.FC<{
       )}
     <TitleEtablissement
       uniteLegale={uniteLegale}
+      session={session}
       nomEtablissement={
-        getEnseigneEtablissement(etablissement) ||
-        getDenominationEtablissement(etablissement)
+        getEnseigneEtablissement(etablissement, session) ||
+        getDenominationEtablissement(etablissement, session)
       }
     />
     <div className="etablissement-sub-title">

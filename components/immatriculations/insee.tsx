@@ -13,10 +13,12 @@ import {
   getAdresseEtablissement,
 } from '#models/statut-diffusion';
 import { formatSiret } from '#utils/helpers';
+import { ISession } from '#utils/session';
 
-const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
-  etablissements,
-}) => (
+const AvisSituationTable: React.FC<{
+  etablissements: IEtablissement[];
+  session: ISession | null;
+}> = ({ etablissements, session }) => (
   <FullTable
     head={['SIRET', 'Adresse', 'Statut', 'Avis de situation']}
     body={etablissements.map((etablissement: IEtablissement) => [
@@ -24,7 +26,7 @@ const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
         {formatSiret(etablissement.siret)}
       </a>,
       <>
-        {getAdresseEtablissement(etablissement)}
+        {getAdresseEtablissement(etablissement, session)}
         {etablissement.estSiege && <Tag color="info">siège social</Tag>}
       </>,
       <IsActiveTag
@@ -39,6 +41,7 @@ const AvisSituationTable: React.FC<{ etablissements: IEtablissement[] }> = ({
 
 type IProps = {
   uniteLegale: IUniteLegale;
+  session: ISession | null;
 };
 
 const AvisSituationNonDiffusible = () => (
@@ -57,7 +60,7 @@ const AvisSituationNonDiffusible = () => (
   </>
 );
 
-const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
+const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, session }) => (
   <Section
     id="insee"
     title="Inscription à l’Insee"
@@ -81,7 +84,10 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
           .
         </p>
         {uniteLegale.etablissements.usePagination ? (
-          <AvisSituationTable etablissements={uniteLegale.etablissements.all} />
+          <AvisSituationTable
+            etablissements={uniteLegale.etablissements.all}
+            session={session}
+          />
         ) : (
           <>
             {uniteLegale.etablissements.open.length > 0 && (
@@ -89,6 +95,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
                 <h3>Etablissement(s) en activité :</h3>
                 <AvisSituationTable
                   etablissements={uniteLegale.etablissements.open}
+                  session={session}
                 />
               </>
             )}
@@ -97,6 +104,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
                 <h3>Etablissement(s) non-diffusible(s) :</h3>
                 <AvisSituationTable
                   etablissements={uniteLegale.etablissements.unknown}
+                  session={session}
                 />
               </>
             )}
@@ -105,6 +113,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale }) => (
                 <h3>Etablissement(s) fermé(s) :</h3>
                 <AvisSituationTable
                   etablissements={uniteLegale.etablissements.closed}
+                  session={session}
                 />
               </>
             )}
