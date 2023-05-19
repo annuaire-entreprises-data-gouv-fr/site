@@ -36,7 +36,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   const isOld = lastModified && isTwoMonthOld(lastModified);
   const last = lastModified || new Date();
 
-  const link = `/administration/${dataSources.map((d) => d.slug).join('_')}`;
+  const faqLink = `/administration/${dataSources.map((d) => d.slug).join('_')}`;
 
   return (
     <>
@@ -52,16 +52,16 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         {dataSources.length > 0 && (
           <div className="administration-page-link">
             <PrintNever>
-              <a href={link}>
+              <a href={faqLink} className="no-style-link question-faq-link">
                 <Icon size={14} slug="questionnaire">
-                  Une erreur ou une question sur ces données ?
+                  <u>Une erreur ou une question sur ces données ?</u>
                 </Icon>
               </a>
             </PrintNever>
             <DataSourcesTooltip
               dataSources={dataSources}
               lastUpdatedAt={formatDate(last)}
-              link={link}
+              link={faqLink}
             />
           </div>
         )}
@@ -71,7 +71,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
               logoType && (
                 <a
                   key={long}
-                  href={link}
+                  href={faqLink}
                   title={long}
                   className="no-style-link"
                 >

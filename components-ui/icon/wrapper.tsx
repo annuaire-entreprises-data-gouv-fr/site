@@ -25,14 +25,14 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
   return (
     <div id={id} className={`icon-wrapper ${className}`}>
       <span className="icon">{icon}</span>
-      {children}
+      <span>{children}</span>
       <style jsx>{`
         .icon-wrapper {
           padding: 0;
           display: inline-flex;
           align-items: center;
           flex-direction: row;
-          flex-wrap: wrap;
+          flex-wrap: nowrap;
         }
         .icon {
           height: ${size}px;
@@ -43,6 +43,7 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
           display: flex;
           align-items: center;
           justify-content: center;
+          flex-shrink: 0;
         }
       `}</style>
     </div>
