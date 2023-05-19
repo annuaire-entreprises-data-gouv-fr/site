@@ -219,7 +219,7 @@ const Title: React.FC<IProps> = ({
           {isLoggedIn(session) ? (
             <ProtectedData full>
               Cette structure est non-diffusible mais vous pouvez voir ses
-              information grâce à votre compte <b>agent-public</b>.
+              informations grâce à votre compte <b>agent-public</b>.
             </ProtectedData>
           ) : (
             <NonDiffusibleAlert />
