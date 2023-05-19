@@ -54,23 +54,6 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
       monthlyAgentNps={monthlyAgentNps}
       monthlyUserNps={monthlyUserNps}
     />
-    <h3>Répartition des réponses par catégorie d’utilisateurs</h3>
-    <BasicChart
-      yLabel="Répartition"
-      stacked={true}
-      horizontal={true}
-      yRange={[0, 100]}
-      height={50}
-      type="bar"
-      labels={['']}
-      datasets={Object.keys(userResponses).map((userTypeKey, index) => {
-        return {
-          label: userTypeKey,
-          data: [userResponses[userTypeKey].value],
-          backgroundColor: constants.chartColors[index + 1],
-        };
-      })}
-    />
   </>
 );
 

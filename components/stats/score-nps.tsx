@@ -76,7 +76,7 @@ export const ScoreNpsStats: React.FC<{
           },
         }}
       />
-      <p>Catégorie de répondants :</p>
+      <h3>Répartition des réponses par catégorie d’utilisateurs</h3>
       <StackedBarChart
         height={300}
         data={dataStackBarChart}
