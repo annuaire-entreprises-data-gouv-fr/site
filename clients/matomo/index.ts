@@ -192,6 +192,8 @@ const computeStats = (
         0,
     });
 
+    const monthlyNpsAdministration =
+      events.months[monthLabel]['Administration publique'];
     const monthlyNpsAgent = events.months[monthLabel]['Agent public'];
     const monthlyNpsAll = events.months[monthLabel]['all'];
 
@@ -206,11 +208,15 @@ const computeStats = (
         npsResponses: monthlyNpsAgent.length,
       });
     } else {
+      const count = monthlyNpsAdministration.length;
+      const avg =
+        monthlyNpsAdministration.reduce((sum, el = 0) => sum + el, 0) / count;
       monthlyAgentNps.push({
         number: lastYear.getMonth() + 1,
         label: monthLabel,
-        nps: null,
-        npsResponses: null,
+        // prefer display 1 rather than 0
+        nps: Math.max(1, Math.round(avg * 10)) / 10,
+        npsResponses: monthlyNpsAdministration.length,
       });
     }
 
