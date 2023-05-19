@@ -103,8 +103,8 @@ export const NpsStats: React.FC<{
         constituer une “image” de la répartition de nos utilisateurs.
       </p>
       <b>Attention,</b> le formulaire est le plus souvent rempli par des
-      utilisateurs récurrents, ce qui fait que cette “image” est nettement
-      influencée par ces derniers.
+      utilisateurs récurrents, donc cette “image” est nettement influencée par
+      ces derniers.
       <StackedBarChart
         height="300px"
         data={dataStackBarChart}
