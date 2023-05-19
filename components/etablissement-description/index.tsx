@@ -7,11 +7,12 @@ import {
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatDateLong } from '#utils/helpers';
+import { ISession } from '#utils/session';
 
 type IProps = {
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
-  usedInEntreprisePage?: boolean;
+  session: ISession | null;
 };
 
 const statusLabel = (etatAdministratif: IETATADMINSTRATIF) => {
@@ -30,6 +31,7 @@ const statusLabel = (etatAdministratif: IETATADMINSTRATIF) => {
 export const EtablissementDescription: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
+  session,
 }) => (
   <>
     {!estNonDiffusible(uniteLegale) && (
@@ -45,7 +47,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
         )}{' '}
         de la structure{' '}
         <a href={`/entreprise/${uniteLegale.chemin}`}>
-          {getNomComplet(uniteLegale)}
+          {getNomComplet(uniteLegale, session)}
         </a>
         ,
         {uniteLegale.etablissements.all.length > 1 ? (
@@ -85,7 +87,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
         <>
           et il est domicilié au{' '}
           <a href={`/carte/${etablissement.siret}`}>
-            {getAdresseEtablissement(etablissement)}
+            {getAdresseEtablissement(etablissement, session)}
           </a>
         </>
       )}

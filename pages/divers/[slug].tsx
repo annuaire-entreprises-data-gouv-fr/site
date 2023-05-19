@@ -27,9 +27,12 @@ const ConventionsCollectives: NextPageWithLayout<IProps> = ({
   <>
     <Meta
       noIndex={true}
+      title={`Conventions collectives - ${getCompanyPageTitle(
+        uniteLegale,
+        session
+      )}`}
+      description={getCompanyPageDescription(uniteLegale, session)}
       canonical={`https://annuaire-entreprises.data.gouv.fr/divers/${uniteLegale.siren}`}
-      title={`Conventions collectives - ${getCompanyPageTitle(uniteLegale)}`}
-      description={getCompanyPageDescription(uniteLegale)}
     />
     <div className="content-container">
       <Title

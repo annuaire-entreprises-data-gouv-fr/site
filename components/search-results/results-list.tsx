@@ -18,9 +18,9 @@ type IProps = {
   searchTerm?: string;
 };
 
-const DirigeantsOrElusList: React.FC<{ dirigeantsOrElus: IDirigeant[] }> = ({
-  dirigeantsOrElus,
-}) => {
+const DirigeantsOrElusList: React.FC<{
+  dirigeantsOrElus: IDirigeant[];
+}> = ({ dirigeantsOrElus }) => {
   const displayMax = 5;
   const firstFive = dirigeantsOrElus.slice(0, displayMax);
   const moreCount = Math.max(dirigeantsOrElus.length - displayMax, 0);
@@ -81,7 +81,9 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
       />
       <div>
         <Icon slug="mapPin">
-          <span className="adress">{getAdresseUniteLegale(result, true)} </span>
+          <span className="adress">
+            {getAdresseUniteLegale(result, null, true)}{' '}
+          </span>
         </Icon>
       </div>
     </a>
@@ -94,7 +96,7 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
               className="adress"
               href={`/etablissement/${etablissement.siret}`}
             >
-              {getAdresseEtablissement(etablissement, true)}
+              {getAdresseEtablissement(etablissement, null, true)}
               <span className="down" />
             </a>
           </li>

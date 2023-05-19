@@ -34,7 +34,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   return (
     <>
       <Meta
-        title={`Labels et certificats - ${getNomComplet(uniteLegale)}`}
+        title={`Labels et certificats - ${getNomComplet(uniteLegale, session)}`}
         canonical={`https://annuaire-entreprises.data.gouv.fr/labels-certificats/${uniteLegale.siren}`}
         noIndex={true}
       />
@@ -51,6 +51,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
           <CertificationsRGESection
             uniteLegale={uniteLegale}
             certificationsRGE={rge}
+            session={session}
           />
         )}
         {uniteLegale.complements.estEss && <CertificationESSSection />}

@@ -42,10 +42,11 @@ const Annonces: NextPageWithLayout<IProps> = ({
     <>
       <Meta
         title={`Annonces légales (BODACC, JOAFE) - ${getCompanyPageTitle(
-          uniteLegale
+          uniteLegale,
+          session
         )}`}
+        description={getCompanyPageDescription(uniteLegale, session)}
         canonical={`https://annuaire-entreprises.data.gouv.fr/annonces/${uniteLegale.siren}`}
-        description={getCompanyPageDescription(uniteLegale)}
         noIndex={true}
       />
       <div className="content-container">

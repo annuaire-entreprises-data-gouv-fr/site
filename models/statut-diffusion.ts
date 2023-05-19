@@ -1,3 +1,5 @@
+import { isAgent, isSuperAgent } from '#utils/session';
+import { ISession } from '#utils/session';
 import { IEtablissement, IUniteLegale } from '.';
 
 export enum ISTATUTDIFFUSION {
@@ -5,6 +7,9 @@ export enum ISTATUTDIFFUSION {
   NONDIFF = 'non-diffusible',
   DIFFUSIBLE = 'diffusible',
 }
+
+const canSeeNonDiffusible = (session: ISession | null) =>
+  session && (isAgent(session) || isSuperAgent(session));
 
 /**
  * Only diffusible. Exclude partially diffusible and non-diffusible
@@ -40,7 +45,14 @@ export const nonDiffusibleDataFormatter = (e: string) =>
  * @param uniteLegale
  * @returns
  */
-export const getNomComplet = (uniteLegale: IUniteLegale) => {
+export const getNomComplet = (
+  uniteLegale: IUniteLegale,
+  session: ISession | null
+) => {
+  if (session && canSeeNonDiffusible(session)) {
+    return uniteLegale.nomComplet;
+  }
+
   if (uniteLegale.complements.estEntrepreneurIndividuel) {
     if (estDiffusible(uniteLegale)) {
       return uniteLegale.nomComplet;
@@ -55,15 +67,21 @@ export const getNomComplet = (uniteLegale: IUniteLegale) => {
   }
 };
 
-export const getEnseigneEtablissement = (etablissement: IEtablissement) => {
-  if (!estDiffusible(etablissement)) {
+export const getEnseigneEtablissement = (
+  etablissement: IEtablissement,
+  session: ISession | null
+) => {
+  if (!estDiffusible(etablissement) && !canSeeNonDiffusible(session)) {
     return nonDiffusibleDataFormatter('information non-diffusible');
   }
   return etablissement.enseigne;
 };
 
-export const getDenominationEtablissement = (etablissement: IEtablissement) => {
-  if (!estDiffusible(etablissement)) {
+export const getDenominationEtablissement = (
+  etablissement: IEtablissement,
+  session: ISession | null
+) => {
+  if (!estDiffusible(etablissement) && !canSeeNonDiffusible(session)) {
     return nonDiffusibleDataFormatter('information non-diffusible');
   }
   return etablissement.denomination;
@@ -92,13 +110,18 @@ const formatAdresseForDiffusion = (
  */
 export const getAdresseUniteLegale = (
   uniteLegale: IUniteLegale,
+  session: ISession | null,
   postale = false
 ) => {
   const { adressePostale, adresse, commune, codePostal } =
     uniteLegale?.siege || {};
 
+  const shouldDiff = canSeeNonDiffusible(session)
+    ? true
+    : estDiffusible(uniteLegale);
+
   return formatAdresseForDiffusion(
-    estDiffusible(uniteLegale),
+    shouldDiff,
     postale ? adressePostale : adresse,
     commune,
     codePostal
@@ -112,12 +135,17 @@ export const getAdresseUniteLegale = (
  */
 export const getAdresseEtablissement = (
   etablissement: IEtablissement,
+  session: ISession | null,
   postale = false
 ) => {
   const { adressePostale, adresse, commune, codePostal } = etablissement || {};
 
+  const shouldDiff = canSeeNonDiffusible(session)
+    ? true
+    : estDiffusible(etablissement);
+
   return formatAdresseForDiffusion(
-    estDiffusible(etablissement),
+    shouldDiff,
     postale ? adressePostale : adresse,
     commune,
     codePostal

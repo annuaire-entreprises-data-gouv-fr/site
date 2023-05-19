@@ -26,9 +26,10 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
   <>
     <Meta
       title={`Justificatif d’immatriculation - ${getCompanyPageTitle(
-        uniteLegale
+        uniteLegale,
+        session
       )}`}
-      description={getCompanyPageDescription(uniteLegale)}
+      description={getCompanyPageDescription(uniteLegale, session)}
       canonical={`https://annuaire-entreprises.data.gouv.fr/justificatif/${uniteLegale.siren}`}
       noIndex={true}
     />
@@ -42,6 +43,7 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
         immatriculationJOAFE={immatriculationJOAFE}
         immatriculationRNE={immatriculationRNE}
         uniteLegale={uniteLegale}
+        session={session}
       />
     </div>
   </>

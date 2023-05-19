@@ -214,14 +214,25 @@ const Title: React.FC<IProps> = ({
           ” .
         </ProtectedData>
       )}
-      {!estDiffusible(uniteLegale) && <NonDiffusibleAlert />}
+      {!estDiffusible(uniteLegale) && (
+        <>
+          {isLoggedIn(session) ? (
+            <ProtectedData full>
+              Cette structure est non-diffusible mais vous pouvez voir ses
+              informations grâce à votre compte <b>agent-public</b>.
+            </ProtectedData>
+          ) : (
+            <NonDiffusibleAlert />
+          )}
+        </>
+      )}
       <MultipleSirenAlert uniteLegale={uniteLegale} />
       {isAssociation(uniteLegale) && (
-        <AssociationAdressAlert uniteLegale={uniteLegale} />
+        <AssociationAdressAlert uniteLegale={uniteLegale} session={session} />
       )}
       <h1>
         <a href={`/entreprise/${uniteLegale.chemin}`}>
-          {getNomComplet(uniteLegale)}
+          {getNomComplet(uniteLegale, session)}
         </a>
       </h1>
       <div className="unite-legale-sub-title">
@@ -230,9 +241,7 @@ const Title: React.FC<IProps> = ({
           &nbsp;‣&nbsp;{formatIntFr(uniteLegale.siren)}
         </span>
         <span>
-          {estNonDiffusible(uniteLegale) && (
-            <Tag color="new">non-diffusible</Tag>
-          )}
+          {!estDiffusible(uniteLegale) && <Tag color="new">non-diffusible</Tag>}
           <IsActiveTag
             etatAdministratif={uniteLegale.etatAdministratif}
             statutDiffusion={uniteLegale.statutDiffusion}
@@ -240,11 +249,11 @@ const Title: React.FC<IProps> = ({
         </span>
       </div>
     </div>
-    <SocialMedia uniteLegale={uniteLegale} />
+    <SocialMedia uniteLegale={uniteLegale} session={session} />
     {estNonDiffusible(uniteLegale) ? (
       <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
     ) : (
-      <UniteLegaleDescription uniteLegale={uniteLegale} />
+      <UniteLegaleDescription uniteLegale={uniteLegale} session={session} />
     )}
     <Tabs
       uniteLegale={uniteLegale}

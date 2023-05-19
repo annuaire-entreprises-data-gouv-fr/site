@@ -37,8 +37,8 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
     <Meta
       title={`${
         etablissement.estSiege ? 'Siège social' : 'Etablissement secondaire'
-      } - ${getCompanyPageTitle(uniteLegale)}`}
-      description={getCompanyPageDescription(uniteLegale)}
+      } - ${getCompanyPageTitle(uniteLegale, session)}`}
+      description={getCompanyPageDescription(uniteLegale, session)}
       canonical={`https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`}
       noIndex={shouldNotIndex(uniteLegale)}
     />
@@ -52,6 +52,7 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
       <TitleEtablissementWithDenomination
         uniteLegale={uniteLegale}
         etablissement={etablissement}
+        session={session}
       />
       <br />
       {estNonDiffusible(etablissement) ? (
@@ -65,6 +66,7 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
         <EtablissementSection
           etablissement={etablissement}
           uniteLegale={uniteLegale}
+          session={session}
           withDenomination={true}
         />
       )}
