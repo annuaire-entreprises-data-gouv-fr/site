@@ -24,7 +24,7 @@ const agentOptions = {
 };
 
 /**
- * Returns a regular axios instance - no cache enabled
+ * Returns a cache-enabled axios instance
  */
 export const axiosInstanceFactory = (
   timeout = constants.timeout.L
