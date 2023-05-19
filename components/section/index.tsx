@@ -31,7 +31,9 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   borderColor = constants.colors.pastelBlue,
   titleColor = constants.colors.frBlue,
 }) => {
-  const dataSources = sources.map((key) => administrationsMetaData[key]);
+  const dataSources = Array.from(new Set(sources)).map(
+    (key) => administrationsMetaData[key]
+  );
 
   const isOld = lastModified && isTwoMonthOld(lastModified);
   const last = lastModified || new Date();

@@ -1,17 +1,19 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import AvisSituationLink from '#components/avis-situation-link';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations';
 import { estActif } from '#models/etat-administratif';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
 import { getAdresseUniteLegale, getNomComplet } from '#models/statut-diffusion';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import {
   checkHasLabelsAndCertificates,
   LabelsAndCertificatesBadgesSection,
+  labelsAndCertificatesSources,
 } from '../labels-and-certificates-badges-section';
 
 const UniteLegaleSection: React.FC<{
@@ -63,13 +65,51 @@ const UniteLegaleSection: React.FC<{
           ],
         ]
       : []),
+    ['', <br />],
+    [
+      'Justificatif(s) d’existence',
+      <ul>
+        {isAssociation(uniteLegale) ? (
+          <li>
+            <a href={`/justificatif/${uniteLegale.siren}`}>
+              Annonce de création publiée au JOAFE
+            </a>
+          </li>
+        ) : isServicePublic(uniteLegale) ? null : (
+          <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
+            >
+              Télécharger l’extrait RNE
+            </a>
+          </li>
+        )}
+        <li>
+          <AvisSituationLink
+            etablissement={uniteLegale.siege}
+            label="Avis de situation Insee"
+          />
+        </li>
+      </ul>,
+    ],
   ];
 
   return (
     <div id="entreprise">
       <Section
         title={`Informations légales de ${getNomComplet(uniteLegale)}`}
-        sources={[EAdministration.INSEE, EAdministration.VIES]}
+        sources={[
+          EAdministration.INSEE,
+          EAdministration.VIES,
+          ...labelsAndCertificatesSources(uniteLegale),
+          ...(isAssociation(uniteLegale)
+            ? [EAdministration.DILA]
+            : isServicePublic(uniteLegale)
+            ? []
+            : [EAdministration.INPI]),
+        ]}
       >
         <TwoColumnTable body={data} />
       </Section>
