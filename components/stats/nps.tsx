@@ -5,68 +5,63 @@ import { StackedBarChart } from '#components/chart/stack-bar';
 import constants from '#models/constants';
 
 export const NpsStats: React.FC<{
-  monthlyAgentNps: IMatomoStats['monthlyAgentNps'];
-  monthlyUserNps: IMatomoStats['monthlyUserNps'];
-}> = ({ monthlyAgentNps, monthlyUserNps }) => {
+  monthlyNps: IMatomoStats['monthlyNps'];
+}> = ({ monthlyNps }) => {
   const totalAvg =
-    monthlyUserNps.reduce((sum, { nps }) => sum + (nps || 0), 0) / 12;
+    monthlyNps.reduce((sum, { values }) => sum + (values['all'].nps || 0), 0) /
+    12;
 
   const dataLineChart: ChartData<'line'> = {
-    labels: monthlyAgentNps.map(({ label }) => label),
+    labels: monthlyNps.map(({ label }) => label),
     datasets: [
       {
         backgroundColor: 'transparent',
         borderColor: constants.chartColors[0],
         borderWidth: 1,
         pointStyle: false,
-        data: monthlyUserNps.map(() => totalAvg),
+        data: monthlyNps.map(() => totalAvg),
         label: 'Note moyenne sur l’année entière',
         tension: 0,
       },
       {
         backgroundColor: constants.chartColors[1],
         borderColor: constants.chartColors[1],
-        data: monthlyUserNps.map(({ nps }) => nps || null),
+        data: monthlyNps.map(({ values }) => values['all'].nps || null),
         label: 'Note moyenne de tous les utilisateurs',
         tension: 0.3,
       },
       {
         backgroundColor: constants.chartColors[6],
         borderColor: constants.chartColors[6],
-        data: monthlyAgentNps.map(({ nps }) => nps || null),
+        data: monthlyNps.map(
+          ({ values }) =>
+            values['Agent public']?.nps ||
+            values['Administration publique']?.nps ||
+            null
+        ),
         label: 'Note moyenne des agents',
         tension: 0.3,
       },
     ],
   };
 
+  const usersType = Array.from(
+    new Set(monthlyNps.map((m) => Object.keys(m.values)).flat())
+  ).filter((v) => v !== 'all');
+
   const dataStackBarChart = {
-    datasets: [
-      {
-        label: 'Agent publics',
-        data: monthlyAgentNps.map(({ label, npsResponses }, index) => {
-          const response = npsResponses || 0;
-          const userResponse = monthlyUserNps[index].npsResponses || 0;
-          return {
-            y: (response * 100) / (response + userResponse),
-            x: label,
-          };
-        }),
-        backgroundColor: constants.chartColors[3],
-      },
-      {
-        label: 'Autres',
-        data: monthlyUserNps.map(({ label, npsResponses }, index) => {
-          const response = npsResponses || 0;
-          const agentResponse = monthlyAgentNps[index].npsResponses || 0;
-          return {
-            y: (response * 100) / (response + agentResponse),
-            x: label,
-          };
-        }),
-        backgroundColor: constants.chartColors[4],
-      },
-    ],
+    datasets: usersType.map((userType, index) => ({
+      label: userType,
+      data: monthlyNps.map(({ label, values }) => {
+        const response = values[userType]?.npsResponses || 0;
+        const userResponse = values['all']?.npsResponses || 0;
+        return {
+          y: (response * 100) / userResponse,
+          x: label,
+        };
+      }),
+      backgroundColor: constants.chartColors[index],
+    })),
   };
 
   return (
@@ -108,6 +103,17 @@ export const NpsStats: React.FC<{
       <StackedBarChart
         height="300px"
         data={dataStackBarChart}
+        scales={{
+          x: {
+            stacked: true,
+          },
+          y: {
+            stacked: true,
+            min: 1,
+            max: 100,
+          },
+        }}
+        options={{ scales: { y: { min: 1, max: 100 } } }}
         pluginOption={{
           legend: { onClick: () => undefined },
           tooltip: {

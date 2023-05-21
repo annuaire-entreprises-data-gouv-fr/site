@@ -7,10 +7,8 @@ import { UsageStats } from '#components/stats/usage';
 import { NextPageWithLayout } from './_app';
 
 const StatsPage: NextPageWithLayout<IMatomoStats> = ({
-  monthlyAgentNps,
-  monthlyUserNps,
+  monthlyNps,
   visits,
-  userResponses,
   mostCopied,
   copyPasteAction,
   redirectedSiren,
@@ -36,18 +34,14 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
       mostCopied={mostCopied}
     />
     <h2>Satisfaction des utilisateurs</h2>
-    <NpsStats
-      monthlyAgentNps={monthlyAgentNps}
-      monthlyUserNps={monthlyUserNps}
-    />
+    <NpsStats monthlyNps={monthlyNps} />
   </>
 );
 
 export const getStaticProps: GetStaticProps = async () => {
   const {
     visits,
-    monthlyAgentNps,
-    monthlyUserNps,
+    monthlyNps,
     userResponses,
     mostCopied,
     copyPasteAction,
@@ -55,8 +49,7 @@ export const getStaticProps: GetStaticProps = async () => {
   } = await clientMatomoStats();
   return {
     props: {
-      monthlyAgentNps,
-      monthlyUserNps,
+      monthlyNps,
       visits,
       userResponses,
       mostCopied,

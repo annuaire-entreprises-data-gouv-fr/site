@@ -11,23 +11,15 @@ export type IMatomoStats = {
     visitorReturning: number;
     visitorUnknown: number;
   }[];
-  monthlyAgentNps: {
+  monthlyNps: {
     label: string;
     number: number;
-    nps: number | null;
-    npsResponses: number | null;
-  }[];
-  monthlyUserNps: {
-    label: string;
-    number: number;
-    nps: number | null;
-    npsResponses: number | null;
-  }[];
-  monthlyUserResponses: {
-    label: string;
-    number: number;
-    nps: number | null;
-    npsResponses: number | null;
+    values: {
+      [key: string]: {
+        nps: number | null;
+        npsResponses: number | null;
+      };
+    };
   }[];
   userResponses: { [key: string]: { value: number; tooltip: string } };
   mostCopied: { label: string; count: number }[];
@@ -159,9 +151,23 @@ const computeStats = (
    *  https://stats.data.gouv.fr/index.php?module=CoreHome&action=index&idSite=145&period=range&date=previous30#?period=range&date=previous30&idSite=145&category=General_Actions&subcategory=Events_Events
    */
   const copyPasteAction = [];
-  const monthlyAgentNps: IMatomoStats['monthlyAgentNps'] = [];
-  const monthlyUserNps: IMatomoStats['monthlyUserNps'] = [];
-  const monthlyUserResponses: IMatomoStats['monthlyUserResponses'] = [];
+
+  const npsData: any = {};
+  const monthlyNps: IMatomoStats['monthlyNps'] = [];
+
+  for (const month in events.months) {
+    for (const property in events.months[month]) {
+      const count = events.months[month][property].length;
+      const avg =
+        events.months[month][property].reduce((sum, el = 0) => sum + el, 0) /
+        count;
+      npsData[month] = npsData[month] || {};
+      npsData[month][property] = {
+        nps: Math.max(1, Math.round(avg * 10)) / 10,
+        npsResponses: count,
+      };
+    }
+  }
 
   for (let i = 0; i < 12; i++) {
     lastYear.setMonth(lastYear.getMonth() + 1);
@@ -199,72 +205,11 @@ const computeStats = (
         0,
     });
 
-    const userResponses = events.months[monthLabel];
-
-    const monthlyNpsAdministration =
-      events.months[monthLabel]['Administration publique'];
-    const monthlyNpsAgent = events.months[monthLabel]['Agent public'];
-    const monthlyNpsAll = events.months[monthLabel]['all'];
-
-    if (userResponses) {
-      for (const [key] of Object.entries(userResponses)) {
-        const count = userResponses[key].length;
-        const avg =
-          userResponses[key].reduce((sum, el = 0) => sum + el, 0) / count;
-        userResponses[key].avg = Math.max(1, Math.round(avg * 10)) / 10;
-      }
-      // const count = userResponses.length;
-      //
-      // monthlyAgentNps.push({
-      //   number: lastYear.getMonth() + 1,
-      //   label: monthLabel,
-      //   // prefer display 1 rather than 0
-      //   nps: Math.max(1, Math.round(avg * 10)) / 10,
-      //   npsResponses: monthlyNpsAgent.length,
-      // });
-    }
-
-    if (monthlyNpsAgent) {
-      const count = monthlyNpsAgent.length;
-      const avg = monthlyNpsAgent.reduce((sum, el = 0) => sum + el, 0) / count;
-      monthlyAgentNps.push({
-        number: lastYear.getMonth() + 1,
-        label: monthLabel,
-        // prefer display 1 rather than 0
-        nps: Math.max(1, Math.round(avg * 10)) / 10,
-        npsResponses: monthlyNpsAgent.length,
-      });
-    } else {
-      const count = monthlyNpsAdministration.length;
-      const avg =
-        monthlyNpsAdministration.reduce((sum, el = 0) => sum + el, 0) / count;
-      monthlyAgentNps.push({
-        number: lastYear.getMonth() + 1,
-        label: monthLabel,
-        // prefer display 1 rather than 0
-        nps: Math.max(1, Math.round(avg * 10)) / 10,
-        npsResponses: monthlyNpsAdministration.length,
-      });
-    }
-
-    if (monthlyNpsAll) {
-      const count = monthlyNpsAll.length;
-      const avg = monthlyNpsAll.reduce((sum, el = 0) => sum + el, 0) / count;
-      monthlyUserNps.push({
-        number: lastYear.getMonth() + 1,
-        label: monthLabel,
-        // prefer display 1 rather than 0
-        nps: Math.max(1, Math.round(avg * 10)) / 10,
-        npsResponses: monthlyNpsAll.length,
-      });
-    } else {
-      monthlyUserNps.push({
-        number: lastYear.getMonth() + 1,
-        label: monthLabel,
-        nps: null,
-        npsResponses: null,
-      });
-    }
+    monthlyNps.push({
+      number: lastYear.getMonth() + 1,
+      label: monthLabel,
+      values: npsData[monthLabel],
+    });
   }
 
   const mostCopiedAggregator = {} as { [key: string]: number };
@@ -288,8 +233,7 @@ const computeStats = (
 
   return {
     copyPasteAction,
-    monthlyUserNps,
-    monthlyAgentNps,
+    monthlyNps,
     mostCopied,
     redirectedSiren,
     userResponses: events.totals,
@@ -325,13 +269,11 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
     });
     return {
       visits: [],
-      monthlyAgentNps: [],
-      monthlyUserNps: [],
-      monthlyUserResponses: [],
-      userResponses: {},
+      monthlyNps: [],
       mostCopied: [],
       copyPasteAction: [],
       redirectedSiren: [],
+      userResponses: {},
     };
   }
 };

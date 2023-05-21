@@ -25,6 +25,8 @@ type StackedBarChartProps = {
   width?: number | string;
   data: ChartData<'bar', any, unknown>;
   pluginOption?: ChartOptions<'bar'>['plugins'];
+  options?: ChartOptions<'bar'>;
+  scales: ChartOptions<'bar'>['scales'];
 };
 
 const defaultOptions = {
@@ -49,12 +51,17 @@ export const StackedBarChart = ({
   height = '400px',
   width = '100%',
   pluginOption,
+  scales,
 }: StackedBarChartProps) => {
   return (
     <div>
       <Bar
         options={{
           ...defaultOptions,
+          scales: {
+            ...defaultOptions.scales,
+            ...scales,
+          },
           plugins: {
             ...defaultOptions.plugins,
             ...pluginOption,
