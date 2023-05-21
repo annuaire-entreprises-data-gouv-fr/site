@@ -56,7 +56,7 @@ export const NpsStats: React.FC<{
         const response = values[userType]?.npsResponses || 0;
         const userResponse = values['all']?.npsResponses || 0;
         return {
-          y: (response * 100) / userResponse,
+          y: userResponse ? (response * 100) / userResponse : 0,
           x: label,
         };
       }),
