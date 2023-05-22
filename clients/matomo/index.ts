@@ -11,11 +11,15 @@ export type IMatomoStats = {
     visitorReturning: number;
     visitorUnknown: number;
   }[];
-  monthlyUserNps: {
+  monthlyNps: {
     label: string;
     number: number;
-    nps: number;
-    npsResponses: number;
+    values: {
+      [key: string]: {
+        nps: number | null;
+        npsResponses: number | null;
+      };
+    };
   }[];
   userResponses: { [key: string]: { value: number; tooltip: string } };
   mostCopied: { label: string; count: number }[];
@@ -57,13 +61,13 @@ const getLabel = (labelAsString: string, index: number) => {
 const aggregateEvents = (
   matomoEventStats: { label: string; nb_events: number }[]
 ) => {
-  const months = {} as {
+  const months: {
     [monthKey: string]: { [userTypeKey: string]: number[] };
-  };
+  } = {};
 
-  const totals = {} as {
+  const totals: {
     [userTypeKey: string]: { value: number; tooltip: string };
-  };
+  } = {};
 
   matomoEventStats.forEach((stat) => {
     if (stat.label.indexOf('mood=') === -1) {
@@ -72,9 +76,18 @@ const aggregateEvents = (
 
     const responses = stat.label.split('&');
     const mood = parseInt(responses[0].replace('mood=', ''), 10);
-    const userType = responses[1].replace('type=', '');
     const date = new Date(responses[3].replace('date=', ''));
     const monthLabel = getMonthLabelFromDate(date);
+
+    let userType = responses[1].replace('type=', '');
+    if (userType === 'Administration publique') {
+      // rewrite old label to "agent public"
+      userType = 'Agent public';
+    }
+    if (userType === 'Entreprise privée') {
+      // rewrite old label to "agent public"
+      userType = 'Dirigeant';
+    }
 
     // migration from 10-based nps to 5 based on 2022-01-30, ended on 2022-02-15
     const is5Based =
@@ -140,20 +153,30 @@ const computeStats = (
   }[][]
 ) => {
   const events = aggregateEvents(matomoNpsEventStats);
-  const monthlyUserNps = [] as {
-    label: string;
-    number: number;
-    nps: number;
-    npsResponses: number;
-  }[];
   const lastYear = getLastYear();
-
   const visits = [];
   const redirectedSiren = [];
   /* Currently the only action we have in matomo is copyPaste
    *  https://stats.data.gouv.fr/index.php?module=CoreHome&action=index&idSite=145&period=range&date=previous30#?period=range&date=previous30&idSite=145&category=General_Actions&subcategory=Events_Events
    */
   const copyPasteAction = [];
+
+  const npsData: any = {};
+  const monthlyNps: IMatomoStats['monthlyNps'] = [];
+
+  for (const month in events.months) {
+    for (const property in events.months[month]) {
+      const count = events.months[month][property].length;
+      const avg =
+        events.months[month][property].reduce((sum, el = 0) => sum + el, 0) /
+        count;
+      npsData[month] = npsData[month] || {};
+      npsData[month][property] = {
+        nps: Math.max(1, Math.round(avg * 10)) / 10,
+        npsResponses: count,
+      };
+    }
+  }
 
   for (let i = 0; i < 12; i++) {
     lastYear.setMonth(lastYear.getMonth() + 1);
@@ -191,19 +214,11 @@ const computeStats = (
         0,
     });
 
-    const monthlyNps = events.months[monthLabel]['all'];
-    if (monthlyNps) {
-      const count = monthlyNps.length;
-      const avg = monthlyNps.reduce((sum, el = 0) => sum + el, 0) / count;
-
-      monthlyUserNps.push({
-        number: lastYear.getMonth() + 1,
-        label: monthLabel,
-        // prefer display 1 rather than 0
-        nps: Math.max(1, Math.round(avg * 10)) / 10,
-        npsResponses: monthlyNps.length,
-      });
-    }
+    monthlyNps.push({
+      number: lastYear.getMonth() + 1,
+      label: monthLabel,
+      values: npsData[monthLabel],
+    });
   }
 
   const mostCopiedAggregator = {} as { [key: string]: number };
@@ -227,7 +242,7 @@ const computeStats = (
 
   return {
     copyPasteAction,
-    monthlyUserNps,
+    monthlyNps,
     mostCopied,
     redirectedSiren,
     userResponses: events.totals,
@@ -263,11 +278,11 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
     });
     return {
       visits: [],
-      monthlyUserNps: [],
-      userResponses: {},
+      monthlyNps: [],
       mostCopied: [],
       copyPasteAction: [],
       redirectedSiren: [],
+      userResponses: {},
     };
   }
 };
