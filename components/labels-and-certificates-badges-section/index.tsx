@@ -1,15 +1,31 @@
 import { LabelAndCertificateBadge } from '#components-ui/badge/frequent';
+import { EAdministration } from '#models/administrations';
 import InformationTooltip from '../../components-ui/information-tooltip';
 import { IUniteLegale } from '../../models';
 
 export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
-  uniteLegale.complements.estEntrepreneurSpectacle ||
-  uniteLegale.complements.estEss ||
-  uniteLegale.complements.estBio ||
-  uniteLegale.complements.egaproRenseignee ||
-  uniteLegale.complements.estOrganismeFormation ||
-  uniteLegale.complements.estQualiopi ||
-  uniteLegale.complements.estRge;
+  labelsAndCertificatesSources(uniteLegale).length > 0;
+
+export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
+  const sources = [];
+  const {
+    estEntrepreneurSpectacle,
+    estEss,
+    estBio,
+    egaproRenseignee,
+    estOrganismeFormation,
+    estQualiopi,
+    estRge,
+  } = uniteLegale.complements;
+  if (estEntrepreneurSpectacle) sources.push(EAdministration.MC);
+  if (estEss) sources.push(EAdministration.INSEE);
+  if (estBio) sources.push(EAdministration.AGENCE_BIO);
+  if (egaproRenseignee || estOrganismeFormation || estQualiopi)
+    sources.push(EAdministration.MTPEI);
+  if (estRge) sources.push(EAdministration.ADEME);
+
+  return sources;
+};
 
 export const LabelsAndCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
