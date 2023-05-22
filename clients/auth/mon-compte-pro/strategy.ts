@@ -1,4 +1,5 @@
-import { Issuer, BaseClient } from 'openid-client';
+import { UserInfo } from 'os';
+import { Issuer, BaseClient, UserinfoResponse } from 'openid-client';
 import { HttpForbiddenError } from '#clients/exceptions';
 
 let _client = undefined as BaseClient | undefined;
@@ -45,7 +46,6 @@ export const monCompteProAuthorizeUrl = async () => {
 };
 
 export type IMCPUserInfo = {
-  sub: string;
   email: string;
   email_verified: boolean;
   organizations: {
@@ -58,7 +58,7 @@ export type IMCPUserInfo = {
   }[];
 };
 
-export const monCompteProGetToken = async (req: any): Promise<IMCPUserInfo> => {
+export const monCompteProGetToken = async (req: any) => {
   const client = await getClient();
 
   const params = client.callbackParams(req);
@@ -74,8 +74,7 @@ export const monCompteProGetToken = async (req: any): Promise<IMCPUserInfo> => {
     throw new HttpForbiddenError('No access token');
   }
 
-  const userInfo = await client.userinfo(access_token);
-  return userInfo;
+  return (await client.userinfo(access_token)) as IMCPUserInfo;
 };
 
 export const monCompteProLogoutUrl = async () => {
