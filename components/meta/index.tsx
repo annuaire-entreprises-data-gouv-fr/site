@@ -28,6 +28,8 @@ const Meta: React.FC<IProps> = ({
       ? `${description.substring(0, 140)}…`
       : description;
 
+  const shouldIndexSite = process.env.INDEXING_ENABLED === 'enabled';
+
   return (
     <>
       <NextSeo
@@ -49,7 +51,7 @@ const Meta: React.FC<IProps> = ({
           ],
           site_name: SITE_NAME,
         }}
-        noindex={noIndex}
+        noindex={shouldIndexSite && noIndex}
         nofollow={false}
       />
       <Head>
