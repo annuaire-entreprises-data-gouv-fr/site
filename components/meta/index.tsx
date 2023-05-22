@@ -28,7 +28,7 @@ const Meta: React.FC<IProps> = ({
       ? `${description.substring(0, 140)}…`
       : description;
 
-  const shouldIndexSite = process.env.INDEXING_ENABLED === 'enabled';
+  const shouldNotIndex = process.env.INDEXING_ENABLED !== 'enabled';
 
   return (
     <>
@@ -51,7 +51,7 @@ const Meta: React.FC<IProps> = ({
           ],
           site_name: SITE_NAME,
         }}
-        noindex={shouldIndexSite && noIndex}
+        noindex={shouldNotIndex || noIndex}
         nofollow={false}
       />
       <Head>

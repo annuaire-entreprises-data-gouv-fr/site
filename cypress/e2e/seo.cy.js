@@ -4,6 +4,30 @@ import { resultRedNeedles } from '../../mocks/handlers/search/result-red-needles
 import { resultSevernaya } from '../../mocks/handlers/search/result-severnaya';
 
 describe('SEO Index or noindex', () => {
+  const isStaging = Cypress.config('baseUrl').indexOf('https://staging') === 0;
+
+  // staging is disindexed
+  if (isStaging) {
+    it('cannot index home page', () => {
+      cy.visit('/');
+      cy.get('meta[name="robots"][content*="noindex"]').should(
+        'have.length',
+        1
+      );
+      cy.get('meta[name="robots"][content*="follow"]').should('have.length', 1);
+    });
+
+    it('cannot index entreprise page', () => {
+      cy.visit(`/entreprise/${resultLaPoste.results[0].siren}`);
+      cy.get('meta[name="robots"][content*="noindex"]').should(
+        'have.length',
+        1
+      );
+      cy.get('meta[name="robots"][content*="follow"]').should('have.length', 1);
+    });
+    return;
+  }
+
   it('can index home page', () => {
     cy.visit('/');
     cy.get('meta[name="robots"][content*="noindex"]').should('have.length', 0);
