@@ -5,7 +5,7 @@ import { resultSolutionEnergie } from '../../mocks/handlers/search/result-soluti
 describe(`Dirigeants and élus pages`, () => {
   it('Dirigeant page loads', () => {
     cy.visit(`/dirigeants/${resultSolutionEnergie.results[0].siren}`);
-    cy.contains('Ilan LEVY').should('be.visible');
+    cy.contains('GSE VD').should('be.visible');
   });
 
   it('Elus page loads', () => {

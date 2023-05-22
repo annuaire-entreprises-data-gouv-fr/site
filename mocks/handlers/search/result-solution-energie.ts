@@ -56,13 +56,6 @@ export const resultSolutionEnergie = {
       date_mise_a_jour: '2022-10-24T08:35:03',
       dirigeants: [
         {
-          nom: 'LEVY',
-          prenoms: 'ilan',
-          annee_de_naissance: '1981',
-          qualite: 'Directeur g\u00e9n\u00e9ral',
-          type_dirigeant: 'personne physique',
-        },
-        {
           siren: '878719756',
           denomination: 'GSE VD',
           sigle: null,
