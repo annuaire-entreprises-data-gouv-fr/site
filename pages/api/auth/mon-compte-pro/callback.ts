@@ -22,8 +22,8 @@ const getUserPrivileges = async (
     userInfo.email === 'user@yopmail.com' &&
     process.env.NODE_ENV !== 'production';
 
-  const authorized = await isAuthorizedAgent(userInfo.email);
-  if (isTestAccount || authorized) {
+  const isSuperAgent = await isAuthorizedAgent(userInfo.email);
+  if (isTestAccount || isSuperAgent) {
     return 'super-agent';
   }
 
