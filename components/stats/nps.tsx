@@ -24,8 +24,8 @@ export const NpsStats: React.FC<{
         tension: 0,
       },
       {
-        backgroundColor: constants.chartColors[1],
-        borderColor: constants.chartColors[1],
+        backgroundColor: constants.chartColors[2],
+        borderColor: constants.chartColors[2],
         data: monthlyNps.map(({ values }) => values['all'].nps || null),
         label: 'Note moyenne de tous les utilisateurs',
         tension: 0.3,
@@ -33,34 +33,35 @@ export const NpsStats: React.FC<{
       {
         backgroundColor: constants.chartColors[6],
         borderColor: constants.chartColors[6],
-        data: monthlyNps.map(
-          ({ values }) =>
-            values['Agent public']?.nps ||
-            values['Administration publique']?.nps ||
-            null
-        ),
+        data: monthlyNps.map(({ values }) => values['Agent public']?.nps, null),
         label: 'Note moyenne des agents',
         tension: 0.3,
       },
     ],
   };
 
-  const usersType = Array.from(
-    new Set(monthlyNps.map((m) => Object.keys(m.values)).flat())
-  ).filter((v) => v !== 'all');
+  const userTypes = [
+    { label: 'Agent public', color: constants.chartColors[6] },
+    { label: 'Dirigeant', color: constants.chartColors[1] },
+    { label: 'Salarié', color: constants.chartColors[7] },
+    { label: 'Indépendant', color: `${constants.chartColors[1]}99` },
+    { label: 'Association', color: constants.chartColors[4] },
+    { label: 'Particulier', color: constants.chartColors[5] },
+    { label: 'Autre', color: constants.chartColors[3] },
+  ];
 
-  const dataStackBarChart = {
-    datasets: usersType.map((userType, index) => ({
-      label: userType,
+  const userTypesData = {
+    datasets: userTypes.map((userType) => ({
+      label: userType.label,
       data: monthlyNps.map(({ label, values }) => {
-        const response = values[userType]?.npsResponses || 0;
+        const response = values[userType.label]?.npsResponses || 0;
         const userResponse = values['all']?.npsResponses || 0;
         return {
           y: userResponse ? (response * 100) / userResponse : 0,
           x: label,
         };
       }),
-      backgroundColor: constants.chartColors[index],
+      backgroundColor: userType.color,
     })),
   };
 
@@ -70,12 +71,12 @@ export const NpsStats: React.FC<{
       <a href="/formulaire/nps">questionnaire de statisfaction</a>.
       <h3>Score de satisfaction</h3>
       <p>
-        Le score de satisfaction est un peu comme un thermomètre. Il permet de
+        Le score de satisfaction agit comme un thermomètre. Il permet de
         déterminer si les utilisateurs sont satisfaits du service et de ses
         évolutions.
         <br />
-        Ce qui nous intéresse avec ce score n’est pas tant sa valeur que ses
-        écarts à la moyenne.
+        Ce score nous intéresse non pas pour sa valeur absolue mais pour ses
+        variations par rapport à la moyenne.
       </p>
       <LineChart
         data={dataLineChart}
@@ -94,15 +95,15 @@ export const NpsStats: React.FC<{
       />
       <h3>Qui sont les utilisateurs de l’Annuaire des Entreprises ?</h3>
       <p>
-        Les réponses du formulaire de statisfaction nous permettent de
-        constituer une “image” de la répartition de nos utilisateurs.
+        Les réponses au formulaire de statisfaction nous permettent de
+        constituer une “image” de nos utilisateurs.
       </p>
-      <b>Attention,</b> le formulaire est le plus souvent rempli par des
-      utilisateurs récurrents, donc cette “image” est nettement influencée par
-      ces derniers.
+      Cependant, le formulaire est le plus souvent rempli par des{' '}
+      <b>utilisateurs récurrents</b>. Cette “image” est donc plus représentative
+      de ces derniers que de l’ensemble des utilisateurs du site.
       <StackedBarChart
         height="300px"
-        data={dataStackBarChart}
+        data={userTypesData}
         scales={{
           x: {
             stacked: true,
@@ -127,7 +128,6 @@ export const NpsStats: React.FC<{
           },
         }}
       />
-      <br />
     </>
   );
 };

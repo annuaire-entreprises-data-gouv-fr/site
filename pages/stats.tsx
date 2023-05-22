@@ -20,14 +20,14 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
     />
     <h1>Statistiques d’utilisation</h1>
     <p>
-      Découvrez nos statistiques d’utilisation mises à jour quotidiennement.
-      Toutes les données recueillies sont <a href="vie-privee">anonymisées</a>.
+      Découvrez nos statistiques d’utilisation. Toutes les données recueillies
+      sont <a href="vie-privee">anonymisées</a>.
     </p>
     <h2>Utilisation du service</h2>
     <h3>Volume de visite</h3>
     <TraficStats visits={visits} />
     <br />
-    <h3>À quoi sert l’Annuaire des Entreprises ?</h3>
+    <h3>Comment est utilisé l’Annuaire des Entreprises ?</h3>
     <UsageStats
       copyPasteAction={copyPasteAction}
       redirectedSiren={redirectedSiren}
@@ -35,6 +35,7 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
     />
     <h2>Satisfaction des utilisateurs</h2>
     <NpsStats monthlyNps={monthlyNps} />
+    <br />
   </>
 );
 

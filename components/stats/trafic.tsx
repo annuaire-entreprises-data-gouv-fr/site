@@ -60,6 +60,20 @@ export const TraficStats: React.FC<{
         />
       </div>
       <StackedBarChart data={data} />
+      <p>
+        Le suivi des évolutions des visites et du nombre d’utilisateurs nous
+        donne une vue globale de l’utilisation du service :
+      </p>
+      <ul>
+        <li>
+          L’augmentation des <b>nouveaux utilisateurs</b>, est un marqueur de la
+          notoriété du service
+        </li>
+        <li>
+          L’augmentation des <b>utilisateurs récurrents</b> (au moins 2 visites
+          dans le mois), est un marqueur de l’efficacité du service
+        </li>
+      </ul>
     </>
   );
 };

@@ -26,7 +26,7 @@ type StackedBarChartProps = {
   data: ChartData<'bar', any, unknown>;
   pluginOption?: ChartOptions<'bar'>['plugins'];
   options?: ChartOptions<'bar'>;
-  scales: ChartOptions<'bar'>['scales'];
+  scales?: ChartOptions<'bar'>['scales'];
 };
 
 const defaultOptions = {

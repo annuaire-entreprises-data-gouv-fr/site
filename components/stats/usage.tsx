@@ -21,15 +21,15 @@ export const UsageStats: React.FC<{
         label: 'Utilisation du siren/siret dans la recherche',
         tension: 0.3,
         data: redirectedSiren.map((redirected) => redirected.value || null),
-        borderColor: constants.chartColors[2],
-        backgroundColor: constants.chartColors[2],
+        borderColor: constants.chartColors[6],
+        backgroundColor: constants.chartColors[6],
       },
       {
         label: 'Utilisation du copier-coller',
         data: copyPasteAction.map((action) => action.value || null),
         tension: 0.3,
-        borderColor: constants.chartColors[4],
-        backgroundColor: constants.chartColors[4],
+        borderColor: constants.chartColors[1],
+        backgroundColor: constants.chartColors[1],
       },
     ],
   };
@@ -59,10 +59,10 @@ export const UsageStats: React.FC<{
           <p>
             Du côté des administrations publiques, <b>le numéro siren/siret</b>{' '}
             est l’identifiant systématiquement utilisé pour identifier une
-            entreprises lors d’une démarches. Pour traiter un dossier, un{' '}
-            <b>agent public</b> qui colle le siren/siret directement dans la
-            recherche, retrouve immédiatement la fiche publique de l’entreprise
-            concernée.
+            entreprises lors d’une démarche. Pour traiter un dossier, un{' '}
+            <b>agent public</b> peut coller le siren/siret directement dans la
+            recherche et retrouver immédiatement la fiche publique de
+            l’entreprise concernée.
           </p>
         </div>
         <div>
