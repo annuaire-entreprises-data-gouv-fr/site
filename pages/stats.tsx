@@ -24,10 +24,8 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
       sont <a href="vie-privee">anonymisées</a>.
     </p>
     <h2>Utilisation du service</h2>
-    <h3>Volume de visite</h3>
     <TraficStats visits={visits} />
     <br />
-    <h3>Comment est utilisé l’Annuaire des Entreprises ?</h3>
     <UsageStats
       copyPasteAction={copyPasteAction}
       redirectedSiren={redirectedSiren}

@@ -13,7 +13,7 @@ export const TraficStats: React.FC<{
     visitorUnknown: number;
   }[];
 }> = ({ visits }) => {
-  const [statsType, setStatsType] = useState('visit');
+  const [statsType, setStatsType] = useState('users');
 
   const data = {
     datasets: [
@@ -48,30 +48,43 @@ export const TraficStats: React.FC<{
 
   return (
     <>
+      <h3>Utilisateurs & trafic</h3>
+      <p>
+        Nous suivons à la fois le nombre d’utilisateurs et le nombre total de
+        visites. <br />
+        Un <b>utilisateur</b> est un individu qui visite l’Annuaire des
+        Entreprises au moins une fois. Un utilisateur effectue donc une ou
+        plusieurs <b>visites</b> du site.
+      </p>
+      <p>
+        Un utilisateur qui a effectué deux visites ou plus est considéré comme
+        un <b>utilisateur réccurent</b>. À l’inverse, un utilisateur qui n’a
+        visité le site qu’une seule fois est un <b>nouvel utilisateur</b>.
+      </p>
       <div className="layout-right">
         <div>Afficher les données par&nbsp;</div>
         <Select
           options={[
+            { value: 'users', label: 'utilisateurs' },
             { value: 'visit', label: 'visites' },
-            { value: 'visitors', label: 'utilisateurs' },
           ]}
-          defaultValue={'visit'}
+          defaultValue={'users'}
           onChange={onOptionChange}
         />
       </div>
       <StackedBarChart data={data} />
       <p>
         Le suivi des évolutions des visites et du nombre d’utilisateurs nous
-        donne une vue globale de l’utilisation du service :
+        informe sur les tendances globales de l’utilisation du service :
       </p>
       <ul>
         <li>
-          L’augmentation des <b>nouveaux utilisateurs</b>, est un marqueur de la
+          L’augmentation des <b>nouveaux utilisateurs</b> est un marqueur de la
           notoriété du service
         </li>
         <li>
           L’augmentation des <b>utilisateurs récurrents</b> (au moins 2 visites
-          dans le mois), est un marqueur de l’efficacité du service
+          dans le mois) est un marqueur de l’efficacité du service
         </li>
       </ul>
     </>
