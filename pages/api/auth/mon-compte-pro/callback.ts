@@ -1,6 +1,9 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { monCompteProGetToken } from '#clients/auth/mon-compte-pro/strategy';
+import {
+  IMCPUserInfo,
+  monCompteProGetToken,
+} from '#clients/auth/mon-compte-pro/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { isAuthorizedAgent } from '#utils/helpers/is-authorized-agent';
 import logErrorInSentry from '#utils/sentry';
@@ -12,35 +15,43 @@ import {
 
 export default withIronSessionApiRoute(callbackRoute, sessionOptions);
 
+const getUserPrivileges = async (
+  userInfo: IMCPUserInfo
+): Promise<ISessionPrivilege> => {
+  const isTestAccount =
+    userInfo.email === 'user@yopmail.com' &&
+    process.env.NODE_ENV !== 'production';
+
+  const authorized = await isAuthorizedAgent(userInfo.email);
+  if (isTestAccount || authorized) {
+    return 'super-agent';
+  }
+
+  const isAgent =
+    userInfo.organizations.filter(
+      (o) =>
+        !o.is_external &&
+        (o.is_collectivite_territoriale || o.is_service_public)
+    ).length > 0;
+
+  if (isAgent) {
+    return 'agent';
+  }
+
+  return 'unkown';
+};
+
 async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     const userInfo = await monCompteProGetToken(req);
+    const userPrivilege = await getUserPrivileges(userInfo);
 
-    const email = userInfo.email;
-
-    if (email) {
-      const isTestAccount =
-        email === 'user@yopmail.com' && process.env.NODE_ENV !== 'production';
-
-      let userPrivilege = 'none' as ISessionPrivilege;
-      const isAdministration = true;
-
-      if (isAdministration) {
-        userPrivilege = 'agent';
-
-        const authorized = await isAuthorizedAgent(email);
-        if (isTestAccount || authorized) {
-          userPrivilege = 'super-agent';
-        }
-
-        await setAgentSession(email, userPrivilege, req.session);
-        res.redirect('/');
-      } else {
-        throw new HttpForbiddenError(`${email} is not an authorized email`);
-      }
-    } else {
-      throw new HttpForbiddenError('No email provided');
+    if (userPrivilege === 'unkown') {
+      throw new HttpForbiddenError(`Unauthorized account : ${userInfo.email}`);
     }
+
+    await setAgentSession(userInfo.email, userPrivilege, req.session);
+    res.redirect('/');
   } catch (e: any) {
     logErrorInSentry('Connexion failed', { details: e.toString() });
     if (e instanceof HttpForbiddenError) {
