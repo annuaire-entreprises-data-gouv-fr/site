@@ -2,7 +2,7 @@ slug: organisme-formation-qualiopi
 title: Rechercher un organisme de formation certifié Qualiopi
 description: Retrouvez facilement toutes les informations sur les organismes de formation certifiés Qualiopi
 footerLabel: Organismes de formation Qualiopi
-published: true
+published: false
 filter:
   name: label
   value: qualiopi
