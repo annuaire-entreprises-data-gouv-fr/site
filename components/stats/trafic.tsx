@@ -58,7 +58,7 @@ export const TraficStats: React.FC<{
       </p>
       <p>
         Un utilisateur qui a effectué deux visites ou plus est considéré comme
-        un <b>utilisateur réccurent</b>. À l’inverse, un utilisateur qui n’a
+        un <b>utilisateur récurrent</b>. À l’inverse, un utilisateur qui n’a
         visité le site qu’une seule fois est un <b>nouvel utilisateur</b>.
       </p>
       <div className="layout-right">
