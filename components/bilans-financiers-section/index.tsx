@@ -39,39 +39,36 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
     );
   }
 
-  // only five last bilans sorted from oldest to latest
-  const sortedBilans = bilansFinanciers.bilans
-    .sort(
-      (a, b) =>
-        new Date(b.dateClotureExercice).getTime() -
-        new Date(a.dateClotureExercice).getTime()
-    )
-    .slice(0, 5)
-    .reverse();
-
-  const colorResultat = '#009FFD';
-  const colorCA = '#FCA311';
+  const bilans = bilansFinanciers.bilans;
+  const colorResultat = constants.chartColors[1];
+  const colorCA = constants.chartColors[4];
 
   const body = [
     [
       <>
         <ColorCircle color={colorCA} /> Chiffre d’affaires
       </>,
-      ...sortedBilans.map((a) => formatCurrency(a.chiffreDAffaires)),
+      ...bilans.map((a) => formatCurrency(a.chiffreDAffaires)),
     ],
     [
       'Marge commerciale ou marge brute',
-      ...sortedBilans.map((a) => formatCurrency(a.margeBrute)),
+      ...bilans.map((a) => formatCurrency(a.margeBrute)),
     ],
     [
       'Marge d’Excédent Brut d’Exploitation (EBE)',
-      ...sortedBilans.map((a) => formatPercentage(a.margeEbe)),
+      ...bilans.map((a) => formatPercentage(a.margeEbe)),
     ],
     [
       <>
         <ColorCircle color={colorResultat} /> Résultat net
       </>,
-      ...sortedBilans.map((a) => formatCurrency(a.resultatNet)),
+      ...bilans.map((a) => formatCurrency(a.resultatNet)),
+    ],
+    [
+      'Type de bilan',
+      ...bilans.map(({ type }) =>
+        type === 'K' ? 'Consolidé' : type === 'C' ? 'Complet' : 'Simplifié'
+      ),
     ],
   ];
 
@@ -90,7 +87,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
         écrivant à <a href={constants.links.mailto}>{constants.links.mail}</a>
       </Info>
       <p>
-        Voici les {sortedBilans.length} derniers bilans déclarés auprès de l’
+        Voici les {bilans.length} derniers bilans déclarés auprès de l’
         <INPI /> pour cette structure.
       </p>
       <p>
@@ -126,21 +123,21 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
         }}
         height={250}
         data={{
-          labels: sortedBilans.map((bilan) =>
+          labels: bilans.map((bilan) =>
             formatDateYear(bilan.dateClotureExercice)
           ),
           datasets: [
             {
               label: "Chiffre d'affaires",
               tension: 0.3,
-              data: sortedBilans.map((bilan) => bilan.chiffreDAffaires ?? 0),
+              data: bilans.map((bilan) => bilan.chiffreDAffaires ?? 0),
               borderColor: colorCA,
               backgroundColor: colorCA,
             },
             {
               label: 'Resultat net',
               tension: 0.3,
-              data: sortedBilans.map((bilan) => bilan.resultatNet ?? 0),
+              data: bilans.map((bilan) => bilan.resultatNet ?? 0),
               borderColor: colorResultat,
               backgroundColor: colorResultat,
             },
@@ -151,7 +148,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
       <FullTable
         head={[
           'Indicateurs',
-          ...sortedBilans.map((a) => formatDateYear(a.dateClotureExercice)),
+          ...bilans.map((a) => formatDateYear(a.dateClotureExercice)),
         ]}
         body={body}
       />

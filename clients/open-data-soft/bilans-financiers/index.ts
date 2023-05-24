@@ -1,6 +1,7 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import { Siren } from '#utils/helpers';
+import { IBilanFinancier } from '#models/donnees-financieres';
+import { Siren, formatDateYear } from '#utils/helpers';
 import odsClient from '..';
 import { IAPIBilanResponse } from './interface';
 
@@ -25,12 +26,54 @@ export const clientBilansFinanciers = async (siren: Siren) => {
   }
 
   return {
-    bilans: response.records.map(mapToDomainObject),
+    ...mapToDomainObject(response.records),
     lastModified: response.lastModified,
   };
 };
 
-const mapToDomainObject = (financialData: IAPIBilanResponse) => {
+const mapToDomainObject = (response: IAPIBilanResponse[]) => {
+  const allBilans = response.map(mapToBilan);
+
+  const yearsSet = new Set<string>();
+
+  let hasBilanConsolide = false;
+  let hasBilanComplet = false;
+
+  const bilansPerYear = {} as {
+    [year: string]: { [type: string]: IBilanFinancier };
+  };
+
+  allBilans.forEach((newBilan: IBilanFinancier) => {
+    const { year, type } = newBilan;
+
+    yearsSet.add(year);
+    hasBilanConsolide = hasBilanConsolide || type === 'K';
+    hasBilanComplet = hasBilanConsolide || type === 'C';
+
+    bilansPerYear[year] = {
+      ...bilansPerYear[year],
+      [type]: newBilan,
+    };
+  });
+
+  const years = Array.from(yearsSet).sort();
+
+  return {
+    bilans: years.map((y) => {
+      const { K = null, C = null, S = null } = bilansPerYear[y] || {};
+
+      if (hasBilanConsolide) {
+        return K;
+      }
+
+      return { ...(K || C || S) };
+    }),
+    firstYear: years[0],
+    hasBilanConsolide,
+  };
+};
+
+const mapToBilan = (financialData: IAPIBilanResponse) => {
   const {
     ratio_de_vetuste = 0,
     rotation_des_stocks_jours = 0,
@@ -44,6 +87,8 @@ const mapToDomainObject = (financialData: IAPIBilanResponse) => {
     ebitda = 0,
     date_cloture_exercice = '',
     ebit = 0,
+    ebe = 0,
+    type_bilan = '',
     marge_brute = 0,
     resultat_net = 0,
     siren,
@@ -75,5 +120,10 @@ const mapToDomainObject = (financialData: IAPIBilanResponse) => {
     capaciteDeRemboursement: capacite_de_remboursement,
     ratioDeLiquidite: ratio_de_liquidite,
     tauxDEndettement: taux_d_endettement,
+    type: type_bilan,
+    estSimplifie: type_bilan === 'S',
+    estConsolide: type_bilan === 'K',
+    estComplet: type_bilan === 'C',
+    year: formatDateYear(date_cloture_exercice),
   };
 };

@@ -84,7 +84,7 @@ const Tabs: React.FC<{
       label: 'Données financières',
       pathPrefix: '/donnees-financieres/',
       noFollow: false,
-      shouldDisplay: isLoggedIn(session),
+      shouldDisplay: true,
     },
     {
       ficheType: FICHE.ANNONCES,
