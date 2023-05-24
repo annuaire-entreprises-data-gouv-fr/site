@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import {
   IMCPUserInfo,
   monCompteAuthenticate,
-  monCompteProGetToken,
 } from '#clients/auth/mon-compte-pro/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { isAuthorizedAgent } from '#utils/helpers/is-authorized-agent';
