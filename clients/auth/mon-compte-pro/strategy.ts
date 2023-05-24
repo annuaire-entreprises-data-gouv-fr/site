@@ -41,13 +41,15 @@ export const getClient = async () => {
 export const monCompteProAuthorizeUrl = async () => {
   const client = await getClient();
   return client.authorizationUrl({
-    scope: 'openid email organizations',
+    scope: 'openid email organizations profile',
   });
 };
 
 export type IMCPUserInfo = {
   email: string;
   email_verified: boolean;
+  family_name: string;
+  given_name: string;
   organizations: {
     id: number;
     siret: string;
@@ -58,7 +60,7 @@ export type IMCPUserInfo = {
   }[];
 };
 
-export const monCompteProGetToken = async (req: any) => {
+export const monCompteAuthenticate = async (req: any) => {
   const client = await getClient();
 
   const params = client.callbackParams(req);
@@ -74,7 +76,8 @@ export const monCompteProGetToken = async (req: any) => {
     throw new HttpForbiddenError('No access token');
   }
 
-  return (await client.userinfo(access_token)) as IMCPUserInfo;
+  const userInfo = (await client.userinfo(access_token)) as IMCPUserInfo;
+  return userInfo;
 };
 
 export const monCompteProLogoutUrl = async () => {

@@ -86,18 +86,23 @@ export const Header: React.FC<IProps> = ({
                             className="fr-link"
                             href="/api/auth/mon-compte-pro/logout"
                           >
-                            <div
-                              style={{
-                                fontVariant: 'small-caps',
-                                color: constants.colors.espaceAgent,
-                              }}
-                            >
-                              <b>agent public</b>
+                            <div>
+                              <Icon slug="user">
+                                {session?.user?.fullName ||
+                                  session?.user?.email ||
+                                  'Utilisateur inconnu'}
+                                &nbsp; (
+                                <b
+                                  style={{
+                                    fontVariant: 'small-caps',
+                                    color: constants.colors.espaceAgent,
+                                  }}
+                                >
+                                  agent public
+                                </b>
+                                )
+                              </Icon>
                             </div>
-                            <Icon slug="user">
-                              Se déconnecter (
-                              {session?.user?.email || 'Utilisateur inconnu'})
-                            </Icon>
                           </a>
                         </li>
                       </ul>

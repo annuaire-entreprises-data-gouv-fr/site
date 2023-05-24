@@ -2,6 +2,7 @@ import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   IMCPUserInfo,
+  monCompteAuthenticate,
   monCompteProGetToken,
 } from '#clients/auth/mon-compte-pro/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
@@ -43,14 +44,20 @@ const getUserPrivileges = async (
 
 async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const userInfo = await monCompteProGetToken(req);
+    const userInfo = await monCompteAuthenticate(req);
     const userPrivilege = await getUserPrivileges(userInfo);
 
     if (userPrivilege === 'unkown') {
       throw new HttpForbiddenError(`Unauthorized account : ${userInfo.email}`);
     }
 
-    await setAgentSession(userInfo.email, userPrivilege, req.session);
+    await setAgentSession(
+      userInfo.email,
+      userInfo.family_name,
+      userInfo.given_name,
+      userPrivilege,
+      req.session
+    );
     res.redirect('/');
   } catch (e: any) {
     logErrorInSentry('Connexion failed', { details: e.toString() });
