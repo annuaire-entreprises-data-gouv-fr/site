@@ -83,7 +83,7 @@ export const Header: React.FC<IProps> = ({
                       <ul className="fr-links-group">
                         <li>
                           <a
-                            className="fr-link"
+                            className="fr-link menu-logout"
                             href="/api/auth/mon-compte-pro/logout"
                           >
                             <div>
@@ -91,7 +91,7 @@ export const Header: React.FC<IProps> = ({
                                 {session?.user?.fullName ||
                                   session?.user?.email ||
                                   'Utilisateur inconnu'}
-                                &nbsp; (
+                                &nbsp;(
                                 <b
                                   style={{
                                     fontVariant: 'small-caps',
@@ -103,6 +103,7 @@ export const Header: React.FC<IProps> = ({
                                 )
                               </Icon>
                             </div>
+                            <div>Se déconnecter</div>
                           </a>
                         </li>
                       </ul>
@@ -165,6 +166,23 @@ export const Header: React.FC<IProps> = ({
         left: 0;
         z-index: 1000;
         position: absolute;
+      }
+
+      a.menu-logout {
+        position: relative;
+      }
+      a.menu-logout div:last-of-type {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        width: 100%;
+        background-color: #fbfbfb;
+        padding: 5px 15px;
+      }
+
+      a.menu-logout:hover div:last-of-type {
+        display: block;
       }
 
       @media print {

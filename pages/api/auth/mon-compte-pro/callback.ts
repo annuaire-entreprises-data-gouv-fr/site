@@ -52,8 +52,8 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
 
     await setAgentSession(
       userInfo.email,
-      userInfo.family_name,
-      userInfo.given_name,
+      userInfo.family_name || '',
+      userInfo.given_name || '',
       userPrivilege,
       req.session
     );
