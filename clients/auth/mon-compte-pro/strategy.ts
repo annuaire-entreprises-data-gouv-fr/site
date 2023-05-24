@@ -46,15 +46,18 @@ export const monCompteProAuthorizeUrl = async () => {
 };
 
 export type IMCPUserInfo = {
+  sub: string;
   email: string;
   email_verified: boolean;
-  family_name: string;
-  given_name: string;
+  family_name: string | null;
+  given_name: string | null;
+  phone_number: string | null;
+  job: string | null;
   organizations: {
     id: number;
     siret: string;
     is_external: boolean;
-    label: string;
+    label: string | null;
     is_collectivite_territoriale: boolean;
     is_service_public: boolean;
   }[];
