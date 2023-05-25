@@ -15,6 +15,7 @@ import constants from '#models/constants';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
+  isServicePublic,
   IUniteLegale,
 } from '#models/index';
 import {
@@ -84,7 +85,8 @@ const Tabs: React.FC<{
       label: 'Données financières',
       pathPrefix: '/donnees-financieres/',
       noFollow: false,
-      shouldDisplay: true,
+      shouldDisplay:
+        !isServicePublic(uniteLegale) && !isAssociation(uniteLegale),
     },
     {
       ficheType: FICHE.ANNONCES,
