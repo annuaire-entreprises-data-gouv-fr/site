@@ -1,3 +1,4 @@
+'use client';
 import axios from 'axios';
 import { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
 import Info from '#components-ui/alerts/info';

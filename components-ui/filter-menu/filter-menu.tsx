@@ -1,4 +1,6 @@
-import { PropsWithChildren, ReactElement, useState } from 'react';
+'use client';
+
+import { PropsWithChildren, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';

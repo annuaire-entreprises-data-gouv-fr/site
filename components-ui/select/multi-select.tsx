@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import ReactSelect, { GroupBase, OptionsOrGroups, Props } from 'react-select';
 

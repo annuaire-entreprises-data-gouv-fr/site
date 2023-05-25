@@ -1,16 +1,20 @@
 import React from 'react';
+import styles from './styles.module.scss';
 
 const SearchBar = ({
   placeholder = 'Nom, adresse, n° SIRET/SIREN...',
   defaultValue = '',
   autoFocus = false,
 }) => (
-  <div className="fr-search-bar" id="search-input--lg">
+  <div
+    className={`fr-search-bar ${styles['fr-search-bar']}`}
+    id="search-input--lg"
+  >
     <label className="fr-label" htmlFor="search-input-input">
       Rechercher une entreprise
     </label>
     <input
-      className="fr-input"
+      className={`fr-input ${styles['search-input']}`}
       placeholder={placeholder}
       defaultValue={defaultValue}
       type="search"
@@ -25,16 +29,6 @@ const SearchBar = ({
       value="submit"
       type="submit"
     />
-    <style jsx>{`
-      .fr-search-bar {
-        width: 100%;
-      }
-
-      input[type='search'] {
-        width: 100%;
-        font-family: 'Marianne', sans-serif;
-      }
-    `}</style>
   </div>
 );
 

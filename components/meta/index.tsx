@@ -2,8 +2,6 @@ import { NextSeo } from 'next-seo';
 import Head from 'next/head';
 import React from 'react';
 
-//@ts-ignore
-
 type IProps = {
   title: string;
   description?: string;

@@ -1,9 +1,9 @@
 import React from 'react';
+import { AdvancedSearch } from '#components/advanced-search';
+import SearchBar from '#components/search-bar';
 import { Icon } from '#components-ui/icon/wrapper';
 import Logo from '#components-ui/logo';
 import { PrintNever } from '#components-ui/print-visibility';
-import { AdvancedSearch } from '#components/advanced-search';
-import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
 import { IParams } from '#models/search-filter-params';
 import { ISession, isLoggedIn } from '#utils/session';
