@@ -48,7 +48,6 @@ export const TraficStats: React.FC<{
 
   return (
     <>
-      <h3>Utilisateurs & trafic</h3>
       <p>
         Nous suivons à la fois le nombre d’utilisateurs et le nombre total de
         visites. <br />
@@ -58,7 +57,7 @@ export const TraficStats: React.FC<{
       </p>
       <p>
         Un utilisateur qui a effectué deux visites ou plus est considéré comme
-        un <b>utilisateur réccurent</b>. À l’inverse, un utilisateur qui n’a
+        un <b>utilisateur récurrent</b>. À l’inverse, un utilisateur qui n’a
         visité le site qu’une seule fois est un <b>nouvel utilisateur</b>.
       </p>
       <div className="layout-right">

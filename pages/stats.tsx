@@ -26,6 +26,7 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
     <h2>Utilisation du service</h2>
     <TraficStats visits={visits} />
     <br />
+    <h2>Comment est utilisé l’Annuaire des Entreprises ?</h2>
     <UsageStats
       copyPasteAction={copyPasteAction}
       redirectedSiren={redirectedSiren}
