@@ -9,6 +9,9 @@ export type ISessionPrivilege = 'unkown' | 'agent' | 'super-agent';
 export type ISession = {
   user?: {
     email?: string;
+    familyName?: string;
+    firstName?: string;
+    fullName?: string;
     privilege?: ISessionPrivilege;
   };
 };
@@ -23,11 +26,16 @@ export const sessionOptions: IronSessionOptions = {
 
 export const setAgentSession = async (
   email: string,
+  familyName: string,
+  firstName: string,
   privilege: ISessionPrivilege,
   session: IronSession
 ) => {
   session.user = {
     email,
+    firstName,
+    familyName,
+    fullName: familyName ? `${firstName} ${familyName}` : undefined,
     privilege,
   };
   await session.save();

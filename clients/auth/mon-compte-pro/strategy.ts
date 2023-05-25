@@ -1,4 +1,5 @@
-import { Issuer, BaseClient } from 'openid-client';
+import { UserInfo } from 'os';
+import { Issuer, BaseClient, UserinfoResponse } from 'openid-client';
 import { HttpForbiddenError } from '#clients/exceptions';
 
 let _client = undefined as BaseClient | undefined;
@@ -40,11 +41,29 @@ export const getClient = async () => {
 export const monCompteProAuthorizeUrl = async () => {
   const client = await getClient();
   return client.authorizationUrl({
-    scope: 'openid email',
+    scope: 'openid email organizations profile',
   });
 };
 
-export const monCompteProGetToken = async (req: any) => {
+export type IMCPUserInfo = {
+  sub: string;
+  email: string;
+  email_verified: boolean;
+  family_name: string | null;
+  given_name: string | null;
+  phone_number: string | null;
+  job: string | null;
+  organizations: {
+    id: number;
+    siret: string;
+    is_external: boolean;
+    label: string | null;
+    is_collectivite_territoriale: boolean;
+    is_service_public: boolean;
+  }[];
+};
+
+export const monCompteAuthenticate = async (req: any) => {
   const client = await getClient();
 
   const params = client.callbackParams(req);
@@ -60,7 +79,7 @@ export const monCompteProGetToken = async (req: any) => {
     throw new HttpForbiddenError('No access token');
   }
 
-  const userInfo = await client.userinfo(access_token);
+  const userInfo = (await client.userinfo(access_token)) as IMCPUserInfo;
   return userInfo;
 };
 
