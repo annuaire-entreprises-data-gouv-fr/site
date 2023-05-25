@@ -9,7 +9,7 @@ import { EAdministration } from '#models/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
 import constants from '#models/constants';
 import { IDonneesFinancieres } from '#models/donnees-financieres';
-import { formatDateYear, formatCurrency } from '#utils/helpers';
+import { formatDateYear, formatCurrency, formatDateLong } from '#utils/helpers';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -23,7 +23,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
     const isNotFound = bilansFinanciers.errorType === 404;
     if (isNotFound) {
       return (
-        <Section title="Bilans financiers" sources={[EAdministration.MEF]}>
+        <Section title="Bilans comptables" sources={[EAdministration.MEF]}>
           <p>Aucun bilan financier n’a été retrouvé pour cette structure.</p>
         </Section>
       );
@@ -42,6 +42,10 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
   const colorCA = constants.chartColors[4];
 
   const body = [
+    [
+      'Date de cloture',
+      ...bilans.map((a) => formatDateLong(a?.dateClotureExercice ?? '')),
+    ],
     [
       <>
         <ColorCircle color={colorCA} /> Chiffre d’affaires
@@ -66,7 +70,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
 
   return (
     <Section
-      title="Bilans financiers"
+      title="Bilans comptables"
       sources={[EAdministration.MEF]}
       lastModified={bilansFinanciers.lastModified}
     >

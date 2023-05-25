@@ -93,9 +93,6 @@ const mapToBilan = (financialData: IAPIBilanResponse): IBilanFinancier => {
     capacite_de_remboursement = 0,
     ratio_de_liquidite = 0,
     taux_d_endettement = 0,
-
-    //resultats financiers ?
-    //resultats exceptionnels ?
   } = financialData;
 
   return {
