@@ -48,7 +48,6 @@ export const TraficStats: React.FC<{
 
   return (
     <>
-      <h3>Utilisateurs & trafic</h3>
       <p>
         Nous suivons à la fois le nombre d’utilisateurs et le nombre total de
         visites. <br />

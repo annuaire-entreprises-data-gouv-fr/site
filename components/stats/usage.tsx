@@ -35,8 +35,6 @@ export const UsageStats: React.FC<{
   };
   return (
     <>
-      <h3>Comment est utilisé l’Annuaire des Entreprises ?</h3>
-
       <div>
         <p>
           Ne pouvant suivre tous les usages du site, nous avons choisi de nous
