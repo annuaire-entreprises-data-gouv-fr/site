@@ -25,55 +25,51 @@ export const clientBilansFinanciers = async (siren: Siren) => {
     throw new HttpNotFound(siren);
   }
 
+  const bilans = mapToDomainObject(response.records);
+
   return {
-    ...mapToDomainObject(response.records),
+    bilans,
+    hasBilanConsolide: bilans[0].estConsolide,
     lastModified: response.lastModified,
   };
 };
 
-const mapToDomainObject = (response: IAPIBilanResponse[]) => {
+const mapToDomainObject = (
+  response: IAPIBilanResponse[]
+): IBilanFinancier[] => {
   const allBilans = response.map(mapToBilan);
 
-  const yearsSet = new Set<string>();
+  let hasBilanConsolide = !!allBilans.find((b) => b.estConsolide);
+  const years = Array.from(new Set(allBilans.map((b) => b.year))).sort();
 
-  let hasBilanConsolide = false;
-  let hasBilanComplet = false;
-
-  const bilansPerYear = {} as {
-    [year: string]: { [type: string]: IBilanFinancier };
-  };
-
-  allBilans.forEach((newBilan: IBilanFinancier) => {
-    const { year, type } = newBilan;
-
-    yearsSet.add(year);
-    hasBilanConsolide = hasBilanConsolide || type === 'K';
-    hasBilanComplet = hasBilanConsolide || type === 'C';
-
-    bilansPerYear[year] = {
-      ...bilansPerYear[year],
-      [type]: newBilan,
-    };
-  });
-
-  const years = Array.from(yearsSet).sort();
-
-  return {
-    bilans: years.map((y) => {
-      const { K = null, C = null, S = null } = bilansPerYear[y] || {};
-
-      if (hasBilanConsolide) {
-        return K;
-      }
-
-      return { ...(K || C || S) };
-    }),
-    firstYear: years[0],
-    hasBilanConsolide,
-  };
+  const removeUndefined = (
+    b: IBilanFinancier | undefined
+  ): b is IBilanFinancier => typeof b !== 'undefined';
+  // following algo is not efficient but it is readable and succinct
+  if (hasBilanConsolide) {
+    return years
+      .map((y) =>
+        allBilans.find((b: IBilanFinancier) => b.estConsolide && b.year === y)
+      )
+      .filter(removeUndefined);
+  } else {
+    return years
+      .map((y) => {
+        const bilanComplet = allBilans.find(
+          (b: IBilanFinancier) => b.estComplet && b.year === y
+        );
+        if (bilanComplet) {
+          return bilanComplet;
+        }
+        return allBilans.find(
+          (b: IBilanFinancier) => b.estSimplifie && b.year === y
+        );
+      })
+      .filter(removeUndefined);
+  }
 };
 
-const mapToBilan = (financialData: IAPIBilanResponse) => {
+const mapToBilan = (financialData: IAPIBilanResponse): IBilanFinancier => {
   const {
     ratio_de_vetuste = 0,
     rotation_des_stocks_jours = 0,
@@ -97,6 +93,9 @@ const mapToBilan = (financialData: IAPIBilanResponse) => {
     capacite_de_remboursement = 0,
     ratio_de_liquidite = 0,
     taux_d_endettement = 0,
+
+    //resultats financiers ?
+    //resultats exceptionnels ?
   } = financialData;
 
   return {
@@ -112,6 +111,7 @@ const mapToBilan = (financialData: IAPIBilanResponse) => {
     ebitda: ebitda,
     dateClotureExercice: date_cloture_exercice,
     ebit: ebit,
+    ebe,
     margeBrute: marge_brute,
     resultatNet: resultat_net,
     siren: siren,

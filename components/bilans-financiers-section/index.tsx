@@ -1,4 +1,5 @@
 import Info from '#components-ui/alerts/info';
+import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { INPI, MEF } from '#components/administrations';
 import { LineChart } from '#components/chart/line';
@@ -8,17 +9,14 @@ import { EAdministration } from '#models/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
 import constants from '#models/constants';
 import { IDonneesFinancieres } from '#models/donnees-financieres';
-import {
-  formatDateYear,
-  formatCurrency,
-  formatPercentage,
-} from '#utils/helpers';
+import { formatDateYear, formatCurrency } from '#utils/helpers';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
 );
 
 export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
+  uniteLegale,
   bilansFinanciers,
 }) => {
   if (isAPINotResponding(bilansFinanciers)) {
@@ -48,27 +46,21 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
       <>
         <ColorCircle color={colorCA} /> Chiffre d’affaires
       </>,
-      ...bilans.map((a) => formatCurrency(a.chiffreDAffaires)),
+      ...bilans.map((a) => formatCurrency(a?.chiffreDAffaires ?? '')),
     ],
     [
       'Marge commerciale ou marge brute',
-      ...bilans.map((a) => formatCurrency(a.margeBrute)),
+      ...bilans.map((a) => formatCurrency(a?.margeBrute ?? '')),
     ],
     [
-      'Marge d’Excédent Brut d’Exploitation (EBE)',
-      ...bilans.map((a) => formatPercentage(a.margeEbe)),
+      'Excédent Brut d’Exploitation (EBE)',
+      ...bilans.map((a) => formatCurrency(a?.ebe ?? '')),
     ],
     [
       <>
         <ColorCircle color={colorResultat} /> Résultat net
       </>,
-      ...bilans.map((a) => formatCurrency(a.resultatNet)),
-    ],
-    [
-      'Type de bilan',
-      ...bilans.map(({ type }) =>
-        type === 'K' ? 'Consolidé' : type === 'C' ? 'Complet' : 'Simplifié'
-      ),
+      ...bilans.map((a) => formatCurrency(a?.resultatNet ?? '')),
     ],
   ];
 
@@ -90,6 +82,13 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
         Voici les {bilans.length} derniers bilans déclarés auprès de l’
         <INPI /> pour cette structure.
       </p>
+      {bilansFinanciers.hasBilanConsolide && (
+        <p>
+          Cette entreprise déclare un <Tag color="info">bilan consolidé</Tag>.
+          C’est le bilan d’un groupe de sociétés dont {uniteLegale.nomComplet}{' '}
+          est la société mère. Son bilan consolidé inclu ceux de ses filiales.
+        </p>
+      )}
       <p>
         À partir des bilans, les équipes du <MEF /> ont calculé et publié les
         indicateurs et ratios financiers suivants&nbsp;:
@@ -146,10 +145,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
       />
       <br />
       <FullTable
-        head={[
-          'Indicateurs',
-          ...bilans.map((a) => formatDateYear(a.dateClotureExercice)),
-        ]}
+        head={['Indicateurs', ...bilans.map((a) => a?.year)]}
         body={body}
       />
     </Section>

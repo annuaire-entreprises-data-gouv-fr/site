@@ -16,7 +16,6 @@ export interface IDonneesFinancieres {
     | {
         bilans: IBilanFinancier[];
         hasBilanConsolide: boolean;
-        firstYear: string;
         lastModified: string | null;
       }
     | IAPINotRespondingError;
@@ -35,6 +34,7 @@ export interface IBilanFinancier {
   ebitda: number;
   dateClotureExercice: string;
   ebit: number;
+  ebe: number;
   margeBrute: number;
   resultatNet: number;
   siren: string;
