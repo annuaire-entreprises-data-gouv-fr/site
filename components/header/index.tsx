@@ -1,12 +1,13 @@
 import React from 'react';
-import { AdvancedSearch } from '#components/advanced-search';
-import SearchBar from '#components/search-bar';
 import { Icon } from '#components-ui/icon/wrapper';
 import Logo from '#components-ui/logo';
 import { PrintNever } from '#components-ui/print-visibility';
+import { AdvancedSearch } from '#components/advanced-search';
+import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
 import { IParams } from '#models/search-filter-params';
 import { ISession, isLoggedIn } from '#utils/session';
+import styles from './styles.module.scss';
 
 type IProps = {
   currentSearchTerm?: string;
@@ -28,7 +29,7 @@ export const Header: React.FC<IProps> = ({
   session = null,
 }) => (
   <>
-    <header role="banner" className="fr-header">
+    <header role="banner" className={styles['fr-header']}>
       <div
         id="loader-bar"
         style={{
@@ -58,7 +59,7 @@ export const Header: React.FC<IProps> = ({
                       </a>
                     </div>
                     {useSearchBar || useLogo ? (
-                      <div className="annuaire-logo">
+                      <div className={styles['annuaire-logo']}>
                         <a href="/" title="L’Annuaire des Entreprises">
                           <Logo
                             title="Logo de l’Annuaire des Entreprises"
@@ -72,7 +73,7 @@ export const Header: React.FC<IProps> = ({
                     <div className="fr-header__navbar"></div>
                   </div>
                   {useSearchBar ? (
-                    <div className="not-fr-search">
+                    <div className={styles['not-fr-search']}>
                       <SearchBar defaultValue={currentSearchTerm} />
                     </div>
                   ) : null}
@@ -127,53 +128,5 @@ export const Header: React.FC<IProps> = ({
         </form>
       </PrintNever>
     </header>
-    <style jsx>{`
-      ${!useSearchBar
-        ? `header.fr-header, div.fr-header__brand {
-        filter: none !important;
-      }`
-        : ''}
-
-      div.annuaire-logo {
-        order: 2;
-        margin-right: 15px;
-      }
-
-      .not-fr-search {
-        width: 470px;
-        max-width: 100%;
-        flex-grow: 1;
-      }
-
-      div.with-session-banner {
-        background-color: ${constants.colors.espaceAgent};
-        color: #fff;
-        font-size: 2rem;
-        line-height: 3rem;
-      }
-
-      #loader-bar {
-        transition: width 150ms ease-in-out;
-        width: 100%;
-        height: 3px;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        position: absolute;
-      }
-
-      @media print {
-        .fr-header {
-          display: none !important;
-        }
-      }
-      @media only screen and (min-width: 1px) and (max-width: 992px) {
-        .not-fr-search {
-          width: 100%;
-          margin: 0.75rem;
-          margin-top: 0;
-        }
-      }
-    `}</style>
   </>
 );

@@ -1,39 +1,12 @@
 import { PropsWithChildren } from 'react';
+import styles from './styles.module.scss';
 
 const PrintOnly: React.FC<PropsWithChildren<{}>> = ({ children }) => (
-  <div>
-    {children}
-    <style jsx>
-      {`
-        div {
-          display: none;
-        }
-        @media print {
-          div {
-            display: block;
-          }
-        }
-      `}
-    </style>
-  </div>
+  <div className={`${styles['print-only']}`}>{children}</div>
 );
 
 const PrintNever: React.FC<PropsWithChildren<{}>> = ({ children }) => (
-  <div>
-    {children}
-    <style jsx>
-      {`
-        div {
-          display: block;
-        }
-        @media print {
-          div {
-            display: none;
-          }
-        }
-      `}
-    </style>
-  </div>
+  <div className={`${styles['print-never']}`}>{children}</div>
 );
 
 export { PrintNever, PrintOnly };

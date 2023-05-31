@@ -8,7 +8,7 @@ export const Question: React.FC<{}> = () => (
     <div
       role="dialog"
       aria-label="Une question"
-      className={`${styles['question-bottom-right']} layout-center`}
+      className={`${styles['question-bottom-right']} layout-center$`}
     >
       <a className="no-style-link" href="/faq">
         <span>Une question&nbsp;</span>

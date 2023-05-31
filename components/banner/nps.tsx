@@ -10,7 +10,7 @@ export const NPSBanner: React.FC<{}> = () => (
       role="dialog"
       aria-label="Donnez-nous votre avis"
     >
-      <div className="fr-container">
+      <div className={`${styles.container} fr-container `}>
         <div
           dangerouslySetInnerHTML={{
             __html: `
@@ -25,7 +25,7 @@ export const NPSBanner: React.FC<{}> = () => (
               <button onclick="window.closeModal('nps-modal')" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
                 <b>Ne plus afficher ce message ✕</b>
               </button>
-        `,
+            `,
           }}
         ></div>
       </div>

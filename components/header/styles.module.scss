@@ -1,0 +1,33 @@
+.annuaire-logo {
+  order: 2;
+  margin-right: 15px;
+}
+
+.not-fr-search {
+  width: 470px;
+  max-width: 100%;
+  flex-grow: 1;
+}
+
+.loader-bar {
+  transition: width 150ms ease-in-out;
+  width: 100%;
+  height: 3px;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  position: absolute;
+}
+
+@media print {
+  .fr-header {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 992px) {
+  .not-fr-search {
+    width: 100%;
+    margin: 0.75rem;
+    margin-top: 0;
+  }
+}

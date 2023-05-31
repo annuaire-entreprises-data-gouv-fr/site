@@ -1,3 +1,4 @@
+import styles from './styles.module.scss';
 type IProps = {
   title: string;
   width: number;
@@ -21,7 +22,7 @@ const Logo: React.FC<IProps> = ({
   className = '',
 }) => (
   <div
-    className="logo-wrapper"
+    className={styles['logo-wrapper']}
     style={{
       width: `${width}px`,
       height: `${height}px`,
@@ -35,23 +36,6 @@ const Logo: React.FC<IProps> = ({
       width="100%"
       height="100%"
     />
-    <style global jsx>
-      {`
-        .logo-wrapper {
-          max-width: 90%;
-          margin: 0 auto;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .logo-wrapper > img {
-          margin: auto;
-          display: block;
-          max-width: 100%;
-          max-height: 100%;
-        }
-      `}
-    </style>
   </div>
 );
 

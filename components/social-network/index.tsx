@@ -1,4 +1,5 @@
 import { PrintNever } from '#components-ui/print-visibility';
+import styles from './styles.module.scss';
 
 const SocialNetworks = () => (
   <PrintNever>
@@ -7,7 +8,9 @@ const SocialNetworks = () => (
         <div className="fr-grid-row">
           <div className="fr-col-12">
             <div className="fr-follow__social">
-              <b className="fr-h5">Retrouvez-nous sur les réseaux sociaux</b>
+              <b className="fr-h5 text">
+                Retrouvez-nous sur les réseaux sociaux
+              </b>
               <ul className="fr-btns-group">
                 <li>
                   <a
@@ -47,11 +50,6 @@ const SocialNetworks = () => (
           </div>
         </div>
       </div>
-      <style jsx>{`
-        h2.fr-h5 {
-          font-size: 1.2rem !important;
-        }
-      `}</style>
     </div>
   </PrintNever>
 );

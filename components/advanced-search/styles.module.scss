@@ -1,0 +1,31 @@
+.search-filters-container {
+  background-color: #f6f6f6;
+}
+
+.search-filer-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.map-switch {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.field-in-line {
+  display: flex;
+  gap: 5px;
+}
+
+.search-localisation-responses {
+  max-height: 270px;
+  overflow: auto;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 992px) {
+  div.select {
+    max-width: 100%;
+  }
+}

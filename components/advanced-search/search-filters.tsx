@@ -10,6 +10,7 @@ import { codesEffectifsOptions } from '#utils/labels/codes-effectifs';
 import { codesSectionNAF } from '#utils/labels/codes-section-NAF';
 import { FilterGeo } from './filter-geo';
 import { FilterStructure } from './filter-structure';
+import styles from './styles.module.scss';
 
 const SearchFilters: React.FC<{
   searchParams?: IParams;
@@ -82,7 +83,7 @@ const SearchFilters: React.FC<{
           Rechercher toutes les structures liées à une personne (dirigeant(e),
           ou élu(e))&nbsp;:
         </label>
-        <div className="field-in-line">
+        <div className={`${styles['field-in-line']}`}>
           <input
             className="fr-input"
             name="fn"
@@ -100,7 +101,7 @@ const SearchFilters: React.FC<{
         </div>
         <br />
         <label>Né(e) entre :</label>
-        <div className="field-in-line">
+        <div className={`${styles['field-in-line']}`}>
           <input
             className="fr-input"
             type="date"
@@ -209,21 +210,6 @@ const SearchFilters: React.FC<{
           />
         </div>
       </FilterMenu>
-      <style jsx>{`
-        .field-in-line {
-          display: flex;
-          gap: 5px;
-        }
-        #search-localisation-responses {
-          max-height: 270px;
-          overflow: auto;
-        }
-        @media only screen and (min-width: 1px) and (max-width: 992px) {
-          div.select {
-            max-width: 100%;
-          }
-        }
-      `}</style>
     </>
   );
 };

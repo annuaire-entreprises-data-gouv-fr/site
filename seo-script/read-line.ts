@@ -1,6 +1,6 @@
+import events from 'events';
 import fs from 'fs';
 import readline from 'readline';
-import events from 'events';
 
 export const readFileLineByLine = async (
   filePath: string,
