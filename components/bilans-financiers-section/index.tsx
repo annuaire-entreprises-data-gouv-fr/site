@@ -1,7 +1,6 @@
 import Info from '#components-ui/alerts/info';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
-import { INPI, MEF } from '#components/administrations';
 import { LineChart } from '#components/chart/line';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
@@ -145,7 +144,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
       />
       <br />
       <FullTable
-        head={['Indicateurs', ...bilans.map((a) => a?.year)]}
+        head={['Indicateurs', ...bilans.map((a) => a?.year.toString())]}
         body={body}
       />
     </Section>

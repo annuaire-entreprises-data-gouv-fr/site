@@ -42,6 +42,9 @@ const groupPerYear = (
   return bilansPerYear;
 };
 
+const sortPerYear = (b1: IBilanFinancier, b2: IBilanFinancier) =>
+  b1.year - b2.year;
+
 const mapToDomainObject = (
   response: IAPIBilanResponse[]
 ): IBilanFinancier[] => {
@@ -58,9 +61,6 @@ const mapToDomainObject = (
   const bilansS = allBilans
     .filter((b) => b.estSimplifie)
     .reduce(groupPerYear, {});
-
-  const sortPerYear = (b1: IBilanFinancier, b2: IBilanFinancier) =>
-    b1.year - b2.year;
 
   const hasBilanConsolide = Object.values(bilansK).length > 0;
   if (hasBilanConsolide) {
