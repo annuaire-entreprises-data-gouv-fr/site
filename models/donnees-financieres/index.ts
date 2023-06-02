@@ -47,7 +47,7 @@ export interface IBilanFinancier {
   estSimplifie: boolean;
   estConsolide: boolean;
   estComplet: boolean;
-  year: string;
+  year: number;
 }
 
 export const getDonneesFinancieresFromSlug = async (

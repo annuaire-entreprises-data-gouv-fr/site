@@ -34,38 +34,40 @@ export const clientBilansFinanciers = async (siren: Siren) => {
   };
 };
 
+const groupPerYear = (
+  bilansPerYear: { [year: string]: IBilanFinancier },
+  bilan: IBilanFinancier
+) => {
+  bilansPerYear[bilan.year] = bilan;
+  return bilansPerYear;
+};
+
 const mapToDomainObject = (
   response: IAPIBilanResponse[]
 ): IBilanFinancier[] => {
   const allBilans = response.map(mapToBilan);
 
-  let hasBilanConsolide = !!allBilans.find((b) => b.estConsolide);
-  const years = Array.from(new Set(allBilans.map((b) => b.year))).sort();
+  const bilansK = allBilans
+    .filter((b) => b.estConsolide)
+    .reduce(groupPerYear, {});
 
-  const removeUndefined = (
-    b: IBilanFinancier | undefined
-  ): b is IBilanFinancier => typeof b !== 'undefined';
-  // following algo is not efficient but it is readable and succinct
+  const bilansC = allBilans
+    .filter((b) => b.estComplet)
+    .reduce(groupPerYear, {});
+
+  const bilansS = allBilans
+    .filter((b) => b.estSimplifie)
+    .reduce(groupPerYear, {});
+
+  const sortPerYear = (b1: IBilanFinancier, b2: IBilanFinancier) =>
+    b1.year - b2.year;
+
+  const hasBilanConsolide = Object.values(bilansK).length > 0;
   if (hasBilanConsolide) {
-    return years
-      .map((y) =>
-        allBilans.find((b: IBilanFinancier) => b.estConsolide && b.year === y)
-      )
-      .filter(removeUndefined);
+    return Object.values(bilansK).sort(sortPerYear);
   } else {
-    return years
-      .map((y) => {
-        const bilanComplet = allBilans.find(
-          (b: IBilanFinancier) => b.estComplet && b.year === y
-        );
-        if (bilanComplet) {
-          return bilanComplet;
-        }
-        return allBilans.find(
-          (b: IBilanFinancier) => b.estSimplifie && b.year === y
-        );
-      })
-      .filter(removeUndefined);
+    const mergedBilans = Object.assign(bilansS, bilansC);
+    return Object.values(mergedBilans).sort(sortPerYear);
   }
 };
 
@@ -117,10 +119,10 @@ const mapToBilan = (financialData: IAPIBilanResponse): IBilanFinancier => {
     capaciteDeRemboursement: capacite_de_remboursement,
     ratioDeLiquidite: ratio_de_liquidite,
     tauxDEndettement: taux_d_endettement,
-    type: type_bilan,
-    estSimplifie: type_bilan === 'S',
-    estConsolide: type_bilan === 'K',
-    estComplet: type_bilan === 'C',
-    year: formatDateYear(date_cloture_exercice),
+    type: type_bilan.toLowerCase(),
+    estSimplifie: type_bilan.toLowerCase() === 's',
+    estConsolide: type_bilan.toLowerCase() === 'k',
+    estComplet: type_bilan.toLowerCase() === 'c',
+    year: new Date(date_cloture_exercice).getFullYear(),
   };
 };

@@ -75,17 +75,12 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
       lastModified={bilansFinanciers.lastModified}
     >
       <Info>
-        Cette section est un travail en cours. Les bilans financiers sont des
-        données difficiles à maitriser et notre travail peut contenir des
-        erreurs.
+        Cette section est un travail en cours.
         <br />
-        Si vous découvrez une erreur, merci de nous en faire part en nous
-        écrivant à <a href={constants.links.mailto}>{constants.links.mail}</a>
+        Si vous découvrez une erreur, merci de nous en faire part et nous la
+        corrigerons au plus vite (
+        <a href={constants.links.mailto}>{constants.links.mail}</a>).
       </Info>
-      <p>
-        Voici les {bilans.length} derniers bilans déclarés auprès de l’
-        <INPI /> pour cette structure.
-      </p>
       {bilansFinanciers.hasBilanConsolide && (
         <p>
           Cette entreprise déclare un <Tag color="info">bilan consolidé</Tag>.
@@ -94,8 +89,9 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
         </p>
       )}
       <p>
-        À partir des bilans, les équipes du <MEF /> ont calculé et publié les
-        indicateurs et ratios financiers suivants&nbsp;:
+        Voici les {bilans.length} derniers bilans
+        {bilansFinanciers.hasBilanConsolide ? ' consolidés' : ''} déclarés par
+        cette entreprise&nbsp;:
       </p>
       <br />
       <LineChart
