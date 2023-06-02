@@ -71,6 +71,13 @@ const mapToDomainObject = (
   }
 };
 
+const getFiscalYear = (date_cloture_exercice: string) => {
+  // determine fiscal year
+  const clotureDate = new Date(date_cloture_exercice);
+  const clotureYear = clotureDate.getFullYear();
+  return clotureDate.getMonth() < 6 ? clotureYear - 1 : clotureYear;
+};
+
 const mapToBilan = (financialData: IAPIBilanResponse): IBilanFinancier => {
   const {
     ratio_de_vetuste = 0,
@@ -123,6 +130,6 @@ const mapToBilan = (financialData: IAPIBilanResponse): IBilanFinancier => {
     estSimplifie: type_bilan.toLowerCase() === 's',
     estConsolide: type_bilan.toLowerCase() === 'k',
     estComplet: type_bilan.toLowerCase() === 'c',
-    year: new Date(date_cloture_exercice).getFullYear(),
+    year: getFiscalYear(date_cloture_exercice),
   };
 };
