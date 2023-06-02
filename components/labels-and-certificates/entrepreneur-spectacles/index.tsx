@@ -125,7 +125,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
   return (
     <Section
       title="Entrepreneur de spectacles vivants"
-      sources={[EAdministration.DINUM, EAdministration.MC]}
+      sources={[EAdministration.MC]}
       lastModified={entrepreneurSpectacles.lastModified}
     >
       Cette structure possède {plural ? 'plusieurs' : 'un'} récépissé{plural} de
