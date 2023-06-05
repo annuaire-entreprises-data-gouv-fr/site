@@ -35,7 +35,7 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
         background-color: #ffd0d0;
         color: #000;
         font-family: 'Marianne', sans-serif;
-        border-bottom: 2px solid ${constants.colors.frBlue};
+        border-bottom: 2px solid #000091;
       }
     `}</style>
   </PrintNever>

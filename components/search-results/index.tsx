@@ -1,3 +1,5 @@
+'use client';
+
 import MapResults from '#components/map/map-results';
 import { ISearchResults } from '#models/search';
 import { IParams } from '#models/search-filter-params';
@@ -51,7 +53,6 @@ const SearchResults: React.FC<{
             </div>
           </div>
         </div>
-
         <style jsx>{`
           .map-container {
             display: flex;

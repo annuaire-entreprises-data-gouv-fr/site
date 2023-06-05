@@ -1,10 +1,12 @@
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
+import styles from './advanced-search-tutorial.module.scss';
 
 export const AdvancedSearchTutorial = () => {
   return (
-    <div className="advanced-search-tutorial">
+    <div className={styles['advanced-search-tutorial']}>
       <svg
+        className={styles.svg}
         fill="#c53721"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="-41.5 -41.5 498.3 498.3"
@@ -17,7 +19,7 @@ export const AdvancedSearchTutorial = () => {
         </g>
       </svg>
       <br />
-      <div className="tutorial">
+      <div className={styles.tutorial}>
         <h3>
           Grâce aux filtres de recherche, retrouvez n’importe quelle entreprise,
           association, ou service public en France.
@@ -53,46 +55,6 @@ export const AdvancedSearchTutorial = () => {
           </ul>
         </div>
       </div>
-      <style jsx>
-        {`
-          .advanced-search-tutorial {
-            position: relative;
-          }
-
-          svg {
-            height: 100px;
-            position: absolute;
-            top: -20px;
-          }
-
-          .tutorial {
-            margin-left: 110px;
-          }
-
-          .tutorial ul {
-            list-style-type: none;
-          }
-          .tutorial ul li {
-            margin: 0 0 20px;
-          }
-          .tutorial li > span {
-            color: ${constants.colors.frBlue};
-          }
-
-          @media only screen and (min-width: 1px) and (max-width: 576px) {
-            svg {
-              rotate: 225deg;
-              height: 60px;
-              position: absolute;
-              top: -40px;
-            }
-
-            .tutorial {
-              margin-left: 0;
-            }
-          }
-        `}
-      </style>
     </div>
   );
 };

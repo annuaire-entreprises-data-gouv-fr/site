@@ -1,0 +1,36 @@
+.advanced-search-tutorial {
+  position: relative;
+}
+
+.svg {
+  height: 100px;
+  position: absolute;
+  top: -20px;
+}
+
+.tutorial {
+  margin-left: 110px;
+}
+
+.tutorial ul {
+  list-style-type: none;
+}
+.tutorial ul li {
+  margin: 0 0 20px;
+}
+.tutorial li > span {
+  color: #000091;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 576px) {
+  .svg {
+    rotate: 225deg;
+    height: 60px;
+    position: absolute;
+    top: -40px;
+  }
+
+  .tutorial {
+    margin-left: 0;
+  }
+}
