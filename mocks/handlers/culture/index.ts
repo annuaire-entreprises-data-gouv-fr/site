@@ -4,7 +4,7 @@ import { records } from './records';
 
 export const handlers = [
   rest.get(
-    'https://data.culture.gouv.fr/api/datasets/1.0/search/',
+    'https://data.culture.gouv.fr/api/datasets/1.0/declarations-des-entrepreneurs-de-spectacles-vivants',
     (_req, res, ctx) => {
       return res(ctx.json(dataset));
     }
