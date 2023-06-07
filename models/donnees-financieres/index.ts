@@ -15,6 +15,7 @@ export interface IDonneesFinancieres {
   bilansFinanciers:
     | {
         bilans: IBilanFinancier[];
+        hasBilanConsolide: boolean;
         lastModified: string | null;
       }
     | IAPINotRespondingError;
@@ -33,6 +34,7 @@ export interface IBilanFinancier {
   ebitda: number;
   dateClotureExercice: string;
   ebit: number;
+  ebe: number;
   margeBrute: number;
   resultatNet: number;
   siren: string;
@@ -41,6 +43,11 @@ export interface IBilanFinancier {
   capaciteDeRemboursement: number;
   ratioDeLiquidite: number;
   tauxDEndettement: number;
+  type: string;
+  estSimplifie: boolean;
+  estConsolide: boolean;
+  estComplet: boolean;
+  year: number;
 }
 
 export const getDonneesFinancieresFromSlug = async (
@@ -60,6 +67,7 @@ export const getDonneesFinancieresFromSlug = async (
       return APINotRespondingFactory(EAdministration.MEF, e.status || 500);
     }),
   ]);
+
   return {
     uniteLegale,
     bilansFinanciers,

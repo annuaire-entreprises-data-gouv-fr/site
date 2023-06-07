@@ -10,14 +10,15 @@ export type IODSResponse = {
 };
 
 export type IODSMetadata = {
-  datasets: { metas: { modified: string; data_processed: string } }[];
+  metas: {
+    modified: string;
+    metadata_processed: string;
+    data_processed: string;
+  };
 };
 
 const extractLastModifiedDate = (metadata: IODSMetadata) => {
-  if (!(metadata.datasets.length > 0)) {
-    return null;
-  }
-  return metadata.datasets[0].metas.data_processed;
+  return metadata?.metas?.metadata_processed || null;
 };
 
 /**

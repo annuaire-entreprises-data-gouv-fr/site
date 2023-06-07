@@ -15,6 +15,7 @@ import constants from '#models/constants';
 import {
   isAssociation,
   isCollectiviteTerritoriale,
+  isServicePublic,
   IUniteLegale,
 } from '#models/index';
 import {
@@ -84,7 +85,8 @@ const Tabs: React.FC<{
       label: 'Données financières',
       pathPrefix: '/donnees-financieres/',
       noFollow: false,
-      shouldDisplay: isLoggedIn(session),
+      shouldDisplay:
+        !isServicePublic(uniteLegale) && !isAssociation(uniteLegale),
     },
     {
       ficheType: FICHE.ANNONCES,
@@ -151,7 +153,7 @@ const Tabs: React.FC<{
           text-align: center;
           box-shadow: 0 -8px 5px -5px ${constants.colors.pastelBlue} inset;
           margin: 0 4px;
-          padding: 10px 5px;
+          padding: 5px;
           margin-bottom: -2px;
         }
 
@@ -160,7 +162,8 @@ const Tabs: React.FC<{
           color: ${constants.colors.frBlue};
           font-weight: bold;
           font-size: 0.9rem;
-          line-height: 1.5rem;
+          line-height: 1.1rem;
+          max-width: 160px;
         }
 
         .title-tabs > a > h2 {

@@ -67,13 +67,15 @@ export const formatCurrency = safe((value: string) => {
   return `${sign * roundedValue} ${unitlist[orderOfMagnitude]}`;
 });
 
-export const formatDateYear = safe((date: string | Date) => {
-  if (!date) {
-    return undefined;
+export const formatDateYear = safe(
+  (date: string | Date): string | undefined => {
+    if (!date) {
+      return undefined;
+    }
+    //@ts-ignore
+    return new Intl.DateTimeFormat('fr-FR', yearOption).format(castDate(date));
   }
-  //@ts-ignore
-  return new Intl.DateTimeFormat('fr-FR', yearOption).format(castDate(date));
-});
+);
 
 export const formatDatePartial = safe((date: string | Date) => {
   if (!date) {
