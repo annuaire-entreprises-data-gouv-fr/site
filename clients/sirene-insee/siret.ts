@@ -279,7 +279,8 @@ export const mapEtablissementToDomainObject = (
     activitePrincipale: activitePrincipaleEtablissement,
     libelleActivitePrincipale: libelleFromCodeNAF(
       activitePrincipaleEtablissement,
-      nomenclatureActivitePrincipaleEtablissement
+      nomenclatureActivitePrincipaleEtablissement,
+      true
     ),
     dateDerniereMiseAJour: dateDernierTraitementEtablissement,
     estSiege: !!etablissementSiege,
@@ -288,9 +289,9 @@ export const mapEtablissementToDomainObject = (
     dateFermeture,
     trancheEffectif: trancheEffectifsEtablissement,
     libelleTrancheEffectif: libelleFromCodeEffectif(
-      trancheEffectifsEtablissement,
-      anneeEffectifsEtablissement
+      trancheEffectifsEtablissement
     ),
+    anneeTrancheEffectif: anneeEffectifsEtablissement,
     adresse,
     adressePostale,
     codePostal,

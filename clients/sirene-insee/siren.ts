@@ -205,13 +205,11 @@ const mapToDomainObject = (
     trancheEffectif: trancheEffectifsUniteLegale,
     libelleTrancheEffectif: libelleFromCodeEffectif(
       trancheEffectifsUniteLegale,
-      anneeEffectifsUniteLegale,
       caractereEmployeurUniteLegale
     ),
-    libelleCategorieEntreprise: libelleFromeCodeCategorie(
-      categorieEntreprise,
-      anneeCategorieEntreprise
-    ),
+    anneeTrancheEffectif: anneeEffectifsUniteLegale,
+    libelleCategorieEntreprise: libelleFromeCodeCategorie(categorieEntreprise),
+    anneeCategorieEntreprise,
     dirigeant: estEntrepreneurIndividuel ? dirigeant : null,
     complements: {
       ...defaultUniteLegale.complements,

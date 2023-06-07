@@ -75,7 +75,7 @@ export const libelleFromCodeNAF = (
 
   //@ts-ignore
   const label = codes[code] || 'Activité inconnue';
-  return addCode && code ? `${code} - ${label}` : label;
+  return addCode && code ? `${label} (${code})` : label;
 };
 
 export const libelleFromCodeSectionNaf = (code: string) => {
@@ -97,7 +97,7 @@ export const libelleFromCodeNAFWithoutNomenclature = (
     //@ts-ignore
     const label = nomenclature[code];
     if (label) {
-      return addCode && code ? `${code} - ${label}` : label;
+      return addCode && code ? `${label} (${code})` : label;
     }
   }
   return 'Activité inconnue';
@@ -105,20 +105,17 @@ export const libelleFromCodeNAFWithoutNomenclature = (
 
 export const libelleFromCodeEffectif = (
   codeEffectif: string,
-  anneeEffectif?: string,
   characterEmployeurUniteLegale?: string
 ) => {
+  if (characterEmployeurUniteLegale === 'N') {
+    return 'Unité non employeuse';
+  }
+
   //@ts-ignore
   const libelle = codesEffectifs[codeEffectif];
 
-  if (libelle && anneeEffectif) {
-    return `${libelle}, en ${anneeEffectif}`;
-  }
   if (libelle) {
     return libelle;
-  }
-  if (characterEmployeurUniteLegale === 'N') {
-    return 'Unité non employeuse';
   }
   return null;
 };
@@ -134,16 +131,12 @@ export const libelleFromTypeVoie = (
   return codesVoies[codeVoie] || codeVoie;
 };
 
-export const libelleFromeCodeCategorie = (
-  codeCategorie: string,
-  anneCategorie?: string
-) => {
+export const libelleFromeCodeCategorie = (codeCategorie: string) => {
   let libelle = categoriesEntreprise(codeCategorie);
 
   if (!libelle) {
     return null;
   }
 
-  const yearSuffix = anneCategorie ? `, en ${anneCategorie}` : '';
-  return `${libelle} (${codeCategorie})${yearSuffix}`;
+  return `${libelle} (${codeCategorie})`;
 };

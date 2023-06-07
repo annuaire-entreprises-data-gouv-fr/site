@@ -195,12 +195,14 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     ),
     nomComplet,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(nature_juridique),
+    anneeCategorieEntreprise: null,
     libelleTrancheEffectif: libelleFromCodeEffectif(tranche_effectif_salarie),
+    anneeTrancheEffectif: null,
     chemin: result.slug_annuaire_entreprises || result.siren,
     natureJuridique: nature_juridique || '',
     libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
       result.activite_principale,
-      false
+      true
     ),
     dirigeants: dirigeants.map(mapToDirigeantModel),
     complements: {

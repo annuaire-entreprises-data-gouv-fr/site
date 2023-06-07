@@ -99,6 +99,24 @@ export const formatDate = safe((date: string | Date) =>
   date ? new Intl.DateTimeFormat('fr-FR').format(castDate(date)) : undefined
 );
 
+export const formatAge = safe((date: string | Date) => {
+  const now = new Date();
+  const then = castDate(date);
+  const monthDiff =
+    now.getMonth() -
+    then.getMonth() +
+    12 * (now.getFullYear() - then.getFullYear());
+
+  if (monthDiff >= 12) {
+    const yearAge = Math.round(monthDiff / 12);
+    return `${yearAge} an${yearAge >= 2 ? 's' : ''}`;
+  }
+  if (monthDiff === 0) {
+    return undefined;
+  }
+  return `${monthDiff} mois`;
+});
+
 export const capitalize = safe((str: string) => {
   if (!str) return str;
 

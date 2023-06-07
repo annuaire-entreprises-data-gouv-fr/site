@@ -23,6 +23,19 @@ const UniteLegaleSection: React.FC<{
 }> = ({ uniteLegale, session }) => {
   const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
 
+  const effectifs =
+    uniteLegale.libelleTrancheEffectif && uniteLegale.anneeTrancheEffectif
+      ? `${uniteLegale.libelleTrancheEffectif}, en ${uniteLegale.anneeTrancheEffectif}`
+      : uniteLegale.trancheEffectif === 'NN'
+      ? uniteLegale.libelleTrancheEffectif
+      : null;
+
+  const categorieEntreprise =
+    uniteLegale.libelleCategorieEntreprise &&
+    uniteLegale.anneeCategorieEntreprise
+      ? `${uniteLegale.libelleCategorieEntreprise}, en ${uniteLegale.anneeCategorieEntreprise}`
+      : null;
+
   const data = [
     ['Dénomination', getNomComplet(uniteLegale, session)],
     ['SIREN', formatIntFr(uniteLegale.siren)],
@@ -44,11 +57,8 @@ const UniteLegaleSection: React.FC<{
       getAdresseUniteLegale(uniteLegale, session, true),
     ],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
-    [
-      'Tranche effectif salarié de la structure',
-      uniteLegale.libelleTrancheEffectif,
-    ],
-    ['Taille de la structure', uniteLegale.libelleCategorieEntreprise],
+    ['Tranche effectif salarié de la structure', effectifs],
+    ['Taille de la structure', categorieEntreprise],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
       'Dernière modification des données Insee',
