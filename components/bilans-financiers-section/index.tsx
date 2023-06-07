@@ -8,7 +8,12 @@ import { EAdministration } from '#models/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
 import constants from '#models/constants';
 import { IDonneesFinancieres } from '#models/donnees-financieres';
-import { formatDateYear, formatCurrency, formatDateLong } from '#utils/helpers';
+import {
+  formatDateYear,
+  formatCurrency,
+  formatDateLong,
+  formatDate,
+} from '#utils/helpers';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -42,8 +47,8 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
 
   const body = [
     [
-      'Date de cloture',
-      ...bilans.map((a) => formatDateLong(a?.dateClotureExercice ?? '')),
+      'Date de clôture',
+      ...bilans.map((a) => formatDate(a?.dateClotureExercice ?? '')),
     ],
     [
       <>
@@ -51,12 +56,9 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
       </>,
       ...bilans.map((a) => formatCurrency(a?.chiffreDAffaires ?? '')),
     ],
+    ['Marge brute', ...bilans.map((a) => formatCurrency(a?.margeBrute ?? ''))],
     [
-      'Marge commerciale ou marge brute',
-      ...bilans.map((a) => formatCurrency(a?.margeBrute ?? '')),
-    ],
-    [
-      'Excédent Brut d’Exploitation (EBE)',
+      'Excédent Brut d’Exploitation',
       ...bilans.map((a) => formatCurrency(a?.ebe ?? '')),
     ],
     [

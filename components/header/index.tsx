@@ -177,8 +177,12 @@ export const Header: React.FC<IProps> = ({
         left: 0;
         display: none;
         width: 100%;
-        background-color: #fbfbfb;
+        background-color: #fff;
         padding: 5px 15px;
+        box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.35);
+      }
+      a.menu-logout div:last-of-type:hover {
+        background-color: #fbfbfb;
       }
 
       a.menu-logout:hover div:last-of-type {

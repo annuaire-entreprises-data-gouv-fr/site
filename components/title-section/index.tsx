@@ -186,12 +186,18 @@ const Tabs: React.FC<{
             flex-direction: column;
             border-bottom: 0;
           }
-          .title-tabs > a {
+
+          .title-tabs > a,
+          .title-tabs > a > h2 {
             margin: 3px;
+            padding: 3px;
+            max-width: none;
           }
+
           .title-tabs > a.active {
             background-color: #fff;
             border-bottom: 2px solid ${constants.colors.pastelBlue};
+            line-height: 1.8rem;
           }
         }
       `}</style>
