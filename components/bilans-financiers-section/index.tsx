@@ -86,7 +86,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
         <p>
           Cette entreprise déclare un <Tag color="info">bilan consolidé</Tag>.
           C’est le bilan d’un groupe de sociétés dont {uniteLegale.nomComplet}{' '}
-          est la société mère. Son bilan consolidé inclu ceux de ses filiales.
+          est la société mère. Son bilan consolidé inclut ceux de ses filiales.
         </p>
       )}
       <p>
