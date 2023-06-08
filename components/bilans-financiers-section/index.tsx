@@ -27,7 +27,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
     const isNotFound = bilansFinanciers.errorType === 404;
     if (isNotFound) {
       return (
-        <Section title="Bilans comptables" sources={[EAdministration.MEF]}>
+        <Section title="Indicateurs financiers" sources={[EAdministration.MEF]}>
           <p>Aucun bilan financier n’a été retrouvé pour cette structure.</p>
         </Section>
       );
@@ -71,7 +71,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
 
   return (
     <Section
-      title="Bilans comptables"
+      title="Indicateurs financiers"
       sources={[EAdministration.MEF]}
       lastModified={bilansFinanciers.lastModified}
     >

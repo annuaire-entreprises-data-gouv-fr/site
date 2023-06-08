@@ -1,7 +1,7 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { IBilanFinancier } from '#models/donnees-financieres';
-import { Siren, formatDateYear } from '#utils/helpers';
+import { Siren } from '#utils/helpers';
 import odsClient from '..';
 import { IAPIBilanResponse } from './interface';
 
