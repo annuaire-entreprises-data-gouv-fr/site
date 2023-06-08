@@ -69,6 +69,8 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
     ],
   ];
 
+  const bilanPlural = bilans.length > 0 ? 's' : '';
+
   return (
     <Section
       title="Indicateurs financiers"
@@ -90,9 +92,10 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
         </p>
       )}
       <p>
-        Voici les {bilans.length} derniers bilans
-        {bilansFinanciers.hasBilanConsolide ? ' consolidés' : ''} déclarés par
-        cette entreprise&nbsp;:
+        Voici les résultats financiers
+        {bilansFinanciers.hasBilanConsolide ? ' consolidés' : ''} publiés par
+        l’entreprise pour les {bilans.length} dernier{bilanPlural} exercice
+        {bilanPlural}&nbsp;:
       </p>
       <br />
       <LineChart
