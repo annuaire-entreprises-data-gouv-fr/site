@@ -69,7 +69,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
     ],
   ];
 
-  const bilanPlural = bilans.length > 0 ? 's' : '';
+  const bilanPlural = bilans.length > 1 ? 's' : '';
 
   return (
     <Section
