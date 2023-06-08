@@ -110,6 +110,13 @@ export const FilterStructure: React.FC<{
         />
         &nbsp;
         <LabelAndCertificateBadge
+          label="Société à mission"
+          isSelected={labelSelected === 'sm'}
+          small
+          onClick={() => setLabelSelected('sm')}
+        />
+        &nbsp;
+        <LabelAndCertificateBadge
           label="Qualiopi"
           isSelected={labelSelected === 'qualiopi'}
           small

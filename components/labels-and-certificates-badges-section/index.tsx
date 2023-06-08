@@ -14,13 +14,19 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
     estBio,
     egaproRenseignee,
     estOrganismeFormation,
+    estSocieteMission,
     estQualiopi,
     estRge,
   } = uniteLegale.complements;
   if (estEntrepreneurSpectacle) sources.push(EAdministration.MC);
   if (estEss) sources.push(EAdministration.INSEE);
   if (estBio) sources.push(EAdministration.AGENCE_BIO);
-  if (egaproRenseignee || estOrganismeFormation || estQualiopi)
+  if (
+    egaproRenseignee ||
+    estOrganismeFormation ||
+    estQualiopi ||
+    estSocieteMission
+  )
     sources.push(EAdministration.MTPEI);
   if (estRge) sources.push(EAdministration.ADEME);
 

@@ -150,6 +150,7 @@ export interface IUniteLegaleComplements {
   estQualiopi: boolean;
   estRge: boolean;
   estOrganismeFormation: boolean;
+  estSocieteMission: boolean;
   estUai: boolean;
 }
 
@@ -165,6 +166,7 @@ export const createDefaultUniteLegaleComplements = () => {
     estFiness: false,
     estRge: false,
     estOrganismeFormation: false,
+    estSocieteMission: false,
     estQualiopi: false,
     estUai: false,
   };

@@ -114,6 +114,7 @@ export type IComplements = {
   egapro_renseignee: boolean;
   est_rge: boolean;
   est_uai: boolean;
+  est_societe_mission: boolean;
   identifiant_association: string;
 };
 
