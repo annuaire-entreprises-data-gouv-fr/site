@@ -55,7 +55,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
             session={session}
           />
         )}
-        {uniteLegale.complements.estEss && <CertificationSocieteMission />}
+        {uniteLegale.complements.estEss && <CertificationESSSection />}
         {uniteLegale.complements.estSocieteMission && (
           <CertificationSocieteMission />
         )}
