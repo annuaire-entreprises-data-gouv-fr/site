@@ -41,7 +41,7 @@ const Title: React.FC<IProps> = ({
       {isLoggedIn(session) && (
         <ProtectedData full>
           Vous êtes connecté avec un compte <b>agent public</b>. Ce compte vous
-          donne accés à certaines données exclusivement réservées à
+          donne accès à certaines données exclusivement réservées à
           l’administration, identifiables par la mention “
           <Icon size={12} slug="lockFill">
             Réservé aux agents publics

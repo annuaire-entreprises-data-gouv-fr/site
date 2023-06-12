@@ -112,7 +112,7 @@ const Partager: NextPageWithLayout = () => {
           </p>
           <p>
             <b>Attention :</b> pensez à bien renseigner{' '}
-            <code>SIREN_OR_SIRET</code> avec le siren ou le siret pour lequel
+            <code>SIREN_OR_SIRET</code> avec le SIREN ou le SIRET pour lequel
             vous voulez créer un lien !
           </p>
           <h2 id="qr">Générer un QR code vers une fiche entreprise</h2>
@@ -149,13 +149,13 @@ const Partager: NextPageWithLayout = () => {
             </ul>
           </p>
           <h2 id="link-search">
-            Aider à la saisie de numéro de siren ou siret
+            Aider à la saisie de numéro de SIREN ou SIRET
           </h2>
           <h3>Quand l’utiliser ?</h3>
           <p>
             Si votre site internet, public ou privé, demande des informations
             liées à une personne morale dans un formulaire (par exemple, le
-            siret ou le siren), vous pouvez fluidifier l’expérience utilisateur
+            SIRET ou le SIREN), vous pouvez fluidifier l’expérience utilisateur
             et limiter les erreurs de saisie, en invitant à retrouver les
             informations demandées grâce à{' '}
             <a href="/">notre moteur de recherche</a>.
