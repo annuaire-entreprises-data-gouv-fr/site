@@ -1,6 +1,5 @@
 import React from 'react';
 import Warning from '#components-ui/alerts/warning';
-import FAQLink from '#components-ui/faq-link';
 import IsActiveTag from '#components-ui/is-active-tag';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
@@ -8,8 +7,6 @@ import { EtablissementDescription } from '#components/etablissement-description'
 import { IEtablissement, IUniteLegale } from '#models/index';
 import {
   estNonDiffusible,
-  getDenominationEtablissement,
-  getEnseigneEtablissement,
   getEtablissementName,
   getNomComplet,
 } from '#models/statut-diffusion';

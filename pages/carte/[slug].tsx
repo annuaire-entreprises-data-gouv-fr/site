@@ -34,7 +34,14 @@ const EtablissementMapPage: NextPageWithLayout<IProps> = ({
     />
     <div className="fr-container">
       <br />
-      <a href={`/entreprise/${etablissement.siren}`}>← Retour</a>
+      <a href={`/entreprise/${etablissement.siren}`}>
+        ⇠ Retourner à la fiche de la structure
+      </a>
+      <br />
+      <br />
+      <a href={`/etablissement/${etablissement.siret}`}>
+        ⇠ Retourner à la fiche de l’établissement
+      </a>
       <HiddenH1 title="Localisation de l’etablissement" />
       <>
         <MapTitleEtablissement
