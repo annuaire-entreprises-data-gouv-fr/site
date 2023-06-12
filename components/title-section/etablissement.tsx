@@ -1,7 +1,9 @@
 import React from 'react';
 import Warning from '#components-ui/alerts/warning';
 import IsActiveTag from '#components-ui/is-active-tag';
+import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
+import { EtablissementDescription } from '#components/etablissement-description';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import {
   estNonDiffusible,
@@ -10,28 +12,13 @@ import {
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatSiret } from '#utils/helpers';
+import {
+  getCompanyLabel,
+  getCompanyPronoun,
+} from '#utils/helpers/get-company-page-title';
 import { ISession } from '#utils/session';
 import { INSEE } from '../administrations';
-
-const TitleEtablissement: React.FC<{
-  uniteLegale: IUniteLegale;
-  nomEtablissement: string | null;
-  session: ISession | null;
-}> = ({ uniteLegale, nomEtablissement, session }) => (
-  <h2>
-    Information sur{' '}
-    {nomEtablissement ? (
-      `l’etablissement ${nomEtablissement}`
-    ) : (
-      <>
-        un établissement de{' '}
-        <a href={`/entreprise/${uniteLegale.chemin}`}>
-          {getNomComplet(uniteLegale, session)}
-        </a>
-      </>
-    )}
-  </h2>
-);
+import { FICHE, Tabs } from './tabs';
 
 const MapTitleEtablissement: React.FC<{
   title?: string;
@@ -75,19 +62,16 @@ const TitleEtablissementWithDenomination: React.FC<{
           .
         </Warning>
       )}
-    <TitleEtablissement
-      uniteLegale={uniteLegale}
-      session={session}
-      nomEtablissement={
-        getEnseigneEtablissement(etablissement, session) ||
-        getDenominationEtablissement(etablissement, session)
-      }
-    />
+
+    <h2>
+      {getEnseigneEtablissement(etablissement, session) ||
+        getDenominationEtablissement(etablissement, session) ||
+        getNomComplet(uniteLegale, session)}{' '}
+      à <a href={`/carte/${etablissement.siret}`}>{etablissement.commune}</a>
+    </h2>
+
     <div className="etablissement-sub-title">
-      <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
-      {etablissement.estSiege && <Tag color="info">siège social</Tag>}
-      {uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 &&
-        !etablissement.estSiege && <Tag>ancien siège social</Tag>}
+      <span>{formatSiret(etablissement.siret)}</span>
       {estNonDiffusible(etablissement) && <Tag color="new">non-diffusible</Tag>}
       <IsActiveTag
         etatAdministratif={etablissement.etatAdministratif}
@@ -95,6 +79,48 @@ const TitleEtablissementWithDenomination: React.FC<{
         since={etablissement.dateFermeture}
       />
     </div>
+    <div className="etablissement-sub-sub-title">
+      <span>Cet établissement est </span>
+      {etablissement.estSiege ? (
+        <>
+          le <Tag color="info">siège social</Tag>
+        </>
+      ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 &&
+        !etablissement.estSiege ? (
+        <>
+          un<Tag>ancien siège social</Tag>
+        </>
+      ) : (
+        <Tag>un établissement secondaire</Tag>
+      )}
+      <span>
+        {' '}
+        de {getCompanyPronoun(uniteLegale).toLowerCase()}{' '}
+        {getCompanyLabel(uniteLegale)}{' '}
+        <a href={`/entreprise/${uniteLegale.siren}`}>
+          {getNomComplet(uniteLegale, session)}
+        </a>
+        <a></a>
+      </span>
+    </div>
+
+    <SocialMedia uniteLegale={uniteLegale} session={session} />
+
+    {estNonDiffusible(etablissement) ? (
+      <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
+    ) : (
+      <EtablissementDescription
+        etablissement={etablissement}
+        uniteLegale={uniteLegale}
+        session={session}
+      />
+    )}
+
+    <Tabs
+      uniteLegale={uniteLegale}
+      currentFicheType={FICHE.ETABLISSEMENT}
+      session={session}
+    />
 
     <style jsx>{`
       .etablissement-sub-title {
@@ -107,6 +133,20 @@ const TitleEtablissementWithDenomination: React.FC<{
         font-variant: small-caps;
         font-size: 1.1rem;
         color: #666;
+      }
+
+      .etablissement-sub-sub-title:before {
+        content: '';
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        margin-left: 15px;
+        margin-bottom: 4px;
+        border: 1px solid #bbb;
+        border-top: none;
+        border-right: none;
+        position: relative;
+        display: inline-block;
       }
     `}</style>
   </div>

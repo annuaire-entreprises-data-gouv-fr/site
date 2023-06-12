@@ -1,11 +1,10 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import Info from '#components-ui/alerts/info';
-import { Icon } from '#components-ui/icon/wrapper';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import MapEtablissement from '#components/map/map-etablissement';
 import Meta from '#components/meta';
-import { MapTitleEtablissement } from '#components/title-etablissement-section';
+import { MapTitleEtablissement } from '#components/title-section/etablissement';
 import { getEtablissementWithLatLongFromSlug } from '#models/etablissement';
 import { IEtablissement } from '#models/index';
 import {

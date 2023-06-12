@@ -9,7 +9,8 @@ import MatomoEventRedirected from '#components/matomo-event/search-redirected';
 import Meta from '#components/meta';
 import { NonDiffusibleSection } from '#components/non-diffusible';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
-import Title, { FICHE } from '#components/title-section';
+import Title from '#components/title-section';
+import { FICHE } from '#components/title-section/tabs';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
 import {
