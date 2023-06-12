@@ -66,6 +66,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
               <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
                 fiches de ses établissements
               </a>
+              .
             </FAQLink>
             , immatriculé sous le siret {formatSiret(etablissement.siret)}, est
             <b>{statusLabel(etablissement.etatAdministratif)}.</b>

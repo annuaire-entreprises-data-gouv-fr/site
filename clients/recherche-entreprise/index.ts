@@ -204,6 +204,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       result.activite_principale,
       false
     ),
+    activitePrincipale: result.activite_principale,
     dirigeants: dirigeants.map(mapToDirigeantModel),
     complements: {
       estBio: est_bio,
@@ -318,10 +319,10 @@ const mapToEtablissement = (
     longitude,
     estSiege: est_siege,
     etatAdministratif,
-    activitePrincipale: activite_principale,
     denomination: nom_commercial,
     libelleActivitePrincipale:
       libelleFromCodeNAFWithoutNomenclature(activite_principale),
+    activitePrincipale: activite_principale,
     dateCreation: date_creation,
     dateDebutActivite: date_debut_activite,
   };
