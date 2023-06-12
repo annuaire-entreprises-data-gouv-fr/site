@@ -14,7 +14,6 @@ import {
   Siret,
   extractSirenFromSiret,
 } from '#utils/helpers';
-import { libelleFromCodeEffectif } from '#utils/helpers/formatting/codes-effectifs';
 import { libelleFromCodeNAF } from '#utils/helpers/formatting/labels';
 import { inseeClientGet, InseeClientOptions } from '.';
 import {

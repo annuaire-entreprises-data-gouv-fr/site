@@ -5,7 +5,7 @@ import { AssociationDocumentSection } from '#components/association-protected-se
 import { AssociationStatutsSection } from '#components/association-protected-section/statuts';
 import AssociationSection from '#components/association-section';
 import Meta from '#components/meta';
-import Title, { FICHE } from '#components/title-section';
+import Title from '#components/title-section';
 import {
   getAssoSubventionsWithUniteLegaleFromSlug,
   ISubventionsAssociation,

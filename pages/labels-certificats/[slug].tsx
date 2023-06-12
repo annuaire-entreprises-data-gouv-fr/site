@@ -7,7 +7,8 @@ import { CertificationESSSection } from '#components/labels-and-certificates/ess
 import { OrganismeDeFormationSection } from '#components/labels-and-certificates/organismes-de-formation';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
 import Meta from '#components/meta';
-import Title, { FICHE } from '#components/title-section';
+import Title from '#components/title-section';
+import { FICHE } from '#components/title-section/tabs';
 import {
   getCertificationsFromSlug,
   ICertifications,
