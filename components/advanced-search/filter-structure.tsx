@@ -89,6 +89,13 @@ export const FilterStructure: React.FC<{
         />
         &nbsp;
         <LabelAndCertificateBadge
+          label="Société à mission"
+          isSelected={labelSelected === 'sm'}
+          small
+          onClick={() => setLabelSelected('sm')}
+        />
+        &nbsp;
+        <LabelAndCertificateBadge
           label="Égalité professionnelle"
           isSelected={labelSelected === 'egapro'}
           small
@@ -107,13 +114,6 @@ export const FilterStructure: React.FC<{
           isSelected={labelSelected === 'of'}
           small
           onClick={() => setLabelSelected('of')}
-        />
-        &nbsp;
-        <LabelAndCertificateBadge
-          label="Société à mission"
-          isSelected={labelSelected === 'sm'}
-          small
-          onClick={() => setLabelSelected('sm')}
         />
         &nbsp;
         <LabelAndCertificateBadge
