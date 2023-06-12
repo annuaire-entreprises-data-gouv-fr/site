@@ -14,7 +14,7 @@ import {
   Siret,
   extractSirenFromSiret,
 } from '#utils/helpers';
-import { libelleFromCodeEffectif, libelleFromCodeNAF } from '#utils/labels';
+import { libelleFromCodeNAF } from '#utils/helpers/formatting/labels';
 import { inseeClientGet, InseeClientOptions } from '.';
 import {
   etatFromEtatAdministratifInsee,
@@ -279,7 +279,8 @@ export const mapEtablissementToDomainObject = (
     activitePrincipale: activitePrincipaleEtablissement,
     libelleActivitePrincipale: libelleFromCodeNAF(
       activitePrincipaleEtablissement,
-      nomenclatureActivitePrincipaleEtablissement
+      nomenclatureActivitePrincipaleEtablissement,
+      false
     ),
     dateDerniereMiseAJour: dateDernierTraitementEtablissement,
     estSiege: !!etablissementSiege,
@@ -287,10 +288,7 @@ export const mapEtablissementToDomainObject = (
     etatAdministratif,
     dateFermeture,
     trancheEffectif: trancheEffectifsEtablissement,
-    libelleTrancheEffectif: libelleFromCodeEffectif(
-      trancheEffectifsEtablissement,
-      anneeEffectifsEtablissement
-    ),
+    anneeTrancheEffectif: anneeEffectifsEtablissement,
     adresse,
     adressePostale,
     codePostal,

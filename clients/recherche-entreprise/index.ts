@@ -26,10 +26,8 @@ import {
 } from '#utils/helpers';
 import {
   libelleFromCategoriesJuridiques,
-  libelleFromCodeEffectif,
   libelleFromCodeNAFWithoutNomenclature,
-  libelleFromeCodeCategorie,
-} from '#utils/labels';
+} from '#utils/helpers/formatting/labels';
 import { httpGet } from '#utils/network';
 import {
   ISearchResponse,
@@ -132,7 +130,9 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     },
     matching_etablissements,
     categorie_entreprise,
+    annee_categorie_entreprise,
     tranche_effectif_salarie,
+    annee_tranche_effectif_salarie,
     date_creation = '',
     date_mise_a_jour = '',
     statut_diffusion = 'O',
@@ -175,7 +175,6 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
 
   return {
     ...createDefaultUniteLegale(siren),
-    libelleCategorieEntreprise: libelleFromeCodeCategorie(categorie_entreprise),
     siege: etablissementSiege,
     matchingEtablissements,
     nombreEtablissements: result.nombre_etablissements || 1,
@@ -195,13 +194,17 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     ),
     nomComplet,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(nature_juridique),
-    libelleTrancheEffectif: libelleFromCodeEffectif(tranche_effectif_salarie),
+    categorieEntreprise: categorie_entreprise,
+    anneeCategorieEntreprise: annee_categorie_entreprise,
+    trancheEffectif: tranche_effectif_salarie,
+    anneeTrancheEffectif: annee_tranche_effectif_salarie,
     chemin: result.slug_annuaire_entreprises || result.siren,
     natureJuridique: nature_juridique || '',
     libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
       result.activite_principale,
       false
     ),
+    activitePrincipale: result.activite_principale,
     dirigeants: dirigeants.map(mapToDirigeantModel),
     complements: {
       estBio: est_bio,
@@ -316,10 +319,10 @@ const mapToEtablissement = (
     longitude,
     estSiege: est_siege,
     etatAdministratif,
-    activitePrincipale: activite_principale,
     denomination: nom_commercial,
     libelleActivitePrincipale:
       libelleFromCodeNAFWithoutNomenclature(activite_principale),
+    activitePrincipale: activite_principale,
     dateCreation: date_creation,
     dateDebutActivite: date_debut_activite,
   };

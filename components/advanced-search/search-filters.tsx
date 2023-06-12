@@ -3,11 +3,11 @@ import { FilterMenu } from '#components-ui/filter-menu';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import { MultiSelect, Select } from '#components-ui/select';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';
-import { categoriesEntreprisesOptions } from '#utils/labels/categories-entreprise';
-import { categoriesJuridiques } from '#utils/labels/categories-juridiques';
-import { codesNAFRev2 } from '#utils/labels/codes-NAF-rev-2';
-import { codesEffectifsOptions } from '#utils/labels/codes-effectifs';
-import { codesSectionNAF } from '#utils/labels/codes-section-NAF';
+import { categoriesEntreprisesOptions } from '#utils/helpers/formatting/categories-entreprise';
+import { codesEffectifsOptions } from '#utils/helpers/formatting/codes-effectifs';
+import { categoriesJuridiques } from '#utils/helpers/formatting/metadata/categories-juridiques';
+import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
+import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
 import { FilterGeo } from './filter-geo';
 import { FilterStructure } from './filter-structure';
 

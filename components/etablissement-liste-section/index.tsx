@@ -39,7 +39,7 @@ const EtablissementTable: React.FC<{
           'Activité (NAF/APE)',
           'Détails (nom, enseigne, adresse)',
           'Création',
-          'Etat',
+          'État',
         ]}
         body={etablissements.map((etablissement: IEtablissement) => [
           <a href={`/etablissement/${etablissement.siret}`}>
@@ -122,7 +122,7 @@ const EtablissementListeSection: React.FC<{
             dont {nombreEtablissementsOuverts} {pluralBe} en activité
           </>
         ) : null}
-        . Cliquez sur un n° siret pour obtenir plus d’information :
+        . Cliquez sur un n° SIRET pour obtenir plus d’information :
       </p>
       <Section
         title={`${nombreEtablissements} établissement${plural} de ${getNomComplet(

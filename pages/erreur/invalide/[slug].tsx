@@ -15,14 +15,14 @@ const SirenOrSiretInvalidPage: NextPageWithLayout<
 > = ({ slug = '' }) => {
   return (
     <>
-      <Meta title="Numero invalide" noIndex={true} />
+      <Meta title="Numéro invalide" noIndex={true} />
       <MatomoEvent category="error" action="sirenOrSiretInvalid" name="" />
       <h1>⚠️ Attention : le numéro d’identification “{slug}” est invalide</h1>
       <div>
         <p>
           Si vous voyez cette page, c’est que le numéro que vous recherchez
-          ressemble à un numéro siren/siret par sa forme (9 chiffres pour le
-          siren ou 14 chiffres pour le siret) mais qu’il ne respecte pas{' '}
+          ressemble à un numéro SIREN/SIRET par sa forme (9 chiffres pour le
+          siren ou 14 chiffres pour le SIRET) mais qu’il ne respecte pas{' '}
           <a
             href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
             target="_blank"
@@ -38,10 +38,10 @@ const SirenOrSiretInvalidPage: NextPageWithLayout<
         <ul>
           <li>
             Vérifiez que vous n’avez pas commis de faute de frappe en recopiant
-            le numero.
+            le numéro.
           </li>
           <li>
-            Vérifiez ce numero auprès de l’organisme ou l’entreprise qui vous
+            Vérifiez ce numéro auprès de l’organisme ou l’entreprise qui vous
             l’a transmis.
           </li>
         </ul>

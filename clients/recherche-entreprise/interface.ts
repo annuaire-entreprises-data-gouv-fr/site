@@ -13,7 +13,6 @@ export type IResult = {
   nombre_etablissements_ouverts: number;
   siege: ISiege;
   activite_principale: string;
-  categorie_entreprise: string;
   date_creation: string;
   date_mise_a_jour: string;
   dirigeants: IDirigeant[];
@@ -22,7 +21,10 @@ export type IResult = {
   nature_juridique: string;
   nom_raison_sociale: string;
   section_activite_principale: string;
+  categorie_entreprise: string;
+  annee_categorie_entreprise: string;
   tranche_effectif_salarie: string;
+  annee_tranche_effectif_salarie: string;
   matching_etablissements: IMatchingEtablissement[];
   etablissements?: IMatchingEtablissement[];
   complements: IComplements;

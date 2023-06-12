@@ -1,17 +1,13 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import Meta from '#components/meta';
+import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
 import { estNonDiffusible } from '#models/statut-diffusion';
 import { shouldNotIndex } from '#utils/helpers';
-import {
-  getCompanyPageDescription,
-  getCompanyPageTitle,
-} from '#utils/helpers/get-company-page-title';
+import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
 import { NonDiffusibleSection } from 'components/non-diffusible';
-import { TitleEtablissementWithDenomination } from 'components/title-etablissement-section';
-import Title, { FICHE } from 'components/title-section';
 import { getEtablissementWithUniteLegaleFromSlug } from 'models/etablissement';
 import { IEtablissement, IUniteLegale } from 'models/index';
 import { NextPageWithLayout } from 'pages/_app';
@@ -44,11 +40,6 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
     />
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
     <div className="content-container">
-      <Title
-        uniteLegale={uniteLegale}
-        ficheType={FICHE.INFORMATION}
-        session={session}
-      />
       <TitleEtablissementWithDenomination
         uniteLegale={uniteLegale}
         etablissement={etablissement}
@@ -56,18 +47,14 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
       />
       <br />
       {estNonDiffusible(etablissement) ? (
-        <>
-          <p>
-            Cet établissement est <b>non-diffusible.</b>
-          </p>
-          <NonDiffusibleSection />
-        </>
+        <NonDiffusibleSection />
       ) : (
         <EtablissementSection
           etablissement={etablissement}
           uniteLegale={uniteLegale}
           session={session}
           withDenomination={true}
+          usedInEntreprisePage={false}
         />
       )}
     </div>

@@ -6,7 +6,7 @@ import {
   getUrlFromDepartement,
   libelleFromCodeNAFWithoutNomenclature,
   libelleFromDepartement,
-} from '#utils/labels';
+} from '#utils/helpers/formatting/labels';
 import { renderPage } from './html-helpers';
 
 const renderNav = (links: string[][]) => {

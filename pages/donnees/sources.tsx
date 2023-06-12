@@ -27,7 +27,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
       <p>
         L’Annuaire des Entreprises utilise les données de différentes
         administrations. Toutes les données accessibles sur le site proviennent
-        d’un jeu de donnée librement téléchargeable sur{' '}
+        d’un jeu de données librement téléchargeable sur{' '}
         <a href="https://data.gouv.fr">data.gouv.fr</a> et sont accessibles{' '}
         <a href="/donnees/api">par API</a>.
       </p>
@@ -66,7 +66,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
                             .map((kw) => <Tag key={kw}>{kw}</Tag>),
                         ],
                         [
-                          'Accés au jeu de donnée complet',
+                          'Accès au jeu de données complet',
                           <a
                             target="_blank"
                             rel="noreferrer noopener"
@@ -78,7 +78,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
                         ...[
                           apiSlug
                             ? [
-                                'Accés par API',
+                                'Accès par API',
                                 <a href={`/donnees/api#${apiSlug}`}>
                                   → Consulter l’API
                                 </a>,

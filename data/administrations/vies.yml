@@ -11,7 +11,7 @@
 #     id: l'id du monitoring
 # dataSources: la liste des jdd
 #   - label: nom
-#     apiSlug: slug de l'API qui donne accés au jdd si il y en a une
+#     apiSlug: slug de l'API qui donne accès au jdd si il y en a une
 #     datagouvLink: lien vers le jdd datagouv si il y en a un
 #     keywords: liste des principales données a trouver dans le jdd séparées par une virgule
 # description: une description de l'administration, sa mission, ses principales données

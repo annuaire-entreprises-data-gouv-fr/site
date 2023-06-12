@@ -14,7 +14,7 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
 > = ({ slug = '' }) => {
   return (
     <>
-      <Meta title="Numero d’identification introuvable" noIndex={true} />
+      <Meta title="Numéro d’identification introuvable" noIndex={true} />
       <MatomoEvent category="error" action="sirenOrSiretNotFound" name="" />
       <h1>Le numéro d’identification “{slug}” n’existe pas</h1>
       <div>
@@ -22,7 +22,7 @@ const SirenOrSiretNotFoundPage: NextPageWithLayout<
         <ul>
           <li>
             Vous avez peut-être commis une erreur en tapant votre numéro
-            siren/siret et celui-ci n’existe pas
+            SIREN/SIRET et celui-ci n’existe pas
           </li>
           <li>
             Ce numéro fait peut-être référence à une entreprise{' '}

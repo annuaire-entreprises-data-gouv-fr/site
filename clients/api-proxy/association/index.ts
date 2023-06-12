@@ -3,7 +3,6 @@ import routes from '#clients/routes';
 import constants from '#models/constants';
 import { IDataAssociation } from '#models/index';
 import { formatAdresse, IdRna, Siren } from '#utils/helpers';
-import { association } from 'mocks/handlers/rncs/association/manakin-production';
 import { clientAPIProxy } from '../client';
 import { IAssociationResponse } from './types';
 
@@ -23,7 +22,6 @@ const clientAssociation = async (numeroRna: IdRna | Siren, useCache = true) => {
   if (response.identite && Object.keys(response.identite).length === 1) {
     throw new HttpNotFound(numeroRna);
   }
-
   return mapToDomainObject(response as IAssociationResponse);
 };
 

@@ -2,7 +2,7 @@ import fs from 'fs';
 import {
   getDepartementFromCodePostal,
   getUrlFromDepartement,
-} from '../utils/labels';
+} from '../utils/helpers/formatting/labels';
 import {
   renderDepartementsPage,
   renderNafsPage,

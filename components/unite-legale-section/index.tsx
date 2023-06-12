@@ -10,6 +10,8 @@ import { estActif } from '#models/etat-administratif';
 import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
 import { getAdresseUniteLegale, getNomComplet } from '#models/statut-diffusion';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
+import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
+import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
 import { ISession } from '#utils/session';
 import {
   checkHasLabelsAndCertificates,
@@ -33,10 +35,8 @@ const UniteLegaleSection: React.FC<{
         formatSiret((uniteLegale.siege || {}).siret),
     ],
     ['N° TVA Intracommunautaire', <TVACell siren={uniteLegale.siren} />],
-    [
-      'Activité principale du siège social (NAF/APE)',
-      uniteLegale.libelleActivitePrincipale,
-    ],
+    ['Activité principale (NAF/APE)', uniteLegale.libelleActivitePrincipale],
+    ['Code NAF/APE', uniteLegale.activitePrincipale],
     [
       <FAQLink to="/faq/modifier-adresse" tooltipLabel="Adresse postale">
         Comment modifier une adresse ?
@@ -46,9 +46,12 @@ const UniteLegaleSection: React.FC<{
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
     [
       'Tranche effectif salarié de la structure',
-      uniteLegale.libelleTrancheEffectif,
+      libelleTrancheEffectif(
+        uniteLegale.trancheEffectif,
+        uniteLegale.anneeTrancheEffectif
+      ),
     ],
-    ['Taille de la structure', uniteLegale.libelleCategorieEntreprise],
+    ['Taille de la structure', libelleCategorieEntreprise(uniteLegale)],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
       'Dernière modification des données Insee',
