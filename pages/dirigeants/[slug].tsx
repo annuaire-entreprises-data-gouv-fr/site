@@ -7,16 +7,14 @@ import DirigeantsSection from '#components/dirigeants-section/rncs-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
 import Meta from '#components/meta';
 import { DirigeantsNonDiffusibleSection } from '#components/non-diffusible';
-import Title, { FICHE } from '#components/title-section';
+import Title from '#components/title-section';
+import { FICHE } from '#components/title-section/tabs';
 import {
   getDirigeantsWithUniteLegaleFromSlug,
   IDirigeants,
 } from '#models/dirigeants';
 import { estDiffusible } from '#models/statut-diffusion';
-import {
-  getCompanyPageDescription,
-  getCompanyPageTitle,
-} from '#utils/helpers/get-company-page-title';
+import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,

@@ -9,7 +9,13 @@ import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
-import { isAssociation, IUniteLegale } from '#models/index';
+import constants from '#models/constants';
+import {
+  isAssociation,
+  isCollectiviteTerritoriale,
+  isServicePublic,
+  IUniteLegale,
+} from '#models/index';
 import {
   estDiffusible,
   estNonDiffusible,
@@ -78,7 +84,11 @@ const Title: React.FC<IProps> = ({
         </span>
       </div>
     </div>
-    <SocialMedia uniteLegale={uniteLegale} session={session} />
+    <SocialMedia
+      path={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
+      label={getNomComplet(uniteLegale, session)}
+      siren={uniteLegale.siren}
+    />
     {estNonDiffusible(uniteLegale) ? (
       <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
     ) : (

@@ -4,14 +4,10 @@ import Meta from '#components/meta';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
 import { estNonDiffusible } from '#models/statut-diffusion';
 import { shouldNotIndex } from '#utils/helpers';
-import {
-  getCompanyPageDescription,
-  getCompanyPageTitle,
-} from '#utils/helpers/get-company-page-title';
+import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
 import { NonDiffusibleSection } from 'components/non-diffusible';
-import Title, { FICHE } from 'components/title-section';
 import { getEtablissementWithUniteLegaleFromSlug } from 'models/etablissement';
 import { IEtablissement, IUniteLegale } from 'models/index';
 import { NextPageWithLayout } from 'pages/_app';

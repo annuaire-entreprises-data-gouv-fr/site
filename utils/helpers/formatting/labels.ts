@@ -1,14 +1,12 @@
 import { escapeTerm } from '#utils/helpers';
-import { categoriesEntreprise } from './categories-entreprise';
-import { categoriesJuridiques } from './categories-juridiques';
-import { codesNAF1993 } from './codes-NAF-1993';
-import { codesNAFRev1 } from './codes-NAF-rev-1';
-import { codesNAFRev2 } from './codes-NAF-rev-2';
-import { codesNAP } from './codes-NAP';
-import { codesEffectifs } from './codes-effectifs';
-import { codesSectionNAF } from './codes-section-NAF';
-import { codesVoies } from './codes-voie';
-import { departements } from './departements';
+import { categoriesJuridiques } from './metadata/categories-juridiques';
+import { codesNAF1993 } from './metadata/codes-NAF-1993';
+import { codesNAFRev1 } from './metadata/codes-NAF-rev-1';
+import { codesNAFRev2 } from './metadata/codes-NAF-rev-2';
+import { codesNAP } from './metadata/codes-NAP';
+import { codesSectionNAF } from './metadata/codes-section-NAF';
+import { codesVoies } from './metadata/codes-voie';
+import { departements } from './metadata/departements';
 
 export const getUrlFromDepartement = (dep: string) => {
   // departement label without special char
@@ -103,23 +101,6 @@ export const libelleFromCodeNAFWithoutNomenclature = (
   return 'Activité inconnue';
 };
 
-export const libelleFromCodeEffectif = (
-  codeEffectif: string,
-  characterEmployeurUniteLegale?: string
-) => {
-  if (characterEmployeurUniteLegale === 'N') {
-    return 'Unité non employeuse';
-  }
-
-  //@ts-ignore
-  const libelle = codesEffectifs[codeEffectif];
-
-  if (libelle) {
-    return libelle;
-  }
-  return null;
-};
-
 export const libelleFromCategoriesJuridiques = (categorie: string) =>
   //@ts-ignore
   categoriesJuridiques[categorie] || null;
@@ -129,14 +110,4 @@ export const libelleFromTypeVoie = (
 ) => {
   //@ts-ignore
   return codesVoies[codeVoie] || codeVoie;
-};
-
-export const libelleFromeCodeCategorie = (codeCategorie: string) => {
-  let libelle = categoriesEntreprise(codeCategorie);
-
-  if (!libelle) {
-    return null;
-  }
-
-  return `${libelle} (${codeCategorie})`;
 };

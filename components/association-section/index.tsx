@@ -7,8 +7,8 @@ import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
 import { IAssociation } from '#models/index';
+import { formatDate, formatIntFr } from '#utils/helpers';
 import { isTwoMonthOld } from '#utils/helpers/checks';
-import { formatDate, formatIntFr } from '#utils/helpers/formatting';
 
 const AssociationSection: React.FC<{
   uniteLegale: IAssociation;

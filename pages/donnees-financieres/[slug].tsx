@@ -2,12 +2,13 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import { BilansFinanciersSection } from '#components/bilans-financiers-section';
 import Meta from '#components/meta';
-import Title, { FICHE } from '#components/title-section';
+import Title from '#components/title-section';
+import { FICHE } from '#components/title-section/tabs';
 import {
   getDonneesFinancieresFromSlug,
   IDonneesFinancieres,
 } from '#models/donnees-financieres';
-import { getCompanyPageTitle } from '#utils/helpers/get-company-page-title';
+import { getCompanyPageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,

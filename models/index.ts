@@ -31,7 +31,6 @@ export interface IEtablissement {
   activitePrincipale: string;
   libelleActivitePrincipale: string;
   trancheEffectif: string;
-  libelleTrancheEffectif: string | null;
   anneeTrancheEffectif: string | null;
   latitude: string;
   longitude: string;
@@ -90,10 +89,9 @@ export interface IUniteLegale extends IEtablissementsList {
   etatAdministratif: IETATADMINSTRATIF;
   nomComplet: string;
   chemin: string;
-  trancheEffectif: string;
-  libelleTrancheEffectif: string | null;
+  trancheEffectif: string | null;
   anneeTrancheEffectif: string | null;
-  libelleCategorieEntreprise: string | null;
+  categorieEntreprise: string | null;
   anneeCategorieEntreprise: string | null;
   dirigeant: IEtatCivil | null;
   complements: IUniteLegaleComplements;
@@ -127,9 +125,8 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     dateDerniereMiseAJour: '',
     dateDebutActivite: '',
     trancheEffectif: '',
-    libelleCategorieEntreprise: null,
     anneeCategorieEntreprise: null,
-    libelleTrancheEffectif: null,
+    categorieEntreprise: null,
     anneeTrancheEffectif: null,
     dirigeant: null,
     complements: createDefaultUniteLegaleComplements(),

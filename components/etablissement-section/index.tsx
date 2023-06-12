@@ -18,10 +18,8 @@ import {
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatDate, formatSiret } from '#utils/helpers';
-import {
-  getCompanyLabel,
-  getCompanyPronoun,
-} from '#utils/helpers/get-company-page-title';
+import { getCompanyLabel, getCompanyPronoun } from '#utils/helpers';
+import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
 import { ISession } from '#utils/session';
 
 type IProps = {
@@ -42,6 +40,7 @@ const EtablissementSection: React.FC<IProps> = ({
   const companyType = `${getCompanyPronoun(
     uniteLegale
   ).toLowerCase()}${getCompanyLabel(uniteLegale)}`;
+
   const data = [
     ...(withDenomination
       ? [
@@ -123,11 +122,20 @@ const EtablissementSection: React.FC<IProps> = ({
       uniteLegale.libelleActivitePrincipale,
     ],
     [
-      'Activité principale de l’établissement (NAF/APE)',
+      `Activité principale de l’établissement (NAF/APE)`,
       etablissement.libelleActivitePrincipale,
     ],
+    ['Code NAF/APE de l’établissement', etablissement.activitePrincipale],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
-    ['Tranche d’effectif salarié', etablissement.libelleTrancheEffectif],
+    [
+      'Tranche d’effectif salarié',
+      libelleTrancheEffectif(
+        uniteLegale.trancheEffectif === 'N'
+          ? 'N'
+          : etablissement.trancheEffectif,
+        etablissement.anneeTrancheEffectif
+      ),
+    ],
     ['Date de création', formatDate(etablissement.dateCreation)],
     [
       'Date de dernière mise à jour',

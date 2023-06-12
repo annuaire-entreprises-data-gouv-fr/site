@@ -16,10 +16,8 @@ import {
 } from '#utils/helpers';
 import {
   libelleFromCategoriesJuridiques,
-  libelleFromCodeEffectif,
   libelleFromCodeNAF,
-  libelleFromeCodeCategorie,
-} from '#utils/labels';
+} from '#utils/helpers/formatting/labels';
 import { inseeClientGet, InseeClientOptions } from '.';
 import {
   etatFromEtatAdministratifInsee,
@@ -127,7 +125,8 @@ const mapToDomainObject = (
     siege.activitePrincipale = activitePrincipaleUniteLegale;
     siege.libelleActivitePrincipale = libelleFromCodeNAF(
       activitePrincipaleUniteLegale,
-      nomenclatureActivitePrincipaleUniteLegale
+      nomenclatureActivitePrincipaleUniteLegale,
+      false
     );
     siege.estSiege = true;
     siege.trancheEffectif = '';
@@ -202,13 +201,12 @@ const mapToDomainObject = (
     ),
     nomComplet,
     chemin: siren,
-    trancheEffectif: trancheEffectifsUniteLegale,
-    libelleTrancheEffectif: libelleFromCodeEffectif(
-      trancheEffectifsUniteLegale,
-      caractereEmployeurUniteLegale
-    ),
+    trancheEffectif:
+      caractereEmployeurUniteLegale === 'N'
+        ? caractereEmployeurUniteLegale
+        : trancheEffectifsUniteLegale,
     anneeTrancheEffectif: anneeEffectifsUniteLegale,
-    libelleCategorieEntreprise: libelleFromeCodeCategorie(categorieEntreprise),
+    categorieEntreprise,
     anneeCategorieEntreprise,
     dirigeant: estEntrepreneurIndividuel ? dirigeant : null,
     complements: {

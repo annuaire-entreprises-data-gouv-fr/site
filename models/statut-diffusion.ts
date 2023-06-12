@@ -87,6 +87,18 @@ export const getDenominationEtablissement = (
   return etablissement.denomination;
 };
 
+export const getEtablissementName = (
+  etablissement: IEtablissement,
+  uniteLegale: IUniteLegale,
+  session: ISession | null
+) => {
+  return (
+    getEnseigneEtablissement(etablissement, session) ||
+    getDenominationEtablissement(etablissement, session) ||
+    getNomComplet(uniteLegale, session)
+  );
+};
+
 const formatAdresseForDiffusion = (
   estDiffusible: boolean,
   adresse: string,

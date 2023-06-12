@@ -24,17 +24,18 @@ import {
 } from '#models/index';
 import { estNonDiffusible } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
-import { extractSirenOrSiretSlugFromUrl, shouldNotIndex } from '#utils/helpers';
 import {
+  extractSirenOrSiretSlugFromUrl,
+  shouldNotIndex,
   getCompanyPageDescription,
   getCompanyPageTitle,
-} from '#utils/helpers/get-company-page-title';
+} from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   postServerSideProps,
   IPropsWithMetadata,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { isLoggedIn } from '#utils/session';
+import { isSuperAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -71,7 +72,7 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
       ) : (
         <>
           <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
-          {isLoggedIn(session) && donneesRestreintesUniteLegale ? (
+          {isSuperAgent(session) && donneesRestreintesUniteLegale ? (
             <DonneesRestreintesSection
               uniteLegale={uniteLegale}
               conformite={donneesRestreintesUniteLegale?.conformite}
@@ -127,7 +128,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     });
 
     let donneesRestreintesUniteLegale = null;
-    if (isLoggedIn(context.req?.session)) {
+    if (isSuperAgent(context.req?.session)) {
       const { siren, siege } = uniteLegale;
       donneesRestreintesUniteLegale = await getDonneesRestreintesEntreprise(
         siren,

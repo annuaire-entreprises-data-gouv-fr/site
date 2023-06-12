@@ -1,4 +1,5 @@
 import React from 'react';
+import FAQLink from '#components-ui/faq-link';
 import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import {
@@ -6,7 +7,13 @@ import {
   getAdresseEtablissement,
   getNomComplet,
 } from '#models/statut-diffusion';
-import { formatDateLong } from '#utils/helpers';
+import {
+  formatAge,
+  formatDateLong,
+  formatSiret,
+  getCompanyLabel,
+  getCompanyPronoun,
+} from '#utils/helpers';
 import { ISession } from '#utils/session';
 
 type IProps = {
@@ -32,66 +39,105 @@ export const EtablissementDescription: React.FC<IProps> = ({
   etablissement,
   uniteLegale,
   session,
-}) => (
-  <>
-    {!estNonDiffusible(uniteLegale) && (
-      <p>
-        Cet établissement est
-        <b>{statusLabel(etablissement.etatAdministratif)}.</b> C’est
-        {etablissement.estSiege ? (
-          <b> le siège social</b>
-        ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 ? (
-          <> un ancien siège social</>
-        ) : (
-          <> un établissement secondaire</>
-        )}{' '}
-        de la structure{' '}
-        <a href={`/entreprise/${uniteLegale.chemin}`}>
-          {getNomComplet(uniteLegale, session)}
-        </a>
-        ,
-        {uniteLegale.etablissements.all.length > 1 ? (
-          <>
-            {' '}
-            qui possède au total{' '}
-            <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
-              {uniteLegale.etablissements.nombreEtablissements} établissements.
+}) => {
+  const ageCreation = formatAge(etablissement.dateCreation);
+  const ageFermeture = !estActif(etablissement)
+    ? formatAge(etablissement.dateDebutActivite)
+    : undefined;
+
+  return (
+    <>
+      {!estNonDiffusible(uniteLegale) && (
+        <>
+          <span>
+            Cet{' '}
+            <FAQLink tooltipLabel="établissement">
+              Une {getCompanyLabel(uniteLegale)} est constituée d’autant
+              d’établissements qu’il y a de lieux différents où elle exerce - ou
+              a exercé - son activité.
+              <br />
+              <br />
+              Il faut bien distinguer la{' '}
+              <a href={`/entreprise/${uniteLegale.chemin}`}>
+                fiche résumé de {getCompanyPronoun(uniteLegale).toLowerCase()}
+                {getCompanyLabel(uniteLegale)}
+              </a>{' '}
+              et les{' '}
+              <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
+                fiches de ses établissements
+              </a>
+            </FAQLink>
+            , immatriculé sous le siret {formatSiret(etablissement.siret)}, est
+            <b>{statusLabel(etablissement.etatAdministratif)}.</b>
+            {etablissement.dateCreation && (
+              <>
+                {' '}
+                Il a été créée le{' '}
+                <b>{formatDateLong(etablissement.dateCreation)}</b>
+                {ageCreation && <>, il y a {ageCreation}</>}.{' '}
+              </>
+            )}
+            {etablissement.dateDebutActivite && !estActif(etablissement) && (
+              <>
+                Il a été fermée le{' '}
+                <b>{formatDateLong(etablissement.dateDebutActivite)}</b>
+                {ageFermeture && <>, il y a {ageFermeture}</>}.{' '}
+              </>
+            )}
+            C’est
+            {etablissement.estSiege ? (
+              <b> le siège social</b>
+            ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 ? (
+              <> un ancien siège social</>
+            ) : (
+              <> un établissement secondaire</>
+            )}{' '}
+            de {getCompanyPronoun(uniteLegale).toLowerCase()}
+            {getCompanyLabel(uniteLegale)}{' '}
+            <a href={`/entreprise/${uniteLegale.chemin}`}>
+              {getNomComplet(uniteLegale, session)}
             </a>
-          </>
-        ) : (
-          <>
-            {' '}
-            et{' '}
-            <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
-              son unique établissement
-            </a>
-          </>
-        )}
-        .
-      </p>
-    )}
-    <p>
-      {etablissement.dateCreation && (
-        <>
-          Cet établissement a été crée le{' '}
-          <b>{formatDateLong(etablissement.dateCreation)}</b>
-        </>
-      )}{' '}
-      {etablissement.dateDebutActivite && !estActif(etablissement) && (
-        <>
-          et il a été fermé le{' '}
-          <b>{formatDateLong(etablissement.dateDebutActivite)}</b>
-        </>
-      )}{' '}
-      {etablissement.adresse && (
-        <>
-          et il est domicilié au{' '}
-          <a href={`/carte/${etablissement.siret}`}>
-            {getAdresseEtablissement(etablissement, session)}
-          </a>
+            ,
+            {uniteLegale.etablissements.all.length > 1 ? (
+              <>
+                {' '}
+                qui possède{' '}
+                <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
+                  {uniteLegale.etablissements.nombreEtablissements - 1} autre(s)
+                  établissement(s)
+                </a>
+              </>
+            ) : (
+              <>
+                {' '}
+                et{' '}
+                <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
+                  son unique établissement
+                </a>
+              </>
+            )}
+            .
+          </span>
+          <p>
+            {etablissement.libelleActivitePrincipale && (
+              <>
+                Son domaine d’activité est :{' '}
+                {etablissement.libelleActivitePrincipale}.
+              </>
+            )}
+            {etablissement.adresse && (
+              <>
+                {' '}
+                Il est domicilié au{' '}
+                <a href={`/carte/${etablissement.siret}`}>
+                  {getAdresseEtablissement(etablissement, session)}
+                </a>
+              </>
+            )}
+            .
+          </p>
         </>
       )}
-      .
-    </p>
-  </>
-);
+    </>
+  );
+};

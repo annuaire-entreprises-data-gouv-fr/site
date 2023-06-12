@@ -1,5 +1,6 @@
 import React from 'react';
 import Warning from '#components-ui/alerts/warning';
+import FAQLink from '#components-ui/faq-link';
 import IsActiveTag from '#components-ui/is-active-tag';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
@@ -9,13 +10,11 @@ import {
   estNonDiffusible,
   getDenominationEtablissement,
   getEnseigneEtablissement,
+  getEtablissementName,
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatSiret } from '#utils/helpers';
-import {
-  getCompanyLabel,
-  getCompanyPronoun,
-} from '#utils/helpers/get-company-page-title';
+import { getCompanyLabel, getCompanyPronoun } from '#utils/helpers';
 import { ISession } from '#utils/session';
 import { INSEE } from '../administrations';
 import { FICHE, Tabs } from './tabs';
@@ -64,10 +63,8 @@ const TitleEtablissementWithDenomination: React.FC<{
       )}
 
     <h2>
-      {getEnseigneEtablissement(etablissement, session) ||
-        getDenominationEtablissement(etablissement, session) ||
-        getNomComplet(uniteLegale, session)}{' '}
-      à <a href={`/carte/${etablissement.siret}`}>{etablissement.commune}</a>
+      {getEtablissementName(etablissement, uniteLegale, session)} à{' '}
+      <a href={`/carte/${etablissement.siret}`}>{etablissement.commune}</a>
     </h2>
 
     <div className="etablissement-sub-title">
@@ -95,7 +92,7 @@ const TitleEtablissementWithDenomination: React.FC<{
       )}
       <span>
         {' '}
-        de {getCompanyPronoun(uniteLegale).toLowerCase()}{' '}
+        de {getCompanyPronoun(uniteLegale).toLowerCase()}
         {getCompanyLabel(uniteLegale)}{' '}
         <a href={`/entreprise/${uniteLegale.siren}`}>
           {getNomComplet(uniteLegale, session)}
@@ -104,7 +101,10 @@ const TitleEtablissementWithDenomination: React.FC<{
       </span>
     </div>
 
-    <SocialMedia uniteLegale={uniteLegale} session={session} />
+    <SocialMedia
+      path={`https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`}
+      label={getEtablissementName(etablissement, uniteLegale, session)}
+    />
 
     {estNonDiffusible(etablissement) ? (
       <p>Les informations concernant cette entreprise ne sont pas publiques.</p>

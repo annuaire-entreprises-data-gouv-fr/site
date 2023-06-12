@@ -2,11 +2,14 @@ import React from 'react';
 import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
 import { getAdresseUniteLegale, getNomComplet } from '#models/statut-diffusion';
-import { formatAge, formatDateLong } from '#utils/helpers';
 import {
+  formatAge,
+  formatDateLong,
   getCompanyLabel,
   getCompanyPronoun,
-} from '#utils/helpers/get-company-page-title';
+} from '#utils/helpers';
+import { libelleCategorieEntrepriseForDescription } from '#utils/helpers/formatting/categories-entreprise';
+import { libelleEffectifForDescription } from '#utils/helpers/formatting/codes-effectifs';
 import { ISession } from '#utils/session';
 
 export const UniteLegaleDescription: React.FC<{
@@ -58,21 +61,8 @@ export const UniteLegaleDescription: React.FC<{
             .
           </>
         )}
-        {uniteLegale.anneeCategorieEntreprise &&
-          uniteLegale.libelleCategorieEntreprise && (
-            <>
-              {' '}
-              En {uniteLegale.anneeCategorieEntreprise}, elle était catégorisée{' '}
-              <b>{uniteLegale.libelleCategorieEntreprise}</b>
-              {uniteLegale.libelleTrancheEffectif &&
-              uniteLegale.trancheEffectif !== 'NN' ? (
-                <> et possédait {uniteLegale.libelleTrancheEffectif}</>
-              ) : (
-                <> et ne possédait pas de salariés</>
-              )}
-              .
-            </>
-          )}
+        {libelleCategorieEntrepriseForDescription(uniteLegale)}
+        {libelleEffectifForDescription(uniteLegale)}
       </p>
       <p>
         {uniteLegale.siege && uniteLegale.siege.adresse && (

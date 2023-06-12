@@ -27,10 +27,11 @@ export const Tabs: React.FC<{
   const tabs = [
     {
       ficheType: FICHE.INFORMATION,
-      label: 'Résumé',
+      label: `Fiche résumé`,
       pathPrefix: '/entreprise/',
       noFollow: false,
       shouldDisplay: true,
+      width: '80px',
     },
     {
       ficheType: FICHE.JUSTIFICATIFS,
@@ -87,6 +88,7 @@ export const Tabs: React.FC<{
       pathPrefix: '/divers/',
       noFollow: false,
       shouldDisplay: true,
+      width: '130px',
     },
   ];
   return (
@@ -94,7 +96,7 @@ export const Tabs: React.FC<{
       <div className="title-tabs">
         {tabs
           .filter(({ shouldDisplay }) => shouldDisplay)
-          .map(({ pathPrefix, ficheType, label, noFollow }) => (
+          .map(({ pathPrefix, ficheType, label, noFollow, width = 'auto' }) => (
             <a
               className={`${
                 currentFicheType === ficheType ? 'active' : ''
@@ -102,27 +104,26 @@ export const Tabs: React.FC<{
               href={`${pathPrefix}${uniteLegale.siren}`}
               rel={noFollow ? 'nofollow' : ''}
               key={label}
+              style={{ width }}
             >
               {currentFicheType === ficheType ? label : <h2>{label}</h2>}
             </a>
           ))}
-
         {currentFicheType === FICHE.ETABLISSEMENT && (
           <>
             <div style={{ flexGrow: 1 }} />
-            <a className="active no-style-link" key="etablissement" href="">
-              <h2>Fiche établissement</h2>
-            </a>
             <a
-              className="no-style-link"
-              key="etablissements"
-              href={`/entreprise/${uniteLegale.chemin}#etablissements`}
+              className="active no-style-link"
+              key="etablissement"
+              href=""
+              style={{ width: '120px' }}
             >
-              <h2>Liste des établissements</h2>
+              <h2>Fiche établissement</h2>
             </a>
           </>
         )}
       </div>
+
       <style jsx>{`
         .title-tabs {
           display: flex;
@@ -141,7 +142,7 @@ export const Tabs: React.FC<{
           text-align: center;
           box-shadow: 0 -8px 5px -5px ${constants.colors.pastelBlue} inset;
           margin: 0 4px;
-          padding: 10px 5px;
+          padding: 5px;
           margin-bottom: -2px;
         }
 
@@ -150,7 +151,8 @@ export const Tabs: React.FC<{
           color: ${constants.colors.frBlue};
           font-weight: bold;
           font-size: 0.9rem;
-          line-height: 1.5rem;
+          line-height: 1.1rem;
+          max-width: 160px;
         }
 
         .title-tabs > a > h2 {
@@ -173,12 +175,19 @@ export const Tabs: React.FC<{
             flex-direction: column;
             border-bottom: 0;
           }
-          .title-tabs > a {
+
+          .title-tabs > a,
+          .title-tabs > a > h2 {
             margin: 3px;
+            padding: 3px;
+            max-width: none;
+            width: auto !important;
           }
+
           .title-tabs > a.active {
             background-color: #fff;
             border-bottom: 2px solid ${constants.colors.pastelBlue};
+            line-height: 1.8rem;
           }
         }
       `}</style>

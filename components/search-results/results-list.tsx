@@ -71,7 +71,7 @@ const ResultItem: React.FC<{ result: ISearchResult }> = ({ result }) => (
           />
         )}
       </div>
-      <div>{result.libelleActivitePrincipale}</div>
+      <div>{result.libelleActivitePrincipale} (result.activitePrincipale)</div>
       <DirigeantsOrElusList
         dirigeantsOrElus={
           isCollectiviteTerritoriale(result)
