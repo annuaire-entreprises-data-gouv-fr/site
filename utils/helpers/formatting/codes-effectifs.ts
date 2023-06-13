@@ -70,6 +70,10 @@ export const libelleEffectifForDescription = (uniteLegale: IUniteLegale) => {
     categorieEntreprise,
   } = uniteLegale;
 
+  if (trancheEffectif === 'N') {
+    return 'Elle n’emploie pas de salariés.';
+  }
+
   //@ts-ignore
   const libelle = codesEffectifs[trancheEffectif];
 
@@ -79,7 +83,7 @@ export const libelleEffectifForDescription = (uniteLegale: IUniteLegale) => {
   const yearPrefix = `${
     shouldAddYear ? ` En ${anneeTrancheEffectif}, ` : ' E'
   }`;
-  if (trancheEffectif === 'N' || trancheEffectif === 'NN' || !libelle) {
+  if (trancheEffectif === 'NN' || !libelle) {
     // means characterEmployeurUniteLegale ='N'
     return `${yearPrefix}lle ne possédait pas de salariés.`;
   }

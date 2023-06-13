@@ -123,7 +123,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
             {etablissement.libelleActivitePrincipale && (
               <>
                 Son domaine d’activité est :{' '}
-                {etablissement.libelleActivitePrincipale}.
+                {(etablissement.libelleActivitePrincipale || '').toLowerCase()}.
               </>
             )}
             {etablissement.adresse && (

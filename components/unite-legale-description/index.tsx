@@ -57,8 +57,8 @@ export const UniteLegaleDescription: React.FC<{
         )}
         {uniteLegale.libelleActivitePrincipale && (
           <>
-            Son domaine d’activité est : {uniteLegale.libelleActivitePrincipale}
-            .
+            Son domaine d’activité est :{' '}
+            {(uniteLegale.libelleActivitePrincipale || '').toLowerCase()}.
           </>
         )}
         {libelleCategorieEntrepriseForDescription(uniteLegale)}

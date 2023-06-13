@@ -59,10 +59,10 @@ const TitleEtablissementWithDenomination: React.FC<{
         </Warning>
       )}
 
-    <h2>
+    <h1>
       {getEtablissementName(etablissement, uniteLegale, session)} à{' '}
       <a href={`/carte/${etablissement.siret}`}>{etablissement.commune}</a>
-    </h2>
+    </h1>
 
     <div className="etablissement-sub-title">
       <span>{formatSiret(etablissement.siret)}</span>
@@ -120,12 +120,18 @@ const TitleEtablissementWithDenomination: React.FC<{
     />
 
     <style jsx>{`
+      h1 {
+        line-height: 1.5rem;
+        font-size: 1.4rem;
+      }
+
       .etablissement-sub-title {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
         margin-bottom: 5px;
       }
+
       .etablissement-sub-title > span:first-of-type {
         font-variant: small-caps;
         font-size: 1.1rem;

@@ -66,6 +66,7 @@ export const Tabs: React.FC<{
       noFollow: false,
       shouldDisplay:
         !isServicePublic(uniteLegale) && !isAssociation(uniteLegale),
+      width: '110px',
     },
     {
       ficheType: FICHE.ANNONCES,
@@ -80,6 +81,7 @@ export const Tabs: React.FC<{
       pathPrefix: '/labels-certificats/',
       noFollow: false,
       shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
+      width: '110px',
     },
     {
       ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
@@ -158,7 +160,7 @@ export const Tabs: React.FC<{
           font-weight: bold;
           font-size: 0.9rem;
           line-height: 1.1rem;
-          max-width: 160px;
+          max-width: 150px;
         }
 
         .title-tabs > a > h2 {
