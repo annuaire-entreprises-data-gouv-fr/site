@@ -71,7 +71,7 @@ export const libelleEffectifForDescription = (uniteLegale: IUniteLegale) => {
   } = uniteLegale;
 
   if (trancheEffectif === 'N') {
-    return 'Elle n’emploie pas de salariés.';
+    return ' Elle n’emploie pas de salariés.';
   }
 
   //@ts-ignore

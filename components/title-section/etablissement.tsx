@@ -97,6 +97,7 @@ const TitleEtablissementWithDenomination: React.FC<{
         <a></a>
       </span>
     </div>
+    <br />
 
     <SocialMedia
       path={`https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`}

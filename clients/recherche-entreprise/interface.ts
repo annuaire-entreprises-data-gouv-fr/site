@@ -84,6 +84,7 @@ export type IMatchingEtablissement = {
   activite_principale: string;
   adresse: string;
   commune: string;
+  code_postal: string;
   libelle_commune: string;
   est_siege: boolean;
   etat_administratif: string;
