@@ -7,41 +7,38 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
 import constants from '#models/constants';
-import { IDonneesFinancieres } from '#models/donnees-financieres';
-import {
-  formatDateYear,
-  formatCurrency,
-  formatDateLong,
-  formatDate,
-} from '#utils/helpers';
+import { IFinances } from '#models/donnees-financieres';
+import { formatDateYear, formatCurrency, formatDate } from '#utils/helpers';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
 );
 
-export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
+export const FinancesAssociationSection: React.FC<IFinances> = ({
   uniteLegale,
-  bilansFinanciers,
+  financesAssociation,
 }) => {
-  if (isAPINotResponding(bilansFinanciers)) {
-    const isNotFound = bilansFinanciers.errorType === 404;
+  if (isAPINotResponding(financesAssociation)) {
+    const isNotFound = financesAssociation.errorType === 404;
     if (isNotFound) {
       return (
-        <Section title="Indicateurs financiers" sources={[EAdministration.MEF]}>
-          <p>Aucun bilan financier n’a été retrouvé pour cette structure.</p>
+        <Section title="Indicateurs financiers" sources={[EAdministration.MI]}>
+          <p>
+            Aucun indicateur financier n’a été retrouvé pour cette association.
+          </p>
         </Section>
       );
     }
     return (
       <AdministrationNotResponding
-        administration={bilansFinanciers.administration}
-        errorType={bilansFinanciers.errorType}
+        administration={financesAssociation.administration}
+        errorType={financesAssociation.errorType}
         title="Données financières"
       />
     );
   }
 
-  const bilans = bilansFinanciers.bilans;
+  const bilans = financesAssociation.bilans;
   const colorResultat = constants.chartColors[1];
   const colorCA = constants.chartColors[4];
 
@@ -74,8 +71,8 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
   return (
     <Section
       title="Indicateurs financiers"
-      sources={[EAdministration.MEF]}
-      lastModified={bilansFinanciers.lastModified}
+      sources={[EAdministration.MI]}
+      lastModified={financesAssociation.lastModified}
     >
       <Info>
         Cette section est un travail en cours.
@@ -84,7 +81,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
         corrigerons au plus vite (
         <a href={constants.links.mailto}>{constants.links.mail}</a>).
       </Info>
-      {bilansFinanciers.hasBilanConsolide && (
+      {financesAssociation.hasBilanConsolide && (
         <p>
           Cette entreprise déclare un <Tag color="info">bilan consolidé</Tag>.
           C’est le bilan d’un groupe de sociétés dont {uniteLegale.nomComplet}{' '}
@@ -93,7 +90,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
       )}
       <p>
         Voici les résultats financiers
-        {bilansFinanciers.hasBilanConsolide ? ' consolidés' : ''} publiés par
+        {financesAssociation.hasBilanConsolide ? ' consolidés' : ''} publiés par
         l’entreprise pour les {bilans.length} dernier{bilanPlural} exercice
         {bilanPlural}&nbsp;:
       </p>

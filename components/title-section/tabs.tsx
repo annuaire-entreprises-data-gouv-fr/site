@@ -1,7 +1,11 @@
 import { PrintNever } from '#components-ui/print-visibility';
 import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
 import constants from '#models/constants';
-import { IUniteLegale, isCollectiviteTerritoriale } from '#models/index';
+import {
+  IUniteLegale,
+  isCollectiviteTerritoriale,
+  isServicePublic,
+} from '#models/index';
 import { ISession, isLoggedIn } from '#utils/session';
 
 export enum FICHE {
@@ -59,7 +63,8 @@ export const Tabs: React.FC<{
       label: 'Données financières',
       pathPrefix: '/donnees-financieres/',
       noFollow: false,
-      shouldDisplay: isLoggedIn(session),
+      shouldDisplay: !isServicePublic(uniteLegale),
+      width: '110px',
     },
     {
       ficheType: FICHE.ANNONCES,
@@ -74,6 +79,7 @@ export const Tabs: React.FC<{
       pathPrefix: '/labels-certificats/',
       noFollow: false,
       shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
+      width: '110px',
     },
     {
       ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
@@ -152,7 +158,7 @@ export const Tabs: React.FC<{
           font-weight: bold;
           font-size: 0.9rem;
           line-height: 1.1rem;
-          max-width: 160px;
+          max-width: 150px;
         }
 
         .title-tabs > a > h2 {

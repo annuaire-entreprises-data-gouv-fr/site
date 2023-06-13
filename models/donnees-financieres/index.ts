@@ -8,11 +8,18 @@ import {
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
-import { IUniteLegale } from '..';
+import { IUniteLegale, isAssociation } from '..';
 
-export interface IDonneesFinancieres {
+export interface IFinances {
   uniteLegale: IUniteLegale;
-  bilansFinanciers:
+  financesSociete:
+    | {
+        bilans: IBilanFinancier[];
+        hasBilanConsolide: boolean;
+        lastModified: string | null;
+      }
+    | IAPINotRespondingError;
+  financesAssociation:
     | {
         bilans: IBilanFinancier[];
         hasBilanConsolide: boolean;
@@ -50,26 +57,32 @@ export interface IBilanFinancier {
   year: number;
 }
 
-export const getDonneesFinancieresFromSlug = async (
-  slug: string
-): Promise<IDonneesFinancieres> => {
+export const getFinancesFromSlug = async (slug: string): Promise<IFinances> => {
   const siren = verifySiren(slug);
-  const [uniteLegale, bilansFinanciers] = await Promise.all([
-    getUniteLegaleFromSlug(siren),
-    clientBilansFinanciers(siren).catch((e) => {
-      if (e instanceof HttpNotFound) {
-        return APINotRespondingFactory(EAdministration.MEF, 404);
-      }
-      logErrorInSentry('Error in API data financieres', {
-        siren,
-        details: e.toString(),
-      });
-      return APINotRespondingFactory(EAdministration.MEF, e.status || 500);
-    }),
-  ]);
+  const uniteLegale = await getUniteLegaleFromSlug(siren);
+
+  if (isAssociation(uniteLegale)) {
+    return {
+      uniteLegale,
+      financesSociete: APINotRespondingFactory(EAdministration.MEF, 404),
+      financesAssociation: APINotRespondingFactory(EAdministration.MEF, 404),
+    };
+  }
+
+  const financesSociete = await clientBilansFinanciers(siren).catch((e) => {
+    if (e instanceof HttpNotFound) {
+      return APINotRespondingFactory(EAdministration.MEF, 404);
+    }
+    logErrorInSentry('Error in API data financieres', {
+      siren,
+      details: e.toString(),
+    });
+    return APINotRespondingFactory(EAdministration.MEF, e.status || 500);
+  });
 
   return {
     uniteLegale,
-    bilansFinanciers,
+    financesSociete,
+    financesAssociation: APINotRespondingFactory(EAdministration.MI, 404),
   };
 };

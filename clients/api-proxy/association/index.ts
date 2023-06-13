@@ -42,6 +42,8 @@ const mapToDomainObject = (
     util_publique = false,
   } = association.identite || {};
 
+  console.log(association.compte);
+
   const {
     num_voie = '',
     type_voie = '',
