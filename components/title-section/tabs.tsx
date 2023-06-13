@@ -1,7 +1,12 @@
 import { PrintNever } from '#components-ui/print-visibility';
 import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
 import constants from '#models/constants';
-import { IUniteLegale, isCollectiviteTerritoriale } from '#models/index';
+import {
+  IUniteLegale,
+  isAssociation,
+  isCollectiviteTerritoriale,
+  isServicePublic,
+} from '#models/index';
 import { ISession, isLoggedIn } from '#utils/session';
 
 export enum FICHE {
@@ -59,7 +64,8 @@ export const Tabs: React.FC<{
       label: 'Données financières',
       pathPrefix: '/donnees-financieres/',
       noFollow: false,
-      shouldDisplay: isLoggedIn(session),
+      shouldDisplay:
+        !isServicePublic(uniteLegale) && !isAssociation(uniteLegale),
     },
     {
       ficheType: FICHE.ANNONCES,
