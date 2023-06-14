@@ -40,10 +40,14 @@ export const EtablissementDescription: React.FC<IProps> = ({
   uniteLegale,
   session,
 }) => {
-  const ageCreation = formatAge(etablissement.dateCreation);
-  const ageFermeture = !estActif(etablissement)
-    ? formatAge(etablissement.dateDebutActivite)
-    : undefined;
+  const ageCreation = etablissement.dateCreation
+    ? formatAge(etablissement.dateCreation)
+    : null;
+
+  const ageFermeture =
+    etablissement.dateDebutActivite && !estActif(etablissement)
+      ? formatAge(etablissement.dateDebutActivite)
+      : null;
 
   return (
     <>
