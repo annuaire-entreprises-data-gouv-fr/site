@@ -20,13 +20,15 @@ const Conformite: React.FC<{
   data: IConformite | IAPINotRespondingError;
   prefix?: string;
 }> = ({ data, prefix }) => {
-  return isAPINotResponding(data) ? (
-    data.errorType === 404 ? (
-      <i>Introuvable</i>
-    ) : (
-      <i>Ce téléservice est actuellement indisponible</i>
-    )
-  ) : (
+  if (isAPINotResponding(data)) {
+    return (
+      <i>
+        {prefix ? `${prefix} : e` : 'E'}rreur {data.errorType}
+      </i>
+    );
+  }
+
+  return (
     <div className="layout-space-between">
       {typeof data.isValid === 'boolean' ? (
         data.isValid ? (
@@ -66,6 +68,7 @@ export const DonneesRestreintesSection: NextPageWithLayout<IProps> = ({
               'Conformité sociale',
               <>
                 <Conformite data={vigilance} prefix="Urssaf" />
+                <br />
                 <Conformite data={msa} prefix="MSA" />
               </>,
             ],

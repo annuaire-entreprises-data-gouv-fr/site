@@ -48,5 +48,8 @@ export const getAgentsFromNotion = async () => {
   const rows = await notion.databases.query({
     database_id: agentsDataBaseId as string,
   });
-  return rows.results.map((r: any) => r.properties.Email.email);
+  const authorizedAgents = rows.results
+    .filter((r: any) => r.properties.Actif.checkbox === true)
+    .map((r: any) => r.properties.Email.email);
+  return authorizedAgents;
 };
