@@ -202,7 +202,9 @@ const fetchUniteLegaleFromInsee = async (
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
         clientUniteLegaleInsee(siren, inseeOptions),
-        clientAllEtablissementsInsee(siren, page, inseeOptions),
+        clientAllEtablissementsInsee(siren, page, inseeOptions).catch(
+          () => null
+        ),
         clientSiegeInsee(siren, inseeOptions),
       ]);
 
