@@ -11,6 +11,7 @@ import {
   ChartOptions,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import { htmlLegendPlugin } from './html-legend-plugin';
 
 ChartJS.register(
   CategoryScale,
@@ -27,6 +28,7 @@ type LineChartProps = {
   options?: ChartOptions<'line'>;
   height?: number | string;
   width?: number | string;
+  htmlLegendId?: string;
 };
 
 export const LineChart = ({
@@ -34,15 +36,29 @@ export const LineChart = ({
   options = {},
   height = '400px',
   width = '100%',
+  // to use an html legend provide a unique id and disable canvas lengend in chart options
+  htmlLegendId = '',
 }: LineChartProps) => {
+  const htmlLegendContainerId = htmlLegendId;
+
   return (
-    <div>
-      <Line
-        options={{ ...options, maintainAspectRatio: false }}
-        data={data}
-        width={width}
-        height={height}
-      />
-    </div>
+    <>
+      {htmlLegendContainerId && (
+        <div id={htmlLegendContainerId} className="layout-right" />
+      )}
+      <div>
+        <Line
+          options={{ ...options, maintainAspectRatio: false }}
+          data={data}
+          width={width}
+          height={height}
+          plugins={[
+            ...(htmlLegendContainerId
+              ? [htmlLegendPlugin(htmlLegendContainerId)]
+              : []),
+          ]}
+        />
+      </div>
+    </>
   );
 };

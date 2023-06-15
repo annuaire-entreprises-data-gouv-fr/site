@@ -97,8 +97,8 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
         l’entreprise pour les {bilans.length} dernier{bilanPlural} exercice
         {bilanPlural}&nbsp;:
       </p>
-      <br />
       <LineChart
+        htmlLegendId={'finance-data-legend'}
         options={{
           plugins: {
             tooltip: {
@@ -110,6 +110,7 @@ export const BilansFinanciersSection: React.FC<IDonneesFinancieres> = ({
                 },
               },
             },
+            legend: { display: false },
           },
           responsive: true,
           maintainAspectRatio: false,
