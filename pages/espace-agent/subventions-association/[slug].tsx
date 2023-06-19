@@ -16,7 +16,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { isLoggedIn } from '#utils/session';
+import { isAgent, isSuperAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, ISubventionsAssociation {}
@@ -65,7 +65,7 @@ const SubventionsAssociationPage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    if (!isLoggedIn(context.req?.session)) {
+    if (!isSuperAgent(context.req?.session)) {
       return {
         redirect: {
           destination: `/connexion/agent-public`,

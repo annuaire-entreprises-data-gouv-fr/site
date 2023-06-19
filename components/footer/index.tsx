@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '#components-ui/logo';
 import { PrintNever } from '#components-ui/print-visibility';
+import { Tag } from '#components-ui/tag';
 import { administrationsMetaData } from '#models/administrations';
 import { getAllLandingPages } from '#models/landing-pages';
 
@@ -119,6 +120,17 @@ const Footer = () => (
                     Code source
                   </a>
                 </li>
+                <li>
+                  <a
+                    className="fr-footer__top-link"
+                    href="/connexion/agent-public"
+                  >
+                    Espace agent public{' '}
+                    <Tag color="new" size="small">
+                      beta
+                    </Tag>
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -166,16 +178,6 @@ const Footer = () => (
             </p>
             <br />
             <ul className="fr-footer__content-list">
-              <li className="fr-footer__content-item">
-                <a
-                  className="fr-footer__content-link"
-                  href="https://etalab.gouv.fr"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  etalab.gouv.fr
-                </a>
-              </li>
               <li className="fr-footer__content-item">
                 <a
                   className="fr-footer__content-link"
