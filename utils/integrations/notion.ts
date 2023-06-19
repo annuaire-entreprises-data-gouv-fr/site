@@ -44,7 +44,7 @@ export const logSuggestionToNotion = async (
 
 const agentsDataBaseId = process.env.NOTION_AGENTS_DATABASE_ID;
 
-export const getAgentsFromNotion = async () => {
+export const getSuperAgentsFromNotion = async () => {
   const rows = await notion.databases.query({
     database_id: agentsDataBaseId as string,
   });
