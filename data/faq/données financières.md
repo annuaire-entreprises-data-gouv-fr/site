@@ -1,26 +1,29 @@
-administrations: 
-  - inpi
-targets:
+  administrations: 
+    - inpi
+  
+  targets:
   - agent
   - dirigeant 
-title: Les données financières des entreprises
+title:
+  # Les données financières des entreprises
 seo: 
   description: Les données financières des entreprises basées en France 
   title: si pas de titre spécifié, le titre principal sera utilisé
 body: |
   ## Pourquoi les données financières d'une entreprise sont-elles accessibles ?
   
-  Le dépôt des comptes annuels est une obligation légale pour toutes les sociétés commerciales (SA, SAS, SARL, EURL, SCI…) auprès des greffes des tribunaux de commerce. Ces données sont ensuite traitées et publiées par l'INPI (@karen lien). Ce sont des données ouvertes et accessibles au public. 
+  Le dépôt des comptes annuels est une obligation légale pour toutes les sociétés commerciales (SA, SAS, SARL, EURL, SCI…) auprès des greffes des tribunaux de commerce. Ces données sont ensuite traitées et publiées par l'[INPI](https://www.inpi.fr). 
+  Ce sont des données ouvertes et accessibles au public. 
   
   Sous certaines conditions, les micro, petites et moyennes entreprises peuvent demander à ce que leurs données ne soient pas publiées et restent confidentielles.  
   
   ## Quelles sont les données financières affichées par l'Annuaire des Entreprises ?
   
-  Nous affichons les informations permettant de se renseigner sur la santé financière d'une société : date de clôture des comptes, chiffre d'affaires, marge brut, EBE, résultat net.
+  Nous affichons les informations les plus importantes permettant de renseigner sur la santé financière d'une société : date de clôture des comptes, chiffre d'affaires, marge brut, EBE, résultat net.
   
   ## D'où proviennent les données ?
   
-  Les données utilisées sont issues de la base des bilans et comptes annuels de l'INPI (@karen lien https://data.inpi.fr/). Les données ont ensuite été retraitées et mise à disposition par les équipes du [Ministère de l'Économie et des Finances](https://www.economie.gouv.fr/) et [republiées sur data.gouv.fr](https://www.data.gouv.fr/fr/datasets/ratios-financiers-bce-inpi/).
+  Les données utilisées sont issues de la base des bilans et comptes annuels de l'[INPI](https://data.inpi.fr). Les données ont ensuite été retraitées et mises à disposition par les équipes du [Ministère de l'Économie et des Finances](https://www.economie.gouv.fr/) et republiées sur [data.gouv.fr](https://www.data.gouv.fr/fr/datasets/ratios-financiers-bce-inpi/).
 
   ## Définition des indicateurs
   
@@ -54,20 +57,14 @@ body: |
   Le bilan consolidé concerne surtout les grandes entreprises qui ont plusieurs filiales.
   
   La consolidation des comptes permet de présenter un état des comptes au niveau du groupe, comme si le siège social et toutes les filiales ne formaient qu'une seule et unique entité. 
+ 
 cta:
-  label: @Karen => lien vers la formalité pour déclarer ses comptes
-  to: url (externe (https://) ou interne en commencant par /)
+  label: Déclarer ses comptes annuels
+  to: https://https://formalites.entreprises.gouv.fr
 more:
-  - label: libellé
-    href: url
-  - label: libellé
-    href: url
-  - label: libellé
-    href: url
-  - label: libellé
-    href: url
-
-En savoir plus sur [le dépôt des comptes annuels d'une société.](https://entreprendre.service-public.fr/vosdroits/F31214)  
-En savoir plus sur les [informations financières accessibles au public.](https://www.economie.gouv.fr/facileco/quelles-sont-informations-accessibles-au-public) 
-  
-  En savoir plus : https://entreprendre.service-public.fr/vosdroits/F32069
+  - label: En savoir plus sur le dépôt de comptes annuels d'une société 
+    href: https://entreprendre.service-public.fr/vosdroits/F31214
+  - label: En savoir plus sur les informations financières accesibles au public 
+    href: https://www.economie.gouv.fr/facileco/quelles-sont-informations-accessibles-au-public 
+  - label: En savoir plus sur la date de clorûre d'un exercice comptable
+    href:  https://entreprendre.service-public.fr/vosdroits/F32069
