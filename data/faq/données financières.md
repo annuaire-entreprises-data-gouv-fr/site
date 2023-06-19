@@ -12,7 +12,7 @@ seo:
 body: |
   ## Pourquoi les données financières d'une entreprise sont-elles accessibles ?
   
-  Le dépôt des comptes annuels est une obligation légale pour toutes les sociétés commerciales (SA, SAS, SARL, EURL, SCI…) auprès des greffes des tribunaux de commerce. Ces données sont ensuite traitées et publiées par l'[INPI](https://www.inpi.fr). 
+  Le dépôt des comptes annuels est une obligation légale pour toutes les sociétés commerciales (SA, SAS, SARL, EURL, SCI…) auprès des greffes des tribunaux de commerce. Ces données sont ensuite traitées et publiées par l'[INPI](https://data.inpi.fr). 
   Ce sont des données ouvertes et accessibles au public. 
   
   Sous certaines conditions, les micro, petites et moyennes entreprises peuvent demander à ce que leurs données ne soient pas publiées et restent confidentielles.  
@@ -60,7 +60,7 @@ body: |
  
 cta:
   label: Déclarer ses comptes annuels
-  to: https://https://formalites.entreprises.gouv.fr
+  to: https://formalites.entreprises.gouv.fr
 more:
   - label: En savoir plus sur le dépôt de comptes annuels d'une société 
     href: https://entreprendre.service-public.fr/vosdroits/F31214
