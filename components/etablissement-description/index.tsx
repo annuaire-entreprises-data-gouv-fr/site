@@ -102,11 +102,9 @@ export const EtablissementDescription: React.FC<IProps> = ({
             <a href={`/entreprise/${uniteLegale.chemin}`}>
               {getNomComplet(uniteLegale, session)}
             </a>
-            ,
             {uniteLegale.etablissements.all.length > 1 ? (
               <>
-                {' '}
-                qui possède{' '}
+                , qui possède{' '}
                 <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
                   {uniteLegale.etablissements.nombreEtablissements - 1} autre(s)
                   établissement(s)
@@ -114,8 +112,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
               </>
             ) : (
               <>
-                {' '}
-                et{' '}
+                {' et '}
                 <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
                   son unique établissement
                 </a>

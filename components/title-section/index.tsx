@@ -9,13 +9,7 @@ import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
-import constants from '#models/constants';
-import {
-  isAssociation,
-  isCollectiviteTerritoriale,
-  isServicePublic,
-  IUniteLegale,
-} from '#models/index';
+import { isAssociation, IUniteLegale } from '#models/index';
 import {
   estDiffusible,
   estNonDiffusible,

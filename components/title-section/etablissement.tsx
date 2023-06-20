@@ -10,7 +10,7 @@ import {
   getEtablissementName,
   getNomComplet,
 } from '#models/statut-diffusion';
-import { formatSiret } from '#utils/helpers';
+import { formatIntFr, formatSiret } from '#utils/helpers';
 import { getCompanyLabel, getCompanyPronoun } from '#utils/helpers';
 import { ISession } from '#utils/session';
 import { INSEE } from '../administrations';
@@ -60,12 +60,12 @@ const TitleEtablissementWithDenomination: React.FC<{
       )}
 
     <h1>
-      {getEtablissementName(etablissement, uniteLegale, session)} à{' '}
-      <a href={`/carte/${etablissement.siret}`}>{etablissement.commune}</a>
+      Établissement {getEtablissementName(etablissement, uniteLegale, session)}{' '}
+      à <a href={`/carte/${etablissement.siret}`}>{etablissement.commune}</a>
     </h1>
 
     <div className="etablissement-sub-title">
-      <span>{formatSiret(etablissement.siret)}</span>
+      <span className="siret-or-siren">{formatSiret(etablissement.siret)}</span>
       {estNonDiffusible(etablissement) && <Tag color="new">non-diffusible</Tag>}
       <IsActiveTag
         etatAdministratif={etablissement.etatAdministratif}
@@ -77,24 +77,34 @@ const TitleEtablissementWithDenomination: React.FC<{
       <span>Cet établissement est </span>
       {etablissement.estSiege ? (
         <>
-          le <Tag color="info">siège social</Tag>
+          le{' '}
+          <Tag color="info" size="small">
+            siège social
+          </Tag>
         </>
       ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 &&
         !etablissement.estSiege ? (
         <>
-          un<Tag>ancien siège social</Tag>
+          un<Tag size="small">ancien siège social</Tag>
         </>
       ) : (
-        <Tag>un établissement secondaire</Tag>
+        <Tag size="small">un établissement secondaire</Tag>
       )}
       <span>
         {' '}
         de {getCompanyPronoun(uniteLegale).toLowerCase()}
         {getCompanyLabel(uniteLegale)}{' '}
         <a href={`/entreprise/${uniteLegale.siren}`}>
-          {getNomComplet(uniteLegale, session)}
+          {getNomComplet(uniteLegale, session)}&nbsp;‣&nbsp;
+          <span className="siret-or-siren">
+            {formatIntFr(uniteLegale.siren)}
+          </span>
+          <IsActiveTag
+            etatAdministratif={uniteLegale.etatAdministratif}
+            statutDiffusion={uniteLegale.statutDiffusion}
+            size="small"
+          />
         </a>
-        <a></a>
       </span>
     </div>
     <br />
@@ -121,6 +131,12 @@ const TitleEtablissementWithDenomination: React.FC<{
     />
 
     <style jsx>{`
+      .siret-or-siren {
+        font-variant: small-caps;
+        font-size: 1.1rem;
+        color: #666;
+      }
+
       h1 {
         line-height: 1.5rem;
         font-size: 1.4rem;
@@ -131,12 +147,6 @@ const TitleEtablissementWithDenomination: React.FC<{
         align-items: center;
         flex-wrap: wrap;
         margin-bottom: 5px;
-      }
-
-      .etablissement-sub-title > span:first-of-type {
-        font-variant: small-caps;
-        font-size: 1.1rem;
-        color: #666;
       }
 
       .etablissement-sub-sub-title:before {
