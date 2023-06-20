@@ -16,7 +16,7 @@ import {
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
-import { ISession, isLoggedIn } from '#utils/session';
+import { isAgent, ISession } from '#utils/session';
 import { FICHE, Tabs } from './tabs';
 
 type IProps = {
@@ -32,7 +32,7 @@ const Title: React.FC<IProps> = ({
 }) => (
   <div className="header-section">
     <div className="title">
-      {isLoggedIn(session) && (
+      {isAgent(session) && (
         <ProtectedData full>
           Vous êtes connecté avec un compte <b>agent public</b>. Ce compte vous
           donne accès à certaines données exclusivement réservées à
@@ -41,11 +41,19 @@ const Title: React.FC<IProps> = ({
             Réservé aux agents publics
           </Icon>
           ” .
+          <br />
+          <br />
+          Ce service est en <Tag color="new">beta test</Tag>. Il est possible
+          que vous recontriez des bugs ou des erreurs. Si cela arrive,{' '}
+          <a href="mailto:charlotte.choplin@beta.gouv.fr">
+            n’hésitez pas à nous contacter
+          </a>
+          .
         </ProtectedData>
       )}
       {!estDiffusible(uniteLegale) && (
         <>
-          {isLoggedIn(session) ? (
+          {isAgent(session) ? (
             <ProtectedData full>
               Cette structure est non-diffusible mais vous pouvez voir ses
               informations grâce à votre compte <b>agent-public</b>.

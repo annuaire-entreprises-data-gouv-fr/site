@@ -1,4 +1,4 @@
-import { isAgent, isSuperAgent } from '#utils/session';
+import { isAgent } from '#utils/session';
 import { ISession } from '#utils/session';
 import { IEtablissement, IUniteLegale } from '.';
 
@@ -9,7 +9,7 @@ export enum ISTATUTDIFFUSION {
 }
 
 const canSeeNonDiffusible = (session: ISession | null) =>
-  session && (isAgent(session) || isSuperAgent(session));
+  session && isAgent(session);
 
 /**
  * Only diffusible. Exclude partially diffusible and non-diffusible

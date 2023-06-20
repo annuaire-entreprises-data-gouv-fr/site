@@ -20,7 +20,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { isLoggedIn } from '#utils/session';
+import { isAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, IDirigeants {}
@@ -52,7 +52,7 @@ const DirigeantsPage: NextPageWithLayout<IProps> = ({
             uniteLegale={uniteLegale}
             immatriculationRNCS={immatriculationRNCS}
           />
-          {estDiffusible(uniteLegale) || isLoggedIn(session) ? (
+          {estDiffusible(uniteLegale) || isAgent(session) ? (
             <>
               {uniteLegale.complements.estEntrepreneurIndividuel &&
                 uniteLegale.dirigeant && (

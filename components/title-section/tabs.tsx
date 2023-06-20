@@ -7,7 +7,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/index';
-import { ISession, isLoggedIn } from '#utils/session';
+import { ISession } from '#utils/session';
 
 export enum FICHE {
   ACTES = 'actes & statuts',
