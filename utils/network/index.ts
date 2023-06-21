@@ -102,7 +102,6 @@ export const defaultCacheConfig = {
       return !isFallback;
     },
   },
-
   // If we should return a old (possibly expired) cache when the current request failed
   // to get a valid response because of a network error, invalid status or etc.
   staleIfError: false,

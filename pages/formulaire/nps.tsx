@@ -1,6 +1,5 @@
 import { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
-import { Checkbox } from '#components-ui/checkbox';
 import { MultiChoice } from '#components-ui/multi-choice';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import constants from '#models/constants';
@@ -16,13 +15,22 @@ export const visitorTypes = [
     value: 'Dirigeant',
     label: 'Dirigeant(e) d’entreprise ou d’association',
   },
-  { value: 'Indépendant', label: 'Indépendant(e)' },
+  {
+    value: 'Indépendant',
+    label: 'Indépendant(e)',
+  },
   {
     value: 'Salarié',
     label: 'Salarié(e) d’entreprise ou d’association',
   },
-  { value: 'Particulier', label: 'Particulier' },
-  { value: 'Autre', label: 'Autre' },
+  {
+    value: 'Particulier',
+    label: 'Particulier',
+  },
+  {
+    value: 'Autre',
+    label: 'Autre',
+  },
 ];
 
 const FeedBackPage: NextPageWithLayout = () => {
@@ -87,7 +95,10 @@ const FeedBackPage: NextPageWithLayout = () => {
               <MultiChoice
                 legend="3 ・ Comment êtes-vous arrivé(e) jusqu’ici ?"
                 values={[
-                  { value: 'Bouche à oreille', label: 'Bouche à oreille' },
+                  {
+                    value: 'Bouche à oreille',
+                    label: 'Bouche à oreille',
+                  },
                   {
                     value: 'Moteur de recherche',
                     label: 'Moteur de recherche',
@@ -102,7 +113,10 @@ const FeedBackPage: NextPageWithLayout = () => {
                     label:
                       'J’ai cliqué sur un lien depuis un autre site internet',
                   },
-                  { value: 'Autre', label: 'Autre' },
+                  {
+                    value: 'Autre',
+                    label: 'Autre',
+                  },
                 ]}
                 name="radio-set-visitor-origin"
                 idPrefix="radio-visitor-origin"
@@ -113,7 +127,6 @@ const FeedBackPage: NextPageWithLayout = () => {
               <legend>
                 <h2>4 ・ Avez-vous quelque chose d’autre à nous dire ?</h2>
               </legend>
-
               <div className="fr-input-group">
                 <label className="fr-label" htmlFor="textarea">
                   Vous rêvez d’une fonctionnalité ? Vous détestez le bleu ?
