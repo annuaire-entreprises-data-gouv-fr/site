@@ -71,7 +71,7 @@ class UniteLegaleBuilder {
     }
 
     if (isProtectedSiren(uniteLegale.siren)) {
-      uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PARTIAL;
+      uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
     }
 
     // en sommeil
