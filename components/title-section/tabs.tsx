@@ -28,7 +28,7 @@ export const Tabs: React.FC<{
   currentFicheType: FICHE;
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ currentFicheType, uniteLegale, session }) => {
+}> = ({ currentFicheType, uniteLegale }) => {
   const tabs = [
     {
       ficheType: FICHE.INFORMATION,
@@ -65,7 +65,9 @@ export const Tabs: React.FC<{
       pathPrefix: '/donnees-financieres/',
       noFollow: false,
       shouldDisplay:
-        !isServicePublic(uniteLegale) && !isAssociation(uniteLegale),
+        !isServicePublic(uniteLegale) &&
+        !isAssociation(uniteLegale) &&
+        !uniteLegale.complements.estEntrepreneurIndividuel,
       width: '110px',
     },
     {

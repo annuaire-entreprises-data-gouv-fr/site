@@ -44,13 +44,9 @@ const FAQArticle: NextPageWithLayout<{ article: IArticle }> = ({ article }) => (
         </div>
       ) : null}
       <h2>Vous ne trouvez pas votre réponse ?</h2>
-      <p>
-        Vous pouvez nous écrire directement et poser vos questions à l’adresse
-        suivante&nbsp;:
-      </p>
       <div className="layout-left">
-        <ButtonLink to={constants.links.mailto} alt small>
-          Écrivez-nous à {constants.links.mail}
+        <ButtonLink to="/faq" alt small>
+          Consultez notre FAQ
         </ButtonLink>
       </div>
     </TextWrapper>
