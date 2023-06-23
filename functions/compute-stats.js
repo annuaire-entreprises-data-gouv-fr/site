@@ -69,10 +69,10 @@ exports.handle = function (event, context) {
   const categories = `https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=day&method=Events.getCategory&module=API&showColumns=label&filter_limit=9999&date=${dateAsString}`;
 
   get(categories)
-    .then(
-      (res) =>
-        res.find((el) => el.label === 'feedback:search-nps').idsubdatatable
-    )
+    .then((res) => {
+      return res.find((el) => el.label === 'feedback:search-nps')
+        .idsubdatatable;
+    })
     .then((categoryId) =>
       get(
         `https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=day&method=Events.getNameFromCategoryId&idSubtable=${categoryId}&module=API&showColumns=label&filter_limit=9999&date=${dateAsString}`
