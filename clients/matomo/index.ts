@@ -269,7 +269,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
     return {
       ...computeStats(
         matomoMonthlyStats.data,
-        matomoNpsEventStats,
+        matomoNpsEventStats.data,
         matomoCopyPasteEventStats.data,
         matomoEventsCategory.data
       ),
@@ -347,7 +347,6 @@ const createEventsCategoryUrl = () => {
     )}`;
     baseUrl += encodeURIComponent(subRequest);
   }
-
   return baseUrl;
 };
 
@@ -358,20 +357,21 @@ const getNpsEvent = async () => {
   const lastYear = getLastYear();
   const subtableIdsResponse = await getEventSubtableIds();
 
-  const data = await Promise.all(
-    subtableIdsResponse.map(async (id: any) => {
-      lastYear.setMonth(lastYear.getMonth() + 1);
-      const response = await httpGet(
-        `https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=month&method=Events.getNameFromCategoryId&idSubtable=${id}&module=API&showColumns=label,nb_events&filter_limit=9999&date=${YYYYMMDD(
-          lastYear
-        )}`
-      );
+  let baseUrl = routes.matomo.report.bulkRequest;
 
-      return response.data;
-    })
-  );
+  for (let i = 0; i < 12; i++) {
+    lastYear.setMonth(lastYear.getMonth() + 1);
+    baseUrl += `&urls[${i}]=`;
+    const subRequest = `idSite=145&period=month&method=Events.getNameFromCategoryId&idSubtable=${
+      subtableIdsResponse[i]
+    }&module=API&showColumns=label,nb_events&filter_limit=9999&date=${YYYYMMDD(
+      lastYear
+    )}`;
 
-  return data;
+    baseUrl += encodeURIComponent(subRequest);
+  }
+
+  return httpGet(baseUrl);
 };
 
 const createCopyPasteEventUrl = () => {
