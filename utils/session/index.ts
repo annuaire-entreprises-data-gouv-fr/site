@@ -57,7 +57,7 @@ export const isLoggedIn = (session: ISession | null) => {
  * @param session
  * @returns
  */
-export const isAgent = (session: ISession | null) => {
+export const isBasicAgent = (session: ISession | null) => {
   return session?.user?.privilege === 'agent';
 };
 
@@ -66,4 +66,11 @@ export const isAgent = (session: ISession | null) => {
  */
 export const isSuperAgent = (session: ISession | null) => {
   return session?.user?.privilege === 'super-agent';
+};
+
+/**
+ *  Verify if user session has super-agent or agent privileges
+ */
+export const isAgent = (session: ISession | null) => {
+  return isBasicAgent(session) || isSuperAgent(session);
 };

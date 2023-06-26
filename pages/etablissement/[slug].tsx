@@ -3,7 +3,11 @@ import React from 'react';
 import Meta from '#components/meta';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
 import { estNonDiffusible } from '#models/statut-diffusion';
-import { shouldNotIndex } from '#utils/helpers';
+import {
+  getEtablissementPageDescription,
+  getEtablissementPageTitle,
+  shouldNotIndex,
+} from '#utils/helpers';
 import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
@@ -33,8 +37,12 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
     <Meta
       title={`${
         etablissement.estSiege ? 'Siège social' : 'Etablissement secondaire'
-      } - ${getCompanyPageTitle(uniteLegale, session)}`}
-      description={getCompanyPageDescription(uniteLegale, session)}
+      } - ${getEtablissementPageTitle(etablissement, uniteLegale, session)}`}
+      description={getEtablissementPageDescription(
+        etablissement,
+        uniteLegale,
+        session
+      )}
       canonical={`https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`}
       noIndex={shouldNotIndex(uniteLegale)}
     />

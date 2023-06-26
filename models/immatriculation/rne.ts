@@ -50,11 +50,7 @@ const getImmatriculationRNE = async (
       return APINotRespondingFactory(EAdministration.INPI, 404);
     }
 
-    logErrorInSentry('Error in RNE : API and fallback failed', {
-      siren,
-      details: e.toString(),
-    });
-
+    // no need to log an error as API-Proxy already logged it
     return APINotRespondingFactory(EAdministration.INPI, 500);
   }
 };

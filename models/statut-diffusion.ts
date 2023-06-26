@@ -1,15 +1,16 @@
-import { isAgent, isSuperAgent } from '#utils/session';
+import { isAgent } from '#utils/session';
 import { ISession } from '#utils/session';
 import { IEtablissement, IUniteLegale } from '.';
 
 export enum ISTATUTDIFFUSION {
+  PROTECTED = 'partiellement diffusible',
   PARTIAL = 'partiellement diffusible',
   NONDIFF = 'non-diffusible',
   DIFFUSIBLE = 'diffusible',
 }
 
 const canSeeNonDiffusible = (session: ISession | null) =>
-  session && (isAgent(session) || isSuperAgent(session));
+  session && isAgent(session);
 
 /**
  * Only diffusible. Exclude partially diffusible and non-diffusible
@@ -23,7 +24,6 @@ export const estDiffusible = (uniteLegaleOrEtablissement: {
     uniteLegaleOrEtablissement.statutDiffusion === ISTATUTDIFFUSION.DIFFUSIBLE
   );
 };
-
 /**
  * Only strict non-diffusible. Exclude partially diffusible and diffusible
  * @param uniteLegaleOrEtablissement

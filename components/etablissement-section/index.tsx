@@ -15,6 +15,7 @@ import {
   getAdresseEtablissement,
   getDenominationEtablissement,
   getEnseigneEtablissement,
+  getEtablissementName,
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatDate, formatSiret } from '#utils/helpers';
@@ -156,7 +157,11 @@ const EtablissementSection: React.FC<IProps> = ({
         title={
           usedInEntreprisePage
             ? `Siège social de ${getNomComplet(uniteLegale, session)}`
-            : `Établissement${etablissement.estSiege ? ' (siège social)' : ''}`
+            : `Information légales de l’établissement ${getEtablissementName(
+                etablissement,
+                uniteLegale,
+                session
+              )} à ${etablissement.commune}`
         }
         id="etablissement"
         sources={[EAdministration.INSEE]}

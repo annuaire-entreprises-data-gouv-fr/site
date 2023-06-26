@@ -21,8 +21,9 @@ const classFromState = (state: IETATADMINSTRATIF) => {
 const EtatTag: React.FC<{
   state: IETATADMINSTRATIF;
   since?: string;
-}> = ({ state, since = '' }) => (
-  <Tag color={classFromState(state)} title={state}>
+  size?: 'medium' | 'small';
+}> = ({ state, since = '', size = 'medium' }) => (
+  <Tag color={classFromState(state)} title={state} size={size}>
     {state}
     {since && <>&nbsp;le&nbsp;{formatDate(since)}</>}
   </Tag>
@@ -32,7 +33,8 @@ const IsActiveTag: React.FC<{
   etatAdministratif: IETATADMINSTRATIF;
   statutDiffusion: ISTATUTDIFFUSION;
   since?: string | null;
-}> = ({ etatAdministratif, statutDiffusion, since }) => {
+  size?: 'medium' | 'small';
+}> = ({ etatAdministratif, statutDiffusion, since, size = 'medium' }) => {
   if (
     etatAdministratif === IETATADMINSTRATIF.INCONNU ||
     statutDiffusion === ISTATUTDIFFUSION.NONDIFF
@@ -43,7 +45,7 @@ const IsActiveTag: React.FC<{
     informations nécessaires pour savoir si cette structure est en activité
     ou si elle est fermée."
       >
-        <EtatTag state={IETATADMINSTRATIF.INCONNU} />
+        <EtatTag state={IETATADMINSTRATIF.INCONNU} size={size} />
       </InformationTooltip>
     );
   }
@@ -51,12 +53,12 @@ const IsActiveTag: React.FC<{
   if (etatAdministratif === IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT) {
     return (
       <InformationTooltip label="Cette structure est en sommeil ou présumée inactive. Elle est active du point de vue administratif mais tous ses établissements sont fermés. Elle n’a pas d’activité économique.">
-        <EtatTag state={etatAdministratif} />
+        <EtatTag state={etatAdministratif} size={size} />
       </InformationTooltip>
     );
   }
 
-  return <EtatTag state={etatAdministratif} since={since || ''} />;
+  return <EtatTag state={etatAdministratif} since={since || ''} size={size} />;
 };
 
 export default IsActiveTag;

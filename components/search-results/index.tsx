@@ -108,7 +108,10 @@ const SearchResults: React.FC<{
           currentPage={results.currentPage}
         />
         <div>
-          <ResultsList results={results.results} />
+          <ResultsList
+            results={results.results}
+            shouldColorZipCode={!!searchFilterParams.cp_dep}
+          />
           <ResultsPagination
             totalPages={results.pageCount}
             searchTerm={searchTerm}

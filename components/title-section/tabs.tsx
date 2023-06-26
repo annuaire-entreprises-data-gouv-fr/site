@@ -6,7 +6,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/index';
-import { ISession, isLoggedIn } from '#utils/session';
+import { ISession } from '#utils/session';
 
 export enum FICHE {
   ACTES = 'actes & statuts',
@@ -27,7 +27,7 @@ export const Tabs: React.FC<{
   currentFicheType: FICHE;
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ currentFicheType, uniteLegale, session }) => {
+}> = ({ currentFicheType, uniteLegale }) => {
   const tabs = [
     {
       ficheType: FICHE.INFORMATION,
@@ -63,7 +63,9 @@ export const Tabs: React.FC<{
       label: 'Données financières',
       pathPrefix: '/donnees-financieres/',
       noFollow: false,
-      shouldDisplay: !isServicePublic(uniteLegale),
+      shouldDisplay:
+        !isServicePublic(uniteLegale) &&
+        !uniteLegale.complements.estEntrepreneurIndividuel,
       width: '110px',
     },
     {

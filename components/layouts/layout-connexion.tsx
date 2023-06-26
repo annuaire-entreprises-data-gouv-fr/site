@@ -50,7 +50,7 @@ export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
           display: flex;
           justify-content: center;
           align-items: center;
-          min-height: 450px;
+          min-height: 500px;
           padding: inherit 100px;
         }
         .img-container > div {

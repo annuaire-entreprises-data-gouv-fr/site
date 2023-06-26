@@ -24,10 +24,14 @@ export const UniteLegaleDescription: React.FC<{
   const plural = nombreEtablissements > 1 ? 's' : '';
   const pluralBe = nombreEtablissementsOuverts > 1 ? 'sont' : 'est';
 
-  const ageCreation = formatAge(uniteLegale.dateCreation);
-  const ageFermeture = !estActif(uniteLegale)
-    ? formatAge(uniteLegale.dateDebutActivite)
-    : undefined;
+  const ageCreation = uniteLegale.dateCreation
+    ? formatAge(uniteLegale.dateCreation)
+    : null;
+
+  const ageFermeture =
+    uniteLegale.dateDebutActivite && !estActif(uniteLegale)
+      ? formatAge(uniteLegale.dateDebutActivite)
+      : null;
 
   return (
     <>
@@ -57,8 +61,8 @@ export const UniteLegaleDescription: React.FC<{
         )}
         {uniteLegale.libelleActivitePrincipale && (
           <>
-            Son domaine d’activité est : {uniteLegale.libelleActivitePrincipale}
-            .
+            Son domaine d’activité est :{' '}
+            {(uniteLegale.libelleActivitePrincipale || '').toLowerCase()}.
           </>
         )}
         {libelleCategorieEntrepriseForDescription(uniteLegale)}

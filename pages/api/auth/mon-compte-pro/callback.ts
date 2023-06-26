@@ -5,7 +5,8 @@ import {
   monCompteAuthenticate,
 } from '#clients/auth/mon-compte-pro/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
-import { isAuthorizedAgent } from '#utils/helpers/is-authorized-agent';
+import { logEventInMatomo } from '#utils/analytics/matomo';
+import { checkIsSuperAgent } from '#utils/helpers/is-super-agent';
 import logErrorInSentry from '#utils/sentry';
 import {
   ISessionPrivilege,
@@ -22,7 +23,7 @@ const getUserPrivileges = async (
     userInfo.email === 'user@yopmail.com' &&
     process.env.NODE_ENV !== 'production';
 
-  const isSuperAgent = await isAuthorizedAgent(userInfo.email);
+  const isSuperAgent = await checkIsSuperAgent(userInfo.email);
   if (isTestAccount || isSuperAgent) {
     return 'super-agent';
   }

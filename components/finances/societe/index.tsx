@@ -1,4 +1,5 @@
 import Info from '#components-ui/alerts/info';
+import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { LineChart } from '#components/chart/line';
@@ -85,7 +86,11 @@ export const FinancesSocieteSection: React.FC<IFinances> = ({
         <p>
           Cette entreprise déclare un <Tag color="info">bilan consolidé</Tag>.
           C’est le bilan d’un groupe de sociétés dont {uniteLegale.nomComplet}{' '}
-          est la société mère. Son bilan consolidé inclut ceux de ses filiales.
+          est la société mère. Son{' '}
+          <FAQLink tooltipLabel="bilan consolidé" to="/faq/donnees-financieres">
+            Qu’est-ce qu’un bilan consolidé ?
+          </FAQLink>{' '}
+          inclut ceux de ses filiales.
         </p>
       )}
       <p>
@@ -94,8 +99,8 @@ export const FinancesSocieteSection: React.FC<IFinances> = ({
         l’entreprise pour les {bilans.length} dernier{bilanPlural} exercice
         {bilanPlural}&nbsp;:
       </p>
-      <br />
       <LineChart
+        htmlLegendId={'finance-data-legend'}
         options={{
           plugins: {
             tooltip: {
@@ -107,6 +112,7 @@ export const FinancesSocieteSection: React.FC<IFinances> = ({
                 },
               },
             },
+            legend: { display: false },
           },
           responsive: true,
           maintainAspectRatio: false,
@@ -146,7 +152,13 @@ export const FinancesSocieteSection: React.FC<IFinances> = ({
       />
       <br />
       <FullTable
-        head={['Indicateurs', ...bilans.map((a) => a?.year.toString())]}
+        head={[
+          //@ts-ignore
+          <FAQLink tooltipLabel="Indicateurs" to="/faq/donnees-financieres">
+            Définition des indicateurs
+          </FAQLink>,
+          ...bilans.map((a) => a?.year.toString()),
+        ]}
         body={body}
       />
     </Section>

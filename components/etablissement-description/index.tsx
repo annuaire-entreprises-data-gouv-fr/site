@@ -40,10 +40,14 @@ export const EtablissementDescription: React.FC<IProps> = ({
   uniteLegale,
   session,
 }) => {
-  const ageCreation = formatAge(etablissement.dateCreation);
-  const ageFermeture = !estActif(etablissement)
-    ? formatAge(etablissement.dateDebutActivite)
-    : undefined;
+  const ageCreation = etablissement.dateCreation
+    ? formatAge(etablissement.dateCreation)
+    : null;
+
+  const ageFermeture =
+    etablissement.dateDebutActivite && !estActif(etablissement)
+      ? formatAge(etablissement.dateDebutActivite)
+      : null;
 
   return (
     <>
@@ -98,11 +102,9 @@ export const EtablissementDescription: React.FC<IProps> = ({
             <a href={`/entreprise/${uniteLegale.chemin}`}>
               {getNomComplet(uniteLegale, session)}
             </a>
-            ,
             {uniteLegale.etablissements.all.length > 1 ? (
               <>
-                {' '}
-                qui possède{' '}
+                , qui possède{' '}
                 <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
                   {uniteLegale.etablissements.nombreEtablissements - 1} autre(s)
                   établissement(s)
@@ -110,8 +112,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
               </>
             ) : (
               <>
-                {' '}
-                et{' '}
+                {' et '}
                 <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
                   son unique établissement
                 </a>
@@ -123,7 +124,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
             {etablissement.libelleActivitePrincipale && (
               <>
                 Son domaine d’activité est :{' '}
-                {etablissement.libelleActivitePrincipale}.
+                {(etablissement.libelleActivitePrincipale || '').toLowerCase()}.
               </>
             )}
             {etablissement.adresse && (

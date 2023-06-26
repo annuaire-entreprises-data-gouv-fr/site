@@ -17,8 +17,8 @@ administrations:
 targets:
 title: Quelle est la fréquence de mise à jour des données ?
 seo:
-  description: Les données du **moteur de recherche** sont mises à jour tous les mois.
+  description: Les données du **moteur de recherche** sont mises à jour tous les deux jours.
 body: |
-  Les données du **moteur de recherche** sont mises à jour tous les mois.
+  Les données du **moteur de recherche** sont mises à jour tous les deux jours.
 
-  Les données affichées sur **chaque page d’une personne morale** sont mises à jour en temps-réel. Les données proviennent des [services informatiques](/administration) des administrations concernées.
+  Les données affichées sur **chaque page d’une personne morale** sont mises à jour en temps-réel. Les données proviennent des [téléservices](/donnees/sources) des administrations concernées.
