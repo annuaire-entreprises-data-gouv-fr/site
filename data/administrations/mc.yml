@@ -28,6 +28,6 @@ dataSources:
   - label: Déclarations des entrepreneurs de spectacles vivants
     apiSlug: spectacle-vivant
     datagouvLink: https://www.data.gouv.fr/fr/datasets/declarations-des-entrepreneurs-de-spectacles-vivants/
-    keywords: Liste des Entrepreneurs de spectacles vivants
+    keywords: Informations des Entrepreneurs de spectacles vivants
 description: |
   Le Ministère de la Culture publie les déclarations des entrepreneurs de spectacles vivants.

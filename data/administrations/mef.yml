@@ -28,6 +28,6 @@ dataSources:
   - label: Ratios Financiers (BCE / INPI)
     apiSlug: bilans
     datagouvLink: https://www.data.gouv.fr/fr/datasets/ratios-financiers-bce-inpi/
-    keywords: Bilans financiers
+    keywords: Données financières des entreprises
 description: |
   Le ministère de l’Économie et des Finances, communément appelé « Bercy », est le ministère chargé des finances publiques d’une part (budget) et de la politique économique de la France d’autre part.

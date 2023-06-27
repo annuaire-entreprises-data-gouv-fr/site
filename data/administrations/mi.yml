@@ -28,10 +28,11 @@ dataSources:
   - label: Répertoire National des Associations
     apiSlug: rna
     datagouvLink: https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/
-    keywords: Informations administratives des associations
+    modifyDataSourceLink: https://lecompteasso.associations.gouv.fr/
+    keywords: Informations administratives d’une association (Nom - Adresse - NAF - Forme juridique), Données financières des Associations
   - label: Répertoire National des Élus
     apiSlug: recherche-entreprise
     datagouvLink: https://www.data.gouv.fr/fr/datasets/repertoire-national-des-elus-1/
-    keywords: Liste des élus d’une collectivité territoriale
+    keywords: Élus d’une collectivité territoriale
 description: |
   Le ministère de l’interieur publie toutes les données des associations enregistrées dans le [Répertoire National des Associations (RNA). Le RNA remplace depuis 2010 le répertoire Waldec (Web des associations librement déclarées).

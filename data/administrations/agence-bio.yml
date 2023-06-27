@@ -30,6 +30,6 @@ dataSources:
   - label: Liste des professionnels engagés en BIO
     apiSlug: bio
     datagouvLink: https://www.data.gouv.fr/fr/datasets/professionnels-engages-en-bio/
-    keywords: Liste des professionnels Bio
+    keywords: Informations des professionnels Bio
 description: |
   Liste des opérateurs économiques engagés en bio et notifiés auprès de l’Agence Bio avec les principales informations publiques qui leur sont rattachées (identification de l’établissement, activité, produits certifiés, lien vers le certificat bio)

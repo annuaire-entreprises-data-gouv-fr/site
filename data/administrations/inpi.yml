@@ -33,10 +33,10 @@ dataSources:
   - label: Immatriculations, modifications, radiations des sociétés
     apiSlug: rncs
     datagouvLink: https://www.data.gouv.fr/fr/datasets/immatriculations-modifications-radiations-des-societes/
-    keywords: Dirigeants, Bénéficaires Effectifs
   - label: Registre National des Entreprises
     apiSlug: rne
     datagouvLink: https://data.inpi.fr
-    keywords: Immatriculations des entreprises
+    modifyDataSourceLink: https://formalites.entreprises.gouv.fr/
+    keywords: Informations administratives d’une entreprise (Nom - Adresse - NAF - Forme juridique), Société à mission, Dirigeants d’une entreprise, Bénéficaires Effectifs d’une entreprise
 description: |
   L’INPI est l’Institut National de la Protection Intellectuelle. C’est un établissement public à caractère administratif,  qui relève du ministère de l’Économie.

@@ -29,6 +29,6 @@ dataSources:
   - label: Annuaire de l’Education Nationale
     apiSlug: annuaire-education
     datagouvLink: https://data.gouv.fr/fr/datasets/annuaire-de-leducation
-    keywords: Liste des établissements scolaires
+    keywords: Informations des établissements scolaires
 description: |
   Le ministère de l'Éducation nationale et de la jeunesse met en œuvre dans l'académie la politique éducative définie au niveau national. Il a autorité sur le premier degré (écoles maternelles et élémentaires) et le second degré (collèges et lycées).

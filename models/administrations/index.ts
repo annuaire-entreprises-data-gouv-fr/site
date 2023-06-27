@@ -70,4 +70,33 @@ const loadMonitoringIds = () =>
 
 export const administrationsMetaData: IAdministrationsMetaData = loadMetadata();
 
+export const allDataKeyword = Object.values(administrationsMetaData).flatMap(
+  ({ dataSources, contact, site, long, short }) => {
+    return dataSources.flatMap(
+      ({
+        keywords = null,
+        label,
+        datagouvLink = '',
+        modifyDataSourceLink = '',
+      }) => {
+        if (!keywords) {
+          return [];
+        }
+        return keywords.split(',').map((kw) => {
+          return {
+            label: kw,
+            dataSource: label,
+            datagouvLink,
+            modifyDataSourceLink,
+            contact,
+            site,
+            long,
+            short,
+          };
+        });
+      }
+    );
+  }
+);
+
 export const allMonitoringIds = loadMonitoringIds();

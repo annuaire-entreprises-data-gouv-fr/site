@@ -32,7 +32,8 @@ dataSources:
   - label: Base Sirene des Entreprises
     apiSlug: sirene
     datagouvLink: https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/
-    keywords: Dénomination, Adresse, NAF, Forme juridique, SIREN, SIRET, ESS, N°RNA
+    modifyDataSourceLink: https://www.insee.fr/fr/information/2015445
+    keywords: Informations administratives d’un service public (Dénomination - NAF - Forme juridique - Adresse), Structures de l’ESS
   - label: Code Officiel Géographiques (COG)
     apiSlug: recherche-entreprise
     datagouvLink: https://www.data.gouv.fr/fr/datasets/code-officiel-geographique-cog/

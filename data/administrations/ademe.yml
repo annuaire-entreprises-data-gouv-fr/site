@@ -30,6 +30,6 @@ dataSources:
   - label: Liste des Entreprises RGE
     apiSlug: recherche-entreprise, rge
     datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-entreprises-rge-1/
-    keywords: Liste des Professionnels RGE
+    keywords: Informations des professionnels RGE
 description: |
   L'Agence de l'Environnement et de la Maîtrise de l'Energie a pour mission d’accompagner la transition écologique et énergétique notamment en participant au financement de projets ou à la recherche pour leur mise en œuvre.

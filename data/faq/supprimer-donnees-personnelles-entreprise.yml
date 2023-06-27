@@ -32,7 +32,7 @@ body: |
 
   Les entreprises individuelles étant des personnes physiques, leurs données comportent de nombreuses données personnelles. 
 
-  Pour protéger les entrepreneurs individuels, l’Insee propose une [procédure spéciale qui permet de disparaitre de tous les sites internet](https://statut-diffusion-sirene.insee.fr/) réutilisant la données des entreprises.
+  Pour protéger les entrepreneurs individuels, l’Insee propose une [procédure spéciale qui permet de disparaitre de tous les sites internet](https://statut-diffusion-sirene.insee.fr/) réutilisant les données de l’Insee. Cela s’applique à l’Annuaire des Entreprises.
 more:
   - label: Changer de statut de diffusion (entreprise individuelle)
     href: https://statut-diffusion-sirene.insee.fr/

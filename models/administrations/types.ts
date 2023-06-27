@@ -16,6 +16,7 @@ export type IAdministrationMetaData = {
   dataSources: {
     label: string;
     datagouvLink: string;
+    modifyDataSourceLink: string;
     apiSlug: string;
     keywords: string;
   }[];

@@ -18,7 +18,7 @@ export const faqTargets = {
   independant: 'Indépendant(e)',
   salarie: 'Salarié(e) d’entreprise ou d’association',
   particulier: 'Particulier',
-  tous: 'Toutes les questions',
+  tous: 'Autre',
 };
 
 const loadAllArticles = () => {
@@ -44,13 +44,10 @@ const loadAllArticles = () => {
   return articles;
 };
 
-export const getAllFaqArticles = () => {
-  return allArticles;
-};
-
-export const getAllFaqArticlesByTarget = () => {
+export const loadAllFaqArticlesByTarget = () => {
   const articlesByTargets: { [key: string]: IArticle[] } = {};
-  allArticles.forEach((article) => {
+
+  allFaqArticles.forEach((article) => {
     const targets = [...(article.targets || []), 'tous'];
     targets.forEach((target) => {
       if (Object.keys(faqTargets).indexOf(target) === -1) {
@@ -67,12 +64,12 @@ export const getAllFaqArticlesByTarget = () => {
 };
 
 export const getFaqArticle = (slug: string) => {
-  return allArticles.find((article) => article.slug === slug);
+  return allFaqArticles.find((article) => article.slug === slug);
 };
 
 export const getFaqArticlesByTag = (tagList: string[]): IArticle[] => {
   const filteredArticles = new Set<IArticle>();
-  allArticles.forEach((article) => {
+  allFaqArticles.forEach((article) => {
     tagList.forEach((tag) => {
       if (article.administrations.indexOf(tag) > -1) {
         filteredArticles.add(article);
@@ -83,4 +80,6 @@ export const getFaqArticlesByTag = (tagList: string[]): IArticle[] => {
   return Array.from(filteredArticles);
 };
 
-const allArticles = loadAllArticles();
+export const allFaqArticles = loadAllArticles();
+
+export const allFaqArticlesByTarget = loadAllFaqArticlesByTarget();
