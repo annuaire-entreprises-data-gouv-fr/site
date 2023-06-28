@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
@@ -10,6 +9,8 @@ import { CertificationSocieteMission } from '#components/labels-and-certificates
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
+import { checkHasLabelsAndCertificates } from '#components/unite-legale-badges-section/labels-and-certificates';
+import { checkHasQualities } from '#components/unite-legale-badges-section/qualities';
 import {
   getCertificationsFromSlug,
   ICertifications,
@@ -46,8 +47,16 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
           uniteLegale={uniteLegale}
           session={session}
         />
-        {!checkHasLabelsAndCertificates(uniteLegale) && (
-          <p>Cette structure ne possède aucun label ou certificat.</p>
+        {!checkHasLabelsAndCertificates(uniteLegale) &&
+          !checkHasQualities(uniteLegale) && (
+            <p>
+              Cette structure ne possède aucun label ou certificat, ni aucune
+              qualité.
+            </p>
+          )}
+        {uniteLegale.complements.estEss && <CertificationESSSection />}
+        {uniteLegale.complements.estSocieteMission && (
+          <CertificationSocieteMission />
         )}
         {uniteLegale.complements.estRge && (
           <CertificationsRGESection
@@ -55,10 +64,6 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
             certificationsRGE={rge}
             session={session}
           />
-        )}
-        {uniteLegale.complements.estEss && <CertificationESSSection />}
-        {uniteLegale.complements.estSocieteMission && (
-          <CertificationSocieteMission />
         )}
         {uniteLegale.complements.estOrganismeFormation && (
           <OrganismeDeFormationSection

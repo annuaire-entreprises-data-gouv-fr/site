@@ -5,6 +5,10 @@ import AvisSituationLink from '#components/avis-situation-link';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
+import {
+  QualitiesBadgesSection,
+  checkHasQualities,
+} from '#components/unite-legale-badges-section/qualities';
 import { EAdministration } from '#models/administrations';
 import { estActif } from '#models/etat-administratif';
 import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
@@ -17,13 +21,14 @@ import {
   checkHasLabelsAndCertificates,
   LabelsAndCertificatesBadgesSection,
   labelsAndCertificatesSources,
-} from '../labels-and-certificates-badges-section';
+} from '../unite-legale-badges-section/labels-and-certificates';
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
+  const hasQuality = checkHasQualities(uniteLegale);
 
   const data = [
     ['Dénomination', getNomComplet(uniteLegale, session)],
@@ -59,6 +64,13 @@ const UniteLegaleSection: React.FC<{
     ],
     ...(!estActif(uniteLegale)
       ? [['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]]
+      : []),
+    // jump line and add label and certificates
+    ...(hasQuality
+      ? [
+          ['', <br />],
+          ['Qualité', <QualitiesBadgesSection uniteLegale={uniteLegale} />],
+        ]
       : []),
     // jump line and add label and certificates
     ...(hasLabelsAndCertificates

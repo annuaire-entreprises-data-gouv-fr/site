@@ -24,6 +24,7 @@ const SearchFilters: React.FC<{
     etat,
     fn,
     label,
+    quality,
     n,
     naf,
     nature_juridique,
@@ -125,7 +126,7 @@ const SearchFilters: React.FC<{
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <FilterStructure label={label} type={type} />
+        <FilterStructure label={label} type={type} quality={quality} />
       </FilterMenu>
       <FilterMenu
         label="Situation administrative"

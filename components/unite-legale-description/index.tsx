@@ -38,12 +38,17 @@ export const UniteLegaleDescription: React.FC<{
       <p>
         <>
           {getCompanyPronoun(uniteLegale)}
-          {getCompanyLabel(uniteLegale)} {getNomComplet(uniteLegale, session)}
+          {getCompanyLabel(uniteLegale)} {getNomComplet(uniteLegale, session)}{' '}
         </>
+        {uniteLegale.natureJuridique && (
+          <>
+            est une <b>{uniteLegale.libelleNatureJuridique}</b>.{' '}
+          </>
+        )}
         {uniteLegale.dateCreation && (
           <>
-            {' '}
-            a été créée le <b>{formatDateLong(uniteLegale.dateCreation)}</b>
+            Elle a été créée le{' '}
+            <b>{formatDateLong(uniteLegale.dateCreation)}</b>
             {ageCreation && <>, il y a {ageCreation}</>}.{' '}
           </>
         )}
@@ -52,11 +57,6 @@ export const UniteLegaleDescription: React.FC<{
             Elle a été fermée le{' '}
             <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>
             {ageFermeture && <>, il y a {ageFermeture}</>}.{' '}
-          </>
-        )}
-        {uniteLegale.natureJuridique && (
-          <>
-            Sa forme juridique est <b>{uniteLegale.libelleNatureJuridique}</b>.{' '}
           </>
         )}
         {uniteLegale.libelleActivitePrincipale && (

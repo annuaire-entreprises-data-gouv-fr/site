@@ -5,7 +5,7 @@ import { EAdministration } from '#models/administrations';
 
 export const CertificationESSSection = () => (
   <Section
-    title="ESS - Entreprise Sociale et Solidaire"
+    title="ESS - Économie Sociale et Solidaire"
     sources={[EAdministration.INSEE]}
   >
     Cette structure est enregistrée auprès de l’

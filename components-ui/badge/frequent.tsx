@@ -19,6 +19,23 @@ export const LabelAndCertificateBadge = ({
   />
 );
 
+export const QualiteBadge = ({
+  small = false,
+  isSelected = false,
+  onClick,
+  label,
+}: IPartialBadgeProps) => (
+  <Badge
+    label={label}
+    icon="bookmarkFill"
+    onClick={onClick}
+    isSelected={isSelected}
+    small={small}
+    fontColor={constants.colors.frBlue}
+    backgroundColor="#ddd"
+  />
+);
+
 export const AssociationBadge = ({
   small = false,
   isSelected = false,

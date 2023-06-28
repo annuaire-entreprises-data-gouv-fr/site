@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
   LabelAndCertificateBadge,
+  QualiteBadge,
   ServicePublicBadge,
 } from '#components-ui/badge/frequent';
 import {
@@ -14,9 +15,11 @@ import { SimpleSeparator } from '#components-ui/horizontal-separator';
 export const FilterStructure: React.FC<{
   type?: string;
   label?: string;
-}> = ({ type = '', label = '' }) => {
+  quality?: string;
+}> = ({ type = '', label = '', quality = '' }) => {
   const [structureType, setStructureType] = useState(type);
   const [labelSelected, setLabelSelected] = useState(label);
+  const [qualitySelected, setQualitySelected] = useState(quality);
   return (
     <>
       <label>Type de structure :</label>
@@ -75,24 +78,17 @@ export const FilterStructure: React.FC<{
         />
         &nbsp;
         <LabelAndCertificateBadge
+          label="Entrepreneur de spectacles vivants"
+          isSelected={labelSelected === 'esv'}
+          small
+          onClick={() => setLabelSelected('esv')}
+        />
+        &nbsp;
+        <LabelAndCertificateBadge
           label="Professionnels du Bio"
           isSelected={labelSelected === 'bio'}
           small
           onClick={() => setLabelSelected('bio')}
-        />
-        &nbsp;
-        <LabelAndCertificateBadge
-          label="ESS - Entreprise Sociale et Solidaire"
-          isSelected={labelSelected === 'ess'}
-          small
-          onClick={() => setLabelSelected('ess')}
-        />
-        &nbsp;
-        <LabelAndCertificateBadge
-          label="Société à mission"
-          isSelected={labelSelected === 'sm'}
-          small
-          onClick={() => setLabelSelected('sm')}
         />
         &nbsp;
         <LabelAndCertificateBadge
@@ -122,12 +118,35 @@ export const FilterStructure: React.FC<{
           small
           onClick={() => setLabelSelected('qualiopi')}
         />
-        &nbsp;
-        <LabelAndCertificateBadge
-          label="Entrepreneur de spectacles vivants"
-          isSelected={labelSelected === 'esv'}
+      </div>
+      <SimpleSeparator />
+      <label>Qualité :</label>
+      <input
+        name="quality"
+        value={qualitySelected}
+        type="hidden"
+        onChange={() => {}}
+      />
+      <div className="badge-wrapper">
+        <QualiteBadge
+          label="Tous"
+          isSelected={qualitySelected === ''}
           small
-          onClick={() => setLabelSelected('esv')}
+          onClick={() => setQualitySelected('')}
+        />
+        &nbsp;
+        <QualiteBadge
+          label="ESS - Économie Sociale et Solidaire"
+          isSelected={qualitySelected === 'ess'}
+          small
+          onClick={() => setQualitySelected('ess')}
+        />
+        &nbsp;
+        <QualiteBadge
+          label="Société à mission"
+          isSelected={qualitySelected === 'sm'}
+          small
+          onClick={() => setQualitySelected('sm')}
         />
       </div>
       <style jsx>{`

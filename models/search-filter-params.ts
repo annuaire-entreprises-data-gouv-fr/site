@@ -12,6 +12,7 @@ export interface IParams {
   fn?: string;
   isEmpty?: boolean;
   label?: string;
+  quality?: string;
   n?: string;
   naf?: string;
   nature_juridique?: string;
@@ -34,6 +35,7 @@ class SearchFilterParams {
       etat = '',
       fn = '',
       label = '',
+      quality = '',
       n = '',
       naf = '',
       nature_juridique = '',
@@ -59,6 +61,7 @@ class SearchFilterParams {
       etat,
       fn,
       label,
+      quality,
       n,
       naf,
       nature_juridique,
@@ -84,14 +87,14 @@ class SearchFilterParams {
       est_rge: this.params.label === 'rge',
       est_bio: this.params.label === 'bio',
       egapro_renseignee: this.params.label === 'egapro',
-      est_ess: this.params.label === 'ess',
+      est_ess: this.params.quality === 'ess',
       est_organisme_formation: this.params.label === 'of',
       est_qualiopi: this.params.label === 'qualiopi',
       est_entrepreneur_spectacle: this.params.label === 'esv',
       est_association: this.params.type === 'asso',
       est_collectivite_territoriale: this.params.type === 'ct',
       est_service_public: this.params.type === 'sp',
-      est_societe_mission: this.params.label === 'sm',
+      est_societe_mission: this.params.quality === 'sm',
       est_entrepreneur_individuel: this.params.type === 'ei',
       code_postal,
       code_commune,
@@ -146,7 +149,7 @@ class SearchFilterParams {
       structureFilter: {
         icon: 'building',
         label: '',
-        excludeParams: ['type', 'label'],
+        excludeParams: ['type', 'label', 'quality'],
       },
       localisationFilter: {
         icon: 'mapPin',
@@ -203,13 +206,13 @@ class SearchFilterParams {
     }
 
     const structureLabels = {
-      ess: 'Label : ESS',
+      ess: 'Qualité : ESS',
       rge: 'Label : RGE',
       esv: 'Label : Entrepreneur de spectacle vivant',
       bio: 'Label : Professionnels du bio',
       egapro: 'Label : Égalité professionnelle',
       qualiopi: 'Label : Qualiopi',
-      sm: 'Label : Société à mission',
+      sm: 'Qualité : Société à mission',
       of: 'Label : Organisme de formation',
       ei: 'Type : Entreprise Individuelle ',
       ct: 'Type : Collectivité territoriale ',
@@ -222,13 +225,25 @@ class SearchFilterParams {
         //@ts-ignore
         structureLabels[this.params.type] || 'filtre sur le type';
     }
-    if (this.params.label && this.params.type) {
-      f.structureFilter.label += ' + ';
-    }
+
     if (this.params.label) {
+      if (f.structureFilter.label) {
+        f.structureFilter.label += ' + ';
+      }
+
       f.structureFilter.label +=
         //@ts-ignore
         structureLabels[this.params.label] || 'filtre sur le label';
+    }
+
+    if (this.params.quality) {
+      if (f.structureFilter.label) {
+        f.structureFilter.label += ' + ';
+      }
+
+      f.structureFilter.label +=
+        //@ts-ignore
+        structureLabels[this.params.quality] || 'filtre sur la qualité';
     }
 
     if (this.params.cp_dep_label) {

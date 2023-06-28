@@ -10,16 +10,13 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
   const sources = [];
   const {
     estEntrepreneurSpectacle,
-    estEss,
     estBio,
     egaproRenseignee,
     estOrganismeFormation,
-    estSocieteMission,
     estQualiopi,
     estRge,
   } = uniteLegale.complements;
   if (estEntrepreneurSpectacle) sources.push(EAdministration.MC);
-  if (estEss || estSocieteMission) sources.push(EAdministration.INSEE);
   if (estBio) sources.push(EAdministration.AGENCE_BIO);
   if (egaproRenseignee || estOrganismeFormation || estQualiopi)
     sources.push(EAdministration.MTPEI);
@@ -34,13 +31,11 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
   const {
     estEntrepreneurSpectacle,
     statutEntrepreneurSpectacle,
-    estEss,
     estRge,
     estOrganismeFormation,
     estQualiopi,
     estBio,
     egaproRenseignee,
-    estSocieteMission,
   } = uniteLegale.complements;
 
   return (
@@ -63,16 +58,6 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       {egaproRenseignee && (
         <InformationTooltip label="Cette structure a renseigné ses déclarations d’égalité entre les femmes et les hommes">
           <LabelAndCertificateBadge label="Égalité professionnelle" />
-        </InformationTooltip>
-      )}
-      {estEss && (
-        <InformationTooltip label="Cette structure appartient au champ de l’Economie Sociale et Solidaire">
-          <LabelAndCertificateBadge label="ESS - Entreprise Sociale et Solidaire" />
-        </InformationTooltip>
-      )}
-      {estSocieteMission && (
-        <InformationTooltip label="Cette structure est une société à mission">
-          <LabelAndCertificateBadge label="Société à mission" />
         </InformationTooltip>
       )}
       {estRge && (
