@@ -14,9 +14,9 @@ export type IArticle = {
 
 export const faqTargets = {
   agent: 'Agent public',
-  dirigeant: 'Dirigeant(e) d’entreprise ou d’association',
+  entreprise: 'Dirigeant(e) ou salarié(e) d’entreprise',
   independant: 'Indépendant(e)',
-  salarie: 'Salarié(e) d’entreprise ou d’association',
+  association: 'Dirigeant(e) ou salarié(e) d’association',
   particulier: 'Particulier',
   tous: 'Autre',
 };

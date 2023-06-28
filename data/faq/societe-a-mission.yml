@@ -2,7 +2,7 @@ administrations:
   - insee
 targets:
   - agent
-  - dirigeant
+  - entreprise
 title: Qu'est-ce qu'une société à mission ?
 seo:
   description: Définition du concept de société à mission et comment devenir une société à mission

@@ -16,7 +16,7 @@ administrations:
 target:
   - agent
   - independant
-  - dirigeant
+  - entreprise
   - particulier
 title: 'Entreprise non-diffusible : définition'
 seo:

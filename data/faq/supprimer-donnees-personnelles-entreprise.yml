@@ -15,7 +15,7 @@ administrations:
   - insee
   - inpi
 targets:
-  - dirigeant
+  - entreprise
   - independant
   - particulier
 title: Comment supprimer les données personnelles de mon entreprise ?

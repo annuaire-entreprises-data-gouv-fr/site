@@ -14,10 +14,10 @@
 administrations:
   - inpi
 targets:
-  - salarie
-  - dirigeant
-  - independant
+  - entreprise
   - agent
+  - independant
+  - particulier
 title: Le justificatif d’immatriculation au RNE d’une entreprise est introuvable
 seo:
   description: Toutes les entreprises doivent être immatriculées au RNE et posséder un justificatif d'immatriculation

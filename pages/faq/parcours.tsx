@@ -74,8 +74,7 @@ const Question: React.FC<IProps> = ({
     case QuestionType.CONTACT:
       return (
         <Answer>
-          Vous avez sélectionné{' '}
-          <b>“je ne trouve pas la réponse à ma question”</b>.
+          <b>Je ne trouve pas la réponse à ma question</b>.
           {userType === 'independant' && (
             <p>
               Si vous possédez une <b>entreprise individuelle</b> dont vous
@@ -86,19 +85,10 @@ const Question: React.FC<IProps> = ({
               .
             </p>
           )}
-          {userType === 'dirigeant' ? (
-            <p>
-              Si vous êtes dirigeant(e) d’une société et que vous souhaitez{' '}
-              <b>cacher ou afficher</b> vos informations personnelles, ou si
-              vous avez une autre question à laquelle cette FAQ n’a pas répondu,
-              vous pouvez nous contacter :
-            </p>
-          ) : (
-            <p>
-              Si vous avez une autre question à laquelle cette FAQ n’a pas
-              répondu, vous pouvez nous contacter :
-            </p>
-          )}
+          <p>
+            Si vous avez une autre question à laquelle cette FAQ n’a pas
+            répondu, vous pouvez nous contacter :
+          </p>
           <div className="layout-center">
             <ButtonLink to={constants.links.mailto}>
               Écrivez-nous à {constants.links.mail}
@@ -198,8 +188,11 @@ const Question: React.FC<IProps> = ({
             values={[
               {
                 onClick: () => setQuestionType(QuestionType.MODIFICATION),
-                label:
-                  'Comment modifier les informations d’une entreprise, d’une association ou d’un service public ?',
+                label: `Comment modifier les informations ${
+                  userType === 'agent'
+                    ? 'd’une entreprise, association ou service public'
+                    : 'de mon entreprise'
+                } ?`,
               },
               ...questions.map(({ title, slug }) => {
                 return {

@@ -15,17 +15,21 @@ administrations:
   - insee
   - inpi
 targets:
-  - salarie
-  - dirigeant
+  - entreprise
   - independant
+  - association
 title: Comment modifier l’adresse de mon entreprise ou association ?
 seo:
   description: Modifiez les données de votre entreprise sur le guichet unique tenu par l’INPI
 body: |
-  Vous pouvez modifier votre adresse sur le guichet unique pour les déclarations de création et modification d'entreprise.
+  Si la structure dont vous souhaitez modifier l’adresse est une entreprise, son/sa dirigeant(e) peut modifier l’adresse sur [le guichet unique pour les déclarations de création et modification d'entreprise](https://www.inpi.fr/formalites-entreprises).
+
+  Si la structure est une association, la démarche se fait sur [le Compte Asso](https://lecompteasso.associations.gouv.fr/).
 more:
   - label: Pourquoi mon adresse personnelle apparait-elle sur ce site ?
     href: /faq/adresse-personnelle
+  - label: ⇢ Formalité de modification d’adresse d’une association
+    href: https://lecompteasso.associations.gouv.fr/
 cta:
-  label: ⇢ Modifier son adresse
+  label: ⇢ Formalité de modification d’adresse d’une entreprise
   to: https://formalites.entreprises.gouv.fr/
