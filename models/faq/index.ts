@@ -1,7 +1,7 @@
 export type IArticle = {
   slug: string;
   administrations: string[];
-  targets: string[];
+  faqTargets: EFAQTargets[];
   title: string;
   seo: {
     description: string;
@@ -12,14 +12,13 @@ export type IArticle = {
   more: { label: string; href: string }[];
 };
 
-export const faqTargets = {
-  agent: 'Agent public',
-  entreprise: 'Dirigeant(e) ou salarié(e) d’entreprise',
-  independant: 'Indépendant(e)',
-  association: 'Dirigeant(e) ou salarié(e) d’association',
-  particulier: 'Particulier',
-  tous: 'Autre',
-};
+export enum EFAQTargets {
+  agent = 'Agent public',
+  entreprise = 'Dirigeant(e) ou salarié(e) d’entreprise',
+  independant = 'Indépendant(e)',
+  association = 'Dirigeant(e) ou salarié(e) d’association',
+  particulier = 'Particulier',
+}
 
 const loadAllArticles = () => {
   const articles = [] as IArticle[];
@@ -47,16 +46,26 @@ const loadAllArticles = () => {
 export const loadAllFaqArticlesByTarget = () => {
   const articlesByTargets: { [key: string]: IArticle[] } = {};
 
+  const validTargets = Object.keys(EFAQTargets);
+
   allFaqArticles.forEach((article) => {
-    const targets = [...(article.targets || []), 'tous'];
-    targets.forEach((target) => {
-      if (Object.keys(faqTargets).indexOf(target) === -1) {
+    article.faqTargets.forEach((target) => {
+      if ([...validTargets, 'all', 'none'].indexOf(target) === -1) {
         throw new Error(`${target} is not a valid target`);
       }
-      articlesByTargets[target] = [
-        ...(articlesByTargets[target] || []),
-        article,
-      ];
+      if (target.toString() === 'all') {
+        validTargets.forEach((validTarget) => {
+          articlesByTargets[validTarget] = [
+            ...(articlesByTargets[validTarget] || []),
+            article,
+          ];
+        });
+      } else {
+        articlesByTargets[target] = [
+          ...(articlesByTargets[target] || []),
+          article,
+        ];
+      }
     });
   });
 

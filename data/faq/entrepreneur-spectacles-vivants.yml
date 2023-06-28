@@ -13,7 +13,8 @@
 #     href: url
 administrations:
   - mc
-targets: # all
+faqTargets:
+  - none
 title: Qu’est ce que le label « Entrepreneur de spectacles vivants » ?
 seo:
   description: “Entrepreneur de spectacles vivants” désigne toute structure (entrepreneur individuel, particulier-employeur, société, association, commune) qui exerce une activité d'exploitation de lieux de spectacles, de production ou de diffusion de spectacles.

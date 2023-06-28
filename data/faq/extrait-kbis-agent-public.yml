@@ -13,7 +13,7 @@
 #     href: url
 administrations:
   - inpi
-targets:
+faqTargets:
   - agent
 title: Je suis un agent public et je cherche les données présentes dans un extrait KBIS/D1
 seo:

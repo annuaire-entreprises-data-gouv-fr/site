@@ -13,7 +13,8 @@
 #     href: url
 administrations:
   - mtpei
-targets: # no targets
+faqTargets:
+  - none
 title: 'Qu’est-ce qu’Egapro : l’Index d’égalité professionnelle entre les femmes et les hommes ?'
 seo:
   description: L’Index Egapro permet de mesurer l’égalité professionnelle entre les femmes et les hommes dans les entreprises de plus de 50 salariés. Il est construit à partir d’indicateurs permettant de mesurer les écarts de rémunération entre les sexes.

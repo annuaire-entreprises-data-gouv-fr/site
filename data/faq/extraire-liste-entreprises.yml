@@ -13,7 +13,7 @@
 #     href: url
 administrations:
   - insee
-targets:
+faqTargets:
   - agent
   - particulier
 title: Extraire une liste d’entreprises, d’associations ou de services publics

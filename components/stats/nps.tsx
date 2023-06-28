@@ -45,7 +45,6 @@ export const NpsStats: React.FC<{
     { label: 'Dirigeant', color: constants.chartColors[1] },
     { label: 'Salarié', color: constants.chartColors[7] },
     { label: 'Indépendant', color: `${constants.chartColors[1]}99` },
-    { label: 'Association', color: constants.chartColors[4] },
     { label: 'Particulier', color: constants.chartColors[5] },
     { label: 'Autre', color: constants.chartColors[3] },
   ];

@@ -70,32 +70,25 @@ const loadMonitoringIds = () =>
 
 export const administrationsMetaData: IAdministrationsMetaData = loadMetadata();
 
-export const allDataKeyword = Object.values(administrationsMetaData).flatMap(
+export const allData = Object.values(administrationsMetaData).flatMap(
   ({ dataSources, contact, site, long, short }) => {
-    return dataSources.flatMap(
-      ({
-        keywords = null,
-        label,
-        datagouvLink = '',
-        modifyDataSourceLink = '',
-      }) => {
-        if (!keywords) {
-          return [];
-        }
-        return keywords.split(',').map((kw) => {
+    return dataSources.flatMap((datasource) => {
+      return (datasource.data || []).map(
+        ({ label, form = '', targets = [] }) => {
           return {
-            label: kw,
-            dataSource: label,
-            datagouvLink,
-            modifyDataSourceLink,
+            label: label,
+            dataSource: datasource.label,
+            datagouvLink: datasource.datagouvLink,
+            targets,
+            form,
             contact,
             site,
             long,
             short,
           };
-        });
-      }
-    );
+        }
+      );
+    });
   }
 );
 

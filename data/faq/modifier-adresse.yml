@@ -14,7 +14,7 @@
 administrations:
   - insee
   - inpi
-targets:
+faqTargets:
   - entreprise
   - independant
   - association

@@ -14,7 +14,8 @@
 administrations:
   - dinum
   - search
-targets: # all
+faqTargets:
+  - all
 title: Pourquoi je ne retrouve pas une entreprise dans les résultats de recherche ?
 seo:
   description: Il existe plusieurs raisons pour lesquelles une entreprise peut ne pas apparaitre dans les résultats de recherche...

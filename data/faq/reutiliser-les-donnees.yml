@@ -13,7 +13,8 @@
 #     href: url
 administrations:
   - all
-targets:
+faqTargets:
+  - all
 title: Comment puis-je utiliser ces données dans mon site internet ?
 seo:
   description: Toutes les données présentées sur le site sont publiées en open-data et lbrement réutilisables.

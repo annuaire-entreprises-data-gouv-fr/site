@@ -13,7 +13,8 @@
 #     href: url
 administrations:
   - insee
-targets: # all
+faqTargets:
+  - none
 title: Qu’est ce que l’Economie Sociale et Solidaire ?
 seo:
   description: L’Economie Sociale et Solidaire (ESS) regroupe les associations, fondations, coopératives, mutuelles et entreprises de l’ESS

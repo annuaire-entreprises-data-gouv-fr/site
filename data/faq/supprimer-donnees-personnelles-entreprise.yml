@@ -14,7 +14,7 @@
 administrations:
   - insee
   - inpi
-targets:
+faqTargets:
   - entreprise
   - independant
   - particulier
@@ -22,11 +22,11 @@ title: Comment supprimer les données personnelles de mon entreprise ?
 seo:
   description: Les données d’une entreprise sont publiques mais une personne physique peut s’oppposer à ce qu’un site internet les publie.
 body: |
-  En tant que dirigeant(e) d’entreprise, les données publiques de votre entreprise peuvent contenir des informations personnelles accessibles sur internet.
+  En tant que dirigeant(e) d’entreprise, les données publiques de votre entreprise peuvent contenir des informations personnelles (nom et prénom) accessibles sur internet.
 
   Ces données sont publiques mais vous pouvez vous opposer à ce qu’un site internet les publie.
 
-  En particulier, pour disparaitre du site Annuaire des Entreprises vous pouvez [suivre notre procédure détaillée](/vie-privee).
+  Ainsi, pour faire disparaitre vos informations de dirigeant(e) du site Annuaire des Entreprises vous pouvez nous en faire la demande.
 
   ## Cas particulier des entreprises individuelles
 
@@ -38,6 +38,8 @@ more:
     href: https://statut-diffusion-sirene.insee.fr/
   - label: Pourquoi mon adresse personnelle apparaît-elle sur ce site ?
     href: /faq/adresse-personnelle
+  - label: Consulter notre politique de confidentialité
+    href: /vie-privee
 cta:
-  label: ⇢ Consulter notre politique de confidentialité
-  to: /vie-privee
+  label: Je souhaite cacher mes informations de dirigeant(e)
+  to: mailto:annuaire-entreprises@data.gouv.fr?subject=Je%20souhaite%20cacher%20mes%20informations%20de%20dirigeant(e)&body=Bonjour%2C%20%0A%0AJe%20souhaite%20cacher%20mes%20informations%20de%20dirigeant(e)%20de%20mon%20entreprise.%0A%0AVoici%20le%20num%C3%A9ro%20Siren%20%2F%20Siret%20concern%C3%A9%20%3A

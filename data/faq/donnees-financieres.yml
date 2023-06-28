@@ -1,7 +1,7 @@
 administrations:
   - inpi
   - urssaf
-targets:
+faqTargets:
   - agent
   - entreprise
 title: Comprendre les données financières publiques des sociétés

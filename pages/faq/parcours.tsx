@@ -11,12 +11,13 @@ import { Loader } from '#components-ui/loader';
 import { MultiChoice } from '#components-ui/multi-choice';
 import TextWrapper from '#components-ui/text-wrapper';
 import { LayoutSimple } from '#components/layouts/layout-simple';
-import { allDataKeyword } from '#models/administrations';
+import { allData } from '#models/administrations';
 import constants from '#models/constants';
-import { allFaqArticlesByTarget, faqTargets, IArticle } from '#models/faq';
+import { allFaqArticlesByTarget, EFAQTargets, IArticle } from '#models/faq';
+import { logEventInMatomo } from '#utils/analytics/matomo';
 import { NextPageWithLayout } from 'pages/_app';
 
-const enum QuestionType {
+const enum EQuestionType {
   LOADER = 'loader',
   NONE = 'none',
   MODIFICATION = 'modification',
@@ -25,8 +26,8 @@ const enum QuestionType {
 }
 
 type IProps = {
-  questionType: QuestionType;
-  setQuestionType: (type: QuestionType) => void;
+  questionType: EQuestionType;
+  setQuestionType: (type: EQuestionType) => void;
   userType: string;
   questions: IArticle[];
 };
@@ -58,20 +59,20 @@ const Question: React.FC<IProps> = ({
   userType,
   questions = [],
 }) => {
-  const [modifyKeyword, selectModifyKeyword] = useState<any>('');
+  const [dataToModify, selectDataToModify] = useState<any>('');
 
   useEffect(() => {
-    selectModifyKeyword('');
+    selectDataToModify('');
   }, [questionType]);
 
   switch (questionType) {
-    case QuestionType.LOADER:
+    case EQuestionType.LOADER:
       return (
         <div className="layout-center" style={{ height: '200px' }}>
           <Loader />
         </div>
       );
-    case QuestionType.CONTACT:
+    case EQuestionType.CONTACT:
       return (
         <Answer>
           <b>Je ne trouve pas la réponse à ma question</b>.
@@ -86,21 +87,24 @@ const Question: React.FC<IProps> = ({
             </p>
           )}
           <p>
-            Si vous avez une autre question à laquelle cette FAQ n’a pas
-            répondu, vous pouvez nous contacter :
+            Si vous avez une question à laquelle cette FAQ n’a pas répondu, vous
+            pouvez nous contacter :
           </p>
           <div className="layout-center">
-            <ButtonLink to={constants.links.mailto}>
+            <ButtonLink
+              to={`${constants.links.mailto}?subject=%5B${userType}%5D%20Je%20ne%20trouve%20pas%20la%20r%C3%A9ponse%20a%20ma%20question&body=Bonjour%2C%20%0A%0AVoici%20ma%20question%20%3A%0AVoici%20le%20num%C3%A9ro%20Siren%20%2F%20Siret%20concern%C3%A9%20%3A`}
+            >
               Écrivez-nous à {constants.links.mail}
             </ButtonLink>
           </div>
           <p>
             <b>NB :</b> si votre question concerne une structure en particulier,
-            pensez à nous indiquer le siren ou le siret dans le corps du mail.
+            pensez à nous indiquer le <b>siren ou le siret</b> dans le corps du
+            mail.
           </p>
         </Answer>
       );
-    case QuestionType.MODIFICATION:
+    case EQuestionType.MODIFICATION:
       return (
         <>
           <p>
@@ -110,8 +114,8 @@ const Question: React.FC<IProps> = ({
             </b>
           </p>
           <p>
-            Si la modification concerne <b>l’affichage de donnée personnelle</b>{' '}
-            sur le site, consultez{' '}
+            Si la modification concerne{' '}
+            <b>l’affichage de donnée personnelles</b> sur le site, consultez{' '}
             <a href="/faq/supprimer-donnees-personnelles-entreprise">
               notre fiche dédiée
             </a>{' '}
@@ -135,39 +139,61 @@ const Question: React.FC<IProps> = ({
           </p>
           <MultiChoice
             idPrefix="modification"
-            values={allDataKeyword.map((dataKeyword) => {
-              return {
-                onClick: () => selectModifyKeyword(dataKeyword),
-                checked: dataKeyword.label === modifyKeyword.label,
-                label: dataKeyword.label,
-              };
-            })}
+            values={allData
+              .filter((data) => {
+                if (userType === 'agent') {
+                  return true;
+                } else {
+                  return (
+                    data.targets.length === 0 ||
+                    data.targets.indexOf(userType) > -1
+                  );
+                }
+              })
+              .map((data) => {
+                return {
+                  onClick: () => selectDataToModify(data),
+                  checked: data.label === dataToModify.label,
+                  label: data.label,
+                };
+              })}
           />
-          {modifyKeyword && (
+          {dataToModify && (
             <Answer>
               Comment modifier les informations suivantes ?
               <p>
-                “<b>{modifyKeyword.label}</b>”
+                “<b>{dataToModify.label}</b>”
               </p>
               <p>Ces informations proviennent de :</p>
               <ul>
                 <li>
                   Source de la donnée :{' '}
-                  <a href={modifyKeyword.datagouvLink}>
-                    {modifyKeyword.dataSource}
+                  <a href={dataToModify.datagouvLink}>
+                    {dataToModify.dataSource}
                   </a>
                 </li>
                 <li>
                   Service responsable :{' '}
-                  <a href={modifyKeyword.site}>{modifyKeyword.long}</a>.
+                  <a href={dataToModify.site}>{dataToModify.long}</a>.
                 </li>
               </ul>
-              {modifyKeyword.contact && (
+              {dataToModify.form ? (
+                <>
+                  <p>
+                    Cette administration propose une démarche en ligne&nbsp;:
+                  </p>
+                  <div className="layout-center">
+                    <ButtonLink to={dataToModify.form}>
+                      Accéder à la démarche en ligne
+                    </ButtonLink>
+                  </div>
+                </>
+              ) : (
                 <>
                   <br />
                   <div className="layout-center">
-                    <ButtonLink to={modifyKeyword.contact}>
-                      Contacter le service ({modifyKeyword.short})
+                    <ButtonLink to={dataToModify.contact}>
+                      Contacter le service ({dataToModify.short})
                     </ButtonLink>
                   </div>
                 </>
@@ -176,8 +202,17 @@ const Question: React.FC<IProps> = ({
           )}
         </>
       );
-    case QuestionType.ALL:
+    case EQuestionType.ALL:
     default:
+      let modifyText = ' d’une entreprise, association ou service public';
+
+      if (userType === 'entreprise' || userType === 'independant') {
+        modifyText = ' de mon entreprise';
+      }
+
+      if (userType === 'association') {
+        modifyText = ' de mon association';
+      }
       return (
         <>
           <p>
@@ -187,12 +222,8 @@ const Question: React.FC<IProps> = ({
             idPrefix="question-type"
             values={[
               {
-                onClick: () => setQuestionType(QuestionType.MODIFICATION),
-                label: `Comment modifier les informations ${
-                  userType === 'agent'
-                    ? 'd’une entreprise, association ou service public'
-                    : 'de mon entreprise'
-                } ?`,
+                onClick: () => setQuestionType(EQuestionType.MODIFICATION),
+                label: `Comment modifier les informations ${modifyText} ?`,
               },
               ...questions.map(({ title, slug }) => {
                 return {
@@ -202,7 +233,7 @@ const Question: React.FC<IProps> = ({
                 };
               }),
               {
-                onClick: () => setQuestionType(QuestionType.CONTACT),
+                onClick: () => setQuestionType(EQuestionType.CONTACT),
                 label: 'Je ne trouve pas la réponse à ma question',
               },
             ]}
@@ -217,8 +248,8 @@ const Parcours: NextPageWithLayout<{}> = () => {
   const scrollRef = useRef(null);
 
   const [userType, setUserType] = useState('');
-  const [questionType, setQuestionType] = useState<QuestionType>(
-    QuestionType.NONE
+  const [questionType, setQuestionType] = useState<EQuestionType>(
+    EQuestionType.NONE
   );
 
   const scroll = () => {
@@ -228,27 +259,29 @@ const Parcours: NextPageWithLayout<{}> = () => {
     }
   };
 
-  const updateQuestion = (q: QuestionType) => {
-    setQuestionType(QuestionType.LOADER);
-    scroll();
-    setTimeout(() => setQuestionType(q), 400);
+  const updateQuestion = (q: EQuestionType) => {
+    setQuestionType(EQuestionType.LOADER);
+
+    setTimeout(() => {
+      setQuestionType(q);
+      scroll();
+    }, 300);
   };
 
   return (
     <>
       <h1 ref={scrollRef}>Bonjour, comment pouvons-nous vous aider ?</h1>
-
       <p>Pour commencer, faisons connaissance :</p>
       <b>Qui êtes-vous ?</b>
       <MultiChoice
         idPrefix="user-type"
-        values={Object.keys(faqTargets).map((key) => {
+        values={Object.keys(EFAQTargets).map((key) => {
           return {
             //@ts-ignore
-            label: faqTargets[key],
+            label: EFAQTargets[key],
             onClick: () => {
               setUserType(key);
-              updateQuestion(QuestionType.NONE);
+              updateQuestion(EQuestionType.NONE);
             },
             checked: userType === key,
           };
@@ -286,7 +319,7 @@ Parcours.getLayout = function getLayout(
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       metadata: { useReact: true },

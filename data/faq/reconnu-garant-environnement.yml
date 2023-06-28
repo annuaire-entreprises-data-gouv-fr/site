@@ -13,7 +13,8 @@
 #     href: url
 administrations:
   - ademe
-targets: # no targets
+faqTargets:
+  - none
 title: Qu’est ce qu’une entreprise RGE - Reconnu Garant de l’Environnement ?
 seo:
   description: La mention « reconnu garant de l'environnement » (ou RGE)** est accordée par les pouvoirs publics aux professionnels du bâtiment spécialisés dans les travaux de rénovation énergétique.

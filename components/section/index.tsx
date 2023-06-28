@@ -54,7 +54,10 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         {dataSources.length > 0 && (
           <div className="administration-page-link">
             <PrintNever>
-              <a href={faqLink} className="no-style-link question-faq-link">
+              <a
+                href="/faq/parcours"
+                className="no-style-link question-faq-link"
+              >
                 <Icon size={14} slug="questionnaire">
                   <u>Une erreur ou une question sur ces données ?</u>
                 </Icon>

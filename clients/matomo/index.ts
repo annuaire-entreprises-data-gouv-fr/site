@@ -90,6 +90,10 @@ const aggregateEvents = (
         // rewrite old label to "agent public"
         userType = 'Dirigeant';
       }
+      if (userType === 'Association') {
+        // rewrite old label to "agent public"
+        userType = 'Salarié';
+      }
 
       // migration from 10-based nps to 5 based on 2022-01-30, ended on 2022-02-15
       const is5Based =

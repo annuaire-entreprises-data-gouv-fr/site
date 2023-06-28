@@ -14,7 +14,7 @@
 administrations:
   - mi
   - insee
-targets:
+faqTargets:
   - agent
   - association
 title: Pourquoi je ne retrouve pas une association dans les résultats de recherche ?

@@ -1,20 +1,3 @@
-# slug: le nom du fichier sans le .yml
-# short: le sigle de l'administration ex Insee
-# site: le site officiel
-# logoType: paysage | portrait selon le sens du logo
-# long: ex Institut national de la statistique et des études économiques (Insee)
-# contact: mail ou lien
-# apiMonitors: la liste des api
-#   - apigouvLink: lien apigouv (facultatif)
-#     apiSlug: un slug d'api unique
-#     apiName: le nom
-#     id: l'id du monitoring
-# dataSources: la liste des jdd
-#   - label: nom
-#     apiSlug: slug de l'API qui donne accès au jdd si il y en a une
-#     datagouvLink: lien vers le jdd datagouv si il y en a un
-#     keywords: liste des principales données a trouver dans le jdd séparées par une virgule
-# description: une description de l'administration, sa mission, ses principales données
 slug: mi
 short: MI
 long: Ministère de l’Intérieur (MI)
@@ -28,11 +11,21 @@ dataSources:
   - label: Répertoire National des Associations
     apiSlug: rna
     datagouvLink: https://www.data.gouv.fr/fr/datasets/repertoire-national-des-associations/
-    modifyDataSourceLink: https://lecompteasso.associations.gouv.fr/
-    keywords: Informations administratives d’une association (Nom - Adresse - NAF - Forme juridique), Données financières des Associations
+    data:
+      - label: Dénomination, NAF, Forme juridique et Adresse d’une association
+        form: https://lecompteasso.associations.gouv.fr/
+        targets:
+          - association
+      - label: Données financières des Associations
+        form: https://lecompteasso.associations.gouv.fr/
+        targets:
+          - association
   - label: Répertoire National des Élus
     apiSlug: recherche-entreprise
     datagouvLink: https://www.data.gouv.fr/fr/datasets/repertoire-national-des-elus-1/
-    keywords: Élus d’une collectivité territoriale
+    data:
+      - label: Élus d’une collectivité territoriale
+        targets:
+          - agent
 description: |
   Le ministère de l’interieur publie toutes les données des associations enregistrées dans le [Répertoire National des Associations (RNA). Le RNA remplace depuis 2010 le répertoire Waldec (Web des associations librement déclarées).
