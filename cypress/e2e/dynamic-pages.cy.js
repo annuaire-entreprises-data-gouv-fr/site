@@ -17,7 +17,7 @@ describe(`Dirigeants and élus pages`, () => {
 describe(`Labels and certificates`, () => {
   it('RGE', () => {
     cy.visit(`/entreprise/${resultSolutionEnergie.results[0].siren}`);
-    cy.contains('Qualités, labels et certificats').should('be.visible');
+    cy.contains('Labels et certificats').should('be.visible');
     cy.contains('RGE - Reconnu Garant de l’Environnement').should('be.visible');
   });
 
@@ -30,6 +30,6 @@ describe(`Labels and certificates`, () => {
 
   it('No certificates', () => {
     cy.visit(`/entreprise/880878145`);
-    cy.contains('Label(s) et certificat(s)').should('have.length', 0);
+    cy.contains('abels et certificats').should('have.length', 0);
   });
 });

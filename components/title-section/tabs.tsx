@@ -83,8 +83,8 @@ export const Tabs: React.FC<{
     {
       ficheType: FICHE.CERTIFICATS,
       label: `${
-        checkHasQuality(uniteLegale) ? 'Qualité(s), l' : 'L'
-      }abel(s) et certificat(s)`,
+        checkHasQuality(uniteLegale) ? 'Qualités, l' : 'L'
+      }abels et certificats`,
       pathPrefix: '/labels-certificats/',
       noFollow: false,
       shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),

@@ -68,7 +68,7 @@ const UniteLegaleSection: React.FC<{
           [
             `${
               checkHasQuality(uniteLegale) ? 'Qualité(s), l' : 'L'
-            }abel(s) et certificat(s)`,
+            }abels et certificats`,
             <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />,
           ],
         ]
