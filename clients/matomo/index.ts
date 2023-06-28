@@ -82,16 +82,15 @@ const aggregateEvents = (
       const monthLabel = getMonthLabelFromDate(date);
 
       let userType = responses[1].replace('type=', '');
+
+      // rewrite legacy labels
       if (userType === 'Administration publique') {
-        // rewrite old label to "agent public"
         userType = 'Agent public';
       }
       if (userType === 'Entreprise privée') {
-        // rewrite old label to "agent public"
         userType = 'Dirigeant';
       }
       if (userType === 'Association') {
-        // rewrite old label to "agent public"
         userType = 'Salarié';
       }
 
