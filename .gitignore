@@ -53,6 +53,7 @@ public/dist
 public/downloads
 public/assets
 public/manifest.json
+public/authorized-agents.txt
 
 # direnv
 .nvmrc
@@ -61,3 +62,4 @@ public/manifest.json
 # cypress
 cypress/videos
 cypress/screenshots
+
