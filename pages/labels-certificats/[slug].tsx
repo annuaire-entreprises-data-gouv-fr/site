@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
@@ -34,6 +35,16 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   organismesDeFormation,
   metadata: { session },
 }) => {
+  const {
+    estEss,
+    estRge,
+    estSocieteMission,
+    estEntrepreneurSpectacle,
+    estOrganismeFormation,
+    egaproRenseignee,
+    estBio,
+  } = uniteLegale.complements;
+
   return (
     <>
       <Meta
@@ -54,33 +65,33 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
               qualité.
             </p>
           )}
-        {uniteLegale.complements.estEss && <CertificationESSSection />}
-        {uniteLegale.complements.estSocieteMission && (
-          <CertificationSocieteMission />
-        )}
-        {uniteLegale.complements.estRge && (
+
+        {estEss && <CertificationESSSection />}
+        {estSocieteMission && <CertificationSocieteMission />}
+
+        {checkHasLabelsAndCertificates(uniteLegale) &&
+          checkHasQualities(uniteLegale) && <HorizontalSeparator />}
+        {estRge && (
           <CertificationsRGESection
             uniteLegale={uniteLegale}
             certificationsRGE={rge}
             session={session}
           />
         )}
-        {uniteLegale.complements.estOrganismeFormation && (
+        {estOrganismeFormation && (
           <OrganismeDeFormationSection
             organismesDeFormation={organismesDeFormation}
             uniteLegale={uniteLegale}
           />
         )}
-        {uniteLegale.complements.egaproRenseignee && (
-          <EgaproSection egapro={egapro} />
-        )}
-        {uniteLegale.complements.estEntrepreneurSpectacle && (
+        {egaproRenseignee && <EgaproSection egapro={egapro} />}
+        {estEntrepreneurSpectacle && (
           <CertificationsEntrepreneurSpectaclesSection
             entrepreneurSpectacles={entrepreneurSpectacles}
           />
         )}
         {/* Can be quite long  */}
-        {uniteLegale.complements.estBio && (
+        {estBio && (
           <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
         )}
       </div>

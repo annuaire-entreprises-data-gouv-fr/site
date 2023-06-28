@@ -22,7 +22,7 @@ footerLabel: Entreprises de l’ESS (Economie Sociale et Solidaire)
 published: true
 description: Retrouvez rapidement les associations et entreprises de l'Économie Sociale et Solidaire (ESS) en France.
 filter:
-  name: label
+  name: quality
   value: ess
 seo:
   title: Consultez le moteur de recherche de l’ESS
