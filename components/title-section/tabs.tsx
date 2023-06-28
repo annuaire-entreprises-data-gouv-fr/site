@@ -1,5 +1,8 @@
 import { PrintNever } from '#components-ui/print-visibility';
-import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
+import {
+  checkHasLabelsAndCertificates,
+  checkHasQuality,
+} from '#components/labels-and-certificates-badges-section';
 import constants from '#models/constants';
 import {
   IUniteLegale,
@@ -79,11 +82,13 @@ export const Tabs: React.FC<{
     },
     {
       ficheType: FICHE.CERTIFICATS,
-      label: 'Labels et certificats',
+      label: `${
+        checkHasQuality(uniteLegale) ? 'Qualité(s), l' : 'L'
+      }abel(s) et certificat(s)`,
       pathPrefix: '/labels-certificats/',
       noFollow: false,
       shouldDisplay: checkHasLabelsAndCertificates(uniteLegale),
-      width: '110px',
+      width: checkHasQuality(uniteLegale) ? '200px' : '110px',
     },
     {
       ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,

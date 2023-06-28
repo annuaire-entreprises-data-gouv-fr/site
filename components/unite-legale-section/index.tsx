@@ -15,6 +15,7 @@ import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectif
 import { ISession } from '#utils/session';
 import {
   checkHasLabelsAndCertificates,
+  checkHasQuality,
   LabelsAndCertificatesBadgesSection,
   labelsAndCertificatesSources,
 } from '../labels-and-certificates-badges-section';
@@ -65,7 +66,9 @@ const UniteLegaleSection: React.FC<{
       ? [
           ['', <br />],
           [
-            'Label(s) et certificat(s)',
+            `${
+              checkHasQuality(uniteLegale) ? 'Qualité(s), l' : 'L'
+            }abel(s) et certificat(s)`,
             <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />,
           ],
         ]

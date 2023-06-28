@@ -59,7 +59,7 @@ export const FilterStructure: React.FC<{
         />
       </div>
       <SimpleSeparator />
-      <label>Labels et certificats :</label>
+      <label>Qualités, labels et certificats :</label>
       <input
         name="label"
         value={labelSelected}

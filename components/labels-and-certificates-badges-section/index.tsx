@@ -3,6 +3,9 @@ import { EAdministration } from '#models/administrations';
 import InformationTooltip from '../../components-ui/information-tooltip';
 import { IUniteLegale } from '../../models';
 
+export const checkHasQuality = (uniteLegale: IUniteLegale) =>
+  uniteLegale.complements.estEss || uniteLegale.complements.estSocieteMission;
+
 export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
   labelsAndCertificatesSources(uniteLegale).length > 0;
 
