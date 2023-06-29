@@ -13,15 +13,6 @@ type Brand<K, T> = K & { __brand: T };
 export type Siren = Brand<string, 'Siren'>;
 export type Siret = Brand<string, 'Siren'>;
 
-function matchAllPolyfill(string: string, regex: RegExp): RegExpMatchArray[] {
-  const matches: RegExpMatchArray[] = [];
-  string.replace(regex, (...args: any[]) => {
-    const matchArray = args.slice(0, -2) as RegExpMatchArray;
-    matches.push(matchArray);
-    return args[0];
-  });
-  return matches;
-}
 export const isSiren = (slug: string): slug is Siren => {
   if (!hasSirenFormat(slug) || !isLuhnValid(slug)) {
     return false;
@@ -128,10 +119,6 @@ export const extractSirenOrSiretSlugFromUrl = (slug: string) => {
   }
   // match a string that ends with either 9 digit or 14 like a siren or a siret
   // we dont use a $ end match as there might be " or %22 at the end
-  const matches = matchAllPolyfill(slug, /\d{14}|\d{9}/g);
-  const m = Array.from(matches, (m) => m[0]);
-  if (m && m.length > 0) {
-    return m[m.length - 1]; // last occurence of match
-  }
-  return '';
+  const match = slug.match(/\d{14}|\d{9}/g);
+  return match ? match[match.length - 1] : '';
 };
