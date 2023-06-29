@@ -48,6 +48,16 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
 
   return (
     <>
+      {estEss && (
+        <InformationTooltip label="Cette structure appartient au champ de l’Economie Sociale et Solidaire">
+          <LabelAndCertificateBadge label="ESS - Entreprise Sociale et Solidaire" />
+        </InformationTooltip>
+      )}
+      {estSocieteMission && (
+        <InformationTooltip label="Cette structure est une société à mission">
+          <LabelAndCertificateBadge label="Société à mission" />
+        </InformationTooltip>
+      )}
       {estOrganismeFormation &&
         (estQualiopi ? (
           <InformationTooltip label="Cette structure est déclarée en tant qu’organisme de formation et elle est certifiée Qualiopi">
@@ -66,16 +76,6 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       {egaproRenseignee && (
         <InformationTooltip label="Cette structure a renseigné ses déclarations d’égalité entre les femmes et les hommes">
           <LabelAndCertificateBadge label="Égalité professionnelle" />
-        </InformationTooltip>
-      )}
-      {estEss && (
-        <InformationTooltip label="Cette structure appartient au champ de l’Economie Sociale et Solidaire">
-          <LabelAndCertificateBadge label="ESS - Entreprise Sociale et Solidaire" />
-        </InformationTooltip>
-      )}
-      {estSocieteMission && (
-        <InformationTooltip label="Cette structure est une société à mission">
-          <LabelAndCertificateBadge label="Société à mission" />
         </InformationTooltip>
       )}
       {estRge && (
