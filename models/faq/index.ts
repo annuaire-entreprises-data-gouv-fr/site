@@ -13,13 +13,22 @@ export type IArticle = {
 };
 
 export enum EFAQTargets {
-  agent = 'Agent public',
-  entreprise = 'Dirigeant(e) ou salarié(e) d’entreprise',
-  independant = 'Indépendant(e)',
-  association = 'Dirigeant(e) ou salarié(e) d’association',
-  particulier = 'Particulier',
-  all = 'Autre',
+  AGENT = 'agent',
+  ENTREPRISE = 'entreprise',
+  INDEPENDANT = 'independant',
+  ASSOCIATION = 'association',
+  PARTICULIER = 'particulier',
+  ALL = 'all',
+  NONE = 'none',
 }
+
+export const FAQTargets = {
+  [EFAQTargets.AGENT]: 'Agent public',
+  [EFAQTargets.ENTREPRISE]: 'Dirigeant(e) ou salarié(e) d’entreprise',
+  [EFAQTargets.INDEPENDANT]: 'Indépendant(e)',
+  [EFAQTargets.ASSOCIATION]: 'Dirigeant(e) ou salarié(e) d’association',
+  [EFAQTargets.PARTICULIER]: 'Particulier',
+};
 
 const loadAllArticles = () => {
   const articles = [] as IArticle[];
@@ -47,27 +56,30 @@ const loadAllArticles = () => {
 export const loadAllFaqArticlesByTarget = () => {
   const articlesByTargets: { [key: string]: IArticle[] } = {};
 
-  const validTargets = Object.keys(EFAQTargets);
-
   allFaqArticles.forEach((article) => {
     article.faqTargets.forEach((target) => {
-      if ([...validTargets, 'none'].indexOf(target) === -1) {
+      if (Object.values(EFAQTargets).indexOf(target) === -1) {
         throw new Error(`${target} is not a valid target`);
       }
-      if (target.toString() === 'all') {
-        validTargets.forEach((validTarget) => {
+
+      if (target === EFAQTargets.ALL) {
+        Object.keys(FAQTargets).forEach((validTarget) => {
           articlesByTargets[validTarget] = [
             ...(articlesByTargets[validTarget] || []),
             article,
           ];
         });
+      } else {
+        articlesByTargets[target] = [
+          ...(articlesByTargets[target] || []),
+          article,
+        ];
       }
-
-      articlesByTargets[target] = [
-        ...(articlesByTargets[target] || []),
-        article,
-      ];
     });
+    articlesByTargets[EFAQTargets.ALL] = [
+      ...(articlesByTargets[EFAQTargets.ALL] || []),
+      article,
+    ];
   });
 
   return articlesByTargets;

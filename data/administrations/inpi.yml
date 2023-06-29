@@ -24,6 +24,7 @@ dataSources:
         form: https://entreprendre.service-public.fr/vosdroits/F24023
         targets:
           - entreprise
+          - independant
       - label: Société à mission
         form: https://www.economie.gouv.fr/entreprises/societe-mission
         targets:
@@ -36,5 +37,10 @@ dataSources:
         form: https://entreprendre.service-public.fr/vosdroits/F36703
         targets:
           - entreprise
+      - label: Informations contenues dans un extrait RNE
+        form: https://formalites.entreprises.gouv.fr/
+        targets:
+          - entreprise
+          - independant
 description: |
   L’INPI est l’Institut National de la Protection Intellectuelle. C’est un établissement public à caractère administratif,  qui relève du ministère de l’Économie.

@@ -14,7 +14,12 @@ import { LayoutSimple } from '#components/layouts/layout-simple';
 import MatomoEvent from '#components/matomo-event';
 import { allData } from '#models/administrations';
 import constants from '#models/constants';
-import { allFaqArticlesByTarget, EFAQTargets, IArticle } from '#models/faq';
+import {
+  allFaqArticlesByTarget,
+  EFAQTargets,
+  FAQTargets,
+  IArticle,
+} from '#models/faq';
 import { NextPageWithLayout } from 'pages/_app';
 
 enum EQuestionType {
@@ -141,7 +146,7 @@ const Question: React.FC<IProps> = ({
             idPrefix="modification"
             values={allData
               .filter((data) => {
-                if (userType === 'agent') {
+                if (userType === 'agent' || userType === 'all') {
                   return true;
                 } else {
                   return (
@@ -282,17 +287,18 @@ const Parcours: NextPageWithLayout<{
       <b>Qui êtes-vous ?</b>
       <MultiChoice
         idPrefix="user-type"
-        values={Object.keys(EFAQTargets).map((key) => {
-          return {
-            //@ts-ignore
-            label: EFAQTargets[key],
-            onClick: () => {
-              setUserType(key);
-              updateQuestion(EQuestionType.NONE);
-            },
-            checked: userType === key,
-          };
-        })}
+        values={[...Object.entries(FAQTargets), ['all', 'Autres']].map(
+          ([key, value]) => {
+            return {
+              label: value,
+              onClick: () => {
+                setUserType(key);
+                updateQuestion(EQuestionType.NONE);
+              },
+              checked: userType === key,
+            };
+          }
+        )}
       />
       {userType && (
         <Question

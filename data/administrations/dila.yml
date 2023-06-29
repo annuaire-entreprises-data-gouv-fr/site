@@ -21,6 +21,7 @@ dataSources:
       - label: Annonces du BODACC
         targets:
           - entreprise
+          - independant
   - label: Journal Officiel des Associations (JOAFE)
     apiSlug: joafe
     datagouvLink: https://www.data.gouv.fr/fr/datasets/associations-joafe/
