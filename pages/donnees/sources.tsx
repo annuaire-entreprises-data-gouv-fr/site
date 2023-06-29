@@ -51,7 +51,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
             <>
               <h2 id={slug}>{long}</h2>
               {dataSources.map(
-                ({ label, datagouvLink, keywords, apiSlug }, sourceIndex) => (
+                ({ label, datagouvLink, data, apiSlug }, sourceIndex) => (
                   <Section
                     id={`${slug}-${sourceIndex}`}
                     title={label}
@@ -61,9 +61,9 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
                       body={[
                         [
                           'Données',
-                          keywords
-                            .split(', ')
-                            .map((kw) => <Tag key={kw}>{kw}</Tag>),
+                          (data || []).map(({ label }) => (
+                            <Tag key={label}>{label}</Tag>
+                          )),
                         ],
                         [
                           'Accès au jeu de données complet',

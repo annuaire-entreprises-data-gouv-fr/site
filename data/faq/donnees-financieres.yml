@@ -1,9 +1,9 @@
 administrations:
   - inpi
   - urssaf
-targets:
+faqTargets:
   - agent
-  - dirigeant
+  - entreprise
 title: Comprendre les données financières publiques des sociétés
 seo:
   description: Quelles sont les données financières publiées par les sociétés en France ?

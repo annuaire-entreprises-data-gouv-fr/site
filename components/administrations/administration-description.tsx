@@ -30,10 +30,10 @@ const AdministrationDescription: React.FC<{
             <div>
               Données transmises :
               <ul>
-                {dataSources.map(({ keywords }) =>
-                  keywords.split(', ').map((kw) => (
-                    <li key={kw}>
-                      <a href={`/donnees/sources#${slug}`}>{kw}</a>
+                {dataSources.map(({ data = [] }) =>
+                  data.map(({ label }) => (
+                    <li key={label}>
+                      <a href={`/donnees/sources#${slug}`}>{label}</a>
                     </li>
                   ))
                 )}

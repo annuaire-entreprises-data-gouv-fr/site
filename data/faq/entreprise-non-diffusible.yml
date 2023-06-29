@@ -13,11 +13,8 @@
 #     href: url
 administrations:
   - insee
-target:
-  - agent
-  - independant
-  - dirigeant
-  - particulier
+faqTargets:
+  - none
 title: 'Entreprise non-diffusible : définition'
 seo:
   description: Certaines entreprises demandent à ne pas figurer sur les listes de diffusion publiques. On parle d’entreprises non-diffusibles auprès de l’Insee.

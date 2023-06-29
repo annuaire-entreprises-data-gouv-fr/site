@@ -13,7 +13,8 @@
 #     href: url
 administrations:
   - agence-bio
-targets: # no targets
+faqTargets:
+  - none
 title: 'Le label « Professionnel du Bio » : définition'
 seo:
   title: Que signifie le label « Professionnel du Bio » ?

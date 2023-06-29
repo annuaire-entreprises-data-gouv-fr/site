@@ -14,9 +14,9 @@
 administrations:
   - mi
   - insee
-targets:
+faqTargets:
   - agent
-  - dirigeant
+  - association
 title: Pourquoi je ne retrouve pas une association dans les résultats de recherche ?
 seo:
   description: Seules les associations qui possèdent un numéro SIREN et un numéro SIRET ont une fiche dans l'Annuaire des Entreprises.

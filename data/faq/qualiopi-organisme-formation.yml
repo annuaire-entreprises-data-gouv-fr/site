@@ -13,7 +13,8 @@
 #     href: url
 administrations:
   - mtpei
-targets: # no targets
+faqTargets:
+  - none
 title: Qu’est-ce que la certification Qualiopi - Organisme de formation ?
 seo:
   description: La certification Qualiopi permet d’attester de la qualité des formations dispensées à travers un Référentiel National de Qualité Qualiopi qui comporte 7 critères répartis en 32 indicateurs.

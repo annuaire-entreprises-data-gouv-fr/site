@@ -1,3 +1,4 @@
+import { EFAQTargets } from '#models/faq';
 import { EAdministration } from '.';
 
 export type IAdministrationsMetaData = {
@@ -17,7 +18,11 @@ export type IAdministrationMetaData = {
     label: string;
     datagouvLink: string;
     apiSlug: string;
-    keywords: string;
+    data?: {
+      label: string;
+      form?: string;
+      targets?: string[];
+    }[];
   }[];
 };
 

@@ -5,7 +5,6 @@ import {
   monCompteAuthenticate,
 } from '#clients/auth/mon-compte-pro/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
-import { logEventInMatomo } from '#utils/analytics/matomo';
 import { checkIsSuperAgent } from '#utils/helpers/is-super-agent';
 import logErrorInSentry from '#utils/sentry';
 import {

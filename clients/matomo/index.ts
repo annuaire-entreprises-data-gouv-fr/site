@@ -82,13 +82,16 @@ const aggregateEvents = (
       const monthLabel = getMonthLabelFromDate(date);
 
       let userType = responses[1].replace('type=', '');
+
+      // rewrite legacy labels
       if (userType === 'Administration publique') {
-        // rewrite old label to "agent public"
         userType = 'Agent public';
       }
       if (userType === 'Entreprise privée') {
-        // rewrite old label to "agent public"
         userType = 'Dirigeant';
+      }
+      if (userType === 'Association') {
+        userType = 'Salarié';
       }
 
       // migration from 10-based nps to 5 based on 2022-01-30, ended on 2022-02-15

@@ -13,9 +13,8 @@
 #     href: url
 administrations:
   - insee
-targets:
+faqTargets:
   - particulier
-  - dirigeant
   - independant
 title: Pourquoi mon adresse personnelle apparait-elle sur ce site ?
 seo:

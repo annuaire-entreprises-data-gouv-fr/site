@@ -1,7 +1,7 @@
 export type IArticle = {
   slug: string;
   administrations: string[];
-  targets: string[];
+  faqTargets: EFAQTargets[];
   title: string;
   seo: {
     description: string;
@@ -12,13 +12,22 @@ export type IArticle = {
   more: { label: string; href: string }[];
 };
 
-export const faqTargets = {
-  agent: 'Agent public',
-  dirigeant: 'Dirigeant(e) d’entreprise ou d’association',
-  independant: 'Indépendant(e)',
-  salarie: 'Salarié(e) d’entreprise ou d’association',
-  particulier: 'Particulier',
-  tous: 'Toutes les questions',
+export enum EFAQTargets {
+  AGENT = 'agent',
+  ENTREPRISE = 'entreprise',
+  INDEPENDANT = 'independant',
+  ASSOCIATION = 'association',
+  PARTICULIER = 'particulier',
+  ALL = 'all',
+  NONE = 'none',
+}
+
+export const FAQTargets = {
+  [EFAQTargets.AGENT]: 'Agent public',
+  [EFAQTargets.ENTREPRISE]: 'Dirigeant(e) ou salarié(e) d’entreprise',
+  [EFAQTargets.INDEPENDANT]: 'Indépendant(e)',
+  [EFAQTargets.ASSOCIATION]: 'Dirigeant(e) ou salarié(e) d’association',
+  [EFAQTargets.PARTICULIER]: 'Particulier',
 };
 
 const loadAllArticles = () => {
@@ -44,35 +53,45 @@ const loadAllArticles = () => {
   return articles;
 };
 
-export const getAllFaqArticles = () => {
-  return allArticles;
-};
-
-export const getAllFaqArticlesByTarget = () => {
+export const loadAllFaqArticlesByTarget = () => {
   const articlesByTargets: { [key: string]: IArticle[] } = {};
-  allArticles.forEach((article) => {
-    const targets = [...(article.targets || []), 'tous'];
-    targets.forEach((target) => {
-      if (Object.keys(faqTargets).indexOf(target) === -1) {
+
+  allFaqArticles.forEach((article) => {
+    article.faqTargets.forEach((target) => {
+      if (Object.values(EFAQTargets).indexOf(target) === -1) {
         throw new Error(`${target} is not a valid target`);
       }
-      articlesByTargets[target] = [
-        ...(articlesByTargets[target] || []),
-        article,
-      ];
+
+      if (target === EFAQTargets.ALL) {
+        Object.keys(FAQTargets).forEach((validTarget) => {
+          articlesByTargets[validTarget] = [
+            ...(articlesByTargets[validTarget] || []),
+            article,
+          ];
+        });
+      } else {
+        articlesByTargets[target] = [
+          ...(articlesByTargets[target] || []),
+          article,
+        ];
+      }
     });
+    articlesByTargets[EFAQTargets.ALL] = [
+      ...(articlesByTargets[EFAQTargets.ALL] || []),
+      article,
+    ];
   });
 
   return articlesByTargets;
 };
 
 export const getFaqArticle = (slug: string) => {
-  return allArticles.find((article) => article.slug === slug);
+  return allFaqArticles.find((article) => article.slug === slug);
 };
 
 export const getFaqArticlesByTag = (tagList: string[]): IArticle[] => {
   const filteredArticles = new Set<IArticle>();
-  allArticles.forEach((article) => {
+  allFaqArticles.forEach((article) => {
     tagList.forEach((tag) => {
       if (article.administrations.indexOf(tag) > -1) {
         filteredArticles.add(article);
@@ -83,4 +102,6 @@ export const getFaqArticlesByTag = (tagList: string[]): IArticle[] => {
   return Array.from(filteredArticles);
 };
 
-const allArticles = loadAllArticles();
+export const allFaqArticles = loadAllArticles();
+
+export const allFaqArticlesByTarget = loadAllFaqArticlesByTarget();
