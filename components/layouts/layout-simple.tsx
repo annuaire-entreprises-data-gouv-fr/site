@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
+import Footer from '#components/footer';
 import { Header } from '#components/header';
 import { ISession } from '#utils/session';
 
@@ -19,5 +20,6 @@ export const LayoutSimple: React.FC<
       session={session}
     />
     <main className="fr-container">{children}</main>
+    <Footer />
   </div>
 );

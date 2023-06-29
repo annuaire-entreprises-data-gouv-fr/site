@@ -31,5 +31,6 @@ dataSources:
     datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-publique-des-organismes-de-formation-l-6351-7-1-du-code-du-travail/
     data:
       - label: Informations des Organismes de formation, Certifications Qualiopi
+        form: https://travail-emploi.gouv.fr/formation-professionnelle/acteurs-cadre-et-qualite-de-la-formation-professionnelle/article/qualiopi-marque-de-certification-qualite-des-prestataires-de-formation
 description: |
   Le ministère du travail publie les conventions collectives des entreprises, l'index Egapro d'égalité entre les femmes et les hommes et la liste des organismes de formation.

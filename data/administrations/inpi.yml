@@ -21,19 +21,19 @@ dataSources:
     datagouvLink: https://data.inpi.fr
     data:
       - label: Dénomination, NAF, Forme juridique et Adresse d’une entreprise
-        form: https://formalites.entreprises.gouv.fr/
+        form: https://entreprendre.service-public.fr/vosdroits/F24023
         targets:
           - entreprise
       - label: Société à mission
-        form: https://formalites.entreprises.gouv.fr/
+        form: https://www.economie.gouv.fr/entreprises/societe-mission
         targets:
           - entreprise
       - label: Dirigeants d’une entreprise
-        form: https://formalites.entreprises.gouv.fr/
+        form: https://entreprendre.service-public.fr/vosdroits/F36173
         targets:
           - entreprise
       - label: Bénéficaires Effectifs d’une entreprise
-        form: https://formalites.entreprises.gouv.fr/
+        form: https://entreprendre.service-public.fr/vosdroits/F36703
         targets:
           - entreprise
 description: |

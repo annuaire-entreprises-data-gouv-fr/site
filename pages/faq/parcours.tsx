@@ -11,13 +11,13 @@ import { Loader } from '#components-ui/loader';
 import { MultiChoice } from '#components-ui/multi-choice';
 import TextWrapper from '#components-ui/text-wrapper';
 import { LayoutSimple } from '#components/layouts/layout-simple';
+import MatomoEvent from '#components/matomo-event';
 import { allData } from '#models/administrations';
 import constants from '#models/constants';
 import { allFaqArticlesByTarget, EFAQTargets, IArticle } from '#models/faq';
-import { logEventInMatomo } from '#utils/analytics/matomo';
 import { NextPageWithLayout } from 'pages/_app';
 
-const enum EQuestionType {
+enum EQuestionType {
   LOADER = 'loader',
   NONE = 'none',
   MODIFICATION = 'modification',
@@ -160,6 +160,11 @@ const Question: React.FC<IProps> = ({
           />
           {dataToModify && (
             <Answer>
+              <MatomoEvent
+                category="parcours:modification"
+                action={userType}
+                name={dataToModify.label}
+              />
               Comment modifier les informations suivantes ?
               <p>
                 “<b>{dataToModify.label}</b>”
@@ -244,12 +249,14 @@ const Question: React.FC<IProps> = ({
   }
 };
 
-const Parcours: NextPageWithLayout<{}> = () => {
+const Parcours: NextPageWithLayout<{
+  initialQuestionType: EQuestionType | null;
+}> = ({ initialQuestionType }) => {
   const scrollRef = useRef(null);
 
-  const [userType, setUserType] = useState('');
+  const [userType, setUserType] = useState(initialQuestionType ? 'all' : '');
   const [questionType, setQuestionType] = useState<EQuestionType>(
-    EQuestionType.NONE
+    initialQuestionType || EQuestionType.NONE
   );
 
   const scroll = () => {
@@ -320,10 +327,14 @@ Parcours.getLayout = function getLayout(
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const question = (context?.query?.question || '') as EQuestionType;
+
+  const initialQuestionType = Object.values(EQuestionType).indexOf(question)
+    ? question
+    : null;
+
   return {
-    props: {
-      metadata: { useReact: true },
-    },
+    props: { initialQuestionType, metadata: { useReact: true } },
   };
 };
 

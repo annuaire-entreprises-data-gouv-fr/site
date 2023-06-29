@@ -20,6 +20,10 @@ dataSources:
         form: https://www.insee.fr/fr/information/2015445
         targets:
           - agent
+      - label: SIREN d’une association
+        form: https://entreprendre.service-public.fr/vosdroits/R55385
+        targets:
+          - association
       - label: Informations des structures de l’ESS
   - label: Code Officiel Géographiques (COG)
     apiSlug: recherche-entreprise

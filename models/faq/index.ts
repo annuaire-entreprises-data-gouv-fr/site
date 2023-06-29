@@ -18,6 +18,7 @@ export enum EFAQTargets {
   independant = 'Indépendant(e)',
   association = 'Dirigeant(e) ou salarié(e) d’association',
   particulier = 'Particulier',
+  all = 'Autre',
 }
 
 const loadAllArticles = () => {
@@ -50,7 +51,7 @@ export const loadAllFaqArticlesByTarget = () => {
 
   allFaqArticles.forEach((article) => {
     article.faqTargets.forEach((target) => {
-      if ([...validTargets, 'all', 'none'].indexOf(target) === -1) {
+      if ([...validTargets, 'none'].indexOf(target) === -1) {
         throw new Error(`${target} is not a valid target`);
       }
       if (target.toString() === 'all') {
@@ -60,12 +61,12 @@ export const loadAllFaqArticlesByTarget = () => {
             article,
           ];
         });
-      } else {
-        articlesByTargets[target] = [
-          ...(articlesByTargets[target] || []),
-          article,
-        ];
       }
+
+      articlesByTargets[target] = [
+        ...(articlesByTargets[target] || []),
+        article,
+      ];
     });
   });
 

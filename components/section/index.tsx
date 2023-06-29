@@ -55,7 +55,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           <div className="administration-page-link">
             <PrintNever>
               <a
-                href="/faq/parcours"
+                href="/faq/parcours?question=modification"
                 className="no-style-link question-faq-link"
               >
                 <Icon size={14} slug="questionnaire">
