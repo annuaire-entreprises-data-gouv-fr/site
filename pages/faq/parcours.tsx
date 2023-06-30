@@ -120,7 +120,7 @@ const Question: React.FC<IProps> = ({
           </p>
           <p>
             Si la modification concerne{' '}
-            <b>l’affichage de donnée personnelles</b> sur le site, consultez{' '}
+            <b>l’affichage de données personnelles</b> sur le site, consultez{' '}
             <a href="/faq/supprimer-donnees-personnelles-entreprise">
               notre fiche dédiée
             </a>{' '}
