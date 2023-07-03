@@ -10,7 +10,6 @@ export const severnaya = {
       nom: 'Estournet',
       role: 'Président',
       dateNaissancePartial: '1985-12',
-      dateNaissanceFull: '1985-12-05',
     },
   ],
   beneficiaires: [

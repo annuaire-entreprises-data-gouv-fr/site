@@ -119,12 +119,6 @@ const routes = {
       rne: 'https://rncs-proxy.api.gouv.fr/rne/',
     },
   },
-  rncs: {
-    proxy: {
-      imr: 'https://rncs-proxy.api.gouv.fr/imr/',
-    },
-  },
-  rnm: 'https://api-rnm.artisanat.fr/v2/entreprises/',
   sireneInsee: {
     auth: 'https://api.insee.fr/token',
     avis: 'https://avis-situation-sirene.insee.fr/AvisPdf.action',

@@ -12,15 +12,10 @@ import {
 } from '#models/api-not-responding';
 import {
   IEtatCivil,
-  IImmatriculationRNCS,
+  IImmatriculationRNE,
   IPersonneMorale,
-} from '#models/immatriculation/rncs';
-import {
-  formatDate,
-  formatDatePartial,
-  formatIntFr,
-  Siren,
-} from '#utils/helpers';
+} from '#models/immatriculation';
+import { formatDatePartial, formatIntFr, Siren } from '#utils/helpers';
 
 /**
  * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts
@@ -40,7 +35,7 @@ export const isPersonneMorale = (
 };
 
 type IProps = {
-  immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
+  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError;
   siren: Siren;
 };
 
@@ -49,24 +44,21 @@ type IProps = {
  * @param param0
  * @returns
  */
-const DirigeantsSection: React.FC<IProps> = ({
-  immatriculationRNCS,
-  siren,
-}) => {
-  if (isAPINotResponding(immatriculationRNCS)) {
-    if (immatriculationRNCS.errorType === 404) {
+const DirigeantsSection: React.FC<IProps> = ({ immatriculationRNE, siren }) => {
+  if (isAPINotResponding(immatriculationRNE)) {
+    if (immatriculationRNE.errorType === 404) {
       return null;
     }
     return (
       <AdministrationNotResponding
-        administration={immatriculationRNCS.administration}
-        errorType={immatriculationRNCS.errorType}
+        administration={immatriculationRNE.administration}
+        errorType={immatriculationRNE.errorType}
         title="Les dirigeants"
       />
     );
   }
 
-  const { dirigeants } = immatriculationRNCS;
+  const { dirigeants } = immatriculationRNE;
 
   const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
     if (isPersonneMorale(dirigeant)) {
@@ -105,25 +97,22 @@ const DirigeantsSection: React.FC<IProps> = ({
         dirigeant.prenom && dirigeant.nom ? ' ' : ''
       }${(dirigeant.nom || '').toUpperCase()}`;
 
-      const infos = [
+      return [
         dirigeant.role,
         <>
           {nomComplet}, né(e) en{' '}
           {formatDatePartial(dirigeant.dateNaissancePartial)}
         </>,
+        ...(dirigeant.dateNaissancePartial
+          ? [
+              <a
+                href={`/personne?n=${dirigeant.nom}&fn=${dirigeant.prenom}&d=${dirigeant.dateNaissancePartial}&sirenFrom=${siren}`}
+              >
+                → voir ses entreprises
+              </a>,
+            ]
+          : []),
       ];
-
-      if (dirigeant.dateNaissanceFull) {
-        //@ts-ignore
-        infos.push([
-          <a
-            href={`/personne?n=${dirigeant.nom}&fn=${dirigeant.prenom}&dmin=${dirigeant.dateNaissanceFull}&dmax=${dirigeant.dateNaissanceFull}&sirenFrom=${siren}`}
-          >
-            → voir ses entreprises
-          </a>,
-        ]);
-      }
-      return infos;
     }
   };
 
@@ -132,28 +121,27 @@ const DirigeantsSection: React.FC<IProps> = ({
   return (
     <>
       <Section
-        id="rncs-dirigeants"
+        id="rne-dirigeants"
         title={`Dirigeant${plural}`}
         sources={[EAdministration.INPI]}
       >
         <>
-          {immatriculationRNCS.metadata.isFallback &&
-            immatriculationRNCS.dirigeants.length > 0 && (
+          {immatriculationRNE.metadata.isFallback &&
+            immatriculationRNE.dirigeants.length > 0 && (
               <InpiPartiallyDownWarning missing="la distinction entre le nom et le prénom" />
             )}
           {dirigeants.length === 0 ? (
             <p>
               Cette entreprise est enregistrée au{' '}
-              <b>Registre National du Commerce et des Sociétés (RNCS)</b>, mais
-              n’y possède aucun dirigeant.
+              <b>Registre National des Entreprises (RNE)</b>, mais n’y possède
+              aucun dirigeant.
             </p>
           ) : (
             <>
               <p>
                 Cette entreprise possède {dirigeants.length} dirigeant{plural}{' '}
                 enregistré{plural} au{' '}
-                <b>Registre National du Commerce et des Sociétés (RNCS)</b>{' '}
-                centralisé par l’
+                <b>Registre National des Entreprises (RNE)</b> tenu par l’
                 <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
                 <a
                   rel="noreferrer noopener"

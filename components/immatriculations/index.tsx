@@ -1,5 +1,6 @@
 import React from 'react';
-import ImmatriculationNotFoundAlert from '#components-ui/alerts/immatriculation-not-found-alert';
+import AssociationCreationNotFoundAlert from '#components-ui/alerts/association-creation-not-found-alert';
+import ImmatriculationRNENotFoundAlert from '#components-ui/alerts/rne-not-found-alert';
 import AvisSituationSection from '#components/immatriculations/insee';
 import ImmatriculationJOAFE from '#components/immatriculations/joafe';
 import ImmatriculationSummary from '#components/immatriculations/summary';
@@ -8,7 +9,7 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IImmatriculation } from '#models/immatriculation';
-import { isAssociation } from '#models/index';
+import { isAssociation, isServicePublic } from '#models/index';
 import { IJustificatifs } from '#models/justificatifs';
 import { ISession } from '#utils/session';
 import ImmatriculationRNE from './rne';
@@ -20,6 +21,7 @@ const isNotFound = (
     isAPINotResponding(immatriculation) && immatriculation.errorType === 404
   );
 };
+
 interface IProps extends IJustificatifs {
   session: ISession | null;
 }
@@ -49,8 +51,17 @@ const Immatriculations: React.FC<IProps> = ({
       />
       {noImmatriculation ? (
         <>
-          <ImmatriculationNotFoundAlert uniteLegale={uniteLegale} />
-          <br />
+          {isAssociation(uniteLegale) ? (
+            <>
+              <AssociationCreationNotFoundAlert association={uniteLegale} />
+              <br />
+            </>
+          ) : isServicePublic(uniteLegale) ? null : (
+            <>
+              <ImmatriculationRNENotFoundAlert uniteLegale={uniteLegale} />
+              <br />
+            </>
+          )}
         </>
       ) : (
         <>

@@ -1,4 +1,4 @@
-import { IEtatCivil } from '#models/immatriculation/rncs';
+import { IEtatCivil } from '#models/immatriculation';
 
 export interface IParams {
   ageMax?: number | string;
@@ -117,7 +117,6 @@ class SearchFilterParams {
       nom: this.params.n?.trim() || '',
       prenom: this.params.fn?.trim() || '',
       sexe: null,
-      dateNaissanceFull: '',
       dateNaissancePartial: this.params.dmin || '',
       lieuNaissance: '',
       role: '',

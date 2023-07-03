@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
 import { createEtablissementsList } from '#models/etablissements-list';
-import { IEtatCivil } from '#models/immatriculation/rncs';
+import { IEtatCivil } from '#models/immatriculation';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,

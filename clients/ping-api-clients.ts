@@ -4,7 +4,6 @@ import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
 import clientSiret2Idcc from '#clients/siret-2-idcc';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
 import { clientApiEntrepriseAssociation } from './api-entreprise/association';
-import { fetchRNCSImmatriculation } from './api-proxy/rncs';
 import { fetchRNEImmatriculation } from './api-proxy/rne';
 import clientSearchRechercheEntreprise from './recherche-entreprise';
 import { clientUniteLegaleRechercheEntreprise } from './recherche-entreprise/siren';
@@ -18,9 +17,6 @@ export class APISlugNotFound extends Error {
 const ping = async (slug: string | string[]) => {
   const useCache = false;
   switch (slug) {
-    case 'api-proxy-rncs':
-      // fetch IRM and disable cache
-      return await fetchRNCSImmatriculation(verifySiren('552032534'), useCache);
     case 'api-proxy-rne':
       // fetch IRM and disable cache
       return await fetchRNEImmatriculation(verifySiren('552032534'), useCache);

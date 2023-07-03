@@ -10,7 +10,6 @@ export const solutionEnergie = {
       nom: 'Levy',
       role: 'Directeur général',
       dateNaissancePartial: '1981-10',
-      dateNaissanceFull: '1981-10-15',
     },
     {
       siren: '878719756',
