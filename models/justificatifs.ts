@@ -11,9 +11,8 @@ import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { verifySiren } from '#utils/helpers';
 import { isAssociation } from '.';
 import { IUniteLegale } from '.';
-import getImmatriculationRNE, {
-  IImmatriculationRNE,
-} from './immatriculation/rne';
+import { IImmatriculationRNE } from './immatriculation';
+import getImmatriculationRNE from './immatriculation/rne';
 
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;

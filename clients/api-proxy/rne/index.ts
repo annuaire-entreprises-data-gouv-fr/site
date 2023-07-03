@@ -1,6 +1,6 @@
 import routes from '#clients/routes';
 import constants from '#models/constants';
-import { IImmatriculationRNE } from '#models/immatriculation/rne';
+import { IImmatriculationRNE } from '#models/immatriculation';
 import { Siren } from '#utils/helpers';
 import { clientAPIProxy } from '../client';
 

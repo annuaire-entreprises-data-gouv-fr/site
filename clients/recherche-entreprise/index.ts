@@ -7,7 +7,7 @@ import {
 import constants from '#models/constants';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
-import { IEtatCivil, IPersonneMorale } from '#models/immatriculation/rncs';
+import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
@@ -258,7 +258,6 @@ const mapToDirigeantModel = (
     prenom: formatFirstNames((prenoms || '').split(' '), 1),
     role: qualite,
     dateNaissancePartial: '',
-    dateNaissanceFull: '',
     lieuNaissance: '',
   };
 };
@@ -272,7 +271,6 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
     prenom: formatFirstNames((prenoms || '').split(' '), 1),
     role: fonction,
     dateNaissancePartial: annee_de_naissance,
-    dateNaissanceFull: '',
     lieuNaissance: '',
   };
 };

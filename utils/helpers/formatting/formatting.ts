@@ -101,6 +101,24 @@ export const formatDate = safe((date: string | Date) =>
   date ? new Intl.DateTimeFormat('fr-FR').format(castDate(date)) : undefined
 );
 
+/**
+ * Takes a YYYY-MM and return YYYY-MM-DD interval from begining to end of month
+ *
+ * @param dPartial
+ * @returns [dmin, dmax]
+ */
+export const formatMonthIntervalFromPartialDate = safe((dPartial: string) => {
+  const [yyyy, mm] = dPartial.split('-');
+
+  const lastDayOfMonth = new Date(
+    parseInt(yyyy, 10),
+    parseInt(mm, 10),
+    0
+  ).getDate();
+
+  return [`${dPartial}-01`, `${dPartial}-${lastDayOfMonth}`];
+});
+
 export const formatAge = safe((date: string | Date) => {
   const now = new Date();
   const then = castDate(date);

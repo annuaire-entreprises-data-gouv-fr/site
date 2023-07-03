@@ -4,7 +4,7 @@ import {
   IEtablissementsList,
 } from '#models/etablissements-list';
 import { IETATADMINSTRATIF } from '#models/etat-administratif';
-import { IEtatCivil } from '#models/immatriculation/rncs';
+import { IEtatCivil } from '#models/immatriculation';
 import { isAssociationFromNatureJuridique } from '#utils/helpers';
 import { Siren, Siret } from '#utils/helpers';
 import { IdRna } from '#utils/helpers';

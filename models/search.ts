@@ -1,6 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
-import { IDirigeant } from '#models/immatriculation/rncs';
+import { IDirigeant } from '#models/immatriculation';
 import SearchFilterParams from '#models/search-filter-params';
 import {
   cleanSearchTerm,

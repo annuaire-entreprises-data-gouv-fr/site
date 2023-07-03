@@ -10,16 +10,13 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
-import {
-  IBeneficiaire,
-  IImmatriculationRNCS,
-} from '#models/immatriculation/rncs';
+import { IBeneficiaire, IImmatriculationRNE } from '#models/immatriculation';
 import { formatDate, formatDatePartial } from '#utils/helpers';
 import { Siren } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
 
 type IProps = {
-  immatriculationRNCS: IImmatriculationRNCS | IAPINotRespondingError;
+  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError;
   siren: Siren;
 };
 
@@ -29,33 +26,32 @@ type IProps = {
  * @returns
  */
 const BeneficiairesSection: React.FC<IProps> = ({
-  immatriculationRNCS,
+  immatriculationRNE,
   siren,
 }) => {
-  if (isAPINotResponding(immatriculationRNCS)) {
-    if (immatriculationRNCS.errorType === 404) {
+  if (isAPINotResponding(immatriculationRNE)) {
+    if (immatriculationRNE.errorType === 404) {
       return null;
     }
     return (
       <AdministrationNotResponding
-        administration={immatriculationRNCS.administration}
-        errorType={immatriculationRNCS.errorType}
+        administration={immatriculationRNE.administration}
+        errorType={immatriculationRNE.errorType}
         title="Bénéficiaires Effectifs"
       />
     );
   }
 
-  const { beneficiaires } = immatriculationRNCS;
+  const { beneficiaires } = immatriculationRNE;
 
   const formtInfos = (beneficiaire: IBeneficiaire) => [
-    formatDate(beneficiaire.dateGreffe),
+    beneficiaire.nationalite,
     <>
       {beneficiaire.prenoms}
       {beneficiaire.prenoms && ' '}
       {(beneficiaire.nom || '').toUpperCase()}, né(e) en{' '}
       {formatDatePartial(beneficiaire.dateNaissancePartial)}
     </>,
-    beneficiaire.nationalite,
   ];
 
   const plural = beneficiaires.length > 1 ? 's' : '';
@@ -68,7 +64,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
         title={`Bénéficiaire${plural} effectif${plural}`}
         sources={[EAdministration.INPI]}
       >
-        {immatriculationRNCS.beneficiaires.length === 0 ? (
+        {immatriculationRNE.beneficiaires.length === 0 ? (
           <p>
             Cette structure ne possède aucun{' '}
             <a
@@ -78,14 +74,13 @@ const BeneficiairesSection: React.FC<IProps> = ({
             >
               bénéficiaire effectif
             </a>{' '}
-            enregistré au{' '}
-            <b>Registre National du Commerce et des Sociétés (RNCS)</b> tenu par
-            l’
+            enregistré au <b>Registre National des Entreprises (RNE)</b> tenu
+            par l’
             <INPI />.
           </p>
         ) : (
           <>
-            {immatriculationRNCS.metadata.isFallback && (
+            {immatriculationRNE.metadata.isFallback && (
               <InpiPartiallyDownWarning missing="la date de déclaration, et la différence entre le nom et le prénom" />
             )}
             <p>
@@ -98,8 +93,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
                 bénéficiaire{plural} effectif{plural}
               </a>{' '}
               enregistré{plural} au{' '}
-              <b>Registre National du Commerce et des Sociétés (RNCS)</b>{' '}
-              centralisé par l’
+              <b>Registre National des Entreprises (RNE)</b> tenu par l’
               <INPI />. Retrouvez le détail des modalités de contrôle sur{' '}
               <a
                 rel="noreferrer noopener"
@@ -111,7 +105,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
               sur le site de l’INPI&nbsp;:
             </p>
             <FullTable
-              head={['Date de déclaration', 'Détails', 'Nationalité']}
+              head={['Nationalité', 'Détails']}
               body={beneficiaires.map((beneficiaire) =>
                 formtInfos(beneficiaire)
               )}

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
-import { isPersonneMorale } from '#components/dirigeants-section/rncs-dirigeants';
+import { isPersonneMorale } from '#components/dirigeants-section/rne-dirigeants';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import constants from '#models/constants';
 import { estActif } from '#models/etat-administratif';
-import { IDirigeant } from '#models/immatriculation/rncs';
+import { IDirigeant } from '#models/immatriculation';
 import { isCollectiviteTerritoriale } from '#models/index';
 import { ISearchResult } from '#models/search';
 import {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { EAdministration } from '#models/administrations';
-import { IEtatCivil } from '#models/immatriculation/rncs';
+import { IEtatCivil } from '#models/immatriculation';
 import { isCollectiviteTerritoriale, IUniteLegale } from '#models/index';
 import { Section } from '../section';
 import { FullTable } from '../table/full';

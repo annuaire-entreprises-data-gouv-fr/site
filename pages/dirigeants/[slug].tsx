@@ -3,7 +3,7 @@ import React from 'react';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import BeneficiairesSection from '#components/dirigeants-section/beneficiaires';
 import DirigeantsEntrepriseIndividuelleSection from '#components/dirigeants-section/insee-dirigeant';
-import DirigeantsSection from '#components/dirigeants-section/rncs-dirigeants';
+import DirigeantsSection from '#components/dirigeants-section/rne-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
 import Meta from '#components/meta';
 import { DirigeantsNonDiffusibleSection } from '#components/non-diffusible';
@@ -27,7 +27,7 @@ interface IProps extends IPropsWithMetadata, IDirigeants {}
 
 const DirigeantsPage: NextPageWithLayout<IProps> = ({
   uniteLegale,
-  immatriculationRNCS,
+  immatriculationRNE,
   metadata: { session },
 }) => {
   return (
@@ -50,7 +50,7 @@ const DirigeantsPage: NextPageWithLayout<IProps> = ({
         <>
           <DirigeantSummary
             uniteLegale={uniteLegale}
-            immatriculationRNCS={immatriculationRNCS}
+            immatriculationRNE={immatriculationRNE}
           />
           {estDiffusible(uniteLegale) || isAgent(session) ? (
             <>
@@ -65,12 +65,12 @@ const DirigeantsPage: NextPageWithLayout<IProps> = ({
                 )}
 
               <DirigeantsSection
-                immatriculationRNCS={immatriculationRNCS}
+                immatriculationRNE={immatriculationRNE}
                 siren={uniteLegale.siren}
               />
               <BreakPageForPrint />
               <BeneficiairesSection
-                immatriculationRNCS={immatriculationRNCS}
+                immatriculationRNE={immatriculationRNE}
                 siren={uniteLegale.siren}
               />
             </>

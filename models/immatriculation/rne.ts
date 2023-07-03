@@ -7,19 +7,10 @@ import {
   IAPINotRespondingError,
 } from '#models/api-not-responding';
 import { Siren } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
-import { IImmatriculationRNCS } from './rncs';
-
-export interface IImmatriculationRNE extends IImmatriculationRNCS {
-  observations: {
-    numObservation: string;
-    dateAjout: string;
-    description: string;
-  }[];
-}
+import { IImmatriculationRNE } from '.';
 
 /*
- * Request Immatriculation from INPI's RNCS
+ * Request Immatriculation from INPI's RNE
  * @param siren
  */
 const getImmatriculationRNE = async (
@@ -51,6 +42,7 @@ const getImmatriculationRNE = async (
     }
 
     // no need to log an error as API-Proxy already logged it
+
     return APINotRespondingFactory(EAdministration.INPI, 500);
   }
 };
