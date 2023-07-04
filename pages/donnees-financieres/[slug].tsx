@@ -41,10 +41,6 @@ const FinancePage: NextPageWithLayout<IProps> = ({
         />
         {isAssociation(uniteLegale) ? (
           <>
-            {/* <ComptesAssociationSection
-              association={uniteLegale}
-              comptesAssociation={[]}
-            /> */}
             <FinancesAssociationSection
               financesAssociation={financesAssociation}
               financesSociete={financesSociete}
@@ -54,6 +50,7 @@ const FinancePage: NextPageWithLayout<IProps> = ({
         ) : isServicePublic(uniteLegale) ? null : (
           <FinancesSocieteSection
             financesSociete={financesSociete}
+            financesAssociation={financesAssociation}
             uniteLegale={uniteLegale}
           />
         )}
