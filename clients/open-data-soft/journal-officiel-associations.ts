@@ -1,6 +1,7 @@
 import routes from '#clients/routes';
 import { IAnnoncesAssociation, IComptesAssociation } from '#models/annonces';
 import { formatDateYear, IdRna, Siren } from '#utils/helpers';
+import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import odsClient from '.';
 
 type IJournalOfficielAssociationRecord = {
@@ -98,7 +99,7 @@ const clientDCA = async (
       dateparution: compte.dateparution,
       numeroParution: compte.id,
       datecloture: compte.dca_datecloture || '',
-      anneeCloture: formatDateYear(compte.dca_datecloture) || '',
+      anneeCloture: getFiscalYear(compte.dca_datecloture) || '',
       permalinkUrl: `${routes.journalOfficielAssociations.site.dca}/?q.id=id:${compte.id}`,
     })),
     lastModified: response.lastModified,

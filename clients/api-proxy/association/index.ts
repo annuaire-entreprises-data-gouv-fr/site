@@ -12,21 +12,26 @@ import { IAssociationResponse } from './types';
  * Takes either a RNA or Siren, but Siren seems to work much better
  * @param idRna
  */
-const clientAssociation = async (numeroRna: IdRna | Siren, useCache = true) => {
+const clientAssociation = async (
+  rnaOrSiren: IdRna | Siren,
+  siretSiege: string,
+  useCache = true
+) => {
   const response = await clientAPIProxy(
-    routes.association + numeroRna,
+    routes.association + rnaOrSiren,
     { timeout: constants.timeout.L },
     useCache
   );
 
   if (response.identite && Object.keys(response.identite).length === 1) {
-    throw new HttpNotFound(numeroRna);
+    throw new HttpNotFound(rnaOrSiren);
   }
-  return mapToDomainObject(response as IAssociationResponse);
+  return mapToDomainObject(response as IAssociationResponse, siretSiege);
 };
 
 const mapToDomainObject = (
-  association: IAssociationResponse
+  association: IAssociationResponse,
+  siretSiege: string
 ): IDataAssociation => {
   const { agrement = [] } = association;
   const { objet = '', lib_famille1 = '' } = association.activites || {};
@@ -98,6 +103,28 @@ const mapToDomainObject = (
       libelleCommune: communeGestion,
     }),
     adresseInconsistency: false,
+    bilans: association.compte
+      .filter((c) => c.annee > 0 && c.id_siret === siretSiege)
+      .map(
+        ({
+          dons = 0,
+          subv = 0,
+          produits = 0,
+          charges = 0,
+          resultat = 0,
+          annee,
+        }) => {
+          return {
+            charges,
+            resultat,
+            subv,
+            dons,
+            produits,
+            year: annee,
+          };
+        }
+      )
+      .sort((c, b) => c.year - b.year),
   };
 };
 

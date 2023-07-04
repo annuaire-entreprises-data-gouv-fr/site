@@ -2,6 +2,7 @@ import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { IBilanFinancier } from '#models/donnees-financieres';
 import { Siren } from '#utils/helpers';
+import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import odsClient from '..';
 import { IAPIBilanResponse } from './interface';
 
@@ -69,13 +70,6 @@ const mapToDomainObject = (
     const mergedBilans = Object.assign(bilansS, bilansC);
     return Object.values(mergedBilans).sort(sortPerYear);
   }
-};
-
-const getFiscalYear = (date_cloture_exercice: string) => {
-  // determine fiscal year
-  const clotureDate = new Date(date_cloture_exercice);
-  const clotureYear = clotureDate.getFullYear();
-  return clotureDate.getMonth() < 6 ? clotureYear - 1 : clotureYear;
 };
 
 const mapToBilan = (financialData: IAPIBilanResponse): IBilanFinancier => {
