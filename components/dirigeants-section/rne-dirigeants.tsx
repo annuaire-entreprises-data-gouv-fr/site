@@ -106,7 +106,7 @@ const DirigeantsSection: React.FC<IProps> = ({ immatriculationRNE, siren }) => {
         ...(dirigeant.dateNaissancePartial
           ? [
               <a
-                href={`/personne?n=${dirigeant.nom}&fn=${dirigeant.prenom}&d=${dirigeant.dateNaissancePartial}&sirenFrom=${siren}`}
+                href={`/personne?n=${dirigeant.nom}&fn=${dirigeant.prenom}&partialDate=${dirigeant.dateNaissancePartial}&sirenFrom=${siren}`}
               >
                 → voir ses entreprises
               </a>,

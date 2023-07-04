@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import Info from '#components-ui/alerts/info';
-import ButtonLink from '#components-ui/button';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import Meta from '#components/meta';
 import ResultsList from '#components/search-results/results-list';
@@ -26,14 +25,14 @@ interface IProps extends IPropsWithMetadata {
   personne: IEtatCivil;
   searchParams: IParams;
   sirenFrom: string;
-  datePartial: string;
+  labelDatePartial: string;
 }
 
 const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
   results,
   searchParams,
   sirenFrom,
-  datePartial,
+  labelDatePartial,
 }) => (
   <>
     <Meta
@@ -59,7 +58,7 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
         <b>
           {searchParams.fn} {searchParams.n}
         </b>
-        , né(e) en {formatDatePartial(datePartial)}.
+        , né(e) en {labelDatePartial}.
         <br />
         Le jour de naissance n’étant pas une donnée publique, cette page peut
         comporter de très rares cas <b>d’homonymie</b>.
@@ -101,8 +100,12 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const sirenFrom = (context.query.sirenFrom || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
 
-    const datePartial = context.query.d || '';
-    const [dmin, dmax] = formatMonthIntervalFromPartialDate(datePartial);
+    const [beginingOfMonth, endOfMonth] = formatMonthIntervalFromPartialDate(
+      context.query.partialDate
+    );
+
+    const dmin = context.query.dmin || beginingOfMonth;
+    const dmax = context.query.dmax || endOfMonth;
 
     const searchFilterParams = new SearchFilterParams({
       ...context.query,
@@ -123,7 +126,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
         results,
         searchParams,
         sirenFrom,
-        datePartial,
+        labelDatePartial: formatDatePartial(dmin || dmax),
       },
     };
   }
