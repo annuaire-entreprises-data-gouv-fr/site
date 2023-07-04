@@ -1,8 +1,8 @@
 ---
+- date: 04/07/2023
+  title: Publication des données financières des associations dans l'onglet "Données financières"
 - date: 07/06/2023
-  title: Ajout de l’onglet données financières
-  description: |
-    Ajout du [filtre cat
+  title: Publication des données financières des sociétés dans l'onglet "Données financières"
 - date: 26/04/2023
   title: Ajout de filtres sur la taille d’entreprise et le nombre de salarié
   description: |

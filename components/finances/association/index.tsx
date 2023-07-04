@@ -84,6 +84,7 @@ export const FinancesAssociationSection: React.FC<IFinances> = ({
       </p>
       <br />
       <LineChart
+        htmlLegendId={'finance-data-legend'}
         options={{
           plugins: {
             tooltip: {
@@ -95,6 +96,7 @@ export const FinancesAssociationSection: React.FC<IFinances> = ({
                 },
               },
             },
+            legend: { display: false },
           },
           responsive: true,
           maintainAspectRatio: false,
