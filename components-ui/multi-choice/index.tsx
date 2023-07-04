@@ -17,6 +17,12 @@ export type IProps = {
   links?: boolean;
 };
 
+const onKeyDown = (event: any, onclick?: Function) => {
+  if (event.keyCode === 13 && onclick) {
+    onclick();
+  }
+};
+
 export const MultiChoice: React.FC<IProps> = ({
   values,
   legend = '',
@@ -36,7 +42,9 @@ export const MultiChoice: React.FC<IProps> = ({
       {values.map(({ label, value, href, onClick, checked = false }, index) => (
         <div key={href || value || label}>
           {href ? (
-            <a href={href}>{label}</a>
+            <a tabIndex={0} href={href}>
+              {label}
+            </a>
           ) : (
             <>
               <input
@@ -48,8 +56,14 @@ export const MultiChoice: React.FC<IProps> = ({
                 //@ts-ignore
                 onChange={!!onClick ? onClick : () => null}
                 checked={checked}
+                tabIndex={-1}
               />
-              <label className="fr-label" htmlFor={`${idPrefix}-${index}`}>
+              <label
+                tabIndex={0}
+                onKeyDown={(e) => onKeyDown(e, onClick)}
+                className="fr-label"
+                htmlFor={`${idPrefix}-${index}`}
+              >
                 {label}
               </label>
             </>
