@@ -36,7 +36,7 @@ const ping = async (slug: string | string[]) => {
         verifySiren('880878145')
       );
     case 'api-association':
-      return await clientAssociation(verifyIdRna('W551000280'), useCache);
+      return await clientAssociation(verifyIdRna('W551000280'), '', useCache);
     case 'api-tva':
       return await clientTVA(verifySiren('880878145'), useCache);
     case 'api-entreprise-association':

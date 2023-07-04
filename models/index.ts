@@ -8,6 +8,7 @@ import { IEtatCivil } from '#models/immatriculation/rncs';
 import { isAssociationFromNatureJuridique } from '#utils/helpers';
 import { Siren, Siret } from '#utils/helpers';
 import { IdRna } from '#utils/helpers';
+import { IBilanFinancierAssociation } from './donnees-financieres';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 export interface IEtablissement {
@@ -207,6 +208,7 @@ export interface IDataAssociation {
   adresseSiege: string;
   adresseGestion: string;
   adresseInconsistency: boolean;
+  bilans: IBilanFinancierAssociation[];
 }
 
 export const isAssociation = (

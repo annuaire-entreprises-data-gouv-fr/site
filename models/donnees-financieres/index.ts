@@ -19,14 +19,17 @@ export interface IFinances {
         lastModified: string | null;
       }
     | IAPINotRespondingError;
-  financesAssociation:
-    | {
-        bilans: IBilanFinancier[];
-        hasBilanConsolide: boolean;
-        lastModified: string | null;
-      }
-    | IAPINotRespondingError;
+  financesAssociation: IBilanFinancierAssociation[] | IAPINotRespondingError;
 }
+
+export type IBilanFinancierAssociation = {
+  dons: number;
+  subv: number;
+  produits: number;
+  charges: number;
+  resultat: number;
+  year: number;
+};
 
 export interface IBilanFinancier {
   ratioDeVetuste: number;
@@ -65,7 +68,9 @@ export const getFinancesFromSlug = async (slug: string): Promise<IFinances> => {
     return {
       uniteLegale,
       financesSociete: APINotRespondingFactory(EAdministration.MEF, 404),
-      financesAssociation: APINotRespondingFactory(EAdministration.MEF, 404),
+      financesAssociation:
+        uniteLegale.association.data?.bilans ||
+        APINotRespondingFactory(EAdministration.MI, 404),
     };
   }
 
