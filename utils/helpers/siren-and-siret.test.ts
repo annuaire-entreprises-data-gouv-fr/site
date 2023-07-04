@@ -71,12 +71,19 @@ describe('Siren or siret extraction from url', () => {
     expect(extractSirenOrSiretSlugFromUrl('/entreprise/88087990000')).toBe(
       '880879900'
     );
+    expect(
+      extractSirenOrSiretSlugFromUrl('/entreprise/sdfds-88087990000')
+    ).toBe('880879900');
   });
 
   test('It works with siret', () => {
     expect(extractSirenOrSiretSlugFromUrl('/entreprise/88087814500015')).toBe(
       '88087814500015'
     );
+
+    expect(
+      extractSirenOrSiretSlugFromUrl('/entreprise/dfgdfg-88087814500015')
+    ).toBe('88087814500015');
   });
 });
 export {};
