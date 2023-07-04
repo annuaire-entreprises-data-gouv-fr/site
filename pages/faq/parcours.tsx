@@ -7,19 +7,13 @@ import React, {
   useState,
 } from 'react';
 import ButtonLink from '#components-ui/button';
-import { Loader } from '#components-ui/loader';
 import { MultiChoice } from '#components-ui/multi-choice';
 import TextWrapper from '#components-ui/text-wrapper';
 import { LayoutSimple } from '#components/layouts/layout-simple';
 import MatomoEvent from '#components/matomo-event';
 import { allData } from '#models/administrations';
 import constants from '#models/constants';
-import {
-  allFaqArticlesByTarget,
-  EFAQTargets,
-  FAQTargets,
-  IArticle,
-} from '#models/faq';
+import { allFaqArticlesByTarget, FAQTargets, IArticle } from '#models/faq';
 import { NextPageWithLayout } from 'pages/_app';
 
 enum EQuestionType {
@@ -71,12 +65,6 @@ const Question: React.FC<IProps> = ({
   }, [questionType]);
 
   switch (questionType) {
-    case EQuestionType.LOADER:
-      return (
-        <div className="layout-center" style={{ height: '200px' }}>
-          <Loader />
-        </div>
-      );
     case EQuestionType.CONTACT:
       return (
         <Answer>
@@ -272,12 +260,8 @@ const Parcours: NextPageWithLayout<{
   };
 
   const updateQuestion = (q: EQuestionType) => {
-    setQuestionType(EQuestionType.LOADER);
-
-    setTimeout(() => {
-      setQuestionType(q);
-      scroll();
-    }, 300);
+    setQuestionType(q);
+    scroll();
   };
 
   return (

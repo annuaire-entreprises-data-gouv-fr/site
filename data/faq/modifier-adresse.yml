@@ -26,7 +26,7 @@ body: |
 
   Si la structure est une association, la démarche se fait sur [le Compte Asso](https://lecompteasso.associations.gouv.fr/).
 more:
-  - label: Pourquoi mon adresse personnelle apparait-elle sur ce site ?
+  - label: Pourquoi mon adresse personnelle apparaît-elle sur ce site ?
     href: /faq/adresse-personnelle
   - label: ⇢ Formalité de modification d’adresse d’une association
     href: https://lecompteasso.associations.gouv.fr/
