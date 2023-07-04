@@ -137,12 +137,12 @@ const TitleEtablissementWithDenomination: React.FC<{
         color: #666;
       }
 
-      h1 {
+      main h1 {
         line-height: 1.5rem;
         font-size: 1.4rem;
       }
 
-      .etablissement-sub-title {
+      main .etablissement-sub-title {
         display: flex;
         align-items: center;
         flex-wrap: wrap;

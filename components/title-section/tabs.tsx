@@ -6,7 +6,6 @@ import {
 import constants from '#models/constants';
 import {
   IUniteLegale,
-  isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/index';
