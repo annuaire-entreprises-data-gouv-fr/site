@@ -12,7 +12,7 @@ export const getAssociation = async (
   const { siren } = uniteLegale;
 
   try {
-    const data = await clientAssociation(siren);
+    const data = await clientAssociation(siren, uniteLegale.siege.siret);
 
     const adresseInconsistency = await verifyAdressConsistency(
       siren,

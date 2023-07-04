@@ -38,42 +38,39 @@ export const FinancesAssociationSection: React.FC<IFinances> = ({
     );
   }
 
-  const bilans = financesAssociation.bilans;
+  const bilans = financesAssociation;
   const colorResultat = constants.chartColors[1];
   const colorCA = constants.chartColors[4];
 
   const body = [
     [
-      'Date de clôture',
-      ...bilans.map((a) => formatDate(a?.dateClotureExercice ?? '')),
+      <>
+        <ColorCircle color={colorCA} /> Total des produits
+      </>,
+      ...bilans.map((a) => formatCurrency(a?.produits ?? '')),
+    ],
+    [
+      'Total des charges',
+      ...bilans.map((a) => formatCurrency(a?.charges ?? '')),
+    ],
+    [
+      'Montants des dons perçus',
+      ...bilans.map((a) => formatCurrency(a?.dons ?? '')),
+    ],
+    [
+      'Montants des subventions perçues',
+      ...bilans.map((a) => formatCurrency(a?.subv ?? '')),
     ],
     [
       <>
-        <ColorCircle color={colorCA} /> Chiffre d’affaires
+        <ColorCircle color={colorResultat} /> Résultat
       </>,
-      ...bilans.map((a) => formatCurrency(a?.chiffreDAffaires ?? '')),
-    ],
-    ['Marge brute', ...bilans.map((a) => formatCurrency(a?.margeBrute ?? ''))],
-    [
-      'Excédent Brut d’Exploitation',
-      ...bilans.map((a) => formatCurrency(a?.ebe ?? '')),
-    ],
-    [
-      <>
-        <ColorCircle color={colorResultat} /> Résultat net
-      </>,
-      ...bilans.map((a) => formatCurrency(a?.resultatNet ?? '')),
+      ...bilans.map((a) => formatCurrency(a?.resultat ?? '')),
     ],
   ];
 
-  const bilanPlural = bilans.length > 1 ? 's' : '';
-
   return (
-    <Section
-      title="Indicateurs financiers"
-      sources={[EAdministration.MI]}
-      lastModified={financesAssociation.lastModified}
-    >
+    <Section title="Indicateurs financiers" sources={[EAdministration.MI]}>
       <Info>
         Cette section est un travail en cours.
         <br />
@@ -81,18 +78,9 @@ export const FinancesAssociationSection: React.FC<IFinances> = ({
         corrigerons au plus vite (
         <a href={constants.links.mailto}>{constants.links.mail}</a>).
       </Info>
-      {financesAssociation.hasBilanConsolide && (
-        <p>
-          Cette entreprise déclare un <Tag color="info">bilan consolidé</Tag>.
-          C’est le bilan d’un groupe de sociétés dont {uniteLegale.nomComplet}{' '}
-          est la société mère. Son bilan consolidé inclut ceux de ses filiales.
-        </p>
-      )}
       <p>
-        Voici les résultats financiers
-        {financesAssociation.hasBilanConsolide ? ' consolidés' : ''} publiés par
-        l’entreprise pour les {bilans.length} dernier{bilanPlural} exercice
-        {bilanPlural}&nbsp;:
+        Voici les résultats financiers déclarés par le siège social de
+        l’association&nbsp;:
       </p>
       <br />
       <LineChart
@@ -123,21 +111,19 @@ export const FinancesAssociationSection: React.FC<IFinances> = ({
         }}
         height={250}
         data={{
-          labels: bilans.map((bilan) =>
-            formatDateYear(bilan.dateClotureExercice)
-          ),
+          labels: bilans.map((bilan) => bilan.year),
           datasets: [
             {
-              label: "Chiffre d'affaires",
+              label: 'Produit',
               tension: 0.3,
-              data: bilans.map((bilan) => bilan.chiffreDAffaires ?? 0),
+              data: bilans.map((bilan) => bilan.produits ?? 0),
               borderColor: colorCA,
               backgroundColor: colorCA,
             },
             {
-              label: 'Resultat net',
+              label: 'Resultat',
               tension: 0.3,
-              data: bilans.map((bilan) => bilan.resultatNet ?? 0),
+              data: bilans.map((bilan) => bilan.resultat ?? 0),
               borderColor: colorResultat,
               backgroundColor: colorResultat,
             },
