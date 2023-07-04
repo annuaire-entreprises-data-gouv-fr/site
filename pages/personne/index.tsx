@@ -14,6 +14,7 @@ import {
   formatMonthIntervalFromPartialDate,
   parseIntWithDefaultValue,
 } from '#utils/helpers';
+import { logWarningInSentry } from '#utils/sentry';
 import {
   IPropsWithMetadata,
   postServerSideProps,
@@ -101,7 +102,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const page = parseIntWithDefaultValue(pageParam, 1);
 
     const [beginingOfMonth, endOfMonth] = formatMonthIntervalFromPartialDate(
-      context.query.partialDate
+      context.query.partialDate || ''
     );
 
     const dmin = context.query.dmin || beginingOfMonth;
@@ -120,6 +121,12 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     );
 
     const searchParams = searchFilterParams.toJSON();
+
+    if (!dmin || !dmax) {
+      logWarningInSentry('No date in page personne - see siren for sirenFrom', {
+        siren: sirenFrom,
+      });
+    }
 
     return {
       props: {
