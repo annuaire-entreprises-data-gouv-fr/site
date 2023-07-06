@@ -29,6 +29,11 @@ body: |
   - si la vérification échoue nous l’indiquons par la mention *“Numéro de TVA inconnu ou entreprise non assujettie à la TVA*”
 
   **⚠️ Attention :** de nombreux sites internet affichent le numéro de TVA **mais ne prennent pas la peine de le vérifier.**
+more:
+  - label: Quels sont les régimes d’imposition à la TVA ?
+    href: https://www.impots.gouv.fr/professionnel/les-regimes-dimposition-la-tva
+  - label: Ensemble de fiches explicatives autour de la TVA
+    href: https://entreprendre.service-public.fr/vosdroits/N13445
 cta:
   label: ⇢ En savoir plus sur le numéro de TVA
   to: https://entreprendre.service-public.fr/vosdroits/F23570

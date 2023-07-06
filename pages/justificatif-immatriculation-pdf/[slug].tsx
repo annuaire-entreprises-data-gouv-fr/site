@@ -68,7 +68,7 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
         >
           <Info full>
             Le téléservice de l’
-            <INPI /> peut malheureusement être victime de son succés et avoir{' '}
+            <INPI /> peut malheureusement être victime de son succès et avoir{' '}
             <b>du mal à répondre à toutes les demandes</b> de document.
             <br />
             Un téléchargement normal prend <b>entre 10 et 20 secondes</b>.{' '}
@@ -104,11 +104,11 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
                         <Loader /> téléchargement en cours
                       </Tag>
                       <span style={{ color: '#777', fontWeight: 'bold' }}>
-                        (temps estimé entre 10 secondes et 2 minute)
+                        (temps estimé entre 10 secondes et 2 minutes)
                       </span>
                     </>,
                     <>
-                      <Tag color="success">succés</Tag>
+                      <Tag color="success">succès</Tag>
                     </>,
                     <>
                       <Tag color="error">échec</Tag>
