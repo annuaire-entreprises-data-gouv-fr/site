@@ -6,7 +6,6 @@ import {
 import constants from '#models/constants';
 import {
   IUniteLegale,
-  isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/index';
@@ -69,7 +68,6 @@ export const Tabs: React.FC<{
       noFollow: false,
       shouldDisplay:
         !isServicePublic(uniteLegale) &&
-        !isAssociation(uniteLegale) &&
         !uniteLegale.complements.estEntrepreneurIndividuel,
       width: '110px',
     },
