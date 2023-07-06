@@ -39,7 +39,7 @@ const geo = async (
       res.status(200).json(results);
     }
   } catch (e: any) {
-    logErrorInSentry('failed to determine localisation', {
+    logErrorInSentry('Error in API Geo (suggest)', {
       details: e.toString(),
     });
     res
