@@ -61,6 +61,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
 
     const page = parseIntWithDefaultValue(pageParam, 1);
     const searchFilterParams = new SearchFilterParams(context.query);
+
     const results = await searchWithoutProtectedSiren(
       searchTerm,
       page,

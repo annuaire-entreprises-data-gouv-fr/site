@@ -7,7 +7,7 @@ export const NotEnoughParams = () => {
       <br />
       <div>
         <h3>
-          Votre requête ne contient pas assez de paramètres de recherche pour
+          🔍 Votre requête ne contient pas assez de paramètres de recherche pour
           nous permettre de vous proposer un résultat.
         </h3>
         Vous pouvez, au choix :
