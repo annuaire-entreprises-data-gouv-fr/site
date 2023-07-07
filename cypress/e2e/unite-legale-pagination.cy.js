@@ -1,6 +1,4 @@
-import { sirenSiege } from '../../mocks/handlers/search/result-la-poste';
-
-const SIREN = sirenSiege;
+const SIREN = 356000000;
 
 describe(`Pagination for single etablissement company`, () => {
   it('Load page even with query params', () => {

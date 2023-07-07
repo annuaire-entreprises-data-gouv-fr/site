@@ -1,12 +1,13 @@
 import http from 'http';
 import https from 'https';
-import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import Axios, { AxiosRequestConfig } from 'axios';
 import {
   AxiosCacheInstance,
   CacheRequestConfig,
   setupCache,
 } from 'axios-cache-interceptor';
 import constants from '#models/constants';
+import { mockStore } from 'clients-mocks';
 import errorInterceptor from './error-interceptor';
 import { logInterceptor, addStartTimeInterceptor } from './log-interceptor';
 import redisStorage from './redis-storage';
@@ -54,7 +55,10 @@ export const axiosInstanceFactory = (
   return axiosInstance;
 };
 
-const axiosInstanceWithCache = axiosInstanceFactory();
+const axiosInstanceWithCache =
+  process.env.END2END_MOCKING === 'enabled'
+    ? mockStore.mockedAxiosInstance
+    : axiosInstanceFactory();
 
 /**
  * Default axios client - not cached by default
