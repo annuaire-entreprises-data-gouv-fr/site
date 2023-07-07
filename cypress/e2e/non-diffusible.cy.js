@@ -1,6 +1,5 @@
-import { resultGanymede } from '../../mocks/handlers/search/result-ganymede';
-import { resultSauvage } from '../../mocks/handlers/search/result-sauvage';
-import { resultSevernaya } from '../../mocks/handlers/search/result-severnaya';
+import resultGanymede from '../../clients-mocks/recherche-entreprise/ganymede';
+import resultSauvage from '../../clients-mocks/recherche-entreprise/sauvage';
 
 describe('Non-diffusible', () => {
   it('Should be non diffusible', () => {

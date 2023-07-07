@@ -1,7 +1,7 @@
-import { resultLaPoste } from '../../mocks/handlers/search/result-la-poste';
-import { resultRaphael } from '../../mocks/handlers/search/result-raphael';
-import { resultRedNeedles } from '../../mocks/handlers/search/result-red-needles';
-import { resultSevernaya } from '../../mocks/handlers/search/result-severnaya';
+import resultLaPoste from '../../clients-mocks/recherche-entreprise/la-poste';
+import resultRaphael from '../../clients-mocks/recherche-entreprise/raphael';
+import resultRedNeedles from '../../clients-mocks/recherche-entreprise/red-needles';
+import resultSevernaya from '../../clients-mocks/recherche-entreprise/severnaya';
 
 describe('SEO Index or noindex', () => {
   const isStaging = Cypress.config('baseUrl').indexOf('https://staging') === 0;

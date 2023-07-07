@@ -1,7 +1,7 @@
-import { resultFinassure } from '../../mocks/handlers/search/result-finassure';
-import { resultRedNeedles } from '../../mocks/handlers/search/result-red-needles';
-import { resultSauvage } from '../../mocks/handlers/search/result-sauvage';
-import { resultSolutionEnergie } from '../../mocks/handlers/search/result-solution-energie';
+import resultFinassure from '../../clients-mocks/recherche-entreprise/finassure';
+import resultRedNeedles from '../../clients-mocks/recherche-entreprise/red-needles';
+import resultSauvage from '../../clients-mocks/recherche-entreprise/sauvage';
+import resultSolutionEnergie from '../../clients-mocks/recherche-entreprise/solution-energie';
 
 describe('Etat administratif', () => {
   // pass failing test as Insee is very instable in CI

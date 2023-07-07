@@ -1,6 +1,6 @@
-import { resultGrandParis } from '../../mocks/handlers/search/result-grand-paris';
-import { resultManakinProduction } from '../../mocks/handlers/search/result-manakin-production';
-import { resultSolutionEnergie } from '../../mocks/handlers/search/result-solution-energie';
+import resultGrandParis from '../../clients-mocks/recherche-entreprise/grand-paris';
+import resultManakinProduction from '../../clients-mocks/recherche-entreprise/manakin-production';
+import resultSolutionEnergie from '../../clients-mocks/recherche-entreprise/solution-energie';
 
 describe(`Dirigeants and élus pages`, () => {
   it('Dirigeant page loads', () => {

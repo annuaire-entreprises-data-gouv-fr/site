@@ -1,4 +1,4 @@
-import { resultSolutionEnergie } from '../../mocks/handlers/search/result-solution-energie';
+import resultSolutionEnergie from '../../clients-mocks/recherche-entreprise/solution-energie';
 
 describe('TVA validation', () => {
   it(`should display the TVA number`, () => {

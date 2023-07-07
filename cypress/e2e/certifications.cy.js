@@ -1,5 +1,5 @@
-import { resultManakinProduction } from '../../mocks/handlers/search/result-manakin-production';
-import { resultSolutionEnergie } from '../../mocks/handlers/search/result-solution-energie';
+import resultManakinProduction from '../../clients-mocks/recherche-entreprise/manakin-production';
+import resultSolutionEnergie from '../../clients-mocks/recherche-entreprise/solution-energie';
 
 describe('Certifications', () => {
   describe('RGE', () => {
