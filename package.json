@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=16.4",
+    "node": ">=18",
     "npm": ">=7"
   },
   "scripts": {
@@ -17,8 +17,9 @@
     "build": "npm run build:frontend && npm run build:back",
     "build:analyze": "ANALYZE=true npm run build",
     "start": "NODE_ENV=production && next start",
-    "test:end2end": "NEXT_PUBLIC_API_MOCKING=enabled cypress run",
-    "test:end2end:open": "NEXT_PUBLIC_API_MOCKING=enabled cypress open",
+    "test:end2end": "END2END_MOCKING=enabled run-p dev test:end2end:open",
+    "test:end2end:run": "cypress run",
+    "test:end2end:open": "cypress open",
     "test:recipe-staging": "cypress open --config baseUrl=https://staging.annuaire-entreprises.data.gouv.fr video=false",
     "test:unit": "jest --runInBand",
     "lint": "next lint",
@@ -54,7 +55,6 @@
     "iron-session": "^6.3.1",
     "js-yaml-loader": "~1.2.2",
     "matomo-tracker": "~2.2.4",
-    "msw": "^1.2.1",
     "next": "^13.4.4",
     "next-seo": "^6.0.0",
     "openid-client": "^5.4.1",

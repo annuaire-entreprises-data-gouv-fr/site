@@ -55,7 +55,8 @@
     "@next/next/no-sync-scripts": "off",
     // no need for unique key in maps as we dont use react on client/front
     "react/jsx-key": "off",
-    "react/no-children-prop": "off"
+    "react/no-children-prop": "off",
+    "import/no-anonymous-default-export": [2, { "allowObject": true }]
   },
   "extends": "next"
 }
