@@ -1,5 +1,5 @@
 export default {
-  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/?q=siren:880878145',
+  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/q=siren:880878145',
   response: {
     header: {
       statut: 200,

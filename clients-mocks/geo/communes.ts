@@ -1,5 +1,5 @@
 export default {
-  regex: 'https://geo.api.gouv.fr/communes',
+  match: 'https://geo.api.gouv.fr/communes',
   response: [
     {
       codesPostaux: ['06000', '06100', '06200', '06300'],

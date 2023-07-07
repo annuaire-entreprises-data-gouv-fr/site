@@ -203,8 +203,8 @@ const fetchUniteLegaleFromInsee = async (
       await Promise.all([
         clientUniteLegaleInsee(siren, inseeOptions),
         // better empty etablissement than failing UL
-        clientAllEtablissementsInsee(siren, page, inseeOptions).catch(
-          () => null
+        clientAllEtablissementsInsee(siren, page, inseeOptions).catch((e) =>
+          console.log(e)
         ),
         // better empty etablissement than failing UL especially for
         clientSiegeInsee(siren, inseeOptions).catch(() => null),

@@ -3,7 +3,7 @@
  * (Entreprise individuelle diffusible)
  */
 export default {
-  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/?q=siren:883010316',
+  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/q=siren:883010316',
   response: {
     header: {
       statut: 200,

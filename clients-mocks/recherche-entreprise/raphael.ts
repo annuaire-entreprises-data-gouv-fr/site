@@ -3,7 +3,8 @@
  * (Entreprise individuelle diffusible)
  */
 export default {
-  match: 'https://recherche-entreprises.api.gouv.fr/search?q=883010316',
+  match:
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=883010316',
   response: {
     results: [
       {

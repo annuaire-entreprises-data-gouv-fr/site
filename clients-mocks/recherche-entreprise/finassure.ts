@@ -3,7 +3,8 @@
  * (EN SOMMEIL OU PRÉSUMÉE INACTIVE)
  */
 export default {
-  match: 'https://recherche-entreprises.api.gouv.fr/search?q=351556394',
+  match:
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=351556394',
   response: {
     results: [
       {

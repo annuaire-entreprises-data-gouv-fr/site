@@ -1,5 +1,7 @@
 export default {
-  match: 'https://recherche-entreprises.api.gouv.fr/search?q=880878145',
+  match: [
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=880878145',
+  ],
   response: {
     results: [
       {

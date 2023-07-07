@@ -1,5 +1,5 @@
 export default {
-  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/?q=siren:842019051',
+  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/q=siren:842019051',
   response: {
     header: {
       statut: 200,

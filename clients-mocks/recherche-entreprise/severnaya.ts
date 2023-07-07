@@ -3,7 +3,8 @@
  * (Protected)
  */
 export default {
-  match: 'https://recherche-entreprises.api.gouv.fr/search?q=908595879',
+  match:
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=908595879',
   response: {
     results: [
       {

@@ -3,7 +3,7 @@
  * (RGE)
  */
 export default {
-  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/?q=siren:528163777',
+  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/q=siren:528163777',
   response: {
     header: {
       statut: 200,

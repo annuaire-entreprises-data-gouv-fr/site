@@ -101,6 +101,8 @@ jobs:
 
       - name: Build site
         run: npm run build
+        env:
+          END2END_MOCKING: enabled
       - name: Cache site
         uses: actions/cache@v3
         id: restore-build
@@ -216,3 +218,4 @@ jobs:
           SPLIT: ${{ strategy.job-total }}
           SPLIT_INDEX: ${{ strategy.job-index }}
           DEBUG: cypress-split
+          END2END_MOCKING: enabled

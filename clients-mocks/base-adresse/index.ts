@@ -1,5 +1,5 @@
 export default {
-  regex: 'https://api-adresse.data.gouv.fr/search/',
+  match: 'https://api-adresse.data.gouv.fr/search/',
   response: {
     type: 'FeatureCollection',
     version: 'draft',

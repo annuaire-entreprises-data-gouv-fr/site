@@ -1,9 +1,11 @@
 export default {
-  match: 'https://recherche-entreprises.api.gouv.fr/search?q=910230242',
+  match: [
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=356000000',
+  ],
   response: {
     results: [
       {
-        siren: '910230242',
+        siren: '356000000',
         nom_complet: 'POSTE',
         nom_raison_sociale: 'POSTE',
         sigle: null,

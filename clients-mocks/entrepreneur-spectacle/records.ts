@@ -1,5 +1,5 @@
 export default {
-  regex: 'https://data.culture.gouv.fr/api/records/1.0/search/',
+  match: 'https://data.culture.gouv.fr/api/records/1.0/search/',
   response: {
     nhits: 1,
     parameters: {

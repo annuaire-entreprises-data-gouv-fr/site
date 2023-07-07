@@ -1,7 +1,7 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export type IMock = {
-  match: string;
+  match: string | string[];
   response: any;
 };
 
@@ -83,8 +83,15 @@ class MockStore {
 
   public get(url: string) {
     for (let mock of this._mocks) {
-      if (url.indexOf(mock.match) > -1) {
-        return mock.response;
+      const regexes =
+        typeof mock.match === 'string'
+          ? [mock.match as string]
+          : (mock.match as string[]);
+
+      for (let regex of regexes) {
+        if (url.indexOf(regex) > -1) {
+          return mock.response;
+        }
       }
     }
 
@@ -95,7 +102,13 @@ class MockStore {
   public mockedAxiosInstance = (
     axiosConfig: AxiosRequestConfig
   ): AxiosResponse => {
-    const url = axiosConfig.url;
+    const params = axiosConfig.params
+      ? Object.keys(axiosConfig.params)
+          .map((k) => `${k}=${axiosConfig.params[k]}`)
+          .join('&')
+      : '';
+
+    const url = `${axiosConfig.url}${params}`;
     if (typeof url === 'undefined') {
       console.error(`No url provided ${url}`);
       throw new MissingMockException();

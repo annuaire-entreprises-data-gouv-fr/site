@@ -3,7 +3,7 @@
  * (PROTECTED)
  */
 export default {
-  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/?q=siren:908595879',
+  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/q=siren:908595879',
   response: {
     header: {
       statut: 200,

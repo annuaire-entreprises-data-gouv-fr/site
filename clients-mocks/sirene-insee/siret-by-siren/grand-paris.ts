@@ -3,7 +3,7 @@
  * (Collectivité territoriale)
  */
 export default {
-  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/?q=siren:200054781',
+  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/q=siren:200054781',
   response: {
     header: {
       statut: 200,

@@ -2,7 +2,8 @@
  * This uniteLegale is used in test for its (non diffusible) status
  */
 export default {
-  match: 'https://recherche-entreprises.api.gouv.fr/search?q=300025764',
+  match:
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=300025764',
   response: {
     results: [
       {

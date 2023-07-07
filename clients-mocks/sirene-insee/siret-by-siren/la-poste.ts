@@ -1,5 +1,5 @@
 export default {
-  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/?q=siren:356000000',
+  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/q=siren:356000000',
   response: {
     header: {
       statut: 200,

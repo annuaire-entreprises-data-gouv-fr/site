@@ -1,6 +1,14 @@
 export default {
-  match:
+  match: [
     'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=ganymede',
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=ag',
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=Ganymede',
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=&limite_matching_etablissements=3&inclure_slug=true&inclure_etablissements=false&prenoms_personne=anne&nom_personne=hidalgo',
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=xavier%20jouppe',
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=&',
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=3&q=la%20poste',
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=la%20poste',
+  ],
   response: {
     results: [
       {

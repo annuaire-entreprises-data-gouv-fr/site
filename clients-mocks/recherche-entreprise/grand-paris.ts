@@ -3,7 +3,9 @@
  * (Collectivité territoriale)
  */
 export default {
-  match: 'https://recherche-entreprises.api.gouv.fr/search?q=200054781',
+  match: [
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=200054781',
+  ],
   response: {
     results: [
       {

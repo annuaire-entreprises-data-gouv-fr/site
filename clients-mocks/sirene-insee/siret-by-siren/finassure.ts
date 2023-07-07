@@ -3,7 +3,7 @@
  * (EN SOMMEIL OU PRÉSUMÉE INACTIVE)
  */
 export default {
-  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/?q=siren:351556394',
+  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/q=siren:351556394',
   response: {
     header: {
       statut: 200,

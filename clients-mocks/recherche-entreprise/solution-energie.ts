@@ -3,7 +3,8 @@
  * (RGE)
  */
 export default {
-  match: 'https://recherche-entreprises.api.gouv.fr/search?q=528163777',
+  match:
+    'https://recherche-entreprises.api.gouv.fr/search?per_page=10&page=1&q=528163777',
   response: {
     results: [
       {

@@ -1,5 +1,5 @@
 export default {
-  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/88087814500015',
+  match: ['https://api.insee.fr/entreprises/sirene/V3/siret/88087814500015'],
   response: {
     header: {
       statut: 200,

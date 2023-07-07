@@ -3,7 +3,7 @@
  * (CESSÉE)
  */
 export default {
-  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/?q=siren:839517323',
+  match: 'https://api.insee.fr/entreprises/sirene/V3/siret/q=siren:839517323',
   response: {
     header: {
       statut: 200,
