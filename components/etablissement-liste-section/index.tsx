@@ -15,12 +15,14 @@ import {
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatDate, formatSiret, Siret } from '#utils/helpers';
+import { ISession } from '#utils/session';
 
 const EtablissementTable: React.FC<{
   label?: string;
   etablissements: IEtablissement[];
   sieges: Siret[];
-}> = ({ label, etablissements, sieges = [] }) => {
+  session: ISession | null;
+}> = ({ label, etablissements, sieges = [], session }) => {
   const plural = etablissements.length > 1 ? 's' : '';
   return (
     <>
@@ -37,7 +39,7 @@ const EtablissementTable: React.FC<{
           'Activité (NAF/APE)',
           'Détails (nom, enseigne, adresse)',
           'Création',
-          'Etat',
+          'État',
         ]}
         body={etablissements.map((etablissement: IEtablissement) => [
           <a href={`/etablissement/${etablissement.siret}`}>
@@ -59,13 +61,13 @@ const EtablissementTable: React.FC<{
                   {(etablissement.enseigne || etablissement.denomination) && (
                     <a href={`/etablissement/${etablissement.siret}`}>
                       <b>
-                        {getEnseigneEtablissement(etablissement) ||
-                          getDenominationEtablissement(etablissement)}
+                        {getEnseigneEtablissement(etablissement, session) ||
+                          getDenominationEtablissement(etablissement, session)}
                         <br />
                       </b>
                     </a>
                   )}
-                  <>{getAdresseEtablissement(etablissement)}</>
+                  <>{getAdresseEtablissement(etablissement, session)}</>
                 </span>
                 {etablissement.estSiege && <Tag color="info">siège social</Tag>}
                 {sieges.indexOf(etablissement.siret) > 0 &&
@@ -91,7 +93,8 @@ const EtablissementTable: React.FC<{
 
 const EtablissementListeSection: React.FC<{
   uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => {
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => {
   const {
     usePagination,
     nombreEtablissements,
@@ -119,11 +122,12 @@ const EtablissementListeSection: React.FC<{
             dont {nombreEtablissementsOuverts} {pluralBe} en activité
           </>
         ) : null}
-        . Cliquez sur un n° siret pour obtenir plus d’information :
+        . Cliquez sur un n° SIRET pour obtenir plus d’information :
       </p>
       <Section
         title={`${nombreEtablissements} établissement${plural} de ${getNomComplet(
-          uniteLegale
+          uniteLegale,
+          session
         )}`}
         sources={[EAdministration.INSEE]}
       >
@@ -132,6 +136,7 @@ const EtablissementListeSection: React.FC<{
             <EtablissementTable
               etablissements={uniteLegale.etablissements.all}
               sieges={uniteLegale.allSiegesSiret}
+              session={session}
             />
             <PageCounter
               currentPage={currentEtablissementPage || 1}
@@ -147,6 +152,7 @@ const EtablissementListeSection: React.FC<{
                   label="actif"
                   etablissements={uniteLegale.etablissements.open}
                   sieges={uniteLegale.allSiegesSiret}
+                  session={session}
                 />
               </>
             )}
@@ -156,6 +162,7 @@ const EtablissementListeSection: React.FC<{
                   label="non-diffusible"
                   etablissements={uniteLegale.etablissements.unknown}
                   sieges={uniteLegale.allSiegesSiret}
+                  session={session}
                 />
               </>
             )}
@@ -165,6 +172,7 @@ const EtablissementListeSection: React.FC<{
                   label="fermé"
                   etablissements={uniteLegale.etablissements.closed}
                   sieges={uniteLegale.allSiegesSiret}
+                  session={session}
                 />
               </>
             )}

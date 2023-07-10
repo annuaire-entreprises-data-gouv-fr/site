@@ -59,7 +59,7 @@ export const FilterStructure: React.FC<{
         />
       </div>
       <SimpleSeparator />
-      <label>Labels et certificats :</label>
+      <label>Qualités, labels et certificats :</label>
       <input
         name="label"
         value={labelSelected}
@@ -75,17 +75,24 @@ export const FilterStructure: React.FC<{
         />
         &nbsp;
         <LabelAndCertificateBadge
-          label="Professionnels du Bio"
-          isSelected={labelSelected === 'bio'}
-          small
-          onClick={() => setLabelSelected('bio')}
-        />
-        &nbsp;
-        <LabelAndCertificateBadge
           label="ESS - Entreprise Sociale et Solidaire"
           isSelected={labelSelected === 'ess'}
           small
           onClick={() => setLabelSelected('ess')}
+        />
+        &nbsp;
+        <LabelAndCertificateBadge
+          label="Société à mission"
+          isSelected={labelSelected === 'sm'}
+          small
+          onClick={() => setLabelSelected('sm')}
+        />
+        &nbsp;
+        <LabelAndCertificateBadge
+          label="Professionnels du Bio"
+          isSelected={labelSelected === 'bio'}
+          small
+          onClick={() => setLabelSelected('bio')}
         />
         &nbsp;
         <LabelAndCertificateBadge

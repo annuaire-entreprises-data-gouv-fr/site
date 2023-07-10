@@ -1,11 +1,10 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import Info from '#components-ui/alerts/info';
-import { Icon } from '#components-ui/icon/wrapper';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import MapEtablissement from '#components/map/map-etablissement';
 import Meta from '#components/meta';
-import { MapTitleEtablissement } from '#components/title-etablissement-section';
+import { MapTitleEtablissement } from '#components/title-section/etablissement';
 import { getEtablissementWithLatLongFromSlug } from '#models/etablissement';
 import { IEtablissement } from '#models/index';
 import {
@@ -25,6 +24,7 @@ interface IProps extends IPropsWithMetadata {
 
 const EtablissementMapPage: NextPageWithLayout<IProps> = ({
   etablissement,
+  metadata: { session },
 }) => (
   <>
     <Meta
@@ -34,7 +34,14 @@ const EtablissementMapPage: NextPageWithLayout<IProps> = ({
     />
     <div className="fr-container">
       <br />
-      <a href={`/entreprise/${etablissement.siren}`}>← Retour</a>
+      <a href={`/entreprise/${etablissement.siren}`}>
+        ⇠ Retourner à la fiche de la structure
+      </a>
+      <br />
+      <br />
+      <a href={`/etablissement/${etablissement.siret}`}>
+        ⇠ Retourner à la fiche de l’établissement
+      </a>
       <HiddenH1 title="Localisation de l’etablissement" />
       <>
         <MapTitleEtablissement
@@ -45,7 +52,8 @@ const EtablissementMapPage: NextPageWithLayout<IProps> = ({
           <Info>
             Cette structure est non-diffusible. <br />
             Son adresse complète n’est pas publique, mais sa commune de
-            domiciliation est : {getAdresseEtablissement(etablissement)}.
+            domiciliation est :{' '}
+            {getAdresseEtablissement(etablissement, session)}.
             <br />
             Le curseur ci-dessous <b>n’est pas placé</b> sur l’adresse réelle.
           </Info>

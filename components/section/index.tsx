@@ -31,12 +31,14 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   borderColor = constants.colors.pastelBlue,
   titleColor = constants.colors.frBlue,
 }) => {
-  const dataSources = sources.map((key) => administrationsMetaData[key]);
+  const dataSources = Array.from(new Set(sources)).map(
+    (key) => administrationsMetaData[key]
+  );
 
   const isOld = lastModified && isTwoMonthOld(lastModified);
   const last = lastModified || new Date();
 
-  const link = `/administration/${dataSources.map((d) => d.slug).join('_')}`;
+  const faqLink = `/administration/${dataSources.map((d) => d.slug).join('_')}`;
 
   return (
     <>
@@ -52,16 +54,19 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         {dataSources.length > 0 && (
           <div className="administration-page-link">
             <PrintNever>
-              <a href={link}>
+              <a
+                href={constants.links.parcours.modification}
+                className="no-style-link question-faq-link"
+              >
                 <Icon size={14} slug="questionnaire">
-                  Une erreur ou une question sur ces données ?
+                  <u>Une erreur ou une question sur ces données ?</u>
                 </Icon>
               </a>
             </PrintNever>
             <DataSourcesTooltip
               dataSources={dataSources}
               lastUpdatedAt={formatDate(last)}
-              link={link}
+              link={faqLink}
             />
           </div>
         )}
@@ -71,7 +76,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
               logoType && (
                 <a
                   key={long}
-                  href={link}
+                  href={faqLink}
                   title={long}
                   className="no-style-link"
                 >

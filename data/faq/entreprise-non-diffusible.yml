@@ -13,11 +13,8 @@
 #     href: url
 administrations:
   - insee
-target:
-  - agent
-  - independant
-  - dirigeant
-  - particulier
+faqTargets:
+  - none
 title: 'Entreprise non-diffusible : définition'
 seo:
   description: Certaines entreprises demandent à ne pas figurer sur les listes de diffusion publiques. On parle d’entreprises non-diffusibles auprès de l’Insee.
@@ -31,13 +28,28 @@ body: |
   Pour des raisons de sécurité, certaines associations et les organismes relevant du ministère de la Défense ne sont pas diffusibles non plus.
 
   Si vous êtes un entrepreneur individuel ou un travailleur indépendant et que vous souhaitez modifier votre statut de diffusion, la démarche est à effectuer auprès de l’Insee.
+
+  ### Mise à jour du statut de non-diffusion en 2023 
+
+  Conformément aux nouvelles modalités relatives au statut de diffusion [Décret n° 2022-1014 du 19 juillet 2022 relatif au Registre national des entreprises et portant adaptation d’autres registres d’entreprises](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000046061058)) les données non-diffusibles ne sont plus occultées en totalité.
+  
+  Cela veut dire que le statut de “non-diffusible” est remplacé par une diffusion partielle des informations, qui inclut : 
+
+  - Pour une personne physique, l’identité de l’entrepreneur (nom, prénoms…), son adresse dans la commune et sa géolocalisation, restant masquées.
+  - Pour une personne morale, seuls les éléments de géolocalisation sont masqués (tout élément d’adresse et de géolocalisation, excepté la commune). 
+ 
+  Donc les données suivantes sont désormais diffusées : activité principale, catégorie juridique, tranche d’effectifs, état administratif. 
 more:
-  - label: Pourquoi mon adresse personnelle apparait-elle sur ce site ?
+  - label: Pourquoi mon adresse personnelle apparaît-elle sur ce site ?
     href: /faq/adresse-personnelle
   - label: Comment supprimer les données personnelles de mon entreprise ?
     href: /faq/supprimer-donnees-personnelles-entreprise
   - label: Comment rendre mon entreprise individuelle non-diffusible ?
     href: /faq/rendre-mon-entreprise-non-diffusible
+  - label : Nouveaux statuts de diffusion selon l'INSEE
+    href : https://www.insee.fr/fr/information/6683782
+  - label : RGPD et protection des données personnelles 
+    href : https://www.cnil.fr/fr/reglement-europeen-protection-donnees/chapitre3#Article21
 cta:
   label: ⇢ Rendre mon entreprise diffusible
   to: https://statut-diffusion-sirene.insee.fr/

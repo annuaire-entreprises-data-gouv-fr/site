@@ -1,15 +1,18 @@
 import { Client } from '@notionhq/client';
 
 const notion = new Client({ auth: process.env.NOTION_API_SECRET });
-export const notionDatabaseId = process.env.NOTION_DATABASE_ID;
 
-export default async function logSuggestionToNotion(
+const feedbacksDatabaseId = process.env.NOTION_FEEDBACKS_DATABASE_ID;
+
+export const notionFeedbacksLink = `https://www.notion.so/apigouv/${feedbacksDatabaseId}?v=a5c2c84d69e7486d9c1c9b9ae90e9f2f&pvs=4`;
+
+export const logSuggestionToNotion = async (
   visitorType: string,
   email: string,
   suggestion: string
-) {
+) => {
   await notion.pages.create({
-    parent: { database_id: notionDatabaseId as string },
+    parent: { database_id: feedbacksDatabaseId as string },
     properties: {
       Email: {
         title: [
@@ -37,4 +40,16 @@ export default async function logSuggestionToNotion(
       },
     },
   });
-}
+};
+
+const agentsDataBaseId = process.env.NOTION_AGENTS_DATABASE_ID;
+
+export const getSuperAgentsFromNotion = async () => {
+  const rows = await notion.databases.query({
+    database_id: agentsDataBaseId as string,
+  });
+  const authorizedAgents = rows.results
+    .filter((r: any) => r.properties.Actif.checkbox === true)
+    .map((r: any) => r.properties.Email.email);
+  return authorizedAgents;
+};

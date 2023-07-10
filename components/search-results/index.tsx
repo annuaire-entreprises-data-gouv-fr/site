@@ -1,6 +1,7 @@
 import MapResults from '#components/map/map-results';
 import { ISearchResults } from '#models/search';
 import { IParams } from '#models/search-filter-params';
+import { BadParams } from './bad-params';
 import ResultsCounter from './results-counter';
 import ResultsList from './results-list';
 import { NotEnoughParams } from './results-not-enough-params';
@@ -14,6 +15,9 @@ const SearchResults: React.FC<{
 }> = ({ results, searchTerm = '', searchFilterParams = {}, map = false }) => {
   if (results.notEnoughParams) {
     return <NotEnoughParams />;
+  }
+  if (results.badParams) {
+    return <BadParams />;
   }
 
   if (!results.results || results.results.length === 0) {
@@ -108,7 +112,10 @@ const SearchResults: React.FC<{
           currentPage={results.currentPage}
         />
         <div>
-          <ResultsList results={results.results} />
+          <ResultsList
+            results={results.results}
+            shouldColorZipCode={!!searchFilterParams.cp_dep}
+          />
           <ResultsPagination
             totalPages={results.pageCount}
             searchTerm={searchTerm}

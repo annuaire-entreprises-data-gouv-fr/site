@@ -15,7 +15,9 @@ env:
   INSEE_CLIENT_ID_FALLBACK: ${{ secrets.INSEE_CLIENT_ID_FALLBACK }}
   INSEE_CLIENT_SECRET_FALLBACK: ${{ secrets.INSEE_CLIENT_SECRET_FALLBACK}}
   PDF_DOWNLOAD_DIRECTORY: /tmp/download
-  NEXT_PUBLIC_API_MOCKING: enabled
+  END2END_MOCKING: enabled
+  INSEE_ENABLED: enabled
+  INDEXING_ENABLED: enabled
   PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
   REDIS_URL: redis://127.0.0.1:6379
   MONCOMPTEPRO_CLIENT_ID: ${{ secrets.MONCOMPTEPRO_CLIENT_ID }}
@@ -99,6 +101,8 @@ jobs:
 
       - name: Build site
         run: npm run build
+        env:
+          END2END_MOCKING: enabled
       - name: Cache site
         uses: actions/cache@v3
         id: restore-build
@@ -214,3 +218,4 @@ jobs:
           SPLIT: ${{ strategy.job-total }}
           SPLIT_INDEX: ${{ strategy.job-index }}
           DEBUG: cypress-split
+          END2END_MOCKING: enabled

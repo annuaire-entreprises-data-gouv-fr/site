@@ -2,14 +2,12 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import ConventionCollectivesSection from '#components/convention-collectives-section';
 import Meta from '#components/meta';
-import Title, { FICHE } from '#components/title-section';
+import Title from '#components/title-section';
+import { FICHE } from '#components/title-section/tabs';
 import getConventionCollectivesFromSlug, {
   IConventions,
 } from '#models/convention-collective';
-import {
-  getCompanyPageDescription,
-  getCompanyPageTitle,
-} from '#utils/helpers/get-company-page-title';
+import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -27,8 +25,12 @@ const ConventionsCollectives: NextPageWithLayout<IProps> = ({
   <>
     <Meta
       noIndex={true}
-      title={`Conventions collectives - ${getCompanyPageTitle(uniteLegale)}`}
-      description={getCompanyPageDescription(uniteLegale)}
+      title={`Conventions collectives - ${getCompanyPageTitle(
+        uniteLegale,
+        session
+      )}`}
+      description={getCompanyPageDescription(uniteLegale, session)}
+      canonical={`https://annuaire-entreprises.data.gouv.fr/divers/${uniteLegale.siren}`}
     />
     <div className="content-container">
       <Title

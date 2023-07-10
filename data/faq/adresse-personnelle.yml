@@ -13,11 +13,10 @@
 #     href: url
 administrations:
   - insee
-targets:
+faqTargets:
   - particulier
-  - dirigeant
   - independant
-title: Pourquoi mon adresse personnelle apparait-elle sur ce site ?
+title: Pourquoi mon adresse personnelle apparaît-elle sur ce site ?
 seo:
   description: Les pages des entreprises individuelles et des auto-entreprises, sont susceptibles de contenir des informations à caractère personnel.
 body: |

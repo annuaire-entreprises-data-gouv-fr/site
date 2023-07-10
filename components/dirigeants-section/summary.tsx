@@ -44,7 +44,7 @@ const NoDirigeantDefault = () => (
 
 const DirigeantSummary: React.FC<IDirigeants> = ({
   uniteLegale,
-  immatriculationRNCS,
+  immatriculationRNE,
 }) => {
   const summaries = [];
   const inseeDirigeant =
@@ -54,17 +54,16 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
     summaries.push(<a href="#insee-dirigeant">{inseeDirigeant}</a>);
   }
 
-  if (!isAPINotResponding(immatriculationRNCS)) {
-    const dirigeantsCount = (immatriculationRNCS?.dirigeants || []).length;
+  if (!isAPINotResponding(immatriculationRNE)) {
+    const dirigeantsCount = (immatriculationRNE?.dirigeants || []).length;
     summaries.push(
-      <a href="#rncs-dirigeants">
-        {dirigeantsCount} dirigeants inscrits au Registre du Commerce et des
-        Sociétés (RCS)
+      <a href="#rne-dirigeants">
+        {dirigeantsCount} dirigeants inscrits au Registre National des
+        Entreprises (RNE)
       </a>
     );
 
-    const beneficiairesCount = (immatriculationRNCS?.beneficiaires || [])
-      .length;
+    const beneficiairesCount = (immatriculationRNE?.beneficiaires || []).length;
     summaries.push(
       <a href="#beneficiaires">
         {beneficiairesCount} bénéficiaires inscrits à Référentiel des

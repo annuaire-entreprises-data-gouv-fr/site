@@ -4,7 +4,7 @@ import {
   getDepartementFromCodePostal,
   getUrlFromDepartement,
   libelleFromDepartement,
-} from '#utils/labels';
+} from '#utils/helpers/formatting/labels';
 
 const StructuredDataBreadcrumb: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,

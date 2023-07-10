@@ -4,10 +4,11 @@ import {
   IEtablissementsList,
 } from '#models/etablissements-list';
 import { IETATADMINSTRATIF } from '#models/etat-administratif';
-import { IEtatCivil } from '#models/immatriculation/rncs';
+import { IEtatCivil } from '#models/immatriculation';
 import { isAssociationFromNatureJuridique } from '#utils/helpers';
 import { Siren, Siret } from '#utils/helpers';
 import { IdRna } from '#utils/helpers';
+import { IBilanFinancierAssociation } from './donnees-financieres';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 export interface IEtablissement {
@@ -31,7 +32,7 @@ export interface IEtablissement {
   activitePrincipale: string;
   libelleActivitePrincipale: string;
   trancheEffectif: string;
-  libelleTrancheEffectif: string | null;
+  anneeTrancheEffectif: string | null;
   latitude: string;
   longitude: string;
 }
@@ -89,9 +90,10 @@ export interface IUniteLegale extends IEtablissementsList {
   etatAdministratif: IETATADMINSTRATIF;
   nomComplet: string;
   chemin: string;
-  trancheEffectif: string;
-  libelleTrancheEffectif: string | null;
-  libelleCategorieEntreprise: string | null;
+  trancheEffectif: string | null;
+  anneeTrancheEffectif: string | null;
+  categorieEntreprise: string | null;
+  anneeCategorieEntreprise: string | null;
   dirigeant: IEtatCivil | null;
   complements: IUniteLegaleComplements;
   association: {
@@ -124,8 +126,9 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     dateDerniereMiseAJour: '',
     dateDebutActivite: '',
     trancheEffectif: '',
-    libelleCategorieEntreprise: null,
-    libelleTrancheEffectif: null,
+    anneeCategorieEntreprise: null,
+    categorieEntreprise: null,
+    anneeTrancheEffectif: null,
     dirigeant: null,
     complements: createDefaultUniteLegaleComplements(),
     association: {
@@ -150,6 +153,7 @@ export interface IUniteLegaleComplements {
   estQualiopi: boolean;
   estRge: boolean;
   estOrganismeFormation: boolean;
+  estSocieteMission: boolean;
   estUai: boolean;
 }
 
@@ -165,6 +169,7 @@ export const createDefaultUniteLegaleComplements = () => {
     estFiness: false,
     estRge: false,
     estOrganismeFormation: false,
+    estSocieteMission: false,
     estQualiopi: false,
     estUai: false,
   };
@@ -203,6 +208,7 @@ export interface IDataAssociation {
   adresseSiege: string;
   adresseGestion: string;
   adresseInconsistency: boolean;
+  bilans: IBilanFinancierAssociation[];
 }
 
 export const isAssociation = (

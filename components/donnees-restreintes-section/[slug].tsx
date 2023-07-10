@@ -18,22 +18,26 @@ import { NextPageWithLayout } from 'pages/_app';
 
 const Conformite: React.FC<{
   data: IConformite | IAPINotRespondingError;
-  prefix?: string;
-}> = ({ data, prefix }) => {
-  return isAPINotResponding(data) ? (
-    data.errorType === 404 ? (
-      <i>Introuvable</i>
-    ) : (
-      <i>Ce téléservice est actuellement indisponible</i>
-    )
-  ) : (
+  administration?: string;
+}> = ({ data, administration }) => {
+  if (isAPINotResponding(data)) {
+    return (
+      <i>
+        {administration ? `${administration} : e` : 'E'}rreur {data.errorType}
+      </i>
+    );
+  }
+
+  return (
     <div className="layout-space-between">
       {typeof data.isValid === 'boolean' ? (
         data.isValid ? (
-          <Icon slug="open">{prefix && <b>{prefix}&nbsp;: </b>} conforme</Icon>
+          <Icon slug="open">
+            {administration && <b>{administration}&nbsp;: </b>} conforme
+          </Icon>
         ) : (
           <Icon slug="closed">
-            {prefix && <b>{prefix}&nbsp;: </b>} non conforme
+            {administration && <b>{administration}&nbsp;: </b>} non conforme
           </Icon>
         )
       ) : (
@@ -65,8 +69,9 @@ export const DonneesRestreintesSection: NextPageWithLayout<IProps> = ({
             [
               'Conformité sociale',
               <>
-                <Conformite data={vigilance} prefix="Urssaf" />
-                <Conformite data={msa} prefix="MSA" />
+                <Conformite data={vigilance} administration="Urssaf" />
+                <br />
+                <Conformite data={msa} administration="MSA" />
               </>,
             ],
             ['', <br />],

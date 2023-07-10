@@ -5,11 +5,13 @@ import CollectiviteTerritorialeSection from '#components/collectivite-territoria
 import DonneesRestreintesSection from '#components/donnees-restreintes-section/[slug]';
 import EtablissementListeSection from '#components/etablissement-liste-section';
 import EtablissementSection from '#components/etablissement-section';
+import MatomoEvent from '#components/matomo-event';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
 import Meta from '#components/meta';
 import { NonDiffusibleSection } from '#components/non-diffusible';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
-import Title, { FICHE } from '#components/title-section';
+import Title from '#components/title-section';
+import { FICHE } from '#components/title-section/tabs';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
 import {
@@ -23,17 +25,18 @@ import {
 } from '#models/index';
 import { estNonDiffusible } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
-import { extractSirenOrSiretSlugFromUrl, shouldNotIndex } from '#utils/helpers';
 import {
+  extractSirenOrSiretSlugFromUrl,
+  shouldNotIndex,
   getCompanyPageDescription,
   getCompanyPageTitle,
-} from '#utils/helpers/get-company-page-title';
+} from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   postServerSideProps,
   IPropsWithMetadata,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { isLoggedIn } from '#utils/session';
+import { isAgent, isSuperAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -50,14 +53,23 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
 }) => (
   <>
     <Meta
-      title={getCompanyPageTitle(uniteLegale)}
-      description={getCompanyPageDescription(uniteLegale)}
+      title={getCompanyPageTitle(uniteLegale, session)}
+      description={getCompanyPageDescription(uniteLegale, session)}
       noIndex={shouldNotIndex(uniteLegale)}
       canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${
         uniteLegale.chemin || uniteLegale.siren
       }`}
     />
     {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
+
+    {isAgent(session) && (
+      <MatomoEvent
+        category="espace-agent"
+        action={`${isSuperAgent(session) ? 'super-agent' : 'agent'}`}
+        name={`visit:${uniteLegale.siren}`}
+      />
+    )}
+
     <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
     <div className="content-container">
       <Title
@@ -69,8 +81,8 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
         <NonDiffusibleSection />
       ) : (
         <>
-          <UniteLegaleSection uniteLegale={uniteLegale} />
-          {isLoggedIn(session) && donneesRestreintesUniteLegale ? (
+          <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
+          {isSuperAgent(session) && donneesRestreintesUniteLegale ? (
             <DonneesRestreintesSection
               uniteLegale={uniteLegale}
               conformite={donneesRestreintesUniteLegale?.conformite}
@@ -89,9 +101,13 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
               etablissement={uniteLegale.siege}
               usedInEntreprisePage={true}
               withDenomination={false}
+              session={session}
             />
           )}
-          <EtablissementListeSection uniteLegale={uniteLegale} />
+          <EtablissementListeSection
+            uniteLegale={uniteLegale}
+            session={session}
+          />
         </>
       )}
     </div>
@@ -122,7 +138,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     });
 
     let donneesRestreintesUniteLegale = null;
-    if (isLoggedIn(context.req?.session)) {
+    if (isSuperAgent(context.req?.session)) {
       const { siren, siege } = uniteLegale;
       donneesRestreintesUniteLegale = await getDonneesRestreintesEntreprise(
         siren,

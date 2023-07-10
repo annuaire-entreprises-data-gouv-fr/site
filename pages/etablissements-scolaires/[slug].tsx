@@ -2,7 +2,8 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import { EtablissementsScolairesSection } from '#components/education-nationale';
 import Meta from '#components/meta';
-import Title, { FICHE } from '#components/title-section';
+import Title from '#components/title-section';
+import { FICHE } from '#components/title-section/tabs';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
   getEtablissementsScolairesFromSlug,
@@ -29,7 +30,11 @@ const EtablissementScolaire: NextPageWithLayout<IProps> = ({
 }) => {
   return (
     <>
-      <Meta title={'Établissements scolaires'} noIndex={true} />
+      <Meta
+        title={'Établissements scolaires'}
+        noIndex={true}
+        canonical={`https://annuaire-entreprises.data.gouv.fr/etablissements-scolaires/${uniteLegale.siren}`}
+      />
       <div className="content-container">
         <Title
           ficheType={FICHE.ETABLISSEMENTS_SCOLAIRES}

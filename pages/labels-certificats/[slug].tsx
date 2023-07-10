@@ -1,13 +1,19 @@
 import { GetServerSideProps } from 'next';
-import { checkHasLabelsAndCertificates } from '#components/labels-and-certificates-badges-section';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import {
+  checkHasLabelsAndCertificates,
+  checkHasQuality,
+} from '#components/labels-and-certificates-badges-section';
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
 import { CertificationESSSection } from '#components/labels-and-certificates/ess';
 import { OrganismeDeFormationSection } from '#components/labels-and-certificates/organismes-de-formation';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
+import { CertificationSocieteMission } from '#components/labels-and-certificates/societe-mission';
 import Meta from '#components/meta';
-import Title, { FICHE } from '#components/title-section';
+import Title from '#components/title-section';
+import { FICHE } from '#components/title-section/tabs';
 import {
   getCertificationsFromSlug,
   ICertifications,
@@ -31,10 +37,21 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   organismesDeFormation,
   metadata: { session },
 }) => {
+  const {
+    estEss,
+    estRge,
+    estSocieteMission,
+    estOrganismeFormation,
+    egaproRenseignee,
+    estBio,
+    estEntrepreneurSpectacle,
+  } = uniteLegale.complements;
+
   return (
     <>
       <Meta
-        title={`Labels et certificats - ${getNomComplet(uniteLegale)}`}
+        title={`Labels et certificats - ${getNomComplet(uniteLegale, session)}`}
+        canonical={`https://annuaire-entreprises.data.gouv.fr/labels-certificats/${uniteLegale.siren}`}
         noIndex={true}
       />
       <div className="content-container">
@@ -46,29 +63,30 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
         {!checkHasLabelsAndCertificates(uniteLegale) && (
           <p>Cette structure ne possède aucun label ou certificat.</p>
         )}
-        {uniteLegale.complements.estRge && (
+        {estEss && <CertificationESSSection />}
+        {estSocieteMission && <CertificationSocieteMission />}
+        {checkHasQuality(uniteLegale) && <HorizontalSeparator />}
+        {estRge && (
           <CertificationsRGESection
             uniteLegale={uniteLegale}
             certificationsRGE={rge}
+            session={session}
           />
         )}
-        {uniteLegale.complements.estEss && <CertificationESSSection />}
-        {uniteLegale.complements.estOrganismeFormation && (
+        {estOrganismeFormation && (
           <OrganismeDeFormationSection
             organismesDeFormation={organismesDeFormation}
             uniteLegale={uniteLegale}
           />
         )}
-        {uniteLegale.complements.egaproRenseignee && (
-          <EgaproSection egapro={egapro} />
-        )}
-        {uniteLegale.complements.estEntrepreneurSpectacle && (
+        {egaproRenseignee && <EgaproSection egapro={egapro} />}
+        {estEntrepreneurSpectacle && (
           <CertificationsEntrepreneurSpectaclesSection
             entrepreneurSpectacles={entrepreneurSpectacles}
           />
         )}
         {/* Can be quite long  */}
-        {uniteLegale.complements.estBio && (
+        {estBio && (
           <CertificationsBioSection uniteLegale={uniteLegale} bio={bio} />
         )}
       </div>

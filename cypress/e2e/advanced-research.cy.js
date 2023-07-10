@@ -56,7 +56,7 @@ describe('Advanced search on page ' + path, () => {
   it('Structure filters', () => {
     cy.visit(path + '?terme=');
     cy.contains('Structure').click();
-    cy.contains('Labels et certificats').should('be.visible');
+    cy.contains('Qualités, labels et certificats').should('be.visible');
     cy.contains('Collectivité').click();
     cy.contains('RGE - ').click();
     cy.contains('Appliquer').click({ force: true });

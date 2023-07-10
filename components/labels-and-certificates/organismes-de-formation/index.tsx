@@ -50,6 +50,11 @@ const OrganismeFormationLabel = ({ estQualiopi = false }) => (
         Cette structure n’est pas <FAQQaliopi />.
       </>
     )}
+    <p>
+      Le nombre de stagiaires et les spécialités sont déclarés par l’organisme
+      de formation dans le Bilan Pédagogique et Financier. La période concernée
+      est celle de l’exercice comptable.
+    </p>
   </>
 );
 
@@ -133,8 +138,6 @@ export const OrganismeDeFormationSection = ({
       <OrganismeFormationLabel
         estQualiopi={uniteLegale.complements.estQualiopi}
       />
-      <br />
-      <br />
       <FullTable head={head} body={body} />
     </Section>
   );

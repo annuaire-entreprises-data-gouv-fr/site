@@ -12,7 +12,7 @@ Pour voir le détail des disponibilités des API utilisées sur le site, [consul
 
 Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).
 
-Ce site a pour vocation de mettre à disposition des citoyens et des agents les données ouvertes "Open-data" des entreprises, associations et administrations dotées d'un n° siren/siret.
+Ce site a pour vocation de mettre à disposition des citoyens et des agents les données ouvertes "Open-data" des entreprises, associations et administrations dotées d'un n° SIREN/SIRET.
 
 ## Comment contribuer ?
 

@@ -20,7 +20,7 @@ export const CertificationESSSection = () => (
         <li>Les mutuelles </li>
         <li>Les « entreprises de l’ESS »</li>
       </ul>
-      <a href="/faq/economie-sociale-et-solidaire">→ En savoir plus</a>
+      <a href="/faq/economie-sociale-et-solidaire-ess">→ En savoir plus</a>
     </FAQLink>
     .
   </Section>

@@ -7,7 +7,7 @@ import {
 import constants from '#models/constants';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
-import { IEtatCivil, IPersonneMorale } from '#models/immatriculation/rncs';
+import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
@@ -26,10 +26,8 @@ import {
 } from '#utils/helpers';
 import {
   libelleFromCategoriesJuridiques,
-  libelleFromCodeEffectif,
   libelleFromCodeNAFWithoutNomenclature,
-  libelleFromeCodeCategorie,
-} from '#utils/labels';
+} from '#utils/helpers/formatting/labels';
 import { httpGet } from '#utils/network';
 import {
   ISearchResponse,
@@ -127,12 +125,15 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       est_rge = false,
       est_service_public = false,
       est_uai = false,
+      est_societe_mission = false,
       identifiant_association = null,
       statut_entrepreneur_spectacle = '',
     },
     matching_etablissements,
     categorie_entreprise,
-    tranche_effectif_salarie,
+    annee_categorie_entreprise = null,
+    tranche_effectif_salarie = null,
+    annee_tranche_effectif_salarie = null,
     date_creation = '',
     date_mise_a_jour = '',
     statut_diffusion = 'O',
@@ -175,7 +176,6 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
 
   return {
     ...createDefaultUniteLegale(siren),
-    libelleCategorieEntreprise: libelleFromeCodeCategorie(categorie_entreprise),
     siege: etablissementSiege,
     matchingEtablissements,
     nombreEtablissements: result.nombre_etablissements || 1,
@@ -195,13 +195,17 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     ),
     nomComplet,
     libelleNatureJuridique: libelleFromCategoriesJuridiques(nature_juridique),
-    libelleTrancheEffectif: libelleFromCodeEffectif(tranche_effectif_salarie),
+    categorieEntreprise: categorie_entreprise,
+    anneeCategorieEntreprise: annee_categorie_entreprise,
+    trancheEffectif: tranche_effectif_salarie,
+    anneeTrancheEffectif: annee_tranche_effectif_salarie,
     chemin: result.slug_annuaire_entreprises || result.siren,
     natureJuridique: nature_juridique || '',
     libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
       result.activite_principale,
       false
     ),
+    activitePrincipale: result.activite_principale,
     dirigeants: dirigeants.map(mapToDirigeantModel),
     complements: {
       estBio: est_bio,
@@ -214,6 +218,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       egaproRenseignee: egapro_renseignee,
       estRge: est_rge,
       estOrganismeFormation: est_organisme_formation,
+      estSocieteMission: est_societe_mission,
       estQualiopi: est_qualiopi,
       estUai: est_uai,
     },
@@ -253,7 +258,6 @@ const mapToDirigeantModel = (
     prenom: formatFirstNames((prenoms || '').split(' '), 1),
     role: qualite,
     dateNaissancePartial: '',
-    dateNaissanceFull: '',
     lieuNaissance: '',
   };
 };
@@ -267,7 +271,6 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
     prenom: formatFirstNames((prenoms || '').split(' '), 1),
     role: fonction,
     dateNaissancePartial: annee_de_naissance,
-    dateNaissanceFull: '',
     lieuNaissance: '',
   };
 };
@@ -280,6 +283,7 @@ const mapToEtablissement = (
     latitude = '0',
     longitude = '0',
     commune = '',
+    code_postal = '',
     libelle_commune = '',
     adresse,
     liste_enseignes,
@@ -309,17 +313,17 @@ const mapToEtablissement = (
     nic: extractNicFromSiret(siret),
     siret: verifySiret(siret),
     adresse,
-    codePostal: commune,
+    codePostal: code_postal,
     commune: libelle_commune,
     adressePostale,
     latitude,
     longitude,
     estSiege: est_siege,
     etatAdministratif,
-    activitePrincipale: activite_principale,
     denomination: nom_commercial,
     libelleActivitePrincipale:
       libelleFromCodeNAFWithoutNomenclature(activite_principale),
+    activitePrincipale: activite_principale,
     dateCreation: date_creation,
     dateDebutActivite: date_debut_activite,
   };

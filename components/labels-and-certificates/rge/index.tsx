@@ -15,6 +15,7 @@ import {
 import { IRGECertification } from '#models/certifications/rge';
 import { IUniteLegale } from '#models/index';
 import { getNomComplet } from '#models/statut-diffusion';
+import { ISession } from '#utils/session';
 import { certificatLogo } from './map-certicat-to-logo';
 
 const renovLink = (slug: string) => {
@@ -30,7 +31,8 @@ const renovLink = (slug: string) => {
 export const CertificationsRGESection: React.FC<{
   uniteLegale: IUniteLegale;
   certificationsRGE: IRGECertification | IAPINotRespondingError;
-}> = ({ uniteLegale, certificationsRGE }) => {
+  session: ISession | null;
+}> = ({ uniteLegale, certificationsRGE, session }) => {
   const sectionTitle = "RGE - Reconnu Garant de l'Environnement";
 
   if (isAPINotResponding(certificationsRGE)) {
@@ -70,7 +72,7 @@ export const CertificationsRGESection: React.FC<{
   } = certificationsRGE.companyInfo;
 
   const data = [
-    ['Dénomination', getNomComplet(uniteLegale)],
+    ['Dénomination', getNomComplet(uniteLegale, session)],
     ['Adresse', adresse],
     ['Téléphone', telephone && <a href={`tel:${telephone}`}>{telephone}</a>],
     [

@@ -11,6 +11,7 @@ export type IAPIBilanResponse = {
   ebitda: number;
   date_cloture_exercice: string;
   ebit: number;
+  ebe: number;
   marge_brute: number;
   resultat_net: number;
   siren: string;
@@ -19,4 +20,5 @@ export type IAPIBilanResponse = {
   capacite_de_remboursement: number;
   ratio_de_liquidite: number;
   taux_d_endettement: number;
+  type_bilan: 'C' | 'K' | 'S';
 };

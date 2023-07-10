@@ -17,7 +17,7 @@
 # datasources: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
 # body: le corps du texte, en markdown
 slug: entrepreneur-spectacles-vivants
-title: Rechercher un(e) entrepreneur de spectacles vivants
+title: un entrepreneur de spectacles vivants
 footerLabel: Entrepreneurs de Spectacles Vivants
 published: true
 description: Retrouvez facilement des informations sur les déclarations et les récépissés des entrepreneurs de spectacles en France.

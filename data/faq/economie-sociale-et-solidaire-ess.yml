@@ -13,7 +13,8 @@
 #     href: url
 administrations:
   - insee
-targets: # no targets
+faqTargets:
+  - none
 title: Qu’est ce que l’Economie Sociale et Solidaire ?
 seo:
   description: L’Economie Sociale et Solidaire (ESS) regroupe les associations, fondations, coopératives, mutuelles et entreprises de l’ESS
@@ -32,7 +33,7 @@ body: |
   - Promouvoir une lucrativité encadrée (notamment des bénéfices, à consacrer au maintien et au développement de l’activité)
   - Avoir une gouvernance démocratique et participative
 
-  Pour faire partie du secteur de l’ESS, les sociétés doivent être valablement enregistrées au registre du commerce et des sociétés (RCS) sous cette dénomination.
+  Pour faire partie du secteur de l’ESS, les sociétés doivent être valablement enregistrées au Registre National des Entreprises (RNE) sous cette dénomination.
 
   **A ne pas confondre avec le [label ESUS](https://www.economie.gouv.fr/entreprises/agrement-entreprise-solidaire-utilite-sociale-ess) du ministère de l’économie.**
 more:

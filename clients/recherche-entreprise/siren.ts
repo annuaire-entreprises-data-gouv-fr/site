@@ -15,6 +15,7 @@ export const clientUniteLegaleRechercheEntreprise = async (
     useCache,
     fallbackOnStaging,
   });
+
   if (!results.length || !results[0]) {
     throw new HttpNotFound(siren);
   }

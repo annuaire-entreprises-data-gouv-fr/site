@@ -1,7 +1,13 @@
 import constants from '#models/constants';
 
 export type IProps = {
-  values: { label: string; value: string }[];
+  values: {
+    label: string;
+    value?: string;
+    onClick?: Function;
+    href?: string;
+    checked?: boolean;
+  }[];
   legend?: string;
   idPrefix?: string;
   name?: string;
@@ -11,6 +17,12 @@ export type IProps = {
   links?: boolean;
 };
 
+const onKeyDown = (event: any, onclick?: Function) => {
+  if (event.keyCode === 13 && onclick) {
+    onclick();
+  }
+};
+
 export const MultiChoice: React.FC<IProps> = ({
   values,
   legend = '',
@@ -18,7 +30,6 @@ export const MultiChoice: React.FC<IProps> = ({
   name = '',
   required = false,
   large = false,
-  links = false,
 }) => (
   <>
     {legend && (
@@ -28,10 +39,12 @@ export const MultiChoice: React.FC<IProps> = ({
     )}
 
     <div className="radio-group rating">
-      {values.map(({ label, value }, index) => (
-        <div>
-          {links ? (
-            <a href={value}>{label}</a>
+      {values.map(({ label, value, href, onClick, checked = false }, index) => (
+        <div key={href || value || label}>
+          {href ? (
+            <a tabIndex={0} href={href}>
+              {label}
+            </a>
           ) : (
             <>
               <input
@@ -40,8 +53,17 @@ export const MultiChoice: React.FC<IProps> = ({
                 name={name}
                 value={value}
                 required={required}
+                //@ts-ignore
+                onChange={!!onClick ? onClick : () => null}
+                checked={checked}
+                tabIndex={-1}
               />
-              <label className="fr-label" htmlFor={`${idPrefix}-${index}`}>
+              <label
+                tabIndex={0}
+                onKeyDown={(e) => onKeyDown(e, onClick)}
+                className="fr-label"
+                htmlFor={`${idPrefix}-${index}`}
+              >
                 {label}
               </label>
             </>
@@ -59,6 +81,7 @@ export const MultiChoice: React.FC<IProps> = ({
         }
 
         .radio-group > div > label,
+        .radio-group > div > div,
         .radio-group > div > a {
           display: block;
           border: 2px solid transparent;
@@ -66,6 +89,7 @@ export const MultiChoice: React.FC<IProps> = ({
           background: #e5e5f4;
           padding: 4px 10px;
           color: ${constants.colors.frBlue};
+          cursor: pointer;
 
           font-weight: ${large ? 'bold' : 'inherit'};
           font-size: ${large ? '2rem' : '1rem'};
@@ -81,6 +105,7 @@ export const MultiChoice: React.FC<IProps> = ({
         }
 
         input[type='radio']:hover + label,
+        .radio-group > div > div:hover,
         .radio-group > div > a:hover {
           border: 2px dashed ${constants.colors.frBlue};
         }

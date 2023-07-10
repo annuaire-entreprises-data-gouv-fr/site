@@ -1,4 +1,61 @@
+import { Siren } from '#utils/helpers';
+
 export interface IImmatriculation {
   downloadLink: string;
   siteLink: string;
+}
+
+export interface IEtatCivil {
+  sexe: 'M' | 'F' | null;
+  nom: string;
+  prenom: string;
+  role: string;
+  dateNaissancePartial: string;
+  lieuNaissance: string;
+}
+
+export interface IBeneficiaire {
+  type: string;
+  nom: string;
+  prenoms: string;
+  dateNaissancePartial: string;
+  nationalite: string;
+  dateGreffe: string;
+}
+export interface IIdentite {
+  denomination: string;
+  dateImmatriculation: string;
+  dateDebutActiv: string;
+  dateRadiation: string;
+  dateCessationActivite: string;
+  isPersonneMorale: boolean;
+  dateClotureExercice: string;
+  dureePersonneMorale: string;
+  capital: string;
+  libelleNatureJuridique: string;
+  natureEntreprise?: string;
+}
+
+export interface IPersonneMorale {
+  siren: string;
+  denomination: string;
+  natureJuridique: string;
+  role: string;
+}
+
+export type IDirigeant = IEtatCivil | IPersonneMorale;
+
+export interface IImmatriculationRNE extends IImmatriculation {
+  siren: Siren;
+  identite: IIdentite;
+  dirigeants: IDirigeant[];
+  beneficiaires: IBeneficiaire[];
+  metadata: {
+    isFallback: boolean;
+  };
+  observations: {
+    numObservation: string;
+    dateAjout: string;
+    description: string;
+  }[];
 }

@@ -13,9 +13,10 @@
 #     href: url
 administrations:
   - insee
-targets:
+faqTargets:
   - particulier
   - independant
+  - entreprise
 title: Comment rendre mon entreprise individuelle diffusible ou non-diffusible ?
 seo:
   description: Changez votre statut de diffusion grâce au téléservice dédié proposé par l'Insee.

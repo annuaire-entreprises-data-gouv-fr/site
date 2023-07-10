@@ -4,7 +4,8 @@ import AnnoncesAssociationSection from '#components/annonces-section/annonces-as
 import AnnoncesBodaccSection from '#components/annonces-section/bodacc';
 import { ComptesAssociationSection } from '#components/annonces-section/comptes-association';
 import Meta from '#components/meta';
-import Title, { FICHE } from '#components/title-section';
+import Title from '#components/title-section';
+import { FICHE } from '#components/title-section/tabs';
 import {
   IAnnoncesBodacc,
   IAnnoncesAssociation,
@@ -13,10 +14,7 @@ import {
 import { getAnnoncesFromSlug } from '#models/annonces';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { isAssociation, IUniteLegale } from '#models/index';
-import {
-  getCompanyPageDescription,
-  getCompanyPageTitle,
-} from '#utils/helpers/get-company-page-title';
+import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -42,9 +40,11 @@ const Annonces: NextPageWithLayout<IProps> = ({
     <>
       <Meta
         title={`Annonces légales (BODACC, JOAFE) - ${getCompanyPageTitle(
-          uniteLegale
+          uniteLegale,
+          session
         )}`}
-        description={getCompanyPageDescription(uniteLegale)}
+        description={getCompanyPageDescription(uniteLegale, session)}
+        canonical={`https://annuaire-entreprises.data.gouv.fr/annonces/${uniteLegale.siren}`}
         noIndex={true}
       />
       <div className="content-container">

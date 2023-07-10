@@ -11,7 +11,7 @@ const routes = {
   bodacc: {
     ods: {
       metadata:
-        'https://bodacc-datadila.opendatasoft.com/api/datasets/1.0/search/?q=annonces-commerciales',
+        'https://bodacc-datadila.opendatasoft.com/api/datasets/1.0/annonces-commerciales',
       search:
         'https://bodacc-datadila.opendatasoft.com/api/records/1.0/search/?dataset=annonces-commerciales',
     },
@@ -28,7 +28,7 @@ const routes = {
   donneesFinancieres: {
     ods: {
       metadata:
-        'https://data.economie.gouv.fr/api/datasets/1.0/search/?q=ratios_inpi_bce',
+        'https://data.economie.gouv.fr/api/datasets/1.0/ratios_inpi_bce/',
       search:
         'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce',
     },
@@ -43,12 +43,15 @@ const routes = {
   },
   dgefp: {
     metadata:
-      'https://dgefp.opendatasoft.com/api/datasets/1.0/search/?q=liste-publique-des-of-v2',
+      'https://dgefp.opendatasoft.com/api/datasets/1.0/liste-publique-des-of-v2',
     search:
       'https://dgefp.opendatasoft.com/api/records/1.0/search/?dataset=liste-publique-des-of-v2',
   },
   educationNationale: {
-    api: 'https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-annuaire-education',
+    metadata:
+      'https://data.education.gouv.fr/api/datasets/1.0/fr-en-annuaire-education',
+    search:
+      'https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-annuaire-education',
     site: 'https://www.education.gouv.fr/annuaire',
   },
   geo: {
@@ -58,7 +61,7 @@ const routes = {
   journalOfficielAssociations: {
     ods: {
       metadata:
-        'https://journal-officiel-datadila.opendatasoft.com/api/datasets/1.0/search/?q=jo_associations',
+        'https://journal-officiel-datadila.opendatasoft.com/api/datasets/1.0/jo_associations',
       search:
         'https://journal-officiel-datadila.opendatasoft.com/api/records/1.0/search/?dataset=jo_associations',
     },
@@ -81,7 +84,7 @@ const routes = {
       copyPasteEvents:
         'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=5&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
       npsEvents:
-        'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=2&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
+        'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=1&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
       bulkRequest:
         'https://stats.data.gouv.fr/index.php?module=API&method=API.getBulkRequest&format=json',
     },
@@ -107,7 +110,7 @@ const routes = {
     entrepreneurSpectacles: {
       ods: {
         metadata:
-          'https://data.culture.gouv.fr/api/datasets/1.0/search/?q=declarations-des-entrepreneurs-de-spectacles-vivants',
+          'https://data.culture.gouv.fr/api/datasets/1.0/declarations-des-entrepreneurs-de-spectacles-vivants',
         search:
           'https://data.culture.gouv.fr/api/records/1.0/search/?dataset=declarations-des-entrepreneurs-de-spectacles-vivants',
       },
@@ -124,12 +127,6 @@ const routes = {
       rne: 'https://rncs-proxy.api.gouv.fr/rne/',
     },
   },
-  rncs: {
-    proxy: {
-      imr: 'https://rncs-proxy.api.gouv.fr/imr/',
-    },
-  },
-  rnm: 'https://api-rnm.artisanat.fr/v2/entreprises/',
   sireneInsee: {
     auth: 'https://api.insee.fr/token',
     avis: 'https://avis-situation-sirene.insee.fr/AvisPdf.action',

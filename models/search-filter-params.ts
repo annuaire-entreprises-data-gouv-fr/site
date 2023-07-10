@@ -1,4 +1,4 @@
-import { IEtatCivil } from '#models/immatriculation/rncs';
+import { IEtatCivil } from '#models/immatriculation';
 
 export interface IParams {
   ageMax?: number | string;
@@ -91,6 +91,7 @@ class SearchFilterParams {
       est_association: this.params.type === 'asso',
       est_collectivite_territoriale: this.params.type === 'ct',
       est_service_public: this.params.type === 'sp',
+      est_societe_mission: this.params.label === 'sm',
       est_entrepreneur_individuel: this.params.type === 'ei',
       code_postal,
       code_commune,
@@ -116,7 +117,6 @@ class SearchFilterParams {
       nom: this.params.n?.trim() || '',
       prenom: this.params.fn?.trim() || '',
       sexe: null,
-      dateNaissanceFull: '',
       dateNaissancePartial: this.params.dmin || '',
       lieuNaissance: '',
       role: '',
@@ -208,6 +208,7 @@ class SearchFilterParams {
       bio: 'Label : Professionnels du bio',
       egapro: 'Label : Égalité professionnelle',
       qualiopi: 'Label : Qualiopi',
+      sm: 'Label : Société à mission',
       of: 'Label : Organisme de formation',
       ei: 'Type : Entreprise Individuelle ',
       ct: 'Type : Collectivité territoriale ',

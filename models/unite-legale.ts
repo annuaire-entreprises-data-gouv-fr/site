@@ -71,7 +71,7 @@ class UniteLegaleBuilder {
     }
 
     if (isProtectedSiren(uniteLegale.siren)) {
-      uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PARTIAL;
+      uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
     }
 
     // en sommeil
@@ -168,7 +168,21 @@ const fetchUniteLegaleFromRechercheEntreprise = async (
     );
   } catch (e: any) {
     if (!(e instanceof HttpNotFound)) {
-      logRechercheEntreprisefailed({ siren, details: e.message || e });
+      try {
+        const forceFallback = true;
+        return await clientUniteLegaleRechercheEntreprise(
+          siren,
+          forceFallback,
+          useCache
+        );
+      } catch (eFallback: any) {
+        if (!(eFallback instanceof HttpNotFound)) {
+          logRechercheEntreprisefailed({
+            siren,
+            details: eFallback.message || e,
+          });
+        }
+      }
     }
     // we dont care about the type of exception here as HttpNotFound and HttpServerError will both be useless to us
     return APINotRespondingFactory(EAdministration.DINUM, 500);
@@ -188,9 +202,11 @@ const fetchUniteLegaleFromInsee = async (
     const [uniteLegaleInsee, allEtablissementsInsee, siegeInsee] =
       await Promise.all([
         clientUniteLegaleInsee(siren, inseeOptions),
-        clientAllEtablissementsInsee(siren, page, inseeOptions).catch(
-          () => null
+        // better empty etablissement than failing UL
+        clientAllEtablissementsInsee(siren, page, inseeOptions).catch((e) =>
+          console.log(e)
         ),
+        // better empty etablissement than failing UL especially for
         clientSiegeInsee(siren, inseeOptions).catch(() => null),
       ]);
 

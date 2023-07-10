@@ -18,13 +18,16 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
   allAdministrations,
 }) => (
   <>
-    <Meta title="Sources des données utilisées dans l'Annuaire des Entreprises" />
+    <Meta
+      title="Sources des données utilisées dans l'Annuaire des Entreprises"
+      canonical="https://annuaire-entreprises.data.gouv.fr/donnees/sources"
+    />
     <div className="content-container">
       <h1>Sources de données</h1>
       <p>
         L’Annuaire des Entreprises utilise les données de différentes
         administrations. Toutes les données accessibles sur le site proviennent
-        d’un jeu de donnée librement téléchargeable sur{' '}
+        d’un jeu de données librement téléchargeable sur{' '}
         <a href="https://data.gouv.fr">data.gouv.fr</a> et sont accessibles{' '}
         <a href="/donnees/api">par API</a>.
       </p>
@@ -48,7 +51,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
             <>
               <h2 id={slug}>{long}</h2>
               {dataSources.map(
-                ({ label, datagouvLink, keywords, apiSlug }, sourceIndex) => (
+                ({ label, datagouvLink, data, apiSlug }, sourceIndex) => (
                   <Section
                     id={`${slug}-${sourceIndex}`}
                     title={label}
@@ -58,12 +61,12 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
                       body={[
                         [
                           'Données',
-                          keywords
-                            .split(', ')
-                            .map((kw) => <Tag key={kw}>{kw}</Tag>),
+                          (data || []).map(({ label }) => (
+                            <Tag key={label}>{label}</Tag>
+                          )),
                         ],
                         [
-                          'Accés au jeu de donnée complet',
+                          'Accès au jeu de données complet',
                           <a
                             target="_blank"
                             rel="noreferrer noopener"
@@ -75,7 +78,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
                         ...[
                           apiSlug
                             ? [
-                                'Accés par API',
+                                'Accès par API',
                                 <a href={`/donnees/api#${apiSlug}`}>
                                   → Consulter l’API
                                 </a>,

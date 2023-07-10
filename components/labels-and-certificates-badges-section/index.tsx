@@ -1,15 +1,35 @@
 import { LabelAndCertificateBadge } from '#components-ui/badge/frequent';
+import { EAdministration } from '#models/administrations';
 import InformationTooltip from '../../components-ui/information-tooltip';
 import { IUniteLegale } from '../../models';
 
+export const checkHasQuality = (uniteLegale: IUniteLegale) =>
+  uniteLegale.complements.estEss || uniteLegale.complements.estSocieteMission;
+
 export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
-  uniteLegale.complements.estEntrepreneurSpectacle ||
-  uniteLegale.complements.estEss ||
-  uniteLegale.complements.estBio ||
-  uniteLegale.complements.egaproRenseignee ||
-  uniteLegale.complements.estOrganismeFormation ||
-  uniteLegale.complements.estQualiopi ||
-  uniteLegale.complements.estRge;
+  labelsAndCertificatesSources(uniteLegale).length > 0;
+
+export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
+  const sources = [];
+  const {
+    estEntrepreneurSpectacle,
+    estEss,
+    estBio,
+    egaproRenseignee,
+    estOrganismeFormation,
+    estSocieteMission,
+    estQualiopi,
+    estRge,
+  } = uniteLegale.complements;
+  if (estEntrepreneurSpectacle) sources.push(EAdministration.MC);
+  if (estEss || estSocieteMission) sources.push(EAdministration.INSEE);
+  if (estBio) sources.push(EAdministration.AGENCE_BIO);
+  if (egaproRenseignee || estOrganismeFormation || estQualiopi)
+    sources.push(EAdministration.MTPEI);
+  if (estRge) sources.push(EAdministration.ADEME);
+
+  return sources;
+};
 
 export const LabelsAndCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -23,10 +43,21 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     estQualiopi,
     estBio,
     egaproRenseignee,
+    estSocieteMission,
   } = uniteLegale.complements;
 
   return (
     <>
+      {estEss && (
+        <InformationTooltip label="Cette structure appartient au champ de l’Economie Sociale et Solidaire">
+          <LabelAndCertificateBadge label="ESS - Entreprise Sociale et Solidaire" />
+        </InformationTooltip>
+      )}
+      {estSocieteMission && (
+        <InformationTooltip label="Cette structure est une société à mission">
+          <LabelAndCertificateBadge label="Société à mission" />
+        </InformationTooltip>
+      )}
       {estOrganismeFormation &&
         (estQualiopi ? (
           <InformationTooltip label="Cette structure est déclarée en tant qu’organisme de formation et elle est certifiée Qualiopi">
@@ -45,11 +76,6 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
       {egaproRenseignee && (
         <InformationTooltip label="Cette structure a renseigné ses déclarations d’égalité entre les femmes et les hommes">
           <LabelAndCertificateBadge label="Égalité professionnelle" />
-        </InformationTooltip>
-      )}
-      {estEss && (
-        <InformationTooltip label="Cette structure appartient au champ de l’Economie Sociale et Solidaire">
-          <LabelAndCertificateBadge label="ESS - Entreprise Sociale et Solidaire" />
         </InformationTooltip>
       )}
       {estRge && (

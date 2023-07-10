@@ -52,6 +52,7 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
     <>
       <Meta
         title="Télécharger le justificatif d’immatriculation"
+        canonical={`https://annuaire-entreprises.data.gouv.fr/justificatif-immatriculation-pdf/${siren}`}
         noIndex={true}
       />
       <br />
@@ -67,7 +68,7 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
         >
           <Info full>
             Le téléservice de l’
-            <INPI /> peut malheureusement être victime de son succés et avoir{' '}
+            <INPI /> peut malheureusement être victime de son succès et avoir{' '}
             <b>du mal à répondre à toutes les demandes</b> de document.
             <br />
             Un téléchargement normal prend <b>entre 10 et 20 secondes</b>.{' '}
@@ -103,11 +104,11 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
                         <Loader /> téléchargement en cours
                       </Tag>
                       <span style={{ color: '#777', fontWeight: 'bold' }}>
-                        (temps estimé entre 10 secondes et 2 minute)
+                        (temps estimé entre 10 secondes et 2 minutes)
                       </span>
                     </>,
                     <>
-                      <Tag color="success">succés</Tag>
+                      <Tag color="success">succès</Tag>
                     </>,
                     <>
                       <Tag color="error">échec</Tag>
@@ -129,24 +130,39 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
                       <p>
                         Le document que vous recherchez n’a pas été retrouvé par
                         le téléservice de l’
-                        <INPI />.
+                        <INPI />. Si la structure est bien une entreprise,{' '}
+                        <b>cela ne devrait pas arriver</b>. Vous pouvez :
                       </p>
-                      <p>
-                        Il arrive que certaines structures soient correctement
-                        immatriculées mais que le document justificatif soit{' '}
-                        <b>introuvable</b>.
-                      </p>
-                      <p>
-                        Quand c’est le cas,{' '}
-                        <a href="https://www.inpi.fr/contactez-nous">
-                          écrivez à l’INPI pour leur demander le document.
-                        </a>{' '}
-                        L’
-                        <INPI /> étant à la fois l’opérateur du Registre
-                        National des Entreprises (RNE) et du téléservice qui
-                        produit les justificatifs, eux seuls sont en mesure de
-                        résoudre le problème.
-                      </p>
+                      <ol>
+                        <li>
+                          Soit essayer de télécharger le document{' '}
+                          <a
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            href={downloadLink}
+                          >
+                            directement sur le site de l’INPI
+                          </a>
+                          .
+                        </li>
+                        <li>
+                          Soit{' '}
+                          <a href="https://www.inpi.fr/contactez-nous">
+                            écrire à l’INPI pour leur demander le document.
+                          </a>
+                        </li>
+                        <p>
+                          L’
+                          <INPI /> est à la fois l’opérateur du Registre
+                          National des Entreprises (RNE) et du téléservice qui
+                          produit les justificatifs, c’est{' '}
+                          <b>
+                            la seule administration en mesure de résoudre le
+                            problème
+                          </b>
+                          .
+                        </p>
+                      </ol>
                     </>,
                   ]}
                 />,

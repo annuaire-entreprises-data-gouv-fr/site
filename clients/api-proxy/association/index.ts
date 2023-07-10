@@ -2,109 +2,70 @@ import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { IDataAssociation } from '#models/index';
-import { formatAdresse, IdRna } from '#utils/helpers';
+import { formatAdresse, IdRna, Siren } from '#utils/helpers';
 import { clientAPIProxy } from '../client';
 import { IAssociationResponse } from './types';
 
 /**
  * Association through the API proxy
+ *
+ * Takes either a RNA or Siren, but Siren seems to work much better
  * @param idRna
  */
-const clientAssociation = async (numeroRna: IdRna, useCache = true) => {
+const clientAssociation = async (
+  rnaOrSiren: IdRna | Siren,
+  siretSiege: string,
+  useCache = true
+) => {
   const response = await clientAPIProxy(
-    routes.association + numeroRna,
+    routes.association + rnaOrSiren,
     { timeout: constants.timeout.L },
     useCache
   );
 
   if (response.identite && Object.keys(response.identite).length === 1) {
-    throw new HttpNotFound(numeroRna);
+    throw new HttpNotFound(rnaOrSiren);
   }
-
-  return mapToDomainObject(numeroRna, response as IAssociationResponse);
+  return mapToDomainObject(response as IAssociationResponse, siretSiege);
 };
 
 const mapToDomainObject = (
-  idRna: IdRna,
-  association: IAssociationResponse
+  association: IAssociationResponse,
+  siretSiege: string
 ): IDataAssociation => {
-  const defaultAssociation = {
-    activites: { objet: '', lib_famille1: '' },
-    identite: {
-      nom: '',
-      id_ex: '',
-      lib_forme_juridique: '',
-      date_pub_jo: '',
-      date_creat: '',
-      date_dissolution: '',
-      eligibilite_cec: false,
-      regime: '',
-      util_publique: false,
-    },
-    coordonnees: {
-      adresse_siege: {
-        num_voie: '',
-        type_voie: '',
-        cp: '',
-        commune: '',
-        voie: '',
-      },
-      adresse_gestion: {
-        commune: '',
-        cp: '',
-        pays: '',
-        voie: '',
-      },
-      telephone: '',
-      courriel: '',
-      site_web: '',
-    },
-    agrement: [
-      {
-        date_attribution: '',
-        type: '',
-        numero: '',
-        niveau: '',
-        attributeur: '',
-        id: 0,
-        dateAttribution: '',
-      },
-    ],
-  };
+  const { agrement = [] } = association;
+  const { objet = '', lib_famille1 = '' } = association.activites || {};
+  const {
+    nom = '',
+    id_ex = '',
+    lib_forme_juridique = '',
+    date_pub_jo = '',
+    date_creat = '',
+    date_dissolution = '',
+    eligibilite_cec = false,
+    regime = '',
+    util_publique = false,
+  } = association.identite || {};
 
   const {
-    activites: { objet = '', lib_famille1 = '' },
-    identite: {
-      nom = '',
-      id_ex = '',
-      lib_forme_juridique = '',
-      date_pub_jo = '',
-      date_creat = '',
-      date_dissolution = '',
-      eligibilite_cec = false,
-      regime = '',
-      util_publique = false,
-    },
-    coordonnees: {
-      adresse_siege: {
-        num_voie = '',
-        type_voie = '',
-        cp = '',
-        commune = '',
-        voie = '',
-      },
-      adresse_gestion: {
-        commune: communeGestion = '',
-        cp: cpGestion = '',
-        pays: paysGestion = '',
-        voie: voieGestion = '',
-      },
-      telephone = '',
-      courriel = '',
-      site_web = '',
-    },
-    agrement,
-  } = { ...defaultAssociation, ...association };
+    num_voie = '',
+    type_voie = '',
+    cp = '',
+    commune = '',
+    voie = '',
+  } = association?.coordonnees?.adresse_siege || {};
+
+  const {
+    commune: communeGestion = '',
+    cp: cpGestion = '',
+    pays: paysGestion = '',
+    voie: voieGestion = '',
+  } = association?.coordonnees?.adresse_gestion || {};
+  const {
+    telephone = '',
+    courriel = '',
+    site_web = '',
+  } = association?.coordonnees || {};
 
   const protocol = (site_web || '').indexOf('http') === 0 ? '' : 'https://';
   const siteWeb = site_web ? `${protocol}${site_web}` : '';
@@ -142,6 +103,28 @@ const mapToDomainObject = (
       libelleCommune: communeGestion,
     }),
     adresseInconsistency: false,
+    bilans: association.compte
+      .filter((c) => c.annee > 0 && c.id_siret === siretSiege)
+      .map(
+        ({
+          dons = 0,
+          subv = 0,
+          produits = 0,
+          charges = 0,
+          resultat = 0,
+          annee,
+        }) => {
+          return {
+            charges,
+            resultat,
+            subv,
+            dons,
+            produits,
+            year: annee,
+          };
+        }
+      )
+      .sort((c, b) => c.year - b.year),
   };
 };
 

@@ -2,7 +2,8 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import ElusSection from '#components/dirigeants-section/elus-section';
 import Meta from '#components/meta';
-import Title, { FICHE } from '#components/title-section';
+import Title from '#components/title-section';
+import { FICHE } from '#components/title-section/tabs';
 import { IUniteLegale } from '#models/index';
 import { getNomComplet } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
@@ -24,7 +25,9 @@ const ElusPage: NextPageWithLayout<IProps> = ({
   return (
     <>
       <Meta
-        title={`Élus de ${getNomComplet(uniteLegale)} - ${uniteLegale.siren}`}
+        title={`Élus de ${getNomComplet(uniteLegale, session)} - ${
+          uniteLegale.siren
+        }`}
         canonical={`https://annuaire-entreprises.data.gouv.fr/elus/${uniteLegale.siren}`}
         noIndex={true}
       />

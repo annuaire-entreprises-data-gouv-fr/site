@@ -1,9 +1,9 @@
 import { clientAssociation } from '#clients/api-proxy/association';
 import { clientBanGeoLoc } from '#clients/base-adresse';
 import { HttpNotFound } from '#clients/exceptions';
-import { escapeTerm, Siren, verifyIdRna } from '#utils/helpers';
+import { escapeTerm, Siren } from '#utils/helpers';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
-import { IDataAssociation, IUniteLegale, NotAValidIdRnaError } from '.';
+import { IDataAssociation, IUniteLegale } from '.';
 
 export const getAssociation = async (
   uniteLegale: IUniteLegale
@@ -12,8 +12,7 @@ export const getAssociation = async (
   const { siren } = uniteLegale;
 
   try {
-    const idRna = verifyIdRna(slug);
-    const data = await clientAssociation(idRna);
+    const data = await clientAssociation(siren, uniteLegale.siege.siret);
 
     const adresseInconsistency = await verifyAdressConsistency(
       siren,
@@ -31,14 +30,8 @@ export const getAssociation = async (
         siren,
         details: `RNA : ${slug}`,
       });
-    } else if (e instanceof NotAValidIdRnaError) {
-      // no need to log warning or to make an api call, we know Id is not valid
-    } else {
-      logErrorInSentry('Error in API ASSOCIATION', {
-        siren,
-        details: e.toString(),
-      });
     }
+    // no need to log an error as API-Proxy already logged it
     return null;
   }
 };

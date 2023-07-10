@@ -1,5 +1,6 @@
 import React from 'react';
-import ImmatriculationNotFoundAlert from '#components-ui/alerts/immatriculation-not-found-alert';
+import AssociationCreationNotFoundAlert from '#components-ui/alerts/association-creation-not-found-alert';
+import ImmatriculationRNENotFoundAlert from '#components-ui/alerts/rne-not-found-alert';
 import AvisSituationSection from '#components/immatriculations/insee';
 import ImmatriculationJOAFE from '#components/immatriculations/joafe';
 import ImmatriculationSummary from '#components/immatriculations/summary';
@@ -8,8 +9,9 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IImmatriculation } from '#models/immatriculation';
-import { isAssociation } from '#models/index';
+import { isAssociation, isServicePublic } from '#models/index';
 import { IJustificatifs } from '#models/justificatifs';
+import { ISession } from '#utils/session';
 import ImmatriculationRNE from './rne';
 
 const isNotFound = (
@@ -20,10 +22,15 @@ const isNotFound = (
   );
 };
 
-const Immatriculations: React.FC<IJustificatifs> = ({
+interface IProps extends IJustificatifs {
+  session: ISession | null;
+}
+
+const Immatriculations: React.FC<IProps> = ({
   immatriculationJOAFE,
   immatriculationRNE,
   uniteLegale,
+  session,
 }) => {
   const isAnAssociation = isAssociation(uniteLegale);
 
@@ -44,8 +51,17 @@ const Immatriculations: React.FC<IJustificatifs> = ({
       />
       {noImmatriculation ? (
         <>
-          <ImmatriculationNotFoundAlert uniteLegale={uniteLegale} />
-          <br />
+          {isAssociation(uniteLegale) ? (
+            <>
+              <AssociationCreationNotFoundAlert association={uniteLegale} />
+              <br />
+            </>
+          ) : isServicePublic(uniteLegale) ? null : (
+            <>
+              <ImmatriculationRNENotFoundAlert uniteLegale={uniteLegale} />
+              <br />
+            </>
+          )}
         </>
       ) : (
         <>
@@ -60,7 +76,7 @@ const Immatriculations: React.FC<IJustificatifs> = ({
           )}
         </>
       )}
-      <AvisSituationSection uniteLegale={uniteLegale} />
+      <AvisSituationSection uniteLegale={uniteLegale} session={session} />
     </>
   );
 };

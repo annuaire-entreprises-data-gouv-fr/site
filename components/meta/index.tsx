@@ -28,6 +28,8 @@ const Meta: React.FC<IProps> = ({
       ? `${description.substring(0, 140)}…`
       : description;
 
+  const shouldNotIndex = process.env.INDEXING_ENABLED !== 'enabled';
+
   return (
     <>
       <NextSeo
@@ -41,7 +43,7 @@ const Meta: React.FC<IProps> = ({
           description: description || SITE_DESCRIPTION,
           images: [
             {
-              url: '/images/linkedin.jpg',
+              url: 'https://annuaire-entreprises.data.gouv.fr/images/linkedin.jpg',
               width: 1200,
               height: 627,
               alt: 'annuaire-entreprises.data.gouv.fr',
@@ -49,7 +51,7 @@ const Meta: React.FC<IProps> = ({
           ],
           site_name: SITE_NAME,
         }}
-        noindex={noIndex}
+        noindex={shouldNotIndex || noIndex}
         nofollow={false}
       />
       <Head>

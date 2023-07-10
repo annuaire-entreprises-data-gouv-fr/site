@@ -99,11 +99,6 @@ const extractDetails = (annonce: IBodaccRecords): string => {
   try {
     if ((annonce as IBodaccA).jugement) {
       const jugement = JSON.parse((annonce as IBodaccA).jugement || '{}');
-
-      const isProcedure = annonce.familleavis_lib === 'Procédures collectives';
-
-      const procedure = isProcedure ? {} : undefined;
-
       return jugement.complementJugement;
     }
     if ((annonce as IBodaccA).acte) {

@@ -14,9 +14,9 @@
 administrations:
   - mi
   - insee
-targets:
+faqTargets:
   - agent
-  - dirigeant
+  - association
 title: Pourquoi je ne retrouve pas une association dans les résultats de recherche ?
 seo:
   description: Seules les associations qui possèdent un numéro SIREN et un numéro SIRET ont une fiche dans l'Annuaire des Entreprises.
@@ -25,7 +25,7 @@ body: |
 
   Celles qui n'en disposent pas ne sont donc référencées.
 
-  **Pourquoi certaines associations ont un SIREN / SIRET et d'autres pas ?**
+  ## Pourquoi certaines associations ont un SIREN / SIRET et d'autres pas ?
 
   Une association doit posséder un SIREN et un SIRET si elle souhaite :
   - demander des subventions publiques

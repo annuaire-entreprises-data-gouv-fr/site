@@ -5,7 +5,6 @@ import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
 import AvisSituationLink from '#components/avis-situation-link';
-import { EtablissementDescription } from '#components/etablissement-description';
 import { Section } from '#components/section';
 import { CopyPaste, TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
@@ -13,15 +12,19 @@ import { EAdministration } from '#models/administrations';
 import { estActif } from '#models/etat-administratif';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import {
-  estDiffusible,
   getAdresseEtablissement,
   getDenominationEtablissement,
   getEnseigneEtablissement,
+  getEtablissementName,
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatDate, formatSiret } from '#utils/helpers';
+import { getCompanyLabel, getCompanyPronoun } from '#utils/helpers';
+import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
+import { ISession } from '#utils/session';
 
 type IProps = {
+  session: ISession | null;
   etablissement: IEtablissement;
   uniteLegale: IUniteLegale;
   usedInEntreprisePage?: boolean;
@@ -33,11 +36,19 @@ const EtablissementSection: React.FC<IProps> = ({
   uniteLegale,
   usedInEntreprisePage,
   withDenomination,
+  session,
 }) => {
+  const companyType = `${getCompanyPronoun(
+    uniteLegale
+  ).toLowerCase()}${getCompanyLabel(uniteLegale)}`;
+
   const data = [
     ...(withDenomination
       ? [
-          ['Dénomination de l’unité légale', getNomComplet(uniteLegale)],
+          [
+            `Dénomination de ${companyType}`,
+            getNomComplet(uniteLegale, session),
+          ],
           [
             'Type d’établissement',
             <>
@@ -51,7 +62,7 @@ const EtablissementSection: React.FC<IProps> = ({
               )}
               {' ( '}
               <a key="entite" href={`/entreprise/${uniteLegale.chemin}`}>
-                → voir la page de l’unité légale
+                → voir la page de {companyType}
               </a>
               {' )'}
             </>,
@@ -62,7 +73,7 @@ const EtablissementSection: React.FC<IProps> = ({
       ? [
           [
             'Enseigne de l’établissement',
-            getEnseigneEtablissement(etablissement),
+            getEnseigneEtablissement(etablissement, session),
           ],
         ]
       : []),
@@ -70,7 +81,7 @@ const EtablissementSection: React.FC<IProps> = ({
       ? [
           [
             'Nom de l’établissement',
-            getDenominationEtablissement(etablissement),
+            getDenominationEtablissement(etablissement, session),
           ],
         ]
       : []),
@@ -80,7 +91,9 @@ const EtablissementSection: React.FC<IProps> = ({
       </FAQLink>,
       etablissement.adresse ? (
         <>
-          <CopyPaste>{getAdresseEtablissement(etablissement)}</CopyPaste>
+          <CopyPaste>
+            {getAdresseEtablissement(etablissement, session)}
+          </CopyPaste>
           <PrintNever key="adresse-link">
             <a href={`/carte/${etablissement.siret}`}>→ voir sur la carte</a>
             <br />
@@ -101,20 +114,29 @@ const EtablissementSection: React.FC<IProps> = ({
                 Comprendre le numéro de TVA intracommunautaire
               </a>
             </FAQLink>,
-            <TVACell />,
+            <TVACell siren={uniteLegale.siren} />,
           ],
         ]
       : []),
     [
-      'Activité principale de l’unité légale (NAF/APE)',
+      `Activité principale de ${companyType} (NAF/APE)`,
       uniteLegale.libelleActivitePrincipale,
     ],
     [
-      'Activité principale de l’établissement (NAF/APE)',
+      `Activité principale de l’établissement (NAF/APE)`,
       etablissement.libelleActivitePrincipale,
     ],
+    ['Code NAF/APE de l’établissement', etablissement.activitePrincipale],
     ['Nature juridique', uniteLegale.libelleNatureJuridique],
-    ['Tranche d’effectif salarié', etablissement.libelleTrancheEffectif],
+    [
+      'Tranche d’effectif salarié',
+      libelleTrancheEffectif(
+        uniteLegale.trancheEffectif === 'N'
+          ? 'N'
+          : etablissement.trancheEffectif,
+        etablissement.anneeTrancheEffectif
+      ),
+    ],
     ['Date de création', formatDate(etablissement.dateCreation)],
     [
       'Date de dernière mise à jour',
@@ -131,17 +153,15 @@ const EtablissementSection: React.FC<IProps> = ({
 
   return (
     <>
-      {!usedInEntreprisePage && (
-        <EtablissementDescription
-          etablissement={etablissement}
-          uniteLegale={uniteLegale}
-        />
-      )}
       <Section
         title={
           usedInEntreprisePage
-            ? `Siège social de ${getNomComplet(uniteLegale)}`
-            : `Établissement${etablissement.estSiege ? ' (siège social)' : ''}`
+            ? `Siège social de ${getNomComplet(uniteLegale, session)}`
+            : `Information légales de l’établissement ${getEtablissementName(
+                etablissement,
+                uniteLegale,
+                session
+              )} à ${etablissement.commune}`
         }
         id="etablissement"
         sources={[EAdministration.INSEE]}

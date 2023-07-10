@@ -1,6 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { logEventInMatomo } from '#utils/analytics/matomo';
 import logInMattermost from '#utils/integrations/mattermost';
+import {
+  logSuggestionToNotion,
+  notionFeedbacksLink,
+} from '#utils/integrations/notion';
 import logErrorInSentry from '#utils/sentry';
 
 const logAllEvents = async (req: NextApiRequest) => {
@@ -11,14 +15,21 @@ const logAllEvents = async (req: NextApiRequest) => {
     const mood = req.body['radio-set-mood'];
     const uuid = req.body['uuid'];
     const origin = req.body['radio-set-visitor-origin'] || NA;
+    const text = req.body['textarea'] || null;
+    const email = req.body['email'] || NA;
+
+    const commentaire = text
+      ? ` \nCommentaire : *${text}* \nEmail : ${email} \nLien notion : [👉 ici](${notionFeedbacksLink})`
+      : '';
 
     const mattermostData = {
       username: 'clippy',
-      text: `Note : **${mood}/10** \nVisiteur : ${visitorType} \nOrigine : ${origin}`,
+      text: `Note : **${mood}/10** \nVisiteur : ${visitorType} \nOrigine : ${origin}${commentaire}`,
     };
 
-    await logInMattermost(mattermostData);
-    await logEventInMatomo(
+    // async functions but no need to await them
+    logInMattermost(mattermostData);
+    logEventInMatomo(
       'feedback:nps',
       NA,
       `mood=${mood}&type=${visitorType}&origin=${origin}&date=${
@@ -26,6 +37,10 @@ const logAllEvents = async (req: NextApiRequest) => {
       }&uuid=${uuid}`,
       'nps'
     );
+    if (text) {
+      // async functions but no need to await them
+      logSuggestionToNotion(visitorType, email, text);
+    }
   } catch (e: any) {
     logErrorInSentry('Error in form submission', { details: e.toString() });
   }
@@ -36,7 +51,7 @@ const saveAndRedirect = async (req: NextApiRequest, res: NextApiResponse) => {
   logAllEvents(req);
 
   res.writeHead(302, {
-    Location: '/formulaire/nps/merci',
+    Location: '/formulaire/merci',
   });
   res.end();
 };

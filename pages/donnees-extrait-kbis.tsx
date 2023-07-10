@@ -7,7 +7,10 @@ import { NextPageWithLayout } from './_app';
 const ExtraitKbis: NextPageWithLayout = () => {
   return (
     <>
-      <Meta title="Comment ça marche ?" />
+      <Meta
+        title="Comment retrouver les données contenues dans un extrait KBIS ou D1 ?"
+        canonical="https://annuaire-entreprises.data.gouv.fr/donnees-extrait-kbis"
+      />
       <TextWrapper>
         <h1>
           Retrouver les données contenues dans un extrait KBIS ou un extrait D1

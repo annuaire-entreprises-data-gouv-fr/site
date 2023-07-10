@@ -7,8 +7,8 @@ import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
 import { IAssociation } from '#models/index';
+import { formatDate, formatIntFr } from '#utils/helpers';
 import { isTwoMonthOld } from '#utils/helpers/checks';
-import { formatDate, formatIntFr } from '#utils/helpers/formatting';
 
 const AssociationSection: React.FC<{
   uniteLegale: IAssociation;
@@ -125,8 +125,8 @@ const AssociationSection: React.FC<{
           <>
             <p>
               Cette structure est inscrite au{' '}
-              <b>Répertoire National des Associations (RNA)</b>, qui contient
-              les informations suivantes&nbsp;:
+              <b>Répertoire National des Associations (RNA)</b>, avec les
+              informations suivantes&nbsp;:
             </p>
             <TwoColumnTable body={lines} />
           </>

@@ -17,7 +17,7 @@
 # datasources: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
 # body: le corps du texte, en markdown
 slug: collectivites-territoriales
-title: Rechercher une collectivité territoriale
+title: une collectivité territoriale
 footerLabel: Collectivités territoriales
 published: true
 isServicePublic: true

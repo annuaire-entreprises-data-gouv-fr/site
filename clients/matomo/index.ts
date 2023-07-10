@@ -11,11 +11,15 @@ export type IMatomoStats = {
     visitorReturning: number;
     visitorUnknown: number;
   }[];
-  monthlyUserNps: {
+  monthlyNps: {
     label: string;
     number: number;
-    nps: number;
-    npsResponses: number;
+    values: {
+      [key: string]: {
+        nps: number | null;
+        npsResponses: number | null;
+      };
+    };
   }[];
   userResponses: { [key: string]: { value: number; tooltip: string } };
   mostCopied: { label: string; count: number }[];
@@ -55,58 +59,72 @@ const getLabel = (labelAsString: string, index: number) => {
  * Aggregate event by month and userType
  */
 const aggregateEvents = (
-  matomoEventStats: { label: string; nb_events: number }[]
+  matomoEventStats: { label: string; nb_events: number }[][]
 ) => {
-  const months = {} as {
+  const months: {
     [monthKey: string]: { [userTypeKey: string]: number[] };
-  };
+  } = {};
 
-  const totals = {} as {
+  const totals: {
     [userTypeKey: string]: { value: number; tooltip: string };
-  };
+  } = {};
 
-  matomoEventStats.forEach((stat) => {
-    if (stat.label.indexOf('mood=') === -1) {
-      return;
-    }
+  matomoEventStats
+    .flatMap((i) => i)
+    .forEach((stat) => {
+      if (stat.label.indexOf('mood=') === -1) {
+        return;
+      }
 
-    const responses = stat.label.split('&');
-    const mood = parseInt(responses[0].replace('mood=', ''), 10);
-    const userType = responses[1].replace('type=', '');
-    const date = new Date(responses[3].replace('date=', ''));
-    const monthLabel = getMonthLabelFromDate(date);
+      const responses = stat.label.split('&');
+      const mood = parseInt(responses[0].replace('mood=', ''), 10);
+      const date = new Date(responses[3].replace('date=', ''));
+      const monthLabel = getMonthLabelFromDate(date);
 
-    // migration from 10-based nps to 5 based on 2022-01-30, ended on 2022-02-15
-    const is5Based =
-      date > new Date('2022-01-30') && date < new Date('2022-02-15');
-    const nps = is5Based ? mood * 2 : mood;
+      let userType = responses[1].replace('type=', '');
 
-    if (userType === 'Non renseigné' || nps < 0) {
-      return;
-    }
+      // rewrite legacy labels
+      if (userType === 'Administration publique') {
+        userType = 'Agent public';
+      }
+      if (userType === 'Entreprise privée') {
+        userType = 'Dirigeant';
+      }
+      if (userType === 'Association') {
+        userType = 'Salarié';
+      }
 
-    if (!months[monthLabel]) {
-      months[monthLabel] = {};
-    }
-    if (!months[monthLabel][userType]) {
-      months[monthLabel][userType] = [];
-    }
-    if (!months[monthLabel]['all']) {
-      months[monthLabel]['all'] = [];
-    }
+      // migration from 10-based nps to 5 based on 2022-01-30, ended on 2022-02-15
+      const is5Based =
+        date > new Date('2022-01-30') && date < new Date('2022-02-15');
+      const nps = is5Based ? mood * 2 : mood;
 
-    months[monthLabel][userType].push(nps);
-    months[monthLabel]['all'].push(nps);
+      if (userType === 'Non renseigné' || nps < 0) {
+        return;
+      }
 
-    totals[userType] = {
-      value: (totals[userType]?.value || 0) + 1,
-      tooltip: '',
-    };
-    totals['all'] = {
-      value: (totals['all']?.value || 0) + 1,
-      tooltip: '',
-    };
-  });
+      if (!months[monthLabel]) {
+        months[monthLabel] = {};
+      }
+      if (!months[monthLabel][userType]) {
+        months[monthLabel][userType] = [];
+      }
+      if (!months[monthLabel]['all']) {
+        months[monthLabel]['all'] = [];
+      }
+
+      months[monthLabel][userType].push(nps);
+      months[monthLabel]['all'].push(nps);
+
+      totals[userType] = {
+        value: (totals[userType]?.value || 0) + 1,
+        tooltip: '',
+      };
+      totals['all'] = {
+        value: (totals['all']?.value || 0) + 1,
+        tooltip: '',
+      };
+    });
 
   const totalAll = totals['all'].value;
   Object.keys(totals).forEach((userTypeKey) => {
@@ -132,7 +150,7 @@ const computeStats = (
     nb_visits_new: number;
     nb_visits_returning: number;
   }[],
-  matomoNpsEventStats: { label: string; nb_events: number }[],
+  matomoNpsEventStats: { label: string; nb_events: number }[][],
   matomoCopyPasteEventStats: { label: string; nb_events: number }[],
   matomoEventsCategory: {
     label: string;
@@ -140,20 +158,30 @@ const computeStats = (
   }[][]
 ) => {
   const events = aggregateEvents(matomoNpsEventStats);
-  const monthlyUserNps = [] as {
-    label: string;
-    number: number;
-    nps: number;
-    npsResponses: number;
-  }[];
   const lastYear = getLastYear();
-
   const visits = [];
   const redirectedSiren = [];
   /* Currently the only action we have in matomo is copyPaste
    *  https://stats.data.gouv.fr/index.php?module=CoreHome&action=index&idSite=145&period=range&date=previous30#?period=range&date=previous30&idSite=145&category=General_Actions&subcategory=Events_Events
    */
   const copyPasteAction = [];
+
+  const npsData: any = {};
+  const monthlyNps: IMatomoStats['monthlyNps'] = [];
+
+  for (const month in events.months) {
+    for (const property in events.months[month]) {
+      const count = events.months[month][property].length;
+      const avg =
+        events.months[month][property].reduce((sum, el = 0) => sum + el, 0) /
+        count;
+      npsData[month] = npsData[month] || {};
+      npsData[month][property] = {
+        nps: Math.max(1, Math.round(avg * 10)) / 10,
+        npsResponses: count,
+      };
+    }
+  }
 
   for (let i = 0; i < 12; i++) {
     lastYear.setMonth(lastYear.getMonth() + 1);
@@ -191,19 +219,11 @@ const computeStats = (
         0,
     });
 
-    const monthlyNps = events.months[monthLabel]['all'];
-    if (monthlyNps) {
-      const count = monthlyNps.length;
-      const avg = monthlyNps.reduce((sum, el = 0) => sum + el, 0) / count;
-
-      monthlyUserNps.push({
-        number: lastYear.getMonth() + 1,
-        label: monthLabel,
-        // prefer display 1 rather than 0
-        nps: Math.max(1, Math.round(avg * 10)) / 10,
-        npsResponses: monthlyNps.length,
-      });
-    }
+    monthlyNps.push({
+      number: lastYear.getMonth() + 1,
+      label: monthLabel,
+      values: npsData[monthLabel],
+    });
   }
 
   const mostCopiedAggregator = {} as { [key: string]: number };
@@ -227,7 +247,7 @@ const computeStats = (
 
   return {
     copyPasteAction,
-    monthlyUserNps,
+    monthlyNps,
     mostCopied,
     redirectedSiren,
     userResponses: events.totals,
@@ -244,7 +264,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       matomoEventsCategory,
     ] = await Promise.all([
       httpGet(createPageViewUrl()),
-      httpGet(createNpsEventUrl()),
+      getNpsEvent(),
       httpGet(createCopyPasteEventUrl()),
       httpGet(createEventsCategoryUrl()),
     ]);
@@ -263,11 +283,11 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
     });
     return {
       visits: [],
-      monthlyUserNps: [],
-      userResponses: {},
+      monthlyNps: [],
       mostCopied: [],
       copyPasteAction: [],
       redirectedSiren: [],
+      userResponses: {},
     };
   }
 };
@@ -296,6 +316,29 @@ const createPageViewUrl = () => {
   return baseUrl;
 };
 
+const getEventSubtableIds = async () => {
+  let baseUrl = routes.matomo.report.bulkRequest;
+  const lastYear = getLastYear();
+  for (let i = 0; i < 12; i++) {
+    lastYear.setMonth(lastYear.getMonth() + 1);
+    baseUrl += `&urls[${i}]=`;
+    const subRequest = `idSite=145&period=month&method=Events.getCategory&module=API&showColumns=idsubtable&secondaryDimension=eventName&date=${YYYYMMDD(
+      lastYear
+    )}`;
+    baseUrl += encodeURIComponent(subRequest);
+  }
+  const events = await httpGet(baseUrl);
+  const filterCategory = events.data.map((event: any) => {
+    return event.map((ev: any) =>
+      ev.segment === 'eventCategory==feedback%3Anps' ? ev.idsubdatatable : null
+    );
+  });
+  const eventSubtableIds = filterCategory
+    .map((k: any) => k.filter((e: any) => e !== null))
+    .map((a: any) => a[0]);
+  return eventSubtableIds;
+};
+
 const createEventsCategoryUrl = () => {
   let baseUrl = routes.matomo.report.bulkRequest;
   const lastYear = getLastYear();
@@ -307,17 +350,31 @@ const createEventsCategoryUrl = () => {
     )}`;
     baseUrl += encodeURIComponent(subRequest);
   }
-
   return baseUrl;
 };
 
 /**
  * Compute matomo API url to extract events count
  */
-const createNpsEventUrl = () => {
+const getNpsEvent = async () => {
   const lastYear = getLastYear();
-  const dateRange = `${YYYYMMDD(lastYear)},${YYYYMMDD(new Date())}`;
-  return routes.matomo.report.npsEvents + dateRange;
+  const subtableIdsResponse = await getEventSubtableIds();
+
+  let baseUrl = routes.matomo.report.bulkRequest;
+
+  for (let i = 0; i < 12; i++) {
+    lastYear.setMonth(lastYear.getMonth() + 1);
+    baseUrl += `&urls[${i}]=`;
+    const subRequest = `idSite=145&period=month&method=Events.getNameFromCategoryId&idSubtable=${
+      subtableIdsResponse[i]
+    }&module=API&showColumns=label,nb_events&filter_limit=9999&date=${YYYYMMDD(
+      lastYear
+    )}`;
+
+    baseUrl += encodeURIComponent(subRequest);
+  }
+
+  return httpGet(baseUrl);
 };
 
 const createCopyPasteEventUrl = () => {

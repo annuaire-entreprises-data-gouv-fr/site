@@ -15,7 +15,7 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
-import { IImmatriculationRNE } from '#models/immatriculation/rne';
+import { IImmatriculationRNE } from '#models/immatriculation';
 import { IUniteLegale } from '#models/index';
 import { formatDate, formatIntFr } from '#utils/helpers';
 

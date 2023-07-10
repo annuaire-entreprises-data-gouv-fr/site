@@ -11,7 +11,7 @@ export class PromiseTimeoutError extends Error {
 }
 
 /**
- * Rejects a promise with a {@link TimeoutError} if it does not settle within
+ * Rejects a promise with a {@link PromiseTimeoutError} if it does not settle within
  * the specified timeout.
  *
  * @param {Promise} promise The promise.
