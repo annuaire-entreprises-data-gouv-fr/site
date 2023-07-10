@@ -3,7 +3,6 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from '#components/labels-and-certificates-badges-section';
-import { hasAssociationBilan } from '#models/association';
 import constants from '#models/constants';
 import {
   IUniteLegale,
