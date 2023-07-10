@@ -3,9 +3,11 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from '#components/labels-and-certificates-badges-section';
+import { hasAssociationBilan } from '#models/association';
 import constants from '#models/constants';
 import {
   IUniteLegale,
+  isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/index';
@@ -31,6 +33,18 @@ export const Tabs: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ currentFicheType, uniteLegale }) => {
+  const shouldDisplayFinances =
+    // hide for public services
+    !isServicePublic(uniteLegale) &&
+    // hide for EI
+    !uniteLegale.complements.estEntrepreneurIndividuel &&
+    // hide for asso without bilans
+    !(
+      isAssociation(uniteLegale) &&
+      uniteLegale.association.data?.bilans &&
+      uniteLegale.association.data?.bilans.length === 0
+    );
+
   const tabs = [
     {
       ficheType: FICHE.INFORMATION,
@@ -66,9 +80,7 @@ export const Tabs: React.FC<{
       label: 'Données financières',
       pathPrefix: '/donnees-financieres/',
       noFollow: false,
-      shouldDisplay:
-        !isServicePublic(uniteLegale) &&
-        !uniteLegale.complements.estEntrepreneurIndividuel,
+      shouldDisplay: shouldDisplayFinances,
       width: '110px',
     },
     {
