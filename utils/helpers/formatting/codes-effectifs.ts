@@ -1,11 +1,6 @@
 import { IUniteLegale } from '#models/index';
 
 export const codesEffectifsOptions = [
-  // first item is not and actual Insee value, we set it arbitrarily when caractereEmployeurUniteLegale is set to 'N' meaning unite legale does not have any employee
-  {
-    label: 'Unité non employeuse',
-    value: 'N',
-  },
   {
     label:
       "Unité non employeuse (pas de salarié au cours de l'année de référence et pas d'effectif au 31/12)",
@@ -40,20 +35,22 @@ const formatAsMap = () => {
   }, {});
 };
 
-export const codesEffectifs = formatAsMap();
+const codesEffectifs = formatAsMap();
 
 export const libelleTrancheEffectif = (
   trancheEffectif: string | null,
   anneeTrancheEffectif: string | null
 ) => {
+  if (trancheEffectif === 'N') {
+    // not an actual Insee value, we set it arbitrarily when caractereEmployeurUniteLegale is set to 'N' meaning unite legale does not have any employee
+    return 'Unité non employeuse';
+  }
+
   //@ts-ignore
   const libelle = codesEffectifs[trancheEffectif];
 
   if (!libelle) {
     return null;
-  }
-  if (trancheEffectif === 'N') {
-    return libelle;
   }
   if (!anneeTrancheEffectif) {
     return null;

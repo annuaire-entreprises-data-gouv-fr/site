@@ -4,10 +4,6 @@ import type { ReactElement, ReactNode } from 'react';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import { ISession } from '#utils/session';
 
-if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-  require('../mocks/index');
-}
-
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (
     page: ReactElement,

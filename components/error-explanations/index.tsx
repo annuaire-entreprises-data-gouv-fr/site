@@ -7,9 +7,8 @@ const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
     {children}
     <p>
       Si vous êtes arrivé sur cette page en cliquant sur un lien du site, merci
-      de nous contacter via{' '}
-      <a href={constants.links.mailto}>{constants.links.mail}</a> pour que nous
-      puissions trouver la panne 🕵️‍♀️.
+      de <a href={constants.links.parcours.contact}>nous contacter</a> pour que
+      nous puissions trouver la panne 🕵️‍♀️.
     </p>
     <p>En attendant, vous pouvez toujours :</p>
     <div className="layout-left">
@@ -50,9 +49,9 @@ const SearchErrorExplanations = () => (
       <a href="/rechercher">fonctionner de nouveau</a> dans quelques instants.
     </p>
     <p>
-      Si la situation perdure, merci de nous contacter via{' '}
-      <a href={constants.links.mailto}>{constants.links.mail}</a> pour que nous
-      puissions trouver la panne 🕵️‍♀️.
+      Si la situation perdure, merci de{' '}
+      <a href={constants.links.parcours.contact}>nous contacter</a> pour que
+      nous puissions trouver la panne 🕵️‍♀️.
     </p>
   </div>
 );

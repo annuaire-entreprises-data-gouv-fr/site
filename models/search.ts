@@ -1,4 +1,4 @@
-import { HttpNotFound } from '#clients/exceptions';
+import { HttpBadRequestError, HttpNotFound } from '#clients/exceptions';
 import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
 import { IDirigeant } from '#models/immatriculation';
 import SearchFilterParams from '#models/search-filter-params';
@@ -30,6 +30,7 @@ export interface ISearchResults {
   pageCount: number;
   results: ISearchResult[];
   notEnoughParams?: boolean;
+  badParams?: boolean;
 }
 
 const noResults = {
@@ -60,6 +61,10 @@ const search = async (
       searchFilterParams,
     });
   } catch (e: any) {
+    if (e instanceof HttpBadRequestError) {
+      return { ...noResults, badParams: true };
+    }
+
     if (e instanceof IsLikelyASirenOrSiretException) {
       throw e;
     }

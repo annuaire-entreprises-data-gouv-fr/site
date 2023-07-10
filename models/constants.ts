@@ -4,6 +4,10 @@ const constants = {
     mail: 'annuaire-entreprises@data.gouv.fr',
     mailtoInpi: 'mailto:licences@inpi.fr',
     mailInpi: 'licences@inpi.fr',
+    parcours: {
+      modification: '/faq/parcours?question=modification',
+      contact: '/faq/parcours?question=contact',
+    },
   },
   resultsPerPage: { etablissements: 200, search: 30 },
   timeout: {

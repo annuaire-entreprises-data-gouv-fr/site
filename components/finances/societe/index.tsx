@@ -78,9 +78,9 @@ export const FinancesSocieteSection: React.FC<IFinances> = ({
       <Info>
         Cette section est un travail en cours.
         <br />
-        Si vous découvrez une erreur, merci de nous en faire part et nous la
-        corrigerons au plus vite (
-        <a href={constants.links.mailto}>{constants.links.mail}</a>).
+        Si vous découvrez une erreur, merci de{' '}
+        <a href={constants.links.parcours.contact}>nous en faire part</a> et
+        nous la corrigerons au plus vite.
       </Info>
       {financesSociete.hasBilanConsolide && (
         <p>
