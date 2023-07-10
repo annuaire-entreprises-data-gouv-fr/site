@@ -40,7 +40,10 @@ const LandingPage: NextPageWithLayout<IProps> = ({
       method="get"
     >
       <h1>
-        <span className="diamond">{diamond}</span>
+        <span className="diamond">
+          <span>{diamond}</span>Rechercher
+          <br />
+        </span>
         {title}
       </h1>
       <h2 className="sub-title">{description}</h2>
@@ -84,12 +87,16 @@ const LandingPage: NextPageWithLayout<IProps> = ({
     <style jsx>{`
       h1 {
         font-size: 2.2rem;
+        line-height: 4rem;
         text-align: center;
         position: relative;
       }
       .diamond {
+        position: relative;
+      }
+      .diamond > span {
         position: absolute;
-        top: -30px;
+        top: -25px;
         left: -30px;
         z-index: -1;
         color: #ffeff0;
@@ -131,8 +138,8 @@ const LandingPage: NextPageWithLayout<IProps> = ({
           font-size: 1.5rem;
           line-height: 2rem;
         }
-        .diamond {
-          top: -25px;
+        .diamond > span {
+          top: -35px;
           left: 50%;
           transform: translateX(-50%);
         }

@@ -58,11 +58,20 @@ const Question: React.FC<IProps> = ({
   userType,
   questions = [],
 }) => {
+  const bottomRef = useRef(null);
+
   const [dataToModify, selectDataToModify] = useState<any>('');
 
   useEffect(() => {
     selectDataToModify('');
   }, [questionType]);
+
+  useEffect(() => {
+    if (bottomRef && bottomRef.current) {
+      //@ts-ignore
+      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [dataToModify]);
 
   switch (questionType) {
     case EQuestionType.CONTACT:
@@ -153,6 +162,7 @@ const Question: React.FC<IProps> = ({
           />
           {dataToModify && (
             <Answer>
+              <span ref={bottomRef} />
               <MatomoEvent
                 category="parcours:modification"
                 action={userType}
@@ -266,7 +276,7 @@ const Parcours: NextPageWithLayout<{
 
   return (
     <>
-      <h1 ref={scrollRef}>Bonjour, comment pouvons-nous vous aider ?</h1>
+      <h1>Bonjour, comment pouvons-nous vous aider ?</h1>
       <p>Pour commencer, faisons connaissance :</p>
       <b>Qui êtes-vous ?</b>
       <MultiChoice
@@ -284,6 +294,7 @@ const Parcours: NextPageWithLayout<{
           }
         )}
       />
+      <span ref={scrollRef} />
       {userType && (
         <Question
           questionType={questionType}

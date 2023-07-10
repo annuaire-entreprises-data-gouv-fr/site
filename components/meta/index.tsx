@@ -43,7 +43,7 @@ const Meta: React.FC<IProps> = ({
           description: description || SITE_DESCRIPTION,
           images: [
             {
-              url: '/images/linkedin.jpg',
+              url: 'https://annuaire-entreprises.data.gouv.fr/images/linkedin.jpg',
               width: 1200,
               height: 627,
               alt: 'annuaire-entreprises.data.gouv.fr',

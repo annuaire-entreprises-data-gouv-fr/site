@@ -138,12 +138,12 @@ const TitleEtablissementWithDenomination: React.FC<{
           <span className="siret-or-siren">
             {formatIntFr(uniteLegale.siren)}
           </span>
-          <IsActiveTag
-            etatAdministratif={uniteLegale.etatAdministratif}
-            statutDiffusion={uniteLegale.statutDiffusion}
-            size="small"
-          />
         </a>
+        <IsActiveTag
+          etatAdministratif={uniteLegale.etatAdministratif}
+          statutDiffusion={uniteLegale.statutDiffusion}
+          size="small"
+        />
       </span>
     </div>
     <br />
