@@ -3,7 +3,7 @@ import { Siret } from '#utils/helpers';
 import odsClient from '..';
 import { IAPIAgregatsComptableResponse } from './interface';
 
-export type IAgregatComptable = {
+export type IBudgetCollectivite = {
   actifImmobilise: number;
   immobilisationsIncorporelles: number;
   subventionsVersees: number;
@@ -50,7 +50,7 @@ export const clientAgregatsComptableCollectivite = async (
 
 const mapToDomainObject = (
   agregatComptableCollectivite: IAPIAgregatsComptableResponse
-): IAgregatComptable => {
+): IBudgetCollectivite => {
   const {
     a1 = 0,
     a11 = 0,

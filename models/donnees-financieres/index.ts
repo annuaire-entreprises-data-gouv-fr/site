@@ -1,6 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import {
-  IAgregatComptable,
+  IBudgetCollectivite,
   clientAgregatsComptableCollectivite,
 } from '#clients/open-data-soft/agregats-comptable-collectivite';
 import { clientBilansFinanciers } from '#clients/open-data-soft/bilans-financiers';
@@ -25,7 +25,7 @@ export interface IDonneesFinancieres {
     | IAPINotRespondingError;
   agregatsComptableCollectivite?:
     | {
-        agregatsComptable: IAgregatComptable;
+        agregatsComptable: IBudgetCollectivite;
         lastModified: string | null;
         year: string;
       }[]

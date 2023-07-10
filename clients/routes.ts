@@ -33,30 +33,12 @@ const routes = {
         'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce',
     },
   },
-  agregatsComptableCollectivite: {
-    2019: {
-      ods: {
-        metadata:
-          'https://data.economie.gouv.fr/api/datasets/1.0/search/?q=agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-2019',
-        search:
-          'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-2019',
-      },
-    },
-    2020: {
-      ods: {
-        metadata:
-          'https://data.economie.gouv.fr/api/datasets/1.0/search/?q=agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-2019-',
-        search:
-          'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-2019-',
-      },
-    },
-    2021: {
-      ods: {
-        metadata:
-          'https://data.economie.gouv.fr/api/datasets/1.0/search/?q=agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-2021',
-        search:
-          'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-2021',
-      },
+  budgetsCollectivites: {
+    ods: {
+      metadata:
+        'https://data.economie.gouv.fr/api/datasets/1.0/search/?q=agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-',
+      search:
+        'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-',
     },
   },
   dgefp: {
