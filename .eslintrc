@@ -42,10 +42,7 @@
           "external",
           "internal",
           ["parent", "sibling", "index"]
-        ],
-        "alphabetize": {
-          "order": "asc"
-        }
+        ]
       }
     ],
     "@next/next/no-css-tags": "off",
