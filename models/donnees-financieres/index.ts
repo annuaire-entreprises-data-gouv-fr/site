@@ -1,14 +1,17 @@
 import { HttpNotFound } from '#clients/exceptions';
-import { IBudgetCollectivite } from '#clients/open-data-soft/agregats-comptable-collectivite';
-import { clientBilansFinanciers } from '#clients/open-data-soft/bilans-financiers';
+import { clientBilansFinanciers } from '#clients/open-data-soft/bilans-financiers-societe';
+import {
+  IBudgetCollectivite,
+  clientBudgetCollectivite,
+} from '#clients/open-data-soft/budget-collectivite';
 import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
-import { Siren, verifySiren } from '#utils/helpers';
-import logErrorInSentry from '#utils/sentry';
+import { Siren, Siret, verifySiren } from '#utils/helpers';
+import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import {
   IUniteLegale,
   isAssociation,
@@ -73,46 +76,53 @@ export interface IBilanFinancier {
   year: number;
 }
 
-const getBudgetCollectivite = async (siren: Siren) => {
-  let agregatsComptableCollectivite;
-  const years = routes.agregatsComptableCollectivite;
-  const { siret } = uniteLegale.siege;
+const getBudgetCollectivite = async (siret: Siret) => {
   try {
-    agregatsComptableCollectivite = await Promise.all([
-      clientAgregatsComptableCollectivite(
-        siret,
-        years[2019].ods.metadata,
-        years[2019].ods.search,
-        '2019'
-      ),
-      clientAgregatsComptableCollectivite(
-        siret,
-        years[2020].ods.metadata,
-        years[2020].ods.search,
-        '2020'
-      ),
-      clientAgregatsComptableCollectivite(
-        siret,
-        years[2021].ods.metadata,
-        years[2021].ods.search,
-        '2021'
-      ),
-    ]);
+    const datasets = [
+      { slug: 'agregatspl-2017', year: 2017 },
+      {
+        slug: 'agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-2018',
+        year: 2018,
+      },
+      {
+        slug: 'agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-2019',
+        year: 2019,
+      },
+      {
+        slug: 'agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-2019-',
+        year: 2020,
+      },
+      {
+        slug: 'agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-2021',
+        year: 2021,
+      },
+    ];
+
+    if (new Date().getFullYear() > datasets[datasets.length - 1].year + 1) {
+      logWarningInSentry('Error in donnees financieres collectivites', {
+        details: 'Need to add previous year dataset',
+      });
+    }
+
+    return await Promise.all(
+      datasets.map(({ slug, year }) =>
+        clientBudgetCollectivite(siret, slug, year).catch((err) => {
+          if (err instanceof HttpNotFound) {
+            return null;
+          }
+          throw err;
+        })
+      )
+    );
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
-      agregatsComptableCollectivite = APINotRespondingFactory(
-        EAdministration.MEF,
-        404
-      );
+      return APINotRespondingFactory(EAdministration.MEF, 404);
     }
-    logErrorInSentry('Error in API agregats comptable collectivite', {
-      siren,
+    logErrorInSentry('Error in donnees financieres collectivites', {
+      siret,
       details: e.toString(),
     });
-    agregatsComptableCollectivite = APINotRespondingFactory(
-      EAdministration.MEF,
-      e.status || 500
-    );
+    return APINotRespondingFactory(EAdministration.MEF, e.status || 500);
   }
 };
 
@@ -150,9 +160,12 @@ export const getFinancesFromSlug = async (slug: string): Promise<IFinances> => {
   }
 
   if (isCollectiviteTerritoriale(uniteLegale)) {
+    const financesCollectivite = await getBudgetCollectivite(
+      uniteLegale.siege.siret
+    );
     return {
       ...defaultFinances,
-      financesCollectivite: getBudgetCollectivite(siren),
+      financesCollectivite,
     };
   }
 

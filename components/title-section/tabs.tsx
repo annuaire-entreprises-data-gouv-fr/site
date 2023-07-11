@@ -34,7 +34,8 @@ export const Tabs: React.FC<{
 }> = ({ currentFicheType, uniteLegale }) => {
   const shouldDisplayFinances =
     // hide for public services
-    !isServicePublic(uniteLegale) &&
+    (isCollectiviteTerritoriale(uniteLegale) ||
+      !isServicePublic(uniteLegale)) &&
     // hide for EI
     !uniteLegale.complements.estEntrepreneurIndividuel &&
     // hide for asso without bilans

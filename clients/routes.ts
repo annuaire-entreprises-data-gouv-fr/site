@@ -33,7 +33,7 @@ const routes = {
         'https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce',
     },
   },
-  budgetsCollectivites: {
+  budgetCollectivite: {
     ods: {
       metadata:
         'https://data.economie.gouv.fr/api/datasets/1.0/search/?q=agregats-comptables-des-collectivites-et-des-etablissements-publics-locaux-',
