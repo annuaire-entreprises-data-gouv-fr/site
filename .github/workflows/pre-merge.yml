@@ -163,25 +163,6 @@ jobs:
           npm install -g @axe-core/cli
           axe http://localhost:3000  http://localhost:3000/donnees-extrait-kbis  http://localhost:3000/comment-ca-marche  http://localhost:3000/rechercher  http://localhost:3000/faq  http://localhost:3000/accessiblite  http://localhost:3000/vie-privee  http://localhost:3000/entreprise/880878145  http://localhost:3000/justificatif/880878145  http://localhost:3000/annonces/880878145  http://localhost:3000/administration/insee http://localhost:3000/administration http://localhost:3000/sources-de-donnees/insee  http://localhost:3000/sources-de-donnees/  http://localhost:3000/carte  http://localhost:3000/etablissement/88087814500015  http://localhost:3000/rechercher?terme=ganymede  --disable scrollable-region-focusable,region,color-contrast,duplicate-id --exit
 
-  prepare:
-    needs: build
-    runs-on: ubuntu-latest
-    # explicitly set the output of this job
-    # so that other jobs can use it
-    outputs:
-      matrix: ${{ steps.prepare.outputs.matrix }}
-    steps:
-      # generate the list using a bash script
-      - name: Create matrix ⊹
-        id: prepare
-        # for reusable workflow, must use the full action reference
-        uses: bahmutov/gh-build-matrix@main
-        with:
-          n: 4 # number of containers to output
-
-      - name: Print result 🖨
-        run: echo '${{ steps.prepare.outputs.matrix }}'
-
   testE2E:
     needs: prepare
     name: End2end tests
