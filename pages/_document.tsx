@@ -49,6 +49,34 @@ const LinksAndScripts = ({ dev = false }) => (
     ) : (
       <>
         <link
+          rel="preload"
+          href={`/${manifest['style/fonts/Marianne-Bold.woff2'].file}`}
+          as="font"
+          type="font/woff2"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href={`/${manifest['style/fonts/Marianne-Regular.woff2'].file}`}
+          as="font"
+          type="font/woff2"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href={`/${manifest['style/fonts/Marianne-Regular_Italic.woff2'].file}`}
+          as="font"
+          type="font/woff2"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href={`/${manifest['style/fonts/Marianne-Medium.woff2'].file}`}
+          as="font"
+          type="font/woff2"
+          crossOrigin=""
+        />
+        <link
           rel="stylesheet"
           type="text/css"
           href={`/${manifest['style/dsfr.min.css'].file}`}
