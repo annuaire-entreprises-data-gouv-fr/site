@@ -25,6 +25,7 @@ import {
   extractNicFromSiret,
 } from '#utils/helpers';
 import {
+  getConventionCollectives,
   libelleFromCategoriesJuridiques,
   libelleFromCodeNAFWithoutNomenclature,
 } from '#utils/helpers/formatting/labels';
@@ -293,6 +294,7 @@ const mapToEtablissement = (
     activite_principale = '',
     date_creation = '',
     date_debut_activite = '',
+    liste_idcc,
   } = etablissement;
 
   const enseigne = (liste_enseignes || []).join(' ');
@@ -326,6 +328,9 @@ const mapToEtablissement = (
     activitePrincipale: activite_principale,
     dateCreation: date_creation,
     dateDebutActivite: date_debut_activite,
+    conventionsCollectives: liste_idcc.map((idcc) => {
+      return { siret, idcc, ...getConventionCollectives(idcc) };
+    }),
   };
 };
 

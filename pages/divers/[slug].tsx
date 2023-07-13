@@ -4,9 +4,6 @@ import ConventionCollectivesSection from '#components/convention-collectives-sec
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import getConventionCollectivesFromSlug, {
-  IConventions,
-} from '#models/convention-collective';
 import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
@@ -14,12 +11,15 @@ import {
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
+import { IUniteLegale } from '#models/index';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
 
-interface IProps extends IPropsWithMetadata, IConventions {}
+interface IProps extends IPropsWithMetadata {
+  uniteLegale: IUniteLegale;
+}
 
 const ConventionsCollectives: NextPageWithLayout<IProps> = ({
   uniteLegale,
-  conventionCollectives,
   metadata: { session },
 }) => (
   <>
@@ -38,9 +38,7 @@ const ConventionsCollectives: NextPageWithLayout<IProps> = ({
         uniteLegale={uniteLegale}
         session={session}
       />
-      <ConventionCollectivesSection
-        conventionCollectives={conventionCollectives}
-      />
+      <ConventionCollectivesSection uniteLegale={uniteLegale} />
     </div>
   </>
 );
@@ -49,13 +47,11 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
 
-    const { uniteLegale, conventionCollectives } =
-      await getConventionCollectivesFromSlug(slug);
+    const uniteLegale = await getUniteLegaleFromSlug(slug);
 
     return {
       props: {
         uniteLegale,
-        conventionCollectives,
       },
     };
   }

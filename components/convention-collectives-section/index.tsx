@@ -3,32 +3,21 @@ import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
-import AdministrationNotResponding from '#components/administration-not-responding';
 import { MTPEI } from '#components/administrations';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '#models/api-not-responding';
-import { IConventionCollective } from '#models/convention-collective';
 import { formatSiret } from '#utils/helpers';
+import { IUniteLegale } from '#models/index';
 
 const ConventionCollectivesSection: React.FC<{
-  conventionCollectives: IConventionCollective[] | IAPINotRespondingError;
-}> = ({ conventionCollectives }) => {
-  if (isAPINotResponding(conventionCollectives)) {
-    return (
-      <AdministrationNotResponding
-        administration={conventionCollectives.administration}
-        errorType={conventionCollectives.errorType}
-        title="Conventions collectives"
-      />
-    );
-  }
+  uniteLegale: IUniteLegale;
+}> = ({ uniteLegale }) => {
+  const conventionCollectives = uniteLegale.etablissements.all.flatMap(
+    ({ conventionsCollectives }) => conventionsCollectives
+  );
 
-  const plural = conventionCollectives.length > 1 ? 's' : '';
+  const plural = conventionCollectives.length > 0 ? 's' : '';
 
   return (
     <Section title="Conventions collectives" sources={[EAdministration.MTPEI]}>
@@ -71,9 +60,14 @@ const ConventionCollectivesSection: React.FC<{
               <a href={`/etablissement/${convention.siret}`}>
                 {formatSiret(convention.siret)}
               </a>,
-              <Tag>{convention.idccNumber}</Tag>,
+              <Tag>{convention.idcc}</Tag>,
               <i className="font-small">{convention.title}</i>,
-              <ButtonLink target="_blank" to={convention.url} alt small>
+              <ButtonLink
+                target="_blank"
+                to={`https://www.legifrance.gouv.fr/conv_coll/id/${convention.idKali}`}
+                alt
+                small
+              >
                 ⇢&nbsp;Consulter
               </ButtonLink>,
             ])}

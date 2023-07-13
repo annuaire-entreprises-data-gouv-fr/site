@@ -6,6 +6,7 @@ import { codesNAFRev2 } from './metadata/codes-NAF-rev-2';
 import { codesNAP } from './metadata/codes-NAP';
 import { codesSectionNAF } from './metadata/codes-section-NAF';
 import { codesVoies } from './metadata/codes-voie';
+import { conventionsCollectives } from './metadata/conventions-collectives';
 import { departements } from './metadata/departements';
 
 export const getUrlFromDepartement = (dep: string) => {
@@ -48,6 +49,16 @@ export const libelleFromDepartement = (
     return `${label}${code}`;
   }
   return 'Département inconnu';
+};
+
+export const getConventionCollectives = (idcc: string) => {
+  //@ts-ignore
+  const cc = conventionsCollectives[idcc];
+
+  if (cc) {
+    return cc as { idKali: string; title: string };
+  }
+  return { idKali: '', title: 'Convention collective inconnue' };
 };
 
 const getNomenclature = (nomenclature: string) => {

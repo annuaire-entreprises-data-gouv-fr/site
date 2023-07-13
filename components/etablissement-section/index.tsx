@@ -142,6 +142,24 @@ const EtablissementSection: React.FC<IProps> = ({
       'Date de dernière mise à jour',
       formatDate(etablissement.dateDerniereMiseAJour),
     ],
+    ...(etablissement.conventionsCollectives.length > 0
+      ? [
+          'Convention collective',
+          <>
+            {etablissement.conventionsCollectives.map((cc) => (
+              <>
+                <Tag>{cc.idcc}</Tag>,<i className="font-small">{cc.title}</i>,
+                <a
+                  target="_blank"
+                  href={`https://www.legifrance.gouv.fr/conv_coll/id/${cc.idKali}`}
+                >
+                  ⇢&nbsp;En savoir plus
+                </a>
+              </>
+            ))}
+          </>,
+        ]
+      : []),
     [
       'Avis de situation Insee',
       <AvisSituationLink etablissement={etablissement} />,
