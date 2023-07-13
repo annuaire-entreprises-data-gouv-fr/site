@@ -9,12 +9,11 @@ on:
 # Be extremely careful as the env variables defined here are accessible by all the actions of the workflow.
 # For critical env variable, declare it within the action.
 env:
-  node-version: 16.x
+  node-version: 18.x
   INSEE_CLIENT_ID: ${{ secrets.INSEE_CLIENT_ID }}
   INSEE_CLIENT_SECRET: ${{ secrets.INSEE_CLIENT_SECRET}}
   INSEE_CLIENT_ID_FALLBACK: ${{ secrets.INSEE_CLIENT_ID_FALLBACK }}
   INSEE_CLIENT_SECRET_FALLBACK: ${{ secrets.INSEE_CLIENT_SECRET_FALLBACK}}
-  PDF_DOWNLOAD_DIRECTORY: /tmp/download
   END2END_MOCKING: enabled
   INSEE_ENABLED: enabled
   INDEXING_ENABLED: enabled
