@@ -180,7 +180,7 @@ jobs:
       - name: Install redis
         run: sudo apt-get install -y redis-tools redis-server
 
-      - name: Run split Cypress tests 🧪
+      - name: Run Cypress tests 🧪
         # https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v5
         with:

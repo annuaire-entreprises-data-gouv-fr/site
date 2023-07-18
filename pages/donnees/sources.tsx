@@ -39,7 +39,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
       <ol>
         {allAdministrations.map(({ dataSources, slug }) =>
           dataSources.map((source, sourceIndex) => (
-            <li key={source.label}>
+            <li key={source.label + '-' + slug}>
               <a href={`#${slug}-${sourceIndex}`}>{source.label}</a>
             </li>
           ))
@@ -48,7 +48,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
       {allAdministrations.map(
         ({ dataSources, administrationEnum, contact, slug, long, short }) =>
           dataSources.length > 0 && (
-            <>
+            <React.Fragment key={slug}>
               <h2 id={slug}>{long}</h2>
               {dataSources.map(
                 ({ label, datagouvLink, data, apiSlug }, sourceIndex) => (
@@ -101,7 +101,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
                 )
               )}
               <HorizontalSeparator />
-            </>
+            </React.Fragment>
           )
       )}
     </div>

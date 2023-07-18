@@ -17,7 +17,7 @@
     "build": "npm run build:frontend && npm run build:back",
     "build:analyze": "ANALYZE=true npm run build",
     "start": "NODE_ENV=production && next start",
-    "test:end2end": "END2END_MOCKING=enabled run-p dev test:end2end:open",
+    "test:end2end": "END2END_MOCKING=enabled run-p dev test:end2end:run",
     "test:end2end:run": "cypress run",
     "test:end2end:open": "cypress open",
     "test:recipe-staging": "cypress open --config baseUrl=https://staging.annuaire-entreprises.data.gouv.fr video=false",
