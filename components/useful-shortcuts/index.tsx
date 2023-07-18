@@ -123,7 +123,7 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
       title: 'Liens utiles',
       shortcuts: [
         {
-          url: `https://mon-entreprise.urssaf.fr/g%C3%A9rer/${uniteLegale.siren}`,
+          url: `https://mon-entreprise.urssaf.fr/assistants/pour-mon-entreprise/${uniteLegale.siren}`,
           label: 'Simulez impôts, salaires & dividendes',
           external: true,
         },
