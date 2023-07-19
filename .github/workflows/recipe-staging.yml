@@ -25,4 +25,4 @@ jobs:
           record: false
           config: baseUrl=https://staging.annuaire-entreprises.data.gouv.fr
         env:
-          DEBUG: '@cypress/github-action'
+          DEBUG: '@cypress/github-action, cypress:*'

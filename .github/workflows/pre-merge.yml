@@ -191,4 +191,4 @@ jobs:
         env:
           PORT: 3000
           END2END_MOCKING: enabled
-          DEBUG: '@cypress/github-action'
+          DEBUG: '@cypress/github-action, cypress:*'
