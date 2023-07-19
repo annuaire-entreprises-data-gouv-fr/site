@@ -86,7 +86,7 @@ const About: NextPageWithLayout = () => {
             <a href="/administration">administrations partenaires</a> :
             <ul>
               {allAdministrations.map((administration) => (
-                <li>
+                <li key={administration.slug}>
                   <a href={`/administration#${administration.slug}`}>
                     {administration.long}
                   </a>

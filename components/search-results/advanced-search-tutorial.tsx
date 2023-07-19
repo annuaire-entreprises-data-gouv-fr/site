@@ -18,10 +18,10 @@ export const AdvancedSearchTutorial = () => {
       </svg>
       <br />
       <div className="tutorial">
-        <h3>
+        <div className="title">
           Grâce aux filtres de recherche, retrouvez n’importe quelle entreprise,
           association, ou service public en France.
-        </h3>
+        </div>
         <div>
           <br />
           <ul>
@@ -70,6 +70,13 @@ export const AdvancedSearchTutorial = () => {
             margin-left: 110px;
           }
 
+          .tutorial div.title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            line-height: 1.9rem;
+            margin: 30px 0 16px;
+          }
+
           .tutorial ul {
             list-style-type: none;
           }
@@ -90,6 +97,9 @@ export const AdvancedSearchTutorial = () => {
 
             .tutorial {
               margin-left: 0;
+            }
+            .tutorial div.title {
+              margin: 10px 0 16px;
             }
           }
         `}

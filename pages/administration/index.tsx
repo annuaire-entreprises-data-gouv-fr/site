@@ -24,7 +24,9 @@ const StatusPage: NextPageWithLayout<{
         associations ou les services publics&nbsp;:
       </p>
       {allAdministrations.map(({ slug }) => (
-        <AdministrationDescription slug={slug} key={slug} />
+        <React.Fragment key={slug}>
+          <AdministrationDescription slug={slug} />
+        </React.Fragment>
       ))}
     </TextWrapper>
   </>
