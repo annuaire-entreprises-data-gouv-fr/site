@@ -183,6 +183,7 @@ jobs:
       - name: Run Cypress tests 🧪
         # https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v5
+        timeout-minutes: 10
         with:
           start: npm start
           record: false
@@ -190,3 +191,4 @@ jobs:
         env:
           PORT: 3000
           END2END_MOCKING: enabled
+          DEBUG: '@cypress/github-action'
