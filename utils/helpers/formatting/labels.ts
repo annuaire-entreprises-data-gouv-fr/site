@@ -59,9 +59,11 @@ export const getConventionCollectives = (idcc: string) => {
   if (cc) {
     return cc as { idKali: string; title: string };
   }
+
   logWarningInSentry('Error in getConventionCollectives', {
     details: `Could not find idcc :${idcc}`,
   });
+
   return { idKali: '', title: 'Convention collective inconnue' };
 };
 

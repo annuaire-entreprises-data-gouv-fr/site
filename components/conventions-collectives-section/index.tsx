@@ -10,22 +10,22 @@ import { EAdministration } from '#models/administrations';
 import { formatSiret } from '#utils/helpers';
 import { IUniteLegale } from '#models/index';
 
-const ConventionCollectivesSection: React.FC<{
+const ConventionsCollectivesSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const conventionCollectives = uniteLegale?.conventionsCollectives?.all || [];
+  const conventionsCollectives = uniteLegale?.conventionsCollectives || [];
 
-  const plural = conventionCollectives.length > 0 ? 's' : '';
+  const plural = conventionsCollectives.length > 0 ? 's' : '';
 
   return (
     <Section title="Conventions collectives" sources={[EAdministration.MTPEI]}>
-      {conventionCollectives.length === 0 ? (
+      {conventionsCollectives.length === 0 ? (
         <div>
           Cette structure n’a pas de{' '}
           <a
             target="_blank"
             rel="noreferrer noopener"
-            href={routes.conventionCollectives.site}
+            href={routes.conventionsCollectives.site}
           >
             convention collective enregistrée
           </a>{' '}
@@ -33,7 +33,7 @@ const ConventionCollectivesSection: React.FC<{
         </div>
       ) : (
         <>
-          Cette structure possède {conventionCollectives.length}{' '}
+          Cette structure possède {conventionsCollectives.length}{' '}
           <FAQLink
             to="/faq/convention-collective"
             tooltipLabel={`convention${plural} collective${plural}`}
@@ -54,7 +54,7 @@ const ConventionCollectivesSection: React.FC<{
           </p>
           <FullTable
             head={['SIRET', 'N°IDCC', 'Détails', 'Explications']}
-            body={conventionCollectives.map((convention) => [
+            body={conventionsCollectives.map((convention) => [
               <a href={`/etablissement/${convention.siret}`}>
                 {formatSiret(convention.siret)}
               </a>,
@@ -62,7 +62,7 @@ const ConventionCollectivesSection: React.FC<{
               <i className="font-small">{convention.title}</i>,
               <ButtonLink
                 target="_blank"
-                to={`${routes.conventionCollectives.details}${convention.idcc}`}
+                to={`${routes.conventionsCollectives.details}${convention.idcc}`}
                 alt
                 small
               >
@@ -75,4 +75,4 @@ const ConventionCollectivesSection: React.FC<{
     </Section>
   );
 };
-export default ConventionCollectivesSection;
+export default ConventionsCollectivesSection;

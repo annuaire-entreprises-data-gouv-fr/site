@@ -112,10 +112,7 @@ export interface IUniteLegale extends IEtablissementsList {
   colter: {
     codeColter: string | null;
   };
-  conventionsCollectives: {
-    siege: IConventionCollective[];
-    all: IConventionCollective[];
-  } | null;
+  conventionsCollectives: IConventionCollective[] | null;
 }
 
 export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {

@@ -1,6 +1,5 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import ConventionCollectivesSection from '#components/convention-collectives-section';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -13,6 +12,7 @@ import {
 import { NextPageWithLayout } from 'pages/_app';
 import { IUniteLegale } from '#models/index';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import ConventionsCollectivesSection from '#components/conventions-collectives-section';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
@@ -38,7 +38,7 @@ const ConventionsCollectives: NextPageWithLayout<IProps> = ({
         uniteLegale={uniteLegale}
         session={session}
       />
-      <ConventionCollectivesSection uniteLegale={uniteLegale} />
+      <ConventionsCollectivesSection uniteLegale={uniteLegale} />
     </div>
   </>
 );

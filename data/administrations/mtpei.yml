@@ -22,7 +22,7 @@ dataSources:
       - label: Déclarations d’égalité professionnelle (Egapro)
         form: https://egapro.travail.gouv.fr/
   - label: Liste des conventions collectives
-    apiSlug: idcc
+    apiSlug: recherche-entreprise
     datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/
     data:
       - label: Conventions Collectives

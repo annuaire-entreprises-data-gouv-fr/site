@@ -21,7 +21,7 @@ const routes = {
         'https://www.bodacc.fr/pages/annonces-commerciales/?sort=dateparution',
     },
   },
-  conventionCollectives: {
+  conventionsCollectives: {
     site: 'https://code.travail.gouv.fr/outils/convention-collective',
     details: 'https://code.travail.gouv.fr/convention-collective/',
   },

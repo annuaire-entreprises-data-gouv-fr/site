@@ -232,10 +232,9 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     colter,
     dateCreation,
     dateDerniereMiseAJour: date_mise_a_jour,
-    conventionsCollectives: {
-      siege: etablissementSiege.conventionsCollectives,
-      all: etablissementsList.all.flatMap((e) => e.conventionsCollectives),
-    },
+    conventionsCollectives: etablissementsList.all.flatMap(
+      (e) => e.conventionsCollectives
+    ),
   };
 };
 
