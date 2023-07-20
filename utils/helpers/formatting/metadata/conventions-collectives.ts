@@ -14,12 +14,12 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale des opérateurs de voyages et des guides du 19 avril 2022',
   },
-  '500': {
+  '0500': {
     idKali: 'KALICONT000005635640',
     title:
       "Convention collective nationale des commerces de gros de l'habillement, de la mercerie, de la chaussure et du jouet du 11 avril 2022 (Accord du 11 avril 2022)",
   },
-  '489': {
+  '0489': {
     idKali: 'KALICONT000005635973',
     title:
       'Convention collective nationale du cartonnage du 17 avril 2019 (Accord du 17 avril 2019) - Étendue par arrêté du 17 décembre 2021 JORF 1 janvier 2022.',
@@ -64,7 +64,7 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale des fleuristes, de la vente et des services des animaux familiers du 29 septembre 2020 (Accord du 29 septembre 2020) - Etendue par arrêté du 17 décembre 2021 JORF 23 décembre 2021',
   },
-  '454': {
+  '0454': {
     idKali: 'KALICONT000005635642',
     title:
       'Convention collective nationale des remontées mécaniques et domaines skiables du 30 septembre 2021 (Avenant n° 73 du 30 septembre 2021)',
@@ -84,7 +84,7 @@ export const conventionsCollectives = {
     title:
       "Convention collective nationale de l'optique-lunetterie de détail du 13 juin 2019 (actualisée par l'avenant du 13 juin 2019)",
   },
-  '538': {
+  '0538': {
     idKali: 'KALICONT000005635702',
     title:
       'Convention collective nationale du personnel des entreprises de manutention ferroviaire et travaux connexes du 12 juin 2019 (Accord du 12 juin 2019) - Étendue par arrêté du 2 avril 2021 JORF 13 avril 2021',
@@ -124,7 +124,7 @@ export const conventionsCollectives = {
     title:
       "Convention collective nationale de l'industrie et des services nautiques du 13 octobre 2020",
   },
-  '43': {
+  '0043': {
     idKali: 'KALICONT000005635612',
     title:
       "Convention collective nationale de l'import-export et du commerce international du 18 décembre 1952. Etendue par arrêté du 18 octobre 1955 JORF 6 novembre 1955 rectificatif JORF 22 novembre 1955.",
@@ -139,7 +139,7 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale des menuiseries, charpentes et constructions industrialisées et portes planes du 19 janvier 2017',
   },
-  '176': {
+  '0176': {
     idKali: 'KALICONT000005635184',
     title:
       "Convention collective nationale de l'industrie pharmaceutique (accord du 11 avril 2019)",
@@ -174,7 +174,7 @@ export const conventionsCollectives = {
     title:
       "Nouvelle convention collective nationale des ouvriers employés par les entreprises du bâtiment visées par le décret du 1er mars 1962 (c'est-à-dire occupant jusqu'à 10 salariés) du 7 mars 2018 (Avenant du 7 mars 2018)",
   },
-  '207': {
+  '0207': {
     idKali: 'KALICONT000005635186',
     title:
       "Convention collective nationale de travail de l'industrie des cuirs et peaux du 6 juin 2018 (Avenant du 6 juin 2018) - Etendue par arrêté du 10 juillet 2020 JORF 1er août 2020.",
@@ -264,7 +264,7 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale des cadres des travaux publics du 20 novembre 2015 - Étendue par arrêté du 5 juin 2020 (JORF du 26 juin 2020)',
   },
-  '733': {
+  '0733': {
     idKali: 'KALICONT000005635629',
     title:
       'Convention collective nationale des détaillants en chaussures du 27 juin 1973 (actualisée par avenant n° 79 du 8 décembre 2014 étendu par arrêté du 11 décembre 2015 JORF 23 décembre 2015)',
@@ -299,12 +299,12 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale de travail du personnel des agences de voyages et de tourisme du 12 mars 1993 (réécrite par avenant du 10 décembre 2013).',
   },
-  '172': {
+  '0172': {
     idKali: 'KALICONT000030264028',
     title:
       "Convention collective interrégionale de l'industrie du bois de pin maritime en forêt de Gascogne du 1er juillet 2014 (réactualisation).",
   },
-  '959': {
+  '0959': {
     idKali: 'KALICONT000005635844',
     title:
       'Convention collective nationale des laboratoires de biologie médicale extra-hospitaliers du 3 février 1978.',
@@ -349,7 +349,7 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale des associations de gestion et de comptabilité du 8 janvier 2013.',
   },
-  '493': {
+  '0493': {
     idKali: 'KALICONT000005635438',
     title:
       'Nouvelle convention collective nationale des vins, cidres, jus de fruits, sirops, spiritueux et liqueurs de France du 15 mars 2013',
@@ -359,7 +359,7 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale des professions de la photographie du 13 février 2013',
   },
-  '897': {
+  '0897': {
     idKali: 'KALICONT000005635223',
     title:
       'Convention collective nationale des services de santé au travail interentreprises du 20 juillet 1976. Etendue par arrêté du 18 octobre 1976 JORF 29 octobre 1976.',
@@ -408,7 +408,7 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale des 5 branches industries alimentaires diverses du 21 mars 2012',
   },
-  '405': {
+  '0405': {
     idKali: 'KALICONT000026950865',
     title:
       "Convention relative aux établissements médico-sociaux de l'union intersyndicale des secteurs sanitaires et sociaux (Avenant du 16 mars 2012 relatif à la mise à jour de la convention)",
@@ -543,7 +543,7 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale des sucreries, sucreries-distilleries et raffineries de sucre du 31 janvier 2008',
   },
-  '731': {
+  '0731': {
     idKali: 'KALICONT000005635592',
     title:
       'Convention collective nationale des cadres des commerces de quincaillerie, fournitures industrielles, fers, métaux et équipement de la maison du 23 juin 1971 (anciennement convention collective interrégionale). Etendue par arrêté du 13 juillet 1973 JORF 9 septembre 1973.',
@@ -603,7 +603,7 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale de la coiffure et des professions connexes du 10 juillet 2006. Etendue par arrêté du 3 avril 2007 JORF 17 avril 2007.',
   },
-  '953': {
+  '0953': {
     idKali: 'KALICONT000005635375',
     title:
       'Convention collective nationale de la charcuterie de détail du 4 avril 2007',
@@ -623,7 +623,7 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale des employés, techniciens et agents de maîtrise des travaux publics du 12 juillet 2006',
   },
-  '992': {
+  '0992': {
     idKali: 'KALICONT000005635593',
     title:
       "Convention collective nationale de la boucherie, boucherie-charcuterie, boucherie hippophagique, triperie, commerces de volailles et gibiers du 12 décembre 1978, actualisée par l'avenant n° 114 du 10 juillet 2006",
@@ -633,7 +633,7 @@ export const conventionsCollectives = {
     title:
       "Convention collective nationale des sociétés concessionnaires ou exploitantes d'autoroutes ou d'ouvrages routiers du 27 juin 2006",
   },
-  '112': {
+  '0112': {
     idKali: 'KALICONT000005635449',
     title:
       "Convention collective nationale de l'industrie laitière du 20 mai 1955, modifiée par avenant n° 34 du 29 juin 2006. Etendue par arrêté du 10 décembre 2007 JORF 18 décembre 2007",
@@ -797,7 +797,7 @@ export const conventionsCollectives = {
     idKali: 'KALICONT000021125058',
     title: 'Convention collective nationale des taxis du 11 septembre 2001',
   },
-  '179': {
+  '0179': {
     idKali: 'KALICONT000005635781',
     title:
       'Convention collective nationale du personnel des coopératives de consommation du 30 avril 1956.',
@@ -1265,7 +1265,7 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale de la restauration ferroviaire du 4 septembre 1984. Etendue par arrêté du 22 février 1985 JONC 7 mars 1985.',
   },
-  '573': {
+  '0573': {
     idKali: 'KALICONT000005635373',
     title:
       'Convention collective nationale de commerces de gros du 23 juin 1970. Etendue par arrêté du 15 juin 1972 JONC 29 août 1972. Mise à jour par accord du 27 septembre 1984 étendu par arrêté du 4 février 1985 JORF 16 février 1985.',
@@ -1365,12 +1365,12 @@ export const conventionsCollectives = {
     title:
       "Convention collective des sociétés d'économie mixte d'autoroutes du 1er juin 1979",
   },
-  '993': {
+  '0993': {
     idKali: 'KALICONT000005635414',
     title:
       'Convention collective nationale des prothésistes dentaires et des personnels des laboratoires de prothèse dentaire du 18 décembre 1978. Etendue par arrêté du 28 février 1979 JORF 17 mars 1979.',
   },
-  '998': {
+  '0998': {
     idKali: 'KALICONT000005635452',
     title:
       "Convention collective nationale des ouvriers, employés, techniciens et agents de maîtrise de l'exploitation d'équipements thermiques et de génie climatique du 7 février 1979.",
@@ -1390,22 +1390,22 @@ export const conventionsCollectives = {
     title:
       "Convention collective nationale de travail concernant le personnel occupé dans les établissements d'entraînement de chevaux de courses au trot du 9 janvier 1979. Etendue par arrêté du 7 mai 1979 JONC 11 mai 1979.",
   },
-  '915': {
+  '0915': {
     idKali: 'KALICONT000005635660',
     title:
       "Convention collective nationale des entreprises d'expertises en matière d'évaluations industrielles et commerciales du 7 décembre 1976. Etendue par arrêté du 5 juillet 1977 JONC 31 juillet 1977.",
   },
-  '413': {
+  '0413': {
     idKali: 'KALICONT000005635407',
     title:
       'Convention collective nationale de travail des établissements et services pour personnes inadaptées et handicapées du 15 mars 1966. Mise à jour au 15 septembre 1976.',
   },
-  '892': {
+  '0892': {
     idKali: 'KALICONT000005635265',
     title:
       "Convention collective nationale des cadres et agents de maîtrise de la distribution des films de l'industrie cinématographique du 30 juin 1976. Etendue par arrêté du 15 avril 1977 (JO du 29 mai 1977)",
   },
-  '843': {
+  '0843': {
     idKali: 'KALICONT000005635886',
     title:
       'Convention collective nationale de la boulangerie-pâtisserie du 19 mars 1976. Etendue par arrêté du 21 juin 1978 JONC 28 juillet 1978.',
@@ -1415,17 +1415,17 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale concernant le personnel des centres équestres du 11 juillet 1975. Etendue par arrêté du 14 juin 1976 JONC 8 août 1976.',
   },
-  '787': {
+  '0787': {
     idKali: 'KALICONT000005635826',
     title:
       "Convention collective nationale des cabinets d'experts-comptables et de commissaires aux comptes du 9 décembre 1974. Etendue par arrêté du 30 mai 1975 JONC 12 juin 1975.",
   },
-  '779': {
+  '0779': {
     idKali: 'KALICONT000005635651',
     title:
       "Convention collective nationale du personnel des voies ferrées d'intérêt local du 26 septembre 1974. Etendue par arrêté du 23 juin 1975 JORF 17 juillet 1975.",
   },
-  '759': {
+  '0759': {
     idKali: 'KALICONT000005635490',
     title:
       'Convention collective nationale des pompes funèbres du 1er mars 1974. Etendue par arrêté du 17 décembre 1993 JORF 28 janvier 1994.',
@@ -1435,36 +1435,36 @@ export const conventionsCollectives = {
     title:
       'Convention collective nationale du travail concernant les gardes-chasse et gardes-pêche particuliers du 2 mai 1973. Étendue par arrêté du 24 janvier 1974 JONC 9 février 1974',
   },
-  '567': {
+  '0567': {
     idKali: 'KALICONT000005635412',
     title:
       "Convention collective nationale de la bijouterie, joaillerie, orfèvrerie et activités qui s'y rattachent du 5 juin 1970 (mise à jour par accord du 20 mars 1973). Etendue par arrêté du 27 septembre 1973 (JO du 22 novembre 1973).",
   },
-  '716': {
+  '0716': {
     idKali: 'KALICONT000005635264',
     title:
       'Convention collective nationale des employés et ouvriers de la distribution cinématographique du 1er mars 1973. Etendue par arrêté du 18 octobre 1977 (JO du 17 décembre 1977)',
   },
-  '715': {
+  '0715': {
     idKali: 'KALICONT000005635873',
     title:
       'Convention collective nationale des instruments à écrire et des industries connexes du 13 février 1973. Etendue par arrêté du 14 septembre 1973 JONC 5 octobre 1973 rectificatif JONC 20 octobre 1973.',
   },
-  '706': {
+  '0706': {
     idKali: 'KALICONT000005635891',
     title:
       'Convention collective nationale du personnel de la reprographie du 18 décembre 1972. Mise à jour en juin 1976. Etendue par arrêté du 23 novembre 1976 JONC 19 décembre 1976.',
   },
-  '675': {
+  '0675': {
     idKali: 'KALICONT000005635617',
     title:
       "Convention collective nationale des maisons à succursales de vente au détail d'habillement du 30 juin 1972. Etendue par arrêté du 8 décembre 1972 (JO du 7 janvier 1973).",
   },
-  '673': {
+  '0673': {
     idKali: 'KALICONT000005635193',
     title: 'Convention collective nationale de la fourrure du 29 juin 1972.',
   },
-  '669': {
+  '0669': {
     idKali: 'KALICONT000005635650',
     title:
       'Convention collective nationale des industries de fabrication mécanique du verre du 8 juin 1972',
@@ -1474,72 +1474,72 @@ export const conventionsCollectives = {
     title:
       "Convention collective nationale de l'industrie de la salaison, charcuterie en gros et conserves de viandes du 29 mars 1972. Etendue par arrêté du 14 mai 1975 JORF 4 juin 1975.",
   },
-  '650': {
+  '0650': {
     idKali: 'KALICONT000005635842',
     title:
       'Convention collective nationale des ingénieurs et cadres de la métallurgie du 13 mars 1972. Etendue par arrêté du 27 avril 1973 (JO du 29 mai 1973)',
   },
-  '637': {
+  '0637': {
     idKali: 'KALICONT000005635466',
     title:
       'Convention collective nationale des industries et du commerce de la récupération du 6 décembre 1971. Etendue par arrêté du 4 janvier 1974 JONC 23 janvier 1974. Elargie par arrêté du 16 janvier 1985 JONC 25 janvier 1985.',
   },
-  '468': {
+  '0468': {
     idKali: 'KALICONT000005635394',
     title:
       'Convention collective nationale du commerce succursaliste de la chaussure du 2 juillet 1968, mise à jour le 18 novembre 1971 (1)',
   },
-  '614': {
+  '0614': {
     idKali: 'KALICONT000005635648',
     title:
       "Convention collective nationale de travail des industries de la sérigraphie et des procédés d'impression numérique connexes du 23 mars 1971.",
   },
-  '388': {
+  '0388': {
     idKali: 'KALICONT000005635984',
     title:
       'Convention collective nationale des cadres, agents de maîtrise et assistants des auditoriums cinématographiques du 30 juin 1994.',
   },
-  '478': {
+  '0478': {
     idKali: 'KALICONT000005635810',
     title:
       'Convention collective nationale des sociétés financières du 22 novembre 1968',
   },
-  '435': {
+  '0435': {
     idKali: 'KALICONT000005635995',
     title:
       'Convention collective nationale des acteurs et acteurs de complément de la production cinématographique du 1er septembre 1967',
   },
-  '390': {
+  '0390': {
     idKali: 'KALICONT000005635268',
     title:
       "Convention collective de travail des professeurs de l'enseignement secondaire libre enseignant dans les établissements hors contrat et dans les établissements sous contrat mais sans être contractuels du 23 juillet 1964",
   },
-  '18': {
+  '0018': {
     idKali: 'KALICONT000005635689',
     title:
       "Convention collective nationale de l'industrie textile du 1er février 1951. Etendue par arrêté du 17 décembre 1951, rectificatif du 13 janvier 1952, mise à jour le 29 mai 1979, en vigueur le 1er octobre 1979. Etendue par arrêté du 23 octobre 1979. JONC 12 janvier 1980.",
   },
-  '54': {
+  '0054': {
     idKali: 'KALICONT000005635149',
     title:
       'Convention collective régionale des industries métallurgiques, mécaniques et connexes de la région parisienne du 16 juillet 1954. Etendue par arrêté du 11 août 1965 (JO du 25 août 1965). Rectificatif du 10 septembre 1965. Mise à jour par accord du 13 juillet 1973, étendu par arrêté du 10 décembre 1979 (JO du 17 janvier 1980)',
   },
-  '354': {
+  '0354': {
     idKali: 'KALICONT000005635672',
     title:
       "Convention collective nationale de l'industrie de la ganterie de peau du 27 novembre 1962. Etendue par arrêté du 14 novembre 1969 JONC 20 décembre 1969.",
   },
-  '303': {
+  '0303': {
     idKali: 'KALICONT000005635552',
     title:
       'Convention collective nationale de la couture parisienne du 10 juillet 1961. Etendue par arrêté du 29 novembre 1982 JONC 20 janvier 1983.',
   },
-  '294': {
+  '0294': {
     idKali: 'KALICONT000005635721',
     title:
       'Convention collective nationale des ouvriers indépendants des studios de la production cinématographique du 1er août 1960.',
   },
-  '292': {
+  '0292': {
     idKali: 'KALICONT000005635856',
     title:
       'Convention collective nationale de la plasturgie du 1er juillet 1960. Etendue par arrêté du 14 mai 1962 JONC 7 juin 1962 rectificatif 30 juin 1962.',
@@ -1549,77 +1549,77 @@ export const conventionsCollectives = {
     title:
       'Convention collective régionale des ingénieurs, assimilés et cadres du bâtiment de la région parisienne du 12 avril 1960',
   },
-  '275': {
+  '0275': {
     idKali: 'KALICONT000005635872',
     title:
       'Convention collective nationale du personnel au sol des entreprises de transport aérien du 22 mai 1959. Etendue par arrêté du 10 janvier 1964 JONC 21 janvier 1964 et rectificatif JONC 4 février 1964.',
   },
-  '247': {
+  '0247': {
     idKali: 'KALICONT000005635647',
     title:
       "Convention collective nationale des industries de l'habillement du 17 février 1958. Etendue par arrêté du 23 juillet 1959 JONC 8 août 1959 et rectificatif au JONC du 13 septembre 1959.",
   },
-  '218': {
+  '0218': {
     idKali: 'KALICONT000038292684',
     title:
       'Convention collective nationale de travail du personnel des organismes de sécurité sociale du 8 février 1957',
   },
-  '211': {
+  '0211': {
     idKali: 'KALICONT000005635430',
     title:
       'Convention collective nationale des cadres des industries de carrières et matériaux du 6 décembre 1956. Etendue par arrêté du 13 décembre 1960 JONC 21 décembre 1960 rectificatif 9 février 1961',
   },
-  '200': {
+  '0200': {
     idKali: 'KALICONT000005635258',
     title:
       'Convention collective nationale des exploitations frigorifiques du 10 juillet 1956. Etendue par arrêté du 15 novembre 1961 JONC 3 décembre 1961.',
   },
-  '184': {
+  '0184': {
     idKali: 'KALICONT000005635955',
     title:
       'Convention collective nationale de travail du personnel des imprimeries de labeur et des industries graphiques. En vigueur le 1er juin 1956. Etendue par arrêté du 22 novembre 1956 JONC 15 décembre 1956.',
   },
-  '158': {
+  '0158': {
     idKali: 'KALICONT000005635966',
     title:
       "Convention collective nationale du travail mécanique du bois, des scieries, du négoce et de l'importation des bois du 28 novembre 1955. Étendue par arrêté du 28 mars 1956 JONC 8 avril 1956.",
   },
-  '135': {
+  '0135': {
     idKali: 'KALICONT000005635649',
     title:
       'Convention collective nationale relative aux conditions de travail des employés, techniciens et agents de maîtrise des industries de carrières et de matériaux du 12 juillet 1955. Etendue par arrêté du 13 décembre 1960 JONC 21 décembre 1960 rectificatif 9 février 1961',
   },
-  '87': {
+  '0087': {
     idKali: 'KALICONT000005635206',
     title:
       'Convention collective nationale relative aux conditions de travail des ouvriers des industries de carrières et de matériaux du 22 avril 1955. Etendue par arrêté du 13 décembre 1960 JONC 21 décembre 1960 rectificatif 9 février 1961',
   },
-  '86': {
+  '0086': {
     idKali: 'KALICONT000005635630',
     title:
       'Convention collective nationale de travail des cadres, techniciens et employés de la publicité française du 22 avril 1955. Étendue par arrêté du 29 juillet 1955 JORF 19 août 1955',
   },
-  '45': {
+  '0045': {
     idKali: 'KALICONT000005635597',
     title:
       'Convention collective nationale du caoutchouc du 6 mars 1953. Étendue par arrêté du 29 mai 1969 JORF 18 juin 1969',
   },
-  '44': {
+  '0044': {
     idKali: 'KALICONT000005635613',
     title:
       'Convention collective nationale des industries chimiques et connexes du 30 décembre 1952. Étendue par arrêté du 13 novembre 1956 JONC 12 décembre 1956',
   },
-  '29': {
+  '0029': {
     idKali: 'KALICONT000005635234',
     title:
       "Convention collective nationale des établissements privés d'hospitalisation, de soins, de cure et de garde à but non lucratif du 31 octobre 1951.",
   },
-  '16': {
+  '0016': {
     idKali: 'KALICONT000005635624',
     title:
       'Convention collective nationale des transports routiers et activités auxiliaires du transport du 21 décembre 1950',
   },
-  '14': {
+  '0014': {
     idKali: 'KALICONT000005635719',
     title:
       'Convention collective nationale des techniciens de la production cinématographique du 30 avril 1950',

@@ -22,8 +22,8 @@ const routes = {
     },
   },
   conventionCollectives: {
-    api: 'https://siret2idcc.fabrique.social.gouv.fr/api/v2/',
     site: 'https://code.travail.gouv.fr/outils/convention-collective',
+    details: 'https://code.travail.gouv.fr/convention-collective/',
   },
   donneesFinancieres: {
     ods: {

@@ -13,9 +13,7 @@ import { IUniteLegale } from '#models/index';
 const ConventionCollectivesSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const conventionCollectives = uniteLegale.etablissements.all.flatMap(
-    ({ conventionsCollectives }) => conventionsCollectives
-  );
+  const conventionCollectives = uniteLegale?.conventionsCollectives?.all || [];
 
   const plural = conventionCollectives.length > 0 ? 's' : '';
 
@@ -55,7 +53,7 @@ const ConventionCollectivesSection: React.FC<{
             </a>
           </p>
           <FullTable
-            head={['SIRET', 'N°IDCC', 'Détails', 'Convention']}
+            head={['SIRET', 'N°IDCC', 'Détails', 'Explications']}
             body={conventionCollectives.map((convention) => [
               <a href={`/etablissement/${convention.siret}`}>
                 {formatSiret(convention.siret)}
@@ -64,7 +62,7 @@ const ConventionCollectivesSection: React.FC<{
               <i className="font-small">{convention.title}</i>,
               <ButtonLink
                 target="_blank"
-                to={`https://www.legifrance.gouv.fr/conv_coll/id/${convention.idKali}`}
+                to={`${routes.conventionCollectives.details}${convention.idcc}`}
                 alt
                 small
               >

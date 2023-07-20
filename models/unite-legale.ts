@@ -142,6 +142,8 @@ class UniteLegaleBuilder {
             ...uniteLegaleRechercheEntreprise.colter,
           },
           chemin: uniteLegaleRechercheEntreprise.chemin,
+          conventionsCollectives:
+            uniteLegaleRechercheEntreprise.conventionsCollectives,
         };
       }
     }

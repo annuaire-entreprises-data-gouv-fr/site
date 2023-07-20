@@ -1,4 +1,5 @@
 import { escapeTerm } from '#utils/helpers';
+import { logWarningInSentry } from '#utils/sentry';
 import { categoriesJuridiques } from './metadata/categories-juridiques';
 import { codesNAF1993 } from './metadata/codes-NAF-1993';
 import { codesNAFRev1 } from './metadata/codes-NAF-rev-1';
@@ -58,6 +59,9 @@ export const getConventionCollectives = (idcc: string) => {
   if (cc) {
     return cc as { idKali: string; title: string };
   }
+  logWarningInSentry('Error in getConventionCollectives', {
+    details: `Could not find idcc :${idcc}`,
+  });
   return { idKali: '', title: 'Convention collective inconnue' };
 };
 
