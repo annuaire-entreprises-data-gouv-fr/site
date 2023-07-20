@@ -1,7 +1,6 @@
 import { clientAssociation } from '#clients/api-proxy/association';
 import { clientTVA } from '#clients/api-proxy/tva';
 import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
-import clientSiret2Idcc from '#clients/siret-2-idcc';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
 import { clientApiEntrepriseAssociation } from './api-entreprise/association';
 import { fetchRNEImmatriculation } from './api-proxy/rne';
@@ -20,8 +19,6 @@ const ping = async (slug: string | string[]) => {
     case 'api-proxy-rne':
       // fetch IRM and disable cache
       return await fetchRNEImmatriculation(verifySiren('552032534'), useCache);
-    case 'api-conventions-collectives':
-      return await clientSiret2Idcc(['54205118000066']);
     case 'api-sirene-insee':
       return await clientUniteLegaleInsee(verifySiren('880878145'), {
         useCache,

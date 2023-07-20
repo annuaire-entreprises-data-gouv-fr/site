@@ -13,6 +13,7 @@ import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
 import { ISession } from '#utils/session';
+import { Tag } from '#components-ui/tag';
 import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
@@ -25,6 +26,8 @@ const UniteLegaleSection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
   const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
+
+  const conventionsCollectives = uniteLegale.conventionsCollectives || [];
 
   const data = [
     ['Dénomination', getNomComplet(uniteLegale, session)],
@@ -61,6 +64,21 @@ const UniteLegaleSection: React.FC<{
     ...(!estActif(uniteLegale)
       ? [['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]]
       : []),
+    ['', <br />],
+    [
+      'Convention(s) collective(s)',
+      conventionsCollectives.length > 0 ? (
+        <>
+          {conventionsCollectives.map((cc) => (
+            <>
+              {<Tag>IDCC {cc.idcc}</Tag>}
+              <br />
+            </>
+          ))}
+          <a href={`/divers/${uniteLegale.siren}`}>→ en savoir plus</a>
+        </>
+      ) : null,
+    ],
     // jump line and add label and certificates
     ...(hasLabelsAndCertificates
       ? [
@@ -117,6 +135,7 @@ const UniteLegaleSection: React.FC<{
             : isServicePublic(uniteLegale)
             ? []
             : [EAdministration.INPI]),
+          ...(conventionsCollectives.length > 0 ? [EAdministration.MTPEI] : []),
         ]}
       >
         <TwoColumnTable body={data} />

@@ -11,6 +11,13 @@ import { IdRna } from '#utils/helpers';
 import { IBilanFinancierAssociation } from './donnees-financieres';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 
+export interface IConventionCollective {
+  siret: string;
+  idcc: string;
+  idKali: string;
+  title: string;
+}
+
 export interface IEtablissement {
   enseigne: string | null;
   denomination: string | null;
@@ -35,6 +42,7 @@ export interface IEtablissement {
   anneeTrancheEffectif: string | null;
   latitude: string;
   longitude: string;
+  conventionsCollectives: IConventionCollective[];
 }
 
 export interface IEtablissementWithUniteLegale {
@@ -71,6 +79,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     libelleTrancheEffectif: '',
     latitude: '',
     longitude: '',
+    conventionsCollectives: [],
   };
 };
 
@@ -103,6 +112,7 @@ export interface IUniteLegale extends IEtablissementsList {
   colter: {
     codeColter: string | null;
   };
+  conventionsCollectives: IConventionCollective[] | null;
 }
 
 export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
@@ -138,6 +148,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     colter: {
       codeColter: null,
     },
+    conventionsCollectives: null,
   };
 };
 

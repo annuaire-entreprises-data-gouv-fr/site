@@ -142,13 +142,14 @@ const EtablissementSection: React.FC<IProps> = ({
       'Date de dernière mise à jour',
       formatDate(etablissement.dateDerniereMiseAJour),
     ],
+    ...(!estActif(etablissement)
+      ? [['Date de fermeture', formatDate(etablissement.dateFermeture || '')]]
+      : []),
+    ['', <br />],
     [
       'Avis de situation Insee',
       <AvisSituationLink etablissement={etablissement} />,
     ],
-    ...(!estActif(etablissement)
-      ? [['Date de fermeture', formatDate(etablissement.dateFermeture || '')]]
-      : []),
   ];
 
   return (

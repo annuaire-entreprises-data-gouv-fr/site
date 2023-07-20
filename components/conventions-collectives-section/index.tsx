@@ -3,42 +3,29 @@ import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
-import AdministrationNotResponding from '#components/administration-not-responding';
 import { MTPEI } from '#components/administrations';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '#models/api-not-responding';
-import { IConventionCollective } from '#models/convention-collective';
 import { formatSiret } from '#utils/helpers';
+import { IUniteLegale } from '#models/index';
 
-const ConventionCollectivesSection: React.FC<{
-  conventionCollectives: IConventionCollective[] | IAPINotRespondingError;
-}> = ({ conventionCollectives }) => {
-  if (isAPINotResponding(conventionCollectives)) {
-    return (
-      <AdministrationNotResponding
-        administration={conventionCollectives.administration}
-        errorType={conventionCollectives.errorType}
-        title="Conventions collectives"
-      />
-    );
-  }
+const ConventionsCollectivesSection: React.FC<{
+  uniteLegale: IUniteLegale;
+}> = ({ uniteLegale }) => {
+  const conventionsCollectives = uniteLegale?.conventionsCollectives || [];
 
-  const plural = conventionCollectives.length > 1 ? 's' : '';
+  const plural = conventionsCollectives.length > 0 ? 's' : '';
 
   return (
     <Section title="Conventions collectives" sources={[EAdministration.MTPEI]}>
-      {conventionCollectives.length === 0 ? (
+      {conventionsCollectives.length === 0 ? (
         <div>
           Cette structure n’a pas de{' '}
           <a
             target="_blank"
             rel="noreferrer noopener"
-            href={routes.conventionCollectives.site}
+            href={routes.conventionsCollectives.site}
           >
             convention collective enregistrée
           </a>{' '}
@@ -46,7 +33,7 @@ const ConventionCollectivesSection: React.FC<{
         </div>
       ) : (
         <>
-          Cette structure possède {conventionCollectives.length}{' '}
+          Cette structure possède {conventionsCollectives.length}{' '}
           <FAQLink
             to="/faq/convention-collective"
             tooltipLabel={`convention${plural} collective${plural}`}
@@ -66,14 +53,19 @@ const ConventionCollectivesSection: React.FC<{
             </a>
           </p>
           <FullTable
-            head={['SIRET', 'N°IDCC', 'Détails', 'Convention']}
-            body={conventionCollectives.map((convention) => [
+            head={['SIRET', 'N°IDCC', 'Détails', 'Explications']}
+            body={conventionsCollectives.map((convention) => [
               <a href={`/etablissement/${convention.siret}`}>
                 {formatSiret(convention.siret)}
               </a>,
-              <Tag>{convention.idccNumber}</Tag>,
+              <Tag>{convention.idcc}</Tag>,
               <i className="font-small">{convention.title}</i>,
-              <ButtonLink target="_blank" to={convention.url} alt small>
+              <ButtonLink
+                target="_blank"
+                to={`${routes.conventionsCollectives.details}${convention.idcc}`}
+                alt
+                small
+              >
                 ⇢&nbsp;Consulter
               </ButtonLink>,
             ])}
@@ -83,4 +75,4 @@ const ConventionCollectivesSection: React.FC<{
     </Section>
   );
 };
-export default ConventionCollectivesSection;
+export default ConventionsCollectivesSection;

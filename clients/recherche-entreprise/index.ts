@@ -25,6 +25,7 @@ import {
   extractNicFromSiret,
 } from '#utils/helpers';
 import {
+  getConventionCollectives,
   libelleFromCategoriesJuridiques,
   libelleFromCodeNAFWithoutNomenclature,
 } from '#utils/helpers/formatting/labels';
@@ -174,20 +175,22 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
   // when unknwon, dateCreation is set to 1900-01-01 by Insee instead of null
   const dateCreation = date_creation === '1900-01-01' ? '' : date_creation;
 
+  const etablissementsList = createEtablissementsList(
+    etablissements.length > 0
+      ? etablissements.map(mapToEtablissement)
+      : [etablissementSiege],
+    // hard code 1 for page as we dont paginate etablissement on recherche-entreprise
+    1,
+    result.nombre_etablissements
+  );
+
   return {
     ...createDefaultUniteLegale(siren),
     siege: etablissementSiege,
     matchingEtablissements,
     nombreEtablissements: result.nombre_etablissements || 1,
     nombreEtablissementsOuverts: result.nombre_etablissements_ouverts || 0,
-    etablissements: createEtablissementsList(
-      etablissements.length > 0
-        ? etablissements.map(mapToEtablissement)
-        : [etablissementSiege],
-      // hard code 1 for page as we dont paginate etablissement on recherche-entreprise
-      1,
-      result.nombre_etablissements
-    ),
+    etablissements: etablissementsList,
     etatAdministratif,
     statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
       statut_diffusion,
@@ -229,6 +232,9 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     colter,
     dateCreation,
     dateDerniereMiseAJour: date_mise_a_jour,
+    conventionsCollectives: etablissementsList.all.flatMap(
+      (e) => e.conventionsCollectives
+    ),
   };
 };
 
@@ -293,6 +299,7 @@ const mapToEtablissement = (
     activite_principale = '',
     date_creation = '',
     date_debut_activite = '',
+    liste_idcc,
   } = etablissement;
 
   const enseigne = (liste_enseignes || []).join(' ');
@@ -326,6 +333,11 @@ const mapToEtablissement = (
     activitePrincipale: activite_principale,
     dateCreation: date_creation,
     dateDebutActivite: date_debut_activite,
+    conventionsCollectives: (liste_idcc || [])
+      .map((idcc) => {
+        return { siret, idcc, ...getConventionCollectives(idcc) };
+      })
+      .filter((cc) => !!cc.idKali),
   };
 };
 
