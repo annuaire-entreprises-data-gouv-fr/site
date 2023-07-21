@@ -4,6 +4,7 @@ import {
   estDiffusible,
   nonDiffusibleDataFormatter,
 } from '#models/statut-diffusion';
+import routes from '#clients/routes';
 
 const AvisSituationLink: React.FC<{
   etablissement: IEtablissement;
@@ -13,7 +14,7 @@ const AvisSituationLink: React.FC<{
     <a
       target="_blank"
       rel="noopener noreferrer"
-      href={`https://api.avis-situation-sirene.insee.fr/identification/pdf/${etablissement.siret}`}
+      href={`${routes.sireneInsee.avis}${etablissement.siret}`}
     >
       {label || 'Avis de situation'}
     </a>

@@ -121,7 +121,7 @@ const routes = {
   },
   sireneInsee: {
     auth: 'https://api.insee.fr/token',
-    avis: 'https://avis-situation-sirene.insee.fr/AvisPdf.action',
+    avis: 'https://api-avis-situation-sirene.insee.fr/identification/pdf/',
     siren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
     siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',
   },
