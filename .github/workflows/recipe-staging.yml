@@ -7,8 +7,6 @@ on:
     workflows: ['Deploy - Staging']
     types: [completed]
   workflow_dispatch:
-  # schedule:
-  #   - cron: '0 1 10,25 * *'
 
 jobs:
   recipe:
@@ -19,8 +17,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Cypress run
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
           browser: chrome
           record: false
-          config: baseUrl=https://staging.annuaire-entreprises.data.gouv.fr
+          config: video=false,baseUrl=https://staging.annuaire-entreprises.data.gouv.fr
