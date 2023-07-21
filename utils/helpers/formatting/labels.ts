@@ -76,7 +76,8 @@ export const getConventionCollectives = (idcc: string) => {
       '0071',
       '0911',
       '2378',
-    ].indexOf(cc) > -1;
+      '2267',
+    ].indexOf(cc.toString()) > -1;
 
   if (!isSpecialIdcc) {
     logWarningInSentry('Error in getConventionCollectives', {
