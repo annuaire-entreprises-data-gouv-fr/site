@@ -3,8 +3,6 @@
 name: Recipe on staging
 
 on:
-  pull_request:
-    branches: [main]
   workflow_run:
     workflows: ['Deploy - Staging']
     types: [completed]
