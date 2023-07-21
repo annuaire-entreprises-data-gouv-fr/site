@@ -1,30 +1,24 @@
-import resultGrandParis from '../../clients-mocks/recherche-entreprise/grand-paris';
-import resultManakinProduction from '../../clients-mocks/recherche-entreprise/manakin-production';
-import resultSolutionEnergie from '../../clients-mocks/recherche-entreprise/solution-energie';
-
 describe(`Dirigeants and élus pages`, () => {
   it('Dirigeant page loads', () => {
-    cy.visit(`/dirigeants/${resultSolutionEnergie.response.results[0].siren}`);
+    cy.visit(`/dirigeants/528163777`);
     cy.contains('GSE VD').should('be.visible');
   });
 
   it('Elus page loads', () => {
-    cy.visit(`/elus/${resultGrandParis.response.results[0].siren}`);
+    cy.visit(`/elus/200054781`);
     cy.contains('Anne HIDALGO').should('be.visible');
   });
 });
 
 describe(`Labels and certificates`, () => {
   it('RGE', () => {
-    cy.visit(`/entreprise/${resultSolutionEnergie.response.results[0].siren}`);
+    cy.visit(`/entreprise/528163777`);
     cy.contains('Labels et certificats').should('be.visible');
     cy.contains('RGE - Reconnu Garant de l’Environnement').should('be.visible');
   });
 
   it('ESS et Spectacle vivant', () => {
-    cy.visit(
-      `/entreprise/${resultManakinProduction.response.results[0].siren}`
-    );
+    cy.visit(`/entreprise/842019051`);
     cy.contains('Qualités, labels et certificats').should('be.visible');
     cy.contains('ESS - Entreprise Sociale et Solidaire').should('be.visible');
     cy.contains('Entrepreneur de spectacles vivants').should('be.visible');
