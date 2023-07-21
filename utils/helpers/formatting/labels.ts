@@ -55,42 +55,42 @@ export const libelleFromDepartement = (
 export const getConventionCollectives = (idcc: string) => {
   const defaultCc = { idKali: '', title: 'Convention collective inconnue' };
 
-  if (!idcc) {
-    return defaultCc;
-  }
-  //@ts-ignore
-  const cc = conventionsCollectives[idcc];
+  try {
+    //@ts-ignore
+    const cc = conventionsCollectives[idcc];
+    if (cc) {
+      return cc as { idKali: string; title: string };
+    }
 
-  if (cc) {
-    return cc as { idKali: string; title: string };
-  }
+    // these CC are known to appear in API but do not exists in public list of CC
+    const isSpecialIdcc =
+      [
+        '0',
+        '9999',
+        '5021',
+        '0804',
+        '2408',
+        '0240',
+        '5505',
+        '5560',
+        '2625',
+        '2409',
+        '0071',
+        '0911',
+        '2378',
+        '2267',
+      ].indexOf(idcc.toString()) > -1;
 
-  // these CC are known to appear in API but do not exists in public list of CC
-  const isSpecialIdcc =
-    [
-      '0',
-      '9999',
-      '5021',
-      '0804',
-      '2408',
-      '0240',
-      '5505',
-      '5560',
-      '2625',
-      '2409',
-      '0071',
-      '0911',
-      '2378',
-      '2267',
-    ].indexOf(idcc.toString()) > -1;
-
-  if (!isSpecialIdcc) {
+    if (isSpecialIdcc) {
+      return defaultCc;
+    }
+  } catch {
     logWarningInSentry('Error in getConventionCollectives', {
       details: `Could not find idcc :${idcc}`,
     });
-  }
 
-  return defaultCc;
+    return defaultCc;
+  }
 };
 
 const getNomenclature = (nomenclature: string) => {
