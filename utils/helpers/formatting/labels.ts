@@ -53,6 +53,11 @@ export const libelleFromDepartement = (
 };
 
 export const getConventionCollectives = (idcc: string) => {
+  const defaultCc = { idKali: '', title: 'Convention collective inconnue' };
+
+  if (!idcc) {
+    return defaultCc;
+  }
   //@ts-ignore
   const cc = conventionsCollectives[idcc];
 
@@ -77,7 +82,7 @@ export const getConventionCollectives = (idcc: string) => {
       '0911',
       '2378',
       '2267',
-    ].indexOf(cc) > -1;
+    ].indexOf(cc.toString()) > -1;
 
   if (!isSpecialIdcc) {
     logWarningInSentry('Error in getConventionCollectives', {
@@ -85,7 +90,7 @@ export const getConventionCollectives = (idcc: string) => {
     });
   }
 
-  return { idKali: '', title: 'Convention collective inconnue' };
+  return defaultCc;
 };
 
 const getNomenclature = (nomenclature: string) => {
