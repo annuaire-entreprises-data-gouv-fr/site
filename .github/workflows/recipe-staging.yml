@@ -3,6 +3,8 @@
 name: Recipe on staging
 
 on:
+  pull_request:
+    branches: [main]
   workflow_run:
     workflows: ['Deploy - Staging']
     types: [completed]
@@ -24,5 +26,3 @@ jobs:
           browser: chrome
           record: false
           config: baseUrl=https://staging.annuaire-entreprises.data.gouv.fr
-        env:
-          DEBUG: '@cypress/github-action, cypress:*'
