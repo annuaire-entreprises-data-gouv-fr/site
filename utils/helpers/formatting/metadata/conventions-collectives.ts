@@ -1,4 +1,26 @@
 export const conventionsCollectives = {
+  // not on legifrance so we use dummy idKali
+  '1369': {
+    idKali: 'dummy1',
+    title:
+      'Convention collective départementale des industries métallurgiques, électriques, électroniques et connexes de Loire-Atlantique',
+  },
+  '1059': {
+    idKali: 'dummy2',
+    title:
+      'Convention collective régionale des industries métallurgiques, électriques, électroniques et connexes de MidiPyrénées (Ariège, Aveyron, Gers, Haute-Garonne, Tarn, Tarn-et-Garonne, Lot, Aude convention du 1er avril 1980)',
+  },
+  '0911': {
+    idKali: 'dummy3',
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques, électriques, connexes et similaires de Seine-et-Marne',
+  },
+  // on legifrance but not on official list
+  '1413': {
+    idKali: 'KALICONT000005635905',
+    title: 'Salariés permanents des entreprises de travail temporaire',
+  },
+  // official list
   '3248': {
     idKali: 'KALICONT000046993250',
     title:

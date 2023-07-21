@@ -60,9 +60,29 @@ export const getConventionCollectives = (idcc: string) => {
     return cc as { idKali: string; title: string };
   }
 
-  logWarningInSentry('Error in getConventionCollectives', {
-    details: `Could not find idcc :${idcc}`,
-  });
+  // these CC are known to appear in API but do not exists in public list of CC
+  const isSpecialIdcc =
+    [
+      '0',
+      '9999',
+      '5021',
+      '0804',
+      '2408',
+      '0240',
+      '5505',
+      '5560',
+      '2625',
+      '2409',
+      '0071',
+      '0911',
+      '2378',
+    ].indexOf(cc) > -1;
+
+  if (!isSpecialIdcc) {
+    logWarningInSentry('Error in getConventionCollectives', {
+      details: `Could not find idcc :${idcc}`,
+    });
+  }
 
   return { idKali: '', title: 'Convention collective inconnue' };
 };
