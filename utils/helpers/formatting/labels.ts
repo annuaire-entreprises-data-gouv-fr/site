@@ -81,14 +81,14 @@ export const getConventionCollectives = (idcc: string) => {
         '2267',
       ].indexOf(idcc.toString()) > -1;
 
-    if (isSpecialIdcc) {
-      return defaultCc;
+    if (!isSpecialIdcc) {
+      throw new Error();
     }
+    return defaultCc;
   } catch {
     logWarningInSentry('Error in getConventionCollectives', {
       details: `Could not find idcc :${idcc}`,
     });
-
     return defaultCc;
   }
 };
