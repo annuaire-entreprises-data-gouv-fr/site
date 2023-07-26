@@ -27,7 +27,9 @@ const UniteLegaleSection: React.FC<{
 }> = ({ uniteLegale, session }) => {
   const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
 
-  const conventionsCollectives = uniteLegale.conventionsCollectives || [];
+  const conventionsCollectives = Array.from(
+    new Set((uniteLegale.conventionsCollectives || []).map((cc) => cc.idcc))
+  );
 
   const data = [
     ['Dénomination', getNomComplet(uniteLegale, session)],
@@ -69,11 +71,11 @@ const UniteLegaleSection: React.FC<{
       'Convention(s) collective(s)',
       conventionsCollectives.length > 0 ? (
         <>
-          {conventionsCollectives.map((cc) => (
-            <>
-              {<Tag>IDCC {cc.idcc}</Tag>}
+          {conventionsCollectives.map((idcc) => (
+            <React.Fragment key={idcc}>
+              {<Tag>IDCC {idcc}</Tag>}
               <br />
-            </>
+            </React.Fragment>
           ))}
           <a href={`/divers/${uniteLegale.siren}`}>→ en savoir plus</a>
         </>
