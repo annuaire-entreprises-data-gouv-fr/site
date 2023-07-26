@@ -1,5 +1,4 @@
 import { clientAssociation } from '#clients/api-proxy/association';
-import { clientTVA } from '#clients/api-proxy/tva';
 import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
 import { clientApiEntrepriseAssociation } from './api-entreprise/association';
@@ -30,8 +29,6 @@ const ping = async (slug: string | string[]) => {
       );
     case 'api-association':
       return await clientAssociation(verifyIdRna('W551000280'), '', useCache);
-    case 'api-tva':
-      return await clientTVA(verifySiren('880878145'), useCache);
     case 'api-entreprise-association':
       return await clientApiEntrepriseAssociation(
         verifySiren('842019051'),

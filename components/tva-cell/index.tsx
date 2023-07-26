@@ -3,7 +3,7 @@ import FAQLink from '#components-ui/faq-link';
 import { Loader } from '#components-ui/loader';
 import FrontStateMachine from '#components/front-state-machine';
 import { CopyPaste } from '#components/table/simple';
-import { tvaNumber } from '#models/tva/utils';
+import { tvaNumber } from '#models/tva';
 import { Siren, formatIntFr } from '#utils/helpers';
 
 const TVACell: React.FC<{ siren: Siren }> = ({ siren }) => {
