@@ -32,4 +32,10 @@ export const conventionsCollectivesExclusionList = [
   '0398',
   '0533',
   '9612',
+  '5014',
+  '0749',
+  '2870',
+  '3128',
+  '3204',
+  '5502',
 ];
