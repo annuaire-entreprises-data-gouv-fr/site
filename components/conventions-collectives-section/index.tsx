@@ -58,7 +58,7 @@ const ConventionsCollectivesSection: React.FC<{
               <a href={`/etablissement/${convention.siret}`}>
                 {formatSiret(convention.siret)}
               </a>,
-              <Tag>{convention.idcc}</Tag>,
+              <Tag>IDCC {convention.idcc}</Tag>,
               <i className="font-small">{convention.title}</i>,
               <ButtonLink
                 target="_blank"

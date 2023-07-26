@@ -15,6 +15,40 @@ export const conventionsCollectives = {
     title:
       'Convention collective départementale des industries métallurgiques, mécaniques, électriques, connexes et similaires de Seine-et-Marne',
   },
+  '1578': {
+    idKali: 'dummy4',
+    title:
+      'Convention collective départementale de la métallurgie de la Loire et de l’arrondissement d’Yssingeaux',
+  },
+  '2126': {
+    idKali: 'dummy5',
+    title:
+      'Convention collective régionale de la métallurgie du Gard et de la Lozère',
+  },
+  '5018': {
+    idKali: 'dummy6',
+    title: 'Convention collective Chambres de commerce et d’industrie',
+  },
+  '0860': {
+    idKali: 'dummy6',
+    title:
+      'Convention collective départementale de la métallurgie et des industries connexes du Finistère',
+  },
+  '0863': {
+    idKali: 'dummy7',
+    title:
+      'Convention collective régionale des industries métallurgiques et connexes d’Ille-et-Vilaine et du Morbihan',
+  },
+  '0878': {
+    idKali: 'dummy8',
+    title:
+      'Convention collective départementale des mensuels des industries métallurgiques du Rhône',
+  },
+  '2221': {
+    idKali: 'dummy9',
+    title:
+      'Convention collective régionale des mensuels des industries des métaux de l’Isère et des Hautes-Alpes',
+  },
   // on legifrance but not on official list
   '1413': {
     idKali: 'KALICONT000005635905',

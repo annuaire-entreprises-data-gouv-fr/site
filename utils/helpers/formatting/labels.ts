@@ -8,6 +8,7 @@ import { codesNAP } from './metadata/codes-NAP';
 import { codesSectionNAF } from './metadata/codes-section-NAF';
 import { codesVoies } from './metadata/codes-voie';
 import { conventionsCollectives } from './metadata/conventions-collectives';
+import { conventionsCollectivesExclusionList } from './metadata/conventions-collectives-exclusion-list';
 import { departements } from './metadata/departements';
 
 export const getUrlFromDepartement = (dep: string) => {
@@ -64,22 +65,7 @@ export const getConventionCollectives = (idcc: string) => {
 
     // these CC are known to appear in API but do not exists in public list of CC
     const isSpecialIdcc =
-      [
-        '0',
-        '9999',
-        '5021',
-        '0804',
-        '2408',
-        '0240',
-        '5505',
-        '5560',
-        '2625',
-        '2409',
-        '0071',
-        '0911',
-        '2378',
-        '2267',
-      ].indexOf(idcc.toString()) > -1;
+      conventionsCollectivesExclusionList.indexOf(idcc.toString()) > -1;
 
     if (isSpecialIdcc) {
       return defaultCc;
