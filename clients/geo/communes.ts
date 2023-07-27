@@ -31,8 +31,7 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
     .reduce(
       (communes: IGeoElement[], commune) => [
         ...communes,
-        ...(commune.codesPostaux.length > 1 &&
-        ['Paris', 'Lyon', 'Marseille'].indexOf(commune.nom) === -1
+        ...(['Paris', 'Lyon', 'Marseille'].indexOf(commune.nom) === -1
           ? [
               {
                 type: 'cp',
@@ -41,9 +40,11 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
               },
             ]
           : []),
-        ...commune.codesPostaux.map((cp) => {
-          return { label: `${commune.nom} (${cp})`, value: cp, type: 'cp' };
-        }),
+        ...(commune.codesPostaux.length > 1
+          ? commune.codesPostaux.map((cp) => {
+              return { label: `${commune.nom} (${cp})`, value: cp, type: 'cp' };
+            })
+          : []),
       ],
       []
     );
