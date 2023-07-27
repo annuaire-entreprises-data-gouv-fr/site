@@ -22,7 +22,6 @@
     "test:end2end:open": "cypress open",
     "test:recipe-staging": "cypress open --config baseUrl=https://staging.annuaire-entreprises.data.gouv.fr video=false",
     "test:unit": "jest --runInBand",
-    "test:a11y": "npx pa11y-ci --config ./pa11y.config.json",
     "lint": "next lint",
     "script:seo": " ts-node --project ./seo-script/seo-script-tsconfig.json ./seo-script/index.ts",
     "storybook:start": "start-storybook -p 6006",
