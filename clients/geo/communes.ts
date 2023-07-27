@@ -34,8 +34,8 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
         ...(['Paris', 'Lyon', 'Marseille'].indexOf(commune.nom) === -1
           ? [
               {
-                type: 'cp',
-                value: commune.codesPostaux.join(','),
+                type: 'insee',
+                value: commune.code,
                 label: `${commune.nom} (Toute la ville)`,
               },
             ]
