@@ -48,7 +48,8 @@ const routes = {
   },
   geo: {
     commune: 'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json',
-    departement: 'https://geo.api.gouv.fr/departements?fields=code&format=json',
+    departement:
+      'https://geo.api.gouv.fr/departements?fields=code&format=json&zone=metro,drom,com',
   },
   journalOfficielAssociations: {
     ods: {
