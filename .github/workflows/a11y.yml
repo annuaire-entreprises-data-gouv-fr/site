@@ -4,10 +4,15 @@ name: A11y on staging
 
 on:
   workflow_dispatch:
+<<<<<<< Updated upstream
   pull_request:
     branches: [main]
   schedule:
     - cron: '0 1 * * *'
+=======
+    schedule:
+      - cron: '0 1 * * *'
+>>>>>>> Stashed changes
 
 jobs:
   recipe:
@@ -15,9 +20,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+<<<<<<< Updated upstream
       - name: Checkout
         uses: actions/checkout@v3
       - name: a11ytester
         uses: mikaelvesavuori/a11ytester-action@v1.0.0
         with:
           urls: '[\"staging.annuaire-entreprises.data.gouv.fr\",\"staging.annuaire-entreprises.data.gouv.fr/donnees-extrait-kbis\",\"staging.annuaire-entreprises.data.gouv.fr/comment-ca-marche\",\"staging.annuaire-entreprises.data.gouv.fr/rechercher\",\"staging.annuaire-entreprises.data.gouv.fr/faq\",\"staging.annuaire-entreprises.data.gouv.fr/accessiblite\",\"staging.annuaire-entreprises.data.gouv.fr/vie-privee\",\"staging.annuaire-entreprises.data.gouv.fr/entreprise/880878145\",\"staging.annuaire-entreprises.data.gouv.fr/justificatif/880878145\",\"staging.annuaire-entreprises.data.gouv.fr/annonces/880878145\",\"staging.annuaire-entreprises.data.gouv.fr/administration/insee\",\"staging.annuaire-entreprises.data.gouv.fr/administration\",\"staging.annuaire-entreprises.data.gouv.fr/sources-de-donnees/insee\",\"staging.annuaire-entreprises.data.gouv.fr/sources-de-donnees/\",\"staging.annuaire-entreprises.data.gouv.fr/carte\",\"staging.annuaire-entreprises.data.gouv.fr/etablissement/88087814500015\",\"staging.annuaire-entreprises.data.gouv.fr/rechercher?terme=ganymede\"]'
+=======
+      - uses: actions/checkout@v3
+      - run: |
+          npx pa11y-ci --config ../../.pa11y.config.json
+>>>>>>> Stashed changes
