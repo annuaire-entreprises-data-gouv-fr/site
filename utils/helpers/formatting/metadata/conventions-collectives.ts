@@ -49,6 +49,11 @@ export const conventionsCollectives = {
     title:
       'Convention collective régionale des mensuels des industries des métaux de l’Isère et des Hautes-Alpes',
   },
+  '1967': {
+    idKali: 'dummy10',
+    title:
+      'Convention collective départementale de l’industrie des métaux du Bas-Rhin',
+  },
   // on legifrance but not on official list
   '1413': {
     idKali: 'KALICONT000005635905',
