@@ -73,7 +73,6 @@
     "vite": "^4.4.2"
   },
   "devDependencies": {
-    "@axe-core/cli": "^4.7.3",
     "@babel/core": "^7.22.8",
     "@storybook/addon-actions": "^7.0.26",
     "@storybook/addon-essentials": "^7.0.26",
