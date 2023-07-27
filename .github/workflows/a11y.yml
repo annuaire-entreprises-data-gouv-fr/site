@@ -17,4 +17,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          npx pa11y-ci --config ../../.pa11y.config.json
+          npx pa11y-ci --config ../../pa11y.config.json
