@@ -15,13 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: browser-actions/setup-chrome@v1
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: a11ytester
+        uses: mikaelvesavuori/a11ytester-action@v1.0.0
         with:
-          chrome-version: 5aa076d9d4b19c5337d07a05a938455ec57417c4
-
-      - run: chrome --version
-
-      - run: |
-          npm install -g @axe-core/cli
-          axe https://staging.annuaire-entreprises.data.gouv.fr  https://staging.annuaire-entreprises.data.gouv.fr/donnees-extrait-kbis  https://staging.annuaire-entreprises.data.gouv.fr/comment-ca-marche  https://staging.annuaire-entreprises.data.gouv.fr/rechercher  https://staging.annuaire-entreprises.data.gouv.fr/faq  https://staging.annuaire-entreprises.data.gouv.fr/accessiblite  https://staging.annuaire-entreprises.data.gouv.fr/vie-privee  https://staging.annuaire-entreprises.data.gouv.fr/entreprise/880878145  https://staging.annuaire-entreprises.data.gouv.fr/justificatif/880878145  https://staging.annuaire-entreprises.data.gouv.fr/annonces/880878145  https://staging.annuaire-entreprises.data.gouv.fr/administration/insee https://staging.annuaire-entreprises.data.gouv.fr/administration https://staging.annuaire-entreprises.data.gouv.fr/sources-de-donnees/insee  https://staging.annuaire-entreprises.data.gouv.fr/sources-de-donnees/  https://staging.annuaire-entreprises.data.gouv.fr/carte  https://staging.annuaire-entreprises.data.gouv.fr/etablissement/88087814500015  https://staging.annuaire-entreprises.data.gouv.fr/rechercher?terme=ganymede  --disable scrollable-region-focusable,region,color-contrast,duplicate-id --exit
+          urls: '[\"staging.annuaire-entreprises.data.gouv.fr\",\"staging.annuaire-entreprises.data.gouv.fr/donnees-extrait-kbis\",\"staging.annuaire-entreprises.data.gouv.fr/comment-ca-marche\",\"staging.annuaire-entreprises.data.gouv.fr/rechercher\",\"staging.annuaire-entreprises.data.gouv.fr/faq\",\"staging.annuaire-entreprises.data.gouv.fr/accessiblite\",\"staging.annuaire-entreprises.data.gouv.fr/vie-privee\",\"staging.annuaire-entreprises.data.gouv.fr/entreprise/880878145\",\"staging.annuaire-entreprises.data.gouv.fr/justificatif/880878145\",\"staging.annuaire-entreprises.data.gouv.fr/annonces/880878145\",\"staging.annuaire-entreprises.data.gouv.fr/administration/insee\",\"staging.annuaire-entreprises.data.gouv.fr/administration\",\"staging.annuaire-entreprises.data.gouv.fr/sources-de-donnees/insee\",\"staging.annuaire-entreprises.data.gouv.fr/sources-de-donnees/\",\"staging.annuaire-entreprises.data.gouv.fr/carte\",\"staging.annuaire-entreprises.data.gouv.fr/etablissement/88087814500015\",\"staging.annuaire-entreprises.data.gouv.fr/rechercher?terme=ganymede\"]'
