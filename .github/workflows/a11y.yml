@@ -4,6 +4,8 @@ name: A11y on staging
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
   schedule:
     - cron: '0 1 * * *'
 
@@ -16,7 +18,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: browser-actions/setup-chrome@v1
         with:
-          chrome-version: stable
+          chrome-version: 5aa076d9d4b19c5337d07a05a938455ec57417c4
 
       - run: chrome --version
 
