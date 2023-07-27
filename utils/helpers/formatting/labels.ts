@@ -100,8 +100,10 @@ export const libelleFromCodeNAF = (
 ) => {
   const codes = getNomenclature(nomenclature);
 
-  //@ts-ignore
-  const label = codes[code] || 'Activité inconnue';
+  const label =
+    //@ts-ignore
+    codes[code] || libelleFromCodeNAFWithoutNomenclature(code);
+
   return addCode && code ? `${label} (${code})` : label;
 };
 
