@@ -54,7 +54,6 @@ export type IMCPUserInfo = {
   phone_number: string | null;
   job: string | null;
   organization: {
-    id: number;
     siret: string;
     is_external: boolean;
     label: string | null;
