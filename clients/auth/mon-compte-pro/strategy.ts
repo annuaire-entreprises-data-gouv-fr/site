@@ -41,7 +41,7 @@ export const getClient = async () => {
 export const monCompteProAuthorizeUrl = async () => {
   const client = await getClient();
   return client.authorizationUrl({
-    scope: 'openid email organizations profile',
+    scope: 'openid email organization profile',
   });
 };
 
@@ -53,14 +53,14 @@ export type IMCPUserInfo = {
   given_name: string | null;
   phone_number: string | null;
   job: string | null;
-  organizations: {
+  organization: {
     id: number;
     siret: string;
     is_external: boolean;
     label: string | null;
     is_collectivite_territoriale: boolean;
     is_service_public: boolean;
-  }[];
+  };
 };
 
 export const monCompteAuthenticate = async (req: any) => {

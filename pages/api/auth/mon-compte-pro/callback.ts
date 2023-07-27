@@ -27,12 +27,11 @@ const getUserPrivileges = async (
     return 'super-agent';
   }
 
+  const { organization } = userInfo;
   const isAgent =
-    userInfo.organizations.filter(
-      (o) =>
-        !o.is_external &&
-        (o.is_collectivite_territoriale || o.is_service_public)
-    ).length > 0;
+    !organization.is_external &&
+    (organization.is_collectivite_territoriale ||
+      organization.is_service_public);
 
   if (isAgent) {
     return 'agent';
