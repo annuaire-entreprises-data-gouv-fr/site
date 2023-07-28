@@ -30,8 +30,9 @@ export const getAssociation = async (
         siren,
         details: `RNA : ${slug}`,
       });
+    } else {
+      logErrorInSentry('Error in API RNA', { siren, details: e.toString() });
     }
-    // no need to log an error as API-Proxy already logged it
     return null;
   }
 };
