@@ -72,9 +72,11 @@ export const getConventionCollectives = (idcc: string) => {
     }
     return defaultCc;
   } catch {
-    logWarningInSentry('Error in getConventionCollectives', {
-      details: `Could not find idcc :${idcc}`,
-    });
+    if (Math.random() < 0.1) {
+      logWarningInSentry('Error in getConventionCollectives', {
+        details: `Could not find idcc :${idcc}`,
+      });
+    }
     return defaultCc;
   }
 };
