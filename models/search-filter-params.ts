@@ -147,6 +147,11 @@ class SearchFilterParams {
         label: '',
         excludeParams: ['type', 'label'],
       },
+      financeFilter: {
+        icon: 'moneyCircle',
+        label: '',
+        excludeParams: ['type', 'label'],
+      },
       localisationFilter: {
         icon: 'mapPin',
         label: '',

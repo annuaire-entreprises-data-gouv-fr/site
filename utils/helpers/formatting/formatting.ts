@@ -60,9 +60,13 @@ export const formatCurrency = safe((value: string) => {
   const unitlist = [' €', 'K €', 'M €', 'Mds €'];
   const sign = Math.sign(number);
 
-  const orderOfMagnitude = Math.floor((number.toString().length - 1) / 3);
+  const orderOfMagnitude = Math.floor(
+    (Math.abs(number).toString().length - 1) / 3
+  );
   const magnitude = Math.pow(1000, orderOfMagnitude);
   const roundedValue = Math.floor(Math.abs(number / magnitude) * 10) / 10;
+
+  console.log(number, sign, orderOfMagnitude, roundedValue);
 
   return `${sign * roundedValue} ${unitlist[orderOfMagnitude]}`;
 });

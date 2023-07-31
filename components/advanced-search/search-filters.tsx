@@ -10,6 +10,7 @@ import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2
 import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
 import { FilterGeo } from './filter-geo';
 import { FilterStructure } from './filter-structure';
+import { FilterFinances } from './filter-finances';
 
 const SearchFilters: React.FC<{
   searchParams?: IParams;
@@ -40,6 +41,7 @@ const SearchFilters: React.FC<{
     dirigeantFilter,
     administrativeFilter,
     structureFilter,
+    financeFilter,
   } = filters.extractFilters();
 
   /**
@@ -126,6 +128,15 @@ const SearchFilters: React.FC<{
         addSaveClearButton
       >
         <FilterStructure label={label} type={type} />
+      </FilterMenu>
+      <FilterMenu
+        label="Finances"
+        activeFilter={financeFilter}
+        searchParams={searchParams}
+        searchTerm={searchTerm}
+        addSaveClearButton
+      >
+        <FilterFinances />
       </FilterMenu>
       <FilterMenu
         label="Situation administrative"
