@@ -130,7 +130,7 @@ const SearchFilters: React.FC<{
         <FilterStructure label={label} type={type} />
       </FilterMenu>
       <FilterMenu
-        label="Finances"
+        label="Financier"
         activeFilter={financeFilter}
         searchParams={searchParams}
         searchTerm={searchTerm}
