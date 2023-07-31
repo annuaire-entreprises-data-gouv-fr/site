@@ -74,7 +74,7 @@ const clientSearchRechercheEntreprise = async ({
 
   const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3&inclure_slug=true&inclure_etablissements=${inclureEtablissements}${
     searchFilterParams?.toApiURI() || ''
-  }`;
+  }&include_admin=slug,etablissements`;
 
   const timeout = fallbackOnStaging
     ? constants.timeout.XL
