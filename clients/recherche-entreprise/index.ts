@@ -11,6 +11,7 @@ import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
+  IConventionCollective,
   IEtablissement,
   NotEnoughParamsException,
 } from '#models/index';
@@ -335,9 +336,9 @@ const mapToEtablissement = (
     dateDebutActivite: date_debut_activite,
     conventionsCollectives: (liste_idcc || [])
       .map((idcc) => {
-        return { siret, idcc, ...getConventionCollectives(idcc) };
+        return getConventionCollectives(idcc, siret);
       })
-      .filter((cc) => !!cc.idKali),
+      .filter((cc): cc is IConventionCollective => !!cc),
   };
 };
 

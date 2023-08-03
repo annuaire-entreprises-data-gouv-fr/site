@@ -1,3 +1,4 @@
+import { IConventionCollective } from '#models/index';
 import { escapeTerm } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
 import { categoriesJuridiques } from './metadata/categories-juridiques';
@@ -53,14 +54,15 @@ export const libelleFromDepartement = (
   return 'Département inconnu';
 };
 
-export const getConventionCollectives = (idcc: string) => {
-  const defaultCc = { idKali: '', title: 'Convention collective inconnue' };
-
+export const getConventionCollectives = (
+  idcc: string,
+  siret: string
+): IConventionCollective | null => {
   try {
     //@ts-ignore
     const cc = conventionsCollectives[idcc];
     if (cc) {
-      return cc as { idKali: string; title: string };
+      return { siret, idcc, ...cc };
     }
 
     // these CC are known to appear in API but do not exists in public list of CC
@@ -70,14 +72,14 @@ export const getConventionCollectives = (idcc: string) => {
     if (!isSpecialIdcc) {
       throw new Error();
     }
-    return defaultCc;
+    return null;
   } catch {
     if (Math.random() < 0.1) {
       logWarningInSentry('Error in getConventionCollectives', {
         details: `Could not find idcc :${idcc}`,
       });
     }
-    return defaultCc;
+    return null;
   }
 };
 

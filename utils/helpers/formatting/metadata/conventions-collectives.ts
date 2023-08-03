@@ -1,63 +1,407 @@
 export const conventionsCollectives = {
-  // not on legifrance so we use dummy idKali
-  '1369': {
-    idKali: 'dummy1',
-    title:
-      'Convention collective départementale des industries métallurgiques, électriques, électroniques et connexes de Loire-Atlantique',
-  },
-  '1059': {
-    idKali: 'dummy2',
-    title:
-      'Convention collective régionale des industries métallurgiques, électriques, électroniques et connexes de MidiPyrénées (Ariège, Aveyron, Gers, Haute-Garonne, Tarn, Tarn-et-Garonne, Lot, Aude convention du 1er avril 1980)',
-  },
-  '0911': {
-    idKali: 'dummy3',
-    title:
-      'Convention collective départementale des industries métallurgiques, mécaniques, électriques, connexes et similaires de Seine-et-Marne',
-  },
-  '1578': {
-    idKali: 'dummy4',
-    title:
-      'Convention collective départementale de la métallurgie de la Loire et de l’arrondissement d’Yssingeaux',
-  },
-  '2126': {
-    idKali: 'dummy5',
-    title:
-      'Convention collective régionale de la métallurgie du Gard et de la Lozère',
-  },
-  '5018': {
-    idKali: 'dummy6',
-    title: 'Convention collective Chambres de commerce et d’industrie',
-  },
-  '0860': {
-    idKali: 'dummy6',
-    title:
-      'Convention collective départementale de la métallurgie et des industries connexes du Finistère',
-  },
-  '0863': {
-    idKali: 'dummy7',
-    title:
-      'Convention collective régionale des industries métallurgiques et connexes d’Ille-et-Vilaine et du Morbihan',
-  },
-  '0878': {
-    idKali: 'dummy8',
-    title:
-      'Convention collective départementale des mensuels des industries métallurgiques du Rhône',
-  },
-  '2221': {
-    idKali: 'dummy9',
-    title:
-      'Convention collective régionale des mensuels des industries des métaux de l’Isère et des Hautes-Alpes',
-  },
-  '1967': {
-    idKali: 'dummy10',
-    title:
-      'Convention collective départementale de l’industrie des métaux du Bas-Rhin',
-  },
   // on legifrance but not on official list
   '1413': {
     idKali: 'KALICONT000005635905',
     title: 'Salariés permanents des entreprises de travail temporaire',
+  },
+  '1423': {
+    idKali: 'KALICONT000005635429',
+    title: 'Navigation de plaisance',
+  },
+  '5017': {
+    idKali: 'KALICONT000036572933',
+    title:
+      'Éditeurs de la presse magazine Employés et cadres (30 octobre 2017)',
+  },
+  '1017': {
+    idKali: 'KALICONT000036572933',
+    title:
+      'Éditeurs de la presse magazine Employés et cadres (30 octobre 2017)',
+  },
+  '7009': {
+    idKali: 'KALICONT000005635480',
+    title: 'Entreprises d’accouvage et de sélection avicoles',
+  },
+  '0700': {
+    idKali: 'KALICONT000005635440',
+    title:
+      'Production des papiers, cartons et celluloses (Ingénieurs et cadres)',
+  },
+  '2111': {
+    idKali: 'KALICONT000044594539',
+    title: 'Particuliers employeurs et emploi à domicile',
+  },
+  '1624': {
+    idKali: 'KALICONT000005635225',
+    title:
+      'Commerce de gros de la confiserie, chocolaterie, biscuiterie et alimentation fine et des négociants-distributeurs de levure',
+  },
+  '0707': {
+    idKali: 'KALICONT000005635669',
+    title:
+      'Transformation des papiers-cartons et de la pellicule cellulosique (ingénieurs et cadres)',
+  },
+  '0412': {
+    idKali: 'KALICONT000005635847',
+    title:
+      'Agences de voyages et de tourisme : personnels, guides accompagnateurs et accompagnateurs',
+  },
+  '1314': {
+    idKali: 'KALICONT000017789780',
+    title:
+      'Maisons d’alimentation à succursales, supermarchés, hypermarchés (gérants mandataires)',
+  },
+  '1495': {
+    idKali: 'KALICONT000005635194',
+    title: 'Transformation des papiers-cartons et industries connexes (OEDTAM)',
+  },
+  '2174': {
+    idKali: 'KALICONT000005635584',
+    title: 'Navigation intérieure : personnel sédentaire (cadres et ETAM)',
+  },
+  '1492': {
+    idKali: 'KALICONT000005635192',
+    title: 'Production des papiers-cartons et celluloses (OEDTAM)',
+  },
+  '1761': {
+    idKali: 'KALICONT000005635247',
+    title: 'Commerce de gros des tissus, tapis et linge de maison',
+  },
+  '1974': {
+    idKali: 'KALICONT000005635578',
+    title:
+      'Navigation intérieure : personnel des entreprises de transport de passagers en navigation intérieure',
+  },
+  '2395': {
+    idKali: 'KALICONT000044594539',
+    title: 'Particuliers employeurs et emploi à domicile',
+  },
+  '0635': {
+    idKali: 'KALICONT000005635851',
+    title: 'Négoce en fournitures dentaires',
+  },
+  '2014': {
+    idKali: 'KALICONT000030185307',
+    title: 'Coopératives de consommation (23 novembre 2018)',
+  },
+  '2018': {
+    idKali: 'KALICONT000030185307',
+    title: 'Coopératives de consommation (23 novembre 2018)',
+  },
+  '1018': {
+    idKali: 'KALICONT000030185307',
+    title: 'Coopératives de consommation (23 novembre 2018)',
+  },
+  '2108': {
+    idKali: 'KALICONT000030185307',
+    title: 'Coopératives de consommation (23 novembre 2018)',
+  },
+  // not on legifrance so we use dummy idKali
+  '1369': {
+    title:
+      'Convention collective départementale des industries métallurgiques, électriques, électroniques et connexes de Loire-Atlantique',
+  },
+  '1059': {
+    title:
+      'Convention collective régionale des industries métallurgiques, électriques, électroniques et connexes de MidiPyrénées (Ariège, Aveyron, Gers, Haute-Garonne, Tarn, Tarn-et-Garonne, Lot, Aude convention du 1er avril 1980)',
+  },
+  '0911': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques, électriques, connexes et similaires de Seine-et-Marne',
+  },
+  '1578': {
+    title:
+      'Convention collective départementale de la métallurgie de la Loire et de l’arrondissement d’Yssingeaux',
+  },
+  '2126': {
+    title:
+      'Convention collective régionale de la métallurgie du Gard et de la Lozère',
+  },
+  '5018': {
+    title: 'Convention collective Chambres de commerce et d’industrie',
+  },
+  '0860': {
+    title:
+      'Convention collective départementale de la métallurgie et des industries connexes du Finistère',
+  },
+  '0863': {
+    title:
+      'Convention collective régionale des industries métallurgiques et connexes d’Ille-et-Vilaine et du Morbihan',
+  },
+  '0878': {
+    title:
+      'Convention collective départementale des mensuels des industries métallurgiques du Rhône',
+  },
+  '2221': {
+    title:
+      'Convention collective régionale des mensuels des industries des métaux de l’Isère et des Hautes-Alpes',
+  },
+  '1967': {
+    title:
+      'Convention collective départementale de l’industrie des métaux du Bas-Rhin',
+  },
+
+  '2615': {
+    title:
+      'Convention collective régionale de la métallurgie des Pyrénées-Atlantiques et du Seignanx',
+  },
+  '0914': {
+    title:
+      'Convention collective départementale des mensuels des industries métallurgiques de l’Ain',
+  },
+  '0836': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques, électriques, connexes et similaires de la Haute-Savoie',
+  },
+  '1387': {
+    title:
+      'Convention collective locale des mensuels des industries métallurgiques des Flandres',
+  },
+  '0714': {
+    title:
+      'Convention collective départementale des industries du travail des métaux de la Moselle (métallurgie)',
+  },
+  '1604': {
+    title: 'Convention collective métallurgie Rouen Dieppe (Seine-Maritime)',
+  },
+  '3209': {
+    title: 'Convention collective Métallurgie Doubs',
+  },
+  '0899': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques et connexes de la Marne',
+  },
+  '1560': {
+    title:
+      'Convention collective départementale des industries métallurgiques, électriques et connexes des AlpesMaritimes',
+  },
+  '1634': {
+    title:
+      'Convention collective départementale de la métallurgie des Côtes-d’Armor',
+  },
+  '2489': {
+    title:
+      'Convention collective départementale des industries métallurgiques et assimilées de la Vendée',
+  },
+  '1867': {
+    title:
+      'Convention collective régionale de la métallurgie de la Drôme-Ardèche',
+  },
+  '0948': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques et connexes de l’Orne',
+  },
+  '0827': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques et connexes des Ardennes',
+  },
+  '0937': {
+    title:
+      'Convention collective régionale des industries métallurgiques mécaniques et connexes de la Haute-Vienne et de la Creuse',
+  },
+  '1885': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques, électriques et connexes du département de la Côte-d’Or',
+  },
+  '2980': {
+    title: 'Convention collective départementale de la métallurgie de la Somme',
+  },
+  '1780': {
+    title:
+      'Convention collective régionale des industries métallurgiques, électriques, électroniques et connexes de MidiPyrénées (Ariège, Aveyron, Gers, Haute-Garonne, Tarn, Tarn-et-Garonne, Lot, Aude convention du 1er avril 1980)',
+  },
+  '1960': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques et connexes du Lot-et-Garonne',
+  },
+  '2266': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques, électriques, connexes et similaires de la Mayenne',
+  },
+  '2700': {
+    title: 'Convention collective départementale de la métallurgie de l’Oise',
+  },
+  '1970': {
+    title:
+      'Convention collective régionale des industries métallurgiques, électriques, électroniques et connexes de MidiPyrénées (Ariège, Aveyron, Gers, Haute-Garonne, Tarn, Tarn-et-Garonne, Lot, Aude convention du 1er avril 1980)',
+  },
+  '1912': {
+    title:
+      'Convention collective départementale des industries de la métallurgie du Haut-Rhin',
+  },
+  '1164': {
+    title:
+      'Convention collective locale des industries métallurgiques et annexes de la région de Vimeu (Somme)',
+  },
+  '1813': {
+    title:
+      'Convention collective locale de travail des industries de la transformation des métaux de la région de Maubeuge',
+  },
+  '3053': {
+    title:
+      'Convention collective départementale des industries de la métallurgie de Haute-Saône',
+  },
+  '1315': {
+    title:
+      'Convention collective régionale des industries métallurgiques, mécaniques et connexes de la Haute-Marne et de la Meuse',
+  },
+  '0930': {
+    title:
+      'Convention collective départementale de la métallurgie et des industries connexes de la Sarthe',
+  },
+  '1732': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques, électriques et connexes de l’Yonne',
+  },
+  '2755': {
+    title:
+      'Convention collective départementale des industries de la métallurgie de Belfort/Montbéliard',
+  },
+
+  '0887': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques, électriques et connexes de l’Eure',
+  },
+  '2630': {
+    title:
+      'Convention collective régionale des industries métallurgiques des Bouches-du-Rhône et Alpes-de-HauteProvence',
+  },
+  '1902': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques, électriques, électroniques connexes et similaires du Maine-et-Loire',
+  },
+  '0829': {
+    title:
+      'Convention collective départementale des industries métallurgiques et des industries connexes du Vaucluse',
+  },
+  '1627': {
+    title:
+      'Convention collective départementale du travail des industries de la métallurgie et des constructions mécaniques de Clermont-Ferrand et du Puy-de-Dôme',
+  },
+  '0965': {
+    title:
+      'Convention collective départementale des industries métallurgiques et connexes du département du Var',
+  },
+  '1592': {
+    title:
+      'Convention collective locale de la métallurgie du Valenciennois et du Cambrésis',
+  },
+  '0920': {
+    title:
+      'Convention collective départementale des industries métallurgiques électriques et connexes de la Vienne',
+  },
+  '0943': {
+    title:
+      'Convention collective départementale des industries métallurgiques mécaniques et connexes du Calvados',
+  },
+  '3231': {
+    title: 'Convention collective territoriale de la métallurgie du Jura',
+  },
+  '0923': {
+    title:
+      'Convention collective départementale de la métallurgie de la Charente-Maritime',
+  },
+  '2294': {
+    title:
+      'Convention collective départementale des industries et métiers de la métallurgie de l’Aube',
+  },
+  '0822': {
+    title:
+      'Convention collective départementale applicable aux mensuels de la métallurgie de la Savoie',
+  },
+  '0984': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques et connexes d’Eure-et-Loir',
+  },
+  '1365': {
+    title:
+      'Convention collective départementale de travail des industries de transformation des métaux de Meurthe-et-Moselle (métallurgie)',
+  },
+  '1577': {
+    title:
+      'Convention collective régionale des industries métallurgiques, électroniques et connexes de l’Hérault, de l’Aude et des Pyrénées-Orientales',
+  },
+  '1159': {
+    title:
+      'Convention collective départementale de la métallurgie de la Nièvre',
+  },
+  '2992': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques, électriques, connexes et similaires d’Indre-et Loire',
+  },
+  '1007': {
+    title:
+      'Convention collective locale d’arrondissement des industries métallurgiques, mécaniques, connexes et similaires de la région de Thiers (Puy-de-Dôme)',
+  },
+  '1966': {
+    title:
+      'Convention collective départementale des industries métallurgiques du Loiret',
+  },
+  '1628': {
+    title:
+      'Convention collective départementale de la métallurgie des Deux-Sèvres',
+  },
+  '1472': {
+    title:
+      'Convention collective départementale des industries métallurgiques du Pas-de-Calais',
+  },
+  '0934': {
+    title:
+      'Convention collective départementale des industries métallurgiques mécaniques connexes et similaires de l’Indre',
+  },
+  '1809': {
+    title: 'Convention collective territoriale de la métallurgie du Jura',
+  },
+  '1626': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques, électriques, électrocéramiques et connexes des Hautes-Pyrénées',
+  },
+  '0828': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques, connexes et similaires de la Manche',
+  },
+  '1375': {
+    title: 'Convention collective Métallurgie Doubs',
+  },
+  '2003': {
+    title:
+      'Convention collective départementale des industries métallurgiques, électriques, électroniques et connexes du département des Vosges',
+  },
+  '1564': {
+    title:
+      'Convention collective départementale des industries de la métallurgie de Saône-et-Loire',
+  },
+  '1525': {
+    title:
+      'Convention collective locale de la métallurgie de la région dunkerquoise',
+  },
+  '1980': {
+    title:
+      'Convention collective régionale des industries métallurgiques, électriques, électroniques et connexes de MidiPyrénées (Ariège, Aveyron, Gers, Haute-Garonne, Tarn, Tarn-et-Garonne, Lot, Aude convention du 1er avril 1980)',
+  },
+  '0979': {
+    title:
+      'Convention collective locale des industries métallurgiques de l’arrondissement du Havre (Seine-Maritime)',
+  },
+  '1274': {
+    title:
+      'Convention collective départementale des industries métallurgiques de la Corrèze',
+  },
+  '1572': {
+    title:
+      'Convention collective départementale de la métallurgie de la Charente',
+  },
+  '0898': {
+    title:
+      'Convention collective départementale des industries métallurgiques, mécaniques, électriques, connexes et similaires de l’Allier',
+  },
+  '1576': {
+    title:
+      'Convention collective départementale de travail des industries métallurgiques, mécaniques, électriques, électroniques, connexes et similaires du département du Cher',
+  },
+  '1353': {
+    title:
+      'Convention collective départementale des industries métallurgiques et connexes de la Dordogne',
   },
   // official list
   '3248': {
