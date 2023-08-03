@@ -8,7 +8,6 @@ import {
   getEtablissementPageTitle,
   shouldNotIndex,
 } from '#utils/helpers';
-import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
 import { NonDiffusibleSection } from 'components/non-diffusible';
