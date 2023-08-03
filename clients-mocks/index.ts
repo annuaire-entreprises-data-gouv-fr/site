@@ -26,6 +26,7 @@ class MockStore {
     this._mocks.push(require('./entrepreneur-spectacle/records').default);
     this._mocks.push(require('./geo/communes').default);
     this._mocks.push(require('./geo/departements').default);
+    this._mocks.push(require('./geo/regions').default);
     this._mocks.push(require('./recherche-entreprise/finassure').default);
     this._mocks.push(require('./recherche-entreprise/ganymede').default);
     this._mocks.push(require('./recherche-entreprise/grand-paris').default);
