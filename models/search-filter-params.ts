@@ -19,6 +19,10 @@ export interface IParams {
   tranche_effectif_salarie?: string;
   sap?: string;
   type?: string;
+  ca_min?: number;
+  ca_max?: number;
+  res_min?: number;
+  res_max?: number;
 }
 
 class SearchFilterParams {
@@ -41,6 +45,10 @@ class SearchFilterParams {
       categorie_entreprise = '',
       sap = '',
       type = '',
+      ca_min = 0,
+      ca_max = 0,
+      res_min = 0,
+      res_max = 0,
     } = query;
 
     // ensure dmax > dmin
@@ -66,6 +74,10 @@ class SearchFilterParams {
       categorie_entreprise,
       sap,
       type,
+      ca_min,
+      ca_max,
+      res_min,
+      res_max,
     };
   }
 
@@ -74,7 +86,7 @@ class SearchFilterParams {
   }
 
   public toApiURI() {
-    const { cp_dep, cp_dep_type } = this.params;
+    const { cp_dep, cp_dep_type, ca_max, ca_min } = this.params;
     const departement = cp_dep_type === 'dep' ? cp_dep : '';
     const code_postal = cp_dep_type === 'cp' ? cp_dep : '';
     const code_commune = cp_dep_type === 'insee' ? cp_dep : '';
@@ -105,6 +117,10 @@ class SearchFilterParams {
       nom_personne: this.params.n?.trim(),
       date_naissance_personne_min: this.params.dmin,
       date_naissance_personne_max: this.params.dmax,
+      ca_max,
+      ca_min,
+      resultat_net_max: this.params.res_max,
+      resultat_net_min: this.params.res_min,
     });
   }
 
@@ -150,7 +166,7 @@ class SearchFilterParams {
       financeFilter: {
         icon: 'moneyCircle',
         label: '',
-        excludeParams: ['type', 'label'],
+        excludeParams: ['ca_min', 'ca_max', 'res_min', 'res_max'],
       },
       localisationFilter: {
         icon: 'mapPin',
@@ -237,6 +253,14 @@ class SearchFilterParams {
 
     if (this.params.cp_dep_label) {
       f.localisationFilter.label = this.params.cp_dep_label;
+    }
+
+    if (this.params.ca_max || this.params.ca_min) {
+      f.financeFilter.label = 'filtre sur le CA';
+    }
+
+    if (this.params.res_max || this.params.res_min) {
+      f.financeFilter.label = 'filtre sur le resultat';
     }
     return f;
   };

@@ -32,6 +32,10 @@ const SearchFilters: React.FC<{
     categorie_entreprise,
     sap,
     type,
+    ca_min,
+    ca_max,
+    res_min,
+    res_max,
   } = searchParams || {};
 
   const filters = new SearchFilterParams(searchParams || {});
@@ -136,7 +140,12 @@ const SearchFilters: React.FC<{
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <FilterFinances />
+        <FilterFinances
+          ca_min={ca_min}
+          ca_max={ca_max}
+          res_min={res_min}
+          res_max={res_max}
+        />
       </FilterMenu>
       <FilterMenu
         label="Situation administrative"
