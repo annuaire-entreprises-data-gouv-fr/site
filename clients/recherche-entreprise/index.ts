@@ -76,6 +76,7 @@ const clientSearchRechercheEntreprise = async ({
     searchFilterParams?.toApiURI() || ''
   }`;
 
+  console.log(url);
   const timeout = fallbackOnStaging
     ? constants.timeout.XL
     : constants.timeout.L;

@@ -6,6 +6,7 @@ import {
 } from '#clients/geo/departements';
 import logErrorInSentry from '#utils/sentry';
 import { withAPM } from '#utils/sentry/tracing';
+import { clientRegionsByName } from '#clients/geo/regions';
 
 const geo = async (
   { query: { slug = '' } }: NextApiRequest,
@@ -31,11 +32,16 @@ const geo = async (
 
       res.status(404).end();
     } else {
-      const [departements, communes] = await Promise.all([
+      const [departements, communes, regions] = await Promise.all([
         clientDepartementsByName(term),
         clientCommunesByName(term),
+        clientRegionsByName(term),
       ]);
-      const results = [...departements.slice(0, 5), ...communes.slice(0, 20)];
+      const results = [
+        ...regions,
+        ...departements.slice(0, 5),
+        ...communes.slice(0, 20),
+      ];
       res.status(200).json(results);
     }
   } catch (e: any) {
