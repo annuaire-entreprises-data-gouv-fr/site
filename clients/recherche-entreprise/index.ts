@@ -72,9 +72,9 @@ const clientSearchRechercheEntreprise = async ({
     throw new NotEnoughParamsException('');
   }
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3&inclure_slug=true&inclure_etablissements=${inclureEtablissements}${
+  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3${
     searchFilterParams?.toApiURI() || ''
-  }&include_admin=slug,etablissements`;
+  }&include_admin=slug${inclureEtablissements ? ',etablissements' : ''}`;
 
   const timeout = fallbackOnStaging
     ? constants.timeout.XL
