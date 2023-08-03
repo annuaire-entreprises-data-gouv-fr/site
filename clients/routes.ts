@@ -50,6 +50,7 @@ const routes = {
     commune: 'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json',
     departement:
       'https://geo.api.gouv.fr/departements?fields=code&format=json&zone=metro,drom,com',
+    region: 'https://geo.api.gouv.fr/regions?limit=3',
   },
   journalOfficielAssociations: {
     ods: {
