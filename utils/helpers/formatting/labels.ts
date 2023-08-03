@@ -74,11 +74,9 @@ export const getConventionCollectives = (
     }
     return null;
   } catch {
-    if (Math.random() < 0.1) {
-      logWarningInSentry('Error in getConventionCollectives', {
-        details: `Could not find idcc :${idcc}`,
-      });
-    }
+    logWarningInSentry('Error in getConventionCollectives', {
+      details: `Could not find idcc :${idcc}`,
+    });
     return null;
   }
 };
