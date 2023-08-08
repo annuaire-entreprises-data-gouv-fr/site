@@ -28,7 +28,7 @@ export const AdvancedSearchTutorial = () => {
             <li>
               <Icon color={constants.colors.frBlue} slug="mapPin">
                 <b>Zone géographique&nbsp;:</b>&#8200;filtrez par ville,
-                département, ou région
+                département ou région
               </Icon>
             </li>
             <li>
