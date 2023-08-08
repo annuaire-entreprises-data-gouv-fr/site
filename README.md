@@ -1,41 +1,41 @@
-# Annuaire des Entreprises - [Site web]
+<h1 align="center">
+  <img src="https://github.com/etalab/annuaire-entreprises-site/blob/main/public/images/annnuaire-entreprises.svg" width="400px" />
+</h1>
 
-Ce site est disponible en ligne : [L’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr).
+Dépôt du site [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr). Pour [l’API Recherche d’Entreprises](https://api.gouv.fr/les-api/api-recherche-entreprises), consultez le [dépôt de l’API](https://github.com/etalab/annuaire-entreprises-search-api).
 
 Ce site met à disposition des citoyens et des agents les données ouvertes (open-data) des entreprises, associations et administrations dotées d'un n° SIREN/SIRET.
 
 ## Statuts
 
-**Qualité**
 [![CI (lint, unit-tests, end2end, a11y)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
 [![Recipe on staging](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/recipe-staging.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/recipe-staging.yml)
-
-**Déploiements du site**
 [![SEO](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/seo.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/seo.yml)
 [![Deploy - Staging](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-staging.yml/badge.svg?branch=main)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-staging.yml)
 [![Deploy - Production](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/deploy-production.yml)
-
-**Disponibilité du site**
 ![Page entreprise](https://img.shields.io/uptimerobot/status/m787859483-e754b64b78a0c30eea102880?label=Page%20entreprise&logo=Page%20entreprise)
 ![Recherche](https://img.shields.io/uptimerobot/status/m787859512-adcc5cd05674366504f96c86?label=Recherche&logo=Page%20entreprise)
+
 
 **Disponibilités des APIs utilisées par le site :**
 
 Pour voir le détail des disponibilités des API utilisées sur le site, [consultez la page de statut](https://annuaire-entreprises.data.gouv.fr/donnees/api).
 
-## Comment contribuer ?
+## Contenu
+
+### Comment contribuer ?
 
 Vous êtes un contributeur exterieur ? [Soumettez-nous une nouvelle issue ou une pull request.](https://github.com/etalab/annuaire-entreprises-site/issues/new/choose)
 
 Vous faîtes partie de l’équipe contenu ? [Consultez le tutoriel.](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/tree/main/CONTRIBUTE-CONTENT.md)
 
-## Vie privée et siren protégés
+### Vie privée et siren protégés
 
 Pour modifier la liste des siren protégés en diffusion [mettre à jour la liste suivante](https://github.com/etalab/annuaire-entreprises-site/edit/main/public/protected-siren.txt)
 
-## Architecture du service 🏗
+## Dépôts liés 🏗
 
-Ce repository fait partie d'un ensemble de services qui constituent l'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
+Ce dépôt fait partie d'un ensemble de dépôts qui constituent l'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
 
 | Description                  | Accès                                                                     |
 | ---------------------------- | ------------------------------------------------------------------------- |
@@ -43,6 +43,7 @@ Ce repository fait partie d'un ensemble de services qui constituent l'[Annuaire 
 | L’API du Moteur de recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-api)   |
 | Pipeline ETL                 | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-infra) |
 | Le proxy API du site         | [par ici 👉](https://github.com/etalab/annuaire-entreprises-api-proxy)    |
+| Tests de pertinence de la recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-testing) |
 
 ## Développement
 
