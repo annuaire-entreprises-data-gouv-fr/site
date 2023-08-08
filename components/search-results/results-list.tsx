@@ -64,8 +64,7 @@ const AddressWithColouredZip = ({ adress = '', zip = '' }) => {
 
     return (
       <>
-        {beginning} <span style={{ background: 'yellow' }}>{zip}</span>{' '}
-        {commune}
+        {beginning} <mark>{zip}</mark> {commune}
       </>
     );
   } catch {

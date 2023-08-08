@@ -8,6 +8,7 @@ import {
   isLikelyASiretOrSiren,
 } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
+import { logWarningInSentry } from '#utils/sentry';
 import {
   IEtablissement,
   IsLikelyASirenOrSiretException,
@@ -62,6 +63,9 @@ const search = async (
     });
   } catch (e: any) {
     if (e instanceof HttpBadRequestError) {
+      logWarningInSentry('BadParams in API Recherche Entreprise', {
+        details: searchFilterParams.toApiURI(),
+      });
       return { ...noResults, badParams: true };
     }
 
