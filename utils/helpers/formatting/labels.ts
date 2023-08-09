@@ -62,7 +62,7 @@ export const getConventionCollectives = (
     //@ts-ignore
     const cc = conventionsCollectives[idcc];
     if (cc) {
-      return { siret, idcc, ...cc };
+      return { siret, idcc, CdTN: true, ...cc };
     }
 
     // these CC are known to appear in API but do not exists in public list of CC
