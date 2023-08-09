@@ -43,7 +43,7 @@ export const clientTVA = async (
   tva: string,
   useCache = true
 ): Promise<string | null> => {
-  const url = `${routes.tva}${tva}`;
+  const url = `${routes.proxy.tva}${tva}`;
 
   const data = (await clientAPIProxy(
     url,
