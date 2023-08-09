@@ -15,6 +15,7 @@ export interface IConventionCollective {
   idcc: string;
   idKali?: string;
   siret?: string;
+  CdTN: boolean;
   title: string;
 }
 
