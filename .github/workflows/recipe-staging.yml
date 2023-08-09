@@ -24,6 +24,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5.6.0
         with:
+          browser: chrome
           record: false
-          headed: false
           config: video=false,baseUrl=https://staging.annuaire-entreprises.data.gouv.fr
