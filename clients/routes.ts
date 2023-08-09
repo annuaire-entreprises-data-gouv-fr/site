@@ -110,7 +110,8 @@ const routes = {
       },
     },
   },
-  association: 'https://rncs-proxy.api.gouv.fr/association/',
+  association:
+    'https://staging.annuaire-entreprises-api-proxy.api.gouv.fr/association/',
   rne: {
     portail: {
       pdf: 'https://data.inpi.fr/export/companies',
@@ -118,7 +119,7 @@ const routes = {
       account: 'https://data.inpi.fr/register',
     },
     proxy: {
-      rne: 'https://rncs-proxy.api.gouv.fr/rne/',
+      rne: 'https://staging.annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
     },
   },
   sireneInsee: {
@@ -134,7 +135,7 @@ const routes = {
       'https://staging.recherche-entreprises.api.gouv.fr/search',
     uniteLegale: 'https://api-annuaire-entreprises.data.gouv.fr/siren?q=',
   },
-  tva: 'https://rncs-proxy.api.gouv.fr/tva/',
+  tva: 'https://staging.annuaire-entreprises-api-proxy.api.gouv.fr/tva/',
 };
 
 export default routes;
