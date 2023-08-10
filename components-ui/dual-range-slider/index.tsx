@@ -19,14 +19,14 @@ const DualRangeSlider: React.FC<{
     }
   }, [value]);
 
-  const handleMinChange = (e) => {
+  const handleMinChange = (e: any) => {
     e.preventDefault();
     const newMinVal = Math.min(+e.target.value, maxValue - step);
     if (!value) setMinValue(newMinVal);
     onChange({ min: newMinVal, max: maxValue });
   };
 
-  const handleMaxChange = (e) => {
+  const handleMaxChange = (e: any) => {
     e.preventDefault();
     const newMaxVal = Math.max(+e.target.value, minValue + step);
     if (!value) setMaxValue(newMaxVal);
