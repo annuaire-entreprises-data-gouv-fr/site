@@ -11,11 +11,7 @@ import {
   SirenNotFoundError,
   SiretNotFoundError,
 } from '#models/index';
-import {
-  extractSirenFromSiretNoVerify,
-  verifySiren,
-  verifySiret,
-} from '#utils/helpers';
+import { verifySiren, verifySiret } from '#utils/helpers';
 import {
   redirectIfSiretOrSiren,
   redirectPageNotFound,

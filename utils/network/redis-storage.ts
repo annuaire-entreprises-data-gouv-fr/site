@@ -3,7 +3,7 @@ import { createClient } from 'redis';
 import { logWarningInSentry } from '#utils/sentry';
 import { promiseTimeout } from './promise-timeout';
 
-export const redisClient = createClient({
+const redisClient = createClient({
   url: process.env.REDIS_URL,
   pingInterval: 1000,
 });
