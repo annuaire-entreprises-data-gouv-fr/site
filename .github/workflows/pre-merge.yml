@@ -158,7 +158,6 @@ jobs:
         with:
           start: npm start
           record: false
-          browser: chrome
         env:
           PORT: 3000
           END2END_MOCKING: enabled
