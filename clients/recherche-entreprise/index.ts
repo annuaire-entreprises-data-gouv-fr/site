@@ -11,6 +11,7 @@ import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
+  IConventionCollective,
   IEtablissement,
   NotEnoughParamsException,
 } from '#models/index';
@@ -72,9 +73,9 @@ const clientSearchRechercheEntreprise = async ({
     throw new NotEnoughParamsException('');
   }
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3&inclure_slug=true&inclure_etablissements=${inclureEtablissements}${
+  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3${
     searchFilterParams?.toApiURI() || ''
-  }`;
+  }&include_admin=slug${inclureEtablissements ? ',etablissements' : ''}`;
 
   const timeout = fallbackOnStaging
     ? constants.timeout.XL
@@ -335,9 +336,9 @@ const mapToEtablissement = (
     dateDebutActivite: date_debut_activite,
     conventionsCollectives: (liste_idcc || [])
       .map((idcc) => {
-        return { siret, idcc, ...getConventionCollectives(idcc) };
+        return getConventionCollectives(idcc, siret);
       })
-      .filter((cc) => !!cc.idKali),
+      .filter((cc): cc is IConventionCollective => !!cc),
   };
 };
 

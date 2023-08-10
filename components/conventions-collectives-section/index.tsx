@@ -60,14 +60,16 @@ const ConventionsCollectivesSection: React.FC<{
               </a>,
               <Tag>IDCC {convention.idcc}</Tag>,
               <i className="font-small">{convention.title}</i>,
-              <ButtonLink
-                target="_blank"
-                to={`${routes.conventionsCollectives.details}${convention.idcc}`}
-                alt
-                small
-              >
-                ⇢&nbsp;Consulter
-              </ButtonLink>,
+              convention.CdTN ? (
+                <ButtonLink
+                  target="_blank"
+                  to={`${routes.conventionsCollectives.details}${convention.idcc}`}
+                  alt
+                  small
+                >
+                  ⇢&nbsp;Consulter
+                </ButtonLink>
+              ) : null,
             ])}
           />
         </>

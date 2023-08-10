@@ -14,11 +14,6 @@ const team = [
     role: 'Data engineer',
   },
   {
-    photoUrl: '/images/team/yoan.jpg',
-    fullname: 'Yoan Ficadiere',
-    role: 'Développeur',
-  },
-  {
     photoUrl: '/images/team/jonathan.jpg',
     fullname: 'Jonathan Louis',
     role: 'Chargé de déploiement SEO',
@@ -32,11 +27,6 @@ const team = [
     photoUrl: '/images/team/anais.jpg',
     fullname: 'Anais Tailhade',
     role: 'Responsable du support utilisateur',
-  },
-  {
-    photoUrl: '/images/team/jeremie.jpg',
-    fullname: 'Jérémie Cook',
-    role: 'UX Designer',
   },
 ];
 

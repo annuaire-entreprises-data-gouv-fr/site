@@ -32,9 +32,9 @@ describe('Advanced search on page ' + path, () => {
     cy.visit(path + '?terme=Ganymede');
 
     cy.contains('Zone géographique').click();
-    cy.contains('Ville ou département').should('be.visible');
+    cy.contains('Ville, département ou région').should('be.visible');
     cy.contains('Zone géographique').click();
-    cy.contains('Ville ou département').should('not.be.visible');
+    cy.contains('Ville, département ou région').should('not.be.visible');
 
     cy.contains('Dirigeant').click();
     cy.contains(

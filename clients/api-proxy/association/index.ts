@@ -18,7 +18,7 @@ const clientAssociation = async (
   useCache = true
 ) => {
   const response = await clientAPIProxy(
-    routes.association + rnaOrSiren,
+    routes.proxy.association + rnaOrSiren,
     { timeout: constants.timeout.L },
     useCache
   );

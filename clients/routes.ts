@@ -50,6 +50,7 @@ const routes = {
     commune: 'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json',
     departement:
       'https://geo.api.gouv.fr/departements?fields=code&format=json&zone=metro,drom,com',
+    region: 'https://geo.api.gouv.fr/regions?limit=3',
   },
   journalOfficielAssociations: {
     ods: {
@@ -109,15 +110,17 @@ const routes = {
       },
     },
   },
-  association: 'https://rncs-proxy.api.gouv.fr/association/',
+  proxy: {
+    rne: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
+    tva: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/',
+    association:
+      'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
+  },
   rne: {
     portail: {
       pdf: 'https://data.inpi.fr/export/companies',
       entreprise: 'https://data.inpi.fr/entreprises/',
       account: 'https://data.inpi.fr/register',
-    },
-    proxy: {
-      rne: 'https://rncs-proxy.api.gouv.fr/rne/',
     },
   },
   sireneInsee: {
@@ -130,10 +133,9 @@ const routes = {
     etablissement: 'https://api-annuaire-entreprises.data.gouv.fr/siret?q=',
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
     rechercheUniteLegaleStaging:
-      'https://staging.recherche-entreprises.api.gouv.fr/search',
+      'https://recherche-entreprises.api.gouv.fr/search',
     uniteLegale: 'https://api-annuaire-entreprises.data.gouv.fr/siren?q=',
   },
-  tva: 'https://rncs-proxy.api.gouv.fr/tva/',
 };
 
 export default routes;

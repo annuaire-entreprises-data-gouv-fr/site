@@ -40,12 +40,14 @@ export const UniteLegaleDescription: React.FC<{
           {getCompanyPronoun(uniteLegale)}
           {getCompanyLabel(uniteLegale)} {getNomComplet(uniteLegale, session)}
         </>
-        {uniteLegale.dateCreation && (
+        {uniteLegale.dateCreation ? (
           <>
             {' '}
             a été créée le <b>{formatDateLong(uniteLegale.dateCreation)}</b>
             {ageCreation && <>, il y a {ageCreation}</>}.{' '}
           </>
+        ) : (
+          <> n’a pas de date de création connue. </>
         )}
         {uniteLegale.dateDebutActivite && !estActif(uniteLegale) && (
           <>

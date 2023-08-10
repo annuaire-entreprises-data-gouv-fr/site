@@ -70,7 +70,7 @@ const SearchFilters: React.FC<{
         searchTerm={searchTerm}
         addSaveClearButton
       >
-        <label>Ville ou département :</label>
+        <label>Ville, département ou région :</label>
         <FilterGeo
           cp_dep={cp_dep}
           cp_dep_label={cp_dep_label}

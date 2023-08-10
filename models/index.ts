@@ -12,9 +12,10 @@ import { IBilanFinancierAssociation } from './donnees-financieres';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 export interface IConventionCollective {
-  siret: string;
   idcc: string;
-  idKali: string;
+  idKali?: string;
+  siret?: string;
+  CdTN: boolean;
   title: string;
 }
 

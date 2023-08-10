@@ -88,6 +88,7 @@ class SearchFilterParams {
   public toApiURI() {
     const { cp_dep, cp_dep_type, ca_max, ca_min } = this.params;
     const departement = cp_dep_type === 'dep' ? cp_dep : '';
+    const region = cp_dep_type === 'reg' ? cp_dep : '';
     const code_postal = cp_dep_type === 'cp' ? cp_dep : '';
     const code_commune = cp_dep_type === 'insee' ? cp_dep : '';
 
@@ -105,14 +106,15 @@ class SearchFilterParams {
       est_service_public: this.params.type === 'sp',
       est_societe_mission: this.params.label === 'sm',
       est_entrepreneur_individuel: this.params.type === 'ei',
-      code_postal,
-      code_commune,
       section_activite_principale: this.params.sap,
       categorie_entreprise: this.params.categorie_entreprise,
       nature_juridique: this.params.nature_juridique,
       tranche_effectif_salarie: this.params.tranche_effectif_salarie,
       activite_principale: this.params.naf,
       departement,
+      region,
+      code_postal,
+      code_commune,
       prenoms_personne: this.params.fn?.trim(),
       nom_personne: this.params.n?.trim(),
       date_naissance_personne_min: this.params.dmin,
