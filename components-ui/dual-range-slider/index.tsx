@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import constants from '#models/constants';
 
+/**
+ * Component with dual slider
+ * Composed of two native sliders
+ *
+ * Use with react !
+ */
 const DualRangeSlider: React.FC<{
   min: number;
   max: number;
@@ -22,14 +28,20 @@ const DualRangeSlider: React.FC<{
   const handleMinChange = (e: any) => {
     e.preventDefault();
     const newMinVal = Math.min(+e.target.value, maxValue - step);
-    if (!value) setMinValue(newMinVal);
+
+    if (!value) {
+      setMinValue(newMinVal);
+    }
     onChange({ min: newMinVal, max: maxValue });
   };
 
   const handleMaxChange = (e: any) => {
     e.preventDefault();
     const newMaxVal = Math.max(+e.target.value, minValue + step);
-    if (!value) setMaxValue(newMaxVal);
+
+    if (!value) {
+      setMaxValue(newMaxVal);
+    }
     onChange({ min: minValue, max: newMaxVal });
   };
 

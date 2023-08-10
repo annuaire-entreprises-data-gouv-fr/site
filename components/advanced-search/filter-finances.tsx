@@ -4,16 +4,26 @@ import { formatCurrency } from '#utils/helpers';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import constants from '#models/constants';
 
+// Discretize "chiffer d’affaires" possible values
 export const CA = [
   0, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000,
   100000000000,
 ];
 
+// Discretize "resultat net" possible values
 export const Res = [
   -100000000000, -1000000000, -100000000, -1000000, 0, 100000, 1000000,
   10000000, 100000000, 1000000000, 10000000000, 100000000000,
 ];
 
+/**
+ * Find the closest value amongst discretized values and return index
+ *
+ * @param values
+ * @param defaultValue
+ * @param value
+ * @returns
+ */
 const findNearestValueIndex = (
   values: number[],
   defaultValue: number,
