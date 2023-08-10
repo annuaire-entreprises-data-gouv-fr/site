@@ -1,4 +1,1427 @@
 export const conventionsCollectives = {
+  // present on list https://code.travail.gouv.fr/fiche-ministere-travail/conventions-collectives-nomenclatures but no page on Code du Travail
+  '9422': {
+    title: 'Convention collective départementale des CUMA Loire',
+    CdTN: false,
+  },
+  '0804': {
+    title:
+      'Accord national interprofessionnel des voyageurs, représentants, placiers (VRP)',
+    CdTN: false,
+  },
+  '9712': {
+    title:
+      'Convention collective départementale des exploitations agricoles Saône et Loire',
+    CdTN: false,
+  },
+  '5022': { title: 'Statut de la Fonction publique hospitalière', CdTN: false },
+  '5021': { title: 'Statut de la Fonction publique territoriale', CdTN: false },
+  '5005': { title: "Statut des Caisses d'épargne", CdTN: false },
+  '7501': {
+    title:
+      'Convention collective nationale des caisses régionales du crédit agricole',
+    CdTN: false,
+  },
+  '0627': {
+    title:
+      'Convention collective départementale des employés, techniciens et agents de maîtrise du bâtiment et des travaux publics de La Réunion',
+    CdTN: false,
+  },
+  '9721': {
+    title:
+      'Convention collective départementale des exploitations polyculture élevage Sarthe',
+    CdTN: false,
+  },
+  '2389': {
+    title:
+      'Convention collective régionale des ouvriers du bâtiment et des travaux publics région de La Réunion',
+    CdTN: false,
+  },
+  '9261': {
+    title:
+      'Convention collective départementale des exploitations agricoles Drôme',
+    CdTN: false,
+  },
+  '5001': {
+    title: 'Statut des industries électriques et gazières',
+    CdTN: false,
+  },
+  '0771': {
+    title:
+      'Convention collective départementale des ingénieurs assimilés et cadres du bâtiment et des travaux publics de La Réunion',
+    CdTN: false,
+  },
+  '9202': {
+    title:
+      'Convention collective départementale des exploitations agricoles Haute Corse',
+    CdTN: false,
+  },
+  '1468': {
+    title: 'Convention collective nationale de branche du Crédit mutuel',
+    CdTN: false,
+  },
+  '9761': {
+    title:
+      'Convention collective départementale des exploitations agricoles Seine Maritime',
+    CdTN: false,
+  },
+  '9112': {
+    title:
+      'Convention collective départementale des exploitations agricoles zone viticole Aude',
+    CdTN: false,
+  },
+  '8116': {
+    title:
+      'Convention collective régionale de la polyculture Île-de-France cadres',
+    CdTN: false,
+  },
+  '5003': { title: "Statut de la Fonction publique d'État", CdTN: false },
+  '9592': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Nord',
+    CdTN: false,
+  },
+  '8216': {
+    title: 'Convention collective régionale de la viticulture Champagne',
+    CdTN: false,
+  },
+  '2378': {
+    title:
+      'Accords professionnels nationaux concernant le personnel intérimaire des entreprises de travail temporaire',
+    CdTN: false,
+  },
+  '1700': {
+    title:
+      'Convention collective départementale des sucreries, sucreries-distilleries et distilleries de la Guadeloupe',
+    CdTN: false,
+  },
+  '8262': {
+    title:
+      "Convention collective régionale des exploitations agricoles Côte d'or Nièvre Yonne ETAR CUMA Côte d'or",
+    CdTN: false,
+  },
+  '9821': {
+    title:
+      'Convention collective départementale des exploitations agricoles Tarn et Garonne',
+    CdTN: false,
+  },
+  '8422': {
+    title: 'Convention collective régionale de polyculture Alsace',
+    CdTN: false,
+  },
+  '9011': {
+    title:
+      'Convention collective départementale des exploitations agricoles Ain',
+    CdTN: false,
+  },
+  '8311': {
+    title:
+      'Convention collective régionale des exploitations forestières scieries Nord Pas de Calais',
+    CdTN: false,
+  },
+  '9841': {
+    title:
+      'Convention collective départementale des exploitations agricoles Vaucluse',
+    CdTN: false,
+  },
+  '8534': {
+    title:
+      'Convention collective régionale maraîchère Ille et Vilaine Morbihan',
+    CdTN: false,
+  },
+  '1031': {
+    title:
+      'Convention collective nationale de la fédération nationale des associations familiales rurales (FNAFR)',
+    CdTN: false,
+  },
+  '2328': {
+    title:
+      'Convention collective départementale des ouvriers du bâtiment et des travaux publics de la Guadeloupe et dépendances',
+    CdTN: false,
+  },
+  '5619': {
+    title:
+      'Convention collective nationale provisoire de la pêche professionnelle maritime',
+    CdTN: false,
+  },
+  '5516': {
+    title: "Convention d'entreprise La Poste - France Télécom",
+    CdTN: false,
+  },
+  '9831': {
+    title:
+      'Convention collective départementale des exploitations agricoles Var',
+    CdTN: false,
+  },
+  '1225': {
+    title: 'Convention collective départementale du commerce de la Réunion',
+    CdTN: false,
+  },
+  '9851': {
+    title:
+      'Convention collective départementale des exploitations polyculture élevage Vendée',
+    CdTN: false,
+  },
+  '0240': {
+    title:
+      'Convention collective nationale du personnel des greffes des tribunaux de commerce',
+    CdTN: false,
+  },
+  '7515': {
+    title:
+      "Convention collective nationale des sociétés d'aménagement foncier et d'établissement rural (SAFER)",
+    CdTN: false,
+  },
+  '9401': {
+    title:
+      'Convention collective départementale des exploitations agricoles Landes',
+    CdTN: false,
+  },
+  '9998': { title: '___Convention non encore en vigueur___', CdTN: false },
+  '5011': { title: "Statut de l'Aéroport de Paris", CdTN: false },
+  '8532': {
+    title: 'Convention collective régionale des ETAR Bretagne',
+    CdTN: false,
+  },
+  '8214': {
+    title:
+      'Convention collective régionale des ETAR Aube Marne polyculture Marne',
+    CdTN: false,
+  },
+  '8252': {
+    title:
+      'Convention collective régionale des travaux agricoles Basse Normandie',
+    CdTN: false,
+  },
+  '9441': {
+    title:
+      'Convention collective départementale des exploitations agricoles Loire Atlantique',
+    CdTN: false,
+  },
+  '9791': {
+    title:
+      'Convention collective départementale des exploitations agricoles Deux Sèvres',
+    CdTN: false,
+  },
+  '9241': {
+    title:
+      'Convention collective départementale des exploitations agricoles Dordogne',
+    CdTN: false,
+  },
+  '9331': {
+    title:
+      'Convention collective départementale des exploitations agricoles Gironde',
+    CdTN: false,
+  },
+  '9691': {
+    title:
+      'Convention collective départementale des exploitations agricoles Rhône',
+    CdTN: false,
+  },
+  '5593': { title: 'Accord de référence FNAB', CdTN: false },
+  '9321': {
+    title:
+      'Convention collective départementale des exploitations agricoles Gers',
+    CdTN: false,
+  },
+  '8741': {
+    title:
+      'Convention collective régionale des exploitations forestières Limousin',
+    CdTN: false,
+  },
+  '0783': {
+    title:
+      "Convention collective nationale des centres d'hébergement et de réadaptation sociale et dans les services d'accueil, d'orientation et d'insertion pour adultes (CHRS, SOP )",
+    CdTN: false,
+  },
+  '9291': {
+    title:
+      'Convention collective départementale des exploitations polyculture, élevage et maraîchage Finistère',
+    CdTN: false,
+  },
+  '9171': {
+    title:
+      'Convention collective départementale des exploitations polyculture Charente Maritime',
+    CdTN: false,
+  },
+  '9591': {
+    title:
+      'Convention collective départementale des exploitations polyculture élevage Nord',
+    CdTN: false,
+  },
+  '9621': {
+    title:
+      'Convention collective départementale des exploitations polyculture élevage Pas de Calais',
+    CdTN: false,
+  },
+  '1203': {
+    title:
+      'Convention collective départementale du commerce et des services de la Guadeloupe',
+    CdTN: false,
+  },
+  '9802': {
+    title:
+      'Convention collective départementale des exploitations polyculture élevage et CUMA, ETAR Somme',
+    CdTN: false,
+  },
+  '8434': {
+    title:
+      'Convention collective régionale des cultures CUMA ETAR Franche Comté',
+    CdTN: false,
+  },
+  '3204': {
+    title:
+      'Convention collective régionale des ingénieurs et cadres du bâtiment, des travaux publics et des industries et activités connexes de la Guyane',
+    CdTN: false,
+  },
+  '9161': {
+    title:
+      'Convention collective départementale des exploitations agricoles Charente',
+    CdTN: false,
+  },
+  '0749': {
+    title:
+      'Convention collective départementale des ouvriers du bâtiment et des travaux publics de la Martinique',
+    CdTN: false,
+  },
+  '9472': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Lot et Garonne',
+    CdTN: false,
+  },
+  '9612': {
+    title:
+      'Convention collective départementale des exploitations polyculture élevage Orne',
+    CdTN: false,
+  },
+  '5024': {
+    title: "Statut des chefs d'établissement de l'enseignement catholique",
+    CdTN: false,
+  },
+  '5502': { title: "Convention d'entreprise Croix Rouge", CdTN: false },
+  '9561': {
+    title:
+      'Convention collective départementale des exploitations polyculture élevage Morbihan',
+    CdTN: false,
+  },
+  '3128': {
+    title:
+      'Convention collective régionale des employés, techniciens et agents de maîtrise du bâtiment, des travaux publics et des industries et activités connexes de la Guyane',
+    CdTN: false,
+  },
+  '5553': { title: "Convention d'entreprise CCAS", CdTN: false },
+  '9121': {
+    title:
+      'Convention collective départementale des exploitations agricoles Aveyron',
+    CdTN: false,
+  },
+  '9311': {
+    title:
+      'Convention collective départementale des exploitations agricoles Haute Garonne',
+    CdTN: false,
+  },
+  '8912': {
+    title: 'Convention collective régionale des ETAR Languedoc Roussillon',
+    CdTN: false,
+  },
+  '9221': {
+    title:
+      "Convention collective départementale des exploitations polyculture Côtes d'Armor",
+    CdTN: false,
+  },
+  '2870': {
+    title:
+      'Convention collective régionale des ouvriers du bâtiment, des travaux publics et des industries et activités connexes de la Guyane',
+    CdTN: false,
+  },
+  '9383': {
+    title:
+      'Convention collective départementale des exploitations agricoles CUMA Isère',
+    CdTN: false,
+  },
+  '9411': {
+    title:
+      'Convention collective départementale des exploitations agricoles Loir et Cher',
+    CdTN: false,
+  },
+  '2025': {
+    title:
+      'Convention collective régionale du travail des activités minières de Guyane',
+    CdTN: false,
+  },
+  '1247': {
+    title: 'Convention collective départementale auto moto de la Réunion',
+    CdTN: false,
+  },
+  '3206': {
+    title:
+      'Convention collective départementale du personnel des cabinets médicaux de Martinique',
+    CdTN: false,
+  },
+  '9151': {
+    title:
+      'Convention collective départementale des exploitations polyculture Cantal',
+    CdTN: false,
+  },
+  '9491': {
+    title:
+      'Convention collective départementale des exploitations polyculture, élevage Maine et Loire',
+    CdTN: false,
+  },
+  '9341': {
+    title:
+      'Convention collective départementale des exploitations agricoles Hérault',
+    CdTN: false,
+  },
+  '9471': {
+    title:
+      'Convention collective départementale des exploitations agricoles Lot et Garonne',
+    CdTN: false,
+  },
+  '8416': {
+    title: 'Convention collective régionale de polyculture Lorraine',
+    CdTN: false,
+  },
+  '5501': {
+    title: "Convention d'entreprise indépendante ou texte assimilé non précisé",
+    CdTN: false,
+  },
+  '9493': {
+    title:
+      'Convention collective départementale des champignonnières Maine et Loire',
+    CdTN: false,
+  },
+  '8721': {
+    title:
+      'Convention collective régionale des exploitations forestières scieries Massif Gascogne',
+    CdTN: false,
+  },
+  '8117': {
+    title:
+      'Convention collective régionale des exploitations polyculture élev CUMA Seine et Marne ETAR Ile de France',
+    CdTN: false,
+  },
+  '9142': {
+    title:
+      'Convention collective départementale des exploitations horticoles fruits Calvados',
+    CdTN: false,
+  },
+  '9351': {
+    title:
+      'Convention collective départementale des exploitations polyculture, élevage et CUMA Ille et Vilaine',
+    CdTN: false,
+  },
+  '9641': {
+    title:
+      'Convention collective départementale des exploitations agricoles Pyrénées Atlantiques',
+    CdTN: false,
+  },
+  '5519': {
+    title:
+      "Convention collective nationale des salariés administratifs des sociétés de secours minières  (n'est pas considérée à l'heure actuelle comme une convention de branche)",
+    CdTN: false,
+  },
+  '5513': { title: "Convention d'entreprise IFREMER", CdTN: false },
+  '5100': { title: 'Statut divers ou non précisé', CdTN: false },
+  '9361': {
+    title:
+      'Convention collective départementale des exploitations polyculture, élevage et CUMA Indre',
+    CdTN: false,
+  },
+  '7020': {
+    title:
+      "Convention collective nationale du réseau des centres d'économie rurale",
+    CdTN: false,
+  },
+  '0438': {
+    title:
+      "Convention collective nationale de travail des échelons intermédiaires des services extérieurs de production des sociétés d'assurances",
+    CdTN: false,
+  },
+  '9451': {
+    title:
+      'Convention collective départementale des exploitations polyculture élevage Loiret',
+    CdTN: false,
+  },
+  '8542': {
+    title:
+      'Convention collective régionale des ETAR Vienne Deux Sèvres production agricole Vienne',
+    CdTN: false,
+  },
+  '9281': {
+    title:
+      'Convention collective départementale des exploitations polyculture, élevage et CUMA Eure et Loir',
+    CdTN: false,
+  },
+  '5019': { title: "Statut des Chambres d'agriculture", CdTN: false },
+  '9371': {
+    title:
+      'Convention collective départementale des exploitations polyculture, élevage viticulture Indre et Loire',
+    CdTN: false,
+  },
+  '7502': {
+    title: 'Convention collective nationale de la Mutualité sociale agricole',
+    CdTN: false,
+  },
+  '2405': {
+    title:
+      "Convention collective départementale des établissements d'hospitalisation privée de la Guadeloupe du 01/04/2003",
+    CdTN: false,
+  },
+  '8241': {
+    title:
+      'Convention collective régionale des exploitations forestières scieries Centre',
+    CdTN: false,
+  },
+  '2345': {
+    title:
+      'Convention collective régionale du transport sanitaire en Martinique',
+    CdTN: false,
+  },
+  '2360': {
+    title:
+      "Convention collective régionale des services de l'automobile de la Guyane",
+    CdTN: false,
+  },
+  '9853': {
+    title:
+      'Convention collective départementale des exploitations maraîchères Vendée',
+    CdTN: false,
+  },
+  '9071': {
+    title:
+      'Convention collective départementale des exploitations agricoles Ardèche',
+    CdTN: false,
+  },
+  '9301': {
+    title:
+      'Convention collective départementale des exploitations agricoles Gard',
+    CdTN: false,
+  },
+  '9181': {
+    title:
+      'Convention collective départementale des exploitations polyculture Cher',
+    CdTN: false,
+  },
+  '9661': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Pyrénées Orientales',
+    CdTN: false,
+  },
+  '9021': {
+    title:
+      'Convention collective départementale des exploitations polyculture Aisne',
+    CdTN: false,
+  },
+  '9631': {
+    title:
+      'Convention collective départementale des exploitations agricoles Puy de Dôme',
+    CdTN: false,
+  },
+  '5507': {
+    title:
+      "Convention collective nationale des administratifs du football (n'est pas considérée à l'heure actuelle comme une convention de branche)",
+    CdTN: false,
+  },
+  '2329': {
+    title:
+      "Accord professionnel national de travail entre les avocats au Conseil d'Etat et à la Cour de Cassation et leur personnel salarié -non avocat-",
+    CdTN: false,
+  },
+  '9041': {
+    title:
+      'Convention collective départementale des exploitations agricoles Alpes de Haute Provence',
+    CdTN: false,
+  },
+  '9081': {
+    title:
+      'Convention collective départementale des exploitations polyculture Ardennes',
+    CdTN: false,
+  },
+  '9601': {
+    title:
+      'Convention collective départementale des exploitations polyculture élevage Oise',
+    CdTN: false,
+  },
+  '0214': {
+    title:
+      'Convention collective régionale des ouvriers des entreprises de presse de la région parisienne',
+    CdTN: false,
+  },
+  '9141': {
+    title:
+      'Convention collective départementale des exploitations polyculture et CUMA Calvados',
+    CdTN: false,
+  },
+  '9131': {
+    title:
+      'Convention collective départementale des exploitations agricoles Bouches du Rhône',
+    CdTN: false,
+  },
+  '9191': {
+    title:
+      'Convention collective départementale des exploitations agricoles Corrèze',
+    CdTN: false,
+  },
+  '8822': {
+    title:
+      'Convention collective régionale des exploitations forestières scieries Rhône Alpes',
+    CdTN: false,
+  },
+  '8432': {
+    title:
+      'Convention collective régionale des scieries agricoles Franche Comté',
+    CdTN: false,
+  },
+  '9272': {
+    title:
+      'Convention collective départementale des exploitations polyculture Eure non cadres',
+    CdTN: false,
+  },
+  '9622': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Pas de Calais',
+    CdTN: false,
+  },
+  '9231': {
+    title:
+      'Convention collective départementale des exploitations agricoles Creuse',
+    CdTN: false,
+  },
+  '9372': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Indre et Loire',
+    CdTN: false,
+  },
+  '8113': {
+    title:
+      "Convention collective régionale de l'arboriculture maraîchage Île-de-France",
+    CdTN: false,
+  },
+  '9051': {
+    title:
+      'Convention collective départementale des exploitations polyculture Hautes Alpes',
+    CdTN: false,
+  },
+  '7520': {
+    title:
+      "Convention collective nationale de l'enseignement agricole privé (CNEAP)",
+    CdTN: false,
+  },
+  '8526': {
+    title:
+      "Convention collective régionale de l'arboriculture fruitière Ouest de la France",
+    CdTN: false,
+  },
+  '9501': {
+    title:
+      'Convention collective départementale des exploitations agricoles Manche',
+    CdTN: false,
+  },
+  '9603': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Oise',
+    CdTN: false,
+  },
+  '7514': {
+    title:
+      'Convention collective nationale des organismes de la Confédération paysanne',
+    CdTN: false,
+  },
+  '9971': {
+    title:
+      'Convention collective départementale des exploitations bananières Martinique',
+    CdTN: false,
+  },
+  '9101': {
+    title:
+      'Convention collective départementale des exploitations polyculture Aube',
+    CdTN: false,
+  },
+  '9871': {
+    title:
+      'Convention collective départementale des exploitations agricoles Haute Vienne',
+    CdTN: false,
+  },
+  '5522': {
+    title: "Convention d'entreprise Établissement français du sang",
+    CdTN: false,
+  },
+  '9111': {
+    title:
+      'Convention collective départementale des exploitations agricoles zone céréalière Aude',
+    CdTN: false,
+  },
+  '9531': {
+    title:
+      'Convention collective départementale des exploitations polyculture élevage Mayenne',
+    CdTN: false,
+  },
+  '8535': {
+    title: 'Convention collective régionale des CUMA Bretagne Pays de la Loire',
+    CdTN: false,
+  },
+  '8531': {
+    title:
+      'Convention collective régionale des exploitations forestières scieries Bretagne',
+    CdTN: false,
+  },
+  '5014': { title: 'Statut de la RATP', CdTN: false },
+  '8431': {
+    title:
+      'Convention collective régionale des exploitations forestières Doubs Jura Haute-Saône Territoire de Belfort',
+    CdTN: false,
+  },
+  '5571': { title: "Convention d'entreprise Fondation d'Auteuil", CdTN: false },
+  '5583': {
+    title: "Convention d'entreprise Voies navigables de France",
+    CdTN: false,
+  },
+  '0653': {
+    title:
+      "Convention collective nationale de travail des producteurs salariés de base des services extérieurs de production des sociétés d'assurances",
+    CdTN: false,
+  },
+  '9032': {
+    title:
+      'Convention collective départementale des exploitations agricoles Allier',
+    CdTN: false,
+  },
+  '8825': {
+    title:
+      'Convention collective régionale de polyculture CUMA Rhône Alpes cadres',
+    CdTN: false,
+  },
+  '9421': {
+    title:
+      'Convention collective départementale des exploitations agricoles Loire',
+    CdTN: false,
+  },
+  '8112': {
+    title:
+      'Convention collective régionale de la polyculture Île-de-France non cadres',
+    CdTN: false,
+  },
+  '0802': {
+    title:
+      'Convention collective nationale de la distribution de papiers-cartons commerces de gros pour les ouvriers, employés, techniciens et agents de maîtrise',
+    CdTN: false,
+  },
+  '8313': {
+    title: 'Convention collective régionale des ETAR Nord Pas de Calais',
+    CdTN: false,
+  },
+  '9811': {
+    title:
+      'Convention collective départementale des exploitations agricoles Tarn',
+    CdTN: false,
+  },
+  '8233': {
+    title: 'Convention collective régionale des ETAR Haute Normandie',
+    CdTN: false,
+  },
+  '9211': {
+    title:
+      "Convention collective départementale des exploitations forestières scieries Côte d'or",
+    CdTN: false,
+  },
+  '0919': {
+    title:
+      'Convention collective départementale du personnel des garages de la Martinique (Automobile, commerce, réparation)',
+    CdTN: false,
+  },
+  '8832': {
+    title:
+      'Convention collective régionale de polyculture CUMA Haute Loire Lozère',
+    CdTN: false,
+  },
+  '9412': {
+    title: 'Convention collective départementale des ETAR CUMA Loir et Cher',
+    CdTN: false,
+  },
+  '8421': {
+    title:
+      'Convention collective régionale des exploitations forestières Alsace',
+    CdTN: false,
+  },
+  '8831': {
+    title:
+      'Convention collective régionale des exploitations forestières scieries Auvergne',
+    CdTN: false,
+  },
+  '8412': {
+    title:
+      'Convention collective régionale des scieries agricoles Alsace Lorraine',
+    CdTN: false,
+  },
+  '2631': {
+    title:
+      "Accord collectif national Branche de la télédiffusion. Salariés employés sous contrat à durée déterminée d'usage",
+    CdTN: false,
+  },
+  '8435': {
+    title:
+      'Convention collective régionale des coopératives fruitières Ain Doubs Jura',
+    CdTN: false,
+  },
+  '5010': {
+    title: "Statut des Chambres des métiers & de l'artisanat",
+    CdTN: false,
+  },
+  '9613': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Orne',
+    CdTN: false,
+  },
+  '8114': {
+    title: 'Convention collective régionale des champignonnières Île-de-France',
+    CdTN: false,
+  },
+  '7513': {
+    title:
+      "Convention collective nationale des centres d'initiatives pour valoriser l'agriculture et le milieu rural",
+    CdTN: false,
+  },
+  '8525': {
+    title: 'Convention collective régionale des ETAR Pays de la Loire',
+    CdTN: false,
+  },
+  '9521': {
+    title:
+      'Convention collective départementale des polyculture pépinières horticulture CUMA Haute Marne',
+    CdTN: false,
+  },
+  '5533': { title: "Convention du comité d'entreprise SNCF", CdTN: false },
+  '9456': {
+    title:
+      'Convention collective départementale des exploitations cultures spécialisées Loiret',
+    CdTN: false,
+  },
+  '8234': {
+    title:
+      "Convention collective régionale de l'horticulture et pépiniéristes Haute Normandie",
+    CdTN: false,
+  },
+  '7508': {
+    title:
+      'Convention collective nationale des Maisons familiales rurales, instituts ruraux et centres',
+    CdTN: false,
+  },
+  '9461': {
+    title:
+      'Convention collective départementale des exploitations agricoles Lot',
+    CdTN: false,
+  },
+  '0418': {
+    title:
+      'Convention collective nationale de la chemiserie sur mesure (annexée à la convention collective nationale de la couture parisienne 0303)',
+    CdTN: false,
+  },
+  '5539': { title: "Convention d'entreprise AFPA", CdTN: false },
+  '8826': {
+    title:
+      'Convention collective régionale des exploitations trav agricoles CUMA Savoie Hte Savoie',
+    CdTN: false,
+  },
+  '8733': {
+    title: 'Convention collective régionale des CUMA Tarn Haute Garonne',
+    CdTN: false,
+  },
+  '0306': {
+    title:
+      'Convention collective régionale des cadres techniques de la presse quotidienne parisienne',
+    CdTN: false,
+  },
+  '1341': {
+    title:
+      'Convention collective départementale des industries agroalimentaires de la Réunion',
+    CdTN: false,
+  },
+  '1049': {
+    title:
+      "Convention collective départementale du bâtiment, des travaux publics et de toutes professions concourant à l'acte de bâtir ou d'aménager de Saint Pierre-et-Miquelon",
+    CdTN: false,
+  },
+  '9723': {
+    title:
+      'Convention collective départementale des exploitations maraîchères Sarthe',
+    CdTN: false,
+  },
+  '2668': {
+    title:
+      'Convention collective nationale de travail des cadres supérieurs des sociétés de secours minières et de leurs établissements, des unions régionales et des assistants sociaux régionaux',
+    CdTN: false,
+  },
+  '9273': {
+    title:
+      'Convention collective départementale des exploitations polyculture Eure cadres',
+    CdTN: false,
+  },
+  '5524': {
+    title: "Convention d'entreprise France terre d'asile",
+    CdTN: false,
+  },
+  '8734': {
+    title: "Convention collective régionale de l'horticulture Midi Pyrénées",
+    CdTN: false,
+  },
+  '9502': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Manche',
+    CdTN: false,
+  },
+  '9091': {
+    title:
+      'Convention collective départementale des exploitations agricoles Ariège',
+    CdTN: false,
+  },
+  '0379': {
+    title:
+      'Convention collective départementale du travail des commerces de la Martinique',
+    CdTN: false,
+  },
+  '8231': {
+    title:
+      'Convention collective régionale des exploitations forestières Haute Normandie',
+    CdTN: false,
+  },
+  '5521': {
+    title:
+      "Convention collective nationale du personnel navigant d'exécution du transport maritime",
+    CdTN: false,
+  },
+  '1961': {
+    title:
+      'Convention collective départementale pour les stations-service en Guadeloupe',
+    CdTN: false,
+  },
+  '5008': { title: 'Statut de la Banque de France', CdTN: false },
+  '9444': {
+    title:
+      'Convention collective départementale des exploitations maraîchères Loire Atlantique',
+    CdTN: false,
+  },
+  '5530': {
+    title: "Convention d'entreprise Adoma (ex Sonacotra)",
+    CdTN: false,
+  },
+  '3207': {
+    title:
+      'Convention collective régionale des transports sanitaires de Guadeloupe',
+    CdTN: false,
+  },
+  '0394': {
+    title:
+      'Convention collective régionale des employés de la presse quotidienne parisienne',
+    CdTN: false,
+  },
+  '9022': {
+    title:
+      'Convention collective départementale des exploitations forestières Aisne',
+    CdTN: false,
+  },
+  '2535': {
+    title:
+      'Convention collective départementale dans la culture de la canne à sucre en Martinique',
+    CdTN: false,
+  },
+  '9494': {
+    title:
+      'Convention collective départementale des exploitations maraîchères Maine et Loire',
+    CdTN: false,
+  },
+  '0901': {
+    title:
+      'Convention collective départementale des ouvriers de la boulangerie de la Martinique',
+    CdTN: false,
+  },
+  '8731': {
+    title:
+      'Convention collective régionale des exploitations forestières scieries Midi Pyrénées',
+    CdTN: false,
+  },
+  '5541': {
+    title:
+      "Convention collective nationale du rugby professionnel (n'est pas considérée à l'heure actuelle comme une convention de branche)",
+    CdTN: false,
+  },
+  '9562': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Morbihan',
+    CdTN: false,
+  },
+  '9201': {
+    title:
+      'Convention collective départementale des exploitations agricoles Corse du Sud',
+    CdTN: false,
+  },
+  '5618': { title: "Accords-convention d'entreprise ADEF", CdTN: false },
+  '9762': {
+    title:
+      'Convention collective départementale des exploitations maraîchères Seine Maritime',
+    CdTN: false,
+  },
+  '9442': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Loire Atlantique',
+    CdTN: false,
+  },
+  '9891': {
+    title:
+      'Convention collective départementale des exploitations forestières Yonne',
+    CdTN: false,
+  },
+  '8415': {
+    title:
+      'Convention collective régionale des exploitations forestières Lorraine',
+    CdTN: false,
+  },
+  '9492': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Maine et Loire',
+    CdTN: false,
+  },
+  '2250': {
+    title:
+      'Convention collective régionale de la boulangerie-pâtisserie de la Guyane',
+    CdTN: false,
+  },
+  '9852': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Vendée',
+    CdTN: false,
+  },
+  '2978': {
+    title:
+      'Convention collective nationale du personnel salarié des agences de recherches privées',
+    CdTN: false,
+  },
+  '9283': {
+    title:
+      'Convention collective départementale des exploitations horticoles fruitières jardinerie Eure et Loire',
+    CdTN: false,
+  },
+  '9061': {
+    title:
+      'Convention collective départementale des exploitations polyculture Alpes Maritimes',
+    CdTN: false,
+  },
+  '5580': { title: "Convention d'entreprise Radio France", CdTN: false },
+  '1257': {
+    title:
+      "Convention collective départementale des employés, agents de maîtrise et cadres de la pharmacie d'officine de la Réunion",
+    CdTN: false,
+  },
+  '5610': {
+    title: "Convention d'entreprise Cinémathèque française",
+    CdTN: false,
+  },
+  '9413': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Loir et Cher',
+    CdTN: false,
+  },
+  '9232': {
+    title:
+      'Convention collective départementale des exploitations pépinières sylvicoles Creuse',
+    CdTN: false,
+  },
+  '9972': {
+    title:
+      'Convention collective départementale des exploitations agricoles Guyane',
+    CdTN: false,
+  },
+  '1060': {
+    title:
+      'Convention collective départementale de la métallurgie de la Martinique',
+    CdTN: false,
+  },
+  '0440': {
+    title:
+      'Convention collective départementale des sucreries et sucreries-distilleries de la Réunion',
+    CdTN: false,
+  },
+  '0925': {
+    title:
+      'Convention collective nationale des ingénieurs et cadres de la distribution des papiers et cartons, commerce de gros',
+    CdTN: false,
+  },
+  '9651': {
+    title:
+      'Convention collective départementale des exploitations agricoles Hautes Pyrénées',
+    CdTN: false,
+  },
+  '5506': { title: "Convention d'entreprise Crédit agricole SA", CdTN: false },
+  '8433': {
+    title: "Convention collective régionale de l'horticulture Franche Comté",
+    CdTN: false,
+  },
+  '5558': {
+    title:
+      "Accords-convention d'entreprise basés sur l'Accord national Multiservice immobilier et facilties management",
+    CdTN: false,
+  },
+  '8541': {
+    title:
+      'Convention collective régionale des exploitations forestières scieries Poitou Charentes',
+    CdTN: false,
+  },
+  '2357': {
+    title:
+      "Accord professionnel national du 3 mars 1993 relatif aux cadres de direction des sociétés d'assurances",
+    CdTN: false,
+  },
+  '5555': {
+    title:
+      "Convention collective nationale des navigants d'exécution du Remorquage maritime",
+    CdTN: false,
+  },
+  '8522': {
+    title:
+      'Convention collective régionale des exploitations forestières scieries Pays de la Loire',
+    CdTN: false,
+  },
+  '3028': {
+    title:
+      'Convention collective régionale des transports routiers et activités auxiliaires du transport de la Guadeloupe',
+    CdTN: false,
+  },
+  '1140': {
+    title:
+      'Convention collective départementale des hôtels cafés restaurants de Saint-Pierre-et-Miquelon(HCR)',
+    CdTN: false,
+  },
+  '5509': { title: "Convention d'entreprise PMU", CdTN: false },
+  '1232': {
+    title: 'Convention collective départementale des hôtels de la Guadeloupe',
+    CdTN: false,
+  },
+  '9292': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Finistère',
+    CdTN: false,
+  },
+  '5537': {
+    title:
+      "Convention collective nationale des dentistes des sociétés de secours minières (n'est pas considérée à l'heure actuelle comme une convention de branche)",
+    CdTN: false,
+  },
+  '1565': {
+    title:
+      'Convention collective départementale des services de soins infirmiers à domicile pour personnes âgées de la Guadeloupe',
+    CdTN: false,
+  },
+  '9374': {
+    title:
+      'Convention collective départementale des exploitations arboriculture fruitière Indre et Loire',
+    CdTN: false,
+  },
+  '8212': {
+    title: 'Convention collective régionale des scieries Champagne Ardenne',
+    CdTN: false,
+  },
+  '8251': {
+    title:
+      'Convention collective régionale des exploitations forestières scieries Calvados Manche Orne',
+    CdTN: false,
+  },
+  '5538': {
+    title:
+      "Convention collective nationale des médecins spécialiste des sociétés de secours minières (n'est pas considérée à l'heure actuelle comme une convention de branche)",
+    CdTN: false,
+  },
+  '8414': {
+    title:
+      'Convention collective régionale maraîchère Meurthe et Moselle Meuse Moselle et Vosges',
+    CdTN: false,
+  },
+  '8523': {
+    title:
+      'Convention collective régionale des exploitations sylvicoles Pays de la Loire',
+    CdTN: false,
+  },
+  '5505': { title: "Convention d'entreprise CEA", CdTN: false },
+  '9532': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Mayenne',
+    CdTN: false,
+  },
+  '2768': {
+    title:
+      'Convention collective nationale de travail des pharmaciens du régime minier',
+    CdTN: false,
+  },
+  '8723': {
+    title: "Convention collective régionale de l'entretien forestier Gascogne",
+    CdTN: false,
+  },
+  '8211': {
+    title:
+      'Convention collective régionale des exploitations forestières Champagne Ardenne',
+    CdTN: false,
+  },
+  '7509': {
+    title:
+      'Convention collective nationale des organismes de formation et de promotion agricoles',
+    CdTN: false,
+  },
+  '9722': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Sarthe',
+    CdTN: false,
+  },
+  '9222': {
+    title:
+      "Convention collective départementale des exploitations pépinières horticulture Côtes d'Armor",
+    CdTN: false,
+  },
+  '9862': {
+    title: 'Convention collective départementale des  champignonnières Vienne',
+    CdTN: false,
+  },
+  '5545': { title: "Convention d'entreprise des restaurants PTT", CdTN: false },
+  '9602': {
+    title:
+      'Convention collective départementale des exploitations forestières Oise',
+    CdTN: false,
+  },
+  '5614': {
+    title: "Convention d'entreprise Institut de l'élevage",
+    CdTN: false,
+  },
+  '9362': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Indre',
+    CdTN: false,
+  },
+  '5526': {
+    title:
+      "Charte du football professionnel (n'est pas considérée à l'heure actuelle comme une convention de branche)",
+    CdTN: false,
+  },
+  '5570': { title: "Convention d'entreprise Opéra de Paris", CdTN: false },
+  '1923': {
+    title:
+      'Convention collective départementale de la manutention portuaire de la Guadeloupe',
+    CdTN: false,
+  },
+  '9302': {
+    title:
+      'Convention collective départementale des exploitations agricoles Gard cadres',
+    CdTN: false,
+  },
+  '5025': {
+    title: 'Statut des personnels des organismes de développement économique',
+    CdTN: false,
+  },
+  '5531': { title: "Convention d'entreprise Syngenta", CdTN: false },
+  '5621': {
+    title: "Convention d'entreprise Fondation Jean Moulin",
+    CdTN: false,
+  },
+  '9581': {
+    title:
+      'Convention collective départementale des exploitations forestières Nièvre',
+    CdTN: false,
+  },
+  '2534': {
+    title:
+      "Convention collective départementale de l'industrie sucrière et rhumière de la Martinique",
+    CdTN: false,
+  },
+  '5203': {
+    title:
+      "Ancienne convention collective nationale des peintres en lettres et publicité peinte (dénoncée, mais pouvant servir de grille d'usage d'établissements réputés sans convention)",
+    CdTN: false,
+  },
+  '9352': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Ille et Vilaine',
+    CdTN: false,
+  },
+  '5002': { title: 'Statut du Mineur', CdTN: false },
+  '5548': { title: "Convention du comité d'entreprise RATP", CdTN: false },
+  '3235': {
+    title: 'Convention collective de la parfumerie sélective',
+    CdTN: false,
+  },
+  '5617': {
+    title: "Accords-convention d'entreprise Sodexo Justice Services",
+    CdTN: false,
+  },
+  '1050': {
+    title:
+      'Convention collective départementale du commerce et des services commerciaux de Saint-Pierre-et-Miquelon',
+    CdTN: false,
+  },
+  '5554': {
+    title:
+      'Convention collective nationale des officiers du Remorquage maritime',
+    CdTN: false,
+  },
+  '5542': {
+    title:
+      "Convention collective nationale du  basket ball professionnel (n'est pas considérée à l'heure actuelle comme une convention de branche)",
+    CdTN: false,
+  },
+  '9103': {
+    title: 'Convention collective départementale de sylviculture Aube',
+    CdTN: false,
+  },
+  '2964': {
+    title:
+      'Accord collectif départemental relatif au transport de proximité public et privé de produits pétroliers et de liquides inflammables sur le territoire de la Martinique',
+    CdTN: false,
+  },
+  '9801': {
+    title:
+      'Convention collective départementale des exploitations forestières Somme',
+    CdTN: false,
+  },
+  '9711': {
+    title:
+      'Convention collective départementale des exploitations forestières Saône et Loire',
+    CdTN: false,
+  },
+  '7503': {
+    title:
+      'Convention collective nationale des distilleries coopératives viticoles et SICA de distillation',
+    CdTN: false,
+  },
+  '8115': {
+    title:
+      'Convention collective régionale des hippodromes Île-de-France Cabourg Caen Chantilly Deauville',
+    CdTN: false,
+  },
+  '1069': {
+    title:
+      'Convention collective départementale de la répartition et des dépôts pharmaceutiques de la Martinique',
+    CdTN: false,
+  },
+  '9182': {
+    title:
+      'Convention collective départementale des exploitations pépinières horticulture Cher',
+    CdTN: false,
+  },
+  '5603': {
+    title: "Accords-convention d'entreprise Synchrotron Soleil",
+    CdTN: false,
+  },
+  '5546': { title: "Convention d'entreprise CNES", CdTN: false },
+  '5604': { title: "Accords-convention d'entreprise Accor", CdTN: false },
+  '0509': {
+    title:
+      'Convention collective régionale des cadres administratifs de la presse quotidienne parisienne',
+    CdTN: false,
+  },
+  '9497': {
+    title:
+      'Convention collective départementale des producteurs graines Maine et Loire',
+    CdTN: false,
+  },
+  '5576': { title: 'Convention du groupe AGEFOS PME', CdTN: false },
+  '8243': {
+    title: 'Convention collective régionale des champignonnières Centre',
+    CdTN: false,
+  },
+  '5631': { title: "Convention d'entreprise UNAF", CdTN: false },
+  '9452': {
+    title: 'Convention collective départementale des CUMA Loiret',
+    CdTN: false,
+  },
+  '1057': {
+    title:
+      'Convention collective départementale des consignataires de navire et manutentionnaires de la Martinique',
+    CdTN: false,
+  },
+  '8221': {
+    title: 'Convention collective régionale des champignonnistes Oise Aisne',
+    CdTN: false,
+  },
+  '5592': { title: "Convention d'entreprise UES CAMIF", CdTN: false },
+  '5633': { title: 'Accords CFA-BTP (numéro provisoire)', CdTN: false },
+  '5201': {
+    title: 'Recommandations ANIL ADIL (Non conventionnelles)',
+    CdTN: false,
+  },
+  '1072': {
+    title:
+      'Convention collective locale du travail règlementant le travail de manutention dans le port de Saint-Pierre',
+    CdTN: false,
+  },
+  '5595': { title: "Convention d'entreprise Sede environnement", CdTN: false },
+  '5549': { title: "Convention d'entreprise IRSN", CdTN: false },
+  '5569': { title: "Convention d'entreprise Comédie française", CdTN: false },
+  '8244': {
+    title: 'Convention collective régionale maraîchère Indre Cher',
+    CdTN: false,
+  },
+  '5023': { title: 'Statut Vivea', CdTN: false },
+  '5562': { title: "Convention d'entreprise Talc de Luzenac", CdTN: false },
+  '8722': {
+    title: 'Convention collective régionale de gemmage forêt Gascogne',
+    CdTN: false,
+  },
+  '5503': {
+    title: "Convention d'entreprise SEITA (LOGISTA France)",
+    CdTN: false,
+  },
+  '5601': { title: "Accords-convention d'entreprise COSEM", CdTN: false },
+  '5532': { title: "Convention d'entreprise INRS", CdTN: false },
+  '5205': {
+    title: "Convention d'entreprise CSE Air France exploitation hub",
+    CdTN: false,
+  },
+  '0780': {
+    title:
+      'Convention collective régionale des tailleurs sur mesure de la région parisienne (annexée à la convention collective nationale de la couture parisienne 0303)',
+    CdTN: false,
+  },
+  '9062': {
+    title:
+      'Convention collective départementale des exploitations forestières scieries Alpes Maritimes',
+    CdTN: false,
+  },
+  '8821': {
+    title:
+      'Convention collective régionale des ouvriers forestiers communes ONF Rhône Alpes',
+    CdTN: false,
+  },
+  '5606': { title: "Convention d'entreprise ANFH", CdTN: false },
+  '5598': { title: "Convention d'entreprise Eurotunnel", CdTN: false },
+  '5602': {
+    title:
+      "Accords-convention d'entreprise Bureau de recherche géologiques et minières",
+    CdTN: false,
+  },
+  '5584': {
+    title:
+      "Accords-convention d'entreprise Laboratoire national de métrologie et d’essais",
+    CdTN: false,
+  },
+  '5611': { title: "Accords-convention d'entreprise ADIE", CdTN: false },
+  '5573': { title: "Convention d'entreprise UGAP", CdTN: false },
+  '5200': {
+    title: "Grille d'usage Mars PF (Non conventionnelle)",
+    CdTN: false,
+  },
+  '5600': {
+    title: "Accords-convention d'entreprise CGG Services",
+    CdTN: false,
+  },
+  '5590': { title: "Convention d'entreprise OPCALIM", CdTN: false },
+  '5616': { title: "Accords-convention d'entreprise CTC", CdTN: false },
+  '5623': {
+    title:
+      "Convention d'entreprise du groupement national interprofessionnel des semences graines et plants",
+    CdTN: false,
+  },
+  '5012': { title: 'Statut des chemins de fer', CdTN: false },
+  '5630': {
+    title: "Accords-convention d'entreprise France active",
+    CdTN: false,
+  },
+  '5629': { title: "Convention d'entreprise d'Unifomation", CdTN: false },
   // on legifrance but not on official list
   '1413': {
     idKali: 'KALICONT000005635905',

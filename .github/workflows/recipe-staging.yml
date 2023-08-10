@@ -3,10 +3,15 @@
 name: Recipe on staging
 
 on:
+  pull_request:
+    branches: [main]
   workflow_run:
     workflows: ['Deploy - Staging']
     types: [completed]
   workflow_dispatch:
+
+env:
+  node-version: 18.x
 
 jobs:
   recipe:
@@ -19,6 +24,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          browser: chrome
           record: false
           config: video=false,baseUrl=https://staging.annuaire-entreprises.data.gouv.fr
