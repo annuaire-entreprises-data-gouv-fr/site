@@ -64,7 +64,7 @@ describe('Advanced search on page ' + path, () => {
 
   it('Finances filters', () => {
     cy.visit(path + '?terme=ganymede&ca_min=100&res_max=100000');
-    cy.contains('filtre sur le CA').click();
+    cy.contains('Filtre financier').click();
     cy.contains('Min : 1 K €').should('be.visible');
     cy.contains('Max : 100 K €').should('be.visible');
   });

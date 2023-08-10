@@ -5,7 +5,9 @@ const MapOrListSwitch = ({ isMap = false, query = '' }) => (
   <>
     {isMap ? (
       <a href={`/rechercher/${query}`}>
-        Afficher les résultats sous forme de liste
+        <Icon color={constants.colors.frBlue} slug="listUnordered">
+          Afficher en liste
+        </Icon>
       </a>
     ) : (
       <a href={`/rechercher/carte${query}`}>

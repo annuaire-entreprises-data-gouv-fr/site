@@ -6,7 +6,7 @@ import constants from '#models/constants';
 
 // Discretize "chiffer d’affaires" possible values
 export const CA = [
-  0, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000,
+  0, 1000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000,
   100000000000,
 ];
 

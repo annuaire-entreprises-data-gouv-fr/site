@@ -95,7 +95,8 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
             margin: 0;
             user-select: none;
             margin-right: 8px;
-            padding: 8px 0;
+            padding-top: 4px;
+            padding-bottom: 4px;
           }
 
           span.search-filter-label {
