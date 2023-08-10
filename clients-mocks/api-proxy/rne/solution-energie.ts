@@ -3,7 +3,7 @@
  * (RGE)
  */
 export default {
-  match: 'https://rncs-proxy.api.gouv.fr/rne/528163777',
+  match: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/528163777',
   response: {
     siren: '528163777',
     dirigeants: [

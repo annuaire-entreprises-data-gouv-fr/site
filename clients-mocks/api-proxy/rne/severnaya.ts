@@ -3,7 +3,7 @@
  * (PROTECTED)
  */
 export default {
-  match: 'https://rncs-proxy.api.gouv.fr/rne/908595879',
+  match: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/908595879',
   response: {
     siren: '908595879',
     dirigeants: [

@@ -1,5 +1,6 @@
 export default {
-  match: 'https://rncs-proxy.api.gouv.fr/association/W751245606',
+  match:
+    'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/W751245606',
   response: {
     identite: {
       nom: 'MANAKIN PRODUCTION',
