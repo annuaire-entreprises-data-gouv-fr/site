@@ -257,12 +257,13 @@ class SearchFilterParams {
       f.localisationFilter.label = this.params.cp_dep_label;
     }
 
-    if (this.params.ca_max || this.params.ca_min) {
-      f.financeFilter.label = 'filtre sur le CA';
-    }
-
-    if (this.params.res_max || this.params.res_min) {
-      f.financeFilter.label = 'filtre sur le resultat';
+    if (
+      this.params.ca_max ||
+      this.params.ca_min ||
+      this.params.res_max ||
+      this.params.res_min
+    ) {
+      f.financeFilter.label = 'Filtre financier';
     }
     return f;
   };
