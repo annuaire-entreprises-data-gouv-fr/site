@@ -54,10 +54,11 @@ export const formatPercentage = safe((value: string, digits = 1) => {
 
 export const formatCurrency = safe((value: string) => {
   const number = parseInt(value, 10);
-  if (!number) {
+  if (!number && number !== 0) {
     return value;
   }
-  const unitlist = [' €', 'K €', 'M €', 'Mds €'];
+
+  const unitlist = ['€', 'K €', 'M €', 'Mds €'];
   const sign = Math.sign(number);
 
   const orderOfMagnitude = Math.floor(

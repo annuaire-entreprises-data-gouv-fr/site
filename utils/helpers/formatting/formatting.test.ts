@@ -1,4 +1,4 @@
-import { formatAdresse } from './formatting';
+import { formatAdresse, formatCurrency } from './formatting';
 
 const adresses = [
   {
@@ -65,6 +65,42 @@ describe('Check formatAdresse', () => {
       expect(formatAdresse(adress.fields)).toBe(adress.expected);
     })
   );
+});
+
+describe('Check formatCurrency', () => {
+  const expected = [
+    '-100 Mds €',
+    '-9.9 M €',
+    '-1 K €',
+    '0 €',
+    '100 €',
+    '10 K €',
+    '1 M €',
+    '100 Mds €',
+    undefined,
+    null,
+    '',
+    'hello skelz',
+  ];
+
+  [
+    -100000000000,
+    -9999999,
+    -1000,
+    0,
+    100,
+    10000,
+    1000000,
+    100000000000,
+    undefined,
+    null,
+    '',
+    'hello skelz',
+  ].map((value, index) => {
+    test(`${value} : ${formatCurrency(value)} - ${expected[index]}`, () => {
+      expect(formatCurrency(value)).toBe(expected[index]);
+    });
+  });
 });
 
 export {};
