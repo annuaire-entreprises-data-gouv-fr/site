@@ -24,9 +24,7 @@
     "test:recipe-staging": "cypress open --config baseUrl=https://staging.annuaire-entreprises.data.gouv.fr video=false",
     "test:unit": "jest --runInBand",
     "lint": "next lint",
-    "script:seo": " ts-node --project ./seo-script/seo-script-tsconfig.json ./seo-script/index.ts",
-    "storybook:start": "start-storybook -p 6006",
-    "build-storybook:build": "build-storybook"
+    "script:seo": " ts-node --project ./seo-script/seo-script-tsconfig.json ./seo-script/index.ts"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "~5.0.0",
@@ -74,13 +72,6 @@
     "@babel/core": "^7.22.8",
     "@commitlint/cli": "^17.6.7",
     "@commitlint/config-conventional": "^17.6.7",
-    "@storybook/addon-actions": "^7.0.26",
-    "@storybook/addon-essentials": "^7.0.26",
-    "@storybook/addon-interactions": "^7.0.26",
-    "@storybook/addon-links": "^7.0.26",
-    "@storybook/builder-vite": "^7.0.26",
-    "@storybook/react": "^7.0.26",
-    "@storybook/testing-library": "^0.2.0",
     "@swc/jest": "^0.2.26",
     "@types/jest": "^29.5.3",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
