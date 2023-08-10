@@ -14,19 +14,38 @@ export const Res = [
   10000000, 100000000, 1000000000, 10000000000, 100000000000,
 ];
 
+const findNearestValueIndex = (
+  values: number[],
+  defaultValue: number,
+  value?: number | null
+) => {
+  if (typeof value === 'undefined' || value === null) {
+    return defaultValue;
+  }
+
+  for (let i = 0; i < values.length - 1; i++) {
+    if (value <= values[i]) {
+      return i;
+    }
+  }
+
+  return values.length - 1;
+};
+
 export const FilterFinances: React.FC<{
-  ca_min?: number;
-  ca_max?: number;
-  res_min?: number;
-  res_max?: number;
+  ca_min?: number | null;
+  ca_max?: number | null;
+  res_min?: number | null;
+  res_max?: number | null;
 }> = ({ ca_min, ca_max, res_min, res_max }) => {
   const [valueCA, setValueCA] = useState({
-    min: ca_min || 0,
-    max: ca_max || CA.length - 1,
+    min: findNearestValueIndex(CA, 0, ca_min),
+    max: findNearestValueIndex(CA, CA.length - 1, ca_max),
   });
+
   const [valueRes, setValueRes] = useState({
-    min: res_min || 0,
-    max: res_max || Res.length - 1,
+    min: findNearestValueIndex(Res, 0, res_min),
+    max: findNearestValueIndex(Res, Res.length - 1, res_max),
   });
 
   return (
@@ -34,7 +53,7 @@ export const FilterFinances: React.FC<{
       {valueCA.min > 0 && (
         <input
           name="ca_min"
-          value={valueCA.min}
+          value={CA[valueCA.min]}
           type="hidden"
           onChange={() => {}}
         />
@@ -42,7 +61,7 @@ export const FilterFinances: React.FC<{
       {valueCA.max < CA.length - 1 && (
         <input
           name="ca_max"
-          value={valueCA.max}
+          value={CA[valueCA.max]}
           type="hidden"
           onChange={() => {}}
         />
@@ -50,7 +69,7 @@ export const FilterFinances: React.FC<{
       {valueRes.min > 0 && (
         <input
           name="res_min"
-          value={valueRes.min}
+          value={Res[valueRes.min]}
           type="hidden"
           onChange={() => {}}
         />
@@ -58,7 +77,7 @@ export const FilterFinances: React.FC<{
       {valueRes.max < Res.length - 1 && (
         <input
           name="res_max"
-          value={valueRes.max}
+          value={Res[valueRes.max]}
           type="hidden"
           onChange={() => {}}
         />

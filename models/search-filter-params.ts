@@ -19,10 +19,10 @@ export interface IParams {
   tranche_effectif_salarie?: string;
   sap?: string;
   type?: string;
-  ca_min?: number;
-  ca_max?: number;
-  res_min?: number;
-  res_max?: number;
+  ca_min?: number | null;
+  ca_max?: number | null;
+  res_min?: number | null;
+  res_max?: number | null;
 }
 
 class SearchFilterParams {
@@ -45,10 +45,10 @@ class SearchFilterParams {
       categorie_entreprise = '',
       sap = '',
       type = '',
-      ca_min = 0,
-      ca_max = 0,
-      res_min = 0,
-      res_max = 0,
+      ca_min = null,
+      ca_max = null,
+      res_min = null,
+      res_max = null,
     } = query;
 
     // ensure dmax > dmin
@@ -317,7 +317,7 @@ export const hasDirigeantFilter = (params: IParams = {}) => {
 };
 
 export const hasSearchParam = (params: object) => {
-  return Object.values(params).some((v) => v !== '');
+  return Object.values(params).some((v) => !!v);
 };
 
 export default SearchFilterParams;

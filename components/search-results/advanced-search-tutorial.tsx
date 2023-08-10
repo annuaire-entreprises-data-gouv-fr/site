@@ -45,6 +45,12 @@ export const AdvancedSearchTutorial = () => {
               </Icon>
             </li>
             <li>
+              <Icon color={constants.colors.frBlue} slug="moneyCircle">
+                <b>Financier&nbsp;:</b>&#8200;filtrez par chiffre d’affaire ou
+                résultat net
+              </Icon>
+            </li>
+            <li>
               <Icon color={constants.colors.frBlue} slug="file">
                 <b>Situation administrative&nbsp;:</b>&#8200;filtrez par domaine
                 d’activité, état administratif (En activité/Cessée) ou taille
@@ -58,6 +64,7 @@ export const AdvancedSearchTutorial = () => {
         {`
           .advanced-search-tutorial {
             position: relative;
+            padding-bottom: 20px;
           }
 
           svg {
