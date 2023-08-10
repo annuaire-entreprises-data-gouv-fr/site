@@ -1,5 +1,5 @@
 export default {
-  match: 'https://rncs-proxy.api.gouv.fr/tva/',
+  match: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/',
   response: {
     isValid: true,
     requestDate: '2023-04-06T21:14:10.956Z',
