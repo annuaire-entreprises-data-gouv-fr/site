@@ -46,7 +46,7 @@ export const AdvancedSearchTutorial = () => {
             </li>
             <li>
               <Icon color={constants.colors.frBlue} slug="moneyCircle">
-                <b>Financier&nbsp;:</b>&#8200;filtrez par chiffre d’affaire ou
+                <b>Financier&nbsp;:</b>&#8200;filtrez par chiffre d’affaires ou
                 résultat net
               </Icon>
             </li>
