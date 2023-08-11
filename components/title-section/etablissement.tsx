@@ -176,16 +176,15 @@ const TitleEtablissementWithDenomination: React.FC<{
         color: #666;
       }
 
-      main h1 {
+      h1 {
         line-height: 1.5rem;
         font-size: 1.4rem;
       }
 
-      main .etablissement-sub-title {
+      .etablissement-sub-title {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        margin-bottom: 5px;
       }
 
       .etablissement-sub-sub-title:before {

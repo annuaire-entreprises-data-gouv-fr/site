@@ -11,19 +11,12 @@ import {
 import { libelleCategorieEntrepriseForDescription } from '#utils/helpers/formatting/categories-entreprise';
 import { libelleEffectifForDescription } from '#utils/helpers/formatting/codes-effectifs';
 import { ISession } from '#utils/session';
+import { UniteLegaleEtablissementCountDescription } from './etablissement-count-description';
 
 export const UniteLegaleDescription: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  const { nombreEtablissements, nombreEtablissementsOuverts, usePagination } =
-    uniteLegale.etablissements;
-
-  const hasOpenEtablissements = nombreEtablissementsOuverts > 0;
-
-  const plural = nombreEtablissements > 1 ? 's' : '';
-  const pluralBe = nombreEtablissementsOuverts > 1 ? 'sont' : 'est';
-
   const ageCreation = uniteLegale.dateCreation
     ? formatAge(uniteLegale.dateCreation)
     : null;
@@ -88,17 +81,9 @@ export const UniteLegaleDescription: React.FC<{
           <>
             {' '}
             Elle possède{' '}
-            <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
-              {nombreEtablissements} établissement{plural}
-            </a>
-            {hasOpenEtablissements &&
-              !usePagination &&
-              nombreEtablissements !== nombreEtablissementsOuverts && (
-                <b>
-                  {' '}
-                  dont {nombreEtablissementsOuverts} {pluralBe} en activité
-                </b>
-              )}
+            <UniteLegaleEtablissementCountDescription
+              uniteLegale={uniteLegale}
+            />
             .
           </>
         )}

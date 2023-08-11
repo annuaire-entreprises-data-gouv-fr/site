@@ -18,6 +18,7 @@ import {
 } from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
 import { isAgent, ISession } from '#utils/session';
+import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
 import { FICHE, Tabs } from './tabs';
 
 type IProps = {
@@ -88,6 +89,11 @@ const Title: React.FC<IProps> = ({
           />
         </span>
       </div>
+      {uniteLegale.etablissements.all && (
+        <div className="unite-legale-sub-sub-title">
+          <UniteLegaleEtablissementCountDescription uniteLegale={uniteLegale} />
+        </div>
+      )}
     </div>
     <SocialMedia
       path={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
@@ -139,6 +145,20 @@ const Title: React.FC<IProps> = ({
         font-variant: small-caps;
         font-size: 1.1rem;
         color: #666;
+      }
+
+      .unite-legale-sub-sub-title:before {
+        content: '';
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        margin-left: 15px;
+        margin-bottom: 4px;
+        border: 1px solid #bbb;
+        border-top: none;
+        border-right: none;
+        position: relative;
+        display: inline-block;
       }
 
       @media only screen and (min-width: 1px) and (max-width: 992px) {
