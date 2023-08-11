@@ -137,9 +137,16 @@ const EtablissementSection: React.FC<IProps> = ({
         etablissement.anneeTrancheEffectif
       ),
     ],
-    ['Date de création', formatDate(etablissement.dateCreation)],
     [
-      'Date de dernière mise à jour',
+      `Date de création de ${companyType}`,
+      formatDate(uniteLegale.dateCreation),
+    ],
+    [
+      'Date de création de l’établissement',
+      formatDate(etablissement.dateCreation),
+    ],
+    [
+      'Dernière modification des données Insee',
       formatDate(etablissement.dateDerniereMiseAJour),
     ],
     ...(!estActif(etablissement)
