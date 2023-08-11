@@ -6,27 +6,32 @@ const team = [
   {
     photoUrl: '/images/team/xavier.jpg',
     fullname: 'Xavier Jouppe',
-    role: 'Intrapreneur',
+    pronoun: 'un',
+    role: 'intrapreneur',
   },
   {
     photoUrl: '/images/team/hajar.jpg',
     fullname: 'Hajar AIT EL KADI',
-    role: 'Data engineer',
-  },
-  {
-    photoUrl: '/images/team/jonathan.jpg',
-    fullname: 'Jonathan Louis',
-    role: 'Chargé de déploiement SEO',
-  },
-  {
-    photoUrl: '/images/team/karen.jpg',
-    fullname: 'Karen Mazmanian',
-    role: 'Chargé de déploiement et de communication',
+    pronoun: 'une',
+    role: 'data engineer',
   },
   {
     photoUrl: '/images/team/anais.jpg',
     fullname: 'Anais Tailhade',
-    role: 'Responsable du support utilisateur',
+    pronoun: 'une',
+    role: 'responsable du support utilisateur',
+  },
+  {
+    photoUrl: '/images/team/jonathan.jpg',
+    fullname: 'Jonathan Louis',
+    pronoun: 'un',
+    role: 'chargé de déploiement SEO',
+  },
+  {
+    photoUrl: '/images/team/karen.jpg',
+    fullname: 'Karen Mazmanian',
+    pronoun: 'un',
+    role: 'chargé de déploiement et de communication',
   },
 ];
 
@@ -127,12 +132,11 @@ const Equipe: NextPageWithLayout = () => {
         <p>Notre équipe est constituée de :</p>
 
         <ul>
-          <li>un intrapreneur chargé de piloter le projet</li>
-          <li>un développeur</li>
-          <li>une data engineer</li>
-          <li>deux chargés de déploiement et de communication</li>
-          <li>une responsable de support</li>
-          <li>un UX designer</li>
+          {team.map(({ pronoun, role }) => (
+            <li>
+              {pronoun} {role}
+            </li>
+          ))}
         </ul>
         <p>
           Plus d’informations{' '}
