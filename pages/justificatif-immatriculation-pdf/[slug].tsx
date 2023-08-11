@@ -104,7 +104,7 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
                         <Loader /> téléchargement en cours
                       </Tag>
                       <span style={{ color: '#777', fontWeight: 'bold' }}>
-                        (temps estimé entre 10 secondes et 2 minutes)
+                        (temps estimé entre 10 secondes et 1 minute)
                       </span>
                     </>,
                     <>
@@ -113,16 +113,18 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
                     <>
                       <Tag color="error">échec</Tag>
                       <p>
-                        Le téléchargement a échoué car le téléservice de l’
-                        <INPI /> ne fonctionne pas actuellement.{' '}
-                        <b>Nous sommes désolé pour ce désagrément</b>.
+                        Le téléchargement direct a échoué et nous avons relancé
+                        un téléchargement dans un nouvel onglet.
                       </p>
+                      Si besoin,{' '}
                       <a
+                        id="download-pdf-link"
                         target="_blank"
                         rel="noreferrer noopener"
                         href={downloadLink}
                       >
-                        Cliquez ici pour ré-essayer de télécharger le document
+                        cliquez ici pour re-lancer un téléchargement dans un
+                        nouvel onglet.
                       </a>
                     </>,
                     <>

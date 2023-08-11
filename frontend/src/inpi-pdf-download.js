@@ -76,32 +76,21 @@ async function downloadInpiPDF() {
 
     if (window.fetch) {
       // first try
-      console.info('first attempt');
       const res = await download(url, siren);
       handleResponse(res);
 
-      // second try
+      if (res === 200) {
+        stateMachine.setSuccess();
+      }
+      if (res === 404) {
+        stateMachine.setNotFound();
+        handleNotFound();
+      }
       if (res === 500) {
-        await wait(1 * 1000);
-
-        console.info('second attempt');
-        const res2 = await download(url, siren);
-        handleResponse(res2);
-
-        // third try
-        if (res2 === 500) {
-          await wait(50 * 1000);
-
-          console.info('third attempt');
-          const res3 = await download(url, siren);
-          handleResponse(res3);
-
-          if (res3 === 500) {
-            // nevermind - it was a bad idea anyway
-            stateMachine.setError();
-            handleError();
-          }
-        }
+        // nevermind - it was a bad idea anyway
+        stateMachine.setError();
+        document.getElementById('download-pdf-link').click();
+        handleError();
       }
     } else {
       stateMachine.setError();
