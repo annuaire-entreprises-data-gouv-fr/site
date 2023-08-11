@@ -19,6 +19,10 @@ export interface IParams {
   tranche_effectif_salarie?: string;
   sap?: string;
   type?: string;
+  ca_min?: number | null;
+  ca_max?: number | null;
+  res_min?: number | null;
+  res_max?: number | null;
 }
 
 class SearchFilterParams {
@@ -41,6 +45,10 @@ class SearchFilterParams {
       categorie_entreprise = '',
       sap = '',
       type = '',
+      ca_min = null,
+      ca_max = null,
+      res_min = null,
+      res_max = null,
     } = query;
 
     // ensure dmax > dmin
@@ -66,6 +74,10 @@ class SearchFilterParams {
       categorie_entreprise,
       sap,
       type,
+      ca_min,
+      ca_max,
+      res_min,
+      res_max,
     };
   }
 
@@ -74,7 +86,7 @@ class SearchFilterParams {
   }
 
   public toApiURI() {
-    const { cp_dep, cp_dep_type } = this.params;
+    const { cp_dep, cp_dep_type, ca_max, ca_min } = this.params;
     const departement = cp_dep_type === 'dep' ? cp_dep : '';
     const region = cp_dep_type === 'reg' ? cp_dep : '';
     const code_postal = cp_dep_type === 'cp' ? cp_dep : '';
@@ -107,6 +119,10 @@ class SearchFilterParams {
       nom_personne: this.params.n?.trim(),
       date_naissance_personne_min: this.params.dmin,
       date_naissance_personne_max: this.params.dmax,
+      ca_max,
+      ca_min,
+      resultat_net_max: this.params.res_max,
+      resultat_net_min: this.params.res_min,
     });
   }
 
@@ -148,6 +164,11 @@ class SearchFilterParams {
         icon: 'building',
         label: '',
         excludeParams: ['type', 'label'],
+      },
+      financeFilter: {
+        icon: 'moneyCircle',
+        label: '',
+        excludeParams: ['ca_min', 'ca_max', 'res_min', 'res_max'],
       },
       localisationFilter: {
         icon: 'mapPin',
@@ -235,6 +256,15 @@ class SearchFilterParams {
     if (this.params.cp_dep_label) {
       f.localisationFilter.label = this.params.cp_dep_label;
     }
+
+    if (
+      this.params.ca_max ||
+      this.params.ca_min ||
+      this.params.res_max ||
+      this.params.res_min
+    ) {
+      f.financeFilter.label = 'Filtre financier';
+    }
     return f;
   };
 }
@@ -288,7 +318,7 @@ export const hasDirigeantFilter = (params: IParams = {}) => {
 };
 
 export const hasSearchParam = (params: object) => {
-  return Object.values(params).some((v) => v !== '');
+  return Object.values(params).some((v) => !!v);
 };
 
 export default SearchFilterParams;

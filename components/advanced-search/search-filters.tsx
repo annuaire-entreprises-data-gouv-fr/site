@@ -10,6 +10,7 @@ import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2
 import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
 import { FilterGeo } from './filter-geo';
 import { FilterStructure } from './filter-structure';
+import { FilterFinances } from './filter-finances';
 
 const SearchFilters: React.FC<{
   searchParams?: IParams;
@@ -31,6 +32,10 @@ const SearchFilters: React.FC<{
     categorie_entreprise,
     sap,
     type,
+    ca_min,
+    ca_max,
+    res_min,
+    res_max,
   } = searchParams || {};
 
   const filters = new SearchFilterParams(searchParams || {});
@@ -40,6 +45,7 @@ const SearchFilters: React.FC<{
     dirigeantFilter,
     administrativeFilter,
     structureFilter,
+    financeFilter,
   } = filters.extractFilters();
 
   /**
@@ -126,6 +132,20 @@ const SearchFilters: React.FC<{
         addSaveClearButton
       >
         <FilterStructure label={label} type={type} />
+      </FilterMenu>
+      <FilterMenu
+        label="Financier"
+        activeFilter={financeFilter}
+        searchParams={searchParams}
+        searchTerm={searchTerm}
+        addSaveClearButton
+      >
+        <FilterFinances
+          ca_min={ca_min}
+          ca_max={ca_max}
+          res_min={res_min}
+          res_max={res_max}
+        />
       </FilterMenu>
       <FilterMenu
         label="Situation administrative"

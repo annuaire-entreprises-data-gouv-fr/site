@@ -45,6 +45,20 @@ const user = (
   </svg>
 );
 
+const moneyCircle = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="100%"
+    height="100%"
+    fill="currentColor"
+    stroke="currentColor"
+    strokeWidth="0"
+  >
+    <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm3.815 4.457L14.114 9.59A2.5 2.5 0 0 0 10.05 11H15v2h-4.95a2.5 2.5 0 0 0 4.064 1.41l1.7 1.133A4.5 4.5 0 0 1 8.028 13H7v-2h1.027a4.5 4.5 0 0 1 7.788-2.543Z" />
+  </svg>
+);
+
 const buildingFill = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -215,6 +229,20 @@ const download = (
   </svg>
 );
 
+const listUnordered = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="100%"
+    height="100%"
+    fill="currentColor"
+    stroke="currentColor"
+    strokeWidth="0"
+  >
+    <path d="M8 4h13v2H8V4ZM4.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0 6.9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3ZM8 11h13v2H8v-2Zm0 7h13v2H8v-2Z" />
+  </svg>
+);
+
 const mapPin = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -375,7 +403,9 @@ export const icons = {
   humanPin,
   file,
   building,
+  moneyCircle,
   mapPin,
+  listUnordered,
   information,
   mail,
   print,
