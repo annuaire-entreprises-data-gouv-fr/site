@@ -334,12 +334,11 @@ const mapToEtablissement = (
     activitePrincipale: activite_principale,
     dateCreation: date_creation,
     dateDebutActivite: date_debut_activite,
-    conventionsCollectives: [],
-    //  (liste_idcc || [])
-    //   .map((idcc) => {
-    //     return getConventionCollectives(idcc, siret);
-    //   })
-    //   .filter((cc): cc is IConventionCollective => !!cc),
+    conventionsCollectives: (liste_idcc || [])
+      .map((idcc) => {
+        return getConventionCollectives(idcc, siret);
+      })
+      .filter((cc): cc is IConventionCollective => !!cc),
   };
 };
 
