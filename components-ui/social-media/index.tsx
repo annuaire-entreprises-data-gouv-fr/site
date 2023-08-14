@@ -110,6 +110,10 @@ const SocialMedia: React.FC<{
       </span>
     </div>
     <style jsx>{`
+      .social-media {
+        color: ${constants.colors.frBlue};
+        margin: 10px 0;
+      }
       .social-media span {
         margin: 0 5px;
       }
@@ -120,10 +124,6 @@ const SocialMedia: React.FC<{
       }
       .social-media span a:after {
         display: none;
-      }
-      .social-media {
-        color: ${constants.colors.frBlue};
-        margin: 0 0 12px 0;
       }
     `}</style>
   </PrintNever>

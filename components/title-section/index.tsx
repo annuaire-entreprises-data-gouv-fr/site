@@ -153,7 +153,7 @@ const Title: React.FC<IProps> = ({
         height: 20px;
         margin-right: 10px;
         margin-left: 15px;
-        margin-bottom: 4px;
+        margin-bottom: 5px;
         border: 1px solid #bbb;
         border-top: none;
         border-right: none;
