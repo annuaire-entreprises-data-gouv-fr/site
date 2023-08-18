@@ -2,8 +2,9 @@ import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import {
   etatFromEtatAdministratifInsee,
+  parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
-} from '#clients/sirene-insee/helpers';
+} from '#utils/helpers/insee-variables';
 import constants from '#models/constants';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
@@ -136,7 +137,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     annee_categorie_entreprise = null,
     tranche_effectif_salarie = null,
     annee_tranche_effectif_salarie = null,
-    date_creation = '',
+    date_creation,
     date_mise_a_jour = '',
     statut_diffusion = 'O',
     etablissements = [],
@@ -172,9 +173,6 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
   ) {
     etatAdministratif = IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT;
   }
-
-  // when unknwon, dateCreation is set to 1900-01-01 by Insee instead of null
-  const dateCreation = date_creation === '1900-01-01' ? '' : date_creation;
 
   const etablissementsList = createEtablissementsList(
     etablissements.length > 0
@@ -231,7 +229,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       data: null,
     },
     colter,
-    dateCreation,
+    dateCreation: parseDateCreationInsee(date_creation),
     dateDerniereMiseAJour: date_mise_a_jour,
     conventionsCollectives: etablissementsList.all.flatMap(
       (e) => e.conventionsCollectives
@@ -332,7 +330,7 @@ const mapToEtablissement = (
     libelleActivitePrincipale:
       libelleFromCodeNAFWithoutNomenclature(activite_principale),
     activitePrincipale: activite_principale,
-    dateCreation: date_creation,
+    dateCreation: parseDateCreationInsee(date_creation),
     dateDebutActivite: date_debut_activite,
     conventionsCollectives: (liste_idcc || [])
       .map((idcc) => {
