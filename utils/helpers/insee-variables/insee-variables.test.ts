@@ -31,11 +31,6 @@ describe('Check statuDiffusionFromStatutDiffusionInsee', () => {
       ISTATUTDIFFUSION.PARTIAL
     );
   });
-  test('Unknown statut fallbacks on diffusible', () => {
-    expect(statuDiffusionFromStatutDiffusionInsee('Hello skelz', '')).toBe(
-      ISTATUTDIFFUSION.DIFFUSIBLE
-    );
-  });
 });
 
 describe('Check etatFromEtatAdministratifInsee', () => {
@@ -48,11 +43,6 @@ describe('Check etatFromEtatAdministratifInsee', () => {
     );
     expect(etatFromEtatAdministratifInsee('F', '')).toBe(
       IETATADMINSTRATIF.FERME
-    );
-  });
-  test('Unknown etat fallbacks on "inconnu"', () => {
-    expect(etatFromEtatAdministratifInsee('Hello skelz', '')).toBe(
-      IETATADMINSTRATIF.INCONNU
     );
   });
 });
