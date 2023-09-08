@@ -77,7 +77,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
             {etablissement.dateCreation && (
               <>
                 {' '}
-                Il a été créée le{' '}
+                Il a été créé le{' '}
                 <b>{formatDateLong(etablissement.dateCreation)}</b>
                 {ageCreation && <>, il y a {ageCreation}</>}.{' '}
               </>
