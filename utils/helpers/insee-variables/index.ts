@@ -1,6 +1,6 @@
 import { IETATADMINSTRATIF } from '#models/etat-administratif';
 import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
-import logErrorInSentry from '../../utils/sentry';
+import logErrorInSentry from '../../sentry';
 
 /**
  * Turn letter based etatAdministratif into Boolean. Logs any unkniown value
@@ -54,4 +54,28 @@ export const statuDiffusionFromStatutDiffusionInsee = (
       });
       return ISTATUTDIFFUSION.DIFFUSIBLE;
   }
+};
+
+/***
+ * Insee's dateCreation is quite weird for unite legale and etablissement
+ * this formatter harmonize all creation dates
+ *
+ * https://www.sirene.fr/static-resources/htm/v_sommaire.htm#8
+ *
+ * Quote :
+ * “si la date de création est au 01/01/1900 dans Sirene,
+ * la date est forcée à null. Dans tous les autres cas,
+ * la date de création n'est jamais à null. Si elle est non renseignée,
+ * elle sera au 01/01/1900. La date de création ne correspond pas
+ * obligatoirement à dateDebut de la première période de l'unité légale.
+ * Certaines variables historisées peuvent posséder des dates de début
+ * soit au 01/01/1900, soit antérieures à la date de création.”
+ */
+export const parseDateCreationInsee = (
+  dateCreation: string | null | undefined
+) => {
+  if (!dateCreation || dateCreation === '1900-01-01') {
+    return '';
+  }
+  return dateCreation;
 };

@@ -18,8 +18,9 @@ import { libelleFromCodeNAF } from '#utils/helpers/formatting/labels';
 import { inseeClientGet, InseeClientOptions } from '.';
 import {
   etatFromEtatAdministratifInsee,
+  parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
-} from './helpers';
+} from '../../utils/helpers/insee-variables';
 
 type IInseeEtablissementResponse = {
   etablissement: IInseeEtablissement;
@@ -275,7 +276,7 @@ export const mapEtablissementToDomainObject = (
     nic,
     enseigne,
     denomination: denominationUsuelleEtablissement || '',
-    dateCreation: dateCreationEtablissement,
+    dateCreation: parseDateCreationInsee(dateCreationEtablissement),
     activitePrincipale: activitePrincipaleEtablissement,
     libelleActivitePrincipale: libelleFromCodeNAF(
       activitePrincipaleEtablissement,
