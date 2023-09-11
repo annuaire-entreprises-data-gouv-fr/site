@@ -1,5 +1,4 @@
 # administrations: la liste des administrations concernées (pour connaitre la liste possible voir la liste des fichiers administrations dans https://github.com/etalab/annuaire-entreprises-site/tree/main/data/administration)
-# targets: la liste des cibles à choisir parmi : agent | particulier | dirigeant | independant
 # title: titre
 # seo: description et titre pour le SEO
 #   description:
@@ -13,8 +12,6 @@
 #     href: url
 administrations:
   - insee
-faqTargets:
-  - none
 title: Qu’est ce que l’Economie Sociale et Solidaire ?
 seo:
   description: L’Economie Sociale et Solidaire (ESS) regroupe les associations, fondations, coopératives, mutuelles et entreprises de l’ESS

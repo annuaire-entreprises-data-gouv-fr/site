@@ -66,6 +66,11 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
+                  <a className="fr-footer__top-link" href="/definition/liste">
+                    Définitions
+                  </a>
+                </li>
+                <li>
                   <a className="fr-footer__top-link" href="/partager">
                     Réutiliser & partager
                   </a>
