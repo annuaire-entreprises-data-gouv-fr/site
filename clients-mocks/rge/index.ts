@@ -14,7 +14,7 @@ export default {
         nom_entreprise: 'GROUPE SOLUTION ENERGIE POLE TECHNIQUE',
         nom_qualification: 'Offre Globale de Rénovation Energétique (C001D117)',
         organisme: 'certibat',
-        telephone: '06 98 39 31 19',
+        telephone: '01 49 48 14 50',
         _i: 31679811519002,
         url_qualification:
           'https://www.qualibat.com/Views/GetFichier.aspx?fn=2022\\SIEG-Certificat-CB-159386-GROUPE SOLUTION - RE22249-1-20220518.pdf',
@@ -40,7 +40,7 @@ export default {
         nom_entreprise: 'GROUPE SOLUTION ENERGIE POLE TECHNIQUE',
         nom_qualification: 'Offre Globale de Rénovation Energétique (C001D119)',
         organisme: 'certibat',
-        telephone: '06 98 39 31 19',
+        telephone: '01 49 48 14 50',
         _i: 31679811519003,
         url_qualification:
           'https://www.qualibat.com/Views/GetFichier.aspx?fn=2022\\SIEG-Certificat-CB-159386-GROUPE SOLUTION - RE22249-1-20220518.pdf',
@@ -65,7 +65,7 @@ export default {
         nom_entreprise: 'GROUPE SOLUTION ENERGIE POLE TECHNIQUE (GSEPT)',
         nom_qualification: 'Audit énergétique “maisons individuelles” (1911)',
         organisme: 'opqibi',
-        telephone: '06 98 39 31 19',
+        telephone: '01 49 48 14 50',
         _i: 53213252944717,
         url_qualification: 'http://opqibi.com/fiche/5059',
         siret: '52816377700030',

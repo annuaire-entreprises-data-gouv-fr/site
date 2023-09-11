@@ -7,7 +7,7 @@ describe('Certifications', () => {
     });
     it('Should display company phone number', () => {
       cy.visit(`/labels-certificats/528163777`);
-      cy.contains('06 98 39 31 19');
+      cy.contains('01 49 48 14 50');
     });
   });
 });
