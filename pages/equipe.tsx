@@ -33,6 +33,18 @@ const team = [
     pronoun: 'un',
     role: 'chargé de déploiement et de communication',
   },
+  {
+    photoUrl: '/images/team/amandine.jpg',
+    fullname: 'Amandine Audras',
+    pronoun: 'une',
+    role: 'UX designeure',
+  },
+  {
+    photoUrl: '/images/team/johan.jpg',
+    fullname: 'Johan Girod',
+    pronoun: 'un',
+    role: 'lead développeur',
+  },
 ];
 
 const Equipe: NextPageWithLayout = () => {
@@ -133,7 +145,7 @@ const Equipe: NextPageWithLayout = () => {
 
         <ul>
           {team.map(({ pronoun, role }) => (
-            <li>
+            <li key={role}>
               {pronoun} {role}
             </li>
           ))}
