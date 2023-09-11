@@ -25,6 +25,10 @@ const positions = [
 const init = () => {
   const loader = document.getElementById('loader-bar');
 
+  if (!loader) {
+    return null;
+  }
+
   loader.style.position = 'fixed';
 
   if (loader.style.backgroundColor === 'transparent') {
@@ -45,6 +49,11 @@ const loadBarFactory = () => {
       this._currentJobId = jobId;
       if (!this._loader) {
         this._loader = init();
+
+        // cancel job if loader is not found
+        if (!this._loader) {
+          return;
+        }
       }
 
       for (let w of positions) {
