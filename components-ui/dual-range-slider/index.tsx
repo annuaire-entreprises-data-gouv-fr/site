@@ -84,20 +84,20 @@ const DualRangeSlider: React.FC<{
           position: relative;
           display: flex;
           align-items: center;
-          margin: 20px 8px;
+          margin: 20px 10px 0;
         }
 
         .input-wrapper {
-          width: calc(100% + 16px);
-          margin: 0 -8px;
+          width: calc(100% + 20px);
+          margin: 0 -10px;
           position: absolute;
-          height: 16px;
+          height: 20px;
         }
 
         .control-wrapper {
           width: 100%;
           position: absolute;
-          height: 16px;
+          height: 20px;
         }
 
         input[type='range'] {
@@ -131,8 +131,8 @@ const DualRangeSlider: React.FC<{
         input[type='range']::-ms-thumb {
           appearance: none;
           pointer-events: all;
-          width: 16px;
-          height: 16px;
+          width: 20px;
+          height: 20px;
           border-radius: 0px;
           border: 0 none;
           cursor: grab;
@@ -146,8 +146,8 @@ const DualRangeSlider: React.FC<{
         input[type='range']::-moz-range-thumb {
           appearance: none;
           pointer-events: all;
-          width: 16px;
-          height: 16px;
+          width: 20px;
+          height: 20px;
           border-radius: 0px;
           border: 0 none;
           cursor: grab;
@@ -161,8 +161,8 @@ const DualRangeSlider: React.FC<{
         input[type='range']::-webkit-slider-thumb {
           appearance: none;
           pointer-events: all;
-          width: 16px;
-          height: 16px;
+          width: 20px;
+          height: 20px;
           border-radius: 0px;
           border: 0 none;
           cursor: grab;
@@ -190,13 +190,13 @@ const DualRangeSlider: React.FC<{
         }
 
         .control {
-          width: 16px;
-          height: 16px;
+          width: 20px;
+          height: 20px;
           border-radius: 50%;
           position: absolute;
           background: #fff;
           border: 2px solid ${color || constants.colors.frBlue};
-          margin-left: -8px;
+          margin-left: -10px;
           z-index: 2;
         }
       `}</style>

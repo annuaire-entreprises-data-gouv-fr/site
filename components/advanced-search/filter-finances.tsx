@@ -123,6 +123,7 @@ export const FilterFinances: React.FC<{
 
       <style jsx>{`
         .legend {
+          padding-top: 20px;
           display: flex;
           justify-content: space-between;
           width: 100%;
