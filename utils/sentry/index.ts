@@ -17,9 +17,13 @@ export type IScope = {
 const getScope = (extra: IScope) => {
   const scope = new Sentry.Scope();
   Object.keys(extra).forEach((key) => {
-    //@ts-ignore
-    const value = (extra[key] || 'N/A').substring(0, 195);
-    scope.setTag(key, value);
+    try {
+      //@ts-ignore
+      const value = (extra[key] || 'N/A').substring(0, 195);
+      scope.setTag(key, value);
+    } catch {
+      scope.setTag(key, 'Serialization failed');
+    }
   });
   if (process.env.INSTANCE_NUMBER) {
     scope.setTag('instance_number', process.env.INSTANCE_NUMBER);
