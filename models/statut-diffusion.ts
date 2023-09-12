@@ -59,7 +59,7 @@ export const getNomComplet = (
     }
     return nonDiffusibleDataFormatter('information non-diffusible');
   } else {
-    if (estNonDiffusible(uniteLegale)) {
+    if (!estDiffusible(uniteLegale)) {
       return nonDiffusibleDataFormatter('information non-diffusible');
     }
 

@@ -76,7 +76,7 @@ const ExtraitKbis: NextPageWithLayout = () => {
             <b>NB :</b> le lien se construit ainsi :
           </p>
           <code>
-            https://annuaire-entreprises.data.gouv.fr/justificatifs/
+            https://annuaire-entreprises.data.gouv.fr/justificatif/
             <i>{'{insérer_le_numéro_siren}'}</i>
           </code>
           <h2>
