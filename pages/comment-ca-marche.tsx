@@ -63,8 +63,17 @@ const About: NextPageWithLayout = () => {
               Commerciales)
             </li>
             <li>
-              <b>Labels et certificats :</b> RGE, ESS, Entrepreneurs de
-              spectacles vivants.
+              <b>Données financières des entreprises :</b> chiffre d’affaires et
+              résultat net des sociétés
+            </li>
+            <li>
+              <b>Annonces légales :</b> annonces officielles au Journal Officiel
+              et au BODACC (Bulletin Officiel Des Annonces Civiles et
+              Commerciales)
+            </li>
+            <li>
+              <b>Labels et certificats :</b> RGE, ESS, Société à mission,
+              Entrepreneurs de spectacles vivants, entreprises du Bio
             </li>
             <li>
               <b>Conventions collectives :</b> documents enregistrés auprès du
