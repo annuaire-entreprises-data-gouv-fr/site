@@ -141,6 +141,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     date_mise_a_jour = '',
     statut_diffusion = 'O',
     etablissements = [],
+    slug,
   } = result;
 
   const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
@@ -201,7 +202,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     anneeCategorieEntreprise: annee_categorie_entreprise,
     trancheEffectif: tranche_effectif_salarie,
     anneeTrancheEffectif: annee_tranche_effectif_salarie,
-    chemin: result.slug_annuaire_entreprises || result.siren,
+    chemin: result.slug || result.siren,
     natureJuridique: nature_juridique || '',
     libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
       result.activite_principale,

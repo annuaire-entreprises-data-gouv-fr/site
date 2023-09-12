@@ -28,7 +28,7 @@ export type IResult = {
   matching_etablissements: IMatchingEtablissement[];
   etablissements?: IMatchingEtablissement[];
   complements: IComplements;
-  slug_annuaire_entreprises: string;
+  slug: string;
 };
 
 export type ISiege = {
