@@ -107,17 +107,7 @@ export const Header: React.FC<IProps> = ({
                           </a>
                         </li>
                       </ul>
-                    ) : (
-                      <ul className="fr-links-group">
-                        <li>
-                          <a className="fr-link" href="/comment-ca-marche">
-                            <Icon size={12} slug="information">
-                              À propos
-                            </Icon>
-                          </a>
-                        </li>
-                      </ul>
-                    )}
+                    ) : null}
                   </div>
                 </div>
               </div>
