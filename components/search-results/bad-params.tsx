@@ -12,8 +12,9 @@ export const BadParams = () => (
         Vous pouvez essayez d’identifier le filtre qui pose problème. Si vous
         n’y parvenez pas,{' '}
         <a href={constants.links.parcours.contact}>
-          vous pouvez nous contacter.
-        </a>
+          vous pouvez nous contacter
+        </a>{' '}
+        ou bien <a href="/rechercher?terme=">effacer tous les filtres</a>.
       </p>
     </div>
     <br />
