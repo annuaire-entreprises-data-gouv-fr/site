@@ -117,7 +117,7 @@ const UniteLegaleSection: React.FC<{
         <li>
           <AvisSituationLink
             etablissement={uniteLegale.siege}
-            label="Avis de situation Insee"
+            label="Télécharger l’avis de situation Insee"
           />
         </li>
       </ul>,

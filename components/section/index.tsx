@@ -1,9 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import Warning from '#components-ui/alerts/warning';
-import { Icon } from '#components-ui/icon/wrapper';
 import DataSourcesTooltip from '#components-ui/information-tooltip/data-sources-tooltip';
 import Logo from '#components-ui/logo';
-import { PrintNever } from '#components-ui/print-visibility';
 import {
   administrationsMetaData,
   EAdministration,
@@ -53,16 +51,6 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         <div>{children}</div>
         {dataSources.length > 0 && (
           <div className="administration-page-link">
-            <PrintNever>
-              <a
-                href={constants.links.parcours.modification}
-                className="no-style-link question-faq-link"
-              >
-                <Icon size={14} slug="questionnaire">
-                  <u>Une erreur ou une question sur ces données ?</u>
-                </Icon>
-              </a>
-            </PrintNever>
             <DataSourcesTooltip
               dataSources={dataSources}
               lastUpdatedAt={formatDate(last)}
@@ -115,14 +103,11 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
 
         .administration-page-link {
           display: flex;
-          justify-content: space-between;
+          justify-content: end;
           align-items: center;
           gap: 10px;
           flex-wrap: wrap;
           margin-top: 25px;
-        }
-        .administration-page-link a {
-          font-size: 0.9rem;
         }
 
         .section-logo-wrapper {
