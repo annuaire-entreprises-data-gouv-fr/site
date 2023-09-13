@@ -15,32 +15,31 @@ import {
 } from '#models/espace-agent/donnees-restreintes-entreprise';
 import { IUniteLegale } from '#models/index';
 import { NextPageWithLayout } from 'pages/_app';
+import { capitalize } from '#utils/helpers';
+
+const AdministrationInformation: React.FC<{
+  str: string;
+  administration?: string;
+}> = ({ str, administration }) => {
+  return (
+    capitalize(`${administration ? `${administration} : `: ''}${str}`)
+  )
+}
 
 const Conformite: React.FC<{
   data: IConformite | IAPINotRespondingError;
   administration?: string;
 }> = ({ data, administration }) => {
   if (isAPINotResponding(data)) {
-    if (data.errorType === 404) {
-      return (
-        <i>
-          {administration ? `${administration} : d` : 'D'}ocument non trouvé
-        </i>
-      )
-    }
-
-    if (data.errorType === 408) {
-      return (
-        <i>
-          {administration ? `${administration} : l` : 'L'}a récupération du document a pris trop de temps
-        </i>
-      )
-    }
 
     return (
-      <i>
-        {administration ? `${administration} : e` : 'E'}rreur {data.errorType}
-      </i>
+      <Icon slug="closed">
+        {
+            data.errorType === 404 && <AdministrationInformation str="document non trouvé" administration={administration} />
+            || data.errorType === 408 && <AdministrationInformation str="la récupération du document a pris trop de temps" administration={administration} />
+            || <AdministrationInformation str={`erreur ${data.errorType}`} administration={administration} />
+        }
+      </Icon>
     );
   }
 
@@ -49,11 +48,11 @@ const Conformite: React.FC<{
       {typeof data.isValid === 'boolean' ? (
         data.isValid ? (
           <Icon slug="open">
-            {administration && <b>{administration}&nbsp;: </b>} conforme
+            <AdministrationInformation str="conforme" administration={administration} />
           </Icon>
         ) : (
           <Icon slug="closed">
-            {administration && <b>{administration}&nbsp;: </b>} non conforme
+            <AdministrationInformation str="non conforme" administration={administration} />
           </Icon>
         )
       ) : (
