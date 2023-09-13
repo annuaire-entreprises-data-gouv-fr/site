@@ -21,6 +21,13 @@ const Conformite: React.FC<{
   administration?: string;
 }> = ({ data, administration }) => {
   if (isAPINotResponding(data)) {
+    if (data.errorType === 404) {
+      return (
+        <i>
+          {administration ? `${administration} : d` : 'D'}ocument non trouvé
+        </i>
+      )
+    }
     return (
       <i>
         {administration ? `${administration} : e` : 'E'}rreur {data.errorType}
