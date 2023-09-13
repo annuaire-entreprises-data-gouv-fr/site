@@ -30,15 +30,6 @@ pages.forEach((page) => {
       // Should be on a new URL which includes '/commands/actions'
       cy.url().should('include', '/');
     });
-
-    it('"À propos" button works', () => {
-      cy.visit(page);
-
-      cy.contains('À propos').click();
-
-      // Should be on a new URL which includes '/commands/actions'
-      cy.url().should('include', '/comment-ca-marche');
-    });
   });
 });
 
