@@ -28,6 +28,15 @@ const Conformite: React.FC<{
         </i>
       )
     }
+
+    if (data.errorType === 408) {
+      return (
+        <i>
+          {administration ? `${administration} : l` : 'L'}a récupération du document a pris trop de temps
+        </i>
+      )
+    }
+
     return (
       <i>
         {administration ? `${administration} : e` : 'E'}rreur {data.errorType}
