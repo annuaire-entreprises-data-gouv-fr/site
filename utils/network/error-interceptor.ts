@@ -52,6 +52,9 @@ const errorInterceptor = (error: AxiosError) => {
     case 401: {
       throw new HttpUnauthorizedError('Unauthorized');
     }
+    case 408: {
+      throw new HttpTimeoutError('Timeout');
+    }
     case 504: {
       throw new HttpTimeoutError('Timeout');
     }
