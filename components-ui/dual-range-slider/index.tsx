@@ -131,8 +131,8 @@ const DualRangeSlider: React.FC<{
         input[type='range']::-ms-thumb {
           appearance: none;
           pointer-events: all;
-          width: 20px;
-          height: 20px;
+          width: 35px;
+          height: 35px;
           border-radius: 0px;
           border: 0 none;
           cursor: grab;
@@ -146,8 +146,8 @@ const DualRangeSlider: React.FC<{
         input[type='range']::-moz-range-thumb {
           appearance: none;
           pointer-events: all;
-          width: 20px;
-          height: 20px;
+          width: 35px;
+          height: 35px;
           border-radius: 0px;
           border: 0 none;
           cursor: grab;
@@ -161,8 +161,8 @@ const DualRangeSlider: React.FC<{
         input[type='range']::-webkit-slider-thumb {
           appearance: none;
           pointer-events: all;
-          width: 20px;
-          height: 20px;
+          width: 35px;
+          height: 35px;
           border-radius: 0px;
           border: 0 none;
           cursor: grab;
