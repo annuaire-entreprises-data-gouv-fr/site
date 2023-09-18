@@ -16,7 +16,6 @@ Ce site met à disposition des citoyens et des agents les données ouvertes (ope
 ![Page entreprise](https://img.shields.io/uptimerobot/status/m787859483-e754b64b78a0c30eea102880?label=Page%20entreprise&logo=Page%20entreprise)
 ![Recherche](https://img.shields.io/uptimerobot/status/m787859512-adcc5cd05674366504f96c86?label=Recherche&logo=Page%20entreprise)
 
-
 **Disponibilités des APIs utilisées par le site :**
 
 Pour voir le détail des disponibilités des API utilisées sur le site, [consultez la page de statut](https://annuaire-entreprises.data.gouv.fr/donnees/api).
@@ -37,12 +36,12 @@ Pour modifier la liste des siren protégés en diffusion [mettre à jour la list
 
 Ce dépôt fait partie d'un ensemble de dépôts qui constituent l'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
 
-| Description                  | Accès                                                                     |
-| ---------------------------- | ------------------------------------------------------------------------- |
-| Le site Web                  | [par ici 👉](https://github.com/etalab/annuaire-entreprises-site)         |
-| L’API du Moteur de recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-api)   |
-| Pipeline ETL                 | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-infra) |
-| Le proxy API du site         | [par ici 👉](https://github.com/etalab/annuaire-entreprises-api-proxy)    |
+| Description                         | Accès                                                                       |
+| ----------------------------------- | --------------------------------------------------------------------------- |
+| Le site Web                         | [par ici 👉](https://github.com/etalab/annuaire-entreprises-site)           |
+| L’API du Moteur de recherche        | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-api)     |
+| Pipeline ETL                        | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-infra)   |
+| Le proxy API du site                | [par ici 👉](https://github.com/etalab/annuaire-entreprises-api-proxy)      |
 | Tests de pertinence de la recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-testing) |
 
 ## Développement
@@ -67,6 +66,13 @@ Nous utilisons [Commit-lint](https://commitlint.js.org/#/) avec [conventional-co
 ```
 
 ### Installation
+
+#### Prérequis
+
+Le projet nécessite node > 18 et redis installé pour être lancé en local.
+
+- [Installer Node](https://nodejs.org/en/download/package-manager)
+- [Installer Redis](https://redis.io/docs/getting-started/installation/)
 
 ```bash
 # Installation
