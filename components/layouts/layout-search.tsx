@@ -8,6 +8,7 @@ import { Header } from '#components/header';
 import SocialNetworks from '#components/social-network';
 import { IParams } from '#models/search-filter-params';
 import { ISession } from '#utils/session';
+import { SurveyBanner } from '#components/banner/survey-banner';
 
 type IProps = {
   currentSearchTerm?: string;
@@ -35,6 +36,8 @@ export const LayoutSearch = ({
       {isBrowserOutdated && <BrowserIsOutdatedBanner />}
 
       <NPSBanner />
+
+      <SurveyBanner />
 
       <Header
         currentSearchTerm={(terme || '') as string}

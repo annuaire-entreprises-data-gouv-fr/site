@@ -40,4 +40,5 @@ function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
   window.sessionStorage.setItem(pvKey, parseInt(pageViewCount, 10) + 1);
 }
 
-triggerModal('nps-modal', 2, '/');
+// triggerModal('nps-modal', 2, '/');
+triggerModal('survey-banner', 0, '/');

@@ -6,6 +6,7 @@ import Footer from '#components/footer';
 import { Header } from '#components/header';
 import SocialNetworks from '#components/social-network';
 import { ISession } from '#utils/session';
+import { SurveyBanner } from '#components/banner/survey-banner';
 
 type IProps = {
   isBrowserOutdated: boolean;
@@ -23,6 +24,7 @@ export const LayoutDefault = ({
     <div id="page-layout">
       {isBrowserOutdated && <BrowserIsOutdatedBanner />}
       <NPSBanner />
+      <SurveyBanner />
 
       <Header
         useSearchBar={searchBar}
