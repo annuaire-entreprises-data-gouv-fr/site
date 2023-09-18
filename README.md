@@ -57,14 +57,6 @@ Pour des raisons de [performances](https://pagespeed.web.dev/analysis/https-annu
 
 Nous utilisons [Commit-lint](https://commitlint.js.org/#/) avec [conventional-commits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#why-use-conventional-commits)
 
-[L'extension Eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) avec la configuration ci-dessous permet de corriger les problèmes de linting automatiquement :
-
-```
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-```
-
 ### Installation
 
 #### Prérequis
