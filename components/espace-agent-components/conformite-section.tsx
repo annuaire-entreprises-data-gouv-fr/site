@@ -1,10 +1,6 @@
-import { useState } from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
 import { ProtectedSection } from '#components/section/protected-section';
 import { TwoColumnTable } from '#components/table/simple';
-import {
-  IDonneesRestreinteUniteLegale,
-} from '#models/espace-agent/donnees-restreintes-entreprise';
 import { IUniteLegale } from '#models/index';
 import { useDonneesRestreintes } from 'hooks';
 import Conformite from './conformite';

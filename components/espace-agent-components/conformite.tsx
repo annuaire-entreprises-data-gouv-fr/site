@@ -1,8 +1,8 @@
+import React from "react";
 import { Icon } from "#components-ui/icon/wrapper";
 import { Loader } from "#components-ui/loader";
 import { IAPINotRespondingError, isAPINotResponding } from "#models/api-not-responding";
 import { IConformite } from "#models/espace-agent/donnees-restreintes-entreprise";
-import React from "react";
 import AdministrationInformation from "./administration-information";
 
 const APINotRespongingElement: React.FC<{
