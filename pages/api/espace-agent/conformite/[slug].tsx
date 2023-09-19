@@ -9,16 +9,21 @@ import { HttpForbiddenError } from '#clients/exceptions';
 export default withIronSessionApiRoute(conformite, sessionOptions);
 
 async function conformite(
-  { query: { slug }, session }: NextApiRequest,
+  req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const { query: { slug }, session } = req;
+
   try {
     if (!isSuperAgent(session)) {
       throw new HttpForbiddenError('Unauthorized account');
     }
+
     const siret = verifySiret(slug as string);
     const siren = extractSirenFromSiret(siret);
-    res.status(200).json(await getDonneesRestreintesEntreprise(siren, siret));
+    
+    const donneesRestreintes = await getDonneesRestreintesEntreprise(siren, siret);
+    res.status(200).json(donneesRestreintes);
   } catch (e: any) {
     const message = 'Failed to get donnees restreintes';
     logErrorInSentry(message, { siret: slug as string, details: e });
