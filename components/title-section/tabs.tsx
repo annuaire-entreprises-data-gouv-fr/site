@@ -10,9 +10,11 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/index';
-import { ISession } from '#utils/session';
+import { ISession, isSuperAgent } from '#utils/session';
 
 export enum FICHE {
+  INFORMATION = 'résumé',
+  AGENTS = 'espace agent',
   ACTES = 'actes & statuts',
   ANNONCES = 'annonces',
   FINANCES = 'finances',
@@ -22,7 +24,6 @@ export enum FICHE {
   DIVERS = 'conventions collectives',
   ELUS = 'élus',
   ETABLISSEMENTS_SCOLAIRES = 'établissements scolaires',
-  INFORMATION = 'résumé',
   JUSTIFICATIFS = 'justificatifs',
   ETABLISSEMENT = 'fiche établissement',
 }
@@ -31,7 +32,7 @@ export const Tabs: React.FC<{
   currentFicheType: FICHE;
   uniteLegale: IUniteLegale;
   session: ISession | null;
-}> = ({ currentFicheType, uniteLegale }) => {
+}> = ({ currentFicheType, uniteLegale, session }) => {
   const shouldDisplayFinances =
     // hide for public services
     !isServicePublic(uniteLegale) &&
@@ -52,6 +53,14 @@ export const Tabs: React.FC<{
       noFollow: false,
       shouldDisplay: true,
       width: '80px',
+    },
+    {
+      ficheType: FICHE.AGENTS,
+      label: 'Fiche agents publics',
+      pathPrefix: '/espace-agent/',
+      noFollow: false,
+      shouldDisplay: isSuperAgent(session),
+      width: '120px',
     },
     {
       ficheType: FICHE.JUSTIFICATIFS,

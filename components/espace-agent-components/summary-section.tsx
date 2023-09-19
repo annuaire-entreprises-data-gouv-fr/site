@@ -18,12 +18,12 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
 }) => {
   return (
     <PrintNever>
-      <ProtectedSection title="Conformité & Immatriculation">
+      <ProtectedSection title="Résumé pour les agents publics">
         <TwoColumnTable
           body={[
             [
               'Conformité',
-              <a href={`/espace-agent/conformite/${uniteLegale.siren}`}>
+              <a href={`/espace-agent/${uniteLegale.siren}`}>
                 → Consulter les attestations fiscales et sociales
               </a>,
             ],

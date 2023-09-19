@@ -31,14 +31,14 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
       title={getCompanyPageTitle(uniteLegale, session)}
       description={getCompanyPageDescription(uniteLegale, session)}
       noIndex={true}
-      canonical={`https://annuaire-entreprises.data.gouv.fr/espace-agent/conformite/${
+      canonical={`https://annuaire-entreprises.data.gouv.fr/espace-agent/${
         uniteLegale.chemin || uniteLegale.siren
       }`}
     />
     <div className="content-container">
       <Title
         uniteLegale={uniteLegale}
-        ficheType={FICHE.INFORMATION}
+        ficheType={FICHE.AGENTS}
         session={session}
       />
       {estNonDiffusible(uniteLegale) ? (
