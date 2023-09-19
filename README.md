@@ -70,6 +70,9 @@ Le projet nécessite node > 18 et redis installé pour être lancé en local.
 # Installation
 npm i
 
+# Copier le fichier .env
+cp .env.dev .env
+
 # Lancer le site en dev
 npm run dev
 
