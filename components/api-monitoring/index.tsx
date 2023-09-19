@@ -219,7 +219,7 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
             Envie de réutiliser cette API ?{' '}
             {apigouvLink && (
               <a href={apigouvLink} target="_blank" rel="noreferrer noopener">
-                Consulter la fiche api.gouv.fr
+                Consulter la documentation
               </a>
             )}
           </i>

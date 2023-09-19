@@ -9,6 +9,8 @@ import { EAdministration } from '#models/administrations';
 import { IAssociation } from '#models/index';
 import { formatDate, formatIntFr } from '#utils/helpers';
 import { isTwoMonthOld } from '#utils/helpers/checks';
+import { isAPINotResponding } from '#models/api-not-responding';
+import AdministrationNotResponding from '#components/administration-not-responding';
 
 const AssociationSection: React.FC<{
   uniteLegale: IAssociation;
@@ -16,6 +18,15 @@ const AssociationSection: React.FC<{
   const {
     association: { idAssociation = '', data },
   } = uniteLegale;
+
+  if (isAPINotResponding(data)) {
+    return (
+      <AdministrationNotResponding
+        administration={data.administration}
+        errorType={data.errorType}
+      />
+    );
+  }
 
   const {
     nomComplet = '',
