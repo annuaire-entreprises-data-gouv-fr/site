@@ -4,10 +4,6 @@ site: https://travail-emploi.gouv.fr/
 long: Ministère du Travail, du Plein Emploi et de l'Insertion (MTPEI)
 contact: https://travail-emploi.gouv.fr/ministere/article/nous-contacter
 apiMonitors:
-  - apiName: API Conventions Collectives
-    apiSlug: idcc
-    apigouvLink: https://api.gouv.fr/les-api/api-conventions-collectives
-    id: 787859521
   - apiName: API Egapro
     apiSlug: egapro
     id: 794017147
