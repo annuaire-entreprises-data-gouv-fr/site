@@ -8,6 +8,7 @@ import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';
 import { Section } from '#components/section';
+import { LoadingSection } from '#components/section/loading';
 import { FullTable } from '#components/table/full';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
@@ -20,7 +21,7 @@ import { IUniteLegale } from '#models/index';
 import { formatDate, formatIntFr } from '#utils/helpers';
 
 type IProps = {
-  immatriculation: IImmatriculationRNE | IAPINotRespondingError;
+  immatriculation: IImmatriculationRNE | IAPINotRespondingError | null;
   uniteLegale: IUniteLegale;
 };
 
@@ -28,6 +29,15 @@ const ImmatriculationRNE: React.FC<IProps> = ({
   immatriculation,
   uniteLegale,
 }) => {
+  if (immatriculation === null) {
+    return (
+      <LoadingSection
+        title="Inscription au RNE"
+        description="Nous récupérons les données du Registre National des Entreprises"
+        sources={[EAdministration.INPI]}
+      />
+    );
+  }
   if (isAPINotResponding(immatriculation)) {
     if (immatriculation.errorType === 404) {
       return null;

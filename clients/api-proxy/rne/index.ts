@@ -11,6 +11,6 @@ import { clientAPIProxy } from '../client';
 export const fetchRNEImmatriculation = async (siren: Siren, useCache = true) =>
   clientAPIProxy(
     routes.proxy.rne + siren,
-    { timeout: constants.timeout.XL },
+    { timeout: constants.timeout.XXL },
     useCache
   ) as Promise<IImmatriculationRNE>;

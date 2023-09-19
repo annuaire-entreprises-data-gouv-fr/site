@@ -37,7 +37,8 @@ const Immatriculations: React.FC<IProps> = ({
   const noAssociationImmatriculation =
     !isAnAssociation || (isAnAssociation && isNotFound(immatriculationJOAFE));
 
-  const noRNEImmatriculation = isNotFound(immatriculationRNE);
+  const noRNEImmatriculation =
+    immatriculationRNE !== null && isNotFound(immatriculationRNE);
 
   const noImmatriculation =
     noAssociationImmatriculation && noRNEImmatriculation;

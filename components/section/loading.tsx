@@ -5,18 +5,20 @@ import { EAdministration } from '#models/administrations';
 export interface IProps {
   title: string;
   sources?: EAdministration[];
+  description: string;
   id?: string;
 }
 
 export const LoadingSection: React.FC<IProps> = ({
   id,
   title,
+  description,
   sources = [],
 }) => (
   <Section id={id} title={title} sources={sources}>
     <div className="layout-center">
       <span>
-        Nous récupérons les annonces de cette structure <Loader />
+        {description} <Loader />
       </span>
     </div>
   </Section>

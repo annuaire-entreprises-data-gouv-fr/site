@@ -45,6 +45,7 @@ const AnnoncesBodaccSection: React.FC<{
     return (
       <LoadingSection
         title="Annonces BODACC"
+        description="Nous récupérons les annonces de cette structure"
         sources={[EAdministration.DILA]}
       />
     );

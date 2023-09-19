@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import Immatriculations from '#components/immatriculations';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
@@ -11,6 +10,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
+import { useImmmatriculationRNE } from 'hooks/use-immatriculation-RNE';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IJustificatifs, IPropsWithMetadata {}
@@ -18,41 +18,48 @@ interface IProps extends IJustificatifs, IPropsWithMetadata {}
 const JustificatifPage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   immatriculationJOAFE,
-  immatriculationRNE,
   metadata: { session },
-}) => (
-  <>
-    <Meta
-      title={`Justificatif d’immatriculation - ${getCompanyPageTitle(
-        uniteLegale,
-        session
-      )}`}
-      description={getCompanyPageDescription(uniteLegale, session)}
-      canonical={`https://annuaire-entreprises.data.gouv.fr/justificatif/${uniteLegale.siren}`}
-      noIndex={true}
-    />
-    <div className="content-container">
-      <Title
-        uniteLegale={uniteLegale}
-        ficheType={FICHE.JUSTIFICATIFS}
-        session={session}
+}) => {
+  const immatriculationRNE = useImmmatriculationRNE(uniteLegale);
+  return (
+    <>
+      <Meta
+        title={`Justificatif d’immatriculation - ${getCompanyPageTitle(
+          uniteLegale,
+          session
+        )}`}
+        description={getCompanyPageDescription(uniteLegale, session)}
+        canonical={`https://annuaire-entreprises.data.gouv.fr/justificatif/${uniteLegale.siren}`}
+        noIndex={true}
       />
-      <Immatriculations
-        immatriculationJOAFE={immatriculationJOAFE}
-        immatriculationRNE={immatriculationRNE}
-        uniteLegale={uniteLegale}
-        session={session}
-      />
-    </div>
-  </>
-);
+      <div className="content-container">
+        <Title
+          uniteLegale={uniteLegale}
+          ficheType={FICHE.JUSTIFICATIFS}
+          session={session}
+        />
+        <Immatriculations
+          immatriculationJOAFE={immatriculationJOAFE}
+          immatriculationRNE={immatriculationRNE}
+          uniteLegale={uniteLegale}
+          session={session}
+        />
+      </div>
+    </>
+  );
+};
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
 
     return {
-      props: await getJustificatifs(slug),
+      props: {
+        ...(await getJustificatifs(slug)),
+        metadata: {
+          useReact: true,
+        },
+      },
     };
   }
 );
