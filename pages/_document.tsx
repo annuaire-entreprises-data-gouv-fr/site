@@ -126,6 +126,8 @@ class CustomDocument extends Document {
         </HeadToUse>
         <body>
           <Main />
+          <script async src="https://tally.so/widgets/embed.js" />
+
           {isProd && process.env.MATOMO_SITE_ID && (
             <script
               dangerouslySetInnerHTML={{
