@@ -11,7 +11,7 @@ const ping = async (
     if (test) {
       res.status(200).json({ message: 'ok' });
     } else {
-      res.status(status).json({ message: 'ko' });
+      res.status(500).json({ message: 'ko', status });
     }
   } catch (e: any) {
     if (e instanceof APISlugNotFound) {
