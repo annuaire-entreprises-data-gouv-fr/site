@@ -12,7 +12,7 @@ import Conformite from './conformite';
 const ConformiteSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const { isLoading, donneesRestreintes } = useDonneesRestreintes(uniteLegale);
+  const { donneesRestreintes } = useDonneesRestreintes(uniteLegale);
 
   return (
     <PrintNever>
@@ -22,7 +22,6 @@ const ConformiteSection: React.FC<{
             [
               'Conformité fiscale',
               <Conformite
-                isLoading={isLoading}
                 data={donneesRestreintes?.conformite?.fiscale}
               />,
             ],
@@ -30,13 +29,11 @@ const ConformiteSection: React.FC<{
               'Conformité sociale',
               <>
                 <Conformite
-                  isLoading={isLoading}
                   data={donneesRestreintes?.conformite?.vigilance}
                   administration="Urssaf"
                 />
                 <br />
                 <Conformite
-                  isLoading={isLoading}
                   data={donneesRestreintes?.conformite?.msa}
                   administration="MSA"
                 />

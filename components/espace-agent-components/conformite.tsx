@@ -7,13 +7,12 @@ import AdministrationInformation from "./administration-information";
 const Conformite: React.FC<{
   data: IConformite | IAPINotRespondingError | undefined;
   administration?: string;
-  isLoading?: boolean;
-}> = ({ data, administration, isLoading = false }) => {
-  if (isLoading) {
+}> = ({ data, administration }) => {
+  if (!data) {
     return <Loader />;
   }
 
-  if (!data || isAPINotResponding(data)) {
+  if (isAPINotResponding(data)) {
     return (
       <Icon slug="closed">
         {(data?.errorType === 404 && (
