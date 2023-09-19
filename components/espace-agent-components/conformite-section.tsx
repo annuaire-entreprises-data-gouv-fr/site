@@ -14,6 +14,7 @@ import {
 import { IUniteLegale } from '#models/index';
 import { Loader } from '#components-ui/loader';
 import { capitalize } from '#utils/helpers';
+import { useDonneesRestreintes } from 'hooks';
 
 const AdministrationInformation: React.FC<{
   str: string;
@@ -88,23 +89,7 @@ const Conformite: React.FC<{
 const ConformiteSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [donneesRestreintes, setDonneesRestreintes] =
-    useState<IDonneesRestreinteUniteLegale | null>(null);
-
-  useEffect(() => {
-    setIsLoading(true);
-    const fetchDonneesRestreintes = async () => {
-      const response = await fetch(
-        `/api/espace-agent/conformite/${uniteLegale.siege.siret}`
-      );
-      const data = await response.json();
-      setDonneesRestreintes(data);
-      setIsLoading(false);
-    };
-
-    fetchDonneesRestreintes();
-  }, [uniteLegale]);
+  const { isLoading, donneesRestreintes } = useDonneesRestreintes(uniteLegale);
 
   return (
     <PrintNever>
