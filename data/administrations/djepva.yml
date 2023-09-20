@@ -1,0 +1,12 @@
+slug: djepva
+short: DJEPVA
+site: https://www.jeunes.gouv.fr/organisation-du-ministere-184
+long: La direction de la jeunesse de l'éducation populaire et de la vie associative (DJEPVA)
+contact: djepva.dir@jeunesse-sports.gouv.fr
+apiMonitors:
+  - apiName: API Association
+    apiSlug: rna
+    id: 793681421
+    apigouvLink: https://www.associations.gouv.fr/les-api-et-autres-outils.html
+description: |
+  Au sein du ministère de l'Éducation nationale et de la Jeunesse, la DJEPVA élabore et pilote les politiques en faveur des jeunes, de l'engagement, de l'éducation populaire et de la vie associative.

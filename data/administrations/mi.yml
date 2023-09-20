@@ -3,10 +3,6 @@ short: MI
 long: Ministère de l’Intérieur (MI)
 site: https://www.interieur.gouv.fr/
 contact: https://www.interieur.gouv.fr/Infos-du-site/Nous-contacter
-apiMonitors:
-  - apiName: API Association
-    apiSlug: rna
-    id: 793681421
 dataSources:
   - label: Répertoire National des Associations
     apiSlug: rna

@@ -1,4 +1,5 @@
 import { INSEE, MI } from '#components/administrations';
+import { isAPINotResponding } from '#models/api-not-responding';
 import { IAssociation } from '#models/index';
 import { getAdresseUniteLegale } from '#models/statut-diffusion';
 import { ISession } from '#utils/session';
@@ -8,6 +9,10 @@ const AssociationAdressAlert: React.FC<{
   uniteLegale: IAssociation;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
+  if (isAPINotResponding(uniteLegale.association.data)) {
+    return null;
+  }
+
   const adresseInconsistency =
     uniteLegale.association?.data?.adresseInconsistency;
 

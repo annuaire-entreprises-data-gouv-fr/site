@@ -13,6 +13,8 @@ export enum EAdministration {
   MTPEI = 'mtpei',
   MI = 'mi',
   VIES = 'vies',
+  DJEPVA = 'djepva'
+  
 }
 
 /**

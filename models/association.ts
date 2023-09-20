@@ -4,15 +4,21 @@ import { HttpNotFound } from '#clients/exceptions';
 import { escapeTerm, Siren } from '#utils/helpers';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import { IDataAssociation, IUniteLegale } from '.';
+import { EAdministration } from './administrations';
+import {
+  APINotRespondingFactory,
+  IAPINotRespondingError,
+} from './api-not-responding';
 
 export const getAssociation = async (
   uniteLegale: IUniteLegale
-): Promise<null | IDataAssociation> => {
-  const slug = uniteLegale.association.idAssociation || '';
+): Promise<IDataAssociation | IAPINotRespondingError> => {
+  const rna = uniteLegale.association.idAssociation || '';
   const { siren } = uniteLegale;
 
+  let data: IDataAssociation;
   try {
-    const data = await clientAssociation(siren, uniteLegale.siege.siret);
+    data = await clientAssociation(siren, uniteLegale.siege.siret);
 
     const adresseInconsistency = await verifyAdressConsistency(
       siren,
@@ -28,12 +34,14 @@ export const getAssociation = async (
     if (e instanceof HttpNotFound) {
       logWarningInSentry('Id RNA not found', {
         siren,
-        details: `RNA : ${slug}`,
+        details: `RNA : ${rna}`,
       });
-    } else {
-      logErrorInSentry('Error in API RNA', { siren, details: e.toString() });
+
+      return APINotRespondingFactory(EAdministration.DJEPVA, 404);
     }
-    return null;
+
+    logErrorInSentry('Error in API RNA', { siren, details: e.toString() });
+    return APINotRespondingFactory(EAdministration.DJEPVA, 500);
   }
 };
 

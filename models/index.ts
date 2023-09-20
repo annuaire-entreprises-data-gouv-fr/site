@@ -8,6 +8,7 @@ import { IEtatCivil } from '#models/immatriculation';
 import { isAssociationFromNatureJuridique } from '#utils/helpers';
 import { Siren, Siret } from '#utils/helpers';
 import { IdRna } from '#utils/helpers';
+import { IAPINotRespondingError } from './api-not-responding';
 import { IBilanFinancierAssociation } from './donnees-financieres';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 
@@ -108,7 +109,7 @@ export interface IUniteLegale extends IEtablissementsList {
   complements: IUniteLegaleComplements;
   association: {
     idAssociation: IdRna | string | null;
-    data: null | IDataAssociation;
+    data: null | IAPINotRespondingError | IDataAssociation;
   };
   colter: {
     codeColter: string | null;
@@ -190,7 +191,7 @@ export const createDefaultUniteLegaleComplements = () => {
 export interface IAssociation extends Omit<IUniteLegale, 'association'> {
   association: {
     idAssociation: IdRna | string;
-    data: null | IDataAssociation;
+    data: IUniteLegale['association']['data'];
   };
 }
 

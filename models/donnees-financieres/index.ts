@@ -4,6 +4,7 @@ import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
+  isAPINotResponding,
 } from '#models/api-not-responding';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { verifySiren } from '#utils/helpers';
@@ -69,7 +70,8 @@ export const getFinancesFromSlug = async (slug: string): Promise<IFinances> => {
       uniteLegale,
       financesSociete: APINotRespondingFactory(EAdministration.MEF, 404),
       financesAssociation:
-        uniteLegale.association.data?.bilans ||
+        (!isAPINotResponding(uniteLegale.association.data) &&
+          uniteLegale.association.data?.bilans) ||
         APINotRespondingFactory(EAdministration.MI, 404),
     };
   }

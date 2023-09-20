@@ -4,6 +4,7 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from '#components/labels-and-certificates-badges-section';
+import { isAPINotResponding } from '#models/api-not-responding';
 import constants from '#models/constants';
 import {
   IUniteLegale,
@@ -42,6 +43,7 @@ export const Tabs: React.FC<{
     // hide for asso without bilans
     !(
       isAssociation(uniteLegale) &&
+      !isAPINotResponding(uniteLegale.association.data) &&
       uniteLegale.association.data?.bilans &&
       uniteLegale.association.data?.bilans.length === 0
     );
