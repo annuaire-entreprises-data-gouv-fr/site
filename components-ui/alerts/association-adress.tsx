@@ -9,7 +9,10 @@ const AssociationAdressAlert: React.FC<{
   uniteLegale: IAssociation;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  if (isAPINotResponding(uniteLegale.association.data)) {
+  if (
+    !uniteLegale.association.data ||
+    isAPINotResponding(uniteLegale.association.data)
+  ) {
     return null;
   }
 
