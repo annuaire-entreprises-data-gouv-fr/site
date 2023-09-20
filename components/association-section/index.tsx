@@ -20,6 +20,29 @@ const AssociationSection: React.FC<{
   } = uniteLegale;
 
   if (isAPINotResponding(data)) {
+    if (data.errorType === 404) {
+      return (
+        <Section
+          title={`Répertoire National des Associations`}
+          sources={[EAdministration.MI]}
+        >
+          <Warning>
+            Cette structure est une association, mais aucune information n’a été
+            trouvée dans le <b>Répertoire National des Associations (RNA)</b>.
+            {!isTwoMonthOld(uniteLegale.dateCreation) && (
+              <>
+                <br />
+                Cette structure a été créée il y a moins de deux mois. Il est
+                donc possible qu’elle n’ait pas encore été publiée au RNA et
+                qu’elle le soit prochainement.
+              </>
+            )}
+          </Warning>
+          <TwoColumnTable body={[['N°RNA', formatIntFr(idAssociation)]]} />
+        </Section>
+      );
+    }
+
     return (
       <AdministrationNotResponding
         administration={data.administration}
@@ -107,41 +130,18 @@ const AssociationSection: React.FC<{
     ],
   ];
 
-  const notInRna = !data;
-
   return (
     <>
       <Section
         title={`Répertoire National des Associations`}
         sources={[EAdministration.MI]}
       >
-        {notInRna ? (
-          <>
-            <Warning>
-              Cette structure est une association, mais aucune information n’a
-              été trouvée dans le{' '}
-              <b>Répertoire National des Associations (RNA)</b>.
-              {!isTwoMonthOld(uniteLegale.dateCreation) && (
-                <>
-                  <br />
-                  Cette structure a été créée il y a moins de deux mois. Il est
-                  donc possible qu’elle n’ait pas encore été publiée au RNA et
-                  qu’elle le soit prochainement.
-                </>
-              )}
-            </Warning>
-            <TwoColumnTable body={[['N°RNA', formatIntFr(idAssociation)]]} />
-          </>
-        ) : (
-          <>
-            <p>
-              Cette structure est inscrite au{' '}
-              <b>Répertoire National des Associations (RNA)</b>, avec les
-              informations suivantes&nbsp;:
-            </p>
-            <TwoColumnTable body={lines} />
-          </>
-        )}
+        <p>
+          Cette structure est inscrite au{' '}
+          <b>Répertoire National des Associations (RNA)</b>, avec les
+          informations suivantes&nbsp;:
+        </p>
+        <TwoColumnTable body={lines} />
         {idAssociation && (
           <>
             <br />

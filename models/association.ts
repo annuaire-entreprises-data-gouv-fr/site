@@ -12,13 +12,24 @@ import {
 
 export const getAssociation = async (
   uniteLegale: IUniteLegale
-): Promise<IAPINotRespondingError | IDataAssociation> => {
+): Promise<IDataAssociation | IAPINotRespondingError> => {
   const rna = uniteLegale.association.idAssociation || '';
   const { siren } = uniteLegale;
 
   let data: IDataAssociation;
   try {
     data = await clientAssociation(siren, uniteLegale.siege.siret);
+
+    const adresseInconsistency = await verifyAdressConsistency(
+      siren,
+      uniteLegale.siege.adresse,
+      data.adresseSiege
+    );
+
+    return {
+      ...data,
+      adresseInconsistency,
+    };
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       logWarningInSentry('Id RNA not found', {
@@ -32,17 +43,6 @@ export const getAssociation = async (
     logErrorInSentry('Error in API RNA', { siren, details: e.toString() });
     return APINotRespondingFactory(EAdministration.DJEPVA, 500);
   }
-
-  const adresseInconsistency = await verifyAdressConsistency(
-    siren,
-    uniteLegale.siege.adresse,
-    data.adresseSiege
-  );
-
-  return {
-    ...data,
-    adresseInconsistency,
-  };
 };
 
 /**
