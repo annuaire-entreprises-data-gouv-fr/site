@@ -66,12 +66,12 @@ export const getFinancesFromSlug = async (slug: string): Promise<IFinances> => {
   const uniteLegale = await getUniteLegaleFromSlug(siren);
 
   if (isAssociation(uniteLegale)) {
+    const { data } = uniteLegale.association;
     return {
       uniteLegale,
       financesSociete: APINotRespondingFactory(EAdministration.MEF, 404),
       financesAssociation:
-        (!isAPINotResponding(uniteLegale.association.data) &&
-          uniteLegale.association.data?.bilans) ||
+        (!!data && !isAPINotResponding(data) && data?.bilans) ||
         APINotRespondingFactory(EAdministration.MI, 404),
     };
   }

@@ -5,9 +5,12 @@ import {
 } from '#models/etablissements-list';
 import { IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IEtatCivil } from '#models/immatriculation';
-import { isAssociationFromNatureJuridique } from '#utils/helpers';
-import { Siren, Siret } from '#utils/helpers';
-import { IdRna } from '#utils/helpers';
+import {
+  IdRna,
+  isAssociationFromNatureJuridique,
+  Siren,
+  Siret,
+} from '#utils/helpers';
 import { IAPINotRespondingError } from './api-not-responding';
 import { IBilanFinancierAssociation } from './donnees-financieres';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
@@ -109,7 +112,7 @@ export interface IUniteLegale extends IEtablissementsList {
   complements: IUniteLegaleComplements;
   association: {
     idAssociation: IdRna | string | null;
-    data: null | IAPINotRespondingError | IDataAssociation;
+    data: IAPINotRespondingError | IDataAssociation | null;
   };
   colter: {
     codeColter: string | null;

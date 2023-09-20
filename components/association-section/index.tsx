@@ -3,14 +3,41 @@ import Warning from '#components-ui/alerts/warning';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { Tag } from '#components-ui/tag';
+import AdministrationNotResponding from '#components/administration-not-responding';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
+import { isAPINotResponding } from '#models/api-not-responding';
 import { IAssociation } from '#models/index';
 import { formatDate, formatIntFr } from '#utils/helpers';
 import { isTwoMonthOld } from '#utils/helpers/checks';
-import { isAPINotResponding } from '#models/api-not-responding';
-import AdministrationNotResponding from '#components/administration-not-responding';
+
+const AssociationNotFound: React.FC<{
+  uniteLegale: IAssociation;
+}> = ({ uniteLegale }) => (
+  <Section
+    title={`Répertoire National des Associations`}
+    sources={[EAdministration.MI]}
+  >
+    <Warning>
+      Cette structure est une association, mais aucune information n’a été
+      trouvée dans le <b>Répertoire National des Associations (RNA)</b>.
+      {!isTwoMonthOld(uniteLegale.dateCreation) && (
+        <>
+          <br />
+          Cette structure a été créée il y a moins de deux mois. Il est donc
+          possible qu’elle n’ait pas encore été publiée au RNA et qu’elle le
+          soit prochainement.
+        </>
+      )}
+    </Warning>
+    <TwoColumnTable
+      body={[
+        ['N°RNA', formatIntFr(uniteLegale.association.idAssociation || '')],
+      ]}
+    />
+  </Section>
+);
 
 const AssociationSection: React.FC<{
   uniteLegale: IAssociation;
@@ -19,28 +46,13 @@ const AssociationSection: React.FC<{
     association: { idAssociation = '', data },
   } = uniteLegale;
 
+  if (!data) {
+    return <AssociationNotFound uniteLegale={uniteLegale} />;
+  }
+
   if (isAPINotResponding(data)) {
     if (data.errorType === 404) {
-      return (
-        <Section
-          title={`Répertoire National des Associations`}
-          sources={[EAdministration.MI]}
-        >
-          <Warning>
-            Cette structure est une association, mais aucune information n’a été
-            trouvée dans le <b>Répertoire National des Associations (RNA)</b>.
-            {!isTwoMonthOld(uniteLegale.dateCreation) && (
-              <>
-                <br />
-                Cette structure a été créée il y a moins de deux mois. Il est
-                donc possible qu’elle n’ait pas encore été publiée au RNA et
-                qu’elle le soit prochainement.
-              </>
-            )}
-          </Warning>
-          <TwoColumnTable body={[['N°RNA', formatIntFr(idAssociation)]]} />
-        </Section>
-      );
+      return <AssociationNotFound uniteLegale={uniteLegale} />;
     }
 
     return (
