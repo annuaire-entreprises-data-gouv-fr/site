@@ -1,3 +1,4 @@
+import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import {
   checkHasLabelsAndCertificates,
@@ -60,7 +61,7 @@ export const Tabs: React.FC<{
       pathPrefix: '/espace-agent/',
       noFollow: false,
       shouldDisplay: isSuperAgent(session),
-      width: '120px',
+      width: '110px',
     },
     {
       ficheType: FICHE.JUSTIFICATIFS,
