@@ -1,4 +1,4 @@
-const head = (title: string, description: string) => `
+const head = (canonical: string, title: string, description: string) => `
 <head>
   <title>${
     title ||
@@ -12,6 +12,7 @@ const head = (title: string, description: string) => `
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="robots" content="index">
+  <link rel="canonical" href="${canonical}" />
   <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
   <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml">
   <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon">
@@ -20,11 +21,16 @@ const head = (title: string, description: string) => `
   </head>
 `;
 
-export const renderPage = (body: string, title = '', description = '') => {
+export const renderPage = (
+  body: string,
+  canonical: string,
+  title = '',
+  description = ''
+) => {
   return `
   <!DOCTYPE html>
   <html lang="en">
-    ${head(title, description)}
+    ${head(canonical, title, description)}
     <body>
       <style>div.body-wrapper { margin-top:40px; margin-bottom:50px; } h1 { margin-top:20px; font-size: 1.8rem; } div.body-wrapper a:not(.fr-breadcrumb__link) { line-height:2.1rem; } .pagination > a { padding: 0 5px; margin:5px 10px; display: inline-block; }</style>
       <header role="banner" class="fr-header"><div class="fr-header__body"><div class="fr-container"><div class="fr-header__body-row"><div class="fr-header__brand fr-enlarge-link"><div class="fr-header__brand-top"><div class="fr-header__logo"><a href="/" title="République française" class=""><p class="fr-logo">République<br />française</p></a></div><div class="fr-header__navbar"></div></div></div><div class="fr-header__tools"><div class="fr-header__tools-links"><ul class="fr-links-group"><li><a href="/" class="fr-link">Rechercher une entreprise</a></li></ul></div></div></div></div></div></header>
