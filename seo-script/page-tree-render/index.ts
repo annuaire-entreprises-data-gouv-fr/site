@@ -41,7 +41,9 @@ const renderDepartementsPage = (departments: any[]) => {
     })
     .join('');
 
-  return renderPage(titleBlock + debBlock, title, description);
+  const canonical = 'https://annuaire-entreprises.data.gouv.fr/departements/';
+
+  return renderPage(titleBlock + debBlock, canonical, title, description);
 };
 
 const renderNafsPage = (dep: string, nafs: any[]) => {
@@ -76,7 +78,16 @@ const renderNafsPage = (dep: string, nafs: any[]) => {
     )
     .join('');
 
-  return renderPage(navBlock + titleBlock + nafsBlock, title, description);
+  const canonical = `https://annuaire-entreprises.data.gouv.fr/departements/${getUrlFromDepartement(
+    dep
+  )}/index.html`;
+
+  return renderPage(
+    navBlock + titleBlock + nafsBlock,
+    canonical,
+    title,
+    description
+  );
 };
 
 const renderResultsPage = (
@@ -92,7 +103,7 @@ const renderResultsPage = (
   const departementLabel = libelleFromDepartement(dep);
 
   const navBlock = renderNav([
-    ['Tous les départements', '/departements/deinx.html'],
+    ['Tous les départements', '/departements/index.html'],
     [departementLabel, `/departements/${depUrl}/index.html`],
     [labelNaf, '#title'],
   ]);
@@ -126,8 +137,13 @@ const renderResultsPage = (
     paginationBlock = `<br/><div>Autres pages de résultats :</div><div class="pagination">${paginationBlock}</div>`;
   }
 
+  const canonical = `https://annuaire-entreprises.data.gouv.fr/departements/${getUrlFromDepartement(
+    dep
+  )}/${naf}/${currentPage}.html`;
+
   return renderPage(
     navBlock + titleBlock + resultsBlock + paginationBlock,
+    canonical,
     title,
     description
   );
