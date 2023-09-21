@@ -3,9 +3,9 @@
 name: Recipe on staging
 
 on:
-  workflow_run:
-    workflows: ['Deploy - Staging']
-    types: [completed]
+  # workflow_run:
+  #   workflows: ['Deploy - Staging']
+  #   types: [completed]
   workflow_dispatch:
 
 env:
