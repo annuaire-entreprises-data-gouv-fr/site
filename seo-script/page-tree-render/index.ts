@@ -41,7 +41,8 @@ const renderDepartementsPage = (departments: any[]) => {
     })
     .join('');
 
-  const canonical = 'https://annuaire-entreprises.data.gouv.fr/departements/';
+  const canonical =
+    'https://annuaire-entreprises.data.gouv.fr/departements/index.html';
 
   return renderPage(titleBlock + debBlock, canonical, title, description);
 };
@@ -149,4 +150,4 @@ const renderResultsPage = (
   );
 };
 
-export { renderDepartementsPage, renderResultsPage, renderNafsPage };
+export { renderDepartementsPage, renderNafsPage, renderResultsPage };
