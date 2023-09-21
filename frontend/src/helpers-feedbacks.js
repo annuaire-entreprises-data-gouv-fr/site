@@ -40,17 +40,17 @@ function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
   window.sessionStorage.setItem(pvKey, parseInt(pageViewCount, 10) + 1);
 }
 
-// triggerModal('nps-modal', 2, '/');
-window.TallyConfig = {
-  formId: 'wMNx5k',
-  popup: {
-    emoji: {
-      text: '👋',
-      animation: 'wave',
-    },
-    open: {
-      trigger: 'time',
-      ms: 5000,
-    },
-  },
-};
+triggerModal('nps-modal', 2, '/');
+// window.TallyConfig = {
+//   formId: 'wMNx5k',
+//   popup: {
+//     emoji: {
+//       text: '👋',
+//       animation: 'wave',
+//     },
+//     open: {
+//       trigger: 'time',
+//       ms: 5000,
+//     },
+//   },
+// };
