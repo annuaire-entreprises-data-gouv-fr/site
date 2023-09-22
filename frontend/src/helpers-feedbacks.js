@@ -41,16 +41,3 @@ function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
 }
 
 triggerModal('nps-modal', 2, '/');
-// window.TallyConfig = {
-//   formId: 'wMNx5k',
-//   popup: {
-//     emoji: {
-//       text: '👋',
-//       animation: 'wave',
-//     },
-//     open: {
-//       trigger: 'time',
-//       ms: 5000,
-//     },
-//   },
-// };

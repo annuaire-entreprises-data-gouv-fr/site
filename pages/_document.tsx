@@ -1,5 +1,4 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document';
-import React from 'react';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 const manifest = (
   process.env.NODE_ENV === 'production'
@@ -126,8 +125,6 @@ class CustomDocument extends Document {
         </HeadToUse>
         <body>
           <Main />
-          <script async src="https://tally.so/widgets/embed.js" />
-
           {isProd && process.env.MATOMO_SITE_ID && (
             <script
               dangerouslySetInnerHTML={{
