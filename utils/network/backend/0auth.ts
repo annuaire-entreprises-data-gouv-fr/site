@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
 import constants from '#models/constants';
 import { logWarningInSentry } from '#utils/sentry';
-import httpClient, { httpGet } from '.';
+import httpClient, { httpGet } from '..';
 
 type IAccessToken = {
   data: {

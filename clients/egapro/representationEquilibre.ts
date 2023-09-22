@@ -4,8 +4,8 @@ import { IEgapro } from '#models/certifications/egapro';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 import {
-  IEgaproRepresentationResponse,
   IEgaproRepresentationItem,
+  IEgaproRepresentationResponse,
 } from './types';
 
 type IEgaproRepresentation = {

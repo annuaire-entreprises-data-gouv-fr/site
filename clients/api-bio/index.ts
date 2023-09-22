@@ -6,7 +6,7 @@ import {
 } from '#models/certifications/bio';
 import { Siren, formatAdresse, verifySiret } from '#utils/helpers';
 import { httpGet } from '#utils/network';
-import { IBioResponse, IBioItem } from './interface';
+import { IBioItem, IBioResponse } from './interface';
 
 /**
  * BIO
@@ -21,8 +21,8 @@ export const clientProfessionnelBio = async (
     params: { siret: siren, nb: 1500 },
   });
   const data = response.data as IBioResponse;
-  const msgNotFound = `No certifications bio found for : ${siren}`
-  
+  const msgNotFound = `No certifications bio found for : ${siren}`;
+
   if (!data.items || data.items.length === 0) {
     throw new HttpNotFound(msgNotFound);
   }

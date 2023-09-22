@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import routes from '#clients/routes';
 import constants from '#models/constants';
-import { httpClientOAuth } from '#utils/network/0auth';
+import { httpClientOAuth } from '#utils/network/backend/0auth';
 
 /**
  * Insee client

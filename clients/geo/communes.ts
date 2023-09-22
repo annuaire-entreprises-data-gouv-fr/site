@@ -50,4 +50,4 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
     );
 };
 
-export { clientCommunesByName, clientCommuneByCp };
+export { clientCommuneByCp, clientCommunesByName };

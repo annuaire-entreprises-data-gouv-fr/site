@@ -34,4 +34,4 @@ const mapToDomainObject = (
   });
 };
 
-export { clientDepartementsByName, clientDepartementByCode };
+export { clientDepartementByCode, clientDepartementsByName };
