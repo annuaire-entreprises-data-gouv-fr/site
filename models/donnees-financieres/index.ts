@@ -1,5 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
-import { clientBilansFinanciers } from '#clients/open-data-soft/bilans-financiers';
+import { clientBilansFinanciers } from '#clients/open-data-soft/clients/bilans-financiers';
 import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,

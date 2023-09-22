@@ -2,7 +2,7 @@ import routes from '#clients/routes';
 import { IAnnoncesBodacc } from '#models/annonces';
 import { Siren, formatDate } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
-import odsClient from '.';
+import odsFrontClient from '../front-ods-client';
 
 type IBodaccRecords = IBodaccA | IBodaccB | IBodaccC;
 
@@ -48,7 +48,7 @@ const clientBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
   const searchUrl = `${routes.bodacc.ods.search}&q=registre%3A${siren}&sort=dateparution&facet=publicationavis&facet=publicationavis_facette&facet=typeavis&facet=typeavis_lib&facet=familleavis&facet=familleavis_lib&facet=numerodepartement&facet=departement_nom_officiel`;
   const metaDataUrl = routes.bodacc.ods.metadata;
 
-  const response = await odsClient({ url: searchUrl }, metaDataUrl);
+  const response = await odsFrontClient(searchUrl, metaDataUrl);
 
   return {
     annonces: response.records.map(mapToDomainObject),

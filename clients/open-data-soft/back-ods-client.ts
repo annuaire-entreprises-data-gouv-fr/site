@@ -1,28 +1,9 @@
 import { AxiosRequestConfig } from 'axios';
 import { httpGet } from '#utils/network';
-
-export type IODSResponse = {
-  records: {
-    datasetid: string;
-    recordid: string;
-    fields: any;
-  }[];
-};
-
-export type IODSMetadata = {
-  metas: {
-    modified: string;
-    metadata_processed: string;
-    data_processed: string;
-  };
-};
-
-const extractLastModifiedDate = (metadata: IODSMetadata) => {
-  return metadata?.metas?.metadata_processed || null;
-};
+import { IODSResponse } from './types';
 
 /**
- * Get results for searchTerms from Sirene ouverte API
+ * Request ODS - Only from backend
  */
 const odsClient = async (
   search: { url: string; config?: AxiosRequestConfig<any> },
@@ -35,7 +16,7 @@ const odsClient = async (
 
   const results = (response.data || []) as IODSResponse;
 
-  const lastModified = extractLastModifiedDate(responseMetaData.data);
+  const lastModified = responseMetaData?.metas?.metadata_processed || null;
 
   return {
     records: results.records.map((record) => record.fields),

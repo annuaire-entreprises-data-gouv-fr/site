@@ -1,11 +1,11 @@
 import { HttpNotFound } from '#clients/exceptions';
-import { clientJOAFE } from '#clients/open-data-soft/journal-officiel-associations';
+import { clientJOAFE } from '#clients/open-data-soft/clients/journal-officiel-associations';
 import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import { IdRna, verifyIdRna, Siren } from '#utils/helpers';
+import { IdRna, Siren, verifyIdRna } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { IImmatriculation } from '.';
 import { NotAValidIdRnaError } from '..';

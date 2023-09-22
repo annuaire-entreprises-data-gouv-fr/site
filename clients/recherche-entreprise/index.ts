@@ -1,43 +1,43 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import {
-  etatFromEtatAdministratifInsee,
-  parseDateCreationInsee,
-  statuDiffusionFromStatutDiffusionInsee,
-} from '#utils/helpers/insee-variables';
 import constants from '#models/constants';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
 import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import {
-  createDefaultEtablissement,
-  createDefaultUniteLegale,
   IConventionCollective,
   IEtablissement,
   NotEnoughParamsException,
+  createDefaultEtablissement,
+  createDefaultUniteLegale,
 } from '#models/index';
 import { ISearchResult, ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
 import {
-  verifySiren,
-  formatFirstNames,
-  verifySiret,
-  parseIntWithDefaultValue,
-  extractSirenFromSiret,
   extractNicFromSiret,
+  extractSirenFromSiret,
+  formatFirstNames,
+  parseIntWithDefaultValue,
+  verifySiren,
+  verifySiret,
 } from '#utils/helpers';
 import {
   getConventionCollectives,
   libelleFromCategoriesJuridiques,
   libelleFromCodeNAFWithoutNomenclature,
 } from '#utils/helpers/formatting/labels';
+import {
+  etatFromEtatAdministratifInsee,
+  parseDateCreationInsee,
+  statuDiffusionFromStatutDiffusionInsee,
+} from '#utils/helpers/insee-variables';
 import { httpGet } from '#utils/network';
 import {
-  ISearchResponse,
-  IResult,
-  ISiege,
-  IMatchingEtablissement,
   IDirigeant,
+  IMatchingEtablissement,
+  IResult,
+  ISearchResponse,
+  ISiege,
 } from './interface';
 
 type ClientSearchRechercheEntreprise = {

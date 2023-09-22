@@ -1,5 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
-import { clientEntrepreneurSpectacles } from '#clients/open-data-soft/entrepreneur-spectacles';
+import { clientEntrepreneurSpectacles } from '#clients/open-data-soft/clients/entrepreneur-spectacles';
 import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,

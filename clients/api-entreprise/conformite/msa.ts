@@ -1,7 +1,7 @@
 import { HttpUnauthorizedError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
-import { Siren, Siret } from '#utils/helpers';
+import { Siret } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 
 export type IAPIEntrepriseConformiteMSA = {

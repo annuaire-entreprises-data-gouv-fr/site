@@ -1,19 +1,18 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import AnnoncesAssociationSection from '#components/annonces-section/annonces-association';
-import AnnoncesBodaccSection from '#components/annonces-section/bodacc';
+import AnnoncesBodacc from '#components/annonces-section/bodacc';
 import { ComptesAssociationSection } from '#components/annonces-section/comptes-association';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import {
-  IAnnoncesBodacc,
   IAnnoncesAssociation,
+  IAnnoncesBodacc,
   IComptesAssociation,
+  getAnnoncesFromSlug,
 } from '#models/annonces';
-import { getAnnoncesFromSlug } from '#models/annonces';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { isAssociation, IUniteLegale } from '#models/index';
+import { IUniteLegale, isAssociation } from '#models/index';
 import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
@@ -31,7 +30,6 @@ interface IProps extends IPropsWithMetadata {
 
 const Annonces: NextPageWithLayout<IProps> = ({
   annoncesAssociation,
-  bodacc,
   comptesAssociation,
   metadata: { session },
   uniteLegale,
@@ -53,7 +51,7 @@ const Annonces: NextPageWithLayout<IProps> = ({
           uniteLegale={uniteLegale}
           session={session}
         />
-        <AnnoncesBodaccSection uniteLegale={uniteLegale} bodacc={bodacc} />
+        <AnnoncesBodacc uniteLegale={uniteLegale} />
         {isAssociation(uniteLegale) && (
           <>
             {annoncesAssociation && (
@@ -78,14 +76,14 @@ const Annonces: NextPageWithLayout<IProps> = ({
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
-    const { uniteLegale, bodacc, comptesAssociation, annoncesAssociation } =
+    const { uniteLegale, comptesAssociation, annoncesAssociation } =
       await getAnnoncesFromSlug(slug);
     return {
       props: {
         annoncesAssociation,
-        bodacc,
         comptesAssociation,
         uniteLegale,
+        metadata: { useReact: true },
       },
     };
   }

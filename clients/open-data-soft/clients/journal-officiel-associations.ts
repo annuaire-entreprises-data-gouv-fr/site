@@ -1,8 +1,8 @@
 import routes from '#clients/routes';
 import { IAnnoncesAssociation, IComptesAssociation } from '#models/annonces';
-import { formatDateYear, IdRna, Siren } from '#utils/helpers';
+import { IdRna, Siren } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
-import odsClient from '.';
+import odsClient from '../back-ods-client';
 
 type IJournalOfficielAssociationRecord = {
   association_type: string; // 'assoLoi1901';
@@ -106,4 +106,4 @@ const clientDCA = async (
   };
 };
 
-export { clientJOAFE, clientDCA };
+export { clientDCA, clientJOAFE };
