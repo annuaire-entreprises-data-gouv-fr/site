@@ -4,6 +4,7 @@ import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down'
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { INPI } from '#components/administrations';
 import { Section } from '#components/section';
+import { LoadingSection } from '#components/section/loading';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import {
@@ -11,12 +12,11 @@ import {
   isAPINotResponding,
 } from '#models/api-not-responding';
 import { IBeneficiaire, IImmatriculationRNE } from '#models/immatriculation';
-import { formatDate, formatDatePartial } from '#utils/helpers';
-import { Siren } from '#utils/helpers';
+import { Siren, formatDatePartial } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
 
 type IProps = {
-  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError;
+  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError | null;
   siren: Siren;
 };
 
@@ -29,6 +29,16 @@ const BeneficiairesSection: React.FC<IProps> = ({
   immatriculationRNE,
   siren,
 }) => {
+  if (immatriculationRNE === null) {
+    return (
+      <LoadingSection
+        id="beneficiaires"
+        title={`Bénéficiaire effectif`}
+        description="Nous récupérons les informations sur les bénéficiaires effectifs dans le Registre National des Entreprises"
+        sources={[EAdministration.INPI]}
+      />
+    );
+  }
   if (isAPINotResponding(immatriculationRNE)) {
     if (immatriculationRNE.errorType === 404) {
       return null;

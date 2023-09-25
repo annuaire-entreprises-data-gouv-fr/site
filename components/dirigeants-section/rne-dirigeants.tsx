@@ -4,6 +4,7 @@ import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down'
 import AdministrationNotResponding from '#components/administration-not-responding';
 import { INPI } from '#components/administrations';
 import { Section } from '#components/section';
+import { LoadingSection } from '#components/section/loading';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import {
@@ -15,7 +16,7 @@ import {
   IImmatriculationRNE,
   IPersonneMorale,
 } from '#models/immatriculation';
-import { formatDatePartial, formatIntFr, Siren } from '#utils/helpers';
+import { Siren, formatDatePartial, formatIntFr } from '#utils/helpers';
 
 /**
  * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts
@@ -35,16 +36,24 @@ export const isPersonneMorale = (
 };
 
 type IProps = {
-  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError;
+  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError | null;
   siren: Siren;
 };
 
 /**
  * Dirigeants section
- * @param param0
- * @returns
  */
 const DirigeantsSection: React.FC<IProps> = ({ immatriculationRNE, siren }) => {
+  if (immatriculationRNE === null) {
+    return (
+      <LoadingSection
+        id="rne-dirigeants"
+        title={`Dirigeant`}
+        sources={[EAdministration.INPI]}
+        description="Nous récupérons les informations sur les dirigeants dans le Registre National des Entreprises…"
+      />
+    );
+  }
   if (isAPINotResponding(immatriculationRNE)) {
     if (immatriculationRNE.errorType === 404) {
       return null;

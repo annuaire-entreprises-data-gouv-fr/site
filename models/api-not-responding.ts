@@ -15,11 +15,11 @@ export const APINotRespondingFactory = (
   };
 };
 
-export const isAPINotResponding = (
-  toBeDetermined: any | IAPINotRespondingError
-): toBeDetermined is IAPINotRespondingError => {
+export function isAPINotResponding<T>(
+  toBeDetermined: Exclude<T, null> | IAPINotRespondingError
+): toBeDetermined is IAPINotRespondingError {
   if ((toBeDetermined as IAPINotRespondingError).errorType) {
     return true;
   }
   return false;
-};
+}

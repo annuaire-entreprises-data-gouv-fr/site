@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import BeneficiairesSection from '#components/dirigeants-section/beneficiaires';
 import DirigeantsEntrepriseIndividuelleSection from '#components/dirigeants-section/insee-dirigeant';
@@ -9,11 +8,9 @@ import Meta from '#components/meta';
 import { DirigeantsNonDiffusibleSection } from '#components/non-diffusible';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import {
-  getDirigeantsWithUniteLegaleFromSlug,
-  IDirigeants,
-} from '#models/dirigeants';
+import { IDirigeants } from '#models/dirigeants';
 import { estDiffusible } from '#models/statut-diffusion';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
@@ -21,15 +18,16 @@ import {
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { isAgent } from '#utils/session';
+import useImmmatriculationRNE from 'hooks/use-immatriculation-RNE';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, IDirigeants {}
 
 const DirigeantsPage: NextPageWithLayout<IProps> = ({
   uniteLegale,
-  immatriculationRNE,
   metadata: { session },
 }) => {
+  const immatriculationRNE = useImmmatriculationRNE(uniteLegale);
   return (
     <>
       <Meta
@@ -87,7 +85,13 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
     return {
-      props: await getDirigeantsWithUniteLegaleFromSlug(slug),
+      props: {
+        uniteLegale: await getUniteLegaleFromSlug(slug, {}),
+        immatriculationRNE: null,
+        metadata: {
+          useReact: true,
+        },
+      },
     };
   }
 );
