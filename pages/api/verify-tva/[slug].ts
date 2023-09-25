@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { tvaIntracommunautaire } from '#models/tva';
 import logErrorInSentry from '#utils/sentry';
 import { withAPM } from '#utils/sentry/tracing';
+import withVerifySessionApiRoute from '#utils/session/with-verify-session-api-route';
 
 const verify = async (
   { query: { slug } }: NextApiRequest,
@@ -16,4 +17,4 @@ const verify = async (
   }
 };
 
-export default withAPM(verify);
+export default withAPM(withVerifySessionApiRoute(verify));

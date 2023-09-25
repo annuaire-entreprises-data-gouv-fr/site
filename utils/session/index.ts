@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import type { IronSession, IronSessionOptions } from 'iron-session';
 
 declare module 'iron-session' {
@@ -7,6 +8,7 @@ declare module 'iron-session' {
 export type ISessionPrivilege = 'unkown' | 'agent' | 'super-agent';
 
 export type ISession = {
+  uuid?: string;
   user?: {
     email?: string;
     familyName?: string;
@@ -24,6 +26,13 @@ export const sessionOptions: IronSessionOptions = {
   },
 };
 
+export async function identifySession(session: IronSession) {
+  if (!hasSessionId(session)) {
+    session.uuid = randomUUID();
+    return session.save();
+  }
+}
+
 export const setAgentSession = async (
   email: string,
   familyName: string,
@@ -39,6 +48,16 @@ export const setAgentSession = async (
     privilege,
   };
   await session.save();
+};
+
+/**
+ * Verify if session has a uuid
+ *
+ * @param session
+ * @returns
+ */
+export const hasSessionId = (session: ISession | null) => {
+  return !!session?.uuid;
 };
 
 /**
