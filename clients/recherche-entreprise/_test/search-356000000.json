@@ -1,0 +1,372 @@
+{
+  "args": {
+    "page": 1,
+    "searchTerms": "356000000",
+    "searchFilterParams": ""
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 1,
+    "results": [
+      {
+        "siren": "356000000",
+        "oldSiren": "356000000",
+        "siege": {
+          "siren": "356000000",
+          "siret": "35600000000048",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": null,
+          "nic": "00048",
+          "dateCreation": "2003-01-01",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2014-04-29",
+          "dateFermeture": "",
+          "adresse": "DIRECTION GENERALE DE LA POSTE 9 RUE DU COLONEL PIERRE AVIA 75015 PARIS 15",
+          "adressePostale": "LA POSTE, DIRECTION GENERALE DE LA POSTE 9 RUE DU COLONEL PIERRE AVIA 75015 PARIS 15",
+          "codePostal": "75015",
+          "commune": "PARIS 15",
+          "activitePrincipale": "53.10Z",
+          "libelleActivitePrincipale": "Activités de poste dans le cadre d’une obligation de service universel (53.10Z)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": null,
+          "longitude": null,
+          "conventionsCollectives": [
+            {
+              "siret": "35600000000048",
+              "idcc": "5516",
+              "CdTN": false,
+              "title": "Convention d'entreprise La Poste - France Télécom"
+            }
+          ]
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "LA POSTE (DIRECTION GENERALE DE LA POSTE)",
+        "chemin": "la-poste-direction-generale-de-la-poste-356000000",
+        "natureJuridique": "5510",
+        "libelleNatureJuridique": "SA nationale à conseil d'administration",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "356000000",
+              "siret": "35600000000048",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00048",
+              "dateCreation": "2003-01-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2014-04-29",
+              "dateFermeture": "",
+              "adresse": "DIRECTION GENERALE DE LA POSTE 9 RUE DU COLONEL PIERRE AVIA 75015 PARIS 15",
+              "adressePostale": "LA POSTE, DIRECTION GENERALE DE LA POSTE 9 RUE DU COLONEL PIERRE AVIA 75015 PARIS 15",
+              "codePostal": "75015",
+              "commune": "PARIS 15",
+              "activitePrincipale": "53.10Z",
+              "libelleActivitePrincipale": "Activités de poste dans le cadre d’une obligation de service universel (53.10Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": null,
+              "longitude": null,
+              "conventionsCollectives": [
+                {
+                  "siret": "35600000000048",
+                  "idcc": "5516",
+                  "CdTN": false,
+                  "title": "Convention d'entreprise La Poste - France Télécom"
+                }
+              ]
+            }
+          ],
+          "open": [
+            {
+              "siren": "356000000",
+              "siret": "35600000000048",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00048",
+              "dateCreation": "2003-01-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2014-04-29",
+              "dateFermeture": "",
+              "adresse": "DIRECTION GENERALE DE LA POSTE 9 RUE DU COLONEL PIERRE AVIA 75015 PARIS 15",
+              "adressePostale": "LA POSTE, DIRECTION GENERALE DE LA POSTE 9 RUE DU COLONEL PIERRE AVIA 75015 PARIS 15",
+              "codePostal": "75015",
+              "commune": "PARIS 15",
+              "activitePrincipale": "53.10Z",
+              "libelleActivitePrincipale": "Activités de poste dans le cadre d’une obligation de service universel (53.10Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": null,
+              "longitude": null,
+              "conventionsCollectives": [
+                {
+                  "siret": "35600000000048",
+                  "idcc": "5516",
+                  "CdTN": false,
+                  "title": "Convention d'entreprise La Poste - France Télécom"
+                }
+              ]
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 12791,
+          "usePagination": true,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "53.10Z",
+        "libelleActivitePrincipale": "Activités de poste dans le cadre d’une obligation de service universel",
+        "dateCreation": "1991-01-01",
+        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateDebutActivite": "",
+        "trancheEffectif": "53",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "GE",
+        "anneeTrancheEffectif": "2020",
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": true,
+          "estRge": false,
+          "estOrganismeFormation": true,
+          "estSocieteMission": false,
+          "estQualiopi": true,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": [
+          {
+            "siret": "35600000000048",
+            "idcc": "5516",
+            "CdTN": false,
+            "title": "Convention d'entreprise La Poste - France Télécom"
+          }
+        ],
+        "matchingEtablissements": [],
+        "nombreEtablissements": 12791,
+        "nombreEtablissementsOuverts": 9379,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "BAUDRY",
+            "prenom": "Irène",
+            "role": "Administrateur représentant du personnel",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "DE MOLLERAT DU JEU (CHAPRON)",
+            "prenom": "Virginie",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "CHEVET-DEHAIL",
+            "prenom": "Stéphane",
+            "role": "Administrateur représentant du personnel",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "FERNANDES",
+            "prenom": "Virgine",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "FIMBEL",
+            "prenom": "Florence",
+            "role": "Administrateur représentant du personnel",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "GEORGHIOU",
+            "prenom": "Jean",
+            "role": "Commissaire aux comptes suppléant",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "GERVAIS",
+            "prenom": "Franck",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "HASPOT",
+            "prenom": "Franck",
+            "role": "Administrateur représentant du personnel",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "JOSEPH",
+            "prenom": "Sylvie",
+            "role": "Administrateur représentant du personnel",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "FLEURENCE (LEGAIN)",
+            "prenom": "Isabelle",
+            "role": "Administrateur représentant du personnel",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "LEJBOWICZ",
+            "prenom": "Corinne",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "LEMOINE",
+            "prenom": "Philippe",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "MALRIEU (MAIROT)",
+            "prenom": "Françoise",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "MAREUSE",
+            "prenom": "Olivier",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "ESTABLIE (MAYENOBE)",
+            "prenom": "Catherine",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "REIS",
+            "prenom": "Hugo",
+            "role": "Administrateur représentant du personnel",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "DE BAILLIENCOURT DIT COURCOL (RICHARTE)",
+            "prenom": "Marie-pierre",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "SAINTOYANT",
+            "prenom": "Antoine",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "SICHEL",
+            "prenom": "Olivier",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "WAHL",
+            "prenom": "Philippe",
+            "role": "Président, Directeur général",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "WAYSAND",
+            "prenom": "Claire",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "",
+            "prenom": "",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "siren": "652044371",
+            "denomination": "Salustro Reydel",
+            "role": "Commissaire aux comptes suppléant"
+          },
+          {
+            "siren": "775726417",
+            "denomination": "KPMG S.A.",
+            "role": "Commissaire aux comptes titulaire"
+          },
+          {
+            "siren": "784824153",
+            "denomination": "MAZARS",
+            "role": "Commissaire aux comptes titulaire"
+          }
+        ]
+      }
+    ]
+  }
+}

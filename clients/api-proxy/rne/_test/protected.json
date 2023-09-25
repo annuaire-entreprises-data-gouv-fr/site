@@ -1,0 +1,43 @@
+{
+  "args": [
+    "908595879"
+  ],
+  "result": {
+    "siren": "908595879",
+    "identite": {
+      "denomination": "SEVERNAYA",
+      "dateImmatriculation": "2021-12-27",
+      "dateDebutActiv": "",
+      "dateRadiation": "",
+      "dateCessationActivite": "",
+      "isPersonneMorale": true,
+      "dateClotureExercice": "",
+      "dureePersonneMorale": "99 ans",
+      "capital": "1 000 EUR (fixe)",
+      "libelleNatureJuridique": "SAS, société par actions simplifiée",
+      "natureEntreprise": "Commerciale"
+    },
+    "dirigeants": [
+      {
+        "nom": "Estournet",
+        "prenom": "PIERRE",
+        "role": "",
+        "dateNaissancePartial": "1985-12",
+        "dateNaissanceFull": ""
+      }
+    ],
+    "beneficiaires": [
+      {
+        "type": "",
+        "nom": "ESTOURNET",
+        "prenoms": "PIERRE",
+        "dateNaissancePartial": "1985-12",
+        "nationalite": "Française"
+      }
+    ],
+    "observations": [],
+    "metadata": {
+      "isFallback": false
+    }
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "args": {
+    "page": 1,
+    "searchTerms": "300025764",
+    "searchFilterParams": ""
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 1,
+    "results": [
+      {
+        "siren": "300025764",
+        "oldSiren": "300025764",
+        "siege": {
+          "siren": "300025764",
+          "siret": "30002576400048",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": "[NON-DIFFUSIBLE]",
+          "nic": "00048",
+          "dateCreation": "2019-12-23",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2019-12-23",
+          "dateFermeture": "",
+          "adresse": "35238 RENNES",
+          "adressePostale": "[NON-DIFFUSIBLE] [NON-DIFFUSIBLE] [NON-DIFFUSIBLE], 35238 RENNES",
+          "codePostal": "[NON-DIFFUSIBLE]",
+          "commune": "RENNES",
+          "activitePrincipale": "68.20A",
+          "libelleActivitePrincipale": "Location de logements (68.20A)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": null,
+          "longitude": null,
+          "conventionsCollectives": []
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "partiellement diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "[NON-DIFFUSIBLE]",
+        "chemin": "300025764",
+        "natureJuridique": "1000",
+        "libelleNatureJuridique": "Entrepreneur individuel",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "300025764",
+              "siret": "30002576400048",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": "[NON-DIFFUSIBLE]",
+              "nic": "00048",
+              "dateCreation": "2019-12-23",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2019-12-23",
+              "dateFermeture": "",
+              "adresse": "35238 RENNES",
+              "adressePostale": "[NON-DIFFUSIBLE] [NON-DIFFUSIBLE] [NON-DIFFUSIBLE], 35238 RENNES",
+              "codePostal": "[NON-DIFFUSIBLE]",
+              "commune": "RENNES",
+              "activitePrincipale": "68.20A",
+              "libelleActivitePrincipale": "Location de logements (68.20A)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": null,
+              "longitude": null,
+              "conventionsCollectives": []
+            }
+          ],
+          "open": [
+            {
+              "siren": "300025764",
+              "siret": "30002576400048",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": "[NON-DIFFUSIBLE]",
+              "nic": "00048",
+              "dateCreation": "2019-12-23",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2019-12-23",
+              "dateFermeture": "",
+              "adresse": "35238 RENNES",
+              "adressePostale": "[NON-DIFFUSIBLE] [NON-DIFFUSIBLE] [NON-DIFFUSIBLE], 35238 RENNES",
+              "codePostal": "[NON-DIFFUSIBLE]",
+              "commune": "RENNES",
+              "activitePrincipale": "68.20A",
+              "libelleActivitePrincipale": "Location de logements (68.20A)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": null,
+              "longitude": null,
+              "conventionsCollectives": []
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 2,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "68.20A",
+        "libelleActivitePrincipale": "Location de logements",
+        "dateCreation": "1981-10-01",
+        "dateDerniereMiseAJour": "2020-04-08T15:04:45",
+        "dateDebutActivite": "",
+        "trancheEffectif": "NN",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": null,
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": true,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": [],
+        "matchingEtablissements": [],
+        "nombreEtablissements": 2,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "[NON-DIFFUSIBLE]",
+            "prenom": "[non-diffusible]",
+            "role": null,
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          }
+        ]
+      }
+    ]
+  }
+}

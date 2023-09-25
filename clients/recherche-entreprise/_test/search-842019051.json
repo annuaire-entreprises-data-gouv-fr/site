@@ -1,0 +1,184 @@
+{
+  "args": {
+    "page": 1,
+    "searchTerms": "842019051",
+    "searchFilterParams": ""
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 1,
+    "results": [
+      {
+        "siren": "842019051",
+        "oldSiren": "842019051",
+        "siege": {
+          "siren": "842019051",
+          "siret": "84201905100015",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": null,
+          "nic": "00015",
+          "dateCreation": "2018-08-02",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2018-12-26",
+          "dateFermeture": "",
+          "adresse": "MANAKIN PRODUCTION 129 RUE LAMARCK 75018 PARIS 18",
+          "adressePostale": "MANAKIN PRODUCTION 129 RUE LAMARCK 75018 PARIS 18",
+          "codePostal": "75018",
+          "commune": "PARIS 18",
+          "activitePrincipale": "90.01Z",
+          "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": "48.891022",
+          "longitude": "2.329849",
+          "conventionsCollectives": [
+            {
+              "siret": "84201905100015",
+              "idcc": "1285",
+              "CdTN": true,
+              "idKali": "KALICONT000005635964",
+              "title": "Convention collective nationale pour les entreprises artistiques et culturelles du 1er janvier 1984. Etendue par arrêté du 4 janvier 1994 JORF 26 janvier 1994."
+            }
+          ]
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "MANAKIN PRODUCTION",
+        "chemin": "manakin-production-842019051",
+        "natureJuridique": "9220",
+        "libelleNatureJuridique": "Association déclarée",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "842019051",
+              "siret": "84201905100015",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00015",
+              "dateCreation": "2018-08-02",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2018-12-26",
+              "dateFermeture": "",
+              "adresse": "MANAKIN PRODUCTION 129 RUE LAMARCK 75018 PARIS 18",
+              "adressePostale": "MANAKIN PRODUCTION 129 RUE LAMARCK 75018 PARIS 18",
+              "codePostal": "75018",
+              "commune": "PARIS 18",
+              "activitePrincipale": "90.01Z",
+              "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.891022",
+              "longitude": "2.329849",
+              "conventionsCollectives": [
+                {
+                  "siret": "84201905100015",
+                  "idcc": "1285",
+                  "CdTN": true,
+                  "idKali": "KALICONT000005635964",
+                  "title": "Convention collective nationale pour les entreprises artistiques et culturelles du 1er janvier 1984. Etendue par arrêté du 4 janvier 1994 JORF 26 janvier 1994."
+                }
+              ]
+            }
+          ],
+          "open": [
+            {
+              "siren": "842019051",
+              "siret": "84201905100015",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00015",
+              "dateCreation": "2018-08-02",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2018-12-26",
+              "dateFermeture": "",
+              "adresse": "MANAKIN PRODUCTION 129 RUE LAMARCK 75018 PARIS 18",
+              "adressePostale": "MANAKIN PRODUCTION 129 RUE LAMARCK 75018 PARIS 18",
+              "codePostal": "75018",
+              "commune": "PARIS 18",
+              "activitePrincipale": "90.01Z",
+              "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.891022",
+              "longitude": "2.329849",
+              "conventionsCollectives": [
+                {
+                  "siret": "84201905100015",
+                  "idcc": "1285",
+                  "CdTN": true,
+                  "idKali": "KALICONT000005635964",
+                  "title": "Convention collective nationale pour les entreprises artistiques et culturelles du 1er janvier 1984. Etendue par arrêté du 4 janvier 1994 JORF 26 janvier 1994."
+                }
+              ]
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 1,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "90.01Z",
+        "libelleActivitePrincipale": "Arts du spectacle vivant",
+        "dateCreation": "2018-08-02",
+        "dateDerniereMiseAJour": "2022-08-29T10:29:06",
+        "dateDebutActivite": "",
+        "trancheEffectif": "01",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2020",
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": true,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": true,
+          "statutEntrepreneurSpectacle": "valide",
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": "W751245606",
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": [
+          {
+            "siret": "84201905100015",
+            "idcc": "1285",
+            "CdTN": true,
+            "idKali": "KALICONT000005635964",
+            "title": "Convention collective nationale pour les entreprises artistiques et culturelles du 1er janvier 1984. Etendue par arrêté du 4 janvier 1994 JORF 26 janvier 1994."
+          }
+        ],
+        "matchingEtablissements": [],
+        "nombreEtablissements": 1,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "args": {
+    "page": 1,
+    "searchTerms": "908595879",
+    "searchFilterParams": ""
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 1,
+    "results": [
+      {
+        "siren": "908595879",
+        "oldSiren": "908595879",
+        "siege": {
+          "siren": "908595879",
+          "siret": "90859587900010",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": null,
+          "nic": "00010",
+          "dateCreation": "2022-01-01",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2022-01-01",
+          "dateFermeture": "",
+          "adresse": "10 RUE DE PENTHIEVRE 75008 PARIS 8",
+          "adressePostale": "10 RUE DE PENTHIEVRE 75008 PARIS 8",
+          "codePostal": "75008",
+          "commune": "PARIS 8",
+          "activitePrincipale": "70.21Z",
+          "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": "48.873057",
+          "longitude": "2.316605",
+          "conventionsCollectives": [
+            {
+              "siret": "90859587900010",
+              "idcc": "1486",
+              "CdTN": true,
+              "idKali": "KALICONT000005635173",
+              "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
+            }
+          ]
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "SEVERNAYA",
+        "chemin": "severnaya-908595879",
+        "natureJuridique": "5710",
+        "libelleNatureJuridique": "SAS, société par actions simplifiée",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "908595879",
+              "siret": "90859587900010",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00010",
+              "dateCreation": "2022-01-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2022-01-01",
+              "dateFermeture": "",
+              "adresse": "10 RUE DE PENTHIEVRE 75008 PARIS 8",
+              "adressePostale": "10 RUE DE PENTHIEVRE 75008 PARIS 8",
+              "codePostal": "75008",
+              "commune": "PARIS 8",
+              "activitePrincipale": "70.21Z",
+              "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.873057",
+              "longitude": "2.316605",
+              "conventionsCollectives": [
+                {
+                  "siret": "90859587900010",
+                  "idcc": "1486",
+                  "CdTN": true,
+                  "idKali": "KALICONT000005635173",
+                  "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
+                }
+              ]
+            }
+          ],
+          "open": [
+            {
+              "siren": "908595879",
+              "siret": "90859587900010",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00010",
+              "dateCreation": "2022-01-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2022-01-01",
+              "dateFermeture": "",
+              "adresse": "10 RUE DE PENTHIEVRE 75008 PARIS 8",
+              "adressePostale": "10 RUE DE PENTHIEVRE 75008 PARIS 8",
+              "codePostal": "75008",
+              "commune": "PARIS 8",
+              "activitePrincipale": "70.21Z",
+              "libelleActivitePrincipale": "Conseil en relations publiques et communication (70.21Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.873057",
+              "longitude": "2.316605",
+              "conventionsCollectives": [
+                {
+                  "siret": "90859587900010",
+                  "idcc": "1486",
+                  "CdTN": true,
+                  "idKali": "KALICONT000005635173",
+                  "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
+                }
+              ]
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 1,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "70.21Z",
+        "libelleActivitePrincipale": "Conseil en relations publiques et communication",
+        "dateCreation": "2022-01-01",
+        "dateDerniereMiseAJour": "2022-07-13T10:40:59",
+        "dateDebutActivite": "",
+        "trancheEffectif": null,
+        "anneeCategorieEntreprise": null,
+        "categorieEntreprise": null,
+        "anneeTrancheEffectif": null,
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": [
+          {
+            "siret": "90859587900010",
+            "idcc": "1486",
+            "CdTN": true,
+            "idKali": "KALICONT000005635173",
+            "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
+          }
+        ],
+        "matchingEtablissements": [],
+        "nombreEtablissements": 1,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "ESTOURNET",
+            "prenom": "Pierre",
+            "role": "Président",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          }
+        ]
+      }
+    ]
+  }
+}

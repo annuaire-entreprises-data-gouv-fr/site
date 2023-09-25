@@ -1,0 +1,188 @@
+{
+  "args": {
+    "page": 1,
+    "searchTerms": "88087814500015",
+    "searchFilterParams": ""
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 1,
+    "results": [
+      {
+        "siren": "880878145",
+        "oldSiren": "880878145",
+        "siege": {
+          "siren": "880878145",
+          "siret": "88087814500015",
+          "oldSiret": "",
+          "etatAdministratif": "fermé",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": null,
+          "nic": "00015",
+          "dateCreation": "2020-01-13",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2022-10-22",
+          "dateFermeture": "",
+          "adresse": "128 RUE LA BOETIE 75008 PARIS 8",
+          "adressePostale": "128 RUE LA BOETIE 75008 PARIS 8",
+          "codePostal": "75008",
+          "commune": "PARIS 8",
+          "activitePrincipale": "62.02A",
+          "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": "48.870938",
+          "longitude": "2.305916",
+          "conventionsCollectives": []
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "cessée",
+        "nomComplet": "GANYMEDE",
+        "chemin": "ganymede-880878145",
+        "natureJuridique": "5710",
+        "libelleNatureJuridique": "SAS, société par actions simplifiée",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "880878145",
+              "siret": "88087814500015",
+              "oldSiret": "",
+              "etatAdministratif": "fermé",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00015",
+              "dateCreation": "2020-01-13",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2022-10-22",
+              "dateFermeture": "",
+              "adresse": "128 RUE LA BOETIE 75008 PARIS 8",
+              "adressePostale": "128 RUE LA BOETIE 75008 PARIS 8",
+              "codePostal": "75008",
+              "commune": "PARIS 8",
+              "activitePrincipale": "62.02A",
+              "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.870938",
+              "longitude": "2.305916",
+              "conventionsCollectives": []
+            }
+          ],
+          "open": [],
+          "unknown": [],
+          "closed": [
+            {
+              "siren": "880878145",
+              "siret": "88087814500015",
+              "oldSiret": "",
+              "etatAdministratif": "fermé",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00015",
+              "dateCreation": "2020-01-13",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2022-10-22",
+              "dateFermeture": "",
+              "adresse": "128 RUE LA BOETIE 75008 PARIS 8",
+              "adressePostale": "128 RUE LA BOETIE 75008 PARIS 8",
+              "codePostal": "75008",
+              "commune": "PARIS 8",
+              "activitePrincipale": "62.02A",
+              "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.870938",
+              "longitude": "2.305916",
+              "conventionsCollectives": []
+            }
+          ],
+          "nombreEtablissementsOuverts": 0,
+          "nombreEtablissements": 1,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "62.02A",
+        "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques",
+        "dateCreation": "2020-01-13",
+        "dateDerniereMiseAJour": "2022-11-16T04:20:08",
+        "dateDebutActivite": "",
+        "trancheEffectif": "01",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2020",
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": [],
+        "matchingEtablissements": [
+          {
+            "siren": "880878145",
+            "siret": "88087814500015",
+            "oldSiret": "",
+            "etatAdministratif": "fermé",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": null,
+            "denomination": null,
+            "nic": "00015",
+            "dateCreation": "2020-01-13",
+            "dateDerniereMiseAJour": "",
+            "dateDebutActivite": "2022-10-22",
+            "dateFermeture": "",
+            "adresse": "128 RUE LA BOETIE 75008 PARIS 8",
+            "adressePostale": "128 RUE LA BOETIE 75008 PARIS 8",
+            "codePostal": "75008",
+            "commune": "PARIS 8",
+            "activitePrincipale": "62.02A",
+            "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
+            "trancheEffectif": "",
+            "libelleTrancheEffectif": "",
+            "latitude": "48.870938",
+            "longitude": "2.305916",
+            "conventionsCollectives": []
+          }
+        ],
+        "nombreEtablissements": 1,
+        "nombreEtablissementsOuverts": 0,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "JOUPPE",
+            "prenom": "Xavier",
+            "role": "Président, Liquidateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          }
+        ]
+      }
+    ]
+  }
+}

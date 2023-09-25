@@ -7,30 +7,17 @@
     "incremental": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
     "paths": {
-      "#clients/*": [
-        "./clients/*"
-      ],
-      "#components/*": [
-        "./components/*"
-      ],
-      "#components-ui/*": [
-        "./components-ui/*"
-      ],
-      "#models/*": [
-        "./models/*"
-      ],
-      "#utils/*": [
-        "./utils/*"
-      ]
+      "#clients/*": ["./clients/*"],
+      "#components/*": ["./components/*"],
+      "#components-ui/*": ["./components-ui/*"],
+      "#models/*": ["./models/*"],
+      "#utils/*": ["./utils/*"],
+      "#clients-mocks/*": ["./clients-mocks/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
@@ -42,16 +29,6 @@
       }
     ]
   },
-  "exclude": [
-    "node_modules",
-    "cypress",
-    "cypress.config.ts",
-    "stories"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ]
+  "exclude": ["node_modules", "cypress", "cypress.config.ts", "stories"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
 }

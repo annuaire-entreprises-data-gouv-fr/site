@@ -1,0 +1,166 @@
+{
+  "args": {
+    "page": 1,
+    "searchTerms": "528163777",
+    "searchFilterParams": ""
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 1,
+    "results": [
+      {
+        "siren": "528163777",
+        "oldSiren": "528163777",
+        "siege": {
+          "siren": "528163777",
+          "siret": "52816377700030",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": null,
+          "nic": "00030",
+          "dateCreation": "2013-10-18",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2023-03-31",
+          "dateFermeture": "",
+          "adresse": "5-9 5 RUE MORAND 93400 SAINT-OUEN-SUR-SEINE",
+          "adressePostale": "5-9 5 RUE MORAND 93400 SAINT-OUEN-SUR-SEINE",
+          "codePostal": "93400",
+          "commune": "SAINT-OUEN-SUR-SEINE",
+          "activitePrincipale": "43.22B",
+          "libelleActivitePrincipale": "Travaux d’installation d’équipements thermiques et de climatisation (43.22B)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": "48.903483",
+          "longitude": "2.347786",
+          "conventionsCollectives": []
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "GROUPE SOLUTION ENERGIE POLE TECHNIQUE (G.S.E.P.T.)",
+        "chemin": "groupe-solution-energie-pole-technique-g-s-e-p-t-528163777",
+        "natureJuridique": "5710",
+        "libelleNatureJuridique": "SAS, société par actions simplifiée",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "528163777",
+              "siret": "52816377700030",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00030",
+              "dateCreation": "2013-10-18",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2023-03-31",
+              "dateFermeture": "",
+              "adresse": "5-9 5 RUE MORAND 93400 SAINT-OUEN-SUR-SEINE",
+              "adressePostale": "5-9 5 RUE MORAND 93400 SAINT-OUEN-SUR-SEINE",
+              "codePostal": "93400",
+              "commune": "SAINT-OUEN-SUR-SEINE",
+              "activitePrincipale": "43.22B",
+              "libelleActivitePrincipale": "Travaux d’installation d’équipements thermiques et de climatisation (43.22B)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.903483",
+              "longitude": "2.347786",
+              "conventionsCollectives": []
+            }
+          ],
+          "open": [
+            {
+              "siren": "528163777",
+              "siret": "52816377700030",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00030",
+              "dateCreation": "2013-10-18",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2023-03-31",
+              "dateFermeture": "",
+              "adresse": "5-9 5 RUE MORAND 93400 SAINT-OUEN-SUR-SEINE",
+              "adressePostale": "5-9 5 RUE MORAND 93400 SAINT-OUEN-SUR-SEINE",
+              "codePostal": "93400",
+              "commune": "SAINT-OUEN-SUR-SEINE",
+              "activitePrincipale": "43.22B",
+              "libelleActivitePrincipale": "Travaux d’installation d’équipements thermiques et de climatisation (43.22B)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.903483",
+              "longitude": "2.347786",
+              "conventionsCollectives": []
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 4,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "71.12B",
+        "libelleActivitePrincipale": "Ingénierie, études techniques",
+        "dateCreation": "2010-10-01",
+        "dateDerniereMiseAJour": "2023-05-17T19:36:21",
+        "dateDebutActivite": "",
+        "trancheEffectif": "11",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2020",
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": true,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": [],
+        "matchingEtablissements": [],
+        "nombreEtablissements": 4,
+        "nombreEtablissementsOuverts": 2,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "LEVY",
+            "prenom": "Ilan",
+            "role": "Directeur général",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "siren": "878719756",
+            "denomination": "GSE VD",
+            "role": "Président"
+          }
+        ]
+      }
+    ]
+  }
+}

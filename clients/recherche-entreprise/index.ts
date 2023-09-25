@@ -1,5 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import stubClient from '#clients/stub-client';
 import constants from '#models/constants';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
@@ -341,4 +342,16 @@ const mapToEtablissement = (
   };
 };
 
-export default clientSearchRechercheEntreprise;
+export function simplifyParams(a: ClientSearchRechercheEntreprise) {
+  return {
+    page: a.page,
+    searchTerms: a.searchTerms,
+    searchFilterParams: a.searchFilterParams?.toApiURI() ?? '',
+  };
+}
+
+export default stubClient({
+  client: clientSearchRechercheEntreprise,
+  fileUrl: import.meta.url,
+  simplifyParams,
+});

@@ -7,10 +7,10 @@ import {
   setupCache,
 } from 'axios-cache-interceptor';
 import constants from '#models/constants';
-import { mockStore } from 'clients-mocks';
 import errorInterceptor from './error-interceptor';
 import { addStartTimeInterceptor, logInterceptor } from './log-interceptor';
 import redisStorage from './redis/redis-storage';
+import { mockStore } from '#clients-mocks/index';
 
 export const CACHE_TIMEOUT = 1000 * 60 * 15;
 

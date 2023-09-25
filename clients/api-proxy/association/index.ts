@@ -2,7 +2,8 @@ import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import constants from '#models/constants';
 import { IDataAssociation } from '#models/index';
-import { formatAdresse, IdRna, Siren } from '#utils/helpers';
+import { IdRna, Siren, formatAdresse } from '#utils/helpers';
+import stubClient from '../../stub-client';
 import { clientAPIProxy } from '../client';
 import { IAssociationResponse } from './types';
 
@@ -128,4 +129,9 @@ const mapToDomainObject = (
   };
 };
 
-export { clientAssociation };
+const stubbedClient = stubClient({
+  client: clientAssociation,
+  fileUrl: import.meta.url,
+});
+
+export { stubbedClient as clientAssociation };
