@@ -164,4 +164,4 @@ jobs:
 
           - If the changes concerns the model (eg. API changed, missing field, type of data),
             you need to check if it is a breaking change, and correct the code if is.
-            When the code is fixed, you can update the snapshot locally.
+            When the code is fixed, you can update the snapshot locally."
