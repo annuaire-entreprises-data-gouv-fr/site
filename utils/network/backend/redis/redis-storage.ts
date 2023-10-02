@@ -44,3 +44,6 @@ const redisStorage = (cache_timeout: number) =>
   });
 
 export default redisStorage;
+export function disconnect() {
+  return redisClient?.disconnect();
+}
