@@ -19,7 +19,7 @@ const config = {
   moduleNameMapper: {
     ...getTsConfigBasePaths(),
   },
-  setupFilesAfterEnv: ['<rootDir>/setup-jest.js']
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.ts']
 };
 
 module.exports = config;
