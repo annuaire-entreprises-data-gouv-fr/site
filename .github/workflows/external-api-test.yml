@@ -33,11 +33,22 @@ jobs:
     name: 'Install dependencies'
     runs-on: ubuntu-latest
     steps:
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
       - uses: ./.github/actions/install-dependencies
 
   testExternalAPIs:
     name: Test external APIs
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/setup-node
-      - run: npm run test:api-clients
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Load node_modules
+        uses: ./.github/actions/load-dependencies
+
+      - name: Launch jest tests
+        run: npm run test:api-clients

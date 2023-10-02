@@ -1,0 +1,14 @@
+name: 'Load dependencies'
+description: 'Load node dependencies previously cached with the action "install-dependencies"'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Load node modules
+      uses: actions/cache@v3
+      id: restore-dependencies
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: ./node_modules
+        key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
