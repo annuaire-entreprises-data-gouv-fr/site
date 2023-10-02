@@ -208,4 +208,26 @@ jobs:
         run: sudo apt-get install -y redis-tools redis-server
 
       - name: Run API client tests
-        run: npm run test:api-client
+        run: npm run test:api-clients
+
+      - name: '[IMPORTANT] Manual action required'
+        if: ${{ failure() }}
+        run: |
+          echo "The API client tests failed.
+
+          We tests external APIs, and ensure there is no regression compared to 
+          previous successful runs stored in snapshots.
+
+          If the test failed, it means that the response returned by the API client
+          is not the same as the one stored in the snapshot. 
+
+          You need to analyse the diff in the logs of the job to decide what to do :
+
+          - If the changes concerns only the data, and not the model (eg. company name changed), 
+            you need to update the snapshot locally by running the following command :
+
+            npm run test:api-clients -- -u
+
+          - If the changes concerns the model (eg. API changed, missing field, type of data),
+            you need to check if it is a breaking change, and correct the code if is.
+            When the code is fixed, you can update the snapshot locally.
