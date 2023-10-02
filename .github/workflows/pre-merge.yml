@@ -182,3 +182,30 @@ jobs:
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
       - name: Run typescript check
         run: npx tsc --noEmit
+
+  testAPIClient:
+    name: Test API client
+    runs-on: ubuntu-latest
+    needs: [dependencies]
+    env:
+      END2END_MOCKING: disabled
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Load node modules
+        uses: actions/cache@v3
+        id: restore-dependencies
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install redis
+        run: sudo apt-get install -y redis-tools redis-server
+
+      - name: Run API client tests
+        run: npm run test:api-client

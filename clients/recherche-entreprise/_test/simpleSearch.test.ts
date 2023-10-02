@@ -2,8 +2,12 @@ import path from 'path';
 import SearchFilterParams from '#models/search-filter-params';
 import clientSearchRechercheEntreprise, { simplifyParams } from '..';
 
-describe('clientSearchRechercheEntreprise : simple search with searchTerms', () => {
+describe.only('clientSearchRechercheEntreprise : simple search with searchTerms', () => {
   [
+    // We use the commented lines to generate snapshots for
+    // E2E testing.
+    // Hovewer, we don't test them for regression because the results
+    // changes often.
     '200054781',
     '300025764',
     '351556394',
@@ -34,6 +38,11 @@ function itShouldMatchSnapshotForSearch(searchTerms: string) {
       },
     ] as const;
     const result = await clientSearchRechercheEntreprise(...args);
+
+    result.results.forEach((searchResult) => {
+      searchResult.dateDerniereMiseAJour = '2023-09-21T03:34:50';
+    });
+
     expect(
       JSON.stringify({ args: simplifyParams(...args), result }, null, 2)
     ).toMatchFile(path.join(__dirname, `./search-${searchTerms}.json`));

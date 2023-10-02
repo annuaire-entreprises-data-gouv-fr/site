@@ -1,4 +1,5 @@
 import path from 'path';
+import { isHttpError } from '#clients/exceptions';
 import { Siren } from '#utils/helpers';
 import { clientUniteLegaleInsee } from '..';
 
@@ -26,10 +27,18 @@ function expectClientToMatchSnapshotWithSiren(siren: Siren) {
         useCache: false,
       },
     ] as const;
-    const result = await clientUniteLegaleInsee(...args);
-
-    expect(JSON.stringify({ args: args[0], result }, null, 2)).toMatchFile(
-      path.join(__dirname, `./siren-${siren}.json`)
-    );
+    try {
+      const result = await clientUniteLegaleInsee(...args);
+      expect(JSON.stringify({ args: args[0], result }, null, 2)).toMatchFile(
+        path.join(__dirname, `./siren-${siren}.json`)
+      );
+    } catch (e) {
+      if (isHttpError(e)) {
+        console.warn('Could not test sirene client (api not responding)');
+        return;
+      } else {
+        throw e;
+      }
+    }
   });
 }

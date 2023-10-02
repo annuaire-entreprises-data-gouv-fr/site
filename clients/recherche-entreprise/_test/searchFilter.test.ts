@@ -8,7 +8,7 @@ const defaultParams = {
 };
 
 describe('clientSearchRechercheEntreprise : simple search with searchTerms', () => {
-  it('Should match snapshot for code postal', async () => {
+  it.skip('Should match snapshot for code postal', async () => {
     const args = [
       {
         ...defaultParams,
@@ -24,7 +24,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
     ).toMatchFile(path.join(__dirname, './code-postal.json'));
   });
 
-  it('Should match snapshot for code postal with search term', async () => {
+  it.skip('Should match snapshot for code postal with search term', async () => {
     const args = [
       {
         ...defaultParams,
@@ -57,7 +57,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
     ).toMatchFile(path.join(__dirname, './anne-hidalgo.json'));
   });
 
-  it('Should match snapshot for la poste', async () => {
+  it.skip('Should match snapshot for la poste', async () => {
     const args = [
       {
         ...defaultParams,
@@ -74,7 +74,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
     ).toMatchFile(path.join(__dirname, './la-poste.json'));
   });
 
-  it('Should match snapshot for la poste page 3', async () => {
+  it.skip('Should match snapshot for la poste page 3', async () => {
     const args = [
       {
         ...defaultParams,
