@@ -1,0 +1,32 @@
+name: 'Install node dependencies'
+description: 'Install node dependencies and cache them for future use'
+inputs:
+  node-version:
+    description: 'Node.js version'
+    required: true
+    default: '18.x'
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: Use Node.js ${{ inputs.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+    - name: Cache node modules
+      uses: actions/cache@v3
+      id: restore-dependencies
+      env:
+        cache-name: cache-node-modules
+      with:
+        # Cache node_modules. To cache global, you may try ~/.npm
+        path: ./node_modules
+        key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-cache-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+    - name: Install dependencies
+      shell: bash
+      run: npm i

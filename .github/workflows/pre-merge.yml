@@ -30,29 +30,11 @@ jobs:
   dependencies:
     name: 'Install dependencies'
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v3
+      - uses: ./.github/actions/install-dependencies
         with:
           node-version: ${{ env.node-version }}
-      - name: Cache node modules
-        uses: actions/cache@v3
-        id: restore-dependencies
-        env:
-          cache-name: cache-node-modules
-        with:
-          # Cache node_modules. To cache global, you may try ~/.npm
-          path: ./node_modules
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-cache-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Install dependencies
-        run: npm i
-
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -60,18 +42,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v3
+      - uses: ./.github/actions/setup-node
         with:
           node-version: ${{ env.node-version }}
-      - name: Load node modules
-        uses: actions/cache@v3
-        id: restore-dependencies
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
       - name: Run linter
         run: npm run lint
 
@@ -82,18 +55,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v3
+      - uses: ./.github/actions/setup-node
         with:
           node-version: ${{ env.node-version }}
-      - name: Load node modules
-        uses: actions/cache@v3
-        id: restore-dependencies
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install redis
         run: sudo apt-get install -y redis-tools redis-server
@@ -116,19 +80,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v3
+      - uses: ./.github/actions/setup-node
         with:
           node-version: ${{ env.node-version }}
-      - name: Load node modules
-        uses: actions/cache@v3
-        id: restore-dependencies
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
-
       - name: Run unit tests
         run: |
           npm run test:unit
@@ -140,7 +94,6 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v3
-
       - name: Load cached build
         uses: actions/cache@v3
         id: restore-build
@@ -168,18 +121,9 @@ jobs:
     needs: [dependencies]
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v3
+      - uses: ./.github/actions/setup-node
         with:
           node-version: ${{ env.node-version }}
-      - name: Load node modules
-        uses: actions/cache@v3
-        id: restore-dependencies
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
       - name: Run typescript check
         run: npx tsc --noEmit
 
@@ -191,19 +135,9 @@ jobs:
       END2END_MOCKING: disabled
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v3
+      - uses: ./.github/actions/setup-node
         with:
           node-version: ${{ env.node-version }}
-      - name: Load node modules
-        uses: actions/cache@v3
-        id: restore-dependencies
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
-
       - name: Install redis
         run: sudo apt-get install -y redis-tools redis-server
 
