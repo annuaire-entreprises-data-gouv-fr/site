@@ -46,7 +46,3 @@ export class HttpForbiddenError extends HttpError {
     super(message, 403);
   }
 }
-
-export const isHttpError = (e: any): e is HttpError => {
-  return e instanceof HttpError;
-};

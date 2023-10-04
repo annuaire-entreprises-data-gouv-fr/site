@@ -21,7 +21,6 @@
     "test:end2end:open:mock": "END2END_MOCKING=enabled run-p dev test:end2end:open",
     "test:end2end:run": "cypress run",
     "test:end2end:open": "cypress open",
-    "test:recipe-staging": "cypress open --config baseUrl=https://staging.annuaire-entreprises.data.gouv.fr video=false",
     "test:unit": "jest --runInBand --testPathIgnorePatterns=clients",
     "test:api-clients": "jest clients",
     "lint": "next lint",

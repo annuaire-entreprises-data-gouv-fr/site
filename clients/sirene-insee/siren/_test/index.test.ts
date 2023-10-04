@@ -1,5 +1,5 @@
 import path from 'path';
-import { isHttpError } from '#clients/exceptions';
+import { HttpServerError, HttpTimeoutError } from '#clients/exceptions';
 import { Siren } from '#utils/helpers';
 import { clientUniteLegaleInsee } from '..';
 
@@ -33,7 +33,7 @@ function expectClientToMatchSnapshotWithSiren(siren: Siren) {
         path.join(__dirname, `./siren-${siren}.json`)
       );
     } catch (e) {
-      if (isHttpError(e)) {
+      if (e instanceof HttpServerError || e instanceof HttpTimeoutError) {
         console.warn('Could not test sirene client (api not responding)');
         return;
       } else {

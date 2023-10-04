@@ -1,4 +1,4 @@
-import { isHttpError } from '#clients/exceptions';
+import { HttpServerError, HttpTimeoutError } from '#clients/exceptions';
 import { clientAllEtablissementsInsee } from '..';
 
 describe('clientAllEtablissementsInsee', () => {
@@ -53,11 +53,10 @@ function expectClientToMatchSnapshotWithSiren(siren: string, page = 1) {
         )
       );
     } catch (e) {
-      if (isHttpError(e)) {
+      if (e instanceof HttpServerError || e instanceof HttpTimeoutError) {
         console.warn('Could not test siret client (api not responding)');
         return;
       } else {
-        throw e;
       }
     }
   });
