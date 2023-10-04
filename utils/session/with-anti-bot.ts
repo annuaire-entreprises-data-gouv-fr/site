@@ -1,7 +1,6 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import { logWarningInSentry } from '#utils/sentry';
-import { getScope } from '#utils/server-side-props-helper/error-handler';
 import { ISession, sessionOptions } from '.';
 
 /**
@@ -19,8 +18,9 @@ import { ISession, sessionOptions } from '.';
 export function withAntiBot(handler: NextApiHandler) {
   async function verifySession(req: NextApiRequest, res: NextApiResponse) {
     if (!userVisitedAPageRecently(req.session)) {
-      const scope = getScope(req, '');
-      logWarningInSentry('Antibot activated for API route', scope);
+      logWarningInSentry('Antibot activated for API route', {
+        details: req.url,
+      });
 
       res.status(401);
       res.send('Unauthorized');
