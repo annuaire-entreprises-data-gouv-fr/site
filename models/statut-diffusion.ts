@@ -105,17 +105,16 @@ export const getEtablissementName = (
 const formatAdresseForDiffusion = (
   estDiffusible: boolean,
   adresse: string,
-  commune: string,
-  codePostal: string
+  commune: string
 ) => {
   if (estDiffusible) {
     return adresse || 'Adresse inconnue';
   }
 
-  if (!commune && !codePostal) {
+  if (!commune) {
     return defaultNonDiffusiblePlaceHolder;
   }
-  return nonDiffusibleDataFormatter(`${codePostal} ${commune}`);
+  return nonDiffusibleDataFormatter(commune);
 };
 
 /**
@@ -128,8 +127,7 @@ export const getAdresseUniteLegale = (
   session: ISession | null,
   postale = false
 ) => {
-  const { adressePostale, adresse, commune, codePostal } =
-    uniteLegale?.siege || {};
+  const { adressePostale, adresse, commune } = uniteLegale?.siege || {};
 
   const shouldDiff = canSeeNonDiffusible(session)
     ? true
@@ -138,8 +136,7 @@ export const getAdresseUniteLegale = (
   return formatAdresseForDiffusion(
     shouldDiff,
     postale ? adressePostale : adresse,
-    commune,
-    codePostal
+    commune
   );
 };
 
@@ -153,7 +150,7 @@ export const getAdresseEtablissement = (
   session: ISession | null,
   postale = false
 ) => {
-  const { adressePostale, adresse, commune, codePostal } = etablissement || {};
+  const { adressePostale, adresse, commune } = etablissement || {};
 
   const shouldDiff = canSeeNonDiffusible(session)
     ? true
@@ -162,32 +159,6 @@ export const getAdresseEtablissement = (
   return formatAdresseForDiffusion(
     shouldDiff,
     postale ? adressePostale : adresse,
-    commune,
-    codePostal
+    commune
   );
-};
-
-/**
- * Return adresse depending on diffusibility status (https://www.insee.fr/fr/information/6683782)
- * @param uniteLegale
- * @returns
- */
-export const getCoordsEtablissement = (etablissement: IEtablissement) => {
-  const defaultLat = '47.394144';
-  const defaultLong = '0.68484';
-
-  const { latitude = defaultLat, longitude = defaultLong } =
-    etablissement || {};
-
-  if (!estDiffusible(etablissement)) {
-    try {
-      const long = parseFloat(longitude).toFixed(2);
-      const lat = parseFloat(latitude).toFixed(2);
-      return [long, lat];
-    } catch {
-      return [defaultLong, defaultLat];
-    }
-  }
-
-  return [etablissement.longitude, etablissement.latitude];
 };

@@ -10,9 +10,9 @@ import {
   agregateTripleFields,
   formatFirstNames,
   formatNameFull,
+  isEntrepreneurIndividuelFromNatureJuridique,
   Siren,
   Siret,
-  isEntrepreneurIndividuelFromNatureJuridique,
 } from '#utils/helpers';
 import {
   libelleFromCategoriesJuridiques,

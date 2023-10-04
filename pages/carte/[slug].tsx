@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import Info from '#components-ui/alerts/info';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import MapEtablissement from '#components/map/map-etablissement';
@@ -48,28 +47,29 @@ const EtablissementMapPage: NextPageWithLayout<IProps> = ({
           etablissement={etablissement}
           title="Géolocalisation de l’établissement"
         />
-        {!estDiffusible(etablissement) && (
+        {!estDiffusible(etablissement) ? (
           <Info>
             Cette structure est non-diffusible. <br />
             Son adresse complète n’est pas publique, mais sa commune de
             domiciliation est :{' '}
             {getAdresseEtablissement(etablissement, session)}.
-            <br />
-            Le curseur ci-dessous <b>n’est pas placé</b> sur l’adresse réelle.
           </Info>
-        )}
-        <br />
-        {etablissement.latitude && etablissement.longitude ? (
-          <div className="map-container">
-            <MapEtablissement etablissement={etablissement} />
-          </div>
         ) : (
-          <i>
-            Nous n’avons pas réussi à déterminer la géolocalisation de cet
-            établissement.
-          </i>
+          <>
+            <br />
+            {etablissement.latitude && etablissement.longitude ? (
+              <div className="map-container">
+                <MapEtablissement etablissement={etablissement} />
+              </div>
+            ) : (
+              <i>
+                Nous n’avons pas réussi à déterminer la géolocalisation de cet
+                établissement.
+              </i>
+            )}
+            <br />
+          </>
         )}
-        <br />
       </>
     </div>
     <style jsx>

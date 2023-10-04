@@ -1,6 +1,7 @@
 import { clientBanGeoLoc } from '#clients/base-adresse';
 import logErrorInSentry from '#utils/sentry';
 import { IEtablissement } from '.';
+import { estDiffusible } from './statut-diffusion';
 
 export interface IGeoLoc {
   lat: string;
@@ -14,13 +15,11 @@ export interface IGeoLoc {
  */
 export const getGeoLoc = async (etablissement: IEtablissement) => {
   try {
-    return await clientBanGeoLoc(etablissement.adresse);
+    if (estDiffusible(etablissement) && etablissement.adresse) {
+      return await clientBanGeoLoc(etablissement.adresse);
+    }
+    return { lat: '', long: '' };
   } catch (e: any) {
-    logErrorInSentry('Error in API BAN', {
-      siren: etablissement.siren,
-      details: JSON.stringify(e.message),
-    });
-
     return { lat: '', long: '' };
   }
 };
