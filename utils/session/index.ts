@@ -7,6 +7,7 @@ declare module 'iron-session' {
 export type ISessionPrivilege = 'unkown' | 'agent' | 'super-agent';
 
 export type ISession = {
+  lastVisitTimestamp?: number;
   user?: {
     email?: string;
     familyName?: string;
@@ -23,6 +24,11 @@ export const sessionOptions: IronSessionOptions = {
     secure: process.env.NODE_ENV === 'production',
   },
 };
+
+export async function setVisitTimestamp(session: IronSession) {
+  session.lastVisitTimestamp = new Date().getTime();
+  return session.save();
+}
 
 export const setAgentSession = async (
   email: string,
