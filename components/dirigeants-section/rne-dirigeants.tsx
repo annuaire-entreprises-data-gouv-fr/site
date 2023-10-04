@@ -7,6 +7,7 @@ import { Section } from '#components/section';
 import { LoadingSection } from '#components/section/loading';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
+import { IAPILoading, isAPILoading } from '#models/api-loading';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -36,7 +37,10 @@ export const isPersonneMorale = (
 };
 
 type IProps = {
-  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError | null;
+  immatriculationRNE:
+    | IImmatriculationRNE
+    | IAPINotRespondingError
+    | IAPILoading;
   siren: Siren;
 };
 
@@ -44,7 +48,7 @@ type IProps = {
  * Dirigeants section
  */
 const DirigeantsSection: React.FC<IProps> = ({ immatriculationRNE, siren }) => {
-  if (immatriculationRNE === null) {
+  if (isAPILoading(immatriculationRNE)) {
     return (
       <LoadingSection
         id="rne-dirigeants"

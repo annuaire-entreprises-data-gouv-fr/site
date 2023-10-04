@@ -11,6 +11,7 @@ import {
   IComptesAssociation,
   getAnnoncesFromSlug,
 } from '#models/annonces';
+import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale, isAssociation } from '#models/index';
 import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
@@ -22,9 +23,9 @@ import {
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
-  annoncesAssociation: IAnnoncesAssociation | IAPINotRespondingError | null;
-  bodacc: IAnnoncesBodacc | IAPINotRespondingError;
-  comptesAssociation: IComptesAssociation | IAPINotRespondingError | null;
+  annoncesAssociation: IAnnoncesAssociation | IAPINotRespondingError;
+  bodacc: IAnnoncesBodacc | IAPINotRespondingError | IAPILoading;
+  comptesAssociation: IComptesAssociation | IAPINotRespondingError;
   uniteLegale: IUniteLegale;
 }
 

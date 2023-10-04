@@ -12,6 +12,7 @@ import { LoadingSection } from '#components/section/loading';
 import { FullTable } from '#components/table/full';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
+import { IAPILoading, isAPILoading } from '#models/api-loading';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -21,7 +22,7 @@ import { IUniteLegale } from '#models/index';
 import { formatDate, formatIntFr } from '#utils/helpers';
 
 type IProps = {
-  immatriculation: IImmatriculationRNE | IAPINotRespondingError | null;
+  immatriculation: IImmatriculationRNE | IAPINotRespondingError | IAPILoading;
   uniteLegale: IUniteLegale;
 };
 
@@ -29,7 +30,7 @@ const ImmatriculationRNE: React.FC<IProps> = ({
   immatriculation,
   uniteLegale,
 }) => {
-  if (immatriculation === null) {
+  if (isAPILoading(immatriculation)) {
     return (
       <LoadingSection
         title="Inscription au RNE"

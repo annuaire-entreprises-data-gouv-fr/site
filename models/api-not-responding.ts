@@ -1,4 +1,5 @@
 import { EAdministration } from './administrations';
+import { IAPILoading } from './api-loading';
 
 export interface IAPINotRespondingError {
   administration: EAdministration;
@@ -16,7 +17,7 @@ export const APINotRespondingFactory = (
 };
 
 export function isAPINotResponding<T>(
-  toBeDetermined: Exclude<T, null> | IAPINotRespondingError
+  toBeDetermined: Exclude<T, IAPILoading> | IAPINotRespondingError
 ): toBeDetermined is IAPINotRespondingError {
   if ((toBeDetermined as IAPINotRespondingError).errorType) {
     return true;

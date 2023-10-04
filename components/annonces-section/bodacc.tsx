@@ -11,6 +11,11 @@ import { EAdministration } from '#models/administrations';
 import { IAnnoncesBodacc } from '#models/annonces';
 import { getAnnoncesBodaccFromSlug } from '#models/annonces/bodacc';
 import {
+  APILoadingFactory,
+  IAPILoading,
+  isAPILoading,
+} from '#models/api-loading';
+import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
@@ -22,8 +27,8 @@ const AnnoncesBodacc: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const [bodacc, setBodacc] = useState<
-    IAnnoncesBodacc | IAPINotRespondingError | null
-  >(null);
+    IAnnoncesBodacc | IAPINotRespondingError | IAPILoading
+  >(APILoadingFactory());
   useEffect(() => {
     const get = async () => {
       const response = await getAnnoncesBodaccFromSlug(
@@ -39,9 +44,9 @@ const AnnoncesBodacc: React.FC<{
 
 const AnnoncesBodaccSection: React.FC<{
   uniteLegale: IUniteLegale;
-  bodacc: IAnnoncesBodacc | IAPINotRespondingError | null;
+  bodacc: IAnnoncesBodacc | IAPINotRespondingError | IAPILoading;
 }> = ({ uniteLegale, bodacc }) => {
-  if (!bodacc) {
+  if (isAPILoading(bodacc)) {
     return (
       <LoadingSection
         title="Annonces BODACC"

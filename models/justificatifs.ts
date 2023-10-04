@@ -10,12 +10,16 @@ import {
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { verifySiren } from '#utils/helpers';
 import { IUniteLegale, isAssociation } from '.';
+import { IAPILoading } from './api-loading';
 import { IImmatriculationRNE } from './immatriculation';
 
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;
   immatriculationJOAFE: IImmatriculationJOAFE | IAPINotRespondingError;
-  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError | null;
+  immatriculationRNE:
+    | IImmatriculationRNE
+    | IAPINotRespondingError
+    | IAPILoading;
 }
 
 const getJustificatifs = async (slug: string) => {

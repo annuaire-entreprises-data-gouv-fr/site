@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { APILoadingFactory, IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { IUniteLegale } from '#models/index';
@@ -7,8 +8,8 @@ import httpFrontClient from '#utils/network/frontend';
 const RNE_ROUTE = '/api/rne';
 export const useImmmatriculationRNE = (uniteLegale: IUniteLegale) => {
   const [immatriculationRNE, setImmatriculationRNE] = useState<
-    IImmatriculationRNE | IAPINotRespondingError | null
-  >(null);
+    IImmatriculationRNE | IAPINotRespondingError | IAPILoading
+  >(APILoadingFactory());
 
   useEffect(() => {
     const fetchDonneesRestreintes = async () => {

@@ -1,5 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import { INPI, INSEE, MI } from '#components/administrations';
+import { isAPILoading } from '#models/api-loading';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { IDirigeants } from '#models/dirigeants';
 import { isServicePublic } from '#models/index';
@@ -54,7 +55,10 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
   if (inseeDirigeant) {
     summaries.push(<a href="#insee-dirigeant">{inseeDirigeant}</a>);
   }
-  if (immatriculationRNE !== null && !isAPINotResponding(immatriculationRNE)) {
+  if (
+    !isAPILoading(immatriculationRNE) &&
+    !isAPINotResponding(immatriculationRNE)
+  ) {
     const dirigeantsCount = (immatriculationRNE?.dirigeants || []).length;
     summaries.push(
       <a href="#rne-dirigeants">
@@ -83,7 +87,7 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
     } else if (isServicePublic(uniteLegale)) {
       return <NoDirigeantServicePublic />;
     } else if (
-      immatriculationRNE === null ||
+      isAPILoading(immatriculationRNE) ||
       (isAPINotResponding(immatriculationRNE) &&
         !(immatriculationRNE instanceof HttpNotFound))
     ) {

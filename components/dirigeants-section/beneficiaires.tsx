@@ -7,6 +7,7 @@ import { Section } from '#components/section';
 import { LoadingSection } from '#components/section/loading';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
+import { IAPILoading, isAPILoading } from '#models/api-loading';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -16,7 +17,10 @@ import { Siren, formatDatePartial } from '#utils/helpers';
 import AdministrationNotResponding from '../administration-not-responding';
 
 type IProps = {
-  immatriculationRNE: IImmatriculationRNE | IAPINotRespondingError | null;
+  immatriculationRNE:
+    | IImmatriculationRNE
+    | IAPINotRespondingError
+    | IAPILoading;
   siren: Siren;
 };
 
@@ -29,7 +33,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
   immatriculationRNE,
   siren,
 }) => {
-  if (immatriculationRNE === null) {
+  if (isAPILoading(immatriculationRNE)) {
     return (
       <LoadingSection
         id="beneficiaires"
