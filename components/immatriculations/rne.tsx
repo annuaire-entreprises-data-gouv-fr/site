@@ -7,7 +7,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';
-import { APISection } from '#components/section/API-section';
+import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
@@ -22,59 +22,71 @@ type IProps = {
   uniteLegale: IUniteLegale;
 };
 
+const ImmatriculationLinks = ({
+  uniteLegale,
+  siteLink,
+}: {
+  uniteLegale: IUniteLegale;
+  siteLink?: string;
+}) => (
+  <>
+    <PrintNever>
+      <p>
+        Pour accéder aux données contenues dans un extrait d’immatriculation
+        (équivalent de <b>l’extrait KBIS ou D1</b>), vous pouvez soit
+        télécharger le{' '}
+        <b>
+          justificatif d’immatriculation au Registre National des Entreprises
+          (RNE)
+        </b>
+        , soit consulter la fiche complète sur le site de l’
+        <INPI />
+        &nbsp;:
+      </p>
+      <div className="layout-center">
+        <ButtonLink
+          nofollow={true}
+          to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
+        >
+          <Icon slug="download">
+            Télécharger le justificatif d’immatriculation
+          </Icon>
+        </ButtonLink>
+        <div className="separator" />
+        <ButtonLink
+          target="_blank"
+          to={
+            siteLink || `${routes.rne.portail.entreprise}${uniteLegale.siren}`
+          }
+          alt
+        >
+          ⇢ Voir la fiche sur le site de l’INPI
+        </ButtonLink>
+      </div>
+    </PrintNever>
+    <style jsx>{`
+      .separator {
+        width: 10px;
+        height: 10px;
+      }
+    `}</style>
+  </>
+);
+
 const ImmatriculationRNE: React.FC<IProps> = ({
   immatriculation,
   uniteLegale,
 }) => {
   return (
     <>
-      <APISection
+      <DataSection
         id="rne"
         title="Inscription au RNE"
         sources={[EAdministration.INPI]}
-        APIRequest={immatriculation}
+        data={immatriculation}
         hideIf404
         additionalInformationOnError={
-          <>
-            <PrintNever>
-              <p>
-                Pour accéder aux données contenues dans un extrait
-                d’immatriculation (équivalent de <b>l’extrait KBIS ou D1</b>),
-                vous pouvez soit télécharger le{' '}
-                <b>
-                  justificatif d’immatriculation au Registre National des
-                  Entreprises (RNE)
-                </b>
-                , soit consulter la fiche complète sur le site de l’
-                <INPI />
-                &nbsp;:
-              </p>
-              <div className="layout-center">
-                <ButtonLink
-                  nofollow={true}
-                  to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
-                >
-                  <Icon slug="download">
-                    Télécharger le justificatif d’immatriculation
-                  </Icon>
-                </ButtonLink>
-                <div className="separator" />
-                <ButtonLink
-                  target="_blank"
-                  to={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
-                  alt
-                >
-                  ⇢ Voir la fiche sur le site de l’INPI
-                </ButtonLink>
-              </div>
-            </PrintNever>
-            <style jsx>{`
-              .separator {
-                width: 10px;
-                height: 10px;
-              }
-            `}</style>
-          </>
+          <ImmatriculationLinks uniteLegale={uniteLegale} />
         }
       >
         {(immatriculation) => (
@@ -90,38 +102,10 @@ const ImmatriculationRNE: React.FC<IProps> = ({
               immatriculation={immatriculation}
               uniteLegale={uniteLegale}
             />
-            <PrintNever>
-              <p>
-                Pour accéder aux données contenues dans un extrait
-                d’immatriculation (équivalent de <b>l’extrait KBIS ou D1</b>),
-                téléchargez le{' '}
-                <b>
-                  justificatif d’immatriculation au Registre National des
-                  Entreprises (RNE)
-                </b>
-                . ou consultez la fiche complète sur le site de l’
-                <INPI />
-                &nbsp;:
-              </p>
-              <div className="layout-center">
-                <ButtonLink
-                  nofollow={true}
-                  to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
-                >
-                  <Icon slug="download">
-                    Télécharger le justificatif d’immatriculation
-                  </Icon>
-                </ButtonLink>
-                <div className="separator" />
-                <ButtonLink
-                  target="_blank"
-                  to={`${immatriculation.siteLink}`}
-                  alt
-                >
-                  ⇢ Voir la fiche sur le site de l’INPI
-                </ButtonLink>
-              </div>
-            </PrintNever>
+            <ImmatriculationLinks
+              uniteLegale={uniteLegale}
+              siteLink={immatriculation.siteLink}
+            />
 
             {immatriculation.observations &&
             immatriculation.observations.length > 0 ? (
@@ -143,15 +127,9 @@ const ImmatriculationRNE: React.FC<IProps> = ({
                 />
               </>
             ) : null}
-            <style jsx>{`
-              .separator {
-                width: 10px;
-                height: 10px;
-              }
-            `}</style>
           </>
         )}
-      </APISection>
+      </DataSection>
       <HorizontalSeparator />
     </>
   );

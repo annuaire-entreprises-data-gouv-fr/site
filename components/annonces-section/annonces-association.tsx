@@ -4,7 +4,7 @@ import AssociationCreationNotFoundAlert from '#components-ui/alerts/association-
 import ButtonLink from '#components-ui/button';
 import { Tag } from '#components-ui/tag';
 import { DILA } from '#components/administrations';
-import { APISection } from '#components/section/API-section';
+import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { IAnnoncesAssociation } from '#models/annonces';
@@ -17,10 +17,10 @@ const AnnoncesAssociationSection: React.FC<{
   annoncesAssociation: IAnnoncesAssociation | IAPINotRespondingError;
 }> = ({ association, annoncesAssociation }) => {
   return (
-    <APISection
+    <DataSection
       title="Annonces Journal Officiel des Associations"
       sources={[EAdministration.DILA]}
-      APIRequest={annoncesAssociation}
+      data={annoncesAssociation}
     >
       {(annoncesAssociation) => (
         <>
@@ -88,7 +88,7 @@ const AnnoncesAssociationSection: React.FC<{
           `}</style>
         </>
       )}
-    </APISection>
+    </DataSection>
   );
 };
 

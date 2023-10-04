@@ -4,7 +4,7 @@ import Info from '#components-ui/alerts/info';
 import ButtonLink from '#components-ui/button';
 import { Tag } from '#components-ui/tag';
 import { DILA } from '#components/administrations';
-import { APISection } from '#components/section/API-section';
+import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { IAnnoncesBodacc } from '#models/annonces';
@@ -38,10 +38,10 @@ const AnnoncesBodaccSection: React.FC<{
   bodacc: IAnnoncesBodacc | IAPINotRespondingError | IAPILoading;
 }> = ({ uniteLegale, bodacc }) => {
   return (
-    <APISection
+    <DataSection
       title="Annonces BODACC"
       sources={[EAdministration.DILA]}
-      APIRequest={bodacc}
+      data={bodacc}
     >
       {(bodacc) => (
         <>
@@ -122,7 +122,7 @@ const AnnoncesBodaccSection: React.FC<{
           `}</style>
         </>
       )}
-    </APISection>
+    </DataSection>
   );
 };
 export default AnnoncesBodacc;

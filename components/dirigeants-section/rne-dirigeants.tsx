@@ -2,7 +2,7 @@ import React from 'react';
 import routes from '#clients/routes';
 import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
 import { INPI } from '#components/administrations';
-import { APISection } from '#components/section/API-section';
+import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { IAPILoading } from '#models/api-loading';
@@ -43,18 +43,17 @@ type IProps = {
  * Dirigeants section
  */
 const DirigeantsSection: React.FC<IProps> = ({ immatriculationRNE, siren }) => (
-  <APISection
+  <DataSection
     id="rne-dirigeants"
-    title="Dirigeant"
+    title="Dirigeant(s)"
     sources={[EAdministration.INPI]}
-    APIRequest={immatriculationRNE}
+    data={immatriculationRNE}
     hideIf404
-    isTitlePlural={hasSeveralDirigeants}
   >
     {(immatriculationRNE) => (
       <DirigeantContent immatriculationRNE={immatriculationRNE} siren={siren} />
     )}
-  </APISection>
+  </DataSection>
 );
 
 export default DirigeantsSection;

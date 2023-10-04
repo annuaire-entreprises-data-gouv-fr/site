@@ -3,7 +3,7 @@ import routes from '#clients/routes';
 import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { INPI } from '#components/administrations';
-import { APISection } from '#components/section/API-section';
+import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { IAPILoading } from '#models/api-loading';
@@ -19,6 +19,10 @@ type IProps = {
   siren: Siren;
 };
 
+function hasSeveralBeneficiaires(immatriculationRNE: IImmatriculationRNE) {
+  return immatriculationRNE.beneficiaires.length > 1;
+}
+
 /**
  * Dirigeants section
  * @param param0
@@ -31,14 +35,12 @@ const BeneficiairesSection: React.FC<IProps> = ({
   return (
     <>
       <HorizontalSeparator />
-      <APISection
+      <DataSection
         id="beneficiaires"
-        title="Bénéficiaire effectif"
-        pluralTitle="Bénéficiaires effectifs"
-        isTitlePlural={hasSeveralBeneficiaires}
+        title="Bénéficiaire(s) effectif(s)"
         sources={[EAdministration.INPI]}
         hideIf404
-        APIRequest={immatriculationRNE}
+        data={immatriculationRNE}
       >
         {(immatriculationRNE) => (
           <BénéficiairesContent
@@ -46,7 +48,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
             siren={siren}
           />
         )}
-      </APISection>
+      </DataSection>
     </>
   );
 };
@@ -129,8 +131,4 @@ function BénéficiairesContent({
       `}</style>
     </>
   );
-}
-
-function hasSeveralBeneficiaires(immatriculationRNE: IImmatriculationRNE) {
-  return immatriculationRNE.beneficiaires.length > 1;
 }

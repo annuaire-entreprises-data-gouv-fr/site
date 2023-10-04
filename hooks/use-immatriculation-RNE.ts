@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
+import { EAdministration } from '#models/administrations';
 import { APILoadingFactory, IAPILoading } from '#models/api-loading';
-import { IAPINotRespondingError } from '#models/api-not-responding';
+import {
+  APINotRespondingFactory,
+  IAPINotRespondingError,
+} from '#models/api-not-responding';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { IUniteLegale } from '#models/index';
 import httpFrontClient from '#utils/network/frontend';
@@ -13,10 +17,16 @@ export const useImmmatriculationRNE = (uniteLegale: IUniteLegale) => {
 
   useEffect(() => {
     const fetchDonneesRestreintes = async () => {
-      const response = await httpFrontClient<IImmatriculationRNE>(
-        RNE_ROUTE + '/' + uniteLegale.siren
-      );
-      setImmatriculationRNE(response);
+      try {
+        const response = await httpFrontClient<IImmatriculationRNE>(
+          RNE_ROUTE + '/' + uniteLegale.siren
+        );
+        setImmatriculationRNE(response);
+      } catch {
+        setImmatriculationRNE(
+          APINotRespondingFactory(EAdministration.INPI, 500)
+        );
+      }
     };
 
     fetchDonneesRestreintes();
