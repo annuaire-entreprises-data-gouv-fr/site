@@ -58,7 +58,7 @@ const handleExceptions = (exception: any, req: IncomingMessage | undefined) => {
   }
 };
 
-const getScope = (req: IncomingMessage | undefined, slug: string) => {
+export const getScope = (req: IncomingMessage | undefined, slug: string) => {
   let sirenOrSiret = {} as any;
 
   try {

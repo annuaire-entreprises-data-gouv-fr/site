@@ -1,9 +1,11 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
+import { logWarningInSentry } from '#utils/sentry';
+import { getScope } from '#utils/server-side-props-helper/error-handler';
 import { hasSessionId, sessionOptions } from '.';
 
 /**
- * withVerifySessionApiRoute
+ * withAntiBot
  *
  * @description
  * This function is a wrapper for API routes that
@@ -14,10 +16,13 @@ import { hasSessionId, sessionOptions } from '.';
  * @returns
  */
 
-export function withVerifySessionApiRoute(handler: NextApiHandler) {
+export function withAntiBot(handler: NextApiHandler) {
   function verifySession(req: NextApiRequest, res: NextApiResponse) {
     if (!hasSessionId(req.session)) {
-      res.status(401).json({ message: 'Session not started' });
+      const scope = getScope(req, '');
+      logWarningInSentry('Antibot activated for API route', scope);
+      res.status(401);
+
       return;
     }
     return handler(req, res);
@@ -25,4 +30,4 @@ export function withVerifySessionApiRoute(handler: NextApiHandler) {
   return withIronSessionApiRoute(verifySession, sessionOptions);
 }
 
-export default withVerifySessionApiRoute;
+export default withAntiBot;
