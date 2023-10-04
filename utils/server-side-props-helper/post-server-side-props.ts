@@ -1,9 +1,8 @@
 import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSidePropsContext } from 'next';
 import { UAParser } from 'ua-parser-js';
-import { identifySession } from '#utils/session';
 import { closeAPM, createAPM } from '../sentry/tracing';
-import { ISession, sessionOptions } from '../session';
+import { ISession, sessionOptions, setVisitTimestamp } from '../session';
 import isUserAgentABot from '../user-agent';
 import { handleErrorFromServerSideProps } from './error-handler';
 
@@ -68,7 +67,7 @@ export function postServerSideProps(
 
     const userAgent = context?.req?.headers['user-agent'] || '';
 
-    await identifySession(context.req.session);
+    await setVisitTimestamp(context.req.session);
 
     return {
       ...redirectAndOther,
