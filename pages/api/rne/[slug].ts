@@ -11,6 +11,7 @@ const getRNE = async (
   try {
     const siren = verifySiren(slug as string);
     const immatriculation = await getImmatriculationRNE(siren);
+    await sleep(1000);
     res.status(200).json(immatriculation);
   } catch (e: any) {
     if (e instanceof NotASirenError || e instanceof NotLuhnValidSirenError) {
@@ -22,3 +23,9 @@ const getRNE = async (
 };
 
 export default withAPM(getRNE);
+
+function sleep(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}

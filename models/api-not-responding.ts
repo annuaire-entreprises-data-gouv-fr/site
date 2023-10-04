@@ -16,8 +16,8 @@ export const APINotRespondingFactory = (
   };
 };
 
-export function isAPINotResponding<T>(
-  toBeDetermined: Exclude<T, IAPILoading> | IAPINotRespondingError
+export function isAPINotResponding<T extends Exclude<{}, IAPILoading>>(
+  toBeDetermined: T | IAPINotRespondingError
 ): toBeDetermined is IAPINotRespondingError {
   if ((toBeDetermined as IAPINotRespondingError).errorType) {
     return true;

@@ -1,4 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
+import { HeightTransition } from '#components-ui/animation/height-transition';
 import { INPI, INSEE, MI } from '#components/administrations';
 import { isAPILoading } from '#models/api-loading';
 import { isAPINotResponding } from '#models/api-not-responding';
@@ -97,7 +98,7 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
   }
 
   return (
-    <>
+    <HeightTransition animateAppear>
       Cette structure possède :
       <ul>
         {summaries.map((summary, index) => (
@@ -105,7 +106,7 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
         ))}
       </ul>
       <br />
-    </>
+    </HeightTransition>
   );
 };
 

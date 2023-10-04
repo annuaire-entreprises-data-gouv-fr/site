@@ -3,18 +3,13 @@ import routes from '#clients/routes';
 import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { INPI } from '#components/administrations';
-import { Section } from '#components/section';
-import { LoadingSection } from '#components/section/loading';
+import { APISection } from '#components/section/API-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
-import { IAPILoading, isAPILoading } from '#models/api-loading';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '#models/api-not-responding';
+import { IAPILoading } from '#models/api-loading';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IBeneficiaire, IImmatriculationRNE } from '#models/immatriculation';
 import { Siren, formatDatePartial } from '#utils/helpers';
-import AdministrationNotResponding from '../administration-not-responding';
 
 type IProps = {
   immatriculationRNE:
@@ -33,29 +28,38 @@ const BeneficiairesSection: React.FC<IProps> = ({
   immatriculationRNE,
   siren,
 }) => {
-  if (isAPILoading(immatriculationRNE)) {
-    return (
-      <LoadingSection
+  return (
+    <>
+      <HorizontalSeparator />
+      <APISection
         id="beneficiaires"
-        title={`Bénéficiaire effectif`}
-        description="Nous récupérons les informations sur les bénéficiaires effectifs dans le Registre National des Entreprises"
+        title="Bénéficiaire effectif"
+        pluralTitle="Bénéficiaires effectifs"
+        isTitlePlural={hasSeveralBeneficiaires}
         sources={[EAdministration.INPI]}
-      />
-    );
-  }
-  if (isAPINotResponding(immatriculationRNE)) {
-    if (immatriculationRNE.errorType === 404) {
-      return null;
-    }
-    return (
-      <AdministrationNotResponding
-        administration={immatriculationRNE.administration}
-        errorType={immatriculationRNE.errorType}
-        title="Bénéficiaires Effectifs"
-      />
-    );
-  }
+        hideIf404
+        APIRequest={immatriculationRNE}
+      >
+        {(immatriculationRNE) => (
+          <BénéficiairesContent
+            immatriculationRNE={immatriculationRNE}
+            siren={siren}
+          />
+        )}
+      </APISection>
+    </>
+  );
+};
+export default BeneficiairesSection;
 
+type IBeneficiairesContentProps = {
+  immatriculationRNE: IImmatriculationRNE;
+  siren: Siren;
+};
+function BénéficiairesContent({
+  immatriculationRNE,
+  siren,
+}: IBeneficiairesContentProps) {
   const { beneficiaires } = immatriculationRNE;
 
   const formtInfos = (beneficiaire: IBeneficiaire) => [
@@ -68,65 +72,56 @@ const BeneficiairesSection: React.FC<IProps> = ({
     </>,
   ];
 
-  const plural = beneficiaires.length > 1 ? 's' : '';
+  const plural = hasSeveralBeneficiaires(immatriculationRNE) ? 's' : '';
 
   return (
     <>
-      <HorizontalSeparator />
-      <Section
-        id="beneficiaires"
-        title={`Bénéficiaire${plural} effectif${plural}`}
-        sources={[EAdministration.INPI]}
-      >
-        {immatriculationRNE.beneficiaires.length === 0 ? (
+      {immatriculationRNE.beneficiaires.length === 0 ? (
+        <p>
+          Cette structure ne possède aucun{' '}
+          <a
+            rel="noreferrer noopener"
+            target="_blank"
+            href="https://www.inpi.fr/fr/faq/qu-est-ce-qu-un-beneficiaire-effectif"
+          >
+            bénéficiaire effectif
+          </a>{' '}
+          enregistré au <b>Registre National des Entreprises (RNE)</b> tenu par
+          l’
+          <INPI />.
+        </p>
+      ) : (
+        <>
+          {immatriculationRNE.metadata.isFallback && (
+            <InpiPartiallyDownWarning missing="la date de déclaration, et la différence entre le nom et le prénom" />
+          )}
           <p>
-            Cette structure ne possède aucun{' '}
+            Cette entreprise possède {beneficiaires.length}{' '}
             <a
               rel="noreferrer noopener"
               target="_blank"
               href="https://www.inpi.fr/fr/faq/qu-est-ce-qu-un-beneficiaire-effectif"
             >
-              bénéficiaire effectif
+              bénéficiaire{plural} effectif{plural}
             </a>{' '}
-            enregistré au <b>Registre National des Entreprises (RNE)</b> tenu
-            par l’
-            <INPI />.
+            enregistré{plural} au <b>Registre National des Entreprises (RNE)</b>{' '}
+            tenu par l’
+            <INPI />. Retrouvez le détail des modalités de contrôle sur{' '}
+            <a
+              rel="noreferrer noopener"
+              target="_blank"
+              href={`${routes.rne.portail.entreprise}${siren}`}
+            >
+              la page de cette entreprise
+            </a>{' '}
+            sur le site de l’INPI&nbsp;:
           </p>
-        ) : (
-          <>
-            {immatriculationRNE.metadata.isFallback && (
-              <InpiPartiallyDownWarning missing="la date de déclaration, et la différence entre le nom et le prénom" />
-            )}
-            <p>
-              Cette entreprise possède {beneficiaires.length}{' '}
-              <a
-                rel="noreferrer noopener"
-                target="_blank"
-                href="https://www.inpi.fr/fr/faq/qu-est-ce-qu-un-beneficiaire-effectif"
-              >
-                bénéficiaire{plural} effectif{plural}
-              </a>{' '}
-              enregistré{plural} au{' '}
-              <b>Registre National des Entreprises (RNE)</b> tenu par l’
-              <INPI />. Retrouvez le détail des modalités de contrôle sur{' '}
-              <a
-                rel="noreferrer noopener"
-                target="_blank"
-                href={`${routes.rne.portail.entreprise}${siren}`}
-              >
-                la page de cette entreprise
-              </a>{' '}
-              sur le site de l’INPI&nbsp;:
-            </p>
-            <FullTable
-              head={['Nationalité', 'Détails']}
-              body={beneficiaires.map((beneficiaire) =>
-                formtInfos(beneficiaire)
-              )}
-            />
-          </>
-        )}
-      </Section>
+          <FullTable
+            head={['Nationalité', 'Détails']}
+            body={beneficiaires.map((beneficiaire) => formtInfos(beneficiaire))}
+          />
+        </>
+      )}
       <style global jsx>{`
         table > tbody > tr > td:first-of-type {
           width: 30%;
@@ -134,5 +129,8 @@ const BeneficiairesSection: React.FC<IProps> = ({
       `}</style>
     </>
   );
-};
-export default BeneficiairesSection;
+}
+
+function hasSeveralBeneficiaires(immatriculationRNE: IImmatriculationRNE) {
+  return immatriculationRNE.beneficiaires.length > 1;
+}

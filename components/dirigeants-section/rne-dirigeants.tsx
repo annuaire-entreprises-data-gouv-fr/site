@@ -1,17 +1,12 @@
 import React from 'react';
 import routes from '#clients/routes';
 import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
-import AdministrationNotResponding from '#components/administration-not-responding';
 import { INPI } from '#components/administrations';
-import { Section } from '#components/section';
-import { LoadingSection } from '#components/section/loading';
+import { APISection } from '#components/section/API-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
-import { IAPILoading, isAPILoading } from '#models/api-loading';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '#models/api-not-responding';
+import { IAPILoading } from '#models/api-loading';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
   IEtatCivil,
   IImmatriculationRNE,
@@ -47,30 +42,31 @@ type IProps = {
 /**
  * Dirigeants section
  */
-const DirigeantsSection: React.FC<IProps> = ({ immatriculationRNE, siren }) => {
-  if (isAPILoading(immatriculationRNE)) {
-    return (
-      <LoadingSection
-        id="rne-dirigeants"
-        title={`Dirigeant`}
-        sources={[EAdministration.INPI]}
-        description="Nous récupérons les informations sur les dirigeants dans le Registre National des Entreprises…"
-      />
-    );
-  }
-  if (isAPINotResponding(immatriculationRNE)) {
-    if (immatriculationRNE.errorType === 404) {
-      return null;
-    }
-    return (
-      <AdministrationNotResponding
-        administration={immatriculationRNE.administration}
-        errorType={immatriculationRNE.errorType}
-        title="Les dirigeants"
-      />
-    );
-  }
+const DirigeantsSection: React.FC<IProps> = ({ immatriculationRNE, siren }) => (
+  <APISection
+    id="rne-dirigeants"
+    title="Dirigeant"
+    sources={[EAdministration.INPI]}
+    APIRequest={immatriculationRNE}
+    hideIf404
+    isTitlePlural={hasSeveralDirigeants}
+  >
+    {(immatriculationRNE) => (
+      <DirigeantContent immatriculationRNE={immatriculationRNE} siren={siren} />
+    )}
+  </APISection>
+);
 
+export default DirigeantsSection;
+
+type IDirigeantContentProps = {
+  immatriculationRNE: IImmatriculationRNE;
+  siren: Siren;
+};
+function DirigeantContent({
+  immatriculationRNE,
+  siren,
+}: IDirigeantContentProps) {
   const { dirigeants } = immatriculationRNE;
 
   const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
@@ -129,50 +125,42 @@ const DirigeantsSection: React.FC<IProps> = ({ immatriculationRNE, siren }) => {
     }
   };
 
-  const plural = dirigeants.length > 1 ? 's' : '';
-
+  const plural = hasSeveralDirigeants(immatriculationRNE) ? 's' : '';
   return (
     <>
-      <Section
-        id="rne-dirigeants"
-        title={`Dirigeant${plural}`}
-        sources={[EAdministration.INPI]}
-      >
+      {immatriculationRNE.metadata.isFallback &&
+        immatriculationRNE.dirigeants.length > 0 && (
+          <InpiPartiallyDownWarning missing="la distinction entre le nom et le prénom" />
+        )}
+      {dirigeants.length === 0 ? (
+        <p>
+          Cette entreprise est enregistrée au{' '}
+          <b>Registre National des Entreprises (RNE)</b>, mais n’y possède aucun
+          dirigeant.
+        </p>
+      ) : (
         <>
-          {immatriculationRNE.metadata.isFallback &&
-            immatriculationRNE.dirigeants.length > 0 && (
-              <InpiPartiallyDownWarning missing="la distinction entre le nom et le prénom" />
-            )}
-          {dirigeants.length === 0 ? (
-            <p>
-              Cette entreprise est enregistrée au{' '}
-              <b>Registre National des Entreprises (RNE)</b>, mais n’y possède
-              aucun dirigeant.
-            </p>
-          ) : (
-            <>
-              <p>
-                Cette entreprise possède {dirigeants.length} dirigeant{plural}{' '}
-                enregistré{plural} au{' '}
-                <b>Registre National des Entreprises (RNE)</b> tenu par l’
-                <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
-                <a
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  href={`${routes.rne.portail.entreprise}${siren}`}
-                >
-                  la page de cette entreprise
-                </a>{' '}
-                sur le site de l’INPI&nbsp;:
-              </p>
-              <FullTable
-                head={['Role', 'Details', 'Action']}
-                body={dirigeants.map((dirigeant) => formatDirigeant(dirigeant))}
-              />
-            </>
-          )}
+          <p>
+            Cette entreprise possède {dirigeants.length} dirigeant{plural}{' '}
+            enregistré{plural} au <b>Registre National des Entreprises (RNE)</b>{' '}
+            tenu par l’
+            <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
+            <a
+              rel="noreferrer noopener"
+              target="_blank"
+              href={`${routes.rne.portail.entreprise}${siren}`}
+            >
+              la page de cette entreprise
+            </a>{' '}
+            sur le site de l’INPI&nbsp;:
+          </p>
+          <FullTable
+            head={['Role', 'Details', 'Action']}
+            body={dirigeants.map((dirigeant) => formatDirigeant(dirigeant))}
+          />
         </>
-      </Section>
+      )}
+
       <style global jsx>{`
         table > tbody > tr > td:first-of-type {
           width: 30%;
@@ -180,5 +168,8 @@ const DirigeantsSection: React.FC<IProps> = ({ immatriculationRNE, siren }) => {
       `}</style>
     </>
   );
-};
-export default DirigeantsSection;
+}
+
+function hasSeveralDirigeants(immatriculationRNE: IImmatriculationRNE) {
+  return immatriculationRNE.dirigeants.length > 1;
+}

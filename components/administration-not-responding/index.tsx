@@ -6,11 +6,13 @@ import { IAPINotRespondingError } from '#models/api-not-responding';
 
 interface IProps extends IAPINotRespondingError {
   title?: string;
+  additionalInformation?: React.ReactNode;
 }
 
 const AdministrationNotResponding: React.FC<IProps> = ({
   title,
   administration,
+  additionalInformation,
 }) => {
   const administrationMetaData = administrationsMetaData[administration] || {};
   return (
@@ -46,6 +48,7 @@ const AdministrationNotResponding: React.FC<IProps> = ({
           </ButtonLink>
         </div>
       )}
+      {additionalInformation ?? null}
     </Section>
   );
 };

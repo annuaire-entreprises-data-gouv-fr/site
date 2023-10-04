@@ -1,3 +1,4 @@
+import { HeightTransition } from '#components-ui/animation/height-transition';
 import { isAPILoading } from '#models/api-loading';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { estActif } from '#models/etat-administratif';
@@ -16,25 +17,27 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
         {!isAPILoading(immatriculationRNE) &&
           !isAPINotResponding(immatriculationRNE) && (
             <li>
-              {!!immatriculationRNE.identite?.dateRadiation ? (
-                <a href="#rne">
-                  <b>Radiée</b> du Registre National des Entreprises (RNE),
-                  depuis le{' '}
-                  {formatDateLong(immatriculationRNE.identite.dateRadiation)}
-                </a>
-              ) : (
-                <a href="#rne">
-                  <b>Inscrite</b> au Registre National des Entreprises (RNE)
-                  {!!immatriculationRNE.identite?.dateImmatriculation && (
-                    <>
-                      , depuis le{' '}
-                      {formatDateLong(
-                        immatriculationRNE.identite?.dateImmatriculation
-                      )}
-                    </>
-                  )}
-                </a>
-              )}
+              <HeightTransition animateAppear>
+                {!!immatriculationRNE.identite?.dateRadiation ? (
+                  <a href="#rne">
+                    <b>Radiée</b> du Registre National des Entreprises (RNE),
+                    depuis le{' '}
+                    {formatDateLong(immatriculationRNE.identite.dateRadiation)}
+                  </a>
+                ) : (
+                  <a href="#rne">
+                    <b>Inscrite</b> au Registre National des Entreprises (RNE)
+                    {!!immatriculationRNE.identite?.dateImmatriculation && (
+                      <>
+                        , depuis le{' '}
+                        {formatDateLong(
+                          immatriculationRNE.identite?.dateImmatriculation
+                        )}
+                      </>
+                    )}
+                  </a>
+                )}
+              </HeightTransition>
             </li>
           )}
         {immatriculationJOAFE && !isAPINotResponding(immatriculationJOAFE) && (
