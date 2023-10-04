@@ -4,12 +4,10 @@ import { IAdministrationMetaData } from '#models/administrations/types';
 
 interface IProps {
   administrationMetaData: IAdministrationMetaData;
-  additionalInformation?: React.ReactNode;
 }
 
 const AdministrationNotRespondingMessage: React.FC<IProps> = ({
   administrationMetaData,
-  additionalInformation,
 }) => {
   return (
     <>
@@ -42,7 +40,6 @@ const AdministrationNotRespondingMessage: React.FC<IProps> = ({
         )}
         .
       </p>
-      {additionalInformation ?? null}
     </>
   );
 };

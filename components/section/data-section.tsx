@@ -34,10 +34,12 @@ export function SectionStateMachine<T extends {}>({
         administrationsMetaData[data.administration] || {};
 
       return (
-        <AdministrationNotRespondingMessage
-          administrationMetaData={administrationMetaData}
-          additionalInformation={additionalInformationOnError}
-        />
+        <>
+          <AdministrationNotRespondingMessage
+            administrationMetaData={administrationMetaData}
+          />
+          {additionalInformationOnError ?? null}
+        </>
       );
     } else {
       return props.children(data);

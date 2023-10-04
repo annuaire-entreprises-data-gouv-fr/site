@@ -6,13 +6,11 @@ import AdministrationNotRespondingMessage from './message';
 
 interface IProps extends IAPINotRespondingError {
   title?: string;
-  additionalInformation?: React.ReactNode;
 }
 
 const AdministrationNotResponding: React.FC<IProps> = ({
   title,
   administration,
-  additionalInformation,
 }) => {
   const administrationMetaData = administrationsMetaData[administration] || {};
   return (
@@ -24,7 +22,6 @@ const AdministrationNotResponding: React.FC<IProps> = ({
     >
       <AdministrationNotRespondingMessage
         administrationMetaData={administrationMetaData}
-        additionalInformation={additionalInformation}
       />
     </Section>
   );
