@@ -1,5 +1,4 @@
-import { isAgent } from '#utils/session';
-import { ISession } from '#utils/session';
+import { ISession, isAgent } from '#utils/session';
 import { IEtablissement, IUniteLegale } from '.';
 
 export enum ISTATUTDIFFUSION {
@@ -40,6 +39,10 @@ export const estNonDiffusible = (uniteLegaleOrEtablissement: {
 export const nonDiffusibleDataFormatter = (e: string) =>
   `▪︎ ▪︎ ▪︎ ${e} ▪︎ ▪︎ ▪︎`;
 
+export const defaultNonDiffusiblePlaceHolder = nonDiffusibleDataFormatter(
+  'information non-diffusible'
+);
+
 /**
  * Return full name depending on diffusibility status (https://www.insee.fr/fr/information/6683782)
  * @param uniteLegale
@@ -57,10 +60,10 @@ export const getNomComplet = (
     if (estDiffusible(uniteLegale)) {
       return uniteLegale.nomComplet;
     }
-    return nonDiffusibleDataFormatter('information non-diffusible');
+    return defaultNonDiffusiblePlaceHolder;
   } else {
     if (!estDiffusible(uniteLegale)) {
-      return nonDiffusibleDataFormatter('information non-diffusible');
+      return defaultNonDiffusiblePlaceHolder;
     }
 
     return uniteLegale.nomComplet;
@@ -72,7 +75,7 @@ export const getEnseigneEtablissement = (
   session: ISession | null
 ) => {
   if (!estDiffusible(etablissement) && !canSeeNonDiffusible(session)) {
-    return nonDiffusibleDataFormatter('information non-diffusible');
+    return defaultNonDiffusiblePlaceHolder;
   }
   return etablissement.enseigne;
 };
@@ -82,7 +85,7 @@ export const getDenominationEtablissement = (
   session: ISession | null
 ) => {
   if (!estDiffusible(etablissement) && !canSeeNonDiffusible(session)) {
-    return nonDiffusibleDataFormatter('information non-diffusible');
+    return defaultNonDiffusiblePlaceHolder;
   }
   return etablissement.denomination;
 };
@@ -110,7 +113,7 @@ const formatAdresseForDiffusion = (
   }
 
   if (!commune && !codePostal) {
-    return nonDiffusibleDataFormatter('information non-diffusible');
+    return defaultNonDiffusiblePlaceHolder;
   }
   return nonDiffusibleDataFormatter(`${codePostal} ${commune}`);
 };
