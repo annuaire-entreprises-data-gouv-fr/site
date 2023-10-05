@@ -96,7 +96,7 @@ function useShowLoadingState<T>(data: IAPILoading | T): data is IAPILoading {
     if (!isAPILoading(data) && !after100ms) {
       setDataLoadedBefore100ms(true);
     }
-  }, [data]);
+  }, [data, after100ms]);
 
   if (dataLoadedBefore100ms) {
     return false;
