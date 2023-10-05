@@ -8,7 +8,7 @@ import Meta from '#components/meta';
 import { DirigeantsNonDiffusibleSection } from '#components/non-diffusible';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { IDirigeants } from '#models/dirigeants';
+import { IUniteLegale } from '#models/index';
 import { estDiffusible } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
@@ -21,7 +21,9 @@ import { isAgent } from '#utils/session';
 import useImmmatriculationRNE from 'hooks/use-immatriculation-RNE';
 import { NextPageWithLayout } from 'pages/_app';
 
-interface IProps extends IPropsWithMetadata, IDirigeants {}
+interface IProps extends IPropsWithMetadata {
+  uniteLegale: IUniteLegale;
+}
 
 const DirigeantsPage: NextPageWithLayout<IProps> = ({
   uniteLegale,
@@ -86,8 +88,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const { slug } = extractParamsFromContext(context);
     return {
       props: {
-        uniteLegale: await getUniteLegaleFromSlug(slug, {}),
-        immatriculationRNE: null,
+        uniteLegale: await getUniteLegaleFromSlug(slug),
         metadata: {
           useReact: true,
         },
