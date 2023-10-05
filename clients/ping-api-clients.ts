@@ -1,11 +1,11 @@
 import { clientAssociation } from '#clients/api-proxy/association';
 import { clientTVA } from '#clients/api-proxy/tva';
-import { clientUniteLegaleInsee } from '#clients/sirene-insee';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
 import { clientApiEntrepriseAssociation } from './api-entreprise/association';
 import { fetchRNEImmatriculation } from './api-proxy/rne';
 import clientSearchRechercheEntreprise from './recherche-entreprise';
 import { clientUniteLegaleRechercheEntreprise } from './recherche-entreprise/siren';
+import { clientUniteLegaleInsee } from './sirene-insee/siren';
 
 export class APISlugNotFound extends Error {
   constructor(public status: number, public message: string) {

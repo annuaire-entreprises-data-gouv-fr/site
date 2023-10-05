@@ -6,7 +6,6 @@ import {
   CacheRequestConfig,
   setupCache,
 } from 'axios-cache-interceptor';
-import { mockStore } from '#clients-mocks/index';
 import constants from '#models/constants';
 import errorInterceptor from './error-interceptor';
 import { addStartTimeInterceptor, logInterceptor } from './log-interceptor';
@@ -55,10 +54,7 @@ export const axiosInstanceFactory = (
   return axiosInstance;
 };
 
-const axiosInstanceWithCache =
-  process.env.END2END_MOCKING === 'enabled'
-    ? mockStore.mockedAxiosInstance
-    : axiosInstanceFactory();
+const axiosInstanceWithCache = axiosInstanceFactory();
 
 /**
  * Default axios client - not cached by default
