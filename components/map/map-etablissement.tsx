@@ -1,7 +1,6 @@
 import React from 'react';
 import constants from '#models/constants';
 import { IEtablissement } from '#models/index';
-import { getCoordsEtablissement } from '#models/statut-diffusion';
 import MaplibreInstance from '.';
 
 const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
@@ -15,9 +14,9 @@ const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
       dangerouslySetInnerHTML={{
         __html: `
                 function initMap(style) {
-                  var coords = [${getCoordsEtablissement(etablissement).join(
-                    ','
-                  )}]
+                  var coords = [${etablissement.longitude}, ${
+          etablissement.latitude
+        }]
 
                   var zoom = ${etablissement ? '12' : '4.5'};
 

@@ -12,15 +12,19 @@ import {
 } from '#clients/sirene-insee/siret';
 import { getAssociation } from '#models/association';
 import { createEtablissementsList } from '#models/etablissements-list';
-import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
+import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
 import { Siren, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import {
   logRechercheEntreprisefailed,
   logSireneInseefailed,
 } from '#utils/sentry/helpers';
-import { createDefaultUniteLegale, IUniteLegale, SirenNotFoundError } from '.';
-import { isAssociation } from '.';
+import {
+  IUniteLegale,
+  SirenNotFoundError,
+  createDefaultUniteLegale,
+  isAssociation,
+} from '.';
 import { EAdministration } from './administrations';
 import {
   APINotRespondingFactory,
