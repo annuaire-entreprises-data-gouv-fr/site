@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FadeIn } from '#components-ui/animation/fade-in';
 import { HeightTransition } from '#components-ui/animation/height-transition';
 import AdministrationNotRespondingMessage from '#components/administration-not-responding/message';
@@ -14,14 +14,14 @@ import DataSectionLoader from './data-section-loader';
 
 interface IDataSectionProps<T> extends ISectionProps {
   data: IAPINotRespondingError | IAPILoading | T;
-  hideIf404?: boolean;
+  notFoundInformation?: React.ReactNode;
   additionalInformationOnError?: React.ReactNode;
   children: (data: T) => JSX.Element;
 }
 
 function SectionStateMachine<T extends {}>({
   data,
-  hideIf404 = false,
+  notFoundInformation,
   additionalInformationOnError,
   ...props
 }: IDataSectionProps<T>) {
@@ -42,10 +42,16 @@ function SectionStateMachine<T extends {}>({
 
       return (
         <FadeIn>
-          <AdministrationNotRespondingMessage
-            administrationMetaData={administrationMetaData}
-          />
-          {additionalInformationOnError ?? null}
+          {data.errorType === 404 && notFoundInformation ? (
+            notFoundInformation
+          ) : (
+            <>
+              <AdministrationNotRespondingMessage
+                administrationMetaData={administrationMetaData}
+              />
+              {additionalInformationOnError ?? null}
+            </>
+          )}
         </FadeIn>
       );
     } else {
@@ -64,7 +70,11 @@ export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
   //@ts-ignore
   const lastModified = data?.lastModified || null;
 
-  if (isAPINotResponding(data) && data.errorType === 404 && props.hideIf404) {
+  if (
+    isAPINotResponding(data) &&
+    data.errorType === 404 &&
+    props.notFoundInformation === null
+  ) {
     return null;
   }
 
@@ -77,6 +87,7 @@ export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
   );
 }
 
+/** Contains the logic that prevents flickering of UI */
 function useShowLoadingState<T>(data: IAPILoading | T): data is IAPILoading {
   const after100ms = useTimeout(100);
   const before800ms = !useTimeout(800);

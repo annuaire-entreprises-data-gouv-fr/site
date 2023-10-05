@@ -1,6 +1,6 @@
 // https://www.joshwcomeau.com/react/prefers-reduced-motion/
 
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const QUERY = '(prefers-reduced-motion: no-preference)';
 const getInitialState = () =>
@@ -16,7 +16,9 @@ export default function usePrefersReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] =
     useState(getInitialState);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const mediaQueryList = window.matchMedia(QUERY);
     const listener = (event: MediaQueryListEvent) => {
       setPrefersReducedMotion(!event.matches);
@@ -26,5 +28,6 @@ export default function usePrefersReducedMotion() {
       mediaQueryList.removeEventListener('change', listener);
     };
   }, []);
+
   return prefersReducedMotion;
 }
