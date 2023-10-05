@@ -9,7 +9,7 @@ type IMeasures = {
   height: number | undefined;
 };
 export function useMeasure(): [
-  ref: (node: HTMLElement) => void,
+  ref: (node: HTMLElement | null) => void,
   measures: IMeasures
 ] {
   const [measures, setMeasures] = useState<IMeasures>({
@@ -32,7 +32,7 @@ export function useMeasure(): [
   }, []);
 
   const ref = useCallback(
-    (node: HTMLElement) => {
+    (node: HTMLElement | null) => {
       if (!node) return;
       setNode(node);
       if (elementObserver) {
