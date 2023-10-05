@@ -1,4 +1,5 @@
 import routes from '#clients/routes';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
@@ -8,7 +9,7 @@ type IGeoRegionResponse = {
   code: string;
 };
 
-export const clientRegionsByName = async (term: string): Promise<any> => {
+const clientRegionsByName = async (term: string): Promise<any> => {
   const response = await httpGet(`${routes.geo.region}&nom=${term}`, {
     timeout: constants.timeout.L,
   });
@@ -25,3 +26,9 @@ const mapToDomainObject = (response: IGeoRegionResponse[]): IGeoElement[] => {
     };
   });
 };
+
+const stubbedClientRegionsByName = stubClientWithSnapshots({
+  clientRegionsByName,
+});
+
+export { stubbedClientRegionsByName as clientRegionsByName };

@@ -1,0 +1,39 @@
+{
+  "args": [
+    "528163777"
+  ],
+  "result": {
+    "companyInfo": {
+      "adresse": "5 RUE MORAND, 93400, SAINT OUEN",
+      "email": "contact@gsept.fr",
+      "nomEntreprise": "GROUPE SOLUTION ENERGIE POLE TECHNIQUE",
+      "siret": "52816377700030",
+      "siteInternet": "",
+      "telephone": "01 49 48 14 50",
+      "workingWithIndividual": true
+    },
+    "certifications": [
+      {
+        "codeQualification": "C001D117",
+        "domaines": [
+          "Projet complet de rénovation",
+          "Audit énergétique"
+        ],
+        "nomCertificat": "CERTIBAT-RGE",
+        "nomQualification": "Offre Globale de Rénovation Energétique (C001D117)",
+        "organisme": "certibat",
+        "urlQualification": "https://www.qualibat.com/Views/GetFichier.aspx?fn=2022\\SIEG-Certificat-CB-159386-GROUPE SOLUTION - RE22249-2-20230414.pdf"
+      },
+      {
+        "codeQualification": "1911",
+        "domaines": [
+          "Audit énergétique"
+        ],
+        "nomCertificat": "Certificat OPQIBI",
+        "nomQualification": "Audit énergétique “maisons individuelles” (1911)",
+        "organisme": "opqibi",
+        "urlQualification": "http://opqibi.com/fiche/5059"
+      }
+    ]
+  }
+}

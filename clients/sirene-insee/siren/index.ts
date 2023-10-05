@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import stubClient from '#clients/stub-client';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IEtatCivil } from '#models/immatriculation';
 import {
@@ -219,7 +219,7 @@ const mapToDomainObject = (
   };
 };
 
-const stubbedClient = stubClient({
+const stubbedClient = stubClientWithSnapshots({
   clientUniteLegaleInsee,
 });
 export { stubbedClient as clientUniteLegaleInsee };

@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import stubClient from '#clients/stub-client';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { Siren } from '#utils/helpers';
@@ -16,7 +16,7 @@ const fetchRNEImmatriculation = async (siren: Siren, useCache = true) =>
     useCache
   ) as Promise<IImmatriculationRNE>;
 
-const stubbedClient = stubClient({
+const stubbedClient = stubClientWithSnapshots({
   fetchRNEImmatriculation,
 });
 

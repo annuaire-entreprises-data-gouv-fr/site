@@ -1,6 +1,6 @@
 import { HttpNotFound, HttpServerError } from '#clients/exceptions';
 import routes from '#clients/routes';
-import stubClient from '#clients/stub-client';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import {
   IEtablissementsList,
@@ -298,7 +298,7 @@ export const mapEtablissementToDomainObject = (
   };
 };
 
-const stubbedClient = stubClient({
+const stubbedClient = stubClientWithSnapshots({
   clientAllEtablissementsInsee,
 });
 export { stubbedClient as clientAllEtablissementsInsee };

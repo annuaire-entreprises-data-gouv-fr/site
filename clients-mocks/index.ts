@@ -15,14 +15,6 @@ class MockStore {
       // dont load mocks
       return;
     }
-
-    this._mocks.push(require('./base-adresse').default);
-
-    this._mocks.push(require('./geo/communes').default);
-    this._mocks.push(require('./geo/departements').default);
-    this._mocks.push(require('./geo/regions').default);
-
-    this._mocks.push(require('./rge').default);
   }
 
   public get(url: string) {

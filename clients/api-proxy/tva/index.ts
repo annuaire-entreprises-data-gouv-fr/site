@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import stubClient from '#clients/stub-client';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { clientAPIProxy } from '../client';
 
@@ -59,7 +59,7 @@ const clientTVA = async (
   return data.isValid ? `FR${data.vatNumber}` : null;
 };
 
-const stubbedClient = stubClient({
+const stubbedClient = stubClientWithSnapshots({
   clientTVA,
 });
 

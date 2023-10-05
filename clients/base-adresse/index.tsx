@@ -1,5 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { IGeoLoc } from '#models/geo-loc';
 import { httpGet } from '#utils/network';
@@ -41,4 +42,6 @@ const mapToDomainObject = (response: IBANResponse): IGeoLoc => {
   };
 };
 
-export { clientBanGeoLoc };
+const stubbedClientBanGeoLoc = stubClientWithSnapshots({ clientBanGeoLoc });
+
+export { stubbedClientBanGeoLoc as clientBanGeoLoc };

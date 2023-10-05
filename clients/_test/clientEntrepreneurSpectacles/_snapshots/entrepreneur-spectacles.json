@@ -1,0 +1,19 @@
+{
+  "args": [
+    "842019051"
+  ],
+  "result": {
+    "licences": [
+      {
+        "categorie": 2,
+        "numeroRecepisse": "PLATESV-R-2021-013704",
+        "nomLieu": "",
+        "statut": "Valide",
+        "dateValidite": "12/01/2022",
+        "dateDepot": "2021-11-30",
+        "type": "Renouvellement"
+      }
+    ],
+    "lastModified": null
+  }
+}

@@ -1,4 +1,5 @@
 import routes from '#clients/routes';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
@@ -34,4 +35,13 @@ const mapToDomainObject = (
   });
 };
 
-export { clientDepartementByCode, clientDepartementsByName };
+const stubbedClientDepartementsByName = stubClientWithSnapshots({
+  clientDepartementsByName,
+});
+const stubbedClientDepartementByCode = stubClientWithSnapshots({
+  clientDepartementByCode,
+});
+export {
+  stubbedClientDepartementByCode as clientDepartementByCode,
+  stubbedClientDepartementsByName as clientDepartementsByName,
+};

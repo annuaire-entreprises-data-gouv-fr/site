@@ -15,14 +15,16 @@ describe('clientAllEtablissementsInsee', () => {
     // '528163777',
     '839517323',
     '842019051',
+    '883010316',
     '880878145',
     '908595879',
   ].forEach((siren) => expectClientToMatchSnapshotWithSiren(siren));
-
-  // expectClientToMatchSnapshotWithSiren('356000000', 1);
-  // expectClientToMatchSnapshotWithSiren('356000000', 3);
-  // expectClientToMatchSnapshotWithSiren('356000000', 6);
-  // expectClientToMatchSnapshotWithSiren('356000000', 7);
+  expectClientToMatchSnapshotWithSiren('356000000', 1);
+  expectClientToMatchSnapshotWithSiren('356000000', 1);
+  expectClientToMatchSnapshotWithSiren('356000000', 3);
+  expectClientToMatchSnapshotWithSiren('356000000', 5);
+  expectClientToMatchSnapshotWithSiren('356000000', 6);
+  expectClientToMatchSnapshotWithSiren('356000000', 7);
 });
 
 function expectClientToMatchSnapshotWithSiren(siren: string, page = 1) {

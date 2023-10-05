@@ -3,7 +3,7 @@ import { readFile } from 'fs/promises';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
-const STUB_FOLDER = '_test';
+type AsyncFn<T extends unknown[], U> = (...args: T) => Promise<U>;
 
 /**
  * Stub a client when we are in E2E test context.
@@ -17,8 +17,7 @@ const STUB_FOLDER = '_test';
  * @param client: an object with a uniq key containing the client function
  * @returns a stubbed client function
  */
-type AsyncFn<T extends unknown[], U> = (...args: T) => Promise<U>;
-export default function stubClient<
+export default function stubClientWithSnapshots<
   Name extends string,
   Args extends unknown[],
   R
@@ -31,31 +30,32 @@ export default function stubClient<
     return client;
   }
 
-  const stubPath = join(
+  const snaphotPath = join(
     dirname(fileURLToPath(import.meta.url)),
-    STUB_FOLDER,
-    clientName
+    '_test',
+    clientName,
+    '_snapshots'
   );
 
-  if (!existsSync(stubPath)) {
+  if (!existsSync(snaphotPath)) {
     throw new Error('No test folder found for client : ' + clientName);
   }
   // List all JSON files in path
-  const stubFiles = readdirSync(stubPath).filter((file: string) =>
+  const snaphotFiles = readdirSync(snaphotPath).filter((file: string) =>
     file.match(/.*.json/)
   );
 
-  const asyncStubs = Promise.all(
-    stubFiles.map(async (path: string) => {
-      const file = await readFile(join(stubPath, path), 'utf-8');
+  const asyncSnaphots = Promise.all(
+    snaphotFiles.map(async (path: string) => {
+      const file = await readFile(join(snaphotPath, path), 'utf-8');
       return JSON.parse(file);
     })
   );
 
   return async function (...args: Args) {
-    const stubs = await asyncStubs;
+    const snaphots = await asyncSnaphots;
     const simplifyParams = await loadSimplifyParams(clientName);
-    const stub = stubs.find((stub: any) => {
+    const stub = snaphots.find((stub: any) => {
       return (
         JSON.stringify(simplifyParams(...args)) === JSON.stringify(stub.args)
       );
@@ -69,10 +69,10 @@ export default function stubClient<
         // is thrown by the client (as we cannot stub error for now)
         console.warn(
           `
-  E2E Mocking Warning
-  -------------------
+  E2E Client Stub Warning
+  -----------------------
   When calling client : ${clientName}
-  No stub found for args : 
+  No snaphots found for args : 
     ${JSON.stringify(simplifyParams(...args), null, 2).replaceAll(
       '\n',
       '\n    '
@@ -106,4 +106,4 @@ async function loadSimplifyParams(clientName: string) {
   }
 }
 
-export { stubClient };
+export { stubClientWithSnapshots as stubClient };

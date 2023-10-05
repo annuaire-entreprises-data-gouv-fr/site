@@ -1,4 +1,5 @@
 import routes from '#clients/routes';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
@@ -50,4 +51,14 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
     );
 };
 
-export { clientCommuneByCp, clientCommunesByName };
+const stubbedClientCommunesByName = stubClientWithSnapshots({
+  clientCommunesByName,
+});
+const stubbedClientCommuneByCp = stubClientWithSnapshots({
+  clientCommuneByCp,
+});
+
+export {
+  stubbedClientCommuneByCp as clientCommuneByCp,
+  stubbedClientCommunesByName as clientCommunesByName,
+};

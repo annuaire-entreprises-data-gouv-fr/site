@@ -13,6 +13,7 @@ describe('clientUniteLegaleInsee', () => {
       '528163777',
       '839517323',
       '842019051',
+      '880878145',
       '908595879',
     ] as Siren[]
   ).forEach(expectClientToMatchSnapshotWithSiren);

@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import stubClient from '#clients/stub-client';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { IEntrepreneurSpectaclesCertification } from '#models/certifications/entrepreneur-spectacles';
 import { Siren } from '#utils/helpers';
 import odsClient from '../../back-ods-client';
@@ -60,7 +60,7 @@ const clientEntrepreneurSpectacles = async (
   };
 };
 
-const stubbedClient = stubClient({
+const stubbedClient = stubClientWithSnapshots({
   clientEntrepreneurSpectacles,
 });
 

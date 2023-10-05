@@ -1,6 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import stubClient from '#clients/stub-client';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
@@ -342,6 +342,6 @@ const mapToEtablissement = (
   };
 };
 
-export default stubClient({
+export default stubClientWithSnapshots({
   clientSearchRechercheEntreprise,
 });

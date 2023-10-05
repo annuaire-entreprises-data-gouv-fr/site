@@ -20,4 +20,12 @@ describe('fetchRNEImmatriculation', () => {
       snaphotFile: 'rge.json',
     });
   });
+  it('Should match snapshot for 356000000 siret', async () => {
+    await expectClientToMatchSnapshot({
+      client: fetchRNEImmatriculation,
+      args: ['356000000' as Siren],
+      __dirname,
+      snaphotFile: 'siret-356000000.json',
+    });
+  });
 });

@@ -3,7 +3,7 @@ import routes from '#clients/routes';
 import constants from '#models/constants';
 import { IDataAssociation } from '#models/index';
 import { IdRna, Siren, formatAdresse } from '#utils/helpers';
-import stubClient from '../../stub-client';
+import stubClientWithSnapshots from '../../stub-client-with-snaphots';
 import { clientAPIProxy } from '../client';
 import { IAssociationResponse } from './types';
 
@@ -129,7 +129,7 @@ const mapToDomainObject = (
   };
 };
 
-const stubbedClient = stubClient({
+const stubbedClient = stubClientWithSnapshots({
   clientAssociation,
 });
 

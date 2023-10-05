@@ -27,7 +27,7 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
 
     expect(
       JSON.stringify({ args: simplifyParams(...args), result }, null, 2)
-    ).toMatchFile(path.join(__dirname, snaphotFile));
+    ).toMatchFile(path.join(__dirname, '_snapshots', snaphotFile));
   } catch (e) {
     if (e instanceof HttpServerError || e instanceof HttpTimeoutError) {
       console.warn('Could not test siret client (api not responding)');
