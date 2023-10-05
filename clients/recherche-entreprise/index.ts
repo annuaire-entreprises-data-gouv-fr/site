@@ -342,16 +342,6 @@ const mapToEtablissement = (
   };
 };
 
-export function simplifyParams(a: ClientSearchRechercheEntreprise) {
-  return {
-    page: a.page,
-    searchTerms: a.searchTerms,
-    searchFilterParams: a.searchFilterParams?.toApiURI() ?? '',
-  };
-}
-
 export default stubClient({
-  client: clientSearchRechercheEntreprise,
-  fileUrl: import.meta.url,
-  simplifyParams,
+  clientSearchRechercheEntreprise,
 });

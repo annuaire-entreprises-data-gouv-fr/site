@@ -61,8 +61,7 @@ const clientEntrepreneurSpectacles = async (
 };
 
 const stubbedClient = stubClient({
-  client: clientEntrepreneurSpectacles,
-  fileUrl: import.meta.url,
+  clientEntrepreneurSpectacles,
 });
 
 export { stubbedClient as clientEntrepreneurSpectacles };

@@ -1,5 +1,5 @@
 import path from 'path';
-import { clientTVA } from '..';
+import { clientTVA } from '#clients/api-proxy/tva';
 
 describe('clientTVA', () => {
   it('Should match snapshot', async () => {

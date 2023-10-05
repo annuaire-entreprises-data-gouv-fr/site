@@ -1,7 +1,7 @@
 import path from 'path';
 import { HttpServerError, HttpTimeoutError } from '#clients/exceptions';
 import { Siren } from '#utils/helpers';
-import { clientUniteLegaleInsee } from '..';
+import { clientUniteLegaleInsee } from '../../sirene-insee/siren';
 
 describe('clientUniteLegaleInsee', () => {
   (

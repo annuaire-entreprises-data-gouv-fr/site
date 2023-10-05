@@ -4,8 +4,10 @@ import {
   HttpServerError,
 } from '#clients/exceptions';
 import { clientUniteLegaleRechercheEntreprise } from '#clients/recherche-entreprise/siren';
-import { InseeClientOptions } from '#clients/sirene-insee';
-import { clientUniteLegaleInsee } from '#clients/sirene-insee/siren';
+import {
+  InseeClientOptions,
+  clientUniteLegaleInsee,
+} from '#clients/sirene-insee';
 import {
   clientAllEtablissementsInsee,
   clientSiegeInsee,

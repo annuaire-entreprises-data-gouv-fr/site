@@ -220,8 +220,6 @@ const mapToDomainObject = (
 };
 
 const stubbedClient = stubClient({
-  client: clientUniteLegaleInsee,
-  fileUrl: import.meta.url,
-  simplifyParams: (siren: Siren) => siren,
+  clientUniteLegaleInsee,
 });
 export { stubbedClient as clientUniteLegaleInsee };

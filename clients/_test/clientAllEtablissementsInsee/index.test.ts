@@ -1,5 +1,5 @@
 import { HttpServerError, HttpTimeoutError } from '#clients/exceptions';
-import { clientAllEtablissementsInsee } from '..';
+import { clientAllEtablissementsInsee } from '../../sirene-insee/siret';
 
 describe('clientAllEtablissementsInsee', () => {
   // We use the commented lines to generate snapshots for

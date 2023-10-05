@@ -1,6 +1,7 @@
 import path from 'path';
+import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
 import SearchFilterParams from '#models/search-filter-params';
-import clientSearchRechercheEntreprise, { simplifyParams } from '..';
+import simplifyParams from './simplify-params';
 
 describe.only('clientSearchRechercheEntreprise : simple search with searchTerms', () => {
   [

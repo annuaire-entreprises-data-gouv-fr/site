@@ -1,6 +1,6 @@
 import path from 'path';
+import { clientAssociation } from '#clients/api-proxy/association';
 import { Siren } from '#utils/helpers';
-import { clientAssociation } from '..';
 
 describe('clientAssociation', () => {
   it('Should match snapshot', async () => {

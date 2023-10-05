@@ -130,8 +130,7 @@ const mapToDomainObject = (
 };
 
 const stubbedClient = stubClient({
-  client: clientAssociation,
-  fileUrl: import.meta.url,
+  clientAssociation,
 });
 
 export { stubbedClient as clientAssociation };

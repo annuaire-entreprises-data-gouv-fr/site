@@ -17,8 +17,7 @@ const fetchRNEImmatriculation = async (siren: Siren, useCache = true) =>
   ) as Promise<IImmatriculationRNE>;
 
 const stubbedClient = stubClient({
-  client: fetchRNEImmatriculation,
-  fileUrl: import.meta.url,
+  fetchRNEImmatriculation,
 });
 
 export { stubbedClient as fetchRNEImmatriculation };

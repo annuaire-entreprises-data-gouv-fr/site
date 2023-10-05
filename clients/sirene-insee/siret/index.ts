@@ -299,8 +299,6 @@ export const mapEtablissementToDomainObject = (
 };
 
 const stubbedClient = stubClient({
-  client: clientAllEtablissementsInsee,
-  fileUrl: import.meta.url,
-  simplifyParams: (siren, page) => ({ siren, page }),
+  clientAllEtablissementsInsee,
 });
 export { stubbedClient as clientAllEtablissementsInsee };

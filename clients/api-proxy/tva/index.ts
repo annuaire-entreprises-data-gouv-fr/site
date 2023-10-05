@@ -60,8 +60,7 @@ const clientTVA = async (
 };
 
 const stubbedClient = stubClient({
-  client: clientTVA,
-  fileUrl: import.meta.url,
+  clientTVA,
 });
 
 export { stubbedClient as clientTVA };

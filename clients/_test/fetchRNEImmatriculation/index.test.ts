@@ -1,6 +1,6 @@
 import path from 'path';
+import { fetchRNEImmatriculation } from '#clients/api-proxy/rne';
 import { Siren } from '#utils/helpers';
-import { fetchRNEImmatriculation } from '..';
 
 describe('fetchRNEImmatriculation', () => {
   it('Should match snapshot for protected uniteLegale with the characteristics (PROTECTED)', async () => {
