@@ -19,12 +19,12 @@ import {
   libelleFromCategoriesJuridiques,
   libelleFromCodeNAF,
 } from '#utils/helpers/formatting/labels';
-import { inseeClientGet, InseeClientOptions } from '..';
+import { inseeClientGet, InseeClientOptions } from '.';
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
-} from '../../../utils/helpers/insee-variables';
+} from '../../utils/helpers/insee-variables';
 
 type IInseeUniteLegaleResponse = {
   uniteLegale: {

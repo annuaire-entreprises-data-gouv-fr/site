@@ -16,12 +16,12 @@ import {
   formatAdresse,
 } from '#utils/helpers';
 import { libelleFromCodeNAF } from '#utils/helpers/formatting/labels';
-import { InseeClientOptions, inseeClientGet } from '..';
+import { InseeClientOptions, inseeClientGet } from '.';
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,
   statuDiffusionFromStatutDiffusionInsee,
-} from '../../../utils/helpers/insee-variables';
+} from '../../utils/helpers/insee-variables';
 
 type IInseeEtablissementResponse = {
   etablissement: IInseeEtablissement;
