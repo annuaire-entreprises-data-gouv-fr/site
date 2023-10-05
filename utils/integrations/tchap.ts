@@ -13,7 +13,7 @@ export default async function logInTchap({ text }: ITchapData) {
     url: process.env.TCHAP_HOOK,
     method: 'POST',
     data: {
-      text,
+      message: text,
       roomId: process.env.TCHAP_ROOM_ID,
     },
   });
