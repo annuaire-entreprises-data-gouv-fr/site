@@ -34,8 +34,8 @@
           "libelleActivitePrincipale": "Activités de poste dans le cadre d’une obligation de service universel (53.10Z)",
           "trancheEffectif": "",
           "libelleTrancheEffectif": "",
-          "latitude": null,
-          "longitude": null,
+          "latitude": "48.83002",
+          "longitude": "2.275688",
           "conventionsCollectives": [
             {
               "siret": "35600000000048",
@@ -76,8 +76,8 @@
               "libelleActivitePrincipale": "Activités de poste dans le cadre d’une obligation de service universel (53.10Z)",
               "trancheEffectif": "",
               "libelleTrancheEffectif": "",
-              "latitude": null,
-              "longitude": null,
+              "latitude": "48.83002",
+              "longitude": "2.275688",
               "conventionsCollectives": [
                 {
                   "siret": "35600000000048",
@@ -111,8 +111,8 @@
               "libelleActivitePrincipale": "Activités de poste dans le cadre d’une obligation de service universel (53.10Z)",
               "trancheEffectif": "",
               "libelleTrancheEffectif": "",
-              "latitude": null,
-              "longitude": null,
+              "latitude": "48.83002",
+              "longitude": "2.275688",
               "conventionsCollectives": [
                 {
                   "siret": "35600000000048",
@@ -126,7 +126,7 @@
           "unknown": [],
           "closed": [],
           "nombreEtablissementsOuverts": 1,
-          "nombreEtablissements": 12791,
+          "nombreEtablissements": 12792,
           "usePagination": true,
           "currentEtablissementPage": 1
         },
@@ -171,8 +171,8 @@
           }
         ],
         "matchingEtablissements": [],
-        "nombreEtablissements": 12791,
-        "nombreEtablissementsOuverts": 9379,
+        "nombreEtablissements": 12792,
+        "nombreEtablissementsOuverts": 9380,
         "dirigeants": [
           {
             "sexe": null,

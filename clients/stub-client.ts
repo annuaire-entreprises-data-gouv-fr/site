@@ -44,7 +44,6 @@ export default function stubClient<
   const stubFiles = readdirSync(stubPath).filter((file: string) =>
     file.match(/.*.json/)
   );
-  console.log('yaaaaaaaa', stubPath, stubFiles);
 
   const asyncStubs = Promise.all(
     stubFiles.map(async (path: string) => {

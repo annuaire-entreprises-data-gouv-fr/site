@@ -1,12 +1,13 @@
-import path from 'path';
 import { clientTVA } from '#clients/api-proxy/tva';
+import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 
 describe('clientTVA', () => {
   it('Should match snapshot', async () => {
-    const args = ['29528163777'] as const;
-    const result = await clientTVA(...args);
-    expect(JSON.stringify({ args, result }, null, 2)).toMatchFile(
-      path.join(__dirname, './tva.json')
-    );
+    await expectClientToMatchSnapshot({
+      client: clientTVA,
+      args: ['29528163777'],
+      __dirname,
+      snaphotFile: 'tva.json',
+    });
   });
 });

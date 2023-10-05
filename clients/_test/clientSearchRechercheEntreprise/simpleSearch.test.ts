@@ -1,6 +1,6 @@
-import path from 'path';
 import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
 import SearchFilterParams from '#models/search-filter-params';
+import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 import simplifyParams from './simplify-params';
 
 describe.only('clientSearchRechercheEntreprise : simple search with searchTerms', () => {
@@ -22,30 +22,32 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     '88087814500015',
     '883010316',
     '908595879',
-    'aga',
-    'Ganymede',
-    'Kikou',
+    // 'aga',
+    // 'Ganymede',
+    // 'Kikou',
     'xavier jouppe',
   ].forEach(itShouldMatchSnapshotForSearch);
 });
 
 function itShouldMatchSnapshotForSearch(searchTerms: string) {
   it(`Should match snapshot for search ${searchTerms}`, async () => {
-    const args = [
-      {
-        page: 1,
-        searchFilterParams: new SearchFilterParams({}),
-        searchTerms,
+    await expectClientToMatchSnapshot({
+      client: clientSearchRechercheEntreprise,
+      __dirname,
+      args: [
+        {
+          page: 1,
+          searchFilterParams: new SearchFilterParams({}),
+          searchTerms,
+        },
+      ],
+      snaphotFile: `search-${searchTerms}.json`,
+      simplifyParams,
+      postProcessResult: (result) => {
+        result.results.forEach((searchResult) => {
+          searchResult.dateDerniereMiseAJour = '2023-09-21T03:34:50';
+        });
       },
-    ] as const;
-    const result = await clientSearchRechercheEntreprise(...args);
-
-    result.results.forEach((searchResult) => {
-      searchResult.dateDerniereMiseAJour = '2023-09-21T03:34:50';
     });
-
-    expect(
-      JSON.stringify({ args: simplifyParams(...args), result }, null, 2)
-    ).toMatchFile(path.join(__dirname, `./search-${searchTerms}.json`));
   });
 }

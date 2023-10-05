@@ -36,7 +36,7 @@
     ],
     "statutDiffusion": "partiellement diffusible",
     "etatAdministratif": "en activité",
-    "nomComplet": "Michel SAUVAGE",
+    "nomComplet": "[ND] ([ND] [ND] [ND]) ([ND])",
     "chemin": "300025764",
     "natureJuridique": "1000",
     "libelleNatureJuridique": "Entrepreneur individuel",
@@ -107,16 +107,16 @@
     "activitePrincipale": "68.20A",
     "libelleActivitePrincipale": "Location de logements",
     "dateCreation": "1981-10-01",
-    "dateDerniereMiseAJour": "2020-04-08",
+    "dateDerniereMiseAJour": "2023-10-5",
     "dateDebutActivite": "2019-12-31",
     "trancheEffectif": "N",
     "anneeCategorieEntreprise": "2020",
     "categorieEntreprise": "PME",
     "anneeTrancheEffectif": null,
     "dirigeant": {
-      "sexe": "M",
-      "prenom": "Michel",
-      "nom": "SAUVAGE"
+      "sexe": "[ND]",
+      "prenom": "[nd]",
+      "nom": "[ND] ([ND])"
     },
     "complements": {
       "estEntrepreneurIndividuel": true,

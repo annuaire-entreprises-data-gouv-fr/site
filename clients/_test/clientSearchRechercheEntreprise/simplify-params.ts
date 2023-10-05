@@ -1,7 +1,7 @@
 type IParams = {
   page: number;
   searchTerms: string;
-  searchFilterParams: {
+  searchFilterParams?: {
     toApiURI: () => string;
   };
 };

@@ -1,5 +1,6 @@
-import { Siren } from '#utils/helpers';
-
-export default function simplifyParams(siren: Siren, page: number) {
+export default function simplifyParams(
+  siren: string,
+  page: number | undefined
+) {
   return { siren, page };
 }

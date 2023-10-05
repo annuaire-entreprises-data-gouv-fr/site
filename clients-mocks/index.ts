@@ -17,7 +17,6 @@ class MockStore {
     }
 
     this._mocks.push(require('./base-adresse').default);
-    this._mocks.push(require('./sirene-insee/token').default);
 
     this._mocks.push(require('./geo/communes').default);
     this._mocks.push(require('./geo/departements').default);

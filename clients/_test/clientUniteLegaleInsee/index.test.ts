@@ -1,7 +1,7 @@
-import path from 'path';
-import { HttpServerError, HttpTimeoutError } from '#clients/exceptions';
 import { Siren } from '#utils/helpers';
 import { clientUniteLegaleInsee } from '../../sirene-insee/siren';
+import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
+import simplifyParams from './simplify-params';
 
 describe('clientUniteLegaleInsee', () => {
   (
@@ -20,25 +20,21 @@ describe('clientUniteLegaleInsee', () => {
 
 function expectClientToMatchSnapshotWithSiren(siren: Siren) {
   it(`Should match snapshot with siren ${siren}`, async () => {
-    const args = [
-      siren,
-      {
-        useFallback: false,
-        useCache: false,
+    await expectClientToMatchSnapshot({
+      client: clientUniteLegaleInsee,
+      __dirname,
+      args: [
+        siren,
+        {
+          useFallback: false,
+          useCache: false,
+        },
+      ],
+      snaphotFile: `siren-${siren}.json`,
+      postProcessResult: (result) => {
+        result.dateDerniereMiseAJour = '2023-10-5';
       },
-    ] as const;
-    try {
-      const result = await clientUniteLegaleInsee(...args);
-      expect(JSON.stringify({ args: args[0], result }, null, 2)).toMatchFile(
-        path.join(__dirname, `./siren-${siren}.json`)
-      );
-    } catch (e) {
-      if (e instanceof HttpServerError || e instanceof HttpTimeoutError) {
-        console.warn('Could not test sirene client (api not responding)');
-        return;
-      } else {
-        throw e;
-      }
-    }
+      simplifyParams,
+    });
   });
 }

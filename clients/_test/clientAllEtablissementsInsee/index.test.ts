@@ -1,5 +1,6 @@
-import { HttpServerError, HttpTimeoutError } from '#clients/exceptions';
 import { clientAllEtablissementsInsee } from '../../sirene-insee/siret';
+import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
+import simplifyParams from './simplify-params';
 
 describe('clientAllEtablissementsInsee', () => {
   // We use the commented lines to generate snapshots for
@@ -28,36 +29,19 @@ function expectClientToMatchSnapshotWithSiren(siren: string, page = 1) {
   it(`Should match snapshot with siren ${siren}${
     page !== 1 ? ' and page ' + page : ''
   }`, async () => {
-    const args = [
-      siren,
-      page,
-      {
-        useFallback: false,
-        useCache: false,
-      },
-    ] as const;
-    try {
-      const result = await clientAllEtablissementsInsee(...args);
-
-      expect(
-        JSON.stringify(
-          {
-            args: {
-              siren,
-              page,
-            },
-            result,
-          },
-          null,
-          2
-        )
-      );
-    } catch (e) {
-      if (e instanceof HttpServerError || e instanceof HttpTimeoutError) {
-        console.warn('Could not test siret client (api not responding)');
-        return;
-      } else {
-      }
-    }
+    await expectClientToMatchSnapshot({
+      __dirname,
+      client: clientAllEtablissementsInsee,
+      args: [
+        siren,
+        page,
+        {
+          useFallback: false,
+          useCache: false,
+        },
+      ],
+      snaphotFile: `siren-${siren}${page !== 1 ? '-page-' + page : ''}.json`,
+      simplifyParams,
+    });
   });
 }
