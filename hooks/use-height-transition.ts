@@ -1,5 +1,5 @@
 import { useSpring } from '@react-spring/web';
-import useMeasure from 'react-use-measure';
+import { useMeasure } from './use-measure';
 import usePrefersReducedMotion from './use-prefers-reduced-motion';
 
 export function useHeightTransition({ animateAppear = false } = {}) {
