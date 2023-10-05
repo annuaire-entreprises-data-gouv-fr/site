@@ -1,6 +1,6 @@
 import { Transaction } from '@sentry/browser';
 import * as Sentry from '@sentry/nextjs';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import { isSentryInitialized, logWarningInSentry } from '.';
 
 const getTransactionNameFromUrl = (url: string) => {
@@ -38,14 +38,12 @@ export const closeAPM = (transaction: Transaction | undefined) => {
   // else do nothing as Sentry is not initialized
 };
 
-export const withAPM = (
-  callback: (req: NextApiRequest, res: NextApiResponse) => Promise<void>
-) => {
+export const withAPM = (handler: NextApiHandler) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const url = req?.url || '/unknown';
     const transaction = createAPM(url, 'withAPM');
     try {
-      await callback(req, res);
+      await handler(req, res);
     } finally {
       if (transaction) {
         closeAPM(transaction);

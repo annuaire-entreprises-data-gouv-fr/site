@@ -34,6 +34,10 @@ const AssociationAdressAlert: React.FC<{
           <br />
           Si vous êtes membre de cette association. Contactez l’administration
           concernée pour corriger l’erreur.
+          <br />
+          <b>NB :</b> si vous avez déjà effectué la correction auprès du <MI />,
+          sachez qu’elle peut prendre quelques semaines avant d’être prise en
+          compte dans les bases de données.
         </Warning>
       )}
     </>

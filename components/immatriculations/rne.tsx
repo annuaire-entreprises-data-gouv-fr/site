@@ -17,6 +17,10 @@ import {
 } from '#models/api-not-responding';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { IUniteLegale } from '#models/index';
+import {
+  defaultNonDiffusiblePlaceHolder,
+  estDiffusible,
+} from '#models/statut-diffusion';
 import { formatDate, formatIntFr } from '#utils/helpers';
 
 type IProps = {
@@ -192,7 +196,12 @@ const ImmatriculationRNETable: React.FC<{
       'Date d’immatriculation au RNE',
       formatDate(immatriculation.identite.dateImmatriculation),
     ],
-    ['Dénomination', immatriculation.identite.denomination],
+    [
+      'Dénomination',
+      estDiffusible(uniteLegale)
+        ? immatriculation.identite.denomination
+        : defaultNonDiffusiblePlaceHolder,
+    ],
     ['Siren', formatIntFr(uniteLegale.siren)],
     ['Nature de l’entreprise', immatriculation.identite.natureEntreprise],
     ['Forme juridique', immatriculation.identite.libelleNatureJuridique],

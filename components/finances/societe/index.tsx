@@ -1,4 +1,3 @@
-import Info from '#components-ui/alerts/info';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import AdministrationNotResponding from '#components/administration-not-responding';
@@ -9,7 +8,7 @@ import { EAdministration } from '#models/administrations';
 import { isAPINotResponding } from '#models/api-not-responding';
 import constants from '#models/constants';
 import { IFinances } from '#models/donnees-financieres';
-import { formatDateYear, formatCurrency, formatDate } from '#utils/helpers';
+import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -75,13 +74,6 @@ export const FinancesSocieteSection: React.FC<IFinances> = ({
       sources={[EAdministration.MEF]}
       lastModified={financesSociete.lastModified}
     >
-      <Info>
-        Cette section est un travail en cours.
-        <br />
-        Si vous découvrez une erreur, merci de{' '}
-        <a href={constants.links.parcours.contact}>nous en faire part</a> et
-        nous la corrigerons au plus vite.
-      </Info>
       {financesSociete.hasBilanConsolide && (
         <p>
           Cette entreprise déclare un <Tag color="info">bilan consolidé</Tag>.
