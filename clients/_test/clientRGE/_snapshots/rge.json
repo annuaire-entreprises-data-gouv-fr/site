@@ -4,26 +4,15 @@
   ],
   "result": {
     "companyInfo": {
-      "adresse": "5 RUE MORAND, 93400, SAINT OUEN",
-      "email": "contact@gsept.fr",
-      "nomEntreprise": "GROUPE SOLUTION ENERGIE POLE TECHNIQUE",
+      "adresse": "5-9 rue Morand, 93400, ST OUEN",
+      "email": "ylan.sabban@yahoo.fr",
+      "nomEntreprise": "GROUPE SOLUTION ENERGIE POLE TECHNIQUE (GSEPT)",
       "siret": "52816377700030",
       "siteInternet": "",
-      "telephone": "01 49 48 14 50",
+      "telephone": "06 98 39 31 19",
       "workingWithIndividual": true
     },
     "certifications": [
-      {
-        "codeQualification": "C001D117",
-        "domaines": [
-          "Projet complet de rénovation",
-          "Audit énergétique"
-        ],
-        "nomCertificat": "CERTIBAT-RGE",
-        "nomQualification": "Offre Globale de Rénovation Energétique (C001D117)",
-        "organisme": "certibat",
-        "urlQualification": "https://www.qualibat.com/Views/GetFichier.aspx?fn=2022\\SIEG-Certificat-CB-159386-GROUPE SOLUTION - RE22249-2-20230414.pdf"
-      },
       {
         "codeQualification": "1911",
         "domaines": [

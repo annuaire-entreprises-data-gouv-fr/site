@@ -32,13 +32,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ inputs.node-version }}
+      - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
       - uses: ./.github/actions/install-dependencies
-        with:
-          node-version: ${{ env.node-version }}
+        name: Install and cache dependencies
+
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -161,7 +161,10 @@ jobs:
         run: sudo apt-get install -y redis-tools redis-server
 
       - name: Run API client tests
-        run: npm run test:api-clients
+        run: |
+          # Retry 2 times before the steps actually fails
+          (echo "===== test:api-clients: retry #1 ====" && npm run test:api-clients) || \
+          (echo "===== test:api-clients: retry #2 ====" && npm run test:api-clients)
 
       - name: '[IMPORTANT] Manual action required'
         if: ${{ failure() }}
@@ -183,4 +186,4 @@ jobs:
 
           - If the changes concerns the model (eg. API changed, missing field, type of data),
             you need to check if it is a breaking change, and correct the code if is.
-            When the code is fixed, you can update the snapshot locally.""
+            When the code is fixed, you can update the snapshot locally."
