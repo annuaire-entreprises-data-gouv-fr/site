@@ -14,15 +14,15 @@ import DataSectionLoader from './data-section-loader';
 
 interface IDataSectionProps<T> extends ISectionProps {
   data: IAPINotRespondingError | IAPILoading | T;
-  notFoundInformation?: React.ReactNode;
-  additionalInformationOnError?: React.ReactNode;
+  notFoundInfo?: React.ReactNode;
+  additionalInfoOnError?: React.ReactNode;
   children: (data: T) => JSX.Element;
 }
 
 function SectionStateMachine<T extends {}>({
   data,
-  notFoundInformation,
-  additionalInformationOnError,
+  notFoundInfo,
+  additionalInfoOnError,
   ...props
 }: IDataSectionProps<T>) {
   const showLoadingState = useShowLoadingState(data);
@@ -42,14 +42,14 @@ function SectionStateMachine<T extends {}>({
 
       return (
         <FadeIn>
-          {data.errorType === 404 && notFoundInformation ? (
-            notFoundInformation
+          {data.errorType === 404 && notFoundInfo ? (
+            notFoundInfo
           ) : (
             <>
               <AdministrationNotRespondingMessage
                 administrationMetaData={administrationMetaData}
               />
-              {additionalInformationOnError ?? null}
+              {additionalInfoOnError ?? null}
             </>
           )}
         </FadeIn>
@@ -73,7 +73,7 @@ export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
   if (
     isAPINotResponding(data) &&
     data.errorType === 404 &&
-    props.notFoundInformation === null
+    props.notFoundInfo === null
   ) {
     return null;
   }

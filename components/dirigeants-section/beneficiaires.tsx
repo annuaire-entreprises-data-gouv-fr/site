@@ -39,7 +39,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
         id="beneficiaires"
         title="Bénéficiaire(s) effectif(s)"
         sources={[EAdministration.INPI]}
-        notFoundInformation={null}
+        notFoundInfo={null}
         data={immatriculationRNE}
       >
         {(immatriculationRNE) => (
