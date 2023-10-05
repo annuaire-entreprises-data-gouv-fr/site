@@ -1,22 +1,51 @@
-import { animated, useSpring } from '@react-spring/web';
-import usePrefersReducedMotion from 'hooks/use-prefers-reduced-motion';
-
-type IFadeInProps = {
-  children: React.ReactNode;
+type IProps = {
+  duration?: number;
   delay?: number;
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 };
 
-export function FadeIn({ children, delay }: IFadeInProps) {
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const animatedStyle = useSpring(
-    !prefersReducedMotion
-      ? {
-          from: { opacity: 0 },
-          to: { opacity: 1 },
-          delay,
+export const FadeIn = ({
+  duration = 400,
+  delay = 0,
+  children,
+  style,
+  className,
+}: IProps) => {
+  return (
+    <>
+      <div
+        className={(className ? className : '') + ' ' + 'fade-in-wrapper'}
+        style={{
+          ...(style || {}),
+          animationDuration: duration + 'ms',
+          animationDelay: delay + 'ms',
+        }}
+      >
+        {children}
+      </div>
+      <style jsx>{`
+        @media (prefers-reduced-motion: no-preference) {
+          .fade-in-wrapper {
+            will-change: opacity, transform;
+            animation-name: fadeInAnimation;
+            animation-fill-mode: backwards;
+            animation-easing-function: ease-in-out;
+          }
         }
-      : {}
+        @keyframes fadeInAnimation {
+          from {
+            opacity: 0;
+            transform: translateY(-5px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+    </>
   );
-
-  return <animated.div style={animatedStyle}>{children} </animated.div>;
-}
+};
+export default FadeIn;

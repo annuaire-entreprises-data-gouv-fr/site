@@ -6,7 +6,9 @@ export function useHeightTransition({ animateAppear = false } = {}) {
   const [ref, { height }] = useMeasure();
   const prefersReducedMotion = usePrefersReducedMotion();
   const animatedStyle = useSpring(
-    prefersReducedMotion || (!animateAppear && height === 0) ? {} : { height }
+    prefersReducedMotion || (!animateAppear && height === undefined)
+      ? {}
+      : { height: height || 0 }
   );
 
   return { ref, animatedStyle } as const;

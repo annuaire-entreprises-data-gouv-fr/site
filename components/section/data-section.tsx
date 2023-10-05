@@ -41,7 +41,7 @@ function SectionStateMachine<T extends {}>({
         administrationsMetaData[data.administration] || {};
 
       return (
-        <FadeIn>
+        <FadeIn key={'' + showLoadingState}>
           {data.errorType === 404 && notFoundInfo ? (
             notFoundInfo
           ) : (
@@ -55,7 +55,9 @@ function SectionStateMachine<T extends {}>({
         </FadeIn>
       );
     } else {
-      return <FadeIn>{props.children(data)};</FadeIn>;
+      return (
+        <FadeIn key={'' + showLoadingState}>{props.children(data)}</FadeIn>
+      );
     }
   }
 }
