@@ -4,6 +4,7 @@ import {
   logSuggestionToNotion,
   notionFeedbacksLink,
 } from '#utils/integrations/notion';
+import logInTchap from '#utils/integrations/tchap';
 import logErrorInSentry from '#utils/sentry';
 
 const logAllEvents = async (req: NextApiRequest) => {
@@ -20,6 +21,8 @@ const logAllEvents = async (req: NextApiRequest) => {
 
     // async functions but no need to await them
     logInMattermost(mattermostData);
+    logInTchap({ text: mattermostData.text });
+
     logSuggestionToNotion(visitorType, email, suggestion);
   } catch (e: any) {
     logErrorInSentry('Error in form submission', {
