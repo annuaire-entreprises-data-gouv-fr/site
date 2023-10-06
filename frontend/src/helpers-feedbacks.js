@@ -48,4 +48,4 @@ function triggerModal(
 }
 
 triggerModal('nps-modal', 2, '/');
-triggerModal('we-need-you-modal', 0, '/', 'opacity: 1;right: 50px;');
+triggerModal('we-need-you-modal', 0, '/');
