@@ -1,11 +1,13 @@
 /**
- *  NPS MODAL & FEEDBACK
+ *  NPS MODAL
  */
 (function init() {
   window.showModal = function (modalId) {
     var modal = document.getElementById(modalId);
+
     if (modal) {
       modal.style.display = 'block';
+      window.setTimeout(() => modal.classList.toggle('hide'), 400);
     }
   };
   window.closeModal = function (modalId) {
@@ -41,3 +43,4 @@ function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
 }
 
 triggerModal('nps-modal', 2, '/');
+// triggerModal('we-need-you-modal', 0, '/');

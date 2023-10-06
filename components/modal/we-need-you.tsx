@@ -1,6 +1,7 @@
 import React from 'react';
-import ButtonLink from '#components-ui/button';
 import constants from '#models/constants';
+
+const formLink = 'https://tally.so/r/w478pA';
 
 export const WeNeedYouModal: React.FC<{}> = () => (
   <>
@@ -8,91 +9,86 @@ export const WeNeedYouModal: React.FC<{}> = () => (
       id="we-need-you-modal"
       role="dialog"
       aria-label="Donnez-nous votre avis"
+      className="hide"
     >
-      <div
-        className="background-close-modal"
-        dangerouslySetInnerHTML={{
-          __html: `
-                <div onclick="window.closeModal('we-need-you-modal')" style="width:100%; height:100%; z-index:99"></div>
-          `,
-        }}
-      />
       <div className="modal">
-        <b>Nous sommes curieux ! 👀</b>
-        <p>
-          Dites-nous comment vous utilisez le site, comment nous pourrions
-          l’améliorer et le compléter.
-        </p>
-        <br />
-        <div className="layout-center">
-          <ButtonLink
-            to="https://startupdetat.typeform.com/to/gyOD5443"
-            target="_blank"
-          >
-            Aidez-nous en répondant au questionnaire
-          </ButtonLink>
+        <div className="title">
+          <div>🙃</div>
+          <div>
+            <b>On a besoin de vous !</b>
+            <br />
+            <i>(pendant 30 sec)</i>
+          </div>
         </div>
-        <br />
+        <div className="layout-center">
+          <div
+            dangerouslySetInnerHTML={{
+              __html: `
+              <a style="background-color:#fff; color:#000091; padding:5px;" onclick="window.closeModal('we-need-you-modal')"  href="${formLink}" target="_blank">
+                Répondez à nos questions
+              </a>`,
+            }}
+          />
+        </div>
         <div
           className="close-modal"
           dangerouslySetInnerHTML={{
             __html: `
             <button onclick="window.closeModal('we-need-you-modal')" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
-            <b>Ne plus afficher ce message ✕</b>
+            <b>fermer ✕</b>
             </button>
             `,
           }}
         />
       </div>
     </div>
+
     <style jsx>{`
       #we-need-you-modal {
-        z-index: 100;
+        z-index: 300;
+        color: #fff;
+        background: transparent;
         position: fixed;
-        width: 100%;
-        height: 100vh;
-        top: 0;
-        font-size: 0.9rem;
-        background-color: rgba(0, 0, 0, 0.3);
-        font-family: 'Marianne', sans-serif;
+        right: 0;
+        top: 230px;
+        overflow: hidden;
         display: none;
-        align-items: center;
-        justify-content: center;
       }
+
+      #we-need-you-modal.hide > .modal {
+        opacity: 0;
+        transform: translateX(300px);
+      }
+
       .modal {
-        background-color: #fff;
-        max-width: 550px;
-        min-height: 200px;
-        position: relative;
-        padding: 40px;
-        text-align: center;
-        border-radius: 3px;
-      }
-      .modal:before {
-        position: absolute;
-        border-top: 3px solid ${constants.colors.frBlue};
-        border-left: 3px solid ${constants.colors.frBlue};
-        content: '';
-        height: 30px;
-        width: 30px;
-        left: 10px;
-        top: 10px;
-      }
-      .modal:after {
-        position: absolute;
-        border-bottom: 3px solid ${constants.colors.frBlue};
-        border-right: 3px solid ${constants.colors.frBlue};
-        content: '';
-        height: 30px;
-        width: 30px;
-        right: 10px;
-        bottom: 10px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        transition: all 250ms 1s ease-out;
+        background-color: ${constants.colors.frBlue};
+        padding: 20px;
+        padding-top: 40px;
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0px);
       }
 
       .close-modal {
         position: absolute;
         top: 20px;
         right: 20px;
+      }
+      .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+      }
+      .title > div:first-of-type {
+        font-size: 2.3rem;
+        padding-right: 5px;
+      }
+      .title > div:nth-of-type(2) > b {
+        font-size: 1.1rem;
       }
 
       .background-close-modal {
@@ -101,6 +97,24 @@ export const WeNeedYouModal: React.FC<{}> = () => (
         right: 0;
         height: 100%;
         width: 100%;
+      }
+
+      @media only screen and (min-width: 1px) and (max-width: 576px) {
+        #we-need-you-modal {
+          bottom: 0;
+          top: initial;
+          width: 100%;
+        }
+
+        #we-need-you-modal.hide > .modal {
+          opacity: 0;
+          transform: translateY(300px);
+        }
+        .modal {
+          border-radius: 0;
+          bottom: 0;
+          transform: translateY(0px);
+        }
       }
     `}</style>
   </>
