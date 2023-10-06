@@ -31,7 +31,6 @@ function triggerModal(
   if (hasAlreadyBeenTriggered) {
     return;
   }
-  console.log('hey');
 
   if (path.indexOf(startsWithString) === -1) {
     return;
@@ -48,5 +47,5 @@ function triggerModal(
   window.sessionStorage.setItem(pvKey, parseInt(pageViewCount, 10) + 1);
 }
 
-// triggerModal('nps-modal', 2, '/');
+triggerModal('nps-modal', 2, '/');
 triggerModal('we-need-you-modal', 0, '/', 'opacity: 1;right: 50px;');
