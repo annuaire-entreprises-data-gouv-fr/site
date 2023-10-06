@@ -98,6 +98,24 @@ export const WeNeedYouModal: React.FC<{}> = () => (
         height: 100%;
         width: 100%;
       }
+
+      @media only screen and (min-width: 1px) and (max-width: 576px) {
+        #we-need-you-modal {
+          bottom: 0;
+          top: initial;
+          width: 100%;
+        }
+
+        #we-need-you-modal.hide > .modal {
+          opacity: 0;
+          transform: translateY(300px);
+        }
+        .modal {
+          border-radius: 0;
+          bottom: 0;
+          transform: translateY(0px);
+        }
+      }
     `}</style>
   </>
 );
