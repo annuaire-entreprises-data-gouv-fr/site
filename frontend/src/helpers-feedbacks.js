@@ -19,19 +19,13 @@
   };
 })();
 
-function triggerModal(
-  modalId,
-  triggerCount = 1,
-  startsWithString = '/',
-  whithStyle = ''
-) {
+function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
   var path = window.location.pathname;
 
   var hasAlreadyBeenTriggered = window.localStorage.getItem(modalId) || false;
   if (hasAlreadyBeenTriggered) {
     return;
   }
-  console.log('hey');
 
   if (path.indexOf(startsWithString) === -1) {
     return;
@@ -42,11 +36,11 @@ function triggerModal(
   var pageViewCount = window.sessionStorage.getItem(pvKey) || 0;
 
   if (pageViewCount >= triggerCount) {
-    window.showModal(modalId, whithStyle);
+    window.showModal(modalId);
   }
 
   window.sessionStorage.setItem(pvKey, parseInt(pageViewCount, 10) + 1);
 }
 
-// triggerModal('nps-modal', 2, '/');
-triggerModal('we-need-you-modal', 0, '/', 'opacity: 1;right: 50px;');
+triggerModal('nps-modal', 2, '/');
+// triggerModal('we-need-you-modal', 0, '/');

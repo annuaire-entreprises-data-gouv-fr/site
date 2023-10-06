@@ -1,7 +1,7 @@
 import React from 'react';
 import constants from '#models/constants';
 
-const formLink = '';
+const formLink = 'https://tally.so/r/w478pA';
 
 export const WeNeedYouModal: React.FC<{}> = () => (
   <>
@@ -50,8 +50,8 @@ export const WeNeedYouModal: React.FC<{}> = () => (
         background: transparent;
         position: fixed;
         right: 0;
-        top: 200px;
-        overflow: scroll;
+        top: 230px;
+        overflow: hidden;
         display: none;
       }
 
@@ -63,7 +63,7 @@ export const WeNeedYouModal: React.FC<{}> = () => (
       .modal {
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
-        transition: all 200ms ease-out;
+        transition: all 250ms 1s ease-out;
         background-color: ${constants.colors.frBlue};
         padding: 20px;
         padding-top: 40px;
