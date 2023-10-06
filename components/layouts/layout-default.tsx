@@ -1,9 +1,10 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { Question } from '#components-ui/question';
 import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
 import { Header } from '#components/header';
+import { WeNeedYouModal } from '#components/modal/we-need-you';
 import SocialNetworks from '#components/social-network';
 import { ISession } from '#utils/session';
 
@@ -22,6 +23,7 @@ export const LayoutDefault = ({
   return (
     <div id="page-layout">
       {isBrowserOutdated && <BrowserIsOutdatedBanner />}
+      <WeNeedYouModal />
       <NPSBanner />
 
       <Header
