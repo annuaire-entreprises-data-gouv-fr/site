@@ -1,10 +1,6 @@
 import httpClient from '#utils/network';
 
-type ITchapData = {
-  text: string;
-};
-
-export default async function logInTchap({ text }: ITchapData) {
+export default async function logInTchap(text: string) {
   if (!process.env.TCHAP_HOOK && !process.env.TCHAP_ROOM_ID) {
     throw new Error('TCHAP ENV variables manquantes');
   }

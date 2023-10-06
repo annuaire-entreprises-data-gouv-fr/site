@@ -1,10 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import logInMattermost from '#utils/integrations/mattermost';
-import {
-  logSuggestionToNotion,
-  notionFeedbacksLink,
-} from '#utils/integrations/notion';
-import logInTchap from '#utils/integrations/tchap';
+import { logSuggestionToNotion } from '#utils/integrations/notion';
 import logErrorInSentry from '#utils/sentry';
 
 const logAllEvents = async (req: NextApiRequest) => {
@@ -14,15 +9,7 @@ const logAllEvents = async (req: NextApiRequest) => {
     const suggestion = req.body['textarea'] || NA;
     const email = req.body['email'] || NA;
 
-    const mattermostData = {
-      username: 'clippy',
-      text: `**Nouvelle suggestion** \nVisiteur : ${visitorType} \nSuggestion : ${suggestion} \nLien notion : [👉 ici](${notionFeedbacksLink})`,
-    };
-
     // async functions but no need to await them
-    logInMattermost(mattermostData);
-    logInTchap({ text: mattermostData.text });
-
     logSuggestionToNotion(visitorType, email, suggestion);
   } catch (e: any) {
     logErrorInSentry('Error in form submission', {

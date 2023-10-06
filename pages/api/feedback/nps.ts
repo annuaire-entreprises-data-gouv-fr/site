@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { logEventInMatomo } from '#utils/analytics/matomo';
-import logInMattermost from '#utils/integrations/mattermost';
 import {
   logSuggestionToNotion,
   notionFeedbacksLink,
 } from '#utils/integrations/notion';
+import logInTchap from '#utils/integrations/tchap';
 import logErrorInSentry from '#utils/sentry';
 
 const logAllEvents = async (req: NextApiRequest) => {
@@ -19,16 +19,13 @@ const logAllEvents = async (req: NextApiRequest) => {
     const email = req.body['email'] || NA;
 
     const commentaire = text
-      ? ` \nCommentaire : *${text}* \nEmail : ${email} \nLien notion : [👉 ici](${notionFeedbacksLink})`
+      ? ` \nCommentaire : ${text} \nEmail : ${email} \nLien notion : ${notionFeedbacksLink}`
       : '';
 
-    const mattermostData = {
-      username: 'clippy',
-      text: `Note : **${mood}/10** \nVisiteur : ${visitorType} \nOrigine : ${origin}${commentaire}`,
-    };
+    const tchapText = `Note : ${mood}/10 \nVisiteur : ${visitorType} \nOrigine : ${origin}${commentaire}`;
 
     // async functions but no need to await them
-    logInMattermost(mattermostData);
+    logInTchap(tchapText);
     logEventInMatomo(
       'feedback:nps',
       NA,
