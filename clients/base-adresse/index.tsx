@@ -17,7 +17,12 @@ type IBANResponse = {
  * GET address for geoloc
  */
 const clientBanGeoLoc = async (adresse: string): Promise<IGeoLoc> => {
-  const route = `${routes.ban}${adresse.replaceAll(' ', '+')}`;
+  // remove all characters that are not digits or letters at the begining of adress as it triggers a 400
+  const sanitizedAdress = adresse
+    .replace(/^[^a-zA-Z0-9]*/, '')
+    .replaceAll(' ', '+');
+
+  const route = `${routes.ban}${sanitizedAdress}`;
   const response = await httpGet(route, { timeout: constants.timeout.L });
 
   return mapToDomainObject(response.data as IBANResponse);

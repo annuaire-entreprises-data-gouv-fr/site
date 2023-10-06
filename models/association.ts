@@ -76,10 +76,12 @@ const verifyAdressConsistency = async (
     }
     return false;
   } catch (e: any) {
-    logErrorInSentry('Error in API BAN', {
-      siren,
-      details: e.toString(),
-    });
+    if (!(e instanceof HttpNotFound)) {
+      logErrorInSentry('Error in API BAN', {
+        siren,
+        details: e.toString(),
+      });
+    }
     return false;
   }
 };
