@@ -63,7 +63,7 @@ export default function stubClientWithSnapshots<
 
     if (!stub) {
       try {
-        const response = client(...args);
+        const response = await client(...args);
 
         // The warning is displayed only if no error
         // is thrown by the client (as we cannot stub error for now)

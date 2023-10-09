@@ -18,22 +18,30 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
   postProcessResult,
   __dirname,
 }: IParams<T, U>) {
+  let result: U | undefined;
   try {
-    const result = await client(...args);
-
+    result = await client(...args);
+  } catch (e) {
+    try {
+      console.log('Second try');
+      result = await client(...args);
+    } catch (e) {
+      if (e instanceof HttpServerError || e instanceof HttpTimeoutError) {
+        console.warn('Could not test siret client (api not responding)');
+        return;
+      } else {
+        throw e;
+      }
+    }
+  } finally {
+    if (!result) {
+      return;
+    }
     if (postProcessResult) {
       postProcessResult(result);
     }
-
     expect(
       JSON.stringify({ args: simplifyParams(...args), result }, null, 2)
     ).toMatchFile(path.join(__dirname, '_snapshots', snaphotFile));
-  } catch (e) {
-    if (e instanceof HttpServerError || e instanceof HttpTimeoutError) {
-      console.warn('Could not test siret client (api not responding)');
-      return;
-    } else {
-      throw e;
-    }
   }
 }

@@ -3,7 +3,7 @@ import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot'
 
 describe('clientCommunesByName', () => {
   it('Should match snapshot', async () => {
-    expectClientToMatchSnapshot({
+    await expectClientToMatchSnapshot({
       client: clientCommunesByName,
       args: ['Nice'],
       __dirname,

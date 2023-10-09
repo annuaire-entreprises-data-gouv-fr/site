@@ -52,4 +52,4 @@ jobs:
         uses: ./.github/actions/load-dependencies
 
       - name: Launch jest tests
-        run: npm run test:api-clients
+        run: npm run test:api-clients -- --runInBand --testTimeout=60000

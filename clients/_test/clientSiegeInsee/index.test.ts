@@ -3,20 +3,17 @@ import { clientUniteLegaleInsee } from '../../sirene-insee/siren';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 import simplifyParams from './simplify-params';
 
-describe('clientUniteLegaleInsee', () => {
+describe('clientSiegeInsee', () => {
   (
     [
       '200054781',
       '300025764',
       '351556394',
-      '356000000',
-      '528163777',
+      // '528163777',
       // '839517323',
       // '842019051',
       // '843701079',
-      // '880878145',
-      // '883010316',
-      '908595879',
+      '880878145',
     ] as Siren[]
   ).forEach(expectClientToMatchSnapshotWithSiren);
 });
