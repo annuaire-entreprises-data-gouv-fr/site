@@ -16,8 +16,6 @@ type IProps = {
 const DirigeantsEntrepriseIndividuelleSection: React.FC<IProps> = ({
   dirigeant,
 }) => {
-  const femininMasculin = dirigeant.sexe === 'M' ? '' : 'e';
-
   return (
     <>
       <Section

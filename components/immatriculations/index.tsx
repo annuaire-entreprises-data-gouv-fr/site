@@ -4,6 +4,7 @@ import ImmatriculationRNENotFoundAlert from '#components-ui/alerts/rne-not-found
 import AvisSituationSection from '#components/immatriculations/insee';
 import ImmatriculationJOAFE from '#components/immatriculations/joafe';
 import ImmatriculationSummary from '#components/immatriculations/summary';
+import { isAPILoading } from '#models/api-loading';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -37,7 +38,8 @@ const Immatriculations: React.FC<IProps> = ({
   const noAssociationImmatriculation =
     !isAnAssociation || (isAnAssociation && isNotFound(immatriculationJOAFE));
 
-  const noRNEImmatriculation = isNotFound(immatriculationRNE);
+  const noRNEImmatriculation =
+    !isAPILoading(immatriculationRNE) && isNotFound(immatriculationRNE);
 
   const noImmatriculation =
     noAssociationImmatriculation && noRNEImmatriculation;

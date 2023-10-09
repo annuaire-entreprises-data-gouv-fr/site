@@ -7,7 +7,7 @@ import {
   EAdministration,
 } from '#models/administrations';
 import constants from '#models/constants';
-import { formatDate, isTwoMonthOld, formatDateLong } from '#utils/helpers';
+import { formatDate, formatDateLong, isTwoMonthOld } from '#utils/helpers';
 
 export interface ISectionProps {
   title: string;

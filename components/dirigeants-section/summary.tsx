@@ -1,4 +1,8 @@
+import { HttpNotFound } from '#clients/exceptions';
+import FadeIn from '#components-ui/animation/fade-in';
+import { HeightTransition } from '#components-ui/animation/height-transition';
 import { INPI, INSEE, MI } from '#components/administrations';
+import { isAPILoading } from '#models/api-loading';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { IDirigeants } from '#models/dirigeants';
 import { isServicePublic } from '#models/index';
@@ -53,8 +57,10 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
   if (inseeDirigeant) {
     summaries.push(<a href="#insee-dirigeant">{inseeDirigeant}</a>);
   }
-
-  if (!isAPINotResponding(immatriculationRNE)) {
+  if (
+    !isAPILoading(immatriculationRNE) &&
+    !isAPINotResponding(immatriculationRNE)
+  ) {
     const dirigeantsCount = (immatriculationRNE?.dirigeants || []).length;
     summaries.push(
       <a href="#rne-dirigeants">
@@ -82,20 +88,28 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
       );
     } else if (isServicePublic(uniteLegale)) {
       return <NoDirigeantServicePublic />;
+    } else if (
+      isAPILoading(immatriculationRNE) ||
+      (isAPINotResponding(immatriculationRNE) &&
+        !(immatriculationRNE instanceof HttpNotFound))
+    ) {
+      return null;
     }
     return <NoDirigeantDefault />;
   }
 
   return (
-    <>
-      Cette structure possède :
-      <ul>
-        {summaries.map((summary, index) => (
-          <li key={index}>{summary}</li>
-        ))}
-      </ul>
-      <br />
-    </>
+    <HeightTransition animateAppear>
+      <FadeIn>
+        Cette structure possède :
+        <ul>
+          {summaries.map((summary, index) => (
+            <li key={index}>{summary}</li>
+          ))}
+        </ul>
+        <br />
+      </FadeIn>
+    </HeightTransition>
   );
 };
 
