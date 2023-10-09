@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import { FadeIn } from '#components-ui/animation/fade-in';
 import { HeightTransition } from '#components-ui/animation/height-transition';
 import AdministrationNotRespondingMessage from '#components/administration-not-responding/message';
@@ -7,42 +8,56 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
+import { useTimeout } from 'hooks/use-timeout';
 import { ISectionProps, Section } from '.';
 import DataSectionLoader from './data-section-loader';
 
 interface IDataSectionProps<T> extends ISectionProps {
   data: IAPINotRespondingError | IAPILoading | T;
-  hideIf404?: boolean;
-  additionalInformationOnError?: React.ReactNode;
+  notFoundInfo?: React.ReactNode;
+  additionalInfoOnError?: React.ReactNode;
   children: (data: T) => JSX.Element;
 }
 
-export function SectionStateMachine<T extends {}>({
+function SectionStateMachine<T extends {}>({
   data,
-  hideIf404 = false,
-  additionalInformationOnError,
+  notFoundInfo,
+  additionalInfoOnError,
   ...props
 }: IDataSectionProps<T>) {
-  if (isAPILoading(data)) {
+  const showLoadingState = useShowLoadingState(data);
+  if (showLoadingState) {
     const dataSources = Array.from(new Set(props.sources || [])).map(
       (key) => administrationsMetaData[key]
     );
-    return <DataSectionLoader dataSources={dataSources} />;
+    return (
+      <FadeIn delay={100}>
+        <DataSectionLoader dataSources={dataSources} />
+      </FadeIn>
+    );
   } else {
     if (isAPINotResponding(data)) {
       const administrationMetaData =
         administrationsMetaData[data.administration] || {};
 
       return (
-        <>
-          <AdministrationNotRespondingMessage
-            administrationMetaData={administrationMetaData}
-          />
-          {additionalInformationOnError ?? null}
-        </>
+        <FadeIn key={'' + showLoadingState}>
+          {data.errorType === 404 && notFoundInfo ? (
+            notFoundInfo
+          ) : (
+            <>
+              <AdministrationNotRespondingMessage
+                administrationMetaData={administrationMetaData}
+              />
+              {additionalInfoOnError ?? null}
+            </>
+          )}
+        </FadeIn>
       );
     } else {
-      return props.children(data);
+      return (
+        <FadeIn key={'' + showLoadingState}>{props.children(data)}</FadeIn>
+      );
     }
   }
 }
@@ -57,17 +72,40 @@ export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
   //@ts-ignore
   const lastModified = data?.lastModified || null;
 
-  if (isAPINotResponding(data) && data.errorType === 404 && props.hideIf404) {
+  if (
+    isAPINotResponding(data) &&
+    data.errorType === 404 &&
+    props.notFoundInfo === null
+  ) {
     return null;
   }
 
   return (
     <Section {...props}>
       <HeightTransition>
-        <FadeIn>
-          <SectionStateMachine {...props} lastModified={lastModified} />
-        </FadeIn>
+        <SectionStateMachine {...props} lastModified={lastModified} />
       </HeightTransition>
     </Section>
   );
+}
+
+/** Contains the logic that prevents flickering of UI */
+function useShowLoadingState<T>(data: IAPILoading | T): data is IAPILoading {
+  const after100ms = useTimeout(100);
+  const before800ms = !useTimeout(800);
+  const [dataLoadedBefore100ms, setDataLoadedBefore100ms] = useState(false);
+  useEffect(() => {
+    if (!isAPILoading(data) && !after100ms) {
+      setDataLoadedBefore100ms(true);
+    }
+  }, [data, after100ms]);
+
+  if (dataLoadedBefore100ms) {
+    return false;
+  }
+  if (before800ms) {
+    // We show the loading state for at least 500ms to avoid flickering
+    return true;
+  }
+  return isAPILoading(data);
 }

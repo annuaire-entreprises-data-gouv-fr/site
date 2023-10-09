@@ -1,4 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
+import FadeIn from '#components-ui/animation/fade-in';
 import { HeightTransition } from '#components-ui/animation/height-transition';
 import { INPI, INSEE, MI } from '#components/administrations';
 import { isAPILoading } from '#models/api-loading';
@@ -99,13 +100,15 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
 
   return (
     <HeightTransition animateAppear>
-      Cette structure possède :
-      <ul>
-        {summaries.map((summary, index) => (
-          <li key={index}>{summary}</li>
-        ))}
-      </ul>
-      <br />
+      <FadeIn>
+        Cette structure possède :
+        <ul>
+          {summaries.map((summary, index) => (
+            <li key={index}>{summary}</li>
+          ))}
+        </ul>
+        <br />
+      </FadeIn>
     </HeightTransition>
   );
 };

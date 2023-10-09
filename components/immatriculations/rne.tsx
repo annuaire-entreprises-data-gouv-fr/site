@@ -84,8 +84,8 @@ const ImmatriculationRNE: React.FC<IProps> = ({
         title="Inscription au RNE"
         sources={[EAdministration.INPI]}
         data={immatriculation}
-        hideIf404
-        additionalInformationOnError={
+        notFoundInfo={null}
+        additionalInfoOnError={
           <ImmatriculationLinks uniteLegale={uniteLegale} />
         }
       >

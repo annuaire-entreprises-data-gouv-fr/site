@@ -48,7 +48,7 @@ const DirigeantsSection: React.FC<IProps> = ({ immatriculationRNE, siren }) => (
     title="Dirigeant(s)"
     sources={[EAdministration.INPI]}
     data={immatriculationRNE}
-    hideIf404
+    notFoundInfo={null}
   >
     {(immatriculationRNE) => (
       <DirigeantContent immatriculationRNE={immatriculationRNE} siren={siren} />
