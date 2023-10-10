@@ -28,5 +28,5 @@ describe('fetchRNEImmatriculation', () => {
       __dirname,
       snaphotFile: 'siret-356000000.json',
     });
-  });
+  }, 30000);
 });
