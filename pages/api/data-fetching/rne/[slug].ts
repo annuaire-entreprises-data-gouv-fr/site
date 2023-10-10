@@ -3,6 +3,7 @@ import getImmatriculationRNE from '#models/immatriculation/rne';
 import { NotASirenError, NotLuhnValidSirenError } from '#models/index';
 import { verifySiren } from '#utils/helpers';
 import { withAPM } from '#utils/sentry/tracing';
+import withAntiBot from '#utils/session/with-anti-bot';
 
 const getRNE = async (
   { query: { slug = '' } }: NextApiRequest,
@@ -21,4 +22,4 @@ const getRNE = async (
   }
 };
 
-export default withAPM(getRNE);
+export default withAPM(withAntiBot(getRNE));

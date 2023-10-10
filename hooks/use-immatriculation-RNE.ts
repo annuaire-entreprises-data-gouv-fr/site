@@ -9,7 +9,7 @@ import { IImmatriculationRNE } from '#models/immatriculation';
 import { IUniteLegale } from '#models/index';
 import httpFrontClient from '#utils/network/frontend';
 
-const RNE_ROUTE = '/api/rne';
+const RNE_ROUTE = '/api/data-fetching/rne';
 export const useImmmatriculationRNE = (uniteLegale: IUniteLegale) => {
   const [immatriculationRNE, setImmatriculationRNE] = useState<
     IImmatriculationRNE | IAPINotRespondingError | IAPILoading
