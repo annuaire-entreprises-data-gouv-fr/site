@@ -1,4 +1,5 @@
 import routes from '#clients/routes';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IEtatCivil } from '#models/immatriculation';
 import {
@@ -64,7 +65,7 @@ type IPeriodeUniteLegale = {
   denominationUsuelle3UniteLegale: string;
 };
 
-export const clientUniteLegaleInsee = async (
+const clientUniteLegaleInsee = async (
   siren: Siren,
   options: InseeClientOptions
 ) => {
@@ -217,3 +218,8 @@ const mapToDomainObject = (
     },
   };
 };
+
+const stubbedClient = stubClientWithSnapshots({
+  clientUniteLegaleInsee,
+});
+export { stubbedClient as clientUniteLegaleInsee };

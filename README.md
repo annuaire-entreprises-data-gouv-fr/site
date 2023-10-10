@@ -100,10 +100,10 @@ npm run test:unit
 npm run test:end2end
 ```
 
-4. Tests end2end sur staging (Recipe on staging)
+4. Tests API calls
 
 ```bash
-npm run test:recipe-staging
+npm run test:api-clients
 ```
 
 ## Deploiement

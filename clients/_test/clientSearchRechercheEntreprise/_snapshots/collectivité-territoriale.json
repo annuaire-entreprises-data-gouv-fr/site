@@ -1,0 +1,1938 @@
+{
+  "args": {
+    "page": 1,
+    "searchTerms": "",
+    "searchFilterParams": "&est_rge=true&est_collectivite_territoriale=true"
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 3,
+    "pageCount": 1,
+    "results": [
+      {
+        "siren": "223100017",
+        "oldSiren": "223100017",
+        "siege": {
+          "siren": "223100017",
+          "siret": "22310001700423",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": null,
+          "nic": "00423",
+          "dateCreation": "1999-05-17",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2015-01-01",
+          "dateFermeture": "",
+          "adresse": "1 BD DE LA MARQUETTE 31090 TOULOUSE CEDEX 9",
+          "adressePostale": "1 BD DE LA MARQUETTE 31090 TOULOUSE CEDEX 9",
+          "codePostal": "31000",
+          "commune": "TOULOUSE",
+          "activitePrincipale": "84.11Z",
+          "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": "43.615663",
+          "longitude": "1.436756",
+          "conventionsCollectives": [
+            {
+              "siret": "22310001700423",
+              "idcc": "5021",
+              "CdTN": false,
+              "title": "Statut de la Fonction publique territoriale"
+            }
+          ]
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "DEPARTEMENT DE LA HAUTE GARONNE",
+        "chemin": "departement-de-la-haute-garonne-223100017",
+        "natureJuridique": "7220",
+        "libelleNatureJuridique": "Département",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "223100017",
+              "siret": "22310001700423",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00423",
+              "dateCreation": "1999-05-17",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2015-01-01",
+              "dateFermeture": "",
+              "adresse": "1 BD DE LA MARQUETTE 31090 TOULOUSE CEDEX 9",
+              "adressePostale": "1 BD DE LA MARQUETTE 31090 TOULOUSE CEDEX 9",
+              "codePostal": "31000",
+              "commune": "TOULOUSE",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "43.615663",
+              "longitude": "1.436756",
+              "conventionsCollectives": [
+                {
+                  "siret": "22310001700423",
+                  "idcc": "5021",
+                  "CdTN": false,
+                  "title": "Statut de la Fonction publique territoriale"
+                }
+              ]
+            }
+          ],
+          "open": [
+            {
+              "siren": "223100017",
+              "siret": "22310001700423",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00423",
+              "dateCreation": "1999-05-17",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2015-01-01",
+              "dateFermeture": "",
+              "adresse": "1 BD DE LA MARQUETTE 31090 TOULOUSE CEDEX 9",
+              "adressePostale": "1 BD DE LA MARQUETTE 31090 TOULOUSE CEDEX 9",
+              "codePostal": "31000",
+              "commune": "TOULOUSE",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "43.615663",
+              "longitude": "1.436756",
+              "conventionsCollectives": [
+                {
+                  "siret": "22310001700423",
+                  "idcc": "5021",
+                  "CdTN": false,
+                  "title": "Statut de la Fonction publique territoriale"
+                }
+              ]
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 72,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "84.11Z",
+        "libelleActivitePrincipale": "Administration publique générale",
+        "dateCreation": "1983-03-01",
+        "dateDerniereMiseAJour": "2023-04-24T09:43:23",
+        "dateDebutActivite": "",
+        "trancheEffectif": "52",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "GE",
+        "anneeTrancheEffectif": "2020",
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": true,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": true,
+          "statutEntrepreneurSpectacle": "valide",
+          "estFiness": true,
+          "egaproRenseignee": false,
+          "estRge": true,
+          "estOrganismeFormation": true,
+          "estSocieteMission": false,
+          "estQualiopi": true,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": "31D",
+          "codeInsee": "31",
+          "niveau": "departement",
+          "elus": [
+            {
+              "sexe": "F",
+              "nom": "VEZAT-BARONIA",
+              "prenom": "Maryse",
+              "role": "2ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1957",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "VINCINI",
+              "prenom": "Sebastien",
+              "role": "1er Vice-président du conseil départemental",
+              "dateNaissancePartial": "1978",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "ARTIGUES",
+              "prenom": "Roselyne",
+              "role": null,
+              "dateNaissancePartial": "1953",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "RIVAL",
+              "prenom": "Patrice",
+              "role": "13ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1951",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BOUREAU",
+              "prenom": "Pascal",
+              "role": null,
+              "dateNaissancePartial": "1957",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "MALRIC",
+              "prenom": "Line",
+              "role": "6ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1964",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BAGNERIS",
+              "prenom": "Bernard",
+              "role": "9ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1959",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LUMEAU-PRECEPTIS",
+              "prenom": "Aude",
+              "role": null,
+              "dateNaissancePartial": "1973",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DENOUVION",
+              "prenom": "Victor",
+              "role": null,
+              "dateNaissancePartial": "1991",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "FLOUREUSSES",
+              "prenom": "Sandrine",
+              "role": "10ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1967",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BAYLAC",
+              "prenom": "Sandrine",
+              "role": null,
+              "dateNaissancePartial": "1973",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GOJARD",
+              "prenom": "Loic",
+              "role": null,
+              "dateNaissancePartial": "1983",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MÉRIC",
+              "prenom": "Georges",
+              "role": "Président du conseil départemental",
+              "dateNaissancePartial": "1947",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "POUMIROL",
+              "prenom": "Emilienne",
+              "role": null,
+              "dateNaissancePartial": "1950",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LAFFONT",
+              "prenom": "Didier",
+              "role": null,
+              "dateNaissancePartial": "1958",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "VOLTO",
+              "prenom": "Véronique",
+              "role": null,
+              "dateNaissancePartial": "1963",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BOUTELOUP",
+              "prenom": "Jerome",
+              "role": null,
+              "dateNaissancePartial": "1976",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "TOUZET",
+              "prenom": "Sophie",
+              "role": null,
+              "dateNaissancePartial": "1973",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CUJIVES",
+              "prenom": "Didier",
+              "role": null,
+              "dateNaissancePartial": "1959",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "GEIL-GOMEZ",
+              "prenom": "Sabine",
+              "role": null,
+              "dateNaissancePartial": "1960",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DEUILHE",
+              "prenom": "Serge",
+              "role": null,
+              "dateNaissancePartial": "1970",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LECLERC",
+              "prenom": "Marie",
+              "role": null,
+              "dateNaissancePartial": "1948",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SUAUD",
+              "prenom": "Thierry",
+              "role": null,
+              "dateNaissancePartial": "1968",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "VIEU",
+              "prenom": "Annie",
+              "role": "12ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1959",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "HEBRARD",
+              "prenom": "Gilbert",
+              "role": null,
+              "dateNaissancePartial": "1947",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "SIORAT",
+              "prenom": "Florence",
+              "role": null,
+              "dateNaissancePartial": "1963",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DUCLOS",
+              "prenom": "Jean-yves",
+              "role": null,
+              "dateNaissancePartial": "1970",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LAURENTIES BARRERE",
+              "prenom": "Céline",
+              "role": null,
+              "dateNaissancePartial": "1973",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LAURENTIES BARRERE",
+              "prenom": "Céline",
+              "role": null,
+              "dateNaissancePartial": "1973",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "HARDY",
+              "prenom": "Isabelle",
+              "role": "8ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1968",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "KLOTZ",
+              "prenom": "Julien",
+              "role": null,
+              "dateNaissancePartial": "1972",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "COURADE",
+              "prenom": "Christine",
+              "role": null,
+              "dateNaissancePartial": "1960",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "FABRE",
+              "prenom": "Jean-michel",
+              "role": "7ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1960",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BOYER",
+              "prenom": "Anne",
+              "role": "14ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1966",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GABRIELI",
+              "prenom": "Alain",
+              "role": "11ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1964",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "GOFFRE PEDROSA",
+              "prenom": "Ines",
+              "role": null,
+              "dateNaissancePartial": "1992",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "TARAVELLA",
+              "prenom": "Aurélien",
+              "role": null,
+              "dateNaissancePartial": "1977",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "FELLAH",
+              "prenom": "Mourad",
+              "role": null,
+              "dateNaissancePartial": "1975",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "SAINT-AUBAIN",
+              "prenom": "Anais",
+              "role": null,
+              "dateNaissancePartial": "1986",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "EL KOUACHERI",
+              "prenom": "Zohra",
+              "role": null,
+              "dateNaissancePartial": "1964",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LLORCA",
+              "prenom": "Jean-louis",
+              "role": "15ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1949",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "DEGERS",
+              "prenom": "Laurence",
+              "role": null,
+              "dateNaissancePartial": "1968",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SIMION",
+              "prenom": "Arnaud",
+              "role": "5ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1968",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "FARCY",
+              "prenom": "Marie-claude",
+              "role": null,
+              "dateNaissancePartial": "1960",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GIBERT",
+              "prenom": "Vincent",
+              "role": "3ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1984",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "HONVAULT",
+              "prenom": "Caroline",
+              "role": null,
+              "dateNaissancePartial": "1979",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "PÉRÉ",
+              "prenom": "Marc",
+              "role": null,
+              "dateNaissancePartial": "1962",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DE SCORRAILLE",
+              "prenom": "Jean-baptiste",
+              "role": null,
+              "dateNaissancePartial": "1963",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LAMANT",
+              "prenom": "Sophie",
+              "role": null,
+              "dateNaissancePartial": "1966",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LUBAC",
+              "prenom": "Christophe",
+              "role": null,
+              "dateNaissancePartial": "1977",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "MASELLA",
+              "prenom": "Lauriane",
+              "role": null,
+              "dateNaissancePartial": "1990",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "CROQUETTE",
+              "prenom": "Martine",
+              "role": "4ème Vice-président du conseil départemental",
+              "dateNaissancePartial": "1952",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "FOUCHIER",
+              "prenom": "Dominique",
+              "role": null,
+              "dateNaissancePartial": "1962",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BARRIERE",
+              "prenom": "Karine",
+              "role": null,
+              "dateNaissancePartial": "1974",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DUMOULIN",
+              "prenom": "Jean-marc",
+              "role": null,
+              "dateNaissancePartial": "1959",
+              "lieuNaissance": ""
+            }
+          ]
+        },
+        "conventionsCollectives": [
+          {
+            "siret": "22310001700423",
+            "idcc": "5021",
+            "CdTN": false,
+            "title": "Statut de la Fonction publique territoriale"
+          }
+        ],
+        "matchingEtablissements": [
+          {
+            "siren": "223100017",
+            "siret": "22310001700423",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": null,
+            "denomination": null,
+            "nic": "00423",
+            "dateCreation": "1999-05-17",
+            "dateDerniereMiseAJour": "",
+            "dateDebutActivite": "2015-01-01",
+            "dateFermeture": "",
+            "adresse": "1 BD DE LA MARQUETTE 31090 TOULOUSE CEDEX 9",
+            "adressePostale": "1 BD DE LA MARQUETTE 31090 TOULOUSE CEDEX 9",
+            "codePostal": "31000",
+            "commune": "TOULOUSE",
+            "activitePrincipale": "84.11Z",
+            "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+            "trancheEffectif": "",
+            "libelleTrancheEffectif": "",
+            "latitude": "43.615663",
+            "longitude": "1.436756",
+            "conventionsCollectives": [
+              {
+                "siret": "22310001700423",
+                "idcc": "5021",
+                "CdTN": false,
+                "title": "Statut de la Fonction publique territoriale"
+              }
+            ]
+          }
+        ],
+        "nombreEtablissements": 72,
+        "nombreEtablissementsOuverts": 29,
+        "dirigeants": []
+      },
+      {
+        "siren": "200069383",
+        "oldSiren": "200069383",
+        "siege": {
+          "siren": "200069383",
+          "siret": "20006938300012",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": null,
+          "nic": "00012",
+          "dateCreation": "2017-01-01",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2017-01-01",
+          "dateFermeture": "",
+          "adresse": "BATIMENT INTERACTIS CHE DE 13 PIERRES BP 421 12200 VILLEFRANCHE-DE-ROUERGUE",
+          "adressePostale": "BATIMENT INTERACTIS CHE DE 13 PIERRES BP 421 12200 VILLEFRANCHE-DE-ROUERGUE",
+          "codePostal": "12200",
+          "commune": "VILLEFRANCHE-DE-ROUERGUE",
+          "activitePrincipale": "84.11Z",
+          "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": "44.357175",
+          "longitude": "2.02648",
+          "conventionsCollectives": [
+            {
+              "siret": "20006938300012",
+              "idcc": "5021",
+              "CdTN": false,
+              "title": "Statut de la Fonction publique territoriale"
+            }
+          ]
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "OUEST AVEYRON COMMUNAUTE",
+        "chemin": "ouest-aveyron-communaute-200069383",
+        "natureJuridique": "7346",
+        "libelleNatureJuridique": "Communauté de communes",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "200069383",
+              "siret": "20006938300012",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00012",
+              "dateCreation": "2017-01-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2017-01-01",
+              "dateFermeture": "",
+              "adresse": "BATIMENT INTERACTIS CHE DE 13 PIERRES BP 421 12200 VILLEFRANCHE-DE-ROUERGUE",
+              "adressePostale": "BATIMENT INTERACTIS CHE DE 13 PIERRES BP 421 12200 VILLEFRANCHE-DE-ROUERGUE",
+              "codePostal": "12200",
+              "commune": "VILLEFRANCHE-DE-ROUERGUE",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "44.357175",
+              "longitude": "2.02648",
+              "conventionsCollectives": [
+                {
+                  "siret": "20006938300012",
+                  "idcc": "5021",
+                  "CdTN": false,
+                  "title": "Statut de la Fonction publique territoriale"
+                }
+              ]
+            }
+          ],
+          "open": [
+            {
+              "siren": "200069383",
+              "siret": "20006938300012",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00012",
+              "dateCreation": "2017-01-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2017-01-01",
+              "dateFermeture": "",
+              "adresse": "BATIMENT INTERACTIS CHE DE 13 PIERRES BP 421 12200 VILLEFRANCHE-DE-ROUERGUE",
+              "adressePostale": "BATIMENT INTERACTIS CHE DE 13 PIERRES BP 421 12200 VILLEFRANCHE-DE-ROUERGUE",
+              "codePostal": "12200",
+              "commune": "VILLEFRANCHE-DE-ROUERGUE",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "44.357175",
+              "longitude": "2.02648",
+              "conventionsCollectives": [
+                {
+                  "siret": "20006938300012",
+                  "idcc": "5021",
+                  "CdTN": false,
+                  "title": "Statut de la Fonction publique territoriale"
+                }
+              ]
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 13,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "84.11Z",
+        "libelleActivitePrincipale": "Administration publique générale",
+        "dateCreation": "2017-01-01",
+        "dateDerniereMiseAJour": "2023-06-06T17:24:38",
+        "dateDebutActivite": "",
+        "trancheEffectif": "21",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2020",
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": true,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": true,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": "200069383",
+          "codeInsee": null,
+          "niveau": "epci",
+          "elus": [
+            {
+              "sexe": "F",
+              "nom": "DOUCET",
+              "prenom": "Marie-josé",
+              "role": null,
+              "dateNaissancePartial": "1966",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "DE ANDRADE",
+              "prenom": "Marie-isabelle",
+              "role": null,
+              "dateNaissancePartial": "1970",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "ALLEMAND",
+              "prenom": "Gilles",
+              "role": null,
+              "dateNaissancePartial": "1967",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DESTRUEL",
+              "prenom": "Emmanuel",
+              "role": null,
+              "dateNaissancePartial": "1969",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "RIGAL",
+              "prenom": "Dominique",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1965",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "SALESSES",
+              "prenom": "Fabienne",
+              "role": null,
+              "dateNaissancePartial": "1962",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MARTY",
+              "prenom": "Guy",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1955",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DELPECH",
+              "prenom": "Michel",
+              "role": "EPCI-P",
+              "dateNaissancePartial": "1953",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MARTY",
+              "prenom": "Benoît",
+              "role": null,
+              "dateNaissancePartial": "1968",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GUILHEN",
+              "prenom": "Philippe",
+              "role": null,
+              "dateNaissancePartial": "1958",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "DELERIS",
+              "prenom": "Suzanne",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1955",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "POUZOULET-LIGUE",
+              "prenom": "Didier",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1961",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SAINT-AFFRE",
+              "prenom": "Christian",
+              "role": null,
+              "dateNaissancePartial": "1951",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MARTIN",
+              "prenom": "Olivier",
+              "role": null,
+              "dateNaissancePartial": "1967",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DEGA",
+              "prenom": "Christophe",
+              "role": null,
+              "dateNaissancePartial": "1971",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LASCHON",
+              "prenom": "Isabelle",
+              "role": null,
+              "dateNaissancePartial": "1970",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "TEULIER",
+              "prenom": "Daniel",
+              "role": null,
+              "dateNaissancePartial": "1959",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "MOYA",
+              "prenom": "Catherine",
+              "role": null,
+              "dateNaissancePartial": "1960",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "COLONGES",
+              "prenom": "Gérard",
+              "role": null,
+              "dateNaissancePartial": "1952",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "CLAPIER",
+              "prenom": "Suzette",
+              "role": null,
+              "dateNaissancePartial": "1955",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "AGRECH",
+              "prenom": "Gérard",
+              "role": null,
+              "dateNaissancePartial": "1947",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DATCHARY",
+              "prenom": "Patrick",
+              "role": null,
+              "dateNaissancePartial": "1952",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "RUSCASSIÉ",
+              "prenom": "Gilles",
+              "role": null,
+              "dateNaissancePartial": "1964",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CHANUT",
+              "prenom": "Christian",
+              "role": null,
+              "dateNaissancePartial": "1952",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "ANDURAND",
+              "prenom": "Jacques",
+              "role": null,
+              "dateNaissancePartial": "1951",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BAYOL",
+              "prenom": "Stéphanie",
+              "role": null,
+              "dateNaissancePartial": "1972",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BOUYSSIÉ",
+              "prenom": "Jean-michel",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1961",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BRUGIER",
+              "prenom": "Guy",
+              "role": null,
+              "dateNaissancePartial": "1962",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BUGAREL",
+              "prenom": "Jean-marie",
+              "role": null,
+              "dateNaissancePartial": "1980",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CANTOURNET",
+              "prenom": "Eric",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1966",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CARRIÉ",
+              "prenom": "Jean-claude",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1972",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "COMBE-CAYLA",
+              "prenom": "Pascale",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1964",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "CUVELIER",
+              "prenom": "Carine",
+              "role": null,
+              "dateNaissancePartial": "1981",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "DESPEYROUX",
+              "prenom": "Vanessa",
+              "role": null,
+              "dateNaissancePartial": "1973",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DO ROZARIO",
+              "prenom": "Georges",
+              "role": null,
+              "dateNaissancePartial": "1946",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "EJJA",
+              "prenom": "Assiya",
+              "role": null,
+              "dateNaissancePartial": "1984",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "FOURSAC",
+              "prenom": "Laurent",
+              "role": null,
+              "dateNaissancePartial": "1967",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GONZALEZ",
+              "prenom": "Arnaud",
+              "role": null,
+              "dateNaissancePartial": "1979",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "JANODET",
+              "prenom": "Alix",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1952",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "MANDROU-TAOUBI",
+              "prenom": "Françoise",
+              "role": null,
+              "dateNaissancePartial": "1956",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "ORCIBAL",
+              "prenom": "Jean-sébastien",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1979",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "PARRA",
+              "prenom": "Carine",
+              "role": null,
+              "dateNaissancePartial": "1979",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "PEZET",
+              "prenom": "Patrick",
+              "role": null,
+              "dateNaissancePartial": "1972",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "RAZAVI",
+              "prenom": "Martine",
+              "role": null,
+              "dateNaissancePartial": "1958",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "ROUX",
+              "prenom": "Veronique",
+              "role": null,
+              "dateNaissancePartial": "1958",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "TRANIER",
+              "prenom": "Laurent",
+              "role": null,
+              "dateNaissancePartial": "1977",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "GUITARD",
+              "prenom": "Béatrice",
+              "role": null,
+              "dateNaissancePartial": "1975",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MASBOU",
+              "prenom": "Jean-pierre",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1956",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "SAVIGNAC",
+              "prenom": "Annabelle",
+              "role": null,
+              "dateNaissancePartial": "1972",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BOULPICANTE",
+              "prenom": "Valérie",
+              "role": null,
+              "dateNaissancePartial": "1968",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "RICHER",
+              "prenom": "Jean-marc",
+              "role": null,
+              "dateNaissancePartial": "1954",
+              "lieuNaissance": ""
+            }
+          ]
+        },
+        "conventionsCollectives": [
+          {
+            "siret": "20006938300012",
+            "idcc": "5021",
+            "CdTN": false,
+            "title": "Statut de la Fonction publique territoriale"
+          }
+        ],
+        "matchingEtablissements": [
+          {
+            "siren": "200069383",
+            "siret": "20006938300012",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": null,
+            "denomination": null,
+            "nic": "00012",
+            "dateCreation": "2017-01-01",
+            "dateDerniereMiseAJour": "",
+            "dateDebutActivite": "2017-01-01",
+            "dateFermeture": "",
+            "adresse": "BATIMENT INTERACTIS CHE DE 13 PIERRES BP 421 12200 VILLEFRANCHE-DE-ROUERGUE",
+            "adressePostale": "BATIMENT INTERACTIS CHE DE 13 PIERRES BP 421 12200 VILLEFRANCHE-DE-ROUERGUE",
+            "codePostal": "12200",
+            "commune": "VILLEFRANCHE-DE-ROUERGUE",
+            "activitePrincipale": "84.11Z",
+            "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+            "trancheEffectif": "",
+            "libelleTrancheEffectif": "",
+            "latitude": "44.357175",
+            "longitude": "2.02648",
+            "conventionsCollectives": [
+              {
+                "siret": "20006938300012",
+                "idcc": "5021",
+                "CdTN": false,
+                "title": "Statut de la Fonction publique territoriale"
+              }
+            ]
+          }
+        ],
+        "nombreEtablissements": 13,
+        "nombreEtablissementsOuverts": 13,
+        "dirigeants": []
+      },
+      {
+        "siren": "200068641",
+        "oldSiren": "200068641",
+        "siege": {
+          "siren": "200068641",
+          "siret": "20006864100014",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": null,
+          "nic": "00014",
+          "dateCreation": "2017-01-01",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2017-01-01",
+          "dateFermeture": "",
+          "adresse": "8 B AV DU PDT VINCENT AURIOL 31601 MURET CEDEX",
+          "adressePostale": "8 B AV DU PDT VINCENT AURIOL 31601 MURET CEDEX",
+          "codePostal": "31600",
+          "commune": "MURET",
+          "activitePrincipale": "84.11Z",
+          "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": "43.468316",
+          "longitude": "1.337009",
+          "conventionsCollectives": [
+            {
+              "siret": "20006864100014",
+              "idcc": "5021",
+              "CdTN": false,
+              "title": "Statut de la Fonction publique territoriale"
+            }
+          ]
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "LE MURETAIN AGGLO",
+        "chemin": "le-muretain-agglo-200068641",
+        "natureJuridique": "7348",
+        "libelleNatureJuridique": "Communauté d'agglomération",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "200068641",
+              "siret": "20006864100014",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00014",
+              "dateCreation": "2017-01-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2017-01-01",
+              "dateFermeture": "",
+              "adresse": "8 B AV DU PDT VINCENT AURIOL 31601 MURET CEDEX",
+              "adressePostale": "8 B AV DU PDT VINCENT AURIOL 31601 MURET CEDEX",
+              "codePostal": "31600",
+              "commune": "MURET",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "43.468316",
+              "longitude": "1.337009",
+              "conventionsCollectives": [
+                {
+                  "siret": "20006864100014",
+                  "idcc": "5021",
+                  "CdTN": false,
+                  "title": "Statut de la Fonction publique territoriale"
+                }
+              ]
+            }
+          ],
+          "open": [
+            {
+              "siren": "200068641",
+              "siret": "20006864100014",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00014",
+              "dateCreation": "2017-01-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2017-01-01",
+              "dateFermeture": "",
+              "adresse": "8 B AV DU PDT VINCENT AURIOL 31601 MURET CEDEX",
+              "adressePostale": "8 B AV DU PDT VINCENT AURIOL 31601 MURET CEDEX",
+              "codePostal": "31600",
+              "commune": "MURET",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "43.468316",
+              "longitude": "1.337009",
+              "conventionsCollectives": [
+                {
+                  "siret": "20006864100014",
+                  "idcc": "5021",
+                  "CdTN": false,
+                  "title": "Statut de la Fonction publique territoriale"
+                }
+              ]
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 6,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "84.11Z",
+        "libelleActivitePrincipale": "Administration publique générale",
+        "dateCreation": "2017-01-01",
+        "dateDerniereMiseAJour": "2023-06-05T10:28:24",
+        "dateDebutActivite": "",
+        "trancheEffectif": "42",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "ETI",
+        "anneeTrancheEffectif": "2020",
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": true,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": true,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": "200068641",
+          "codeInsee": null,
+          "niveau": "epci",
+          "elus": [
+            {
+              "sexe": "M",
+              "nom": "CHEBELIN",
+              "prenom": "Thierry",
+              "role": null,
+              "dateNaissancePartial": "1975",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DESCHAMPS",
+              "prenom": "Gilbert",
+              "role": null,
+              "dateNaissancePartial": "1957",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "DIOGO",
+              "prenom": "Magalie",
+              "role": null,
+              "dateNaissancePartial": "1986",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MESPLES",
+              "prenom": "Thierry",
+              "role": null,
+              "dateNaissancePartial": "1970",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SOTTIL",
+              "prenom": "Alain",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1952",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CASSAGNE",
+              "prenom": "Robert",
+              "role": null,
+              "dateNaissancePartial": "1955",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "PUIG",
+              "prenom": "Jean-marie",
+              "role": null,
+              "dateNaissancePartial": "1957",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LOUZON",
+              "prenom": "Thierry",
+              "role": null,
+              "dateNaissancePartial": "1958",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MAILHÉ",
+              "prenom": "Christophe",
+              "role": null,
+              "dateNaissancePartial": "1971",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SEVERAC",
+              "prenom": "Philippe",
+              "role": null,
+              "dateNaissancePartial": "1959",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "SIMEON",
+              "prenom": "Françoise",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1957",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "VITET",
+              "prenom": "Martine",
+              "role": null,
+              "dateNaissancePartial": "1953",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LAMPIN",
+              "prenom": "Amandine",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1977",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "NOVALES",
+              "prenom": "Luc",
+              "role": null,
+              "dateNaissancePartial": "1963",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "REFUTIN",
+              "prenom": "Nicolas",
+              "role": null,
+              "dateNaissancePartial": "1981",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "VIDAL",
+              "prenom": "Alain",
+              "role": null,
+              "dateNaissancePartial": "1965",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CARLIER",
+              "prenom": "David-olivier",
+              "role": null,
+              "dateNaissancePartial": "1973",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "SUSSET",
+              "prenom": "Hélène",
+              "role": null,
+              "dateNaissancePartial": "1979",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "AUTHIE",
+              "prenom": "Olivier",
+              "role": null,
+              "dateNaissancePartial": "1974",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "MATHEU",
+              "prenom": "Christelle",
+              "role": null,
+              "dateNaissancePartial": "1973",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DELSOL",
+              "prenom": "Alain",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1960",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BEDIEE",
+              "prenom": "Jean-sébastien",
+              "role": null,
+              "dateNaissancePartial": "1974",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "BELOUAZZA",
+              "prenom": "Rachida",
+              "role": null,
+              "dateNaissancePartial": "1960",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "CRÉDOT",
+              "prenom": "Myriam",
+              "role": null,
+              "dateNaissancePartial": "1973",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DELAHAYE",
+              "prenom": "Christophe",
+              "role": null,
+              "dateNaissancePartial": "1968",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "DULON",
+              "prenom": "Irène",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1957",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "GERMA",
+              "prenom": "Sylvie",
+              "role": null,
+              "dateNaissancePartial": "1962",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MANDEMENT",
+              "prenom": "André",
+              "role": "EPCI-P",
+              "dateNaissancePartial": "1958",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "PEREZ",
+              "prenom": "Colette",
+              "role": null,
+              "dateNaissancePartial": "1960",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "RUEDA",
+              "prenom": "Michel",
+              "role": null,
+              "dateNaissancePartial": "1959",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "TERRISSE",
+              "prenom": "Jean-marc",
+              "role": null,
+              "dateNaissancePartial": "1968",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "TOUZET",
+              "prenom": "Sophie",
+              "role": null,
+              "dateNaissancePartial": "1973",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "ZARDO",
+              "prenom": "Léonard",
+              "role": null,
+              "dateNaissancePartial": "1948",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "COLL",
+              "prenom": "Jean-louis",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1948",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "GAMBET",
+              "prenom": "Claudine",
+              "role": null,
+              "dateNaissancePartial": "1953",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GUERRIOT",
+              "prenom": "Philippe",
+              "role": null,
+              "dateNaissancePartial": "1964",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LACAMPAGNE",
+              "prenom": "Sylviane",
+              "role": null,
+              "dateNaissancePartial": "1960",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MONTARIOL",
+              "prenom": "Gérard",
+              "role": null,
+              "dateNaissancePartial": "1954",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "RODRIGUEZ",
+              "prenom": "Anaïs",
+              "role": null,
+              "dateNaissancePartial": "1978",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SUAUD",
+              "prenom": "Thierry",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1968",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "HUCHON",
+              "prenom": "Christiane",
+              "role": null,
+              "dateNaissancePartial": "1955",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MABIRE",
+              "prenom": "Sylvain",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1972",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "GALY",
+              "prenom": "Liliane",
+              "role": null,
+              "dateNaissancePartial": "1955",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "VACHER",
+              "prenom": "Gilles",
+              "role": null,
+              "dateNaissancePartial": "1954",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BÉRAIL",
+              "prenom": "Pierre",
+              "role": null,
+              "dateNaissancePartial": "1946",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "CAMBEFORT",
+              "prenom": "Catherine",
+              "role": null,
+              "dateNaissancePartial": "1961",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GASQUET",
+              "prenom": "Etienne",
+              "role": null,
+              "dateNaissancePartial": "1949",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MORERE",
+              "prenom": "André",
+              "role": null,
+              "dateNaissancePartial": "1949",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "DEUILHE",
+              "prenom": "Serge",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1970",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "LOUIT",
+              "prenom": "Catherine",
+              "role": null,
+              "dateNaissancePartial": "1961",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "REY-BÈTHBÉDER",
+              "prenom": "Nicolas",
+              "role": null,
+              "dateNaissancePartial": "1970",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SUTRA",
+              "prenom": "Jean-françois",
+              "role": null,
+              "dateNaissancePartial": "1955",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "PALAS",
+              "prenom": "Alain",
+              "role": null,
+              "dateNaissancePartial": "1955",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BERGIA",
+              "prenom": "Jean-marc",
+              "role": null,
+              "dateNaissancePartial": "1972",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "BOUTELOUP",
+              "prenom": "Jerome",
+              "role": "EPCI-VP",
+              "dateNaissancePartial": "1976",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "STREMLER",
+              "prenom": "Philippe",
+              "role": null,
+              "dateNaissancePartial": "1958",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "VALLIER",
+              "prenom": "Vicky",
+              "role": null,
+              "dateNaissancePartial": "1968",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GARAUD",
+              "prenom": "Jean-claude",
+              "role": null,
+              "dateNaissancePartial": "1947",
+              "lieuNaissance": ""
+            }
+          ]
+        },
+        "conventionsCollectives": [
+          {
+            "siret": "20006864100014",
+            "idcc": "5021",
+            "CdTN": false,
+            "title": "Statut de la Fonction publique territoriale"
+          }
+        ],
+        "matchingEtablissements": [
+          {
+            "siren": "200068641",
+            "siret": "20006864100014",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": null,
+            "denomination": null,
+            "nic": "00014",
+            "dateCreation": "2017-01-01",
+            "dateDerniereMiseAJour": "",
+            "dateDebutActivite": "2017-01-01",
+            "dateFermeture": "",
+            "adresse": "8 B AV DU PDT VINCENT AURIOL 31601 MURET CEDEX",
+            "adressePostale": "8 B AV DU PDT VINCENT AURIOL 31601 MURET CEDEX",
+            "codePostal": "31600",
+            "commune": "MURET",
+            "activitePrincipale": "84.11Z",
+            "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+            "trancheEffectif": "",
+            "libelleTrancheEffectif": "",
+            "latitude": "43.468316",
+            "longitude": "1.337009",
+            "conventionsCollectives": [
+              {
+                "siret": "20006864100014",
+                "idcc": "5021",
+                "CdTN": false,
+                "title": "Statut de la Fonction publique territoriale"
+              }
+            ]
+          }
+        ],
+        "nombreEtablissements": 6,
+        "nombreEtablissementsOuverts": 6,
+        "dirigeants": []
+      }
+    ]
+  }
+}

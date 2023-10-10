@@ -1,4 +1,5 @@
 import routes from '#clients/routes';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { clientAPIProxy } from '../client';
 
@@ -39,7 +40,7 @@ export class TVAUserException extends Error {
  * @param tva
  * @returns TVA number if valid else null
  */
-export const clientTVA = async (
+const clientTVA = async (
   tva: string,
   useCache = true
 ): Promise<string | null> => {
@@ -57,3 +58,9 @@ export const clientTVA = async (
 
   return data.isValid ? `FR${data.vatNumber}` : null;
 };
+
+const stubbedClient = stubClientWithSnapshots({
+  clientTVA,
+});
+
+export { stubbedClient as clientTVA };

@@ -7,10 +7,9 @@ import {
   setupCache,
 } from 'axios-cache-interceptor';
 import constants from '#models/constants';
-import { mockStore } from 'clients-mocks';
 import errorInterceptor from './error-interceptor';
 import { addStartTimeInterceptor, logInterceptor } from './log-interceptor';
-import redisStorage from './redis/redis-storage';
+import redisStorage, { connect } from './redis/redis-storage';
 
 export const CACHE_TIMEOUT = 1000 * 60 * 15;
 
@@ -55,22 +54,21 @@ export const axiosInstanceFactory = (
   return axiosInstance;
 };
 
-const axiosInstanceWithCache =
-  process.env.END2END_MOCKING === 'enabled'
-    ? mockStore.mockedAxiosInstance
-    : axiosInstanceFactory();
+const axiosInstanceWithCache = axiosInstanceFactory();
 
 /**
  * Default axios client - not cached by default
  * @param config
  * @returns
  */
-const httpClient = async (config: CacheRequestConfig): Promise<any> =>
-  await axiosInstanceWithCache({
+const httpClient = async (config: CacheRequestConfig): Promise<any> => {
+  await connect();
+  return await axiosInstanceWithCache({
     timeout: constants.timeout.L,
     cache: false,
     ...config,
   });
+};
 
 /**
  * GET axios client

@@ -1,0 +1,1047 @@
+{
+  "args": {
+    "page": 1,
+    "searchTerms": "ganymede",
+    "searchFilterParams": "&ca_min=100&resultat_net_max=100000"
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 5,
+    "pageCount": 1,
+    "results": [
+      {
+        "siren": "817883150",
+        "oldSiren": "817883150",
+        "siege": {
+          "siren": "817883150",
+          "siret": "81788315000010",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": null,
+          "nic": "00010",
+          "dateCreation": "2016-01-15",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2017-06-01",
+          "dateFermeture": "",
+          "adresse": "3 RUE DE LA GAITE 75014 PARIS 14",
+          "adressePostale": "3 RUE DE LA GAITE 75014 PARIS 14",
+          "codePostal": "75014",
+          "commune": "PARIS 14",
+          "activitePrincipale": "70.22Z",
+          "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": "48.84074",
+          "longitude": "2.324549",
+          "conventionsCollectives": [
+            {
+              "siret": "81788315000010",
+              "idcc": "1486",
+              "CdTN": true,
+              "idKali": "KALICONT000005635173",
+              "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
+            }
+          ]
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "GANYMEDE",
+        "chemin": "ganymede-817883150",
+        "natureJuridique": "5710",
+        "libelleNatureJuridique": "SAS, société par actions simplifiée",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "817883150",
+              "siret": "81788315000010",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00010",
+              "dateCreation": "2016-01-15",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2017-06-01",
+              "dateFermeture": "",
+              "adresse": "3 RUE DE LA GAITE 75014 PARIS 14",
+              "adressePostale": "3 RUE DE LA GAITE 75014 PARIS 14",
+              "codePostal": "75014",
+              "commune": "PARIS 14",
+              "activitePrincipale": "70.22Z",
+              "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.84074",
+              "longitude": "2.324549",
+              "conventionsCollectives": [
+                {
+                  "siret": "81788315000010",
+                  "idcc": "1486",
+                  "CdTN": true,
+                  "idKali": "KALICONT000005635173",
+                  "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
+                }
+              ]
+            }
+          ],
+          "open": [
+            {
+              "siren": "817883150",
+              "siret": "81788315000010",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00010",
+              "dateCreation": "2016-01-15",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2017-06-01",
+              "dateFermeture": "",
+              "adresse": "3 RUE DE LA GAITE 75014 PARIS 14",
+              "adressePostale": "3 RUE DE LA GAITE 75014 PARIS 14",
+              "codePostal": "75014",
+              "commune": "PARIS 14",
+              "activitePrincipale": "70.22Z",
+              "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.84074",
+              "longitude": "2.324549",
+              "conventionsCollectives": [
+                {
+                  "siret": "81788315000010",
+                  "idcc": "1486",
+                  "CdTN": true,
+                  "idKali": "KALICONT000005635173",
+                  "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
+                }
+              ]
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 1,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "70.22Z",
+        "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion",
+        "dateCreation": "2016-01-15",
+        "dateDerniereMiseAJour": "2022-08-29T10:08:44",
+        "dateDebutActivite": "",
+        "trancheEffectif": "01",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2020",
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": [
+          {
+            "siret": "81788315000010",
+            "idcc": "1486",
+            "CdTN": true,
+            "idKali": "KALICONT000005635173",
+            "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
+          }
+        ],
+        "matchingEtablissements": [
+          {
+            "siren": "817883150",
+            "siret": "81788315000010",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": null,
+            "denomination": null,
+            "nic": "00010",
+            "dateCreation": "2016-01-15",
+            "dateDerniereMiseAJour": "",
+            "dateDebutActivite": "2017-06-01",
+            "dateFermeture": "",
+            "adresse": "3 RUE DE LA GAITE 75014 PARIS 14",
+            "adressePostale": "3 RUE DE LA GAITE 75014 PARIS 14",
+            "codePostal": "75014",
+            "commune": "PARIS 14",
+            "activitePrincipale": "70.22Z",
+            "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
+            "trancheEffectif": "",
+            "libelleTrancheEffectif": "",
+            "latitude": "48.84074",
+            "longitude": "2.324549",
+            "conventionsCollectives": [
+              {
+                "siret": "81788315000010",
+                "idcc": "1486",
+                "CdTN": true,
+                "idKali": "KALICONT000005635173",
+                "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
+              }
+            ]
+          }
+        ],
+        "nombreEtablissements": 1,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "NÉGRIER",
+            "prenom": "Philippe",
+            "role": "Président",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          }
+        ]
+      },
+      {
+        "siren": "414971929",
+        "oldSiren": "414971929",
+        "siege": {
+          "siren": "414971929",
+          "siret": "41497192900040",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": null,
+          "nic": "00040",
+          "dateCreation": "2013-07-01",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2022-07-18",
+          "dateFermeture": "",
+          "adresse": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
+          "adressePostale": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
+          "codePostal": "84000",
+          "commune": "AVIGNON",
+          "activitePrincipale": "64.30Z",
+          "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": "43.926703",
+          "longitude": "4.784775",
+          "conventionsCollectives": [
+            {
+              "siret": "41497192900040",
+              "idcc": "0478",
+              "CdTN": true,
+              "idKali": "KALICONT000005635810",
+              "title": "Convention collective nationale des sociétés financières du 22 novembre 1968"
+            }
+          ]
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "FINANCIERE GANYMEDE",
+        "chemin": "financiere-ganymede-414971929",
+        "natureJuridique": "5710",
+        "libelleNatureJuridique": "SAS, société par actions simplifiée",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "414971929",
+              "siret": "41497192900040",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00040",
+              "dateCreation": "2013-07-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2022-07-18",
+              "dateFermeture": "",
+              "adresse": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
+              "adressePostale": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
+              "codePostal": "84000",
+              "commune": "AVIGNON",
+              "activitePrincipale": "64.30Z",
+              "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "43.926703",
+              "longitude": "4.784775",
+              "conventionsCollectives": [
+                {
+                  "siret": "41497192900040",
+                  "idcc": "0478",
+                  "CdTN": true,
+                  "idKali": "KALICONT000005635810",
+                  "title": "Convention collective nationale des sociétés financières du 22 novembre 1968"
+                }
+              ]
+            }
+          ],
+          "open": [
+            {
+              "siren": "414971929",
+              "siret": "41497192900040",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00040",
+              "dateCreation": "2013-07-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2022-07-18",
+              "dateFermeture": "",
+              "adresse": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
+              "adressePostale": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
+              "codePostal": "84000",
+              "commune": "AVIGNON",
+              "activitePrincipale": "64.30Z",
+              "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "43.926703",
+              "longitude": "4.784775",
+              "conventionsCollectives": [
+                {
+                  "siret": "41497192900040",
+                  "idcc": "0478",
+                  "CdTN": true,
+                  "idKali": "KALICONT000005635810",
+                  "title": "Convention collective nationale des sociétés financières du 22 novembre 1968"
+                }
+              ]
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 4,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "64.30Z",
+        "libelleActivitePrincipale": "Fonds de placement et entités financières similaires",
+        "dateCreation": "1997-12-08",
+        "dateDerniereMiseAJour": "2022-08-29T09:31:21",
+        "dateDebutActivite": "",
+        "trancheEffectif": "01",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2020",
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": [
+          {
+            "siret": "41497192900040",
+            "idcc": "0478",
+            "CdTN": true,
+            "idKali": "KALICONT000005635810",
+            "title": "Convention collective nationale des sociétés financières du 22 novembre 1968"
+          }
+        ],
+        "matchingEtablissements": [
+          {
+            "siren": "414971929",
+            "siret": "41497192900040",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": null,
+            "denomination": null,
+            "nic": "00040",
+            "dateCreation": "2013-07-01",
+            "dateDerniereMiseAJour": "",
+            "dateDebutActivite": "2022-07-18",
+            "dateFermeture": "",
+            "adresse": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
+            "adressePostale": "ZAC DE COURTINE IV RUE RIGOBERTA MENCHU 84000 AVIGNON",
+            "codePostal": "84000",
+            "commune": "AVIGNON",
+            "activitePrincipale": "64.30Z",
+            "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
+            "trancheEffectif": "",
+            "libelleTrancheEffectif": "",
+            "latitude": "43.926703",
+            "longitude": "4.784775",
+            "conventionsCollectives": [
+              {
+                "siret": "41497192900040",
+                "idcc": "0478",
+                "CdTN": true,
+                "idKali": "KALICONT000005635810",
+                "title": "Convention collective nationale des sociétés financières du 22 novembre 1968"
+              }
+            ]
+          },
+          {
+            "siren": "414971929",
+            "siret": "41497192900024",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": false,
+            "enseigne": null,
+            "denomination": null,
+            "nic": "00024",
+            "dateCreation": "2002-10-30",
+            "dateDerniereMiseAJour": "",
+            "dateDebutActivite": "2008-01-01",
+            "dateFermeture": "",
+            "adresse": "60 AV DU GENERAL DE GAULLE 92800 PUTEAUX",
+            "adressePostale": "60 AV DU GENERAL DE GAULLE 92800 PUTEAUX",
+            "codePostal": "92800",
+            "commune": "PUTEAUX",
+            "activitePrincipale": "64.30Z",
+            "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
+            "trancheEffectif": "",
+            "libelleTrancheEffectif": "",
+            "latitude": "48.887985",
+            "longitude": "2.233045",
+            "conventionsCollectives": []
+          },
+          {
+            "siren": "414971929",
+            "siret": "41497192900016",
+            "oldSiret": "",
+            "etatAdministratif": "fermé",
+            "statutDiffusion": "diffusible",
+            "estSiege": false,
+            "enseigne": null,
+            "denomination": null,
+            "nic": "00016",
+            "dateCreation": "1997-12-08",
+            "dateDerniereMiseAJour": "",
+            "dateDebutActivite": "2002-10-30",
+            "dateFermeture": "",
+            "adresse": "4 CHE DES SABLONS 78160 MARLY-LE-ROI",
+            "adressePostale": "4 CHE DES SABLONS 78160 MARLY-LE-ROI",
+            "codePostal": "78160",
+            "commune": "MARLY-LE-ROI",
+            "activitePrincipale": "65.2E",
+            "libelleActivitePrincipale": "Organismes de placement en valeurs mobilières (65.2E)",
+            "trancheEffectif": "",
+            "libelleTrancheEffectif": "",
+            "latitude": "48.876263",
+            "longitude": "2.097763",
+            "conventionsCollectives": []
+          }
+        ],
+        "nombreEtablissements": 4,
+        "nombreEtablissementsOuverts": 2,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "DANAN",
+            "prenom": "Charles",
+            "role": "Directeur général",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
+            "nom": "ROUSSET",
+            "prenom": "Olivier",
+            "role": "Commissaire aux comptes suppléant",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "siren": "432345783",
+            "denomination": "PROMETHEE GROUP",
+            "role": "Président"
+          },
+          {
+            "siren": "702621590",
+            "denomination": "ARESXPERT AUDIT",
+            "role": "Commissaire aux comptes titulaire"
+          }
+        ]
+      },
+      {
+        "siren": "479285801",
+        "oldSiren": "479285801",
+        "siege": {
+          "siren": "479285801",
+          "siret": "47928580100011",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": null,
+          "nic": "00011",
+          "dateCreation": "2004-09-01",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2008-01-01",
+          "dateFermeture": "",
+          "adresse": "72 CHE DES FONTAINES 77220 PRESLES-EN-BRIE",
+          "adressePostale": "72 CHE DES FONTAINES 77220 PRESLES-EN-BRIE",
+          "codePostal": "77220",
+          "commune": "PRESLES-EN-BRIE",
+          "activitePrincipale": "46.18Z",
+          "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": "48.700488",
+          "longitude": "2.758235",
+          "conventionsCollectives": []
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "FRANK HATEM & EUGENIE ROSEC (UCER - GANYMEDE)",
+        "chemin": "frank-hatem-eugenie-rosec-ucer-ganymede-479285801",
+        "natureJuridique": "5499",
+        "libelleNatureJuridique": "Société à responsabilité limitée (sans autre indication)",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "479285801",
+              "siret": "47928580100011",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00011",
+              "dateCreation": "2004-09-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2008-01-01",
+              "dateFermeture": "",
+              "adresse": "72 CHE DES FONTAINES 77220 PRESLES-EN-BRIE",
+              "adressePostale": "72 CHE DES FONTAINES 77220 PRESLES-EN-BRIE",
+              "codePostal": "77220",
+              "commune": "PRESLES-EN-BRIE",
+              "activitePrincipale": "46.18Z",
+              "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.700488",
+              "longitude": "2.758235",
+              "conventionsCollectives": []
+            }
+          ],
+          "open": [
+            {
+              "siren": "479285801",
+              "siret": "47928580100011",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00011",
+              "dateCreation": "2004-09-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2008-01-01",
+              "dateFermeture": "",
+              "adresse": "72 CHE DES FONTAINES 77220 PRESLES-EN-BRIE",
+              "adressePostale": "72 CHE DES FONTAINES 77220 PRESLES-EN-BRIE",
+              "codePostal": "77220",
+              "commune": "PRESLES-EN-BRIE",
+              "activitePrincipale": "46.18Z",
+              "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.700488",
+              "longitude": "2.758235",
+              "conventionsCollectives": []
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 1,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "46.18Z",
+        "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques",
+        "dateCreation": "2004-09-01",
+        "dateDerniereMiseAJour": "2023-04-18T15:06:33",
+        "dateDebutActivite": "",
+        "trancheEffectif": "NN",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": null,
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": [],
+        "matchingEtablissements": [],
+        "nombreEtablissements": 1,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "HATEM",
+            "prenom": "Franck",
+            "role": "Gérant",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          }
+        ]
+      },
+      {
+        "siren": "491470597",
+        "oldSiren": "491470597",
+        "siege": {
+          "siren": "491470597",
+          "siret": "49147059700031",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": null,
+          "nic": "00031",
+          "dateCreation": "2020-05-01",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2020-05-01",
+          "dateFermeture": "",
+          "adresse": "16 CHE DE GANYMEDE 33460 MACAU",
+          "adressePostale": "16 CHE DE GANYMEDE 33460 MACAU",
+          "codePostal": "33460",
+          "commune": "MACAU",
+          "activitePrincipale": "46.19B",
+          "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": "45.00782",
+          "longitude": "-0.619455",
+          "conventionsCollectives": []
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "MCDC 31264 (MCDC 31264)",
+        "chemin": "mcdc-31264-mcdc-31264-491470597",
+        "natureJuridique": "5499",
+        "libelleNatureJuridique": "Société à responsabilité limitée (sans autre indication)",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "491470597",
+              "siret": "49147059700031",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00031",
+              "dateCreation": "2020-05-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2020-05-01",
+              "dateFermeture": "",
+              "adresse": "16 CHE DE GANYMEDE 33460 MACAU",
+              "adressePostale": "16 CHE DE GANYMEDE 33460 MACAU",
+              "codePostal": "33460",
+              "commune": "MACAU",
+              "activitePrincipale": "46.19B",
+              "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "45.00782",
+              "longitude": "-0.619455",
+              "conventionsCollectives": []
+            }
+          ],
+          "open": [
+            {
+              "siren": "491470597",
+              "siret": "49147059700031",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": null,
+              "nic": "00031",
+              "dateCreation": "2020-05-01",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2020-05-01",
+              "dateFermeture": "",
+              "adresse": "16 CHE DE GANYMEDE 33460 MACAU",
+              "adressePostale": "16 CHE DE GANYMEDE 33460 MACAU",
+              "codePostal": "33460",
+              "commune": "MACAU",
+              "activitePrincipale": "46.19B",
+              "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "45.00782",
+              "longitude": "-0.619455",
+              "conventionsCollectives": []
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 3,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "46.19B",
+        "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers",
+        "dateCreation": "2006-09-01",
+        "dateDerniereMiseAJour": "2023-04-18T15:06:53",
+        "dateDebutActivite": "",
+        "trancheEffectif": "NN",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": null,
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": [],
+        "matchingEtablissements": [
+          {
+            "siren": "491470597",
+            "siret": "49147059700031",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": null,
+            "denomination": null,
+            "nic": "00031",
+            "dateCreation": "2020-05-01",
+            "dateDerniereMiseAJour": "",
+            "dateDebutActivite": "2020-05-01",
+            "dateFermeture": "",
+            "adresse": "16 CHE DE GANYMEDE 33460 MACAU",
+            "adressePostale": "16 CHE DE GANYMEDE 33460 MACAU",
+            "codePostal": "33460",
+            "commune": "MACAU",
+            "activitePrincipale": "46.19B",
+            "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
+            "trancheEffectif": "",
+            "libelleTrancheEffectif": "",
+            "latitude": "45.00782",
+            "longitude": "-0.619455",
+            "conventionsCollectives": []
+          }
+        ],
+        "nombreEtablissements": 3,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "CORBINEAU",
+            "prenom": "Dominique",
+            "role": "Gérant",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          }
+        ]
+      },
+      {
+        "siren": "852504034",
+        "oldSiren": "852504034",
+        "siege": {
+          "siren": "852504034",
+          "siret": "85250403400012",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": null,
+          "denomination": "GANYMEDE PATRIMOINE",
+          "nic": "00012",
+          "dateCreation": "2019-07-09",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2020-10-01",
+          "dateFermeture": "",
+          "adresse": "3 GALERIE DU MIDI 31250 REVEL",
+          "adressePostale": "GANYMEDE PATRIMOINE, 3 GALERIE DU MIDI 31250 REVEL",
+          "codePostal": "31250",
+          "commune": "REVEL",
+          "activitePrincipale": "68.31Z",
+          "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
+          "trancheEffectif": "",
+          "libelleTrancheEffectif": "",
+          "latitude": "43.458122",
+          "longitude": "2.00451",
+          "conventionsCollectives": [
+            {
+              "siret": "85250403400012",
+              "idcc": "1527",
+              "CdTN": true,
+              "idKali": "KALICONT000005635413",
+              "title": "Convention collective nationale de l'immobilier, administrateurs de biens, sociétés immobilières, agents immobiliers, etc. (anciennement cabinets d'administrateurs de biens et des sociétés immobilières), du 9 septembre 1988. Etendue par arrêté du 24 février 1989 JORF 3 mars 1989. Mise à jour par avenant n° 47 du 23 novembre 2010, JORF 18 juillet 2012 puis mise à jour par avenant n° 83 du 2 décembre 2019 étendu par arrêté du 2 juillet 2021 JORF 14 juillet 2021"
+            }
+          ]
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "PATRIMOINE OCCITAN",
+        "chemin": "patrimoine-occitan-852504034",
+        "natureJuridique": "5710",
+        "libelleNatureJuridique": "SAS, société par actions simplifiée",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "852504034",
+              "siret": "85250403400012",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": "GANYMEDE PATRIMOINE",
+              "nic": "00012",
+              "dateCreation": "2019-07-09",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2020-10-01",
+              "dateFermeture": "",
+              "adresse": "3 GALERIE DU MIDI 31250 REVEL",
+              "adressePostale": "GANYMEDE PATRIMOINE, 3 GALERIE DU MIDI 31250 REVEL",
+              "codePostal": "31250",
+              "commune": "REVEL",
+              "activitePrincipale": "68.31Z",
+              "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "43.458122",
+              "longitude": "2.00451",
+              "conventionsCollectives": [
+                {
+                  "siret": "85250403400012",
+                  "idcc": "1527",
+                  "CdTN": true,
+                  "idKali": "KALICONT000005635413",
+                  "title": "Convention collective nationale de l'immobilier, administrateurs de biens, sociétés immobilières, agents immobiliers, etc. (anciennement cabinets d'administrateurs de biens et des sociétés immobilières), du 9 septembre 1988. Etendue par arrêté du 24 février 1989 JORF 3 mars 1989. Mise à jour par avenant n° 47 du 23 novembre 2010, JORF 18 juillet 2012 puis mise à jour par avenant n° 83 du 2 décembre 2019 étendu par arrêté du 2 juillet 2021 JORF 14 juillet 2021"
+                }
+              ]
+            }
+          ],
+          "open": [
+            {
+              "siren": "852504034",
+              "siret": "85250403400012",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": null,
+              "denomination": "GANYMEDE PATRIMOINE",
+              "nic": "00012",
+              "dateCreation": "2019-07-09",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2020-10-01",
+              "dateFermeture": "",
+              "adresse": "3 GALERIE DU MIDI 31250 REVEL",
+              "adressePostale": "GANYMEDE PATRIMOINE, 3 GALERIE DU MIDI 31250 REVEL",
+              "codePostal": "31250",
+              "commune": "REVEL",
+              "activitePrincipale": "68.31Z",
+              "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
+              "trancheEffectif": "",
+              "libelleTrancheEffectif": "",
+              "latitude": "43.458122",
+              "longitude": "2.00451",
+              "conventionsCollectives": [
+                {
+                  "siret": "85250403400012",
+                  "idcc": "1527",
+                  "CdTN": true,
+                  "idKali": "KALICONT000005635413",
+                  "title": "Convention collective nationale de l'immobilier, administrateurs de biens, sociétés immobilières, agents immobiliers, etc. (anciennement cabinets d'administrateurs de biens et des sociétés immobilières), du 9 septembre 1988. Etendue par arrêté du 24 février 1989 JORF 3 mars 1989. Mise à jour par avenant n° 47 du 23 novembre 2010, JORF 18 juillet 2012 puis mise à jour par avenant n° 83 du 2 décembre 2019 étendu par arrêté du 2 juillet 2021 JORF 14 juillet 2021"
+                }
+              ]
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 1,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "68.31Z",
+        "libelleActivitePrincipale": "Agences immobilières",
+        "dateCreation": "2019-07-09",
+        "dateDerniereMiseAJour": "2022-08-29T10:36:04",
+        "dateDebutActivite": "",
+        "trancheEffectif": "02",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2020",
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": [
+          {
+            "siret": "85250403400012",
+            "idcc": "1527",
+            "CdTN": true,
+            "idKali": "KALICONT000005635413",
+            "title": "Convention collective nationale de l'immobilier, administrateurs de biens, sociétés immobilières, agents immobiliers, etc. (anciennement cabinets d'administrateurs de biens et des sociétés immobilières), du 9 septembre 1988. Etendue par arrêté du 24 février 1989 JORF 3 mars 1989. Mise à jour par avenant n° 47 du 23 novembre 2010, JORF 18 juillet 2012 puis mise à jour par avenant n° 83 du 2 décembre 2019 étendu par arrêté du 2 juillet 2021 JORF 14 juillet 2021"
+          }
+        ],
+        "matchingEtablissements": [
+          {
+            "siren": "852504034",
+            "siret": "85250403400012",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": null,
+            "denomination": "GANYMEDE PATRIMOINE",
+            "nic": "00012",
+            "dateCreation": "2019-07-09",
+            "dateDerniereMiseAJour": "",
+            "dateDebutActivite": "2020-10-01",
+            "dateFermeture": "",
+            "adresse": "3 GALERIE DU MIDI 31250 REVEL",
+            "adressePostale": "GANYMEDE PATRIMOINE, 3 GALERIE DU MIDI 31250 REVEL",
+            "codePostal": "31250",
+            "commune": "REVEL",
+            "activitePrincipale": "68.31Z",
+            "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
+            "trancheEffectif": "",
+            "libelleTrancheEffectif": "",
+            "latitude": "43.458122",
+            "longitude": "2.00451",
+            "conventionsCollectives": [
+              {
+                "siret": "85250403400012",
+                "idcc": "1527",
+                "CdTN": true,
+                "idKali": "KALICONT000005635413",
+                "title": "Convention collective nationale de l'immobilier, administrateurs de biens, sociétés immobilières, agents immobiliers, etc. (anciennement cabinets d'administrateurs de biens et des sociétés immobilières), du 9 septembre 1988. Etendue par arrêté du 24 février 1989 JORF 3 mars 1989. Mise à jour par avenant n° 47 du 23 novembre 2010, JORF 18 juillet 2012 puis mise à jour par avenant n° 83 du 2 décembre 2019 étendu par arrêté du 2 juillet 2021 JORF 14 juillet 2021"
+              }
+            ]
+          }
+        ],
+        "nombreEtablissements": 1,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "DURET",
+            "prenom": "Eric",
+            "role": "président",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          }
+        ]
+      }
+    ]
+  }
+}

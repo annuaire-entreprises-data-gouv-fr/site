@@ -1,0 +1,28 @@
+{
+  "args": [
+    "528163777"
+  ],
+  "result": {
+    "companyInfo": {
+      "adresse": "5-9 rue Morand, 93400, ST OUEN",
+      "email": "ylan.sabban@yahoo.fr",
+      "nomEntreprise": "GROUPE SOLUTION ENERGIE POLE TECHNIQUE (GSEPT)",
+      "siret": "52816377700030",
+      "siteInternet": "",
+      "telephone": "06 98 39 31 19",
+      "workingWithIndividual": true
+    },
+    "certifications": [
+      {
+        "codeQualification": "1911",
+        "domaines": [
+          "Audit énergétique"
+        ],
+        "nomCertificat": "Certificat OPQIBI",
+        "nomQualification": "Audit énergétique “maisons individuelles” (1911)",
+        "organisme": "opqibi",
+        "urlQualification": "http://opqibi.com/fiche/5059"
+      }
+    ]
+  }
+}

@@ -1,3 +1,4 @@
+
 const { pathsToModuleNameMapper } = require('ts-jest');
 const { compilerOptions: baseTsConfig } = require('./tsconfig.json');
 
@@ -6,8 +7,8 @@ const { compilerOptions: baseTsConfig } = require('./tsconfig.json');
 const getTsConfigBasePaths = () => {
   return baseTsConfig.paths
     ? pathsToModuleNameMapper(baseTsConfig.paths, {
-        prefix: '<rootDir>/',
-      })
+      prefix: '<rootDir>/',
+    })
     : {};
 };
 
@@ -18,6 +19,8 @@ const config = {
   moduleNameMapper: {
     ...getTsConfigBasePaths(),
   },
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
+  testTimeout: 10000
 };
 
 module.exports = config;

@@ -1,5 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { INomCertificat, IRGECertification } from '#models/certifications/rge';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
@@ -102,4 +103,5 @@ const mapToDomainObject = (rge: IRGEResponse) => {
   };
 };
 
-export { clientRGE };
+const stubbedClientRGE = stubClientWithSnapshots({ clientRGE });
+export { stubbedClientRGE as clientRGE };

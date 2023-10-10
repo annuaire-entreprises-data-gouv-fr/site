@@ -3,7 +3,7 @@ import { createClient } from 'redis';
 import { logWarningInSentry } from '#utils/sentry';
 import { promiseTimeout } from './promise-timeout';
 
-const redisClient = createClient({
+let redisClient = createClient({
   url: process.env.REDIS_URL,
   pingInterval: 1000,
 });
@@ -12,7 +12,15 @@ redisClient.on('error', (err) => {
   logWarningInSentry('Error in Redis', { details: err });
 });
 
-redisClient.connect();
+export async function connect() {
+  if (!redisClient.isOpen) {
+    try {
+      return redisClient.connect();
+    } catch (e) {
+      logWarningInSentry('Could not connect to redis client');
+    }
+  }
+}
 
 const redisStorage = (cache_timeout: number) =>
   buildStorage({
@@ -44,3 +52,9 @@ const redisStorage = (cache_timeout: number) =>
   });
 
 export default redisStorage;
+export async function disconnect() {
+  if (redisClient.isOpen) {
+    redisClient.removeAllListeners();
+    return await redisClient.disconnect();
+  }
+}

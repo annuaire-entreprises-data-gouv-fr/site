@@ -1,21 +1,22 @@
 import { HttpNotFound, HttpServerError } from '#clients/exceptions';
 import routes from '#clients/routes';
+import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import {
-  createEtablissementsList,
   IEtablissementsList,
+  createEtablissementsList,
 } from '#models/etablissements-list';
 import { estActif } from '#models/etat-administratif';
-import { createDefaultEtablissement, IEtablissement } from '#models/index';
+import { IEtablissement, createDefaultEtablissement } from '#models/index';
 import {
-  formatAdresse,
-  agregateTripleFields,
   Siren,
   Siret,
+  agregateTripleFields,
   extractSirenFromSiret,
+  formatAdresse,
 } from '#utils/helpers';
 import { libelleFromCodeNAF } from '#utils/helpers/formatting/labels';
-import { inseeClientGet, InseeClientOptions } from '.';
+import { InseeClientOptions, inseeClientGet } from '.';
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,
@@ -93,7 +94,7 @@ interface IInseeetablissementUniteLegale {
   nomUniteLegale: string;
 }
 
-export const clientAllEtablissementsInsee = async (
+const clientAllEtablissementsInsee = async (
   siren: string,
   page = 1,
   options: InseeClientOptions
@@ -125,7 +126,7 @@ export const clientAllEtablissementsInsee = async (
   };
 };
 
-export const clientEtablissementInsee = async (
+const clientEtablissementInsee = async (
   siret: Siret,
   options: InseeClientOptions
 ) => {
@@ -148,7 +149,7 @@ export const clientEtablissementInsee = async (
   return mapEtablissementToDomainObject(etablissement, siret);
 };
 
-export const clientSiegeInsee = async (
+const clientSiegeInsee = async (
   siren: Siren,
   options: InseeClientOptions
 ): Promise<IEtablissement> => {
@@ -162,7 +163,7 @@ export const clientSiegeInsee = async (
   return mapEtablissementToDomainObject(etablissements[0]);
 };
 
-export const mapEtablissementToDomainObject = (
+const mapEtablissementToDomainObject = (
   inseeEtablissement: IInseeEtablissement,
   oldSiret?: Siret
 ): IEtablissement => {
@@ -295,4 +296,22 @@ export const mapEtablissementToDomainObject = (
     codePostal,
     commune: libelleCommuneEtablissement,
   };
+};
+
+const stubbedClientAllEtablissementsInsee = stubClientWithSnapshots({
+  clientAllEtablissementsInsee,
+});
+
+const stubbedClientEtablissementInsee = stubClientWithSnapshots({
+  clientEtablissementInsee,
+});
+
+const stubbedClientSiegeInsee = stubClientWithSnapshots({
+  clientSiegeInsee,
+});
+
+export {
+  stubbedClientAllEtablissementsInsee as clientAllEtablissementsInsee,
+  stubbedClientEtablissementInsee as clientEtablissementInsee,
+  stubbedClientSiegeInsee as clientSiegeInsee,
 };

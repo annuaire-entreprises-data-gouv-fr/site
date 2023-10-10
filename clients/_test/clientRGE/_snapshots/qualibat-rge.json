@@ -1,0 +1,36 @@
+{
+  "args": [
+    "843701079"
+  ],
+  "result": {
+    "companyInfo": {
+      "adresse": "LD LA VAURELLE, 81170, CORDES",
+      "email": "besoin2toit@gmail.com",
+      "nomEntreprise": "BESOIN DE TOIT",
+      "siret": "84370107900017",
+      "siteInternet": "",
+      "telephone": "06 88 47 70 42",
+      "workingWithIndividual": true
+    },
+    "certifications": [
+      {
+        "codeQualification": "3111D111",
+        "domaines": [
+          "Isolation par l'intérieur des murs ou rampants de toitures  ou plafonds",
+          "Isolation des toitures terrasses ou des toitures par l'extérieur",
+          "Isolation des combles perdus",
+          "Isolation par l'intérieur des murs ou rampants de toitures  ou plafonds",
+          "Isolation des combles perdus",
+          "Isolation par l'intérieur des murs ou rampants de toitures  ou plafonds",
+          "Isolation des combles perdus",
+          "Isolation des planchers bas",
+          "Isolation des murs par l'extérieur"
+        ],
+        "nomCertificat": "QUALIBAT-RGE",
+        "nomQualification": "Tuiles canal (3111D111)",
+        "organisme": "qualibat",
+        "urlQualification": "https://www.qualibat.com/Views/GetFichier.aspx?fn=2023\\D31-Certificat-177096-E177096-2-20230602-RGEAnnexe.pdf"
+      }
+    ]
+  }
+}

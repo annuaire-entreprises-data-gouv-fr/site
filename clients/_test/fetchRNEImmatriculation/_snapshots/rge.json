@@ -1,0 +1,86 @@
+{
+  "args": [
+    "528163777"
+  ],
+  "result": {
+    "siren": "528163777",
+    "identite": {
+      "denomination": "GROUPE SOLUTION ENERGIE POLE TECHNIQUE",
+      "dateImmatriculation": "2010-11-05",
+      "dateDebutActiv": "2010-10-01",
+      "dateRadiation": "",
+      "dateCessationActivite": "",
+      "isPersonneMorale": true,
+      "dateClotureExercice": "",
+      "dureePersonneMorale": "99 ans",
+      "capital": "26 000 EUR (fixe)",
+      "libelleNatureJuridique": "SAS, société par actions simplifiée",
+      "natureEntreprise": "Artisanale réglementée"
+    },
+    "dirigeants": [
+      {
+        "siren": "878719756",
+        "denomination": "GSE VD",
+        "natureJuridique": "Société par actions simplifiée",
+        "role": null
+      },
+      {
+        "siren": "",
+        "denomination": "GROUPE SOLUTION ENERGIE",
+        "natureJuridique": "5710",
+        "role": null
+      },
+      {
+        "nom": "LEVY",
+        "prenom": "ILAN",
+        "role": "",
+        "dateNaissancePartial": "1981-10",
+        "dateNaissanceFull": ""
+      },
+      {
+        "nom": "SABBAN",
+        "prenom": "GILLES",
+        "role": "",
+        "dateNaissancePartial": "1965-09",
+        "dateNaissanceFull": ""
+      },
+      {
+        "siren": "",
+        "denomination": "GROUPE SOLUTION ENERGIE",
+        "natureJuridique": "5710",
+        "role": null
+      }
+    ],
+    "beneficiaires": [
+      {
+        "type": "",
+        "nom": "SITBON",
+        "prenoms": "PHILIPPE",
+        "dateNaissancePartial": "1964-10",
+        "nationalite": "FRANCAISE"
+      },
+      {
+        "type": "",
+        "nom": "SABBAN",
+        "prenoms": "GILLES, YLAN",
+        "dateNaissancePartial": "1965-09",
+        "nationalite": "FRANCAISE"
+      }
+    ],
+    "observations": [
+      {
+        "numObservation": "2130",
+        "description": "Ouverture de l'établissement secondaire situé 1 rue Camille Claudel - Zone Tertiaire d'Atlanparc 56890 Plescop à compter du 01/01/2019",
+        "dateAjout": "2019-03-15"
+      },
+      {
+        "numObservation": "",
+        "description": "Continuation de la société malgré un actif net devenu inférieur à la moitie du capital social. Décision du 27/06/2019",
+        "dateAjout": "2019-10-10"
+      }
+    ],
+    "metadata": {
+      "isFallback": false
+    }
+  }
+}

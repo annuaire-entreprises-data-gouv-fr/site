@@ -1,0 +1,74 @@
+{
+  "args": {
+    "siren": "842019051",
+    "page": 1
+  },
+  "result": {
+    "etablissements": {
+      "all": [
+        {
+          "siren": "842019051",
+          "siret": "84201905100015",
+          "oldSiret": "84201905100015",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": "",
+          "denomination": "",
+          "nic": "00015",
+          "dateCreation": "2018-08-02",
+          "dateDerniereMiseAJour": "2022-08-29T10:29:06",
+          "dateDebutActivite": "",
+          "dateFermeture": null,
+          "adresse": "MANAKIN PRODUCTION, 129 RUE LAMARCK, 75018 PARIS 18",
+          "adressePostale": "MANAKIN PRODUCTION, 129 RUE LAMARCK, 75018 PARIS 18",
+          "codePostal": "75018",
+          "commune": "PARIS 18",
+          "activitePrincipale": "90.01Z",
+          "libelleActivitePrincipale": "Arts du spectacle vivant",
+          "trancheEffectif": "01",
+          "libelleTrancheEffectif": "",
+          "latitude": "",
+          "longitude": "",
+          "conventionsCollectives": [],
+          "anneeTrancheEffectif": "2020"
+        }
+      ],
+      "open": [
+        {
+          "siren": "842019051",
+          "siret": "84201905100015",
+          "oldSiret": "84201905100015",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": "",
+          "denomination": "",
+          "nic": "00015",
+          "dateCreation": "2018-08-02",
+          "dateDerniereMiseAJour": "2022-08-29T10:29:06",
+          "dateDebutActivite": "",
+          "dateFermeture": null,
+          "adresse": "MANAKIN PRODUCTION, 129 RUE LAMARCK, 75018 PARIS 18",
+          "adressePostale": "MANAKIN PRODUCTION, 129 RUE LAMARCK, 75018 PARIS 18",
+          "codePostal": "75018",
+          "commune": "PARIS 18",
+          "activitePrincipale": "90.01Z",
+          "libelleActivitePrincipale": "Arts du spectacle vivant",
+          "trancheEffectif": "01",
+          "libelleTrancheEffectif": "",
+          "latitude": "",
+          "longitude": "",
+          "conventionsCollectives": [],
+          "anneeTrancheEffectif": "2020"
+        }
+      ],
+      "unknown": [],
+      "closed": [],
+      "nombreEtablissementsOuverts": 1,
+      "nombreEtablissements": 1,
+      "usePagination": false,
+      "currentEtablissementPage": 1
+    }
+  }
+}
