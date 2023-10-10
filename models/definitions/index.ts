@@ -24,7 +24,7 @@ const loadAllDefinitions = () => {
 
   keys
     // weirdly context add duplicates - this filter removes them
-    .filter((k: string) => k.indexOf('./') === 0)
+    .filter((k: string) => k.startsWith('./'))
     .forEach((key: string, index: number) => {
       const slug = key.replace('.yml', '').replace('./', '');
       definitions.push({ ...values[index], slug });
