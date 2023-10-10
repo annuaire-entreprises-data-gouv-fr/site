@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import * as Sentry from '@sentry/browser';
 import { EAdministration } from '#models/administrations';
 import { APILoadingFactory, IAPILoading } from '#models/api-loading';
 import {
@@ -22,7 +23,8 @@ export const useImmmatriculationRNE = (uniteLegale: IUniteLegale) => {
           RNE_ROUTE + '/' + uniteLegale.siren
         );
         setImmatriculationRNE(response);
-      } catch {
+      } catch (e) {
+        Sentry.captureException(e);
         setImmatriculationRNE(
           APINotRespondingFactory(EAdministration.INPI, 500)
         );
