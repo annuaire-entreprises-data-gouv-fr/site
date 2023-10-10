@@ -44,7 +44,9 @@ export const FilterGeo: React.FC<{
     debounce((term: string) => {
       setLoading(true);
       axios
-        .get(`/api/data/geo/${term}`, { timeout: constants.timeout.XXL })
+        .get(`/api/data-fetching/geo/${term}`, {
+          timeout: constants.timeout.XXL,
+        })
         .then((response) => {
           setGeoSuggests(response.data);
           if (response.data.length === 0) {

@@ -13,7 +13,7 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
 
     const siren = extractSirenSlugFromUrl(window.location.pathname || '');
 
-    fetch(`/api/data/verify-tva/${siren}`)
+    fetch(`/api/data-fetching/verify-tva/${siren}`)
       .then((e) => {
         if (!e.ok) {
           throw new Error(e.status);
