@@ -4,9 +4,10 @@ import {
   clientDepartementByCode,
   clientDepartementsByName,
 } from '#clients/geo/departements';
+import { clientRegionsByName } from '#clients/geo/regions';
 import logErrorInSentry from '#utils/sentry';
 import { withAPM } from '#utils/sentry/tracing';
-import { clientRegionsByName } from '#clients/geo/regions';
+import withAntiBot from '#utils/session/with-anti-bot';
 
 const geo = async (
   { query: { slug = '' } }: NextApiRequest,
@@ -54,4 +55,4 @@ const geo = async (
   }
 };
 
-export default withAPM(geo);
+export default withAPM(withAntiBot(geo));
