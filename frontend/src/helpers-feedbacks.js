@@ -43,4 +43,4 @@ function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
 }
 
 triggerModal('nps-modal', 2, '/');
-// triggerModal('we-need-you-modal', 0, '/');
+triggerModal('we-need-you-modal', 0, '/');
