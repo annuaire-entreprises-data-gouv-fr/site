@@ -8,6 +8,13 @@ export const getStaticPages = () => {
       return `/faq/${file.replace('.yml', '')}`;
     });
 
+  const definitionsPages = fs
+    .readdirSync('./data/definitions')
+    .filter((file) => file.indexOf('.yml') > -1)
+    .map((file) => {
+      return `/definitions/${file.replace('.yml', '')}`;
+    });
+
   const lpPages = fs
     .readdirSync('./data/landing-pages')
     .filter((file) => file.indexOf('.yml') > -1)
@@ -21,8 +28,11 @@ export const getStaticPages = () => {
     '/comment-ca-marche',
     '/administration',
     '/faq',
+    '/faq',
+    '/definitions',
     '/partager',
     ...faqPages,
     ...lpPages,
+    ...definitionsPages,
   ];
 };

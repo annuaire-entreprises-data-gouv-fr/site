@@ -66,7 +66,7 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/definition/liste">
+                  <a className="fr-footer__top-link" href="/definitions">
                     Définitions
                   </a>
                 </li>

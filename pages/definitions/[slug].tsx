@@ -20,12 +20,12 @@ const DefinitionPage: NextPageWithLayout<{ definition: IDefinition }> = ({
       title={definition.seo.title || definition.title}
       description={definition.seo.description}
       noIndex={false}
-      canonical={`https://annuaire-entreprises.data.gouv.fr/faq/${definition.slug}`}
+      canonical={`https://annuaire-entreprises.data.gouv.fr/definitions/${definition.slug}`}
     />
     <TextWrapper>
       <Breadcrumb
         links={[
-          { href: '/definition/liste', label: 'Définitions' },
+          { href: '/definitions', label: 'Définitions' },
           { href: '', label: definition.title },
         ]}
       />

@@ -14,7 +14,7 @@ const AllDefinitionsPage: NextPageWithLayout<{
   <>
     <Meta
       title="Definitions des termes utilisées sur l'Annuaire des Entreprises"
-      canonical="https://annuaire-entreprises.data.gouv.fr/definition"
+      canonical="https://annuaire-entreprises.data.gouv.fr/definitions"
     />
     <StructuredDataFAQ
       data={definitions.map(({ title, body }) => [
@@ -27,7 +27,7 @@ const AllDefinitionsPage: NextPageWithLayout<{
       <ul>
         {definitions.map(({ slug, title }) => (
           <li key={slug}>
-            <a href={`/definition/${slug}`}>{title}</a>
+            <a href={`/definitions/${slug}`}>{title}</a>
           </li>
         ))}
       </ul>
