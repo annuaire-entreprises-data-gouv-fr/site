@@ -27,7 +27,7 @@ const AllDefinitionsPage: NextPageWithLayout<{
       <ul>
         {definitions.map(({ slug, title }) => (
           <li key={slug}>
-            <a href={`/definitions/${slug}`}>{title}</a>
+            <a href={`/definitions/${slug}`} aria-label={title+', voir la définition'}>{title}</a>
           </li>
         ))}
       </ul>
