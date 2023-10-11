@@ -1,0 +1,13 @@
+name: 'Notify message'
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name:
+      run: |
+        curl -X POST $TCHAP_HOOK -d '{ "message": "${{ github.event.inputs.message }}", "roomId": "$ROOM_ID" }'
+      shell: bash
+      env:
+        HOOK: ${{ secrets.TCHAP_HOOK }}
+        ROOM_ID: ${{ secrets.TCHAP_ROOM_ID }}
