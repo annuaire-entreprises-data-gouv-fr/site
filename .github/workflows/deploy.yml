@@ -31,7 +31,7 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST_STAGING }}
 
       - name: Notify staging failure only
-        if: failure()
+        if: success() || failure()
         uses: ./.github/actions/notify
         with:
           message: 'Deploy to staging failed'
@@ -66,7 +66,7 @@ jobs:
           SSH_HOST: ${{ secrets[matrix.host] }}
 
       - name: Notify
-        if: failure()
+        if: success() || failure()
         uses: ./.github/actions/notify
         with:
           message: 'Deploy to production failed'
