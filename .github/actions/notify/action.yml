@@ -3,6 +3,16 @@ name: 'Notify message'
 runs:
   using: 'composite'
 
+inputs:
+  hooks:
+    description: 'Hook url'
+    required: true
+  message:
+    description: 'Body'
+    required: true
+  id:
+    required: false
+
   steps:
     - name:
       run: |
