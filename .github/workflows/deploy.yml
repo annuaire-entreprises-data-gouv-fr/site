@@ -38,6 +38,8 @@ jobs:
         uses: ./.github/actions/notify
         with:
           message: 'Deploy to staging failed'
+          hook: ${{ secrets.TCHAP_HOOK }}
+          id: ${{ secrets.TCHAP_ROOM_ID }}
 
   deploy-production:
     name: Deploy - production
@@ -74,3 +76,5 @@ jobs:
         uses: ./.github/actions/notify
         with:
           message: 'Deploy to production failed'
+          hook: ${{ secrets.TCHAP_HOOK }}
+          id: ${{ secrets.TCHAP_ROOM_ID }}
