@@ -14,6 +14,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      - uses: actions/checkout@v3
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
@@ -49,6 +50,7 @@ jobs:
           - environment: production-02
             host: SSH_HOST_PRODUCTION_02
     steps:
+      - uses: actions/checkout@v3
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
