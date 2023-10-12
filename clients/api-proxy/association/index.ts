@@ -104,7 +104,7 @@ const mapToDomainObject = (
       libelleCommune: communeGestion,
     }),
     adresseInconsistency: false,
-    bilans: association.compte
+    bilans: (association.compte || [])
       .filter((c) => c.annee > 0 && c.id_siret === siretSiege)
       .map(
         ({
