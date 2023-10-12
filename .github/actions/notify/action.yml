@@ -16,5 +16,5 @@ runs:
   steps:
     - name:
       run: |
-        curl -X POST ${{ inputs.hook }} -d '{ "message": "${{ inputs.message }}", "roomId": "${{ inputs.id }}" }'
+        curl -X POST ${{ inputs.hook }} -H 'Content-Type: application/json' -d '{ "message": "${{ inputs.message }}", "roomId": "${{ inputs.id }}" }'
       shell: bash

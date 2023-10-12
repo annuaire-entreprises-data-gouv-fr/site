@@ -22,6 +22,6 @@ jobs:
         if: success() || failure()
         uses: ./.github/actions/notify
         with:
-          message: 'Deploy to staging failed'
+          message: '🚨 ${{ repository.name }} : deploy to staging failed'
           hook: ${{ secrets.TCHAP_HOOK }}
           id: ${{ secrets.TCHAP_ROOM_ID }}
