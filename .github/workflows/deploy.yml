@@ -30,12 +30,6 @@ jobs:
         env:
           SSH_HOST: ${{ secrets.SSH_HOST_STAGING }}
 
-      - name: Notify staging failure only
-        if: success() || failure()
-        uses: ./.github/actions/notify
-        with:
-          message: 'Deploy to staging failed'
-
   deploy-production:
     name: Deploy - production
     runs-on: ubuntu-latest
@@ -64,9 +58,3 @@ jobs:
         run: ssh -i ./deploy.key www-data@$SSH_HOST 'sh /opt/apps/annuaire-entreprises/annuaire-entreprises-deploy.sh'
         env:
           SSH_HOST: ${{ secrets[matrix.host] }}
-
-      - name: Notify
-        if: success() || failure()
-        uses: ./.github/actions/notify
-        with:
-          message: 'Deploy to production failed'
