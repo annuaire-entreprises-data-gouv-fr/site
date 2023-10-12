@@ -1,8 +1,5 @@
 name: 'Notify message'
 
-runs:
-  using: 'composite'
-
 inputs:
   hooks:
     description: 'Hook url'
@@ -12,6 +9,9 @@ inputs:
     required: true
   id:
     required: false
+
+runs:
+  using: 'composite'
 
   steps:
     - name:
