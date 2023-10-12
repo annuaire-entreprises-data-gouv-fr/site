@@ -8,6 +8,7 @@ import {
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { IUniteLegale } from '#models/index';
 import httpFrontClient from '#utils/network/frontend';
+import logErrorInSentry from '#utils/sentry';
 
 const RNE_ROUTE = '/api/data-fetching/rne';
 export const useImmmatriculationRNE = (uniteLegale: IUniteLegale) => {
@@ -22,7 +23,10 @@ export const useImmmatriculationRNE = (uniteLegale: IUniteLegale) => {
           RNE_ROUTE + '/' + uniteLegale.siren
         );
         setImmatriculationRNE(response);
-      } catch {
+      } catch (e: any) {
+        logErrorInSentry('Error in RNE call from frontend', {
+          details: e.toString(),
+        });
         setImmatriculationRNE(
           APINotRespondingFactory(EAdministration.INPI, 500)
         );
