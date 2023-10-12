@@ -34,7 +34,7 @@ jobs:
       #     SSH_HOST: ${{ secrets.SSH_HOST_STAGING }}
 
       - name: Notify staging failure only
-        # if: success() || failure()
+        if: success() || failure()
         uses: ./.github/actions/notify
         with:
           message: 'Deploy to staging failed'
