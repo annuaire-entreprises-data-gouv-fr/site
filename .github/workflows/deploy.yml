@@ -76,3 +76,11 @@ jobs:
           message: '🚨 ${{ github.event.repository.name }} : deploy to production failed'
           hook: ${{ secrets.TCHAP_HOOK }}
           id: ${{ secrets.TCHAP_ROOM_ID }}
+
+      - name: Notify deploy succes
+        if: success()
+        uses: ./.github/actions/notify
+        with:
+          message: '✅ ${{ github.event.repository.name }} : successfully deploy to staging & production'
+          hook: ${{ secrets.TCHAP_HOOK }}
+          id: ${{ secrets.TCHAP_ROOM_ID }}
