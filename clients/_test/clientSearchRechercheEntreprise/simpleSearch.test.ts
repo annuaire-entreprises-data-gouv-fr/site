@@ -14,7 +14,6 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     '351556394',
     // '356000000',
     '528163777',
-    '528163777',
     '839517323',
     '842019051',
     '842019051',

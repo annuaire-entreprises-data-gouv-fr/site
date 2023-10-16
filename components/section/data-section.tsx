@@ -95,7 +95,10 @@ export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
 function useShowLoadingState<T>(data: IAPILoading | T): data is IAPILoading {
   const after100ms = useTimeout(100);
   const before800ms = !useTimeout(800);
-  const [dataLoadedBefore100ms, setDataLoadedBefore100ms] = useState(false);
+  const [dataLoadedBefore100ms, setDataLoadedBefore100ms] = useState(
+    !isAPILoading(data)
+  );
+
   useEffect(() => {
     if (!isAPILoading(data) && !after100ms) {
       setDataLoadedBefore100ms(true);

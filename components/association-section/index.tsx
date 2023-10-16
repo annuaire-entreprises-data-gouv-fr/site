@@ -60,7 +60,7 @@ export default function AssociationSection({
   return (
     <>
       <DataSection
-        title={`Répertoire National des Associations`}
+        title="Répertoire National des Associations"
         sources={[EAdministration.MI]}
         data={data}
         notFoundInfo={<AssociationNotFound uniteLegale={uniteLegale} />}
