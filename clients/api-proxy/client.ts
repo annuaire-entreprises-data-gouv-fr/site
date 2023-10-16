@@ -9,12 +9,12 @@ import { httpGet } from '#utils/network';
  * @param useCache by default, cache is deactivated
  * @returns
  */
-const getAPIProxy = async (
+async function getAPIProxy<T>(
   url: string,
   options?: AxiosRequestConfig,
   useCache = false // by default we dont cache response
-) =>
-  await httpGet(
+): Promise<T> {
+  return await httpGet(
     url,
     {
       ...options,
@@ -25,14 +25,12 @@ const getAPIProxy = async (
     },
     useCache
   );
+}
 
-const clientAPIProxy = async (
+export async function clientAPIProxy<T>(
   route: string,
   options: AxiosRequestConfig,
   useCache: boolean
-) => {
-  const request = await getAPIProxy(route, options, useCache);
-  return request.data;
-};
-
-export { clientAPIProxy };
+): Promise<T> {
+  return await getAPIProxy<T>(route, options, useCache);
+}
