@@ -1,4 +1,5 @@
 import routes from '#clients/routes';
+import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IAnnoncesAssociation, IComptesAssociation } from '#models/annonces';
 import { IdRna, Siren } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
@@ -106,4 +107,11 @@ const clientDCA = async (
   };
 };
 
-export { clientDCA, clientJOAFE };
+const stubbedClientDCA = stubClient({
+  clientDCA,
+});
+const stubbedClientJOAFE = stubClient({
+  clientJOAFE,
+});
+
+export { stubbedClientDCA as clientDCA, stubbedClientJOAFE as clientJOAFE };

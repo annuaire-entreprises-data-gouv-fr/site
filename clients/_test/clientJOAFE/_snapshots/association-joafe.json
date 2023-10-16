@@ -1,0 +1,17 @@
+{
+  "args": [
+    "W643000551"
+  ],
+  "result": {
+    "annonces": [
+      {
+        "typeAvisLibelle": "Modification",
+        "datePublication": "2015-07-04",
+        "numeroParution": "201500271011",
+        "details": "Associations loi du 1er juillet 1901",
+        "path": "https://www.journal-officiel.gouv.fr/document/associations_b/201500271011"
+      }
+    ],
+    "lastModified": null
+  }
+}
