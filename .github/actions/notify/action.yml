@@ -1,4 +1,5 @@
 name: 'Notify message'
+description: 'Send message to tech team'
 
 inputs:
   hook:
@@ -8,13 +9,13 @@ inputs:
     description: 'Body'
     required: true
   id:
+    description: 'Room id'
     required: false
 
 runs:
   using: 'composite'
 
   steps:
-    - name:
-      run: |
+    - run: |
         curl -X POST ${{ inputs.hook }} -H 'Content-Type: application/json' -d '{ "message": "${{ inputs.message }}", "roomId": "${{ inputs.id }}" }'
       shell: bash
