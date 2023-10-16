@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import routes from '#clients/routes';
 import Info from '#components-ui/alerts/info';
 import { Loader } from '#components-ui/loader';
@@ -14,37 +13,6 @@ import { formatIntFr } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import { postServerSideProps } from '#utils/server-side-props-helper/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
-
-const Retry: React.FC<{}> = () => (
-  <>
-    <div
-      dangerouslySetInnerHTML={{
-        __html: `
-            <div class="button-link small">
-                <button onclick="window.downloadInpiPDF();">
-                <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                >
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-                <span>&nbsp;Relancer le téléchargement</span>
-                </button>
-            </div>
-        `,
-      }}
-    />
-  </>
-);
 
 const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
   const downloadLink = `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`;

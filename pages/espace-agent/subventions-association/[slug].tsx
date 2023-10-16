@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import ProtectedData from '#components-ui/alerts/protected-data';
 import { AssociationDocumentSection } from '#components/association-protected-section/documents';
 import { AssociationStatutsSection } from '#components/association-protected-section/statuts';
@@ -16,7 +15,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { isAgent, isSuperAgent } from '#utils/session';
+import { isSuperAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, ISubventionsAssociation {}
