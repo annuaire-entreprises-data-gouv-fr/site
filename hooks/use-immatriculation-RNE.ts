@@ -7,7 +7,7 @@ import {
 } from '#models/api-not-responding';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { IUniteLegale } from '#models/index';
-import httpFrontClient from '#utils/network/frontend';
+import { httpGet } from '#utils/network';
 import logErrorInSentry from '#utils/sentry';
 
 const RNE_ROUTE = '/api/data-fetching/rne';
@@ -19,7 +19,7 @@ export const useImmmatriculationRNE = (uniteLegale: IUniteLegale) => {
   useEffect(() => {
     const fetchDonneesRestreintes = async () => {
       try {
-        const response = await httpFrontClient<IImmatriculationRNE>(
+        const response = await httpGet<IImmatriculationRNE>(
           RNE_ROUTE + '/' + uniteLegale.siren
         );
         setImmatriculationRNE(response);

@@ -1,52 +1,54 @@
-import {
-  HttpBadRequestError,
-  HttpForbiddenError,
-  HttpNotFound,
-  HttpServerError,
-  HttpTimeoutError,
-  HttpTooManyRequests,
-  HttpUnauthorizedError,
-} from '#clients/exceptions';
+import Axios, { AxiosRequestConfig } from 'axios';
+import { setupCache } from 'axios-cache-interceptor';
+import constants from '#models/constants';
 
-async function httpFrontClient<T>(request: RequestInfo): Promise<T> {
-  const response = await fetch(request);
+/**
+ * Returns a cache-enabled axios instance
+ */
+export const axiosFrontendFactory = () => {
+  const axiosOptions = {
+    timeout: constants.timeout.XL,
+  };
 
-  if (!response.ok) {
-    switch (response.status) {
-      case 429: {
-        throw new HttpTooManyRequests(
-          response.statusText || 'Too many requests'
-        );
-      }
-      case 404: {
-        throw new HttpNotFound(response.statusText || 'Not Found');
-      }
-      case 403: {
-        throw new HttpForbiddenError('Forbidden');
-      }
-      case 400: {
-        throw new HttpBadRequestError('Bad Request');
-      }
-      case 401: {
-        throw new HttpUnauthorizedError('Unauthorized');
-      }
-      case 408: {
-        throw new HttpTimeoutError('Timeout');
-      }
-      case 504: {
-        throw new HttpTimeoutError('Timeout');
-      }
-      default:
-        throw new HttpServerError(
-          `Unknown server error while querying ${request}. ${
-            response.statusText || ''
-          }`
-        );
-    }
-  }
+  const axiosInstance = setupCache(Axios.create(axiosOptions), {
+    storage: undefined,
+  });
 
-  // may error if there is no body, return empty array
-  return response.json().catch(() => ({}));
+  //@ts-ignore
+  axiosInstance.interceptors.response.use(() => {}, errorInterceptor);
+
+  return axiosInstance;
+};
+
+const axiosInstance = axiosFrontendFactory();
+
+export async function httpFrontClient<T>(
+  config: AxiosRequestConfig
+): Promise<T> {
+  const response = await axiosInstance({
+    timeout: constants.timeout.L,
+    cache: false,
+    ...config,
+  });
+  return response.data;
+}
+
+/**
+ * GET axios client
+ * @param url
+ * @param config
+ * @param useCache - cache is disabled by default
+ * @returns
+ */
+export async function httpGet<T>(
+  url: string,
+  config?: AxiosRequestConfig
+): Promise<T> {
+  return await httpFrontClient<T>({
+    url,
+    timeout: constants.timeout.L,
+    ...config,
+  });
 }
 
 export default httpFrontClient;

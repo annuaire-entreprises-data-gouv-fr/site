@@ -26,7 +26,7 @@ export const clientApiEntrepriseConformiteFiscale = async (siren: Siren) => {
   // never cache any API Entreprise request
   const useCache = false;
 
-  const response = await httpGet(
+  const response = await httpGet<IAPIEntrepriseConformiteFiscale>(
     `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.fiscale}${siren}/attestation_fiscale`,
     {
       headers: {
@@ -42,7 +42,7 @@ export const clientApiEntrepriseConformiteFiscale = async (siren: Siren) => {
     useCache
   );
 
-  return mapToDomainObject(response.data);
+  return mapToDomainObject(response);
 };
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteFiscale) => {

@@ -7,7 +7,7 @@ import {
   setupCache,
 } from 'axios-cache-interceptor';
 import constants from '#models/constants';
-import errorInterceptor from './error-interceptor';
+import errorInterceptor from '../utils/error-interceptor';
 import { addStartTimeInterceptor, logInterceptor } from './log-interceptor';
 import redisStorage, { connect } from './redis/redis-storage';
 
@@ -61,14 +61,15 @@ const axiosInstanceWithCache = axiosInstanceFactory();
  * @param config
  * @returns
  */
-const httpClient = async (config: CacheRequestConfig): Promise<any> => {
+async function httpBackClient<T>(config: CacheRequestConfig): Promise<T> {
   await connect();
-  return await axiosInstanceWithCache({
+  const response = await axiosInstanceWithCache({
     timeout: constants.timeout.L,
     cache: false,
     ...config,
   });
-};
+  return response.data;
+}
 
 /**
  * GET axios client
@@ -77,17 +78,18 @@ const httpClient = async (config: CacheRequestConfig): Promise<any> => {
  * @param useCache - cache is disabled by default
  * @returns
  */
-const httpGet = async (
+async function httpGet<T>(
   url: string,
   config?: AxiosRequestConfig,
   useCache = false
-) =>
-  await httpClient({
+): Promise<T> {
+  return await httpBackClient<T>({
     url,
     timeout: constants.timeout.L,
     ...config,
     cache: useCache ? defaultCacheConfig : false,
   });
+}
 
 export const defaultCacheConfig = {
   // 15 minutes lifespan as average session is ~ 3 min.
@@ -109,6 +111,6 @@ export const defaultCacheConfig = {
   staleIfError: false,
 };
 
-export { httpClient, httpGet };
+export { httpBackClient, httpGet };
 
-export default httpClient;
+export default httpBackClient;

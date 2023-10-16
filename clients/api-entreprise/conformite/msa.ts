@@ -23,7 +23,7 @@ export const clientApiEntrepriseConformiteMSA = async (siret: Siret) => {
   // never cache any API Entreprise request
   const useCache = false;
 
-  const response = await httpGet(
+  const response = await httpGet<IAPIEntrepriseConformiteMSA>(
     `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.msa}${siret}/conformite_cotisations`,
     {
       headers: {
@@ -39,7 +39,7 @@ export const clientApiEntrepriseConformiteMSA = async (siret: Siret) => {
     useCache
   );
 
-  return mapToDomainObject(response.data);
+  return mapToDomainObject(response);
 };
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteMSA) => {

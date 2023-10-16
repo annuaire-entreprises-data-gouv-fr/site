@@ -43,17 +43,17 @@ const fallbackClient = new httpClientOAuth(
  * @param axiosConfig
  * @returns
  */
-export const inseeClientGet = async (
+export async function inseeClientGet<T>(
   route: string,
   options = { useFallback: false, useCache: false } as InseeClientOptions,
   axiosConfig: AxiosRequestConfig = {}
-) => {
+): Promise<T> {
   const { useFallback, useCache } = options;
 
   const client = useFallback ? fallbackClient : defaultClient;
-  return await client.get(
+  return (await client.get(
     route,
     { timeout: constants.timeout.S, ...axiosConfig },
     useCache
-  );
-};
+  )) as T;
+}

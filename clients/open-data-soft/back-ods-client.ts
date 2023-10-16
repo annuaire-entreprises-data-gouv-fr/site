@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { httpGet } from '#utils/network';
-import { IODSResponse } from './types';
+import { IODSMetadata, IODSResponse } from './types';
 
 /**
  * Request ODS - Only from backend
@@ -10,11 +10,11 @@ const odsClient = async (
   metaDataUrl: string
 ): Promise<any> => {
   const [response, responseMetaData] = await Promise.all([
-    httpGet(search.url, search.config),
-    httpGet(metaDataUrl),
+    httpGet<IODSResponse>(search.url, search.config),
+    httpGet<IODSMetadata>(metaDataUrl),
   ]);
 
-  const results = (response.data || []) as IODSResponse;
+  const results = response || [];
 
   const lastModified = responseMetaData?.metas?.metadata_processed || null;
 

@@ -153,12 +153,15 @@ const clientSiegeInsee = async (
   siren: Siren,
   options: InseeClientOptions
 ): Promise<IEtablissement> => {
-  const response = await inseeClientGet(routes.sireneInsee.siret, options, {
-    params: {
-      q: `etablissementSiege:true AND siren:${siren}`,
-    },
-  });
-  const { etablissements } = response.data as IInseeEtablissementResponse;
+  const { etablissements } = await inseeClientGet<IInseeEtablissementResponse>(
+    routes.sireneInsee.siret,
+    options,
+    {
+      params: {
+        q: `etablissementSiege:true AND siren:${siren}`,
+      },
+    }
+  );
 
   return mapEtablissementToDomainObject(etablissements[0]);
 };

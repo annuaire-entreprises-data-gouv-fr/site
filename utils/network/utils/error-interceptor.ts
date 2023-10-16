@@ -1,12 +1,12 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import {
+  HttpBadRequestError,
   HttpForbiddenError,
   HttpNotFound,
   HttpServerError,
   HttpTimeoutError,
   HttpTooManyRequests,
   HttpUnauthorizedError,
-  HttpBadRequestError,
 } from '#clients/exceptions';
 import { formatLog } from './format-log';
 

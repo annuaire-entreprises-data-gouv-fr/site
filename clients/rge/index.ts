@@ -31,16 +31,16 @@ type IRGEResponse = {
  */
 const clientRGE = async (siren: Siren): Promise<IRGECertification> => {
   const route = routes.certifications.rge.api;
-  const response = await httpGet(route, { params: { qs: `siret:${siren}*` } });
-
-  const data = response.data as IRGEResponse;
+  const data = await httpGet<IRGEResponse>(route, {
+    params: { qs: `siret:${siren}*` },
+  });
 
   if (!data.results.length) {
     throw new HttpNotFound(
       `Cannot found certifications associate to siren : ${siren}`
     );
   }
-  return mapToDomainObject(response.data);
+  return mapToDomainObject(data);
 };
 
 const mapToDomainObject = (rge: IRGEResponse) => {

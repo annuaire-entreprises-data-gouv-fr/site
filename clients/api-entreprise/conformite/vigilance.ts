@@ -30,7 +30,7 @@ export const clientApiEntrepriseConformiteVigilance = async (siren: Siren) => {
   // never cache any API Entreprise request
   const useCache = false;
 
-  const response = await httpGet(
+  const response = await httpGet<IAPIEntrepriseConformiteVigilance>(
     `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.vigilance}${siren}/attestation_vigilance`,
     {
       headers: {
@@ -46,7 +46,7 @@ export const clientApiEntrepriseConformiteVigilance = async (siren: Siren) => {
     useCache
   );
 
-  return mapToDomainObject(response.data);
+  return mapToDomainObject(response);
 };
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteVigilance) => {

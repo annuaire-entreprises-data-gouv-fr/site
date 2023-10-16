@@ -1,4 +1,4 @@
-import httpFrontClient from '#utils/network/frontend';
+import { httpGet } from '#utils/network';
 import { IODSMetadata, IODSResponse } from './types';
 
 /**
@@ -9,8 +9,8 @@ const odsFrontClient = async (
   metaDataUrl: string
 ): Promise<any> => {
   const [response, responseMetaData] = await Promise.all([
-    httpFrontClient<IODSResponse>(searchUrl),
-    httpFrontClient<IODSMetadata>(metaDataUrl),
+    httpGet<IODSResponse>(searchUrl),
+    httpGet<IODSMetadata>(metaDataUrl),
   ]);
 
   const results = (response || []) as IODSResponse;
