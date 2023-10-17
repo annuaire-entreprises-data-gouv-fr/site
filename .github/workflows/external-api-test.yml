@@ -2,11 +2,11 @@
 
 name: 'External API check'
 
-# Check every day at 6:00 AM
 on:
   workflow_dispatch:
+  # Check every day at 3:00 AM and 3:00 PM
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 3,15 * * *'
 
 # Be extremely careful as the env variables defined here are accessible by all the actions of the workflow.
 # For critical env variable, declare it within the action.
@@ -41,15 +41,58 @@ jobs:
         uses: ./.github/actions/install-dependencies
 
   testExternalAPIs:
-    name: Test external APIs
+    name: Test externals API
     runs-on: ubuntu-latest
+    needs: [dependencies]
     steps:
+      - uses: actions/checkout@v3
       - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
       - name: Load node_modules
         uses: ./.github/actions/load-dependencies
+      - name: Install redis
+        run: sudo apt-get install -y redis-tools redis-server
 
-      - name: Launch jest tests
-        run: npm run test:api-clients -- --runInBand --testTimeout=60000
+      - name: Run API client unit tests
+        run: |
+          npm run test:api-clients -- --runInBand --testTimeout=60000 --silent
+
+      - name: '[IF FAIL] Manual action required (read below)'
+        if: ${{ failure() }}
+        run: |
+          echo "The API client tests failed.
+
+          We tests external APIs, and ensure there is no regression compared to 
+          previous successful runs stored in snapshots.
+
+          If the test failed, it means that the response returned by the API client
+          is not the same as the one stored in the snapshot. 
+
+          You need to analyse the diff in the logs of the job to decide what to do :
+
+          - If the changes concerns only the data, and not the model (eg. company name changed), 
+            you need to update the snapshot locally by running the following command :
+
+            npm run test:api-clients -- -u
+
+          - If the changes concerns the model (eg. API changed, missing field, type of data),
+            you need to check if it is a breaking change, and correct the code if is.
+            When the code is fixed, you can update the snapshot locally.
+            
+            
+          If there is no diff, it probably means that the API is down. You need to check if 
+          there is an incident reported on the APIs status page :
+
+          https://annuaire-entreprises.data.gouv.fr/donnees/api
+
+          If there is no incident, you can try to run the tests again.
+          "
+      - name: Notify API failure to team
+        if: failure()
+        uses: ./.github/actions/notify
+        with:
+          message: '🚨 API client tests failed [see in github](${{ github.event.workflow_run.url }})'
+          hook: ${{ secrets.TCHAP_HOOK }}
+          id: ${{ secrets.TCHAP_ROOM_ID }}
