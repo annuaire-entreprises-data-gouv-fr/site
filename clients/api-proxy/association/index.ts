@@ -18,7 +18,7 @@ const clientAssociation = async (
   siretSiege: string,
   useCache = true
 ) => {
-  const response = await clientAPIProxy(
+  const response = await clientAPIProxy<IAssociationResponse>(
     routes.proxy.association + rnaOrSiren,
     { timeout: constants.timeout.L },
     useCache
@@ -27,7 +27,7 @@ const clientAssociation = async (
   if (response.identite && Object.keys(response.identite).length === 1) {
     throw new HttpNotFound(rnaOrSiren);
   }
-  return mapToDomainObject(response as IAssociationResponse, siretSiege);
+  return mapToDomainObject(response, siretSiege);
 };
 
 const mapToDomainObject = (

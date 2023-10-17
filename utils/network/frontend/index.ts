@@ -1,5 +1,5 @@
 import Axios, { AxiosRequestConfig } from 'axios';
-import { setupCache } from 'axios-cache-interceptor';
+import { buildWebStorage, setupCache } from 'axios-cache-interceptor';
 import constants from '#models/constants';
 
 /**
@@ -11,7 +11,7 @@ export const axiosFrontendFactory = () => {
   };
 
   const axiosInstance = setupCache(Axios.create(axiosOptions), {
-    storage: undefined,
+    storage: buildWebStorage(sessionStorage, 'axios-cache:'),
   });
 
   //@ts-ignore

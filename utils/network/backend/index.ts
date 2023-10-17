@@ -87,11 +87,11 @@ async function httpGet<T>(
     url,
     timeout: constants.timeout.L,
     ...config,
-    cache: useCache ? defaultCacheConfig : false,
+    cache: useCache ? defaultBackCacheConfig : false,
   });
 }
 
-export const defaultCacheConfig = {
+const defaultBackCacheConfig = {
   // 15 minutes lifespan as average session is ~ 3 min.
   ttl: CACHE_TIMEOUT,
 
