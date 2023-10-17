@@ -1,6 +1,22 @@
 import { AxiosRequestConfig } from 'axios';
 import { CacheRequestConfig } from 'axios-cache-interceptor';
+import constants from '#models/constants';
+import { defaultCacheConfig } from './utils/cache-config';
 
+/**
+ * TO READ
+ *
+ * Differences between frontend clients and backend
+ *
+ * - Logging is different
+ * - Caching is different
+ */
+
+/**
+ * Default http client - any HTTP method - no cache
+ * @param config
+ * @returns
+ */
 export async function httpClient<T>(config: CacheRequestConfig): Promise<T> {
   if (typeof window === 'undefined') {
     const { httpBackClient } = await import('./backend');
@@ -11,18 +27,24 @@ export async function httpClient<T>(config: CacheRequestConfig): Promise<T> {
   }
 }
 
+/**
+ * GET http client - can use cache
+ * @param url
+ * @param config
+ * @param useCache - cache is disabled by default
+ * @returns
+ */
 export async function httpGet<T>(
   url: string,
   config?: AxiosRequestConfig,
   useCache = false
 ): Promise<T> {
-  if (typeof window === 'undefined') {
-    const { httpGet } = await import('./backend');
-    return await httpGet<T>(url, config, useCache);
-  } else {
-    const { httpGet } = await import('./frontend');
-    return await httpGet<T>(url, config);
-  }
+  return await httpClient({
+    url,
+    timeout: constants.timeout.L,
+    ...config,
+    cache: useCache ? defaultCacheConfig : false,
+  });
 }
 
 export default httpClient;

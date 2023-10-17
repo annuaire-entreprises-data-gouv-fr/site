@@ -10,17 +10,23 @@ type IGeoDepartementResponse = {
 };
 
 const clientDepartementsByName = async (slug: string): Promise<any> => {
-  const response = await httpGet(`${routes.geo.departement}&nom=${slug}`, {
-    timeout: constants.timeout.L,
-  });
-  return mapToDomainObject(response.data || []);
+  const response = await httpGet<IGeoDepartementResponse[]>(
+    `${routes.geo.departement}&nom=${slug}`,
+    {
+      timeout: constants.timeout.L,
+    }
+  );
+  return mapToDomainObject(response || []);
 };
 
 const clientDepartementByCode = async (code: string): Promise<any> => {
-  const response = await httpGet(`${routes.geo.departement}&code=${code}`, {
-    timeout: constants.timeout.L,
-  });
-  return mapToDomainObject(response.data || []);
+  const response = await httpGet<IGeoDepartementResponse[]>(
+    `${routes.geo.departement}&code=${code}`,
+    {
+      timeout: constants.timeout.L,
+    }
+  );
+  return mapToDomainObject(response || []);
 };
 
 const mapToDomainObject = (

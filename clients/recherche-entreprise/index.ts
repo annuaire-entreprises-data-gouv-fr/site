@@ -83,7 +83,7 @@ const clientSearchRechercheEntreprise = async ({
     ? constants.timeout.XL
     : constants.timeout.L;
 
-  const response = await httpGet<ISearchResponse>(
+  const results = await httpGet<ISearchResponse>(
     url,
     {
       timeout,

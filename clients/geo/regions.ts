@@ -10,11 +10,14 @@ type IGeoRegionResponse = {
 };
 
 const clientRegionsByName = async (term: string): Promise<any> => {
-  const response = await httpGet(`${routes.geo.region}&nom=${term}`, {
-    timeout: constants.timeout.L,
-  });
+  const response = await httpGet<IGeoRegionResponse[]>(
+    `${routes.geo.region}&nom=${term}`,
+    {
+      timeout: constants.timeout.L,
+    }
+  );
 
-  return mapToDomainObject(response.data || []);
+  return mapToDomainObject(response || []);
 };
 
 const mapToDomainObject = (response: IGeoRegionResponse[]): IGeoElement[] => {

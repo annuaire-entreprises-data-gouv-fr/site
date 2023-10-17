@@ -33,7 +33,7 @@ export class httpClientOAuth {
 
   newToken = async () => {
     try {
-      const { data } = await httpClient<IAccessToken>({
+      const data = await httpClient<IAccessToken['data']>({
         url: this.token_url,
         method: 'POST',
         timeout: constants.timeout.XXS,

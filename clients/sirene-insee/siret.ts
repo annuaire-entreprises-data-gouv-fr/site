@@ -102,16 +102,18 @@ const clientAllEtablissementsInsee = async (
   const etablissementsPerPage = constants.resultsPerPage.etablissements;
   const cursor = Math.max(page - 1, 0) * etablissementsPerPage;
 
-  const response = await inseeClientGet(routes.sireneInsee.siret, options, {
-    params: {
-      q: `siren:${siren}`,
-      nombre: etablissementsPerPage,
-      debut: cursor,
-    },
-  });
-
   const { header, etablissements } =
-    response.data as IInseeEtablissementsResponse;
+    await inseeClientGet<IInseeEtablissementsResponse>(
+      routes.sireneInsee.siret,
+      options,
+      {
+        params: {
+          q: `siren:${siren}`,
+          nombre: etablissementsPerPage,
+          debut: cursor,
+        },
+      }
+    );
 
   const allEtablissements = etablissements.map((e) =>
     mapEtablissementToDomainObject(e)
@@ -130,13 +132,11 @@ const clientEtablissementInsee = async (
   siret: Siret,
   options: InseeClientOptions
 ) => {
-  const response = await inseeClientGet(
-    routes.sireneInsee.siret + siret,
-    options
-  );
-
   const { etablissement, etablissements } =
-    response.data as IInseeEtablissementResponse;
+    await inseeClientGet<IInseeEtablissementResponse>(
+      routes.sireneInsee.siret + siret,
+      options
+    );
 
   if (!etablissement && etablissements) {
     if (etablissements.length === 1) {

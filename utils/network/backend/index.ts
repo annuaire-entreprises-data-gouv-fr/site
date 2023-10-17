@@ -1,17 +1,16 @@
 import http from 'http';
 import https from 'https';
-import Axios, { AxiosRequestConfig } from 'axios';
+import Axios from 'axios';
 import {
   AxiosCacheInstance,
   CacheRequestConfig,
   setupCache,
 } from 'axios-cache-interceptor';
 import constants from '#models/constants';
+import { CACHE_TIMEOUT } from '../utils/cache-config';
 import errorInterceptor from '../utils/error-interceptor';
 import { addStartTimeInterceptor, logInterceptor } from './log-interceptor';
 import redisStorage, { connect } from './redis/redis-storage';
-
-export const CACHE_TIMEOUT = 1000 * 60 * 15;
 
 /**
  * Limit the number of sockets allocated per distant hosts and to reuse sockets
@@ -56,11 +55,6 @@ export const axiosInstanceFactory = (
 
 const axiosInstanceWithCache = axiosInstanceFactory();
 
-/**
- * Default axios client - not cached by default
- * @param config
- * @returns
- */
 async function httpBackClient<T>(config: CacheRequestConfig): Promise<T> {
   await connect();
   const response = await axiosInstanceWithCache({
@@ -71,46 +65,6 @@ async function httpBackClient<T>(config: CacheRequestConfig): Promise<T> {
   return response.data;
 }
 
-/**
- * GET axios client
- * @param url
- * @param config
- * @param useCache - cache is disabled by default
- * @returns
- */
-async function httpGet<T>(
-  url: string,
-  config?: AxiosRequestConfig,
-  useCache = false
-): Promise<T> {
-  return await httpBackClient<T>({
-    url,
-    timeout: constants.timeout.L,
-    ...config,
-    cache: useCache ? defaultBackCacheConfig : false,
-  });
-}
-
-const defaultBackCacheConfig = {
-  // 15 minutes lifespan as average session is ~ 3 min.
-  ttl: CACHE_TIMEOUT,
-
-  // only cache 200
-  cachePredicate: {
-    statusCheck: (status: number) => {
-      return status >= 200 && status < 300;
-    },
-    responseMatch: ({ data }: { data: any }) => {
-      // only caches if the response is not fallback
-      const isFallback = !!data?.metadata?.isFallback;
-      return !isFallback;
-    },
-  },
-  // If we should return a old (possibly expired) cache when the current request failed
-  // to get a valid response because of a network error, invalid status or etc.
-  staleIfError: false,
-};
-
-export { httpBackClient, httpGet };
+export { httpBackClient };
 
 export default httpBackClient;

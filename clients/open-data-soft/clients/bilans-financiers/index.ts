@@ -3,7 +3,7 @@ import routes from '#clients/routes';
 import { IBilanFinancier } from '#models/donnees-financieres';
 import { Siren } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
-import odsClient from '../../back-ods-client';
+import odsClient from '../..';
 import { IAPIBilanResponse } from './interface';
 
 /**
