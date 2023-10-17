@@ -1,6 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
 import { CacheRequestConfig } from 'axios-cache-interceptor';
-import constants from '#models/constants';
 import { defaultCacheConfig } from './utils/cache-config';
 
 /**
@@ -41,7 +40,6 @@ export async function httpGet<T>(
 ): Promise<T> {
   return await httpClient({
     url,
-    timeout: constants.timeout.L,
     ...config,
     cache: useCache ? defaultCacheConfig : false,
   });

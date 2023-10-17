@@ -36,7 +36,7 @@ export const clientApiEntrepriseConformiteVigilance = async (siren: Siren) => {
       headers: {
         Authorization: `Bearer ${process.env.API_ENTREPRISE_TOKEN}`,
       },
-      timeout: constants.timeout.XL,
+      timeout: constants.timeout.XXXL,
       params: {
         object: 'espace-agent-public',
         context: 'annuaire-entreprises',

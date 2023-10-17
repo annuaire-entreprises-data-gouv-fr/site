@@ -5,6 +5,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
+import constants from '#models/constants';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { IUniteLegale } from '#models/index';
 import { httpGet } from '#utils/network';
@@ -20,7 +21,8 @@ export const useImmmatriculationRNE = (uniteLegale: IUniteLegale) => {
     const fetchDonneesRestreintes = async () => {
       try {
         const response = await httpGet<IImmatriculationRNE>(
-          RNE_ROUTE + '/' + uniteLegale.siren
+          RNE_ROUTE + '/' + uniteLegale.siren,
+          { timeout: constants.timeout.XXXXL }
         );
         setImmatriculationRNE(response);
       } catch (e: any) {

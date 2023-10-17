@@ -1,5 +1,5 @@
 import Axios, { AxiosRequestConfig } from 'axios';
-import { buildWebStorage, setupCache } from 'axios-cache-interceptor';
+import { setupCache } from 'axios-cache-interceptor';
 import constants from '#models/constants';
 import errorInterceptor from '../utils/error-interceptor';
 
@@ -16,7 +16,7 @@ export const axiosFrontendFactory = () => {
    * note for future references : we can cache request on front end (local or session storage)
    *  */
   const axiosInstance = setupCache(Axios.create(axiosOptions), {
-    storage: buildWebStorage(sessionStorage, 'axios-cache:'),
+    storage: undefined, //buildWebStorage(localStorage, 'axios-cache:'),
   });
 
   axiosInstance.interceptors.response.use(function (response) {
@@ -32,7 +32,7 @@ export async function httpFrontClient<T>(
   config: AxiosRequestConfig
 ): Promise<T> {
   const response = await axiosInstance({
-    timeout: constants.timeout.L,
+    timeout: constants.timeout.XL,
     cache: false,
     ...config,
   });

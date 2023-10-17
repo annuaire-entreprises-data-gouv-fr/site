@@ -32,7 +32,7 @@ export const clientApiEntrepriseConformiteFiscale = async (siren: Siren) => {
       headers: {
         Authorization: `Bearer ${process.env.API_ENTREPRISE_TOKEN}`,
       },
-      timeout: constants.timeout.XXL,
+      timeout: constants.timeout.XXXL,
       params: {
         object: 'espace-agent-public',
         context: 'annuaire-entreprises',
