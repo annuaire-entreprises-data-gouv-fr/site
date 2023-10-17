@@ -5,7 +5,7 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '0 7 * * *'
 
 jobs:
   deploy-staging:
