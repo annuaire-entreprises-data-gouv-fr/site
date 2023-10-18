@@ -112,7 +112,7 @@ const routes = {
   },
   proxy: {
     rne: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
-    tva: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/',
+    tva: 'https://staging.annuaire-entreprises-api-proxy.api.gouv.fr/tva/',
     association:
       'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
   },
