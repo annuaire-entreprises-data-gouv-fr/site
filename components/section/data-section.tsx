@@ -80,6 +80,7 @@ export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
     return null;
   }
 
+  /* eslint-disable react/jsx-props-no-spreading */
   return (
     <Section {...props}>
       <HeightTransition>
@@ -87,6 +88,7 @@ export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
       </HeightTransition>
     </Section>
   );
+  /* eslint-enable react/jsx-props-no-spreading */
 }
 
 /** Contains the logic that prevents flickering of UI */
