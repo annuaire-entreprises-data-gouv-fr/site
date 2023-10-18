@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
-import { LayoutDefault } from '#components/layouts/layout-default';
 import { ISession } from '#utils/session';
+import { LayoutDefault } from '#components/layouts/layout-default';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (
@@ -27,5 +27,6 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         {page}
       </LayoutDefault>
     ));
+  //eslint-disable-next-line react/jsx-props-no-spreading
   return getLayout(<Component {...pageProps} />, isBrowserOutdated, session);
 }

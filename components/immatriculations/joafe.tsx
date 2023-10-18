@@ -23,12 +23,14 @@ const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => {
     if (immatriculation.errorType === 404) {
       return null;
     } else {
+      /* eslint-disable react/jsx-props-no-spreading */
       return (
         <AdministrationNotResponding
           {...immatriculation}
           title="Enregistrement au JOAFE"
         />
       );
+      /* eslint-enable react/jsx-props-no-spreading */
     }
   }
 

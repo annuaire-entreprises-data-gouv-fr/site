@@ -1,4 +1,5 @@
 import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
+import { ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 import simplifyParams from './simplify-params';
@@ -25,6 +26,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
       ],
       snaphotFile: 'code-postal.json',
       simplifyParams,
+      postProcessResult,
     });
   });
 
@@ -44,6 +46,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
       ],
       snaphotFile: 'code-postal-with-search.json',
       simplifyParams,
+      postProcessResult,
     });
   });
 
@@ -62,6 +65,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
       ],
       snaphotFile: 'anne-hidalgo.json',
       simplifyParams,
+      postProcessResult,
     });
   });
 
@@ -81,6 +85,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
       ],
       snaphotFile: 'la-poste.json',
       simplifyParams,
+      postProcessResult,
     });
   });
 
@@ -101,6 +106,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
       ],
       snaphotFile: 'la-poste-page-3.json',
       simplifyParams,
+      postProcessResult,
     });
   });
 
@@ -119,6 +125,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
       ],
       snaphotFile: 'collectivité-territoriale.json',
       simplifyParams,
+      postProcessResult,
     });
   });
 
@@ -138,6 +145,13 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
       ],
       snaphotFile: 'CA-resultat-filter.json',
       simplifyParams,
+      postProcessResult,
     });
   });
 });
+
+function postProcessResult(result: ISearchResults) {
+  result.results.forEach((searchResult) => {
+    searchResult.dateDerniereMiseAJour = '2023-09-21T03:34:50';
+  });
+}

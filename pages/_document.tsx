@@ -102,6 +102,7 @@ class CustomHead extends Head {
     this.context.docComponentsRendered.Head = true;
     this.context.docComponentsRendered.NextScript = true;
     return (
+      //eslint-disable-next-line react/jsx-props-no-spreading
       <head {...this.props}>
         {children}
         {head}
