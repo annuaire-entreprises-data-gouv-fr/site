@@ -6,6 +6,7 @@ import simplifyParams from './simplify-params';
 describe('clientUniteLegaleInsee', () => {
   (
     [
+      '198100125', // établissement scolaire
       '200054781',
       '300025764',
       '351556394',

@@ -9,6 +9,8 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     // E2E testing.
     // Hovewer, we don't test them for regression because the results
     // changes often.
+
+    '198100125', // établissement scolaire
     '200054781',
     '300025764',
     '338365059',

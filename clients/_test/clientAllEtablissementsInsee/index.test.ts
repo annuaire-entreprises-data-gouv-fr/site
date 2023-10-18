@@ -9,6 +9,8 @@ describe('clientAllEtablissementsInsee', () => {
   // of the pagination changes systematically between API calls.
 
   [
+    '198100125', // établissement scolaire
+
     // '200054781',
     // '300025764',
     '338365059',
