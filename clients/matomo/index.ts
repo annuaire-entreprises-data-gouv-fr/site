@@ -328,7 +328,7 @@ const getEventSubtableIds = async () => {
     )}`;
     baseUrl += encodeURIComponent(subRequest);
   }
-  const events = await httpGet<any[]>(baseUrl);
+  const events = await httpGet<unknown[]>(baseUrl);
   const filterCategory = events.map((event: any) => {
     return event.map((ev: any) =>
       ev.segment === 'eventCategory==feedback%3Anps' ? ev.idsubdatatable : null

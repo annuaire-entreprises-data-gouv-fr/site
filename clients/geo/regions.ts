@@ -9,7 +9,7 @@ type IGeoRegionResponse = {
   code: string;
 };
 
-const clientRegionsByName = async (term: string): Promise<any> => {
+const clientRegionsByName = async (term: string): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoRegionResponse[]>(
     `${routes.geo.region}&nom=${term}`,
     {

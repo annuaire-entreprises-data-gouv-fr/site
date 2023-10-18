@@ -6,9 +6,9 @@ import { IODSMetadata, IODSResponse } from './types';
  * Request ODS - Only from backend
  */
 const odsClient = async (
-  search: { url: string; config?: AxiosRequestConfig<any> },
+  search: { url: string; config?: AxiosRequestConfig<unknown> },
   metaDataUrl: string
-): Promise<any> => {
+): Promise<unknown> => {
   const [response, responseMetaData] = await Promise.all([
     httpGet<IODSResponse>(search.url, search.config),
     httpGet<IODSMetadata>(metaDataUrl),

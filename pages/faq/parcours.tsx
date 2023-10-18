@@ -13,7 +13,7 @@ import { LayoutSimple } from '#components/layouts/layout-simple';
 import MatomoEvent from '#components/matomo-event';
 import { allData } from '#models/administrations';
 import constants from '#models/constants';
-import { allFaqArticlesByTarget, FAQTargets, IArticle } from '#models/faq';
+import { FAQTargets, IArticle, allFaqArticlesByTarget } from '#models/faq';
 import { NextPageWithLayout } from 'pages/_app';
 
 enum EQuestionType {

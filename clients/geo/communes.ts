@@ -10,7 +10,7 @@ type IGeoCommuneResponse = {
   code: string;
 };
 
-const clientCommunesByName = async (slug: string): Promise<any> => {
+const clientCommunesByName = async (slug: string): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoCommuneResponse[]>(
     `${routes.geo.commune}&nom=${slug}`,
     {
@@ -21,7 +21,7 @@ const clientCommunesByName = async (slug: string): Promise<any> => {
   return mapToDomainObject(response || []);
 };
 
-const clientCommuneByCp = async (cp: string): Promise<any> => {
+const clientCommuneByCp = async (cp: string): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoCommuneResponse[]>(
     `${routes.geo.commune}&codePostal=${cp}`,
     {

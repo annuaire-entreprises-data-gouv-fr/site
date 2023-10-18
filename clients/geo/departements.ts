@@ -9,7 +9,9 @@ type IGeoDepartementResponse = {
   code: string;
 };
 
-const clientDepartementsByName = async (slug: string): Promise<any> => {
+const clientDepartementsByName = async (
+  slug: string
+): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoDepartementResponse[]>(
     `${routes.geo.departement}&nom=${slug}`,
     {
@@ -19,7 +21,9 @@ const clientDepartementsByName = async (slug: string): Promise<any> => {
   return mapToDomainObject(response || []);
 };
 
-const clientDepartementByCode = async (code: string): Promise<any> => {
+const clientDepartementByCode = async (
+  code: string
+): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoDepartementResponse[]>(
     `${routes.geo.departement}&code=${code}`,
     {
