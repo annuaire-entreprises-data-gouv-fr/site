@@ -1,0 +1,32 @@
+{
+  "args": [
+    "356000000"
+  ],
+  "result": {
+    "records": [
+      {
+        "nda": "11755565775",
+        "exNda": "11755565775",
+        "region": "Île-de-France",
+        "dateDeclaration": "23/05/2023",
+        "specialite": "Développement des capacités comportementales et relationnelles",
+        "stagiaires": 88546,
+        "certifications": [
+          "Actions de formations"
+        ]
+      },
+      {
+        "nda": "11755762075",
+        "exNda": "11755762075",
+        "region": "Île-de-France",
+        "dateDeclaration": "31/05/2023",
+        "specialite": "Transport, manutention, magasinage",
+        "stagiaires": 94,
+        "certifications": [
+          "Actions de formations"
+        ]
+      }
+    ],
+    "lastModified": null
+  }
+}

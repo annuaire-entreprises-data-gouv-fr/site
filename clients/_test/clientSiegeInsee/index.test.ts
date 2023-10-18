@@ -15,6 +15,7 @@ describe('clientSiegeInsee', () => {
       // '839517323',
       // '842019051',
       // '843701079',
+      // '356000000', // laposte
       '880878145',
     ] as Siren[]
   ).forEach(expectClientToMatchSnapshotWithSiren);

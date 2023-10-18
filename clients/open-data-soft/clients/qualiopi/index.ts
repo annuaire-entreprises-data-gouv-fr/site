@@ -1,5 +1,6 @@
 import odsClient from '#clients/open-data-soft';
 import routes from '#clients/routes';
+import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IOrganismeFormation } from '#models/certifications/organismes-de-formation';
 import { Siren } from '#utils/helpers';
 import { IOrganismesFormationRecord } from './type';
@@ -8,7 +9,7 @@ import { IOrganismesFormationRecord } from './type';
  * MTPEI - DGEFP
  * https://dgefp.opendatasoft.com/explore/dataset/liste-publique-des-of-v2/information/
  */
-export const clientOrganismeFormation = async (
+const clientOrganismeFormation = async (
   siren: Siren
 ): Promise<IOrganismeFormation> => {
   const response = await odsClient(
@@ -40,3 +41,9 @@ const mapToDomainObject = (record: IOrganismesFormationRecord) => {
       : [],
   };
 };
+
+const stubbedClientOrganismeFormation = stubClient({
+  clientOrganismeFormation,
+});
+
+export { stubbedClientOrganismeFormation as clientOrganismeFormation };
