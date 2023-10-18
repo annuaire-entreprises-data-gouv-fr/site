@@ -33,12 +33,13 @@ jobs:
     name: 'Install dependencies'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Use Node.js ${{ env.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
-      - name: Install and cache dependencies
-        uses: ./.github/actions/install-dependencies
+      - uses: ./.github/actions/install-dependencies
+        name: Install and cache dependencies
 
   testExternalAPIs:
     name: Test externals API
