@@ -3,6 +3,20 @@ import { CacheRequestConfig } from 'axios-cache-interceptor';
 import { defaultCacheConfig } from './utils/cache-config';
 
 /**
+ * Inner client allow us to resolve async import on module load
+ *
+ * i.e. when node starts or web page loads
+ */
+let innerClient = initClient();
+async function initClient() {
+  if (typeof window === 'undefined') {
+    return (await import('./backend')).httpBackClient;
+  } else {
+    return (await import('./frontend')).httpFrontClient;
+  }
+}
+
+/**
  * TO READ
  *
  * Differences between frontend clients and backend
@@ -17,13 +31,9 @@ import { defaultCacheConfig } from './utils/cache-config';
  * @returns
  */
 export async function httpClient<T>(config: CacheRequestConfig): Promise<T> {
-  if (typeof window === 'undefined') {
-    const { httpBackClient } = await import('./backend');
-    return httpBackClient<T>(config);
-  } else {
-    const { httpFrontClient } = await import('./frontend');
-    return httpFrontClient<T>(config);
-  }
+  return await (
+    await innerClient
+  )(config);
 }
 
 /**

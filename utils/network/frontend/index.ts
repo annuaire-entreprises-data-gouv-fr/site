@@ -1,42 +1,46 @@
-import Axios, { AxiosRequestConfig } from 'axios';
-import { setupCache } from 'axios-cache-interceptor';
+import { HttpTimeoutError } from '#clients/exceptions';
 import constants from '#models/constants';
-import errorInterceptor from '../utils/error-interceptor';
+import { httpErrorHandler } from '../utils/http-error-handler';
 
-/**
- * Returns a cache-enabled axios instance
- */
-const axiosFrontendFactory = () => {
-  const axiosOptions = {
-    timeout: constants.timeout.XL,
-  };
-
-  /**
-   *
-   * note for future references : we can cache request on front end (local or session storage)
-   *  */
-  const axiosInstance = setupCache(Axios.create(axiosOptions), {
-    storage: undefined, //buildWebStorage(localStorage, 'axios-cache:'),
-  });
-
-  axiosInstance.interceptors.response.use(function (response) {
-    return response;
-  }, errorInterceptor);
-
-  return axiosInstance;
+type IFetchRequestConfig = {
+  url?: string;
+  timeout?: number;
 };
 
-const axiosInstance = axiosFrontendFactory();
+export async function httpFrontClient<T>(config: IFetchRequestConfig) {
+  if (!config.url) {
+    throw new Error('Url required');
+  }
 
-export async function httpFrontClient<T>(
-  config: AxiosRequestConfig
-): Promise<T> {
-  const response = await axiosInstance({
-    timeout: constants.timeout.XL,
-    cache: false,
-    ...config,
-  });
-  return response.data;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => {
+    controller.abort();
+    throw new HttpTimeoutError('Timeout');
+  }, config.timeout || constants.timeout.XL);
+
+  try {
+    const response = await fetch(config.url, {
+      signal: controller.signal,
+    });
+    const isJson = response.headers
+      .get('content-type')
+      ?.includes('application/json');
+
+    const data = await (isJson ? response.json() : response.text());
+
+    if (!response.ok) {
+      return httpErrorHandler(
+        config.url,
+        response.status,
+        response.statusText,
+        data.message
+      );
+    }
+
+    return data as T;
+  } finally {
+    clearTimeout(timeoutId);
+  }
 }
 
 export default httpFrontClient;

@@ -54,7 +54,7 @@ export const FilterGeo: React.FC<{
           setLoading(false);
         })
         .catch((e) => {
-          setIssue(e?.request?.status === 404 ? Issue.NORESULT : Issue.ERROR);
+          setIssue(e?.status === 404 ? Issue.NORESULT : Issue.ERROR);
         });
     }),
     []

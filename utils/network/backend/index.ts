@@ -8,7 +8,7 @@ import {
 } from 'axios-cache-interceptor';
 import constants from '#models/constants';
 import { CACHE_TIMEOUT } from '../utils/cache-config';
-import errorInterceptor from '../utils/error-interceptor';
+import errorInterceptor from './error-interceptor';
 import { addStartTimeInterceptor, logInterceptor } from './log-interceptor';
 import redisStorage, { connect } from './redis/redis-storage';
 
