@@ -6,7 +6,7 @@ import errorInterceptor from '../utils/error-interceptor';
 /**
  * Returns a cache-enabled axios instance
  */
-export const axiosFrontendFactory = () => {
+const axiosFrontendFactory = () => {
   const axiosOptions = {
     timeout: constants.timeout.XL,
   };
