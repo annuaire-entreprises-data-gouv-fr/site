@@ -1,0 +1,73 @@
+administrations:
+  - dila
+title: Qu’est ce que le BODACC ?
+
+seo:
+  title: BODACC - définition - Annuaire des Entreprises
+  description: Le Bulletin Officiel des Annonces Civiles et Commerciales (BODACC) publie les actes enregistrés au registre du commerce et des sociétés (RCS).
+# href: <https://annuaire-entreprises.data.gouv.fr/definition/bodacc>
+# # BODACC
+
+# **SOMMAIRE**
+
+# - **Le BODACC : définition**
+# - **Que trouve-t-on sur le BODACC ?**
+# - **Les services gratuits disponibles sur Bodacc.fr**
+# - **Les sources des annonces du BODAAC**
+
+body: |
+
+  ## Le BODACC : définition
+
+  Le Bulletin Officiel des Annonces Civiles et Commerciales (BODACC) publie les actes enregistrés au registre du commerce et des sociétés (RCS). Il est édité par la Direction de l’Information Légale et Administrative (DILA) dans le cadre de sa mission de service public de la transparence économique et financière.
+
+  ## Que trouve-t-on sur le BODACC ?
+
+  Parmi la liste des actes consignés dans ce bulletin national, on retrouve :
+
+  - les ventes et cessions
+  - les immatriculations et créations d'établissement
+  - les modifications et radiations de personnes physiques ou morales inscrites au RCS
+  - les procédures (collectives, de conciliation ou de rétablissement professionnel)
+  - les vis de dépôt des comptes des sociétés
+
+  Le BODACC diffuse aussi certaines annonces civiles :
+
+  - les annonces de rétablissement personnel
+  - les déclarations d’acceptation de succession à concurrence de l’actif net
+  - les avis d’envoi en possession
+
+  ## Les services gratuits disponibles sur Bodacc.fr
+
+  Le site internet [bodacc.fr](https://www.bodacc.fr/pages/home/) vous permet de :
+
+  - consulter gratuitement en ligne les annonces parues depuis 2008
+  - télécharger gratuitement ces annonces au format PDF
+  - créer gratuitement des alertes pour faire une veille sur les annonces commerciales
+  - enregistrer vos recherches favorites pour gagner du temps à chaque visite
+
+  **Exemple**
+
+  Vous recherchez une annonce de liquidation judiciaire ? Vous pouvez créer un compte sur [bodacc.fr](https://www.bodacc.fr/pages/home/) . Dans votre espace personnel, vous pourrez créer jusqu'à 10 alertes et enregistrer vos recherches en nombre illimité.
+
+  **À noter** : **3 441 948 annonces ont été diffusées sur le site internet [bodacc.fr](https://www.bodacc.fr/pages/home/)**
+
+  ## Les sources des annonces du BODAAC
+
+  Les informations relatives aux entreprises ou commerçants immatriculés au RCS sont extraites des registres publics appartenants aux  :
+
+  - greffes des tribunaux de commerce
+  - tribunaux de proximité ou des tribunaux judiciaires
+  - tribunaux mixtes de commerce d’outre-mer
+  - tribunaux de première instance
+  - cours d’appel
+
+  Les annonces civiles, elles, sont transmises par :
+
+  - les greffes des tribunaux civils
+  - les notaires
+  - les mandataires et les commissions de surendettement de la banque de France
+
+more:
+  - label: Consulter le site du BODACC
+    href: https://www.bodacc.fr/pages/home/
