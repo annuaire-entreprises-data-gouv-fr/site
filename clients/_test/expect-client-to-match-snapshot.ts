@@ -37,6 +37,7 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
     if (!result) {
       return;
     }
+
     if (postProcessResult) {
       postProcessResult(result);
     }

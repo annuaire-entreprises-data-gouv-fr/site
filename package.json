@@ -22,8 +22,8 @@
     "test:end2end:run": "cypress run",
     "test:end2end:open": "cypress open",
     "test:unit": "jest --runInBand --testPathIgnorePatterns=clients",
-    "test:api-clients": "jest clients",
-    "test:api-clients:update-snapshots": "jest clients -u",
+    "test:api-clients": "jest clients --silent",
+    "test:api-clients:update-snapshots": "jest clients --silent -u",
     "lint": "next lint",
     "script:seo": " ts-node --project ./seo-script/seo-script-tsconfig.json ./seo-script/index.ts"
   },

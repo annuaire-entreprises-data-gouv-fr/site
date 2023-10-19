@@ -9,6 +9,9 @@ describe('clientEntrepreneurSpectacles', () => {
       args: ['842019051' as Siren],
       __dirname,
       snaphotFile: 'entrepreneur-spectacles.json',
+      postProcessResult: (result) => {
+        result.lastModified = '2023-10-18T23:19:19.590091+00:00';
+      },
     });
   });
 });
