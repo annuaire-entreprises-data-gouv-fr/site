@@ -17,10 +17,9 @@ export const clientProfessionnelBio = async (
 ): Promise<IEtablissementsBio> => {
   const route = routes.certifications.bio.api;
   // siret actually accept both siren and siret
-  const response = await httpGet(route, {
+  const data = await httpGet<IBioResponse>(route, {
     params: { siret: siren, nb: 1500 },
   });
-  const data = response.data as IBioResponse;
   const msgNotFound = `No certifications bio found for : ${siren}`;
 
   if (!data.items || data.items.length === 0) {

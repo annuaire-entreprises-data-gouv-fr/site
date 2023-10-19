@@ -69,12 +69,10 @@ const clientUniteLegaleInsee = async (
   siren: Siren,
   options: InseeClientOptions
 ) => {
-  const response = await inseeClientGet(
+  const data = await inseeClientGet<IInseeUniteLegaleResponse>(
     routes.sireneInsee.siren + siren,
     options
   );
-
-  const data = response.data as IInseeUniteLegaleResponse;
 
   return mapToDomainObject(siren, data);
 };

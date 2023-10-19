@@ -2,7 +2,7 @@ import routes from '#clients/routes';
 import { IAnnoncesAssociation, IComptesAssociation } from '#models/annonces';
 import { IdRna, Siren } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
-import odsClient from '../../back-ods-client';
+import odsClient from '../..';
 
 type IJournalOfficielAssociationRecord = {
   association_type: string; // 'assoLoi1901';

@@ -21,12 +21,14 @@ type IEgaproRepresentation = {
 export const clientEgaproRepresentationEquilibre = async (
   siren: Siren
 ): Promise<IEgapro['representation']> => {
-  const responseSearchApi = await httpGet(routes.egapro.representation, {
-    params: { q: siren },
-  });
+  const responseSearchApi = await httpGet<IEgaproRepresentationResponse>(
+    routes.egapro.representation,
+    {
+      params: { q: siren },
+    }
+  );
 
-  const dataSearch = responseSearchApi.data
-    ?.data as IEgaproRepresentationResponse['data'];
+  const dataSearch = responseSearchApi?.data;
 
   if (!dataSearch || !dataSearch?.length) {
     throw new HttpNotFound(

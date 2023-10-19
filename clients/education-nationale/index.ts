@@ -13,15 +13,16 @@ import { IEducationNationaleRecord, IEducationNationaleRecords } from './types';
  */
 const clientEducationNationale = async (siren: Siren, page: number) => {
   const rows = 30;
-  const response = await httpGet(routes.educationNationale.search, {
-    params: {
-      q: `#startswith(siren_siret, ${siren})`,
-      start: (page - 1) * rows,
-      rows,
-    },
-  });
-
-  const data = response.data as IEducationNationaleRecords;
+  const data = await httpGet<IEducationNationaleRecords>(
+    routes.educationNationale.search,
+    {
+      params: {
+        q: `#startswith(siren_siret, ${siren})`,
+        start: (page - 1) * rows,
+        rows,
+      },
+    }
+  );
 
   if (!data.records.length) {
     throw new HttpNotFound(`Cannot found education establishment : ${siren}`);

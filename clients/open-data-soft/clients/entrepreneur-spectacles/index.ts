@@ -2,7 +2,7 @@ import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { IEntrepreneurSpectaclesCertification } from '#models/certifications/entrepreneur-spectacles';
 import { Siren } from '#utils/helpers';
-import odsClient from '../../back-ods-client';
+import odsClient from '../..';
 
 type ISpectaclesVivantsRecord = {
   geoloc_cp: string[];

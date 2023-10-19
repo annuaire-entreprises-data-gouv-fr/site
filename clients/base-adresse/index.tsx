@@ -24,9 +24,11 @@ const clientBanGeoLoc = async (adresse: string): Promise<IGeoLoc> => {
     .replaceAll(' ', '+');
 
   const route = `${routes.ban}${sanitizedAdress}`;
-  const response = await httpGet(route, { timeout: constants.timeout.L });
+  const response = await httpGet<IBANResponse>(route, {
+    timeout: constants.timeout.L,
+  });
 
-  return mapToDomainObject(response.data as IBANResponse);
+  return mapToDomainObject(response);
 };
 
 const mapToDomainObject = (response: IBANResponse): IGeoLoc => {

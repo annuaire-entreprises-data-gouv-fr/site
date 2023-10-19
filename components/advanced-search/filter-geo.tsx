@@ -1,10 +1,10 @@
-import axios from 'axios';
 import { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
 import Info from '#components-ui/alerts/info';
 import Warning from '#components-ui/alerts/warning';
 import { Loader } from '#components-ui/loader';
 import constants from '#models/constants';
 import { debounce } from '#utils/helpers/debounce';
+import { httpGet } from '#utils/network';
 import { useLocalStorage } from 'hooks';
 
 type IGeoSuggest = {
@@ -31,7 +31,7 @@ export const FilterGeo: React.FC<{
   const [issue, setIssue] = useState(Issue.NONE);
   const [searchTerm, setSearchTerm] = useState(cp_dep_label);
   const [isLoading, setLoading] = useState(false);
-  const [geoSuggests, setGeoSuggests] = useState([]);
+  const [geoSuggests, setGeoSuggests] = useState<IGeoSuggest[]>([]);
 
   const [suggestsHistory, setSuggestsHistory] = useLocalStorage(
     'geo-search-history-4',
@@ -43,19 +43,18 @@ export const FilterGeo: React.FC<{
   const search = useCallback(
     debounce((term: string) => {
       setLoading(true);
-      axios
-        .get(`/api/data-fetching/geo/${term}`, {
-          timeout: constants.timeout.XXL,
-        })
-        .then((response) => {
-          setGeoSuggests(response.data);
-          if (response.data.length === 0) {
+      httpGet<IGeoSuggest[]>(`/api/data-fetching/geo/${term}`, {
+        timeout: constants.timeout.XXL,
+      })
+        .then((data) => {
+          setGeoSuggests(data);
+          if (data.length === 0) {
             setIssue(Issue.NORESULT);
           }
           setLoading(false);
         })
         .catch((e) => {
-          setIssue(e?.request?.status === 404 ? Issue.NORESULT : Issue.ERROR);
+          setIssue(e?.status === 404 ? Issue.NORESULT : Issue.ERROR);
         });
     }),
     []

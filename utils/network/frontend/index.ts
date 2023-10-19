@@ -1,52 +1,46 @@
-import {
-  HttpBadRequestError,
-  HttpForbiddenError,
-  HttpNotFound,
-  HttpServerError,
-  HttpTimeoutError,
-  HttpTooManyRequests,
-  HttpUnauthorizedError,
-} from '#clients/exceptions';
+import { HttpTimeoutError } from '#clients/exceptions';
+import constants from '#models/constants';
+import { httpErrorHandler } from '../utils/http-error-handler';
 
-async function httpFrontClient<T>(request: RequestInfo): Promise<T> {
-  const response = await fetch(request);
+type IFetchRequestConfig = {
+  url?: string;
+  timeout?: number;
+};
 
-  if (!response.ok) {
-    switch (response.status) {
-      case 429: {
-        throw new HttpTooManyRequests(
-          response.statusText || 'Too many requests'
-        );
-      }
-      case 404: {
-        throw new HttpNotFound(response.statusText || 'Not Found');
-      }
-      case 403: {
-        throw new HttpForbiddenError('Forbidden');
-      }
-      case 400: {
-        throw new HttpBadRequestError('Bad Request');
-      }
-      case 401: {
-        throw new HttpUnauthorizedError('Unauthorized');
-      }
-      case 408: {
-        throw new HttpTimeoutError('Timeout');
-      }
-      case 504: {
-        throw new HttpTimeoutError('Timeout');
-      }
-      default:
-        throw new HttpServerError(
-          `Unknown server error while querying ${request}. ${
-            response.statusText || ''
-          }`
-        );
-    }
+export async function httpFrontClient<T>(config: IFetchRequestConfig) {
+  if (!config.url) {
+    throw new Error('Url required');
   }
 
-  // may error if there is no body, return empty array
-  return response.json().catch(() => ({}));
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => {
+    controller.abort();
+    throw new HttpTimeoutError('Timeout');
+  }, config.timeout || constants.timeout.XL);
+
+  try {
+    const response = await fetch(config.url, {
+      signal: controller.signal,
+    });
+    const isJson = response.headers
+      .get('content-type')
+      ?.includes('application/json');
+
+    const data = await (isJson ? response.json() : response.text());
+
+    if (!response.ok) {
+      return httpErrorHandler(
+        config.url,
+        response.status,
+        response.statusText,
+        data.message
+      );
+    }
+
+    return data as T;
+  } finally {
+    clearTimeout(timeoutId);
+  }
 }
 
 export default httpFrontClient;
