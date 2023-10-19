@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
+import { isSiren } from '#utils/helpers';
 import 'dotenv/config';
 import fs from 'fs';
 import path from 'path';
-import { isSiren } from '#utils/helpers';
 
 // Script that fetches the protected siren from the grist table
 // and saves them under /public/protected-siren.txt
@@ -28,8 +28,10 @@ async function fetchAndSaveProtectedSiren() {
       console.log(
         `[fetch-protected_siren]: Fetching protected siren from Grist table...`
       );
+
       protectedSiren = await fetchFromGrist();
-      `[fetch-protected_siren]: Grist table successfully fetched`;
+
+      console.log(`[fetch-protected_siren]: Grist table successfully fetched`);
     } catch (err) {
       console.error(
         `[fetch-protected_siren]: Error fetching from grist table (${err})`
@@ -116,7 +118,9 @@ function fetchFromCurrentlyDeployed(): Promise<string[]> {
     .then((text) => {
       const sirens = text.trim().split('\n');
       if (!sirens.every(isSiren)) {
-        throw new Error('invalid response from annuaire-entreprises');
+        throw new Error(
+          'One or more slug from current protected-siren.txt is invalid'
+        );
       }
       return sirens;
     });
