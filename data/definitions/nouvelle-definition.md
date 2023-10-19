@@ -77,3 +77,13 @@ Si l’entreprise est redevable de la TVA, le service des impôts des entreprise
 Il est possible de consulter le numéro de TVA intracommunautaire d’une entreprise en ligne. Comment faire ? Pour toutes les entreprises et associations françaises, l’Annuaire des Entreprises affiche cette information. Pour une entreprise établie hors de France, mais dans l’UE, cette vérification s’effectue via le [service européen de validation des numéros de TVA (VIES)](https://ec.europa.eu/taxation_customs/vies/#/vat-validation). Cette précaution est fortement recommandée afin de réduire le risque de fraude ou d’escroquerie.
 
 ***Attention** : de nombreux sites internet affichent un numéro de TVA mais ne prennent pas la peine de le vérifier.*
+
+**SOURCES** :
+- [annuaire-entreprises.data.gouv.fr/faq/tva-intracommunautaire](https://annuaire-entreprises.data.gouv.fr/faq/tva-intracommunautaire)
+- [economie.gouv.fr/cedef/numero-tva-intracommunautaire](https://www.economie.gouv.fr/cedef/numero-tva-intracommunautaire)
+- [entreprendre.service-public.fr/vosdroits/F23570](https://entreprendre.service-public.fr/vosdroits/F23570)
+- [economie.gouv.fr/entreprises/activite-entreprise-numero-tva-intracommunautaire](https://www.economie.gouv.fr/entreprises/activite-entreprise-numero-tva-intracommunautaire)
+
+**DÉFINITIONS LIÉESs** :
+
+
