@@ -1,6 +1,12 @@
-import { AxiosRequestConfig } from 'axios';
-import { CacheRequestConfig } from 'axios-cache-interceptor';
-import { defaultCacheConfig } from './utils/cache-config';
+export type IDefaultRequestConfig = {
+  url?: string;
+  timeout?: number;
+  useCache?: boolean;
+  params?: any;
+  headers?: any;
+  method?: 'POST' | 'GET';
+  data?: any;
+};
 
 /**
  * Inner client allow us to resolve async import on module load
@@ -30,7 +36,7 @@ async function initClient() {
  * @param config
  * @returns
  */
-export async function httpClient<T>(config: CacheRequestConfig): Promise<T> {
+export async function httpClient<T>(config: IDefaultRequestConfig): Promise<T> {
   return await (
     await innerClient
   )(config);
@@ -45,13 +51,11 @@ export async function httpClient<T>(config: CacheRequestConfig): Promise<T> {
  */
 export async function httpGet<T>(
   url: string,
-  config?: AxiosRequestConfig,
-  useCache = false
+  config?: IDefaultRequestConfig
 ): Promise<T> {
   return await httpClient({
     url,
     ...config,
-    cache: useCache ? defaultCacheConfig : false,
   });
 }
 

@@ -1,8 +1,7 @@
-import { AxiosRequestConfig } from 'axios';
 import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
 import constants from '#models/constants';
 import { logWarningInSentry } from '#utils/sentry';
-import httpClient, { httpGet } from '..';
+import httpClient, { IDefaultRequestConfig, httpGet } from '..';
 
 type IAccessToken = {
   data: {
@@ -43,7 +42,7 @@ export class httpClientOAuth {
           grant_type: 'client_credentials',
           validity_period: 604800,
         },
-        cache: false,
+        useCache: false,
       });
       this._token = {
         data,
@@ -72,20 +71,21 @@ export class httpClientOAuth {
     return this._token;
   };
 
-  get = async (url: string, options: AxiosRequestConfig, useCache = false) => {
+  get = async (
+    url: string,
+    options: IDefaultRequestConfig,
+    useCache = false
+  ) => {
     const token = await this.getToken();
 
-    return httpGet(
-      url,
-      {
-        timeout: constants.timeout.M,
-        ...options,
-        headers: {
-          ...options.headers,
-          Authorization: `Bearer ${token.data.access_token}`,
-        },
+    return httpGet(url, {
+      timeout: constants.timeout.M,
+      ...options,
+      headers: {
+        ...options.headers,
+        Authorization: `Bearer ${token.data.access_token}`,
       },
-      useCache
-    );
+      useCache,
+    });
   };
 }

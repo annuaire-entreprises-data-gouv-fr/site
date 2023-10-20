@@ -1,6 +1,6 @@
-import { AxiosRequestConfig } from 'axios';
 import routes from '#clients/routes';
 import constants from '#models/constants';
+import { IDefaultRequestConfig } from '#utils/network';
 import { httpClientOAuth } from '#utils/network/backend/0auth';
 
 /**
@@ -40,20 +40,20 @@ const fallbackClient = new httpClientOAuth(
  *
  * @param route
  * @param options
- * @param axiosConfig
+ * @param config
  * @returns
  */
 export async function inseeClientGet<T>(
   route: string,
   options = { useFallback: false, useCache: false } as InseeClientOptions,
-  axiosConfig: AxiosRequestConfig = {}
+  config: IDefaultRequestConfig = {}
 ): Promise<T> {
   const { useFallback, useCache } = options;
 
   const client = useFallback ? fallbackClient : defaultClient;
   return (await client.get(
     route,
-    { timeout: constants.timeout.S, ...axiosConfig },
+    { timeout: constants.timeout.S, ...config },
     useCache
   )) as T;
 }
