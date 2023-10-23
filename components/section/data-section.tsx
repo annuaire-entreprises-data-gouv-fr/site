@@ -82,9 +82,9 @@ export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
 
   /* eslint-disable react/jsx-props-no-spreading */
   return (
-    <Section {...props}>
+    <Section {...props} lastModified={lastModified}>
       <HeightTransition>
-        <SectionStateMachine {...props} lastModified={lastModified} />
+        <SectionStateMachine {...props} />
       </HeightTransition>
     </Section>
   );
