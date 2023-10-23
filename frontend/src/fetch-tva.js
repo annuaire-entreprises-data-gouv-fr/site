@@ -17,7 +17,7 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
     fetch(`/api/data-fetching/verify-tva/${siren}`)
       .then((e) => {
         if (!e.ok) {
-          throw new Error(e.status);
+          throw new Error("Error in API TVA :" + e.status);
         }
         return e.json();
       })
