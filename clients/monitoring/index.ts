@@ -55,7 +55,7 @@ export const clientMonitorings = async (): Promise<IMonitoring[]> => {
   data.append('logs_end_date', Math.ceil(to.getTime() / 1000));
   data.append('logs_start_date', Math.floor(from.getTime() / 1000));
 
-  const response = await httpClient({
+  const result = await httpClient<IUptimeRobotResponse>({
     url: routes.monitoring + `?api_key=${process.env.UPTIME_ROBOT_API_KEY}`,
     method: 'POST',
     data,
@@ -65,8 +65,6 @@ export const clientMonitorings = async (): Promise<IMonitoring[]> => {
     },
     timeout: constants.timeout.XL,
   });
-
-  const result = response.data as IUptimeRobotResponse;
 
   return result.monitors.map((monitor) => mapToDomainObject(monitor, from));
 };

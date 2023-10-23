@@ -46,11 +46,11 @@ const clientTVA = async (
 ): Promise<string | null> => {
   const url = `${routes.proxy.tva}${tva}`;
 
-  const data = (await clientAPIProxy(
+  const data = await clientAPIProxy<IVIESResponse>(
     url,
     { timeout: constants.timeout.XXL },
     useCache
-  )) as IVIESResponse;
+  );
 
   if (data.userError && ['VALID', 'INVALID'].indexOf(data.userError) === -1) {
     throw new TVAUserException(data.userError);

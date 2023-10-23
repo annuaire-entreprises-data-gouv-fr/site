@@ -1,4 +1,4 @@
-import odsClient from '#clients/open-data-soft/back-ods-client';
+import odsClient from '#clients/open-data-soft';
 import routes from '#clients/routes';
 import { IOrganismeFormation } from '#models/certifications/organismes-de-formation';
 import { Siren } from '#utils/helpers';

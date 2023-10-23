@@ -83,7 +83,7 @@ const clientSearchRechercheEntreprise = async ({
     ? constants.timeout.XL
     : constants.timeout.L;
 
-  const response = await httpGet(
+  const results = await httpGet<ISearchResponse>(
     url,
     {
       timeout,
@@ -91,8 +91,6 @@ const clientSearchRechercheEntreprise = async ({
     },
     useCache
   );
-
-  const results = response.data as ISearchResponse;
 
   if (!results.results || results.results.length === 0) {
     throw new HttpNotFound('No results');

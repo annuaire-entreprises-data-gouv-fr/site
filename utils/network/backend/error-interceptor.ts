@@ -1,14 +1,6 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import {
-  HttpForbiddenError,
-  HttpNotFound,
-  HttpServerError,
-  HttpTimeoutError,
-  HttpTooManyRequests,
-  HttpUnauthorizedError,
-  HttpBadRequestError,
-} from '#clients/exceptions';
-import { formatLog } from './format-log';
+import { formatLog } from '../utils/format-log';
+import { httpErrorHandler } from '../utils/http-error-handler';
 
 const getStatus = (response?: AxiosResponse, message?: string) => {
   if (response?.status) {
@@ -35,36 +27,7 @@ const errorInterceptor = (error: AxiosError) => {
       formatLog(url, status, false, startTime ? endTime - startTime : undefined)
     );
   }
-
-  switch (status) {
-    case 429: {
-      throw new HttpTooManyRequests(statusText || 'Too many requests');
-    }
-    case 404: {
-      throw new HttpNotFound(statusText || 'Not Found');
-    }
-    case 403: {
-      throw new HttpForbiddenError('Forbidden');
-    }
-    case 400: {
-      throw new HttpBadRequestError('Bad Request');
-    }
-    case 401: {
-      throw new HttpUnauthorizedError('Unauthorized');
-    }
-    case 408: {
-      throw new HttpTimeoutError('Timeout');
-    }
-    case 504: {
-      throw new HttpTimeoutError('Timeout');
-    }
-    default:
-      throw new HttpServerError(
-        `Unknown server error while querying ${url}. ${statusText || ''} ${
-          message || ''
-        }`
-      );
-  }
+  httpErrorHandler(url, status, statusText, message);
 };
 
 export default errorInterceptor;

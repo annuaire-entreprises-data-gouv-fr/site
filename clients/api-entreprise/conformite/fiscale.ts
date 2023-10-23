@@ -26,13 +26,13 @@ export const clientApiEntrepriseConformiteFiscale = async (siren: Siren) => {
   // never cache any API Entreprise request
   const useCache = false;
 
-  const response = await httpGet(
+  const response = await httpGet<IAPIEntrepriseConformiteFiscale>(
     `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.fiscale}${siren}/attestation_fiscale`,
     {
       headers: {
         Authorization: `Bearer ${process.env.API_ENTREPRISE_TOKEN}`,
       },
-      timeout: constants.timeout.XXL,
+      timeout: constants.timeout.XXXL,
       params: {
         object: 'espace-agent-public',
         context: 'annuaire-entreprises',
@@ -42,7 +42,7 @@ export const clientApiEntrepriseConformiteFiscale = async (siren: Siren) => {
     useCache
   );
 
-  return mapToDomainObject(response.data);
+  return mapToDomainObject(response);
 };
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteFiscale) => {

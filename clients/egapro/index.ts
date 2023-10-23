@@ -16,11 +16,11 @@ const employeesSizeRangeMapping = {
  * https://egapro.travail.gouv.fr/
  */
 export const clientEgapro = async (siren: Siren): Promise<IEgapro['index']> => {
-  const response = await httpGet(routes.egapro.index, {
+  const response = await httpGet<IEgaproResponse>(routes.egapro.index, {
     params: { q: siren },
   });
 
-  const dataSearch = response.data?.data as IEgaproResponse['data'];
+  const dataSearch = response?.data;
 
   if (!dataSearch || !dataSearch?.length) {
     throw new HttpNotFound(

@@ -1,5 +1,5 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { formatLog } from './format-log';
+import { formatLog } from '../utils/format-log';
 
 /**
  * Add startTime to request

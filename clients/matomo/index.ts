@@ -140,22 +140,23 @@ const aggregateEvents = (
   return { months, totals };
 };
 
+type IMatomoMonthlyStat = {
+  nb_uniq_visitors_new: number;
+  nb_uniq_visitors_returning: number;
+  nb_visits_new: number;
+  nb_visits_returning: number;
+};
+
+type IMatomoEventStat = { label: string; nb_events: number };
+
 /**
  * Turns matomo response into monthly stats
  */
 const computeStats = (
-  matomoMonthlyStats: {
-    nb_uniq_visitors_new: number;
-    nb_uniq_visitors_returning: number;
-    nb_visits_new: number;
-    nb_visits_returning: number;
-  }[],
-  matomoNpsEventStats: { label: string; nb_events: number }[][],
-  matomoCopyPasteEventStats: { label: string; nb_events: number }[],
-  matomoEventsCategory: {
-    label: string;
-    nb_events: number;
-  }[][]
+  matomoMonthlyStats: IMatomoMonthlyStat[],
+  matomoNpsEventStats: IMatomoEventStat[][],
+  matomoCopyPasteEventStats: IMatomoEventStat[],
+  matomoEventsCategory: IMatomoEventStat[][]
 ) => {
   const events = aggregateEvents(matomoNpsEventStats);
   const lastYear = getLastYear();
@@ -263,18 +264,18 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       matomoCopyPasteEventStats,
       matomoEventsCategory,
     ] = await Promise.all([
-      httpGet(createPageViewUrl()),
+      httpGet<IMatomoMonthlyStat[]>(createPageViewUrl()),
       getNpsEvent(),
-      httpGet(createCopyPasteEventUrl()),
-      httpGet(createEventsCategoryUrl()),
+      httpGet<IMatomoEventStat[]>(createCopyPasteEventUrl()),
+      httpGet<IMatomoEventStat[][]>(createEventsCategoryUrl()),
     ]);
 
     return {
       ...computeStats(
-        matomoMonthlyStats.data,
-        matomoNpsEventStats.data,
-        matomoCopyPasteEventStats.data,
-        matomoEventsCategory.data
+        matomoMonthlyStats,
+        matomoNpsEventStats,
+        matomoCopyPasteEventStats,
+        matomoEventsCategory
       ),
     };
   } catch (e: any) {
@@ -327,8 +328,8 @@ const getEventSubtableIds = async () => {
     )}`;
     baseUrl += encodeURIComponent(subRequest);
   }
-  const events = await httpGet(baseUrl);
-  const filterCategory = events.data.map((event: any) => {
+  const events = await httpGet<unknown[]>(baseUrl);
+  const filterCategory = events.map((event: any) => {
     return event.map((ev: any) =>
       ev.segment === 'eventCategory==feedback%3Anps' ? ev.idsubdatatable : null
     );
@@ -356,7 +357,7 @@ const createEventsCategoryUrl = () => {
 /**
  * Compute matomo API url to extract events count
  */
-const getNpsEvent = async () => {
+const getNpsEvent = async (): Promise<IMatomoEventStat[][]> => {
   const lastYear = getLastYear();
   const subtableIdsResponse = await getEventSubtableIds();
 
