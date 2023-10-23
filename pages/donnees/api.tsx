@@ -28,6 +28,7 @@ const StatusPage: NextPageWithLayout<IProps> = ({
       title="Statut des API utilisées par l'Annuaire des Entreprises"
       noIndex
     />
+    <script> window.setTimeout(function() {}, 90)</script>
     <div className="content-container">
       <h1>Statut des API utilisées</h1>
       <p>

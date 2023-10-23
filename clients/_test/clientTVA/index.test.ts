@@ -1,4 +1,4 @@
-import { clientTVA } from '#clients/api-proxy/tva';
+import { clientTVA } from '#clients/api-vies';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 
 describe('clientTVA', () => {

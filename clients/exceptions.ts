@@ -23,6 +23,13 @@ export class HttpServerError extends HttpError {
     super(message, 500);
   }
 }
+
+export class HttpConnectionReset extends HttpError {
+  constructor(public message: string) {
+    super(message, 500);
+  }
+}
+
 export class HttpTimeoutError extends HttpError {
   constructor(public message: string) {
     super(message, 408);

@@ -1,7 +1,6 @@
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
-import constants from '#models/constants';
-import { clientAPIProxy } from '../client';
+import { httpGet } from '#utils/network';
 
 type IVIESResponse = {
   isValid: boolean;
@@ -44,12 +43,9 @@ const clientTVA = async (
   tva: string,
   useCache = true
 ): Promise<string | null> => {
-  const url = `${routes.proxy.tva}${tva}`;
+  const url = `${routes.tva}${tva}`;
 
-  const data = await clientAPIProxy<IVIESResponse>(url, {
-    timeout: constants.timeout.XXL,
-    useCache,
-  });
+  const data = await httpGet<IVIESResponse>(url, { useCache });
 
   if (data.userError && ['VALID', 'INVALID'].indexOf(data.userError) === -1) {
     throw new TVAUserException(data.userError);
