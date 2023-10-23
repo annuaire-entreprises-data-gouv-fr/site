@@ -4,7 +4,9 @@ import { useEffect, useState } from 'react';
 
 const QUERY = '(prefers-reduced-motion: no-preference)';
 const getInitialState = () =>
-  typeof window !== 'undefined' && !window.matchMedia(QUERY).matches;
+  typeof window !== 'undefined' &&
+  !!window.matchMedia &&
+  !window.matchMedia(QUERY).matches;
 
 /**
  * Returns whether the user has requested that the system minimize the amount of
@@ -23,9 +25,9 @@ export default function usePrefersReducedMotion() {
     const listener = (event: MediaQueryListEvent) => {
       setPrefersReducedMotion(!event.matches);
     };
-    mediaQueryList.addEventListener('change', listener);
+    mediaQueryList?.addEventListener?.('change', listener);
     return () => {
-      mediaQueryList.removeEventListener('change', listener);
+      mediaQueryList?.removeEventListener?.('change', listener);
     };
   }, []);
 
