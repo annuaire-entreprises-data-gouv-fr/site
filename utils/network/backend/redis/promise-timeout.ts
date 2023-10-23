@@ -15,7 +15,6 @@ export class PromiseTimeoutError extends Error {
  * the specified timeout.
  *
  * @param {Promise} promise The promise.
- * @param {string} errorMessage Error message to use if the promise times out.
  * @param {number} timeoutMillis Number of milliseconds to wait on settling.
  * @returns {Promise} Either resolves/rejects with `promise`, or rejects with
  *                   `TimeoutError`, whichever settles first.
