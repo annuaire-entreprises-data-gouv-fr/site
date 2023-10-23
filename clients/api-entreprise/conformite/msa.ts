@@ -35,8 +35,8 @@ export const clientApiEntrepriseConformiteMSA = async (siret: Siret) => {
         context: 'annuaire-entreprises',
         recipient: 13002526500013,
       },
-    },
-    useCache
+      useCache,
+    }
   );
 
   return mapToDomainObject(response);

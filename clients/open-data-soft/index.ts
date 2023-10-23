@@ -1,12 +1,11 @@
-import { AxiosRequestConfig } from 'axios';
-import { httpGet } from '#utils/network';
+import { IDefaultRequestConfig, httpGet } from '#utils/network';
 import { IODSMetadata, IODSResponse } from './types';
 
 /**
- * Request ODS - Only from backend
+ * Request ODS
  */
 const odsClient = async (
-  search: { url: string; config?: AxiosRequestConfig },
+  search: { url: string; config?: IDefaultRequestConfig },
   metaDataUrl: string
 ): Promise<any> => {
   const [response, responseMetaData] = await Promise.all([

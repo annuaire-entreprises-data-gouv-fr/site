@@ -1,13 +1,10 @@
 import http from 'http';
 import https from 'https';
 import Axios from 'axios';
-import {
-  AxiosCacheInstance,
-  CacheRequestConfig,
-  setupCache,
-} from 'axios-cache-interceptor';
+import { AxiosCacheInstance, setupCache } from 'axios-cache-interceptor';
 import constants from '#models/constants';
-import { CACHE_TIMEOUT } from '../utils/cache-config';
+import { IDefaultRequestConfig } from '..';
+import { CACHE_TIMEOUT, defaultCacheConfig } from './cache-config';
 import errorInterceptor from './error-interceptor';
 import { addStartTimeInterceptor, logInterceptor } from './log-interceptor';
 import redisStorage, { connect } from './redis/redis-storage';
@@ -55,11 +52,11 @@ export const axiosInstanceFactory = (
 
 const axiosInstanceWithCache = axiosInstanceFactory();
 
-async function httpBackClient<T>(config: CacheRequestConfig): Promise<T> {
+async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
   await connect();
   const response = await axiosInstanceWithCache({
     timeout: constants.timeout.L,
-    cache: false,
+    cache: config.useCache ? defaultCacheConfig : false,
     ...config,
   });
   return response.data;
