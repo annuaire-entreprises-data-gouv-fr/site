@@ -1,5 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IBilanFinancier } from '#models/donnees-financieres';
 import { Siren } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
@@ -10,7 +11,7 @@ import { IAPIBilanResponse } from './interface';
  * Données financière (Ratios Financiers (BCE / INPI))
  * https://data.economie.gouv.fr/explore/dataset/ratios_inpi_bce/api
  */
-export const clientBilansFinanciers = async (siren: Siren) => {
+const clientBilansFinanciers = async (siren: Siren) => {
   const url = routes.donneesFinancieres.ods.search;
   const metaDataUrl = routes.donneesFinancieres.ods.metadata;
 
@@ -127,3 +128,9 @@ const mapToBilan = (financialData: IAPIBilanResponse): IBilanFinancier => {
     year: getFiscalYear(date_cloture_exercice),
   };
 };
+
+const stubbedClientBilansFinanciers = stubClient({
+  clientBilansFinanciers,
+});
+
+export { stubbedClientBilansFinanciers as clientBilansFinanciers };

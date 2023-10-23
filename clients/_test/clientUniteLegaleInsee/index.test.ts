@@ -6,11 +6,13 @@ import simplifyParams from './simplify-params';
 describe('clientUniteLegaleInsee', () => {
   (
     [
+      '198100125', // établissement scolaire
       '200054781',
       '300025764',
       '351556394',
       '356000000',
       '528163777',
+      '338365059',
       // '839517323',
       // '842019051',
       // '843701079',

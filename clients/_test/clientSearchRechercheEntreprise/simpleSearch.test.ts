@@ -9,14 +9,17 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     // E2E testing.
     // Hovewer, we don't test them for regression because the results
     // changes often.
+
+    '198100125', // établissement scolaire
     '200054781',
     '300025764',
+    '338365059',
     '351556394',
-    // '356000000',
+    // '356000000', // La poste
     '528163777',
     '839517323',
-    '842019051',
-    '842019051',
+    '842019051', // Qualibat RGE
+    '843701079',
     '880878145',
     '88087814500015',
     '883010316',

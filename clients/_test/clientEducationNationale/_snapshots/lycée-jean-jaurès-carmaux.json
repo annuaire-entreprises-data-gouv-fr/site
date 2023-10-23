@@ -1,0 +1,28 @@
+{
+  "args": [
+    "198100125",
+    1
+  ],
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 0,
+    "results": [
+      {
+        "adresse": "route de Blaye",
+        "codePostal": "81400",
+        "idEtablissement": "0810012Y",
+        "libelleAcademie": "Toulouse",
+        "mail": "0810012y@ac-toulouse.fr",
+        "nombreEleves": 820,
+        "nomCommune": "Carmaux",
+        "nomEtablissement": "Lycée polyvalent Jean Jaurès",
+        "siret": "19810012500014",
+        "statut": "Public",
+        "telephone": "05 63 80 22 00",
+        "uai": "0810012Y",
+        "zone": "C"
+      }
+    ]
+  }
+}

@@ -6,13 +6,16 @@ import simplifyParams from './simplify-params';
 describe('clientSiegeInsee', () => {
   (
     [
+      '198100125', // établissement scolaire
       '200054781',
       '300025764',
       '351556394',
+      '338365059',
       // '528163777',
       // '839517323',
       // '842019051',
       // '843701079',
+      // '356000000', // laposte
       '880878145',
     ] as Siren[]
   ).forEach(expectClientToMatchSnapshotWithSiren);

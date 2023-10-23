@@ -1,0 +1,75 @@
+{
+  "args": [
+    "356000000"
+  ],
+  "result": {
+    "employeesSizeRange": "1000 salariés ou plus",
+    "years": [
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022"
+    ],
+    "moreThan1000": true,
+    "lessThan250": false,
+    "indexYears": [
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "scores": {
+      "notes": [
+        94,
+        94,
+        94,
+        94,
+        94
+      ],
+      "augmentations": [
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "augmentationsPromotions": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "congesMaternite": [
+        15,
+        15,
+        15,
+        15,
+        15
+      ],
+      "hautesRemunerations": [
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "promotions": [
+        15,
+        15,
+        15,
+        15,
+        15
+      ],
+      "remunerations": [
+        39,
+        39,
+        39,
+        39,
+        39
+      ]
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IEgapro } from '#models/certifications/egapro';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
@@ -15,7 +16,7 @@ const employeesSizeRangeMapping = {
  * EGAPRO
  * https://egapro.travail.gouv.fr/
  */
-export const clientEgapro = async (siren: Siren): Promise<IEgapro['index']> => {
+const clientEgapro = async (siren: Siren): Promise<IEgapro['index']> => {
   const response = await httpGet<IEgaproResponse>(routes.egapro.index, {
     params: { q: siren },
   });
@@ -84,3 +85,6 @@ const mapToDomainObject = (egapro: IEgaproItem): IEgapro['index'] => {
     },
   };
 };
+
+const stubbedClientEgapro = stubClient({ clientEgapro });
+export { stubbedClientEgapro as clientEgapro };

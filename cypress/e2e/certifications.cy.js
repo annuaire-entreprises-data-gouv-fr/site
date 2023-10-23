@@ -15,14 +15,27 @@ describe('Certifications', () => {
       cy.contains('06 98 39 31 19');
     });
   });
-});
-
-describe('Certifications', () => {
   describe('ESS & Spectacles vivants', () => {
     it('Should display ESS and spectacles vivants', () => {
       cy.visit(`/labels-certificats/842019051`);
       cy.contains('ESS');
       cy.contains('Numéro de récépissé');
+    });
+  });
+  describe('Egapro', () => {
+    it('Should display Égalité professionnelle', () => {
+      cy.visit(`/labels-certificats/356000000`);
+      cy.contains('Égalité professionnelle');
+      cy.contains('Femmes parmi les cadres dirigeants')
+      cy.contains('94')
+    });
+  });
+  describe('Qualiopi', () => {
+    it('Should display Qualiopi', () => {
+      cy.visit(`/labels-certificats/356000000`);
+      cy.contains('Organisme de formation certifié Qualiopi');
+      cy.contains('Numéro Déclaration Activité')
+      cy.contains('11755565775')
     });
   });
 });

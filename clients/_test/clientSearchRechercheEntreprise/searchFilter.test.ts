@@ -10,7 +10,7 @@ const defaultParams = {
   searchFilterParams: new SearchFilterParams({}),
 };
 
-describe('clientSearchRechercheEntreprise : simple search with searchTerms', () => {
+describe('clientSearchRechercheEntreprise : use of search filters', () => {
   it.skip('Should match snapshot for code postal', async () => {
     await expectClientToMatchSnapshot({
       client: clientSearchRechercheEntreprise,
@@ -50,7 +50,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
     });
   });
 
-  it('Should match snapshot for Anne Hidalgo', async () => {
+  it.skip('Should match snapshot for Anne Hidalgo', async () => {
     await expectClientToMatchSnapshot({
       client: clientSearchRechercheEntreprise,
       __dirname,

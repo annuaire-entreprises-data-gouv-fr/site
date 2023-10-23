@@ -1,5 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IEtablissementsScolaires } from '#models/etablissements-scolaires';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
@@ -57,4 +58,8 @@ const mapToDomainObject = (
   }));
 };
 
-export { clientEducationNationale };
+const stubbedClientEducationNationale = stubClient({
+  clientEducationNationale,
+});
+
+export { stubbedClientEducationNationale as clientEducationNationale };
