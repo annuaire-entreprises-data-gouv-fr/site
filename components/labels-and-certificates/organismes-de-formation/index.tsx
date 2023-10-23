@@ -1,21 +1,84 @@
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
-import AdministrationNotResponding from '#components/administration-not-responding';
 import { MTPEI } from '#components/administrations';
-import { Section } from '#components/section';
+import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '#models/api-not-responding';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IOrganismeFormation } from '#models/certifications/organismes-de-formation';
 import { IUniteLegale } from '#models/index';
-import { formatIntFr } from '#utils/helpers';
 
 type OrganismeDeFormationSectionProps = {
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
   uniteLegale: IUniteLegale;
+};
+
+export const OrganismeDeFormationSection = ({
+  organismesDeFormation,
+  uniteLegale,
+}: OrganismeDeFormationSectionProps) => {
+  const estQualiopi = uniteLegale.complements.estQualiopi;
+
+  const head = [
+    'Numéro Déclaration Activité (NDA)',
+    'Détails',
+    ...(estQualiopi ? ['Certification(s) Qualiopi'] : []),
+  ];
+
+  const title = `Organisme de formation${
+    estQualiopi ? ' certifié Qualiopi' : ''
+  }`;
+
+  return (
+    <DataSection
+      title={title}
+      sources={[EAdministration.MTPEI]}
+      data={organismesDeFormation}
+      notFoundInfo={<OrganismeFormationLabel estQualiopi={estQualiopi} />}
+    >
+      {(organismesDeFormation) => (
+        <>
+          <OrganismeFormationLabel estQualiopi={estQualiopi} />
+          <FullTable
+            head={head}
+            body={organismesDeFormation.records.map((fields) => [
+              <Tag>{fields.nda ? fields.nda : 'Inconnu'}</Tag>,
+              <>
+                {fields.specialite && (
+                  <>
+                    <b>Spécialité :</b> {fields.specialite}
+                    <br />
+                  </>
+                )}
+                {fields.stagiaires && (
+                  <>
+                    <b>Nombre de stagiaires :</b> {fields.stagiaires}
+                    <br />
+                  </>
+                )}
+                {fields.dateDeclaration && (
+                  <>
+                    <b>Déclaration : </b> le {fields.dateDeclaration}
+                    {fields.region && <>, en région {fields.region}</>}
+                    <br />
+                  </>
+                )}
+              </>,
+              ...(estQualiopi
+                ? [
+                    fields.certifications.map((certification) => (
+                      <Tag color="info" key={certification}>
+                        {certification}
+                      </Tag>
+                    )),
+                  ]
+                : []),
+            ])}
+          />{' '}
+        </>
+      )}
+    </DataSection>
+  );
 };
 
 const FAQQaliopi = () => (
@@ -57,88 +120,3 @@ const OrganismeFormationLabel = ({ estQualiopi = false }) => (
     </p>
   </>
 );
-
-export const OrganismeDeFormationSection = ({
-  organismesDeFormation,
-  uniteLegale,
-}: OrganismeDeFormationSectionProps) => {
-  const estQualiopi = uniteLegale.complements.estQualiopi;
-
-  if (isAPINotResponding(organismesDeFormation)) {
-    const isNotFound = organismesDeFormation.errorType === 404;
-
-    if (isNotFound) {
-      return (
-        <Section
-          title="Organisme de formation"
-          sources={[EAdministration.MTPEI]}
-        >
-          <OrganismeFormationLabel estQualiopi={estQualiopi} />
-        </Section>
-      );
-    }
-    return (
-      <AdministrationNotResponding
-        administration={organismesDeFormation.administration}
-        errorType={organismesDeFormation.errorType}
-      />
-    );
-  }
-
-  const head = [
-    'Numéro Déclaration Activité (NDA)',
-    'Détails',
-    ...(estQualiopi ? ['Certification(s) Qualiopi'] : []),
-  ];
-
-  const body = organismesDeFormation.records.map((fields) => [
-    <Tag>{fields.nda ? fields.nda : 'Inconnu'}</Tag>,
-    <>
-      {fields.specialite && (
-        <>
-          <b>Spécialité :</b> {fields.specialite}
-          <br />
-        </>
-      )}
-      {fields.stagiaires && (
-        <>
-          <b>Nombre de stagiaires :</b> {fields.stagiaires}
-          <br />
-        </>
-      )}
-      {fields.dateDeclaration && (
-        <>
-          <b>Déclaration : </b> le {fields.dateDeclaration}
-          {fields.region && <>, en région {fields.region}</>}
-          <br />
-        </>
-      )}
-    </>,
-    ...(estQualiopi
-      ? [
-          fields.certifications.map((certification) => (
-            <Tag color="info" key={certification}>
-              {certification}
-            </Tag>
-          )),
-        ]
-      : []),
-  ]);
-
-  const title = `Organisme de formation${
-    uniteLegale.complements.estQualiopi ? ' certifié Qualiopi' : ''
-  }`;
-
-  return (
-    <Section
-      title={title}
-      sources={[EAdministration.MTPEI]}
-      lastModified={organismesDeFormation.lastModified}
-    >
-      <OrganismeFormationLabel
-        estQualiopi={uniteLegale.complements.estQualiopi}
-      />
-      <FullTable head={head} body={body} />
-    </Section>
-  );
-};

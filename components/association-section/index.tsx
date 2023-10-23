@@ -3,22 +3,18 @@ import Warning from '#components-ui/alerts/warning';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { Tag } from '#components-ui/tag';
-import AdministrationNotResponding from '#components/administration-not-responding';
 import { Section } from '#components/section';
+import { DataSection } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations';
-import { isAPINotResponding } from '#models/api-not-responding';
-import { IAssociation } from '#models/index';
-import { formatDate, formatIntFr } from '#utils/helpers';
+import { IAssociation, IDataAssociation } from '#models/index';
+import { IdRna, formatDate, formatIntFr } from '#utils/helpers';
 import { isTwoMonthOld } from '#utils/helpers/checks';
 
 const AssociationNotFound: React.FC<{
   uniteLegale: IAssociation;
 }> = ({ uniteLegale }) => (
-  <Section
-    title={`Répertoire National des Associations`}
-    sources={[EAdministration.MI]}
-  >
+  <>
     <Warning>
       Cette structure est une association, mais aucune information n’a été
       trouvée dans le <b>Répertoire National des Associations (RNA)</b>.
@@ -36,33 +32,77 @@ const AssociationNotFound: React.FC<{
         ['N°RNA', formatIntFr(uniteLegale.association.idAssociation || '')],
       ]}
     />
-  </Section>
+  </>
 );
 
-const AssociationSection: React.FC<{
+export default function AssociationSection({
+  uniteLegale,
+}: {
   uniteLegale: IAssociation;
-}> = ({ uniteLegale }) => {
+}) {
   const {
     association: { idAssociation = '', data },
   } = uniteLegale;
 
   if (!data) {
-    return <AssociationNotFound uniteLegale={uniteLegale} />;
-  }
-
-  if (isAPINotResponding(data)) {
-    if (data.errorType === 404) {
-      return <AssociationNotFound uniteLegale={uniteLegale} />;
-    }
-
+    // Data can be null if the natureJuridique is an association,
+    // but no idAssociation is provided by Insee API call.
     return (
-      <AdministrationNotResponding
-        administration={data.administration}
-        errorType={data.errorType}
-      />
+      <Section
+        title={`Répertoire National des Associations`}
+        sources={[EAdministration.MI]}
+      >
+        <AssociationNotFound uniteLegale={uniteLegale} />;
+      </Section>
     );
   }
 
+  return (
+    <>
+      <DataSection
+        title="Répertoire National des Associations"
+        sources={[EAdministration.MI]}
+        data={data}
+        notFoundInfo={<AssociationNotFound uniteLegale={uniteLegale} />}
+      >
+        {(data) => (
+          <>
+            <p>
+              Cette structure est inscrite au{' '}
+              <b>Répertoire National des Associations (RNA)</b>, avec les
+              informations suivantes&nbsp;:
+            </p>
+            <TwoColumnTable
+              body={getTableData(uniteLegale.association.idAssociation, data)}
+            />
+            {idAssociation && (
+              <>
+                <br />
+                Retrouvez plus d&apos;informations (comptes, effectifs et
+                documents administratifs) sur la{' '}
+                <a
+                  target="_blank"
+                  href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
+                  rel="noreferrer"
+                >
+                  fiche data-asso de cette association
+                </a>
+                .
+              </>
+            )}
+          </>
+        )}
+      </DataSection>
+      <HorizontalSeparator />
+      <BreakPageForPrint />
+    </>
+  );
+}
+
+const getTableData = (
+  idAssociation: string | IdRna,
+  association: IDataAssociation
+) => {
   const {
     nomComplet = '',
     objet = '',
@@ -80,9 +120,9 @@ const AssociationSection: React.FC<{
     siteWeb = '',
     agrement = [],
     eligibiliteCEC = false,
-  } = data || {};
+  } = association || {};
 
-  const lines = [
+  return [
     ['N°RNA', formatIntFr(idAssociation)],
     ['Nom', nomComplet],
     ['Famille', libelleFamille],
@@ -141,39 +181,4 @@ const AssociationSection: React.FC<{
       ),
     ],
   ];
-
-  return (
-    <>
-      <Section
-        title={`Répertoire National des Associations`}
-        sources={[EAdministration.MI]}
-      >
-        <p>
-          Cette structure est inscrite au{' '}
-          <b>Répertoire National des Associations (RNA)</b>, avec les
-          informations suivantes&nbsp;:
-        </p>
-        <TwoColumnTable body={lines} />
-        {idAssociation && (
-          <>
-            <br />
-            Retrouvez plus d&apos;informations (comptes, effectifs et documents
-            administratifs) sur la{' '}
-            <a
-              target="_blank"
-              href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
-              rel="noreferrer"
-            >
-              fiche data-asso de cette association
-            </a>
-            .
-          </>
-        )}
-      </Section>
-      <HorizontalSeparator />
-      <BreakPageForPrint />
-    </>
-  );
 };
-
-export default AssociationSection;
