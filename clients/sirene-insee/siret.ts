@@ -102,17 +102,19 @@ const clientAllEtablissementsInsee = async (
   const etablissementsPerPage = constants.resultsPerPage.etablissements;
   const cursor = Math.max(page - 1, 0) * etablissementsPerPage;
 
+  const { useCache, useFallback } = options;
   const { header, etablissements } =
     await inseeClientGet<IInseeEtablissementsResponse>(
       routes.sireneInsee.siret,
-      options,
       {
         params: {
           q: `siren:${siren}`,
           nombre: etablissementsPerPage,
           debut: cursor,
         },
-      }
+        useCache,
+      },
+      useFallback
     );
 
   const allEtablissements = etablissements.map((e) =>
@@ -153,14 +155,16 @@ const clientSiegeInsee = async (
   siren: Siren,
   options: InseeClientOptions
 ): Promise<IEtablissement> => {
+  const { useCache, useFallback } = options;
   const { etablissements } = await inseeClientGet<IInseeEtablissementResponse>(
     routes.sireneInsee.siret,
-    options,
     {
       params: {
         q: `etablissementSiege:true AND siren:${siren}`,
       },
-    }
+      useCache,
+    },
+    useFallback
   );
 
   return mapEtablissementToDomainObject(etablissements[0]);

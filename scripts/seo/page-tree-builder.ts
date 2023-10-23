@@ -2,7 +2,7 @@ import fs from 'fs';
 import {
   getDepartementFromCodePostal,
   getUrlFromDepartement,
-} from '../utils/helpers/formatting/labels';
+} from '../../utils/helpers/formatting/labels';
 import {
   renderDepartementsPage,
   renderNafsPage,
@@ -17,7 +17,7 @@ class PageTreeBuilder {
 
   constructor() {
     this.dico = {};
-    this.pageTreeDir = './seo-script/dist/departements/';
+    this.pageTreeDir = './scripts/seo/dist/departements/';
     this.pageCount = 0;
     this.ignoredUrl = 0;
   }

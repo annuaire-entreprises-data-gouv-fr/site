@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
+import { EspaceAgentSummarySection } from '#components/espace-agent-components/summary-section';
 import EtablissementListeSection from '#components/etablissement-liste-section';
 import EtablissementSection from '#components/etablissement-section';
 import MatomoEvent from '#components/matomo-event';
@@ -14,26 +14,25 @@ import { FICHE } from '#components/title-section/tabs';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
 import {
-  isCollectiviteTerritoriale,
   IUniteLegale,
   isAssociation,
+  isCollectiviteTerritoriale,
 } from '#models/index';
 import { estNonDiffusible } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import {
   extractSirenOrSiretSlugFromUrl,
-  shouldNotIndex,
   getCompanyPageDescription,
   getCompanyPageTitle,
+  shouldNotIndex,
 } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
-  postServerSideProps,
   IPropsWithMetadata,
+  postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { isAgent, isSuperAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
-import { EspaceAgentSummarySection } from '#components/espace-agent-components/summary-section';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;

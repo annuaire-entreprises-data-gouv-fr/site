@@ -38,8 +38,8 @@ export const clientApiEntrepriseConformiteFiscale = async (siren: Siren) => {
         context: 'annuaire-entreprises',
         recipient: 13002526500013,
       },
-    },
-    useCache
+      useCache,
+    }
   );
 
   return mapToDomainObject(response);

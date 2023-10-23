@@ -1,7 +1,12 @@
-import { AxiosRequestConfig } from 'axios';
 import routes from '#clients/routes';
 import constants from '#models/constants';
+import { IDefaultRequestConfig } from '#utils/network';
 import { httpClientOAuth } from '#utils/network/backend/0auth';
+
+export type InseeClientOptions = {
+  useFallback: boolean;
+  useCache: boolean;
+};
 
 /**
  * Insee client
@@ -13,11 +18,6 @@ import { httpClientOAuth } from '#utils/network/backend/0auth';
  *
  * NB: we want to limit instance to share the /token authentication calls
  */
-
-export type InseeClientOptions = {
-  useFallback: boolean;
-  useCache: boolean;
-};
 
 const defaultClient = new httpClientOAuth(
   routes.sireneInsee.auth,
@@ -34,26 +34,19 @@ const fallbackClient = new httpClientOAuth(
 /**
  * Insee API client
  *
- * Two main different config options :
- * useCache : to activate result caching and avoid unecessary calls
- * useFallback : to use fallback credentials and avoid rate limiting
- *
  * @param route
- * @param options
- * @param axiosConfig
+ * @param config
+ * @param useFallback use fallback credentials
  * @returns
  */
 export async function inseeClientGet<T>(
   route: string,
-  options = { useFallback: false, useCache: false } as InseeClientOptions,
-  axiosConfig: AxiosRequestConfig = {}
+  config: IDefaultRequestConfig = {},
+  useFallback = false
 ): Promise<T> {
-  const { useFallback, useCache } = options;
-
   const client = useFallback ? fallbackClient : defaultClient;
-  return (await client.get(
-    route,
-    { timeout: constants.timeout.S, ...axiosConfig },
-    useCache
-  )) as T;
+  return (await client.get(route, {
+    timeout: constants.timeout.S,
+    ...config,
+  })) as T;
 }

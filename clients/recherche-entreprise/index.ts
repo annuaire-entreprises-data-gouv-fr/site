@@ -83,14 +83,11 @@ const clientSearchRechercheEntreprise = async ({
     ? constants.timeout.XL
     : constants.timeout.L;
 
-  const results = await httpGet<ISearchResponse>(
-    url,
-    {
-      timeout,
-      headers: { referer: 'annuaire-entreprises-site' },
-    },
-    useCache
-  );
+  const results = await httpGet<ISearchResponse>(url, {
+    timeout,
+    headers: { referer: 'annuaire-entreprises-site' },
+    useCache,
+  });
 
   if (!results.results || results.results.length === 0) {
     throw new HttpNotFound('No results');

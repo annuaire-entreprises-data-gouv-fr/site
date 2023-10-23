@@ -82,9 +82,9 @@ export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
 
   /* eslint-disable react/jsx-props-no-spreading */
   return (
-    <Section {...props}>
+    <Section {...props} lastModified={lastModified}>
       <HeightTransition>
-        <SectionStateMachine {...props} lastModified={lastModified} />
+        <SectionStateMachine {...props} />
       </HeightTransition>
     </Section>
   );
@@ -95,7 +95,10 @@ export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
 function useShowLoadingState<T>(data: IAPILoading | T): data is IAPILoading {
   const after100ms = useTimeout(100);
   const before800ms = !useTimeout(800);
-  const [dataLoadedBefore100ms, setDataLoadedBefore100ms] = useState(false);
+  const [dataLoadedBefore100ms, setDataLoadedBefore100ms] = useState(
+    !isAPILoading(data)
+  );
+
   useEffect(() => {
     if (!isAPILoading(data) && !after100ms) {
       setDataLoadedBefore100ms(true);

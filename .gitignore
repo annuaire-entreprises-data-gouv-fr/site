@@ -3,6 +3,9 @@
 #redis
 dump.rdb
 
+#protected-siren (fetching data from grist)
+public/protected-siren.txt
+
 #cspell 
 cspell.json
 
@@ -40,7 +43,7 @@ yarn-error.log*
 # vercel
 .vercel
 
-/seo-script/dist
+/scripts/seo/dist
 
 /public/maps/*
 /public/resources/downloads/*
