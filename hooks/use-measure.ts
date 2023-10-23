@@ -35,11 +35,11 @@ export function useMeasure(): [
     (node: HTMLElement | null) => {
       if (!node) return;
       setNode(node);
+      setMeasures({
+        height: node.clientHeight,
+        width: node.clientWidth,
+      });
       if (elementObserver) {
-        setMeasures({
-          height: node.clientHeight,
-          width: node.clientWidth,
-        });
         elementObserver.observe(node);
       }
     },

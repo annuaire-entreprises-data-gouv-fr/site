@@ -1,3 +1,4 @@
+import FadeIn from '#components-ui/animation/fade-in';
 import { HeightTransition } from '#components-ui/animation/height-transition';
 import { isAPILoading } from '#models/api-loading';
 import { isAPINotResponding } from '#models/api-not-responding';
@@ -14,32 +15,6 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
     <>
       Cette structure est :
       <ul>
-        {!isAPILoading(immatriculationRNE) &&
-          !isAPINotResponding(immatriculationRNE) && (
-            <li>
-              <HeightTransition animateAppear>
-                {!!immatriculationRNE.identite?.dateRadiation ? (
-                  <a href="#rne">
-                    <b>Radiée</b> du Registre National des Entreprises (RNE),
-                    depuis le{' '}
-                    {formatDateLong(immatriculationRNE.identite.dateRadiation)}
-                  </a>
-                ) : (
-                  <a href="#rne">
-                    <b>Inscrite</b> au Registre National des Entreprises (RNE)
-                    {!!immatriculationRNE.identite?.dateImmatriculation && (
-                      <>
-                        , depuis le{' '}
-                        {formatDateLong(
-                          immatriculationRNE.identite?.dateImmatriculation
-                        )}
-                      </>
-                    )}
-                  </a>
-                )}
-              </HeightTransition>
-            </li>
-          )}
         {immatriculationJOAFE && !isAPINotResponding(immatriculationJOAFE) && (
           <li>
             <a href="#joafe">
@@ -61,6 +36,36 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
             </a>
           )}
         </li>
+        {!isAPILoading(immatriculationRNE) &&
+          !isAPINotResponding(immatriculationRNE) && (
+            <li>
+              <HeightTransition animateAppear>
+                <FadeIn>
+                  {!!immatriculationRNE.identite?.dateRadiation ? (
+                    <a href="#rne">
+                      <b>Radiée</b> du Registre National des Entreprises (RNE),
+                      depuis le{' '}
+                      {formatDateLong(
+                        immatriculationRNE.identite.dateRadiation
+                      )}
+                    </a>
+                  ) : (
+                    <a href="#rne">
+                      <b>Inscrite</b> au Registre National des Entreprises (RNE)
+                      {!!immatriculationRNE.identite?.dateImmatriculation && (
+                        <>
+                          , depuis le{' '}
+                          {formatDateLong(
+                            immatriculationRNE.identite?.dateImmatriculation
+                          )}
+                        </>
+                      )}
+                    </a>
+                  )}
+                </FadeIn>
+              </HeightTransition>
+            </li>
+          )}
       </ul>
       <br />
     </>
