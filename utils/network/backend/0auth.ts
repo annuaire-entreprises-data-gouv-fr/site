@@ -71,21 +71,17 @@ export class httpClientOAuth {
     return this._token;
   };
 
-  get = async (
-    url: string,
-    options: IDefaultRequestConfig,
-    useCache = false
-  ) => {
+  get = async (url: string, config: IDefaultRequestConfig) => {
     const token = await this.getToken();
 
     return httpGet(url, {
       timeout: constants.timeout.M,
-      ...options,
+      ...config,
       headers: {
-        ...options.headers,
+        ...config.headers,
         Authorization: `Bearer ${token.data.access_token}`,
       },
-      useCache,
+      useCache: config.useCache || false,
     });
   };
 }

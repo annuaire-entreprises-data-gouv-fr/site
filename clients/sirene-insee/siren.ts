@@ -69,9 +69,11 @@ const clientUniteLegaleInsee = async (
   siren: Siren,
   options: InseeClientOptions
 ) => {
+  const { useCache, useFallback } = options;
   const data = await inseeClientGet<IInseeUniteLegaleResponse>(
     routes.sireneInsee.siren + siren,
-    options
+    { useCache },
+    useFallback
   );
 
   return mapToDomainObject(siren, data);
