@@ -18,7 +18,7 @@ export default function usePrefersReducedMotion() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-
+    if (!window.matchMedia) return;
     const mediaQueryList = window.matchMedia(QUERY);
     const listener = (event: MediaQueryListEvent) => {
       setPrefersReducedMotion(!event.matches);

@@ -4,7 +4,10 @@ import usePrefersReducedMotion from './use-prefers-reduced-motion';
 
 export function useHeightTransition({ animateAppear = false } = {}) {
   const [ref, { height }] = useMeasure();
-  const prefersReducedMotion = usePrefersReducedMotion();
+  const prefersReducedMotion =
+    usePrefersReducedMotion() ||
+    (typeof window !== 'undefined' && !window.ResizeObserver); // Feature not supported
+
   const animatedStyle = useSpring(
     prefersReducedMotion || (!animateAppear && height === undefined)
       ? {}
