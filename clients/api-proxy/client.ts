@@ -3,7 +3,7 @@ import { IDefaultRequestConfig, httpGet } from '#utils/network';
 /**
  * GET for API Proxy api
  *
- * @param orute
+ * @param route
  * @param options
  * @returns
  */
