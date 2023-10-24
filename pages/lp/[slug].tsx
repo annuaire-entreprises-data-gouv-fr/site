@@ -7,9 +7,9 @@ import { LayoutDefault } from '#components/layouts/layout-default';
 import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
 import {
+  ILandingPage,
   getAllLandingPages,
   getLandingPage,
-  ILandingPage,
 } from '#models/landing-pages';
 import { IPropsWithMetadata } from '#utils/server-side-props-helper/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';

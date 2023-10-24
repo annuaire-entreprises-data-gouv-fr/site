@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import { HttpNotFound } from '#clients/exceptions';
 import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
@@ -8,7 +7,7 @@ import {
   administrationsMetaData,
   EAdministration,
 } from '#models/administrations';
-import { getFaqArticlesByTag, IArticle } from '#models/faq';
+import { getFaqArticlesByTag, IFaqArticle } from '#models/article/faq';
 import {
   IPropsWithMetadata,
   postServerSideProps,
@@ -21,7 +20,7 @@ interface IProps extends IPropsWithMetadata {
     slug: string;
   }[];
   title: string;
-  articles: IArticle[];
+  articles: IFaqArticle[];
   path: string;
 }
 

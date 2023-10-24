@@ -1,4 +1,4 @@
-import { getFaqArticlesByTag } from '#models/faq';
+import { getFaqArticlesByTag } from '#models/article/faq';
 
 export const NotEnoughParams = () => {
   const articles = getFaqArticlesByTag(['search']);

@@ -1,15 +1,12 @@
 import { GetStaticProps } from 'next';
-import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
-import ReactMarkdown from 'react-markdown';
 import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
 import StructuredDataFAQ from '#components/structured-data/faq';
-import { allFaqArticles, IArticle } from '#models/faq';
+import { allFaqArticles, IFaqArticle } from '#models/article/faq';
 import { NextPageWithLayout } from 'pages/_app';
 
 const FAQPage: NextPageWithLayout<{
-  articles: IArticle[];
+  articles: IFaqArticle[];
 }> = ({ articles }) => (
   <>
     <Meta
@@ -17,10 +14,7 @@ const FAQPage: NextPageWithLayout<{
       canonical="https://annuaire-entreprises.data.gouv.fr/faq"
     />
     <StructuredDataFAQ
-      data={articles.map(({ title, body }) => [
-        title,
-        renderToStaticMarkup(<ReactMarkdown>{body}</ReactMarkdown>),
-      ])}
+      data={articles.map(({ title, body }) => [title, body.html])}
     />
     <TextWrapper>
       <h1>Réponses à vos questions (FAQ) :</h1>
