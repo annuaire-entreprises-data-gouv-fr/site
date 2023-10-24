@@ -25,12 +25,13 @@ export async function connect() {
 const redisStorage = (cache_timeout: number) =>
   buildStorage({
     async find(key: string) {
-      const result = await promiseTimeout(redisClient.get(key), 100).catch(
-        (err) => {
-          logWarningInSentry('Redis client timeout', { details: err });
-          return null;
-        }
-      );
+      const result = await promiseTimeout(
+        redisClient.get(key),
+        100
+      ).catch((err) => {
+        logWarningInSentry('Redis find key fail', { details: err });
+        return null;
+      });
 
       return result ? JSON.parse(result) : result;
     },
@@ -42,7 +43,7 @@ const redisStorage = (cache_timeout: number) =>
         }),
         200
       ).catch((err) => {
-        logWarningInSentry('Redis client timeout', {});
+        logWarningInSentry('Redis set key failed', { details: err });
       });
     },
 
