@@ -1,7 +1,7 @@
 import { clientAssociation } from '#clients/api-proxy/association';
-import { clientTVA } from '#clients/api-proxy/tva';
 import { verifyIdRna, verifySiren } from '#utils/helpers';
 import { fetchRNEImmatriculation } from './api-proxy/rne';
+import { clientTVA } from './api-vies';
 import clientSearchRechercheEntreprise from './recherche-entreprise';
 import { clientUniteLegaleRechercheEntreprise } from './recherche-entreprise/siren';
 import { clientUniteLegaleInsee } from './sirene-insee/siren';

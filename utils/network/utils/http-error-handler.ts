@@ -1,5 +1,6 @@
 import {
   HttpBadRequestError,
+  HttpConnectionReset,
   HttpForbiddenError,
   HttpNotFound,
   HttpServerError,
@@ -37,6 +38,13 @@ export const httpErrorHandler = (
       throw new HttpTimeoutError('Timeout');
     }
     default:
+      if ((message || '').indexOf('ECONNRESET') > -1) {
+        throw new HttpConnectionReset(
+          `ECONNRESET  while querying ${url}. ${statusText || ''} ${
+            message || ''
+          }`
+        );
+      }
       throw new HttpServerError(
         `Unknown server error while querying ${url}. ${statusText || ''} ${
           message || ''

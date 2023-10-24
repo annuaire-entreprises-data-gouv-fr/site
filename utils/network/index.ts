@@ -46,7 +46,6 @@ export async function httpClient<T>(config: IDefaultRequestConfig): Promise<T> {
  * GET http client - can use cache
  * @param url
  * @param config
- * @param useCache - cache is disabled by default
  * @returns
  */
 export async function httpGet<T>(
