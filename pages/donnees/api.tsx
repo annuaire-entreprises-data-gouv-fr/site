@@ -28,6 +28,16 @@ const StatusPage: NextPageWithLayout<IProps> = ({
       title="Statut des API utilisées par l'Annuaire des Entreprises"
       noIndex
     />
+    <div
+      dangerouslySetInnerHTML={{
+        __html: `
+          <script>
+            // reload page every minute
+            window.setTimeout(function() {window.location.reload()}, 60*1000)
+          </script>
+  `,
+      }}
+    />
     <div className="content-container">
       <h1>Statut des API utilisées</h1>
       <p>
