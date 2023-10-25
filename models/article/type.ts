@@ -5,11 +5,13 @@ export type IArticle = {
     description: string;
     title?: string;
   };
-  body: {
-    raw: string;
-    html: string;
-    headings: { id: string; value: string; depth: number }[];
-  };
+  body: IParsedMakdown;
   cta: { label: string; to: string };
   more: { label: string; href: string }[];
+};
+
+export type IParsedMakdown = {
+  raw: string;
+  html: string;
+  headings: { id: string; value: string; depth: number }[];
 };

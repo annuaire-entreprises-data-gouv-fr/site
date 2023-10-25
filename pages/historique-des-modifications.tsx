@@ -1,8 +1,7 @@
 import { GetStaticProps } from 'next';
-import React from 'react';
-import ReactMarkdown from 'react-markdown';
 import Meta from '#components/meta';
 import changelog, { IChangelog } from '#models/historique-modifications';
+import parseMarkdownSync from '#utils/static-markdown-pages/parse-markdown';
 import { NextPageWithLayout } from './_app';
 
 type IProps = {
@@ -26,17 +25,17 @@ const Changelog: NextPageWithLayout<IProps> = ({ changelog }) => (
             <b>{change.date}</b>
           </div>
           <div>
-            <ReactMarkdown
-              components={{
-                p: 'div',
+            <div
+              dangerouslySetInnerHTML={{
+                __html: parseMarkdownSync(change.title).html,
               }}
-            >
-              {change.title}
-            </ReactMarkdown>
+            />
             {change.description && (
-              <i>
-                <ReactMarkdown>{change.description}</ReactMarkdown>
-              </i>
+              <em
+                dangerouslySetInnerHTML={{
+                  __html: parseMarkdownSync(change.description).html,
+                }}
+              />
             )}
           </div>
         </li>

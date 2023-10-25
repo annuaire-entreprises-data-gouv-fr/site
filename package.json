@@ -63,7 +63,6 @@
     "react": "~18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "~18.2.0",
-    "react-markdown": "^8.0.7",
     "react-select": "^5.7.7",
     "redis": "^4.6.10",
     "rehype-stringify": "^10.0.0",
