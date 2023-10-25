@@ -6,14 +6,7 @@ administrations:
   - vies
 title:
   Le numéro de TVA intracommunautaire
-  # **SOMMAIRE**
-
-  # - Quelles sont les entreprises concernées ?
-  # - Quelle est l’utilité de cet identifiant unique ?
-  # - Obtenir son numéro de TVA intracommunautaire
-  # - Trouver son numéro de TVA intracommunautaire
 body: |
-
 
   ## Numéro de TVA intracommunautaire : définition
 
@@ -62,7 +55,6 @@ body: |
   Il est possible de consulter le numéro de TVA intracommunautaire d’une entreprise en ligne. Comment faire ? Pour toutes les entreprises et associations françaises, l’Annuaire des Entreprises affiche cette information. Pour une entreprise établie hors de France, mais dans l’UE, cette vérification s’effectue via le [service européen de validation des numéros de TVA (VIES)](https://ec.europa.eu/taxation_customs/vies/#/vat-validation). Cette précaution est fortement recommandée afin de réduire le risque de fraude ou d’escroquerie.
 
   ***Attention** : de nombreux sites internet affichent un numéro de TVA mais ne prennent pas la peine de le vérifier.*
-
 more:
   - label: Consulter la page dédiée sur service-public.fr
     href: https://entreprendre.service-public.fr/vosdroits/F23570
