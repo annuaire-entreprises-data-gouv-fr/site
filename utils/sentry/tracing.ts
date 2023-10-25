@@ -1,7 +1,7 @@
 import { Transaction } from '@sentry/browser';
 import * as Sentry from '@sentry/nextjs';
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
-import { isSentryInitialized, logWarningInSentry } from '.';
+import { isSentryActivated, logWarningInSentry } from '.';
 
 const getTransactionNameFromUrl = (url: string) => {
   try {
@@ -20,7 +20,7 @@ const getTransactionNameFromUrl = (url: string) => {
 };
 
 export const createAPM = (url: string, operator: string) => {
-  if (!isSentryInitialized()) {
+  if (!isSentryActivated) {
     return;
   }
   return Sentry.startTransaction({
@@ -32,7 +32,7 @@ export const createAPM = (url: string, operator: string) => {
 export const closeAPM = (transaction: Transaction | undefined) => {
   if (transaction) {
     transaction.finish();
-  } else if (isSentryInitialized()) {
+  } else if (isSentryActivated) {
     logWarningInSentry('APM transaction is not defined');
   }
   // else do nothing as Sentry is not initialized

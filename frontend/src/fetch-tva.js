@@ -3,8 +3,9 @@
  *
  *
  */
-import { captureException } from '@sentry/browser';
+import * as Sentry from '@sentry/browser';
 import FrontStateMachineFactory from './front-state-machine';
+import { isSentryActivated } from './sentry';
 import { extractSirenSlugFromUrl, formatIntFr } from './utils';
 
 (function TVA() {
@@ -32,7 +33,11 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
         }
       })
       .catch((e) => {
-        captureException(e);
+        if (isSentryActivated) {
+          Sentry.captureException(e);
+        } else {
+          console.error(e)
+        }
         tvaContainer.setError();
       });
   }

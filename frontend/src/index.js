@@ -1,3 +1,5 @@
+import './sentry';
+
 // load first to lowser CLS
 import './helpers-feedbacks';
 
@@ -6,7 +8,6 @@ import './helpers-copy-paste';
 import './inpi-pdf-download';
 import './load-bar';
 
-import './sentry';
 
 // include DSFR in bundle in prod
 if (import.meta.env.PROD) {

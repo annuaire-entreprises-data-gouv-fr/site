@@ -1,4 +1,6 @@
-module.exports = {
+const { withSentryConfig } = require("@sentry/nextjs");
+
+const nextjsConfig = {
   webpack: function (config) {
     config.module.rules.push({
       test: /\.ya?ml$/,
@@ -15,4 +17,9 @@ module.exports = {
       },
     ];
   },
-};
+}
+
+module.exports = process.env.NODE_ENV === "production" && process.env.SENTRY_DSN
+  ? withSentryConfig(nextjsConfig, { silent: true, hideSourceMaps: false })
+  : nextjsConfig;
+
