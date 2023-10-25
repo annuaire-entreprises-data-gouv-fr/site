@@ -5,7 +5,7 @@
  */
 import * as Sentry from '@sentry/browser';
 import FrontStateMachineFactory from './front-state-machine';
-import { isSentryActivated } from './sentry';
+import { isViteSentryActivated } from './sentry';
 import { extractSirenSlugFromUrl, formatIntFr } from './utils';
 
 (function TVA() {
@@ -33,7 +33,7 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
         }
       })
       .catch((e) => {
-        if (isSentryActivated) {
+        if (isViteSentryActivated) {
           Sentry.captureException(e);
         } else {
           console.error(e)

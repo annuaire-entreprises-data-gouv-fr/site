@@ -29,13 +29,13 @@ const getScope = (extra: IScope) => {
   return scope;
 };
 
-export const isSentryActivated =
+export const isNextJSSentryActivated =
   process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN;
 
 const logInSentryFactory =
   (severity = 'error' as SeverityLevel) =>
   (errorMsg: any, extra: IScope = {}) => {
-    if (isSentryActivated) {
+    if (isNextJSSentryActivated) {
       const scope = getScope(extra || {});
       scope.setLevel(severity);
 
