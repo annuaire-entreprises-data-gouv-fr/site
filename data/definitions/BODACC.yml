@@ -1,20 +1,9 @@
 administrations:
   - dila
 title: Qu’est ce que le BODACC ?
-
 seo:
   title: BODACC - définition - Annuaire des Entreprises
   description: Le Bulletin Officiel des Annonces Civiles et Commerciales (BODACC) publie les actes enregistrés au registre du commerce et des sociétés (RCS).
-# href: <https://annuaire-entreprises.data.gouv.fr/definition/bodacc>
-# # BODACC
-
-# **SOMMAIRE**
-
-# - **Le BODACC : définition**
-# - **Que trouve-t-on sur le BODACC ?**
-# - **Les services gratuits disponibles sur Bodacc.fr**
-# - **Les sources des annonces du BODAAC**
-
 body: |
 
   ## Le BODACC : définition
