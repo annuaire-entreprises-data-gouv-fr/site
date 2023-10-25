@@ -52,6 +52,8 @@ jobs:
           - environment: production-02
             host: SSH_HOST_PRODUCTION_02
     steps:
+      - uses: actions/checkout@v3
+
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
@@ -68,7 +70,6 @@ jobs:
         env:
           SSH_HOST: ${{ secrets[matrix.host] }}
 
-      - uses: actions/checkout@v3
       - name: Notify staging failure only
         if: failure()
         uses: ./.github/actions/notify
