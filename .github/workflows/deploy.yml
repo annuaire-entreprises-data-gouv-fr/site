@@ -14,6 +14,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      - uses: actions/checkout@v3
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
@@ -30,7 +31,6 @@ jobs:
         env:
           SSH_HOST: ${{ secrets.SSH_HOST_STAGING }}
 
-      - uses: actions/checkout@v3
       - name: Notify staging failure only
         if: failure()
         uses: ./.github/actions/notify
