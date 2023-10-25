@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Section } from '#components/section';
@@ -124,7 +124,7 @@ const Metric: React.FC<{
 const RobotTooltip = () => (
   <InformationTooltip
     orientation="right"
-    label="Ces données sont obtenues via un robot qui interroge la source de données toutes les 5 minutes"
+    label="Ces données sont obtenues via un robot qui interroge la source de données toutes les minutes"
   >
     <Icon color={constants.colors.frBlue} size={12} slug="information" />
   </InformationTooltip>
