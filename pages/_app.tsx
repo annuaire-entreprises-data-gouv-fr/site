@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
 import { ISession } from '#utils/session';
 import { LayoutDefault } from '#components/layouts/layout-default';
+import '../frontend/src/common';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (

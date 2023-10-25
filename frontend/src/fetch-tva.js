@@ -3,7 +3,7 @@
  *
  *
  */
-import * as Sentry from "@sentry/browser";
+import { captureException } from '@sentry/browser';
 import FrontStateMachineFactory from './front-state-machine';
 import { extractSirenSlugFromUrl, formatIntFr } from './utils';
 
@@ -32,7 +32,7 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
         }
       })
       .catch((e) => {
-        Sentry.captureException(e);
+        captureException(e);
         tvaContainer.setError();
       });
   }

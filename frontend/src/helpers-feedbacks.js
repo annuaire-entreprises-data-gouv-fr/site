@@ -1,7 +1,7 @@
 /**
  *  NPS MODAL
  */
-(function init() {
+function init() {
   window.showModal = function (modalId) {
     var modal = document.getElementById(modalId);
 
@@ -17,7 +17,7 @@
     }
     window.localStorage.setItem(modalId, true);
   };
-})();
+}
 
 function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
   var path = window.location.pathname;
@@ -42,5 +42,10 @@ function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
   window.sessionStorage.setItem(pvKey, parseInt(pageViewCount, 10) + 1);
 }
 
-triggerModal('nps-modal', 2, '/');
+
+if (typeof window !== 'undefined') {
+  init()
+  triggerModal('nps-modal', 2, '/');
+}
+
 // triggerModal('we-need-you-modal', 0, '/');
