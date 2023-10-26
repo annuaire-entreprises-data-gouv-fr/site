@@ -7,7 +7,7 @@
     "npm": ">=7"
   },
   "scripts": {
-    "prepare": "husky install; run-p script:fetch-protected-siren",
+    "prepare": "npx simple-git-hooks; npm run script:fetch-protected-siren",
     "start:dev:redis": "redis-server --daemonize yes",
     "start:dev:frontend": "vite --config ./frontend/vite.config.ts",
     "start:dev:next": "NODE_ENV=development next dev",
