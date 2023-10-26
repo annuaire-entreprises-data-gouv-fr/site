@@ -10,7 +10,7 @@ describe(`FAQ contextual links`, () => {
       cy.contains('Que signifie “inconnu ou non-assujettie à la TVA” ?').click({
         force: true,
       });
-      cy.contains('Qu’est ce que le numéro de TVA intracommunautaire ?')
+      cy.url().should('include', '/definitions/tva-intracommunautaire');
     });
   });
   it('Source de données', () => {
