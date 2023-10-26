@@ -9,6 +9,7 @@ a {
 
 body,
 html {
+  --text-spacing: 1.2rem 0;
   margin: 0;
   padding: 0;
 }
@@ -112,10 +113,6 @@ h4 {
   margin: 22px 0 10px;
 }
 
-p {
-  margin: 20px 0;
-}
-
 @media only screen and (min-width: 1px) and (max-width: 576px) {
   h1 {
     font-size: 1.6rem;
@@ -149,10 +146,10 @@ p {
 
 /* # that appears before headings in content extracted from markdown */
 .anchor-link {
-  font-size: .9em;
+  font-size: 1em;
   float: left;
-  margin-left: -.87em;
-  padding-right: .23em;
+  margin-left: -1em;
+  padding-right: .25em;
   color: #000091;
   opacity: 0;
   background-image: none !important;

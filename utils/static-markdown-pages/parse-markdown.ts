@@ -16,7 +16,7 @@ export default function parseMarkdownSync(body: string): IParsedMakdown {
     // @ts-ignore
     headings: parsedBody.data.headings.map((header) => ({
       id: header.data.id,
-      value: header.value,
+      content: header.value,
       depth: header.depth,
     })),
   };

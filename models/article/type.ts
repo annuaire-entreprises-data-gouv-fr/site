@@ -13,5 +13,5 @@ export type IArticle = {
 export type IParsedMakdown = {
   raw: string;
   html: string;
-  headings: { id: string; value: string; depth: number }[];
+  headings: { id: string; content: string; depth: number }[];
 };
