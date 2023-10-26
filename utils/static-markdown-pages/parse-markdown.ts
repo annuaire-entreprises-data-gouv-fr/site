@@ -1,4 +1,5 @@
 import remarkHeadings from '@vcarl/remark-headings';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeStringify from 'rehype-stringify';
 // @ts-ignore
 import remarkHeadingId from 'remark-heading-id';
@@ -26,6 +27,17 @@ const markdownProcessor = unified()
   .use(remarkHeadingId, { defaults: true })
   .use(remarkHeadings)
   .use(remarkRehype)
+  .use(rehypeAutolinkHeadings, {
+    content: {
+      type: 'text',
+      value: '#',
+    },
+    properties: {
+      className: ['anchor-link'],
+      'aria-hidden': true,
+      'tab-index': -1,
+    },
+  })
   .use(rehypeStringify);
 
 function removeSingleParagraph(body: string): string {

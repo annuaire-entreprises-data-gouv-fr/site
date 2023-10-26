@@ -146,3 +146,18 @@ p {
 .maplibregl-marker {
   z-index: 10000;
 }
+
+/* # that appears before headings in content extracted from markdown */
+.anchor-link {
+  font-size: .9em;
+  float: left;
+  margin-left: -.87em;
+  padding-right: .23em;
+  color: #000091;
+  opacity: 0;
+  background-image: none !important;
+}
+
+*:hover > .anchor-link {
+  opacity: 1
+}
