@@ -1,3 +1,5 @@
+const redirects = require('./redirects.json');
+
 module.exports = {
   webpack: function (config) {
     config.module.rules.push({
@@ -7,12 +9,6 @@ module.exports = {
     return config;
   },
   async redirects() {
-    return [
-      {
-        source: '/api/qr/:slug',
-        destination: '/api/share/qr/:slug',
-        permanent: true,
-      },
-    ];
+    return redirects;
   },
 };
