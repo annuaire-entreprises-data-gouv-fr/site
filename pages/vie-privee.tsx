@@ -118,7 +118,7 @@ const Privacy: NextPageWithLayout = () => (
               <td>Données relatives aux agents publics</td>
               <td>
                 Les données sont accessibles via API, elles sont supprimées des
-                serveurs au bout d’une dizaine de minute.
+                serveurs au bout d’une dizaine de minutes.
               </td>
             </tr>
             <tr>
