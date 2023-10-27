@@ -47,7 +47,7 @@ const Privacy: NextPageWithLayout = () => (
       <p>
         La présente politique de confidentialité informe les personnes
         concernées sur le traitement de données à caractère personnel sur
-        Annuaire des entreprises et notamment sur{' '}
+        Annuaire des Entreprises et notamment sur{' '}
         <a href="https://api.gouv.fr/les-api/api-recherche-entreprises">
           API Recherche d’entreprises
         </a>
