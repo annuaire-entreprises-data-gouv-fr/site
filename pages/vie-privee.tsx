@@ -1,4 +1,3 @@
-import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import { DILA, INPI, INSEE } from '#components/administrations';
 import Meta from '#components/meta';
@@ -10,10 +9,10 @@ const Privacy: NextPageWithLayout = () => (
     <TextWrapper>
       <h1>Politique de confidentialité</h1>
       <p>
-        La DINUM est responsable des traitements de données à caractère
-        personnel réalisés par l’Annuaire des Entreprises. Elle s’engage à
-        assurer un traitement de ces données conforme au Règlement (UE) 2016/679
-        relatif à la protection des données à caractère personnel et à la libre
+        La DINUM est responsable de traitement de données à caractère personnel
+        réalisés par l’Annuaire des Entreprises. Elle s’engage à assurer un
+        traitement de ces données conforme au Règlement (UE) 2016/679 relatif à
+        la protection des données à caractère personnel et à la libre
         circulation de ces données et à la loi n° 78-17 du 6 janvier 1978
         relative à l’informatique aux fichiers et aux libertés.
       </p>
@@ -35,61 +34,57 @@ const Privacy: NextPageWithLayout = () => (
             prénoms, date de naissance et nationalité; (organisme qui produit
             les données : <INPI />)
           </li>
+          <li>
+            Données relatives aux agents publics : nom, prénom, adresse e-mail.
+          </li>
+          <li>
+            Données relatives aux personnes physiques qui s’opposent au
+            traitement de leurs données identifiantes : nom, prénom, lieu et
+            date de naissance.
+          </li>
         </ul>
+      </p>
+      <p>
+        La présente politique de confidentialité informe les personnes
+        concernées sur le traitement de données à caractère personnel sur
+        Annuaire des Entreprises et notamment sur{' '}
+        <a href="https://api.gouv.fr/les-api/api-recherche-entreprises">
+          API Recherche d’entreprises
+        </a>
+        .
+      </p>
+      <p>
+        Effectivement, certaines données du RGE ou relatives aux associations
+        par exemple peuvent être traitées par le biais d’
+        <a href="https://api.gouv.fr/les-api/api-recherche-entreprises">
+          API Recherche d’entreprises
+        </a>{' '}
+        sans qu’elles soient nécessaires au traitement : notamment l’adresse
+        postale du fondateur de l’association lorsqu’il n’y a pas de siège
+        social ou des adresses e-mail et numéros de téléphone de contact.{' '}
       </p>
       <h2>Finalités</h2>
       <p>
-        Les traitements ont pour finalités la publication des données publiques
-        détenues par l’administration sur les entreprises ou les associations et
-        en particulier les données contenues dans un extrait d’immatriculation
-        d’entreprise (également appelé extrait KBIS ou extrait D1).
-      </p>
-      <h2>Données à caractère personnel traitées</h2>
-      <p>
-        Ne sont traitées que les données strictement nécessaires au
-        fonctionnement du service. Les données à caractère personnel concernées
-        sont les suivantes : Données relatives aux dirigeants : prénoms, nom,
-        lieu et mois de naissance, adresse postale; Données relatives aux
-        bénéficiaires effectifs : prénoms, nom, prénoms, date de naissance et
-        nationalité.
-        <br />
-        Les données traitées sont issues des données publiées par l’INPI et
-        l’INSEE.
+        Les traitements ont pour finalités la mise à disposition des données
+        publiques détenues par l’administration sur les entreprises ou les
+        associations et en particulier les données contenues dans un extrait
+        d’immatriculation d’entreprise (également appelé extrait KBIS ou extrait
+        D1).
       </p>
       <h2>Base légale</h2>
-      <h3>Données relatives au dirigeant</h3>
       <p>
-        Le traitement est nécessaire à l’exécution d’une mission d’intérêt
-        public ou relevant de l’exercice de l’autorité publique dont est investi
-        le responsable de traitement au sens de l’article 6-e du règlement (UE)
-        2016/679 du Parlement européen et du Conseil du 27 avril 2016 relatif à
-        la protection des personnes physiques à l’égard du traitement des
-        données à caractère personnel et à la libre circulation de ces données.
+        Les données à caractère personnel susvisées sont traitées par le biais
+        de l’exécution d’une mission d’intérêt public ou relevant de l’exercice
+        de l’autorité publique dont est investi le responsable de traitement au
+        sens de l’article 6-1 e) du RGPD.
       </p>
       <p>
-        Le Service participe à la mise à disposition par la DINUM des données
-        publiques, conformément aux missions qui lui sont confiées par le décret
-        n° 2019-1088 du 25 octobre 2019 relatif au système d’information et de
+        Cette mission d’intérêt public est mise en œuvre par le décret n°
+        2019-1088 du 25 octobre 2019 relatif au système d’information et de
         communication de l’Etat et à la direction interministérielle du
         numérique.
       </p>
-      <h3>Données relatives aux bénéficiaires effectifs</h3>
-      <p>
-        Le traitement est nécessaire à l’exécution d’une mission d’intérêt
-        public ou relevant de l’exercice de l’autorité publique dont est investi
-        le responsable de traitement au sens de l’article 6-e du règlement (UE)
-        2016/679 du Parlement européen et du Conseil du 27 avril 2016 relatif à
-        la protection des personnes physiques à l’égard du traitement des
-        données à caractère personnel et à la libre circulation de ces données.
-      </p>
-      <p>
-        Le Service participe à la mise à disposition par la DINUM des données
-        publiques, conformément aux missions qui lui sont confiées par le décret
-        n° 2019-1088 du 25 octobre 2019 relatif au système d’information et de
-        communication de l’Etat et à la direction interministérielle du
-        numérique.
-      </p>
-      <h2>Durée de conservation</h2>
+      <h2>Durées de conservation</h2>
       <div className="fr-table">
         <table>
           <caption>
@@ -97,7 +92,7 @@ const Privacy: NextPageWithLayout = () => (
           </caption>
           <thead>
             <tr>
-              <th>Type de donnée</th>
+              <th>Catégories de données</th>
               <th>Durée de conservation</th>
             </tr>
           </thead>
@@ -105,17 +100,32 @@ const Privacy: NextPageWithLayout = () => (
             <tr>
               <td>Données relatives aux dirigeants</td>
               <td>
-                L’application a accès à ces données en lecture seule, via des
-                API. Ces données sont immédiatement supprimées des serveurs et
-                ne sont donc pas stockées.
+                Les données sont accessibles via API, elles sont supprimées des
+                serveurs au bout d’une dizaine de minute. <br />
+                Les données des dirigeants accessibles depuis l’API Recherche
+                d’entreprises sont conservées indéfiniment sur l’API et sont
+                réactualisées tous les jours.
               </td>
             </tr>
             <tr>
               <td>Données relatives aux bénéficiaires effectifs</td>
               <td>
-                L’application a accès à ces données en lecture seule, via des
-                API. Ces données sont immédiatement supprimées des serveurs et
-                ne sont donc pas stockées.
+                Les données sont accessibles via API, elles sont supprimées des
+                serveurs au bout d’une dizaine de minute.
+              </td>
+            </tr>
+            <tr>
+              <td>Données relatives aux agents publics</td>
+              <td>
+                Les données sont accessibles via API, elles sont supprimées des
+                serveurs au bout d’une dizaine de minutes.
+              </td>
+            </tr>
+            <tr>
+              <td>Données relatives aux personnes physiques qui s’opposent </td>
+              <td>
+                Les données sont supprimées dès la mise en œuvre de
+                l’opposition.
               </td>
             </tr>
             <tr>
@@ -154,6 +164,68 @@ const Privacy: NextPageWithLayout = () => (
               <td>Hébergement</td>
               <td>France</td>
               <td>https://www.ovh.com/fr/protection-donnees-personnelles/</td>
+            </tr>
+            <tr>
+              <td>Scalingo</td>
+              <td>Hébergement de test</td>
+              <td>France</td>
+              <td>
+                https://scalingo.com/fr/contrat-gestion-traitements-donnees-personnelles
+              </td>
+            </tr>
+            <tr>
+              <td>Matomo</td>
+              <td>Mesure d’audience</td>
+              <td>France</td>
+              <td>https://fr.matomo.org/matomo-cloud-dpa/</td>
+            </tr>
+            <tr>
+              <td>Sentry</td>
+              <td>Tracking d’erreurs</td>
+              <td>Union Européenne</td>
+              <td>https://sentry.io/legal/dpa/</td>
+            </tr>
+            <tr>
+              <td>Nginix Amplify</td>
+              <td>Monitoring</td>
+              <td>Union Européenne</td>
+              <td>https://www.f5.com/company/policies/privacy-notice</td>
+            </tr>
+            <tr>
+              <td>Zammad</td>
+              <td>Support</td>
+              <td>Union Européenne</td>
+              <td>https://zammad.com/en/company/privacy</td>
+            </tr>
+            <tr>
+              <td>Github</td>
+              <td>Hébergement du code</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Notion</td>
+              <td>Gestion des connaissances</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Tchap</td>
+              <td>Outil de collaboration</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Mattermost</td>
+              <td>Outil de collaboration</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Grist</td>
+              <td>Gestion des connaissances</td>
+              <td></td>
+              <td></td>
             </tr>
           </tbody>
         </table>
