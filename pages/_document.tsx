@@ -6,7 +6,13 @@ const manifest = (
     : {}
 ) as { [key: string]: any };
 
-const LinksAndScripts = ({ dev = false }) => (
+const LinksAndScripts = ({
+  dev = false,
+  useReact,
+}: {
+  dev: boolean;
+  useReact: boolean;
+}) => (
   <>
     {/* Standard Meta */}
     {/* https://gouvfr.atlassian.net/wiki/spaces/DB/pages/223019574/D+veloppeurs */}
@@ -39,11 +45,13 @@ const LinksAndScripts = ({ dev = false }) => (
           type="module"
           src="http://localhost:3001/@vite/client"
         ></script>
-        <script
-          defer
-          type="module"
-          src="http://localhost:3001/frontend/src/index.js"
-        ></script>
+        {!useReact && (
+          <script
+            defer
+            type="module"
+            src="http://localhost:3001/frontend/src/index.js"
+          ></script>
+        )}
       </>
     ) : (
       <>
@@ -85,11 +93,13 @@ const LinksAndScripts = ({ dev = false }) => (
           type="text/css"
           href={`/${manifest['style/globals.css'].file}`}
         />
-        <script
-          defer
-          type="module"
-          src={`/${manifest['src/index.js'].file}`}
-        ></script>
+        {!useReact && (
+          <script
+            defer
+            type="module"
+            src={`/${manifest['src/index.js'].file}`}
+          ></script>
+        )}
       </>
     )}
   </>
@@ -122,7 +132,7 @@ class CustomDocument extends Document {
     return (
       <Html lang="fr">
         <HeadToUse>
-          <LinksAndScripts dev={!isProd} />
+          <LinksAndScripts dev={!isProd} useReact={useReact} />
         </HeadToUse>
         <body>
           <Main />

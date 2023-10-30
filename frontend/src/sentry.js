@@ -1,8 +1,10 @@
 import * as Sentry from '@sentry/browser';
 
-var dsn = import.meta.env.VITE_SENTRY_FRONT_DSN;
+const dsn = import.meta.env.VITE_SENTRY_FRONT_DSN;
+export const isViteSentryActivated = import.meta.env.PROD && Sentry && dsn
 
-if (import.meta.env.PROD && Sentry && dsn) {
+
+if (isViteSentryActivated) {
   Sentry.init({
     dsn: dsn,
     // This enables automatic instrumentation (highly recommended), but is not

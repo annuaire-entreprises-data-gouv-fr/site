@@ -2,6 +2,7 @@
  * COPY TO CLIPBOARD FUNCTION
  */
 
+
 const copyIcon = `<svg
   xmlns="http://www.w3.org/2000/svg"
   width="15"
@@ -40,7 +41,7 @@ function logCopyPaste(element) {
     const label = element.closest('tr').childNodes[0].innerText;
     var _paq = window._paq || [];
     _paq.push(['trackEvent', 'action', 'copyPaste', `${label}`]);
-  } catch {}
+  } catch { }
 }
 
 function createCopyButton(element) {
@@ -109,7 +110,7 @@ function createCopyButton(element) {
   };
 }
 
-(function addAllCopyFunctions() {
+function addAllCopyFunctions() {
   const copyList = document.getElementsByClassName('copy-button');
   for (var i = 0; i < copyList.length; i++) {
     const element = copyList[i];
@@ -117,4 +118,8 @@ function createCopyButton(element) {
       createCopyButton(element);
     }
   }
-})();
+}
+
+if (typeof window !== 'undefined') {
+  addAllCopyFunctions();
+}
