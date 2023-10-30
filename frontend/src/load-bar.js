@@ -40,9 +40,6 @@ const init = () => {
 };
 
 const loadBarFactory = () => {
-  const _loader = null;
-  let _currentJobId = null;
-
   return {
     run: async function () {
       const jobId = Math.random().toString(16).substring(7);
@@ -70,6 +67,6 @@ const loadBarFactory = () => {
 
 const loadBar = loadBarFactory();
 
-(function init() {
+if (typeof window !== 'undefined') {
   window.addEventListener('beforeunload', loadBar.run);
-})();
+}

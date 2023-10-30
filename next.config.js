@@ -1,6 +1,7 @@
+const { withSentryConfig } = require("@sentry/nextjs");
 const redirects = require('./redirects.json');
 
-module.exports = {
+const nextjsConfig = {
   webpack: function (config) {
     config.module.rules.push({
       test: /\.ya?ml$/,
@@ -11,4 +12,9 @@ module.exports = {
   async redirects() {
     return redirects;
   },
-};
+}
+
+module.exports = process.env.NODE_ENV === "production" && process.env.SENTRY_DSN
+  ? withSentryConfig(nextjsConfig, { silent: true, hideSourceMaps: false })
+  : nextjsConfig;
+

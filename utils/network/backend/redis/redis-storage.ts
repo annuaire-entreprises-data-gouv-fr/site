@@ -34,11 +34,10 @@ export class RedisClient {
 
   find = async (key: string) => {
     await this.connect();
-    console.log(key);
 
     const result = await promiseTimeout(this._client.get(key), 100).catch(
       (err) => {
-        logWarningInSentry('Redis find key fail', { details: err });
+        logWarningInSentry(err);
         return null;
       }
     );
@@ -55,7 +54,7 @@ export class RedisClient {
       }),
       200
     ).catch((err) => {
-      logWarningInSentry('Redis set key failed', { details: err });
+      logWarningInSentry(err);
     });
   };
 
