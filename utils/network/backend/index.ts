@@ -1,7 +1,11 @@
 import http from 'http';
 import https from 'https';
 import Axios from 'axios';
-import { AxiosCacheInstance, setupCache } from 'axios-cache-interceptor';
+import {
+  AxiosCacheInstance,
+  buildStorage,
+  setupCache,
+} from 'axios-cache-interceptor';
 import constants from '#models/constants';
 import { IDefaultRequestConfig } from '..';
 import { CACHE_TIMEOUT, defaultCacheConfig } from './cache-config';
@@ -36,7 +40,7 @@ export const axiosInstanceFactory = (
   };
 
   const axiosInstance = setupCache(Axios.create(axiosOptions), {
-    storage: redisClient?.storage,
+    storage: redisClient ? buildStorage(redisClient.store) : undefined,
     // ignore cache-control headers as some API like sirene return 'no-cache' headers
     headerInterpreter: () => CACHE_TIMEOUT,
     // eslint-disable-next-line no-console

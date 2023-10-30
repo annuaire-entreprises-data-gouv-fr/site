@@ -1,4 +1,3 @@
-import { buildStorage } from 'axios-cache-interceptor';
 import { createClient } from 'redis';
 import { logWarningInSentry } from '#utils/sentry';
 import { promiseTimeout } from './promise-timeout';
@@ -64,9 +63,9 @@ export class RedisClient {
     await this._client.del(key);
   };
 
-  public storage = buildStorage({
+  public store = {
     find: this.find,
     remove: this.remove,
     set: this.set,
-  });
+  };
 }
