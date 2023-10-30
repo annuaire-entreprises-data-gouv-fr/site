@@ -200,32 +200,32 @@ const Privacy: NextPageWithLayout = () => (
             <tr>
               <td>Github</td>
               <td>Hébergement du code</td>
-              <td></td>
-              <td></td>
+              <td>États-Unis</td>
+              <td>https://github.com/customer-terms/github-data-protection-agreement</td>
             </tr>
             <tr>
               <td>Notion</td>
               <td>Gestion des connaissances</td>
-              <td></td>
-              <td></td>
+              <td>États-Unis</td>
+              <td>https://notion.notion.site/Data-Processing-Addendum-361b540101274b1fa7e16b90402b0d99</td>
             </tr>
             <tr>
               <td>Tchap</td>
               <td>Outil de collaboration</td>
-              <td></td>
-              <td></td>
+              <td>France</td>
+              <td>https://tchap.beta.gouv.fr/politique-de-confidentialite</td>
             </tr>
             <tr>
               <td>Mattermost</td>
               <td>Outil de collaboration</td>
-              <td></td>
-              <td></td>
+              <td>France</td>
+              <td>https://mattermost.com/data-processing-addendum/</td>
             </tr>
             <tr>
               <td>Grist</td>
               <td>Gestion des connaissances</td>
-              <td></td>
-              <td></td>
+              <td>France</td>
+              <td>https://www.getgrist.com/privacy/</td>
             </tr>
           </tbody>
         </table>
