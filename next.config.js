@@ -1,4 +1,5 @@
 const { withSentryConfig } = require("@sentry/nextjs");
+const redirects = require('./redirects.json');
 
 const nextjsConfig = {
   webpack: function (config) {
@@ -9,13 +10,7 @@ const nextjsConfig = {
     return config;
   },
   async redirects() {
-    return [
-      {
-        source: '/api/qr/:slug',
-        destination: '/api/share/qr/:slug',
-        permanent: true,
-      },
-    ];
+    return redirects;
   },
 }
 

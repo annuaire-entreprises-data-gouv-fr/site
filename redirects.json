@@ -1,0 +1,12 @@
+[
+    {
+        "source": "/api/qr/:slug",
+        "destination": "/api/share/qr/:slug",
+        "permanent": true
+    }, 
+    {
+        "source": "/faq/tva-intracommunautaire",
+        "destination": "/definitions/tva-intracommunautaire",
+        "permanent": true
+    }
+]
