@@ -3,59 +3,71 @@ import { createClient } from 'redis';
 import { logWarningInSentry } from '#utils/sentry';
 import { promiseTimeout } from './promise-timeout';
 
-let redisClient = createClient({
-  url: process.env.REDIS_URL,
-  pingInterval: 1000,
-});
+export class RedisClient {
+  static isRedisEnabled = process.env.REDIS_ENABLED === 'enabled';
+  private _client;
 
-redisClient.on('error', (err) => {
-  logWarningInSentry('Error in Redis', { details: err });
-});
-
-export async function connect() {
-  if (!redisClient.isOpen) {
-    try {
-      return redisClient.connect();
-    } catch (e) {
-      logWarningInSentry('Could not connect to redis client');
+  constructor(private cache_timeout: number) {
+    if (!RedisClient.isRedisEnabled) {
+      throw new Error('Redis is disabled');
     }
-  }
-}
 
-const redisStorage = (cache_timeout: number) =>
-  buildStorage({
-    async find(key: string) {
-      const result = await promiseTimeout(
-        redisClient.get(key),
-        100
-      ).catch((err) => {
+    this._client = createClient({
+      url: process.env.REDIS_URL,
+      pingInterval: 1000,
+    });
+
+    this._client.on('error', (err) => {
+      logWarningInSentry('Error in Redis', { details: err });
+    });
+  }
+
+  connect = async () => {
+    if (!this._client.isOpen) {
+      try {
+        return this._client.connect();
+      } catch (e) {
+        logWarningInSentry('Could not connect to redis client');
+      }
+    }
+  };
+
+  find = async (key: string) => {
+    await this.connect();
+    console.log(key);
+
+    const result = await promiseTimeout(this._client.get(key), 100).catch(
+      (err) => {
         logWarningInSentry('Redis find key fail', { details: err });
         return null;
-      });
+      }
+    );
 
-      return result ? JSON.parse(result) : result;
-    },
+    return result ? JSON.parse(result) : result;
+  };
 
-    async set(key: string, value: any) {
-      await promiseTimeout(
-        redisClient.set(key, JSON.stringify(value), {
-          PX: cache_timeout,
-        }),
-        200
-      ).catch((err) => {
-        logWarningInSentry('Redis set key failed', { details: err });
-      });
-    },
+  set = async (key: string, value: any) => {
+    await this.connect();
 
-    async remove(key: string) {
-      await redisClient.del(key);
-    },
+    await promiseTimeout(
+      this._client.set(key, JSON.stringify(value), {
+        PX: this.cache_timeout,
+      }),
+      200
+    ).catch((err) => {
+      logWarningInSentry('Redis set key failed', { details: err });
+    });
+  };
+
+  remove = async (key: string) => {
+    await this.connect();
+
+    await this._client.del(key);
+  };
+
+  public storage = buildStorage({
+    find: this.find,
+    remove: this.remove,
+    set: this.set,
   });
-
-export default redisStorage;
-export async function disconnect() {
-  if (redisClient.isOpen) {
-    redisClient.removeAllListeners();
-    return await redisClient.disconnect();
-  }
 }

@@ -7,7 +7,7 @@ import { IDefaultRequestConfig } from '..';
 import { CACHE_TIMEOUT, defaultCacheConfig } from './cache-config';
 import errorInterceptor from './error-interceptor';
 import { addStartTimeInterceptor, logInterceptor } from './log-interceptor';
-import redisStorage, { connect } from './redis/redis-storage';
+import { RedisClient } from './redis/redis-storage';
 
 /**
  * Limit the number of sockets allocated per distant hosts and to reuse sockets
@@ -18,6 +18,10 @@ const agentOptions = {
   maxSockets: 128, // Maximum number of sockets to allow per host. Defaults to Infinity.
   maxFreeSockets: 128, // Maximum number of sockets to leave open in a free state. Only relevant if keepAlive is set to true. Defaults to 256.
 };
+
+const redisClient = RedisClient.isRedisEnabled
+  ? new RedisClient(CACHE_TIMEOUT)
+  : undefined;
 
 /**
  * Returns a cache-enabled axios instance
@@ -32,7 +36,7 @@ export const axiosInstanceFactory = (
   };
 
   const axiosInstance = setupCache(Axios.create(axiosOptions), {
-    storage: redisStorage(CACHE_TIMEOUT),
+    storage: redisClient?.storage,
     // ignore cache-control headers as some API like sirene return 'no-cache' headers
     headerInterpreter: () => CACHE_TIMEOUT,
     // eslint-disable-next-line no-console
@@ -53,7 +57,6 @@ export const axiosInstanceFactory = (
 const axiosInstanceWithCache = axiosInstanceFactory();
 
 async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
-  await connect();
   const response = await axiosInstanceWithCache({
     timeout: constants.timeout.L,
     cache: config.useCache ? defaultCacheConfig : false,
