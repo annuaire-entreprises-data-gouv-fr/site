@@ -6,7 +6,12 @@ import remarkHeadingId from 'remark-heading-id';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
-import { IParsedMakdown } from '#models/article/type';
+
+type IParsedMakdown = {
+  raw: string;
+  html: string;
+  headings: { id: string; content: string; depth: number }[];
+};
 
 export default function parseMarkdownSync(body: string): IParsedMakdown {
   const parsedBody = markdownProcessor.processSync(body);

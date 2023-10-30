@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react';
 import { diamond } from '#components-ui/logo/home-h1';
 import AdministrationDescription from '#components/administrations/administration-description';
 import { LayoutDefault } from '#components/layouts/layout-default';
+import { RenderMarkdownServerOnly } from '#components/markdown';
 import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
 import {
@@ -11,7 +12,6 @@ import {
   getLandingPage,
 } from '#models/landing-pages';
 import { IPropsWithMetadata } from '#utils/server-side-props-helper/post-server-side-props';
-import parseMarkdownSync from '#utils/static-markdown-pages/parse-markdown';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, ILandingPage {}
@@ -67,21 +67,13 @@ const LandingPage: NextPageWithLayout<IProps> = ({
           <div key={block.title} className="fr-col-12 fr-col-sm-4 fr-col-md-4">
             <div className="reassurance">
               <h2>{block.title}</h2>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: parseMarkdownSync(block.body).html,
-                }}
-              />{' '}
+              <RenderMarkdownServerOnly>{block.body}</RenderMarkdownServerOnly>
             </div>
           </div>
         ))}
       </div>
       <br />
-      <div
-        dangerouslySetInnerHTML={{
-          __html: parseMarkdownSync(body).html,
-        }}
-      />{' '}
+      <RenderMarkdownServerOnly>{body}</RenderMarkdownServerOnly>{' '}
       {datasources.length > 0 && (
         <h2>Quelles sont les sources des données utilisées ?</h2>
       )}

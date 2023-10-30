@@ -1,8 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Breadcrumb from '#components-ui/breadcrumb';
 import ButtonLink from '#components-ui/button';
-import Summary from '#components-ui/summary';
 import TextWrapper from '#components-ui/text-wrapper';
+import { RenderMarkdownServerOnly } from '#components/markdown';
 import Meta from '#components/meta';
 import {
   IDefinition,
@@ -30,11 +30,9 @@ const DefinitionPage: NextPageWithLayout<{
           ]}
         />
         <h1 className="definition-title">{definition.title}</h1>
-        <Summary
-          headings={definition.body.headings.filter(({ depth }) => depth === 2)}
-        />
-
-        <div dangerouslySetInnerHTML={{ __html: definition.body.html }} />
+        <RenderMarkdownServerOnly showToc>
+          {definition.body}
+        </RenderMarkdownServerOnly>
 
         {definition.cta ? (
           <div className="layout-left">

@@ -1,8 +1,8 @@
 import { GetStaticProps } from 'next';
 import Meta from '#components/meta';
 import changelog, { IChangelog } from '#models/historique-modifications';
-import parseMarkdownSync from '#utils/static-markdown-pages/parse-markdown';
 import { NextPageWithLayout } from './_app';
+import parseMarkdownSync from '#utils/static-pages/parse-markdown';
 
 type IProps = {
   changelog: IChangelog[];

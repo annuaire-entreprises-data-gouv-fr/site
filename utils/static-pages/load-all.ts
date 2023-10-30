@@ -1,10 +1,9 @@
 import { IArticle } from '#models/article/type';
-import parseMarkdownSync from './parse-markdown';
 
 export function loadAll<T extends IArticle>(
   articlesFolderContext: Record<string, T>
 ): T[] {
-  const rawArticles = [] as Array<T>;
+  const articles = [] as Array<T>;
   //@ts-ignore
   const keys = articlesFolderContext.keys();
   const values = keys.map(articlesFolderContext);
@@ -15,11 +14,8 @@ export function loadAll<T extends IArticle>(
     .forEach((key: string, index: number) => {
       const slug = key.replace('.yml', '').replace('./', '');
       //@ts-ignore
-      rawArticles.push({ ...values[index], slug });
+      articles.push({ ...values[index], slug });
     });
 
-  return rawArticles.map((article) => ({
-    ...article,
-    body: parseMarkdownSync(article.body as unknown as string),
-  }));
+  return articles;
 }

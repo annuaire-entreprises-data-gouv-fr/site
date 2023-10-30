@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Breadcrumb from '#components-ui/breadcrumb';
 import ButtonLink from '#components-ui/button';
 import TextWrapper from '#components-ui/text-wrapper';
+import { RenderMarkdownServerOnly } from '#components/markdown';
 import Meta from '#components/meta';
 import {
   IFaqArticle,
@@ -28,11 +29,7 @@ const FAQArticle: NextPageWithLayout<{ article: IFaqArticle }> = ({
         ]}
       />
       <h1>{article.title}</h1>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: article.body.html,
-        }}
-      />
+      <RenderMarkdownServerOnly>{article.body}</RenderMarkdownServerOnly>
       {article.cta ? (
         <div className="layout-left">
           <ButtonLink to={article.cta.to}>{article.cta.label}</ButtonLink>

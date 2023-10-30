@@ -1,4 +1,4 @@
-import { loadAll } from '#utils/static-markdown-pages/load-all';
+import { loadAll } from '#utils/static-pages/load-all';
 import { IArticle } from '../type';
 
 export type IDefinition = {
