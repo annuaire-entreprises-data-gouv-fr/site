@@ -36,15 +36,7 @@
           "libelleTrancheEffectif": "",
           "latitude": "48.873057",
           "longitude": "2.316605",
-          "conventionsCollectives": [
-            {
-              "siret": "90859587900010",
-              "idcc": "1486",
-              "CdTN": true,
-              "idKali": "KALICONT000005635173",
-              "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
-            }
-          ]
+          "conventionsCollectives": []
         },
         "allSiegesSiret": [],
         "statutDiffusion": "diffusible",
@@ -79,15 +71,7 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.873057",
               "longitude": "2.316605",
-              "conventionsCollectives": [
-                {
-                  "siret": "90859587900010",
-                  "idcc": "1486",
-                  "CdTN": true,
-                  "idKali": "KALICONT000005635173",
-                  "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
-                }
-              ]
+              "conventionsCollectives": []
             }
           ],
           "open": [
@@ -115,15 +99,7 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.873057",
               "longitude": "2.316605",
-              "conventionsCollectives": [
-                {
-                  "siret": "90859587900010",
-                  "idcc": "1486",
-                  "CdTN": true,
-                  "idKali": "KALICONT000005635173",
-                  "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
-                }
-              ]
+              "conventionsCollectives": []
             }
           ],
           "unknown": [],
@@ -165,15 +141,7 @@
         "colter": {
           "codeColter": null
         },
-        "conventionsCollectives": [
-          {
-            "siret": "90859587900010",
-            "idcc": "1486",
-            "CdTN": true,
-            "idKali": "KALICONT000005635173",
-            "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
-          }
-        ],
+        "conventionsCollectives": [],
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,

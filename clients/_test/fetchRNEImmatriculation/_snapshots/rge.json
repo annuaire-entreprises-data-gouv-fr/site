@@ -15,21 +15,9 @@
       "dureePersonneMorale": "99 ans",
       "capital": "26 000 EUR (fixe)",
       "libelleNatureJuridique": "SAS, société par actions simplifiée",
-      "natureEntreprise": "Artisanale réglementée"
+      "natureEntreprise": null
     },
     "dirigeants": [
-      {
-        "siren": "878719756",
-        "denomination": "GSE VD",
-        "natureJuridique": "Société par actions simplifiée",
-        "role": null
-      },
-      {
-        "siren": "",
-        "denomination": "GROUPE SOLUTION ENERGIE",
-        "natureJuridique": "5710",
-        "role": null
-      },
       {
         "nom": "LEVY",
         "prenom": "ILAN",
@@ -43,6 +31,12 @@
         "role": "",
         "dateNaissancePartial": "1965-09",
         "dateNaissanceFull": ""
+      },
+      {
+        "siren": "878719756",
+        "denomination": "GSE VD",
+        "natureJuridique": "Société par actions simplifiée",
+        "role": "Président de SAS"
       },
       {
         "siren": "",
