@@ -1,5 +1,4 @@
 import { clientBanGeoLoc } from '#clients/base-adresse';
-import logErrorInSentry from '#utils/sentry';
 import { IEtablissement } from '.';
 import { estDiffusible } from './statut-diffusion';
 

@@ -85,9 +85,9 @@ const getComptesAssociation = async (
   try {
     return await clientDCA(siren, idRna);
   } catch (e: any) {
-    logErrorInSentry('Error in API JOAFE : COMPTES', {
+    logErrorInSentry(e, {
       siren,
-      details: e.toString(),
+      errorName: 'Error in API JOAFE : COMPTES',
     });
     return APINotRespondingFactory(EAdministration.DILA, 500);
   }
@@ -100,9 +100,10 @@ const getAnnoncesAssociation = async (
   try {
     return await clientJOAFE(idRna);
   } catch (e: any) {
-    logErrorInSentry('Error in API JOAFE: ANNONCES', {
+    e;
+    logErrorInSentry(e, {
       siren,
-      details: e.toString(),
+      errorName: 'API JOAFE ANNONCES',
     });
     return APINotRespondingFactory(EAdministration.DILA, 500);
   }

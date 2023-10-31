@@ -11,7 +11,7 @@ async function loginRoute(_req: NextApiRequest, res: NextApiResponse) {
     const url = await monCompteProAuthorizeUrl();
     res.redirect(url);
   } catch (e: any) {
-    logErrorInSentry('Login failed', { details: e.toString() });
+    logErrorInSentry(e, { errorName: 'Connexion failed' });
     res.redirect('/connexion/echec-connexion');
   }
 }

@@ -8,6 +8,7 @@ export type IScope = {
   slug?: string;
   details?: string;
   referrer?: string;
+  errorName?: string;
   browser?: string;
 };
 
@@ -35,9 +36,15 @@ export const isNextJSSentryActivated =
 const logInSentryFactory =
   (severity = 'error' as SeverityLevel) =>
   (errorMsg: any, extra: IScope = {}) => {
+    if (extra.errorName && typeof errorMsg !== 'string') {
+      const originalErrorName = errorMsg.name;
+      errorMsg.name = extra.errorName;
+      extra.errorName = originalErrorName;
+    }
     if (isNextJSSentryActivated) {
       const scope = getScope(extra || {});
       scope.setLevel(severity);
+
       if (typeof errorMsg === 'string') {
         Sentry.captureMessage(errorMsg, scope);
       } else {
@@ -51,5 +58,9 @@ const logInSentryFactory =
 export const logWarningInSentry = logInSentryFactory('info' as SeverityLevel);
 
 export const logErrorInSentry = logInSentryFactory('error' as SeverityLevel);
+
+export const logFatalErrorInSentry = logInSentryFactory(
+  'fatal' as SeverityLevel
+);
 
 export default logErrorInSentry;
