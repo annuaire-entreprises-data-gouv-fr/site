@@ -14,9 +14,10 @@ const nextjsConfig = {
   },
 }
 
-module.exports = nextjsConfig
 
-// process.env.NODE_ENV === "production" && process.env.SENTRY_DSN
-//   ? withSentryConfig(nextjsConfig, { silent: true, hideSourceMaps: false, token: process.env.SENTRY_AUTH_TOKEN })
-//   : nextjsConfig;
+module.exports = process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_SENTRY_DSN
+  ? withSentryConfig(nextjsConfig, { silent: true, hideSourceMaps: false })
+  : nextjsConfig;
+
+
 

@@ -30,7 +30,7 @@ const getScope = (extra: IScope) => {
 };
 
 export const isNextJSSentryActivated =
-  process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN;
+  process.env.NODE_ENV === 'production' && !!process.env.NEXT_PUBLIC_SENTRY_DSN;
 
 const logInSentryFactory =
   (severity = 'error' as SeverityLevel) =>
@@ -38,7 +38,6 @@ const logInSentryFactory =
     if (isNextJSSentryActivated) {
       const scope = getScope(extra || {});
       scope.setLevel(severity);
-
       if (typeof errorMsg === 'string') {
         Sentry.captureMessage(errorMsg, scope);
       } else {
