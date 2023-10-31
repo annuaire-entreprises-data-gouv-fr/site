@@ -1,12 +1,12 @@
 import Summary from '#components-ui/summary';
-import parseMarkdownSync from './parse-markdown';
+import parseMarkdownSync, { IMarkdown } from './parse-markdown';
 
 export default function RenderMarkdownServerOnly({
   children,
   showToc = false,
 }: {
   showToc?: boolean;
-  children: string;
+  children: IMarkdown | string;
 }) {
   if (typeof window !== 'undefined') {
     throw new Error('This component is server-side only');

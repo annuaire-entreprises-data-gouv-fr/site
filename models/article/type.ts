@@ -1,3 +1,5 @@
+import { IMarkdown } from '#components/markdown/parse-markdown';
+
 export type IArticle = {
   slug: string;
   title: string;
@@ -5,7 +7,7 @@ export type IArticle = {
     description: string;
     title?: string;
   };
-  body: string;
+  body: IMarkdown;
   cta: { label: string; to: string };
   more: { label: string; href: string }[];
 };

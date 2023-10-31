@@ -7,16 +7,22 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
 
+export type IMarkdown = {
+  __typename: 'Markdown';
+};
+
 type IParsedMakdown = {
-  raw: string;
+  raw: IMarkdown;
   html: string;
   headings: { id: string; content: string; depth: number }[];
 };
 
-export default function parseMarkdownSync(body: string): IParsedMakdown {
+export default function parseMarkdownSync(
+  body: IMarkdown | string
+): IParsedMakdown {
   const parsedBody = markdownProcessor.processSync(body);
   return {
-    raw: body,
+    raw: body as IMarkdown,
     html: removeSingleParagraph(parsedBody.value as string),
     // @ts-ignore
     headings: parsedBody.data.headings.map((header) => ({

@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
+import parseMarkdownSync from '#components/markdown/parse-markdown';
 import Meta from '#components/meta';
 import StructuredDataFAQ from '#components/structured-data/faq';
 import { allFaqArticles, IFaqArticle } from '#models/article/faq';
@@ -14,7 +15,10 @@ const FAQPage: NextPageWithLayout<{
       canonical="https://annuaire-entreprises.data.gouv.fr/faq"
     />
     <StructuredDataFAQ
-      data={articles.map(({ title, body }) => [title, body.html])}
+      data={articles.map(({ title, body }) => [
+        title,
+        parseMarkdownSync(body).html,
+      ])}
     />
     <TextWrapper>
       <h1>Réponses à vos questions (FAQ) :</h1>

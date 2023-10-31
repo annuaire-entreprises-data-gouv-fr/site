@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
+import parseMarkdownSync from '#components/markdown/parse-markdown';
 import Meta from '#components/meta';
 import StructuredDataFAQ from '#components/structured-data/faq';
 import { IDefinition, allDefinitions } from '#models/article/definitions';
@@ -14,7 +15,10 @@ const AllDefinitionsPage: NextPageWithLayout<{
       canonical="https://annuaire-entreprises.data.gouv.fr/definitions"
     />
     <StructuredDataFAQ
-      data={definitions.map(({ title, body }) => [title, body.html])}
+      data={definitions.map(({ title, body }) => [
+        title,
+        parseMarkdownSync(body).html,
+      ])}
     />
     <TextWrapper>
       <h1>Définitions</h1>
