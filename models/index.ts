@@ -12,7 +12,7 @@ import {
   Siret,
 } from '#utils/helpers';
 import { IAPINotRespondingError } from './api-not-responding';
-import { IBilanFinancierAssociation } from './donnees-financieres';
+import { IBilanFinancierAssociation } from './finances-societe/types';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 export interface IConventionCollective {
@@ -226,6 +226,15 @@ export interface IDataAssociation {
   adresseInconsistency: boolean;
   bilans: IBilanFinancierAssociation[];
 }
+
+type IBilanFinancierAssociation = {
+  dons: number;
+  subv: number;
+  produits: number;
+  charges: number;
+  resultat: number;
+  year: number;
+};
 
 export const isAssociation = (
   toBeDetermined: IUniteLegale

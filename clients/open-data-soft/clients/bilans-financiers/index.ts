@@ -1,7 +1,7 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { stubClient } from '#clients/stub-client-with-snaphots';
-import { IBilanFinancier } from '#models/donnees-financieres';
+import { IBilanFinancier } from '#models/finances-societe/types';
 import { Siren } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import odsClient from '../..';

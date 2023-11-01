@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import routes from '#clients/routes';
 import { EAdministration } from '#models/administrations';
 import { APILoadingFactory, IAPILoading } from '#models/api-loading';
 import {
@@ -10,17 +11,16 @@ import { IUniteLegale } from '#models/index';
 import { httpGet } from '#utils/network';
 import logErrorInSentry from '#utils/sentry';
 
-const RNE_ROUTE = '/api/data-fetching/rne';
 export const useImmmatriculationRNE = (uniteLegale: IUniteLegale) => {
   const [immatriculationRNE, setImmatriculationRNE] = useState<
     IImmatriculationRNE | IAPINotRespondingError | IAPILoading
   >(APILoadingFactory());
 
   useEffect(() => {
-    const fetchDonneesRestreintes = async () => {
+    const fetchData = async () => {
       try {
         const response = await httpGet<IImmatriculationRNE>(
-          RNE_ROUTE + '/' + uniteLegale.siren
+          routes.api.rne + '/' + uniteLegale.siren
         );
         setImmatriculationRNE(response);
       } catch (e: any) {
@@ -33,7 +33,7 @@ export const useImmmatriculationRNE = (uniteLegale: IUniteLegale) => {
       }
     };
 
-    fetchDonneesRestreintes();
+    fetchData();
   }, [uniteLegale]);
 
   return immatriculationRNE;

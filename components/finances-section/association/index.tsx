@@ -3,8 +3,12 @@ import { LineChart } from '#components/chart/line';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
+import {
+  APINotRespondingFactory,
+  isAPINotResponding,
+} from '#models/api-not-responding';
 import constants from '#models/constants';
-import { IFinances } from '#models/donnees-financieres';
+import { IAssociation } from '#models/index';
 import { formatCurrency } from '#utils/helpers';
 
 const ColorCircle = ({ color }: { color: string }) => (
@@ -14,9 +18,14 @@ const ColorCircle = ({ color }: { color: string }) => (
 const colorResultat = constants.chartColors[1];
 const colorCA = constants.chartColors[4];
 
-export const FinancesAssociationSection: React.FC<IFinances> = ({
-  financesAssociation,
-}) => {
+export const FinancesAssociationSection: React.FC<{
+  association: IAssociation;
+}> = ({ association }) => {
+  const { data } = association.association;
+  const financesAssociation =
+    (!!data && !isAPINotResponding(data) && data?.bilans) ||
+    APINotRespondingFactory(EAdministration.MI, 404);
+
   return (
     <DataSection
       notFoundInfo="Aucun indicateur financier n’a été retrouvé pour cette association."

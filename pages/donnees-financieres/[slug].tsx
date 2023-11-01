@@ -1,12 +1,11 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
-import { FinancesAssociationSection } from '#components/finances/association';
-import { FinancesSocieteSection } from '#components/finances/societe';
+import { FinancesAssociationSection } from '#components/finances-section/association';
+import { FinancesSocieteSection } from '#components/finances-section/societe';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { IFinances, getFinancesFromSlug } from '#models/donnees-financieres';
-import { isAssociation, isServicePublic } from '#models/index';
+import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { getCompanyPageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
@@ -15,12 +14,12 @@ import {
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
-interface IProps extends IPropsWithMetadata, IFinances {}
+interface IProps extends IPropsWithMetadata {
+  uniteLegale: IUniteLegale;
+}
 
 const FinancePage: NextPageWithLayout<IProps> = ({
   uniteLegale,
-  financesSociete,
-  financesAssociation,
   metadata: { session },
 }) => {
   return (
@@ -40,19 +39,9 @@ const FinancePage: NextPageWithLayout<IProps> = ({
           session={session}
         />
         {isAssociation(uniteLegale) ? (
-          <>
-            <FinancesAssociationSection
-              financesAssociation={financesAssociation}
-              financesSociete={financesSociete}
-              uniteLegale={uniteLegale}
-            />
-          </>
+          <FinancesAssociationSection association={uniteLegale} />
         ) : isServicePublic(uniteLegale) ? null : (
-          <FinancesSocieteSection
-            financesSociete={financesSociete}
-            financesAssociation={financesAssociation}
-            uniteLegale={uniteLegale}
-          />
+          <FinancesSocieteSection uniteLegale={uniteLegale} />
         )}
       </div>
     </>
@@ -63,14 +52,11 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug } = extractParamsFromContext(context);
 
-    const { uniteLegale, financesSociete, financesAssociation } =
-      await getFinancesFromSlug(slug);
+    const uniteLegale = await getUniteLegaleFromSlug(slug);
 
     return {
       props: {
         uniteLegale,
-        financesSociete,
-        financesAssociation,
         metadata: { useReact: true },
       },
     };
