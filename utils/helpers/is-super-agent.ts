@@ -9,8 +9,8 @@ class SuperAgentsList {
       try {
         this._list = await getSuperAgentsFromNotion();
       } catch (e: any) {
-        logErrorInSentry('Error while fetching agent list from notion', {
-          details: e.toString(),
+        logErrorInSentry(e, {
+          errorName: 'Error while fetching agent list from notion',
         });
       }
     }

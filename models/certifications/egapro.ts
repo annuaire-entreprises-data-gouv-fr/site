@@ -63,9 +63,9 @@ export const getEgapro = async (
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);
     }
-    logErrorInSentry('Error in API EGAPRO', {
+    logErrorInSentry(e, {
       siren: uniteLegale.siren,
-      details: e.toString(),
+      errorName: 'Error in API EGAPRO',
     });
     return APINotRespondingFactory(EAdministration.MTPEI, 500);
   }

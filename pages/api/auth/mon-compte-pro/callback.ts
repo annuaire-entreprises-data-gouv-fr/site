@@ -61,7 +61,7 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
     );
     res.redirect('/');
   } catch (e: any) {
-    logErrorInSentry('Connexion failed', { details: e.toString() });
+    logErrorInSentry(e, { errorName: 'Connexion failed' });
     if (e instanceof HttpForbiddenError) {
       res.redirect('/connexion/echec-authorisation-requise');
     } else {

@@ -1,7 +1,6 @@
-import React from 'react';
 import { ServerErrorExplanations } from '#components/error-explanations';
 import Meta from '#components/meta';
-import logErrorInSentry from '#utils/sentry';
+import { logFatalErrorInSentry } from '#utils/sentry';
 import { NextPageWithLayout } from './_app';
 
 const ServerError: NextPageWithLayout = () => {
@@ -14,19 +13,9 @@ const ServerError: NextPageWithLayout = () => {
 };
 
 ServerError.getInitialProps = ({ res, err }) => {
-  let errAsString = '';
-  try {
-    console.error('error 500 :', err);
-    errAsString = (err || '').toString();
-  } catch {
-    errAsString = 'failed to serialize error';
-  }
-
-  logErrorInSentry(`Server Error (500) - unknown reason`, {
-    details: errAsString,
+  logFatalErrorInSentry(err, {
     page: res?.req.url,
   });
-
   return { statusCode: 500 };
 };
 

@@ -80,9 +80,9 @@ export const getFinancesFromSlug = async (slug: string): Promise<IFinances> => {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.MEF, 404);
     }
-    logErrorInSentry('Error in API data financieres', {
+    logErrorInSentry(e, {
       siren,
-      details: e.toString(),
+      errorName: 'Error in API data financieres',
     });
     return APINotRespondingFactory(EAdministration.MEF, e.status || 500);
   });

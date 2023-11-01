@@ -39,7 +39,7 @@ const logAllEvents = async (req: NextApiRequest) => {
       logSuggestionToNotion(visitorType, email, text);
     }
   } catch (e: any) {
-    logErrorInSentry('Error in form submission', { details: e.toString() });
+    logErrorInSentry(e, { errorName: 'Error in form submission' });
   }
 };
 

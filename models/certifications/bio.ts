@@ -47,9 +47,9 @@ export const getBio = async (uniteLegale: IUniteLegale) => {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.AGENCE_BIO, 404);
     }
-    logErrorInSentry('Error in API bio', {
+    logErrorInSentry(e, {
       siren: uniteLegale.siren,
-      details: e.toString(),
+      errorName: 'Error in API bio',
     });
     return APINotRespondingFactory(EAdministration.AGENCE_BIO, 500);
   }

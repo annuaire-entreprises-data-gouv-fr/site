@@ -24,8 +24,8 @@ export const useImmmatriculationRNE = (uniteLegale: IUniteLegale) => {
         );
         setImmatriculationRNE(response);
       } catch (e: any) {
-        logErrorInSentry('Error in RNE call from frontend', {
-          details: e.toString(),
+        logErrorInSentry(e, {
+          errorName: 'RNE API error',
         });
         setImmatriculationRNE(
           APINotRespondingFactory(EAdministration.INPI, 500)

@@ -12,8 +12,8 @@ const logAllEvents = async (req: NextApiRequest) => {
     // async functions but no need to await them
     logSuggestionToNotion(visitorType, email, suggestion);
   } catch (e: any) {
-    logErrorInSentry('Error in form submission', {
-      details: e.toString(),
+    logErrorInSentry(e, {
+      errorName: 'Error in form submission',
     });
   }
 };

@@ -33,23 +33,19 @@ export const getDonneesRestreintesEntreprise = async (
       return APINotRespondingFactory(EAdministration.DINUM, 404);
     }
 
-    logErrorInSentry('Error in API Entreprise', {
+    logErrorInSentry(e, {
       siren,
-      details: e.toString(),
+      errorName: 'Error in API Entreprise',
     });
     return APINotRespondingFactory(EAdministration.DINUM, e.status || 500);
   };
 
   const [fiscale, vigilance, msa] = await Promise.all([
-    clientApiEntrepriseConformiteFiscale(siren).catch(
-      handleApiEntrepriseError
-    ),
+    clientApiEntrepriseConformiteFiscale(siren).catch(handleApiEntrepriseError),
     clientApiEntrepriseConformiteVigilance(siren).catch(
       handleApiEntrepriseError
     ),
-    clientApiEntrepriseConformiteMSA(siret).catch(
-      handleApiEntrepriseError
-    )
+    clientApiEntrepriseConformiteMSA(siret).catch(handleApiEntrepriseError),
   ]);
 
   return {
