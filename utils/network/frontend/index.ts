@@ -1,5 +1,6 @@
 import { HttpTimeoutError } from '#clients/exceptions';
 import constants from '#models/constants';
+import logErrorInSentry from '#utils/sentry';
 import { IDefaultRequestConfig } from '..';
 import { httpErrorHandler } from '../utils/http-error-handler';
 
@@ -12,6 +13,10 @@ function buildUrl(url: string, params: any) {
     const separator = url.indexOf('?') > 0 ? '&' : '?';
     return `${url}${separator}${serializedParams}`;
   } catch (e) {
+    logErrorInSentry(e, {
+      errorName: 'Error while building url on frontend client',
+      details: url,
+    });
     return url;
   }
 }
@@ -21,7 +26,7 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
     throw new Error('Url is required');
   }
   if (config.useCache || config.method || config.data || config.headers) {
-    throw new Error('Feature not yet supported on frontend');
+    throw new Error('Feature not yet supported on frontend client');
   }
 
   const controller = new AbortController();
