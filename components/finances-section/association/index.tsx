@@ -24,8 +24,8 @@ export const FinancesAssociationSection: React.FC<{
   const financesAssociation =
     (!!data &&
       !isAPINotResponding(data) &&
-      data?.bilans &&
-      data.bilans.length > 0) ||
+      data?.bilans.length > 0 &&
+      data?.bilans) ||
     APINotRespondingFactory(EAdministration.MI, 404);
 
   return (
