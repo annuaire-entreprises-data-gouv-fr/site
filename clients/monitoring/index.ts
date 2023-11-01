@@ -55,8 +55,9 @@ export const clientMonitorings = async (): Promise<IMonitoring[]> => {
   data.append('logs_end_date', Math.ceil(to.getTime() / 1000));
   data.append('logs_start_date', Math.floor(from.getTime() / 1000));
 
+  const url = `${routes.tooling.monitoring}?api_key=${process.env.UPTIME_ROBOT_API_KEY}`;
   const result = await httpClient<IUptimeRobotResponse>({
-    url: routes.monitoring + `?api_key=${process.env.UPTIME_ROBOT_API_KEY}`,
+    url,
     method: 'POST',
     data,
     headers: {

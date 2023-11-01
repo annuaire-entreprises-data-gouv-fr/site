@@ -1,3 +1,4 @@
+import routes from '#clients/routes';
 import httpClient from '#utils/network';
 
 const gristTables = {
@@ -7,7 +8,7 @@ const gristTables = {
   },
 } as { [tableKey: string]: { docId: string; tableId: string } };
 
-export async function logInGrist(tableKey: string, data: unknown[]) {
+function getGristUrl(tableKey: string) {
   const gristIds = gristTables[tableKey];
 
   if (!gristIds) {
@@ -16,11 +17,13 @@ export async function logInGrist(tableKey: string, data: unknown[]) {
   if (!process.env.GRIST_API_KEY) {
     throw new Error('GRIST_API_KEY environment variable is not set');
   }
-  const { docId, tableId } = gristIds;
+  return `${routes.tooling.grist}${gristIds.docId}/tables/${gristIds.tableId}/records`;
+}
 
+export async function logInGrist(tableKey: string, data: unknown[]) {
   await httpClient({
     method: 'POST',
-    url: `https://grist.incubateur.net/api/docs/${docId}/tables/${tableId}/records`,
+    url: getGristUrl(tableKey),
     headers: {
       ContentType: 'application/json',
       Authorization: 'Bearer ' + process.env.GRIST_API_KEY,
@@ -29,6 +32,16 @@ export async function logInGrist(tableKey: string, data: unknown[]) {
       records: data.map((d) => {
         return { fields: d };
       }),
+    },
+  });
+}
+
+export async function readFromGrist(tableKey: string) {
+  return await httpClient({
+    method: 'GET',
+    url: getGristUrl(tableKey),
+    headers: {
+      Authorization: 'Bearer ' + process.env.GRIST_API_KEY,
     },
   });
 }

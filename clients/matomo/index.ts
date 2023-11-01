@@ -301,7 +301,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
  * Compute matomo API url to extract page view count
  */
 const createPageViewUrl = () => {
-  let baseUrl = routes.matomo.report.bulkRequest;
+  let baseUrl = routes.tooling.matomo.report.bulkRequest;
   const lastYear = getLastYear();
 
   for (let i = 0; i < 12; i++) {
@@ -318,7 +318,7 @@ const createPageViewUrl = () => {
 };
 
 const getEventSubtableIds = async () => {
-  let baseUrl = routes.matomo.report.bulkRequest;
+  let baseUrl = routes.tooling.matomo.report.bulkRequest;
   const lastYear = getLastYear();
   for (let i = 0; i < 12; i++) {
     lastYear.setMonth(lastYear.getMonth() + 1);
@@ -341,7 +341,7 @@ const getEventSubtableIds = async () => {
 };
 
 const createEventsCategoryUrl = () => {
-  let baseUrl = routes.matomo.report.bulkRequest;
+  let baseUrl = routes.tooling.matomo.report.bulkRequest;
   const lastYear = getLastYear();
   for (let i = 0; i < 12; i++) {
     lastYear.setMonth(lastYear.getMonth() + 1);
@@ -361,7 +361,7 @@ const getNpsEvent = async (): Promise<IMatomoEventStat[][]> => {
   const lastYear = getLastYear();
   const subtableIdsResponse = await getEventSubtableIds();
 
-  let baseUrl = routes.matomo.report.bulkRequest;
+  let baseUrl = routes.tooling.matomo.report.bulkRequest;
 
   for (let i = 0; i < 12; i++) {
     lastYear.setMonth(lastYear.getMonth() + 1);
@@ -381,7 +381,7 @@ const getNpsEvent = async (): Promise<IMatomoEventStat[][]> => {
 const createCopyPasteEventUrl = () => {
   const lastYear = getLastYear();
   const dateRange = `${YYYYMMDD(lastYear)},${YYYYMMDD(new Date())}`;
-  return routes.matomo.report.copyPasteEvents + dateRange;
+  return routes.tooling.matomo.report.copyPasteEvents + dateRange;
 };
 
 /**
