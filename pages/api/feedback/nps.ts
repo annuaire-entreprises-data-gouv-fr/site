@@ -1,12 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { logEventInMatomo } from '#utils/analytics/matomo';
-import {
-  logSuggestionToNotion,
-  notionFeedbacksLink,
-} from '#utils/integrations/notion';
+import { logInGrist } from '#utils/integrations/grist';
 import logInTchap from '#utils/integrations/tchap';
 import logErrorInSentry from '#utils/sentry';
 
+/**
+ * Log feedback in relevant platform
+ *
+ * NB : uses many async functions but intentionnally DO NOT await them
+ * @param req
+ */
 const logAllEvents = async (req: NextApiRequest) => {
   try {
     const today = new Date();
@@ -18,25 +20,27 @@ const logAllEvents = async (req: NextApiRequest) => {
     const text = req.body['textarea'] || null;
     const email = req.body['email'] || NA;
 
-    const commentaire = text
-      ? ` \nCommentaire : ${text} \nEmail : ${email} \nLien notion : ${notionFeedbacksLink}`
-      : '';
+    // grist
+    logInGrist('nps-feedbacks', [
+      {
+        visitorType,
+        mood,
+        text,
+        email,
+        origin,
+        date: today.toISOString().split('T')[0],
+        fullDate: today,
+        uuid,
+      },
+    ]);
 
-    const tchapText = `Note : ${mood}/10 \nVisiteur : ${visitorType} \nOrigine : ${origin}${commentaire}`;
-
-    // async functions but no need to await them
-    logInTchap(tchapText);
-    logEventInMatomo(
-      'feedback:nps',
-      NA,
-      `mood=${mood}&type=${visitorType}&origin=${origin}&date=${
-        today.toISOString().split('T')[0]
-      }&uuid=${uuid}`,
-      'nps'
-    );
+    // tchap : only if text
     if (text) {
-      // async functions but no need to await them
-      logSuggestionToNotion(visitorType, email, text);
+      const commentaire = text
+        ? ` \nCommentaire : ${text} \nEmail : ${email}`
+        : '';
+      const tchapText = `Note : ${mood}/10 \nVisiteur : ${visitorType} \nOrigine : ${origin}${commentaire}`;
+      logInTchap(tchapText);
     }
   } catch (e: any) {
     logErrorInSentry(e, { errorName: 'Error in form submission' });
