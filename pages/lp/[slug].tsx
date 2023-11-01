@@ -1,15 +1,15 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import { diamond } from '#components-ui/logo/home-h1';
 import AdministrationDescription from '#components/administrations/administration-description';
 import { LayoutDefault } from '#components/layouts/layout-default';
+import { RenderMarkdownServerOnly } from '#components/markdown';
 import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
 import {
+  ILandingPage,
   getAllLandingPages,
   getLandingPage,
-  ILandingPage,
 } from '#models/landing-pages';
 import { IPropsWithMetadata } from '#utils/server-side-props-helper/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
@@ -67,13 +67,13 @@ const LandingPage: NextPageWithLayout<IProps> = ({
           <div key={block.title} className="fr-col-12 fr-col-sm-4 fr-col-md-4">
             <div className="reassurance">
               <h2>{block.title}</h2>
-              <ReactMarkdown>{block.body}</ReactMarkdown>
+              <RenderMarkdownServerOnly>{block.body}</RenderMarkdownServerOnly>
             </div>
           </div>
         ))}
       </div>
       <br />
-      {body && <ReactMarkdown>{body}</ReactMarkdown>}
+      <RenderMarkdownServerOnly>{body}</RenderMarkdownServerOnly>{' '}
       {datasources.length > 0 && (
         <h2>Quelles sont les sources des données utilisées ?</h2>
       )}

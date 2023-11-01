@@ -11,7 +11,7 @@ async function logoutRoute(_req: NextApiRequest, res: NextApiResponse) {
     const url = await monCompteProLogoutUrl();
     res.redirect(url);
   } catch (e: any) {
-    logErrorInSentry('Logout failed', { details: e.toString() });
+    logErrorInSentry(e, { errorName: 'Logout failed' });
     res.redirect('/connexion/au-revoir');
   }
 }

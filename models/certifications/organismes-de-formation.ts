@@ -33,9 +33,9 @@ export const getOrganismesDeFormation = async (
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);
     }
-    logErrorInSentry('Error in Organisme de formation', {
+    logErrorInSentry(e, {
       siren: uniteLegale.siren,
-      details: e.toString(),
+      errorName: 'Error in Organisme de formation',
     });
     return APINotRespondingFactory(EAdministration.MTPEI, 500);
   }

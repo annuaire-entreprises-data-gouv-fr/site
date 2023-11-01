@@ -33,9 +33,9 @@ export const getEntrepreneurSpectaclesCertification = async (
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.MC, 404);
     }
-    logErrorInSentry('Error in API Spectacles Vivants', {
+    logErrorInSentry(e, {
       siren: uniteLegale.siren,
-      details: e.toString(),
+      errorName: 'Error in API Spectacles Vivants',
     });
     return APINotRespondingFactory(EAdministration.MC, 500);
   }

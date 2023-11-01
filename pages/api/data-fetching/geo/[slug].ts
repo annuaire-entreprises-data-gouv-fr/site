@@ -45,8 +45,8 @@ const geo = async (
       res.status(200).json(results);
     }
   } catch (e: any) {
-    logErrorInSentry('Error in API Geo (suggest)', {
-      details: e.toString(),
+    logErrorInSentry(e, {
+      errorName: 'Error in API Geo (suggest)',
     });
     res
       .status(e.status || 500)

@@ -60,9 +60,9 @@ export const getRGECertifications = async (
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.ADEME, 404);
     }
-    logErrorInSentry('Error in API RGE', {
+    logErrorInSentry(e, {
       siren: uniteLegale.siren,
-      details: e.toString(),
+      errorName: 'Error in API RGE',
     });
     return APINotRespondingFactory(EAdministration.ADEME, 500);
   }

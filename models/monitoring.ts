@@ -1,6 +1,6 @@
 import { clientMonitorings } from '#clients/monitoring';
 import logErrorInSentry from '#utils/sentry';
-import { administrationsMetaData, EAdministration } from './administrations';
+import { administrationsMetaData } from './administrations';
 
 export type IRatio = {
   ratio: string;
@@ -29,8 +29,8 @@ const getMonitorings = async (): Promise<IMonitoring[]> => {
   try {
     return await clientMonitorings();
   } catch (e: any) {
-    logErrorInSentry('Error while fetching monitoring', {
-      details: e.message,
+    logErrorInSentry(e, {
+      errorName: 'Error while fetching monitoring',
     });
     return [];
   }

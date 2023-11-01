@@ -3,17 +3,24 @@ import constants from '#models/constants';
 import { IDefaultRequestConfig } from '..';
 import { httpErrorHandler } from '../utils/http-error-handler';
 
+function buildUrl(url: string, params: any) {
+  try {
+    const serializedParams = Object.keys(params)
+      .map((k) => `${k}=${params[k]}`)
+      .join('&');
+
+    const separator = url.indexOf('?') > 0 ? '&' : '?';
+    return `${url}${separator}${serializedParams}`;
+  } catch (e) {
+    return url;
+  }
+}
+
 export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
   if (!config.url) {
-    throw new Error('Url required');
+    throw new Error('Url is required');
   }
-  if (
-    config.params ||
-    config.useCache ||
-    config.method ||
-    config.data ||
-    config.headers
-  ) {
+  if (config.useCache || config.method || config.data || config.headers) {
     throw new Error('Feature not yet supported on frontend');
   }
 
@@ -24,7 +31,7 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
   }, config.timeout || constants.timeout.XXXXL);
 
   try {
-    const response = await fetch(config.url, {
+    const response = await fetch(buildUrl(config.url, config.params), {
       signal: controller.signal,
     });
     const isJson = response.headers

@@ -40,9 +40,9 @@ export const getEtablissementsScolaires = async (
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.EDUCATION_NATIONALE, 404);
     }
-    logErrorInSentry('Error in API Education nationale', {
+    logErrorInSentry(e, {
       siren,
-      details: e.toString(),
+      errorName: 'Error in API Education nationale',
     });
     return APINotRespondingFactory(EAdministration.EDUCATION_NATIONALE, 500);
   }

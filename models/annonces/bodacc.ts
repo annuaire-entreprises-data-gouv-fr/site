@@ -15,9 +15,9 @@ export const getAnnoncesBodaccFromSlug = async (
   try {
     return await clientBodacc(siren);
   } catch (e: any) {
-    logErrorInSentry('Error in API BODACC', {
+    logErrorInSentry(e, {
       siren,
-      details: e.toString(),
+      errorName: 'Error in API Bodacc',
     });
     return APINotRespondingFactory(EAdministration.DILA, 500);
   }

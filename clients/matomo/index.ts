@@ -279,8 +279,8 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       ),
     };
   } catch (e: any) {
-    logErrorInSentry('Failed to compute matomo stats', {
-      details: e.toString(),
+    logErrorInSentry(e, {
+      errorName: 'Failed to compute matomo stats',
     });
     return {
       visits: [],

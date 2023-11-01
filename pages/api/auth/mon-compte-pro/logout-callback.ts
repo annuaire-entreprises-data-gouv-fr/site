@@ -11,7 +11,7 @@ async function loginCallback(req: NextApiRequest, res: NextApiResponse) {
     await req.session.save();
     res.redirect('/connexion/au-revoir');
   } catch (e: any) {
-    logErrorInSentry('Logout failed', { details: e.toString() });
+    logErrorInSentry(e, { errorName: 'Logout failed' });
     res.redirect('/connexion/au-revoir');
   }
 }

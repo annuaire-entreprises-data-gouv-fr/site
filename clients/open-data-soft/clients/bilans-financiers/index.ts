@@ -1,10 +1,9 @@
 import { HttpNotFound } from '#clients/exceptions';
+import odsClient from '#clients/open-data-soft';
 import routes from '#clients/routes';
-import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IBilanFinancier } from '#models/finances-societe/types';
 import { Siren } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
-import odsClient from '../..';
 import { IAPIBilanResponse } from './interface';
 
 /**
@@ -28,7 +27,6 @@ const clientBilansFinanciers = async (siren: Siren) => {
   }
 
   const bilans = mapToDomainObject(response.records);
-
   return {
     bilans,
     hasBilanConsolide: bilans[0].estConsolide,
@@ -129,8 +127,10 @@ const mapToBilan = (financialData: IAPIBilanResponse): IBilanFinancier => {
   };
 };
 
-const stubbedClientBilansFinanciers = stubClient({
-  clientBilansFinanciers,
-});
+// const stubbedClientBilansFinanciers = stubClient({
+//   clientBilansFinanciers,
+// });
 
-export { stubbedClientBilansFinanciers as clientBilansFinanciers };
+// export { stubbedClientBilansFinanciers as clientBilansFinanciers };
+
+export { clientBilansFinanciers };

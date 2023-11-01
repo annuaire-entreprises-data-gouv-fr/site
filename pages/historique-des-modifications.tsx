@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next';
-import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import { RenderMarkdownServerOnly } from '#components/markdown';
 import Meta from '#components/meta';
 import changelog, { IChangelog } from '#models/historique-modifications';
 import { NextPageWithLayout } from './_app';
@@ -21,22 +20,18 @@ const Changelog: NextPageWithLayout<IProps> = ({ changelog }) => (
     </p>
     <ul>
       {changelog.map((change) => (
-        <li key={change.title}>
+        <li key={change.date}>
           <div className="date">
             <b>{change.date}</b>
           </div>
           <div>
-            <ReactMarkdown
-              components={{
-                p: 'div',
-              }}
-            >
-              {change.title}
-            </ReactMarkdown>
+            <RenderMarkdownServerOnly>{change.title}</RenderMarkdownServerOnly>
             {change.description && (
-              <i>
-                <ReactMarkdown>{change.description}</ReactMarkdown>
-              </i>
+              <em>
+                <RenderMarkdownServerOnly>
+                  {change.description}
+                </RenderMarkdownServerOnly>
+              </em>
             )}
           </div>
         </li>

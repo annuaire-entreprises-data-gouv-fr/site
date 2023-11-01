@@ -12,8 +12,12 @@ import TextWrapper from '#components-ui/text-wrapper';
 import { LayoutSimple } from '#components/layouts/layout-simple';
 import MatomoEvent from '#components/matomo-event';
 import { allData } from '#models/administrations';
+import {
+  FAQTargets,
+  IFaqArticle,
+  allFaqArticlesByTarget,
+} from '#models/article/faq';
 import constants from '#models/constants';
-import { FAQTargets, IArticle, allFaqArticlesByTarget } from '#models/faq';
 import { NextPageWithLayout } from 'pages/_app';
 
 enum EQuestionType {
@@ -28,7 +32,7 @@ type IProps = {
   questionType: EQuestionType;
   setQuestionType: (type: EQuestionType) => void;
   userType: string;
-  questions: IArticle[];
+  questions: IFaqArticle[];
 };
 
 const Answer: React.FC<PropsWithChildren<{}>> = ({ children }) => (

@@ -40,7 +40,7 @@ export const getAssociation = async (
       return APINotRespondingFactory(EAdministration.DJEPVA, 404);
     }
 
-    logErrorInSentry('Error in API RNA', { siren, details: e.toString() });
+    logErrorInSentry(e, { siren, errorName: 'Error in API RNA' });
     return APINotRespondingFactory(EAdministration.DJEPVA, 500);
   }
 };
@@ -77,9 +77,9 @@ const verifyAdressConsistency = async (
     return false;
   } catch (e: any) {
     if (!(e instanceof HttpNotFound)) {
-      logErrorInSentry('Error in API BAN', {
+      logErrorInSentry(e, {
         siren,
-        details: e.toString(),
+        errorName: 'Error in API BAN',
       });
     }
     return false;

@@ -12,7 +12,6 @@ import {
   Siret,
 } from '#utils/helpers';
 import { IAPINotRespondingError } from './api-not-responding';
-import { IBilanFinancierAssociation } from './finances-societe/types';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 export interface IConventionCollective {

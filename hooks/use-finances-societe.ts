@@ -25,7 +25,7 @@ export const useFinancesSociete = (uniteLegale: IUniteLegale) => {
             return APINotRespondingFactory(EAdministration.MEF, 404);
           }
           logErrorInSentry(e, {
-            errorMessage: 'Error in API data financieres',
+            errorName: 'Error in API data financieres',
             siren,
           });
           return APINotRespondingFactory(EAdministration.MEF, e.status || 500);
@@ -33,7 +33,7 @@ export const useFinancesSociete = (uniteLegale: IUniteLegale) => {
 
         setFinances(response);
       } catch (e: any) {
-        logErrorInSentry(e, { errorMessage: 'Error in API data financieres' });
+        logErrorInSentry(e, { errorName: 'Error in API data financieres' });
         setFinances(APINotRespondingFactory(EAdministration.MEF, 500));
       }
     };

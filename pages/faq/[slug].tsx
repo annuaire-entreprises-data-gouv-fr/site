@@ -1,14 +1,19 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import React from 'react';
-import ReactMarkdown from 'react-markdown';
 import Breadcrumb from '#components-ui/breadcrumb';
 import ButtonLink from '#components-ui/button';
 import TextWrapper from '#components-ui/text-wrapper';
+import { RenderMarkdownServerOnly } from '#components/markdown';
 import Meta from '#components/meta';
-import { allFaqArticles, getFaqArticle, IArticle } from '#models/faq';
+import {
+  IFaqArticle,
+  allFaqArticles,
+  getFaqArticle,
+} from '#models/article/faq';
 import { NextPageWithLayout } from 'pages/_app';
 
-const FAQArticle: NextPageWithLayout<{ article: IArticle }> = ({ article }) => (
+const FAQArticle: NextPageWithLayout<{ article: IFaqArticle }> = ({
+  article,
+}) => (
   <>
     <Meta
       title={article.seo.title || article.title}
@@ -24,7 +29,7 @@ const FAQArticle: NextPageWithLayout<{ article: IArticle }> = ({ article }) => (
         ]}
       />
       <h1>{article.title}</h1>
-      <ReactMarkdown>{article.body}</ReactMarkdown>
+      <RenderMarkdownServerOnly>{article.body}</RenderMarkdownServerOnly>
       {article.cta ? (
         <div className="layout-left">
           <ButtonLink to={article.cta.to}>{article.cta.label}</ButtonLink>
