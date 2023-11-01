@@ -1,4 +1,3 @@
-import Info from '#components-ui/alerts/info';
 import { LineChart } from '#components/chart/line';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
@@ -23,7 +22,10 @@ export const FinancesAssociationSection: React.FC<{
 }> = ({ association }) => {
   const { data } = association.association;
   const financesAssociation =
-    (!!data && !isAPINotResponding(data) && data?.bilans) ||
+    (!!data &&
+      !isAPINotResponding(data) &&
+      data?.bilans &&
+      data.bilans.length > 0) ||
     APINotRespondingFactory(EAdministration.MI, 404);
 
   return (
@@ -35,13 +37,6 @@ export const FinancesAssociationSection: React.FC<{
     >
       {(bilans) => (
         <>
-          <Info>
-            Cette section est un travail en cours.
-            <br />
-            Si vous découvrez une erreur, merci de nous en faire part et nous la
-            corrigerons au plus vite (
-            <a href={constants.links.mailto}>{constants.links.mail}</a>).
-          </Info>
           <p>
             Voici les résultats financiers déclarés par le siège social de
             l’association&nbsp;:
