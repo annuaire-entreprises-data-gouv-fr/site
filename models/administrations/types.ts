@@ -1,4 +1,3 @@
-import { EFAQTargets } from '#models/faq';
 import { EAdministration } from '.';
 
 export type IAdministrationsMetaData = {

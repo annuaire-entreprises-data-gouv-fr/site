@@ -1,16 +1,10 @@
-export type IArticle = {
-  slug: string;
+import { loadAll } from '#utils/static-pages/load-all';
+import { IArticle } from '../type';
+
+export type IFaqArticle = {
   administrations: string[];
   faqTargets: EFAQTargets[];
-  title: string;
-  seo: {
-    description: string;
-    title?: string;
-  };
-  body: string;
-  cta: { label: string; to: string };
-  more: { label: string; href: string }[];
-};
+} & IArticle;
 
 export enum EFAQTargets {
   AGENT = 'agent',
@@ -30,31 +24,8 @@ export const FAQTargets = {
   [EFAQTargets.PARTICULIER]: 'Particulier',
 };
 
-const loadAllArticles = () => {
-  const articles = [] as IArticle[];
-  //@ts-ignore
-  const faqArticlesFolderContext = require.context(
-    '/data/faq',
-    false,
-    /\.yml$/
-  );
-  const keys = faqArticlesFolderContext.keys();
-  const values = keys.map(faqArticlesFolderContext);
-
-  keys
-    // weirdly context add duplicates - this filter removes them
-    .filter((k: string) => k.indexOf('./') === 0)
-    .forEach((key: string, index: number) => {
-      const slug = key.replace('.yml', '').replace('./', '');
-      //@ts-ignore
-      articles.push({ ...values[index], slug });
-    });
-
-  return articles;
-};
-
 export const loadAllFaqArticlesByTarget = () => {
-  const articlesByTargets: { [key: string]: IArticle[] } = {};
+  const articlesByTargets: { [key: string]: IFaqArticle[] } = {};
 
   allFaqArticles.forEach((article) => {
     article.faqTargets.forEach((target) => {
@@ -89,8 +60,8 @@ export const getFaqArticle = (slug: string) => {
   return allFaqArticles.find((article) => article.slug === slug);
 };
 
-export const getFaqArticlesByTag = (tagList: string[]): IArticle[] => {
-  const filteredArticles = new Set<IArticle>();
+export const getFaqArticlesByTag = (tagList: string[]): IFaqArticle[] => {
+  const filteredArticles = new Set<IFaqArticle>();
   allFaqArticles.forEach((article) => {
     tagList.forEach((tag) => {
       if (article.administrations.indexOf(tag) > -1) {
@@ -102,6 +73,9 @@ export const getFaqArticlesByTag = (tagList: string[]): IArticle[] => {
   return Array.from(filteredArticles);
 };
 
-export const allFaqArticles = loadAllArticles();
+export const allFaqArticles = loadAll<IFaqArticle>(
+  // @ts-ignore
+  require.context('data/faq', false, /\.yml$/)
+);
 
 export const allFaqArticlesByTarget = loadAllFaqArticlesByTarget();

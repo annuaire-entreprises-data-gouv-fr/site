@@ -1,12 +1,10 @@
 import { GetStaticProps } from 'next';
-import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
-import ReactMarkdown from 'react-markdown';
 import TextWrapper from '#components-ui/text-wrapper';
+import parseMarkdownSync from '#components/markdown/parse-markdown';
 import Meta from '#components/meta';
 import StructuredDataFAQ from '#components/structured-data/faq';
+import { IDefinition, allDefinitions } from '#models/article/definitions';
 import { NextPageWithLayout } from 'pages/_app';
-import { IDefinition, allDefinitions } from '#models/definitions';
 
 const AllDefinitionsPage: NextPageWithLayout<{
   definitions: IDefinition[];
@@ -19,7 +17,7 @@ const AllDefinitionsPage: NextPageWithLayout<{
     <StructuredDataFAQ
       data={definitions.map(({ title, body }) => [
         title,
-        renderToStaticMarkup(<ReactMarkdown>{body}</ReactMarkdown>),
+        parseMarkdownSync(body).html,
       ])}
     />
     <TextWrapper>
@@ -27,7 +25,12 @@ const AllDefinitionsPage: NextPageWithLayout<{
       <ul>
         {definitions.map(({ slug, title }) => (
           <li key={slug}>
-            <a href={`/definitions/${slug}`} aria-label={title+', voir la définition'}>{title}</a>
+            <a
+              href={`/definitions/${slug}`}
+              aria-label={title + ', voir la définition'}
+            >
+              {title}
+            </a>
           </li>
         ))}
       </ul>
