@@ -51,7 +51,7 @@ export const Tabs: React.FC<{
     {
       ficheType: FICHE.INFORMATION,
       label: `Fiche résumé`,
-      pathPrefix: '/entreprise/',
+      fullPath: `/entreprise/${uniteLegale.chemin}`,
       noFollow: false,
       shouldDisplay: true,
       width: '80px',
@@ -131,19 +131,28 @@ export const Tabs: React.FC<{
       <div className="title-tabs">
         {tabs
           .filter(({ shouldDisplay }) => shouldDisplay)
-          .map(({ pathPrefix, ficheType, label, noFollow, width = 'auto' }) => (
-            <a
-              className={`${
-                currentFicheType === ficheType ? 'active' : ''
-              } no-style-link`}
-              href={`${pathPrefix}${uniteLegale.siren}`}
-              rel={noFollow ? 'nofollow' : ''}
-              key={label}
-              style={{ width }}
-            >
-              {currentFicheType === ficheType ? label : <h2>{label}</h2>}
-            </a>
-          ))}
+          .map(
+            ({
+              fullPath,
+              pathPrefix,
+              ficheType,
+              label,
+              noFollow,
+              width = 'auto',
+            }) => (
+              <a
+                className={`${
+                  currentFicheType === ficheType ? 'active' : ''
+                } no-style-link`}
+                href={fullPath || `${pathPrefix}${uniteLegale.siren}`}
+                rel={noFollow ? 'nofollow' : ''}
+                key={label}
+                style={{ width }}
+              >
+                {currentFicheType === ficheType ? label : <h2>{label}</h2>}
+              </a>
+            )
+          )}
         {currentFicheType === FICHE.ETABLISSEMENT && (
           <>
             <div style={{ flexGrow: 1 }} />
