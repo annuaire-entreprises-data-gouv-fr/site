@@ -318,7 +318,31 @@ export class NotASiretError extends Error {
 /**
  * This is not a valid IdRna
  */
-export class NotAValidIdRnaError extends Error {
+export class NotAnIdRnaError extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+/**
+ * This is not a valid IdRnf
+ */
+export class NotAnIdRnfError extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+/**
+ * This is a valid siren but it was not found
+ */
+export class RnfNotFoundError extends Error {
+  constructor(public message: string) {
+    super();
+  }
+}
+
+export class IsLikelyAnIdRnfException extends Error {
   constructor(public message: string) {
     super();
   }

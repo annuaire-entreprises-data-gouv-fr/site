@@ -8,7 +8,7 @@ import {
 import { IdRna, Siren, verifyIdRna } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { IImmatriculation } from '.';
-import { NotAValidIdRnaError } from '..';
+import { NotAnIdRnaError } from '..';
 
 export interface IImmatriculationJOAFE extends IImmatriculation {
   siren: Siren;
@@ -41,7 +41,7 @@ export const getImmatriculationJOAFE = async (
       siteLink: annonceCreation.path,
     } as IImmatriculationJOAFE;
   } catch (e: any) {
-    if (e instanceof HttpNotFound || e instanceof NotAValidIdRnaError) {
+    if (e instanceof HttpNotFound || e instanceof NotAnIdRnaError) {
       return APINotRespondingFactory(EAdministration.DILA, 404);
     }
 

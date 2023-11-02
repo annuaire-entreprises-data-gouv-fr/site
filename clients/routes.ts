@@ -53,6 +53,7 @@ const routes = {
       'https://geo.api.gouv.fr/departements?fields=code&format=json&zone=metro,drom,com',
     region: 'https://geo.api.gouv.fr/regions?limit=3',
   },
+  rnf: 'https://rnf.dso.numerique-interieur.com/api/foundations/',
   journalOfficielAssociations: {
     ods: {
       metadata:

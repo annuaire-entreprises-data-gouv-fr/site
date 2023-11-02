@@ -1,4 +1,4 @@
-import { NotAValidIdRnaError } from '#models/index';
+import { NotAnIdRnaError } from '#models/index';
 
 /**
  * IdRna types
@@ -21,11 +21,11 @@ export const isIdRna = (slug: string): slug is IdRna => {
 };
 
 /**
- * Throw an exception if a string is not a siret
+ * Throw an exception if a string is not a RNA
  * */
 export const verifyIdRna = (slug: string): IdRna => {
   if (!slug || !isIdRna(slug)) {
-    throw new NotAValidIdRnaError(slug);
+    throw new NotAnIdRnaError(slug);
   }
   return slug;
 };

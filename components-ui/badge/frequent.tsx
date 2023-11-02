@@ -34,6 +34,23 @@ export const AssociationBadge = ({
     backgroundColor="#e5d2f9"
   />
 );
+
+export const FondationBadge = ({
+  small = false,
+  isSelected = false,
+  onClick,
+}: IPartialBadgeProps) => (
+  <Badge
+    small={small}
+    onClick={onClick}
+    icon="communityFill"
+    isSelected={isSelected}
+    label="Fondation"
+    fontColor="#3d0d71"
+    backgroundColor="#ffb8e3"
+  />
+);
+
 export const EntrepriseIndividuelleBadge = ({
   small = false,
   isSelected = false,

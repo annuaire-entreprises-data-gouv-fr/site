@@ -3,16 +3,22 @@ import { GetServerSidePropsContext } from 'next';
 import { HttpNotFound } from '#clients/exceptions';
 import {
   IsLikelyASirenOrSiretException,
+  IsLikelyAnIdRnfException,
   NotASirenError,
   NotASiretError,
+  NotAnIdRnfError,
   NotLuhnValidSirenError,
   NotLuhnValidSiretError,
+  RnfNotFoundError,
   SearchEngineError,
   SirenNotFoundError,
   SiretNotFoundError,
 } from '#models/index';
 import { verifySiren, verifySiret } from '#utils/helpers';
 import {
+  redirectIdRnfIntrouvable,
+  redirectIdRnfInvalid,
+  redirectIfIdRnf,
   redirectIfSiretOrSiren,
   redirectPageNotFound,
   redirectSearchEngineError,
@@ -43,6 +49,12 @@ const handleExceptions = (exception: any, req: IncomingMessage | undefined) => {
       exception instanceof NotASiretError
     ) {
       return redirectPageNotFound(message, scope);
+    } else if (exception instanceof IsLikelyAnIdRnfException) {
+      return redirectIfIdRnf(message);
+    } else if (exception instanceof NotAnIdRnfError) {
+      return redirectIdRnfInvalid(message);
+    } else if (exception instanceof RnfNotFoundError) {
+      return redirectIdRnfIntrouvable(message);
     } else if (exception instanceof HttpNotFound) {
       return redirectPageNotFound(message, scope);
     } else if (exception instanceof SearchEngineError) {

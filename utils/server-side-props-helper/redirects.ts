@@ -71,6 +71,35 @@ export const redirectSirenOrSiretIntrouvable = (
   };
 };
 
+export const redirectIfIdRnf = (slug: string) => {
+  return {
+    redirect: {
+      destination: `/fondation/${slug}`,
+      permanent: false,
+    },
+  };
+};
+
+export const redirectIdRnfIntrouvable = (idRnf: string, scope?: IScope) => {
+  logWarningInSentry('Redirect Id RNF not found', scope);
+  return {
+    redirect: {
+      destination: `/erreur/introuvable/${idRnf}`,
+      permanent: false,
+    },
+  };
+};
+
+export const redirectIdRnfInvalid = (idRnf: string, scope?: IScope) => {
+  logWarningInSentry('Redirect siren or siret invalid', scope);
+  return {
+    redirect: {
+      destination: `/erreur/invalide/${idRnf}`,
+      permanent: false,
+    },
+  };
+};
+
 export const redirectIfSiretOrSiren = (siretOrSiren: string) => {
   let destination;
   if (hasSiretFormat(siretOrSiren)) {

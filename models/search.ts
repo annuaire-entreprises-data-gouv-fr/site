@@ -7,12 +7,14 @@ import {
   escapeTerm,
   isLikelyASiretOrSiren,
 } from '#utils/helpers';
+import { isIdRnfValid } from '#utils/helpers/id-rnf';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logWarningInSentry } from '#utils/sentry';
 import {
   IEtablissement,
-  IsLikelyASirenOrSiretException,
   IUniteLegale,
+  IsLikelyASirenOrSiretException,
+  IsLikelyAnIdRnfException,
   NotEnoughParamsException,
   SearchEngineError,
 } from '.';
@@ -42,17 +44,32 @@ const noResults = {
   notEnoughParams: false,
 };
 
+/**
+ * Checks if term looks like a siren, siret or rnf
+ * @param term
+ */
+const formatChecks = (term: string) => {
+  const likelyASiretOrSiren = isLikelyASiretOrSiren(term);
+
+  if (likelyASiretOrSiren) {
+    throw new IsLikelyASirenOrSiretException(term);
+  }
+
+  const isLikelyAnIdRnf = isIdRnfValid(term);
+
+  if (isLikelyAnIdRnf) {
+    throw new IsLikelyAnIdRnfException(term);
+  }
+};
+
 const search = async (
   searchTerm: string,
   page: number,
   searchFilterParams: SearchFilterParams
 ) => {
   const cleanedTerm = cleanSearchTerm(searchTerm);
-  const likelyASiretOrSiren = isLikelyASiretOrSiren(cleanedTerm);
 
-  if (likelyASiretOrSiren) {
-    throw new IsLikelyASirenOrSiretException(cleanedTerm);
-  }
+  formatChecks(cleanedTerm);
 
   try {
     const escapedSearchTerm = escapeTerm(searchTerm);
@@ -69,7 +86,10 @@ const search = async (
       return { ...noResults, badParams: true };
     }
 
-    if (e instanceof IsLikelyASirenOrSiretException) {
+    if (
+      e instanceof IsLikelyASirenOrSiretException ||
+      e instanceof IsLikelyAnIdRnfException
+    ) {
       throw e;
     }
     if (e instanceof HttpNotFound) {
