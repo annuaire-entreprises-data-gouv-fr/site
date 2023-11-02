@@ -91,7 +91,7 @@ export const redirectIdRnfIntrouvable = (idRnf: string, scope?: IScope) => {
 };
 
 export const redirectIdRnfInvalid = (idRnf: string, scope?: IScope) => {
-  logWarningInSentry('Redirect siren or siret invalid', scope);
+  logWarningInSentry('Redirect idRnf invalid', scope);
   return {
     redirect: {
       destination: `/erreur/invalide/${idRnf}`,
