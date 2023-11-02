@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { HomeH1 } from '#components-ui/logo/home-h1';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import Meta from '#components/meta';
@@ -72,19 +72,13 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   }
 );
 
-Index.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated,
-  session
-) {
+Index.getLayout = function getLayout(page: ReactElement, session) {
   return (
-    <LayoutDefault
-      isBrowserOutdated={isBrowserOutdated}
-      searchBar={false}
-      session={session}
-    >
-      {page}
-    </LayoutDefault>
+    <>
+      <LayoutDefault searchBar={false} session={session}>
+        {page}
+      </LayoutDefault>
+    </>
   );
 };
 

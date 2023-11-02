@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { PropsWithChildren } from 'react';
 import { Question } from '#components-ui/question';
-import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
 import { Header } from '#components/header';
@@ -12,7 +11,6 @@ import { ISession } from '#utils/session';
 
 type IProps = {
   currentSearchTerm?: string;
-  isBrowserOutdated: boolean;
   map?: boolean;
   searchFilterParams?: IParams;
   session?: ISession | null;
@@ -24,7 +22,6 @@ type IProps = {
  */
 export const LayoutSearch = ({
   children,
-  isBrowserOutdated,
   map,
   session = null,
 }: PropsWithChildren<IProps>) => {
@@ -33,7 +30,6 @@ export const LayoutSearch = ({
 
   return (
     <div id="page-layout">
-      {isBrowserOutdated && <BrowserIsOutdatedBanner />}
       <WeNeedYouModal />
       <NPSBanner />
 

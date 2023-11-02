@@ -151,15 +151,8 @@ const LandingPage: NextPageWithLayout<IProps> = ({
   </>
 );
 
-LandingPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated: boolean
-) {
-  return (
-    <LayoutDefault isBrowserOutdated={isBrowserOutdated} searchBar={false}>
-      {page}
-    </LayoutDefault>
-  );
+LandingPage.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutDefault searchBar={false}>{page}</LayoutDefault>;
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

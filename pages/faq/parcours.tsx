@@ -319,16 +319,8 @@ const Parcours: NextPageWithLayout<{
   );
 };
 
-Parcours.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated,
-  session
-) {
-  return (
-    <LayoutSimple isBrowserOutdated={isBrowserOutdated} session={session}>
-      {page}
-    </LayoutSimple>
-  );
+Parcours.getLayout = function getLayout(page: ReactElement, session) {
+  return <LayoutSimple session={session}>{page}</LayoutSimple>;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

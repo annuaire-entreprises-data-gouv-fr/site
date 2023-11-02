@@ -1,13 +1,12 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import { LayoutSearch } from '#components/layouts/layout-search';
 import Meta from '#components/meta';
 import SearchResults from '#components/search-results';
 import { AdvancedSearchTutorial } from '#components/search-results/advanced-search-tutorial';
 import StructuredDataSearchAction from '#components/structured-data/search';
-import { ISearchResults } from '#models/search';
-import { searchWithoutProtectedSiren } from '#models/search';
+import { ISearchResults, searchWithoutProtectedSiren } from '#models/search';
 import SearchFilterParams, {
   IParams,
   hasSearchParam,
@@ -81,16 +80,8 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   }
 );
 
-SearchResultPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated,
-  session
-) {
-  return (
-    <LayoutSearch isBrowserOutdated={isBrowserOutdated} session={session}>
-      {page}
-    </LayoutSearch>
-  );
+SearchResultPage.getLayout = function getLayout(page: ReactElement, session) {
+  return <LayoutSearch session={session}>{page}</LayoutSearch>;
 };
 
 export default SearchResultPage;

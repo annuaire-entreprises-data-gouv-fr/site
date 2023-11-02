@@ -10,20 +10,26 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
       aria-label="Votre navigateur est obsolète"
     >
       <div className="fr-container">
-        <b>⚠️ Votre navigateur est obsolète : </b>
-        le site est utilisable mais certaines fonctionnalités comme le
-        déclenchement automatique des téléchargements, la recherche avancée ou
-        le copier/coller ne fonctionneront pas.
-        <br />
-        Avoir un navigateur à jour est{' '}
-        <a
-          target="_blank"
-          rel="noreferrer noopener"
-          href="https://www.ssi.gouv.fr/entreprise/precautions-elementaires/bonnes-pratiques-de-navigation-sur-linternet/"
-        >
-          recommandé par l’ANSSI pour naviguer sur internet en sécurité
-        </a>
-        .
+        <h1>⚠️ Votre navigateur est obsolète </h1>
+        <p>
+          La plupart des fonctionalités de ce site ne fonctionneront pas. Vous
+          pourrez uniquement :
+        </p>
+        <ul>
+          <li>Rechercher une entreprise par son nom ou son SIREN</li>
+          <li>Consulter la fiche résumé de l’entreprise</li>
+        </ul>
+        <p>
+          Avoir un navigateur à jour est{' '}
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://www.ssi.gouv.fr/entreprise/precautions-elementaires/bonnes-pratiques-de-navigation-sur-linternet/"
+          >
+            fortement recommandé par l’ANSSI
+          </a>{' '}
+          pour naviguer sur internet en sécurité.
+        </p>
       </div>
     </div>
     <style jsx>{`
@@ -36,6 +42,9 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
         color: #000;
         font-family: 'Marianne', sans-serif;
         border-bottom: 2px solid ${constants.colors.frBlue};
+      }
+      h1 {
+        margin-top: 0;
       }
     `}</style>
   </PrintNever>
