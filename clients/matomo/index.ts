@@ -408,6 +408,6 @@ const YYYYMMDD = (d: Date) => d.toISOString().split('T')[0];
  * format a date as it's month in french
  */
 const getMonthLabelFromDate = (d: Date) => {
-  const options = { month: 'long', year: 'numeric' } as any;
+  const options = { month: 'long', year: 'numeric', timeZone: 'UTC' } as any;
   return new Intl.DateTimeFormat('fr-FR', options).format(d);
 };

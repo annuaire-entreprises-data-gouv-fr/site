@@ -1,6 +1,8 @@
 import { libelleFromTypeVoie } from '#utils/helpers/formatting/labels';
 import logErrorInSentry from '#utils/sentry';
 
+const timeZone = 'UTC';
+
 /**
  * Wrapper that ensure every formatter is safe to run
  * @param castAndFormat
@@ -26,15 +28,18 @@ const longDateOptions = {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
+  timeZone,
 };
 
 const longDatePartial = {
   year: 'numeric',
   month: 'long',
+  timeZone,
 };
 
 const yearOption = {
   year: 'numeric',
+  timeZone,
 };
 
 /**
@@ -101,7 +106,9 @@ export const formatDateLong = safe((date: string | Date) => {
 });
 
 export const formatDate = safe((date: string | Date) =>
-  date ? new Intl.DateTimeFormat('fr-FR').format(castDate(date)) : undefined
+  date
+    ? new Intl.DateTimeFormat('fr-FR', { timeZone }).format(castDate(date))
+    : undefined
 );
 
 /**
