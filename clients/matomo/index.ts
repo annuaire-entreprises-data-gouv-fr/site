@@ -22,7 +22,7 @@ export type IMatomoStats = {
       };
     };
   }[];
-  userResponses: { [key: string]: { value: number; tooltip: string } };
+  userResponses: { [key: string]: number };
   mostCopied: { label: string; count: number }[];
   copyPasteAction: { value: number; label: string }[];
   redirectedSiren: { value: number; label: string }[];
@@ -73,9 +73,9 @@ const computeStats = (
   matomoCopyPasteEventStats: IMatomoEventStat[],
   matomoEventsCategory: IMatomoEventStat[][]
 ) => {
-  const visits = [];
-  const redirectedSiren = [];
-  const copyPasteAction = [];
+  const visits = [] as IMatomoStats['visits'];
+  const redirectedSiren = [] as IMatomoStats['redirectedSiren'];
+  const copyPasteAction = [] as IMatomoStats['copyPasteAction'];
 
   lastTwelveMonths().forEach(({ label, number }, index) => {
     const {
@@ -215,7 +215,7 @@ const getNpsRecords = async () => {
   } = {};
 
   const totals: {
-    [userTypeKey: string]: { value: number; tooltip: string };
+    [userTypeKey: string]: number;
   } = {};
 
   let totalAll = 0;
@@ -228,7 +228,11 @@ const getNpsRecords = async () => {
     const mood = parseInt(record.mood, 10);
     const date = new Date(record.date);
     const monthLabel = getMonthLabelFromDate(date);
+
     let userType = record.visitorType;
+    if (userType === 'Non renseigné') {
+      userType = 'Autre';
+    }
 
     if (!months[monthLabel]) {
       months[monthLabel] = {};
@@ -243,19 +247,11 @@ const getNpsRecords = async () => {
     months[monthLabel][userType].push(mood);
     months[monthLabel]['all'].push(mood);
 
-    totals[userType] = {
-      value: (totals[userType]?.value || 0) + 1,
-      tooltip: '',
-    };
-    totalAll += 1;
+    (totals[userType] = (totals[userType] || 0) + 1), (totalAll += 1);
   });
 
   Object.keys(totals).forEach((userTypeKey) => {
-    const percent = Math.floor((totals[userTypeKey].value / totalAll) * 100);
-
-    totals[
-      userTypeKey
-    ].tooltip = `${totals[userTypeKey].value} réponses (${percent}%)`;
+    const percent = Math.floor((totals[userTypeKey] / totalAll) * 100);
   });
 
   const nps = { months, totals };
