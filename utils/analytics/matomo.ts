@@ -13,7 +13,7 @@ const init = () => {
   if (!matomo) {
     matomo = new MatomoTracker(
       process.env.MATOMO_SITE_ID,
-      routes.matomo.tracker
+      routes.tooling.matomo.tracker
     );
   }
 };

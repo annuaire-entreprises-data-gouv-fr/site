@@ -74,18 +74,6 @@ const routes = {
     userInfo: '/api/v1/userinfo',
     logout: '/api/v1/logout',
   },
-  matomo: {
-    report: {
-      copyPasteEvents:
-        'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=5&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
-      npsEvents:
-        'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=1&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
-      bulkRequest:
-        'https://stats.data.gouv.fr/index.php?module=API&method=API.getBulkRequest&format=json',
-    },
-    tracker: 'https://stats.data.gouv.fr/piwik.php',
-  },
-  monitoring: 'https://api.uptimerobot.com/v2/getMonitors',
   egapro: {
     index: 'https://egapro.travail.gouv.fr/api/search',
     representation:
@@ -135,6 +123,21 @@ const routes = {
     rechercheUniteLegaleStaging:
       'https://recherche-entreprises.api.gouv.fr/search',
     uniteLegale: 'https://api-annuaire-entreprises.data.gouv.fr/siren?q=',
+  },
+  tooling: {
+    grist: 'https://grist.incubateur.net/api/docs/',
+    matomo: {
+      report: {
+        copyPasteEvents:
+          'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=5&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
+        npsEvents:
+          'https://stats.data.gouv.fr/index.php?module=API&format=json&idSite=145&period=range&method=Events.getNameFromCategoryId&idSubtable=1&module=API&showColumns=label,nb_events&filter_limit=9999&date=',
+        bulkRequest:
+          'https://stats.data.gouv.fr/index.php?module=API&method=API.getBulkRequest&format=json',
+      },
+      tracker: 'https://stats.data.gouv.fr/piwik.php',
+    },
+    monitoring: 'https://api.uptimerobot.com/v2/getMonitors',
   },
 };
 

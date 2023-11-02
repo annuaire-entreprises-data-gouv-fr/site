@@ -1,4 +1,5 @@
 import routes from '#clients/routes';
+import { readFromGrist } from '#utils/integrations/grist';
 import { httpGet } from '#utils/network';
 import logErrorInSentry from '#utils/sentry';
 
@@ -21,7 +22,7 @@ export type IMatomoStats = {
       };
     };
   }[];
-  userResponses: { [key: string]: { value: number; tooltip: string } };
+  userResponses: { [key: string]: number };
   mostCopied: { label: string; count: number }[];
   copyPasteAction: { value: number; label: string }[];
   redirectedSiren: { value: number; label: string }[];
@@ -55,91 +56,6 @@ const getLabel = (labelAsString: string, index: number) => {
   return labelAsString;
 };
 
-/**
- * Aggregate event by month and userType
- */
-const aggregateEvents = (
-  matomoEventStats: { label: string; nb_events: number }[][]
-) => {
-  const months: {
-    [monthKey: string]: { [userTypeKey: string]: number[] };
-  } = {};
-
-  const totals: {
-    [userTypeKey: string]: { value: number; tooltip: string };
-  } = {};
-
-  matomoEventStats
-    .flatMap((i) => i)
-    .forEach((stat) => {
-      if (stat.label.indexOf('mood=') === -1) {
-        return;
-      }
-
-      const responses = stat.label.split('&');
-      const mood = parseInt(responses[0].replace('mood=', ''), 10);
-      const date = new Date(responses[3].replace('date=', ''));
-      const monthLabel = getMonthLabelFromDate(date);
-
-      let userType = responses[1].replace('type=', '');
-
-      // rewrite legacy labels
-      if (userType === 'Administration publique') {
-        userType = 'Agent public';
-      }
-      if (userType === 'Entreprise privée') {
-        userType = 'Dirigeant';
-      }
-      if (userType === 'Association') {
-        userType = 'Salarié';
-      }
-
-      // migration from 10-based nps to 5 based on 2022-01-30, ended on 2022-02-15
-      const is5Based =
-        date > new Date('2022-01-30') && date < new Date('2022-02-15');
-      const nps = is5Based ? mood * 2 : mood;
-
-      if (userType === 'Non renseigné' || nps < 0) {
-        return;
-      }
-
-      if (!months[monthLabel]) {
-        months[monthLabel] = {};
-      }
-      if (!months[monthLabel][userType]) {
-        months[monthLabel][userType] = [];
-      }
-      if (!months[monthLabel]['all']) {
-        months[monthLabel]['all'] = [];
-      }
-
-      months[monthLabel][userType].push(nps);
-      months[monthLabel]['all'].push(nps);
-
-      totals[userType] = {
-        value: (totals[userType]?.value || 0) + 1,
-        tooltip: '',
-      };
-      totals['all'] = {
-        value: (totals['all']?.value || 0) + 1,
-        tooltip: '',
-      };
-    });
-
-  const totalAll = totals['all'].value;
-  Object.keys(totals).forEach((userTypeKey) => {
-    const percent = Math.floor((totals[userTypeKey].value / totalAll) * 100);
-
-    totals[
-      userTypeKey
-    ].tooltip = `${totals[userTypeKey].value} réponses (${percent}%)`;
-  });
-
-  delete totals['all'];
-
-  return { months, totals };
-};
-
 type IMatomoMonthlyStat = {
   nb_uniq_visitors_new: number;
   nb_uniq_visitors_returning: number;
@@ -154,52 +70,24 @@ type IMatomoEventStat = { label: string; nb_events: number };
  */
 const computeStats = (
   matomoMonthlyStats: IMatomoMonthlyStat[],
-  matomoNpsEventStats: IMatomoEventStat[][],
   matomoCopyPasteEventStats: IMatomoEventStat[],
   matomoEventsCategory: IMatomoEventStat[][]
 ) => {
-  const events = aggregateEvents(matomoNpsEventStats);
-  const lastYear = getLastYear();
-  const visits = [];
-  const redirectedSiren = [];
-  /* Currently the only action we have in matomo is copyPaste
-   *  https://stats.data.gouv.fr/index.php?module=CoreHome&action=index&idSite=145&period=range&date=previous30#?period=range&date=previous30&idSite=145&category=General_Actions&subcategory=Events_Events
-   */
-  const copyPasteAction = [];
+  const visits = [] as IMatomoStats['visits'];
+  const redirectedSiren = [] as IMatomoStats['redirectedSiren'];
+  const copyPasteAction = [] as IMatomoStats['copyPasteAction'];
 
-  const npsData: any = {};
-  const monthlyNps: IMatomoStats['monthlyNps'] = [];
-
-  for (const month in events.months) {
-    for (const property in events.months[month]) {
-      const count = events.months[month][property].length;
-      const avg =
-        events.months[month][property].reduce((sum, el = 0) => sum + el, 0) /
-        count;
-      npsData[month] = npsData[month] || {};
-      npsData[month][property] = {
-        nps: Math.max(1, Math.round(avg * 10)) / 10,
-        npsResponses: count,
-      };
-    }
-  }
-
-  for (let i = 0; i < 12; i++) {
-    lastYear.setMonth(lastYear.getMonth() + 1);
-
-    const monthLabel = getMonthLabelFromDate(lastYear);
-
+  lastTwelveMonths().forEach(({ label, number }, index) => {
     const {
       nb_visits_returning,
       nb_visits_new,
       nb_uniq_visitors_returning,
       nb_uniq_visitors_new,
-    } = matomoMonthlyStats[i];
+    } = matomoMonthlyStats[index];
 
-    // getMonth is 0-indexed
     visits.push({
-      number: lastYear.getMonth() + 1,
-      label: monthLabel,
+      number,
+      label,
       visitReturning: nb_visits_returning,
       visitUnknown: nb_visits_new,
       visitorReturning: nb_uniq_visitors_returning,
@@ -207,25 +95,20 @@ const computeStats = (
     });
 
     redirectedSiren.push({
-      label: monthLabel,
+      label,
       value:
-        matomoEventsCategory[i].find((e) => e.label === 'research:redirected')
-          ?.nb_events || 0,
+        matomoEventsCategory[index].find(
+          (e) => e.label === 'research:redirected'
+        )?.nb_events || 0,
     });
 
     copyPasteAction.push({
-      label: monthLabel,
+      label,
       value:
-        matomoEventsCategory[i].find((e) => e.label === 'action')?.nb_events ||
-        0,
+        matomoEventsCategory[index].find((e) => e.label === 'action')
+          ?.nb_events || 0,
     });
-
-    monthlyNps.push({
-      number: lastYear.getMonth() + 1,
-      label: monthLabel,
-      values: npsData[monthLabel],
-    });
-  }
+  });
 
   const mostCopiedAggregator = {} as { [key: string]: number };
 
@@ -248,10 +131,8 @@ const computeStats = (
 
   return {
     copyPasteAction,
-    monthlyNps,
     mostCopied,
     redirectedSiren,
-    userResponses: events.totals,
     visits,
   };
 };
@@ -260,23 +141,23 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
   try {
     const [
       matomoMonthlyStats,
-      matomoNpsEventStats,
       matomoCopyPasteEventStats,
       matomoEventsCategory,
+      npsRecords,
     ] = await Promise.all([
       httpGet<IMatomoMonthlyStat[]>(createPageViewUrl()),
-      getNpsEvent(),
       httpGet<IMatomoEventStat[]>(createCopyPasteEventUrl()),
       httpGet<IMatomoEventStat[][]>(createEventsCategoryUrl()),
+      getNpsRecords(),
     ]);
 
     return {
       ...computeStats(
         matomoMonthlyStats,
-        matomoNpsEventStats,
         matomoCopyPasteEventStats,
         matomoEventsCategory
       ),
+      ...npsRecords,
     };
   } catch (e: any) {
     logErrorInSentry(e, {
@@ -301,92 +182,115 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
  * Compute matomo API url to extract page view count
  */
 const createPageViewUrl = () => {
-  let baseUrl = routes.matomo.report.bulkRequest;
-  const lastYear = getLastYear();
-
-  for (let i = 0; i < 12; i++) {
-    lastYear.setMonth(lastYear.getMonth() + 1);
-    baseUrl += `&urls[${i}]=`;
-    const subRequest = `idSite=145&period=month&method=VisitFrequency.get&module=VisitFrequency&date=${YYYYMMDD(
-      lastYear
-    )}`;
+  let baseUrl = routes.tooling.matomo.report.bulkRequest;
+  lastTwelveMonths().forEach((month, index) => {
+    baseUrl += `&urls[${index}]=`;
+    const subRequest = `idSite=145&period=month&method=VisitFrequency.get&module=VisitFrequency&date=${month.firstDay}`;
 
     baseUrl += encodeURIComponent(subRequest);
-  }
+  });
 
   return baseUrl;
 };
 
-const getEventSubtableIds = async () => {
-  let baseUrl = routes.matomo.report.bulkRequest;
-  const lastYear = getLastYear();
-  for (let i = 0; i < 12; i++) {
-    lastYear.setMonth(lastYear.getMonth() + 1);
-    baseUrl += `&urls[${i}]=`;
-    const subRequest = `idSite=145&period=month&method=Events.getCategory&module=API&showColumns=idsubtable&secondaryDimension=eventName&date=${YYYYMMDD(
-      lastYear
-    )}`;
-    baseUrl += encodeURIComponent(subRequest);
-  }
-  const events = await httpGet<unknown[]>(baseUrl);
-  const filterCategory = events.map((event: any) => {
-    return event.map((ev: any) =>
-      ev.segment === 'eventCategory==feedback%3Anps' ? ev.idsubdatatable : null
-    );
-  });
-  const eventSubtableIds = filterCategory
-    .map((k: any) => k.filter((e: any) => e !== null))
-    .map((a: any) => a[0]);
-  return eventSubtableIds;
-};
-
 const createEventsCategoryUrl = () => {
-  let baseUrl = routes.matomo.report.bulkRequest;
-  const lastYear = getLastYear();
-  for (let i = 0; i < 12; i++) {
-    lastYear.setMonth(lastYear.getMonth() + 1);
-    baseUrl += `&urls[${i}]=`;
-    const subRequest = `idSite=145&period=month&method=Events.getCategory&module=API&date=${YYYYMMDD(
-      lastYear
-    )}`;
+  let baseUrl = routes.tooling.matomo.report.bulkRequest;
+  lastTwelveMonths().forEach((month, index) => {
+    baseUrl += `&urls[${index}]=`;
+    const subRequest = `idSite=145&period=month&method=Events.getCategory&module=API&date=${month.firstDay}`;
     baseUrl += encodeURIComponent(subRequest);
-  }
+  });
   return baseUrl;
 };
 
 /**
- * Compute matomo API url to extract events count
+ * Fetch from Grist and then aggregate event by month and userType
  */
-const getNpsEvent = async (): Promise<IMatomoEventStat[][]> => {
-  const lastYear = getLastYear();
-  const subtableIdsResponse = await getEventSubtableIds();
+const getNpsRecords = async () => {
+  const { records } = await readFromGrist('nps-feedbacks');
+  const npsRecords = records.map((r) => r.fields);
 
-  let baseUrl = routes.matomo.report.bulkRequest;
+  const months: {
+    [monthKey: string]: { [userTypeKey: string]: number[] };
+  } = {};
 
-  for (let i = 0; i < 12; i++) {
-    lastYear.setMonth(lastYear.getMonth() + 1);
-    baseUrl += `&urls[${i}]=`;
-    const subRequest = `idSite=145&period=month&method=Events.getNameFromCategoryId&idSubtable=${
-      subtableIdsResponse[i]
-    }&module=API&showColumns=label,nb_events&filter_limit=9999&date=${YYYYMMDD(
-      lastYear
-    )}`;
+  const totals: {
+    [userTypeKey: string]: number;
+  } = {};
 
-    baseUrl += encodeURIComponent(subRequest);
+  let totalAll = 0;
+
+  npsRecords.forEach((record) => {
+    if (record.mood === -1) {
+      return;
+    }
+
+    const mood = parseInt(record.mood, 10);
+    const date = new Date(record.date);
+    const monthLabel = getMonthLabelFromDate(date);
+
+    let userType = record.visitorType;
+    if (userType === 'Non renseigné') {
+      userType = 'Autre';
+    }
+
+    if (!months[monthLabel]) {
+      months[monthLabel] = {};
+    }
+    if (!months[monthLabel][userType]) {
+      months[monthLabel][userType] = [];
+    }
+    if (!months[monthLabel]['all']) {
+      months[monthLabel]['all'] = [];
+    }
+
+    months[monthLabel][userType].push(mood);
+    months[monthLabel]['all'].push(mood);
+
+    (totals[userType] = (totals[userType] || 0) + 1), (totalAll += 1);
+  });
+
+  Object.keys(totals).forEach((userTypeKey) => {
+    const percent = Math.floor((totals[userTypeKey] / totalAll) * 100);
+  });
+
+  const nps = { months, totals };
+  const npsData: any = {};
+  const monthlyNps: IMatomoStats['monthlyNps'] = [];
+
+  for (const month in nps.months) {
+    for (const userTypeKey in nps.months[month]) {
+      const count = nps.months[month][userTypeKey].length;
+      const avg =
+        nps.months[month][userTypeKey].reduce((sum, el = 0) => sum + el, 0) /
+        count;
+      npsData[month] = npsData[month] || {};
+      npsData[month][userTypeKey] = {
+        nps: Math.max(1, Math.round(avg * 10)) / 10,
+        npsResponses: count,
+      };
+    }
   }
 
-  return httpGet(baseUrl);
+  lastTwelveMonths().forEach(({ label, number }) => {
+    monthlyNps.push({
+      number,
+      label,
+      values: npsData[label],
+    });
+  });
+  return { monthlyNps, userResponses: nps.totals };
 };
 
 const createCopyPasteEventUrl = () => {
   const lastYear = getLastYear();
   const dateRange = `${YYYYMMDD(lastYear)},${YYYYMMDD(new Date())}`;
-  return routes.matomo.report.copyPasteEvents + dateRange;
+  return routes.tooling.matomo.report.copyPasteEvents + dateRange;
 };
 
 /**
  * Dates Helpers
- * /
+ */
 
 /**
  * return the date of the first day of the month, one-year ago
@@ -410,4 +314,22 @@ const YYYYMMDD = (d: Date) => d.toISOString().split('T')[0];
 const getMonthLabelFromDate = (d: Date) => {
   const options = { month: 'long', year: 'numeric', timeZone: 'UTC' } as any;
   return new Intl.DateTimeFormat('fr-FR', options).format(d);
+};
+
+/**
+ * Last 12 months
+ */
+const lastTwelveMonths = () => {
+  const lastYear = getLastYear();
+  const months = [];
+  for (let i = 0; i < 12; i++) {
+    lastYear.setMonth(lastYear.getMonth() + 1);
+    const monthLabel = getMonthLabelFromDate(lastYear);
+    months.push({
+      label: monthLabel,
+      number: lastYear.getMonth() + 1,
+      firstDay: YYYYMMDD(lastYear),
+    });
+  }
+  return months;
 };
