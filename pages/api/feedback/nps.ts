@@ -29,7 +29,6 @@ const logAllEvents = async (req: NextApiRequest) => {
         email,
         origin,
         date: today.toISOString().split('T')[0],
-        fullDate: today,
         uuid,
       },
     ]);

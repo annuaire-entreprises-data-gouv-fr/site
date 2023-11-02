@@ -1,6 +1,12 @@
 import routes from '#clients/routes';
 import httpClient from '#utils/network';
 
+type IGristRecords = {
+  records: {
+    fields: any;
+  }[];
+};
+
 const gristTables = {
   'nps-feedbacks': {
     docId: 'hp8PLhMGY9sNWuzGDGe6yi',
@@ -37,7 +43,7 @@ export async function logInGrist(tableKey: string, data: unknown[]) {
 }
 
 export async function readFromGrist(tableKey: string) {
-  return await httpClient({
+  return await httpClient<IGristRecords>({
     method: 'GET',
     url: getGristUrl(tableKey),
     headers: {
