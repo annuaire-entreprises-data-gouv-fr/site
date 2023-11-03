@@ -66,6 +66,11 @@ const Meta: React.FC<IProps> = ({
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        {/* <meta name="twitter:card" content="summary_large_image" /> */}
+        <meta
+          property="twitter:image"
+          content="https://annuaire-entreprises.data.gouv.fr/images/linkedin.jpg"
+        />
         <meta name="format-detection" content="telephone=no" />
 
         {/* Schema.org for Google */}
