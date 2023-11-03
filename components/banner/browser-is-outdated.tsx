@@ -12,8 +12,8 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
       <div className="fr-container">
         <h1>⚠️ Votre navigateur est obsolète </h1>
         <p>
-          La plupart des fonctionalités de ce site ne fonctionneront pas. Vous
-          pourrez uniquement :
+          La plupart des fonctionalités de ce site <b>ne fonctionneront pas</b>.
+          Vous pourrez essentiellement :
         </p>
         <ul>
           <li>Rechercher une entreprise par son nom ou son SIREN</li>
@@ -38,12 +38,13 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
         padding-bottom: 15px;
         font-size: 0.9rem;
         width: 100%;
-        background-color: #ffd0d0;
-        color: #000;
+        background-color: #b50800;
+        color: #fff;
         font-family: 'Marianne', sans-serif;
         border-bottom: 2px solid ${constants.colors.frBlue};
       }
       h1 {
+        color: #fff;
         margin-top: 0;
       }
     `}</style>
