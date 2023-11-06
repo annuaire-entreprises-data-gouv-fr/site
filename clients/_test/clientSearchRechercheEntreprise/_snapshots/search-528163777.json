@@ -34,8 +34,8 @@
           "libelleActivitePrincipale": "Travaux d’installation d’équipements thermiques et de climatisation (43.22B)",
           "trancheEffectif": "",
           "libelleTrancheEffectif": "",
-          "latitude": null,
-          "longitude": null,
+          "latitude": "48.903483",
+          "longitude": "2.347786",
           "conventionsCollectives": []
         },
         "allSiegesSiret": [],
@@ -69,8 +69,8 @@
               "libelleActivitePrincipale": "Travaux d’installation d’équipements thermiques et de climatisation (43.22B)",
               "trancheEffectif": "",
               "libelleTrancheEffectif": "",
-              "latitude": null,
-              "longitude": null,
+              "latitude": "48.903483",
+              "longitude": "2.347786",
               "conventionsCollectives": []
             }
           ],
@@ -97,8 +97,8 @@
               "libelleActivitePrincipale": "Travaux d’installation d’équipements thermiques et de climatisation (43.22B)",
               "trancheEffectif": "",
               "libelleTrancheEffectif": "",
-              "latitude": null,
-              "longitude": null,
+              "latitude": "48.903483",
+              "longitude": "2.347786",
               "conventionsCollectives": []
             }
           ],
