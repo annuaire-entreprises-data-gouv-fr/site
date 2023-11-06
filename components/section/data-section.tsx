@@ -31,35 +31,36 @@ function SectionStateMachine<T extends {}>({
       (key) => administrationsMetaData[key]
     );
     return (
-      <FadeIn delay={100}>
-        <DataSectionLoader dataSources={dataSources} />
+      <HeightTransition>
+        <FadeIn>
+          <DataSectionLoader dataSources={dataSources} />
+        </FadeIn>
+      </HeightTransition>
+    );
+  }
+  if (isAPILoading(data)) {
+    return <div style={{ minHeight: '100px' }} />;
+  }
+  if (isAPINotResponding(data)) {
+    const administrationMetaData =
+      administrationsMetaData[data.administration] || {};
+
+    return (
+      <FadeIn key={'' + showLoadingState}>
+        {data.errorType === 404 && notFoundInfo ? (
+          notFoundInfo
+        ) : (
+          <>
+            <AdministrationNotRespondingMessage
+              administrationMetaData={administrationMetaData}
+            />
+            {additionalInfoOnError ?? null}
+          </>
+        )}
       </FadeIn>
     );
-  } else {
-    if (isAPINotResponding(data)) {
-      const administrationMetaData =
-        administrationsMetaData[data.administration] || {};
-
-      return (
-        <FadeIn key={'' + showLoadingState}>
-          {data.errorType === 404 && notFoundInfo ? (
-            notFoundInfo
-          ) : (
-            <>
-              <AdministrationNotRespondingMessage
-                administrationMetaData={administrationMetaData}
-              />
-              {additionalInfoOnError ?? null}
-            </>
-          )}
-        </FadeIn>
-      );
-    } else {
-      return (
-        <FadeIn key={'' + showLoadingState}>{props.children(data)}</FadeIn>
-      );
-    }
   }
+  return <FadeIn key={'' + showLoadingState}>{props.children(data)}</FadeIn>;
 }
 
 /**
@@ -83,16 +84,14 @@ export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
   /* eslint-disable react/jsx-props-no-spreading */
   return (
     <Section {...props} lastModified={lastModified}>
-      <HeightTransition>
-        <SectionStateMachine {...props} />
-      </HeightTransition>
+      <SectionStateMachine {...props} />
     </Section>
   );
   /* eslint-enable react/jsx-props-no-spreading */
 }
 
 /** Contains the logic that prevents flickering of UI */
-function useShowLoadingState<T>(data: IAPILoading | T): data is IAPILoading {
+function useShowLoadingState<T>(data: IAPILoading | T): boolean {
   const after100ms = useTimeout(100);
   const before800ms = !useTimeout(800);
   const [dataLoadedBefore100ms, setDataLoadedBefore100ms] = useState(

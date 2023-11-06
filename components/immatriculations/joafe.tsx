@@ -1,6 +1,7 @@
 import React from 'react';
 import ButtonLink from '#components-ui/button';
 import { Icon } from '#components-ui/icon/wrapper';
+import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import { DataSection } from '#components/section/data-section';
 import { EAdministration } from '#models/administrations';
@@ -58,6 +59,7 @@ const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => (
         );
       }}
     </DataSection>
+    <BreakPageForPrint />
   </>
 );
 

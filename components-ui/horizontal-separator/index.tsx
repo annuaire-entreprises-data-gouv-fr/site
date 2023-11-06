@@ -1,4 +1,3 @@
-import BreakPageForPrint from '#components-ui/print-break-page';
 import constants from '#models/constants';
 
 export const SimpleSeparator = () => (
@@ -17,7 +16,6 @@ export const SimpleSeparator = () => (
 
 export const HorizontalSeparator = () => (
   <>
-    <BreakPageForPrint />
     <div className="horizontal-separator layout-center">
       <span className="line" />
       <span className="circle" />

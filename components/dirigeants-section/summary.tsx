@@ -1,6 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import FadeIn from '#components-ui/animation/fade-in';
-import { HeightTransition } from '#components-ui/animation/height-transition';
+import { Loader } from '#components-ui/loader';
 import { INPI, INSEE, MI } from '#components/administrations';
 import { isAPILoading } from '#models/api-loading';
 import { isAPINotResponding } from '#models/api-not-responding';
@@ -77,7 +77,13 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
       </a>
     );
   }
-
+  if (isAPILoading(immatriculationRNE)) {
+    summaries.push(
+      <span>
+        chargement des données des dirigeants en cours <Loader />
+      </span>
+    );
+  }
   const hasNoDirigeant = summaries.length === 0;
   if (hasNoDirigeant) {
     if (uniteLegale.association.idAssociation) {
@@ -89,9 +95,8 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
     } else if (isServicePublic(uniteLegale)) {
       return <NoDirigeantServicePublic />;
     } else if (
-      isAPILoading(immatriculationRNE) ||
-      (isAPINotResponding(immatriculationRNE) &&
-        !(immatriculationRNE instanceof HttpNotFound))
+      isAPINotResponding(immatriculationRNE) &&
+      !(immatriculationRNE instanceof HttpNotFound)
     ) {
       return null;
     }
@@ -99,17 +104,17 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
   }
 
   return (
-    <HeightTransition animateAppear>
-      <FadeIn>
-        Cette structure possède :
-        <ul>
-          {summaries.map((summary, index) => (
-            <li key={index}>{summary}</li>
-          ))}
-        </ul>
-        <br />
-      </FadeIn>
-    </HeightTransition>
+    <>
+      Cette structure possède :
+      <ul>
+        {summaries.map((summary, index) => (
+          <li key={index}>
+            <FadeIn>{summary}</FadeIn>
+          </li>
+        ))}
+      </ul>
+      <br />
+    </>
   );
 };
 
