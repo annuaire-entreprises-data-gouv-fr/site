@@ -39,11 +39,15 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
       //  https://stackoverflow.com/questions/44891421/detect-es6-import-compatibility
       dangerouslySetInnerHTML={{
         __html: `
-          var esModuleDisabled = typeof window !== 'undefined' 
-            && !('noModule' in HTMLScriptElement.prototype)
+          try {
+             var esModuleDisabled = typeof window !== 'undefined' 
+               && !('noModule' in HTMLScriptElement.prototype);
             
-          if (esModuleDisabled) {
-            getElementById('browser-is-outdated').style.display = 'block'
+             if (esModuleDisabled) {
+                 throw new Error('browser is outdated');
+             }
+          } catch {
+             getElementById('browser-is-outdated').style.display = 'block';
           }
         `,
       }}
