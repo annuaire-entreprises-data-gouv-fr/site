@@ -1,4 +1,7 @@
 const routes = {
+  api: {
+    rne: '/api/data-fetching/rne',
+  },
   apiEntreprise: {
     association: '/v4/djepva/api-association/associations/',
     conformite: {

@@ -1,10 +1,13 @@
-import Info from '#components-ui/alerts/info';
 import { LineChart } from '#components/chart/line';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
+import {
+  APINotRespondingFactory,
+  isAPINotResponding,
+} from '#models/api-not-responding';
 import constants from '#models/constants';
-import { IFinances } from '#models/donnees-financieres';
+import { IAssociation } from '#models/index';
 import { formatCurrency } from '#utils/helpers';
 
 const ColorCircle = ({ color }: { color: string }) => (
@@ -14,9 +17,17 @@ const ColorCircle = ({ color }: { color: string }) => (
 const colorResultat = constants.chartColors[1];
 const colorCA = constants.chartColors[4];
 
-export const FinancesAssociationSection: React.FC<IFinances> = ({
-  financesAssociation,
-}) => {
+export const FinancesAssociationSection: React.FC<{
+  association: IAssociation;
+}> = ({ association }) => {
+  const { data } = association.association;
+  const financesAssociation =
+    (!!data &&
+      !isAPINotResponding(data) &&
+      data?.bilans.length > 0 &&
+      data?.bilans) ||
+    APINotRespondingFactory(EAdministration.MI, 404);
+
   return (
     <DataSection
       notFoundInfo="Aucun indicateur financier n’a été retrouvé pour cette association."
@@ -26,13 +37,6 @@ export const FinancesAssociationSection: React.FC<IFinances> = ({
     >
       {(bilans) => (
         <>
-          <Info>
-            Cette section est un travail en cours.
-            <br />
-            Si vous découvrez une erreur, merci de nous en faire part et nous la
-            corrigerons au plus vite (
-            <a href={constants.links.mailto}>{constants.links.mail}</a>).
-          </Info>
           <p>
             Voici les résultats financiers déclarés par le siège social de
             l’association&nbsp;:

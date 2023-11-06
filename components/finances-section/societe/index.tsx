@@ -5,8 +5,9 @@ import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import constants from '#models/constants';
-import { IFinances } from '#models/donnees-financieres';
+import { IUniteLegale } from '#models/index';
 import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
+import useFinancesSociete from 'hooks/use-finances-societe';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -14,10 +15,11 @@ const ColorCircle = ({ color }: { color: string }) => (
 const colorResultat = constants.chartColors[1];
 const colorCA = constants.chartColors[4];
 
-export const FinancesSocieteSection: React.FC<IFinances> = ({
-  uniteLegale,
-  financesSociete,
-}) => {
+export const FinancesSocieteSection: React.FC<{
+  uniteLegale: IUniteLegale;
+}> = ({ uniteLegale }) => {
+  const financesSociete = useFinancesSociete(uniteLegale);
+
   return (
     <DataSection
       title="Indicateurs financiers"
