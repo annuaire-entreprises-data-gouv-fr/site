@@ -20,21 +20,17 @@ export const useFinancesSociete = (uniteLegale: IUniteLegale) => {
     const fetchData = async () => {
       const { siren } = uniteLegale;
       try {
-        const response = await clientBilansFinanciers(siren).catch((e) => {
-          if (e instanceof HttpNotFound) {
-            return APINotRespondingFactory(EAdministration.MEF, 404);
-          }
+        setFinances(await clientBilansFinanciers(siren));
+      } catch (e: any) {
+        if (!(e instanceof HttpNotFound)) {
           logErrorInSentry(e, {
             errorName: 'Error in API data financieres',
             siren,
           });
-          return APINotRespondingFactory(EAdministration.MEF, e.status || 500);
-        });
-
-        setFinances(response);
-      } catch (e: any) {
-        logErrorInSentry(e, { errorName: 'Error in API data financieres' });
-        setFinances(APINotRespondingFactory(EAdministration.MEF, 500));
+        }
+        setFinances(
+          APINotRespondingFactory(EAdministration.MEF, e.status || 500)
+        );
       }
     };
 
