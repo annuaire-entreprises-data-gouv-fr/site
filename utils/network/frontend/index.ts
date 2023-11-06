@@ -6,10 +6,7 @@ import { httpErrorHandler } from '../utils/http-error-handler';
 
 function buildUrl(url: string, params: any) {
   try {
-    const serializedParams = Object.keys(params)
-      .map((k) => `${k}=${params[k]}`)
-      .join('&');
-
+    const serializedParams = new URLSearchParams(params).toString();
     const separator = url.indexOf('?') > 0 ? '&' : '?';
     return `${url}${separator}${serializedParams}`;
   } catch (e) {
