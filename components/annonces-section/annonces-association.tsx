@@ -8,19 +8,24 @@ import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { IAnnoncesAssociation } from '#models/annonces';
+import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IAssociation } from '#models/index';
 import { formatDate } from '#utils/helpers';
 
 const AnnoncesAssociationSection: React.FC<{
   association: IAssociation;
-  annoncesAssociation: IAnnoncesAssociation | IAPINotRespondingError;
+  annoncesAssociation:
+    | IAnnoncesAssociation
+    | IAPINotRespondingError
+    | IAPILoading;
 }> = ({ association, annoncesAssociation }) => {
   return (
     <DataSection
       title="Annonces Journal Officiel des Associations"
       sources={[EAdministration.DILA]}
       data={annoncesAssociation}
+      notFoundInfo={null}
     >
       {(annoncesAssociation) => (
         <>

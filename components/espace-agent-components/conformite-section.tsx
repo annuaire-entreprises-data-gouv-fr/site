@@ -2,13 +2,13 @@ import { PrintNever } from '#components-ui/print-visibility';
 import { ProtectedSection } from '#components/section/protected-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { IUniteLegale } from '#models/index';
-import { useDonneesRestreintes } from 'hooks';
+import { useFetchDonneesRestreintes } from 'hooks';
 import Conformite from './conformite';
 
 const ConformiteSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const { donneesRestreintes } = useDonneesRestreintes(uniteLegale);
+  const { donneesRestreintes } = useFetchDonneesRestreintes(uniteLegale);
 
   return (
     <PrintNever>
@@ -17,9 +17,7 @@ const ConformiteSection: React.FC<{
           body={[
             [
               'Conformité fiscale',
-              <Conformite
-                data={donneesRestreintes?.conformite?.fiscale}
-              />,
+              <Conformite data={donneesRestreintes?.conformite?.fiscale} />,
             ],
             [
               'Conformité sociale',

@@ -3,7 +3,7 @@ import { IDonneesRestreinteUniteLegale } from '#models/espace-agent/donnees-rest
 import { IUniteLegale } from '#models/index';
 import { httpGet } from '#utils/network';
 
-export const useDonneesRestreintes = (uniteLegale: IUniteLegale) => {
+export const useFetchDonneesRestreintes = (uniteLegale: IUniteLegale) => {
   const [donneesRestreintes, setDonneesRestreintes] =
     useState<IDonneesRestreinteUniteLegale | null>(null);
 
@@ -21,5 +21,3 @@ export const useDonneesRestreintes = (uniteLegale: IUniteLegale) => {
 
   return { donneesRestreintes };
 };
-
-export default useDonneesRestreintes;
