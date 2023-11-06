@@ -65,6 +65,10 @@ async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
     timeout: constants.timeout.L,
     cache: config.useCache ? defaultCacheConfig : false,
     ...config,
+    headers: {
+      'User-Agent': 'annuaire-entreprises-site',
+      ...(config.headers || {}),
+    },
   });
   return response.data;
 }
