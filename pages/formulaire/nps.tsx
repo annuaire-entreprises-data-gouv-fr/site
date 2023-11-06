@@ -175,15 +175,8 @@ const FeedBackPage: NextPageWithLayout = () => {
   );
 };
 
-FeedBackPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return (
-    <LayoutDefault isBrowserOutdated={isBrowserOutdated} searchBar={false}>
-      {page}
-    </LayoutDefault>
-  );
+FeedBackPage.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutDefault searchBar={false}>{page}</LayoutDefault>;
 };
 
 export default FeedBackPage;

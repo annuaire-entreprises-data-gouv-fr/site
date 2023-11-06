@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import { SearchErrorExplanations } from '#components/error-explanations';
 import { LayoutSearch } from '#components/layouts/layout-search';
@@ -39,16 +39,8 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   }
 );
 
-SearchResultPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated,
-  session
-) {
-  return (
-    <LayoutSearch isBrowserOutdated={isBrowserOutdated} session={session}>
-      {page}
-    </LayoutSearch>
-  );
+SearchResultPage.getLayout = function getLayout(page: ReactElement, session) {
+  return <LayoutSearch session={session}>{page}</LayoutSearch>;
 };
 
 export default SearchResultPage;

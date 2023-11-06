@@ -19,15 +19,8 @@ const ThanksPage: NextPageWithLayout = () => {
   );
 };
 
-ThanksPage.getLayout = function getLayout(
-  page: ReactElement,
-  isBrowserOutdated
-) {
-  return (
-    <LayoutDefault isBrowserOutdated={isBrowserOutdated} searchBar={false}>
-      {page}
-    </LayoutDefault>
-  );
+ThanksPage.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutDefault searchBar={false}>{page}</LayoutDefault>;
 };
 
 export default ThanksPage;

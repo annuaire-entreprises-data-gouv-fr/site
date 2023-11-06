@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import { LayoutSearch } from '#components/layouts/layout-search';
 import Meta from '#components/meta';
 import SearchResults from '#components/search-results';
 import StructuredDataSearchAction from '#components/structured-data/search';
-import { searchWithoutProtectedSiren, ISearchResults } from '#models/search';
+import { ISearchResults, searchWithoutProtectedSiren } from '#models/search';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import {
@@ -72,15 +72,10 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
 
 MapSearchResultPage.getLayout = function getLayout(
   page: ReactElement,
-  isBrowserOutdated,
   session
 ) {
   return (
-    <LayoutSearch
-      isBrowserOutdated={isBrowserOutdated}
-      map={true}
-      session={session}
-    >
+    <LayoutSearch map={true} session={session}>
       {page}
     </LayoutSearch>
   );
