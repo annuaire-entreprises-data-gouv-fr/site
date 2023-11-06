@@ -5,7 +5,7 @@ import constants from '#models/constants';
 export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
   <PrintNever>
     <div
-      className="browser-is-outdated"
+      id="browser-is-outdated"
       role="dialog"
       aria-label="Votre navigateur est obsolète"
     >
@@ -32,12 +32,29 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
         </p>
       </div>
     </div>
+
+    <script
+      //   Script that shows warning for browser without ESModule
+      //  https://caniuse.com/?search=esmodule
+      //  https://stackoverflow.com/questions/44891421/detect-es6-import-compatibility
+      dangerouslySetInnerHTML={{
+        __html: `
+          var esModuleDisabled = typeof window !== 'undefined' 
+            && !('noModule' in HTMLScriptElement.prototype)
+            
+          if (esModuleDisabled) {
+            getElementById('browser-is-outdated').style.display = 'block'
+          }
+        `,
+      }}
+    ></script>
     <style jsx>{`
-      .browser-is-outdated {
+      #browser-is-outdated {
         padding-top: 15px;
         padding-bottom: 15px;
         font-size: 0.9rem;
         width: 100%;
+        display: none;
         background-color: #b50800;
         color: #fff;
         font-family: 'Marianne', sans-serif;

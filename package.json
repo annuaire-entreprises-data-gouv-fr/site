@@ -39,7 +39,6 @@
     "@types/qrcode": "^1.5.2",
     "@types/react": "^18.2.28",
     "@types/react-dom": "^18.2.13",
-    "@types/ua-parser-js": "^0.7.37",
     "@vcarl/remark-headings": "^0.1.0",
     "autoprefixer": "^10.4.16",
     "axios": "^1.5.1",
@@ -72,7 +71,6 @@
     "remark-rehype": "^11.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2",
-    "ua-parser-js": "^1.0.36",
     "unified": "^11.0.3",
     "vite": "^4.4.11"
   },
