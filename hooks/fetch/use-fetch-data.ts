@@ -6,6 +6,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
+import { RequestAbortedDuringUnload } from '#utils/network/frontend';
 
 type IFetchDataType<T> = {
   fetchData: () => Promise<T>;
@@ -32,10 +33,17 @@ export function useFetchData<T extends {}>(
       try {
         setResponse(await fetchData());
       } catch (e: any) {
-        if (!(e instanceof HttpNotFound)) {
-          logError?.(e);
+        if (e instanceof RequestAbortedDuringUnload) {
+          return;
         }
+
         setResponse(APINotRespondingFactory(administration, e.status || 500));
+
+        if (e instanceof HttpNotFound) {
+          return;
+        }
+
+        logError?.(e);
       }
     };
     fetchAndTreatResponse();
