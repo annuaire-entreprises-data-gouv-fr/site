@@ -7,7 +7,7 @@ import { EAdministration } from '#models/administrations';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/index';
 import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
-import useFinancesSociete from 'hooks/use-finances-societe';
+import { useFetchFinancesSociete } from 'hooks/fetch/finances-societe';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -18,7 +18,7 @@ const colorCA = constants.chartColors[4];
 export const FinancesSocieteSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const financesSociete = useFinancesSociete(uniteLegale);
+  const financesSociete = useFetchFinancesSociete(uniteLegale);
 
   return (
     <DataSection

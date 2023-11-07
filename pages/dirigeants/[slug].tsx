@@ -18,7 +18,7 @@ import {
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { isAgent } from '#utils/session';
-import useImmmatriculationRNE from 'hooks/use-immatriculation-RNE';
+import { useFetchImmatriculationRNE } from 'hooks/fetch/immatriculation-rne';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -29,7 +29,7 @@ const DirigeantsPage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   metadata: { session },
 }) => {
-  const immatriculationRNE = useImmmatriculationRNE(uniteLegale);
+  const immatriculationRNE = useFetchImmatriculationRNE(uniteLegale);
   return (
     <>
       <Meta
