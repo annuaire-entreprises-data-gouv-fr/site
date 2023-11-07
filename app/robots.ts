@@ -32,6 +32,7 @@ export default function robots(): MetadataRoute.Robots {
         '/justificatif-immatriculation-pdf/',
         '/annonces/',
         '/dirigeants/',
+        '/donnees-financieres/',
         '/personne/',
         '/elus/',
         '/divers/',
