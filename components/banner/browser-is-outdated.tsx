@@ -34,21 +34,15 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
     </div>
 
     <script
-      //   Script that shows warning for browser without ESModule
-      //  https://caniuse.com/?search=esmodule
-      //  https://stackoverflow.com/questions/44891421/detect-es6-import-compatibility
+      //  Show warning for browsers without Optional chaining
+      //  https://caniuse.com/mdn-javascript_operators_optional_chaining
+      //  https://stackoverflow.com/questions/66288922/check-if-optional-chaining-is-supported
       dangerouslySetInnerHTML={{
         __html: `
         (function () {
-
           try {
-            var esModuleDisabled = typeof window !== 'undefined' 
-            && !('noModule' in HTMLScriptElement.prototype);
-            
-            if (esModuleDisabled) {
-              throw new Error('browser is outdated');
-            }
-          } catch {
+            eval('var foo = {}; foo?.bar');
+          } catch (e) {
             document.getElementById('browser-is-outdated').style.display = 'block';
           }
         })()
