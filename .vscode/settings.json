@@ -10,5 +10,5 @@
   ],
   "eslint.enable": true,
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": ["source.organizeImports", "source.fixAll"]
+  "editor.codeActionsOnSave": ["source.organizeImports", "source.fixAll.eslint"]
 }
