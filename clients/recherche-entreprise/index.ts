@@ -137,7 +137,6 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     date_mise_a_jour = '',
     statut_diffusion = 'O',
     etablissements = [],
-    slug,
   } = result;
 
   const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
@@ -310,15 +309,23 @@ const mapToEtablissement = (
     etat_administratif,
     siret
   );
+
+  let trancheEffectif = '';
+  if ('tranche_effectif_salarie' in etablissement) {
+    trancheEffectif = etablissement.tranche_effectif_salarie;
+  }
+
   return {
     ...createDefaultEtablissement(),
     siren: extractSirenFromSiret(siret),
+    enseigne,
     nic: extractNicFromSiret(siret),
     siret: verifySiret(siret),
     adresse,
     codePostal: code_postal,
     commune: libelle_commune,
     adressePostale,
+    trancheEffectif,
     latitude,
     longitude,
     estSiege: est_siege,

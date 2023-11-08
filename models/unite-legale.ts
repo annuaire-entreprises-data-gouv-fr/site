@@ -13,7 +13,11 @@ import {
 import { getAssociation } from '#models/association';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
-import { Siren, verifySiren } from '#utils/helpers';
+import {
+  Siren,
+  isEntrepreneurIndividuelFromNatureJuridique,
+  verifySiren,
+} from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import {
   logRechercheEntreprisefailed,
@@ -30,6 +34,7 @@ import {
   APINotRespondingFactory,
   isAPINotResponding,
 } from './api-not-responding';
+import constants from './constants';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 /**
@@ -101,11 +106,13 @@ class UniteLegaleBuilder {
       process.env.INSEE_ENABLED !== 'disabled' &&
       (isAPINotResponding(uniteLegaleRechercheEntreprise) ||
         // We call insee to handle the case of entreprise indivuelle non diffusible
-        uniteLegaleRechercheEntreprise.natureJuridique === '1000' ||
+        isEntrepreneurIndividuelFromNatureJuridique(
+          uniteLegaleRechercheEntreprise.natureJuridique
+        ) ||
         // We call insee if there is more than 10 etablissements
         // (pagination is not handled by recherche entreprise)
         (uniteLegaleRechercheEntreprise.etablissements?.nombreEtablissements ??
-          0) > 10);
+          0) > constants.resultsPerPage.etablissements);
 
     const getUniteLegaleInsee =
       !shouldUseInsee || this._isBot
@@ -169,8 +176,6 @@ class UniteLegaleBuilder {
  * Fetch Unite Legale from Sirene Recherche Entreprise
  */
 
-// TODO: par rapport à fetchFromInsee, on perd l'enseigne de l'établissement, la date de dernière mise à
-// jour et la tranche d'effectif
 const fetchUniteLegaleFromRechercheEntreprise = async (
   siren: Siren,
   useCache: boolean
