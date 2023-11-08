@@ -10,7 +10,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { useImmmatriculationRNE } from 'hooks/use-immatriculation-RNE';
+import { useFetchImmatriculationRNE } from 'hooks/fetch/immatriculation-rne';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IJustificatifs, IPropsWithMetadata {}
@@ -20,7 +20,7 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
   immatriculationJOAFE,
   metadata: { session },
 }) => {
-  const immatriculationRNE = useImmmatriculationRNE(uniteLegale);
+  const immatriculationRNE = useFetchImmatriculationRNE(uniteLegale);
   return (
     <>
       <Meta

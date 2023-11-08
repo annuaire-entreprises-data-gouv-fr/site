@@ -38,8 +38,10 @@ const logInSentryFactory =
   (errorMsg: any, extra: IScope = {}) => {
     if (extra.errorName && typeof errorMsg !== 'string') {
       const originalErrorName = errorMsg.name;
-      errorMsg.name = extra.errorName;
-      extra.errorName = originalErrorName;
+      try {
+        errorMsg.name = extra.errorName;
+        extra.errorName = originalErrorName;
+      } catch (e) {}
     }
     if (isNextJSSentryActivated) {
       const scope = getScope(extra || {});
