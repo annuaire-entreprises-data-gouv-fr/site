@@ -2,6 +2,7 @@ import React from 'react';
 import routes from '#clients/routes';
 import { OpenClosedTag } from '#components-ui/badge/frequent';
 import ButtonLink from '#components-ui/button';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
@@ -133,6 +134,7 @@ const ImmatriculationRNE: React.FC<IProps> = ({
           </>
         )}
       </DataSection>
+      <HorizontalSeparator />
     </>
   );
 };
