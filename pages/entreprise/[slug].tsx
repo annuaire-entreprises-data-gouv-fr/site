@@ -106,10 +106,8 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug, isRedirected, page, isBot } = extractParamsFromContext(
-      context,
-      true
-    );
+    const { slug, isRedirected, page, isBot } =
+      extractParamsFromContext(context);
 
     const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
     if (sirenOrSiretSlug.length === 14) {
