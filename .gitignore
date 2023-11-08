@@ -65,3 +65,5 @@ public/authorized-agents.txt
 cypress/videos
 cypress/screenshots
 
+# typescript
+tsconfig.tsbuildinfo

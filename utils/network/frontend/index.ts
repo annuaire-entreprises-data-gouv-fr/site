@@ -56,7 +56,7 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
     if (e instanceof TypeError && pendingUnload) {
       // Chrome and firefox systematically throw a TypeError when aborting a fetch when the user is navigating away
       // We don't want this error to bubble though the app
-      throw new RequestAbortedDuringUnload();
+      throw new RequestAbortedDuringUnloadException();
     }
     throw e;
   } finally {
@@ -71,7 +71,7 @@ if (typeof window !== 'undefined') {
   };
 }
 
-export class RequestAbortedDuringUnload extends Error {
+export class RequestAbortedDuringUnloadException extends Error {
   name = 'RequestAbortedDuringUnload';
   constructor() {
     super('Fetch request aborted because user is navigating away');

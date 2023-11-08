@@ -6,7 +6,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
-import { RequestAbortedDuringUnload } from '#utils/network/frontend';
+import { RequestAbortedDuringUnloadException } from '#utils/network/frontend';
 
 type IFetchDataType<T> = {
   fetchData: () => Promise<T>;
@@ -33,7 +33,7 @@ export function useFetchData<T extends {}>(
       try {
         setResponse(await fetchData());
       } catch (e: any) {
-        if (e instanceof RequestAbortedDuringUnload) {
+        if (e instanceof RequestAbortedDuringUnloadException) {
           return;
         }
 
