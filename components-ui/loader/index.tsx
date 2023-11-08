@@ -1,11 +1,11 @@
 export const Loader = () => (
   <>
     <span>
-      <div className="loader">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <span className="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
     </span>
     <style jsx>
       {`
@@ -25,19 +25,19 @@ export const Loader = () => (
           }
         }
 
-        .loader > div:nth-child(1) {
+        .loader > span:nth-child(1) {
           animation: loader 0.6s -0.14s infinite ease-in-out;
         }
 
-        .loader > div:nth-child(2) {
+        .loader > span:nth-child(2) {
           animation: loader 0.6s -0.07s infinite ease-in-out;
         }
 
-        .loader > div:nth-child(3) {
+        .loader > span:nth-child(3) {
           animation: loader 0.6s 0s infinite ease-in-out;
         }
 
-        .loader > div {
+        .loader > span {
           background-color: #999;
           width: 5px;
           height: 5px;

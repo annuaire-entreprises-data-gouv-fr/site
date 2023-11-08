@@ -1,4 +1,3 @@
-import React from 'react';
 import constants from '#models/constants';
 
 export const SimpleSeparator = () => (
