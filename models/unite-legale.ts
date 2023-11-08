@@ -94,10 +94,21 @@ class UniteLegaleBuilder {
     // no cache for bot as they scrap so they tend not to call the same siren twice
     const useCache = !this._isBot;
 
-    const shouldNotUseInsee = process.env.INSEE_ENABLED === 'disabled';
+    const uniteLegaleRechercheEntreprise =
+      await fetchUniteLegaleFromRechercheEntreprise(this._siren, useCache);
+
+    const shouldUseInsee =
+      process.env.INSEE_ENABLED !== 'disabled' &&
+      (isAPINotResponding(uniteLegaleRechercheEntreprise) ||
+        // We call insee to handle the case of entreprise indivuelle non diffusible
+        uniteLegaleRechercheEntreprise.natureJuridique === '1000' ||
+        // We call insee if there is more than 10 etablissements
+        // (pagination is not handled by recherche entreprise)
+        (uniteLegaleRechercheEntreprise.etablissements?.nombreEtablissements ??
+          0) > 10);
 
     const getUniteLegaleInsee =
-      shouldNotUseInsee || this._isBot
+      !shouldUseInsee || this._isBot
         ? () => APINotRespondingFactory(EAdministration.INSEE, 403) // never call Insee for bot
         : async () =>
             await fetchUniteLegaleFromInsee(this._siren, this._page, {
@@ -105,15 +116,11 @@ class UniteLegaleBuilder {
               useCache,
             });
 
-    const [uniteLegaleInsee, uniteLegaleRechercheEntreprise] =
-      await Promise.all([
-        getUniteLegaleInsee(),
-        fetchUniteLegaleFromRechercheEntreprise(this._siren, useCache),
-      ]);
+    const uniteLegaleInsee = await getUniteLegaleInsee();
 
     if (isAPINotResponding(uniteLegaleInsee)) {
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
-        if (shouldNotUseInsee) {
+        if (!shouldUseInsee) {
           throw new HttpServerError('Sirene Insee fallback failed, return 500');
         }
         const uniteLegaleInseeFallbacked = await fetchUniteLegaleFromInsee(
@@ -161,6 +168,9 @@ class UniteLegaleBuilder {
 /**
  * Fetch Unite Legale from Sirene Recherche Entreprise
  */
+
+// TODO: par rapport à fetchFromInsee, on perd l'enseigne de l'établissement, la date de dernière mise à
+// jour et la tranche d'effectif
 const fetchUniteLegaleFromRechercheEntreprise = async (
   siren: Siren,
   useCache: boolean
