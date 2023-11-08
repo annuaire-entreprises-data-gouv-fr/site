@@ -64,9 +64,10 @@ export type ISiege = {
   longitude: string;
   nom_commercial: string;
   numero_voie: string;
+  type_voie: string;
   siret: string;
   tranche_effectif_salarie: string;
-  type_voie: string;
+  annee_tranche_effectif_salarie: string;
 };
 
 export type IDirigeant = {
@@ -100,6 +101,8 @@ export type IMatchingEtablissement = {
   siret: string;
   date_creation: string;
   date_debut_activite: string;
+  tranche_effectif_salarie: string;
+  annee_tranche_effectif_salarie: string;
 };
 
 export type IComplements = {

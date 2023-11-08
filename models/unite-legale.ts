@@ -32,6 +32,7 @@ import {
 import { EAdministration } from './administrations';
 import {
   APINotRespondingFactory,
+  IAPINotRespondingError,
   isAPINotResponding,
 } from './api-not-responding';
 import constants from './constants';
@@ -102,34 +103,29 @@ class UniteLegaleBuilder {
     const uniteLegaleRechercheEntreprise =
       await fetchUniteLegaleFromRechercheEntreprise(this._siren, useCache);
 
-    const shouldUseInsee =
-      process.env.INSEE_ENABLED !== 'disabled' &&
-      (isAPINotResponding(uniteLegaleRechercheEntreprise) ||
-        // We call insee to handle the case of entreprise indivuelle non diffusible
-        isEntrepreneurIndividuelFromNatureJuridique(
-          uniteLegaleRechercheEntreprise.natureJuridique
-        ) ||
-        // We call insee if there is more than 10 etablissements
-        // (pagination is not handled by recherche entreprise)
-        (uniteLegaleRechercheEntreprise.etablissements?.nombreEtablissements ??
-          0) > constants.resultsPerPage.etablissements);
+    const useInsee = this.shouldUseInsee(
+      uniteLegaleRechercheEntreprise,
+      this._isBot
+    );
 
-    const getUniteLegaleInsee =
-      !shouldUseInsee || this._isBot
-        ? () => APINotRespondingFactory(EAdministration.INSEE, 403) // never call Insee for bot
-        : async () =>
-            await fetchUniteLegaleFromInsee(this._siren, this._page, {
-              useFallback: false,
-              useCache,
-            });
+    if (!useInsee) {
+      if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
+        throw new HttpServerError('Recherche failed, return 500');
+      }
+      return uniteLegaleRechercheEntreprise;
+    }
 
-    const uniteLegaleInsee = await getUniteLegaleInsee();
+    const uniteLegaleInsee = await fetchUniteLegaleFromInsee(
+      this._siren,
+      this._page,
+      {
+        useFallback: false,
+        useCache,
+      }
+    );
 
     if (isAPINotResponding(uniteLegaleInsee)) {
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
-        if (!shouldUseInsee) {
-          throw new HttpServerError('Sirene Insee fallback failed, return 500');
-        }
         const uniteLegaleInseeFallbacked = await fetchUniteLegaleFromInsee(
           this._siren,
           this._page,
@@ -165,6 +161,41 @@ class UniteLegaleBuilder {
         };
       }
     }
+  };
+
+  shouldUseInsee = (
+    uniteLegaleRechercheEntreprise: IUniteLegale | IAPINotRespondingError,
+    isBot: boolean
+  ) => {
+    const isInseeEnabled = process.env.INSEE_ENABLED !== 'disabled';
+    if (!isInseeEnabled) {
+      return false;
+    }
+
+    const rechercheEntrepriseFailed = isAPINotResponding(
+      uniteLegaleRechercheEntreprise
+    );
+
+    if (rechercheEntrepriseFailed) {
+      return true;
+    } else {
+      if (isBot) {
+        return false;
+      }
+
+      const isEI = isEntrepreneurIndividuelFromNatureJuridique(
+        uniteLegaleRechercheEntreprise.natureJuridique
+      );
+
+      const hasTooManyEtablissementForPagination =
+        (uniteLegaleRechercheEntreprise.etablissements?.nombreEtablissements ??
+          0) > constants.resultsPerPage.etablissements;
+
+      if (isEI || hasTooManyEtablissementForPagination) {
+        return true;
+      }
+    }
+    return false;
   };
 }
 

@@ -295,6 +295,8 @@ const mapToEtablissement = (
     date_creation = '',
     date_debut_activite = '',
     liste_idcc,
+    tranche_effectif_salarie = '',
+    annee_tranche_effectif_salarie = '',
   } = etablissement;
 
   const enseigne = (liste_enseignes || []).join(' ');
@@ -310,11 +312,6 @@ const mapToEtablissement = (
     siret
   );
 
-  let trancheEffectif = '';
-  if ('tranche_effectif_salarie' in etablissement) {
-    trancheEffectif = etablissement.tranche_effectif_salarie;
-  }
-
   return {
     ...createDefaultEtablissement(),
     siren: extractSirenFromSiret(siret),
@@ -325,7 +322,8 @@ const mapToEtablissement = (
     codePostal: code_postal,
     commune: libelle_commune,
     adressePostale,
-    trancheEffectif,
+    trancheEffectif: tranche_effectif_salarie,
+    anneeTrancheEffectif: annee_tranche_effectif_salarie,
     latitude,
     longitude,
     estSiege: est_siege,
