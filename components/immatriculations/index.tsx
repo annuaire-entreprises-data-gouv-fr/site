@@ -1,7 +1,6 @@
 import React from 'react';
 import AssociationCreationNotFoundAlert from '#components-ui/alerts/association-creation-not-found-alert';
 import ImmatriculationRNENotFoundAlert from '#components-ui/alerts/rne-not-found-alert';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import AvisSituationSection from '#components/immatriculations/insee';
 import ImmatriculationJOAFE from '#components/immatriculations/joafe';
@@ -53,10 +52,6 @@ const Immatriculations: React.FC<IProps> = ({
         immatriculationRNE={immatriculationRNE}
         uniteLegale={uniteLegale}
       />
-      <AvisSituationSection uniteLegale={uniteLegale} session={session} />
-      <HorizontalSeparator />
-      <BreakPageForPrint />
-
       {noImmatriculation ? (
         <>
           {isAssociation(uniteLegale) ? (
@@ -84,6 +79,8 @@ const Immatriculations: React.FC<IProps> = ({
           )}
         </>
       )}
+      <BreakPageForPrint />
+      <AvisSituationSection uniteLegale={uniteLegale} session={session} />
     </>
   );
 };
