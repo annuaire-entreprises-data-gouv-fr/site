@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import ConformiteSection from '#components/espace-agent-components/conformite-section';
 import Meta from '#components/meta';
 import { NonDiffusibleSection } from '#components/non-diffusible';
 import Title from '#components/title-section';
@@ -10,12 +10,11 @@ import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
-  postServerSideProps,
   IPropsWithMetadata,
+  postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { isSuperAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
-import ConformiteSection from '#components/espace-agent-components/conformite-section';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
@@ -61,8 +60,8 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       };
     }
 
-    const { slug } = extractParamsFromContext(context);
-    const uniteLegale = await getUniteLegaleFromSlug(slug);
+    const { slug, isBot } = extractParamsFromContext(context);
+    const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
     return {
       props: {
         uniteLegale,

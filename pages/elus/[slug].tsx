@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import ElusSection from '#components/dirigeants-section/elus-section';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
@@ -45,8 +44,8 @@ const ElusPage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug } = extractParamsFromContext(context);
-    const uniteLegale = await getUniteLegaleFromSlug(slug);
+    const { slug, isBot } = extractParamsFromContext(context);
+    const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
 
     return {
       props: { uniteLegale },

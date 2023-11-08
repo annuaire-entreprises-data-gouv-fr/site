@@ -1,8 +1,10 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
+import ConventionsCollectivesSection from '#components/conventions-collectives-section';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
+import { IUniteLegale } from '#models/index';
+import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
@@ -10,9 +12,6 @@ import {
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
-import { IUniteLegale } from '#models/index';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
-import ConventionsCollectivesSection from '#components/conventions-collectives-section';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
@@ -45,9 +44,9 @@ const ConventionsCollectives: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug } = extractParamsFromContext(context);
+    const { slug, isBot } = extractParamsFromContext(context);
 
-    const uniteLegale = await getUniteLegaleFromSlug(slug);
+    const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
 
     return {
       props: {
