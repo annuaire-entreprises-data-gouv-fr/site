@@ -18,8 +18,12 @@ import {
   getEtablissementName,
   getNomComplet,
 } from '#models/statut-diffusion';
-import { formatDate, formatSiret } from '#utils/helpers';
-import { getCompanyLabel, getCompanyPronoun } from '#utils/helpers';
+import {
+  formatDate,
+  formatSiret,
+  getCompanyLabel,
+  getCompanyPronoun,
+} from '#utils/helpers';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
 import { ISession } from '#utils/session';
 
@@ -145,10 +149,14 @@ const EtablissementSection: React.FC<IProps> = ({
       'Date de création de l’établissement',
       formatDate(etablissement.dateCreation),
     ],
-    [
-      'Dernière modification des données Insee',
-      formatDate(etablissement.dateDerniereMiseAJour),
-    ],
+    ...(etablissement.dateDerniereMiseAJour
+      ? [
+          [
+            'Dernière modification des données Insee',
+            formatDate(etablissement.dateDerniereMiseAJour),
+          ],
+        ]
+      : []),
     ...(!estActif(etablissement)
       ? [['Date de fermeture', formatDate(etablissement.dateFermeture || '')]]
       : []),

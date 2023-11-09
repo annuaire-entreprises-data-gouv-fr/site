@@ -53,7 +53,7 @@ export const libelleTrancheEffectif = (
     return null;
   }
   if (!anneeTrancheEffectif) {
-    return null;
+    return `${libelle} (année de référence non renseignée)`;
   }
 
   return `${libelle}, en ${anneeTrancheEffectif}`;

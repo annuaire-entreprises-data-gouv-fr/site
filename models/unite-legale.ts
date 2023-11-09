@@ -13,7 +13,11 @@ import {
 import { getAssociation } from '#models/association';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
-import { Siren, verifySiren } from '#utils/helpers';
+import {
+  Siren,
+  isEntrepreneurIndividuelFromNatureJuridique,
+  verifySiren,
+} from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import {
   logRechercheEntreprisefailed,
@@ -28,8 +32,10 @@ import {
 import { EAdministration } from './administrations';
 import {
   APINotRespondingFactory,
+  IAPINotRespondingError,
   isAPINotResponding,
 } from './api-not-responding';
+import constants from './constants';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 /**
@@ -94,28 +100,32 @@ class UniteLegaleBuilder {
     // no cache for bot as they scrap so they tend not to call the same siren twice
     const useCache = !this._isBot;
 
-    const shouldNotUseInsee = process.env.INSEE_ENABLED === 'disabled';
+    const uniteLegaleRechercheEntreprise =
+      await fetchUniteLegaleFromRechercheEntreprise(this._siren, useCache);
 
-    const getUniteLegaleInsee =
-      shouldNotUseInsee || this._isBot
-        ? () => APINotRespondingFactory(EAdministration.INSEE, 403) // never call Insee for bot
-        : async () =>
-            await fetchUniteLegaleFromInsee(this._siren, this._page, {
-              useFallback: false,
-              useCache,
-            });
+    const useInsee = this.shouldUseInsee(
+      uniteLegaleRechercheEntreprise,
+      this._isBot
+    );
 
-    const [uniteLegaleInsee, uniteLegaleRechercheEntreprise] =
-      await Promise.all([
-        getUniteLegaleInsee(),
-        fetchUniteLegaleFromRechercheEntreprise(this._siren, useCache),
-      ]);
+    if (!useInsee) {
+      if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
+        throw new HttpServerError('Recherche failed, return 500');
+      }
+      return uniteLegaleRechercheEntreprise;
+    }
+
+    const uniteLegaleInsee = await fetchUniteLegaleFromInsee(
+      this._siren,
+      this._page,
+      {
+        useFallback: false,
+        useCache,
+      }
+    );
 
     if (isAPINotResponding(uniteLegaleInsee)) {
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
-        if (shouldNotUseInsee) {
-          throw new HttpServerError('Sirene Insee fallback failed, return 500');
-        }
         const uniteLegaleInseeFallbacked = await fetchUniteLegaleFromInsee(
           this._siren,
           this._page,
@@ -152,6 +162,41 @@ class UniteLegaleBuilder {
       }
     }
   };
+
+  shouldUseInsee = (
+    uniteLegaleRechercheEntreprise: IUniteLegale | IAPINotRespondingError,
+    isBot: boolean
+  ) => {
+    const isInseeEnabled = process.env.INSEE_ENABLED !== 'disabled';
+    if (!isInseeEnabled) {
+      return false;
+    }
+
+    const rechercheEntrepriseFailed = isAPINotResponding(
+      uniteLegaleRechercheEntreprise
+    );
+
+    if (rechercheEntrepriseFailed) {
+      return true;
+    } else {
+      if (isBot) {
+        return false;
+      }
+
+      const isEI = isEntrepreneurIndividuelFromNatureJuridique(
+        uniteLegaleRechercheEntreprise.natureJuridique
+      );
+
+      const hasTooManyEtablissementForPagination =
+        (uniteLegaleRechercheEntreprise.etablissements?.nombreEtablissements ??
+          0) > constants.resultsPerPage.etablissements;
+
+      if (isEI || hasTooManyEtablissementForPagination) {
+        return true;
+      }
+    }
+    return false;
+  };
 }
 
 //=========================
@@ -161,6 +206,7 @@ class UniteLegaleBuilder {
 /**
  * Fetch Unite Legale from Sirene Recherche Entreprise
  */
+
 const fetchUniteLegaleFromRechercheEntreprise = async (
   siren: Siren,
   useCache: boolean
