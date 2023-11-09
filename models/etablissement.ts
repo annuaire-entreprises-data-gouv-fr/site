@@ -3,16 +3,16 @@ import { clientEtablissementRechercheEntreprise } from '#clients/recherche-entre
 import { clientEtablissementInsee } from '#clients/sirene-insee/siret';
 import { getGeoLoc } from '#models/geo-loc';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
-import { extractSirenFromSiret, Siret, verifySiret } from '#utils/helpers';
+import { Siret, extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import {
   logRechercheEntreprisefailed,
   logSireneInseefailed,
 } from '#utils/sentry/helpers';
 import {
-  createDefaultEtablissement,
   IEtablissement,
   IEtablissementWithUniteLegale,
   SiretNotFoundError,
+  createDefaultEtablissement,
 } from '.';
 
 /*
@@ -25,12 +25,11 @@ const getEtablissementFromSlug = async (
   const siret = verifySiret(slug);
 
   const isBot = options?.isBot || false;
-
   const shouldNotUseInsee = process.env.INSEE_ENABLED === 'disabled';
 
   const etablissement =
     shouldNotUseInsee || isBot
-      ? await getEtablissementForGoodBot(siret)
+      ? await getEtablissementRechercheEntreprise(siret)
       : await getEtablissement(siret);
 
   return etablissement;
@@ -93,7 +92,7 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
 /**
  * Return an Etablissement from sirene ouverte
  */
-const getEtablissementForGoodBot = async (
+const getEtablissementRechercheEntreprise = async (
   siret: Siret
 ): Promise<IEtablissement> => {
   try {
@@ -150,7 +149,7 @@ const createNonDiffusibleEtablissement = (siret: Siret) => {
 };
 
 export {
-  getEtablissementWithUniteLegaleFromSlug,
-  getEtablissementWithLatLongFromSlug,
   getEtablissementFromSlug,
+  getEtablissementWithLatLongFromSlug,
+  getEtablissementWithUniteLegaleFromSlug,
 };

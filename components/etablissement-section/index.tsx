@@ -151,8 +151,10 @@ const EtablissementSection: React.FC<IProps> = ({
     ],
     ...(etablissement.dateDerniereMiseAJour
       ? [
-          'Dernière modification des données Insee',
-          formatDate(etablissement.dateDerniereMiseAJour),
+          [
+            'Dernière modification des données Insee',
+            formatDate(etablissement.dateDerniereMiseAJour),
+          ],
         ]
       : []),
     ...(!estActif(etablissement)
