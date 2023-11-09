@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import Meta from '#components/meta';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
 import { estNonDiffusible } from '#models/statut-diffusion';
@@ -70,10 +69,7 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug, isBot, isRedirected } = extractParamsFromContext(
-      context,
-      true
-    );
+    const { slug, isBot, isRedirected } = extractParamsFromContext(context);
 
     const etablissementWithUniteLegale =
       await getEtablissementWithUniteLegaleFromSlug(slug, isBot);

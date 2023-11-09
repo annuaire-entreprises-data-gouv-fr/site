@@ -24,7 +24,6 @@ const MapSearchResultPage: NextPageWithLayout<IProps> = ({
   results,
   searchTerm,
   searchFilterParams,
-  metadata,
 }) => (
   <>
     <Meta

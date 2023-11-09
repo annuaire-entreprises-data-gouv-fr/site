@@ -85,10 +85,10 @@ const DirigeantsPage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug } = extractParamsFromContext(context);
+    const { slug, isBot } = extractParamsFromContext(context);
     return {
       props: {
-        uniteLegale: await getUniteLegaleFromSlug(slug),
+        uniteLegale: await getUniteLegaleFromSlug(slug, { isBot }),
         metadata: {
           useReact: true,
         },

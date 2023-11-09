@@ -50,9 +50,9 @@ const FinancePage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug } = extractParamsFromContext(context);
+    const { slug, isBot } = extractParamsFromContext(context);
 
-    const uniteLegale = await getUniteLegaleFromSlug(slug);
+    const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
 
     return {
       props: {

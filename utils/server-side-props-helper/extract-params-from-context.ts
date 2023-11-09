@@ -2,15 +2,8 @@ import { GetServerSidePropsContext } from 'next';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import isUserAgentABot from '#utils/user-agent';
 
-const extractParamsFromContext = (
-  context: GetServerSidePropsContext,
-  allParams = false
-) => {
+const extractParamsFromContext = (context: GetServerSidePropsContext) => {
   const slug = (context?.params?.slug || '') as string;
-
-  if (!allParams) {
-    return { slug };
-  }
 
   const referer = context?.req?.headers?.referer;
   const isRedirected = !!referer && !!context.query.redirected;
@@ -22,6 +15,7 @@ const extractParamsFromContext = (
   const isABotUA = isUserAgentABot(context?.req?.headers['user-agent'] || '');
 
   const isBot = !!isABotParam || isABotUA;
+
   return {
     slug,
     isRedirected,

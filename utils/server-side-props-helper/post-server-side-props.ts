@@ -2,13 +2,10 @@ import { withIronSessionSsr } from 'iron-session/next';
 import { GetServerSidePropsContext } from 'next';
 import { closeAPM, createAPM } from '../sentry/tracing';
 import { ISession, sessionOptions, setVisitTimestamp } from '../session';
-import isUserAgentABot from '../user-agent';
 import { handleErrorFromServerSideProps } from './error-handler';
 
 export interface IPropsWithMetadata {
   metadata: {
-    // display outdated browser banner
-    isBot: boolean;
     // enable react hydration in browser
     useReact?: boolean;
     session: ISession | null;
@@ -37,8 +34,6 @@ export function postServerSideProps(
 
     closeAPM(transaction);
 
-    const userAgent = context?.req?.headers['user-agent'] || '';
-
     await setVisitTimestamp(context.req.session);
 
     return {
@@ -47,7 +42,6 @@ export function postServerSideProps(
         ...props,
         metadata: {
           ...props.metadata,
-          isBot: isUserAgentABot(userAgent),
           session: context.req.session,
         },
       },
