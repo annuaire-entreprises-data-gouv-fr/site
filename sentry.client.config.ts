@@ -3,7 +3,7 @@ import { isNextJSSentryActivated } from '#utils/sentry';
 if (isNextJSSentryActivated) {
   Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
-    tracesSampleRate: 0.01,
+    tracesSampleRate: 0.005,
     maxBreadcrumbs: 2,
 
     // An error can be thrown when a fetch request is aborted during a page unload
