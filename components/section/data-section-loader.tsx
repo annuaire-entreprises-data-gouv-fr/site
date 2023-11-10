@@ -1,4 +1,4 @@
-import Warning from '#components-ui/alerts/warning';
+import Info from '#components-ui/alerts/info';
 import FadeIn from '#components-ui/animation/fade-in';
 import { HeightTransition } from '#components-ui/animation/height-transition';
 import { Loader } from '#components-ui/loader';
@@ -16,10 +16,10 @@ export default function DataSectionLoader({
       {after5s && (
         <HeightTransition animateAppear>
           <FadeIn>
-            <Warning>
+            <Info full>
               Le service semble particulièrement occupé en ce moment, cela peut
               prendre encore un peu de temps (10s à 20s).
-            </Warning>
+            </Info>
           </FadeIn>
         </HeightTransition>
       )}
