@@ -207,8 +207,7 @@ const createEventsCategoryUrl = () => {
  * Fetch from Grist and then aggregate event by month and userType
  */
 const getNpsRecords = async () => {
-  const { records } = await readFromGrist('nps-feedbacks');
-  const npsRecords = records.map((r) => r.fields);
+  const npsRecords = await readFromGrist('nps-feedbacks');
 
   const months: {
     [monthKey: string]: { [userTypeKey: string]: number[] };

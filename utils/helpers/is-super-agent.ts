@@ -1,4 +1,4 @@
-import { getSuperAgentsFromNotion } from '#utils/integrations/notion';
+import { readFromGrist } from '#utils/integrations/grist';
 import logErrorInSentry from '#utils/sentry';
 
 class SuperAgentsList {
@@ -7,7 +7,11 @@ class SuperAgentsList {
   getList = async () => {
     if (this._list.length === 0) {
       try {
-        this._list = await getSuperAgentsFromNotion();
+        const superAgents = await readFromGrist('comptes-agents');
+
+        this._list = superAgents
+          .filter((r: any) => r.actif === true)
+          .map((r: any) => r.email);
       } catch (e: any) {
         logErrorInSentry(e, {
           errorName: 'Error while fetching agent list from notion',

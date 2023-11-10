@@ -12,6 +12,10 @@ const gristTables = {
     docId: 'hp8PLhMGY9sNWuzGDGe6yi',
     tableId: 'NPS_Feedbacks',
   },
+  'comptes-agents': {
+    docId: 'hp8PLhMGY9sNWuzGDGe6yi',
+    tableId: 'Comptes_agents',
+  },
 } as { [tableKey: string]: { docId: string; tableId: string } };
 
 function getGristUrl(tableKey: string) {
@@ -43,11 +47,13 @@ export async function logInGrist(tableKey: string, data: unknown[]) {
 }
 
 export async function readFromGrist(tableKey: string) {
-  return await httpClient<IGristRecords>({
+  const { records } = await httpClient<IGristRecords>({
     method: 'GET',
     url: getGristUrl(tableKey),
     headers: {
       Authorization: 'Bearer ' + process.env.GRIST_API_KEY,
     },
   });
+
+  return records.map((r) => r.fields);
 }
