@@ -43,6 +43,7 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
           try {
             eval('var foo = {}; foo?.bar');
           } catch (e) {
+            window.IS_OUTDATED_BROWSER = true;
             document.getElementById('browser-is-outdated').style.display = 'block';
           }
         })()
