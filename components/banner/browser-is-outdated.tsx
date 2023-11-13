@@ -45,6 +45,14 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
           } catch (e) {
             window.IS_OUTDATED_BROWSER = true;
             document.getElementById('browser-is-outdated').style.display = 'block';
+         
+            var _paq = window._paq || [];
+            _paq.push([
+                'trackEvent',
+                'error',
+                'outdated-browser',
+                'warning-displayed',
+            ]);
           }
         })()
         `,
