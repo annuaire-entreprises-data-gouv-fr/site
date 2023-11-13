@@ -69,8 +69,6 @@ jobs:
 
       - name: Build site
         run: npm run build
-        env:
-          NEXT_PUBLIC_END2END_MOCKING: enabled
       - name: Cache site
         uses: actions/cache@v3
         id: restore-build
@@ -98,19 +96,22 @@ jobs:
   testE2E:
     name: End2end tests
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [dependencies]
     env:
       NEXT_PUBLIC_END2END_MOCKING: enabled
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v3
-      - name: Load cached build
-        uses: actions/cache@v3
-        id: restore-build
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v3
         with:
-          path: ./*
-          key: ${{ github.sha }}
-
+          node-version: ${{ env.node-version }}
+      - name: Load node_modules
+        uses: ./.github/actions/load-dependencies
+      - name: Build site with E2E mocking
+        run: npm run build
+        env:
+          NEXT_PUBLIC_END2END_MOCKING: enabled
       - name: Run Cypress tests 🧪
         # https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v5
