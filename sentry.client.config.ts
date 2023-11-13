@@ -8,6 +8,6 @@ if (isNextJSSentryActivated) {
 
     // An error can be thrown when a fetch request is aborted during a page unload
     // We don't want to log it to sentry so we ignore it.
-    ignoreErrors: ['RequestAbortedDuringUnload'],
+    ignoreErrors: ['RequestAbortedDuringUnloadException'],
   });
 }
