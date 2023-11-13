@@ -1,8 +1,3 @@
-import { existsSync, readdirSync } from 'fs';
-import { readFile } from 'fs/promises';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
-
 type AsyncFn<T extends unknown[], U> = (...args: T) => Promise<U>;
 
 /**
@@ -26,34 +21,14 @@ export default function stubClientWithSnapshots<
   const client = arg[clientName];
 
   // If mocking is not enabled, return the real client
-  if (process.env.END2END_MOCKING !== 'enabled') {
+  if (process.env.NEXT_PUBLIC_END2END_MOCKING !== 'enabled') {
     return client;
   }
 
-  const snaphotPath = join(
-    dirname(fileURLToPath(import.meta.url)),
-    '_test',
-    clientName,
-    '_snapshots'
-  );
-
-  if (!existsSync(snaphotPath)) {
-    throw new Error('No test folder found for client : ' + clientName);
-  }
-  // List all JSON files in path
-  const snaphotFiles = readdirSync(snaphotPath).filter((file: string) =>
-    file.match(/.*.json/)
-  );
-
-  const asyncSnaphots = Promise.all(
-    snaphotFiles.map(async (path: string) => {
-      const file = await readFile(join(snaphotPath, path), 'utf-8');
-      return JSON.parse(file);
-    })
-  );
+  const asyncSnapshots = loadSnapshots(clientName);
 
   return async function (...args: Args) {
-    const snaphots = await asyncSnaphots;
+    const snaphots = await asyncSnapshots;
     const simplifyParams = await loadSimplifyParams(clientName);
     const stub = snaphots.find((stub: any) => {
       return (
@@ -92,7 +67,7 @@ export default function stubClientWithSnapshots<
 async function loadSimplifyParams(clientName: string) {
   try {
     const simplifyParamsPath = await import(
-      `./_test/${clientName}/simplify-params.ts`
+      `#clients/_test/${clientName}/simplify-params.ts`
     );
 
     if (!simplifyParamsPath.default) {
@@ -104,6 +79,41 @@ async function loadSimplifyParams(clientName: string) {
   } catch (e) {
     return (...args: any[]) => args;
   }
+}
+
+// Load all snapshots .json files in the folder /_test/<clientName>/_snapshots/*.json
+// using require.context webpack feature
+async function loadSnapshots(clientName: string) {
+  // @ts-ignore
+  const snapshotContext = require.context(
+    `#clients/_test/`,
+    true,
+    /\.json$/,
+    'lazy'
+  );
+  const snapshots = await Promise.all(
+    snapshotContext
+      .keys()
+      .filter((fileName: string) =>
+        fileName.includes(`/${clientName}/_snapshots/`)
+      )
+      .map((fileName: string) => {
+        const snapshot = snapshotContext(fileName);
+        return snapshot;
+      })
+  );
+
+  if (snapshots.length === 0) {
+    console.warn(
+      `
+  E2E Client Stub Warning
+  -----------------------
+  No snapshots found for client ${clientName}.
+  Please create a snapshot file in clients/_test/${clientName}/_snapshots/
+`
+    );
+  }
+  return snapshots;
 }
 
 export { stubClientWithSnapshots as stubClient };
