@@ -19,7 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": null,
+          "enseigne": "[NON-DIFFUSIBLE] [NON-DIFFUSIBLE] [NON-DIFFUSIBLE]",
           "denomination": "[NON-DIFFUSIBLE]",
           "nic": "00048",
           "dateCreation": "2019-12-23",
@@ -32,11 +32,12 @@
           "commune": "RENNES",
           "activitePrincipale": "68.20A",
           "libelleActivitePrincipale": "Location de logements (68.20A)",
-          "trancheEffectif": "",
+          "trancheEffectif": null,
           "libelleTrancheEffectif": "",
           "latitude": null,
           "longitude": null,
-          "conventionsCollectives": []
+          "conventionsCollectives": [],
+          "anneeTrancheEffectif": null
         },
         "allSiegesSiret": [],
         "statutDiffusion": "partiellement diffusible",
@@ -54,7 +55,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "[NON-DIFFUSIBLE] [NON-DIFFUSIBLE] [NON-DIFFUSIBLE]",
               "denomination": "[NON-DIFFUSIBLE]",
               "nic": "00048",
               "dateCreation": "2019-12-23",
@@ -67,11 +68,12 @@
               "commune": "RENNES",
               "activitePrincipale": "68.20A",
               "libelleActivitePrincipale": "Location de logements (68.20A)",
-              "trancheEffectif": "",
+              "trancheEffectif": null,
               "libelleTrancheEffectif": "",
               "latitude": null,
               "longitude": null,
-              "conventionsCollectives": []
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": null
             }
           ],
           "open": [
@@ -82,7 +84,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "[NON-DIFFUSIBLE] [NON-DIFFUSIBLE] [NON-DIFFUSIBLE]",
               "denomination": "[NON-DIFFUSIBLE]",
               "nic": "00048",
               "dateCreation": "2019-12-23",
@@ -95,11 +97,12 @@
               "commune": "RENNES",
               "activitePrincipale": "68.20A",
               "libelleActivitePrincipale": "Location de logements (68.20A)",
-              "trancheEffectif": "",
+              "trancheEffectif": null,
               "libelleTrancheEffectif": "",
               "latitude": null,
               "longitude": null,
-              "conventionsCollectives": []
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": null
             }
           ],
           "unknown": [],

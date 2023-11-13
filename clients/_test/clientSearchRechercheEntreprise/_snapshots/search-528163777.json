@@ -19,7 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": null,
+          "enseigne": "",
           "denomination": null,
           "nic": "00030",
           "dateCreation": "2013-10-18",
@@ -32,11 +32,12 @@
           "commune": "SAINT-OUEN-SUR-SEINE",
           "activitePrincipale": "43.22B",
           "libelleActivitePrincipale": "Travaux d’installation d’équipements thermiques et de climatisation (43.22B)",
-          "trancheEffectif": "",
+          "trancheEffectif": "11",
           "libelleTrancheEffectif": "",
           "latitude": "48.903483",
           "longitude": "2.347786",
-          "conventionsCollectives": []
+          "conventionsCollectives": [],
+          "anneeTrancheEffectif": "2020"
         },
         "allSiegesSiret": [],
         "statutDiffusion": "diffusible",
@@ -54,7 +55,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00030",
               "dateCreation": "2013-10-18",
@@ -67,11 +68,12 @@
               "commune": "SAINT-OUEN-SUR-SEINE",
               "activitePrincipale": "43.22B",
               "libelleActivitePrincipale": "Travaux d’installation d’équipements thermiques et de climatisation (43.22B)",
-              "trancheEffectif": "",
+              "trancheEffectif": "11",
               "libelleTrancheEffectif": "",
               "latitude": "48.903483",
               "longitude": "2.347786",
-              "conventionsCollectives": []
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "open": [
@@ -82,7 +84,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00030",
               "dateCreation": "2013-10-18",
@@ -95,11 +97,12 @@
               "commune": "SAINT-OUEN-SUR-SEINE",
               "activitePrincipale": "43.22B",
               "libelleActivitePrincipale": "Travaux d’installation d’équipements thermiques et de climatisation (43.22B)",
-              "trancheEffectif": "",
+              "trancheEffectif": "11",
               "libelleTrancheEffectif": "",
               "latitude": "48.903483",
               "longitude": "2.347786",
-              "conventionsCollectives": []
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "unknown": [],
