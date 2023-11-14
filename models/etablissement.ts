@@ -127,9 +127,11 @@ const getEtablissementWithLatLongFromSlug = async (
   slug: string
 ): Promise<IEtablissement> => {
   const etablissement = await getEtablissementFromSlug(slug);
-  const { lat, long } = await getGeoLoc(etablissement);
-  etablissement.latitude = lat;
-  etablissement.longitude = long;
+  if (!etablissement.latitude || !etablissement.longitude) {
+    const { lat, long } = await getGeoLoc(etablissement);
+    etablissement.latitude = lat;
+    etablissement.longitude = long;
+  }
   return etablissement;
 };
 
