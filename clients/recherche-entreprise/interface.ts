@@ -121,6 +121,7 @@ export type IComplements = {
   est_rge: boolean;
   est_uai: boolean;
   est_societe_mission: boolean;
+  est_association: boolean;
   identifiant_association: string;
 };
 

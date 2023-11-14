@@ -1,6 +1,6 @@
 import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
-import { estDiffusible, ISTATUTDIFFUSION } from '#models/statut-diffusion';
+import { estDiffusible } from '#models/statut-diffusion';
 
 export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string
@@ -16,18 +16,6 @@ export const isTwoMonthOld = (dateAsString: string) => {
     return false;
   }
 };
-
-export const isAssociationFromNatureJuridique = (natureJuridique = '') =>
-  natureJuridique === '5195' || natureJuridique.indexOf('92') === 0;
-
-export const isServicePublicFromNatureJuridique = (natureJuridique = '') =>
-  natureJuridique === '3210' ||
-  natureJuridique === '3110' ||
-  natureJuridique.indexOf('4') === 0 ||
-  natureJuridique.indexOf('71') === 0 ||
-  natureJuridique.indexOf('72') === 0 ||
-  natureJuridique.indexOf('73') === 0 ||
-  natureJuridique.indexOf('74') === 0;
 
 /**
  * Return true if an uniteLegale should be **ignored** by indexing bots

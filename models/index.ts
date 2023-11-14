@@ -5,12 +5,7 @@ import {
 } from '#models/etablissements-list';
 import { IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IEtatCivil } from '#models/immatriculation';
-import {
-  IdRna,
-  isAssociationFromNatureJuridique,
-  Siren,
-  Siret,
-} from '#utils/helpers';
+import { IdRna, Siren, Siret } from '#utils/helpers';
 import { IAPINotRespondingError } from './api-not-responding';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 
@@ -169,6 +164,7 @@ export interface IUniteLegaleComplements {
   estRge: boolean;
   estOrganismeFormation: boolean;
   estSocieteMission: boolean;
+  estAssociation: boolean;
   estUai: boolean;
 }
 
@@ -187,6 +183,7 @@ export const createDefaultUniteLegaleComplements = () => {
     estSocieteMission: false,
     estQualiopi: false,
     estUai: false,
+    estAssociation: false,
   };
 };
 
@@ -239,7 +236,7 @@ export const isAssociation = (
   toBeDetermined: IUniteLegale
 ): toBeDetermined is IAssociation => {
   return (
-    isAssociationFromNatureJuridique(toBeDetermined.natureJuridique) ||
+    toBeDetermined.complements.estAssociation ||
     (toBeDetermined as IAssociation).association.idAssociation !== null
   );
 };

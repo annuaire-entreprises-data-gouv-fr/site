@@ -127,6 +127,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       est_societe_mission = false,
       identifiant_association = null,
       statut_entrepreneur_spectacle = '',
+      est_association = false,
     },
     matching_etablissements,
     categorie_entreprise,
@@ -218,6 +219,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
       estOrganismeFormation: est_organisme_formation,
       estSocieteMission: est_societe_mission,
       estQualiopi: est_qualiopi,
+      estAssociation: est_association,
       estUai: est_uai,
     },
     association: {
