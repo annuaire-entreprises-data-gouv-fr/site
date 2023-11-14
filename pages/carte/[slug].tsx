@@ -45,7 +45,10 @@ const EtablissementMapPage: NextPageWithLayout<IProps> = ({
       <>
         <MapTitleEtablissement
           etablissement={etablissement}
-          title="Géolocalisation de l’établissement"
+          title={`Géolocalisation de l’établissement - ${getAdresseEtablissement(
+            etablissement,
+            session
+          )}`}
         />
         {!estDiffusible(etablissement) ? (
           <Info>
