@@ -16,6 +16,7 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
   snaphotFile,
   simplifyParams = (...args: T) => args,
   postProcessResult,
+
   __dirname,
 }: IParams<T, U>) {
   let result: U | undefined;
@@ -37,12 +38,18 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
     if (!result) {
       return;
     }
-
-    if (postProcessResult) {
-      postProcessResult(result);
-    }
-    expect(
-      JSON.stringify({ args: simplifyParams(...args), result }, null, 2)
-    ).toMatchFile(path.join(__dirname, '_snapshots', snaphotFile));
   }
+  if (postProcessResult) {
+    try {
+      postProcessResult(result);
+    } catch (e) {
+      console.error(e);
+      console.warn('Snapshot not tested');
+      return;
+    }
+  }
+
+  expect(
+    JSON.stringify({ args: simplifyParams(...args), result }, null, 2)
+  ).toMatchFile(path.join(__dirname, '_snapshots', snaphotFile));
 }

@@ -19,7 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": null,
+          "enseigne": "",
           "denomination": null,
           "nic": "00423",
           "dateCreation": "1999-05-17",
@@ -32,7 +32,7 @@
           "commune": "TOULOUSE",
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-          "trancheEffectif": "",
+          "trancheEffectif": "52",
           "libelleTrancheEffectif": "",
           "latitude": "43.615663",
           "longitude": "1.436756",
@@ -43,7 +43,8 @@
               "CdTN": false,
               "title": "Statut de la Fonction publique territoriale"
             }
-          ]
+          ],
+          "anneeTrancheEffectif": "2020"
         },
         "allSiegesSiret": [],
         "statutDiffusion": "diffusible",
@@ -61,7 +62,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00423",
               "dateCreation": "1999-05-17",
@@ -74,7 +75,7 @@
               "commune": "TOULOUSE",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": "52",
               "libelleTrancheEffectif": "",
               "latitude": "43.615663",
               "longitude": "1.436756",
@@ -85,7 +86,8 @@
                   "CdTN": false,
                   "title": "Statut de la Fonction publique territoriale"
                 }
-              ]
+              ],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "open": [
@@ -96,7 +98,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00423",
               "dateCreation": "1999-05-17",
@@ -109,7 +111,7 @@
               "commune": "TOULOUSE",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": "52",
               "libelleTrancheEffectif": "",
               "latitude": "43.615663",
               "longitude": "1.436756",
@@ -120,7 +122,8 @@
                   "CdTN": false,
                   "title": "Statut de la Fonction publique territoriale"
                 }
-              ]
+              ],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "unknown": [],
@@ -622,7 +625,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
-            "enseigne": null,
+            "enseigne": "",
             "denomination": null,
             "nic": "00423",
             "dateCreation": "1999-05-17",
@@ -646,7 +649,8 @@
                 "CdTN": false,
                 "title": "Statut de la Fonction publique territoriale"
               }
-            ]
+            ],
+            "anneeTrancheEffectif": ""
           }
         ],
         "nombreEtablissements": 72,
@@ -663,7 +667,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": null,
+          "enseigne": "",
           "denomination": null,
           "nic": "00012",
           "dateCreation": "2017-01-01",
@@ -676,7 +680,7 @@
           "commune": "VILLEFRANCHE-DE-ROUERGUE",
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-          "trancheEffectif": "",
+          "trancheEffectif": "21",
           "libelleTrancheEffectif": "",
           "latitude": "44.357175",
           "longitude": "2.02648",
@@ -687,7 +691,8 @@
               "CdTN": false,
               "title": "Statut de la Fonction publique territoriale"
             }
-          ]
+          ],
+          "anneeTrancheEffectif": "2020"
         },
         "allSiegesSiret": [],
         "statutDiffusion": "diffusible",
@@ -705,7 +710,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00012",
               "dateCreation": "2017-01-01",
@@ -718,7 +723,7 @@
               "commune": "VILLEFRANCHE-DE-ROUERGUE",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": "21",
               "libelleTrancheEffectif": "",
               "latitude": "44.357175",
               "longitude": "2.02648",
@@ -729,7 +734,8 @@
                   "CdTN": false,
                   "title": "Statut de la Fonction publique territoriale"
                 }
-              ]
+              ],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "open": [
@@ -740,7 +746,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00012",
               "dateCreation": "2017-01-01",
@@ -753,7 +759,7 @@
               "commune": "VILLEFRANCHE-DE-ROUERGUE",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": "21",
               "libelleTrancheEffectif": "",
               "latitude": "44.357175",
               "longitude": "2.02648",
@@ -764,7 +770,8 @@
                   "CdTN": false,
                   "title": "Statut de la Fonction publique territoriale"
                 }
-              ]
+              ],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "unknown": [],
@@ -1234,7 +1241,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
-            "enseigne": null,
+            "enseigne": "",
             "denomination": null,
             "nic": "00012",
             "dateCreation": "2017-01-01",
@@ -1258,7 +1265,8 @@
                 "CdTN": false,
                 "title": "Statut de la Fonction publique territoriale"
               }
-            ]
+            ],
+            "anneeTrancheEffectif": ""
           }
         ],
         "nombreEtablissements": 13,
@@ -1275,7 +1283,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": null,
+          "enseigne": "",
           "denomination": null,
           "nic": "00014",
           "dateCreation": "2017-01-01",
@@ -1288,7 +1296,7 @@
           "commune": "MURET",
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-          "trancheEffectif": "",
+          "trancheEffectif": "42",
           "libelleTrancheEffectif": "",
           "latitude": "43.468316",
           "longitude": "1.337009",
@@ -1299,7 +1307,8 @@
               "CdTN": false,
               "title": "Statut de la Fonction publique territoriale"
             }
-          ]
+          ],
+          "anneeTrancheEffectif": "2020"
         },
         "allSiegesSiret": [],
         "statutDiffusion": "diffusible",
@@ -1317,7 +1326,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00014",
               "dateCreation": "2017-01-01",
@@ -1330,7 +1339,7 @@
               "commune": "MURET",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": "42",
               "libelleTrancheEffectif": "",
               "latitude": "43.468316",
               "longitude": "1.337009",
@@ -1341,7 +1350,8 @@
                   "CdTN": false,
                   "title": "Statut de la Fonction publique territoriale"
                 }
-              ]
+              ],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "open": [
@@ -1352,7 +1362,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00014",
               "dateCreation": "2017-01-01",
@@ -1365,7 +1375,7 @@
               "commune": "MURET",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": "42",
               "libelleTrancheEffectif": "",
               "latitude": "43.468316",
               "longitude": "1.337009",
@@ -1376,7 +1386,8 @@
                   "CdTN": false,
                   "title": "Statut de la Fonction publique territoriale"
                 }
-              ]
+              ],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "unknown": [],
@@ -1902,7 +1913,7 @@
             "etatAdministratif": "en activité",
             "statutDiffusion": "diffusible",
             "estSiege": true,
-            "enseigne": null,
+            "enseigne": "",
             "denomination": null,
             "nic": "00014",
             "dateCreation": "2017-01-01",
@@ -1926,7 +1937,8 @@
                 "CdTN": false,
                 "title": "Statut de la Fonction publique territoriale"
               }
-            ]
+            ],
+            "anneeTrancheEffectif": ""
           }
         ],
         "nombreEtablissements": 6,

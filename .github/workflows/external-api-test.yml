@@ -3,10 +3,12 @@
 name: 'External API check'
 
 on:
+  pull_request:
+    branches: [main]
   workflow_dispatch:
-  # Check every day at 3:00 AM and 3:00 PM
+  # Check every day at 3:00 AM
   schedule:
-    - cron: '0 3,15 * * *'
+    - cron: '0 3 * * *'
 
 # Be extremely careful as the env variables defined here are accessible by all the actions of the workflow.
 # For critical env variable, declare it within the action.
@@ -89,9 +91,9 @@ jobs:
           If there is no incident, you can try to run the tests again.
           "
       - name: Notify API failure to team
-        if: failure()
+        if: ${{ github.event_name == 'schedule' && failure()}}
         uses: ./.github/actions/notify
         with:
-          message: '🚨 API client tests failed [see in github](${{ github.event.workflow_run.url }})'
+          message: '🚨 API client tests failed ({{ github.event.repository.html_url }}/actions/runs/{{ github.run_id }})'
           hook: ${{ secrets.TCHAP_HOOK }}
           id: ${{ secrets.TCHAP_ROOM_ID }}

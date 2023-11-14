@@ -19,7 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": null,
+          "enseigne": "",
           "denomination": null,
           "nic": "00017",
           "dateCreation": "2018-11-12",
@@ -32,7 +32,7 @@
           "commune": "CORDES-SUR-CIEL",
           "activitePrincipale": "43.91A",
           "libelleActivitePrincipale": "Travaux de charpente (43.91A)",
-          "trancheEffectif": "",
+          "trancheEffectif": "02",
           "libelleTrancheEffectif": "",
           "latitude": "44.075685",
           "longitude": "1.943401",
@@ -51,7 +51,8 @@
               "idKali": "KALICONT000005635221",
               "title": "Nouvelle convention collective nationale des ouvriers employés par les entreprises du bâtiment visées par le décret du 1er mars 1962 (c'est-à-dire occupant jusqu'à 10 salariés) du 7 mars 2018 (Avenant du 7 mars 2018)"
             }
-          ]
+          ],
+          "anneeTrancheEffectif": "2020"
         },
         "allSiegesSiret": [],
         "statutDiffusion": "diffusible",
@@ -69,7 +70,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00017",
               "dateCreation": "2018-11-12",
@@ -82,7 +83,7 @@
               "commune": "CORDES-SUR-CIEL",
               "activitePrincipale": "43.91A",
               "libelleActivitePrincipale": "Travaux de charpente (43.91A)",
-              "trancheEffectif": "",
+              "trancheEffectif": "02",
               "libelleTrancheEffectif": "",
               "latitude": "44.075685",
               "longitude": "1.943401",
@@ -101,7 +102,8 @@
                   "idKali": "KALICONT000005635221",
                   "title": "Nouvelle convention collective nationale des ouvriers employés par les entreprises du bâtiment visées par le décret du 1er mars 1962 (c'est-à-dire occupant jusqu'à 10 salariés) du 7 mars 2018 (Avenant du 7 mars 2018)"
                 }
-              ]
+              ],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "open": [
@@ -112,7 +114,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00017",
               "dateCreation": "2018-11-12",
@@ -125,7 +127,7 @@
               "commune": "CORDES-SUR-CIEL",
               "activitePrincipale": "43.91A",
               "libelleActivitePrincipale": "Travaux de charpente (43.91A)",
-              "trancheEffectif": "",
+              "trancheEffectif": "02",
               "libelleTrancheEffectif": "",
               "latitude": "44.075685",
               "longitude": "1.943401",
@@ -144,7 +146,8 @@
                   "idKali": "KALICONT000005635221",
                   "title": "Nouvelle convention collective nationale des ouvriers employés par les entreprises du bâtiment visées par le décret du 1er mars 1962 (c'est-à-dire occupant jusqu'à 10 salariés) du 7 mars 2018 (Avenant du 7 mars 2018)"
                 }
-              ]
+              ],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "unknown": [],
