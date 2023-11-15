@@ -19,7 +19,7 @@
           "etatAdministratif": "fermé",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": null,
+          "enseigne": "",
           "denomination": null,
           "nic": "00015",
           "dateCreation": "2020-01-13",
@@ -32,11 +32,12 @@
           "commune": "PARIS 8",
           "activitePrincipale": "62.02A",
           "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-          "trancheEffectif": "",
+          "trancheEffectif": "01",
           "libelleTrancheEffectif": "",
           "latitude": "48.870938",
           "longitude": "2.305916",
-          "conventionsCollectives": []
+          "conventionsCollectives": [],
+          "anneeTrancheEffectif": "2020"
         },
         "allSiegesSiret": [],
         "statutDiffusion": "diffusible",
@@ -54,7 +55,7 @@
               "etatAdministratif": "fermé",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00015",
               "dateCreation": "2020-01-13",
@@ -67,11 +68,12 @@
               "commune": "PARIS 8",
               "activitePrincipale": "62.02A",
               "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-              "trancheEffectif": "",
+              "trancheEffectif": "01",
               "libelleTrancheEffectif": "",
               "latitude": "48.870938",
               "longitude": "2.305916",
-              "conventionsCollectives": []
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "open": [],
@@ -84,7 +86,7 @@
               "etatAdministratif": "fermé",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00015",
               "dateCreation": "2020-01-13",
@@ -97,11 +99,12 @@
               "commune": "PARIS 8",
               "activitePrincipale": "62.02A",
               "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-              "trancheEffectif": "",
+              "trancheEffectif": "01",
               "libelleTrancheEffectif": "",
               "latitude": "48.870938",
               "longitude": "2.305916",
-              "conventionsCollectives": []
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "nombreEtablissementsOuverts": 0,
@@ -150,7 +153,7 @@
             "etatAdministratif": "fermé",
             "statutDiffusion": "diffusible",
             "estSiege": true,
-            "enseigne": null,
+            "enseigne": "",
             "denomination": null,
             "nic": "00015",
             "dateCreation": "2020-01-13",
@@ -167,7 +170,8 @@
             "libelleTrancheEffectif": "",
             "latitude": "48.870938",
             "longitude": "2.305916",
-            "conventionsCollectives": []
+            "conventionsCollectives": [],
+            "anneeTrancheEffectif": ""
           }
         ],
         "nombreEtablissements": 1,

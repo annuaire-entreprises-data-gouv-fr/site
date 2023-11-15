@@ -19,7 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": null,
+          "enseigne": "",
           "denomination": null,
           "nic": "00022",
           "dateCreation": "2016-12-28",
@@ -32,7 +32,7 @@
           "commune": "PARIS 13",
           "activitePrincipale": "84.11Z",
           "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-          "trancheEffectif": "",
+          "trancheEffectif": "22",
           "libelleTrancheEffectif": "",
           "latitude": "48.837285",
           "longitude": "2.370436",
@@ -43,7 +43,8 @@
               "CdTN": false,
               "title": "Statut de la Fonction publique territoriale"
             }
-          ]
+          ],
+          "anneeTrancheEffectif": "2020"
         },
         "allSiegesSiret": [],
         "statutDiffusion": "diffusible",
@@ -61,7 +62,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00022",
               "dateCreation": "2016-12-28",
@@ -74,7 +75,7 @@
               "commune": "PARIS 13",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": "22",
               "libelleTrancheEffectif": "",
               "latitude": "48.837285",
               "longitude": "2.370436",
@@ -85,7 +86,8 @@
                   "CdTN": false,
                   "title": "Statut de la Fonction publique territoriale"
                 }
-              ]
+              ],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "open": [
@@ -96,7 +98,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00022",
               "dateCreation": "2016-12-28",
@@ -109,7 +111,7 @@
               "commune": "PARIS 13",
               "activitePrincipale": "84.11Z",
               "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": "22",
               "libelleTrancheEffectif": "",
               "latitude": "48.837285",
               "longitude": "2.370436",
@@ -120,7 +122,8 @@
                   "CdTN": false,
                   "title": "Statut de la Fonction publique territoriale"
                 }
-              ]
+              ],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "unknown": [],

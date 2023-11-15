@@ -19,7 +19,7 @@
           "etatAdministratif": "fermé",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": null,
+          "enseigne": "",
           "denomination": null,
           "nic": "00015",
           "dateCreation": "2018-05-06",
@@ -32,11 +32,12 @@
           "commune": "GAGNY",
           "activitePrincipale": "70.22Z",
           "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
-          "trancheEffectif": "",
+          "trancheEffectif": null,
           "libelleTrancheEffectif": "",
           "latitude": "48.886494",
           "longitude": "2.542338",
-          "conventionsCollectives": []
+          "conventionsCollectives": [],
+          "anneeTrancheEffectif": null
         },
         "allSiegesSiret": [],
         "statutDiffusion": "diffusible",
@@ -54,7 +55,7 @@
               "etatAdministratif": "fermé",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00015",
               "dateCreation": "2018-05-06",
@@ -67,11 +68,12 @@
               "commune": "GAGNY",
               "activitePrincipale": "70.22Z",
               "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": null,
               "libelleTrancheEffectif": "",
               "latitude": "48.886494",
               "longitude": "2.542338",
-              "conventionsCollectives": []
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": null
             }
           ],
           "open": [],
@@ -84,7 +86,7 @@
               "etatAdministratif": "fermé",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00015",
               "dateCreation": "2018-05-06",
@@ -97,11 +99,12 @@
               "commune": "GAGNY",
               "activitePrincipale": "70.22Z",
               "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": null,
               "libelleTrancheEffectif": "",
               "latitude": "48.886494",
               "longitude": "2.542338",
-              "conventionsCollectives": []
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": null
             }
           ],
           "nombreEtablissementsOuverts": 0,
