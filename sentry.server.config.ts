@@ -13,7 +13,11 @@ if (isNextJSSentryActivated) {
 
       const headers = Object.entries(event.request.headers ?? {}).filter(
         // Remove sensitive headers
-        ([key]) => !key.startsWith('sec-') && !key.startsWith('x-')
+        ([key, value]) =>
+          !value.match(
+            // IP adress regex
+            /(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}/
+          )
       );
       event.request.headers = Object.fromEntries(headers);
 
