@@ -19,7 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": null,
+          "enseigne": "",
           "denomination": null,
           "nic": "00014",
           "dateCreation": "1983-03-01",
@@ -32,11 +32,12 @@
           "commune": "BLAYE-LES-MINES",
           "activitePrincipale": "85.31Z",
           "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
-          "trancheEffectif": "",
+          "trancheEffectif": "22",
           "libelleTrancheEffectif": "",
           "latitude": "46.8030906",
           "longitude": "4.4244097",
-          "conventionsCollectives": []
+          "conventionsCollectives": [],
+          "anneeTrancheEffectif": "2020"
         },
         "allSiegesSiret": [],
         "statutDiffusion": "diffusible",
@@ -54,7 +55,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00014",
               "dateCreation": "1983-03-01",
@@ -67,11 +68,12 @@
               "commune": "BLAYE-LES-MINES",
               "activitePrincipale": "85.31Z",
               "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": "22",
               "libelleTrancheEffectif": "",
               "latitude": "46.8030906",
               "longitude": "4.4244097",
-              "conventionsCollectives": []
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "open": [
@@ -82,7 +84,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00014",
               "dateCreation": "1983-03-01",
@@ -95,11 +97,12 @@
               "commune": "BLAYE-LES-MINES",
               "activitePrincipale": "85.31Z",
               "libelleActivitePrincipale": "Enseignement secondaire général (85.31Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": "22",
               "libelleTrancheEffectif": "",
               "latitude": "46.8030906",
               "longitude": "4.4244097",
-              "conventionsCollectives": []
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "unknown": [],

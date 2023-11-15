@@ -19,7 +19,7 @@
           "etatAdministratif": "fermé",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": null,
+          "enseigne": "",
           "denomination": null,
           "nic": "00010",
           "dateCreation": "1989-08-01",
@@ -32,11 +32,12 @@
           "commune": "LE PORT",
           "activitePrincipale": "66.22Z",
           "libelleActivitePrincipale": "Activités des agents et courtiers d’assurances (66.22Z)",
-          "trancheEffectif": "",
+          "trancheEffectif": "NN",
           "libelleTrancheEffectif": "",
           "latitude": "-20.939999",
           "longitude": "55.292503",
-          "conventionsCollectives": []
+          "conventionsCollectives": [],
+          "anneeTrancheEffectif": null
         },
         "allSiegesSiret": [],
         "statutDiffusion": "diffusible",
@@ -54,7 +55,7 @@
               "etatAdministratif": "fermé",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00010",
               "dateCreation": "1989-08-01",
@@ -67,11 +68,12 @@
               "commune": "LE PORT",
               "activitePrincipale": "66.22Z",
               "libelleActivitePrincipale": "Activités des agents et courtiers d’assurances (66.22Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": "NN",
               "libelleTrancheEffectif": "",
               "latitude": "-20.939999",
               "longitude": "55.292503",
-              "conventionsCollectives": []
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": null
             }
           ],
           "open": [],
@@ -84,7 +86,7 @@
               "etatAdministratif": "fermé",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00010",
               "dateCreation": "1989-08-01",
@@ -97,11 +99,12 @@
               "commune": "LE PORT",
               "activitePrincipale": "66.22Z",
               "libelleActivitePrincipale": "Activités des agents et courtiers d’assurances (66.22Z)",
-              "trancheEffectif": "",
+              "trancheEffectif": "NN",
               "libelleTrancheEffectif": "",
               "latitude": "-20.939999",
               "longitude": "55.292503",
-              "conventionsCollectives": []
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": null
             }
           ],
           "nombreEtablissementsOuverts": 0,

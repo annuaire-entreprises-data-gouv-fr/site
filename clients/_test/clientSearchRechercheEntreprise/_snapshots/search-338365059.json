@@ -19,7 +19,7 @@
           "etatAdministratif": "en activité",
           "statutDiffusion": "diffusible",
           "estSiege": true,
-          "enseigne": null,
+          "enseigne": "",
           "denomination": null,
           "nic": "00017",
           "dateCreation": "1986-06-13",
@@ -32,7 +32,7 @@
           "commune": "MAZERES-LEZONS",
           "activitePrincipale": "88.99B",
           "libelleActivitePrincipale": "Action sociale sans hébergement n.c.a. (88.99B)",
-          "trancheEffectif": "",
+          "trancheEffectif": "11",
           "libelleTrancheEffectif": "",
           "latitude": "43.277531",
           "longitude": "-0.356241",
@@ -44,7 +44,8 @@
               "idKali": "KALICONT000005635384",
               "title": "Convention collective nationale des acteurs du lien social et familial : centres sociaux et socioculturels, associations d'accueil de jeunes enfants, associations de développement social local du 4 juin 1983. Etendue par arrêté du 22 janvier 1987 JORF 12 février 1987. (1)"
             }
-          ]
+          ],
+          "anneeTrancheEffectif": "2020"
         },
         "allSiegesSiret": [],
         "statutDiffusion": "diffusible",
@@ -62,7 +63,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00017",
               "dateCreation": "1986-06-13",
@@ -75,7 +76,7 @@
               "commune": "MAZERES-LEZONS",
               "activitePrincipale": "88.99B",
               "libelleActivitePrincipale": "Action sociale sans hébergement n.c.a. (88.99B)",
-              "trancheEffectif": "",
+              "trancheEffectif": "11",
               "libelleTrancheEffectif": "",
               "latitude": "43.277531",
               "longitude": "-0.356241",
@@ -87,7 +88,8 @@
                   "idKali": "KALICONT000005635384",
                   "title": "Convention collective nationale des acteurs du lien social et familial : centres sociaux et socioculturels, associations d'accueil de jeunes enfants, associations de développement social local du 4 juin 1983. Etendue par arrêté du 22 janvier 1987 JORF 12 février 1987. (1)"
                 }
-              ]
+              ],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "open": [
@@ -98,7 +100,7 @@
               "etatAdministratif": "en activité",
               "statutDiffusion": "diffusible",
               "estSiege": true,
-              "enseigne": null,
+              "enseigne": "",
               "denomination": null,
               "nic": "00017",
               "dateCreation": "1986-06-13",
@@ -111,7 +113,7 @@
               "commune": "MAZERES-LEZONS",
               "activitePrincipale": "88.99B",
               "libelleActivitePrincipale": "Action sociale sans hébergement n.c.a. (88.99B)",
-              "trancheEffectif": "",
+              "trancheEffectif": "11",
               "libelleTrancheEffectif": "",
               "latitude": "43.277531",
               "longitude": "-0.356241",
@@ -123,7 +125,8 @@
                   "idKali": "KALICONT000005635384",
                   "title": "Convention collective nationale des acteurs du lien social et familial : centres sociaux et socioculturels, associations d'accueil de jeunes enfants, associations de développement social local du 4 juin 1983. Etendue par arrêté du 22 janvier 1987 JORF 12 février 1987. (1)"
                 }
-              ]
+              ],
+              "anneeTrancheEffectif": "2020"
             }
           ],
           "unknown": [],
