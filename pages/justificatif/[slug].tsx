@@ -51,11 +51,11 @@ const JustificatifPage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug } = extractParamsFromContext(context);
+    const { slug, isBot } = extractParamsFromContext(context);
 
     return {
       props: {
-        ...(await getJustificatifs(slug)),
+        ...(await getJustificatifs(slug, isBot)),
         metadata: {
           useReact: true,
         },
