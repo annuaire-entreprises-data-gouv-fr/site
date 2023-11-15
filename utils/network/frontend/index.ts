@@ -72,7 +72,7 @@ if (typeof window !== 'undefined') {
 }
 
 export class RequestAbortedDuringUnloadException extends Error {
-  name = 'RequestAbortedDuringUnload';
+  name = 'RequestAbortedDuringUnloadException';
   constructor() {
     super('Fetch request aborted because user is navigating away');
   }
