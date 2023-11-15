@@ -21,7 +21,7 @@ if (isNextJSSentryActivated) {
         event.tags = {};
       }
       event.tags['is_bot'] = isUserAgentABot(
-        event.request.headers.userAgent ?? ''
+        event.request.headers['user-agent'] ?? ''
       );
 
       return event;

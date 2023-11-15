@@ -135,6 +135,7 @@
           "estOrganismeFormation": false,
           "estSocieteMission": false,
           "estQualiopi": false,
+          "estAssociation": false,
           "estUai": false
         },
         "association": {
