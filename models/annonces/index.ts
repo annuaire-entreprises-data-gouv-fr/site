@@ -53,9 +53,7 @@ export interface IAnnoncesAssociation {
 }
 
 const getAnnoncesFromSlug = async (siren: string, isBot: boolean) => {
-  const [uniteLegale] = await Promise.all([
-    getUniteLegaleFromSlug(siren, { isBot }),
-  ]);
+  const uniteLegale = await getUniteLegaleFromSlug(siren, { isBot });
 
   let annoncesAssociation = null;
   let comptesAssociation = null;
