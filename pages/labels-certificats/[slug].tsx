@@ -15,8 +15,8 @@ import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import {
-  getCertificationsFromSlug,
   ICertifications,
+  getCertificationsFromSlug,
 } from '#models/certifications';
 import { getNomComplet } from '#models/statut-diffusion';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
@@ -96,7 +96,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug } = extractParamsFromContext(context);
+    const { slug, isBot } = extractParamsFromContext(context);
 
     const {
       uniteLegale,
@@ -105,7 +105,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       egapro,
       bio,
       organismesDeFormation,
-    } = await getCertificationsFromSlug(slug);
+    } = await getCertificationsFromSlug(slug, isBot);
 
     return {
       props: {

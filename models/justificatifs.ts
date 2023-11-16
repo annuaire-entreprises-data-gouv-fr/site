@@ -22,10 +22,10 @@ export interface IJustificatifs {
     | IAPILoading;
 }
 
-const getJustificatifs = async (slug: string) => {
+const getJustificatifs = async (slug: string, isBot: boolean) => {
   const siren = verifySiren(slug);
 
-  const uniteLegale = await getUniteLegaleFromSlug(siren);
+  const uniteLegale = await getUniteLegaleFromSlug(siren, { isBot });
 
   const immatriculationJOAFE = isAssociation(uniteLegale)
     ? await getImmatriculationJOAFE(
