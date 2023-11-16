@@ -76,9 +76,9 @@ const Annonces: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug } = extractParamsFromContext(context);
+    const { slug, isBot } = extractParamsFromContext(context);
     const { uniteLegale, comptesAssociation, annoncesAssociation } =
-      await getAnnoncesFromSlug(slug);
+      await getAnnoncesFromSlug(slug, isBot);
     return {
       props: {
         annoncesAssociation,

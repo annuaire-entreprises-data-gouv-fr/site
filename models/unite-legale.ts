@@ -44,7 +44,7 @@ import { ISTATUTDIFFUSION } from './statut-diffusion';
 
 interface IUniteLegaleOptions {
   page?: number;
-  isBot?: boolean;
+  isBot: boolean;
 }
 
 /**
@@ -52,7 +52,7 @@ interface IUniteLegaleOptions {
  */
 export const getUniteLegaleFromSlug = async (
   slug: string,
-  options: IUniteLegaleOptions = {}
+  options: IUniteLegaleOptions
 ): Promise<IUniteLegale> => {
   const { isBot = false, page = 1 } = options;
 

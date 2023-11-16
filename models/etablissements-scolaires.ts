@@ -50,11 +50,12 @@ export const getEtablissementsScolaires = async (
 
 export const getEtablissementsScolairesFromSlug = async (
   slug: string,
-  page: number
+  page: number,
+  isBot: boolean
 ) => {
   const siren = verifySiren(slug);
   const [uniteLegale, etablissementsScolaires] = await Promise.all([
-    getUniteLegaleFromSlug(siren),
+    getUniteLegaleFromSlug(siren, { isBot }),
     getEtablissementsScolaires(siren, page),
   ]);
 

@@ -163,14 +163,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
     logErrorInSentry(e, {
       errorName: 'Failed to compute matomo stats',
     });
-    return {
-      visits: [],
-      monthlyNps: [],
-      mostCopied: [],
-      copyPasteAction: [],
-      redirectedSiren: [],
-      userResponses: {},
-    };
+    throw e;
   }
 };
 

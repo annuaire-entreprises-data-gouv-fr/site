@@ -25,9 +25,10 @@ export interface ICertifications {
 }
 
 export const getCertificationsFromSlug = async (
-  slug: string
+  slug: string,
+  isBot: boolean
 ): Promise<ICertifications> => {
-  const uniteLegale = await getUniteLegaleFromSlug(slug);
+  const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
 
   const [rge, entrepreneurSpectacles, bio, egapro, organismesDeFormation] =
     await Promise.all([

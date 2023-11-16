@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import { EtablissementsScolairesSection } from '#components/education-nationale';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
@@ -53,9 +52,9 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const pageParam = (context.query.page || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
-    const { slug } = extractParamsFromContext(context);
+    const { slug, isBot } = extractParamsFromContext(context);
     const { uniteLegale, etablissementsScolaires } =
-      await getEtablissementsScolairesFromSlug(slug, page);
+      await getEtablissementsScolairesFromSlug(slug, page, isBot);
 
     return {
       props: {
