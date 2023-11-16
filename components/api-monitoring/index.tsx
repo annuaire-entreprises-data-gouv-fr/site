@@ -6,9 +6,6 @@ import constants from '#models/constants';
 import { IMonitoringWithMetaData, IRatio } from '#models/monitoring';
 
 const getUptimeColor = (ratio: IRatio) => {
-  if (!ratio.isActive) {
-    return '#ddd';
-  }
   const uptimeNum = parseFloat(ratio.ratio);
 
   if (uptimeNum >= 99.99) {
@@ -22,9 +19,6 @@ const getUptimeColor = (ratio: IRatio) => {
 };
 
 const getUptimeLabel = (ratio: IRatio) => {
-  if (!ratio.isActive) {
-    return 'Aucune donnée sur cette période.';
-  }
   const uptimeNum = parseFloat(ratio.ratio);
   if (uptimeNum >= 99.99) {
     return 'service en état de fonctionnement';
@@ -177,10 +171,6 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
             <div>
               <b>30 jours</b>
               <span>{uptime.month}%</span>
-            </div>
-            <div>
-              <b>3 mois</b>
-              <span>{uptime.trimester}%</span>
             </div>
           </div>
         </div>

@@ -7,11 +7,11 @@ apiMonitors:
   - apiName: API Recherche d’entreprises
     apiSlug: recherche-entreprise
     apigouvLink: https://api.gouv.fr/les-api/api-recherche-entreprises
-    id: 787859512
+    id: 4pyd
   - apiName: API Base Adresse Nationale
     apiSlug: ban
     apigouvLink: https://api.gouv.fr/les-api/base-adresse-nationale
-    id: 789207932
+    id: qct6
 dataSources:
   - label: Base Adresse Nationale
     apiSlug: ban

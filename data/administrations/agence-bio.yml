@@ -8,7 +8,7 @@ apiMonitors:
   - apiName: API Professionnels du Bio
     apiSlug: bio
     apigouvLink: https://api.gouv.fr/les-api/api-professionnels-bio
-    id: 794009401
+    id: n11w
 dataSources:
   - label: Liste des professionnels engagés en BIO
     apiSlug: bio
