@@ -45,6 +45,12 @@ const team = [
     pronoun: 'un',
     role: 'lead développeur',
   },
+  {
+    photoUrl: '/images/team/kevin.jpg',
+    fullname: 'Kevin Masseix',
+    pronoun: 'un',
+    role: 'devops',
+  },
 ];
 
 const Equipe: NextPageWithLayout = () => {
