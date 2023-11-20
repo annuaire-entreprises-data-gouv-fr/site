@@ -222,7 +222,7 @@
             "sexe": null,
             "nom": "NÉGRIER",
             "prenom": "Philippe",
-            "role": "Président",
+            "role": null,
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }
@@ -495,7 +495,7 @@
             "sexe": null,
             "nom": "DANAN",
             "prenom": "Charles",
-            "role": "Directeur général",
+            "role": "Directeur Général",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           },
@@ -510,7 +510,7 @@
           {
             "siren": "432345783",
             "denomination": "PROMETHEE GROUP",
-            "role": "Président"
+            "role": null
           },
           {
             "siren": "702621590",
@@ -1062,7 +1062,7 @@
             "sexe": null,
             "nom": "DURET",
             "prenom": "Eric",
-            "role": "président",
+            "role": null,
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }
