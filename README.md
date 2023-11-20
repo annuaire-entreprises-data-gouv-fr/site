@@ -29,7 +29,7 @@ Vous faîtes partie de l’équipe contenu ? [Consultez le tutoriel.](https://gi
 
 ### Vie privée et siren protégés
 
-Pour modifier la liste des siren protégés en diffusion [mettre à jour la liste suivante](https://github.com/etalab/annuaire-entreprises-site/edit/main/public/protected-siren.txt)
+Pour protéger un siren et en limiter la diffusion [suivez la procédure](https://annuaire-entreprises.data.gouv.fr/faq/supprimer-donnees-personnelles-entreprise).
 
 ## Dépôts liés 🏗
 
