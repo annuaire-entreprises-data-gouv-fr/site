@@ -154,7 +154,7 @@
             "sexe": null,
             "nom": "ESTOURNET",
             "prenom": "Pierre",
-            "role": "Président",
+            "role": null,
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }

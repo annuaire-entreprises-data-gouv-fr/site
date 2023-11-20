@@ -151,17 +151,9 @@
         "nombreEtablissementsOuverts": 2,
         "dirigeants": [
           {
-            "sexe": null,
-            "nom": "LEVY",
-            "prenom": "Ilan",
-            "role": "Directeur général",
-            "dateNaissancePartial": "",
-            "lieuNaissance": ""
-          },
-          {
             "siren": "878719756",
             "denomination": "GSE VD",
-            "role": "Président"
+            "role": null
           }
         ]
       }

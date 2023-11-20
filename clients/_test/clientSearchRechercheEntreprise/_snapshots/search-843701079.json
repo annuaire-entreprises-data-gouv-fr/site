@@ -214,7 +214,7 @@
             "sexe": null,
             "nom": "BERTRAND",
             "prenom": "Lionel",
-            "role": "Président",
+            "role": null,
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }
