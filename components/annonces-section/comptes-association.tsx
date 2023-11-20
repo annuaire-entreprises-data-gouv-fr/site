@@ -6,25 +6,19 @@ import { DILA } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
-import { IComptesAssociation } from '#models/annonces';
-import { IAPILoading } from '#models/api-loading';
-import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IAssociation } from '#models/index';
 import { formatDate } from '#utils/helpers';
+import { useFetchComptesAssociation } from 'hooks';
 
 export const ComptesAssociationSection: React.FC<{
   association: IAssociation;
-  comptesAssociation:
-    | IComptesAssociation
-    | IAPINotRespondingError
-    | IAPILoading;
-}> = ({ association, comptesAssociation }) => {
+}> = ({ association }) => {
+  const comptesAssociation = useFetchComptesAssociation(association);
   return (
     <DataSection
       data={comptesAssociation}
       title="Dépôt de Comptes des Associations"
       sources={[EAdministration.DILA]}
-      notFoundInfo={null}
     >
       {(comptesAssociation) =>
         comptesAssociation.comptes.length === 0 ? (

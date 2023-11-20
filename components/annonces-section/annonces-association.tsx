@@ -7,25 +7,19 @@ import { DILA } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
-import { IAnnoncesAssociation } from '#models/annonces';
-import { IAPILoading } from '#models/api-loading';
-import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IAssociation } from '#models/index';
 import { formatDate } from '#utils/helpers';
+import { useFetchJOAFE } from 'hooks';
 
 const AnnoncesAssociationSection: React.FC<{
   association: IAssociation;
-  annoncesAssociation:
-    | IAnnoncesAssociation
-    | IAPINotRespondingError
-    | IAPILoading;
-}> = ({ association, annoncesAssociation }) => {
+}> = ({ association }) => {
+  const annoncesAssociation = useFetchJOAFE(association);
   return (
     <DataSection
       title="Annonces Journal Officiel des Associations"
       sources={[EAdministration.DILA]}
       data={annoncesAssociation}
-      notFoundInfo={null}
     >
       {(annoncesAssociation) => (
         <>

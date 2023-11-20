@@ -5,9 +5,6 @@ import { ComptesAssociationSection } from '#components/annonces-section/comptes-
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { IAnnoncesAssociation, IAnnoncesBodacc } from '#models/annonces';
-import { IAPILoading } from '#models/api-loading';
-import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale, isAssociation } from '#models/index';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
@@ -16,12 +13,9 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { useFetchComptesAssociation, useFetchJOAFE } from 'hooks';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
-  annoncesAssociation: IAnnoncesAssociation | IAPINotRespondingError;
-  bodacc: IAnnoncesBodacc | IAPINotRespondingError | IAPILoading;
   uniteLegale: IUniteLegale;
 }
 
@@ -29,8 +23,6 @@ const Annonces: NextPageWithLayout<IProps> = ({
   metadata: { session },
   uniteLegale,
 }) => {
-  const annoncesAssociation = useFetchJOAFE(uniteLegale);
-  const comptesAssociation = useFetchComptesAssociation(uniteLegale);
   return (
     <>
       <Meta
@@ -51,15 +43,8 @@ const Annonces: NextPageWithLayout<IProps> = ({
         <AnnoncesBodacc uniteLegale={uniteLegale} />
         {isAssociation(uniteLegale) && (
           <>
-            <AnnoncesAssociationSection
-              association={uniteLegale}
-              annoncesAssociation={annoncesAssociation}
-            />
-
-            <ComptesAssociationSection
-              association={uniteLegale}
-              comptesAssociation={comptesAssociation}
-            />
+            <AnnoncesAssociationSection association={uniteLegale} />
+            <ComptesAssociationSection association={uniteLegale} />
           </>
         )}
       </div>
