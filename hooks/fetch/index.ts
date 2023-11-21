@@ -1,3 +1,4 @@
+export { useFetchBODACC } from './bodacc';
 export { useFetchComptesAssociation } from './comptes-association';
 export { useFetchDonneesRestreintes } from './donnees-restreintes';
 export { useFetchFinancesSociete } from './finances-societe';

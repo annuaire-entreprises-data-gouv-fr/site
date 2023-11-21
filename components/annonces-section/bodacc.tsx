@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import routes from '#clients/routes';
 import Info from '#components-ui/alerts/info';
 import ButtonLink from '#components-ui/button';
@@ -8,28 +8,16 @@ import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { IAnnoncesBodacc } from '#models/annonces';
-import { getAnnoncesBodaccFromSlug } from '#models/annonces/bodacc';
-import { APILoadingFactory, IAPILoading } from '#models/api-loading';
+import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/index';
-import { formatDate, verifySiren } from '#utils/helpers';
+import { formatDate } from '#utils/helpers';
+import { useFetchBODACC } from 'hooks';
 
 const AnnoncesBodacc: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const [bodacc, setBodacc] = useState<
-    IAnnoncesBodacc | IAPINotRespondingError | IAPILoading
-  >(APILoadingFactory());
-  useEffect(() => {
-    const get = async () => {
-      const response = await getAnnoncesBodaccFromSlug(
-        verifySiren(uniteLegale.siren)
-      );
-      setBodacc(response);
-    };
-    get();
-  }, [uniteLegale]);
-
+  const bodacc = useFetchBODACC(uniteLegale);
   return <AnnoncesBodaccSection uniteLegale={uniteLegale} bodacc={bodacc} />;
 };
 
