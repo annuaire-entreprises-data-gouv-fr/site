@@ -1,6 +1,6 @@
 import { useSpring } from '@react-spring/web';
 import { useMeasure } from './use-measure';
-import usePrefersReducedMotion from './use-prefers-reduced-motion';
+import { usePrefersReducedMotion } from './use-prefers-reduced-motion';
 
 export function useHeightTransition({ animateAppear = false } = {}) {
   const [ref, { height }] = useMeasure();
