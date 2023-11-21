@@ -1,6 +1,8 @@
 const routes = {
   api: {
     rne: '/api/data-fetching/rne',
+    conformite: `/api/data-fetching/espace-agent/conformite`,
+    actes: `/api/data-fetching/espace-agent/actes`,
   },
   apiEntreprise: {
     association: '/v4/djepva/api-association/associations/',
@@ -104,6 +106,7 @@ const routes = {
   },
   proxy: {
     rne: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
+    actes: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/actes/',
     association:
       'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
   },

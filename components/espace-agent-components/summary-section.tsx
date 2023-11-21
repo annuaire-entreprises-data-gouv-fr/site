@@ -1,4 +1,3 @@
-import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
@@ -6,14 +5,17 @@ import { PrintNever } from '#components-ui/print-visibility';
 import { ProtectedSection } from '#components/section/protected-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { IUniteLegale } from '#models/index';
+import { ISession, isSuperAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps {
   uniteLegale: IUniteLegale;
+  session: ISession | null;
 }
 
 export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
   uniteLegale,
+  session = null,
 }) => {
   return (
     <PrintNever>
@@ -21,17 +23,22 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
         <TwoColumnTable
           body={[
             [
-              'Conformité',
-              <a href={`/espace-agent/${uniteLegale.siren}`}>
-                → Consulter les attestations fiscales et sociales
+              'Documents juridiques',
+              <a href={`/espace-agent/${uniteLegale.siren}#actes`}>
+                → Consulter les Actes et les Statuts constitutifs
               </a>,
             ],
-            [
-              'Dirigeants et registre des bénéficiaires effectifs',
-              <a href={`/dirigeants/${uniteLegale.siren}`}>
-                → Consulter la page dirigeants
-              </a>,
+            ...[
+              isSuperAgent(session)
+                ? [
+                    'Conformité',
+                    <a href={`/espace-agent/${uniteLegale.siren}#conformite`}>
+                      → Consulter les attestations fiscales et sociales
+                    </a>,
+                  ]
+                : [],
             ],
+            ['', <br />],
             [
               <FAQLink tooltipLabel="Immatriculation au RNE">
                 Depuis le 1er Janvier 2023, toute entreprise exerçant sur le
@@ -46,6 +53,14 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
               </FAQLink>,
               <a href={`/justificatif/${uniteLegale.siren}`}>
                 → Consulter la page justificatif d’immatriculation
+              </a>,
+            ],
+            [
+              '',
+
+              <a href={`/dirigeants/${uniteLegale.siren}`}>
+                → Consulter la page dirigeants & le registre des bénéficiaires
+                effectifs
               </a>,
             ],
             [

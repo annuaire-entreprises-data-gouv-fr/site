@@ -1,5 +1,16 @@
 import { Siren } from '#utils/helpers';
 
+interface IActeRNE {
+  id: string;
+  dateDepot: string;
+}
+
+export interface IActesRNE {
+  actes: IActeRNE[];
+  bilans: IActeRNE[];
+  bilansSaisis: IActeRNE[];
+}
+
 export interface IImmatriculation {
   downloadLink: string;
   siteLink: string;

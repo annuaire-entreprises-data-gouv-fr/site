@@ -23,7 +23,7 @@ export default function DataSectionLoader({
           </FadeIn>
         </HeightTransition>
       )}
-      {!dataSources ? (
+      {!dataSources || dataSources.length === 0 ? (
         <p>
           Nous récupérons les informations <Loader />
         </p>
