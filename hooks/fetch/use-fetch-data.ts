@@ -11,6 +11,7 @@ import { RequestAbortedDuringUnloadException } from '#utils/network/frontend';
 type IFetchDataType<T> = {
   fetchData: () => Promise<T>;
   administration: EAdministration;
+  errorOn404?: boolean;
   logError?: (error: any) => void;
 };
 
@@ -47,6 +48,6 @@ export function useFetchData<T extends {}>(
       }
     };
     fetchAndTreatResponse();
-  }, [...dependancies]);
+  }, dependancies);
   return response;
 }

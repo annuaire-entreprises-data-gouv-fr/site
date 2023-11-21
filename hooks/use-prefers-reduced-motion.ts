@@ -12,7 +12,7 @@ const getInitialState = () =>
  *
  * Should be used to conditionally render animations and transitions.
  */
-export default function usePrefersReducedMotion() {
+export function usePrefersReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] =
     useState(getInitialState);
 

@@ -152,9 +152,9 @@
         "dirigeants": [
           {
             "sexe": null,
-            "nom": "JOUPPE (BARTHE)",
+            "nom": "BARTHE",
             "prenom": "Marie-christine",
-            "role": "Gérant, Associé indéfiniment responsable",
+            "role": "Gérant",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           },
@@ -162,7 +162,7 @@
             "sexe": null,
             "nom": "JOUPPE",
             "prenom": "Bernard",
-            "role": "Gérant, Associé indéfiniment responsable",
+            "role": "Gérant",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           },
@@ -193,7 +193,7 @@
           {
             "sexe": null,
             "nom": "JOUPPE",
-            "prenom": "Sigolène",
+            "prenom": "Sigolene",
             "role": "Associé indéfiniment responsable",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
@@ -353,7 +353,7 @@
             "sexe": null,
             "nom": "JOUPPE",
             "prenom": "Xavier",
-            "role": "Président, Liquidateur",
+            "role": "Liquidateur",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }

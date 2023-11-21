@@ -10,7 +10,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { useFetchImmatriculationRNE } from 'hooks/fetch/immatriculation-rne';
+import { useFetchImmatriculationRNE } from 'hooks';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IJustificatifs, IPropsWithMetadata {}

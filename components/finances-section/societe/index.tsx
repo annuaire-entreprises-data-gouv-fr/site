@@ -7,7 +7,7 @@ import { EAdministration } from '#models/administrations';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/index';
 import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
-import { useFetchFinancesSociete } from 'hooks/fetch/finances-societe';
+import { useFetchFinancesSociete } from 'hooks';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
