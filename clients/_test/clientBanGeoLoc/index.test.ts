@@ -5,7 +5,10 @@ describe('clientBanGeoLoc', () => {
   [
     '129 rue lamarck, 75018 paris 18',
     'manakin production, 129 rue lamarck, 75018 paris 18',
+    'manakin production 129 rue lamarck 75018 paris 18',
     '129 rue lamarck, 75018 paris 18e',
+    'rue jules ferry, 64110 mazeres-lezons',
+    'rue jules ferry 64110 mazeres-lezons',
   ].forEach(expectClientToMatchSnapshotWithAddress);
 });
 

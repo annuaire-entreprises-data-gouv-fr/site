@@ -16,6 +16,7 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     '338365059',
     '351556394',
     // '356000000', // La poste
+    '493096580',
     '528163777',
     '839517323',
     '842019051', // Qualibat RGE
