@@ -58,7 +58,7 @@ jobs:
 
       - name: Run API client unit tests
         run: |
-          npm run test:api-clients -- --runInBand --testTimeout=60000 --silent
+          npm run test:api-clients -- --runInBand --testTimeout=61000 --silent
 
       - name: '[IF FAIL] Manual action required (read below)'
         if: ${{ failure() }}

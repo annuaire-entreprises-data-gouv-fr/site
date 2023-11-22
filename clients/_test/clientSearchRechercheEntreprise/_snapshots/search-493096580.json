@@ -1,0 +1,165 @@
+{
+  "args": {
+    "page": 1,
+    "searchTerms": "493096580",
+    "searchFilterParams": ""
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 1,
+    "results": [
+      {
+        "siren": "493096580",
+        "oldSiren": "493096580",
+        "siege": {
+          "siren": "493096580",
+          "siret": "49309658000029",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": "",
+          "denomination": "PAYSAGISTE DU CAROUX",
+          "nic": "00029",
+          "dateCreation": "2010-10-22",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2013-10-01",
+          "dateFermeture": "",
+          "adresse": "RTE DE SAINT PONS 34390 MONS",
+          "adressePostale": "PAYSAGISTE DU CAROUX, RTE DE SAINT PONS 34390 MONS",
+          "codePostal": "34390",
+          "commune": "MONS",
+          "activitePrincipale": "81.30Z",
+          "libelleActivitePrincipale": "Services d’aménagement paysager (81.30Z)",
+          "trancheEffectif": "00",
+          "libelleTrancheEffectif": "",
+          "latitude": "43.565024",
+          "longitude": "2.946295",
+          "conventionsCollectives": [],
+          "anneeTrancheEffectif": "2020"
+        },
+        "allSiegesSiret": [],
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "JOHAN GIROD",
+        "chemin": "johan-girod-493096580",
+        "natureJuridique": "1000",
+        "libelleNatureJuridique": "Entrepreneur individuel",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "493096580",
+              "siret": "49309658000029",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": "",
+              "denomination": "PAYSAGISTE DU CAROUX",
+              "nic": "00029",
+              "dateCreation": "2010-10-22",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2013-10-01",
+              "dateFermeture": "",
+              "adresse": "RTE DE SAINT PONS 34390 MONS",
+              "adressePostale": "PAYSAGISTE DU CAROUX, RTE DE SAINT PONS 34390 MONS",
+              "codePostal": "34390",
+              "commune": "MONS",
+              "activitePrincipale": "81.30Z",
+              "libelleActivitePrincipale": "Services d’aménagement paysager (81.30Z)",
+              "trancheEffectif": "00",
+              "libelleTrancheEffectif": "",
+              "latitude": "43.565024",
+              "longitude": "2.946295",
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": "2020"
+            }
+          ],
+          "open": [
+            {
+              "siren": "493096580",
+              "siret": "49309658000029",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": "",
+              "denomination": "PAYSAGISTE DU CAROUX",
+              "nic": "00029",
+              "dateCreation": "2010-10-22",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2013-10-01",
+              "dateFermeture": "",
+              "adresse": "RTE DE SAINT PONS 34390 MONS",
+              "adressePostale": "PAYSAGISTE DU CAROUX, RTE DE SAINT PONS 34390 MONS",
+              "codePostal": "34390",
+              "commune": "MONS",
+              "activitePrincipale": "81.30Z",
+              "libelleActivitePrincipale": "Services d’aménagement paysager (81.30Z)",
+              "trancheEffectif": "00",
+              "libelleTrancheEffectif": "",
+              "latitude": "43.565024",
+              "longitude": "2.946295",
+              "conventionsCollectives": [],
+              "anneeTrancheEffectif": "2020"
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 2,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "81.30Z",
+        "libelleActivitePrincipale": "Services d’aménagement paysager",
+        "dateCreation": "2006-12-01",
+        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateDebutActivite": "",
+        "trancheEffectif": "00",
+        "anneeCategorieEntreprise": "2020",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2020",
+        "dirigeant": null,
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": false,
+          "estEntrepreneurIndividuel": true,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estAssociation": false,
+          "estUai": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": [],
+        "matchingEtablissements": [],
+        "nombreEtablissements": 2,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": [
+          {
+            "sexe": null,
+            "nom": "GIROD",
+            "prenom": "Johan",
+            "role": null,
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          }
+        ]
+      }
+    ]
+  }
+}
