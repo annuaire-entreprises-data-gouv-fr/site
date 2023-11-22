@@ -8,7 +8,7 @@ apiMonitors:
   - apiName: API Professionnels du Bio
     apiSlug: bio
     apigouvLink: https://api.gouv.fr/les-api/api-professionnels-bio
-    id: n11w
+    updownIoId: w3tx
 dataSources:
   - label: Liste des professionnels engagés en BIO
     apiSlug: bio

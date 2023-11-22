@@ -26,7 +26,7 @@ export type IAdministrationMetaData = {
 };
 
 export type IAPIMonitorMetaData = {
-  id: string;
+  updownIoId: string;
   apigouvLink?: string;
   apiSlug: string;
   apiName: string;

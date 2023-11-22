@@ -120,7 +120,6 @@ export class DailyUptimeRatioConverter {
       .map((day) => {
         return {
           ratioNumber: day.uptime,
-          ratio: day.uptime.toFixed(2),
           date: this.getDDMMYYYY(day.date),
         };
       });

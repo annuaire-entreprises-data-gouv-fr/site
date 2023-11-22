@@ -8,11 +8,11 @@ apiMonitors:
   - apiName: API BODACC
     apiSlug: bodacc
     apigouvLink: https://api.gouv.fr/les-api/api-bulletin-annonces-civiles-commerciales-bodacc
-    id: gjsg
+    updownIoId: wd04
   - apiName: API Annonces et comptes annuels des associations (JOAFE)
     apiSlug: joafe
     apigouvLink: https://api.gouv.fr/les-api/api-annonces-comptes-annuels-associations-joafe
-    id: vyak
+    updownIoId: 8pjy
 dataSources:
   - label: Bulletin officiel des annonces civiles et commerciales (BODACC)
     apiSlug: bodacc

@@ -6,7 +6,7 @@ import constants from '#models/constants';
 import { IMonitoringWithMetaData, IRatio } from '#models/monitoring';
 
 const getUptimeColor = (ratio: IRatio) => {
-  const uptimeNum = parseFloat(ratio.ratio);
+  const uptimeNum = ratio.ratioNumber;
 
   if (uptimeNum >= 99.99) {
     return '#3bd671';
@@ -19,15 +19,16 @@ const getUptimeColor = (ratio: IRatio) => {
 };
 
 const getUptimeLabel = (ratio: IRatio) => {
-  const uptimeNum = parseFloat(ratio.ratio);
+  const uptimeNum = ratio.ratioNumber;
+  const formattedRation = ratio.ratioNumber.toFixed(2);
   if (uptimeNum >= 99.99) {
     return 'service en état de fonctionnement';
   } else if (uptimeNum >= 99) {
-    return `${ratio.ratio}% : service faiblement perturbé`;
+    return `${formattedRation}% : service faiblement perturbé`;
   } else if (uptimeNum >= 95) {
-    return `${ratio.ratio}% : service très perturbé`; // Orange
+    return `${formattedRation}% : service très perturbé`; // Orange
   }
-  return `${ratio.ratio}% : service extrêmement perturbé`;
+  return `${formattedRation}% : service extrêmement perturbé`;
 };
 
 const getHideClasses = (index: number) => {

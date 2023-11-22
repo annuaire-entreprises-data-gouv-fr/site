@@ -9,4 +9,4 @@ description: |
 apiMonitors:
   - apiName: API TVA
     apiSlug: tva
-    id: 7z86
+    updownIoId: pkcu

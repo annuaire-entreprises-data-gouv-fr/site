@@ -6,7 +6,7 @@ contact: https://www.economie.gouv.fr/contact
 apiMonitors:
   - apiName: API Bilans Financiers
     apiSlug: bilans
-    id: 7z86
+    updownIoId: nvlu
 dataSources:
   - label: Ratios Financiers (BCE / INPI)
     apiSlug: bilans

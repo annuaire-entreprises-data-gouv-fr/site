@@ -8,7 +8,7 @@ apiMonitors:
   - apiName: API Professionnels RGE
     apiSlug: rge
     apigouvLink: https://api.gouv.fr/les-api/api_professionnels_rge
-    id: 2j25
+    updownIoId: urb0
 dataSources:
   - label: Liste des Entreprises RGE
     apiSlug: recherche-entreprise, rge
