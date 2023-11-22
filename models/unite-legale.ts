@@ -55,7 +55,6 @@ export const getUniteLegaleFromSlug = async (
   options: IUniteLegaleOptions
 ): Promise<IUniteLegale> => {
   const { isBot = false, page = 1 } = options;
-
   const uniteLegale = new UniteLegaleBuilder(slug, isBot, page);
 
   return await uniteLegale.build();

@@ -34,14 +34,18 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
     </div>
 
     <script
-      //  Show warning for browsers without Optional chaining
-      //  https://caniuse.com/mdn-javascript_operators_optional_chaining
-      //  https://stackoverflow.com/questions/66288922/check-if-optional-chaining-is-supported
+      //  Show warning for browsers
+      //  1. without Optional chaining
+      //    - https://caniuse.com/mdn-javascript_operators_optional_chaining
+      //    - https://stackoverflow.com/questions/66288922/check-if-optional-chaining-is-supported
+      //  2. without public class fields
+      //    - https://caniuse.com/?search=mdn-javascript_classes_public_class_fields
       dangerouslySetInnerHTML={{
         __html: `
         (function () {
           try {
-            eval('var foo = {}; foo?.bar');
+            eval('var foo = {}; foo?.bar'); // 1. Optional chaining
+            eval('class A { foo=1 }');      // 2. Class fields
           } catch (e) {
             window.IS_OUTDATED_BROWSER = true;
             document.getElementById('browser-is-outdated').style.display = 'block';

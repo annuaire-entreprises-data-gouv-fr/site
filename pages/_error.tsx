@@ -13,9 +13,11 @@ const ServerError: NextPageWithLayout = () => {
 };
 
 ServerError.getInitialProps = ({ res, err }) => {
-  logFatalErrorInSentry(err, {
-    page: res?.req.url,
-  });
+  try {
+    logFatalErrorInSentry(err, {
+      page: res?.req.url,
+    });
+  } catch (e) {}
   return { statusCode: 500 };
 };
 

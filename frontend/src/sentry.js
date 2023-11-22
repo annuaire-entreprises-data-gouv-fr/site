@@ -1,8 +1,7 @@
 import * as Sentry from '@sentry/browser';
 
 const dsn = import.meta.env.VITE_SENTRY_FRONT_DSN;
-export const isViteSentryActivated = import.meta.env.PROD && Sentry && dsn
-
+export const isViteSentryActivated = import.meta.env.PROD && Sentry && dsn;
 
 if (isViteSentryActivated) {
   Sentry.init({
@@ -32,7 +31,7 @@ if (isViteSentryActivated) {
         },
       }),
     ],
-
+    tracesSampleRate: 0.005,
     tracesSampler: (samplingContext) => {
       const path = samplingContext?.location?.pathname || '';
 

@@ -8,6 +8,7 @@ import {
 } from '#models/administrations';
 import constants from '#models/constants';
 import { formatDate, formatDateLong, isTwoMonthOld } from '#utils/helpers';
+import SectionErrorBoundary from './section-error-boundary';
 
 export interface ISectionProps {
   title: string;
@@ -39,7 +40,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   const faqLink = `/administration/${dataSources.map((d) => d.slug).join('_')}`;
 
   return (
-    <>
+    <SectionErrorBoundary>
       <div className="section-container" id={id}>
         <h2>{title}</h2>
         {isOld && lastModified && (
@@ -128,6 +129,6 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           }
         }
       `}</style>
-    </>
+    </SectionErrorBoundary>
   );
 };
