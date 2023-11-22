@@ -1,4 +1,4 @@
-describe('Bilans financiers', () => {
+describe('Annonces BODACC', () => {
   it('Should display Annonces BODACC section', () => {
     cy.visit('/annonces/880878145');
     cy.contains('Annonces BODACC');
