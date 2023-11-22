@@ -1,9 +1,7 @@
-import FormData from 'form-data';
 import routes from '#clients/routes';
-import { allMonitoringIds } from '#models/administrations';
 import constants from '#models/constants';
-import { IMonitoring } from '#models/monitoring';
-import httpClient from '#utils/network';
+import { IMonitoring, IRatio } from '#models/monitoring';
+import { httpGet } from '#utils/network';
 import { DailyUptimeRatioConverter } from './series';
 
 export type IMonitorLog = {
@@ -17,79 +15,54 @@ export type IMonitorLog = {
   };
 };
 
-type IUptimeRobotMonitor = {
-  id: number;
-  friendly_name: string;
-  create_datetime: number;
-  status: number;
-  logs: IMonitorLog[];
-  all_time_uptime_ratio: string;
-  custom_uptime_ratio: string;
-  custom_down_durations: string;
+export type IUpdownIODowntimes = {
+  id: string;
+  error: string; // 'Response timeout (30 seconds)';
+  started_at: string; // '2023-11-15T23:09:17Z';
+  ended_at: string; // '2023-11-15T23:11:28Z';
+  duration: number; // in seconds
+  partial: boolean;
 };
 
-type IUptimeRobotResponse = {
-  stat: 'ok' | 'fail';
-  pagination: {
-    offset: number;
-    limit: number;
-    total: number;
-  };
-  monitors: IUptimeRobotMonitor[];
+export const clientMonitoring = async (slug: string): Promise<IMonitoring> => {
+  const url = `${routes.tooling.monitoring}/${slug}/downtimes`;
+  const response = await httpGet<IUpdownIODowntimes[]>(url, {
+    headers: {
+      'Accept-Encoding': 'gzip',
+      'X-API-Key': process.env.UPDOWN_IO_API_KEY,
+    },
+    timeout: constants.timeout.XL,
+  });
+  return mapToDomainObject(response);
 };
 
-export const clientMonitorings = async (): Promise<IMonitoring[]> => {
-  const data = new FormData();
-  const to = new Date();
+const mapToDomainObject = (downtimes: IUpdownIODowntimes[]): IMonitoring => {
   const from = new Date();
-  from.setUTCDate(to.getUTCDate() - 89);
+  from.setUTCDate(from.getUTCDate() - 89);
   from.setUTCHours(0);
   from.setUTCMinutes(0);
   from.setUTCSeconds(0);
 
-  data.append('monitors', allMonitoringIds.join('-'));
-  data.append('logs', '1');
-  data.append('format', 'json');
-  data.append('custom_uptime_ratios', '1-7-30-90');
-  data.append('log_types', '1');
-  data.append('logs_end_date', Math.ceil(to.getTime() / 1000));
-  data.append('logs_start_date', Math.floor(from.getTime() / 1000));
+  const dailySeries = new DailyUptimeRatioConverter(from);
+  dailySeries.feed(downtimes);
 
-  const url = `${routes.tooling.monitoring}?api_key=${process.env.UPTIME_ROBOT_API_KEY}`;
-  const result = await httpClient<IUptimeRobotResponse>({
-    url,
-    method: 'POST',
-    data,
-    headers: {
-      ...data.getHeaders(),
-      'Accept-Encoding': 'gzip,deflate,compress',
-    },
-    timeout: constants.timeout.XL,
-  });
+  const isOnline = downtimes.length > 0 ? downtimes[0].ended_at !== null : true;
 
-  return result.monitors.map((monitor) => mapToDomainObject(monitor, from));
-};
+  const series = dailySeries.export();
 
-const mapToDomainObject = (
-  monitor: IUptimeRobotMonitor,
-  from: Date
-): IMonitoring => {
-  const createdAt = new Date(monitor.create_datetime * 1000);
-  const dailySeries = new DailyUptimeRatioConverter(from, createdAt);
-  dailySeries.feed(monitor.logs);
-
-  const uptimeAvg = monitor.custom_uptime_ratio.split('-');
-  const isOnline = [8, 9].indexOf(monitor.status) === -1;
+  const avg = (ratios: IRatio[]) => {
+    return (
+      ratios.reduce((sum, ratio) => ratio.ratioNumber + sum, 0) / ratios.length
+    );
+  };
 
   return {
-    id: monitor.id,
-    series: dailySeries.export(),
+    series,
     isOnline,
     uptime: {
-      day: uptimeAvg[0],
-      week: uptimeAvg[1],
-      month: uptimeAvg[2],
-      trimester: uptimeAvg[3],
+      day: avg(series.slice(-1)).toFixed(2),
+      week: avg(series.slice(- 7)).toFixed(2),
+      month: avg(series).toFixed(2),
     },
   };
 };

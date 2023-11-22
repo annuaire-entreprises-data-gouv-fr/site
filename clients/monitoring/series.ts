@@ -1,10 +1,9 @@
 import { IRatio } from '#models/monitoring';
-import { IMonitorLog } from '.';
+import { IUpdownIODowntimes } from '.';
 
 type ILog = {
   date: Date;
   downtime: number;
-  monitorExists: boolean;
   uptime: number;
 };
 
@@ -21,30 +20,32 @@ export class DailyUptimeRatioConverter {
   getDDMMYYYY = (d: Date): string =>
     new Intl.DateTimeFormat('fr-FR', { timeZone: 'UTC' }).format(d);
 
-  constructor(from: Date, createdAt: Date) {
+  constructor(from: Date) {
     for (let i = 0; i < 90; i++) {
       const currentDate = this.addUTCDay(from, i);
       const key = this.getDDMMYYYY(currentDate);
       this._days[key] = {
         date: currentDate,
         downtime: 0,
-        monitorExists: currentDate >= createdAt,
         uptime: 100,
       };
     }
   }
 
-  feed(logs: IMonitorLog[]) {
-    for (let i = 0; i < logs.length; i++) {
-      const log = logs[i];
+  feed(downtimes: IUpdownIODowntimes[]) {
+    for (let i = 0; i < downtimes.length; i++) {
+      const downtime = downtimes[i];
 
-      const downStartDate = new Date(log.datetime * 1000);
+      const downStartDate = new Date(downtime.started_at);
 
       const nextDay = this.getUTCNextDay(downStartDate);
       const secondsBeforeNextDay =
         (nextDay.getTime() - downStartDate.getTime()) / 1000;
 
-      const downtimeInSeconds = log.duration;
+      const timeSinceDownStartDate = Math.floor(
+        (new Date().getTime() - downStartDate.getTime()) / 1000
+      );
+      const downtimeInSeconds = downtime.duration || timeSinceDownStartDate;
 
       const downtimeWithinDay = Math.min(
         secondsBeforeNextDay,
@@ -53,10 +54,11 @@ export class DailyUptimeRatioConverter {
 
       this.logDownTime(downStartDate, downtimeWithinDay);
 
-      const isDowntimeOverlappingDays = log.duration > secondsBeforeNextDay;
+      const isDowntimeOverlappingDays =
+        downtimeInSeconds > secondsBeforeNextDay;
 
       if (isDowntimeOverlappingDays) {
-        const remainingDowntime = log.duration - downtimeWithinDay;
+        const remainingDowntime = downtimeInSeconds - downtimeWithinDay;
         const remainingDays = Math.ceil(remainingDowntime / SECONDS_IN_A_DAY);
 
         for (let day = 1; day <= remainingDays; day++) {
@@ -117,8 +119,7 @@ export class DailyUptimeRatioConverter {
       .sort((a, b) => (a.date < b.date ? -1 : 1))
       .map((day) => {
         return {
-          ratio: day.uptime.toFixed(2),
-          isActive: day.monitorExists,
+          ratioNumber: day.uptime,
           date: this.getDDMMYYYY(day.date),
         };
       });

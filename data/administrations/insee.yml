@@ -8,9 +8,9 @@ apiMonitors:
   - apigouvLink: https://api.gouv.fr/les-api/sirene_v3
     apiSlug: sirene
     apiName: API Répertoire Sirene
-    id: 787859514
+    updownIoId: swog
   - apiName: API Avis de situation Sirene
-    id: 791856492
+    updownIoId: yh9e
 dataSources:
   - label: Base Sirene des Entreprises
     apiSlug: sirene

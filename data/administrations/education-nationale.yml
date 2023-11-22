@@ -7,7 +7,7 @@ apiMonitors:
   - apiName: API Etablissements Scolaires
     apiSlug: annuaire-education
     apigouvLink: https://api.gouv.fr/documentation/api-annuaire-education
-    id: 793392963
+    updownIoId: 2vx1
 dataSources:
   - label: Annuaire de l’Education Nationale
     apiSlug: annuaire-education

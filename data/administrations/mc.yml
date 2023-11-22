@@ -6,7 +6,7 @@ contact: https://www.culture.gouv.fr/Nous-contacter
 apiMonitors:
   - apiName: API Déclarations des entrepreneurs de spectacles vivants
     apiSlug: spectacle-vivant
-    id: 793285299
+    updownIoId: 9mht
 dataSources:
   - label: Déclarations des entrepreneurs de spectacles vivants
     apiSlug: spectacle-vivant
