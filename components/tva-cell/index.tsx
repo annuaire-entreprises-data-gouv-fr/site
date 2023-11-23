@@ -93,12 +93,10 @@ const TVACell: React.FC<{ uniteLegale: IUniteLegale }> = ({ uniteLegale }) => {
                   Elle possède un numéro de TVA Intracommunautaire pour chacune
                   de ces activités.
                   <br />
-                  Le numéro affiché correspond à celui de sa plus ancienne
-                  activité.
+                  Le numéro affiché correspond à sa plus ancienne activité.
                 </>
               }
               orientation="left"
-              width={230}
               left="5px"
             >
               <Icon slug="alertFill" color="orange">
