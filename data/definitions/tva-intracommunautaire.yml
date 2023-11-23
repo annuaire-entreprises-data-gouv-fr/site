@@ -54,6 +54,10 @@ body: |
   Il est possible de consulter le numéro de TVA intracommunautaire d’une entreprise en ligne. Comment faire ? Pour toutes les entreprises et associations françaises, l’Annuaire des Entreprises affiche cette information. Pour une entreprise établie hors de France, mais dans l’UE, cette vérification s’effectue via le [service européen de validation des numéros de TVA (VIES)](https://ec.europa.eu/taxation_customs/vies/#/vat-validation). Cette précaution est fortement recommandée afin de réduire le risque de fraude ou d’escroquerie.
 
   ***Attention** : de nombreux sites internet affichent un numéro de TVA mais ne prennent pas la peine de le vérifier.*
+
+  ## Une entreprise peut-elle avoir plusieurs numéro de TVA intracommunautaire ?
+
+  Une entreprise assujettie à la TVA possède un numéro de TVA pour chacun de ses code d’activité (NAF/APE). Dans ce cas, le numéro de TVA affiché sur Annuaire des Entreprises est celui de son premier code d’activité.
 more:
   - label: Consulter la page dédiée sur service-public.fr
     href: https://entreprendre.service-public.fr/vosdroits/F23570

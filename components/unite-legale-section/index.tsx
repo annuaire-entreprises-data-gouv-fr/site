@@ -1,6 +1,7 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import { Tag } from '#components-ui/tag';
 import AvisSituationLink from '#components/avis-situation-link';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
@@ -13,11 +14,10 @@ import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
 import { ISession } from '#utils/session';
-import { Tag } from '#components-ui/tag';
 import {
+  LabelsAndCertificatesBadgesSection,
   checkHasLabelsAndCertificates,
   checkHasQuality,
-  LabelsAndCertificatesBadgesSection,
   labelsAndCertificatesSources,
 } from '../labels-and-certificates-badges-section';
 
@@ -40,7 +40,14 @@ const UniteLegaleSection: React.FC<{
         uniteLegale.siege.siret &&
         formatSiret((uniteLegale.siege || {}).siret),
     ],
-    ['N° TVA Intracommunautaire', <TVACell siren={uniteLegale.siren} />],
+    [
+      <FAQLink tooltipLabel="N° TVA Intracommunautaire">
+        <a href="/faq/tva-intracommunautaire">
+          Comprendre le numéro de TVA intracommunautaire
+        </a>
+      </FAQLink>,
+      <TVACell uniteLegale={uniteLegale} />,
+    ],
     ['Activité principale (NAF/APE)', uniteLegale.libelleActivitePrincipale],
     ['Code NAF/APE', uniteLegale.activitePrincipale],
     [
