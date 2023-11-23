@@ -2,7 +2,6 @@
  * COPY TO CLIPBOARD FUNCTION
  */
 
-
 const copyIcon = `<svg
   xmlns="http://www.w3.org/2000/svg"
   width="15"
@@ -41,19 +40,19 @@ function logCopyPaste(element) {
     const label = element.closest('tr').childNodes[0].innerText;
     var _paq = window._paq || [];
     _paq.push(['trackEvent', 'action', 'copyPaste', `${label}`]);
-  } catch { }
+  } catch {}
 }
 
 function createCopyButton(element) {
   const childElement =
     element.children && element.children.length > 0 && element.children[0];
   const childElementWidth = childElement?.offsetWidth || 0;
+  const parentElementWidth = element?.parentElement?.offsetWidth || 0;
+
+  const isChildrenTooLarge = childElementWidth + 75 >= parentElementWidth;
 
   // position copy/paste either next to text or justified to the right
-  let rightPosition = 0;
-  if (childElementWidth !== 0 && element.offsetWidth - childElementWidth > 75) {
-    rightPosition = element.offsetWidth - 75 - childElementWidth;
-  }
+  const rightPosition = isChildrenTooLarge ? 0 : -75;
 
   element.style.cursor = 'pointer';
   element.style.position = 'relative';
