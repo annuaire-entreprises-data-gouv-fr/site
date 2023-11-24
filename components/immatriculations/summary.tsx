@@ -30,8 +30,10 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
             </a>
           ) : (
             <a href="#insee">
-              <b>Cessée</b> auprès de l’Insee, depuis le{' '}
-              {formatDateLong(uniteLegale.dateDebutActivite)}
+              <b>Cessée</b> auprès de l’Insee
+              {uniteLegale.dateDebutActivite
+                ? `, depuis le ${formatDateLong(uniteLegale.dateDebutActivite)}`
+                : ''}
             </a>
           )}
         </li>
