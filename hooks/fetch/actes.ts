@@ -9,7 +9,7 @@ export function useFetchActes(uniteLegale: IUniteLegale) {
   const { siren } = uniteLegale;
   return useFetchData(
     {
-      fetchData: () => httpGet<IActesRNE>(routes.api.actes + '/' + siren),
+      fetchData: () => httpGet<IActesRNE>(routes.api.actes.list + siren),
       administration: EAdministration.INPI,
     },
     [siren]

@@ -1,8 +1,11 @@
+import routes from '#clients/routes';
+import ButtonLink from '#components-ui/button';
 import { PrintNever } from '#components-ui/print-visibility';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { IUniteLegale } from '#models/index';
+import { formatDateLong } from '#utils/helpers';
 import useFetchActes from 'hooks/fetch/actes';
 
 const ActesSection: React.FC<{
@@ -21,8 +24,20 @@ const ActesSection: React.FC<{
       >
         {(actes) => (
           <FullTable
-            head={['Test', 'Ba']}
-            body={actes.actes.map((a) => [[a.dateDepot], [a.id]])}
+            head={['Description', 'Lien']}
+            body={actes.actes.map((a) => [
+              <>
+                <b>Déposé(s) le {formatDateLong(a.dateDepot)} :</b>
+                <ul>
+                  {(a?.acte || []).map((acteName) => (
+                    <li>{acteName}</li>
+                  ))}
+                </ul>
+              </>,
+              <ButtonLink alt small to={routes.api.actes.download + a.id}>
+                Télécharger
+              </ButtonLink>,
+            ])}
           />
         )}
       </DataSection>

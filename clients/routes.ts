@@ -2,7 +2,10 @@ const routes = {
   api: {
     rne: '/api/data-fetching/rne',
     conformite: `/api/data-fetching/espace-agent/conformite`,
-    actes: `/api/data-fetching/espace-agent/actes`,
+    actes: {
+      list: `/api/data-fetching/espace-agent/actes/`,
+      download: `/api/data-fetching/espace-agent/actes/download/`,
+    },
   },
   apiEntreprise: {
     association: '/v4/djepva/api-association/associations/',
@@ -106,7 +109,11 @@ const routes = {
   },
   proxy: {
     rne: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
-    actes: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/actes/',
+    actes: {
+      list: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/actes/',
+      download:
+        'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/actes/download/',
+    },
     association:
       'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
   },
