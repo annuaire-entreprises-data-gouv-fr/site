@@ -1,7 +1,7 @@
 describe('TVA validation', () => {
   it(`should display the TVA number`, () => {
-    cy.visit(`/entreprise/528163777`);
-    cy.contains('FR29 528 163 777').should('have.length', 1);
+    cy.visit(`/entreprise/217500016`);
+    cy.contains('FR72 217 500 016').should('have.length', 1);
   });
 });
 it('TVA Non-assujettie', () => {

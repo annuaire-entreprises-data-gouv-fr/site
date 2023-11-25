@@ -32,7 +32,7 @@ const Unknown = () => (
 
 const CopyCell = () => (
   <CopyPaste shouldTrim={true} id="tva-cell-result">
-    Unknown
+    Inconnu
   </CopyPaste>
 );
 
@@ -90,16 +90,16 @@ const TVACell: React.FC<{ uniteLegale: IUniteLegale }> = ({ uniteLegale }) => {
                     a plusieurs activités différentes
                   </a>
                   .<br />
-                  Elle possède un numéro de TVA Intracommunautaire pour chacune
-                  de ces activités.
+                  Elle peut posséder un numéro de TVA Intracommunautaire pour
+                  chacune de ces activités.
                   <br />
-                  Le numéro affiché correspond à sa plus ancienne activité.
+                  Le numéro affiché correspond à son activité la plus ancienne.
                 </>
               }
               orientation="left"
               left="5px"
             >
-              <Icon slug="alertFill" color="orange">
+              <Icon slug="lightbulbFill" color="#ffb300">
                 <CopyCell />
               </Icon>
             </InformationTooltip>
