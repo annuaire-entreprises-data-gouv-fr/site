@@ -26,6 +26,8 @@ const routes = {
     },
   },
   conventionsCollectives: {
+    metadata:
+      'https://recherche-entreprises.api.gouv.fr/metadata/conventions_collectives',
     site: 'https://code.travail.gouv.fr/outils/convention-collective',
     details: 'https://code.travail.gouv.fr/convention-collective/',
   },

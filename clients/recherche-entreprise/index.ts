@@ -2,17 +2,17 @@ import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
+import { IConventionsCollectives } from '#models/conventions-collectives-list';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
 import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import {
-  IConventionCollective,
   IEtablissement,
   NotEnoughParamsException,
   createDefaultEtablissement,
   createDefaultUniteLegale,
 } from '#models/index';
-import { ISearchResult, ISearchResults } from '#models/search';
+import { ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
 import {
   extractNicFromSiret,
@@ -23,7 +23,6 @@ import {
   verifySiret,
 } from '#utils/helpers';
 import {
-  getConventionCollectives,
   libelleFromCategoriesJuridiques,
   libelleFromCodeNAFWithoutNomenclature,
 } from '#utils/helpers/formatting/labels';
@@ -95,7 +94,7 @@ const clientSearchRechercheEntreprise = async ({
   return mapToDomainObjectNew(results);
 };
 
-const mapToDomainObjectNew = (data: ISearchResponse): ISearchResults => {
+const mapToDomainObjectNew = (data: ISearchResponse) => {
   const { total_results = 0, total_pages = 0, results = [], page } = data;
 
   return {
@@ -106,7 +105,7 @@ const mapToDomainObjectNew = (data: ISearchResponse): ISearchResults => {
   };
 };
 
-const mapToUniteLegale = (result: IResult): ISearchResult => {
+const mapToUniteLegale = (result: IResult) => {
   const {
     nature_juridique,
     siege,
@@ -229,8 +228,17 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     colter,
     dateCreation: parseDateCreationInsee(date_creation),
     dateDerniereMiseAJour: date_mise_a_jour,
-    conventionsCollectives: etablissementsList.all.flatMap(
-      (e) => e.conventionsCollectives
+    conventionsCollectives: etablissements.reduce(
+      (idccSiretPair, { siret, liste_idcc }) => {
+        (liste_idcc || []).forEach(async (idcc) => {
+          idccSiretPair[idcc] = {
+            idcc,
+            sirets: [...(idccSiretPair[idcc]?.sirets || []), siret],
+          };
+        });
+        return idccSiretPair;
+      },
+      {} as IConventionsCollectives
     ),
   };
 };
@@ -296,7 +304,6 @@ const mapToEtablissement = (
     activite_principale = '',
     date_creation = '',
     date_debut_activite = '',
-    liste_idcc,
     tranche_effectif_salarie = '',
     annee_tranche_effectif_salarie = '',
   } = etablissement;
@@ -336,11 +343,6 @@ const mapToEtablissement = (
     activitePrincipale: activite_principale,
     dateCreation: parseDateCreationInsee(date_creation),
     dateDebutActivite: date_debut_activite,
-    conventionsCollectives: (liste_idcc || [])
-      .map((idcc) => {
-        return getConventionCollectives(idcc, siret);
-      })
-      .filter((cc): cc is IConventionCollective => !!cc),
   };
 };
 

@@ -7,15 +7,8 @@ import { IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IEtatCivil } from '#models/immatriculation';
 import { IdRna, Siren, Siret } from '#utils/helpers';
 import { IAPINotRespondingError } from './api-not-responding';
+import { IConventionsCollectives } from './conventions-collectives-list';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
-
-export interface IConventionCollective {
-  idcc: string;
-  idKali?: string;
-  siret?: string;
-  CdTN: boolean;
-  title: string;
-}
 
 export interface IEtablissement {
   enseigne: string | null;
@@ -41,7 +34,6 @@ export interface IEtablissement {
   anneeTrancheEffectif: string | null;
   latitude: string;
   longitude: string;
-  conventionsCollectives: IConventionCollective[];
 }
 
 export interface IEtablissementWithUniteLegale {
@@ -78,7 +70,6 @@ export const createDefaultEtablissement = (): IEtablissement => {
     libelleTrancheEffectif: '',
     latitude: '',
     longitude: '',
-    conventionsCollectives: [],
   };
 };
 
@@ -111,7 +102,7 @@ export interface IUniteLegale extends IEtablissementsList {
   colter: {
     codeColter: string | null;
   };
-  conventionsCollectives: IConventionCollective[] | null;
+  conventionsCollectives: IConventionsCollectives | null;
 }
 
 export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {

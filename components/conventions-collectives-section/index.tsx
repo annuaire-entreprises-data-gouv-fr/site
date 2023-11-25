@@ -7,19 +7,24 @@ import { MTPEI } from '#components/administrations';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
-import { formatSiret } from '#utils/helpers';
 import { IUniteLegale } from '#models/index';
+import { capitalize, formatSiret } from '#utils/helpers';
 
 const ConventionsCollectivesSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const conventionsCollectives = uniteLegale?.conventionsCollectives || [];
+  const conventionsCollectives = Object.values(
+    uniteLegale.conventionsCollectives || []
+  );
+  const countIdCc = conventionsCollectives
+    ? Object.keys(conventionsCollectives).length
+    : 0;
 
-  const plural = conventionsCollectives.length > 0 ? 's' : '';
+  const plural = countIdCc > 0 ? 's' : '';
 
   return (
     <Section title="Conventions collectives" sources={[EAdministration.MTPEI]}>
-      {conventionsCollectives.length === 0 ? (
+      {countIdCc === 0 ? (
         <div>
           Cette structure n’a pas de{' '}
           <a
@@ -33,7 +38,7 @@ const ConventionsCollectivesSection: React.FC<{
         </div>
       ) : (
         <>
-          Cette structure possède {conventionsCollectives.length}{' '}
+          Cette structure possède {countIdCc}{' '}
           <FAQLink
             to="/faq/convention-collective"
             tooltipLabel={`convention${plural} collective${plural}`}
@@ -53,24 +58,48 @@ const ConventionsCollectivesSection: React.FC<{
             </a>
           </p>
           <FullTable
-            head={['SIRET', 'N°IDCC', 'Détails', 'Explications']}
-            body={conventionsCollectives.map((convention) => [
-              <a href={`/etablissement/${convention.siret}`}>
-                {formatSiret(convention.siret)}
-              </a>,
-              <Tag>IDCC {convention.idcc}</Tag>,
-              <i className="font-small">{convention.title}</i>,
-              convention.CdTN ? (
-                <ButtonLink
-                  target="_blank"
-                  to={`${routes.conventionsCollectives.details}${convention.idcc}`}
-                  alt
-                  small
-                >
-                  ⇢&nbsp;Consulter
-                </ButtonLink>
-              ) : null,
-            ])}
+            head={['N°IDCC', 'Détails', 'Etablissement(s)', 'Explications']}
+            body={conventionsCollectives.map(
+              ({ idcc, sirets = [], metadata = {} }) => [
+                <Tag>IDCC {idcc}</Tag>,
+                <>
+                  {metadata.nature && (
+                    <>
+                      <b className="font-small">
+                        {capitalize(metadata.nature)}
+                      </b>
+                      <br />
+                    </>
+                  )}
+                  <span className="font-small">
+                    {metadata.title || <i>Non renseigné</i>}
+                  </span>
+                </>,
+                <ul>
+                  {(sirets || []).map((siret) => (
+                    <li>
+                      <a href={`/etablissement/${siret}`}>
+                        {formatSiret(siret)}
+                      </a>
+                    </li>
+                  ))}
+                </ul>,
+                <>
+                  {idcc === '9999' ? (
+                    <i>Non renseigné</i>
+                  ) : (
+                    <ButtonLink
+                      target="_blank"
+                      to={`${routes.conventionsCollectives.details}${idcc}`}
+                      alt
+                      small
+                    >
+                      ⇢&nbsp;Consulter
+                    </ButtonLink>
+                  )}
+                </>,
+              ]
+            )}
           />
         </>
       )}

@@ -3,6 +3,7 @@ import ConventionsCollectivesSection from '#components/conventions-collectives-s
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
+import { getIdccWithMetadata } from '#models/conventions-collectives-list';
 import { IUniteLegale } from '#models/index';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
@@ -47,6 +48,8 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const { slug, isBot } = extractParamsFromContext(context);
 
     const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
+
+    uniteLegale.conventionsCollectives = await getIdccWithMetadata(uniteLegale);
 
     return {
       props: {

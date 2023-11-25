@@ -1,4 +1,5 @@
 import routes from '#clients/routes';
+import constants from '#models/constants';
 import { readFromGrist } from '#utils/integrations/grist';
 import { httpGet } from '#utils/network';
 import logErrorInSentry from '#utils/sentry';
@@ -145,9 +146,15 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       matomoEventsCategory,
       npsRecords,
     ] = await Promise.all([
-      httpGet<IMatomoMonthlyStat[]>(createPageViewUrl()),
-      httpGet<IMatomoEventStat[]>(createCopyPasteEventUrl()),
-      httpGet<IMatomoEventStat[][]>(createEventsCategoryUrl()),
+      httpGet<IMatomoMonthlyStat[]>(createPageViewUrl(), {
+        timeout: constants.timeout.XXL,
+      }),
+      httpGet<IMatomoEventStat[]>(createCopyPasteEventUrl(), {
+        timeout: constants.timeout.XXL,
+      }),
+      httpGet<IMatomoEventStat[][]>(createEventsCategoryUrl(), {
+        timeout: constants.timeout.XXL,
+      }),
       getNpsRecords(),
     ]);
 

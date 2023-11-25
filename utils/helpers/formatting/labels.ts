@@ -1,6 +1,4 @@
-import { IConventionCollective } from '#models/index';
 import { escapeTerm } from '#utils/helpers';
-import { logWarningInSentry } from '#utils/sentry';
 import { categoriesJuridiques } from './metadata/categories-juridiques';
 import { codesNAF1993 } from './metadata/codes-NAF-1993';
 import { codesNAFRev1 } from './metadata/codes-NAF-rev-1';
@@ -8,8 +6,6 @@ import { codesNAFRev2 } from './metadata/codes-NAF-rev-2';
 import { codesNAP } from './metadata/codes-NAP';
 import { codesSectionNAF } from './metadata/codes-section-NAF';
 import { codesVoies } from './metadata/codes-voie';
-import { conventionsCollectives } from './metadata/conventions-collectives';
-import { conventionsCollectivesExclusionList } from './metadata/conventions-collectives-exclusion-list';
 import { departements } from './metadata/departements';
 
 export const getUrlFromDepartement = (dep: string) => {
@@ -52,33 +48,6 @@ export const libelleFromDepartement = (
     return `${label}${code}`;
   }
   return 'Département inconnu';
-};
-
-export const getConventionCollectives = (
-  idcc: string,
-  siret: string
-): IConventionCollective | null => {
-  try {
-    //@ts-ignore
-    const cc = conventionsCollectives[idcc];
-    if (cc) {
-      return { siret, idcc, CdTN: true, ...cc };
-    }
-
-    // these CC are known to appear in API but do not exists in public list of CC
-    const isSpecialIdcc =
-      conventionsCollectivesExclusionList.indexOf(idcc.toString()) > -1;
-
-    if (!isSpecialIdcc) {
-      throw new Error();
-    }
-    return null;
-  } catch {
-    logWarningInSentry('Error in getConventionCollectives', {
-      details: `Could not find idcc :${idcc}`,
-    });
-    return null;
-  }
 };
 
 const getNomenclature = (nomenclature: string) => {
