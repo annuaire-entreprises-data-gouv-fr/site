@@ -1,3 +1,4 @@
+import { Exception } from '#models/exceptions';
 import { libelleFromTypeVoie } from '#utils/helpers/formatting/labels';
 import logErrorInSentry from '#utils/sentry';
 
@@ -9,15 +10,21 @@ const timeZone = 'UTC';
  * @returns
  */
 const safe =
-  (castAndFormat: Function) =>
-  (...args: any) => {
+  <T extends unknown[], R>(castAndFormat: (...args: T) => R) =>
+  (...args: T): R | undefined => {
     try {
       return castAndFormat.apply(null, args);
     } catch (e: any) {
-      logErrorInSentry('Error while using formatting function', {
-        details: e.toString() || args,
-      });
-      return args;
+      logErrorInSentry(
+        new Exception({
+          name: 'ViewFormattingException',
+          cause: e,
+          context: {
+            details: args.toString(),
+          },
+        })
+      );
+      return undefined;
     }
   };
 
@@ -48,7 +55,7 @@ const yearOption = {
  * @param digits number of digits
  * @returns
  */
-export const formatPercentage = safe((value: string, digits = 1) => {
+export const formatPercentage = safe((value: string, digits: number = 1) => {
   let number = parseFloat(value);
   if (!number) {
     return undefined;
@@ -57,23 +64,25 @@ export const formatPercentage = safe((value: string, digits = 1) => {
   return parseFloat(value).toFixed(digits) + '%';
 });
 
-export const formatCurrency = safe((value: string) => {
-  const number = parseInt(value, 10);
-  if (!number && number !== 0) {
-    return value;
+export const formatCurrency = safe(
+  (value: string | number | undefined | null) => {
+    const number = parseInt(value + '', 10);
+    if (!number && number !== 0) {
+      return value as string;
+    }
+
+    const unitlist = ['€', 'K €', 'M €', 'Mds €'];
+    const sign = Math.sign(number);
+
+    const orderOfMagnitude = Math.floor(
+      (Math.abs(number).toString().length - 1) / 3
+    );
+    const magnitude = Math.pow(1000, orderOfMagnitude);
+    const roundedValue = Math.floor(Math.abs(number / magnitude) * 10) / 10;
+
+    return `${sign * roundedValue} ${unitlist[orderOfMagnitude]}`;
   }
-
-  const unitlist = ['€', 'K €', 'M €', 'Mds €'];
-  const sign = Math.sign(number);
-
-  const orderOfMagnitude = Math.floor(
-    (Math.abs(number).toString().length - 1) / 3
-  );
-  const magnitude = Math.pow(1000, orderOfMagnitude);
-  const roundedValue = Math.floor(Math.abs(number / magnitude) * 10) / 10;
-
-  return `${sign * roundedValue} ${unitlist[orderOfMagnitude]}`;
-});
+);
 
 export const formatDateYear = safe(
   (date: string | Date): string | undefined => {
@@ -126,7 +135,7 @@ export const formatMonthIntervalFromPartialDate = safe((dPartial: string) => {
     0
   ).getDate();
 
-  return [`${dPartial}-01`, `${dPartial}-${lastDayOfMonth}`];
+  return [`${dPartial}-01`, `${dPartial}-${lastDayOfMonth}`] as const;
 });
 
 export const formatAge = safe((date: string | Date) => {
@@ -153,14 +162,14 @@ export const capitalize = safe((str: string) => {
   return str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
 });
 
-export const formatIntFr = safe((intAsString = '') => {
+export const formatIntFr = safe((intAsString: string = '') => {
   if (!intAsString) {
     return intAsString;
   }
   return intAsString.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
 });
 
-export const formatFloatFr = safe((floatAsString = '') => {
+export const formatFloatFr = safe((floatAsString: string = '') => {
   if (!floatAsString) {
     return floatAsString;
   }

@@ -1,4 +1,6 @@
+import { EAdministration } from '#models/administrations';
 import { IETATADMINSTRATIF } from '#models/etat-administratif';
+import { Exception } from '#models/exceptions';
 import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
 import logErrorInSentry from '../../sentry';
 
@@ -21,10 +23,13 @@ export const etatFromEtatAdministratifInsee = (
     case 'F':
       return IETATADMINSTRATIF.FERME;
     default:
-      logErrorInSentry('API Sirene - Unknown Etat Administratif', {
-        siret: sirenOrSiret,
-        details: etatAdministratifInsee,
-      });
+      logErrorInSentry(
+        new APISireneUnknownParameterException(
+          'Unknown Etat Administratif',
+          sirenOrSiret,
+          etatAdministratifInsee
+        )
+      );
       return IETATADMINSTRATIF.INCONNU;
   }
 };
@@ -48,13 +53,30 @@ export const statuDiffusionFromStatutDiffusionInsee = (
     case 'P':
       return ISTATUTDIFFUSION.PARTIAL;
     default:
-      logErrorInSentry('API Sirene - Unknown Statut Diffusion', {
-        siret: sirenOrSiret,
-        details: statutDiffusionInsee,
-      });
+      logErrorInSentry(
+        new APISireneUnknownParameterException(
+          'Unknown Statut Diffusion',
+          sirenOrSiret,
+          statutDiffusionInsee
+        )
+      );
       return ISTATUTDIFFUSION.DIFFUSIBLE;
   }
 };
+
+class APISireneUnknownParameterException extends Exception {
+  administration = EAdministration.INSEE;
+  constructor(message: string, siret: string, details: string) {
+    super({
+      name: 'APISireneUnknownParameterException',
+      message,
+      context: {
+        siret,
+        details,
+      },
+    });
+  }
+}
 
 /***
  * Insee's dateCreation is quite weird for unite legale and etablissement

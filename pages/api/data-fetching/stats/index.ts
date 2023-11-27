@@ -22,10 +22,8 @@ const stats = async (_req: NextApiRequest, res: NextApiResponse) => {
       redirectedSiren,
     });
   } catch (e: any) {
-    logErrorInSentry(e, {
-      errorName: 'failed to compute stats (API route)',
-    });
-    res.status(500).json({ message: 'failed to compute stats' });
+    logErrorInSentry(e);
+    res.status(500).json({ message: e.message });
   }
 };
 

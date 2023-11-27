@@ -4,16 +4,15 @@ import { clientEtablissementInsee } from '#clients/sirene-insee/siret';
 import { getGeoLoc } from '#models/geo-loc';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { Siret, extractSirenFromSiret, verifySiret } from '#utils/helpers';
-import {
-  logRechercheEntreprisefailed,
-  logSireneInseefailed,
-} from '#utils/sentry/helpers';
+import logErrorInSentry, { logFatalErrorInSentry } from '#utils/sentry';
 import {
   IEtablissement,
   IEtablissementWithUniteLegale,
   SiretNotFoundError,
   createDefaultEtablissement,
 } from '.';
+import { EAdministration } from './administrations';
+import { FetchRessourceException, IExceptionContext } from './exceptions';
 
 /*
  * Return an etablissement given an existing siret
@@ -52,15 +51,30 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
       throw new SiretNotFoundError(siret);
     }
 
-    logSireneInseefailed({ siret, details: e.message }, false);
+    logErrorInSentry(
+      new FetchEtablissementException({
+        message: 'Fail to fetch from INSEE API',
+        cause: e,
+        administration: EAdministration.INSEE,
+        context: {
+          siret,
+        },
+      })
+    );
 
     try {
       return await clientEtablissementRechercheEntreprise(siret);
     } catch (firstFallback: any) {
-      logRechercheEntreprisefailed({
-        siret,
-        details: firstFallback.message || firstFallback,
-      });
+      logErrorInSentry(
+        new FetchEtablissementException({
+          message: 'Fail to fetch from Search API',
+          cause: firstFallback,
+          administration: EAdministration.DINUM,
+          context: {
+            siret,
+          },
+        })
+      );
 
       try {
         return await clientEtablissementInsee(siret, {
@@ -74,20 +88,38 @@ const getEtablissement = async (siret: Siret): Promise<IEtablissement> => {
         if (lastFallback instanceof HttpNotFound) {
           throw new SiretNotFoundError(siret);
         }
-        logSireneInseefailed(
-          {
-            siret,
-            details: lastFallback.message || lastFallback,
-          },
-          true
-        );
 
         // both API failed to fetch this siren, return a 500
-        throw lastFallback;
+
+        const error = new FetchEtablissementException({
+          message: 'Fail to fetch from INSEE fallback API',
+          cause: e,
+          administration: EAdministration.INSEE,
+          context: {
+            siret,
+          },
+        });
+        logFatalErrorInSentry(error);
+        throw error;
       }
     }
   }
 };
+
+type IFetchEtablissementExceptionArgs = {
+  message: string;
+  cause: any;
+  administration: EAdministration;
+  context?: IExceptionContext;
+};
+class FetchEtablissementException extends FetchRessourceException {
+  constructor(args: IFetchEtablissementExceptionArgs) {
+    super({
+      ...args,
+      ressource: 'Etablissement',
+    });
+  }
+}
 
 /**
  * Return an Etablissement from sirene ouverte

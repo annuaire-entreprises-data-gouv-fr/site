@@ -15,14 +15,21 @@ function init() {
     if (modal) {
       modal.style.display = 'none';
     }
-    window.localStorage.setItem(modalId, true);
+    try {
+      window.localStorage.setItem(modalId, true);
+    } catch (e) {}
   };
 }
 
 function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
   var path = window.location.pathname;
 
-  var hasAlreadyBeenTriggered = window.localStorage.getItem(modalId) || false;
+  var hasAlreadyBeenTriggered;
+  try {
+    hasAlreadyBeenTriggered = window.localStorage.getItem(modalId) || false;
+  } catch (e) {
+    hasAlreadyBeenTriggered = true;
+  }
   if (hasAlreadyBeenTriggered) {
     return;
   }
@@ -42,9 +49,8 @@ function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
   window.sessionStorage.setItem(pvKey, parseInt(pageViewCount, 10) + 1);
 }
 
-
 if (typeof window !== 'undefined') {
-  init()
+  init();
   triggerModal('nps-modal', 2, '/');
 }
 

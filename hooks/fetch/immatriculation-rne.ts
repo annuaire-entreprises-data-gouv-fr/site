@@ -3,7 +3,6 @@ import { EAdministration } from '#models/administrations';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { IUniteLegale } from '#models/index';
 import { httpGet } from '#utils/network';
-import logErrorInSentry from '#utils/sentry';
 import { useFetchData } from './use-fetch-data';
 
 export function useFetchImmatriculationRNE(uniteLegale: IUniteLegale) {
@@ -15,12 +14,6 @@ export function useFetchImmatriculationRNE(uniteLegale: IUniteLegale) {
           routes.api.rne.immatriculation + '/' + siren
         ),
       administration: EAdministration.INPI,
-      logError: (e: any) => {
-        logErrorInSentry(e, {
-          errorName: 'RNE API error',
-          siren,
-        });
-      },
     },
     [siren]
   );

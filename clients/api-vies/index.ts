@@ -32,6 +32,7 @@ export class TVAUserException extends Error {
   constructor(public message: string) {
     super(message);
     this.message = message;
+    this.name = 'TVAUserException';
   }
 }
 /**

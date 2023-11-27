@@ -1,5 +1,6 @@
 import { clientDCA } from '#clients/open-data-soft/clients/journal-officiel-associations';
 import { EAdministration } from '#models/administrations';
+import { FetchRessourceException } from '#models/exceptions';
 import { IUniteLegale as IAssociation } from '#models/index';
 import { IdRna } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
@@ -13,11 +14,17 @@ export const useFetchComptesAssociation = (association: IAssociation) => {
       fetchData: () => clientDCA(siren, idRna as IdRna),
       administration: EAdministration.DILA,
       logError: (e: any) => {
-        logErrorInSentry(e, {
-          errorName: 'error in API JOAFE : COMPTES',
-          details: `RNA : ${idRna}`,
-          siren: association.siren,
-        });
+        logErrorInSentry(
+          new FetchRessourceException({
+            ressource: 'ComptesAssociation',
+            administration: EAdministration.DILA,
+            cause: e,
+            context: {
+              siren,
+              idRna,
+            },
+          })
+        );
       },
     },
     [association]

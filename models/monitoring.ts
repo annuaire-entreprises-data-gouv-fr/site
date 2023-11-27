@@ -1,6 +1,7 @@
 import { clientMonitoring } from '#clients/monitoring';
-import logErrorInSentry from '#utils/sentry';
+import { logWarningInSentry } from '#utils/sentry';
 import { EAdministration, administrationsMetaData } from './administrations';
+import { FetchRessourceException } from './exceptions';
 
 export type IRatio = {
   ratioNumber: number;
@@ -56,11 +57,15 @@ export const getMonitorsByAdministration = async (): Promise<{
                   ...monitoring,
                 } as IMonitoringWithMetaData;
               } catch (e: any) {
-                logErrorInSentry(e, {
-                  errorName: 'Error while fetching monitoring',
-                  details: apiName || '',
+                const error = new FetchRessourceException({
+                  cause: e,
+                  ressource: 'ClientMonitoring',
+                  context: {
+                    details: apiName || '',
+                  },
                 });
-                throw e;
+                logWarningInSentry(error);
+                throw error;
               }
             }
           )

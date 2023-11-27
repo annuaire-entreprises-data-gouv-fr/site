@@ -1,5 +1,6 @@
 import { HttpTimeoutError } from '#clients/exceptions';
 import constants from '#models/constants';
+import { Exception } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { IDefaultRequestConfig } from '..';
 import { httpErrorHandler } from '../utils/http-error-handler';
@@ -9,11 +10,16 @@ function buildUrl(url: string, params: any) {
     const serializedParams = new URLSearchParams(params).toString();
     const separator = url.indexOf('?') > 0 ? '&' : '?';
     return `${url}${separator}${serializedParams}`;
-  } catch (e) {
-    logErrorInSentry(e, {
-      errorName: 'Error while building url on frontend client',
-      details: url,
-    });
+  } catch (e: any) {
+    logErrorInSentry(
+      new Exception({
+        name: 'BuildURLWithParamsException',
+        cause: e,
+        context: {
+          details: url,
+        },
+      })
+    );
     return url;
   }
 }
@@ -77,9 +83,9 @@ if (typeof window !== 'undefined') {
 }
 
 export class RequestAbortedDuringUnloadException extends Error {
-  name = 'RequestAbortedDuringUnloadException';
   constructor() {
     super('Fetch request aborted because user is navigating away');
+    this.name = 'RequestAbortedDuringUnloadException';
   }
 }
 

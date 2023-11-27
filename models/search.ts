@@ -11,11 +11,13 @@ import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logWarningInSentry } from '#utils/sentry';
 import {
   IEtablissement,
-  IsLikelyASirenOrSiretException,
   IUniteLegale,
+  IsLikelyASirenOrSiretException,
   NotEnoughParamsException,
   SearchEngineError,
 } from '.';
+import { EAdministration } from './administrations';
+import { FetchRessourceException } from './exceptions';
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
@@ -41,7 +43,9 @@ const noResults = {
   results: [],
   notEnoughParams: false,
 };
-
+class APIRechercheEntrepriseException extends Error {
+  name = 'APIRechercheEntrepriseException';
+}
 const search = async (
   searchTerm: string,
   page: number,
@@ -63,9 +67,17 @@ const search = async (
     });
   } catch (e: any) {
     if (e instanceof HttpBadRequestError) {
-      logWarningInSentry('BadParams in API Recherche Entreprise', {
-        details: searchFilterParams.toApiURI(),
-      });
+      logWarningInSentry(
+        new FetchRessourceException({
+          cause: e,
+          ressource: 'APIRechercheEntreprise',
+          administration: EAdministration.DINUM,
+          message: 'BadParams in API Recherche Entreprise',
+          context: {
+            details: searchFilterParams.toApiURI(),
+          },
+        })
+      );
       return { ...noResults, badParams: true };
     }
 

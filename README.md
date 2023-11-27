@@ -140,3 +140,49 @@ npm run build:seo
 ## Licence
 
 Ce projet est sous AGPL 3.0
+
+## Remontée d'erreur
+
+Nous utilisons [Sentry](https://errors.data.gouv) pour remonter les erreurs du site. Voici les bonnes pratiques à suivre pour remonter une erreur :
+
+1. **Utiliser le bon niveau d'erreur**
+
+- `fatal` : une erreur qui empêche tout ou une partie du site de fonctionner. Une page d'erreur est affichée à l'utilisateur.
+- `logErrorInSentry` : une fonctionnalité importante du site ne fonctionne pas.
+- `logWarningInSentry` : une fonctionnalité mineure du site ne fonctionne pas. Un comportement imprévu est arrivé. Non bloquant pour l'utilisateur.
+- `logInfoInSentry` : information sur le comportement du site
+
+2. **Logguer des erreurs et non des string**. Cela permet d'avoir les stacktrace complètes et uniformise l'affichage dans sentry. Pour cela, vous pouvez vous aider de la classe `Exception`
+
+```typescript
+  logErrorInSentry(new Exception({ name: 'RedisClientFailException' });
+```
+
+3. **Remonter des erreurs métiers** : l'erreur doit informer sur ce qui n'a pas fonctionné du point de vue de l'utilisateur. Vous pouvez utiliser le paramètre `cause` pour logguer l'erreur technique à l'origine de l'erreur métier. Vous pouvez également ajouter des informations contextuelles sur l'erreur via le paramètre `context`.
+
+```typescript
+try {
+  // ...
+} catch (e) {
+  logErrorInSentry(
+    new Exception({
+      name: 'AgentConnectionFailedException',
+      message: 'Error during authentication',
+      cause: e,
+      context: {
+        siren,
+        siret,
+        details: agentId,
+      },
+    })
+  );
+}
+```
+
+4. **Utiliser des classes d'erreur spécialisée**.
+
+- `Exception` : erreur métier
+- `InternalError` : bug interne du code qui n'est **jamais** supposé arriver
+- `FetchRessourceException` : erreur lors d'un appel à une API externe
+
+Vous pouvez en créer d'autres en étendant la classe `Exception`.

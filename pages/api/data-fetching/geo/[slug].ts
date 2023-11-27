@@ -5,6 +5,7 @@ import {
   clientDepartementsByName,
 } from '#clients/geo/departements';
 import { clientRegionsByName } from '#clients/geo/regions';
+import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { withAPM } from '#utils/sentry/tracing';
 
@@ -45,9 +46,15 @@ const geo = async (
       res.status(200).json(results);
     }
   } catch (e: any) {
-    logErrorInSentry(e, {
-      errorName: 'Error in API Geo (suggest)',
-    });
+    logErrorInSentry(
+      new FetchRessourceException({
+        cause: e,
+        ressource: 'Geo',
+        context: {
+          slug: slug as string,
+        },
+      })
+    );
     res
       .status(e.status || 500)
       .json({ message: 'failed to determine localisation' });

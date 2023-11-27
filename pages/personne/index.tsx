@@ -1,13 +1,13 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import Info from '#components-ui/alerts/info';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import Meta from '#components/meta';
 import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';
+import { Exception } from '#models/exceptions';
 import { IEtatCivil } from '#models/immatriculation';
-import { searchWithoutProtectedSiren, ISearchResults } from '#models/search';
+import { ISearchResults, searchWithoutProtectedSiren } from '#models/search';
 import SearchFilterParams, { IParams } from '#models/search-filter-params';
 import {
   formatDatePartial,
@@ -102,11 +102,11 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const page = parseIntWithDefaultValue(pageParam, 1);
 
     const [beginingOfMonth, endOfMonth] = formatMonthIntervalFromPartialDate(
-      context.query.partialDate || ''
-    );
+      (context.query.partialDate as string) || ''
+    ) ?? ['', ''];
 
-    const dmin = context.query.dmin || beginingOfMonth;
-    const dmax = context.query.dmax || endOfMonth;
+    const dmin = (context.query.dmin as string) || beginingOfMonth;
+    const dmax = (context.query.dmax as string) || endOfMonth;
 
     const searchFilterParams = new SearchFilterParams({
       ...context.query,
@@ -123,9 +123,15 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const searchParams = searchFilterParams.toJSON();
 
     if (!dmin || !dmax) {
-      logWarningInSentry('No date in page personne - see siren for sirenFrom', {
-        siren: sirenFrom,
-      });
+      logWarningInSentry(
+        new Exception({
+          name: 'SearchDirigeantBadParams',
+          message: 'No date bounds in page personne',
+          context: {
+            siren: sirenFrom,
+          },
+        })
+      );
     }
 
     return {

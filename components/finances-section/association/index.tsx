@@ -49,9 +49,7 @@ export const FinancesAssociationSection: React.FC<{
                 tooltip: {
                   callbacks: {
                     label(tooltipItem) {
-                      return formatCurrency(
-                        tooltipItem.parsed.y.toString()
-                      ).toString();
+                      return formatCurrency(tooltipItem.parsed.y.toString());
                     },
                   },
                 },

@@ -9,6 +9,11 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from './api-not-responding';
+import {
+  Exception,
+  FetchRessourceException,
+  IExceptionContext,
+} from './exceptions';
 
 export const getAssociation = async (
   uniteLegale: IUniteLegale
@@ -32,18 +37,48 @@ export const getAssociation = async (
     };
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
-      logWarningInSentry('Id RNA not found', {
-        siren,
-        details: `RNA : ${rna}`,
-      });
+      logWarningInSentry(
+        new FetchAssociationException({
+          message: 'Id RNA not found',
+          cause: e,
+          context: {
+            idRna: rna,
+            siren,
+          },
+        })
+      );
 
       return APINotRespondingFactory(EAdministration.DJEPVA, 404);
     }
 
-    logErrorInSentry(e, { siren, errorName: 'Error in API RNA' });
+    logErrorInSentry(
+      new FetchAssociationException({
+        message: 'RNA API error',
+        cause: e,
+        context: {
+          idRna: rna,
+          siren,
+        },
+      })
+    );
     return APINotRespondingFactory(EAdministration.DJEPVA, 500);
   }
 };
+
+type IFetchAssociationExceptionArgs = {
+  message: string;
+  cause: any;
+  context?: IExceptionContext;
+};
+class FetchAssociationException extends FetchRessourceException {
+  constructor(args: IFetchAssociationExceptionArgs) {
+    super({
+      ...args,
+      ressource: 'Association',
+      administration: EAdministration.DJEPVA,
+    });
+  }
+}
 
 /**
  * Compare adress in base Sirene and in RNA
@@ -77,10 +112,13 @@ const verifyAdressConsistency = async (
     return false;
   } catch (e: any) {
     if (!(e instanceof HttpNotFound)) {
-      logErrorInSentry(e, {
-        siren,
-        errorName: 'Error in API BAN',
-      });
+      logWarningInSentry(
+        new Exception({
+          name: 'FailToVerifyAdressConsistencyException',
+          cause: e,
+          context: { siren },
+        })
+      );
     }
     return false;
   }

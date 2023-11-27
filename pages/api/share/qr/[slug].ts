@@ -1,6 +1,7 @@
 import { createCanvas, loadImage } from 'canvas';
 import { NextApiRequest, NextApiResponse } from 'next';
 import QRCode from 'qrcode';
+import { Exception } from '#models/exceptions';
 import { hasSirenFormat } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 
@@ -52,7 +53,16 @@ const qrCode = ({ query: { slug } }: NextApiRequest, res: NextApiResponse) => {
       res.end(img);
       resolve(null);
     } catch (e: any) {
-      logErrorInSentry(e, { siren: slug as string });
+      logErrorInSentry(
+        new Exception({
+          name: 'QRCodeGenerationException',
+          cause: e,
+          context: {
+            slug: slug as string,
+          },
+        })
+      );
+
       res.status(500).json({ message: e });
       resolve(null);
     }

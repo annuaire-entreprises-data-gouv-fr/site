@@ -2,6 +2,8 @@ import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { clientDocuments } from '#clients/api-proxy/rne/documents';
 import { HttpForbiddenError } from '#clients/exceptions';
+import { EAdministration } from '#models/administrations';
+import { FetchRessourceException } from '#models/exceptions';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { isAgent, sessionOptions } from '#utils/session';
@@ -28,7 +30,15 @@ async function actes(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).json(actes);
   } catch (e: any) {
     const message = 'Failed to fetch document list';
-    logErrorInSentry(e, { siret: slug as string, errorName: message });
+    logErrorInSentry(
+      new FetchRessourceException({
+        cause: e,
+        ressource: 'RNEDocuments',
+        message,
+        administration: EAdministration.INPI,
+        context: { siren: slug as string },
+      })
+    );
     res.status(e.status || 500).json({ message });
   }
 }

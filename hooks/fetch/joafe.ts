@@ -1,5 +1,6 @@
 import { clientJOAFE } from '#clients/open-data-soft/clients/journal-officiel-associations';
 import { EAdministration } from '#models/administrations';
+import { FetchRessourceException } from '#models/exceptions';
 import { IAssociation } from '#models/index';
 import { IdRna } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
@@ -13,11 +14,17 @@ export const useFetchJOAFE = (association: IAssociation) => {
       fetchData: () => clientJOAFE(idRna as IdRna),
       administration: EAdministration.DILA,
       logError: (e: any) => {
-        logErrorInSentry(e, {
-          errorName: 'JOAFE API error',
-          details: `RNA : ${idRna}`,
-          siren: association.siren,
-        });
+        logErrorInSentry(
+          new FetchRessourceException({
+            ressource: 'JOAFE',
+            administration: EAdministration.DILA,
+            cause: e,
+            context: {
+              idRna,
+              siren: association.siren,
+            },
+          })
+        );
       },
     },
     [idRna]
