@@ -19,7 +19,7 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     '493096580',
     '528163777',
     '839517323',
-    '842019051', // Qualibat RGE
+    '842019051', // Qualibat RGE + entrepreneur spectacle
     '843701079',
     '880878145',
     '88087814500015',
