@@ -199,7 +199,7 @@
             "commune": "PARIS 14",
             "activitePrincipale": "70.22Z",
             "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion (70.22Z)",
-            "trancheEffectif": "",
+            "trancheEffectif": "01",
             "libelleTrancheEffectif": "",
             "latitude": "48.84074",
             "longitude": "2.324549",
@@ -212,7 +212,7 @@
                 "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
               }
             ],
-            "anneeTrancheEffectif": ""
+            "anneeTrancheEffectif": "2020"
           }
         ],
         "nombreEtablissements": 1,
@@ -418,7 +418,7 @@
             "commune": "AVIGNON",
             "activitePrincipale": "64.30Z",
             "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
-            "trancheEffectif": "",
+            "trancheEffectif": "01",
             "libelleTrancheEffectif": "",
             "latitude": "43.926703",
             "longitude": "4.784775",
@@ -431,7 +431,7 @@
                 "title": "Convention collective nationale des sociétés financières du 22 novembre 1968"
               }
             ],
-            "anneeTrancheEffectif": ""
+            "anneeTrancheEffectif": "2020"
           },
           {
             "siren": "414971929",
@@ -453,12 +453,12 @@
             "commune": "PUTEAUX",
             "activitePrincipale": "64.30Z",
             "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
-            "trancheEffectif": "",
+            "trancheEffectif": "NN",
             "libelleTrancheEffectif": "",
             "latitude": "48.887985",
             "longitude": "2.233045",
             "conventionsCollectives": [],
-            "anneeTrancheEffectif": ""
+            "anneeTrancheEffectif": null
           },
           {
             "siren": "414971929",
@@ -480,12 +480,12 @@
             "commune": "MARLY-LE-ROI",
             "activitePrincipale": "65.2E",
             "libelleActivitePrincipale": "Organismes de placement en valeurs mobilières (65.2E)",
-            "trancheEffectif": "",
+            "trancheEffectif": "NN",
             "libelleTrancheEffectif": "",
             "latitude": "48.876263",
             "longitude": "2.097763",
             "conventionsCollectives": [],
-            "anneeTrancheEffectif": ""
+            "anneeTrancheEffectif": null
           }
         ],
         "nombreEtablissements": 4,
@@ -828,12 +828,12 @@
             "commune": "MACAU",
             "activitePrincipale": "46.19B",
             "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-            "trancheEffectif": "",
+            "trancheEffectif": null,
             "libelleTrancheEffectif": "",
             "latitude": "45.00782",
             "longitude": "-0.619455",
             "conventionsCollectives": [],
-            "anneeTrancheEffectif": ""
+            "anneeTrancheEffectif": null
           }
         ],
         "nombreEtablissements": 3,
@@ -1039,7 +1039,7 @@
             "commune": "REVEL",
             "activitePrincipale": "68.31Z",
             "libelleActivitePrincipale": "Agences immobilières (68.31Z)",
-            "trancheEffectif": "",
+            "trancheEffectif": "02",
             "libelleTrancheEffectif": "",
             "latitude": "43.458122",
             "longitude": "2.00451",
@@ -1052,7 +1052,7 @@
                 "title": "Convention collective nationale de l'immobilier, administrateurs de biens, sociétés immobilières, agents immobiliers, etc. (anciennement cabinets d'administrateurs de biens et des sociétés immobilières), du 9 septembre 1988. Etendue par arrêté du 24 février 1989 JORF 3 mars 1989. Mise à jour par avenant n° 47 du 23 novembre 2010, JORF 18 juillet 2012 puis mise à jour par avenant n° 83 du 2 décembre 2019 étendu par arrêté du 2 juillet 2021 JORF 14 juillet 2021"
               }
             ],
-            "anneeTrancheEffectif": ""
+            "anneeTrancheEffectif": "2020"
           }
         ],
         "nombreEtablissements": 1,
