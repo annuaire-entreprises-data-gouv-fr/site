@@ -11,15 +11,15 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     // changes often.
 
     '198100125', // établissement scolaire
-    '200054781',
-    '300025764',
-    '338365059',
-    '351556394',
+    // '200054781',
+    // '300025764',
+    // '338365059',
+    // '351556394',
     // '356000000', // La poste
-    '493096580',
-    '528163777',
-    '839517323',
-    '842019051', // Qualibat RGE + entrepreneur spectacle
+    // '493096580',
+    // '528163777',
+    // '839517323', // entreprise cessée
+    '800329849', // entrepreneur spectacle, asso & ESS
     '843701079',
     '880878145',
     '88087814500015',

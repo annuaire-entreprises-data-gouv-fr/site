@@ -12,8 +12,8 @@ describe('clientSiegeInsee', () => {
       '351556394',
       '338365059',
       // '528163777',
-      // '839517323',
-      // '842019051',
+      // '839517323', // entreprise cessée
+      '800329849', // entrepreneur spectacle asso & ESS
       // '843701079',
       // '356000000', // laposte
       '880878145',
