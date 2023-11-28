@@ -167,12 +167,12 @@
             "commune": "PARIS 8",
             "activitePrincipale": "62.02A",
             "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-            "trancheEffectif": "",
+            "trancheEffectif": "01",
             "libelleTrancheEffectif": "",
             "latitude": "48.870938",
             "longitude": "2.305916",
             "conventionsCollectives": [],
-            "anneeTrancheEffectif": ""
+            "anneeTrancheEffectif": "2020"
           }
         ],
         "nombreEtablissements": 1,

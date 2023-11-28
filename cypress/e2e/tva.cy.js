@@ -1,27 +1,29 @@
 describe('TVA validation', () => {
   it(`should display the TVA number`, () => {
-    cy.visit(`/entreprise/217500016`);
-    cy.contains('FR72 217 500 016').should('have.length', 1);
+    cy.visit(`/entreprise/842019051`);
+    cy.contains('FR43 842 019 051').should('have.length', 1);
   });
 });
 it('TVA Non-assujettie', () => {
-  cy.visit(`/entreprise/883010316`).then(() => {
+  //  invalid number and no activity
+  cy.visit(`/entreprise/198100125`).then(() => {
     cy.contains('Non-assujetti à la TVA');
   });
-  cy.visit(`/entreprise/423208180`).then(() => {
+  // closed company
+  cy.visit(`/entreprise/839517323`).then(() => {
     cy.contains('Non-assujetti à la TVA');
   });
 });
 it('TVA link', () => {
-  cy.visit(`/entreprise/383657467`).then(() => {
+  cy.visit(`/entreprise/300025764`).then(() => {
     cy.contains('Que signifie “inconnu ou non-assujettie à la TVA” ?').click({
       force: true,
     });
     cy.url().should('include', '/definitions/tva-intracommunautaire');
   });
-  cy.visit(`/entreprise/217500016`).then(() => {
+  cy.visit(`/entreprise/552032534`).then(() => {
     cy.contains(
-      'Elle possède un numéro de TVA Intracommunautaire pour chacune de ces activités.'
+      'Elle peut posséder un numéro de TVA Intracommunautaire pour chacune de ces activités.'
     );
   });
 });

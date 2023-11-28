@@ -131,7 +131,8 @@
       "estOrganismeFormation": false,
       "estSocieteMission": false,
       "estQualiopi": false,
-      "estUai": false
+      "estUai": false,
+      "estAssociation": false
     },
     "association": {
       "idAssociation": null,

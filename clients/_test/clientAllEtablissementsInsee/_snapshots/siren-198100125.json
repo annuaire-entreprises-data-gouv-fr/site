@@ -17,7 +17,7 @@
           "denomination": "",
           "nic": "00014",
           "dateCreation": "1983-03-01",
-          "dateDerniereMiseAJour": "2023-05-09T10:16:45",
+          "dateDerniereMiseAJour": "2023-11-27T13:17:45",
           "dateDebutActivite": "",
           "dateFermeture": null,
           "adresse": "RTE DE BLAYE, PARC DE LA VERRERIE, 81400 BLAYE-LES-MINES",
@@ -31,7 +31,7 @@
           "latitude": "",
           "longitude": "",
           "conventionsCollectives": [],
-          "anneeTrancheEffectif": "2020"
+          "anneeTrancheEffectif": "2021"
         }
       ],
       "open": [
@@ -46,7 +46,7 @@
           "denomination": "",
           "nic": "00014",
           "dateCreation": "1983-03-01",
-          "dateDerniereMiseAJour": "2023-05-09T10:16:45",
+          "dateDerniereMiseAJour": "2023-11-27T13:17:45",
           "dateDebutActivite": "",
           "dateFermeture": null,
           "adresse": "RTE DE BLAYE, PARC DE LA VERRERIE, 81400 BLAYE-LES-MINES",
@@ -60,7 +60,7 @@
           "latitude": "",
           "longitude": "",
           "conventionsCollectives": [],
-          "anneeTrancheEffectif": "2020"
+          "anneeTrancheEffectif": "2021"
         }
       ],
       "unknown": [],

@@ -108,10 +108,10 @@
     "dateCreation": "2016-01-01",
     "dateDerniereMiseAJour": "2023-10-5",
     "dateDebutActivite": "2016-12-28",
-    "trancheEffectif": "22",
+    "trancheEffectif": "32",
     "anneeCategorieEntreprise": "2020",
     "categorieEntreprise": "PME",
-    "anneeTrancheEffectif": "2020",
+    "anneeTrancheEffectif": "2021",
     "dirigeant": null,
     "complements": {
       "estEntrepreneurIndividuel": false,
@@ -126,7 +126,8 @@
       "estOrganismeFormation": false,
       "estSocieteMission": false,
       "estQualiopi": false,
-      "estUai": false
+      "estUai": false,
+      "estAssociation": false
     },
     "association": {
       "idAssociation": null,
