@@ -66,12 +66,12 @@ const DirigeantsPage: NextPageWithLayout<IProps> = ({
 
               <DirigeantsSection
                 immatriculationRNE={immatriculationRNE}
-                siren={uniteLegale.siren}
+                uniteLegale={uniteLegale}
               />
               <BreakPageForPrint />
               <BeneficiairesSection
                 immatriculationRNE={immatriculationRNE}
-                siren={uniteLegale.siren}
+                uniteLegale={uniteLegale}
               />
             </>
           ) : (

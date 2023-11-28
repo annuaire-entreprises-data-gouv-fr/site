@@ -72,12 +72,10 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   }
 );
 
-Index.getLayout = function getLayout(page: ReactElement, session) {
+Index.getLayout = function getLayout(page: ReactElement) {
   return (
     <>
-      <LayoutDefault searchBar={false} session={session}>
-        {page}
-      </LayoutDefault>
+      <LayoutDefault searchBar={false}>{page}</LayoutDefault>
     </>
   );
 };

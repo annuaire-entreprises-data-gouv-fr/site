@@ -7,24 +7,18 @@ import { Header } from '#components/header';
 import { WeNeedYouModal } from '#components/modal/we-need-you';
 import SocialNetworks from '#components/social-network';
 import { IParams } from '#models/search-filter-params';
-import { ISession } from '#utils/session';
 
 type IProps = {
   currentSearchTerm?: string;
   map?: boolean;
   searchFilterParams?: IParams;
-  session?: ISession | null;
 };
 
 /**
  * This Layout should be use only for the page /recherche and /rechercher/carte who use
  * advanced filter with react activated
  */
-export const LayoutSearch = ({
-  children,
-  map,
-  session = null,
-}: PropsWithChildren<IProps>) => {
+export const LayoutSearch = ({ children, map }: PropsWithChildren<IProps>) => {
   const router = useRouter();
   const { terme, ...rest } = router.query;
 
@@ -40,7 +34,6 @@ export const LayoutSearch = ({
         useAdvancedSearch={true}
         useSearchBar={true}
         useLogo={true}
-        session={session}
       />
 
       <main className="fr-container">{children}</main>
