@@ -19,9 +19,7 @@ describe('TVA validation', () => {
       cy.url().should('include', '/definitions/tva-intracommunautaire');
     });
     cy.visit(`/entreprise/217500016`).then(() => {
-      cy.contains(
-        'Elle possède un numéro de TVA Intracommunautaire pour chacune de ces activités.'
-      );
+      cy.contains('FR72217500016').should('have.length', 1);
     });
   });
 });
