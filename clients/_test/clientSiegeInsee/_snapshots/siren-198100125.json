@@ -110,7 +110,7 @@
     "trancheEffectif": "22",
     "anneeCategorieEntreprise": "2020",
     "categorieEntreprise": "PME",
-    "anneeTrancheEffectif": "2020",
+    "anneeTrancheEffectif": "2021",
     "dirigeant": null,
     "complements": {
       "estEntrepreneurIndividuel": false,
@@ -125,7 +125,8 @@
       "estOrganismeFormation": false,
       "estSocieteMission": false,
       "estQualiopi": false,
-      "estUai": false
+      "estUai": false,
+      "estAssociation": false
     },
     "association": {
       "idAssociation": null,

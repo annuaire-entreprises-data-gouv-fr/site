@@ -25,6 +25,7 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     '88087814500015',
     '883010316',
     '908595879',
+    '552032534',
     // 'aga',
     // 'Ganymede',
     // 'Kikou',
