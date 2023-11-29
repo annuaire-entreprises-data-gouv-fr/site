@@ -1,15 +1,18 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { clientDownloadActe } from '#clients/api-proxy/rne/actes';
+import {
+  clientDownloadActe,
+  clientDownloadBilan,
+} from '#clients/api-proxy/rne/documents';
 import { HttpBadRequestError, HttpForbiddenError } from '#clients/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { isAgent, sessionOptions } from '#utils/session';
 
-export default withIronSessionApiRoute(downloadActe, sessionOptions);
+export default withIronSessionApiRoute(download, sessionOptions);
 
-async function downloadActe(req: NextApiRequest, res: NextApiResponse) {
+async function download(req: NextApiRequest, res: NextApiResponse) {
   const {
-    query: { slug },
+    query: { slug, type },
     session,
   } = req;
 
@@ -22,12 +25,20 @@ async function downloadActe(req: NextApiRequest, res: NextApiResponse) {
       throw new HttpBadRequestError('Please provide a valid acte id');
     }
 
-    const pdf = await clientDownloadActe(slug as string);
+    let pdf = '';
+    if (type === 'bilan') {
+      pdf = await clientDownloadBilan(slug as string);
+    } else if (type === 'acte') {
+      pdf = await clientDownloadActe(slug as string);
+    } else {
+      throw new HttpBadRequestError('Please provide a valid document type');
+    }
+
     res.status(200);
     res.setHeader('content-type', 'application/pdf');
     res.end(Buffer.from(pdf, 'binary'));
   } catch (e: any) {
-    const message = 'Failed to download acte';
+    const message = 'Failed to download document';
     logErrorInSentry(e, { details: slug as string, errorName: message });
     res.status(e.status || 500).json({ message });
   }

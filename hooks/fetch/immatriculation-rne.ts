@@ -11,7 +11,9 @@ export function useFetchImmatriculationRNE(uniteLegale: IUniteLegale) {
   return useFetchData(
     {
       fetchData: () =>
-        httpGet<IImmatriculationRNE>(routes.api.rne + '/' + siren),
+        httpGet<IImmatriculationRNE>(
+          routes.api.rne.immatriculation + '/' + siren
+        ),
       administration: EAdministration.INPI,
       logError: (e: any) => {
         logErrorInSentry(e, {

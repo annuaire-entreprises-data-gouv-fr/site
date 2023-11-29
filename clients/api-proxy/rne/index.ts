@@ -10,10 +10,13 @@ import { clientAPIProxy } from '../client';
  * @param siren
  */
 const fetchRNEImmatriculation = async (siren: Siren, useCache = true) =>
-  clientAPIProxy<IImmatriculationRNE>(routes.proxy.rne + siren, {
-    timeout: constants.timeout.XXXXL,
-    useCache,
-  });
+  clientAPIProxy<IImmatriculationRNE>(
+    routes.proxy.rne.immatriculation + siren,
+    {
+      timeout: constants.timeout.XXXXL,
+      useCache,
+    }
+  );
 
 const stubbedClient = stubClientWithSnapshots({
   fetchRNEImmatriculation,

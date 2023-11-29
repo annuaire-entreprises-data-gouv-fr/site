@@ -10,13 +10,19 @@ import { clientAPIProxy } from '../client';
  * @param siren
  */
 const fetchActesFromRNE = async (siren: Siren, useCache = true) =>
-  clientAPIProxy<IActesRNE>(routes.proxy.actes.list + siren, {
+  clientAPIProxy<IActesRNE>(routes.proxy.rne.documents.list + siren, {
     timeout: constants.timeout.XXXXL,
     useCache,
   });
 
 const clientDownloadActe = async (id: string) =>
-  clientAPIProxy<IActesRNE>(routes.proxy.actes.download + id, {
+  clientAPIProxy<string>(routes.proxy.rne.documents.download.acte + id, {
+    timeout: constants.timeout.XXXXL,
+    responseType: 'arraybuffer',
+  });
+
+const clientDownloadBilan = async (id: string) =>
+  clientAPIProxy<string>(routes.proxy.rne.documents.download.bilan + id, {
     timeout: constants.timeout.XXXXL,
     responseType: 'arraybuffer',
   });
@@ -25,4 +31,8 @@ const stubbedClient = stubClientWithSnapshots({
   fetchActesFromRNE,
 });
 
-export { stubbedClient as clientActes, clientDownloadActe };
+export {
+  stubbedClient as clientActes,
+  clientDownloadActe,
+  clientDownloadBilan,
+};

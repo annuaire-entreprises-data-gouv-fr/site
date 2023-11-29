@@ -7,6 +7,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
 import { formatDateLong } from '#utils/helpers';
+import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import useFetchActes from 'hooks/fetch/documents';
 
 const DocumentBilansSection: React.FC<{
@@ -44,15 +45,15 @@ const DocumentBilansSection: React.FC<{
               déposé(s) au RNE :
             </p>
             <FullTable
-              head={['Date de dépôt', 'Description', 'Lien']}
+              head={['Date de dépôt', 'Année fiscale', 'Lien']}
               body={documents.bilans.map((a) => [
                 formatDateLong(a.dateDepot),
-                a.description,
+                getFiscalYear(a.dateCloture),
                 <ButtonLink
                   alt
                   small
                   target="_blank"
-                  to={routes.api.actes.download + a.id}
+                  to={`${routes.api.rne.documents.download}${a.id}?type=bilan`}
                 >
                   Télécharger
                 </ButtonLink>,

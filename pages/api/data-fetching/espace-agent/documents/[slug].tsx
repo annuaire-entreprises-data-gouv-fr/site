@@ -1,6 +1,6 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { clientActes } from '#clients/api-proxy/rne/actes';
+import { clientActes } from '#clients/api-proxy/rne/documents';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
@@ -24,7 +24,7 @@ async function actes(req: NextApiRequest, res: NextApiResponse) {
     const actes = await clientActes(siren);
     res.status(200).json(actes);
   } catch (e: any) {
-    const message = 'Failed to get actes';
+    const message = 'Failed to fetch document list';
     logErrorInSentry(e, { siret: slug as string, errorName: message });
     res.status(e.status || 500).json({ message });
   }

@@ -58,7 +58,7 @@ const DocumentActesSection: React.FC<{
                   target="_blank"
                   alt
                   small
-                  to={routes.api.actes.download + a.id}
+                  to={`${routes.api.rne.documents.download}${a.id}?type=acte`}
                 >
                   Télécharger
                 </ButtonLink>,

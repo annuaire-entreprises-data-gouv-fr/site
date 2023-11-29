@@ -9,7 +9,8 @@ interface IActeRNE {
 interface IBilanRNE {
   id: string;
   dateDepot: string;
-  description: string;
+  dateCloture: string;
+  typeBilan: string;
 }
 
 export interface IActesRNE {

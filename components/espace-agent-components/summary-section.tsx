@@ -23,23 +23,6 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
         <TwoColumnTable
           body={[
             [
-              'Documents juridiques',
-              <a href={`/espace-agent/${uniteLegale.siren}#actes`}>
-                → Consulter les Actes et les Statuts constitutifs
-              </a>,
-            ],
-            ...[
-              isSuperAgent(session)
-                ? [
-                    'Conformité',
-                    <a href={`/espace-agent/${uniteLegale.siren}#conformite`}>
-                      → Consulter les attestations fiscales et sociales
-                    </a>,
-                  ]
-                : [],
-            ],
-            ['', <br />],
-            [
               <FAQLink tooltipLabel="Immatriculation au RNE">
                 Depuis le 1er Janvier 2023, toute entreprise exerçant sur le
                 territoire français (sauf Polynésie française,
@@ -75,6 +58,13 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
             ],
             ['', <br />],
             [
+              'Documents juridiques',
+              <a href={`/espace-agent/${uniteLegale.siren}#actes`}>
+                → Consulter les Actes et les Statuts constitutifs
+              </a>,
+            ],
+            ['', <br />],
+            [
               <>Données financières</>,
               <a href={`/donnees-financieres/${uniteLegale.siren}`}>
                 → Consulter les indicateurs financiers
@@ -86,6 +76,17 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
                 <Icon slug="download">Télécharger les bilans</Icon>
               </a>,
             ],
+            ...(isSuperAgent(session)
+              ? [
+                  ['', <br />],
+                  [
+                    'Conformité',
+                    <a href={`/espace-agent/${uniteLegale.siren}#conformite`}>
+                      → Consulter les attestations fiscales et sociales
+                    </a>,
+                  ],
+                ]
+              : []),
           ]}
         />
       </ProtectedSection>
