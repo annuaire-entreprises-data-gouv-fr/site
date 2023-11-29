@@ -1,39 +1,33 @@
-import { TVAUserException, clientTVA } from '#clients/api-vies';
-import { HttpConnectionReset } from '#clients/exceptions';
-import { verifySiren } from '#utils/helpers';
-import { logWarningInSentry } from '#utils/sentry';
+import { estActif } from '#models/etat-administratif';
+import { IEtablissement, IUniteLegale } from '..';
 import { tvaNumber } from './utils';
 
-export interface ITvaIntracommunautaire {
-  numero: string;
-  isValid: boolean;
+export type ITVAIntracommunautaire = {
+  number: string;
+  mayHaveMultipleTVANumber: {
+    allTime: boolean;
+    currentlyActive: boolean;
+  };
+};
+
+function haveMultipleNafs(etablissementsList: IEtablissement[] = []) {
+  return (
+    Array.from(new Set(etablissementsList.map((e) => e.activitePrincipale)))
+      .length > 1
+  );
 }
 
-/**
- * build TVA number from siren and then validate it
- */
-export const tvaIntracommunautaire = async (
-  slug: string
-): Promise<string | null> => {
-  const siren = verifySiren(slug);
-  const tvaNumberFromSiren = tvaNumber(siren);
-
-  try {
-    return await clientTVA(tvaNumberFromSiren);
-  } catch (eFirstTry: any) {
-    if (eFirstTry instanceof TVAUserException) {
-      throw eFirstTry;
-    }
-    // retry once as VIES randomely reset connection
-    try {
-      if (eFirstTry instanceof HttpConnectionReset) {
-        logWarningInSentry('ECONNRESET in API TVA : retrying');
-      } else {
-        logWarningInSentry('Error in API TVA : retrying');
-      }
-      return await clientTVA(tvaNumberFromSiren);
-    } catch (eFallback: any) {
-      throw eFallback;
-    }
+export const getTvaUniteLegale = (
+  uniteLegale: IUniteLegale
+): ITVAIntracommunautaire | null => {
+  if (!estActif(uniteLegale)) {
+    return null;
   }
+  return {
+    number: tvaNumber(uniteLegale.siren),
+    mayHaveMultipleTVANumber: {
+      allTime: haveMultipleNafs(uniteLegale.etablissements.all),
+      currentlyActive: haveMultipleNafs(uniteLegale.etablissements.open),
+    },
+  };
 };

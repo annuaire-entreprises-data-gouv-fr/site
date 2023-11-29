@@ -37,6 +37,7 @@ import {
 } from './api-not-responding';
 import constants from './constants';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
+import { getTvaUniteLegale } from './tva';
 
 /**
  * PUBLIC METHODS
@@ -73,6 +74,9 @@ class UniteLegaleBuilder {
 
   build = async () => {
     const uniteLegale = await this.fetchFromClients();
+
+    // determine TVA
+    uniteLegale.tva = getTvaUniteLegale(uniteLegale);
 
     // no need to call API association for bots
     if (!this._isBot && isAssociation(uniteLegale)) {

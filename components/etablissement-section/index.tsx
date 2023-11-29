@@ -118,7 +118,7 @@ const EtablissementSection: React.FC<IProps> = ({
                 Comprendre le numéro de TVA intracommunautaire
               </a>
             </FAQLink>,
-            <TVACell uniteLegale={uniteLegale} />,
+            <TVACell tva={uniteLegale.tva} />,
           ],
         ]
       : []),
