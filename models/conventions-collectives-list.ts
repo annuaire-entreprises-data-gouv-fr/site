@@ -1,64 +1,64 @@
 import { clientIdccMetadata } from '#clients/recherche-entreprise/idcc-metadata';
-import { logWarningInSentry } from '#utils/sentry';
-import { IUniteLegale } from '.';
+import logErrorInSentry from '#utils/sentry';
+import { EAdministration } from './administrations';
+import { APINotRespondingFactory } from './api-not-responding';
 
 export type IConventionsCollectives = {
-  [idcc: string]: IConventionCollective;
+  [idcc: string]: string[];
 };
 
-type IConventionCollective = {
-  idcc: string;
-  metadata?: IConventionCollectiveMetadata;
-  sirets?: string[];
-};
-
-export type IConventionCollectiveMetadata = {
+export type ICCWithMetadata = {
   idKali?: string | null;
   legifrance?: string | null;
   title?: string;
   nature?: string;
   etat?: string;
+  sirets?: string[];
+  idcc?: string;
 };
 
-class IdccMetadata {
+class CCMetadata {
   private _idccMetadata = null as {
-    [idcc: string]: IConventionCollectiveMetadata;
+    [idcc: string]: ICCWithMetadata;
   } | null;
 
   get = async (idcc: string) => {
-    try {
-      if (!this._idccMetadata) {
-        this._idccMetadata = await clientIdccMetadata();
-      }
+    if (!this._idccMetadata) {
+      this._idccMetadata = await clientIdccMetadata();
+    }
 
-      if (Object.values(this._idccMetadata).length === 0) {
-        throw new Error('Empty Idcc metadata list');
-      }
+    if (Object.values(this._idccMetadata).length === 0) {
+      throw new Error('Empty Idcc metadata list');
+    }
 
-      if (idcc in this._idccMetadata) {
-        return this._idccMetadata[idcc] || {};
-      } else {
-        throw new Error('Convention collective not found');
-      }
-    } catch (e: any) {
-      logWarningInSentry('Error in convention collective', {
-        details: e.toString(),
-      });
+    if (idcc in this._idccMetadata) {
+      return this._idccMetadata[idcc] || {};
+    } else {
+      throw new Error('Convention collective not found');
     }
   };
 }
-const IdccBuilder = new IdccMetadata();
+const CCMetadataStore = new CCMetadata();
 
-export const getIdccWithMetadata = async (uniteLegale: IUniteLegale) => {
-  if (!uniteLegale.conventionsCollectives) {
-    return {};
+export const getCCMetadata = async (cc: IConventionsCollectives) => {
+  if (Object.keys(cc).length === 0) {
+    return APINotRespondingFactory(EAdministration.MTPEI, 404);
   }
 
-  for (let [idcc, cc] of Object.entries(uniteLegale.conventionsCollectives)) {
-    uniteLegale.conventionsCollectives[idcc] = {
-      ...cc,
-      metadata: await IdccBuilder.get(idcc),
-    };
+  try {
+    const metadata = [] as ICCWithMetadata[];
+    for (let [idcc, sirets] of Object.entries(cc)) {
+      metadata.push({
+        sirets,
+        ...(await CCMetadataStore.get(idcc)),
+      });
+    }
+    return metadata;
+  } catch (e: any) {
+    logErrorInSentry(e, {
+      errorName: 'Error in convention collective',
+      details: e.toString(),
+    });
+    return APINotRespondingFactory(EAdministration.MTPEI, 500);
   }
-  return uniteLegale.conventionsCollectives;
 };

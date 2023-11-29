@@ -3,7 +3,11 @@ import ConventionsCollectivesSection from '#components/conventions-collectives-s
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { getIdccWithMetadata } from '#models/conventions-collectives-list';
+import { IAPINotRespondingError } from '#models/api-not-responding';
+import {
+  IConventionsCollectivesMetadata,
+  getCCMetadata,
+} from '#models/conventions-collectives-list';
 import { IUniteLegale } from '#models/index';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
@@ -16,10 +20,12 @@ import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
+  ccWithMetadata: IConventionsCollectivesMetadata | IAPINotRespondingError;
 }
 
 const ConventionsCollectives: NextPageWithLayout<IProps> = ({
   uniteLegale,
+  ccWithMetadata,
   metadata: { session },
 }) => (
   <>
@@ -38,7 +44,7 @@ const ConventionsCollectives: NextPageWithLayout<IProps> = ({
         uniteLegale={uniteLegale}
         session={session}
       />
-      <ConventionsCollectivesSection uniteLegale={uniteLegale} />
+      <ConventionsCollectivesSection ccWithMetadata={ccWithMetadata} />
     </div>
   </>
 );
@@ -49,11 +55,14 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
 
     const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
 
-    uniteLegale.conventionsCollectives = await getIdccWithMetadata(uniteLegale);
+    const ccWithMetadata = await getCCMetadata(
+      uniteLegale.conventionsCollectives
+    );
 
     return {
       props: {
         uniteLegale,
+        ccWithMetadata,
       },
     };
   }
