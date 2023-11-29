@@ -150,7 +150,7 @@ const routes = {
       },
       tracker: 'https://stats.data.gouv.fr/piwik.php',
     },
-    monitoring: 'https://api.uptimerobot.com/v2/getMonitors',
+    monitoring: 'https://updown.io/api/checks/',
   },
 };
 

@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
 import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
+import ErrorBoundary from '#components/error-boundary';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import { ISession } from '#utils/session';
 import '../frontend/src/entry-with-react';
@@ -23,9 +24,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   //eslint-disable-next-line react/jsx-props-no-spreading
   const layout = getLayout(<Component {...pageProps} />, session);
   return (
-    <>
+    <ErrorBoundary>
       <BrowserIsOutdatedBanner />
       {layout}
-    </>
+    </ErrorBoundary>
   );
 }

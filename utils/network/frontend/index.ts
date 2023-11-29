@@ -28,8 +28,7 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
 
   const controller = new AbortController();
   const timeoutId = setTimeout(() => {
-    controller.abort();
-    throw new HttpTimeoutError('Timeout');
+    controller.abort(new HttpTimeoutError('Timeout'));
   }, config.timeout || constants.timeout.XXXXL);
 
   try {

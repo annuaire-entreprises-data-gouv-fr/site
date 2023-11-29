@@ -1,5 +1,6 @@
 import odsClient from '#clients/open-data-soft';
 import routes from '#clients/routes';
+import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IAnnoncesBodacc } from '#models/annonces';
 import { Siren, formatDate } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
@@ -144,4 +145,8 @@ const extractDetails = (annonce: IBodaccRecords): string => {
   }
 };
 
-export default clientBodacc;
+const stubbedClientBodacc = stubClient({
+  clientBodacc,
+});
+
+export default stubbedClientBodacc;

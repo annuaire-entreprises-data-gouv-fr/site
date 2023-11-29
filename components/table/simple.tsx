@@ -10,9 +10,9 @@ interface ISectionProps {
 export const CopyPaste: React.FC<
   PropsWithChildren<{ shouldTrim?: boolean; id?: string }>
 > = ({ children, shouldTrim = false, id = undefined }) => (
-  <div className={`copy-button ${shouldTrim ? 'trim' : ''}`}>
+  <span className={`copy-button ${shouldTrim ? 'trim' : ''}`}>
     <span id={id}>{children}</span>
-  </div>
+  </span>
 );
 
 const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({

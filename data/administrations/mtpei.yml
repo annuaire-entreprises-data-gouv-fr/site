@@ -6,10 +6,10 @@ contact: https://travail-emploi.gouv.fr/ministere/article/nous-contacter
 apiMonitors:
   - apiName: API Egapro
     apiSlug: egapro
-    id: 794017147
+    updownIoId: t5x6
   - apiName: API Liste des organismes de formation et des certifications Qualiopi
     apiSlug: qualiopi
-    id: 794191533
+    updownIoId: l00h
 dataSources:
   - label: Index de l’égalité professionnelle et représentation équilibrée femmes - hommes
     apiSlug: egapro

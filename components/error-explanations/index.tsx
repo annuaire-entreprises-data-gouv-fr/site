@@ -23,11 +23,30 @@ const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
 
 const ServerErrorExplanations = () => (
   <ErrorTemplate>
-    <h1>Oh non 😱 ! C’est la panne ⚠️</h1>
+    <h1>Oh non, c’est la panne 😱</h1>
     <p>
       Si vous voyez cette page, c’est que l’ordinateur qui fait marcher ce site
       internet a rencontré une petite panne. Pas d’inquiétude, le reste du site
       fonctionne toujours !
+    </p>
+    <p>
+      Ce problème a été automatiquement signalé à notre équipe technique, qui va
+      essayer de le corriger au plus vite.
+    </p>
+  </ErrorTemplate>
+);
+
+const ClientErrorExplanations = () => (
+  <ErrorTemplate>
+    <h1>Oh non, c’est la panne 😱</h1>
+    <p>
+      Si vous voyez cette page, c’est que votre navigateur a rencontré une
+      erreur en essayant d’afficher cette page. Pas d’inquiétude, le reste du
+      site fonctionne toujours !
+    </p>
+    <p>
+      Ce problème a été automatiquement signalé à notre équipe technique, qui va
+      essayer de le corriger au plus vite.
     </p>
   </ErrorTemplate>
 );
@@ -57,7 +76,8 @@ const SearchErrorExplanations = () => (
 );
 
 export {
+  ClientErrorExplanations,
   ErrorNotFoundExplanations,
-  ServerErrorExplanations,
   SearchErrorExplanations,
+  ServerErrorExplanations,
 };
