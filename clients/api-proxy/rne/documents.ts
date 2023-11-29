@@ -32,7 +32,7 @@ const stubbedClient = stubClientWithSnapshots({
 });
 
 export {
-  stubbedClient as clientActes,
+  stubbedClient as clientDocuments,
   clientDownloadActe,
   clientDownloadBilan,
 };
