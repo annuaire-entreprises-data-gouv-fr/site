@@ -16,7 +16,7 @@ interface IBilanRNE {
 export interface IActesRNE {
   actes: IActeRNE[];
   bilans: IBilanRNE[];
-  bilansSaisis: IBilanRNE[];
+  hasBilanConsolide: boolean;
 }
 
 export interface IImmatriculation {

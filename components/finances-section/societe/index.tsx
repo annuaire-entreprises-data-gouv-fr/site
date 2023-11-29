@@ -67,7 +67,7 @@ export const FinancesSocieteSection: React.FC<{
                 mère. Son{' '}
                 <FAQLink
                   tooltipLabel="bilan consolidé"
-                  to="/faq/donnees-financieres"
+                  to="/faq/donnees-financieres#quest-ce-quun-bilan-consolide"
                 >
                   Qu’est-ce qu’un bilan consolidé ?
                 </FAQLink>{' '}
