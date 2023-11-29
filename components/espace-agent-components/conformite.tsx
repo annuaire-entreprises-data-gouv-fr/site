@@ -1,9 +1,11 @@
-import React from "react";
-import { Icon } from "#components-ui/icon/wrapper";
-import { Loader } from "#components-ui/loader";
-import { IAPINotRespondingError, isAPINotResponding } from "#models/api-not-responding";
-import { IConformite } from "#models/espace-agent/donnees-restreintes-entreprise";
-import AdministrationInformation from "./administration-information";
+import React from 'react';
+import { Icon } from '#components-ui/icon/wrapper';
+import {
+  IAPINotRespondingError,
+  isAPINotResponding,
+} from '#models/api-not-responding';
+import { IConformite } from '#models/espace-agent/donnees-restreintes-entreprise';
+import AdministrationInformation from './administration-information';
 
 const APINotRespongingElement: React.FC<{
   data: IAPINotRespondingError;
@@ -29,24 +31,22 @@ const APINotRespongingElement: React.FC<{
           />
         )}
     </Icon>
-  )
-}
+  );
+};
 
 const Conformite: React.FC<{
-  data: IConformite | IAPINotRespondingError | undefined;
+  data: IConformite | IAPINotRespondingError;
   administration?: string;
 }> = ({ data, administration }) => {
-  if (!data) {
-    return <Loader />;
-  }
-
   if (isAPINotResponding(data)) {
-    return <APINotRespongingElement data={data} administration={administration} />;
+    return (
+      <APINotRespongingElement data={data} administration={administration} />
+    );
   }
 
   return (
     <div className="layout-space-between">
-      { data.isValid === true ? (
+      {data.isValid === true ? (
         <Icon slug="open">
           <AdministrationInformation
             str="conforme"
@@ -61,7 +61,7 @@ const Conformite: React.FC<{
           />
         </Icon>
       )}
-      { data.url && (
+      {data.url && (
         <a href={data.url}>
           <Icon slug="download">{data.label || 'télécharger'}</Icon>
         </a>

@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
+import ActesSection from '#components/espace-agent-components/documents/actes';
 import Meta from '#components/meta';
-import { NonDiffusibleSection } from '#components/non-diffusible';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IUniteLegale } from '#models/index';
-import { estNonDiffusible } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
@@ -13,7 +13,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { isSuperAgent } from '#utils/session';
+import { isAgent, isSuperAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -21,7 +21,7 @@ interface IProps extends IPropsWithMetadata {
   redirected: boolean;
 }
 
-const UniteLegalePage: NextPageWithLayout<IProps> = ({
+const UniteLegaleForAgentPage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   metadata: { session },
 }) => (
@@ -40,10 +40,12 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
         ficheType={FICHE.AGENTS}
         session={session}
       />
-      {estNonDiffusible(uniteLegale) ? (
-        <NonDiffusibleSection />
-      ) : (
-        <ConformiteSection uniteLegale={uniteLegale} />
+      {isAgent(session) && <ActesSection uniteLegale={uniteLegale} />}
+      {isSuperAgent(session) && (
+        <>
+          <HorizontalSeparator />
+          <ConformiteSection uniteLegale={uniteLegale} />
+        </>
       )}
     </div>
   </>
@@ -51,7 +53,7 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    if (!isSuperAgent(context.req?.session)) {
+    if (!isAgent(context.req?.session)) {
       return {
         redirect: {
           destination: `/connexion/agent-public`,
@@ -71,4 +73,4 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   }
 );
 
-export default UniteLegalePage;
+export default UniteLegaleForAgentPage;

@@ -16,18 +16,16 @@ export type IConformite = {
   label: string | null;
 };
 
-export type IDonneesRestreinteUniteLegale = {
-  conformite: {
-    fiscale: IConformite | IAPINotRespondingError;
-    vigilance: IConformite | IAPINotRespondingError;
-    msa: IConformite | IAPINotRespondingError;
-  };
+export type IConformiteUniteLegale = {
+  fiscale: IConformite | IAPINotRespondingError;
+  vigilance: IConformite | IAPINotRespondingError;
+  msa: IConformite | IAPINotRespondingError;
 };
 
 export const getDonneesRestreintesEntreprise = async (
   siren: Siren,
   siret: Siret
-): Promise<IDonneesRestreinteUniteLegale> => {
+): Promise<IConformiteUniteLegale> => {
   const handleApiEntrepriseError = (e: any) => {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.DINUM, 404);
@@ -49,10 +47,8 @@ export const getDonneesRestreintesEntreprise = async (
   ]);
 
   return {
-    conformite: {
-      fiscale,
-      vigilance,
-      msa,
-    },
+    fiscale,
+    vigilance,
+    msa,
   };
 };

@@ -28,7 +28,7 @@ async function conformite(req: NextApiRequest, res: NextApiResponse) {
     );
     res.status(200).json(donneesRestreintes);
   } catch (e: any) {
-    const message = 'Failed to get donnees restreintes';
+    const message = 'Failed to get donnees conformite';
     logErrorInSentry(e, { siret: slug as string, errorName: message });
     res.status(e.status || 500).json({ message });
   }

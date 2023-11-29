@@ -5,6 +5,7 @@ export type IDefaultRequestConfig = {
   params?: any;
   headers?: any;
   method?: 'POST' | 'GET';
+  responseType?: 'blob' | 'arraybuffer';
   data?: any;
 };
 

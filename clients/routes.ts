@@ -1,6 +1,13 @@
 const routes = {
   api: {
-    rne: '/api/data-fetching/rne',
+    rne: {
+      immatriculation: '/api/data-fetching/rne',
+      documents: {
+        list: `/api/data-fetching/espace-agent/documents/`,
+        download: `/api/data-fetching/espace-agent/documents/download/`,
+      },
+    },
+    conformite: `/api/data-fetching/espace-agent/conformite`,
   },
   apiEntreprise: {
     association: '/v4/djepva/api-association/associations/',
@@ -103,7 +110,18 @@ const routes = {
     },
   },
   proxy: {
-    rne: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
+    rne: {
+      immatriculation:
+        'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/',
+      documents: {
+        list: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/documents/',
+        download: {
+          acte: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/download/acte/',
+          bilan:
+            'https://annuaire-entreprises-api-proxy.api.gouv.fr/rne/download/bilan/',
+        },
+      },
+    },
     association:
       'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
   },

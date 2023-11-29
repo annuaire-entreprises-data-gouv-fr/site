@@ -77,9 +77,9 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
         ) : (
           <>
             <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
-            {isSuperAgent(session) ? (
+            {isSuperAgent(session) && (
               <EspaceAgentSummarySection uniteLegale={uniteLegale} />
-            ) : null}
+            )}
             {isAssociation(uniteLegale) && (
               <AssociationSection uniteLegale={uniteLegale} />
             )}
