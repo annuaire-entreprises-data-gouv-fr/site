@@ -19,7 +19,7 @@ describe('TVA validation', () => {
       cy.url().should('include', '/definitions/tva-intracommunautaire');
     });
     cy.visit(`/entreprise/217500016`).then(() => {
-      cy.contains('FR72217500016').should('have.length', 1);
+      cy.contains('FR72 217 500 016').should('have.length', 1);
     });
   });
 });
