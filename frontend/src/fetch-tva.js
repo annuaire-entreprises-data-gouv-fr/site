@@ -1,7 +1,5 @@
 /**
  * ASYNC CLIENT UPDATE FUNCTIONS
- *
- *
  */
 import * as Sentry from '@sentry/browser';
 import FrontStateMachineFactory from './front-state-machine';
@@ -18,7 +16,7 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
     fetch(`/api/data-fetching/verify-tva/${siren}`)
       .then((e) => {
         if (!e.ok) {
-          throw new Error("Error in API TVA :" + e.status);
+          throw new Error('Error in API TVA :' + e.status);
         }
         return e.json();
       })
@@ -27,6 +25,7 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
         const tva = response.tva;
         if (tva) {
           resultCell.innerHTML = formatIntFr(tva);
+          resultCell.style.marginRight = '75px';
           tvaContainer.setSuccess();
         } else {
           tvaContainer.setDefault();
@@ -36,7 +35,7 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
         if (isViteSentryActivated) {
           Sentry.captureException(e);
         } else {
-          console.error(e)
+          console.error(e);
         }
         tvaContainer.setError();
       });

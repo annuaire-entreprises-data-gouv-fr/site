@@ -152,7 +152,7 @@
           "estServicePublic": false,
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": true,
-          "statutEntrepreneurSpectacle": "invalide",
+          "statutEntrepreneurSpectacle": "valide",
           "estFiness": false,
           "egaproRenseignee": false,
           "estRge": false,

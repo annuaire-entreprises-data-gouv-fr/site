@@ -47,7 +47,8 @@ function createCopyButton(element) {
   const childElement =
     element.children && element.children.length > 0 && element.children[0];
   const childElementWidth = childElement?.offsetWidth || 0;
-  const parentElementWidth = element?.parentElement?.offsetWidth || 0;
+  const parentElement = element?.parentElement;
+  const parentElementWidth = parentElement?.offsetWidth || 0;
 
   const isChildrenTooLarge = childElementWidth + 75 >= parentElementWidth;
 
@@ -75,7 +76,8 @@ function createCopyButton(element) {
   copyLabel.style.flexDirection = 'row';
   copyLabel.style.boxShadow = rightPosition === 0 ? '-25px 0 8px  #fff' : '';
 
-  element.addEventListener(
+  const targetElement = parentElement || element;
+  targetElement.addEventListener(
     'mouseenter',
     (event) => {
       copyLabel.style.color = '#000091';
@@ -86,12 +88,12 @@ function createCopyButton(element) {
     false
   );
 
-  element.addEventListener('mouseleave', (event) => {
+  targetElement.addEventListener('mouseleave', (event) => {
     copyWrapper.remove();
     copyLabel.remove();
   });
 
-  element.onclick = () => {
+  targetElement.onclick = () => {
     copyLabel.style.color = 'green';
     copyLabel.innerHTML = htmlCopiedButton;
 
