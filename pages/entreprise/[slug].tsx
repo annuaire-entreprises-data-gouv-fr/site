@@ -32,6 +32,7 @@ import {
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { isAgent, isSuperAgent } from '#utils/session';
+import useSession from 'hooks/use-session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -42,71 +43,69 @@ interface IProps extends IPropsWithMetadata {
 const UniteLegalePage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   redirected,
-  metadata: { session },
-}) => (
-  <>
-    <Meta
-      title={getCompanyPageTitle(uniteLegale, session)}
-      description={getCompanyPageDescription(uniteLegale, session)}
-      noIndex={shouldNotIndex(uniteLegale)}
-      canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${
-        uniteLegale.chemin || uniteLegale.siren
-      }`}
-    />
-    {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
-
-    {isAgent(session) && (
-      <MatomoEvent
-        category="espace-agent"
-        action={`${isSuperAgent(session) ? 'super-agent' : 'agent'}`}
-        name={`visit:${uniteLegale.siren}`}
+}) => {
+  const session = useSession();
+  return (
+    <>
+      <Meta
+        title={getCompanyPageTitle(uniteLegale, session)}
+        description={getCompanyPageDescription(uniteLegale, session)}
+        noIndex={shouldNotIndex(uniteLegale)}
+        canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${
+          uniteLegale.chemin || uniteLegale.siren
+        }`}
       />
-    )}
+      {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
 
-    <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
-    <div className="content-container">
-      <Title
-        uniteLegale={uniteLegale}
-        ficheType={FICHE.INFORMATION}
-        session={session}
-      />
-      {estNonDiffusible(uniteLegale) ? (
-        <NonDiffusibleSection />
-      ) : (
-        <>
-          <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
-          {isSuperAgent(session) && (
-            <EspaceAgentSummarySection
-              uniteLegale={uniteLegale}
-              session={session}
-            />
-          )}
-          {isAssociation(uniteLegale) && (
-            <AssociationSection uniteLegale={uniteLegale} />
-          )}
-          {isCollectiviteTerritoriale(uniteLegale) && (
-            <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
-          )}
-          <UsefulShortcuts uniteLegale={uniteLegale} />
-          {uniteLegale.siege && (
-            <EtablissementSection
-              uniteLegale={uniteLegale}
-              etablissement={uniteLegale.siege}
-              usedInEntreprisePage={true}
-              withDenomination={false}
-              session={session}
-            />
-          )}
-          <EtablissementListeSection
-            uniteLegale={uniteLegale}
-            session={session}
-          />
-        </>
+      {isAgent(session) && (
+        <MatomoEvent
+          category="espace-agent"
+          action={`${isSuperAgent(session) ? 'super-agent' : 'agent'}`}
+          name={`visit:${uniteLegale.siren}`}
+        />
       )}
-    </div>
-  </>
-);
 
+      <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
+      <div className="content-container">
+        <Title
+          uniteLegale={uniteLegale}
+          ficheType={FICHE.INFORMATION}
+          session={session}
+        />
+        {estNonDiffusible(uniteLegale) ? (
+          <NonDiffusibleSection />
+        ) : (
+          <>
+            <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
+            {isSuperAgent(session) && (
+              <EspaceAgentSummarySection uniteLegale={uniteLegale} />
+            )}
+            {isAssociation(uniteLegale) && (
+              <AssociationSection uniteLegale={uniteLegale} />
+            )}
+            {isCollectiviteTerritoriale(uniteLegale) && (
+              <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
+            )}
+            <UsefulShortcuts uniteLegale={uniteLegale} />
+            {uniteLegale.siege && (
+              <EtablissementSection
+                uniteLegale={uniteLegale}
+                etablissement={uniteLegale.siege}
+                usedInEntreprisePage={true}
+                withDenomination={false}
+                session={session}
+              />
+            )}
+            <EtablissementListeSection
+              uniteLegale={uniteLegale}
+              session={session}
+            />
+          </>
+        )}
+      </div>
+    </>
+  );
+};
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug, isRedirected, page, isBot } =

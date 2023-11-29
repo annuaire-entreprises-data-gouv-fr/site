@@ -5,18 +5,18 @@ import { PrintNever } from '#components-ui/print-visibility';
 import { ProtectedSection } from '#components/section/protected-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { IUniteLegale } from '#models/index';
-import { ISession, isSuperAgent } from '#utils/session';
+import { isSuperAgent } from '#utils/session';
+import useSession from 'hooks/use-session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps {
   uniteLegale: IUniteLegale;
-  session: ISession | null;
 }
 
 export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
   uniteLegale,
-  session = null,
 }) => {
+  const session = useSession();
   return (
     <PrintNever>
       <ProtectedSection title="Résumé pour les agents publics">
