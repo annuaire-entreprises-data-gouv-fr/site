@@ -22,8 +22,6 @@ it('TVA link', () => {
     cy.url().should('include', '/definitions/tva-intracommunautaire');
   });
   cy.visit(`/entreprise/552032534`).then(() => {
-    cy.contains(
-      'Elle peut posséder un numéro de TVA Intracommunautaire pour chacune de ces activités.'
-    );
+    cy.contains('FR27 552 032 534').should('have.length', 1);
   });
 });
