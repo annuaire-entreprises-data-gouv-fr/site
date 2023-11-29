@@ -18,7 +18,7 @@ describe(`Labels and certificates`, () => {
   });
 
   it('ESS et Spectacle vivant', () => {
-    cy.visit(`/entreprise/842019051`);
+    cy.visit(`/entreprise/800329849`);
     cy.contains('Qualités, labels et certificats').should('be.visible');
     cy.contains('ESS - Entreprise Sociale et Solidaire').should('be.visible');
     cy.contains('Entrepreneur de spectacles vivants').should('be.visible');

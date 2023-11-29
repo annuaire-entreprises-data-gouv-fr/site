@@ -7,7 +7,7 @@ describe('clientAssociation', () => {
   it('Should match snapshot', async () => {
     await expectClientToMatchSnapshot({
       client: clientAssociation,
-      args: ['842019051' as Siren, '84201905100015'],
+      args: ['800329849' as Siren, '80032984900023'],
       snaphotFile: 'association.json',
       simplifyParams,
       __dirname,

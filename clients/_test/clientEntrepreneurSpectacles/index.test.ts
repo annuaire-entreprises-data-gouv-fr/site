@@ -6,7 +6,7 @@ describe('clientEntrepreneurSpectacles', () => {
   it('Should match snapshot', async () => {
     await expectClientToMatchSnapshot({
       client: clientEntrepreneurSpectacles,
-      args: ['842019051' as Siren],
+      args: ['810050898' as Siren],
       __dirname,
       snaphotFile: 'entrepreneur-spectacles.json',
       postProcessResult: (result) => {
