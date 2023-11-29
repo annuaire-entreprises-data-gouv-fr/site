@@ -319,8 +319,8 @@ const Parcours: NextPageWithLayout<{
   );
 };
 
-Parcours.getLayout = function getLayout(page: ReactElement, session) {
-  return <LayoutSimple session={session}>{page}</LayoutSimple>;
+Parcours.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutSimple>{page}</LayoutSimple>;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

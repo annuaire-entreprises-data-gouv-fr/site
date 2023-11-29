@@ -6,6 +6,7 @@ import { Tag } from '#components-ui/tag';
 import { DILA } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
+import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations';
 import { IAnnoncesBodacc } from '#models/annonces';
 import { IAPILoading } from '#models/api-loading';
@@ -72,14 +73,12 @@ const AnnoncesBodaccSection: React.FC<{
                 </b>
                 , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
                 consulter{' '}
-                <a
-                  rel="noreferrer noopener"
-                  target="_blank"
+                <UniteLegalePageLink
+                  uniteLegale={uniteLegale}
                   href={`${routes.bodacc.site.recherche}/${uniteLegale.siren}`}
-                >
-                  la page de cette entreprise
-                </a>{' '}
-                sur le site du BODACC&nbsp;:
+                  siteName="le site du BODACC"
+                />
+                &nbsp;:
               </p>
               <FullTable
                 head={['Publication', 'N°', 'Details', 'Lien']}
