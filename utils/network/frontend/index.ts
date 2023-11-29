@@ -22,7 +22,13 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
   if (!config.url) {
     throw new Error('Url is required');
   }
-  if (config.useCache || config.method || config.data || config.headers) {
+  if (
+    config.responseType ||
+    config.useCache ||
+    config.method ||
+    config.data ||
+    config.headers
+  ) {
     throw new Error('Feature not yet supported on frontend client');
   }
 

@@ -1,4 +1,6 @@
 import { GetServerSideProps } from 'next';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import DocumentBilansSection from '#components/espace-agent-components/documents/bilans';
 import { FinancesAssociationSection } from '#components/finances-section/association';
 import { FinancesSocieteSection } from '#components/finances-section/societe';
 import Meta from '#components/meta';
@@ -12,6 +14,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
+import { isAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -41,7 +44,15 @@ const FinancePage: NextPageWithLayout<IProps> = ({
         {isAssociation(uniteLegale) ? (
           <FinancesAssociationSection association={uniteLegale} />
         ) : isServicePublic(uniteLegale) ? null : (
-          <FinancesSocieteSection uniteLegale={uniteLegale} />
+          <>
+            <FinancesSocieteSection uniteLegale={uniteLegale} />
+            {isAgent(session) && (
+              <>
+                <HorizontalSeparator />
+                <DocumentBilansSection uniteLegale={uniteLegale} />
+              </>
+            )}
+          </>
         )}
       </div>
     </>

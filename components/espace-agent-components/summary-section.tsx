@@ -77,7 +77,13 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
             [
               <>Données financières</>,
               <a href={`/donnees-financieres/${uniteLegale.siren}`}>
-                → Consulter les derniers bilans
+                → Consulter les indicateurs financiers
+              </a>,
+            ],
+            [
+              '',
+              <a href={`/donnees-financieres/${uniteLegale.siren}#bilans`}>
+                <Icon slug="download">Télécharger les bilans</Icon>
               </a>,
             ],
           ]}

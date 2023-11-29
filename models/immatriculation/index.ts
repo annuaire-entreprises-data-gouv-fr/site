@@ -3,13 +3,19 @@ import { Siren } from '#utils/helpers';
 interface IActeRNE {
   id: string;
   dateDepot: string;
-  acte?: string[];
+  actes?: string[];
+}
+
+interface IBilanRNE {
+  id: string;
+  dateDepot: string;
+  description: string;
 }
 
 export interface IActesRNE {
   actes: IActeRNE[];
-  bilans: IActeRNE[];
-  bilansSaisis: IActeRNE[];
+  bilans: IBilanRNE[];
+  bilansSaisis: IBilanRNE[];
 }
 
 export interface IImmatriculation {

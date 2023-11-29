@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
-import ActesSection from '#components/espace-agent-components/actes';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
+import ActesSection from '#components/espace-agent-components/documents/actes';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -40,7 +41,12 @@ const UniteLegaleForAgentPage: NextPageWithLayout<IProps> = ({
         session={session}
       />
       {isAgent(session) && <ActesSection uniteLegale={uniteLegale} />}
-      {isSuperAgent(session) && <ConformiteSection uniteLegale={uniteLegale} />}
+      {isSuperAgent(session) && (
+        <>
+          <HorizontalSeparator />
+          <ConformiteSection uniteLegale={uniteLegale} />
+        </>
+      )}
     </div>
   </>
 );
