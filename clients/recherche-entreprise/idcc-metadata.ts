@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { IConventionsCollectivesMetadata } from '#models/conventions-collectives-list';
+import { ICCWithMetadata } from '#models/conventions-collectives-list';
 import { httpGet } from '#utils/network';
 
 type IIdccMetadata = {
@@ -35,5 +35,5 @@ const mapToDomainObject = (response: IIdccMetadata) => {
       idcc,
     };
     return idccMetadatas;
-  }, {} as { [idcc: string]: IConventionsCollectivesMetadata });
+  }, {} as { [idcc: string]: ICCWithMetadata });
 };

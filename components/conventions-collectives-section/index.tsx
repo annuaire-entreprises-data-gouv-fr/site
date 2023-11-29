@@ -89,6 +89,9 @@ const ConventionsCollectivesSection: React.FC<{
                         target="_blank"
                         to={`${routes.conventionsCollectives.details}${idcc}`}
                         alt
+                        aria-label={`Convention collective ${
+                          title || idcc
+                        }, consulter les informations`}
                         small
                       >
                         ⇢&nbsp;Consulter

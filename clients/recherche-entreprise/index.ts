@@ -230,7 +230,7 @@ const mapToUniteLegale = (result: IResult) => {
     dateDerniereMiseAJour: date_mise_a_jour,
     conventionsCollectives: etablissements.reduce(
       (idccSiretPair, { siret, liste_idcc }) => {
-        (liste_idcc || []).forEach(async (idcc) => {
+        (liste_idcc || []).forEach((idcc) => {
           idccSiretPair[idcc] = [...(idccSiretPair[idcc] || []), siret];
         });
         return idccSiretPair;

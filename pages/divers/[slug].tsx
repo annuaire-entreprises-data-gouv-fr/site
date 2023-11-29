@@ -5,7 +5,7 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import {
-  IConventionsCollectivesMetadata,
+  ICCWithMetadata,
   getCCMetadata,
 } from '#models/conventions-collectives-list';
 import { IUniteLegale } from '#models/index';
@@ -20,7 +20,7 @@ import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
-  ccWithMetadata: IConventionsCollectivesMetadata | IAPINotRespondingError;
+  ccWithMetadata: ICCWithMetadata[] | IAPINotRespondingError;
 }
 
 const ConventionsCollectives: NextPageWithLayout<IProps> = ({
