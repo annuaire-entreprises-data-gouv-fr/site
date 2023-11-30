@@ -8,6 +8,7 @@ import { IEtatCivil } from '#models/immatriculation';
 import { IdRna, Siren, Siret } from '#utils/helpers';
 import { IAPINotRespondingError } from './api-not-responding';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
+import { ITVAIntracommunautaire } from './tva';
 
 export interface IConventionCollective {
   idcc: string;
@@ -85,6 +86,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
 export interface IUniteLegale extends IEtablissementsList {
   siren: Siren;
   oldSiren: Siren;
+  tva: ITVAIntracommunautaire | null;
   siege: IEtablissement;
   allSiegesSiret: Siret[];
   natureJuridique: string;
@@ -122,6 +124,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     oldSiren: siren,
     siege,
     allSiegesSiret: [],
+    tva: null,
     statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     etatAdministratif: IETATADMINSTRATIF.INCONNU,
     nomComplet: '',

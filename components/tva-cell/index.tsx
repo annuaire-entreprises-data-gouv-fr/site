@@ -5,17 +5,8 @@ import InformationTooltip from '#components-ui/information-tooltip';
 import { Loader } from '#components-ui/loader';
 import FrontStateMachine from '#components/front-state-machine';
 import { CopyPaste } from '#components/table/simple';
-import { estActif } from '#models/etat-administratif';
-import { IEtablissement, IUniteLegale } from '#models/index';
-import { tvaNumber } from '#models/tva/utils';
+import { ITVAIntracommunautaire } from '#models/tva';
 import { formatIntFr } from '#utils/helpers';
-
-function haveMultipleNafs(etablissementsList: IEtablissement[] = []) {
-  return (
-    Array.from(new Set(etablissementsList.map((e) => e.activitePrincipale)))
-      .length > 1
-  );
-}
 
 const NoTVA = () => <i>Non-assujetti à la TVA</i>;
 
@@ -51,27 +42,20 @@ const CopyCell = () => (
  *     - it has two or more active NAFs -> it might have other valid TVA numbers
  *
  */
-const TVACell: React.FC<{ uniteLegale: IUniteLegale }> = ({ uniteLegale }) => {
-  if (!estActif(uniteLegale)) {
+const TVACell: React.FC<{
+  tva: ITVAIntracommunautaire | null;
+}> = ({ tva }) => {
+  if (!tva) {
     return <NoTVA />;
   }
 
-  const mayHaveMultipleTVANumbers = haveMultipleNafs(
-    uniteLegale.etablissements.all
-  );
-
-  const mayHaveMultipleActiveTVANumbers = haveMultipleNafs(
-    uniteLegale.etablissements.open
-  );
-
-  const { siren } = uniteLegale;
-  const unverifiedTvaNumber = tvaNumber(siren);
+  const { number, mayHaveMultipleTVANumber } = tva;
 
   return (
     <FrontStateMachine
       id="tva-cell-wrapper"
       states={[
-        mayHaveMultipleTVANumbers ? <Unknown /> : <NoTVA />,
+        mayHaveMultipleTVANumber.allTime ? <Unknown /> : <NoTVA />,
         <>
           <Loader />
           {/*
@@ -81,7 +65,7 @@ const TVACell: React.FC<{ uniteLegale: IUniteLegale }> = ({ uniteLegale }) => {
           &nbsp;
         </>,
         <>
-          {mayHaveMultipleActiveTVANumbers ? (
+          {mayHaveMultipleTVANumber.currentlyActive ? (
             <InformationTooltip
               label={
                 <>
@@ -109,9 +93,9 @@ const TVACell: React.FC<{ uniteLegale: IUniteLegale }> = ({ uniteLegale }) => {
         </>,
         <i>
           Le téléservice du VIES ne fonctionne pas actuellement.{' '}
-          {unverifiedTvaNumber
+          {number
             ? `Nous n’avons pas pu vérifier si le numéro FR${formatIntFr(
-                unverifiedTvaNumber
+                number
               )} est valide.`
             : ''}{' '}
           Merci de ré-essayer plus tard.

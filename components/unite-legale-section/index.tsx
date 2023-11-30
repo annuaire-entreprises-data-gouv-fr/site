@@ -46,7 +46,7 @@ const UniteLegaleSection: React.FC<{
           Comprendre le numéro de TVA intracommunautaire
         </a>
       </FAQLink>,
-      <TVACell uniteLegale={uniteLegale} />,
+      <TVACell tva={uniteLegale.tva} />,
     ],
     ['Activité principale (NAF/APE)', uniteLegale.libelleActivitePrincipale],
     ['Code NAF/APE', uniteLegale.activitePrincipale],
