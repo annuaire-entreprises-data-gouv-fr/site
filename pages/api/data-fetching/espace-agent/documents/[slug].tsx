@@ -22,6 +22,9 @@ async function actes(req: NextApiRequest, res: NextApiResponse) {
     const siren = verifySiren(slug as string);
 
     const actes = await clientDocuments(siren);
+    actes.hasBilanConsolide =
+      actes.bilans.filter((b) => b.typeBilan === 'K').length > 0;
+
     res.status(200).json(actes);
   } catch (e: any) {
     const message = 'Failed to fetch document list';
