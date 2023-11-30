@@ -4,10 +4,9 @@ import { verifySiren } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
 import { tvaNumber } from './utils';
 
-/**
- * build TVA number from siren and then validate it
- */
-export const verifyTVA = async (slug: string): Promise<string | null> => {
+export const buildAndVerifyTVA = async (
+  slug: string
+): Promise<string | null> => {
   const siren = verifySiren(slug);
   const tvaNumberFromSiren = tvaNumber(siren);
 

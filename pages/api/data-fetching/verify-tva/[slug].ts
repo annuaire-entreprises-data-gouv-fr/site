@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { verifyTVA } from '#models/tva/verfify';
+import { buildAndVerifyTVA } from '#models/tva/verify';
 import logErrorInSentry from '#utils/sentry';
 import { withAPM } from '#utils/sentry/tracing';
 import withAntiBot from '#utils/session/with-anti-bot';
@@ -9,7 +9,7 @@ const verify = async (
   res: NextApiResponse
 ) => {
   try {
-    const tva = await verifyTVA(slug as string);
+    const tva = await buildAndVerifyTVA(slug as string);
     res.status(200).json({ tva });
   } catch (e: any) {
     logErrorInSentry(e, { errorName: 'Error in API TVA' });
