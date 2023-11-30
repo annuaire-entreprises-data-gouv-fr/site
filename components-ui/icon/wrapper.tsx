@@ -6,7 +6,7 @@ type IProps = {
   className?: string;
   size?: number;
   color?: string;
-  slug: string;
+  slug: keyof typeof icons;
 };
 
 export const Icon: React.FC<PropsWithChildren<IProps>> = ({
@@ -17,7 +17,6 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
   children,
   slug,
 }) => {
-  //@ts-ignore
   const icon = icons[slug];
   if (!icon) {
     console.error(`Error in <Icon/> : ${slug} icon does not exists`);
