@@ -1,10 +1,11 @@
 import { MouseEventHandler } from 'react';
+import { IIconsSlug } from '#components-ui/icon';
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
 
 const ActiveFilterLabel: React.FC<{
   label?: string;
-  icon: string;
+  icon: IIconsSlug;
   query: string;
   onClick: MouseEventHandler;
 }> = ({ label, icon, query, onClick }) => (

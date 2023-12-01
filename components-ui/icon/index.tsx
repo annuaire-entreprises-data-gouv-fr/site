@@ -412,6 +412,8 @@ const errorFill = (
   </svg>
 );
 
+export type IIconsSlug = keyof typeof icons;
+
 export const icons = {
   errorFill,
   lightbulbFill,

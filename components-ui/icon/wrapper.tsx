@@ -1,12 +1,12 @@
 import { PropsWithChildren } from 'react';
-import { icons } from '.';
+import { IIconsSlug, icons } from '.';
 
 type IProps = {
   id?: string;
   className?: string;
   size?: number;
   color?: string;
-  slug: keyof typeof icons;
+  slug: IIconsSlug;
 };
 
 export const Icon: React.FC<PropsWithChildren<IProps>> = ({
