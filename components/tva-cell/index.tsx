@@ -6,7 +6,6 @@ import { Loader } from '#components-ui/loader';
 import FrontStateMachine from '#components/front-state-machine';
 import { CopyPaste } from '#components/table/simple';
 import { ITVAIntracommunautaire } from '#models/tva';
-import { formatIntFr } from '#utils/helpers';
 
 const NoTVA = () => <i>Non-assujetti à la TVA</i>;
 
@@ -21,9 +20,9 @@ const Unknown = () => (
   </i>
 );
 
-const CopyCell = () => (
+const CopyCell = ({ number }: { number?: string }) => (
   <CopyPaste shouldTrim={true} id="tva-cell-result">
-    Inconnu
+    {number || 'Inconnu'}
   </CopyPaste>
 );
 
@@ -91,15 +90,24 @@ const TVACell: React.FC<{
             <CopyCell />
           )}
         </>,
-        <i>
-          Le téléservice du VIES ne fonctionne pas actuellement.{' '}
-          {number
-            ? `Nous n’avons pas pu vérifier si le numéro FR${formatIntFr(
-                number
-              )} est valide.`
-            : ''}{' '}
-          Merci de ré-essayer plus tard.
-        </i>,
+        <>
+          <InformationTooltip
+            label={
+              <>
+                Nous n’avons pas pu controler la validité de ce numéro car le
+                téléservice du VIES ne fonctionne pas actuellement. Merci de
+                ré-essayer plus tard pour vérifier si cette structure est bien
+                assujettie à la TVA.
+              </>
+            }
+            orientation="left"
+            left="5px"
+          >
+            <Icon slug="errorFill" color="#df0a00">
+              <CopyCell number={`FR${number}`} />
+            </Icon>
+          </InformationTooltip>
+        </>,
       ]}
     />
   );

@@ -1,9 +1,10 @@
 import { MouseEventHandler } from 'react';
+import { IIconsSlug } from '#components-ui/icon';
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
 
 interface IProps extends IPartialBadgeProps {
-  icon: string;
+  icon: IIconsSlug;
   backgroundColor?: string;
   fontColor?: string;
 }

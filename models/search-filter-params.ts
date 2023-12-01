@@ -1,3 +1,4 @@
+import { IIconsSlug } from '#components-ui/icon';
 import { IEtatCivil } from '#models/immatriculation';
 
 export interface IParams {
@@ -175,7 +176,7 @@ class SearchFilterParams {
         label: '',
         excludeParams: ['cp_dep', 'cp_dep_label', 'cp_dep_type'],
       },
-    };
+    } as { [key: string]: ISearchFilter };
 
     if (hasDirigeantFilter(this.params)) {
       let labelAge = '';
@@ -308,7 +309,7 @@ export const buildSearchQuery = (
 };
 
 export interface ISearchFilter {
-  icon: string;
+  icon: IIconsSlug;
   label: string;
   excludeParams: string[];
 }
