@@ -30,47 +30,43 @@ export const getMonitorsByAdministration = async (): Promise<{
     [key: string]: IMonitoringWithMetaData[];
   };
 
-  const allMonitorings = await Promise.all(
-    Object.values(administrationsMetaData).reduce(
-      (
-        aggregator: Promise<IMonitoringWithMetaData>[],
-        { apiMonitors = [], administrationEnum }
-      ) => {
-        aggregator = [
-          ...aggregator,
-          ...apiMonitors
-            .filter(({ updownIoId }) => !!updownIoId)
-            .map(
-              async ({
-                updownIoId,
-                apigouvLink = null,
-                apiName = null,
-                apiSlug = null,
-              }) => {
-                try {
-                  const monitoring = await clientMonitoring(updownIoId);
-                  return {
-                    apigouvLink,
-                    apiSlug,
-                    apiName,
-                    administrationEnum,
-                    ...monitoring,
-                  } as IMonitoringWithMetaData;
-                } catch (e: any) {
-                  logErrorInSentry(e, {
-                    errorName: 'Error while fetching monitoring',
-                    details: apiName || '',
-                  });
-                  throw e;
-                }
+  let allMonitorings = [] as IMonitoringWithMetaData[];
+  for (const { apiMonitors = [], administrationEnum } of Object.values(
+    administrationsMetaData
+  )) {
+    allMonitorings = [
+      ...allMonitorings,
+      ...(await Promise.all(
+        apiMonitors
+          .filter(({ updownIoId }) => !!updownIoId)
+          .map(
+            async ({
+              updownIoId,
+              apigouvLink = null,
+              apiName = null,
+              apiSlug = null,
+            }) => {
+              try {
+                const monitoring = await clientMonitoring(updownIoId);
+                return {
+                  apigouvLink,
+                  apiSlug,
+                  apiName,
+                  administrationEnum,
+                  ...monitoring,
+                } as IMonitoringWithMetaData;
+              } catch (e: any) {
+                logErrorInSentry(e, {
+                  errorName: 'Error while fetching monitoring',
+                  details: apiName || '',
+                });
+                throw e;
               }
-            ),
-        ];
-        return aggregator;
-      },
-      []
-    )
-  );
+            }
+          )
+      )),
+    ];
+  }
 
   allMonitorings.forEach((monitorings) => {
     allMonitoringsByAdministration[monitorings.administrationEnum] = [
