@@ -15,7 +15,7 @@ import { ISession, isSuperAgent } from '#utils/session';
 
 export enum FICHE {
   INFORMATION = 'résumé',
-  AGENTS = 'espace agent',
+  DOCUMENTS = 'documents',
   ACTES = 'actes & statuts',
   ANNONCES = 'annonces',
   FINANCES = 'finances',
@@ -57,9 +57,9 @@ export const Tabs: React.FC<{
       width: '80px',
     },
     {
-      ficheType: FICHE.AGENTS,
-      label: 'Fiche agents publics',
-      pathPrefix: '/espace-agent/',
+      ficheType: FICHE.DOCUMENTS,
+      label: 'Documents',
+      pathPrefix: '/documents/',
       noFollow: false,
       shouldDisplay: isSuperAgent(session),
       width: '110px',

@@ -30,14 +30,14 @@ const UniteLegaleForAgentPage: NextPageWithLayout<IProps> = ({
       title={getCompanyPageTitle(uniteLegale, session)}
       description={getCompanyPageDescription(uniteLegale, session)}
       noIndex={true}
-      canonical={`https://annuaire-entreprises.data.gouv.fr/espace-agent/${
+      canonical={`https://annuaire-entreprises.data.gouv.fr/documents/${
         uniteLegale.chemin || uniteLegale.siren
       }`}
     />
     <div className="content-container">
       <Title
         uniteLegale={uniteLegale}
-        ficheType={FICHE.AGENTS}
+        ficheType={FICHE.DOCUMENTS}
         session={session}
       />
       {isAgent(session) && <ActesSection uniteLegale={uniteLegale} />}
