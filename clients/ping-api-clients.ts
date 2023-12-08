@@ -25,7 +25,8 @@ const ping = async (slug: string | string[]) => {
       });
     case 'api-sirene-donnees-ouvertes':
       return await clientUniteLegaleRechercheEntreprise(
-        verifySiren('880878145')
+        verifySiren('880878145'),
+        1
       );
     case 'api-association':
       return await clientAssociation(verifyIdRna('W551000280'), '', useCache);

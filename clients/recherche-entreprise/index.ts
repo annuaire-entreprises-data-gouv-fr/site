@@ -48,6 +48,7 @@ type ClientSearchRechercheEntreprise = {
   fallbackOnStaging?: boolean;
   useCache?: boolean;
   inclureEtablissements?: boolean;
+  pageEtablissements?: number;
 };
 
 /**
@@ -60,6 +61,7 @@ const clientSearchRechercheEntreprise = async ({
   fallbackOnStaging = false,
   useCache = false,
   inclureEtablissements = false,
+  pageEtablissements = 1,
 }: ClientSearchRechercheEntreprise): Promise<ISearchResults> => {
   const encodedTerms = encodeURIComponent(searchTerms);
 
@@ -75,9 +77,18 @@ const clientSearchRechercheEntreprise = async ({
     throw new NotEnoughParamsException('');
   }
 
-  const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3${
+  let url = route;
+  url += `?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3${
     searchFilterParams?.toApiURI() || ''
-  }&include_admin=slug${inclureEtablissements ? ',etablissements' : ''}`;
+  }`;
+  url += `&include_admin=slug`;
+
+  if (inclureEtablissements) {
+    url += `,etablissements`;
+  }
+  if (inclureEtablissements && pageEtablissements) {
+    url += `&page_etablissements=${pageEtablissements}`;
+  }
 
   const timeout = fallbackOnStaging
     ? constants.timeout.XL
@@ -92,21 +103,27 @@ const clientSearchRechercheEntreprise = async ({
   if (!results.results || results.results.length === 0) {
     throw new HttpNotFound('No results');
   }
-  return mapToDomainObjectNew(results);
+  return mapToDomainObjectNew(results, pageEtablissements);
 };
 
-const mapToDomainObjectNew = (data: ISearchResponse): ISearchResults => {
+const mapToDomainObjectNew = (
+  data: ISearchResponse,
+  pageEtablissements: number
+): ISearchResults => {
   const { total_results = 0, total_pages = 0, results = [], page } = data;
 
   return {
     currentPage: parseIntWithDefaultValue(page as string, 1),
     resultCount: total_results,
     pageCount: total_pages,
-    results: results.map(mapToUniteLegale),
+    results: results.map((r) => mapToUniteLegale(r, pageEtablissements)),
   };
 };
 
-const mapToUniteLegale = (result: IResult): ISearchResult => {
+const mapToUniteLegale = (
+  result: IResult,
+  pageEtablissements: number
+): ISearchResult => {
   const {
     nature_juridique,
     siege,
@@ -175,8 +192,7 @@ const mapToUniteLegale = (result: IResult): ISearchResult => {
     etablissements.length > 0
       ? etablissements.map(mapToEtablissement)
       : [etablissementSiege],
-    // hard code 1 for page as we dont paginate etablissement on recherche-entreprise
-    1,
+    pageEtablissements,
     result.nombre_etablissements
   );
 
