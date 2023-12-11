@@ -122,7 +122,8 @@ export const Tabs: React.FC<{
       label: 'Conventions collectives',
       pathPrefix: '/divers/',
       noFollow: false,
-      shouldDisplay: (uniteLegale.conventionsCollectives || []).length > 0,
+      shouldDisplay:
+        Object.keys(uniteLegale.conventionsCollectives || {}).length > 0,
       width: '130px',
     },
   ];

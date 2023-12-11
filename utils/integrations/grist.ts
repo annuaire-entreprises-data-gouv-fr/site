@@ -1,4 +1,5 @@
 import routes from '#clients/routes';
+import constants from '#models/constants';
 import httpClient from '#utils/network';
 
 type IGristRecords = {
@@ -43,6 +44,7 @@ export async function logInGrist(tableKey: string, data: unknown[]) {
         return { fields: d };
       }),
     },
+    timeout: constants.timeout.XXL,
   });
 }
 
@@ -53,6 +55,7 @@ export async function readFromGrist(tableKey: string) {
     headers: {
       Authorization: 'Bearer ' + process.env.GRIST_API_KEY,
     },
+    timeout: constants.timeout.XXL,
   });
 
   return records.map((r) => r.fields);

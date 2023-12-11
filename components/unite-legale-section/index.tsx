@@ -27,8 +27,8 @@ const UniteLegaleSection: React.FC<{
 }> = ({ uniteLegale, session }) => {
   const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
 
-  const conventionsCollectives = Array.from(
-    new Set((uniteLegale.conventionsCollectives || []).map((cc) => cc.idcc))
+  const conventionsCollectives = Object.keys(
+    uniteLegale.conventionsCollectives || {}
   );
 
   const data = [
