@@ -1,4 +1,4 @@
-import { Exception } from '#models/exceptions';
+import { InternalError } from '#models/index';
 import { libelleFromTypeVoie } from '#utils/helpers/formatting/labels';
 import logErrorInSentry from '#utils/sentry';
 
@@ -11,20 +11,25 @@ const timeZone = 'UTC';
  */
 const safe =
   <T extends unknown[], R>(castAndFormat: (...args: T) => R) =>
-  (...args: T): R | undefined => {
+  (...args: T): R | string => {
     try {
       return castAndFormat.apply(null, args);
     } catch (e: any) {
+      let argsAsString = '';
+      try {
+        argsAsString = args.toString();
+      } catch {}
       logErrorInSentry(
-        new Exception({
-          name: 'ViewFormattingException',
+        new InternalError({
+          message: 'Formatting error in view',
           cause: e,
           context: {
-            details: args.toString(),
+            details: argsAsString,
           },
         })
       );
-      return undefined;
+
+      return argsAsString;
     }
   };
 
@@ -94,7 +99,7 @@ export const formatDateYear = safe(
   }
 );
 
-export const formatDatePartial = safe((date: string | Date) => {
+export const formatDatePartial = safe((date: string | Date | undefined) => {
   if (!date) {
     return undefined;
   }
@@ -114,7 +119,7 @@ export const formatDateLong = safe((date: string | Date) => {
   );
 });
 
-export const formatDate = safe((date: string | Date) =>
+export const formatDate = safe((date: string | Date | undefined) =>
   date
     ? new Intl.DateTimeFormat('fr-FR', { timeZone }).format(castDate(date))
     : undefined

@@ -7,7 +7,7 @@ import { IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IEtatCivil } from '#models/immatriculation';
 import { IdRna, Siren, Siret } from '#utils/helpers';
 import { IAPINotRespondingError } from './api-not-responding';
-import { Exception } from './exceptions';
+import { Exception, IExceptionContext } from './exceptions';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 import { ITVAIntracommunautaire } from './tva';
 
@@ -392,7 +392,11 @@ export class SearchEngineError extends Exception {
  * If it is, it means that there is a bug in the code.
  */
 export class InternalError extends Exception {
-  constructor(args: { message: string; cause?: any }) {
+  constructor(args: {
+    message: string;
+    cause?: any;
+    context?: IExceptionContext;
+  }) {
     super({ name: 'InternalError', ...args });
   }
 }

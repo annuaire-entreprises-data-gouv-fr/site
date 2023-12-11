@@ -101,9 +101,11 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const sirenFrom = (context.query.sirenFrom || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
 
-    const [beginingOfMonth, endOfMonth] = formatMonthIntervalFromPartialDate(
+    const monthInterval = formatMonthIntervalFromPartialDate(
       (context.query.partialDate as string) || ''
     ) ?? ['', ''];
+    const [beginingOfMonth, endOfMonth] =
+      typeof monthInterval === 'string' ? ['', ''] : monthInterval;
 
     const dmin = (context.query.dmin as string) || beginingOfMonth;
     const dmax = (context.query.dmax as string) || endOfMonth;
