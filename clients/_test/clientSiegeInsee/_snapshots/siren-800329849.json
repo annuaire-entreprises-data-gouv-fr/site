@@ -33,6 +33,7 @@
       "80032984900023",
       "80032984900015"
     ],
+    "tva": null,
     "statutDiffusion": "diffusible",
     "etatAdministratif": "en activité",
     "nomComplet": "THEATRE STEPHANE GILDAS",
@@ -109,7 +110,7 @@
     "dateDerniereMiseAJour": "2023-10-5",
     "dateDebutActivite": "2017-12-20",
     "trancheEffectif": "N",
-    "anneeCategorieEntreprise": "2020",
+    "anneeCategorieEntreprise": "2021",
     "categorieEntreprise": "PME",
     "anneeTrancheEffectif": "2021",
     "dirigeant": null,

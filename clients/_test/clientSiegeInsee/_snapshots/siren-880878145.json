@@ -32,6 +32,7 @@
     "allSiegesSiret": [
       "88087814500015"
     ],
+    "tva": null,
     "statutDiffusion": "diffusible",
     "etatAdministratif": "cessée",
     "nomComplet": "GANYMEDE",
@@ -108,7 +109,7 @@
     "dateDerniereMiseAJour": "2023-10-5",
     "dateDebutActivite": "2022-10-22",
     "trancheEffectif": "N",
-    "anneeCategorieEntreprise": "2020",
+    "anneeCategorieEntreprise": "2021",
     "categorieEntreprise": "PME",
     "anneeTrancheEffectif": "2021",
     "dirigeant": null,
