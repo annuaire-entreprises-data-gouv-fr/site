@@ -69,10 +69,14 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
           url: `/entreprise/${uniteLegale.chemin}#etablissement`,
           label: 'Infos sur le siège social',
         },
-        {
-          url: `/entreprise/${uniteLegale.chemin}#etablissements`,
-          label: `Liste des ${uniteLegale.etablissements.nombreEtablissements} établissements`,
-        },
+        ...(uniteLegale.etablissements.nombreEtablissements > 1
+          ? [
+              {
+                url: `/entreprise/${uniteLegale.chemin}#etablissements`,
+                label: `Voir des ${uniteLegale.etablissements.nombreEtablissements} établissements`,
+              },
+            ]
+          : []),
         {
           url: `/carte/${uniteLegale.siege.siret}`,
           label: `Voir le siège sur la carte`,
