@@ -1,8 +1,9 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { monCompteProAuthorizeUrl } from '#clients/auth/mon-compte-pro/strategy';
-import logErrorInSentry from '#utils/sentry';
+import { logFatalErrorInSentry } from '#utils/sentry';
 import { sessionOptions } from '#utils/session';
+import { AgentConnectionFailedException } from './callback';
 
 export default withIronSessionApiRoute(loginRoute, sessionOptions);
 
@@ -11,7 +12,7 @@ async function loginRoute(_req: NextApiRequest, res: NextApiResponse) {
     const url = await monCompteProAuthorizeUrl();
     res.redirect(url);
   } catch (e: any) {
-    logErrorInSentry(e, { errorName: 'Connexion failed' });
+    logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));
     res.redirect('/connexion/echec-connexion');
   }
 }

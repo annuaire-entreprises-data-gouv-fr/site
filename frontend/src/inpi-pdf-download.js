@@ -13,15 +13,16 @@ function saveAsPdf(blob, siren) {
   window.URL.revokeObjectURL(url);
 }
 
+class PDFDownloadException extends Error {
+  name = 'PDFDownloadException';
+}
+
 function handleError() {
-  throw new Error('INPI PDF Download : failed and redirected');
+  throw new PDFDownloadException('Failed and redirected');
 }
 
 function handleNotFound() {
-  throw new Error('INPI PDF Download : 404');
-}
-function wait(ttw) {
-  return new Promise((resolve) => setTimeout(resolve, ttw));
+  throw new PDFDownloadException('Not found - 404');
 }
 
 async function download(url, siren) {

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { buildAndVerifyTVA } from '#models/tva/verify';
-import logErrorInSentry from '#utils/sentry';
+import { FetchVerifyTVAException, buildAndVerifyTVA } from '#models/tva/verify';
+import { logWarningInSentry } from '#utils/sentry';
 import { withAPM } from '#utils/sentry/tracing';
 import withAntiBot from '#utils/session/with-anti-bot';
 
@@ -12,7 +12,12 @@ const verify = async (
     const tva = await buildAndVerifyTVA(slug as string);
     res.status(200).json({ tva });
   } catch (e: any) {
-    logErrorInSentry(e, { errorName: 'Error in API TVA' });
+    logWarningInSentry(
+      new FetchVerifyTVAException({
+        cause: e,
+        context: { slug: slug as string },
+      })
+    );
     res.status(500).json({ message: 'failed to verify TVA number' });
   }
 };

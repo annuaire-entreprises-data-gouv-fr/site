@@ -1,5 +1,7 @@
 import { HttpTimeoutError } from '#clients/exceptions';
 import constants from '#models/constants';
+import { Exception, IExceptionContext } from '#models/exceptions';
+import { InternalError } from '#models/index';
 import logErrorInSentry from '#utils/sentry';
 import { IDefaultRequestConfig } from '..';
 import { httpErrorHandler } from '../utils/http-error-handler';
@@ -9,18 +11,23 @@ function buildUrl(url: string, params: any) {
     const serializedParams = new URLSearchParams(params).toString();
     const separator = url.indexOf('?') > 0 ? '&' : '?';
     return `${url}${separator}${serializedParams}`;
-  } catch (e) {
-    logErrorInSentry(e, {
-      errorName: 'Error while building url on frontend client',
-      details: url,
-    });
+  } catch (e: any) {
+    logErrorInSentry(
+      new Exception({
+        name: 'BuildURLWithParamsException',
+        cause: e,
+        context: {
+          details: url,
+        },
+      })
+    );
     return url;
   }
 }
 
 export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
   if (!config.url) {
-    throw new Error('Url is required');
+    throw new InternalError({ message: 'Url is required' });
   }
   if (
     config.responseType ||
@@ -29,7 +36,9 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
     config.data ||
     config.headers
   ) {
-    throw new Error('Feature not yet supported on frontend client');
+    throw new InternalError({
+      message: 'Feature not yet supported on frontend client',
+    });
   }
 
   const controller = new AbortController();
@@ -58,12 +67,17 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
 
     return data as T;
   } catch (e) {
+    const errorArgs = {
+      context: { page: config.url, details: `method: ${config.method}` },
+      cause: e,
+    };
+
     if (e instanceof TypeError && pendingUnload) {
       // Chrome and firefox systematically throw a TypeError when aborting a fetch when the user is navigating away
       // We don't want this error to bubble though the app
-      throw new RequestAbortedDuringUnloadException();
+      throw new RequestAbortedDuringUnloadException(errorArgs);
     }
-    throw e;
+    throw new FailToFetchError(errorArgs);
   } finally {
     clearTimeout(timeoutId);
   }
@@ -76,10 +90,23 @@ if (typeof window !== 'undefined') {
   };
 }
 
-export class RequestAbortedDuringUnloadException extends Error {
-  name = 'RequestAbortedDuringUnloadException';
-  constructor() {
-    super('Fetch request aborted because user is navigating away');
+export class RequestAbortedDuringUnloadException extends Exception {
+  constructor(args: { context: IExceptionContext; cause: any }) {
+    super({
+      name: 'RequestAbortedDuringUnloadException',
+      message: 'Fetch request aborted because user is navigating away',
+      ...args,
+    });
+  }
+}
+
+export class FailToFetchError extends Exception {
+  constructor(args: { context: IExceptionContext; cause: any }) {
+    super({
+      name: 'FailToFetchError',
+      message: 'Error while trying to fetch ressource from client',
+      ...args,
+    });
   }
 }
 

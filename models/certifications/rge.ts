@@ -5,6 +5,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
+import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '..';
 
@@ -60,10 +61,16 @@ export const getRGECertifications = async (
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.ADEME, 404);
     }
-    logErrorInSentry(e, {
-      siren: uniteLegale.siren,
-      errorName: 'Error in API RGE',
-    });
+    logErrorInSentry(
+      new FetchRessourceException({
+        cause: e,
+        ressource: 'RGECertifications',
+        context: {
+          siren: uniteLegale.siren,
+        },
+        administration: EAdministration.ADEME,
+      })
+    );
     return APINotRespondingFactory(EAdministration.ADEME, 500);
   }
 };

@@ -5,6 +5,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
+import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '..';
 
@@ -33,10 +34,16 @@ export const getEntrepreneurSpectaclesCertification = async (
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.MC, 404);
     }
-    logErrorInSentry(e, {
-      siren: uniteLegale.siren,
-      errorName: 'Error in API Spectacles Vivants',
-    });
+    logErrorInSentry(
+      new FetchRessourceException({
+        cause: e,
+        ressource: 'EntrepreneurSpectacles',
+        context: {
+          siren: uniteLegale.siren,
+        },
+        administration: EAdministration.MC,
+      })
+    );
     return APINotRespondingFactory(EAdministration.MC, 500);
   }
 };

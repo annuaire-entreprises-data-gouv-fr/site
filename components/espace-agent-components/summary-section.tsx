@@ -59,7 +59,7 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
             ['', <br />],
             [
               'Documents juridiques',
-              <a href={`/espace-agent/${uniteLegale.siren}#actes`}>
+              <a href={`/documents/${uniteLegale.siren}#actes`}>
                 → Consulter les Actes et les Statuts constitutifs
               </a>,
             ],
@@ -81,7 +81,7 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
                   ['', <br />],
                   [
                     'Conformité',
-                    <a href={`/espace-agent/${uniteLegale.siren}#conformite`}>
+                    <a href={`/documents/${uniteLegale.siren}#conformite`}>
                       → Consulter les attestations fiscales et sociales
                     </a>,
                   ],

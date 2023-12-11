@@ -74,7 +74,7 @@ const clientSearchRechercheEntreprise = async ({
   const filters = searchFilterParams?.toApiURI();
 
   if (!filters && (!encodedTerms || encodedTerms.length < 3)) {
-    throw new NotEnoughParamsException('');
+    throw new NotEnoughParamsException();
   }
 
   let url = route;

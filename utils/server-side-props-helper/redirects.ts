@@ -1,24 +1,13 @@
+import { InternalError } from '#models/index';
 import { hasSirenFormat, hasSiretFormat } from '#utils/helpers';
-import { IScope, logWarningInSentry } from '#utils/sentry';
 
-export const redirectPageNotFound = (
-  msg: string,
-  scope?: IScope
-): { notFound: true } => {
-  logWarningInSentry('Redirect 404 page', {
-    details: msg,
-    ...scope,
-  });
+export const redirectPageNotFound = (): { notFound: true } => {
   return {
     notFound: true,
   };
 };
 
-export const redirectServerError = (msg: string, scope?: IScope) => {
-  logWarningInSentry('Redirect 500 page', {
-    details: msg,
-    ...scope,
-  });
+export const redirectServerError = () => {
   return {
     redirect: {
       destination: '/500',
@@ -27,11 +16,7 @@ export const redirectServerError = (msg: string, scope?: IScope) => {
   };
 };
 
-export const redirectSearchEngineError = (msg: string, scope?: IScope) => {
-  logWarningInSentry('Redirect search error page', {
-    details: msg,
-    ...scope,
-  });
+export const redirectSearchEngineError = () => {
   return {
     redirect: {
       destination: '/rechercher/erreur',
@@ -43,11 +28,7 @@ export const redirectSearchEngineError = (msg: string, scope?: IScope) => {
 /**
  * Siren/Siret is NOT valid
  */
-export const redirectSirenOrSiretInvalid = (
-  sirenOrSiret: string,
-  scope?: IScope
-) => {
-  logWarningInSentry('Redirect siren or siret invalid', scope);
+export const redirectSirenOrSiretInvalid = (sirenOrSiret: string) => {
   return {
     redirect: {
       destination: `/erreur/invalide/${sirenOrSiret}`,
@@ -58,11 +39,7 @@ export const redirectSirenOrSiretInvalid = (
 /**
  * Siren/Siret is valid but not found
  */
-export const redirectSirenOrSiretIntrouvable = (
-  sirenOrSiret: string,
-  scope?: IScope
-) => {
-  logWarningInSentry('Redirect siren or siret not found', scope);
+export const redirectSirenOrSiretIntrouvable = (sirenOrSiret: string) => {
   return {
     redirect: {
       destination: `/erreur/introuvable/${sirenOrSiret}`,
@@ -78,7 +55,9 @@ export const redirectIfSiretOrSiren = (siretOrSiren: string) => {
   } else if (hasSirenFormat(siretOrSiren)) {
     destination = `/entreprise/${siretOrSiren}?redirected=1`;
   } else {
-    throw new Error(`${siretOrSiren} is neither a siret or a siren`);
+    throw new InternalError({
+      message: `${siretOrSiren} is neither a siret or a siren`,
+    });
   }
   return {
     redirect: {

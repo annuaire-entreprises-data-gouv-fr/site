@@ -1,6 +1,7 @@
 import { HttpServerError, HttpUnauthorizedError } from '#clients/exceptions';
 import constants from '#models/constants';
-import { logWarningInSentry } from '#utils/sentry';
+import { Information } from '#models/exceptions';
+import { logInfoInSentry } from '#utils/sentry';
 import httpClient, { IDefaultRequestConfig, httpGet } from '..';
 
 type IAccessToken = {
@@ -62,7 +63,12 @@ export class httpClientOAuth {
   getToken = async () => {
     // in case something went wrong during the last refresh
     if (!this._token || this.isTokenExpired()) {
-      logWarningInSentry('Refreshing Insee token');
+      logInfoInSentry(
+        new Information({
+          name: 'RefreshingInseeToken',
+          message: 'Refreshing Insee token',
+        })
+      );
       await this.newToken();
       if (!this._token) {
         throw new HttpUnauthorizedError('Failed to refresh token');

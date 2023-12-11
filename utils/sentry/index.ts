@@ -1,68 +1,45 @@
 import * as Sentry from '@sentry/nextjs';
 import { SeverityLevel } from '@sentry/nextjs';
-
-export type IScope = {
-  page?: string;
-  siret?: string;
-  siren?: string;
-  slug?: string;
-  details?: string;
-  referrer?: string;
-  errorName?: string;
-  browser?: string;
-};
+import { Exception, FetchRessourceException } from '#models/exceptions';
 
 // scope allows to log stuff in tags in sentry
-const getScope = (extra: IScope) => {
+function getScope(exception: Exception) {
   const scope = new Sentry.Scope();
-  Object.keys(extra).forEach((key) => {
+
+  Object.entries(exception.context).forEach(([key, value]) => {
     try {
-      //@ts-ignore
-      const value = (extra[key] || 'N/A').substring(0, 195);
+      value = (value || 'N/A').substring(0, 195);
       scope.setTag(key, value);
     } catch {
       scope.setTag(key, 'Serialization failed');
     }
   });
+  if (exception instanceof FetchRessourceException) {
+    scope.setTag('administration', exception.administration);
+  }
   if (process.env.INSTANCE_NUMBER) {
     scope.setTag('instance_number', process.env.INSTANCE_NUMBER);
   }
   return scope;
-};
+}
 
 export const isNextJSSentryActivated =
   process.env.NODE_ENV === 'production' && !!process.env.NEXT_PUBLIC_SENTRY_DSN;
 
 const logInSentryFactory =
-  (severity = 'error' as SeverityLevel) =>
-  (errorMsg: any, extra: IScope = {}) => {
-    if (extra.errorName && typeof errorMsg !== 'string') {
-      const originalErrorName = errorMsg.name;
-      try {
-        errorMsg.name = extra.errorName;
-        extra.errorName = originalErrorName;
-      } catch (e) {}
-    }
+  (severity: SeverityLevel) => (exception: Exception) => {
     if (isNextJSSentryActivated) {
-      const scope = getScope(extra || {});
+      const scope = getScope(exception);
       scope.setLevel(severity);
-
-      if (typeof errorMsg === 'string') {
-        Sentry.captureMessage(errorMsg, scope);
-      } else {
-        Sentry.captureException(errorMsg, scope);
-      }
+      Sentry.captureException(exception, scope);
     } else {
-      console.error(errorMsg, JSON.stringify(extra));
+      console.error(exception, JSON.stringify(exception.context));
     }
   };
 
-export const logWarningInSentry = logInSentryFactory('info' as SeverityLevel);
-
-export const logErrorInSentry = logInSentryFactory('error' as SeverityLevel);
-
-export const logFatalErrorInSentry = logInSentryFactory(
-  'fatal' as SeverityLevel
-);
+export const logInfoInSentry = logInSentryFactory('info');
+export const logWarningInSentry = logInSentryFactory('warning');
+export const logErrorInSentry = logInSentryFactory('error');
+export const logFatalErrorInSentry = logInSentryFactory('fatal');
 
 export default logErrorInSentry;
