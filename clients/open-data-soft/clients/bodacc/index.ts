@@ -2,6 +2,7 @@ import odsClient from '#clients/open-data-soft';
 import routes from '#clients/routes';
 import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IAnnoncesBodacc } from '#models/annonces';
+import { Exception } from '#models/exceptions';
 import { Siren, formatDate } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
 
@@ -88,9 +89,12 @@ const extractProcedure = (annonce: IBodaccRecords): any | undefined => {
 
     return null;
   } catch (e: any) {
-    logWarningInSentry('Unexpected error while parsing BODACC :' + e, {
-      details: annonce.registre,
-    });
+    logWarningInSentry(
+      new BodaccParsingException({
+        cause: e,
+        context: { details: annonce.registre },
+      })
+    );
     return null;
   }
 };
@@ -138,12 +142,29 @@ const extractDetails = (annonce: IBodaccRecords): string => {
     }
     return '';
   } catch (e: any) {
-    logWarningInSentry('Unexpected error while parsing BODACC :' + e, {
-      details: annonce.registre,
-    });
+    logWarningInSentry(
+      new BodaccParsingException({
+        cause: e,
+        context: {
+          details: annonce.registre,
+        },
+      })
+    );
     return '';
   }
 };
+
+type IBodaccParsingExceptionArguments = {
+  cause: any;
+  context: {
+    details: string;
+  };
+};
+class BodaccParsingException extends Exception {
+  constructor(args: IBodaccParsingExceptionArguments) {
+    super({ name: 'BodaccParsingException', ...args });
+  }
+}
 
 const stubbedClientBodacc = stubClient({
   clientBodacc,

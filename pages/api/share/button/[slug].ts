@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import constants from '#models/constants';
+import { Exception } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 
 const button = (
@@ -158,7 +159,15 @@ const button = (
 
     `);
   } catch (e: any) {
-    logErrorInSentry(e, { siren: slug as string });
+    logErrorInSentry(
+      new Exception({
+        name: 'ShareButtonGenerationException',
+        cause: e,
+        context: {
+          slug: slug as string,
+        },
+      })
+    );
     res.status(500).json({ message: e });
   }
 };

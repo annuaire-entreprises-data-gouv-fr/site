@@ -1,41 +1,42 @@
 import { PrintNever } from '#components-ui/print-visibility';
-import { ProtectedSection } from '#components/section/protected-section';
+import { DataSection } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { IUniteLegale } from '#models/index';
-import { useFetchDonneesRestreintes } from 'hooks';
+import useFetchConformite from 'hooks/fetch/conformite';
 import Conformite from './conformite';
 
 const ConformiteSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const { donneesRestreintes } = useFetchDonneesRestreintes(uniteLegale);
+  const conformite = useFetchConformite(uniteLegale);
 
   return (
     <PrintNever>
-      <ProtectedSection title="Conformité">
-        <TwoColumnTable
-          body={[
-            [
-              'Conformité fiscale',
-              <Conformite data={donneesRestreintes?.conformite?.fiscale} />,
-            ],
-            [
-              'Conformité sociale',
-              <>
-                <Conformite
-                  data={donneesRestreintes?.conformite?.vigilance}
-                  administration="Urssaf"
-                />
-                <br />
-                <Conformite
-                  data={donneesRestreintes?.conformite?.msa}
-                  administration="MSA"
-                />
-              </>,
-            ],
-          ]}
-        />
-      </ProtectedSection>
+      <DataSection
+        title="Conformité"
+        id="conformite"
+        isProtected
+        data={conformite}
+      >
+        {(conformite) => (
+          <TwoColumnTable
+            body={[
+              ['Conformité fiscale', <Conformite data={conformite?.fiscale} />],
+              [
+                'Conformité sociale',
+                <>
+                  <Conformite
+                    data={conformite?.vigilance}
+                    administration="Urssaf"
+                  />
+                  <br />
+                  <Conformite data={conformite?.msa} administration="MSA" />
+                </>,
+              ],
+            ]}
+          />
+        )}
+      </DataSection>
     </PrintNever>
   );
 };

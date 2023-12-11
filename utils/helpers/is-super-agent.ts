@@ -1,5 +1,6 @@
+import { FetchRessourceException } from '#models/exceptions';
 import { readFromGrist } from '#utils/integrations/grist';
-import logErrorInSentry from '#utils/sentry';
+import { logFatalErrorInSentry } from '#utils/sentry';
 
 class SuperAgentsList {
   public _list: string[] = [];
@@ -13,9 +14,12 @@ class SuperAgentsList {
           .filter((r: any) => r.actif === true)
           .map((r: any) => r.email);
       } catch (e: any) {
-        logErrorInSentry(e, {
-          errorName: 'Error while fetching agent list from notion',
-        });
+        logFatalErrorInSentry(
+          new FetchRessourceException({
+            ressource: 'SuperAgentsList',
+            cause: e,
+          })
+        );
       }
     }
     return this._list;

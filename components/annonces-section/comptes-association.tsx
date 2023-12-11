@@ -5,6 +5,7 @@ import { Tag } from '#components-ui/tag';
 import { DILA } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
+import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations';
 import { IAssociation } from '#models/index';
 import { formatDate } from '#utils/helpers';
@@ -41,14 +42,12 @@ export const ComptesAssociationSection: React.FC<{
               <b>Journal Officiel des Associations (JOAFE)</b>
               , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
               consulter{' '}
-              <a
-                rel="noreferrer noopener"
-                target="_blank"
+              <UniteLegalePageLink
+                uniteLegale={association}
                 href={`${routes.journalOfficielAssociations.site.recherche}?q=${association.siren}`}
-              >
-                la page de cette association
-              </a>{' '}
-              sur le site du JOAFE&nbsp;:
+                siteName="le site du JOAFE"
+              />
+              &nbsp;:
             </p>
             <FullTable
               head={[

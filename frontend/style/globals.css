@@ -149,12 +149,12 @@ h4 {
   font-size: 1em;
   float: left;
   margin-left: -1em;
-  padding-right: .25em;
+  padding-right: 0.25em;
   color: #000091;
   opacity: 0;
   background-image: none !important;
 }
 
 *:hover > .anchor-link {
-  opacity: 1
+  opacity: 1;
 }

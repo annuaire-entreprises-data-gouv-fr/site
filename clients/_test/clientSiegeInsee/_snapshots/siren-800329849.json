@@ -1,19 +1,19 @@
 {
-  "args": "842019051",
+  "args": "800329849",
   "result": {
-    "siren": "842019051",
-    "oldSiren": "842019051",
+    "siren": "800329849",
+    "oldSiren": "800329849",
     "siege": {
-      "siren": "842019051",
-      "siret": "84201905100015",
+      "siren": "800329849",
+      "siret": "80032984900023",
       "oldSiret": "",
       "etatAdministratif": "inconnu",
       "statutDiffusion": "diffusible",
       "estSiege": true,
       "enseigne": null,
       "denomination": null,
-      "nic": "00015",
-      "dateCreation": "2018-12-26",
+      "nic": "00023",
+      "dateCreation": "2017-12-20",
       "dateDerniereMiseAJour": "",
       "dateDebutActivite": "",
       "dateFermeture": "",
@@ -30,27 +30,28 @@
       "conventionsCollectives": []
     },
     "allSiegesSiret": [
-      "84201905100015"
+      "80032984900023",
+      "80032984900015"
     ],
     "statutDiffusion": "diffusible",
     "etatAdministratif": "en activité",
-    "nomComplet": "MANAKIN PRODUCTION",
-    "chemin": "842019051",
+    "nomComplet": "THEATRE STEPHANE GILDAS",
+    "chemin": "800329849",
     "natureJuridique": "9220",
     "libelleNatureJuridique": "Association déclarée",
     "etablissements": {
       "all": [
         {
-          "siren": "842019051",
-          "siret": "84201905100015",
+          "siren": "800329849",
+          "siret": "80032984900023",
           "oldSiret": "",
           "etatAdministratif": "inconnu",
           "statutDiffusion": "diffusible",
           "estSiege": true,
           "enseigne": null,
           "denomination": null,
-          "nic": "00015",
-          "dateCreation": "2018-12-26",
+          "nic": "00023",
+          "dateCreation": "2017-12-20",
           "dateDerniereMiseAJour": "",
           "dateDebutActivite": "",
           "dateFermeture": "",
@@ -71,16 +72,16 @@
       "unknown": [],
       "closed": [
         {
-          "siren": "842019051",
-          "siret": "84201905100015",
+          "siren": "800329849",
+          "siret": "80032984900023",
           "oldSiret": "",
           "etatAdministratif": "inconnu",
           "statutDiffusion": "diffusible",
           "estSiege": true,
           "enseigne": null,
           "denomination": null,
-          "nic": "00015",
-          "dateCreation": "2018-12-26",
+          "nic": "00023",
+          "dateCreation": "2017-12-20",
           "dateDerniereMiseAJour": "",
           "dateDebutActivite": "",
           "dateFermeture": "",
@@ -104,13 +105,13 @@
     },
     "activitePrincipale": "90.01Z",
     "libelleActivitePrincipale": "Arts du spectacle vivant",
-    "dateCreation": "2018-08-02",
+    "dateCreation": "2013-12-18",
     "dateDerniereMiseAJour": "2023-10-5",
-    "dateDebutActivite": "2018-12-26",
-    "trancheEffectif": "01",
+    "dateDebutActivite": "2017-12-20",
+    "trancheEffectif": "N",
     "anneeCategorieEntreprise": "2020",
     "categorieEntreprise": "PME",
-    "anneeTrancheEffectif": "2020",
+    "anneeTrancheEffectif": "2021",
     "dirigeant": null,
     "complements": {
       "estEntrepreneurIndividuel": false,
@@ -125,10 +126,11 @@
       "estOrganismeFormation": false,
       "estSocieteMission": false,
       "estQualiopi": false,
-      "estUai": false
+      "estUai": false,
+      "estAssociation": false
     },
     "association": {
-      "idAssociation": "W751245606",
+      "idAssociation": "W751222623",
       "data": null
     },
     "colter": {

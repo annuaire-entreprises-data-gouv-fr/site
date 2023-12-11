@@ -1,12 +1,12 @@
 import { PropsWithChildren } from 'react';
-import { icons } from '.';
+import { IIconsSlug, icons } from '.';
 
 type IProps = {
   id?: string;
   className?: string;
   size?: number;
   color?: string;
-  slug: string;
+  slug: IIconsSlug;
 };
 
 export const Icon: React.FC<PropsWithChildren<IProps>> = ({
@@ -17,7 +17,6 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
   children,
   slug,
 }) => {
-  //@ts-ignore
   const icon = icons[slug];
   if (!icon) {
     console.error(`Error in <Icon/> : ${slug} icon does not exists`);

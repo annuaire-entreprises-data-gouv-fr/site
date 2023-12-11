@@ -5,18 +5,20 @@ import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { INPI } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
+import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations';
 import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IBeneficiaire, IImmatriculationRNE } from '#models/immatriculation';
-import { Siren, formatDatePartial } from '#utils/helpers';
+import { IUniteLegale } from '#models/index';
+import { formatDatePartial } from '#utils/helpers';
 
 type IProps = {
   immatriculationRNE:
     | IImmatriculationRNE
     | IAPINotRespondingError
     | IAPILoading;
-  siren: Siren;
+  uniteLegale: IUniteLegale;
 };
 
 function hasSeveralBeneficiaires(immatriculationRNE: IImmatriculationRNE) {
@@ -30,7 +32,7 @@ function hasSeveralBeneficiaires(immatriculationRNE: IImmatriculationRNE) {
  */
 const BeneficiairesSection: React.FC<IProps> = ({
   immatriculationRNE,
-  siren,
+  uniteLegale,
 }) => {
   return (
     <>
@@ -45,7 +47,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
         {(immatriculationRNE) => (
           <BénéficiairesContent
             immatriculationRNE={immatriculationRNE}
-            siren={siren}
+            uniteLegale={uniteLegale}
           />
         )}
       </DataSection>
@@ -56,11 +58,11 @@ export default BeneficiairesSection;
 
 type IBeneficiairesContentProps = {
   immatriculationRNE: IImmatriculationRNE;
-  siren: Siren;
+  uniteLegale: IUniteLegale;
 };
 function BénéficiairesContent({
   immatriculationRNE,
-  siren,
+  uniteLegale,
 }: IBeneficiairesContentProps) {
   const { beneficiaires } = immatriculationRNE;
 
@@ -109,14 +111,12 @@ function BénéficiairesContent({
             enregistré{plural} au <b>Registre National des Entreprises (RNE)</b>{' '}
             tenu par l’
             <INPI />. Retrouvez le détail des modalités de contrôle sur{' '}
-            <a
-              rel="noreferrer noopener"
-              target="_blank"
-              href={`${routes.rne.portail.entreprise}${siren}`}
-            >
-              la page de cette entreprise
-            </a>{' '}
-            sur le site de l’INPI&nbsp;:
+            <UniteLegalePageLink
+              uniteLegale={uniteLegale}
+              href={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
+              siteName="le site de l’INPI"
+            />
+            &nbsp;:
           </p>
           <FullTable
             head={['Nationalité', 'Détails']}

@@ -8,7 +8,9 @@ import { IEtatCivil } from '#models/immatriculation';
 import { IdRna, Siren, Siret } from '#utils/helpers';
 import { IAPINotRespondingError } from './api-not-responding';
 import { IConventionsCollectives } from './conventions-collectives-list';
+import { Exception, IExceptionContext } from './exceptions';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
+import { ITVAIntracommunautaire } from './tva';
 
 export interface IEtablissement {
   enseigne: string | null;
@@ -76,6 +78,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
 export interface IUniteLegale extends IEtablissementsList {
   siren: Siren;
   oldSiren: Siren;
+  tva: ITVAIntracommunautaire | null;
   siege: IEtablissement;
   allSiegesSiret: Siret[];
   natureJuridique: string;
@@ -113,6 +116,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     oldSiren: siren,
     siege,
     allSiegesSiret: [],
+    tva: null,
     statutDiffusion: ISTATUTDIFFUSION.DIFFUSIBLE,
     etatAdministratif: IETATADMINSTRATIF.INCONNU,
     nomComplet: '',
@@ -260,82 +264,130 @@ export const isCollectiviteTerritoriale = (
 /**
  * This is a valid siren but it was not found
  */
-export class SirenNotFoundError extends Error {
-  constructor(public message: string) {
-    super();
+export class SirenNotFoundError extends Exception {
+  constructor(siren: string) {
+    super({
+      name: 'SirenNotFoundError',
+      message: 'This is a valid siren but it was not found',
+      context: { siren },
+    });
   }
 }
 
 /**
  * This look like a siren but does not respect Luhn formula
  */
-export class NotLuhnValidSirenError extends Error {
-  constructor(public message: string) {
-    super();
+export class NotLuhnValidSirenError extends Exception {
+  constructor(siren: string) {
+    super({
+      name: 'NotLuhnValidSirenError',
+      message: 'This look like a siren but does not respect Luhn formula',
+      context: { siren },
+    });
   }
 }
 
 /**
  * This does not even look like a siren
  */
-export class NotASirenError extends Error {
-  constructor(public message: string) {
-    super();
+export class NotASirenError extends Exception {
+  constructor(siren: string) {
+    super({
+      name: 'NotASirenError',
+      message: 'This does not even look like a siren',
+      context: { siren },
+    });
   }
 }
 
 /**
  * This is a valid siret but it was not found
  */
-export class SiretNotFoundError extends Error {
-  constructor(public message: string) {
-    super();
+export class SiretNotFoundError extends Exception {
+  constructor(siret: string) {
+    super({
+      name: 'SiretNotFoundError',
+      message: 'This is a valid siret but it was not found',
+      context: { siret },
+    });
   }
 }
 
 /**
  * This look like a siret but does not respect Luhn formula
  */
-export class NotLuhnValidSiretError extends Error {
-  constructor(public message: string) {
-    super();
+export class NotLuhnValidSiretError extends Exception {
+  constructor(siret: string) {
+    super({
+      name: 'NotLuhnValidSiretError',
+      message: 'This look like a siret but does not respect Luhn formula',
+      context: { siret },
+    });
   }
 }
 
 /**
  * This does not even look like a siret
  */
-export class NotASiretError extends Error {
-  constructor(public message: string) {
-    super();
+export class NotASiretError extends Exception {
+  constructor(siret: string) {
+    super({
+      name: 'NotASiretError',
+      message: 'This does not even look like a siret',
+      context: { siret },
+    });
   }
 }
 
 /**
  * This is not a valid IdRna
  */
-export class NotAValidIdRnaError extends Error {
-  constructor(public message: string) {
-    super();
+export class NotAValidIdRnaError extends Exception {
+  constructor(idRna: string) {
+    super({
+      name: 'NotAValidIdRnaError',
+      message: 'This is not a valid IdRna',
+      context: { idRna },
+    });
   }
 }
 
 /** COMMON EXCEPTIONS */
-export class IsLikelyASirenOrSiretException extends Error {
-  constructor(public message: string) {
-    super();
+export class IsLikelyASirenOrSiretException extends Exception {
+  constructor(public sirenOrSiret: string) {
+    super({
+      name: 'IsLikelyASirenOrSiretException',
+      context: {
+        details: sirenOrSiret,
+      },
+    });
   }
 }
 
 // search engine exception
-export class NotEnoughParamsException extends Error {
-  constructor(public message: string) {
-    super();
+export class NotEnoughParamsException extends Exception {
+  constructor() {
+    super({ name: 'NotEnoughParamsException' });
   }
 }
 
-export class SearchEngineError extends Error {
+export class SearchEngineError extends Exception {
   constructor(public message: string) {
-    super();
+    super({ name: 'SearchEngineError', message });
+  }
+}
+
+/**
+ * Represents an internal error.
+ * This error should never be thrown.
+ * If it is, it means that there is a bug in the code.
+ */
+export class InternalError extends Exception {
+  constructor(args: {
+    message: string;
+    cause?: any;
+    context?: IExceptionContext;
+  }) {
+    super({ name: 'InternalError', ...args });
   }
 }

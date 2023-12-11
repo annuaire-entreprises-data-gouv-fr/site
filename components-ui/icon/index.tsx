@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * DSFR
  */
@@ -390,7 +388,35 @@ const file = (
   </svg>
 );
 
+const lightbulbFill = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="100%"
+    fill="currentColor"
+    height="100%"
+  >
+    <path d="M11 18H7.941c-.297-1.273-1.637-2.314-2.187-3a8 8 0 1 1 12.49.002c-.55.685-1.888 1.726-2.185 2.998H13v-5h-2v5Zm5 2v1a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-1h8Z" />
+  </svg>
+);
+
+const errorFill = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="100%"
+    fill="currentColor"
+    height="100%"
+    viewBox="0 0 24 24"
+  >
+    <path d="M17.5,2.5h-11L1,12l5.5,9.5h11L23,12L17.5,2.5z M16.2,14.8l-1.4,1.4L12,13.4l-2.8,2.8l-1.4-1.4l2.8-2.8L7.8,9.2l1.4-1.4l2.8,2.8l2.8-2.8l1.4,1.4L13.4,12L16.2,14.8z" />
+  </svg>
+);
+
+export type IIconsSlug = keyof typeof icons;
+
 export const icons = {
+  errorFill,
+  lightbulbFill,
   lockFill,
   user,
   communityFill,

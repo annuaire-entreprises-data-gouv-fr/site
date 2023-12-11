@@ -4,6 +4,7 @@ import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down'
 import { INPI } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
+import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations';
 import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -12,7 +13,8 @@ import {
   IImmatriculationRNE,
   IPersonneMorale,
 } from '#models/immatriculation';
-import { Siren, formatDatePartial, formatIntFr } from '#utils/helpers';
+import { IUniteLegale } from '#models/index';
+import { formatDatePartial, formatIntFr } from '#utils/helpers';
 
 /**
  * Weird bug happennig here. Webpack build fail when this function is in model/dirigeants.ts
@@ -36,13 +38,16 @@ type IProps = {
     | IImmatriculationRNE
     | IAPINotRespondingError
     | IAPILoading;
-  siren: Siren;
+  uniteLegale: IUniteLegale;
 };
 
 /**
  * Dirigeants section
  */
-const DirigeantsSection: React.FC<IProps> = ({ immatriculationRNE, siren }) => (
+const DirigeantsSection: React.FC<IProps> = ({
+  immatriculationRNE,
+  uniteLegale,
+}) => (
   <DataSection
     id="rne-dirigeants"
     title="Dirigeant(s)"
@@ -51,7 +56,10 @@ const DirigeantsSection: React.FC<IProps> = ({ immatriculationRNE, siren }) => (
     notFoundInfo={null}
   >
     {(immatriculationRNE) => (
-      <DirigeantContent immatriculationRNE={immatriculationRNE} siren={siren} />
+      <DirigeantContent
+        immatriculationRNE={immatriculationRNE}
+        uniteLegale={uniteLegale}
+      />
     )}
   </DataSection>
 );
@@ -60,11 +68,11 @@ export default DirigeantsSection;
 
 type IDirigeantContentProps = {
   immatriculationRNE: IImmatriculationRNE;
-  siren: Siren;
+  uniteLegale: IUniteLegale;
 };
 function DirigeantContent({
   immatriculationRNE,
-  siren,
+  uniteLegale,
 }: IDirigeantContentProps) {
   const { dirigeants } = immatriculationRNE;
 
@@ -114,7 +122,7 @@ function DirigeantContent({
         ...(dirigeant.dateNaissancePartial
           ? [
               <a
-                href={`/personne?n=${dirigeant.nom}&fn=${dirigeant.prenom}&partialDate=${dirigeant.dateNaissancePartial}&sirenFrom=${siren}`}
+                href={`/personne?n=${dirigeant.nom}&fn=${dirigeant.prenom}&partialDate=${dirigeant.dateNaissancePartial}&sirenFrom=${uniteLegale.siren}`}
               >
                 → voir ses entreprises
               </a>,
@@ -144,14 +152,12 @@ function DirigeantContent({
             enregistré{plural} au <b>Registre National des Entreprises (RNE)</b>{' '}
             tenu par l’
             <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
-            <a
-              rel="noreferrer noopener"
-              target="_blank"
-              href={`${routes.rne.portail.entreprise}${siren}`}
-            >
-              la page de cette entreprise
-            </a>{' '}
-            sur le site de l’INPI&nbsp;:
+            <UniteLegalePageLink
+              href={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}
+              uniteLegale={uniteLegale}
+              siteName="le site de l’INPI"
+            />
+            &nbsp;:
           </p>
           <FullTable
             head={['Role', 'Details', 'Action']}

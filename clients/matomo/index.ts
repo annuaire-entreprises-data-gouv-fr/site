@@ -1,8 +1,8 @@
 import routes from '#clients/routes';
 import constants from '#models/constants';
+import { FetchRessourceException } from '#models/exceptions';
 import { readFromGrist } from '#utils/integrations/grist';
 import { httpGet } from '#utils/network';
-import logErrorInSentry from '#utils/sentry';
 
 export type IMatomoStats = {
   visits: {
@@ -167,10 +167,10 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       ...npsRecords,
     };
   } catch (e: any) {
-    logErrorInSentry(e, {
-      errorName: 'Failed to compute matomo stats',
+    throw new FetchRessourceException({
+      ressource: 'MatomoStats',
+      cause: e,
     });
-    throw e;
   }
 };
 

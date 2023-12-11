@@ -639,7 +639,7 @@
             "commune": "TOULOUSE",
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-            "trancheEffectif": "",
+            "trancheEffectif": "52",
             "libelleTrancheEffectif": "",
             "latitude": "43.615663",
             "longitude": "1.436756",
@@ -651,7 +651,7 @@
                 "title": "Statut de la Fonction publique territoriale"
               }
             ],
-            "anneeTrancheEffectif": ""
+            "anneeTrancheEffectif": "2020"
           }
         ],
         "nombreEtablissements": 72,
@@ -1256,7 +1256,7 @@
             "commune": "VILLEFRANCHE-DE-ROUERGUE",
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-            "trancheEffectif": "",
+            "trancheEffectif": "21",
             "libelleTrancheEffectif": "",
             "latitude": "44.357175",
             "longitude": "2.02648",
@@ -1268,7 +1268,7 @@
                 "title": "Statut de la Fonction publique territoriale"
               }
             ],
-            "anneeTrancheEffectif": ""
+            "anneeTrancheEffectif": "2020"
           }
         ],
         "nombreEtablissements": 13,
@@ -1929,7 +1929,7 @@
             "commune": "MURET",
             "activitePrincipale": "84.11Z",
             "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
-            "trancheEffectif": "",
+            "trancheEffectif": "42",
             "libelleTrancheEffectif": "",
             "latitude": "43.468316",
             "longitude": "1.337009",
@@ -1941,7 +1941,7 @@
                 "title": "Statut de la Fonction publique territoriale"
               }
             ],
-            "anneeTrancheEffectif": ""
+            "anneeTrancheEffectif": "2020"
           }
         ],
         "nombreEtablissements": 6,

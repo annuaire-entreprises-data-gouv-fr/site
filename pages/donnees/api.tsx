@@ -85,7 +85,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const monitors = await getMonitorsByAdministration();
   return {
     props: { monitors, administrationsMetaData: administrationsMetaData },
-    revalidate: 30, // revalidate every 10 seconds
+    revalidate: 30, // revalidate every 30 seconds
   };
 };
 

@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react';
 import React from 'react';
-import { ClientErrorExplanations } from './error-explanations';
-import { LayoutDefault } from './layouts/layout-default';
+import { ClientErrorExplanations } from '../error-explanations';
+import { LayoutDefault } from '../layouts/layout-default';
 
 export default function ErrorBoundary({
   children,

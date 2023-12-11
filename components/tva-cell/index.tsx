@@ -5,17 +5,7 @@ import InformationTooltip from '#components-ui/information-tooltip';
 import { Loader } from '#components-ui/loader';
 import FrontStateMachine from '#components/front-state-machine';
 import { CopyPaste } from '#components/table/simple';
-import { estActif } from '#models/etat-administratif';
-import { IEtablissement, IUniteLegale } from '#models/index';
-import { tvaNumber } from '#models/tva/utils';
-import { formatIntFr } from '#utils/helpers';
-
-function haveMultipleNafs(etablissementsList: IEtablissement[] = []) {
-  return (
-    Array.from(new Set(etablissementsList.map((e) => e.activitePrincipale)))
-      .length > 1
-  );
-}
+import { ITVAIntracommunautaire } from '#models/tva';
 
 const NoTVA = () => <i>Non-assujetti à la TVA</i>;
 
@@ -30,9 +20,9 @@ const Unknown = () => (
   </i>
 );
 
-const CopyCell = () => (
+const CopyCell = ({ number }: { number?: string }) => (
   <CopyPaste shouldTrim={true} id="tva-cell-result">
-    Unknown
+    {number || 'Inconnu'}
   </CopyPaste>
 );
 
@@ -51,27 +41,20 @@ const CopyCell = () => (
  *     - it has two or more active NAFs -> it might have other valid TVA numbers
  *
  */
-const TVACell: React.FC<{ uniteLegale: IUniteLegale }> = ({ uniteLegale }) => {
-  if (!estActif(uniteLegale)) {
+const TVACell: React.FC<{
+  tva: ITVAIntracommunautaire | null;
+}> = ({ tva }) => {
+  if (!tva) {
     return <NoTVA />;
   }
 
-  const mayHaveMultipleTVANumbers = haveMultipleNafs(
-    uniteLegale.etablissements.all
-  );
-
-  const mayHaveMultipleActiveTVANumbers = haveMultipleNafs(
-    uniteLegale.etablissements.open
-  );
-
-  const { siren } = uniteLegale;
-  const unverifiedTvaNumber = tvaNumber(siren);
+  const { number, mayHaveMultipleTVANumber } = tva;
 
   return (
     <FrontStateMachine
       id="tva-cell-wrapper"
       states={[
-        mayHaveMultipleTVANumbers ? <Unknown /> : <NoTVA />,
+        mayHaveMultipleTVANumber.allTime ? <Unknown /> : <NoTVA />,
         <>
           <Loader />
           {/*
@@ -81,7 +64,7 @@ const TVACell: React.FC<{ uniteLegale: IUniteLegale }> = ({ uniteLegale }) => {
           &nbsp;
         </>,
         <>
-          {mayHaveMultipleActiveTVANumbers ? (
+          {mayHaveMultipleTVANumber.currentlyActive ? (
             <InformationTooltip
               label={
                 <>
@@ -90,16 +73,16 @@ const TVACell: React.FC<{ uniteLegale: IUniteLegale }> = ({ uniteLegale }) => {
                     a plusieurs activités différentes
                   </a>
                   .<br />
-                  Elle possède un numéro de TVA Intracommunautaire pour chacune
-                  de ces activités.
+                  Elle peut posséder un numéro de TVA Intracommunautaire pour
+                  chacune de ces activités.
                   <br />
-                  Le numéro affiché correspond à sa plus ancienne activité.
+                  Le numéro affiché correspond à son activité la plus ancienne.
                 </>
               }
               orientation="left"
               left="5px"
             >
-              <Icon slug="alertFill" color="orange">
+              <Icon slug="lightbulbFill" color="#ffb300">
                 <CopyCell />
               </Icon>
             </InformationTooltip>
@@ -107,15 +90,24 @@ const TVACell: React.FC<{ uniteLegale: IUniteLegale }> = ({ uniteLegale }) => {
             <CopyCell />
           )}
         </>,
-        <i>
-          Le téléservice du VIES ne fonctionne pas actuellement.{' '}
-          {unverifiedTvaNumber
-            ? `Nous n’avons pas pu vérifier si le numéro FR${formatIntFr(
-                unverifiedTvaNumber
-              )} est valide.`
-            : ''}{' '}
-          Merci de ré-essayer plus tard.
-        </i>,
+        <>
+          <InformationTooltip
+            label={
+              <>
+                Nous n’avons pas pu controler la validité de ce numéro car le
+                téléservice du VIES ne fonctionne pas actuellement. Merci de
+                ré-essayer plus tard pour vérifier si cette structure est bien
+                assujettie à la TVA.
+              </>
+            }
+            orientation="left"
+            left="5px"
+          >
+            <Icon slug="errorFill" color="#df0a00">
+              <CopyCell number={`FR${number}`} />
+            </Icon>
+          </InformationTooltip>
+        </>,
       ]}
     />
   );

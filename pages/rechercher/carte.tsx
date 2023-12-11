@@ -69,15 +69,8 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   }
 );
 
-MapSearchResultPage.getLayout = function getLayout(
-  page: ReactElement,
-  session
-) {
-  return (
-    <LayoutSearch map={true} session={session}>
-      {page}
-    </LayoutSearch>
-  );
+MapSearchResultPage.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutSearch map={true}>{page}</LayoutSearch>;
 };
 
 export default MapSearchResultPage;

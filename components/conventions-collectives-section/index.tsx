@@ -56,51 +56,53 @@ const ConventionsCollectivesSection: React.FC<{
                 le site du Code du Travail Numérique.
               </a>
             </p>
-            <FullTable
-              head={['N°IDCC', 'Détails', 'Etablissement(s)', 'Explications']}
-              body={ccWithMetadata.map(
-                ({ idcc, sirets = [], nature, title }) => [
-                  <Tag>IDCC {idcc}</Tag>,
-                  <>
-                    {nature && (
-                      <>
-                        <b className="font-small">{capitalize(nature)}</b>
-                        <br />
-                      </>
-                    )}
-                    <span className="font-small">
-                      {title || <i>Non renseigné</i>}
-                    </span>
-                  </>,
-                  <ul>
-                    {(sirets || []).map((siret) => (
-                      <li>
-                        <a href={`/etablissement/${siret}`}>
-                          {formatSiret(siret)}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>,
-                  <>
-                    {idcc === '9999' ? (
-                      <i>Non renseigné</i>
-                    ) : (
-                      <ButtonLink
-                        target="_blank"
-                        to={`${routes.conventionsCollectives.details}${idcc}`}
-                        alt
-                        aria-label={`Convention collective ${
-                          title || idcc
-                        }, consulter les informations`}
-                        small
-                      >
-                        ⇢&nbsp;Consulter
-                      </ButtonLink>
-                    )}
-                  </>,
-                ]
-              )}
-            />
+            {ccWithMetadata && ccWithMetadata.length > 0 && (
+              <FullTable
+                head={['N°IDCC', 'Détails', 'Etablissement(s)', 'Explications']}
+                body={ccWithMetadata.map(
+                  ({ idcc, sirets = [], nature, title }) => [
+                    <Tag>IDCC {idcc}</Tag>,
+                    <>
+                      {nature && (
+                        <>
+                          <b className="font-small">{capitalize(nature)}</b>
+                          <br />
+                        </>
+                      )}
+                      <span className="font-small">
+                        {title || <i>Non renseigné</i>}
+                      </span>
+                    </>,
+                    <ul>
+                      {(sirets || []).map((siret) => (
+                        <li>
+                          <a href={`/etablissement/${siret}`}>
+                            {formatSiret(siret)}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>,
+                    <>
+                      {idcc === '9999' ? (
+                        <i>Non renseigné</i>
+                      ) : (
+                        <ButtonLink
+                          target="_blank"
+                          to={`${routes.conventionsCollectives.details}${idcc}`}
+                          alt
+                          aria-label={`Convention collective ${
+                            title || idcc
+                          }, consulter les informations`}
+                          small
+                        >
+                          ⇢&nbsp;Consulter
+                        </ButtonLink>
+                      )}
+                    </>,
+                  ]
+                )}
+              />
+            )}
           </>
         );
       }}

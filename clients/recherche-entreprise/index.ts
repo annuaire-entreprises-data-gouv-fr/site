@@ -71,7 +71,7 @@ const clientSearchRechercheEntreprise = async ({
   const filters = searchFilterParams?.toApiURI();
 
   if (!filters && (!encodedTerms || encodedTerms.length < 3)) {
-    throw new NotEnoughParamsException('');
+    throw new NotEnoughParamsException();
   }
 
   const url = `${route}?per_page=10&page=${page}&q=${encodedTerms}&limite_matching_etablissements=3${

@@ -1,3 +1,4 @@
+import { HttpNotFound, HttpServerError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { ICCWithMetadata } from '#models/conventions-collectives-list';
 import { httpGet } from '#utils/network';
@@ -15,25 +16,49 @@ type IIdccMetadata = {
   };
 };
 
-export const clientIdccMetadata = async () => {
-  const response = await httpGet<IIdccMetadata>(
-    routes.conventionsCollectives.metadata
-  );
+class IdCCMetadataClient {
+  private _idccMetadata = null as {
+    [idcc: string]: ICCWithMetadata;
+  } | null;
 
-  return mapToDomainObject(response);
-};
+  get = async (idcc: string) => {
+    if (!this._idccMetadata) {
+      const response = await httpGet<IIdccMetadata>(
+        routes.conventionsCollectives.metadata
+      );
 
-const mapToDomainObject = (response: IIdccMetadata) => {
-  return Object.entries(response).reduce((idccMetadatas, [idcc, metadata]) => {
-    const { id_kali, url, nature, etat } = metadata;
-    idccMetadatas[idcc] = {
-      idKali: id_kali,
-      legifrance: url,
-      title: metadata['titre de la convention'],
-      nature,
-      etat,
-      idcc,
-    };
-    return idccMetadatas;
-  }, {} as { [idcc: string]: ICCWithMetadata });
-};
+      this._idccMetadata = this.mapToDomainObject(response);
+    }
+
+    if (Object.values(this._idccMetadata).length === 0) {
+      throw new HttpServerError('Empty Idcc metadata list');
+    }
+
+    if (idcc in this._idccMetadata) {
+      return this._idccMetadata[idcc] || {};
+    } else {
+      throw new HttpNotFound('Convention collective not found');
+    }
+  };
+
+  mapToDomainObject = (response: IIdccMetadata) => {
+    return Object.entries(response).reduce(
+      (idccMetadatas, [idcc, metadata]) => {
+        const { id_kali, url, nature, etat } = metadata;
+        idccMetadatas[idcc] = {
+          idKali: id_kali,
+          legifrance: url,
+          title: metadata['titre de la convention'],
+          nature,
+          etat,
+          idcc,
+        };
+        return idccMetadatas;
+      },
+      {} as { [idcc: string]: ICCWithMetadata }
+    );
+  };
+}
+const client = new IdCCMetadataClient();
+
+export const clientIdccMetadata = async (idcc: string) => client.get(idcc);

@@ -7,6 +7,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
+import { FetchRessourceException } from '#models/exceptions';
 import { Siren, Siret } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 
@@ -16,27 +17,32 @@ export type IConformite = {
   label: string | null;
 };
 
-export type IDonneesRestreinteUniteLegale = {
-  conformite: {
-    fiscale: IConformite | IAPINotRespondingError;
-    vigilance: IConformite | IAPINotRespondingError;
-    msa: IConformite | IAPINotRespondingError;
-  };
+export type IConformiteUniteLegale = {
+  fiscale: IConformite | IAPINotRespondingError;
+  vigilance: IConformite | IAPINotRespondingError;
+  msa: IConformite | IAPINotRespondingError;
 };
 
 export const getDonneesRestreintesEntreprise = async (
   siren: Siren,
   siret: Siret
-): Promise<IDonneesRestreinteUniteLegale> => {
+): Promise<IConformiteUniteLegale> => {
   const handleApiEntrepriseError = (e: any) => {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.DINUM, 404);
     }
 
-    logErrorInSentry(e, {
-      siren,
-      errorName: 'Error in API Entreprise',
-    });
+    logErrorInSentry(
+      new FetchRessourceException({
+        cause: e,
+        ressource: 'DonneesRestreintesAPIEntreprise',
+        context: {
+          siren,
+          siret,
+        },
+        administration: EAdministration.DINUM,
+      })
+    );
     return APINotRespondingFactory(EAdministration.DINUM, e.status || 500);
   };
 
@@ -49,10 +55,8 @@ export const getDonneesRestreintesEntreprise = async (
   ]);
 
   return {
-    conformite: {
-      fiscale,
-      vigilance,
-      msa,
-    },
+    fiscale,
+    vigilance,
+    msa,
   };
 };

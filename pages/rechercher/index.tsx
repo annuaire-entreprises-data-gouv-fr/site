@@ -80,8 +80,8 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   }
 );
 
-SearchResultPage.getLayout = function getLayout(page: ReactElement, session) {
-  return <LayoutSearch session={session}>{page}</LayoutSearch>;
+SearchResultPage.getLayout = function getLayout(page: ReactElement) {
+  return <LayoutSearch>{page}</LayoutSearch>;
 };
 
 export default SearchResultPage;

@@ -19,10 +19,7 @@ import {
   verifySiren,
 } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
-import {
-  logRechercheEntreprisefailed,
-  logSireneInseefailed,
-} from '#utils/sentry/helpers';
+import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
 import {
   IUniteLegale,
   SirenNotFoundError,
@@ -36,7 +33,9 @@ import {
   isAPINotResponding,
 } from './api-not-responding';
 import constants from './constants';
+import { FetchRessourceException } from './exceptions';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
+import { getTvaUniteLegale } from './tva';
 
 /**
  * PUBLIC METHODS
@@ -73,6 +72,9 @@ class UniteLegaleBuilder {
 
   build = async () => {
     const uniteLegale = await this.fetchFromClients();
+
+    // determine TVA
+    uniteLegale.tva = getTvaUniteLegale(uniteLegale);
 
     // no need to call API association for bots
     if (!this._isBot && isAssociation(uniteLegale)) {
@@ -228,10 +230,16 @@ const fetchUniteLegaleFromRechercheEntreprise = async (
         );
       } catch (eFallback: any) {
         if (!(eFallback instanceof HttpNotFound)) {
-          logRechercheEntreprisefailed({
-            siren,
-            details: eFallback.message || e,
-          });
+          logFatalErrorInSentry(
+            new FetchRessourceException({
+              cause: eFallback,
+              ressource: 'UniteLegale',
+              administration: EAdministration.DINUM,
+              context: {
+                siren,
+              },
+            })
+          );
         }
       }
     }
@@ -289,9 +297,18 @@ const fetchUniteLegaleFromInsee = async (
       throw new SirenNotFoundError(siren);
     }
 
-    logSireneInseefailed(
-      { siren, details: e.message || e },
-      inseeOptions.useFallback
+    logWarningInSentry(
+      new FetchRessourceException({
+        ressource: 'UniteLegaleInsee',
+        administration: EAdministration.INSEE,
+        message: `Fail to fetch from INSEE ${
+          inseeOptions.useFallback ? 'fallback' : ''
+        } API`,
+        cause: e,
+        context: {
+          siren,
+        },
+      })
     );
 
     return APINotRespondingFactory(EAdministration.INSEE, 500);

@@ -11,11 +11,13 @@ import {
 import { useTimeout } from 'hooks/use-timeout';
 import { ISectionProps, Section } from '.';
 import DataSectionLoader from './data-section-loader';
+import { ProtectedSection } from './protected-section';
 
 interface IDataSectionProps<T> extends ISectionProps {
   data: IAPINotRespondingError | IAPILoading | T;
   notFoundInfo?: React.ReactNode;
   additionalInfoOnError?: React.ReactNode;
+  isProtected?: boolean;
   children: (data: T) => JSX.Element;
 }
 
@@ -69,7 +71,7 @@ function SectionStateMachine<T extends {}>({
  * @returns
  */
 export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
-  const { data } = props;
+  const { data, isProtected } = props;
   //@ts-ignore
   const lastModified = data?.lastModified || null;
 
@@ -79,6 +81,16 @@ export function DataSection<T extends {}>({ ...props }: IDataSectionProps<T>) {
     props.notFoundInfo === null
   ) {
     return null;
+  }
+
+  if (isProtected) {
+    /* eslint-disable react/jsx-props-no-spreading */
+    return (
+      <ProtectedSection {...props} lastModified={lastModified}>
+        <SectionStateMachine {...props} />
+      </ProtectedSection>
+    );
+    /* eslint-enable react/jsx-props-no-spreading */
   }
 
   /* eslint-disable react/jsx-props-no-spreading */

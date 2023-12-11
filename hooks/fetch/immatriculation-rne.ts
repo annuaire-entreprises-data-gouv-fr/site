@@ -1,5 +1,6 @@
 import routes from '#clients/routes';
 import { EAdministration } from '#models/administrations';
+import { FetchRessourceException } from '#models/exceptions';
 import { IImmatriculationRNE } from '#models/immatriculation';
 import { IUniteLegale } from '#models/index';
 import { httpGet } from '#utils/network';
@@ -11,13 +12,26 @@ export function useFetchImmatriculationRNE(uniteLegale: IUniteLegale) {
   return useFetchData(
     {
       fetchData: () =>
-        httpGet<IImmatriculationRNE>(routes.api.rne + '/' + siren),
+        httpGet<IImmatriculationRNE>(
+          routes.api.rne.immatriculation + '/' + siren
+        ),
+
       administration: EAdministration.INPI,
       logError: (e: any) => {
-        logErrorInSentry(e, {
-          errorName: 'RNE API error',
-          siren,
-        });
+        if (e.status) {
+          // We already log error server side
+          return;
+        }
+        logErrorInSentry(
+          new FetchRessourceException({
+            ressource: 'ImmatriculationRNE',
+            administration: EAdministration.INPI,
+            cause: e,
+            context: {
+              siren,
+            },
+          })
+        );
       },
     },
     [siren]

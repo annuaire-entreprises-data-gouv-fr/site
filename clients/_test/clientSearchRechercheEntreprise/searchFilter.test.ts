@@ -123,7 +123,7 @@ describe('clientSearchRechercheEntreprise : use of search filters', () => {
           }),
         },
       ],
-      snaphotFile: 'collectivité-territoriale.json',
+      snaphotFile: 'colter.json',
       simplifyParams,
       postProcessResult,
     });
