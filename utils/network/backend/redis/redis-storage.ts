@@ -1,5 +1,6 @@
 import { BuildStorage } from 'axios-cache-interceptor';
 import { createClient } from 'redis';
+import { Exception } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
 import { promiseTimeout } from './promise-timeout';
 
@@ -18,7 +19,9 @@ export class RedisStorage implements BuildStorage {
     });
 
     this._client.on('error', (err) => {
-      logWarningInSentry('Error in Redis', { details: err });
+      logWarningInSentry(
+        new RedisStorageException({ message: 'Redis client error', cause: err })
+      );
     });
   }
 
@@ -27,7 +30,12 @@ export class RedisStorage implements BuildStorage {
       try {
         return this._client.connect();
       } catch (e) {
-        logWarningInSentry('Could not connect to redis client');
+        logWarningInSentry(
+          new RedisStorageException({
+            message: 'Could not connect to redis client',
+            cause: e,
+          })
+        );
       }
     }
   }
@@ -36,7 +44,12 @@ export class RedisStorage implements BuildStorage {
     await this.connect();
     const result = await promiseTimeout(this._client.get(key), 100).catch(
       (err) => {
-        logWarningInSentry(err);
+        logWarningInSentry(
+          new RedisStorageException({
+            message: 'Could not find key',
+            cause: err,
+          })
+        );
         return null;
       }
     );
@@ -52,7 +65,9 @@ export class RedisStorage implements BuildStorage {
       }),
       200
     ).catch((err) => {
-      logWarningInSentry(err);
+      logWarningInSentry(
+        new RedisStorageException({ message: 'Could not set key', cause: err })
+      );
     });
   };
 
@@ -60,4 +75,10 @@ export class RedisStorage implements BuildStorage {
     await this.connect();
     await this._client.del(key);
   };
+}
+
+class RedisStorageException extends Exception {
+  constructor(args: { message: string; cause?: any }) {
+    super({ ...args, name: 'RedisStorageException' });
+  }
 }

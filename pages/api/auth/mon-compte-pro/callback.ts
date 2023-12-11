@@ -5,8 +5,9 @@ import {
   monCompteAuthenticate,
 } from '#clients/auth/mon-compte-pro/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
+import { Exception } from '#models/exceptions';
 import { checkIsSuperAgent } from '#utils/helpers/is-super-agent';
-import logErrorInSentry from '#utils/sentry';
+import { logFatalErrorInSentry } from '#utils/sentry';
 import {
   ISessionPrivilege,
   sessionOptions,
@@ -61,11 +62,20 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
     );
     res.redirect('/');
   } catch (e: any) {
-    logErrorInSentry(e, { errorName: 'Connexion failed' });
+    logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));
     if (e instanceof HttpForbiddenError) {
       res.redirect('/connexion/echec-authorisation-requise');
     } else {
       res.redirect('/connexion/echec-connexion');
     }
+  }
+}
+
+export class AgentConnectionFailedException extends Exception {
+  constructor(args: { cause?: any }) {
+    super({
+      name: 'AgentConnectionFailedException',
+      ...args,
+    });
   }
 }

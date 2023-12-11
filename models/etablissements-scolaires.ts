@@ -7,6 +7,7 @@ import {
 } from '#models/api-not-responding';
 import { Siren, verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
+import { FetchRessourceException } from './exceptions';
 import { getUniteLegaleFromSlug } from './unite-legale';
 
 export interface IEtablissementsScolaires {
@@ -40,10 +41,16 @@ export const getEtablissementsScolaires = async (
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.EDUCATION_NATIONALE, 404);
     }
-    logErrorInSentry(e, {
-      siren,
-      errorName: 'Error in API Education nationale',
-    });
+    logErrorInSentry(
+      new FetchRessourceException({
+        ressource: 'EtablissementsScolaires',
+        cause: e,
+        context: {
+          siren,
+        },
+        administration: EAdministration.EDUCATION_NATIONALE,
+      })
+    );
     return APINotRespondingFactory(EAdministration.EDUCATION_NATIONALE, 500);
   }
 };

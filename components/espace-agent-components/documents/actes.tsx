@@ -7,12 +7,12 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations';
 import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
 import { formatDateLong } from '#utils/helpers';
-import useFetchActes from 'hooks/fetch/documents';
+import useFetchActesRNE from 'hooks/fetch/actes-RNE';
 
 const DocumentActesSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const documents = useFetchActes(uniteLegale);
+  const documents = useFetchActesRNE(uniteLegale);
 
   return (
     <PrintNever>

@@ -3,6 +3,7 @@ import { IBioResponse } from '#clients/api-bio/interface';
 import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations';
 import { APINotRespondingFactory } from '#models/api-not-responding';
+import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { IUniteLegale } from '..';
 
@@ -47,10 +48,16 @@ export const getBio = async (uniteLegale: IUniteLegale) => {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.AGENCE_BIO, 404);
     }
-    logErrorInSentry(e, {
-      siren: uniteLegale.siren,
-      errorName: 'Error in API bio',
-    });
+    logErrorInSentry(
+      new FetchRessourceException({
+        ressource: 'ProfessionnelBio',
+        cause: e,
+        context: {
+          siren: uniteLegale.siren,
+        },
+        administration: EAdministration.AGENCE_BIO,
+      })
+    );
     return APINotRespondingFactory(EAdministration.AGENCE_BIO, 500);
   }
 };

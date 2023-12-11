@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import constants from '#models/constants';
+import { InternalError } from '#models/index';
 import { logWarningInSentry } from '#utils/sentry';
 
 interface ISectionProps {
@@ -69,7 +70,9 @@ const shouldTrim = (label: any) => {
     }
     return false;
   } catch (e: any) {
-    logWarningInSentry('Error in shouldTrim', { details: e.toString() });
+    logWarningInSentry(
+      new InternalError({ message: 'Error in shouldTrim', cause: e })
+    );
     return false;
   }
 };

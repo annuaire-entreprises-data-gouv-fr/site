@@ -5,6 +5,8 @@ import {
   clientDownloadBilan,
 } from '#clients/api-proxy/rne/documents';
 import { HttpBadRequestError, HttpForbiddenError } from '#clients/exceptions';
+import { EAdministration } from '#models/administrations';
+import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { isAgent, sessionOptions } from '#utils/session';
 
@@ -39,7 +41,15 @@ async function download(req: NextApiRequest, res: NextApiResponse) {
     res.end(Buffer.from(pdf, 'binary'));
   } catch (e: any) {
     const message = 'Failed to download document';
-    logErrorInSentry(e, { details: slug as string, errorName: message });
+    logErrorInSentry(
+      new FetchRessourceException({
+        cause: e,
+        ressource: 'RNEDocuments',
+        message,
+        administration: EAdministration.INPI,
+        context: { details: slug as string },
+      })
+    );
     res.status(e.status || 500).json({ message });
   }
 }

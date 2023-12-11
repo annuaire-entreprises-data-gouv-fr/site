@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations';
 import { APILoadingFactory, IAPILoading } from '#models/api-loading';
 import {
@@ -11,8 +10,7 @@ import { RequestAbortedDuringUnloadException } from '#utils/network/frontend';
 type IFetchDataType<T> = {
   fetchData: () => Promise<T>;
   administration: EAdministration;
-  errorOn404?: boolean;
-  logError?: (error: any) => void;
+  logError: (error: any) => void;
 };
 
 /**
@@ -39,12 +37,7 @@ export function useFetchData<T extends {}>(
         }
 
         setResponse(APINotRespondingFactory(administration, e.status || 500));
-
-        if (e instanceof HttpNotFound) {
-          return;
-        }
-
-        logError?.(e);
+        logError(e);
       }
     };
     fetchAndTreatResponse();

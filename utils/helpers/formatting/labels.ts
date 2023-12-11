@@ -1,3 +1,4 @@
+import { Exception } from '#models/exceptions';
 import { IConventionCollective } from '#models/index';
 import { escapeTerm } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
@@ -70,13 +71,17 @@ export const getConventionCollectives = (
       conventionsCollectivesExclusionList.indexOf(idcc.toString()) > -1;
 
     if (!isSpecialIdcc) {
-      throw new Error();
+      throw new Exception({
+        name: 'ConventionCollectiveNotFoundException',
+        message: `Could not find idcc`,
+        context: {
+          details: idcc,
+        },
+      });
     }
     return null;
-  } catch {
-    logWarningInSentry('Error in getConventionCollectives', {
-      details: `Could not find idcc :${idcc}`,
-    });
+  } catch (e: any) {
+    logWarningInSentry(e);
     return null;
   }
 };

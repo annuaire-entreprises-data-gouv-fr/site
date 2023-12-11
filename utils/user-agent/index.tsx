@@ -1,5 +1,6 @@
 import crawlers from 'crawler-user-agents';
-import logErrorInSentry from '#utils/sentry';
+import { Exception } from '#models/exceptions';
+import { logWarningInSentry } from '#utils/sentry';
 
 const isUserAgentABot = (userAgent: string) => {
   if (!userAgent) {
@@ -23,10 +24,11 @@ const isUserAgentABot = (userAgent: string) => {
         RegExp(crawler.pattern.toLocaleLowerCase()).test(userAgent)
       );
     });
-  } catch (e) {
-    logErrorInSentry(e, { errorName: 'Error while parsing user agent' });
+  } catch (e: any) {
+    logWarningInSentry(
+      new Exception({ name: 'UserAgentParsingException', cause: e })
+    );
     return false;
   }
 };
-
 export default isUserAgentABot;

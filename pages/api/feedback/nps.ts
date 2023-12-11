@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { Exception } from '#models/exceptions';
 import { logInGrist } from '#utils/integrations/grist';
 import logInTchap from '#utils/integrations/tchap';
 import logErrorInSentry from '#utils/sentry';
@@ -42,7 +43,12 @@ const logAllEvents = async (req: NextApiRequest) => {
       logInTchap(tchapText);
     }
   } catch (e: any) {
-    logErrorInSentry(e, { errorName: 'Error in form submission' });
+    logErrorInSentry(
+      new Exception({
+        name: 'NPSFormSubmissionException',
+        cause: e,
+      })
+    );
   }
 };
 

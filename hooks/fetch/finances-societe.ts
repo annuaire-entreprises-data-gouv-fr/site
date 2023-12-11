@@ -1,7 +1,8 @@
 import { clientBilansFinanciers } from '#clients/open-data-soft/clients/bilans-financiers';
 import { EAdministration } from '#models/administrations';
+import { FetchRessourceException } from '#models/exceptions';
 import { IUniteLegale } from '#models/index';
-import logErrorInSentry from '#utils/sentry';
+import logErrorInSentry, { logInfoInSentry } from '#utils/sentry';
 import { useFetchData } from './use-fetch-data';
 
 export function useFetchFinancesSociete(uniteLegale: IUniteLegale) {
@@ -11,10 +12,19 @@ export function useFetchFinancesSociete(uniteLegale: IUniteLegale) {
       fetchData: () => clientBilansFinanciers(siren),
       administration: EAdministration.MEF,
       logError: (e: any) => {
-        logErrorInSentry(e, {
-          errorName: 'Error in API data financieres',
-          siren,
+        const exception = new FetchRessourceException({
+          ressource: 'BilansFinanciers',
+          administration: EAdministration.MEF,
+          cause: e,
+          context: {
+            siren: uniteLegale.siren,
+          },
         });
+        if (e.status === 404) {
+          logInfoInSentry(exception);
+        } else {
+          logErrorInSentry(exception);
+        }
       },
     },
     [uniteLegale.siren]

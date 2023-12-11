@@ -10,12 +10,12 @@ import { EAdministration } from '#models/administrations';
 import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
 import { formatDateLong } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
-import useFetchActes from 'hooks/fetch/documents';
+import useFetchActesRNE from 'hooks/fetch/actes-RNE';
 
 const DocumentBilansSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const documents = useFetchActes(uniteLegale);
+  const documents = useFetchActesRNE(uniteLegale);
 
   return (
     <PrintNever>
