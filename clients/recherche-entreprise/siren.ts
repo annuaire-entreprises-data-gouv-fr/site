@@ -5,6 +5,7 @@ import clientSearchRechercheEntreprise from '.';
 
 export const clientUniteLegaleRechercheEntreprise = async (
   siren: Siren,
+  pageEtablissements: number,
   fallbackOnStaging = false,
   useCache = false
 ): Promise<IUniteLegale> => {
@@ -12,6 +13,7 @@ export const clientUniteLegaleRechercheEntreprise = async (
     searchTerms: siren,
     page: 1,
     inclureEtablissements: true,
+    pageEtablissements,
     useCache,
     fallbackOnStaging,
   });

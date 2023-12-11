@@ -32,6 +32,7 @@
     "allSiegesSiret": [
       "33836505900017"
     ],
+    "tva": null,
     "statutDiffusion": "diffusible",
     "etatAdministratif": "en activité",
     "nomComplet": "CENTRE SOCIAL 'CAP DE TOUT' (CENTRE SOCIAL)",
@@ -108,7 +109,7 @@
     "dateDerniereMiseAJour": "2023-10-5",
     "dateDebutActivite": "2016-01-01",
     "trancheEffectif": "11",
-    "anneeCategorieEntreprise": "2020",
+    "anneeCategorieEntreprise": "2021",
     "categorieEntreprise": "PME",
     "anneeTrancheEffectif": "2021",
     "dirigeant": null,

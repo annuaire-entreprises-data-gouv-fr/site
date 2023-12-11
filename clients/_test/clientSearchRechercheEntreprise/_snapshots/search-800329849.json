@@ -32,7 +32,7 @@
           "commune": "PARIS 13",
           "activitePrincipale": "90.01Z",
           "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
-          "trancheEffectif": "01",
+          "trancheEffectif": "02",
           "libelleTrancheEffectif": "",
           "latitude": "48.829633",
           "longitude": "2.374801",
@@ -45,9 +45,10 @@
               "title": "Convention collective nationale des entreprises du secteur privé du spectacle vivant du 3 février 2012"
             }
           ],
-          "anneeTrancheEffectif": "2020"
+          "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
+        "tva": null,
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "THEATRE STEPHANE GILDAS",
@@ -76,7 +77,7 @@
               "commune": "PARIS 13",
               "activitePrincipale": "90.01Z",
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
-              "trancheEffectif": "01",
+              "trancheEffectif": "02",
               "libelleTrancheEffectif": "",
               "latitude": "48.829633",
               "longitude": "2.374801",
@@ -89,7 +90,7 @@
                   "title": "Convention collective nationale des entreprises du secteur privé du spectacle vivant du 3 février 2012"
                 }
               ],
-              "anneeTrancheEffectif": "2020"
+              "anneeTrancheEffectif": "2021"
             }
           ],
           "open": [
@@ -113,7 +114,7 @@
               "commune": "PARIS 13",
               "activitePrincipale": "90.01Z",
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
-              "trancheEffectif": "01",
+              "trancheEffectif": "02",
               "libelleTrancheEffectif": "",
               "latitude": "48.829633",
               "longitude": "2.374801",
@@ -126,7 +127,7 @@
                   "title": "Convention collective nationale des entreprises du secteur privé du spectacle vivant du 3 février 2012"
                 }
               ],
-              "anneeTrancheEffectif": "2020"
+              "anneeTrancheEffectif": "2021"
             }
           ],
           "unknown": [],
@@ -141,10 +142,10 @@
         "dateCreation": "2013-12-18",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateDebutActivite": "",
-        "trancheEffectif": "01",
-        "anneeCategorieEntreprise": "2020",
+        "trancheEffectif": "02",
+        "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2020",
+        "anneeTrancheEffectif": "2021",
         "dirigeant": null,
         "complements": {
           "estBio": false,

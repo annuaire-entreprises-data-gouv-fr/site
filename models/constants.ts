@@ -9,7 +9,7 @@ const constants = {
       contact: '/faq/parcours?question=contact',
     },
   },
-  resultsPerPage: { etablissements: 200, search: 30 },
+  resultsPerPage: { etablissements: 100, search: 30 },
   timeout: {
     XXS: 350,
     XS: 850,

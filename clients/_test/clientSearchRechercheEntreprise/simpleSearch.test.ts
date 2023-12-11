@@ -30,11 +30,23 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     // 'Ganymede',
     // 'Kikou',
     'xavier jouppe',
-  ].forEach(itShouldMatchSnapshotForSearch);
+  ].forEach((s) => itShouldMatchSnapshotForSearch(s, 1));
+  // itShouldMatchSnapshotForSearch('356000000', 1);
+  // itShouldMatchSnapshotForSearch('356000000', 3);
+  // itShouldMatchSnapshotForSearch('356000000', 5);
+  // itShouldMatchSnapshotForSearch('356000000', 6);
+  // itShouldMatchSnapshotForSearch('356000000', 7);
 });
 
-function itShouldMatchSnapshotForSearch(searchTerms: string) {
-  it(`Should match snapshot for search ${searchTerms}`, async () => {
+function itShouldMatchSnapshotForSearch(
+  searchTerms: string,
+  pageEtablissements = 1
+) {
+  it(`Should match snapshot for search ${searchTerms} ${
+    pageEtablissements !== 1
+      ? ' and etablissement page ' + pageEtablissements
+      : ''
+  }`, async () => {
     await expectClientToMatchSnapshot({
       client: clientSearchRechercheEntreprise,
       __dirname,
@@ -45,7 +57,9 @@ function itShouldMatchSnapshotForSearch(searchTerms: string) {
           searchTerms,
         },
       ],
-      snaphotFile: `search-${searchTerms}.json`,
+      snaphotFile: `search-${searchTerms}${
+        pageEtablissements !== 1 ? `-${pageEtablissements}` : ''
+      }.json`,
       simplifyParams,
       postProcessResult: (result) => {
         result.results.forEach((searchResult) => {

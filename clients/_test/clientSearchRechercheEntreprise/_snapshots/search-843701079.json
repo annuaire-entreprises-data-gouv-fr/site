@@ -39,22 +39,23 @@
           "conventionsCollectives": [
             {
               "siret": "84370107900017",
-              "idcc": "2609",
-              "CdTN": true,
-              "idKali": "KALICONT000018773893",
-              "title": "Convention collective nationale des employés, techniciens et agents de maîtrise du bâtiment du 12 juillet 2006"
-            },
-            {
-              "siret": "84370107900017",
               "idcc": "1596",
               "CdTN": true,
               "idKali": "KALICONT000005635221",
               "title": "Nouvelle convention collective nationale des ouvriers employés par les entreprises du bâtiment visées par le décret du 1er mars 1962 (c'est-à-dire occupant jusqu'à 10 salariés) du 7 mars 2018 (Avenant du 7 mars 2018)"
+            },
+            {
+              "siret": "84370107900017",
+              "idcc": "2609",
+              "CdTN": true,
+              "idKali": "KALICONT000018773893",
+              "title": "Convention collective nationale des employés, techniciens et agents de maîtrise du bâtiment du 12 juillet 2006"
             }
           ],
-          "anneeTrancheEffectif": "2020"
+          "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
+        "tva": null,
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "BESOIN DE TOIT",
@@ -90,20 +91,20 @@
               "conventionsCollectives": [
                 {
                   "siret": "84370107900017",
-                  "idcc": "2609",
-                  "CdTN": true,
-                  "idKali": "KALICONT000018773893",
-                  "title": "Convention collective nationale des employés, techniciens et agents de maîtrise du bâtiment du 12 juillet 2006"
-                },
-                {
-                  "siret": "84370107900017",
                   "idcc": "1596",
                   "CdTN": true,
                   "idKali": "KALICONT000005635221",
                   "title": "Nouvelle convention collective nationale des ouvriers employés par les entreprises du bâtiment visées par le décret du 1er mars 1962 (c'est-à-dire occupant jusqu'à 10 salariés) du 7 mars 2018 (Avenant du 7 mars 2018)"
+                },
+                {
+                  "siret": "84370107900017",
+                  "idcc": "2609",
+                  "CdTN": true,
+                  "idKali": "KALICONT000018773893",
+                  "title": "Convention collective nationale des employés, techniciens et agents de maîtrise du bâtiment du 12 juillet 2006"
                 }
               ],
-              "anneeTrancheEffectif": "2020"
+              "anneeTrancheEffectif": "2021"
             }
           ],
           "open": [
@@ -134,20 +135,20 @@
               "conventionsCollectives": [
                 {
                   "siret": "84370107900017",
-                  "idcc": "2609",
-                  "CdTN": true,
-                  "idKali": "KALICONT000018773893",
-                  "title": "Convention collective nationale des employés, techniciens et agents de maîtrise du bâtiment du 12 juillet 2006"
-                },
-                {
-                  "siret": "84370107900017",
                   "idcc": "1596",
                   "CdTN": true,
                   "idKali": "KALICONT000005635221",
                   "title": "Nouvelle convention collective nationale des ouvriers employés par les entreprises du bâtiment visées par le décret du 1er mars 1962 (c'est-à-dire occupant jusqu'à 10 salariés) du 7 mars 2018 (Avenant du 7 mars 2018)"
+                },
+                {
+                  "siret": "84370107900017",
+                  "idcc": "2609",
+                  "CdTN": true,
+                  "idKali": "KALICONT000018773893",
+                  "title": "Convention collective nationale des employés, techniciens et agents de maîtrise du bâtiment du 12 juillet 2006"
                 }
               ],
-              "anneeTrancheEffectif": "2020"
+              "anneeTrancheEffectif": "2021"
             }
           ],
           "unknown": [],
@@ -163,9 +164,9 @@
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateDebutActivite": "",
         "trancheEffectif": "02",
-        "anneeCategorieEntreprise": "2020",
+        "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
-        "anneeTrancheEffectif": "2020",
+        "anneeTrancheEffectif": "2021",
         "dirigeant": null,
         "complements": {
           "estBio": false,
@@ -193,17 +194,17 @@
         "conventionsCollectives": [
           {
             "siret": "84370107900017",
-            "idcc": "2609",
-            "CdTN": true,
-            "idKali": "KALICONT000018773893",
-            "title": "Convention collective nationale des employés, techniciens et agents de maîtrise du bâtiment du 12 juillet 2006"
-          },
-          {
-            "siret": "84370107900017",
             "idcc": "1596",
             "CdTN": true,
             "idKali": "KALICONT000005635221",
             "title": "Nouvelle convention collective nationale des ouvriers employés par les entreprises du bâtiment visées par le décret du 1er mars 1962 (c'est-à-dire occupant jusqu'à 10 salariés) du 7 mars 2018 (Avenant du 7 mars 2018)"
+          },
+          {
+            "siret": "84370107900017",
+            "idcc": "2609",
+            "CdTN": true,
+            "idKali": "KALICONT000018773893",
+            "title": "Convention collective nationale des employés, techniciens et agents de maîtrise du bâtiment du 12 juillet 2006"
           }
         ],
         "matchingEtablissements": [],

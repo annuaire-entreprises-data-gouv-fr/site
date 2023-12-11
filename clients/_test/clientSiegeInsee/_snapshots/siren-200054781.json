@@ -33,6 +33,7 @@
       "20005478100022",
       "20005478100014"
     ],
+    "tva": null,
     "statutDiffusion": "diffusible",
     "etatAdministratif": "en activité",
     "nomComplet": "METROPOLE DU GRAND PARIS (MGP)",
@@ -109,7 +110,7 @@
     "dateDerniereMiseAJour": "2023-10-5",
     "dateDebutActivite": "2016-12-28",
     "trancheEffectif": "32",
-    "anneeCategorieEntreprise": "2020",
+    "anneeCategorieEntreprise": "2021",
     "categorieEntreprise": "PME",
     "anneeTrancheEffectif": "2021",
     "dirigeant": null,

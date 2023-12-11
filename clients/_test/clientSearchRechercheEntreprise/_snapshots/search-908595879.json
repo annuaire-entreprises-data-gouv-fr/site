@@ -40,6 +40,7 @@
           "anneeTrancheEffectif": null
         },
         "allSiegesSiret": [],
+        "tva": null,
         "statutDiffusion": "diffusible",
         "etatAdministratif": "en activité",
         "nomComplet": "SEVERNAYA",
