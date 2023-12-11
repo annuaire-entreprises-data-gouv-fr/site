@@ -57,14 +57,6 @@ export const Tabs: React.FC<{
       width: '80px',
     },
     {
-      ficheType: FICHE.DOCUMENTS,
-      label: 'Documents',
-      pathPrefix: '/documents/',
-      noFollow: false,
-      shouldDisplay: isSuperAgent(session),
-      width: '110px',
-    },
-    {
       ficheType: FICHE.JUSTIFICATIFS,
       label: 'Justificatif d’immatriculation',
       pathPrefix: '/justificatif/',
@@ -84,6 +76,14 @@ export const Tabs: React.FC<{
       pathPrefix: '/dirigeants/',
       noFollow: false,
       shouldDisplay: !isCollectiviteTerritoriale(uniteLegale),
+    },
+    {
+      ficheType: FICHE.DOCUMENTS,
+      label: 'Documents',
+      pathPrefix: '/documents/',
+      noFollow: false,
+      shouldDisplay: isSuperAgent(session),
+      width: '110px',
     },
     {
       ficheType: FICHE.FINANCES,
