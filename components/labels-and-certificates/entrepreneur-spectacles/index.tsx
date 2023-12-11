@@ -19,6 +19,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
   return (
     <DataSection
       title="Entrepreneur de spectacles vivants"
+      id="entrepreneur-spectacles"
       sources={[EAdministration.MC]}
       data={entrepreneurSpectacles}
       notFoundInfo={

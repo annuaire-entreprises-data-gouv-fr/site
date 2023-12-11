@@ -33,6 +33,7 @@ export const OrganismeDeFormationSection = ({
     <DataSection
       title={title}
       sources={[EAdministration.MTPEI]}
+      id="organisme-de-formation"
       data={organismesDeFormation}
       notFoundInfo={<OrganismeFormationLabel estQualiopi={estQualiopi} />}
     >

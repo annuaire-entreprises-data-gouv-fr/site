@@ -31,6 +31,7 @@ export const CertificationsRGESection: React.FC<{
 }> = ({ uniteLegale, certificationsRGE, session }) => {
   return (
     <DataSection
+      id="rge"
       title="RGE - Reconnu Garant de l'Environnement"
       sources={[EAdministration.ADEME]}
       data={certificationsRGE}
