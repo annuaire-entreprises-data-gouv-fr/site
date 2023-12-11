@@ -1,4 +1,3 @@
-import React from 'react';
 import Logo from '#components-ui/logo';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
@@ -158,9 +157,9 @@ const Footer = () => (
               par l’administration sur une entreprise, une association ou une
               administration et{' '}
               <a href="/donnees-extrait-kbis">
-                en particulier les données contenues dans un extrait KBIS/D1
-              </a>
-              .
+                en particulier les données contenues dans un extrait KBIS
+              </a>{' '}
+              ou de l’extrait D1.
             </p>
             <p className="fr-footer__content-desc">
               Il est opéré par la{' '}
