@@ -23,7 +23,6 @@ describe('clientAllEtablissementsInsee', () => {
     '908595879',
   ].forEach((siren) => expectClientToMatchSnapshotWithSiren(siren));
   // expectClientToMatchSnapshotWithSiren('356000000', 1);
-  // expectClientToMatchSnapshotWithSiren('356000000', 1);
   // expectClientToMatchSnapshotWithSiren('356000000', 3);
   // expectClientToMatchSnapshotWithSiren('356000000', 5);
   // expectClientToMatchSnapshotWithSiren('356000000', 6);

@@ -33,6 +33,7 @@
       "52816377700030",
       "52816377700014"
     ],
+    "tva": null,
     "statutDiffusion": "diffusible",
     "etatAdministratif": "en activité",
     "nomComplet": "GROUPE SOLUTION ENERGIE POLE TECHNIQUE (G.S.E.P.T.)",
@@ -109,7 +110,7 @@
     "dateDerniereMiseAJour": "2023-10-5",
     "dateDebutActivite": "2023-03-31",
     "trancheEffectif": "N",
-    "anneeCategorieEntreprise": "2020",
+    "anneeCategorieEntreprise": "2021",
     "categorieEntreprise": "PME",
     "anneeTrancheEffectif": "2021",
     "dirigeant": null,

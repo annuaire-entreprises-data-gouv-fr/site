@@ -34,6 +34,7 @@
       "30002576400022",
       "300025764null"
     ],
+    "tva": null,
     "statutDiffusion": "partiellement diffusible",
     "etatAdministratif": "en activité",
     "nomComplet": "Michel SAUVAGE",
@@ -110,7 +111,7 @@
     "dateDerniereMiseAJour": "2023-10-5",
     "dateDebutActivite": "2019-12-31",
     "trancheEffectif": "N",
-    "anneeCategorieEntreprise": "2020",
+    "anneeCategorieEntreprise": "2021",
     "categorieEntreprise": "PME",
     "anneeTrancheEffectif": null,
     "dirigeant": {

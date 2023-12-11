@@ -10,6 +10,7 @@ apiMonitors:
     apiName: API Répertoire Sirene
     updownIoId: swog
   - apiName: API Avis de situation Sirene
+    apiSlug: avis-situation
     updownIoId: yh9e
 dataSources:
   - label: Base Sirene des Entreprises

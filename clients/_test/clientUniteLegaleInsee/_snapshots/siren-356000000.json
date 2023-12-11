@@ -32,6 +32,7 @@
     "allSiegesSiret": [
       "35600000000048"
     ],
+    "tva": null,
     "statutDiffusion": "diffusible",
     "etatAdministratif": "en activité",
     "nomComplet": "LA POSTE (DIRECTION GENERALE DE LA POSTE)",
@@ -108,7 +109,7 @@
     "dateDerniereMiseAJour": "2023-10-5",
     "dateDebutActivite": "2021-12-31",
     "trancheEffectif": "53",
-    "anneeCategorieEntreprise": "2020",
+    "anneeCategorieEntreprise": "2021",
     "categorieEntreprise": "GE",
     "anneeTrancheEffectif": "2021",
     "dirigeant": null,

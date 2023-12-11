@@ -32,7 +32,6 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from './api-not-responding';
-import constants from './constants';
 import { FetchRessourceException } from './exceptions';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 import { getTvaUniteLegale } from './tva';
@@ -102,7 +101,11 @@ class UniteLegaleBuilder {
     const useCache = !this._isBot;
 
     const uniteLegaleRechercheEntreprise =
-      await fetchUniteLegaleFromRechercheEntreprise(this._siren, useCache);
+      await fetchUniteLegaleFromRechercheEntreprise(
+        this._siren,
+        this._page,
+        useCache
+      );
 
     const useInsee = this.shouldUseInsee(
       uniteLegaleRechercheEntreprise,
@@ -188,11 +191,7 @@ class UniteLegaleBuilder {
         uniteLegaleRechercheEntreprise.natureJuridique
       );
 
-      const hasTooManyEtablissementForPagination =
-        (uniteLegaleRechercheEntreprise.etablissements?.nombreEtablissements ??
-          0) > constants.resultsPerPage.etablissements;
-
-      if (isEI || hasTooManyEtablissementForPagination) {
+      if (isEI) {
         return true;
       }
     }
@@ -210,12 +209,14 @@ class UniteLegaleBuilder {
 
 const fetchUniteLegaleFromRechercheEntreprise = async (
   siren: Siren,
+  pageEtablissements: number,
   useCache: boolean
 ) => {
   try {
     const useFallback = false;
     return await clientUniteLegaleRechercheEntreprise(
       siren,
+      pageEtablissements,
       useFallback,
       useCache
     );
@@ -225,6 +226,7 @@ const fetchUniteLegaleFromRechercheEntreprise = async (
         const forceFallback = true;
         return await clientUniteLegaleRechercheEntreprise(
           siren,
+          pageEtablissements,
           forceFallback,
           useCache
         );
