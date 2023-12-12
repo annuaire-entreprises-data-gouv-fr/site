@@ -3,7 +3,7 @@ import { EAdministration } from '#models/administrations';
 import { FetchRessourceException } from '#models/exceptions';
 import { IAssociation } from '#models/index';
 import { IdRna } from '#utils/helpers';
-import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
+import logErrorInSentry from '#utils/sentry';
 import { useFetchData } from './use-fetch-data';
 
 export const useFetchJOAFE = (association: IAssociation) => {
@@ -14,6 +14,9 @@ export const useFetchJOAFE = (association: IAssociation) => {
       fetchData: () => clientJOAFE(idRna as IdRna),
       administration: EAdministration.DILA,
       logError: (e: any) => {
+        if (e.status === 404) {
+          return;
+        }
         const exception = new FetchRessourceException({
           ressource: 'JOAFE',
           administration: EAdministration.DILA,
@@ -23,11 +26,7 @@ export const useFetchJOAFE = (association: IAssociation) => {
             siren: association.siren,
           },
         });
-        if (e.status === 404) {
-          logWarningInSentry(exception);
-        } else {
-          logErrorInSentry(exception);
-        }
+        logErrorInSentry(exception);
       },
     },
     [idRna]
