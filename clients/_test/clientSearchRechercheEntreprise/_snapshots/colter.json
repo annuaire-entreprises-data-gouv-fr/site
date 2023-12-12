@@ -36,14 +36,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "43.615663",
           "longitude": "1.436756",
-          "conventionsCollectives": [
-            {
-              "siret": "22310001700423",
-              "idcc": "5021",
-              "CdTN": false,
-              "title": "Statut de la Fonction publique territoriale"
-            }
-          ],
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -80,14 +72,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.615663",
               "longitude": "1.436756",
-              "conventionsCollectives": [
-                {
-                  "siret": "22310001700423",
-                  "idcc": "5021",
-                  "CdTN": false,
-                  "title": "Statut de la Fonction publique territoriale"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -116,14 +100,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.615663",
               "longitude": "1.436756",
-              "conventionsCollectives": [
-                {
-                  "siret": "22310001700423",
-                  "idcc": "5021",
-                  "CdTN": false,
-                  "title": "Statut de la Fonction publique territoriale"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -603,14 +579,7 @@
             }
           ]
         },
-        "conventionsCollectives": [
-          {
-            "siret": "22310001700423",
-            "idcc": "5021",
-            "CdTN": false,
-            "title": "Statut de la Fonction publique territoriale"
-          }
-        ],
+        "conventionsCollectives": {},
         "matchingEtablissements": [
           {
             "siren": "223100017",
@@ -636,14 +605,6 @@
             "libelleTrancheEffectif": "",
             "latitude": "43.615663",
             "longitude": "1.436756",
-            "conventionsCollectives": [
-              {
-                "siret": "22310001700423",
-                "idcc": "5021",
-                "CdTN": false,
-                "title": "Statut de la Fonction publique territoriale"
-              }
-            ],
             "anneeTrancheEffectif": "2021"
           }
         ],
@@ -678,14 +639,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "44.357175",
           "longitude": "2.02648",
-          "conventionsCollectives": [
-            {
-              "siret": "20006938300012",
-              "idcc": "5021",
-              "CdTN": false,
-              "title": "Statut de la Fonction publique territoriale"
-            }
-          ],
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -722,14 +675,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "44.357175",
               "longitude": "2.02648",
-              "conventionsCollectives": [
-                {
-                  "siret": "20006938300012",
-                  "idcc": "5021",
-                  "CdTN": false,
-                  "title": "Statut de la Fonction publique territoriale"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -758,14 +703,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "44.357175",
               "longitude": "2.02648",
-              "conventionsCollectives": [
-                {
-                  "siret": "20006938300012",
-                  "idcc": "5021",
-                  "CdTN": false,
-                  "title": "Statut de la Fonction publique territoriale"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -1229,14 +1166,7 @@
             }
           ]
         },
-        "conventionsCollectives": [
-          {
-            "siret": "20006938300012",
-            "idcc": "5021",
-            "CdTN": false,
-            "title": "Statut de la Fonction publique territoriale"
-          }
-        ],
+        "conventionsCollectives": {},
         "matchingEtablissements": [
           {
             "siren": "200069383",
@@ -1262,14 +1192,6 @@
             "libelleTrancheEffectif": "",
             "latitude": "44.357175",
             "longitude": "2.02648",
-            "conventionsCollectives": [
-              {
-                "siret": "20006938300012",
-                "idcc": "5021",
-                "CdTN": false,
-                "title": "Statut de la Fonction publique territoriale"
-              }
-            ],
             "anneeTrancheEffectif": "2021"
           }
         ],
@@ -1304,14 +1226,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "43.468316",
           "longitude": "1.337009",
-          "conventionsCollectives": [
-            {
-              "siret": "20006864100014",
-              "idcc": "5021",
-              "CdTN": false,
-              "title": "Statut de la Fonction publique territoriale"
-            }
-          ],
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -1348,14 +1262,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.468316",
               "longitude": "1.337009",
-              "conventionsCollectives": [
-                {
-                  "siret": "20006864100014",
-                  "idcc": "5021",
-                  "CdTN": false,
-                  "title": "Statut de la Fonction publique territoriale"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -1384,14 +1290,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.468316",
               "longitude": "1.337009",
-              "conventionsCollectives": [
-                {
-                  "siret": "20006864100014",
-                  "idcc": "5021",
-                  "CdTN": false,
-                  "title": "Statut de la Fonction publique territoriale"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -1903,14 +1801,7 @@
             }
           ]
         },
-        "conventionsCollectives": [
-          {
-            "siret": "20006864100014",
-            "idcc": "5021",
-            "CdTN": false,
-            "title": "Statut de la Fonction publique territoriale"
-          }
-        ],
+        "conventionsCollectives": {},
         "matchingEtablissements": [
           {
             "siren": "200068641",
@@ -1936,14 +1827,6 @@
             "libelleTrancheEffectif": "",
             "latitude": "43.468316",
             "longitude": "1.337009",
-            "conventionsCollectives": [
-              {
-                "siret": "20006864100014",
-                "idcc": "5021",
-                "CdTN": false,
-                "title": "Statut de la Fonction publique territoriale"
-              }
-            ],
             "anneeTrancheEffectif": "2021"
           }
         ],

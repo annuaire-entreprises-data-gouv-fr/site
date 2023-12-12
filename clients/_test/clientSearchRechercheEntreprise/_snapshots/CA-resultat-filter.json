@@ -36,15 +36,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "48.84074",
           "longitude": "2.324549",
-          "conventionsCollectives": [
-            {
-              "siret": "81788315000010",
-              "idcc": "1486",
-              "CdTN": true,
-              "idKali": "KALICONT000005635173",
-              "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
-            }
-          ],
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -81,15 +72,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.84074",
               "longitude": "2.324549",
-              "conventionsCollectives": [
-                {
-                  "siret": "81788315000010",
-                  "idcc": "1486",
-                  "CdTN": true,
-                  "idKali": "KALICONT000005635173",
-                  "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -118,15 +100,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.84074",
               "longitude": "2.324549",
-              "conventionsCollectives": [
-                {
-                  "siret": "81788315000010",
-                  "idcc": "1486",
-                  "CdTN": true,
-                  "idKali": "KALICONT000005635173",
-                  "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -170,15 +143,7 @@
         "colter": {
           "codeColter": null
         },
-        "conventionsCollectives": [
-          {
-            "siret": "81788315000010",
-            "idcc": "1486",
-            "CdTN": true,
-            "idKali": "KALICONT000005635173",
-            "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
-          }
-        ],
+        "conventionsCollectives": {},
         "matchingEtablissements": [
           {
             "siren": "817883150",
@@ -204,15 +169,6 @@
             "libelleTrancheEffectif": "",
             "latitude": "48.84074",
             "longitude": "2.324549",
-            "conventionsCollectives": [
-              {
-                "siret": "81788315000010",
-                "idcc": "1486",
-                "CdTN": true,
-                "idKali": "KALICONT000005635173",
-                "title": "Convention collective nationale des bureaux d'études techniques, des cabinets d'ingénieurs-conseils et des sociétés de conseils du 15 décembre 1987."
-              }
-            ],
             "anneeTrancheEffectif": "2021"
           }
         ],
@@ -256,15 +212,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "43.926703",
           "longitude": "4.784775",
-          "conventionsCollectives": [
-            {
-              "siret": "41497192900040",
-              "idcc": "0478",
-              "CdTN": true,
-              "idKali": "KALICONT000005635810",
-              "title": "Convention collective nationale des sociétés financières du 22 novembre 1968"
-            }
-          ],
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -301,15 +248,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.926703",
               "longitude": "4.784775",
-              "conventionsCollectives": [
-                {
-                  "siret": "41497192900040",
-                  "idcc": "0478",
-                  "CdTN": true,
-                  "idKali": "KALICONT000005635810",
-                  "title": "Convention collective nationale des sociétés financières du 22 novembre 1968"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -338,15 +276,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.926703",
               "longitude": "4.784775",
-              "conventionsCollectives": [
-                {
-                  "siret": "41497192900040",
-                  "idcc": "0478",
-                  "CdTN": true,
-                  "idKali": "KALICONT000005635810",
-                  "title": "Convention collective nationale des sociétés financières du 22 novembre 1968"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -390,15 +319,7 @@
         "colter": {
           "codeColter": null
         },
-        "conventionsCollectives": [
-          {
-            "siret": "41497192900040",
-            "idcc": "0478",
-            "CdTN": true,
-            "idKali": "KALICONT000005635810",
-            "title": "Convention collective nationale des sociétés financières du 22 novembre 1968"
-          }
-        ],
+        "conventionsCollectives": {},
         "matchingEtablissements": [
           {
             "siren": "414971929",
@@ -424,15 +345,6 @@
             "libelleTrancheEffectif": "",
             "latitude": "43.926703",
             "longitude": "4.784775",
-            "conventionsCollectives": [
-              {
-                "siret": "41497192900040",
-                "idcc": "0478",
-                "CdTN": true,
-                "idKali": "KALICONT000005635810",
-                "title": "Convention collective nationale des sociétés financières du 22 novembre 1968"
-              }
-            ],
             "anneeTrancheEffectif": "2021"
           },
           {
@@ -459,7 +371,6 @@
             "libelleTrancheEffectif": "",
             "latitude": "48.887985",
             "longitude": "2.233045",
-            "conventionsCollectives": [],
             "anneeTrancheEffectif": null
           },
           {
@@ -486,7 +397,6 @@
             "libelleTrancheEffectif": "",
             "latitude": "48.876263",
             "longitude": "2.097763",
-            "conventionsCollectives": [],
             "anneeTrancheEffectif": null
           }
         ],
@@ -548,7 +458,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "48.700488",
           "longitude": "2.758235",
-          "conventionsCollectives": [],
           "anneeTrancheEffectif": null
         },
         "allSiegesSiret": [],
@@ -585,7 +494,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.700488",
               "longitude": "2.758235",
-              "conventionsCollectives": [],
               "anneeTrancheEffectif": null
             }
           ],
@@ -614,7 +522,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.700488",
               "longitude": "2.758235",
-              "conventionsCollectives": [],
               "anneeTrancheEffectif": null
             }
           ],
@@ -658,7 +565,7 @@
         "colter": {
           "codeColter": null
         },
-        "conventionsCollectives": [],
+        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,
@@ -700,7 +607,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "45.00782",
           "longitude": "-0.619455",
-          "conventionsCollectives": [],
           "anneeTrancheEffectif": null
         },
         "allSiegesSiret": [],
@@ -737,7 +643,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "45.00782",
               "longitude": "-0.619455",
-              "conventionsCollectives": [],
               "anneeTrancheEffectif": null
             }
           ],
@@ -766,7 +671,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "45.00782",
               "longitude": "-0.619455",
-              "conventionsCollectives": [],
               "anneeTrancheEffectif": null
             }
           ],
@@ -810,7 +714,7 @@
         "colter": {
           "codeColter": null
         },
-        "conventionsCollectives": [],
+        "conventionsCollectives": {},
         "matchingEtablissements": [
           {
             "siren": "491470597",
@@ -836,7 +740,6 @@
             "libelleTrancheEffectif": "",
             "latitude": "45.00782",
             "longitude": "-0.619455",
-            "conventionsCollectives": [],
             "anneeTrancheEffectif": null
           }
         ],
@@ -880,15 +783,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "43.458122",
           "longitude": "2.00451",
-          "conventionsCollectives": [
-            {
-              "siret": "85250403400012",
-              "idcc": "1527",
-              "CdTN": true,
-              "idKali": "KALICONT000005635413",
-              "title": "Convention collective nationale de l'immobilier, administrateurs de biens, sociétés immobilières, agents immobiliers, etc. (anciennement cabinets d'administrateurs de biens et des sociétés immobilières), du 9 septembre 1988. Etendue par arrêté du 24 février 1989 JORF 3 mars 1989. Mise à jour par avenant n° 47 du 23 novembre 2010, JORF 18 juillet 2012 puis mise à jour par avenant n° 83 du 2 décembre 2019 étendu par arrêté du 2 juillet 2021 JORF 14 juillet 2021"
-            }
-          ],
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -925,15 +819,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.458122",
               "longitude": "2.00451",
-              "conventionsCollectives": [
-                {
-                  "siret": "85250403400012",
-                  "idcc": "1527",
-                  "CdTN": true,
-                  "idKali": "KALICONT000005635413",
-                  "title": "Convention collective nationale de l'immobilier, administrateurs de biens, sociétés immobilières, agents immobiliers, etc. (anciennement cabinets d'administrateurs de biens et des sociétés immobilières), du 9 septembre 1988. Etendue par arrêté du 24 février 1989 JORF 3 mars 1989. Mise à jour par avenant n° 47 du 23 novembre 2010, JORF 18 juillet 2012 puis mise à jour par avenant n° 83 du 2 décembre 2019 étendu par arrêté du 2 juillet 2021 JORF 14 juillet 2021"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -962,15 +847,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.458122",
               "longitude": "2.00451",
-              "conventionsCollectives": [
-                {
-                  "siret": "85250403400012",
-                  "idcc": "1527",
-                  "CdTN": true,
-                  "idKali": "KALICONT000005635413",
-                  "title": "Convention collective nationale de l'immobilier, administrateurs de biens, sociétés immobilières, agents immobiliers, etc. (anciennement cabinets d'administrateurs de biens et des sociétés immobilières), du 9 septembre 1988. Etendue par arrêté du 24 février 1989 JORF 3 mars 1989. Mise à jour par avenant n° 47 du 23 novembre 2010, JORF 18 juillet 2012 puis mise à jour par avenant n° 83 du 2 décembre 2019 étendu par arrêté du 2 juillet 2021 JORF 14 juillet 2021"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -1014,15 +890,7 @@
         "colter": {
           "codeColter": null
         },
-        "conventionsCollectives": [
-          {
-            "siret": "85250403400012",
-            "idcc": "1527",
-            "CdTN": true,
-            "idKali": "KALICONT000005635413",
-            "title": "Convention collective nationale de l'immobilier, administrateurs de biens, sociétés immobilières, agents immobiliers, etc. (anciennement cabinets d'administrateurs de biens et des sociétés immobilières), du 9 septembre 1988. Etendue par arrêté du 24 février 1989 JORF 3 mars 1989. Mise à jour par avenant n° 47 du 23 novembre 2010, JORF 18 juillet 2012 puis mise à jour par avenant n° 83 du 2 décembre 2019 étendu par arrêté du 2 juillet 2021 JORF 14 juillet 2021"
-          }
-        ],
+        "conventionsCollectives": {},
         "matchingEtablissements": [
           {
             "siren": "852504034",
@@ -1048,15 +916,6 @@
             "libelleTrancheEffectif": "",
             "latitude": "43.458122",
             "longitude": "2.00451",
-            "conventionsCollectives": [
-              {
-                "siret": "85250403400012",
-                "idcc": "1527",
-                "CdTN": true,
-                "idKali": "KALICONT000005635413",
-                "title": "Convention collective nationale de l'immobilier, administrateurs de biens, sociétés immobilières, agents immobiliers, etc. (anciennement cabinets d'administrateurs de biens et des sociétés immobilières), du 9 septembre 1988. Etendue par arrêté du 24 février 1989 JORF 3 mars 1989. Mise à jour par avenant n° 47 du 23 novembre 2010, JORF 18 juillet 2012 puis mise à jour par avenant n° 83 du 2 décembre 2019 étendu par arrêté du 2 juillet 2021 JORF 14 juillet 2021"
-              }
-            ],
             "anneeTrancheEffectif": "2021"
           }
         ],
