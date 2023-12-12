@@ -4,7 +4,7 @@ import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IEgapro } from '#models/certifications/egapro';
 

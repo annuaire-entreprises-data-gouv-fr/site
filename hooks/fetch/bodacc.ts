@@ -1,5 +1,5 @@
 import clientBodacc from '#clients/open-data-soft/clients/bodacc';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
 import { IUniteLegale } from '#models/index';
 import { verifySiren } from '#utils/helpers';

@@ -1,7 +1,7 @@
 import { LineChart } from '#components/chart/line';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import {
   APINotRespondingFactory,
   isAPINotResponding,

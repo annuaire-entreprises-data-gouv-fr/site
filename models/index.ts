@@ -6,7 +6,7 @@ import {
 import { IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IEtatCivil } from '#models/immatriculation';
 import { IdRna, Siren, Siret } from '#utils/helpers';
-import { EAdministration } from './administrations';
+import { EAdministration } from './administrations/EAdministration';
 import { IAPINotRespondingError } from './api-not-responding';
 import { IConventionsCollectives } from './conventions-collectives-list';
 import {

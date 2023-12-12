@@ -11,7 +11,7 @@ import {
   SiretNotFoundError,
   createDefaultEtablissement,
 } from '.';
-import { EAdministration } from './administrations';
+import { EAdministration } from './administrations/EAdministration';
 import { FetchRessourceException, IExceptionContext } from './exceptions';
 
 /*

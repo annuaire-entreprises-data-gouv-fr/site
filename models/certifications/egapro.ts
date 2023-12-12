@@ -1,7 +1,7 @@
 import { clientEgapro } from '#clients/egapro';
 import { clientEgaproRepresentationEquilibre } from '#clients/egapro/representationEquilibre';
 import { HttpNotFound } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,

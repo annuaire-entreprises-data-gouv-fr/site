@@ -2,7 +2,7 @@ import { clientApiEntrepriseConformiteFiscale } from '#clients/api-entreprise/co
 import { clientApiEntrepriseConformiteMSA } from '#clients/api-entreprise/conformite/msa';
 import { clientApiEntrepriseConformiteVigilance } from '#clients/api-entreprise/conformite/vigilance';
 import { HttpNotFound } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,

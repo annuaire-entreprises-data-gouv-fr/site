@@ -6,7 +6,7 @@ import AvisSituationLink from '#components/avis-situation-link';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { estActif } from '#models/etat-administratif';
 import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
 import { getAdresseUniteLegale, getNomComplet } from '#models/statut-diffusion';

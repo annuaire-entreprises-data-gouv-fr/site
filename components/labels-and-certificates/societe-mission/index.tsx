@@ -1,6 +1,6 @@
 import FAQLink from '#components-ui/faq-link';
 import { Section } from '#components/section';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 
 export const CertificationSocieteMission = () => (
   <Section title="Société à mission" sources={[EAdministration.INSEE]}>

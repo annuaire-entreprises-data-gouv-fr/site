@@ -14,7 +14,6 @@ const getTsConfigBasePaths = () => {
 const config = {
   transform: {
     '^.+\\.(t|j)sx?$': ['@swc/jest'],
-    '\\.y(a)?ml$': 'jest-transform-yaml',
   },
   moduleNameMapper: {
     ...getTsConfigBasePaths(),

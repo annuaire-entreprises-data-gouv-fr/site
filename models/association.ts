@@ -4,7 +4,7 @@ import { HttpNotFound } from '#clients/exceptions';
 import { escapeTerm, Siren } from '#utils/helpers';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import { IDataAssociation, IUniteLegale } from '.';
-import { EAdministration } from './administrations';
+import { EAdministration } from './administrations/EAdministration';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,

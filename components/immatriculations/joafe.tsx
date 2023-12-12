@@ -4,7 +4,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import { DataSection } from '#components/section/data-section';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IImmatriculationJOAFE } from '#models/immatriculation/joafe';
 import { formatDate, formatIntFr } from '#utils/helpers';

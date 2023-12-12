@@ -1,4 +1,4 @@
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { IETATADMINSTRATIF } from '#models/etat-administratif';
 import { Exception } from '#models/exceptions';
 import { ISTATUTDIFFUSION } from '#models/statut-diffusion';

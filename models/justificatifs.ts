@@ -1,4 +1,3 @@
-import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
@@ -10,6 +9,7 @@ import {
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { verifySiren } from '#utils/helpers';
 import { IUniteLegale, isAssociation } from '.';
+import { EAdministration } from './administrations/EAdministration';
 import { IAPILoading } from './api-loading';
 import { IImmatriculationRNE } from './immatriculation';
 

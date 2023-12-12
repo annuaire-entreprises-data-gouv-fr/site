@@ -1,7 +1,7 @@
 import { fetchRNEImmatriculation } from '#clients/api-proxy/rne';
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,

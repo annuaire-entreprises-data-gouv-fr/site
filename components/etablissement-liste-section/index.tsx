@@ -4,7 +4,7 @@ import { Tag } from '#components-ui/tag';
 import PageCounter from '#components/search-results/results-pagination';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import {
@@ -14,7 +14,7 @@ import {
   getEnseigneEtablissement,
   getNomComplet,
 } from '#models/statut-diffusion';
-import { formatDate, formatSiret, Siret } from '#utils/helpers';
+import { Siret, formatDate, formatSiret } from '#utils/helpers';
 import { ISession } from '#utils/session';
 
 const EtablissementTable: React.FC<{

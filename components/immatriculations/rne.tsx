@@ -10,7 +10,7 @@ import { INPI } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IImmatriculationRNE } from '#models/immatriculation';

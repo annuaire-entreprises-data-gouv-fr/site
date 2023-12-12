@@ -8,7 +8,7 @@ import FrontStateMachine from '#components/front-state-machine';
 import Meta from '#components/meta';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { formatIntFr } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import { postServerSideProps } from '#utils/server-side-props-helper/post-server-side-props';
