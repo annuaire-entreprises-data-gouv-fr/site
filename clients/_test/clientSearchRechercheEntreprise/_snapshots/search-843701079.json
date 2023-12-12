@@ -36,22 +36,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "44.075685",
           "longitude": "1.943401",
-          "conventionsCollectives": [
-            {
-              "siret": "84370107900017",
-              "idcc": "1596",
-              "CdTN": true,
-              "idKali": "KALICONT000005635221",
-              "title": "Nouvelle convention collective nationale des ouvriers employés par les entreprises du bâtiment visées par le décret du 1er mars 1962 (c'est-à-dire occupant jusqu'à 10 salariés) du 7 mars 2018 (Avenant du 7 mars 2018)"
-            },
-            {
-              "siret": "84370107900017",
-              "idcc": "2609",
-              "CdTN": true,
-              "idKali": "KALICONT000018773893",
-              "title": "Convention collective nationale des employés, techniciens et agents de maîtrise du bâtiment du 12 juillet 2006"
-            }
-          ],
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -88,22 +72,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "44.075685",
               "longitude": "1.943401",
-              "conventionsCollectives": [
-                {
-                  "siret": "84370107900017",
-                  "idcc": "1596",
-                  "CdTN": true,
-                  "idKali": "KALICONT000005635221",
-                  "title": "Nouvelle convention collective nationale des ouvriers employés par les entreprises du bâtiment visées par le décret du 1er mars 1962 (c'est-à-dire occupant jusqu'à 10 salariés) du 7 mars 2018 (Avenant du 7 mars 2018)"
-                },
-                {
-                  "siret": "84370107900017",
-                  "idcc": "2609",
-                  "CdTN": true,
-                  "idKali": "KALICONT000018773893",
-                  "title": "Convention collective nationale des employés, techniciens et agents de maîtrise du bâtiment du 12 juillet 2006"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -132,22 +100,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "44.075685",
               "longitude": "1.943401",
-              "conventionsCollectives": [
-                {
-                  "siret": "84370107900017",
-                  "idcc": "1596",
-                  "CdTN": true,
-                  "idKali": "KALICONT000005635221",
-                  "title": "Nouvelle convention collective nationale des ouvriers employés par les entreprises du bâtiment visées par le décret du 1er mars 1962 (c'est-à-dire occupant jusqu'à 10 salariés) du 7 mars 2018 (Avenant du 7 mars 2018)"
-                },
-                {
-                  "siret": "84370107900017",
-                  "idcc": "2609",
-                  "CdTN": true,
-                  "idKali": "KALICONT000018773893",
-                  "title": "Convention collective nationale des employés, techniciens et agents de maîtrise du bâtiment du 12 juillet 2006"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -191,22 +143,7 @@
         "colter": {
           "codeColter": null
         },
-        "conventionsCollectives": [
-          {
-            "siret": "84370107900017",
-            "idcc": "1596",
-            "CdTN": true,
-            "idKali": "KALICONT000005635221",
-            "title": "Nouvelle convention collective nationale des ouvriers employés par les entreprises du bâtiment visées par le décret du 1er mars 1962 (c'est-à-dire occupant jusqu'à 10 salariés) du 7 mars 2018 (Avenant du 7 mars 2018)"
-          },
-          {
-            "siret": "84370107900017",
-            "idcc": "2609",
-            "CdTN": true,
-            "idKali": "KALICONT000018773893",
-            "title": "Convention collective nationale des employés, techniciens et agents de maîtrise du bâtiment du 12 juillet 2006"
-          }
-        ],
+        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,

@@ -36,15 +36,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "48.829633",
           "longitude": "2.374801",
-          "conventionsCollectives": [
-            {
-              "siret": "80032984900023",
-              "idcc": "3090",
-              "CdTN": true,
-              "idKali": "KALICONT000028157262",
-              "title": "Convention collective nationale des entreprises du secteur privé du spectacle vivant du 3 février 2012"
-            }
-          ],
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -81,15 +72,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.829633",
               "longitude": "2.374801",
-              "conventionsCollectives": [
-                {
-                  "siret": "80032984900023",
-                  "idcc": "3090",
-                  "CdTN": true,
-                  "idKali": "KALICONT000028157262",
-                  "title": "Convention collective nationale des entreprises du secteur privé du spectacle vivant du 3 février 2012"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -118,15 +100,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.829633",
               "longitude": "2.374801",
-              "conventionsCollectives": [
-                {
-                  "siret": "80032984900023",
-                  "idcc": "3090",
-                  "CdTN": true,
-                  "idKali": "KALICONT000028157262",
-                  "title": "Convention collective nationale des entreprises du secteur privé du spectacle vivant du 3 février 2012"
-                }
-              ],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -170,15 +143,7 @@
         "colter": {
           "codeColter": null
         },
-        "conventionsCollectives": [
-          {
-            "siret": "80032984900023",
-            "idcc": "3090",
-            "CdTN": true,
-            "idKali": "KALICONT000028157262",
-            "title": "Convention collective nationale des entreprises du secteur privé du spectacle vivant du 3 février 2012"
-          }
-        ],
+        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 2,
         "nombreEtablissementsOuverts": 1,

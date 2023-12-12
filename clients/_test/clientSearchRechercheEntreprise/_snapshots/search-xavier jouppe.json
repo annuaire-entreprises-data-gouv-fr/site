@@ -36,7 +36,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "47.388388",
           "longitude": "0.68393",
-          "conventionsCollectives": [],
           "anneeTrancheEffectif": null
         },
         "allSiegesSiret": [],
@@ -73,7 +72,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "47.388388",
               "longitude": "0.68393",
-              "conventionsCollectives": [],
               "anneeTrancheEffectif": null
             }
           ],
@@ -102,7 +100,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "47.388388",
               "longitude": "0.68393",
-              "conventionsCollectives": [],
               "anneeTrancheEffectif": null
             }
           ],
@@ -146,7 +143,7 @@
         "colter": {
           "codeColter": null
         },
-        "conventionsCollectives": [],
+        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,
@@ -236,7 +233,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "48.870938",
           "longitude": "2.305916",
-          "conventionsCollectives": [],
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -273,7 +269,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.870938",
               "longitude": "2.305916",
-              "conventionsCollectives": [],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -304,7 +299,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.870938",
               "longitude": "2.305916",
-              "conventionsCollectives": [],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -346,7 +340,7 @@
         "colter": {
           "codeColter": null
         },
-        "conventionsCollectives": [],
+        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 0,

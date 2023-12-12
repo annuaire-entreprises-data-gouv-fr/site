@@ -36,7 +36,6 @@
           "libelleTrancheEffectif": "",
           "latitude": "46.8030906",
           "longitude": "4.4244097",
-          "conventionsCollectives": [],
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -73,7 +72,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "46.8030906",
               "longitude": "4.4244097",
-              "conventionsCollectives": [],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -102,7 +100,6 @@
               "libelleTrancheEffectif": "",
               "latitude": "46.8030906",
               "longitude": "4.4244097",
-              "conventionsCollectives": [],
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -146,7 +143,7 @@
         "colter": {
           "codeColter": null
         },
-        "conventionsCollectives": [],
+        "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 1,
         "nombreEtablissementsOuverts": 1,
