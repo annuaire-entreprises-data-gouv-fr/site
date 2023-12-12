@@ -3,13 +3,13 @@ import { GetServerSidePropsContext } from 'next';
 import { HttpNotFound } from '#clients/exceptions';
 import { Exception, IExceptionContext } from '#models/exceptions';
 import {
+  FetchRechercheEntrepriseException,
   InternalError,
   IsLikelyASirenOrSiretException,
   NotASirenError,
   NotASiretError,
   NotLuhnValidSirenError,
   NotLuhnValidSiretError,
-  SearchEngineError,
   SirenNotFoundError,
   SiretNotFoundError,
 } from '#models/index';
@@ -62,7 +62,7 @@ const handleExceptions = (exception: any, req: IncomingMessage | undefined) => {
         })
       );
       return redirectPageNotFound();
-    } else if (exception instanceof SearchEngineError) {
+    } else if (exception instanceof FetchRechercheEntrepriseException) {
       logFatalErrorInSentry(exception);
       return redirectSearchEngineError();
     } else {

@@ -6,9 +6,14 @@ import {
 import { IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IEtatCivil } from '#models/immatriculation';
 import { IdRna, Siren, Siret } from '#utils/helpers';
+import { EAdministration } from './administrations';
 import { IAPINotRespondingError } from './api-not-responding';
 import { IConventionsCollectives } from './conventions-collectives-list';
-import { Exception, IExceptionContext } from './exceptions';
+import {
+  Exception,
+  FetchRessourceException,
+  IExceptionContext,
+} from './exceptions';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
 import { ITVAIntracommunautaire } from './tva';
 
@@ -371,9 +376,17 @@ export class NotEnoughParamsException extends Exception {
   }
 }
 
-export class SearchEngineError extends Exception {
-  constructor(public message: string) {
-    super({ name: 'SearchEngineError', message });
+export class FetchRechercheEntrepriseException extends FetchRessourceException {
+  constructor(args: {
+    cause: any;
+    context?: IExceptionContext;
+    message?: string;
+  }) {
+    super({
+      ...args,
+      administration: EAdministration.DINUM,
+      ressource: 'RechercheEntreprise',
+    });
   }
 }
 
