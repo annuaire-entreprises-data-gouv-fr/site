@@ -1,6 +1,7 @@
 import { clientMonitoring } from '#clients/monitoring';
 import { logWarningInSentry } from '#utils/sentry';
-import { EAdministration, administrationsMetaData } from './administrations';
+import { administrationsMetaData } from './administrations';
+import { EAdministration } from './administrations/EAdministration';
 import { FetchRessourceException } from './exceptions';
 
 export type IRatio = {

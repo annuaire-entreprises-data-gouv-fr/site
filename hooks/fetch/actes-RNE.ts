@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
 import { IActesRNE } from '#models/immatriculation';
 import { IUniteLegale } from '#models/index';

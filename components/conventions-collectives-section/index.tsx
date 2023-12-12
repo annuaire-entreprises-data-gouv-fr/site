@@ -6,7 +6,7 @@ import { Tag } from '#components-ui/tag';
 import { MTPEI } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { ICCWithMetadata } from '#models/conventions-collectives-list';
 import { capitalize, formatSiret } from '#utils/helpers';

@@ -1,6 +1,6 @@
 import { clientIdccMetadata } from '#clients/recherche-entreprise/idcc-metadata';
 import logErrorInSentry from '#utils/sentry';
-import { EAdministration } from './administrations';
+import { EAdministration } from './administrations/EAdministration';
 import { APINotRespondingFactory } from './api-not-responding';
 import { FetchRessourceException } from './exceptions';
 

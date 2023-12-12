@@ -5,7 +5,7 @@ import { EDUCNAT } from '#components/administrations';
 import ResultsPagination from '#components/search-results/results-pagination';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IEtablissementsScolaires } from '#models/etablissements-scolaires';
 

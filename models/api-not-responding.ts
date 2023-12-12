@@ -1,4 +1,4 @@
-import { EAdministration } from './administrations';
+import { EAdministration } from './administrations/EAdministration';
 import { IAPILoading } from './api-loading';
 
 export interface IAPINotRespondingError {

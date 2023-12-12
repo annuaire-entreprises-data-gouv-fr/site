@@ -5,7 +5,7 @@ import {
   clientDownloadBilan,
 } from '#clients/api-proxy/rne/documents';
 import { HttpBadRequestError, HttpForbiddenError } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { isAgent, sessionOptions } from '#utils/session';

@@ -3,10 +3,8 @@ import { HttpNotFound } from '#clients/exceptions';
 import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
 import Meta from '#components/meta';
-import {
-  administrationsMetaData,
-  EAdministration,
-} from '#models/administrations';
+import { administrationsMetaData } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { getFaqArticlesByTag, IFaqArticle } from '#models/article/faq';
 import {
   IPropsWithMetadata,

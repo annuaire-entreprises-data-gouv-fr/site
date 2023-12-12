@@ -10,14 +10,12 @@ import {
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logWarningInSentry } from '#utils/sentry';
 import {
+  FetchRechercheEntrepriseException,
   IEtablissement,
   IUniteLegale,
   IsLikelyASirenOrSiretException,
   NotEnoughParamsException,
-  SearchEngineError,
 } from '.';
-import { EAdministration } from './administrations';
-import { FetchRessourceException } from './exceptions';
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;
@@ -68,10 +66,8 @@ const search = async (
   } catch (e: any) {
     if (e instanceof HttpBadRequestError) {
       logWarningInSentry(
-        new FetchRessourceException({
+        new FetchRechercheEntrepriseException({
           cause: e,
-          ressource: 'APIRechercheEntreprise',
-          administration: EAdministration.DINUM,
           message: 'BadParams in API Recherche Entreprise',
           context: {
             details: searchFilterParams.toApiURI(),
@@ -104,9 +100,12 @@ const search = async (
       if (eFallback instanceof HttpNotFound) {
         return noResults;
       }
-      throw new SearchEngineError(
-        `term : ${searchTerm} - ${eFallback.toString()}`
-      );
+      throw new FetchRechercheEntrepriseException({
+        cause: eFallback,
+        context: {
+          details: searchTerm,
+        },
+      });
     }
   }
 };

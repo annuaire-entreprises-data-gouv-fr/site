@@ -1,6 +1,6 @@
 import { TVAUserException, clientTVA } from '#clients/api-vies';
 import { HttpConnectionReset } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException, IExceptionContext } from '#models/exceptions';
 import { verifySiren } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';

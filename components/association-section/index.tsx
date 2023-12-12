@@ -6,7 +6,7 @@ import { Tag } from '#components-ui/tag';
 import { Section } from '#components/section';
 import { DataSection } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { IAssociation, IDataAssociation } from '#models/index';
 import { IdRna, formatDate, formatIntFr } from '#utils/helpers';
 import { isTwoMonthOld } from '#utils/helpers/checks';

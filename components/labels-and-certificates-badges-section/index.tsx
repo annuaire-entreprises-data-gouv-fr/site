@@ -1,5 +1,5 @@
 import { LabelAndCertificateBadge } from '#components-ui/badge/frequent';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import InformationTooltip from '../../components-ui/information-tooltip';
 import { IUniteLegale } from '../../models';
 

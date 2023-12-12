@@ -1,12 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import React from 'react';
 import { HttpNotFound } from '#clients/exceptions';
 import AdministrationNotResponding from '#components/administration-not-responding';
 import Meta from '#components/meta';
-import {
-  administrationsMetaData,
-  EAdministration,
-} from '#models/administrations';
+import { administrationsMetaData } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { NextPageWithLayout } from 'pages/_app';
 
 const AdministrationError: NextPageWithLayout<{

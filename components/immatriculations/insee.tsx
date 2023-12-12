@@ -6,7 +6,7 @@ import { INSEE } from '#components/administrations';
 import AvisSituationLink from '#components/avis-situation-link';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { IEtablissement, IUniteLegale } from '#models/index';
 import {
   estNonDiffusible,

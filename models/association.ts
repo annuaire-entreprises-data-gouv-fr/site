@@ -4,7 +4,7 @@ import { HttpNotFound } from '#clients/exceptions';
 import { escapeTerm, Siren } from '#utils/helpers';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import { IDataAssociation, IUniteLegale } from '.';
-import { EAdministration } from './administrations';
+import { EAdministration } from './administrations/EAdministration';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
@@ -53,7 +53,6 @@ export const getAssociation = async (
 
     logErrorInSentry(
       new FetchAssociationException({
-        message: 'RNA API error',
         cause: e,
         context: {
           idRna: rna,
@@ -66,7 +65,7 @@ export const getAssociation = async (
 };
 
 type IFetchAssociationExceptionArgs = {
-  message: string;
+  message?: string;
   cause: any;
   context?: IExceptionContext;
 };

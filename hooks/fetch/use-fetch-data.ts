@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { APILoadingFactory, IAPILoading } from '#models/api-loading';
 import {
   APINotRespondingFactory,

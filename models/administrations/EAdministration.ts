@@ -1,0 +1,15 @@
+export enum EAdministration {
+  EDUCATION_NATIONALE = 'education-nationale',
+  AGENCE_BIO = 'agence-bio',
+  ADEME = 'ademe',
+  DILA = 'dila',
+  DINUM = 'dinum',
+  MC = 'mc',
+  MEF = 'mef',
+  INPI = 'inpi',
+  INSEE = 'insee',
+  MTPEI = 'mtpei',
+  MI = 'mi',
+  VIES = 'vies',
+  DJEPVA = 'djepva',
+}

@@ -2,10 +2,8 @@ import React, { PropsWithChildren } from 'react';
 import Warning from '#components-ui/alerts/warning';
 import DataSourcesTooltip from '#components-ui/information-tooltip/data-sources-tooltip';
 import Logo from '#components-ui/logo';
-import {
-  administrationsMetaData,
-  EAdministration,
-} from '#models/administrations';
+import { administrationsMetaData } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { formatDate, formatDateLong, isTwoMonthOld } from '#utils/helpers';
 import SectionErrorBoundary from './section-error-boundary';

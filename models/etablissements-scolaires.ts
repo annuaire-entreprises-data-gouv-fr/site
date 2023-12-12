@@ -1,12 +1,12 @@
 import { clientEducationNationale } from '#clients/education-nationale';
 import { HttpNotFound } from '#clients/exceptions';
-import { EAdministration } from '#models/administrations';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
 import { Siren, verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
+import { EAdministration } from './administrations/EAdministration';
 import { FetchRessourceException } from './exceptions';
 import { getUniteLegaleFromSlug } from './unite-legale';
 

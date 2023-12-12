@@ -1,6 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import { clientRGE } from '#clients/rge';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,

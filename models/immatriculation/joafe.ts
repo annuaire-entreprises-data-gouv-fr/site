@@ -1,6 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import { clientJOAFE } from '#clients/open-data-soft/clients/journal-officiel-associations';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,

@@ -6,7 +6,7 @@ import { Tag } from '#components-ui/tag';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { TwoColumnTable } from '#components/table/simple';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IRGECertification } from '#models/certifications/rge';
 import { IUniteLegale } from '#models/index';

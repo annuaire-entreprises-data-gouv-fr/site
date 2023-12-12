@@ -1,5 +1,5 @@
 import { clientBilansFinanciers } from '#clients/open-data-soft/clients/bilans-financiers';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
 import { IUniteLegale } from '#models/index';
 import logErrorInSentry from '#utils/sentry';

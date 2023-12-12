@@ -1,5 +1,5 @@
 import { clientJOAFE } from '#clients/open-data-soft/clients/journal-officiel-associations';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
 import { IAssociation } from '#models/index';
 import { IdRna } from '#utils/helpers';

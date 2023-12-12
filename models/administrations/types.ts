@@ -1,4 +1,4 @@
-import { EAdministration } from '.';
+import { EAdministration } from './EAdministration';
 
 export type IAdministrationsMetaData = {
   [key: string]: IAdministrationMetaData;

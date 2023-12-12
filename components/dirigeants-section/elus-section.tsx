@@ -1,5 +1,5 @@
 import React from 'react';
-import { EAdministration } from '#models/administrations';
+import { EAdministration } from '#models/administrations/EAdministration';
 import { IEtatCivil } from '#models/immatriculation';
 import { isCollectiviteTerritoriale, IUniteLegale } from '#models/index';
 import { Section } from '../section';

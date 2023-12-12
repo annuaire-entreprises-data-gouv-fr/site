@@ -26,7 +26,7 @@ import {
   createDefaultUniteLegale,
   isAssociation,
 } from '.';
-import { EAdministration } from './administrations';
+import { EAdministration } from './administrations/EAdministration';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
