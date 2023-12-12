@@ -19,7 +19,7 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   link,
 }) => {
   const ContainerComponent = (
-    props: PropsWithChildren<{ className?: string }>
+    props: PropsWithChildren<{ className?: string; id?: string }>
   ) =>
     link ? (
       <a href={link.href} aria-label={link['aria-label']} {...props} />

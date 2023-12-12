@@ -31,19 +31,21 @@ export function Badge({
   link,
 }: IProps) {
   const ContainerComponent = (
-    props: PropsWithChildren<{ className?: string }>
+    props: PropsWithChildren<{
+      className?: string;
+      onClick?: MouseEventHandler;
+    }>
   ) =>
     link ? (
       <a href={link.href} aria-label={link['aria-label']} {...props} />
-    ) : onClick ? (
-      <button onClick={onClick} {...props} />
     ) : (
       <span {...props} />
     );
 
   return (
     <ContainerComponent
-      className={`badge-wrapper ${isSelected ? 'active' : ''}`}
+      onClick={onClick}
+      className={`badge-wrapper ${isSelected ? 'active' : ''} `}
     >
       <span className="badge-icon" aria-hidden>
         <Icon size={16} slug={icon} />
@@ -63,18 +65,11 @@ export function Badge({
           line-height: inherit;
           cursor: ${onClick ? 'pointer' : 'inherit'};
         }
-
-        a.badge-wrapper:hover {
-          filter: brightness(0.95);
+        .badge-wrapper:hover {
+          border: 2px dashed
+            ${onClick && !link ? constants.colors.frBlue : 'transparent'};
         }
-        a.badge-wrapper:active {
-          filter: brightness(0.9);
-        }
-
-        button.badge-wrapper:hover {
-          border: 2px dashed ${constants.colors.frBlue};
-        }
-        button.badge-wrapper.active {
+        .badge-wrapper.active {
           border: 2px solid ${constants.colors.frBlue};
         }
 
@@ -83,6 +78,12 @@ export function Badge({
         }
         a.badge-wrapper .badge-label {
           text-decoration: underline;
+        }
+        a.badge-wrapper:hover {
+          filter: brightness(0.95);
+        }
+        a.badge-wrapper:active {
+          filter: brightness(0.9);
         }
 
         .badge-icon {
