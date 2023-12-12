@@ -59,9 +59,10 @@ const ConventionsCollectivesSection: React.FC<{
             {ccWithMetadata && ccWithMetadata.length > 0 && (
               <FullTable
                 head={['N°IDCC', 'Détails', 'Etablissement(s)', 'Explications']}
+                verticalAlign="top"
                 body={ccWithMetadata.map(
                   ({ idcc, sirets = [], nature, title }) => [
-                    <Tag>IDCC {idcc}</Tag>,
+                    <Tag id={`idcc-${idcc}`}>IDCC {idcc}</Tag>,
                     <>
                       {nature && (
                         <>

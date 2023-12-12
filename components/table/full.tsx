@@ -5,9 +5,15 @@ interface ISectionProps {
   head: string[];
   body: any[][];
   id?: string;
+  verticalAlign?: 'top' | 'middle' | 'bottom';
 }
 
-export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
+export const FullTable: React.FC<ISectionProps> = ({
+  id,
+  head,
+  body,
+  verticalAlign = 'middle',
+}) => (
   <>
     <table id={id} className="full-table">
       <thead>
@@ -21,25 +27,18 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
         {body.map((row, bodyIndex) => (
           <tr key={'row-' + bodyIndex}>
             {row.map((cell, rowIndex) => (
-              <td key={'cell-' + rowIndex}>{cell}</td>
+              <td key={'cell-' + rowIndex}>
+                <strong aria-hidden className="mobile">
+                  {head[rowIndex]}&nbsp;:&nbsp;
+                </strong>
+                {cell}
+              </td>
             ))}
           </tr>
         ))}
       </tbody>
     </table>
-    <div className="mobile">
-      {body.map((row, bodyIndex) => (
-        <div key={'row-' + bodyIndex}>
-          {row.map((cell, rowIndex) =>
-            !cell && cell !== 0 ? null : (
-              <div key={rowIndex}>
-                <b>{head[rowIndex]}&nbsp;:</b> {cell}
-              </div>
-            )
-          )}
-        </div>
-      ))}
-    </div>
+
     <style jsx>{`
       table {
         border-collapse: collapse;
@@ -49,6 +48,7 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
 
       tr td,
       th {
+        vertical-align: ${verticalAlign};
         border: 1px solid ${constants.colors.pastelBlue};
         border-left: none;
         border-right: none;
@@ -70,18 +70,25 @@ export const FullTable: React.FC<ISectionProps> = ({ id, head, body }) => (
         background-color: ${constants.colors.pastelBlue}66;
       }
 
-      .mobile {
-        display: none;
-      }
-      .mobile > div {
-        margin: 20px 0;
+      @media only screen and (min-width: 1px) and (max-width: 992px) {
+        table,
+        tbody,
+        tr,
+        td {
+          display: block;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+        thead {
+          display: none;
+        }
+        table tr:hover > td {
+          background-color: transparent;
+        }
       }
 
-      @media only screen and (min-width: 1px) and (max-width: 992px) {
+      @media (min-width: 993px) {
         .mobile {
-          display: block;
-        }
-        table {
           display: none;
         }
       }

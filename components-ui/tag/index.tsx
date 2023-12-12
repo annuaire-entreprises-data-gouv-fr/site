@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from 'react';
 
 interface ITagProps {
   size?: 'medium' | 'small';
+  id?: string;
   color?: 'default' | 'error' | 'info' | 'new' | 'success' | 'warning';
   // title?: string;
   link?: {
@@ -12,6 +13,7 @@ interface ITagProps {
 
 export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   children,
+  id,
   size = 'medium',
   color = 'default',
   link,
@@ -33,6 +35,7 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   return (
     <>
       <ContainerComponent
+        id={id}
         className={`fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`}
       >
         {children}
@@ -43,9 +46,20 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
           display: inline-block;
           vertical-align: middle;
           margin: 3px 5px;
+          margin-left: 0;
           max-width: 80vw;
           overflow: hidden;
           text-overflow: ellipsis;
+        }
+        a.fr-badge {
+          text-decoration: underline;
+          border: none;
+        }
+        a.fr-badge:hover {
+          filter: brightness(0.95);
+        }
+        a.fr-badge:active {
+          filter: brightness(0.9);
         }
       `}</style>
     </>
