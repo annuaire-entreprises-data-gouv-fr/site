@@ -3,28 +3,27 @@ import React, { PropsWithChildren } from 'react';
 interface ITagProps {
   size?: 'medium' | 'small';
   color?: 'default' | 'error' | 'info' | 'new' | 'success' | 'warning';
-  title?: string;
+  // title?: string;
+  link?: {
+    href: string;
+    'aria-label': string;
+  };
 }
 
 export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   children,
   size = 'medium',
   color = 'default',
-  title = '',
+  link,
 }) => {
-  const badgeSize = {
-    small: 'fr-badge--sm',
-    medium: 'fr-badge--md',
-  };
-
-  const badgeColor = {
-    default: '',
-    new: 'fr-badge--new',
-    error: 'fr-badge--error',
-    warning: 'fr-badge--warning',
-    info: 'fr-badge--info',
-    success: 'fr-badge--success',
-  };
+  const ContainerComponent = (
+    props: PropsWithChildren<{ className?: string }>
+  ) =>
+    link ? (
+      <a href={link.href} aria-label={link['aria-label']} {...props} />
+    ) : (
+      <span {...props} />
+    );
 
   let serializedTag = '';
   try {
@@ -33,12 +32,11 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
 
   return (
     <>
-      <span
+      <ContainerComponent
         className={`fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`}
-        title={title || serializedTag}
       >
         {children}
-      </span>
+      </ContainerComponent>
       <style jsx>{`
         .fr-badge {
           white-space: nowrap;
@@ -52,4 +50,18 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
       `}</style>
     </>
   );
+};
+
+const badgeSize = {
+  small: 'fr-badge--sm',
+  medium: 'fr-badge--md',
+};
+
+const badgeColor = {
+  default: '',
+  new: 'fr-badge--new',
+  error: 'fr-badge--error',
+  warning: 'fr-badge--warning',
+  info: 'fr-badge--info',
+  success: 'fr-badge--success',
 };
