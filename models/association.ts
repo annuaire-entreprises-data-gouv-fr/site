@@ -53,7 +53,6 @@ export const getAssociation = async (
 
     logErrorInSentry(
       new FetchAssociationException({
-        message: 'RNA API error',
         cause: e,
         context: {
           idRna: rna,
@@ -66,7 +65,7 @@ export const getAssociation = async (
 };
 
 type IFetchAssociationExceptionArgs = {
-  message: string;
+  message?: string;
   cause: any;
   context?: IExceptionContext;
 };
