@@ -12,17 +12,18 @@ export function useFetchFinancesSociete(uniteLegale: IUniteLegale) {
       fetchData: () => clientBilansFinanciers(siren),
       administration: EAdministration.MEF,
       logError: (e: any) => {
-        if (e.status !== 404)
-          logErrorInSentry(
-            new FetchRessourceException({
-              ressource: 'BilansFinanciers',
-              administration: EAdministration.MEF,
-              cause: e,
-              context: {
-                siren: uniteLegale.siren,
-              },
-            })
-          );
+        if (e.status === 404) {
+          return;
+        }
+        const exception = new FetchRessourceException({
+          ressource: 'BilansFinanciers',
+          administration: EAdministration.MEF,
+          cause: e,
+          context: {
+            siren: uniteLegale.siren,
+          },
+        });
+        logErrorInSentry(exception);
       },
     },
     [uniteLegale.siren]
