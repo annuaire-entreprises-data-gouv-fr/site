@@ -49,58 +49,101 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
   return (
     <>
       {estEss && (
-        <InformationTooltip label="Cette structure appartient au champ de l’Economie Sociale et Solidaire">
-          <LabelAndCertificateBadge label="ESS - Entreprise Sociale et Solidaire" />
-        </InformationTooltip>
+        <LabelWithLinkToSection
+          informationTooltipLabel="Cette structure appartient au champ de l’Economie Sociale et Solidaire"
+          label="ESS - Entreprise Sociale et Solidaire"
+          sectionId="ess"
+          siren={uniteLegale.siren}
+        />
       )}
       {estSocieteMission && (
-        <InformationTooltip label="Cette structure est une société à mission">
-          <LabelAndCertificateBadge label="Société à mission" />
-        </InformationTooltip>
+        <LabelWithLinkToSection
+          informationTooltipLabel="Cette structure est une société à mission"
+          label="Société à mission"
+          sectionId="societe-a-mission"
+          siren={uniteLegale.siren}
+        />
       )}
       {estOrganismeFormation &&
         (estQualiopi ? (
-          <InformationTooltip label="Cette structure est déclarée en tant qu’organisme de formation et elle est certifiée Qualiopi">
-            <LabelAndCertificateBadge label="Organisme de formation (certifié Qualiopi)" />
-          </InformationTooltip>
+          <LabelWithLinkToSection
+            informationTooltipLabel="Cette structure est déclarée en tant qu’organisme de formation et elle est certifiée Qualiopi"
+            label="Organisme de formation (certifié Qualiopi)"
+            sectionId="organisme-de-formation"
+            siren={uniteLegale.siren}
+          />
         ) : (
-          <InformationTooltip label="Cette structure est déclarée en tant qu’organisme de formation">
-            <LabelAndCertificateBadge label="Organisme de formation" />
-          </InformationTooltip>
+          <LabelWithLinkToSection
+            informationTooltipLabel="Cette structure est déclarée en tant qu’organisme de formation"
+            label="Organisme de formation"
+            sectionId="organisme-de-formation"
+            siren={uniteLegale.siren}
+          />
         ))}
       {estBio && (
-        <InformationTooltip label="Cette structure est un professionnel du Bio">
-          <LabelAndCertificateBadge label="Professionnel du Bio" />
-        </InformationTooltip>
+        <LabelWithLinkToSection
+          label="Professionnel du Bio"
+          informationTooltipLabel="Cette structure est un professionnel du Bio"
+          sectionId="professionnel-du-bio"
+          siren={uniteLegale.siren}
+        />
       )}
       {egaproRenseignee && (
-        <InformationTooltip label="Cette structure a renseigné ses déclarations d’égalité entre les femmes et les hommes">
-          <LabelAndCertificateBadge label="Égalité professionnelle" />
-        </InformationTooltip>
+        <LabelWithLinkToSection
+          label="Égalité professionnelle"
+          informationTooltipLabel="Cette structure a renseigné ses déclarations d’égalité entre les femmes et les hommes"
+          sectionId="egalite-professionnelle"
+          siren={uniteLegale.siren}
+        />
       )}
       {estRge && (
-        <InformationTooltip label="Cette structure est Reconnue Garante de l’Environnement">
-          <LabelAndCertificateBadge label="RGE - Reconnu Garant de l’Environnement" />
-        </InformationTooltip>
+        <LabelWithLinkToSection
+          informationTooltipLabel="Cette structure est Reconnue Garante de l’Environnement"
+          label="RGE - Reconnu Garant de l’Environnement"
+          sectionId="rge"
+          siren={uniteLegale.siren}
+        />
       )}
       {estEntrepreneurSpectacle &&
         (statutEntrepreneurSpectacle !== 'valide' ? (
-          <InformationTooltip label="Cette structure a demandé un récépissé de déclaration d’entrepreneur de spectacles vivants, mais le statut du récépissé n’est pas valide (en cours d’instruction ou invalide)">
-            <LabelAndCertificateBadge label="Entrepreneur de spectacles vivants (pas de récépissé valide)" />
-          </InformationTooltip>
+          <LabelWithLinkToSection
+            informationTooltipLabel="Cette structure a demandé un récépissé de déclaration d’entrepreneur de spectacles vivants, mais le statut du récépissé n’est pas valide (en cours d’instruction ou invalide)"
+            label="Entrepreneur de spectacles vivants (pas de récépissé valide)"
+            sectionId="entrepreneur-spectacles"
+            siren={uniteLegale.siren}
+          />
         ) : (
-          <InformationTooltip label="Cette structure possède un récépissé de déclaration d’entrepreneur de spectacles vivants">
-            <LabelAndCertificateBadge label="Entrepreneur de spectacles vivants" />
-          </InformationTooltip>
+          <LabelWithLinkToSection
+            informationTooltipLabel="Cette structure possède un récépissé de déclaration d’entrepreneur de spectacles vivants"
+            label="Entrepreneur de spectacles vivants"
+            sectionId="entrepreneur-spectacles"
+            siren={uniteLegale.siren}
+          />
         ))}
-      {checkHasLabelsAndCertificates(uniteLegale) && (
-        <>
-          <br />
-          <a href={`/labels-certificats/${uniteLegale.siren}`}>
-            → en savoir plus
-          </a>
-        </>
-      )}
     </>
   );
 };
+
+function LabelWithLinkToSection({
+  label,
+  informationTooltipLabel,
+  sectionId,
+  siren,
+}: {
+  label: string;
+  informationTooltipLabel: string;
+  sectionId: string;
+  siren: string;
+}) {
+  return (
+    <InformationTooltip label={informationTooltipLabel} cursor="pointer">
+      <LabelAndCertificateBadge
+        label={label}
+        link={{
+          href: `/labels-certificats/${siren}#${sectionId}`,
+          'aria-label': `Consulter la section ${label} pour cette structure`,
+        }}
+      />
+    </InformationTooltip>
+  );
+}

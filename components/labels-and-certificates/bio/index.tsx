@@ -23,6 +23,7 @@ export const CertificationsBioSection: React.FC<{
     <DataSection
       title="Professionnel du Bio"
       data={bio}
+      id="professionnel-du-bio"
       sources={[EAdministration.AGENCE_BIO]}
       notFoundInfo={
         <>

@@ -76,17 +76,22 @@ const UniteLegaleSection: React.FC<{
     ['', <br />],
     [
       'Convention(s) collective(s)',
-      conventionsCollectives.length > 0 ? (
-        <>
-          {conventionsCollectives.map((idcc) => (
+      conventionsCollectives.length > 0
+        ? conventionsCollectives.map((idcc) => (
             <React.Fragment key={idcc}>
-              {<Tag>IDCC {idcc}</Tag>}
-              <br />
+              {
+                <Tag
+                  link={{
+                    href: `/divers/${uniteLegale.siren}#idcc-${idcc}`,
+                    'aria-label': `Consulter les convention collectives de l'unité légale, dont l'IDCC ${idcc}`,
+                  }}
+                >
+                  IDCC {idcc}
+                </Tag>
+              }
             </React.Fragment>
-          ))}
-          <a href={`/divers/${uniteLegale.siren}`}>→ en savoir plus</a>
-        </>
-      ) : null,
+          ))
+        : null,
     ],
     // jump line and add label and certificates
     ...(hasLabelsAndCertificates

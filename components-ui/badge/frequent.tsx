@@ -7,6 +7,7 @@ export const LabelAndCertificateBadge = ({
   isSelected = false,
   onClick,
   label,
+  link,
 }: IPartialBadgeProps) => (
   <Badge
     label={label}
@@ -14,6 +15,7 @@ export const LabelAndCertificateBadge = ({
     onClick={onClick}
     isSelected={isSelected}
     small={small}
+    link={link}
     fontColor={constants.colors.frBlue}
     backgroundColor="#ddd"
   />

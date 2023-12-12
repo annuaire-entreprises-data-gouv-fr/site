@@ -19,6 +19,7 @@ const InformationTooltip: React.FC<
     width?: number;
     inlineBlock?: boolean;
     left?: string;
+    cursor?: 'help' | 'pointer' | 'auto';
   }>
 > = ({
   children,
@@ -27,6 +28,7 @@ const InformationTooltip: React.FC<
   width = 250,
   inlineBlock = true,
   left = '',
+  cursor = 'help',
 }) => (
   <>
     <span className="wrapper">
@@ -35,12 +37,13 @@ const InformationTooltip: React.FC<
     </span>
     <style jsx>{`
       .wrapper {
-        cursor: help;
+        cursor: ${cursor};
         position: relative;
         display: ${inlineBlock ? 'inline-block' : 'block'};
       }
 
       .wrapper .tooltip {
+        cursor: help;
         font-size: 0.9rem;
         background: #444;
         border-radius: 5px;
@@ -99,7 +102,8 @@ const InformationTooltip: React.FC<
         right: 0;
       }
 
-      .wrapper:hover .tooltip {
+      .wrapper:hover .tooltip,
+      .wrapper:focus-within .tooltip {
         visibility: visible;
         pointer-events: auto;
       }

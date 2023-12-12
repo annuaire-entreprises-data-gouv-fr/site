@@ -15,6 +15,7 @@ export const EgaproSection: React.FC<{
 
   return (
     <DataSection
+      id="egalite-professionnelle"
       notFoundInfo={
         <>
           Nous n’avons pas retrouvé d’
