@@ -1,4 +1,3 @@
-import React from 'react';
 import Info from '#components-ui/alerts/info';
 import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
@@ -65,14 +64,19 @@ const Budget: NextPageWithLayout = () => (
       </ul>
       <p>Répartition des dépenses effectuées :</p>
       <FullTable
-        head={['Poste de dépense', '2021', '2022']}
+        head={['Poste de dépense', '2021', '2022', '2023']}
         body={[
-          ['Développement', '165 000 €', '193 000 €'],
-          ['Déploiement', '5 000 €', '78 000 €'],
-          ['Design', '25 000 €', '24 000 €'],
-          ['Logiciels', '-', '12 000 €'],
-          ['Hébergement', '1000 €', '3000 €'],
-          [<b>Total TTC</b>, <b>196 000 €</b>, <b>310 000 €</b>],
+          ['Développement', '165 000 €', '213 000 €', '375 000 €'],
+          ['Déploiement', '5 000 €', '98 000 €', '157 000 €'],
+          ['Design', '25 000 €', '25 000 €', '43 000 €'],
+          ['Logiciels', '-', '12 000 €', '12 000 €'],
+          ['Hébergement', '1000 €', '3000 €', '3000 €'],
+          [
+            <b>Total TTC</b>,
+            <b>196 000 €</b>,
+            <b>350 000 €</b>,
+            <b>590 000 €</b>,
+          ],
         ]}
       ></FullTable>
       <br />
