@@ -33,12 +33,7 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
         // We dont log errors, as they are already logged in the backend
         tvaContainer.setError();
         if (e instanceof TypeError) {
-          throw new new FetchRessourceException({
-            ressource: 'VerifyTVA',
-            cause: e,
-            context: { siren },
-            administration: EAdministration.VIES,
-          })();
+          throw e;
         }
       });
   }
