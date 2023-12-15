@@ -12,6 +12,8 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
       return;
     }
 
+    tvaContainer.setStarted();
+
     const siren = extractSirenSlugFromUrl(window.location.pathname || '');
 
     fetch(`/api/data-fetching/verify-tva/${siren}`)
