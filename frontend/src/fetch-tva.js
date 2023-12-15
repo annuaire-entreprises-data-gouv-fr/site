@@ -7,7 +7,10 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
 (function TVA() {
   const tvaContainer = FrontStateMachineFactory('tva-cell-wrapper');
   if (tvaContainer.exists) {
-    tvaContainer.setStarted();
+    if (Math.random() > 0.25) {
+      tvaContainer.setError();
+      return;
+    }
 
     const siren = extractSirenSlugFromUrl(window.location.pathname || '');
 
