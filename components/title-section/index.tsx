@@ -1,5 +1,4 @@
 import React from 'react';
-import AssociationAdressAlert from '#components-ui/alerts/association-adress';
 import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
 import NonDiffusibleAlert from '#components-ui/alerts/non-diffusible';
 import ProtectedData from '#components-ui/alerts/protected-data';
@@ -10,15 +9,15 @@ import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
-import { isAssociation, IUniteLegale } from '#models/index';
+import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
+import { IUniteLegale } from '#models/index';
 import {
   estDiffusible,
   estNonDiffusible,
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
-import { isAgent, ISession } from '#utils/session';
-import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
+import { ISession, isAgent } from '#utils/session';
 import { FICHE, Tabs } from './tabs';
 
 type IProps = {
@@ -68,9 +67,6 @@ const Title: React.FC<IProps> = ({
         </>
       )}
       <MultipleSirenAlert uniteLegale={uniteLegale} />
-      {isAssociation(uniteLegale) && (
-        <AssociationAdressAlert uniteLegale={uniteLegale} session={session} />
-      )}
       <h1>
         <a href={`/entreprise/${uniteLegale.chemin}`}>
           {getNomComplet(uniteLegale, session)}

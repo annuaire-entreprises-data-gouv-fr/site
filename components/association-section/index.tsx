@@ -1,4 +1,5 @@
 import React from 'react';
+import AssociationAdressAlert from '#components-ui/alerts/association-adress';
 import Warning from '#components-ui/alerts/warning';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
@@ -7,6 +8,7 @@ import { Section } from '#components/section';
 import { DataSection } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IAssociation, IDataAssociation } from '#models/index';
 import { IdRna, formatDate, formatIntFr } from '#utils/helpers';
 import { isTwoMonthOld } from '#utils/helpers/checks';
@@ -37,14 +39,14 @@ const AssociationNotFound: React.FC<{
 
 export default function AssociationSection({
   uniteLegale,
+  association,
 }: {
   uniteLegale: IAssociation;
+  association: IDataAssociation | IAPINotRespondingError | null;
 }) {
-  const {
-    association: { idAssociation = '', data },
-  } = uniteLegale;
+  const { idAssociation = '' } = uniteLegale.association;
 
-  if (!data) {
+  if (!association) {
     // Data can be null if the natureJuridique is an association,
     // but no idAssociation is provided by Insee API call.
     return (
@@ -62,19 +64,21 @@ export default function AssociationSection({
       <DataSection
         title="Répertoire National des Associations"
         sources={[EAdministration.MI]}
-        data={data}
+        data={association}
         notFoundInfo={<AssociationNotFound uniteLegale={uniteLegale} />}
       >
-        {(data) => (
+        {(association) => (
           <>
+            <AssociationAdressAlert
+              uniteLegale={uniteLegale}
+              association={association}
+            />
             <p>
               Cette structure est inscrite au{' '}
               <b>Répertoire National des Associations (RNA)</b>, avec les
               informations suivantes&nbsp;:
             </p>
-            <TwoColumnTable
-              body={getTableData(uniteLegale.association.idAssociation, data)}
-            />
+            <TwoColumnTable body={getTableData(idAssociation, association)} />
             {idAssociation && (
               <>
                 <br />

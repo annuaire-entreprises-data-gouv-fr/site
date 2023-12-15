@@ -7,7 +7,6 @@ import { IETATADMINSTRATIF } from '#models/etat-administratif';
 import { IEtatCivil } from '#models/immatriculation';
 import { IdRna, Siren, Siret } from '#utils/helpers';
 import { EAdministration } from './administrations/EAdministration';
-import { IAPINotRespondingError } from './api-not-responding';
 import { IConventionsCollectives } from './conventions-collectives-list';
 import {
   Exception,
@@ -105,7 +104,6 @@ export interface IUniteLegale extends IEtablissementsList {
   complements: IUniteLegaleComplements;
   association: {
     idAssociation: IdRna | string | null;
-    data: IAPINotRespondingError | IDataAssociation | null;
   };
   colter: {
     codeColter: string | null;
@@ -142,7 +140,6 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     complements: createDefaultUniteLegaleComplements(),
     association: {
       idAssociation: null,
-      data: null,
     },
     colter: {
       codeColter: null,
@@ -190,7 +187,6 @@ export const createDefaultUniteLegaleComplements = () => {
 export interface IAssociation extends Omit<IUniteLegale, 'association'> {
   association: {
     idAssociation: IdRna | string;
-    data: IUniteLegale['association']['data'];
   };
 }
 

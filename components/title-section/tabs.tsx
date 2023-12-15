@@ -3,11 +3,9 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from '#components/labels-and-certificates-badges-section';
-import { isAPINotResponding } from '#models/api-not-responding';
 import constants from '#models/constants';
 import {
   IUniteLegale,
-  isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/index';
@@ -38,14 +36,7 @@ export const Tabs: React.FC<{
     // hide for public services
     !isServicePublic(uniteLegale) &&
     // hide for EI
-    !uniteLegale.complements.estEntrepreneurIndividuel &&
-    // hide for asso without bilans
-    !(
-      isAssociation(uniteLegale) &&
-      (!uniteLegale.association.data ||
-        isAPINotResponding(uniteLegale.association.data) ||
-        (uniteLegale.association.data?.bilans || []).length === 0)
-    );
+    !uniteLegale.complements.estEntrepreneurIndividuel;
 
   const tabs = [
     {

@@ -214,7 +214,6 @@ const mapToDomainObject = (
     },
     association: {
       idAssociation: identifiantAssociationUniteLegale || null,
-      data: null,
     },
   };
 };
