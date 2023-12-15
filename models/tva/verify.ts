@@ -2,7 +2,7 @@ import { TVAUserException, clientTVA } from '#clients/api-vies';
 import { HttpConnectionReset } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException, IExceptionContext } from '#models/exceptions';
-import { verifySiren } from '#utils/helpers';
+import { verifySiren, verifyTVANumber } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
 import { tvaNumber } from './utils';
 
@@ -10,7 +10,7 @@ export const buildAndVerifyTVA = async (
   slug: string
 ): Promise<string | null> => {
   const siren = verifySiren(slug);
-  const tvaNumberFromSiren = tvaNumber(siren);
+  const tvaNumberFromSiren = verifyTVANumber(tvaNumber(siren));
 
   try {
     return await clientTVA(tvaNumberFromSiren);

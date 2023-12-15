@@ -1,4 +1,5 @@
 import { clientTVA } from '#clients/api-vies';
+import { TVANumber } from '#utils/helpers';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 
 describe('clientTVA', () => {
@@ -14,7 +15,7 @@ describe('clientTVA', () => {
     for (let arg of testValues) {
       await expectClientToMatchSnapshot({
         client: clientTVA,
-        args: [arg],
+        args: [arg as TVANumber],
         __dirname,
         snaphotFile: `tva-${arg}.json`,
       });
