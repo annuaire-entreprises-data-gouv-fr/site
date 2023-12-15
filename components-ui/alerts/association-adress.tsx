@@ -21,7 +21,7 @@ const AssociationAdressAlert: React.FC<{
 
   return (
     <>
-      {true && (
+      {adresseInconsistency && (
         <Warning full>
           L’adresse déclarée auprès du <MI /> (en préfecture){' '}
           <b>est différente</b> de celle déclarée auprès de l’
