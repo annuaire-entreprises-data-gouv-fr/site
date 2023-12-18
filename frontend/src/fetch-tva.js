@@ -5,10 +5,10 @@ import FrontStateMachineFactory from './front-state-machine';
 import { extractSirenSlugFromUrl, formatIntFr } from './utils';
 
 (function TVA() {
-  const logTVA = (isValid) => {
+  const logTVA = (siren, isValid) => {
     try {
       var _paq = window._paq || [];
-      _paq.push(['trackEvent', 'tva', isValid ? 'valid' : 'invalid']);
+      _paq.push(['trackEvent', 'tva', isValid ? 'valid' : 'invalid', siren]);
     } catch {}
   };
 
@@ -37,7 +37,7 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
         }
 
         if (Math.random() < 0.01) {
-          logTVA(!!tva);
+          logTVA(siren, !!tva);
         }
       })
       .catch((e) => {
