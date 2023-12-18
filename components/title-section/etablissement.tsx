@@ -15,8 +15,12 @@ import {
   getEtablissementName,
   getNomComplet,
 } from '#models/statut-diffusion';
-import { formatIntFr, formatSiret } from '#utils/helpers';
-import { getCompanyLabel, getCompanyPronoun } from '#utils/helpers';
+import {
+  formatIntFr,
+  formatSiret,
+  getCompanyLabel,
+  getCompanyPronoun,
+} from '#utils/helpers';
 import { ISession, isAgent } from '#utils/session';
 import { INSEE } from '../administrations';
 import { FICHE, Tabs } from './tabs';
@@ -104,7 +108,9 @@ const TitleEtablissementWithDenomination: React.FC<{
     </h1>
 
     <div className="etablissement-sub-title">
-      <span className="siret-or-siren">{formatSiret(etablissement.siret)}</span>
+      <span className="siret-or-siren">
+        {formatSiret(etablissement.siret)}&nbsp;
+      </span>
       {estNonDiffusible(etablissement) && <Tag color="new">non-diffusible</Tag>}
       <IsActiveTag
         etatAdministratif={etablissement.etatAdministratif}
@@ -204,4 +210,4 @@ const TitleEtablissementWithDenomination: React.FC<{
   </div>
 );
 
-export { TitleEtablissementWithDenomination, MapTitleEtablissement };
+export { MapTitleEtablissement, TitleEtablissementWithDenomination };

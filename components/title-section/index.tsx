@@ -10,6 +10,7 @@ import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
+import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
 import { isAssociation, IUniteLegale } from '#models/index';
 import {
   estDiffusible,
@@ -18,7 +19,6 @@ import {
 } from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
 import { isAgent, ISession } from '#utils/session';
-import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
 import { FICHE, Tabs } from './tabs';
 
 type IProps = {
@@ -79,7 +79,7 @@ const Title: React.FC<IProps> = ({
       <div className="unite-legale-sub-title">
         <UniteLegaleBadge uniteLegale={uniteLegale} />
         <span className="siren">
-          &nbsp;‣&nbsp;{formatIntFr(uniteLegale.siren)}
+          &nbsp;‣&nbsp;{formatIntFr(uniteLegale.siren)}&nbsp;
         </span>
         <span>
           {!estDiffusible(uniteLegale) && <Tag color="new">non-diffusible</Tag>}

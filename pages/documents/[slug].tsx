@@ -40,13 +40,13 @@ const UniteLegaleForAgentPage: NextPageWithLayout<IProps> = ({
         ficheType={FICHE.DOCUMENTS}
         session={session}
       />
-      {isAgent(session) && <ActesSection uniteLegale={uniteLegale} />}
       {isSuperAgent(session) && (
         <>
-          <HorizontalSeparator />
           <ConformiteSection uniteLegale={uniteLegale} />
+          <HorizontalSeparator />
         </>
       )}
+      {isAgent(session) && <ActesSection uniteLegale={uniteLegale} />}
     </div>
   </>
 );
