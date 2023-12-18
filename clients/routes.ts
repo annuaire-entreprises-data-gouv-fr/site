@@ -17,7 +17,6 @@ const routes = {
       msa: '/v3/msa/etablissements/',
     },
   },
-  tva: 'https://ec.europa.eu/taxation_customs/vies/rest-api/ms/FR/vat/',
   ban: 'https://api-adresse.data.gouv.fr/search/?q=',
   bodacc: {
     ods: {
@@ -126,6 +125,7 @@ const routes = {
     },
     association:
       'https://annuaire-entreprises-api-proxy.api.gouv.fr/association/',
+    tva: 'https://annuaire-entreprises-api-proxy.api.gouv.fr/tva/',
   },
   rne: {
     portail: {

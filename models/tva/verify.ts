@@ -14,27 +14,22 @@ export const buildAndVerifyTVA = async (
 
   try {
     return await clientTVA(tvaNumberFromSiren);
-  } catch (eFirstTry: any) {
-    if (eFirstTry instanceof TVAUserException) {
-      throw eFirstTry;
+  } catch (e: any) {
+    if (e instanceof TVAUserException) {
+      throw e;
     }
-    // retry once as VIES randomely reset connection
-    try {
-      const message =
-        eFirstTry instanceof HttpConnectionReset
-          ? 'ECONNRESET in API TVA : retrying'
-          : 'Error in API TVA : retrying';
-      logWarningInSentry(
-        new FetchVerifyTVAException({
-          message,
-          cause: eFirstTry,
-          context: { siren },
-        })
-      );
-      return await clientTVA(tvaNumberFromSiren);
-    } catch (eFallback: any) {
-      throw eFallback;
-    }
+    const message =
+      e instanceof HttpConnectionReset
+        ? 'ECONNRESET in API TVA'
+        : 'Error in API TVA';
+    logWarningInSentry(
+      new FetchVerifyTVAException({
+        message,
+        cause: e,
+        context: { siren },
+      })
+    );
+    throw e;
   }
 };
 

@@ -18,6 +18,7 @@ const ping = async (slug: string | string[]) => {
   const sirenDanone = verifySiren('552032534');
 
   const useCache = false;
+
   switch (slug) {
     case 'api-proxy-rne':
       // fetch IRM and disable cache
