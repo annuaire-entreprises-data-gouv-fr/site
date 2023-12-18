@@ -27,14 +27,14 @@
       {
         "nom": "Wahl",
         "prenom": "PHILIPPE",
-        "role": "",
+        "role": "Président",
         "dateNaissancePartial": "1956-03",
         "dateNaissanceFull": ""
       },
       {
-        "nom": "Richarte",
+        "nom": "de Bailliencourt dit Courcol (Richarte)",
         "prenom": "MARIE-PIERRE",
-        "role": "",
+        "role": "Administrateur",
         "dateNaissancePartial": "1970-02",
         "dateNaissanceFull": ""
       },
@@ -53,21 +53,21 @@
       {
         "nom": "Lemoine",
         "prenom": "PHILIPPE",
-        "role": "",
+        "role": "Administrateur",
         "dateNaissancePartial": "1949-11",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Lejbowicz",
         "prenom": "CORINNE",
-        "role": "",
+        "role": "Administrateur",
         "dateNaissancePartial": "1960-04",
         "dateNaissanceFull": ""
       },
       {
-        "nom": "Mairot",
+        "nom": "Malrieu (Mairot)",
         "prenom": "FRANCOISE",
-        "role": "",
+        "role": "Administrateur",
         "dateNaissancePartial": "1946-02",
         "dateNaissanceFull": ""
       },
@@ -79,99 +79,99 @@
       },
       {
         "nom": "Georghiou",
-        "prenom": "JEAN",
-        "role": "",
+        "prenom": "JEAN, CHRISTOPHE",
+        "role": "Commissaire aux comptes suppléant",
         "dateNaissancePartial": "1965-05",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Reis",
         "prenom": "HUGO",
-        "role": "",
+        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1972-03",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Sichel",
         "prenom": "OLIVIER",
-        "role": "",
+        "role": "Administrateur",
         "dateNaissancePartial": "1967-04",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Neves Da Rocha",
-        "prenom": "RUBEN",
-        "role": "",
+        "prenom": "RUBEN, JOSE",
+        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1974-06",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Gervais",
         "prenom": "FRANCK",
-        "role": "",
+        "role": "Administrateur",
         "dateNaissancePartial": "1976-12",
         "dateNaissanceFull": ""
       },
       {
-        "nom": "Mayenobe",
+        "nom": "Establie (Mayenobe)",
         "prenom": "CATHERINE",
-        "role": "",
+        "role": "Administrateur",
         "dateNaissancePartial": "1964-10",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Mareuse",
         "prenom": "OLIVIER",
-        "role": "",
+        "role": "Administrateur",
         "dateNaissancePartial": "1963-10",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Waysand",
         "prenom": "CLAIRE",
-        "role": "",
+        "role": "Administrateur",
         "dateNaissancePartial": "1969-07",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Chevet-Dehail",
         "prenom": "STEPHANE",
-        "role": "",
+        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1975-06",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Joseph",
         "prenom": "SYLVIE",
-        "role": "",
+        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1961-07",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Baudry",
         "prenom": "IRENE",
-        "role": "",
+        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1976-05",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Haspot",
         "prenom": "FRANCK",
-        "role": "",
+        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1967-10",
         "dateNaissanceFull": ""
       },
       {
-        "nom": "Legain",
+        "nom": "Fleurence (Legain)",
         "prenom": "ISABELLE",
-        "role": "",
+        "role": "Administrateur représentant du personnel",
         "dateNaissancePartial": "1964-09",
         "dateNaissanceFull": ""
       },
       {
         "nom": "Saintoyant",
         "prenom": "ANTOINE",
-        "role": "",
+        "role": "Administrateur",
         "dateNaissancePartial": "1977-08",
         "dateNaissanceFull": ""
       },
@@ -182,9 +182,9 @@
         "role": "Commissaire aux comptes titulaire"
       },
       {
-        "nom": "Spanagle",
+        "nom": "b (Spanagle)",
         "prenom": "NATHALIE",
-        "role": "",
+        "role": "Administrateur",
         "dateNaissancePartial": "1967-10",
         "dateNaissanceFull": ""
       }
