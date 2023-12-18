@@ -33,7 +33,7 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
         // We dont log errors, as they are already logged in the backend
         tvaContainer.setError();
         if (e instanceof TypeError) {
-          throw e;
+          throw new Error("Client error while fetching TVA", {cause : e});
         }
       });
   }
