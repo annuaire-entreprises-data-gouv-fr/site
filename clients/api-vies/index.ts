@@ -1,5 +1,6 @@
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
+import { TVANumber } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 
 type IVIESResponse = {
@@ -35,13 +36,14 @@ export class TVAUserException extends Error {
     this.name = 'TVAUserException';
   }
 }
+
 /**
  * Call VIES to validate a French TVA number
  * @param tva
  * @returns TVA number if valid else null
  */
 const clientTVA = async (
-  tva: string,
+  tva: TVANumber,
   useCache = true
 ): Promise<string | null> => {
   const url = `${routes.tva}${tva}`;

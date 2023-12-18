@@ -1,8 +1,8 @@
 import { clientIdccMetadata } from '#clients/recherche-entreprise/idcc-metadata';
-import logErrorInSentry from '#utils/sentry';
+import logErrorInSentry, { logInfoInSentry } from '#utils/sentry';
 import { EAdministration } from './administrations/EAdministration';
 import { APINotRespondingFactory } from './api-not-responding';
-import { FetchRessourceException } from './exceptions';
+import { FetchRessourceException, Information } from './exceptions';
 
 export type IConventionsCollectives = {
   [idcc: string]: string[];
@@ -18,13 +18,34 @@ export type ICCWithMetadata = {
   idcc?: string;
 };
 
+const unknonwCC = {
+  idKali: '',
+  legifrance: '',
+  title:
+    'Cette convention collective n’apparait pas dans la nomenclature officielle du ministère du travail.',
+  nature: 'Convention collective inconnue',
+  etat: '',
+  idcc: '',
+};
+
 export const getCCMetadata = async (cc: IConventionsCollectives) => {
   try {
     const metadata = [] as ICCWithMetadata[];
     for (let [idcc, sirets] of Object.entries(cc)) {
+      const idccMetadata = await clientIdccMetadata(idcc);
+
+      if (!idccMetadata) {
+        logInfoInSentry(
+          new Information({
+            name: 'UnknownConventionCollective',
+            message: `Convention Collective inconnue : ${idcc}`,
+          })
+        );
+      }
+
       metadata.push({
         sirets,
-        ...(await clientIdccMetadata(idcc)),
+        ...(idccMetadata || { ...unknonwCC, idcc }),
       });
     }
     return metadata;
@@ -34,7 +55,7 @@ export const getCCMetadata = async (cc: IConventionsCollectives) => {
         cause: e,
         ressource: 'Convention Collective',
         context: {
-          details: Object.keys(cc).join(''),
+          details: Object.keys(cc).join(', '),
         },
       })
     );

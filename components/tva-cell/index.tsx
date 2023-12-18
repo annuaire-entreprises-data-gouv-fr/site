@@ -6,6 +6,7 @@ import { Loader } from '#components-ui/loader';
 import FrontStateMachine from '#components/front-state-machine';
 import { CopyPaste } from '#components/table/simple';
 import { ITVAIntracommunautaire } from '#models/tva';
+import { formatIntFr } from '#utils/helpers';
 
 const NoTVA = () => <i>Non-assujetti à la TVA</i>;
 
@@ -104,7 +105,7 @@ const TVACell: React.FC<{
             left="5px"
           >
             <Icon slug="errorFill" color="#df0a00">
-              <CopyCell number={`FR${number}`} />
+              <CopyCell number={`FR${formatIntFr(number)}`} />
             </Icon>
           </InformationTooltip>
         </>,

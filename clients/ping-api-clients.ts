@@ -1,5 +1,6 @@
 import { clientAssociation } from '#clients/api-proxy/association';
-import { verifyIdRna, verifySiren } from '#utils/helpers';
+import { tvaNumber } from '#models/tva/utils';
+import { verifyIdRna, verifySiren, verifyTVANumber } from '#utils/helpers';
 import { fetchRNEImmatriculation } from './api-proxy/rne';
 import { clientTVA } from './api-vies';
 import clientSearchRechercheEntreprise from './recherche-entreprise';
@@ -13,25 +14,26 @@ export class APISlugNotFound extends Error {
 }
 
 const ping = async (slug: string | string[]) => {
+  const sirenGanymede = verifySiren('880878145');
+  const sirenDanone = verifySiren('552032534');
+
   const useCache = false;
   switch (slug) {
     case 'api-proxy-rne':
       // fetch IRM and disable cache
-      return await fetchRNEImmatriculation(verifySiren('552032534'), useCache);
+      return await fetchRNEImmatriculation(sirenDanone, useCache);
     case 'api-sirene-insee':
-      return await clientUniteLegaleInsee(verifySiren('880878145'), {
+      return await clientUniteLegaleInsee(sirenGanymede, {
         useCache,
         useFallback: false,
       });
     case 'api-sirene-donnees-ouvertes':
-      return await clientUniteLegaleRechercheEntreprise(
-        verifySiren('880878145'),
-        1
-      );
+      return await clientUniteLegaleRechercheEntreprise(sirenGanymede, 1);
     case 'api-association':
       return await clientAssociation(verifyIdRna('W551000280'), '', useCache);
     case 'api-tva':
-      return await clientTVA(verifySiren('880878145'), useCache);
+      const tva = verifyTVANumber(tvaNumber(sirenDanone));
+      return await clientTVA(tva, useCache);
     case 'api-recherche':
       return await clientSearchRechercheEntreprise({
         searchTerms: 'test',

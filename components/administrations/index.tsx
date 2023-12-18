@@ -19,7 +19,7 @@ export const ADEME = ({ queryString = '' }) => (
 export const INPI = ({ queryString = '' }) => (
   <a
     href={`/administration/inpi${queryString}`}
-    title="Institut National de la Propriété Intellectuelle"
+    title="Institut National de la Propriété Industrielle"
   >
     INPI
   </a>

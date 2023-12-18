@@ -3,7 +3,19 @@ import {
   isLuhnValid,
   isSiren,
   isSiret,
+  isTVANumber,
 } from './siren-and-siret';
+
+describe('Check isTVA', () => {
+  test('Succeed with valid tva', () => {
+    expect(isTVANumber('74722003936')).toBe(true);
+  });
+
+  test('Fails with invalid tva', () => {
+    expect(isSiren('747220039E6')).toBe(false);
+    expect(isTVANumber('356000000')).toBe(false);
+  });
+});
 
 describe('Check isSiren', () => {
   test('Succeed with valid siren', () => {

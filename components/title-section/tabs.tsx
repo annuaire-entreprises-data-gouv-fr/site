@@ -9,7 +9,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/index';
-import { ISession, isSuperAgent } from '#utils/session';
+import { ISession, isAgent } from '#utils/session';
 
 export enum FICHE {
   INFORMATION = 'résumé',
@@ -73,7 +73,7 @@ export const Tabs: React.FC<{
       label: 'Documents',
       pathPrefix: '/documents/',
       noFollow: false,
-      shouldDisplay: isSuperAgent(session),
+      shouldDisplay: isAgent(session),
       width: '110px',
     },
     {

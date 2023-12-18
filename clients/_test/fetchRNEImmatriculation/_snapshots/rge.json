@@ -19,16 +19,16 @@
     },
     "dirigeants": [
       {
-        "nom": "LEVY",
+        "nom": "LEVY (LEVY)",
         "prenom": "ILAN",
-        "role": "",
+        "role": "Directeur général délégué",
         "dateNaissancePartial": "1981-10",
         "dateNaissanceFull": ""
       },
       {
         "nom": "SABBAN",
         "prenom": "GILLES",
-        "role": "",
+        "role": "Gérant",
         "dateNaissancePartial": "1965-09",
         "dateNaissanceFull": ""
       },
@@ -42,7 +42,7 @@
         "siren": "",
         "denomination": "GROUPE SOLUTION ENERGIE",
         "natureJuridique": "5710",
-        "role": null
+        "role": "Autre"
       }
     ],
     "beneficiaires": [

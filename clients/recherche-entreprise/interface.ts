@@ -28,6 +28,7 @@ export type IResult = {
   matching_etablissements: IMatchingEtablissement[];
   etablissements?: IMatchingEtablissement[];
   complements: IComplements;
+  caractere_employeur: string;
   slug: string;
 };
 
@@ -67,6 +68,7 @@ export type ISiege = {
   type_voie: string;
   siret: string;
   tranche_effectif_salarie: string;
+  caractere_employeur: string;
   annee_tranche_effectif_salarie: string;
 };
 
@@ -102,6 +104,7 @@ export type IMatchingEtablissement = {
   date_creation: string;
   date_debut_activite: string;
   tranche_effectif_salarie: string;
+  caractere_employeur: string;
   annee_tranche_effectif_salarie: string;
 };
 

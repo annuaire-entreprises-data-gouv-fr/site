@@ -1,6 +1,6 @@
 slug: inpi
 short: INPI
-long: Institut National de la Propriété Intellectuelle (INPI)
+long: Institut National de la Propriété Industrielle (INPI)
 site: https://www.inpi.fr/
 logoType: portrait
 contact: https://www.inpi.fr/fr/contactez-nous?about=030
@@ -36,4 +36,4 @@ dataSources:
           - entreprise
           - independant
 description: |
-  L’INPI est l’Institut National de la Protection Intellectuelle. C’est un établissement public à caractère administratif,  qui relève du ministère de l’Économie.
+  L’INPI est l’Institut National de la Protection Industrielle. C’est un établissement public à caractère administratif,  qui relève du ministère de l’Économie.

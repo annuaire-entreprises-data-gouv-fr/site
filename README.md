@@ -12,8 +12,6 @@ Ce site met à disposition des citoyens et des agents les données ouvertes (ope
 [![External API check](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml)
 [![SEO](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/seo.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/seo.yml)
 [![Deploy](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy.yml)
-![Page entreprise](https://img.shields.io/uptimerobot/status/m787859483-e754b64b78a0c30eea102880?label=Page%20entreprise&logo=Page%20entreprise)
-![Recherche](https://img.shields.io/uptimerobot/status/m787859512-adcc5cd05674366504f96c86?label=Recherche&logo=Page%20entreprise)
 
 **Disponibilités des APIs utilisées par le site :**
 

@@ -151,6 +151,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     date_mise_a_jour = '',
     statut_diffusion = 'O',
     etablissements = [],
+    caractere_employeur = '',
   } = result;
 
   const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
@@ -208,7 +209,10 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     libelleNatureJuridique: libelleFromCategoriesJuridiques(nature_juridique),
     categorieEntreprise: categorie_entreprise,
     anneeCategorieEntreprise: annee_categorie_entreprise,
-    trancheEffectif: tranche_effectif_salarie,
+    trancheEffectif:
+      caractere_employeur === 'N'
+        ? caractere_employeur
+        : tranche_effectif_salarie,
     anneeTrancheEffectif: annee_tranche_effectif_salarie,
     chemin: result.slug || result.siren,
     natureJuridique: nature_juridique || '',
@@ -303,7 +307,6 @@ const mapToEtablissement = (
     siret,
     latitude = '0',
     longitude = '0',
-    commune = '',
     code_postal = '',
     libelle_commune = '',
     adresse,
@@ -315,6 +318,7 @@ const mapToEtablissement = (
     date_creation = '',
     date_debut_activite = '',
     tranche_effectif_salarie = '',
+    caractere_employeur = '',
     annee_tranche_effectif_salarie = '',
   } = etablissement;
 
@@ -341,7 +345,10 @@ const mapToEtablissement = (
     codePostal: code_postal,
     commune: libelle_commune,
     adressePostale,
-    trancheEffectif: tranche_effectif_salarie,
+    trancheEffectif:
+      caractere_employeur === 'N'
+        ? caractere_employeur
+        : tranche_effectif_salarie,
     anneeTrancheEffectif: annee_tranche_effectif_salarie,
     latitude,
     longitude,
