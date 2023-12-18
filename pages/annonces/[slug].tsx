@@ -43,8 +43,8 @@ const Annonces: NextPageWithLayout<IProps> = ({
         <AnnoncesBodacc uniteLegale={uniteLegale} />
         {isAssociation(uniteLegale) && (
           <>
-            <AnnoncesAssociationSection association={uniteLegale} />
-            <ComptesAssociationSection association={uniteLegale} />
+            <AnnoncesAssociationSection uniteLegale={uniteLegale} />
+            <ComptesAssociationSection uniteLegale={uniteLegale} />
           </>
         )}
       </div>

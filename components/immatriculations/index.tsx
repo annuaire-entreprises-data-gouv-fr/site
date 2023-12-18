@@ -56,7 +56,7 @@ const Immatriculations: React.FC<IProps> = ({
         <>
           {isAssociation(uniteLegale) ? (
             <>
-              <AssociationCreationNotFoundAlert association={uniteLegale} />
+              <AssociationCreationNotFoundAlert uniteLegale={uniteLegale} />
               <br />
             </>
           ) : isServicePublic(uniteLegale) ? null : (

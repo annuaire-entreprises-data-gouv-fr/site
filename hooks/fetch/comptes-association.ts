@@ -6,9 +6,9 @@ import { IdRna } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { useFetchData } from './use-fetch-data';
 
-export const useFetchComptesAssociation = (association: IAssociation) => {
-  const idRna = association.association.idAssociation as IdRna;
-  const siren = association.siren;
+export const useFetchComptesAssociation = (uniteLegale: IAssociation) => {
+  const idRna = uniteLegale.association.idAssociation as IdRna;
+  const siren = uniteLegale.siren;
   return useFetchData(
     {
       fetchData: () => clientDCA(siren, idRna as IdRna),
@@ -29,6 +29,6 @@ export const useFetchComptesAssociation = (association: IAssociation) => {
         logErrorInSentry(exception);
       },
     },
-    [association]
+    [uniteLegale]
   );
 };
