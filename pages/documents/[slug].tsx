@@ -42,8 +42,8 @@ const UniteLegaleForAgentPage: NextPageWithLayout<IProps> = ({
       />
       {isSuperAgent(session) && (
         <>
-          <HorizontalSeparator />
           <ConformiteSection uniteLegale={uniteLegale} />
+          <HorizontalSeparator />
         </>
       )}
       {isAgent(session) && <ActesSection uniteLegale={uniteLegale} />}
