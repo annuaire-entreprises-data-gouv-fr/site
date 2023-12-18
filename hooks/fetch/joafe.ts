@@ -6,8 +6,8 @@ import { IdRna } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { useFetchData } from './use-fetch-data';
 
-export const useFetchJOAFE = (association: IAssociation) => {
-  const idRna = association.association.idAssociation as IdRna;
+export const useFetchJOAFE = (uniteLegale: IAssociation) => {
+  const idRna = uniteLegale.association.idAssociation as IdRna;
 
   return useFetchData(
     {
@@ -23,7 +23,7 @@ export const useFetchJOAFE = (association: IAssociation) => {
           cause: e,
           context: {
             idRna,
-            siren: association.siren,
+            siren: uniteLegale.siren,
           },
         });
         logErrorInSentry(exception);

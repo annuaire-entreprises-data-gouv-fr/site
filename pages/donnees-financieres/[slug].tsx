@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import DocumentBilansSection from '#components/espace-agent-components/documents/bilans';
-import { FinancesAssociationSection } from '#components/finances-section/association';
 import { FinancesSocieteSection } from '#components/finances-section/societe';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
@@ -41,9 +40,8 @@ const FinancePage: NextPageWithLayout<IProps> = ({
           uniteLegale={uniteLegale}
           session={session}
         />
-        {isAssociation(uniteLegale) ? (
-          <FinancesAssociationSection association={uniteLegale} />
-        ) : isServicePublic(uniteLegale) ? null : (
+        {/* We use to have finances for association but data disappeared from open data API. Code still exists in <FinancesAssociationSection /> */}
+        {isAssociation(uniteLegale) || isServicePublic(uniteLegale) ? null : (
           <>
             <FinancesSocieteSection uniteLegale={uniteLegale} />
             {isAgent(session) && (

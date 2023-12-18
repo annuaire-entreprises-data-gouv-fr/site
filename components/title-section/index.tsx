@@ -1,5 +1,4 @@
 import React from 'react';
-import AssociationAdressAlert from '#components-ui/alerts/association-adress';
 import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
 import NonDiffusibleAlert from '#components-ui/alerts/non-diffusible';
 import ProtectedData from '#components-ui/alerts/protected-data';
@@ -11,7 +10,7 @@ import { Tag } from '#components-ui/tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
 import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
-import { isAssociation, IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/index';
 import {
   estDiffusible,
   estNonDiffusible,
@@ -68,9 +67,6 @@ const Title: React.FC<IProps> = ({
         </>
       )}
       <MultipleSirenAlert uniteLegale={uniteLegale} />
-      {isAssociation(uniteLegale) && (
-        <AssociationAdressAlert uniteLegale={uniteLegale} session={session} />
-      )}
       <h1>
         <a href={`/entreprise/${uniteLegale.chemin}`}>
           {getNomComplet(uniteLegale, session)}
