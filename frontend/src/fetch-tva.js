@@ -5,13 +5,15 @@ import FrontStateMachineFactory from './front-state-machine';
 import { extractSirenSlugFromUrl, formatIntFr } from './utils';
 
 (function TVA() {
+  const logTVA = (siren, isValid) => {
+    try {
+      var _paq = window._paq || [];
+      _paq.push(['trackEvent', 'tva', isValid ? 'valid' : 'invalid', siren]);
+    } catch {}
+  };
+
   const tvaContainer = FrontStateMachineFactory('tva-cell-wrapper');
   if (tvaContainer.exists) {
-    if (Math.random() > 0.25) {
-      tvaContainer.setError();
-      return;
-    }
-
     tvaContainer.setStarted();
 
     const siren = extractSirenSlugFromUrl(window.location.pathname || '');
@@ -33,17 +35,16 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
         } else {
           tvaContainer.setDefault();
         }
+
+        if (Math.random() < 0.01) {
+          logTVA(siren, !!tva);
+        }
       })
       .catch((e) => {
         // We dont log errors, as they are already logged in the backend
         tvaContainer.setError();
         if (e instanceof TypeError) {
-          throw new new FetchRessourceException({
-            ressource: 'VerifyTVA',
-            cause: e,
-            context: { siren },
-            administration: EAdministration.VIES,
-          })();
+          throw new Error("Client error while fetching TVA", {cause : e});
         }
       });
   }

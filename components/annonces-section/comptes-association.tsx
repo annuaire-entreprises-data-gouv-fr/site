@@ -12,9 +12,9 @@ import { formatDate } from '#utils/helpers';
 import { useFetchComptesAssociation } from 'hooks';
 
 export const ComptesAssociationSection: React.FC<{
-  association: IAssociation;
-}> = ({ association }) => {
-  const comptesAssociation = useFetchComptesAssociation(association);
+  uniteLegale: IAssociation;
+}> = ({ uniteLegale }) => {
+  const comptesAssociation = useFetchComptesAssociation(uniteLegale);
   return (
     <DataSection
       data={comptesAssociation}
@@ -43,8 +43,8 @@ export const ComptesAssociationSection: React.FC<{
               , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
               consulter{' '}
               <UniteLegalePageLink
-                uniteLegale={association}
-                href={`${routes.journalOfficielAssociations.site.recherche}?q=${association.siren}`}
+                uniteLegale={uniteLegale}
+                href={`${routes.journalOfficielAssociations.site.recherche}?q=${uniteLegale.siren}`}
                 siteName="le site du JOAFE"
               />
               &nbsp;:

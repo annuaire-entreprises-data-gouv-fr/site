@@ -10,7 +10,6 @@ import {
   clientAllEtablissementsInsee,
   clientSiegeInsee,
 } from '#clients/sirene-insee/siret';
-import { getAssociation } from '#models/association';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
 import {
@@ -20,12 +19,7 @@ import {
 } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
-import {
-  IUniteLegale,
-  SirenNotFoundError,
-  createDefaultUniteLegale,
-  isAssociation,
-} from '.';
+import { IUniteLegale, SirenNotFoundError, createDefaultUniteLegale } from '.';
 import { EAdministration } from './administrations/EAdministration';
 import {
   APINotRespondingFactory,
@@ -74,11 +68,6 @@ class UniteLegaleBuilder {
 
     // determine TVA
     uniteLegale.tva = getTvaUniteLegale(uniteLegale);
-
-    // no need to call API association for bots
-    if (!this._isBot && isAssociation(uniteLegale)) {
-      uniteLegale.association.data = await getAssociation(uniteLegale);
-    }
 
     if (isProtectedSiren(uniteLegale.siren)) {
       uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;

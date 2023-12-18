@@ -46,7 +46,7 @@ const clientTVA = async (
   tva: TVANumber,
   useCache = true
 ): Promise<string | null> => {
-  const url = `${routes.tva}${tva}`;
+  const url = `${routes.proxy.tva}${tva}`;
 
   const data = await clientAPIProxy<IVIESResponse>(url, { useCache });
 

@@ -13,7 +13,10 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
+import { IAPINotRespondingError } from '#models/api-not-responding';
+import { getAssociation } from '#models/association';
 import {
+  IDataAssociation,
   IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
@@ -37,11 +40,13 @@ import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
+  association: IDataAssociation | IAPINotRespondingError | null;
   redirected: boolean;
 }
 
 const UniteLegalePage: NextPageWithLayout<IProps> = ({
   uniteLegale,
+  association,
   redirected,
 }) => {
   const session = useSession();
@@ -81,7 +86,10 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
               <EspaceAgentSummarySection uniteLegale={uniteLegale} />
             )}
             {isAssociation(uniteLegale) && (
-              <AssociationSection uniteLegale={uniteLegale} />
+              <AssociationSection
+                uniteLegale={uniteLegale}
+                association={association}
+              />
             )}
             {isCollectiviteTerritoriale(uniteLegale) && (
               <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
@@ -127,9 +135,15 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       isBot,
     });
 
+    const shouldFetchAssociation = !isBot && isAssociation(uniteLegale);
+    const association = shouldFetchAssociation
+      ? await getAssociation(uniteLegale)
+      : null;
+
     return {
       props: {
         uniteLegale,
+        association,
         redirected: isRedirected,
       },
     };
