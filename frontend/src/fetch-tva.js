@@ -5,13 +5,15 @@ import FrontStateMachineFactory from './front-state-machine';
 import { extractSirenSlugFromUrl, formatIntFr } from './utils';
 
 (function TVA() {
+  const logTVA = (isValid) => {
+    try {
+      var _paq = window._paq || [];
+      _paq.push(['trackEvent', 'tva', isValid ? 'valid' : 'invalid']);
+    } catch {}
+  };
+
   const tvaContainer = FrontStateMachineFactory('tva-cell-wrapper');
   if (tvaContainer.exists) {
-    if (Math.random() > 0.25) {
-      tvaContainer.setError();
-      return;
-    }
-
     tvaContainer.setStarted();
 
     const siren = extractSirenSlugFromUrl(window.location.pathname || '');
@@ -32,6 +34,10 @@ import { extractSirenSlugFromUrl, formatIntFr } from './utils';
           tvaContainer.setSuccess();
         } else {
           tvaContainer.setDefault();
+        }
+
+        if (Math.random() < 0.01) {
+          logTVA(!!tva);
         }
       })
       .catch((e) => {
