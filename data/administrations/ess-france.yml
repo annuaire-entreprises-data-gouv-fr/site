@@ -4,7 +4,6 @@ site: https://www.ess-france.org/
 long: Chambre Française de l'Economie Sociale et Solidaire
 logoType: portrait
 contact: https://www.ess-france.org/contactez-nous
-apiMonitors:
 dataSources:
   - label: Liste des entreprises de l'ESS
     apiSlug: liste-ess
