@@ -1,5 +1,7 @@
 import { ChartData } from 'chart.js';
+import { ChangeEvent, useState } from 'react';
 import { IMatomoStats } from '#clients/matomo';
+import { Select } from '#components-ui/select';
 import { LineChart } from '#components/chart/line';
 import { StackedBarChart } from '#components/chart/stack-bar';
 import constants from '#models/constants';
@@ -7,9 +9,16 @@ import constants from '#models/constants';
 export const NpsStats: React.FC<{
   monthlyNps: IMatomoStats['monthlyNps'];
 }> = ({ monthlyNps }) => {
+  const [statsType, setStatsType] = useState<'avg' | 'nps'>('avg');
+
   const totalAvg =
-    monthlyNps.reduce((sum, { values }) => sum + (values['all'].nps || 0), 0) /
-    12;
+    monthlyNps.reduce(
+      (sum, { values }) => sum + (values['all'][statsType] || 0),
+      0
+    ) / 12;
+
+  const npsMaxRange = statsType === 'avg' ? 10 : 100;
+  const npsPrefixLabel = statsType === 'avg' ? 'Note moyenne' : 'NPS';
 
   const dataLineChart: ChartData<'line'> = {
     labels: monthlyNps.map(({ label }) => label),
@@ -20,21 +29,24 @@ export const NpsStats: React.FC<{
         borderWidth: 1,
         pointStyle: false,
         data: monthlyNps.map(() => totalAvg),
-        label: 'Note moyenne sur l’année entière',
+        label: `${npsPrefixLabel} sur l’année entière`,
         tension: 0,
       },
       {
         backgroundColor: constants.chartColors[2],
         borderColor: constants.chartColors[2],
-        data: monthlyNps.map(({ values }) => values['all'].nps || null),
-        label: 'Note moyenne de tous les utilisateurs',
+        data: monthlyNps.map(({ values }) => values['all'][statsType] || null),
+        label: `${npsPrefixLabel} de tous les utilisateurs`,
         tension: 0.3,
       },
       {
         backgroundColor: constants.chartColors[6],
         borderColor: constants.chartColors[6],
-        data: monthlyNps.map(({ values }) => values['Agent public']?.nps, null),
-        label: 'Note moyenne des agents',
+        data: monthlyNps.map(
+          ({ values }) => values['Agent public'][statsType],
+          null
+        ),
+        label: `${npsPrefixLabel} des agents`,
         tension: 0.3,
       },
     ],
@@ -53,8 +65,8 @@ export const NpsStats: React.FC<{
     datasets: userTypes.map((userType) => ({
       label: userType.label,
       data: monthlyNps.map(({ label, values }) => {
-        const response = values[userType.label]?.npsResponses || 0;
-        const userResponse = values['all']?.npsResponses || 0;
+        const response = values[userType.label]?.count || 0;
+        const userResponse = values['all']?.count || 0;
         return {
           y: userResponse ? (response * 100) / userResponse : 0,
           x: label,
@@ -62,6 +74,10 @@ export const NpsStats: React.FC<{
       }),
       backgroundColor: userType.color,
     })),
+  };
+
+  const onOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setStatsType(e.target.value as 'nps' | 'avg');
   };
 
   return (
@@ -77,6 +93,26 @@ export const NpsStats: React.FC<{
         Ce score nous intéresse non pas pour sa valeur absolue mais pour ses
         variations par rapport à la moyenne.
       </p>
+      <p>
+        Les données sont consultables sous deux formes : la <b>note moyenne</b>{' '}
+        et le <b>Net Promoter Score (NPS)</b>. Le NPS est la différence entre
+        les promoteurs (notes {'>'} 8/10) et les détracteurs (notes {'<'} 7/10).
+        Il permet d’estimer les chances qu’a un produit d’être recommandé par
+        ses utilisateurs et utilisatrices.
+      </p>
+      <br />
+      <div className="layout-right">
+        <div>Afficher les données par&nbsp;</div>
+        <Select
+          options={[
+            { value: 'avg', label: 'note moyenne' },
+            { value: 'nps', label: 'net promoter score (NPS)' },
+          ]}
+          defaultValue={'users'}
+          onChange={onOptionChange}
+        />
+      </div>
+      <br />
       <LineChart
         data={dataLineChart}
         height="250px"
@@ -86,7 +122,7 @@ export const NpsStats: React.FC<{
             y: {
               title: { display: true, text: 'Note sur 10' },
               min: 0,
-              max: 10,
+              max: npsMaxRange,
               ticks: { stepSize: 1 },
             },
           },

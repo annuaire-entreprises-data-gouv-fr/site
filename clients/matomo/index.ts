@@ -19,7 +19,8 @@ export type IMatomoStats = {
     values: {
       [key: string]: {
         nps: number | null;
-        npsResponses: number | null;
+        count: number | null;
+        avg: number | null;
       };
     };
   }[];
@@ -220,11 +221,12 @@ const getNpsRecords = async () => {
   let totalAll = 0;
 
   npsRecords.forEach((record) => {
-    if (record.mood === -1) {
+    const mood = parseInt(record.mood, 10);
+
+    if (mood === -1 || isNaN(mood)) {
       return;
     }
 
-    const mood = parseInt(record.mood, 10);
     const date = new Date(record.date);
     const monthLabel = getMonthLabelFromDate(date);
 
@@ -249,28 +251,30 @@ const getNpsRecords = async () => {
     (totals[userType] = (totals[userType] || 0) + 1), (totalAll += 1);
   });
 
-  Object.keys(totals).forEach((userTypeKey) => {
-    const percent = Math.floor((totals[userTypeKey] / totalAll) * 100);
-  });
-
   const nps = { months, totals };
   const npsData: any = {};
-  const monthlyNps: IMatomoStats['monthlyNps'] = [];
 
   for (const month in nps.months) {
     for (const userTypeKey in nps.months[month]) {
-      const count = nps.months[month][userTypeKey].length;
-      const avg =
-        nps.months[month][userTypeKey].reduce((sum, el = 0) => sum + el, 0) /
-        count;
+      const ratings = nps.months[month][userTypeKey];
+      const count = ratings.length;
+
+      const promoters = ratings.filter((e) => e > 8).length;
+      const detractors = ratings.filter((e) => e < 7).length;
+      const npsFormula = Math.round(((promoters - detractors) / count) * 100);
+
+      const avgRaw = ratings.reduce((sum, el = 0) => sum + el, 0) / count;
+      const avg = Math.max(1, Math.round(avgRaw * 10)) / 10;
       npsData[month] = npsData[month] || {};
       npsData[month][userTypeKey] = {
-        nps: Math.max(1, Math.round(avg * 10)) / 10,
-        npsResponses: count,
+        avg,
+        count,
+        nps: npsFormula,
       };
     }
   }
 
+  const monthlyNps: IMatomoStats['monthlyNps'] = [];
   lastTwelveMonths().forEach(({ label, number }) => {
     monthlyNps.push({
       number,
