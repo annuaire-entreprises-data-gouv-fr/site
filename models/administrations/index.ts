@@ -21,7 +21,12 @@ const validateMetaData = (
 
   return {
     // default values
-    ...{ apiMonitors: [], dataSources: [], administrationEnum },
+    ...{
+      estServicePublic: true,
+      apiMonitors: [],
+      dataSources: [],
+      administrationEnum,
+    },
     ...a,
   };
 };
