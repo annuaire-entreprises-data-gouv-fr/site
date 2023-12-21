@@ -12,4 +12,5 @@ export enum EAdministration {
   MI = 'mi',
   VIES = 'vies',
   DJEPVA = 'djepva',
+  ESSFRANCE = 'ess-france',
 }

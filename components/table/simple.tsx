@@ -60,6 +60,10 @@ const shouldTrim = (label: any) => {
     // as this is likely to trigger an exception we use a try / catch
     const labelAsString = label?.props?.tooltipLabel || label || '';
 
+    if (typeof labelAsString === 'object') {
+      return false;
+    }
+
     if (
       labelAsString.indexOf('TVA') > -1 ||
       labelAsString.indexOf('SIREN') > -1 ||

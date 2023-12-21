@@ -25,6 +25,15 @@ export const INPI = ({ queryString = '' }) => (
   </a>
 );
 
+export const ESSFrance = ({ queryString = '' }) => (
+  <a
+    href={`/administration/ess-france${queryString}`}
+    title="ESS France ou Chambre Française de l'Economie Sociale et Solidaire"
+  >
+    ESS France
+  </a>
+);
+
 export const DILA = ({ queryString = '' }) => (
   <a
     href={`/administration/dila${queryString}`}
