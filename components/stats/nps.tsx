@@ -108,7 +108,7 @@ export const NpsStats: React.FC<{
             { value: 'avg', label: 'note moyenne' },
             { value: 'nps', label: 'net promoter score (NPS)' },
           ]}
-          defaultValue={'users'}
+          defaultValue={'avg'}
           onChange={onOptionChange}
         />
       </div>
@@ -120,7 +120,10 @@ export const NpsStats: React.FC<{
           responsive: true,
           scales: {
             y: {
-              title: { display: true, text: 'Note sur 10' },
+              title: {
+                display: true,
+                text: statsType === 'avg' ? 'Note sur 10' : 'NPS',
+              },
               min: 0,
               max: npsMaxRange,
               ticks: { stepSize: 1 },
