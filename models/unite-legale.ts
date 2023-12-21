@@ -71,6 +71,13 @@ class UniteLegaleBuilder {
 
     if (isProtectedSiren(uniteLegale.siren)) {
       uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
+      uniteLegale.siege.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
+
+      const allProtected = uniteLegale.etablissements.all.map((e) => {
+        e.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
+        return e;
+      });
+      uniteLegale.etablissements = createEtablissementsList(allProtected);
     }
 
     // en sommeil
