@@ -39,6 +39,7 @@ export default function robots(): MetadataRoute.Robots {
         '/erreur/',
         '/formulaire/',
         '/carte/',
+        '/labels-certificats/',
       ],
     },
     sitemap: 'https://annuaire-entreprises.data.gouv.fr/sitemap.xml',
