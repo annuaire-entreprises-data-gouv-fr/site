@@ -1,7 +1,7 @@
 import { clientAssociation } from '#clients/api-proxy/association';
 import { clientBanGeoLoc } from '#clients/base-adresse';
 import { HttpNotFound } from '#clients/exceptions';
-import { escapeTerm, Siren } from '#utils/helpers';
+import { removeSpecialChars, Siren } from '#utils/helpers';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import { IDataAssociation, IUniteLegale } from '.';
 import { EAdministration } from './administrations/EAdministration';
@@ -92,8 +92,8 @@ const verifyAdressConsistency = async (
   adress2 = ''
 ) => {
   try {
-    const adress1formatted = escapeTerm(adress1.toLowerCase());
-    const adress2formatted = escapeTerm(adress2.toLowerCase());
+    const adress1formatted = removeSpecialChars(adress1.toLowerCase());
+    const adress2formatted = removeSpecialChars(adress2.toLowerCase());
 
     const hasDifferences = adress1formatted !== adress2formatted;
 

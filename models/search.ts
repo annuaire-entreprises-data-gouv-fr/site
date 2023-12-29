@@ -4,8 +4,8 @@ import { IDirigeant } from '#models/immatriculation';
 import SearchFilterParams from '#models/search-filter-params';
 import {
   cleanSearchTerm,
-  escapeTerm,
   isLikelyASiretOrSiren,
+  removeSpecialChars,
 } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logWarningInSentry } from '#utils/sentry';
@@ -41,9 +41,6 @@ const noResults = {
   results: [],
   notEnoughParams: false,
 };
-class APIRechercheEntrepriseException extends Error {
-  name = 'APIRechercheEntrepriseException';
-}
 const search = async (
   searchTerm: string,
   page: number,
@@ -57,7 +54,7 @@ const search = async (
   }
 
   try {
-    const escapedSearchTerm = escapeTerm(searchTerm);
+    const escapedSearchTerm = removeSpecialChars(searchTerm);
     return await clientSearchRechercheEntreprise({
       searchTerms: escapedSearchTerm,
       page,
@@ -89,7 +86,7 @@ const search = async (
 
     // attempt a fallback on staging
     try {
-      const escapedSearchTerm = escapeTerm(searchTerm);
+      const escapedSearchTerm = removeSpecialChars(searchTerm);
       return await clientSearchRechercheEntreprise({
         searchTerms: escapedSearchTerm,
         page,

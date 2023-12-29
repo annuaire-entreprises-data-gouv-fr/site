@@ -1,4 +1,9 @@
-import { formatAdresse, formatCurrency } from './formatting';
+import {
+  escapeString,
+  formatAdresse,
+  formatCurrency,
+  removeSpecialChars,
+} from './formatting';
 
 const adresses = [
   {
@@ -101,6 +106,14 @@ describe('Check formatCurrency', () => {
       expect(formatCurrency(value)).toBe(expected[index]);
     });
   });
+});
+
+describe('Check escapeString', () => {
+  expect(escapeString("ksdn'fk'jdnsfㅤé")).toBe('ksdn-fk-jdnsf-e');
+});
+
+describe('Check removeSpecialChars', () => {
+  expect(removeSpecialChars("ksㅤdn'fk'jdnsfㅤé")).toBe("ksㅤdn'fk'jdnsfㅤe");
 });
 
 export {};

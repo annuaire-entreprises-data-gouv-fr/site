@@ -65,6 +65,8 @@ const Index: NextPageWithLayout = () => (
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  // server side props for session initialization
+
   async () => {
     return {
       props: {},
