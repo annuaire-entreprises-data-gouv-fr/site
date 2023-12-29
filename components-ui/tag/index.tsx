@@ -27,11 +27,6 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
       <span {...props} />
     );
 
-  let serializedTag = '';
-  try {
-    serializedTag = children?.toString() || '';
-  } catch {}
-
   return (
     <>
       <ContainerComponent
@@ -46,7 +41,6 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
           display: inline-block;
           vertical-align: middle;
           margin: 3px 5px;
-          margin-left: 0;
           max-width: 80vw;
           overflow: hidden;
           text-overflow: ellipsis;

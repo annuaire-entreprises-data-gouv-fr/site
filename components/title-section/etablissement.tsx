@@ -108,9 +108,7 @@ const TitleEtablissementWithDenomination: React.FC<{
     </h1>
 
     <div className="etablissement-sub-title">
-      <span className="siret-or-siren">
-        {formatSiret(etablissement.siret)}&nbsp;
-      </span>
+      <span className="siret-or-siren">{formatSiret(etablissement.siret)}</span>
       {estNonDiffusible(etablissement) && <Tag color="new">non-diffusible</Tag>}
       <IsActiveTag
         etatAdministratif={etablissement.etatAdministratif}

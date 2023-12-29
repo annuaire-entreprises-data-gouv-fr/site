@@ -17,7 +17,7 @@ import {
   getNomComplet,
 } from '#models/statut-diffusion';
 import { formatIntFr } from '#utils/helpers';
-import { isAgent, ISession } from '#utils/session';
+import { ISession, isAgent } from '#utils/session';
 import { FICHE, Tabs } from './tabs';
 
 type IProps = {
@@ -75,7 +75,7 @@ const Title: React.FC<IProps> = ({
       <div className="unite-legale-sub-title">
         <UniteLegaleBadge uniteLegale={uniteLegale} />
         <span className="siren">
-          &nbsp;‣&nbsp;{formatIntFr(uniteLegale.siren)}&nbsp;
+          &nbsp;‣&nbsp;{formatIntFr(uniteLegale.siren)}
         </span>
         <span>
           {!estDiffusible(uniteLegale) && <Tag color="new">non-diffusible</Tag>}
