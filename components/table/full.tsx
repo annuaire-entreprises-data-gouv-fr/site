@@ -85,6 +85,13 @@ export const FullTable: React.FC<ISectionProps> = ({
         table tr:hover > td {
           background-color: transparent;
         }
+
+        tr {
+          padding: 20px 0;
+        }
+        tr:not(:last-of-type) {
+          border-bottom: 1px solid ${constants.colors.pastelBlue}66;
+        }
       }
 
       @media (min-width: 993px) {
