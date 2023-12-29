@@ -7,6 +7,10 @@ import {
   getEntrepreneurSpectaclesCertification,
   IEntrepreneurSpectaclesCertification,
 } from './entrepreneur-spectacles';
+import {
+  getEntrepriseInclusive,
+  IEntrepriseInclusive,
+} from './entreprise-inclusive';
 import { getEss, IESS } from './ess';
 import {
   getOrganismesDeFormation,
@@ -24,6 +28,7 @@ export interface ICertifications {
   egapro: IEgapro | IAPINotRespondingError;
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
   ess: IESS | IAPINotRespondingError;
+  entrepriseInclusive: IEntrepriseInclusive | IAPINotRespondingError;
 }
 
 export const getCertificationsFromSlug = async (
@@ -32,15 +37,23 @@ export const getCertificationsFromSlug = async (
 ): Promise<ICertifications> => {
   const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
 
-  const [rge, entrepreneurSpectacles, bio, egapro, organismesDeFormation, ess] =
-    await Promise.all([
-      getRGECertifications(uniteLegale),
-      getEntrepreneurSpectaclesCertification(uniteLegale),
-      getBio(uniteLegale),
-      getEgapro(uniteLegale),
-      getOrganismesDeFormation(uniteLegale),
-      getEss(uniteLegale),
-    ]);
+  const [
+    rge,
+    entrepreneurSpectacles,
+    bio,
+    egapro,
+    organismesDeFormation,
+    ess,
+    entrepriseInclusive,
+  ] = await Promise.all([
+    getRGECertifications(uniteLegale),
+    getEntrepreneurSpectaclesCertification(uniteLegale),
+    getBio(uniteLegale),
+    getEgapro(uniteLegale),
+    getOrganismesDeFormation(uniteLegale),
+    getEss(uniteLegale),
+    getEntrepriseInclusive(uniteLegale),
+  ]);
 
   return {
     bio,
@@ -50,5 +63,6 @@ export const getCertificationsFromSlug = async (
     entrepreneurSpectacles,
     organismesDeFormation,
     ess,
+    entrepriseInclusive,
   };
 };

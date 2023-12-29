@@ -112,6 +112,10 @@ const routes = {
           'https://data.culture.gouv.fr/api/records/1.0/search/?dataset=declarations-des-entrepreneurs-de-spectacles-vivants',
       },
     },
+    entrepriseInclusive: {
+      site: 'https://lemarche.inclusion.beta.gouv.fr/prestataires/',
+      api: 'https://lemarche.inclusion.beta.gouv.fr/api/siae/siret/',
+    },
   },
   proxy: {
     rne: {

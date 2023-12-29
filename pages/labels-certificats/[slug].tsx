@@ -7,6 +7,7 @@ import {
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
+import { EntrepriseInclusiveSection } from '#components/labels-and-certificates/entreprise-inclusive';
 import { CertificationESSSection } from '#components/labels-and-certificates/ess';
 import { OrganismeDeFormationSection } from '#components/labels-and-certificates/organismes-de-formation';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
@@ -36,6 +37,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   entrepreneurSpectacles,
   organismesDeFormation,
   ess,
+  entrepriseInclusive,
   metadata: { session },
 }) => {
   const {
@@ -46,6 +48,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
     egaproRenseignee,
     estBio,
     estEntrepreneurSpectacle,
+    estEntrepriseInclusive,
   } = uniteLegale.complements;
 
   return (
@@ -67,6 +70,11 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
         {estEss && <CertificationESSSection ess={ess} />}
         {estSocieteMission && <CertificationSocieteMission />}
         {checkHasQuality(uniteLegale) && <HorizontalSeparator />}
+        {estEntrepriseInclusive && (
+          <EntrepriseInclusiveSection
+            entrepriseInclusive={entrepriseInclusive}
+          />
+        )}
         {estRge && (
           <CertificationsRGESection
             uniteLegale={uniteLegale}
@@ -107,6 +115,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       bio,
       organismesDeFormation,
       ess,
+      entrepriseInclusive,
     } = await getCertificationsFromSlug(slug, isBot);
 
     return {
@@ -118,6 +127,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
         uniteLegale,
         organismesDeFormation,
         ess,
+        entrepriseInclusive,
       },
     };
   }
