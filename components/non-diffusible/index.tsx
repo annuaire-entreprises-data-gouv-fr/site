@@ -1,4 +1,3 @@
-import React from 'react';
 import ButtonLink from '#components-ui/button';
 import { INSEE } from '#components/administrations';
 import { Section } from '#components/section';
@@ -34,7 +33,7 @@ export const NonDiffusibleSection = () => (
   </Section>
 );
 
-export const DirigeantsNonDiffusibleSection = () => (
+export const DonneesPriveesSection = () => (
   <Section title="Données privées">
     <p>
       Les dirigeants de cette entreprise ont demandé à ce que ces informations

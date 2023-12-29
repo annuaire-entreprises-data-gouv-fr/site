@@ -9,8 +9,14 @@ const AdministrationDescription: React.FC<{
     throw new Error(`Administration ${slug} does not exist`);
   }
 
-  const { description, contact, long, dataSources, logoType } =
-    administrationsMetaData[slug];
+  const {
+    description,
+    contact,
+    long,
+    dataSources,
+    logoType,
+    estServicePublic,
+  } = administrationsMetaData[slug];
 
   return (
     <div className="administration-wrapper" id={slug}>
@@ -43,7 +49,8 @@ const AdministrationDescription: React.FC<{
           {contact && (
             <p>
               <a rel="noreferrer noopener" target="_blank" href={contact}>
-                → Contacter cette administration
+                → Contacter cette{' '}
+                {estServicePublic ? 'administration' : 'organisation'}
               </a>
             </p>
           )}

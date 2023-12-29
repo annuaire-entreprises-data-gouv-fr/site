@@ -1,0 +1,16 @@
+slug: ess-france
+short: ESS France
+site: https://www.ess-france.org/
+long: Chambre Française de l'Economie Sociale et Solidaire
+logoType: portrait
+contact: https://www.ess-france.org/contactez-nous
+dataSources:
+  - label: Liste des entreprises de l'ESS
+    apiSlug: liste-ess
+    datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-entreprises-de-less
+    data:
+      - label: famille juridique d’une entreprise de l’ESS
+      - label: CRESS d’une entreprise de l’ESS
+estServicePublic: false
+description: |
+  ESS France, ou Chambre Française de l’Economie Sociale et Solidaire, est la voix de référence de l’ESS. Elle fédère les organisations nationales de l’ESS représentant les différentes formes statutaires de l’ESS (associations, coopératives, mutuelles, fondations et sociétés commerciales de l’ESS), les Chambres régionales de l’ESS et tout autre personne morale, de type fédération, réseau, collectif ou regroupement de niveau national qui souhaite s’investir dans ses activités. Dans le cadre de leurs missions, ESS France et les CRESS publient et mettent à jour la liste des entreprises de l’ESS (article 6 de la loi ESS de 2014).

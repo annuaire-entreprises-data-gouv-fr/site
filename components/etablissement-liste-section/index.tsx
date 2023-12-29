@@ -146,7 +146,7 @@ const EtablissementListeSection: React.FC<{
           </>
         ) : (
           <>
-            {nombreEtablissementsOuverts > 0 && (
+            {uniteLegale.etablissements.open.length > 0 && (
               <>
                 <EtablissementTable
                   label="actif"

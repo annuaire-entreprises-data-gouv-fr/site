@@ -35,6 +35,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   entrepreneurSpectacles,
   organismesDeFormation,
+  ess,
   metadata: { session },
 }) => {
   const {
@@ -63,7 +64,7 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
         {!checkHasLabelsAndCertificates(uniteLegale) && (
           <p>Cette structure ne possède aucun label ou certificat.</p>
         )}
-        {estEss && <CertificationESSSection />}
+        {estEss && <CertificationESSSection ess={ess} />}
         {estSocieteMission && <CertificationSocieteMission />}
         {checkHasQuality(uniteLegale) && <HorizontalSeparator />}
         {estRge && (
@@ -105,6 +106,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       egapro,
       bio,
       organismesDeFormation,
+      ess,
     } = await getCertificationsFromSlug(slug, isBot);
 
     return {
@@ -115,6 +117,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
         rge,
         uniteLegale,
         organismesDeFormation,
+        ess,
       },
     };
   }

@@ -13,6 +13,7 @@ export type IAdministrationMetaData = {
   contact: string;
   site: string;
   apiMonitors?: IAPIMonitorMetaData[];
+  estServicePublic: boolean;
   dataSources: {
     label: string;
     datagouvLink: string;

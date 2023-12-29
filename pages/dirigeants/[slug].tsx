@@ -5,7 +5,7 @@ import DirigeantsEntrepriseIndividuelleSection from '#components/dirigeants-sect
 import DirigeantsSection from '#components/dirigeants-section/rne-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
 import Meta from '#components/meta';
-import { DirigeantsNonDiffusibleSection } from '#components/non-diffusible';
+import { DonneesPriveesSection } from '#components/non-diffusible';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IUniteLegale } from '#models/index';
@@ -75,7 +75,7 @@ const DirigeantsPage: NextPageWithLayout<IProps> = ({
               />
             </>
           ) : (
-            <DirigeantsNonDiffusibleSection />
+            <DonneesPriveesSection />
           )}
         </>
       </div>

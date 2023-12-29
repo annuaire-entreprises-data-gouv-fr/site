@@ -31,6 +31,9 @@ const routes = {
         'https://www.bodacc.fr/pages/annonces-commerciales/?sort=dateparution',
     },
   },
+  datagouv: {
+    ess: 'https://tabular-api.data.gouv.fr/api/resources/57bc99ca-0432-4b46-8fcc-e76a35c9efaf/data/',
+  },
   conventionsCollectives: {
     metadata:
       'https://recherche-entreprises.api.gouv.fr/metadata/conventions_collectives',

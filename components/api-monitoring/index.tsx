@@ -151,7 +151,7 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
         ) : (
           <p>
             L’API est actuellement hors-service et l’accès aux données est
-            fortement perturbé, voir impossible.
+            fortement perturbé, voire impossible.
           </p>
         )}
         <div className="metrics-title">
