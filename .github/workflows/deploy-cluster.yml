@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy-website-production:
-    name: Deploy website on production
+    name: Deploy website to production
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
@@ -33,7 +33,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{secrets.SSH_MACHINE_USER_PRIVATE_KEY}}
           SSH_HOST: ${{ secrets[matrix.host] }}
 
-      - name: Deploy to production
+      - name: Deploy website to production
         run: ssh -i ./deploy.key www-data@$SSH_HOST 'python3 /opt/scripts/app-deploy-release/deploy.py /opt/git/releases/annuaire-entreprises-site https://github.com/etalab/annuaire-entreprises-site.git website --version main --versions_to_keep=5'
         env:
           SSH_HOST: ${{ secrets[matrix.host] }}
