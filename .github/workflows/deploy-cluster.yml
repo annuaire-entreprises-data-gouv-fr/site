@@ -8,8 +8,8 @@ on:
     - cron: '0 7 * * *'
 
 jobs:
-  deploy-production:
-    name: Deploy on production
+  deploy-website-production:
+    name: Deploy website on production
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
@@ -34,7 +34,7 @@ jobs:
           SSH_HOST: ${{ secrets[matrix.host] }}
 
       - name: Deploy to production
-        run: ssh -i ./deploy.key www-data@$SSH_HOST 'python3 /opt/scripts/app-deploy-release/deploy.py /opt/git/releases/annuaire-entreprises-site https://github.com/etalab/annuaire-entreprises-site.git site --version main --versions_to_keep=5'
+        run: ssh -i ./deploy.key www-data@$SSH_HOST 'python3 /opt/scripts/app-deploy-release/deploy.py /opt/git/releases/annuaire-entreprises-site https://github.com/etalab/annuaire-entreprises-site.git website --version main --versions_to_keep=5'
         env:
           SSH_HOST: ${{ secrets[matrix.host] }}
 
@@ -49,7 +49,7 @@ jobs:
   notify-deploy-success:
     name: Notify successful deployment
     runs-on: ubuntu-latest
-    needs: [deploy-production]
+    needs: [deploy-website-production]
 
     steps:
       - uses: actions/checkout@v3
