@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import BeneficiairesSection from '#components/dirigeants-section/beneficiaires';
-import DirigeantsEntrepriseIndividuelleSection from '#components/dirigeants-section/insee-dirigeant';
 import DirigeantsSection from '#components/dirigeants-section/rne-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
 import Meta from '#components/meta';
@@ -54,16 +53,6 @@ const DirigeantsPage: NextPageWithLayout<IProps> = ({
           />
           {estDiffusible(uniteLegale) || isAgent(session) ? (
             <>
-              {uniteLegale.complements.estEntrepreneurIndividuel &&
-                uniteLegale.dirigeant && (
-                  <>
-                    <DirigeantsEntrepriseIndividuelleSection
-                      dirigeant={uniteLegale.dirigeant}
-                    />
-                    <BreakPageForPrint />
-                  </>
-                )}
-
               <DirigeantsSection
                 immatriculationRNE={immatriculationRNE}
                 uniteLegale={uniteLegale}

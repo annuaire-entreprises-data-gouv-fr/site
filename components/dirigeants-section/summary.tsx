@@ -51,12 +51,7 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
   immatriculationRNE,
 }) => {
   const summaries = [];
-  const inseeDirigeant =
-    uniteLegale.dirigeant && '1 dirigeant(e) inscrit(e) à l’Insee';
 
-  if (inseeDirigeant) {
-    summaries.push(<a href="#insee-dirigeant">{inseeDirigeant}</a>);
-  }
   if (
     !isAPILoading(immatriculationRNE) &&
     !isAPINotResponding(immatriculationRNE)
