@@ -15,9 +15,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - environment: production-01
+          - environment: production-03
             host: SSH_HOST_PRODUCTION_03
-          - environment: production-02
+          - environment: production-04
             host: SSH_HOST_PRODUCTION_04
     steps:
       - uses: actions/checkout@v3
