@@ -42,7 +42,7 @@ jobs:
         if: failure()
         uses: ./.github/actions/notify
         with:
-          message: '🚨 ${{ github.event.repository.name }} [${{ matrix.environment }}] : deploy to production failed'
+          message: '🚨 ${{ github.event.repository.name }} [${{ matrix.environment }}] : deploy to production cluster failed'
           hook: ${{ secrets.TCHAP_HOOK }}
           id: ${{ secrets.TCHAP_ROOM_ID }}
 
@@ -56,6 +56,6 @@ jobs:
       - name: Notify deploy success
         uses: ./.github/actions/notify
         with:
-          message: '✅ ${{ github.event.repository.name }} : successfully deploy to staging & production clusters'
+          message: '✅ ${{ github.event.repository.name }} : successfully deploy production cluster'
           hook: ${{ secrets.TCHAP_HOOK }}
           id: ${{ secrets.TCHAP_ROOM_ID }}
