@@ -218,8 +218,6 @@ const getNpsRecords = async () => {
     [userTypeKey: string]: number;
   } = {};
 
-  let totalAll = 0;
-
   npsRecords.forEach((record) => {
     const mood = parseInt(record.mood, 10);
 
@@ -248,7 +246,7 @@ const getNpsRecords = async () => {
     months[monthLabel][userType].push(mood);
     months[monthLabel]['all'].push(mood);
 
-    (totals[userType] = (totals[userType] || 0) + 1), (totalAll += 1);
+    totals[userType] = (totals[userType] || 0) + 1;
   });
 
   const nps = { months, totals };
@@ -288,6 +286,7 @@ const getNpsRecords = async () => {
 const createCopyPasteEventUrl = () => {
   const lastYear = getLastYear();
   const dateRange = `${YYYYMMDD(lastYear)},${YYYYMMDD(new Date())}`;
+
   return routes.tooling.matomo.report.copyPasteEvents + dateRange;
 };
 
