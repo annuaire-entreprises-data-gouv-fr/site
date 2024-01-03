@@ -16,9 +16,9 @@ jobs:
       matrix:
         include:
           - environment: production-01
-            host: CLUSTER_HOST_PRODUCTION_01
+            host: SSH_HOST_PRODUCTION_03
           - environment: production-02
-            host: CLUSTER_HOST_PRODUCTION_01
+            host: SSH_HOST_PRODUCTION_04
     steps:
       - uses: actions/checkout@v3
 
