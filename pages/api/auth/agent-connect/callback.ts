@@ -1,9 +1,9 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
-  IMCPUserInfo,
-  monCompteAuthenticate,
-} from '#clients/auth/mon-compte-pro/strategy';
+  IAgentConnectUserInfo,
+  agentConnectAuthenticate,
+} from '#clients/auth/agent-connect/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { Exception } from '#models/exceptions';
 import { checkIsSuperAgent } from '#utils/helpers/is-super-agent';
@@ -17,7 +17,7 @@ import {
 export default withIronSessionApiRoute(callbackRoute, sessionOptions);
 
 const getUserPrivileges = async (
-  userInfo: IMCPUserInfo
+  userInfo: IAgentConnectUserInfo
 ): Promise<ISessionPrivilege> => {
   const isTestAccount =
     userInfo.email === 'user@yopmail.com' &&
@@ -46,7 +46,7 @@ const getUserPrivileges = async (
 
 async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const userInfo = await monCompteAuthenticate(req);
+    const userInfo = await agentConnectAuthenticate(req);
     const userPrivilege = await getUserPrivileges(userInfo);
 
     if (userPrivilege === 'unkown') {

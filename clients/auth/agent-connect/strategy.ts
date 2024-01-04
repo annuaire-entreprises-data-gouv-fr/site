@@ -1,14 +1,14 @@
-import { Issuer, BaseClient } from 'openid-client';
+import { BaseClient, Issuer, generators } from 'openid-client';
 import { HttpForbiddenError } from '#clients/exceptions';
 
 let _client = undefined as BaseClient | undefined;
 
-const CLIENT_ID = process.env.MONCOMPTEPRO_CLIENT_ID;
-const ISSUER_URL = process.env.MONCOMPTEPRO_URL;
-const CLIENT_SECRET = process.env.MONCOMPTEPRO_CLIENT_SECRET;
-const REDIRECT_URI = process.env.MONCOMPTEPRO_REDIRECT_URI;
+const CLIENT_ID = process.env.AGENTCONNECT_CLIENT_ID;
+const CLIENT_SECRET = process.env.AGENTCONNECT_CLIENT_SECRET;
+const ISSUER_URL = process.env.AGENTCONNECT_URL_DISCOVER;
+const REDIRECT_URI = process.env.AGENTCONNECT_REDIRECT_URI;
 const POST_LOGOUT_REDIRECT_URI =
-  process.env.MONCOMPTEPRO_POST_LOGOUT_REDIRECT_URI;
+  process.env.AGENTCONNECT_POST_LOGOUT_REDIRECT_URI;
 
 if (
   !CLIENT_ID ||
@@ -17,34 +17,42 @@ if (
   !REDIRECT_URI ||
   !POST_LOGOUT_REDIRECT_URI
 ) {
-  throw new Error('MON COMPTE PRO ENV variables are not defined');
+  throw new Error('AGENT CONNECT ENV variables are not defined');
 }
 
 export const getClient = async () => {
   if (_client) {
     return _client;
   } else {
-    const monCompteProIssuer = await Issuer.discover(ISSUER_URL as string);
+    const agentConnectIssuer = await Issuer.discover(ISSUER_URL as string);
 
-    _client = new monCompteProIssuer.Client({
+    _client = new agentConnectIssuer.Client({
       client_id: CLIENT_ID as string,
       client_secret: CLIENT_SECRET as string,
-      redirect_uris: [REDIRECT_URI as string],
       post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI as string],
+      redirect_uri: REDIRECT_URI,
     });
 
     return _client;
   }
 };
 
-export const monCompteProAuthorizeUrl = async () => {
+export const agentConnectAuthorizeUrl = async () => {
   const client = await getClient();
+
+  const nonce = generators.nonce();
+  const state = generators.state();
+
   return client.authorizationUrl({
-    scope: 'openid email organization profile',
+    nonce,
+    acr_values: 'eidas1',
+    scope:
+      'uid given_name usual_name email siren siret organizational_unit belonging_population',
+    state,
   });
 };
 
-export type IMCPUserInfo = {
+export type IAgentConnectUserInfo = {
   sub: string;
   email: string;
   email_verified: boolean;
@@ -59,7 +67,7 @@ export type IMCPUserInfo = {
   is_service_public: boolean;
 };
 
-export const monCompteAuthenticate = async (req: any) => {
+export const agentConnectAuthenticate = async (req: any) => {
   const client = await getClient();
 
   const params = client.callbackParams(req);
@@ -75,11 +83,13 @@ export const monCompteAuthenticate = async (req: any) => {
     throw new HttpForbiddenError('No access token');
   }
 
-  const userInfo = (await client.userinfo(access_token)) as IMCPUserInfo;
+  const userInfo = (await client.userinfo(
+    access_token
+  )) as IAgentConnectUserInfo;
   return userInfo;
 };
 
-export const monCompteProLogoutUrl = async () => {
+export const agentConnectLogoutUrl = async () => {
   const client = await getClient();
   return client.endSessionUrl({
     post_logout_redirect_uri: POST_LOGOUT_REDIRECT_URI,

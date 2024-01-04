@@ -1,20 +1,20 @@
 import React from 'react';
 
-const ButtonMonComptePro: React.FC<{}> = () => (
-  <form action="/api/auth/mon-compte-pro/login" method="get">
+const ButtonAgentConnect: React.FC<{}> = () => (
+  <form action="/api/auth/agent-connect/login" method="get">
     <div className="fr-connect-group">
       <button className="fr-connect">
         <span className="fr-connect__login">S’identifier avec</span>
-        <span className="fr-connect__brand">MonComptePro</span>
+        <span className="fr-connect__brand">Agent Connect</span>
       </button>
       <p>
         <a
-          href="https://moncomptepro.beta.gouv.fr/"
+          href="https://agentconnect.gouv.fr/"
           target="_blank"
           rel="noopener noreferrer"
-          title="Qu’est-ce que MonComptePro ? - nouvelle fenêtre"
+          title="Qu’est-ce qu’AgentConnect ? - nouvelle fenêtre"
         >
-          Qu’est-ce que MonComptePro ?
+          Qu’est-ce qu’AgentConnect ?
         </a>
       </p>
     </div>
@@ -26,4 +26,4 @@ const ButtonMonComptePro: React.FC<{}> = () => (
   </form>
 );
 
-export default ButtonMonComptePro;
+export default ButtonAgentConnect;

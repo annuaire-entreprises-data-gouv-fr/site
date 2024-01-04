@@ -1,6 +1,5 @@
-import React from 'react';
 import { ReactElement } from 'react';
-import ButtonMonComptePro from '#components-ui/button-mon-compte-pro';
+import ButtonAgentConnect from '#components-ui/button-agent-connect';
 import connexionPicture from '#components-ui/illustrations/connexion';
 import { Tag } from '#components-ui/tag';
 import { LayoutConnexion } from '#components/layouts/layout-connexion';
@@ -27,7 +26,7 @@ const Login = () => {
         .
       </p>
       <div className="layout-center">
-        <ButtonMonComptePro />
+        <ButtonAgentConnect />
       </div>
       <style jsx>{`
         h1,
