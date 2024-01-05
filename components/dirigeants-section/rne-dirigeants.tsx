@@ -82,7 +82,6 @@ function DirigeantContent({
         dirigeant.role,
         <>
           <b>{dirigeant.denomination}</b>
-
           {dirigeant.siren ? (
             <>
               {' - '}
