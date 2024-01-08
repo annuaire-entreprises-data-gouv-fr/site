@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as axios from 'axios';
 
 const SOURCE_URL =
-  'https://object.files.data.gouv.fr/opendata/ae/sitemap-prod.csv';
+  'https://object.files.data.gouv.fr/opendata/ae/prod/sitemap.csv';
 
 export const downloadAndSaveData = async () => {
   console.time('⏱ Download and save base SIREN');
