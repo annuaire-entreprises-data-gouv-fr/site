@@ -1,8 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
-import DocumentWall from '#components/espace-agent-components/documents/document-wall';
-import DocumentActesSection from '#components/espace-agent-components/documents/dopcument-actes';
+import DocumentActesSection from '#components/espace-agent-components/documents/document-actes';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -47,14 +46,10 @@ const UniteLegaleForAgentPage: NextPageWithLayout<IProps> = ({
           <HorizontalSeparator />
         </>
       )}
-      <DocumentWall
-        isVisible={isAgent(session)}
-        title="Actes et statuts"
-        id="actes"
+      <DocumentActesSection
         uniteLegale={uniteLegale}
-      >
-        <DocumentActesSection uniteLegale={uniteLegale} />
-      </DocumentWall>
+        isAgent={isAgent(session)}
+      />
     </div>
   </>
 );
