@@ -36,9 +36,10 @@ const ImmatriculationLinks = ({
   if (!estDiffusible(uniteLegale)) {
     return (
       <p>
-        Le(s) dirigeant(s) se sont opposés à la diffusion de leur données sur
-        cette page. Pour télécharger son extrait d’immatriculation, rendez-vous
-        sur le site <a href="https://data.inpi.fr">data.inpi.fr</a>.
+        Le(s) dirigeant(s) se sont opposés à la diffusion de leurs données
+        personnelles. Pour télécharger l’extrait d’immatriculation de cette
+        entreprise, rendez-vous sur le site{' '}
+        <a href="https://data.inpi.fr">data.inpi.fr</a>.
       </p>
     );
   }
