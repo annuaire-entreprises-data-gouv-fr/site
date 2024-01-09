@@ -26,10 +26,11 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
     }${(elu.nom || '').toUpperCase()}`;
 
     const infos = [
-      elu.role,
-      <>
-        {nomComplet}, né(e) en {formatDatePartial(elu.dateNaissancePartial)}
-      </>,
+      elu.role ?? <span style={{ color: '#555' }}>Non renseigné</span>,
+      <>{nomComplet}</>,
+      <span style={{ textTransform: 'capitalize' }}>
+        {formatDatePartial(elu.dateNaissancePartial)}
+      </span>,
     ];
 
     return infos;
@@ -51,10 +52,8 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
               {plural} au Répertoire National des Élus&nbsp;:
             </p>
             <FullTable
-              head={['Role', 'Details']}
-              body={elus
-                .sort((a) => (!a.role ? 1 : -1))
-                .map((elu) => formatElus(elu))}
+              head={['Role', 'Élu(e)', 'Date de naissance']}
+              body={elus.sort(sortByRole).map((elu) => formatElus(elu))}
             />
           </>
         ) : (
@@ -65,11 +64,38 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
         )}
       </Section>
       <style global jsx>{`
-        table > tbody > tr > td:first-of-type {
-          width: 30%;
+        table > tbody > tr > td {
+          min-width: 30%;
         }
       `}</style>
     </>
   );
 };
 export default ElusSection;
+
+type IElu = {
+  role?: string;
+};
+function sortByRole(a: IElu, b: IElu): -1 | 1 | 0 {
+  const roleA = a.role;
+  const roleB = b.role;
+  if (roleA === roleB) {
+    return 0;
+  }
+  if (roleA === 'Maire') {
+    return -1;
+  }
+  if (roleB === 'Maire') {
+    return 1;
+  }
+  if (roleA == null) {
+    return 1;
+  }
+  if (roleB == null) {
+    return -1;
+  }
+  if (roleA.match(/^[\d]+/) && roleB.match(/^[\d]+/)) {
+    return parseInt(roleA, 10) < parseInt(roleB, 10) ? -1 : 1;
+  }
+  return roleA < roleB ? -1 : 1;
+}
