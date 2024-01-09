@@ -9,7 +9,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/index';
-import { ISession, isAgent } from '#utils/session';
+import { ISession } from '#utils/session';
 
 export enum FICHE {
   INFORMATION = 'résumé',
@@ -73,8 +73,8 @@ export const Tabs: React.FC<{
       label: 'Documents',
       pathPrefix: '/documents/',
       noFollow: false,
-      shouldDisplay: isAgent(session),
-      width: '110px',
+      shouldDisplay: true,
+      width: '95px',
     },
     {
       ficheType: FICHE.FINANCES,
@@ -82,7 +82,7 @@ export const Tabs: React.FC<{
       pathPrefix: '/donnees-financieres/',
       noFollow: false,
       shouldDisplay: shouldDisplayFinances,
-      width: '110px',
+      width: '100px',
     },
     {
       ficheType: FICHE.ANNONCES,

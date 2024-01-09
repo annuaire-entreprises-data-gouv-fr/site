@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
-import ActesSection from '#components/espace-agent-components/documents/actes';
+import DocumentWall from '#components/espace-agent-components/documents/document-wall';
+import DocumentActesSection from '#components/espace-agent-components/documents/dopcument-actes';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -46,22 +47,20 @@ const UniteLegaleForAgentPage: NextPageWithLayout<IProps> = ({
           <HorizontalSeparator />
         </>
       )}
-      {isAgent(session) && <ActesSection uniteLegale={uniteLegale} />}
+      <DocumentWall
+        isVisible={isAgent(session)}
+        title="Actes et statuts"
+        id="actes"
+        uniteLegale={uniteLegale}
+      >
+        <DocumentActesSection uniteLegale={uniteLegale} />
+      </DocumentWall>
     </div>
   </>
 );
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    if (!isAgent(context.req?.session)) {
-      return {
-        redirect: {
-          destination: `/connexion/agent-public`,
-          permanent: false,
-        },
-      };
-    }
-
     const { slug, isBot } = extractParamsFromContext(context);
     const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
     return {

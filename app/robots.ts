@@ -33,6 +33,7 @@ export default function robots(): MetadataRoute.Robots {
         '/annonces/',
         '/dirigeants/',
         '/donnees-financieres/',
+        '/documents/',
         '/personne/',
         '/elus/',
         '/divers/',
