@@ -1,0 +1,33 @@
+title: Entreprise non-diffusible
+
+seo:
+  title: Entreprise non diffusible - définition - Annuaire des Entreprises
+  description: Une entreprise non diffusible est une entreprise dont les informations légales ne sont pas diffusibles ni ouvertes au public.
+
+cta:
+  label: Changer son statut de diffusion
+  lien: https://statut-diffusion-sirene.insee.fr
+
+body: |
+  ## **Entreprise non diffusible : définition**
+
+  Une entreprise non diffusible est une entreprise dont les informations légales ne sont pas diffusibles ni ouvertes au public. Cela signifie que leur statut auprès de l'INSEE est classé comme “non diffusible”.
+
+  Si une entreprise est non-diffusible, alors ses informations ne seront pas accessibles sur l’Annuaire des Entreprises.
+
+  ## **Mise à jour du statut de diffusion en 2023**
+
+  Conformément aux nouvelles modalités relatives au statut de diffusion [Décret n° 2022-1014 du 19 juillet 2022 relatif au Registre national des entreprises et portant adaptation d’autres registres d’entreprises](https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000046061058)) les données non-diffusibles ne sont plus occultées en totalité.
+
+  Cela veut dire que le statut de “non-diffusible” est remplacé par une diffusion partielle des informations, qui inclut :
+
+  * Pour une personne physique, l’identité de l’entrepreneur (nom, prénoms…), son adresse dans la commune et sa géolocalisation, restant masquées.
+  * Pour une personne morale, seuls les éléments de géolocalisation sont masqués (tout élément d’adresse et de géolocalisation, excepté la commune).
+
+  Donc les données suivantes sont désormais diffusées : activité principale, catégorie juridique, tranche d’effectifs, état administratif.
+
+  ##  **Rendre son entreprise non diffusible**
+
+  Pour demander la non-diffusion (ou la diffusion) de vos informations légales, vous devez vous adresser aux services de l'INSEE : [https://statut-diffusion-sirene.insee.fr](https://statut-diffusion-sirene.insee.fr/)
+
+  Une fois la demande acceptée, votre statut de diffusion sera mis à jour dans un délai d'un mois maximum sur le site de l'Annuaire des Entreprises.

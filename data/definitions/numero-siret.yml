@@ -1,0 +1,48 @@
+title: Numéro SIRET
+
+seo:
+  title: Numéro SIRET - définition - Annuaire des Entreprises
+  description: Le SIRET est un numéro unique qui permet d’identifier chaque établissement d’une entreprise auprès des administrations.
+
+body: |
+
+  ## **Le numéro SIRET : définition**
+
+  Le numéro SIRET (Système d’Identification du Répertoire des Etablissements) est le numéro d’immatriculation de chaque établissement d’une entreprise (l’unité légale). Il se compose de 14 chiffres attribués par l’INSEE (Institut National de la Statistique et des Etudes Economiques). Le SIRET permet l’identification de chaque établissement par les administrations et organismes publics.
+
+  **A noter** : une entreprise peut avoir plusieurs SIRET même si la majorité n’en possède qu’un seul (établissement unique).
+
+  ## **A quoi sert le SIRET ?**
+
+  Le numéro SIRET facilite l’accès à l’ensemble des informations juridiques et financières d’un établissement. Cette donnée étant publique, elle est accessible à toute personne qui souhaite les consulter. Par exemple, le SIRET doit figurer sur le bulletin de salaire du personnel travaillant dans l’établissement.
+
+  ## **Quelle différence entre le SIRET et le SIREN ?**
+
+  Le SIRET est formé de 14 chiffres : les 9 chiffres du SIREN suivis de 5 chiffres du NIC (Numéro Interne de Classement) spécifique à chaque établissement. Tandis que le numéro SIREN se compose de 9 chiffres, il identifie l’entreprise en tant qu’entité légale.
+
+  La formule de 14 chiffres du SIRET est simple à retenir : **SIRET = SIREN + numéro NIC**
+
+  **Exemple :  Carrefour Proximité France**
+
+  * SIREN : 345 130 488
+  * SIRET du siège social : 345 130 488 00017
+
+  **SIRET = SIREN + numéro NIC**
+
+  345 130 488 00017 = 345 130 488 + 00017
+
+  Ci-dessous, deux exemples de SIRET d’établissements appartenant à Carrefour Proximité France :
+
+  * SIRET : 345 130 488 00132
+  * SIRET : 345 130 488 00611
+
+  ## **Comment obtenir un numéro de SIRET ?**
+
+  Le numéro SIRET est délivré automatiquement après la demande d’immatriculation de l’entreprise sur le site internet [des formalités des entreprises](https://formalites.entreprises.gouv.fr/). Si vous n’avez pas encore reçu ce numéro, vous pourrez suivre l’évolution du traitement de votre demande sur ce même site internet.
+
+
+  ****
+
+  ## **Comment trouver un numéro de SIRET ?**
+
+  Le SIRET est une information publique. Toute personne peut consulter ce numéro sur le site internet de [l’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr). Ceci, au même titre que le SIREN, le N° TVA Intracommunautaire, l’activité principale (NAF/APE), le code NAF/APE, etc.
