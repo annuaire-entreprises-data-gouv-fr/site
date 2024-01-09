@@ -1,5 +1,5 @@
-import { HttpForbiddenError } from '#clients/exceptions';
 import { BaseClient, Issuer, generators } from 'openid-client';
+import { HttpForbiddenError } from '#clients/exceptions';
 
 let _client = undefined as BaseClient | undefined;
 
@@ -29,7 +29,7 @@ export const getClient = async () => {
     _client = new agentConnectIssuer.Client({
       client_id: CLIENT_ID as string,
       client_secret: CLIENT_SECRET as string,
-      redirect_uri: REDIRECT_URI,
+      redirect_uris: [REDIRECT_URI],
       post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI as string],
     });
 
@@ -44,8 +44,7 @@ export const agentConnectAuthorizeUrl = async () => {
   const state = generators.state();
 
   return client.authorizationUrl({
-    scope:
-      'openid uid given_name usual_name email siren siret organizational_unit belonging_population phone chorusdt idp_id idp_acr',
+    scope: 'openid given_name usual_name email siret',
     acr_values: 'eidas1',
     response_type: 'code',
     nonce,
