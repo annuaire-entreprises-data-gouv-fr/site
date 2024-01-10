@@ -46,11 +46,13 @@ export const DonneesPriveesSection = () => (
       </p>
     }
     modalFooter={
-      <p>
-        Si cette entreprise est la vôtre et que{' '}
-        <b>vous souhaitez rendre ces données publiques</b> :{' '}
-        <a href={constants.links.parcours.contact}>contactez-nous</a>.
-      </p>
+      <>
+        <b>C’est votre entreprise ?</b>
+        <p>
+          Si vous souhaitez rendre ces données publiques :{' '}
+          <a href={constants.links.parcours.contact}>contactez-nous</a>.
+        </p>
+      </>
     }
   />
 );

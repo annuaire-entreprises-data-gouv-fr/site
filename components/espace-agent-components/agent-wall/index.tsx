@@ -77,6 +77,7 @@ const AgentWall: React.FC<{
           .cta-actes > div {
             padding: 0;
             box-shadow: none;
+            border: none;
           }
         }
       `}</style>
