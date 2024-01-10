@@ -2,7 +2,7 @@ name: Deploy cluster
 
 on:
   push:
-    branches: [main]
+    branches: [main, deploy_stdout_logged_on_server]
   workflow_dispatch:
   schedule:
     - cron: '0 7 * * *'
@@ -34,7 +34,7 @@ jobs:
           SSH_HOST: ${{ secrets[matrix.host] }}
 
       - name: Deploy website to production
-        run: ssh -i ./deploy.key www-data@$SSH_HOST 'python3 /opt/scripts/app-deploy-release/deploy.py /opt/git/releases/annuaire-entreprises-site https://github.com/etalab/annuaire-entreprises-site.git website --version main --versions_to_keep=5'
+        run: ssh -i ./deploy.key www-data@$SSH_HOST 'python3 /opt/scripts/app-deploy-release/deploy.py /opt/git/releases/annuaire-entreprises-site https://github.com/etalab/annuaire-entreprises-site.git website --version main --versions_to_keep=5 | tee --append /var/log/deploy_annuaire-entreprises-site'
         env:
           SSH_HOST: ${{ secrets[matrix.host] }}
 
