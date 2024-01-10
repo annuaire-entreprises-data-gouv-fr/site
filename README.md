@@ -138,7 +138,7 @@ npm run build:seo
 
 ## Licence
 
-Le code source est publié par la Direction interministérielle du numérique sour[licence MIT](LICENSE).
+Le code source est publié par la Direction interministérielle du numérique sous [licence MIT](LICENSE).
 
 ## Remontée d'erreur
 
