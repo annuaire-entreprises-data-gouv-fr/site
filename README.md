@@ -138,7 +138,7 @@ npm run build:seo
 
 ## Licence
 
-Ce projet est sous AGPL 3.0
+Le code source est publié par la Direction interministérielle du numérique sour[licence MIT](LICENSE).
 
 ## Remontée d'erreur
 
