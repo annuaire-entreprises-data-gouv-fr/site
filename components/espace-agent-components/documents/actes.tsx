@@ -27,7 +27,7 @@ const DocumentActesSection: React.FC<{
             {(isAssociation(uniteLegale) || isServicePublic(uniteLegale)) && (
               <>
                 <Warning full>
-                  Les asociations et les services publics ne sont pas
+                  Les associations et les services publics ne sont pas
                   immatriculés au RNE.
                 </Warning>
                 <br />
