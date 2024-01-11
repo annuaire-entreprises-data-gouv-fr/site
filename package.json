@@ -1,5 +1,5 @@
 {
-  "name": "personnes-morales",
+  "name": "annuaire-entreprises-site",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -25,8 +25,7 @@
     "test:api-clients": "jest clients --silent",
     "test:api-clients:update-snapshots": "jest clients --silent -u",
     "lint": "next lint",
-    "script:fetch-protected-siren": "ts-node ./scripts/fetch-protected-siren.ts",
-    "script:seo": " ts-node ./scripts/seo/index.ts"
+    "script:fetch-protected-siren": "ts-node ./scripts/fetch-protected-siren.ts"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "~5.0.0",
@@ -68,7 +67,6 @@
     "remark-heading-id": "^1.0.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.0.0",
-    "ts-node": "^10.9.1",
     "typescript": "^5.2.2",
     "unified": "^11.0.3",
     "vite": "^4.4.11"
