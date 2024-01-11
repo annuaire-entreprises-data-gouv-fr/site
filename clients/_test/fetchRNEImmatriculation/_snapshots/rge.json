@@ -11,11 +11,11 @@
       "dateRadiation": "",
       "dateCessationActivite": "",
       "isPersonneMorale": true,
-      "dateClotureExercice": "",
+      "dateClotureExercice": "3009",
       "dureePersonneMorale": "99 ans",
       "capital": "26 000 EUR (fixe)",
       "libelleNatureJuridique": "SAS, société par actions simplifiée",
-      "natureEntreprise": null
+      "natureEntreprise": "Artisanale réglementée"
     },
     "dirigeants": [
       {

@@ -119,7 +119,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "GE",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -152,7 +151,7 @@
             "sexe": null,
             "nom": "BERNARD DE SAINT AFFRIQUE",
             "prenom": "Antoine",
-            "role": "Directeur Général, Administrateur",
+            "role": "Directeur Général",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           },
@@ -198,6 +197,14 @@
           },
           {
             "sexe": null,
+            "nom": "MEHTA",
+            "prenom": "Sanjiv",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
             "nom": "MOLITOR",
             "prenom": "Bettina",
             "role": "Administrateur",
@@ -224,19 +231,19 @@
             "sexe": null,
             "nom": "SCHNEPP",
             "prenom": "Gilles",
-            "role": "Président du conseil d'administration, Administrateur",
+            "role": "Administrateur",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           },
           {
             "siren": "344366315",
             "denomination": "ERNST & YOUNG AUDIT",
-            "role": "Commissaire aux comptes titulaire"
+            "role": null
           },
           {
             "siren": "387953961",
             "denomination": "MAZARS ET ASSOCIÉS",
-            "role": "Commissaire aux comptes titulaire"
+            "role": null
           }
         ]
       }
