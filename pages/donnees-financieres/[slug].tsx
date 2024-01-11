@@ -1,6 +1,5 @@
 import { GetServerSideProps } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import DocumentBilansSection from '#components/espace-agent-components/documents/bilans';
 import { FinancesSocieteSection } from '#components/finances-section/societe';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
@@ -47,7 +46,6 @@ const FinancePage: NextPageWithLayout<IProps> = ({
             {isAgent(session) && (
               <>
                 <HorizontalSeparator />
-                <DocumentBilansSection uniteLegale={uniteLegale} />
               </>
             )}
           </>
