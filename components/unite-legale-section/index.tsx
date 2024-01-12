@@ -2,7 +2,8 @@ import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Tag } from '#components-ui/tag';
-import AvisSituationLink from '#components/avis-situation-link';
+import AvisSituationLink from '#components/justificatifs/avis-situation-link';
+import ExtraitRNELink from '#components/justificatifs/extrait-rne-link';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
@@ -117,19 +118,14 @@ const UniteLegaleSection: React.FC<{
           </li>
         ) : isServicePublic(uniteLegale) ? null : (
           <li>
-            <a
-              target="_blank"
-              rel="noopener"
-              href={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
-            >
-              Télécharger l’extrait RNE
-            </a>
+            Extrait RNE : <ExtraitRNELink uniteLegale={uniteLegale} />
           </li>
         )}
         <li>
+          Avis de situation Insee :{' '}
           <AvisSituationLink
             etablissement={uniteLegale.siege}
-            label="Télécharger l’avis de situation Insee"
+            label="télécharger"
           />
         </li>
       </ul>,
