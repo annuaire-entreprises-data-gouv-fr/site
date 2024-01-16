@@ -7,9 +7,9 @@ import { AgentConnectionFailedException } from './callback';
 
 export default withIronSessionApiRoute(loginRoute, sessionOptions);
 
-async function loginRoute(_req: NextApiRequest, res: NextApiResponse) {
+async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const url = await agentConnectAuthorizeUrl();
+    const url = await agentConnectAuthorizeUrl(req);
     res.redirect(url);
   } catch (e: any) {
     logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));

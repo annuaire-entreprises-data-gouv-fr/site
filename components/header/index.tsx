@@ -85,7 +85,7 @@ export const Header: React.FC<IProps> = ({
                           <li>
                             <a
                               className="fr-link menu-logout"
-                              href="/api/auth/mon-compte-pro/logout"
+                              href="/api/auth/agent-connect/logout"
                             >
                               <div>
                                 <Icon slug="user">

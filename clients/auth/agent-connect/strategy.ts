@@ -1,3 +1,4 @@
+import { IncomingMessage } from 'http';
 import { BaseClient, Issuer, generators } from 'openid-client';
 import { HttpForbiddenError } from '#clients/exceptions';
 
@@ -9,6 +10,8 @@ const ISSUER_URL = process.env.AGENTCONNECT_URL_DISCOVER;
 const REDIRECT_URI = process.env.AGENTCONNECT_REDIRECT_URI;
 const POST_LOGOUT_REDIRECT_URI =
   process.env.AGENTCONNECT_POST_LOGOUT_REDIRECT_URI;
+
+const SCOPES = 'openid given_name usual_name email siret';
 
 if (
   !CLIENT_ID ||
@@ -31,20 +34,25 @@ export const getClient = async () => {
       client_secret: CLIENT_SECRET as string,
       redirect_uris: [REDIRECT_URI],
       post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI as string],
+      userinfo_signed_response_alg: 'RS256',
     });
 
     return _client;
   }
 };
 
-export const agentConnectAuthorizeUrl = async () => {
+export const agentConnectAuthorizeUrl = async (req: IncomingMessage) => {
   const client = await getClient();
 
   const nonce = generators.nonce();
   const state = generators.state();
 
+  req.session.state = state;
+  req.session.nonce = nonce;
+  await req.session.save();
+
   return client.authorizationUrl({
-    scope: 'openid given_name usual_name email siret',
+    scope: SCOPES,
     acr_values: 'eidas1',
     response_type: 'code',
     nonce,
@@ -67,31 +75,34 @@ export type IAgentConnectUserInfo = {
   is_service_public: boolean;
 };
 
-export const agentConnectAuthenticate = async (req: any) => {
+export const agentConnectAuthenticate = async (req: IncomingMessage) => {
   const client = await getClient();
 
   const params = client.callbackParams(req);
-  const tokenSet = await client.callback(
-    // reuse redirect_uri
-    REDIRECT_URI,
-    params
-  );
 
-  const { access_token } = tokenSet;
+  const tokenSet = await client.grant({
+    grant_type: 'authorization_code',
+    code: params.code,
+    redirect_uri: REDIRECT_URI,
+    scope: SCOPES,
+  });
 
-  if (!access_token) {
+  const accessToken = tokenSet.access_token;
+  if (!accessToken) {
     throw new HttpForbiddenError('No access token');
   }
 
-  const userInfo = (await client.userinfo(
-    access_token
-  )) as IAgentConnectUserInfo;
+  const userInfo = (await client.userinfo(tokenSet)) as IAgentConnectUserInfo;
+  req.session.idToken = tokenSet.id_token;
+  await req.session.save();
+
   return userInfo;
 };
 
-export const agentConnectLogoutUrl = async () => {
+export const agentConnectLogoutUrl = async (req: IncomingMessage) => {
   const client = await getClient();
   return client.endSessionUrl({
+    id_token_hint: req.session.idToken,
     post_logout_redirect_uri: POST_LOGOUT_REDIRECT_URI,
   });
 };
