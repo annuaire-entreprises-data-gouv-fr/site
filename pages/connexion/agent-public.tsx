@@ -13,17 +13,13 @@ const Login = () => {
         canonical="https://annuaire-entreprises.data.gouv.fr/connexion/agent-public"
         noIndex={true}
       />
-      <h1>Accédez à l’espace agent public</h1>
+      <h1>Espace agent public</h1>
       <p>
         Ce service est en <Tag color="new">beta test</Tag>.
       </p>
       <p>
-        Seuls les agents et agentes habilités peuvent se connecter. Si vous êtes
-        intéressé(e),{' '}
-        <a href="mailto:charlotte.choplin@beta.gouv.fr">
-          vous pouvez nous contacter
-        </a>
-        .
+        Accédez aux actes, statuts, bilans et données des entreprises
+        non-diffusibles.
       </p>
       <div className="layout-center">
         <ButtonAgentConnect />

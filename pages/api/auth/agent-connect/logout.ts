@@ -3,14 +3,14 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { agentConnectLogoutUrl } from '#clients/auth/agent-connect/strategy';
 import { Exception } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
-import { cleanAgentSession, sessionOptions } from '#utils/session';
+import { sessionOptions, setSirenFrom } from '#utils/session';
 
 export default withIronSessionApiRoute(logoutRoute, sessionOptions);
 
 async function logoutRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
+    await setSirenFrom(req.session, (req?.query?.sirenFrom || '') as string);
     const url = await agentConnectLogoutUrl(req);
-    await cleanAgentSession(req.session);
     res.redirect(url);
   } catch (e: any) {
     logErrorInSentry(new LogoutFailedException({ cause: e }));

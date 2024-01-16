@@ -10,6 +10,8 @@ import { checkIsSuperAgent } from '#utils/helpers/is-super-agent';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import {
   ISessionPrivilege,
+  cleanSirenFrom,
+  getSirenFrom,
   sessionOptions,
   setAgentSession,
 } from '#utils/session';
@@ -48,6 +50,7 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
     const userInfo = await agentConnectAuthenticate(req);
     const userPrivilege = await getUserPrivileges(userInfo);
+    const session = req.session;
 
     if (userPrivilege === 'unkown') {
       throw new HttpForbiddenError(`Unauthorized account : ${userInfo.email}`);
@@ -58,9 +61,17 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
       userInfo.family_name || '',
       userInfo.given_name || '',
       userPrivilege,
-      req.session
+      session
     );
-    res.redirect('/');
+
+    const sirenFrom = getSirenFrom(session);
+
+    if (sirenFrom) {
+      await cleanSirenFrom(session);
+      res.redirect(`/entreprise/${sirenFrom}`);
+    } else {
+      res.redirect('/');
+    }
   } catch (e: any) {
     logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));
     if (e instanceof HttpForbiddenError) {
