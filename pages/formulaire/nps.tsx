@@ -8,16 +8,16 @@ import { NextPageWithLayout } from 'pages/_app';
 
 export const visitorTypes = [
   {
-    value: 'Agent public',
-    label: 'Agent public',
+    value: 'Indépendant',
+    label: 'Indépendant(e)',
   },
   {
     value: 'Dirigeant',
     label: 'Dirigeant(e) d’entreprise ou d’association',
   },
   {
-    value: 'Indépendant',
-    label: 'Indépendant(e)',
+    value: 'Agent public',
+    label: 'Agent public',
   },
   {
     value: 'Salarié',

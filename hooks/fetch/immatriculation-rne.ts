@@ -15,7 +15,6 @@ export function useFetchImmatriculationRNE(uniteLegale: IUniteLegale) {
         httpGet<IImmatriculationRNE>(
           routes.api.rne.immatriculation + '/' + siren
         ),
-
       administration: EAdministration.INPI,
       logError: (e: any) => {
         if (e.status) {

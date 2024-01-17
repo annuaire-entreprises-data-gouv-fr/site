@@ -2,6 +2,7 @@ import React from 'react';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IEtatCivil } from '#models/immatriculation';
 import { isCollectiviteTerritoriale, IUniteLegale } from '#models/index';
+import { formatDatePartial } from '#utils/helpers';
 import { Section } from '../section';
 import { FullTable } from '../table/full';
 
@@ -27,7 +28,7 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
     const infos = [
       elu.role,
       <>
-        {nomComplet}, né(e) en {elu.dateNaissancePartial}
+        {nomComplet}, né(e) en {formatDatePartial(elu.dateNaissancePartial)}
       </>,
     ];
 
@@ -51,7 +52,9 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
             </p>
             <FullTable
               head={['Role', 'Details']}
-              body={elus.map((elu) => formatElus(elu))}
+              body={elus
+                .sort((a) => (!a.role ? 1 : -1))
+                .map((elu) => formatElus(elu))}
             />
           </>
         ) : (

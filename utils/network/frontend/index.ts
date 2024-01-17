@@ -66,7 +66,7 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
     }
 
     return data as T;
-  } catch (e) {
+  } catch (e: any) {
     const errorArgs = {
       context: { page: config.url, details: `method: ${config.method}` },
       cause: e,
@@ -77,7 +77,7 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
       // We don't want this error to bubble though the app
       throw new RequestAbortedDuringUnloadException(errorArgs);
     }
-    throw new FailToFetchError(errorArgs);
+    throw new FailToFetchError(errorArgs, e.status);
   } finally {
     clearTimeout(timeoutId);
   }
@@ -101,7 +101,10 @@ export class RequestAbortedDuringUnloadException extends Exception {
 }
 
 export class FailToFetchError extends Exception {
-  constructor(args: { context: IExceptionContext; cause: any }) {
+  constructor(
+    args: { context: IExceptionContext; cause: any },
+    public status = 500
+  ) {
     super({
       name: 'FailToFetchError',
       message: 'Error while trying to fetch ressource from client',

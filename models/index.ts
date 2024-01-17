@@ -100,7 +100,6 @@ export interface IUniteLegale extends IEtablissementsList {
   anneeTrancheEffectif: string | null;
   categorieEntreprise: string | null;
   anneeCategorieEntreprise: string | null;
-  dirigeant: IEtatCivil | null;
   complements: IUniteLegaleComplements;
   association: {
     idAssociation: IdRna | string | null;
@@ -136,7 +135,6 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     anneeCategorieEntreprise: null,
     categorieEntreprise: null,
     anneeTrancheEffectif: null,
-    dirigeant: null,
     complements: createDefaultUniteLegaleComplements(),
     association: {
       idAssociation: null,

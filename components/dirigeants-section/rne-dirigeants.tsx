@@ -82,7 +82,6 @@ function DirigeantContent({
         dirigeant.role,
         <>
           <b>{dirigeant.denomination}</b>
-
           {dirigeant.siren ? (
             <>
               {' - '}
@@ -113,16 +112,20 @@ function DirigeantContent({
         dirigeant.prenom && dirigeant.nom ? ' ' : ''
       }${(dirigeant.nom || '').toUpperCase()}`;
 
+      const firstName = (dirigeant.prenom || '').split(',')[0];
+
       return [
         dirigeant.role,
         <>
-          {nomComplet}, né(e) en{' '}
-          {formatDatePartial(dirigeant.dateNaissancePartial)}
+          {nomComplet}
+          {dirigeant.dateNaissancePartial
+            ? `, né(e) en ${formatDatePartial(dirigeant.dateNaissancePartial)}`
+            : ''}
         </>,
         ...(dirigeant.dateNaissancePartial
           ? [
               <a
-                href={`/personne?n=${dirigeant.nom}&fn=${dirigeant.prenom}&partialDate=${dirigeant.dateNaissancePartial}&sirenFrom=${uniteLegale.siren}`}
+                href={`/personne?n=${dirigeant.nom}&fn=${firstName}&partialDate=${dirigeant.dateNaissancePartial}&sirenFrom=${uniteLegale.siren}`}
               >
                 → voir ses entreprises
               </a>,

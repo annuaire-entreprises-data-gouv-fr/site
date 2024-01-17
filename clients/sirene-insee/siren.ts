@@ -1,7 +1,6 @@
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { createEtablissementsList } from '#models/etablissements-list';
-import { IEtatCivil } from '#models/immatriculation';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
@@ -165,12 +164,6 @@ const mapToDomainObject = (
     categorieJuridiqueUniteLegale
   );
 
-  const dirigeant = {
-    sexe: sexeUniteLegale,
-    prenom: formatFirstNames([prenomUsuelUniteLegale]),
-    nom: formatNameFull(nomUniteLegale, nomUsageUniteLegale),
-  } as IEtatCivil;
-
   return {
     ...defaultUniteLegale,
     siren,
@@ -206,7 +199,6 @@ const mapToDomainObject = (
     anneeTrancheEffectif: anneeEffectifsUniteLegale,
     categorieEntreprise,
     anneeCategorieEntreprise,
-    dirigeant: estEntrepreneurIndividuel ? dirigeant : null,
     complements: {
       ...defaultUniteLegale.complements,
       estEntrepreneurIndividuel,

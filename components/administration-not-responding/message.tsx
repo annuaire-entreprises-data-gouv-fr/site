@@ -14,11 +14,14 @@ const AdministrationNotRespondingMessage: React.FC<IProps> = ({
       <Warning>
         Le service de l’administration qui nous transmet cette donnée ne
         fonctionne pas en ce moment. 🛑
-      </Warning>
-      <p>
+        <br />
         Cela vient probablement d’une surcharge ponctuelle de leurs services.
-        Merci de ré-essayer plus tard. Nous sommes désolés pour le dérangement.
-      </p>
+        Nous sommes désolés pour le dérangement.
+        <br />
+        <br />
+        Vous pouvez{' '}
+        <a href="">cliquez-ici pour recharger la page et ré-essayer</a>.
+      </Warning>
       <p>
         Pour en savoir plus sur l’état du service, vous pouvez consultez la
         section de cette administration{' '}

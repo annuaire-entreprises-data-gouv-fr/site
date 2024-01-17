@@ -1,10 +1,10 @@
 import React from 'react';
+import routes from '#clients/routes';
 import { IEtablissement } from '#models/index';
 import {
   estDiffusible,
   nonDiffusibleDataFormatter,
 } from '#models/statut-diffusion';
-import routes from '#clients/routes';
 
 const AvisSituationLink: React.FC<{
   etablissement: IEtablissement;
