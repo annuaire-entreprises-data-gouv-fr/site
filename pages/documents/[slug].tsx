@@ -7,7 +7,10 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IUniteLegale } from '#models/index';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
-import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
+import {
+  uniteLegalePageDescription,
+  uniteLegalePageTitle,
+} from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -27,8 +30,8 @@ const UniteLegaleForAgentPage: NextPageWithLayout<IProps> = ({
 }) => (
   <>
     <Meta
-      title={getCompanyPageTitle(uniteLegale, session)}
-      description={getCompanyPageDescription(uniteLegale, session)}
+      title={uniteLegalePageTitle(uniteLegale, session)}
+      description={uniteLegalePageDescription(uniteLegale, session)}
       noIndex={true}
       canonical={`https://annuaire-entreprises.data.gouv.fr/documents/${
         uniteLegale.chemin || uniteLegale.siren

@@ -1,13 +1,9 @@
-import { LabelAndCertificateBadge } from '#components-ui/badge/frequent';
 import { EAdministration } from '#models/administrations/EAdministration';
-import InformationTooltip from '../../components-ui/information-tooltip';
-import { IUniteLegale } from '../../models';
+import { IUniteLegale } from '../../../models';
+import { LabelWithLinkToSection } from './label-with-link-to-section';
 
 export const checkHasQuality = (uniteLegale: IUniteLegale) =>
   uniteLegale.complements.estEss || uniteLegale.complements.estSocieteMission;
-
-export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
-  labelsAndCertificatesSources(uniteLegale).length > 0;
 
 export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
   const sources = [];
@@ -30,6 +26,9 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
 
   return sources;
 };
+
+export const checkHasLabelsAndCertificates = (uniteLegale: IUniteLegale) =>
+  labelsAndCertificatesSources(uniteLegale).length > 0;
 
 export const LabelsAndCertificatesBadgesSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -123,27 +122,3 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     </>
   );
 };
-
-function LabelWithLinkToSection({
-  label,
-  informationTooltipLabel,
-  sectionId,
-  siren,
-}: {
-  label: string;
-  informationTooltipLabel: string;
-  sectionId: string;
-  siren: string;
-}) {
-  return (
-    <InformationTooltip label={informationTooltipLabel} cursor="pointer">
-      <LabelAndCertificateBadge
-        label={label}
-        link={{
-          href: `/labels-certificats/${siren}#${sectionId}`,
-          'aria-label': `Consulter la section ${label} pour cette structure`,
-        }}
-      />
-    </InformationTooltip>
-  );
-}

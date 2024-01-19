@@ -10,7 +10,10 @@ import { FICHE } from '#components/title-section/tabs';
 import { IUniteLegale } from '#models/index';
 import { estDiffusible } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
-import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
+import {
+  uniteLegalePageDescription,
+  uniteLegalePageTitle,
+} from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -34,11 +37,11 @@ const DirigeantsPage: NextPageWithLayout<IProps> = ({
       <Meta
         canonical={`https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`}
         noIndex={true}
-        title={`Dirigeants de la structure - ${getCompanyPageTitle(
+        title={`Dirigeants de la structure - ${uniteLegalePageTitle(
           uniteLegale,
           session
         )}`}
-        description={getCompanyPageDescription(uniteLegale, session)}
+        description={uniteLegalePageDescription(uniteLegale, session)}
       />
       <div className="content-container">
         <Title

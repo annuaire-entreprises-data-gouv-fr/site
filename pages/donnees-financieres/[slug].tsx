@@ -7,7 +7,7 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
-import { getCompanyPageTitle } from '#utils/helpers';
+import { uniteLegalePageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -27,7 +27,7 @@ const FinancePage: NextPageWithLayout<IProps> = ({
   return (
     <>
       <Meta
-        title={`Données financières - ${getCompanyPageTitle(
+        title={`Données financières - ${uniteLegalePageTitle(
           uniteLegale,
           session
         )}`}

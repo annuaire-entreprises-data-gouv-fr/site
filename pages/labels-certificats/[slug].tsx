@@ -3,7 +3,7 @@ import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
-} from '#components/labels-and-certificates-badges-section';
+} from '#components/badges-section/labels-and-certificates';
 import { CertificationsBioSection } from '#components/labels-and-certificates/bio';
 import { EgaproSection } from '#components/labels-and-certificates/egapro';
 import { CertificationsEntrepreneurSpectaclesSection } from '#components/labels-and-certificates/entrepreneur-spectacles';
@@ -54,7 +54,10 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
   return (
     <>
       <Meta
-        title={`Labels et certificats - ${getNomComplet(uniteLegale, session)}`}
+        title={`Qualités, labels et certificats - ${getNomComplet(
+          uniteLegale,
+          session
+        )}`}
         canonical={`https://annuaire-entreprises.data.gouv.fr/labels-certificats/${uniteLegale.siren}`}
         noIndex={true}
       />

@@ -3,10 +3,10 @@ import { estActif } from '#models/etat-administratif';
 import { IUniteLegale } from '#models/index';
 import { getAdresseUniteLegale, getNomComplet } from '#models/statut-diffusion';
 import {
+  capitalize,
   formatAge,
   formatDateLong,
-  getCompanyLabel,
-  getCompanyPronoun,
+  uniteLegaleLabelWithPronoun,
 } from '#utils/helpers';
 import { libelleCategorieEntrepriseForDescription } from '#utils/helpers/formatting/categories-entreprise';
 import { libelleEffectifForDescription } from '#utils/helpers/formatting/codes-effectifs';
@@ -30,8 +30,8 @@ export const UniteLegaleDescription: React.FC<{
     <>
       <p>
         <>
-          {getCompanyPronoun(uniteLegale)}
-          {getCompanyLabel(uniteLegale)} {getNomComplet(uniteLegale, session)}
+          {capitalize(uniteLegaleLabelWithPronoun(uniteLegale))}{' '}
+          {getNomComplet(uniteLegale, session)}
         </>
         {uniteLegale.dateCreation ? (
           <>

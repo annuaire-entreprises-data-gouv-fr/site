@@ -237,6 +237,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       estQualiopi: est_qualiopi,
       estAssociation: est_association,
       estUai: est_uai,
+      estEntrepriseInclusive: true,
     },
     association: {
       idAssociation: identifiant_association,
@@ -320,6 +321,12 @@ const mapToEtablissement = (
     tranche_effectif_salarie = '',
     caractere_employeur = '',
     annee_tranche_effectif_salarie = '',
+    liste_finess = [],
+    liste_id_bio = [],
+    liste_idcc = [],
+    liste_id_organisme_formation = [],
+    liste_rge = [],
+    liste_uai = [],
   } = etablissement;
 
   const enseigne = (liste_enseignes || []).join(' ');
@@ -360,6 +367,14 @@ const mapToEtablissement = (
     activitePrincipale: activite_principale,
     dateCreation: parseDateCreationInsee(date_creation),
     dateDebutActivite: date_debut_activite,
+    complements: {
+      idFiness: liste_finess || [],
+      idBio: liste_id_bio || [],
+      idcc: liste_idcc || [],
+      idOrganismeFormation: liste_id_organisme_formation || [],
+      idRge: liste_rge || [],
+      idUai: liste_uai || [],
+    },
   };
 };
 

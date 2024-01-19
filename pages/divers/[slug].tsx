@@ -10,7 +10,10 @@ import {
 } from '#models/conventions-collectives-list';
 import { IUniteLegale } from '#models/index';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
-import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
+import {
+  uniteLegalePageDescription,
+  uniteLegalePageTitle,
+} from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -31,11 +34,11 @@ const ConventionsCollectives: NextPageWithLayout<IProps> = ({
   <>
     <Meta
       noIndex={true}
-      title={`Conventions collectives - ${getCompanyPageTitle(
+      title={`Conventions collectives - ${uniteLegalePageTitle(
         uniteLegale,
         session
       )}`}
-      description={getCompanyPageDescription(uniteLegale, session)}
+      description={uniteLegalePageDescription(uniteLegale, session)}
       canonical={`https://annuaire-entreprises.data.gouv.fr/divers/${uniteLegale.siren}`}
     />
     <div className="content-container">

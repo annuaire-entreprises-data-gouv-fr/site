@@ -1,6 +1,7 @@
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { IEntrepriseInclusive } from '#models/certifications/entreprise-inclusive';
+import { Siret } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 
 type APIInclusionResponse = {
@@ -40,18 +41,29 @@ type APIInclusionResponse = {
  *
  * https://lemarche.inclusion.beta.gouv.fr/api/docs/
  */
-const clientAPIInclusion = async (): Promise<IEntrepriseInclusive> => {
-  const url = routes.certifications.entrepriseInclusive.api + `77564204400207`;
-  const response = await httpGet<any>(url, {
-    params: { token: process.env.API_MARCHE_INCLUSION_TOKEN },
-  });
+const clientAPIInclusion = async (
+  sirets: Siret[]
+): Promise<IEntrepriseInclusive[]> => {
+  const urls = sirets.map(
+    (siret) => routes.certifications.entrepriseInclusive.api + siret
+  );
+  const responses = await Promise.all(
+    urls.map((url) =>
+      httpGet<APIInclusionResponse>(url, {
+        params: { token: process.env.API_MARCHE_INCLUSION_TOKEN },
+      })
+    )
+  );
 
-  console.log(response);
-  return mapToDomainObject(response);
+  return responses.map(mapToDomainObject);
 };
 
-const mapToDomainObject = (res: any) => {
-  return null;
+const mapToDomainObject = (res: APIInclusionResponse) => {
+  const { slug, siret } = res;
+  return {
+    marcheInclusionLink: routes.certifications.entrepriseInclusive.site + slug,
+    siret,
+  };
 };
 
 const stubbedClientInclusion = stubClientWithSnapshots({

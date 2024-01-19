@@ -18,8 +18,7 @@ import {
 import {
   formatIntFr,
   formatSiret,
-  getCompanyLabel,
-  getCompanyPronoun,
+  uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
 import { ISession, isAgent } from '#utils/session';
 import { INSEE } from '../administrations';
@@ -135,8 +134,7 @@ const TitleEtablissementWithDenomination: React.FC<{
       )}
       <span>
         {' '}
-        de {getCompanyPronoun(uniteLegale).toLowerCase()}
-        {getCompanyLabel(uniteLegale)}{' '}
+        {uniteLegaleLabelWithPronounContracted(uniteLegale)}{' '}
         <a href={`/entreprise/${uniteLegale.siren}`}>
           {getNomComplet(uniteLegale, session)}&nbsp;‣&nbsp;
           <span className="siret-or-siren">

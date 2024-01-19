@@ -2,7 +2,7 @@ import { PrintNever } from '#components-ui/print-visibility';
 import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
-} from '#components/labels-and-certificates-badges-section';
+} from '#components/badges-section/labels-and-certificates';
 import constants from '#models/constants';
 import {
   IUniteLegale,

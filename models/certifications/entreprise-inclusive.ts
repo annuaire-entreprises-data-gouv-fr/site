@@ -15,12 +15,14 @@ export type IEntrepriseInclusive = {
 
 export const getEntrepriseInclusive = async (
   uniteLegale: IUniteLegale
-): Promise<IEntrepriseInclusive | IAPINotRespondingError> => {
+): Promise<IEntrepriseInclusive[] | IAPINotRespondingError> => {
   try {
     if (!uniteLegale.complements.estEntrepriseInclusive) {
       throw new HttpNotFound('Not an entreprise inclusive');
     }
-    return await clientAPIInclusion();
+    return await clientAPIInclusion(
+      uniteLegale.etablissements.all.map((e) => e.siret)
+    );
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.DINUM, 404);

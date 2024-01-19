@@ -1,9 +1,9 @@
 import {
-  isAssociation,
-  isServicePublic,
-  isCollectiviteTerritoriale,
-  IUniteLegale,
   IEtablissement,
+  IUniteLegale,
+  isAssociation,
+  isCollectiviteTerritoriale,
+  isServicePublic,
 } from '#models/index';
 import {
   getAdresseEtablissement,
@@ -15,21 +15,47 @@ import { ISession } from '#utils/session';
 import { formatSiret } from '../siren-and-siret';
 import { capitalize, formatIntFr } from './formatting';
 
-export const getCompanyPronoun = (uniteLegale: IUniteLegale) => {
+const uniteLegalePronounContracted = (uniteLegale: IUniteLegale) => {
   switch (true) {
     case isAssociation(uniteLegale):
     case uniteLegale.complements.estEntrepreneurIndividuel:
-      return 'L’';
+      return 'de l’';
     case isCollectiviteTerritoriale(uniteLegale):
-      return 'La ';
+      return 'de la ';
     case isServicePublic(uniteLegale):
-      return 'Le ';
+      return 'du ';
     default:
-      return 'La ';
+      return 'de la ';
   }
 };
 
-export const getCompanyLabel = (uniteLegale: IUniteLegale) => {
+const uniteLegalePronoun = (uniteLegale: IUniteLegale) => {
+  switch (true) {
+    case isAssociation(uniteLegale):
+    case uniteLegale.complements.estEntrepreneurIndividuel:
+      return 'l’';
+    case isCollectiviteTerritoriale(uniteLegale):
+      return 'la ';
+    case isServicePublic(uniteLegale):
+      return 'le ';
+    default:
+      return 'la ';
+  }
+};
+
+export const uniteLegaleLabelWithPronoun = (uniteLegale: IUniteLegale) => {
+  return uniteLegalePronoun(uniteLegale) + uniteLegaleLabel(uniteLegale);
+};
+
+export const uniteLegaleLabelWithPronounContracted = (
+  uniteLegale: IUniteLegale
+) => {
+  return (
+    uniteLegalePronounContracted(uniteLegale) + uniteLegaleLabel(uniteLegale)
+  );
+};
+
+export const uniteLegaleLabel = (uniteLegale: IUniteLegale) => {
   switch (true) {
     case isAssociation(uniteLegale):
       return `association`;
@@ -44,11 +70,11 @@ export const getCompanyLabel = (uniteLegale: IUniteLegale) => {
   }
 };
 
-export const getCompanyPageTitle = (
+export const uniteLegalePageTitle = (
   uniteLegale: IUniteLegale,
   session: ISession | null
 ) => {
-  return `${capitalize(getCompanyLabel(uniteLegale))} ${getNomComplet(
+  return `${capitalize(uniteLegaleLabel(uniteLegale))} ${getNomComplet(
     uniteLegale,
     session
   )} à ${uniteLegale.siege.codePostal} ${
@@ -56,7 +82,7 @@ export const getCompanyPageTitle = (
   } - SIREN ${formatIntFr(uniteLegale.siren)} | Annuaire des Entreprises`;
 };
 
-export const getCompanyPageDescription = (
+export const uniteLegalePageDescription = (
   uniteLegale: IUniteLegale,
   session: ISession | null
 ) =>
@@ -68,7 +94,7 @@ export const getCompanyPageDescription = (
     session
   )} : SIREN, SIRET, TVA Intracommunautaire, Code APE/NAF, dirigeant, adresse, justificatif  d'immatriculation...`;
 
-export const getEtablissementPageDescription = (
+export const etablissementPageDescription = (
   etablissement: IEtablissement,
   uniteLegale: IUniteLegale,
   session: ISession | null
@@ -82,7 +108,7 @@ export const getEtablissementPageDescription = (
     session
   )} : SIREN, SIRET, TVA Intracommunautaire, Code APE/NAF, dirigeant, adresse, justificatif  d'immatriculation...`;
 
-export const getEtablissementPageTitle = (
+export const etablissementPageTitle = (
   etablissement: IEtablissement,
   uniteLegale: IUniteLegale,
   session: ISession | null

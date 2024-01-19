@@ -226,13 +226,13 @@ class SearchFilterParams {
     }
 
     const structureLabels = {
-      ess: 'Label : ESS',
-      rge: 'Label : RGE',
+      ess: 'Qualité : ESS',
+      rge: 'Certifié : RGE',
       esv: 'Label : Entrepreneur de spectacle vivant',
-      bio: 'Label : Professionnels du bio',
+      bio: 'Certifié : Professionnels du bio',
       egapro: 'Label : Égalité professionnelle',
-      qualiopi: 'Label : Qualiopi',
-      sm: 'Label : Société à mission',
+      qualiopi: 'Certifié : Qualiopi',
+      sm: 'Qualité : Société à mission',
       of: 'Label : Organisme de formation',
       ei: 'Type : Entreprise Individuelle ',
       ct: 'Type : Collectivité territoriale ',

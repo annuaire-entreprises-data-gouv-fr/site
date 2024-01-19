@@ -5,7 +5,7 @@ import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IEntrepriseInclusive } from '#models/certifications/entreprise-inclusive';
 
 export const EntrepriseInclusiveSection: React.FC<{
-  entrepriseInclusive: IEntrepriseInclusive | IAPINotRespondingError;
+  entrepriseInclusive: IEntrepriseInclusive[] | IAPINotRespondingError;
 }> = ({ entrepriseInclusive }) => {
   return (
     <DataSection

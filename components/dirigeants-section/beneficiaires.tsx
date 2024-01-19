@@ -97,7 +97,7 @@ function BénéficiairesContent({
       ) : (
         <>
           {immatriculationRNE.metadata.isFallback && (
-            <InpiPartiallyDownWarning missing="la date de déclaration, et la différence entre le nom et le prénom" />
+            <InpiPartiallyDownWarning />
           )}
           <p>
             Cette entreprise possède {beneficiaires.length}{' '}

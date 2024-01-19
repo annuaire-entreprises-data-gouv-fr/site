@@ -25,9 +25,9 @@ import { estNonDiffusible } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import {
   extractSirenOrSiretSlugFromUrl,
-  getCompanyPageDescription,
-  getCompanyPageTitle,
   shouldNotIndex,
+  uniteLegalePageDescription,
+  uniteLegalePageTitle,
 } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
@@ -53,8 +53,8 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
   return (
     <>
       <Meta
-        title={getCompanyPageTitle(uniteLegale, session)}
-        description={getCompanyPageDescription(uniteLegale, session)}
+        title={uniteLegalePageTitle(uniteLegale, session)}
+        description={uniteLegalePageDescription(uniteLegale, session)}
         noIndex={shouldNotIndex(uniteLegale)}
         canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${
           uniteLegale.chemin || uniteLegale.siren
