@@ -27,7 +27,14 @@
       "libelleTrancheEffectif": "",
       "latitude": "",
       "longitude": "",
-      "conventionsCollectives": []
+      "complements": {
+        "idFiness": [],
+        "idBio": [],
+        "idcc": [],
+        "idOrganismeFormation": [],
+        "idRge": [],
+        "idUai": []
+      }
     },
     "allSiegesSiret": [
       "20005478100022",
@@ -66,7 +73,14 @@
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
-          "conventionsCollectives": []
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          }
         }
       ],
       "open": [],
@@ -96,7 +110,14 @@
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
-          "conventionsCollectives": []
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          }
         }
       ],
       "nombreEtablissementsOuverts": 0,
@@ -113,7 +134,6 @@
     "anneeCategorieEntreprise": "2021",
     "categorieEntreprise": "PME",
     "anneeTrancheEffectif": "2021",
-    "dirigeant": null,
     "complements": {
       "estEntrepreneurIndividuel": false,
       "estEss": false,
@@ -128,15 +148,15 @@
       "estSocieteMission": false,
       "estQualiopi": false,
       "estUai": false,
-      "estAssociation": false
+      "estAssociation": false,
+      "estEntrepriseInclusive": false
     },
     "association": {
-      "idAssociation": null,
-      "data": null
+      "idAssociation": null
     },
     "colter": {
       "codeColter": null
     },
-    "conventionsCollectives": null
+    "conventionsCollectives": {}
   }
 }

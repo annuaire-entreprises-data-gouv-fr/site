@@ -32,10 +32,18 @@
           "commune": "PARIS 8",
           "activitePrincipale": "62.02A",
           "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-          "trancheEffectif": "01",
+          "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
           "latitude": "48.870938",
           "longitude": "2.305916",
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -68,10 +76,18 @@
               "commune": "PARIS 8",
               "activitePrincipale": "62.02A",
               "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-              "trancheEffectif": "01",
+              "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
               "latitude": "48.870938",
               "longitude": "2.305916",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -98,10 +114,18 @@
               "commune": "PARIS 8",
               "activitePrincipale": "62.02A",
               "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-              "trancheEffectif": "01",
+              "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
               "latitude": "48.870938",
               "longitude": "2.305916",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -115,11 +139,10 @@
         "dateCreation": "2020-01-13",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateDebutActivite": "",
-        "trancheEffectif": "01",
+        "trancheEffectif": "N",
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -134,7 +157,8 @@
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,
@@ -165,10 +189,18 @@
             "commune": "PARIS 8",
             "activitePrincipale": "62.02A",
             "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques (62.02A)",
-            "trancheEffectif": "01",
+            "trancheEffectif": "N",
             "libelleTrancheEffectif": "",
             "latitude": "48.870938",
             "longitude": "2.305916",
+            "complements": {
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
             "anneeTrancheEffectif": "2021"
           }
         ],

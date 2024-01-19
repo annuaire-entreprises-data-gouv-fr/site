@@ -36,6 +36,20 @@
           "libelleTrancheEffectif": "",
           "latitude": "43.615663",
           "longitude": "1.436756",
+          "complements": {
+            "idFiness": [
+              "310796198"
+            ],
+            "idBio": [],
+            "idcc": [
+              "5021"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [
+              "1911"
+            ],
+            "idUai": []
+          },
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -72,6 +86,20 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.615663",
               "longitude": "1.436756",
+              "complements": {
+                "idFiness": [
+                  "310796198"
+                ],
+                "idBio": [],
+                "idcc": [
+                  "5021"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "1911"
+                ],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -100,6 +128,20 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.615663",
               "longitude": "1.436756",
+              "complements": {
+                "idFiness": [
+                  "310796198"
+                ],
+                "idBio": [],
+                "idcc": [
+                  "5021"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "1911"
+                ],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -119,7 +161,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "GE",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -134,7 +175,8 @@
           "estSocieteMission": false,
           "estQualiopi": true,
           "estAssociation": false,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,
@@ -150,7 +192,7 @@
               "nom": "VEZAT-BARONIA",
               "prenom": "Maryse",
               "role": "1er Vice-président du conseil départemental",
-              "dateNaissancePartial": "04/0",
+              "dateNaissancePartial": "1957-09",
               "lieuNaissance": ""
             },
             {
@@ -158,7 +200,7 @@
               "nom": "VINCINI",
               "prenom": "Sebastien",
               "role": "Président du conseil départemental",
-              "dateNaissancePartial": "25/0",
+              "dateNaissancePartial": "1978-03",
               "lieuNaissance": ""
             },
             {
@@ -166,7 +208,7 @@
               "nom": "ARTIGUES",
               "prenom": "Roselyne",
               "role": null,
-              "dateNaissancePartial": "14/0",
+              "dateNaissancePartial": "1953-05",
               "lieuNaissance": ""
             },
             {
@@ -174,7 +216,7 @@
               "nom": "RIVAL",
               "prenom": "Patrice",
               "role": "12ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "04/0",
+              "dateNaissancePartial": "1951-05",
               "lieuNaissance": ""
             },
             {
@@ -182,7 +224,7 @@
               "nom": "BOUREAU",
               "prenom": "Pascal",
               "role": null,
-              "dateNaissancePartial": "07/1",
+              "dateNaissancePartial": "1957-12",
               "lieuNaissance": ""
             },
             {
@@ -190,7 +232,7 @@
               "nom": "MALRIC",
               "prenom": "Line",
               "role": "5ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "10/1",
+              "dateNaissancePartial": "1964-10",
               "lieuNaissance": ""
             },
             {
@@ -198,7 +240,7 @@
               "nom": "BAGNERIS",
               "prenom": "Bernard",
               "role": "8ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "18/1",
+              "dateNaissancePartial": "1959-11",
               "lieuNaissance": ""
             },
             {
@@ -206,7 +248,7 @@
               "nom": "LUMEAU-PRECEPTIS",
               "prenom": "Aude",
               "role": null,
-              "dateNaissancePartial": "22/0",
+              "dateNaissancePartial": "1973-02",
               "lieuNaissance": ""
             },
             {
@@ -214,7 +256,7 @@
               "nom": "DENOUVION",
               "prenom": "Victor",
               "role": null,
-              "dateNaissancePartial": "27/1",
+              "dateNaissancePartial": "1991-10",
               "lieuNaissance": ""
             },
             {
@@ -222,7 +264,7 @@
               "nom": "FLOUREUSSES",
               "prenom": "Sandrine",
               "role": "9ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "29/0",
+              "dateNaissancePartial": "1967-03",
               "lieuNaissance": ""
             },
             {
@@ -230,7 +272,7 @@
               "nom": "BAYLAC",
               "prenom": "Sandrine",
               "role": null,
-              "dateNaissancePartial": "31/1",
+              "dateNaissancePartial": "1973-10",
               "lieuNaissance": ""
             },
             {
@@ -238,7 +280,7 @@
               "nom": "GOJARD",
               "prenom": "Loic",
               "role": null,
-              "dateNaissancePartial": "29/0",
+              "dateNaissancePartial": "1983-06",
               "lieuNaissance": ""
             },
             {
@@ -246,7 +288,7 @@
               "nom": "ARSÉGUEL",
               "prenom": "Patrice",
               "role": null,
-              "dateNaissancePartial": "04/0",
+              "dateNaissancePartial": "1964-06",
               "lieuNaissance": ""
             },
             {
@@ -254,7 +296,7 @@
               "nom": "POUMIROL",
               "prenom": "Emilienne",
               "role": null,
-              "dateNaissancePartial": "25/0",
+              "dateNaissancePartial": "1950-07",
               "lieuNaissance": ""
             },
             {
@@ -262,7 +304,7 @@
               "nom": "LAFFONT",
               "prenom": "Didier",
               "role": null,
-              "dateNaissancePartial": "22/0",
+              "dateNaissancePartial": "1958-04",
               "lieuNaissance": ""
             },
             {
@@ -270,7 +312,7 @@
               "nom": "VOLTO",
               "prenom": "Véronique",
               "role": null,
-              "dateNaissancePartial": "04/0",
+              "dateNaissancePartial": "1963-07",
               "lieuNaissance": ""
             },
             {
@@ -278,7 +320,7 @@
               "nom": "BOUTELOUP",
               "prenom": "Jerome",
               "role": null,
-              "dateNaissancePartial": "15/0",
+              "dateNaissancePartial": "1976-03",
               "lieuNaissance": ""
             },
             {
@@ -286,7 +328,7 @@
               "nom": "TOUZET",
               "prenom": "Sophie",
               "role": null,
-              "dateNaissancePartial": "07/1",
+              "dateNaissancePartial": "1973-12",
               "lieuNaissance": ""
             },
             {
@@ -294,7 +336,7 @@
               "nom": "CUJIVES",
               "prenom": "Didier",
               "role": null,
-              "dateNaissancePartial": "28/1",
+              "dateNaissancePartial": "1959-10",
               "lieuNaissance": ""
             },
             {
@@ -302,7 +344,7 @@
               "nom": "GEIL-GOMEZ",
               "prenom": "Sabine",
               "role": "15ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "18/0",
+              "dateNaissancePartial": "1960-03",
               "lieuNaissance": ""
             },
             {
@@ -310,7 +352,7 @@
               "nom": "DEUILHE",
               "prenom": "Serge",
               "role": null,
-              "dateNaissancePartial": "14/0",
+              "dateNaissancePartial": "1970-05",
               "lieuNaissance": ""
             },
             {
@@ -318,7 +360,7 @@
               "nom": "LECLERC",
               "prenom": "Marie",
               "role": null,
-              "dateNaissancePartial": "08/0",
+              "dateNaissancePartial": "1948-05",
               "lieuNaissance": ""
             },
             {
@@ -326,7 +368,7 @@
               "nom": "SUAUD",
               "prenom": "Thierry",
               "role": null,
-              "dateNaissancePartial": "03/0",
+              "dateNaissancePartial": "1968-01",
               "lieuNaissance": ""
             },
             {
@@ -334,7 +376,7 @@
               "nom": "VIEU",
               "prenom": "Annie",
               "role": "11ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "06/0",
+              "dateNaissancePartial": "1959-05",
               "lieuNaissance": ""
             },
             {
@@ -342,7 +384,7 @@
               "nom": "HEBRARD",
               "prenom": "Gilbert",
               "role": null,
-              "dateNaissancePartial": "01/0",
+              "dateNaissancePartial": "1947-09",
               "lieuNaissance": ""
             },
             {
@@ -350,7 +392,7 @@
               "nom": "SIORAT",
               "prenom": "Florence",
               "role": null,
-              "dateNaissancePartial": "20/0",
+              "dateNaissancePartial": "1963-01",
               "lieuNaissance": ""
             },
             {
@@ -358,7 +400,7 @@
               "nom": "DUCLOS",
               "prenom": "Jean-yves",
               "role": null,
-              "dateNaissancePartial": "29/0",
+              "dateNaissancePartial": "1970-08",
               "lieuNaissance": ""
             },
             {
@@ -366,7 +408,7 @@
               "nom": "LAURENTIES BARRERE",
               "prenom": "Céline",
               "role": null,
-              "dateNaissancePartial": "19/1",
+              "dateNaissancePartial": "1973-11",
               "lieuNaissance": ""
             },
             {
@@ -374,7 +416,7 @@
               "nom": "HARDY",
               "prenom": "Isabelle",
               "role": "7ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "22/0",
+              "dateNaissancePartial": "1968-08",
               "lieuNaissance": ""
             },
             {
@@ -382,7 +424,7 @@
               "nom": "KLOTZ",
               "prenom": "Julien",
               "role": null,
-              "dateNaissancePartial": "13/1",
+              "dateNaissancePartial": "1972-12",
               "lieuNaissance": ""
             },
             {
@@ -390,7 +432,7 @@
               "nom": "COURADE",
               "prenom": "Christine",
               "role": null,
-              "dateNaissancePartial": "07/0",
+              "dateNaissancePartial": "1960-04",
               "lieuNaissance": ""
             },
             {
@@ -398,7 +440,7 @@
               "nom": "FABRE",
               "prenom": "Jean-michel",
               "role": "6ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "25/0",
+              "dateNaissancePartial": "1960-07",
               "lieuNaissance": ""
             },
             {
@@ -406,7 +448,7 @@
               "nom": "BOYER",
               "prenom": "Anne",
               "role": "13ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "09/0",
+              "dateNaissancePartial": "1966-05",
               "lieuNaissance": ""
             },
             {
@@ -414,7 +456,7 @@
               "nom": "GABRIELI",
               "prenom": "Alain",
               "role": "10ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "08/0",
+              "dateNaissancePartial": "1964-03",
               "lieuNaissance": ""
             },
             {
@@ -422,7 +464,7 @@
               "nom": "GOFFRE PEDROSA",
               "prenom": "Ines",
               "role": null,
-              "dateNaissancePartial": "04/0",
+              "dateNaissancePartial": "1992-01",
               "lieuNaissance": ""
             },
             {
@@ -430,7 +472,7 @@
               "nom": "TARAVELLA",
               "prenom": "Aurélien",
               "role": null,
-              "dateNaissancePartial": "25/1",
+              "dateNaissancePartial": "1977-11",
               "lieuNaissance": ""
             },
             {
@@ -438,7 +480,7 @@
               "nom": "FELLAH",
               "prenom": "Mourad",
               "role": null,
-              "dateNaissancePartial": "30/1",
+              "dateNaissancePartial": "1975-12",
               "lieuNaissance": ""
             },
             {
@@ -446,7 +488,7 @@
               "nom": "SAINT-AUBAIN",
               "prenom": "Anais",
               "role": null,
-              "dateNaissancePartial": "20/0",
+              "dateNaissancePartial": "1986-02",
               "lieuNaissance": ""
             },
             {
@@ -454,7 +496,7 @@
               "nom": "EL KOUACHERI",
               "prenom": "Zohra",
               "role": null,
-              "dateNaissancePartial": "08/0",
+              "dateNaissancePartial": "1964-07",
               "lieuNaissance": ""
             },
             {
@@ -462,7 +504,7 @@
               "nom": "LLORCA",
               "prenom": "Jean-louis",
               "role": "14ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "12/0",
+              "dateNaissancePartial": "1949-02",
               "lieuNaissance": ""
             },
             {
@@ -470,7 +512,7 @@
               "nom": "DEGERS",
               "prenom": "Laurence",
               "role": null,
-              "dateNaissancePartial": "19/0",
+              "dateNaissancePartial": "1968-05",
               "lieuNaissance": ""
             },
             {
@@ -478,7 +520,7 @@
               "nom": "SIMION",
               "prenom": "Arnaud",
               "role": "4ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "19/0",
+              "dateNaissancePartial": "1968-05",
               "lieuNaissance": ""
             },
             {
@@ -486,7 +528,7 @@
               "nom": "FARCY",
               "prenom": "Marie-claude",
               "role": null,
-              "dateNaissancePartial": "15/0",
+              "dateNaissancePartial": "1960-07",
               "lieuNaissance": ""
             },
             {
@@ -494,7 +536,7 @@
               "nom": "GIBERT",
               "prenom": "Vincent",
               "role": "2ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "30/0",
+              "dateNaissancePartial": "1984-07",
               "lieuNaissance": ""
             },
             {
@@ -502,7 +544,7 @@
               "nom": "HONVAULT",
               "prenom": "Caroline",
               "role": null,
-              "dateNaissancePartial": "28/0",
+              "dateNaissancePartial": "1979-03",
               "lieuNaissance": ""
             },
             {
@@ -510,7 +552,7 @@
               "nom": "PÉRÉ",
               "prenom": "Marc",
               "role": null,
-              "dateNaissancePartial": "05/1",
+              "dateNaissancePartial": "1962-11",
               "lieuNaissance": ""
             },
             {
@@ -518,7 +560,7 @@
               "nom": "DE SCORRAILLE",
               "prenom": "Jean-baptiste",
               "role": null,
-              "dateNaissancePartial": "28/0",
+              "dateNaissancePartial": "1963-07",
               "lieuNaissance": ""
             },
             {
@@ -526,7 +568,7 @@
               "nom": "LAMANT",
               "prenom": "Sophie",
               "role": null,
-              "dateNaissancePartial": "14/0",
+              "dateNaissancePartial": "1966-02",
               "lieuNaissance": ""
             },
             {
@@ -534,7 +576,7 @@
               "nom": "LUBAC",
               "prenom": "Christophe",
               "role": null,
-              "dateNaissancePartial": "26/0",
+              "dateNaissancePartial": "1977-04",
               "lieuNaissance": ""
             },
             {
@@ -542,7 +584,7 @@
               "nom": "MASELLA",
               "prenom": "Lauriane",
               "role": null,
-              "dateNaissancePartial": "22/0",
+              "dateNaissancePartial": "1990-06",
               "lieuNaissance": ""
             },
             {
@@ -550,7 +592,7 @@
               "nom": "CROQUETTE",
               "prenom": "Martine",
               "role": "3ème Vice-président du conseil départemental",
-              "dateNaissancePartial": "27/0",
+              "dateNaissancePartial": "1952-05",
               "lieuNaissance": ""
             },
             {
@@ -558,7 +600,7 @@
               "nom": "FOUCHIER",
               "prenom": "Dominique",
               "role": null,
-              "dateNaissancePartial": "19/0",
+              "dateNaissancePartial": "1962-08",
               "lieuNaissance": ""
             },
             {
@@ -566,7 +608,7 @@
               "nom": "BARRIERE",
               "prenom": "Karine",
               "role": null,
-              "dateNaissancePartial": "19/0",
+              "dateNaissancePartial": "1974-06",
               "lieuNaissance": ""
             },
             {
@@ -574,7 +616,7 @@
               "nom": "DUMOULIN",
               "prenom": "Jean-marc",
               "role": null,
-              "dateNaissancePartial": "28/0",
+              "dateNaissancePartial": "1959-02",
               "lieuNaissance": ""
             }
           ]
@@ -605,6 +647,20 @@
             "libelleTrancheEffectif": "",
             "latitude": "43.615663",
             "longitude": "1.436756",
+            "complements": {
+              "idFiness": [
+                "310796198"
+              ],
+              "idBio": [],
+              "idcc": [
+                "5021"
+              ],
+              "idOrganismeFormation": [],
+              "idRge": [
+                "1911"
+              ],
+              "idUai": []
+            },
             "anneeTrancheEffectif": "2021"
           }
         ],
@@ -639,6 +695,18 @@
           "libelleTrancheEffectif": "",
           "latitude": "44.357175",
           "longitude": "2.02648",
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "5021"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [
+              "1911"
+            ],
+            "idUai": []
+          },
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -675,6 +743,18 @@
               "libelleTrancheEffectif": "",
               "latitude": "44.357175",
               "longitude": "2.02648",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "5021"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "1911"
+                ],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -703,6 +783,18 @@
               "libelleTrancheEffectif": "",
               "latitude": "44.357175",
               "longitude": "2.02648",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "5021"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "1911"
+                ],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -722,7 +814,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -737,7 +828,8 @@
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,
@@ -753,7 +845,7 @@
               "nom": "DOUCET",
               "prenom": "Marie-josé",
               "role": null,
-              "dateNaissancePartial": "20/0",
+              "dateNaissancePartial": "1966-06",
               "lieuNaissance": ""
             },
             {
@@ -761,7 +853,7 @@
               "nom": "DE ANDRADE",
               "prenom": "Marie-isabelle",
               "role": null,
-              "dateNaissancePartial": "21/0",
+              "dateNaissancePartial": "1970-03",
               "lieuNaissance": ""
             },
             {
@@ -769,7 +861,7 @@
               "nom": "ALLEMAND",
               "prenom": "Gilles",
               "role": null,
-              "dateNaissancePartial": "17/0",
+              "dateNaissancePartial": "1967-04",
               "lieuNaissance": ""
             },
             {
@@ -777,7 +869,7 @@
               "nom": "DESTRUEL",
               "prenom": "Emmanuel",
               "role": null,
-              "dateNaissancePartial": "07/1",
+              "dateNaissancePartial": "1969-11",
               "lieuNaissance": ""
             },
             {
@@ -785,7 +877,7 @@
               "nom": "RIGAL",
               "prenom": "Dominique",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "30/0",
+              "dateNaissancePartial": "1965-09",
               "lieuNaissance": ""
             },
             {
@@ -793,7 +885,7 @@
               "nom": "VABRE",
               "prenom": "Thierry",
               "role": null,
-              "dateNaissancePartial": "17/0",
+              "dateNaissancePartial": "1965-02",
               "lieuNaissance": ""
             },
             {
@@ -801,7 +893,7 @@
               "nom": "SALESSES",
               "prenom": "Fabienne",
               "role": null,
-              "dateNaissancePartial": "06/0",
+              "dateNaissancePartial": "1962-09",
               "lieuNaissance": ""
             },
             {
@@ -809,7 +901,7 @@
               "nom": "MARTY",
               "prenom": "Guy",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "06/0",
+              "dateNaissancePartial": "1955-08",
               "lieuNaissance": ""
             },
             {
@@ -817,7 +909,7 @@
               "nom": "DELPECH",
               "prenom": "Michel",
               "role": "Président du conseil communautaire",
-              "dateNaissancePartial": "30/0",
+              "dateNaissancePartial": "1953-05",
               "lieuNaissance": ""
             },
             {
@@ -825,7 +917,7 @@
               "nom": "MARTY",
               "prenom": "Benoît",
               "role": null,
-              "dateNaissancePartial": "04/1",
+              "dateNaissancePartial": "1968-10",
               "lieuNaissance": ""
             },
             {
@@ -833,7 +925,7 @@
               "nom": "GUILHEN",
               "prenom": "Philippe",
               "role": null,
-              "dateNaissancePartial": "13/0",
+              "dateNaissancePartial": "1958-06",
               "lieuNaissance": ""
             },
             {
@@ -841,7 +933,7 @@
               "nom": "DELERIS",
               "prenom": "Suzanne",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "29/1",
+              "dateNaissancePartial": "1955-10",
               "lieuNaissance": ""
             },
             {
@@ -849,7 +941,7 @@
               "nom": "POUZOULET-LIGUE",
               "prenom": "Didier",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "17/1",
+              "dateNaissancePartial": "1961-11",
               "lieuNaissance": ""
             },
             {
@@ -857,7 +949,7 @@
               "nom": "SAINT-AFFRE",
               "prenom": "Christian",
               "role": null,
-              "dateNaissancePartial": "29/0",
+              "dateNaissancePartial": "1951-04",
               "lieuNaissance": ""
             },
             {
@@ -865,7 +957,7 @@
               "nom": "MARTIN",
               "prenom": "Olivier",
               "role": null,
-              "dateNaissancePartial": "30/0",
+              "dateNaissancePartial": "1967-04",
               "lieuNaissance": ""
             },
             {
@@ -873,7 +965,7 @@
               "nom": "DEGA",
               "prenom": "Christophe",
               "role": null,
-              "dateNaissancePartial": "03/0",
+              "dateNaissancePartial": "1971-08",
               "lieuNaissance": ""
             },
             {
@@ -881,7 +973,7 @@
               "nom": "LASCHON",
               "prenom": "Isabelle",
               "role": null,
-              "dateNaissancePartial": "09/1",
+              "dateNaissancePartial": "1970-12",
               "lieuNaissance": ""
             },
             {
@@ -889,7 +981,7 @@
               "nom": "TEULIER",
               "prenom": "Daniel",
               "role": null,
-              "dateNaissancePartial": "17/0",
+              "dateNaissancePartial": "1959-07",
               "lieuNaissance": ""
             },
             {
@@ -897,7 +989,7 @@
               "nom": "MOYA",
               "prenom": "Catherine",
               "role": null,
-              "dateNaissancePartial": "11/0",
+              "dateNaissancePartial": "1960-01",
               "lieuNaissance": ""
             },
             {
@@ -905,7 +997,7 @@
               "nom": "COLONGES",
               "prenom": "Gérard",
               "role": null,
-              "dateNaissancePartial": "10/0",
+              "dateNaissancePartial": "1952-03",
               "lieuNaissance": ""
             },
             {
@@ -913,7 +1005,7 @@
               "nom": "CLAPIER",
               "prenom": "Suzette",
               "role": null,
-              "dateNaissancePartial": "19/0",
+              "dateNaissancePartial": "1955-09",
               "lieuNaissance": ""
             },
             {
@@ -921,7 +1013,7 @@
               "nom": "AGRECH",
               "prenom": "Gérard",
               "role": null,
-              "dateNaissancePartial": "02/0",
+              "dateNaissancePartial": "1947-06",
               "lieuNaissance": ""
             },
             {
@@ -929,7 +1021,7 @@
               "nom": "DATCHARY",
               "prenom": "Patrick",
               "role": null,
-              "dateNaissancePartial": "20/1",
+              "dateNaissancePartial": "1952-12",
               "lieuNaissance": ""
             },
             {
@@ -937,7 +1029,7 @@
               "nom": "RUSCASSIÉ",
               "prenom": "Gilles",
               "role": null,
-              "dateNaissancePartial": "16/1",
+              "dateNaissancePartial": "1964-10",
               "lieuNaissance": ""
             },
             {
@@ -945,7 +1037,7 @@
               "nom": "CHANUT",
               "prenom": "Christian",
               "role": null,
-              "dateNaissancePartial": "14/0",
+              "dateNaissancePartial": "1952-08",
               "lieuNaissance": ""
             },
             {
@@ -953,7 +1045,7 @@
               "nom": "ANDURAND",
               "prenom": "Jacques",
               "role": null,
-              "dateNaissancePartial": "29/0",
+              "dateNaissancePartial": "1951-03",
               "lieuNaissance": ""
             },
             {
@@ -961,7 +1053,7 @@
               "nom": "BAYOL",
               "prenom": "Stéphanie",
               "role": null,
-              "dateNaissancePartial": "29/1",
+              "dateNaissancePartial": "1972-12",
               "lieuNaissance": ""
             },
             {
@@ -969,7 +1061,7 @@
               "nom": "BOUYSSIÉ",
               "prenom": "Jean-michel",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "10/0",
+              "dateNaissancePartial": "1961-09",
               "lieuNaissance": ""
             },
             {
@@ -977,7 +1069,7 @@
               "nom": "BRUGIER",
               "prenom": "Guy",
               "role": null,
-              "dateNaissancePartial": "08/0",
+              "dateNaissancePartial": "1962-07",
               "lieuNaissance": ""
             },
             {
@@ -985,7 +1077,7 @@
               "nom": "BUGAREL",
               "prenom": "Jean-marie",
               "role": null,
-              "dateNaissancePartial": "19/0",
+              "dateNaissancePartial": "1980-07",
               "lieuNaissance": ""
             },
             {
@@ -993,7 +1085,7 @@
               "nom": "CANTOURNET",
               "prenom": "Eric",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "28/1",
+              "dateNaissancePartial": "1966-12",
               "lieuNaissance": ""
             },
             {
@@ -1001,7 +1093,7 @@
               "nom": "CARRIÉ",
               "prenom": "Jean-claude",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "15/0",
+              "dateNaissancePartial": "1972-07",
               "lieuNaissance": ""
             },
             {
@@ -1009,7 +1101,7 @@
               "nom": "COMBE-CAYLA",
               "prenom": "Pascale",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "13/1",
+              "dateNaissancePartial": "1964-10",
               "lieuNaissance": ""
             },
             {
@@ -1017,7 +1109,7 @@
               "nom": "CUVELIER",
               "prenom": "Carine",
               "role": null,
-              "dateNaissancePartial": "15/1",
+              "dateNaissancePartial": "1981-10",
               "lieuNaissance": ""
             },
             {
@@ -1025,7 +1117,7 @@
               "nom": "DESPEYROUX",
               "prenom": "Vanessa",
               "role": null,
-              "dateNaissancePartial": "14/1",
+              "dateNaissancePartial": "1973-11",
               "lieuNaissance": ""
             },
             {
@@ -1033,7 +1125,7 @@
               "nom": "DO ROZARIO",
               "prenom": "Georges",
               "role": null,
-              "dateNaissancePartial": "28/1",
+              "dateNaissancePartial": "1946-11",
               "lieuNaissance": ""
             },
             {
@@ -1041,7 +1133,7 @@
               "nom": "FOURSAC",
               "prenom": "Laurent",
               "role": null,
-              "dateNaissancePartial": "09/0",
+              "dateNaissancePartial": "1967-04",
               "lieuNaissance": ""
             },
             {
@@ -1049,7 +1141,7 @@
               "nom": "GONZALEZ",
               "prenom": "Arnaud",
               "role": null,
-              "dateNaissancePartial": "28/0",
+              "dateNaissancePartial": "1979-09",
               "lieuNaissance": ""
             },
             {
@@ -1057,7 +1149,7 @@
               "nom": "JANODET",
               "prenom": "Alix",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "01/0",
+              "dateNaissancePartial": "1952-06",
               "lieuNaissance": ""
             },
             {
@@ -1065,7 +1157,7 @@
               "nom": "MANDROU-TAOUBI",
               "prenom": "Françoise",
               "role": null,
-              "dateNaissancePartial": "07/0",
+              "dateNaissancePartial": "1956-04",
               "lieuNaissance": ""
             },
             {
@@ -1073,7 +1165,7 @@
               "nom": "ORCIBAL",
               "prenom": "Jean-sébastien",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "15/0",
+              "dateNaissancePartial": "1979-01",
               "lieuNaissance": ""
             },
             {
@@ -1081,7 +1173,7 @@
               "nom": "PARRA",
               "prenom": "Carine",
               "role": null,
-              "dateNaissancePartial": "01/0",
+              "dateNaissancePartial": "1979-05",
               "lieuNaissance": ""
             },
             {
@@ -1089,7 +1181,7 @@
               "nom": "PEZET",
               "prenom": "Patrick",
               "role": null,
-              "dateNaissancePartial": "24/0",
+              "dateNaissancePartial": "1972-05",
               "lieuNaissance": ""
             },
             {
@@ -1097,7 +1189,7 @@
               "nom": "POURCEL",
               "prenom": "Frédéric",
               "role": null,
-              "dateNaissancePartial": "13/0",
+              "dateNaissancePartial": "1975-07",
               "lieuNaissance": ""
             },
             {
@@ -1105,7 +1197,7 @@
               "nom": "RAZAVI",
               "prenom": "Martine",
               "role": null,
-              "dateNaissancePartial": "28/1",
+              "dateNaissancePartial": "1958-12",
               "lieuNaissance": ""
             },
             {
@@ -1113,7 +1205,7 @@
               "nom": "ROUX",
               "prenom": "Veronique",
               "role": null,
-              "dateNaissancePartial": "01/0",
+              "dateNaissancePartial": "1958-08",
               "lieuNaissance": ""
             },
             {
@@ -1121,7 +1213,7 @@
               "nom": "TRANIER",
               "prenom": "Laurent",
               "role": null,
-              "dateNaissancePartial": "07/0",
+              "dateNaissancePartial": "1977-09",
               "lieuNaissance": ""
             },
             {
@@ -1129,7 +1221,7 @@
               "nom": "GUITARD",
               "prenom": "Béatrice",
               "role": null,
-              "dateNaissancePartial": "21/0",
+              "dateNaissancePartial": "1975-05",
               "lieuNaissance": ""
             },
             {
@@ -1137,7 +1229,7 @@
               "nom": "MASBOU",
               "prenom": "Jean-pierre",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "02/0",
+              "dateNaissancePartial": "1956-07",
               "lieuNaissance": ""
             },
             {
@@ -1145,7 +1237,7 @@
               "nom": "SAVIGNAC",
               "prenom": "Annabelle",
               "role": null,
-              "dateNaissancePartial": "14/0",
+              "dateNaissancePartial": "1972-05",
               "lieuNaissance": ""
             },
             {
@@ -1153,7 +1245,7 @@
               "nom": "BOULPICANTE",
               "prenom": "Valérie",
               "role": null,
-              "dateNaissancePartial": "09/0",
+              "dateNaissancePartial": "1968-04",
               "lieuNaissance": ""
             },
             {
@@ -1161,7 +1253,7 @@
               "nom": "RICHER",
               "prenom": "Jean-marc",
               "role": null,
-              "dateNaissancePartial": "15/0",
+              "dateNaissancePartial": "1954-02",
               "lieuNaissance": ""
             }
           ]
@@ -1192,6 +1284,18 @@
             "libelleTrancheEffectif": "",
             "latitude": "44.357175",
             "longitude": "2.02648",
+            "complements": {
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [
+                "5021"
+              ],
+              "idOrganismeFormation": [],
+              "idRge": [
+                "1911"
+              ],
+              "idUai": []
+            },
             "anneeTrancheEffectif": "2021"
           }
         ],
@@ -1226,6 +1330,18 @@
           "libelleTrancheEffectif": "",
           "latitude": "43.468316",
           "longitude": "1.337009",
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "5021"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [
+              "1911"
+            ],
+            "idUai": []
+          },
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -1262,6 +1378,18 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.468316",
               "longitude": "1.337009",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "5021"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "1911"
+                ],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -1290,6 +1418,18 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.468316",
               "longitude": "1.337009",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "5021"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "1911"
+                ],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -1309,7 +1449,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "ETI",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -1324,7 +1463,8 @@
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,
@@ -1340,7 +1480,7 @@
               "nom": "CHEBELIN",
               "prenom": "Thierry",
               "role": null,
-              "dateNaissancePartial": "11/0",
+              "dateNaissancePartial": "1975-09",
               "lieuNaissance": ""
             },
             {
@@ -1348,7 +1488,7 @@
               "nom": "DESCHAMPS",
               "prenom": "Gilbert",
               "role": null,
-              "dateNaissancePartial": "17/0",
+              "dateNaissancePartial": "1957-03",
               "lieuNaissance": ""
             },
             {
@@ -1356,7 +1496,7 @@
               "nom": "DIOGO",
               "prenom": "Magalie",
               "role": null,
-              "dateNaissancePartial": "17/0",
+              "dateNaissancePartial": "1986-09",
               "lieuNaissance": ""
             },
             {
@@ -1364,7 +1504,7 @@
               "nom": "MESPLES",
               "prenom": "Thierry",
               "role": null,
-              "dateNaissancePartial": "21/1",
+              "dateNaissancePartial": "1970-10",
               "lieuNaissance": ""
             },
             {
@@ -1372,7 +1512,7 @@
               "nom": "SOTTIL",
               "prenom": "Alain",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "10/0",
+              "dateNaissancePartial": "1952-03",
               "lieuNaissance": ""
             },
             {
@@ -1380,7 +1520,7 @@
               "nom": "CASSAGNE",
               "prenom": "Robert",
               "role": null,
-              "dateNaissancePartial": "26/0",
+              "dateNaissancePartial": "1955-09",
               "lieuNaissance": ""
             },
             {
@@ -1388,7 +1528,7 @@
               "nom": "PUIG",
               "prenom": "Jean-marie",
               "role": null,
-              "dateNaissancePartial": "16/1",
+              "dateNaissancePartial": "1957-11",
               "lieuNaissance": ""
             },
             {
@@ -1396,7 +1536,7 @@
               "nom": "LOUZON",
               "prenom": "Thierry",
               "role": null,
-              "dateNaissancePartial": "01/1",
+              "dateNaissancePartial": "1958-11",
               "lieuNaissance": ""
             },
             {
@@ -1404,7 +1544,7 @@
               "nom": "MAILHÉ",
               "prenom": "Christophe",
               "role": null,
-              "dateNaissancePartial": "12/0",
+              "dateNaissancePartial": "1971-08",
               "lieuNaissance": ""
             },
             {
@@ -1412,7 +1552,7 @@
               "nom": "SEVERAC",
               "prenom": "Philippe",
               "role": null,
-              "dateNaissancePartial": "15/0",
+              "dateNaissancePartial": "1959-03",
               "lieuNaissance": ""
             },
             {
@@ -1420,7 +1560,7 @@
               "nom": "SIMEON",
               "prenom": "Françoise",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "29/0",
+              "dateNaissancePartial": "1957-07",
               "lieuNaissance": ""
             },
             {
@@ -1428,7 +1568,7 @@
               "nom": "VITET",
               "prenom": "Martine",
               "role": null,
-              "dateNaissancePartial": "06/0",
+              "dateNaissancePartial": "1953-04",
               "lieuNaissance": ""
             },
             {
@@ -1436,7 +1576,7 @@
               "nom": "LAMPIN",
               "prenom": "Amandine",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "04/0",
+              "dateNaissancePartial": "1977-03",
               "lieuNaissance": ""
             },
             {
@@ -1444,7 +1584,7 @@
               "nom": "NOVALES",
               "prenom": "Luc",
               "role": null,
-              "dateNaissancePartial": "24/0",
+              "dateNaissancePartial": "1963-03",
               "lieuNaissance": ""
             },
             {
@@ -1452,7 +1592,7 @@
               "nom": "REFUTIN",
               "prenom": "Nicolas",
               "role": null,
-              "dateNaissancePartial": "20/0",
+              "dateNaissancePartial": "1981-02",
               "lieuNaissance": ""
             },
             {
@@ -1460,7 +1600,7 @@
               "nom": "VIDAL",
               "prenom": "Alain",
               "role": null,
-              "dateNaissancePartial": "22/0",
+              "dateNaissancePartial": "1965-06",
               "lieuNaissance": ""
             },
             {
@@ -1468,7 +1608,7 @@
               "nom": "CARLIER",
               "prenom": "David-olivier",
               "role": null,
-              "dateNaissancePartial": "14/1",
+              "dateNaissancePartial": "1973-10",
               "lieuNaissance": ""
             },
             {
@@ -1476,7 +1616,7 @@
               "nom": "SUSSET",
               "prenom": "Hélène",
               "role": null,
-              "dateNaissancePartial": "03/0",
+              "dateNaissancePartial": "1979-01",
               "lieuNaissance": ""
             },
             {
@@ -1484,7 +1624,7 @@
               "nom": "AUTHIE",
               "prenom": "Olivier",
               "role": null,
-              "dateNaissancePartial": "29/0",
+              "dateNaissancePartial": "1974-06",
               "lieuNaissance": ""
             },
             {
@@ -1492,7 +1632,7 @@
               "nom": "MATHEU",
               "prenom": "Christelle",
               "role": null,
-              "dateNaissancePartial": "21/0",
+              "dateNaissancePartial": "1973-08",
               "lieuNaissance": ""
             },
             {
@@ -1500,7 +1640,7 @@
               "nom": "DELSOL",
               "prenom": "Alain",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "14/0",
+              "dateNaissancePartial": "1960-06",
               "lieuNaissance": ""
             },
             {
@@ -1508,7 +1648,7 @@
               "nom": "BEDIEE",
               "prenom": "Jean-sébastien",
               "role": null,
-              "dateNaissancePartial": "29/1",
+              "dateNaissancePartial": "1974-10",
               "lieuNaissance": ""
             },
             {
@@ -1516,7 +1656,7 @@
               "nom": "BELOUAZZA",
               "prenom": "Rachida",
               "role": null,
-              "dateNaissancePartial": "01/0",
+              "dateNaissancePartial": "1960-07",
               "lieuNaissance": ""
             },
             {
@@ -1524,7 +1664,7 @@
               "nom": "CRÉDOT",
               "prenom": "Myriam",
               "role": null,
-              "dateNaissancePartial": "29/0",
+              "dateNaissancePartial": "1973-08",
               "lieuNaissance": ""
             },
             {
@@ -1532,7 +1672,7 @@
               "nom": "DELAHAYE",
               "prenom": "Christophe",
               "role": null,
-              "dateNaissancePartial": "14/0",
+              "dateNaissancePartial": "1968-02",
               "lieuNaissance": ""
             },
             {
@@ -1540,7 +1680,7 @@
               "nom": "DULON",
               "prenom": "Irène",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "21/0",
+              "dateNaissancePartial": "1957-01",
               "lieuNaissance": ""
             },
             {
@@ -1548,7 +1688,7 @@
               "nom": "GERMA",
               "prenom": "Sylvie",
               "role": null,
-              "dateNaissancePartial": "28/0",
+              "dateNaissancePartial": "1962-04",
               "lieuNaissance": ""
             },
             {
@@ -1556,7 +1696,7 @@
               "nom": "MANDEMENT",
               "prenom": "André",
               "role": "Président du conseil communautaire",
-              "dateNaissancePartial": "07/0",
+              "dateNaissancePartial": "1958-09",
               "lieuNaissance": ""
             },
             {
@@ -1564,7 +1704,7 @@
               "nom": "PEREZ",
               "prenom": "Colette",
               "role": null,
-              "dateNaissancePartial": "04/0",
+              "dateNaissancePartial": "1960-01",
               "lieuNaissance": ""
             },
             {
@@ -1572,7 +1712,7 @@
               "nom": "RUEDA",
               "prenom": "Michel",
               "role": null,
-              "dateNaissancePartial": "12/0",
+              "dateNaissancePartial": "1959-01",
               "lieuNaissance": ""
             },
             {
@@ -1580,7 +1720,7 @@
               "nom": "TERRISSE",
               "prenom": "Jean-marc",
               "role": null,
-              "dateNaissancePartial": "25/0",
+              "dateNaissancePartial": "1968-04",
               "lieuNaissance": ""
             },
             {
@@ -1588,7 +1728,7 @@
               "nom": "TOUZET",
               "prenom": "Sophie",
               "role": null,
-              "dateNaissancePartial": "07/1",
+              "dateNaissancePartial": "1973-12",
               "lieuNaissance": ""
             },
             {
@@ -1596,7 +1736,7 @@
               "nom": "ZARDO",
               "prenom": "Léonard",
               "role": null,
-              "dateNaissancePartial": "08/0",
+              "dateNaissancePartial": "1948-01",
               "lieuNaissance": ""
             },
             {
@@ -1604,7 +1744,7 @@
               "nom": "COLL",
               "prenom": "Jean-louis",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "10/0",
+              "dateNaissancePartial": "1948-07",
               "lieuNaissance": ""
             },
             {
@@ -1612,7 +1752,7 @@
               "nom": "GAMBET",
               "prenom": "Claudine",
               "role": null,
-              "dateNaissancePartial": "15/0",
+              "dateNaissancePartial": "1953-08",
               "lieuNaissance": ""
             },
             {
@@ -1620,7 +1760,7 @@
               "nom": "GUERRIOT",
               "prenom": "Philippe",
               "role": null,
-              "dateNaissancePartial": "28/0",
+              "dateNaissancePartial": "1964-03",
               "lieuNaissance": ""
             },
             {
@@ -1628,7 +1768,7 @@
               "nom": "LACAMPAGNE",
               "prenom": "Sylviane",
               "role": null,
-              "dateNaissancePartial": "10/1",
+              "dateNaissancePartial": "1960-12",
               "lieuNaissance": ""
             },
             {
@@ -1636,7 +1776,7 @@
               "nom": "MONTARIOL",
               "prenom": "Gérard",
               "role": null,
-              "dateNaissancePartial": "23/0",
+              "dateNaissancePartial": "1954-05",
               "lieuNaissance": ""
             },
             {
@@ -1644,7 +1784,7 @@
               "nom": "RODRIGUEZ",
               "prenom": "Anaïs",
               "role": null,
-              "dateNaissancePartial": "11/0",
+              "dateNaissancePartial": "1978-03",
               "lieuNaissance": ""
             },
             {
@@ -1652,7 +1792,7 @@
               "nom": "SUAUD",
               "prenom": "Thierry",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "03/0",
+              "dateNaissancePartial": "1968-01",
               "lieuNaissance": ""
             },
             {
@@ -1660,7 +1800,7 @@
               "nom": "HUCHON",
               "prenom": "Christiane",
               "role": null,
-              "dateNaissancePartial": "14/0",
+              "dateNaissancePartial": "1955-07",
               "lieuNaissance": ""
             },
             {
@@ -1668,7 +1808,7 @@
               "nom": "MABIRE",
               "prenom": "Sylvain",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "03/0",
+              "dateNaissancePartial": "1972-05",
               "lieuNaissance": ""
             },
             {
@@ -1676,7 +1816,7 @@
               "nom": "GALY",
               "prenom": "Liliane",
               "role": null,
-              "dateNaissancePartial": "25/1",
+              "dateNaissancePartial": "1955-10",
               "lieuNaissance": ""
             },
             {
@@ -1684,7 +1824,7 @@
               "nom": "VACHER",
               "prenom": "Gilles",
               "role": null,
-              "dateNaissancePartial": "01/0",
+              "dateNaissancePartial": "1954-08",
               "lieuNaissance": ""
             },
             {
@@ -1692,7 +1832,7 @@
               "nom": "BÉRAIL",
               "prenom": "Pierre",
               "role": null,
-              "dateNaissancePartial": "21/1",
+              "dateNaissancePartial": "1946-12",
               "lieuNaissance": ""
             },
             {
@@ -1700,7 +1840,7 @@
               "nom": "CAMBEFORT",
               "prenom": "Catherine",
               "role": null,
-              "dateNaissancePartial": "22/0",
+              "dateNaissancePartial": "1961-08",
               "lieuNaissance": ""
             },
             {
@@ -1708,7 +1848,7 @@
               "nom": "GASQUET",
               "prenom": "Etienne",
               "role": null,
-              "dateNaissancePartial": "07/0",
+              "dateNaissancePartial": "1949-06",
               "lieuNaissance": ""
             },
             {
@@ -1716,7 +1856,7 @@
               "nom": "MORERE",
               "prenom": "André",
               "role": null,
-              "dateNaissancePartial": "30/1",
+              "dateNaissancePartial": "1949-11",
               "lieuNaissance": ""
             },
             {
@@ -1724,7 +1864,7 @@
               "nom": "DEUILHE",
               "prenom": "Serge",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "14/0",
+              "dateNaissancePartial": "1970-05",
               "lieuNaissance": ""
             },
             {
@@ -1732,7 +1872,7 @@
               "nom": "LOUIT",
               "prenom": "Catherine",
               "role": null,
-              "dateNaissancePartial": "22/0",
+              "dateNaissancePartial": "1961-06",
               "lieuNaissance": ""
             },
             {
@@ -1740,7 +1880,7 @@
               "nom": "REY-BÈTHBÉDER",
               "prenom": "Nicolas",
               "role": null,
-              "dateNaissancePartial": "06/0",
+              "dateNaissancePartial": "1970-06",
               "lieuNaissance": ""
             },
             {
@@ -1748,7 +1888,7 @@
               "nom": "SUTRA",
               "prenom": "Jean-françois",
               "role": null,
-              "dateNaissancePartial": "25/0",
+              "dateNaissancePartial": "1955-02",
               "lieuNaissance": ""
             },
             {
@@ -1756,7 +1896,7 @@
               "nom": "PALAS",
               "prenom": "Alain",
               "role": null,
-              "dateNaissancePartial": "07/0",
+              "dateNaissancePartial": "1955-05",
               "lieuNaissance": ""
             },
             {
@@ -1764,7 +1904,7 @@
               "nom": "BERGIA",
               "prenom": "Jean-marc",
               "role": null,
-              "dateNaissancePartial": "15/0",
+              "dateNaissancePartial": "1972-04",
               "lieuNaissance": ""
             },
             {
@@ -1772,7 +1912,7 @@
               "nom": "BOUTELOUP",
               "prenom": "Jerome",
               "role": "Vice-président du conseil communautaire",
-              "dateNaissancePartial": "15/0",
+              "dateNaissancePartial": "1976-03",
               "lieuNaissance": ""
             },
             {
@@ -1780,7 +1920,7 @@
               "nom": "STREMLER",
               "prenom": "Philippe",
               "role": null,
-              "dateNaissancePartial": "24/1",
+              "dateNaissancePartial": "1958-12",
               "lieuNaissance": ""
             },
             {
@@ -1788,7 +1928,7 @@
               "nom": "VALLIER",
               "prenom": "Vicky",
               "role": null,
-              "dateNaissancePartial": "13/1",
+              "dateNaissancePartial": "1968-12",
               "lieuNaissance": ""
             },
             {
@@ -1796,7 +1936,7 @@
               "nom": "GARAUD",
               "prenom": "Jean-claude",
               "role": null,
-              "dateNaissancePartial": "20/1",
+              "dateNaissancePartial": "1947-10",
               "lieuNaissance": ""
             }
           ]
@@ -1827,6 +1967,18 @@
             "libelleTrancheEffectif": "",
             "latitude": "43.468316",
             "longitude": "1.337009",
+            "complements": {
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [
+                "5021"
+              ],
+              "idOrganismeFormation": [],
+              "idRge": [
+                "1911"
+              ],
+              "idUai": []
+            },
             "anneeTrancheEffectif": "2021"
           }
         ],

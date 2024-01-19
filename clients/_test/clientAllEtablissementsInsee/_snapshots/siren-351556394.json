@@ -30,7 +30,14 @@
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
-          "conventionsCollectives": [],
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
           "anneeTrancheEffectif": null
         }
       ],
@@ -61,7 +68,14 @@
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
-          "conventionsCollectives": [],
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
           "anneeTrancheEffectif": null
         }
       ],

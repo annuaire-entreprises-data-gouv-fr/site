@@ -27,7 +27,14 @@
       "libelleTrancheEffectif": "",
       "latitude": "",
       "longitude": "",
-      "conventionsCollectives": []
+      "complements": {
+        "idFiness": [],
+        "idBio": [],
+        "idcc": [],
+        "idOrganismeFormation": [],
+        "idRge": [],
+        "idUai": []
+      }
     },
     "allSiegesSiret": [
       "30002576400048",
@@ -67,7 +74,14 @@
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
-          "conventionsCollectives": []
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          }
         }
       ],
       "open": [],
@@ -97,7 +111,14 @@
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
-          "conventionsCollectives": []
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          }
         }
       ],
       "nombreEtablissementsOuverts": 0,
@@ -114,11 +135,6 @@
     "anneeCategorieEntreprise": "2021",
     "categorieEntreprise": "PME",
     "anneeTrancheEffectif": null,
-    "dirigeant": {
-      "sexe": "M",
-      "prenom": "Michel",
-      "nom": "SAUVAGE"
-    },
     "complements": {
       "estEntrepreneurIndividuel": true,
       "estEss": false,
@@ -133,15 +149,15 @@
       "estSocieteMission": false,
       "estQualiopi": false,
       "estUai": false,
-      "estAssociation": false
+      "estAssociation": false,
+      "estEntrepriseInclusive": false
     },
     "association": {
-      "idAssociation": null,
-      "data": null
+      "idAssociation": null
     },
     "colter": {
       "codeColter": null
     },
-    "conventionsCollectives": null
+    "conventionsCollectives": {}
   }
 }

@@ -32,10 +32,20 @@
           "commune": "PARIS 13",
           "activitePrincipale": "90.01Z",
           "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
-          "trancheEffectif": "02",
+          "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
           "latitude": "48.829633",
           "longitude": "2.374801",
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "3090"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -68,10 +78,20 @@
               "commune": "PARIS 13",
               "activitePrincipale": "90.01Z",
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
-              "trancheEffectif": "02",
+              "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
               "latitude": "48.829633",
               "longitude": "2.374801",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "3090"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -96,10 +116,20 @@
               "commune": "PARIS 13",
               "activitePrincipale": "90.01Z",
               "libelleActivitePrincipale": "Arts du spectacle vivant (90.01Z)",
-              "trancheEffectif": "02",
+              "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
               "latitude": "48.829633",
               "longitude": "2.374801",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "3090"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -115,11 +145,10 @@
         "dateCreation": "2013-12-18",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateDebutActivite": "",
-        "trancheEffectif": "02",
+        "trancheEffectif": "N",
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": true,
@@ -134,7 +163,8 @@
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": true,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": "W751222623",

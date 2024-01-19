@@ -36,6 +36,16 @@
           "libelleTrancheEffectif": "",
           "latitude": "48.84074",
           "longitude": "2.324549",
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "1486"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -72,6 +82,16 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.84074",
               "longitude": "2.324549",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "1486"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -100,6 +120,16 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.84074",
               "longitude": "2.324549",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "1486"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -119,7 +149,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -134,7 +163,8 @@
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,
@@ -169,6 +199,16 @@
             "libelleTrancheEffectif": "",
             "latitude": "48.84074",
             "longitude": "2.324549",
+            "complements": {
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [
+                "1486"
+              ],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
             "anneeTrancheEffectif": "2021"
           }
         ],
@@ -179,7 +219,7 @@
             "sexe": null,
             "nom": "NÉGRIER",
             "prenom": "Philippe",
-            "role": null,
+            "role": "Président de SAS",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }
@@ -212,6 +252,16 @@
           "libelleTrancheEffectif": "",
           "latitude": "43.926703",
           "longitude": "4.784775",
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "0478"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -248,6 +298,16 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.926703",
               "longitude": "4.784775",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "0478"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -276,6 +336,16 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.926703",
               "longitude": "4.784775",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "0478"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -295,7 +365,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -310,7 +379,8 @@
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,
@@ -345,6 +415,16 @@
             "libelleTrancheEffectif": "",
             "latitude": "43.926703",
             "longitude": "4.784775",
+            "complements": {
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [
+                "0478"
+              ],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
             "anneeTrancheEffectif": "2021"
           },
           {
@@ -367,10 +447,18 @@
             "commune": "PUTEAUX",
             "activitePrincipale": "64.30Z",
             "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
-            "trancheEffectif": "NN",
+            "trancheEffectif": "N",
             "libelleTrancheEffectif": "",
             "latitude": "48.887985",
             "longitude": "2.233045",
+            "complements": {
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
             "anneeTrancheEffectif": null
           },
           {
@@ -393,10 +481,18 @@
             "commune": "MARLY-LE-ROI",
             "activitePrincipale": "65.2E",
             "libelleActivitePrincipale": "Organismes de placement en valeurs mobilières (65.2E)",
-            "trancheEffectif": "NN",
+            "trancheEffectif": "N",
             "libelleTrancheEffectif": "",
             "latitude": "48.876263",
             "longitude": "2.097763",
+            "complements": {
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
             "anneeTrancheEffectif": null
           }
         ],
@@ -427,7 +523,7 @@
           {
             "siren": "702621590",
             "denomination": "ARESXPERT AUDIT",
-            "role": "Commissaire aux comptes titulaire"
+            "role": null
           }
         ]
       },
@@ -454,10 +550,18 @@
           "commune": "PRESLES-EN-BRIE",
           "activitePrincipale": "46.18Z",
           "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
-          "trancheEffectif": "NN",
+          "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
           "latitude": "48.700488",
           "longitude": "2.758235",
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
           "anneeTrancheEffectif": null
         },
         "allSiegesSiret": [],
@@ -490,10 +594,18 @@
               "commune": "PRESLES-EN-BRIE",
               "activitePrincipale": "46.18Z",
               "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
-              "trancheEffectif": "NN",
+              "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
               "latitude": "48.700488",
               "longitude": "2.758235",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": null
             }
           ],
@@ -518,10 +630,18 @@
               "commune": "PRESLES-EN-BRIE",
               "activitePrincipale": "46.18Z",
               "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
-              "trancheEffectif": "NN",
+              "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
               "latitude": "48.700488",
               "longitude": "2.758235",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": null
             }
           ],
@@ -537,11 +657,10 @@
         "dateCreation": "2004-09-01",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateDebutActivite": "",
-        "trancheEffectif": "NN",
+        "trancheEffectif": "N",
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -556,7 +675,8 @@
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,
@@ -603,10 +723,18 @@
           "commune": "MACAU",
           "activitePrincipale": "46.19B",
           "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-          "trancheEffectif": null,
+          "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
           "latitude": "45.00782",
           "longitude": "-0.619455",
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
           "anneeTrancheEffectif": null
         },
         "allSiegesSiret": [],
@@ -639,10 +767,18 @@
               "commune": "MACAU",
               "activitePrincipale": "46.19B",
               "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-              "trancheEffectif": null,
+              "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
               "latitude": "45.00782",
               "longitude": "-0.619455",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": null
             }
           ],
@@ -667,10 +803,18 @@
               "commune": "MACAU",
               "activitePrincipale": "46.19B",
               "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-              "trancheEffectif": null,
+              "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
               "latitude": "45.00782",
               "longitude": "-0.619455",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": null
             }
           ],
@@ -686,11 +830,10 @@
         "dateCreation": "2006-09-01",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateDebutActivite": "",
-        "trancheEffectif": "NN",
+        "trancheEffectif": "N",
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -705,7 +848,8 @@
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,
@@ -736,10 +880,18 @@
             "commune": "MACAU",
             "activitePrincipale": "46.19B",
             "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-            "trancheEffectif": null,
+            "trancheEffectif": "N",
             "libelleTrancheEffectif": "",
             "latitude": "45.00782",
             "longitude": "-0.619455",
+            "complements": {
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
             "anneeTrancheEffectif": null
           }
         ],
@@ -783,6 +935,16 @@
           "libelleTrancheEffectif": "",
           "latitude": "43.458122",
           "longitude": "2.00451",
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "1527"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -819,6 +981,16 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.458122",
               "longitude": "2.00451",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "1527"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -847,6 +1019,16 @@
               "libelleTrancheEffectif": "",
               "latitude": "43.458122",
               "longitude": "2.00451",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "1527"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -866,7 +1048,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -881,7 +1062,8 @@
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,
@@ -916,6 +1098,16 @@
             "libelleTrancheEffectif": "",
             "latitude": "43.458122",
             "longitude": "2.00451",
+            "complements": {
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [
+                "1527"
+              ],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
             "anneeTrancheEffectif": "2021"
           }
         ],
@@ -926,7 +1118,7 @@
             "sexe": null,
             "nom": "DURET",
             "prenom": "Eric",
-            "role": null,
+            "role": "Président de SAS",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }

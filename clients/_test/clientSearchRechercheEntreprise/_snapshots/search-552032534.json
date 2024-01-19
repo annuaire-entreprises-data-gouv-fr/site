@@ -36,6 +36,18 @@
           "libelleTrancheEffectif": "",
           "latitude": "48.872565",
           "longitude": "2.334926",
+          "complements": {
+            "idFiness": [
+              "750073181"
+            ],
+            "idBio": [],
+            "idcc": [
+              "9999"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -72,6 +84,18 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.872565",
               "longitude": "2.334926",
+              "complements": {
+                "idFiness": [
+                  "750073181"
+                ],
+                "idBio": [],
+                "idcc": [
+                  "9999"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -100,6 +124,18 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.872565",
               "longitude": "2.334926",
+              "complements": {
+                "idFiness": [
+                  "750073181"
+                ],
+                "idBio": [],
+                "idcc": [
+                  "9999"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -119,7 +155,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "GE",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -127,14 +162,15 @@
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": false,
           "statutEntrepreneurSpectacle": null,
-          "estFiness": false,
+          "estFiness": true,
           "egaproRenseignee": true,
           "estRge": false,
           "estOrganismeFormation": false,
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,
@@ -152,7 +188,7 @@
             "sexe": null,
             "nom": "BERNARD DE SAINT AFFRIQUE",
             "prenom": "Antoine",
-            "role": "Directeur Général, Administrateur",
+            "role": "Directeur Général",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           },
@@ -198,6 +234,14 @@
           },
           {
             "sexe": null,
+            "nom": "MEHTA",
+            "prenom": "Sanjiv",
+            "role": "Administrateur",
+            "dateNaissancePartial": "",
+            "lieuNaissance": ""
+          },
+          {
+            "sexe": null,
             "nom": "MOLITOR",
             "prenom": "Bettina",
             "role": "Administrateur",
@@ -224,19 +268,19 @@
             "sexe": null,
             "nom": "SCHNEPP",
             "prenom": "Gilles",
-            "role": "Président du conseil d'administration, Administrateur",
+            "role": "Administrateur",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           },
           {
             "siren": "344366315",
             "denomination": "ERNST & YOUNG AUDIT",
-            "role": "Commissaire aux comptes titulaire"
+            "role": null
           },
           {
             "siren": "387953961",
             "denomination": "MAZARS ET ASSOCIÉS",
-            "role": "Commissaire aux comptes titulaire"
+            "role": null
           }
         ]
       }
