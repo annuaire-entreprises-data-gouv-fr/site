@@ -72,12 +72,12 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
         )}
         {estEss && <CertificationESSSection ess={ess} />}
         {estSocieteMission && <CertificationSocieteMission />}
-        {checkHasQuality(uniteLegale) && <HorizontalSeparator />}
         {estEntrepriseInclusive && (
           <EntrepriseInclusiveSection
             entrepriseInclusive={entrepriseInclusive}
           />
         )}
+        {checkHasQuality(uniteLegale) && <HorizontalSeparator />}
         {estRge && (
           <CertificationsRGESection
             uniteLegale={uniteLegale}

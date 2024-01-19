@@ -28,7 +28,7 @@ export interface ICertifications {
   egapro: IEgapro | IAPINotRespondingError;
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
   ess: IESS | IAPINotRespondingError;
-  entrepriseInclusive: IEntrepriseInclusive[] | IAPINotRespondingError;
+  entrepriseInclusive: IEntrepriseInclusive | IAPINotRespondingError;
 }
 
 export const getCertificationsFromSlug = async (

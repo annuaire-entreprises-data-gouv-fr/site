@@ -1,4 +1,4 @@
-import { clientAPIInclusion } from '#clients/api-inclusion';
+import { clientMarcheInclusion } from '#clients/api-inclusion';
 import { HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {
@@ -11,21 +11,21 @@ import { IUniteLegale } from '..';
 
 export type IEntrepriseInclusive = {
   marcheInclusionLink: string;
+  type: string;
+  siret: string;
 };
 
 export const getEntrepriseInclusive = async (
   uniteLegale: IUniteLegale
-): Promise<IEntrepriseInclusive[] | IAPINotRespondingError> => {
+): Promise<IEntrepriseInclusive | IAPINotRespondingError> => {
   try {
     if (!uniteLegale.complements.estEntrepriseInclusive) {
       throw new HttpNotFound('Not an entreprise inclusive');
     }
-    return await clientAPIInclusion(
-      uniteLegale.etablissements.all.map((e) => e.siret)
-    );
+    return await clientMarcheInclusion(uniteLegale.siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
-      return APINotRespondingFactory(EAdministration.DINUM, 404);
+      return APINotRespondingFactory(EAdministration.MARCHE_INCLUSION, 404);
     }
     logErrorInSentry(
       new FetchRessourceException({
@@ -34,9 +34,12 @@ export const getEntrepriseInclusive = async (
         context: {
           siren: uniteLegale.siren,
         },
-        administration: EAdministration.DINUM,
+        administration: EAdministration.MARCHE_INCLUSION,
       })
     );
-    return APINotRespondingFactory(EAdministration.DINUM, 500);
+    return APINotRespondingFactory(
+      EAdministration.MARCHE_INCLUSION,
+      e.status || 500
+    );
   }
 };

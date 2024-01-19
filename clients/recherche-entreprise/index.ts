@@ -193,6 +193,8 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     result.nombre_etablissements
   );
 
+  const estEntrepriseInclusive = siren === '419437629';
+
   return {
     ...createDefaultUniteLegale(siren),
     siege: etablissementSiege,
@@ -237,7 +239,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       estQualiopi: est_qualiopi,
       estAssociation: est_association,
       estUai: est_uai,
-      estEntrepriseInclusive: true,
+      estEntrepriseInclusive,
     },
     association: {
       idAssociation: identifiant_association,

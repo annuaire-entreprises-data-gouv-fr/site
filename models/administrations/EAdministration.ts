@@ -13,4 +13,5 @@ export enum EAdministration {
   VIES = 'vies',
   DJEPVA = 'djepva',
   ESSFRANCE = 'ess-france',
+  MARCHE_INCLUSION = 'marche-inclusion',
 }
