@@ -45,8 +45,8 @@ const DirigeantsOrElusList: React.FC<{
       </Icon>
       <style jsx>{`
         .dirigeants-or-elus {
+          color: var(--text-default-grey);
           font-size: 0.9rem;
-          color: #555;
           margin: 8px auto;
         }
       `}</style>

@@ -1,8 +1,9 @@
 import React from 'react';
+import NonRenseigne from '#components/non-renseigne';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IEtatCivil } from '#models/immatriculation';
 import { isCollectiviteTerritoriale, IUniteLegale } from '#models/index';
-import { formatDatePartial } from '#utils/helpers';
+import { capitalize, formatDatePartial } from '#utils/helpers';
 import { Section } from '../section';
 import { FullTable } from '../table/full';
 
@@ -26,10 +27,12 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
     }${(elu.nom || '').toUpperCase()}`;
 
     const infos = [
-      elu.role ?? <span style={{ color: '#555' }}>Non renseigné</span>,
+      elu.role ?? <NonRenseigne />,
       <>{nomComplet}</>,
-      <span style={{ textTransform: 'capitalize' }}>
-        {formatDatePartial(elu.dateNaissancePartial)}
+      <span>
+        {capitalize(formatDatePartial(elu.dateNaissancePartial) ?? '') || (
+          <NonRenseigne />
+        )}
       </span>,
     ];
 
@@ -63,7 +66,7 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
           </p>
         )}
       </Section>
-      <style global jsx>{`
+      <style jsx>{`
         table > tbody > tr > td {
           min-width: 30%;
         }

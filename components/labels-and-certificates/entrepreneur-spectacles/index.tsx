@@ -4,6 +4,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
 import { MC } from '#components/administrations';
+import NonRenseigne from '#components/non-renseigne';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -135,7 +136,7 @@ const formatLicence = (categorie: number, nomLieu = '') => {
     case 3:
       return <b>Diffuseurs de spectacles</b>;
     default:
-      return <i>Non renseigné</i>;
+      return <NonRenseigne />;
   }
 };
 

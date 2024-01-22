@@ -78,6 +78,7 @@ export function Badge({
         }
         a.badge-wrapper .badge-label {
           text-decoration: underline;
+          color: var(--text-default-grey);
         }
         a.badge-wrapper:hover {
           filter: brightness(0.95);
@@ -101,7 +102,6 @@ export function Badge({
           border-top-right-radius: 50px;
           border-bottom-right-radius: 50px;
           background-color: #eee;
-          color: #555;
           font-weight: bold;
           padding: ${small ? '0 8px 0 6px' : '2px 10px 2px 8px'};
         }
