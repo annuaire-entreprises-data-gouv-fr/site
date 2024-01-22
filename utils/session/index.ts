@@ -71,7 +71,7 @@ export const setSirenFrom = async (session: IronSession, sirenFrom: string) => {
 export const getSirenFrom = (session: IronSession) => session.sirenFrom;
 
 export const cleanSirenFrom = async (session: IronSession) => {
-  session.sirenFrom = undefined;
+  delete session.sirenFrom;
 };
 
 /**
