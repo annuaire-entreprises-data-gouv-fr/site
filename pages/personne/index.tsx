@@ -56,17 +56,17 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
       </h1>
       <Info>
         Cette page liste toutes les structures associées à{' '}
-        <b>
+        <strong>
           {searchParams.fn} {searchParams.n}
-        </b>
+        </strong>
         , né(e) en {labelDatePartial}.
         <br />
         Le jour de naissance n’étant pas une donnée publique, cette page peut
-        comporter de très rares cas <b>d’homonymie</b>.
+        comporter de très rares cas <strong>d’homonymie</strong>.
         <br />
         <br />
-        Enfin, si <b>vous ne retrouvez pas une entreprise</b> qui devrait se
-        trouver dans la liste , vous pouvez{' '}
+        Enfin, si <strong>vous ne retrouvez pas une entreprise</strong> qui
+        devrait se trouver dans la liste , vous pouvez{' '}
         <a href={`/rechercher?fn=${searchParams.fn}&n=${searchParams.n}`}>
           élargir la recherche à toutes les structures liées à une personne
           appelée «&nbsp;

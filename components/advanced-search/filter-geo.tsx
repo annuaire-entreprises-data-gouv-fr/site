@@ -162,7 +162,7 @@ export const FilterGeo: React.FC<{
             geoSuggests.length === 0 &&
             suggestsHistory.length > 0 && (
               <div className="drop-down">
-                <b>Localisations récentes :</b>
+                <strong>Localisations récentes :</strong>
                 {suggestsHistory.map((suggest: IGeoSuggest) => (
                   <div
                     key={'suggest-history-' + suggest.label}

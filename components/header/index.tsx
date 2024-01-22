@@ -93,14 +93,14 @@ export const Header: React.FC<IProps> = ({
                                     session?.user?.email ||
                                     'Utilisateur inconnu'}
                                   &nbsp;(
-                                  <b
+                                  <strong
                                     style={{
                                       fontVariant: 'small-caps',
                                       color: constants.colors.espaceAgent,
                                     }}
                                   >
                                     agent public
-                                  </b>
+                                  </strong>
                                   )
                                 </Icon>
                               </div>

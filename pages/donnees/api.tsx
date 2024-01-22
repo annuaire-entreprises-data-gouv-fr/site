@@ -45,13 +45,13 @@ const StatusPage: NextPageWithLayout<IProps> = ({
         administrations en lien avec les entreprises, les associations et les
         services publics. Les <a href="/donnees/sources">données</a> sont
         accessibles par le biais de téléservices appelés API. Ces API sont{' '}
-        <b>ouvertes à tous</b>.
+        <strong>ouvertes à tous</strong>.
       </p>
       <p>
         Cette page détaille la liste des API utilisées et leur disponibilité en
         temps réel&nbsp;:
       </p>
-      <b>Sommaire</b>
+      <strong>Sommaire</strong>
       <ol>
         {Object.keys(monitors).map((administrationEnum) =>
           monitors[administrationEnum].map((monitor) => (

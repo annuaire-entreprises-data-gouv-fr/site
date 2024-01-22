@@ -1,4 +1,3 @@
-import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import Meta from '#components/meta';
 import TextWrapper from 'components-ui/text-wrapper';
@@ -111,7 +110,7 @@ const Partager: NextPageWithLayout = () => {
             </code>
           </p>
           <p>
-            <b>Attention :</b> pensez à bien renseigner{' '}
+            <strong>Attention :</strong> pensez à bien renseigner{' '}
             <code>SIREN_OR_SIRET</code> avec le SIREN ou le SIRET pour lequel
             vous voulez créer un lien !
           </p>
@@ -134,7 +133,8 @@ const Partager: NextPageWithLayout = () => {
             >
               QR code
             </a>
-            , scannable par téléphone, <b>depuis chaque fiche entreprise</b> :
+            , scannable par téléphone,{' '}
+            <strong>depuis chaque fiche entreprise</strong> :
             <ul>
               <li>
                 Allez sur le <a href="/">moteur de recherche</a>

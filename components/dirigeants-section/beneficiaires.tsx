@@ -90,8 +90,8 @@ function BénéficiairesContent({
           >
             bénéficiaire effectif
           </a>{' '}
-          enregistré au <b>Registre National des Entreprises (RNE)</b> tenu par
-          l’
+          enregistré au <strong>Registre National des Entreprises (RNE)</strong>{' '}
+          tenu par l’
           <INPI />.
         </p>
       ) : (
@@ -108,8 +108,8 @@ function BénéficiairesContent({
             >
               bénéficiaire{plural} effectif{plural}
             </a>{' '}
-            enregistré{plural} au <b>Registre National des Entreprises (RNE)</b>{' '}
-            tenu par l’
+            enregistré{plural} au{' '}
+            <strong>Registre National des Entreprises (RNE)</strong> tenu par l’
             <INPI />. Retrouvez le détail des modalités de contrôle sur{' '}
             <UniteLegalePageLink
               uniteLegale={uniteLegale}

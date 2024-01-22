@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import ButtonLink from '#components-ui/button';
 import MatomoEvent from '#components/matomo-event';
 import Meta from '#components/meta';
@@ -33,7 +32,7 @@ const SirenOrSiretInvalidPage: NextPageWithLayout<
         </p>
         <p>
           Nous vous invitons à la plus grande vigilance,{' '}
-          <b>car il peut s’agir d’un numéro frauduleux</b>&nbsp;:
+          <strong>car il peut s’agir d’un numéro frauduleux</strong>&nbsp;:
         </p>
         <ul>
           <li>

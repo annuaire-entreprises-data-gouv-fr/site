@@ -66,7 +66,9 @@ const ConventionsCollectivesSection: React.FC<{
                     <>
                       {nature && (
                         <>
-                          <b className="font-small">{capitalize(nature)}</b>
+                          <strong className="font-small">
+                            {capitalize(nature)}
+                          </strong>
                           <br />
                         </>
                       )}

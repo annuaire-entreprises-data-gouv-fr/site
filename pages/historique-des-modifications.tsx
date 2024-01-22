@@ -22,7 +22,7 @@ const Changelog: NextPageWithLayout<IProps> = ({ changelog }) => (
       {changelog.map((change) => (
         <li key={change.date}>
           <div className="date">
-            <b>{change.date}</b>
+            <strong>{change.date}</strong>
           </div>
           <div>
             <RenderMarkdownServerOnly>{change.title}</RenderMarkdownServerOnly>

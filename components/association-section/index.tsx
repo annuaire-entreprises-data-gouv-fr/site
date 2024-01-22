@@ -19,7 +19,8 @@ const AssociationNotFound: React.FC<{
   <>
     <Warning>
       Cette structure est une association, mais aucune information n’a été
-      trouvée dans le <b>Répertoire National des Associations (RNA)</b>.
+      trouvée dans le{' '}
+      <strong>Répertoire National des Associations (RNA)</strong>.
       {!isTwoMonthOld(uniteLegale.dateCreation) && (
         <>
           <br />
@@ -75,8 +76,8 @@ export default function AssociationSection({
             />
             <p>
               Cette structure est inscrite au{' '}
-              <b>Répertoire National des Associations (RNA)</b>, avec les
-              informations suivantes&nbsp;:
+              <strong>Répertoire National des Associations (RNA)</strong>, avec
+              les informations suivantes&nbsp;:
             </p>
             <TwoColumnTable body={getTableData(idAssociation, association)} />
             {idAssociation && (
@@ -150,7 +151,7 @@ const getTableData = (
         ? agrement.map((agr) => {
             return (
               <div key={agr.type}>
-                <b>{agr.type}&nbsp;:</b> attribué le{' '}
+                <strong>{agr.type}&nbsp;:</strong> attribué le{' '}
                 {formatDate(agr.dateAttribution)} ({agr.attributeur})
               </div>
             );

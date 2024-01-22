@@ -46,7 +46,7 @@ const AnnoncesAssociationSection: React.FC<{
               <p>
                 Cette structure possède {annoncesAssociation.annonces.length}{' '}
                 annonces publiées au{' '}
-                <b>Journal Officiel des Associations (JOAFE)</b>
+                <strong>Journal Officiel des Associations (JOAFE)</strong>
                 , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
                 consulter{' '}
                 <UniteLegalePageLink
@@ -64,10 +64,10 @@ const AnnoncesAssociationSection: React.FC<{
                   'Justificatif de parution',
                 ]}
                 body={annoncesAssociation.annonces.map((annonce) => [
-                  <b>{formatDate(annonce.datePublication)}</b>,
+                  <strong>{formatDate(annonce.datePublication)}</strong>,
                   <Tag>{annonce.numeroParution}</Tag>,
                   <div className="annonce">
-                    <b>{annonce.typeAvisLibelle}</b>
+                    <strong>{annonce.typeAvisLibelle}</strong>
                     <div className="font-small">
                       <i>{annonce.details}</i>
                     </div>

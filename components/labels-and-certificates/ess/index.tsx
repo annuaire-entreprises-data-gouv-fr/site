@@ -25,9 +25,9 @@ const ESSFAQLink = () => (
 
 const ESSNotFound = () => (
   <>
-    Cette structure <b>n’apparait pas</b> dans la liste des entreprises de{' '}
-    <ESSFAQLink /> tenue par <ESSFrance />, alors que sa forme juridique relève
-    du champs de l’ESS.
+    Cette structure <strong>n’apparait pas</strong> dans la liste des
+    entreprises de <ESSFAQLink /> tenue par <ESSFrance />, alors que sa forme
+    juridique relève du champs de l’ESS.
     <p>
       Il existe plusieurs explications possibles :
       <ul>

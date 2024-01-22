@@ -10,8 +10,9 @@ export const CertificationSocieteMission = () => (
   >
     Cette structure est une{' '}
     <FAQLink tooltipLabel="société à mission">
-      Une <b>société à mission</b> est une entreprise avec une{' '}
-      <b>raison d’être</b> intégrant des objectifs sociaux et environnementaux.
+      Une <strong>société à mission</strong> est une entreprise avec une{' '}
+      <strong>raison d’être</strong> intégrant des objectifs sociaux et
+      environnementaux.
       <br />
       <br />
       <a href="/faq/societe-a-mission">En savoir plus</a>

@@ -11,10 +11,10 @@ const Footer = () => (
         <div className="fr-container">
           <div className="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
-              <b className="fr-footer__top-cat">
+              <strong className="fr-footer__top-cat">
                 Vérifier les informations légales d’une entreprise ou
                 association
-              </b>
+              </strong>
               <ul className="fr-footer__top-list">
                 {getAllLandingPages()
                   .filter((lp) => !lp.isServicePublic)
@@ -27,9 +27,9 @@ const Footer = () => (
                   ))}
               </ul>
               <br />
-              <b className="fr-footer__top-cat">
+              <strong className="fr-footer__top-cat">
                 Vérifier les informations légales d’une administration
-              </b>
+              </strong>
               <ul className="fr-footer__top-list">
                 {getAllLandingPages()
                   .filter((lp) => lp.isServicePublic)
@@ -43,9 +43,9 @@ const Footer = () => (
               </ul>
             </div>
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
-              <b className="fr-footer__top-cat">
+              <strong className="fr-footer__top-cat">
                 Consulter la liste officielle des entreprises françaises
-              </b>
+              </strong>
               <ul className="fr-footer__top-list">
                 <li>
                   <a
@@ -57,7 +57,7 @@ const Footer = () => (
                 </li>
               </ul>
               <br />
-              <b className="fr-footer__top-cat">Aide</b>
+              <strong className="fr-footer__top-cat">Aide</strong>
               <ul className="fr-footer__top-list">
                 <li>
                   <a className="fr-footer__top-link" href="/faq">
@@ -87,7 +87,9 @@ const Footer = () => (
               </ul>
             </div>
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
-              <b className="fr-footer__top-cat">Annuaire des Entreprises</b>
+              <strong className="fr-footer__top-cat">
+                Annuaire des Entreprises
+              </strong>
               <ul className="fr-footer__top-list">
                 <li>
                   <a className="fr-footer__top-link" href="/administration">
@@ -236,7 +238,7 @@ const Footer = () => (
           </div>
         </div>
         <div className="fr-footer__partners">
-          <b className="fr-footer__partners-title">Nos partenaires</b>
+          <strong className="fr-footer__partners-title">Nos partenaires</strong>
           <div className="fr-footer__partners-logos">
             <div className="fr-footer__partners-sub">
               <ul>
