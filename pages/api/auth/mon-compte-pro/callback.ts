@@ -1,17 +1,15 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
-  IAgentConnectUserInfo,
-  agentConnectAuthenticate,
-} from '#clients/auth/agent-connect/strategy';
+  IMCPUserInfo,
+  monCompteAuthenticate,
+} from '#clients/auth/mon-compte-pro/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { Exception } from '#models/exceptions';
 import { checkIsSuperAgent } from '#utils/helpers/is-super-agent';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import {
   ISessionPrivilege,
-  cleanSirenFrom,
-  getSirenFrom,
   sessionOptions,
   setAgentSession,
 } from '#utils/session';
@@ -19,7 +17,7 @@ import {
 export default withIronSessionApiRoute(callbackRoute, sessionOptions);
 
 const getUserPrivileges = async (
-  userInfo: IAgentConnectUserInfo
+  userInfo: IMCPUserInfo
 ): Promise<ISessionPrivilege> => {
   const isTestAccount =
     userInfo.email === 'user@yopmail.com' &&
@@ -48,9 +46,8 @@ const getUserPrivileges = async (
 
 async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const userInfo = await agentConnectAuthenticate(req);
+    const userInfo = await monCompteAuthenticate(req);
     const userPrivilege = await getUserPrivileges(userInfo);
-    const session = req.session;
 
     if (userPrivilege === 'unkown') {
       throw new HttpForbiddenError(`Unauthorized account : ${userInfo.email}`);
@@ -61,17 +58,9 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
       userInfo.family_name || '',
       userInfo.given_name || '',
       userPrivilege,
-      session
+      req.session
     );
-
-    const sirenFrom = getSirenFrom(session);
-
-    if (sirenFrom) {
-      await cleanSirenFrom(session);
-      res.redirect(`/entreprise/${sirenFrom}`);
-    } else {
-      res.redirect('/');
-    }
+    res.redirect('/');
   } catch (e: any) {
     logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));
     if (e instanceof HttpForbiddenError) {
