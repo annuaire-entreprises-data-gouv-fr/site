@@ -15,7 +15,7 @@ export const WeNeedYouModal: React.FC<{}> = () => (
         <div className="title">
           <div>🙃</div>
           <div>
-            <b>On a besoin de vous !</b>
+            <strong>On a besoin de vous !</strong>
             <br />
             <i>(pendant 30 sec)</i>
           </div>
@@ -35,7 +35,7 @@ export const WeNeedYouModal: React.FC<{}> = () => (
           dangerouslySetInnerHTML={{
             __html: `
             <button onclick="window.closeModal('we-need-you-modal')" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
-            <b>fermer ✕</b>
+            <strong>fermer ✕</strong>
             </button>
             `,
           }}
@@ -87,7 +87,7 @@ export const WeNeedYouModal: React.FC<{}> = () => (
         font-size: 2.3rem;
         padding-right: 5px;
       }
-      .title > div:nth-of-type(2) > b {
+      .title > div:nth-of-type(2) > strong {
         font-size: 1.1rem;
       }
 

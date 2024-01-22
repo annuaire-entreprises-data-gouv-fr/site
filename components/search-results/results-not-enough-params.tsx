@@ -22,10 +22,10 @@ export const NotEnoughParams = () => {
           </li>
         </ul>
         <br />
-        <b>
+        <strong>
           Vous avez une question concernant le fonctionnement du moteur de
           recherche ?
-        </b>
+        </strong>
         <ul>
           {articles.map(({ slug, title }) => (
             <li key={slug}>

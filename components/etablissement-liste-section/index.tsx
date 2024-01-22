@@ -60,11 +60,11 @@ const EtablissementTable: React.FC<{
                 <span style={{ fontVariant: 'all-small-caps' }}>
                   {(etablissement.enseigne || etablissement.denomination) && (
                     <a href={`/etablissement/${etablissement.siret}`}>
-                      <b>
+                      <strong>
                         {getEnseigneEtablissement(etablissement, session) ||
                           getDenominationEtablissement(etablissement, session)}
                         <br />
-                      </b>
+                      </strong>
                     </a>
                   )}
                   <>{getAdresseEtablissement(etablissement, session)}</>
@@ -113,9 +113,9 @@ const EtablissementListeSection: React.FC<{
     <div id="etablissements">
       <p>
         Cette structure possède{' '}
-        <b>
+        <strong>
           {nombreEtablissements} établissement{plural}
-        </b>
+        </strong>
         {nombreEtablissementsOuverts && !usePagination ? (
           <>
             {' '}

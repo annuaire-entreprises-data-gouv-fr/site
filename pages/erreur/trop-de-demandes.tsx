@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import ButtonLink from '#components-ui/button';
 import Meta from '#components/meta';
 import constants from '#models/constants';
@@ -18,14 +17,15 @@ const TooManyRequest: NextPageWithLayout = () => {
 
       <ul>
         <li>
-          Si vous travaillez <b>pour un service public</b> (administration,
-          ministère, collectivité),{' '}
+          Si vous travaillez <strong>pour un service public</strong>{' '}
+          (administration, ministère, collectivité),{' '}
           <a href={`mailto:${constants.links.mailto}`}>contactez-nous</a> et
           nous ferons le nécessaire pour que cela ne se reproduise pas.
         </li>
         <li>
-          Si <b>vous utilisez des robots 🤖</b> pour scrapper les données du
-          site. <b>Sachez que toutes les données sont publiques !</b> Alors{' '}
+          Si <strong>vous utilisez des robots 🤖</strong> pour scrapper les
+          données du site.{' '}
+          <strong>Sachez que toutes les données sont publiques !</strong> Alors{' '}
           <a href="/donnees/sources">
             utilisez les jeux de données directement ou l’API
           </a>

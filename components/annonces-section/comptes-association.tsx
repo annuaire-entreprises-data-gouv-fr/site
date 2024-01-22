@@ -39,7 +39,7 @@ export const ComptesAssociationSection: React.FC<{
             <p>
               Cette structure possède {comptesAssociation.comptes.length}{' '}
               comptes publiés au{' '}
-              <b>Journal Officiel des Associations (JOAFE)</b>
+              <strong>Journal Officiel des Associations (JOAFE)</strong>
               , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
               consulter{' '}
               <UniteLegalePageLink
@@ -57,10 +57,10 @@ export const ComptesAssociationSection: React.FC<{
                 'Dépôt des comptes',
               ]}
               body={comptesAssociation.comptes.map((compte) => [
-                <b>{formatDate(compte.dateparution)}</b>,
+                <strong>{formatDate(compte.dateparution)}</strong>,
                 <Tag>{compte.numeroParution}</Tag>,
                 <div>
-                  <b>Comptes {compte.anneeCloture}</b> <br />
+                  <strong>Comptes {compte.anneeCloture}</strong> <br />
                   clôturés le {formatDate(compte.datecloture)}
                 </div>,
                 <ButtonLink target="_blank" to={compte.permalinkUrl} alt small>

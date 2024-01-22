@@ -11,8 +11,8 @@ export const NonDiffusibleSection = () => (
       <a href="https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=C505A51DBC1A4EB1FFF3764C69ACDB1C.tpdjo11v_1?idArticle=LEGIARTI000020165030&cidTexte=LEGITEXT000005634379&dateTexte=20100702">
         l’article A123-96 du code du commerce
       </a>
-      . On parle d’entreprise <b>non-diffusible</b>. Dans ce cas nous{' '}
-      <b>ne diffusons pas les informations</b> de cette entreprise sur
+      . On parle d’entreprise <strong>non-diffusible</strong>. Dans ce cas nous{' '}
+      <strong>ne diffusons pas les informations</strong> de cette entreprise sur
       l’Annuaire des Entreprises.
     </p>
     <p>

@@ -35,8 +35,8 @@ export const EtablissementsScolairesSection: React.FC<{
         return (
           <>
             <p>
-              Cette structure possède <b>{etablissements.resultCount}</b>{' '}
-              établissement
+              Cette structure possède{' '}
+              <strong>{etablissements.resultCount}</strong> établissement
               {plural} scolaire{plural}&nbsp;:
             </p>
             <FullTable

@@ -47,12 +47,12 @@ const ImmatriculationLinks = ({
       <PrintNever>
         <p>
           Pour accéder aux données contenues dans un extrait d’immatriculation
-          (équivalent de <b>l’extrait KBIS ou D1</b>), vous pouvez soit
-          télécharger le{' '}
-          <b>
+          (équivalent de <strong>l’extrait KBIS ou D1</strong>), vous pouvez
+          soit télécharger le{' '}
+          <strong>
             justificatif d’immatriculation au Registre National des Entreprises
             (RNE)
-          </b>
+          </strong>
           , soit consulter la fiche complète sur le site de l’
           <INPI />
           &nbsp;:
@@ -108,8 +108,8 @@ const ImmatriculationRNE: React.FC<IProps> = ({
           <>
             <p>
               Cette structure possède une fiche d’immatriculation au{' '}
-              <b>Registre National des Entreprises (RNE)</b> qui liste les
-              entreprises de France et qui est tenu par l’
+              <strong>Registre National des Entreprises (RNE)</strong> qui liste
+              les entreprises de France et qui est tenu par l’
               <INPI />.
             </p>
 
@@ -129,7 +129,7 @@ const ImmatriculationRNE: React.FC<IProps> = ({
                 <p>
                   Cette structure possède également{' '}
                   {immatriculation.observations.length} observation au{' '}
-                  <b>RNE</b>
+                  <strong>RNE</strong>
                   &nbsp;:
                 </p>
                 <FullTable

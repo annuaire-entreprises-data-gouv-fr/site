@@ -18,7 +18,7 @@ export const NPSBanner: React.FC<{}> = () => (
           dangerouslySetInnerHTML={{
             __html: `
               <button onclick="window.closeModal('nps-modal')" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
-                <b>Ne plus afficher ce message ✕</b>
+                <strong>Ne plus afficher ce message ✕</strong>
               </button>
         `,
           }}

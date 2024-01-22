@@ -107,7 +107,8 @@ export const CertificationsRGESection: React.FC<{
             <TwoColumnTable body={data} />
             <p>
               Cette structure possède{' '}
-              <b>{certificationsRGE.certifications.length}</b> certificat
+              <strong>{certificationsRGE.certifications.length}</strong>{' '}
+              certificat
               {plural}&nbsp;:
             </p>
             <FullTable

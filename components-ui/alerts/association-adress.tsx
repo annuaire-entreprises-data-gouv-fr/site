@@ -24,7 +24,7 @@ const AssociationAdressAlert: React.FC<{
       {adresseInconsistency && (
         <Warning full>
           L’adresse déclarée auprès du <MI /> (en préfecture){' '}
-          <b>est différente</b> de celle déclarée auprès de l’
+          <strong>est différente</strong> de celle déclarée auprès de l’
           <INSEE /> :
           <ul>
             <li>
@@ -38,9 +38,9 @@ const AssociationAdressAlert: React.FC<{
           concernée pour corriger l’erreur.
           <br />
           <br />
-          <b>NB :</b> si vous avez déjà effectué la correction auprès du <MI />,
-          sachez qu’elle peut prendre quelques semaines avant d’être prise en
-          compte dans les bases de données.
+          <strong>NB :</strong> si vous avez déjà effectué la correction auprès
+          du <MI />, sachez qu’elle peut prendre quelques semaines avant d’être
+          prise en compte dans les bases de données.
         </Warning>
       )}
     </>

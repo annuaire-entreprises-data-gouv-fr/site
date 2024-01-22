@@ -36,7 +36,7 @@ const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => (
           <>
             <p>
               Cette structure est enregistrée au{' '}
-              <b>Journal Officiel des Association (JOAFE)</b>.
+              <strong>Journal Officiel des Association (JOAFE)</strong>.
             </p>
             <TwoColumnTable body={data} />
             {immatriculation.downloadLink && (

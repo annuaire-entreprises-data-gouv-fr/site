@@ -46,7 +46,7 @@ export const UsageStats: React.FC<{
           nombre de siren/siret utilisé directement dans le moteur de recherche,
           car ces deux indicateurs sont corrélés à l’application du{' '}
           <a href="https://www.modernisation.gouv.fr/fileadmin/Book/Fiche3_5.pdf">
-            <b>Dites-Le-Nous-Une-Fois</b> (DLNUF)
+            <strong>Dites-Le-Nous-Une-Fois</strong> (DLNUF)
           </a>
           .
         </p>
@@ -55,19 +55,20 @@ export const UsageStats: React.FC<{
         <div className="chart-container">
           <div>
             <p>
-              Le <b>copier-coller</b> sert majoritairement à copier les numéros
-              siren/siret. Beaucoup d’entrepreneurs ne connaissent pas leurs
-              informations par coeur et utilisent l’Annuaire des Entreprises
-              pour les retrouver, en particulier durant leurs démarches
-              administratives.
+              Le <strong>copier-coller</strong> sert majoritairement à copier
+              les numéros siren/siret. Beaucoup d’entrepreneurs ne connaissent
+              pas leurs informations par coeur et utilisent l’Annuaire des
+              Entreprises pour les retrouver, en particulier durant leurs
+              démarches administratives.
             </p>
             <p>
               Du côté des administrations publiques,{' '}
-              <b>le numéro siren/siret</b> est l’identifiant systématiquement
-              utilisé pour identifier une entreprise lors d’une démarche. Pour
-              traiter un dossier, un <b>agent public</b> peut coller le
-              siren/siret directement dans la barre de recherche de l’Annuaire
-              des Entreprises et retrouver immédiatement la fiche publique de
+              <strong>le numéro siren/siret</strong> est l’identifiant
+              systématiquement utilisé pour identifier une entreprise lors d’une
+              démarche. Pour traiter un dossier, un{' '}
+              <strong>agent public</strong> peut coller le siren/siret
+              directement dans la barre de recherche de l’Annuaire des
+              Entreprises et retrouver immédiatement la fiche publique de
               l’entreprise concernée.
             </p>
           </div>

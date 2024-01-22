@@ -1,4 +1,3 @@
-import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import { INPI, INSEE } from '#components/administrations';
 import Meta from '#components/meta';
@@ -30,12 +29,13 @@ const ExtraitKbis: NextPageWithLayout = () => {
           entreprise auprès de son Centre de Formalité des Entreprises (CFE).
         </p>
         <p>
-          Il est important de faire la différence entre <b>l’extrait KBIS</b>{' '}
-          qui est l’extrait d’immatriculation au Registre du Commerce et des
-          Sociétés, qui concerne les <b>entreprises commerciales</b> et{' '}
-          <b>l’extrait D1</b> qui est l’extrait d’immatriculation au Répertoire
-          des Métiers de la Chambre de Métiers et de l’Artisanat et qui concerne{' '}
-          <b>les entreprises artisanales</b>.
+          Il est important de faire la différence entre{' '}
+          <strong>l’extrait KBIS</strong> qui est l’extrait d’immatriculation au
+          Registre du Commerce et des Sociétés, qui concerne les{' '}
+          <strong>entreprises commerciales</strong> et{' '}
+          <strong>l’extrait D1</strong> qui est l’extrait d’immatriculation au
+          Répertoire des Métiers de la Chambre de Métiers et de l’Artisanat et
+          qui concerne <strong>les entreprises artisanales</strong>.
         </p>
         <div>
           <h2>
@@ -49,8 +49,9 @@ const ExtraitKbis: NextPageWithLayout = () => {
           </p>
           <p>
             Une fois sur la page de l’entreprise, consultez l’onglet{' '}
-            <b>justificatifs</b> et retrouvez-y les données d’immatriculations
-            issues du Registre National des Entreprises (RNE) tenu par l’
+            <strong>justificatifs</strong> et retrouvez-y les données
+            d’immatriculations issues du Registre National des Entreprises (RNE)
+            tenu par l’
             <INPI />.
           </p>
           <h2>
@@ -73,7 +74,7 @@ const ExtraitKbis: NextPageWithLayout = () => {
             </li>
           </ol>
           <p>
-            <b>NB :</b> le lien se construit ainsi :
+            <strong>NB :</strong> le lien se construit ainsi :
           </p>
           <code>
             https://annuaire-entreprises.data.gouv.fr/justificatif/
@@ -89,7 +90,8 @@ const ExtraitKbis: NextPageWithLayout = () => {
             <INPI />.
           </p>
           <p>
-            <b>NB :</b> toutes les APIs du service public sont référencées sur{' '}
+            <strong>NB :</strong> toutes les APIs du service public sont
+            référencées sur{' '}
             <a
               target="_blank"
               rel="noreferrer noopener"
@@ -104,8 +106,8 @@ const ExtraitKbis: NextPageWithLayout = () => {
             via API
           </h2>
           <p>
-            Il existe une API spéciale, <b>API Entreprise</b> réservée aux
-            administrations et à certaines entreprises éligibles, qui permet
+            Il existe une API spéciale, <strong>API Entreprise</strong> réservée
+            aux administrations et à certaines entreprises éligibles, qui permet
             d’accéder aux informations des entreprises détenue par
             l’administration :
           </p>
