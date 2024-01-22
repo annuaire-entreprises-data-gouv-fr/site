@@ -3,7 +3,7 @@ import ButtonLink from '#components-ui/button';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { Tag } from '#components-ui/tag';
 import { INSEE } from '#components/administrations';
-import AvisSituationLink from '#components/avis-situation-link';
+import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
