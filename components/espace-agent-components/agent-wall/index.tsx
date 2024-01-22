@@ -16,7 +16,7 @@ const AgentWall: React.FC<{
         <div className="cta-actes layout-center">
           <div>
             <p>
-              <b>Vous êtes agent public ?</b>
+              <h3>Vous êtes agent public ?</h3>
             </p>
             <div className="layout-center">
               <ButtonMonComptePro />
