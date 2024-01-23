@@ -1,5 +1,3 @@
-import { withIronSessionApiRoute } from 'iron-session/next';
-import { NextApiRequest, NextApiResponse } from 'next';
 import {
   IAgentConnectUserInfo,
   agentConnectAuthenticate,
@@ -12,11 +10,9 @@ import {
   ISessionPrivilege,
   cleanSirenFrom,
   getSirenFrom,
-  sessionOptions,
   setAgentSession,
 } from '#utils/session';
-
-export default withIronSessionApiRoute(callbackRoute, sessionOptions);
+import withSession from '#utils/session/with-session';
 
 const getUserPrivileges = async (
   userInfo: IAgentConnectUserInfo
@@ -46,7 +42,7 @@ const getUserPrivileges = async (
   return 'unkown';
 };
 
-async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
+export default withSession(async function callbackRoute(req, res) {
   try {
     const userInfo = await agentConnectAuthenticate(req);
     const userPrivilege = await getUserPrivileges(userInfo);
@@ -80,7 +76,7 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
       res.redirect('/connexion/echec-connexion');
     }
   }
-}
+});
 
 export class AgentConnectionFailedException extends Exception {
   constructor(args: { cause?: any }) {

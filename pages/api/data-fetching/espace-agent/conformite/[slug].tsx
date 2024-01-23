@@ -1,15 +1,12 @@
-import { withIronSessionApiRoute } from 'iron-session/next';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { getDonneesRestreintesEntreprise } from '#models/espace-agent/donnees-restreintes-entreprise';
 import { FetchRessourceException } from '#models/exceptions';
 import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { logFatalErrorInSentry } from '#utils/sentry';
-import { isSuperAgent, sessionOptions } from '#utils/session';
+import { isSuperAgent } from '#utils/session';
+import withSession from '#utils/session/with-session';
 
-export default withIronSessionApiRoute(conformite, sessionOptions);
-
-async function conformite(req: NextApiRequest, res: NextApiResponse) {
+export default withSession(async function conformite(req, res) {
   const {
     query: { slug },
     session,
@@ -40,4 +37,4 @@ async function conformite(req: NextApiRequest, res: NextApiResponse) {
     );
     res.status(e.status || 500).json({ message });
   }
-}
+});

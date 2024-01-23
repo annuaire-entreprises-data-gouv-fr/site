@@ -1,8 +1,4 @@
-import type { IronSession, IronSessionOptions } from 'iron-session';
-
-declare module 'iron-session' {
-  interface IronSessionData extends ISession {}
-}
+import type { IronSession, SessionOptions } from 'iron-session';
 
 export type ISessionPrivilege = 'unkown' | 'agent' | 'super-agent';
 
@@ -23,7 +19,7 @@ export type ISession = {
   sirenFrom?: string;
 };
 
-export const sessionOptions: IronSessionOptions = {
+export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
   cookieName: 'annuaire-entreprises-session',
   cookieOptions: {
@@ -31,7 +27,7 @@ export const sessionOptions: IronSessionOptions = {
   },
 };
 
-export async function setVisitTimestamp(session: IronSession) {
+export async function setVisitTimestamp(session: IronSession<ISession>) {
   session.lastVisitTimestamp = new Date().getTime();
   return session.save();
 }
@@ -41,7 +37,7 @@ export const setAgentSession = async (
   familyName: string,
   firstName: string,
   privilege: ISessionPrivilege,
-  session: IronSession
+  session: IronSession<ISession>
 ) => {
   session.user = {
     email,
@@ -53,7 +49,7 @@ export const setAgentSession = async (
   await session.save();
 };
 
-export const cleanAgentSession = async (session: IronSession) => {
+export const cleanAgentSession = async (session: IronSession<ISession>) => {
   session.user = {};
   await session.save();
 };
@@ -63,14 +59,18 @@ export const cleanAgentSession = async (session: IronSession) => {
  * @param session
  */
 
-export const setSirenFrom = async (session: IronSession, sirenFrom: string) => {
+export const setSirenFrom = async (
+  session: IronSession<ISession>,
+  sirenFrom: string
+) => {
   session.sirenFrom = sirenFrom;
   await session.save();
 };
 
-export const getSirenFrom = (session: IronSession) => session.sirenFrom;
+export const getSirenFrom = (session: IronSession<ISession>) =>
+  session.sirenFrom;
 
-export const cleanSirenFrom = async (session: IronSession) => {
+export const cleanSirenFrom = async (session: IronSession<ISession>) => {
   delete session.sirenFrom;
 };
 

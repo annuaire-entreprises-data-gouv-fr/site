@@ -1,6 +1,6 @@
-import { IncomingMessage } from 'http';
 import { BaseClient, Issuer, generators } from 'openid-client';
 import { HttpForbiddenError } from '#clients/exceptions';
+import { IReqWithSession } from '#utils/session/with-session';
 
 let _client = undefined as BaseClient | undefined;
 
@@ -41,7 +41,7 @@ export const getClient = async () => {
   }
 };
 
-export const agentConnectAuthorizeUrl = async (req: IncomingMessage) => {
+export const agentConnectAuthorizeUrl = async (req: IReqWithSession) => {
   const client = await getClient();
 
   const nonce = generators.nonce();
@@ -75,7 +75,7 @@ export type IAgentConnectUserInfo = {
   is_service_public: boolean;
 };
 
-export const agentConnectAuthenticate = async (req: IncomingMessage) => {
+export const agentConnectAuthenticate = async (req: IReqWithSession) => {
   const client = await getClient();
 
   const params = client.callbackParams(req);
@@ -99,7 +99,7 @@ export const agentConnectAuthenticate = async (req: IncomingMessage) => {
   return userInfo;
 };
 
-export const agentConnectLogoutUrl = async (req: IncomingMessage) => {
+export const agentConnectLogoutUrl = async (req: IReqWithSession) => {
   const client = await getClient();
   return client.endSessionUrl({
     id_token_hint: req.session.idToken,

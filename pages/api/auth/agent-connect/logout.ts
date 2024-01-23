@@ -1,13 +1,10 @@
-import { withIronSessionApiRoute } from 'iron-session/next';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { agentConnectLogoutUrl } from '#clients/auth/agent-connect/strategy';
 import { Exception } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
-import { sessionOptions, setSirenFrom } from '#utils/session';
+import { setSirenFrom } from '#utils/session';
+import withSession from '#utils/session/with-session';
 
-export default withIronSessionApiRoute(logoutRoute, sessionOptions);
-
-async function logoutRoute(req: NextApiRequest, res: NextApiResponse) {
+export default withSession(async function logoutRoute(req, res) {
   try {
     await setSirenFrom(req.session, (req?.query?.sirenFrom || '') as string);
     const url = await agentConnectLogoutUrl(req);
@@ -16,7 +13,7 @@ async function logoutRoute(req: NextApiRequest, res: NextApiResponse) {
     logErrorInSentry(new LogoutFailedException({ cause: e }));
     res.redirect('/connexion/au-revoir');
   }
-}
+});
 
 export class LogoutFailedException extends Exception {
   constructor(args: { cause?: any }) {
