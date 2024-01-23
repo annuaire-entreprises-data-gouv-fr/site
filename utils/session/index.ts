@@ -29,6 +29,7 @@ export const sessionOptions: IronSessionOptions = {
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
   },
+  ttl: 604800, // a week
 };
 
 export async function setVisitTimestamp(session: IronSession) {
