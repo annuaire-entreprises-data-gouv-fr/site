@@ -15,12 +15,6 @@ export type ISession = {
     fullName?: string;
     privilege?: ISessionPrivilege;
   };
-  // agent connect
-  state?: string;
-  nonce?: string;
-  idToken?: string;
-  // connexion
-  sirenFrom?: string;
 };
 
 export const sessionOptions: IronSessionOptions = {
@@ -51,27 +45,6 @@ export const setAgentSession = async (
     privilege,
   };
   await session.save();
-};
-
-export const cleanAgentSession = async (session: IronSession) => {
-  session.user = {};
-  await session.save();
-};
-
-/**
- * Store Siren for redirections
- * @param session
- */
-
-export const setSirenFrom = async (session: IronSession, sirenFrom: string) => {
-  session.sirenFrom = sirenFrom;
-  await session.save();
-};
-
-export const getSirenFrom = (session: IronSession) => session.sirenFrom;
-
-export const cleanSirenFrom = async (session: IronSession) => {
-  delete session.sirenFrom;
 };
 
 /**

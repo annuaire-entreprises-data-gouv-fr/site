@@ -8,7 +8,6 @@ import constants from '#models/constants';
 import { IParams } from '#models/search-filter-params';
 import { isLoggedIn } from '#utils/session';
 import useSession from 'hooks/use-session';
-import useSirenFromRouter from 'hooks/use-siren-from-url';
 
 type IProps = {
   currentSearchTerm?: string;
@@ -28,7 +27,6 @@ export const Header: React.FC<IProps> = ({
   useSearchBar = false,
 }) => {
   const session = useSession();
-  const sirenFrom = useSirenFromRouter();
   return (
     <>
       <header role="banner" className="fr-header">
@@ -87,7 +85,7 @@ export const Header: React.FC<IProps> = ({
                           <li>
                             <a
                               className="fr-link menu-logout"
-                              href={`/api/auth/agent-connect/logout?sirenFrom=${sirenFrom}`}
+                              href="/api/auth/mon-compte-pro/logout"
                             >
                               <div>
                                 <Icon slug="user">
