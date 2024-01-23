@@ -210,9 +210,8 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     categorieEntreprise: categorie_entreprise,
     anneeCategorieEntreprise: annee_categorie_entreprise,
     trancheEffectif:
-      caractere_employeur === 'N'
-        ? caractere_employeur
-        : tranche_effectif_salarie,
+      tranche_effectif_salarie ??
+      (caractere_employeur === 'N' ? caractere_employeur : null),
     anneeTrancheEffectif: annee_tranche_effectif_salarie,
     chemin: result.slug || result.siren,
     natureJuridique: nature_juridique || '',

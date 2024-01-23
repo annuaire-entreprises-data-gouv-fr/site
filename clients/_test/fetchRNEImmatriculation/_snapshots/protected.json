@@ -7,11 +7,11 @@
     "identite": {
       "denomination": "SEVERNAYA",
       "dateImmatriculation": "2021-12-27",
-      "dateDebutActiv": "",
+      "dateDebutActiv": "2022-01-01",
       "dateRadiation": "",
       "dateCessationActivite": "",
       "isPersonneMorale": true,
-      "dateClotureExercice": "",
+      "dateClotureExercice": "3112",
       "dureePersonneMorale": "99 ans",
       "capital": "1 000 EUR (fixe)",
       "libelleNatureJuridique": "SAS, société par actions simplifiée",
@@ -21,7 +21,7 @@
       {
         "nom": "Estournet",
         "prenom": "PIERRE",
-        "role": "Président",
+        "role": "Président de SAS",
         "dateNaissancePartial": "1985-12",
         "dateNaissanceFull": ""
       }

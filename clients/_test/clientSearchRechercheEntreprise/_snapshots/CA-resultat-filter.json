@@ -119,7 +119,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -179,7 +178,7 @@
             "sexe": null,
             "nom": "NÉGRIER",
             "prenom": "Philippe",
-            "role": null,
+            "role": "Président de SAS",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }
@@ -295,7 +294,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -367,7 +365,7 @@
             "commune": "PUTEAUX",
             "activitePrincipale": "64.30Z",
             "libelleActivitePrincipale": "Fonds de placement et entités financières similaires (64.30Z)",
-            "trancheEffectif": "NN",
+            "trancheEffectif": "N",
             "libelleTrancheEffectif": "",
             "latitude": "48.887985",
             "longitude": "2.233045",
@@ -393,7 +391,7 @@
             "commune": "MARLY-LE-ROI",
             "activitePrincipale": "65.2E",
             "libelleActivitePrincipale": "Organismes de placement en valeurs mobilières (65.2E)",
-            "trancheEffectif": "NN",
+            "trancheEffectif": "N",
             "libelleTrancheEffectif": "",
             "latitude": "48.876263",
             "longitude": "2.097763",
@@ -427,7 +425,7 @@
           {
             "siren": "702621590",
             "denomination": "ARESXPERT AUDIT",
-            "role": "Commissaire aux comptes titulaire"
+            "role": null
           }
         ]
       },
@@ -454,7 +452,7 @@
           "commune": "PRESLES-EN-BRIE",
           "activitePrincipale": "46.18Z",
           "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
-          "trancheEffectif": "NN",
+          "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
           "latitude": "48.700488",
           "longitude": "2.758235",
@@ -490,7 +488,7 @@
               "commune": "PRESLES-EN-BRIE",
               "activitePrincipale": "46.18Z",
               "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
-              "trancheEffectif": "NN",
+              "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
               "latitude": "48.700488",
               "longitude": "2.758235",
@@ -518,7 +516,7 @@
               "commune": "PRESLES-EN-BRIE",
               "activitePrincipale": "46.18Z",
               "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques (46.18Z)",
-              "trancheEffectif": "NN",
+              "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
               "latitude": "48.700488",
               "longitude": "2.758235",
@@ -541,7 +539,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -603,7 +600,7 @@
           "commune": "MACAU",
           "activitePrincipale": "46.19B",
           "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-          "trancheEffectif": null,
+          "trancheEffectif": "N",
           "libelleTrancheEffectif": "",
           "latitude": "45.00782",
           "longitude": "-0.619455",
@@ -639,7 +636,7 @@
               "commune": "MACAU",
               "activitePrincipale": "46.19B",
               "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-              "trancheEffectif": null,
+              "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
               "latitude": "45.00782",
               "longitude": "-0.619455",
@@ -667,7 +664,7 @@
               "commune": "MACAU",
               "activitePrincipale": "46.19B",
               "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-              "trancheEffectif": null,
+              "trancheEffectif": "N",
               "libelleTrancheEffectif": "",
               "latitude": "45.00782",
               "longitude": "-0.619455",
@@ -690,7 +687,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -736,7 +732,7 @@
             "commune": "MACAU",
             "activitePrincipale": "46.19B",
             "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers (46.19B)",
-            "trancheEffectif": null,
+            "trancheEffectif": "N",
             "libelleTrancheEffectif": "",
             "latitude": "45.00782",
             "longitude": "-0.619455",
@@ -866,7 +862,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -926,7 +921,7 @@
             "sexe": null,
             "nom": "DURET",
             "prenom": "Eric",
-            "role": null,
+            "role": "Président de SAS",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }
