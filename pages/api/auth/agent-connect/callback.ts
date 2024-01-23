@@ -30,20 +30,8 @@ const getUserPrivileges = async (
     return 'super-agent';
   }
 
-  const {
-    is_external = false,
-    is_collectivite_territoriale = false,
-    is_service_public = false,
-  } = userInfo;
-
-  const isAgent =
-    !is_external && (is_collectivite_territoriale || is_service_public);
-
-  if (isAgent) {
-    return 'agent';
-  }
-
-  return 'unkown';
+  // agent connect only connect agents
+  return 'agent';
 };
 
 async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
