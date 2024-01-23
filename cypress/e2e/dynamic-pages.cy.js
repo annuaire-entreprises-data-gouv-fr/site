@@ -12,7 +12,7 @@ describe(`Dirigeants and élus pages`, () => {
 
 describe(`Labels and certificates`, () => {
   it('RGE', () => {
-    cy.visit(`/entreprise/528163777`);
+    cy.visit(`/entreprise/843701079`);
     cy.contains('Labels et certificats').should('be.visible');
     cy.contains('RGE - Reconnu Garant de l’Environnement').should('be.visible');
   });

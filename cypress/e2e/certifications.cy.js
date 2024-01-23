@@ -1,8 +1,8 @@
 describe('Certifications', () => {
   describe('RGE', () => {
     it('Should display certification name - OPQIBI', () => {
-      cy.visit(`/labels-certificats/528163777`);
-      cy.contains('Certificat OPQIBI');
+      cy.visit(`/labels-certificats/487444697`);
+      cy.contains('Certificat Qualifelec RGE');
     });
 
     it('Should display certification name - QUALIBAT', () => {
@@ -11,8 +11,8 @@ describe('Certifications', () => {
     });
 
     it('Should display company phone number', () => {
-      cy.visit(`/labels-certificats/528163777`);
-      cy.contains('06 98 39 31 19');
+      cy.visit(`/labels-certificats/487444697`);
+      cy.contains('09 82 26 64 14');
     });
   });
   describe('ESS & Spectacles vivants', () => {

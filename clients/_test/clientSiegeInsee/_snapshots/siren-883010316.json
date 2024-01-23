@@ -1,11 +1,11 @@
 {
-  "args": "880878145",
+  "args": "883010316",
   "result": {
-    "siren": "880878145",
-    "oldSiren": "880878145",
+    "siren": "883010316",
+    "oldSiren": "883010316",
     "siege": {
-      "siren": "880878145",
-      "siret": "88087814500015",
+      "siren": "883010316",
+      "siret": "88301031600015",
       "oldSiret": "",
       "etatAdministratif": "inconnu",
       "statutDiffusion": "diffusible",
@@ -13,7 +13,7 @@
       "enseigne": null,
       "denomination": null,
       "nic": "00015",
-      "dateCreation": "2022-10-22",
+      "dateCreation": "2020-09-01",
       "dateDerniereMiseAJour": "",
       "dateDebutActivite": "",
       "dateFermeture": "",
@@ -21,29 +21,36 @@
       "adressePostale": "",
       "codePostal": "",
       "commune": "",
-      "activitePrincipale": "62.02A",
-      "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques",
+      "activitePrincipale": "70.22Z",
+      "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion",
       "trancheEffectif": "",
       "libelleTrancheEffectif": "",
       "latitude": "",
       "longitude": "",
-      "conventionsCollectives": []
+      "complements": {
+        "idFiness": [],
+        "idBio": [],
+        "idcc": [],
+        "idOrganismeFormation": [],
+        "idRge": [],
+        "idUai": []
+      }
     },
     "allSiegesSiret": [
-      "88087814500015"
+      "88301031600015"
     ],
     "tva": null,
     "statutDiffusion": "diffusible",
     "etatAdministratif": "cessée",
-    "nomComplet": "GANYMEDE",
-    "chemin": "880878145",
-    "natureJuridique": "5710",
-    "libelleNatureJuridique": "SAS, société par actions simplifiée",
+    "nomComplet": "Raphael DUBIGNY",
+    "chemin": "883010316",
+    "natureJuridique": "1000",
+    "libelleNatureJuridique": "Entrepreneur individuel",
     "etablissements": {
       "all": [
         {
-          "siren": "880878145",
-          "siret": "88087814500015",
+          "siren": "883010316",
+          "siret": "88301031600015",
           "oldSiret": "",
           "etatAdministratif": "inconnu",
           "statutDiffusion": "diffusible",
@@ -51,7 +58,7 @@
           "enseigne": null,
           "denomination": null,
           "nic": "00015",
-          "dateCreation": "2022-10-22",
+          "dateCreation": "2020-09-01",
           "dateDerniereMiseAJour": "",
           "dateDebutActivite": "",
           "dateFermeture": "",
@@ -59,21 +66,28 @@
           "adressePostale": "",
           "codePostal": "",
           "commune": "",
-          "activitePrincipale": "62.02A",
-          "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques",
+          "activitePrincipale": "70.22Z",
+          "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion",
           "trancheEffectif": "",
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
-          "conventionsCollectives": []
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          }
         }
       ],
       "open": [],
       "unknown": [],
       "closed": [
         {
-          "siren": "880878145",
-          "siret": "88087814500015",
+          "siren": "883010316",
+          "siret": "88301031600015",
           "oldSiret": "",
           "etatAdministratif": "inconnu",
           "statutDiffusion": "diffusible",
@@ -81,7 +95,7 @@
           "enseigne": null,
           "denomination": null,
           "nic": "00015",
-          "dateCreation": "2022-10-22",
+          "dateCreation": "2020-09-01",
           "dateDerniereMiseAJour": "",
           "dateDebutActivite": "",
           "dateFermeture": "",
@@ -89,13 +103,20 @@
           "adressePostale": "",
           "codePostal": "",
           "commune": "",
-          "activitePrincipale": "62.02A",
-          "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques",
+          "activitePrincipale": "70.22Z",
+          "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion",
           "trancheEffectif": "",
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
-          "conventionsCollectives": []
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          }
         }
       ],
       "nombreEtablissementsOuverts": 0,
@@ -103,18 +124,17 @@
       "usePagination": false,
       "currentEtablissementPage": 0
     },
-    "activitePrincipale": "62.02A",
-    "libelleActivitePrincipale": "Conseil en systèmes et logiciels informatiques",
-    "dateCreation": "2020-01-13",
+    "activitePrincipale": "70.22Z",
+    "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion",
+    "dateCreation": "2018-05-06",
     "dateDerniereMiseAJour": "2023-10-5",
-    "dateDebutActivite": "2022-10-22",
+    "dateDebutActivite": "2020-09-01",
     "trancheEffectif": "N",
-    "anneeCategorieEntreprise": "2021",
-    "categorieEntreprise": "PME",
-    "anneeTrancheEffectif": "2021",
-    "dirigeant": null,
+    "anneeCategorieEntreprise": null,
+    "categorieEntreprise": null,
+    "anneeTrancheEffectif": null,
     "complements": {
-      "estEntrepreneurIndividuel": false,
+      "estEntrepreneurIndividuel": true,
       "estEss": false,
       "estBio": false,
       "estEntrepreneurSpectacle": false,
@@ -127,15 +147,15 @@
       "estSocieteMission": false,
       "estQualiopi": false,
       "estUai": false,
-      "estAssociation": false
+      "estAssociation": false,
+      "estEntrepriseInclusive": false
     },
     "association": {
-      "idAssociation": null,
-      "data": null
+      "idAssociation": null
     },
     "colter": {
       "codeColter": null
     },
-    "conventionsCollectives": null
+    "conventionsCollectives": {}
   }
 }

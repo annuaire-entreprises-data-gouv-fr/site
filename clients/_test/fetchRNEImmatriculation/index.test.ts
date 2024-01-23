@@ -33,7 +33,7 @@ describe('fetchRNEImmatriculation', () => {
     async () => {
       await expectClientToMatchSnapshot({
         client: fetchRNEImmatriculation,
-        args: ['528163777' as Siren],
+        args: ['487444697' as Siren],
         __dirname,
         postProcessResult,
         snaphotFile: 'rge.json',

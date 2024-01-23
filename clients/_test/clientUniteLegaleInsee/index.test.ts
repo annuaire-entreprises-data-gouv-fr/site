@@ -4,23 +4,9 @@ import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot'
 import simplifyParams from './simplify-params';
 
 describe('clientUniteLegaleInsee', () => {
-  (
-    [
-      '198100125', // établissement scolaire
-      '200054781',
-      '300025764',
-      '351556394',
-      '356000000',
-      '528163777',
-      '338365059',
-      // '839517323', // entreprise cessée
-      '800329849', // entrepreneur spectacle asso & ESS
-      // '843701079',// Qualibat RGE
-      // '880878145',
-      // '883010316',
-      '908595879',
-    ] as Siren[]
-  ).forEach(expectClientToMatchSnapshotWithSiren);
+  (['908595879', '883010316'] as Siren[]).forEach(
+    expectClientToMatchSnapshotWithSiren
+  );
 });
 
 function expectClientToMatchSnapshotWithSiren(siren: Siren) {

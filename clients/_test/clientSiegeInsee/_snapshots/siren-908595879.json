@@ -1,19 +1,19 @@
 {
-  "args": "338365059",
+  "args": "908595879",
   "result": {
-    "siren": "338365059",
-    "oldSiren": "338365059",
+    "siren": "908595879",
+    "oldSiren": "908595879",
     "siege": {
-      "siren": "338365059",
-      "siret": "33836505900017",
+      "siren": "908595879",
+      "siret": "90859587900010",
       "oldSiret": "",
       "etatAdministratif": "inconnu",
       "statutDiffusion": "diffusible",
       "estSiege": true,
       "enseigne": null,
       "denomination": null,
-      "nic": "00017",
-      "dateCreation": "2016-01-01",
+      "nic": "00010",
+      "dateCreation": "2022-01-01",
       "dateDerniereMiseAJour": "",
       "dateDebutActivite": "",
       "dateFermeture": "",
@@ -21,37 +21,44 @@
       "adressePostale": "",
       "codePostal": "",
       "commune": "",
-      "activitePrincipale": "88.99B",
-      "libelleActivitePrincipale": "Action sociale sans hébergement n.c.a.",
+      "activitePrincipale": "70.21Z",
+      "libelleActivitePrincipale": "Conseil en relations publiques et communication",
       "trancheEffectif": "",
       "libelleTrancheEffectif": "",
       "latitude": "",
       "longitude": "",
-      "conventionsCollectives": []
+      "complements": {
+        "idFiness": [],
+        "idBio": [],
+        "idcc": [],
+        "idOrganismeFormation": [],
+        "idRge": [],
+        "idUai": []
+      }
     },
     "allSiegesSiret": [
-      "33836505900017"
+      "90859587900010"
     ],
     "tva": null,
     "statutDiffusion": "diffusible",
     "etatAdministratif": "en activité",
-    "nomComplet": "CENTRE SOCIAL 'CAP DE TOUT' (CENTRE SOCIAL)",
-    "chemin": "338365059",
-    "natureJuridique": "9230",
-    "libelleNatureJuridique": "Association déclarée, reconnue d'utilité publique",
+    "nomComplet": "SEVERNAYA",
+    "chemin": "908595879",
+    "natureJuridique": "5710",
+    "libelleNatureJuridique": "SAS, société par actions simplifiée",
     "etablissements": {
       "all": [
         {
-          "siren": "338365059",
-          "siret": "33836505900017",
+          "siren": "908595879",
+          "siret": "90859587900010",
           "oldSiret": "",
           "etatAdministratif": "inconnu",
           "statutDiffusion": "diffusible",
           "estSiege": true,
           "enseigne": null,
           "denomination": null,
-          "nic": "00017",
-          "dateCreation": "2016-01-01",
+          "nic": "00010",
+          "dateCreation": "2022-01-01",
           "dateDerniereMiseAJour": "",
           "dateDebutActivite": "",
           "dateFermeture": "",
@@ -59,29 +66,36 @@
           "adressePostale": "",
           "codePostal": "",
           "commune": "",
-          "activitePrincipale": "88.99B",
-          "libelleActivitePrincipale": "Action sociale sans hébergement n.c.a.",
+          "activitePrincipale": "70.21Z",
+          "libelleActivitePrincipale": "Conseil en relations publiques et communication",
           "trancheEffectif": "",
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
-          "conventionsCollectives": []
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          }
         }
       ],
       "open": [],
       "unknown": [],
       "closed": [
         {
-          "siren": "338365059",
-          "siret": "33836505900017",
+          "siren": "908595879",
+          "siret": "90859587900010",
           "oldSiret": "",
           "etatAdministratif": "inconnu",
           "statutDiffusion": "diffusible",
           "estSiege": true,
           "enseigne": null,
           "denomination": null,
-          "nic": "00017",
-          "dateCreation": "2016-01-01",
+          "nic": "00010",
+          "dateCreation": "2022-01-01",
           "dateDerniereMiseAJour": "",
           "dateDebutActivite": "",
           "dateFermeture": "",
@@ -89,13 +103,20 @@
           "adressePostale": "",
           "codePostal": "",
           "commune": "",
-          "activitePrincipale": "88.99B",
-          "libelleActivitePrincipale": "Action sociale sans hébergement n.c.a.",
+          "activitePrincipale": "70.21Z",
+          "libelleActivitePrincipale": "Conseil en relations publiques et communication",
           "trancheEffectif": "",
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
-          "conventionsCollectives": []
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          }
         }
       ],
       "nombreEtablissementsOuverts": 0,
@@ -103,19 +124,18 @@
       "usePagination": false,
       "currentEtablissementPage": 0
     },
-    "activitePrincipale": "88.99B",
-    "libelleActivitePrincipale": "Action sociale sans hébergement n.c.a.",
-    "dateCreation": "1986-06-13",
+    "activitePrincipale": "70.21Z",
+    "libelleActivitePrincipale": "Conseil en relations publiques et communication",
+    "dateCreation": "2022-01-01",
     "dateDerniereMiseAJour": "2023-10-5",
-    "dateDebutActivite": "2016-01-01",
-    "trancheEffectif": "11",
-    "anneeCategorieEntreprise": "2021",
-    "categorieEntreprise": "PME",
-    "anneeTrancheEffectif": "2021",
-    "dirigeant": null,
+    "dateDebutActivite": "2022-01-01",
+    "trancheEffectif": null,
+    "anneeCategorieEntreprise": null,
+    "categorieEntreprise": null,
+    "anneeTrancheEffectif": null,
     "complements": {
       "estEntrepreneurIndividuel": false,
-      "estEss": true,
+      "estEss": false,
       "estBio": false,
       "estEntrepreneurSpectacle": false,
       "egaproRenseignee": false,
@@ -127,15 +147,15 @@
       "estSocieteMission": false,
       "estQualiopi": false,
       "estUai": false,
-      "estAssociation": false
+      "estAssociation": false,
+      "estEntrepriseInclusive": false
     },
     "association": {
-      "idAssociation": "W643000551",
-      "data": null
+      "idAssociation": null
     },
     "colter": {
       "codeColter": null
     },
-    "conventionsCollectives": null
+    "conventionsCollectives": {}
   }
 }
