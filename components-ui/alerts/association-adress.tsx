@@ -1,4 +1,5 @@
 import { INSEE, MI } from '#components/administrations';
+import NonRenseigne from '#components/non-renseigne';
 import {
   IAPINotRespondingError,
   isAPINotResponding,
@@ -28,7 +29,7 @@ const AssociationAdressAlert: React.FC<{
           <INSEE /> :
           <ul>
             <li>
-              <MI /> : {associationAdresse || 'Non renseignée'}
+              <MI /> : {associationAdresse || <NonRenseigne />}
             </li>
             <li>
               <INSEE /> : {getAdresseUniteLegale(uniteLegale, null)}

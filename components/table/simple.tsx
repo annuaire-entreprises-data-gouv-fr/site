@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from 'react';
+import NonRenseigne from '#components/non-renseigne';
 import constants from '#models/constants';
 import { InternalError } from '#models/index';
 import { logWarningInSentry } from '#utils/sentry';
@@ -25,11 +26,11 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
     <td>
       {isCopyEnabled ? (
         <CopyPaste shouldTrim={shouldTrim(label)}>
-          {children || <i>Non renseigné</i>}
+          {children || <NonRenseigne />}
         </CopyPaste>
       ) : (
         <div>
-          <span>{children || <i>Non renseigné</i>}</span>
+          <span>{children || <NonRenseigne />}</span>
         </div>
       )}
       <style jsx>{`

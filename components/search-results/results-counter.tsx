@@ -39,7 +39,7 @@ const ResultsCounter: React.FC<{
       <style jsx>{`
         .results-counter {
           margin-top: 20px;
-          color: #555;
+          color: var(--text-default-grey);
         }
       `}</style>
     </>

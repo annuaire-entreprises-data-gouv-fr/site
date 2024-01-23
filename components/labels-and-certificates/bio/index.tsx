@@ -4,6 +4,7 @@ import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
+import NonRenseigne from '#components/non-renseigne';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -154,7 +155,7 @@ const getCertificationDate = (certificat: IBioCertification) => {
       </>
     ),
   };
-  return status ? mapping[status] : 'Non renseigné';
+  return status ? mapping[status] : <NonRenseigne />;
 };
 
 const FAQBio = ({ label = 'certification Bio' }) => (

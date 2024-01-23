@@ -158,3 +158,8 @@ h4 {
 *:hover > .anchor-link {
   opacity: 1;
 }
+
+/* Prevent the first column of table to be too small */
+table > tbody > tr > td:first-of-type {
+  min-width: 30%;
+}
