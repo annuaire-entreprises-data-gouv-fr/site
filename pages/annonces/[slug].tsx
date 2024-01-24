@@ -9,7 +9,10 @@ import { FICHE } from '#components/title-section/tabs';
 import { IUniteLegale, isAssociation } from '#models/index';
 import { estDiffusible } from '#models/statut-diffusion';
 import { getUniteLegaleFromSlug } from '#models/unite-legale';
-import { getCompanyPageDescription, getCompanyPageTitle } from '#utils/helpers';
+import {
+  uniteLegalePageDescription,
+  uniteLegalePageTitle,
+} from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
@@ -29,11 +32,11 @@ const Annonces: NextPageWithLayout<IProps> = ({
   return (
     <>
       <Meta
-        title={`Annonces légales (BODACC, JOAFE) - ${getCompanyPageTitle(
+        title={`Annonces légales (BODACC, JOAFE) - ${uniteLegalePageTitle(
           uniteLegale,
           session
         )}`}
-        description={getCompanyPageDescription(uniteLegale, session)}
+        description={uniteLegalePageDescription(uniteLegale, session)}
         canonical={`https://annuaire-entreprises.data.gouv.fr/annonces/${uniteLegale.siren}`}
         noIndex={true}
       />

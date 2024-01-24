@@ -3,8 +3,8 @@ import Meta from '#components/meta';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
 import { estNonDiffusible } from '#models/statut-diffusion';
 import {
-  getEtablissementPageDescription,
-  getEtablissementPageTitle,
+  etablissementPageDescription,
+  etablissementPageTitle,
   shouldNotIndex,
 } from '#utils/helpers';
 import EtablissementSection from 'components/etablissement-section';
@@ -35,8 +35,8 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
     <Meta
       title={`${
         etablissement.estSiege ? 'Siège social' : 'Etablissement secondaire'
-      } - ${getEtablissementPageTitle(etablissement, uniteLegale, session)}`}
-      description={getEtablissementPageDescription(
+      } - ${etablissementPageTitle(etablissement, uniteLegale, session)}`}
+      description={etablissementPageDescription(
         etablissement,
         uniteLegale,
         session

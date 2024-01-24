@@ -1,19 +1,19 @@
 {
-  "args": "300025764",
+  "args": "908595879",
   "result": {
-    "siren": "300025764",
-    "oldSiren": "300025764",
+    "siren": "908595879",
+    "oldSiren": "908595879",
     "siege": {
-      "siren": "300025764",
-      "siret": "30002576400048",
+      "siren": "908595879",
+      "siret": "90859587900010",
       "oldSiret": "",
       "etatAdministratif": "inconnu",
       "statutDiffusion": "diffusible",
       "estSiege": true,
       "enseigne": null,
       "denomination": null,
-      "nic": "00048",
-      "dateCreation": "2019-12-31",
+      "nic": "00010",
+      "dateCreation": "2022-01-01",
       "dateDerniereMiseAJour": "",
       "dateDebutActivite": "",
       "dateFermeture": "",
@@ -21,39 +21,44 @@
       "adressePostale": "",
       "codePostal": "",
       "commune": "",
-      "activitePrincipale": "68.20A",
-      "libelleActivitePrincipale": "Location de logements",
+      "activitePrincipale": "70.21Z",
+      "libelleActivitePrincipale": "Conseil en relations publiques et communication",
       "trancheEffectif": "",
       "libelleTrancheEffectif": "",
       "latitude": "",
       "longitude": "",
-      "conventionsCollectives": []
+      "complements": {
+        "idFiness": [],
+        "idBio": [],
+        "idcc": [],
+        "idOrganismeFormation": [],
+        "idRge": [],
+        "idUai": []
+      }
     },
     "allSiegesSiret": [
-      "30002576400048",
-      "30002576400022",
-      "300025764null"
+      "90859587900010"
     ],
     "tva": null,
-    "statutDiffusion": "partiellement diffusible",
+    "statutDiffusion": "diffusible",
     "etatAdministratif": "en activité",
-    "nomComplet": "Michel SAUVAGE",
-    "chemin": "300025764",
-    "natureJuridique": "1000",
-    "libelleNatureJuridique": "Entrepreneur individuel",
+    "nomComplet": "SEVERNAYA",
+    "chemin": "908595879",
+    "natureJuridique": "5710",
+    "libelleNatureJuridique": "SAS, société par actions simplifiée",
     "etablissements": {
       "all": [
         {
-          "siren": "300025764",
-          "siret": "30002576400048",
+          "siren": "908595879",
+          "siret": "90859587900010",
           "oldSiret": "",
           "etatAdministratif": "inconnu",
           "statutDiffusion": "diffusible",
           "estSiege": true,
           "enseigne": null,
           "denomination": null,
-          "nic": "00048",
-          "dateCreation": "2019-12-31",
+          "nic": "00010",
+          "dateCreation": "2022-01-01",
           "dateDerniereMiseAJour": "",
           "dateDebutActivite": "",
           "dateFermeture": "",
@@ -61,29 +66,36 @@
           "adressePostale": "",
           "codePostal": "",
           "commune": "",
-          "activitePrincipale": "68.20A",
-          "libelleActivitePrincipale": "Location de logements",
+          "activitePrincipale": "70.21Z",
+          "libelleActivitePrincipale": "Conseil en relations publiques et communication",
           "trancheEffectif": "",
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
-          "conventionsCollectives": []
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          }
         }
       ],
       "open": [],
       "unknown": [],
       "closed": [
         {
-          "siren": "300025764",
-          "siret": "30002576400048",
+          "siren": "908595879",
+          "siret": "90859587900010",
           "oldSiret": "",
           "etatAdministratif": "inconnu",
           "statutDiffusion": "diffusible",
           "estSiege": true,
           "enseigne": null,
           "denomination": null,
-          "nic": "00048",
-          "dateCreation": "2019-12-31",
+          "nic": "00010",
+          "dateCreation": "2022-01-01",
           "dateDerniereMiseAJour": "",
           "dateDebutActivite": "",
           "dateFermeture": "",
@@ -91,13 +103,20 @@
           "adressePostale": "",
           "codePostal": "",
           "commune": "",
-          "activitePrincipale": "68.20A",
-          "libelleActivitePrincipale": "Location de logements",
+          "activitePrincipale": "70.21Z",
+          "libelleActivitePrincipale": "Conseil en relations publiques et communication",
           "trancheEffectif": "",
           "libelleTrancheEffectif": "",
           "latitude": "",
           "longitude": "",
-          "conventionsCollectives": []
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          }
         }
       ],
       "nombreEtablissementsOuverts": 0,
@@ -105,22 +124,17 @@
       "usePagination": false,
       "currentEtablissementPage": 0
     },
-    "activitePrincipale": "68.20A",
-    "libelleActivitePrincipale": "Location de logements",
-    "dateCreation": "1981-10-01",
+    "activitePrincipale": "70.21Z",
+    "libelleActivitePrincipale": "Conseil en relations publiques et communication",
+    "dateCreation": "2022-01-01",
     "dateDerniereMiseAJour": "2023-10-5",
-    "dateDebutActivite": "2019-12-31",
-    "trancheEffectif": "N",
-    "anneeCategorieEntreprise": "2021",
-    "categorieEntreprise": "PME",
+    "dateDebutActivite": "2022-01-01",
+    "trancheEffectif": null,
+    "anneeCategorieEntreprise": null,
+    "categorieEntreprise": null,
     "anneeTrancheEffectif": null,
-    "dirigeant": {
-      "sexe": "M",
-      "prenom": "Michel",
-      "nom": "SAUVAGE"
-    },
     "complements": {
-      "estEntrepreneurIndividuel": true,
+      "estEntrepreneurIndividuel": false,
       "estEss": false,
       "estBio": false,
       "estEntrepreneurSpectacle": false,
@@ -133,15 +147,15 @@
       "estSocieteMission": false,
       "estQualiopi": false,
       "estUai": false,
-      "estAssociation": false
+      "estAssociation": false,
+      "estEntrepriseInclusive": false
     },
     "association": {
-      "idAssociation": null,
-      "data": null
+      "idAssociation": null
     },
     "colter": {
       "codeColter": null
     },
-    "conventionsCollectives": null
+    "conventionsCollectives": {}
   }
 }

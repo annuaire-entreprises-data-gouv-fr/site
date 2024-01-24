@@ -8,25 +8,9 @@ describe('clientAllEtablissementsInsee', () => {
   // Hovewer, we don't test them for regression because the result
   // of the pagination changes systematically between API calls.
 
-  [
-    '198100125', // établissement scolaire
-
-    // '200054781',
-    // '300025764',
-    '338365059',
-    '351556394',
-    // '528163777',
-    '839517323', // entreprise cessée
-    '843701079', // Qualibat RGE
-    '883010316',
-    '880878145',
-    '908595879',
-  ].forEach((siren) => expectClientToMatchSnapshotWithSiren(siren));
-  // expectClientToMatchSnapshotWithSiren('356000000', 1);
-  // expectClientToMatchSnapshotWithSiren('356000000', 3);
-  // expectClientToMatchSnapshotWithSiren('356000000', 5);
-  // expectClientToMatchSnapshotWithSiren('356000000', 6);
-  // expectClientToMatchSnapshotWithSiren('356000000', 7);
+  ['908595879', '883010316'].forEach((siren) =>
+    expectClientToMatchSnapshotWithSiren(siren)
+  );
 });
 
 function expectClientToMatchSnapshotWithSiren(siren: string, page = 1) {

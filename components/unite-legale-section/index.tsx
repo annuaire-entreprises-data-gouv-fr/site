@@ -1,7 +1,7 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import { Tag } from '#components-ui/tag';
+import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
 import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import ExtraitRNELink from '#components/justificatifs/extrait-rne-link';
 import { Section } from '#components/section';
@@ -20,7 +20,7 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
   labelsAndCertificatesSources,
-} from '../labels-and-certificates-badges-section';
+} from '../badges-section/labels-and-certificates';
 
 const UniteLegaleSection: React.FC<{
   uniteLegale: IUniteLegale;
@@ -77,22 +77,10 @@ const UniteLegaleSection: React.FC<{
     ['', <br />],
     [
       'Convention(s) collective(s)',
-      conventionsCollectives.length > 0
-        ? conventionsCollectives.map((idcc) => (
-            <React.Fragment key={idcc}>
-              {
-                <Tag
-                  link={{
-                    href: `/divers/${uniteLegale.siren}#idcc-${idcc}`,
-                    'aria-label': `Consulter les convention collectives de l'unité légale, dont l'IDCC ${idcc}`,
-                  }}
-                >
-                  IDCC {idcc}
-                </Tag>
-              }
-            </React.Fragment>
-          ))
-        : null,
+      <ConventionCollectivesBadgesSection
+        conventionCollectives={conventionsCollectives}
+        siren={uniteLegale.siren}
+      />,
     ],
     // jump line and add label and certificates
     ...(hasLabelsAndCertificates
@@ -112,8 +100,13 @@ const UniteLegaleSection: React.FC<{
       <ul>
         {isAssociation(uniteLegale) ? (
           <li>
-            <a href={`/justificatif/${uniteLegale.siren}`}>
-              Annonce de création publiée au JOAFE
+            Annonce de création au JOAFE :{' '}
+            <a
+              href={`/justificatif/${uniteLegale.siren}`}
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              télécharger
             </a>
           </li>
         ) : isServicePublic(uniteLegale) ? null : (

@@ -1,0 +1,28 @@
+{
+  "args": [
+    "487444697"
+  ],
+  "result": {
+    "companyInfo": {
+      "adresse": "22 RUE MAISON BLANCHE, 24330, BOULAZAC ISLE MANOIRE",
+      "email": "jerome.basbayon@essor.group",
+      "nomEntreprise": "ESSOR ENERGIES",
+      "siret": "48744469700428",
+      "siteInternet": "",
+      "telephone": "09 82 26 64 14",
+      "workingWithIndividual": true
+    },
+    "certifications": [
+      {
+        "codeQualification": "43SPVRGE",
+        "domaines": [
+          "Panneaux solaires photovoltaïques"
+        ],
+        "nomCertificat": "Certificat Qualifelec RGE",
+        "nomQualification": "Panneaux Solaires Photovoltaïques (43SPVRGE)",
+        "organisme": "qualifelec",
+        "urlQualification": "https://www.qualifelec.fr/certifmoteur/51423/241620.pdf"
+      }
+    ]
+  }
+}

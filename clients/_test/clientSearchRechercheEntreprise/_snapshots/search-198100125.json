@@ -36,6 +36,18 @@
           "libelleTrancheEffectif": "",
           "latitude": "46.8030906",
           "longitude": "4.4244097",
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "9999"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": [
+              "0810012Y"
+            ]
+          },
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -72,6 +84,18 @@
               "libelleTrancheEffectif": "",
               "latitude": "46.8030906",
               "longitude": "4.4244097",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "9999"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": [
+                  "0810012Y"
+                ]
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -100,6 +124,18 @@
               "libelleTrancheEffectif": "",
               "latitude": "46.8030906",
               "longitude": "4.4244097",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "9999"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": [
+                  "0810012Y"
+                ]
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -133,7 +169,8 @@
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
-          "estUai": true
+          "estUai": true,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,

@@ -9,16 +9,7 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     // E2E testing.
     // Hovewer, we don't test them for regression because the results
     // changes often.
-
     '198100125', // établissement scolaire
-    // '200054781',
-    // '300025764',
-    // '338365059',
-    // '351556394',
-    // '356000000', // La poste
-    // '493096580',
-    // '528163777',
-    // '839517323', // entreprise cessée
     '800329849', // entrepreneur spectacle, asso & ESS
     '843701079',
     '880878145',
@@ -26,16 +17,8 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     '883010316',
     '908595879',
     '552032534',
-    // 'aga',
-    // 'Ganymede',
-    // 'Kikou',
     'xavier jouppe',
   ].forEach((s) => itShouldMatchSnapshotForSearch(s, 1));
-  // itShouldMatchSnapshotForSearch('356000000', 1);
-  // itShouldMatchSnapshotForSearch('356000000', 3);
-  // itShouldMatchSnapshotForSearch('356000000', 5);
-  // itShouldMatchSnapshotForSearch('356000000', 6);
-  // itShouldMatchSnapshotForSearch('356000000', 7);
 });
 
 function itShouldMatchSnapshotForSearch(

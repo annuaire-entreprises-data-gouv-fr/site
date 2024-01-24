@@ -40,6 +40,7 @@ export interface IEtablissement {
   anneeTrancheEffectif: string | null;
   latitude: string;
   longitude: string;
+  complements: IEtablissementComplements;
 }
 
 export interface IEtablissementWithUniteLegale {
@@ -76,6 +77,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     libelleTrancheEffectif: '',
     latitude: '',
     longitude: '',
+    complements: createDefaultEtablissementComplements(),
   };
 };
 
@@ -160,27 +162,51 @@ export interface IUniteLegaleComplements {
   estOrganismeFormation: boolean;
   estSocieteMission: boolean;
   estAssociation: boolean;
+  estEntrepriseInclusive: boolean;
   estUai: boolean;
 }
 
-export const createDefaultUniteLegaleComplements = () => {
-  return {
-    estEntrepreneurIndividuel: false,
-    estEss: false,
-    estBio: false,
-    estEntrepreneurSpectacle: false,
-    egaproRenseignee: false,
-    statutEntrepreneurSpectacle: '',
-    estServicePublic: false,
-    estFiness: false,
-    estRge: false,
-    estOrganismeFormation: false,
-    estSocieteMission: false,
-    estQualiopi: false,
-    estUai: false,
-    estAssociation: false,
+export const createDefaultUniteLegaleComplements =
+  (): IUniteLegaleComplements => {
+    return {
+      estEntrepreneurIndividuel: false,
+      estEss: false,
+      estBio: false,
+      estEntrepreneurSpectacle: false,
+      egaproRenseignee: false,
+      statutEntrepreneurSpectacle: '',
+      estServicePublic: false,
+      estFiness: false,
+      estRge: false,
+      estOrganismeFormation: false,
+      estSocieteMission: false,
+      estQualiopi: false,
+      estUai: false,
+      estAssociation: false,
+      estEntrepriseInclusive: false,
+    };
   };
-};
+
+export interface IEtablissementComplements {
+  idFiness: string[];
+  idBio: string[];
+  idcc: string[];
+  idOrganismeFormation: string[];
+  idRge: string[];
+  idUai: string[];
+}
+
+export const createDefaultEtablissementComplements =
+  (): IEtablissementComplements => {
+    return {
+      idFiness: [],
+      idBio: [],
+      idcc: [],
+      idOrganismeFormation: [],
+      idRge: [],
+      idUai: [],
+    };
+  };
 
 export interface IAssociation extends Omit<IUniteLegale, 'association'> {
   association: {

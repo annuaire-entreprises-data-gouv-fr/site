@@ -140,7 +140,7 @@ function DirigeantContent({
     <>
       {immatriculationRNE.metadata.isFallback &&
         immatriculationRNE.dirigeants.length > 0 && (
-          <InpiPartiallyDownWarning missing="la distinction entre le nom et le prénom" />
+          <InpiPartiallyDownWarning />
         )}
       {dirigeants.length === 0 ? (
         <p>

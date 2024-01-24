@@ -11,8 +11,8 @@ import {
   formatAge,
   formatDateLong,
   formatSiret,
-  getCompanyLabel,
-  getCompanyPronoun,
+  uniteLegaleLabel,
+  uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
 import { ISession } from '#utils/session';
 
@@ -56,15 +56,15 @@ export const EtablissementDescription: React.FC<IProps> = ({
           <span>
             Cet{' '}
             <FAQLink tooltipLabel="établissement">
-              Une {getCompanyLabel(uniteLegale)} est constituée d’autant
+              Une {uniteLegaleLabel(uniteLegale)} est constituée d’autant
               d’établissements qu’il y a de lieux différents où elle exerce - ou
               a exercé - son activité.
               <br />
               <br />
               Il faut bien distinguer la{' '}
               <a href={`/entreprise/${uniteLegale.chemin}`}>
-                fiche résumé de {getCompanyPronoun(uniteLegale).toLowerCase()}
-                {getCompanyLabel(uniteLegale)}
+                fiche résumé{' '}
+                {uniteLegaleLabelWithPronounContracted(uniteLegale)}
               </a>{' '}
               et les{' '}
               <a href={`/entreprise/${uniteLegale.chemin}#etablissements`}>
@@ -99,8 +99,7 @@ export const EtablissementDescription: React.FC<IProps> = ({
             ) : (
               <> un établissement secondaire</>
             )}{' '}
-            de {getCompanyPronoun(uniteLegale).toLowerCase()}
-            {getCompanyLabel(uniteLegale)}{' '}
+            {uniteLegaleLabelWithPronounContracted(uniteLegale)}{' '}
             <a href={`/entreprise/${uniteLegale.chemin}`}>
               {getNomComplet(uniteLegale, session)}
             </a>

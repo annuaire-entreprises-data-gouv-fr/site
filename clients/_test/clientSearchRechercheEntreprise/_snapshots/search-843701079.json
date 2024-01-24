@@ -36,6 +36,27 @@
           "libelleTrancheEffectif": "",
           "latitude": "44.075685",
           "longitude": "1.943401",
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "1596",
+              "2609"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [
+              "3111D111",
+              "3111D113",
+              "3111D114",
+              "7121D111",
+              "7121D114",
+              "7122D111",
+              "7122D114",
+              "7122D115",
+              "7131D112"
+            ],
+            "idUai": []
+          },
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -72,6 +93,27 @@
               "libelleTrancheEffectif": "",
               "latitude": "44.075685",
               "longitude": "1.943401",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "1596",
+                  "2609"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "3111D111",
+                  "3111D113",
+                  "3111D114",
+                  "7121D111",
+                  "7121D114",
+                  "7122D111",
+                  "7122D114",
+                  "7122D115",
+                  "7131D112"
+                ],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -100,6 +142,27 @@
               "libelleTrancheEffectif": "",
               "latitude": "44.075685",
               "longitude": "1.943401",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "1596",
+                  "2609"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "3111D111",
+                  "3111D113",
+                  "3111D114",
+                  "7121D111",
+                  "7121D114",
+                  "7122D111",
+                  "7122D114",
+                  "7122D115",
+                  "7131D112"
+                ],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -133,7 +196,8 @@
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,

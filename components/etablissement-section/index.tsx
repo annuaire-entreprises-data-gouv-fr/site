@@ -4,6 +4,8 @@ import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
+import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
+import { labelsAndCertificatesSources } from '#components/badges-section/labels-and-certificates';
 import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { Section } from '#components/section';
 import { CopyPaste, TwoColumnTable } from '#components/table/simple';
@@ -21,8 +23,7 @@ import {
 import {
   formatDate,
   formatSiret,
-  getCompanyLabel,
-  getCompanyPronoun,
+  uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
 import { ISession } from '#utils/session';
@@ -42,15 +43,15 @@ const EtablissementSection: React.FC<IProps> = ({
   withDenomination,
   session,
 }) => {
-  const companyType = `${getCompanyPronoun(
+  const uniteLegaleLabel = `${uniteLegaleLabelWithPronounContracted(
     uniteLegale
-  ).toLowerCase()}${getCompanyLabel(uniteLegale)}`;
+  )}`;
 
   const data = [
     ...(withDenomination
       ? [
           [
-            `Dénomination de ${companyType}`,
+            `Dénomination ${uniteLegaleLabel}`,
             getNomComplet(uniteLegale, session),
           ],
           [
@@ -66,7 +67,7 @@ const EtablissementSection: React.FC<IProps> = ({
               )}
               {' ( '}
               <a key="entite" href={`/entreprise/${uniteLegale.chemin}`}>
-                → voir la page de {companyType}
+                → voir la page {uniteLegaleLabel}
               </a>
               {' )'}
             </>,
@@ -123,7 +124,7 @@ const EtablissementSection: React.FC<IProps> = ({
         ]
       : []),
     [
-      `Activité principale de ${companyType} (NAF/APE)`,
+      `Activité principale ${uniteLegaleLabel} (NAF/APE)`,
       uniteLegale.libelleActivitePrincipale,
     ],
     [
@@ -142,7 +143,7 @@ const EtablissementSection: React.FC<IProps> = ({
       ),
     ],
     [
-      `Date de création de ${companyType}`,
+      `Date de création ${uniteLegaleLabel}`,
       formatDate(uniteLegale.dateCreation),
     ],
     [
@@ -161,6 +162,20 @@ const EtablissementSection: React.FC<IProps> = ({
       ? [['Date de fermeture', formatDate(etablissement.dateFermeture || '')]]
       : []),
     ['', <br />],
+    ...(etablissement.complements.idcc
+      ? [
+          [
+            'Convention collective de l’établissement',
+            [
+              <ConventionCollectivesBadgesSection
+                conventionCollectives={etablissement.complements.idcc}
+                siren={uniteLegale.siren}
+              />,
+            ],
+          ],
+          ['', <br />],
+        ]
+      : []),
     [
       'Avis de situation Insee',
       <AvisSituationLink etablissement={etablissement} />,
@@ -180,7 +195,11 @@ const EtablissementSection: React.FC<IProps> = ({
               )} à ${etablissement.commune}`
         }
         id="etablissement"
-        sources={[EAdministration.INSEE]}
+        sources={[
+          EAdministration.INSEE,
+          EAdministration.VIES,
+          ...labelsAndCertificatesSources(uniteLegale),
+        ]}
       >
         <TwoColumnTable body={data} />
       </Section>

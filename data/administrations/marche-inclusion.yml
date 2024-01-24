@@ -1,0 +1,19 @@
+slug: marche-inclusion
+short: Marché de l’Inclusion
+site: https://lemarche.inclusion.beta.gouv.fr/
+long: Marché de l’Inclusion
+logoType: paysage
+contact: https://lemarche.inclusion.beta.gouv.fr/contact/
+apiMonitors:
+  - apiName: API Marché de l’Inclusion
+    apigouvlink: https://api.gouv.fr/les-api/api-structures-inclusion
+    apiSlug: marche-inclusion
+    updownIoId: 4yxy
+dataSources:
+  - label: Liste des structures de l’inclusion
+    apiSlug: marche-inclusion
+    data:
+      - label: structures de l’inclusion (EA, ESAT, SIAE)
+estServicePublic: true
+description: |
+  Le Marché de l’Inclusion est l’outil mis à disposition des acheteurs privés et public pour trouver des fournisseurs inclusifs en France.

@@ -36,6 +36,14 @@
           "libelleTrancheEffectif": "",
           "latitude": "48.870938",
           "longitude": "2.305916",
+          "complements": {
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
           "anneeTrancheEffectif": "2021"
         },
         "allSiegesSiret": [],
@@ -72,6 +80,14 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.870938",
               "longitude": "2.305916",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -102,6 +118,14 @@
               "libelleTrancheEffectif": "",
               "latitude": "48.870938",
               "longitude": "2.305916",
+              "complements": {
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
               "anneeTrancheEffectif": "2021"
             }
           ],
@@ -115,7 +139,7 @@
         "dateCreation": "2020-01-13",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateDebutActivite": "",
-        "trancheEffectif": "01",
+        "trancheEffectif": "N",
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",
@@ -133,7 +157,8 @@
           "estSocieteMission": false,
           "estQualiopi": false,
           "estAssociation": false,
-          "estUai": false
+          "estUai": false,
+          "estEntrepriseInclusive": false
         },
         "association": {
           "idAssociation": null,
@@ -168,6 +193,14 @@
             "libelleTrancheEffectif": "",
             "latitude": "48.870938",
             "longitude": "2.305916",
+            "complements": {
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [],
+              "idOrganismeFormation": [],
+              "idRge": [],
+              "idUai": []
+            },
             "anneeTrancheEffectif": "2021"
           }
         ],
