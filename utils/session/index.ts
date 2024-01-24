@@ -16,12 +16,12 @@ export type ISession = {
   nonce?: string;
   idToken?: string;
   // connexion
-  sirenFrom?: string;
+  pathFrom?: string;
 };
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
-  cookieName: 'annuaire-entreprises-session',
+  cookieName: 'annuaire-entreprises-user-session',
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
   },
@@ -60,19 +60,18 @@ export const cleanAgentSession = async (session: IronSession<ISession>) => {
  * @param session
  */
 
-export const setSirenFrom = async (
+export const setPathFrom = async (
   session: IronSession<ISession>,
-  sirenFrom: string
+  pathFrom: string
 ) => {
-  session.sirenFrom = sirenFrom;
+  session.pathFrom = pathFrom;
   await session.save();
 };
 
-export const getSirenFrom = (session: IronSession<ISession>) =>
-  session.sirenFrom;
+export const getPathFrom = (session: IronSession<ISession>) => session.pathFrom;
 
-export const cleanSirenFrom = async (session: IronSession<ISession>) => {
-  delete session.sirenFrom;
+export const cleanPathFrom = async (session: IronSession<ISession>) => {
+  delete session.pathFrom;
 };
 
 /**

@@ -46,8 +46,8 @@ const SirenOrSiretInvalidPage: NextPageWithLayout<
         </ul>
         <p>
           Si vous avez effectué ces deux vérifications et que cette page
-          s’affiche toujours, n’hésitez pas à nous contacter via{' '}
-          <a href={constants.links.mailto}>{constants.links.mail}</a>.
+          s’affiche toujours, vous pouvez{' '}
+          <a href={constants.links.parcours.contact}>nous contacter</a>.
         </p>
       </div>
       <div className="layout-center">

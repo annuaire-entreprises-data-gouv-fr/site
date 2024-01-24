@@ -1,12 +1,14 @@
 import React from 'react';
-import useSirenFromRouter from 'hooks/use-siren-from-url';
+import usePathFromRouter from 'hooks/use-path-from-router';
 
 const ButtonAgentConnect: React.FC<{}> = () => {
-  const sirenFrom = useSirenFromRouter();
+  const pathFrom = usePathFromRouter();
   return (
     <div>
       <form
-        action={`/api/auth/agent-connect/login?sirenFrom=${sirenFrom}`}
+        action={`/api/auth/agent-connect/login${
+          pathFrom ? `?pathFrom=${pathFrom}` : ''
+        }`}
         method="get"
       >
         <button className="agentconnect-button"></button>

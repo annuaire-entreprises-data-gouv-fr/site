@@ -8,12 +8,13 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
 import { formatDateLong } from '#utils/helpers';
 import useFetchActesRNE from 'hooks/fetch/actes-RNE';
+import AgentWallDocuments from '../agent-wall/documents';
 
 const NoDocument = () => (
   <>Aucun document n’a été retrouvé dans le RNE pour cette entreprise.</>
 );
 
-const DocumentActesSection: React.FC<{
+const AgentComponent: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const documents = useFetchActesRNE(uniteLegale);
@@ -77,6 +78,23 @@ const DocumentActesSection: React.FC<{
       </DataSection>
     </PrintNever>
   );
+};
+
+const DocumentActesSection: React.FC<{
+  uniteLegale: IUniteLegale;
+  isAgent: boolean;
+}> = ({ uniteLegale, isAgent }) => {
+  if (!isAgent) {
+    return (
+      <AgentWallDocuments
+        title="Actes et statuts"
+        id="actes"
+        uniteLegale={uniteLegale}
+      />
+    );
+  }
+
+  return <AgentComponent uniteLegale={uniteLegale} />;
 };
 
 export default DocumentActesSection;

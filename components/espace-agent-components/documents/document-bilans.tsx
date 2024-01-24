@@ -11,12 +11,13 @@ import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
 import { formatDateLong } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import useFetchActesRNE from 'hooks/fetch/actes-RNE';
+import AgentWallDocuments from '../agent-wall/documents';
 
 const NoBilans = () => (
   <>Aucun comptes n’a été déposé au RNE pour cette entreprise.</>
 );
 
-const DocumentBilansSection: React.FC<{
+const AgentComponent: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const documents = useFetchActesRNE(uniteLegale);
@@ -89,6 +90,23 @@ const DocumentBilansSection: React.FC<{
       </DataSection>
     </PrintNever>
   );
+};
+
+const DocumentBilansSection: React.FC<{
+  uniteLegale: IUniteLegale;
+  isAgent: boolean;
+}> = ({ uniteLegale, isAgent }) => {
+  if (!isAgent) {
+    return (
+      <AgentWallDocuments
+        title="Bilans"
+        id="bilans"
+        uniteLegale={uniteLegale}
+      />
+    );
+  }
+
+  return <AgentComponent uniteLegale={uniteLegale} />;
 };
 
 export default DocumentBilansSection;
