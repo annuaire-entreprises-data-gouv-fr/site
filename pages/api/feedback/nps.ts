@@ -57,7 +57,9 @@ const saveAndRedirect = async (req: NextApiRequest, res: NextApiResponse) => {
   logAllEvents(req);
 
   res.writeHead(302, {
-    Location: '/formulaire/merci',
+    Location: `/formulaire/merci?usager=${encodeURIComponent(
+      req.body['radio-set-visitor-type']
+    )}`,
   });
   res.end();
 };

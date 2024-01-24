@@ -1,9 +1,13 @@
+import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
 import { MultiChoice } from '#components-ui/multi-choice';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
+import { postServerSideProps } from '#utils/server-side-props-helper/post-server-side-props';
+import { isAgent, isSuperAgent } from '#utils/session';
+import useSession from 'hooks/use-session';
 import { NextPageWithLayout } from 'pages/_app';
 
 export const visitorTypes = [
@@ -16,7 +20,7 @@ export const visitorTypes = [
     label: 'Dirigeant(e) d’entreprise ou d’association',
   },
   {
-    value: 'Agent public',
+    value: 'Agent public non connecté',
     label: 'Agent public',
   },
   {
@@ -35,6 +39,7 @@ export const visitorTypes = [
 
 const FeedBackPage: NextPageWithLayout = () => {
   const uuid = randomId();
+  const session = useSession();
   return (
     <div id="page-layout">
       <main className="fr-container">
@@ -82,13 +87,27 @@ const FeedBackPage: NextPageWithLayout = () => {
             </fieldset>
 
             <fieldset>
-              <MultiChoice
-                legend="2 ・ Vous êtes venu(e) sur l’Annuaire des Entreprises en tant que :"
-                values={visitorTypes}
-                name="radio-set-visitor-type"
-                idPrefix="radio-visitor-type"
-                required={false}
-              />
+              {isAgent(session) ? (
+                <input
+                  aria-hidden
+                  type="hidden"
+                  name="radio-set-visitor-type"
+                  value={
+                    isSuperAgent(session)
+                      ? 'Super-agent connecté'
+                      : 'Agent connecté'
+                  }
+                  tabIndex={-1}
+                />
+              ) : (
+                <MultiChoice
+                  legend="2 ・ Vous êtes venu(e) sur l’Annuaire des Entreprises en tant que :"
+                  values={visitorTypes}
+                  name="radio-set-visitor-type"
+                  idPrefix="radio-visitor-type"
+                  required={false}
+                />
+              )}
             </fieldset>
             <fieldset>
               <MultiChoice
@@ -177,5 +196,9 @@ const FeedBackPage: NextPageWithLayout = () => {
 FeedBackPage.getLayout = function getLayout(page: ReactElement) {
   return <LayoutDefault searchBar={false}>{page}</LayoutDefault>;
 };
+
+export const getServerSideProps: GetServerSideProps = postServerSideProps(
+  () => ({})
+);
 
 export default FeedBackPage;
