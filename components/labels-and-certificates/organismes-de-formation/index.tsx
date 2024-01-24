@@ -47,19 +47,19 @@ export const OrganismeDeFormationSection = ({
               <>
                 {fields.specialite && (
                   <>
-                    <b>Spécialité :</b> {fields.specialite}
+                    <strong>Spécialité :</strong> {fields.specialite}
                     <br />
                   </>
                 )}
                 {fields.stagiaires && (
                   <>
-                    <b>Nombre de stagiaires :</b> {fields.stagiaires}
+                    <strong>Nombre de stagiaires :</strong> {fields.stagiaires}
                     <br />
                   </>
                 )}
                 {fields.dateDeclaration && (
                   <>
-                    <b>Déclaration : </b> le {fields.dateDeclaration}
+                    <strong>Déclaration : </strong> le {fields.dateDeclaration}
                     {fields.region && <>, en région {fields.region}</>}
                     <br />
                   </>
@@ -105,7 +105,7 @@ const OrganismeFormationLabel = ({ estQualiopi = false }) => (
         <br />
         <br />
         Cette structure est <FAQQaliopi />. C’est un organisme dont les
-        formations peuvent <b>obtenir un financement public</b>.
+        formations peuvent <strong>obtenir un financement public</strong>.
       </>
     ) : (
       <>

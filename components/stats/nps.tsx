@@ -94,11 +94,12 @@ export const NpsStats: React.FC<{
         variations par rapport à la moyenne.
       </p>
       <p>
-        Les données sont consultables sous deux formes : la <b>note moyenne</b>{' '}
-        et le <b>Net Promoter Score (NPS)</b>. Le NPS est la différence entre
-        les promoteurs (notes {'>'} 8/10) et les détracteurs (notes {'<'} 7/10).
-        Il permet d’estimer les chances qu’a un produit d’être recommandé par
-        ses utilisateurs et utilisatrices.
+        Les données sont consultables sous deux formes : la{' '}
+        <strong>note moyenne</strong> et le{' '}
+        <strong>Net Promoter Score (NPS)</strong>. Le NPS est la différence
+        entre les promoteurs (notes {'>'} 8/10) et les détracteurs (notes {'<'}{' '}
+        7/10). Il permet d’estimer les chances qu’a un produit d’être recommandé
+        par ses utilisateurs et utilisatrices.
       </p>
       <br />
       <div className="layout-right">
@@ -137,8 +138,8 @@ export const NpsStats: React.FC<{
         constituer une “image” de nos utilisateurs.
       </p>
       Cependant, le formulaire est le plus souvent rempli par des{' '}
-      <b>utilisateurs récurrents</b>. Cette “image” est donc plus représentative
-      de ces derniers que de l’ensemble des utilisateurs du site.
+      <strong>utilisateurs récurrents</strong>. Cette “image” est donc plus
+      représentative de ces derniers que de l’ensemble des utilisateurs du site.
       <StackedBarChart
         height="300px"
         data={userTypesData}

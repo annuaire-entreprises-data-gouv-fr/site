@@ -32,7 +32,7 @@ const SirenOrSiretInvalidPage: NextPageWithLayout<
         </p>
         <p>
           Nous vous invitons à la plus grande vigilance,{' '}
-          <b>car il peut s’agir d’un numéro frauduleux</b>&nbsp;:
+          <strong>car il peut s’agir d’un numéro frauduleux</strong>&nbsp;:
         </p>
         <ul>
           <li>

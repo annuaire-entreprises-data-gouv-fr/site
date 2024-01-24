@@ -51,9 +51,9 @@ const FeedBackPage: NextPageWithLayout = () => {
         <br />
         <br />
         <div>
-          Attention, <b>ce formulaire est anonyme</b>. Si vous avez une demande
-          précise, <a href={constants.links.parcours.contact}>contactez-nous</a>
-          .
+          Attention, <strong>ce formulaire est anonyme</strong>. Si vous avez
+          une demande précise,{' '}
+          <a href={constants.links.parcours.contact}>contactez-nous</a>.
         </div>
         <div className="content-container form-container">
           <form action="/api/feedback/nps" method="post">

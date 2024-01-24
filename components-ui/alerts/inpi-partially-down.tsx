@@ -6,10 +6,12 @@ const InpiPartiallyDownWarning: React.FC<{ missing?: string }> = ({
 }) => (
   <Warning>
     Le téléservice de l’
-    <INPI />, qui nous transmet les données, <b>fonctionne partiellement</b>.
+    <INPI />, qui nous transmet les données,{' '}
+    <strong>fonctionne partiellement</strong>.
     <br />
     Par conséquent il nous manque {missing || 'des données'}.<br /> Vous pouvez
-    néanmoins les retrouver sur le <b>PDF justificatif d’immatriculation</b>.
+    néanmoins les retrouver sur le{' '}
+    <strong>PDF justificatif d’immatriculation</strong>.
   </Warning>
 );
 

@@ -1,6 +1,6 @@
 import ButtonLink from '#components-ui/button';
 import { INPI } from '#components/administrations';
-import AvisSituationLink from '#components/avis-situation-link';
+import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { IUniteLegale } from '#models/index';
 import Warning from './warning';
 
@@ -8,13 +8,13 @@ const ImmatriculationRNENotFoundAlert: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => (
   <Warning full>
-    <b>
+    <strong>
       L’Immatriculation au Registre National des Entreprises (RNE) est
       introuvable
-    </b>
+    </strong>
     <p>
-      Nous n’avons <b>pas retrouvé l’immatriculation</b> de cette entreprise
-      dans le RNE tenu par l’
+      Nous n’avons <strong>pas retrouvé l’immatriculation</strong> de cette
+      entreprise dans le RNE tenu par l’
       <INPI />.
     </p>
     <p>
@@ -31,8 +31,9 @@ const ImmatriculationRNENotFoundAlert: React.FC<{
     </p>
     <p>
       Si cette structure est une entreprise commerciale, artisanale, agricole ou
-      indépendante, <b>elle doit être enregistrée au RNE</b>. Le fait qu’elle
-      soit introuvable <b>est anormal et le problème doit être remonté</b> à l’
+      indépendante, <strong>elle doit être enregistrée au RNE</strong>. Le fait
+      qu’elle soit introuvable{' '}
+      <strong>est anormal et le problème doit être remonté</strong> à l’
       <INPI /> pour y être résolu.
     </p>
     <div className="layout-center">

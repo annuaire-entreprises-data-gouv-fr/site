@@ -2,7 +2,7 @@ import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 const manifest = (
   process.env.NODE_ENV === 'production'
-    ? require('../public/manifest.json')
+    ? require('../public/.vite/manifest.json')
     : {}
 ) as { [key: string]: any };
 

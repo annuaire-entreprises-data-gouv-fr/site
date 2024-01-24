@@ -13,6 +13,10 @@ import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import useFetchActesRNE from 'hooks/fetch/actes-RNE';
 import AgentWallDocuments from '../agent-wall/documents';
 
+const NoBilans = () => (
+  <>Aucun comptes n’a été déposé au RNE pour cette entreprise.</>
+);
+
 const AgentComponent: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
@@ -31,52 +35,58 @@ const AgentComponent: React.FC<{
             {(isAssociation(uniteLegale) || isServicePublic(uniteLegale)) && (
               <>
                 <Warning full>
-                  Les asociations et les services publics ne sont pas
+                  Les associations et les services publics ne sont pas
                   immatriculés au RNE.
                 </Warning>
                 <br />
               </>
             )}
-            Aucun comptes n’a été déposé au RNE pour cette entreprise.
+            <NoBilans />
           </>
         }
       >
-        {(documents) => (
-          <>
-            <p>
-              Cette entreprise possède {documents.bilans.length} bilan(s)
-              déposé(s) au RNE{' '}
-              {documents.hasBilanConsolide && (
-                <>
-                  , dont certains sont des{' '}
-                  <FAQLink
-                    tooltipLabel="bilans consolidés"
-                    to="/faq/donnees-financieres#quest-ce-quun-bilan-consolide"
+        {(documents) =>
+          documents.bilans?.length === 0 ? (
+            <NoBilans />
+          ) : (
+            <>
+              <p>
+                Cette entreprise possède {documents.bilans.length} bilan(s)
+                déposé(s) au RNE{' '}
+                {documents.hasBilanConsolide && (
+                  <>
+                    , dont certains sont des{' '}
+                    <FAQLink
+                      tooltipLabel="bilans consolidés"
+                      to="/faq/donnees-financieres#quest-ce-quun-bilan-consolide"
+                    >
+                      Qu’est-ce qu’un bilan consolidé ?
+                    </FAQLink>
+                  </>
+                )}{' '}
+                :
+              </p>
+              <FullTable
+                head={['Date de dépôt', 'Année fiscale', '', 'Lien']}
+                body={documents.bilans.map((a) => [
+                  formatDateLong(a.dateDepot),
+                  getFiscalYear(a.dateCloture),
+                  a.typeBilan === 'K' && (
+                    <Tag color="info">bilan consolidé</Tag>
+                  ),
+                  <ButtonLink
+                    alt
+                    small
+                    target="_blank"
+                    to={`${routes.api.rne.documents.download}${a.id}?type=bilan`}
                   >
-                    Qu’est-ce qu’un bilan consolidé ?
-                  </FAQLink>
-                </>
-              )}{' '}
-              :
-            </p>
-            <FullTable
-              head={['Date de dépôt', 'Année fiscale', '', 'Lien']}
-              body={documents.bilans.map((a) => [
-                formatDateLong(a.dateDepot),
-                getFiscalYear(a.dateCloture),
-                a.typeBilan === 'K' && <Tag color="info">bilan consolidé</Tag>,
-                <ButtonLink
-                  alt
-                  small
-                  target="_blank"
-                  to={`${routes.api.rne.documents.download}${a.id}?type=bilan`}
-                >
-                  Télécharger
-                </ButtonLink>,
-              ])}
-            />
-          </>
-        )}
+                    Télécharger
+                  </ButtonLink>,
+                ])}
+              />
+            </>
+          )
+        }
       </DataSection>
     </PrintNever>
   );

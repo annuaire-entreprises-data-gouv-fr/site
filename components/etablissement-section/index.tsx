@@ -4,7 +4,7 @@ import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
-import AvisSituationLink from '#components/avis-situation-link';
+import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { Section } from '#components/section';
 import { CopyPaste, TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';

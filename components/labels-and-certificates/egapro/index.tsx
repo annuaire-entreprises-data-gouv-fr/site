@@ -31,12 +31,13 @@ export const EgaproSection: React.FC<{
         const plural = egapro.index.years.length > 0;
         return (
           <>
-            Cette structure de <b>{egapro.index.employeesSizeRange}</b> a
-            déclaré {plural ? 'plusieurs' : 'une'} <FAQEgapro />
+            Cette structure de{' '}
+            <strong>{egapro.index.employeesSizeRange}</strong> a déclaré{' '}
+            {plural ? 'plusieurs' : 'une'} <FAQEgapro />
             <p>
-              Chaque déclaration se fait l’année <b>N</b> au titre de l’année{' '}
-              <b>N-1</b> (par exemple : les données déclarées en 2023 sont
-              celles de 2022).
+              Chaque déclaration se fait l’année <strong>N</strong> au titre de
+              l’année <strong>N-1</strong> (par exemple : les données déclarées
+              en 2023 sont celles de 2022).
             </p>
             <FullTable
               head={['Année', ...egapro.index.indexYears]}
@@ -105,12 +106,14 @@ const getSectionBody = (egapro: IEgapro) => {
       'Index (sur 100)',
       ...notes
         .map((note) =>
-          note ? <b style={{ color: getColor(note) }}>{note}</b> : null
+          note ? (
+            <strong style={{ color: getColor(note) }}>{note}</strong>
+          ) : null
         )
         .map(mapToNc),
     ],
     [
-      <b>
+      <strong>
         <FAQLink tooltipLabel="Détails">
           L’index est une synthèse des différents indicateurs ci-dessous
           <br />
@@ -118,7 +121,7 @@ const getSectionBody = (egapro: IEgapro) => {
             → En savoir plus
           </a>
         </FAQLink>
-      </b>,
+      </strong>,
       ...egapro.index.years.map(() => ''),
     ],
     ['    Écart rémunérations (sur 40)', ...remunerations.map(mapToNc)],

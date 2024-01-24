@@ -17,7 +17,7 @@ const ShortcutsSection: React.FC<{
   <div className="container">
     {title && (
       <div>
-        <b className="title">{title}</b>
+        <strong className="title">{title}</strong>
       </div>
     )}
     {shortcuts

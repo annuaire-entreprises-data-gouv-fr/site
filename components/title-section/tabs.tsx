@@ -6,6 +6,7 @@ import {
 import constants from '#models/constants';
 import {
   IUniteLegale,
+  isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/index';
@@ -35,6 +36,8 @@ export const Tabs: React.FC<{
   const shouldDisplayFinances =
     // hide for public services
     !isServicePublic(uniteLegale) &&
+    // hide for asso
+    !isAssociation(uniteLegale) &&
     // hide for EI
     !uniteLegale.complements.estEntrepreneurIndividuel;
 

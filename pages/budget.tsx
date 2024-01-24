@@ -16,7 +16,7 @@ const Budget: NextPageWithLayout = () => (
       <p>
         L’
         <a href="https://annuaire-entreprises.data.gouv.fr">
-          <b>Annuaire des Entreprises</b>
+          <strong>Annuaire des Entreprises</strong>
         </a>{' '}
         est un service public numérique, c’est pourquoi nous sommes transparents
         sur les ressources allouées et la manière dont elles sont employées.
@@ -43,15 +43,16 @@ const Budget: NextPageWithLayout = () => (
       <p>Répartition des sources de financements :</p>
       <ul>
         <li>
-          <b>2021</b> : le projet est une experimentation financée à 100% par la{' '}
+          <strong>2021</strong> : le projet est une experimentation financée à
+          100% par la{' '}
           <a href="https://numerique.gouv.fr/" target="_blank" rel="noopener">
             Direction Interministérielle du Numérique (DINUM)
           </a>
           .
         </li>
         <li>
-          <b>2022</b> : la DINUM continue d’assurer le financement du projet. Le
-          projet bénéficie également du programme{' '}
+          <strong>2022</strong> : la DINUM continue d’assurer le financement du
+          projet. Le projet bénéficie également du programme{' '}
           <a
             href="https://france-relance.transformation.gouv.fr/"
             target="_blank"
@@ -72,16 +73,16 @@ const Budget: NextPageWithLayout = () => (
           ['Logiciels', '-', '12 000 €', '12 000 €'],
           ['Hébergement', '1000 €', '3000 €', '3000 €'],
           [
-            <b>Total TTC</b>,
-            <b>196 000 €</b>,
-            <b>350 000 €</b>,
-            <b>590 000 €</b>,
+            <strong>Total TTC</strong>,
+            <strong>196 000 €</strong>,
+            <strong>350 000 €</strong>,
+            <strong>590 000 €</strong>,
           ],
         ]}
       ></FullTable>
       <br />
       <Info>
-        <b>À propos de la TVA</b>
+        <strong>À propos de la TVA</strong>
         <p>
           Contrairement aux entreprises du secteur privé, les administrations ne
           peuvent pas récupérer la TVA supportée sur leurs achats dans le cadre

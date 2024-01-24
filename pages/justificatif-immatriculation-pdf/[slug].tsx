@@ -37,12 +37,13 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
           <Info full>
             Le téléservice de l’
             <INPI /> peut malheureusement être victime de son succès et avoir{' '}
-            <b>du mal à répondre à toutes les demandes</b> de document.
+            <strong>du mal à répondre à toutes les demandes</strong> de
+            document.
             <br />
-            Un téléchargement normal prend <b>entre 10 et 20 secondes</b>.{' '}
-            <br />
+            Un téléchargement normal prend{' '}
+            <strong>entre 10 et 20 secondes</strong>. <br />
             Mais quand le service est surchargé, le téléchargement peut
-            atteindre plusieurs minutes <b>voire même échouer</b>.
+            atteindre plusieurs minutes <strong>voire même échouer</strong>.
           </Info>
           <p>
             Le téléchargement de l’extrait d’immatriculation au Répertoire
@@ -101,7 +102,8 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
                         Le document que vous recherchez n’a pas été retrouvé par
                         le téléservice de l’
                         <INPI />. Si la structure est bien une entreprise,{' '}
-                        <b>cela ne devrait pas arriver</b>. Vous pouvez :
+                        <strong>cela ne devrait pas arriver</strong>. Vous
+                        pouvez :
                       </p>
                       <ol>
                         <li>
@@ -126,10 +128,10 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
                           <INPI /> est à la fois l’opérateur du Registre
                           National des Entreprises (RNE) et du téléservice qui
                           produit les justificatifs, c’est{' '}
-                          <b>
+                          <strong>
                             la seule administration en mesure de résoudre le
                             problème
-                          </b>
+                          </strong>
                           .
                         </p>
                       </ol>

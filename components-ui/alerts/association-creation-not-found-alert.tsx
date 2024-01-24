@@ -9,7 +9,7 @@ const AssociationCreationNotFoundAlert: React.FC<{
 }> = ({ uniteLegale }) => (
   <Warning full>
     Nous n’avons pas retrouvé l’annonce de création de cette association dans le{' '}
-    <b>Journal Officiel des Association (JOAFE).</b>
+    <strong>Journal Officiel des Association (JOAFE).</strong>
     <br />
     Les annonces les plus anciennes du Journal Officiel peuvent contenir des
     erreurs de saisie qui ne nous permettent pas de les retrouver grâce à leur

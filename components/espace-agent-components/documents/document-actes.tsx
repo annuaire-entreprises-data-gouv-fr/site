@@ -10,6 +10,10 @@ import { formatDateLong } from '#utils/helpers';
 import useFetchActesRNE from 'hooks/fetch/actes-RNE';
 import AgentWallDocuments from '../agent-wall/documents';
 
+const NoDocument = () => (
+  <>Aucun document n’a été retrouvé dans le RNE pour cette entreprise.</>
+);
+
 const AgentComponent: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
@@ -28,45 +32,49 @@ const AgentComponent: React.FC<{
             {(isAssociation(uniteLegale) || isServicePublic(uniteLegale)) && (
               <>
                 <Warning full>
-                  Les asociations et les services publics ne sont pas
+                  Les associations et les services publics ne sont pas
                   immatriculés au RNE.
                 </Warning>
                 <br />
               </>
             )}
-            Aucun document n’a été retrouvé dans le RNE pour cette entreprise.
+            <NoDocument />
           </>
         }
       >
-        {(documents) => (
-          <>
-            <p>
-              Cette entreprise possède {documents.actes.length} document(s) au
-              RNE. Chaque document peut contenir un ou plusieurs actes :
-            </p>
-            <FullTable
-              head={['Date de dépôt', 'Acte(s) contenu(s)', 'Lien']}
-              body={documents.actes.map((a) => [
-                formatDateLong(a.dateDepot),
-                a.actes && (
-                  <ul>
-                    {(a?.actes || []).map((acteName) => (
-                      <li>{acteName}</li>
-                    ))}
-                  </ul>
-                ),
-                <ButtonLink
-                  target="_blank"
-                  alt
-                  small
-                  to={`${routes.api.rne.documents.download}${a.id}?type=acte`}
-                >
-                  Télécharger
-                </ButtonLink>,
-              ])}
-            />
-          </>
-        )}
+        {(documents) =>
+          documents.actes?.length === 0 ? (
+            <NoDocument />
+          ) : (
+            <>
+              <p>
+                Cette entreprise possède {documents.actes.length} document(s) au
+                RNE. Chaque document peut contenir un ou plusieurs actes :
+              </p>
+              <FullTable
+                head={['Date de dépôt', 'Acte(s) contenu(s)', 'Lien']}
+                body={documents.actes.map((a) => [
+                  formatDateLong(a.dateDepot),
+                  a.actes && (
+                    <ul>
+                      {(a?.actes || []).map((acteName) => (
+                        <li>{acteName}</li>
+                      ))}
+                    </ul>
+                  ),
+                  <ButtonLink
+                    target="_blank"
+                    alt
+                    small
+                    to={`${routes.api.rne.documents.download}${a.id}?type=acte`}
+                  >
+                    Télécharger
+                  </ButtonLink>,
+                ])}
+              />
+            </>
+          )
+        }
       </DataSection>
     </PrintNever>
   );

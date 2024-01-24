@@ -21,9 +21,9 @@ export const HomeH1 = () => (
   <div className="home-h1">
     <span>{diamond}</span>
     <h1>
-      L’<b>Annuaire</b> des
+      L’<strong>Annuaire</strong> des
       <br />
-      <b>Entreprises</b>
+      <strong>Entreprises</strong>
     </h1>
     <style jsx>
       {`
@@ -56,7 +56,7 @@ export const HomeH1 = () => (
           margin: 0;
         }
 
-        .home-h1 > h1 > b {
+        .home-h1 > h1 > strong {
           font-weight: 900;
         }
         .home-h1 > h1 > b:nth-of-type(2) {

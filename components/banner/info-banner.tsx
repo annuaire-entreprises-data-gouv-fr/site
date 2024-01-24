@@ -1,6 +1,7 @@
 import React from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
-import { INPI, INSEE } from '#components/administrations';
+import { INSEE } from '#components/administrations';
+import NonRenseigne from '#components/non-renseigne';
 import constants from '#models/constants';
 
 export const InfoBanner: React.FC<{}> = () => (
@@ -18,7 +19,7 @@ export const InfoBanner: React.FC<{}> = () => (
           <li>
             Sur la page d’un établissement ou d’un siège social, le nombre de
             salariés, la date de fermeture et la date de dernière mise à jour
-            sont <i>Non renseigné</i>
+            sont <NonRenseigne />
           </li>
           <li>
             Si une entreprise a plus de 100 établissements, la liste de ses

@@ -17,22 +17,23 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
         {immatriculationJOAFE && !isAPINotResponding(immatriculationJOAFE) && (
           <li>
             <a href="#joafe">
-              <b>Enregistrée</b> au Journal Officiel des Associations (JOAFE),
-              depuis le {formatDateLong(immatriculationJOAFE.datePublication)}
+              <strong>Enregistrée</strong> au Journal Officiel des Associations
+              (JOAFE), depuis le{' '}
+              {formatDateLong(immatriculationJOAFE.datePublication)}
             </a>
           </li>
         )}
         <li>
           {estActif(uniteLegale) ? (
             <a href="#insee">
-              <b>Inscrite</b> à l’Insee
+              <strong>Inscrite</strong> à l’Insee
               {uniteLegale.dateCreation
                 ? `, depuis le ${formatDateLong(uniteLegale.dateCreation)}`
                 : ''}
             </a>
           ) : (
             <a href="#insee">
-              <b>Cessée</b> auprès de l’Insee
+              <strong>Cessée</strong> auprès de l’Insee
               {uniteLegale.dateDebutActivite
                 ? `, depuis le ${formatDateLong(uniteLegale.dateDebutActivite)}`
                 : ''}
@@ -45,13 +46,14 @@ const ImmatriculationSummary: React.FC<IJustificatifs> = ({
               <FadeIn>
                 {!!immatriculationRNE.identite?.dateRadiation ? (
                   <a href="#rne">
-                    <b>Radiée</b> du Registre National des Entreprises (RNE),
-                    depuis le{' '}
+                    <strong>Radiée</strong> du Registre National des Entreprises
+                    (RNE), depuis le{' '}
                     {formatDateLong(immatriculationRNE.identite.dateRadiation)}
                   </a>
                 ) : (
                   <a href="#rne">
-                    <b>Inscrite</b> au Registre National des Entreprises (RNE)
+                    <strong>Inscrite</strong> au Registre National des
+                    Entreprises (RNE)
                     {!!immatriculationRNE.identite?.dateImmatriculation && (
                       <>
                         , depuis le{' '}

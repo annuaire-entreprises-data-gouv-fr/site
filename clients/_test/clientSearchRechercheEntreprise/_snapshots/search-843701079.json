@@ -119,7 +119,6 @@
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",
-        "dirigeant": null,
         "complements": {
           "estBio": false,
           "estEss": false,
@@ -152,7 +151,7 @@
             "sexe": null,
             "nom": "BERTRAND",
             "prenom": "Lionel",
-            "role": null,
+            "role": "Président de SAS",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }
