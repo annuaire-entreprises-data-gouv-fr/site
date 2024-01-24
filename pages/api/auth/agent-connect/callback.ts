@@ -8,8 +8,8 @@ import { checkIsSuperAgent } from '#utils/helpers/is-super-agent';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import {
   ISessionPrivilege,
-  cleanSirenFrom,
-  getSirenFrom,
+  cleanPathFrom,
+  getPathFrom,
   setAgentSession,
 } from '#utils/session';
 import withSession from '#utils/session/with-session';
@@ -48,11 +48,11 @@ export default withSession(async function callbackRoute(req, res) {
       session
     );
 
-    const sirenFrom = getSirenFrom(session);
+    const pathFrom = getPathFrom(session);
 
-    if (sirenFrom) {
-      await cleanSirenFrom(session);
-      res.redirect(`/entreprise/${sirenFrom}`);
+    if (pathFrom) {
+      await cleanPathFrom(session);
+      res.redirect(pathFrom);
     } else {
       res.redirect('/');
     }

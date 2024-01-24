@@ -1,4 +1,4 @@
-import ButtonMonComptePro from '#components-ui/button-mon-compte-pro';
+import ButtonAgentConnect from '#components-ui/button-agent-connect';
 import { ProtectedSection } from '#components/section/protected-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -15,11 +15,9 @@ const AgentWall: React.FC<{
       <div className="cta-wrapper">
         <div className="cta-actes layout-center">
           <div>
-            <p>
-              <h3>Vous êtes agent public ?</h3>
-            </p>
+            <h3>Vous êtes agent public ?</h3>
             <div className="layout-center">
-              <ButtonMonComptePro />
+              <ButtonAgentConnect />
             </div>
             {modalFooter}
           </div>
