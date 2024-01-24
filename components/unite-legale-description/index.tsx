@@ -36,7 +36,8 @@ export const UniteLegaleDescription: React.FC<{
         {uniteLegale.dateCreation ? (
           <>
             {' '}
-            a été créée le <b>{formatDateLong(uniteLegale.dateCreation)}</b>
+            a été créée le{' '}
+            <strong>{formatDateLong(uniteLegale.dateCreation)}</strong>
             {ageCreation && <>, il y a {ageCreation}</>}.{' '}
           </>
         ) : (
@@ -45,13 +46,14 @@ export const UniteLegaleDescription: React.FC<{
         {uniteLegale.dateDebutActivite && !estActif(uniteLegale) && (
           <>
             Elle a été fermée le{' '}
-            <b>{formatDateLong(uniteLegale.dateDebutActivite)}</b>
+            <strong>{formatDateLong(uniteLegale.dateDebutActivite)}</strong>
             {ageFermeture && <>, il y a {ageFermeture}</>}.{' '}
           </>
         )}
         {uniteLegale.natureJuridique && (
           <>
-            Sa forme juridique est <b>{uniteLegale.libelleNatureJuridique}</b>.{' '}
+            Sa forme juridique est{' '}
+            <strong>{uniteLegale.libelleNatureJuridique}</strong>.{' '}
           </>
         )}
         {uniteLegale.libelleActivitePrincipale && (

@@ -54,7 +54,7 @@ const Metric: React.FC<{
             inlineBlock={false}
             label={
               <>
-                <b>{serie.date}</b>
+                <strong>{serie.date}</strong>
                 <br />
                 {getUptimeLabel(serie)}
               </>
@@ -162,15 +162,15 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
           <h3>Statistiques moyennes</h3>
           <div className="mean-stats">
             <div>
-              <b>24h</b>
+              <strong>24h</strong>
               <span>{uptime.day}%</span>
             </div>
             <div>
-              <b>7 jours</b>
+              <strong>7 jours</strong>
               <span>{uptime.week}%</span>
             </div>
             <div>
-              <b>30 jours</b>
+              <strong>30 jours</strong>
               <span>{uptime.month}%</span>
             </div>
           </div>
@@ -195,7 +195,7 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
             flex-direction: column;
             align-items: center;
           }
-          .mean-stats > div b {
+          .mean-stats > div strong {
             font-size: 1.1rem;
             line-height: 2.2rem;
           }

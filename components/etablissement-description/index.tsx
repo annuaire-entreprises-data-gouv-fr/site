@@ -73,25 +73,27 @@ export const EtablissementDescription: React.FC<IProps> = ({
               .
             </FAQLink>
             , immatriculé sous le siret {formatSiret(etablissement.siret)}, est
-            <b>{statusLabel(etablissement.etatAdministratif)}.</b>
+            <strong>{statusLabel(etablissement.etatAdministratif)}.</strong>
             {etablissement.dateCreation && (
               <>
                 {' '}
                 Il a été créé le{' '}
-                <b>{formatDateLong(etablissement.dateCreation)}</b>
+                <strong>{formatDateLong(etablissement.dateCreation)}</strong>
                 {ageCreation && <>, il y a {ageCreation}</>}.{' '}
               </>
             )}
             {etablissement.dateDebutActivite && !estActif(etablissement) && (
               <>
                 Il a été fermée le{' '}
-                <b>{formatDateLong(etablissement.dateDebutActivite)}</b>
+                <strong>
+                  {formatDateLong(etablissement.dateDebutActivite)}
+                </strong>
                 {ageFermeture && <>, il y a {ageFermeture}</>}.{' '}
               </>
             )}
             C’est
             {etablissement.estSiege ? (
-              <b> le siège social</b>
+              <strong> le siège social</strong>
             ) : uniteLegale.allSiegesSiret.indexOf(etablissement.siret) > -1 ? (
               <> un ancien siège social</>
             ) : (

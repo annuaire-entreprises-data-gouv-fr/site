@@ -1,6 +1,7 @@
 import React from 'react';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { Tag } from '#components-ui/tag';
+import NonRenseigne from '#components/non-renseigne';
 import PageCounter from '#components/search-results/results-pagination';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
@@ -47,24 +48,24 @@ const EtablissementTable: React.FC<{
           </a>,
           <>
             {estNonDiffusible(etablissement) ? (
-              <i>Non renseigné</i>
+              <NonRenseigne />
             ) : (
               etablissement.libelleActivitePrincipale
             )}
           </>,
           <>
             {estNonDiffusible(etablissement) ? (
-              <i>Non renseigné</i>
+              <NonRenseigne />
             ) : (
               <>
                 <span style={{ fontVariant: 'all-small-caps' }}>
                   {(etablissement.enseigne || etablissement.denomination) && (
                     <a href={`/etablissement/${etablissement.siret}`}>
-                      <b>
+                      <strong>
                         {getEnseigneEtablissement(etablissement, session) ||
                           getDenominationEtablissement(etablissement, session)}
                         <br />
-                      </b>
+                      </strong>
                     </a>
                   )}
                   <>{getAdresseEtablissement(etablissement, session)}</>
@@ -113,9 +114,9 @@ const EtablissementListeSection: React.FC<{
     <div id="etablissements">
       <p>
         Cette structure possède{' '}
-        <b>
+        <strong>
           {nombreEtablissements} établissement{plural}
-        </b>
+        </strong>
         {nombreEtablissementsOuverts && !usePagination ? (
           <>
             {' '}

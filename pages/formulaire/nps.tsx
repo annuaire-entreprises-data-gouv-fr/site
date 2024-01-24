@@ -51,8 +51,8 @@ const FeedBackPage: NextPageWithLayout = () => {
         <br />
         <br />
         <div>
-          Attention, <b>ce formulaire est anonyme</b>. Si vous avez une demande
-          précise, écrivez-nous un mail à{' '}
+          Attention, <strong>ce formulaire est anonyme</strong>. Si vous avez
+          une demande précise, écrivez-nous un mail à{' '}
           <a href={constants.links.mailto}>{constants.links.mail}</a> et nous
           vous répondrons.
         </div>

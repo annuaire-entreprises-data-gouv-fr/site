@@ -81,7 +81,7 @@ function DirigeantContent({
       const infos = [
         dirigeant.role,
         <>
-          <b>{dirigeant.denomination}</b>
+          <strong>{dirigeant.denomination}</strong>
           {dirigeant.siren ? (
             <>
               {' - '}
@@ -145,15 +145,15 @@ function DirigeantContent({
       {dirigeants.length === 0 ? (
         <p>
           Cette entreprise est enregistrée au{' '}
-          <b>Registre National des Entreprises (RNE)</b>, mais n’y possède aucun
-          dirigeant.
+          <strong>Registre National des Entreprises (RNE)</strong>, mais n’y
+          possède aucun dirigeant.
         </p>
       ) : (
         <>
           <p>
             Cette entreprise possède {dirigeants.length} dirigeant{plural}{' '}
-            enregistré{plural} au <b>Registre National des Entreprises (RNE)</b>{' '}
-            tenu par l’
+            enregistré{plural} au{' '}
+            <strong>Registre National des Entreprises (RNE)</strong> tenu par l’
             <INPI />. Pour en savoir plus, vous pouvez consulter{' '}
             <UniteLegalePageLink
               href={`${routes.rne.portail.entreprise}${uniteLegale.siren}`}

@@ -106,7 +106,7 @@ export const OpenClosedTag: React.FC<
       icon={isVerified ? 'open' : 'closed'}
       label={label}
       backgroundColor="#ddd"
-      fontColor="#555"
+      fontColor="var(--text-default-grey)"
     />
   </div>
 );

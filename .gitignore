@@ -43,6 +43,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# vite
+.vite
+
 /scripts/seo/dist
 
 /public/maps/*

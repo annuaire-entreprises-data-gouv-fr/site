@@ -67,10 +67,10 @@ const AnnoncesBodaccSection: React.FC<{
             <>
               <p>
                 Elle possède {bodacc.annonces.length} annonces publiées au{' '}
-                <b>
+                <strong>
                   Bulletin Officiel Des Annonces Civiles et Commerciales
                   (BODACC)
-                </b>
+                </strong>
                 , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
                 consulter{' '}
                 <UniteLegalePageLink
@@ -83,10 +83,10 @@ const AnnoncesBodaccSection: React.FC<{
               <FullTable
                 head={['Publication', 'N°', 'Details', 'Lien']}
                 body={bodacc.annonces.map((annonce) => [
-                  <b>{formatDate(annonce.datePublication)}</b>,
+                  <strong>{formatDate(annonce.datePublication)}</strong>,
                   <Tag>n°&nbsp;{annonce.numeroAnnonce}</Tag>,
                   <div className="annonce">
-                    <b>{annonce.titre}</b>
+                    <strong>{annonce.titre}</strong>
                     <div className="font-small">
                       <i>{annonce.sousTitre}</i>
                       {annonce.tribunal && (

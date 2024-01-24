@@ -70,8 +70,8 @@ const TitleEtablissementWithDenomination: React.FC<{
     {isAgent(session) && (
       <PrintNever>
         <ProtectedData full>
-          Vous êtes connecté avec un compte <b>agent public</b>. Ce compte vous
-          donne accès à certaines données exclusivement réservées à
+          Vous êtes connecté avec un compte <strong>agent public</strong>. Ce
+          compte vous donne accès à certaines données exclusivement réservées à
           l’administration, identifiables par la mention “
           <Icon size={12} slug="lockFill">
             Réservé aux agents publics
@@ -93,7 +93,7 @@ const TitleEtablissementWithDenomination: React.FC<{
         {isAgent(session) ? (
           <ProtectedData full>
             Cette structure est non-diffusible mais vous pouvez voir ses
-            informations grâce à votre compte <b>agent-public</b>.
+            informations grâce à votre compte <strong>agent-public</strong>.
           </ProtectedData>
         ) : (
           <NonDiffusibleAlert />

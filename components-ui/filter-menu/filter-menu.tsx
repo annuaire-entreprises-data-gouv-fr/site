@@ -1,11 +1,11 @@
-import { PropsWithChildren, ReactElement, useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
 import {
-  buildSearchQuery,
   IParams,
   ISearchFilter,
+  buildSearchQuery,
 } from '#models/search-filter-params';
 import { useOutsideClick } from 'hooks';
 import ActiveFilterLabel from './active-filter-label';
@@ -100,7 +100,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
           }
 
           span.search-filter-label {
-            color: #555;
+            color: var(--text-default-grey);
             user-select: none;
             display: flex;
             align-items: center;

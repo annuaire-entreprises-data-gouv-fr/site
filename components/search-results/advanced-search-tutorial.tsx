@@ -27,34 +27,34 @@ export const AdvancedSearchTutorial = () => {
           <ul>
             <li>
               <Icon color={constants.colors.frBlue} slug="mapPin">
-                <b>Zone géographique&nbsp;:</b>&#8200;filtrez par ville,
-                département ou région
+                <strong>Zone géographique&nbsp;:</strong>&#8200;filtrez par
+                ville, département ou région
               </Icon>
             </li>
             <li>
               <Icon color={constants.colors.frBlue} slug="humanPin">
-                <b>Dirigeant&nbsp;:</b>&#8200;filtrez par le nom ou le prénom
-                d’un(e) dirigeant(e)
+                <strong>Dirigeant&nbsp;:</strong>&#8200;filtrez par le nom ou le
+                prénom d’un(e) dirigeant(e)
               </Icon>
             </li>
             <li>
               <Icon color={constants.colors.frBlue} slug="building">
-                <b>Structure&nbsp;:</b>&#8200;filtrez par type de structure ou
-                labels (ESS, Société à mission, RGE, Spectacle vivant, Qualiopi,
-                Bio)
+                <strong>Structure&nbsp;:</strong>&#8200;filtrez par type de
+                structure ou labels (ESS, Société à mission, RGE, Spectacle
+                vivant, Qualiopi, Bio)
               </Icon>
             </li>
             <li>
               <Icon color={constants.colors.frBlue} slug="moneyCircle">
-                <b>Financier&nbsp;:</b>&#8200;filtrez par chiffre d’affaires ou
-                résultat net
+                <strong>Financier&nbsp;:</strong>&#8200;filtrez par chiffre
+                d’affaires ou résultat net
               </Icon>
             </li>
             <li>
               <Icon color={constants.colors.frBlue} slug="file">
-                <b>Situation administrative&nbsp;:</b>&#8200;filtrez par domaine
-                d’activité, état administratif (En activité/Cessée) ou taille
-                d’entreprise
+                <strong>Situation administrative&nbsp;:</strong>&#8200;filtrez
+                par domaine d’activité, état administratif (En activité/Cessée)
+                ou taille d’entreprise
               </Icon>
             </li>
           </ul>

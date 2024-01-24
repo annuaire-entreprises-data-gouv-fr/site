@@ -150,8 +150,8 @@ const button = (
             </svg>
           </div>
           <div class="label">
-            Voir les <b>informations légales</b> sur
-            <div>l’<b>Annuaire</b> des <b>Entreprises</b></div>
+            Voir les <strong>informations légales</strong> sur
+            <div>l’<strong>Annuaire</strong> des <strong>Entreprises</strong></div>
           </div></a>
       </div>
   </body>

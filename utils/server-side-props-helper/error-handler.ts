@@ -128,10 +128,10 @@ const getContext = (
  * @param getServerSidePropsFunction
  * @returns
  */
-export function handleErrorFromServerSideProps(
-  getServerSidePropsFunction: (context: GetServerSidePropsContext) => any
-) {
-  return async (context: GetServerSidePropsContext) => {
+export function handleErrorFromServerSideProps<
+  C extends GetServerSidePropsContext
+>(getServerSidePropsFunction: (context: C) => any) {
+  return async (context: C) => {
     try {
       return await getServerSidePropsFunction(context);
     } catch (exception: any) {

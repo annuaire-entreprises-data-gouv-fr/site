@@ -4,6 +4,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
 import { MC } from '#components/administrations';
+import NonRenseigne from '#components/non-renseigne';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -56,10 +57,12 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
             </a>{' '}
             du <MC />.
             <p>
-              Le <b>numéro de récépissé est le numéro de déclaration</b>. Le
-              récépissé est valide 30 jours après que le dossier ait été reçu
+              Le{' '}
+              <strong>numéro de récépissé est le numéro de déclaration</strong>.
+              Le récépissé est valide 30 jours après que le dossier ait été reçu
               complet et conforme à la réglementation. Un récépissé de
-              déclaration au statut valide est <b>valable pour cinq ans</b>.
+              déclaration au statut valide est{' '}
+              <strong>valable pour cinq ans</strong>.
             </p>
             <p>
               Si une déclaration que vous avez faite n’apparaît pas sur le
@@ -121,7 +124,7 @@ const formatLicence = (categorie: number, nomLieu = '') => {
     case 1:
       return (
         <>
-          <b>Exploitant de lieu de spectacles vivant</b>
+          <strong>Exploitant de lieu de spectacles vivant</strong>
           {nomLieu && (
             <>
               <br />
@@ -131,11 +134,13 @@ const formatLicence = (categorie: number, nomLieu = '') => {
         </>
       );
     case 2:
-      return <b>Producteurs de spectacles ou entrepreneurs de tournées</b>;
+      return (
+        <strong>Producteurs de spectacles ou entrepreneurs de tournées</strong>
+      );
     case 3:
-      return <b>Diffuseurs de spectacles</b>;
+      return <strong>Diffuseurs de spectacles</strong>;
     default:
-      return <i>Non renseigné</i>;
+      return <NonRenseigne />;
   }
 };
 

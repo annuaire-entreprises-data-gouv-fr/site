@@ -1,0 +1,32 @@
+title: Numéro NIC
+
+seo:
+  title: Numéro NIC - définition - Annuaire des Entreprises
+  description: Le Numéro Interne de Classement (NIC) permet d’identifier un établissement au sein de l’entreprise à laquelle il est rattachée.
+body: |
+  ## **Le Numéro NIC : définition**
+
+  Le Numéro Interne de Classement (NIC) permet d’identifier un établissement au sein de l’entreprise à laquelle il est rattaché. Ce code est automatiquement attribué à un établissement lors de son immatriculation auprès de l’Institut national de la statistique et des études économiques (INSEE).
+
+  Pour rappel, un établissement est une entité de production, distincte géographiquement, rattachée juridiquement à l'unité légale.
+
+  ## **Où trouver le numéro NIC ?**
+
+  Ce code correspond aux 5 derniers chiffres du numéro SIRET. Les 9 chiffres qui le précèdent sont ceux du SIREN de l’entreprise à laquelle est rattaché l’établissement.
+
+  L’Annuaire des Entreprises permet d’accéder à la référence NIC et aux numéros SIREN et SIRET des entreprises, administrations ou associations.
+
+  **Exemple :**
+
+  Électricité de France (EDF)
+
+  * SIREN : 552 081 317
+
+  L’entreprise détient plusieurs établissements en France. Parmi eux :
+
+  * SIRET de l’établissement C. ARDENNES à CHARLEVILLE-MEZIERES : 552 081 317 01826
+  * NIC de l’établissement C. ARDENNES à CHARLEVILLE-MEZIERES : 01826
+
+  ***A noter*** *: le NIC ne contient aucune information au sujet de l’activité ou de la localisation d’un établissement.*
+
+

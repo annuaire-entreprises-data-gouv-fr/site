@@ -193,9 +193,8 @@ const mapToDomainObject = (
     nomComplet,
     chemin: siren,
     trancheEffectif:
-      caractereEmployeurUniteLegale === 'N'
-        ? caractereEmployeurUniteLegale
-        : trancheEffectifsUniteLegale,
+      trancheEffectifsUniteLegale ??
+      (caractereEmployeurUniteLegale === 'N' ? 'N' : null),
     anneeTrancheEffectif: anneeEffectifsUniteLegale,
     categorieEntreprise,
     anneeCategorieEntreprise,

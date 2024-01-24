@@ -1,4 +1,3 @@
-import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
 import { administrationsMetaData } from '#models/administrations';
@@ -21,10 +20,10 @@ const About: NextPageWithLayout = () => {
         </p>
         <p>
           Ce site ne fait{' '}
-          <b>
+          <strong>
             que centraliser les données. Il ne les modifie pas et ne les stocke
             pas.
-          </b>
+          </strong>
         </p>
         <p>
           Il est opéré par{' '}
@@ -43,41 +42,42 @@ const About: NextPageWithLayout = () => {
           </p>
           <ul>
             <li>
-              <b>Résumé :</b> les informations générales (adresse, SIRET, SIREN,
-              code NAF/ APE, numéro de TVA, RNA pour les associations…), les
-              informations sur le siège social ainsi que la liste des
-              établissements.
+              <strong>Résumé :</strong> les informations générales (adresse,
+              SIRET, SIREN, code NAF/ APE, numéro de TVA, RNA pour les
+              associations…), les informations sur le siège social ainsi que la
+              liste des établissements.
             </li>
             <li>
-              <b>Justificatif d’immatriculation :</b> permettant d’obtenir le
-              document pour prouver l’existence d’une entreprise ou d’une
-              association (équivalent des extraits KBIS et D1)
+              <strong>Justificatif d’immatriculation :</strong> permettant
+              d’obtenir le document pour prouver l’existence d’une entreprise ou
+              d’une association (équivalent des extraits KBIS et D1)
             </li>
             <li>
-              Informations sur les <b>dirigeants</b> (d’entreprises) ou élus
-              (collectivités)
+              Informations sur les <strong>dirigeants</strong> (d’entreprises)
+              ou élus (collectivités)
             </li>
             <li>
-              <b>Annonces légales :</b> annonces officielles au Journal Officiel
-              et au BODACC (Bulletin Officiel Des Annonces Civiles et
-              Commerciales)
+              <strong>Annonces légales :</strong> annonces officielles au
+              Journal Officiel et au BODACC (Bulletin Officiel Des Annonces
+              Civiles et Commerciales)
             </li>
             <li>
-              <b>Données financières des entreprises :</b> chiffre d’affaires et
-              résultat net des sociétés
+              <strong>Données financières des entreprises :</strong> chiffre
+              d’affaires et résultat net des sociétés
             </li>
             <li>
-              <b>Annonces légales :</b> annonces officielles au Journal Officiel
-              et au BODACC (Bulletin Officiel Des Annonces Civiles et
-              Commerciales)
+              <strong>Annonces légales :</strong> annonces officielles au
+              Journal Officiel et au BODACC (Bulletin Officiel Des Annonces
+              Civiles et Commerciales)
             </li>
             <li>
-              <b>Labels et certificats :</b> RGE, ESS, Société à mission,
-              Entrepreneurs de spectacles vivants, entreprises du Bio
+              <strong>Labels et certificats :</strong> RGE, ESS, Société à
+              mission, Entrepreneurs de spectacles vivants, entreprises du Bio
             </li>
             <li>
-              <b>Conventions collectives :</b> documents enregistrés auprès du
-              ministère du travail, du plein l’emploi et de l’insertion
+              <strong>Conventions collectives :</strong> documents enregistrés
+              auprès du ministère du travail, du plein l’emploi et de
+              l’insertion
             </li>
           </ul>
           <h2>
@@ -129,9 +129,9 @@ const About: NextPageWithLayout = () => {
             <a href="/donnees/api">statut des API utilisées</a>.
           </p>
           <p>
-            <b>NB</b> : L’Annuaire des Entreprises a développé sa propre API
-            pour son moteur de recherche et la met également à disposition
-            gratuitement :{' '}
+            <strong>NB</strong> : L’Annuaire des Entreprises a développé sa
+            propre API pour son moteur de recherche et la met également à
+            disposition gratuitement :{' '}
             <a
               href="https://api.gouv.fr/les-api/api-recherche-entreprises"
               target="_blank"
@@ -177,8 +177,8 @@ const About: NextPageWithLayout = () => {
             <li>
               Proposer aux entrepreneur(e)s un moyen simple et efficace de
               retrouver facilement les informations légales de leur entreprise :{' '}
-              <b>numéro SIRET, numéro SIREN, numéro de TVA etc.</b> afin de les
-              utiliser dans leurs démarches administratives.
+              <strong>numéro SIRET, numéro SIREN, numéro de TVA etc.</strong>{' '}
+              afin de les utiliser dans leurs démarches administratives.
             </li>
             <li>
               Permettre aux agents publics de retrouver{' '}

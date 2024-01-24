@@ -1,57 +1,76 @@
 {
   "args": [
-    "487444697"
+    "528163777"
   ],
   "result": {
-    "siren": "487444697",
+    "siren": "528163777",
     "identite": {
-      "denomination": "ESSOR ENERGIES (SOLARSUD)",
-      "dateImmatriculation": "2005-12-12",
-      "dateDebutActiv": "2005-12-06",
+      "denomination": "GROUPE SOLUTION ENERGIE POLE TECHNIQUE",
+      "dateImmatriculation": "2010-11-05",
+      "dateDebutActiv": "2010-10-01",
       "dateRadiation": "",
       "dateCessationActivite": "",
       "isPersonneMorale": true,
-      "dateClotureExercice": "3112",
+      "dateClotureExercice": "3009",
       "dureePersonneMorale": "99 ans",
-      "capital": "2 099 975 EUR (fixe)",
-      "libelleNatureJuridique": "Société à responsabilité limitée (sans autre indication)",
+      "capital": "26 000 EUR (fixe)",
+      "libelleNatureJuridique": "SAS, société par actions simplifiée",
       "natureEntreprise": "Commerciale"
     },
     "dirigeants": [
       {
-        "nom": "POUYANNE",
-        "prenom": "DAVID, JEAN-CLAUDE",
-        "role": "Gérant",
-        "dateNaissancePartial": "1965-10",
+        "nom": "LEVY (LEVY)",
+        "prenom": "ILAN",
+        "role": "Directeur général délégué",
+        "dateNaissancePartial": "1981-10",
         "dateNaissanceFull": ""
       },
       {
-        "nom": "POUYANNE (POUYANNE)",
-        "prenom": "DAVID, JEAN, CLAUDE",
+        "nom": "SABBAN",
+        "prenom": "GILLES",
         "role": "Gérant",
-        "dateNaissancePartial": "1965-10",
+        "dateNaissancePartial": "1965-09",
         "dateNaissanceFull": ""
+      },
+      {
+        "siren": "878719756",
+        "denomination": "GSE VD",
+        "natureJuridique": "Société par actions simplifiée",
+        "role": "Président de SAS"
+      },
+      {
+        "siren": "",
+        "denomination": "GROUPE SOLUTION ENERGIE",
+        "natureJuridique": "5710",
+        "role": "Autre"
       }
     ],
     "beneficiaires": [
       {
         "type": "",
-        "nom": "POUYANNE",
-        "prenoms": "DAVID, JEAN-CLAUDE",
-        "dateNaissancePartial": "1965-10",
-        "nationalite": "Française"
+        "nom": "SITBON",
+        "prenoms": "PHILIPPE",
+        "dateNaissancePartial": "1964-10",
+        "nationalite": "FRANCAISE"
+      },
+      {
+        "type": "",
+        "nom": "SABBAN",
+        "prenoms": "GILLES, YLAN",
+        "dateNaissancePartial": "1965-09",
+        "nationalite": "FRANCAISE"
       }
     ],
     "observations": [
       {
-        "numObservation": "12767",
-        "description": "Radiation du RCS de Bordeaux le 07/03/2023",
-        "dateAjout": "2023-03-08"
+        "numObservation": "2130",
+        "description": "Ouverture de l'établissement secondaire situé 1 rue Camille Claudel - Zone Tertiaire d'Atlanparc 56890 Plescop à compter du 01/01/2019",
+        "dateAjout": "2019-03-15"
       },
       {
-        "numObservation": "8588",
-        "description": "Continuation de la société malgré un actif net devenu inférieur à la moitié du capital social. Décision du 01/12/2023",
-        "dateAjout": "2023-12-06"
+        "numObservation": "",
+        "description": "Continuation de la société malgré un actif net devenu inférieur à la moitie du capital social. Décision du 27/06/2019",
+        "dateAjout": "2019-10-10"
       }
     ],
     "metadata": {

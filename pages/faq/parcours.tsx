@@ -38,7 +38,7 @@ type IProps = {
 const Answer: React.FC<PropsWithChildren<{}>> = ({ children }) => (
   <>
     <p>
-      <b>Réponse</b>
+      <strong>Réponse</strong>
     </p>
     <TextWrapper>
       <div className="parcours-response">
@@ -81,11 +81,12 @@ const Question: React.FC<IProps> = ({
     case EQuestionType.CONTACT:
       return (
         <Answer>
-          <b>Je ne trouve pas la réponse à ma question</b>.
+          <strong>Je ne trouve pas la réponse à ma question</strong>.
           {userType === 'independant' && (
             <p>
-              Si vous possédez une <b>entreprise individuelle</b> dont vous
-              souhaitez <b>cacher ou afficher</b> les informations personnelles,{' '}
+              Si vous possédez une <strong>entreprise individuelle</strong> dont
+              vous souhaitez <strong>cacher ou afficher</strong> les
+              informations personnelles,{' '}
               <a href="/faq/rendre-mon-entreprise-non-diffusible">
                 consultez notre fiche
               </a>
@@ -104,9 +105,9 @@ const Question: React.FC<IProps> = ({
             </ButtonLink>
           </div>
           <p>
-            <b>NB :</b> si votre question concerne une structure en particulier,
-            pensez à nous indiquer le <b>siren ou le siret</b> dans le corps du
-            mail.
+            <strong>NB :</strong> si votre question concerne une structure en
+            particulier, pensez à nous indiquer le{' '}
+            <strong>siren ou le siret</strong> dans le corps du mail.
           </p>
         </Answer>
       );
@@ -114,14 +115,15 @@ const Question: React.FC<IProps> = ({
       return (
         <>
           <p>
-            <b>
+            <strong>
               Comment modifier les informations d’une entreprise, d’une
               association ou d’un service public ?
-            </b>
+            </strong>
           </p>
           <p>
             Si la modification concerne{' '}
-            <b>l’affichage de données personnelles</b> sur le site, consultez{' '}
+            <strong>l’affichage de données personnelles</strong> sur le site,
+            consultez{' '}
             <a href="/faq/supprimer-donnees-personnelles-entreprise">
               notre fiche dédiée
             </a>{' '}
@@ -131,17 +133,18 @@ const Question: React.FC<IProps> = ({
             Pour le reste, l’Annuaire des Entreprises centralise les
             informations dont dispose l’administration sur une entreprise, une
             association ou un service public, mais{' '}
-            <b>ne stocke aucune information</b>. Les informations que vous voyez
-            sur le site sont récupérées <b>en temps réel</b> auprès des services
-            des administrations qui en ont la charge.
+            <strong>ne stocke aucune information</strong>. Les informations que
+            vous voyez sur le site sont récupérées{' '}
+            <strong>en temps réel</strong> auprès des services des
+            administrations qui en ont la charge.
           </p>
           <p>
             Si vous constatez une erreur, il est{' '}
-            <b>essentiel de la faire corriger à la source</b>, pour que la
-            correction soit transmise à toute l’administration.
+            <strong>essentiel de la faire corriger à la source</strong>, pour
+            que la correction soit transmise à toute l’administration.
           </p>
           <p>
-            <b>Quelle information souhaitez-vous faire modifier ?</b>
+            <strong>Quelle information souhaitez-vous faire modifier ?</strong>
           </p>
           <MultiChoice
             idPrefix="modification"
@@ -174,7 +177,7 @@ const Question: React.FC<IProps> = ({
               />
               Comment modifier les informations suivantes ?
               <p>
-                “<b>{dataToModify.label}</b>”
+                “<strong>{dataToModify.label}</strong>”
               </p>
               <p>Ces informations proviennent de :</p>
               <ul>
@@ -228,7 +231,7 @@ const Question: React.FC<IProps> = ({
       return (
         <>
           <p>
-            <b>Quelle est votre question ?</b>
+            <strong>Quelle est votre question ?</strong>
           </p>
           <MultiChoice
             idPrefix="question-type"
@@ -282,7 +285,7 @@ const Parcours: NextPageWithLayout<{
     <>
       <h1>Bonjour, comment pouvons-nous vous aider ?</h1>
       <p>Pour commencer, faisons connaissance :</p>
-      <b>Qui êtes-vous ?</b>
+      <strong>Qui êtes-vous ?</strong>
       <MultiChoice
         idPrefix="user-type"
         values={[...Object.entries(FAQTargets), ['all', 'Autres']].map(

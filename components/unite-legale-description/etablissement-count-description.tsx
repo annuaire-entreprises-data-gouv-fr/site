@@ -20,10 +20,10 @@ export const UniteLegaleEtablissementCountDescription: React.FC<{
       {hasOpenEtablissements &&
         !usePagination &&
         nombreEtablissements !== nombreEtablissementsOuverts && (
-          <b>
+          <strong>
             {' '}
             dont {nombreEtablissementsOuverts} {pluralBe} en activité
-          </b>
+          </strong>
         )}
     </>
   );

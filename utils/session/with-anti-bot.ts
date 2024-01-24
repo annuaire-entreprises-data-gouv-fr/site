@@ -1,8 +1,8 @@
-import { withIronSessionApiRoute } from 'iron-session/next';
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
+import { NextApiHandler } from 'next';
 import { Information } from '#models/exceptions';
 import { logInfoInSentry } from '#utils/sentry';
-import { ISession, sessionOptions } from '.';
+import { ISession } from '.';
+import withSession from './with-session';
 
 /**
  * withAntiBot
@@ -17,7 +17,7 @@ import { ISession, sessionOptions } from '.';
  */
 
 export function withAntiBot(handler: NextApiHandler) {
-  async function verifySession(req: NextApiRequest, res: NextApiResponse) {
+  return withSession(async function verifySession(req, res) {
     if (!userVisitedAPageRecently(req.session)) {
       logInfoInSentry(
         new Information({
@@ -32,8 +32,7 @@ export function withAntiBot(handler: NextApiHandler) {
       res.send('Unauthorized');
     }
     return handler(req, res);
-  }
-  return withIronSessionApiRoute(verifySession, sessionOptions);
+  });
 }
 
 function userVisitedAPageRecently(session: ISession | null) {

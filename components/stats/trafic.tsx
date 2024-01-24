@@ -51,14 +51,15 @@ export const TraficStats: React.FC<{
       <p>
         Nous suivons à la fois le nombre d’utilisateurs et le nombre total de
         visites. <br />
-        Un <b>utilisateur</b> est un individu qui visite l’Annuaire des
-        Entreprises au moins une fois. Un utilisateur effectue donc une ou
-        plusieurs <b>visites</b> du site.
+        Un <strong>utilisateur</strong> est un individu qui visite l’Annuaire
+        des Entreprises au moins une fois. Un utilisateur effectue donc une ou
+        plusieurs <strong>visites</strong> du site.
       </p>
       <p>
         Un utilisateur qui a effectué deux visites ou plus est considéré comme
-        un <b>utilisateur récurrent</b>. À l’inverse, un utilisateur qui n’a
-        visité le site qu’une seule fois est un <b>nouvel utilisateur</b>.
+        un <strong>utilisateur récurrent</strong>. À l’inverse, un utilisateur
+        qui n’a visité le site qu’une seule fois est un{' '}
+        <strong>nouvel utilisateur</strong>.
       </p>
       <div className="layout-right">
         <div>Afficher les données par&nbsp;</div>
@@ -78,12 +79,12 @@ export const TraficStats: React.FC<{
       </p>
       <ul>
         <li>
-          L’augmentation des <b>nouveaux utilisateurs</b> est un marqueur de la
-          notoriété du service
+          L’augmentation des <strong>nouveaux utilisateurs</strong> est un
+          marqueur de la notoriété du service
         </li>
         <li>
-          L’augmentation des <b>utilisateurs récurrents</b> (au moins 2 visites
-          dans le mois) est un marqueur de l’efficacité du service
+          L’augmentation des <strong>utilisateurs récurrents</strong> (au moins
+          2 visites dans le mois) est un marqueur de l’efficacité du service
         </li>
       </ul>
     </>

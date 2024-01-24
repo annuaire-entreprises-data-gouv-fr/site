@@ -4,6 +4,7 @@ import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import { MTPEI } from '#components/administrations';
+import NonRenseigne from '#components/non-renseigne';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -66,12 +67,14 @@ const ConventionsCollectivesSection: React.FC<{
                     <>
                       {nature && (
                         <>
-                          <b className="font-small">{capitalize(nature)}</b>
+                          <strong className="font-small">
+                            {capitalize(nature)}
+                          </strong>
                           <br />
                         </>
                       )}
                       <span className="font-small">
-                        {title || <i>Non renseigné</i>}
+                        {title || <NonRenseigne />}
                       </span>
                     </>,
                     <ul>
@@ -85,7 +88,7 @@ const ConventionsCollectivesSection: React.FC<{
                     </ul>,
                     <>
                       {idcc === '9999' ? (
-                        <i>Non renseigné</i>
+                        <NonRenseigne />
                       ) : (
                         <ButtonLink
                           target="_blank"

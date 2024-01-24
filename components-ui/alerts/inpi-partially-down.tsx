@@ -4,7 +4,8 @@ import Warning from './warning';
 const InpiPartiallyDownWarning = () => (
   <Warning>
     Le téléservice de l’
-    <INPI />, qui nous transmet les données, <b>fonctionne partiellement</b>.
+    <INPI />, qui nous transmet les données,{' '}
+    <strong>fonctionne partiellement</strong>.
     <br />
     L’information ci-dessous est la plus récente que nous ayons à notre
     disposition, elle a été récupérée auprès de l’

@@ -1,23 +1,21 @@
-import { withIronSessionApiRoute } from 'iron-session/next';
-import { NextApiRequest, NextApiResponse } from 'next';
 import {
-  IMCPUserInfo,
-  monCompteAuthenticate,
-} from '#clients/auth/mon-compte-pro/strategy';
+  IAgentConnectUserInfo,
+  agentConnectAuthenticate,
+} from '#clients/auth/agent-connect/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { Exception } from '#models/exceptions';
 import { checkIsSuperAgent } from '#utils/helpers/is-super-agent';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import {
   ISessionPrivilege,
-  sessionOptions,
+  cleanSirenFrom,
+  getSirenFrom,
   setAgentSession,
 } from '#utils/session';
-
-export default withIronSessionApiRoute(callbackRoute, sessionOptions);
+import withSession from '#utils/session/with-session';
 
 const getUserPrivileges = async (
-  userInfo: IMCPUserInfo
+  userInfo: IAgentConnectUserInfo
 ): Promise<ISessionPrivilege> => {
   const isTestAccount =
     userInfo.email === 'user@yopmail.com' &&
@@ -28,26 +26,15 @@ const getUserPrivileges = async (
     return 'super-agent';
   }
 
-  const {
-    is_external = false,
-    is_collectivite_territoriale = false,
-    is_service_public = false,
-  } = userInfo;
-
-  const isAgent =
-    !is_external && (is_collectivite_territoriale || is_service_public);
-
-  if (isAgent) {
-    return 'agent';
-  }
-
-  return 'unkown';
+  // agent connect only connect agents
+  return 'agent';
 };
 
-async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
+export default withSession(async function callbackRoute(req, res) {
   try {
-    const userInfo = await monCompteAuthenticate(req);
+    const userInfo = await agentConnectAuthenticate(req);
     const userPrivilege = await getUserPrivileges(userInfo);
+    const session = req.session;
 
     if (userPrivilege === 'unkown') {
       throw new HttpForbiddenError(`Unauthorized account : ${userInfo.email}`);
@@ -58,9 +45,17 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
       userInfo.family_name || '',
       userInfo.given_name || '',
       userPrivilege,
-      req.session
+      session
     );
-    res.redirect('/');
+
+    const sirenFrom = getSirenFrom(session);
+
+    if (sirenFrom) {
+      await cleanSirenFrom(session);
+      res.redirect(`/entreprise/${sirenFrom}`);
+    } else {
+      res.redirect('/');
+    }
   } catch (e: any) {
     logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));
     if (e instanceof HttpForbiddenError) {
@@ -69,7 +64,7 @@ async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
       res.redirect('/connexion/echec-connexion');
     }
   }
-}
+});
 
 export class AgentConnectionFailedException extends Exception {
   constructor(args: { cause?: any }) {

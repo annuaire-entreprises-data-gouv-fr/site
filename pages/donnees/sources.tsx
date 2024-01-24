@@ -35,7 +35,7 @@ const DataSourcesPage: NextPageWithLayout<IProps> = ({
         Voici donc la liste des données utilisées sur l’Annuaire des Entreprises
         :
       </p>
-      <b>Sommaire</b>
+      <strong>Sommaire</strong>
       <ol>
         {allAdministrations.map(({ dataSources, slug }) =>
           dataSources.map((source, sourceIndex) => (
