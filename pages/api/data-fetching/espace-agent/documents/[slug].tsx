@@ -1,16 +1,13 @@
-import { withIronSessionApiRoute } from 'iron-session/next';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { clientDocuments } from '#clients/api-proxy/rne/documents';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
-import { isAgent, sessionOptions } from '#utils/session';
+import { isAgent } from '#utils/session';
+import withSession from '#utils/session/with-session';
 
-export default withIronSessionApiRoute(actes, sessionOptions);
-
-async function actes(req: NextApiRequest, res: NextApiResponse) {
+withSession(async function actes(req, res) {
   const {
     query: { slug },
     session,
@@ -41,4 +38,4 @@ async function actes(req: NextApiRequest, res: NextApiResponse) {
     );
     res.status(e.status || 500).json({ message });
   }
-}
+});

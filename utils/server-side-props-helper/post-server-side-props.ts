@@ -1,5 +1,6 @@
-import { withIronSessionSsr } from 'iron-session/next';
+import { getIronSession } from 'iron-session';
 import { GetServerSidePropsContext } from 'next';
+import { IReqWithSession } from '#utils/session/with-session';
 import { closeAPM, createAPM } from '../sentry/tracing';
 import { ISession, sessionOptions, setVisitTimestamp } from '../session';
 import { handleErrorFromServerSideProps } from './error-handler';
@@ -12,6 +13,10 @@ export interface IPropsWithMetadata {
   };
 }
 
+type IGetServerSidePropsContextWithSession = GetServerSidePropsContext & {
+  req: IReqWithSession;
+};
+
 /**
  * Post process a GetServerSideProps
  *
@@ -22,19 +27,28 @@ export interface IPropsWithMetadata {
  * @returns
  */
 export function postServerSideProps(
-  getServerSidePropsFunction: (context: GetServerSidePropsContext) => any
+  getServerSidePropsFunction: (
+    context: IGetServerSidePropsContextWithSession
+  ) => any
 ) {
-  return withIronSessionSsr(async (context: GetServerSidePropsContext) => {
+  return async (context: GetServerSidePropsContext) => {
     const url = context?.req?.url || '/unknown';
 
     const transaction = createAPM(url, 'postServerSideProps');
-
+    const contextWithSession = context as IGetServerSidePropsContextWithSession;
+    contextWithSession.req.session = await getIronSession<ISession>(
+      context.req,
+      context.res,
+      sessionOptions
+    );
     const { props = {}, ...redirectAndOther } =
-      await handleErrorFromServerSideProps(getServerSidePropsFunction)(context);
+      await handleErrorFromServerSideProps(getServerSidePropsFunction)(
+        contextWithSession
+      );
 
     closeAPM(transaction);
 
-    await setVisitTimestamp(context.req.session);
+    await setVisitTimestamp(contextWithSession.req.session);
 
     return {
       ...redirectAndOther,
@@ -42,9 +56,9 @@ export function postServerSideProps(
         ...props,
         metadata: {
           ...props.metadata,
-          session: context.req.session,
+          session: contextWithSession.req.session,
         },
       },
     };
-  }, sessionOptions);
+  };
 }

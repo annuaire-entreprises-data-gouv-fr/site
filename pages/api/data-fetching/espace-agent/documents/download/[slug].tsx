@@ -1,5 +1,3 @@
-import { withIronSessionApiRoute } from 'iron-session/next';
-import { NextApiRequest, NextApiResponse } from 'next';
 import {
   clientDownloadActe,
   clientDownloadBilan,
@@ -8,11 +6,10 @@ import { HttpBadRequestError, HttpForbiddenError } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
-import { isAgent, sessionOptions } from '#utils/session';
+import { isAgent } from '#utils/session';
+import withSession from '#utils/session/with-session';
 
-export default withIronSessionApiRoute(download, sessionOptions);
-
-async function download(req: NextApiRequest, res: NextApiResponse) {
+withSession(async function download(req, res) {
   const {
     query: { slug, type },
     session,
@@ -52,4 +49,4 @@ async function download(req: NextApiRequest, res: NextApiResponse) {
     );
     res.status(e.status || 500).json({ message });
   }
-}
+});

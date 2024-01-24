@@ -1,13 +1,10 @@
-import { withIronSessionApiRoute } from 'iron-session/next';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { agentConnectAuthorizeUrl } from '#clients/auth/agent-connect/strategy';
 import { logFatalErrorInSentry } from '#utils/sentry';
-import { sessionOptions, setSirenFrom } from '#utils/session';
+import { setSirenFrom } from '#utils/session';
+import withSession from '#utils/session/with-session';
 import { AgentConnectionFailedException } from './callback';
 
-export default withIronSessionApiRoute(loginRoute, sessionOptions);
-
-async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
+export default withSession(async function loginRoute(req, res) {
   try {
     await setSirenFrom(req.session, (req?.query?.sirenFrom || '') as string);
     const url = await agentConnectAuthorizeUrl(req);
@@ -16,4 +13,4 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
     logFatalErrorInSentry(new AgentConnectionFailedException({ cause: e }));
     res.redirect('/connexion/echec-connexion');
   }
-}
+});
