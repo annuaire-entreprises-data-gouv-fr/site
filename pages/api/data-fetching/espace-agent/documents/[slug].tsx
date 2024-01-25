@@ -7,7 +7,7 @@ import logErrorInSentry from '#utils/sentry';
 import { isAgent } from '#utils/session';
 import withSession from '#utils/session/with-session';
 
-withSession(async function actes(req, res) {
+export default withSession(async function actes(req, res) {
   const {
     query: { slug },
     session,
