@@ -39,8 +39,4 @@ const getRNE = async (
   }
 };
 
-class FetchRNEImmatriculationException extends Error {
-  name = 'FetchRNEImmatriculationException';
-}
-
 export default withAPM(withAntiBot(getRNE));
