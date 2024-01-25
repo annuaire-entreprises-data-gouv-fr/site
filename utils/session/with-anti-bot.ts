@@ -30,8 +30,9 @@ export function withAntiBot(handler: NextApiHandler) {
 
       res.status(401);
       res.send('Unauthorized');
+    } else {
+      return handler(req, res);
     }
-    return handler(req, res);
   });
 }
 
