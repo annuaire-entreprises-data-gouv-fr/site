@@ -89,7 +89,7 @@ const ResultItem: React.FC<{
       >
         <div className="title">
           <span>{`${result.nomComplet}`}</span>
-          <UniteLegaleBadge uniteLegale={result} small hiddenByDefault />
+          <UniteLegaleBadge uniteLegale={result} small defaultShouldBeHid />
           {!estActif(result) && (
             <IsActiveTag
               etatAdministratif={result.etatAdministratif}

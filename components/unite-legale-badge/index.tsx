@@ -15,8 +15,8 @@ import {
 const UniteLegaleBadge: React.FC<{
   uniteLegale: IUniteLegale;
   small?: boolean;
-  hiddenByDefault?: boolean;
-}> = ({ uniteLegale, small = false, defaultShouldBeHid = false }) => {
+  defaultBadgeShouldBeHid?: boolean;
+}> = ({ uniteLegale, small = false, defaultBadgeShouldBeHid = false }) => {
   const badges = [];
   if (isAssociation(uniteLegale)) {
     badges.push(<AssociationBadge small={small} />);
