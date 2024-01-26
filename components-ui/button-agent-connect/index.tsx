@@ -13,16 +13,14 @@ const ButtonAgentConnect: React.FC<{}> = () => {
       >
         <button className="agentconnect-button"></button>
       </form>
-      <p>
-        <a
-          href="https://agentconnect.gouv.fr/"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
-        >
-          Qu’est-ce que AgentConnect ?
-        </a>
-      </p>
+      <a
+        href="https://agentconnect.gouv.fr/"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
+      >
+        Qu’est-ce que AgentConnect ?
+      </a>
       <style jsx>{`
         .agentconnect-button {
           background-color: transparent !important;

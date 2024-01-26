@@ -6,37 +6,49 @@ import {
   ServicePublicBadge,
 } from '#components-ui/badge/frequent';
 import {
-  isServicePublic,
+  IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
-  IUniteLegale,
+  isServicePublic,
 } from '#models/index';
 
 const UniteLegaleBadge: React.FC<{
   uniteLegale: IUniteLegale;
   small?: boolean;
   hiddenByDefault?: boolean;
-}> = ({ uniteLegale, small = false, hiddenByDefault = false }) => {
+}> = ({ uniteLegale, small = false, defaultShouldBeHid = false }) => {
+  const badges = [];
   if (isAssociation(uniteLegale)) {
-    return <AssociationBadge small={small} />;
+    badges.push(<AssociationBadge small={small} />);
   }
   if (uniteLegale.complements.estEntrepreneurIndividuel) {
-    return <EntrepriseIndividuelleBadge small={small} />;
+    badges.push(<EntrepriseIndividuelleBadge small={small} />);
   }
 
   if (isCollectiviteTerritoriale(uniteLegale)) {
     // colter before administration as it is more restrictive yet some colter might also be administration
-    return <CollectiviteTerritorialeBadge small={small} />;
+    badges.push(<CollectiviteTerritorialeBadge small={small} />);
   }
 
   if (isServicePublic(uniteLegale)) {
-    return <ServicePublicBadge small={small} />;
+    badges.push(<ServicePublicBadge small={small} />);
   }
 
-  if (hiddenByDefault) {
+  if (badges.length > 0) {
+    return (
+      <>
+        {badges.map((badge) => (
+          <>{badge}</>
+        ))}
+      </>
+    );
+  }
+
+  // default
+  if (defaultShouldBeHid) {
     return null;
   }
-  // default case
+
   return <DefaultStructureBadge small={small} />;
 };
 

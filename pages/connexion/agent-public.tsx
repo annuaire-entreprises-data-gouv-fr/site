@@ -19,7 +19,8 @@ const Login = () => {
       </p>
       <p>
         Accédez aux actes, statuts, bilans et données des entreprises
-        non-diffusibles.
+        non-diffusibles en cliquant sur le bouton ci-dessous pour vous connecter
+        :
       </p>
       <div className="layout-center">
         <ButtonAgentConnect />
