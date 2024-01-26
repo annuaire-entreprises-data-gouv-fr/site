@@ -5,12 +5,10 @@ const ButtonAgentConnect: React.FC<{}> = () => {
   const pathFrom = usePathFromRouter();
   return (
     <div>
-      <form
-        action={`/api/auth/agent-connect/login${
-          pathFrom ? `?pathFrom=${pathFrom}` : ''
-        }`}
-        method="get"
-      >
+      <form action="/api/auth/agent-connect/login" method="get">
+        {pathFrom && (
+          <input readOnly hidden aria-hidden name="pathFrom" value={pathFrom} />
+        )}
         <button className="agentconnect-button"></button>
       </form>
       <p>

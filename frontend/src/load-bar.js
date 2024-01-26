@@ -33,6 +33,8 @@ const init = () => {
 
   if (loader.style.backgroundColor === 'transparent') {
     loader.style.background = '#000091';
+    loader.style.background =
+      'linear-gradient(90deg, rgba(0,0,145,1), rgb(0, 159, 255))';
   }
 
   document.body.appendChild(loader);

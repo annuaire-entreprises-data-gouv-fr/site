@@ -48,7 +48,7 @@ export default withSession(async function callbackRoute(req, res) {
       session
     );
 
-    const pathFrom = getPathFrom(session);
+    const pathFrom = decodeURIComponent(getPathFrom(session) || '');
 
     if (pathFrom) {
       await cleanPathFrom(session);

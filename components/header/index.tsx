@@ -85,10 +85,7 @@ export const Header: React.FC<IProps> = ({
                       {isLoggedIn(session) ? (
                         <ul className="fr-links-group">
                           <li>
-                            <a
-                              className="fr-link menu-logout"
-                              href={`/api/auth/agent-connect/logout?pathFrom=${pathFrom}`}
-                            >
+                            <div className="fr-link menu-logout">
                               <div>
                                 <Icon slug="user">
                                   {session?.user?.fullName ||
@@ -106,8 +103,12 @@ export const Header: React.FC<IProps> = ({
                                   )
                                 </Icon>
                               </div>
-                              <div>Se déconnecter</div>
-                            </a>
+                              <a
+                                href={`/api/auth/agent-connect/logout?pathFrom=${pathFrom}`}
+                              >
+                                <div>Se déconnecter</div>
+                              </a>
+                            </div>
                           </li>
                         </ul>
                       ) : null}
@@ -161,10 +162,14 @@ export const Header: React.FC<IProps> = ({
           position: absolute;
         }
 
-        a.menu-logout {
+        div.menu-logout {
           position: relative;
         }
-        a.menu-logout div:last-of-type {
+        div.menu-logout:hover {
+          background-color: #eee;
+          cursor: default;
+        }
+        div.menu-logout > a {
           position: absolute;
           top: 100%;
           left: 0;
@@ -172,13 +177,13 @@ export const Header: React.FC<IProps> = ({
           width: 100%;
           background-color: #fff;
           padding: 5px 15px;
-          box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.35);
+          box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.5);
         }
-        a.menu-logout div:last-of-type:hover {
-          background-color: #fbfbfb;
+        div.menu-logout > a:hover {
+          background-color: #f8f8f8;
         }
 
-        a.menu-logout:hover div:last-of-type {
+        div.menu-logout:hover > a {
           display: block;
         }
 
