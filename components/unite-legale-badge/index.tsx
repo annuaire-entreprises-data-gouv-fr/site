@@ -26,11 +26,13 @@ const UniteLegaleBadge: React.FC<{
   }
 
   if (isCollectiviteTerritoriale(uniteLegale)) {
-    // colter before administration as it is more restrictive yet some colter might also be administration
     badges.push(<CollectiviteTerritorialeBadge small={small} />);
   }
 
-  if (isServicePublic(uniteLegale)) {
+  if (
+    isServicePublic(uniteLegale) &&
+    !isCollectiviteTerritoriale(uniteLegale)
+  ) {
     badges.push(<ServicePublicBadge small={small} />);
   }
 
