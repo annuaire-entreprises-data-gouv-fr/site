@@ -45,7 +45,7 @@ const UniteLegaleBadge: React.FC<{
   }
 
   // default
-  if (defaultShouldBeHid) {
+  if (defaultBadgeShouldBeHid) {
     return null;
   }
 
