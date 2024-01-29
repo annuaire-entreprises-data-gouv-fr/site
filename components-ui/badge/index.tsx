@@ -72,13 +72,14 @@ export function Badge({
         .badge-wrapper.active {
           border: 2px solid ${constants.colors.frBlue};
         }
-
+        .badge-wrapper .badge-label {
+          color: var(--text-default-grey);
+        }
         a.badge-wrapper {
           background: none;
         }
         a.badge-wrapper .badge-label {
           text-decoration: underline;
-          color: var(--text-default-grey);
         }
         a.badge-wrapper:hover {
           filter: brightness(0.95);
