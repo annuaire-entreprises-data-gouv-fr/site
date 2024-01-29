@@ -18,7 +18,7 @@ const AgentWall: React.FC<{
             <h3>Vous êtes agent public ?</h3>
             <p>Cliquez sur le bouton ci-dessous pour vous connecter :</p>
             <div className="layout-center">
-              <ButtonAgentConnect />
+              <ButtonAgentConnect usePathFrom />
             </div>
             {modalFooter}
           </div>
