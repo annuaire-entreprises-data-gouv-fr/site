@@ -17,7 +17,7 @@ export default function DataSectionLoader({
         <HeightTransition animateAppear>
           <FadeIn>
             <Info full>
-              Ce téléservice{' '}
+              Le service qui renvoie la donnée{' '}
               {dataSources && `(${dataSources.map((d) => d.short).join(', ')})`}{' '}
               semble occupé en ce moment. Le téléchargement des informations
               peut prendre du temps (10s à 20s).
