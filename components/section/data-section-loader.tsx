@@ -13,12 +13,15 @@ export default function DataSectionLoader({
   const after5s = useTimeout(5000);
   return (
     <>
-      {after5s && (
+      {/* {after5s && ( */}
+      {true && (
         <HeightTransition animateAppear>
           <FadeIn>
             <Info full>
-              Le service semble particulièrement occupé en ce moment, cela peut
-              prendre encore un peu de temps (10s à 20s).
+              Ce téléservice{' '}
+              {dataSources && `(${dataSources.map((d) => d.short).join(', ')})`}{' '}
+              semble occupé en ce moment. Le téléchargement des informations
+              peut prendre du temps (10s à 20s).
             </Info>
           </FadeIn>
         </HeightTransition>
