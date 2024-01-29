@@ -1,6 +1,6 @@
 import React from 'react';
+import { Warning } from '#components-ui/alerts';
 import AssociationAdressAlert from '#components-ui/alerts/association-adress';
-import Warning from '#components-ui/alerts/warning';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { Tag } from '#components-ui/tag';

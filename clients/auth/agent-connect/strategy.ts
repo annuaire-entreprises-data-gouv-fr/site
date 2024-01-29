@@ -7,7 +7,9 @@ let _client = undefined as BaseClient | undefined;
 const CLIENT_ID = process.env.AGENTCONNECT_CLIENT_ID;
 const CLIENT_SECRET = process.env.AGENTCONNECT_CLIENT_SECRET;
 const ISSUER_URL = process.env.AGENTCONNECT_URL_DISCOVER;
+
 const REDIRECT_URI = process.env.AGENTCONNECT_REDIRECT_URI;
+
 const POST_LOGOUT_REDIRECT_URI =
   process.env.AGENTCONNECT_POST_LOGOUT_REDIRECT_URI;
 

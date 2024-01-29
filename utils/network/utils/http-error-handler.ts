@@ -26,7 +26,7 @@ export const httpErrorHandler = (
       throw new HttpForbiddenError('Forbidden');
     }
     case 400: {
-      throw new HttpBadRequestError('Bad Request');
+      throw new HttpBadRequestError(message || 'Bad Request');
     }
     case 401: {
       throw new HttpUnauthorizedError('Unauthorized');
