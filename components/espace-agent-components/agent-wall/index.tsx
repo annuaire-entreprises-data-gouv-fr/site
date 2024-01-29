@@ -19,14 +19,22 @@ const AgentWall: React.FC<{
             <div>
               <h3>Vous êtes agent public ?</h3>
               <p>
-                En cliquant sur le bouton ci-dessous, vous aurez un
-                immédiatement accès à ces données. Cela fonctionne quelque soit
-                votre administration, sans création de compte&nbsp;:
+                Accédez immédiatement à ces données en continuant avec le bouton{' '}
+                <a
+                  href="https://agentconnect.gouv.fr/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
+                >
+                  AgentConnect
+                </a>
+                .
               </p>
-              <div className="layout-center">
-                <ButtonAgentConnect />
-              </div>
-              <br />
+              <p>
+                Disponible pour toutes les administrations, sans création de
+                compte.
+              </p>
+              <ButtonAgentConnect />
             </div>
             <div className="cta-footer">{modalFooter}</div>
           </div>
@@ -76,11 +84,12 @@ const AgentWall: React.FC<{
           border-radius: 3px;
         }
 
-        .cta-actes > div > div {
-          padding: 10px 30px;
+        .cta-actes > div > div:first-of-type {
+          padding: 0 30px 20px;
         }
 
         .cta-footer {
+          padding: 10px 30px;
           font-size: 0.9rem;
           background-color: ${constants.colors.lightGrey};
         }
