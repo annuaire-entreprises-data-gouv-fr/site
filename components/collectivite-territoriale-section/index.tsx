@@ -61,7 +61,6 @@ const CollectiviteTerritorialeSection: React.FC<{
           EAdministration.DINUM,
         ]}
       >
-        <p>Cette structure est une collectivite territoriale&nbsp;:</p>
         <TwoColumnTable body={data} />
       </Section>
       <HorizontalSeparator />

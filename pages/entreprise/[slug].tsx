@@ -7,6 +7,7 @@ import EtablissementSection from '#components/etablissement-section';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
 import Meta from '#components/meta';
 import { NonDiffusibleSection } from '#components/non-diffusible';
+import ServicePublicSection from '#components/service-public-section';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
@@ -20,8 +21,13 @@ import {
   IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
+  isServicePublic,
 } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
+import {
+  IServicePublic,
+  getServicePublicByUniteLegale,
+} from '#models/service-public';
 import {
   extractSirenOrSiretSlugFromUrl,
   shouldNotIndex,
@@ -40,12 +46,14 @@ import { NextPageWithLayout } from 'pages/_app';
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
   association: IDataAssociation | IAPINotRespondingError | null;
+  servicePublic: IServicePublic | IAPINotRespondingError | null;
   redirected: boolean;
 }
 
 const UniteLegalePage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   association,
+  servicePublic,
   redirected,
 }) => {
   const session = useSession();
@@ -76,14 +84,20 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
             {isSuperAgent(session) && (
               <EspaceAgentSummarySection uniteLegale={uniteLegale} />
             )}
+            {isCollectiviteTerritoriale(uniteLegale) && (
+              <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
+            )}
+            {servicePublic && (
+              <ServicePublicSection
+                uniteLegale={uniteLegale}
+                servicePublic={servicePublic}
+              />
+            )}
             {isAssociation(uniteLegale) && (
               <AssociationSection
                 uniteLegale={uniteLegale}
                 association={association}
               />
-            )}
-            {isCollectiviteTerritoriale(uniteLegale) && (
-              <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
             )}
             <UsefulShortcuts uniteLegale={uniteLegale} />
             {uniteLegale.siege && (
@@ -131,10 +145,16 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       ? await getAssociation(uniteLegale)
       : null;
 
+    const shouldFetchServicePublic = !isBot && isServicePublic(uniteLegale);
+
+    const servicePublic = shouldFetchServicePublic
+      ? await getServicePublicByUniteLegale(uniteLegale)
+      : null;
     return {
       props: {
         uniteLegale,
         association,
+        servicePublic,
         redirected: isRedirected,
       },
     };

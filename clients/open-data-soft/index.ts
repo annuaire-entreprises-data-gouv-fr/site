@@ -16,9 +16,11 @@ const odsClient = async (
   const results = response || [];
 
   const lastModified = responseMetaData?.metas?.metadata_processed || null;
-
   return {
-    records: results.records.map((record) => record.fields),
+    records:
+      'records' in results
+        ? results.records.map((record) => record.fields)
+        : results.results,
     lastModified,
   };
 };
