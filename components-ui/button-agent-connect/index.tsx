@@ -9,7 +9,7 @@ const ButtonAgentConnect: React.FC<{ usePathFrom?: boolean }> = ({
     <div>
       <form action="/api/auth/agent-connect/login" method="get">
         {usePathFrom && pathFrom && (
-          <input readOnly hidden aria-hidden name="pathTo" value={pathFrom} />
+          <input readOnly hidden aria-hidden name="pathFrom" value={pathFrom} />
         )}
         <button className="agentconnect-button"></button>
       </form>
