@@ -16,6 +16,7 @@ const AgentWall: React.FC<{
         <div className="cta-actes layout-center">
           <div>
             <h3>Vous êtes agent public ?</h3>
+            <p>Cliquez sur le bouton ci-dessous pour vous connecter :</p>
             <div className="layout-center">
               <ButtonAgentConnect />
             </div>
@@ -23,17 +24,20 @@ const AgentWall: React.FC<{
           </div>
         </div>
         <div className="blur" tab-index="-1" aria-hidden>
-          <p>Voici la liste de 7 présidents de la république française :</p>
+          <p>Voici une liste de présidents de la République Française :</p>
           <FullTable
             head={['Date de dépôt', 'Acte(s) contenu(s)']}
             body={[
               ['Charles', 'de Gaulle'],
               ['Jacques', 'Chirac'],
+              ['Félix', 'Faure'],
               ['Georges', 'Pompidou'],
               ['François', 'Mitterrand'],
+              ['René', 'Coty'],
               ['Valéry', "Giscard d'Estaing"],
               ['Nicolas', 'Sarkozy'],
               ['Emmanuel', 'Macron'],
+              ['Adolphe', 'Thiers'],
             ].map(([a, b]) => [a, b])}
           />
         </div>
