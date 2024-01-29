@@ -1,4 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document';
+import { isAgent, isSuperAgent } from '#utils/session';
 
 const manifest = (
   process.env.NODE_ENV === 'production'
@@ -127,7 +128,8 @@ class CustomDocument extends Document {
     const isProd = process.env.NODE_ENV === 'production';
     const useReact =
       this.props['__NEXT_DATA__']?.props?.pageProps?.metadata?.useReact;
-
+    const session =
+      this.props['__NEXT_DATA__']?.props?.pageProps?.metadata?.session;
     const HeadToUse = useReact ? Head : CustomHead;
     return (
       <Html lang="fr">
@@ -141,6 +143,13 @@ class CustomDocument extends Document {
               dangerouslySetInnerHTML={{
                 __html: `
               var _paq = window._paq || [];
+              ${
+                isSuperAgent(session)
+                  ? `_paq.push(['setCustomDimension', '1', 'Super-agent connecté']);`
+                  : isAgent(session)
+                  ? `_paq.push(['setCustomDimension', '1', 'Agent connecté']);`
+                  : ''
+              }
               _paq.push(['trackPageView']);
               _paq.push(['enableLinkTracking']);
               (function () {
