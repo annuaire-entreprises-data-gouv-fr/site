@@ -13,8 +13,7 @@ export default function DataSectionLoader({
   const after5s = useTimeout(5000);
   return (
     <>
-      {/* {after5s && ( */}
-      {true && (
+      {after5s && (
         <HeightTransition animateAppear>
           <FadeIn>
             <Info full>
