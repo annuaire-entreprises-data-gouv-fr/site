@@ -91,7 +91,7 @@ const AgentWall: React.FC<{
         .cta-footer {
           padding: 10px 30px;
           font-size: 0.9rem;
-          background-color: ${constants.colors.lightGrey};
+          background-color: var(--background-alt-grey);
         }
 
         @media only screen and (min-width: 1px) and (max-width: 768px) {
