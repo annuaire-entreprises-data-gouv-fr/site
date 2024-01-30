@@ -133,7 +133,7 @@ const Footer = () => (
                     className="fr-footer__top-link"
                     href="/connexion/agent-public"
                   >
-                    Compte agent public
+                    Espace agent public
                   </a>
                 </li>
               </ul>

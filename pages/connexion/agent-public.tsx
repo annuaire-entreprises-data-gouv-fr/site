@@ -9,11 +9,11 @@ const Login = () => {
   return (
     <>
       <Meta
-        title="Accédez à votre compte agent public sur Annuaire des Entreprises"
+        title="Accédez à votre espace agent public sur Annuaire des Entreprises"
         canonical="https://annuaire-entreprises.data.gouv.fr/connexion/agent-public"
         noIndex={true}
       />
-      <h1>Compte agent public</h1>
+      <h1>Espace agent public</h1>
       <p>
         Ce service est en <Tag color="new">beta test</Tag>.
       </p>

@@ -116,7 +116,7 @@ export const Header: React.FC<IProps> = ({
                               href="/connexion/agent-public"
                               className="fr-link"
                             >
-                              <Icon slug="user">Compte agent public</Icon>
+                              <Icon slug="user">Espace agent public</Icon>
                             </a>
                           ) : null}
                         </li>
