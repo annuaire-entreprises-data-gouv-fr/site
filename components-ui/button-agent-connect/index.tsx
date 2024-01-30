@@ -1,11 +1,13 @@
 import React from 'react';
 import usePathFromRouter from 'hooks/use-path-from-router';
 
-const ButtonAgentConnect: React.FC<{}> = () => {
+const ButtonAgentConnect: React.FC<{ usePathFrom?: boolean }> = ({
+  usePathFrom,
+}) => {
   const pathFrom = usePathFromRouter();
   return (
     <form action="/api/auth/agent-connect/login" method="get">
-      {pathFrom && (
+      {usePathFrom && pathFrom && (
         <input readOnly hidden aria-hidden name="pathFrom" value={pathFrom} />
       )}
       <div className="fr-connect-group">

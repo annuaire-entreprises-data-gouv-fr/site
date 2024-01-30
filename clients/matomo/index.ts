@@ -228,9 +228,12 @@ const getNpsRecords = async () => {
     const date = new Date(record.date);
     const monthLabel = getMonthLabelFromDate(date);
 
-    let userType = record.visitorType;
+    let userType: string = record.visitorType;
     if (userType === 'Non renseigné') {
       userType = 'Autre';
+    }
+    if (userType.startsWith('Agent') || userType.startsWith('Super-agent')) {
+      userType = 'Agent public';
     }
 
     if (!months[monthLabel]) {

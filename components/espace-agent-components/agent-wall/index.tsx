@@ -2,7 +2,6 @@ import ButtonAgentConnect from '#components-ui/button-agent-connect';
 import { ProtectedSection } from '#components/section/protected-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import constants from '#models/constants';
 
 const AgentWall: React.FC<{
   title: string;
@@ -34,7 +33,7 @@ const AgentWall: React.FC<{
                 Disponible pour toutes les administrations, sans création de
                 compte.
               </p>
-              <ButtonAgentConnect />
+              <ButtonAgentConnect usePathFrom />
             </div>
             <div className="cta-footer">{modalFooter}</div>
           </div>

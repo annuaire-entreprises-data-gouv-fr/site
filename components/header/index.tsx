@@ -17,6 +17,7 @@ type IProps = {
   useAdvancedSearch?: boolean;
   useLogo?: boolean;
   useSearchBar?: boolean;
+  useAgentCTA?: boolean;
 };
 
 export const Header: React.FC<IProps> = ({
@@ -26,6 +27,7 @@ export const Header: React.FC<IProps> = ({
   useLogo = false,
   useAdvancedSearch = false,
   useSearchBar = false,
+  useAgentCTA = false,
 }) => {
   const session = useSession();
   const pathFrom = usePathFromRouter();
@@ -82,9 +84,9 @@ export const Header: React.FC<IProps> = ({
                   </div>
                   <div className="fr-header__tools">
                     <div className="fr-header__tools-links">
-                      {isLoggedIn(session) ? (
-                        <ul className="fr-links-group">
-                          <li>
+                      <ul className="fr-links-group">
+                        <li>
+                          {isLoggedIn(session) ? (
                             <div className="fr-link menu-logout">
                               <div>
                                 <Icon slug="user">
@@ -109,9 +111,16 @@ export const Header: React.FC<IProps> = ({
                                 <div>Se déconnecter</div>
                               </a>
                             </div>
-                          </li>
-                        </ul>
-                      ) : null}
+                          ) : useAgentCTA ? (
+                            <a
+                              href="/connexion/agent-public"
+                              className="fr-link"
+                            >
+                              <Icon slug="user">Compte agent public</Icon>
+                            </a>
+                          ) : null}
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>

@@ -9,18 +9,29 @@ const Login = () => {
   return (
     <>
       <Meta
-        title="Accédez à l’espace agent public sur Annuaire des Entreprises"
+        title="Accédez à votre compte agent public sur Annuaire des Entreprises"
         canonical="https://annuaire-entreprises.data.gouv.fr/connexion/agent-public"
         noIndex={true}
       />
-      <h1>Espace agent public</h1>
+      <h1>Compte agent public</h1>
       <p>
         Ce service est en <Tag color="new">beta test</Tag>.
       </p>
       <p>
-        Accédez aux actes, statuts, bilans et données des entreprises
-        non-diffusibles, en cliquant sur le bouton ci-dessous pour vous connecter
-        :
+        Accédez aux entreprises non-diffusibles, aux actes, aux statuts et aux
+        bilans des entreprises, en continuant avec le bouton{' '}
+        <a
+          href="https://agentconnect.gouv.fr/"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
+        >
+          AgentConnect
+        </a>
+        .
+        <p>
+          Disponible pour toutes les administrations, sans création de compte.
+        </p>
       </p>
       <div className="layout-center">
         <ButtonAgentConnect />
