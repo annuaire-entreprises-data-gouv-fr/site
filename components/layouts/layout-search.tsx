@@ -34,6 +34,7 @@ export const LayoutSearch = ({ children, map }: PropsWithChildren<IProps>) => {
         useAdvancedSearch={true}
         useSearchBar={true}
         useLogo={true}
+        useAgentCTA={true}
       />
 
       <main className="fr-container">{children}</main>

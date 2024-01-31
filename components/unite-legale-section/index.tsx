@@ -136,8 +136,8 @@ const UniteLegaleSection: React.FC<{
           ...(isAssociation(uniteLegale)
             ? [EAdministration.DILA]
             : isServicePublic(uniteLegale)
-            ? []
-            : [EAdministration.INPI]),
+              ? []
+              : [EAdministration.INPI]),
           ...(conventionsCollectives.length > 0 ? [EAdministration.MTPEI] : []),
         ]}
       >

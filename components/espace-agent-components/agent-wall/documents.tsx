@@ -13,16 +13,13 @@ const AgentWallDocuments: React.FC<{
       title={title}
       modalFooter={
         <>
-          <h3>Comment accéder à ces documents autrement ?</h3>
-          <p>
-            Les <strong>particuliers, salariés</strong> et{' '}
-            <strong>entrepreneurs</strong>, peuvent consulter cette donnée sur
-            l’onglet document de{' '}
-            <a href={routes.rne.portail.entreprise + uniteLegale.siren}>
-              la page data.inpi.fr de cette entreprise
-            </a>
-            .
-          </p>
+          Les <strong>particuliers, salariés</strong> et{' '}
+          <strong>entrepreneurs</strong>, peuvent consulter cette donnée sur
+          l’onglet document de{' '}
+          <a href={routes.rne.portail.entreprise + uniteLegale.siren}>
+            la page data.inpi.fr de cette entreprise
+          </a>
+          .
         </>
       }
     />

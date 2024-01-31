@@ -1,6 +1,6 @@
 import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
-import { NextPageWithLayout } from './_app';
+import { NextPageWithLayout } from '../_app';
 
 const team = [
   {
@@ -59,6 +59,7 @@ const Equipe: NextPageWithLayout = () => {
       <Meta
         noIndex
         title="Qui est l’équipe derrière l'Annuaire des Entreprises"
+        canonical="https://annuaire-entreprises.data.gouv.fr/a-propos/equipe"
       />
       <TextWrapper>
         <h1>Qui sommes-nous ?</h1>

@@ -4,7 +4,7 @@ import Meta from '#components/meta';
 import { NpsStats } from '#components/stats/nps';
 import { TraficStats } from '#components/stats/trafic';
 import { UsageStats } from '#components/stats/usage';
-import { NextPageWithLayout } from './_app';
+import { NextPageWithLayout } from '../_app';
 
 const StatsPage: NextPageWithLayout<IMatomoStats> = ({
   monthlyNps,
@@ -16,6 +16,7 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
   <>
     <Meta
       title="Statistiques d’utilisation de l’Annuaire des Entreprises"
+      canonical="https://annuaire-entreprises.data.gouv.fr/a-propos/stats"
       noIndex={true}
     />
     <h1>Statistiques d’utilisation</h1>
