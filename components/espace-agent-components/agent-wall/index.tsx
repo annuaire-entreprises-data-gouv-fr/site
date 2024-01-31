@@ -24,20 +24,29 @@ const AgentWall: React.FC<{
           </div>
         </div>
         <div className="blur" tab-index="-1" aria-hidden>
-          <p>Voici une liste de présidents de la République Française :</p>
+          <p>
+            Nous recrutons ! Consultez notre{' '}
+            <a href="https://www.numerique.gouv.fr/rejoignez-nous/">
+              page carrière
+            </a>{' '}
+            ou{' '}
+            <a href="https://beta.gouv.fr/recrutement/">celle de beta.gouv</a>.
+          </p>
           <FullTable
-            head={['Date de dépôt', 'Acte(s) contenu(s)']}
+            head={['Métier', 'Description']}
             body={[
-              ['Charles', 'de Gaulle'],
-              ['Jacques', 'Chirac'],
-              ['Félix', 'Faure'],
-              ['Georges', 'Pompidou'],
-              ['François', 'Mitterrand'],
-              ['René', 'Coty'],
-              ['Valéry', "Giscard d'Estaing"],
-              ['Nicolas', 'Sarkozy'],
-              ['Emmanuel', 'Macron'],
-              ['Adolphe', 'Thiers'],
+              ['Intrapreneurs', 'Le/la responsable du service numérique'],
+              ['Développeur frontend', 'React, Vue, Rails etc.'],
+              ['Développeur backend', 'Typescript, Rails, Python etc.'],
+              ['Data Engineer', 'Airflow, Python'],
+              ['Devops', 'Ansible, Scalingo, OVH'],
+              [
+                'Chargé de déploiement',
+                'SEO, relations avec les administrations',
+              ],
+              ['Designer', 'UX, UI, Product designer'],
+              ['Chargé de communication', 'X, Linkedin, newsletters internes'],
+              ['Chargé des relations usagers', 'Outils de support'],
             ].map(([a, b]) => [a, b])}
           />
         </div>
@@ -47,7 +56,7 @@ const AgentWall: React.FC<{
           position: relative;
         }
         .blur {
-          filter: blur(4px);
+          filter: blur(6px);
           user-select: none;
           bubble-event: none;
           pointer-events: none;
