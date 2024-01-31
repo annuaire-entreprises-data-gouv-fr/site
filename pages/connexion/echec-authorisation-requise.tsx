@@ -12,7 +12,7 @@ const ConnexionFailure: NextPageWithLayout = () => (
       noIndex={true}
     />
     <h1>Vous n’êtes pas autorisé(e) à accéder à cette partie du site</h1>
-    <p>Ce compte est réservé aux agents publics habilités.</p>
+    <p>Cet espace est réservé aux agents publics habilités.</p>
     <p>
       Vous êtes agent(e) du service public et vous souhaiter accéder au
       service&nbsp;:{' '}
