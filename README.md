@@ -10,7 +10,7 @@ Ce site met à disposition des citoyens et des agents les données ouvertes (ope
 
 [![CI (lint, unit-tests, end2end, a11y)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
 [![External API check](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml)
-[![Deploy](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy.yml)
+[![Deploy cluster](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-cluster.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-cluster.yml)
 
 **Disponibilités des APIs utilisées par le site :**
 
