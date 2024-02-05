@@ -17,7 +17,7 @@ faqTargets:
   - agent
 title: Je suis un agent public et je cherche les données présentes dans un extrait KBIS/D1
 seo:
-  description: Retrouvez les données présentes dans un extrait KBOS/D1 sur l’Annuaire des Entreprises
+  description: Retrouvez les données présentes dans un extrait KBIS/D1 sur l’Annuaire des Entreprises
 body: |
   À partir de Novembre 2021, les entreprises immatriculées au RNE n’ont plus à fournir leur extrait KBIS dans leurs démarches administratives, le seul numéro siret suffit à l’administration pour retrouver les données nécessaire.
 
