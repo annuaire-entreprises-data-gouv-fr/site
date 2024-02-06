@@ -11,10 +11,14 @@ export default function Favourites() {
     setShortCuts(recentVisits);
   }, [recentVisits]);
 
+  const plural = shortCuts.length > 1 ? 's' : '';
+
   return (
     shortCuts.length > 0 && (
       <>
-        <small className="layout-center">Pages récemment consultées :</small>
+        <small className="layout-center">
+          Page{plural} récemment consultée{plural} :
+        </small>
         <div className="layout-center">
           {shortCuts.map(({ siren, name, path }) => {
             const fullName = `${formatIntFr(siren)}${name ? ` - ${name}` : ''}`;

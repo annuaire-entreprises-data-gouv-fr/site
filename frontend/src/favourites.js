@@ -29,7 +29,7 @@ function init() {
 
     var visit = getSirenAndName(path);
     var newFavourites = [visit];
-    for (var i = 0; i < Math.min(favourites.length, 3); i++) {
+    for (var i = 0; i < Math.min(favourites.length, 2); i++) {
       if (favourites[i].siren !== visit.siren) {
         newFavourites.push(favourites[i]);
       }
