@@ -25,6 +25,7 @@ export default function Favourites() {
                   href: path || `/entreprise/${siren}`,
                   'aria-label': `Consulter la page de ${fullName}`,
                 }}
+                maxWidth="300px"
               >
                 {fullName}
               </Tag>
