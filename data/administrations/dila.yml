@@ -16,7 +16,7 @@ apiMonitors:
   - apiName: API Annuaire des services publics
     apiSlug: annuaire
     apigouvLink: https://api.gouv.fr/les-api/api-annuaire-administration-services-publics
-    # updownIoId: 8pjk
+    updownIoId: ly69
 dataSources:
   - label: Bulletin officiel des annonces civiles et commerciales (BODACC)
     apiSlug: bodacc
