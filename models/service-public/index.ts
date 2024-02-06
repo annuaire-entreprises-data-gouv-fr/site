@@ -55,7 +55,7 @@ type ILien = {
 type IAffectationPersonne = Array<{
   nom: string;
   fonction: string;
-  lienTexteAffectation: ILien;
+  lienTexteAffectation: ILien | null;
 }>;
 
 export const getServicePublicByUniteLegale = async (

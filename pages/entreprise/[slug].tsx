@@ -1,4 +1,6 @@
 import { GetServerSideProps } from 'next';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import BreakPageForPrint from '#components-ui/print-break-page';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
 import { EspaceAgentSummarySection } from '#components/espace-agent-components/summary-section';
@@ -13,7 +15,10 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
-import { IAPINotRespondingError } from '#models/api-not-responding';
+import {
+  IAPINotRespondingError,
+  isAPINotResponding,
+} from '#models/api-not-responding';
 import { getAssociation } from '#models/association';
 import { IDataAssociation } from '#models/association/types';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
@@ -85,13 +90,22 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
               <EspaceAgentSummarySection uniteLegale={uniteLegale} />
             )}
             {isCollectiviteTerritoriale(uniteLegale) && (
-              <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
+              <>
+                <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
+              </>
             )}
             {servicePublic && (
               <ServicePublicSection
                 uniteLegale={uniteLegale}
                 servicePublic={servicePublic}
               />
+            )}
+            {(isCollectiviteTerritoriale(uniteLegale) ||
+              (servicePublic && !isAPINotResponding(servicePublic))) && (
+              <>
+                <HorizontalSeparator />
+                <BreakPageForPrint />
+              </>
             )}
             {isAssociation(uniteLegale) && (
               <AssociationSection

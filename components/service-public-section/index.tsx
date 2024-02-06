@@ -1,13 +1,9 @@
 import { ReactNode } from 'react';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import NonRenseigne from '#components/non-renseigne';
 import { DataSection } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
-import {
-  IAPINotRespondingError,
-  isAPINotResponding,
-} from '#models/api-not-responding';
+import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/index';
 import { IServicePublic } from '#models/service-public';
 
@@ -30,7 +26,6 @@ export default function ServicePublicSection({
           <TwoColumnTable body={getTableData(servicePublic, uniteLegale)} />
         )}
       </DataSection>
-      {!isAPINotResponding(servicePublic) && <HorizontalSeparator />}
     </>
   );
 }

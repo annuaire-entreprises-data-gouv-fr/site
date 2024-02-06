@@ -105,7 +105,7 @@ const mapToDomainObject = (
 type IAffectationPersonne = IServicePublic['affectationPersonne'];
 function mapToAffectationPersonne(
   affectationRecord: string
-): IAffectationPersonne | null {
+): IAffectationPersonne {
   const affectations = JSON.parse(
     affectationRecord || 'null'
   ) as Array<IAffectationRecord> | null;

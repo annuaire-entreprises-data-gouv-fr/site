@@ -1,4 +1,5 @@
 import { DILA } from '#components/administrations';
+import NonRenseigne from '#components/non-renseigne';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -27,14 +28,18 @@ export default function ResponsableSection({ servicePublic }: IProps) {
             body={servicePublic.affectationPersonne.map((personne) => [
               personne.fonction,
               personne.nom,
-              <a
-                href={personne.lienTexteAffectation.valeur}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${personne.lienTexteAffectation.libelle}, nouvelle fenêtre`}
-              >
-                {personne.lienTexteAffectation.libelle}
-              </a>,
+              personne.lienTexteAffectation ? (
+                <a
+                  href={personne.lienTexteAffectation.valeur}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${personne.lienTexteAffectation.libelle}, nouvelle fenêtre`}
+                >
+                  {personne.lienTexteAffectation.libelle}
+                </a>
+              ) : (
+                <NonRenseigne />
+              ),
             ])}
           />
         )
