@@ -173,7 +173,7 @@ const fetchEtablissementFromRechercheEntreprise = async (
       })
     );
 
-    return APINotRespondingFactory(EAdministration.INSEE, 500);
+    return APINotRespondingFactory(EAdministration.DINUM, 500);
   }
 };
 
