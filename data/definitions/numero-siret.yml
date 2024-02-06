@@ -46,3 +46,13 @@ body: |
   ## **Comment trouver un numéro de SIRET ?**
 
   Le SIRET est une information publique. Toute personne peut consulter ce numéro sur le site internet de [l’Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr). Ceci, au même titre que le SIREN, le N° TVA Intracommunautaire, l’activité principale (NAF/APE), le code NAF/APE, etc.
+
+more:
+  - label: 'SIREN'
+    href: '/definition/siren'
+
+  - label: 'Numéro de TVA intracommunautaire'
+    href: '/definition/numero-tva-intracommunautaire'
+
+  - label: 'Kbis'
+    href: '/definition/kbis'

@@ -8,6 +8,16 @@ cta:
   label: Changer son statut de diffusion
   lien: https://statut-diffusion-sirene.insee.fr
 
+more:
+  - label: 'Entreprise individuelle'
+    href: '/definition/entreprise-individuelle'
+
+  - label: 'Personne physique'
+    href: '/definition/personne-physique'
+
+  - label: 'Personne morale'
+    href: '/definition/personnne-morale'
+
 body: |
   ## **Entreprise non diffusible : définition**
 
