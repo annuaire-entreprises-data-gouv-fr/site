@@ -59,8 +59,19 @@ export const TraficStats: React.FC<{
         </li>
         <li>
           Un <strong>agent connecté</strong> est un agent public qui s’est
-          identifié avec AgentConnect pour avoir accès à des informations
-          additionnelles (actes, statuts, etc.)
+          identifié avec{' '}
+          <a
+            href="https://agentconnect.gouv.fr/"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
+          >
+            AgentConnect
+          </a>{' '}
+          pour{' '}
+          <a href="https://annuaire-entreprises.data.gouv.fr/connexion/agent-public">
+            avoir accès à des informations additionnelles (actes, statuts, etc.)
+          </a>
         </li>
       </ul>
       <p>

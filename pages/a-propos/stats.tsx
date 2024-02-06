@@ -22,7 +22,7 @@ const StatsPage: NextPageWithLayout<IMatomoStats> = ({
     <h1>Statistiques d’utilisation</h1>
     <p>
       Découvrez nos statistiques d’utilisation. Toutes les données recueillies
-      sont <a href="vie-privee">anonymisées</a>.
+      sont <a href="/vie-privee">anonymisées</a>.
     </p>
     <h2>Utilisation du service</h2>
     <TraficStats visits={visits} />
