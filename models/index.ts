@@ -188,6 +188,7 @@ export const createDefaultUniteLegaleComplements =
   };
 
 export interface IEtablissementComplements {
+  estEntrepreneurIndividuel: boolean;
   idFiness: string[];
   idBio: string[];
   idcc: string[];
@@ -199,6 +200,7 @@ export interface IEtablissementComplements {
 export const createDefaultEtablissementComplements =
   (): IEtablissementComplements => {
     return {
+      estEntrepreneurIndividuel: false,
       idFiness: [],
       idBio: [],
       idcc: [],

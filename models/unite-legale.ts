@@ -12,11 +12,7 @@ import {
 } from '#clients/sirene-insee/siret';
 import { createEtablissementsList } from '#models/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
-import {
-  Siren,
-  isEntrepreneurIndividuelFromNatureJuridique,
-  verifySiren,
-} from '#utils/helpers';
+import { Siren, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
 import { IUniteLegale, SirenNotFoundError, createDefaultUniteLegale } from '.';
@@ -183,11 +179,9 @@ class UniteLegaleBuilder {
         return false;
       }
 
-      const isEI = isEntrepreneurIndividuelFromNatureJuridique(
-        uniteLegaleRechercheEntreprise.natureJuridique
-      );
-
-      if (isEI) {
+      if (
+        uniteLegaleRechercheEntreprise.complements.estEntrepreneurIndividuel
+      ) {
         return true;
       }
     }

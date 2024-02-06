@@ -118,8 +118,13 @@ const shouldUseInsee = (
       return false;
     }
 
-    // we always call insee for etablissement as we dont know if they belong to an EI
-    return true;
+    if (
+      etablissementRechercheEntreprise.complements.estEntrepreneurIndividuel
+    ) {
+      return true;
+    }
+
+    return false;
   }
 };
 const fetchEtablissmentFromInsee = async (
