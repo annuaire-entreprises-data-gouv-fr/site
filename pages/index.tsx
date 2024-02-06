@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
 import { HomeH1 } from '#components-ui/logo/home-h1';
+import Favourites from '#components/favourites';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import Meta from '#components/meta';
 import SearchBar from '#components/search-bar';
@@ -41,6 +42,10 @@ const Index: NextPageWithLayout = () => (
         </div>
       </form>
     </div>
+    <div className="favourite-wrapper">
+      <Favourites />
+    </div>
+
     <style jsx>{`
       h2 {
         text-align: center;
@@ -48,9 +53,13 @@ const Index: NextPageWithLayout = () => (
       }
 
       .centered-search {
-        margin-bottom: 32vh;
+        margin-bottom: 15vh;
         margin-top: 10vh;
         max-width: 900px;
+      }
+
+      .favourite-wrapper {
+        height: 19vh;
       }
 
       .search-bar-wrapper {
@@ -69,7 +78,11 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
 
   async () => {
     return {
-      props: {},
+      props: {
+        metadata: {
+          useReact: true,
+        },
+      },
     };
   }
 );
