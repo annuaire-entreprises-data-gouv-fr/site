@@ -6,13 +6,7 @@ function getSirenAndName(path) {
   var match = path.match(/\d{9}/g);
   if (typeof match !== 'undefined') {
     var siren = match[match.length - 1];
-    var name = path
-      .replace(siren, '')
-      .replace('/entreprise/', '')
-      .split('-')
-      .join('')
-      .toUpperCase();
-
+    var name = document.getElementsByTagName('h1')[0].innerText;
     return { siren, name, path };
   }
   return '';

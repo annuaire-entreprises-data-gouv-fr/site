@@ -31,15 +31,15 @@ const Meta: React.FC<IProps> = ({
   return (
     <>
       <NextSeo
-        title={title || SITE_NAME}
-        description={description || SITE_DESCRIPTION}
+        title={title ?? SITE_NAME}
+        description={description ?? SITE_DESCRIPTION}
         canonical={canonical}
         openGraph={{
           ...(canonical ? { url: canonical } : {}),
           locale: 'fr_FR',
           type: 'website',
           title: title,
-          description: description || SITE_DESCRIPTION,
+          description: description ?? SITE_DESCRIPTION,
           images: [
             {
               url: 'https://annuaire-entreprises.data.gouv.fr/images/linkedin.jpg',
@@ -50,7 +50,7 @@ const Meta: React.FC<IProps> = ({
           ],
           site_name: SITE_NAME,
         }}
-        noindex={shouldNotIndex || noIndex}
+        noindex={noIndex ?? shouldNotIndex}
         nofollow={false}
       />
       <Head>
@@ -71,10 +71,10 @@ const Meta: React.FC<IProps> = ({
         <meta name="format-detection" content="telephone=no" />
 
         {/* Schema.org for Google */}
-        <meta itemProp="name" content={title || SITE_NAME} />
+        <meta itemProp="name" content={title ?? SITE_NAME} />
         <meta
           itemProp="description"
-          content={description || SITE_DESCRIPTION}
+          content={description ?? SITE_DESCRIPTION}
         />
       </Head>
     </>

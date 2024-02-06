@@ -3,7 +3,7 @@ import './sentry';
 // load first to lowser CLS
 import './helpers-feedbacks';
 
-import './favourite';
+import './favourites';
 import './fetch-tva';
 import './helpers-copy-paste';
 import './inpi-pdf-download';

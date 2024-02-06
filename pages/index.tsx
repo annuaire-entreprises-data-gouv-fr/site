@@ -59,7 +59,7 @@ const Index: NextPageWithLayout = () => (
       }
 
       .favourite-wrapper {
-        margin-bottom: 10vh;
+        height: 19vh;
       }
 
       .search-bar-wrapper {

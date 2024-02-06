@@ -40,6 +40,7 @@ table.full-table {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .layout-center.vertical-margin {
   margin: 10px auto;
@@ -49,6 +50,7 @@ table.full-table {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .layout-right.vertical-margin {
@@ -59,6 +61,7 @@ table.full-table {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .layout-left .vertical-margin {
