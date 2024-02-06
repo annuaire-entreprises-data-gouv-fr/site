@@ -61,11 +61,11 @@ const FeedBackPage: NextPageWithLayout = () => {
           <a href={constants.links.parcours.contact}>contactez-nous</a>.
         </div>
         <div className="content-container form-container">
-          <form action="/api/feedback/nps" method="post">
+          <form action="/api/feedback/nps" method="post" id="form-feedback-nps">
             <input name="uuid" value={uuid} type="hidden" />
             <fieldset>
               <MultiChoice
-                legend="1 ・ Sur une échelle de 1 à 10, à quel point recommanderiez-vous l’Annuaire des Entreprises ?"
+                legend="Sur une échelle de 1 à 10, à quel point recommanderiez-vous l’Annuaire des Entreprises ?"
                 values={[
                   { value: '1', label: '1' },
                   { value: '2', label: '2' },
@@ -101,7 +101,7 @@ const FeedBackPage: NextPageWithLayout = () => {
                 />
               ) : (
                 <MultiChoice
-                  legend="2 ・ Vous êtes venu(e) sur l’Annuaire des Entreprises en tant que :"
+                  legend="Vous êtes venu(e) sur l’Annuaire des Entreprises en tant que :"
                   values={visitorTypes}
                   name="radio-set-visitor-type"
                   idPrefix="radio-visitor-type"
@@ -111,7 +111,7 @@ const FeedBackPage: NextPageWithLayout = () => {
             </fieldset>
             <fieldset>
               <MultiChoice
-                legend="3 ・ Comment êtes-vous arrivé(e) jusqu’ici ?"
+                legend="Comment êtes-vous arrivé(e) jusqu’ici ?"
                 values={[
                   {
                     value: 'Bouche à oreille',
@@ -143,7 +143,7 @@ const FeedBackPage: NextPageWithLayout = () => {
             </fieldset>
             <fieldset>
               <legend>
-                <h2>4 ・ Avez-vous quelque chose d’autre à nous dire ?</h2>
+                <h2>Avez-vous quelque chose d’autre à nous dire ?</h2>
               </legend>
               <div className="fr-input-group">
                 <label className="fr-label" htmlFor="textarea">
@@ -185,6 +185,18 @@ const FeedBackPage: NextPageWithLayout = () => {
               border: none;
               margin: 40px 0;
               padding: 0;
+            }
+          `}
+        </style>
+        <style jsx global>
+          {`
+            #form-feedback-nps {
+              counter-reset: question;
+            }
+            #form-feedback-nps > fieldset > legend h2::before {
+              counter-increment: question;
+              content: counter(question) ' ・ ';
+              font-weight: bold;
             }
           `}
         </style>
