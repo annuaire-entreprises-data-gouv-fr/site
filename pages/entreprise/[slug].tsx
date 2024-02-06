@@ -15,14 +15,14 @@ import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { getAssociation } from '#models/association';
+import { IDataAssociation } from '#models/association/types';
+import { estNonDiffusible } from '#models/core/statut-diffusion';
 import {
-  IDataAssociation,
   IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
-} from '#models/index';
-import { estNonDiffusible } from '#models/statut-diffusion';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
+} from '#models/core/types';
+import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import {
   extractSirenOrSiretSlugFromUrl,
   shouldNotIndex,

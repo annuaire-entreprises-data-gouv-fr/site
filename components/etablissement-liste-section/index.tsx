@@ -7,14 +7,14 @@ import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
-import { IEtablissement, IUniteLegale } from '#models/index';
 import {
   estNonDiffusible,
   getAdresseEtablissement,
   getDenominationEtablissement,
   getEnseigneEtablissement,
   getNomComplet,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { Siret, formatDate, formatSiret } from '#utils/helpers';
 import { ISession } from '#utils/session';
 

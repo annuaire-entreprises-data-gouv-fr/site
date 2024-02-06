@@ -7,9 +7,9 @@ import Meta from '#components/meta';
 import { DonneesPriveesSection } from '#components/non-diffusible';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { IUniteLegale } from '#models/index';
-import { estDiffusible } from '#models/statut-diffusion';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { estDiffusible } from '#models/core/statut-diffusion';
+import { IUniteLegale } from '#models/core/types';
+import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,

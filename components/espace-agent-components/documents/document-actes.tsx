@@ -5,7 +5,11 @@ import { PrintNever } from '#components-ui/print-visibility';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
+import {
+  IUniteLegale,
+  isAssociation,
+  isServicePublic,
+} from '#models/core/types';
 import { formatDateLong } from '#utils/helpers';
 import useFetchActesRNE from 'hooks/fetch/actes-RNE';
 import AgentWallDocuments from '../agent-wall/documents';

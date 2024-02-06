@@ -6,11 +6,11 @@ import {
   ServicePublicBadge,
 } from '#components-ui/badge/frequent';
 import {
-  isServicePublic,
+  IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
-  IUniteLegale,
-} from '#models/index';
+  isServicePublic,
+} from '#models/core/types';
 
 const UniteLegaleBadge: React.FC<{
   uniteLegale: IUniteLegale;

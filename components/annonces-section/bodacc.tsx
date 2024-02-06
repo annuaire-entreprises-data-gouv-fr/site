@@ -11,7 +11,7 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { IAnnoncesBodacc } from '#models/annonces';
 import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 import { formatDate } from '#utils/helpers';
 import { useFetchBODACC } from 'hooks';
 

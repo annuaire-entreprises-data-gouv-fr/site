@@ -8,13 +8,13 @@ import { PrintNever } from '#components-ui/print-visibility';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import { EtablissementDescription } from '#components/etablissement-description';
-import { IEtablissement, IUniteLegale } from '#models/index';
 import {
   estDiffusible,
   estNonDiffusible,
   getEtablissementName,
   getNomComplet,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { IEtablissement, IUniteLegale } from '#models/core/types';
 import {
   formatIntFr,
   formatSiret,

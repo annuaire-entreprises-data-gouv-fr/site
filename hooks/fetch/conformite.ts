@@ -2,7 +2,7 @@ import routes from '#clients/routes';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IConformiteUniteLegale } from '#models/espace-agent/donnees-restreintes-entreprise';
 import { FetchRessourceException } from '#models/exceptions';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 import { httpGet } from '#utils/network';
 import logErrorInSentry from '#utils/sentry';
 import { useFetchData } from './use-fetch-data';

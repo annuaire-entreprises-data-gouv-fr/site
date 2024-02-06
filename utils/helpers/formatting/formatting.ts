@@ -1,4 +1,4 @@
-import { InternalError } from '#models/index';
+import { InternalError } from '#models/core/types';
 import { libelleFromTypeVoie } from '#utils/helpers/formatting/labels';
 import logErrorInSentry from '#utils/sentry';
 

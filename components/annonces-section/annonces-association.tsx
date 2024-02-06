@@ -8,7 +8,7 @@ import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAssociation } from '#models/index';
+import { IAssociation } from '#models/core/types';
 import { formatDate } from '#utils/helpers';
 import { useFetchJOAFE } from 'hooks';
 

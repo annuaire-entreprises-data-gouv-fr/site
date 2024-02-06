@@ -1,7 +1,10 @@
 import React from 'react';
-import { estActif } from '#models/etat-administratif';
-import { IUniteLegale } from '#models/index';
-import { getAdresseUniteLegale, getNomComplet } from '#models/statut-diffusion';
+import { estActif } from '#models/core/etat-administratif';
+import {
+  getAdresseUniteLegale,
+  getNomComplet,
+} from '#models/core/statut-diffusion';
+import { IUniteLegale } from '#models/core/types';
 import {
   capitalize,
   formatAge,

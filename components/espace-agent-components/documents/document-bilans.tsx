@@ -7,7 +7,11 @@ import { Tag } from '#components-ui/tag';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
+import {
+  IUniteLegale,
+  isAssociation,
+  isServicePublic,
+} from '#models/core/types';
 import { formatDateLong } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import useFetchActesRNE from 'hooks/fetch/actes-RNE';

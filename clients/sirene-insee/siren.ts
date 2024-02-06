@@ -1,11 +1,11 @@
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
-import { createEtablissementsList } from '#models/etablissements-list';
+import { createEtablissementsList } from '#models/core/etablissements-list';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
   IUniteLegale,
-} from '#models/index';
+} from '#models/core/types';
 import {
   agregateTripleFields,
   formatFirstNames,

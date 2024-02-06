@@ -9,7 +9,7 @@ import { FetchRessourceException } from '#models/exceptions';
 import { IdRna, Siren, verifyIdRna } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { IImmatriculation } from '.';
-import { NotAValidIdRnaError } from '..';
+import { NotAValidIdRnaError } from '../core/types';
 
 export interface IImmatriculationJOAFE extends IImmatriculation {
   siren: Siren;

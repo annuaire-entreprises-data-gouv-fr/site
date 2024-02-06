@@ -5,7 +5,7 @@ import { INPI, INSEE, MI } from '#components/administrations';
 import { isAPILoading } from '#models/api-loading';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { IDirigeants } from '#models/dirigeants';
-import { isServicePublic } from '#models/index';
+import { isServicePublic } from '#models/core/types';
 
 const NoDirigeantAssociation = ({ idAssociation = '' }) => (
   <>

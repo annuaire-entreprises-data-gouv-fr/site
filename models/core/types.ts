@@ -2,19 +2,19 @@
 import {
   createEtablissementsList,
   IEtablissementsList,
-} from '#models/etablissements-list';
-import { IETATADMINSTRATIF } from '#models/etat-administratif';
+} from '#models/core/etablissements-list';
+import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
 import { IEtatCivil } from '#models/immatriculation';
 import { IdRna, Siren, Siret } from '#utils/helpers';
-import { EAdministration } from './administrations/EAdministration';
-import { IConventionsCollectives } from './conventions-collectives-list';
+import { EAdministration } from '../administrations/EAdministration';
+import { IConventionsCollectives } from '../conventions-collectives-list';
 import {
   Exception,
   FetchRessourceException,
   IExceptionContext,
-} from './exceptions';
+} from '../exceptions';
+import { ITVAIntracommunautaire } from '../tva';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
-import { ITVAIntracommunautaire } from './tva';
 
 export interface IEtablissement {
   enseigne: string | null;
@@ -215,44 +215,6 @@ export interface IAssociation extends Omit<IUniteLegale, 'association'> {
     idAssociation: IdRna | string;
   };
 }
-
-export interface IDataAssociation {
-  exId: string;
-  nomComplet: string;
-  objet: string;
-  telephone: string;
-  libelleFamille: string;
-  mail: string;
-  siteWeb: string;
-  utilPublique: boolean;
-  regime: string;
-  agrement: {
-    type: string;
-    numero: string;
-    niveau: string;
-    attributeur: string;
-    id: number;
-    dateAttribution: string;
-  }[];
-  formeJuridique: string;
-  datePublicationJournalOfficiel: string;
-  dateCreation: string;
-  dateDissolution: string;
-  eligibiliteCEC: boolean;
-  adresseSiege: string;
-  adresseGestion: string;
-  adresseInconsistency: boolean;
-  bilans: IBilanFinancierAssociation[];
-}
-
-type IBilanFinancierAssociation = {
-  dons: number;
-  subv: number;
-  produits: number;
-  charges: number;
-  resultat: number;
-  year: number;
-};
 
 export const isAssociation = (
   toBeDetermined: IUniteLegale

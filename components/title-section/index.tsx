@@ -10,12 +10,12 @@ import { Tag } from '#components-ui/tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
 import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
-import { IUniteLegale } from '#models/index';
 import {
   estDiffusible,
   estNonDiffusible,
   getNomComplet,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { IUniteLegale } from '#models/core/types';
 import { formatIntFr } from '#utils/helpers';
 import { ISession, isAgent } from '#utils/session';
 import { FICHE, Tabs } from './tabs';

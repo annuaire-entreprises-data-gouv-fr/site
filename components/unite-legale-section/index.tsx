@@ -8,9 +8,16 @@ import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { estActif } from '#models/etat-administratif';
-import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
-import { getAdresseUniteLegale, getNomComplet } from '#models/statut-diffusion';
+import { estActif } from '#models/core/etat-administratif';
+import {
+  getAdresseUniteLegale,
+  getNomComplet,
+} from '#models/core/statut-diffusion';
+import {
+  IUniteLegale,
+  isAssociation,
+  isServicePublic,
+} from '#models/core/types';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';

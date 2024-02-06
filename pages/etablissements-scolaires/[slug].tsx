@@ -4,11 +4,11 @@ import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IAPINotRespondingError } from '#models/api-not-responding';
+import { IUniteLegale } from '#models/core/types';
 import {
   getEtablissementsScolairesFromSlug,
   IEtablissementsScolaires,
 } from '#models/etablissements-scolaires';
-import { IUniteLegale } from '#models/index';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {

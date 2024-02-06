@@ -3,15 +3,15 @@ import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { IConventionsCollectives } from '#models/conventions-collectives-list';
-import { createEtablissementsList } from '#models/etablissements-list';
-import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
-import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
+import { createEtablissementsList } from '#models/core/etablissements-list';
+import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import {
   IEtablissement,
   NotEnoughParamsException,
   createDefaultEtablissement,
   createDefaultUniteLegale,
-} from '#models/index';
+} from '#models/core/types';
+import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import { ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
 import {

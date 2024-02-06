@@ -9,7 +9,7 @@ import {
   isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
-} from '#models/index';
+} from '#models/core/types';
 import { ISession } from '#utils/session';
 
 export enum FICHE {

@@ -1,7 +1,7 @@
 import FadeIn from '#components-ui/animation/fade-in';
 import { isAPILoading } from '#models/api-loading';
 import { isAPINotResponding } from '#models/api-not-responding';
-import { estActif } from '#models/etat-administratif';
+import { estActif } from '#models/core/etat-administratif';
 import { IJustificatifs } from '#models/justificatifs';
 import { formatDateLong } from '#utils/helpers';
 

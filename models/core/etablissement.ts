@@ -6,22 +6,23 @@ import {
 import { clientEtablissementRechercheEntreprise } from '#clients/recherche-entreprise/siret';
 import { InseeClientOptions } from '#clients/sirene-insee';
 import { clientEtablissementInsee } from '#clients/sirene-insee/siret';
+import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { getGeoLoc } from '#models/geo-loc';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { Siret, extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
-import {
-  IEtablissement,
-  IEtablissementWithUniteLegale,
-  createDefaultEtablissement,
-} from '.';
-import { EAdministration } from './administrations/EAdministration';
+import { shouldUseInsee } from '.';
+import { EAdministration } from '../administrations/EAdministration';
 import {
   APINotRespondingFactory,
   IAPINotRespondingError,
   isAPINotResponding,
-} from './api-not-responding';
-import { FetchRessourceException, IExceptionContext } from './exceptions';
+} from '../api-not-responding';
+import { FetchRessourceException, IExceptionContext } from '../exceptions';
+import {
+  IEtablissement,
+  IEtablissementWithUniteLegale,
+  createDefaultEtablissement,
+} from './types';
 
 /*
  * Return an etablissement given an existing siret
@@ -52,7 +53,11 @@ const fetchFromClients = async (
   const etablissementRechercheEntreprise =
     await fetchEtablissementFromRechercheEntreprise(siret, useCache);
 
-  const useInsee = shouldUseInsee(etablissementRechercheEntreprise, isBot);
+  const useInsee = shouldUseInsee(
+    etablissementRechercheEntreprise,
+    isBot,
+    (e: IEtablissement) => e.complements.estEntrepreneurIndividuel
+  );
 
   if (!useInsee) {
     if (isAPINotResponding(etablissementRechercheEntreprise)) {
@@ -97,36 +102,6 @@ const fetchFromClients = async (
   }
 };
 
-const shouldUseInsee = (
-  etablissementRechercheEntreprise: IEtablissement | IAPINotRespondingError,
-  isBot: boolean
-) => {
-  const isInseeEnabled = process.env.INSEE_ENABLED !== 'disabled';
-
-  if (!isInseeEnabled) {
-    return false;
-  }
-
-  const rechercheEntrepriseFailed = isAPINotResponding(
-    etablissementRechercheEntreprise
-  );
-
-  if (rechercheEntrepriseFailed) {
-    return true;
-  } else {
-    if (isBot) {
-      return false;
-    }
-
-    if (
-      etablissementRechercheEntreprise.complements.estEntrepreneurIndividuel
-    ) {
-      return true;
-    }
-
-    return false;
-  }
-};
 const fetchEtablissmentFromInsee = async (
   siret: Siret,
   options: InseeClientOptions

@@ -1,5 +1,5 @@
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IUniteLegale } from '../../../models';
+import { IUniteLegale } from '../../../models/core/types';
 import { LabelWithLinkToSection } from './label-with-link-to-section';
 
 export const checkHasQuality = (uniteLegale: IUniteLegale) =>

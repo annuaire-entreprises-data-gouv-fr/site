@@ -5,8 +5,12 @@ import { FinancesSocieteSection } from '#components/finances-section/societe';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import {
+  IUniteLegale,
+  isAssociation,
+  isServicePublic,
+} from '#models/core/types';
+import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { uniteLegalePageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {

@@ -5,8 +5,8 @@ import DocumentActesSection from '#components/espace-agent-components/documents/
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { IUniteLegale } from '#models/index';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { IUniteLegale } from '#models/core/types';
+import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,

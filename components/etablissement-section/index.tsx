@@ -11,15 +11,15 @@ import { Section } from '#components/section';
 import { CopyPaste, TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { estActif } from '#models/etat-administratif';
-import { IEtablissement, IUniteLegale } from '#models/index';
+import { estActif } from '#models/core/etat-administratif';
 import {
   getAdresseEtablissement,
   getDenominationEtablissement,
   getEnseigneEtablissement,
   getEtablissementName,
   getNomComplet,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { IEtablissement, IUniteLegale } from '#models/core/types';
 import {
   formatDate,
   formatSiret,

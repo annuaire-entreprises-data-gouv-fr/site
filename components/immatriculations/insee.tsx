@@ -7,11 +7,11 @@ import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IEtablissement, IUniteLegale } from '#models/index';
 import {
   estNonDiffusible,
   getAdresseEtablissement,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { IEtablissement, IUniteLegale } from '#models/core/types';
 import { formatSiret } from '#utils/helpers';
 import { ISession } from '#utils/session';
 
