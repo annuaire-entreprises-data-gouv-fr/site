@@ -66,17 +66,16 @@ export const getServicePublicByUniteLegale = async (
       return APINotRespondingFactory(EAdministration.DILA, 404);
     }
 
-    const servicePublicBySiret = await clientAnnuaireServicePublicBySiret(
-      uniteLegale.siege.siret
-    );
-
-    if (servicePublicBySiret) {
-      return servicePublicBySiret;
-    }
-
-    return await clientAnnuaireServicePublicByName(uniteLegale.nomComplet);
+    return await clientAnnuaireServicePublicBySiret(uniteLegale.siege.siret);
   } catch (e: any) {
-    return mapToError(e, uniteLegale.siege.siret, uniteLegale.nomComplet);
+    try {
+      if (!(e instanceof HttpNotFound)) {
+        throw e;
+      }
+      return await clientAnnuaireServicePublicByName(uniteLegale.nomComplet);
+    } catch (e: any) {
+      return mapToError(e, uniteLegale.siege.siret, uniteLegale.nomComplet);
+    }
   }
 };
 

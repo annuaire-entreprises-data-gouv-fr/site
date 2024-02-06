@@ -51,22 +51,19 @@ const clientAnnuaireServicePublicByName = async (
 
   const response = await queryAnnuaireServicePublic(`search(nom, "${name}")`);
 
-  response.records = [
-    response.records.find((record: IServicePublicRecord) => {
-      const nom = record.nom
-        .toUpperCase()
-        // Remove accents
-        .normalize('NFD')
-        .replace(/\p{Diacritic}/gu, '');
-      return nom === name;
-    }),
-  ];
-
-  if (!response.records.length) {
+  const record = response.records.find((record: IServicePublicRecord) => {
+    const nom = record.nom
+      .toUpperCase()
+      // Remove accents
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '');
+    return nom === name;
+  });
+  if (!record) {
     throw new HttpNotFound(`Name = ${name}`);
   }
   return {
-    ...mapToDomainObject(response.records[0]),
+    ...mapToDomainObject(record),
     lastModified: response.lastModified,
   };
 };
@@ -146,9 +143,7 @@ function mapToAdresse(record: IServicePublicRecord) {
   }
   const adresse =
     adresses.find((a) => a.type_adresse === 'Adresse postale') ?? adresses[0];
-  const nom = record.sigle || record.nom;
   return [
-    nom,
     adresse.complement1,
     adresse.complement2,
     adresse.numero_voie,
