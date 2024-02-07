@@ -1,6 +1,5 @@
 title: Numéro SIREN
 
-
 seo:
   title: Numéro SIREN - définition - Annuaire des Entreprises
   description: Le SIREN est un numéro unique qui permet d’identifier chaque entreprise auprès des administrations
@@ -60,4 +59,12 @@ body: |
   * courrier (partenaires commerciaux et autorité fiscale et administrative)
   * déclaration fiscale et administrative
 
+more:
+  - label: 'SIRET'
+    href: '/definition/siret'
 
+  - label: 'Numéro de TVA intracommunautaire'
+    href: '/definition/numero-tva-intracommunautaire'
+
+  - label: 'Kbis'
+    href: '/definition/kbis'

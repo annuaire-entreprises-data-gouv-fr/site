@@ -1,16 +1,24 @@
-title:  Professionels du bio
+# Label « Professionnels du bio »
 
+### DONNÉES STRUCTURÉE A REMPLIR :
+
+## 1. METADONNEES SEO
 
 seo:
-  title: Label “Professionnel du bio” - définition - Annuaire des Entreprises
-  description: Le label “professionnels du bio” concerne les producteurs, distributeurs, revendeurs et importateurs agricoles et alimentaires qui sont certifiés bio. 
+  title: Label « professionnels du bio » - définition - Annuaire des Entreprises
+  description: Le label « professionnels du bio » concerne les producteurs, distributeurs, revendeurs et importateurs agricoles et alimentaires qui sont certifiés bio.
 
 ## 3. CTA BOUTON BLEU en fin de page
 
-cta: 
-  label: Devenir professionnel du bio 
-  lien: https://www.agencebio.org/profil/
+more:
+  - label: "Label RGE (Reconnu garant de l'environnement)"
+    href: '/definition/label-rge-reconnu-garant-de-l-environnement'
 
+  - label: 'Économie sociale et solidaire (ESS)'
+    href: '/definition/economie-sociale-et-solidaire-ess'
+
+  - label: 'Société à mission'
+    href: '/definition/societe-a-mission'
 
 body: |
   ## **Produit bio : définition**
@@ -21,9 +29,9 @@ body: |
 
   D'autres labellisations existent, comme [la marque AB,](https://www.agencebio.org/questions/quelle-difference-entre-le-logo-ab-et-le-logo-europeen-ab/) elles sont cependant facultatives et complémentaires du logo bio européen.
 
-  ## **Label professionnels du bio**
+  ## **Label** « **professionnels du bio** »
 
-  Le label “professionnels du bio” concerne les producteurs, distributeurs, revendeurs et importateurs agricoles et alimentaires qui sont certifiés bio.
+  Le label « professionnels du bio » concerne les producteurs, distributeurs, revendeurs et importateurs agricoles et alimentaires qui sont certifiés bio.
 
   Pour être reconnu professionnel du Bio, il faut en faire la demande et être certifié par [les organismes certificateurs agréés par l’Institut NAtional de l’Origine et de la qualité (INAO)](https://www.inao.gouv.fr/Espace-professionnel-et-outils/Controles-des-signes-d-identification-de-l-origine-et-de-la-qualite-SIQO/Les-organismes-de-controle).
 

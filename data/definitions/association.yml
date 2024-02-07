@@ -53,3 +53,13 @@ body: |
   * conditions de modification des statuts de l’association et de dissolution de l’association
 
   Pour ce travail de rédaction, il est possible de s’appuyer sur cet [exemple de statut d’association](https://www.service-public.fr/particuliers/vosdroits/R2631) du site [Service-public.fr](http://Service-public.fr).
+
+more:
+  - label: 'Société à mission'
+    href: '/definition/societe-a-mission'
+
+  - label: 'SIREN'
+    href: '/definition/siren'
+
+  - label: 'SIRET'
+    href: '/definition/siret'
