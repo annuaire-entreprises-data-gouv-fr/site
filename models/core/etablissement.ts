@@ -9,6 +9,7 @@ import { clientEtablissementInsee } from '#clients/sirene-insee/siret';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { getGeoLoc } from '#models/geo-loc';
 import { Siret, extractSirenFromSiret, verifySiret } from '#utils/helpers';
+import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import logErrorInSentry from '#utils/sentry';
 import { shouldUseInsee } from '.';
 import { EAdministration } from '../administrations/EAdministration';
@@ -18,6 +19,7 @@ import {
   isAPINotResponding,
 } from '../api-not-responding';
 import { FetchRessourceException, IExceptionContext } from '../exceptions';
+import { ISTATUTDIFFUSION } from './statut-diffusion';
 import {
   IEtablissement,
   IEtablissementWithUniteLegale,
@@ -35,7 +37,13 @@ const getEtablissementFromSlug = async (
 
   const isBot = options?.isBot || false;
 
-  const etablissement = fetchFromClients(siret, isBot);
+  const etablissement = await fetchFromClients(siret, isBot);
+
+  const siren = extractSirenFromSiret(siret);
+
+  if (isProtectedSiren(siren)) {
+    etablissement.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
+  }
 
   return etablissement;
 };
