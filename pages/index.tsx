@@ -53,13 +53,13 @@ const Index: NextPageWithLayout = () => (
       }
 
       .centered-search {
-        margin-bottom: 15vh;
-        margin-top: 10vh;
+        margin-bottom: 16vh;
+        margin-top: 11vh;
         max-width: 900px;
       }
 
       .favourite-wrapper {
-        height: 19vh;
+        height: 25vh;
       }
 
       .search-bar-wrapper {

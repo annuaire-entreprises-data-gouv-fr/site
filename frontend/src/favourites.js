@@ -29,15 +29,18 @@ function init() {
 
     var visit = getSirenAndName(path);
     var newFavourites = [visit];
-    for (var i = 0; i < Math.min(favourites.length, 2); i++) {
+    for (var i = 0; i < favourites.length; i++) {
       if (favourites[i].siren !== visit.siren) {
         newFavourites.push(favourites[i]);
       }
     }
 
-    window.localStorage.setItem(localStorageKey, JSON.stringify(newFavourites));
+    window.localStorage.setItem(
+      localStorageKey,
+      JSON.stringify(newFavourites.slice(0, 3))
+    );
   } catch (e) {
-    console.error(e);
+    throw e;
   }
 }
 
