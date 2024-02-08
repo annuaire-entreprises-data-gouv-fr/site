@@ -16,8 +16,8 @@ function init() {
       modal.style.display = 'none';
     }
     try {
-      window.localStorage.setItem(modalId, new Date().toISOString());
-    } catch (e) {}
+      window.localStorage.setItem(modalId, new Date().getTime().toString());
+    } catch {}
   };
 }
 
@@ -25,38 +25,26 @@ function triggerModal(
   modalId,
   triggerCount = 1,
   startsWithString = '/',
-  periodicity = undefined
+  monthPeriodReset = 6
 ) {
   var path = window.location.pathname;
 
-  var hasAlreadyBeenTriggered;
   try {
-    hasAlreadyBeenTriggered = window.localStorage.getItem(modalId);
-  } catch (e) {
-    hasAlreadyBeenTriggered = 'true';
-  }
-  if (hasAlreadyBeenTriggered === 'true') {
-    if (periodicity) {
-      try {
-        window.localStorage.setItem(modalId, new Date().toISOString());
-      } catch (e) {}
-    }
-    return;
-  }
-
-  if (periodicity) {
-    try {
-      var lastTime = window.localStorage.getItem(modalId);
-      if (lastTime) {
-        var lastTimeDate = new Date(lastTime);
-        var currentTime = new Date();
-        var diffInMonths =
-          (currentTime - lastTimeDate) / (1000 * 60 * 60 * 24 * 30);
-        if (diffInMonths < periodicity) {
-          return;
-        }
+    var lastTriggerTimestamp = window.localStorage.getItem(modalId);
+    if (lastTriggerTimestamp) {
+      var diffInMonths =
+        (new Date().getTime() - parseInt(lastTriggerTimestamp, 10)) /
+        (1000 * 60 * 60 * 24 * 30);
+      if (diffInMonths > monthPeriodReset) {
+        // after X month, reset
+        window.localStorage.removeItem(modalId);
+      } else {
+        return;
       }
-    } catch (e) {}
+    }
+  } catch (e) {
+    // no access to local storage. Probably for privacy reason. We choose not to show modal rather than showing it on every visit
+    return;
   }
 
   if (path.indexOf(startsWithString) === -1) {
@@ -76,7 +64,5 @@ function triggerModal(
 
 if (typeof window !== 'undefined') {
   init();
-  triggerModal('nps-modal', 2, '/', 6);
+  triggerModal('nps-modal-2', 2, '/', 6);
 }
-
-// triggerModal('we-need-you-modal', 0, '/');
