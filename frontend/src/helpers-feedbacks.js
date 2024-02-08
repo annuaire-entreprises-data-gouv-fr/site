@@ -16,21 +16,34 @@ function init() {
       modal.style.display = 'none';
     }
     try {
-      window.localStorage.setItem(modalId, true);
-    } catch (e) {}
+      window.localStorage.setItem(modalId, new Date().getTime().toString());
+    } catch {}
   };
 }
 
-function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
+function triggerModal(
+  modalId,
+  triggerCount = 1,
+  startsWithString = '/',
+  monthPeriodReset = 6
+) {
   var path = window.location.pathname;
 
-  var hasAlreadyBeenTriggered;
   try {
-    hasAlreadyBeenTriggered = window.localStorage.getItem(modalId) || false;
+    var lastTriggerTimestamp = window.localStorage.getItem(modalId);
+    if (lastTriggerTimestamp) {
+      var diffInMonths =
+        (new Date().getTime() - parseInt(lastTriggerTimestamp, 10)) /
+        (1000 * 60 * 60 * 24 * 30);
+      if (diffInMonths > monthPeriodReset) {
+        // after X month, reset
+        window.localStorage.removeItem(modalId);
+      } else {
+        return;
+      }
+    }
   } catch (e) {
-    hasAlreadyBeenTriggered = true;
-  }
-  if (hasAlreadyBeenTriggered) {
+    // no access to local storage. Probably for privacy reason. We choose not to show modal rather than showing it on every visit
     return;
   }
 
@@ -51,7 +64,5 @@ function triggerModal(modalId, triggerCount = 1, startsWithString = '/') {
 
 if (typeof window !== 'undefined') {
   init();
-  triggerModal('nps-modal', 2, '/');
+  triggerModal('nps-modal-2', 2, '/', 6);
 }
-
-// triggerModal('we-need-you-modal', 0, '/');
