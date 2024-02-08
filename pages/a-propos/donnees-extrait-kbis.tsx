@@ -1,14 +1,14 @@
 import TextWrapper from '#components-ui/text-wrapper';
 import { INPI, INSEE } from '#components/administrations';
 import Meta from '#components/meta';
-import { NextPageWithLayout } from './_app';
+import { NextPageWithLayout } from '../_app';
 
 const ExtraitKbis: NextPageWithLayout = () => {
   return (
     <>
       <Meta
         title="Comment retrouver les données contenues dans un extrait KBIS ou D1 ?"
-        canonical="https://annuaire-entreprises.data.gouv.fr/donnees-extrait-kbis"
+        canonical="https://annuaire-entreprises.data.gouv.fr/a-propos/donnees-extrait-kbis"
       />
       <TextWrapper>
         <h1>

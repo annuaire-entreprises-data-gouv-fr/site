@@ -118,7 +118,8 @@ const UniteLegaleSection: React.FC<{
           </li>
         ) : isServicePublic(uniteLegale) ? null : (
           <li>
-            Extrait RNE : <ExtraitRNELink uniteLegale={uniteLegale} />
+            Extrait RNE (équivalent KBIS/D1) :{' '}
+            <ExtraitRNELink uniteLegale={uniteLegale} />
           </li>
         )}
         <li>

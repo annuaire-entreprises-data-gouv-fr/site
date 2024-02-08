@@ -35,3 +35,13 @@ body: |
   Si le code APE ne correspond pas ou n'est plus en adéquation avec l'activité principale l’entreprise, vous pouvez demander sa modification en vous connectant au [Guichet unique des formalités des entreprises](https://procedures.inpi.fr/?/).
 
   S’il y a une anomalie entre le code APE attribué et l’activité principale de l’entreprise, il faut remplir [le formulaire de demande de modification de l'INSEE](https://www.insee.fr/fr/information/6435934) prévu à cet effet.
+
+more:
+  - label: 'SIREN'
+    href: '/definition/siren'
+
+  - label: 'SIRET'
+    href: '/definition/siret'
+
+  - label: 'Kbis'
+    href: '/definition/kbis'

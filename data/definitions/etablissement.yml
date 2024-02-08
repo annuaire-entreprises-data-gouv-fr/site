@@ -47,3 +47,13 @@ body: |
   ## **Identifier un établissement grâce à l'Annuaire des Entreprises**
 
   L'Annuaire des Entreprises référence les pages établissements de façon distincte de leur unité légale, tout en mentionnant l'unité légale de référence et l'arborescence entre les établissements, notamment s'il s'agit d'un établissement secondaire ou s'il s'agit de l'unité légale de référence.
+
+more:
+  - label: 'SIRET'
+    href: '/definition/siret'
+
+  - label: 'SIREN'
+    href: '/definition/siren'
+
+  - label: 'Kbis'
+    href: '/definition/kbis'

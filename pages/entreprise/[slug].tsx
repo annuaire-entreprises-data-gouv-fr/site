@@ -4,7 +4,6 @@ import CollectiviteTerritorialeSection from '#components/collectivite-territoria
 import { EspaceAgentSummarySection } from '#components/espace-agent-components/summary-section';
 import EtablissementListeSection from '#components/etablissement-liste-section';
 import EtablissementSection from '#components/etablissement-section';
-import MatomoEvent from '#components/matomo-event';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
 import Meta from '#components/meta';
 import { NonDiffusibleSection } from '#components/non-diffusible';
@@ -34,7 +33,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { isAgent, isSuperAgent } from '#utils/session';
+import { isSuperAgent } from '#utils/session';
 import useSession from 'hooks/use-session';
 import { NextPageWithLayout } from 'pages/_app';
 
@@ -61,14 +60,6 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
         }`}
       />
       {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
-
-      {isAgent(session) && (
-        <MatomoEvent
-          category="espace-agent"
-          action={`${isSuperAgent(session) ? 'super-agent' : 'agent'}`}
-          name={`visit:${uniteLegale.siren}`}
-        />
-      )}
 
       <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
       <div className="content-container">

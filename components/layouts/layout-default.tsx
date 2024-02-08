@@ -23,6 +23,7 @@ export const LayoutDefault = ({
         useSearchBar={searchBar}
         useAdvancedSearch={false}
         useMap={false}
+        useAgentCTA={true}
       />
       <main className="fr-container">{children}</main>
       <SocialNetworks />

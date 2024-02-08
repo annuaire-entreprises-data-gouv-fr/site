@@ -122,7 +122,7 @@ const extractDetails = (annonce: IBodaccRecords): string => {
 
     if ((annonce as IBodaccC).depot) {
       const depot = JSON.parse((annonce as IBodaccC).depot || '{}');
-      return `${depot.typeDepot} de l’exercice clôt le ${depot.dateCloture}`;
+      return `${depot.typeDepot} de l’exercice clos le ${depot.dateCloture}`;
     }
     if ((annonce as IBodaccB).radiationaurcs) {
       const radiationaurcs = JSON.parse(

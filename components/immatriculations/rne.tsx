@@ -129,7 +129,7 @@ const ImmatriculationRNE: React.FC<IProps> = ({
                 <br />
                 <p>
                   Cette structure possède également{' '}
-                  {immatriculation.observations.length} observation au{' '}
+                  {immatriculation.observations.length} observation(s) au{' '}
                   <strong>RNE</strong>
                   &nbsp;:
                 </p>

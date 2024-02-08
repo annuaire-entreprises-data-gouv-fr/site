@@ -16,7 +16,6 @@ export const NpsStats: React.FC<{
       (sum, { values }) => sum + (values['all'][statsType] || 0),
       0
     ) / 12;
-
   const npsMaxRange = statsType === 'avg' ? 10 : 100;
   const npsPrefixLabel = statsType === 'avg' ? 'Note moyenne' : 'NPS';
 

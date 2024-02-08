@@ -192,7 +192,7 @@ const EtablissementSection: React.FC<IProps> = ({
                 etablissement,
                 uniteLegale,
                 session
-              )} à ${etablissement.commune}`
+              )}${etablissement.commune ? `à ${etablissement.commune}` : ''}`
         }
         id="etablissement"
         sources={[

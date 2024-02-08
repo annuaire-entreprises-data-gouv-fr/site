@@ -29,4 +29,12 @@ body: |
 
   ***A noter*** *: le NIC ne contient aucune information au sujet de l’activité ou de la localisation d’un établissement.*
 
+more:
+  - label: 'Établissement'
+    href: '/definition/etablissement'
 
+  - label: 'SIRET'
+    href: '/definition/siret'
+
+  - label: 'SIREN'
+    href: '/definition/siren'

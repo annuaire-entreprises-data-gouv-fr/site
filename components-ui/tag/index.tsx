@@ -9,6 +9,7 @@ interface ITagProps {
     href: string;
     'aria-label': string;
   };
+  maxWidth?: string;
 }
 
 export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
@@ -17,6 +18,7 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   size = 'medium',
   color = 'default',
   link,
+  maxWidth,
 }) => {
   const ContainerComponent = (
     props: PropsWithChildren<{ className?: string; id?: string }>
@@ -41,7 +43,7 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
           display: inline-block;
           vertical-align: middle;
           margin: 3px 5px;
-          max-width: 80vw;
+          max-width: ${maxWidth || '80vw'};
           overflow: hidden;
           text-overflow: ellipsis;
         }

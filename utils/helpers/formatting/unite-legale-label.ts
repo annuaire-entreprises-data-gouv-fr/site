@@ -74,12 +74,17 @@ export const uniteLegalePageTitle = (
   uniteLegale: IUniteLegale,
   session: ISession | null
 ) => {
+  const city =
+    uniteLegale.siege.codePostal || uniteLegale.siege.commune
+      ? ` à ${uniteLegale.siege.codePostal} ${uniteLegale.siege.commune}`
+      : '';
+
   return `${capitalize(uniteLegaleLabel(uniteLegale))} ${getNomComplet(
     uniteLegale,
     session
-  )} à ${uniteLegale.siege.codePostal} ${
-    uniteLegale.siege.commune
-  } - SIREN ${formatIntFr(uniteLegale.siren)} | Annuaire des Entreprises`;
+  )}${city} - SIREN ${formatIntFr(
+    uniteLegale.siren
+  )} | Annuaire des Entreprises`;
 };
 
 export const uniteLegalePageDescription = (
@@ -113,9 +118,16 @@ export const etablissementPageTitle = (
   uniteLegale: IUniteLegale,
   session: ISession | null
 ) => {
-  return `${getEtablissementName(etablissement, uniteLegale, session)} à ${
-    etablissement.codePostal
-  } ${etablissement.commune} - SIRET ${formatSiret(
+  const city =
+    etablissement.codePostal || etablissement.commune
+      ? ` à ${etablissement.codePostal} ${etablissement.commune}`
+      : '';
+
+  return `${getEtablissementName(
+    etablissement,
+    uniteLegale,
+    session
+  )}${city} - SIRET ${formatSiret(
     etablissement.siret
   )} | Annuaire des Entreprises`;
 };

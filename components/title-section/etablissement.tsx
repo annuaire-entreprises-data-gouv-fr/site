@@ -103,7 +103,12 @@ const TitleEtablissementWithDenomination: React.FC<{
 
     <h1>
       Établissement {getEtablissementName(etablissement, uniteLegale, session)}{' '}
-      à <a href={`/carte/${etablissement.siret}`}>{etablissement.commune}</a>
+      {etablissement.commune && (
+        <>
+          à{' '}
+          <a href={`/carte/${etablissement.siret}`}>{etablissement.commune}</a>
+        </>
+      )}
     </h1>
 
     <div className="etablissement-sub-title">

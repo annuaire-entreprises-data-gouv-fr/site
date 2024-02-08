@@ -4,11 +4,20 @@ seo:
   title: Certification Qualiopi - définition - Annuaire des Entreprises
   description: Le label Qualiopi est une certification permettant d'attester de la qualité d'un organisme de formation. Cette certification est obligatoire pour obtenir des financements publics.
 
+## 3. CTA BOUTON BLEU en fin de page
 cta:
-  - label: En savoir plus sur Qualiopi
-    lien: https://travail-emploi.gouv.fr/formation-professionnelle/acteurs-cadre-et-qualite-de-la-formation-professionnelle/article/qualiopi-marque-de-certification-qualite-des-prestataires-de-formation
+  label: ⇢ En savoir plus sur Qualiopi
+  lien: https://travail-emploi.gouv.fr/formation-professionnelle/acteurs-cadre-et-qualite-de-la-formation-professionnelle/article/qualiopi-marque-de-certification-qualite-des-prestataires-de-formation
+
+more:
   - label: Qualiopi dans la loi
-    lien: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000037367660/
+    href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000037367660/
+  - label: 'SIREN'
+    href: '/definition/siren'
+  - label: 'SIRET'
+    href: '/definition/siret'
+  - label: 'Kbis'
+    href: '/definition/kbis'
 
 body: |
   ## **Certification Qualiopi : définition**

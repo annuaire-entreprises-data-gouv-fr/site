@@ -8,8 +8,8 @@ export type IMatomoStats = {
   visits: {
     label: string;
     number: number;
-    visitReturning: number;
-    visitUnknown: number;
+    agentReturning: number;
+    agentUnknown: number;
     visitorReturning: number;
     visitorUnknown: number;
   }[];
@@ -72,6 +72,7 @@ type IMatomoEventStat = { label: string; nb_events: number };
  */
 const computeStats = (
   matomoMonthlyStats: IMatomoMonthlyStat[],
+  matomoAgentMonthlyStats: IMatomoMonthlyStat[],
   matomoCopyPasteEventStats: IMatomoEventStat[],
   matomoEventsCategory: IMatomoEventStat[][]
 ) => {
@@ -81,19 +82,22 @@ const computeStats = (
 
   lastTwelveMonths().forEach(({ label, number }, index) => {
     const {
-      nb_visits_returning,
-      nb_visits_new,
-      nb_uniq_visitors_returning,
-      nb_uniq_visitors_new,
+      nb_uniq_visitors_returning: visitorReturning,
+      nb_uniq_visitors_new: visitorUnknown,
     } = matomoMonthlyStats[index];
+
+    const {
+      nb_uniq_visitors_returning: agentReturning,
+      nb_uniq_visitors_new: agentUnknown,
+    } = matomoAgentMonthlyStats[index];
 
     visits.push({
       number,
       label,
-      visitReturning: nb_visits_returning,
-      visitUnknown: nb_visits_new,
-      visitorReturning: nb_uniq_visitors_returning,
-      visitorUnknown: nb_uniq_visitors_new,
+      agentReturning,
+      agentUnknown,
+      visitorReturning,
+      visitorUnknown,
     });
 
     redirectedSiren.push({
@@ -143,11 +147,15 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
   try {
     const [
       matomoMonthlyStats,
+      matomoAgentMonthlyStats,
       matomoCopyPasteEventStats,
       matomoEventsCategory,
       npsRecords,
     ] = await Promise.all([
       httpGet<IMatomoMonthlyStat[]>(createPageViewUrl(), {
+        timeout: constants.timeout.XXL,
+      }),
+      httpGet<IMatomoMonthlyStat[]>(createAgentPageViewUrl(), {
         timeout: constants.timeout.XXL,
       }),
       httpGet<IMatomoEventStat[]>(createCopyPasteEventUrl(), {
@@ -158,10 +166,10 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       }),
       getNpsRecords(),
     ]);
-
     return {
       ...computeStats(
         matomoMonthlyStats,
+        matomoAgentMonthlyStats,
         matomoCopyPasteEventStats,
         matomoEventsCategory
       ),
@@ -191,6 +199,13 @@ const createPageViewUrl = () => {
     baseUrl += encodeURIComponent(subRequest);
   });
 
+  return baseUrl;
+};
+
+const createAgentPageViewUrl = () => {
+  const agentConnecté = encodeURIComponent('Agent connecté');
+  const segment = encodeURIComponent('dimension1==' + agentConnecté);
+  const baseUrl = createPageViewUrl() + '&segment=' + segment;
   return baseUrl;
 };
 
@@ -228,9 +243,12 @@ const getNpsRecords = async () => {
     const date = new Date(record.date);
     const monthLabel = getMonthLabelFromDate(date);
 
-    let userType = record.visitorType;
+    let userType: string = record.visitorType;
     if (userType === 'Non renseigné') {
       userType = 'Autre';
+    }
+    if (userType.startsWith('Agent') || userType.startsWith('Super-agent')) {
+      userType = 'Agent public';
     }
 
     if (!months[monthLabel]) {

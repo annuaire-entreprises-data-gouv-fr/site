@@ -53,3 +53,13 @@ body: |
   Les tarifs varient en fonction de la forme juridique de l’entreprise et du département dans lequel l’annonce est publiée. Le coût d’une annonce légale peut être établi sur la base d’un forfait ou d’après le nombre de caractères (espace inclus) utilisés pour la rédaction.
 
   ***A noter*** *: la liste des tarifs des annonces légales est disponible sur [le site web du ministère de l’Economie et des Finances](https://www.economie.gouv.fr/entreprises/publier-annonce-legale)*
+
+more:
+  - label: 'SIREN'
+    href: '/definition/siren'
+
+  - label: 'SIRET'
+    href: '/definition/siret'
+
+  - label: 'Kbis'
+    href: '/definition/kbis'

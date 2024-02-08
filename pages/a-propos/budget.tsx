@@ -2,14 +2,14 @@ import Info from '#components-ui/alerts/info';
 import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
 import { FullTable } from '#components/table/full';
-import { NextPageWithLayout } from './_app';
+import { NextPageWithLayout } from '../_app';
 
 const Budget: NextPageWithLayout = () => (
   <div>
     <Meta
       noIndex
       title="Politique de confidentialité"
-      canonical="https://annuaire-entreprises.data.gouv.fr/budget"
+      canonical="https://annuaire-entreprises.data.gouv.fr/a-propos/budget"
     />
     <TextWrapper>
       <h1>Budget</h1>

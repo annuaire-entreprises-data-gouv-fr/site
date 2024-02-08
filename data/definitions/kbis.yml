@@ -51,3 +51,13 @@ body: |
   La gratuité de l'accès à l’extrait Kbis est conditionnée par le demandeur. En effet, tout chef d’entreprise peut se rendre sur le site [Monideum](https://www.monidenum.fr/) et créer son espace personnel pour télécharger gratuitement le Kbis au format numérique. Cette plate-forme est sous l’autorité des greffes des tribunaux de commerce.
 
   Une personne extérieure à l’entreprise peut également effectuer une demande de Kbis. Cela est possible en ligne sur [Infogreffe.fr](https://www.infogreffe.fr/) (exceptées pour les sociétés dont le siège social est basé en Alsace, en Moselle ou en Guyane). Cette démarche est payante. Il est également possible de solliciter le greffe du tribunal de commerce dont relève l’entreprise.
+
+more:
+  - label: 'Personne morale'
+    href: '/definition/personne-morale'
+
+  - label: 'SIRET'
+    href: '/definition/siret'
+
+  - label: 'SIREN'
+    href: '/definition/siren'

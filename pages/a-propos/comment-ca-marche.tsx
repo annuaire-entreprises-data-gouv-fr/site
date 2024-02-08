@@ -1,7 +1,7 @@
 import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
 import { administrationsMetaData } from '#models/administrations';
-import { NextPageWithLayout } from './_app';
+import { NextPageWithLayout } from '../_app';
 
 const About: NextPageWithLayout = () => {
   const allAdministrations = Object.values(administrationsMetaData);
@@ -9,7 +9,7 @@ const About: NextPageWithLayout = () => {
     <>
       <Meta
         title="Comment ça marche ?"
-        canonical="https://annuaire-entreprises.data.gouv.fr/comment-ca-marche"
+        canonical="https://annuaire-entreprises.data.gouv.fr/a-propos/comment-ca-marche"
       />
       <TextWrapper>
         <h1>À propos de L’Annuaire des Entreprises</h1>
