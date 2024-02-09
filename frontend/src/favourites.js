@@ -40,7 +40,7 @@ function init() {
       JSON.stringify(newFavourites.slice(0, 3))
     );
   } catch (e) {
-    throw e;
+    // likely no access to local storage
   }
 }
 
