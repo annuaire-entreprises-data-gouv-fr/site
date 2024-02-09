@@ -10,7 +10,7 @@ import {
   isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
-} from '#models/index';
+} from '#models/core/types';
 
 const UniteLegaleBadge: React.FC<{
   uniteLegale: IUniteLegale;

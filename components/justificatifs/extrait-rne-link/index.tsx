@@ -1,9 +1,9 @@
 import React from 'react';
-import { IUniteLegale } from '#models/index';
 import {
   estDiffusible,
   nonDiffusibleDataFormatter,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { IUniteLegale } from '#models/core/types';
 import { isAgent } from '#utils/session';
 import useSession from 'hooks/use-session';
 

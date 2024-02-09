@@ -10,25 +10,25 @@ import {
   clientAllEtablissementsInsee,
   clientSiegeInsee,
 } from '#clients/sirene-insee/siret';
-import { createEtablissementsList } from '#models/etablissements-list';
-import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
-import {
-  Siren,
-  isEntrepreneurIndividuelFromNatureJuridique,
-  verifySiren,
-} from '#utils/helpers';
+import { createEtablissementsList } from '#models/core/etablissements-list';
+import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
+import { Siren, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
-import { IUniteLegale, SirenNotFoundError, createDefaultUniteLegale } from '.';
-import { EAdministration } from './administrations/EAdministration';
+import { shouldUseInsee } from '.';
+import { EAdministration } from '../administrations/EAdministration';
 import {
   APINotRespondingFactory,
-  IAPINotRespondingError,
   isAPINotResponding,
-} from './api-not-responding';
-import { FetchRessourceException } from './exceptions';
+} from '../api-not-responding';
+import { FetchRessourceException } from '../exceptions';
+import { getTvaUniteLegale } from '../tva';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
-import { getTvaUniteLegale } from './tva';
+import {
+  IUniteLegale,
+  SirenNotFoundError,
+  createDefaultUniteLegale,
+} from './types';
 
 /**
  * PUBLIC METHODS
@@ -103,9 +103,10 @@ class UniteLegaleBuilder {
         useCache
       );
 
-    const useInsee = this.shouldUseInsee(
+    const useInsee = shouldUseInsee(
       uniteLegaleRechercheEntreprise,
-      this._isBot
+      this._isBot,
+      (ul: IUniteLegale) => ul.complements.estEntrepreneurIndividuel
     );
 
     if (!useInsee) {
@@ -161,37 +162,6 @@ class UniteLegaleBuilder {
         };
       }
     }
-  };
-
-  shouldUseInsee = (
-    uniteLegaleRechercheEntreprise: IUniteLegale | IAPINotRespondingError,
-    isBot: boolean
-  ) => {
-    const isInseeEnabled = process.env.INSEE_ENABLED !== 'disabled';
-    if (!isInseeEnabled) {
-      return false;
-    }
-
-    const rechercheEntrepriseFailed = isAPINotResponding(
-      uniteLegaleRechercheEntreprise
-    );
-
-    if (rechercheEntrepriseFailed) {
-      return true;
-    } else {
-      if (isBot) {
-        return false;
-      }
-
-      const isEI = isEntrepreneurIndividuelFromNatureJuridique(
-        uniteLegaleRechercheEntreprise.natureJuridique
-      );
-
-      if (isEI) {
-        return true;
-      }
-    }
-    return false;
   };
 }
 

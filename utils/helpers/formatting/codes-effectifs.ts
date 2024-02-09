@@ -1,4 +1,4 @@
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 
 export const codesEffectifsOptions = [
   {
@@ -78,7 +78,7 @@ export const libelleEffectifForDescription = (uniteLegale: IUniteLegale) => {
     !anneeCategorieEntreprise && !categorieEntreprise && !!anneeTrancheEffectif;
 
   const yearPrefix = `${
-    shouldAddYear ? ` En ${anneeTrancheEffectif}, ` : ' E'
+    shouldAddYear ? ` En ${anneeTrancheEffectif}, e` : ' E'
   }`;
   if (trancheEffectif === 'NN' || !libelle) {
     // means characterEmployeurUniteLegale ='N'

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { NotASirenError, NotLuhnValidSirenError } from '#models/core/types';
 import { FetchRessourceException } from '#models/exceptions';
 import getImmatriculationRNE from '#models/immatriculation/rne';
-import { NotASirenError, NotLuhnValidSirenError } from '#models/index';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { withAPM } from '#utils/sentry/tracing';

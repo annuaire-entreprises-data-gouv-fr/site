@@ -1,12 +1,12 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
-import { estActif, IETATADMINSTRATIF } from '#models/etat-administratif';
-import { IEtablissement, IUniteLegale } from '#models/index';
+import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import {
   estNonDiffusible,
   getAdresseEtablissement,
   getNomComplet,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { IEtablissement, IUniteLegale } from '#models/core/types';
 import {
   formatAge,
   formatDateLong,

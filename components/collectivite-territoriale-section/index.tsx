@@ -5,7 +5,7 @@ import BreakPageForPrint from '#components-ui/print-break-page';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { ICollectiviteTerritoriale } from '#models/index';
+import { ICollectiviteTerritoriale } from '#models/core/types';
 
 const CollectiviteTerritorialeSection: React.FC<{
   uniteLegale: ICollectiviteTerritoriale;

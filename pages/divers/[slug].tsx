@@ -8,8 +8,8 @@ import {
   ICCWithMetadata,
   getCCMetadata,
 } from '#models/conventions-collectives-list';
-import { IUniteLegale } from '#models/index';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { IUniteLegale } from '#models/core/types';
+import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,

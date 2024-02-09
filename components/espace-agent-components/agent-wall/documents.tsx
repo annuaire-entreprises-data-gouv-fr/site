@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 import AgentWall from '.';
 
 const AgentWallDocuments: React.FC<{

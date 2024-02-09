@@ -13,7 +13,7 @@ import {
   IBioCertification,
   IEtablissementsBio,
 } from '#models/certifications/bio';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 import { formatDate, formatSiret } from '#utils/helpers';
 
 export const CertificationsBioSection: React.FC<{

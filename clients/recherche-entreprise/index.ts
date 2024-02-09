@@ -3,15 +3,15 @@ import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { IConventionsCollectives } from '#models/conventions-collectives-list';
-import { createEtablissementsList } from '#models/etablissements-list';
-import { IETATADMINSTRATIF, estActif } from '#models/etat-administratif';
-import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
+import { createEtablissementsList } from '#models/core/etablissements-list';
+import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import {
   IEtablissement,
   NotEnoughParamsException,
   createDefaultEtablissement,
   createDefaultUniteLegale,
-} from '#models/index';
+} from '#models/core/types';
+import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import { ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
 import {
@@ -167,10 +167,14 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       }
     : { codeColter: null };
 
-  const etablissementSiege = mapToEtablissement(siege);
+  const etablissementSiege = mapToEtablissement(
+    siege,
+    est_entrepreneur_individuel
+  );
 
   const matchingEtablissements = matching_etablissements.map(
-    (matchingEtablissement) => mapToEtablissement(matchingEtablissement)
+    (matchingEtablissement) =>
+      mapToEtablissement(matchingEtablissement, est_entrepreneur_individuel)
   );
 
   // case no open etablisssment
@@ -187,7 +191,9 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
 
   const etablissementsList = createEtablissementsList(
     etablissements.length > 0
-      ? etablissements.map(mapToEtablissement)
+      ? etablissements.map((e) =>
+          mapToEtablissement(e, est_entrepreneur_individuel)
+        )
       : [etablissementSiege],
     pageEtablissements,
     result.nombre_etablissements
@@ -303,7 +309,8 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
 };
 
 const mapToEtablissement = (
-  etablissement: ISiege | IMatchingEtablissement
+  etablissement: ISiege | IMatchingEtablissement,
+  estEntrepreneurIndividuel: boolean
 ): IEtablissement => {
   const {
     siret,
@@ -369,6 +376,7 @@ const mapToEtablissement = (
     dateCreation: parseDateCreationInsee(date_creation),
     dateDebutActivite: date_debut_activite,
     complements: {
+      estEntrepreneurIndividuel,
       idFiness: liste_finess || [],
       idBio: liste_id_bio || [],
       idcc: liste_idcc || [],

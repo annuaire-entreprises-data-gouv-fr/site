@@ -5,7 +5,7 @@ import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
 import { useFetchFinancesSociete } from 'hooks';
 

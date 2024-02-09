@@ -1,7 +1,7 @@
 import { clientDCA } from '#clients/open-data-soft/clients/journal-officiel-associations';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
-import { IUniteLegale as IAssociation } from '#models/index';
+import { IUniteLegale as IAssociation } from '#models/core/types';
 import { IdRna } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { useFetchData } from './use-fetch-data';

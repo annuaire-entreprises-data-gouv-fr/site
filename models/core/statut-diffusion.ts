@@ -1,5 +1,5 @@
 import { ISession, isAgent } from '#utils/session';
-import { IEtablissement, IUniteLegale } from '.';
+import { IEtablissement, IUniteLegale } from './types';
 
 export enum ISTATUTDIFFUSION {
   PROTECTED = 'partiellement diffusible',

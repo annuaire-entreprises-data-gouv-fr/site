@@ -15,7 +15,7 @@ import {
   IUniteLegale,
   IsLikelyASirenOrSiretException,
   NotEnoughParamsException,
-} from '.';
+} from './core/types';
 
 export interface ISearchResult extends IUniteLegale {
   nombreEtablissements: number;

@@ -6,7 +6,7 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IOrganismeFormation } from '#models/certifications/organismes-de-formation';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 
 type OrganismeDeFormationSectionProps = {
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;

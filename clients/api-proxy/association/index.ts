@@ -1,7 +1,7 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import { IDataAssociation } from '#models/association/types';
 import constants from '#models/constants';
-import { IDataAssociation } from '#models/index';
 import { IdRna, Siren, formatAdresse } from '#utils/helpers';
 import stubClientWithSnapshots from '../../stub-client-with-snaphots';
 import { clientAPIProxy } from '../client';

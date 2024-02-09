@@ -1,5 +1,5 @@
 import React from 'react';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 
 export const UniteLegaleEtablissementCountDescription: React.FC<{
   uniteLegale: IUniteLegale;

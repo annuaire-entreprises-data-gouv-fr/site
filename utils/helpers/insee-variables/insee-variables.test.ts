@@ -1,5 +1,5 @@
-import { IETATADMINSTRATIF } from '#models/etat-administratif';
-import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
+import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
+import { ISTATUTDIFFUSION } from '#models/core/statut-diffusion';
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,

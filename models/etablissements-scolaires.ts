@@ -7,8 +7,8 @@ import {
 import { Siren, verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { EAdministration } from './administrations/EAdministration';
+import { getUniteLegaleFromSlug } from './core/unite-legale';
 import { FetchRessourceException } from './exceptions';
-import { getUniteLegaleFromSlug } from './unite-legale';
 
 export interface IEtablissementsScolaires {
   currentPage: number;

@@ -4,7 +4,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import { ProtectedSection } from '#components/section/protected-section';
 import { TwoColumnTable } from '#components/table/simple';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 import { isSuperAgent } from '#utils/session';
 import useSession from 'hooks/use-session';
 import { NextPageWithLayout } from 'pages/_app';

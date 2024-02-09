@@ -1,6 +1,6 @@
-import { estActif } from '#models/etat-administratif';
-import { IUniteLegale } from '#models/index';
-import { estDiffusible } from '#models/statut-diffusion';
+import { estActif } from '#models/core/etat-administratif';
+import { estDiffusible } from '#models/core/statut-diffusion';
+import { IUniteLegale } from '#models/core/types';
 
 export const isEntrepreneurIndividuelFromNatureJuridique = (
   natureJuridique: string

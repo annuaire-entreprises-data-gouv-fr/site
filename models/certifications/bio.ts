@@ -5,7 +5,7 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { APINotRespondingFactory } from '#models/api-not-responding';
 import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
-import { IUniteLegale } from '..';
+import { IUniteLegale } from '../core/types';
 
 export interface IEtablissementsBio {
   etablissementsBio: IEtablissementBio[];

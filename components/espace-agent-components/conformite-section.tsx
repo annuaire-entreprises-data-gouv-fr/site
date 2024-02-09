@@ -1,7 +1,7 @@
 import { PrintNever } from '#components-ui/print-visibility';
 import { DataSection } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 import useFetchConformite from 'hooks/fetch/conformite';
 import Conformite from './conformite';
 

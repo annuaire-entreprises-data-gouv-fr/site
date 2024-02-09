@@ -1,8 +1,8 @@
 import React from 'react';
 import NonRenseigne from '#components/non-renseigne';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { isCollectiviteTerritoriale, IUniteLegale } from '#models/core/types';
 import { IEtatCivil } from '#models/immatriculation';
-import { isCollectiviteTerritoriale, IUniteLegale } from '#models/index';
 import { capitalize, formatDatePartial } from '#utils/helpers';
 import { Section } from '../section';
 import { FullTable } from '../table/full';

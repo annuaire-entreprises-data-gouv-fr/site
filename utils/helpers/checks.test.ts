@@ -1,6 +1,6 @@
-import { IETATADMINSTRATIF } from '#models/etat-administratif';
-import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
-import { createDefaultUniteLegale } from '../../models';
+import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
+import { ISTATUTDIFFUSION } from '#models/core/statut-diffusion';
+import { createDefaultUniteLegale } from '../../models/core/types';
 import {
   isEntrepreneurIndividuelFromNatureJuridique,
   shouldNotIndex,

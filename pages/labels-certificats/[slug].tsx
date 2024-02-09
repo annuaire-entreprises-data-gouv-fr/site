@@ -19,7 +19,7 @@ import {
   ICertifications,
   getCertificationsFromSlug,
 } from '#models/certifications';
-import { getNomComplet } from '#models/statut-diffusion';
+import { getNomComplet } from '#models/core/statut-diffusion';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,

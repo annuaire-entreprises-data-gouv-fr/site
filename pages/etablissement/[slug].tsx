@@ -1,7 +1,9 @@
 import { GetServerSideProps } from 'next';
 import Meta from '#components/meta';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
-import { estNonDiffusible } from '#models/statut-diffusion';
+import { getEtablissementWithUniteLegaleFromSlug } from '#models/core/etablissement';
+import { estNonDiffusible } from '#models/core/statut-diffusion';
+import { IEtablissement, IUniteLegale } from '#models/core/types';
 import {
   etablissementPageDescription,
   etablissementPageTitle,
@@ -10,8 +12,6 @@ import {
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
 import { NonDiffusibleSection } from 'components/non-diffusible';
-import { getEtablissementWithUniteLegaleFromSlug } from 'models/etablissement';
-import { IEtablissement, IUniteLegale } from 'models/index';
 import { NextPageWithLayout } from 'pages/_app';
 import extractParamsFromContext from 'utils/server-side-props-helper/extract-params-from-context';
 import {

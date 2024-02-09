@@ -1,16 +1,16 @@
 import {
+  getAdresseEtablissement,
+  getAdresseUniteLegale,
+  getEtablissementName,
+  getNomComplet,
+} from '#models/core/statut-diffusion';
+import {
   IEtablissement,
   IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
-} from '#models/index';
-import {
-  getAdresseEtablissement,
-  getAdresseUniteLegale,
-  getEtablissementName,
-  getNomComplet,
-} from '#models/statut-diffusion';
+} from '#models/core/types';
 import { ISession } from '#utils/session';
 import { formatSiret } from '../siren-and-siret';
 import { capitalize, formatIntFr } from './formatting';

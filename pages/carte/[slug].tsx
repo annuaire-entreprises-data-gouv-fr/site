@@ -4,12 +4,12 @@ import HiddenH1 from '#components/a11y-components/hidden-h1';
 import MapEtablissement from '#components/map/map-etablissement';
 import Meta from '#components/meta';
 import { MapTitleEtablissement } from '#components/title-section/etablissement';
-import { getEtablissementWithLatLongFromSlug } from '#models/etablissement';
-import { IEtablissement } from '#models/index';
+import { getEtablissementWithLatLongFromSlug } from '#models/core/etablissement';
 import {
   estDiffusible,
   getAdresseEtablissement,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { IEtablissement } from '#models/core/types';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,

@@ -8,12 +8,12 @@ import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
+import { IUniteLegale } from '#models/core/types';
 import {
   IEtatCivil,
   IImmatriculationRNE,
   IPersonneMorale,
 } from '#models/immatriculation';
-import { IUniteLegale } from '#models/index';
 import { formatDatePartial, formatIntFr } from '#utils/helpers';
 
 /**

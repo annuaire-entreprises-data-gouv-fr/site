@@ -13,12 +13,12 @@ import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IImmatriculationRNE } from '#models/immatriculation';
-import { IUniteLegale } from '#models/index';
 import {
   defaultNonDiffusiblePlaceHolder,
   estDiffusible,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { IUniteLegale } from '#models/core/types';
+import { IImmatriculationRNE } from '#models/immatriculation';
 import { formatDate, formatIntFr } from '#utils/helpers';
 
 type IProps = {
