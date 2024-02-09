@@ -10,7 +10,7 @@ import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { getGeoLoc } from '#models/geo-loc';
 import { Siret, extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
-import logErrorInSentry from '#utils/sentry';
+import logErrorInSentry, { logFatalErrorInSentry } from '#utils/sentry';
 import { shouldUseInsee } from '.';
 import { EAdministration } from '../administrations/EAdministration';
 import {
@@ -146,16 +146,29 @@ const fetchEtablissementFromRechercheEntreprise = async (
   try {
     return await clientEtablissementRechercheEntreprise(siret, useCache);
   } catch (firstFallback: any) {
-    logErrorInSentry(
-      new FetchEtablissementException({
-        message: 'Fail to fetch from Search API',
-        cause: firstFallback,
-        administration: EAdministration.DINUM,
-        context: {
+    if (!(firstFallback instanceof HttpNotFound)) {
+      try {
+        const useFallback = true;
+        return await clientEtablissementRechercheEntreprise(
           siret,
-        },
-      })
-    );
+          useCache,
+          useFallback
+        );
+      } catch (eFallback: any) {
+        if (!(eFallback instanceof HttpNotFound)) {
+          logFatalErrorInSentry(
+            new FetchEtablissementException({
+              message: 'Fail to fetch from Search API',
+              cause: firstFallback,
+              administration: EAdministration.DINUM,
+              context: {
+                siret,
+              },
+            })
+          );
+        }
+      }
+    }
 
     return APINotRespondingFactory(EAdministration.DINUM, 500);
   }
