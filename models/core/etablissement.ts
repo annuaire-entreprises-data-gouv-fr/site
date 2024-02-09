@@ -23,6 +23,7 @@ import { ISTATUTDIFFUSION } from './statut-diffusion';
 import {
   IEtablissement,
   IEtablissementWithUniteLegale,
+  SiretNotFoundError,
   createDefaultEtablissement,
 } from './types';
 
@@ -121,7 +122,7 @@ const fetchEtablissmentFromInsee = async (
       return createNonDiffusibleEtablissement(siret);
     }
     if (e instanceof HttpNotFound) {
-      return APINotRespondingFactory(EAdministration.INSEE, 404);
+      throw new SiretNotFoundError(siret);
     }
 
     logErrorInSentry(

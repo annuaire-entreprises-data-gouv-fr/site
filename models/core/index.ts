@@ -8,12 +8,6 @@ export function shouldUseInsee<T extends {}>(
   isBot: boolean,
   isEI: (r: T) => boolean
 ) {
-  const isInseeEnabled = process.env.INSEE_ENABLED !== 'disabled';
-
-  if (!isInseeEnabled) {
-    return false;
-  }
-
   const rechercheEntrepriseFailed = isAPINotResponding(
     etablissementRechercheEntreprise
   );
