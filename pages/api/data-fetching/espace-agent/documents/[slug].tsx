@@ -1,5 +1,5 @@
 import { clientDocuments } from '#clients/api-proxy/rne/documents';
-import { HttpForbiddenError } from '#clients/exceptions';
+import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
 import { verifySiren } from '#utils/helpers';
@@ -27,15 +27,18 @@ export default withSession(async function actes(req, res) {
     res.status(200).json(actes);
   } catch (e: any) {
     const message = 'Failed to fetch document list';
-    logErrorInSentry(
-      new FetchRessourceException({
-        cause: e,
-        ressource: 'RNEDocuments',
-        message,
-        administration: EAdministration.INPI,
-        context: { siren: slug as string },
-      })
-    );
+
+    if (!(e instanceof HttpNotFound)) {
+      logErrorInSentry(
+        new FetchRessourceException({
+          cause: e,
+          ressource: 'RNEDocuments',
+          message,
+          administration: EAdministration.INPI,
+          context: { siren: slug as string },
+        })
+      );
+    }
     res.status(e.status || 500).json({ message });
   }
 });
