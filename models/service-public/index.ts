@@ -8,10 +8,14 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
+import {
+  IEtablissement,
+  IUniteLegale,
+  isServicePublic,
+} from '#models/core/types';
 import { FetchRessourceException } from '#models/exceptions';
 import { Siret } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
-import { IEtablissement, IUniteLegale, isServicePublic } from '..';
 
 export interface IServicePublic {
   adresseCourriel: string | null;
@@ -23,7 +27,12 @@ export interface IServicePublic {
   mission: string | null;
   nom: string | null;
   sigle: string | null;
-  liens: Array<ILien>;
+  liens: {
+    organigramme: ILien | null;
+    annuaireServicePublic: ILien | null;
+    formulaireContact: ILien | null;
+    sitesInternet: Array<ILien>;
+  };
   telephone: string | null;
   typeOrganisme:
     | null
@@ -59,11 +68,12 @@ type IAffectationPersonne = Array<{
 }>;
 
 export const getServicePublicByUniteLegale = async (
-  uniteLegale: IUniteLegale
-): Promise<IServicePublic | IAPINotRespondingError> => {
+  uniteLegale: IUniteLegale,
+  options: { isBot: boolean }
+): Promise<IServicePublic | IAPINotRespondingError | null> => {
   try {
-    if (!isServicePublic(uniteLegale)) {
-      return APINotRespondingFactory(EAdministration.DILA, 404);
+    if (options.isBot || !isServicePublic(uniteLegale)) {
+      return null;
     }
 
     return await clientAnnuaireServicePublicBySiret(uniteLegale.siege.siret);
@@ -80,9 +90,14 @@ export const getServicePublicByUniteLegale = async (
 };
 
 export const getServicePublicByEtablissement = async (
-  etablissement: IEtablissement
-): Promise<IServicePublic | IAPINotRespondingError> => {
+  uniteLegale: IUniteLegale,
+  etablissement: IEtablissement,
+  options: { isBot: boolean }
+): Promise<IServicePublic | IAPINotRespondingError | null> => {
   try {
+    if (options.isBot || !isServicePublic(uniteLegale)) {
+      return null;
+    }
     return await clientAnnuaireServicePublicBySiret(etablissement.siret);
   } catch (e: any) {
     return mapToError(e, etablissement.siret);

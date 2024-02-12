@@ -26,7 +26,6 @@ import {
   IUniteLegale,
   isAssociation,
   isCollectiviteTerritoriale,
-  isServicePublic,
 } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import {
@@ -90,9 +89,7 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
               <EspaceAgentSummarySection uniteLegale={uniteLegale} />
             )}
             {isCollectiviteTerritoriale(uniteLegale) && (
-              <>
-                <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
-              </>
+              <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
             )}
             {servicePublic && (
               <ServicePublicSection
@@ -154,23 +151,18 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       isBot,
     });
 
-    const shouldFetchAssociation = !isBot && isAssociation(uniteLegale);
-    const association = shouldFetchAssociation
-      ? await getAssociation(uniteLegale)
-      : null;
+    const association = await getAssociation(uniteLegale, { isBot });
+    const servicePublic = await getServicePublicByUniteLegale(uniteLegale, {
+      isBot,
+    });
 
-    const shouldFetchServicePublic = !isBot && isServicePublic(uniteLegale);
-
-    const servicePublic = shouldFetchServicePublic
-      ? await getServicePublicByUniteLegale(uniteLegale)
-      : null;
     return {
       props: {
         uniteLegale,
         association,
         servicePublic,
         redirected: isRedirected,
-      },
+      } as IProps,
     };
   }
 );

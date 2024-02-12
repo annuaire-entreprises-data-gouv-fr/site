@@ -4,16 +4,18 @@ import { DataSection } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 import { IServicePublic } from '#models/service-public';
+
+type IProps = {
+  servicePublic: IServicePublic | IAPINotRespondingError;
+  uniteLegale: IUniteLegale;
+};
 
 export default function ServicePublicSection({
   servicePublic,
   uniteLegale,
-}: {
-  uniteLegale: IUniteLegale;
-  servicePublic: IServicePublic | IAPINotRespondingError;
-}) {
+}: IProps) {
   return (
     <>
       <DataSection
@@ -23,7 +25,22 @@ export default function ServicePublicSection({
         notFoundInfo={null}
       >
         {(servicePublic) => (
-          <TwoColumnTable body={getTableData(servicePublic, uniteLegale)} />
+          <>
+            <TwoColumnTable body={getTableData(servicePublic, uniteLegale)} />
+            {servicePublic.liens.annuaireServicePublic && (
+              <p>
+                Voir plus d’informations sur la page de{' '}
+                <a
+                  href={servicePublic.liens.annuaireServicePublic.valeur}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Voir la page de ce service public sur l’annuaire service-public.fr, nouvelle fenêtre"
+                >
+                  l’annuaire service-public.fr
+                </a>
+              </p>
+            )}
+          </>
         )}
       </DataSection>
     </>
@@ -41,9 +58,6 @@ const getTableData = (
         'Type organisme',
         servicePublic.typeOrganisme,
       ],
-      ['Adresse Postale', servicePublic.adressePostale],
-      ['Téléphone', servicePublic.telephone],
-      ['Email', servicePublic.adresseCourriel],
       servicePublic.affectationPersonne && [
         'Responsables',
         <a
@@ -52,20 +66,50 @@ const getTableData = (
           → voir les {servicePublic.affectationPersonne.length} responsable(s)
         </a>,
       ],
+      ['Adresse postale', servicePublic.adressePostale],
       [
-        'Liens',
-        servicePublic.liens.length && (
+        'Téléphone',
+        servicePublic.telephone && (
+          <a href={`tel:${servicePublic.telephone}`}>
+            {servicePublic.telephone}
+          </a>
+        ),
+      ],
+      [
+        'Email',
+        servicePublic.adresseCourriel && (
+          <a href={`mailto:${servicePublic.adresseCourriel}`}>
+            {servicePublic.adresseCourriel}
+          </a>
+        ),
+      ],
+      [
+        'Formulaire de contact',
+        servicePublic.liens.formulaireContact && (
+          <a
+            href={servicePublic.liens.formulaireContact.valeur}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`ouvrir ${servicePublic.liens.formulaireContact.libelle}, nouvelle fenêtre`}
+          >
+            {servicePublic.liens.formulaireContact.libelle}
+          </a>
+        ),
+      ],
+
+      [
+        'Site internet',
+        servicePublic.liens.sitesInternet.length === 0 ? null : servicePublic
+            .liens.sitesInternet.length === 1 ? (
+          <Lien
+            libelle={servicePublic.liens.sitesInternet[0].libelle}
+            valeur={servicePublic.liens.sitesInternet[0].valeur}
+          />
+        ) : (
           <ul>
-            {servicePublic.liens.map((lien) => (
+            {servicePublic.liens.sitesInternet.map((lien) => (
               <li key={lien.valeur}>
-                <a
-                  href={lien.valeur}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`ouvrir ${lien.libelle}, nouvelle fenêtre`}
-                >
-                  {lien.libelle}
-                </a>
+                <Lien libelle={lien.libelle} valeur={lien.valeur} />
               </li>
             ))}
           </ul>
@@ -74,3 +118,16 @@ const getTableData = (
     ].filter(Boolean) as [string, ReactNode][]
   ).map(([label, value]) => [label, value ?? <NonRenseigne />]);
 };
+
+function Lien({ libelle, valeur }: { libelle: string; valeur: string }) {
+  return (
+    <a
+      href={valeur}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`ouvrir ${libelle}, nouvelle fenêtre`}
+    >
+      {libelle}
+    </a>
+  );
+}

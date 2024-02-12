@@ -4,11 +4,7 @@ import ServicePublicSection from '#components/service-public-section';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
 import { getEtablissementWithUniteLegaleFromSlug } from '#models/core/etablissement';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
-import {
-  IEtablissement,
-  IUniteLegale,
-  isServicePublic,
-} from '#models/core/types';
+import { IEtablissement, IUniteLegale } from '#models/core/types';
 import {
   IServicePublic,
   getServicePublicByEtablissement,
@@ -91,12 +87,11 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     const etablissementWithUniteLegale =
       await getEtablissementWithUniteLegaleFromSlug(slug, isBot);
 
-    const servicePublic =
-      isBot || !isServicePublic(etablissementWithUniteLegale.uniteLegale)
-        ? null
-        : await getServicePublicByEtablissement(
-            etablissementWithUniteLegale.etablissement
-          );
+    const servicePublic = await getServicePublicByEtablissement(
+      etablissementWithUniteLegale.uniteLegale,
+      etablissementWithUniteLegale.etablissement,
+      { isBot }
+    );
 
     return {
       props: {

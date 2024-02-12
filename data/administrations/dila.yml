@@ -14,7 +14,7 @@ apiMonitors:
     apigouvLink: https://api.gouv.fr/les-api/api-annonces-comptes-annuels-associations-joafe
     updownIoId: 8pjy
   - apiName: API Annuaire des services publics
-    apiSlug: annuaire
+    apiSlug: annuaire-administration
     apigouvLink: https://api.gouv.fr/les-api/api-annuaire-administration-services-publics
     updownIoId: ly69
 dataSources:
@@ -34,7 +34,7 @@ dataSources:
         targets:
           - association
   - label: Annuaire de l'administration
-    apiSlug: annuaire
+    apiSlug: annuaire-administration
     datagouvLink: https://www.data.gouv.fr/fr/datasets/53699fe4a3a729239d206227/
     data:
       - label: Annuaire des services publics

@@ -37,7 +37,7 @@ function queryAnnuaireServicePublic(whereQuery: string) {
   return odsClient(
     {
       url: routes.annuaireServicePublic.ods.search,
-      config: { params: { where: whereQuery } },
+      config: { params: { where: whereQuery }, useCache: true },
     },
     routes.annuaireServicePublic.ods.metadata
   );
@@ -166,8 +166,13 @@ function mapToTelephone(telephoneRecord: string) {
 }
 
 function mapToLiens(record: IServicePublicRecord) {
-  const liens: IServicePublic['liens'] = [];
-  const sitesInternet = (
+  const liens: IServicePublic['liens'] = {
+    sitesInternet: [],
+    formulaireContact: null,
+    annuaireServicePublic: null,
+    organigramme: null,
+  };
+  liens.sitesInternet = (
     JSON.parse(record['site_internet'] || '[]') as Array<{
       valeur: string;
       libelle: string;
@@ -180,26 +185,25 @@ function mapToLiens(record: IServicePublicRecord) {
         .replace(/^www./, '')})`,
     valeur: site.valeur,
   }));
-  liens.push(...sitesInternet);
 
   if (record['formulaire_contact']) {
-    liens.push({
-      libelle: 'Formulaire de contact',
+    liens.formulaireContact = {
+      libelle: 'Accéder au formulaire de contact',
       valeur: record['formulaire_contact'],
-    });
+    };
   }
 
   const organigrammes = JSON.parse(record['organigramme'] || '[]') as Array<{
     valeur: string;
     libelle: string;
   }>;
-  liens.push(...organigrammes);
+  liens.organigramme = organigrammes[0] ?? null;
 
   if (record['url_service_public']) {
-    liens.push({
+    liens.annuaireServicePublic = {
       libelle: 'Informations supplémentaires (annuaire du service-public)',
       valeur: record['url_service_public'],
-    });
+    };
   }
 
   return liens;

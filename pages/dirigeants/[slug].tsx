@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import BeneficiairesSection from '#components/dirigeants-section/beneficiaires';
+import ResponsableSection from '#components/dirigeants-section/responsables-service-public';
 import DirigeantsSection from '#components/dirigeants-section/rne-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
 import Meta from '#components/meta';
@@ -9,7 +10,7 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { estDiffusible } from '#models/core/statut-diffusion';
-import { IUniteLegale, isServicePublic } from '#models/core/types';
+import { IUniteLegale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import {
   IServicePublic,
@@ -28,7 +29,6 @@ import { isAgent } from '#utils/session';
 import { useFetchImmatriculationRNE } from 'hooks';
 import useSession from 'hooks/use-session';
 import { NextPageWithLayout } from 'pages/_app';
-import ResponsableSection from 'responsables-service-public';
 
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
@@ -99,10 +99,10 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug, isBot } = extractParamsFromContext(context);
     const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
-    let servicePublic: IServicePublic | IAPINotRespondingError | null = null;
-    if (!isBot && isServicePublic(uniteLegale)) {
-      servicePublic = await getServicePublicByUniteLegale(uniteLegale);
-    }
+    let servicePublic = await getServicePublicByUniteLegale(uniteLegale, {
+      isBot,
+    });
+
     return {
       props: {
         uniteLegale: await getUniteLegaleFromSlug(slug, { isBot }),
