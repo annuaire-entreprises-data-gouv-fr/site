@@ -20,7 +20,7 @@ export default function Summary(props: ISummaryProps) {
       </p>
       <ol className="fr-summary__list">
         {props.headings.map(({ id, content }) => (
-          <li>
+          <li key={id}>
             <a className="fr-summary__link" href={`#${id}`}>
               {content}{' '}
             </a>
