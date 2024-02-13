@@ -1,0 +1,181 @@
+{
+  "args": {
+    "page": 1,
+    "searchTerms": "130025265",
+    "searchFilterParams": ""
+  },
+  "result": {
+    "currentPage": 1,
+    "resultCount": 1,
+    "pageCount": 1,
+    "results": [
+      {
+        "siren": "130025265",
+        "oldSiren": "130025265",
+        "siege": {
+          "siren": "130025265",
+          "siret": "13002526500013",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": "",
+          "denomination": null,
+          "nic": "00013",
+          "dateCreation": "2017-05-24",
+          "dateDerniereMiseAJour": "",
+          "dateDebutActivite": "2017-05-24",
+          "dateFermeture": "",
+          "adresse": "20 AV DE SEGUR 75007 PARIS 7",
+          "adressePostale": "20 AV DE SEGUR 75007 PARIS 7",
+          "codePostal": "75007",
+          "commune": "PARIS 7",
+          "activitePrincipale": "84.11Z",
+          "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+          "trancheEffectif": "N",
+          "libelleTrancheEffectif": "",
+          "latitude": "48.850699",
+          "longitude": "2.308628",
+          "complements": {
+            "estEntrepreneurIndividuel": false,
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [],
+            "idOrganismeFormation": [],
+            "idRge": [],
+            "idUai": []
+          },
+          "anneeTrancheEffectif": "2021"
+        },
+        "allSiegesSiret": [],
+        "tva": null,
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "DIRECTION INTERMINISTERIELLE DU NUMERIQUE (DINUM)",
+        "chemin": "direction-interministerielle-du-numerique-dinum-130025265",
+        "natureJuridique": "7120",
+        "libelleNatureJuridique": "Service central d'un ministère",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "130025265",
+              "siret": "13002526500013",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00013",
+              "dateCreation": "2017-05-24",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2017-05-24",
+              "dateFermeture": "",
+              "adresse": "20 AV DE SEGUR 75007 PARIS 7",
+              "adressePostale": "20 AV DE SEGUR 75007 PARIS 7",
+              "codePostal": "75007",
+              "commune": "PARIS 7",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "N",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.850699",
+              "longitude": "2.308628",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
+              "anneeTrancheEffectif": "2021"
+            }
+          ],
+          "open": [
+            {
+              "siren": "130025265",
+              "siret": "13002526500013",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00013",
+              "dateCreation": "2017-05-24",
+              "dateDerniereMiseAJour": "",
+              "dateDebutActivite": "2017-05-24",
+              "dateFermeture": "",
+              "adresse": "20 AV DE SEGUR 75007 PARIS 7",
+              "adressePostale": "20 AV DE SEGUR 75007 PARIS 7",
+              "codePostal": "75007",
+              "commune": "PARIS 7",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "N",
+              "libelleTrancheEffectif": "",
+              "latitude": "48.850699",
+              "longitude": "2.308628",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [],
+                "idOrganismeFormation": [],
+                "idRge": [],
+                "idUai": []
+              },
+              "anneeTrancheEffectif": "2021"
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 1,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "84.11Z",
+        "libelleActivitePrincipale": "Administration publique générale",
+        "dateCreation": "2017-05-24",
+        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateDebutActivite": "",
+        "trancheEffectif": "22",
+        "anneeCategorieEntreprise": "2021",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2021",
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": true,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": false,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estAssociation": false,
+          "estUai": false,
+          "estEntrepriseInclusive": false
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": null
+        },
+        "conventionsCollectives": {},
+        "matchingEtablissements": [],
+        "nombreEtablissements": 1,
+        "nombreEtablissementsOuverts": 1,
+        "dirigeants": []
+      }
+    ]
+  }
+}
