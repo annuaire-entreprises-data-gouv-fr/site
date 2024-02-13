@@ -17,6 +17,10 @@ const gristTables = {
     docId: 'hp8PLhMGY9sNWuzGDGe6yi',
     tableId: 'Comptes_agents',
   },
+  'hide-personal-data': {
+    docId: 'hp8PLhMGY9sNWuzGDGe6yi',
+    tableId: 'Hide_personal_data_requests',
+  },
 } as { [tableKey: string]: { docId: string; tableId: string } };
 
 function getGristUrl(tableKey: string) {

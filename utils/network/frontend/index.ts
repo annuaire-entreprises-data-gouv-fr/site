@@ -1,7 +1,10 @@
 import { HttpTimeoutError } from '#clients/exceptions';
 import constants from '#models/constants';
-import { Exception, IExceptionContext } from '#models/exceptions';
-import { InternalError } from '#models/core/types';
+import {
+  Exception,
+  IExceptionContext,
+  InternalError,
+} from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
 import { IDefaultRequestConfig } from '..';
 import { httpErrorHandler } from '../utils/http-error-handler';

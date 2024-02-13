@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import Warning from '#components-ui/alerts/warning';
+import { Warning } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { PrintNever } from '#components-ui/print-visibility';
