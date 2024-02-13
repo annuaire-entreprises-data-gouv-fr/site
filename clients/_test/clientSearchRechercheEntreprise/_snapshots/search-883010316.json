@@ -37,6 +37,7 @@
           "latitude": "48.886494",
           "longitude": "2.542338",
           "complements": {
+            "estEntrepreneurIndividuel": true,
             "idFiness": [],
             "idBio": [],
             "idcc": [],
@@ -81,6 +82,7 @@
               "latitude": "48.886494",
               "longitude": "2.542338",
               "complements": {
+                "estEntrepreneurIndividuel": true,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [],
@@ -119,6 +121,7 @@
               "latitude": "48.886494",
               "longitude": "2.542338",
               "complements": {
+                "estEntrepreneurIndividuel": true,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [],

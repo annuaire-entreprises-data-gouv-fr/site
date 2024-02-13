@@ -37,6 +37,7 @@
           "latitude": "48.872565",
           "longitude": "2.334926",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [
               "750073181"
             ],
@@ -85,6 +86,7 @@
               "latitude": "48.872565",
               "longitude": "2.334926",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [
                   "750073181"
                 ],
@@ -125,6 +127,7 @@
               "latitude": "48.872565",
               "longitude": "2.334926",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [
                   "750073181"
                 ],
@@ -182,7 +185,7 @@
         "conventionsCollectives": {},
         "matchingEtablissements": [],
         "nombreEtablissements": 17,
-        "nombreEtablissementsOuverts": 4,
+        "nombreEtablissementsOuverts": 2,
         "dirigeants": [
           {
             "sexe": null,
