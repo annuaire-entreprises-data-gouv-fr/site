@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState } from 'react';
 import { Tag } from '#components-ui/tag';
 import { formatIntFr } from '#utils/helpers';
@@ -30,6 +31,7 @@ export default function Favourites() {
                   'aria-label': `Consulter la page de ${fullName}`,
                 }}
                 maxWidth="300px"
+                key={siren}
               >
                 {fullName}
               </Tag>

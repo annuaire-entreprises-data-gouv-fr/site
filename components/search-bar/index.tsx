@@ -1,4 +1,4 @@
-import React from 'react';
+'use client';
 
 const SearchBar = ({
   placeholder = 'Nom, adresse, n° SIRET/SIREN...',

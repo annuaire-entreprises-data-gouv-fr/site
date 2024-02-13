@@ -1,3 +1,5 @@
+'use client';
+
 export const diamond = (
   <svg
     fill="none"

@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';

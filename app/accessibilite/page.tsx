@@ -1,7 +1,8 @@
+'use client';
 import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
 import constants from '#models/constants';
-import { NextPageWithLayout } from './_app';
+import { NextPageWithLayout } from '../../pages/_app';
 
 const Accessibility: NextPageWithLayout = () => {
   return (

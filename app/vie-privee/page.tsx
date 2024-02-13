@@ -1,7 +1,8 @@
+'use client';
 import TextWrapper from '#components-ui/text-wrapper';
 import { DILA, INPI, INSEE } from '#components/administrations';
 import Meta from '#components/meta';
-import { NextPageWithLayout } from './_app';
+import { NextPageWithLayout } from '../../pages/_app';
 
 const Privacy: NextPageWithLayout = () => (
   <div>
@@ -201,13 +202,17 @@ const Privacy: NextPageWithLayout = () => (
               <td>Github</td>
               <td>Hébergement du code</td>
               <td>États-Unis</td>
-              <td>https://github.com/customer-terms/github-data-protection-agreement</td>
+              <td>
+                https://github.com/customer-terms/github-data-protection-agreement
+              </td>
             </tr>
             <tr>
               <td>Notion</td>
               <td>Gestion des connaissances</td>
               <td>États-Unis</td>
-              <td>https://notion.notion.site/Data-Processing-Addendum-361b540101274b1fa7e16b90402b0d99</td>
+              <td>
+                https://notion.notion.site/Data-Processing-Addendum-361b540101274b1fa7e16b90402b0d99
+              </td>
             </tr>
             <tr>
               <td>Tchap</td>

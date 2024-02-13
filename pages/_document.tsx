@@ -39,7 +39,7 @@ const LinksAndScripts = ({
         <link
           rel="stylesheet"
           type="text/css"
-          href="http://localhost:3001/frontend/style/globals.css"
+          href="http://localhost:3001/frontend//globals.css"
         />
         <script
           defer

@@ -49,11 +49,6 @@ const SocialNetworks = () => (
           </div>
         </div>
       </div>
-      <style jsx>{`
-        h2.fr-h5 {
-          font-size: 1.2rem !important;
-        }
-      `}</style>
     </div>
   </PrintNever>
 );

@@ -166,3 +166,19 @@ h4 {
 table > tbody > tr > td:first-of-type {
   min-width: 30%;
 }
+
+.print-never {
+  display: block;
+
+  @media print {
+    display: none;
+  }
+}
+
+.print-only {
+  display: none;
+
+  @media print {
+    display: block;
+  }
+}
