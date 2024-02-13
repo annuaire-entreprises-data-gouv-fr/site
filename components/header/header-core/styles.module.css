@@ -1,0 +1,37 @@
+.notFrSearch {
+  width: 470px;
+  max-width: 100%;
+  flex-grow: 1;
+
+  @media only screen and (min-width: 1px) and (max-width: 992px) {
+    width: 100%;
+    margin: 0.75rem;
+    margin-top: 0;
+  }
+}
+
+.menuLogout {
+  position: relative;
+}
+.menuLogout:hover {
+  background-color: #eee;
+  cursor: default;
+}
+
+.menuLogout > a {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  width: 100%;
+  background-color: #fff;
+  padding: 5px 15px;
+  box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.5);
+}
+.menuLogout > a:hover {
+  background-color: #f8f8f8;
+}
+
+.menuLogout:hover > a {
+  display: block;
+}

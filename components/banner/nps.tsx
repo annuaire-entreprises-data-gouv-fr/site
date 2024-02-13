@@ -7,8 +7,28 @@ import constants from '#models/constants';
 export const NPSBanner: React.FC<{}> = () => {
   return (
     <PrintNever>
-      <div id="nps-modal-2" role="dialog" aria-label="Donnez-nous votre avis">
-        <div className="fr-container">
+      <div
+        id="nps-modal-2"
+        role="dialog"
+        aria-label="Donnez-nous votre avis"
+        style={{
+          display: 'none',
+          paddingTop: '15px',
+          paddingBottom: '15px',
+          fontSize: '0.9rem',
+          width: '100%',
+          backgroundColor: '#fffde6',
+          fontFamily: "'Marianne', sans-serif",
+          borderBottom: `2px solid ${constants.colors.frBlue}`,
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
           <div
             dangerouslySetInnerHTML={{
               __html: `
@@ -28,23 +48,6 @@ export const NPSBanner: React.FC<{}> = () => {
           ></div>
         </div>
       </div>
-      <style jsx>{`
-        #nps-modal-2 {
-          display: none;
-          padding-top: 15px;
-          padding-bottom: 15px;
-          font-size: 0.9rem;
-          width: 100%;
-          background-color: #fffde6;
-          font-family: 'Marianne', sans-serif;
-          border-bottom: 2px solid ${constants.colors.frBlue};
-        }
-        #nps-modal-2 .fr-container {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-      `}</style>
     </PrintNever>
   );
 };

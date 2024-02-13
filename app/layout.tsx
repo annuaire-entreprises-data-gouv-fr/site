@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { Question } from '#components-ui/question';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
-import { Header } from '#components/header';
+import { HeaderSimple } from '#components/header/header-simple';
 import SocialNetworks from '#components/social-network';
 import '../frontend/style/dsfr.min.css';
 import '../frontend/style/globals.css';
@@ -22,12 +22,7 @@ export default function RootLayout({
       <body>
         <div style={{ width: '100%' }}>
           <NPSBanner />
-          <Header
-            useSearchBar={false}
-            useAdvancedSearch={false}
-            useMap={false}
-            useAgentCTA={true}
-          />
+          <HeaderSimple useSearchBar={false} useAgentCTA={true} />
           <main className="fr-container">{children}</main>
           <SocialNetworks />
           <Question />

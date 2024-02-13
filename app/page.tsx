@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { HomeH1 } from '#components-ui/logo/home-h1';
+import { LogoAnnuaire } from '#components-ui/logo-annuaire/logo-annuaire';
 import Favourites from '#components/favourites';
 import SearchBar from '#components/search-bar';
 import StructuredDataSearchAction from '#components/structured-data/search';
@@ -30,7 +30,7 @@ const Index: NextPageWithLayout = () => (
         action={'/rechercher'}
         method="get"
       >
-        <HomeH1 />
+        <LogoAnnuaire />
         <h2 style={{ textAlign: 'center', marginTop: '30px' }}>
           Vérifiez les informations légales publiques des entreprises,
           associations et services publics en France

@@ -1,0 +1,55 @@
+.logoAnnuaire {
+  width: 260px;
+  height: 100px;
+  max-width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  @media only screen and (min-width: 1px) and (max-width: 576px) {
+    width: 250px;
+    height: 90px;
+  }
+}
+.logoDiamond {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  top: 0;
+  color: #e8edff;
+}
+.logoH1 {
+  position: absolute;
+  z-index: 1;
+  font-weight: 100;
+  font-size: 2rem;
+  line-height: 2rem;
+  top: 20px;
+  left: 25px;
+  padding: 0;
+  margin: 0;
+
+  @media only screen and (min-width: 1px) and (max-width: 576px) {
+    font-size: 1.7rem;
+    line-height: 1.9rem;
+    left: 30px;
+  }
+}
+
+.logoAnnuaire > h1 > strong {
+  font-weight: 900;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 576px) {
+  .logoAnnuaire {
+    width: 250px;
+    height: 90px;
+  }
+  .logoAnnuaire > h1 {
+    font-size: 1.7rem;
+    line-height: 1.9rem;
+    left: 30px;
+  }
+}

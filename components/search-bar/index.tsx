@@ -18,6 +18,10 @@ const SearchBar = ({
       name="terme"
       autoComplete="off"
       autoFocus={autoFocus}
+      style={{
+        width: '100%',
+        fontFamily: "'Marianne', sans-serif",
+      }}
     />
     <button
       className="fr-btn"
@@ -25,16 +29,6 @@ const SearchBar = ({
       value="submit"
       type="submit"
     />
-    <style jsx>{`
-      .fr-search-bar {
-        width: 100%;
-      }
-
-      input[type='search'] {
-        width: 100%;
-        font-family: 'Marianne', sans-serif;
-      }
-    `}</style>
   </div>
 );
 

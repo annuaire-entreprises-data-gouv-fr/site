@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
-import { diamond } from '#components-ui/logo/home-h1';
+import { diamond } from '#components-ui/logo-annuaire/logo-annuaire';
 import AdministrationDescription from '#components/administrations/administration-description';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import { RenderMarkdownServerOnly } from '#components/markdown';
