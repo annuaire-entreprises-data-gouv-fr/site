@@ -9,6 +9,7 @@ import {
   allDefinitions,
   getDefinition,
 } from '#models/article/definitions';
+import { InternalError } from '#models/exceptions';
 import { NextPageWithLayout } from 'pages/_app';
 
 const DefinitionPage: NextPageWithLayout<{
@@ -74,6 +75,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string;
   const definition = getDefinition(slug);
+  if (!definition || !definition.body || !definition.title) {
+    throw new InternalError({
+      message: 'Definition not found',
+      context: { slug },
+    });
+  }
+
   return {
     props: {
       definition,

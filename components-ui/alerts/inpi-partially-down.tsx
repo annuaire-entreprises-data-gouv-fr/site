@@ -1,5 +1,5 @@
 import { INPI } from '#components/administrations';
-import Warning from './warning';
+import { Warning } from '.';
 
 const InpiPartiallyDownWarning = () => (
   <Warning>

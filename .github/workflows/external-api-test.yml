@@ -53,7 +53,7 @@ jobs:
           npm run test:api-clients:update-snapshots -- --runInBand --testTimeout=61000 --silent
 
       - name: 'Create a PR if there is a diff in the snapshots'
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v6
         with:
           branch: 'BOT-snapshots-update'
           title: '🤖 API client snapshots update'

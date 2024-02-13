@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import Warning from '#components-ui/alerts/warning';
+import { Warning } from '#components-ui/alerts';
 import DataSourcesTooltip from '#components-ui/information-tooltip/data-sources-tooltip';
 import Logo from '#components-ui/logo';
 import { administrationsMetaData } from '#models/administrations';
