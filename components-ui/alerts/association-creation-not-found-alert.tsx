@@ -2,7 +2,7 @@ import React from 'react';
 import routes from '#clients/routes';
 import { IAssociation } from '#models/core/types';
 import { formatIntFr } from '#utils/helpers';
-import Warning from './warning';
+import { Warning } from '.';
 
 const AssociationCreationNotFoundAlert: React.FC<{
   uniteLegale: IAssociation;

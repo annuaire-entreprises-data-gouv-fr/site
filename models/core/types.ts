@@ -373,18 +373,3 @@ export class FetchRechercheEntrepriseException extends FetchRessourceException {
     });
   }
 }
-
-/**
- * Represents an internal error.
- * This error should never be thrown.
- * If it is, it means that there is a bug in the code.
- */
-export class InternalError extends Exception {
-  constructor(args: {
-    message: string;
-    cause?: any;
-    context?: IExceptionContext;
-  }) {
-    super({ name: 'InternalError', ...args });
-  }
-}
