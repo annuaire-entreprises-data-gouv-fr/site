@@ -7,7 +7,7 @@ import {
 import { IDataAssociation } from '#models/association/types';
 import { getAdresseUniteLegale } from '#models/core/statut-diffusion';
 import { IAssociation } from '#models/core/types';
-import { Warning } from '.';
+import Warning from './warning';
 
 const AssociationAdressAlert: React.FC<{
   uniteLegale: IAssociation;
