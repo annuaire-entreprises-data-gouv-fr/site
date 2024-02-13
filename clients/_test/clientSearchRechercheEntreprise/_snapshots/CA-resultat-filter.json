@@ -37,6 +37,7 @@
           "latitude": "48.84074",
           "longitude": "2.324549",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [
@@ -83,6 +84,7 @@
               "latitude": "48.84074",
               "longitude": "2.324549",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -121,6 +123,7 @@
               "latitude": "48.84074",
               "longitude": "2.324549",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -200,6 +203,7 @@
             "latitude": "48.84074",
             "longitude": "2.324549",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [
@@ -253,6 +257,7 @@
           "latitude": "43.926703",
           "longitude": "4.784775",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [
@@ -299,6 +304,7 @@
               "latitude": "43.926703",
               "longitude": "4.784775",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -337,6 +343,7 @@
               "latitude": "43.926703",
               "longitude": "4.784775",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -416,6 +423,7 @@
             "latitude": "43.926703",
             "longitude": "4.784775",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [
@@ -452,6 +460,7 @@
             "latitude": "48.887985",
             "longitude": "2.233045",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [],
@@ -486,6 +495,7 @@
             "latitude": "48.876263",
             "longitude": "2.097763",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [],
@@ -555,6 +565,7 @@
           "latitude": "48.700488",
           "longitude": "2.758235",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [],
@@ -599,6 +610,7 @@
               "latitude": "48.700488",
               "longitude": "2.758235",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [],
@@ -635,6 +647,7 @@
               "latitude": "48.700488",
               "longitude": "2.758235",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [],
@@ -657,7 +670,7 @@
         "dateCreation": "2004-09-01",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateDebutActivite": "",
-        "trancheEffectif": "N",
+        "trancheEffectif": "NN",
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
@@ -728,6 +741,7 @@
           "latitude": "45.00782",
           "longitude": "-0.619455",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [],
@@ -772,6 +786,7 @@
               "latitude": "45.00782",
               "longitude": "-0.619455",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [],
@@ -808,6 +823,7 @@
               "latitude": "45.00782",
               "longitude": "-0.619455",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [],
@@ -830,7 +846,7 @@
         "dateCreation": "2006-09-01",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateDebutActivite": "",
-        "trancheEffectif": "N",
+        "trancheEffectif": "NN",
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
@@ -885,6 +901,7 @@
             "latitude": "45.00782",
             "longitude": "-0.619455",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [],
@@ -936,6 +953,7 @@
           "latitude": "43.458122",
           "longitude": "2.00451",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [
@@ -982,6 +1000,7 @@
               "latitude": "43.458122",
               "longitude": "2.00451",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -1020,6 +1039,7 @@
               "latitude": "43.458122",
               "longitude": "2.00451",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -1099,6 +1119,7 @@
             "latitude": "43.458122",
             "longitude": "2.00451",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [

@@ -37,11 +37,12 @@
           "latitude": "44.075685",
           "longitude": "1.943401",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "1596",
-              "2609"
+              "2609",
+              "1596"
             ],
             "idOrganismeFormation": [],
             "idRge": [
@@ -94,11 +95,12 @@
               "latitude": "44.075685",
               "longitude": "1.943401",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "1596",
-                  "2609"
+                  "2609",
+                  "1596"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -143,11 +145,12 @@
               "latitude": "44.075685",
               "longitude": "1.943401",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "1596",
-                  "2609"
+                  "2609",
+                  "1596"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
