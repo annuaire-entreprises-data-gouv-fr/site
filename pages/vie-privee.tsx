@@ -201,17 +201,13 @@ const Privacy: NextPageWithLayout = () => (
               <td>Github</td>
               <td>Hébergement du code</td>
               <td>États-Unis</td>
-              <td>
-                https://github.com/customer-terms/github-data-protection-agreement
-              </td>
+              <td>https://github.com/customer-terms/github-data-protection-agreement</td>
             </tr>
             <tr>
               <td>Notion</td>
               <td>Gestion des connaissances</td>
               <td>États-Unis</td>
-              <td>
-                https://notion.notion.site/Data-Processing-Addendum-361b540101274b1fa7e16b90402b0d99
-              </td>
+              <td>https://notion.notion.site/Data-Processing-Addendum-361b540101274b1fa7e16b90402b0d99</td>
             </tr>
             <tr>
               <td>Tchap</td>
@@ -332,16 +328,12 @@ const Privacy: NextPageWithLayout = () => (
         opposer aux traitements réalisés par l’Annuaire des Entreprises.
       </p>
       <p>
-        Vos droits d’accès et d’opposition s’exercent auprès de la DINUM, soit
-        en ligne{' '}
-        <a href="/formulaire/supprimer-donnees-personnelles-entreprise">
-          sur ce formulaire
-        </a>
-        , soit par mail à l’adresse{' '}
+        Vos droits d’accès et d’opposition s’exercent auprès de la DINUM à
+        l’adresse{' '}
         <a href="mailto:annuaire-entreprises@data.gouv.fr">
           annuaire-entreprises@data.gouv.fr
         </a>{' '}
-        soit par courrier à l’adresse suivante :
+        ou par courrier à l’adresse suivante :
         <ul>
           <li>DINUM, A l’attention d’annuaire-entreprises</li>
           <li>20 avenue de Ségur 75007 Paris</li>

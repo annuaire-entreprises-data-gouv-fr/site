@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import NonRenseigne from '#components/non-renseigne';
 import constants from '#models/constants';
-import { InternalError } from '#models/exceptions';
+import { InternalError } from '#models/core/types';
 import { logWarningInSentry } from '#utils/sentry';
 
 interface ISectionProps {

@@ -64,14 +64,6 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="fr-footer__top-link"
-                    href="/formulaire/supprimer-donnees-personnelles-entreprise"
-                  >
-                    Supprimer ses données personnelles
-                  </a>
-                </li>
-                <li>
                   <a className="fr-footer__top-link" href="/definitions">
                     Définitions
                   </a>

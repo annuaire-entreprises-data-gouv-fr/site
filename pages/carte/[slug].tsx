@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { Info } from '#components-ui/alerts';
+import Info from '#components-ui/alerts/info';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import MapEtablissement from '#components/map/map-etablissement';
 import Meta from '#components/meta';

@@ -11,22 +11,12 @@ export type ISession = {
     fullName?: string;
     privilege?: ISessionPrivilege;
   };
-
   // agent connect
   state?: string;
   nonce?: string;
   idToken?: string;
   // connexion
   pathFrom?: string;
-
-  // FranceConnect hide personal data request
-  hidePersonalDataRequestFC?: {
-    firstName?: string;
-    familyName?: string;
-    birthdate?: string;
-    tokenId: string;
-    sub: string;
-  };
 };
 
 export const sessionOptions: SessionOptions = {
@@ -74,10 +64,8 @@ export const setPathFrom = async (
   session: IronSession<ISession>,
   pathFrom: string
 ) => {
-  if (pathFrom) {
-    session.pathFrom = pathFrom;
-    await session.save();
-  }
+  session.pathFrom = pathFrom;
+  await session.save();
 };
 
 export const getPathFrom = (session: IronSession<ISession>) => session.pathFrom;
@@ -85,40 +73,6 @@ export const getPathFrom = (session: IronSession<ISession>) => session.pathFrom;
 export const cleanPathFrom = async (session: IronSession<ISession>) => {
   delete session.pathFrom;
 };
-export const setHidePersonalDataRequestFCSession = async (
-  firstName: string | undefined,
-  familyName: string | undefined,
-  birthdate: string | undefined,
-  tokenId: string,
-  sub: string,
-  session: IronSession<ISession>
-) => {
-  session.hidePersonalDataRequestFC = {
-    firstName,
-    familyName,
-    birthdate,
-    tokenId,
-    sub,
-  };
-  await session.save();
-};
-
-export function getHidePersonalDataRequestFCSession(
-  session: ISession | null
-): Required<NonNullable<ISession['hidePersonalDataRequestFC']>> | null {
-  if (
-    !session ||
-    !session.hidePersonalDataRequestFC ||
-    !session.hidePersonalDataRequestFC.firstName ||
-    !session.hidePersonalDataRequestFC.familyName ||
-    !session.hidePersonalDataRequestFC.birthdate
-  ) {
-    return null;
-  }
-  return session.hidePersonalDataRequestFC as Required<
-    NonNullable<ISession['hidePersonalDataRequestFC']>
-  >;
-}
 
 /**
  *  Verify if user is loggedin
