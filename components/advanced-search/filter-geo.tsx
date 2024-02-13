@@ -1,6 +1,5 @@
 import { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
-import Info from '#components-ui/alerts/info';
-import Warning from '#components-ui/alerts/warning';
+import { Info, Warning } from '#components-ui/alerts';
 import { Loader } from '#components-ui/loader';
 import constants from '#models/constants';
 import { debounce } from '#utils/helpers/debounce';

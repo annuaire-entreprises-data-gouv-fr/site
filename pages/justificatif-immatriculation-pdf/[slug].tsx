@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import routes from '#clients/routes';
-import Info from '#components-ui/alerts/info';
+import { Info } from '#components-ui/alerts';
 import { Loader } from '#components-ui/loader';
 import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';

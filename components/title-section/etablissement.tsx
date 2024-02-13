@@ -1,7 +1,7 @@
 import React from 'react';
+import { Warning } from '#components-ui/alerts';
 import NonDiffusibleAlert from '#components-ui/alerts/non-diffusible';
 import ProtectedData from '#components-ui/alerts/protected-data';
-import Warning from '#components-ui/alerts/warning';
 import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
 import { PrintNever } from '#components-ui/print-visibility';
