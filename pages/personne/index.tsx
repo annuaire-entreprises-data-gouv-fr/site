@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { Info } from '#components-ui/alerts';
+import Info from '#components-ui/alerts/info';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import Meta from '#components/meta';
 import ResultsList from '#components/search-results/results-list';

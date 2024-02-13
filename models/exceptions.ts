@@ -69,32 +69,3 @@ export class FetchRessourceException extends Exception {
     this.administration = administration;
   }
 }
-
-/**
- * Throw an error when a case is not supposed to happen (ex: a switch case that should never happen)
- *
- * This is a way to make sure that the code is exhaustive, because the typescript compiler will complain otherwise
- *
- * @param value The value that should not be reached
- */
-export function throwUnreachableCaseError(value: never): never {
-  throw new InternalError({
-    message: `Unreachable case`,
-    context: { details: value },
-  });
-}
-/**
- * Represents an internal error.
- * This error should never be thrown.
- * If it is, it means that there is a bug in the code.
- */
-
-export class InternalError extends Exception {
-  constructor(args: {
-    message: string;
-    cause?: any;
-    context?: IExceptionContext;
-  }) {
-    super({ name: 'InternalError', ...args });
-  }
-}

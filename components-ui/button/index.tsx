@@ -2,7 +2,6 @@ import React, { MouseEventHandler, PropsWithChildren } from 'react';
 import constants from '#models/constants';
 
 type IProps = {
-  role?: string;
   small?: boolean;
   to?: string;
   type?: 'submit' | null;
@@ -13,7 +12,6 @@ type IProps = {
 };
 
 const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
-  role,
   to,
   children,
   small = false,
@@ -24,12 +22,11 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
 }) => (
   <div className={`button-link ${alt ? 'alt' : ''} ${small ? 'small' : ''}`}>
     {!to ? (
-      <button role={role} type="submit" onClick={onClick}>
+      <button type="submit" onClick={onClick}>
         {children}
       </button>
     ) : (
       <a
-        role={role}
         target={target}
         rel={
           (target === '_blank' ? 'noopener noreferrer' : '') +

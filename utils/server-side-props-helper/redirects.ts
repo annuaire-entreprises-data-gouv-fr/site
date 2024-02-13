@@ -1,4 +1,4 @@
-import { InternalError } from '#models/exceptions';
+import { InternalError } from '#models/core/types';
 import { hasSirenFormat, hasSiretFormat } from '#utils/helpers';
 
 export const redirectPageNotFound = (): { notFound: true } => {

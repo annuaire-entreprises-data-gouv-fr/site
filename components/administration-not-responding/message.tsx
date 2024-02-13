@@ -1,5 +1,5 @@
 import React from 'react';
-import { Warning } from '#components-ui/alerts';
+import Warning from '#components-ui/alerts/warning';
 import { IAdministrationMetaData } from '#models/administrations/types';
 
 interface IProps {

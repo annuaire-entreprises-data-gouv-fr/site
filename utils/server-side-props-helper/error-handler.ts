@@ -1,11 +1,8 @@
 import { HttpNotFound } from '#clients/exceptions';
-import {
-  Exception,
-  IExceptionContext,
-  InternalError,
-} from '#models/exceptions';
+import { Exception, IExceptionContext } from '#models/exceptions';
 import {
   FetchRechercheEntrepriseException,
+  InternalError,
   IsLikelyASirenOrSiretException,
   NotASirenError,
   NotASiretError,
