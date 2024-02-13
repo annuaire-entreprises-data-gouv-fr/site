@@ -1,4 +1,4 @@
-import { Info } from '.';
+import Info from './info';
 
 const NonDiffusibleAlert = () => (
   <Info full>

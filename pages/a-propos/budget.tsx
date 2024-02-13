@@ -1,4 +1,4 @@
-import { Info } from '#components-ui/alerts';
+import Info from '#components-ui/alerts/info';
 import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
 import { FullTable } from '#components/table/full';
