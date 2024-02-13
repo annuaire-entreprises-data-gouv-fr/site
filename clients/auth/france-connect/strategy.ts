@@ -12,22 +12,22 @@ const CLIENT_SECRET = process.env.FRANCECONNECT_CLIENT_SECRET;
 const REDIRECT_URI = process.env.FRANCECONNECT_REDIRECT_URI;
 const POST_LOGOUT_REDIRECT_URI =
   process.env.FRANCECONNECT_POST_LOGOUT_REDIRECT_URI;
-if (
-  !CLIENT_ID ||
-  !ISSUER_URL ||
-  !CLIENT_SECRET ||
-  !REDIRECT_URI ||
-  !POST_LOGOUT_REDIRECT_URI
-) {
-  throw new InternalError({
-    message: 'FRANCECONNECT ENV variables are not defined',
-  });
-}
 
 export const getClient = async () => {
   if (_client) {
     return _client;
   } else {
+    if (
+      !CLIENT_ID ||
+      !ISSUER_URL ||
+      !CLIENT_SECRET ||
+      !REDIRECT_URI ||
+      !POST_LOGOUT_REDIRECT_URI
+    ) {
+      throw new InternalError({
+        message: 'FRANCECONNECT ENV variables are not defined',
+      });
+    }
     const FranceConnectIssuer = new Issuer({
       issuer: ISSUER_URL,
       authorization_endpoint: `${ISSUER_URL}/api/v1/authorize`,
