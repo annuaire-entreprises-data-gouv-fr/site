@@ -1,4 +1,4 @@
-import Info from '#components-ui/alerts/info';
+import { Info } from '#components-ui/alerts';
 import FadeIn from '#components-ui/animation/fade-in';
 import { HeightTransition } from '#components-ui/animation/height-transition';
 import { Loader } from '#components-ui/loader';
