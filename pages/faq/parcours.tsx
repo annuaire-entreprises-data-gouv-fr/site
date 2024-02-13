@@ -94,7 +94,9 @@ const Question: React.FC<IProps> = ({
             </p>
           )}
           <p>
-            Si vous avez une question à laquelle cette FAQ n’a pas répondu, vous
+            Si vous avez une question{' '}
+            <strong>à propos des informations affichées sur le site</strong>, ou
+            un problème lié au <strong>fonctionnement du site</strong>, vous
             pouvez nous contacter :
           </p>
           <div className="layout-center">

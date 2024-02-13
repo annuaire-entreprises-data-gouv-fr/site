@@ -60,6 +60,7 @@ const Index: NextPageWithLayout = () => (
 
       .favourite-wrapper {
         height: 25vh;
+        max-height: 150px;
       }
 
       .search-bar-wrapper {
