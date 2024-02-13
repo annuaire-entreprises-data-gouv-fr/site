@@ -4,6 +4,7 @@ import { IReqWithSession } from '#utils/session/with-session';
 import { closeAPM, createAPM } from '../sentry/tracing';
 import { ISession, sessionOptions, setVisitTimestamp } from '../session';
 import { handleErrorFromServerSideProps } from './error-handler';
+import parseFormBodyMiddleware from './parse-form-body';
 
 export interface IPropsWithMetadata {
   metadata: {
@@ -13,9 +14,10 @@ export interface IPropsWithMetadata {
   };
 }
 
-type IGetServerSidePropsContextWithSession = GetServerSidePropsContext & {
-  req: IReqWithSession;
-};
+export type IGetServerSidePropsContextWithSession =
+  GetServerSidePropsContext & {
+    req: IReqWithSession;
+  };
 
 /**
  * Post process a GetServerSideProps
@@ -33,6 +35,7 @@ export function postServerSideProps(
 ) {
   return async (context: GetServerSidePropsContext) => {
     const url = context?.req?.url || '/unknown';
+    await parseFormBodyMiddleware(context);
 
     const transaction = createAPM(url, 'postServerSideProps');
     const contextWithSession = context as IGetServerSidePropsContextWithSession;

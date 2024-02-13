@@ -1,6 +1,6 @@
 import React from 'react';
 import routes from '#clients/routes';
-import Info from '#components-ui/alerts/info';
+import { Info } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import { Tag } from '#components-ui/tag';
 import { DILA } from '#components/administrations';
