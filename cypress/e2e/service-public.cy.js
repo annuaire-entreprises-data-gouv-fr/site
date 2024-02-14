@@ -4,13 +4,11 @@ describe('Service public', () => {
     cy.contains('Service public');
     cy.contains('Type organisme');
     cy.contains('Administration centrale (ou Ministère)');
-    cy.contains(
-      'Voir plus d’informations sur la page de l’annuaire service-public.fr'
-    );
+    cy.contains('fiche de l’Annuaire du service public');
   });
   it('Should display dirigeant information', () => {
     cy.visit('/dirigeants/130025265');
-    cy.contains('Ce service public est dirigé par les personnes suivantes :');
+    cy.contains('dirigeant(es) enregistré(es) auprès de la DILA');
     const table = () => cy.get('#responsables-service-public table');
 
     table().contains('Role');
