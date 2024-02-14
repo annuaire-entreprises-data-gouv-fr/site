@@ -1,15 +1,13 @@
 import { GetServerSideProps } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import ComptesBodacc from '#components/annonces-section/comptes/bodacc';
+import { ComptesAssociationSection } from '#components/annonces-section/comptes/dca';
 import DocumentBilansSection from '#components/espace-agent-components/documents/document-bilans';
 import { FinancesSocieteSection } from '#components/finances-section/societe';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import {
-  IUniteLegale,
-  isAssociation,
-  isServicePublic,
-} from '#models/core/types';
+import { IUniteLegale, isAssociation } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { uniteLegalePageTitle } from '#utils/helpers';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
@@ -45,7 +43,7 @@ const FinancePage: NextPageWithLayout<IProps> = ({
           session={session}
         />
         {/* We use to have finances for association but data disappeared from open data API. Code still exists in <FinancesAssociationSection /> */}
-        {isAssociation(uniteLegale) || isServicePublic(uniteLegale) ? null : (
+        {isAssociation(uniteLegale) ? null : (
           <>
             <FinancesSocieteSection uniteLegale={uniteLegale} />
             <HorizontalSeparator />
@@ -54,6 +52,11 @@ const FinancePage: NextPageWithLayout<IProps> = ({
               isAgent={isAgent(session)}
             />
           </>
+        )}
+        {isAssociation(uniteLegale) ? (
+          <ComptesAssociationSection uniteLegale={uniteLegale} />
+        ) : (
+          <ComptesBodacc uniteLegale={uniteLegale} />
         )}
       </div>
     </>

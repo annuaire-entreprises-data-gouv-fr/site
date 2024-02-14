@@ -53,6 +53,9 @@ const clientBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
 
   return {
     annonces: response.records.map(mapToDomainObject),
+    comptes: response.records
+      .filter((a: IBodaccCoreRecord) => a.publicationavis === 'C')
+      .map(mapToDomainObject),
     lastModified: response.lastModified,
     procedures: response.records
       .map(extractProcedure)
@@ -122,7 +125,9 @@ const extractDetails = (annonce: IBodaccRecords): string => {
 
     if ((annonce as IBodaccC).depot) {
       const depot = JSON.parse((annonce as IBodaccC).depot || '{}');
-      return `${depot.typeDepot} de l’exercice clos le ${depot.dateCloture}`;
+      return `${depot.typeDepot} de l’exercice clos le ${depot.dateCloture}${
+        depot.descriptif ? `. \n${depot.descriptif}` : ''
+      }`;
     }
     if ((annonce as IBodaccB).radiationaurcs) {
       const radiationaurcs = JSON.parse(

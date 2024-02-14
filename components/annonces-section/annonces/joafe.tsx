@@ -2,7 +2,6 @@ import React from 'react';
 import routes from '#clients/routes';
 import AssociationCreationNotFoundAlert from '#components-ui/alerts/association-creation-not-found-alert';
 import ButtonLink from '#components-ui/button';
-import { Tag } from '#components-ui/tag';
 import { DILA } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
@@ -12,7 +11,7 @@ import { IAssociation } from '#models/core/types';
 import { formatDate } from '#utils/helpers';
 import { useFetchJOAFE } from 'hooks';
 
-const AnnoncesAssociationSection: React.FC<{
+const AnnoncesJOAFESection: React.FC<{
   uniteLegale: IAssociation;
 }> = ({ uniteLegale }) => {
   const annoncesAssociation = useFetchJOAFE(uniteLegale);
@@ -59,19 +58,22 @@ const AnnoncesAssociationSection: React.FC<{
               <FullTable
                 head={[
                   'Publication',
-                  'N° parution',
                   'Type d’annonce',
                   'Justificatif de parution',
                 ]}
                 body={annoncesAssociation.annonces.map((annonce) => [
                   <strong>{formatDate(annonce.datePublication)}</strong>,
-                  <Tag>{annonce.numeroParution}</Tag>,
-                  <div className="annonce">
-                    <strong>{annonce.typeAvisLibelle}</strong>
-                    <div className="font-small">
-                      <i>{annonce.details}</i>
+                  <>
+                    <div>
+                      <strong>{annonce.typeAvisLibelle}</strong>
                     </div>
-                  </div>,
+                    {annonce.details}
+                    <div>
+                      <i className="font-small">
+                        Annonce n°{annonce.numeroParution}
+                      </i>
+                    </div>
+                  </>,
                   <ButtonLink target="_blank" to={annonce.path} alt small>
                     ⇢&nbsp;Consulter
                   </ButtonLink>,
@@ -79,15 +81,10 @@ const AnnoncesAssociationSection: React.FC<{
               />
             </>
           )}
-          <style jsx>{`
-            .annonce {
-              margin: 5px 0;
-            }
-          `}</style>
         </>
       )}
     </DataSection>
   );
 };
 
-export default AnnoncesAssociationSection;
+export default AnnoncesJOAFESection;
