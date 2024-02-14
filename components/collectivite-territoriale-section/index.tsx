@@ -68,7 +68,7 @@ const CollectiviteTerritorialeSection: React.FC<{
             <a
               target="_blank"
               href={`https://collectivite.fr/${codeInsee}`}
-              rel="noreferrer"
+              rel="noopener"
             >
               fiche collectivites.fr
             </a>

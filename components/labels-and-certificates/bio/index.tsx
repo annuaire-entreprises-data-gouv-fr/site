@@ -34,7 +34,7 @@ export const CertificationsBioSection: React.FC<{
             <a
               href={routes.certifications.bio.site}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               moteur de recherche de l&apos;Agence Bio
             </a>

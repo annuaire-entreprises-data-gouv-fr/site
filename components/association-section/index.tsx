@@ -89,7 +89,7 @@ export default function AssociationSection({
                 <a
                   target="_blank"
                   href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   fiche data-asso de cette association
                 </a>
@@ -179,7 +179,7 @@ const getTableData = (
     [
       'Site web',
       siteWeb ? (
-        <a href={siteWeb} target="_blank" rel="noreferrer">
+        <a href={siteWeb} target="_blank" rel="noopener noreferrer">
           {siteWeb}
         </a>
       ) : (

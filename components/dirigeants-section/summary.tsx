@@ -19,7 +19,7 @@ const NoDirigeantAssociation = ({ idAssociation = '' }) => (
       <a
         target="_blank"
         href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
-        rel="noreferrer"
+        rel="noopener noreferrer"
       >
         sa fiche data-asso
       </a>
