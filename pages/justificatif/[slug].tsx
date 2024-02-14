@@ -59,9 +59,6 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     return {
       props: {
         ...(await getJustificatifs(slug, isBot)),
-        metadata: {
-          useReact: true,
-        },
       },
     };
   }

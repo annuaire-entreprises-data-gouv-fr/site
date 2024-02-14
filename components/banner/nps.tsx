@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
-import constants from '#models/constants';
+import styles from './styles.module.css';
 
 export const NPSBanner: React.FC<{}> = () => {
   return (
@@ -11,24 +11,9 @@ export const NPSBanner: React.FC<{}> = () => {
         id="nps-modal-2"
         role="dialog"
         aria-label="Donnez-nous votre avis"
-        style={{
-          display: 'none',
-          paddingTop: '15px',
-          paddingBottom: '15px',
-          fontSize: '0.9rem',
-          width: '100%',
-          backgroundColor: '#fffde6',
-          fontFamily: "'Marianne', sans-serif",
-          borderBottom: `2px solid ${constants.colors.frBlue}`,
-        }}
+        className={styles.npsModal}
       >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
+        <div>
           <div
             dangerouslySetInnerHTML={{
               __html: `

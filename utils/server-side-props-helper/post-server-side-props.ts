@@ -8,7 +8,6 @@ import { handleErrorFromServerSideProps } from './error-handler';
 export interface IPropsWithMetadata {
   metadata: {
     // enable react hydration in browser
-    useReact?: boolean;
     session: ISession | null;
   };
 }

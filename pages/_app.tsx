@@ -6,7 +6,9 @@ import ErrorBoundary from '#components/error-boundary/index';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import { ISession } from '#utils/session';
 import { SessionProvider } from 'hooks/use-session';
-import '../frontend/src/entry-with-react';
+
+import '../frontend/style/dsfr.min.css';
+import '../frontend/style/globals.css';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;

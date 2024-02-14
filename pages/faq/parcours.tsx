@@ -336,7 +336,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     : null;
 
   return {
-    props: { initialQuestionType, metadata: { useReact: true } },
+    props: { initialQuestionType },
   };
 };
 

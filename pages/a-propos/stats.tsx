@@ -56,9 +56,6 @@ export const getStaticProps: GetStaticProps = async () => {
       mostCopied,
       copyPasteAction,
       redirectedSiren,
-      metadata: {
-        useReact: true,
-      },
     },
     revalidate: 4 * 3600, // In seconds - 4 hours
   };

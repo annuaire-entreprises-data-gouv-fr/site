@@ -81,9 +81,6 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     return {
       props: {
         uniteLegale: await getUniteLegaleFromSlug(slug, { isBot }),
-        metadata: {
-          useReact: true,
-        },
       },
     };
   }

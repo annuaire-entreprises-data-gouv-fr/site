@@ -4,7 +4,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import Logo from '#components-ui/logo';
 import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
-import { ISession } from '#utils/session';
+import { ISession, isLoggedIn } from '#utils/session';
 import styles from './styles.module.css';
 
 type IProps = {
@@ -71,7 +71,7 @@ export const HeaderCore: React.FC<IProps> = ({
             <div className="fr-header__tools-links">
               <ul className="fr-links-group">
                 <li>
-                  {true ? (
+                  {isLoggedIn(session) ? (
                     <div className={styles.menuLogout + ' fr-link'}>
                       <div>
                         <Icon slug="user">

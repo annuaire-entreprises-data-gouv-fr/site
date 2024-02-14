@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { IIconsSlug, icons } from '.';
+import styles from './styles.module.css';
 
 type IProps = {
   id?: string;
@@ -22,28 +23,13 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
     console.error(`Error in <Icon/> : ${slug} icon does not exists`);
   }
   return (
-    <div
-      id={id}
-      className={className}
-      style={{
-        padding: '0',
-        display: 'inline-flex',
-        alignItems: 'center',
-        flexDirection: 'row',
-        flexWrap: 'nowrap',
-      }}
-    >
+    <div id={id} className={styles.icon + ' ' + className}>
       <span
         style={{
           height: size + 'px',
           width: size + 'px',
           color: color || 'inherit',
-          padding: '0',
           marginRight: children ? '5px' : '',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: '0',
         }}
       >
         {icon}

@@ -69,7 +69,6 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
     return {
       props: {
         uniteLegale,
-        metadata: { useReact: true },
       },
     };
   }
