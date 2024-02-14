@@ -49,6 +49,7 @@ const CollectiviteTerritorialeSection: React.FC<{
     ],
   ];
 
+  const shouldDisplayCollectiviteLink = codeInsee && niveau === 'commune';
   return (
     <>
       <Section
@@ -60,6 +61,20 @@ const CollectiviteTerritorialeSection: React.FC<{
         ]}
       >
         <TwoColumnTable body={data} />
+        {shouldDisplayCollectiviteLink && (
+          <>
+            <br />
+            Retrouvez plus d&apos;informations sur la{' '}
+            <a
+              target="_blank"
+              href={`https://collectivite.fr/${codeInsee}`}
+              rel="noreferrer"
+            >
+              fiche collectivites.fr
+            </a>
+            .
+          </>
+        )}
       </Section>
     </>
   );
