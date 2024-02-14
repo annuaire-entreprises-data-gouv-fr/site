@@ -151,10 +151,12 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       isBot,
     });
 
-    const association = await getAssociation(uniteLegale, { isBot });
-    const servicePublic = await getServicePublicByUniteLegale(uniteLegale, {
-      isBot,
-    });
+    const [association, servicePublic] = await Promise.all([
+      getAssociation(uniteLegale, { isBot }),
+      getServicePublicByUniteLegale(uniteLegale, {
+        isBot,
+      }),
+    ]);
 
     return {
       props: {

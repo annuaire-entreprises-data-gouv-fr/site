@@ -29,15 +29,16 @@ export default function ServicePublicSection({
             <TwoColumnTable body={getTableData(servicePublic, uniteLegale)} />
             {servicePublic.liens.annuaireServicePublic && (
               <p>
-                Voir plus d’informations sur la page de{' '}
+                Retrouvez plus d&apos;informations sur la{' '}
                 <a
                   href={servicePublic.liens.annuaireServicePublic.valeur}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Voir la page de ce service public sur l’annuaire service-public.fr, nouvelle fenêtre"
+                  aria-label="Voir la page de ce service public sur l’Annuaire du service public, nouvelle fenêtre"
                 >
-                  l’annuaire service-public.fr
+                  fiche de l’Annuaire du service public
                 </a>
+                .
               </p>
             )}
           </>
@@ -59,11 +60,11 @@ const getTableData = (
         servicePublic.typeOrganisme,
       ],
       servicePublic.affectationPersonne && [
-        'Responsables',
+        'Dirigeants',
         <a
           href={`/dirigeants/${uniteLegale.siren}#responsables-service-public`}
         >
-          → voir les {servicePublic.affectationPersonne.length} responsable(s)
+          → voir les {servicePublic.affectationPersonne.length} dirigeant(es)
         </a>,
       ],
       ['Adresse postale', servicePublic.adressePostale],

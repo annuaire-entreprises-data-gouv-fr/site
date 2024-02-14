@@ -25,7 +25,40 @@ export default function ResponsableSection({ servicePublic }: IProps) {
             </p>
           ) : (
             <>
-              <p>Ce service public est dirigé par les personnes suivantes :</p>
+              <p>
+                Ce service public possède{' '}
+                {servicePublic.affectationPersonne.length} dirigeant(es)
+                enregistré(es) auprès de la <DILA />
+                {servicePublic.liens.annuaireServicePublic && (
+                  <>
+                    {' '}
+                    sur{' '}
+                    <a
+                      href={servicePublic.liens.annuaireServicePublic.valeur}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Voir la page de l’Annuaire du service public, Nouvelle fenêtre"
+                    >
+                      l’Annuaire du service public
+                    </a>
+                  </>
+                )}
+                {servicePublic.liens.organigramme && (
+                  <>
+                    {' '}
+                    et publie un{' '}
+                    <a
+                      href={servicePublic.liens.organigramme.valeur}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Voir ${servicePublic.liens.organigramme.libelle}, nouvelle fenêtre`}
+                    >
+                      organigramme
+                    </a>
+                  </>
+                )}
+                .
+              </p>
 
               <FullTable
                 head={['Role', 'Nom', 'Nomination']}
@@ -47,33 +80,6 @@ export default function ResponsableSection({ servicePublic }: IProps) {
                 ])}
               />
             </>
-          )}
-
-          {servicePublic.liens.organigramme && (
-            <p>
-              Vous pouvez également consulter le lien suivant :{' '}
-              <a
-                href={servicePublic.liens.organigramme.valeur}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Voir ${servicePublic.liens.organigramme.libelle}, nouvelle fenêtre`}
-              >
-                {servicePublic.liens.organigramme.libelle}
-              </a>
-            </p>
-          )}
-          {servicePublic.liens.annuaireServicePublic && (
-            <p>
-              Plus d’informations sur{' '}
-              <a
-                href={servicePublic.liens.annuaireServicePublic.valeur}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Voir la page de l’annuaire du service-public, Nouvelle fenêtre"
-              >
-                l’annuaire du service-public
-              </a>
-            </p>
           )}
         </>
       )}

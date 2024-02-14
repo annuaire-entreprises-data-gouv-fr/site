@@ -99,7 +99,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const { slug, isBot } = extractParamsFromContext(context);
     const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
-    let servicePublic = await getServicePublicByUniteLegale(uniteLegale, {
+    const servicePublic = await getServicePublicByUniteLegale(uniteLegale, {
       isBot,
     });
 
