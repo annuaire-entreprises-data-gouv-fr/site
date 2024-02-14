@@ -11,6 +11,7 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     // changes often.
     '198100125', // établissement scolaire
     '800329849', // entrepreneur spectacle, asso & ESS
+    '130025265', // DINUM (service public)
     '843701079',
     '880878145',
     '88087814500015',

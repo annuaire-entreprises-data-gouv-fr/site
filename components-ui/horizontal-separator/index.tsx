@@ -24,7 +24,7 @@ export const HorizontalSeparator = () => (
     <style jsx>{`
       div.horizontal-separator {
         width: 100%;
-        padding: 40px 0;
+        margin: 40px 0;
       }
       div.horizontal-separator > span.line {
         width: 50px;

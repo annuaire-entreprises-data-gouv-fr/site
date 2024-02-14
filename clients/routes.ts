@@ -82,6 +82,14 @@ const routes = {
         'https://www.journal-officiel.gouv.fr/pages/associations-recherche',
     },
   },
+  annuaireServicePublic: {
+    ods: {
+      metadata:
+        'https://api-lannuaire.service-public.fr/api/explore/v2.1/catalog/datasets/api-lannuaire-administration/',
+      search:
+        'https://api-lannuaire.service-public.fr/api/explore/v2.1/catalog/datasets/api-lannuaire-administration/records',
+    },
+  },
   franceConnect: {
     authorization: '/api/v1/authorize',
     token: '/api/v1/token',

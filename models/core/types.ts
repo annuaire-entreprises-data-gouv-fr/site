@@ -225,8 +225,6 @@ export const isAssociation = (
   );
 };
 
-export interface IServicePublic extends IUniteLegale {}
-
 export const isServicePublic = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estServicePublic;
 

@@ -1,4 +1,6 @@
 import { GetServerSideProps } from 'next';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import BreakPageForPrint from '#components-ui/print-break-page';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
 import { EspaceAgentSummarySection } from '#components/espace-agent-components/summary-section';
@@ -7,12 +9,16 @@ import EtablissementSection from '#components/etablissement-section';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
 import Meta from '#components/meta';
 import { NonDiffusibleSection } from '#components/non-diffusible';
+import ServicePublicSection from '#components/service-public-section';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
-import { IAPINotRespondingError } from '#models/api-not-responding';
+import {
+  IAPINotRespondingError,
+  isAPINotResponding,
+} from '#models/api-not-responding';
 import { getAssociation } from '#models/association';
 import { IDataAssociation } from '#models/association/types';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
@@ -22,6 +28,10 @@ import {
   isCollectiviteTerritoriale,
 } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
+import {
+  IServicePublic,
+  getServicePublicByUniteLegale,
+} from '#models/service-public';
 import {
   extractSirenOrSiretSlugFromUrl,
   shouldNotIndex,
@@ -40,12 +50,14 @@ import { NextPageWithLayout } from 'pages/_app';
 interface IProps extends IPropsWithMetadata {
   uniteLegale: IUniteLegale;
   association: IDataAssociation | IAPINotRespondingError | null;
+  servicePublic: IServicePublic | IAPINotRespondingError | null;
   redirected: boolean;
 }
 
 const UniteLegalePage: NextPageWithLayout<IProps> = ({
   uniteLegale,
   association,
+  servicePublic,
   redirected,
 }) => {
   const session = useSession();
@@ -76,14 +88,27 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
             {isSuperAgent(session) && (
               <EspaceAgentSummarySection uniteLegale={uniteLegale} />
             )}
+            {isCollectiviteTerritoriale(uniteLegale) && (
+              <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
+            )}
+            {servicePublic && (
+              <ServicePublicSection
+                uniteLegale={uniteLegale}
+                servicePublic={servicePublic}
+              />
+            )}
+            {(isCollectiviteTerritoriale(uniteLegale) ||
+              (servicePublic && !isAPINotResponding(servicePublic))) && (
+              <>
+                <HorizontalSeparator />
+                <BreakPageForPrint />
+              </>
+            )}
             {isAssociation(uniteLegale) && (
               <AssociationSection
                 uniteLegale={uniteLegale}
                 association={association}
               />
-            )}
-            {isCollectiviteTerritoriale(uniteLegale) && (
-              <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
             )}
             <UsefulShortcuts uniteLegale={uniteLegale} />
             {uniteLegale.siege && (
@@ -126,17 +151,20 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       isBot,
     });
 
-    const shouldFetchAssociation = !isBot && isAssociation(uniteLegale);
-    const association = shouldFetchAssociation
-      ? await getAssociation(uniteLegale)
-      : null;
+    const [association, servicePublic] = await Promise.all([
+      getAssociation(uniteLegale, { isBot }),
+      getServicePublicByUniteLegale(uniteLegale, {
+        isBot,
+      }),
+    ]);
 
     return {
       props: {
         uniteLegale,
         association,
+        servicePublic,
         redirected: isRedirected,
-      },
+      } as IProps,
     };
   }
 );

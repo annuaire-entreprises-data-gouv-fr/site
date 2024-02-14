@@ -82,7 +82,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           border: 2px solid ${borderColor};
           border-radius: 2px;
           position: relative;
-          margin: 10px 0 10px;
+          margin: 20px 0 40px;
           padding: 1rem;
           width: ${width}%;
         }

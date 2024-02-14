@@ -8,7 +8,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '../api-not-responding';
-import { IUniteLegale } from '../core/types';
+import { isAssociation, IUniteLegale } from '../core/types';
 import {
   Exception,
   FetchRessourceException,
@@ -17,8 +17,12 @@ import {
 import { IDataAssociation } from './types';
 
 export const getAssociation = async (
-  uniteLegale: IUniteLegale
-): Promise<IDataAssociation | IAPINotRespondingError> => {
+  uniteLegale: IUniteLegale,
+  options: { isBot: boolean }
+): Promise<IDataAssociation | IAPINotRespondingError | null> => {
+  if (options.isBot || !isAssociation(uniteLegale)) {
+    return null;
+  }
   const rna = uniteLegale.association.idAssociation || '';
   const { siren } = uniteLegale;
 
