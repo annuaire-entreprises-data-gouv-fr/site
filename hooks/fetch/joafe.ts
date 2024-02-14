@@ -11,7 +11,7 @@ export const useFetchJOAFE = (uniteLegale: IAssociation) => {
 
   return useFetchData(
     {
-      fetchData: () => clientJOAFE(idRna as IdRna, uniteLegale.siren),
+      fetchData: () => clientJOAFE(idRna as IdRna),
       administration: EAdministration.DILA,
       logError: (e: any) => {
         if (e.status === 404) {

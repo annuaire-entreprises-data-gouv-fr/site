@@ -49,6 +49,9 @@ const AnnoncesBodaccSection: React.FC<{
               body={bodacc.comptes.map((annonce) => [
                 <strong>{formatDate(annonce.datePublication)}</strong>,
                 <>
+                  <div>
+                    <strong>{annonce.titre}</strong>
+                  </div>
                   {annonce.details}
                   <div>
                     <i className="font-small">

@@ -27,7 +27,7 @@ export const getImmatriculationJOAFE = async (
 ): Promise<IAPINotRespondingError | IImmatriculationJOAFE> => {
   try {
     const idRna = verifyIdRna(idRnaAsString || '');
-    const annoncesJO = await clientJOAFE(idRna, siren);
+    const annoncesJO = await clientJOAFE(idRna);
     const annonceCreation = annoncesJO.annonces.find(
       (annonce) => annonce.typeAvisLibelle === 'Création'
     );

@@ -4,6 +4,7 @@ import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IAnnoncesBodacc } from '#models/annonces';
 import { Exception } from '#models/exceptions';
 import { Siren, formatDate } from '#utils/helpers';
+import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import { logWarningInSentry } from '#utils/sentry';
 
 type IBodaccRecords = IBodaccA | IBodaccB | IBodaccC;
@@ -65,7 +66,7 @@ const clientBodacc = async (siren: Siren): Promise<IAnnoncesBodacc> => {
 
 const mapToDomainObject = (annonce: IBodaccRecords) => {
   return {
-    titre: annonce.familleavis_lib || '',
+    titre: extractTitre(annonce),
     sousTitre: `BODACC ${annonce.publicationavis} n°${annonce.parution}`,
     typeAvisLibelle: annonce.typeavis_lib || '',
     tribunal: annonce.tribunal || '',
@@ -74,6 +75,14 @@ const mapToDomainObject = (annonce: IBodaccRecords) => {
     details: extractDetails(annonce) || '',
     path: `${routes.bodacc.site.annonce}${annonce.publicationavis}/${annonce.parution}/${annonce.numeroannonce}`,
   };
+};
+
+const extractTitre = (annonce: IBodaccRecords) => {
+  if ((annonce as IBodaccC).depot) {
+    const depot = JSON.parse((annonce as IBodaccC).depot || '{}');
+    return `${annonce.familleavis_lib} ${getFiscalYear(depot.dateCloture)}`;
+  }
+  return annonce.familleavis_lib || '';
 };
 
 const extractProcedure = (annonce: IBodaccRecords): any | undefined => {

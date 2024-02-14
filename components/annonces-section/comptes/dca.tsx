@@ -17,7 +17,7 @@ export const ComptesAssociationSection: React.FC<{
   return (
     <DataSection
       data={comptes}
-      title="Dépôt de Compte des Associations"
+      title="Dépôts des Comptes des Associations"
       sources={[EAdministration.DILA]}
     >
       {(comptes) =>
