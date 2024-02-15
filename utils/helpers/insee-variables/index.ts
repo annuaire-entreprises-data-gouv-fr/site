@@ -22,6 +22,8 @@ export const etatFromEtatAdministratifInsee = (
       return IETATADMINSTRATIF.CESSEE;
     case 'F':
       return IETATADMINSTRATIF.FERME;
+    case 'I':
+      return IETATADMINSTRATIF.INCONNU;
     default:
       logErrorInSentry(
         new APISireneUnknownParameterException(

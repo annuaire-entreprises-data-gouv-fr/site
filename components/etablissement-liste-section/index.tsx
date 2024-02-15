@@ -131,6 +131,7 @@ const EtablissementListeSection: React.FC<{
           session
         )}`}
         sources={[EAdministration.INSEE]}
+        lastModified={uniteLegale.dateDerniereMiseAJour}
       >
         {usePagination ? (
           <>

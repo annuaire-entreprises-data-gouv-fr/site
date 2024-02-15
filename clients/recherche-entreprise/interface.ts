@@ -15,6 +15,8 @@ export type IResult = {
   activite_principale: string;
   date_creation: string;
   date_mise_a_jour: string;
+  date_mise_a_jour_insee: string;
+  date_mise_a_jour_rne: string;
   dirigeants: IDirigeant[];
   etat_administratif: string;
   statut_diffusion: 'O' | 'P';
