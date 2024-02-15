@@ -77,14 +77,14 @@ export const getServicePublicByUniteLegale = async (
     }
 
     return await clientAnnuaireServicePublicBySiret(uniteLegale.siege.siret);
-  } catch (e: any) {
+  } catch (eSiret: any) {
     try {
-      if (!(e instanceof HttpNotFound)) {
-        throw e;
+      if (!(eSiret instanceof HttpNotFound)) {
+        throw eSiret;
       }
       return await clientAnnuaireServicePublicByName(uniteLegale.nomComplet);
-    } catch (e: any) {
-      return mapToError(e, uniteLegale.siege.siret, uniteLegale.nomComplet);
+    } catch (eName: any) {
+      return mapToError(eName, uniteLegale.siege.siret, uniteLegale.nomComplet);
     }
   }
 };

@@ -33,6 +33,13 @@ type IAffectationRecord = {
   fonction: string;
 };
 
+function firstArrayElement(array: any[], defaultValue: any) {
+  if (array && array.length && array.length > 0) {
+    return array[0] ?? defaultValue;
+  }
+  return defaultValue;
+}
+
 function queryAnnuaireServicePublic(whereQuery: string) {
   return odsClient(
     {
@@ -76,6 +83,7 @@ const clientAnnuaireServicePublicBySiret = async (
   if (!response.records.length) {
     throw new HttpNotFound(`Siret = ${siret}`);
   }
+
   return {
     ...mapToDomainObject(response.records[0]),
     lastModified: response.lastModified,
@@ -117,7 +125,10 @@ function mapToAffectationPersonne(
   return affectations.map((affectation) => ({
     nom: affectation.personne.prenom + ' ' + affectation.personne.nom,
     fonction: affectation.fonction,
-    lienTexteAffectation: affectation.personne.texte_reference[0] ?? null,
+    lienTexteAffectation: firstArrayElement(
+      affectation.personne.texte_reference,
+      null
+    ),
   }));
 }
 
@@ -142,7 +153,8 @@ function mapToAdresse(record: IServicePublicRecord) {
     return null;
   }
   const adresse =
-    adresses.find((a) => a.type_adresse === 'Adresse postale') ?? adresses[0];
+    adresses.find((a) => a.type_adresse === 'Adresse postale') ??
+    firstArrayElement(adresses, '');
   return [
     adresse.complement1,
     adresse.complement2,
@@ -197,7 +209,7 @@ function mapToLiens(record: IServicePublicRecord) {
     valeur: string;
     libelle: string;
   }>;
-  liens.organigramme = organigrammes[0] ?? null;
+  liens.organigramme = firstArrayElement(organigrammes, null);
 
   if (record['url_service_public']) {
     liens.annuaireServicePublic = {
