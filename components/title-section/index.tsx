@@ -1,6 +1,8 @@
 import React from 'react';
 import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
+import NoSiegeSocialAlert from '#components-ui/alerts/no-siege-social';
 import NonDiffusibleAlert from '#components-ui/alerts/non-diffusible';
+import NotInSireneAlert from '#components-ui/alerts/not-in-sirene-alert';
 import ProtectedData from '#components-ui/alerts/protected-data';
 import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
@@ -66,7 +68,9 @@ const Title: React.FC<IProps> = ({
           )}
         </>
       )}
+      <NoSiegeSocialAlert uniteLegale={uniteLegale} />
       <MultipleSirenAlert uniteLegale={uniteLegale} />
+      <NotInSireneAlert uniteLegale={uniteLegale} />
       <h1>
         <a href={`/entreprise/${uniteLegale.chemin}`}>
           {getNomComplet(uniteLegale, session)}

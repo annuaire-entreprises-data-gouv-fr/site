@@ -159,6 +159,10 @@ class UniteLegaleBuilder {
           chemin: uniteLegaleRechercheEntreprise.chemin,
           conventionsCollectives:
             uniteLegaleRechercheEntreprise.conventionsCollectives,
+          dateDerniereMiseAJour:
+            uniteLegaleRechercheEntreprise.dateDerniereMiseAJour,
+          dateMiseAJourInsee: uniteLegaleRechercheEntreprise.dateMiseAJourInsee,
+          dateMiseAJourInpi: uniteLegaleRechercheEntreprise.dateMiseAJourInpi,
         };
       }
     }

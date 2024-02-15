@@ -164,6 +164,10 @@ const mapToDomainObject = (
     categorieJuridiqueUniteLegale
   );
 
+  const dateDernierTraitement = (dateDernierTraitementUniteLegale || '').split(
+    'T'
+  )[0];
+
   return {
     ...defaultUniteLegale,
     siren,
@@ -178,9 +182,9 @@ const mapToDomainObject = (
     libelleActivitePrincipale: siege.libelleActivitePrincipale,
     etablissements: createEtablissementsList([siege]),
     dateCreation: parseDateCreationInsee(dateCreationUniteLegale),
-    dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
-      'T'
-    )[0],
+    dateDerniereMiseAJour: dateDernierTraitement,
+    dateMiseAJourInsee: dateDernierTraitement,
+    dateMiseAJourInpi: '',
     dateDebutActivite: dateDebut,
     etatAdministratif: etatFromEtatAdministratifInsee(
       etatAdministratifUniteLegale,

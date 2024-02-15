@@ -75,9 +75,17 @@ const UniteLegaleSection: React.FC<{
     ['Taille de la structure', libelleCategorieEntreprise(uniteLegale)],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
-      'Dernière modification des données Insee',
-      formatDate(uniteLegale.dateDerniereMiseAJour),
+      'Dernière modification à l’Insee',
+      formatDate(uniteLegale.dateMiseAJourInsee),
     ],
+    ...(uniteLegale.dateMiseAJourInpi
+      ? [
+          [
+            'Dernière modification à l’Inpi',
+            formatDate(uniteLegale.dateMiseAJourInpi),
+          ],
+        ]
+      : []),
     ...(!estActif(uniteLegale)
       ? [['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]]
       : []),
@@ -105,7 +113,7 @@ const UniteLegaleSection: React.FC<{
     [
       'Justificatif(s) d’existence',
       <ul>
-        {isAssociation(uniteLegale) ? (
+        {isAssociation(uniteLegale) && (
           <li>
             Annonce de création au JOAFE :{' '}
             <a
@@ -116,19 +124,22 @@ const UniteLegaleSection: React.FC<{
               télécharger
             </a>
           </li>
-        ) : isServicePublic(uniteLegale) ? null : (
+        )}
+        {uniteLegale.dateMiseAJourInpi && (
           <li>
             Extrait RNE (équivalent KBIS/D1) :{' '}
             <ExtraitRNELink uniteLegale={uniteLegale} />
           </li>
         )}
-        <li>
-          Avis de situation Insee :{' '}
-          <AvisSituationLink
-            etablissement={uniteLegale.siege}
-            label="télécharger"
-          />
-        </li>
+        {uniteLegale.dateMiseAJourInsee && (
+          <li>
+            Avis de situation Insee :{' '}
+            <AvisSituationLink
+              etablissement={uniteLegale.siege}
+              label="télécharger"
+            />
+          </li>
+        )}
       </ul>,
     ],
   ];
@@ -148,6 +159,7 @@ const UniteLegaleSection: React.FC<{
             : [EAdministration.INPI]),
           ...(conventionsCollectives.length > 0 ? [EAdministration.MTPEI] : []),
         ]}
+        lastModified={uniteLegale.dateDerniereMiseAJour}
       >
         <TwoColumnTable body={data} />
       </Section>
