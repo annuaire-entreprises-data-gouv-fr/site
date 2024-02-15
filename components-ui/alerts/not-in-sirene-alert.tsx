@@ -8,11 +8,11 @@ const NotInSireneAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
 }) =>
   !uniteLegale.dateMiseAJourInsee && (
     <Warning full>
-      Cette structure <b>n’apparait pas</b> dans la{' '}
+      Cette structure <strong>n’apparait pas</strong> dans la{' '}
       <a href="https://sirene.fr">base Sirene</a> des entreprises tenue par l’
       <INSEE />, mais elle est présente dans le Registre National des
       Entreprises ou RNE, tenu par l’
-      <INPI />. C’est une situation <b>très inhabituelle</b>.
+      <INPI />. C’est une situation <strong>très inhabituelle</strong>.
       <br />
       <br />
       Retrouvez plus d&apos;informations sur la{' '}

@@ -6,7 +6,7 @@ const NoSiegeSocialAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
 }) =>
   uniteLegale.siege.siret === '' && (
     <Error full>
-      Cette structure n’a pas de <b>siège social</b>.
+      Cette structure n’a pas de <strong>siège social</strong>.
     </Error>
   );
 

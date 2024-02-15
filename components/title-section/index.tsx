@@ -1,8 +1,4 @@
 import React from 'react';
-import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
-import NoSiegeSocialAlert from '#components-ui/alerts/no-siege-social';
-import NonDiffusibleAlert from '#components-ui/alerts/non-diffusible';
-import NotInSireneAlert from '#components-ui/alerts/not-in-sirene-alert';
 import ProtectedData from '#components-ui/alerts/protected-data';
 import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
@@ -20,6 +16,7 @@ import {
 import { IUniteLegale } from '#models/core/types';
 import { formatIntFr } from '#utils/helpers';
 import { ISession, isAgent } from '#utils/session';
+import TitleAlerts from './alerts';
 import { FICHE, Tabs } from './tabs';
 
 type IProps = {
@@ -56,21 +53,13 @@ const Title: React.FC<IProps> = ({
           </ProtectedData>
         </PrintNever>
       )}
-      {!estDiffusible(uniteLegale) && (
-        <>
-          {isAgent(session) ? (
-            <ProtectedData full>
-              Cette structure est non-diffusible mais vous pouvez voir ses
-              informations grâce à votre compte <strong>agent-public</strong>.
-            </ProtectedData>
-          ) : (
-            <NonDiffusibleAlert />
-          )}
-        </>
-      )}
-      <NoSiegeSocialAlert uniteLegale={uniteLegale} />
-      <MultipleSirenAlert uniteLegale={uniteLegale} />
-      <NotInSireneAlert uniteLegale={uniteLegale} />
+
+      <TitleAlerts
+        uniteLegale={uniteLegale}
+        session={session}
+        statutDiffusion={uniteLegale.statutDiffusion}
+      />
+
       <h1>
         <a href={`/entreprise/${uniteLegale.chemin}`}>
           {getNomComplet(uniteLegale, session)}

@@ -43,7 +43,8 @@ export const FinancesSocieteSection: React.FC<{
               Les bilans de cette structure sont accompagnés d’une déclaration
               de confidentialité.
               <br />
-              Seuls les <b>agents publics</b> peuvent les consulter sur ce site.
+              Seuls les <strong>agents publics</strong> peuvent les consulter
+              sur ce site.
             </Info>
           );
         }
