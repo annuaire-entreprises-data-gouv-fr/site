@@ -8,11 +8,16 @@ describe('Annonces BODACC', () => {
     cy.contains('Publication');
     cy.contains('23/11/2022');
 
-    cy.contains('N°');
-    cy.contains('n° 446');
+    cy.contains('Dépôts des comptes 2021');
+    cy.contains('n°446');
     cy.contains('Radiations');
+    cy.contains('Annonce n°446, BODACC B n°20220227');
+  });
+
+  it('Should display JOAFE section for association', () => {
+    cy.visit('/annonces/338365059');
     cy.contains(
-      'BODACC B n°20220227 publiée au Greffe du Tribunal de Commerce de Paris'
+      /Cette structure possède [\d] annonces publiées au Journal Officiel des Associations/
     );
   });
 });

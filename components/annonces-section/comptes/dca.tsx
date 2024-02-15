@@ -1,7 +1,6 @@
 import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
-import { Tag } from '#components-ui/tag';
 import { DILA } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
@@ -14,15 +13,15 @@ import { useFetchComptesAssociation } from 'hooks';
 export const ComptesAssociationSection: React.FC<{
   uniteLegale: IAssociation;
 }> = ({ uniteLegale }) => {
-  const comptesAssociation = useFetchComptesAssociation(uniteLegale);
+  const comptes = useFetchComptesAssociation(uniteLegale);
   return (
     <DataSection
-      data={comptesAssociation}
-      title="Dépôt de Comptes des Associations"
+      data={comptes}
+      title="Dépôts des Comptes des Associations"
       sources={[EAdministration.DILA]}
     >
-      {(comptesAssociation) =>
-        comptesAssociation.comptes.length === 0 ? (
+      {(comptes) =>
+        comptes.annonces.length === 0 ? (
           <div>
             Cette association n’a aucun compte déposé au{' '}
             <a
@@ -37,9 +36,8 @@ export const ComptesAssociationSection: React.FC<{
         ) : (
           <>
             <p>
-              Cette structure possède {comptesAssociation.comptes.length}{' '}
-              comptes publiés au{' '}
-              <strong>Journal Officiel des Associations (JOAFE)</strong>
+              Cette structure possède {comptes.annonces.length} comptes publiés
+              au <strong>Journal Officiel des Associations (JOAFE)</strong>
               , consolidé par la <DILA />. Pour en savoir plus, vous pouvez
               consulter{' '}
               <UniteLegalePageLink
@@ -50,29 +48,25 @@ export const ComptesAssociationSection: React.FC<{
               &nbsp;:
             </p>
             <FullTable
-              head={[
-                'Date de déclaration',
-                'N° parution',
-                'Détails',
-                'Dépôt des comptes',
-              ]}
-              body={comptesAssociation.comptes.map((compte) => [
-                <strong>{formatDate(compte.dateparution)}</strong>,
-                <Tag>{compte.numeroParution}</Tag>,
-                <div>
-                  <strong>Comptes {compte.anneeCloture}</strong> <br />
-                  clôturés le {formatDate(compte.datecloture)}
-                </div>,
-                <ButtonLink target="_blank" to={compte.permalinkUrl} alt small>
+              head={['Publication', 'Type d’annonce', 'Consulter les comptes']}
+              body={comptes.annonces.map((annonce) => [
+                <strong>{formatDate(annonce.datePublication)}</strong>,
+                <>
+                  <div>
+                    <strong>{annonce.typeAvisLibelle}</strong>
+                  </div>
+                  {annonce.details}
+                  <div>
+                    <i className="font-small">
+                      Annonce n°{annonce.numeroParution}
+                    </i>
+                  </div>
+                </>,
+                <ButtonLink target="_blank" to={annonce.path} alt small>
                   ⇢&nbsp;Consulter
                 </ButtonLink>,
               ])}
             />
-            <style jsx>{`
-              .annonce {
-                margin: 5px 0;
-              }
-            `}</style>
           </>
         )
       }
