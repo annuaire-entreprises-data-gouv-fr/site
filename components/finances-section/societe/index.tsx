@@ -40,8 +40,8 @@ export const FinancesSocieteSection: React.FC<{
         ) {
           return (
             <Info>
-              Les bilans de cette structure sont sont accompagnés d’une
-              déclaration de confidentialité.
+              Les bilans de cette structure sont accompagnés d’une déclaration
+              de confidentialité.
               <br />
               Seuls les <b>agents publics</b> peuvent les consulter sur ce site.
             </Info>
