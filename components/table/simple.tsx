@@ -89,7 +89,7 @@ const shouldTrim = (label: any) => {
  */
 export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
   return (
-    <table id={id}>
+    <table className="two-column-table" id={id}>
       <tbody>
         {body.map((row, idx) => (
           <tr key={'a' + idx}>

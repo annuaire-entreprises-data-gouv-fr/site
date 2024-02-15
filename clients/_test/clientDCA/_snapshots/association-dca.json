@@ -4,62 +4,62 @@
     "W643000551"
   ],
   "result": {
-    "comptes": [
+    "annonces": [
       {
-        "dateparution": "2023-10-16",
+        "datePublication": "2023-10-16",
         "numeroParution": "338365059_31122022",
-        "datecloture": "2022-12-31T12:00:00+00:00",
-        "anneeCloture": 2022,
-        "permalinkUrl": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122022"
+        "typeAvisLibelle": "Dépôt de compte 2022",
+        "details": "Date de clôture de l'exercice : 31 décembre 2022",
+        "path": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122022"
       },
       {
-        "dateparution": "2023-03-10",
+        "datePublication": "2023-03-10",
         "numeroParution": "338365059_31122021",
-        "datecloture": "2021-12-31T12:00:00+00:00",
-        "anneeCloture": 2021,
-        "permalinkUrl": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122021"
+        "typeAvisLibelle": "Dépôt de compte 2021",
+        "details": "Date de clôture de l'exercice : 31 décembre 2021",
+        "path": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122021"
       },
       {
-        "dateparution": "2021-07-08",
+        "datePublication": "2021-07-08",
         "numeroParution": "338365059_31122020",
-        "datecloture": "2020-12-31T12:00:00+00:00",
-        "anneeCloture": 2020,
-        "permalinkUrl": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122020"
+        "typeAvisLibelle": "Dépôt de compte 2020",
+        "details": "Date de clôture de l'exercice : 31 décembre 2020",
+        "path": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122020"
       },
       {
-        "dateparution": "2021-02-11",
+        "datePublication": "2021-02-11",
         "numeroParution": "338365059_31122019",
-        "datecloture": "2019-12-31T12:00:00+00:00",
-        "anneeCloture": 2019,
-        "permalinkUrl": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122019"
+        "typeAvisLibelle": "Dépôt de compte 2019",
+        "details": "Date de clôture de l'exercice : 31 décembre 2019",
+        "path": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122019"
       },
       {
-        "dateparution": "2019-07-30",
+        "datePublication": "2019-07-30",
         "numeroParution": "338365059_31122018",
-        "datecloture": "2018-12-31T12:00:00+00:00",
-        "anneeCloture": 2018,
-        "permalinkUrl": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122018"
+        "typeAvisLibelle": "Dépôt de compte 2018",
+        "details": "Date de clôture de l'exercice : 31 décembre 2018",
+        "path": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122018"
       },
       {
-        "dateparution": "2018-09-14",
+        "datePublication": "2018-09-14",
         "numeroParution": "338365059_31122017",
-        "datecloture": "2017-12-31T12:00:00+00:00",
-        "anneeCloture": 2017,
-        "permalinkUrl": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122017"
+        "typeAvisLibelle": "Dépôt de compte 2017",
+        "details": "Date de clôture de l'exercice : 31 décembre 2017",
+        "path": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122017"
       },
       {
-        "dateparution": "2016-06-06",
+        "datePublication": "2016-06-06",
         "numeroParution": "338365059_31122015",
-        "datecloture": "2015-12-31T12:00:00+00:00",
-        "anneeCloture": 2015,
-        "permalinkUrl": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122015"
+        "typeAvisLibelle": "Dépôt de compte 2015",
+        "details": "Date de clôture de l'exercice : 31 décembre 2015",
+        "path": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122015"
       },
       {
-        "dateparution": "2015-06-16",
+        "datePublication": "2015-06-16",
         "numeroParution": "338365059_31122014",
-        "datecloture": "2014-12-31T12:00:00+00:00",
-        "anneeCloture": 2014,
-        "permalinkUrl": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122014"
+        "typeAvisLibelle": "Dépôt de compte 2014",
+        "details": "Date de clôture de l'exercice : 31 décembre 2014",
+        "path": "https://www.journal-officiel.gouv.fr/pages/associations-detail-annonce/?q.id=id:338365059_31122014"
       }
     ],
     "lastModified": "2023-10-18T23:19:19.590091+00:00"

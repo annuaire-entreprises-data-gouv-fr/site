@@ -1,3 +1,4 @@
+import { Info } from '#components-ui/alerts';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import { LineChart } from '#components/chart/line';
@@ -7,7 +8,9 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/core/types';
 import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
+import { isAgent } from '#utils/session';
 import { useFetchFinancesSociete } from 'hooks';
+import useSession from 'hooks/use-session';
 
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
@@ -18,6 +21,7 @@ const colorCA = constants.chartColors[4];
 export const FinancesSocieteSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
+  const session = useSession();
   const financesSociete = useFetchFinancesSociete(uniteLegale);
 
   return (
@@ -29,6 +33,20 @@ export const FinancesSocieteSection: React.FC<{
     >
       {(financesSociete) => {
         const bilans = financesSociete.bilans;
+
+        if (
+          bilans.find((e) => e.confidentiality !== 'Public') &&
+          !isAgent(session)
+        ) {
+          return (
+            <Info>
+              Les bilans de cette structure sont accompagnés d’une déclaration
+              de confidentialité.
+              <br />
+              Seuls les <b>agents publics</b> peuvent les consulter sur ce site.
+            </Info>
+          );
+        }
         const body = [
           [
             'Date de clôture',
@@ -60,7 +78,7 @@ export const FinancesSocieteSection: React.FC<{
         return (
           <>
             {financesSociete.hasBilanConsolide && (
-              <p>
+              <div>
                 Cette entreprise déclare un{' '}
                 <Tag color="info">bilan consolidé</Tag>. C’est le bilan d’un
                 groupe de sociétés dont {uniteLegale.nomComplet} est la société
@@ -72,7 +90,7 @@ export const FinancesSocieteSection: React.FC<{
                   Qu’est-ce qu’un bilan consolidé ?
                 </FAQLink>{' '}
                 inclut ceux de ses filiales.
-              </p>
+              </div>
             )}
             <p>
               Voici les résultats financiers

@@ -1,25 +1,18 @@
-export interface IComptesAssociation {
-  comptes: {
-    dateparution: string;
-    numeroParution: string;
-    datecloture: string;
-    permalinkUrl: string;
-    anneeCloture: string;
-  }[];
-  lastModified: string | null;
+interface IAnnonceBodacc {
+  titre: string;
+  sousTitre: string;
+  typeAvisLibelle: string;
+  tribunal: string;
+  numeroAnnonce: number;
+  datePublication: string;
+  details: string;
+  path: string;
 }
+[];
 
 export interface IAnnoncesBodacc {
-  annonces: {
-    titre: string;
-    sousTitre: string;
-    typeAvisLibelle: string;
-    tribunal: string;
-    numeroAnnonce: number;
-    datePublication: string;
-    details: string;
-    path: string;
-  }[];
+  annonces: IAnnonceBodacc[];
+  comptes: IAnnonceBodacc[];
   lastModified: string | null;
   procedures: {
     date: string;

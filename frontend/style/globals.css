@@ -163,6 +163,6 @@ h4:not(.fr-alert__title) {
 }
 
 /* Prevent the first column of table to be too small */
-table > tbody > tr > td:first-of-type {
+table.two-column-table > tbody > tr > td:first-of-type {
   min-width: 30%;
 }
