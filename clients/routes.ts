@@ -156,11 +156,9 @@ const routes = {
     siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',
   },
   rechercheEntreprise: {
-    etablissement: 'https://api-annuaire-entreprises.data.gouv.fr/siret?q=',
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
     rechercheUniteLegaleStaging:
       'https://recherche-entreprises.api.gouv.fr/search',
-    uniteLegale: 'https://api-annuaire-entreprises.data.gouv.fr/siren?q=',
   },
   tooling: {
     grist: 'https://grist.incubateur.net/api/docs/',
