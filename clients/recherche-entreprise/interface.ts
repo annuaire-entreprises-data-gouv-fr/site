@@ -70,6 +70,7 @@ export type IEtablissementCore = {
   liste_id_organisme_formation: string[] | null;
   liste_rge: string[] | null;
   liste_uai: string[] | null;
+  statut_diffusion_etablissement: string;
 };
 
 export interface ISiege extends IEtablissementCore {

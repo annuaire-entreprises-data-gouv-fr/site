@@ -355,6 +355,7 @@ const mapToEtablissement = (
     liste_id_organisme_formation = [],
     liste_rge = [],
     liste_uai = [],
+    statut_diffusion_etablissement,
   } = etablissement;
 
   const enseigne = (liste_enseignes || []).join(' ');
@@ -389,6 +390,10 @@ const mapToEtablissement = (
     longitude,
     estSiege: est_siege,
     etatAdministratif,
+    statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
+      statut_diffusion_etablissement || 'O',
+      siret
+    ),
     denomination: nom_commercial,
     libelleActivitePrincipale:
       libelleFromCodeNAFWithoutNomenclature(activite_principale),
