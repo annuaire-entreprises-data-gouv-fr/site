@@ -4,12 +4,13 @@ import {
 } from '#models/api-not-responding';
 
 export function shouldUseInsee<T extends {}>(
-  etablissementRechercheEntreprise: T | IAPINotRespondingError,
+  rechercheEntrepriseResponse: T | IAPINotRespondingError,
   isBot: boolean,
-  isEI: (r: T) => boolean
+  isEI: (r: T) => boolean,
+  isNotInInseeStock?: (r: T) => boolean
 ) {
   const rechercheEntrepriseFailed = isAPINotResponding(
-    etablissementRechercheEntreprise
+    rechercheEntrepriseResponse
   );
 
   if (rechercheEntrepriseFailed) {
@@ -19,8 +20,14 @@ export function shouldUseInsee<T extends {}>(
       return false;
     }
 
-    if (isEI(etablissementRechercheEntreprise)) {
-      return true;
+    if (rechercheEntrepriseResponse) {
+      if (isNotInInseeStock && isNotInInseeStock(rechercheEntrepriseResponse)) {
+        return true;
+      }
+
+      if (isEI(rechercheEntrepriseResponse)) {
+        return true;
+      }
     }
 
     return false;

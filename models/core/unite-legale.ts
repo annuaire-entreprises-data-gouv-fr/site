@@ -106,7 +106,8 @@ class UniteLegaleBuilder {
     const useInsee = shouldUseInsee(
       uniteLegaleRechercheEntreprise,
       this._isBot,
-      (ul: IUniteLegale) => ul.complements.estEntrepreneurIndividuel
+      (ul: IUniteLegale) => ul.complements.estEntrepreneurIndividuel,
+      (ul: IUniteLegale) => !ul.dateMiseAJourInsee
     );
 
     if (!useInsee) {
@@ -161,7 +162,9 @@ class UniteLegaleBuilder {
             uniteLegaleRechercheEntreprise.conventionsCollectives,
           dateDerniereMiseAJour:
             uniteLegaleRechercheEntreprise.dateDerniereMiseAJour,
-          dateMiseAJourInsee: uniteLegaleRechercheEntreprise.dateMiseAJourInsee,
+          dateMiseAJourInsee:
+            uniteLegaleInsee.dateMiseAJourInsee ??
+            uniteLegaleRechercheEntreprise.dateMiseAJourInsee,
           dateMiseAJourInpi: uniteLegaleRechercheEntreprise.dateMiseAJourInpi,
         };
       }
