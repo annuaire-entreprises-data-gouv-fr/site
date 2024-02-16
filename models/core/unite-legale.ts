@@ -19,6 +19,7 @@ import { shouldUseInsee } from '.';
 import { EAdministration } from '../administrations/EAdministration';
 import {
   APINotRespondingFactory,
+  isAPI404,
   isAPINotResponding,
 } from '../api-not-responding';
 import { FetchRessourceException } from '../exceptions';
@@ -111,6 +112,9 @@ class UniteLegaleBuilder {
     );
 
     if (!useInsee) {
+      if (isAPI404(uniteLegaleRechercheEntreprise)) {
+        throw new SirenNotFoundError(this._siren);
+      }
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
         throw new HttpServerError('Recherche failed, return 500');
       }
@@ -126,49 +130,77 @@ class UniteLegaleBuilder {
       }
     );
 
+    /**
+     * Nowhere to be found
+     */
+    if (
+      isAPI404(uniteLegaleRechercheEntreprise) &&
+      isAPI404(uniteLegaleInsee)
+    ) {
+      throw new SirenNotFoundError(this._siren);
+    }
+
+    /**
+     * Siren in RNE, not in Sirene
+     */
+    if (
+      isAPI404(uniteLegaleInsee) &&
+      !isAPINotResponding(uniteLegaleRechercheEntreprise)
+    ) {
+      return uniteLegaleRechercheEntreprise;
+    }
+
+    /**
+     * Siren in Sirene API, not in stocks
+     */
+    if (
+      isAPI404(uniteLegaleRechercheEntreprise) &&
+      !isAPINotResponding(uniteLegaleInsee)
+    ) {
+      return uniteLegaleInsee;
+    }
+
+    /***
+     * Sirene Insee failed
+     */
     if (isAPINotResponding(uniteLegaleInsee)) {
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
-        const uniteLegaleInseeFallbacked = await fetchUniteLegaleFromInsee(
-          this._siren,
-          this._page,
-          {
-            useFallback: true,
-            useCache,
-          }
-        );
-        if (isAPINotResponding(uniteLegaleInseeFallbacked)) {
-          throw new HttpServerError('Sirene Insee fallback failed, return 500');
-        }
-        return uniteLegaleInseeFallbacked;
+        throw new HttpServerError('Both API failed');
       } else {
         return uniteLegaleRechercheEntreprise;
       }
-    } else {
-      if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
-        return uniteLegaleInsee;
-      } else {
-        return {
-          ...uniteLegaleInsee,
-          complements: {
-            ...uniteLegaleInsee?.complements,
-            ...uniteLegaleRechercheEntreprise.complements,
-          },
-          colter: {
-            ...uniteLegaleInsee?.colter,
-            ...uniteLegaleRechercheEntreprise.colter,
-          },
-          chemin: uniteLegaleRechercheEntreprise.chemin,
-          conventionsCollectives:
-            uniteLegaleRechercheEntreprise.conventionsCollectives,
-          dateDerniereMiseAJour:
-            uniteLegaleRechercheEntreprise.dateDerniereMiseAJour,
-          dateMiseAJourInsee:
-            uniteLegaleInsee.dateMiseAJourInsee ??
-            uniteLegaleRechercheEntreprise.dateMiseAJourInsee,
-          dateMiseAJourInpi: uniteLegaleRechercheEntreprise.dateMiseAJourInpi,
-        };
-      }
     }
+
+    /**
+     * Recherche failed
+     */
+    if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
+      return uniteLegaleInsee;
+    }
+
+    /**
+     * Default case, both API answered
+     */
+    return {
+      ...uniteLegaleInsee,
+      complements: {
+        ...uniteLegaleInsee?.complements,
+        ...uniteLegaleRechercheEntreprise.complements,
+      },
+      colter: {
+        ...uniteLegaleInsee?.colter,
+        ...uniteLegaleRechercheEntreprise.colter,
+      },
+      chemin: uniteLegaleRechercheEntreprise.chemin,
+      conventionsCollectives:
+        uniteLegaleRechercheEntreprise.conventionsCollectives,
+      dateDerniereMiseAJour:
+        uniteLegaleRechercheEntreprise.dateDerniereMiseAJour,
+      dateMiseAJourInsee:
+        uniteLegaleInsee.dateMiseAJourInsee ??
+        uniteLegaleRechercheEntreprise.dateMiseAJourInsee,
+      dateMiseAJourInpi: uniteLegaleRechercheEntreprise.dateMiseAJourInpi,
+    };
   };
 }
 
@@ -194,6 +226,9 @@ const fetchUniteLegaleFromRechercheEntreprise = async (
       useCache
     );
   } catch (e: any) {
+    if (e instanceof HttpNotFound) {
+      return APINotRespondingFactory(EAdministration.DINUM, 404);
+    }
     if (!(e instanceof HttpNotFound)) {
       try {
         const forceFallback = true;
@@ -204,6 +239,9 @@ const fetchUniteLegaleFromRechercheEntreprise = async (
           useCache
         );
       } catch (eFallback: any) {
+        if (eFallback instanceof HttpNotFound) {
+          return APINotRespondingFactory(EAdministration.DINUM, 404);
+        }
         if (!(eFallback instanceof HttpNotFound)) {
           logFatalErrorInSentry(
             new FetchRessourceException({
@@ -269,7 +307,7 @@ const fetchUniteLegaleFromInsee = async (
       return uniteLegale;
     }
     if (e instanceof HttpNotFound) {
-      throw new SirenNotFoundError(siren);
+      return APINotRespondingFactory(EAdministration.INSEE, 404);
     }
 
     logWarningInSentry(
