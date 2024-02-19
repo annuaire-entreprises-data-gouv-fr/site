@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { buildSearchQuery, IParams } from '#models/search-filter-params';

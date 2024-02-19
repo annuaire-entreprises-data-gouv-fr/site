@@ -1,3 +1,5 @@
+'use client';
+
 import React, { PropsWithChildren, ReactNode } from 'react';
 
 const computeLeft = (orientation: 'left' | 'right' | 'center', width = 250) => {

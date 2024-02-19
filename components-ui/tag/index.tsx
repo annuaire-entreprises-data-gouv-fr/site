@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from 'react';
+import styles from './styles.module.css';
 
 interface ITagProps {
   size?: 'medium' | 'small';
@@ -21,7 +22,7 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   maxWidth,
 }) => {
   const ContainerComponent = (
-    props: PropsWithChildren<{ className?: string; id?: string }>
+    props: PropsWithChildren<{ style?: any; className?: string; id?: string }>
   ) =>
     link ? (
       <a href={link.href} aria-label={link['aria-label']} {...props} />
@@ -33,31 +34,16 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
     <>
       <ContainerComponent
         id={id}
-        className={`fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`}
+        style={{
+          maxWidth: maxWidth || '80vw',
+        }}
+        className={
+          styles['.fr-badge'] +
+          ` fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]} dsfr-overwrite`
+        }
       >
         {children}
       </ContainerComponent>
-      <style jsx>{`
-        .fr-badge {
-          white-space: nowrap;
-          display: inline-block;
-          vertical-align: middle;
-          margin: 3px 5px;
-          max-width: ${maxWidth || '80vw'};
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        a.fr-badge {
-          text-decoration: underline;
-          border: none;
-        }
-        a.fr-badge:hover {
-          filter: brightness(0.95);
-        }
-        a.fr-badge:active {
-          filter: brightness(0.9);
-        }
-      `}</style>
     </>
   );
 };

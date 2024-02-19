@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
 import DocumentActesSection from '#components/espace-agent-components/documents/document-actes';
@@ -16,7 +17,6 @@ import {
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { isAgent, isSuperAgent } from '#utils/session';
-import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {

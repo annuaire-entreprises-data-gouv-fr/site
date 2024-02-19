@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next';
 import AnnoncesBodacc from '#components/annonces-section/annonces/bodacc';
 import AnnoncesJOAFESection from '#components/annonces-section/annonces/joafe';
+import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Meta from '#components/meta';
-import { DonneesPriveesSection } from '#components/non-diffusible';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { estDiffusible } from '#models/core/statut-diffusion';

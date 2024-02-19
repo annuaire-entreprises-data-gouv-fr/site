@@ -1,0 +1,18 @@
+.fr-badge.dsfr-overwrite {
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 3px 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+a.fr-badge {
+  text-decoration: underline;
+  border: none;
+}
+a.fr-badge:hover {
+  filter: brightness(0.95);
+}
+a.fr-badge:active {
+  filter: brightness(0.9);
+}

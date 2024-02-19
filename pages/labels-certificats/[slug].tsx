@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import {
   checkHasLabelsAndCertificates,
@@ -24,7 +25,6 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata, ICertifications {}

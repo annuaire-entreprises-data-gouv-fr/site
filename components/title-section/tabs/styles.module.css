@@ -2,7 +2,7 @@
   display: flex;
   flex-grow: 1;
   font-size: 0.9rem;
-  border-bottom: 2px solid '#dfdff1';
+  border-bottom: 2px solid #dfdff1;
 
   @media only screen and (min-width: 1px) and (max-width: 768px) {
     flex-direction: column;
@@ -12,13 +12,13 @@
 .titleTabs > a {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  border: 2px solid '#dfdff1';
+  border: 2px solid #dfdff1;
   background-color: #efeffb;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  box-shadow: 0 -8px 5px -5px '#dfdff1' inset;
+  box-shadow: 0 -8px 5px -5px #dfdff1 inset;
   margin: 0 4px;
   padding: 5px;
   margin-bottom: -2px;
@@ -26,7 +26,7 @@
 
 .titleTabs > a,
 .titleTabs > a > h2 {
-  color: '#000091';
+  color: #000091;
   font-weight: bold;
   font-size: 0.9rem;
   line-height: 1.1rem;
@@ -46,7 +46,7 @@
 }
 
 .titleTabs > a:hover {
-  background-color: '#dfdff1';
+  background-color: #dfdff1;
 }
 
 .titleTabs > a.active {
@@ -56,7 +56,7 @@
 
   @media only screen and (min-width: 1px) and (max-width: 768px) {
     background-color: #fff;
-    border-bottom: 2px solid '#dfdff1';
+    border-bottom: 2px solid #dfdff1;
     line-height: 1.8rem;
   }
 }

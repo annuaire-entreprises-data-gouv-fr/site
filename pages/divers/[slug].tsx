@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import ConventionsCollectivesSection from '#components/conventions-collectives-section';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
@@ -18,7 +19,6 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
-import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {

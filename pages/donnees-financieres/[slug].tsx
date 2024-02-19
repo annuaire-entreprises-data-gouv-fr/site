@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import ComptesBodacc from '#components/annonces-section/comptes/bodacc';
 import { ComptesAssociationSection } from '#components/annonces-section/comptes/dca';
@@ -15,7 +16,6 @@ import {
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { isAgent } from '#utils/session';
-import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {

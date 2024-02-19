@@ -1,3 +1,5 @@
+'use client';
+
 import React, { PropsWithChildren } from 'react';
 import { Warning } from '#components-ui/alerts';
 import DataSourcesTooltip from '#components-ui/information-tooltip/data-sources-tooltip';
@@ -80,11 +82,11 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
       <style jsx>{`
         .section-container {
           border: 2px solid ${borderColor};
+          width: ${width}%;
           border-radius: 2px;
           position: relative;
           margin: 20px 0 40px;
           padding: 1rem;
-          width: ${width}%;
         }
 
         .section-container > h2 {

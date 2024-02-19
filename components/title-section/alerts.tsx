@@ -1,8 +1,8 @@
-import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
-import NoSiegeSocialAlert from '#components-ui/alerts/no-siege-social';
-import NonDiffusibleAlert from '#components-ui/alerts/non-diffusible';
-import NotInSireneAlert from '#components-ui/alerts/not-in-sirene-alert';
-import ProtectedData from '#components-ui/alerts/protected-data';
+import { ProtectedData } from '#components-ui/alerts';
+import MultipleSirenAlert from '#components-ui/alerts-with-explanations/multiple-siren';
+import NoSiegeSocialAlert from '#components-ui/alerts-with-explanations/no-siege-social';
+import NonDiffusibleAlert from '#components-ui/alerts-with-explanations/non-diffusible';
+import NotInSireneAlert from '#components-ui/alerts-with-explanations/not-in-sirene-alert';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';

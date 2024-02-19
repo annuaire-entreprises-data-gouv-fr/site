@@ -1,3 +1,5 @@
+'use client';
+
 import React, { PropsWithChildren } from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';

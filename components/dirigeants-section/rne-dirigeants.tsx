@@ -1,6 +1,6 @@
 import React from 'react';
 import routes from '#clients/routes';
-import InpiPartiallyDownWarning from '#components-ui/alerts/inpi-partially-down';
+import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
 import { INPI } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';

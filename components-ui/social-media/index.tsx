@@ -2,8 +2,8 @@ import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { PrintNever } from '#components-ui/print-visibility';
-import constants from '#models/constants';
 import { Siren } from '#utils/helpers';
+import styles from './styles.module.css';
 
 const SocialMedia: React.FC<{
   path: string;
@@ -11,7 +11,7 @@ const SocialMedia: React.FC<{
   siren?: Siren;
 }> = ({ path, label, siren }) => (
   <PrintNever>
-    <div className="social-media layout-right">
+    <div className={styles.socialMedia + ' layout-right'}>
       <span>
         <InformationTooltip
           orientation="right"
@@ -109,23 +109,6 @@ const SocialMedia: React.FC<{
         </InformationTooltip>
       </span>
     </div>
-    <style jsx>{`
-      .social-media {
-        color: ${constants.colors.frBlue};
-        margin: 10px 0;
-      }
-      .social-media span {
-        margin: 0 5px;
-      }
-      .social-media span a,
-      .social-media span div {
-        cursor: pointer !important;
-        padding: 8px;
-      }
-      .social-media span a:after {
-        display: none;
-      }
-    `}</style>
   </PrintNever>
 );
 

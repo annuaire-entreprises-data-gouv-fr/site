@@ -1,5 +1,5 @@
 import { IUniteLegale } from '#models/core/types';
-import { Error } from '.';
+import { Error } from '../alerts';
 
 const NoSiegeSocialAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,

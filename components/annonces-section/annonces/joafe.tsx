@@ -1,6 +1,6 @@
 import React from 'react';
 import routes from '#clients/routes';
-import AssociationCreationNotFoundAlert from '#components-ui/alerts/association-creation-not-found-alert';
+import AssociationCreationNotFoundAlert from '#components-ui/alerts-with-explanations/association-creation-not-found-alert';
 import ButtonLink from '#components-ui/button';
 import { DILA } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';

@@ -7,7 +7,7 @@ import { EspaceAgentSummarySection } from '#components/espace-agent-components/s
 import EtablissementListeSection from '#components/etablissement-liste-section';
 import EtablissementSection from '#components/etablissement-section';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
-import { NonDiffusibleSection } from '#components/non-diffusible';
+import { NonDiffusibleSection } from '#components/non-diffusible-section';
 import ServicePublicSection from '#components/service-public-section';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title from '#components/title-section';
@@ -29,7 +29,6 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-props-helper/extract-params-app-router';
 import { isSuperAgent } from '#utils/session';
-import useSession from 'hooks/use-session';
 
 export async function generateMetadata(
   props: AppRouterProps
@@ -54,7 +53,8 @@ export async function generateMetadata(
 }
 
 export default async function UniteLegalePage(props: AppRouterProps) {
-  const session = useSession();
+  // post server side props et session
+  const session = null;
 
   const { slug, isRedirected, page, isBot } = extractParamsAppRouter(props);
 

@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import Immatriculations from '#components/immatriculations';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
@@ -13,7 +14,6 @@ import {
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { useFetchImmatriculationRNE } from 'hooks';
-import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IJustificatifs, IPropsWithMetadata {}

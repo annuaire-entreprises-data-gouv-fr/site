@@ -14,7 +14,7 @@ import {
   fillHidePersonalDataRequest,
 } from '#models/hide-personal-data-request';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '#utils/helpers';
-import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
+import extractParamsPageRouter from '#utils/server-side-props-helper/extract-params-page-router';
 import {
   IGetServerSidePropsContextWithSession,
   postServerSideProps,
@@ -81,7 +81,7 @@ async function postHidePersonalDataRequest(
   context: IGetServerSidePropsContextWithSession
 ) {
   const { siren } = context.req.body;
-  const { isBot } = extractParamsFromContext(context);
+  const { isBot } = extractParamsPageRouter(context);
 
   const uniteLegale = await getUniteLegaleFromSlug(siren, {
     isBot,

@@ -9,7 +9,7 @@
 }
 
 .container {
-  border: 2px solid '#dfdff1';
+  border: 2px solid #dfdff1;
   padding: 15px;
   flex-grow: 0;
   flex-shrink: 0;

@@ -1,8 +1,6 @@
 import ButtonLink from '#components-ui/button';
 import { INSEE } from '#components/administrations';
-import AgentWall from '#components/espace-agent-components/agent-wall';
 import { Section } from '#components/section';
-import constants from '#models/constants';
 
 export const NonDiffusibleSection = () => (
   <Section title="Qu’est ce qu’une entreprise non-diffusible ?">
@@ -32,24 +30,4 @@ export const NonDiffusibleSection = () => (
       </ButtonLink>
     </div>{' '}
   </Section>
-);
-
-export const DonneesPriveesSection = () => (
-  <AgentWall
-    id=""
-    title="Données privées"
-    sectionIntro={
-      <p>
-        Les dirigeants de cette entreprise ont demandé à ce que ces informations
-        ne soient pas rendues publiques. Seuls les agents publics peuvent
-        consulter ces informations.
-      </p>
-    }
-    modalFooter={
-      <>
-        Si vous souhaitez rendre ces données publiques :{' '}
-        <a href={constants.links.parcours.contact}>contactez-nous</a>.
-      </>
-    }
-  />
 );

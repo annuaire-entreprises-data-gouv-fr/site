@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import Meta from '#components/meta';
+import { NonDiffusibleSection } from '#components/non-diffusible-section';
 import ServicePublicSection from '#components/service-public-section';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
 import { getEtablissementWithUniteLegaleFromSlug } from '#models/core/etablissement';
@@ -17,7 +18,6 @@ import {
 import extractParamsPageRouter from '#utils/server-side-props-helper/extract-params-page-router';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
-import { NonDiffusibleSection } from 'components/non-diffusible';
 import { NextPageWithLayout } from 'pages/_app';
 import {
   IPropsWithMetadata,

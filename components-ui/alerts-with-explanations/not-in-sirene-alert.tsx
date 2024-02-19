@@ -1,7 +1,7 @@
 import routes from '#clients/routes';
 import { INPI, INSEE } from '#components/administrations';
 import { IUniteLegale } from '#models/core/types';
-import { Warning } from '.';
+import { Warning } from '../alerts';
 
 const NotInSireneAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,

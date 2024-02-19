@@ -1,0 +1,15 @@
+.socialMedia {
+  color: #000091;
+  margin: 10px 0;
+}
+.socialMedia span {
+  margin: 0 5px;
+}
+.socialMedia span a,
+.socialMedia span div {
+  cursor: pointer !important;
+  padding: 8px;
+}
+.socialMedia span a:after {
+  display: none;
+}

@@ -1,12 +1,15 @@
 import React, { PropsWithChildren } from 'react';
 import { IIconsSlug } from '#components-ui/icon';
 import { Icon } from '#components-ui/icon/wrapper';
+import constants from '#models/constants';
+import styles from './styles.module.css';
 
 const colors = {
   info: ['#0078f3', '#f4f6ff'],
   success: ['#18753c', '#dffee6'],
   error: ['#ce0500', '#fff4f4'],
   warning: ['#ff9c00', '#fff3e0'],
+  protected: [constants.colors.espaceAgent, constants.colors.espaceAgentPastel],
 };
 
 const Alert: React.FC<
@@ -17,28 +20,33 @@ const Alert: React.FC<
     icon: IIconsSlug;
   }>
 > = ({ full = false, color1, color2, icon, children }) => (
-  <div className="alert">
+  <div
+    className={styles.alert}
+    style={{
+      borderLeft: `4px solid ${color1}`,
+      backgroundColor: color2,
+      width: full ? '100%' : 'auto',
+    }}
+  >
     <div>
       <Icon color={color1} size={16} slug={icon} />
     </div>
     <div>{children}</div>
-    <style jsx>{`
-      .alert {
-        border: none;
-        border-radius: 2px;
-        border-left: 4px solid ${color1};
-        background-color: ${color2};
-        padding: 10px;
-        margin: 10px 0;
-        display: flex;
-        align-items: start;
-        width: ${full ? '100%' : 'auto'};
-      }
-      .alert > div:first-of-type {
-        margin-right: 10px;
-      }
-    `}</style>
   </div>
+);
+
+export const ProtectedData: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
+  full = false,
+  children,
+}) => (
+  <Alert
+    full={full}
+    color1={colors.protected[0]}
+    color2={colors.protected[1]}
+    icon="lockFill"
+  >
+    {children}
+  </Alert>
 );
 
 export const Success: React.FC<PropsWithChildren<{ full?: boolean }>> = ({

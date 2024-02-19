@@ -1,7 +1,6 @@
 import { ISTATUTDIFFUSION, estDiffusible } from '#models/core/statut-diffusion';
 import { ISession, isAgent } from '#utils/session';
-import { Info } from '.';
-import ProtectedData from './protected-data';
+import { Info, ProtectedData } from '../alerts';
 
 const DefaultNonDiffusibleAlert = () => (
   <Info full>
