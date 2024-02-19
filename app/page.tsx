@@ -3,7 +3,6 @@ import { LogoAnnuaire } from '#components-ui/logo-annuaire/logo-annuaire';
 import Favourites from '#components/favourites';
 import SearchBar from '#components/search-bar';
 import StructuredDataSearchAction from '#components/structured-data/search';
-import { NextPageWithLayout } from '../pages/_app';
 
 export const metadata: Metadata = {
   title:
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
   },
 };
 
-const Index: NextPageWithLayout = () => (
+const Index = () => (
   <>
     <StructuredDataSearchAction />
     <div className="layout-center">

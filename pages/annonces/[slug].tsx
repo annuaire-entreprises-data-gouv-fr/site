@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next';
 import AnnoncesAssociationSection from '#components/annonces-section/annonces-association';
 import AnnoncesBodacc from '#components/annonces-section/bodacc';
 import { ComptesAssociationSection } from '#components/annonces-section/comptes-association';
@@ -13,12 +12,13 @@ import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from '#utils/helpers';
-import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
+import extractParamsPageRouter from '#utils/server-side-props-helper/extract-params-page-router';
 import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { isAgent } from '#utils/session';
+import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -64,7 +64,7 @@ const Annonces: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug, isBot } = extractParamsFromContext(context);
+    const { slug, isBot } = extractParamsPageRouter(context);
     const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
     return {
       props: {

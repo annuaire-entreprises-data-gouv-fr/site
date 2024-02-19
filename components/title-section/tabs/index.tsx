@@ -3,7 +3,6 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from '#components/badges-section/labels-and-certificates';
-import constants from '#models/constants';
 import {
   IUniteLegale,
   isAssociation,
@@ -11,6 +10,7 @@ import {
   isServicePublic,
 } from '#models/core/types';
 import { ISession } from '#utils/session';
+import styles from './styles.module.css';
 
 export enum FICHE {
   INFORMATION = 'résumé',
@@ -123,7 +123,7 @@ export const Tabs: React.FC<{
   ];
   return (
     <PrintNever>
-      <div className="title-tabs">
+      <div className={styles.titleTabs}>
         {tabs
           .filter(({ shouldDisplay }) => shouldDisplay)
           .map(
@@ -162,74 +162,6 @@ export const Tabs: React.FC<{
           </>
         )}
       </div>
-
-      <style jsx>{`
-        .title-tabs {
-          display: flex;
-          flex-grow: 1;
-          font-size: 0.9rem;
-          border-bottom: 2px solid ${constants.colors.pastelBlue};
-        }
-        .title-tabs > a {
-          border-top-left-radius: 3px;
-          border-top-right-radius: 3px;
-          border: 2px solid ${constants.colors.pastelBlue};
-          background-color: #efeffb;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          box-shadow: 0 -8px 5px -5px ${constants.colors.pastelBlue} inset;
-          margin: 0 4px;
-          padding: 5px;
-          margin-bottom: -2px;
-        }
-
-        .title-tabs > a,
-        .title-tabs > a > h2 {
-          color: ${constants.colors.frBlue};
-          font-weight: bold;
-          font-size: 0.9rem;
-          line-height: 1.1rem;
-          max-width: 150px;
-        }
-
-        .title-tabs > a > h2 {
-          margin: 0;
-          padding: 0;
-        }
-
-        .title-tabs > a:hover {
-          background-color: ${constants.colors.pastelBlue};
-        }
-
-        .title-tabs > a.active {
-          box-shadow: none;
-          background-color: #fff;
-          border-bottom: 0;
-        }
-
-        @media only screen and (min-width: 1px) and (max-width: 768px) {
-          .title-tabs {
-            flex-direction: column;
-            border-bottom: 0;
-          }
-
-          .title-tabs > a,
-          .title-tabs > a > h2 {
-            margin: 3px;
-            padding: 3px;
-            max-width: none;
-            width: auto !important;
-          }
-
-          .title-tabs > a.active {
-            background-color: #fff;
-            border-bottom: 2px solid ${constants.colors.pastelBlue};
-            line-height: 1.8rem;
-          }
-        }
-      `}</style>
     </PrintNever>
   );
 };

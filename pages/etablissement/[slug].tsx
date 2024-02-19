@@ -9,11 +9,11 @@ import {
   etablissementPageTitle,
   shouldNotIndex,
 } from '#utils/helpers';
+import extractParamsPageRouter from '#utils/server-side-props-helper/extract-params-page-router';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
 import { NonDiffusibleSection } from 'components/non-diffusible';
 import { NextPageWithLayout } from 'pages/_app';
-import extractParamsFromContext from 'utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,
   postServerSideProps,
@@ -69,7 +69,7 @@ const EtablissementPage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug, isBot, isRedirected } = extractParamsFromContext(context);
+    const { slug, isBot, isRedirected } = extractParamsPageRouter(context);
 
     const etablissementWithUniteLegale =
       await getEtablissementWithUniteLegaleFromSlug(slug, isBot);

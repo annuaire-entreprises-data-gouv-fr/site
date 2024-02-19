@@ -10,7 +10,7 @@ import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { formatIntFr } from '#utils/helpers';
-import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
+import extractParamsPageRouter from '#utils/server-side-props-helper/extract-params-page-router';
 import { postServerSideProps } from '#utils/server-side-props-helper/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
@@ -149,7 +149,7 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug } = extractParamsFromContext(context);
+    const { slug } = extractParamsPageRouter(context);
     return {
       props: { siren: slug },
     };

@@ -10,7 +10,7 @@ import {
   getAdresseEtablissement,
 } from '#models/core/statut-diffusion';
 import { IEtablissement } from '#models/core/types';
-import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
+import extractParamsPageRouter from '#utils/server-side-props-helper/extract-params-page-router';
 import {
   IPropsWithMetadata,
   postServerSideProps,
@@ -89,7 +89,7 @@ const EtablissementMapPage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug } = extractParamsFromContext(context);
+    const { slug } = extractParamsPageRouter(context);
 
     const etablissement = await getEtablissementWithLatLongFromSlug(slug);
 

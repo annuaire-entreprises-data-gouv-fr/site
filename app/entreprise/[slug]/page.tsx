@@ -1,65 +1,75 @@
-import { GetServerSideProps } from 'next';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
 import { EspaceAgentSummarySection } from '#components/espace-agent-components/summary-section';
 import EtablissementListeSection from '#components/etablissement-liste-section';
 import EtablissementSection from '#components/etablissement-section';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
-import Meta from '#components/meta';
 import { NonDiffusibleSection } from '#components/non-diffusible';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
-import { IAPINotRespondingError } from '#models/api-not-responding';
 import { getAssociation } from '#models/association';
-import { IDataAssociation } from '#models/association/types';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
-import {
-  IUniteLegale,
-  isAssociation,
-  isCollectiviteTerritoriale,
-} from '#models/core/types';
+import { isAssociation, isCollectiviteTerritoriale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import {
-  extractSirenOrSiretSlugFromUrl,
   shouldNotIndex,
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from '#utils/helpers';
-import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
-import {
-  IPropsWithMetadata,
-  postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+import extractParamsAppRouter, {
+  AppRouterProps,
+} from '#utils/server-side-props-helper/extract-params-app-router';
 import { isSuperAgent } from '#utils/session';
 import useSession from 'hooks/use-session';
-import { NextPageWithLayout } from 'pages/_app';
+import { Metadata } from 'next';
 
-interface IProps extends IPropsWithMetadata {
-  uniteLegale: IUniteLegale;
-  association: IDataAssociation | IAPINotRespondingError | null;
-  redirected: boolean;
+export async function generateMetadata(
+  props: AppRouterProps
+): Promise<Metadata> {
+  const { slug, page, isBot } = extractParamsAppRouter(props);
+
+  const uniteLegale = await getUniteLegaleFromSlug(slug, {
+    page,
+    isBot,
+  });
+
+  return {
+    title: uniteLegalePageTitle(uniteLegale, null),
+    description: uniteLegalePageDescription(uniteLegale, null),
+    robots: shouldNotIndex(uniteLegale) ? 'noindex, nofollow' : 'index, follow',
+    alternates: {
+      canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${
+        uniteLegale.chemin || uniteLegale.siren
+      }`,
+    },
+  };
 }
 
-const UniteLegalePage: NextPageWithLayout<IProps> = ({
-  uniteLegale,
-  association,
-  redirected,
-}) => {
+export default async function UniteLegalePage(props: AppRouterProps) {
+  // TODO :  postServerSideProps
+
   const session = useSession();
+
+  const { slug, isRedirected, page, isBot } = extractParamsAppRouter(props);
+
+  const uniteLegale = await getUniteLegaleFromSlug(slug, {
+    page,
+    isBot,
+  });
+
+  const shouldFetchAssociation = !isBot && isAssociation(uniteLegale);
+  const association = shouldFetchAssociation
+    ? await getAssociation(uniteLegale)
+    : null;
+
   return (
     <>
-      <Meta
-        title={uniteLegalePageTitle(uniteLegale, session)}
-        description={uniteLegalePageDescription(uniteLegale, session)}
-        noIndex={shouldNotIndex(uniteLegale)}
-        canonical={`https://annuaire-entreprises.data.gouv.fr/entreprise/${
-          uniteLegale.chemin || uniteLegale.siren
-        }`}
-      />
-      {redirected && <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />}
+      {isRedirected && (
+        <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />
+      )}
 
       <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
       <div className="content-container">
@@ -104,41 +114,4 @@ const UniteLegalePage: NextPageWithLayout<IProps> = ({
       </div>
     </>
   );
-};
-export const getServerSideProps: GetServerSideProps = postServerSideProps(
-  async (context) => {
-    const { slug, isRedirected, page, isBot } =
-      extractParamsFromContext(context);
-
-    const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
-    if (sirenOrSiretSlug.length === 14) {
-      // 14 digits is not a siren -> but it may be a siret
-      return {
-        redirect: {
-          destination: `/etablissement/${sirenOrSiretSlug}`,
-          permanent: false,
-        },
-      };
-    }
-
-    const uniteLegale = await getUniteLegaleFromSlug(sirenOrSiretSlug, {
-      page,
-      isBot,
-    });
-
-    const shouldFetchAssociation = !isBot && isAssociation(uniteLegale);
-    const association = shouldFetchAssociation
-      ? await getAssociation(uniteLegale)
-      : null;
-
-    return {
-      props: {
-        uniteLegale,
-        association,
-        redirected: isRedirected,
-      },
-    };
-  }
-);
-
-export default UniteLegalePage;
+}

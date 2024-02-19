@@ -205,18 +205,6 @@ const EtablissementSection: React.FC<IProps> = ({
       </Section>
       <HorizontalSeparator />
       <BreakPageForPrint />
-      <style jsx>{`
-        .section-wrapper {
-          display: flex;
-          flex-direction: row;
-        }
-
-        @media only screen and (min-width: 1px) and (max-width: 576px) {
-          .section-wrapper {
-            flex-direction: column;
-          }
-        }
-      `}</style>
     </>
   );
 };

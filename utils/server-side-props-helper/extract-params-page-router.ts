@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import isUserAgentABot from '#utils/user-agent';
 
-const extractParamsFromContext = (context: GetServerSidePropsContext) => {
+const extractParamsPageRouter = (context: GetServerSidePropsContext) => {
   const slug = (context?.params?.slug || '') as string;
 
   const referer = context?.req?.headers?.referer;
@@ -24,4 +24,4 @@ const extractParamsFromContext = (context: GetServerSidePropsContext) => {
   };
 };
 
-export default extractParamsFromContext;
+export default extractParamsPageRouter;

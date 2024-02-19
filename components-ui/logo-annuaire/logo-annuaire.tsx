@@ -21,8 +21,8 @@ export const diamond = (
  */
 export const LogoAnnuaire = () => (
   <div className={styles.logoAnnuaire}>
-    <span className={styles.logoDiamond}>{diamond}</span>
-    <h1 className={styles.logoH1}>
+    <span>{diamond}</span>
+    <h1>
       L’<strong>Annuaire</strong> des
       <br />
       <strong>Entreprises</strong>

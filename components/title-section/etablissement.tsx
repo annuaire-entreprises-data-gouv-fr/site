@@ -1,4 +1,3 @@
-import React from 'react';
 import NonDiffusibleAlert from '#components-ui/alerts/non-diffusible';
 import ProtectedData from '#components-ui/alerts/protected-data';
 import Warning from '#components-ui/alerts/warning';
@@ -21,6 +20,7 @@ import {
   uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
 import { ISession, isAgent } from '#utils/session';
+import React from 'react';
 import { INSEE } from '../administrations';
 import { FICHE, Tabs } from './tabs';
 
