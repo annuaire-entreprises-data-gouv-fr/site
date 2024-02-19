@@ -134,7 +134,7 @@ export const Tabs: React.FC<{
             }) => (
               <a
                 className={`${
-                  currentFicheType === ficheType ? 'active' : ''
+                  currentFicheType === ficheType ? styles.activeLink : ''
                 } no-style-link`}
                 href={fullPath || `${pathPrefix}${uniteLegale.siren}`}
                 rel={noFollow ? 'nofollow' : ''}
@@ -149,7 +149,7 @@ export const Tabs: React.FC<{
           <>
             <div style={{ flexGrow: 1 }} />
             <a
-              className="active no-style-link"
+              className={styles.activeLink + ' no-style-link'}
               key="etablissement"
               href=""
               style={{ width: '120px' }}

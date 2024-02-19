@@ -1,3 +1,14 @@
+.activeLink {
+  box-shadow: none !important;
+  background-color: #fff !important;
+  border-bottom: 0 !important;
+
+  @media only screen and (min-width: 1px) and (max-width: 768px) {
+    border-bottom: 2px solid #dfdff1 !important;
+    line-height: 1.8rem !important;
+  }
+}
+
 .titleTabs {
   display: flex;
   flex-grow: 1;
@@ -47,16 +58,4 @@
 
 .titleTabs > a:hover {
   background-color: #dfdff1;
-}
-
-.titleTabs > a.active {
-  box-shadow: none;
-  background-color: #fff;
-  border-bottom: 0;
-
-  @media only screen and (min-width: 1px) and (max-width: 768px) {
-    background-color: #fff;
-    border-bottom: 2px solid #dfdff1;
-    line-height: 1.8rem;
-  }
 }

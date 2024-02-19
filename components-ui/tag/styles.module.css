@@ -1,4 +1,4 @@
-.fr-badge.dsfr-overwrite {
+.frBadge {
   white-space: nowrap;
   display: inline-block;
   vertical-align: middle;
@@ -6,13 +6,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-a.fr-badge {
+a.frBadge {
   text-decoration: underline;
   border: none;
 }
-a.fr-badge:hover {
+a.frBadge:hover {
   filter: brightness(0.95);
 }
-a.fr-badge:active {
+a.frBadge:active {
   filter: brightness(0.9);
 }

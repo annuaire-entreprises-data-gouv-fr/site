@@ -38,8 +38,8 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
           maxWidth: maxWidth || '80vw',
         }}
         className={
-          styles['.fr-badge'] +
-          ` fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]} dsfr-overwrite`
+          styles.frBadge +
+          ` fr-badge fr-badge--no-icon ${badgeSize[size]} ${badgeColor[color]}`
         }
       >
         {children}

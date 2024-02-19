@@ -20,11 +20,7 @@ import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { isAssociation, isCollectiviteTerritoriale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { getServicePublicByUniteLegale } from '#models/service-public';
-import {
-  shouldNotIndex,
-  uniteLegalePageDescription,
-  uniteLegalePageTitle,
-} from '#utils/helpers';
+import { extractSirenOrSiretSlugFromUrl } from '#utils/helpers';
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-props-helper/extract-params-app-router';
@@ -33,23 +29,21 @@ import { isSuperAgent } from '#utils/session';
 export async function generateMetadata(
   props: AppRouterProps
 ): Promise<Metadata> {
-  const { slug, page, isBot } = extractParamsAppRouter(props);
-
-  const uniteLegale = await getUniteLegaleFromSlug(slug, {
-    page,
-    isBot,
-  });
-
-  return {
-    title: uniteLegalePageTitle(uniteLegale, null),
-    description: uniteLegalePageDescription(uniteLegale, null),
-    robots: shouldNotIndex(uniteLegale) ? 'noindex, nofollow' : 'index, follow',
-    alternates: {
-      canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${
-        uniteLegale.chemin || uniteLegale.siren
-      }`,
-    },
-  };
+  // const { slug, page, isBot } = extractParamsAppRouter(props);
+  // const uniteLegale = await getUniteLegaleFromSlug(slug, {
+  //   page,
+  //   isBot,
+  // });
+  // return {
+  //   title: uniteLegalePageTitle(uniteLegale, null),
+  //   description: uniteLegalePageDescription(uniteLegale, null),
+  //   robots: shouldNotIndex(uniteLegale) ? 'noindex, nofollow' : 'index, follow',
+  //   alternates: {
+  //     canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${
+  //       uniteLegale.chemin || uniteLegale.siren
+  //     }`,
+  //   },
+  // };
 }
 
 export default async function UniteLegalePage(props: AppRouterProps) {
@@ -58,7 +52,14 @@ export default async function UniteLegalePage(props: AppRouterProps) {
 
   const { slug, isRedirected, page, isBot } = extractParamsAppRouter(props);
 
-  const uniteLegale = await getUniteLegaleFromSlug(slug, {
+  const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
+  if (sirenOrSiretSlug.length === 14) {
+    return {
+      redirect: `/etablissement/${sirenOrSiretSlug}`,
+    };
+  }
+
+  const uniteLegale = await getUniteLegaleFromSlug(sirenOrSiretSlug, {
     page,
     isBot,
   });

@@ -29,7 +29,7 @@ const Title: React.FC<IProps> = ({
   session,
 }) => (
   <div className={styles.headerSection}>
-    <div className="title">
+    <div>
       <TitleAlerts
         uniteLegale={uniteLegale}
         session={session}
@@ -40,9 +40,9 @@ const Title: React.FC<IProps> = ({
           {getNomComplet(uniteLegale, session)}
         </a>
       </h1>
-      <div className="unite-legale-sub-title">
+      <div className={styles.subTitle}>
         <UniteLegaleBadge uniteLegale={uniteLegale} />
-        <span className="siren">
+        <span className={styles.sirenTitle}>
           &nbsp;‣&nbsp;{formatIntFr(uniteLegale.siren)}
         </span>
         <span>
@@ -54,7 +54,7 @@ const Title: React.FC<IProps> = ({
         </span>
       </div>
       {uniteLegale.etablissements.all && (
-        <div className="unite-legale-sub-sub-title">
+        <div className={styles.subSubTitle}>
           <UniteLegaleEtablissementCountDescription uniteLegale={uniteLegale} />
         </div>
       )}
