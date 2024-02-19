@@ -5,7 +5,6 @@ import {
 } from '#components/badges-section/labels-and-certificates';
 import {
   IUniteLegale,
-  isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
@@ -36,8 +35,6 @@ export const Tabs: React.FC<{
   const shouldDisplayFinances =
     // hide for public services
     !isServicePublic(uniteLegale) &&
-    // hide for asso
-    !isAssociation(uniteLegale) &&
     // hide for EI
     !uniteLegale.complements.estEntrepreneurIndividuel;
 

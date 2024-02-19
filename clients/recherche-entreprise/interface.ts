@@ -15,6 +15,8 @@ export type IResult = {
   activite_principale: string;
   date_creation: string;
   date_mise_a_jour: string;
+  date_mise_a_jour_insee: string;
+  date_mise_a_jour_rne: string;
   dirigeants: IDirigeant[];
   etat_administratif: string;
   statut_diffusion: 'O' | 'P';
@@ -68,6 +70,7 @@ export type IEtablissementCore = {
   liste_id_organisme_formation: string[] | null;
   liste_rge: string[] | null;
   liste_uai: string[] | null;
+  statut_diffusion_etablissement: string;
 };
 
 export interface ISiege extends IEtablissementCore {

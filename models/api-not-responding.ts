@@ -24,3 +24,15 @@ export function isAPINotResponding<T extends Exclude<{}, IAPILoading>>(
   }
   return false;
 }
+
+export function isAPI404<T extends Exclude<{}, IAPILoading>>(
+  toBeDetermined: T | IAPINotRespondingError
+): toBeDetermined is IAPINotRespondingError {
+  if (
+    (toBeDetermined as IAPINotRespondingError).errorType &&
+    (toBeDetermined as IAPINotRespondingError).errorType === 404
+  ) {
+    return true;
+  }
+  return false;
+}

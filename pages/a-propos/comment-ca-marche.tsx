@@ -110,7 +110,11 @@ const About: NextPageWithLayout = () => {
           <p>
             Toutes les données utilisées sont ouvertes en open data et
             accessibles sur{' '}
-            <a href="https://data.gouv.fr/" target="_blank" rel="noreferrer">
+            <a
+              href="https://data.gouv.fr/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               data.gouv.fr
             </a>
             .
@@ -118,7 +122,11 @@ const About: NextPageWithLayout = () => {
           <p>
             Si vous souhaitez les réutiliser, vous pouvez utiliser les APIs du
             service public qui sont référencées sur{' '}
-            <a href="https://api.gouv.fr/" target="_blank" rel="noreferrer">
+            <a
+              href="https://api.gouv.fr/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               api.gouv.fr
             </a>
             .
@@ -135,7 +143,7 @@ const About: NextPageWithLayout = () => {
             <a
               href="https://api.gouv.fr/les-api/api-recherche-entreprises"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               l’API Recherche d’entreprises
             </a>
@@ -194,7 +202,7 @@ const About: NextPageWithLayout = () => {
               <a
                 href="https://www.economie.gouv.fr/dgccrf"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 DGCCRF
               </a>{' '}
@@ -202,7 +210,7 @@ const About: NextPageWithLayout = () => {
               <a
                 href="https://signal.conso.gouv.fr"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 Signal Conso
               </a>{' '}

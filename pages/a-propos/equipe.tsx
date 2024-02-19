@@ -70,7 +70,7 @@ const Equipe: NextPageWithLayout = () => {
           <a
             href="https://www.numerique.gouv.fr/dinum/"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             (DINUM)
           </a>
@@ -78,7 +78,7 @@ const Equipe: NextPageWithLayout = () => {
           <a
             href="https://entreprises.gouv.fr/"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             Direction Générale des Entreprises (DGE)
           </a>{' '}

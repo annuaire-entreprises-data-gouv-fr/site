@@ -20,7 +20,6 @@ env:
   IRON_SESSION_PWD: ${{ secrets.IRON_SESSION_PWD }}
   GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
   UPDOWN_IO_API_KEY: ${{ secrets.UPDOWN_IO_API_KEY }}
-
 jobs:
   dependencies:
     name: 'Install dependencies'

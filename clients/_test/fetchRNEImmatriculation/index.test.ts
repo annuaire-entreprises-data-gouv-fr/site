@@ -3,7 +3,7 @@ import { IImmatriculationRNE } from '#models/immatriculation';
 import { Siren } from '#utils/helpers';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 
-const TIMEOUT_RNE = 60000;
+const TIMEOUT_RNE = 90000;
 
 function postProcessResult(result: IImmatriculationRNE) {
   if (result.metadata.isFallback) {

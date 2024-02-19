@@ -15,6 +15,8 @@ import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import { ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
 import {
+  Siren,
+  Siret,
   extractNicFromSiret,
   extractSirenFromSiret,
   formatFirstNames,
@@ -148,10 +150,14 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     tranche_effectif_salarie = null,
     annee_tranche_effectif_salarie = null,
     date_creation,
-    date_mise_a_jour = '',
-    statut_diffusion = 'O',
+    date_mise_a_jour,
+    date_mise_a_jour_insee,
+    date_mise_a_jour_rne,
+    statut_diffusion,
     etablissements = [],
     caractere_employeur = '',
+    etat_administratif,
+    nombre_etablissements_ouverts,
   } = result;
 
   const nomComplet = (result.nom_complet || 'Nom inconnu').toUpperCase();
@@ -167,9 +173,10 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       }
     : { codeColter: null };
 
-  const etablissementSiege = mapToEtablissement(
+  const etablissementSiege = mapToSiege(
     siege,
-    est_entrepreneur_individuel
+    est_entrepreneur_individuel,
+    siren
   );
 
   const matchingEtablissements = matching_etablissements.map(
@@ -179,13 +186,10 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
 
   // case no open etablisssment
   let etatAdministratif = etatFromEtatAdministratifInsee(
-    result.etat_administratif,
+    etat_administratif || 'I',
     siren
   );
-  if (
-    estActif({ etatAdministratif }) &&
-    result.nombre_etablissements_ouverts === 0
-  ) {
+  if (estActif({ etatAdministratif }) && nombre_etablissements_ouverts === 0) {
     etatAdministratif = IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT;
   }
 
@@ -210,7 +214,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     etablissements: etablissementsList,
     etatAdministratif,
     statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
-      statut_diffusion,
+      statut_diffusion || 'O',
       siren
     ),
     nomComplet,
@@ -252,7 +256,9 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     },
     colter,
     dateCreation: parseDateCreationInsee(date_creation),
-    dateDerniereMiseAJour: date_mise_a_jour,
+    dateDerniereMiseAJour: date_mise_a_jour || '',
+    dateMiseAJourInsee: date_mise_a_jour_insee || '',
+    dateMiseAJourInpi: date_mise_a_jour_rne || '',
     conventionsCollectives: etablissements.reduce(
       (idccSiretPair, { siret, liste_idcc }) => {
         (liste_idcc || []).forEach((idcc) => {
@@ -263,6 +269,20 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       {} as IConventionsCollectives
     ),
   };
+};
+
+const mapToSiege = (
+  siege: IResult['siege'],
+  est_entrepreneur_individuel: boolean,
+  siren: Siren
+) => {
+  if (!siege || Object.keys(siege).length === 0) {
+    return {
+      ...createDefaultEtablissement(),
+      siret: '' as Siret,
+    };
+  }
+  return mapToEtablissement(siege, est_entrepreneur_individuel);
 };
 
 const mapToDirigeantModel = (
@@ -335,6 +355,7 @@ const mapToEtablissement = (
     liste_id_organisme_formation = [],
     liste_rge = [],
     liste_uai = [],
+    statut_diffusion_etablissement,
   } = etablissement;
 
   const enseigne = (liste_enseignes || []).join(' ');
@@ -369,6 +390,10 @@ const mapToEtablissement = (
     longitude,
     estSiege: est_siege,
     etatAdministratif,
+    statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
+      statut_diffusion_etablissement || 'O',
+      siret
+    ),
     denomination: nom_commercial,
     libelleActivitePrincipale:
       libelleFromCodeNAFWithoutNomenclature(activite_principale),

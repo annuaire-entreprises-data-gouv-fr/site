@@ -37,6 +37,7 @@
           "latitude": "48.870938",
           "longitude": "2.305916",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [],
@@ -81,6 +82,7 @@
               "latitude": "48.870938",
               "longitude": "2.305916",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [],
@@ -119,6 +121,7 @@
               "latitude": "48.870938",
               "longitude": "2.305916",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [],
@@ -139,7 +142,7 @@
         "dateCreation": "2020-01-13",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
         "dateDebutActivite": "",
-        "trancheEffectif": "N",
+        "trancheEffectif": "01",
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",
@@ -194,6 +197,7 @@
             "latitude": "48.870938",
             "longitude": "2.305916",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [],

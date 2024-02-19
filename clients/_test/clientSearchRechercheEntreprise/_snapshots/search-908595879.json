@@ -37,6 +37,7 @@
           "latitude": "48.873057",
           "longitude": "2.316605",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [
@@ -83,6 +84,7 @@
               "latitude": "48.873057",
               "longitude": "2.316605",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -121,6 +123,7 @@
               "latitude": "48.873057",
               "longitude": "2.316605",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -182,7 +185,7 @@
             "sexe": null,
             "nom": "ESTOURNET",
             "prenom": "Pierre",
-            "role": null,
+            "role": "Président de SAS",
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }

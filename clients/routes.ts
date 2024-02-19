@@ -82,6 +82,14 @@ const routes = {
         'https://www.journal-officiel.gouv.fr/pages/associations-recherche',
     },
   },
+  annuaireServicePublic: {
+    ods: {
+      metadata:
+        'https://api-lannuaire.service-public.fr/api/explore/v2.1/catalog/datasets/api-lannuaire-administration/',
+      search:
+        'https://api-lannuaire.service-public.fr/api/explore/v2.1/catalog/datasets/api-lannuaire-administration/records',
+    },
+  },
   franceConnect: {
     authorization: '/api/v1/authorize',
     token: '/api/v1/token',
@@ -148,11 +156,9 @@ const routes = {
     siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',
   },
   rechercheEntreprise: {
-    etablissement: 'https://api-annuaire-entreprises.data.gouv.fr/siret?q=',
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
     rechercheUniteLegaleStaging:
       'https://recherche-entreprises.api.gouv.fr/search',
-    uniteLegale: 'https://api-annuaire-entreprises.data.gouv.fr/siren?q=',
   },
   tooling: {
     grist: 'https://grist.incubateur.net/api/docs/',

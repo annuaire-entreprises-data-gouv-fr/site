@@ -1,3 +1,6 @@
+import { Metadata } from 'next';
+import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import BreakPageForPrint from '#components-ui/print-break-page';
 import AssociationSection from '#components/association-section';
 import CollectiviteTerritorialeSection from '#components/collectivite-territoriale-section';
 import { EspaceAgentSummarySection } from '#components/espace-agent-components/summary-section';
@@ -5,15 +8,18 @@ import EtablissementListeSection from '#components/etablissement-liste-section';
 import EtablissementSection from '#components/etablissement-section';
 import MatomoEventRedirected from '#components/matomo-event/search-redirected';
 import { NonDiffusibleSection } from '#components/non-diffusible';
+import ServicePublicSection from '#components/service-public-section';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
+import { isAPINotResponding } from '#models/api-not-responding';
 import { getAssociation } from '#models/association';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { isAssociation, isCollectiviteTerritoriale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
+import { getServicePublicByUniteLegale } from '#models/service-public';
 import {
   shouldNotIndex,
   uniteLegalePageDescription,
@@ -24,7 +30,6 @@ import extractParamsAppRouter, {
 } from '#utils/server-side-props-helper/extract-params-app-router';
 import { isSuperAgent } from '#utils/session';
 import useSession from 'hooks/use-session';
-import { Metadata } from 'next';
 
 export async function generateMetadata(
   props: AppRouterProps
@@ -49,8 +54,6 @@ export async function generateMetadata(
 }
 
 export default async function UniteLegalePage(props: AppRouterProps) {
-  // TODO :  postServerSideProps
-
   const session = useSession();
 
   const { slug, isRedirected, page, isBot } = extractParamsAppRouter(props);
@@ -60,10 +63,12 @@ export default async function UniteLegalePage(props: AppRouterProps) {
     isBot,
   });
 
-  const shouldFetchAssociation = !isBot && isAssociation(uniteLegale);
-  const association = shouldFetchAssociation
-    ? await getAssociation(uniteLegale)
-    : null;
+  const [association, servicePublic] = await Promise.all([
+    getAssociation(uniteLegale, { isBot }),
+    getServicePublicByUniteLegale(uniteLegale, {
+      isBot,
+    }),
+  ]);
 
   return (
     <>
@@ -86,14 +91,27 @@ export default async function UniteLegalePage(props: AppRouterProps) {
             {isSuperAgent(session) && (
               <EspaceAgentSummarySection uniteLegale={uniteLegale} />
             )}
+            {isCollectiviteTerritoriale(uniteLegale) && (
+              <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
+            )}
+            {servicePublic && (
+              <ServicePublicSection
+                uniteLegale={uniteLegale}
+                servicePublic={servicePublic}
+              />
+            )}
+            {(isCollectiviteTerritoriale(uniteLegale) ||
+              (servicePublic && !isAPINotResponding(servicePublic))) && (
+              <>
+                <HorizontalSeparator />
+                <BreakPageForPrint />
+              </>
+            )}
             {isAssociation(uniteLegale) && (
               <AssociationSection
                 uniteLegale={uniteLegale}
                 association={association}
               />
-            )}
-            {isCollectiviteTerritoriale(uniteLegale) && (
-              <CollectiviteTerritorialeSection uniteLegale={uniteLegale} />
             )}
             <UsefulShortcuts uniteLegale={uniteLegale} />
             {uniteLegale.siege && (

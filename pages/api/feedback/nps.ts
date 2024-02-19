@@ -19,6 +19,7 @@ const logAllEvents = async (req: NextApiRequest) => {
     const uuid = req.body['uuid'];
     const origin = req.body['radio-set-visitor-origin'] || NA;
     const text = req.body['textarea'] || null;
+    const hasEmail = !!req.body['email'];
     const email = req.body['email'] || NA;
 
     // grist
@@ -36,9 +37,16 @@ const logAllEvents = async (req: NextApiRequest) => {
 
     // tchap : only if text
     if (text) {
-      const commentaire = text
-        ? ` \nCommentaire : ${text} \nEmail : ${email}`
+      let commentaire = text ? ` \nCommentaire : ${text}` : '';
+
+      commentaire += hasEmail
+        ? `\nEmail : ${email} (<a href="mailto:${email}?subject=${encodeURIComponent(
+            `Réponse à votre message`
+          )}&body=${encodeURIComponent(
+            `Bonjour,\n Merci pour votre message : “ ${text} ” \nBonne journée,`
+          )}>répondre</a>)`
         : '';
+
       const tchapText = `Note : ${mood}/10 \nVisiteur : ${visitorType} \nOrigine : ${origin}${commentaire}`;
       logInTchap(tchapText);
     }

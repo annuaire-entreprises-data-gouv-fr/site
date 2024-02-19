@@ -5,6 +5,7 @@
   "result": {
     "bilans": [
       {
+        "confidentiality": "Partiellement confidentiel",
         "ratioDeVetuste": 90.991,
         "rotationDesStocksJours": 0,
         "margeEbe": 0,
@@ -33,6 +34,7 @@
         "year": 2019
       },
       {
+        "confidentiality": "Public",
         "ratioDeVetuste": 80.303,
         "rotationDesStocksJours": 232.914,
         "margeEbe": 7.053,
@@ -61,6 +63,7 @@
         "year": 2020
       },
       {
+        "confidentiality": "Partiellement confidentiel",
         "ratioDeVetuste": 70.479,
         "rotationDesStocksJours": 0,
         "margeEbe": 0,
@@ -89,6 +92,7 @@
         "year": 2021
       },
       {
+        "confidentiality": "Partiellement confidentiel",
         "ratioDeVetuste": 64.985,
         "rotationDesStocksJours": 0.672,
         "margeEbe": -27.746,

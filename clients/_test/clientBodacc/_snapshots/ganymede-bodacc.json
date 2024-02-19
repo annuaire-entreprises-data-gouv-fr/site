@@ -1,5 +1,7 @@
 {
-  "args": ["880878145"],
+  "args": [
+    "880878145"
+  ],
   "result": {
     "annonces": [
       {
@@ -13,23 +15,45 @@
         "path": "https://www.bodacc.fr/annonce/detail-annonce/B/20220227/446"
       },
       {
-        "titre": "Dépôts des comptes",
+        "titre": "Dépôts des comptes 2021",
         "sousTitre": "BODACC C n°20220090",
         "typeAvisLibelle": "Avis initial",
         "tribunal": "Greffe du Tribunal de Commerce de paris",
         "numeroAnnonce": 2528,
         "datePublication": "2022-05-08",
-        "details": "Comptes annuels et rapports de l’exercice clos le 2021-12-31",
+        "details": "Comptes annuels et rapports de l’exercice clos le 2021-12-31. \nLes comptes annuels sont accompagnés d'une déclaration de confidentialité en application du premier ou deuxième alinéa de l'article L. 232-25.",
         "path": "https://www.bodacc.fr/annonce/detail-annonce/C/20220090/2528"
       },
       {
-        "titre": "Dépôts des comptes",
+        "titre": "Dépôts des comptes 2020",
         "sousTitre": "BODACC C n°20210155",
         "typeAvisLibelle": "Avis initial",
         "tribunal": "GREFFE DU TRIBUNAL DE COMMERCE DE PARIS",
         "numeroAnnonce": 4392,
         "datePublication": "2021-08-11",
-        "details": "Comptes annuels et rapports de l’exercice clos le 2020-12-31",
+        "details": "Comptes annuels et rapports de l’exercice clos le 2020-12-31. \nLes comptes annuels sont accompagnés d'une déclaration de confidentialité en application du premier ou deuxième alinéa de l'article L. 232-25.",
+        "path": "https://www.bodacc.fr/annonce/detail-annonce/C/20210155/4392"
+      }
+    ],
+    "comptes": [
+      {
+        "titre": "Dépôts des comptes 2021",
+        "sousTitre": "BODACC C n°20220090",
+        "typeAvisLibelle": "Avis initial",
+        "tribunal": "Greffe du Tribunal de Commerce de paris",
+        "numeroAnnonce": 2528,
+        "datePublication": "2022-05-08",
+        "details": "Comptes annuels et rapports de l’exercice clos le 2021-12-31. \nLes comptes annuels sont accompagnés d'une déclaration de confidentialité en application du premier ou deuxième alinéa de l'article L. 232-25.",
+        "path": "https://www.bodacc.fr/annonce/detail-annonce/C/20220090/2528"
+      },
+      {
+        "titre": "Dépôts des comptes 2020",
+        "sousTitre": "BODACC C n°20210155",
+        "typeAvisLibelle": "Avis initial",
+        "tribunal": "GREFFE DU TRIBUNAL DE COMMERCE DE PARIS",
+        "numeroAnnonce": 4392,
+        "datePublication": "2021-08-11",
+        "details": "Comptes annuels et rapports de l’exercice clos le 2020-12-31. \nLes comptes annuels sont accompagnés d'une déclaration de confidentialité en application du premier ou deuxième alinéa de l'article L. 232-25.",
         "path": "https://www.bodacc.fr/annonce/detail-annonce/C/20210155/4392"
       }
     ],

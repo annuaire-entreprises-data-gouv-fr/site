@@ -33,7 +33,7 @@ const Login = () => {
           Disponible pour toutes les administrations, sans création de compte.
         </p>
       </p>
-      <ButtonAgentConnect />
+      <ButtonAgentConnect usePathFrom={false} />
       <style jsx>{`
         h1,
         p {

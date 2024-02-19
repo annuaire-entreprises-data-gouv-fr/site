@@ -93,6 +93,8 @@ export interface IUniteLegale extends IEtablissementsList {
   libelleActivitePrincipale: string;
   dateCreation: string;
   dateDerniereMiseAJour: string;
+  dateMiseAJourInsee: string;
+  dateMiseAJourInpi: string;
   dateDebutActivite: string;
   statutDiffusion: ISTATUTDIFFUSION; // diffusion des données autorisée - uniquement les EI
   etatAdministratif: IETATADMINSTRATIF;
@@ -132,6 +134,8 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     libelleActivitePrincipale: '',
     dateCreation: '',
     dateDerniereMiseAJour: '',
+    dateMiseAJourInsee: '',
+    dateMiseAJourInpi: '',
     dateDebutActivite: '',
     trancheEffectif: '',
     anneeCategorieEntreprise: null,
@@ -224,8 +228,6 @@ export const isAssociation = (
     (toBeDetermined as IAssociation).association.idAssociation !== null
   );
 };
-
-export interface IServicePublic extends IUniteLegale {}
 
 export const isServicePublic = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estServicePublic;
@@ -371,20 +373,5 @@ export class FetchRechercheEntrepriseException extends FetchRessourceException {
       administration: EAdministration.DINUM,
       ressource: 'RechercheEntreprise',
     });
-  }
-}
-
-/**
- * Represents an internal error.
- * This error should never be thrown.
- * If it is, it means that there is a bug in the code.
- */
-export class InternalError extends Exception {
-  constructor(args: {
-    message: string;
-    cause?: any;
-    context?: IExceptionContext;
-  }) {
-    super({ name: 'InternalError', ...args });
   }
 }

@@ -1,6 +1,6 @@
-import AnnoncesAssociationSection from '#components/annonces-section/annonces-association';
-import AnnoncesBodacc from '#components/annonces-section/bodacc';
-import { ComptesAssociationSection } from '#components/annonces-section/comptes-association';
+import { GetServerSideProps } from 'next';
+import AnnoncesBodacc from '#components/annonces-section/annonces/bodacc';
+import AnnoncesJOAFESection from '#components/annonces-section/annonces/joafe';
 import Meta from '#components/meta';
 import { DonneesPriveesSection } from '#components/non-diffusible';
 import Title from '#components/title-section';
@@ -18,7 +18,6 @@ import {
   postServerSideProps,
 } from '#utils/server-side-props-helper/post-server-side-props';
 import { isAgent } from '#utils/session';
-import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -52,10 +51,7 @@ const Annonces: NextPageWithLayout<IProps> = ({
           <DonneesPriveesSection />
         )}
         {isAssociation(uniteLegale) && (
-          <>
-            <AnnoncesAssociationSection uniteLegale={uniteLegale} />
-            <ComptesAssociationSection uniteLegale={uniteLegale} />
-          </>
+          <AnnoncesJOAFESection uniteLegale={uniteLegale} />
         )}
       </div>
     </>

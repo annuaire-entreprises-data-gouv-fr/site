@@ -1,7 +1,7 @@
 import { INSEE } from '#components/administrations';
 import { IUniteLegale } from '#models/core/types';
 import { formatIntFr } from '#utils/helpers';
-import Warning from './warning';
+import { Warning } from '.';
 
 const MultipleSirenAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
@@ -13,7 +13,7 @@ const MultipleSirenAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
         <INSEE /> : {formatIntFr(uniteLegale.oldSiren)} et{' '}
         {formatIntFr(uniteLegale.siren)}. Pour voir les informations complètes,
         consultez la page{' '}
-        <a href={`/entreprise/${uniteLegale.chemin}`}>
+        <a href={`/entreprise/${uniteLegale.siren}`}>
           {formatIntFr(uniteLegale.siren)}
         </a>
         .

@@ -1,5 +1,5 @@
 import { ErrorBoundary as SentryErrorBoundary } from '@sentry/nextjs';
-import Warning from '#components-ui/alerts/warning';
+import { Warning } from '#components-ui/alerts';
 import constants from '#models/constants';
 
 export default function SectionErrorBoundary({

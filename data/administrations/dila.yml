@@ -13,6 +13,10 @@ apiMonitors:
     apiSlug: joafe
     apigouvLink: https://api.gouv.fr/les-api/api-annonces-comptes-annuels-associations-joafe
     updownIoId: 8pjy
+  - apiName: API Annuaire des services publics
+    apiSlug: annuaire-administration
+    apigouvLink: https://api.gouv.fr/les-api/api-annuaire-administration-services-publics
+    updownIoId: ly69
 dataSources:
   - label: Bulletin officiel des annonces civiles et commerciales (BODACC)
     apiSlug: bodacc
@@ -29,5 +33,12 @@ dataSources:
       - label: Annonces du JOAFE
         targets:
           - association
+  - label: Annuaire de l'administration
+    apiSlug: annuaire-administration
+    datagouvLink: https://www.data.gouv.fr/fr/datasets/53699fe4a3a729239d206227/
+    data:
+      - label: Annuaire des services publics
+        targets:
+          - agent
 description: |
   La DILA est la Direction de l'Information Légale et Administrative. C'est une administration publique française. Dans le cadre de sa mission, la DILA a la charge de la diffusion des données dont la publication est obligatoire, par la publication au Journal-officiel de la République française et dans les bulletins d'annonces légale.

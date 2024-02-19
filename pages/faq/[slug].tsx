@@ -59,13 +59,15 @@ const FAQArticle: NextPageWithLayout<{ article: IFaqArticle }> = ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: allFaqArticles.map(({ slug }) => {
-      return {
-        params: {
-          slug,
-        },
-      };
-    }),
+    paths: allFaqArticles
+      .filter(({ body }) => !!body)
+      .map(({ slug }) => {
+        return {
+          params: {
+            slug,
+          },
+        };
+      }),
     fallback: false,
   };
 };

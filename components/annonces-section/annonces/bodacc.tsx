@@ -1,8 +1,7 @@
 import React from 'react';
 import routes from '#clients/routes';
-import Info from '#components-ui/alerts/info';
+import { Info } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
-import { Tag } from '#components-ui/tag';
 import { DILA } from '#components/administrations';
 import { DataSection } from '#components/section/data-section';
 import { FullTable } from '#components/table/full';
@@ -81,20 +80,23 @@ const AnnoncesBodaccSection: React.FC<{
                 &nbsp;:
               </p>
               <FullTable
-                head={['Publication', 'N°', 'Details', 'Lien']}
+                head={['Publication', 'Details', 'Lien']}
                 body={bodacc.annonces.map((annonce) => [
                   <strong>{formatDate(annonce.datePublication)}</strong>,
-                  <Tag>n°&nbsp;{annonce.numeroAnnonce}</Tag>,
-                  <div className="annonce">
-                    <strong>{annonce.titre}</strong>
-                    <div className="font-small">
-                      <i>{annonce.sousTitre}</i>
-                      {annonce.tribunal && (
-                        <i> publiée au {annonce.tribunal}</i>
-                      )}
+                  <>
+                    <div>
+                      <strong>{annonce.titre}</strong>
                     </div>
-                    <i className="font-small">{annonce.details}</i>
-                  </div>,
+                    {annonce.details}
+                    <div>
+                      <i className="font-small">
+                        Annonce n°{annonce.numeroAnnonce}, {annonce.sousTitre}
+                        {annonce.tribunal && (
+                          <>, publiée au {annonce.tribunal}</>
+                        )}
+                      </i>
+                    </div>
+                  </>,
                   <ButtonLink target="_blank" to={annonce.path} alt small>
                     ⇢&nbsp;Consulter
                   </ButtonLink>,

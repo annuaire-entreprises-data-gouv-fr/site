@@ -1,7 +1,7 @@
 import routes from '#clients/routes';
 import { stubClient } from '#clients/stub-client-with-snaphots';
-import { IAnnoncesAssociation, IComptesAssociation } from '#models/annonces';
-import { IdRna, Siren } from '#utils/helpers';
+import { IAnnoncesAssociation } from '#models/annonces';
+import { IdRna, Siren, formatDateLong } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import odsClient from '../..';
 
@@ -87,7 +87,7 @@ const clientJOAFE = async (idRna: string): Promise<IAnnoncesAssociation> => {
 const clientDCA = async (
   siren: Siren,
   idRna: IdRna | string
-): Promise<IComptesAssociation> => {
+): Promise<IAnnoncesAssociation> => {
   const filterParam = `&q=dca_siren=${siren}+OR+numero_rna=${idRna}&refine.source=dca&sort=dca_datecloture`;
 
   const searchUrl = `${routes.journalOfficielAssociations.ods.search}${filterParam}`;
@@ -96,12 +96,16 @@ const clientDCA = async (
   const response = await odsClient({ url: searchUrl }, metaDataUrl);
 
   return {
-    comptes: response.records.map((compte: IDCAField) => ({
-      dateparution: compte.dateparution,
+    annonces: response.records.map((compte: IDCAField) => ({
+      datePublication: compte.dateparution,
       numeroParution: compte.id,
-      datecloture: compte.dca_datecloture || '',
-      anneeCloture: getFiscalYear(compte.dca_datecloture) || '',
-      permalinkUrl: `${routes.journalOfficielAssociations.site.dca}/?q.id=id:${compte.id}`,
+      typeAvisLibelle: `Dépôt de compte ${getFiscalYear(
+        compte.dca_datecloture
+      )}`,
+      details: `Date de clôture de l'exercice : ${formatDateLong(
+        compte.dca_datecloture
+      )}`,
+      path: `${routes.journalOfficielAssociations.site.dca}/?q.id=id:${compte.id}`,
     })),
     lastModified: response.lastModified,
   };
