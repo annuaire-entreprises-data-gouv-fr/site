@@ -8,7 +8,10 @@ import { ISession } from '#utils/session';
 import { SessionProvider } from 'hooks/use-session';
 import '../frontend/src/entry-with-react';
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+export type NextPageWithLayout<P = Record<never, never>, IP = P> = NextPage<
+  P,
+  IP
+> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 

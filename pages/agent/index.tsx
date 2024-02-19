@@ -1,14 +1,12 @@
-import { GetStaticProps } from 'next';
 import { ReactElement } from 'react';
 import ButtonAgentConnect from '#components-ui/button-agent-connect';
 import Container from '#components-ui/container';
 import { LayoutSimple } from '#components/layouts/layout-simple';
 import Meta from '#components/meta';
+import { administrationsMetaData } from '#models/administrations';
 import { NextPageWithLayout } from 'pages/_app';
 
-interface IProps {}
-
-const LandingPage: NextPageWithLayout<IProps> = ({}) => (
+const LandingPage: NextPageWithLayout = () => (
   <>
     <Meta
       title="Espace agent | Annuaire des Entreprises"
@@ -98,22 +96,22 @@ const LandingPage: NextPageWithLayout<IProps> = ({}) => (
     <section>
       <h3>
         L’Annuaire des Entreprises est opéré par la DINUM, avec le partenariat
-        de l’INSEE, l’INPI, l’ADEME etc.
+        des administrations suivantes :
       </h3>
       <div className="logo-soup">
-        <img src="/images/logos/ademe.svg" alt="ADEME" />
-        <img src="/images/logos/insee.svg" alt="INSEE" />
-        <img src="/images/logos/inpi.svg" alt="INPI" />
-        <img src="/images/logos/agence-bio.svg" alt="Agence bio" />
-        <img src="/images/logos/ess-france.svg" alt="ESS-France" />
-        <img
-          src="/images/logos/marche-inclusion.svg"
-          alt="Marché de l'inclusion"
-        />
-        <img src="/images/logos/dila.svg" alt="DILA" />
-
-        <img src="/images/logos/vies.svg" alt="VIES" />
+        {Object.values(administrationsMetaData)
+          .sort((a, b) => a.long.localeCompare(b.long))
+          .map(({ slug, long, logoType }) =>
+            logoType && slug ? (
+              <img src={`/images/logos/${slug}.svg`} alt={long} key={slug} />
+            ) : null
+          )}
       </div>
+      <p>
+        <a href="/administrations">
+          → Voir la liste complète des administrations partenaires
+        </a>
+      </p>
     </section>
     <style jsx>
       {`
@@ -203,7 +201,7 @@ function CaseExample({ title, description, image }: ICaseExampleProps) {
           }
           img + * {
             border-left: 2px solid var(--background-alt-blue-france);
-            padding-left: 2rem;
+            padding-left: 1.5rem;
           }
           @media (max-width: 768px) {
             .case-example {
@@ -227,12 +225,6 @@ function CaseExample({ title, description, image }: ICaseExampleProps) {
 
 LandingPage.getLayout = function getLayout(page: ReactElement) {
   return <LayoutSimple>{page}</LayoutSimple>;
-};
-
-export const getStaticProps: GetStaticProps = async ({}) => {
-  return {
-    props: {},
-  };
 };
 
 export default LandingPage;

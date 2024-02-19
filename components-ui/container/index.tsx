@@ -7,12 +7,20 @@ type ContainerProps = {
 };
 
 /**
- * This container is used to wrap the main content of the page
+ * This container is a wrapper arround `.fr-container` from the DSFR
  *
- * It can be wrapped inside another container to create a nested container, with a different style (usually, a container with a different background color)
+ * It can be use at any level of nesting inside the HTML tree, and will always
+ * create a new outer container wrapper that takes the full width of the viewport, and
+ * then create a `.fr-container` inside of it.
+ *
+ * It exposes a `className` and `style` props to allow for custom styling of the
+ * outer container.
+ *
+ * This enable to style the outer container with a background color that spans the
+ * full width of the viewport for instance.
  *
  */
-export default function Container({
+export default function FullWidthContainer({
   children,
   style = {},
   className = '',
@@ -35,8 +43,6 @@ export default function Container({
           display: flex;
           flex-direction: column;
           min-width: 100vw;
-        }
-        .fr-container {
         }
       `}</style>
     </>
