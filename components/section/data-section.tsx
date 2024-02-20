@@ -13,7 +13,7 @@ import {
 import { useTimeout } from 'hooks/use-timeout';
 import { ISectionProps, Section } from '.';
 import DataSectionLoader from './data-section-loader';
-import { ProtectedSection } from './protected-section';
+import { ProtectedSection } from './protected';
 
 interface IDataSectionProps<T> extends ISectionProps {
   data: IAPINotRespondingError | IAPILoading | T;

@@ -1,24 +1,22 @@
-'use client';
-
 import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
-import { ProtectedSection } from '#components/section/protected-section';
+import { ProtectedSection } from '#components/section/protected';
 import { TwoColumnTable } from '#components/table/simple';
 import { IUniteLegale } from '#models/core/types';
-import { isSuperAgent } from '#utils/session';
-import useSession from 'hooks/use-session';
+import { ISession, isSuperAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps {
   uniteLegale: IUniteLegale;
+  session: ISession | null;
 }
 
 export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
   uniteLegale,
+  session,
 }) => {
-  const session = useSession();
   return (
     <PrintNever>
       <ProtectedSection title="Résumé pour les agents publics">

@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import { Question } from '#components-ui/question';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
-import { Header } from '#components/header';
+import { HeaderWithAdvancedSearch } from '#components/header/header-advanced-search';
 import { WeNeedYouModal } from '#components/modal/we-need-you';
 import SocialNetworks from '#components/social-network';
 
@@ -19,7 +19,7 @@ export const LayoutDefault = ({
       <WeNeedYouModal />
       <NPSBanner />
 
-      <Header
+      <HeaderWithAdvancedSearch
         useSearchBar={searchBar}
         useAdvancedSearch={false}
         useMap={false}

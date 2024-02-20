@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { Header } from '#components/header';
+import { HeaderWithAdvancedSearch } from '#components/header/header-advanced-search';
 
 type IProps = {
   img: JSX.Element;
@@ -10,7 +10,7 @@ export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
   img,
 }) => (
   <div id="page-layout">
-    <Header
+    <HeaderWithAdvancedSearch
       useSearchBar={false}
       useLogo={true}
       useAdvancedSearch={false}

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
 import constants from '#models/constants';
-import { NextPageWithLayout } from '../../pages/_app';
+import { NextPageWithLayout } from '../../../pages/_app';
 
 export const metadata: Metadata = {
   title: 'Déclaration d’accessibilité',
@@ -56,17 +56,16 @@ const Accessibility: NextPageWithLayout = () => (
       responsable du site internet un défaut d’accessibilité qui vous empêche
       d’accéder à un contenu ou à un des services du portail et vous n’avez pas
       obtenu de réponse satisfaisante.
-      <br />
-      <p>Vous pouvez :</p>
-      <ul>
-        <li>Écrire un message au Défenseur des droits</li>
-        <li>Contacter le délégué du Défenseur des droits dans votre région</li>
-        <li>
-          Envoyer un courrier par la poste (gratuit, ne pas mettre de timbre) :
-          Défenseur des droits Libre réponse 71120 75342 Paris CEDEX 07
-        </li>
-      </ul>
     </p>
+    <p>Vous pouvez :</p>
+    <ul>
+      <li>Écrire un message au Défenseur des droits</li>
+      <li>Contacter le délégué du Défenseur des droits dans votre région</li>
+      <li>
+        Envoyer un courrier par la poste (gratuit, ne pas mettre de timbre) :
+        Défenseur des droits Libre réponse 71120 75342 Paris CEDEX 07
+      </li>
+    </ul>
   </TextWrapper>
 );
 

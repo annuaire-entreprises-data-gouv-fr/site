@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
-import { NextPageWithLayout } from '../../pages/_app';
+import { NextPageWithLayout } from '../../../pages/_app';
 
 export const metadata: Metadata = {
   title: 'Mentions légales',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   },
 };
 
-const Privacy: NextPageWithLayout = () => (
+const Mentions: NextPageWithLayout = () => (
   <TextWrapper>
     <h1>Mentions légales</h1>
     <h2>Éditeur</h2>
@@ -33,4 +33,4 @@ const Privacy: NextPageWithLayout = () => (
   </TextWrapper>
 );
 
-export default Privacy;
+export default Mentions;

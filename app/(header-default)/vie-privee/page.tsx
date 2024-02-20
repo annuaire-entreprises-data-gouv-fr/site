@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
 import { DILA, INPI, INSEE } from '#components/administrations';
-import { NextPageWithLayout } from '../../pages/_app';
+import { NextPageWithLayout } from '../../../pages/_app';
 
 export const metadata: Metadata = {
   title: 'Politique de confidentialité',
@@ -28,27 +28,26 @@ const Privacy: NextPageWithLayout = () => (
       du service. Ces données ne pourront en aucun cas servir au contrôle et à
       la surveillance de l’activité des Utilisateurs et Utilisatrices. Les
       données à caractère personnel concernées sont les suivantes :
-      <ul>
-        <li>
-          Données relatives aux dirigeants : prénoms, nom, lieu et mois de
-          naissance, adresse postale; (organisme qui produit les données :{' '}
-          <INSEE />, <DILA />, <INPI />)
-        </li>
-        <li>
-          Données relatives aux bénéficiaires effectifs : prénoms, nom, prénoms,
-          date de naissance et nationalité; (organisme qui produit les données :{' '}
-          <INPI />)
-        </li>
-        <li>
-          Données relatives aux agents publics : nom, prénom, adresse e-mail.
-        </li>
-        <li>
-          Données relatives aux personnes physiques qui s’opposent au traitement
-          de leurs données identifiantes : nom, prénom, lieu et date de
-          naissance.
-        </li>
-      </ul>
     </p>
+    <ul>
+      <li>
+        Données relatives aux dirigeants : prénoms, nom, lieu et mois de
+        naissance, adresse postale; (organisme qui produit les données :{' '}
+        <INSEE />, <DILA />, <INPI />)
+      </li>
+      <li>
+        Données relatives aux bénéficiaires effectifs : prénoms, nom, prénoms,
+        date de naissance et nationalité; (organisme qui produit les données :{' '}
+        <INPI />)
+      </li>
+      <li>
+        Données relatives aux agents publics : nom, prénom, adresse e-mail.
+      </li>
+      <li>
+        Données relatives aux personnes physiques qui s’opposent au traitement
+        de leurs données identifiantes : nom, prénom, lieu et date de naissance.
+      </li>
+    </ul>
     <p>
       La présente politique de confidentialité informe les personnes concernées
       sur le traitement de données à caractère personnel sur Annuaire des
@@ -344,11 +343,11 @@ const Privacy: NextPageWithLayout = () => (
         annuaire-entreprises@data.gouv.fr
       </a>{' '}
       ou par courrier à l’adresse suivante :
-      <ul>
-        <li>DINUM, A l’attention d’annuaire-entreprises</li>
-        <li>20 avenue de Ségur 75007 Paris</li>
-      </ul>
     </p>
+    <ul>
+      <li>DINUM, A l’attention d’annuaire-entreprises</li>
+      <li>20 avenue de Ségur 75007 Paris</li>
+    </ul>
     <p>
       Si vous vous opposez au traitement de vos données à caractère personnel,
       celles-ci ne seront plus diffusées en open data dans la rubrique
@@ -358,42 +357,41 @@ const Privacy: NextPageWithLayout = () => (
     </p>
     <p>
       Pour exercer votre droit de modification, nous vous invitons à vous
-      rapprocher des organismes qui ont produit ces données.
-      <ul>
-        <li>
-          l’
-          <INSEE /> (Institut national de la statistique et des études
-          économiques)
-        </li>
-        <li>
-          l’
-          <INPI /> (Institut national de la propriété industrielle)
-        </li>
-        <li>
-          la <DILA /> (Direction de l’information légale et administrative)
-        </li>
-      </ul>
+      rapprocher des organismes qui ont produit ces données :
     </p>
+    <ul>
+      <li>
+        l’
+        <INSEE /> (Institut national de la statistique et des études
+        économiques)
+      </li>
+      <li>
+        l’
+        <INPI /> (Institut national de la propriété industrielle)
+      </li>
+      <li>
+        la <DILA /> (Direction de l’information légale et administrative)
+      </li>
+    </ul>
     <p>
       Pour exercer vos droits, vous pouvez également contacter le délégué à la
       protection des données (DPD) des services du Premier Ministre : par mail à{' '}
       <a href="mailto:dpd@pm.gouv.fr">dpd@pm.gouv.fr</a>
       ou par courrier à l’adresse suivante :
-      <ul>
-        <li>
-          Services du Premier Ministre À l’attention du délégué à la protection
-          des données (DPD)
-        </li>
-        <li>56 rue de Varenne 75007 Paris</li>
-      </ul>
-      Conformément au règlement général sur la protection des données, vous
-      disposez du droit d’introduire une réclamation auprès de la CNIL (3 place
-      de Fontenoy – TSA 80715 – 75334 PARIS CEDEX 07).
-      <br />
-      Les modalités de réclamation sont précisées sur le site de la CNIL :{' '}
-      <a href="https://www.cnil.fr">www.cnil.fr</a>.
     </p>
-    <h2>Contact</h2>
+    <ul>
+      <li>
+        Services du Premier Ministre À l’attention du délégué à la protection
+        des données (DPD)
+      </li>
+      <li>56 rue de Varenne 75007 Paris</li>
+    </ul>
+    Conformément au règlement général sur la protection des données, vous
+    disposez du droit d’introduire une réclamation auprès de la CNIL (3 place de
+    Fontenoy – TSA 80715 – 75334 PARIS CEDEX 07).
+    <br />
+    Les modalités de réclamation sont précisées sur le site de la CNIL :{' '}
+    <a href="https://www.cnil.fr">www.cnil.fr</a>.<h2>Contact</h2>
     <p>
       L’adresse mail de contact est la suivante :
       <a href="mailto:annuaire-entreprises@data.gouv.fr">

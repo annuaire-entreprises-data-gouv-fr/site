@@ -1,5 +1,5 @@
 import ButtonAgentConnect from '#components-ui/button-agent-connect';
-import { ProtectedSection } from '#components/section/protected-section';
+import { ProtectedSection } from '#components/section/protected';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 

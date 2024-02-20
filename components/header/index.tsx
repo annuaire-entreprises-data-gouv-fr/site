@@ -1,43 +1,59 @@
 'use client';
-import React from 'react';
-import { AdvancedSearch } from '#components/advanced-search';
-import { IParams } from '#models/search-filter-params';
-import { HeaderSimple } from './header-simple';
+
+import { PrintNever } from '#components-ui/print-visibility';
+import constants from '#models/constants';
+import { isLoggedIn } from '#utils/session';
+import usePathFromRouter from 'hooks/use-path-from-router';
+import useSession from 'hooks/use-session';
+import { HeaderCore } from './header-core';
 
 type IProps = {
-  currentSearchTerm?: string;
-  useMap?: boolean;
-  searchParams?: IParams;
-  useAdvancedSearch?: boolean;
   useLogo?: boolean;
   useSearchBar?: boolean;
   useAgentCTA?: boolean;
+  useMap?: boolean;
+  plugin?: JSX.Element;
 };
 
 export const Header: React.FC<IProps> = ({
-  currentSearchTerm = '',
-  searchParams = {},
-  useMap = false,
   useLogo = false,
-  useAdvancedSearch = false,
   useSearchBar = false,
+  useMap = false,
   useAgentCTA = false,
+  plugin = null,
 }) => {
-  const advancedSearchPlugin = useAdvancedSearch ? (
-    <AdvancedSearch
-      searchParams={searchParams}
-      currentSearchTerm={currentSearchTerm}
-      isMap={useMap}
-    />
-  ) : undefined;
-
+  const session = useSession();
+  const pathFrom = usePathFromRouter();
   return (
-    <HeaderSimple
-      useMap={useMap}
-      useLogo={useLogo}
-      useSearchBar={useSearchBar}
-      useAgentCTA={useAgentCTA}
-      plugin={advancedSearchPlugin}
-    />
+    <header
+      role="banner"
+      className="fr-header"
+      style={{ filter: !useSearchBar ? 'none !important' : undefined }}
+    >
+      <div
+        id="loader-bar"
+        style={{
+          background: isLoggedIn(session)
+            ? constants.colors.espaceAgent
+            : 'transparent',
+        }}
+      />
+      <PrintNever>
+        <form
+          id="search-bar-form"
+          action={useMap ? '/rechercher/carte' : '/rechercher'}
+          method="get"
+        >
+          <HeaderCore
+            useSearchBar={useSearchBar}
+            useLogo={useLogo}
+            useAgentCTA={useAgentCTA}
+            pathFrom={pathFrom}
+            session={session}
+          />
+          {plugin}
+        </form>
+      </PrintNever>
+    </header>
   );
 };

@@ -20,9 +20,9 @@ export default async function Changelog() {
         Découvrez les dernières fonctionnalités ajoutées au site internet&nbsp;:
       </p>
       <ul style={{ listStyleType: 'none', margin: '0', padding: '0' }}>
-        {changelog.map((change) => (
+        {changelog.map((change, index) => (
           <li
-            key={change.date}
+            key={index}
             style={{
               display: 'flex',
               marginBottom: '10px',

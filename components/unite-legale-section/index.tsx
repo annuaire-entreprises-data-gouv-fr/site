@@ -128,7 +128,7 @@ const UniteLegaleSection: React.FC<{
         {uniteLegale.dateMiseAJourInpi && (
           <li>
             Extrait RNE (équivalent KBIS/D1) :{' '}
-            <ExtraitRNELink uniteLegale={uniteLegale} />
+            <ExtraitRNELink uniteLegale={uniteLegale} session={session} />
           </li>
         )}
         {uniteLegale.dateMiseAJourInsee && (
