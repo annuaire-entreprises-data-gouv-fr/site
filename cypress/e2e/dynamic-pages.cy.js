@@ -5,7 +5,7 @@ describe(`Dirigeants and élus pages`, () => {
   });
 
   it('Elus page loads', () => {
-    cy.visit(`/elus/200054781`);
+    cy.visit(`/elus/217500016`);
     cy.contains('Anne HIDALGO').should('be.visible');
   });
 });
