@@ -61,7 +61,7 @@ const mapToDomainObject = (downtimes: IUpdownIODowntimes[]): IMonitoring => {
     isOnline,
     uptime: {
       day: avg(series.slice(-1)).toFixed(2),
-      week: avg(series.slice(- 7)).toFixed(2),
+      week: avg(series.slice(-7)).toFixed(2),
       month: avg(series).toFixed(2),
     },
   };
