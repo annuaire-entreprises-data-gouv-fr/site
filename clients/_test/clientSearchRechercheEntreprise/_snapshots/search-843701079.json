@@ -41,8 +41,8 @@
             "idFiness": [],
             "idBio": [],
             "idcc": [
-              "2609",
-              "1596"
+              "1596",
+              "2609"
             ],
             "idOrganismeFormation": [],
             "idRge": [
@@ -99,8 +99,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "2609",
-                  "1596"
+                  "1596",
+                  "2609"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -149,8 +149,8 @@
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
-                  "2609",
-                  "1596"
+                  "1596",
+                  "2609"
                 ],
                 "idOrganismeFormation": [],
                 "idRge": [
@@ -180,6 +180,8 @@
         "libelleActivitePrincipale": "Travaux de charpente",
         "dateCreation": "2018-11-12",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2023-11-30T11:21:41",
+        "dateMiseAJourInpi": "2024-01-13T23:12:14",
         "dateDebutActivite": "",
         "trancheEffectif": "02",
         "anneeCategorieEntreprise": "2021",
