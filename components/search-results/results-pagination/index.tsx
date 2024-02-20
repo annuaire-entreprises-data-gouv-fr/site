@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { buildSearchQuery, IParams } from '#models/search-filter-params';
@@ -147,7 +145,7 @@ const ResultsPagination: React.FC<IProps> = ({
   }
 
   return (
-    <div className="layout-center">
+    <div className="layout-center" style={{ margin: '15px auto' }}>
       <nav role="navigation" className="fr-pagination" aria-label="Pagination">
         <ul className="fr-pagination__list">
           <First
@@ -196,11 +194,6 @@ const ResultsPagination: React.FC<IProps> = ({
           />
         </ul>
       </nav>
-      <style jsx>{`
-        div.layout-center {
-          margin: 15px auto;
-        }
-      `}</style>
     </div>
   );
 };

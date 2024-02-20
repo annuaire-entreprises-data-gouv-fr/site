@@ -1,12 +1,12 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import React from 'react';
-import usePathFromRouter from 'hooks/use-path-from-router';
 
 const ButtonAgentConnect: React.FC<{ usePathFrom?: boolean }> = ({
   usePathFrom,
 }) => {
-  const pathFrom = usePathFromRouter();
+  const pathFrom = usePathname();
   return (
     <form action="/api/auth/agent-connect/login" method="get">
       {usePathFrom && pathFrom && (

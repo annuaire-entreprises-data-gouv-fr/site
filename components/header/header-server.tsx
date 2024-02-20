@@ -1,5 +1,5 @@
-import { usePathname } from 'next/navigation';
-import useSession from 'hooks/use-session';
+import usePathServer from 'hooks/use-path-server';
+import useSessionServer from 'hooks/use-session-server';
 import { HeaderCore } from './header-core';
 
 type IProps = {
@@ -9,15 +9,16 @@ type IProps = {
   useMap?: boolean;
   plugin?: JSX.Element;
 };
-export const Header: React.FC<IProps> = ({
+
+export const HeaderServer: React.FC<IProps> = async ({
   useLogo = false,
   useSearchBar = false,
   useMap = false,
   useAgentCTA = false,
   plugin,
 }) => {
-  const session = useSession();
-  const pathFrom = usePathname();
+  const session = await useSessionServer();
+  const pathFrom = usePathServer();
 
   return (
     <HeaderCore
@@ -27,7 +28,7 @@ export const Header: React.FC<IProps> = ({
       useAgentCTA={useAgentCTA}
       plugin={plugin}
       session={session}
-      pathFrom={pathFrom || ''}
+      pathFrom={pathFrom}
     />
   );
 };

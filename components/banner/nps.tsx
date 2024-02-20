@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
 import styles from './styles.module.css';

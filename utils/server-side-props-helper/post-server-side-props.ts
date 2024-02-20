@@ -49,7 +49,6 @@ export function postServerSideProps(
       );
 
     closeAPM(transaction);
-
     await setVisitTimestamp(contextWithSession.req.session);
 
     return {

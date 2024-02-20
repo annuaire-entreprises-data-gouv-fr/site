@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
 import { cache } from 'react';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
@@ -32,13 +31,16 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-props-helper/extract-params-app-router';
 import { isSuperAgent } from '#utils/session';
+import useSessionServer from 'hooks/use-session-server';
 
 const cachedGetUniteLegale = cache(
   async (slug: string, page: number, isBot: boolean) => {
-    return await getUniteLegaleFromSlug(slug, {
+    const sirenOrSiret = extractSirenOrSiretSlugFromUrl(slug);
+    const uniteLegale = await getUniteLegaleFromSlug(sirenOrSiret, {
       page,
       isBot,
     });
+    return uniteLegale;
   }
 );
 
@@ -46,12 +48,7 @@ export async function generateMetadata(
   props: AppRouterProps
 ): Promise<Metadata> {
   const { slug, page, isBot } = extractParamsAppRouter(props);
-  const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
-  if (sirenOrSiretSlug.length === 14) {
-    redirect(`/etablissement/${sirenOrSiretSlug}`);
-  }
-
-  const uniteLegale = await cachedGetUniteLegale(sirenOrSiretSlug, page, isBot);
+  const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
   return {
     title: uniteLegalePageTitle(uniteLegale, null),
     description: uniteLegalePageDescription(uniteLegale, null),
@@ -65,17 +62,11 @@ export async function generateMetadata(
 }
 
 export default async function UniteLegalePage(props: AppRouterProps) {
-  // post server side props et session
-  const session = null;
+  // post server side props ? et session ?
+  const session = await useSessionServer();
 
-  const { slug, isRedirected, page, isBot } = extractParamsAppRouter(props);
-
-  const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
-  if (sirenOrSiretSlug.length === 14) {
-    redirect(`/etablissement/${sirenOrSiretSlug}`);
-  }
-
-  const uniteLegale = await cachedGetUniteLegale(sirenOrSiretSlug, page, isBot);
+  const { slug, page, isBot, isRedirected } = extractParamsAppRouter(props);
+  const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
 
   const [association, servicePublic] = await Promise.all([
     getAssociation(uniteLegale, { isBot }),

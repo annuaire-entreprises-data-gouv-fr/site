@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { Question } from '#components-ui/question';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
-import { Header } from '#components/header';
+import { HeaderServer } from '#components/header/header-server';
 import SocialNetworks from '#components/social-network';
 import '../../frontend/style/dsfr.min.css';
 import '../../frontend/style/globals.css';
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     'L’administration permet aux particuliers, entrepreneurs et agents publics de vérifier les informations informations légales des entreprises, associations et services publics en France.',
 };
 
-export default function LayoutWithSearchBar({
+export default async function LayoutWithSearchBar({
   children,
 }: {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ export default function LayoutWithSearchBar({
       <body>
         <div style={{ width: '100%' }}>
           <NPSBanner />
-          <Header useSearchBar={true} useAgentCTA={true} />
+          <HeaderServer useSearchBar={true} useAgentCTA={true} />
           <main className="fr-container">{children}</main>
           <SocialNetworks />
           <Question />
