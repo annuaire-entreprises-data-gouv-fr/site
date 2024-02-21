@@ -16,39 +16,17 @@ import {
   uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
 import { ISession } from '#utils/session';
-import { INSEE } from '../administrations';
-import TitleAlerts from './alerts';
-import { FICHE, Tabs } from './tabs';
-
-const MapTitleEtablissement: React.FC<{
-  title?: string;
-  etablissement: IEtablissement;
-}> = ({ title, etablissement }) => (
-  <div className="sub-title">
-    <h2>{title || 'Information sur l’Etablissement'}</h2>
-    <span>établissement ‣ {formatSiret(etablissement.siret)}</span>
-    {etablissement.estSiege && <Tag color="info">siège social</Tag>}
-    <IsActiveTag
-      etatAdministratif={etablissement.etatAdministratif}
-      statutDiffusion={etablissement.statutDiffusion}
-      since={etablissement.dateFermeture}
-    />
-    <style jsx>{`
-      .sub-title > span {
-        color: #666;
-        font-variant: small-caps;
-        font-size: 1.1rem;
-      }
-    `}</style>
-  </div>
-);
+import { INSEE } from '../../administrations';
+import TitleAlerts from '../alerts';
+import { FICHE, Tabs } from '../tabs';
+import styles from './styles.module.css';
 
 const TitleEtablissementWithDenomination: React.FC<{
   uniteLegale: IUniteLegale;
   etablissement: IEtablissement;
   session: ISession | null;
 }> = ({ uniteLegale, etablissement, session }) => (
-  <div className="etablissement-title">
+  <div className={styles.etablissementTitle}>
     {etablissement.oldSiret &&
       etablissement.oldSiret !== etablissement.siret && (
         <Warning full>
@@ -79,8 +57,10 @@ const TitleEtablissementWithDenomination: React.FC<{
       )}
     </h1>
 
-    <div className="etablissement-sub-title">
-      <span className="siret-or-siren">{formatSiret(etablissement.siret)}</span>
+    <div className={styles.subTitle}>
+      <span className={styles.sirenOrSiret}>
+        {formatSiret(etablissement.siret)}
+      </span>
       {estNonDiffusible(etablissement) && <Tag color="new">non-diffusible</Tag>}
       <IsActiveTag
         etatAdministratif={etablissement.etatAdministratif}
@@ -88,7 +68,7 @@ const TitleEtablissementWithDenomination: React.FC<{
         since={etablissement.dateFermeture}
       />
     </div>
-    <div className="etablissement-sub-sub-title">
+    <div className={styles.subSubTitle}>
       <span>Cet établissement est </span>
       {etablissement.estSiege ? (
         <>
@@ -110,7 +90,7 @@ const TitleEtablissementWithDenomination: React.FC<{
         {uniteLegaleLabelWithPronounContracted(uniteLegale)}{' '}
         <a href={`/entreprise/${uniteLegale.siren}`}>
           {getNomComplet(uniteLegale, session)}&nbsp;‣&nbsp;
-          <span className="siret-or-siren">
+          <span className={styles.sirenOrSiret}>
             {formatIntFr(uniteLegale.siren)}
           </span>
         </a>
@@ -143,40 +123,7 @@ const TitleEtablissementWithDenomination: React.FC<{
       currentFicheType={FICHE.ETABLISSEMENT}
       session={session}
     />
-
-    <style jsx>{`
-      .siret-or-siren {
-        font-variant: small-caps;
-        font-size: 1.1rem;
-        color: #666;
-      }
-
-      h1 {
-        line-height: 1.5rem;
-        font-size: 1.4rem;
-      }
-
-      .etablissement-sub-title {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-
-      .etablissement-sub-sub-title:before {
-        content: '';
-        width: 20px;
-        height: 20px;
-        margin-right: 10px;
-        margin-left: 15px;
-        margin-bottom: 4px;
-        border: 1px solid #bbb;
-        border-top: none;
-        border-right: none;
-        position: relative;
-        display: inline-block;
-      }
-    `}</style>
   </div>
 );
 
-export { MapTitleEtablissement, TitleEtablissementWithDenomination };
+export { TitleEtablissementWithDenomination };

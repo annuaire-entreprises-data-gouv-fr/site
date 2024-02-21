@@ -35,8 +35,8 @@ import useSessionServer from 'hooks/use-session-server';
 
 const cachedGetUniteLegale = cache(
   async (slug: string, page: number, isBot: boolean) => {
-    const sirenOrSiret = extractSirenOrSiretSlugFromUrl(slug);
-    const uniteLegale = await getUniteLegaleFromSlug(sirenOrSiret, {
+    const sirenSlug = extractSirenOrSiretSlugFromUrl(slug);
+    const uniteLegale = await getUniteLegaleFromSlug(sirenSlug, {
       page,
       isBot,
     });
