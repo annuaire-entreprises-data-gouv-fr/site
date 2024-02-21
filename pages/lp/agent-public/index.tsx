@@ -11,6 +11,7 @@ const LandingPage: NextPageWithLayout = () => (
     <Meta
       title="Espace agent | Annuaire des Entreprises"
       description="Les informations des entreprises sont toutes dans l’espace agent !"
+      canonical="https://annuaire-entreprises.data.gouv.fr/lp/agent-public"
       noIndex={false}
     />
     <section className="hero">
