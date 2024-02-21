@@ -150,6 +150,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     tranche_effectif_salarie = null,
     annee_tranche_effectif_salarie = null,
     date_creation,
+    date_fermeture,
     date_mise_a_jour,
     date_mise_a_jour_insee,
     date_mise_a_jour_rne,
@@ -259,6 +260,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     dateDerniereMiseAJour: date_mise_a_jour || '',
     dateMiseAJourInsee: date_mise_a_jour_insee || '',
     dateMiseAJourInpi: date_mise_a_jour_rne || '',
+    dateFermeture: date_fermeture ?? '',
     conventionsCollectives: etablissements.reduce(
       (idccSiretPair, { siret, liste_idcc }) => {
         (liste_idcc || []).forEach((idcc) => {
@@ -346,6 +348,7 @@ const mapToEtablissement = (
     activite_principale = '',
     date_creation = '',
     date_debut_activite = '',
+    date_fermeture = '',
     tranche_effectif_salarie = '',
     caractere_employeur = '',
     annee_tranche_effectif_salarie = '',
@@ -399,7 +402,8 @@ const mapToEtablissement = (
       libelleFromCodeNAFWithoutNomenclature(activite_principale),
     activitePrincipale: activite_principale,
     dateCreation: parseDateCreationInsee(date_creation),
-    dateDebutActivite: date_debut_activite,
+    dateDebutActivite: date_debut_activite ?? '',
+    dateFermeture: date_fermeture ?? '',
     complements: {
       estEntrepreneurIndividuel,
       idFiness: liste_finess || [],

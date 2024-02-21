@@ -14,6 +14,7 @@ export type IResult = {
   siege: ISiege;
   activite_principale: string;
   date_creation: string;
+  date_fermeture: string;
   date_mise_a_jour: string;
   date_mise_a_jour_insee: string;
   date_mise_a_jour_rne: string;
@@ -61,6 +62,7 @@ export type IEtablissementCore = {
   siret: string;
   date_creation: string;
   date_debut_activite: string;
+  date_fermeture: string;
   tranche_effectif_salarie: string;
   caractere_employeur: string;
   annee_tranche_effectif_salarie: string;
