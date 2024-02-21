@@ -1,5 +1,4 @@
 import routes from '#clients/routes';
-import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
@@ -12,7 +11,7 @@ type IGeoCommuneResponse = {
 
 const clientCommunesByName = async (slug: string): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoCommuneResponse[]>(
-    `${routes.geo.commune}&nom=${slug}`,
+    `${routes.geo.communes}&nom=${slug}`,
     {
       timeout: constants.timeout.L,
     }
@@ -23,7 +22,7 @@ const clientCommunesByName = async (slug: string): Promise<IGeoElement[]> => {
 
 const clientCommuneByCp = async (cp: string): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoCommuneResponse[]>(
-    `${routes.geo.commune}&codePostal=${cp}`,
+    `${routes.geo.communes}&codePostal=${cp}`,
     {
       timeout: constants.timeout.L,
     }
@@ -57,14 +56,5 @@ const mapToDomainObject = (response: IGeoCommuneResponse[]): IGeoElement[] => {
     );
 };
 
-const stubbedClientCommunesByName = stubClientWithSnapshots({
-  clientCommunesByName,
-});
-const stubbedClientCommuneByCp = stubClientWithSnapshots({
-  clientCommuneByCp,
-});
-
-export {
-  stubbedClientCommuneByCp as clientCommuneByCp,
-  stubbedClientCommunesByName as clientCommunesByName,
-};
+// No need to stub as API Geo is robust and can be used for test e2e
+export { clientCommuneByCp, clientCommunesByName };

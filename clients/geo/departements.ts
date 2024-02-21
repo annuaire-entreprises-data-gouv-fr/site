@@ -1,5 +1,4 @@
 import routes from '#clients/routes';
-import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
@@ -13,7 +12,7 @@ const clientDepartementsByName = async (
   slug: string
 ): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoDepartementResponse[]>(
-    `${routes.geo.departement}&nom=${slug}`,
+    `${routes.geo.departements}&nom=${slug}`,
     {
       timeout: constants.timeout.L,
     }
@@ -25,7 +24,7 @@ const clientDepartementByCode = async (
   code: string
 ): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoDepartementResponse[]>(
-    `${routes.geo.departement}&code=${code}`,
+    `${routes.geo.departements}&code=${code}`,
     {
       timeout: constants.timeout.L,
     }
@@ -45,13 +44,5 @@ const mapToDomainObject = (
   });
 };
 
-const stubbedClientDepartementsByName = stubClientWithSnapshots({
-  clientDepartementsByName,
-});
-const stubbedClientDepartementByCode = stubClientWithSnapshots({
-  clientDepartementByCode,
-});
-export {
-  stubbedClientDepartementByCode as clientDepartementByCode,
-  stubbedClientDepartementsByName as clientDepartementsByName,
-};
+// No need to stub as API Geo is robust and can be used for test e2e
+export { clientDepartementByCode, clientDepartementsByName };

@@ -62,10 +62,12 @@ const routes = {
     site: 'https://www.education.gouv.fr/annuaire',
   },
   geo: {
-    commune: 'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json',
-    departement:
+    communes:
+      'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json',
+    departements:
       'https://geo.api.gouv.fr/departements?fields=code&format=json&zone=metro,drom,com',
-    region: 'https://geo.api.gouv.fr/regions?limit=3',
+    regions: 'https://geo.api.gouv.fr/regions?fields=nom,code',
+    epcis: 'https://geo.api.gouv.fr/epcis?fields=nom,code',
   },
   journalOfficielAssociations: {
     ods: {
