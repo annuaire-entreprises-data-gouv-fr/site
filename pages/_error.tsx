@@ -14,8 +14,8 @@ const ServerError: NextPageWithLayout = () => {
 };
 
 ServerError.getInitialProps = (...args) => {
-  // eslint-disable-next-line no-console
-  console.log('ERROR', args);
+  // log as JSON in order to be parse by Kibana
+  console.error(args[0]);
   try {
     const { res, err } = args[0];
     logFatalErrorInSentry(
