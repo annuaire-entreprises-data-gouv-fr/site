@@ -112,10 +112,7 @@ export const Header: React.FC<IProps> = ({
                               </a>
                             </div>
                           ) : useAgentCTA ? (
-                            <a
-                              href="/connexion/agent-public"
-                              className="fr-link"
-                            >
+                            <a href="/lp/agent-public" className="fr-link">
                               <Icon slug="user">Espace agent public</Icon>
                             </a>
                           ) : null}

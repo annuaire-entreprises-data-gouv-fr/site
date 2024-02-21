@@ -10,7 +10,6 @@ const Login = () => {
     <>
       <Meta
         title="Accédez à votre espace agent public sur Annuaire des Entreprises"
-        canonical="https://annuaire-entreprises.data.gouv.fr/connexion/agent-public"
         noIndex={true}
       />
       <h1>Espace agent public</h1>

@@ -69,7 +69,7 @@ export const TraficStats: React.FC<{
             AgentConnect
           </a>{' '}
           pour{' '}
-          <a href="https://annuaire-entreprises.data.gouv.fr/connexion/agent-public">
+          <a href="https://annuaire-entreprises.data.gouv.fr/lp/agent-public">
             avoir accès à des informations additionnelles (actes, statuts, etc.)
           </a>
         </li>
