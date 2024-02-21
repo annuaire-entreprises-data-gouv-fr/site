@@ -37,7 +37,7 @@ export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
         }
 
         .img-container:before {
-          background-color: #f5f5fe;
+          background-color: #fef6e3;
           border-radius: 8px;
           position: absolute;
           top: 0;
