@@ -10,6 +10,7 @@ export type ISession = {
     firstName?: string;
     fullName?: string;
     privilege?: ISessionPrivilege;
+    siret?: string;
   };
 
   // agent connect
@@ -47,6 +48,7 @@ export const setAgentSession = async (
   email: string,
   familyName: string,
   firstName: string,
+  siret: string,
   privilege: ISessionPrivilege,
   session: IronSession<ISession>
 ) => {
@@ -56,6 +58,7 @@ export const setAgentSession = async (
     familyName,
     fullName: familyName ? `${firstName} ${familyName}` : undefined,
     privilege,
+    siret,
   };
   await session.save();
 };

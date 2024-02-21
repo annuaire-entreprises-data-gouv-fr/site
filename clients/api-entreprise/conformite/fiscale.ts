@@ -1,8 +1,7 @@
-import { HttpUnauthorizedError } from '#clients/exceptions';
 import routes from '#clients/routes';
-import constants from '#models/constants';
+import { IConformite } from '#models/espace-agent/donnees-restreintes-entreprise';
 import { Siren } from '#utils/helpers';
-import { httpGet } from '#utils/network';
+import clientAPIEntreprise from '../client';
 
 export type IAPIEntrepriseConformiteFiscale = {
   data: {
@@ -18,31 +17,18 @@ export type IAPIEntrepriseConformiteFiscale = {
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseConformiteFiscale = async (siren: Siren) => {
-  if (!process.env.API_ENTREPRISE_URL || !process.env.API_ENTREPRISE_TOKEN) {
-    throw new HttpUnauthorizedError('Missing API Entreprise credentials');
-  }
-
-  // never cache any API Entreprise request
-  const useCache = false;
-
-  const response = await httpGet<IAPIEntrepriseConformiteFiscale>(
+export const clientApiEntrepriseConformiteFiscale = async (
+  siren: Siren,
+  recipientSiret: string
+) => {
+  return await clientAPIEntreprise<
+    IAPIEntrepriseConformiteFiscale,
+    IConformite
+  >(
     `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.fiscale}${siren}/attestation_fiscale`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.API_ENTREPRISE_TOKEN}`,
-      },
-      timeout: constants.timeout.XXXL,
-      params: {
-        object: 'espace-agent-public',
-        context: 'annuaire-entreprises',
-        recipient: 13002526500013,
-      },
-      useCache,
-    }
+    mapToDomainObject,
+    recipientSiret
   );
-
-  return mapToDomainObject(response);
 };
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteFiscale) => {

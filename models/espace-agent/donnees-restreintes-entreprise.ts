@@ -25,7 +25,8 @@ export type IConformiteUniteLegale = {
 
 export const getDonneesRestreintesEntreprise = async (
   siren: Siren,
-  siret: Siret
+  siret: Siret,
+  recipientSiret?: string
 ): Promise<IConformiteUniteLegale> => {
   const handleApiEntrepriseError = (e: any) => {
     if (e instanceof HttpNotFound) {
@@ -47,11 +48,15 @@ export const getDonneesRestreintesEntreprise = async (
   };
 
   const [fiscale, vigilance, msa] = await Promise.all([
-    clientApiEntrepriseConformiteFiscale(siren).catch(handleApiEntrepriseError),
-    clientApiEntrepriseConformiteVigilance(siren).catch(
+    clientApiEntrepriseConformiteFiscale(siren, recipientSiret).catch(
       handleApiEntrepriseError
     ),
-    clientApiEntrepriseConformiteMSA(siret).catch(handleApiEntrepriseError),
+    clientApiEntrepriseConformiteVigilance(siren, recipientSiret).catch(
+      handleApiEntrepriseError
+    ),
+    clientApiEntrepriseConformiteMSA(siret, recipientSiret).catch(
+      handleApiEntrepriseError
+    ),
   ]);
 
   return {
