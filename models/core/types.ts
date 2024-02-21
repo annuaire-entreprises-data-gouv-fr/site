@@ -134,6 +134,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     activitePrincipale: '',
     libelleActivitePrincipale: '',
     dateCreation: '',
+    dateFermeture: '',
     dateDerniereMiseAJour: '',
     dateMiseAJourInsee: '',
     dateMiseAJourInpi: '',

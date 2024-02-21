@@ -19,7 +19,7 @@ export type IAPIEntrepriseConformiteFiscale = {
  */
 export const clientApiEntrepriseConformiteFiscale = async (
   siren: Siren,
-  recipientSiret: string
+  recipientSiret?: string
 ) => {
   return await clientAPIEntreprise<
     IAPIEntrepriseConformiteFiscale,
