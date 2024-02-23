@@ -62,7 +62,7 @@ type ILien = {
   valeur: string;
 };
 type IAffectationPersonne = Array<{
-  nom: string;
+  nom: string | null;
   fonction: string;
   lienTexteAffectation: ILien | null;
 }>;

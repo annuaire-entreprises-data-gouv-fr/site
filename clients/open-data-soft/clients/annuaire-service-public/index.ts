@@ -33,7 +33,7 @@ type IAffectationRecord = {
   fonction: string;
 };
 
-function firstArrayElement(array: any[], defaultValue: any) {
+function firstArrayElement<T>(array: T[], defaultValue: T): T {
   if (array && array.length && array.length > 0) {
     return array[0] ?? defaultValue;
   }
@@ -121,15 +121,23 @@ function mapToAffectationPersonne(
   if (!affectations || !affectations.length) {
     return null;
   }
-
   return affectations.map((affectation) => ({
-    nom: affectation.personne.prenom + ' ' + affectation.personne.nom,
+    nom: getNom(affectation.personne),
     fonction: affectation.fonction,
     lienTexteAffectation: firstArrayElement(
       affectation.personne.texte_reference,
       null
     ),
   }));
+}
+function getNom(personne: IAffectationRecord['personne']) {
+  if (!personne.prenom && !personne.nom) {
+    return null;
+  }
+  return (
+    personne.prenom +
+    (personne.nom || personne.prenom ? ' ' + personne.nom : '')
+  );
 }
 
 function mapToNom(record: IServicePublicRecord) {
@@ -154,7 +162,10 @@ function mapToAdresse(record: IServicePublicRecord) {
   }
   const adresse =
     adresses.find((a) => a.type_adresse === 'Adresse postale') ??
-    firstArrayElement(adresses, '');
+    firstArrayElement(adresses, null);
+  if (!adresse) {
+    return null;
+  }
   return [
     adresse.complement1,
     adresse.complement2,

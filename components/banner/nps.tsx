@@ -33,7 +33,7 @@ export const NPSBanner: React.FC<{}> = () => {
           padding-bottom: 15px;
           font-size: 0.9rem;
           width: 100%;
-          background-color: #fffde6;
+          background-color: #fef6e3;
           font-family: 'Marianne', sans-serif;
           border-bottom: 2px solid ${constants.colors.frBlue};
         }

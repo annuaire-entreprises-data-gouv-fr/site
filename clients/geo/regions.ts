@@ -1,5 +1,4 @@
 import routes from '#clients/routes';
-import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
@@ -11,7 +10,7 @@ type IGeoRegionResponse = {
 
 const clientRegionsByName = async (term: string): Promise<IGeoElement[]> => {
   const response = await httpGet<IGeoRegionResponse[]>(
-    `${routes.geo.region}&nom=${term}`,
+    `${routes.geo.regions}&nom=${term}`,
     {
       timeout: constants.timeout.L,
     }
@@ -30,8 +29,5 @@ const mapToDomainObject = (response: IGeoRegionResponse[]): IGeoElement[] => {
   });
 };
 
-const stubbedClientRegionsByName = stubClientWithSnapshots({
-  clientRegionsByName,
-});
-
-export { stubbedClientRegionsByName as clientRegionsByName };
+// No need to stub as API Geo is robust and can be used for test e2e
+export { clientRegionsByName };
