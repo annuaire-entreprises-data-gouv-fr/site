@@ -5,19 +5,12 @@ import NonRenseigne from '#components/non-renseigne';
 import constants from '#models/constants';
 import { InternalError } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
+import { CopyPaste } from './copy-paste';
 
 interface ISectionProps {
   body: any[][];
   id?: string;
 }
-
-export const CopyPaste: React.FC<
-  PropsWithChildren<{ shouldTrim?: boolean; id?: string }>
-> = ({ children, shouldTrim = false, id = undefined }) => (
-  <span className={`copy-button ${shouldTrim ? 'trim' : ''}`}>
-    <span id={id}>{children}</span>
-  </span>
-);
 
 const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
   children,
@@ -27,9 +20,7 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
   return (
     <td>
       {isCopyEnabled ? (
-        <CopyPaste shouldTrim={shouldTrim(label)}>
-          {children || <NonRenseigne />}
-        </CopyPaste>
+        <CopyPaste shouldTrim={shouldTrim(label)}>{children}</CopyPaste>
       ) : (
         <div>
           <span>{children || <NonRenseigne />}</span>

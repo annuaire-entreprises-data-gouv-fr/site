@@ -8,7 +8,8 @@ import { ConventionCollectivesBadgesSection } from '#components/badges-section/c
 import { labelsAndCertificatesSources } from '#components/badges-section/labels-and-certificates';
 import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { Section } from '#components/section';
-import { CopyPaste, TwoColumnTable } from '#components/table/simple';
+import { CopyPaste } from '#components/table/copy-paste';
+import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { estActif } from '#models/core/etat-administratif';
