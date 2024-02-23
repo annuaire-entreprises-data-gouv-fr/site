@@ -91,7 +91,7 @@ class SearchFilterParams {
     const departement = cp_dep_type === 'dep' ? cp_dep : '';
     const region = cp_dep_type === 'reg' ? cp_dep : '';
     const code_postal = cp_dep_type === 'cp' ? cp_dep : '';
-    const ecpi = cp_dep_type === 'epci' ? cp_dep : '';
+    const epci = cp_dep_type === 'epci' ? cp_dep : '';
     const code_commune = cp_dep_type === 'insee' ? cp_dep : '';
 
     return serializeParams({
@@ -116,7 +116,7 @@ class SearchFilterParams {
       departement,
       region,
       code_postal,
-      ecpi,
+      epci,
       code_commune,
       prenoms_personne: this.params.fn?.trim(),
       nom_personne: this.params.n?.trim(),
