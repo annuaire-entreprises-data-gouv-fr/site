@@ -182,7 +182,7 @@ const mapToDomainObject = (
     libelleActivitePrincipale: siege.libelleActivitePrincipale,
     etablissements: createEtablissementsList([siege]),
     dateCreation: parseDateCreationInsee(dateCreationUniteLegale),
-    dateDerniereMiseAJour: dateDernierTraitement,
+    dateDerniereMiseAJour: new Date().toISOString(),
     dateMiseAJourInsee: dateDernierTraitement,
     dateMiseAJourInpi: '',
     dateDebutActivite: dateDebut,

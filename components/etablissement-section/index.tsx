@@ -150,11 +150,11 @@ const EtablissementSection: React.FC<IProps> = ({
       'Date de création de l’établissement',
       formatDate(etablissement.dateCreation),
     ],
-    ...(etablissement.dateDerniereMiseAJour
+    ...(etablissement.dateMiseAJourInsee
       ? [
           [
             'Dernière modification des données Insee',
-            formatDate(etablissement.dateDerniereMiseAJour),
+            formatDate(etablissement.dateMiseAJourInsee),
           ],
         ]
       : []),
@@ -200,6 +200,7 @@ const EtablissementSection: React.FC<IProps> = ({
           EAdministration.VIES,
           ...labelsAndCertificatesSources(uniteLegale),
         ]}
+        lastModified={etablissement.dateDerniereMiseAJour}
       >
         <TwoColumnTable body={data} />
       </Section>

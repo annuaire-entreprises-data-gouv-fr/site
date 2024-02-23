@@ -291,7 +291,8 @@ const mapEtablissementToDomainObject = (
       nomenclatureActivitePrincipaleEtablissement,
       false
     ),
-    dateDerniereMiseAJour: dateDernierTraitementEtablissement,
+    dateDerniereMiseAJour: new Date().toISOString(),
+    dateMiseAJourInsee: dateDernierTraitementEtablissement,
     estSiege: !!etablissementSiege,
     statutDiffusion,
     etatAdministratif,
