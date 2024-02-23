@@ -1,3 +1,4 @@
+import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { ConventionCollectivesBadgesSection } from '#components/badges-section/convention-collectives';
@@ -21,7 +22,6 @@ import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
 import { ISession } from '#utils/session';
-import React from 'react';
 import {
   LabelsAndCertificatesBadgesSection,
   checkHasLabelsAndCertificates,

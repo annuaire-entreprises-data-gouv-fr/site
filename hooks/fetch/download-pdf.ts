@@ -5,21 +5,24 @@ import { httpGet } from '#utils/network';
 import logErrorInSentry from '#utils/sentry';
 import { useFetchData } from './use-fetch-data';
 
+const is404 = (msg: string) => msg.indexOf('Siren non existant') !== 0;
+
 export function usePDFDownloader(pdfLink: string) {
   return useFetchData(
     {
       fetchData: async () => {
         try {
-          const t = httpGet<Blob>(pdfLink, { responseType: 'blob' });
-          return t;
-        } catch (e) {
-          console.log(e);
-          throw new HttpNotFound('Siren non existant');
+          return await httpGet<Blob>(pdfLink, { responseType: 'blob' });
+        } catch (e: any) {
+          if (is404(e?.message)) {
+            throw new HttpNotFound('Not found - 404');
+          }
+          throw e;
         }
       },
       administration: EAdministration.INPI,
       logError: (e: any) => {
-        const message = true ? 'Not found - 404' : 'Failed and redirected';
+        const message = e.status === 404 ? e.message : 'Failed and redirected';
 
         logErrorInSentry(
           new FetchRessourceException({

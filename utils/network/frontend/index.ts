@@ -61,11 +61,11 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
     }
 
     if (config.responseType == 'blob') {
-      return response.blob();
+      return response.blob() as T;
     }
 
     if (config.responseType == 'arraybuffer') {
-      return response.arrayBuffer();
+      return response.arrayBuffer() as T;
     }
     const data = await (isJson ? response.json() : response.text());
     return data as T;
