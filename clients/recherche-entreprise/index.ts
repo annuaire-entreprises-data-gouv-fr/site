@@ -367,7 +367,7 @@ const mapToEtablissement = (
     : '';
 
   const etatAdministratif = etatFromEtatAdministratifInsee(
-    etat_administratif,
+    etat_administratif || 'I',
     siret
   );
 

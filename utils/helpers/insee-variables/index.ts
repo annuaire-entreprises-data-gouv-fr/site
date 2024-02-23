@@ -12,9 +12,10 @@ import logErrorInSentry from '../../sentry';
  * @returns
  */
 export const etatFromEtatAdministratifInsee = (
-  etatAdministratifInsee: 'A' | 'C' | 'F' | string = '',
+  etatAdministratifInsee: 'A' | 'C' | 'F' | 'I' | string = '',
   sirenOrSiret: string
 ) => {
+  console.log(etatAdministratifInsee);
   switch (etatAdministratifInsee) {
     case 'A':
       return IETATADMINSTRATIF.ACTIF;
