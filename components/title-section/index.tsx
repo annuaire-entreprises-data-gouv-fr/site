@@ -1,23 +1,19 @@
 import React from 'react';
-import MultipleSirenAlert from '#components-ui/alerts/multiple-siren';
-import NonDiffusibleAlert from '#components-ui/alerts/non-diffusible';
-import ProtectedData from '#components-ui/alerts/protected-data';
-import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
-import { PrintNever } from '#components-ui/print-visibility';
 import SocialMedia from '#components-ui/social-media';
 import { Tag } from '#components-ui/tag';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { UniteLegaleDescription } from '#components/unite-legale-description';
 import { UniteLegaleEtablissementCountDescription } from '#components/unite-legale-description/etablissement-count-description';
-import { IUniteLegale } from '#models/index';
 import {
   estDiffusible,
   estNonDiffusible,
   getNomComplet,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { IUniteLegale } from '#models/core/types';
 import { formatIntFr } from '#utils/helpers';
-import { ISession, isAgent } from '#utils/session';
+import { ISession } from '#utils/session';
+import TitleAlerts from './alerts';
 import { FICHE, Tabs } from './tabs';
 
 type IProps = {
@@ -33,40 +29,11 @@ const Title: React.FC<IProps> = ({
 }) => (
   <div className="header-section">
     <div className="title">
-      {isAgent(session) && (
-        <PrintNever>
-          <ProtectedData full>
-            Vous êtes connecté avec un compte <strong>agent public</strong>. Ce
-            compte vous donne accès à certaines données exclusivement réservées
-            à l’administration, identifiables par la mention “
-            <Icon size={12} slug="lockFill">
-              Réservé aux agents publics
-            </Icon>
-            ” .
-            <br />
-            <br />
-            Ce service est en <Tag color="new">beta test</Tag>. Il est possible
-            que vous recontriez des bugs ou des erreurs. Si cela arrive,{' '}
-            <a href="mailto:charlotte.choplin@beta.gouv.fr">
-              n’hésitez pas à nous contacter
-            </a>
-            .
-          </ProtectedData>
-        </PrintNever>
-      )}
-      {!estDiffusible(uniteLegale) && (
-        <>
-          {isAgent(session) ? (
-            <ProtectedData full>
-              Cette structure est non-diffusible mais vous pouvez voir ses
-              informations grâce à votre compte <strong>agent-public</strong>.
-            </ProtectedData>
-          ) : (
-            <NonDiffusibleAlert />
-          )}
-        </>
-      )}
-      <MultipleSirenAlert uniteLegale={uniteLegale} />
+      <TitleAlerts
+        uniteLegale={uniteLegale}
+        session={session}
+        statutDiffusion={uniteLegale.statutDiffusion}
+      />
       <h1>
         <a href={`/entreprise/${uniteLegale.chemin}`}>
           {getNomComplet(uniteLegale, session)}

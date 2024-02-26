@@ -9,6 +9,7 @@ export const LayoutSimple: React.FC<PropsWithChildren<{}>> = ({ children }) => (
       useLogo={true}
       useAdvancedSearch={false}
       useMap={false}
+      useAgentCTA={true}
     />
     <main className="fr-container">{children}</main>
     <Footer />

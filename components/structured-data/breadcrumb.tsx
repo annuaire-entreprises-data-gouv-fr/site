@@ -1,5 +1,5 @@
 import React from 'react';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 import {
   getDepartementFromCodePostal,
   getUrlFromDepartement,

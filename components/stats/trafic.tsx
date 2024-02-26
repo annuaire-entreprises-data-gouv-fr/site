@@ -7,34 +7,34 @@ export const TraficStats: React.FC<{
   visits: {
     number: number;
     label: string;
-    visitReturning: number;
-    visitUnknown: number;
+    agentUnknown: number;
+    agentReturning: number;
     visitorReturning: number;
     visitorUnknown: number;
   }[];
 }> = ({ visits }) => {
-  const [statsType, setStatsType] = useState('users');
+  const [statsType, setStatsType] = useState<'agents' | 'users'>('users');
 
   const data = {
     datasets: [
       {
         label:
-          statsType === 'visit'
-            ? 'Nombre de visites d’utilisateurs récurrents'
+          statsType === 'agents'
+            ? 'Nombre d’agents récurrents'
             : 'Nombre d’utilisateurs récurrents',
-        data: visits.map(({ label, visitorReturning, visitReturning }) => ({
-          y: statsType === 'visit' ? visitReturning : visitorReturning,
+        data: visits.map(({ label, visitorReturning, agentReturning }) => ({
+          y: statsType === 'agents' ? agentReturning : visitorReturning,
           x: label,
         })),
         backgroundColor: constants.chartColors[0],
       },
       {
         label:
-          statsType === 'visit'
-            ? 'Nombre de visites de nouveaux utilisateurs'
+          statsType === 'agents'
+            ? 'Nombre de nouveaux agents'
             : 'Nombre de nouveaux utilisateurs',
-        data: visits.map(({ label, visitorUnknown, visitUnknown }) => ({
-          y: statsType === 'visit' ? visitUnknown : visitorUnknown,
+        data: visits.map(({ label, visitorUnknown, agentUnknown }) => ({
+          y: statsType === 'agents' ? agentUnknown : visitorUnknown,
           x: label,
         })),
         backgroundColor: constants.chartColors[1],
@@ -43,22 +43,41 @@ export const TraficStats: React.FC<{
   };
 
   const onOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setStatsType(e.target.value);
+    setStatsType(e.target.value as 'agents' | 'users');
   };
 
   return (
     <>
       <p>
-        Nous suivons à la fois le nombre d’utilisateurs et le nombre total de
-        visites. <br />
-        Un <strong>utilisateur</strong> est un individu qui visite l’Annuaire
-        des Entreprises au moins une fois. Un utilisateur effectue donc une ou
-        plusieurs <strong>visites</strong> du site.
+        Nous suivons le nombre d’<strong>utilisateurs</strong> et le nombre d’
+        <strong>agents connectés</strong>.
       </p>
+      <ul>
+        <li>
+          Un <strong>utilisateur</strong> est un individu qui visite l’Annuaire
+          des Entreprises au moins une fois dans le mois.
+        </li>
+        <li>
+          Un <strong>agent connecté</strong> est un agent public qui s’est
+          identifié avec{' '}
+          <a
+            href="https://agentconnect.gouv.fr/"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
+          >
+            AgentConnect
+          </a>{' '}
+          pour{' '}
+          <a href="https://annuaire-entreprises.data.gouv.fr/lp/agent-public">
+            avoir accès à des informations additionnelles (actes, statuts, etc.)
+          </a>
+        </li>
+      </ul>
       <p>
-        Un utilisateur qui a effectué deux visites ou plus est considéré comme
-        un <strong>utilisateur récurrent</strong>. À l’inverse, un utilisateur
-        qui n’a visité le site qu’une seule fois est un{' '}
+        Un utilisateur qui a déjà visité le site les mois précédents est un un{' '}
+        <strong>utilisateur récurrent</strong>. À l’inverse, un utilisateur qui
+        visite le site pour la première fois est un{' '}
         <strong>nouvel utilisateur</strong>.
       </p>
       <div className="layout-right">
@@ -66,7 +85,7 @@ export const TraficStats: React.FC<{
         <Select
           options={[
             { value: 'users', label: 'utilisateurs' },
-            { value: 'visit', label: 'visites' },
+            { value: 'agents', label: 'agents' },
           ]}
           defaultValue={'users'}
           onChange={onOptionChange}

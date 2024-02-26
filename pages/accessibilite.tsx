@@ -1,4 +1,3 @@
-import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import Meta from '#components/meta';
 import constants from '#models/constants';

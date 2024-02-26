@@ -37,6 +37,7 @@
           "latitude": "44.075685",
           "longitude": "1.943401",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [
@@ -94,6 +95,7 @@
               "latitude": "44.075685",
               "longitude": "1.943401",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -143,6 +145,7 @@
               "latitude": "44.075685",
               "longitude": "1.943401",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -177,6 +180,8 @@
         "libelleActivitePrincipale": "Travaux de charpente",
         "dateCreation": "2018-11-12",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2023-11-30T11:21:41",
+        "dateMiseAJourInpi": "2024-01-13T23:12:14",
         "dateDebutActivite": "",
         "trancheEffectif": "02",
         "anneeCategorieEntreprise": "2021",

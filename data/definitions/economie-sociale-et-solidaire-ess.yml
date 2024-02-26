@@ -36,6 +36,15 @@ body: |
 more:
   - label: Rechercher une entreprise de l’économie sociale et solidaire
     href: /lp/ess-economie-sociale-solidaire
+  - label: 'Société à mission'
+    href: '/definition/societe-a-mission'
+
+  - label: "Label RGE (Reconnu garant de l'environnement)"
+    href: '/definition/label-rge-reconnu-garant-de-l-environnement'
+
+  - label: 'Label « Professionnel du bio »'
+    href: '/definition/label-professionnel-du-bio'
+
 cta:
   label: ⇢ En savoir plus sur l’Economie Sociale et Solidaire
   to: https://www.economie.gouv.fr/cedef/economie-sociale-et-solidaire

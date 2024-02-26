@@ -1,6 +1,6 @@
 import React from 'react';
 import constants from '#models/constants';
-import { IEtablissement } from '#models/index';
+import { IEtablissement } from '#models/core/types';
 import MaplibreInstance from '.';
 
 const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({

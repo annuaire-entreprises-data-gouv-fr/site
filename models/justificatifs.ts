@@ -2,16 +2,16 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '#models/api-not-responding';
+import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import {
   IImmatriculationJOAFE,
   getImmatriculationJOAFE,
 } from '#models/immatriculation/joafe';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
 import { verifySiren } from '#utils/helpers';
-import { IUniteLegale, isAssociation } from '.';
 import { EAdministration } from './administrations/EAdministration';
 import { IAPILoading } from './api-loading';
 import { IImmatriculationRNE } from './immatriculation';
+import { IUniteLegale, isAssociation } from './core/types';
 
 export interface IJustificatifs {
   uniteLegale: IUniteLegale;

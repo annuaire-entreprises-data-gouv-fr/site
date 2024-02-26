@@ -14,7 +14,10 @@ export type IResult = {
   siege: ISiege;
   activite_principale: string;
   date_creation: string;
+  date_fermeture: string;
   date_mise_a_jour: string;
+  date_mise_a_jour_insee: string;
+  date_mise_a_jour_rne: string;
   dirigeants: IDirigeant[];
   etat_administratif: string;
   statut_diffusion: 'O' | 'P';
@@ -59,6 +62,7 @@ export type IEtablissementCore = {
   siret: string;
   date_creation: string;
   date_debut_activite: string;
+  date_fermeture: string;
   tranche_effectif_salarie: string;
   caractere_employeur: string;
   annee_tranche_effectif_salarie: string;
@@ -68,6 +72,7 @@ export type IEtablissementCore = {
   liste_id_organisme_formation: string[] | null;
   liste_rge: string[] | null;
   liste_uai: string[] | null;
+  statut_diffusion_etablissement: string;
 };
 
 export interface ISiege extends IEtablissementCore {

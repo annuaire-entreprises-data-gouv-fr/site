@@ -1,13 +1,17 @@
 import { HttpNotFound } from '#clients/exceptions';
-import { IEtablissement } from '#models/index';
+import { IEtablissement } from '#models/core/types';
 import clientSearchRechercheEntreprise from '.';
 
 export const clientEtablissementRechercheEntreprise = async (
-  siret: string
+  siret: string,
+  useCache = false,
+  useFallback = false
 ): Promise<IEtablissement> => {
   const { results } = await clientSearchRechercheEntreprise({
     searchTerms: siret,
     page: 1,
+    fallbackOnStaging: useFallback,
+    useCache,
   });
 
   if (

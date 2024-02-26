@@ -40,6 +40,7 @@ table.full-table {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .layout-center.vertical-margin {
   margin: 10px auto;
@@ -49,6 +50,7 @@ table.full-table {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .layout-right.vertical-margin {
@@ -59,6 +61,7 @@ table.full-table {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .layout-left .vertical-margin {
@@ -89,25 +92,25 @@ main {
   min-height: 400px;
 }
 
-h1 {
+h1:not(.fr-alert__title) {
   font-size: 1.8rem;
   line-height: 2.6rem;
   margin: 50px 0 10px;
 }
 
-h2 {
+h2:not(.fr-alert__title) {
   font-size: 1.3rem;
   line-height: 1.8rem;
   margin: 40px 0 10px;
 }
 
-h3 {
+h3:not(.fr-alert__title) {
   font-size: 1.1rem;
   line-height: 1.6rem;
   margin: 32px 0 10px;
 }
 
-h4 {
+h4:not(.fr-alert__title) {
   font-size: 1.1rem;
   line-height: 1.4rem;
   margin: 22px 0 10px;
@@ -160,6 +163,6 @@ h4 {
 }
 
 /* Prevent the first column of table to be too small */
-table > tbody > tr > td:first-of-type {
+table.two-column-table > tbody > tr > td:first-of-type {
   min-width: 30%;
 }

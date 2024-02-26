@@ -1,11 +1,11 @@
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
-import { createEtablissementsList } from '#models/etablissements-list';
+import { createEtablissementsList } from '#models/core/etablissements-list';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
   IUniteLegale,
-} from '#models/index';
+} from '#models/core/types';
 import {
   agregateTripleFields,
   formatFirstNames,
@@ -164,6 +164,10 @@ const mapToDomainObject = (
     categorieJuridiqueUniteLegale
   );
 
+  const dateDernierTraitement = (dateDernierTraitementUniteLegale || '').split(
+    'T'
+  )[0];
+
   return {
     ...defaultUniteLegale,
     siren,
@@ -178,9 +182,9 @@ const mapToDomainObject = (
     libelleActivitePrincipale: siege.libelleActivitePrincipale,
     etablissements: createEtablissementsList([siege]),
     dateCreation: parseDateCreationInsee(dateCreationUniteLegale),
-    dateDerniereMiseAJour: (dateDernierTraitementUniteLegale || '').split(
-      'T'
-    )[0],
+    dateDerniereMiseAJour: new Date().toISOString(),
+    dateMiseAJourInsee: dateDernierTraitement,
+    dateMiseAJourInpi: '',
     dateDebutActivite: dateDebut,
     etatAdministratif: etatFromEtatAdministratifInsee(
       etatAdministratifUniteLegale,

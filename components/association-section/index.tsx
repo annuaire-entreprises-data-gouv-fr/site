@@ -1,6 +1,6 @@
 import React from 'react';
+import { Warning } from '#components-ui/alerts';
 import AssociationAdressAlert from '#components-ui/alerts/association-adress';
-import Warning from '#components-ui/alerts/warning';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { Tag } from '#components-ui/tag';
@@ -9,7 +9,8 @@ import { DataSection } from '#components/section/data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IAssociation, IDataAssociation } from '#models/index';
+import { IDataAssociation } from '#models/association/types';
+import { IAssociation } from '#models/core/types';
 import { IdRna, formatDate, formatIntFr } from '#utils/helpers';
 import { isTwoMonthOld } from '#utils/helpers/checks';
 
@@ -88,7 +89,7 @@ export default function AssociationSection({
                 <a
                   target="_blank"
                   href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   fiche data-asso de cette association
                 </a>
@@ -178,7 +179,7 @@ const getTableData = (
     [
       'Site web',
       siteWeb ? (
-        <a href={siteWeb} target="_blank" rel="noreferrer">
+        <a href={siteWeb} target="_blank" rel="noopener noreferrer">
           {siteWeb}
         </a>
       ) : (

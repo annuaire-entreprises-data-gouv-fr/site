@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import NonRenseigne from '#components/non-renseigne';
 import constants from '#models/constants';
-import { InternalError } from '#models/index';
+import { InternalError } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
 
 interface ISectionProps {
@@ -89,7 +89,7 @@ const shouldTrim = (label: any) => {
  */
 export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
   return (
-    <table id={id}>
+    <table className="two-column-table" id={id}>
       <tbody>
         {body.map((row, idx) => (
           <tr key={'a' + idx}>

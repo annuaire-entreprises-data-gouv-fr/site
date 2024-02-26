@@ -16,14 +16,13 @@ export class DailyUptimeRatioConverter {
   private _days: {
     [key: string]: ILog;
   } = {};
-
-  getDDMMYYYY = (d: Date): string =>
-    new Intl.DateTimeFormat('fr-FR', { timeZone: 'UTC' }).format(d);
+  private _from: Date;
 
   constructor(from: Date) {
+    this._from = from;
     for (let i = 0; i < 90; i++) {
-      const currentDate = this.addUTCDay(from, i);
-      const key = this.getDDMMYYYY(currentDate);
+      const currentDate = addUTCDay(from, i);
+      const key = getDDMMYYYY(currentDate);
       this._days[key] = {
         date: currentDate,
         downtime: 0,
@@ -35,10 +34,13 @@ export class DailyUptimeRatioConverter {
   feed(downtimes: IUpdownIODowntimes[]) {
     for (let i = 0; i < downtimes.length; i++) {
       const downtime = downtimes[i];
+      let downStartDate = new Date(downtime.started_at);
 
-      const downStartDate = new Date(downtime.started_at);
+      if (downStartDate.getTime() < this._from.getTime()) {
+        downStartDate = this._from;
+      }
 
-      const nextDay = this.getUTCNextDay(downStartDate);
+      const nextDay = getUTCNextDay(downStartDate);
       const secondsBeforeNextDay =
         (nextDay.getTime() - downStartDate.getTime()) / 1000;
 
@@ -68,7 +70,7 @@ export class DailyUptimeRatioConverter {
             ? remainingDowntime % SECONDS_IN_A_DAY
             : SECONDS_IN_A_DAY;
 
-          const logDate = this.addUTCDay(downStartDate, day);
+          const logDate = addUTCDay(downStartDate, day);
           this.logDownTime(logDate, duration);
         }
       }
@@ -76,14 +78,15 @@ export class DailyUptimeRatioConverter {
   }
 
   logDownTime(day: Date, duration: number) {
-    const key = this.getDDMMYYYY(day);
+    const key = getDDMMYYYY(day);
+
     const currDay = this._days[key];
     currDay.downtime += duration;
 
     let secondsInDay = SECONDS_IN_A_DAY;
 
     const toDay = new Date();
-    const isToDay = this.getDDMMYYYY(day) === this.getDDMMYYYY(toDay);
+    const isToDay = getDDMMYYYY(day) === getDDMMYYYY(toDay);
 
     if (isToDay) {
       secondsInDay =
@@ -97,31 +100,35 @@ export class DailyUptimeRatioConverter {
     this._days[key] = currDay;
   }
 
-  /**
-   *  For a given date, returns the Date of the next UTC day at 00:00:00
-   *  ex: 19/07/2021 14:35:00 UTC => 20/07/2021 00:00:00
-   *  */
-  getUTCNextDay = (d: Date): Date => {
-    const next = new Date(
-      Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1)
-    );
-    return next;
-  };
-
-  addUTCDay = (d: Date, day: number) => {
-    const logDate = new Date(d);
-    logDate.setUTCDate(logDate.getUTCDate() + day);
-    return logDate;
-  };
-
   export(): IRatio[] {
     return Object.values(this._days)
       .sort((a, b) => (a.date < b.date ? -1 : 1))
       .map((day) => {
         return {
           ratioNumber: day.uptime,
-          date: this.getDDMMYYYY(day.date),
+          date: getDDMMYYYY(day.date),
         };
       });
   }
+}
+
+function getDDMMYYYY(d: Date): string {
+  return new Intl.DateTimeFormat('fr-FR', { timeZone: 'UTC' }).format(d);
+}
+
+function addUTCDay(d: Date, day: number) {
+  const logDate = new Date(d);
+  logDate.setUTCDate(logDate.getUTCDate() + day);
+  return logDate;
+}
+
+/**
+ *  For a given date, returns the Date of the next UTC day at 00:00:00
+ *  ex: 19/07/2021 14:35:00 UTC => 20/07/2021 00:00:00
+ *  */
+function getUTCNextDay(d: Date): Date {
+  const next = new Date(
+    Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1)
+  );
+  return next;
 }

@@ -37,6 +37,7 @@
           "latitude": "48.829633",
           "longitude": "2.374801",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [
@@ -83,6 +84,7 @@
               "latitude": "48.829633",
               "longitude": "2.374801",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -121,6 +123,7 @@
               "latitude": "48.829633",
               "longitude": "2.374801",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -144,8 +147,10 @@
         "libelleActivitePrincipale": "Arts du spectacle vivant",
         "dateCreation": "2013-12-18",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2023-11-30T10:56:31",
+        "dateMiseAJourInpi": "",
         "dateDebutActivite": "",
-        "trancheEffectif": "N",
+        "trancheEffectif": "02",
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": "2021",

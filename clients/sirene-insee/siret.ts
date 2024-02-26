@@ -5,9 +5,9 @@ import constants from '#models/constants';
 import {
   IEtablissementsList,
   createEtablissementsList,
-} from '#models/etablissements-list';
-import { estActif } from '#models/etat-administratif';
-import { IEtablissement, createDefaultEtablissement } from '#models/index';
+} from '#models/core/etablissements-list';
+import { estActif } from '#models/core/etat-administratif';
+import { IEtablissement, createDefaultEtablissement } from '#models/core/types';
 import {
   Siren,
   Siret,
@@ -291,7 +291,8 @@ const mapEtablissementToDomainObject = (
       nomenclatureActivitePrincipaleEtablissement,
       false
     ),
-    dateDerniereMiseAJour: dateDernierTraitementEtablissement,
+    dateDerniereMiseAJour: new Date().toISOString(),
+    dateMiseAJourInsee: dateDernierTraitementEtablissement,
     estSiege: !!etablissementSiege,
     statutDiffusion,
     etatAdministratif,

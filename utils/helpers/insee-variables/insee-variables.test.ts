@@ -1,5 +1,5 @@
-import { IETATADMINSTRATIF } from '#models/etat-administratif';
-import { ISTATUTDIFFUSION } from '#models/statut-diffusion';
+import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
+import { ISTATUTDIFFUSION } from '#models/core/statut-diffusion';
 import {
   etatFromEtatAdministratifInsee,
   parseDateCreationInsee,
@@ -43,6 +43,9 @@ describe('Check etatFromEtatAdministratifInsee', () => {
     );
     expect(etatFromEtatAdministratifInsee('F', '')).toBe(
       IETATADMINSTRATIF.FERME
+    );
+    expect(etatFromEtatAdministratifInsee('I', '')).toBe(
+      IETATADMINSTRATIF.INCONNU
     );
   });
 });

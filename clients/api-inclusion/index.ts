@@ -44,11 +44,12 @@ type APIInclusionResponse = {
 const clientMarcheInclusion = async (
   siren: Siren
 ): Promise<IEntrepriseInclusive> => {
-  const url = routes.certifications.entrepriseInclusive.api + '41943762900043';
+  const url = routes.certifications.entrepriseInclusive.api + siren;
   const response = await httpGet<APIInclusionResponse>(url, {
     params: { token: process.env.API_MARCHE_INCLUSION_TOKEN },
   });
 
+  console.log(response);
   return mapToDomainObject(response);
 };
 

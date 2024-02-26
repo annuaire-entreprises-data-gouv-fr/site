@@ -10,8 +10,8 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
+import { isAssociation, isServicePublic } from '#models/core/types';
 import { IImmatriculation } from '#models/immatriculation';
-import { isAssociation, isServicePublic } from '#models/index';
 import { IJustificatifs } from '#models/justificatifs';
 import { ISession } from '#utils/session';
 import ImmatriculationRNE from './rne';

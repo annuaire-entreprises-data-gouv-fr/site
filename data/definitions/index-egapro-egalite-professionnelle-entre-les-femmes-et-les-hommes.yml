@@ -4,6 +4,16 @@ seo:
   title: Index Egapro - définition - Annuaire des Entreprises
   description: L'index Egapro est un score calculé sur plusieurs indicateurs, permettant de mesurer le niveau d'égalité égalité professionnelle entre les femmes et les hommes dans les entreprises de plus de 50 salariés.
   url: https://annuaire-entreprises.data.gouv.fr/defintion/egapro-egalite-professionnelle-femme-homme
+more:
+  ## 4. SECTION « Définition liées » ou « Sur le même sujet » en fin de page
+  - label: "Label RGE (Reconnu Garant de l'Environnement"
+    href: '/definition/label-rge-reconnu-garant-de-l-environnement'
+
+  - label: 'Économie Sociale et Solidaire (ESS)'
+    href: '/definition/economie-sociale-et-solidaire-ess'
+
+  - label: 'Label « Professionnel du Bio »'
+    href: '/label-professionnel-du-bio'
 
 body: |
   ## **Index Egapro : définition**

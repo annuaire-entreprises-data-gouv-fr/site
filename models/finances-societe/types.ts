@@ -5,6 +5,7 @@ export type IFinancesSociete = {
 };
 
 export interface IBilanFinancier {
+  confidentiality: 'Public' | string;
   ratioDeVetuste: number;
   rotationDesStocksJours: number;
   margeEbe: number;

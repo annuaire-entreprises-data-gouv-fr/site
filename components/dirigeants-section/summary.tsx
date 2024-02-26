@@ -5,7 +5,6 @@ import { INPI, INSEE, MI } from '#components/administrations';
 import { isAPILoading } from '#models/api-loading';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { IDirigeants } from '#models/dirigeants';
-import { isServicePublic } from '#models/index';
 
 const NoDirigeantAssociation = ({ idAssociation = '' }) => (
   <>
@@ -20,21 +19,13 @@ const NoDirigeantAssociation = ({ idAssociation = '' }) => (
       <a
         target="_blank"
         href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
-        rel="noreferrer"
+        rel="noopener noreferrer"
       >
         sa fiche data-asso
       </a>
       .
     </p>
   </>
-);
-
-const NoDirigeantServicePublic = () => (
-  <p>
-    Les administrations centrales, ministères et autres services public,
-    n&apos;ont pas de dirigeant(e) enregistré(e) dans les bases de données de l’
-    <INSEE /> ou de <INPI />.
-  </p>
 );
 
 const NoDirigeantDefault = () => (
@@ -87,8 +78,6 @@ const DirigeantSummary: React.FC<IDirigeants> = ({
           idAssociation={uniteLegale.association.idAssociation}
         />
       );
-    } else if (isServicePublic(uniteLegale)) {
-      return <NoDirigeantServicePublic />;
     } else if (
       isAPINotResponding(immatriculationRNE) &&
       !(immatriculationRNE instanceof HttpNotFound)

@@ -4,9 +4,10 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
-import { IAssociation, IDataAssociation } from '#models/index';
-import { getAdresseUniteLegale } from '#models/statut-diffusion';
-import Warning from './warning';
+import { IDataAssociation } from '#models/association/types';
+import { getAdresseUniteLegale } from '#models/core/statut-diffusion';
+import { IAssociation } from '#models/core/types';
+import { Warning } from '.';
 
 const AssociationAdressAlert: React.FC<{
   uniteLegale: IAssociation;

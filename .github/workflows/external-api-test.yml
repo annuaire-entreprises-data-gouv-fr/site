@@ -17,15 +17,9 @@ env:
   INSEE_CLIENT_ID_FALLBACK: ${{ secrets.INSEE_CLIENT_ID_FALLBACK }}
   INSEE_CLIENT_SECRET_FALLBACK: ${{ secrets.INSEE_CLIENT_SECRET_FALLBACK}}
   NEXT_PUBLIC_END2END_MOCKING: disabled
-  INSEE_ENABLED: enabled
   INDEXING_ENABLED: enabled
   REDIS_ENABLED: disabled
   PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
-  MONCOMPTEPRO_CLIENT_ID: ${{ secrets.MONCOMPTEPRO_CLIENT_ID }}
-  MONCOMPTEPRO_CLIENT_SECRET: ${{ secrets.MONCOMPTEPRO_CLIENT_SECRET }}
-  MONCOMPTEPRO_URL: ${{ secrets.MONCOMPTEPRO_URL }}
-  MONCOMPTEPRO_REDIRECT_URI: ${{ secrets.MONCOMPTEPRO_REDIRECT_URI }}
-  MONCOMPTEPRO_POST_LOGOUT_REDIRECT_URI: ${{ secrets.MONCOMPTEPRO_POST_LOGOUT_REDIRECT_URI }}
   IRON_SESSION_PWD: ${{ secrets.IRON_SESSION_PWD }}
 
 jobs:
@@ -59,7 +53,7 @@ jobs:
           npm run test:api-clients:update-snapshots -- --runInBand --testTimeout=61000 --silent
 
       - name: 'Create a PR if there is a diff in the snapshots'
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v6
         with:
           branch: 'BOT-snapshots-update'
           title: '🤖 API client snapshots update'

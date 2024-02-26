@@ -62,10 +62,12 @@ const routes = {
     site: 'https://www.education.gouv.fr/annuaire',
   },
   geo: {
-    commune: 'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json',
-    departement:
+    communes:
+      'https://geo.api.gouv.fr/communes?fields=codesPostaux&format=json',
+    departements:
       'https://geo.api.gouv.fr/departements?fields=code&format=json&zone=metro,drom,com',
-    region: 'https://geo.api.gouv.fr/regions?limit=3',
+    regions: 'https://geo.api.gouv.fr/regions?fields=nom,code',
+    epcis: 'https://geo.api.gouv.fr/epcis?fields=nom,code',
   },
   journalOfficielAssociations: {
     ods: {
@@ -80,6 +82,14 @@ const routes = {
         'https://www.journal-officiel.gouv.fr/document/associations_b/',
       recherche:
         'https://www.journal-officiel.gouv.fr/pages/associations-recherche',
+    },
+  },
+  annuaireServicePublic: {
+    ods: {
+      metadata:
+        'https://api-lannuaire.service-public.fr/api/explore/v2.1/catalog/datasets/api-lannuaire-administration/',
+      search:
+        'https://api-lannuaire.service-public.fr/api/explore/v2.1/catalog/datasets/api-lannuaire-administration/records',
     },
   },
   franceConnect: {
@@ -148,11 +158,9 @@ const routes = {
     siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',
   },
   rechercheEntreprise: {
-    etablissement: 'https://api-annuaire-entreprises.data.gouv.fr/siret?q=',
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',
     rechercheUniteLegaleStaging:
       'https://recherche-entreprises.api.gouv.fr/search',
-    uniteLegale: 'https://api-annuaire-entreprises.data.gouv.fr/siren?q=',
   },
   tooling: {
     grist: 'https://grist.incubateur.net/api/docs/',

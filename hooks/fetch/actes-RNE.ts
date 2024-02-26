@@ -2,7 +2,7 @@ import routes from '#clients/routes';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
 import { IActesRNE } from '#models/immatriculation';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 import { httpGet } from '#utils/network';
 import logErrorInSentry from '#utils/sentry';
 import { useFetchData } from './use-fetch-data';

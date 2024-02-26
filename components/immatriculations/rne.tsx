@@ -13,12 +13,12 @@ import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { IImmatriculationRNE } from '#models/immatriculation';
-import { IUniteLegale } from '#models/index';
 import {
   defaultNonDiffusiblePlaceHolder,
   estDiffusible,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { IUniteLegale } from '#models/core/types';
+import { IImmatriculationRNE } from '#models/immatriculation';
 import { formatDate, formatIntFr } from '#utils/helpers';
 
 type IProps = {
@@ -36,9 +36,10 @@ const ImmatriculationLinks = ({
   if (!estDiffusible(uniteLegale)) {
     return (
       <p>
-        Le(s) dirigeant(s) se sont opposés à la diffusion de leur données sur
-        cette page. Pour télécharger son extrait d’immatriculation, rendez-vous
-        sur le site <a href="https://data.inpi.fr">data.inpi.fr</a>.
+        Le(s) dirigeant(s) se sont opposés à la diffusion de leurs données
+        personnelles. Pour télécharger l’extrait d’immatriculation de cette
+        entreprise, rendez-vous sur le site{' '}
+        <a href="https://data.inpi.fr">data.inpi.fr</a>.
       </p>
     );
   }
@@ -128,7 +129,7 @@ const ImmatriculationRNE: React.FC<IProps> = ({
                 <br />
                 <p>
                   Cette structure possède également{' '}
-                  {immatriculation.observations.length} observation au{' '}
+                  {immatriculation.observations.length} observation(s) au{' '}
                   <strong>RNE</strong>
                   &nbsp;:
                 </p>

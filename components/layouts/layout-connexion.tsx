@@ -15,6 +15,7 @@ export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
       useLogo={true}
       useAdvancedSearch={false}
       useMap={false}
+      useAgentCTA={false}
     />
     <div className="connect-container">
       <div className="img-container">
@@ -60,7 +61,7 @@ export const LayoutConnexion: React.FC<PropsWithChildren<IProps>> = ({
           margin-left: -80px;
           border-radius: 8px;
           background-color: #fff;
-          padding-bottom: 60px !important;
+          padding-bottom: 40px !important;
         }
 
         @media only screen and (min-width: 1px) and (max-width: 768px) {

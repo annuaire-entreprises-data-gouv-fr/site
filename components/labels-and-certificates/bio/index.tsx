@@ -13,7 +13,7 @@ import {
   IBioCertification,
   IEtablissementsBio,
 } from '#models/certifications/bio';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 import { formatDate, formatSiret } from '#utils/helpers';
 
 export const CertificationsBioSection: React.FC<{
@@ -34,7 +34,7 @@ export const CertificationsBioSection: React.FC<{
             <a
               href={routes.certifications.bio.site}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               moteur de recherche de l&apos;Agence Bio
             </a>

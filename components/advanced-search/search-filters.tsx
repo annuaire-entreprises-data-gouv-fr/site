@@ -8,9 +8,9 @@ import { codesEffectifsOptions } from '#utils/helpers/formatting/codes-effectifs
 import { categoriesJuridiques } from '#utils/helpers/formatting/metadata/categories-juridiques';
 import { codesNAFRev2 } from '#utils/helpers/formatting/metadata/codes-NAF-rev-2';
 import { codesSectionNAF } from '#utils/helpers/formatting/metadata/codes-section-NAF';
+import { FilterFinances } from './filter-finances';
 import { FilterGeo } from './filter-geo';
 import { FilterStructure } from './filter-structure';
-import { FilterFinances } from './filter-finances';
 
 const SearchFilters: React.FC<{
   searchParams?: IParams;

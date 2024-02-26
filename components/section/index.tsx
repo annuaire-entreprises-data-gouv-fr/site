@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import Warning from '#components-ui/alerts/warning';
+import { Warning } from '#components-ui/alerts';
 import DataSourcesTooltip from '#components-ui/information-tooltip/data-sources-tooltip';
 import Logo from '#components-ui/logo';
 import { administrationsMetaData } from '#models/administrations';
@@ -82,7 +82,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           border: 2px solid ${borderColor};
           border-radius: 2px;
           position: relative;
-          margin: 10px 0 10px;
+          margin: 20px 0 40px;
           padding: 1rem;
           width: ${width}%;
         }

@@ -6,8 +6,8 @@ import {
   APINotRespondingFactory,
   isAPINotResponding,
 } from '#models/api-not-responding';
+import { IDataAssociation } from '#models/association/types';
 import constants from '#models/constants';
-import { IDataAssociation } from '#models/index';
 import { formatCurrency } from '#utils/helpers';
 
 const ColorCircle = ({ color }: { color: string }) => (

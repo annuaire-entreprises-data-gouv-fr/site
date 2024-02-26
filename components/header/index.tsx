@@ -7,8 +7,8 @@ import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
 import { IParams } from '#models/search-filter-params';
 import { isLoggedIn } from '#utils/session';
+import usePathFromRouter from 'hooks/use-path-from-router';
 import useSession from 'hooks/use-session';
-import useSirenFromRouter from 'hooks/use-siren-from-url';
 
 type IProps = {
   currentSearchTerm?: string;
@@ -17,6 +17,7 @@ type IProps = {
   useAdvancedSearch?: boolean;
   useLogo?: boolean;
   useSearchBar?: boolean;
+  useAgentCTA?: boolean;
 };
 
 export const Header: React.FC<IProps> = ({
@@ -26,9 +27,10 @@ export const Header: React.FC<IProps> = ({
   useLogo = false,
   useAdvancedSearch = false,
   useSearchBar = false,
+  useAgentCTA = false,
 }) => {
   const session = useSession();
-  const sirenFrom = useSirenFromRouter();
+  const pathFrom = usePathFromRouter();
   return (
     <>
       <header role="banner" className="fr-header">
@@ -82,13 +84,10 @@ export const Header: React.FC<IProps> = ({
                   </div>
                   <div className="fr-header__tools">
                     <div className="fr-header__tools-links">
-                      {isLoggedIn(session) ? (
-                        <ul className="fr-links-group">
-                          <li>
-                            <a
-                              className="fr-link menu-logout"
-                              href={`/api/auth/agent-connect/logout?sirenFrom=${sirenFrom}`}
-                            >
+                      <ul className="fr-links-group">
+                        <li>
+                          {isLoggedIn(session) ? (
+                            <div className="fr-link menu-logout">
                               <div>
                                 <Icon slug="user">
                                   {session?.user?.fullName ||
@@ -106,11 +105,19 @@ export const Header: React.FC<IProps> = ({
                                   )
                                 </Icon>
                               </div>
-                              <div>Se déconnecter</div>
+                              <a
+                                href={`/api/auth/agent-connect/logout?pathFrom=${pathFrom}`}
+                              >
+                                <div>Se déconnecter</div>
+                              </a>
+                            </div>
+                          ) : useAgentCTA ? (
+                            <a href="/lp/agent-public" className="fr-link">
+                              <Icon slug="user">Espace agent public</Icon>
                             </a>
-                          </li>
-                        </ul>
-                      ) : null}
+                          ) : null}
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -161,10 +168,14 @@ export const Header: React.FC<IProps> = ({
           position: absolute;
         }
 
-        a.menu-logout {
+        div.menu-logout {
           position: relative;
         }
-        a.menu-logout div:last-of-type {
+        div.menu-logout:hover {
+          background-color: #eee;
+          cursor: default;
+        }
+        div.menu-logout > a {
           position: absolute;
           top: 100%;
           left: 0;
@@ -172,13 +183,13 @@ export const Header: React.FC<IProps> = ({
           width: 100%;
           background-color: #fff;
           padding: 5px 15px;
-          box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.35);
+          box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.5);
         }
-        a.menu-logout div:last-of-type:hover {
-          background-color: #fbfbfb;
+        div.menu-logout > a:hover {
+          background-color: #f8f8f8;
         }
 
-        a.menu-logout:hover div:last-of-type {
+        div.menu-logout:hover > a {
           display: block;
         }
 

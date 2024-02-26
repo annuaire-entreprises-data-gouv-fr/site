@@ -1,6 +1,5 @@
 import Logo from '#components-ui/logo';
 import { PrintNever } from '#components-ui/print-visibility';
-import { Tag } from '#components-ui/tag';
 import { administrationsMetaData } from '#models/administrations';
 import { getAllLandingPages } from '#models/landing-pages';
 
@@ -65,6 +64,14 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
+                  <a
+                    className="fr-footer__top-link"
+                    href="/formulaire/supprimer-donnees-personnelles-entreprise"
+                  >
+                    Supprimer ses données personnelles
+                  </a>
+                </li>
+                <li>
                   <a className="fr-footer__top-link" href="/definitions">
                     Définitions
                   </a>
@@ -97,22 +104,25 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/stats">
+                  <a className="fr-footer__top-link" href="/a-propos/stats">
                     Statistiques
                   </a>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/budget">
+                  <a className="fr-footer__top-link" href="/a-propos/budget">
                     Budget
                   </a>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/equipe">
+                  <a className="fr-footer__top-link" href="/a-propos/equipe">
                     Qui sommes-nous ?
                   </a>
                 </li>
                 <li>
-                  <a className="fr-footer__top-link" href="/comment-ca-marche">
+                  <a
+                    className="fr-footer__top-link"
+                    href="/a-propos/comment-ca-marche"
+                  >
                     A propos
                   </a>
                 </li>
@@ -127,14 +137,8 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="fr-footer__top-link"
-                    href="/connexion/agent-public"
-                  >
-                    Espace agent public{' '}
-                    <Tag color="new" size="small">
-                      beta
-                    </Tag>
+                  <a className="fr-footer__top-link" href="/lp/agent-public">
+                    Espace agent public
                   </a>
                 </li>
               </ul>
@@ -158,7 +162,7 @@ const Footer = () => (
               Ce site permet de retrouver toutes les données publiques détenues
               par l’administration sur une entreprise, une association ou une
               administration et{' '}
-              <a href="/donnees-extrait-kbis">
+              <a href="/a-propos/donnees-extrait-kbis">
                 en particulier les données contenues dans un extrait KBIS
               </a>{' '}
               ou de l’extrait D1.

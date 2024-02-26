@@ -1,5 +1,5 @@
-import { IUniteLegale, isAssociation } from '#models/index';
-import { getNomComplet } from '#models/statut-diffusion';
+import { getNomComplet } from '#models/core/statut-diffusion';
+import { IUniteLegale, isAssociation } from '#models/core/types';
 import useSession from 'hooks/use-session';
 
 type IProp = {

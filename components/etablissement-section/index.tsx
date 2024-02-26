@@ -11,15 +11,15 @@ import { Section } from '#components/section';
 import { CopyPaste, TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { estActif } from '#models/etat-administratif';
-import { IEtablissement, IUniteLegale } from '#models/index';
+import { estActif } from '#models/core/etat-administratif';
 import {
   getAdresseEtablissement,
   getDenominationEtablissement,
   getEnseigneEtablissement,
   getEtablissementName,
   getNomComplet,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { IEtablissement, IUniteLegale } from '#models/core/types';
 import {
   formatDate,
   formatSiret,
@@ -150,11 +150,11 @@ const EtablissementSection: React.FC<IProps> = ({
       'Date de création de l’établissement',
       formatDate(etablissement.dateCreation),
     ],
-    ...(etablissement.dateDerniereMiseAJour
+    ...(etablissement.dateMiseAJourInsee
       ? [
           [
             'Dernière modification des données Insee',
-            formatDate(etablissement.dateDerniereMiseAJour),
+            formatDate(etablissement.dateMiseAJourInsee),
           ],
         ]
       : []),
@@ -192,7 +192,7 @@ const EtablissementSection: React.FC<IProps> = ({
                 etablissement,
                 uniteLegale,
                 session
-              )} à ${etablissement.commune}`
+              )}${etablissement.commune ? ` à ${etablissement.commune}` : ''}`
         }
         id="etablissement"
         sources={[
@@ -200,6 +200,7 @@ const EtablissementSection: React.FC<IProps> = ({
           EAdministration.VIES,
           ...labelsAndCertificatesSources(uniteLegale),
         ]}
+        lastModified={etablissement.dateDerniereMiseAJour}
       >
         <TwoColumnTable body={data} />
       </Section>

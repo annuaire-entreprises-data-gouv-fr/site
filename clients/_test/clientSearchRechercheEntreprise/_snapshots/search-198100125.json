@@ -37,6 +37,7 @@
           "latitude": "46.8030906",
           "longitude": "4.4244097",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [
@@ -85,6 +86,7 @@
               "latitude": "46.8030906",
               "longitude": "4.4244097",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -125,6 +127,7 @@
               "latitude": "46.8030906",
               "longitude": "4.4244097",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -150,6 +153,8 @@
         "libelleActivitePrincipale": "Enseignement secondaire général",
         "dateCreation": "1965-05-01",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2023-11-30T10:17:27",
+        "dateMiseAJourInpi": "",
         "dateDebutActivite": "",
         "trancheEffectif": "22",
         "anneeCategorieEntreprise": "2021",

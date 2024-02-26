@@ -37,6 +37,7 @@
           "latitude": "48.84074",
           "longitude": "2.324549",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [
@@ -83,6 +84,7 @@
               "latitude": "48.84074",
               "longitude": "2.324549",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -121,6 +123,7 @@
               "latitude": "48.84074",
               "longitude": "2.324549",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -144,6 +147,8 @@
         "libelleActivitePrincipale": "Conseil pour les affaires et autres conseils de gestion",
         "dateCreation": "2016-01-15",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2023-11-30T11:06:18",
+        "dateMiseAJourInpi": "2024-01-13T18:45:59",
         "dateDebutActivite": "",
         "trancheEffectif": "01",
         "anneeCategorieEntreprise": "2021",
@@ -200,6 +205,7 @@
             "latitude": "48.84074",
             "longitude": "2.324549",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [
@@ -253,6 +259,7 @@
           "latitude": "43.926703",
           "longitude": "4.784775",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [
@@ -299,6 +306,7 @@
               "latitude": "43.926703",
               "longitude": "4.784775",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -337,6 +345,7 @@
               "latitude": "43.926703",
               "longitude": "4.784775",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -360,6 +369,8 @@
         "libelleActivitePrincipale": "Fonds de placement et entités financières similaires",
         "dateCreation": "1997-12-08",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2023-11-30T10:31:35",
+        "dateMiseAJourInpi": "2024-01-13T02:01:59",
         "dateDebutActivite": "",
         "trancheEffectif": "01",
         "anneeCategorieEntreprise": "2021",
@@ -416,6 +427,7 @@
             "latitude": "43.926703",
             "longitude": "4.784775",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [
@@ -452,6 +464,7 @@
             "latitude": "48.887985",
             "longitude": "2.233045",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [],
@@ -486,6 +499,7 @@
             "latitude": "48.876263",
             "longitude": "2.097763",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [],
@@ -555,6 +569,7 @@
           "latitude": "48.700488",
           "longitude": "2.758235",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [],
@@ -599,6 +614,7 @@
               "latitude": "48.700488",
               "longitude": "2.758235",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [],
@@ -635,6 +651,7 @@
               "latitude": "48.700488",
               "longitude": "2.758235",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [],
@@ -656,8 +673,10 @@
         "libelleActivitePrincipale": "Intermédiaires spécialisés dans le commerce d’autres produits spécifiques",
         "dateCreation": "2004-09-01",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2023-04-18T15:06:33",
+        "dateMiseAJourInpi": "2024-01-13T06:42:52",
         "dateDebutActivite": "",
-        "trancheEffectif": "N",
+        "trancheEffectif": "NN",
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
@@ -728,6 +747,7 @@
           "latitude": "45.00782",
           "longitude": "-0.619455",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [],
@@ -772,6 +792,7 @@
               "latitude": "45.00782",
               "longitude": "-0.619455",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [],
@@ -808,6 +829,7 @@
               "latitude": "45.00782",
               "longitude": "-0.619455",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [],
@@ -829,8 +851,10 @@
         "libelleActivitePrincipale": "Autres intermédiaires du commerce en produits divers",
         "dateCreation": "2006-09-01",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2023-04-18T15:06:53",
+        "dateMiseAJourInpi": "2024-01-13T08:05:54",
         "dateDebutActivite": "",
-        "trancheEffectif": "N",
+        "trancheEffectif": "NN",
         "anneeCategorieEntreprise": "2021",
         "categorieEntreprise": "PME",
         "anneeTrancheEffectif": null,
@@ -885,6 +909,7 @@
             "latitude": "45.00782",
             "longitude": "-0.619455",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [],
@@ -936,6 +961,7 @@
           "latitude": "43.458122",
           "longitude": "2.00451",
           "complements": {
+            "estEntrepreneurIndividuel": false,
             "idFiness": [],
             "idBio": [],
             "idcc": [
@@ -982,6 +1008,7 @@
               "latitude": "43.458122",
               "longitude": "2.00451",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -1020,6 +1047,7 @@
               "latitude": "43.458122",
               "longitude": "2.00451",
               "complements": {
+                "estEntrepreneurIndividuel": false,
                 "idFiness": [],
                 "idBio": [],
                 "idcc": [
@@ -1043,6 +1071,8 @@
         "libelleActivitePrincipale": "Agences immobilières",
         "dateCreation": "2019-07-09",
         "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2023-11-30T11:27:11",
+        "dateMiseAJourInpi": "2024-01-14T00:34:19",
         "dateDebutActivite": "",
         "trancheEffectif": "02",
         "anneeCategorieEntreprise": "2021",
@@ -1099,6 +1129,7 @@
             "latitude": "43.458122",
             "longitude": "2.00451",
             "complements": {
+              "estEntrepreneurIndividuel": false,
               "idFiness": [],
               "idBio": [],
               "idcc": [

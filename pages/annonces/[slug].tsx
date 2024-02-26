@@ -1,14 +1,13 @@
 import { GetServerSideProps } from 'next';
-import AnnoncesAssociationSection from '#components/annonces-section/annonces-association';
-import AnnoncesBodacc from '#components/annonces-section/bodacc';
-import { ComptesAssociationSection } from '#components/annonces-section/comptes-association';
+import AnnoncesBodacc from '#components/annonces-section/annonces/bodacc';
+import AnnoncesJOAFESection from '#components/annonces-section/annonces/joafe';
 import Meta from '#components/meta';
 import { DonneesPriveesSection } from '#components/non-diffusible';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { IUniteLegale, isAssociation } from '#models/index';
-import { estDiffusible } from '#models/statut-diffusion';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { estDiffusible } from '#models/core/statut-diffusion';
+import { IUniteLegale, isAssociation } from '#models/core/types';
+import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -52,10 +51,7 @@ const Annonces: NextPageWithLayout<IProps> = ({
           <DonneesPriveesSection />
         )}
         {isAssociation(uniteLegale) && (
-          <>
-            <AnnoncesAssociationSection uniteLegale={uniteLegale} />
-            <ComptesAssociationSection uniteLegale={uniteLegale} />
-          </>
+          <AnnoncesJOAFESection uniteLegale={uniteLegale} />
         )}
       </div>
     </>

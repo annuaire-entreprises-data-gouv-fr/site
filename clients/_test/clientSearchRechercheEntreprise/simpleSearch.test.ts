@@ -11,12 +11,15 @@ describe.only('clientSearchRechercheEntreprise : simple search with searchTerms'
     // changes often.
     '198100125', // établissement scolaire
     '800329849', // entrepreneur spectacle, asso & ESS
+    '130025265', // DINUM (service public)
+    '217500016', // Ville de paris
     '843701079',
     '880878145',
     '88087814500015',
     '883010316',
     '908595879',
     '552032534',
+
     'xavier jouppe',
   ].forEach((s) => itShouldMatchSnapshotForSearch(s, 1));
 });

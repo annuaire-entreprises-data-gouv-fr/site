@@ -1,12 +1,37 @@
 [
-    {
-        "source": "/api/qr/:slug",
-        "destination": "/api/share/qr/:slug",
-        "permanent": true
-    }, 
-    {
-        "source": "/faq/tva-intracommunautaire",
-        "destination": "/definitions/tva-intracommunautaire",
-        "permanent": true
-    }
+  {
+    "source": "/api/qr/:slug",
+    "destination": "/api/share/qr/:slug",
+    "permanent": true
+  },
+  {
+    "source": "/faq/tva-intracommunautaire",
+    "destination": "/definitions/tva-intracommunautaire",
+    "permanent": true
+  },
+  {
+    "source": "/budget",
+    "destination": "/a-propos/budget",
+    "permanent": true
+  },
+  {
+    "source": "/equipe",
+    "destination": "/a-propos/equipe",
+    "permanent": true
+  },
+  {
+    "source": "/comment-ca-marche",
+    "destination": "/a-propos/comment-ca-marche",
+    "permanent": true
+  },
+  {
+    "source": "/donnees-extrait-kbis",
+    "destination": "/a-propos/donnees-extrait-kbis",
+    "permanent": true
+  },
+  {
+    "source": "/stats",
+    "destination": "/a-propos/stats",
+    "permanent": true
+  }
 ]

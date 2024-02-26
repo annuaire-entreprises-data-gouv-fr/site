@@ -3,9 +3,9 @@ import ElusSection from '#components/dirigeants-section/elus-section';
 import Meta from '#components/meta';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { IUniteLegale } from '#models/index';
-import { getNomComplet } from '#models/statut-diffusion';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
+import { getNomComplet } from '#models/core/statut-diffusion';
+import { IUniteLegale } from '#models/core/types';
+import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
 import {
   IPropsWithMetadata,

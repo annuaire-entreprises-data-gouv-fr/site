@@ -1,5 +1,5 @@
 import { HttpNotFound } from '#clients/exceptions';
-import { IUniteLegale } from '#models/index';
+import { IUniteLegale } from '#models/core/types';
 import { Siren } from '#utils/helpers';
 import clientSearchRechercheEntreprise from '.';
 

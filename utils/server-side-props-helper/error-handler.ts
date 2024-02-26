@@ -1,10 +1,11 @@
-import { IncomingMessage } from 'http';
-import { GetServerSidePropsContext } from 'next';
 import { HttpNotFound } from '#clients/exceptions';
-import { Exception, IExceptionContext } from '#models/exceptions';
+import {
+  Exception,
+  IExceptionContext,
+  InternalError,
+} from '#models/exceptions';
 import {
   FetchRechercheEntrepriseException,
-  InternalError,
   IsLikelyASirenOrSiretException,
   NotASirenError,
   NotASiretError,
@@ -12,9 +13,11 @@ import {
   NotLuhnValidSiretError,
   SirenNotFoundError,
   SiretNotFoundError,
-} from '#models/index';
+} from '#models/core/types';
 import { verifySiren, verifySiret } from '#utils/helpers';
 import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
+import { IncomingMessage } from 'http';
+import { GetServerSidePropsContext } from 'next';
 import {
   redirectIfSiretOrSiren,
   redirectPageNotFound,

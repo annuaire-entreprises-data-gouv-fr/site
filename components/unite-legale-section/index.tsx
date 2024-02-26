@@ -8,9 +8,16 @@ import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { estActif } from '#models/etat-administratif';
-import { IUniteLegale, isAssociation, isServicePublic } from '#models/index';
-import { getAdresseUniteLegale, getNomComplet } from '#models/statut-diffusion';
+import { estActif } from '#models/core/etat-administratif';
+import {
+  getAdresseUniteLegale,
+  getNomComplet,
+} from '#models/core/statut-diffusion';
+import {
+  IUniteLegale,
+  isAssociation,
+  isServicePublic,
+} from '#models/core/types';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
@@ -68,11 +75,26 @@ const UniteLegaleSection: React.FC<{
     ['Taille de la structure', libelleCategorieEntreprise(uniteLegale)],
     ['Date de création', formatDate(uniteLegale.dateCreation)],
     [
-      'Dernière modification des données Insee',
-      formatDate(uniteLegale.dateDerniereMiseAJour),
+      'Dernière modification à l’Insee',
+      formatDate(uniteLegale.dateMiseAJourInsee),
     ],
+    ...(uniteLegale.dateMiseAJourInpi
+      ? [
+          [
+            'Dernière modification à l’Inpi',
+            formatDate(uniteLegale.dateMiseAJourInpi),
+          ],
+        ]
+      : []),
     ...(!estActif(uniteLegale)
-      ? [['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]]
+      ? [
+          [
+            'Date de fermeture',
+            formatDate(
+              uniteLegale.dateDebutActivite || uniteLegale.dateFermeture
+            ),
+          ],
+        ]
       : []),
     ['', <br />],
     [
@@ -98,7 +120,7 @@ const UniteLegaleSection: React.FC<{
     [
       'Justificatif(s) d’existence',
       <ul>
-        {isAssociation(uniteLegale) ? (
+        {isAssociation(uniteLegale) && (
           <li>
             Annonce de création au JOAFE :{' '}
             <a
@@ -109,18 +131,22 @@ const UniteLegaleSection: React.FC<{
               télécharger
             </a>
           </li>
-        ) : isServicePublic(uniteLegale) ? null : (
+        )}
+        {uniteLegale.dateMiseAJourInpi && (
           <li>
-            Extrait RNE : <ExtraitRNELink uniteLegale={uniteLegale} />
+            Extrait RNE (équivalent KBIS/D1) :{' '}
+            <ExtraitRNELink uniteLegale={uniteLegale} />
           </li>
         )}
-        <li>
-          Avis de situation Insee :{' '}
-          <AvisSituationLink
-            etablissement={uniteLegale.siege}
-            label="télécharger"
-          />
-        </li>
+        {uniteLegale.dateMiseAJourInsee && (
+          <li>
+            Avis de situation Insee :{' '}
+            <AvisSituationLink
+              etablissement={uniteLegale.siege}
+              label="télécharger"
+            />
+          </li>
+        )}
       </ul>,
     ],
   ];
@@ -140,6 +166,7 @@ const UniteLegaleSection: React.FC<{
             : [EAdministration.INPI]),
           ...(conventionsCollectives.length > 0 ? [EAdministration.MTPEI] : []),
         ]}
+        lastModified={uniteLegale.dateDerniereMiseAJour}
       >
         <TwoColumnTable body={data} />
       </Section>

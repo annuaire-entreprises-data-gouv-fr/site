@@ -4,14 +4,14 @@ import IsActiveTag from '#components-ui/is-active-tag';
 import { isPersonneMorale } from '#components/dirigeants-section/rne-dirigeants';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import constants from '#models/constants';
-import { estActif } from '#models/etat-administratif';
-import { IDirigeant } from '#models/immatriculation';
-import { isCollectiviteTerritoriale } from '#models/index';
-import { ISearchResult } from '#models/search';
+import { estActif } from '#models/core/etat-administratif';
 import {
   getAdresseEtablissement,
   getAdresseUniteLegale,
-} from '#models/statut-diffusion';
+} from '#models/core/statut-diffusion';
+import { isCollectiviteTerritoriale } from '#models/core/types';
+import { IDirigeant } from '#models/immatriculation';
+import { ISearchResult } from '#models/search';
 
 type IProps = {
   results: ISearchResult[];
@@ -89,7 +89,11 @@ const ResultItem: React.FC<{
       >
         <div className="title">
           <span>{`${result.nomComplet}`}</span>
-          <UniteLegaleBadge uniteLegale={result} small hiddenByDefault />
+          <UniteLegaleBadge
+            uniteLegale={result}
+            small
+            defaultBadgeShouldBeHid
+          />
           {!estActif(result) && (
             <IsActiveTag
               etatAdministratif={result.etatAdministratif}

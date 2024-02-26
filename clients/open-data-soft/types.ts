@@ -1,10 +1,14 @@
-export type IODSResponse = {
-  records: {
-    datasetid: string;
-    recordid: string;
-    fields: any;
-  }[];
-};
+export type IODSResponse =
+  | {
+      records: {
+        datasetid: string;
+        recordid: string;
+        fields: any;
+      }[];
+    }
+  | {
+      results: any[];
+    };
 
 export type IODSMetadata = {
   metas: {

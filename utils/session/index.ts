@@ -10,18 +10,29 @@ export type ISession = {
     firstName?: string;
     fullName?: string;
     privilege?: ISessionPrivilege;
+    siret?: string;
   };
+
   // agent connect
   state?: string;
   nonce?: string;
   idToken?: string;
   // connexion
-  sirenFrom?: string;
+  pathFrom?: string;
+
+  // FranceConnect hide personal data request
+  hidePersonalDataRequestFC?: {
+    firstName?: string;
+    familyName?: string;
+    birthdate?: string;
+    tokenId: string;
+    sub: string;
+  };
 };
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
-  cookieName: 'annuaire-entreprises-session',
+  cookieName: 'annuaire-entreprises-user-session',
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
   },
@@ -37,6 +48,7 @@ export const setAgentSession = async (
   email: string,
   familyName: string,
   firstName: string,
+  siret: string,
   privilege: ISessionPrivilege,
   session: IronSession<ISession>
 ) => {
@@ -46,6 +58,7 @@ export const setAgentSession = async (
     familyName,
     fullName: familyName ? `${firstName} ${familyName}` : undefined,
     privilege,
+    siret,
   };
   await session.save();
 };
@@ -60,20 +73,55 @@ export const cleanAgentSession = async (session: IronSession<ISession>) => {
  * @param session
  */
 
-export const setSirenFrom = async (
+export const setPathFrom = async (
   session: IronSession<ISession>,
-  sirenFrom: string
+  pathFrom: string
 ) => {
-  session.sirenFrom = sirenFrom;
+  if (pathFrom) {
+    session.pathFrom = pathFrom;
+    await session.save();
+  }
+};
+
+export const getPathFrom = (session: IronSession<ISession>) => session.pathFrom;
+
+export const cleanPathFrom = async (session: IronSession<ISession>) => {
+  delete session.pathFrom;
+};
+export const setHidePersonalDataRequestFCSession = async (
+  firstName: string | undefined,
+  familyName: string | undefined,
+  birthdate: string | undefined,
+  tokenId: string,
+  sub: string,
+  session: IronSession<ISession>
+) => {
+  session.hidePersonalDataRequestFC = {
+    firstName,
+    familyName,
+    birthdate,
+    tokenId,
+    sub,
+  };
   await session.save();
 };
 
-export const getSirenFrom = (session: IronSession<ISession>) =>
-  session.sirenFrom;
-
-export const cleanSirenFrom = async (session: IronSession<ISession>) => {
-  delete session.sirenFrom;
-};
+export function getHidePersonalDataRequestFCSession(
+  session: ISession | null
+): Required<NonNullable<ISession['hidePersonalDataRequestFC']>> | null {
+  if (
+    !session ||
+    !session.hidePersonalDataRequestFC ||
+    !session.hidePersonalDataRequestFC.firstName ||
+    !session.hidePersonalDataRequestFC.familyName ||
+    !session.hidePersonalDataRequestFC.birthdate
+  ) {
+    return null;
+  }
+  return session.hidePersonalDataRequestFC as Required<
+    NonNullable<ISession['hidePersonalDataRequestFC']>
+  >;
+}
 
 /**
  *  Verify if user is loggedin

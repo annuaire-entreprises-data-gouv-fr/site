@@ -21,4 +21,5 @@ export interface IAPIBilanResponse {
   ratio_de_liquidite: number;
   taux_d_endettement: number;
   type_bilan: 'C' | 'K' | 'S';
+  confidentiality: 'Public' | string;
 }

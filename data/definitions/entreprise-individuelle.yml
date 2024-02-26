@@ -3,6 +3,16 @@ title: Entreprise individuelle
 seo:
   title: Entreprise individuelle - définition - Annuaire des Entreprises
   description: Une entreprise individuelle est une forme d'entreprise simplifiée qui regroupe les statuts d'entrepreneur individuel, de micro-entrepreneur et anciennement d'auto-entrepreneur.
+more:
+  - label: 'Personne physique'
+    href: '/definition/personne-physique'
+
+  - label: 'SIREN'
+    href: '/definition/siren'
+
+  - label: 'Entreprise non diffusible'
+    href: '/definition/entreprise-non-diffusible'
+
 body: |
 
 

@@ -1,11 +1,9 @@
 import React from 'react';
 import FAQLink from '#components-ui/faq-link';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import BreakPageForPrint from '#components-ui/print-break-page';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { ICollectiviteTerritoriale } from '#models/index';
+import { ICollectiviteTerritoriale } from '#models/core/types';
 
 const CollectiviteTerritorialeSection: React.FC<{
   uniteLegale: ICollectiviteTerritoriale;
@@ -51,6 +49,7 @@ const CollectiviteTerritorialeSection: React.FC<{
     ],
   ];
 
+  const shouldDisplayCollectiviteLink = codeInsee && niveau === 'commune';
   return (
     <>
       <Section
@@ -61,11 +60,22 @@ const CollectiviteTerritorialeSection: React.FC<{
           EAdministration.DINUM,
         ]}
       >
-        <p>Cette structure est une collectivite territoriale&nbsp;:</p>
         <TwoColumnTable body={data} />
+        {shouldDisplayCollectiviteLink && (
+          <>
+            <br />
+            Retrouvez plus d&apos;informations sur la{' '}
+            <a
+              target="_blank"
+              href={`https://collectivite.fr/${codeInsee}`}
+              rel="noopener"
+            >
+              fiche collectivites.fr
+            </a>
+            .
+          </>
+        )}
       </Section>
-      <HorizontalSeparator />
-      <BreakPageForPrint />
     </>
   );
 };

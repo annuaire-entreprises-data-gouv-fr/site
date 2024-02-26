@@ -1,7 +1,7 @@
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { getEgapro, IEgapro } from '#models/certifications/egapro';
-import { getUniteLegaleFromSlug } from '#models/unite-legale';
-import { IUniteLegale } from '..';
+import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
+import { IUniteLegale } from '../core/types';
 import { getBio, IEtablissementsBio } from './bio';
 import {
   getEntrepreneurSpectaclesCertification,

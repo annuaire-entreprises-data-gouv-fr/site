@@ -81,3 +81,12 @@ export const EDUCNAT = ({ queryString = '' }) => (
     Éducation nationale
   </a>
 );
+
+export const DINUM = ({ queryString = '' }) => (
+  <a
+    href={`/administration/dinum${queryString}`}
+    title="Direction Interministérielle du Numérique"
+  >
+    DINUM
+  </a>
+);

@@ -9,7 +9,7 @@ import logErrorInSentry from '#utils/sentry';
 import { isAgent } from '#utils/session';
 import withSession from '#utils/session/with-session';
 
-withSession(async function download(req, res) {
+export default withSession(async function download(req, res) {
   const {
     query: { slug, type },
     session,
@@ -50,3 +50,11 @@ withSession(async function download(req, res) {
     res.status(e.status || 500).json({ message });
   }
 });
+
+// Actes can often be bigger than 4MB
+// https://nextjs.org/docs/messages/api-routes-response-size-limit#possible-ways-to-fix-it
+export const config = {
+  api: {
+    responseLimit: false,
+  },
+};
