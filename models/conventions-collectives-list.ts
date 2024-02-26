@@ -1,4 +1,4 @@
-import { clientIdccMetadata } from '#clients/recherche-entreprise/idcc-metadata';
+import { clientIdccMetadata } from '#clients/metadata-store/idcc';
 import logErrorInSentry, { logInfoInSentry } from '#utils/sentry';
 import { EAdministration } from './administrations/EAdministration';
 import { APINotRespondingFactory } from './api-not-responding';

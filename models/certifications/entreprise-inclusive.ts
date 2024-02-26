@@ -17,7 +17,7 @@ export type IEntrepriseInclusive = {
 
 export const getEntrepriseInclusive = async (
   uniteLegale: IUniteLegale
-): Promise<IEntrepriseInclusive | IAPINotRespondingError> => {
+): Promise<IEntrepriseInclusive[] | IAPINotRespondingError> => {
   try {
     if (!uniteLegale.complements.estEntrepriseInclusive) {
       throw new HttpNotFound('Not an entreprise inclusive');

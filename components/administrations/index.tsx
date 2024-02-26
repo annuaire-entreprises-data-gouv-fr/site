@@ -90,3 +90,12 @@ export const DINUM = ({ queryString = '' }) => (
     DINUM
   </a>
 );
+
+export const MarcheInclusion = ({ queryString = '' }) => (
+  <a
+    href={`/administration/marche-inclusion${queryString}`}
+    title="Le Marché de l’Inclusion"
+  >
+    Marché de l’Inclusion
+  </a>
+);

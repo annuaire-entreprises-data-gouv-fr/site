@@ -124,7 +124,10 @@ const routes = {
     },
     entrepriseInclusive: {
       site: 'https://lemarche.inclusion.beta.gouv.fr/prestataires/',
-      api: 'https://lemarche.inclusion.beta.gouv.fr/api/siae/siret/',
+      api: {
+        siren: 'https://lemarche.inclusion.beta.gouv.fr/api/siae/siren/',
+        metadata: 'https://lemarche.inclusion.beta.gouv.fr/api/siae/kinds',
+      },
     },
   },
   proxy: {
