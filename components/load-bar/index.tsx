@@ -1,3 +1,29 @@
+'use client';
+
+import { useEffect } from 'react';
+import constants from '#models/constants';
+
+export default function LoadBar({ isAgent }: { isAgent: boolean }) {
+  useEffect(() => {
+    const loadBar = loadBarFactory();
+    if (typeof window !== 'undefined') {
+      window.addEventListener('beforeunload', loadBar.run);
+    }
+  }, []);
+  return (
+    <div
+      id="loader-bar"
+      style={{
+        background: isAgent ? constants.colors.espaceAgent : 'transparent',
+        height: '3px',
+        position: 'fixed',
+        top: '0',
+        width: '0',
+      }}
+    />
+  );
+}
+
 /**
  * Small utils that create a load bar on when user is about to leave page.
  *
@@ -6,10 +32,8 @@
  * Load bar is entirely a visual trick to help with user patience.
  */
 
-const wait = async (timeout) => {
-  return new Promise((resolve, reject) =>
-    window.setTimeout(() => resolve(), timeout)
-  );
+const wait = async (timeout: number): Promise<void> => {
+  return new Promise((resolve) => window.setTimeout(() => resolve(), timeout));
 };
 
 /**
@@ -24,12 +48,9 @@ const positions = [
 
 const init = () => {
   const loader = document.getElementById('loader-bar');
-
   if (!loader) {
     return null;
   }
-
-  loader.style.position = 'fixed';
 
   if (loader.style.backgroundColor === 'transparent') {
     loader.style.background = '#000091';
@@ -37,14 +58,17 @@ const init = () => {
       'linear-gradient(90deg, rgba(0,0,145,1), rgb(0, 159, 255))';
   }
 
-  document.body.appendChild(loader);
   return loader;
 };
 
 const loadBarFactory = () => {
   return {
+    _currentJobId: '',
+    _loader: null as HTMLElement | null,
+
     run: async function () {
       const jobId = Math.random().toString(16).substring(7);
+
       this._currentJobId = jobId;
       if (!this._loader) {
         this._loader = init();
@@ -66,9 +90,3 @@ const loadBarFactory = () => {
     },
   };
 };
-
-const loadBar = loadBarFactory();
-
-if (typeof window !== 'undefined') {
-  window.addEventListener('beforeunload', loadBar.run);
-}

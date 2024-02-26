@@ -6,7 +6,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { Loader } from '#components-ui/loader';
 import MatomoEvent from '#components/matomo-event';
-import { CopyPaste } from '#components/table/simple';
+import { CopyPaste } from '#components/table/copy-paste';
 import { isAPILoading } from '#models/api-loading';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
@@ -28,8 +28,8 @@ const Unknown = () => (
 );
 
 const CopyCell = ({ number }: { number: string }) => (
-  <CopyPaste shouldTrim={true} id="tva-cell-result">
-    FR{formatIntFr(number)}
+  <CopyPaste shouldTrim={true} id="tva-cell-result" label="TVA">
+    {'FR' + formatIntFr(number)}
   </CopyPaste>
 );
 

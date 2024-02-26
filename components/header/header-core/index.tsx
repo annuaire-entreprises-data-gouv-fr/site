@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import Logo from '#components-ui/logo';
 import { PrintNever } from '#components-ui/print-visibility';
+import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
 import { ISession, isLoggedIn } from '#utils/session';
@@ -34,14 +35,8 @@ export const HeaderCore: React.FC<IProps> = ({
       className="fr-header"
       style={{ filter: !useSearchBar ? 'none !important' : undefined }}
     >
-      <div
-        id="loader-bar"
-        style={{
-          background: isLoggedIn(session)
-            ? constants.colors.espaceAgent
-            : 'transparent',
-        }}
-      />
+      <LoadBar isAgent={isLoggedIn(session)} />
+
       <PrintNever>
         <form
           id="search-bar-form"

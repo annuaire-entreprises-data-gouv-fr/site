@@ -80,7 +80,6 @@ export default async function UniteLegalePage(props: AppRouterProps) {
       {isRedirected && (
         <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />
       )}
-
       <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
       <div className="content-container">
         <Title

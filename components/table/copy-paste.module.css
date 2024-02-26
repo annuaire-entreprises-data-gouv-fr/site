@@ -1,0 +1,41 @@
+.copyButton {
+  font-size: inherit;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none !important;
+  cursor: pointer;
+  color: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  flex-wrap: wrap;
+  display: inline-flex;
+  align-items: center;
+  line-height: inherit;
+  gap: 5px;
+  text-align: left;
+}
+
+.copyTooltip {
+  background-color: #dfdff1;
+  border-radius: 3px;
+  color: #000091;
+  padding: 0 4px;
+  display: inline-flex;
+  align-items: center;
+  animation: fadeIn 0.1s ease-in-out;
+  font-size: 0.9rem;
+  will-change: transform, opacity;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
