@@ -29,9 +29,11 @@ function ConventionsCollectivesExplanations({
     return null;
   }
 
+  const plural = ccWithexplanations.length > 1 ? 's' : '';
+
   return (
     <Info>
-      {ccWithexplanations.length} convention collective n’est plus en vigueur :
+      {ccWithexplanations.length} convention{plural} collective{plural} n{ccWithexplanations.length > 1 ? 'e sont' : '’est'} plus en vigueur :
       <ul>
         {ccWithexplanations.map(({ idcc, splitted, redirect }) => (
           <Fragment key={idcc}>
