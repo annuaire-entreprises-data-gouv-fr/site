@@ -28,7 +28,7 @@ const Unknown = () => (
 );
 
 const CopyCell = ({ number }: { number: string }) => (
-  <CopyPaste shouldTrim={true} id="tva-cell-result">
+  <CopyPaste shouldTrim={true} id="tva-cell-result" label="TVA">
     {'FR' + formatIntFr(number)}
   </CopyPaste>
 );

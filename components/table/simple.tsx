@@ -20,7 +20,9 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
   return (
     <td>
       {isCopyEnabled ? (
-        <CopyPaste shouldTrim={shouldTrim(label)}>{children}</CopyPaste>
+        <CopyPaste label={label} shouldTrim={shouldTrim(label)}>
+          {children}
+        </CopyPaste>
       ) : (
         <div>
           <span>{children || <NonRenseigne />}</span>

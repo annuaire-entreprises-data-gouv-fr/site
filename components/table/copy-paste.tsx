@@ -7,12 +7,14 @@ type ICopyPasteProps = {
   shouldTrim?: boolean;
   id?: string;
   children: string;
+  label: string;
 };
 
 export function CopyPaste({
   children,
   shouldTrim = false,
   id = undefined,
+  label,
 }: ICopyPasteProps) {
   if (typeof children !== 'string') {
     throw new InternalError({
@@ -28,6 +30,7 @@ export function CopyPaste({
     document.body.removeChild(el);
     setCopied(true);
     element.current?.focus();
+    logCopyPaste(label);
   };
   const element = createRef<HTMLButtonElement>();
 
@@ -109,4 +112,11 @@ function CheckMarkSVG() {
       <path d="M4 16L11 23 27 7" />
     </svg>
   );
+}
+
+function logCopyPaste(label: string) {
+  try {
+    var _paq = window._paq || [];
+    _paq.push(['trackEvent', 'action', 'copyPaste', `${label}`]);
+  } catch {}
 }

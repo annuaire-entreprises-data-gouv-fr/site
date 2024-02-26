@@ -97,7 +97,7 @@ const EtablissementSection: React.FC<IProps> = ({
       </FAQLink>,
       etablissement.adresse ? (
         <>
-          <CopyPaste>
+          <CopyPaste label="Adresse">
             {getAdresseEtablissement(etablissement, session)}
           </CopyPaste>
           <PrintNever key="adresse-link">
