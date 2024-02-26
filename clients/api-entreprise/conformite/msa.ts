@@ -1,8 +1,7 @@
-import { HttpUnauthorizedError } from '#clients/exceptions';
 import routes from '#clients/routes';
-import constants from '#models/constants';
+import { IConformite } from '#models/espace-agent/donnees-restreintes-entreprise';
 import { Siret } from '#utils/helpers';
-import { httpGet } from '#utils/network';
+import clientAPIEntreprise from '../client';
 
 export type IAPIEntrepriseConformiteMSA = {
   data: {
@@ -15,31 +14,15 @@ export type IAPIEntrepriseConformiteMSA = {
 /**
  * GET documents from API Entreprise
  */
-export const clientApiEntrepriseConformiteMSA = async (siret: Siret) => {
-  if (!process.env.API_ENTREPRISE_URL || !process.env.API_ENTREPRISE_TOKEN) {
-    throw new HttpUnauthorizedError('Missing API Entreprise credentials');
-  }
-
-  // never cache any API Entreprise request
-  const useCache = false;
-
-  const response = await httpGet<IAPIEntrepriseConformiteMSA>(
+export const clientApiEntrepriseConformiteMSA = async (
+  siret: Siret,
+  recipientSiret?: string
+) => {
+  return await clientAPIEntreprise<IAPIEntrepriseConformiteMSA, IConformite>(
     `${process.env.API_ENTREPRISE_URL}${routes.apiEntreprise.conformite.msa}${siret}/conformite_cotisations`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.API_ENTREPRISE_TOKEN}`,
-      },
-      timeout: constants.timeout.XXXL,
-      params: {
-        object: 'espace-agent-public',
-        context: 'annuaire-entreprises',
-        recipient: 13002526500013,
-      },
-      useCache,
-    }
+    mapToDomainObject,
+    recipientSiret
   );
-
-  return mapToDomainObject(response);
 };
 
 const mapToDomainObject = (response: IAPIEntrepriseConformiteMSA) => {

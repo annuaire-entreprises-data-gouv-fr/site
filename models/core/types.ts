@@ -98,6 +98,7 @@ export interface IUniteLegale extends IEtablissementsList {
   dateMiseAJourInsee: string;
   dateMiseAJourInpi: string;
   dateDebutActivite: string;
+  dateFermeture: string;
   statutDiffusion: ISTATUTDIFFUSION; // diffusion des données autorisée - uniquement les EI
   etatAdministratif: IETATADMINSTRATIF;
   nomComplet: string;
@@ -135,6 +136,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     activitePrincipale: '',
     libelleActivitePrincipale: '',
     dateCreation: '',
+    dateFermeture: '',
     dateDerniereMiseAJour: '',
     dateMiseAJourInsee: '',
     dateMiseAJourInpi: '',

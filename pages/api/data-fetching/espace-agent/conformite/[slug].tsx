@@ -17,12 +17,15 @@ export default withSession(async function conformite(req, res) {
       throw new HttpForbiddenError('Unauthorized account');
     }
 
+    const agentSiret = session?.user?.siret;
+
     const siret = verifySiret(slug as string);
     const siren = extractSirenFromSiret(siret);
 
     const donneesRestreintes = await getDonneesRestreintesEntreprise(
       siren,
-      siret
+      siret,
+      agentSiret
     );
     res.status(200).json(donneesRestreintes);
   } catch (e: any) {
