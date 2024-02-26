@@ -1,14 +1,16 @@
+'use client';
 import { useEffect } from 'react';
 import { Exception } from '#models/exceptions';
 
-export function useSaveFavourite(visit: {
+export function SaveFavourite(props: {
   siren: string;
   name: string;
   path: string;
 }) {
   useEffect(() => {
-    saveFavourite(visit);
-  }, [visit]);
+    saveFavourite(props);
+  }, [props]);
+  return null;
 }
 
 const LOCALSTORAGE_KEY = 'favourites-siren';
