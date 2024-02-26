@@ -1,11 +1,6 @@
 import { clientAssociation } from '#clients/api-proxy/association';
 import { tvaNumber } from '#models/tva/utils';
-import {
-  verifyIdRna,
-  verifySiren,
-  verifySiret,
-  verifyTVANumber,
-} from '#utils/helpers';
+import { verifyIdRna, verifySiren, verifyTVANumber } from '#utils/helpers';
 import { clientMarcheInclusion } from './api-inclusion';
 import { fetchRNEImmatriculation } from './api-proxy/rne';
 import { clientTVA } from './api-vies';
@@ -22,7 +17,7 @@ export class APISlugNotFound extends Error {
 const ping = async (slug: string | string[]) => {
   const sirenGanymede = verifySiren('880878145');
   const sirenDanone = verifySiren('552032534');
-  const siretInclusion = verifySiret('419437629');
+  const siretInclusion = verifySiren('419437629');
 
   const useCache = false;
 

@@ -7,11 +7,7 @@ import {
 } from '#models/api-not-responding';
 import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
-<<<<<<< HEAD
-import { IUniteLegale } from '..';
-=======
 import { IUniteLegale } from '../core/types';
->>>>>>> main
 
 export type IEntrepriseInclusive = {
   marcheInclusionLink: string;
