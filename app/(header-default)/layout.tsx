@@ -4,8 +4,8 @@ import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
 import { HeaderServer } from '#components/header/header-server';
 import SocialNetworks from '#components/social-network';
-import '../../frontend/style/dsfr.min.css';
-import '../../frontend/style/globals.css';
+import '../../style/dsfr.min.css';
+import '../../style/globals.css';
 
 export const metadata: Metadata = {
   title:
