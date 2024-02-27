@@ -7,6 +7,7 @@
   cursor: pointer;
   color: inherit;
   font-weight: inherit;
+  position: relative;
   font-family: inherit;
   flex-wrap: wrap;
   display: inline-flex;
@@ -26,6 +27,13 @@
   animation: fadeIn 0.1s ease-in-out;
   font-size: 0.9rem;
   will-change: transform, opacity;
+}
+.copyTooltipAbsolute {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  box-shadow: -5px 0px 2px 5px rgba(255, 255, 255, 1);
+  z-index: 100;
 }
 
 @keyframes fadeIn {

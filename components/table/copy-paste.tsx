@@ -1,5 +1,5 @@
 'use client';
-import { createRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { InternalError } from '#models/exceptions';
 import style from './copy-paste.module.css';
 
@@ -21,6 +21,9 @@ export function CopyPaste({
       message: `CopyPaste component can only be used with string children, got ${typeof children}`,
     });
   }
+
+  const timeoutId = useRef<NodeJS.Timeout>();
+
   const copyToClipboard = () => {
     const el = document.createElement('textarea');
     el.value = shouldTrim ? children.trim() : children;
@@ -31,17 +34,27 @@ export function CopyPaste({
     setCopied(true);
     element.current?.focus();
     logCopyPaste(label);
+    timeoutId.current = setTimeout(() => {
+      setCopied(false);
+    }, 5000);
   };
-  const element = createRef<HTMLButtonElement>();
+
+  const element = useRef<HTMLButtonElement>(null);
 
   const handleBlur = () => {
     setFocused(false);
     setCopied(false);
+    clearTimeout(timeoutId.current);
   };
   const [hovered, setHovered] = useState(false);
   const [copied, setCopied] = useState(false);
   const [focused, setFocused] = useState(false);
-
+  const copyTooltipRef = useRef<HTMLSpanElement>(null);
+  useLayoutEffect(() => {
+    if (copyTooltipRef.current && copyTooltipRef.current.offsetTop > 0) {
+      copyTooltipRef.current.classList.add(style.copyTooltipAbsolute);
+    }
+  });
   return (
     <button
       className={style.copyButton}
@@ -59,6 +72,7 @@ export function CopyPaste({
         <span
           className={style.copyTooltip}
           aria-hidden
+          ref={copyTooltipRef}
           style={{ color: copied ? 'green' : '' }}
         >
           {copied ? (

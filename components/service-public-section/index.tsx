@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode } from 'react';
 import NonRenseigne from '#components/non-renseigne';
 import { DataSection } from '#components/section/data-section';
