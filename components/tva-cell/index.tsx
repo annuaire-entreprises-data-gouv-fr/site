@@ -124,7 +124,6 @@ const VerifyTVA: React.FC<{
         ) : mayHaveMultipleTVANumber.allTime ? (
           <>
             <Unknown />
-            joli
           </>
         ) : (
           <NoTVA />

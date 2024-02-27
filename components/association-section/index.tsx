@@ -1,5 +1,5 @@
-import React from 'react';
-import { Warning } from '#components-ui/alerts';
+'use client';
+
 import AssociationAdressAlert from '#components-ui/alerts-with-explanations/association-adress';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
@@ -12,98 +12,7 @@ import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IDataAssociation } from '#models/association/types';
 import { IAssociation } from '#models/core/types';
 import { IdRna, formatDate, formatIntFr } from '#utils/helpers';
-import { isTwoMonthOld } from '#utils/helpers/checks';
-
-const AssociationNotFound: React.FC<{
-  uniteLegale: IAssociation;
-}> = ({ uniteLegale }) => (
-  <>
-    <Warning>
-      Cette structure est une association, mais aucune information n’a été
-      trouvée dans le{' '}
-      <strong>Répertoire National des Associations (RNA)</strong>.
-      {!isTwoMonthOld(uniteLegale.dateCreation) && (
-        <>
-          <br />
-          Cette structure a été créée il y a moins de deux mois. Il est donc
-          possible qu’elle n’ait pas encore été publiée au RNA et qu’elle le
-          soit prochainement.
-        </>
-      )}
-    </Warning>
-    <TwoColumnTable
-      body={[
-        ['N°RNA', formatIntFr(uniteLegale.association.idAssociation || '')],
-      ]}
-    />
-  </>
-);
-
-export default function AssociationSection({
-  uniteLegale,
-  association,
-}: {
-  uniteLegale: IAssociation;
-  association: IDataAssociation | IAPINotRespondingError | null;
-}) {
-  const { idAssociation = '' } = uniteLegale.association;
-
-  if (!association) {
-    // Data can be null if the natureJuridique is an association,
-    // but no idAssociation is provided by Insee API call.
-    return (
-      <Section
-        title={`Répertoire National des Associations`}
-        sources={[EAdministration.MI]}
-      >
-        <AssociationNotFound uniteLegale={uniteLegale} />;
-      </Section>
-    );
-  }
-
-  return (
-    <>
-      <DataSection
-        title="Répertoire National des Associations"
-        sources={[EAdministration.MI]}
-        data={association}
-        notFoundInfo={<AssociationNotFound uniteLegale={uniteLegale} />}
-      >
-        {(association) => (
-          <>
-            <AssociationAdressAlert
-              uniteLegale={uniteLegale}
-              association={association}
-            />
-            <p>
-              Cette structure est inscrite au{' '}
-              <strong>Répertoire National des Associations (RNA)</strong>, avec
-              les informations suivantes&nbsp;:
-            </p>
-            <TwoColumnTable body={getTableData(idAssociation, association)} />
-            {idAssociation && (
-              <>
-                <br />
-                Retrouvez plus d&apos;informations (comptes, effectifs et
-                documents administratifs) sur la{' '}
-                <a
-                  target="_blank"
-                  href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
-                  rel="noopener noreferrer"
-                >
-                  fiche data-asso de cette association
-                </a>
-                .
-              </>
-            )}
-          </>
-        )}
-      </DataSection>
-      <HorizontalSeparator />
-      <BreakPageForPrint />
-    </>
-  );
-}
+import { AssociationNotFound } from './association-not-found';
 
 const getTableData = (
   idAssociation: string | IdRna,
@@ -188,3 +97,71 @@ const getTableData = (
     ],
   ];
 };
+
+const AssociationSection = ({
+  uniteLegale,
+  association,
+}: {
+  uniteLegale: IAssociation;
+  association: IDataAssociation | IAPINotRespondingError | null;
+}) => {
+  const { idAssociation = '' } = uniteLegale.association;
+
+  if (!association) {
+    // Data can be null if the natureJuridique is an association,
+    // but no idAssociation is provided by Insee API call.
+    return (
+      <Section
+        title={`Répertoire National des Associations`}
+        sources={[EAdministration.MI]}
+      >
+        <AssociationNotFound uniteLegale={uniteLegale} />;
+      </Section>
+    );
+  }
+
+  return (
+    <>
+      <DataSection
+        title="Répertoire National des Associations"
+        sources={[EAdministration.MI]}
+        data={association}
+        notFoundInfo={<AssociationNotFound uniteLegale={uniteLegale} />}
+      >
+        {(association) => (
+          <>
+            <AssociationAdressAlert
+              uniteLegale={uniteLegale}
+              association={association}
+            />
+            <p>
+              Cette structure est inscrite au{' '}
+              <strong>Répertoire National des Associations (RNA)</strong>, avec
+              les informations suivantes&nbsp;:
+            </p>
+            <TwoColumnTable body={getTableData(idAssociation, association)} />
+            {idAssociation && (
+              <>
+                <br />
+                Retrouvez plus d&apos;informations (comptes, effectifs et
+                documents administratifs) sur la{' '}
+                <a
+                  target="_blank"
+                  href={`https://www.data-asso.fr/annuaire/association/${idAssociation}?docFields=documentsDac,documentsRna`}
+                  rel="noopener noreferrer"
+                >
+                  fiche data-asso de cette association
+                </a>
+                .
+              </>
+            )}
+          </>
+        )}
+      </DataSection>
+      <HorizontalSeparator />
+      <BreakPageForPrint />
+    </>
+  );
+};
+
+export default AssociationSection;

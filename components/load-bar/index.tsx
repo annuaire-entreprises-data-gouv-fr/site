@@ -15,6 +15,7 @@ export default function LoadBar({ isAgent }: { isAgent: boolean }) {
       id="loader-bar"
       style={{
         background: isAgent ? constants.colors.espaceAgent : 'transparent',
+        transition: 'width 300ms ease-in-out',
         height: '3px',
         position: 'fixed',
         top: '0',
