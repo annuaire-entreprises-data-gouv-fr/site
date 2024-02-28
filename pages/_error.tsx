@@ -16,7 +16,7 @@ const ServerError: NextPageWithLayout = () => {
 ServerError.getInitialProps = (...args) => {
   // log as JSON in order to be parse by Kibana
   try {
-    console.error(args[0]);
+    console.error(JSON.stringify(args[0]));
     const { res, err } = args[0];
     logFatalErrorInSentry(
       new Exception({
