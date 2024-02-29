@@ -16,9 +16,16 @@ export type ICCWithMetadata = {
   etat?: string;
   sirets?: string[];
   idcc?: string;
+  explanation: ICCExplanation | null;
 };
 
-const unknonwCC = {
+export type ICCExplanation = {
+  idcc: string;
+  redirect?: string;
+  splitted?: string[];
+};
+
+const unknonwCC: ICCWithMetadata = {
   idKali: '',
   legifrance: '',
   title:
@@ -26,6 +33,7 @@ const unknonwCC = {
   nature: 'Convention collective inconnue',
   etat: '',
   idcc: '',
+  explanation: null,
 };
 
 export const getCCMetadata = async (cc: IConventionsCollectives) => {
