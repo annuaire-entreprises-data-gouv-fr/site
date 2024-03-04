@@ -24,7 +24,13 @@ const errorInterceptor = (error: AxiosError) => {
     //@ts-ignore
     const startTime = config?.metadata?.startTime;
     console.error(
-      formatLog(url, status, false, startTime ? endTime - startTime : undefined)
+      formatLog(
+        url,
+        status,
+        false,
+        startTime ? endTime - startTime : undefined,
+        error.request?.method
+      )
     );
   }
   httpErrorHandler(url, status, statusText, message);
