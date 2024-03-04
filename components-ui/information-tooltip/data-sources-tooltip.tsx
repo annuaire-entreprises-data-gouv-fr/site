@@ -3,6 +3,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import { IAdministrationMetaData } from '#models/administrations/types';
 import constants from '#models/constants';
 import InformationTooltip from '.';
+import style from './style.module.css';
 
 const DataSourcesTooltip: React.FC<{
   dataSources: IAdministrationMetaData[];
@@ -23,7 +24,14 @@ const DataSourcesTooltip: React.FC<{
         </>
       }
     >
-      <a href={link} className="data-source no-style-link">
+      <a
+        href={link}
+        className={`no-style-link ${style['data-source']}`}
+        style={{
+          color: constants.colors.frBlue,
+          backgroundColor: constants.colors.pastelBlue,
+        }}
+      >
         <span className="layout-center">
           <Icon color={constants.colors.frBlue} size={12} slug="information" />
         </span>
@@ -38,20 +46,6 @@ const DataSourcesTooltip: React.FC<{
             ''
           )}
         </span>
-        <style jsx>{`
-          .data-source {
-            display: inline-flex;
-            font-size: 0.7rem;
-            background-color: ${constants.colors.pastelBlue};
-            color: ${constants.colors.frBlue};
-            padding: 2px 10px;
-            border-radius: 40px;
-            cursor: help;
-          }
-          .data-source:hover {
-            background-color: #d3d3ec;
-          }
-        `}</style>
       </a>
     </InformationTooltip>
   </>

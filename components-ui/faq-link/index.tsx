@@ -33,7 +33,7 @@ const LinkOrSpan: React.FC<
   PropsWithChildren<{ to?: string; ariaLabel: string }>
 > = ({ to, children, ariaLabel }) =>
   to ? (
-    <a href={to} aria-label={ariaLabel} style={{ background: 'none' }}>
+    <a href={to} aria-label={ariaLabel} className="no-style-link">
       {children}
     </a>
   ) : (

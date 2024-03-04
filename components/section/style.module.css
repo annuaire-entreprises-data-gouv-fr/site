@@ -1,0 +1,48 @@
+    .section-container {
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 2px;
+        position: relative;
+        margin: 20px 0 40px;
+        padding: 1rem;
+    }
+
+    .section-container>h2 {
+        margin-top: 0;
+        margin-bottom: 25px;
+        display: inline-block;
+        font-size: 1.1rem;
+        line-height: 1.8rem;
+        /* background-color: ${borderColor}; */
+        /* color: ${titleColor}; */
+        padding: 0 7px;
+        border-radius: 2px;
+        max-width: calc(100% - 250px);
+    }
+
+    .administration-page-link {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 25px;
+    }
+
+    .section-logo-wrapper {
+        position: absolute;
+        top: 25px;
+        right: 16px;
+        display: flex;
+        justify-content: end;
+    }
+
+    @media only screen and (min-width: 1px) and (max-width: 768px) {
+        .section-logo-wrapper {
+            display: none;
+        }
+
+        .section-container>h2 {
+            max-width: 100%;
+        }
+    }

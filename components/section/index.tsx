@@ -1,5 +1,3 @@
-'use client';
-
 import React, { PropsWithChildren } from 'react';
 import { Warning } from '#components-ui/alerts';
 import DataSourcesTooltip from '#components-ui/information-tooltip/data-sources-tooltip';
@@ -9,7 +7,7 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { formatDate, formatDateLong, isTwoMonthOld } from '#utils/helpers';
 import SectionErrorBoundary from './section-error-boundary';
-
+import style from './style.module.css';
 export interface ISectionProps {
   title: string;
   width?: number;
@@ -41,8 +39,12 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
 
   return (
     <SectionErrorBoundary>
-      <div className="section-container" id={id}>
-        <h2>{title}</h2>
+      <div
+        className={style['section-container']}
+        id={id}
+        style={{ width: `${width}%`, borderColor }}
+      >
+        <h2 style={{ color: titleColor }}>{title}</h2>
         {isOld && lastModified && (
           <Warning>
             Ces données n’ont pas été mises à jour depuis plus de deux mois.
@@ -51,7 +53,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         )}
         <div>{children}</div>
         {dataSources.length > 0 && (
-          <div className="administration-page-link">
+          <div className={style['administration-page-link']}>
             <DataSourcesTooltip
               dataSources={dataSources}
               lastUpdatedAt={formatDate(last)}
@@ -59,7 +61,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
             />
           </div>
         )}
-        <div className="section-logo-wrapper">
+        <div className={style['section-logo-wrapper']}>
           {dataSources.map(
             ({ slug, long, logoType }) =>
               logoType && (
@@ -79,56 +81,6 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           )}
         </div>
       </div>
-      <style jsx>{`
-        .section-container {
-          border: 2px solid ${borderColor};
-          width: ${width}%;
-          border-radius: 2px;
-          position: relative;
-          margin: 20px 0 40px;
-          padding: 1rem;
-        }
-
-        .section-container > h2 {
-          margin-top: 0;
-          margin-bottom: 25px;
-          display: inline-block;
-          font-size: 1.1rem;
-          line-height: 1.8rem;
-          background-color: ${borderColor};
-          color: ${titleColor};
-          padding: 0 7px;
-          border-radius: 2px;
-          max-width: calc(100% - 250px);
-        }
-
-        .administration-page-link {
-          display: flex;
-          justify-content: end;
-          align-items: center;
-          gap: 10px;
-          flex-wrap: wrap;
-          margin-top: 25px;
-        }
-
-        .section-logo-wrapper {
-          position: absolute;
-          top: 25px;
-          right: 16px;
-          display: flex;
-          justify-content: end;
-        }
-
-        @media only screen and (min-width: 1px) and (max-width: 768px) {
-          .section-logo-wrapper {
-            display: none;
-          }
-
-          .section-container > h2 {
-            max-width: 100%;
-          }
-        }
-      `}</style>
     </SectionErrorBoundary>
   );
 };
