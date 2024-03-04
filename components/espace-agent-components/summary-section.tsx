@@ -2,7 +2,7 @@ import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
-import { ProtectedSection } from '#components/section/protected';
+import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { IUniteLegale } from '#models/core/types';
 import { ISession, isSuperAgent } from '#utils/session';
@@ -19,7 +19,7 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
 }) => {
   return (
     <PrintNever>
-      <ProtectedSection title="Résumé pour les agents publics">
+      <Section title="Résumé pour les agents publics" isProtected>
         <TwoColumnTable
           body={[
             [
@@ -88,7 +88,7 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
               : []),
           ]}
         />
-      </ProtectedSection>
+      </Section>
       <HorizontalSeparator />
     </PrintNever>
   );

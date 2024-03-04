@@ -6,7 +6,7 @@ import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import { MTPEI } from '#components/administrations';
 import NonRenseigne from '#components/non-renseigne';
-import { DataSection } from '#components/section/data-section';
+import { ClientDataSection } from '#components/section/client-data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -33,7 +33,8 @@ function ConventionsCollectivesExplanations({
 
   return (
     <Info>
-      {ccWithexplanations.length} convention{plural} collective{plural} n{ccWithexplanations.length > 1 ? 'e sont' : '’est'} plus en vigueur :
+      {ccWithexplanations.length} convention{plural} collective{plural} n
+      {ccWithexplanations.length > 1 ? 'e sont' : '’est'} plus en vigueur :
       <ul>
         {ccWithexplanations.map(({ idcc, splitted, redirect }) => (
           <Fragment key={idcc}>
@@ -65,7 +66,7 @@ const ConventionsCollectivesSection: React.FC<{
   ccWithMetadata: ICCWithMetadata[] | IAPINotRespondingError;
 }> = ({ ccWithMetadata }) => {
   return (
-    <DataSection
+    <ClientDataSection
       title="Conventions collectives"
       sources={[EAdministration.MTPEI]}
       notFoundInfo={
@@ -162,7 +163,7 @@ const ConventionsCollectivesSection: React.FC<{
           </>
         );
       }}
-    </DataSection>
+    </ClientDataSection>
   );
 };
 export default ConventionsCollectivesSection;

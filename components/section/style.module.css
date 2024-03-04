@@ -13,8 +13,7 @@
         display: inline-block;
         font-size: 1.1rem;
         line-height: 1.8rem;
-        /* background-color: ${borderColor}; */
-        /* color: ${titleColor}; */
+
         padding: 0 7px;
         border-radius: 2px;
         max-width: calc(100% - 250px);
@@ -44,5 +43,26 @@
 
         .section-container>h2 {
             max-width: 100%;
+        }
+    }
+
+    .protected {
+        position: absolute;
+        background: #ffe8f4;
+        top: 0;
+        left: calc(50% - 115px);
+        width: 230px;
+        text-align: center;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        color: #cc007a;
+        font-weight: bold;
+        font-size: 0.9rem;
+
+        @media only screen and (min-width: 1px) and (max-width: 992px) {
+            background: #ffe8f4;
+            top: -14px;
+            text-align: center;
+            border-radius: 20px;
         }
     }

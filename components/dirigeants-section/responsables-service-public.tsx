@@ -1,6 +1,6 @@
 import { DILA } from '#components/administrations';
 import NonRenseigne from '#components/non-renseigne';
-import { DataSection } from '#components/section/data-section';
+import { ServerDataSection } from '#components/section/server-data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -9,7 +9,7 @@ import { IServicePublic } from '#models/service-public';
 type IProps = { servicePublic: IServicePublic | IAPINotRespondingError };
 export default function ResponsableSection({ servicePublic }: IProps) {
   return (
-    <DataSection
+    <ServerDataSection
       id="responsables-service-public"
       title={`Dirigeants`}
       sources={[EAdministration.DILA]}
@@ -87,7 +87,7 @@ export default function ResponsableSection({ servicePublic }: IProps) {
           )}
         </>
       )}
-    </DataSection>
+    </ServerDataSection>
   );
 }
 

@@ -2,7 +2,7 @@ import { Info } from '#components-ui/alerts';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import { LineChart } from '#components/chart/line';
-import { DataSection } from '#components/section/data-section';
+import { ClientDataSection } from '#components/section/client-data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
@@ -25,7 +25,7 @@ export const FinancesSocieteSection: React.FC<{
   const financesSociete = useFetchFinancesSociete(uniteLegale);
 
   return (
-    <DataSection
+    <ClientDataSection
       title="Indicateurs financiers"
       sources={[EAdministration.MEF]}
       data={financesSociete}
@@ -166,6 +166,6 @@ export const FinancesSocieteSection: React.FC<{
           </>
         );
       }}
-    </DataSection>
+    </ClientDataSection>
   );
 };

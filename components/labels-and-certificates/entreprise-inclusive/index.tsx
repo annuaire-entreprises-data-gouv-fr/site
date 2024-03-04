@@ -1,6 +1,6 @@
 import React from 'react';
 import ButtonLink from '#components-ui/button';
-import { DataSection } from '#components/section/data-section';
+import { ServerDataSection } from '#components/section/server-data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -11,7 +11,7 @@ export const EntrepriseInclusiveSection: React.FC<{
   entrepriseInclusive: IEntrepriseInclusive | IAPINotRespondingError;
 }> = ({ entrepriseInclusive }) => {
   return (
-    <DataSection
+    <ServerDataSection
       id="entreprise-inclusive"
       title="Entreprise Inclusive"
       sources={[EAdministration.MARCHE_INCLUSION]}
@@ -38,6 +38,6 @@ export const EntrepriseInclusiveSection: React.FC<{
           ]}
         />
       )}
-    </DataSection>
+    </ServerDataSection>
   );
 };

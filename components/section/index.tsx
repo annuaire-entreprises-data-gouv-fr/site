@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { Warning } from '#components-ui/alerts';
+import { Icon } from '#components-ui/icon/wrapper';
 import DataSourcesTooltip from '#components-ui/information-tooltip/data-sources-tooltip';
 import Logo from '#components-ui/logo';
 import { administrationsMetaData } from '#models/administrations';
@@ -14,8 +15,7 @@ export interface ISectionProps {
   sources?: EAdministration[];
   id?: string;
   lastModified?: string | null;
-  borderColor?: string;
-  titleColor?: string;
+  isProtected?: boolean;
 }
 
 export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
@@ -25,8 +25,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   sources = [],
   lastModified = null,
   width = 100,
-  borderColor = constants.colors.pastelBlue,
-  titleColor = constants.colors.frBlue,
+  isProtected = false,
 }) => {
   const dataSources = Array.from(new Set(sources)).map(
     (key) => administrationsMetaData[key]
@@ -37,6 +36,13 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
 
   const faqLink = `/administration/${dataSources.map((d) => d.slug).join('_')}`;
 
+  const borderColor = isProtected
+    ? constants.colors.espaceAgentPastel
+    : constants.colors.pastelBlue;
+  const titleColor = isProtected
+    ? constants.colors.espaceAgent
+    : constants.colors.frBlue;
+
   return (
     <SectionErrorBoundary>
       <div
@@ -44,7 +50,16 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         id={id}
         style={{ width: `${width}%`, borderColor }}
       >
-        <h2 style={{ color: titleColor }}>{title}</h2>
+        {isProtected && (
+          <div className={style.protected}>
+            <Icon size={12} slug="lockFill">
+              Réservé aux agents publics
+            </Icon>
+          </div>
+        )}
+        <h2 style={{ color: titleColor, backgroundColor: borderColor }}>
+          {title}
+        </h2>
         {isOld && lastModified && (
           <Warning>
             Ces données n’ont pas été mises à jour depuis plus de deux mois.

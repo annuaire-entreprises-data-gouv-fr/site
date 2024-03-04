@@ -5,7 +5,7 @@ import FAQLink from '#components-ui/faq-link';
 import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
 import NonRenseigne from '#components/non-renseigne';
-import { DataSection } from '#components/section/data-section';
+import { ServerDataSection } from '#components/section/server-data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -21,7 +21,7 @@ export const CertificationsBioSection: React.FC<{
   bio: IEtablissementsBio | IAPINotRespondingError;
 }> = ({ bio }) => {
   return (
-    <DataSection
+    <ServerDataSection
       title="Professionnel du Bio"
       data={bio}
       id="professionnel-du-bio"
@@ -128,7 +128,7 @@ export const CertificationsBioSection: React.FC<{
           </>
         );
       }}
-    </DataSection>
+    </ServerDataSection>
   );
 };
 

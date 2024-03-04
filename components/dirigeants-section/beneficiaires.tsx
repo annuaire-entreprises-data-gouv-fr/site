@@ -3,7 +3,7 @@ import routes from '#clients/routes';
 import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { INPI } from '#components/administrations';
-import { DataSection } from '#components/section/data-section';
+import { ClientDataSection } from '#components/section/client-data-section';
 import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -37,11 +37,16 @@ const BeneficiairesSection: React.FC<IProps> = ({
   return (
     <>
       <HorizontalSeparator />
-      <DataSection
+      <ClientDataSection
         id="beneficiaires"
         title="Bénéficiaire(s) effectif(s)"
         sources={[EAdministration.INPI]}
-        notFoundInfo={null}
+        notFoundInfo={
+          <>
+            Cette structure n’est pas enregistrée au{' '}
+            <strong>Registre National des Entreprises (RNE)</strong>
+          </>
+        }
         data={immatriculationRNE}
       >
         {(immatriculationRNE) => (
@@ -50,7 +55,7 @@ const BeneficiairesSection: React.FC<IProps> = ({
             uniteLegale={uniteLegale}
           />
         )}
-      </DataSection>
+      </ClientDataSection>
     </>
   );
 };

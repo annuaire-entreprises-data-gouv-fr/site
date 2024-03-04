@@ -1,7 +1,7 @@
 import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
-import { DataSection } from '#components/section/data-section';
+import { ClientDataSection } from '#components/section/client-data-section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAnnoncesBodacc } from '#models/annonces';
@@ -23,7 +23,7 @@ const AnnoncesBodaccSection: React.FC<{
   bodacc: IAnnoncesBodacc | IAPINotRespondingError | IAPILoading;
 }> = ({ uniteLegale, bodacc }) => {
   return (
-    <DataSection
+    <ClientDataSection
       title="Dépôts des comptes (BODACC C)"
       sources={[EAdministration.DILA]}
       data={bodacc}
@@ -68,7 +68,7 @@ const AnnoncesBodaccSection: React.FC<{
           )}
         </>
       )}
-    </DataSection>
+    </ClientDataSection>
   );
 };
 export default ComptesBodacc;

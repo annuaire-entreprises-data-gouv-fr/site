@@ -7,7 +7,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';
-import { DataSection } from '#components/section/data-section';
+import { ClientDataSection } from '#components/section/client-data-section';
 import { FullTable } from '#components/table/full';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -95,12 +95,17 @@ const ImmatriculationRNE: React.FC<IProps> = ({
 }) => {
   return (
     <>
-      <DataSection
+      <ClientDataSection
         id="rne"
         title="Inscription au RNE"
         sources={[EAdministration.INPI]}
         data={immatriculation}
-        notFoundInfo={null}
+        notFoundInfo={
+          <>
+            Cette structure ne possède pas de fiche d’immatriculation au{' '}
+            <strong>Registre National des Entreprises (RNE)</strong>
+          </>
+        }
         additionalInfoOnError={
           <ImmatriculationLinks uniteLegale={uniteLegale} />
         }
@@ -145,7 +150,7 @@ const ImmatriculationRNE: React.FC<IProps> = ({
             ) : null}
           </>
         )}
-      </DataSection>
+      </ClientDataSection>
       <HorizontalSeparator />
     </>
   );

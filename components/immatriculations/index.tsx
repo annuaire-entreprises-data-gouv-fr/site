@@ -71,7 +71,7 @@ const Immatriculations: React.FC<IProps> = ({
           {isAnAssociation && (
             <ImmatriculationJOAFE immatriculation={immatriculationJOAFE} />
           )}
-          {!noRNEImmatriculation && (
+          {!noRNEImmatriculation && !isServicePublic(uniteLegale) && (
             <ImmatriculationRNE
               immatriculation={immatriculationRNE}
               uniteLegale={uniteLegale}

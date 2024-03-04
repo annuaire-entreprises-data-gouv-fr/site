@@ -3,7 +3,7 @@ import routes from '#clients/routes';
 import AssociationCreationNotFoundAlert from '#components-ui/alerts-with-explanations/association-creation-not-found-alert';
 import ButtonLink from '#components-ui/button';
 import { DILA } from '#components/administrations';
-import { DataSection } from '#components/section/data-section';
+import { ClientDataSection } from '#components/section/client-data-section';
 import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -16,7 +16,7 @@ const AnnoncesJOAFESection: React.FC<{
 }> = ({ uniteLegale }) => {
   const annoncesAssociation = useFetchJOAFE(uniteLegale);
   return (
-    <DataSection
+    <ClientDataSection
       title="Annonces Journal Officiel des Associations"
       sources={[EAdministration.DILA]}
       data={annoncesAssociation}
@@ -83,7 +83,7 @@ const AnnoncesJOAFESection: React.FC<{
           )}
         </>
       )}
-    </DataSection>
+    </ClientDataSection>
   );
 };
 

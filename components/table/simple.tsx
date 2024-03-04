@@ -1,12 +1,10 @@
-'use client';
-
 import React, { PropsWithChildren } from 'react';
 import NonRenseigne from '#components/non-renseigne';
 import constants from '#models/constants';
 import { InternalError } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
 import { CopyPaste } from './copy-paste';
-
+import styles from './style.module.css';
 interface ISectionProps {
   body: any[][];
   id?: string;
@@ -18,7 +16,7 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
 }) => {
   const isCopyEnabled = typeof children === 'string' && children !== '';
   return (
-    <td>
+    <td className={styles.cell}>
       {isCopyEnabled ? (
         <CopyPaste label={label} shouldTrim={shouldTrim(label)}>
           {children}
@@ -28,20 +26,6 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
           <span>{children || <NonRenseigne />}</span>
         </div>
       )}
-      <style jsx>{`
-        td {
-          width: auto;
-          padding: 5px 3px;
-          background-color: #fff;
-          padding-left: 30px;
-        }
-        @media only screen and (min-width: 1px) and (max-width: 576px) {
-          td {
-            padding: 0;
-            margin: 0;
-          }
-        }
-      `}</style>
     </td>
   );
 };
@@ -84,63 +68,21 @@ const shouldTrim = (label: any) => {
  */
 export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
   return (
-    <table className="two-column-table" id={id}>
+    <table className={styles['two-column-table']} id={id}>
       <tbody>
         {body.map((row, idx) => (
           <tr key={'a' + idx}>
-            <td>
+            <td
+              style={{
+                borderColor: constants.colors.pastelBlue,
+              }}
+            >
               <div>{row[0]}</div>
             </td>
             <Cell label={row[0]}>{row[1]}</Cell>
           </tr>
         ))}
       </tbody>
-      <style jsx>{`
-        table {
-          border-collapse: collapse;
-          text-align: left;
-          color: #081d35;
-          width: 100%;
-        }
-        tr > td:first-of-type {
-          font-weight: bold;
-          padding-right: 30px;
-          padding-left: 10px;
-          border-right: 1px solid ${constants.colors.pastelBlue};
-          vertical-align: baseline;
-        }
-        tr > td:first-of-type > div {
-          min-width: 140px;
-        }
-        td,
-        th {
-          border: none;
-          padding: 3px;
-          background-color: #fff;
-          padding-left: 30px;
-        }
-        table > thead {
-          display: none;
-          background-color: ${constants.colors.pastelBlue};
-        }
-        @media only screen and (min-width: 1px) and (max-width: 576px) {
-          tr {
-            display: flex;
-            flex-direction: column;
-            margin: 15px 0;
-          }
-          tr > td {
-            border: none;
-            padding: 0;
-            margin: 0;
-          }
-          tr > td:first-of-type {
-            border: none;
-            padding: 0;
-            margin: 0;
-          }
-        }
-      `}</style>
     </table>
   );
 };

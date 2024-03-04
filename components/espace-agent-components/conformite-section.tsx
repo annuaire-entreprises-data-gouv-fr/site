@@ -1,5 +1,5 @@
 import { PrintNever } from '#components-ui/print-visibility';
-import { DataSection } from '#components/section/data-section';
+import { ClientDataSection } from '#components/section/client-data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { IUniteLegale } from '#models/core/types';
 import useFetchConformite from 'hooks/fetch/conformite';
@@ -12,7 +12,7 @@ const ConformiteSection: React.FC<{
 
   return (
     <PrintNever>
-      <DataSection
+      <ClientDataSection
         title="Conformité"
         id="conformite"
         isProtected
@@ -36,7 +36,7 @@ const ConformiteSection: React.FC<{
             ]}
           />
         )}
-      </DataSection>
+      </ClientDataSection>
     </PrintNever>
   );
 };

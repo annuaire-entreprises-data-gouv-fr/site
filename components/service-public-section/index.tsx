@@ -1,8 +1,8 @@
-'use client';
+// 'use client';
 
 import { ReactNode } from 'react';
 import NonRenseigne from '#components/non-renseigne';
-import { DataSection } from '#components/section/data-section';
+import { ServerDataSection } from '#components/section/server-data-section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -20,7 +20,7 @@ export default function ServicePublicSection({
 }: IProps) {
   return (
     <>
-      <DataSection
+      <ServerDataSection
         title={'Service public'}
         sources={[EAdministration.DILA]}
         data={servicePublic}
@@ -45,7 +45,7 @@ export default function ServicePublicSection({
             )}
           </>
         )}
-      </DataSection>
+      </ServerDataSection>
     </>
   );
 }
