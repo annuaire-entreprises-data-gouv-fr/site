@@ -28,6 +28,7 @@ export interface IEtablissement {
   estSiege: boolean;
   dateCreation: string;
   dateDerniereMiseAJour: string;
+  dateMiseAJourInsee: string;
   dateFermeture: string | null;
   dateDebutActivite: string;
   adresse: string;
@@ -65,6 +66,7 @@ export const createDefaultEtablissement = (): IEtablissement => {
     nic: '',
     dateCreation: '',
     dateDerniereMiseAJour: '',
+    dateMiseAJourInsee: '',
     dateDebutActivite: '',
     dateFermeture: '',
     adresse: '',
@@ -96,6 +98,7 @@ export interface IUniteLegale extends IEtablissementsList {
   dateMiseAJourInsee: string;
   dateMiseAJourInpi: string;
   dateDebutActivite: string;
+  dateFermeture: string;
   statutDiffusion: ISTATUTDIFFUSION; // diffusion des données autorisée - uniquement les EI
   etatAdministratif: IETATADMINSTRATIF;
   nomComplet: string;
@@ -133,6 +136,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     activitePrincipale: '',
     libelleActivitePrincipale: '',
     dateCreation: '',
+    dateFermeture: '',
     dateDerniereMiseAJour: '',
     dateMiseAJourInsee: '',
     dateMiseAJourInpi: '',

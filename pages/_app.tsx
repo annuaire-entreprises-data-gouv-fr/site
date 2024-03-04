@@ -10,7 +10,10 @@ import { SessionProvider } from 'hooks/use-session';
 import '../style/dsfr.min.css';
 import '../style/globals.css';
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+export type NextPageWithLayout<P = Record<never, never>, IP = P> = NextPage<
+  P,
+  IP
+> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 

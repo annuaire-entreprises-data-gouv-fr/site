@@ -2,6 +2,7 @@ import { HttpServerError } from '#clients/exceptions';
 import routes from '#clients/routes';
 import { ICCWithMetadata } from '#models/conventions-collectives-list';
 import { httpGet } from '#utils/network';
+import { idccExplanation } from './idcc-explanation';
 
 type IIdccMetadata = {
   [idcc: string]: {
@@ -52,6 +53,7 @@ class IdCCMetadataClient {
           nature,
           etat,
           idcc,
+          explanation: idccExplanation(idcc),
         };
         return idccMetadatas;
       },

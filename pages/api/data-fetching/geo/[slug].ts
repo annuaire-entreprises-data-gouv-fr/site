@@ -4,6 +4,7 @@ import {
   clientDepartementByCode,
   clientDepartementsByName,
 } from '#clients/geo/departements';
+import { clientEpcisByName, clientEpcisBySiren } from '#clients/geo/epcis';
 import { clientRegionsByName } from '#clients/geo/regions';
 import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
@@ -19,7 +20,6 @@ const geo = async (
     if (isNumber) {
       if (term.length < 6) {
         // code departement or CP
-
         let suggests = [];
         if (term.length <= 2) {
           const testDepCode = `${term}${'0'.repeat(2 - term.length)}`;
@@ -31,16 +31,24 @@ const geo = async (
         res.status(200).json(suggests);
       }
 
+      // code epci are siren
+      if (term.length === 9) {
+        const suggests = await clientEpcisBySiren(term);
+        res.status(200).json(suggests);
+      }
+
       res.status(404).end();
     } else {
-      const [departements, communes, regions] = await Promise.all([
+      const [departements, communes, regions, epcis] = await Promise.all([
         clientDepartementsByName(term),
         clientCommunesByName(term),
         clientRegionsByName(term),
+        clientEpcisByName(term),
       ]);
       const results = [
         ...regions,
         ...departements.slice(0, 5),
+        ...epcis.slice(0, 3),
         ...communes.slice(0, 20),
       ];
       res.status(200).json(results);

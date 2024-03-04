@@ -64,15 +64,19 @@ export default function ResponsableSection({ servicePublic }: IProps) {
                 head={['Role', 'Nom', 'Nomination']}
                 body={servicePublic.affectationPersonne.map((personne) => [
                   personne.fonction,
-                  personne.nom,
+                  personne.nom ?? <NonRenseigne />,
                   personne.lienTexteAffectation ? (
                     <a
                       href={personne.lienTexteAffectation.valeur}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`${personne.lienTexteAffectation.libelle}, nouvelle fenêtre`}
+                      aria-label={`${
+                        personne.lienTexteAffectation.libelle ||
+                        'Voir la nomination'
+                      }, nouvelle fenêtre`}
                     >
-                      {personne.lienTexteAffectation.libelle}
+                      {personne.lienTexteAffectation.libelle ||
+                        'Voir la nomination'}
                     </a>
                   ) : (
                     <NonRenseigne />

@@ -14,9 +14,9 @@ const ServerError: NextPageWithLayout = () => {
 };
 
 ServerError.getInitialProps = (...args) => {
-  // eslint-disable-next-line no-console
-  console.log('ERROR', args);
+  // log as JSON in order to be parse by Kibana
   try {
+    console.error(JSON.stringify(args[0]));
     const { res, err } = args[0];
     logFatalErrorInSentry(
       new Exception({
@@ -27,7 +27,16 @@ ServerError.getInitialProps = (...args) => {
         },
       })
     );
-  } catch (e) {}
+  } catch (e) {
+    console.error('Failed to parse NextPageRequest, returning 500');
+    logFatalErrorInSentry(
+      new Exception({
+        name: 'ServerErrorPageDisplayed',
+        cause: e,
+        context: {},
+      })
+    );
+  }
   return { statusCode: 500 };
 };
 

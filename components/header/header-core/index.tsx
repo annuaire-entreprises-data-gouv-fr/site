@@ -119,12 +119,7 @@ export const HeaderCore: React.FC<IProps> = ({
                             </a>
                           </div>
                         ) : useAgentCTA ? (
-                          <a
-                            href={`/connexion/agent-public?pathFrom=${encodeURIComponent(
-                              pathFrom
-                            )}`}
-                            className="fr-link"
-                          >
+                          <a href="/lp/agent-public" className="fr-link">
                             <Icon slug="user">Espace agent public</Icon>
                           </a>
                         ) : null}

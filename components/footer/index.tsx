@@ -137,10 +137,7 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="fr-footer__top-link"
-                    href="/connexion/agent-public"
-                  >
+                  <a className="fr-footer__top-link" href="/lp/agent-public">
                     Espace agent public
                   </a>
                 </li>

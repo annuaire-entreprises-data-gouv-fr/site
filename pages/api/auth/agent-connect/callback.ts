@@ -42,8 +42,9 @@ export default withSession(async function callbackRoute(req, res) {
 
     await setAgentSession(
       userInfo.email,
-      userInfo.family_name || '',
-      userInfo.given_name || '',
+      userInfo.family_name ?? '',
+      userInfo.given_name ?? '',
+      userInfo.siret ?? '',
       userPrivilege,
       session
     );

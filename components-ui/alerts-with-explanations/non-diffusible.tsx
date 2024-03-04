@@ -14,8 +14,7 @@ const DefaultNonDiffusibleAlert = () => (
     <br />
     <br />
     Si vous êtes <strong>agent public</strong>, vous pouvez consulter ces
-    informations sur <a href="/connexion/agent-public">l’espace agent public</a>
-    .
+    informations sur <a href="/lp/agent-public">l’espace agent public</a>.
   </Info>
 );
 
@@ -29,8 +28,7 @@ const ProtectedSirenAlert = () => (
     <br />
     <br />
     Si vous êtes <strong>agent public</strong>, vous pouvez consulter ces
-    informations sur <a href="/connexion/agent-public">l’espace agent public</a>
-    .
+    informations sur <a href="/lp/agent-public">l’espace agent public</a>.
   </Info>
 );
 

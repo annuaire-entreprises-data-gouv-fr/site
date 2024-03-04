@@ -87,7 +87,14 @@ const UniteLegaleSection: React.FC<{
         ]
       : []),
     ...(!estActif(uniteLegale)
-      ? [['Date de fermeture', formatDate(uniteLegale.dateDebutActivite)]]
+      ? [
+          [
+            'Date de fermeture',
+            formatDate(
+              uniteLegale.dateDebutActivite || uniteLegale.dateFermeture
+            ),
+          ],
+        ]
       : []),
     ['', <br />],
     [

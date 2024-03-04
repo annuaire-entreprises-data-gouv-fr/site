@@ -44,6 +44,9 @@ describe('Check etatFromEtatAdministratifInsee', () => {
     expect(etatFromEtatAdministratifInsee('F', '')).toBe(
       IETATADMINSTRATIF.FERME
     );
+    expect(etatFromEtatAdministratifInsee('I', '')).toBe(
+      IETATADMINSTRATIF.INCONNU
+    );
   });
 });
 export {};
