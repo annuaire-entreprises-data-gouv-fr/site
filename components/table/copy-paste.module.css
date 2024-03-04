@@ -7,10 +7,11 @@
   cursor: pointer;
   color: inherit;
   font-weight: inherit;
+  width: 100%;
   position: relative;
   font-family: inherit;
   flex-wrap: wrap;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   line-height: inherit;
   gap: 5px;
@@ -28,6 +29,7 @@
   font-size: 0.9rem;
   will-change: transform, opacity;
 }
+
 .copyTooltipAbsolute {
   position: absolute;
   bottom: 0;
