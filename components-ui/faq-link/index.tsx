@@ -7,22 +7,37 @@ const FAQLink: React.FC<
   PropsWithChildren<{ tooltipLabel: string; to?: string }>
 > = ({ to, tooltipLabel, children }) => (
   <InformationTooltip
-    label={to ? <a href={to}>{children}</a> : children}
+    label={children}
+    tabIndex={to ? undefined : 0}
     orientation="left"
     width={230}
-    left="5px"
+    left="0px"
+    ariaRelation="describedby"
   >
-    <span
-      style={{
-        margin: 0,
-        padding: 0,
-        borderBottom: '1px dotted #666',
-      }}
-    >
-      {tooltipLabel}{' '}
-      <Icon color={constants.colors.frBlue} size={12} slug="information" />
-    </span>
+    <LinkOrSpan to={to} ariaLabel={`En savoir plus sur ${tooltipLabel}`}>
+      <span
+        style={{
+          margin: 0,
+          padding: 0,
+          borderBottom: '1px dotted #666',
+        }}
+      >
+        {tooltipLabel}{' '}
+        <Icon color={constants.colors.frBlue} size={12} slug="information" />
+      </span>
+    </LinkOrSpan>
   </InformationTooltip>
 );
+
+const LinkOrSpan: React.FC<
+  PropsWithChildren<{ to?: string; ariaLabel: string }>
+> = ({ to, children, ariaLabel }) =>
+  to ? (
+    <a href={to} aria-label={ariaLabel} style={{ background: 'none' }}>
+      {children}
+    </a>
+  ) : (
+    <span>{children}</span>
+  );
 
 export default FAQLink;

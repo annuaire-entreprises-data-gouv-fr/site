@@ -114,12 +114,11 @@ const getSectionBody = (egapro: IEgapro) => {
     ],
     [
       <strong>
-        <FAQLink tooltipLabel="Détails">
+        <FAQLink
+          tooltipLabel="Détails"
+          to="https://egapro.travail.gouv.fr/aide-simulation"
+        >
           L’index est une synthèse des différents indicateurs ci-dessous
-          <br />
-          <a href="https://egapro.travail.gouv.fr/aide-simulation">
-            → En savoir plus
-          </a>
         </FAQLink>
       </strong>,
       ...egapro.index.years.map(() => ''),
@@ -171,18 +170,18 @@ const getColor = (note: number) => {
 const FAQEgapro = () => (
   <FAQLink
     tooltipLabel={`index d’égalité professionnelle entre les femmes et les hommes.`}
+    to="/faq/egapro-egalite-professionnelle-femme-homme"
   >
     L’Index Egapro permet de mesurer l’égalité professionnelle entre les femmes
     et les hommes dans les entreprises de plus de 50 salariés.
-    <br />
-    <a href="/faq/egapro-egalite-professionnelle-femme-homme">
-      → En savoir plus
-    </a>
   </FAQLink>
 );
 
 const NC = () => (
-  <InformationTooltip label="Cette année là, cette structure n’était pas concernée par ce critère.">
+  <InformationTooltip
+    tabIndex={0}
+    label="Cette année là, cette structure n’était pas concernée par ce critère."
+  >
     <i>NC</i>
   </InformationTooltip>
 );

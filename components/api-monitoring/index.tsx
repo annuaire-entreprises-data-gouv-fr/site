@@ -51,6 +51,8 @@ const Metric: React.FC<{
           <InformationTooltip
             orientation={index < 76 ? 'left' : 'right'}
             width={170}
+            tabIndex={0}
+            ariaRelation="labelledby"
             inlineBlock={false}
             label={
               <>
@@ -119,6 +121,8 @@ const Metric: React.FC<{
 const RobotTooltip = () => (
   <InformationTooltip
     orientation="right"
+    tabIndex={0}
+    ariaRelation="labelledby"
     label="Ces données sont obtenues via un robot qui interroge la source de données toutes les minutes"
   >
     <Icon color={constants.colors.frBlue} size={12} slug="information" />

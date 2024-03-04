@@ -23,16 +23,15 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
         <TwoColumnTable
           body={[
             [
-              <FAQLink tooltipLabel="Immatriculation au RNE">
+              <FAQLink
+                tooltipLabel="Immatriculation au RNE"
+                to="https://www.inpi.fr/le-registre-national-des-entreprises"
+              >
                 Depuis le 1er Janvier 2023, toute entreprise exerçant sur le
                 territoire français (sauf Polynésie française,
                 Nouvelle-Calédonie et Wallis et Futuna) une activité de nature
                 commerciale, artisanale, agricole ou indépendante est
                 enregistrée au RNE.
-                <br />
-                <a href="https://www.inpi.fr/le-registre-national-des-entreprises">
-                  → En savoir plus
-                </a>
               </FAQLink>,
               <a href={`/justificatif/${uniteLegale.siren}`}>
                 → Consulter la page justificatif d’immatriculation

@@ -14,6 +14,7 @@ const SocialMedia: React.FC<{
     <div className={styles.socialMedia + ' layout-right'}>
       <span>
         <InformationTooltip
+          tabIndex={undefined}
           orientation="right"
           label="Partager cette page sur Linkedin"
         >
@@ -30,6 +31,7 @@ const SocialMedia: React.FC<{
       </span>
       <span>
         <InformationTooltip
+          tabIndex={undefined}
           orientation="right"
           label="Partager cette page sur Twitter"
         >
@@ -46,6 +48,7 @@ const SocialMedia: React.FC<{
       </span>
       <span>
         <InformationTooltip
+          tabIndex={undefined}
           orientation="right"
           label="Partager cette page sur Facebook"
         >
@@ -62,6 +65,7 @@ const SocialMedia: React.FC<{
       </span>
       <span>
         <InformationTooltip
+          tabIndex={undefined}
           orientation="right"
           label="Partager cette page par Email"
         >
@@ -77,6 +81,7 @@ const SocialMedia: React.FC<{
       {siren && (
         <span>
           <InformationTooltip
+            tabIndex={undefined}
             label="Télécharger un QR Code à inclure dans un courier ou dans un devis, pour partager cette page"
             orientation="right"
           >
@@ -93,6 +98,7 @@ const SocialMedia: React.FC<{
       )}
       <span>
         <InformationTooltip
+          tabIndex={undefined}
           label="Imprimer cette page ou la sauvegarder au format PDF"
           orientation="right"
         >

@@ -71,6 +71,7 @@ const VerifyTVA: React.FC<{
     return (
       <>
         <InformationTooltip
+          tabIndex={0}
           label={
             <>
               Nous n’avons pas pu controler la validité de ce numéro car le
@@ -96,6 +97,7 @@ const VerifyTVA: React.FC<{
           <>
             {mayHaveMultipleTVANumber.currentlyActive ? (
               <InformationTooltip
+                tabIndex={0}
                 label={
                   <>
                     Attention, cette structure{' '}

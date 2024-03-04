@@ -83,11 +83,12 @@ export const OrganismeDeFormationSection = ({
 };
 
 const FAQQaliopi = () => (
-  <FAQLink tooltipLabel="certifiée Qualiopi">
+  <FAQLink
+    tooltipLabel="certifiée Qualiopi"
+    to="/faq/qualiopi-organisme-formation"
+  >
     La certification Qualiopi est accordé par le <MTPEI /> aux organismes de
     formation répondant à certains critères de qualité.
-    <br />
-    <a href="/faq/qualiopi-organisme-formation">→ En savoir plus</a>
   </FAQLink>
 );
 

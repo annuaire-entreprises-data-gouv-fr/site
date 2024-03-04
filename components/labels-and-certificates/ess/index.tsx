@@ -7,7 +7,10 @@ import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IESS } from '#models/certifications/ess';
 
 const ESSFAQLink = () => (
-  <FAQLink tooltipLabel="l’Economie Sociale et Solidaire">
+  <FAQLink
+    tooltipLabel="l’Economie Sociale et Solidaire"
+    to="/definitions/economie-sociale-et-solidaire-ess"
+  >
     L’Economie Sociale et Solidaire (ESS) regroupe&nbsp;:
     <br />
     <ul>
@@ -17,9 +20,6 @@ const ESSFAQLink = () => (
       <li>Les mutuelles </li>
       <li>Les « entreprises de l’ESS »</li>
     </ul>
-    <a href="/definitions/economie-sociale-et-solidaire-ess">
-      → En savoir plus
-    </a>
   </FAQLink>
 );
 

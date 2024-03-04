@@ -49,10 +49,11 @@ const UniteLegaleSection: React.FC<{
         formatSiret((uniteLegale.siege || {}).siret),
     ],
     [
-      <FAQLink tooltipLabel="N° TVA Intracommunautaire">
-        <a href="/faq/tva-intracommunautaire">
-          Comprendre le numéro de TVA intracommunautaire
-        </a>
+      <FAQLink
+        tooltipLabel="N° TVA Intracommunautaire"
+        to="/faq/tva-intracommunautaire"
+      >
+        Comprendre le numéro de TVA intracommunautaire
       </FAQLink>,
       <TVACell uniteLegale={uniteLegale} />,
     ],

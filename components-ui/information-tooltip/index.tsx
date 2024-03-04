@@ -1,6 +1,95 @@
 'use client';
+import {
+  PropsWithChildren,
+  ReactNode,
+  useEffect,
+  useId,
+  useState,
+} from 'react';
+import style from './style.module.css';
 
-import React, { PropsWithChildren, ReactNode } from 'react';
+type IProps = PropsWithChildren<{
+  /**
+   * The content of the tooltip
+   * MUST NOT contain any interactive elements (like buttons or links) for accessibility reasons
+   */
+  label: string | ReactNode;
+  orientation?: 'left' | 'right' | 'center';
+  width?: number;
+  inlineBlock?: boolean;
+  left?: string;
+  cursor?: 'help' | 'pointer' | 'auto';
+  /**
+   * The aria relation between the tooltip and the element it describes.
+   * - 'labelledby' is used when the tooltip is a label for the element, and will replace the element's content (for instance when the element is an icon)
+   *  - 'describedby' is used when the tooltip adds information to the element, it will be read after the element's content
+   */
+  ariaRelation?: 'describedby' | 'labelledby';
+  /**
+   * The tabIndex of the element, MUST BE SET to allow keyboard navigation (accessibility)
+   * - to a number if the children is not focusable (like a div or a span), usually to 0
+   * - to undefined if the children is focusable (like a button or a link)
+   */
+  tabIndex: number | undefined;
+}>;
+
+/**
+ * Accessible tooltip component, following guidances from https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
+ */
+function InformationTooltip({
+  children,
+  label,
+  orientation = 'center',
+  ariaRelation = 'describedby',
+  width = 250,
+  inlineBlock = true,
+  left = '',
+  cursor = 'auto',
+  tabIndex,
+}: IProps) {
+  const id = useId();
+  const {
+    displayed,
+    handleFocus,
+    handleBlur,
+    handleMouseEnter,
+    handleMouseLeave,
+  } = useTooltipState();
+  return (
+    <>
+      <span
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        className={style.wrapper}
+        tabIndex={tabIndex}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          cursor: cursor,
+          display: inlineBlock ? 'inline-block' : 'block',
+        }}
+      >
+        <span {...{ [`aria-${ariaRelation}`]: id }}>{children}</span>
+        <div
+          className={`${style.tooltip} ${style[orientation]} ${
+            displayed ? style.displayed : ''
+          }`}
+          style={{
+            width: `${width}px`,
+            left: left || computeLeft(orientation, width),
+            borderBottomRightRadius: orientation === 'right' ? '0' : '5px',
+            borderBottomLeftRadius: orientation === 'left' ? '0' : '5px',
+          }}
+          id={id}
+          role="tooltip"
+        >
+          {label}
+        </div>
+      </span>
+    </>
+  );
+}
+export default InformationTooltip;
 
 const computeLeft = (orientation: 'left' | 'right' | 'center', width = 250) => {
   switch (orientation) {
@@ -14,127 +103,33 @@ const computeLeft = (orientation: 'left' | 'right' | 'center', width = 250) => {
   }
 };
 
-const InformationTooltip: React.FC<
-  PropsWithChildren<{
-    label: ReactNode | string;
-    orientation?: 'left' | 'right' | 'center';
-    width?: number;
-    inlineBlock?: boolean;
-    left?: string;
-    cursor?: 'help' | 'pointer' | 'auto';
-  }>
-> = ({
-  children,
-  label,
-  orientation = 'center',
-  width = 250,
-  inlineBlock = true,
-  left = '',
-  cursor = 'help',
-}) => (
-  <>
-    <span className="wrapper">
-      {children}
-      <div className={`tooltip ${orientation}`}>{label}</div>
-    </span>
-    <style jsx>{`
-      .wrapper {
-        cursor: ${cursor};
-        position: relative;
-        display: ${inlineBlock ? 'inline-block' : 'block'};
-      }
+function useTooltipState() {
+  const [displayedHover, setDisplayedHover] = useState(false);
+  const [displayedFocus, setDisplayedFocus] = useState(false);
 
-      .wrapper .tooltip {
-        cursor: help;
-        font-size: 0.9rem;
-        background: #444;
-        border-radius: 5px;
-        border-bottom-right-radius: ${orientation === 'right' ? 0 : 5}px;
-        border-bottom-left-radius: ${orientation === 'left' ? 0 : 5}px;
-        bottom: calc(100% + 10px);
-        color: #fff;
-        left: ${left ? left : computeLeft(orientation, width)};
-        display: block;
-        visibility: hidden;
-        padding: 10px;
-        width: ${width}px;
-        pointer-events: none;
-        position: absolute;
-        z-index: 1000;
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setDisplayedFocus(false);
+        setDisplayedHover(false);
       }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
-      /* This bridges the gap so you can mouse into the tooltip without it disappearing */
-      .wrapper .tooltip:before {
-        bottom: -10px;
-        content: ' ';
-        display: block;
-        height: 20px;
-        left: 0;
-        position: absolute;
-        width: 100%;
-      }
+  const handleFocus = () => setDisplayedFocus(true);
+  const handleBlur = () => setDisplayedFocus(false);
+  const handleMouseEnter = () => setDisplayedHover(true);
+  const handleMouseLeave = () => setDisplayedHover(false);
 
-      /*small triangle */
-      .wrapper .tooltip.center:after,
-      .wrapper .tooltip.left:after,
-      .wrapper .tooltip.right:after {
-        bottom: -5px;
-        content: ' ';
-        height: 0;
-        position: absolute;
-        width: 0;
-      }
-
-      .wrapper .tooltip.center:after {
-        border-left: solid transparent 5px;
-        border-right: solid transparent 5px;
-        border-top: solid #444 5px;
-        left: 50%;
-      }
-      .wrapper .tooltip.left:after {
-        border-bottom: solid transparent 5px;
-        border-right: solid transparent 5px;
-        border-left: solid #444 5px;
-        left: 0;
-      }
-      .wrapper .tooltip.right:after {
-        border-bottom: solid transparent 5px;
-        border-left: solid transparent 5px;
-        border-right: solid #444 5px;
-        right: 0;
-      }
-
-      .wrapper:hover .tooltip,
-      .wrapper:focus-within .tooltip {
-        visibility: visible;
-        pointer-events: auto;
-      }
-
-      @media only screen and (min-width: 1px) and (max-width: 576px) {
-        .wrapper:hover .tooltip {
-          visibility: visible;
-          pointer-events: auto;
-          opacity: 0.95;
-        }
-        .wrapper .tooltip {
-          transition: opacity 300ms ease-in-out;
-          opacity: 0;
-          position: fixed;
-          width: auto;
-          top: 0;
-          left: 0;
-          right: 0;
-          border-radius: 0;
-          height: 30%;
-          overflow: auto;
-        }
-        .wrapper .tooltip:after,
-        .wrapper .tooltip:before {
-          display: none;
-        }
-      }
-    `}</style>
-  </>
-);
-
-export default InformationTooltip;
+  return {
+    displayed: displayedFocus || displayedHover,
+    handleFocus,
+    handleBlur,
+    handleMouseEnter,
+    handleMouseLeave,
+  };
+}

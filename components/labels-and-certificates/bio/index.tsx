@@ -159,11 +159,9 @@ const getCertificationDate = (certificat: IBioCertification) => {
 };
 
 const FAQBio = ({ label = 'certification Bio' }) => (
-  <FAQLink tooltipLabel={label}>
+  <FAQLink tooltipLabel={label} to="/faq/professionnels-bio">
     Le label “Professionnel du bio” concerne les entreprises dont tout ou partie
     de leur activité est certifiée Bio par des organismes certificateurs,
     encadrés par l’Agence Bio.
-    <br />
-    <a href="/faq/professionnels-bio">→ En savoir plus</a>
   </FAQLink>
 );

@@ -84,12 +84,13 @@ export const CertificationsRGESection: React.FC<{
         return (
           <>
             Cette structure est une entreprise{' '}
-            <FAQLink tooltipLabel="certifiée RGE - Reconnu Garant de l’Environnement">
+            <FAQLink
+              tooltipLabel="certifiée RGE - Reconnu Garant de l’Environnement"
+              to="/faq/reconnu-garant-environnement"
+            >
               La certification RGE est accordée par les pouvoirs publics aux
               professionnels du bâtiment spécialisés dans les travaux
               de rénovation énergétique.
-              <br />
-              <a href="/faq/reconnu-garant-environnement">→ En savoir plus</a>
             </FAQLink>
             .
             {linkFranceRenov && (

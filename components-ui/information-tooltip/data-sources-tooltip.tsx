@@ -11,6 +11,7 @@ const DataSourcesTooltip: React.FC<{
 }> = ({ dataSources, lastUpdatedAt, link }) => (
   <>
     <InformationTooltip
+      tabIndex={undefined}
       orientation="center"
       label={
         <>
@@ -19,8 +20,6 @@ const DataSourcesTooltip: React.FC<{
               <div>{dataSource.long}.</div>
             </React.Fragment>
           ))}
-          <br />
-          <a href={link}>→ En savoir plus</a>
         </>
       }
     >
