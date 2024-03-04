@@ -1,28 +1,25 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { Metadata } from 'next';
 import Breadcrumb from '#components-ui/breadcrumb';
 import ButtonLink from '#components-ui/button';
 import TextWrapper from '#components-ui/text-wrapper';
 import { RenderMarkdownServerOnly } from '#components/markdown';
-import Meta from '#components/meta';
-import {
-  IDefinition,
-  allDefinitions,
-  getDefinition,
-} from '#models/article/definitions';
+import { allDefinitions, getDefinition } from '#models/article/definitions';
 import { InternalError } from '#models/exceptions';
-import { NextPageWithLayout } from 'pages/_app';
 
-const DefinitionPage: NextPageWithLayout<{
-  definition: IDefinition;
-}> = ({ definition }) => {
+type IParams = {
+  slug: string;
+};
+export default function DefinitionPage({ params }: { params: IParams }) {
+  const definition = getDefinition(params.slug);
+  if (!definition || !definition.body || !definition.title) {
+    throw new InternalError({
+      message: 'Definition not found',
+      context: params,
+    });
+  }
+
   return (
     <>
-      <Meta
-        title={definition.seo.title || definition.title}
-        description={definition.seo.description}
-        noIndex={false}
-        canonical={`https://annuaire-entreprises.data.gouv.fr/definitions/${definition.slug}`}
-      />
       <TextWrapper>
         <Breadcrumb
           links={[
@@ -57,36 +54,32 @@ const DefinitionPage: NextPageWithLayout<{
       </TextWrapper>
     </>
   );
-};
+}
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: allDefinitions.map(({ slug }) => {
-      return {
-        params: {
-          slug,
-        },
-      };
-    }),
-    fallback: false,
-  };
-};
+export async function generateStaticParams(): Promise<Array<IParams>> {
+  return allDefinitions.map(({ slug }) => {
+    return {
+      slug,
+    };
+  });
+}
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const slug = params?.slug as string;
-  const definition = getDefinition(slug);
-  if (!definition || !definition.body || !definition.title) {
+export async function generateMetadata({
+  params,
+}: {
+  params: IParams;
+}): Promise<Metadata> {
+  const definition = getDefinition(params.slug);
+  if (!definition) {
     throw new InternalError({
       message: 'Definition not found',
-      context: { slug },
+      context: params,
     });
   }
-
   return {
-    props: {
-      definition,
-    },
+    title: definition.seo.title || definition.title,
+    description: definition.seo.description,
+    noIndex: false,
+    canonical: `https://annuaire-entreprises.data.gouv.fr/definitions/${definition.slug}`,
   };
-};
-
-export default DefinitionPage;
+}
