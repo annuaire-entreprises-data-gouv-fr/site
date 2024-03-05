@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { NextSeo } from 'next-seo';
 import Head from 'next/head';
 import React from 'react';
@@ -15,6 +16,16 @@ const SITE_NAME = 'Annuaire des Entreprises : le moteur de recherche officiel';
 const SITE_DESCRIPTION =
   'L’administration permet aux particuliers et agents publics de vérifier les informations juridiques officielles d’une entreprise : SIREN, SIRET, TVA Intracommunautaire, code APE/NAF, capital social, justificatif d’immatriculation, dirigeants, convention collective…';
 
+const SHOULD_NOT_INDEX = process.env.INDEXING_ENABLED !== 'enabled';
+const OPENGRAPH_IMAGES = [
+  {
+    url: 'https://annuaire-entreprises.data.gouv.fr/images/linkedin.jpg',
+    width: 1200,
+    height: 627,
+    alt: 'annuaire-entreprises.data.gouv.fr',
+  },
+];
+
 const Meta: React.FC<IProps> = ({
   title = SITE_NAME,
   description = '',
@@ -25,8 +36,6 @@ const Meta: React.FC<IProps> = ({
     description.length > 140
       ? `${description.substring(0, 140)}…`
       : description;
-
-  const shouldNotIndex = process.env.INDEXING_ENABLED !== 'enabled';
 
   return (
     <>
@@ -40,17 +49,10 @@ const Meta: React.FC<IProps> = ({
           type: 'website',
           title: title,
           description: description ?? SITE_DESCRIPTION,
-          images: [
-            {
-              url: 'https://annuaire-entreprises.data.gouv.fr/images/linkedin.jpg',
-              width: 1200,
-              height: 627,
-              alt: 'annuaire-entreprises.data.gouv.fr',
-            },
-          ],
+          images: OPENGRAPH_IMAGES,
           site_name: SITE_NAME,
         }}
-        noindex={noIndex ?? shouldNotIndex}
+        noindex={noIndex ?? SHOULD_NOT_INDEX}
         nofollow={false}
       />
       <Head>
@@ -82,3 +84,26 @@ const Meta: React.FC<IProps> = ({
 };
 
 export default Meta;
+
+export function meta(obj: Metadata): Metadata {
+  obj.title ??= SITE_NAME;
+  obj.description ??= SITE_DESCRIPTION;
+  obj.openGraph ??= {};
+  obj.openGraph.title ??= obj.title;
+  obj.openGraph.description ??= obj.description ?? SITE_DESCRIPTION;
+  // @ts-ignore
+  obj.openGraph.type ??= 'website';
+  obj.openGraph.images ??= OPENGRAPH_IMAGES;
+  obj.openGraph.siteName = SITE_NAME;
+
+  if (typeof obj.alternates?.canonical === 'string') {
+    obj.openGraph.url ??= obj.alternates.canonical;
+  }
+
+  obj.robots ??= {};
+  if (typeof obj.robots === 'object') {
+    obj.robots.follow = true;
+  }
+
+  return obj;
+}

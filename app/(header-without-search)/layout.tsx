@@ -3,16 +3,12 @@ import { Question } from '#components-ui/question';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
 import { HeaderServer } from '#components/header/header-server';
+import { meta } from '#components/meta';
 import SocialNetworks from '#components/social-network';
 import '../../style/dsfr.min.css';
 import '../../style/globals.css';
 
-export const metadata: Metadata = {
-  title:
-    'L’Annuaire des Entreprises françaises : les informations légales officielles de l’administration',
-  description:
-    'L’administration permet aux particuliers, entrepreneurs et agents publics de vérifier les informations informations légales des entreprises, associations et services publics en France.',
-};
+export const metadata: Metadata = meta({});
 
 export default async function LayoutWithSearchBar({
   children,
