@@ -79,7 +79,11 @@ export async function generateMetadata({
   return {
     title: definition.seo.title || definition.title,
     description: definition.seo.description,
-    noIndex: false,
-    canonical: `https://annuaire-entreprises.data.gouv.fr/definitions/${definition.slug}`,
+    robots: {
+      index: false,
+    },
+    alternates: {
+      canonical: `https://annuaire-entreprises.data.gouv.fr/definitions/${definition.slug}`,
+    },
   };
 }
