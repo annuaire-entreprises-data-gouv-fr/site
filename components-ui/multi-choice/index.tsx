@@ -1,5 +1,4 @@
-import constants from '#models/constants';
-
+import styles from './style.module.css';
 export type IProps = {
   values: {
     label: string;
@@ -34,15 +33,20 @@ export const MultiChoice: React.FC<IProps> = ({
   <>
     {legend && (
       <legend>
-        <h2>{legend}</h2>
+        <h2 style={{ fontSize: '1.2rem' }}>{legend}</h2>
       </legend>
     )}
 
-    <div className="radio-group rating">
+    <div
+      className={styles['radio-group']}
+      style={{
+        justifyContent: large ? 'center' : 'flex-start',
+      }}
+    >
       {values.map(({ label, value, href, onClick, checked = false }, index) => (
         <div key={href || value || label}>
           {href ? (
-            <a tabIndex={0} href={href}>
+            <a tabIndex={0} href={href} style={computeStyle(large)}>
               {label}
             </a>
           ) : (
@@ -60,6 +64,7 @@ export const MultiChoice: React.FC<IProps> = ({
               />
               <label
                 tabIndex={0}
+                style={computeStyle(large)}
                 onKeyDown={(e) => onKeyDown(e, onClick)}
                 className="fr-label"
                 htmlFor={`${idPrefix}-${index}`}
@@ -71,52 +76,14 @@ export const MultiChoice: React.FC<IProps> = ({
         </div>
       ))}
     </div>
-
-    <style jsx>
-      {`
-        .radio-group {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: ${large ? 'center' : 'start'};
-        }
-
-        .radio-group > div > label,
-        .radio-group > div > div,
-        .radio-group > div > a {
-          display: block;
-          border: 2px solid transparent;
-          border-radius: 6px;
-          background: #e5e5f4;
-          padding: 4px 10px;
-          color: ${constants.colors.frBlue};
-          cursor: pointer;
-
-          font-weight: ${large ? 'bold' : 'inherit'};
-          font-size: ${large ? '2rem' : '1rem'};
-          line-height: ${large ? '3rem' : '1.5rem'};
-          margin: ${large ? '15px 10px' : '5px'};
-        }
-
-        .radio-group > div > input {
-          opacity: 0;
-          height: 0;
-          width: 0;
-          position: absolute;
-        }
-
-        input[type='radio']:hover + label,
-        .radio-group > div > div:hover,
-        .radio-group > div > a:hover {
-          border: 2px dashed ${constants.colors.frBlue};
-        }
-        input[type='radio']:checked + label {
-          border: 2px solid ${constants.colors.frBlue};
-        }
-
-        h2 {
-          font-size: 1.3rem;
-        }
-      `}
-    </style>
   </>
 );
+
+function computeStyle(large: boolean) {
+  return {
+    fontWeight: large ? 'bold' : 'inherit',
+    fontSize: large ? '2rem' : '1rem',
+    lineHeight: large ? '3rem' : '1.5rem',
+    margin: large ? '15px 10px' : '5px',
+  };
+}

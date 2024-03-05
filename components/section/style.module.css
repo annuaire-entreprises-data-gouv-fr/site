@@ -21,7 +21,7 @@
 
     .administration-page-link {
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
         align-items: center;
         gap: 10px;
         flex-wrap: wrap;
@@ -33,7 +33,7 @@
         top: 25px;
         right: 16px;
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
     }
 
     @media only screen and (min-width: 1px) and (max-width: 768px) {

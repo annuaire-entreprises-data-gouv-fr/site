@@ -180,3 +180,11 @@ h4:not(.fr-alert__title) {
     display: block;
   }
 }
+
+/* There is no alternative than copying color constant, in order to have them in hover state */
+:root {
+  --annuaire-colors-frBlue: #000091;
+  --annuaire-colors-pastelBlue: #dfdff1;
+  --annuaire-colors-espaceAgent: #CC007A;
+  --annuaire-colors-espaceAgentPastel: #ffe8f4;
+}

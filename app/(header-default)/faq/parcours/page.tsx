@@ -1,15 +1,9 @@
-import { GetServerSideProps } from 'next';
-import React, {
-  PropsWithChildren,
-  ReactElement,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+'use client';
+import { useSearchParams } from 'next/navigation';
+import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import { MultiChoice } from '#components-ui/multi-choice';
 import TextWrapper from '#components-ui/text-wrapper';
-import { LayoutSimple } from '#components/layouts/layout-simple';
 import MatomoEvent from '#components/matomo-event';
 import { allData } from '#models/administrations';
 import {
@@ -18,7 +12,6 @@ import {
   allFaqArticlesByTarget,
 } from '#models/article/faq';
 import constants from '#models/constants';
-import { NextPageWithLayout } from 'pages/_app';
 
 enum EQuestionType {
   LOADER = 'loader',
@@ -41,16 +34,15 @@ const Answer: React.FC<PropsWithChildren<{}>> = ({ children }) => (
       <strong>Réponse</strong>
     </p>
     <TextWrapper>
-      <div className="parcours-response">
+      <div
+        style={{
+          background: '#efefef',
+          padding: '30px 20px',
+          margin: '10px',
+          borderRadius: '3px',
+        }}
+      >
         {children}
-        <style jsx>{`
-          .parcours-response {
-            background: #efefef;
-            padding: 30px 20px;
-            margin: 10px;
-            border-radius: 3px;
-          }
-        `}</style>
       </div>
     </TextWrapper>
   </>
@@ -261,9 +253,13 @@ const Question: React.FC<IProps> = ({
   }
 };
 
-const Parcours: NextPageWithLayout<{
-  initialQuestionType: EQuestionType | null;
-}> = ({ initialQuestionType }) => {
+export default function Parcours() {
+  const question = (useSearchParams()?.get('question') ?? '') as EQuestionType;
+
+  const initialQuestionType = Object.values(EQuestionType).indexOf(question)
+    ? question
+    : null;
+
   const scrollRef = useRef(null);
 
   const [userType, setUserType] = useState(initialQuestionType ? 'all' : '');
@@ -314,30 +310,7 @@ const Parcours: NextPageWithLayout<{
           userType={userType}
         />
       )}
-      <div className="parcours-bottom-margin" />
-      <style jsx>{`
-        .parcours-bottom-margin {
-          margin-top: 200px;
-        }
-      `}</style>
+      <div style={{ marginTop: '200px' }} />
     </>
   );
-};
-
-Parcours.getLayout = function getLayout(page: ReactElement) {
-  return <LayoutSimple>{page}</LayoutSimple>;
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const question = (context?.query?.question || '') as EQuestionType;
-
-  const initialQuestionType = Object.values(EQuestionType).indexOf(question)
-    ? question
-    : null;
-
-  return {
-    props: { initialQuestionType },
-  };
-};
-
-export default Parcours;
+}

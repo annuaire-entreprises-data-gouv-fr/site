@@ -94,7 +94,7 @@ export default InformationTooltip;
 const computeLeft = (orientation: 'left' | 'right' | 'center', width = 250) => {
   switch (orientation) {
     case 'right':
-      return `calc(50% - ${width}px);`;
+      return `calc(50% - ${width}px)`;
     case 'left':
       return `50%`;
     case 'center':
