@@ -12,7 +12,7 @@
         display: block;
         visibility: hidden;
         padding: 10px;
-
+        font-style: normal;
         pointer-events: none;
         position: absolute;
         z-index: 1000;

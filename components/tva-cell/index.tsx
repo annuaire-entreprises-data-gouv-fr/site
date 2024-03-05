@@ -22,7 +22,9 @@ const Unknown = () => (
       to="/faq/tva-intracommunautaire"
       tooltipLabel="Numéro de TVA inconnu ou structure non-assujettie à la TVA"
     >
-      Que signifie “inconnu ou non-assujettie à la TVA” ?
+      Le numéro de TVA de cette entreprise est inconnu. Cela peut signifier
+      qu’elle est non-assujettie à la TVA, ou qu’elle possède un numéro de TVA
+      valide mais non renseigné dans nos bases.
     </FAQLink>
   </i>
 );
@@ -100,10 +102,7 @@ const VerifyTVA: React.FC<{
                 tabIndex={0}
                 label={
                   <>
-                    Attention, cette structure{' '}
-                    <a href="#etablissements">
-                      a plusieurs activités différentes
-                    </a>
+                    Attention, cette structure a plusieurs activités différentes
                     .<br />
                     Elle peut posséder un numéro de TVA Intracommunautaire pour
                     chacune de ces activités.
