@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import constants from '#models/constants';
+import styles from './style.module.css';
 
 const FAQLink: React.FC<
   PropsWithChildren<{ tooltipLabel: string; to?: string }>
@@ -12,16 +13,11 @@ const FAQLink: React.FC<
     orientation="left"
     width={230}
     left="0px"
+    cursor={to ? 'pointer' : 'auto'}
     ariaRelation="describedby"
   >
     <LinkOrSpan to={to} ariaLabel={`En savoir plus sur ${tooltipLabel}`}>
-      <span
-        style={{
-          margin: 0,
-          padding: 0,
-          borderBottom: '1px dotted #666',
-        }}
-      >
+      <span className={styles.label + ' ' + (to ? styles.link : '')}>
         {tooltipLabel}{' '}
         <Icon color={constants.colors.frBlue} size={12} slug="information" />
       </span>
