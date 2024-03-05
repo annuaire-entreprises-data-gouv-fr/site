@@ -30,8 +30,8 @@ const AdministrationDescription: React.FC<{
       </div>
       <div>
         {titleLevel === 'h2' ? <h2>{long}</h2> : <h3>{long}</h3>}
-        <p>
-          {description}
+        <section>
+          <p>{description}</p>
           {dataSources.length > 0 && (
             <div>
               Données transmises :
@@ -54,7 +54,7 @@ const AdministrationDescription: React.FC<{
               </a>
             </p>
           )}
-        </p>
+        </section>
       </div>
     </div>
   );
