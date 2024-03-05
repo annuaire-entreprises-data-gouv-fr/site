@@ -29,7 +29,6 @@ const DataSourcesTooltip: React.FC<{
         className={`no-style-link ${style['data-source']}`}
         style={{
           color: constants.colors.frBlue,
-          backgroundColor: constants.colors.pastelBlue,
         }}
       >
         <span className="layout-center">
