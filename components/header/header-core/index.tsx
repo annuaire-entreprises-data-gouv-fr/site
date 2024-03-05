@@ -33,7 +33,7 @@ export const HeaderCore: React.FC<IProps> = ({
     <header
       role="banner"
       className="fr-header"
-      style={{ filter: !useSearchBar ? 'none !important' : undefined }}
+      style={{ filter: !useSearchBar ? 'none' : undefined }}
     >
       <LoadBar isAgent={isLoggedIn(session)} />
 
@@ -49,7 +49,7 @@ export const HeaderCore: React.FC<IProps> = ({
                 <div
                   className="fr-header__brand"
                   style={{
-                    filter: !useSearchBar ? 'none !important' : undefined,
+                    filter: !useSearchBar ? 'none' : undefined,
                   }}
                 >
                   <div className="fr-header__brand-top">
