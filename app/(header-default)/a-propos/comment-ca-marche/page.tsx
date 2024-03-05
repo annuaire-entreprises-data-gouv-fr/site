@@ -1,16 +1,19 @@
+import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
-import Meta from '#components/meta';
 import { administrationsMetaData } from '#models/administrations';
-import { NextPageWithLayout } from '../_app';
 
-const About: NextPageWithLayout = () => {
+export const metadata: Metadata = {
+  title: 'Comment ça marche ?',
+  alternates: {
+    canonical:
+      'https://annuaire-entreprises.data.gouv.fr/a-propos/comment-ca-marche',
+  },
+};
+
+export default function About() {
   const allAdministrations = Object.values(administrationsMetaData);
   return (
     <>
-      <Meta
-        title="Comment ça marche ?"
-        canonical="https://annuaire-entreprises.data.gouv.fr/a-propos/comment-ca-marche"
-      />
       <TextWrapper>
         <h1>À propos de L’Annuaire des Entreprises</h1>
         <p>
@@ -93,16 +96,16 @@ const About: NextPageWithLayout = () => {
             Ces bases de données sont récupérées grâce aux téléservices
             développés par les{' '}
             <a href="/administration">administrations partenaires</a> :
-            <ul>
-              {allAdministrations.map((administration) => (
-                <li key={administration.slug}>
-                  <a href={`/administration#${administration.slug}`}>
-                    {administration.long}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </p>
+          <ul>
+            {allAdministrations.map((administration) => (
+              <li key={administration.slug}>
+                <a href={`/administration#${administration.slug}`}>
+                  {administration.long}
+                </a>
+              </li>
+            ))}
+          </ul>
           <h2>
             A quel point les données utilisées par l’Annuaire des Entreprises
             sont ouvertes et disponibles ?{' '}
@@ -240,6 +243,4 @@ const About: NextPageWithLayout = () => {
       </TextWrapper>
     </>
   );
-};
-
-export default About;
+}
