@@ -5,7 +5,7 @@ import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
 import { MC } from '#components/administrations';
 import NonRenseigne from '#components/non-renseigne';
-import { ServerDataSection } from '#components/section/server-data-section';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -18,7 +18,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
     | IAPINotRespondingError;
 }> = ({ entrepreneurSpectacles }) => {
   return (
-    <ServerDataSection
+    <DataSectionServer
       title="Entrepreneur de spectacles vivants"
       id="entrepreneur-spectacles"
       sources={[EAdministration.MC]}
@@ -104,7 +104,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
           </>
         );
       }}
-    </ServerDataSection>
+    </DataSectionServer>
   );
 };
 

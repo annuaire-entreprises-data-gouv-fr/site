@@ -1,26 +1,28 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Info } from '#components-ui/alerts';
 import { FadeIn } from '#components-ui/animation/fade-in';
 import { HeightTransition } from '#components-ui/animation/height-transition';
+import { Loader } from '#components-ui/loader';
 import { administrationsMetaData } from '#models/administrations';
+import { IAdministrationMetaData } from '#models/administrations/types';
 import { IAPILoading, isAPILoading } from '#models/api-loading';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { useTimeout } from 'hooks/use-timeout';
-import { ISectionProps, Section } from '.';
-import DataSectionLoader from './data-section-loader';
-import { ServerDataSection } from './server-data-section';
+import { ISectionProps, Section } from '..';
+import { DataSectionServer } from './server';
 
-interface IClientDataSectionProps<T> extends ISectionProps {
+interface IDataSectionClientProps<T> extends ISectionProps {
   data: IAPINotRespondingError | IAPILoading | T;
   notFoundInfo?: NonNullable<React.ReactNode>;
   additionalInfoOnError?: React.ReactNode;
   children: (data: T) => JSX.Element;
 }
-export function ClientDataSection<T>({
+export function DataSectionClient<T>({
   data,
   ...props
-}: IClientDataSectionProps<T>) {
+}: IDataSectionClientProps<T>) {
   const showLoadingState = useShowLoadingState(data);
   if (isAPILoading(data) && !showLoadingState) {
     return <div style={{ minHeight: '100px' }} />;
@@ -41,7 +43,7 @@ export function ClientDataSection<T>({
       </Section>
     );
   }
-  return <ServerDataSection data={data} {...props} />;
+  return <DataSectionServer data={data} {...props} />;
 }
 
 /** Contains the logic that prevents flickering of UI */
@@ -66,4 +68,48 @@ function useShowLoadingState<T>(data: IAPILoading | T): data is IAPILoading {
     return true;
   }
   return isAPILoading(data);
+}
+
+function DataSectionLoader({
+  dataSources,
+}: {
+  dataSources: IAdministrationMetaData[];
+}) {
+  const after5s = useTimeout(5000);
+  return (
+    <>
+      {after5s && (
+        <HeightTransition animateAppear>
+          <FadeIn>
+            <Info full>
+              Le téléservice qui renvoie la donnée{' '}
+              {dataSources && `(${dataSources.map((d) => d.short).join(', ')})`}{' '}
+              semble occupé en ce moment. Le téléchargement des informations
+              peut prendre du temps (10s à 20s).
+            </Info>
+          </FadeIn>
+        </HeightTransition>
+      )}
+      {!dataSources || dataSources.length === 0 ? (
+        <p>
+          Nous récupérons les informations <Loader />
+        </p>
+      ) : dataSources.length === 1 ? (
+        <p>
+          Nous récupérons les informations dans la base de données «{' '}
+          {dataSources[0].long} » <Loader />
+        </p>
+      ) : (
+        <>
+          <Loader /> Nous récupérons les informations dans les bases de données
+          :
+          <ul>
+            {dataSources.map((d) => (
+              <li key={d.slug}>{d.long}</li>
+            ))}
+          </ul>
+        </>
+      )}
+    </>
+  );
 }

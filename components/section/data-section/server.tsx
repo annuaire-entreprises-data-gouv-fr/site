@@ -6,9 +6,9 @@ import {
   IAPINotRespondingError,
   isAPINotResponding,
 } from '#models/api-not-responding';
-import { ISectionProps, Section } from '.';
+import { ISectionProps, Section } from '..';
 
-interface IServerDataSectionProps<T> extends ISectionProps {
+interface IDataSectionServerProps<T> extends ISectionProps {
   data: IAPINotRespondingError | T;
   notFoundInfo?: React.ReactNode;
   additionalInfoOnError?: React.ReactNode;
@@ -20,12 +20,12 @@ interface IServerDataSectionProps<T> extends ISectionProps {
  * @param param0
  * @returns
  */
-export function ServerDataSection<T extends Exclude<unknown, IAPILoading>>({
+export function DataSectionServer<T extends Exclude<unknown, IAPILoading>>({
   data,
   notFoundInfo,
   additionalInfoOnError,
   ...props
-}: IServerDataSectionProps<T>) {
+}: IDataSectionServerProps<T>) {
   //@ts-ignore
   const lastModified = data?.lastModified || null;
 

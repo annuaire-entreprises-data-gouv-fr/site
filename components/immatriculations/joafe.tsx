@@ -3,7 +3,7 @@ import ButtonLink from '#components-ui/button';
 import { Icon } from '#components-ui/icon/wrapper';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { PrintNever } from '#components-ui/print-visibility';
-import { ServerDataSection } from '#components/section/server-data-section';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IImmatriculationJOAFE } from '#models/immatriculation/joafe';
@@ -16,7 +16,7 @@ type IProps = {
 
 const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => (
   <>
-    <ServerDataSection
+    <DataSectionServer
       id="joafe"
       title="Enregistrement au JOAFE"
       sources={[EAdministration.DILA]}
@@ -63,7 +63,7 @@ const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => (
           </>
         );
       }}
-    </ServerDataSection>
+    </DataSectionServer>
     <BreakPageForPrint />
   </>
 );

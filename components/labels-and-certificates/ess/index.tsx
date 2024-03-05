@@ -1,6 +1,6 @@
 import FAQLink from '#components-ui/faq-link';
 import { ESSFrance } from '#components/administrations';
-import { ServerDataSection } from '#components/section/server-data-section';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -46,7 +46,7 @@ export const CertificationESSSection = ({
 }: {
   ess: IESS | IAPINotRespondingError;
 }) => (
-  <ServerDataSection
+  <DataSectionServer
     title="ESS - Entreprise Sociale et Solidaire"
     id="ess"
     sources={[EAdministration.ESSFRANCE]}
@@ -76,5 +76,5 @@ export const CertificationESSSection = ({
         />
       </>
     )}
-  </ServerDataSection>
+  </DataSectionServer>
 );

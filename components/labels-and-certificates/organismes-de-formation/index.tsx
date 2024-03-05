@@ -1,7 +1,7 @@
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import { MTPEI } from '#components/administrations';
-import { ServerDataSection } from '#components/section/server-data-section';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -30,7 +30,7 @@ export const OrganismeDeFormationSection = ({
   }`;
 
   return (
-    <ServerDataSection
+    <DataSectionServer
       title={title}
       sources={[EAdministration.MTPEI]}
       id="organisme-de-formation"
@@ -78,7 +78,7 @@ export const OrganismeDeFormationSection = ({
           />{' '}
         </>
       )}
-    </ServerDataSection>
+    </DataSectionServer>
   );
 };
 

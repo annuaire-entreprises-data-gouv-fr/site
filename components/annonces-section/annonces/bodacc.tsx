@@ -3,7 +3,7 @@ import routes from '#clients/routes';
 import { Info } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import { DILA } from '#components/administrations';
-import { ClientDataSection } from '#components/section/client-data-section';
+import { DataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -26,7 +26,7 @@ const AnnoncesBodaccSection: React.FC<{
   bodacc: IAnnoncesBodacc | IAPINotRespondingError | IAPILoading;
 }> = ({ uniteLegale, bodacc }) => {
   return (
-    <ClientDataSection
+    <DataSectionClient
       title="Annonces BODACC"
       sources={[EAdministration.DILA]}
       data={bodacc}
@@ -111,7 +111,7 @@ const AnnoncesBodaccSection: React.FC<{
           `}</style>
         </>
       )}
-    </ClientDataSection>
+    </DataSectionClient>
   );
 };
 export default AnnoncesBodacc;

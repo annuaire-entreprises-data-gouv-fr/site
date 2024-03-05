@@ -2,7 +2,7 @@ import routes from '#clients/routes';
 import { Warning } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import { PrintNever } from '#components-ui/print-visibility';
-import { ClientDataSection } from '#components/section/client-data-section';
+import { DataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {
@@ -25,7 +25,7 @@ const AgentComponent: React.FC<{
 
   return (
     <PrintNever>
-      <ClientDataSection
+      <DataSectionClient
         title="Actes et statuts"
         id="actes"
         isProtected
@@ -79,7 +79,7 @@ const AgentComponent: React.FC<{
             </>
           )
         }
-      </ClientDataSection>
+      </DataSectionClient>
     </PrintNever>
   );
 };

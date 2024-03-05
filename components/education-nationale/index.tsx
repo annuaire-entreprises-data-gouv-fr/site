@@ -3,7 +3,7 @@ import routes from '#clients/routes';
 import { Tag } from '#components-ui/tag';
 import { EDUCNAT } from '#components/administrations';
 import ResultsPagination from '#components/search-results/results-pagination';
-import { ServerDataSection } from '#components/section/server-data-section';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -13,7 +13,7 @@ export const EtablissementsScolairesSection: React.FC<{
   etablissements: IEtablissementsScolaires | IAPINotRespondingError;
 }> = ({ etablissements }) => {
   return (
-    <ServerDataSection
+    <DataSectionServer
       title="Annuaire de l’Education Nationale"
       sources={[EAdministration.EDUCATION_NATIONALE]}
       data={etablissements}
@@ -80,6 +80,6 @@ export const EtablissementsScolairesSection: React.FC<{
           </>
         );
       }}
-    </ServerDataSection>
+    </DataSectionServer>
   );
 };

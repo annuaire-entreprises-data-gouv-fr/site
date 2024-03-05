@@ -2,7 +2,7 @@ import React from 'react';
 import routes from '#clients/routes';
 import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';
 import { INPI } from '#components/administrations';
-import { ClientDataSection } from '#components/section/client-data-section';
+import { DataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -48,7 +48,7 @@ const DirigeantsSection: React.FC<IProps> = ({
   immatriculationRNE,
   uniteLegale,
 }) => (
-  <ClientDataSection
+  <DataSectionClient
     id="rne-dirigeants"
     title="Dirigeant(s)"
     sources={[EAdministration.INPI]}
@@ -66,7 +66,7 @@ const DirigeantsSection: React.FC<IProps> = ({
         uniteLegale={uniteLegale}
       />
     )}
-  </ClientDataSection>
+  </DataSectionClient>
 );
 
 export default DirigeantsSection;

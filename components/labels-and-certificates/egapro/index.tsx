@@ -2,7 +2,7 @@ import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import InformationTooltip from '#components-ui/information-tooltip';
-import { ServerDataSection } from '#components/section/server-data-section';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -14,7 +14,7 @@ export const EgaproSection: React.FC<{
   const sectionTitle = `Égalité professionnelle - Egapro`;
 
   return (
-    <ServerDataSection
+    <DataSectionServer
       id="egalite-professionnelle"
       notFoundInfo={
         <>
@@ -86,7 +86,7 @@ export const EgaproSection: React.FC<{
           </>
         );
       }}
-    </ServerDataSection>
+    </DataSectionServer>
   );
 };
 
