@@ -2,19 +2,25 @@ import { ReactElement } from 'react';
 import ButtonAgentConnect from '#components-ui/button-agent-connect';
 import Container from '#components-ui/container';
 import { LayoutSimple } from '#components/layouts/layout-simple';
-import Meta from '#components/meta';
 import { administrationsMetaData } from '#models/administrations';
 import { NextPageWithLayout } from 'pages/_app';
+import styles from './style.module.css';
+
+export const metadata = {
+  title: 'Espace agent | Annuaire des Entreprises',
+  description:
+    'Les informations des entreprises sont toutes dans l’espace agent !',
+  robots: {
+    index: false,
+  },
+  alternates: {
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/lp/agent-public',
+  },
+};
 
 const LandingPage: NextPageWithLayout = () => (
-  <>
-    <Meta
-      title="Espace agent | Annuaire des Entreprises"
-      description="Les informations des entreprises sont toutes dans l’espace agent !"
-      canonical="https://annuaire-entreprises.data.gouv.fr/lp/agent-public"
-      noIndex={false}
-    />
-    <section className="hero">
+  <div className={styles['page']}>
+    <section className={styles['hero']}>
       <div>
         <header style={{ marginBottom: '2rem' }}>
           <h1>
@@ -29,7 +35,7 @@ const LandingPage: NextPageWithLayout = () => (
       </div>
       <img src="/images/lp-agent/secure-folder 1.svg" alt="" />
     </section>
-    <section className="fr-grid-row fr-grid-row--gutters value">
+    <section className={`fr-grid-row fr-grid-row--gutters ${styles['value']}`}>
       <h2 className="fr-sr-only">Quels avantages pour les agents ?</h2>
       <div className="fr-col-12  fr-col-md-4">
         <h3>Un accès simple et rapide</h3>
@@ -99,7 +105,7 @@ const LandingPage: NextPageWithLayout = () => (
         L’Annuaire des Entreprises est opéré par la DINUM, avec le partenariat
         des administrations suivantes :
       </h3>
-      <div className="logo-soup">
+      <div className={styles['logo-soup']}>
         {Object.values(administrationsMetaData)
           .sort((a, b) => a.long.localeCompare(b.long))
           .map(({ slug, long, logoType }) =>
@@ -114,56 +120,7 @@ const LandingPage: NextPageWithLayout = () => (
         </a>
       </p>
     </section>
-    <style jsx>
-      {`
-        section.hero {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-        .hero header {
-          max-width: 500px;
-        }
-        .hero img {
-          width: 400px;
-        }
-
-        section.value img {
-          height: 100px;
-        }
-
-        section {
-          margin-bottom: 4rem;
-        }
-        .logo-soup {
-          display: flex;
-          justify-content: space-between;
-          gap: 2rem;
-          padding: 1rem 0;
-          flex-wrap: wrap;
-        }
-        .logo-soup img {
-          height: 4rem;
-          max-width: 130px;
-        }
-
-        @media (max-width: 768px) {
-          .hero img {
-            display: none;
-          }
-          section {
-            margin-bottom: 2rem;
-          }
-
-          section.value img,
-          section.value h3 {
-            width: 100%;
-            text-align: center;
-          }
-        }
-      `}
-    </style>
-  </>
+  </div>
 );
 
 type ICaseExampleProps = {
@@ -174,52 +131,13 @@ type ICaseExampleProps = {
 function CaseExample({ title, description, image }: ICaseExampleProps) {
   return (
     <>
-      <div className="fr-col-12 fr-col-md-6 case-example">
+      <div className={`fr-col-12 fr-col-md-6 ${styles['case-example']}`}>
         <img src={image} alt="" />
         <div>
           <h3>{title}</h3>
           <p>{description}</p>
         </div>
       </div>
-      <style jsx>
-        {`
-          .case-example {
-            display: flex;
-            align-items: center;
-          }
-          img {
-            margin-right: 20px;
-            padding: 4rem;
-            padding-top: 0;
-            padding-bottom: 4rem;
-            margin: 0 -2rem;
-            background: radial-gradient(
-              circle at center,
-              var(--background-alt-blue-france) 0%,
-              var(--background-alt-blue-france) 50%,
-              #ffffff 50%
-            );
-          }
-          img + * {
-            border-left: 2px solid var(--background-alt-blue-france);
-            padding-left: 1.5rem;
-          }
-          @media (max-width: 768px) {
-            .case-example {
-              flex-wrap: wrap;
-              margin-bottom: 2rem;
-            }
-            img {
-              height: 4rem;
-              padding: 1rem;
-              margin: 0;
-              background: var(--background-alt-blue-france);
-              border-radius: 0.5rem;
-              border-bottom-left-radius: 0;
-            }
-          }
-        `}
-      </style>
     </>
   );
 }

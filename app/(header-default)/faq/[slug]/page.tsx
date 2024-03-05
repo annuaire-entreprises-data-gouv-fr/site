@@ -81,7 +81,11 @@ export function generateMetadata({ params }: { params: IParams }): Metadata {
     title: article.seo.title || article.title,
     description: article.seo.description,
     // TODO
-    noIndex: false,
-    canonical: `https://annuaire-entreprises.data.gouv.fr/faq/${article.slug}`,
+    robots: {
+      index: false,
+    },
+    alternates: {
+      canonical: `https://annuaire-entreprises.data.gouv.fr/faq/${article.slug}`,
+    },
   };
 }
