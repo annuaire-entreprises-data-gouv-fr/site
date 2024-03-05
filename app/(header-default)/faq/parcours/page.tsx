@@ -1,5 +1,4 @@
 'use client';
-import { useSearchParams } from 'next/navigation';
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import { MultiChoice } from '#components-ui/multi-choice';
@@ -253,8 +252,12 @@ const Question: React.FC<IProps> = ({
   }
 };
 
-export default function Parcours() {
-  const question = (useSearchParams()?.get('question') ?? '') as EQuestionType;
+export default function Parcours({
+  searchParams,
+}: {
+  searchParams?: { question?: string };
+}) {
+  const question = (searchParams?.question ?? '') as EQuestionType;
 
   const initialQuestionType = Object.values(EQuestionType).indexOf(question)
     ? question
