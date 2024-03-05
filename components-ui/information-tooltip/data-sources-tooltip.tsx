@@ -7,10 +7,20 @@ import style from './style.module.css';
 
 const DataSourcesTooltip: React.FC<{
   dataSources: IAdministrationMetaData[];
-  lastUpdatedAt?: string | Date;
+  lastUpdatedAt?: string;
   link: string;
 }> = ({ dataSources, lastUpdatedAt, link }) => (
   <>
+    {lastUpdatedAt ? (
+      <>
+        <span className={style['updated-at']}>
+          Mise à jour le {lastUpdatedAt}
+        </span>
+        <br />
+      </>
+    ) : (
+      ''
+    )}
     <InformationTooltip
       tabIndex={undefined}
       orientation="center"
@@ -31,19 +41,15 @@ const DataSourcesTooltip: React.FC<{
           color: constants.colors.frBlue,
         }}
       >
-        <span className="layout-center">
+        <span
+          className="layout-center"
+          style={{ display: 'inlineBloc', marginRight: '0.25rem' }}
+        >
           <Icon color={constants.colors.frBlue} size={12} slug="information" />
         </span>
         <span>
-          &nbsp;Source{dataSources.length > 1 ? 's' : ''}&nbsp;:&nbsp;
+          Source{dataSources.length > 1 ? 's' : ''}&nbsp;:&nbsp;
           {dataSources.map((dataSource) => dataSource.short).join(', ')}
-          {lastUpdatedAt ? (
-            <>
-              &nbsp;・&nbsp;mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastUpdatedAt}
-            </>
-          ) : (
-            ''
-          )}
         </span>
       </a>
     </InformationTooltip>

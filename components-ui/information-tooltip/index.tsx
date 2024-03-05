@@ -1,7 +1,10 @@
 'use client';
 import {
+  Children,
   PropsWithChildren,
   ReactNode,
+  cloneElement,
+  isValidElement,
   useEffect,
   useId,
   useState,
@@ -55,6 +58,16 @@ function InformationTooltip({
     handleMouseEnter,
     handleMouseLeave,
   } = useTooltipState();
+
+  if (Children.count(children) !== 1 || !isValidElement(children)) {
+    children = <span {...{ [`aria-${ariaRelation}`]: id }}>{children}</span>;
+  } else {
+    // We'd rather add the aria props directly to the children, in case of a label for a button or link for instance
+    children = cloneElement(children, {
+      [`aria-${ariaRelation}`]: id,
+    });
+  }
+
   return (
     <>
       <span
@@ -69,7 +82,7 @@ function InformationTooltip({
           display: inlineBlock ? 'inline-block' : 'block',
         }}
       >
-        <span {...{ [`aria-${ariaRelation}`]: id }}>{children}</span>
+        <span>{children}</span>
         <div
           className={`${style.tooltip} ${style[orientation]} ${
             displayed ? style.displayed : ''

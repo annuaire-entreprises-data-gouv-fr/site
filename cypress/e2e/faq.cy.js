@@ -1,7 +1,7 @@
 describe(`FAQ contextual links`, () => {
   it('Adresse link', () => {
     cy.visit(`/etablissement/88087814500015`);
-    const link = cy.contains('Adresse').hover();
+    const link = cy.contains('Adresse').focus();
     cy.contains('Comment modifier une adresse ?');
     link.click();
     cy.url().should('include', '/faq/modifier-adresse');

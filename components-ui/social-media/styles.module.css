@@ -1,15 +1,22 @@
 .socialMedia {
   color: #000091;
-  margin: 10px 0;
+  margin: 1rem 0;
 }
-.socialMedia span {
-  margin: 0 5px;
+
+.socialMedia button,
+.socialMedia a {
+  background: none !important;
+  border: none;
+  padding: 0.5rem;
+
 }
-.socialMedia span a,
-.socialMedia span div {
-  cursor: pointer !important;
-  padding: 8px;
+
+
+.socialMedia button:focus-visible,
+.socialMedia a:focus-visible {
+  outline: 2px solid #000091;
 }
+
 .socialMedia span a:after {
   display: none;
 }
