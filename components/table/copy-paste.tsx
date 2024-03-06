@@ -24,7 +24,7 @@ export function CopyPaste({
 
   const timeoutId = useRef<NodeJS.Timeout>();
 
-  const copyToClipboard = (e: MouseEvent) => {
+  const copyToClipboard = (e: any) => {
     const el = document.createElement('textarea');
     el.value = shouldTrim ? children.trim() : children;
     document.body.appendChild(el);
