@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 import React from 'react';
 import AdministrationNotRespondingMessage from '#components/administration-not-responding/message';
 import { administrationsMetaData } from '#models/administrations';
@@ -54,11 +56,10 @@ export function DataSectionServer<T extends Exclude<unknown, IAPILoading>>({
     );
   }
 
-  /* eslint-disable react/jsx-props-no-spreading */
   return (
     <Section {...props} lastModified={lastModified}>
       {props.children(data)}
     </Section>
   );
-  /* eslint-enable react/jsx-props-no-spreading */
 }
+/* eslint-enable react/jsx-props-no-spreading */

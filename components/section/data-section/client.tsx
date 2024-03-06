@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable react/jsx-props-no-spreading */
 
 import { useEffect, useState } from 'react';
 import { Info } from '#components-ui/alerts';
@@ -113,3 +114,5 @@ function DataSectionLoader({
     </>
   );
 }
+
+/* eslint-enable react/jsx-props-no-spreading */

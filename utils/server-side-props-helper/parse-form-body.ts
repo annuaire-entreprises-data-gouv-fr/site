@@ -2,7 +2,11 @@ import { promisify } from 'util';
 import bodyParser from 'body-parser';
 import { GetServerSidePropsContext } from 'next';
 
-const parseFormBody = promisify(bodyParser.urlencoded());
+const parseFormBody = promisify(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 /**
  *
  * @param context

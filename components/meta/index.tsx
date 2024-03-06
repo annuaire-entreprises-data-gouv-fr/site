@@ -86,6 +86,7 @@ const Meta: React.FC<IProps> = ({
 export default Meta;
 
 export function meta(obj: Metadata): Metadata {
+  obj.metadataBase = new URL('https://annuaire-entreprises.data.gouv.fr');
   obj.title ??= SITE_NAME;
   obj.description ??= SITE_DESCRIPTION;
   obj.openGraph ??= {};
