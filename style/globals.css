@@ -183,3 +183,7 @@ h4:not(.fr-alert__title) {
   --annuaire-colors-espaceAgent: #cc007a;
   --annuaire-colors-espaceAgentPastel: #ffe8f4;
 }
+
+#browser-is-outdated {
+  display: none;
+}

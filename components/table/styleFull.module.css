@@ -8,7 +8,7 @@ table.fullTable {
 }
 
 td.cell {
-  border: 1px solid #dfdff1;
+  border: 1px solid var(--annuaire-colors-pastelBlue);
   border-left: none;
   border-right: none;
   border: none;

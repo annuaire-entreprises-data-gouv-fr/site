@@ -6,7 +6,7 @@
   width: 100%;
   background-color: #fffde6;
   font-family: 'Marianne' sans-serif;
-  border-bottom: 2px solid #000091;
+  border-bottom: 2px solid var(--annuaire-colors-frBlue);
 }
 
 .npsModal > div {

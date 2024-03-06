@@ -19,9 +19,9 @@
 }
 
 .copyTooltip {
-  background-color: #dfdff1;
+  background-color: var(--annuaire-colors-pastelBlue);
   border-radius: 3px;
-  color: #000091;
+  color: var(--annuaire-colors-frBlue);
   padding: 0 4px;
   display: inline-flex;
   align-items: center;

@@ -1,7 +1,7 @@
 .simpleHorizontalSeparator {
   margin: 15px 0;
   width: 100%;
-  background-color: #dfdff1;
+  background-color: var(--annuaire-colors-pastelBlue);
   height: 1px;
 }
 
@@ -11,7 +11,7 @@
 }
 .horizontalSeparator > span.line {
   width: 50px;
-  background-color: #dfdff1;
+  background-color: var(--annuaire-colors-pastelBlue);
   height: 2px;
   margin: 0 10px;
 }
@@ -20,5 +20,5 @@
   width: 7px;
   height: 7px;
   border-radius: 20px;
-  background-color: #dfdff1;
+  background-color: var(--annuaire-colors-pastelBlue);
 }

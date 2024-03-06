@@ -15,7 +15,7 @@
 }
 
 .badgeWrapperOnClick:hover {
-  border: 2px dashed #000091 !important;
+  border: 2px dashed var(--annuaire-colors-frBlue) !important;
 }
 
 .badgeWrapper .badgeLabel {

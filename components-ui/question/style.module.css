@@ -7,7 +7,7 @@
 }
 
 .questionBottomRight > a {
-  background-color: #000091 !important;
+  background-color: var(--annuaire-colors-frBlue) !important;
   color: #fff;
   border-radius: 30px;
   padding: 15px 20px;

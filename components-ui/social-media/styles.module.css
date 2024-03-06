@@ -1,5 +1,5 @@
 .socialMedia {
-  color: #000091;
+  color: var(--annuaire-colors-frBlue);
   margin: 10px 0;
 }
 
@@ -13,7 +13,7 @@
 
 .socialMedia button:focus-visible,
 .socialMedia a:focus-visible {
-  outline: 2px solid #000091;
+  outline: 2px solid var(--annuaire-colors-frBlue);
 }
 
 .socialMedia span a:after {

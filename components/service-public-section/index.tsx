@@ -1,5 +1,3 @@
-// 'use client';
-
 import { ReactNode } from 'react';
 import NonRenseigne from '#components/non-renseigne';
 import { DataSectionServer } from '#components/section/data-section/server';
