@@ -24,7 +24,7 @@ export function CopyPaste({
 
   const timeoutId = useRef<NodeJS.Timeout>();
 
-  const copyToClipboard = () => {
+  const copyToClipboard = (e: MouseEvent) => {
     const el = document.createElement('textarea');
     el.value = shouldTrim ? children.trim() : children;
     document.body.appendChild(el);
@@ -32,11 +32,15 @@ export function CopyPaste({
     document.execCommand('copy');
     document.body.removeChild(el);
     setCopied(true);
-    element.current?.focus();
+
+    const isKeyboardNavigation = e.detail === 0;
+    if (isKeyboardNavigation) {
+      element.current?.focus();
+    }
     logCopyPaste(label);
     timeoutId.current = setTimeout(() => {
       setCopied(false);
-    }, 5000);
+    }, 2000);
   };
 
   const element = useRef<HTMLButtonElement>(null);
@@ -55,6 +59,7 @@ export function CopyPaste({
       copyTooltipRef.current.classList.add(style.copyTooltipAbsolute);
     }
   });
+
   return (
     <button
       className={style.copyButton}
