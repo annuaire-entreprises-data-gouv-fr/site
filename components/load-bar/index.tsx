@@ -20,6 +20,7 @@ export default function LoadBar({ isAgent }: { isAgent: boolean }) {
         position: 'fixed',
         top: '0',
         width: '0',
+        zIndex: '10000',
       }}
     />
   );
