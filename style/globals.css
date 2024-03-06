@@ -31,11 +31,6 @@ h3,
   white-space: pre-wrap;
 }
 
-table.full-table {
-  /* Do not break word on full table */
-  word-break: initial;
-}
-
 .layout-center {
   display: flex;
   align-items: center;
@@ -160,10 +155,9 @@ h4:not(.fr-alert__title) {
   background-image: none !important;
 }
 
-*:hover>.anchor-link {
+*:hover > .anchor-link {
   opacity: 1;
 }
-
 
 .print-never {
   display: block;
@@ -185,6 +179,6 @@ h4:not(.fr-alert__title) {
 :root {
   --annuaire-colors-frBlue: #000091;
   --annuaire-colors-pastelBlue: #dfdff1;
-  --annuaire-colors-espaceAgent: #CC007A;
+  --annuaire-colors-espaceAgent: #cc007a;
   --annuaire-colors-espaceAgentPastel: #ffe8f4;
 }

@@ -4,7 +4,8 @@ import constants from '#models/constants';
 import { InternalError } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
 import { CopyPaste } from './copy-paste';
-import styles from './style.module.css';
+import styles from './styleSimple.module.css';
+
 interface ISectionProps {
   body: any[][];
   id?: string;
