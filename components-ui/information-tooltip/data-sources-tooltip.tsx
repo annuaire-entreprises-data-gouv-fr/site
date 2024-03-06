@@ -9,7 +9,8 @@ const DataSourcesTooltip: React.FC<{
   dataSources: IAdministrationMetaData[];
   lastUpdatedAt?: string;
   link: string;
-}> = ({ dataSources, lastUpdatedAt, link }) => (
+  orientation?: 'center' | 'left' | 'right';
+}> = ({ dataSources, lastUpdatedAt, link, orientation }) => (
   <>
     {lastUpdatedAt ? (
       <>
@@ -23,7 +24,7 @@ const DataSourcesTooltip: React.FC<{
     )}
     <InformationTooltip
       tabIndex={undefined}
-      orientation="center"
+      orientation={orientation || 'center'}
       label={
         <>
           {dataSources.map((dataSource) => (

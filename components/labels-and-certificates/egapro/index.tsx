@@ -123,12 +123,12 @@ const getSectionBody = (egapro: IEgapro) => {
       </strong>,
       ...egapro.index.years.map(() => ''),
     ],
-    ['    Écart rémunérations (sur 40)', ...remunerations.map(mapToNc)],
+    ['・Écart rémunérations (sur 40)', ...remunerations.map(mapToNc)],
     // only less than 250
     ...[
       egapro.index.lessThan250
         ? [
-            `    Écart taux d'augmentation (sur 35)`,
+            `・Écart taux d'augmentation (sur 35)`,
             ...augmentationsPromotions.map(mapToNc),
           ]
         : [],
@@ -137,7 +137,7 @@ const getSectionBody = (egapro: IEgapro) => {
     ...[
       !egapro.index.lessThan250
         ? [
-            `    Écart taux d'augmentation (sur 20)`,
+            `・Écart taux d'augmentation (sur 20)`,
             ...augmentations.map(mapToNc),
           ]
         : [],
@@ -145,11 +145,11 @@ const getSectionBody = (egapro: IEgapro) => {
     // only more than 250
     ...[
       !egapro.index.lessThan250
-        ? ['    Écart taux promotion (sur 15)', ...promotions.map(mapToNc)]
+        ? ['・Écart taux promotion (sur 15)', ...promotions.map(mapToNc)]
         : [],
     ],
-    ['    Retour congé maternité (sur 15)', ...congesMaternite.map(mapToNc)],
-    ['    Hautes rémunérations (sur 10)', ...hautesRemunerations.map(mapToNc)],
+    ['・Retour congé maternité (sur 15)', ...congesMaternite.map(mapToNc)],
+    ['・Hautes rémunérations (sur 10)', ...hautesRemunerations.map(mapToNc)],
   ];
 };
 

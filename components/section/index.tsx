@@ -73,6 +73,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
               dataSources={dataSources}
               lastUpdatedAt={formatDate(last)}
               link={faqLink}
+              orientation="right"
             />
           </div>
         )}

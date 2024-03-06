@@ -33,6 +33,7 @@ export function Badge({
   const ContainerComponent = (
     props: PropsWithChildren<{
       className?: string;
+      style?: { [key: string]: string };
       onClick?: MouseEventHandler;
     }>
   ) =>
@@ -45,21 +46,33 @@ export function Badge({
   return (
     <ContainerComponent
       onClick={onClick}
-      className={
-        styles.badgeWrapper +
-        ` ${isSelected ? 'active' : ''} ${!!onClick ? 'cursor-pointer' : ''} ${
-          small ? 'small' : ''
-        }${onClick && !link ? 'on-click-no-link' : ''}`
-      }
+      className={`${styles.badgeWrapper} ${
+        onClick && !link && !isSelected ? styles.badgeWrapperOnClick : ''
+      } ${!!onClick ? ' cursor-pointer' : ''}`}
+      style={{
+        border: isSelected ? '2px solid #000091' : '2px solid transparent',
+        fontSize: small ? '0.9rem' : '1rem',
+      }}
     >
       <span
         className={styles.badgeIcon}
         aria-hidden
-        style={{ backgroundColor: backgroundColor, color: fontColor }}
+        style={{
+          backgroundColor: backgroundColor,
+          color: fontColor,
+          padding: small ? '0 6px' : '2px 8px',
+        }}
       >
         <Icon size={16} slug={icon} />
       </span>
-      <span className={styles.badgeLabel}>{label}</span>
+      <span
+        className={styles.badgeLabel}
+        style={{
+          padding: small ? '0 8px 0 6px' : '2px 10px 2px 8px',
+        }}
+      >
+        {label}
+      </span>
     </ContainerComponent>
   );
 }

@@ -1,6 +1,6 @@
 .socialMedia {
   color: #000091;
-  margin: 1rem 0;
+  margin: 10px 0;
 }
 
 .socialMedia button,
@@ -8,9 +8,8 @@
   background: none !important;
   border: none;
   padding: 0.5rem;
-
+  margin: 0 5px;
 }
-
 
 .socialMedia button:focus-visible,
 .socialMedia a:focus-visible {

@@ -35,6 +35,11 @@
   margin-bottom: -2px;
 }
 
+.titleTabs > a > h2 {
+  margin: 0;
+  padding: 0;
+}
+
 .titleTabs > a,
 .titleTabs > a > h2 {
   color: #000091;
@@ -49,11 +54,6 @@
     max-width: none;
     width: auto !important;
   }
-}
-
-.titleTabs > a > h2 {
-  margin: 0;
-  padding: 0;
 }
 
 .titleTabs > a:hover {
