@@ -6,12 +6,14 @@ import { RenderMarkdownServerOnly } from '#components/markdown';
 import SearchBar from '#components/search-bar';
 import { InternalError } from '#models/exceptions';
 import { getAllLandingPages, getLandingPage } from '#models/landing-pages';
+import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 import styles from './style.module.css';
+
 type IParams = {
   slug: string;
 };
 
-export default function LandingPage({
+export default withErrorHandler(function LandingPage({
   params,
 }: {
   params: IParams;
@@ -91,7 +93,7 @@ export default function LandingPage({
       </div>
     </>
   );
-}
+});
 
 export async function generateStaticParams(): Promise<Array<IParams>> {
   return getAllLandingPages().map(({ slug }) => {
@@ -101,7 +103,11 @@ export async function generateStaticParams(): Promise<Array<IParams>> {
   });
 }
 
-export function generateMetadata({ params }: { params: IParams }): Metadata {
+export const generateMetadata = withErrorHandler(function ({
+  params,
+}: {
+  params: IParams;
+}): Metadata {
   const landingPage = getLandingPage(params.slug);
   if (!landingPage) {
     throw new InternalError({
@@ -119,4 +125,4 @@ export function generateMetadata({ params }: { params: IParams }): Metadata {
       canonical: `https://annuaire-entreprises.data.gouv.fr/lp/${params.slug}`,
     },
   };
-}
+});

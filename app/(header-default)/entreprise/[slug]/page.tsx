@@ -29,7 +29,8 @@ import {
 } from '#utils/helpers';
 import extractParamsAppRouter, {
   AppRouterProps,
-} from '#utils/server-side-props-helper/extract-params-app-router';
+} from '#utils/server-side-helper/app/extract-params';
+import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 import { isSuperAgent } from '#utils/session';
 import useSessionServer from 'hooks/use-session-server';
 
@@ -44,25 +45,28 @@ const cachedGetUniteLegale = cache(
   }
 );
 
-export async function generateMetadata(
-  props: AppRouterProps
-): Promise<Metadata> {
-  const { slug, page, isBot } = extractParamsAppRouter(props);
-  const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
-  return {
-    title: uniteLegalePageTitle(uniteLegale, null),
-    description: uniteLegalePageDescription(uniteLegale, null),
-    robots: shouldNotIndex(uniteLegale) ? 'noindex, nofollow' : 'index, follow',
-    alternates: {
-      canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${
-        uniteLegale.chemin || uniteLegale.siren
-      }`,
-    },
-  };
-}
+export const generateMetadata = withErrorHandler(
+  async (props: AppRouterProps): Promise<Metadata> => {
+    const { slug, page, isBot } = extractParamsAppRouter(props);
+    const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
+    return {
+      title: uniteLegalePageTitle(uniteLegale, null),
+      description: uniteLegalePageDescription(uniteLegale, null),
+      robots: shouldNotIndex(uniteLegale)
+        ? 'noindex, nofollow'
+        : 'index, follow',
+      alternates: {
+        canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${
+          uniteLegale.chemin || uniteLegale.siren
+        }`,
+      },
+    };
+  }
+);
 
-export default async function UniteLegalePage(props: AppRouterProps) {
-  // post server side props ? et session ?
+export default withErrorHandler(async function UniteLegalePage(
+  props: AppRouterProps
+) {
   const session = await useSessionServer();
 
   const { slug, page, isBot, isRedirected } = extractParamsAppRouter(props);
@@ -139,4 +143,4 @@ export default async function UniteLegalePage(props: AppRouterProps) {
       </div>
     </>
   );
-}
+});

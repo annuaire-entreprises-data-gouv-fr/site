@@ -13,8 +13,8 @@ import { isAPI404, isAPINotResponding } from '#models/api-not-responding';
 import { FetchRessourceException } from '#models/exceptions';
 import { formatIntFr } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
-import extractParamsPageRouter from '#utils/server-side-props-helper/extract-params-page-router';
-import { postServerSideProps } from '#utils/server-side-props-helper/post-server-side-props';
+import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
+import { postServerSideProps } from '#utils/server-side-helper/page/post-server-side-props';
 import usePDFDownloader from 'hooks/fetch/download-pdf';
 import { NextPageWithLayout } from 'pages/_app';
 

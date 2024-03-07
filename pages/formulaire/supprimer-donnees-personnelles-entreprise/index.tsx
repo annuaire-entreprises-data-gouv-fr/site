@@ -14,11 +14,11 @@ import {
   fillHidePersonalDataRequest,
 } from '#models/hide-personal-data-request';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '#utils/helpers';
-import extractParamsPageRouter from '#utils/server-side-props-helper/extract-params-page-router';
+import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
 import {
   IGetServerSidePropsContextWithSession,
   postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-helper/page/post-server-side-props';
 import { getHidePersonalDataRequestFCSession } from '#utils/session';
 import useSession from 'hooks/use-session';
 

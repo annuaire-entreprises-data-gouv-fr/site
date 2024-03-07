@@ -10,11 +10,11 @@ import {
   getAdresseEtablissement,
 } from '#models/core/statut-diffusion';
 import { IEtablissement } from '#models/core/types';
-import extractParamsPageRouter from '#utils/server-side-props-helper/extract-params-page-router';
+import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-helper/page/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {

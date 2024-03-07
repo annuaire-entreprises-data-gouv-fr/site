@@ -14,7 +14,8 @@ import {
 } from '#utils/helpers';
 import extractParamsAppRouter, {
   AppRouterProps,
-} from '#utils/server-side-props-helper/extract-params-app-router';
+} from '#utils/server-side-helper/app/extract-params';
+import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
 import useSessionServer from 'hooks/use-session-server';
@@ -30,7 +31,7 @@ const cachedEtablissementWithUniteLegale = cache(
   }
 );
 
-export async function generateMetadata(
+export const generateMetadata = withErrorHandler(async function (
   props: AppRouterProps
 ): Promise<Metadata> {
   const { slug, isBot } = extractParamsAppRouter(props);
@@ -49,9 +50,11 @@ export async function generateMetadata(
       canonical: `https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`,
     },
   };
-}
+});
 
-export default async function EtablissementPage(props: AppRouterProps) {
+export default withErrorHandler(async function EtablissementPage(
+  props: AppRouterProps
+) {
   // post server side props ? et session ?
   const session = await useSessionServer();
 
@@ -98,4 +101,4 @@ export default async function EtablissementPage(props: AppRouterProps) {
       </div>
     </>
   );
-}
+});

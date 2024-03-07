@@ -5,7 +5,7 @@ import { MultiChoice } from '#components-ui/multi-choice';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
-import { postServerSideProps } from '#utils/server-side-props-helper/post-server-side-props';
+import { postServerSideProps } from '#utils/server-side-helper/page/post-server-side-props';
 import { isAgent, isSuperAgent } from '#utils/session';
 import useSession from 'hooks/use-session';
 import { NextPageWithLayout } from 'pages/_app';

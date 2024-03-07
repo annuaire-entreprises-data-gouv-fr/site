@@ -4,7 +4,7 @@ import { SearchErrorExplanations } from '#components/error-explanations';
 import { LayoutSearch } from '#components/layouts/layout-search';
 import Meta from '#components/meta';
 import StructuredDataSearchAction from '#components/structured-data/search';
-import { IPropsWithMetadata } from '#utils/server-side-props-helper/post-server-side-props';
+import { IPropsWithMetadata } from '#utils/server-side-helper/page/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
 const SearchResultPage: NextPageWithLayout<IPropsWithMetadata> = ({}) => {

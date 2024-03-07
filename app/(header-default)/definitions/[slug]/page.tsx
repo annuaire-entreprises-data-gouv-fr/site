@@ -5,11 +5,16 @@ import TextWrapper from '#components-ui/text-wrapper';
 import { RenderMarkdownServerOnly } from '#components/markdown';
 import { allDefinitions, getDefinition } from '#models/article/definitions';
 import { InternalError } from '#models/exceptions';
+import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 
 type IParams = {
   slug: string;
 };
-export default function DefinitionPage({ params }: { params: IParams }) {
+export default withErrorHandler(function DefinitionPage({
+  params,
+}: {
+  params: IParams;
+}) {
   const definition = getDefinition(params.slug);
   if (!definition || !definition.body || !definition.title) {
     throw new InternalError({
@@ -54,7 +59,7 @@ export default function DefinitionPage({ params }: { params: IParams }) {
       </TextWrapper>
     </>
   );
-}
+});
 
 export async function generateStaticParams(): Promise<Array<IParams>> {
   return allDefinitions.map(({ slug }) => {
@@ -64,11 +69,11 @@ export async function generateStaticParams(): Promise<Array<IParams>> {
   });
 }
 
-export async function generateMetadata({
+export const generateMetadata = withErrorHandler(function ({
   params,
 }: {
   params: IParams;
-}): Promise<Metadata> {
+}): Metadata {
   const definition = getDefinition(params.slug);
   if (!definition) {
     throw new InternalError({
@@ -86,4 +91,4 @@ export async function generateMetadata({
       canonical: `https://annuaire-entreprises.data.gouv.fr/definitions/${definition.slug}`,
     },
   };
-}
+});

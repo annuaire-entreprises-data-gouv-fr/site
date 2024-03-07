@@ -10,11 +10,11 @@ import { FICHE } from '#components/title-section/tabs';
 import { IUniteLegale, isAssociation } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { uniteLegalePageTitle } from '#utils/helpers';
-import extractParamsPageRouter from '#utils/server-side-props-helper/extract-params-page-router';
+import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-helper/page/post-server-side-props';
 import { isAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 

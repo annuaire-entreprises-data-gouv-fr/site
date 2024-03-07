@@ -11,7 +11,7 @@ import { parseIntWithDefaultValue } from '#utils/helpers';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-helper/page/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {

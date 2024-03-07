@@ -1,14 +1,14 @@
 import { getIronSession } from 'iron-session';
 import { GetServerSidePropsContext } from 'next';
 import { IReqWithSession } from '#utils/session/with-session';
-import { closeAPM, createAPM } from '../sentry/tracing';
-import { ISession, sessionOptions, setVisitTimestamp } from '../session';
-import { handleErrorFromServerSideProps } from './error-handler';
+import { closeAPM, createAPM } from '../../sentry/tracing';
+import { ISession, sessionOptions, setVisitTimestamp } from '../../session';
+import { errorRedirection } from '../redirection';
+import { getContext } from './error-context';
 import parseFormBodyMiddleware from './parse-form-body';
 
 export interface IPropsWithMetadata {
   metadata: {
-    // enable react hydration in browser
     session: ISession | null;
   };
 }
@@ -61,5 +61,32 @@ export function postServerSideProps(
         },
       },
     };
+  };
+}
+
+/**
+ * Handle exceptions raised in getServersSideProps
+ *
+ * @param getServerSidePropsFunction
+ * @returns
+ */
+export function handleErrorFromServerSideProps<
+  C extends GetServerSidePropsContext
+>(getServerSidePropsFunction: (context: C) => any) {
+  return async (context: C) => {
+    try {
+      return await getServerSidePropsFunction(context);
+    } catch (exception: any) {
+      const message = exception.message;
+      const ctx = getContext(context.req, message);
+      const { destination } = errorRedirection(exception, ctx);
+
+      return {
+        redirect: {
+          destination,
+          permanent: false,
+        },
+      };
+    }
   };
 }
