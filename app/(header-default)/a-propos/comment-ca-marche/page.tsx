@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical:
       'https://annuaire-entreprises.data.gouv.fr/a-propos/comment-ca-marche',
   },
+  robots: 'index, follow',
 };
 
 export default function About() {

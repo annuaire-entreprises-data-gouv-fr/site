@@ -118,9 +118,7 @@ export const generateMetadata = withErrorHandler(function ({
   return {
     title: landingPage.seo.title || landingPage.title,
     description: landingPage.seo.description,
-    robots: {
-      index: false,
-    },
+    robots: 'index, follow',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/lp/${params.slug}`,
     },

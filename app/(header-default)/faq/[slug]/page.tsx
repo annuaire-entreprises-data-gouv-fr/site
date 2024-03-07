@@ -85,10 +85,7 @@ export const generateMetadata = withErrorHandler(function ({
   return {
     title: article.seo.title || article.title,
     description: article.seo.description,
-    // TODO
-    robots: {
-      index: false,
-    },
+    robots: 'index, follow',
     alternates: {
       canonical: `https://annuaire-entreprises.data.gouv.fr/faq/${article.slug}`,
     },

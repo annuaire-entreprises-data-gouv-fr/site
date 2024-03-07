@@ -1,4 +1,5 @@
 'use client';
+import { Metadata } from 'next';
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import { MultiChoice } from '#components-ui/multi-choice';
@@ -25,6 +26,16 @@ type IProps = {
   setQuestionType: (type: EQuestionType) => void;
   userType: string;
   questions: IFaqArticle[];
+};
+
+export const generateMetadata = function ({}: {}): Metadata {
+  return {
+    title: 'FAQ interactive de l’Annuaire des Entreprises',
+    robots: 'index, follow',
+    alternates: {
+      canonical: `https://annuaire-entreprises.data.gouv.fr/faq/parcours`,
+    },
+  };
 };
 
 const Answer: React.FC<PropsWithChildren<{}>> = ({ children }) => (

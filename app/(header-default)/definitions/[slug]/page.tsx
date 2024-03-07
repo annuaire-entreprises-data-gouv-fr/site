@@ -10,6 +10,29 @@ import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 type IParams = {
   slug: string;
 };
+
+export const generateMetadata = withErrorHandler(function ({
+  params,
+}: {
+  params: IParams;
+}): Metadata {
+  const definition = getDefinition(params.slug);
+  if (!definition) {
+    throw new InternalError({
+      message: 'Definition not found',
+      context: params,
+    });
+  }
+  return {
+    title: definition.seo.title || definition.title,
+    description: definition.seo.description,
+    robots: 'noindex, nofollow',
+    alternates: {
+      canonical: `https://annuaire-entreprises.data.gouv.fr/definitions/${definition.slug}`,
+    },
+  };
+});
+
 export default withErrorHandler(function DefinitionPage({
   params,
 }: {
@@ -68,27 +91,3 @@ export async function generateStaticParams(): Promise<Array<IParams>> {
     };
   });
 }
-
-export const generateMetadata = withErrorHandler(function ({
-  params,
-}: {
-  params: IParams;
-}): Metadata {
-  const definition = getDefinition(params.slug);
-  if (!definition) {
-    throw new InternalError({
-      message: 'Definition not found',
-      context: params,
-    });
-  }
-  return {
-    title: definition.seo.title || definition.title,
-    description: definition.seo.description,
-    robots: {
-      index: false,
-    },
-    alternates: {
-      canonical: `https://annuaire-entreprises.data.gouv.fr/definitions/${definition.slug}`,
-    },
-  };
-});

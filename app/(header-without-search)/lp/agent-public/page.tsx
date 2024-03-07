@@ -10,9 +10,7 @@ export const metadata = {
   title: 'Espace agent | Annuaire des Entreprises',
   description:
     'Les informations des entreprises sont toutes dans l’espace agent !',
-  robots: {
-    index: false,
-  },
+  robots: 'index, follow',
   alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/lp/agent-public',
   },

@@ -38,4 +38,5 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://annuaire-entreprises.data.gouv.fr/definitions',
   },
+  robots: 'index, follow',
 };
