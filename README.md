@@ -32,7 +32,7 @@ Pour protéger un siren et en limiter la diffusion [suivez la procédure](https:
 
 ## Dépôts liés 🏗
 
-Ce dépôt fait partie d'un ensemble de dépôts qui constituent l'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
+Voici la liste des dépôts de  code du projet [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
 
 | Description                         | Accès                                                                       |
 | ----------------------------------- | --------------------------------------------------------------------------- |
