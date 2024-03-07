@@ -77,7 +77,7 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
       <HorizontalSeparator />
       <span>
         {results.currentPage > 1 && `Page ${results.currentPage} de `}
-        {results.resultCount} résultats trouvés.
+        {results.resultCount} résultat(s) trouvé(s).
       </span>
       <ResultsList results={results.results} />
       {results.pageCount > 0 && (
