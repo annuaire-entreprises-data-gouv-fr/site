@@ -4,6 +4,7 @@ const ResultsCounter: React.FC<{
   resultCount?: number;
   currentPage?: number;
 }> = ({ resultCount = 0, currentPage = 1 }) => {
+  const plural = resultCount > 1 ? 's' : '';
   return (
     <>
       {resultCount ? (
@@ -11,7 +12,7 @@ const ResultsCounter: React.FC<{
           <span>
             {currentPage > 1 && `Page ${currentPage} de `}
             {resultCount === 10000 && 'Plus de '}
-            {resultCount} résultats trouvés.
+            {resultCount} résultat{plural} trouvé{plural}.
           </span>
         </div>
       ) : (
