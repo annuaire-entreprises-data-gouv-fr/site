@@ -57,7 +57,6 @@ const VerifyTVA: React.FC<{
 }> = ({ tva, siren }) => {
   const { tvaNumber, mayHaveMultipleTVANumber } = tva;
   const verification = useFetchTVA(siren);
-
   if (isAPILoading(verification)) {
     return (
       <>

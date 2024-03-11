@@ -22,6 +22,7 @@ type IExceptionArgument = {
     page?: string;
     referrer?: string;
     browser?: string;
+    digest?: string;
   };
 };
 
