@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { ClientErrorExplanations } from '#components/error-explanations';
-import { LayoutDefault } from '#components/layouts/layout-default';
+import { HeaderServer } from '#components/header/header-server';
 import { Exception } from '#models/exceptions';
 import { logFatalErrorInSentry } from '#utils/sentry';
 
@@ -26,8 +26,11 @@ export default function ErrorPage({
   }, [error]);
 
   return (
-    <LayoutDefault>
-      <ClientErrorExplanations />
-    </LayoutDefault>
+    <>
+      <HeaderServer useSearchBar={true} useAgentCTA={false} />
+      <main className="fr-container">
+        <ClientErrorExplanations />
+      </main>
+    </>
   );
 }
