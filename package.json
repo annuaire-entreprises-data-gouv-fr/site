@@ -41,7 +41,7 @@
     "canvas": "^2.11.2",
     "chart.js": "^4.4.1",
     "crawler-user-agents": "^1.0.117",
-    "cssnano": "^6.0.3",
+    "cssnano": "^6.1.0",
     "dotenv": "^16.3.2",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.1.0",

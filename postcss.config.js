@@ -1,5 +1,17 @@
 module.exports = {
   plugins: [
+    // 'postcss-remove-dsfr-font-face',
+    [
+      'cssnano',
+      {
+        preset: [
+          'default',
+          {
+            discardComments: { removeAll: true },
+          },
+        ],
+      },
+    ],
     'postcss-flexbugs-fixes',
     ['postcss-preset-env', {}],
     [
@@ -13,6 +25,7 @@ module.exports = {
           './components-ui/**/*.{js,jsx,ts,tsx}',
         ],
         safelist: ['html', 'body', 'anchor-link'],
+        fontFace: true,
       },
     ],
   ],
