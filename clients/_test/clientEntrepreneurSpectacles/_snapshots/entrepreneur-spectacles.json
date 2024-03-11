@@ -1,34 +1,25 @@
 {
   "args": [
-    "810050898"
+    "800329849"
   ],
   "result": {
     "licences": [
       {
-        "categorie": 1,
-        "numeroRecepisse": "PLATESV-R-2021-000086",
-        "nomLieu": "SALLE PLEYEL",
-        "statut": "Valide",
-        "dateValidite": "04/02/2021",
-        "dateDepot": "2021-01-05",
-        "type": "Renouvellement"
-      },
-      {
-        "categorie": 3,
-        "numeroRecepisse": "PLATESV-R-2020-010011",
+        "categorie": 2,
+        "numeroRecepisse": "PLATESV-R-2021-006658",
         "nomLieu": "",
         "statut": "Valide",
-        "dateValidite": "20/11/2020",
-        "dateDepot": "2020-10-21",
+        "dateValidite": "11/07/2021",
+        "dateDepot": "2021-05-27",
         "type": "Renouvellement"
       },
       {
         "categorie": 2,
-        "numeroRecepisse": "PLATESV-R-2020-010010",
+        "numeroRecepisse": "PLATESV-R-2021-006193",
         "nomLieu": "",
-        "statut": "Valide",
-        "dateValidite": "20/11/2020",
-        "dateDepot": "2020-10-21",
+        "statut": "Invalide",
+        "dateValidite": "",
+        "dateDepot": "2021-05-18",
         "type": "Renouvellement"
       }
     ],

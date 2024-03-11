@@ -1,0 +1,24 @@
+{
+  "args": [
+    "356000000"
+  ],
+  "result": {
+    "years": [
+      "2022"
+    ],
+    "scores": {
+      "pourcentageFemmesCadres": [
+        25
+      ],
+      "pourcentageHommesCadres": [
+        75
+      ],
+      "pourcentageFemmesMembres": [
+        35.2
+      ],
+      "pourcentageHommesMembres": [
+        64.8
+      ]
+    }
+  }
+}
