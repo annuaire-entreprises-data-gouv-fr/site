@@ -30,9 +30,9 @@ import {
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
+import getSession from '#utils/server-side-helper/app/get-session';
 import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 import { isSuperAgent } from '#utils/session';
-import useSessionServer from 'hooks/use-session-server';
 
 const cachedGetUniteLegale = cache(
   async (slug: string, page: number, isBot: boolean) => {
@@ -67,7 +67,7 @@ export const generateMetadata = withErrorHandler(
 export default withErrorHandler(async function UniteLegalePage(
   props: AppRouterProps
 ) {
-  const session = await useSessionServer();
+  const session = await getSession();
 
   const { slug, page, isBot, isRedirected } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
