@@ -74,6 +74,7 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
         {body.map((row, idx) => (
           <tr key={'a' + idx}>
             <td
+              className={styles.cell}
               style={{
                 borderColor: constants.colors.pastelBlue,
               }}

@@ -80,26 +80,6 @@
   }
 }
 
-@media only screen and (min-width: 1px) and (max-width: 576px) {
-  .wrapper .tooltip {
-    opacity: 0.95;
-    position: fixed;
-    width: 100% !important;
-    top: 0;
-    left: 0;
-    right: 0;
-    border-radius: 0 !important;
-    height: 30%;
-    overflow: auto;
-    font-size: 1rem;
-  }
-
-  .wrapper .tooltip:after,
-  .wrapper .tooltip:before {
-    display: none;
-  }
-}
-
 .data-source {
   display: inline-flex;
   font-size: 0.7rem;
