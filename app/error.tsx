@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { ClientErrorExplanations } from '#components/error-explanations';
-import { HeaderServer } from '#components/header/header-server';
+import { Header } from '#components/header';
 import { Exception } from '#models/exceptions';
 import { logFatalErrorInSentry } from '#utils/sentry';
 
@@ -27,7 +27,7 @@ export default function ErrorPage({
 
   return (
     <>
-      <HeaderServer useSearchBar={true} useAgentCTA={false} />
+      <Header useSearchBar={true} useAgentCTA={false} />
       <main className="fr-container">
         <ClientErrorExplanations />
       </main>
