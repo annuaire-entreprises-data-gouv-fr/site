@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { EQuestionType } from '#components/faq-parcours/question';
-import ParcoursClient from './client';
+import ParcoursQuestions from './_components/parcours-questions';
 
 export const metadata: Metadata = {
   title: 'FAQ interactive de l’Annuaire des Entreprises',
@@ -22,7 +22,7 @@ export default function Parcours({
       <h1>Bonjour, comment pouvons-nous vous aider ?</h1>
       <p>Pour commencer, faisons connaissance :</p>
       <strong>Qui êtes-vous ?</strong>
-      <ParcoursClient question={question} />
+      <ParcoursQuestions question={question} />
       <div style={{ marginTop: '200px' }} />
     </>
   );

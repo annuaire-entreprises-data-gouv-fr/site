@@ -7,7 +7,7 @@ import { FAQTargets, allFaqArticlesByTarget } from '#models/article/faq';
 type IProps = {
   question: EQuestionType;
 };
-export default function ParcoursClient({ question }: IProps) {
+export default function ParcoursQuestions({ question }: IProps) {
   const initialQuestionType = Object.values(EQuestionType).indexOf(question)
     ? question
     : null;
