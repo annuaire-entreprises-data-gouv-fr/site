@@ -37,13 +37,15 @@ export const EntrepriseInclusiveSection: React.FC<{
           <FullTable
             head={[
               'Siret de l’établissement',
+              'Catégorie',
               'Type de structure',
               'Plus d’informations',
             ]}
             body={entrepriseInclusive.map(
-              ({ siret, marcheInclusionLink, type }) => {
+              ({ siret, marcheInclusionLink, type, category }) => {
                 return [
                   <a href={`/etablissement/${siret}`}>{formatSiret(siret)}</a>,
+                  category,
                   type,
                   <ButtonLink to={marcheInclusionLink} alt small>
                     ⇢&nbsp;Consulter

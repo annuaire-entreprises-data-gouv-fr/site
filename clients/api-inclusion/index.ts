@@ -63,6 +63,7 @@ const mapToDomainObject = async (res: APIInclusionResponse) => {
   return {
     marcheInclusionLink: routes.certifications.entrepriseInclusive.site + slug,
     siret,
+    category: kindLabel?.parent || '',
     type: kindLabel?.name || kind,
   };
 };

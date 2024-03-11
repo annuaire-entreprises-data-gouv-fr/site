@@ -12,6 +12,7 @@ import { IUniteLegale } from '../core/types';
 export type IEntrepriseInclusive = {
   marcheInclusionLink: string;
   type: string;
+  category: string;
   siret: string;
 };
 

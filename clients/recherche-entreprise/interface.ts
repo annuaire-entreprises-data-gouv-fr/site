@@ -115,6 +115,8 @@ export type IComplements = {
   est_societe_mission: boolean;
   est_association: boolean;
   identifiant_association: string;
+  est_siae: boolean;
+  type_siae: string;
 };
 
 export type ICollectiviteTerritoriale = {
