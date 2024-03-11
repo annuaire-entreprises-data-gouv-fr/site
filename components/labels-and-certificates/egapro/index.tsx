@@ -2,7 +2,7 @@ import React from 'react';
 import FAQLink from '#components-ui/faq-link';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import InformationTooltip from '#components-ui/information-tooltip';
-import { DataSection } from '#components/section/data-section';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -14,7 +14,7 @@ export const EgaproSection: React.FC<{
   const sectionTitle = `Égalité professionnelle - Egapro`;
 
   return (
-    <DataSection
+    <DataSectionServer
       id="egalite-professionnelle"
       notFoundInfo={
         <>
@@ -86,7 +86,7 @@ export const EgaproSection: React.FC<{
           </>
         );
       }}
-    </DataSection>
+    </DataSectionServer>
   );
 };
 
@@ -114,22 +114,21 @@ const getSectionBody = (egapro: IEgapro) => {
     ],
     [
       <strong>
-        <FAQLink tooltipLabel="Détails">
+        <FAQLink
+          tooltipLabel="Détails"
+          to="https://egapro.travail.gouv.fr/aide-simulation"
+        >
           L’index est une synthèse des différents indicateurs ci-dessous
-          <br />
-          <a href="https://egapro.travail.gouv.fr/aide-simulation">
-            → En savoir plus
-          </a>
         </FAQLink>
       </strong>,
       ...egapro.index.years.map(() => ''),
     ],
-    ['    Écart rémunérations (sur 40)', ...remunerations.map(mapToNc)],
+    ['・Écart rémunérations (sur 40)', ...remunerations.map(mapToNc)],
     // only less than 250
     ...[
       egapro.index.lessThan250
         ? [
-            `    Écart taux d'augmentation (sur 35)`,
+            `・Écart taux d'augmentation (sur 35)`,
             ...augmentationsPromotions.map(mapToNc),
           ]
         : [],
@@ -138,7 +137,7 @@ const getSectionBody = (egapro: IEgapro) => {
     ...[
       !egapro.index.lessThan250
         ? [
-            `    Écart taux d'augmentation (sur 20)`,
+            `・Écart taux d'augmentation (sur 20)`,
             ...augmentations.map(mapToNc),
           ]
         : [],
@@ -146,11 +145,11 @@ const getSectionBody = (egapro: IEgapro) => {
     // only more than 250
     ...[
       !egapro.index.lessThan250
-        ? ['    Écart taux promotion (sur 15)', ...promotions.map(mapToNc)]
+        ? ['・Écart taux promotion (sur 15)', ...promotions.map(mapToNc)]
         : [],
     ],
-    ['    Retour congé maternité (sur 15)', ...congesMaternite.map(mapToNc)],
-    ['    Hautes rémunérations (sur 10)', ...hautesRemunerations.map(mapToNc)],
+    ['・Retour congé maternité (sur 15)', ...congesMaternite.map(mapToNc)],
+    ['・Hautes rémunérations (sur 10)', ...hautesRemunerations.map(mapToNc)],
   ];
 };
 
@@ -171,18 +170,18 @@ const getColor = (note: number) => {
 const FAQEgapro = () => (
   <FAQLink
     tooltipLabel={`index d’égalité professionnelle entre les femmes et les hommes.`}
+    to="/faq/egapro-egalite-professionnelle-femme-homme"
   >
     L’Index Egapro permet de mesurer l’égalité professionnelle entre les femmes
     et les hommes dans les entreprises de plus de 50 salariés.
-    <br />
-    <a href="/faq/egapro-egalite-professionnelle-femme-homme">
-      → En savoir plus
-    </a>
   </FAQLink>
 );
 
 const NC = () => (
-  <InformationTooltip label="Cette année là, cette structure n’était pas concernée par ce critère.">
+  <InformationTooltip
+    tabIndex={0}
+    label="Cette année là, cette structure n’était pas concernée par ce critère."
+  >
     <i>NC</i>
   </InformationTooltip>
 );

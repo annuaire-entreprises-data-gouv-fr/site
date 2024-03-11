@@ -36,37 +36,35 @@ async function createQRCode(dataForQRcode: string) {
   return canvas.toDataURL('image/png');
 }
 
-const qrCode = ({ query: { slug } }: NextApiRequest, res: NextApiResponse) => {
+const qrCode = async (
+  { query: { slug } }: NextApiRequest,
+  res: NextApiResponse
+) => {
   const url = getUrl(slug as string);
 
-  // next js warning caused by callback => https://github.com/vercel/next.js/issues/10439
-  return new Promise(async (resolve) => {
-    try {
-      const urlAsImg = await createQRCode(url);
+  try {
+    const urlAsImg = await createQRCode(url);
 
-      const base64Data = urlAsImg.replace(/^data:image\/png;base64,/, '');
-      var img = Buffer.from(base64Data, 'base64');
-      res.writeHead(200, {
-        'Content-Type': 'image/png',
-        'Content-Length': img.length,
-      });
-      res.end(img);
-      resolve(null);
-    } catch (e: any) {
-      logErrorInSentry(
-        new Exception({
-          name: 'QRCodeGenerationException',
-          cause: e,
-          context: {
-            slug: slug as string,
-          },
-        })
-      );
+    const base64Data = urlAsImg.replace(/^data:image\/png;base64,/, '');
+    var img = Buffer.from(base64Data, 'base64');
+    res.writeHead(200, {
+      'Content-Type': 'image/png',
+      'Content-Length': img.length,
+    });
+    res.end(img);
+  } catch (e: any) {
+    logErrorInSentry(
+      new Exception({
+        name: 'QRCodeGenerationException',
+        cause: e,
+        context: {
+          slug: slug as string,
+        },
+      })
+    );
 
-      res.status(500).json({ message: e });
-      resolve(null);
-    }
-  });
+    res.status(500).json({ message: e });
+  }
 };
 
 export default qrCode;

@@ -41,6 +41,7 @@ const IsActiveTag: React.FC<{
   ) {
     return (
       <InformationTooltip
+        tabIndex={0}
         label="Nous n’avons pas les
     informations nécessaires pour savoir si cette structure est en activité
     ou si elle est fermée."
@@ -52,7 +53,10 @@ const IsActiveTag: React.FC<{
 
   if (etatAdministratif === IETATADMINSTRATIF.ACTIF_ZERO_ETABLISSEMENT) {
     return (
-      <InformationTooltip label="Cette structure est en sommeil ou présumée inactive. Elle est active du point de vue administratif mais tous ses établissements sont fermés. Elle n’a pas d’activité économique.">
+      <InformationTooltip
+        tabIndex={0}
+        label="Cette structure est en sommeil ou présumée inactive. Elle est active du point de vue administratif mais tous ses établissements sont fermés. Elle n’a pas d’activité économique."
+      >
         <EtatTag state={etatAdministratif} size={size} />
       </InformationTooltip>
     );

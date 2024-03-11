@@ -13,10 +13,11 @@ describe('TVA validation', () => {
   });
   it('TVA link', () => {
     cy.visit(`/entreprise/383657467`).then(() => {
-      cy.contains('Que signifie “inconnu ou non-assujettie à la TVA” ?').click({
-        force: true,
-      });
+      cy.contains(
+        'Numéro de TVA inconnu ou structure non-assujettie à la TVA'
+      ).click();
       cy.url().should('include', '/definitions/tva-intracommunautaire');
+      0;
     });
     cy.visit(`/entreprise/217500016`).then(() => {
       cy.contains('FR72 217 500 016').should('have.length', 1);

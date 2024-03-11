@@ -54,7 +54,7 @@ const clientTVA = async (
     throw new TVAUserException(data.userError);
   }
 
-  return data.isValid ? `FR${data.vatNumber}` : null;
+  return data.isValid ? data.vatNumber : null;
 };
 
 const stubbedClient = stubClientWithSnapshots({

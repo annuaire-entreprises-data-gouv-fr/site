@@ -8,4 +8,4 @@ export type IChangelog = {
   description?: IMarkdown;
 };
 
-export default data as { changelog: IChangelog[] };
+export default data as IChangelog[];

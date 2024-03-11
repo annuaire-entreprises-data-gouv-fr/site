@@ -1,12 +1,17 @@
 import React from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
-import constants from '#models/constants';
+import styles from './styles.module.css';
 
 export const NPSBanner: React.FC<{}> = () => {
   return (
     <PrintNever>
-      <div id="nps-modal-2" role="dialog" aria-label="Donnez-nous votre avis">
-        <div className="fr-container">
+      <div
+        id="nps-modal-2"
+        role="dialog"
+        aria-label="Donnez-nous votre avis"
+        className={styles.npsModal}
+      >
+        <div>
           <div
             dangerouslySetInnerHTML={{
               __html: `
@@ -26,23 +31,6 @@ export const NPSBanner: React.FC<{}> = () => {
           ></div>
         </div>
       </div>
-      <style jsx>{`
-        #nps-modal-2 {
-          display: none;
-          padding-top: 15px;
-          padding-bottom: 15px;
-          font-size: 0.9rem;
-          width: 100%;
-          background-color: #fef6e3;
-          font-family: 'Marianne', sans-serif;
-          border-bottom: 2px solid ${constants.colors.frBlue};
-        }
-        #nps-modal-2 .fr-container {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-      `}</style>
     </PrintNever>
   );
 };

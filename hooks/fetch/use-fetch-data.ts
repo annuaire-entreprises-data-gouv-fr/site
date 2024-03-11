@@ -19,7 +19,7 @@ type IFetchDataType<T> = {
  * @param dependancies : Array of dependancies to retrigger the fetch
  * @returns
  */
-export function useFetchData<T extends {}>(
+export function useFetchData<T>(
   { fetchData, administration, logError }: IFetchDataType<T>,
   dependancies: Array<unknown>
 ) {

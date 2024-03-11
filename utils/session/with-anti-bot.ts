@@ -41,7 +41,7 @@ function userVisitedAPageRecently(session: ISession | null) {
     return false;
   }
   const now = new Date();
-  const lastVisit = new Date(session.lastVisitTimestamp);
+  const lastVisit = new Date(session?.lastVisitTimestamp);
   const diff = now.getTime() - lastVisit.getTime();
   return diff < 1000 * 60 * 5; // 5 minutes
 }

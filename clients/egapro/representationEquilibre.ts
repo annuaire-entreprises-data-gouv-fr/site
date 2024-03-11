@@ -1,5 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
+import { stubClient } from '#clients/stub-client-with-snaphots';
 import { IEgapro } from '#models/certifications/egapro';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
@@ -18,7 +19,7 @@ type IEgaproRepresentation = {
   };
 };
 
-export const clientEgaproRepresentationEquilibre = async (
+const clientEgaproRepresentationEquilibre = async (
   siren: Siren
 ): Promise<IEgapro['representation']> => {
   const responseSearchApi = await httpGet<IEgaproRepresentationResponse>(
@@ -72,3 +73,8 @@ const mapToDomainObject = (
 
   return formatted;
 };
+
+const stubbedClientEgaproRepresentationEquilibre = stubClient({
+  clientEgaproRepresentationEquilibre,
+});
+export { stubbedClientEgaproRepresentationEquilibre as clientEgaproRepresentationEquilibre };

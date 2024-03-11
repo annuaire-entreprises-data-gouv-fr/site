@@ -4,8 +4,8 @@ import BeneficiairesSection from '#components/dirigeants-section/beneficiaires';
 import ResponsableSection from '#components/dirigeants-section/responsables-service-public';
 import DirigeantsSection from '#components/dirigeants-section/rne-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
+import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Meta from '#components/meta';
-import { DonneesPriveesSection } from '#components/non-diffusible';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -20,11 +20,11 @@ import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from '#utils/helpers';
-import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
+import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-helper/page/post-server-side-props';
 import { isAgent } from '#utils/session';
 import { useFetchImmatriculationRNE } from 'hooks';
 import useSession from 'hooks/use-session';
@@ -97,7 +97,8 @@ function DirigeantInformation({ uniteLegale }: { uniteLegale: IUniteLegale }) {
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug, isBot } = extractParamsFromContext(context);
+    const { slug, isBot } = extractParamsPageRouter(context);
+
     const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
     const servicePublic = await getServicePublicByUniteLegale(uniteLegale, {
       isBot,
@@ -107,9 +108,6 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
       props: {
         uniteLegale: await getUniteLegaleFromSlug(slug, { isBot }),
         servicePublic,
-        metadata: {
-          useReact: true,
-        },
       },
     };
   }

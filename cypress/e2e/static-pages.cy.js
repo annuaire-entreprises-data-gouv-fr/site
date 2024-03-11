@@ -16,7 +16,7 @@ pages.forEach((page) => {
 
     it('FAQ button works', () => {
       cy.visit(page);
-      cy.get('.question-bottom-right > a').click();
+      cy.get('[data-test-id="question-faq"]').click();
 
       // Should be on a new URL which includes '/commands/actions'
       cy.url().should('include', '/faq');

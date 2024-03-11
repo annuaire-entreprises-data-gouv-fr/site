@@ -8,7 +8,6 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
       role="dialog"
       aria-label="Votre navigateur est obsolète"
     />
-
     <script
       //  Show warning for browsers
       //  1. without Optional chaining
@@ -39,10 +38,5 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
         `,
       }}
     ></script>
-    <style jsx>{`
-      #browser-is-outdated {
-        display: none;
-      }
-    `}</style>
   </PrintNever>
 );

@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { Warning } from '#components-ui/alerts';
+import { Icon } from '#components-ui/icon/wrapper';
 import DataSourcesTooltip from '#components-ui/information-tooltip/data-sources-tooltip';
 import Logo from '#components-ui/logo';
 import { administrationsMetaData } from '#models/administrations';
@@ -7,15 +8,14 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { formatDate, formatDateLong, isTwoMonthOld } from '#utils/helpers';
 import SectionErrorBoundary from './section-error-boundary';
-
+import style from './style.module.css';
 export interface ISectionProps {
   title: string;
   width?: number;
   sources?: EAdministration[];
   id?: string;
   lastModified?: string | null;
-  borderColor?: string;
-  titleColor?: string;
+  isProtected?: boolean;
 }
 
 export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
@@ -25,8 +25,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   sources = [],
   lastModified = null,
   width = 100,
-  borderColor = constants.colors.pastelBlue,
-  titleColor = constants.colors.frBlue,
+  isProtected = false,
 }) => {
   const dataSources = Array.from(new Set(sources)).map(
     (key) => administrationsMetaData[key]
@@ -37,10 +36,30 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
 
   const faqLink = `/administration/${dataSources.map((d) => d.slug).join('_')}`;
 
+  const borderColor = isProtected
+    ? constants.colors.espaceAgentPastel
+    : constants.colors.pastelBlue;
+  const titleColor = isProtected
+    ? constants.colors.espaceAgent
+    : constants.colors.frBlue;
+
   return (
     <SectionErrorBoundary>
-      <div className="section-container" id={id}>
-        <h2>{title}</h2>
+      <div
+        className={style['section-container']}
+        id={id}
+        style={{ width: `${width}%`, borderColor }}
+      >
+        {isProtected && (
+          <div className={style.protected}>
+            <Icon size={12} slug="lockFill">
+              Réservé aux agents publics
+            </Icon>
+          </div>
+        )}
+        <h2 style={{ color: titleColor, backgroundColor: borderColor }}>
+          {title}
+        </h2>
         {isOld && lastModified && (
           <Warning>
             Ces données n’ont pas été mises à jour depuis plus de deux mois.
@@ -49,15 +68,16 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         )}
         <div>{children}</div>
         {dataSources.length > 0 && (
-          <div className="administration-page-link">
+          <div className={style['administration-page-link']}>
             <DataSourcesTooltip
               dataSources={dataSources}
               lastUpdatedAt={formatDate(last)}
               link={faqLink}
+              orientation="right"
             />
           </div>
         )}
-        <div className="section-logo-wrapper">
+        <div className={style['section-logo-wrapper']}>
           {dataSources.map(
             ({ slug, long, logoType }) =>
               logoType && (
@@ -77,56 +97,6 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           )}
         </div>
       </div>
-      <style jsx>{`
-        .section-container {
-          border: 2px solid ${borderColor};
-          border-radius: 2px;
-          position: relative;
-          margin: 20px 0 40px;
-          padding: 1rem;
-          width: ${width}%;
-        }
-
-        .section-container > h2 {
-          margin-top: 0;
-          margin-bottom: 25px;
-          display: inline-block;
-          font-size: 1.1rem;
-          line-height: 1.8rem;
-          background-color: ${borderColor};
-          color: ${titleColor};
-          padding: 0 7px;
-          border-radius: 2px;
-          max-width: calc(100% - 250px);
-        }
-
-        .administration-page-link {
-          display: flex;
-          justify-content: end;
-          align-items: center;
-          gap: 10px;
-          flex-wrap: wrap;
-          margin-top: 25px;
-        }
-
-        .section-logo-wrapper {
-          position: absolute;
-          top: 25px;
-          right: 16px;
-          display: flex;
-          justify-content: end;
-        }
-
-        @media only screen and (min-width: 1px) and (max-width: 768px) {
-          .section-logo-wrapper {
-            display: none;
-          }
-
-          .section-container > h2 {
-            max-width: 100%;
-          }
-        }
-      `}</style>
     </SectionErrorBoundary>
   );
 };

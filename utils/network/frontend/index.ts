@@ -32,13 +32,7 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
   if (!config.url) {
     throw new InternalError({ message: 'Url is required' });
   }
-  if (
-    config.responseType ||
-    config.useCache ||
-    config.method ||
-    config.data ||
-    config.headers
-  ) {
+  if (config.useCache || config.method || config.data || config.headers) {
     throw new InternalError({
       message: 'Feature not yet supported on frontend client',
     });
@@ -57,17 +51,23 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
       .get('content-type')
       ?.includes('application/json');
 
-    const data = await (isJson ? response.json() : response.text());
-
     if (!response.ok) {
       return httpErrorHandler(
         config.url,
         response.status,
         response.statusText,
-        data.message
+        await (isJson ? response.json() : response.text())
       );
     }
 
+    if (config.responseType == 'blob') {
+      return response.blob() as T;
+    }
+
+    if (config.responseType == 'arraybuffer') {
+      return response.arrayBuffer() as T;
+    }
+    const data = await (isJson ? response.json() : response.text());
     return data as T;
   } catch (e: any) {
     const errorArgs = {

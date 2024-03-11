@@ -4,18 +4,139 @@ import { Info } from '#components-ui/alerts';
 import { Loader } from '#components-ui/loader';
 import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';
-import FrontStateMachine from '#components/front-state-machine';
 import Meta from '#components/meta';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
+import { isAPILoading } from '#models/api-loading';
+import { isAPI404, isAPINotResponding } from '#models/api-not-responding';
+import { FetchRessourceException } from '#models/exceptions';
 import { formatIntFr } from '#utils/helpers';
-import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
-import { postServerSideProps } from '#utils/server-side-props-helper/post-server-side-props';
+import logErrorInSentry from '#utils/sentry';
+import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
+import { postServerSideProps } from '#utils/server-side-helper/page/post-server-side-props';
+import usePDFDownloader from 'hooks/fetch/download-pdf';
 import { NextPageWithLayout } from 'pages/_app';
 
-const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
+function saveAsPdf(blob: Blob, siren: string) {
+  var url = window.URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  //@ts-ignore
+  a.style = 'display: none';
+  a.href = url;
+  a.download = 'extrait_immatriculation_inpi_' + siren + '.pdf';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
+}
+
+function PDFFailed({ downloadLink }: { downloadLink: string }) {
+  return (
+    <>
+      <Tag color="error">échec</Tag>
+      <p>
+        Le téléchargement direct a échoué et nous avons relancé un
+        téléchargement dans un nouvel onglet.
+      </p>
+      Si besoin,{' '}
+      <a
+        id="download-pdf-link"
+        target="_blank"
+        rel="noreferrer noopener"
+        href={downloadLink}
+        //@ts-ignore
+        onClick={window.open(downloadLink, '_blank', 'noopener,noreferrer')}
+      >
+        cliquez ici pour re-lancer un téléchargement dans un nouvel onglet.
+      </a>
+    </>
+  );
+}
+
+function InpiPDFDownloader({ siren }: { siren: string }) {
   const downloadLink = `${routes.rne.portail.pdf}?format=pdf&ids=[%22${siren}%22]`;
+
+  const pdf = usePDFDownloader(downloadLink);
+
+  if (isAPILoading(pdf)) {
+    return (
+      <>
+        <Tag>
+          <Loader /> téléchargement en cours
+        </Tag>
+        <span style={{ color: '#777', fontWeight: 'bold' }}>
+          (temps estimé entre 10 secondes et 1 minute)
+        </span>
+      </>
+    );
+  }
+
+  if (isAPI404(pdf)) {
+    return (
+      <>
+        <Tag color="error">introuvable</Tag>
+        <p>
+          Le document que vous recherchez n’a pas été retrouvé par le
+          téléservice de l’
+          <INPI />. Si la structure est bien une entreprise,{' '}
+          <strong>cela ne devrait pas arriver</strong>. Vous pouvez :
+        </p>
+        <ol>
+          <li>
+            Soit essayer de télécharger le document{' '}
+            <a target="_blank" rel="noreferrer noopener" href={downloadLink}>
+              directement sur le site de l’INPI
+            </a>
+            .
+          </li>
+          <li>
+            Soit{' '}
+            <a href="https://www.inpi.fr/contactez-nous">
+              écrire à l’INPI pour leur demander le document.
+            </a>
+          </li>
+          <p>
+            L’
+            <INPI /> est à la fois l’opérateur du Registre National des
+            Entreprises (RNE) et du téléservice qui produit les justificatifs,
+            c’est{' '}
+            <strong>
+              la seule administration en mesure de résoudre le problème
+            </strong>
+            .
+          </p>
+        </ol>
+      </>
+    );
+  }
+
+  if (isAPINotResponding(pdf)) {
+    return <PDFFailed downloadLink={downloadLink} />;
+  }
+  try {
+    saveAsPdf(pdf, siren);
+  } catch (e) {
+    logErrorInSentry(
+      new FetchRessourceException({
+        ressource: 'PDFDownloadException',
+        message: 'Failed to save blob as PDF',
+        administration: EAdministration.INPI,
+        cause: e,
+      })
+    );
+
+    return <PDFFailed downloadLink={downloadLink} />;
+  }
+
+  return (
+    <>
+      <Tag color="success">succès</Tag>
+    </>
+  );
+}
+
+const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
   return (
     <>
       <Meta
@@ -52,93 +173,7 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
           </p>
           <TwoColumnTable
             body={[
-              [
-                'Statut du téléchargement',
-                <FrontStateMachine
-                  id="immatriculation-pdf-status-wrapper"
-                  states={[
-                    <i>
-                      le téléchargement va commencer... (si il ne démarre pas,{' '}
-                      <a
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        href={downloadLink}
-                      >
-                        cliquez ici
-                      </a>
-                      )
-                    </i>,
-                    <>
-                      <Tag>
-                        <Loader /> téléchargement en cours
-                      </Tag>
-                      <span style={{ color: '#777', fontWeight: 'bold' }}>
-                        (temps estimé entre 10 secondes et 1 minute)
-                      </span>
-                    </>,
-                    <>
-                      <Tag color="success">succès</Tag>
-                    </>,
-                    <>
-                      <Tag color="error">échec</Tag>
-                      <p>
-                        Le téléchargement direct a échoué et nous avons relancé
-                        un téléchargement dans un nouvel onglet.
-                      </p>
-                      Si besoin,{' '}
-                      <a
-                        id="download-pdf-link"
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        href={downloadLink}
-                      >
-                        cliquez ici pour re-lancer un téléchargement dans un
-                        nouvel onglet.
-                      </a>
-                    </>,
-                    <>
-                      <Tag color="error">introuvable</Tag>
-                      <p>
-                        Le document que vous recherchez n’a pas été retrouvé par
-                        le téléservice de l’
-                        <INPI />. Si la structure est bien une entreprise,{' '}
-                        <strong>cela ne devrait pas arriver</strong>. Vous
-                        pouvez :
-                      </p>
-                      <ol>
-                        <li>
-                          Soit essayer de télécharger le document{' '}
-                          <a
-                            target="_blank"
-                            rel="noreferrer noopener"
-                            href={downloadLink}
-                          >
-                            directement sur le site de l’INPI
-                          </a>
-                          .
-                        </li>
-                        <li>
-                          Soit{' '}
-                          <a href="https://www.inpi.fr/contactez-nous">
-                            écrire à l’INPI pour leur demander le document.
-                          </a>
-                        </li>
-                        <p>
-                          L’
-                          <INPI /> est à la fois l’opérateur du Registre
-                          National des Entreprises (RNE) et du téléservice qui
-                          produit les justificatifs, c’est{' '}
-                          <strong>
-                            la seule administration en mesure de résoudre le
-                            problème
-                          </strong>
-                          .
-                        </p>
-                      </ol>
-                    </>,
-                  ]}
-                />,
-              ],
+              ['Statut du téléchargement', <InpiPDFDownloader siren={siren} />],
             ]}
           />
         </Section>
@@ -149,7 +184,7 @@ const InpiPDF: NextPageWithLayout<{ siren: string }> = ({ siren }) => {
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug } = extractParamsFromContext(context);
+    const { slug } = extractParamsPageRouter(context);
     return {
       props: { siren: slug },
     };

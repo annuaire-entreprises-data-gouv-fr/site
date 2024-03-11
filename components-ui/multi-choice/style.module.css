@@ -1,0 +1,36 @@
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.radio-group>div>label,
+.radio-group>div>div,
+.radio-group>div>a {
+    display: block;
+    border-style: none;
+    border-radius: 6px;
+    background: #e5e5f4 !important;
+    padding: 4px 10px;
+    cursor: pointer;
+    color: var(--annuaire-colors-frBlue);
+    border: 2px solid transparent;
+
+}
+
+.radio-group>div>input {
+    opacity: 0;
+    height: 0;
+    width: 0;
+    position: absolute;
+}
+
+.radio-group input[type='radio']:hover+label,
+.radio-group>div>div:hover,
+.radio-group>div>a:hover {
+    border: 2px dashed var(--annuaire-colors-frBlue)
+}
+
+.radio-group input[type='radio']:checked+label {
+    border: 2px solid var(--annuaire-colors-frBlue)
+}

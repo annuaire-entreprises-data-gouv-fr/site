@@ -10,11 +10,11 @@ import { FICHE } from '#components/title-section/tabs';
 import { IUniteLegale, isAssociation } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { uniteLegalePageTitle } from '#utils/helpers';
-import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
+import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-helper/page/post-server-side-props';
 import { isAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
@@ -65,14 +65,13 @@ const FinancePage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug, isBot } = extractParamsFromContext(context);
+    const { slug, isBot } = extractParamsPageRouter(context);
 
     const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
 
     return {
       props: {
         uniteLegale,
-        metadata: { useReact: true },
       },
     };
   }

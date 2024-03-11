@@ -9,7 +9,7 @@ import {
   IMonitoringWithMetaData,
   getMonitorsByAdministration,
 } from '#models/monitoring';
-import { IPropsWithMetadata } from '#utils/server-side-props-helper/post-server-side-props';
+import { IPropsWithMetadata } from '#utils/server-side-helper/page/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {

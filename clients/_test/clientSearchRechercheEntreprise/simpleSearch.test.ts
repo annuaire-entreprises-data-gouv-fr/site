@@ -3,7 +3,7 @@ import SearchFilterParams from '#models/search-filter-params';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 import simplifyParams from './simplify-params';
 
-describe.only('clientSearchRechercheEntreprise : simple search with searchTerms', () => {
+describe('clientSearchRechercheEntreprise : simple search with searchTerms', () => {
   [
     // We use the commented lines to generate snapshots for
     // E2E testing.

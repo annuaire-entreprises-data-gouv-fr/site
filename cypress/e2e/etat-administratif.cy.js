@@ -6,7 +6,7 @@ describe('Etat administratif', () => {
   });
 
   it('Diffusible', () => {
-    cy.visit(`/entreprise/528163777`);
+    cy.visit(`/entreprise/356000000`);
     cy.contains('en activité').should('have.length', 1);
   });
 

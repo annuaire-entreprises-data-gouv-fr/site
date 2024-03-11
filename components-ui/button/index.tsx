@@ -1,3 +1,5 @@
+'use client';
+
 import React, { MouseEventHandler, PropsWithChildren } from 'react';
 import constants from '#models/constants';
 

@@ -1,13 +1,16 @@
 import FAQLink from '#components-ui/faq-link';
 import { ESSFrance } from '#components/administrations';
-import { DataSection } from '#components/section/data-section';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IESS } from '#models/certifications/ess';
 
 const ESSFAQLink = () => (
-  <FAQLink tooltipLabel="l’Economie Sociale et Solidaire">
+  <FAQLink
+    tooltipLabel="l’Economie Sociale et Solidaire"
+    to="/definitions/economie-sociale-et-solidaire-ess"
+  >
     L’Economie Sociale et Solidaire (ESS) regroupe&nbsp;:
     <br />
     <ul>
@@ -17,9 +20,6 @@ const ESSFAQLink = () => (
       <li>Les mutuelles </li>
       <li>Les « entreprises de l’ESS »</li>
     </ul>
-    <a href="/definitions/economie-sociale-et-solidaire-ess">
-      → En savoir plus
-    </a>
   </FAQLink>
 );
 
@@ -46,7 +46,7 @@ export const CertificationESSSection = ({
 }: {
   ess: IESS | IAPINotRespondingError;
 }) => (
-  <DataSection
+  <DataSectionServer
     title="ESS - Entreprise Sociale et Solidaire"
     id="ess"
     sources={[EAdministration.ESSFRANCE]}
@@ -76,5 +76,5 @@ export const CertificationESSSection = ({
         />
       </>
     )}
-  </DataSection>
+  </DataSectionServer>
 );

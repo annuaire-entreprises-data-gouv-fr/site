@@ -56,7 +56,7 @@ const mapToDomainObject = (res: APIInclusionResponse) => {
   const { slug, siret, kind, kind_parent } = res;
   return {
     marcheInclusionLink: routes.certifications.entrepriseInclusive.site + slug,
-    siret,
+    siret: siret || '',
     type: kind + ' ' + kind_parent,
   };
 };

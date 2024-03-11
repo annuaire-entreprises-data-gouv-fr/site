@@ -1,5 +1,4 @@
 import React from 'react';
-import constants from '#models/constants';
 import {
   IUniteLegale,
   isAssociation,
@@ -7,6 +6,7 @@ import {
 } from '#models/core/types';
 import { HorizontalSeparator } from 'components-ui/horizontal-separator';
 import { PrintNever } from 'components-ui/print-visibility';
+import styles from './styles.module.css';
 
 const ShortcutsSection: React.FC<{
   shortcuts: {
@@ -18,7 +18,10 @@ const ShortcutsSection: React.FC<{
   title: string;
   shortcutCount: number;
 }> = ({ shortcuts, title, shortcutCount }) => (
-  <div className="container">
+  <div
+    className={styles.container}
+    style={{ width: `calc(${Math.round(100 / shortcutCount)}% - 15px)` }}
+  >
     {title && (
       <div>
         <strong className="title">{title}</strong>
@@ -38,27 +41,6 @@ const ShortcutsSection: React.FC<{
           )}
         </div>
       ))}
-    <style jsx>{`
-      .container {
-        border: 2px solid ${constants.colors.pastelBlue};
-        padding: 15px;
-        flex-grow: 0;
-        flex-shrink: 0;
-        width: calc(${Math.round(100 / shortcutCount)}% - 15px);
-      }
-
-      .container > div {
-        margin-bottom: 10px;
-      }
-
-      @media only screen and (min-width: 1px) and (max-width: 1100px) {
-        .container {
-          max-width: 100%;
-          min-width: 250px;
-          flex-grow: 1;
-        }
-      }
-    `}</style>
   </div>
 );
 
@@ -148,7 +130,7 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
   return (
     <PrintNever>
       <div>
-        <div className="wrapper">
+        <div className={styles.wrapper}>
           {data
             .filter((d) => !d.hide)
             .map((sectionData) => (
@@ -162,19 +144,6 @@ const UsefulShortcuts: React.FC<{ uniteLegale: IUniteLegale }> = ({
         </div>
         <HorizontalSeparator />
       </div>
-      <style jsx>{`
-        .wrapper {
-          display: flex;
-          justify-content: space-between;
-          gap: 15px;
-        }
-
-        @media only screen and (min-width: 1px) and (max-width: 1100px) {
-          .wrapper {
-            flex-wrap: wrap;
-          }
-        }
-      `}</style>
     </PrintNever>
   );
 };

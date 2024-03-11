@@ -3,7 +3,7 @@ import { IEtablissement, IUniteLegale } from '../core/types';
 import { tvaNumber } from './utils';
 
 export type ITVAIntracommunautaire = {
-  number: string;
+  tvaNumber: string;
   mayHaveMultipleTVANumber: {
     allTime: boolean;
     currentlyActive: boolean;
@@ -24,7 +24,7 @@ export const getTvaUniteLegale = (
     return null;
   }
   return {
-    number: tvaNumber(uniteLegale.siren),
+    tvaNumber: tvaNumber(uniteLegale.siren),
     mayHaveMultipleTVANumber: {
       allTime: haveMultipleNafs(uniteLegale.etablissements.all),
       currentlyActive: haveMultipleNafs(uniteLegale.etablissements.open),

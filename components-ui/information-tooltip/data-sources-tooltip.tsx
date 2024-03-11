@@ -3,15 +3,28 @@ import { Icon } from '#components-ui/icon/wrapper';
 import { IAdministrationMetaData } from '#models/administrations/types';
 import constants from '#models/constants';
 import InformationTooltip from '.';
+import style from './style.module.css';
 
 const DataSourcesTooltip: React.FC<{
   dataSources: IAdministrationMetaData[];
-  lastUpdatedAt?: string | Date;
+  lastUpdatedAt?: string;
   link: string;
-}> = ({ dataSources, lastUpdatedAt, link }) => (
+  orientation?: 'center' | 'left' | 'right';
+}> = ({ dataSources, lastUpdatedAt, link, orientation }) => (
   <>
+    {lastUpdatedAt ? (
+      <>
+        <span className={style['updated-at']}>
+          Mise à jour le {lastUpdatedAt}
+        </span>
+        <br />
+      </>
+    ) : (
+      ''
+    )}
     <InformationTooltip
-      orientation="center"
+      tabIndex={undefined}
+      orientation={orientation || 'center'}
       label={
         <>
           {dataSources.map((dataSource) => (
@@ -19,40 +32,26 @@ const DataSourcesTooltip: React.FC<{
               <div>{dataSource.long}.</div>
             </React.Fragment>
           ))}
-          <br />
-          <a href={link}>→ En savoir plus</a>
         </>
       }
     >
-      <a href={link} className="data-source no-style-link">
-        <span className="layout-center">
+      <a
+        href={link}
+        className={`no-style-link ${style['data-source']}`}
+        style={{
+          color: constants.colors.frBlue,
+        }}
+      >
+        <span
+          className="layout-center"
+          style={{ display: 'inlineBloc', marginRight: '0.25rem' }}
+        >
           <Icon color={constants.colors.frBlue} size={12} slug="information" />
         </span>
         <span>
-          &nbsp;Source{dataSources.length > 1 ? 's' : ''}&nbsp;:&nbsp;
+          Source{dataSources.length > 1 ? 's' : ''}&nbsp;:&nbsp;
           {dataSources.map((dataSource) => dataSource.short).join(', ')}
-          {lastUpdatedAt ? (
-            <>
-              &nbsp;・&nbsp;mise&nbsp;à&nbsp;jour&nbsp;le&nbsp;{lastUpdatedAt}
-            </>
-          ) : (
-            ''
-          )}
         </span>
-        <style jsx>{`
-          .data-source {
-            display: inline-flex;
-            font-size: 0.7rem;
-            background-color: ${constants.colors.pastelBlue};
-            color: ${constants.colors.frBlue};
-            padding: 2px 10px;
-            border-radius: 40px;
-            cursor: help;
-          }
-          .data-source:hover {
-            background-color: #d3d3ec;
-          }
-        `}</style>
       </a>
     </InformationTooltip>
   </>
