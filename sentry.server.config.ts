@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs';
+import { Exception } from '#models/exceptions';
 import { isNextJSSentryActivated } from '#utils/sentry';
 import isUserAgentABot from '#utils/user-agent';
 if (isNextJSSentryActivated) {
@@ -27,6 +28,13 @@ if (isNextJSSentryActivated) {
       event.tags['is_bot'] = isUserAgentABot(
         event.request.headers['user-agent'] ?? ''
       );
+
+      if (hint.originalException instanceof Exception) {
+        event.fingerprint = [
+          hint.originalException.name,
+          hint.originalException.message,
+        ];
+      }
 
       return event;
     },
