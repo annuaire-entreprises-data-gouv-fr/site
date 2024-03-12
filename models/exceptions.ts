@@ -34,9 +34,6 @@ export class Exception extends Error {
   constructor({ name, message, cause, context }: IExceptionArgument) {
     if (message == undefined && cause && 'name' in cause) {
       message = cause.name;
-      if ('message' in cause) {
-        message += `: ${cause.message}`;
-      }
     }
     super(message, { cause });
     this.name = name;
