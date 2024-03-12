@@ -36,10 +36,12 @@ if (isNextJSSentryActivated) {
       }
       if (
         hint.originalException instanceof Error &&
-        hint.originalException.message.includes(
-          'Hydration failed because the initial UI does not match what was rendered on the server' ||
-            'There was an error while hydrating'
-        )
+        (hint.originalException.message.includes(
+          'Hydration failed because the initial UI does not match what was rendered on the server'
+        ) ||
+          hint.originalException.message.includes(
+            'Error: Server-side rendering was not set up'
+          ))
       ) {
         event.fingerprint = ['HydrationError'];
       }

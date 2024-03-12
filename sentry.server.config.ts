@@ -8,6 +8,13 @@ if (isNextJSSentryActivated) {
     tracesSampleRate: 0.005,
     maxBreadcrumbs: 0, // dont log breadcrumb
     beforeSend(event, hint) {
+      if (hint.originalException instanceof Exception) {
+        event.fingerprint = [
+          hint.originalException.name,
+          hint.originalException.message,
+        ];
+      }
+
       if (!event.request) {
         return event;
       }
@@ -28,13 +35,6 @@ if (isNextJSSentryActivated) {
       event.tags['is_bot'] = isUserAgentABot(
         event.request.headers['user-agent'] ?? ''
       );
-
-      if (hint.originalException instanceof Exception) {
-        event.fingerprint = [
-          hint.originalException.name,
-          hint.originalException.message,
-        ];
-      }
 
       return event;
     },
