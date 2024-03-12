@@ -1,8 +1,7 @@
 'use client';
 
 import React, { MouseEventHandler, PropsWithChildren } from 'react';
-import constants from '#models/constants';
-
+import styles from './style.module.css';
 type IProps = {
   role?: string;
   small?: boolean;
@@ -24,7 +23,11 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   nofollow = false,
   onClick = () => {},
 }) => (
-  <div className={`button-link ${alt ? 'alt' : ''} ${small ? 'small' : ''}`}>
+  <div
+    className={`${styles['button-link']} ${alt ? styles.alt : ''} ${
+      small ? styles.small : ''
+    }`}
+  >
     {!to ? (
       <button role={role} type="submit" onClick={onClick}>
         {children}
@@ -43,58 +46,6 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         {children}
       </a>
     )}
-
-    {/* styles are global as they are used in partials button-async */}
-    <style global jsx>{`
-      div.button-link {
-        display: block;
-      }
-      div.button-link > a,
-      div.button-link > button {
-        text-align: center;
-        outline: none;
-        transition: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 0;
-        background-color: ${constants.colors.frBlue};
-        color: #fff;
-        text-decoration: none;
-        font-size: 1rem;
-        line-height: 1.2rem;
-        min-height: 46px;
-        padding: 0 10px;
-        border: 2px solid transparent;
-        border-radius: 3px;
-      }
-      div.button-link.small > a,
-      div.button-link.small > button {
-        min-height: 36px;
-        font-size: 0.9rem;
-      }
-
-      div.button-link.alt > a,
-      div.button-link.alt > button {
-        border: 2px solid ${constants.colors.frBlue};
-        color: ${constants.colors.frBlue};
-        background-color: #fff;
-      }
-
-      div.button-link:hover > a,
-      div.button-link:hover > button {
-        color: #fff;
-        border-color: #0b01c3;
-        text-decoration: none;
-        background-color: #0b01c3;
-      }
-
-      div.button-link.alt:hover > a,
-      div.button-link.alt:hover > button {
-        color: #0b01c3;
-        background-color: ${constants.colors.pastelBlue};
-      }
-    `}</style>
   </div>
 );
 
