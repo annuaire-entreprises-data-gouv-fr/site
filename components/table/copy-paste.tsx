@@ -4,7 +4,7 @@ import { InternalError } from '#models/exceptions';
 import style from './copy-paste.module.css';
 
 type ICopyPasteProps = {
-  shouldTrim?: boolean;
+  shouldRemoveSpace?: boolean;
   id?: string;
   children: string;
   label: string;
@@ -12,7 +12,7 @@ type ICopyPasteProps = {
 
 export function CopyPaste({
   children,
-  shouldTrim = false,
+  shouldRemoveSpace = false,
   id = undefined,
   label,
 }: ICopyPasteProps) {
@@ -26,7 +26,7 @@ export function CopyPaste({
 
   const copyToClipboard = (e: any) => {
     const el = document.createElement('textarea');
-    el.value = shouldTrim ? children.trim() : children;
+    el.value = shouldRemoveSpace ? children.replace(/\s/g, '') : children;
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');

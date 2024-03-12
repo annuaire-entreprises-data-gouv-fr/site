@@ -76,11 +76,7 @@ const Title: React.FC<IProps> = ({
       <UniteLegaleDescription uniteLegale={uniteLegale} session={session} />
     )}
 
-    <Tabs
-      uniteLegale={uniteLegale}
-      currentFicheType={ficheType}
-      session={session}
-    />
+    <Tabs uniteLegale={uniteLegale} currentFicheType={ficheType} />
   </div>
 );
 

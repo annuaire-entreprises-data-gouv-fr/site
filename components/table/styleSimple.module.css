@@ -63,7 +63,10 @@ td.cell {
 
 @media only screen and (min-width: 1px) and (max-width: 576px) {
     td.cell {
+        display: block;
+        width: 100% !important;
         padding: 0;
         margin: 0;
+        margin-bottom: 0.5rem !important;
     }
 }

@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs';
+import { Exception } from '#models/exceptions';
 import { isNextJSSentryActivated } from '#utils/sentry';
 declare global {
   interface Window {
@@ -26,6 +27,21 @@ if (isNextJSSentryActivated) {
 
       if (window.IS_OUTDATED_BROWSER) {
         return null;
+      }
+      if (hint.originalException instanceof Exception) {
+        event.fingerprint = [
+          hint.originalException.name,
+          hint.originalException.message,
+        ];
+      }
+      if (
+        hint.originalException instanceof Error &&
+        hint.originalException.message.includes(
+          'Hydration failed because the initial UI does not match what was rendered on the server' ||
+            'There was an error while hydrating'
+        )
+      ) {
+        event.fingerprint = ['HydrationError'];
       }
       return event;
     },
