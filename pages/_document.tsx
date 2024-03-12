@@ -7,7 +7,7 @@ class CustomDocument extends Document {
     const session =
       this.props['__NEXT_DATA__']?.props?.pageProps?.metadata?.session;
     return (
-      <Html lang="fr">
+      <Html lang="fr" suppressHydrationWarning>
         <Head />
         <body>
           <Main />

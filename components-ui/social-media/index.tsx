@@ -57,6 +57,8 @@ const SocialMedia: React.FC<{
             href={`https://www.facebook.com/sharer/sharer.php?u=${path}`}
             rel="noreferrer noopener"
             target="_blank"
+            // Hydration warning when using some extension
+            suppressHydrationWarning
             className="no-style-link"
           >
             <Icon slug="facebook" />

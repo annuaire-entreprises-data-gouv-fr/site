@@ -17,7 +17,7 @@ export default async function HomeLayout({
 }) {
   const session = await getSession();
   return (
-    <html lang="fr" style={marianne.style}>
+    <html lang="fr" style={marianne.style} suppressHydrationWarning>
       {process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID && (
         <MatomoInit session={session} />
       )}
