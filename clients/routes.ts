@@ -1,5 +1,6 @@
 const routes = {
   api: {
+    association: '/api/data-fetching/association',
     rne: {
       immatriculation: '/api/data-fetching/rne',
       documents: {

@@ -1,6 +1,7 @@
 import { clientAssociation } from '#clients/api-proxy/association';
 import { clientBanGeoLoc } from '#clients/base-adresse';
 import { HttpNotFound } from '#clients/exceptions';
+import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { removeSpecialChars, Siren } from '#utils/helpers';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
 import { EAdministration } from '../administrations/EAdministration';
@@ -8,7 +9,7 @@ import {
   APINotRespondingFactory,
   IAPINotRespondingError,
 } from '../api-not-responding';
-import { isAssociation, IUniteLegale } from '../core/types';
+import { isAssociation } from '../core/types';
 import {
   Exception,
   FetchRessourceException,
@@ -16,11 +17,11 @@ import {
 } from '../exceptions';
 import { IDataAssociation } from './types';
 
-export const getAssociation = async (
-  uniteLegale: IUniteLegale,
-  options: { isBot: boolean }
+export const getAssociationFromSlug = async (
+  slug: string
 ): Promise<IDataAssociation | IAPINotRespondingError | null> => {
-  if (options.isBot || !isAssociation(uniteLegale)) {
+  const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot: false });
+  if (!isAssociation(uniteLegale)) {
     return null;
   }
   const rna = uniteLegale.association.idAssociation || '';

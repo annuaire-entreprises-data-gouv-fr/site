@@ -17,7 +17,6 @@ const getRNE = async (
     res.status(200).json(immatriculation);
   } catch (e: any) {
     let message: string;
-
     if (e instanceof NotASirenError || e instanceof NotLuhnValidSirenError) {
       message = e.message;
       res.status(400);
