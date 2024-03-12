@@ -13,7 +13,7 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={marianne.className}>
+    <html lang="fr" style={marianne.style}>
       <body>
         <BrowserIsOutdatedBanner />
         <div style={{ width: '100%' }}>{children}</div>
