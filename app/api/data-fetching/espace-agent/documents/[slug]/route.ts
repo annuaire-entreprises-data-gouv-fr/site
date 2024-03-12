@@ -5,14 +5,14 @@ import { FetchRessourceException } from '#models/exceptions';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { isAgent } from '#utils/session';
-import withSession from '#utils/session/with-session';
+import useSessionServer from 'hooks/use-session-server';
 
-export default withSession(async function actes(req, res) {
-  const {
-    query: { slug },
-    session,
-  } = req;
-
+export async function GET(
+  _request: Request,
+  { params }: { params: { slug: string } }
+) {
+  const session = await useSessionServer();
+  const slug = params.slug;
   try {
     if (!isAgent(session)) {
       throw new HttpForbiddenError('Unauthorized account');
@@ -24,7 +24,7 @@ export default withSession(async function actes(req, res) {
     actes.hasBilanConsolide =
       actes.bilans.filter((b) => b.typeBilan === 'K').length > 0;
 
-    res.status(200).json(actes);
+    return Response.json(actes, { status: 200 });
   } catch (e: any) {
     const message = 'Failed to fetch document list';
 
@@ -39,6 +39,6 @@ export default withSession(async function actes(req, res) {
         })
       );
     }
-    res.status(e.status || 500).json({ message });
+    return Response.json({ message }, { status: e.status || 500 });
   }
-});
+}

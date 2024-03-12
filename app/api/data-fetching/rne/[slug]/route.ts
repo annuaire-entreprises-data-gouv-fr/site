@@ -1,30 +1,29 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { NotASirenError, NotLuhnValidSirenError } from '#models/core/types';
 import { FetchRessourceException } from '#models/exceptions';
 import getImmatriculationRNE from '#models/immatriculation/rne';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
-import { withAPM } from '#utils/sentry/tracing';
-import withAntiBot from '#utils/session/with-anti-bot';
+import { withAntiScrapping } from '#utils/server-side-helper/app/with-anti-bot';
 
-const getRNE = async (
-  { query: { slug = '' } }: NextApiRequest,
-  res: NextApiResponse
-) => {
+export const GET = withAntiScrapping(async function (
+  _request: Request,
+  { params }: { params: { slug: string } }
+) {
+  const slug = params.slug;
   try {
     const siren = verifySiren(slug as string);
     const immatriculation = await getImmatriculationRNE(siren);
-    res.status(200).json(immatriculation);
+    return Response.json(immatriculation, { status: 200 });
   } catch (e: any) {
     let message: string;
+    let status = 200;
     if (e instanceof NotASirenError || e instanceof NotLuhnValidSirenError) {
       message = e.message;
-      res.status(400);
+      status = 400;
     } else {
       message = 'Failed to fetch RNE immatriculation';
-      res.status(500);
+      status = 500;
     }
-    res.json({ message });
     logErrorInSentry(
       new FetchRessourceException({
         cause: e,
@@ -35,7 +34,6 @@ const getRNE = async (
         },
       })
     );
+    return Response.json({ message }, { status });
   }
-};
-
-export default withAPM(withAntiBot(getRNE));
+});

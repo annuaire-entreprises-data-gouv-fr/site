@@ -4,14 +4,14 @@ import { FetchRessourceException } from '#models/exceptions';
 import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { isSuperAgent } from '#utils/session';
-import withSession from '#utils/session/with-session';
+import useSessionServer from 'hooks/use-session-server';
 
-export default withSession(async function conformite(req, res) {
-  const {
-    query: { slug },
-    session,
-  } = req;
-
+export async function GET(
+  _request: Request,
+  { params }: { params: { slug: string } }
+) {
+  const session = await useSessionServer();
+  const slug = params.slug;
   try {
     if (!isSuperAgent(session)) {
       throw new HttpForbiddenError('Unauthorized account');
@@ -27,7 +27,7 @@ export default withSession(async function conformite(req, res) {
       siret,
       agentSiret
     );
-    res.status(200).json(donneesRestreintes);
+    return Response.json(donneesRestreintes, { status: 200 });
   } catch (e: any) {
     const message = 'Failed to get donnees conformite';
     logFatalErrorInSentry(
@@ -38,6 +38,6 @@ export default withSession(async function conformite(req, res) {
         message,
       })
     );
-    res.status(e.status || 500).json({ message });
+    return Response.json({ message }, { status: e.status || 500 });
   }
-});
+}

@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { notFound } from 'next/navigation';
 import { clientCommuneByCp, clientCommunesByName } from '#clients/geo/communes';
 import {
   clientDepartementByCode,
@@ -8,12 +8,12 @@ import { clientEpcisByName, clientEpcisBySiren } from '#clients/geo/epcis';
 import { clientRegionsByName } from '#clients/geo/regions';
 import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
-import { withAPM } from '#utils/sentry/tracing';
 
-const geo = async (
-  { query: { slug = '' } }: NextApiRequest,
-  res: NextApiResponse
-) => {
+export async function GET(
+  _request: Request,
+  { params }: { params: { slug: string } }
+) {
+  const slug = params.slug;
   try {
     const term = slug as string;
     const isNumber = /^[0-9]+$/.test(term);
@@ -28,16 +28,16 @@ const geo = async (
           const testCommuneCode = `${term}${'0'.repeat(5 - term.length)}`;
           suggests = await clientCommuneByCp(testCommuneCode);
         }
-        res.status(200).json(suggests);
+        return Response.json(suggests, { status: 200 });
       }
 
       // code epci are siren
       if (term.length === 9) {
         const suggests = await clientEpcisBySiren(term);
-        res.status(200).json(suggests);
+        return Response.json(suggests, { status: 200 });
       }
 
-      res.status(404).end();
+      return notFound();
     } else {
       const [departements, communes, regions, epcis] = await Promise.all([
         clientDepartementsByName(term),
@@ -51,7 +51,7 @@ const geo = async (
         ...epcis.slice(0, 3),
         ...communes.slice(0, 20),
       ];
-      res.status(200).json(results);
+      return Response.json(results, { status: 200 });
     }
   } catch (e: any) {
     logErrorInSentry(
@@ -63,10 +63,9 @@ const geo = async (
         },
       })
     );
-    res
-      .status(e.status || 500)
-      .json({ message: 'failed to determine localisation' });
+    return Response.json(
+      { message: 'failed to determine localisation' },
+      { status: e.status || 500 }
+    );
   }
-};
-
-export default withAPM(geo);
+}
