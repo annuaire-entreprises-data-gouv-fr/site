@@ -6,7 +6,7 @@ import ErrorBoundary from '#components/error-boundary/index';
 import { LayoutDefault } from '#components/layouts/layout-default';
 import { ISession } from '#utils/session';
 import { SessionProvider } from 'hooks/use-session';
-
+import { marianne } from 'app/fonts';
 import '../style/dsfr.min.css';
 import '../style/globals.css';
 
@@ -30,6 +30,11 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const layout = getLayout(<Component {...pageProps} />);
   return (
     <ErrorBoundary>
+      <style jsx global>{`
+        html {
+          font-family: ${marianne.style.fontFamily};
+        }
+      `}</style>
       <SessionProvider value={session}>
         <BrowserIsOutdatedBanner />
         {layout}
