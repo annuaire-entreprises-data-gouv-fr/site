@@ -16,7 +16,6 @@ import { FICHE } from '#components/title-section/tabs';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
 import { isAPINotResponding } from '#models/api-not-responding';
-import { getAssociation } from '#models/association';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { isAssociation, isCollectiviteTerritoriale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
@@ -72,8 +71,7 @@ export default withErrorHandler(async function UniteLegalePage(
   const { slug, page, isBot, isRedirected } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
 
-  const [association, servicePublic] = await Promise.all([
-    getAssociation(uniteLegale, { isBot }),
+  const [servicePublic] = await Promise.all([
     getServicePublicByUniteLegale(uniteLegale, {
       isBot,
     }),
@@ -119,10 +117,7 @@ export default withErrorHandler(async function UniteLegalePage(
               </>
             )}
             {isAssociation(uniteLegale) && (
-              <AssociationSection
-                uniteLegale={uniteLegale}
-                association={association}
-              />
+              <AssociationSection uniteLegale={uniteLegale} />
             )}
             <UsefulShortcuts uniteLegale={uniteLegale} />
             {uniteLegale.siege && (

@@ -5,13 +5,13 @@ import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import { Tag } from '#components-ui/tag';
 import { Section } from '#components/section';
-import { DataSectionServer } from '#components/section/data-section/server';
+import { DataSectionClient } from '#components/section/data-section/client';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IDataAssociation } from '#models/association/types';
 import { IAssociation } from '#models/core/types';
 import { IdRna, formatDate, formatIntFr } from '#utils/helpers';
+import { useFetchAssociation } from 'hooks/fetch/association';
 import { AssociationNotFound } from './association-not-found';
 
 const getTableData = (
@@ -98,14 +98,10 @@ const getTableData = (
   ];
 };
 
-const AssociationSection = ({
-  uniteLegale,
-  association,
-}: {
-  uniteLegale: IAssociation;
-  association: IDataAssociation | IAPINotRespondingError | null;
-}) => {
+const AssociationSection = ({ uniteLegale }: { uniteLegale: IAssociation }) => {
   const { idAssociation = '' } = uniteLegale.association;
+
+  const association = useFetchAssociation(uniteLegale.siren);
 
   if (!association) {
     // Data can be null if the natureJuridique is an association,
@@ -122,7 +118,7 @@ const AssociationSection = ({
 
   return (
     <>
-      <DataSectionServer
+      <DataSectionClient
         title="Répertoire National des Associations"
         sources={[EAdministration.MI]}
         data={association}
@@ -157,7 +153,7 @@ const AssociationSection = ({
             )}
           </>
         )}
-      </DataSectionServer>
+      </DataSectionClient>
       <HorizontalSeparator />
       <BreakPageForPrint />
     </>
