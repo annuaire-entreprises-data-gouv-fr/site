@@ -21,7 +21,6 @@ export default withAPM(
         new FetchRessourceException({
           cause: e,
           ressource: 'Association',
-          message,
           context: {
             slug: slug as string,
           },
