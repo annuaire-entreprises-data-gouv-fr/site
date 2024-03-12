@@ -8,6 +8,7 @@ type IProps = {
   useAgentCTA?: boolean;
   useMap?: boolean;
   plugin?: JSX.Element;
+  currentSearchTerm?: string;
 };
 
 export const HeaderServer: React.FC<IProps> = async ({
@@ -16,6 +17,7 @@ export const HeaderServer: React.FC<IProps> = async ({
   useMap = false,
   useAgentCTA = false,
   plugin,
+  currentSearchTerm = '',
 }) => {
   const session = await useSessionServer();
   const pathFrom = usePathServer();
@@ -29,6 +31,7 @@ export const HeaderServer: React.FC<IProps> = async ({
       plugin={plugin}
       session={session}
       pathFrom={pathFrom}
+      currentSearchTerm={currentSearchTerm}
     />
   );
 };
