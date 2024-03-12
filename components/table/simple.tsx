@@ -19,7 +19,7 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
   return (
     <td className={styles.cell}>
       {isCopyEnabled ? (
-        <CopyPaste label={label} shouldTrim={shouldTrim(label)}>
+        <CopyPaste label={label} shouldRemoveSpace={shouldRemoveSpace(label)}>
           {children}
         </CopyPaste>
       ) : (
@@ -35,7 +35,7 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
  * Add a css class to customize copy to clipboard behaviour
  * @param label
  */
-const shouldTrim = (label: any) => {
+const shouldRemoveSpace = (label: any) => {
   try {
     // in case label is a JSX element we use the children as label
     // as this is likely to trigger an exception we use a try / catch
