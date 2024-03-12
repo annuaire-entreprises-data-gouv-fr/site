@@ -39,6 +39,7 @@ export const HeaderWithAdvancedSearch: React.FC<IProps> = ({
       useSearchBar={useSearchBar}
       useAgentCTA={useAgentCTA}
       plugin={advancedSearchPlugin}
+      currentSearchTerm={currentSearchTerm}
     />
   );
 };
