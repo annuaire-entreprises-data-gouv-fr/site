@@ -8,7 +8,6 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { ISession } from '#utils/session';
 import styles from './styles.module.css';
 
 export enum FICHE {
@@ -30,8 +29,7 @@ export enum FICHE {
 export const Tabs: React.FC<{
   currentFicheType: FICHE;
   uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ currentFicheType, uniteLegale, session }) => {
+}> = ({ currentFicheType, uniteLegale }) => {
   const shouldDisplayFinances =
     // hide for public services
     !isServicePublic(uniteLegale) &&
