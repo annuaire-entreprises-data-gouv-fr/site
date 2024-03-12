@@ -46,7 +46,10 @@ export const getCCMetadata = async (cc: IConventionsCollectives) => {
         logInfoInSentry(
           new Information({
             name: 'UnknownConventionCollective',
-            message: `Convention Collective inconnue : ${idcc}`,
+            message: `Convention Collective inconnue`,
+            context: {
+              details: idcc,
+            },
           })
         );
       }
