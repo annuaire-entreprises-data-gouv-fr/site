@@ -5,7 +5,7 @@ import { ConnectionFranceConnect } from '#components/hide-personal-data-request-
 import { RenseignerSiren } from '#components/hide-personal-data-request-siren';
 import { RequestState } from '#components/hide-personal-data-request-state';
 import { LayoutSimple } from '#components/layouts/layout-simple';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { IUniteLegale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { InternalError } from '#models/exceptions';

@@ -4,7 +4,7 @@ import ComptesBodacc from '#components/annonces-section/comptes/bodacc';
 import { ComptesAssociationSection } from '#components/annonces-section/comptes/dca';
 import DocumentBilansSection from '#components/espace-agent-components/documents/document-bilans';
 import { FinancesSocieteSection } from '#components/finances-section/societe';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IUniteLegale, isAssociation } from '#models/core/types';

@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { Info } from '#components-ui/alerts';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import MapEtablissement from '#components/map/map-etablissement';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { MapTitleEtablissement } from '#components/title-section/etablissement/map-title';
 import { getEtablissementWithLatLongFromSlug } from '#models/core/etablissement';
 import {

@@ -1,5 +1,5 @@
 import { Icon } from '#components-ui/icon/wrapper';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import TextWrapper from 'components-ui/text-wrapper';
 import { NextPageWithLayout } from 'pages/_app';
 

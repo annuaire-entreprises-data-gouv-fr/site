@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { Info } from '#components-ui/alerts';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';

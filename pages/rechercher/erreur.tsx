@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import { SearchErrorExplanations } from '#components/error-explanations';
 import { LayoutSearch } from '#components/layouts/layout-search';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import StructuredDataSearchAction from '#components/structured-data/search';
 import { IPropsWithMetadata } from '#utils/server-side-helper/page/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';

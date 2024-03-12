@@ -3,7 +3,7 @@ import ButtonAgentConnect from '#components-ui/button-agent-connect';
 import connexionPicture from '#components-ui/illustrations/connexion';
 import { Tag } from '#components-ui/tag';
 import { LayoutConnexion } from '#components/layouts/layout-connexion';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 
 const Login = () => {
   return (

@@ -1,6 +1,5 @@
-import { GetServerSideProps } from 'next';
 import ElusSection from '#components/dirigeants-section/elus-section';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { getNomComplet } from '#models/core/statut-diffusion';
@@ -11,6 +10,7 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-helper/page/post-server-side-props';
+import { GetServerSideProps } from 'next';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {

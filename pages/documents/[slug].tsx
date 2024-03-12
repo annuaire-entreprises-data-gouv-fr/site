@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
 import DocumentActesSection from '#components/espace-agent-components/documents/document-actes';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IUniteLegale } from '#models/core/types';

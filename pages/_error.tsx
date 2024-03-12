@@ -1,5 +1,5 @@
 import { ServerErrorExplanations } from '#components/error-explanations';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { Exception } from '#models/exceptions';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { NextPageWithLayout } from './_app';

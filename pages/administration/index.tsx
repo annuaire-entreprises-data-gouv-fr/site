@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next';
 import React from 'react';
 import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { administrationsMetaData } from '#models/administrations';
 import { IAdministrationMetaData } from '#models/administrations/types';
 import { NextPageWithLayout } from 'pages/_app';

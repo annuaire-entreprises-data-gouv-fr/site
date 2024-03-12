@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { HttpNotFound } from '#clients/exceptions';
 import TextWrapper from '#components-ui/text-wrapper';
 import AdministrationDescription from '#components/administrations/administration-description';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { administrationsMetaData } from '#models/administrations';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { getFaqArticlesByTag, IFaqArticle } from '#models/article/faq';

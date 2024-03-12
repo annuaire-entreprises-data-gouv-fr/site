@@ -1,6 +1,6 @@
 import { Info } from '#components-ui/alerts';
 import TextWrapper from '#components-ui/text-wrapper';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { FullTable } from '#components/table/full';
 import { NextPageWithLayout } from '../_app';
 

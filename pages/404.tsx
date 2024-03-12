@@ -1,7 +1,6 @@
-import React from 'react';
 import { ErrorNotFoundExplanations } from '#components/error-explanations';
 import MatomoEvent from '#components/matomo-event';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { NextPageWithLayout } from './_app';
 
 const NotFound: NextPageWithLayout = () => {

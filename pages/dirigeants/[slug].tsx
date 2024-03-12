@@ -5,7 +5,7 @@ import ResponsableSection from '#components/dirigeants-section/responsables-serv
 import DirigeantsSection from '#components/dirigeants-section/rne-dirigeants';
 import DirigeantSummary from '#components/dirigeants-section/summary';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IAPINotRespondingError } from '#models/api-not-responding';

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
-import { meta } from '#components/meta';
+import { meta } from '#components/meta/meta-server';
 import '../style/dsfr.min.css';
 import '../style/globals.css';
 import { marianne } from './fonts';

@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next';
 import React from 'react';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import ApiMonitoring from '#components/api-monitoring';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { administrationsMetaData } from '#models/administrations';
 import { IAdministrationsMetaData } from '#models/administrations/types';
 import {

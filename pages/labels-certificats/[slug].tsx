@@ -12,7 +12,7 @@ import { CertificationESSSection } from '#components/labels-and-certificates/ess
 import { OrganismeDeFormationSection } from '#components/labels-and-certificates/organismes-de-formation';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
 import { CertificationSocieteMission } from '#components/labels-and-certificates/societe-mission';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import {

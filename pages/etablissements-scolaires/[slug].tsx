@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { EtablissementsScolairesSection } from '#components/education-nationale';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IAPINotRespondingError } from '#models/api-not-responding';

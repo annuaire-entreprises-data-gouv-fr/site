@@ -1,7 +1,7 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import logoutPicture from '#components-ui/illustrations/logout';
 import { LayoutConnexion } from '#components/layouts/layout-connexion';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { NextPageWithLayout } from 'pages/_app';
 
 const Logout: NextPageWithLayout = () => (

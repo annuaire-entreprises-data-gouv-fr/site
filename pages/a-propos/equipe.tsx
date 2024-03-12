@@ -1,5 +1,5 @@
 import TextWrapper from '#components-ui/text-wrapper';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { NextPageWithLayout } from '../_app';
 
 const team = [

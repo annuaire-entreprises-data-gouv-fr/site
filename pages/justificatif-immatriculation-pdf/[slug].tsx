@@ -4,7 +4,7 @@ import { Info } from '#components-ui/alerts';
 import { Loader } from '#components-ui/loader';
 import { Tag } from '#components-ui/tag';
 import { INPI } from '#components/administrations';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';

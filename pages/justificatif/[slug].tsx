@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import Immatriculations from '#components/immatriculations';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import getJustificatifs, { IJustificatifs } from '#models/justificatifs';

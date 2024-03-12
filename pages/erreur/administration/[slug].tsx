@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { HttpNotFound } from '#clients/exceptions';
 import AdministrationNotResponding from '#components/administration-not-responding';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { administrationsMetaData } from '#models/administrations';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { NextPageWithLayout } from 'pages/_app';
