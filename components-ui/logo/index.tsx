@@ -4,6 +4,7 @@ type IProps = {
   height: number;
   slug: string;
   className?: string;
+  lazy?: boolean;
 };
 
 /**
@@ -19,6 +20,7 @@ const Logo: React.FC<IProps> = ({
   height,
   slug = 'marianne',
   className = '',
+  lazy = false,
 }) => (
   <div
     className="logo-wrapper"
@@ -45,6 +47,7 @@ const Logo: React.FC<IProps> = ({
         maxWidth: '100%',
         maxHeight: '100%',
       }}
+      loading={lazy ? 'lazy' : 'eager'}
     />
   </div>
 );
