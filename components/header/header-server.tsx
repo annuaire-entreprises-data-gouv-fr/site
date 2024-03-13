@@ -1,5 +1,5 @@
-import getSession from '#utils/server-side-helper/app/get-session';
 import usePathServer from 'hooks/use-path-server';
+import useSessionServer from 'hooks/use-session-server';
 import { HeaderCore } from './header-core';
 
 type IProps = {
@@ -19,7 +19,7 @@ export const HeaderServer: React.FC<IProps> = async ({
   plugin,
   currentSearchTerm = '',
 }) => {
-  const session = await getSession();
+  const session = await useSessionServer();
   const pathFrom = usePathServer();
 
   return (
