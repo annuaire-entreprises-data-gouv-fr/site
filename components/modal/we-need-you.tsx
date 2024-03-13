@@ -34,7 +34,7 @@ export const WeNeedYouModal: React.FC<{}> = () => (
           className="close-modal"
           dangerouslySetInnerHTML={{
             __html: `
-            <button onclick="window.closeModal('we-need-you-modal')" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
+            <button onclick="window.closeModal('we-need-you-modal')" style="box-shadow:none;padding: 0;outline: none;border: none;background-color: transparent;">
             <strong>fermer ✕</strong>
             </button>
             `,

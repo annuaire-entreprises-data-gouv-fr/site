@@ -17,11 +17,6 @@ export const marianne = localFont({
       weight: '900',
       style: 'normal',
     },
-    {
-      path: '../style/fonts/Marianne-Bold_Italic.woff2',
-      weight: '700',
-      style: 'italic',
-    },
   ],
   display: 'swap',
   variable: '--font-marianne',

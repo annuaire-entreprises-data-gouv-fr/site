@@ -1,36 +1,77 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
+import { Exception } from '#models/exceptions';
+import { logInfoInSentry } from '#utils/sentry';
+import { useStorage } from 'hooks';
 import styles from './styles.module.css';
 
+const NPS_MODAL_ID = 'nps-modal-2';
+
 export const NPSBanner: React.FC<{}> = () => {
-  return (
+  const [isVisible, setIsVisible] = useState(false);
+
+  const [hasAlreadyBeenTriggered, setHasAlreadyBeenTriggered] = useStorage(
+    'local',
+    NPS_MODAL_ID,
+    false
+  );
+
+  const [pageViewCount, setPageViewCount] = useStorage(
+    'session',
+    'pv-' + NPS_MODAL_ID,
+    '0'
+  );
+
+  const pathCounter = () => {
+    try {
+      if (hasAlreadyBeenTriggered) {
+        return 0;
+      }
+      const newViewCount = parseInt(pageViewCount, 10) + 1;
+      setPageViewCount(newViewCount.toString());
+      return newViewCount;
+    } catch (e) {
+      logInfoInSentry(
+        new Exception({
+          name: 'SaveFavouriteException',
+          cause: e,
+        })
+      );
+      return 0;
+    }
+  };
+
+  useEffect(() => {
+    const t = pathCounter();
+    if (t > 2) {
+      setIsVisible(true);
+    }
+  }, []);
+
+  const close = () => {
+    setHasAlreadyBeenTriggered(true);
+    setIsVisible(false);
+  };
+
+  return isVisible ? (
     <PrintNever>
       <div
-        id="nps-modal-2"
+        id={NPS_MODAL_ID}
         role="dialog"
         aria-label="Donnez-nous votre avis"
         className={styles.npsModal}
       >
-        <div>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: `
-              <a onclick="window.closeModal('nps-modal-2')" href="/formulaire/nps" target="_blank">
-                👍👎 Quel est votre avis sur ce site ?
-              </a>`,
-            }}
-          />
-          <div
-            dangerouslySetInnerHTML={{
-              __html: `
-              <button onclick="window.closeModal('nps-modal-2')" style="box-shadow:none;font-family: 'Marianne', sans-serif;padding: 0;outline: none;border: none;background-color: transparent;">
-                <strong>Ne plus afficher ce message ✕</strong>
-              </button>
-        `,
-            }}
-          ></div>
+        <div className="fr-container">
+          <a onClick={close} href="/formulaire/nps" target="_blank">
+            👍👎 Quel est votre avis sur ce site ?
+          </a>
+          <button onClick={close}>
+            <strong>Ne plus afficher ce message ✕</strong>
+          </button>
         </div>
       </div>
     </PrintNever>
-  );
+  ) : null;
 };

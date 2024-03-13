@@ -37,7 +37,6 @@ export const InfoBanner: React.FC<{}> = () => (
         font-size: 0.9rem;
         width: 100%;
         background-color: #e5f3ff;
-        font-family: 'Marianne', sans-serif;
         border-bottom: 2px solid ${constants.colors.frBlue};
       }
     `}</style>

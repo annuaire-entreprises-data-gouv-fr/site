@@ -4,7 +4,7 @@ import { Loader } from '#components-ui/loader';
 import constants from '#models/constants';
 import { debounce } from '#utils/helpers/debounce';
 import { httpGet } from '#utils/network';
-import { useLocalStorage } from 'hooks';
+import { useStorage } from 'hooks';
 
 type IGeoSuggest = {
   label: string;
@@ -32,7 +32,8 @@ export const FilterGeo: React.FC<{
   const [isLoading, setLoading] = useState(false);
   const [geoSuggests, setGeoSuggests] = useState<IGeoSuggest[]>([]);
 
-  const [suggestsHistory, setSuggestsHistory] = useLocalStorage(
+  const [suggestsHistory, setSuggestsHistory] = useStorage(
+    'local',
     'geo-search-history-4',
     []
   );
