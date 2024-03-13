@@ -19,7 +19,7 @@ export function withIgnoreBot<T>(
     params: T,
     session: ISession | null
   ) => Promise<Response>,
-  callback?: (params: T) => unknown
+  fallback: unknown = {}
 ) {
   return async function (request: Request, params: T) {
     const { isBot } = userAgent(request);
@@ -34,7 +34,6 @@ export function withIgnoreBot<T>(
         })
       );
 
-      const fallback = callback ? callback(params) : {};
       return Response.json(fallback || {}, { status: 200 });
     } else {
       return await apiRoute(request, params, session);

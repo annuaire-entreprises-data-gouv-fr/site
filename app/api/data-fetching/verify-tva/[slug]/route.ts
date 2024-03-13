@@ -1,17 +1,8 @@
-import { tvaNumber } from '#models/tva/utils';
+import { EAdministration } from '#models/administrations/EAdministration';
+import { APINotRespondingFactory } from '#models/api-not-responding';
 import { FetchVerifyTVAException, buildAndVerifyTVA } from '#models/tva/verify';
-import { Siren } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
 import { withIgnoreBot } from '#utils/server-side-helper/app/with-anti-bot';
-
-/**
- * Simplmified response for bots, doesnot really check TVA
- * @param param0
- * @returns
- */
-const fallbackForBot = ({ params }: { params: { slug: string } }) => {
-  return { tva: tvaNumber(params.slug as Siren) };
-};
 
 export const GET = withIgnoreBot(async function (
   _request: Request,
@@ -34,4 +25,4 @@ export const GET = withIgnoreBot(async function (
     );
   }
 },
-fallbackForBot);
+APINotRespondingFactory(EAdministration.VIES, 418));
