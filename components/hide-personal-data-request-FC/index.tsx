@@ -1,20 +1,16 @@
 import ButtonLink from '#components-ui/button';
 import ButtonFranceConnect from '#components-ui/button-france-connect';
-import { ISession, getHidePersonalDataRequestFCSession } from '#utils/session';
+import { getHidePersonalDataRequestFCSession } from '#utils/session';
+import useSession from 'hooks/use-session';
 
-export async function ConnectionFranceConnect({
-  session,
-}: {
-  session: ISession;
-}) {
+export function ConnectionFranceConnect() {
+  const session = useSession();
   const missingDataInFranceConnect =
     session &&
     session.hidePersonalDataRequestFC &&
     !getHidePersonalDataRequestFCSession(session);
-
   const franceConnectInfo =
     session && getHidePersonalDataRequestFCSession(session);
-
   return (
     <>
       {missingDataInFranceConnect ? (

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
 import { MatomoInit } from '#components/matomo-event/init';
 import { meta } from '#components/meta/meta-server';
-import getSession from '#utils/server-side-helper/app/get-session';
+import useSessionServer from 'hooks/use-session-server';
 import '../style/dsfr.min.css';
 import '../style/globals.css';
 import { PrefetchImgs } from './component/prefetch-dsfr-imgs';
@@ -15,7 +15,7 @@ export default async function HomeLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getSession();
+  const session = await useSessionServer();
   return (
     <html lang="fr" style={marianne.style}>
       {process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID && (
