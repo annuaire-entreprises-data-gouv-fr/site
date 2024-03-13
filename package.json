@@ -37,7 +37,6 @@
     "autoprefixer": "^10.4.17",
     "axios": "^1.6.5",
     "axios-cache-interceptor": "^1.5.1",
-    "body-parser": "^1.20.2",
     "canvas": "^2.11.2",
     "chart.js": "^4.4.1",
     "crawler-user-agents": "^1.0.117",
