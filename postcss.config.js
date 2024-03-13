@@ -1,16 +1,16 @@
 module.exports = {
   plugins: [
-    [
-      'cssnano',
-      {
-        preset: [
-          'default',
-          {
-            discardComments: { removeAll: true },
-          },
-        ],
-      },
-    ],
+    // [
+    //   'cssnano',
+    //   {
+    //     preset: [
+    //       'default',
+    //       {
+    //         discardComments: { removeAll: true },
+    //       },
+    //     ],
+    //   },
+    // ],
     'postcss-flexbugs-fixes',
     ['postcss-preset-env', {}],
     [
