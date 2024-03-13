@@ -1,8 +1,8 @@
-import useSessionServer from 'hooks/use-session-server';
 import { userAgent } from 'next/server';
 import { Information } from '#models/exceptions';
 import { logInfoInSentry } from '#utils/sentry';
 import { ISession } from '../../session';
+import getSession from './get-session';
 
 /**
  * IgnoreBot
@@ -23,7 +23,7 @@ export function withIgnoreBot<T>(
 ) {
   return withAntiScrapping(async function (request: Request, params: T) {
     const { isBot } = userAgent(request);
-    const session = await useSessionServer();
+    const session = await getSession();
 
     if (isBot) {
       logInfoInSentry(
@@ -53,7 +53,7 @@ export function withIgnoreBot<T>(
  */
 export function withAntiScrapping<T>(apiRoute: any) {
   return async function (request: Request, params: T) {
-    const session = await useSessionServer();
+    const session = await getSession();
 
     if (!userVisitedAPageRecently(session)) {
       logInfoInSentry(

@@ -1,17 +1,17 @@
-import useSessionServer from 'hooks/use-session-server';
 import { clientDocuments } from '#clients/api-proxy/rne/documents';
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
+import getSession from '#utils/server-side-helper/app/get-session';
 import { isAgent } from '#utils/session';
 
 export async function GET(
   _request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const session = await useSessionServer();
+  const session = await getSession();
   const slug = params.slug;
   try {
     if (!isAgent(session)) {
