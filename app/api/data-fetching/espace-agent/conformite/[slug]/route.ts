@@ -1,10 +1,10 @@
+import useSessionServer from 'hooks/use-session-server';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { getDonneesRestreintesEntreprise } from '#models/espace-agent/donnees-restreintes-entreprise';
 import { FetchRessourceException } from '#models/exceptions';
 import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { isSuperAgent } from '#utils/session';
-import useSessionServer from 'hooks/use-session-server';
 
 export async function GET(
   _request: Request,

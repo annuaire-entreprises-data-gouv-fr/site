@@ -1,7 +1,7 @@
+import useSessionServer from 'hooks/use-session-server';
 import { userAgent } from 'next/server';
 import { Information } from '#models/exceptions';
 import { logInfoInSentry } from '#utils/sentry';
-import useSessionServer from 'hooks/use-session-server';
 import { ISession } from '../../session';
 
 /**

@@ -1,3 +1,4 @@
+import useSessionServer from 'hooks/use-session-server';
 import { clientDocuments } from '#clients/api-proxy/rne/documents';
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -5,7 +6,6 @@ import { FetchRessourceException } from '#models/exceptions';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { isAgent } from '#utils/session';
-import useSessionServer from 'hooks/use-session-server';
 
 export async function GET(
   _request: Request,
