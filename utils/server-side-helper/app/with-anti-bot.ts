@@ -21,7 +21,7 @@ export function withIgnoreBot<T>(
   ) => Promise<Response>,
   fallback: unknown = {}
 ) {
-  return async function (request: Request, params: T) {
+  return withAntiScrapping(async function (request: Request, params: T) {
     const { isBot } = userAgent(request);
     const session = await getSession();
 
@@ -38,7 +38,7 @@ export function withIgnoreBot<T>(
     } else {
       return await apiRoute(request, params, session);
     }
-  };
+  });
 }
 
 /**

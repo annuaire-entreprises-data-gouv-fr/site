@@ -25,9 +25,8 @@ describe('Data fetching routes', () => {
     cy.request({
       url: '/api/data-fetching/verify-tva/552032534',
       failOnStatusCode: false,
-      headers: { 'User-Agent': 'googlebot' },
     }).then((resp) => {
-      expect(resp.body.errorType).to.eq(418);
+      expect(resp.status).to.eq(401);
     });
 
     cy.request({
