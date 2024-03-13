@@ -12,6 +12,7 @@ html {
   --text-spacing: 1.2rem 0;
   margin: 0;
   padding: 0;
+  font-family: var(--font-marianne), arial, sans-serif;
 }
 
 a.no-style-link {
@@ -178,6 +179,7 @@ h4:not(.fr-alert__title) {
 
 /* There is no alternative than copying color constant, in order to have them in hover state */
 :root {
+  --annuaire-colors-yellow: #fef6e3;
   --annuaire-colors-frBlue: #000091;
   --annuaire-colors-pastelBlue: #dfdff1;
   --annuaire-colors-espaceAgent: #cc007a;

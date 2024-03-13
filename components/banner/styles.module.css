@@ -1,11 +1,10 @@
 .npsModal {
-  display: none;
+  display: block;
   padding-top: 15px;
   padding-bottom: 15px;
   font-size: 0.9rem;
   width: 100%;
-  background-color: #fffde6;
-  font-family: 'Marianne' sans-serif;
+  background-color: var(--annuaire-colors-yellow);
   border-bottom: 2px solid var(--annuaire-colors-frBlue);
 }
 
@@ -13,4 +12,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.npsModal > div > button {
+  box-shadow: none;
+  padding: 0;
+  outline: none;
+  border: none;
+  background-color: transparent;
 }

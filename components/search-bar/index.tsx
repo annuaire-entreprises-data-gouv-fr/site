@@ -18,7 +18,6 @@ const SearchBar = ({
       autoFocus={autoFocus}
       style={{
         width: '100%',
-        fontFamily: "'Marianne', sans-serif",
       }}
     />
     <button
