@@ -1,15 +1,12 @@
 import { Error, Info, Success } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
-import { IUniteLegale } from '#models/core/types';
 import { throwUnreachableCaseError } from '#models/exceptions';
 import { IHidePersonalDataRequest } from '#models/hide-personal-data-request';
 
-export function RequestState({
-  hidePersonalDataRequest,
-}: {
+type IProps = {
   hidePersonalDataRequest?: IHidePersonalDataRequest;
-  uniteLegale: IUniteLegale;
-}) {
+};
+export function RequestState({ hidePersonalDataRequest }: IProps) {
   return (
     <>
       {!hidePersonalDataRequest ? (
@@ -72,7 +69,7 @@ export function RequestState({
       <p role="list" className="fr-mt-3w layout-left">
         <ButtonLink
           role="listitem"
-          to="/faq/supprimer-donnees-personnelles-entreprise"
+          to="/formulaire/supprimer-donnees-personnelles-entreprise"
         >
           Faire une autre demande
         </ButtonLink>

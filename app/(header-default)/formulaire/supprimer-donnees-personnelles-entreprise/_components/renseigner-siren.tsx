@@ -1,15 +1,20 @@
-import { useState } from 'react';
-import { isSiren } from '#utils/helpers';
-import { getHidePersonalDataRequestFCSession } from '#utils/session';
-import useSession from 'hooks/use-session';
+'use client';
 
-export function RenseignerSiren() {
+import { useState } from 'react';
+import { useFormStatus } from 'react-dom';
+import { Loader } from '#components-ui/loader';
+import { isSiren } from '#utils/helpers';
+
+type IProps = {
+  formAction: (formData: FormData) => void;
+};
+
+export function RenseignerSiren({ formAction }: IProps) {
   const [siren, setSiren] = useState<string>('');
   let validSiren = isSiren(siren);
-  const session = useSession();
-  const isConnected = session && !!getHidePersonalDataRequestFCSession(session);
+
   return (
-    <form method="POST">
+    <form action={formAction}>
       <fieldset
         className="fr-fieldset fr-grid-row"
         aria-label="SIREN de l'entreprise"
@@ -50,16 +55,23 @@ export function RenseignerSiren() {
           → Rechercher le SIREN de mon entreprise
         </a>
       </p>
-      <p role="list" className="fr-mt-6w">
-        <button
-          role="listitem"
-          className="fr-btn fr-btn--primary fr-mr-2w"
-          type="submit"
-          disabled={!validSiren || !isConnected}
-        >
-          Valider et envoyer la demande
-        </button>
-      </p>
+      <SubmitButton disabled={!validSiren} />
     </form>
+  );
+}
+
+export function SubmitButton({ disabled }: { disabled: boolean }) {
+  const { pending } = useFormStatus();
+
+  return (
+    <p className="fr-mt-6w">
+      <button
+        className="fr-btn fr-btn--primary fr-mr-2w"
+        type="submit"
+        disabled={disabled || pending}
+      >
+        Valider et envoyer la demande {pending && <Loader />}
+      </button>
+    </p>
   );
 }
