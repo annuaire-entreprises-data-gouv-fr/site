@@ -221,7 +221,7 @@ const Partager: NextPageWithLayout = () => {
           <p>
             Toutes les données utilisées sur l’Annuaire des Entreprises sont
             librement accessibles par API. Consultez la page{' '}
-            <a href="/administration">statut des API</a> pour en savoir plus.
+            <a href="/donnees/api">statut des API</a> pour en savoir plus.
           </p>
         </div>
       </TextWrapper>
