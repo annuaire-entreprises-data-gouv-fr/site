@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/nextjs';
-import { Exception } from '#models/exceptions';
 import { isNextJSSentryActivated } from '#utils/sentry';
 import isUserAgentABot from '#utils/user-agent';
 if (isNextJSSentryActivated) {
@@ -8,11 +7,22 @@ if (isNextJSSentryActivated) {
     tracesSampleRate: 0.005,
     maxBreadcrumbs: 0, // dont log breadcrumb
     beforeSend(event, hint) {
-      if (hint.originalException instanceof Exception) {
-        event.fingerprint = [
-          hint.originalException.name,
-          hint.originalException.message,
-        ];
+      // Grouping logic for custom exceptions
+      const originalException = hint.originalException;
+      if (
+        // The exception is an instance of our custom Exception class
+        // (instanceof does not work in this case)
+        typeof originalException === 'object' &&
+        originalException &&
+        'context' in originalException &&
+        'name' in originalException
+      ) {
+        const name = originalException.name as string;
+        const message =
+          'message' in originalException
+            ? (originalException.message as string)
+            : '';
+        event.fingerprint = [name, message];
       }
 
       if (!event.request) {

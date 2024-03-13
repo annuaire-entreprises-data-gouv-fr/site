@@ -8,6 +8,7 @@ type IProps = {
   useAgentCTA?: boolean;
   useMap?: boolean;
   plugin?: JSX.Element;
+  currentSearchTerm?: string;
 };
 export const Header: React.FC<IProps> = ({
   useLogo = false,
@@ -15,6 +16,7 @@ export const Header: React.FC<IProps> = ({
   useMap = false,
   useAgentCTA = false,
   plugin,
+  currentSearchTerm = '',
 }) => {
   const session = useSession();
   const pathFrom = usePathname();
@@ -28,6 +30,7 @@ export const Header: React.FC<IProps> = ({
       plugin={plugin}
       session={session}
       pathFrom={pathFrom || ''}
+      currentSearchTerm={currentSearchTerm}
     />
   );
 };

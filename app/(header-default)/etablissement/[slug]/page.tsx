@@ -15,10 +15,10 @@ import {
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
+import getSession from '#utils/server-side-helper/app/get-session';
 import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
-import useSessionServer from 'hooks/use-session-server';
 
 const cachedEtablissementWithUniteLegale = cache(
   async (slug: string, isBot: boolean) => {
@@ -56,7 +56,7 @@ export default withErrorHandler(async function EtablissementPage(
   props: AppRouterProps
 ) {
   // post server side props ? et session ?
-  const session = await useSessionServer();
+  const session = await getSession();
 
   const { slug, isBot, isRedirected } = extractParamsAppRouter(props);
 

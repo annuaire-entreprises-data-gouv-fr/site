@@ -3,14 +3,14 @@ import { getDonneesRestreintesEntreprise } from '#models/espace-agent/donnees-re
 import { FetchRessourceException } from '#models/exceptions';
 import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { logFatalErrorInSentry } from '#utils/sentry';
+import getSession from '#utils/server-side-helper/app/get-session';
 import { isSuperAgent } from '#utils/session';
-import useSessionServer from 'hooks/use-session-server';
 
 export async function GET(
   _request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const session = await useSessionServer();
+  const session = await getSession();
   const slug = params.slug;
   try {
     if (!isSuperAgent(session)) {
