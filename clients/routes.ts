@@ -5,7 +5,7 @@ const routes = {
       immatriculation: '/api/data-fetching/rne',
       documents: {
         list: '/api/data-fetching/espace-agent/documents/',
-        download: '/api/data-fetching/espace-agent/documents/download/',
+        download: '/api/download/espace-agent/documents/',
       },
     },
     conformite: '/api/data-fetching/espace-agent/conformite',
