@@ -261,6 +261,7 @@ const Footer = () => (
                             width={80}
                             height={50}
                             className="fr-footer__logo"
+                            lazy
                           />
                         ) : (
                           <Logo
@@ -269,6 +270,7 @@ const Footer = () => (
                             width={150}
                             height={50}
                             className="fr-footer__logo"
+                            lazy
                           />
                         )}
                       </a>
@@ -290,6 +292,7 @@ const Footer = () => (
                       width={80}
                       height={50}
                       className="fr-footer__logo"
+                      lazy
                     />
                   </a>
                 </li>
