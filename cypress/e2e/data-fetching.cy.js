@@ -8,7 +8,7 @@ describe('Data fetching routes', () => {
     });
 
     cy.request({
-      url: '/api/data-fetching/espace-agent/documents/download/552032534',
+      url: '/api/download/espace-agent/documents/552032534',
       failOnStatusCode: false,
     }).then((resp) => {
       expect(resp.status).to.eq(403);
