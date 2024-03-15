@@ -8,7 +8,8 @@ import { ConventionCollectivesBadgesSection } from '#components/badges-section/c
 import { labelsAndCertificatesSources } from '#components/badges-section/labels-and-certificates';
 import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { Section } from '#components/section';
-import { CopyPaste, TwoColumnTable } from '#components/table/simple';
+import { CopyPaste } from '#components/table/copy-paste';
+import { TwoColumnTable } from '#components/table/simple';
 import TVACell from '#components/tva-cell';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { estActif } from '#models/core/etat-administratif';
@@ -96,7 +97,7 @@ const EtablissementSection: React.FC<IProps> = ({
       </FAQLink>,
       etablissement.adresse ? (
         <>
-          <CopyPaste>
+          <CopyPaste label="Adresse">
             {getAdresseEtablissement(etablissement, session)}
           </CopyPaste>
           <PrintNever key="adresse-link">
@@ -114,12 +115,13 @@ const EtablissementSection: React.FC<IProps> = ({
     ...(!usedInEntreprisePage
       ? [
           [
-            <FAQLink tooltipLabel="N° TVA Intracommunautaire">
-              <a href="/faq/tva-intracommunautaire">
-                Comprendre le numéro de TVA intracommunautaire
-              </a>
+            <FAQLink
+              tooltipLabel="N° TVA Intracommunautaire"
+              to="/faq/tva-intracommunautaire"
+            >
+              Comprendre le numéro de TVA intracommunautaire
             </FAQLink>,
-            <TVACell tva={uniteLegale.tva} />,
+            <TVACell uniteLegale={uniteLegale} />,
           ],
         ]
       : []),
@@ -206,18 +208,6 @@ const EtablissementSection: React.FC<IProps> = ({
       </Section>
       <HorizontalSeparator />
       <BreakPageForPrint />
-      <style jsx>{`
-        .section-wrapper {
-          display: flex;
-          flex-direction: row;
-        }
-
-        @media only screen and (min-width: 1px) and (max-width: 576px) {
-          .section-wrapper {
-            flex-direction: column;
-          }
-        }
-      `}</style>
     </>
   );
 };

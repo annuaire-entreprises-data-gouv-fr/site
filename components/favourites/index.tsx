@@ -1,11 +1,12 @@
+'use client';
 import { useEffect, useState } from 'react';
 import { Tag } from '#components-ui/tag';
 import { formatIntFr } from '#utils/helpers';
-import { useLocalStorage } from 'hooks';
+import { useStorage } from 'hooks';
 
 export default function Favourites() {
   const [shortCuts, setShortCuts] = useState([]);
-  const [recentVisits] = useLocalStorage('favourites-siren', []);
+  const [recentVisits] = useStorage('local', 'favourites-siren', []);
 
   useEffect(() => {
     setShortCuts(recentVisits);
@@ -30,6 +31,7 @@ export default function Favourites() {
                   'aria-label': `Consulter la page de ${fullName}`,
                 }}
                 maxWidth="300px"
+                key={siren}
               >
                 {fullName}
               </Tag>

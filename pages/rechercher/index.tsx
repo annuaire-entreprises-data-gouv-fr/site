@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import { LayoutSearch } from '#components/layouts/layout-search';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import SearchResults from '#components/search-results';
 import { AdvancedSearchTutorial } from '#components/search-results/advanced-search-tutorial';
 import StructuredDataSearchAction from '#components/structured-data/search';
@@ -15,7 +15,7 @@ import { parseIntWithDefaultValue } from '#utils/helpers';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-helper/page/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -72,9 +72,6 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
         results,
         searchTerm,
         searchFilterParams: searchFilterParams.toJSON(),
-        metadata: {
-          useReact: true,
-        },
       },
     };
   }

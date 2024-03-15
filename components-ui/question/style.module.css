@@ -1,0 +1,42 @@
+.questionBottomRight {
+  position: fixed;
+  right: 60px;
+  bottom: 60px;
+  z-index: 100;
+}
+
+.questionBottomRight > a {
+  background-color: var(--annuaire-colors-frBlue) !important;
+  color: #fff;
+  border-radius: 30px;
+  padding: 15px 20px;
+  font-size: 1.1rem;
+  display: flex;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3) !important;
+  transition: margin 100ms ease-in-out, box-shadow 100ms ease-in-out;
+  margin-bottom: 0;
+}
+.questionBottomRight:hover > a {
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
+  margin-bottom: 5px;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 576px) {
+  .questionBottomRight {
+    bottom: 50px;
+    right: 10px;
+  }
+  .questionBottomRight > a {
+    padding: 15px;
+    border-radius: 50px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .questionBottomRight > a > span:first-of-type {
+    display: none;
+  }
+}

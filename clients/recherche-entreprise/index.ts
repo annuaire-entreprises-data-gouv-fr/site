@@ -189,7 +189,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
 
   // case no open etablisssment
   let etatAdministratif = etatFromEtatAdministratifInsee(
-    etat_administratif || 'I',
+    etat_administratif,
     siren
   );
   if (estActif({ etatAdministratif }) && nombre_etablissements_ouverts === 0) {
@@ -371,7 +371,7 @@ const mapToEtablissement = (
     : '';
 
   const etatAdministratif = etatFromEtatAdministratifInsee(
-    etat_administratif || 'I',
+    etat_administratif,
     siret
   );
 

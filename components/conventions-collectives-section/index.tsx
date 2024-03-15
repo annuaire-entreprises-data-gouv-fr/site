@@ -1,22 +1,72 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import routes from '#clients/routes';
+import { Info } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import { MTPEI } from '#components/administrations';
 import NonRenseigne from '#components/non-renseigne';
-import { DataSection } from '#components/section/data-section';
+import { DataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import { ICCWithMetadata } from '#models/conventions-collectives-list';
+import {
+  ICCExplanation,
+  ICCWithMetadata,
+} from '#models/conventions-collectives-list';
 import { capitalize, formatSiret } from '#utils/helpers';
+
+function ConventionsCollectivesExplanations({
+  ccWithMetadata,
+}: {
+  ccWithMetadata: ICCWithMetadata[];
+}) {
+  const ccWithexplanations = ccWithMetadata
+    .map(({ explanation }) => explanation)
+    .filter((e): e is ICCExplanation => !!e);
+
+  if (ccWithexplanations.length == 0) {
+    return null;
+  }
+
+  const plural = ccWithexplanations.length > 1 ? 's' : '';
+
+  return (
+    <Info>
+      {ccWithexplanations.length} convention{plural} collective{plural} n
+      {ccWithexplanations.length > 1 ? 'e sont' : '’est'} plus en vigueur :
+      <ul>
+        {ccWithexplanations.map(({ idcc, splitted, redirect }) => (
+          <Fragment key={idcc}>
+            {redirect && (
+              <li>
+                <Tag>IDCC {idcc}</Tag> a été remplacée par{' '}
+                <Tag>IDCC {redirect}</Tag>
+              </li>
+            )}
+            {splitted && (
+              <li>
+                <Tag>IDCC {idcc}</Tag> a été découpée entre{' '}
+                {splitted.map((cc, index) => (
+                  <Fragment key={index}>
+                    {index !== 0 && 'et '}
+                    <Tag>IDCC {cc}</Tag>
+                  </Fragment>
+                ))}
+              </li>
+            )}
+          </Fragment>
+        ))}
+      </ul>
+    </Info>
+  );
+}
 
 const ConventionsCollectivesSection: React.FC<{
   ccWithMetadata: ICCWithMetadata[] | IAPINotRespondingError;
 }> = ({ ccWithMetadata }) => {
   return (
-    <DataSection
+    <DataSectionClient
       title="Conventions collectives"
       sources={[EAdministration.MTPEI]}
       notFoundInfo={
@@ -57,6 +107,9 @@ const ConventionsCollectivesSection: React.FC<{
                 le site du Code du Travail Numérique.
               </a>
             </p>
+            <ConventionsCollectivesExplanations
+              ccWithMetadata={ccWithMetadata}
+            />
             {ccWithMetadata && ccWithMetadata.length > 0 && (
               <FullTable
                 head={['N°IDCC', 'Détails', 'Etablissement(s)', 'Explications']}
@@ -88,7 +141,7 @@ const ConventionsCollectivesSection: React.FC<{
                     </ul>,
                     <>
                       {idcc === '9999' ? (
-                        <NonRenseigne />
+                        <i>Sans convention collective</i>
                       ) : (
                         <ButtonLink
                           target="_blank"
@@ -110,7 +163,7 @@ const ConventionsCollectivesSection: React.FC<{
           </>
         );
       }}
-    </DataSection>
+    </DataSectionClient>
   );
 };
 export default ConventionsCollectivesSection;

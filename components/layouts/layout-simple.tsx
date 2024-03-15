@@ -1,10 +1,10 @@
 import React, { PropsWithChildren } from 'react';
 import Footer from '#components/footer';
-import { Header } from '#components/header';
+import { HeaderWithAdvancedSearch } from '#components/header/header-advanced-search';
 
 export const LayoutSimple: React.FC<PropsWithChildren<{}>> = ({ children }) => (
   <div id="page-layout">
-    <Header
+    <HeaderWithAdvancedSearch
       useSearchBar={false}
       useLogo={true}
       useAdvancedSearch={false}

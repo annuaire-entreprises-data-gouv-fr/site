@@ -1,6 +1,6 @@
 import TextWrapper from '#components-ui/text-wrapper';
 import { INPI, INSEE } from '#components/administrations';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { NextPageWithLayout } from '../_app';
 
 const ExtraitKbis: NextPageWithLayout = () => {

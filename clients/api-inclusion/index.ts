@@ -1,8 +1,6 @@
 import { HttpNotFound } from '#clients/exceptions';
-import { clientInclusionKindMetadata } from '#clients/metadata-store/inclusion-kind';
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
-import { IEntrepriseInclusive } from '#models/certifications/entreprise-inclusive';
 import { Siren } from '#utils/helpers';
 import { httpGet } from '#utils/network';
 
@@ -43,9 +41,7 @@ type APIInclusionResponse = {
  *
  * https://lemarche.inclusion.beta.gouv.fr/api/docs/
  */
-const clientMarcheInclusion = async (
-  siren: Siren
-): Promise<IEntrepriseInclusive[]> => {
+const clientMarcheInclusion = async (siren: Siren) => {
   const url = routes.certifications.entrepriseInclusive.api.siren + siren;
   const response = await httpGet<APIInclusionResponse[]>(url, {
     params: { token: process.env.API_MARCHE_INCLUSION_TOKEN },
@@ -59,12 +55,10 @@ const clientMarcheInclusion = async (
 
 const mapToDomainObject = async (res: APIInclusionResponse) => {
   const { slug, siret, kind } = res;
-  const kindLabel = await clientInclusionKindMetadata(kind);
   return {
     marcheInclusionLink: routes.certifications.entrepriseInclusive.site + slug,
-    siret,
-    category: kindLabel?.parent || '',
-    type: kindLabel?.name || kind,
+    siret: siret || '',
+    kind,
   };
 };
 

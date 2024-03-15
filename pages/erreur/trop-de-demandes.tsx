@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import ButtonLink from '#components-ui/button';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import constants from '#models/constants';
 import { NextPageWithLayout } from 'pages/_app';
 

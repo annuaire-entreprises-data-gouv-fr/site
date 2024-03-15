@@ -5,7 +5,7 @@ import FAQLink from '#components-ui/faq-link';
 import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
 import NonRenseigne from '#components/non-renseigne';
-import { DataSection } from '#components/section/data-section';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -21,7 +21,7 @@ export const CertificationsBioSection: React.FC<{
   bio: IEtablissementsBio | IAPINotRespondingError;
 }> = ({ bio }) => {
   return (
-    <DataSection
+    <DataSectionServer
       title="Professionnel du Bio"
       data={bio}
       id="professionnel-du-bio"
@@ -128,7 +128,7 @@ export const CertificationsBioSection: React.FC<{
           </>
         );
       }}
-    </DataSection>
+    </DataSectionServer>
   );
 };
 
@@ -159,11 +159,9 @@ const getCertificationDate = (certificat: IBioCertification) => {
 };
 
 const FAQBio = ({ label = 'certification Bio' }) => (
-  <FAQLink tooltipLabel={label}>
+  <FAQLink tooltipLabel={label} to="/faq/professionnels-bio">
     Le label “Professionnel du bio” concerne les entreprises dont tout ou partie
     de leur activité est certifiée Bio par des organismes certificateurs,
     encadrés par l’Agence Bio.
-    <br />
-    <a href="/faq/professionnels-bio">→ En savoir plus</a>
   </FAQLink>
 );

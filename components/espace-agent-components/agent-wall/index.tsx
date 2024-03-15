@@ -1,5 +1,5 @@
 import ButtonAgentConnect from '#components-ui/button-agent-connect';
-import { ProtectedSection } from '#components/section/protected-section';
+import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 
@@ -10,7 +10,7 @@ const AgentWall: React.FC<{
   modalFooter?: JSX.Element;
 }> = ({ id, title, sectionIntro = null, modalFooter = null }) => {
   return (
-    <ProtectedSection title={title} id={id} sources={[EAdministration.INPI]}>
+    <Section title={title} id={id} sources={[EAdministration.INPI]} isProtected>
       {sectionIntro}
       <div className="cta-wrapper">
         <div className="cta-actes">
@@ -122,7 +122,7 @@ const AgentWall: React.FC<{
           }
         }
       `}</style>
-    </ProtectedSection>
+    </Section>
   );
 };
 

@@ -28,7 +28,7 @@ const button = (
       html {
         font-size:18px;
         line-height:25px;
-        font-family: 'Marianne', sans-serif;
+        font-family: 'Marianne', arial, sans-serif;
       }
       body {
         margin:0;

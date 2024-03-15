@@ -5,7 +5,7 @@ import InformationTooltip from '#components-ui/information-tooltip';
 import { Tag } from '#components-ui/tag';
 import { MC } from '#components/administrations';
 import NonRenseigne from '#components/non-renseigne';
-import { DataSection } from '#components/section/data-section';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -18,7 +18,7 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
     | IAPINotRespondingError;
 }> = ({ entrepreneurSpectacles }) => {
   return (
-    <DataSection
+    <DataSectionServer
       title="Entrepreneur de spectacles vivants"
       id="entrepreneur-spectacles"
       sources={[EAdministration.MC]}
@@ -104,18 +104,18 @@ export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
           </>
         );
       }}
-    </DataSection>
+    </DataSectionServer>
   );
 };
 
 const FAQ = () => (
-  <FAQLink tooltipLabel="d’entrepreneur de spectacles vivants">
+  <FAQLink
+    to="/faq/entrepreneur-spectacles-vivants"
+    tooltipLabel="d’entrepreneur de spectacles vivants"
+  >
     Un entrepreneur de spectacles vivants désigne toute personne qui exerce une
     activité d’exploitation de lieux de spectacles, de production ou de
     diffusion de spectacles.
-    <br />
-    <br />
-    <a href="/faq/entrepreneur-spectacles-vivants">→ En savoir plus</a>
   </FAQLink>
 );
 
@@ -148,27 +148,39 @@ const Validity = ({ statut = '', dateDeValidite = '' }) => {
   switch (statut) {
     case 'valide':
       return (
-        <InformationTooltip label="La déclaration vaut récépissé. L'exercice de la profession est licite.">
+        <InformationTooltip
+          tabIndex={0}
+          label="La déclaration vaut récépissé. L'exercice de la profession est licite."
+        >
           <Tag color="success">valide</Tag>
           {dateDeValidite ? ` depuis le ${dateDeValidite}` : ''}
         </InformationTooltip>
       );
     case 'en instruction':
       return (
-        <InformationTooltip label="Instruction du dossier en cours. L'exercice de la profession au titre de cette déclaration est interdit.">
+        <InformationTooltip
+          tabIndex={0}
+          label="Instruction du dossier en cours. L'exercice de la profession au titre de cette déclaration est interdit."
+        >
           <Tag color="info">En instruction</Tag>
         </InformationTooltip>
       );
     case 'invalidé':
       return (
-        <InformationTooltip label="Le récépissé a été retirée après une période de validité.">
+        <InformationTooltip
+          tabIndex={0}
+          label="Le récépissé a été retirée après une période de validité."
+        >
           <Tag color="error">Invalidé</Tag>
           {dateDeValidite ? ` depuis le ${dateDeValidite}` : ''}
         </InformationTooltip>
       );
     case 'invalide':
       return (
-        <InformationTooltip label="La déclaration a été refusée. L'exercice de la profession au titre de cette déclaration est interdit.">
+        <InformationTooltip
+          tabIndex={0}
+          label="La déclaration a été refusée. L'exercice de la profession au titre de cette déclaration est interdit."
+        >
           <Tag color="error">Invalide</Tag>
         </InformationTooltip>
       );

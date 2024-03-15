@@ -13,7 +13,7 @@ export function LabelWithLinkToSection({
   siren: string;
 }) {
   return (
-    <InformationTooltip label={informationTooltipLabel} cursor="pointer">
+    <InformationTooltip label={informationTooltipLabel} tabIndex={undefined}>
       <LabelAndCertificateBadge
         label={label}
         link={{

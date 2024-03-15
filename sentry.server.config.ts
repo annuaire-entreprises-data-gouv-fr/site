@@ -7,6 +7,24 @@ if (isNextJSSentryActivated) {
     tracesSampleRate: 0.005,
     maxBreadcrumbs: 0, // dont log breadcrumb
     beforeSend(event, hint) {
+      // Grouping logic for custom exceptions
+      const originalException = hint.originalException;
+      if (
+        // The exception is an instance of our custom Exception class
+        // (instanceof does not work in this case)
+        typeof originalException === 'object' &&
+        originalException &&
+        'context' in originalException &&
+        'name' in originalException
+      ) {
+        const name = originalException.name as string;
+        const message =
+          'message' in originalException
+            ? (originalException.message as string)
+            : '';
+        event.fingerprint = [name, message];
+      }
+
       if (!event.request) {
         return event;
       }

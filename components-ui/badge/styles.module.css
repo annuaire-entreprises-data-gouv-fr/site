@@ -1,0 +1,50 @@
+.badgeWrapper {
+  display: inline-flex;
+  align-items: stretch;
+  justify-content: center;
+  margin: 2px 0;
+  margin-right: 0.25rem;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  padding: 0;
+  line-height: inherit;
+}
+
+.badgeWrapper:hover {
+  border: 2px dashed transparent;
+}
+
+.badgeWrapperOnClick:hover {
+  border: 2px dashed var(--annuaire-colors-frBlue) !important;
+}
+
+.badgeWrapper .badgeLabel {
+  color: var(--text-default-grey);
+}
+a.badgeWrapper {
+  background: none;
+}
+a.badgeWrapper .badgeLabel {
+  text-decoration: underline;
+}
+a.badgeWrapper:hover {
+  filter: brightness(0.95);
+}
+a.badgeWrapper:active {
+  filter: brightness(0.9);
+}
+
+.badgeIcon {
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badgeLabel {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  background-color: #eee;
+  font-weight: bold;
+}

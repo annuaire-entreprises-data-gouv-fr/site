@@ -2,19 +2,19 @@ import { GetServerSideProps } from 'next';
 import { Info } from '#components-ui/alerts';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import MapEtablissement from '#components/map/map-etablissement';
-import Meta from '#components/meta';
-import { MapTitleEtablissement } from '#components/title-section/etablissement';
+import Meta from '#components/meta/meta-client';
+import { MapTitleEtablissement } from '#components/title-section/etablissement/map-title';
 import { getEtablissementWithLatLongFromSlug } from '#models/core/etablissement';
 import {
   estDiffusible,
   getAdresseEtablissement,
 } from '#models/core/statut-diffusion';
 import { IEtablissement } from '#models/core/types';
-import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
+import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-helper/page/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -89,7 +89,7 @@ const EtablissementMapPage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug } = extractParamsFromContext(context);
+    const { slug } = extractParamsPageRouter(context);
 
     const etablissement = await getEtablissementWithLatLongFromSlug(slug);
 

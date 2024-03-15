@@ -1,13 +1,15 @@
 const routes = {
   api: {
+    association: '/api/data-fetching/association',
     rne: {
       immatriculation: '/api/data-fetching/rne',
       documents: {
-        list: `/api/data-fetching/espace-agent/documents/`,
-        download: `/api/data-fetching/espace-agent/documents/download/`,
+        list: '/api/data-fetching/espace-agent/documents/',
+        download: '/api/download/espace-agent/documents/',
       },
     },
-    conformite: `/api/data-fetching/espace-agent/conformite`,
+    conformite: '/api/data-fetching/espace-agent/conformite',
+    tva: '/api/data-fetching/verify-tva/',
   },
   apiEntreprise: {
     association: '/v4/djepva/api-association/associations/',

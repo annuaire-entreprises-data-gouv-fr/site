@@ -1,6 +1,6 @@
 import Logo from '#components-ui/logo';
 import { administrationsMetaData } from '#models/administrations';
-
+import styles from './style.module.css';
 const AdministrationDescription: React.FC<{
   slug: string; // EAdministration
   titleLevel?: 'h2' | 'h3';
@@ -19,7 +19,7 @@ const AdministrationDescription: React.FC<{
   } = administrationsMetaData[slug];
 
   return (
-    <div className="administration-wrapper" id={slug}>
+    <div className={styles['administration-wrapper']} id={slug}>
       <div>
         <Logo
           title={long}
@@ -30,8 +30,8 @@ const AdministrationDescription: React.FC<{
       </div>
       <div>
         {titleLevel === 'h2' ? <h2>{long}</h2> : <h3>{long}</h3>}
-        <p>
-          {description}
+        <section>
+          <p>{description}</p>
           {dataSources.length > 0 && (
             <div>
               Données transmises :
@@ -54,34 +54,8 @@ const AdministrationDescription: React.FC<{
               </a>
             </p>
           )}
-        </p>
+        </section>
       </div>
-      <style jsx>{`
-        .administration-wrapper {
-          display: flex;
-          align-items: center;
-        }
-
-        .administration-wrapper > div:first-of-type {
-          flex-shrink: 0;
-          flex-grow: 0;
-          display: flex;
-          justify-content: left;
-          align-items: center;
-          width: 120px;
-        }
-
-        @media only screen and (min-width: 1px) and (max-width: 576px) {
-          .administration-wrapper {
-            flex-direction: column;
-            margin-top: 30px;
-          }
-          .administration-wrapper > div:first-of-type {
-            width: 70px;
-            margin-bottom: 15px;
-          }
-        }
-      `}</style>
     </div>
   );
 };

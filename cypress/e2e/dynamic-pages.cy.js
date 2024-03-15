@@ -1,7 +1,7 @@
 describe(`Dirigeants and élus pages`, () => {
   it('Dirigeant page loads', () => {
-    cy.visit(`/dirigeants/528163777`);
-    cy.contains('GSE VD').should('be.visible');
+    cy.visit(`/dirigeants/356000000`);
+    cy.contains("L'ETAT").should('be.visible');
   });
 
   it('Elus page loads', () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { MarcheInclusion } from '#components/administrations';
-import { DataSection } from '#components/section/data-section';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { ICertifications } from '#models/certifications';
@@ -12,7 +12,7 @@ export const EntrepriseInclusiveSection: React.FC<{
   entrepriseInclusive: ICertifications['entrepriseInclusive'];
 }> = ({ entrepriseInclusive }) => {
   return (
-    <DataSection
+    <DataSectionServer
       id="entreprise-inclusive"
       title="Entreprise Sociale Inclusive"
       sources={[EAdministration.MARCHE_INCLUSION]}
@@ -56,6 +56,6 @@ export const EntrepriseInclusiveSection: React.FC<{
           />
         </>
       )}
-    </DataSection>
+    </DataSectionServer>
   );
 };

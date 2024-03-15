@@ -1,0 +1,13 @@
+.form-feedback-nps fieldset {
+  border: none;
+  margin: 40px 0;
+  padding: 0;
+}
+.form-feedback-nps {
+  counter-reset: question;
+}
+.form-feedback-nps > fieldset > legend h2::before {
+  counter-increment: question;
+  content: counter(question) ' ・ ';
+  font-weight: bold;
+}

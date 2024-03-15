@@ -22,17 +22,7 @@ export const etatFromEtatAdministratifInsee = (
       return IETATADMINSTRATIF.CESSEE;
     case 'F':
       return IETATADMINSTRATIF.FERME;
-    case 'I':
-      // cette valeur est utilisée dans le cas d'entreprise inscrite au RNE mais absente de la base SIRENE
-      return IETATADMINSTRATIF.INCONNU;
     default:
-      logErrorInSentry(
-        new APISireneUnknownParameterException(
-          'Unknown Etat Administratif',
-          sirenOrSiret,
-          etatAdministratifInsee
-        )
-      );
       return IETATADMINSTRATIF.INCONNU;
   }
 };

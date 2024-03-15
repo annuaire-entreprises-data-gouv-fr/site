@@ -1,16 +1,16 @@
 import { GetServerSideProps } from 'next';
 import ElusSection from '#components/dirigeants-section/elus-section';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { getNomComplet } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
-import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
+import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-helper/page/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -44,7 +44,7 @@ const ElusPage: NextPageWithLayout<IProps> = ({
 
 export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
-    const { slug, isBot } = extractParamsFromContext(context);
+    const { slug, isBot } = extractParamsPageRouter(context);
     const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
 
     return {

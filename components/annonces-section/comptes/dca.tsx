@@ -2,7 +2,7 @@ import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
 import { DILA } from '#components/administrations';
-import { DataSection } from '#components/section/data-section';
+import { DataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -15,7 +15,7 @@ export const ComptesAssociationSection: React.FC<{
 }> = ({ uniteLegale }) => {
   const comptes = useFetchComptesAssociation(uniteLegale);
   return (
-    <DataSection
+    <DataSectionClient
       data={comptes}
       title="Dépôts des Comptes des Associations"
       sources={[EAdministration.DILA]}
@@ -70,6 +70,6 @@ export const ComptesAssociationSection: React.FC<{
           </>
         )
       }
-    </DataSection>
+    </DataSectionClient>
   );
 };

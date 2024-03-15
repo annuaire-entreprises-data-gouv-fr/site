@@ -1,14 +1,10 @@
-import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
 import { SearchErrorExplanations } from '#components/error-explanations';
 import { LayoutSearch } from '#components/layouts/layout-search';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import StructuredDataSearchAction from '#components/structured-data/search';
-import {
-  IPropsWithMetadata,
-  postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+import { IPropsWithMetadata } from '#utils/server-side-helper/page/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
 const SearchResultPage: NextPageWithLayout<IPropsWithMetadata> = ({}) => {
@@ -26,18 +22,6 @@ const SearchResultPage: NextPageWithLayout<IPropsWithMetadata> = ({}) => {
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = postServerSideProps(
-  async () => {
-    return {
-      props: {
-        metadata: {
-          useReact: true,
-        },
-      },
-    };
-  }
-);
 
 SearchResultPage.getLayout = function getLayout(page: ReactElement) {
   return <LayoutSearch>{page}</LayoutSearch>;

@@ -27,7 +27,7 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST_STAGING_V2 }}
 
       - name: Deploy website to staging
-        run: ssh -i ./deploy.key www-data@$SSH_HOST 'python3 /opt/scripts/app-deploy-release/deploy.py /opt/git/releases/annuaire-entreprises-site https://github.com/etalab/annuaire-entreprises-site.git website --version main --versions_to_keep=5 | tee --append /var/log/deploy_annuaire-entreprises-site'
+        run: ssh -i ./deploy.key www-data@$SSH_HOST 'python3 /opt/scripts/app-deploy-release/deploy.py /opt/git/releases/annuaire-entreprises-site https://github.com/etalab/annuaire-entreprises-site.git website --version main --versions_to_keep=5 1> >(tee --append /var/log/deploy_annuaire-entreprises-site)'
         env:
           SSH_HOST: ${{ secrets.SSH_HOST_STAGING_V2 }}
 

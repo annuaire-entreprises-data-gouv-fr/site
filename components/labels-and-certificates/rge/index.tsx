@@ -3,7 +3,7 @@ import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
-import { DataSection } from '#components/section/data-section';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { TwoColumnTable } from '#components/table/simple';
 import { EAdministration } from '#models/administrations/EAdministration';
@@ -30,7 +30,7 @@ export const CertificationsRGESection: React.FC<{
   session: ISession | null;
 }> = ({ uniteLegale, certificationsRGE, session }) => {
   return (
-    <DataSection
+    <DataSectionServer
       id="rge"
       title="RGE - Reconnu Garant de l'Environnement"
       sources={[EAdministration.ADEME]}
@@ -84,12 +84,13 @@ export const CertificationsRGESection: React.FC<{
         return (
           <>
             Cette structure est une entreprise{' '}
-            <FAQLink tooltipLabel="certifiée RGE - Reconnu Garant de l’Environnement">
+            <FAQLink
+              tooltipLabel="certifiée RGE - Reconnu Garant de l’Environnement"
+              to="/faq/reconnu-garant-environnement"
+            >
               La certification RGE est accordée par les pouvoirs publics aux
               professionnels du bâtiment spécialisés dans les travaux
               de rénovation énergétique.
-              <br />
-              <a href="/faq/reconnu-garant-environnement">→ En savoir plus</a>
             </FAQLink>
             .
             {linkFranceRenov && (
@@ -151,6 +152,6 @@ export const CertificationsRGESection: React.FC<{
           </>
         );
       }}
-    </DataSection>
+    </DataSectionServer>
   );
 };

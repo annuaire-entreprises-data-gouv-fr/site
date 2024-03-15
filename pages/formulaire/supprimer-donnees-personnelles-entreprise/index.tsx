@@ -5,7 +5,7 @@ import { ConnectionFranceConnect } from '#components/hide-personal-data-request-
 import { RenseignerSiren } from '#components/hide-personal-data-request-siren';
 import { RequestState } from '#components/hide-personal-data-request-state';
 import { LayoutSimple } from '#components/layouts/layout-simple';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { IUniteLegale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { InternalError } from '#models/exceptions';
@@ -14,11 +14,11 @@ import {
   fillHidePersonalDataRequest,
 } from '#models/hide-personal-data-request';
 import { isEntrepreneurIndividuelFromNatureJuridique } from '#utils/helpers';
-import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
+import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
 import {
   IGetServerSidePropsContextWithSession,
   postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-helper/page/post-server-side-props';
 import { getHidePersonalDataRequestFCSession } from '#utils/session';
 import useSession from 'hooks/use-session';
 
@@ -81,7 +81,7 @@ async function postHidePersonalDataRequest(
   context: IGetServerSidePropsContextWithSession
 ) {
   const { siren } = context.req.body;
-  const { isBot } = extractParamsFromContext(context);
+  const { isBot } = extractParamsPageRouter(context);
 
   const uniteLegale = await getUniteLegaleFromSlug(siren, {
     isBot,

@@ -1,0 +1,18 @@
+.frBadge {
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 3px 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+a.frBadge {
+  text-decoration: underline;
+  border: none;
+}
+a.frBadge:hover {
+  filter: brightness(0.95);
+}
+a.frBadge:active {
+  filter: brightness(0.9);
+}

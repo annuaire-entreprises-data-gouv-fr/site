@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import connexionRefusedPicture from '#components-ui/illustrations/connexion-refused';
 import { LayoutConnexion } from '#components/layouts/layout-connexion';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import constants from '#models/constants';
 import { NextPageWithLayout } from 'pages/_app';
 

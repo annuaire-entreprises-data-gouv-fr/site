@@ -1,5 +1,5 @@
 import React from 'react';
-import constants from '#models/constants';
+import styles from './styleFull.module.css';
 
 interface ISectionProps {
   head: string[];
@@ -14,91 +14,33 @@ export const FullTable: React.FC<ISectionProps> = ({
   body,
   verticalAlign = 'middle',
 }) => (
-  <>
-    <table id={id} className="full-table">
-      <thead>
-        <tr>
-          {head.map((cell, index) => (
-            <th key={index}>{cell}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {body.map((row, bodyIndex) => (
-          <tr key={'row-' + bodyIndex}>
-            {row.map((cell, rowIndex) => (
-              <td key={'cell-' + rowIndex}>
-                <strong aria-hidden className="mobile">
+  <table id={id} className={styles.fullTable}>
+    <thead className={styles.head}>
+      <tr>
+        {head.map((cell, index) => (
+          <th key={index}>{cell}</th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {body.map((row, bodyIndex) => (
+        <tr key={'row-' + bodyIndex} className={styles.row}>
+          {row.map((cell, rowIndex) => (
+            <td
+              key={'cell-' + rowIndex}
+              style={{ verticalAlign }}
+              className={styles.cell}
+            >
+              {cell == null || cell === '' ? null : (
+                <strong aria-hidden className={styles.mobile}>
                   {head[rowIndex]}&nbsp;:&nbsp;
                 </strong>
-                {cell}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-
-    <style jsx>{`
-      table {
-        border-collapse: collapse;
-        text-align: left;
-        color: #081d35;
-      }
-
-      tr td,
-      th {
-        vertical-align: ${verticalAlign};
-        border: 1px solid ${constants.colors.pastelBlue};
-        border-left: none;
-        border-right: none;
-        border: none;
-        padding: 5px;
-        background-color: #fff;
-      }
-
-      tr > td,
-      table th {
-        padding-left: 10px;
-      }
-
-      table {
-        width: 100%;
-      }
-
-      table tr:hover > td {
-        background-color: ${constants.colors.pastelBlue}66;
-      }
-
-      @media only screen and (min-width: 1px) and (max-width: 992px) {
-        table,
-        tbody,
-        tr,
-        td {
-          display: block;
-          padding-left: 0 !important;
-          padding-right: 0 !important;
-        }
-        thead {
-          display: none;
-        }
-        table tr:hover > td {
-          background-color: transparent;
-        }
-
-        tr {
-          padding: 20px 0;
-        }
-        tr:not(:last-of-type) {
-          border-bottom: 1px solid ${constants.colors.pastelBlue}66;
-        }
-      }
-
-      @media (min-width: 993px) {
-        .mobile {
-          display: none;
-        }
-      }
-    `}</style>
-  </>
+              )}
+              {cell}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
 );

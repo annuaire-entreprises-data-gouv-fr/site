@@ -3,19 +3,13 @@ import NonRenseigne from '#components/non-renseigne';
 import constants from '#models/constants';
 import { InternalError } from '#models/exceptions';
 import { logWarningInSentry } from '#utils/sentry';
+import { CopyPaste } from './copy-paste';
+import styles from './styleSimple.module.css';
 
 interface ISectionProps {
   body: any[][];
   id?: string;
 }
-
-export const CopyPaste: React.FC<
-  PropsWithChildren<{ shouldTrim?: boolean; id?: string }>
-> = ({ children, shouldTrim = false, id = undefined }) => (
-  <span className={`copy-button ${shouldTrim ? 'trim' : ''}`}>
-    <span id={id}>{children}</span>
-  </span>
-);
 
 const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
   children,
@@ -23,30 +17,16 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
 }) => {
   const isCopyEnabled = typeof children === 'string' && children !== '';
   return (
-    <td>
+    <td className={styles.cell}>
       {isCopyEnabled ? (
-        <CopyPaste shouldTrim={shouldTrim(label)}>
-          {children || <NonRenseigne />}
+        <CopyPaste label={label} shouldRemoveSpace={shouldRemoveSpace(label)}>
+          {children}
         </CopyPaste>
       ) : (
         <div>
           <span>{children || <NonRenseigne />}</span>
         </div>
       )}
-      <style jsx>{`
-        td {
-          width: auto;
-          padding: 5px 3px;
-          background-color: #fff;
-          padding-left: 30px;
-        }
-        @media only screen and (min-width: 1px) and (max-width: 576px) {
-          td {
-            padding: 0;
-            margin: 0;
-          }
-        }
-      `}</style>
     </td>
   );
 };
@@ -55,7 +35,7 @@ const Cell: React.FC<PropsWithChildren<{ label?: string }>> = ({
  * Add a css class to customize copy to clipboard behaviour
  * @param label
  */
-const shouldTrim = (label: any) => {
+const shouldRemoveSpace = (label: any) => {
   try {
     // in case label is a JSX element we use the children as label
     // as this is likely to trigger an exception we use a try / catch
@@ -89,63 +69,22 @@ const shouldTrim = (label: any) => {
  */
 export const TwoColumnTable: React.FC<ISectionProps> = ({ id, body }) => {
   return (
-    <table className="two-column-table" id={id}>
+    <table className={styles['two-column-table']} id={id}>
       <tbody>
         {body.map((row, idx) => (
           <tr key={'a' + idx}>
-            <td>
+            <td
+              className={styles.cell}
+              style={{
+                borderColor: constants.colors.pastelBlue,
+              }}
+            >
               <div>{row[0]}</div>
             </td>
             <Cell label={row[0]}>{row[1]}</Cell>
           </tr>
         ))}
       </tbody>
-      <style jsx>{`
-        table {
-          border-collapse: collapse;
-          text-align: left;
-          color: #081d35;
-          width: 100%;
-        }
-        tr > td:first-of-type {
-          font-weight: bold;
-          padding-right: 30px;
-          padding-left: 10px;
-          border-right: 1px solid ${constants.colors.pastelBlue};
-          vertical-align: baseline;
-        }
-        tr > td:first-of-type > div {
-          min-width: 140px;
-        }
-        td,
-        th {
-          border: none;
-          padding: 3px;
-          background-color: #fff;
-          padding-left: 30px;
-        }
-        table > thead {
-          display: none;
-          background-color: ${constants.colors.pastelBlue};
-        }
-        @media only screen and (min-width: 1px) and (max-width: 576px) {
-          tr {
-            display: flex;
-            flex-direction: column;
-            margin: 15px 0;
-          }
-          tr > td {
-            border: none;
-            padding: 0;
-            margin: 0;
-          }
-          tr > td:first-of-type {
-            border: none;
-            padding: 0;
-            margin: 0;
-          }
-        }
-      `}</style>
     </table>
   );
 };

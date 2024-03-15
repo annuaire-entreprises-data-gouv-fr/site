@@ -29,7 +29,8 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
       response?.status,
       //@ts-ignore
       response?.cached,
-      startTime ? endTime - startTime : undefined
+      startTime ? endTime - startTime : undefined,
+      response?.request?.method
     )
   );
   return response;

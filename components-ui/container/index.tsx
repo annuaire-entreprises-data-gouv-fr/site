@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-
+import styles from './style.module.css';
 type ContainerProps = {
   children: ReactNode;
   className?: string;
@@ -27,24 +27,14 @@ export default function FullWidthContainer({
 }: ContainerProps) {
   return (
     <>
-      <div className="outer-outer-container">
-        <div className={`${className} outer-container`} style={style}>
+      <div className={styles['outer-outer-container']}>
+        <div
+          className={`${className} ${styles['outer-container']}`}
+          style={style}
+        >
           <div className="fr-container">{children}</div>
         </div>
       </div>
-      <style jsx>{`
-        .outer-outer-container {
-          display: flex;
-          flex: 1 1 0%;
-          justify-content: center;
-        }
-        .outer-container {
-          flex: 1 1 0%;
-          display: flex;
-          flex-direction: column;
-          min-width: 100vw;
-        }
-      `}</style>
     </>
   );
 }

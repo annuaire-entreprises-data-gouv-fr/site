@@ -4,6 +4,7 @@ type IProps = {
   height: number;
   slug: string;
   className?: string;
+  lazy?: boolean;
 };
 
 /**
@@ -19,12 +20,18 @@ const Logo: React.FC<IProps> = ({
   height,
   slug = 'marianne',
   className = '',
+  lazy = false,
 }) => (
   <div
     className="logo-wrapper"
     style={{
       width: `${width}px`,
       height: `${height}px`,
+      maxWidth: ' 90%',
+      margin: '0 auto',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     }}
   >
     <img
@@ -34,24 +41,14 @@ const Logo: React.FC<IProps> = ({
       title={title}
       width="100%"
       height="100%"
+      style={{
+        margin: 'auto',
+        display: 'block',
+        maxWidth: '100%',
+        maxHeight: '100%',
+      }}
+      loading={lazy ? 'lazy' : 'eager'}
     />
-    <style global jsx>
-      {`
-        .logo-wrapper {
-          max-width: 90%;
-          margin: 0 auto;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .logo-wrapper > img {
-          margin: auto;
-          display: block;
-          max-width: 100%;
-          max-height: 100%;
-        }
-      `}
-    </style>
   </div>
 );
 

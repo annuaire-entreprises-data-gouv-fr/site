@@ -4,7 +4,7 @@ import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
-import { DataSection } from '#components/section/data-section';
+import { DataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {
@@ -28,7 +28,7 @@ const AgentComponent: React.FC<{
 
   return (
     <PrintNever>
-      <DataSection
+      <DataSectionClient
         title="Bilans"
         id="bilans"
         isProtected
@@ -91,7 +91,7 @@ const AgentComponent: React.FC<{
             </>
           )
         }
-      </DataSection>
+      </DataSectionClient>
     </PrintNever>
   );
 };

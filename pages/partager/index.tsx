@@ -1,5 +1,5 @@
 import { Icon } from '#components-ui/icon/wrapper';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import TextWrapper from 'components-ui/text-wrapper';
 import { NextPageWithLayout } from 'pages/_app';
 
@@ -221,7 +221,7 @@ const Partager: NextPageWithLayout = () => {
           <p>
             Toutes les données utilisées sur l’Annuaire des Entreprises sont
             librement accessibles par API. Consultez la page{' '}
-            <a href="/administration">statut des API</a> pour en savoir plus.
+            <a href="/donnees/api">statut des API</a> pour en savoir plus.
           </p>
         </div>
       </TextWrapper>

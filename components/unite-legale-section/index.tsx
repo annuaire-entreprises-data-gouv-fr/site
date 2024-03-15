@@ -49,12 +49,13 @@ const UniteLegaleSection: React.FC<{
         formatSiret((uniteLegale.siege || {}).siret),
     ],
     [
-      <FAQLink tooltipLabel="N° TVA Intracommunautaire">
-        <a href="/faq/tva-intracommunautaire">
-          Comprendre le numéro de TVA intracommunautaire
-        </a>
+      <FAQLink
+        tooltipLabel="N° TVA Intracommunautaire"
+        to="/faq/tva-intracommunautaire"
+      >
+        Comprendre le numéro de TVA intracommunautaire
       </FAQLink>,
-      <TVACell tva={uniteLegale.tva} />,
+      <TVACell uniteLegale={uniteLegale} />,
     ],
     ['Activité principale (NAF/APE)', uniteLegale.libelleActivitePrincipale],
     ['Code NAF/APE', uniteLegale.activitePrincipale],
@@ -135,7 +136,7 @@ const UniteLegaleSection: React.FC<{
         {uniteLegale.dateMiseAJourInpi && (
           <li>
             Extrait RNE (équivalent KBIS/D1) :{' '}
-            <ExtraitRNELink uniteLegale={uniteLegale} />
+            <ExtraitRNELink uniteLegale={uniteLegale} session={session} />
           </li>
         )}
         {uniteLegale.dateMiseAJourInsee && (

@@ -8,7 +8,6 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
       role="dialog"
       aria-label="Votre navigateur est obsolète"
     />
-
     <script
       //  Show warning for browsers
       //  1. without Optional chaining
@@ -25,7 +24,7 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
           } catch (e) {
             window.IS_OUTDATED_BROWSER = true;
             var browserIsOutdated = document.getElementById('browser-is-outdated');
-            browserIsOutdated.innerHTML = '<div class="fr-container"> <style>#browser-is-outdated{padding-top: 15px; padding-bottom: 15px; font-size: 0.9rem; width: 100%; background-color: #b50800; color: #fff; font-family: "Marianne", sans-serif; border-bottom: 2px solid #000091;}#browser-is-outdated h1{color: #fff; margin-top: 0;}</style> <h1>⚠️ Votre navigateur est obsolète</h1> <p> La plupart des fonctionalités de ce site <strong>ne fonctionneront pas</strong>. Vous pourrez essentiellement : </p><ul> <li> Rechercher une entreprise par son nom ou son SIREN </li><li>Consulter la fiche résumé de l’entreprise</li></ul> <p> Avoir un navigateur à jour est <a target="_blank" rel="noreferrer noopener" href="https://www.ssi.gouv.fr/entreprise/precautions-elementaires/bonnes-pratiques-de-navigation-sur-linternet/" >fortement recommandé par l’ANSSI</a> pour naviguer sur internet en sécurité. </p></div>';
+            browserIsOutdated.innerHTML = '<div class="fr-container"> <style>#browser-is-outdated{padding-top: 15px; padding-bottom: 15px; font-size: 0.9rem; width: 100%; background-color: #b50800; color: #fff; border-bottom: 2px solid #000091;}#browser-is-outdated h1{color: #fff; margin-top: 0;}</style> <h1>⚠️ Votre navigateur est obsolète</h1> <p> La plupart des fonctionalités de ce site <strong>ne fonctionneront pas</strong>. Vous pourrez essentiellement : </p><ul> <li> Rechercher une entreprise par son nom ou son SIREN </li><li>Consulter la fiche résumé de l’entreprise</li></ul> <p> Avoir un navigateur à jour est <a target="_blank" rel="noreferrer noopener" href="https://www.ssi.gouv.fr/entreprise/precautions-elementaires/bonnes-pratiques-de-navigation-sur-linternet/" >fortement recommandé par l’ANSSI</a> pour naviguer sur internet en sécurité. </p></div>';
             browserIsOutdated.style.display = 'block';
             window._paq = window._paq || [];
             window._paq.push([
@@ -39,10 +38,5 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
         `,
       }}
     ></script>
-    <style jsx>{`
-      #browser-is-outdated {
-        display: none;
-      }
-    `}</style>
   </PrintNever>
 );

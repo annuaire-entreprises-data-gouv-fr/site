@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import { clientMatomoStats, IMatomoStats } from '#clients/matomo';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { NpsStats } from '#components/stats/nps';
 import { TraficStats } from '#components/stats/trafic';
 import { UsageStats } from '#components/stats/usage';
@@ -56,9 +56,6 @@ export const getStaticProps: GetStaticProps = async () => {
       mostCopied,
       copyPasteAction,
       redirectedSiren,
-      metadata: {
-        useReact: true,
-      },
     },
     revalidate: 4 * 3600, // In seconds - 4 hours
   };

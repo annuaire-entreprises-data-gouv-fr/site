@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { EtablissementsScolairesSection } from '#components/education-nationale';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -10,11 +10,11 @@ import {
   IEtablissementsScolaires,
 } from '#models/etablissements-scolaires';
 import { parseIntWithDefaultValue } from '#utils/helpers';
-import extractParamsFromContext from '#utils/server-side-props-helper/extract-params-from-context';
+import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-helper/page/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = postServerSideProps(
   async (context) => {
     const pageParam = (context.query.page || '') as string;
     const page = parseIntWithDefaultValue(pageParam, 1);
-    const { slug, isBot } = extractParamsFromContext(context);
+    const { slug, isBot } = extractParamsPageRouter(context);
     const { uniteLegale, etablissementsScolaires } =
       await getEtablissementsScolairesFromSlug(slug, page, isBot);
 

@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { Info } from '#components-ui/alerts';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import ResultsList from '#components/search-results/results-list';
 import PageCounter from '#components/search-results/results-pagination';
 import StructuredDataSearchAction from '#components/structured-data/search';
@@ -18,7 +18,7 @@ import { logWarningInSentry } from '#utils/sentry';
 import {
   IPropsWithMetadata,
   postServerSideProps,
-} from '#utils/server-side-props-helper/post-server-side-props';
+} from '#utils/server-side-helper/page/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -77,7 +77,7 @@ const SearchDirigeantPage: NextPageWithLayout<IProps> = ({
       <HorizontalSeparator />
       <span>
         {results.currentPage > 1 && `Page ${results.currentPage} de `}
-        {results.resultCount} résultats trouvés.
+        {results.resultCount} résultat(s) trouvé(s).
       </span>
       <ResultsList results={results.results} />
       {results.pageCount > 0 && (

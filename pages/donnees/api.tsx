@@ -2,14 +2,14 @@ import { GetStaticProps } from 'next';
 import React from 'react';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import ApiMonitoring from '#components/api-monitoring';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { administrationsMetaData } from '#models/administrations';
 import { IAdministrationsMetaData } from '#models/administrations/types';
 import {
   IMonitoringWithMetaData,
   getMonitorsByAdministration,
 } from '#models/monitoring';
-import { IPropsWithMetadata } from '#utils/server-side-props-helper/post-server-side-props';
+import { IPropsWithMetadata } from '#utils/server-side-helper/page/post-server-side-props';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {

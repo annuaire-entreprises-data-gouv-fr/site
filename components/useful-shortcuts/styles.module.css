@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+
+  @media only screen and (min-width: 1px) and (max-width: 1100px) {
+    flex-wrap: wrap;
+  }
+}
+
+.container {
+  border: 2px solid var(--annuaire-colors-pastelBlue);
+  padding: 15px;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  @media only screen and (min-width: 1px) and (max-width: 1100px) {
+    max-width: 100%;
+    min-width: 250px;
+    flex-grow: 1;
+  }
+}
+
+.container > div {
+  margin-bottom: 10px;
+}

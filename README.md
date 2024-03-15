@@ -2,19 +2,21 @@
   <img src="https://github.com/etalab/annuaire-entreprises-site/blob/main/public/images/annnuaire-entreprises.svg" width="400px" />
 </h1>
 
+<a href="https://github.com/etalab/annuaire-entreprises-site/blob/main/LICENSE"><img src="https://img.shields.io/github/license/etalab/annuaire-entreprises-site.svg?color=green" alt="License Badge"></a>
+[![CI (lint, unit-tests, end2end, a11y)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
+[![External API check](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml)
+[![Deploy cluster](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-cluster.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-cluster.yml)
+<a href="https://annuaire-entreprises.data.gouv.fr/donnees/administrations"><img src="https://img.shields.io/badge/Page-partenaires-blue.svg" alt="Partenaires Badge"></a>
+<a href="https://annuaire-entreprises.data.gouv.fr/donnees/sources"><img src="https://img.shields.io/badge/Page-datasources-blue.svg" alt="Sources de données Badge"></a>
+<a href="https://annuaire-entreprises.data.gouv.fr/donnees/api"><img src="https://img.shields.io/badge/Page-statuts-blue.svg" alt="Statut des API Badge"></a>
+<a href="https://annuaire-entreprises.data.gouv.fr/historique-des-modifications"><img src="https://img.shields.io/badge/Page-changelog-blue.svg" alt="Changelog Badge"></a>
+<a href="https://annuaire-entreprises.data.gouv.fr/a-propos/stats"><img src="https://img.shields.io/badge/Page-stats-blue.svg" alt="Statistiques Badge"></a>
+
 Dépôt du site [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr). Pour [l’API Recherche d’Entreprises](https://api.gouv.fr/les-api/api-recherche-entreprises), consultez le [dépôt de l’API](https://github.com/etalab/annuaire-entreprises-search-api).
 
 Ce site met à disposition des citoyens et des agents les données ouvertes (open-data) des entreprises, associations et administrations dotées d'un n° SIREN/SIRET.
 
-## Statuts
-
-[![CI (lint, unit-tests, end2end, a11y)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
-[![External API check](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml)
-[![Deploy cluster](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-cluster.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-cluster.yml)
-
-**Disponibilités des APIs utilisées par le site :**
-
-Pour voir le détail des disponibilités des API utilisées sur le site, [consultez la page de statut](https://annuaire-entreprises.data.gouv.fr/donnees/api).
+Ce site ré-utilise les données des différentes administrations partenaires : 
 
 ## Contenu
 
@@ -30,7 +32,7 @@ Pour protéger un siren et en limiter la diffusion [suivez la procédure](https:
 
 ## Dépôts liés 🏗
 
-Ce dépôt fait partie d'un ensemble de dépôts qui constituent l'[Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
+Voici la liste des dépôts de  code du projet [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
 
 | Description                         | Accès                                                                       |
 | ----------------------------------- | --------------------------------------------------------------------------- |
@@ -44,13 +46,6 @@ Ce dépôt fait partie d'un ensemble de dépôts qui constituent l'[Annuaire des
 
 
 ## Développement
-
-### Choix d’architecture du site
-
-Pour des raisons de [performances](https://pagespeed.web.dev/analysis/https-annuaire-entreprises-data-gouv-fr-entreprise-danone-552032534/z9b3dtu5dl?form_factor=mobile), ce site utilise Next.js de manière modifiée :
-
-- en developpement, next.js tourne de manière normale.
-- en production, la ré-hydratation de react dans le navigateur est uniquement activée sur les pages où c'est pertinent. Pour le reste des pages, Next.js est utilisé comme un framework de rendu serveur traditionnel (type Django ou Rails).
 
 ### Outils
 

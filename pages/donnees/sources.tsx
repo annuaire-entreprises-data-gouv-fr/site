@@ -3,7 +3,7 @@ import React from 'react';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
 import { Tag } from '#components-ui/tag';
-import Meta from '#components/meta';
+import Meta from '#components/meta/meta-client';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { administrationsMetaData } from '#models/administrations';
