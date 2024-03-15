@@ -23,7 +23,6 @@ export const AdvancedSearchTutorial = () => {
           association, ou service public en France.
         </div>
         <div>
-          <br />
           <ul>
             <li>
               <Icon color={constants.colors.frBlue} slug="mapPin">
@@ -40,8 +39,8 @@ export const AdvancedSearchTutorial = () => {
             <li>
               <Icon color={constants.colors.frBlue} slug="building">
                 <strong>Structure&nbsp;:</strong>&#8200;filtrez par type de
-                structure ou labels (ESS, Société à mission, RGE, Spectacle
-                vivant, Qualiopi, Bio)
+                structure ou labels (ESS, Société à mission, Entreprise
+                Inclusive, RGE, Spectacle vivant, Qualiopi, Bio)
               </Icon>
             </li>
             <li>
@@ -86,6 +85,8 @@ export const AdvancedSearchTutorial = () => {
 
           .tutorial ul {
             list-style-type: none;
+            margin-top: 30px;
+            padding: 0;
           }
           .tutorial ul li {
             margin: 0 0 20px;

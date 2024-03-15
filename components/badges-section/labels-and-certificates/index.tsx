@@ -43,6 +43,8 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
     estBio,
     egaproRenseignee,
     estSocieteMission,
+    estEntrepriseInclusive,
+    typeEntrepriseInclusive,
   } = uniteLegale.complements;
 
   return (
@@ -60,6 +62,14 @@ export const LabelsAndCertificatesBadgesSection: React.FC<{
           informationTooltipLabel="Cette structure est une société à mission"
           label="Société à mission"
           sectionId="societe-a-mission"
+          siren={uniteLegale.siren}
+        />
+      )}
+      {estEntrepriseInclusive && (
+        <LabelWithLinkToSection
+          informationTooltipLabel="Cette structure est une Entreprise Inclusive"
+          label={`Entreprise Sociale Inclusive (${typeEntrepriseInclusive})`}
+          sectionId="entreprise-inclusive"
           siren={uniteLegale.siren}
         />
       )}

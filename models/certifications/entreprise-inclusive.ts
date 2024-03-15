@@ -1,5 +1,6 @@
 import { clientMarcheInclusion } from '#clients/api-inclusion';
 import { HttpNotFound } from '#clients/exceptions';
+import { clientInclusionKindMetadata } from '#clients/metadata-store/inclusion-kind';
 import { EAdministration } from '#models/administrations/EAdministration';
 import {
   APINotRespondingFactory,
@@ -12,17 +13,33 @@ import { IUniteLegale } from '../core/types';
 export type IEntrepriseInclusive = {
   marcheInclusionLink: string;
   type: string;
+  category: string;
   siret: string;
 };
 
 export const getEntrepriseInclusive = async (
   uniteLegale: IUniteLegale
-): Promise<IEntrepriseInclusive | IAPINotRespondingError> => {
+): Promise<IEntrepriseInclusive[] | IAPINotRespondingError> => {
   try {
     if (!uniteLegale.complements.estEntrepriseInclusive) {
       throw new HttpNotFound('Not an entreprise inclusive');
     }
-    return await clientMarcheInclusion(uniteLegale.siren);
+    const entrepriseInclusiveList = await clientMarcheInclusion(
+      uniteLegale.siren
+    );
+    return await Promise.all(
+      entrepriseInclusiveList.map(
+        async ({ marcheInclusionLink, siret, kind }) => {
+          const kindLabel = await clientInclusionKindMetadata(kind);
+          return {
+            marcheInclusionLink,
+            siret,
+            category: kindLabel?.parent || '',
+            type: kindLabel?.name ? `${kindLabel?.name} (${kind})` : kind,
+          };
+        }
+      )
+    );
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.MARCHE_INCLUSION, 404);

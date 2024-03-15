@@ -143,6 +143,8 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       identifiant_association = null,
       statut_entrepreneur_spectacle = '',
       est_association = false,
+      est_siae = false,
+      type_siae = '',
     },
     matching_etablissements,
     categorie_entreprise,
@@ -204,8 +206,6 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     result.nombre_etablissements
   );
 
-  const estEntrepriseInclusive = siren === '419437629';
-
   return {
     ...createDefaultUniteLegale(siren),
     siege: etablissementSiege,
@@ -249,7 +249,8 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       estQualiopi: est_qualiopi,
       estAssociation: est_association,
       estUai: est_uai,
-      estEntrepriseInclusive,
+      estEntrepriseInclusive: est_siae,
+      typeEntrepriseInclusive: type_siae,
     },
     association: {
       idAssociation: identifiant_association,

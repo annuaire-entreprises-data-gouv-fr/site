@@ -28,16 +28,14 @@ const ESSNotFound = () => (
     Cette structure <strong>n’apparait pas</strong> dans la liste des
     entreprises de <ESSFAQLink /> tenue par <ESSFrance />, alors que sa forme
     juridique relève du champs de l’ESS.
-    <p>
-      Il existe plusieurs explications possibles :
-      <ul>
-        <li>soit c’est une société commerciale de l’ESS</li>
-        <li>soit c’est une structure inactive qui a été retirée de la liste</li>
-        <li>
-          soit c’est une structure récente qui sera bientôt ajoutée à la liste
-        </li>
-      </ul>
-    </p>
+    <p>Il existe plusieurs explications possibles :</p>
+    <ul>
+      <li>soit c’est une société commerciale de l’ESS</li>
+      <li>soit c’est une structure inactive qui a été retirée de la liste</li>
+      <li>
+        soit c’est une structure récente qui sera bientôt ajoutée à la liste
+      </li>
+    </ul>
   </>
 );
 
