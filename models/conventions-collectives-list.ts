@@ -16,7 +16,7 @@ export type ICCWithMetadata = {
   etat?: string;
   sirets?: string[];
   idcc?: string;
-  explanation: ICCExplanation | null;
+  explanation?: ICCExplanation | null;
 };
 
 export type ICCExplanation = {
