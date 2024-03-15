@@ -1,4 +1,7 @@
+'use client';
+
 import styles from './style.module.css';
+
 export type IProps = {
   values: {
     label: string;
@@ -59,7 +62,7 @@ export const MultiChoice: React.FC<IProps> = ({
                 required={required}
                 //@ts-ignore
                 onChange={!!onClick ? onClick : () => null}
-                checked={checked}
+                defaultChecked={checked}
                 tabIndex={-1}
               />
               <label

@@ -1,16 +1,13 @@
-import { GetServerSideProps } from 'next';
-import { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
 import { MultiChoice } from '#components-ui/multi-choice';
-import { LayoutDefault } from '#components/layouts/layout-default';
 import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
-import { postServerSideProps } from '#utils/server-side-helper/page/post-server-side-props';
+import getSession from '#utils/server-side-helper/app/get-session';
 import { isAgent, isSuperAgent } from '#utils/session';
-import useSession from 'hooks/use-session';
 import { NextPageWithLayout } from 'pages/_app';
+import styles from './style.module.css';
 
-export const visitorTypes = [
+const visitorTypes = [
   {
     value: 'Indépendant',
     label: 'Indépendant(e)',
@@ -37,9 +34,17 @@ export const visitorTypes = [
   },
 ];
 
-const FeedBackPage: NextPageWithLayout = () => {
+export const metadata = {
+  title: 'Quel est votre avis sur l’Annuaire des Entreprises ?',
+  robots: 'noindex, nofollow',
+  alternates: {
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/formulaire/merci',
+  },
+};
+
+const FeedBackPage: NextPageWithLayout = async () => {
   const uuid = randomId();
-  const session = useSession();
+  const session = await getSession();
   return (
     <div id="page-layout">
       <main className="fr-container">
@@ -61,7 +66,12 @@ const FeedBackPage: NextPageWithLayout = () => {
           <a href={constants.links.parcours.contact}>contactez-nous</a>.
         </div>
         <div className="content-container form-container">
-          <form action="/api/feedback/nps" method="post" id="form-feedback-nps">
+          <form
+            action="/api/feedback/nps"
+            method="post"
+            id="form-feedback-nps"
+            className={styles['form-feedback-nps']}
+          >
             <input name="uuid" value={uuid} type="hidden" />
             <fieldset>
               <MultiChoice
@@ -166,6 +176,7 @@ const FeedBackPage: NextPageWithLayout = () => {
                   id="email"
                   name="email"
                   type="email"
+                  defaultValue={isAgent(session) ? session?.user?.email : ''}
                 />
               </div>
             </fieldset>
@@ -178,39 +189,9 @@ const FeedBackPage: NextPageWithLayout = () => {
             </div>
           </form>
         </div>
-
-        <style jsx>
-          {`
-            fieldset {
-              border: none;
-              margin: 40px 0;
-              padding: 0;
-            }
-          `}
-        </style>
-        <style jsx global>
-          {`
-            #form-feedback-nps {
-              counter-reset: question;
-            }
-            #form-feedback-nps > fieldset > legend h2::before {
-              counter-increment: question;
-              content: counter(question) ' ・ ';
-              font-weight: bold;
-            }
-          `}
-        </style>
       </main>
     </div>
   );
 };
-
-FeedBackPage.getLayout = function getLayout(page: ReactElement) {
-  return <LayoutDefault searchBar={false}>{page}</LayoutDefault>;
-};
-
-export const getServerSideProps: GetServerSideProps = postServerSideProps(
-  () => ({})
-);
 
 export default FeedBackPage;

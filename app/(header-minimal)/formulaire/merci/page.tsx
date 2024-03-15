@@ -1,9 +1,14 @@
-import { ReactElement } from 'react';
 import ButtonLink from '#components-ui/button';
-import { LayoutDefault } from '#components/layouts/layout-default';
-import { NextPageWithLayout } from 'pages/_app';
 
-const ThanksPage: NextPageWithLayout = () => {
+export const metadata = {
+  title: 'Merci beaucoup pour votre retour',
+  robots: 'noindex, nofollow',
+  alternates: {
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/formulaire/merci',
+  },
+};
+
+const MerciPage = () => {
   return (
     <div id="layout">
       <main>
@@ -19,8 +24,4 @@ const ThanksPage: NextPageWithLayout = () => {
   );
 };
 
-ThanksPage.getLayout = function getLayout(page: ReactElement) {
-  return <LayoutDefault searchBar={false}>{page}</LayoutDefault>;
-};
-
-export default ThanksPage;
+export default MerciPage;

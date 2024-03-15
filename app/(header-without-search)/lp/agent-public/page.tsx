@@ -1,7 +1,5 @@
-import { ReactElement } from 'react';
 import ButtonAgentConnect from '#components-ui/button-agent-connect';
 import Container from '#components-ui/container';
-import { LayoutSimple } from '#components/layouts/layout-simple';
 import { administrationsMetaData } from '#models/administrations';
 import { NextPageWithLayout } from 'pages/_app';
 import styles from './style.module.css';
@@ -16,7 +14,7 @@ export const metadata = {
   },
 };
 
-const LandingPage: NextPageWithLayout = () => (
+const LandingPageAgent: NextPageWithLayout = () => (
   <div className={styles['page']}>
     <section className={styles['hero']}>
       <div>
@@ -140,8 +138,4 @@ function CaseExample({ title, description, image }: ICaseExampleProps) {
   );
 }
 
-LandingPage.getLayout = function getLayout(page: ReactElement) {
-  return <LayoutSimple>{page}</LayoutSimple>;
-};
-
-export default LandingPage;
+export default LandingPageAgent;
