@@ -12,6 +12,10 @@ export function useFetchTVA(siren: Siren) {
       fetchData: () => httpGet<{ tva: string | null }>(routes.api.tva + siren),
       administration: EAdministration.VIES,
       logError: (e: any) => {
+        if (e.status) {
+          // We already log error server side
+          return;
+        }
         logErrorInSentry(
           new FetchRessourceException({
             ressource: 'VerifyTVAFront',
