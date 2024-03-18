@@ -179,7 +179,8 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
-          "estEntrepriseInclusive": false
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
         },
         "association": {
           "idAssociation": null,

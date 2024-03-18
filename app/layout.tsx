@@ -17,11 +17,10 @@ export default async function HomeLayout({
 }) {
   const session = await getSession();
   return (
-    <html lang="fr" style={marianne.style}>
-      {process.env.NODE_ENV === 'production' && process.env.MATOMO_SITE_ID && (
-        <MatomoInit session={session} />
-      )}
+    <html lang="fr" style={marianne.style} suppressHydrationWarning>
       <body>
+        {process.env.NODE_ENV === 'production' &&
+          process.env.MATOMO_SITE_ID && <MatomoInit session={session} />}
         <PrefetchImgs />
         <BrowserIsOutdatedBanner />
         <div style={{ width: '100%' }}>{children}</div>

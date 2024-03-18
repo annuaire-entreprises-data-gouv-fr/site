@@ -1,4 +1,5 @@
 import routes from '#clients/routes';
+import { stubClient } from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
 import { httpGet } from '#utils/network';
 import { IGeoElement } from '.';
@@ -29,5 +30,6 @@ const mapToDomainObject = (response: IGeoRegionResponse[]): IGeoElement[] => {
   });
 };
 
-// No need to stub as API Geo is robust and can be used for test e2e
-export { clientRegionsByName };
+// This API can timeout, so we need to stub it
+const stubbedClientRegionsByName = stubClient({ clientRegionsByName });
+export { stubbedClientRegionsByName as clientRegionsByName };
