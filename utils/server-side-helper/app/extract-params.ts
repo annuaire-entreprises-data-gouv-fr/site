@@ -7,9 +7,12 @@ export type AppRouterProps = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-const extractParamsAppRouter = ({ params, searchParams }: AppRouterProps) => {
+const extractParamsAppRouter = ({
+  params,
+  searchParams,
+}: Partial<AppRouterProps>) => {
   const slug = (params?.slug || '') as string;
-
+  searchParams = searchParams ?? {};
   const headersList = headers();
   const referer = headersList.get('referer') && '';
   const userAgent = headersList.get('user-agent') || '';
