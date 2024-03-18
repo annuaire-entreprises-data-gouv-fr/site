@@ -12,7 +12,6 @@ export function BrowserIsOutdatedBanner({ children }: { children: ReactNode }) {
       {children}
       {/* This script is at the end of the page to not block the rendering process and improve LCP */}
       <script
-        defer
         //  Show warning for browsers
         //  1. without Optional chaining
         //    - https://caniuse.com/mdn-javascript_operators_optional_chaining
