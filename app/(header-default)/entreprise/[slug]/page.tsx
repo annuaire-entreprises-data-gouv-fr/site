@@ -82,7 +82,6 @@ export default withErrorHandler(async function UniteLegalePage(
       {isRedirected && (
         <MatomoEventRedirected sirenOrSiret={uniteLegale.siren} />
       )}
-      <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
       <div className="content-container">
         <Title
           uniteLegale={uniteLegale}
@@ -136,6 +135,7 @@ export default withErrorHandler(async function UniteLegalePage(
           </>
         )}
       </div>
+      <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
     </>
   );
 });
