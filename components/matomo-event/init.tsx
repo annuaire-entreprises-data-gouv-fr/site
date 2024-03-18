@@ -3,6 +3,7 @@ import { ISession, isAgent, isSuperAgent } from '#utils/session';
 export function MatomoInit({ session }: { session: ISession | null }) {
   return (
     <script
+      defer
       dangerouslySetInnerHTML={{
         __html: `
               var _paq = window._paq || [];

@@ -10,10 +10,10 @@ class CustomDocument extends Document {
       <Html lang="fr" suppressHydrationWarning>
         <Head />
         <body>
-          <Main />
           {isProd && process.env.MATOMO_SITE_ID && (
             <MatomoInit session={session} />
           )}
+          <Main />
           <NextScript />
         </body>
       </Html>
