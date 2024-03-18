@@ -1,7 +1,5 @@
 module.exports = {
   plugins: [
-    'postcss-flexbugs-fixes',
-    ['postcss-preset-env', {}],
     [
       '@fullhuman/postcss-purgecss',
       {
@@ -16,6 +14,19 @@ module.exports = {
         fontFace: true,
       },
     ],
-    'autoprefixer',
+    'postcss-flexbugs-fixes',
+    ['postcss-preset-env', {}],
+    [
+      'cssnano',
+      {
+        preset: [
+          'default',
+          {
+            discardComments: { removeAll: true },
+            calc: false,
+          },
+        ],
+      },
+    ],
   ],
 };
