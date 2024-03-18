@@ -1,11 +1,11 @@
 import { ISession, isAgent, isSuperAgent } from '#utils/session';
-
+const TRACKER_BASE_URL = 'https://stats.data.gouv.fr';
 export function MatomoInit({ session }: { session: ISession | null }) {
   return (
-    <script
-      defer
-      dangerouslySetInnerHTML={{
-        __html: `
+    <>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
               var _paq = window._paq || [];
               ${
                 isSuperAgent(session)
@@ -16,21 +16,18 @@ export function MatomoInit({ session }: { session: ISession | null }) {
               }
               _paq.push(['trackPageView']);
               _paq.push(['enableLinkTracking']);
-              (function () {
-                var u = 'https://stats.data.gouv.fr/';
-                _paq.push(['setTrackerUrl', u + 'piwik.php']);
-                _paq.push(['setSiteId', ${process.env.MATOMO_SITE_ID}]);
-                var d = document,
-                  g = d.createElement('script'),
-                  s = d.getElementsByTagName('script')[0];
-                g.type = 'text/javascript';
-                g.async = true;
-                g.defer = true;
-                g.src = u + 'piwik.js';
-                s.parentNode.insertBefore(g, s);
-              })();
+              _paq.push(['setTrackerUrl', '${TRACKER_BASE_URL}/piwik.php']);
+              _paq.push(['setSiteId', ${process.env.MATOMO_SITE_ID}]);
               `,
-      }}
-    ></script>
+        }}
+      ></script>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: `
+        <script type="text/javascript" async defer src="${TRACKER_BASE_URL}/piwik.js"></script>
+      `,
+        }}
+      />
+    </>
   );
 }

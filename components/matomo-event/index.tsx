@@ -6,7 +6,7 @@ const MatomoEvent: React.FC<{
   <div
     dangerouslySetInnerHTML={{
       __html: `
-        <script defer>
+        <script>
           var _paq = window._paq || [];
           _paq.push([
               'trackEvent',
