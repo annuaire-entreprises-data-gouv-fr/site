@@ -1,22 +1,25 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
 
-export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
-  <PrintNever>
-    <div
-      id="browser-is-outdated"
-      role="dialog"
-      aria-label="Votre navigateur est obsolète"
-    />
-    <script
-      //  Show warning for browsers
-      //  1. without Optional chaining
-      //    - https://caniuse.com/mdn-javascript_operators_optional_chaining
-      //    - https://stackoverflow.com/questions/66288922/check-if-optional-chaining-is-supported
-      //  2. without public class fields
-      //    - https://caniuse.com/?search=mdn-javascript_classes_public_class_fields
-      dangerouslySetInnerHTML={{
-        __html: `
+export function BrowserIsOutdatedBanner({ children }: { children: ReactNode }) {
+  return (
+    <PrintNever>
+      <div
+        id="browser-is-outdated"
+        role="dialog"
+        aria-label="Votre navigateur est obsolète"
+      />
+      {children}
+      {/* This script is at the end of the page to not block the rendering process and improve LCP */}
+      <script
+        //  Show warning for browsers
+        //  1. without Optional chaining
+        //    - https://caniuse.com/mdn-javascript_operators_optional_chaining
+        //    - https://stackoverflow.com/questions/66288922/check-if-optional-chaining-is-supported
+        //  2. without public class fields
+        //    - https://caniuse.com/?search=mdn-javascript_classes_public_class_fields
+        dangerouslySetInnerHTML={{
+          __html: `
         (function () {
           try {
             eval('var foo = {}; foo?.bar'); // 1. Optional chaining
@@ -36,7 +39,8 @@ export const BrowserIsOutdatedBanner: React.FC<{}> = () => (
           }
         })()
         `,
-      }}
-    ></script>
-  </PrintNever>
-);
+        }}
+      ></script>
+    </PrintNever>
+  );
+}
