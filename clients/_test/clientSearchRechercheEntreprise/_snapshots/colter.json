@@ -185,7 +185,8 @@
           "estQualiopi": true,
           "estAssociation": false,
           "estUai": false,
-          "estEntrepriseInclusive": false
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
         },
         "association": {
           "idAssociation": null,
@@ -849,7 +850,8 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
-          "estEntrepriseInclusive": false
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
         },
         "association": {
           "idAssociation": null,
@@ -2086,7 +2088,7 @@
           "estServicePublic": true,
           "estEntrepreneurIndividuel": false,
           "estEntrepreneurSpectacle": true,
-          "statutEntrepreneurSpectacle": "invalide",
+          "statutEntrepreneurSpectacle": "valide",
           "estFiness": false,
           "egaproRenseignee": false,
           "estRge": true,
@@ -2095,7 +2097,8 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
-          "estEntrepriseInclusive": false
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
         },
         "association": {
           "idAssociation": null,
@@ -2741,7 +2744,8 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
-          "estEntrepriseInclusive": false
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
         },
         "association": {
           "idAssociation": null,
@@ -3419,7 +3423,8 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
-          "estEntrepriseInclusive": false
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
         },
         "association": {
           "idAssociation": null,
@@ -4001,7 +4006,8 @@
           "estQualiopi": false,
           "estAssociation": false,
           "estUai": false,
-          "estEntrepriseInclusive": false
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
         },
         "association": {
           "idAssociation": null,

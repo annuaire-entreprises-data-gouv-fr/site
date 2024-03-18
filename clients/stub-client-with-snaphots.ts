@@ -40,10 +40,11 @@ export default function stubClientWithSnapshots<
       try {
         const response = await client(...args);
 
-        // The warning is displayed only if no error
-        // is thrown by the client (as we cannot stub error for now)
-        console.warn(
-          `
+        if (process.env.NODE_ENV !== 'production') {
+          // The warning is displayed only if no error
+          // is thrown by the client (as we cannot stub error for now)
+          console.warn(
+            `
   E2E Client Stub Warning
   -----------------------
   When calling client : ${clientName}
@@ -55,7 +56,8 @@ export default function stubClientWithSnapshots<
       
   Calling the real client instead.
     `
-        );
+          );
+        }
         return response;
       } finally {
       }

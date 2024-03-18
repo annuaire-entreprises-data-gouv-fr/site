@@ -1,0 +1,42 @@
+{
+  "args": [
+    "Nice"
+  ],
+  "result": [
+    {
+      "type": "insee",
+      "value": "06088",
+      "label": "Nice (Toute la ville)"
+    },
+    {
+      "label": "Nice (06000)",
+      "value": "06000",
+      "type": "cp"
+    },
+    {
+      "label": "Nice (06100)",
+      "value": "06100",
+      "type": "cp"
+    },
+    {
+      "label": "Nice (06200)",
+      "value": "06200",
+      "type": "cp"
+    },
+    {
+      "label": "Nice (06300)",
+      "value": "06300",
+      "type": "cp"
+    },
+    {
+      "type": "insee",
+      "value": "21454",
+      "label": "Nicey (Toute la ville)"
+    },
+    {
+      "type": "insee",
+      "value": "55384",
+      "label": "Nicey-sur-Aire (Toute la ville)"
+    }
+  ]
+}
