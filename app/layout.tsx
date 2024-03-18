@@ -22,8 +22,9 @@ export default async function HomeLayout({
         {process.env.NODE_ENV === 'production' &&
           process.env.MATOMO_SITE_ID && <MatomoInit session={session} />}
         <PrefetchImgs />
-        <BrowserIsOutdatedBanner />
-        <div style={{ width: '100%' }}>{children}</div>
+        <BrowserIsOutdatedBanner>
+          <div style={{ width: '100%' }}>{children}</div>
+        </BrowserIsOutdatedBanner>
       </body>
     </html>
   );

@@ -3,6 +3,7 @@ import { Icon } from '#components-ui/icon/wrapper';
 import InformationTooltip from '#components-ui/information-tooltip';
 import { PrintNever } from '#components-ui/print-visibility';
 import { Siren } from '#utils/helpers';
+import PrintButton from './print-button';
 import styles from './styles.module.css';
 
 const SocialMedia: React.FC<{
@@ -100,25 +101,7 @@ const SocialMedia: React.FC<{
         </span>
       )}
       <span>
-        <InformationTooltip
-          ariaRelation="labelledby"
-          tabIndex={undefined}
-          label="Imprimer cette page ou la sauvegarder au format PDF"
-          orientation="right"
-        >
-          <button id="print-button">
-            <Icon className="cursor-pointer" slug="print" />
-          </button>
-        </InformationTooltip>
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: `
-              var openPrintAlert = function() { window.print() };
-              document.getElementById("print-button").onclick=openPrintAlert;
-          `,
-          }}
-        ></script>
+        <PrintButton />
       </span>
     </div>
   </PrintNever>

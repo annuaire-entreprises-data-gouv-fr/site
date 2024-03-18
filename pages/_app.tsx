@@ -36,8 +36,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         }
       `}</style>
       <SessionProvider value={session}>
-        <BrowserIsOutdatedBanner />
-        {layout}
+        <BrowserIsOutdatedBanner>{layout}</BrowserIsOutdatedBanner>
       </SessionProvider>
     </ErrorBoundary>
   );
