@@ -14,8 +14,16 @@ module.exports = {
         fontFace: true,
       },
     ],
+    [
+      'postcss-preset-env',
+      {
+        features: {
+          'nesting-rules': true,
+        },
+      },
+    ],
     'postcss-flexbugs-fixes',
-    ['postcss-preset-env', {}],
+
     [
       'cssnano',
       {

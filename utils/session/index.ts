@@ -156,3 +156,19 @@ export const isSuperAgent = (session: ISession | null) => {
 export const isAgent = (session: ISession | null) => {
   return isBasicAgent(session) || isSuperAgent(session);
 };
+
+export type IAgentContactInfo = {
+  name?: string;
+  email: string;
+};
+export const getAgentContactInfo = (
+  session: ISession | null
+): IAgentContactInfo | null => {
+  if (!isAgent(session) || !session?.user?.email) {
+    return null;
+  }
+  return {
+    email: session.user.email,
+    name: session.user.fullName,
+  };
+};

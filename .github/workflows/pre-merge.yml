@@ -20,6 +20,9 @@ env:
   IRON_SESSION_PWD: ${{ secrets.IRON_SESSION_PWD }}
   GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
   UPDOWN_IO_API_KEY: ${{ secrets.UPDOWN_IO_API_KEY }}
+  CRISP_TOKEN_ID: ${{ secrets.CRISP_TOKEN_ID }}
+  CRISP_TOKEN_KEY: ${{ secrets.CRISP_TOKEN_KEY }}
+  CRISP_WEBSITE_ID: ${{ secrets.CRISP_WEBSITE_ID }}
 jobs:
   dependencies:
     name: 'Install dependencies'

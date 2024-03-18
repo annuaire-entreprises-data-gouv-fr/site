@@ -1,0 +1,133 @@
+.button {
+  position: fixed;
+  z-index: 1000;
+  right: 3rem;
+  bottom: 3rem;
+  width: 60px;
+  height: 60px;
+  background-color: var(--annuaire-colors-espaceAgent);
+  border: none;
+  border-radius: 50%;
+  padding: 1rem;
+  filter: brightness(1.1);
+
+  color: white;
+  box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.3);
+  transition: margin 100ms ease-in-out, box-shadow 100ms ease-in-out,
+    transform 100ms ease-in-out, filter 100ms ease-in-out;
+
+  & .close {
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1rem;
+  }
+
+  &:hover {
+    background-color: var(--annuaire-colors-espaceAgent) !important;
+    filter: brightness(1);
+  }
+  &:active {
+    background-color: var(--annuaire-colors-espaceAgent) !important;
+    transform: translateY(2px);
+  }
+}
+
+.dialog {
+  overflow: hidden;
+  padding: 0 1rem 1rem;
+  opacity: 0;
+  box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  margin-right: 3rem;
+  position: fixed;
+  bottom: 120px;
+  right: 0;
+  background-color: white;
+  z-index: 1000;
+  border: none;
+  border-radius: 0.25rem;
+  border: 1px solid var(--background-action-high-blue-france);
+
+  &:focus-within {
+    outline-color: #0a76f6;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+
+  &[aria-hidden='false'] {
+    animation: fadeIn 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+  }
+  & > button:first-of-type {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  & fieldset {
+    border: none;
+    padding: 0;
+  }
+}
+
+.type {
+  composes: fr-input-group from global;
+  & legend {
+    margin-bottom: 1rem;
+  }
+
+  & label {
+    display: block;
+    background-color: var(--background-alt-blue-france);
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  & label:hover {
+    background-color: var(--background-alt-blue-france-hover);
+  }
+  & label:active,
+  & label:checked {
+    background-color: var(--background-alt-blue-france-active);
+  }
+
+  & label:focus,
+  & input:focus-visible + label {
+    outline-style: solid;
+    outline-color: #0a76f6;
+    outline-offset: 2px;
+    outline-width: 2px;
+  }
+  & input:checked + label {
+    background-color: var(--background-alt-blue-france-active);
+  }
+}
+
+@media only screen and (min-width: 1px) and (max-width: 588px) {
+  .button {
+    right: 0.75rem;
+    bottom: 0.75rem;
+    transform: scale(0.8);
+  }
+  .dialog {
+    margin-right: 0;
+    margin-left: 0;
+    max-width: 100%;
+    border-radius: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    height: 100%;
+    border: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
