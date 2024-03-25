@@ -3,13 +3,17 @@ import { PrintNever } from '#components-ui/print-visibility';
 
 export function BrowserIsOutdatedBanner({ children }: { children: ReactNode }) {
   return (
-    <PrintNever>
-      <div
-        id="browser-is-outdated"
-        role="dialog"
-        aria-label="Votre navigateur est obsolète"
-      />
+    <>
+      <PrintNever>
+        <div
+          id="browser-is-outdated"
+          role="dialog"
+          aria-label="Votre navigateur est obsolète"
+        />
+      </PrintNever>
+
       {children}
+
       {/* This script is at the end of the page to not block the rendering process and improve LCP */}
       <script
         //  Show warning for browsers
@@ -41,6 +45,6 @@ export function BrowserIsOutdatedBanner({ children }: { children: ReactNode }) {
         `,
         }}
       ></script>
-    </PrintNever>
+    </>
   );
 }
