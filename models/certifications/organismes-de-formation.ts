@@ -14,6 +14,7 @@ export type IOrganismeFormation = {
     nda: string | null;
     exNda: string | null;
     stagiaires: number | null;
+    formateurs: number | null;
     certifications: string[];
     specialite: string;
     dateDeclaration: string | null;

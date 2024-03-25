@@ -3,13 +3,28 @@
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
-const ButtonAgentConnect: React.FC<{ usePathFrom?: boolean }> = ({
-  usePathFrom,
+type IProps = {
+  useCurrentPathForRediction: boolean;
+  alternatePathForRedirection?: string;
+};
+
+const ButtonAgentConnect: React.FC<IProps> = ({
+  alternatePathForRedirection,
+  useCurrentPathForRediction,
 }) => {
-  const pathFrom = usePathname();
+  let pathFrom = null;
+  const currentPath = usePathname();
+
+  if (useCurrentPathForRediction) {
+    pathFrom = currentPath;
+  }
+  if (alternatePathForRedirection) {
+    pathFrom = alternatePathForRedirection;
+  }
+
   return (
     <form action="/api/auth/agent-connect/login" method="get">
-      {usePathFrom && pathFrom && (
+      {pathFrom && (
         <input readOnly hidden aria-hidden name="pathFrom" value={pathFrom} />
       )}
       <div className="fr-connect-group">
