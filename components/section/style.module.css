@@ -5,10 +5,9 @@
   position: relative;
   margin: 20px 0 40px;
   padding: 1rem;
-  contain: content;
 }
 
-.section-container>h2 {
+.section-container > h2 {
   margin-top: 0;
   margin-bottom: 25px;
   display: inline-block;
@@ -42,7 +41,7 @@
     display: none;
   }
 
-  .section-container>h2 {
+  .section-container > h2 {
     max-width: 100%;
   }
 }
