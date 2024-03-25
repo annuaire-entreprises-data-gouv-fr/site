@@ -10,6 +10,7 @@ import {
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
 import useFetchActesRNE from 'hooks/fetch/actes-RNE';
 import AgentWallDocuments from '../agent-wall/documents';
@@ -86,9 +87,9 @@ const AgentComponent: React.FC<{
 
 const DocumentActesSection: React.FC<{
   uniteLegale: IUniteLegale;
-  isAgent: boolean;
-}> = ({ uniteLegale, isAgent }) => {
-  if (!isAgent) {
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => {
+  if (!session?.rights.actesRne) {
     return (
       <AgentWallDocuments
         title="Actes et statuts"

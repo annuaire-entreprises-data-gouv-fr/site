@@ -17,7 +17,6 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-helper/page/post-server-side-props';
-import { isAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -45,7 +44,7 @@ const Annonces: NextPageWithLayout<IProps> = ({
           uniteLegale={uniteLegale}
           session={session}
         />
-        {estDiffusible(uniteLegale) || isAgent(session) ? (
+        {estDiffusible(uniteLegale) || session?.rights.nonDiffusible ? (
           <AnnoncesBodacc uniteLegale={uniteLegale} />
         ) : (
           <DonneesPriveesSection />

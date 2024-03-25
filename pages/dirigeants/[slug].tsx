@@ -25,7 +25,6 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-helper/page/post-server-side-props';
-import { isAgent } from '#utils/session';
 import { useFetchImmatriculationRNE } from 'hooks';
 import useSession from 'hooks/use-session';
 import { NextPageWithLayout } from 'pages/_app';
@@ -76,7 +75,7 @@ function DirigeantInformation({ uniteLegale }: { uniteLegale: IUniteLegale }) {
         uniteLegale={uniteLegale}
         immatriculationRNE={immatriculationRNE}
       />
-      {estDiffusible(uniteLegale) || isAgent(session) ? (
+      {estDiffusible(uniteLegale) || session?.rights.nonDiffusible ? (
         <>
           <DirigeantsSection
             immatriculationRNE={immatriculationRNE}

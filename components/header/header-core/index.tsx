@@ -4,7 +4,7 @@ import { PrintNever } from '#components-ui/print-visibility';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
-import { ISession, isLoggedIn } from '#utils/session';
+import { ISession } from '#utils/session';
 import styles from './styles.module.css';
 
 type IProps = {
@@ -34,7 +34,7 @@ export const HeaderCore: React.FC<IProps> = ({
       className="fr-header"
       style={{ filter: !useSearchBar ? 'none' : undefined }}
     >
-      <LoadBar isAgent={isLoggedIn(session)} />
+      <LoadBar session={session} />
 
       <PrintNever>
         <form
@@ -100,7 +100,7 @@ export const HeaderCore: React.FC<IProps> = ({
                   <div className="fr-header__tools-links">
                     <ul className="fr-links-group">
                       <li>
-                        {isLoggedIn(session) ? (
+                        {session?.rights.isLoggedIn ? (
                           <div className={styles.menuLogout + ' fr-link'}>
                             <div>
                               <Icon slug="user">

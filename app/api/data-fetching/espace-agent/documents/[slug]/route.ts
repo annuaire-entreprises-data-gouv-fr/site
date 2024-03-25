@@ -5,7 +5,6 @@ import { FetchRessourceException } from '#models/exceptions';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { isAgent } from '#utils/session';
 
 export async function GET(
   _request: Request,
@@ -14,7 +13,7 @@ export async function GET(
   const session = await getSession();
   const slug = params.slug;
   try {
-    if (!isAgent(session)) {
+    if (!session?.rights.documentsRne) {
       throw new HttpForbiddenError('Unauthorized account');
     }
 

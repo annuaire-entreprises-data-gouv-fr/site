@@ -4,7 +4,6 @@ import { FetchRessourceException } from '#models/exceptions';
 import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { isSuperAgent } from '#utils/session';
 
 export async function GET(
   _request: Request,
@@ -13,7 +12,7 @@ export async function GET(
   const session = await getSession();
   const slug = params.slug;
   try {
-    if (!isSuperAgent(session)) {
+    if (!session?.rights.conformite) {
       throw new HttpForbiddenError('Unauthorized account');
     }
 

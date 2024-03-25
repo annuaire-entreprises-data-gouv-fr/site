@@ -16,7 +16,6 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-helper/page/post-server-side-props';
-import { isAgent, isSuperAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -43,16 +42,13 @@ const UniteLegaleForAgentPage: NextPageWithLayout<IProps> = ({
         ficheType={FICHE.DOCUMENTS}
         session={session}
       />
-      {isSuperAgent(session) && (
+      {session?.rights.conformite && (
         <>
           <ConformiteSection uniteLegale={uniteLegale} />
           <HorizontalSeparator />
         </>
       )}
-      <DocumentActesSection
-        uniteLegale={uniteLegale}
-        isAgent={isAgent(session)}
-      />
+      <DocumentActesSection uniteLegale={uniteLegale} session={session} />
     </div>
   </>
 );

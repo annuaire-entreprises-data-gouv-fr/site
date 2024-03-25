@@ -1,5 +1,5 @@
 import { ISTATUTDIFFUSION, estDiffusible } from '#models/core/statut-diffusion';
-import { ISession, isAgent } from '#utils/session';
+import { ISession } from '#models/user/session';
 import { Info, ProtectedData } from '../alerts';
 
 const DefaultNonDiffusibleAlert = () => (
@@ -42,7 +42,7 @@ export default function NonDiffusibleAlert({
   if (estDiffusible({ statutDiffusion })) {
     return null;
   }
-  if (isAgent(session)) {
+  if (session?.rights.nonDiffusible) {
     <ProtectedData full>
       Les informations de cette structure ne sont pas accessibles au grand
       public mais vous pouvez voir ses informations grâce à votre compte{' '}

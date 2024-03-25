@@ -4,13 +4,13 @@ import {
   nonDiffusibleDataFormatter,
 } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
-import { ISession, isAgent } from '#utils/session';
+import { ISession } from '#models/user/session';
 
 const ExtraitRNELink: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  return estDiffusible(uniteLegale) || isAgent(session) ? (
+  return estDiffusible(uniteLegale) || session?.rights.nonDiffusible ? (
     <a
       target="_blank"
       rel="noopener"

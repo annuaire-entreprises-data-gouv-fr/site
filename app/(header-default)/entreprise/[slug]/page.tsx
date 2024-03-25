@@ -31,7 +31,6 @@ import extractParamsAppRouter, {
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
 import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
-import { isSuperAgent } from '#utils/session';
 
 const cachedGetUniteLegale = cache(
   async (slug: string, page: number, isBot: boolean) => {
@@ -93,7 +92,7 @@ export default withErrorHandler(async function UniteLegalePage(
         ) : (
           <>
             <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
-            {isSuperAgent(session) && (
+            {session?.rights.isAgent && (
               <EspaceAgentSummarySection
                 uniteLegale={uniteLegale}
                 session={session}

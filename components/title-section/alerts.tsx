@@ -8,7 +8,7 @@ import { PrintNever } from '#components-ui/print-visibility';
 import { Tag } from '#components-ui/tag';
 import { ISTATUTDIFFUSION } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
-import { ISession, isAgent } from '#utils/session';
+import { ISession } from '#models/user/session';
 
 export default function TitleAlerts({
   uniteLegale,
@@ -25,7 +25,7 @@ export default function TitleAlerts({
       <MultipleSirenAlert uniteLegale={uniteLegale} />
       <NotInSireneAlert uniteLegale={uniteLegale} />
 
-      {isAgent(session) && (
+      {session?.rights.isAgent && (
         <PrintNever>
           <ProtectedData full>
             Vous êtes connecté avec un compte <strong>agent public</strong>. Ce

@@ -3,7 +3,6 @@ import { MultiChoice } from '#components-ui/multi-choice';
 import constants from '#models/constants';
 import { randomId } from '#utils/helpers';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { isAgent, isSuperAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 import styles from './style.module.css';
 
@@ -97,16 +96,12 @@ const FeedBackPage: NextPageWithLayout = async () => {
             </fieldset>
 
             <fieldset>
-              {isAgent(session) ? (
+              {session?.rights.isLoggedIn ? (
                 <input
                   aria-hidden
                   type="hidden"
                   name="radio-set-visitor-type"
-                  value={
-                    isSuperAgent(session)
-                      ? 'Super-agent connecté'
-                      : 'Agent connecté'
-                  }
+                  value={`${session?.user?.userType}`}
                   tabIndex={-1}
                 />
               ) : (
@@ -176,7 +171,9 @@ const FeedBackPage: NextPageWithLayout = async () => {
                   id="email"
                   name="email"
                   type="email"
-                  defaultValue={isAgent(session) ? session?.user?.email : ''}
+                  defaultValue={
+                    session?.rights.isLoggedIn ? session?.user?.email : ''
+                  }
                 />
               </div>
             </fieldset>

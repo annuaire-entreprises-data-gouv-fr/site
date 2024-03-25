@@ -12,6 +12,7 @@ import {
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import useFetchActesRNE from 'hooks/fetch/actes-RNE';
@@ -98,9 +99,9 @@ const AgentComponent: React.FC<{
 
 const DocumentBilansSection: React.FC<{
   uniteLegale: IUniteLegale;
-  isAgent: boolean;
-}> = ({ uniteLegale, isAgent }) => {
-  if (!isAgent) {
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => {
+  if (!session?.rights.bilansRne) {
     return (
       <AgentWallDocuments
         title="Bilans"
