@@ -8,7 +8,7 @@
   contain: content;
 }
 
-.section-container>h2 {
+.section-container > h2 {
   margin-top: 0;
   margin-bottom: 25px;
   display: inline-block;
@@ -17,7 +17,7 @@
 
   padding: 0 7px;
   border-radius: 2px;
-  max-width: calc(100% - 250px);
+  max-width: calc(100% - 400px);
 }
 
 .administration-page-link {
@@ -42,7 +42,7 @@
     display: none;
   }
 
-  .section-container>h2 {
+  .section-container > h2 {
     max-width: 100%;
   }
 }
