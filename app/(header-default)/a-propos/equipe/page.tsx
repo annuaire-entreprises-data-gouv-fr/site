@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
+import styles from './style.module.css';
 
 const team = [
   {
@@ -166,9 +167,9 @@ export default function Equipe() {
           </a>
           .
         </p>
-        <div className="team-members">
+        <div className={styles['team-members']}>
           {team.map((member) => (
-            <div className="team-member" key={member.fullname}>
+            <div className={styles['team-member']} key={member.fullname}>
               <img
                 src={member.photoUrl}
                 alt={`Photo de ${member.fullname} - ${member.role}`}
@@ -178,26 +179,6 @@ export default function Equipe() {
           ))}
         </div>
       </TextWrapper>
-      <style jsx>{`
-        .team-members {
-          margin: 60px auto;
-          display: flex;
-          justify-content: center;
-          width: 100%;
-          flex-wrap: wrap;
-        }
-
-        .team-member {
-          text-align: center;
-          width: 80px;
-        }
-
-        .team-member img {
-          width: 100px;
-          border-radius: 50%;
-          border: 5px solid #fff;
-        }
-      `}</style>
     </div>
   );
 }
