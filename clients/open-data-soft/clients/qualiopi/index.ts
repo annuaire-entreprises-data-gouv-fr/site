@@ -36,6 +36,7 @@ const mapToDomainObject = (record: IOrganismesFormationRecord) => {
       record.informationsdeclarees_datedernieredeclaration || null,
     specialite: record.toutes_specialites,
     stagiaires: record.informationsdeclarees_nbstagiaires || null,
+    formateurs: record.informationsdeclarees_effectifformateurs || null,
     certifications: record.certifications
       ? (record.certifications || '').split('/')
       : [],

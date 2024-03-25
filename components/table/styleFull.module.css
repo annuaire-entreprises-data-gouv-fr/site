@@ -12,8 +12,7 @@ td.cell {
   border-left: none;
   border-right: none;
   border: none;
-  padding: 5px;
-  padding-left: 10px;
+  padding: 5px 0;
   background-color: #fff;
 }
 
