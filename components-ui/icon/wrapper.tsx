@@ -30,6 +30,7 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
           width: size + 'px',
           color: color || 'inherit',
           marginRight: children ? '5px' : '0',
+          flexShrink: '0',
         }}
       >
         {icon}
