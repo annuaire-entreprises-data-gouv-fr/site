@@ -31,6 +31,9 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
           color: color || 'inherit',
           marginRight: children ? '5px' : '0',
           flexShrink: '0',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         {icon}
