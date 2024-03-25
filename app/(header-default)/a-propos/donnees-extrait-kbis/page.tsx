@@ -1,15 +1,19 @@
+import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
 import { INPI, INSEE } from '#components/administrations';
-import Meta from '#components/meta/meta-client';
-import { NextPageWithLayout } from '../_app';
 
-const ExtraitKbis: NextPageWithLayout = () => {
+export const metadata: Metadata = {
+  title: 'Comment retrouver les données contenues dans un extrait KBIS ou D1 ?',
+  alternates: {
+    canonical:
+      'https://annuaire-entreprises.data.gouv.fr/a-propos/donnees-extrait-kbis',
+  },
+  robots: 'index, follow',
+};
+
+export default function ExtraitKbis() {
   return (
     <>
-      <Meta
-        title="Comment retrouver les données contenues dans un extrait KBIS ou D1 ?"
-        canonical="https://annuaire-entreprises.data.gouv.fr/a-propos/donnees-extrait-kbis"
-      />
       <TextWrapper>
         <h1>
           Retrouver les données contenues dans un extrait KBIS ou un extrait D1
@@ -133,6 +137,4 @@ const ExtraitKbis: NextPageWithLayout = () => {
       </TextWrapper>
     </>
   );
-};
-
-export default ExtraitKbis;
+}

@@ -1,6 +1,5 @@
+import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
-import Meta from '#components/meta/meta-client';
-import { NextPageWithLayout } from '../_app';
 
 const team = [
   {
@@ -53,14 +52,17 @@ const team = [
   },
 ];
 
-const Equipe: NextPageWithLayout = () => {
+export const metadata: Metadata = {
+  title: "Qui est l’équipe derrière l'Annuaire des Entreprises",
+  alternates: {
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/a-propos/equipe',
+  },
+  robots: 'noindex, nofollow',
+};
+
+export default function Equipe() {
   return (
     <div>
-      <Meta
-        noIndex
-        title="Qui est l’équipe derrière l'Annuaire des Entreprises"
-        canonical="https://annuaire-entreprises.data.gouv.fr/a-propos/equipe"
-      />
       <TextWrapper>
         <h1>Qui sommes-nous ?</h1>
         <h2>Qui construit l’Annuaire des Entreprises ?</h2>
@@ -198,6 +200,4 @@ const Equipe: NextPageWithLayout = () => {
       `}</style>
     </div>
   );
-};
-
-export default Equipe;
+}

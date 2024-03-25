@@ -1,16 +1,18 @@
+import { Metadata } from 'next';
 import { Info } from '#components-ui/alerts';
 import TextWrapper from '#components-ui/text-wrapper';
-import Meta from '#components/meta/meta-client';
 import { FullTable } from '#components/table/full';
-import { NextPageWithLayout } from '../_app';
 
-const Budget: NextPageWithLayout = () => (
+export const metadata: Metadata = {
+  title: 'Budget de l’Annuaire des Entreprises',
+  alternates: {
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/a-propos/budget',
+  },
+  robots: 'noindex, nofollow',
+};
+
+export default function Budget() {
   <div>
-    <Meta
-      noIndex
-      title="Politique de confidentialité"
-      canonical="https://annuaire-entreprises.data.gouv.fr/a-propos/budget"
-    />
     <TextWrapper>
       <h1>Budget</h1>
       <p>
@@ -93,7 +95,5 @@ const Budget: NextPageWithLayout = () => (
         </p>
       </Info>
     </TextWrapper>
-  </div>
-);
-
-export default Budget;
+  </div>;
+}
