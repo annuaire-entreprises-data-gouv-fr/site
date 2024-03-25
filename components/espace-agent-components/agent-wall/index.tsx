@@ -33,7 +33,7 @@ const AgentWall: React.FC<{
                 Disponible pour toutes les administrations, sans création de
                 compte.
               </p>
-              <ButtonAgentConnect usePathFrom />
+              <ButtonAgentConnect useCurrentPathForRediction />
             </div>
             <div className="cta-footer">{modalFooter}</div>
           </div>
