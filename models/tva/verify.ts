@@ -1,7 +1,7 @@
 import { TVAUserException, clientTVA } from '#clients/api-vies';
 import { HttpConnectionReset } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { FetchRessourceException, IExceptionContext } from '#models/exceptions';
+import { FetchRessourceException } from '#models/exceptions';
 import { verifySiren, verifyTVANumber } from '#utils/helpers';
 import { logWarningInSentry } from '#utils/sentry';
 import { tvaNumber } from './utils';
@@ -23,8 +23,10 @@ export const buildAndVerifyTVA = async (
         ? 'ECONNRESET in API TVA'
         : 'Error in API TVA';
     logWarningInSentry(
-      new FetchVerifyTVAException({
+      new FetchRessourceException({
         message,
+        ressource: 'VerifyTVA',
+        administration: EAdministration.VIES,
         cause: e,
         context: { siren },
       })
@@ -32,18 +34,3 @@ export const buildAndVerifyTVA = async (
     throw e;
   }
 };
-
-type IFetchEtablissementExceptionArgs = {
-  message?: string;
-  cause?: any;
-  context?: IExceptionContext;
-};
-export class FetchVerifyTVAException extends FetchRessourceException {
-  constructor(args: IFetchEtablissementExceptionArgs) {
-    super({
-      ressource: 'VerifyTVA',
-      administration: EAdministration.VIES,
-      ...args,
-    });
-  }
-}
