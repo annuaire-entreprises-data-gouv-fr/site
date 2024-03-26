@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/nextjs';
 import { Exception } from '#models/exceptions';
 import { isNextJSSentryActivated } from '#utils/sentry';
+import { getTransactionNameFromUrl } from '#utils/sentry/tracing';
 declare global {
   interface Window {
     IS_OUTDATED_BROWSER: boolean;
@@ -42,6 +43,14 @@ if (isNextJSSentryActivated) {
       ) {
         event.fingerprint = ['HydrationError'];
       }
+      return event;
+    },
+
+    beforeSendTransaction(event) {
+      if (event.transaction && event.transaction.startsWith('/')) {
+        event.transaction = getTransactionNameFromUrl(event.transaction);
+      }
+
       return event;
     },
   });
