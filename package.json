@@ -33,7 +33,6 @@
     "canvas": "^2.11.2",
     "chart.js": "^4.4.1",
     "crawler-user-agents": "^1.0.117",
-    "crisp-api": "^8.3.1",
     "cssnano": "^6.1.0",
     "dotenv": "^16.3.2",
     "eslint": "^8.56.0",

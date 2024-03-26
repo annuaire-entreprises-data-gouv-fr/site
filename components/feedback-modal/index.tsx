@@ -116,8 +116,8 @@ function Icon() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M28.5 0.5C29.3284 0.5 30 1.17157 30 2V23C30 23.8284 29.3284 24.5 28.5 24.5H6.6825L0 29.75V2C0 1.17157 0.671573 0.5 1.5 0.5H28.5ZM16.5 15.5H13.5V18.5H16.5V15.5ZM16.5 6.5H13.5V14H16.5V6.5Z"
         fill="white"
       />

@@ -1,7 +1,6 @@
-import Crisp from 'crisp-api';
+import routes from '#clients/routes';
 import { Exception } from '#models/exceptions';
-
-const CrispClient = new Crisp();
+import httpClient from '#utils/network';
 
 if (
   !process.env.CRISP_TOKEN_ID ||
@@ -14,11 +13,14 @@ if (
 }
 
 const websiteID = process.env.CRISP_WEBSITE_ID;
-CrispClient.authenticateTier(
-  'plugin',
-  process.env.CRISP_TOKEN_ID,
-  process.env.CRISP_TOKEN_KEY
-);
+const crispAuthHeaders = {
+  'X-Crisp-Tier': 'plugin',
+  Authorization:
+    'Basic ' +
+    btoa(process.env.CRISP_TOKEN_ID + ':' + process.env.CRISP_TOKEN_KEY),
+};
+
+const rootUrl = routes.tooling.crisp + websiteID;
 
 export async function sendMessageToCrisp(
   author: {
@@ -29,30 +31,38 @@ export async function sendMessageToCrisp(
   tags: Array<string> = []
 ): Promise<void> {
   try {
-    const response = await CrispClient.website.createNewConversation(websiteID);
-    const sessionID = response.session_id;
-
+    const response = await httpClient<{ data: { session_id: string } }>({
+      method: 'POST',
+      url: rootUrl + '/conversation',
+      headers: crispAuthHeaders,
+      data: {},
+    });
+    const sessionID = response.data.session_id;
     const metas = {
       nickname: author.name,
       email: author.email,
       segments: tags,
     };
 
-    await CrispClient.website.updateConversationMetas(
-      websiteID,
-      sessionID,
-      metas
-    );
+    await httpClient({
+      method: 'PATCH',
+      headers: crispAuthHeaders,
+      url: rootUrl + '/conversation/' + sessionID + '/meta',
+      data: metas,
+    });
 
-    await CrispClient.website.sendMessageInConversation(websiteID, sessionID, {
-      type: 'text',
-      content: message,
-      from: 'user',
-      origin: 'chat',
+    await httpClient({
+      method: 'POST',
+      headers: crispAuthHeaders,
+      url: rootUrl + '/conversation/' + sessionID + '/message',
+      data: {
+        type: 'text',
+        content: message,
+        from: 'user',
+        origin: 'chat',
+      },
     });
   } catch (error) {
-    console.error(error);
-
     throw new Exception({
       name: 'CrispClientError',
       cause: error,
