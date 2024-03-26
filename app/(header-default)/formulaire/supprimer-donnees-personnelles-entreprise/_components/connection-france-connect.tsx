@@ -1,6 +1,7 @@
 import ButtonLink from '#components-ui/button';
 import ButtonFranceConnect from '#components-ui/button-france-connect';
-import { ISession, getHidePersonalDataRequestFCSession } from '#utils/session';
+import { ISession } from '#models/user/session';
+import { getHidePersonalDataRequestFCSession } from '#utils/session';
 
 export async function ConnectionFranceConnect({
   session,

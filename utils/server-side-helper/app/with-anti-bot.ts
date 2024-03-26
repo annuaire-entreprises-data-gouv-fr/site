@@ -1,7 +1,7 @@
 import { userAgent } from 'next/server';
 import { Information } from '#models/exceptions';
+import { ISession } from '#models/user/session';
 import { logInfoInSentry } from '#utils/sentry';
-import { ISession } from '../../session';
 import getSession from './get-session';
 
 /**

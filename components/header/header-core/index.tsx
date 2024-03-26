@@ -4,7 +4,7 @@ import { PrintNever } from '#components-ui/print-visibility';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
-import { ISession } from '#utils/session';
+import { ISession } from '#models/user/session';
 import styles from './styles.module.css';
 
 type IProps = {
