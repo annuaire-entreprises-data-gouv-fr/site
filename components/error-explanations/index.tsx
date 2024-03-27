@@ -36,9 +36,9 @@ const ServerErrorExplanations = () => (
   </ErrorTemplate>
 );
 
-const ClientErrorExplanations = ({ error }: { error: Error }) => (
+const ClientErrorExplanations = ({ error }: { error?: Error }) => (
   <ErrorTemplate>
-    {error.name === 'ChunkLoadError' ? (
+    {error?.name === 'ChunkLoadError' ? (
       <>
         <h1>Erreur lors du chargement de la page</h1>
         <p>
