@@ -1,7 +1,5 @@
 import React from 'react';
 import { PrintNever } from '#components-ui/print-visibility';
-import { INSEE } from '#components/administrations';
-import NonRenseigne from '#components/non-renseigne';
 import constants from '#models/constants';
 
 export const InfoBanner: React.FC<{}> = () => (
@@ -10,35 +8,21 @@ export const InfoBanner: React.FC<{}> = () => (
       className="info-banner"
       role="dialog"
       aria-label="Instabilité des services de nos partenaires"
+      style={{
+        paddingTop: '15px',
+        paddingBottom: '15px',
+        width: '100%',
+        backgroundColor: '#e5f3ff',
+        borderBottom: `2px solid ${constants.colors.frBlue}`,
+      }}
     >
       <div className="fr-container">
-        ⚠️ Suite à une instabilité des services de nos partenaires (
-        <INSEE />
-        ), les fonctionnalités suivantes sont dégradées :
-        <ul>
-          <li>
-            Sur la page d’un établissement ou d’un siège social, le nombre de
-            salariés, la date de fermeture et la date de dernière mise à jour
-            sont <NonRenseigne />
-          </li>
-          <li>
-            Si une entreprise a plus de 100 établissements, la liste de ses
-            établissements ne fonctionne plus.
-          </li>
-        </ul>
-        Veuillez nous excuser pour la gêne occasionnée, nous faisons de notre
-        mieux pour rétablir le service.
+        ⚠️ Une mise à jour est en cours et les données affichées sur notre site
+        peuvent ne pas être à jour.
+        <br />
+        Cette situation est susceptible de perdurer jusqu’à mardi 02 avril.
+        Veuillez nous excuser pour la gêne occasionnée.
       </div>
     </div>
-    <style jsx>{`
-      .info-banner {
-        padding-top: 15px;
-        padding-bottom: 15px;
-        font-size: 0.9rem;
-        width: 100%;
-        background-color: #e5f3ff;
-        border-bottom: 2px solid ${constants.colors.frBlue};
-      }
-    `}</style>
   </PrintNever>
 );
