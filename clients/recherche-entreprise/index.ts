@@ -329,7 +329,6 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
 const mapToEtablissement = (
   etablissement: ISiege | IMatchingEtablissement,
   estEntrepreneurIndividuel: boolean,
-  siren?: Siren
 ): IEtablissement => {
   const {
     siret,
