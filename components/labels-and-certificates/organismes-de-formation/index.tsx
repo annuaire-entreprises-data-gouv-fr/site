@@ -51,9 +51,15 @@ export const OrganismeDeFormationSection = ({
                     <br />
                   </>
                 )}
+                {fields.formateurs && (
+                  <>
+                    <strong>Effectifs formateurs :</strong> {fields.formateurs}
+                    <br />
+                  </>
+                )}
                 {fields.stagiaires && (
                   <>
-                    <strong>Nombre de stagiaires :</strong> {fields.stagiaires}
+                    <strong>Effectifs stagiaires :</strong> {fields.stagiaires}
                     <br />
                   </>
                 )}

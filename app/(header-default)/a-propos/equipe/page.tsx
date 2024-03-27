@@ -1,6 +1,6 @@
+import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
-import Meta from '#components/meta/meta-client';
-import { NextPageWithLayout } from '../_app';
+import styles from './style.module.css';
 
 const team = [
   {
@@ -53,14 +53,17 @@ const team = [
   },
 ];
 
-const Equipe: NextPageWithLayout = () => {
+export const metadata: Metadata = {
+  title: "Qui est l’équipe derrière l'Annuaire des Entreprises",
+  alternates: {
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/a-propos/equipe',
+  },
+  robots: 'noindex, nofollow',
+};
+
+export default function Equipe() {
   return (
     <div>
-      <Meta
-        noIndex
-        title="Qui est l’équipe derrière l'Annuaire des Entreprises"
-        canonical="https://annuaire-entreprises.data.gouv.fr/a-propos/equipe"
-      />
       <TextWrapper>
         <h1>Qui sommes-nous ?</h1>
         <h2>Qui construit l’Annuaire des Entreprises ?</h2>
@@ -164,9 +167,9 @@ const Equipe: NextPageWithLayout = () => {
           </a>
           .
         </p>
-        <div className="team-members">
+        <div className={styles['team-members']}>
           {team.map((member) => (
-            <div className="team-member" key={member.fullname}>
+            <div className={styles['team-member']} key={member.fullname}>
               <img
                 src={member.photoUrl}
                 alt={`Photo de ${member.fullname} - ${member.role}`}
@@ -176,28 +179,6 @@ const Equipe: NextPageWithLayout = () => {
           ))}
         </div>
       </TextWrapper>
-      <style jsx>{`
-        .team-members {
-          margin: 60px auto;
-          display: flex;
-          justify-content: center;
-          width: 100%;
-          flex-wrap: wrap;
-        }
-
-        .team-member {
-          text-align: center;
-          width: 80px;
-        }
-
-        .team-member img {
-          width: 100px;
-          border-radius: 50%;
-          border: 5px solid #fff;
-        }
-      `}</style>
     </div>
   );
-};
-
-export default Equipe;
+}
