@@ -5,6 +5,7 @@ import {
 import { HttpBadRequestError, HttpForbiddenError } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
+import { EScope, hasRights } from '#models/user/rights';
 import logErrorInSentry from '#utils/sentry';
 import withSession from '#utils/session/with-session';
 
@@ -15,7 +16,7 @@ export default withSession(async function download(req, res) {
   } = req;
 
   try {
-    if (!session?.rights.documentsRne) {
+    if (!hasRights(session, EScope.documentsRne)) {
       throw new HttpForbiddenError('Unauthorized account');
     }
 

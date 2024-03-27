@@ -12,6 +12,7 @@ import {
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
+import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
@@ -101,7 +102,7 @@ const DocumentBilansSection: React.FC<{
   uniteLegale: IUniteLegale;
   session: ISession | null;
 }> = ({ uniteLegale, session }) => {
-  if (!session?.rights.bilansRne) {
+  if (!hasRights(session, EScope.bilansRne)) {
     return (
       <AgentWallDocuments
         title="Bilans"

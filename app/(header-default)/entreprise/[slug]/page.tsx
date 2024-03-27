@@ -20,6 +20,7 @@ import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { isAssociation, isCollectiviteTerritoriale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { getServicePublicByUniteLegale } from '#models/service-public';
+import { isAgent } from '#models/user/rights';
 import {
   extractSirenOrSiretSlugFromUrl,
   shouldNotIndex,
@@ -92,7 +93,7 @@ export default withErrorHandler(async function UniteLegalePage(
         ) : (
           <>
             <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
-            {session?.rights.isAgent && (
+            {isAgent(session) && (
               <EspaceAgentSummarySection
                 uniteLegale={uniteLegale}
                 session={session}

@@ -7,6 +7,7 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { IUniteLegale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
+import { EScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -42,7 +43,7 @@ const UniteLegaleForAgentPage: NextPageWithLayout<IProps> = ({
         ficheType={FICHE.DOCUMENTS}
         session={session}
       />
-      {session?.rights.conformite && (
+      {hasRights(session, EScope.conformite) && (
         <>
           <ConformiteSection uniteLegale={uniteLegale} />
           <HorizontalSeparator />

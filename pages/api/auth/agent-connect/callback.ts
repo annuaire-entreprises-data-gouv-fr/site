@@ -1,7 +1,6 @@
 import { agentConnectAuthenticate } from '#clients/auth/agent-connect/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { Exception } from '#models/exceptions';
-import getRights from '#models/user/rights';
 import { getUserScopes } from '#models/user/scopes';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import { cleanPathFrom, getPathFrom, setAgentSession } from '#utils/session';
@@ -11,7 +10,6 @@ export default withSession(async function callbackRoute(req, res) {
   try {
     const userInfo = await agentConnectAuthenticate(req);
     const { scopes, userType } = await getUserScopes(userInfo?.email);
-    const rights = await getRights(scopes);
     const session = req.session;
 
     await setAgentSession(
@@ -19,7 +17,7 @@ export default withSession(async function callbackRoute(req, res) {
       userInfo.family_name ?? '',
       userInfo.given_name ?? '',
       userInfo.siret ?? '',
-      rights,
+      scopes,
       userType,
       session
     );

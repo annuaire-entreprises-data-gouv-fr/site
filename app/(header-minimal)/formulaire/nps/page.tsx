@@ -1,6 +1,7 @@
 import ButtonLink from '#components-ui/button';
 import { MultiChoice } from '#components-ui/multi-choice';
 import constants from '#models/constants';
+import { isLoggedIn } from '#models/user/rights';
 import { randomId } from '#utils/helpers';
 import getSession from '#utils/server-side-helper/app/get-session';
 import { NextPageWithLayout } from 'pages/_app';
@@ -96,7 +97,7 @@ const FeedBackPage: NextPageWithLayout = async () => {
             </fieldset>
 
             <fieldset>
-              {session?.rights.isLoggedIn ? (
+              {isLoggedIn(session) ? (
                 <input
                   aria-hidden
                   type="hidden"
@@ -171,9 +172,7 @@ const FeedBackPage: NextPageWithLayout = async () => {
                   id="email"
                   name="email"
                   type="email"
-                  defaultValue={
-                    session?.rights.isLoggedIn ? session?.user?.email : ''
-                  }
+                  defaultValue={isLoggedIn(session) ? session?.user?.email : ''}
                 />
               </div>
             </fieldset>

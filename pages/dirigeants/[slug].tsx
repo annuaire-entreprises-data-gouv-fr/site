@@ -16,6 +16,7 @@ import {
   IServicePublic,
   getServicePublicByUniteLegale,
 } from '#models/service-public';
+import { EScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -75,7 +76,8 @@ function DirigeantInformation({ uniteLegale }: { uniteLegale: IUniteLegale }) {
         uniteLegale={uniteLegale}
         immatriculationRNE={immatriculationRNE}
       />
-      {estDiffusible(uniteLegale) || session?.rights.nonDiffusible ? (
+      {estDiffusible(uniteLegale) ||
+      hasRights(session, EScope.nonDiffusible) ? (
         <>
           <DirigeantsSection
             immatriculationRNE={immatriculationRNE}

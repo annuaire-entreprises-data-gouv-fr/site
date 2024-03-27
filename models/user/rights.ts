@@ -1,30 +1,36 @@
-import { IScope } from './scopes';
+import { ISession } from './session';
 
-export type IRights = {
-  // view variables
-  actesRne: boolean;
-  bilansRne: boolean;
-  documentsRne: boolean;
-  conformite: boolean;
-  nonDiffusible: boolean;
-  isLoggedIn: boolean;
+export enum EScope {
+  actesRne = 'rne',
+  bilansRne = 'rne',
+  documentsRne = 'rne',
+  conformite = 'conformite',
+  nonDiffusible = 'nonDiffusible',
+  isAgent = 'isAgent',
+}
 
-  // avoid using these last two and prefer dedicated view variable
-  isAgent: boolean;
-};
+/**
+ * Has rights to access a view
+ */
+export function hasRights(session: ISession | null, rightScope: EScope) {
+  const userScopes = session?.user?.scopes || [];
 
-export default function getRights(scopes: IScope[]): IRights {
-  const isAgent = scopes.length > 0;
-  const hasScope = (slug: IScope) => {
-    return scopes.indexOf(slug) > -1;
-  };
-  return {
-    actesRne: hasScope('rne'),
-    bilansRne: hasScope('rne'),
-    documentsRne: hasScope('rne'),
-    conformite: hasScope('conformite'),
-    nonDiffusible: hasScope('nondiffusible'),
-    isLoggedIn: isAgent,
-    isAgent,
-  };
+  switch (rightScope) {
+    case EScope.actesRne:
+    case EScope.bilansRne:
+    case EScope.documentsRne:
+      return userScopes.includes('rne');
+    case EScope.conformite:
+      return userScopes.includes('conformite');
+    case EScope.nonDiffusible:
+      return userScopes.includes('nondiffusible');
+    case EScope.nonDiffusible:
+      return userScopes.length > 0;
+    default:
+      return false;
+  }
+}
+
+export function isLoggedIn(session: ISession | null) {
+  return (session?.user?.scopes || []).length > 0;
 }

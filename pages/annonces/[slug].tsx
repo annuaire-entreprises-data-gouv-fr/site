@@ -8,6 +8,7 @@ import { FICHE } from '#components/title-section/tabs';
 import { estDiffusible } from '#models/core/statut-diffusion';
 import { IUniteLegale, isAssociation } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
+import { EScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -44,7 +45,8 @@ const Annonces: NextPageWithLayout<IProps> = ({
           uniteLegale={uniteLegale}
           session={session}
         />
-        {estDiffusible(uniteLegale) || session?.rights.nonDiffusible ? (
+        {estDiffusible(uniteLegale) ||
+        hasRights(session, EScope.nonDiffusible) ? (
           <AnnoncesBodacc uniteLegale={uniteLegale} />
         ) : (
           <DonneesPriveesSection />

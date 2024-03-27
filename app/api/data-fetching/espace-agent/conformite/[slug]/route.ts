@@ -1,6 +1,7 @@
 import { HttpForbiddenError } from '#clients/exceptions';
 import { getDonneesRestreintesEntreprise } from '#models/espace-agent/donnees-restreintes-entreprise';
 import { FetchRessourceException } from '#models/exceptions';
+import { EScope, hasRights } from '#models/user/rights';
 import { extractSirenFromSiret, verifySiret } from '#utils/helpers';
 import { logFatalErrorInSentry } from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
@@ -12,7 +13,7 @@ export async function GET(
   const session = await getSession();
   const slug = params.slug;
   try {
-    if (!session?.rights.conformite) {
+    if (!hasRights(session, EScope.conformite)) {
       throw new HttpForbiddenError('Unauthorized account');
     }
 

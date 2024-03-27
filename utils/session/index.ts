@@ -1,5 +1,5 @@
 import type { IronSession, SessionOptions } from 'iron-session';
-import { IRights } from '#models/user/rights';
+import { IScope } from '#models/user/scopes';
 import { ISession } from '#models/user/session';
 
 export const sessionOptions: SessionOptions = {
@@ -21,7 +21,7 @@ export const setAgentSession = async (
   familyName: string,
   firstName: string,
   siret: string,
-  rights: IRights,
+  scopes: IScope[],
   userType: string,
   session: IronSession<ISession>
 ) => {
@@ -32,8 +32,8 @@ export const setAgentSession = async (
     fullName: familyName ? `${firstName} ${familyName}` : undefined,
     siret,
     userType,
+    scopes,
   };
-  session.rights = rights;
   await session.save();
 };
 

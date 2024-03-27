@@ -4,6 +4,7 @@ import { PrintNever } from '#components-ui/print-visibility';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
+import { isLoggedIn } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import styles from './styles.module.css';
 
@@ -100,7 +101,7 @@ export const HeaderCore: React.FC<IProps> = ({
                   <div className="fr-header__tools-links">
                     <ul className="fr-links-group">
                       <li>
-                        {session?.rights.isLoggedIn ? (
+                        {isLoggedIn(session) ? (
                           <div className={styles.menuLogout + ' fr-link'}>
                             <div>
                               <Icon slug="user">

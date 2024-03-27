@@ -1,4 +1,4 @@
-import { IRights } from './rights';
+import { IScope } from './scopes';
 
 export type ISession = {
   lastVisitTimestamp?: number;
@@ -9,9 +9,8 @@ export type ISession = {
     fullName?: string;
     siret?: string;
     userType?: string;
+    scopes?: IScope[];
   };
-
-  rights: IRights;
 
   // agent connect
   state?: string;
