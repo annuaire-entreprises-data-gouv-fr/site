@@ -9,5 +9,5 @@ import {
 export default function ErrorPage({ error }: { error: NextAppError }) {
   useLogFatalErrorAppClient(error);
 
-  return <ClientErrorExplanations />;
+  return <ClientErrorExplanations error={error} />;
 }

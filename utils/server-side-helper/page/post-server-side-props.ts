@@ -1,7 +1,6 @@
 import { getIronSession } from 'iron-session';
 import { GetServerSidePropsContext } from 'next';
 import { IReqWithSession } from '#utils/session/with-session';
-import { closeAPM, createAPM } from '../../sentry/tracing';
 import { ISession, sessionOptions, setVisitTimestamp } from '../../session';
 import { errorRedirection } from '../redirection';
 import { getContext } from './error-context';
@@ -34,7 +33,6 @@ export function postServerSideProps(
   return async (context: GetServerSidePropsContext) => {
     const url = context?.req?.url || '/unknown';
 
-    const transaction = createAPM(url, 'postServerSideProps');
     const contextWithSession = context as IGetServerSidePropsContextWithSession;
     contextWithSession.req.session = await getIronSession<ISession>(
       context.req,
@@ -46,7 +44,6 @@ export function postServerSideProps(
         contextWithSession
       );
 
-    closeAPM(transaction);
     await setVisitTimestamp(contextWithSession.req.session);
 
     return {
