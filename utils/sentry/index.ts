@@ -17,9 +17,6 @@ function getScope(exception: Exception) {
   if (exception instanceof FetchRessourceException) {
     scope.setTag('administration', exception.administration);
   }
-  if (process.env.INSTANCE_NUMBER) {
-    scope.setTag('instance_number', process.env.INSTANCE_NUMBER);
-  }
   return scope;
 }
 
