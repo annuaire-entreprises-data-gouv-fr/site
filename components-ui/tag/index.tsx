@@ -19,7 +19,6 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
   size = 'medium',
   color = 'default',
   link,
-  maxWidth,
 }) => {
   const ContainerComponent = (
     props: PropsWithChildren<{ style?: any; className?: string; id?: string }>
@@ -35,7 +34,7 @@ export const Tag: React.FC<PropsWithChildren<ITagProps>> = ({
       <ContainerComponent
         id={id}
         style={{
-          maxWidth: maxWidth || '80vw',
+          margin: '3px',
         }}
         className={
           styles.frBadge +
