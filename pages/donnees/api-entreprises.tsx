@@ -15,7 +15,7 @@ const AccesByAPIPage = () => (
         <a href="https://commission.europa.eu/news/once-only-principle-system-breakthrough-eus-digital-single-market-2020-11-05_en">
           Dites-Le-Nous-Une-Fois
         </a>
-        , la <DINUM /> propose deux API pour accèder aux données détenues par
+        , la <DINUM /> propose deux API pour accéder aux données détenues par
         les administrations sur une entreprise française : l’
         <strong>API Recherche d’entreprise</strong> et l’
         <strong>API Entreprise</strong>.
@@ -28,11 +28,8 @@ const AccesByAPIPage = () => (
         National des Entreprises (RNE) et la base Sirene). Elle permet d’accéder
         aux principales données ouvertes des entreprises françaises. Elle
         contient par exemple les données de la{' '}
-        <a href="https://annuaire-entreprises.data.gouv.fr/rechercher?terme=edf">
-          page de recherche
-        </a>{' '}
-        et celles de la{' '}
-        <a href="http://localhost:3000/entreprise/electricite-de-france-edf-552081317">
+        <a href="/rechercher?terme=edf">page de recherche</a> et celles de la{' '}
+        <a href="/entreprise/electricite-de-france-edf-552081317">
           fiche résumé
         </a>
         .
@@ -72,7 +69,7 @@ const AccesByAPIPage = () => (
         d’échanger entre eux les <strong>données restreintes</strong> des
         entreprises françaises.
         <br />
-        Par définition elle est réservées aux administrations et nécessite un
+        Par définition elle est réservée aux administrations et nécessite un
         haut niveau d’habilitation. Ses données sont accessibles sur l’Annuaires
         des Entrepirses, uniquement <strong>aux agents publics</strong>. Pour en
         savoir plus,{' '}
@@ -97,14 +94,14 @@ const AccesByAPIPage = () => (
       <h2>Les API entreprises, en dehors de la DINUM</h2>
       <p>
         En dehors de ces deux API, chaque administration propose des{' '}
-        <a href="https://api.gouv.fr">API pour accèder à ses données</a>. En
-        particulier, il existe deux API pour accèder aux deux principales bases
+        <a href="https://api.gouv.fr">API pour accéder à ses données</a>. En
+        particulier, il existe deux API pour accéder aux deux principales bases
         de données d’entreprises :
       </p>
       <ul>
         <li>
           l’<a href="https://api.gouv.fr/les-api/sirene_v3">API Sirene</a> de l’
-          <INSEE />, pour accèder au répertoire Sirene.
+          <INSEE />, pour accéder au répertoire Sirene.
         </li>
         <li>
           l’
@@ -112,7 +109,7 @@ const AccesByAPIPage = () => (
             API RNE
           </a>{' '}
           de l’
-          <INPI />, pour accèder au Registre National des Entreprises.
+          <INPI />, pour accéder au Registre National des Entreprises.
         </li>
       </ul>
       <h2>Comparaison entre les différentes API disponibles</h2>
