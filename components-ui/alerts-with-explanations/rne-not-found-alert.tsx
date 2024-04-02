@@ -2,11 +2,13 @@ import ButtonLink from '#components-ui/button';
 import { INPI } from '#components/administrations';
 import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { IUniteLegale } from '#models/core/types';
+import { ISession } from '#utils/session';
 import { Warning } from '../alerts';
 
 const ImmatriculationRNENotFoundAlert: React.FC<{
   uniteLegale: IUniteLegale;
-}> = ({ uniteLegale }) => (
+  session: ISession | null;
+}> = ({ uniteLegale, session }) => (
   <Warning full>
     <strong>
       L’Immatriculation au Registre National des Entreprises (RNE) est
@@ -44,6 +46,7 @@ const ImmatriculationRNENotFoundAlert: React.FC<{
     <br />
     En l’absence de justificatif d’immatriculation, vous pouvez télécharger{' '}
     <AvisSituationLink
+      session={session}
       etablissement={uniteLegale.siege}
       label="l’avis de situation Insee du siège social"
     />

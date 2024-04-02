@@ -5,12 +5,14 @@ import {
   nonDiffusibleDataFormatter,
 } from '#models/core/statut-diffusion';
 import { IEtablissement } from '#models/core/types';
+import { ISession, isAgent } from '#utils/session';
 
 const AvisSituationLink: React.FC<{
   etablissement: IEtablissement;
+  session: ISession | null;
   label?: string;
-}> = ({ etablissement, label }) =>
-  estDiffusible(etablissement) ? (
+}> = ({ etablissement, label, session }) =>
+  estDiffusible(etablissement) || isAgent(session) ? (
     <a
       target="_blank"
       rel="noopener noreferrer"
