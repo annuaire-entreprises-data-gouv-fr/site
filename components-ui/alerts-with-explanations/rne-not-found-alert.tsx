@@ -2,7 +2,7 @@ import ButtonLink from '#components-ui/button';
 import { INPI } from '#components/administrations';
 import AvisSituationLink from '#components/justificatifs/avis-situation-link';
 import { IUniteLegale } from '#models/core/types';
-import { ISession } from '#utils/session';
+import { ISession } from '#models/user/session';
 import { Warning } from '../alerts';
 
 const ImmatriculationRNENotFoundAlert: React.FC<{
