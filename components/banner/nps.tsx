@@ -48,6 +48,7 @@ export const NPSBanner: React.FC<{}> = () => {
     if (t > 2) {
       setIsVisible(true);
     }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const close = () => {

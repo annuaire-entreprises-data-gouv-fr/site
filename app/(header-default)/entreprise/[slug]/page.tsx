@@ -47,6 +47,7 @@ const cachedGetUniteLegale = cache(
 export const generateMetadata = withErrorHandler(
   async (props: AppRouterProps): Promise<Metadata> => {
     const { slug, page, isBot } = extractParamsAppRouter(props);
+
     const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
     return {
       title: uniteLegalePageTitle(uniteLegale, null),
@@ -67,7 +68,6 @@ export default withErrorHandler(async function UniteLegalePage(
   props: AppRouterProps
 ) {
   const session = await getSession();
-
   const { slug, page, isBot, isRedirected } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
 
