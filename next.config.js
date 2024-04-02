@@ -2,7 +2,8 @@ const { withSentryConfig } = require('@sentry/nextjs');
 const redirects = require('./redirects.json');
 
 const WITH_SENTRY =
-  process.env.NEXT_PUBLIC_SENTRY_DSN && process.env.NODE_ENV === 'production';
+  !!process.env.NEXT_PUBLIC_SENTRY_DSN && process.env.NODE_ENV === 'production';
+
 const DISABLE_SOURCEMAP_UPLOAD =
   process.env.SENTRY_DISABLE_SOURCEMAP_UPLOAD === 'true';
 

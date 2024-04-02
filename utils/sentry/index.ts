@@ -3,9 +3,7 @@ import { SeverityLevel } from '@sentry/nextjs';
 import { Exception, FetchRessourceException } from '#models/exceptions';
 
 // scope allows to log stuff in tags in sentry
-function getScope(exception: Exception) {
-  const scope = new Sentry.Scope();
-
+function getScope(exception: Exception, scope: Sentry.Scope) {
   Object.entries(exception.context).forEach(([key, value]) => {
     try {
       value = (value || 'N/A').substring(0, 195);
@@ -17,18 +15,21 @@ function getScope(exception: Exception) {
   if (exception instanceof FetchRessourceException) {
     scope.setTag('administration', exception.administration);
   }
+
   return scope;
 }
 
 export const isNextJSSentryActivated =
-  process.env.NODE_ENV === 'production' && !!process.env.NEXT_PUBLIC_SENTRY_DSN;
+  !!process.env.NEXT_PUBLIC_SENTRY_DSN && process.env.NODE_ENV === 'production';
 
 const logInSentryFactory =
   (severity: SeverityLevel) => (exception: Exception) => {
     if (isNextJSSentryActivated) {
-      const scope = getScope(exception);
-      scope.setLevel(severity);
-      Sentry.captureException(exception, scope);
+      Sentry.withScope((scope) => {
+        scope = getScope(exception, scope);
+        scope.setLevel(severity);
+        Sentry.captureException(exception, scope);
+      });
     } else {
       console.error(exception, JSON.stringify(exception.context));
     }
