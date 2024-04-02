@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import { PropsWithChildren } from 'react';
-import { Question } from '#components-ui/question';
 import { NPSBanner } from '#components/banner/nps';
 import Footer from '#components/footer';
 import { HeaderWithAdvancedSearch } from '#components/header/header-advanced-search';
 import { WeNeedYouModal } from '#components/modal/we-need-you';
+import { Question } from '#components/question';
 import SocialNetworks from '#components/social-network';
 import { IParams } from '#models/search-filter-params';
 

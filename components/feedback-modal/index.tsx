@@ -2,6 +2,7 @@
 
 import { useLayoutEffect, useRef, useState } from 'react';
 import { HeightTransition } from '#components-ui/animation/height-transition';
+import FloatingHelpButton from '#components-ui/floating-help-button';
 import { PrintNever } from '#components-ui/print-visibility';
 import { IAgentContactInfo } from '#utils/session';
 import FeedbackForm from './feedback-form';
@@ -52,27 +53,21 @@ export default function FeedbackModal({ agentContactInfo }: IProps) {
   return (
     <PrintNever>
       <div onKeyDown={handleKeyDown}>
-        <button
-          ref={buttonRef}
-          aria-label="Partager une idée, un bug, une question ou une donnée manquante avec l'équipe de l'Annuaire des Entreprises"
-          onClick={() => (opened ? handleClose() : handleOpen())}
-          aria-controls="feedback-modal"
-          aria-haspopup="dialog"
-          className={styles.button}
-          aria-expanded={opened}
-        >
-          {!opened ? (
-            <Icon />
-          ) : (
-            <span
-              aria-label="Fermer la fenêtre de retour"
-              className={styles.close}
+        {!opened && (
+          <FloatingHelpButton>
+            <button
+              ref={buttonRef}
+              aria-label="Partager une idée, un bug, une question ou une donnée manquante avec l'équipe de l'Annuaire des Entreprises"
+              onClick={() => (opened ? handleClose() : handleOpen())}
+              aria-controls="feedback-modal"
+              aria-haspopup="dialog"
+              aria-expanded={opened}
+              className={styles.button}
             >
-              ×
-            </span>
-          )}
-        </button>
-
+              <Icon />
+            </button>
+          </FloatingHelpButton>
+        )}
         <div
           id="feedback-modal"
           aria-modal="false"

@@ -5,22 +5,28 @@
   z-index: 100;
 }
 
-.questionBottomRight > a {
+.questionBottomRight>:is(a, button) {
   background-color: var(--annuaire-colors-frBlue) !important;
   color: #fff;
   border-radius: 30px;
+  height: 60px;
   padding: 15px 20px;
   font-size: 1.1rem;
   display: flex;
   color: #fff;
   text-decoration: none;
   box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3) !important;
-  transition: margin 100ms ease-in-out, box-shadow 100ms ease-in-out;
-  margin-bottom: 0;
+  transition: transform 100ms ease-in-out, box-shadow 100ms ease-in-out;
 }
-.questionBottomRight:hover > a {
+
+.questionBottomRight:hover>:is(a, button) {
   box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
-  margin-bottom: 5px;
+  transform: translateY(5px);
+}
+
+.questionBottomRight> :is(a, button):active {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(0);
 }
 
 @media only screen and (min-width: 1px) and (max-width: 576px) {
@@ -28,7 +34,8 @@
     bottom: 50px;
     right: 10px;
   }
-  .questionBottomRight > a {
+
+  .questionBottomRight> :is(a, button) {
     padding: 15px;
     border-radius: 50px;
     font-weight: bold;
@@ -36,7 +43,8 @@
     align-items: center;
     justify-content: center;
   }
-  .questionBottomRight > a > span:first-of-type {
+
+  .questionBottomRight> :is(a, button)>span:first-of-type {
     display: none;
   }
 }

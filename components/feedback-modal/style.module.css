@@ -1,36 +1,7 @@
-.button {
-  position: fixed;
-  z-index: 1000;
-  right: 3rem;
-  bottom: 3rem;
-  width: 60px;
-  height: 60px;
-  background-color: var(--annuaire-colors-espaceAgent);
-  border: none;
-  border-radius: 50%;
-  padding: 1rem;
-  filter: brightness(1.1);
-
-  color: white;
-  box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.3);
-  transition: margin 100ms ease-in-out, box-shadow 100ms ease-in-out,
-    transform 100ms ease-in-out, filter 100ms ease-in-out;
-
-  & .close {
-    font-size: 2rem;
-    font-weight: bold;
-    line-height: 1rem;
-  }
-
-  &:hover {
-    background-color: var(--annuaire-colors-espaceAgent) !important;
-    filter: brightness(1);
-  }
-  &:active {
-    background-color: var(--annuaire-colors-espaceAgent) !important;
-    transform: translateY(2px);
-  }
+.button>svg {
+  width: 20px;
 }
+
 
 .dialog {
   overflow: hidden;
@@ -40,7 +11,10 @@
   max-width: 500px;
   margin-right: 3rem;
   position: fixed;
-  bottom: 120px;
+  visibility: hidden;
+  right: 60px;
+  bottom: 60px;
+
   right: 0;
   background-color: white;
   z-index: 1000;
@@ -56,8 +30,10 @@
 
   &[aria-hidden='false'] {
     animation: fadeIn 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    visibility: visible;
   }
-  & > button:first-of-type {
+
+  &>button:first-of-type {
     position: absolute;
     top: 0;
     right: 0;
@@ -70,35 +46,12 @@
 }
 
 .type {
-  composes: fr-input-group from global;
+  composes: fr-input-group from global radio-group from '#components-ui/multi-choice/style.module.css';
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
   & legend {
-    margin-bottom: 1rem;
-  }
-
-  & label {
-    display: block;
-    background-color: var(--background-alt-blue-france);
-    padding: 0.5rem 1rem;
     margin-bottom: 0.5rem;
-    border-radius: 0.25rem;
-  }
-  & label:hover {
-    background-color: var(--background-alt-blue-france-hover);
-  }
-  & label:active,
-  & label:checked {
-    background-color: var(--background-alt-blue-france-active);
-  }
-
-  & label:focus,
-  & input:focus-visible + label {
-    outline-style: solid;
-    outline-color: #0a76f6;
-    outline-offset: 2px;
-    outline-width: 2px;
-  }
-  & input:checked + label {
-    background-color: var(--background-alt-blue-france-active);
   }
 }
 
@@ -108,6 +61,7 @@
     bottom: 0.75rem;
     transform: scale(0.8);
   }
+
   .dialog {
     margin-right: 0;
     margin-left: 0;
@@ -126,6 +80,7 @@
     transform: translateY(50px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;

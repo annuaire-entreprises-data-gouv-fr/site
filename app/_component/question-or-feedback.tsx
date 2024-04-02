@@ -1,13 +1,17 @@
-import { Question } from '#components-ui/question';
 import FeedbackModal from '#components/feedback-modal';
-import { ISession, getAgentContactInfo } from '#utils/session';
+import { Question } from '#components/question';
+import { ISession } from '#utils/session';
 
 export default function QuestionOrFeedback({
   session,
 }: {
   session: ISession | null;
 }) {
-  const agentContactInfo = getAgentContactInfo(session);
+  const agentContactInfo = {
+    email: 'johan.girod@beta.gouv.fr',
+    name: 'Johan Girod',
+  };
+  // getAgentContactInfo(session);
   if (!agentContactInfo) {
     return <Question />;
   }
