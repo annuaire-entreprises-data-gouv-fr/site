@@ -46,7 +46,6 @@ export class RedisStorage implements BuildStorage {
       (err) => {
         logWarningInSentry(
           new RedisStorageException({
-            message: 'Could not find key',
             cause: err,
           })
         );
@@ -65,9 +64,7 @@ export class RedisStorage implements BuildStorage {
       }),
       200
     ).catch((err) => {
-      logWarningInSentry(
-        new RedisStorageException({ message: 'Could not set key', cause: err })
-      );
+      logWarningInSentry(new RedisStorageException({ cause: err }));
     });
   };
 
@@ -78,7 +75,7 @@ export class RedisStorage implements BuildStorage {
 }
 
 class RedisStorageException extends Exception {
-  constructor(args: { message: string; cause?: any }) {
+  constructor(args: { message?: string; cause?: any }) {
     super({ ...args, name: 'RedisStorageException' });
   }
 }
