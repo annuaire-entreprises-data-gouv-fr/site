@@ -46,6 +46,7 @@ export class RedisStorage implements BuildStorage {
       (err) => {
         logWarningInSentry(
           new RedisStorageException({
+            message: err.message || 'Could not get key',
             cause: err,
           })
         );
@@ -64,7 +65,12 @@ export class RedisStorage implements BuildStorage {
       }),
       200
     ).catch((err) => {
-      logWarningInSentry(new RedisStorageException({ cause: err }));
+      logWarningInSentry(
+        new RedisStorageException({
+          message: err.message || 'Could not set key',
+          cause: err,
+        })
+      );
     });
   };
 
