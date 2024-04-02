@@ -32,8 +32,6 @@ const plugins =
       ]
     : [['postcss-preset-env', {}]];
 
-console.log(plugins);
-
 module.exports = {
   plugins,
 };
