@@ -23,9 +23,9 @@ export function hasRights(session: ISession | null, rightScope: EScope) {
     case EScope.conformite:
       return userScopes.includes('conformite');
     case EScope.nonDiffusible:
-      return userScopes.includes('nondiffusible');
-    case EScope.nonDiffusible:
-      return userScopes.length > 0;
+      return userScopes.includes('nonDiffusible');
+    case EScope.isAgent:
+      return userScopes.includes('agent');
     default:
       return false;
   }

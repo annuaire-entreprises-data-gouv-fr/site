@@ -44,11 +44,13 @@ export default function NonDiffusibleAlert({
     return null;
   }
   if (hasRights(session, EScope.nonDiffusible)) {
-    <ProtectedData full>
-      Les informations de cette structure ne sont pas accessibles au grand
-      public mais vous pouvez voir ses informations grâce à votre compte{' '}
-      <strong>agent-public</strong>.
-    </ProtectedData>;
+    return (
+      <ProtectedData full>
+        Les informations de cette structure ne sont pas accessibles au grand
+        public mais vous pouvez voir ses informations grâce à votre compte{' '}
+        <strong>agent-public</strong>.
+      </ProtectedData>
+    );
   }
 
   if (statutDiffusion === ISTATUTDIFFUSION.PROTECTED) {
