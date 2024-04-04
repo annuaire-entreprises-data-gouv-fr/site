@@ -20,7 +20,10 @@ export class RedisStorage implements BuildStorage {
 
     this._client.on('error', (err) => {
       logWarningInSentry(
-        new RedisStorageException({ message: 'Redis client error', cause: err })
+        new RedisStorageException({
+          message: err.message || 'Redis client error',
+          cause: err,
+        })
       );
     });
   }
