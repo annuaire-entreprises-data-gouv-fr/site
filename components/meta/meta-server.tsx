@@ -13,6 +13,8 @@ export function meta(obj: Metadata): Metadata {
   obj.openGraph.images ??= OPENGRAPH_IMAGES;
   obj.openGraph.siteName = SITE_NAME;
 
+  obj.formatDetection = { telephone: false };
+
   if (typeof obj.alternates?.canonical === 'string') {
     obj.openGraph.url ??= obj.alternates.canonical;
   }

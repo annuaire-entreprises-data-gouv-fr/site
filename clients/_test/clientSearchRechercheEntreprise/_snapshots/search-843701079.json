@@ -225,7 +225,7 @@
             "sexe": null,
             "nom": "BERTRAND",
             "prenom": "Lionel",
-            "role": "Président de SAS",
+            "role": null,
             "dateNaissancePartial": "",
             "lieuNaissance": ""
           }

@@ -1,3 +1,4 @@
+import { EAdministration } from '#models/administrations/EAdministration';
 import { getAssociationFromSlug } from '#models/association';
 import { FetchRessourceException } from '#models/exceptions';
 import logErrorInSentry from '#utils/sentry';
@@ -18,6 +19,7 @@ export const GET = withIgnoreBot(async function (
       new FetchRessourceException({
         cause: e,
         ressource: 'Association',
+        administration: EAdministration.MI,
         message,
         context: {
           slug: slug as string,

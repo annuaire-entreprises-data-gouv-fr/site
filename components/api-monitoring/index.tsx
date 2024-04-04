@@ -4,6 +4,7 @@ import InformationTooltip from '#components-ui/information-tooltip';
 import { Section } from '#components/section';
 import constants from '#models/constants';
 import { IMonitoringWithMetaData, IRatio } from '#models/monitoring';
+import styles from './styles.module.css';
 
 const getUptimeColor = (ratio: IRatio) => {
   const uptimeNum = ratio.ratioNumber;
@@ -35,19 +36,22 @@ const getHideClasses = (index: number) => {
   if (index > 70) {
     return '';
   } else if (index > 50) {
-    return 'hide-mobile';
+    return styles['hide-mobile'];
   } else {
-    return 'hide-mobile hide-tablet';
+    return `${styles['hide-mobile']} ${styles['hide-tablet']}`;
   }
 };
 
 const Metric: React.FC<{
   series: IRatio[];
 }> = ({ series }) => (
-  <div className="series-wrapper">
-    <div className="uptime-chart">
+  <div className={styles['series-wrapper']}>
+    <div className={styles['uptime-chart']}>
       {series.map((serie, index) => (
-        <div className={`serie ${getHideClasses(index)}`} key={index}>
+        <div
+          className={`${getHideClasses(index)} ${styles.series}`}
+          key={index}
+        >
           <InformationTooltip
             orientation={index < 76 ? 'left' : 'right'}
             width={170}
@@ -63,7 +67,7 @@ const Metric: React.FC<{
             }
           >
             <div
-              className="serie-rectangle"
+              className={styles['serie-rectangle']}
               style={{
                 backgroundColor: getUptimeColor(serie),
               }}
@@ -72,49 +76,6 @@ const Metric: React.FC<{
         </div>
       ))}
     </div>
-    <style jsx>{`
-      .series-wrapper {
-        display: flex;
-        flex-direction: row;
-      }
-      .uptime-chart {
-        flex-grow: 1;
-        display: flex;
-        margin: 0;
-      }
-      .uptime-chart > div {
-        flex-grow: 1;
-      }
-
-      .serie {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      .serie-rectangle {
-        border-radius: 6px;
-        height: 40px;
-        margin: 3px 0;
-        transition: 100ms opacity ease-in-out;
-        border: 2px solid #fff;
-      }
-      .serie-rectangle:hover {
-        margin: 0;
-        opacity: 0.6;
-        height: 46px;
-      }
-
-      @media only screen and (min-width: 576px) and (max-width: 768px) {
-        .hide-tablet {
-          display: none;
-        }
-      }
-      @media only screen and (min-width: 1px) and (max-width: 576px) {
-        .hide-mobile {
-          display: none;
-        }
-      }
-    `}</style>
   </div>
 );
 
@@ -158,13 +119,13 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
             fortement perturbé, voire impossible.
           </p>
         )}
-        <div className="metrics-title">
+        <div className={styles['metrics-title']}>
           <h3>
             Historique de disponibilité <RobotTooltip />
           </h3>
           <Metric series={series} />
           <h3>Statistiques moyennes</h3>
-          <div className="mean-stats">
+          <div className={styles['mean-stats']}>
             <div>
               <strong>24h</strong>
               <span>{uptime.day}%</span>
@@ -179,34 +140,6 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
             </div>
           </div>
         </div>
-
-        <style jsx>{`
-          .metrics-title {
-            display: block;
-            margin-bottom: 10px;
-          }
-          .metrics-title h3 {
-            margin-bottom: 10px;
-            margin-top: 20px;
-          }
-          .mean-stats {
-            display: flex;
-            justify-content: space-between;
-          }
-          .mean-stats > div {
-            width: 24%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
-          .mean-stats > div strong {
-            font-size: 1.1rem;
-            line-height: 2.2rem;
-          }
-          .mean-stats > div:not(:last-of-type) {
-            border-right: 2px solid ${constants.colors.pastelBlue};
-          }
-        `}</style>
 
         {apigouvLink && (
           <i>

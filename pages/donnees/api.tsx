@@ -56,6 +56,9 @@ const StatusPage: NextPageWithLayout<IProps> = ({
         {Object.keys(monitors).map((administrationEnum) =>
           monitors[administrationEnum].map((monitor) => (
             <li key={monitor.apiSlug}>
+              <span style={{ color: monitor.isOnline ? '#3bd671' : '#f29030' }}>
+                ●
+              </span>{' '}
               <a href={`#${monitor.apiSlug}`}>{monitor.apiName}</a>
             </li>
           ))

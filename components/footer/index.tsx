@@ -40,8 +40,7 @@ const Footer = () => (
                     </li>
                   ))}
               </ul>
-            </div>
-            <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
+              <br />
               <strong className="fr-footer__top-cat">
                 Consulter la liste officielle des entreprises françaises
               </strong>
@@ -55,12 +54,18 @@ const Footer = () => (
                   </a>
                 </li>
               </ul>
-              <br />
+            </div>
+            <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
               <strong className="fr-footer__top-cat">Aide</strong>
               <ul className="fr-footer__top-list">
                 <li>
                   <a className="fr-footer__top-link" href="/faq">
                     Questions fréquentes
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/definitions">
+                    Définitions
                   </a>
                 </li>
                 <li>
@@ -71,61 +76,12 @@ const Footer = () => (
                     Supprimer ses données personnelles
                   </a>
                 </li>
-                <li>
-                  <a className="fr-footer__top-link" href="/definitions">
-                    Définitions
-                  </a>
-                </li>
-                <li>
-                  <a className="fr-footer__top-link" href="/partager">
-                    Réutiliser & partager
-                  </a>
-                </li>
-                <li>
-                  <a className="fr-footer__top-link" href="/donnees/sources">
-                    Sources de données
-                  </a>
-                </li>
-                <li>
-                  <a className="fr-footer__top-link" href="/donnees/api">
-                    Statut des API utilisées
-                  </a>
-                </li>
               </ul>
-            </div>
-            <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
+              <br />
               <strong className="fr-footer__top-cat">
-                Annuaire des Entreprises
+                Développeurs & développeuses
               </strong>
               <ul className="fr-footer__top-list">
-                <li>
-                  <a className="fr-footer__top-link" href="/administration">
-                    Administrations partenaires
-                  </a>
-                </li>
-                <li>
-                  <a className="fr-footer__top-link" href="/a-propos/stats">
-                    Statistiques
-                  </a>
-                </li>
-                <li>
-                  <a className="fr-footer__top-link" href="/a-propos/budget">
-                    Budget
-                  </a>
-                </li>
-                <li>
-                  <a className="fr-footer__top-link" href="/a-propos/equipe">
-                    Qui sommes-nous ?
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="fr-footer__top-link"
-                    href="/a-propos/comment-ca-marche"
-                  >
-                    A propos
-                  </a>
-                </li>
                 <li>
                   <a
                     className="fr-footer__top-link"
@@ -137,8 +93,66 @@ const Footer = () => (
                   </a>
                 </li>
                 <li>
+                  <a className="fr-footer__top-link" href="/donnees/sources">
+                    Sources de données
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="fr-footer__top-link"
+                    href="/donnees/api-entreprises"
+                  >
+                    API Recherche d’entreprises & API Entreprise
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/donnees/api">
+                    Disponibilité des API
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
+              <strong className="fr-footer__top-cat">
+                Annuaire des Entreprises
+              </strong>
+              <ul className="fr-footer__top-list">
+                <li>
+                  <a
+                    className="fr-footer__top-link"
+                    href="/a-propos/comment-ca-marche"
+                  >
+                    A propos
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/administration">
+                    Administrations partenaires
+                  </a>
+                </li>
+                <li>
                   <a className="fr-footer__top-link" href="/lp/agent-public">
-                    Espace agent public
+                    L’espace agent public
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/a-propos/stats">
+                    Statistiques d’usage
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/a-propos/budget">
+                    Budget
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/a-propos/equipe">
+                    Équipe
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/partager">
+                    Réutiliser & partager
                   </a>
                 </li>
               </ul>

@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/nextjs';
 import { Exception } from '#models/exceptions';
 import { isNextJSSentryActivated } from '#utils/sentry';
 import { getTransactionNameFromUrl } from '#utils/sentry/tracing';
+import isUserAgentABot from '#utils/user-agent';
 declare global {
   interface Window {
     IS_OUTDATED_BROWSER: boolean;
@@ -36,13 +37,11 @@ if (isNextJSSentryActivated) {
         ];
       }
 
-      if (
-        ['Hydration failed', 'There was an error while hydrating'].some(
-          (mess) => event.message?.includes(mess)
-        )
-      ) {
-        event.fingerprint = ['HydrationError'];
+      if (!event.tags) {
+        event.tags = {};
       }
+      event.tags['is_bot'] = isUserAgentABot(navigator.userAgent || '');
+
       return event;
     },
 

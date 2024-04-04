@@ -159,8 +159,8 @@ const routes = {
   sireneInsee: {
     auth: 'https://api.insee.fr/token',
     avis: 'https://api-avis-situation-sirene.insee.fr/identification/pdf/',
-    siren: 'https://api.insee.fr/entreprises/sirene/V3/siren/',
-    siret: 'https://api.insee.fr/entreprises/sirene/V3/siret/',
+    siren: 'https://api.insee.fr/entreprises/sirene/V3.11/siren/',
+    siret: 'https://api.insee.fr/entreprises/sirene/V3.11/siret/',
   },
   rechercheEntreprise: {
     rechercheUniteLegale: 'https://recherche-entreprises.api.gouv.fr/search',

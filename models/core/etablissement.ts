@@ -19,7 +19,7 @@ import {
   isAPINotResponding,
 } from '../api-not-responding';
 import { FetchRessourceException, IExceptionContext } from '../exceptions';
-import { ISTATUTDIFFUSION } from './statut-diffusion';
+import { ISTATUTDIFFUSION, estDiffusible } from './statut-diffusion';
 import {
   IEtablissement,
   IEtablissementWithUniteLegale,
@@ -65,7 +65,8 @@ const fetchFromClients = async (
   const useInsee = shouldUseInsee(
     etablissementRechercheEntreprise,
     isBot,
-    (e: IEtablissement) => e.complements.estEntrepreneurIndividuel
+    (e: IEtablissement) =>
+      !estDiffusible(e) || e.complements.estEntrepreneurIndividuel
   );
 
   if (!useInsee) {

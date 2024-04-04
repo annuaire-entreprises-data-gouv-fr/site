@@ -24,7 +24,7 @@ import {
 } from '../api-not-responding';
 import { FetchRessourceException } from '../exceptions';
 import { getTvaUniteLegale } from '../tva';
-import { ISTATUTDIFFUSION } from './statut-diffusion';
+import { ISTATUTDIFFUSION, estDiffusible } from './statut-diffusion';
 import {
   IUniteLegale,
   SirenNotFoundError,
@@ -107,7 +107,8 @@ class UniteLegaleBuilder {
     const useInsee = shouldUseInsee(
       uniteLegaleRechercheEntreprise,
       this._isBot,
-      (ul: IUniteLegale) => ul.complements.estEntrepreneurIndividuel,
+      (ul: IUniteLegale) =>
+        !estDiffusible(ul) || ul.complements.estEntrepreneurIndividuel,
       (ul: IUniteLegale) => !ul.dateMiseAJourInsee
     );
 
