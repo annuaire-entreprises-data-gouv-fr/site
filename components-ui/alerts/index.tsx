@@ -5,7 +5,7 @@ import constants from '#models/constants';
 import styles from './styles.module.css';
 
 const colors = {
-  info: ['#0078f3', '#f4f6ff'],
+  info: ['#0078f3', '#e5f3ff'],
   success: ['#18753c', '#dffee6'],
   error: ['#ce0500', '#fff4f4'],
   warning: ['#ff9c00', '#fff3e0'],
