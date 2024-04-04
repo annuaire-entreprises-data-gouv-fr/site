@@ -2,8 +2,10 @@
 
 import { useEffect } from 'react';
 import constants from '#models/constants';
+import { EScope, hasRights } from '#models/user/rights';
+import { ISession } from '#models/user/session';
 
-export default function LoadBar({ isAgent }: { isAgent: boolean }) {
+export default function LoadBar({ session }: { session: ISession | null }) {
   useEffect(() => {
     const loadBar = loadBarFactory();
     if (typeof window !== 'undefined') {
@@ -14,7 +16,9 @@ export default function LoadBar({ isAgent }: { isAgent: boolean }) {
     <div
       id="loader-bar"
       style={{
-        background: isAgent ? constants.colors.espaceAgent : 'transparent',
+        background: hasRights(session, EScope.isAgent)
+          ? constants.colors.espaceAgent
+          : 'transparent',
         transition: 'width 300ms ease-in-out',
         height: '3px',
         position: 'fixed',

@@ -10,12 +10,12 @@ import {
   getNomComplet,
 } from '#models/core/statut-diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import {
   formatIntFr,
   formatSiret,
   uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
-import { ISession } from '#utils/session';
 import { INSEE } from '../../administrations';
 import TitleAlerts from '../alerts';
 import { FICHE, Tabs } from '../tabs';

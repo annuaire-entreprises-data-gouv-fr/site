@@ -5,7 +5,8 @@ import { InfoBanner } from '#components/banner/info-banner';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
-import { ISession, isLoggedIn } from '#utils/session';
+import { isLoggedIn } from '#models/user/rights';
+import { ISession } from '#models/user/session';
 import styles from './styles.module.css';
 
 type IProps = {
@@ -35,8 +36,8 @@ export const HeaderCore: React.FC<IProps> = ({
       className="fr-header"
       style={{ filter: !useSearchBar ? 'none' : undefined }}
     >
+      <LoadBar session={session} />
       <InfoBanner />
-      <LoadBar isAgent={isLoggedIn(session)} />
 
       <PrintNever>
         <form

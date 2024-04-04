@@ -20,6 +20,7 @@ import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { isAssociation, isCollectiviteTerritoriale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { getServicePublicByUniteLegale } from '#models/service-public';
+import { EScope, hasRights } from '#models/user/rights';
 import {
   extractSirenOrSiretSlugFromUrl,
   shouldNotIndex,
@@ -31,7 +32,6 @@ import extractParamsAppRouter, {
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
 import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
-import { isSuperAgent } from '#utils/session';
 
 const cachedGetUniteLegale = cache(
   async (slug: string, page: number, isBot: boolean) => {
@@ -93,7 +93,7 @@ export default withErrorHandler(async function UniteLegalePage(
         ) : (
           <>
             <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
-            {isSuperAgent(session) && (
+            {hasRights(session, EScope.isAgent) && (
               <EspaceAgentSummarySection
                 uniteLegale={uniteLegale}
                 session={session}

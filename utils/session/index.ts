@@ -1,34 +1,6 @@
 import type { IronSession, SessionOptions } from 'iron-session';
-
-export type ISessionPrivilege = 'unkown' | 'agent' | 'super-agent';
-
-export type ISession = {
-  lastVisitTimestamp?: number;
-  user?: {
-    email?: string;
-    familyName?: string;
-    firstName?: string;
-    fullName?: string;
-    privilege?: ISessionPrivilege;
-    siret?: string;
-  };
-
-  // agent connect
-  state?: string;
-  nonce?: string;
-  idToken?: string;
-  // connexion
-  pathFrom?: string;
-
-  // FranceConnect hide personal data request
-  hidePersonalDataRequestFC?: {
-    firstName?: string;
-    familyName?: string;
-    birthdate?: string;
-    tokenId: string;
-    sub: string;
-  };
-};
+import { IScope } from '#models/user/scopes';
+import { ISession } from '#models/user/session';
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
@@ -49,7 +21,8 @@ export const setAgentSession = async (
   familyName: string,
   firstName: string,
   siret: string,
-  privilege: ISessionPrivilege,
+  scopes: IScope[],
+  userType: string,
   session: IronSession<ISession>
 ) => {
   session.user = {
@@ -57,8 +30,9 @@ export const setAgentSession = async (
     firstName,
     familyName,
     fullName: familyName ? `${firstName} ${familyName}` : undefined,
-    privilege,
     siret,
+    userType,
+    scopes,
   };
   await session.save();
 };
@@ -122,37 +96,3 @@ export function getHidePersonalDataRequestFCSession(
     NonNullable<ISession['hidePersonalDataRequestFC']>
   >;
 }
-
-/**
- *  Verify if user is loggedin
- *
- * @param session
- * @returns
- */
-export const isLoggedIn = (session: ISession | null) => {
-  return !!session?.user?.email;
-};
-
-/**
- *  Verify if user session has agent privileges
- *
- * @param session
- * @returns
- */
-export const isBasicAgent = (session: ISession | null) => {
-  return session?.user?.privilege === 'agent';
-};
-
-/**
- *  Verify if user session has super-agent privileges
- */
-export const isSuperAgent = (session: ISession | null) => {
-  return session?.user?.privilege === 'super-agent';
-};
-
-/**
- *  Verify if user session has super-agent or agent privileges
- */
-export const isAgent = (session: ISession | null) => {
-  return isBasicAgent(session) || isSuperAgent(session);
-};
