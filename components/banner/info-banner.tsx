@@ -18,11 +18,9 @@ export const InfoBanner: React.FC<{}> = () => (
       }}
     >
       <div className="fr-container">
-        ⚠️ Une mise à jour <INSEE /> est en cours et les données affichées sur notre site
-        peuvent ne pas être à jour.
+        ⚠️ Une mise à jour <INSEE /> est en cours et les données <a href="https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/">de la base Sirene</a> n’ont pas été mises à jour sur notre site depuis le 22 mars 2024.
         <br />
-        Cette situation est susceptible de perdurer jusqu’au vendredi 05 avril.
-        Veuillez nous excuser pour la gêne occasionnée.
+        Cette situation est susceptible de perdurer jusqu’à ce que les données soient disponibles. Veuillez nous excuser pour la gêne occasionnée.
       </div>
     </div>
   </PrintNever>
