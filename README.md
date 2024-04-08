@@ -6,7 +6,7 @@
 [![CI (lint, unit-tests, end2end, a11y)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
 [![External API check](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml)
 [![Deploy cluster](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-cluster.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-cluster.yml)
-<a href="https://annuaire-entreprises.data.gouv.fr/donnees/administrations"><img src="https://img.shields.io/badge/Page-partenaires-blue.svg" alt="Partenaires Badge"></a>
+<a href="https://annuaire-entreprises.data.gouv.fr/administration"><img src="https://img.shields.io/badge/Page-partenaires-blue.svg" alt="Partenaires Badge"></a>
 <a href="https://annuaire-entreprises.data.gouv.fr/donnees/sources"><img src="https://img.shields.io/badge/Page-datasources-blue.svg" alt="Sources de données Badge"></a>
 <a href="https://annuaire-entreprises.data.gouv.fr/donnees/api"><img src="https://img.shields.io/badge/Page-statuts-blue.svg" alt="Statut des API Badge"></a>
 <a href="https://annuaire-entreprises.data.gouv.fr/historique-des-modifications"><img src="https://img.shields.io/badge/Page-changelog-blue.svg" alt="Changelog Badge"></a>
@@ -16,7 +16,7 @@ Dépôt du site [Annuaire des Entreprises](https://annuaire-entreprises.data.gou
 
 Ce site met à disposition des citoyens et des agents les données ouvertes (open-data) des entreprises, associations et administrations dotées d'un n° SIREN/SIRET.
 
-Ce site ré-utilise les données des différentes administrations partenaires :
+Ce site ré-utilise les données des différentes [administrations partenaires](https://annuaire-entreprises.data.gouv.fr/administration).
 
 ## Contenu
 

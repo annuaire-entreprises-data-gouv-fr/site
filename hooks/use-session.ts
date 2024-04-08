@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import { ISession } from '#utils/session';
+import { ISession } from '#models/user/session';
 
 const sessionContext = createContext<ISession | null>(null);
 

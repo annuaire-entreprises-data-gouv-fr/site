@@ -2,10 +2,10 @@ import { clientDocuments } from '#clients/api-proxy/rne/documents';
 import { HttpForbiddenError, HttpNotFound } from '#clients/exceptions';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { FetchRessourceException } from '#models/exceptions';
+import { EScope, hasRights } from '#models/user/rights';
 import { verifySiren } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { isAgent } from '#utils/session';
 
 export async function GET(
   _request: Request,
@@ -14,7 +14,7 @@ export async function GET(
   const session = await getSession();
   const slug = params.slug;
   try {
-    if (!isAgent(session)) {
+    if (!hasRights(session, EScope.documentsRne)) {
       throw new HttpForbiddenError('Unauthorized account');
     }
 

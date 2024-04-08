@@ -11,7 +11,7 @@ import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IRGECertification } from '#models/certifications/rge';
 import { getNomComplet } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
-import { ISession } from '#utils/session';
+import { ISession } from '#models/user/session';
 import { certificatLogo } from './map-certicat-to-logo';
 
 const renovLink = (slug: string) => {

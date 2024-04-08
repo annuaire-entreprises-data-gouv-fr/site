@@ -4,7 +4,7 @@ import type { ReactElement, ReactNode } from 'react';
 import { BrowserIsOutdatedBanner } from '#components/banner/browser-is-outdated';
 import ErrorBoundary from '#components/error-boundary/index';
 import { LayoutDefault } from '#components/layouts/layout-default';
-import { ISession } from '#utils/session';
+import { ISession } from '#models/user/session';
 import { marianne } from 'app/fonts';
 import { SessionProvider } from 'hooks/use-session';
 import '../style/dsfr.min.css';

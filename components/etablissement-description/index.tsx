@@ -7,6 +7,7 @@ import {
   getNomComplet,
 } from '#models/core/statut-diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import {
   formatAge,
   formatDateLong,
@@ -14,7 +15,6 @@ import {
   uniteLegaleLabel,
   uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
-import { ISession } from '#utils/session';
 
 type IProps = {
   etablissement: IEtablissement;
