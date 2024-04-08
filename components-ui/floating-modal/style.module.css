@@ -1,0 +1,15 @@
+.floating-modal {
+    background-color: #fff;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+    padding: 1rem 2rem 2rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--background-action-high-blue-france);
+}
+
+
+.footer {
+    margin: 2rem -2rem -2rem;
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    background-color: var(--background-alt-grey);
+}

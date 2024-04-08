@@ -3,6 +3,8 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { HeightTransition } from '#components-ui/animation/height-transition';
 import FloatingHelpButton from '#components-ui/floating-help-button';
+import FloatingModal from '#components-ui/floating-modal';
+import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import FeedbackForm from './feedback-form';
 import RegisterBeta from './register-beta';
@@ -64,11 +66,11 @@ export default function FeedbackModal({ agentContactInfo }: IProps) {
               aria-expanded={opened}
               className={styles.button}
             >
-              <Icon />
+              <Icon slug="discussion" size={24} />
             </button>
           </FloatingHelpButton>
         )}
-        <div
+        <FloatingModal
           id="feedback-modal"
           aria-modal="false"
           aria-hidden={!opened}
@@ -95,27 +97,8 @@ export default function FeedbackModal({ agentContactInfo }: IProps) {
               />
             )}
           </HeightTransition>
-        </div>
+        </FloatingModal>
       </div>
     </PrintNever>
-  );
-}
-
-function Icon() {
-  return (
-    <svg
-      width="30"
-      height="30"
-      viewBox="0 0 30 30"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M28.5 0.5C29.3284 0.5 30 1.17157 30 2V23C30 23.8284 29.3284 24.5 28.5 24.5H6.6825L0 29.75V2C0 1.17157 0.671573 0.5 1.5 0.5H28.5ZM16.5 15.5H13.5V18.5H16.5V15.5ZM16.5 6.5H13.5V14H16.5V6.5Z"
-        fill="white"
-      />
-    </svg>
   );
 }

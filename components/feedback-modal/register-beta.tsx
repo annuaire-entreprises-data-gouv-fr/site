@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Loader } from '#components-ui/loader';
-import { IAgentContactInfo } from '#utils/session';
 import { useStorage } from 'hooks';
 import { registerToBeta } from './actions';
+import { IAgentContactInfo } from './type';
 
 const REGISTER_BETA_ID = 'register-beta';
 type IProps = { agentContactInfo: IAgentContactInfo };
@@ -54,7 +54,8 @@ export default function RegisterBeta({ agentContactInfo }: IProps) {
       {!isAlreadyRegistered && (
         <>
           Pour améliorer l’espace agent, vous pouvez participer à notre
-          programme de beta-test. <small>(prévoir 2 échanges en visio)</small>
+          programme de beta-test.
+          <small>(entretiens en visio, questionnaires, etc.)</small>
           <form action={handleRegister}>
             <label
               className="fr-label"

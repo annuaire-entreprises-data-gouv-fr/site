@@ -9,11 +9,7 @@ export default function QuestionOrFeedback({
 }: {
   session: ISession | null;
 }) {
-  const agentContactInfo = {
-    email: 'johan.girod@beta.gouv.fr',
-    name: 'Johan Girod',
-  };
-  // getAgentContactInfo(session);
+  const agentContactInfo = getAgentContactInfo(session);
   if (!agentContactInfo) {
     return <Question />;
   }

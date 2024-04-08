@@ -1,4 +1,5 @@
 'use client';
+import '#components-ui/floating-modal/style.module.css';
 import { useRef, useState } from 'react';
 import { sendFeedback } from './actions';
 import FeedbackMessage from './feedback-message';

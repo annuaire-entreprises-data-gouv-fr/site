@@ -4,8 +4,7 @@ import { Exception } from '#models/exceptions';
 import { sendMessageToCrisp } from '#utils/integrations/crisp';
 import { logInGrist, readFromGrist } from '#utils/integrations/grist';
 import logErrorInSentry, { logWarningInSentry } from '#utils/sentry';
-import { IAgentContactInfo } from '#utils/session';
-import { FeedbackType } from './type';
+import { FeedbackType, IAgentContactInfo } from './type';
 
 export async function sendFeedback(
   agentContactInfo: IAgentContactInfo,
