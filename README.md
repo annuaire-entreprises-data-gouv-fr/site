@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://github.com/etalab/annuaire-entreprises-site/blob/main/public/images/annuaire-entreprises-large.gif" width="400px" />
+  <img src="https://github.com/etalab/annuaire-entreprises-site/blob/main/public/images/annuaire-entreprises-paysage-large.gif" width="400px" />
 </h1>
 
 <a href="https://github.com/etalab/annuaire-entreprises-site/blob/main/LICENSE"><img src="https://img.shields.io/github/license/etalab/annuaire-entreprises-site.svg?color=green" alt="License Badge"></a>
