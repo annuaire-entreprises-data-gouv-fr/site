@@ -46,7 +46,7 @@ export const LayoutSearch = ({ children, map }: PropsWithChildren<IProps>) => {
           width: 100%;
         }
         main.fr-container {
-          max-width: ${map ? '100%' : ''};
+          ${map ? 'max-width: 100%;' : ''}
         }
       `}</style>
     </div>

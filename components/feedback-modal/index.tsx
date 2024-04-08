@@ -4,10 +4,10 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { HeightTransition } from '#components-ui/animation/height-transition';
 import FloatingHelpButton from '#components-ui/floating-help-button';
 import { PrintNever } from '#components-ui/print-visibility';
-import { IAgentContactInfo } from '#utils/session';
 import FeedbackForm from './feedback-form';
 import RegisterBeta from './register-beta';
 import styles from './style.module.css';
+import { IAgentContactInfo } from './type';
 
 type IProps = {
   agentContactInfo: IAgentContactInfo;

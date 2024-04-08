@@ -15,6 +15,8 @@ export type IEntrepriseInclusive = {
   type: string;
   category: string;
   siret: string;
+  city: string;
+  department: string;
 };
 
 export const getEntrepriseInclusive = async (
@@ -28,17 +30,14 @@ export const getEntrepriseInclusive = async (
       uniteLegale.siren
     );
     return await Promise.all(
-      entrepriseInclusiveList.map(
-        async ({ marcheInclusionLink, siret, kind }) => {
-          const kindLabel = await clientInclusionKindMetadata(kind);
-          return {
-            marcheInclusionLink,
-            siret,
-            category: kindLabel?.parent || '',
-            type: kindLabel?.name ? `${kindLabel?.name} (${kind})` : kind,
-          };
-        }
-      )
+      entrepriseInclusiveList.map(async ({ kind, ...rest }) => {
+        const kindLabel = await clientInclusionKindMetadata(kind);
+        return {
+          ...rest,
+          category: kindLabel?.parent || '',
+          type: kindLabel?.name ? `${kindLabel?.name} (${kind})` : kind,
+        };
+      })
     );
   } catch (e: any) {
     if (e instanceof HttpNotFound) {

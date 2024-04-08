@@ -39,14 +39,26 @@ export const EntrepriseInclusiveSection: React.FC<{
               'Siret de l’établissement',
               'Catégorie',
               'Type de structure',
+              'Lieu',
               'Plus d’informations',
             ]}
             body={entrepriseInclusive.map(
-              ({ siret, marcheInclusionLink, type, category }) => {
+              ({
+                siret,
+                marcheInclusionLink,
+                type,
+                category,
+                city,
+                department,
+              }) => {
                 return [
                   <a href={`/etablissement/${siret}`}>{formatSiret(siret)}</a>,
                   category,
                   type,
+                  <>
+                    {city}
+                    {department ? ` (${department})` : ''}
+                  </>,
                   <ButtonLink to={marcheInclusionLink} alt small>
                     ⇢&nbsp;Consulter
                   </ButtonLink>,

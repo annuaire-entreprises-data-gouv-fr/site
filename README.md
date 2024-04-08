@@ -1,12 +1,12 @@
 <h1 align="center">
-  <img src="https://github.com/etalab/annuaire-entreprises-site/blob/main/public/images/annnuaire-entreprises.svg" width="400px" />
+  <img src="https://github.com/etalab/annuaire-entreprises-site/blob/main/public/images/annuaire-entreprises-paysage-large.gif" width="400px" />
 </h1>
 
 <a href="https://github.com/etalab/annuaire-entreprises-site/blob/main/LICENSE"><img src="https://img.shields.io/github/license/etalab/annuaire-entreprises-site.svg?color=green" alt="License Badge"></a>
 [![CI (lint, unit-tests, end2end, a11y)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
 [![External API check](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/external-api-test.yml)
 [![Deploy cluster](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-cluster.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises-site/actions/workflows/deploy-cluster.yml)
-<a href="https://annuaire-entreprises.data.gouv.fr/donnees/administrations"><img src="https://img.shields.io/badge/Page-partenaires-blue.svg" alt="Partenaires Badge"></a>
+<a href="https://annuaire-entreprises.data.gouv.fr/administration"><img src="https://img.shields.io/badge/Page-partenaires-blue.svg" alt="Partenaires Badge"></a>
 <a href="https://annuaire-entreprises.data.gouv.fr/donnees/sources"><img src="https://img.shields.io/badge/Page-datasources-blue.svg" alt="Sources de données Badge"></a>
 <a href="https://annuaire-entreprises.data.gouv.fr/donnees/api"><img src="https://img.shields.io/badge/Page-statuts-blue.svg" alt="Statut des API Badge"></a>
 <a href="https://annuaire-entreprises.data.gouv.fr/historique-des-modifications"><img src="https://img.shields.io/badge/Page-changelog-blue.svg" alt="Changelog Badge"></a>
@@ -16,7 +16,7 @@ Dépôt du site [Annuaire des Entreprises](https://annuaire-entreprises.data.gou
 
 Ce site met à disposition des citoyens et des agents les données ouvertes (open-data) des entreprises, associations et administrations dotées d'un n° SIREN/SIRET.
 
-Ce site ré-utilise les données des différentes administrations partenaires : 
+Ce site ré-utilise les données des différentes [administrations partenaires](https://annuaire-entreprises.data.gouv.fr/administration).
 
 ## Contenu
 
@@ -32,7 +32,7 @@ Pour protéger un siren et en limiter la diffusion [suivez la procédure](https:
 
 ## Dépôts liés 🏗
 
-Voici la liste des dépôts de  code du projet [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
+Voici la liste des dépôts de code du projet [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
 
 | Description                         | Accès                                                                       |
 | ----------------------------------- | --------------------------------------------------------------------------- |
@@ -42,8 +42,7 @@ Voici la liste des dépôts de  code du projet [Annuaire des Entreprises](https:
 | Pipeline ETL                        | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-infra)   |
 | Le proxy API du site                | [par ici 👉](https://github.com/etalab/annuaire-entreprises-api-proxy)      |
 | Tests de pertinence de la recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-testing) |
-| Authentification des outils d’admin | [par ici 👉](https://github.com/etalab/annuaire-entreprises-admin-auth) |
-
+| Authentification des outils d’admin | [par ici 👉](https://github.com/etalab/annuaire-entreprises-admin-auth)     |
 
 ## Développement
 

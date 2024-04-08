@@ -54,6 +54,8 @@ jobs:
 
       - name: 'Create a PR if there is a diff in the snapshots'
         uses: peter-evans/create-pull-request@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_EXTERNAL_API_TEST_PR }}
         with:
           branch: 'BOT-snapshots-update'
           title: '🤖 API client snapshots update'
@@ -72,5 +74,3 @@ jobs:
             Otherwise, you should take action to fix the issue, by either: 
             - Contact the administration responsible for the API
             - Change the client code to adapt to the new data
-
-          token: ${{ secrets.TOKEN_GITHUB_EXTERNAL_API_TEST_PR }}

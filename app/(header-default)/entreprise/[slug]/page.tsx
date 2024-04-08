@@ -20,6 +20,7 @@ import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { isAssociation, isCollectiviteTerritoriale } from '#models/core/types';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { getServicePublicByUniteLegale } from '#models/service-public';
+import { EScope, hasRights } from '#models/user/rights';
 import {
   extractSirenOrSiretSlugFromUrl,
   shouldNotIndex,
@@ -31,7 +32,6 @@ import extractParamsAppRouter, {
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
 import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
-import { isSuperAgent } from '#utils/session';
 
 const cachedGetUniteLegale = cache(
   async (slug: string, page: number, isBot: boolean) => {
@@ -47,6 +47,7 @@ const cachedGetUniteLegale = cache(
 export const generateMetadata = withErrorHandler(
   async (props: AppRouterProps): Promise<Metadata> => {
     const { slug, page, isBot } = extractParamsAppRouter(props);
+
     const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
     return {
       title: uniteLegalePageTitle(uniteLegale, null),
@@ -67,7 +68,6 @@ export default withErrorHandler(async function UniteLegalePage(
   props: AppRouterProps
 ) {
   const session = await getSession();
-
   const { slug, page, isBot, isRedirected } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
 
@@ -93,7 +93,7 @@ export default withErrorHandler(async function UniteLegalePage(
         ) : (
           <>
             <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
-            {isSuperAgent(session) && (
+            {hasRights(session, EScope.isAgent) && (
               <EspaceAgentSummarySection
                 uniteLegale={uniteLegale}
                 session={session}

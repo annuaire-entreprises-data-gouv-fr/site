@@ -1,4 +1,5 @@
-import { ISession, isAgent } from '#utils/session';
+import { EScope, hasRights } from '#models/user/rights';
+import { ISession } from '#models/user/session';
 import { IEtablissement, IUniteLegale } from './types';
 
 export enum ISTATUTDIFFUSION {
@@ -9,7 +10,7 @@ export enum ISTATUTDIFFUSION {
 }
 
 const canSeeNonDiffusible = (session: ISession | null) =>
-  session && isAgent(session);
+  hasRights(session, EScope.nonDiffusible);
 
 /**
  * Only diffusible. Exclude partially diffusible and non-diffusible

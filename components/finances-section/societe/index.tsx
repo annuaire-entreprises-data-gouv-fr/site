@@ -7,8 +7,8 @@ import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import constants from '#models/constants';
 import { IUniteLegale } from '#models/core/types';
+import { EScope, hasRights } from '#models/user/rights';
 import { formatCurrency, formatDate, formatDateYear } from '#utils/helpers';
-import { isAgent } from '#utils/session';
 import { useFetchFinancesSociete } from 'hooks';
 import useSession from 'hooks/use-session';
 
@@ -36,7 +36,7 @@ export const FinancesSocieteSection: React.FC<{
 
         if (
           bilans.find((e) => e.confidentiality !== 'Public') &&
-          !isAgent(session)
+          !hasRights(session, EScope.bilansRne)
         ) {
           return (
             <Info>

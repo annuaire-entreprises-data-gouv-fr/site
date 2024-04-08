@@ -5,6 +5,7 @@ import {
   getNomComplet,
 } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import {
   capitalize,
   formatAge,
@@ -13,7 +14,6 @@ import {
 } from '#utils/helpers';
 import { libelleCategorieEntrepriseForDescription } from '#utils/helpers/formatting/categories-entreprise';
 import { libelleEffectifForDescription } from '#utils/helpers/formatting/codes-effectifs';
-import { ISession } from '#utils/session';
 import { UniteLegaleEtablissementCountDescription } from './etablissement-count-description';
 
 export const UniteLegaleDescription: React.FC<{

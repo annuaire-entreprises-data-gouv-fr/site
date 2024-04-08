@@ -3,7 +3,9 @@ import { IUniteLegale } from '../../../models/core/types';
 import { LabelWithLinkToSection } from './label-with-link-to-section';
 
 export const checkHasQuality = (uniteLegale: IUniteLegale) =>
-  uniteLegale.complements.estEss || uniteLegale.complements.estSocieteMission;
+  uniteLegale.complements.estEss ||
+  uniteLegale.complements.estSocieteMission ||
+  uniteLegale.complements.estEntrepriseInclusive;
 
 export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
   const sources = [];
@@ -16,6 +18,7 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
     estSocieteMission,
     estQualiopi,
     estRge,
+    estEntrepriseInclusive,
   } = uniteLegale.complements;
   if (estEntrepreneurSpectacle) sources.push(EAdministration.MC);
   if (estEss || estSocieteMission) sources.push(EAdministration.INSEE);
@@ -23,6 +26,7 @@ export const labelsAndCertificatesSources = (uniteLegale: IUniteLegale) => {
   if (egaproRenseignee || estOrganismeFormation || estQualiopi)
     sources.push(EAdministration.MTPEI);
   if (estRge) sources.push(EAdministration.ADEME);
+  if (estEntrepriseInclusive) sources.push(EAdministration.MARCHE_INCLUSION);
 
   return sources;
 };

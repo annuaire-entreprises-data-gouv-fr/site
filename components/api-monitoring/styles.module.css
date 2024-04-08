@@ -1,0 +1,67 @@
+.metrics-title {
+  display: block;
+  margin-bottom: 10px;
+}
+.metrics-title h3 {
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.mean-stats {
+  display: flex;
+  justify-content: space-between;
+}
+.mean-stats > div {
+  width: 24%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mean-stats > div strong {
+  font-size: 1.1rem;
+  line-height: 2.2rem;
+}
+.mean-stats > div:not(:last-of-type) {
+  border-right: 2px solid var(--annuaire-colors-pastelBlue);
+}
+
+.series-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.uptime-chart {
+  flex-grow: 1;
+  display: flex;
+  margin: 0;
+}
+.uptime-chart > div {
+  flex-grow: 1;
+}
+
+.serie {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.serie-rectangle {
+  border-radius: 6px;
+  height: 40px;
+  margin: 3px 0;
+  transition: 100ms opacity ease-in-out;
+  border: 2px solid #fff;
+}
+.serie-rectangle:hover {
+  margin: 0;
+  opacity: 0.6;
+  height: 46px;
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  .hide-tablet {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 576px) {
+  .hide-mobile {
+    display: none;
+  }
+}

@@ -54,11 +54,13 @@ const clientMarcheInclusion = async (siren: Siren) => {
 };
 
 const mapToDomainObject = async (res: APIInclusionResponse) => {
-  const { slug, siret, kind } = res;
+  const { slug, siret, kind, city, department } = res;
   return {
     marcheInclusionLink: routes.certifications.entrepriseInclusive.site + slug,
     siret: siret || '',
     kind,
+    city,
+    department,
   };
 };
 

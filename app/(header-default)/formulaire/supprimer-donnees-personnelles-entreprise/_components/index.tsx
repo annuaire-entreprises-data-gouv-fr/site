@@ -1,7 +1,8 @@
 'use client';
 import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
-import { ISession, getHidePersonalDataRequestFCSession } from '#utils/session';
+import { ISession } from '#models/user/session';
+import { getHidePersonalDataRequestFCSession } from '#utils/session';
 import { postHidePersonalDataRequest } from '../actions';
 import { ConnectionFranceConnect } from './connection-france-connect';
 import { RenseignerSiren } from './renseigner-siren';

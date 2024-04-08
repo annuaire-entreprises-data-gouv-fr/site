@@ -1,4 +1,6 @@
-import { ISession, isAgent, isSuperAgent } from '#utils/session';
+import { EScope, hasRights } from '#models/user/rights';
+import { ISession } from '#models/user/session';
+
 const TRACKER_BASE_URL = 'https://stats.data.gouv.fr';
 export function MatomoInit({ session }: { session: ISession | null }) {
   return (
@@ -8,10 +10,8 @@ export function MatomoInit({ session }: { session: ISession | null }) {
           __html: `
               var _paq = window._paq || [];
               ${
-                isSuperAgent(session)
-                  ? `_paq.push(['setCustomDimension', '1', 'Super-agent connecté']);`
-                  : isAgent(session)
-                  ? `_paq.push(['setCustomDimension', '1', 'Agent connecté']);`
+                hasRights(session, EScope.isAgent)
+                  ? `_paq.push(['setCustomDimension', '1', '${session?.user?.userType}']);`
                   : ''
               }
               _paq.push(['trackPageView']);

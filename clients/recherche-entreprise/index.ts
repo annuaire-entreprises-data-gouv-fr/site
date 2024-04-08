@@ -176,11 +176,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       }
     : { codeColter: null };
 
-  const etablissementSiege = mapToSiege(
-    siege,
-    est_entrepreneur_individuel,
-    siren
-  );
+  const etablissementSiege = mapToSiege(siege, est_entrepreneur_individuel);
 
   const matchingEtablissements = matching_etablissements.map(
     (matchingEtablissement) =>
@@ -276,10 +272,9 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
 
 const mapToSiege = (
   siege: IResult['siege'],
-  est_entrepreneur_individuel: boolean,
-  siren: Siren
+  est_entrepreneur_individuel: boolean
 ) => {
-  if (!siege || Object.keys(siege).length === 0) {
+  if (!siege || Object.keys(siege).length === 0 || !siege.siret) {
     return {
       ...createDefaultEtablissement(),
       siret: '' as Siret,
@@ -333,7 +328,7 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
 
 const mapToEtablissement = (
   etablissement: ISiege | IMatchingEtablissement,
-  estEntrepreneurIndividuel: boolean
+  estEntrepreneurIndividuel: boolean,
 ): IEtablissement => {
   const {
     siret,

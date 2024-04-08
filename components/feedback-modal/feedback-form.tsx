@@ -1,10 +1,9 @@
 'use client';
 import { useRef, useState } from 'react';
-import { IAgentContactInfo } from '#utils/session';
 import { sendFeedback } from './actions';
 import FeedbackMessage from './feedback-message';
 import styles from './style.module.css';
-import { FeedbackType } from './type';
+import { FeedbackType, IAgentContactInfo } from './type';
 
 type IProps = { onSubmit: () => void; agentContactInfo: IAgentContactInfo };
 export default function FeedbackForm({ onSubmit, agentContactInfo }: IProps) {

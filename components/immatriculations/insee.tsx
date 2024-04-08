@@ -12,8 +12,8 @@ import {
   getAdresseEtablissement,
 } from '#models/core/statut-diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
-import { ISession } from '#utils/session';
 
 const AvisSituationTable: React.FC<{
   etablissements: IEtablissement[];

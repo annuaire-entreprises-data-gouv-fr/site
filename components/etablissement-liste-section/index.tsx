@@ -15,8 +15,8 @@ import {
   getNomComplet,
 } from '#models/core/statut-diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { Siret, formatDate, formatSiret } from '#utils/helpers';
-import { ISession } from '#utils/session';
 
 const EtablissementTable: React.FC<{
   label?: string;

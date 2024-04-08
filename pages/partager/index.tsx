@@ -135,19 +135,20 @@ const Partager: NextPageWithLayout = () => {
             </a>
             , scannable par téléphone,{' '}
             <strong>depuis chaque fiche entreprise</strong> :
-            <ul>
-              <li>
-                Allez sur le <a href="/">moteur de recherche</a>
-              </li>
-              <li>Trouvez l’entreprise et accédez à sa fiche</li>
-              <li>
-                Cliquez en haut à droite de la page, sur le petit logo{' '}
-                <Icon slug="qrCode" />
-              </li>
-              <li>Sauvegardez le QR code ainsi généré</li>
-              <li>Ajoutez-le à vos documents !</li>
-            </ul>
           </p>
+          <ul>
+            <li>
+              Allez sur le <a href="/">moteur de recherche</a>
+            </li>
+            <li>Trouvez l’entreprise et accédez à sa fiche</li>
+            <li>
+              Cliquez en haut à droite de la page, sur le petit logo{' '}
+              <Icon slug="qrCode" />
+            </li>
+            <li>Sauvegardez le QR code ainsi généré</li>
+            <li>Ajoutez-le à vos documents !</li>
+          </ul>
+          <br />
           <h2 id="link-search">
             Aider à la saisie de numéro de SIREN ou SIRET
           </h2>
@@ -174,28 +175,6 @@ const Partager: NextPageWithLayout = () => {
             `}
             </code>
           </p>
-          {/* <h2 id="search">
-            Ajouter un champ d’auto complétion de numéro siren dans un
-            formulaire
-          </h2>
-          <h3>Quand l’utiliser ?</h3>
-          <p></p>
-          <input
-            type="text"
-            className="fr-input"
-            id="search-widget"
-            style={{ width: '400px' }}
-            placeholder="Recherchez une entreprise par son nom ou son adresse"
-          />
-          <div
-            dangerouslySetInnerHTML={{
-              __html: `
-            <script src="/search-widget/index.js" nomodule="" defer></script>
-          `,
-            }}
-          />
-          <h3>Comment faire ?</h3>
-          <p></p> */}
           <h2 id="browser-search-engine">
             Ajouter le moteur de recherche à votre navigateur
           </h2>

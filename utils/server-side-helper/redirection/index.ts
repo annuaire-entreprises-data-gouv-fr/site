@@ -64,7 +64,7 @@ export const errorRedirection = (
   try {
     exception.context = {
       ...exception.context,
-      context,
+      ...context,
     };
     const sirenOrSiret = (exception.context.siren ||
       exception.context.siret) as string;

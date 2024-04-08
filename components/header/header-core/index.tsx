@@ -1,10 +1,12 @@
 import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
+import { InfoBanner } from '#components/banner/info-banner';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
 import constants from '#models/constants';
-import { ISession, isLoggedIn } from '#utils/session';
+import { isLoggedIn } from '#models/user/rights';
+import { ISession } from '#models/user/session';
 import styles from './styles.module.css';
 
 type IProps = {
@@ -34,7 +36,8 @@ export const HeaderCore: React.FC<IProps> = ({
       className="fr-header"
       style={{ filter: !useSearchBar ? 'none' : undefined }}
     >
-      <LoadBar isAgent={isLoggedIn(session)} />
+      <LoadBar session={session} />
+      <InfoBanner />
 
       <PrintNever>
         <form
@@ -128,7 +131,12 @@ export const HeaderCore: React.FC<IProps> = ({
                             </a>
                           </div>
                         ) : useAgentCTA ? (
-                          <a href="/lp/agent-public" className="fr-link">
+                          <a
+                            href={`/lp/agent-public?pathFrom=${encodeURIComponent(
+                              pathFrom
+                            )}`}
+                            className="fr-link"
+                          >
                             <Icon slug="user">Espace agent public</Icon>
                           </a>
                         ) : null}
