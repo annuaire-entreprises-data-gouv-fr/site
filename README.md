@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://github.com/etalab/annuaire-entreprises-site/blob/main/public/images/annnuaire-entreprises.svg" width="400px" />
+  <img src="https://github.com/etalab/annuaire-entreprises-site/blob/main/public/images/annuaire-entreprises.gif" width="140px" />
 </h1>
 
 <a href="https://github.com/etalab/annuaire-entreprises-site/blob/main/LICENSE"><img src="https://img.shields.io/github/license/etalab/annuaire-entreprises-site.svg?color=green" alt="License Badge"></a>
@@ -16,7 +16,7 @@ Dépôt du site [Annuaire des Entreprises](https://annuaire-entreprises.data.gou
 
 Ce site met à disposition des citoyens et des agents les données ouvertes (open-data) des entreprises, associations et administrations dotées d'un n° SIREN/SIRET.
 
-Ce site ré-utilise les données des différentes administrations partenaires : 
+Ce site ré-utilise les données des différentes administrations partenaires :
 
 ## Contenu
 
@@ -32,7 +32,7 @@ Pour protéger un siren et en limiter la diffusion [suivez la procédure](https:
 
 ## Dépôts liés 🏗
 
-Voici la liste des dépôts de  code du projet [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
+Voici la liste des dépôts de code du projet [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr) :
 
 | Description                         | Accès                                                                       |
 | ----------------------------------- | --------------------------------------------------------------------------- |
@@ -42,8 +42,7 @@ Voici la liste des dépôts de  code du projet [Annuaire des Entreprises](https:
 | Pipeline ETL                        | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-infra)   |
 | Le proxy API du site                | [par ici 👉](https://github.com/etalab/annuaire-entreprises-api-proxy)      |
 | Tests de pertinence de la recherche | [par ici 👉](https://github.com/etalab/annuaire-entreprises-search-testing) |
-| Authentification des outils d’admin | [par ici 👉](https://github.com/etalab/annuaire-entreprises-admin-auth) |
-
+| Authentification des outils d’admin | [par ici 👉](https://github.com/etalab/annuaire-entreprises-admin-auth)     |
 
 ## Développement
 
