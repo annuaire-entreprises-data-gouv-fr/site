@@ -1,5 +1,6 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useId, useState } from 'react';
 import ButtonLink from '#components-ui/button';
+import ButtonClose from '#components-ui/button/button-close';
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
 import {
@@ -9,6 +10,7 @@ import {
 } from '#models/search-filter-params';
 import { useOutsideClick } from 'hooks';
 import ActiveFilterLabel from './active-filter-label';
+import styles from './style.module.css';
 
 type FilterMenuProps = {
   label: string;
@@ -37,6 +39,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
   const ref = useOutsideClick(() => {
     setOpen(false);
   });
+  const id = useId();
 
   return (
     <>
@@ -66,12 +69,19 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
             )}
           </label>
           {open && (
-            <label onClick={() => setOpen(false)} className="close-container">
-              Fermer ✕
-            </label>
+            <ButtonClose
+              onClick={() => setOpen(false)}
+              className={styles['close-container']}
+              ariaControls={id}
+              ariaLabel="Fermer les filtres"
+            />
           )}
         </div>
-        <div className="container" style={{ display: open ? 'block' : 'none' }}>
+        <div
+          className="container"
+          style={{ display: open ? 'block' : 'none' }}
+          id={id}
+        >
           <div className="filter-container">{children}</div>
           {addSaveClearButton && (
             <>
@@ -117,7 +127,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
             background-color: #fefefe;
           }
 
-          label.close-container {
+          .close-container {
             z-index: 10010;
             display: none;
             position: fixed;
@@ -167,7 +177,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
               height: 100vh;
               margin-top: 0;
             }
-            label.close-container {
+            .close-container {
               display: block;
             }
           }

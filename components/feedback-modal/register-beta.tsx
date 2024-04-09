@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
+import ButtonLink from '#components-ui/button';
 import { Loader } from '#components-ui/loader';
 import { useStorage } from 'hooks';
 import { registerToBeta } from './actions';
@@ -63,6 +64,7 @@ export default function RegisterBeta({ agentContactInfo }: IProps) {
             >
               <input
                 type="checkbox"
+                required
                 id="consent"
                 name="consent"
                 checked={consentGiven}
@@ -92,14 +94,13 @@ function SubmitButton({ disabled = false }) {
   const { pending } = useFormStatus();
   return (
     <div className="fr-btns-group">
-      <button
+      <ButtonLink
         aria-label="Participer au programme de beta-test"
         role="submit"
         disabled={disabled}
-        className="fr-btn"
       >
         Participer {pending && <Loader />}
-      </button>
+      </ButtonLink>
     </div>
   );
 }

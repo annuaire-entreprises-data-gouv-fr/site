@@ -1,7 +1,8 @@
 'use client';
 
 import { useLayoutEffect, useRef, useState } from 'react';
-import { HeightTransition } from '#components-ui/animation/height-transition';
+import FadeIn from '#components-ui/animation/fade-in';
+import ButtonClose from '#components-ui/button/button-close';
 import FloatingHelpButton from '#components-ui/floating-help-button';
 import FloatingModal from '#components-ui/floating-modal';
 import { Icon } from '#components-ui/icon/wrapper';
@@ -79,15 +80,12 @@ export default function FeedbackModal({ agentContactInfo }: IProps) {
           className={styles.dialog}
           aria-label="Partager une idée, un bug, une question ou une donnée manquante avec l'équipe de l'Annuaire des Entreprises"
         >
-          <button
+          <ButtonClose
             onClick={handleClose}
-            className="fr-btn fr-btn--tertiary-no-outline fr-btn--sm"
-            aria-label="Fermer la fenêtre de retour"
-            aria-controls="feedback-modal"
-          >
-            × Fermer
-          </button>
-          <HeightTransition>
+            ariaLabel="Fermer la fenêtre de retour"
+            ariaControls="feedback-modal"
+          />
+          <FadeIn>
             {formSubmitted ? (
               <RegisterBeta agentContactInfo={agentContactInfo} />
             ) : (
@@ -96,7 +94,7 @@ export default function FeedbackModal({ agentContactInfo }: IProps) {
                 agentContactInfo={agentContactInfo}
               />
             )}
-          </HeightTransition>
+          </FadeIn>
         </FloatingModal>
       </div>
     </PrintNever>

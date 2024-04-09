@@ -1,0 +1,13 @@
+.close-container {
+  z-index: 10010;
+  display: none;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 992px) {
+  .close-container {
+    display: block;
+  }
+}

@@ -4,10 +4,9 @@
   max-width: 500px;
   position: fixed;
   visibility: hidden;
-  right: 60px;
-  bottom: 60px;
+  right: 40px;
+  bottom: 40px;
   z-index: 1000;
-
 
   &:focus-within {
     outline-color: #0a76f6;
@@ -20,7 +19,7 @@
     visibility: visible;
   }
 
-  &>button:first-of-type {
+  & > button:first-of-type {
     position: absolute;
     top: 0;
     right: 0;

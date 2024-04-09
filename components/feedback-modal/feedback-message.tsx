@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Error } from '#components-ui/alerts';
 import FadeIn from '#components-ui/animation/fade-in';
+import ButtonLink from '#components-ui/button';
 import { Loader } from '#components-ui/loader';
 import Textarea from '#components-ui/textarea';
 import constants from '#models/constants';
@@ -44,6 +45,7 @@ export default function FeedbackMessage({ type, isErrored }: IProps) {
           autoResize
           id="feedback-textarea"
           name="message"
+          required
           value={feedbackContent}
           onChange={(e) => setFeedbackContent(e.target.value)}
           placeholder="Dites-nous tout"
@@ -66,14 +68,13 @@ export default function FeedbackMessage({ type, isErrored }: IProps) {
         </FadeIn>
       )}
       <div className="fr-btns-group">
-        <button
+        <ButtonLink
           role="submit"
-          disabled={!feedbackContent || pending}
-          className="fr-btn"
+          disabled={pending}
           aria-label="Envoyer votre message"
         >
           Envoyer {pending && <Loader />}
-        </button>
+        </ButtonLink>
       </div>
     </>
   );
