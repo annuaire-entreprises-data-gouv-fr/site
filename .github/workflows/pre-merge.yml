@@ -20,6 +20,7 @@ env:
   IRON_SESSION_PWD: ${{ secrets.IRON_SESSION_PWD }}
   GRIST_API_KEY: ${{ secrets.GRIST_API_KEY }}
   UPDOWN_IO_API_KEY: ${{ secrets.UPDOWN_IO_API_KEY }}
+
 jobs:
   dependencies:
     name: 'Install dependencies'
@@ -122,6 +123,14 @@ jobs:
         env:
           PORT: 3000
           NEXT_PUBLIC_END2END_MOCKING: enabled
+      - name: Upload screenshots 📸
+        uses: actions/upload-artifact@v4
+        # add the line below to store screenshots only on failures
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
 
   typecheck:
     name: Type check

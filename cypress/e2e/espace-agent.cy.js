@@ -38,7 +38,7 @@ describe(
       cy.location().should((loc) => {
         expect(loc.pathname).to.eq('/');
       });
-
+      cy.visit('/');
       cy.contains('annuaire@yopmail.com');
     });
 
