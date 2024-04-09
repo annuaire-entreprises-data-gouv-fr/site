@@ -18,7 +18,7 @@ export const InfoBanner: React.FC<{}> = () => (
       }}
     >
       <div className="fr-container">
-        ℹ️ Suite à la mise à jour de la base{' '}
+        ℹ️ Suite à la mise à jour{' '}
         <a href="https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/">
           de la base Sirene
         </a>{' '}
