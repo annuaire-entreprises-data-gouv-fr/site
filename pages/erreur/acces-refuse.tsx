@@ -17,13 +17,16 @@ const Forbidden: NextPageWithLayout = () => {
         robot et que le problème se reproduit, vous pouvez nous contacter via
         notre FAQ.
       </p>
-      <div className="layout-left">
-        <ButtonLink to="/faq" alt>
-          Accéder à la FAQ
-        </ButtonLink>
-        <span>&nbsp;</span>
-        <ButtonLink to="/">Retourner à la page d’accueil</ButtonLink>
-      </div>
+      <ul className="fr-btns-group fr-btns-group--inline-md">
+        <li>
+          <ButtonLink to="/faq" alt>
+            Accéder à la FAQ
+          </ButtonLink>
+        </li>
+        <li>
+          <ButtonLink to="/">Retourner à la page d’accueil</ButtonLink>
+        </li>
+      </ul>
     </>
   );
 };

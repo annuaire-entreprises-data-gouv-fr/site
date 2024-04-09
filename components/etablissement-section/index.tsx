@@ -180,7 +180,7 @@ const EtablissementSection: React.FC<IProps> = ({
       : []),
     [
       'Avis de situation Insee',
-      <AvisSituationLink etablissement={etablissement} />,
+      <AvisSituationLink session={session} etablissement={etablissement} />,
     ],
   ];
 
