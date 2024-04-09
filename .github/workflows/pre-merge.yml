@@ -94,6 +94,11 @@ jobs:
     needs: [dependencies]
     env:
       NEXT_PUBLIC_END2END_MOCKING: enabled
+      AGENTCONNECT_CLIENT_ID: ${{ secrets.AGENTCONNECT_CLIENT_ID }}
+      AGENTCONNECT_CLIENT_SECRET: ${{ secrets.AGENTCONNECT_CLIENT_SECRET }}
+      AGENTCONNECT_URL_DISCOVER: https://fca.integ01.dev-agentconnect.fr/api/v2/.well-known/openid-configuration
+      AGENTCONNECT_REDIRECT_URI: http://localhost:3000/api/auth/agent-connect/callback
+      AGENTCONNECT_POST_LOGOUT_REDIRECT_URI: http://localhost:3000/api/auth/agent-connect/logout-callback
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v3
