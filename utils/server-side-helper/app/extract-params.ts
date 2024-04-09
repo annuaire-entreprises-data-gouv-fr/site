@@ -14,10 +14,10 @@ const extractParamsAppRouter = ({
   const slug = (params?.slug || '') as string;
   searchParams = searchParams ?? {};
   const headersList = headers();
-  const referer = headersList.get('referer') && '';
   const userAgent = headersList.get('user-agent') || '';
 
-  const isRedirected = !!referer && !!searchParams.redirected;
+  // cf middleware
+  const isRedirected = headersList.get('x-redirected') === '1';
 
   const pageParam = (searchParams.page || '') as string;
   const page = parseIntWithDefaultValue(pageParam, 1);
