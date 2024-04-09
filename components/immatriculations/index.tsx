@@ -61,7 +61,10 @@ const Immatriculations: React.FC<IProps> = ({
             </>
           ) : isServicePublic(uniteLegale) ? null : (
             <>
-              <ImmatriculationRNENotFoundAlert uniteLegale={uniteLegale} />
+              <ImmatriculationRNENotFoundAlert
+                session={session}
+                uniteLegale={uniteLegale}
+              />
               <br />
             </>
           )}

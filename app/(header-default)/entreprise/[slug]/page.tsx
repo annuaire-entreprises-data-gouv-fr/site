@@ -49,9 +49,10 @@ export const generateMetadata = withErrorHandler(
     const { slug, page, isBot } = extractParamsAppRouter(props);
 
     const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
+    const session = await getSession();
     return {
-      title: uniteLegalePageTitle(uniteLegale, null),
-      description: uniteLegalePageDescription(uniteLegale, null),
+      title: uniteLegalePageTitle(uniteLegale, session),
+      description: uniteLegalePageDescription(uniteLegale, session),
       robots: shouldNotIndex(uniteLegale)
         ? 'noindex, nofollow'
         : 'index, follow',

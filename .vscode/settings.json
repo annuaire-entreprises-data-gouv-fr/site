@@ -1,13 +1,4 @@
 {
-  "spellright.language": ["fr", "en"],
-  "spellright.documentTypes": [
-    "yaml",
-    "git-commit",
-    "markdown",
-    "html",
-    "typescript",
-    "typescriptreact"
-  ],
   "eslint.enable": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": ["source.organizeImports", "source.fixAll.eslint"]

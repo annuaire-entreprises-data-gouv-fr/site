@@ -143,6 +143,7 @@ const UniteLegaleSection: React.FC<{
           <li>
             Avis de situation Insee :{' '}
             <AvisSituationLink
+              session={session}
               etablissement={uniteLegale.siege}
               label="télécharger"
             />
