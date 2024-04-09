@@ -1,0 +1,10 @@
+.map {
+  background: var(--annuaire-colors-pastelBlue);
+  width: 100%;
+  z-index: 0;
+}
+@media only screen and (min-width: 1px) and (max-width: 1100px) {
+  .map {
+    min-height: 30vh;
+  }
+}

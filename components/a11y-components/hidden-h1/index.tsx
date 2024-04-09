@@ -1,21 +1,7 @@
 import React from 'react';
-
+import styles from './style.module.css';
 const HiddenH1: React.FC<{ title: string }> = ({ title }) => (
-  <>
-    <h1>{title}</h1>
-    <style jsx>{`
-      h1 {
-        clip: rect(1px, 1px, 1px, 1px);
-        height: 1px;
-        overflow: hidden;
-        position: absolute;
-        white-space: nowrap;
-        width: 1px;
-        z-index: -1;
-        user-select: none;
-      }
-    `}</style>
-  </>
+  <h1 className={styles['title']}>{title}</h1>
 );
 
 export default HiddenH1;

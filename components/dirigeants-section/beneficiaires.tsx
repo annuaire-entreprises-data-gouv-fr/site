@@ -129,11 +129,6 @@ function BénéficiairesContent({
           />
         </>
       )}
-      <style global jsx>{`
-        table > tbody > tr > td:first-of-type {
-          width: 30%;
-        }
-      `}</style>
     </>
   );
 }

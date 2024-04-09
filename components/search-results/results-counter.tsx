@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './style.module.css';
 
 const ResultsCounter: React.FC<{
   resultCount?: number;
@@ -8,7 +9,7 @@ const ResultsCounter: React.FC<{
   return (
     <>
       {resultCount ? (
-        <div className="results-counter">
+        <div className={styles['results-counter']}>
           <span>
             {currentPage > 1 && `Page ${currentPage} de `}
             {resultCount === 10000 && 'Plus de '}
@@ -16,8 +17,8 @@ const ResultsCounter: React.FC<{
           </span>
         </div>
       ) : (
-        <div className="no-results">
-          <div className="results-counter">
+        <div>
+          <div className={styles['results-counter']}>
             <span>
               Aucune structure n’a été trouvée pour vos critères de recherche .
             </span>
@@ -37,12 +38,6 @@ const ResultsCounter: React.FC<{
           </ul>
         </div>
       )}
-      <style jsx>{`
-        .results-counter {
-          margin-top: 20px;
-          color: var(--text-default-grey);
-        }
-      `}</style>
     </>
   );
 };

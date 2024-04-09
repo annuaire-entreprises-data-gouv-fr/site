@@ -1,0 +1,180 @@
+/****************************
+ * ADVANCED SEARCH TUTORIAL *
+ ****************************/
+
+.advanced-search-tutorial {
+  position: relative;
+  padding-bottom: 20px;
+}
+.svg-arrow {
+  height: 100px;
+  position: absolute;
+  top: -20px;
+}
+
+.tutorial {
+  margin-left: 110px;
+}
+
+.tutorial .title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 1.9rem;
+  margin: 30px 0 16px;
+}
+
+.tutorial ul {
+  list-style-type: none;
+  margin-top: 30px;
+  padding: 0;
+}
+.tutorial ul li {
+  margin: 0 0 20px;
+}
+.tutorial li > span {
+  color: var(--annuaire-colors-frBlue);
+}
+
+@media only screen and (min-width: 1px) and (max-width: 576px) {
+  .advanced-search-tutorial svg {
+    rotate: 225deg;
+    height: 60px;
+    position: absolute;
+    top: -40px;
+  }
+
+  .tutorial {
+    margin-left: 0;
+  }
+  .tutorial .title {
+    margin: 10px 0 16px;
+  }
+}
+
+/******************
+ * SEARCH RESULTS *
+ ******************/
+
+.map-container {
+  display: flex;
+  flex-direction: row-reverse;
+  height: calc(100vh - 180px);
+}
+.results-for-map-wrapper {
+  width: 550px;
+  flex-shrink: 0;
+  font-size: 1rem;
+  height: 100%;
+  overflow: auto;
+}
+.results-for-map-wrapper > .results-list-wrapper {
+  padding: 0 10px;
+  height: calc(100% - 60px);
+  overflow: auto;
+}
+.results-for-map-wrapper > .results-footer-wrapper {
+  height: 60px;
+  width: 100%;
+  display: flex;
+}
+.results-counter {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: rgb(112, 117, 122);
+  margin-bottom: 15px;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 1100px) {
+  .map-container {
+    display: block;
+    height: auto;
+  }
+
+  .results-for-map-wrapper {
+    width: 100%;
+  }
+
+  .results-for-map-wrapper > .results-list-wrapper {
+    height: auto;
+    overflow: none;
+  }
+}
+
+.results-counter {
+  margin-top: 20px;
+  color: var(--text-default-grey);
+}
+
+/************************
+ * SEARCH RESULTS LIST  *
+ ************************/
+.result-item {
+  margin: 30px 0;
+}
+
+.result-item a {
+  background-image: none;
+}
+.result-item a:not(.no-style-link):hover,
+.result-item > a:hover .title > span:first-of-type {
+  text-decoration: underline;
+}
+
+.result-item > a {
+  text-decoration: none;
+  border: none;
+  color: #333;
+  display: block;
+  font-size: 1rem;
+}
+.result-item > a .title {
+  color: var(--annuaire-colors-frBlue);
+  text-decoration: none;
+  font-size: 1.1rem;
+  margin-bottom: 3px;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.result-item > a .title > span:first-of-type {
+  margin-right: 10px;
+}
+
+.result-item ul.matching-etablissement {
+  margin-left: 10px;
+}
+
+.result-item ul.matching-etablissement li {
+  list-style-type: none;
+  padding-left: 15px;
+  position: relative;
+}
+.result-item ul.matching-etablissement li:before,
+.result-item ul.matching-etablissement .down {
+  content: '';
+  width: 10px;
+  height: 15px;
+  border: 1px solid #bbb;
+  border-top: none;
+  border-right: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.result-item ul.matching-etablissement .down {
+  border-bottom: none;
+  height: 100%;
+}
+
+.result-item .adress {
+  color: #707070;
+  font-size: 0.9rem;
+}
+
+.dirigeants-or-elus {
+  color: var(--text-default-grey);
+  font-size: 0.9rem;
+  margin: 8px auto;
+}

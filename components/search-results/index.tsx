@@ -6,6 +6,7 @@ import ResultsCounter from './results-counter';
 import ResultsList from './results-list';
 import { NotEnoughParams } from './results-not-enough-params';
 import ResultsPagination from './results-pagination';
+import styles from './style.module.css';
 
 const SearchResults: React.FC<{
   searchTerm?: string;
@@ -32,11 +33,11 @@ const SearchResults: React.FC<{
   if (map) {
     return (
       <>
-        <div className="map-container">
+        <div className={styles['map-container']}>
           <MapResults results={results.results} />
-          <div className="results-for-map-wrapper">
-            <div className="results-list-wrapper">
-              <div className="results-counter">
+          <div className={styles['results-for-map-wrapper']}>
+            <div className={styles['results-list-wrapper']}>
+              <div className={styles['results-counter']}>
                 <ResultsCounter
                   resultCount={results.resultCount}
                   currentPage={results.currentPage}
@@ -44,7 +45,7 @@ const SearchResults: React.FC<{
               </div>
               <ResultsList results={results.results} />
             </div>
-            <div className="results-footer-wrapper">
+            <div className={styles['results-footer-wrapper']}>
               <ResultsPagination
                 totalPages={results.pageCount}
                 currentPage={results.currentPage}
@@ -55,53 +56,6 @@ const SearchResults: React.FC<{
             </div>
           </div>
         </div>
-
-        <style jsx>{`
-          .map-container {
-            display: flex;
-            flex-direction: row-reverse;
-            height: calc(100vh - 180px);
-          }
-          .results-for-map-wrapper {
-            width: 550px;
-            flex-shrink: 0;
-            font-size: 1rem;
-            height: 100%;
-            overflow: auto;
-          }
-          .results-for-map-wrapper > .results-list-wrapper {
-            padding: 0 10px;
-            height: calc(100% - 60px);
-            overflow: auto;
-          }
-          .results-for-map-wrapper > .results-footer-wrapper {
-            height: 60px;
-            width: 100%;
-            display: flex;
-          }
-          .results-counter {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            color: rgb(112, 117, 122);
-            margin-bottom: 15px;
-          }
-
-          @media only screen and (min-width: 1px) and (max-width: 1100px) {
-            .map-container {
-              display: block;
-              height: auto;
-            }
-
-            .results-for-map-wrapper {
-              width: 100%;
-            }
-
-            .results-for-map-wrapper > .results-list-wrapper {
-              height: auto;
-              overflow: none;
-            }
-          }
-        `}</style>
       </>
     );
   } else {

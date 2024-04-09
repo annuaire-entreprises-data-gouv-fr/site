@@ -1,10 +1,12 @@
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
+import styles from './style.module.css';
 
 export const AdvancedSearchTutorial = () => {
   return (
-    <div className="advanced-search-tutorial">
+    <div className={styles['advanced-search-tutorial']}>
       <svg
+        className={styles['svg-arrow']}
         fill="#c53721"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="-41.5 -41.5 498.3 498.3"
@@ -17,8 +19,8 @@ export const AdvancedSearchTutorial = () => {
         </g>
       </svg>
       <br />
-      <div className="tutorial">
-        <div className="title">
+      <div className={styles['tutorial']}>
+        <div className={styles['title']}>
           Grâce aux filtres de recherche, retrouvez n’importe quelle entreprise,
           association, ou service public en France.
         </div>
@@ -59,59 +61,6 @@ export const AdvancedSearchTutorial = () => {
           </ul>
         </div>
       </div>
-      <style jsx>
-        {`
-          .advanced-search-tutorial {
-            position: relative;
-            padding-bottom: 20px;
-          }
-
-          svg {
-            height: 100px;
-            position: absolute;
-            top: -20px;
-          }
-
-          .tutorial {
-            margin-left: 110px;
-          }
-
-          .tutorial div.title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            line-height: 1.9rem;
-            margin: 30px 0 16px;
-          }
-
-          .tutorial ul {
-            list-style-type: none;
-            margin-top: 30px;
-            padding: 0;
-          }
-          .tutorial ul li {
-            margin: 0 0 20px;
-          }
-          .tutorial li > span {
-            color: ${constants.colors.frBlue};
-          }
-
-          @media only screen and (min-width: 1px) and (max-width: 576px) {
-            svg {
-              rotate: 225deg;
-              height: 60px;
-              position: absolute;
-              top: -40px;
-            }
-
-            .tutorial {
-              margin-left: 0;
-            }
-            .tutorial div.title {
-              margin: 10px 0 16px;
-            }
-          }
-        `}
-      </style>
     </div>
   );
 };
