@@ -18,9 +18,13 @@ export const InfoBanner: React.FC<{}> = () => (
       }}
     >
       <div className="fr-container">
-        ⚠️ Une mise à jour <INSEE /> est en cours et les données <a href="https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/">de la base Sirene</a> n’ont pas été mises à jour sur notre site depuis le 22 mars 2024.
-        <br />
-        Cette situation est susceptible de perdurer jusqu’à ce que les données soient disponibles. Veuillez nous excuser pour la gêne occasionnée.
+        ℹ️ Suite à la mise à jour de la base{' '}
+        <a href="https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/">
+          de la base Sirene
+        </a>{' '}
+        de l’
+        <INSEE />, les données sont désormais à jour à l’exception de la qualité
+        Société à mission.
       </div>
     </div>
   </PrintNever>
