@@ -66,22 +66,25 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
       ) : (
         throwUnreachableCaseError(hidePersonalDataRequest)
       )}
-      <p role="list" className="fr-mt-3w layout-left">
-        <ButtonLink
-          role="listitem"
-          to="/formulaire/supprimer-donnees-personnelles-entreprise"
-        >
-          Faire une autre demande
-        </ButtonLink>
-        &nbsp;
-        <ButtonLink
-          role="listitem"
-          to="/api/auth/france-connect/logout?pathFrom=%2Fformulaire%2Fsupprimer-donnees-personnelles-entreprise"
-          alt
-        >
-          Me déconnecter
-        </ButtonLink>
-      </p>
+      <ul className="fr-btns-group fr-btns-group--inline-md fr-btns-group--center">
+        <li>
+          <ButtonLink
+            role="listitem"
+            to="/formulaire/supprimer-donnees-personnelles-entreprise"
+          >
+            Faire une autre demande
+          </ButtonLink>
+        </li>
+        <li>
+          <ButtonLink
+            role="listitem"
+            to="/api/auth/france-connect/logout?pathFrom=%2Fformulaire%2Fsupprimer-donnees-personnelles-entreprise"
+            alt
+          >
+            Me déconnecter
+          </ButtonLink>
+        </li>
+      </ul>
     </>
   );
 }
