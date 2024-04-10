@@ -5,10 +5,10 @@ import NonDiffusibleAlert from '#components-ui/alerts-with-explanations/non-diff
 import NotInSireneAlert from '#components-ui/alerts-with-explanations/not-in-sirene-alert';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
-import { Tag } from '#components-ui/tag';
 import { ISTATUTDIFFUSION } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
-import { ISession, isAgent } from '#utils/session';
+import { EScope, hasRights } from '#models/user/rights';
+import { ISession } from '#models/user/session';
 
 export default function TitleAlerts({
   uniteLegale,
@@ -25,7 +25,7 @@ export default function TitleAlerts({
       <MultipleSirenAlert uniteLegale={uniteLegale} />
       <NotInSireneAlert uniteLegale={uniteLegale} />
 
-      {isAgent(session) && (
+      {hasRights(session, EScope.isAgent) && (
         <PrintNever>
           <ProtectedData full>
             Vous êtes connecté avec un compte <strong>agent public</strong>. Ce
@@ -35,14 +35,6 @@ export default function TitleAlerts({
               Réservé aux agents publics
             </Icon>
             ” .
-            <br />
-            <br />
-            Ce service est en <Tag color="new">beta test</Tag>. Il est possible
-            que vous recontriez des bugs ou des erreurs. Si cela arrive,{' '}
-            <a href="mailto:charlotte.choplin@beta.gouv.fr">
-              n’hésitez pas à nous contacter
-            </a>
-            .
           </ProtectedData>
         </PrintNever>
       )}

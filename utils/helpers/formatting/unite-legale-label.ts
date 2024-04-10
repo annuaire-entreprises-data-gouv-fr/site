@@ -11,7 +11,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from '#models/core/types';
-import { ISession } from '#utils/session';
+import { ISession } from '#models/user/session';
 import { formatSiret } from '../siren-and-siret';
 import { capitalize, formatIntFr } from './formatting';
 

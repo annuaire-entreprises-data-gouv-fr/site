@@ -21,13 +21,13 @@ import {
   getNomComplet,
 } from '#models/core/statut-diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import {
   formatDate,
   formatSiret,
   uniteLegaleLabelWithPronounContracted,
 } from '#utils/helpers';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
-import { ISession } from '#utils/session';
 
 type IProps = {
   session: ISession | null;
@@ -180,7 +180,7 @@ const EtablissementSection: React.FC<IProps> = ({
       : []),
     [
       'Avis de situation Insee',
-      <AvisSituationLink etablissement={etablissement} />,
+      <AvisSituationLink session={session} etablissement={etablissement} />,
     ],
   ];
 

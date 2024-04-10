@@ -1,51 +1,24 @@
-import {
-  IAgentConnectUserInfo,
-  agentConnectAuthenticate,
-} from '#clients/auth/agent-connect/strategy';
+import { agentConnectAuthenticate } from '#clients/auth/agent-connect/strategy';
 import { HttpForbiddenError } from '#clients/exceptions';
 import { Exception } from '#models/exceptions';
-import { checkIsSuperAgent } from '#utils/helpers/is-super-agent';
+import { getUserScopes } from '#models/user/scopes';
 import { logFatalErrorInSentry } from '#utils/sentry';
-import {
-  ISessionPrivilege,
-  cleanPathFrom,
-  getPathFrom,
-  setAgentSession,
-} from '#utils/session';
+import { cleanPathFrom, getPathFrom, setAgentSession } from '#utils/session';
 import withSession from '#utils/session/with-session';
-
-const getUserPrivileges = async (
-  userInfo: IAgentConnectUserInfo
-): Promise<ISessionPrivilege> => {
-  const isTestAccount =
-    userInfo.email === 'user@yopmail.com' &&
-    process.env.NODE_ENV !== 'production';
-
-  const isSuperAgent = await checkIsSuperAgent(userInfo.email);
-  if (isTestAccount || isSuperAgent) {
-    return 'super-agent';
-  }
-
-  // agent connect only connect agents
-  return 'agent';
-};
 
 export default withSession(async function callbackRoute(req, res) {
   try {
     const userInfo = await agentConnectAuthenticate(req);
-    const userPrivilege = await getUserPrivileges(userInfo);
+    const { scopes, userType } = await getUserScopes(userInfo?.email);
     const session = req.session;
-
-    if (userPrivilege === 'unkown') {
-      throw new HttpForbiddenError(`Unauthorized account : ${userInfo.email}`);
-    }
 
     await setAgentSession(
       userInfo.email,
       userInfo.family_name ?? '',
       userInfo.given_name ?? '',
       userInfo.siret ?? '',
-      userPrivilege,
+      scopes,
+      userType,
       session
     );
 

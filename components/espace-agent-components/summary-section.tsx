@@ -5,7 +5,8 @@ import { PrintNever } from '#components-ui/print-visibility';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
 import { IUniteLegale } from '#models/core/types';
-import { ISession, isSuperAgent } from '#utils/session';
+import { EScope, hasRights } from '#models/user/rights';
+import { ISession } from '#models/user/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps {
@@ -75,7 +76,7 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
                 <Icon slug="download">Télécharger les bilans</Icon>
               </a>,
             ],
-            ...(isSuperAgent(session)
+            ...(hasRights(session, EScope.conformite)
               ? [
                   ['', <br />],
                   [

@@ -15,7 +15,6 @@ import {
   IPropsWithMetadata,
   postServerSideProps,
 } from '#utils/server-side-helper/page/post-server-side-props';
-import { isAgent } from '#utils/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps extends IPropsWithMetadata {
@@ -49,7 +48,7 @@ const FinancePage: NextPageWithLayout<IProps> = ({
             <HorizontalSeparator />
             <DocumentBilansSection
               uniteLegale={uniteLegale}
-              isAgent={isAgent(session)}
+              session={session}
             />
           </>
         )}

@@ -19,6 +19,7 @@ describe('clientSearchRechercheEntreprise : simple search with searchTerms', () 
     '883010316',
     '908595879',
     '552032534',
+    '41154066900016', // Entreprise non enregistrée dans la base sirene
 
     'xavier jouppe',
   ].forEach((s) => itShouldMatchSnapshotForSearch(s, 1));

@@ -13,7 +13,7 @@ import {
 import { isAssociation, isServicePublic } from '#models/core/types';
 import { IImmatriculation } from '#models/immatriculation';
 import { IJustificatifs } from '#models/justificatifs';
-import { ISession } from '#utils/session';
+import { ISession } from '#models/user/session';
 import ImmatriculationRNE from './rne';
 
 const isNotFound = (
@@ -61,7 +61,10 @@ const Immatriculations: React.FC<IProps> = ({
             </>
           ) : isServicePublic(uniteLegale) ? null : (
             <>
-              <ImmatriculationRNENotFoundAlert uniteLegale={uniteLegale} />
+              <ImmatriculationRNENotFoundAlert
+                session={session}
+                uniteLegale={uniteLegale}
+              />
               <br />
             </>
           )}

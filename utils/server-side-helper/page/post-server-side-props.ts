@@ -1,7 +1,8 @@
 import { getIronSession } from 'iron-session';
 import { GetServerSidePropsContext } from 'next';
+import { ISession } from '#models/user/session';
 import { IReqWithSession } from '#utils/session/with-session';
-import { ISession, sessionOptions, setVisitTimestamp } from '../../session';
+import { sessionOptions, setVisitTimestamp } from '../../session';
 import { errorRedirection } from '../redirection';
 import { getContext } from './error-context';
 

@@ -12,8 +12,8 @@ import {
   getNomComplet,
 } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { formatIntFr } from '#utils/helpers';
-import { ISession } from '#utils/session';
 import TitleAlerts from './alerts';
 import styles from './styles.module.css';
 import { FICHE, Tabs } from './tabs';

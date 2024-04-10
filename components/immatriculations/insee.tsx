@@ -12,8 +12,8 @@ import {
   getAdresseEtablissement,
 } from '#models/core/statut-diffusion';
 import { IEtablissement, IUniteLegale } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { formatSiret } from '#utils/helpers';
-import { ISession } from '#utils/session';
 
 const AvisSituationTable: React.FC<{
   etablissements: IEtablissement[];
@@ -34,7 +34,11 @@ const AvisSituationTable: React.FC<{
         statutDiffusion={etablissement.statutDiffusion}
         since={etablissement.dateFermeture}
       />,
-      <AvisSituationLink etablissement={etablissement} label="Télécharger" />,
+      <AvisSituationLink
+        session={session}
+        etablissement={etablissement}
+        label="Télécharger"
+      />,
     ])}
   />
 );
@@ -78,6 +82,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, session }) => (
           Si vous avez plusieurs établisements et ne savez pas quel avis de
           situation utiliser,{' '}
           <AvisSituationLink
+            session={session}
             etablissement={uniteLegale.siege}
             label="téléchargez l’avis de situation Sirene du siège social"
           />

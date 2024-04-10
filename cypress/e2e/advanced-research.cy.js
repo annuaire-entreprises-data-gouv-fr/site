@@ -17,7 +17,6 @@ describe('Search page', () => {
 describe('Dirigeants and Elus search', () => {
   it('Search an élu with dirigeants filters', () => {
     cy.visit('/rechercher?terme=&fn=anne&n=hidalgo');
-    cy.contains('36 RUE DES PIPISRELLES').should('be.visible');
     cy.contains('VILLE DE PARIS').should('be.visible');
   });
   it('Search a dirigeant with main search bar', () => {

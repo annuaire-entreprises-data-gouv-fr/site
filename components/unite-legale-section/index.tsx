@@ -18,10 +18,10 @@ import {
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
+import { ISession } from '#models/user/session';
 import { formatDate, formatIntFr, formatSiret } from '#utils/helpers';
 import { libelleCategorieEntreprise } from '#utils/helpers/formatting/categories-entreprise';
 import { libelleTrancheEffectif } from '#utils/helpers/formatting/codes-effectifs';
-import { ISession } from '#utils/session';
 import {
   LabelsAndCertificatesBadgesSection,
   checkHasLabelsAndCertificates,
@@ -143,6 +143,7 @@ const UniteLegaleSection: React.FC<{
           <li>
             Avis de situation Insee :{' '}
             <AvisSituationLink
+              session={session}
               etablissement={uniteLegale.siege}
               label="télécharger"
             />

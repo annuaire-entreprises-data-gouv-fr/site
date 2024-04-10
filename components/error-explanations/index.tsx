@@ -11,13 +11,17 @@ const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
       nous puissions trouver la panne 🕵️‍♀️.
     </p>
     <p>En attendant, vous pouvez toujours :</p>
-    <div className="layout-left">
-      <ButtonLink to="/faq" alt>
-        Consulter notre page d’aide
-      </ButtonLink>
-      <span>&nbsp;</span>
-      <ButtonLink to="/">Retourner à la page d’accueil</ButtonLink>
-    </div>
+    <ul className="fr-btns-group fr-btns-group--inline-md">
+      <li>
+        <ButtonLink to="/faq" alt>
+          Consulter notre page d’aide
+        </ButtonLink>
+      </li>
+      <li>
+        <span>&nbsp;</span>
+        <ButtonLink to="/">Retourner à la page d’accueil</ButtonLink>
+      </li>
+    </ul>
   </div>
 );
 

@@ -58,33 +58,31 @@ const ImmatriculationLinks = ({
           <INPI />
           &nbsp;:
         </p>
-        <div className="layout-center">
-          <ButtonLink
-            nofollow={true}
-            to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
-          >
-            <Icon slug="download">
-              Télécharger le justificatif d’immatriculation
-            </Icon>
-          </ButtonLink>
-          <div className="separator" />
-          <ButtonLink
-            target="_blank"
-            to={
-              siteLink || `${routes.rne.portail.entreprise}${uniteLegale.siren}`
-            }
-            alt
-          >
-            ⇢ Voir la fiche sur le site de l’INPI
-          </ButtonLink>
-        </div>
+        <ul className="fr-btns-group fr-btns-group--inline-md fr-btns-group--center">
+          <li>
+            <ButtonLink
+              nofollow={true}
+              to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
+            >
+              <Icon slug="download">
+                Télécharger le justificatif d’immatriculation
+              </Icon>
+            </ButtonLink>
+          </li>
+          <li>
+            <ButtonLink
+              target="_blank"
+              to={
+                siteLink ||
+                `${routes.rne.portail.entreprise}${uniteLegale.siren}`
+              }
+              alt
+            >
+              ⇢ Voir la fiche sur le site de l’INPI
+            </ButtonLink>
+          </li>
+        </ul>
       </PrintNever>
-      <style jsx>{`
-        .separator {
-          width: 10px;
-          height: 10px;
-        }
-      `}</style>
     </>
   );
 };

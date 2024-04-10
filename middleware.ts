@@ -1,8 +1,9 @@
 import { getIronSession } from 'iron-session';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { sessionOptions, setVisitTimestamp } from '#utils/session';
+import { ISession } from '#models/user/session';
 import { extractSirenOrSiretSlugFromUrl } from '#utils/helpers';
+import { sessionOptions, setVisitTimestamp } from '#utils/session';
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
@@ -55,8 +56,11 @@ export async function middleware(request: NextRequest) {
       headers: requestHeaders,
     },
   });
-
-  const session = await getIronSession(request, response, sessionOptions);
+  const session = await getIronSession<ISession>(
+    request,
+    response,
+    sessionOptions
+  );
   await setVisitTimestamp(session);
 
   return response;
