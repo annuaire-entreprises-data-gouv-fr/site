@@ -1,5 +1,5 @@
 import routes from '#clients/routes';
-import { ICCWithMetadata } from '#models/conventions-collectives-list';
+import { ICCWithMetadata } from '#models/conventions-collectives';
 import { MetadataStore } from '.';
 
 type IIdccMetadata = {
@@ -25,7 +25,10 @@ function mapToDomainObject(response: IIdccMetadata) {
       nature,
       etat,
       idcc,
+      updated: [],
+      unknown: false,
     };
+
     return idccMetadatas;
   }, {} as { [idcc: string]: ICCWithMetadata });
 }
@@ -36,4 +39,19 @@ const store = new MetadataStore<ICCWithMetadata>(
   mapToDomainObject
 );
 
-export const clientIdccMetadata = async (idcc: string) => store.get(idcc);
+export const clientIdccMetadata = async (idcc: string) => {
+  let res = await store.get(idcc);
+  if (res === null) {
+    res = {
+      idKali: '',
+      legifrance: '',
+      title: '',
+      nature: '',
+      etat: '',
+      idcc,
+      updated: [],
+      unknown: true,
+    };
+  }
+  return res;
+};

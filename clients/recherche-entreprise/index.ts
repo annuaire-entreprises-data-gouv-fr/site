@@ -2,7 +2,7 @@ import { HttpNotFound } from '#clients/exceptions';
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import constants from '#models/constants';
-import { IConventionsCollectives } from '#models/conventions-collectives-list';
+import { IConventionsCollectives } from '#models/conventions-collectives';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
 import {
@@ -15,7 +15,6 @@ import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import { ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
 import {
-  Siren,
   Siret,
   extractNicFromSiret,
   extractSirenFromSiret,
@@ -328,7 +327,7 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
 
 const mapToEtablissement = (
   etablissement: ISiege | IMatchingEtablissement,
-  estEntrepreneurIndividuel: boolean,
+  estEntrepreneurIndividuel: boolean
 ): IEtablissement => {
   const {
     siret,

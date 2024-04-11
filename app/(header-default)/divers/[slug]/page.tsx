@@ -3,7 +3,7 @@ import { cache } from 'react';
 import ConventionsCollectivesSection from '#components/conventions-collectives-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { getCCMetadata } from '#models/conventions-collectives-list';
+import { getCCMetadata } from '#models/conventions-collectives';
 import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import {
   uniteLegalePageDescription,

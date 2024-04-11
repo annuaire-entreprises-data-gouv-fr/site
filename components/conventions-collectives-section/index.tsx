@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import routes from '#clients/routes';
-import { Info } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
@@ -10,55 +9,35 @@ import { DataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
-import {
-  ICCExplanation,
-  ICCWithMetadata,
-} from '#models/conventions-collectives-list';
+import { ICCWithMetadata } from '#models/conventions-collectives';
 import { capitalize, formatSiret } from '#utils/helpers';
 
-function ConventionsCollectivesExplanations({
-  ccWithMetadata,
-}: {
-  ccWithMetadata: ICCWithMetadata[];
-}) {
-  const ccWithexplanations = ccWithMetadata
-    .map(({ explanation }) => explanation)
-    .filter((e): e is ICCExplanation => !!e);
+function CCUnknown({ ccWithMetadata }: { ccWithMetadata: ICCWithMetadata[] }) {
+  const unknown = ccWithMetadata.filter((e) => e.unknown);
 
-  if (ccWithexplanations.length == 0) {
-    return null;
+  if (unknown.length == 0) {
+    return '.';
   }
 
-  const plural = ccWithexplanations.length > 1 ? 's' : '';
+  const plural = unknown.length > 1 ? 's' : '';
 
   return (
-    <Info>
-      {ccWithexplanations.length} convention{plural} collective{plural} n
-      {ccWithexplanations.length > 1 ? 'e sont' : '’est'} plus en vigueur :
-      <ul>
-        {ccWithexplanations.map(({ idcc, splitted, redirect }) => (
-          <Fragment key={idcc}>
-            {redirect && (
-              <li>
-                <Tag>IDCC {idcc}</Tag> a été remplacée par{' '}
-                <Tag>IDCC {redirect}</Tag>
-              </li>
-            )}
-            {splitted && (
-              <li>
-                <Tag>IDCC {idcc}</Tag> a été découpée entre{' '}
-                {splitted.map((cc, index) => (
-                  <Fragment key={index}>
-                    {index !== 0 && 'et '}
-                    <Tag>IDCC {cc}</Tag>
-                  </Fragment>
-                ))}
-              </li>
-            )}
-          </Fragment>
-        ))}
-      </ul>
-    </Info>
+    <>
+      , mais elle possède {plural ? 'plusieurs' : 'une'}{' '}
+      <Tag color="warning">
+        IDCC Inconnue{plural} ou supprimée{plural}
+      </Tag>{' '}
+      qui n’apparai
+      {plural ? 'ssent' : 't'} pas dans la{' '}
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://travail-emploi.gouv.fr/dialogue-social/negociation-collective/article/conventions-collectives-nomenclatures"
+      >
+        liste des conventions collectives en vigueur
+      </a>
+      , tenue par le <MTPEI />.
+    </>
   );
 }
 
@@ -95,7 +74,8 @@ const ConventionsCollectivesSection: React.FC<{
             >
               Qu’est-ce qu’une convention collective ?
             </FAQLink>{' '}
-            enregistrée{plural}.
+            enregistrée{plural}
+            <CCUnknown ccWithMetadata={ccWithMetadata} />
             <p>
               Pour en savoir plus sur une convention collective en particulier,
               consultez{' '}
@@ -106,29 +86,61 @@ const ConventionsCollectivesSection: React.FC<{
               >
                 le site du Code du Travail Numérique.
               </a>
+              , le{' '}
+              <a
+                rel="noreferrer noopener"
+                target="_blank"
+                href="https://www.legifrance.gouv.fr/liste/bocc"
+              >
+                bulletin officiel des conventions collectives sur Legifrance
+              </a>
+              , ou le{' '}
+              <a href="https://www.elections-professionnelles.travail.gouv.fr/web/guest/recherche-idcc">
+                moteur de recherche de conventions collectives
+              </a>
+              .
             </p>
-            <ConventionsCollectivesExplanations
-              ccWithMetadata={ccWithMetadata}
-            />
             {ccWithMetadata && ccWithMetadata.length > 0 && (
               <FullTable
                 head={['N°IDCC', 'Détails', 'Etablissement(s)', 'Explications']}
                 verticalAlign="top"
                 body={ccWithMetadata.map(
-                  ({ idcc, sirets = [], nature, title }) => [
+                  ({ idcc, sirets = [], nature, title, unknown, updated }) => [
                     <Tag id={`idcc-${idcc}`}>IDCC {idcc}</Tag>,
                     <>
-                      {nature && (
+                      {updated.length > 0 ? (
                         <>
-                          <strong className="font-small">
-                            {capitalize(nature)}
-                          </strong>
-                          <br />
+                          <Tag color="new">IDCC Supprimée</Tag> et remplacée par
+                          :{' '}
+                          <ul>
+                            {updated.map((updatedCC, index) => (
+                              <li>
+                                {index !== 0 && ' ou '}
+                                {updatedCC.title}
+                                <Tag>IDCC {updatedCC.idcc}</Tag>
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      ) : unknown ? (
+                        <>
+                          <Tag color="warning">IDCC Inconnue</Tag>
+                        </>
+                      ) : (
+                        <>
+                          {nature && (
+                            <>
+                              <strong className="font-small">
+                                {capitalize(nature)}
+                              </strong>
+                              <br />
+                            </>
+                          )}
+                          <span className="font-small">
+                            {title || <NonRenseigne />}
+                          </span>
                         </>
                       )}
-                      <span className="font-small">
-                        {title || <NonRenseigne />}
-                      </span>
                     </>,
                     <ul>
                       {(sirets || []).map((siret) => (
