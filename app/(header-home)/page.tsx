@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { LogoAnnuaire } from '#components-ui/logo-annuaire/logo-annuaire';
+import { LogoAnnuaireWithEasterEgg } from '#components-ui/logo-annuaire/logo-with-easter-egg';
 import Favourites from '#components/favourites';
 import SearchBar from '#components/search-bar';
 import StructuredDataSearchAction from '#components/structured-data/search';
@@ -29,7 +29,7 @@ const Index = () => (
         action={'/rechercher'}
         method="get"
       >
-        <LogoAnnuaire />
+        <LogoAnnuaireWithEasterEgg />
         <h2 style={{ textAlign: 'center', marginTop: '30px' }}>
           Vérifiez les informations légales publiques des entreprises,
           associations et services publics en France

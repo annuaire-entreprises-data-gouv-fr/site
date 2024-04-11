@@ -19,21 +19,8 @@ export const diamond = (
  *
  * @returns
  */
-export const LogoAnnuaire = () => (
-  <div className={styles.logoAnnuaire}>
-    <span>{diamond}</span>
-    <h1>
-      L’<strong>Annuaire</strong> des
-      <br />
-      <strong>Entreprises</strong>
-    </h1>
-  </div>
-);
-
 export const LogoAnnuaireGif = () => (
-  <img
-    style={{ height: '100px', margin: 'auto', display: 'block' }}
-    src="/images/annuaire-entreprises-paysage-large.gif"
-    alt="Logo de l’Annuaire des Entreprises"
-  />
+  <div className={styles.logoAnnuaire}>
+    <img src="/images/annuaire-entreprises-paysage-large.gif" />
+  </div>
 );
