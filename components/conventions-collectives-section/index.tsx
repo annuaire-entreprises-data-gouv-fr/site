@@ -6,7 +6,7 @@ import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';
 import { MTPEI } from '#components/administrations';
 import NonRenseigne from '#components/non-renseigne';
-import { DataSectionClient } from '#components/section/data-section/client';
+import { DataSectionServer } from '#components/section/data-section/server';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
@@ -66,7 +66,7 @@ const ConventionsCollectivesSection: React.FC<{
   ccWithMetadata: ICCWithMetadata[] | IAPINotRespondingError;
 }> = ({ ccWithMetadata }) => {
   return (
-    <DataSectionClient
+    <DataSectionServer
       title="Conventions collectives"
       sources={[EAdministration.MTPEI]}
       notFoundInfo={
@@ -163,7 +163,7 @@ const ConventionsCollectivesSection: React.FC<{
           </>
         );
       }}
-    </DataSectionClient>
+    </DataSectionServer>
   );
 };
 export default ConventionsCollectivesSection;
