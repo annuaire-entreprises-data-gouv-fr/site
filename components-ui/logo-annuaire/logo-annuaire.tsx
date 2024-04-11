@@ -29,3 +29,11 @@ export const LogoAnnuaire = () => (
     </h1>
   </div>
 );
+
+export const LogoAnnuaireGif = () => (
+  <img
+    style={{ height: '100px', margin: 'auto', display: 'block' }}
+    src="/images/annuaire-entreprises-paysage-large.gif"
+    alt="Logo de l’Annuaire des Entreprises"
+  />
+);
