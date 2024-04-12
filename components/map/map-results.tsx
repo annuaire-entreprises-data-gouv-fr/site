@@ -1,45 +1,82 @@
-import React from 'react';
+'use client';
+
+import maplibregl from 'maplibre-gl';
 import constants from '#models/constants';
-import { ISearchResult } from '#models/search';
-import MaplibreInstance from '.';
+import { ISearchResults } from '#models/search';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import { useEffect, useRef, useState } from 'react';
+import './map.css';
 
-const MapResults: React.FC<{ results: ISearchResult[] }> = ({ results }) => (
-  <>
-    <MaplibreInstance />
-    <script
-      async
-      defer
-      dangerouslySetInnerHTML={{
-        __html: `
-          function initMap(style) {
-            var map = new maplibregl.Map({
-              container: 'map',
-              style: style, // stylesheet location
-              center: [2, 46], // starting position [lng, lat]
-              zoom: 4.5 // starting zoom
-            });
-            var results = ${JSON.stringify(results)};
-            for (var i = 0; i < results.length; i++) {
-                var result = results[i];
-                var popup = new maplibregl.Popup({ offset: 25 }).setHTML(
-                '<div><strong>'+result.nomComplet+'</strong></div>'+
-                '<div><i>'+result.siege.adresse+'</i></div>'+
-                '<div><a href="/entreprise/'+result.chemin+'">⇢ Accéder à la fiche entreprise</a></div>'
-                );
+export default function Map({
+  results,
+  height,
+}: {
+  results: ISearchResults;
+  height: string;
+}) {
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const [lng] = useState(2);
+  const [lat] = useState(47);
+  const [zoom] = useState(4.5);
 
-                new maplibregl.Marker({ color: '${constants.colors.frBlue}' })
-                .setLngLat([result.siege.longitude,result.siege.latitude])
-                .setPopup(popup)
-                .addTo(map);
-            }
-          }
+  useEffect(() => {
+    if (map.current) return; // stops map from intializing more than once
 
+    map.current = new maplibregl.Map({
+      container: mapContainer.current,
+      style: `https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json`,
+      center: [lng, lat],
+      zoom: zoom,
+      minZoom: 3,
+    });
 
-          fetch("https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json").then(res=> res.json()).then(el => initMap(el))
-        `,
-      }}
+    results.results.forEach((result) => {
+      var popup = new maplibregl.Popup({ offset: 25 }).setHTML(
+        '<div><strong><a href="/entreprise/' +
+          result.chemin +
+          '">' +
+          result.nomComplet +
+          '</a></strong></div>' +
+          '<div><i>' +
+          result.siege.adresse +
+          '</i></div>' +
+          ''
+      );
+
+      new maplibregl.Marker({ color: constants.colors.frBlue })
+        //@ts-ignore
+        .setLngLat([result.siege.longitude, result.siege.latitude])
+        .setPopup(popup)
+        .addTo(map.current);
+
+      result.matchingEtablissements.forEach((match) => {
+        var popup = new maplibregl.Popup({ offset: 25 }).setHTML(
+          '<div><strong><a href="/etablissement/' +
+            match.siret +
+            '">' +
+            match.siret +
+            '</a></strong></div>' +
+            '<div><i>' +
+            match.adresse +
+            '</i></div>' +
+            ''
+        );
+
+        new maplibregl.Marker({ color: 'yellow' })
+          //@ts-ignore
+          .setLngLat([match.longitude, match.latitude])
+          .setPopup(popup)
+          .addTo(map.current);
+      });
+    });
+  }, [lng, lat, zoom, results]);
+
+  return (
+    <div
+      ref={mapContainer}
+      className="map"
+      style={{ width: '100%', zIndex: '0', height }}
     />
-  </>
-);
-
-export default MapResults;
+  );
+}
