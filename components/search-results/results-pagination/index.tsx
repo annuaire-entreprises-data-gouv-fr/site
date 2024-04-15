@@ -1,5 +1,4 @@
 import React from 'react';
-import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { buildSearchQuery, IParams } from '#models/search-filter-params';
 import pagesArray from './pages-array';
 
@@ -141,7 +140,7 @@ const ResultsPagination: React.FC<IProps> = ({
 }) => {
   const pages = pagesArray(currentPage, totalPages);
   if (pages.length === 1) {
-    return <HorizontalSeparator />;
+    return null;
   }
 
   return (

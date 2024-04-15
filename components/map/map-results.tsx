@@ -1,19 +1,22 @@
+/* eslint-disable import/order */
 'use client';
 
-import maplibregl, { Map } from 'maplibre-gl';
 import constants from '#models/constants';
 import { ISearchResults } from '#models/search';
 import { formatIntFr, formatSiret } from '#utils/helpers';
+import maplibregl, { Map } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useEffect, useRef, useState } from 'react';
 import './map.css';
 
-export default function Map({
+export default function MapWithResults({
   results,
   height,
+  shouldColorZipCode,
 }: {
   results: ISearchResults;
   height: string;
+  shouldColorZipCode: boolean;
 }) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<Map>(null);
@@ -58,12 +61,14 @@ export default function Map({
         var popup = new maplibregl.Popup({ offset: 25 }).setHTML(
           `<div><strong><a href="/etablissement/${match.siret}">${formatSiret(
             match.siret
-          )}</a></strong><br/>Etablissement secondaire de ${
-            result.nomComplet
-          }<br/>📍${match.adresse}</div>`
+          )}</a></strong><br/>Etablissement secondaire de <a href="/entreprise/${
+            match.siren
+          }">${result.nomComplet}</a><br/>📍${match.adresse}</div>`
         );
 
-        new maplibregl.Marker({ color: 'yellow' })
+        new maplibregl.Marker({
+          color: shouldColorZipCode ? 'yellow' : constants.colors.pastelBlue,
+        })
           //@ts-ignore
           .setLngLat([match.longitude, match.latitude])
           .setPopup(popup)
@@ -71,7 +76,7 @@ export default function Map({
           .addTo(map.current);
       });
     });
-  }, [lng, lat, zoom, results]);
+  }, [lng, lat, zoom, results, shouldColorZipCode]);
 
   return (
     <div

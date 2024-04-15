@@ -106,7 +106,7 @@ const ResultItem: React.FC<{
         />
         <div>
           <Icon slug="mapPin">
-            <span className="adress">
+            <span className={styles['adress']}>
               <AddressWithColouredZip
                 adress={getAdresseUniteLegale(result, null, true)}
                 zip={(shouldColorSiege && result.siege.codePostal) || ''}

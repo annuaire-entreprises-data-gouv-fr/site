@@ -1,7 +1,11 @@
 import { Metadata } from 'next';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
+import { NPSBanner } from '#components/banner/nps';
+import Footer from '#components/footer';
+import { HeaderWithAdvancedSearch } from '#components/header/header-advanced-search';
 import SearchResults from '#components/search-results';
 import { AdvancedSearchTutorial } from '#components/search-results/advanced-search-tutorial';
+import SocialNetworks from '#components/social-network';
 import StructuredDataSearchAction from '#components/structured-data/search';
 import { searchWithoutProtectedSiren } from '#models/search';
 import SearchFilterParams, {
@@ -32,21 +36,35 @@ const SearchResultPage = withErrorHandler(async function UniteLegalePage(
     searchFilterParams
   );
 
+  const searchFilterParamsJSON = searchFilterParams.toJSON();
+
   return (
     <>
-      <StructuredDataSearchAction />
-      <HiddenH1 title="Résultats de recherche" />
-      <div className="content-container">
-        {!hasSearchParam(searchFilterParams) && !searchTerm ? (
-          <AdvancedSearchTutorial />
-        ) : (
-          <SearchResults
-            results={results}
-            searchTerm={searchTerm}
-            searchFilterParams={searchFilterParams.toJSON()}
-          />
-        )}
-      </div>
+      <NPSBanner />
+      <HeaderWithAdvancedSearch
+        useSearchBar={true}
+        useAgentCTA={true}
+        useMap={false}
+        searchParams={searchFilterParamsJSON}
+        currentSearchTerm={searchTerm}
+      />
+      <main className="fr-container">
+        <StructuredDataSearchAction />
+        <HiddenH1 title="Résultats de recherche" />
+        <div className="content-container">
+          {!hasSearchParam(searchFilterParamsJSON) && !searchTerm ? (
+            <AdvancedSearchTutorial />
+          ) : (
+            <SearchResults
+              results={results}
+              searchTerm={searchTerm}
+              searchFilterParams={searchFilterParamsJSON}
+            />
+          )}
+        </div>
+      </main>
+      <SocialNetworks />
+      <Footer />
     </>
   );
 });

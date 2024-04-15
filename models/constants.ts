@@ -26,6 +26,7 @@ const constants = {
     pastelBlue: '#dfdff1',
     espaceAgent: '#CC007A',
     espaceAgentPastel: '#ffe8f4',
+    yellow: '#fef6e3',
   },
   chartColors: [
     '#e60049',

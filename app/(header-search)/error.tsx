@@ -1,6 +1,7 @@
 'use client';
 
 import { SearchErrorExplanations } from '#components/error-explanations';
+import { Header } from '#components/header';
 import {
   NextAppError,
   useLogFatalErrorAppClient,
@@ -9,5 +10,14 @@ import {
 export default function ErrorPage({ error }: { error: NextAppError }) {
   useLogFatalErrorAppClient(error);
 
-  return <SearchErrorExplanations />;
+  return (
+    <>
+      <Header useSearchBar={true} useAgentCTA={true} useMap={false} />
+      <main className="fr-container">
+        <div className="fr-container">
+          <SearchErrorExplanations />
+        </div>
+      </main>
+    </>
+  );
 }

@@ -23,7 +23,13 @@ const SearchResultsMap: React.FC<{
     );
   }
   if (results.notEnoughParams) {
-    return <MapWithResults results={results} height={height} />;
+    return (
+      <MapWithResults
+        results={results}
+        height={height}
+        shouldColorZipCode={false}
+      />
+    );
   }
   if (results.badParams) {
     return (
@@ -35,21 +41,37 @@ const SearchResultsMap: React.FC<{
 
   if (!results.results || results.results.length === 0) {
     return (
-      <ResultsCounter
-        resultCount={results.resultCount}
-        currentPage={results.currentPage}
-      />
+      <>
+        <div className={styles['map-container']} style={{ height: height }}>
+          <MapWithResults
+            results={results}
+            height={height}
+            shouldColorZipCode={false}
+          />
+          <div className={styles['results-for-map-wrapper']}>
+            <ResultsCounter
+              resultCount={results.resultCount}
+              currentPage={results.currentPage}
+            />
+          </div>
+        </div>
+      </>
     );
   }
+  const shouldColorZipCode = !!searchFilterParams.cp_dep;
 
   return (
     <>
       <div className={styles['map-container']} style={{ height: height }}>
-        <MapWithResults results={results} height={height} />
+        <MapWithResults
+          results={results}
+          height={height}
+          shouldColorZipCode={shouldColorZipCode}
+        />
         <div className={styles['results-for-map-wrapper']}>
           <ResultsList
             results={results.results}
-            shouldColorZipCode={!!searchFilterParams.cp_dep}
+            shouldColorZipCode={shouldColorZipCode}
           />
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
+import { HeaderWithAdvancedSearch } from '#components/header/header-advanced-search';
 import SearchResultsMap from '#components/search-results/map';
 import StructuredDataSearchAction from '#components/structured-data/search';
 import { searchWithoutProtectedSiren } from '#models/search';
@@ -29,15 +30,25 @@ const MapSearchResultPage = withErrorHandler(async function UniteLegalePage(
     searchFilterParams
   );
 
+  const searchFilterParamsJSON = searchFilterParams.toJSON();
   return (
     <>
-      <StructuredDataSearchAction />
-      <HiddenH1 title="Résultats de recherche" />
-      <SearchResultsMap
-        results={results}
-        searchTerm={searchTerm}
-        searchFilterParams={searchFilterParams.toJSON()}
+      <HeaderWithAdvancedSearch
+        useSearchBar={true}
+        useAgentCTA={true}
+        useMap={true}
+        searchParams={searchFilterParamsJSON}
+        currentSearchTerm={searchTerm}
       />
+      <main style={{ maxWidth: '100%', marginBottom: 0 }} className="map">
+        <StructuredDataSearchAction />
+        <HiddenH1 title="Résultats de recherche" />
+        <SearchResultsMap
+          results={results}
+          searchTerm={searchTerm}
+          searchFilterParams={searchFilterParamsJSON}
+        />
+      </main>
     </>
   );
 });

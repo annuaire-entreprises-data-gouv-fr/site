@@ -10,7 +10,8 @@
 .result-item a {
   background-image: none;
 }
-.result-item a:not(.no-style-link):hover,
+a.adress:hover,
+.matching-etablissement a:hover,
 .result-item > a:hover .title > span:first-of-type {
   text-decoration: underline;
 }
@@ -27,7 +28,6 @@
   text-decoration: none;
   font-size: 1.1rem;
   margin-bottom: 3px;
-
   display: flex;
   align-items: center;
   flex-wrap: wrap;
