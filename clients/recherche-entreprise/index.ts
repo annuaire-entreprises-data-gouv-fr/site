@@ -15,7 +15,6 @@ import { IEtatCivil, IPersonneMorale } from '#models/immatriculation';
 import { ISearchResults } from '#models/search';
 import SearchFilterParams from '#models/search-filter-params';
 import {
-  Siren,
   Siret,
   extractNicFromSiret,
   extractSirenFromSiret,
@@ -328,7 +327,7 @@ const mapToElusModel = (eluRaw: any): IEtatCivil => {
 
 const mapToEtablissement = (
   etablissement: ISiege | IMatchingEtablissement,
-  estEntrepreneurIndividuel: boolean,
+  estEntrepreneurIndividuel: boolean
 ): IEtablissement => {
   const {
     siret,

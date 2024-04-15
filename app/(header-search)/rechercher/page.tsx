@@ -1,22 +1,25 @@
 import { Metadata } from 'next';
 import HiddenH1 from '#components/a11y-components/hidden-h1';
-import SearchResultsMap from '#components/search-results/map';
+import SearchResults from '#components/search-results';
+import { AdvancedSearchTutorial } from '#components/search-results/advanced-search-tutorial';
 import StructuredDataSearchAction from '#components/structured-data/search';
 import { searchWithoutProtectedSiren } from '#models/search';
-import SearchFilterParams from '#models/search-filter-params';
+import SearchFilterParams, {
+  hasSearchParam,
+} from '#models/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
 import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 
 export const metadata: Metadata = {
-  title: 'Rechercher une entreprise sur la carte',
+  title: 'Rechercher une entreprise, un service public ou une association',
   alternates: {
-    canonical: 'https://annuaire-entreprises.data.gouv.fr/rechercher/carte',
+    canonical: 'https://annuaire-entreprises.data.gouv.fr/rechercher',
   },
   robots: 'noindex, nofollow',
 };
 
-const MapSearchResultPage = withErrorHandler(async function UniteLegalePage(
+const SearchResultPage = withErrorHandler(async function UniteLegalePage(
   props: AppRouterProps
 ) {
   const searchTerm = (props.searchParams.terme || '') as string;
@@ -33,13 +36,19 @@ const MapSearchResultPage = withErrorHandler(async function UniteLegalePage(
     <>
       <StructuredDataSearchAction />
       <HiddenH1 title="Résultats de recherche" />
-      <SearchResultsMap
-        results={results}
-        searchTerm={searchTerm}
-        searchFilterParams={searchFilterParams.toJSON()}
-      />
+      <div className="content-container">
+        {!hasSearchParam(searchFilterParams) && !searchTerm ? (
+          <AdvancedSearchTutorial />
+        ) : (
+          <SearchResults
+            results={results}
+            searchTerm={searchTerm}
+            searchFilterParams={searchFilterParams.toJSON()}
+          />
+        )}
+      </div>
     </>
   );
 });
 
-export default MapSearchResultPage;
+export default SearchResultPage;
