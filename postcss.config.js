@@ -11,7 +11,11 @@ const plugins =
               './components/**/*.{js,jsx,ts,tsx}',
               './components-ui/**/*.{js,jsx,ts,tsx}',
             ],
-            safelist: ['html', 'body', 'anchor-link'],
+            safelist: {
+              standard: [/html/, /body/, /anchor-link/],
+              deep: [],
+              greedy: [/maplibregl/],
+            },
             fontFace: true,
           },
         ],
