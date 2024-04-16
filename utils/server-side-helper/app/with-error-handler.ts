@@ -20,7 +20,7 @@ async function renderPage<T>(
 
     return {
       render: null,
-      redirection: errorRedirection(error, { slug, referrer }),
+      redirection: errorRedirection(error, { slug, referrer }, false),
     };
   }
 }

@@ -75,7 +75,7 @@ export function handleErrorFromServerSideProps<
     } catch (exception: any) {
       const message = exception.message;
       const ctx = getContext(context.req, message);
-      const { destination } = errorRedirection(exception, ctx);
+      const { destination } = errorRedirection(exception, ctx, true);
 
       return {
         redirect: {

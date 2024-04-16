@@ -1,3 +1,5 @@
+'use client';
+
 import { KeyboardEventHandler, useCallback, useEffect, useState } from 'react';
 import { Info, Warning } from '#components-ui/alerts';
 import { Loader } from '#components-ui/loader';

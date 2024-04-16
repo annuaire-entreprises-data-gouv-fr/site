@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import {
   AssociationBadge,
   CollectiviteTerritorialeBadge,
@@ -39,8 +40,8 @@ const UniteLegaleBadge: React.FC<{
   if (badges.length > 0) {
     return (
       <>
-        {badges.map((badge) => (
-          <>{badge}</>
+        {badges.map((badge, i) => (
+          <Fragment key={i}>{badge}</Fragment>
         ))}
       </>
     );

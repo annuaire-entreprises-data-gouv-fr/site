@@ -1,0 +1,107 @@
+.selected-filter-container {
+  display: flex;
+  align-items: center;
+  padding: 5px 30px 5px 10px;
+  justify-content: center;
+  color: var(--annuaire-colors-frBlue);
+  background-color: var(--annuaire-colors-pastelBlue);
+  border-radius: 3px;
+  border: 1px solid var(--annuaire-colors-frBlue);
+}
+.selected-filter-container:hover {
+  border-color: #0a76f6;
+}
+
+.selected-filter-container > a {
+  padding: 5px 10px 5px 5px;
+  font-weight: bold;
+  position: absolute;
+  right: 0;
+}
+.selected-filter-container > a:hover {
+  background-color: #00009111;
+}
+
+/* === filter menu === */
+
+div.search-filter-label-container {
+  position: relative;
+  margin: 0;
+  user-select: none;
+  margin-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+span.search-filter-label {
+  color: var(--text-default-grey);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+span.search-filter-label > span {
+  color: var(--annuaire-colors-frBlue);
+}
+span.search-filter-label:hover {
+  border-color: #0a76f6;
+  background-color: #fefefe;
+}
+
+label.close-container {
+  z-index: 10010;
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  content: 'Fermer ✕';
+  cursor: pointer;
+}
+
+.container {
+  box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.3);
+  top: 100%;
+  left: 0;
+  position: absolute;
+  padding: 15px;
+  margin-top: 5px;
+  background-color: #fff;
+  border-radius: 3px;
+  width: 480px;
+  z-index: 1000;
+}
+.container:before {
+  content: ' ';
+  position: absolute;
+  bottom: 100%; /* At the bottom of the tooltip */
+  left: 10%;
+  margin-left: 0;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+}
+
+.container > .filter-container {
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0 4px;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 992px) {
+  .container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 50px;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0;
+  }
+  label.close-container {
+    display: block;
+  }
+}

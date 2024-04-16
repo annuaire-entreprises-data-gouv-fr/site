@@ -15,6 +15,7 @@ type IProps = {
   useSearchBar?: boolean;
   useAgentCTA?: boolean;
   useMap?: boolean;
+  useInfoBanner?: boolean;
   session: ISession | null;
   plugin?: JSX.Element;
   pathFrom: string;

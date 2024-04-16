@@ -1,9 +1,8 @@
 import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
-import { isPersonneMorale } from '#components/dirigeants-section/rne-dirigeants';
+import { isPersonneMorale } from '#components/dirigeants-section/is-personne-morale';
 import UniteLegaleBadge from '#components/unite-legale-badge';
-import constants from '#models/constants';
 import { estActif } from '#models/core/etat-administratif';
 import {
   getAdresseEtablissement,
@@ -12,6 +11,7 @@ import {
 import { isCollectiviteTerritoriale } from '#models/core/types';
 import { IDirigeant } from '#models/immatriculation';
 import { ISearchResult } from '#models/search';
+import styles from './style.module.css';
 
 type IProps = {
   results: ISearchResult[];
@@ -31,7 +31,7 @@ const DirigeantsOrElusList: React.FC<{
   }
 
   return (
-    <div className="dirigeants-or-elus">
+    <div className={styles['dirigeants-or-elus']}>
       <Icon slug="humanPin">
         {firstFive
           .map((dirigeantOrElu) =>
@@ -43,13 +43,6 @@ const DirigeantsOrElusList: React.FC<{
         {moreCount > 0 &&
           `, et ${moreCount} autre${moreCount === 1 ? '' : 's'}`}
       </Icon>
-      <style jsx>{`
-        .dirigeants-or-elus {
-          color: var(--text-default-grey);
-          font-size: 0.9rem;
-          margin: 8px auto;
-        }
-      `}</style>
     </div>
   );
 };
@@ -80,14 +73,14 @@ const ResultItem: React.FC<{
     shouldColorZipCode && result.matchingEtablissements.find((e) => e.estSiege);
 
   return (
-    <div className="result-item">
+    <div className={styles['result-item']}>
       <a
         href={`/entreprise/${result.chemin}`}
         key={result.siren}
         className="result-link no-style-link"
         data-siren={result.siren}
       >
-        <div className="title">
+        <div className={styles['title']}>
           <span>{`${result.nomComplet}`}</span>
           <UniteLegaleBadge
             uniteLegale={result}
@@ -113,7 +106,7 @@ const ResultItem: React.FC<{
         />
         <div>
           <Icon slug="mapPin">
-            <span className="adress">
+            <span className={styles['adress']}>
               <AddressWithColouredZip
                 adress={getAdresseUniteLegale(result, null, true)}
                 zip={(shouldColorSiege && result.siege.codePostal) || ''}
@@ -122,20 +115,20 @@ const ResultItem: React.FC<{
           </Icon>
         </div>
       </a>
-      <ul className="matching-etablissement">
+      <ul className={styles['matching-etablissement']}>
         {(result.matchingEtablissements || [])
           .filter((e) => !e.estSiege)
           .map((etablissement) => (
             <li key={etablissement.siret}>
               <a
-                className="adress"
+                className={styles['adress']}
                 href={`/etablissement/${etablissement.siret}`}
               >
                 <AddressWithColouredZip
                   adress={getAdresseEtablissement(etablissement, null, true)}
                   zip={(shouldColorZipCode && etablissement.codePostal) || ''}
                 />
-                <span className="down" />
+                <span className={styles['down']} />
               </a>
             </li>
           ))}
@@ -152,73 +145,6 @@ const ResultItem: React.FC<{
           </a>
         </li>
       </ul>
-
-      <style jsx>{`
-        .result-item {
-          margin: 30px 0;
-        }
-
-        .result-item a {
-          background-image: none;
-        }
-        .result-item a:not(.no-style-link):hover,
-        .result-item > a:hover .title > span:first-of-type {
-          text-decoration: underline;
-        }
-
-        .result-item > a {
-          text-decoration: none;
-          border: none;
-          color: #333;
-          display: block;
-          font-size: 1rem;
-        }
-        .result-item > a .title {
-          color: ${constants.colors.frBlue};
-          text-decoration: none;
-          font-size: 1.1rem;
-          margin-bottom: 3px;
-
-          display: flex;
-          align-items: center;
-          flex-wrap: wrap;
-        }
-
-        .result-item > a .title > span:first-of-type {
-          margin-right: 10px;
-        }
-
-        .result-item ul.matching-etablissement {
-          margin-left: 10px;
-        }
-
-        .result-item ul.matching-etablissement li {
-          list-style-type: none;
-          padding-left: 15px;
-          position: relative;
-        }
-        .result-item ul.matching-etablissement li:before,
-        .result-item ul.matching-etablissement .down {
-          content: '';
-          width: 10px;
-          height: 15px;
-          border: 1px solid #bbb;
-          border-top: none;
-          border-right: none;
-          position: absolute;
-          left: 0;
-          top: 0;
-        }
-        .result-item ul.matching-etablissement .down {
-          border-bottom: none;
-          height: 100%;
-        }
-
-        .result-item .adress {
-          color: #707070;
-          font-size: 0.9rem;
-        }
-      `}</style>
     </div>
   );
 };

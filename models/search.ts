@@ -118,7 +118,7 @@ export const searchWithoutProtectedSiren = async (
   searchTerm: string,
   page: number,
   searchFilterParams: SearchFilterParams
-) => {
+): Promise<ISearchResults> => {
   const results = await search(searchTerm, page, searchFilterParams);
 
   results.results = results.results.filter((result) => {

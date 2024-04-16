@@ -1,8 +1,10 @@
+'use client';
+
 import { useState } from 'react';
 import DualRangeSlider from '#components-ui/dual-range-slider';
-import { formatCurrency } from '#utils/helpers';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
 import constants from '#models/constants';
+import { formatCurrency } from '#utils/helpers';
 
 // Discretize "chiffer d’affaires" possible values
 export const CA = [

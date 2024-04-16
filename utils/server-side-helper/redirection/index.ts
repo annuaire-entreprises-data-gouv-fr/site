@@ -20,7 +20,6 @@ import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
 const redirects = {
   notFound: { destination: '/404' },
   serverError: { destination: '/500' },
-  searchError: { destination: '/rechercher/erreur' },
 };
 
 /**
@@ -59,7 +58,8 @@ export type IRedirect = {
 
 export const errorRedirection = (
   exception: any,
-  context: IExceptionContext
+  context: IExceptionContext,
+  shouldRedirect500: boolean
 ): IRedirect => {
   try {
     exception.context = {
@@ -98,7 +98,7 @@ export const errorRedirection = (
       return redirects.notFound;
     } else if (exception instanceof FetchRechercheEntrepriseException) {
       logFatalErrorInSentry(exception);
-      return redirects.searchError;
+      throw exception;
     } else {
       logFatalErrorInSentry(
         new Exception({
@@ -119,6 +119,12 @@ export const errorRedirection = (
       cause: e,
     });
     logFatalErrorInSentry(internalError);
-    return redirects.serverError;
+
+    if (shouldRedirect500) {
+      return redirects.serverError;
+    } else {
+      // app router -> we leave it to the frontend error handler
+      throw e;
+    }
   }
 };
