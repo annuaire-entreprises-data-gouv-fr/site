@@ -73,7 +73,7 @@ export default function MapWithResults({
           .addTo(map.current);
       });
     });
-  }, [lng, lat, zoom, results, shouldColorZipCode]);
+  }, [results, shouldColorZipCode]);
 
   return (
     <div
