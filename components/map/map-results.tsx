@@ -6,7 +6,7 @@ import { ISearchResults } from '#models/search';
 import { formatIntFr, formatSiret } from '#utils/helpers';
 import maplibregl, { Map } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import './map.css';
 
 export default function MapWithResults({
@@ -20,9 +20,6 @@ export default function MapWithResults({
 }) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<Map>(null);
-  const [lng] = useState(2);
-  const [lat] = useState(47);
-  const [zoom] = useState(4.5);
 
   useEffect(() => {
     if (map.current) return; // stops map from intializing more than once
@@ -32,8 +29,8 @@ export default function MapWithResults({
       //@ts-ignore
       container: mapContainer.current,
       style: `https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json`,
-      center: [lng, lat],
-      zoom: zoom,
+      center: [2, 47],
+      zoom: 4.5,
       minZoom: 3,
     });
 
