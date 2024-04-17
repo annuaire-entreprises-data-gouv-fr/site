@@ -4,9 +4,10 @@ import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { Warning } from '../alerts';
 
-const NotInSireneAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
-  uniteLegale,
-}) => {
+const NotInSireneAlert: React.FC<{
+  uniteLegale: IUniteLegale;
+  pronoun?: string;
+}> = ({ uniteLegale, pronoun = 'Cette structure' }) => {
   /* non-diffusible = exist in insee so following do not apply */
   if (estNonDiffusible(uniteLegale)) {
     return null;
@@ -16,9 +17,14 @@ const NotInSireneAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
     return null;
   }
 
+  if (!uniteLegale.dateMiseAJourInpi) {
+    // does not exist in RNE either
+    return null;
+  }
+
   return (
     <Warning full>
-      Cette structure <strong>n’apparait pas</strong> dans la{' '}
+      {pronoun} <strong>n’apparait pas</strong> dans la{' '}
       <a href="https://sirene.fr">base Sirene</a> des entreprises tenue par l’
       <INSEE />, mais elle est présente dans le Registre National des
       Entreprises ou RNE, tenu par l’

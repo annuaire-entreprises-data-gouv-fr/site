@@ -3,8 +3,10 @@ import { cache } from 'react';
 import { NonDiffusibleSection } from '#components/non-diffusible-section';
 import ServicePublicSection from '#components/service-public-section';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
+import { UniteLegaleErrorSection } from '#components/unite-legale-error-section';
 import { getEtablissementWithUniteLegaleFromSlug } from '#models/core/etablissement';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
+import { hasError } from '#models/core/unite-legale-errors';
 import { getServicePublicByEtablissement } from '#models/service-public';
 import {
   etablissementPageDescription,
@@ -16,7 +18,6 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
 
@@ -31,7 +32,7 @@ const cachedEtablissementWithUniteLegale = cache(
   }
 );
 
-export const generateMetadata = withErrorHandler(async function (
+export const generateMetadata = async function (
   props: AppRouterProps
 ): Promise<Metadata> {
   const { slug, isBot } = extractParamsAppRouter(props);
@@ -50,17 +51,19 @@ export const generateMetadata = withErrorHandler(async function (
       canonical: `https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`,
     },
   };
-});
+};
 
-export default withErrorHandler(async function EtablissementPage(
-  props: AppRouterProps
-) {
+export default (async function EtablissementPage(props: AppRouterProps) {
   const session = await getSession();
 
   const { slug, isBot, isRedirected } = extractParamsAppRouter(props);
 
   const { etablissement, uniteLegale } =
     await cachedEtablissementWithUniteLegale(slug, isBot);
+
+  if (hasError(uniteLegale)) {
+    return <UniteLegaleErrorSection uniteLegale={uniteLegale} />;
+  }
 
   const servicePublic = await getServicePublicByEtablissement(
     uniteLegale,

@@ -1,3 +1,5 @@
+'use client';
+
 import routes from '#clients/routes';
 import { Warning } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
@@ -10,17 +12,14 @@ import {
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
 import useFetchActesRNE from 'hooks/fetch/actes-RNE';
-import AgentWallDocuments from '../agent-wall/documents';
 
 const NoDocument = () => (
   <>Aucun document n’a été retrouvé dans le RNE pour cette entreprise.</>
 );
 
-const AgentComponent: React.FC<{
+export const AgentActesSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const documents = useFetchActesRNE(uniteLegale);
@@ -85,22 +84,3 @@ const AgentComponent: React.FC<{
     </PrintNever>
   );
 };
-
-const DocumentActesSection: React.FC<{
-  uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ uniteLegale, session }) => {
-  if (!hasRights(session, EScope.actesRne)) {
-    return (
-      <AgentWallDocuments
-        title="Actes et statuts"
-        id="actes"
-        uniteLegale={uniteLegale}
-      />
-    );
-  }
-
-  return <AgentComponent uniteLegale={uniteLegale} />;
-};
-
-export default DocumentActesSection;

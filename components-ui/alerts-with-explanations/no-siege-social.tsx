@@ -16,7 +16,8 @@ const NoSiegeSocialAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
 
   return (
     <Error full>
-      Cette structure n’a pas de <strong>siège social</strong>.
+      Nous n’avons pas retrouvé d’information concernant le{' '}
+      <strong>siège social</strong> de cette structure.
     </Error>
   );
 };

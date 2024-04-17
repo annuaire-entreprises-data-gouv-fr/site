@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next';
+import { Metadata } from 'next';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import {
   checkHasLabelsAndCertificates,
@@ -12,34 +12,51 @@ import { CertificationESSSection } from '#components/labels-and-certificates/ess
 import { OrganismeDeFormationSection } from '#components/labels-and-certificates/organismes-de-formation';
 import { CertificationsRGESection } from '#components/labels-and-certificates/rge';
 import { CertificationSocieteMission } from '#components/labels-and-certificates/societe-mission';
-import Meta from '#components/meta/meta-client';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
+import { UniteLegaleErrorSection } from '#components/unite-legale-error-section';
+import { getCertificationsFromSlug } from '#models/certifications';
+import { cachedGetUniteLegale } from '#models/core/unite-legale-cache';
+import { hasError } from '#models/core/unite-legale-errors';
 import {
-  ICertifications,
-  getCertificationsFromSlug,
-} from '#models/certifications';
-import { getNomComplet } from '#models/core/statut-diffusion';
-import extractParamsPageRouter from '#utils/server-side-helper/page/extract-params';
-import {
-  IPropsWithMetadata,
-  postServerSideProps,
-} from '#utils/server-side-helper/page/post-server-side-props';
-import { NextPageWithLayout } from 'pages/_app';
+  uniteLegalePageDescription,
+  uniteLegalePageTitle,
+} from '#utils/helpers';
+import extractParamsAppRouter, {
+  AppRouterProps,
+} from '#utils/server-side-helper/app/extract-params';
+import getSession from '#utils/server-side-helper/app/get-session';
 
-interface IProps extends IPropsWithMetadata, ICertifications {}
+export const generateMetadata = async (
+  props: AppRouterProps
+): Promise<Metadata> => {
+  const { slug, isBot } = extractParamsAppRouter(props);
 
-const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
-  bio,
-  rge,
-  egapro,
-  uniteLegale,
-  entrepreneurSpectacles,
-  organismesDeFormation,
-  ess,
-  entrepriseInclusive,
-  metadata: { session },
-}) => {
+  const uniteLegale = await cachedGetUniteLegale(slug, isBot);
+  const session = await getSession();
+
+  return {
+    title: `Qualités, labels et certificats - ${uniteLegalePageTitle(
+      uniteLegale,
+      session
+    )}`,
+    description: uniteLegalePageDescription(uniteLegale, session),
+    robots: 'noindex, nofollow',
+    alternates: {
+      canonical: `https://annuaire-entreprises.data.gouv.fr/labels-certificats/${uniteLegale.siren}`,
+    },
+  };
+};
+
+const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
+  const session = await getSession();
+  const { slug, isBot } = extractParamsAppRouter(props);
+  const uniteLegale = await cachedGetUniteLegale(slug, isBot);
+
+  if (hasError(uniteLegale)) {
+    return <UniteLegaleErrorSection uniteLegale={uniteLegale} />;
+  }
+
   const {
     estEss,
     estRge,
@@ -51,16 +68,18 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
     estEntrepriseInclusive,
   } = uniteLegale.complements;
 
+  const {
+    rge,
+    entrepreneurSpectacles,
+    egapro,
+    bio,
+    organismesDeFormation,
+    ess,
+    entrepriseInclusive,
+  } = await getCertificationsFromSlug(uniteLegale);
+
   return (
     <>
-      <Meta
-        title={`Qualités, labels et certificats - ${getNomComplet(
-          uniteLegale,
-          session
-        )}`}
-        canonical={`https://annuaire-entreprises.data.gouv.fr/labels-certificats/${uniteLegale.siren}`}
-        noIndex={true}
-      />
       <div className="content-container">
         <Title
           ficheType={FICHE.CERTIFICATS}
@@ -105,35 +124,5 @@ const LabelsAndCertificatsPage: NextPageWithLayout<IProps> = ({
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = postServerSideProps(
-  async (context) => {
-    const { slug, isBot } = extractParamsPageRouter(context);
-
-    const {
-      uniteLegale,
-      rge,
-      entrepreneurSpectacles,
-      egapro,
-      bio,
-      organismesDeFormation,
-      ess,
-      entrepriseInclusive,
-    } = await getCertificationsFromSlug(slug, isBot);
-
-    return {
-      props: {
-        bio,
-        egapro,
-        entrepreneurSpectacles,
-        rge,
-        uniteLegale,
-        organismesDeFormation,
-        ess,
-        entrepriseInclusive,
-      },
-    };
-  }
-);
 
 export default LabelsAndCertificatsPage;

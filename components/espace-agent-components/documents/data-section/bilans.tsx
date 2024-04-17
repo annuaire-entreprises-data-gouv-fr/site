@@ -1,3 +1,5 @@
+'use client';
+
 import routes from '#clients/routes';
 import { Warning } from '#components-ui/alerts';
 import ButtonLink from '#components-ui/button';
@@ -12,18 +14,15 @@ import {
   isAssociation,
   isServicePublic,
 } from '#models/core/types';
-import { EScope, hasRights } from '#models/user/rights';
-import { ISession } from '#models/user/session';
 import { formatDateLong } from '#utils/helpers';
 import { getFiscalYear } from '#utils/helpers/formatting/format-fiscal-year';
 import useFetchActesRNE from 'hooks/fetch/actes-RNE';
-import AgentWallDocuments from '../agent-wall/documents';
 
 const NoBilans = () => (
   <>Aucun comptes n’a été déposé au RNE pour cette entreprise.</>
 );
 
-const AgentComponent: React.FC<{
+const AgentBilansSection: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const documents = useFetchActesRNE(uniteLegale);
@@ -98,21 +97,4 @@ const AgentComponent: React.FC<{
   );
 };
 
-const DocumentBilansSection: React.FC<{
-  uniteLegale: IUniteLegale;
-  session: ISession | null;
-}> = ({ uniteLegale, session }) => {
-  if (!hasRights(session, EScope.bilansRne)) {
-    return (
-      <AgentWallDocuments
-        title="Bilans"
-        id="bilans"
-        uniteLegale={uniteLegale}
-      />
-    );
-  }
-
-  return <AgentComponent uniteLegale={uniteLegale} />;
-};
-
-export default DocumentBilansSection;
+export default AgentBilansSection;

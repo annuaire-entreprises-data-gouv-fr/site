@@ -12,9 +12,13 @@ import {
 } from '#clients/sirene-insee/siret';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
-import { Siren, verifySiren } from '#utils/helpers';
+import { Siren, isLuhnValid, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
-import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
+import {
+  logFatalErrorInSentry,
+  logInfoInSentry,
+  logWarningInSentry,
+} from '#utils/sentry';
 import { shouldUseInsee } from '.';
 import { EAdministration } from '../administrations/EAdministration';
 import {
@@ -27,9 +31,11 @@ import { getTvaUniteLegale } from '../tva';
 import { ISTATUTDIFFUSION, estDiffusible } from './statut-diffusion';
 import {
   IUniteLegale,
+  NotLuhnValidSirenError,
   SirenNotFoundError,
   createDefaultUniteLegale,
 } from './types';
+import { EUniteLEgaleError } from './unite-legale-errors';
 
 /**
  * PUBLIC METHODS
@@ -104,6 +110,17 @@ class UniteLegaleBuilder {
         useCache
       );
 
+    const sirenIsLuhnValid = isLuhnValid(this._siren);
+    if (isAPI404(uniteLegaleRechercheEntreprise) && !sirenIsLuhnValid) {
+      logInfoInSentry(new NotLuhnValidSirenError(this._siren));
+
+      // no need to go further : insee's siren follow luhn
+      return createDefaultUniteLegale(
+        this._siren,
+        EUniteLEgaleError.NotLuhnValid
+      );
+    }
+
     const useInsee = shouldUseInsee(
       uniteLegaleRechercheEntreprise,
       this._isBot,
@@ -114,7 +131,11 @@ class UniteLegaleBuilder {
 
     if (!useInsee) {
       if (isAPI404(uniteLegaleRechercheEntreprise)) {
-        throw new SirenNotFoundError(this._siren);
+        logInfoInSentry(new SirenNotFoundError(this._siren));
+        return createDefaultUniteLegale(
+          this._siren,
+          EUniteLEgaleError.NotFound
+        );
       }
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
         throw new HttpServerError('Recherche failed, return 500');
@@ -138,7 +159,8 @@ class UniteLegaleBuilder {
       isAPI404(uniteLegaleRechercheEntreprise) &&
       isAPI404(uniteLegaleInsee)
     ) {
-      throw new SirenNotFoundError(this._siren);
+      logInfoInSentry(new SirenNotFoundError(this._siren));
+      return createDefaultUniteLegale(this._siren, EUniteLEgaleError.NotFound);
     }
 
     /**

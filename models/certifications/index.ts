@@ -1,6 +1,5 @@
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { getEgapro, IEgapro } from '#models/certifications/egapro';
-import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { IUniteLegale } from '../core/types';
 import { getBio, IEtablissementsBio } from './bio';
 import {
@@ -32,11 +31,8 @@ export interface ICertifications {
 }
 
 export const getCertificationsFromSlug = async (
-  slug: string,
-  isBot: boolean
+  uniteLegale: IUniteLegale
 ): Promise<ICertifications> => {
-  const uniteLegale = await getUniteLegaleFromSlug(slug, { isBot });
-
   const [
     rge,
     entrepreneurSpectacles,

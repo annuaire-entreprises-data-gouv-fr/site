@@ -13,7 +13,6 @@ import SearchFilterParams, {
 } from '#models/search-filter-params';
 import { parseIntWithDefaultValue } from '#utils/helpers';
 import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
-import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 
 export const metadata: Metadata = {
   title: 'Rechercher une entreprise, un service public ou une association',
@@ -23,9 +22,7 @@ export const metadata: Metadata = {
   robots: 'noindex, nofollow',
 };
 
-const SearchResultPage = withErrorHandler(async function UniteLegalePage(
-  props: AppRouterProps
-) {
+const SearchResultPage = async function UniteLegalePage(props: AppRouterProps) {
   const searchTerm = (props.searchParams.terme || '') as string;
   const pageParam = (props.searchParams.page || '') as string;
   const page = parseIntWithDefaultValue(pageParam, 1);
@@ -35,7 +32,6 @@ const SearchResultPage = withErrorHandler(async function UniteLegalePage(
     page,
     searchFilterParams
   );
-
   const searchFilterParamsJSON = searchFilterParams.toJSON();
 
   return (
@@ -67,6 +63,6 @@ const SearchResultPage = withErrorHandler(async function UniteLegalePage(
       <Footer />
     </>
   );
-});
+};
 
 export default SearchResultPage;

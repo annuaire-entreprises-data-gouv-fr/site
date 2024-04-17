@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import routes from '#clients/routes';
 import { Info } from '#components-ui/alerts';
@@ -7,9 +9,6 @@ import { DataSectionClient } from '#components/section/data-section/client';
 import { FullTable } from '#components/table/full';
 import { UniteLegalePageLink } from '#components/unite-legale-page-link';
 import { EAdministration } from '#models/administrations/EAdministration';
-import { IAnnoncesBodacc } from '#models/annonces';
-import { IAPILoading } from '#models/api-loading';
-import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
 import { formatDate } from '#utils/helpers';
 import { useFetchBODACC } from 'hooks';
@@ -18,13 +17,7 @@ const AnnoncesBodacc: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
   const bodacc = useFetchBODACC(uniteLegale);
-  return <AnnoncesBodaccSection uniteLegale={uniteLegale} bodacc={bodacc} />;
-};
 
-const AnnoncesBodaccSection: React.FC<{
-  uniteLegale: IUniteLegale;
-  bodacc: IAnnoncesBodacc | IAPINotRespondingError | IAPILoading;
-}> = ({ uniteLegale, bodacc }) => {
   return (
     <DataSectionClient
       title="Annonces BODACC"
