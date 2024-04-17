@@ -57,10 +57,7 @@ export async function UniteLegaleErrorSection({ uniteLegale }: IProp) {
           {formatIntFr(uniteLegale.siren)}
         </a>
       </h1>
-      Cette structure présente une ou plusieurs incohérences, ce qui nous
-      empêche d’afficher sa page :
-      <br />
-      <NotInSireneAlert uniteLegale={uniteLegale} pronoun="Elle" />
+      <NotInSireneAlert uniteLegale={uniteLegale} />
       {isNotLuhnValid(uniteLegale) && (
         <NotAValidSirenOrSiretAlert uniteLegale={uniteLegale} />
       )}

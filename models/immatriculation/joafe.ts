@@ -9,7 +9,11 @@ import { FetchRessourceException } from '#models/exceptions';
 import { IdRna, Siren, verifyIdRna } from '#utils/helpers';
 import logErrorInSentry from '#utils/sentry';
 import { IImmatriculation } from '.';
-import { NotAValidIdRnaError } from '../core/types';
+import {
+  IUniteLegale,
+  NotAValidIdRnaError,
+  isAssociation,
+} from '../core/types';
 
 export interface IImmatriculationJOAFE extends IImmatriculation {
   siren: Siren;
@@ -17,11 +21,22 @@ export interface IImmatriculationJOAFE extends IImmatriculation {
   datePublication: string;
 }
 
+export const getImmatriculationJOAFE = async (uniteLegale: IUniteLegale) => {
+  if (isAssociation(uniteLegale)) {
+    return await getImmatriculationJOAFEFromIds(
+      uniteLegale.siren,
+      uniteLegale?.association?.idAssociation
+    );
+  } else {
+    return APINotRespondingFactory(EAdministration.DILA, 404);
+  }
+};
+
 /**
  * Request Immatriculation from JOAFE
  * @param siren
  */
-export const getImmatriculationJOAFE = async (
+const getImmatriculationJOAFEFromIds = async (
   siren: Siren,
   idRnaAsString: IdRna | string | null
 ): Promise<IAPINotRespondingError | IImmatriculationJOAFE> => {

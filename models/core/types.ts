@@ -158,7 +158,7 @@ export const createDefaultUniteLegale = (
       codeColter: null,
     },
     conventionsCollectives: {},
-    error: error || EUniteLEgaleError.None,
+    error: error ?? EUniteLEgaleError.None,
   };
 };
 

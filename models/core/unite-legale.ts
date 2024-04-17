@@ -55,7 +55,6 @@ export const getUniteLegaleFromSlug = async (
 ): Promise<IUniteLegale> => {
   const { isBot = false, page = 1 } = options;
   const uniteLegale = new UniteLegaleBuilder(slug, isBot, page);
-
   return await uniteLegale.build();
 };
 
@@ -111,14 +110,18 @@ class UniteLegaleBuilder {
       );
 
     const sirenIsLuhnValid = isLuhnValid(this._siren);
-    if (isAPI404(uniteLegaleRechercheEntreprise) && !sirenIsLuhnValid) {
+    if (!sirenIsLuhnValid) {
       logInfoInSentry(new NotLuhnValidSirenError(this._siren));
-
-      // no need to go further : insee's siren follow luhn
-      return createDefaultUniteLegale(
-        this._siren,
-        EUniteLEgaleError.NotLuhnValid
-      );
+      if (isAPI404(uniteLegaleRechercheEntreprise)) {
+        // no need to go further : insee's siren follow luhn
+        return createDefaultUniteLegale(
+          this._siren,
+          EUniteLEgaleError.NotLuhnValid
+        );
+      } else {
+        uniteLegaleRechercheEntreprise.error = EUniteLEgaleError.NotLuhnValid;
+        return uniteLegaleRechercheEntreprise;
+      }
     }
 
     const useInsee = shouldUseInsee(

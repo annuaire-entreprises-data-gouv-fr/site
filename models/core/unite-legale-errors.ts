@@ -1,9 +1,10 @@
 import { IUniteLegale } from './types';
 
 export enum EUniteLEgaleError {
-  NotLuhnValid,
-  NotFound,
-  None,
+  None = 'none',
+  NotLuhnValid = 'notluhnvalid',
+  NotFound = 'notfound',
+  NotASiren = 'notasiren',
 }
 
 export const hasError = (uniteLegale: IUniteLegale) => {

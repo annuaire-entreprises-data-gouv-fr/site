@@ -12,7 +12,7 @@ export const NotAValidSirenOrSiretAlert: React.FC<{
       <MatomoEvent category="error" action="sirenOrSiretInvalid" name="" />
       <Error full>
         <b>
-          ⚠️ Son numéro d’identification “{formatIntFr(uniteLegale.siren)}” est
+          ⚠️ Ce numéro d’identification “{formatIntFr(uniteLegale.siren)}” est
           invalide
         </b>
         <div>

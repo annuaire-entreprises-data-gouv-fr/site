@@ -7,10 +7,10 @@ import {
   isLikelyASiretOrSiren,
 } from '#utils/helpers';
 import { sessionOptions, setVisitTimestamp } from '#utils/session';
+
 const shouldRedirect = (path: string, search: string, url: string) => {
   try {
     const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(path);
-
     if (sirenOrSiretSlug) {
       if (path.startsWith('/entreprise/')) {
         if (!isLikelyASiretOrSiren(sirenOrSiretSlug)) {
@@ -38,9 +38,9 @@ const shouldRedirect = (path: string, search: string, url: string) => {
       );
 
       if (isLikelyASiretOrSiren(sirenOrSiretParam)) {
-        if (sirenOrSiretParam.length === 9) {
-          return new URL(`/entreprise/${sirenOrSiretParam}`, url);
-        } else if (sirenOrSiretParam.length === 14) {
+        if (sirenOrSiretParam.length === 14) {
+          return new URL(`/etablissement/${sirenOrSiretParam}`, url);
+        } else if (sirenOrSiretParam.length === 9) {
           return new URL(`/entreprise/${sirenOrSiretParam}`, url);
         }
       }
@@ -112,5 +112,7 @@ export const config = {
     '/etablissement/:path*',
     '/rechercher/:path*',
     '/rechercher/carte/:path*',
+    '/justificatif/:path*',
+    '/dirigeant/:path*',
   ],
 };

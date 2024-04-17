@@ -8,7 +8,7 @@ import { EAdministration } from '#models/administrations/EAdministration';
 import { IAPINotRespondingError } from '#models/api-not-responding';
 import { IImmatriculationJOAFE } from '#models/immatriculation/joafe';
 import { formatDate, formatIntFr } from '#utils/helpers';
-import { TwoColumnTable } from '../table/simple';
+import { TwoColumnTable } from '../../../../../components/table/simple';
 
 type IProps = {
   immatriculation: IImmatriculationJOAFE | IAPINotRespondingError;

@@ -6,8 +6,7 @@ import { Warning } from '../alerts';
 
 const NotInSireneAlert: React.FC<{
   uniteLegale: IUniteLegale;
-  pronoun?: string;
-}> = ({ uniteLegale, pronoun = 'Cette structure' }) => {
+}> = ({ uniteLegale }) => {
   /* non-diffusible = exist in insee so following do not apply */
   if (estNonDiffusible(uniteLegale)) {
     return null;
@@ -24,7 +23,7 @@ const NotInSireneAlert: React.FC<{
 
   return (
     <Warning full>
-      {pronoun} <strong>n’apparait pas</strong> dans la{' '}
+      Cette structure <strong>n’apparait pas</strong> dans la{' '}
       <a href="https://sirene.fr">base Sirene</a> des entreprises tenue par l’
       <INSEE />, mais elle est présente dans le Registre National des
       Entreprises ou RNE, tenu par l’
