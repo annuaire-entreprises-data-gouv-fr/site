@@ -1,9 +1,6 @@
 import { Metadata } from 'next';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { UniteLegaleErrorSection } from '#components/unite-legale-error-section';
-import { cachedGetUniteLegale } from '#models/core/unite-legale-cache';
-import { hasError } from '#models/core/unite-legale-errors';
 import { getImmatriculationJOAFE } from '#models/immatriculation/joafe';
 import {
   uniteLegalePageDescription,
@@ -13,6 +10,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { cachedGetUniteLegale } from 'app/(header-default)/cached-methods';
 import Immatriculations from './_components';
 
 export const generateMetadata = async (
@@ -38,10 +36,6 @@ export const generateMetadata = async (
 const JustificatifPage = async (props: AppRouterProps) => {
   const { slug, isBot } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
-
-  if (hasError(uniteLegale)) {
-    return <UniteLegaleErrorSection uniteLegale={uniteLegale} />;
-  }
 
   const immatriculationJOAFE = await getImmatriculationJOAFE(uniteLegale);
   const session = await getSession();

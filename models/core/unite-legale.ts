@@ -12,13 +12,9 @@ import {
 } from '#clients/sirene-insee/siret';
 import { createEtablissementsList } from '#models/core/etablissements-list';
 import { IETATADMINSTRATIF, estActif } from '#models/core/etat-administratif';
-import { Siren, isLuhnValid, verifySiren } from '#utils/helpers';
+import { Siren, verifySiren } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
-import {
-  logFatalErrorInSentry,
-  logInfoInSentry,
-  logWarningInSentry,
-} from '#utils/sentry';
+import { logFatalErrorInSentry, logWarningInSentry } from '#utils/sentry';
 import { shouldUseInsee } from '.';
 import { EAdministration } from '../administrations/EAdministration';
 import {
@@ -31,11 +27,9 @@ import { getTvaUniteLegale } from '../tva';
 import { ISTATUTDIFFUSION, estDiffusible } from './statut-diffusion';
 import {
   IUniteLegale,
-  NotLuhnValidSirenError,
   SirenNotFoundError,
   createDefaultUniteLegale,
 } from './types';
-import { EUniteLEgaleError } from './unite-legale-errors';
 
 /**
  * PUBLIC METHODS
@@ -55,6 +49,7 @@ export const getUniteLegaleFromSlug = async (
 ): Promise<IUniteLegale> => {
   const { isBot = false, page = 1 } = options;
   const uniteLegale = new UniteLegaleBuilder(slug, isBot, page);
+
   return await uniteLegale.build();
 };
 
@@ -109,21 +104,6 @@ class UniteLegaleBuilder {
         useCache
       );
 
-    const sirenIsLuhnValid = isLuhnValid(this._siren);
-    if (!sirenIsLuhnValid) {
-      logInfoInSentry(new NotLuhnValidSirenError(this._siren));
-      if (isAPI404(uniteLegaleRechercheEntreprise)) {
-        // no need to go further : insee's siren follow luhn
-        return createDefaultUniteLegale(
-          this._siren,
-          EUniteLEgaleError.NotLuhnValid
-        );
-      } else {
-        uniteLegaleRechercheEntreprise.error = EUniteLEgaleError.NotLuhnValid;
-        return uniteLegaleRechercheEntreprise;
-      }
-    }
-
     const useInsee = shouldUseInsee(
       uniteLegaleRechercheEntreprise,
       this._isBot,
@@ -134,11 +114,7 @@ class UniteLegaleBuilder {
 
     if (!useInsee) {
       if (isAPI404(uniteLegaleRechercheEntreprise)) {
-        logInfoInSentry(new SirenNotFoundError(this._siren));
-        return createDefaultUniteLegale(
-          this._siren,
-          EUniteLEgaleError.NotFound
-        );
+        throw new SirenNotFoundError(this._siren);
       }
       if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
         throw new HttpServerError('Recherche failed, return 500');
@@ -162,8 +138,7 @@ class UniteLegaleBuilder {
       isAPI404(uniteLegaleRechercheEntreprise) &&
       isAPI404(uniteLegaleInsee)
     ) {
-      logInfoInSentry(new SirenNotFoundError(this._siren));
-      return createDefaultUniteLegale(this._siren, EUniteLEgaleError.NotFound);
+      throw new SirenNotFoundError(this._siren);
     }
 
     /**

@@ -15,7 +15,6 @@ import {
 } from '../exceptions';
 import { ITVAIntracommunautaire } from '../tva';
 import { ISTATUTDIFFUSION } from './statut-diffusion';
-import { EUniteLEgaleError } from './unite-legale-errors';
 
 export interface IEtablissement {
   enseigne: string | null;
@@ -116,13 +115,9 @@ export interface IUniteLegale extends IEtablissementsList {
     codeColter: string | null;
   };
   conventionsCollectives: IConventionsCollectives;
-  error: EUniteLEgaleError;
 }
 
-export const createDefaultUniteLegale = (
-  siren: Siren,
-  error?: EUniteLEgaleError
-): IUniteLegale => {
+export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
   const siege = createDefaultEtablissement();
   siege.estSiege = true;
   return {
@@ -158,7 +153,6 @@ export const createDefaultUniteLegale = (
       codeColter: null,
     },
     conventionsCollectives: {},
-    error: error ?? EUniteLEgaleError.None,
   };
 };
 

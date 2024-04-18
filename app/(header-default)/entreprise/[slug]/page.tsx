@@ -12,14 +12,11 @@ import ServicePublicSection from '#components/service-public-section';
 import StructuredDataBreadcrumb from '#components/structured-data/breadcrumb';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { UniteLegaleErrorSection } from '#components/unite-legale-error-section';
 import UniteLegaleSection from '#components/unite-legale-section';
 import UsefulShortcuts from '#components/useful-shortcuts';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { isAssociation, isCollectiviteTerritoriale } from '#models/core/types';
-import { cachedGetUniteLegale } from '#models/core/unite-legale-cache';
-import { hasError } from '#models/core/unite-legale-errors';
 import { getServicePublicByUniteLegale } from '#models/service-public';
 import { EScope, hasRights } from '#models/user/rights';
 import {
@@ -31,6 +28,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { cachedGetUniteLegale } from 'app/(header-default)/cached-methods';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -55,10 +53,6 @@ export default async function UniteLegalePage(props: AppRouterProps) {
   const session = await getSession();
   const { slug, page, isBot, isRedirected } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
-
-  if (hasError(uniteLegale)) {
-    return <UniteLegaleErrorSection uniteLegale={uniteLegale} />;
-  }
 
   const [servicePublic] = await Promise.all([
     getServicePublicByUniteLegale(uniteLegale, {

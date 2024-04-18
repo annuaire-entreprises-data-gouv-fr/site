@@ -14,10 +14,7 @@ import { CertificationsRGESection } from '#components/labels-and-certificates/rg
 import { CertificationSocieteMission } from '#components/labels-and-certificates/societe-mission';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { UniteLegaleErrorSection } from '#components/unite-legale-error-section';
 import { getCertificationsFromSlug } from '#models/certifications';
-import { cachedGetUniteLegale } from '#models/core/unite-legale-cache';
-import { hasError } from '#models/core/unite-legale-errors';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -26,6 +23,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { cachedGetUniteLegale } from 'app/(header-default)/cached-methods';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -52,10 +50,6 @@ const LabelsAndCertificatsPage = async (props: AppRouterProps) => {
   const session = await getSession();
   const { slug, isBot } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
-
-  if (hasError(uniteLegale)) {
-    return <UniteLegaleErrorSection uniteLegale={uniteLegale} />;
-  }
 
   const {
     estEss,

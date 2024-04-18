@@ -2,10 +2,7 @@ import { Metadata } from 'next';
 import ConventionsCollectivesSection from '#components/conventions-collectives-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { UniteLegaleErrorSection } from '#components/unite-legale-error-section';
 import { getCCMetadata } from '#models/conventions-collectives';
-import { cachedGetUniteLegale } from '#models/core/unite-legale-cache';
-import { hasError } from '#models/core/unite-legale-errors';
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -14,6 +11,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { cachedGetUniteLegale } from 'app/(header-default)/cached-methods';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -40,10 +38,6 @@ export default async function ConventionCollectivePage(props: AppRouterProps) {
   const session = await getSession();
   const { slug, page, isBot } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
-
-  if (hasError(uniteLegale)) {
-    return <UniteLegaleErrorSection uniteLegale={uniteLegale} />;
-  }
 
   const ccWithMetadata = await getCCMetadata(
     uniteLegale.conventionsCollectives

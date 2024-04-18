@@ -35,10 +35,13 @@ export interface IJustificatifs {
     | IImmatriculationRNE
     | IAPINotRespondingError
     | IAPILoading;
+}
+
+interface IProps extends IJustificatifs {
   session: ISession | null;
 }
 
-export const ImmatriculationsSection: React.FC<IJustificatifs> = ({
+export const ImmatriculationsSection: React.FC<IProps> = ({
   immatriculationJOAFE,
   immatriculationRNE,
   uniteLegale,

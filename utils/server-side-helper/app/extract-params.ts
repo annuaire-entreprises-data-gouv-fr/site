@@ -7,7 +7,10 @@ export type AppRouterProps = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-function extractParamsAppRouter<T>({ params, searchParams }: AppRouterProps) {
+function extractParamsAppRouter({
+  params,
+  searchParams,
+}: Partial<AppRouterProps>) {
   const slug = (params?.slug || '') as string;
 
   searchParams = searchParams ?? {};

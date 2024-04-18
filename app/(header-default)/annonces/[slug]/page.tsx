@@ -4,11 +4,8 @@ import AnnoncesJOAFESection from '#components/annonces-section/annonces/joafe';
 import { DonneesPriveesSection } from '#components/donnees-privees-section';
 import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
-import { UniteLegaleErrorSection } from '#components/unite-legale-error-section';
 import { estDiffusible } from '#models/core/statut-diffusion';
 import { isAssociation } from '#models/core/types';
-import { cachedGetUniteLegale } from '#models/core/unite-legale-cache';
-import { hasError } from '#models/core/unite-legale-errors';
 import { EScope, hasRights } from '#models/user/rights';
 import {
   uniteLegalePageDescription,
@@ -18,6 +15,7 @@ import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
+import { cachedGetUniteLegale } from 'app/(header-default)/cached-methods';
 
 export const generateMetadata = async (
   props: AppRouterProps
@@ -43,10 +41,6 @@ const AnnoncesPage = async (props: AppRouterProps) => {
   const session = await getSession();
   const { slug, isBot } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
-
-  if (hasError(uniteLegale)) {
-    return <UniteLegaleErrorSection uniteLegale={uniteLegale} />;
-  }
 
   return (
     <>

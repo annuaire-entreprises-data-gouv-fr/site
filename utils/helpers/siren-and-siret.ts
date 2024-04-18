@@ -23,7 +23,7 @@ export const verifyTVANumber = (slug: string): TVANumber => {
 };
 
 export type Siren = Brand<string, 'Siren'>;
-export type Siret = Brand<string, 'Siren'>;
+export type Siret = Brand<string, 'Siret'>;
 
 export const isSiren = (slug: string): slug is Siren => {
   if (!hasSirenFormat(slug)) {
@@ -32,7 +32,7 @@ export const isSiren = (slug: string): slug is Siren => {
   return true;
 };
 
-export const isSiret = (slug: string): slug is Siren => {
+export const isSiret = (slug: string): slug is Siret => {
   if (!hasSiretFormat(slug)) {
     return false;
   }
