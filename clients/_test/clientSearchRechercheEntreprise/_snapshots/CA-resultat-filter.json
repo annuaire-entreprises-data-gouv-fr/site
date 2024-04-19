@@ -546,12 +546,12 @@
           {
             "siren": "432345783",
             "denomination": "PROMETHEE GROUP",
-            "role": null
+            "role": "Président de SAS"
           },
           {
             "siren": "702621590",
             "denomination": "ARESXPERT AUDIT",
-            "role": null
+            "role": "Commissaire aux comptes titulaire"
           }
         ]
       },
