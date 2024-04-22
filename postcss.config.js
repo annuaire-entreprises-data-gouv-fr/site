@@ -1,3 +1,12 @@
+const postCssPresetEnv = [
+  'postcss-preset-env',
+  {
+    features: {
+      'nesting-rules': true,
+    },
+  },
+];
+
 const plugins =
   process.env.NODE_ENV === 'production'
     ? [
@@ -20,7 +29,7 @@ const plugins =
           },
         ],
         'postcss-flexbugs-fixes',
-        ['postcss-preset-env', {}],
+        postCssPresetEnv,
         [
           'cssnano',
           {
@@ -34,7 +43,7 @@ const plugins =
           },
         ],
       ]
-    : [['postcss-preset-env', {}]];
+    : [postCssPresetEnv];
 
 module.exports = {
   plugins,
