@@ -3,7 +3,7 @@ describe('Siren / Siret redirections', () => {
     cy.visit('/');
 
     cy.get('.fr-search-bar > input')
-      .type('Ganymede')
+      .type('123456789')
       .should('have.value', '123456789');
 
     cy.get('.fr-search-bar > button').click();
@@ -15,7 +15,7 @@ describe('Siren / Siret redirections', () => {
     cy.visit('/');
 
     cy.get('.fr-search-bar > input')
-      .type('Ganymede')
+      .type('123 456 789')
       .should('have.value', '123 456 789');
 
     cy.get('.fr-search-bar > button').click();
@@ -27,7 +27,7 @@ describe('Siren / Siret redirections', () => {
     cy.visit('/');
 
     cy.get('.fr-search-bar > input')
-      .type('Ganymede')
+      .type('123 456 789 0 0003')
       .should('have.value', '123 456 789 0 0003');
 
     cy.get('.fr-search-bar > button').click();

@@ -1,11 +1,14 @@
 import { getIronSession } from 'iron-session';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import { Exception } from '#models/exceptions';
 import { ISession } from '#models/user/session';
 import {
   extractSirenOrSiretSlugFromUrl,
-  isLikelyASiretOrSiren,
+  isLikelyASiren,
+  isLikelyASiret,
 } from '#utils/helpers';
+import logErrorInSentry from '#utils/sentry';
 import { sessionOptions, setVisitTimestamp } from '#utils/session';
 
 const shouldRedirect = (path: string, search: string, url: string) => {
@@ -13,21 +16,18 @@ const shouldRedirect = (path: string, search: string, url: string) => {
     const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(path);
     if (sirenOrSiretSlug) {
       if (path.startsWith('/entreprise/')) {
-        if (!isLikelyASiretOrSiren(sirenOrSiretSlug)) {
-          return new URL(`/404`, url);
-        }
-
-        if (sirenOrSiretSlug.length === 14) {
+        if (isLikelyASiret(sirenOrSiretSlug)) {
           return new URL(`/etablissement/${sirenOrSiretSlug}`, url);
+        } else if (!isLikelyASiren(sirenOrSiretSlug)) {
+          return new URL(`/404`, url);
         }
       }
 
       if (path.startsWith('/etablissement/')) {
-        if (!isLikelyASiretOrSiren(sirenOrSiretSlug)) {
-          return new URL(`/404`, url);
-        }
-        if (sirenOrSiretSlug.length === 9) {
+        if (isLikelyASiren(sirenOrSiretSlug)) {
           return new URL(`/entreprise/${sirenOrSiretSlug}`, url);
+        } else if (!isLikelyASiret(sirenOrSiretSlug)) {
+          return new URL(`/404`, url);
         }
       }
     }
@@ -37,16 +37,22 @@ const shouldRedirect = (path: string, search: string, url: string) => {
         search.replaceAll(/[+]|(%20)/g, '')
       );
 
-      if (isLikelyASiretOrSiren(sirenOrSiretParam)) {
-        if (sirenOrSiretParam.length === 14) {
-          return new URL(`/etablissement/${sirenOrSiretParam}`, url);
-        } else if (sirenOrSiretParam.length === 9) {
-          return new URL(`/entreprise/${sirenOrSiretParam}`, url);
-        }
+      if (isLikelyASiret(sirenOrSiretParam)) {
+        return new URL(`/etablissement/${sirenOrSiretParam}`, url);
+      } else if (isLikelyASiren(sirenOrSiretParam)) {
+        return new URL(`/entreprise/${sirenOrSiretParam}`, url);
       }
     }
   } catch (e) {
-    console.error(e);
+    logErrorInSentry(
+      new Exception({
+        name: 'FailedToRedirectInMiddleware',
+        cause: e,
+        context: {
+          page: path,
+        },
+      })
+    );
   }
   return null;
 };

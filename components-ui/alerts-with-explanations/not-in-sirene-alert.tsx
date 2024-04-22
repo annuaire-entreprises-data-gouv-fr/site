@@ -18,6 +18,7 @@ const NotInSireneAlert: React.FC<{
 
   if (!uniteLegale.dateMiseAJourInpi) {
     // does not exist in RNE either
+    // should not exist in theory as UL come either from RNE or Sirene
     return null;
   }
 
