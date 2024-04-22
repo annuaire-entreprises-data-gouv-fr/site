@@ -25,18 +25,28 @@ export function CopyPaste({
   const timeoutId = useRef<NodeJS.Timeout>();
 
   const copyToClipboard = (e: any) => {
-    const el = document.createElement('textarea');
-    el.value = shouldRemoveSpace ? children.replace(/\s/g, '') : children;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
+    const valueToCopy = shouldRemoveSpace
+      ? children.replace(/\s/g, '')
+      : children;
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(valueToCopy);
+    } else {
+      const el = document.createElement('textarea');
+      el.value = valueToCopy;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    }
+
     setCopied(true);
 
     const isKeyboardNavigation = e.detail === 0;
     if (isKeyboardNavigation) {
       element.current?.focus();
     }
+    setCopied(true);
     logCopyPaste(label);
     timeoutId.current = setTimeout(() => {
       setCopied(false);
@@ -53,7 +63,9 @@ export function CopyPaste({
   const [hovered, setHovered] = useState(false);
   const [copied, setCopied] = useState(false);
   const [focused, setFocused] = useState(false);
+
   const copyTooltipRef = useRef<HTMLSpanElement>(null);
+
   useLayoutEffect(() => {
     if (copyTooltipRef.current && copyTooltipRef.current.offsetTop > 0) {
       copyTooltipRef.current.classList.add(style.copyTooltipAbsolute);
@@ -72,7 +84,7 @@ export function CopyPaste({
       aria-label={`${children}, copier dans le presse-papier`}
       title="Copier dans le presse-papier"
     >
-      <span id={id}>{children}</span>{' '}
+      <span id={id}>{children} </span>
       {(hovered || copied || focused) && (
         <span
           className={style.copyTooltip}
@@ -82,11 +94,13 @@ export function CopyPaste({
         >
           {copied ? (
             <>
-              <CheckMarkSVG /> copié
+              <CheckMarkSVG />
+              <span> copié</span>
             </>
           ) : (
             <>
-              <CopySVG /> copier
+              <CopySVG />
+              <span> copier</span>
             </>
           )}
         </span>
