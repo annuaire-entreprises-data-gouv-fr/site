@@ -1,7 +1,7 @@
 'use client';
-import { PropsWithChildren, useId, useState } from 'react';
+
+import { PropsWithChildren, useState } from 'react';
 import ButtonLink from '#components-ui/button';
-import ButtonClose from '#components-ui/button/button-close';
 import { Icon } from '#components-ui/icon/wrapper';
 import constants from '#models/constants';
 import {
@@ -40,7 +40,6 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
   const ref = useOutsideClick(() => {
     setOpen(false);
   });
-  const id = useId();
 
   return (
     <>
@@ -70,12 +69,12 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
             )}
           </label>
           {open && (
-            <ButtonClose
+            <label
               onClick={() => setOpen(false)}
               className={styles['close-container']}
-              ariaControls={id}
-              ariaLabel="Fermer les filtres"
-            />
+            >
+              Fermer ✕
+            </label>
           )}
         </div>
         <div

@@ -8,19 +8,17 @@
   border-radius: 3px;
   border: 1px solid var(--annuaire-colors-frBlue);
 }
-
 .selected-filter-container:hover {
   border-color: #0a76f6;
 }
 
-.selected-filter-container>a {
+.selected-filter-container > a {
   padding: 5px 10px 5px 5px;
   font-weight: bold;
   position: absolute;
   right: 0;
 }
-
-.selected-filter-container>a:hover {
+.selected-filter-container > a:hover {
   background-color: #00009111;
 }
 
@@ -45,22 +43,22 @@ span.search-filter-label {
   border-radius: 3px;
   padding: 5px 10px;
 }
-
-span.search-filter-label>span {
+span.search-filter-label > span {
   color: var(--annuaire-colors-frBlue);
 }
-
 span.search-filter-label:hover {
   border-color: #0a76f6;
   background-color: #fefefe;
 }
 
-.close-container {
+label.close-container {
   z-index: 10010;
   display: none;
   position: fixed;
   top: 20px;
   right: 20px;
+  content: 'Fermer ✕';
+  cursor: pointer;
 }
 
 .container {
@@ -75,12 +73,10 @@ span.search-filter-label:hover {
   width: 480px;
   z-index: 1000;
 }
-
 .container:before {
   content: ' ';
   position: absolute;
-  bottom: 100%;
-  /* At the bottom of the tooltip */
+  bottom: 100%; /* At the bottom of the tooltip */
   left: 10%;
   margin-left: 0;
   border-width: 10px;
@@ -88,7 +84,7 @@ span.search-filter-label:hover {
   border-color: transparent transparent white transparent;
 }
 
-.container>.filter-container {
+.container > .filter-container {
   max-height: 400px;
   overflow-y: auto;
   z-index: 100;
@@ -105,8 +101,7 @@ span.search-filter-label:hover {
     height: 100vh;
     margin-top: 0;
   }
-
-  .close-container {
+  label.close-container {
     display: block;
   }
 }
