@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { cache } from 'react';
 import { extractSirenOrSiretSlugFromUrl } from '#utils/helpers';
+import { logInfoInSentry } from '#utils/sentry';
 import { getEtablissementWithUniteLegaleFromSlug } from '../../../models/core/etablissement';
 import {
   NotASirenError,
@@ -12,9 +13,11 @@ import { getUniteLegaleFromSlug } from '../../../models/core/unite-legale';
 
 const handleException = (e: any, slug: string) => {
   if (e instanceof NotASirenError || e instanceof NotASiretError) {
+    logInfoInSentry(e);
     redirect('/404');
   }
   if (e instanceof SirenNotFoundError || e instanceof SiretNotFoundError) {
+    logInfoInSentry(e);
     redirect('/erreur/introuvable/' + slug);
   }
 };
