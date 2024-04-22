@@ -5,7 +5,7 @@ import { meta } from '#components/meta/meta-server';
 import getSession from '#utils/server-side-helper/app/get-session';
 import '../style/dsfr.min.css';
 import '../style/globals.css';
-import { PrefetchImgs } from './_component/prefetch-dsfr-imgs';
+import { PrefetchImgs } from './component/prefetch-dsfr-imgs';
 import { marianne } from './fonts';
 
 export const metadata: Metadata = meta({});

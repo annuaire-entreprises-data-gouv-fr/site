@@ -6,22 +6,18 @@ type IProps = {
   small?: boolean;
   to?: string;
   type?: 'submit' | null;
-  disabled?: boolean;
   alt?: boolean;
   target?: '_blank';
-  ariaLabel?: string;
   nofollow?: boolean;
   onClick?: MouseEventHandler;
 };
 
 const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   role,
-  disabled,
   to,
   children,
   small = false,
   alt = false,
-  ariaLabel,
   target = '',
   nofollow = false,
   onClick = () => {},
@@ -32,8 +28,6 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
         role={role}
         type="submit"
         onClick={onClick}
-        disabled={disabled}
-        aria-label={ariaLabel}
         className={`fr-btn ${alt ? ' fr-btn--secondary ' : ''} ${
           small ? ' fr-btn--sm ' : ''
         }`}
@@ -43,7 +37,6 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
     ) : (
       <a
         role={role}
-        aria-label={ariaLabel}
         target={target}
         rel={
           (target === '_blank' ? 'noopener noreferrer' : '') +

@@ -168,7 +168,6 @@ const routes = {
       'https://recherche-entreprises.api.gouv.fr/search',
   },
   tooling: {
-    crisp: 'https://api.crisp.chat/v1/website/',
     grist: 'https://grist.incubateur.net/api/docs/',
     matomo: {
       report: {
