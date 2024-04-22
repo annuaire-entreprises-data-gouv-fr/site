@@ -20,6 +20,7 @@ export const NotLuhnValidAlert: React.FC<{
           href="https://fr.wikipedia.org/wiki/Formule_de_Luhn"
           target="_blank"
           rel="noreferrer noopener"
+          aria-label="Voir les explications de l'algorithme de vérification, nouvelle fenêtre"
         >
           l’algorithme de vérification
         </a>{' '}
