@@ -4,7 +4,7 @@ export type IDefaultRequestConfig = {
   useCache?: boolean;
   params?: any;
   headers?: any;
-  method?: 'POST' | 'GET';
+  method?: 'POST' | 'GET' | 'PATCH';
   responseType?: 'blob' | 'arraybuffer';
   data?: any;
 };

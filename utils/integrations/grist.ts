@@ -21,9 +21,13 @@ const gristTables = {
     docId: 'hp8PLhMGY9sNWuzGDGe6yi',
     tableId: 'Hide_personal_data_requests',
   },
-} as { [tableKey: string]: { docId: string; tableId: string } };
+  'agents-beta-testeurs': {
+    docId: 'hp8PLhMGY9sNWuzGDGe6yi',
+    tableId: 'Agents_beta_testeurs',
+  },
+} as const;
 
-function getGristUrl(tableKey: string) {
+function getGristUrl(tableKey: keyof typeof gristTables) {
   const gristIds = gristTables[tableKey];
 
   if (!gristIds) {
@@ -35,7 +39,10 @@ function getGristUrl(tableKey: string) {
   return `${routes.tooling.grist}${gristIds.docId}/tables/${gristIds.tableId}/records`;
 }
 
-export async function logInGrist(tableKey: string, data: unknown[]) {
+export async function logInGrist(
+  tableKey: keyof typeof gristTables,
+  data: unknown[]
+) {
   await httpClient({
     method: 'POST',
     url: getGristUrl(tableKey),
@@ -52,7 +59,7 @@ export async function logInGrist(tableKey: string, data: unknown[]) {
   });
 }
 
-export async function readFromGrist(tableKey: string) {
+export async function readFromGrist(tableKey: keyof typeof gristTables) {
   const { records } = await httpClient<IGristRecords>({
     method: 'GET',
     url: getGristUrl(tableKey),
