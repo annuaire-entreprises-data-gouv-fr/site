@@ -30,7 +30,7 @@ export const logInterceptor = (response: AxiosResponse<any, any>) => {
       //@ts-ignore
       response?.cached,
       startTime ? endTime - startTime : undefined,
-      response?.request?.method
+      (response?.config?.method || '').toUpperCase()
     )
   );
   return response;

@@ -45,7 +45,7 @@ export const UsageStats: React.FC<{
           Nous suivons en particulier l’utilisation du copier-coller et le
           nombre de siren/siret utilisé directement dans le moteur de recherche,
           car ces deux indicateurs sont corrélés à l’application du{' '}
-          <a href="https://www.modernisation.gouv.fr/fileadmin/Book/Fiche3_5.pdf">
+          <a href="https://en.wikipedia.org/wiki/Once-only_principle">
             <strong>Dites-Le-Nous-Une-Fois</strong> (DLNUF)
           </a>
           .

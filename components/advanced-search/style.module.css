@@ -1,0 +1,32 @@
+.search-filters-container {
+  background-color: #f6f6f6;
+}
+
+.search-filters-container > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.filter-container {
+  display: flex;
+  max-width: calc(100% - 200px);
+  flex-wrap: wrap;
+}
+
+.map-switch {
+  flex-grow: 1;
+  text-align: right;
+  max-width: 200px;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 768px) {
+  .filter-container,
+  .map-switch {
+    width: 100%;
+    max-width: 100%;
+  }
+}

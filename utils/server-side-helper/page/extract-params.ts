@@ -5,9 +5,6 @@ import isUserAgentABot from '#utils/user-agent';
 const extractParamsPageRouter = (context: GetServerSidePropsContext) => {
   const slug = (context?.params?.slug || '') as string;
 
-  const referer = context?.req?.headers?.referer;
-  const isRedirected = !!referer && !!context.query.redirected;
-
   const pageParam = (context?.query?.page || '') as string;
   const page = parseIntWithDefaultValue(pageParam, 1);
 
@@ -18,7 +15,6 @@ const extractParamsPageRouter = (context: GetServerSidePropsContext) => {
 
   return {
     slug,
-    isRedirected,
     page,
     isBot,
   };

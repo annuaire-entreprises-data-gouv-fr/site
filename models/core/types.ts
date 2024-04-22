@@ -7,7 +7,7 @@ import { IETATADMINSTRATIF } from '#models/core/etat-administratif';
 import { IEtatCivil } from '#models/immatriculation';
 import { IdRna, Siren, Siret } from '#utils/helpers';
 import { EAdministration } from '../administrations/EAdministration';
-import { IConventionsCollectives } from '../conventions-collectives-list';
+import { IConventionsCollectives } from '../conventions-collectives';
 import {
   Exception,
   FetchRessourceException,

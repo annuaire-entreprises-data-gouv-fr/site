@@ -141,11 +141,6 @@ h4:not(.fr-alert__title) {
   }
 }
 
-/* Carte Map libre */
-.maplibregl-marker {
-  z-index: 10000;
-}
-
 /* # that appears before headings in content extracted from markdown */
 .anchor-link {
   font-size: 1em;

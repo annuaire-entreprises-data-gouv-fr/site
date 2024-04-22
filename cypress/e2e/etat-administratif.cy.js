@@ -1,5 +1,4 @@
 describe('Etat administratif', () => {
-  // pass failing test as Insee is very instable in CI
   it('Non diffusible', () => {
     cy.visit(`/entreprise/300025764`);
     cy.contains('information non-diffusible');

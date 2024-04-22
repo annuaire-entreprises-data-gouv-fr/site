@@ -2,7 +2,7 @@ import React from 'react';
 import { Siren, Siret } from '#utils/helpers';
 import MatomoEvent from '.';
 
-const MatomoEventFromSearch: React.FC<{ sirenOrSiret: Siren | Siret }> = ({
+const MatomoEventFromRedirected: React.FC<{ sirenOrSiret: Siren | Siret }> = ({
   sirenOrSiret,
 }) => (
   <MatomoEvent
@@ -12,4 +12,4 @@ const MatomoEventFromSearch: React.FC<{ sirenOrSiret: Siren | Siret }> = ({
   />
 );
 
-export default MatomoEventFromSearch;
+export default MatomoEventFromRedirected;

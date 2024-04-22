@@ -52,6 +52,21 @@
         "numObservation": "8588",
         "description": "Continuation de la société malgré un actif net devenu inférieur à la moitié du capital social. Décision du 01/12/2023",
         "dateAjout": "2023-12-06"
+      },
+      {
+        "numObservation": "3001",
+        "description": "(Ouverture d'une procédure de) Liquidation judiciaire  En date du 09/04/2024, le Tribunal de Commerce de Périgueux a ouvert une procédure de liquidation judiciaire , et a nommé en qualité de Liquidateur :      Maître Nicolas LEURET - SELARL LGA - 78, rue Victor Hugo - 24000 PérigueuxLa date de cessation des paiements a été fixée au 29/03/2024  Les déclarations de créances (sommes réclamées + pièces justificatives) sont à déposer auprès du mandataire judiciaire dans les deux mois à compter de la publication du jugement d'ouverture au b.o.d.a.c.c (bulletin officiel des annonces civile et commercial)Date d'effet : 09/04/2024",
+        "dateAjout": "2024-04-12"
+      },
+      {
+        "numObservation": "F24/020887",
+        "description": "Jugement du Tribunal de Commerce de Périgueux en date du 09/04/2024 prononçant la liquidation judiciaire. Liquidateur judiciaire : SCP LGA prise en la personne de Me Nicolas LEURET le mercurial 78 rue Victor Hugo 24000 Périgueux. Date de cessation des paiements : 29/03/2024",
+        "dateAjout": "2024-04-15"
+      },
+      {
+        "numObservation": "F24/001909",
+        "description": "Jugement du Tribunal de Commerce de Périgueux en date du 09/04/2024 prononçant la liquidation judiciaire immédiate. Liquidateur judiciaire : Maître LEURET Nicolas 78 rue Victor Hugo 24000 Périgueux. Date de cessation des paiements : 29/03/2024",
+        "dateAjout": "2024-04-16"
       }
     ],
     "metadata": {

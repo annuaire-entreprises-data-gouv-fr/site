@@ -55,8 +55,8 @@ export default function RegisterBeta({ agentContactInfo }: IProps) {
       {!isAlreadyRegistered && (
         <>
           Pour améliorer l’espace agent, vous pouvez participer à notre
-          programme de beta-test.
-          <small>(entretiens en visio, questionnaires, etc.)</small>
+          programme de beta-test{' '}
+          <small>(entretiens en visio, questionnaires, etc.).</small>
           <form action={handleRegister}>
             <label
               className="fr-label"

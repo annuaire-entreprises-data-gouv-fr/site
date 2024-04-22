@@ -6,7 +6,7 @@
   },
   "result": {
     "currentPage": 1,
-    "resultCount": 7,
+    "resultCount": 8,
     "pageCount": 1,
     "results": [
       {
@@ -2572,6 +2572,445 @@
         ],
         "nombreEtablissements": 13,
         "nombreEtablissementsOuverts": 13,
+        "dirigeants": []
+      },
+      {
+        "siren": "241700624",
+        "oldSiren": "241700624",
+        "siege": {
+          "siren": "241700624",
+          "siret": "24170062400026",
+          "oldSiret": "",
+          "etatAdministratif": "en activité",
+          "statutDiffusion": "diffusible",
+          "estSiege": true,
+          "enseigne": "",
+          "denomination": null,
+          "nic": "00026",
+          "dateCreation": "1998-02-13",
+          "dateDerniereMiseAJour": "",
+          "dateMiseAJourInsee": "",
+          "dateDebutActivite": "2008-01-01",
+          "dateFermeture": "",
+          "adresse": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
+          "adressePostale": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
+          "codePostal": "17310",
+          "commune": "SAINT-PIERRE-D'OLERON",
+          "activitePrincipale": "84.11Z",
+          "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+          "trancheEffectif": "22",
+          "libelleTrancheEffectif": "",
+          "latitude": "45.936181",
+          "longitude": "-1.303525",
+          "complements": {
+            "estEntrepreneurIndividuel": false,
+            "idFiness": [],
+            "idBio": [],
+            "idcc": [
+              "5021"
+            ],
+            "idOrganismeFormation": [],
+            "idRge": [
+              "1911"
+            ],
+            "idUai": []
+          },
+          "anneeTrancheEffectif": "2021"
+        },
+        "allSiegesSiret": [],
+        "tva": null,
+        "statutDiffusion": "diffusible",
+        "etatAdministratif": "en activité",
+        "nomComplet": "COMMUNAUTE DE COMMUNES DE L ILE D OLERON",
+        "chemin": "communaute-de-communes-de-l-ile-d-oleron-241700624",
+        "natureJuridique": "7346",
+        "libelleNatureJuridique": "Communauté de communes",
+        "etablissements": {
+          "all": [
+            {
+              "siren": "241700624",
+              "siret": "24170062400026",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00026",
+              "dateCreation": "1998-02-13",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2008-01-01",
+              "dateFermeture": "",
+              "adresse": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
+              "adressePostale": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
+              "codePostal": "17310",
+              "commune": "SAINT-PIERRE-D'OLERON",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "22",
+              "libelleTrancheEffectif": "",
+              "latitude": "45.936181",
+              "longitude": "-1.303525",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "5021"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "1911"
+                ],
+                "idUai": []
+              },
+              "anneeTrancheEffectif": "2021"
+            }
+          ],
+          "open": [
+            {
+              "siren": "241700624",
+              "siret": "24170062400026",
+              "oldSiret": "",
+              "etatAdministratif": "en activité",
+              "statutDiffusion": "diffusible",
+              "estSiege": true,
+              "enseigne": "",
+              "denomination": null,
+              "nic": "00026",
+              "dateCreation": "1998-02-13",
+              "dateDerniereMiseAJour": "",
+              "dateMiseAJourInsee": "",
+              "dateDebutActivite": "2008-01-01",
+              "dateFermeture": "",
+              "adresse": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
+              "adressePostale": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
+              "codePostal": "17310",
+              "commune": "SAINT-PIERRE-D'OLERON",
+              "activitePrincipale": "84.11Z",
+              "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+              "trancheEffectif": "22",
+              "libelleTrancheEffectif": "",
+              "latitude": "45.936181",
+              "longitude": "-1.303525",
+              "complements": {
+                "estEntrepreneurIndividuel": false,
+                "idFiness": [],
+                "idBio": [],
+                "idcc": [
+                  "5021"
+                ],
+                "idOrganismeFormation": [],
+                "idRge": [
+                  "1911"
+                ],
+                "idUai": []
+              },
+              "anneeTrancheEffectif": "2021"
+            }
+          ],
+          "unknown": [],
+          "closed": [],
+          "nombreEtablissementsOuverts": 1,
+          "nombreEtablissements": 10,
+          "usePagination": false,
+          "currentEtablissementPage": 1
+        },
+        "activitePrincipale": "84.11Z",
+        "libelleActivitePrincipale": "Administration publique générale",
+        "dateCreation": "1995-12-26",
+        "dateFermeture": "",
+        "dateDerniereMiseAJour": "2023-09-21T03:34:50",
+        "dateMiseAJourInsee": "2024-03-22T14:26:06",
+        "dateMiseAJourInpi": "",
+        "dateDebutActivite": "",
+        "trancheEffectif": "22",
+        "anneeCategorieEntreprise": "2021",
+        "categorieEntreprise": "PME",
+        "anneeTrancheEffectif": "2021",
+        "complements": {
+          "estBio": false,
+          "estEss": false,
+          "estServicePublic": true,
+          "estEntrepreneurIndividuel": false,
+          "estEntrepreneurSpectacle": false,
+          "statutEntrepreneurSpectacle": null,
+          "estFiness": false,
+          "egaproRenseignee": false,
+          "estRge": true,
+          "estOrganismeFormation": false,
+          "estSocieteMission": false,
+          "estQualiopi": false,
+          "estAssociation": false,
+          "estUai": false,
+          "estEntrepriseInclusive": false,
+          "typeEntrepriseInclusive": null
+        },
+        "association": {
+          "idAssociation": null,
+          "data": null
+        },
+        "colter": {
+          "codeColter": "241700624",
+          "codeInsee": null,
+          "niveau": "epci",
+          "elus": [
+            {
+              "sexe": "M",
+              "nom": "BENITO ET GARCIA",
+              "prenom": "Richard",
+              "role": null,
+              "dateNaissancePartial": "1949-07",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "FERREIRA",
+              "prenom": "François",
+              "role": null,
+              "dateNaissancePartial": "1959-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "HUMBERT",
+              "prenom": "Micheline",
+              "role": null,
+              "dateNaissancePartial": "1948-12",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "JOUTEUX",
+              "prenom": "Françoise",
+              "role": null,
+              "dateNaissancePartial": "1951-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "PARENT",
+              "prenom": "Michel",
+              "role": "Président du conseil communautaire",
+              "dateNaissancePartial": "1947-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "HUOT",
+              "prenom": "Joseph",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1947-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "JOYEUX",
+              "prenom": "Nathalie",
+              "role": null,
+              "dateNaissancePartial": "1985-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "DELHUMEAU-JAUD",
+              "prenom": "Fabienne",
+              "role": null,
+              "dateNaissancePartial": "1957-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "LIVENAIS",
+              "prenom": "Patrick",
+              "role": null,
+              "dateNaissancePartial": "1950-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MAZERAT",
+              "prenom": "Adrien",
+              "role": null,
+              "dateNaissancePartial": "1988-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MORANDEAU",
+              "prenom": "Yannick",
+              "role": null,
+              "dateNaissancePartial": "1953-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "RABELLE",
+              "prenom": "Dominique",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1950-04",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "COIFFÉ",
+              "prenom": "Luc",
+              "role": null,
+              "dateNaissancePartial": "1961-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "DELISÉE",
+              "prenom": "Martine",
+              "role": null,
+              "dateNaissancePartial": "1959-02",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "FROUGIER",
+              "prenom": "Sylvie",
+              "role": null,
+              "dateNaissancePartial": "1961-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GAZEU",
+              "prenom": "Patrick",
+              "role": null,
+              "dateNaissancePartial": "1958-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GUILBERT",
+              "prenom": "Éric",
+              "role": null,
+              "dateNaissancePartial": "1961-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "RAYNAL",
+              "prenom": "Philippe",
+              "role": null,
+              "dateNaissancePartial": "1968-06",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "SUEUR",
+              "prenom": "Christophe",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1966-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "VITET",
+              "prenom": "Françoise",
+              "role": null,
+              "dateNaissancePartial": "1956-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "GAILLOT",
+              "prenom": "Bruno",
+              "role": null,
+              "dateNaissancePartial": "1955-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "VILLAUTREIX",
+              "prenom": "Marie-josée",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1963-05",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "CHARTIER",
+              "prenom": "Chantal",
+              "role": null,
+              "dateNaissancePartial": "1955-03",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "ROBILLARD",
+              "prenom": "Patrice",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1950-08",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "CHEVRIER",
+              "prenom": "Philippe",
+              "role": "Vice-président du conseil communautaire",
+              "dateNaissancePartial": "1954-10",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "M",
+              "nom": "MONNEREAU",
+              "prenom": "Patrick",
+              "role": null,
+              "dateNaissancePartial": "1953-02",
+              "lieuNaissance": ""
+            }
+          ]
+        },
+        "conventionsCollectives": {},
+        "matchingEtablissements": [
+          {
+            "siren": "241700624",
+            "siret": "24170062400026",
+            "oldSiret": "",
+            "etatAdministratif": "en activité",
+            "statutDiffusion": "diffusible",
+            "estSiege": true,
+            "enseigne": "",
+            "denomination": null,
+            "nic": "00026",
+            "dateCreation": "1998-02-13",
+            "dateDerniereMiseAJour": "",
+            "dateMiseAJourInsee": "",
+            "dateDebutActivite": "2008-01-01",
+            "dateFermeture": "",
+            "adresse": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
+            "adressePostale": "59 ROUTE DES ALLEES 17310 SAINT-PIERRE-D'OLERON",
+            "codePostal": "17310",
+            "commune": "SAINT-PIERRE-D'OLERON",
+            "activitePrincipale": "84.11Z",
+            "libelleActivitePrincipale": "Administration publique générale (84.11Z)",
+            "trancheEffectif": "22",
+            "libelleTrancheEffectif": "",
+            "latitude": "45.936181",
+            "longitude": "-1.303525",
+            "complements": {
+              "estEntrepreneurIndividuel": false,
+              "idFiness": [],
+              "idBio": [],
+              "idcc": [
+                "5021"
+              ],
+              "idOrganismeFormation": [],
+              "idRge": [
+                "1911"
+              ],
+              "idUai": []
+            },
+            "anneeTrancheEffectif": "2021"
+          }
+        ],
+        "nombreEtablissements": 10,
+        "nombreEtablissementsOuverts": 9,
         "dirigeants": []
       },
       {

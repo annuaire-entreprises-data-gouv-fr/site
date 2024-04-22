@@ -1,0 +1,75 @@
+.results-counter {
+  margin-top: 20px;
+  color: var(--text-default-grey);
+}
+
+.result-item {
+  margin: 30px 0;
+}
+
+.result-item a {
+  background-image: none;
+}
+a.adress:hover,
+.matching-etablissement a:hover,
+.result-item > a:hover .title > span:first-of-type {
+  text-decoration: underline;
+}
+
+.result-item > a {
+  text-decoration: none;
+  border: none;
+  color: #333;
+  display: block;
+  font-size: 1rem;
+}
+.title {
+  color: var(--annuaire-colors-frBlue);
+  text-decoration: none;
+  font-size: 1.1rem;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.title > span:first-of-type {
+  margin-right: 10px;
+}
+
+.matching-etablissement {
+  margin-left: 10px;
+}
+
+.matching-etablissement li {
+  list-style-type: none;
+  padding-left: 15px;
+  position: relative;
+}
+.matching-etablissement li:before,
+.down {
+  content: '';
+  width: 10px;
+  height: 15px;
+  border: 1px solid #bbb;
+  border-top: none;
+  border-right: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.down {
+  border-bottom: none;
+  height: 100%;
+}
+
+.adress {
+  color: #707070;
+  font-size: 0.9rem;
+}
+
+.dirigeants-or-elus {
+  color: var(--text-default-grey);
+  font-size: 0.9rem;
+  margin: 8px auto;
+}

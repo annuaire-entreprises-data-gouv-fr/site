@@ -10,6 +10,7 @@ export function meta(obj: Metadata): Metadata {
   obj.openGraph.description ??= obj.description ?? SITE_DESCRIPTION;
   // @ts-ignore
   obj.openGraph.type ??= 'website';
+  obj.openGraph.locale ??= 'fr_FR';
   obj.openGraph.images ??= OPENGRAPH_IMAGES;
   obj.openGraph.siteName = SITE_NAME;
 

@@ -11,6 +11,7 @@ export function SaveFavourite(props: {
   useEffect(() => {
     saveFavourite(props);
   }, [props]);
+
   return null;
 }
 
@@ -37,11 +38,12 @@ function saveFavourite(visit: { siren: string; name: string; path: string }) {
       JSON.stringify(newFavourites.slice(0, 3))
     );
   } catch (e) {
-    logInfoInSentry(
-      new Exception({
-        name: 'SaveFavouriteException',
-        cause: e,
-      })
-    );
+    if (e)
+      logInfoInSentry(
+        new Exception({
+          name: 'SaveFavouriteException',
+          cause: e,
+        })
+      );
   }
 }

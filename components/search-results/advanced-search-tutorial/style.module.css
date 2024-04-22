@@ -1,0 +1,48 @@
+.advanced-search-tutorial {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.advanced-search-tutorial > svg {
+  height: 100px;
+  position: absolute;
+  top: -20px;
+}
+.advanced-search-tutorial > div {
+  margin-left: 110px;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 1.9rem;
+  margin: 30px 0 16px;
+}
+
+.advanced-search-tutorial > div ul {
+  list-style-type: none;
+  margin-top: 30px;
+  padding: 0;
+}
+.advanced-search-tutorial > div ul li {
+  margin: 0 0 20px;
+}
+.advanced-search-tutorial > div li > span {
+  color: var(--annuaire-colors-frBlue);
+}
+
+@media only screen and (min-width: 1px) and (max-width: 576px) {
+  .advanced-search-tutorial > svg {
+    rotate: 225deg;
+    height: 60px;
+    position: absolute;
+    top: -40px;
+  }
+
+  .advanced-search-tutorial > div {
+    margin-left: 0;
+  }
+  .title {
+    margin: 10px 0 16px;
+  }
+}

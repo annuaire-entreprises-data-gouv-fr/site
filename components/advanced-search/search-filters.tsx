@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { FilterMenu } from '#components-ui/filter-menu';
 import { SimpleSeparator } from '#components-ui/horizontal-separator';
@@ -88,7 +90,12 @@ const SearchFilters: React.FC<{
           Rechercher toutes les structures liées à une personne (dirigeant(e),
           ou élu(e))&nbsp;:
         </label>
-        <div className="field-in-line">
+        <div
+          style={{
+            display: 'flex',
+            gap: '5px',
+          }}
+        >
           <input
             className="fr-input"
             name="fn"
@@ -106,7 +113,12 @@ const SearchFilters: React.FC<{
         </div>
         <br />
         <label>Né(e) entre :</label>
-        <div className="field-in-line">
+        <div
+          style={{
+            display: 'flex',
+            gap: '5px',
+          }}
+        >
           <input
             className="fr-input"
             type="date"
@@ -229,21 +241,6 @@ const SearchFilters: React.FC<{
           />
         </div>
       </FilterMenu>
-      <style jsx>{`
-        .field-in-line {
-          display: flex;
-          gap: 5px;
-        }
-        #search-localisation-responses {
-          max-height: 270px;
-          overflow: auto;
-        }
-        @media only screen and (min-width: 1px) and (max-width: 992px) {
-          div.select {
-            max-width: 100%;
-          }
-        }
-      `}</style>
     </>
   );
 };
