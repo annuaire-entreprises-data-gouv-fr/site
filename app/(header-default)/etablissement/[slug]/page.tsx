@@ -9,11 +9,11 @@ import {
   etablissementPageTitle,
   shouldNotIndex,
 } from '#utils/helpers';
+import { cachedEtablissementWithUniteLegale } from '#utils/server-side-helper/app/cached-methods';
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { cachedEtablissementWithUniteLegale } from 'app/(header-default)/cached-methods';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
 

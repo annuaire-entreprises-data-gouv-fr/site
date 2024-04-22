@@ -8,11 +8,11 @@ import Title from '#components/title-section';
 import { FICHE } from '#components/title-section/tabs';
 import { isAssociation } from '#models/core/types';
 import { uniteLegalePageTitle } from '#utils/helpers';
+import { cachedGetUniteLegale } from '#utils/server-side-helper/app/cached-methods';
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { cachedGetUniteLegale } from 'app/(header-default)/cached-methods';
 
 export const generateMetadata = async (
   props: AppRouterProps

@@ -1,14 +1,14 @@
 import { redirect } from 'next/navigation';
 import { cache } from 'react';
 import { extractSirenOrSiretSlugFromUrl } from '#utils/helpers';
-import { getEtablissementWithUniteLegaleFromSlug } from '../../models/core/etablissement';
+import { getEtablissementWithUniteLegaleFromSlug } from '../../../models/core/etablissement';
 import {
   NotASirenError,
   NotASiretError,
   SirenNotFoundError,
   SiretNotFoundError,
-} from '../../models/core/types';
-import { getUniteLegaleFromSlug } from '../../models/core/unite-legale';
+} from '../../../models/core/types';
+import { getUniteLegaleFromSlug } from '../../../models/core/unite-legale';
 
 const handleException = (e: any, slug: string) => {
   if (e instanceof NotASirenError || e instanceof NotASiretError) {

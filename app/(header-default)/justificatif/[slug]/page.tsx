@@ -6,11 +6,11 @@ import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from '#utils/helpers';
+import { cachedGetUniteLegale } from '#utils/server-side-helper/app/cached-methods';
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import { cachedGetUniteLegale } from 'app/(header-default)/cached-methods';
 import Immatriculations from './_components';
 
 export const generateMetadata = async (
