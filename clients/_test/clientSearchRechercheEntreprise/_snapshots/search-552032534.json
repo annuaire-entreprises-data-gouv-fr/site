@@ -285,12 +285,12 @@
           {
             "siren": "344366315",
             "denomination": "ERNST & YOUNG AUDIT",
-            "role": null
+            "role": "Commissaire aux comptes titulaire"
           },
           {
             "siren": "387953961",
             "denomination": "MAZARS ET ASSOCIÉS",
-            "role": null
+            "role": "Commissaire aux comptes titulaire"
           }
         ]
       }
