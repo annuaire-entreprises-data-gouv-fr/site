@@ -25,6 +25,7 @@ export function DataSectionClient<T>({
   ...props
 }: IDataSectionClientProps<T>) {
   const showLoadingState = useShowLoadingState(data);
+
   if (isAPILoading(data) && !showLoadingState) {
     return <div style={{ minHeight: '100px' }} />;
   }
@@ -49,19 +50,19 @@ export function DataSectionClient<T>({
 
 /** Contains the logic that prevents flickering of UI */
 function useShowLoadingState<T>(data: IAPILoading | T): data is IAPILoading {
-  const after100ms = useTimeout(100);
+  const before100ms = !useTimeout(100);
   const before800ms = !useTimeout(800);
   const [dataLoadedBefore100ms, setDataLoadedBefore100ms] = useState(
-    !isAPILoading(data)
+    before100ms && !isAPILoading(data)
   );
 
   useEffect(() => {
-    if (!isAPILoading(data) && !after100ms) {
+    if (!isAPILoading(data) && before100ms) {
       setDataLoadedBefore100ms(true);
     }
-  }, [data, after100ms]);
+  }, [data]);
 
-  if (dataLoadedBefore100ms) {
+  if (before100ms || dataLoadedBefore100ms) {
     return false;
   }
   if (before800ms) {
