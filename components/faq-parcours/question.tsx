@@ -2,8 +2,7 @@ import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import ButtonLink from '#components-ui/button';
 import { MultiChoice } from '#components-ui/multi-choice';
 import TextWrapper from '#components-ui/text-wrapper';
-import MatomoEvent from '#components/matomo-event';
-import { allData } from '#models/administrations';
+import { allDataToModify } from '#models/administrations/data-to-modify';
 import { IFaqArticle } from '#models/article/faq';
 import constants from '#models/constants';
 export enum EQuestionType {
@@ -114,7 +113,7 @@ export default function Question({
           </p>
           <MultiChoice
             idPrefix="modification"
-            values={allData
+            values={allDataToModify
               .filter((data) => {
                 if (userType === 'agent' || userType === 'all') {
                   return true;
@@ -127,60 +126,11 @@ export default function Question({
               })
               .map((data) => {
                 return {
-                  onClick: () => selectDataToModify(data),
-                  checked: data.label === dataToModify.label,
+                  href: `/faq/modifier/${data.slug}`,
                   label: data.label,
                 };
               })}
           />
-          {dataToModify && (
-            <Answer>
-              <span ref={bottomRef} />
-              <MatomoEvent
-                category="parcours:modification"
-                action={userType}
-                name={dataToModify.label}
-              />
-              Comment modifier les informations suivantes ?
-              <p>
-                “<strong>{dataToModify.label}</strong>”
-              </p>
-              <p>Ces informations proviennent de :</p>
-              <ul>
-                <li>
-                  Source de la donnée :{' '}
-                  <a href={dataToModify.datagouvLink}>
-                    {dataToModify.dataSource}
-                  </a>
-                </li>
-                <li>
-                  Service responsable :{' '}
-                  <a href={dataToModify.site}>{dataToModify.long}</a>.
-                </li>
-              </ul>
-              {dataToModify.form ? (
-                <>
-                  <p>
-                    Cette administration propose une démarche en ligne&nbsp;:
-                  </p>
-                  <div className="layout-center">
-                    <ButtonLink to={dataToModify.form}>
-                      Accéder à la démarche en ligne
-                    </ButtonLink>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <br />
-                  <div className="layout-center">
-                    <ButtonLink to={dataToModify.contact}>
-                      Contacter le service ({dataToModify.short})
-                    </ButtonLink>
-                  </div>
-                </>
-              )}
-            </Answer>
-          )}
         </>
       );
     case EQuestionType.ALL:

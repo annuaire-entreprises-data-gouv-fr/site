@@ -4,22 +4,18 @@ import ButtonLink from '#components-ui/button';
 import TextWrapper from '#components-ui/text-wrapper';
 import { RenderMarkdownServerOnly } from '#components/markdown';
 import { allFaqArticles, getFaqArticle } from '#models/article/faq';
-import { InternalError } from '#models/exceptions';
+import { AppRouterProps } from '#utils/server-side-helper/app/extract-params';
+import { redirectFAQPageNotFound } from '#utils/server-side-helper/app/redirect-faq-not-found';
 
 type IParams = {
   slug: string;
 };
 
-export default async function FAQArticle({ params }: { params: IParams }) {
-  const slug = params.slug;
-  const article = getFaqArticle(slug);
+export default async function FAQArticle(props: AppRouterProps) {
+  const article = getFaqArticle(props.params.slug);
   if (!article) {
-    throw new InternalError({
-      message: 'Article not found',
-      context: params,
-    });
+    return redirectFAQPageNotFound(props.params.slug);
   }
-
   return (
     <>
       <TextWrapper>
@@ -69,17 +65,10 @@ export async function generateStaticParams(): Promise<Array<IParams>> {
     });
 }
 
-export const generateMetadata = function ({
-  params,
-}: {
-  params: IParams;
-}): Metadata {
-  const article = getFaqArticle(params.slug);
+export const generateMetadata = function (props: AppRouterProps): Metadata {
+  const article = getFaqArticle(props.params.slug);
   if (!article) {
-    throw new InternalError({
-      message: 'Article not found',
-      context: params,
-    });
+    return redirectFAQPageNotFound(props.params.slug);
   }
   return {
     title: article.seo.title || article.title,
