@@ -1,12 +1,13 @@
 'use client';
 
+import { ChangeEventHandler } from 'react';
 import styles from './style.module.css';
 
 export type IProps = {
   values: {
     label: string;
     value?: string;
-    onClick?: Function;
+    onClick?: ChangeEventHandler<HTMLInputElement>;
     href?: string;
     checked?: boolean;
   }[];
@@ -60,9 +61,9 @@ export const MultiChoice: React.FC<IProps> = ({
                 name={name}
                 value={value}
                 required={required}
-                //@ts-ignore
-                onChange={!!onClick ? onClick : () => null}
-                defaultChecked={checked}
+                onChange={!!onClick ? onClick : undefined}
+                checked={!!onClick ? checked : undefined}
+                defaultChecked={!!onClick ? undefined : checked}
                 tabIndex={-1}
               />
               <label
