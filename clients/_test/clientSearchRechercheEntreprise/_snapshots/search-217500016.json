@@ -331,6 +331,14 @@
               "lieuNaissance": ""
             },
             {
+              "sexe": "F",
+              "nom": "BOËLLE",
+              "prenom": "Sandrine",
+              "role": null,
+              "dateNaissancePartial": "1961-05",
+              "lieuNaissance": ""
+            },
+            {
               "sexe": "M",
               "nom": "BOHBOT",
               "prenom": "Jack-yves",
@@ -342,7 +350,7 @@
               "sexe": "M",
               "nom": "BONNET-OULALDJ",
               "prenom": "Nicolas",
-              "role": null,
+              "role": "36ème adjoint au Maire",
               "dateNaissancePartial": "1974-05",
               "lieuNaissance": ""
             },
@@ -376,14 +384,6 @@
               "prenom": "Anne-claire",
               "role": "6ème adjoint au Maire",
               "dateNaissancePartial": "1987-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "BOËLLE",
-              "prenom": "Sandrine",
-              "role": null,
-              "dateNaissancePartial": "1961-05",
               "lieuNaissance": ""
             },
             {
@@ -462,7 +462,7 @@
               "sexe": "M",
               "nom": "CHEVANDIER",
               "prenom": "Thomas",
-              "role": null,
+              "role": "37ème adjoint au Maire",
               "dateNaissancePartial": "1985-03",
               "lieuNaissance": ""
             },
@@ -531,14 +531,6 @@
               "lieuNaissance": ""
             },
             {
-              "sexe": "F",
-              "nom": "D'HAUTESERRE",
-              "prenom": "Jeanne",
-              "role": null,
-              "dateNaissancePartial": "1953-07",
-              "lieuNaissance": ""
-            },
-            {
               "sexe": "M",
               "nom": "DAGNAUD",
               "prenom": "François",
@@ -592,6 +584,14 @@
               "prenom": "Inès",
               "role": null,
               "dateNaissancePartial": "1987-09",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
+              "nom": "D'HAUTESERRE",
+              "prenom": "Jeanne",
+              "role": null,
+              "dateNaissancePartial": "1953-07",
               "lieuNaissance": ""
             },
             {
@@ -651,6 +651,14 @@
               "lieuNaissance": ""
             },
             {
+              "sexe": "M",
+              "nom": "FÉRAUD",
+              "prenom": "Rémi",
+              "role": null,
+              "dateNaissancePartial": "1971-08",
+              "lieuNaissance": ""
+            },
+            {
               "sexe": "F",
               "nom": "FILOCHE",
               "prenom": "Léa",
@@ -672,14 +680,6 @@
               "prenom": "Ségolène",
               "role": null,
               "dateNaissancePartial": "1994-08",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "FÉRAUD",
-              "prenom": "Rémi",
-              "role": null,
-              "dateNaissancePartial": "1971-08",
               "lieuNaissance": ""
             },
             {
@@ -1179,6 +1179,14 @@
               "lieuNaissance": ""
             },
             {
+              "sexe": "M",
+              "nom": "PÉCHENARD",
+              "prenom": "Frédéric",
+              "role": null,
+              "dateNaissancePartial": "1957-03",
+              "lieuNaissance": ""
+            },
+            {
               "sexe": "F",
               "nom": "PETIT",
               "prenom": "Carine",
@@ -1236,14 +1244,6 @@
             },
             {
               "sexe": "M",
-              "nom": "PÉCHENARD",
-              "prenom": "Frédéric",
-              "role": null,
-              "dateNaissancePartial": "1957-03",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
               "nom": "RABADAN",
               "prenom": "Pierre",
               "role": "31ème adjoint au Maire",
@@ -1276,6 +1276,14 @@
             },
             {
               "sexe": "F",
+              "nom": "RÉMY-LELEU",
+              "prenom": "Raphaëlle",
+              "role": null,
+              "dateNaissancePartial": "1992-01",
+              "lieuNaissance": ""
+            },
+            {
+              "sexe": "F",
               "nom": "RIVIER",
               "prenom": "Emmanuelle",
               "role": null,
@@ -1296,14 +1304,6 @@
               "prenom": "Jean-luc",
               "role": "33ème adjoint au Maire",
               "dateNaissancePartial": "1959-06",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "F",
-              "nom": "RÉMY-LELEU",
-              "prenom": "Raphaëlle",
-              "role": null,
-              "dateNaissancePartial": "1992-01",
               "lieuNaissance": ""
             },
             {
@@ -1414,7 +1414,7 @@
               "sexe": "F",
               "nom": "TONOLLI",
               "prenom": "Mélody",
-              "role": null,
+              "role": "35ème adjoint au Maire",
               "dateNaissancePartial": "1984-04",
               "lieuNaissance": ""
             },
@@ -1459,6 +1459,14 @@
               "lieuNaissance": ""
             },
             {
+              "sexe": "M",
+              "nom": "VÉRON",
+              "prenom": "Aurélien",
+              "role": null,
+              "dateNaissancePartial": "1969-04",
+              "lieuNaissance": ""
+            },
+            {
               "sexe": "F",
               "nom": "VERSINI",
               "prenom": "Dominique",
@@ -1472,14 +1480,6 @@
               "prenom": "Patrick",
               "role": null,
               "dateNaissancePartial": "1976-07",
-              "lieuNaissance": ""
-            },
-            {
-              "sexe": "M",
-              "nom": "VÉRON",
-              "prenom": "Aurélien",
-              "role": null,
-              "dateNaissancePartial": "1969-04",
               "lieuNaissance": ""
             },
             {
