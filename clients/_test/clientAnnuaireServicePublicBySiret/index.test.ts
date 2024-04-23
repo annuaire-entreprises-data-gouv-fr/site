@@ -1,12 +1,12 @@
 import { clientAnnuaireServicePublicBySiret } from '#clients/open-data-soft/clients/annuaire-service-public';
-import { Siren } from '#utils/helpers';
+import { Siret } from '#utils/helpers';
 import { expectClientToMatchSnapshot } from '../expect-client-to-match-snapshot';
 
 describe('clientEntrepreneurSpectacles', () => {
   it('Should match snapshot', async () => {
     await expectClientToMatchSnapshot({
       client: clientAnnuaireServicePublicBySiret,
-      args: ['13002526500013' as Siren],
+      args: ['13002526500013' as Siret],
       __dirname,
       snaphotFile: 'dinum.json',
       postProcessResult: (result) => {
