@@ -17,6 +17,7 @@ import UsefulShortcuts from '#components/useful-shortcuts';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { isAssociation, isCollectiviteTerritoriale } from '#models/core/types';
+import { getImmatriculationEORI } from '#models/espace-agent/immatriculation-eori';
 import { getServicePublicByUniteLegale } from '#models/service-public';
 import { EScope, hasRights } from '#models/user/rights';
 import {
@@ -50,15 +51,20 @@ export const generateMetadata = async (
 };
 
 export default async function UniteLegalePage(props: AppRouterProps) {
-  const session = await getSession();
   const { slug, page, isBot, isRedirected } = extractParamsAppRouter(props);
+  const session = await getSession();
   const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
-  const [servicePublic] = await Promise.all([
+  const [servicePublic, immatriculationEORI] = await Promise.all([
     getServicePublicByUniteLegale(uniteLegale, {
       isBot,
     }),
+    hasRights(session, EScope.eori)
+      ? getImmatriculationEORI(uniteLegale.siege.siret)
+      : null,
   ]);
+
+  console.log('immatriculationEORI', immatriculationEORI);
 
   return (
     <>
@@ -78,6 +84,7 @@ export default async function UniteLegalePage(props: AppRouterProps) {
             <UniteLegaleSection uniteLegale={uniteLegale} session={session} />
             {hasRights(session, EScope.isAgent) && (
               <EspaceAgentSummarySection
+                immatriculationEORI={immatriculationEORI}
                 uniteLegale={uniteLegale}
                 session={session}
               />

@@ -2,20 +2,29 @@ import FAQLink from '#components-ui/faq-link';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
+import NonRenseigne from '#components/non-renseigne';
 import { Section } from '#components/section';
 import { TwoColumnTable } from '#components/table/simple';
+import {
+  IAPINotRespondingError,
+  isAPI404,
+  isAPINotResponding,
+} from '#models/api-not-responding';
 import { IUniteLegale } from '#models/core/types';
+import { IImmatriculationEORI } from '#models/espace-agent/immatriculation-eori';
 import { EScope, hasRights } from '#models/user/rights';
 import { ISession } from '#models/user/session';
 import { NextPageWithLayout } from 'pages/_app';
 
 interface IProps {
   uniteLegale: IUniteLegale;
+  immatriculationEORI: IImmatriculationEORI | null | IAPINotRespondingError;
   session: ISession | null;
 }
 
 export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
   uniteLegale,
+  immatriculationEORI,
   session,
 }) => {
   return (
@@ -84,6 +93,24 @@ export const EspaceAgentSummarySection: NextPageWithLayout<IProps> = ({
                     <a href={`/documents/${uniteLegale.siren}#conformite`}>
                       → Consulter les attestations fiscales et sociales
                     </a>,
+                  ],
+                ]
+              : []),
+            ...(hasRights(session, EScope.eori) &&
+            immatriculationEORI &&
+            (!isAPINotResponding(immatriculationEORI) ||
+              isAPI404(immatriculationEORI))
+              ? [
+                  ['', <br />],
+                  [
+                    'Immatriculation EORI',
+                    isAPI404(immatriculationEORI) ? (
+                      <NonRenseigne />
+                    ) : !immatriculationEORI.actif ? (
+                      'Non actif'
+                    ) : (
+                      immatriculationEORI.identifiantEORI
+                    ),
                   ],
                 ]
               : []),

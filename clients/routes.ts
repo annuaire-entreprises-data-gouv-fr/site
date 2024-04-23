@@ -12,12 +12,13 @@ const routes = {
     tva: '/api/data-fetching/verify-tva/',
   },
   apiEntreprise: {
-    association: '/v4/djepva/api-association/associations/',
     conformite: {
-      fiscale: '/v4/dgfip/unites_legales/',
-      vigilance: '/v4/urssaf/unites_legales/',
-      msa: '/v3/msa/etablissements/',
+      fiscale: '/v4/dgfip/unites_legales/{siren}/attestation_fiscale',
+      vigilance: '/v4/urssaf/unites_legales/{siren}/attestation_vigilance',
+      msa: '/v3/msa/etablissements/{siret}/conformite_cotisations',
     },
+    immatriculationEORI:
+      '/v3/douanes/etablissements/{siret}/immatriculations_eori',
   },
   ban: 'https://api-adresse.data.gouv.fr/search/?q=',
   bodacc: {
