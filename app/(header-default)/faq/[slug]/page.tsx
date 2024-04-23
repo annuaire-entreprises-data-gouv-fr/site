@@ -5,7 +5,6 @@ import TextWrapper from '#components-ui/text-wrapper';
 import { RenderMarkdownServerOnly } from '#components/markdown';
 import { allFaqArticles, getFaqArticle } from '#models/article/faq';
 import { InternalError } from '#models/exceptions';
-import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 
 type IParams = {
   slug: string;
@@ -70,7 +69,7 @@ export async function generateStaticParams(): Promise<Array<IParams>> {
     });
 }
 
-export const generateMetadata = withErrorHandler(function ({
+export const generateMetadata = function ({
   params,
 }: {
   params: IParams;
@@ -90,4 +89,4 @@ export const generateMetadata = withErrorHandler(function ({
       canonical: `https://annuaire-entreprises.data.gouv.fr/faq/${article.slug}`,
     },
   };
-});
+};

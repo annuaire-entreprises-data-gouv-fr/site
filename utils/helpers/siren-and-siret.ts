@@ -1,9 +1,4 @@
-import {
-  NotASirenError,
-  NotASiretError,
-  NotLuhnValidSirenError,
-  NotLuhnValidSiretError,
-} from '#models/core/types';
+import { NotASirenError, NotASiretError } from '#models/core/types';
 
 /**
  * Siren and siret types
@@ -28,17 +23,17 @@ export const verifyTVANumber = (slug: string): TVANumber => {
 };
 
 export type Siren = Brand<string, 'Siren'>;
-export type Siret = Brand<string, 'Siren'>;
+export type Siret = Brand<string, 'Siret'>;
 
 export const isSiren = (slug: string): slug is Siren => {
-  if (!hasSirenFormat(slug) || !isLuhnValid(slug)) {
+  if (!hasSirenFormat(slug)) {
     return false;
   }
   return true;
 };
 
-export const isSiret = (slug: string): slug is Siren => {
-  if (!hasSiretFormat(slug) || !isLuhnValid(slug)) {
+export const isSiret = (slug: string): slug is Siret => {
+  if (!hasSiretFormat(slug)) {
     return false;
   }
   return true;
@@ -49,11 +44,7 @@ export const isSiret = (slug: string): slug is Siren => {
  * */
 export const verifySiren = (slug: string): Siren => {
   if (!isSiren(slug)) {
-    if (!hasSirenFormat(slug)) {
-      throw new NotASirenError(slug);
-    } else {
-      throw new NotLuhnValidSirenError(slug);
-    }
+    throw new NotASirenError(slug);
   }
   return slug;
 };
@@ -63,11 +54,7 @@ export const verifySiren = (slug: string): Siren => {
  * */
 export const verifySiret = (slug: string): Siret => {
   if (!isSiret(slug)) {
-    if (!hasSiretFormat(slug)) {
-      throw new NotASiretError(slug);
-    } else {
-      throw new NotLuhnValidSiretError(slug);
-    }
+    throw new NotASiretError(slug);
   }
   return slug;
 };
@@ -102,8 +89,16 @@ export const isLuhnValid = (str: string) => {
   return luhnChecksum(str) % 10 === 0;
 };
 
+export const isLikelyASiren = (slug: string) => {
+  return hasSirenFormat(slug) && slug.length === 9;
+};
+
+export const isLikelyASiret = (slug: string) => {
+  return hasSiretFormat(slug) && slug.length === 14;
+};
+
 export const isLikelyASiretOrSiren = (slug: string) => {
-  return hasSirenFormat(slug) || hasSiretFormat(slug);
+  return isLikelyASiren(slug) || isLikelyASiret(slug);
 };
 
 export const hasSirenFormat = (str: string) => !!str.match(/^\d{9}$/g);

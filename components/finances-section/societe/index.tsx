@@ -1,3 +1,5 @@
+'use client';
+
 import { Info } from '#components-ui/alerts';
 import FAQLink from '#components-ui/faq-link';
 import { Tag } from '#components-ui/tag';

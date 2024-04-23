@@ -3,8 +3,6 @@ import { GetServerSidePropsContext } from 'next';
 import { ISession } from '#models/user/session';
 import { IReqWithSession } from '#utils/session/with-session';
 import { sessionOptions, setVisitTimestamp } from '../../session';
-import { errorRedirection } from '../redirection';
-import { getContext } from './error-context';
 
 export interface IPropsWithMetadata {
   metadata: {
@@ -32,8 +30,6 @@ export function postServerSideProps(
   ) => any
 ) {
   return async (context: GetServerSidePropsContext) => {
-    const url = context?.req?.url || '/unknown';
-
     const contextWithSession = context as IGetServerSidePropsContextWithSession;
     contextWithSession.req.session = await getIronSession<ISession>(
       context.req,
@@ -73,13 +69,9 @@ export function handleErrorFromServerSideProps<
     try {
       return await getServerSidePropsFunction(context);
     } catch (exception: any) {
-      const message = exception.message;
-      const ctx = getContext(context.req, message);
-      const { destination } = errorRedirection(exception, ctx, true);
-
       return {
         redirect: {
-          destination,
+          destination: 500,
           permanent: false,
         },
       };

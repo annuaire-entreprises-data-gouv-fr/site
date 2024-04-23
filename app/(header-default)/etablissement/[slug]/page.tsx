@@ -1,37 +1,23 @@
 import { Metadata } from 'next';
-import { cache } from 'react';
 import { NonDiffusibleSection } from '#components/non-diffusible-section';
 import ServicePublicSection from '#components/service-public-section';
 import { TitleEtablissementWithDenomination } from '#components/title-section/etablissement';
-import { getEtablissementWithUniteLegaleFromSlug } from '#models/core/etablissement';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { getServicePublicByEtablissement } from '#models/service-public';
 import {
   etablissementPageDescription,
   etablissementPageTitle,
-  extractSirenOrSiretSlugFromUrl,
   shouldNotIndex,
 } from '#utils/helpers';
+import { cachedEtablissementWithUniteLegale } from '#utils/server-side-helper/app/cached-methods';
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 import EtablissementSection from 'components/etablissement-section';
 import MatomoEventRedirected from 'components/matomo-event/search-redirected';
 
-const cachedEtablissementWithUniteLegale = cache(
-  async (slug: string, isBot: boolean) => {
-    const siretSlug = extractSirenOrSiretSlugFromUrl(slug);
-    const uniteLegale = await getEtablissementWithUniteLegaleFromSlug(
-      siretSlug,
-      isBot
-    );
-    return uniteLegale;
-  }
-);
-
-export const generateMetadata = withErrorHandler(async function (
+export const generateMetadata = async function (
   props: AppRouterProps
 ): Promise<Metadata> {
   const { slug, isBot } = extractParamsAppRouter(props);
@@ -50,18 +36,14 @@ export const generateMetadata = withErrorHandler(async function (
       canonical: `https://annuaire-entreprises.data.gouv.fr/etablissement/${etablissement.siret}`,
     },
   };
-});
+};
 
-export default withErrorHandler(async function EtablissementPage(
-  props: AppRouterProps
-) {
-  const session = await getSession();
-
+export default (async function EtablissementPage(props: AppRouterProps) {
   const { slug, isBot, isRedirected } = extractParamsAppRouter(props);
-
   const { etablissement, uniteLegale } =
     await cachedEtablissementWithUniteLegale(slug, isBot);
 
+  const session = await getSession();
   const servicePublic = await getServicePublicByEtablissement(
     uniteLegale,
     etablissement,

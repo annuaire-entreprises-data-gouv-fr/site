@@ -7,11 +7,12 @@ export type AppRouterProps = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-const extractParamsAppRouter = ({
+function extractParamsAppRouter({
   params,
   searchParams,
-}: Partial<AppRouterProps>) => {
+}: Partial<AppRouterProps>) {
   const slug = (params?.slug || '') as string;
+
   searchParams = searchParams ?? {};
   const headersList = headers();
   const userAgent = headersList.get('user-agent') || '';
@@ -28,11 +29,11 @@ const extractParamsAppRouter = ({
   const isBot = !!isABotParam || isABotUA;
 
   return {
-    slug,
     isRedirected,
     page,
     isBot,
+    slug,
   };
-};
+}
 
 export default extractParamsAppRouter;

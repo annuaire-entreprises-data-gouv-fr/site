@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import routes from '#clients/routes';
 import ButtonLink from '#components-ui/button';

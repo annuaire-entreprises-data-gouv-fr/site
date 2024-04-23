@@ -165,7 +165,9 @@ class UniteLegaleBuilder {
      * Sirene Insee failed
      */
     if (isAPINotResponding(uniteLegaleInsee)) {
-      if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
+      if (isAPI404(uniteLegaleRechercheEntreprise)) {
+        throw new SirenNotFoundError(this._siren);
+      } else if (isAPINotResponding(uniteLegaleRechercheEntreprise)) {
         throw new HttpServerError('Both API failed');
       } else {
         return uniteLegaleRechercheEntreprise;

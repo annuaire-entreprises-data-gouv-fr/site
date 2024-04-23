@@ -1,3 +1,5 @@
+'use client';
+
 import { PrintNever } from '#components-ui/print-visibility';
 import { DataSectionClient } from '#components/section/data-section/client';
 import { TwoColumnTable } from '#components/table/simple';

@@ -1,29 +1,74 @@
 import { getIronSession } from 'iron-session';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import { Exception } from '#models/exceptions';
 import { ISession } from '#models/user/session';
-import { extractSirenOrSiretSlugFromUrl } from '#utils/helpers';
+import {
+  extractSirenOrSiretSlugFromUrl,
+  isLikelyASiren,
+  isLikelyASiret,
+} from '#utils/helpers';
+import logErrorInSentry from '#utils/sentry';
 import { sessionOptions, setVisitTimestamp } from '#utils/session';
+
+const shouldRedirect = (path: string, search: string, url: string) => {
+  try {
+    const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(path);
+    if (sirenOrSiretSlug) {
+      if (path.startsWith('/entreprise/')) {
+        if (isLikelyASiret(sirenOrSiretSlug)) {
+          return new URL(`/etablissement/${sirenOrSiretSlug}`, url);
+        } else if (!isLikelyASiren(sirenOrSiretSlug)) {
+          return new URL(`/404`, url);
+        }
+      }
+
+      if (path.startsWith('/etablissement/')) {
+        if (isLikelyASiren(sirenOrSiretSlug)) {
+          return new URL(`/entreprise/${sirenOrSiretSlug}`, url);
+        } else if (!isLikelyASiret(sirenOrSiretSlug)) {
+          return new URL(`/404`, url);
+        }
+      }
+    }
+
+    if (path.startsWith('/rechercher')) {
+      const sirenOrSiretParam = extractSirenOrSiretSlugFromUrl(
+        search.replaceAll(/[+]|(%20)/g, '')
+      );
+
+      if (isLikelyASiret(sirenOrSiretParam)) {
+        return new URL(`/etablissement/${sirenOrSiretParam}`, url);
+      } else if (isLikelyASiren(sirenOrSiretParam)) {
+        return new URL(`/entreprise/${sirenOrSiretParam}`, url);
+      }
+    }
+  } catch (e) {
+    logErrorInSentry(
+      new Exception({
+        name: 'FailedToRedirectInMiddleware',
+        cause: e,
+        context: {
+          page: path,
+        },
+      })
+    );
+  }
+  return null;
+};
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(pathname);
 
-  const isEntreprisePage = pathname.startsWith('/entreprise/');
+  const redirection = shouldRedirect(
+    request.nextUrl.pathname,
+    request.nextUrl.search,
+    request.url
+  );
 
-  if (isEntreprisePage && sirenOrSiretSlug.length === 14) {
-    return NextResponse.redirect(
-      new URL(`/etablissement/${sirenOrSiretSlug}`, request.url)
-    );
-  }
-
-  const isEtablissementPage = pathname.startsWith('/etablissement/');
-
-  if (isEtablissementPage && sirenOrSiretSlug.length === 9) {
-    return NextResponse.redirect(
-      new URL(`/entreprise/${sirenOrSiretSlug}`, request.url)
-    );
+  if (redirection) {
+    return NextResponse.redirect(redirection);
   }
 
   /**
@@ -68,5 +113,12 @@ export async function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/entreprise/:path*', '/etablissement/:path*'],
+  matcher: [
+    '/entreprise/:path*',
+    '/etablissement/:path*',
+    '/rechercher/:path*',
+    '/rechercher/carte/:path*',
+    '/justificatif/:path*',
+    '/dirigeant/:path*',
+  ],
 };

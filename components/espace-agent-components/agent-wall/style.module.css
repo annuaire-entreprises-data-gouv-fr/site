@@ -1,40 +1,42 @@
 .cta-wrapper {
-    position: relative;
+  position: relative;
 }
 
 .blur {
-    filter: blur(6px);
-    user-select: none;
-    bubble-event: none;
-    pointer-events: none;
+  filter: blur(6px);
+  user-select: none;
+  bubble-event: none;
+  pointer-events: none;
 }
 
 .cta-actes {
-    margin: 20px 20%;
-    position: absolute;
-    z-index: 10;
+  margin: 20px 20%;
+  position: absolute;
+  z-index: 10;
 }
 
-
+.cta-actes > h3 {
+  margin: 10px;
+}
 
 @media only screen and (min-width: 1px) and (max-width: 768px) {
-    .blur {
-        display: none;
-    }
+  .blur {
+    display: none;
+  }
 
-    .cta-actes {
-        padding: 0;
-        position: relative;
-    }
+  .cta-actes {
+    padding: 0;
+    position: relative;
+  }
 
-    .cta-actes>div {
-        padding: 0;
-        box-shadow: none;
-        border: none;
-    }
+  .cta-actes > div {
+    padding: 0;
+    box-shadow: none;
+    border: none;
+  }
 
-    .cta-footer {
-        font-size: 0.9rem;
-        background-color: transparent;
-    }
+  .cta-footer {
+    font-size: 0.9rem;
+    background-color: transparent;
+  }
 }

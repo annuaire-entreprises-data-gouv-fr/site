@@ -2,11 +2,7 @@ import { HttpBadRequestError, HttpNotFound } from '#clients/exceptions';
 import clientSearchRechercheEntreprise from '#clients/recherche-entreprise';
 import { IDirigeant } from '#models/immatriculation';
 import SearchFilterParams from '#models/search-filter-params';
-import {
-  cleanSearchTerm,
-  isLikelyASiretOrSiren,
-  removeSpecialChars,
-} from '#utils/helpers';
+import { removeSpecialChars } from '#utils/helpers';
 import { isProtectedSiren } from '#utils/helpers/is-protected-siren-or-siret';
 import { logWarningInSentry } from '#utils/sentry';
 import {
@@ -46,13 +42,6 @@ const search = async (
   page: number,
   searchFilterParams: SearchFilterParams
 ) => {
-  const cleanedTerm = cleanSearchTerm(searchTerm);
-  const likelyASiretOrSiren = isLikelyASiretOrSiren(cleanedTerm);
-
-  if (likelyASiretOrSiren) {
-    throw new IsLikelyASirenOrSiretException(cleanedTerm);
-  }
-
   try {
     const escapedSearchTerm = removeSpecialChars(searchTerm);
     return await clientSearchRechercheEntreprise({

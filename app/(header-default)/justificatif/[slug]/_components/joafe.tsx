@@ -1,0 +1,71 @@
+import React from 'react';
+import ButtonLink from '#components-ui/button';
+import { Icon } from '#components-ui/icon/wrapper';
+import BreakPageForPrint from '#components-ui/print-break-page';
+import { PrintNever } from '#components-ui/print-visibility';
+import { DataSectionServer } from '#components/section/data-section/server';
+import { EAdministration } from '#models/administrations/EAdministration';
+import { IAPINotRespondingError } from '#models/api-not-responding';
+import { IImmatriculationJOAFE } from '#models/immatriculation/joafe';
+import { formatDate, formatIntFr } from '#utils/helpers';
+import { TwoColumnTable } from '../../../../../components/table/simple';
+
+type IProps = {
+  immatriculation: IImmatriculationJOAFE | IAPINotRespondingError;
+};
+
+const ImmatriculationJOAFE: React.FC<IProps> = ({ immatriculation }) => (
+  <>
+    <DataSectionServer
+      id="joafe"
+      title="Enregistrement au JOAFE"
+      sources={[EAdministration.DILA]}
+      data={immatriculation}
+      notFoundInfo={
+        <>
+          Cette structure n’est pas enregistrée au{' '}
+          <strong>Journal Officiel des Associations (JOAFE)</strong>.
+        </>
+      }
+    >
+      {(immatriculation) => {
+        const data = [
+          ['Siren', formatIntFr(immatriculation.siren)],
+          ['N°RNA', formatIntFr(immatriculation.idRna)],
+          [
+            'Date d’enregistrement',
+            formatDate(immatriculation.datePublication),
+          ],
+        ];
+        return (
+          <>
+            <p>
+              Cette structure est enregistrée au{' '}
+              <strong>Journal Officiel des Association (JOAFE)</strong>.
+            </p>
+            <TwoColumnTable body={data} />
+            {immatriculation.downloadLink && (
+              <PrintNever>
+                <p>
+                  Pour accéder à l’annonce de création de l’association,
+                  téléchargez le document ci-dessous :
+                </p>
+                <div className="layout-center">
+                  <ButtonLink
+                    target="_blank"
+                    to={`${immatriculation.downloadLink}`}
+                  >
+                    <Icon slug="download">Télécharger le justificatif</Icon>
+                  </ButtonLink>
+                </div>
+              </PrintNever>
+            )}
+          </>
+        );
+      }}
+    </DataSectionServer>
+    <BreakPageForPrint />
+  </>
+);
+
+export default ImmatriculationJOAFE;

@@ -3,6 +3,7 @@ import MultipleSirenAlert from '#components-ui/alerts-with-explanations/multiple
 import NoSiegeSocialAlert from '#components-ui/alerts-with-explanations/no-siege-social';
 import NonDiffusibleAlert from '#components-ui/alerts-with-explanations/non-diffusible';
 import NotInSireneAlert from '#components-ui/alerts-with-explanations/not-in-sirene-alert';
+import { NotLuhnValidAlert } from '#components-ui/alerts-with-explanations/not-luhn-valid';
 import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import { ISTATUTDIFFUSION } from '#models/core/statut-diffusion';
@@ -21,6 +22,7 @@ export default function TitleAlerts({
 }) {
   return (
     <>
+      <NotLuhnValidAlert uniteLegale={uniteLegale} />
       <NoSiegeSocialAlert uniteLegale={uniteLegale} />
       <MultipleSirenAlert uniteLegale={uniteLegale} />
       <NotInSireneAlert uniteLegale={uniteLegale} />

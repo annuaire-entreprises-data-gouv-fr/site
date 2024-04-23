@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { cache } from 'react';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
 import BreakPageForPrint from '#components-ui/print-break-page';
 import AssociationSection from '#components/association-section';
@@ -18,59 +17,42 @@ import UsefulShortcuts from '#components/useful-shortcuts';
 import { isAPINotResponding } from '#models/api-not-responding';
 import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { isAssociation, isCollectiviteTerritoriale } from '#models/core/types';
-import { getUniteLegaleFromSlug } from '#models/core/unite-legale';
 import { getServicePublicByUniteLegale } from '#models/service-public';
 import { EScope, hasRights } from '#models/user/rights';
 import {
-  extractSirenOrSiretSlugFromUrl,
   shouldNotIndex,
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from '#utils/helpers';
+import { cachedGetUniteLegale } from '#utils/server-side-helper/app/cached-methods';
 import extractParamsAppRouter, {
   AppRouterProps,
 } from '#utils/server-side-helper/app/extract-params';
 import getSession from '#utils/server-side-helper/app/get-session';
-import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 
-const cachedGetUniteLegale = cache(
-  async (slug: string, page: number, isBot: boolean) => {
-    const sirenSlug = extractSirenOrSiretSlugFromUrl(slug);
-    const uniteLegale = await getUniteLegaleFromSlug(sirenSlug, {
-      page,
-      isBot,
-    });
-    return uniteLegale;
-  }
-);
-
-export const generateMetadata = withErrorHandler(
-  async (props: AppRouterProps): Promise<Metadata> => {
-    const { slug, page, isBot } = extractParamsAppRouter(props);
-
-    const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
-    const session = await getSession();
-    return {
-      title: uniteLegalePageTitle(uniteLegale, session),
-      description: uniteLegalePageDescription(uniteLegale, session),
-      robots: shouldNotIndex(uniteLegale)
-        ? 'noindex, nofollow'
-        : 'index, follow',
-      alternates: {
-        canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${
-          uniteLegale.chemin || uniteLegale.siren
-        }`,
-      },
-    };
-  }
-);
-
-export default withErrorHandler(async function UniteLegalePage(
+export const generateMetadata = async (
   props: AppRouterProps
-) {
+): Promise<Metadata> => {
+  const { slug, page, isBot } = extractParamsAppRouter(props);
+
+  const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
+  const session = await getSession();
+  return {
+    title: uniteLegalePageTitle(uniteLegale, session),
+    description: uniteLegalePageDescription(uniteLegale, session),
+    robots: shouldNotIndex(uniteLegale) ? 'noindex, nofollow' : 'index, follow',
+    alternates: {
+      canonical: `https://annuaire-entreprises.data.gouv.fr/entreprise/${
+        uniteLegale.chemin || uniteLegale.siren
+      }`,
+    },
+  };
+};
+
+export default async function UniteLegalePage(props: AppRouterProps) {
   const session = await getSession();
   const { slug, page, isBot, isRedirected } = extractParamsAppRouter(props);
-  const uniteLegale = await cachedGetUniteLegale(slug, page, isBot);
+  const uniteLegale = await cachedGetUniteLegale(slug, isBot, page);
 
   const [servicePublic] = await Promise.all([
     getServicePublicByUniteLegale(uniteLegale, {
@@ -139,4 +121,4 @@ export default withErrorHandler(async function UniteLegalePage(
       <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
     </>
   );
-});
+}

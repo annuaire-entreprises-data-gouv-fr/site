@@ -4,15 +4,21 @@ import { estNonDiffusible } from '#models/core/statut-diffusion';
 import { IUniteLegale } from '#models/core/types';
 import { Warning } from '../alerts';
 
-const NotInSireneAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
-  uniteLegale,
-}) => {
+const NotInSireneAlert: React.FC<{
+  uniteLegale: IUniteLegale;
+}> = ({ uniteLegale }) => {
   /* non-diffusible = exist in insee so following do not apply */
   if (estNonDiffusible(uniteLegale)) {
     return null;
   }
 
   if (uniteLegale.dateMiseAJourInsee) {
+    return null;
+  }
+
+  if (!uniteLegale.dateMiseAJourInpi) {
+    // does not exist in RNE either
+    // should not exist in theory as UL come either from RNE or Sirene
     return null;
   }
 

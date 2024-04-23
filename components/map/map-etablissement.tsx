@@ -1,45 +1,96 @@
-import React from 'react';
+/* eslint-disable import/order */
+'use client';
+
 import constants from '#models/constants';
 import { IEtablissement } from '#models/core/types';
-import MaplibreInstance from '.';
+import { formatSiret } from '#utils/helpers';
+import maplibregl, { LngLatLike, Map } from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import { useEffect, useRef } from 'react';
+import './map.css';
 
-const MapEtablissement: React.FC<{ etablissement: IEtablissement }> = ({
+function checkLatLng(latitude: string, longitude: string): LngLatLike | null {
+  try {
+    const lat = parseFloat(latitude);
+    const lng = parseFloat(longitude);
+
+    if (lat < -90 || lat > 90) {
+      throw new Error('Invalid latitude');
+    }
+
+    if (lng < -180 || lng > 180) {
+      throw new Error('Invalid latitude');
+    }
+
+    return {
+      lat,
+      lng,
+    };
+  } catch {}
+  return null;
+}
+
+export function MapEtablissement({
   etablissement,
-}) => (
-  <>
-    <MaplibreInstance />
-    <script
-      async
-      defer
-      dangerouslySetInnerHTML={{
-        __html: `
-                function initMap(style) {
-                  var coords = [${etablissement.longitude}, ${
-          etablissement.latitude
-        }]
+}: {
+  etablissement: IEtablissement;
+}) {
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const map = useRef<Map>(null);
 
-                  var zoom = ${etablissement ? '12' : '4.5'};
+  const coords = checkLatLng(etablissement.latitude, etablissement.longitude);
 
-                  var map = new maplibregl.Map({
-                    container: 'map',
-                    style: style, // stylesheet location
-                    center: coords,
-                    zoom: zoom // starting zoom
-                  });
-                  ${
-                    etablissement
-                      ? `new maplibregl.Marker({ color: '${constants.colors.frBlue}' })
-                    .setLngLat(coords)
-                    .addTo(map);`
-                      : ''
-                  }
-                }
+  useEffect(() => {
+    if (map.current || !coords) return; // stops map from intializing more than once
 
-                fetch("https://etalab-tiles.fr/styles/osm-bright/style.json").then(res=> res.json()).then(el => initMap(el))
-              `,
+    const zoom = etablissement ? 12 : 4.5;
+
+    //@ts-ignore
+    map.current = new maplibregl.Map({
+      //@ts-ignore
+      container: mapContainer.current,
+      style: `https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json`,
+      center: coords,
+      zoom,
+      minZoom: 3,
+    });
+
+    const popup = new maplibregl.Popup({ offset: 30 }).setHTML(
+      `<div><strong>${formatSiret(etablissement.siret)}</strong><br/>📍${
+        etablissement.adresse
+      }</div>`
+    );
+
+    new maplibregl.Marker({ color: constants.colors.frBlue })
+      //@ts-ignore
+      .setLngLat(coords)
+      .setPopup(popup)
+      //@ts-ignore
+      .addTo(map.current);
+  }, [etablissement, coords]);
+
+  return (
+    <div
+      style={{
+        padding: '20px 0',
       }}
-    />
-  </>
-);
+    >
+      {coords ? (
+        <div
+          ref={mapContainer}
+          className="map"
+          style={{ width: '100%', zIndex: '0', height: '450px' }}
+        />
+      ) : (
+        <i>
+          Nous n’avons pas réussi à déterminer la géolocalisation de cet
+          établissement, car ses coordonnées (latitude :{' '}
+          {etablissement.latitude}°, longitude : {etablissement.longitude}°)
+          sont invalides.
+        </i>
+      )}
+    </div>
+  );
+}
 
 export default MapEtablissement;

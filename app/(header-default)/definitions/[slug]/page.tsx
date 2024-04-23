@@ -5,13 +5,12 @@ import TextWrapper from '#components-ui/text-wrapper';
 import { RenderMarkdownServerOnly } from '#components/markdown';
 import { allDefinitions, getDefinition } from '#models/article/definitions';
 import { InternalError } from '#models/exceptions';
-import withErrorHandler from '#utils/server-side-helper/app/with-error-handler';
 
 type IParams = {
   slug: string;
 };
 
-export const generateMetadata = withErrorHandler(function ({
+export const generateMetadata = function ({
   params,
 }: {
   params: IParams;
@@ -31,13 +30,9 @@ export const generateMetadata = withErrorHandler(function ({
       canonical: `https://annuaire-entreprises.data.gouv.fr/definitions/${definition.slug}`,
     },
   };
-});
+};
 
-export default withErrorHandler(function DefinitionPage({
-  params,
-}: {
-  params: IParams;
-}) {
+export default (function DefinitionPage({ params }: { params: IParams }) {
   const definition = getDefinition(params.slug);
   if (!definition || !definition.body || !definition.title) {
     throw new InternalError({
