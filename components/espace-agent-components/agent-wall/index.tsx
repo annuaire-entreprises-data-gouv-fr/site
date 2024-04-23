@@ -1,8 +1,9 @@
 import ButtonAgentConnect from '#components-ui/button-agent-connect';
+import FloatingModal from '#components-ui/floating-modal';
 import { Section } from '#components/section';
 import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
-import styles from './style.module.css';
+import style from './style.module.css';
 
 const AgentWall: React.FC<{
   title: string;
@@ -13,33 +14,31 @@ const AgentWall: React.FC<{
   return (
     <Section title={title} id={id} sources={[EAdministration.INPI]} isProtected>
       {sectionIntro}
-      <div className={styles['cta-wrapper']}>
-        <div className={styles['cta-actes']}>
-          <div>
-            <div>
-              <h3>Vous êtes agent public ?</h3>
-              <p>
-                Accédez immédiatement à ces données en continuant avec le bouton{' '}
-                <a
-                  href="https://agentconnect.gouv.fr/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
-                >
-                  AgentConnect
-                </a>
-                .
-              </p>
-              <p>
-                Disponible pour toutes les administrations, sans création de
-                compte.
-              </p>
-              <ButtonAgentConnect useCurrentPathForRediction />
-            </div>
-            <div className={styles['cta-footer']}>{modalFooter}</div>
-          </div>
-        </div>
-        <div className={styles['blur']} tab-index="-1" aria-hidden>
+      <div className={style['cta-wrapper']}>
+        <FloatingModal
+          agentColor
+          className={style['cta-actes']}
+          footer={modalFooter}
+        >
+          <h3>Vous êtes agent public ?</h3>
+          <p>
+            Accédez immédiatement à ces données en continuant avec le bouton{' '}
+            <a
+              href="https://agentconnect.gouv.fr/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Qu’est-ce que AgentConnect ? - nouvelle fenêtre"
+            >
+              AgentConnect
+            </a>
+            .
+          </p>
+          <p>
+            Disponible pour toutes les administrations, sans création de compte.
+          </p>
+          <ButtonAgentConnect useCurrentPathForRediction />
+        </FloatingModal>
+        <div className={style['blur']} tab-index="-1" aria-hidden>
           <p>
             Nous recrutons ! Consultez notre{' '}
             <a href="https://www.numerique.gouv.fr/rejoignez-nous/">

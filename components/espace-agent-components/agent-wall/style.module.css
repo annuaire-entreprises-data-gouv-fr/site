@@ -1,46 +1,34 @@
 .cta-wrapper {
   position: relative;
 }
+
 .blur {
   filter: blur(6px);
   user-select: none;
   bubble-event: none;
   pointer-events: none;
 }
+
 .cta-actes {
-  padding: 20px 20%;
+  margin: 20px 20%;
   position: absolute;
-  top: 0;
   z-index: 10;
-  height: 100%;
-  width: 100%;
 }
 
-.cta-actes > div {
-  background-color: #fff;
-  box-shadow: 0 0 20px 0 rgba(0.5, 0.5, 0.5, 0.1);
-  border: 1px solid rgba(0.5, 0.5, 0.5, 0.1);
-  border-radius: 3px;
-}
-
-.cta-actes > div > div:first-of-type {
-  padding: 0 30px 20px;
-}
-
-.cta-footer {
-  padding: 10px 30px;
-  font-size: 0.9rem;
-  background-color: var(--background-alt-grey);
+.cta-actes > h3 {
+  margin: 10px;
 }
 
 @media only screen and (min-width: 1px) and (max-width: 768px) {
   .blur {
     display: none;
   }
+
   .cta-actes {
     padding: 0;
     position: relative;
   }
+
   .cta-actes > div {
     padding: 0;
     box-shadow: none;

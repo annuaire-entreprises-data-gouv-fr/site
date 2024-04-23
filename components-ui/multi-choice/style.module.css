@@ -6,6 +6,7 @@
 
 .radio-group>div>label,
 .radio-group>div>div,
+.radio-group input[type='radio']+label,
 .radio-group>div>a {
     display: block;
     border-style: none;
@@ -18,7 +19,7 @@
 
 }
 
-.radio-group>div>input {
+.radio-group input[type='radio'] {
     opacity: 0;
     height: 0;
     width: 0;
@@ -29,6 +30,14 @@
 .radio-group>div>div:hover,
 .radio-group>div>a:hover {
     border: 2px dashed var(--annuaire-colors-frBlue)
+}
+
+.radio-group input[type='radio']:focus-visible+label,
+.radio-group input[type='radio']+label:focus {
+    outline-style: solid;
+    outline-color: #0a76f6;
+    outline-width: 2px;
+    outline-offset: 2px;
 }
 
 .radio-group input[type='radio']:checked+label {
