@@ -33,7 +33,13 @@ const handleException = (e: any, slug: string) => {
       e instanceof SirenNotFoundError ||
       e instanceof SiretNotFoundError
     ) {
-      logWarningInSentry(e);
+      logWarningInSentry(
+        new Exception({
+          name: 'SirenNotFoundOrInvalid',
+          cause: e,
+          context: { slug },
+        })
+      );
       redirect('/erreur/introuvable/' + slug);
     } else if (e instanceof FetchRechercheEntrepriseException) {
       logFatalErrorInSentry(e);
