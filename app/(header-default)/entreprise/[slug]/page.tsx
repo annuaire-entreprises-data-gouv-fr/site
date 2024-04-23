@@ -59,12 +59,8 @@ export default async function UniteLegalePage(props: AppRouterProps) {
     getServicePublicByUniteLegale(uniteLegale, {
       isBot,
     }),
-    hasRights(session, EScope.eori)
-      ? getImmatriculationEORI(uniteLegale.siege.siret)
-      : null,
+    getImmatriculationEORI(uniteLegale.siege.siret, session),
   ]);
-
-  console.log('immatriculationEORI', immatriculationEORI);
 
   return (
     <>

@@ -1,6 +1,7 @@
 import type { IronSession, SessionOptions } from 'iron-session';
 import { IScope } from '#models/user/scopes';
 import { ISession } from '#models/user/session';
+import { Siret } from '#utils/helpers';
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_PWD as string,
@@ -30,7 +31,7 @@ export const setAgentSession = async (
     firstName,
     familyName,
     fullName: familyName ? `${firstName} ${familyName}` : undefined,
-    siret,
+    siret: siret as Siret,
     userType,
     scopes,
   };

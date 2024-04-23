@@ -1,3 +1,4 @@
+import { Siret } from '#utils/helpers';
 import { IScope } from './scopes';
 
 export type ISession = {
@@ -7,7 +8,7 @@ export type ISession = {
     familyName?: string;
     firstName?: string;
     fullName?: string;
-    siret?: string;
+    siret?: Siret;
     userType?: string;
     scopes?: IScope[];
   };

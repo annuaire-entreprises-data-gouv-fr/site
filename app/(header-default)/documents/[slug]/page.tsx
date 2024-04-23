@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
+import { clientApiEntrepriseCarteProfessionnelleTravauxPublics } from '#clients/api-entreprise/carte-professionnelle-travaux-publics';
 import { HorizontalSeparator } from '#components-ui/horizontal-separator';
+import { CarteProfessionnelleTravauxPublicsSection } from '#components/carte-professionnelle-travaux-publics-section';
 import ConformiteSection from '#components/espace-agent-components/conformite-section';
 import ActesSection from '#components/espace-agent-components/documents/actes-walled';
 import Title from '#components/title-section';
@@ -42,7 +44,14 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
   const session = await getSession();
   const { slug, isBot } = extractParamsAppRouter(props);
   const uniteLegale = await cachedGetUniteLegale(slug, isBot);
-
+  const carteProfessionnelleTravauxPublics = hasRights(
+    session,
+    EScope.carteProfessionnelleTravauxPublics
+  )
+    ? await clientApiEntrepriseCarteProfessionnelleTravauxPublics(
+        uniteLegale.siren
+      )
+    : null;
   return (
     <>
       <div className="content-container">
@@ -58,6 +67,15 @@ const UniteLegaleDocumentPage = async (props: AppRouterProps) => {
           </>
         )}
         <ActesSection uniteLegale={uniteLegale} session={session} />
+        {carteProfessionnelleTravauxPublics && (
+          <>
+            <CarteProfessionnelleTravauxPublicsSection
+              carteProfessionnelleTravauxPublics={
+                carteProfessionnelleTravauxPublics
+              }
+            />
+          </>
+        )}
       </div>
     </>
   );

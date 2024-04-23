@@ -19,6 +19,15 @@ const routes = {
     },
     immatriculationEORI:
       '/v3/douanes/etablissements/{siret}/immatriculations_eori',
+    carteProfessionnelleTravauxPublics:
+      '/v3/fntp/unites_legales/{siren}/carte_professionnelle_travaux_publics',
+    certifications: {
+      qualifelec: '/v3/qualifelec/etablissements/{siret}/certificats',
+      qualibat: '/v3/qualibat/etablissements/{siret}/certification_batiment',
+      opqibi: '/v3/opqibi/unites_legales/{siren}/certification_ingenierie',
+    },
+    mandatairesRCS:
+      '/v3/infogreffe/rcs/unites_legales/{siren}/mandataires_sociaux',
   },
   ban: 'https://api-adresse.data.gouv.fr/search/?q=',
   bodacc: {
