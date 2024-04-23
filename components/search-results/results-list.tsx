@@ -95,7 +95,8 @@ const ResultItem: React.FC<{
           )}
         </div>
         <div>
-          {result.libelleActivitePrincipale} ({result.activitePrincipale})
+          {result.libelleActivitePrincipale}{' '}
+          {result.activitePrincipale ? `(${result.activitePrincipale})` : null}
         </div>
         <DirigeantsOrElusList
           dirigeantsOrElus={

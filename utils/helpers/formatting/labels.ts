@@ -71,11 +71,11 @@ export const libelleFromCodeNAF = (
 ) => {
   const codes = getNomenclature(nomenclature);
 
-  const label =
-    //@ts-ignore
-    codes[code] || libelleFromCodeNAFWithoutNomenclature(code);
+  //@ts-ignore
+  const codeLabel = code ? codes[code] : undefined;
+  const label = codeLabel || libelleFromCodeNAFWithoutNomenclature(code);
 
-  return addCode && code ? `${label} (${code})` : label;
+  return addCode && codeLabel ? `${label} (${code})` : label;
 };
 
 export const libelleFromCodeSectionNaf = (code: string) => {
