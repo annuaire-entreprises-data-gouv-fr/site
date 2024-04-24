@@ -2,10 +2,12 @@ import { Metadata } from 'next';
 import TextWrapper from '#components-ui/text-wrapper';
 import parseMarkdownSync from '#components/markdown/parse-markdown';
 import StructuredDataFAQ from '#components/structured-data/faq';
+import { allDataToModify } from '#models/administrations/data-to-modify';
 import { allFaqArticles } from '#models/article/faq';
 
 export default function FAQPage() {
   const articles = allFaqArticles;
+
   return (
     <>
       <StructuredDataFAQ
@@ -20,6 +22,14 @@ export default function FAQPage() {
           {articles.map(({ slug, title }) => (
             <li key={slug}>
               <a href={`/faq/${slug}`}>{title}</a>
+            </li>
+          ))}
+        </ul>
+        <h2>Comment modifier les informations d’une entreprise ?</h2>
+        <ul>
+          {allDataToModify.map(({ label, slug }) => (
+            <li key={slug}>
+              <a href={`/faq/modifier/${slug}`}>{label}</a>
             </li>
           ))}
         </ul>

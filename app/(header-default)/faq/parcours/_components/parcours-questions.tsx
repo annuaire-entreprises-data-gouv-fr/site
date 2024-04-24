@@ -1,4 +1,5 @@
 'use client';
+
 import { useRef, useState } from 'react';
 import { MultiChoice } from '#components-ui/multi-choice';
 import Question, { EQuestionType } from '#components/faq-parcours/question';
