@@ -90,6 +90,8 @@ const clientSearchRechercheEntreprise = async ({
     url += `&page_etablissements=${pageEtablissements}`;
   }
 
+  url += `&mtm_campaign=annuaire-entreprises-site`;
+
   const timeout = fallbackOnStaging
     ? constants.timeout.XL
     : constants.timeout.L;
