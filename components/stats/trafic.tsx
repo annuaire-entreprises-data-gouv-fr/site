@@ -6,7 +6,9 @@ import constants from '#models/constants';
 
 type IStatType = 'agents' | 'users' | 'api';
 
-export const TraficStats: React.FC<IMatomoStats> = ({ visits }) => {
+export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
+  visits = [],
+}) => {
   const [statsType, setStatsType] = useState<IStatType>('users');
 
   const data = {
