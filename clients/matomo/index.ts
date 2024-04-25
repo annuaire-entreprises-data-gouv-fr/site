@@ -12,6 +12,7 @@ export type IMatomoStats = {
     agentUnknown: number;
     visitorReturning: number;
     visitorUnknown: number;
+    apiRequests: number;
   }[];
   monthlyNps: {
     label: string;
@@ -29,6 +30,9 @@ export type IMatomoStats = {
   copyPasteAction: { value: number; label: string }[];
   redirectedSiren: { value: number; label: string }[];
 };
+
+const SITE_ID = '145';
+const API_SITE_ID = '294';
 
 const getLabel = (labelAsString: string, index: number) => {
   if (
@@ -63,6 +67,8 @@ type IMatomoMonthlyStat = {
   nb_uniq_visitors_returning: number;
   nb_visits_new: number;
   nb_visits_returning: number;
+  nb_actions_returning: number;
+  nb_actions_new: number;
 };
 
 type IMatomoEventStat = { label: string; nb_events: number };
@@ -73,6 +79,7 @@ type IMatomoEventStat = { label: string; nb_events: number };
 const computeStats = (
   matomoMonthlyStats: IMatomoMonthlyStat[],
   matomoAgentMonthlyStats: IMatomoMonthlyStat[],
+  matomoAPIMonthlyStats: IMatomoMonthlyStat[],
   matomoCopyPasteEventStats: IMatomoEventStat[],
   matomoEventsCategory: IMatomoEventStat[][]
 ) => {
@@ -91,6 +98,11 @@ const computeStats = (
       nb_uniq_visitors_new: agentUnknown,
     } = matomoAgentMonthlyStats[index];
 
+    const { nb_actions_returning: api_returning, nb_actions_new: api_new } =
+      matomoAPIMonthlyStats[index];
+
+    const apiRequests = (api_returning + api_new) * 100;
+
     visits.push({
       number,
       label,
@@ -98,6 +110,7 @@ const computeStats = (
       agentUnknown,
       visitorReturning,
       visitorUnknown,
+      apiRequests,
     });
 
     redirectedSiren.push({
@@ -148,14 +161,18 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
     const [
       matomoMonthlyStats,
       matomoAgentMonthlyStats,
+      matomoAPIMonthlyStats,
       matomoCopyPasteEventStats,
       matomoEventsCategory,
       npsRecords,
     ] = await Promise.all([
-      httpGet<IMatomoMonthlyStat[]>(createPageViewUrl(), {
+      httpGet<IMatomoMonthlyStat[]>(createPageViewUrl(SITE_ID), {
         timeout: constants.timeout.XXL,
       }),
       httpGet<IMatomoMonthlyStat[]>(createAgentPageViewUrl(), {
+        timeout: constants.timeout.XXL,
+      }),
+      httpGet<IMatomoMonthlyStat[]>(createPageViewUrl(API_SITE_ID), {
         timeout: constants.timeout.XXL,
       }),
       httpGet<IMatomoEventStat[]>(createCopyPasteEventUrl(), {
@@ -170,6 +187,7 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
       ...computeStats(
         matomoMonthlyStats,
         matomoAgentMonthlyStats,
+        matomoAPIMonthlyStats,
         matomoCopyPasteEventStats,
         matomoEventsCategory
       ),
@@ -190,11 +208,11 @@ export const clientMatomoStats = async (): Promise<IMatomoStats> => {
 /**
  * Compute matomo API url to extract page view count
  */
-const createPageViewUrl = () => {
+const createPageViewUrl = (siteId: string) => {
   let baseUrl = routes.tooling.matomo.report.bulkRequest;
   lastTwelveMonths().forEach((month, index) => {
     baseUrl += `&urls[${index}]=`;
-    const subRequest = `idSite=145&period=month&method=VisitFrequency.get&module=VisitFrequency&date=${month.firstDay}`;
+    const subRequest = `idSite=${siteId}&period=month&method=VisitFrequency.get&module=VisitFrequency&date=${month.firstDay}`;
 
     baseUrl += encodeURIComponent(subRequest);
   });
@@ -205,7 +223,7 @@ const createPageViewUrl = () => {
 const createAgentPageViewUrl = () => {
   const agentConnecté = encodeURIComponent('Agent connecté');
   const segment = encodeURIComponent('dimension1==' + agentConnecté);
-  const baseUrl = createPageViewUrl() + '&segment=' + segment;
+  const baseUrl = createPageViewUrl(SITE_ID) + '&segment=' + segment;
   return baseUrl;
 };
 
@@ -213,7 +231,7 @@ const createEventsCategoryUrl = () => {
   let baseUrl = routes.tooling.matomo.report.bulkRequest;
   lastTwelveMonths().forEach((month, index) => {
     baseUrl += `&urls[${index}]=`;
-    const subRequest = `idSite=145&period=month&method=Events.getCategory&module=API&date=${month.firstDay}`;
+    const subRequest = `idSite=${SITE_ID}&period=month&method=Events.getCategory&module=API&date=${month.firstDay}`;
     baseUrl += encodeURIComponent(subRequest);
   });
   return baseUrl;

@@ -1,49 +1,59 @@
 import { ChangeEvent, useState } from 'react';
+import { IMatomoStats } from '#clients/matomo';
 import { Select } from '#components-ui/select';
 import { StackedBarChart } from '#components/chart/stack-bar';
 import constants from '#models/constants';
 
-export const TraficStats: React.FC<{
-  visits: {
-    number: number;
-    label: string;
-    agentUnknown: number;
-    agentReturning: number;
-    visitorReturning: number;
-    visitorUnknown: number;
-  }[];
-}> = ({ visits }) => {
-  const [statsType, setStatsType] = useState<'agents' | 'users'>('users');
+type IStatType = 'agents' | 'users' | 'api';
+
+export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
+  visits = [],
+}) => {
+  const [statsType, setStatsType] = useState<IStatType>('users');
 
   const data = {
-    datasets: [
-      {
-        label:
-          statsType === 'agents'
-            ? 'Nombre d’agents récurrents'
-            : 'Nombre d’utilisateurs récurrents',
-        data: visits.map(({ label, visitorReturning, agentReturning }) => ({
-          y: statsType === 'agents' ? agentReturning : visitorReturning,
-          x: label,
-        })),
-        backgroundColor: constants.chartColors[0],
-      },
-      {
-        label:
-          statsType === 'agents'
-            ? 'Nombre de nouveaux agents'
-            : 'Nombre de nouveaux utilisateurs',
-        data: visits.map(({ label, visitorUnknown, agentUnknown }) => ({
-          y: statsType === 'agents' ? agentUnknown : visitorUnknown,
-          x: label,
-        })),
-        backgroundColor: constants.chartColors[1],
-      },
-    ],
+    datasets:
+      statsType === 'api'
+        ? [
+            {
+              label: 'Nombre d’appels reçus par l’API Recherche d’Entreprises',
+              data: visits.map(({ label, apiRequests }) => ({
+                y: apiRequests,
+                x: label,
+              })),
+              backgroundColor: constants.chartColors[1],
+            },
+          ]
+        : [
+            {
+              label:
+                statsType === 'agents'
+                  ? 'Nombre d’agents récurrents'
+                  : 'Nombre d’utilisateurs récurrents',
+              data: visits.map(
+                ({ label, visitorReturning, agentReturning }) => ({
+                  y: statsType === 'agents' ? agentReturning : visitorReturning,
+                  x: label,
+                })
+              ),
+              backgroundColor: constants.chartColors[0],
+            },
+            {
+              label:
+                statsType === 'agents'
+                  ? 'Nombre de nouveaux agents'
+                  : 'Nombre de nouveaux utilisateurs',
+              data: visits.map(({ label, visitorUnknown, agentUnknown }) => ({
+                y: statsType === 'agents' ? agentUnknown : visitorUnknown,
+                x: label,
+              })),
+              backgroundColor: constants.chartColors[1],
+            },
+          ],
   };
 
   const onOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setStatsType(e.target.value as 'agents' | 'users');
+    setStatsType(e.target.value as IStatType);
   };
 
   return (
@@ -86,6 +96,7 @@ export const TraficStats: React.FC<{
           options={[
             { value: 'users', label: 'utilisateurs' },
             { value: 'agents', label: 'agents' },
+            { value: 'api', label: 'appels API' },
           ]}
           defaultValue={'users'}
           onChange={onOptionChange}
@@ -106,6 +117,15 @@ export const TraficStats: React.FC<{
           2 visites dans le mois) est un marqueur de l’efficacité du service
         </li>
       </ul>
+      <p>
+        Nous suivons également le nombre d’appels reçus par{' '}
+        <a href="/donnees/api-entreprises">
+          notre API de Recherche d’entreprises
+        </a>
+        . Ce chiffre inclut les appels provenant du site{' '}
+        <b>Annuaire des Entreprises</b> et les appels externes, provenant
+        d’acteurs privés ou publics.
+      </p>
     </>
   );
 };
