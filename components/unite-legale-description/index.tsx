@@ -1,5 +1,4 @@
 import React from 'react';
-import { estActif } from '#models/core/etat-administratif';
 import {
   getAdresseUniteLegale,
   getNomComplet,
@@ -24,10 +23,9 @@ export const UniteLegaleDescription: React.FC<{
     ? formatAge(uniteLegale.dateCreation)
     : null;
 
-  const ageFermeture =
-    uniteLegale.dateDebutActivite && !estActif(uniteLegale)
-      ? formatAge(uniteLegale.dateDebutActivite)
-      : null;
+  const ageFermeture = uniteLegale.dateFermeture
+    ? formatAge(uniteLegale.dateFermeture)
+    : null;
 
   return (
     <>
@@ -46,10 +44,10 @@ export const UniteLegaleDescription: React.FC<{
         ) : (
           <> n’a pas de date de création connue. </>
         )}
-        {uniteLegale.dateDebutActivite && !estActif(uniteLegale) && (
+        {uniteLegale.dateFermeture && (
           <>
             Elle a été fermée le{' '}
-            <strong>{formatDateLong(uniteLegale.dateDebutActivite)}</strong>
+            <strong>{formatDateLong(uniteLegale.dateFermeture)}</strong>
             {ageFermeture && <>, il y a {ageFermeture}</>}.{' '}
           </>
         )}
