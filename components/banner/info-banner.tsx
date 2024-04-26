@@ -23,8 +23,8 @@ export const InfoBanner: React.FC<{}> = () => (
           de la base Sirene
         </a>{' '}
         de l’
-        <INSEE />, les données sont désormais à jour à l’exception de la qualité
-        Société à mission.
+        <INSEE />, les données des sociétés à mission sont temporairement
+        manquantes.
       </div>
     </div>
   </PrintNever>
