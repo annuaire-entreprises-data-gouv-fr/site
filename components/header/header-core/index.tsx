@@ -1,12 +1,10 @@
 import React from 'react';
-import { Icon } from '#components-ui/icon/wrapper';
 import { PrintNever } from '#components-ui/print-visibility';
 import { InfoBanner } from '#components/banner/info-banner';
 import LoadBar from '#components/load-bar';
 import SearchBar from '#components/search-bar';
-import constants from '#models/constants';
-import { isLoggedIn } from '#models/user/rights';
 import { ISession } from '#models/user/session';
+import Menu from '../menu';
 import styles from './styles.module.css';
 
 type IProps = {
@@ -104,43 +102,11 @@ export const HeaderCore: React.FC<IProps> = ({
                   <div className="fr-header__tools-links">
                     <ul className="fr-links-group">
                       <li>
-                        {isLoggedIn(session) ? (
-                          <div className={styles.menuLogout + ' fr-link'}>
-                            <div>
-                              <Icon slug="user">
-                                {session?.user?.fullName ||
-                                  session?.user?.email ||
-                                  'Utilisateur inconnu'}
-                                &nbsp;(
-                                <strong
-                                  style={{
-                                    fontVariant: 'small-caps',
-                                    color: constants.colors.espaceAgent,
-                                  }}
-                                >
-                                  agent public
-                                </strong>
-                                )
-                              </Icon>
-                            </div>
-                            <a
-                              href={`/api/auth/agent-connect/logout?pathFrom=${encodeURIComponent(
-                                pathFrom
-                              )}`}
-                            >
-                              <div>Se déconnecter</div>
-                            </a>
-                          </div>
-                        ) : useAgentCTA ? (
-                          <a
-                            href={`/lp/agent-public?pathFrom=${encodeURIComponent(
-                              pathFrom
-                            )}`}
-                            className="fr-link"
-                          >
-                            <Icon slug="user">Espace agent public</Icon>
-                          </a>
-                        ) : null}
+                        <Menu
+                          session={session}
+                          useAgentCTA={useAgentCTA}
+                          pathFrom={pathFrom}
+                        />
                       </li>
                     </ul>
                   </div>

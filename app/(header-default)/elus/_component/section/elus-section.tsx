@@ -1,11 +1,11 @@
 import React from 'react';
 import NonRenseigne from '#components/non-renseigne';
+import { Section } from '#components/section';
+import { FullTable } from '#components/table/full';
 import { EAdministration } from '#models/administrations/EAdministration';
 import { isCollectiviteTerritoriale, IUniteLegale } from '#models/core/types';
 import { IEtatCivil } from '#models/immatriculation';
 import { capitalize, formatDatePartial } from '#utils/helpers';
-import { Section } from '../section';
-import { FullTable } from '../table/full';
 
 /**
  * Elus section
@@ -42,36 +42,29 @@ const ElusSection: React.FC<{ uniteLegale: IUniteLegale }> = ({
   const plural = elus.length > 1 ? 's' : '';
 
   return (
-    <>
-      <Section
-        id="collectivite-elus"
-        title={`Élu${plural}`}
-        sources={[EAdministration.MI, EAdministration.DINUM]}
-      >
-        {elus.length > 0 ? (
-          <>
-            <p>
-              Cette collectivité possède {elus.length} élu{plural} enregistré
-              {plural} au Répertoire National des Élus&nbsp;:
-            </p>
-            <FullTable
-              head={['Role', 'Élu(e)', 'Date de naissance']}
-              body={elus.sort(sortByRole).map((elu) => formatElus(elu))}
-            />
-          </>
-        ) : (
+    <Section
+      id="collectivite-elus"
+      title={`Élu${plural}`}
+      sources={[EAdministration.MI, EAdministration.DINUM]}
+    >
+      {elus.length > 0 ? (
+        <>
           <p>
-            Cette collectivité ne possède aucun élu enregistré au Répertoire
-            National des Élus
+            Cette collectivité possède {elus.length} élu{plural} enregistré
+            {plural} au Répertoire National des Élus&nbsp;:
           </p>
-        )}
-      </Section>
-      <style jsx>{`
-        table > tbody > tr > td {
-          min-width: 30%;
-        }
-      `}</style>
-    </>
+          <FullTable
+            head={['Role', 'Élu(e)', 'Date de naissance']}
+            body={elus.sort(sortByRole).map((elu) => formatElus(elu))}
+          />
+        </>
+      ) : (
+        <p>
+          Cette collectivité ne possède aucun élu enregistré au Répertoire
+          National des Élus
+        </p>
+      )}
+    </Section>
   );
 };
 export default ElusSection;

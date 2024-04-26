@@ -56,32 +56,15 @@ const Footer = () => (
               </ul>
             </div>
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
-              <strong className="fr-footer__top-cat">Aide</strong>
-              <ul className="fr-footer__top-list">
-                <li>
-                  <a className="fr-footer__top-link" href="/faq">
-                    Questions fréquentes
-                  </a>
-                </li>
-                <li>
-                  <a className="fr-footer__top-link" href="/definitions">
-                    Définitions
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="fr-footer__top-link"
-                    href="/formulaire/supprimer-donnees-personnelles-entreprise"
-                  >
-                    Supprimer ses données personnelles
-                  </a>
-                </li>
-              </ul>
-              <br />
               <strong className="fr-footer__top-cat">
                 Développeurs & développeuses
               </strong>
               <ul className="fr-footer__top-list">
+                <li>
+                  <a className="fr-footer__top-link" href="/partager">
+                    Réutiliser & partager
+                  </a>
+                </li>
                 <li>
                   <a
                     className="fr-footer__top-link"
@@ -111,8 +94,75 @@ const Footer = () => (
                   </a>
                 </li>
               </ul>
+              <br />
+              <ul className="fr-footer__top-list">
+                <strong className="fr-footer__top-cat">Autres sites</strong>
+                <li className="fr-footer__content-item">
+                  <a
+                    className="fr-footer__top-link"
+                    href="https://entreprises.gouv.fr"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    entreprises.gouv.fr
+                  </a>
+                </li>
+                <li className="fr-footer__content-item">
+                  <a
+                    className="fr-footer__top-link"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href="https://entreprendre.service-public.fr/"
+                  >
+                    entreprendre.service-public.fr
+                  </a>
+                </li>
+                <li className="fr-footer__content-item">
+                  <a
+                    className="fr-footer__top-link"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href="https://mon-entreprise.fr"
+                  >
+                    mon-entreprise.fr
+                  </a>
+                </li>
+
+                <li className="fr-footer__content-item">
+                  <a
+                    className="fr-footer__top-link"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href="https://formalites.entreprises.gouv.fr"
+                  >
+                    formalites.entreprises.gouv.fr
+                  </a>
+                </li>
+              </ul>
             </div>
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
+              <strong className="fr-footer__top-cat">Aide</strong>
+              <ul className="fr-footer__top-list">
+                <li>
+                  <a className="fr-footer__top-link" href="/faq">
+                    Questions fréquentes
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__top-link" href="/definitions">
+                    Définitions
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="fr-footer__top-link"
+                    href="/formulaire/supprimer-donnees-personnelles-entreprise"
+                  >
+                    Supprimer ses données personnelles
+                  </a>
+                </li>
+              </ul>
+              <br />
               <strong className="fr-footer__top-cat">
                 Annuaire des Entreprises
               </strong>
@@ -148,11 +198,6 @@ const Footer = () => (
                 <li>
                   <a className="fr-footer__top-link" href="/a-propos/equipe">
                     Équipe
-                  </a>
-                </li>
-                <li>
-                  <a className="fr-footer__top-link" href="/partager">
-                    Réutiliser & partager
                   </a>
                 </li>
               </ul>
@@ -205,51 +250,45 @@ const Footer = () => (
               <li className="fr-footer__content-item">
                 <a
                   className="fr-footer__content-link"
-                  href="https://entreprises.gouv.fr"
                   target="_blank"
-                  rel="noreferrer noopener"
+                  rel="noopener external"
+                  title="Legifrance - nouvelle fenêtre"
+                  href="https://legifrance.gouv.fr"
                 >
-                  entreprises.gouv.fr
+                  legifrance.gouv.fr
                 </a>
               </li>
               <li className="fr-footer__content-item">
                 <a
                   className="fr-footer__content-link"
                   target="_blank"
-                  rel="noreferrer noopener"
-                  href="https://entreprendre.service-public.fr/"
+                  rel="noopener external"
+                  title="Info.gouv.fr - nouvelle fenêtre"
+                  href="https://info.gouv.fr"
                 >
-                  entreprendre.service-public.fr
+                  info.gouv.fr
                 </a>
               </li>
               <li className="fr-footer__content-item">
                 <a
                   className="fr-footer__content-link"
                   target="_blank"
-                  rel="noreferrer noopener"
-                  href="https://mon-entreprise.fr"
+                  rel="noopener external"
+                  title="Service Public - nouvelle fenêtre"
+                  href="https://service-public.fr"
                 >
-                  mon-entreprise.fr
+                  service-public.fr
                 </a>
               </li>
               <li className="fr-footer__content-item">
                 <a
                   className="fr-footer__content-link"
                   target="_blank"
-                  rel="noreferrer noopener"
+                  rel="noopener external"
+                  title="Data.gouv.fr - nouvelle fenêtre"
                   href="https://data.gouv.fr"
                 >
                   data.gouv.fr
-                </a>
-              </li>
-              <li className="fr-footer__content-item">
-                <a
-                  className="fr-footer__content-link"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  href="https://formalites.entreprises.gouv.fr"
-                >
-                  formalites.entreprises.gouv.fr
                 </a>
               </li>
             </ul>

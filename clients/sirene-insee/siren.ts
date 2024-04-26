@@ -1,6 +1,7 @@
 import routes from '#clients/routes';
 import stubClientWithSnapshots from '#clients/stub-client-with-snaphots';
 import { createEtablissementsList } from '#models/core/etablissements-list';
+import { estActif } from '#models/core/etat-administratif';
 import {
   createDefaultEtablissement,
   createDefaultUniteLegale,
@@ -168,6 +169,11 @@ const mapToDomainObject = (
     'T'
   )[0];
 
+  const etatAdministratif = etatFromEtatAdministratifInsee(
+    etatAdministratifUniteLegale,
+    siren
+  );
+
   return {
     ...defaultUniteLegale,
     siren,
@@ -186,10 +192,8 @@ const mapToDomainObject = (
     dateMiseAJourInsee: dateDernierTraitement,
     dateMiseAJourInpi: '',
     dateDebutActivite: dateDebut,
-    etatAdministratif: etatFromEtatAdministratifInsee(
-      etatAdministratifUniteLegale,
-      siren
-    ),
+    dateFermeture: !estActif({ etatAdministratif }) ? dateDebut : '',
+    etatAdministratif,
     statutDiffusion: statuDiffusionFromStatutDiffusionInsee(
       statutDiffusionUniteLegale,
       siren

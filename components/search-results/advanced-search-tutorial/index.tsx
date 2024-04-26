@@ -33,7 +33,7 @@ export const AdvancedSearchTutorial = () => {
               </Icon>
             </li>
             <li>
-              <Icon color={constants.colors.frBlue} slug="humanPin">
+              <Icon color={constants.colors.frBlue} slug="user">
                 <strong>Dirigeant&nbsp;:</strong>&#8200;filtrez par le nom ou le
                 prénom d’un(e) dirigeant(e)
               </Icon>

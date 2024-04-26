@@ -22,6 +22,7 @@ dataSources:
     datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-conventions-collectives-par-entreprise-siret/
     data:
       - label: Conventions Collectives
+        form: https://www.net-entreprises.fr/astuces-net-entreprises/idcc-comment-faire-sa-declaration-selon-la-norme-dsn-2023/
   - label: Liste des organismes de formation et des certifications Qualiopi
     apiSlug: qualiopi
     datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-publique-des-organismes-de-formation-l-6351-7-1-du-code-du-travail/
