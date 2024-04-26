@@ -1,0 +1,25 @@
+.menuLogout {
+  position: relative;
+}
+.menuLogout:hover {
+  background-color: #eee !important;
+  cursor: default;
+}
+
+.menuLogout > a {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  width: 100%;
+  background-color: #fff;
+  padding: 5px 15px;
+  box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.5);
+}
+.menuLogout > a:hover {
+  background-color: #f8f8f8 !important;
+}
+
+.menuLogout:hover > a {
+  display: block;
+}

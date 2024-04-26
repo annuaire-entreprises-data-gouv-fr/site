@@ -144,7 +144,7 @@ class SearchFilterParams {
   public extractFilters = () => {
     const f = {
       dirigeantFilter: {
-        icon: 'humanPin',
+        icon: 'user',
         label: '',
         excludeParams: ['fn', 'n', 'dmin', 'dmax'],
       },

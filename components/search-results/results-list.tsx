@@ -1,7 +1,6 @@
 import React from 'react';
 import { Icon } from '#components-ui/icon/wrapper';
 import IsActiveTag from '#components-ui/is-active-tag';
-import { isPersonneMorale } from '#components/dirigeants-section/is-personne-morale';
 import UniteLegaleBadge from '#components/unite-legale-badge';
 import { estActif } from '#models/core/etat-administratif';
 import {
@@ -11,6 +10,7 @@ import {
 import { isCollectiviteTerritoriale } from '#models/core/types';
 import { IDirigeant } from '#models/immatriculation';
 import { ISearchResult } from '#models/search';
+import { isPersonneMorale } from 'app/(header-default)/dirigeants/_component/sections/is-personne-morale';
 import styles from './style.module.css';
 
 type IProps = {
@@ -32,7 +32,7 @@ const DirigeantsOrElusList: React.FC<{
 
   return (
     <div className={styles['dirigeants-or-elus']}>
-      <Icon slug="humanPin">
+      <Icon slug="user">
         {firstFive
           .map((dirigeantOrElu) =>
             isPersonneMorale(dirigeantOrElu)

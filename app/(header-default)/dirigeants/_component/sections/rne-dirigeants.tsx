@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import routes from '#clients/routes';
 import InpiPartiallyDownWarning from '#components-ui/alerts-with-explanations/inpi-partially-down';

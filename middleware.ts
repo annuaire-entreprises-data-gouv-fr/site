@@ -119,6 +119,6 @@ export const config = {
     '/rechercher/:path*',
     '/rechercher/carte/:path*',
     '/justificatif/:path*',
-    '/dirigeant/:path*',
+    '/dirigeants/:path*',
   ],
 };

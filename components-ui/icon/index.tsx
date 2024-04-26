@@ -16,19 +16,6 @@ const communityFill = (
   </svg>
 );
 
-const humanPin = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    width="100%"
-    height="100%"
-    fill="currentColor"
-    stroke="currentColor"
-    strokeWidth="0"
-  >
-    <path d="M12 2c5.523 0 10 4.477 10 10 0 4.747-3.308 8.722-7.745 9.745L12 24l-2.255-2.255C5.308 20.722 2 16.747 2 12 2 6.477 6.477 2 12 2Zm.16 14c-2.036 0-3.87.87-5.148 2.257a7.953 7.953 0 0 0 3.182 1.539l.56.129L12 21.172l1.247-1.247.56-.13a7.956 7.956 0 0 0 3.36-1.686A6.979 6.979 0 0 0 12.16 16ZM6.554 6.14a8 8 0 0 0-.938 10.681v-.001A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634A8 8 0 0 0 6.554 6.141ZM12 5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
-  </svg>
-);
 const user = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -36,10 +23,8 @@ const user = (
     width="100%"
     height="100%"
     fill="currentColor"
-    stroke="currentColor"
-    strokeWidth="0"
   >
-    <path d="M4 22a8 8 0 1 1 16 0H4Zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6Z" />
+    <path d="M12 14a8 8 0 0 1 8 8h-2a6 6 0 1 0-12 0H4a8 8 0 0 1 8-8Zm0-13c3.315 0 6 2.685 6 6s-2.685 6-6 6-6-2.685-6-6 2.685-6 6-6Zm0 2C9.79 3 8 4.79 8 7s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4Z" />
   </svg>
 );
 
@@ -123,20 +108,6 @@ const building = (
     strokeWidth="0"
   >
     <path d="M14 3a1 1 0 0 1 1 1v15h4v-8h-2V9h3a1 1 0 0 1 1 1v9h2v2H1v-2h2V4a1 1 0 0 1 1-1h10Zm-1 2H5v14h8V5Zm-2 6v2H7v-2h4Zm0-4v2H7V7h4Z" />
-  </svg>
-);
-
-const questionnaire = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="100%"
-    height="100%"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    stroke="currentColor"
-    strokeWidth="0"
-  >
-    <path d="M21 3a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.455L2 22.5V4a1 1 0 0 1 1-1h18Zm-1 2H4v13.385L5.763 17H20V5Zm-7 9v2h-2v-2h2Zm-.54-7.972A3.501 3.501 0 0 1 12 13h-1v-2h1a1.5 1.5 0 1 0-1.471-1.794l-1.962-.393a3.501 3.501 0 0 1 3.892-2.785Z" />
   </svg>
 );
 
@@ -441,9 +412,23 @@ const discussion = (
   </svg>
 );
 
+const accountLine = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="100%"
+    height="100%"
+    stroke="none"
+    fill="currentColor"
+  >
+    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm-4.987-3.744A7.966 7.966 0 0 0 12 20a7.97 7.97 0 0 0 5.167-1.892A6.979 6.979 0 0 0 12.16 16a6.981 6.981 0 0 0-5.147 2.256ZM5.616 16.82A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634 8 8 0 1 0-12.906.187v-.001ZM12 13a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+  </svg>
+);
+
 export type IIconsSlug = keyof typeof icons;
 
 export const icons = {
+  accountLine,
   errorFill,
   lightbulbFill,
   lockFill,
@@ -455,7 +440,6 @@ export const icons = {
   buildingFill,
   open,
   closed,
-  humanPin,
   file,
   building,
   moneyCircle,
@@ -471,7 +455,6 @@ export const icons = {
   download,
   questionFill,
   alertFill,
-  questionnaire,
   successFill,
   discussion,
 };
