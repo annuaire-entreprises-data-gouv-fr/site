@@ -3,6 +3,45 @@ import constants from '#models/constants';
 import { Information } from '#models/exceptions';
 import { httpGet } from '#utils/network';
 import { logInfoInSentry } from '#utils/sentry';
+import getSession from '#utils/server-side-helper/app/get-session';
+
+const logUserRequest = async (route: string) => {
+  const url = new URL(route)
+
+  const [resource_type, resource_id] = (url.pathname.match(/\/(.*)\/([^\/]*)$/) || [null, null, null]).slice(1)
+
+  let log = {
+    date: (new Date()).toISOString(),
+    timestamp: Date.now(),
+    route: route,
+    content: {
+      resource_type: resource_type,
+      resource_id: resource_id,
+    },
+
+    // Elastic Common Schema : https://www.elastic.co/guide/en/ecs/current/ecs-url.html
+    url: {
+      scheme: (url.protocol.match(/^(https?)/) || ['']).shift(),
+      domain: url.host,
+      path: url.pathname,
+      query: url.search,
+
+    },
+  }
+
+  const session = await getSession()
+
+  if (session.user) {
+    // Elastic Common Schema : https://www.elastic.co/guide/en/ecs/current/ecs-user.html
+    log.user = {
+      email: session.user.email,
+      siret: session.user.siret,
+    };
+
+  }
+
+  console.log(`${JSON.stringify({'message': JSON.stringify(log)})}`)
+}
 
 /**
  * Wrapper client to call API Entreprise
@@ -17,6 +56,8 @@ export default async function clientAPIEntreprise<T, U>(
   mapToDomainObject: (e: T) => U,
   recipientSiret?: string
 ) {
+  logUserRequest(route)
+
   if (!recipientSiret) {
     logInfoInSentry(
       new Information({
