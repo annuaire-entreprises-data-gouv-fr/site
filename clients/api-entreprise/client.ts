@@ -8,7 +8,7 @@ import getSession from '#utils/server-side-helper/app/get-session';
 
 type ApiEntrepriseLogType = {
   date: string;
-  timestamp: int;
+  timestamp: integer;
   request: {
     route: string;
     id: string;
