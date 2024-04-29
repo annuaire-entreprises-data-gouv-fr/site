@@ -6,12 +6,35 @@ import { randomId } from '#utils/helpers';
 import { logInfoInSentry } from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
 
+type ApiEntrepriseLogType = {
+  date: string;
+  timestamp: int;
+  request: {
+    route: string;
+    id: string;
+  };
+  content: {
+    resource_type: string | null;
+    resource_id: string | nul;
+  };
+  url: {
+    scheme: string;
+    domain: string;
+    path: string;
+    query: string;
+  };
+  user?: {
+    email?: string;
+    siret?: string;
+  }
+}
+
 const logUserRequest = async (route: string) => {
   const url = new URL(route)
 
   const [resource_type, resource_id] = (url.pathname.match(/\/(.*)\/([^\/]*)$/) || [null, null, null]).slice(1)
 
-  let log = {
+  let log: ApiEntrepriseLogType = {
     date: (new Date()).toISOString(),
     timestamp: Date.now(),
 
