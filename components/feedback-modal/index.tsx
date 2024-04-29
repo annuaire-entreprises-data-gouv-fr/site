@@ -60,7 +60,7 @@ export default function FeedbackModal({ agentContactInfo }: IProps) {
           <FloatingHelpButton>
             <button
               ref={buttonRef}
-              aria-label="Partager une idée, un bug, une question ou une donnée manquante avec l'équipe de l'Annuaire des Entreprises"
+              aria-label="Dites-nous tout : partager une idée, un bug, une question ou une donnée manquante avec l'équipe de l'Annuaire des Entreprises"
               onClick={() => (opened ? handleClose() : handleOpen())}
               aria-controls="feedback-modal"
               aria-haspopup="dialog"
@@ -68,6 +68,7 @@ export default function FeedbackModal({ agentContactInfo }: IProps) {
               className={styles.button}
             >
               <Icon slug="discussion" size={24} />
+              <span>Dites-nous tout</span>
             </button>
           </FloatingHelpButton>
         )}

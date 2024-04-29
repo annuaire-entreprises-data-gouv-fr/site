@@ -17,7 +17,7 @@
   box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3) !important;
   transition: transform 100ms ease-in-out, box-shadow 100ms ease-in-out;
 
-  & > span:first-of-type {
+  & span {
     padding-left: 5px;
   }
 }
