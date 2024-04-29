@@ -2,6 +2,7 @@ import { HttpUnauthorizedError } from '#clients/exceptions';
 import constants from '#models/constants';
 import { Information } from '#models/exceptions';
 import { httpGet } from '#utils/network';
+import { randomId } from '#utils/helpers';
 import { logInfoInSentry } from '#utils/sentry';
 import getSession from '#utils/server-side-helper/app/get-session';
 
@@ -13,7 +14,12 @@ const logUserRequest = async (route: string) => {
   let log = {
     date: (new Date()).toISOString(),
     timestamp: Date.now(),
-    route: route,
+
+    request: {
+      route: route,
+      id: randomId(),
+    },
+
     content: {
       resource_type: resource_type,
       resource_id: resource_id,
