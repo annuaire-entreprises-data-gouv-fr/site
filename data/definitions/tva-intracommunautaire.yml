@@ -53,6 +53,15 @@ body: |
 
   Il est possible de consulter le numéro de TVA intracommunautaire d’une entreprise en ligne. Comment faire ? Pour toutes les entreprises et associations françaises, l’Annuaire des Entreprises affiche cette information. Pour une entreprise établie hors de France, mais dans l’UE, cette vérification s’effectue via le [service européen de validation des numéros de TVA (VIES)](https://ec.europa.eu/taxation_customs/vies/#/vat-validation). Cette précaution est fortement recommandée afin de réduire le risque de fraude ou d’escroquerie.
 
+  Le numéro de TVA affiché sur l’Annuaire des Entreprises est validé par l’administration fiscale. 
+
+  ## Que signifie n° de TVA non valide ?
+
+  Un numéro **non valide** peut signifier plusieurs choses : 
+  - la structure peut ne pas être assujettie à la TVA
+  - la structure est assujettie, mais ce numéro a été invalidé par l’administration fiscale (fermeture de l'entreprise, procédure collective, ou fraude)
+  - la structure est assujettie, mais elle possède un ou plusieurs autres numéro de TVA, dont nous n’avons pas connaissance
+    
   ***Attention** : de nombreux sites internet affichent un numéro de TVA mais ne prennent pas la peine de le vérifier.*
 
   ## Une entreprise peut-elle avoir plusieurs numéro de TVA intracommunautaire ?
