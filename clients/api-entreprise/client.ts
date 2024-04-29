@@ -37,7 +37,7 @@ const logUserRequest = async (route: string) => {
 
   const session = await getSession()
 
-  if (session.user) {
+  if (session?.user) {
     // Elastic Common Schema : https://www.elastic.co/guide/en/ecs/current/ecs-user.html
     log.user = {
       email: session.user.email,
