@@ -7,7 +7,7 @@ Le contenu est centralisé de manière très pratique dans le dossier [/data](ht
 ## Modifier une page
 
 - La retrouver
-  - [retrouver une page d'administration](https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administration)
+  - [retrouver une page d'administration](https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
   - [retrouver une page de FAQ](https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/faq)
   - [retrouver une page de définition](https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/definitions)
   - [retrouver une landing page](https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/landing-page)
