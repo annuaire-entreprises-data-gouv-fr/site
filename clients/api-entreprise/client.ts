@@ -31,7 +31,7 @@ export default async function clientAPIEntreprise<T, U>(
     throw new HttpUnauthorizedError('Missing API Entreprise credentials');
   }
 
-  sensitiveRequestLogger(route);
+  await sensitiveRequestLogger(route);
 
   // never cache any API Entreprise request
   const useCache = false;
