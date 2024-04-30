@@ -3,7 +3,7 @@
 </h1>
 
 <a href="https://github.com/annuaire-entreprises-data-gouv-fr/site/blob/main/LICENSE"><img src="https://img.shields.io/github/license/annuaire-entreprises-data-gouv-fr/site.svg?color=green" alt="License Badge"></a>
-[![CI (lint, unit-tests, end2end, a11y)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/actions/workflows/pre-merge.yml)
+[![CI (lint, unit-tests, end2end, a11y)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/pre-merge.yml/badge.svg)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/pre-merge.yml)
 [![External API check](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/external-api-test.yml/badge.svg)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/external-api-test.yml)
 [![Deploy cluster](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/deploy-cluster.yml/badge.svg)](https://github.com/annuaire-entreprises-data-gouv-fr/site/actions/workflows/deploy-cluster.yml)
 <a href="https://annuaire-entreprises.data.gouv.fr/administration"><img src="https://img.shields.io/badge/Page-partenaires-blue.svg" alt="Partenaires Badge"></a>
@@ -24,7 +24,7 @@ Ce site ré-utilise les données des différentes [administrations partenaires](
 
 Vous êtes un contributeur exterieur ? [Soumettez-nous une nouvelle issue ou une pull request.](https://github.com/annuaire-entreprises-data-gouv-fr/site/issues/new/choose)
 
-Vous faîtes partie de l’équipe contenu ? [Consultez le tutoriel.](https://github.com/etalab/annuaire-entreprises.data.gouv.fr/tree/main/CONTRIBUTE-CONTENT.md)
+Vous faîtes partie de l’équipe contenu ? [Consultez le tutoriel.](https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/CONTRIBUTE-CONTENT.md)
 
 ### Vie privée et siren protégés
 
